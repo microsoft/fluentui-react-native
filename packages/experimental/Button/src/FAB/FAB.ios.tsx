@@ -1,3 +1,3 @@
-import { FAB } from './FABMobile';
+import { FAB } from './FABCore';
 
 export default FAB;

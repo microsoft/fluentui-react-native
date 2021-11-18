@@ -16,7 +16,7 @@ export const FAB = compose<FABType>({
   },
   render: (_userProps: ButtonCoreProps, _useSlots: UseSlots<FABType>) => {
     return (_final: ButtonCoreProps, ..._children: React.ReactNode[]) => {
-      return null;
+      return null; // Only implemented for mobile endpoints
     };
   },
 });
