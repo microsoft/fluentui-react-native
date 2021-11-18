@@ -2,6 +2,35 @@
   "name": "@uifabricshared/foundation-composable",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@uifabricshared/foundation-composable_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@uifabricshared/foundation-composable"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@uifabricshared/foundation-composable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Nov 2021 23:17:41 GMT",
       "tag": "@uifabricshared/foundation-composable_v0.9.3",
       "version": "0.9.3",

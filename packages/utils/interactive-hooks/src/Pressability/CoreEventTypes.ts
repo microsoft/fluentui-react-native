@@ -22,7 +22,7 @@ export type SyntheticEvent<T> = Readonly<{
   cancelable?: boolean;
   currentTarget: number | React.ElementRef<HostComponent<any>>;
   defaultPrevented?: boolean;
-  dispatchConfig: Readonly<{
+  dispatchConfig?: Readonly<{
     registrationName: string;
   }>;
   eventPhase?: number;
