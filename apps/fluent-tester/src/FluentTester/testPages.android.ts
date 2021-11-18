@@ -1,4 +1,5 @@
 import { TestDescription } from './TestComponents';
+import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
@@ -26,6 +27,11 @@ export const tests: TestDescription[] = [
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
     testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+  },
+  {
+    name: 'Avatar Test',
+    component: JSAvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
   },
   {
     name: 'Button Test',

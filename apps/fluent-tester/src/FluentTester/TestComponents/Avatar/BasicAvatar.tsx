@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { AvatarSize, AvatarColor, Avatar, AvatarPresence } from '@fluentui-react-native/experimental-avatar';
+import { AvatarSize, AvatarColor, JSAvatar, AvatarPresence } from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { AvatarTokens } from '@fluentui-react-native/experimental-avatar';
+import { JSAvatarTokens } from '@fluentui-react-native/experimental-avatar';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -61,7 +61,7 @@ const StyledPicker = (props) => {
 };
 
 export const StandardUsage: React.FunctionComponent = () => {
-  const tokens: AvatarTokens = {};
+  const tokens: JSAvatarTokens = {};
   const [showImage, setShowImage] = React.useState(true);
   const [imageSize, setImageSize] = React.useState<WithUndefined<AvatarSize>>('size72');
   const [coinColor, setCoinColor] = React.useState<WithUndefined<AvatarColor>>('brass');
@@ -89,7 +89,7 @@ export const StandardUsage: React.FunctionComponent = () => {
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
 
-      <Avatar
+      <JSAvatar
         size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
         imageDescription="Photo of Satya Nadella"

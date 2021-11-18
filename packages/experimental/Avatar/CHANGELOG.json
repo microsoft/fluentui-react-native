@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 21:07:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix Avatar not working on iOS",
+            "author": "sanajmi@microsoft.com",
+            "commit": "7356f363aa7ef56ecd1221ba4b36411701438c2e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.13.0",
       "version": "0.13.0",

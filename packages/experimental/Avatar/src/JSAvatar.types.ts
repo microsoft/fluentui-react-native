@@ -2,7 +2,7 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
 
-export const avatarName = 'Avatar';
+export const JSAvatarName = 'Avatar';
 
 export type AvatarSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
 
@@ -50,7 +50,7 @@ export interface AvatarConfigurableProps {
   coinColorFluent?: AvatarColor;
 }
 
-export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
+export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   imageUrl?: string;
   imageDescription?: string;
   initials?: string;
@@ -70,7 +70,7 @@ export interface AvatarSlotProps {
 
 export type IconAlignment = 'start' | 'center' | 'end';
 
-export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps {
+export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps {
   avatarSize?: number;
   iconSize?: number;
   iconStrokeWidth?: number;
@@ -81,7 +81,7 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   physicalSize?: number;
 }
 
-export interface AvatarState {
+export interface JSAvatarState {
   personaPhotoSource: ImageURISource | undefined;
   iconSource: ImageURISource | undefined;
   showRing: boolean;
@@ -89,13 +89,13 @@ export interface AvatarState {
 }
 
 export interface AvatarInfo {
-  props: AvatarProps;
-  state: AvatarState;
+  props: JSAvatarProps;
+  state: JSAvatarState;
 }
 
-export interface AvatarType {
-  props: AvatarProps;
+export interface JSAvatarType {
+  props: JSAvatarProps;
   slotProps: AvatarSlotProps;
-  tokens: AvatarTokens;
-  state: AvatarState;
+  tokens: JSAvatarTokens;
+  state: JSAvatarState;
 }
