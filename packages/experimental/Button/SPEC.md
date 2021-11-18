@@ -10,9 +10,6 @@ Basic examples:
 
 ```jsx
 <Button>Text</Button>
-<Button icon={<SVGIcon />} />
-<Button icon={<SVGIcon />}>Text</Button>
-<Button icon={<SVGIcon />} iconPosition="after">Text</Button>
 <Button appearance="primary">Text</Button>
 <Button disabled>Text</Button>
 <Button size="small">Text</Button>
@@ -68,9 +65,7 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
-   * - 'outline': Removes background styling.
    * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
-   * - 'transparent': Removes background and border styling.
    */
   appearance?: 'primary' | 'outline' | 'subtle' | 'transparent';
 
@@ -80,11 +75,11 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
    */
   icon?: IconSourcesType;
 
-  // /**
-  //  * Loader slot that, if specified, renders a `loader` before the `icon` and `children` while the `loading` flag
-  //  * is set to `true`.
-  //  */
-  loader?: TBD;
+  /**
+   * Loader slot that, if specified, renders a `loader` before the `icon` and `children` while the `loading` flag
+   * is set to `true`.
+   */
+  loader?: ActivityIndicator;
 
   /**
    * A button can fill the width of its container.
@@ -135,11 +130,9 @@ TBD once we decide on tokens set.
 
 The following section describes the different states in which a `Button` can be throughout the course of interaction with it.
 
-#### Enabled state
+#### Enabled and Disabled states
 
 An enabled `Button` communicates interaction by having styling that invites the user to click/tap on it to trigger an action.
-
-#### Disabled state
 
 A disabled `Button` is non-interactive, disallowing the user to click/tap on it to trigger an action.
 
@@ -172,13 +165,13 @@ The following is a set of keys that interact with the `Button` component:
 
 #### Cursor interaction
 
-- `mouseenter`: Should immediately change the styling of the `Button` so that it appears to be hovered.
-- `mouseleave`: Should immediately remove the hovered styling of the `Button`.
-- `mouseup`: If triggered while cursor is still inside of the `Button's` boundaries, then it should execute the `Button` and move focus to its target.
+- Cursor moves onto botton: Should immediately change the styling of the `Button` so that it appears to be hovered.
+- Cursor moves out of botton: Should immediately remove the hovered styling of the `Button`.
+- Mouse click: Should execute the `Button` and move focus to its target.
 
 #### Touch interaction
 
-The same behavior as above translated for touch events. This means that there is no equivalent for `mouseenter` and `mouseleave`, which makes it so that the hovered state cannot be accessed.
+The same behavior as above translated for touch events. This means that there is no equivalent for `onHoverIn` and `onHoverOut`, which makes it so that the hovered state cannot be accessed.
 
 ## Accessibility
 
@@ -187,3 +180,5 @@ The same behavior as above translated for touch events. This means that there is
 - Should default to adding `role="button"` to the root slot.
 - Should mix in the accessibility props expected for a `button` component.
 - Should be keyboard tabbable and focusable.
+
+See [`useButton` hook](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/Button/src/useButton.ts) for details on accessibility props
