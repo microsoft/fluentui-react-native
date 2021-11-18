@@ -65,24 +65,16 @@ export const settings: IComposeSettings<SubmenuItemType> = [
           color: 'menuItemTextHovered',
         },
       },
-      submenuItemHovered: {
+      hovered: {
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
         },
       },
-      focused: {
+      submenuItemHovered: {
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
-          borderColor: 'focusBorder',
-        },
-        _overrides: {
-          hovered: {
-            tokens: {
-              borderColor: 'transparent',
-            },
-          },
         },
       },
     },
