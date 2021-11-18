@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "remove focus style overrides for macOS contextual menu items",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
