@@ -9,17 +9,17 @@ PODS:
     - React-Core (= 0.63.43)
     - React-jsi (= 0.63.43)
     - ReactCommon/turbomodule/core (= 0.63.43)
-  - FRNAvatar (0.12.19):
+  - FRNAvatar (0.13.1):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNCallout (0.18.1):
+  - FRNCallout (0.19.0):
     - React
-  - FRNCheckbox (0.3.2):
+  - FRNCheckbox (0.4.0):
     - React
-  - FRNMenuButton (0.6.18):
+  - FRNMenuButton (0.7.0):
     - React
-  - FRNRadioButton (0.13.19):
+  - FRNRadioButton (0.14.0):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -94,7 +94,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.7.34):
+  - RCTFocusZone (0.8.0):
     - React
   - RCTRequired (0.63.43)
   - RCTTypeSafety (0.63.43):
@@ -459,15 +459,15 @@ SPEC CHECKSUMS:
   DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 40c32d4336fa0f0359adb2970c9fdcd7bc9d2937
   FBReactNativeSpec: f01aafe907f0095df9f38b6192c2720a322a7df4
-  FRNAvatar: ab60c356b71b08a3f54427a5e82376ef3024175e
-  FRNCallout: 28a5d9b7594311bf3f56fbe8631c3c660eb18866
-  FRNCheckbox: 3abc14a67473edd3338dabd6d5943d66e536349c
-  FRNMenuButton: 02610e011feff7caf3a0d467b9b499d76c94e2aa
-  FRNRadioButton: 51d3db9157086fb32f0d351fdf7d914739e4b8ab
+  FRNAvatar: 0428d40426e812920dab291f6d49c1f5b981391a
+  FRNCallout: 2c142e11629f97fb56d5c33bfa7b4227ca35cf1b
+  FRNCheckbox: 0a55a3b3be9325f6ae3d9819d422cc40159ea302
+  FRNMenuButton: 0be2eed5de64a6a3b8d4e8bd72c2400d5ec7badf
+  FRNRadioButton: b39e1e0234758f1e2e1fb7cc20af46cda4c1aa8c
   glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
-  RCTFocusZone: befd11629f89fd4d323d4acf24d3ffb0de6e772e
+  RCTFocusZone: c218fc9fe24da09e94582bea518cfe0f35488c10
   RCTRequired: 19162253ff1760f0803296337f7f3ca3f51aae70
   RCTTypeSafety: b9e00438e1dfe29a7870edac614d4cebb07b30af
   React: 09a8ce3c329a2a3230cb78098f1bf15e96dabb95
