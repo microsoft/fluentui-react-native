@@ -13,7 +13,7 @@ export const fontProps: FontIconProps = Platform.select({
   macos: {
     fontFamily: 'Arial',
     codepoint: 0x2663,
-    fontSize: 32,
+    fontSize: 12,
   },
   default: {
     fontFamily: `Font Awesome 5 Free`,
