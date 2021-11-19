@@ -108,26 +108,6 @@ const contextualMenu: React.FunctionComponent = () => {
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="4" />
           <ContextualMenuItem text="MenuItem 5" itemKey="5" />
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
-          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
-          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
-          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
-          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
-          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
-          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
-          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
-          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
-          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
-          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
-          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
-          <ContextualMenuItem text="MenuItem 5" itemKey="5" />
         </ContextualMenu>
       )}
     </View>
@@ -148,7 +128,7 @@ const nestedContextualMenu: React.FunctionComponent = () => {
       fontFamily: `Font Awesome 5 Free`,
       fontSrcFile: testTtf,
       codepoint: 0xf083,
-      fontSize: 32,
+      fontSize: 12,
     },
   });
 
@@ -203,6 +183,7 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => {
     console.log('submenu item clicked');
   }, []);
+
 
   return (
     <View>
@@ -363,6 +344,159 @@ const IconContextualMenu: React.FunctionComponent = () => {
   );
 };
 
+const ScrollViewContextualMenu: React.FunctionComponent = () => {
+  const stdBtnRef = React.useRef(null);
+
+  const [showContextualMenu, setShowContextualMenu] = React.useState(false);
+  const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
+  const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
+
+  const [isBeakVisible, setIsBeakVisible] = React.useState(false);
+  const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+
+  const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
+  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+
+  const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
+  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+
+  const toggleShowContextualMenu = React.useCallback(() => {
+    setShowContextualMenu(!showContextualMenu);
+    setIsContextualMenuVisible(false);
+  }, [showContextualMenu, setShowContextualMenu, setIsContextualMenuVisible]);
+
+  const onShowContextualMenu = React.useCallback(() => {
+    setIsContextualMenuVisible(true);
+  }, [setIsContextualMenuVisible]);
+
+  const onDismissContextualMenu = React.useCallback(() => {
+    setShowContextualMenu(false);
+    setIsContextualMenuVisible(false);
+  }, [setShowContextualMenu]);
+
+  const onItemClick = React.useCallback(
+    (key) => {
+      setLastMenuItemClicked(key);
+    },
+    [setLastMenuItemClicked],
+  );
+
+  const stdMenuItemRef = React.useRef(null);
+
+  const [showSubmenu, setShowSubmenu] = React.useState(false);
+  const [isSubmenuVisible, setIsSubmenuVisible] = React.useState(false);
+
+  const toggleShowSubmenu = React.useCallback(() => {
+    setShowSubmenu(!showSubmenu);
+    setIsSubmenuVisible(!isSubmenuVisible);
+  }, [showSubmenu, isSubmenuVisible, setShowSubmenu, setIsSubmenuVisible]);
+
+  const onShowSubmenu = React.useCallback(() => {
+    setIsSubmenuVisible(true);
+  }, [setIsSubmenuVisible]);
+
+  const onDismissSubmenu = React.useCallback(() => {
+    setShowSubmenu(false);
+  }, [setShowSubmenu]);
+
+  const onClick = React.useCallback(() => {
+    console.log('submenu item clicked');
+  }, []);
+
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
+
+
+  return (
+    <View>
+      <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Should Focus on Mount</Text>
+            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
+          </View>
+
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Should Focus on Container</Text>
+            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
+          </View>
+          <View style={{ flexDirection: 'row' }}>
+            <Text>Beak Visible</Text>
+            <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
+          </View>
+        </View>
+
+        <Separator vertical />
+
+        <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
+          <Text>
+            <Text>Menu Visibility: </Text>
+            {isContextualMenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+          </Text>
+          <Text>
+            <Text>Last Menu Item Clicked: </Text>
+            {lastMenuItemClicked > 0 ? (
+              <Text style={{ color: 'blue' }}>{lastMenuItemClicked}</Text>
+            ) : (
+              <Text style={{ color: 'blue' }}>none</Text>
+            )}
+          </Text>
+          <Text>
+            <Text>Menu and Submenu's max height set to 200</Text>
+          </Text>
+          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+        </View>
+      </View>
+
+      {showContextualMenu && (
+        <ContextualMenu
+          target={stdBtnRef}
+          onDismiss={onDismissContextualMenu}
+          onShow={onShowContextualMenu}
+          accessibilityLabel="Standard ContextualMenu"
+          onItemClick={onItemClick}
+          setShowMenu={toggleShowContextualMenu}
+          shouldFocusOnMount={focusOnMount}
+          shouldFocusOnContainer={focusOnContainer}
+          isBeakVisible={isBeakVisible}
+          maxHeight={200}
+        >
+          <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+          <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+          <SubmenuItem
+            icon={{ svgSource: svgProps, width: 12, height: 12 }}
+            text="Nested Menu"
+            itemKey="4"
+            onHoverIn={toggleShowSubmenu}
+            componentRef={stdMenuItemRef}
+          />
+          {showSubmenu && (
+            <Submenu maxHeight={200} target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
+              <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+              <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+              <ContextualMenuItem text="MenuItem 1" itemKey="1" />
+              <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+              <ContextualMenuItem
+                icon={{ svgSource: svgProps, width: 12, height: 12 }}
+                text="SubmenuItem svg icon"
+                itemKey="4"
+                onClick={onClick}
+              />
+              <ContextualMenuItem text="SubmenuItem 2" itemKey="2" />
+              <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+            </Submenu>
+          )}
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+
+        </ContextualMenu>
+      )}
+    </View>
+  );
+};
+
 const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',
@@ -376,6 +510,10 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'IconButton with Customized ContextualMenu',
     component: IconContextualMenu,
+  },
+  {
+    name: 'ContextalMenu with ScrollView',
+    component: ScrollViewContextualMenu,
   },
 ];
 

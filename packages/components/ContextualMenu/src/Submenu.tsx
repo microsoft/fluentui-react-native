@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
 import { settings } from './Submenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
@@ -14,7 +14,7 @@ import { CMContext } from './ContextualMenu';
 export const Submenu = compose<SubmenuType>({
   displayName: submenuName,
   usePrepareProps: (userProps: SubmenuProps, useStyling: IUseComposeStyling<SubmenuType>) => {
-    const { setShowMenu, shouldFocusOnMount = true, shouldFocusOnContainer = true, ...rest } = userProps;
+    const { setShowMenu, maxHeight, shouldFocusOnMount = true, shouldFocusOnContainer = true, ...rest } = userProps;
 
     // Grabs the context information from ContextualMenu (onDismissMenu callback)
     const context = React.useContext(CMContext);
@@ -64,6 +64,7 @@ export const Submenu = compose<SubmenuType>({
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
         onBlur: toggleContainerFocus,
+        style: {maxHeight: maxHeight}
       },
     });
 
@@ -85,7 +86,11 @@ export const Submenu = compose<SubmenuType>({
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
-          <Slots.container>{children}</Slots.container>
+        <Slots.container>
+            <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1}} showsVerticalScrollIndicator={true}>
+              {children}
+            </ScrollView>
+          </Slots.container>
         </Slots.root>
       </CMContext.Provider>
     );
