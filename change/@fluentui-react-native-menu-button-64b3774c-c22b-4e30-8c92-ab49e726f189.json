@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Allow maxHeight prop to be set on menu and submenu for Scrollview",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
