@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Allow maxHeight prop to be set on menu and submenu for Scrollview",
+  "packageName": "@fluentui-react-native/merge-props",
+  "email": "email not defined",
+  "dependentChangeType": "none"
+}
