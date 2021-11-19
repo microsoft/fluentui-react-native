@@ -31,7 +31,7 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { setShowMenu, maxHeight, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
+    const { setShowMenu, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
@@ -65,7 +65,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
         onBlur: toggleContainerFocus,
-        style: {maxHeight: maxHeight}
+        style: {maxHeight: maxHeight, width: maxWidth}
       },
     });
 

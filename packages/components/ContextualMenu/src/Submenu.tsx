@@ -14,7 +14,7 @@ import { CMContext } from './ContextualMenu';
 export const Submenu = compose<SubmenuType>({
   displayName: submenuName,
   usePrepareProps: (userProps: SubmenuProps, useStyling: IUseComposeStyling<SubmenuType>) => {
-    const { setShowMenu, maxHeight, shouldFocusOnMount = true, shouldFocusOnContainer = true, ...rest } = userProps;
+    const { setShowMenu, maxWidth, maxHeight, shouldFocusOnMount = true, shouldFocusOnContainer = true, ...rest } = userProps;
 
     // Grabs the context information from ContextualMenu (onDismissMenu callback)
     const context = React.useContext(CMContext);
@@ -64,7 +64,7 @@ export const Submenu = compose<SubmenuType>({
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
         onBlur: toggleContainerFocus,
-        style: {maxHeight: maxHeight}
+        style: {maxHeight: maxHeight, width: maxWidth}
       },
     });
 
