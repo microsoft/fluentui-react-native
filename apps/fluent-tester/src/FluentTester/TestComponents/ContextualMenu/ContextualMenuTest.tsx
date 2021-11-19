@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { Text, View, Switch, Platform } from 'react-native';
+import { Text, View, Switch } from 'react-native';
 import {
   Text as FURNText,
   Button,
@@ -13,8 +13,8 @@ import {
 } from '@fluentui/react-native';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../Button/test.svg';
+import { svgProps, fontProps, testImage } from '../Common/iconExamples';
+
 
 const contextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
@@ -115,27 +115,6 @@ const contextualMenu: React.FunctionComponent = () => {
 };
 
 const nestedContextualMenu: React.FunctionComponent = () => {
-  const testImage = require('../Button/icon_24x24.png');
-  const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
-
-  const fontProps: FontIconProps = Platform.select({
-    macos: {
-      fontFamily: 'Arial',
-      codepoint: 0x2663,
-      fontSize: 32,
-    },
-    default: {
-      fontFamily: `Font Awesome 5 Free`,
-      fontSrcFile: testTtf,
-      codepoint: 0xf083,
-      fontSize: 12,
-    },
-  });
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
 
   const stdBtnRef = React.useRef(null);
 
@@ -256,10 +235,6 @@ const nestedContextualMenu: React.FunctionComponent = () => {
 };
 
 const IconContextualMenu: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
 
   const stdBtnRef = React.useRef(null);
 
@@ -403,12 +378,6 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
     console.log('submenu item clicked');
   }, []);
 
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-
-
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -444,7 +413,7 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
             )}
           </Text>
           <Text>
-            <Text>Menu and Submenu's max height set to 200</Text>
+            <Text>Menu and Submenu max height set to 200</Text>
           </Text>
           <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
         </View>
