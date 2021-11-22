@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "change fonticon size for macos example",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

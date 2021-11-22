@@ -437,29 +437,28 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           <SubmenuItem
             icon={{ svgSource: svgProps, width: 12, height: 12 }}
             text="Nested Menu"
-            itemKey="4"
+            itemKey="3"
             onHoverIn={toggleShowSubmenu}
             componentRef={stdMenuItemRef}
           />
           {showSubmenu && (
             <Submenu maxHeight={200} target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
-              <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-              <ContextualMenuItem text="MenuItem 2" itemKey="2" />
-              <ContextualMenuItem text="MenuItem 1" itemKey="1" />
-              <ContextualMenuItem text="MenuItem 2" itemKey="2" />
+              <ContextualMenuItem text="MenuItem 4" itemKey="4" />
+              <ContextualMenuItem text="MenuItem 5" itemKey="5" />
+              <ContextualMenuItem text="MenuItem 6" itemKey="6" />
+              <ContextualMenuItem text="MenuItem 7" itemKey="7" />
               <ContextualMenuItem
                 icon={{ svgSource: svgProps, width: 12, height: 12 }}
                 text="SubmenuItem svg icon"
-                itemKey="4"
+                itemKey="8"
                 onClick={onClick}
               />
-              <ContextualMenuItem text="SubmenuItem 2" itemKey="2" />
-              <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
+              <ContextualMenuItem text="SubmenuItem 2" itemKey="9" />
+              <ContextualMenuItem text="Disabled Menu Item" itemKey="10" disabled />
             </Submenu>
           )}
-          <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
-          <ContextualMenuItem text="MenuItem 4" itemKey="4" />
-
+          <ContextualMenuItem text="Disabled Menu Item" itemKey="11" disabled />
+          <ContextualMenuItem text="MenuItem 4" itemKey="12" />
         </ContextualMenu>
       )}
     </View>

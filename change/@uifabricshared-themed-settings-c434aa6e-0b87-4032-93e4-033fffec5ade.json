@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "change fonticon size for macos example",
-  "packageName": "@uifabricshared/themed-settings",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
