@@ -97,6 +97,24 @@ export const StandardUsage: React.FunctionComponent = () => {
         imageUrl={showImage ? satyaPhotoUrl : undefined}
         coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
       />
+      <JSAvatar
+        size={imageSize === undefinedText ? undefined : imageSize}
+        initials="SN"
+        shape="circular"
+        imageDescription="Photo of Satya Nadella"
+        presence={presence === undefinedText ? undefined : presence}
+        imageUrl={showImage ? satyaPhotoUrl : undefined}
+        coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+      />
+      <JSAvatar
+        size={imageSize === undefinedText ? undefined : imageSize}
+        initials="SN"
+        shape="square"
+        imageDescription="Photo of Satya Nadella"
+        presence={presence === undefinedText ? undefined : presence}
+        imageUrl={showImage ? satyaPhotoUrl : undefined}
+        coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+      />
     </View>
   );
 };

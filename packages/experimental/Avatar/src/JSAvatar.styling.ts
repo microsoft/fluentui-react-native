@@ -3,6 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
 import { calculateEffectiveSizes, convertCoinColorFluent, getRingThickness } from './JSAvatar.helpers';
+import { borderStyles } from '@fluentui-react-native/tokens';
 
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
@@ -10,8 +11,11 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end',
 };
 
+export const avatarStates: (keyof JSAvatarTokens)[] = ['circular', 'square'];
+
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
+  states: avatarStates,
   slotProps: {
     root: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -43,7 +47,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       ['initialsSize'],
     ),
     initialsBackground: buildProps(
-      (tokens: JSAvatarTokens) => {
+      (tokens: JSAvatarTokens, theme: Theme) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
         const { backgroundColor, coinColorFluent } = tokens;
         let effectiveBackgroundColor = backgroundColor;
@@ -52,7 +56,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         }
         return {
           style: {
-            borderRadius: physicalSize / 2,
+            ...borderStyles.from(tokens, theme),
             width: physicalSize,
             height: physicalSize,
             flexGrow: 1,
@@ -63,21 +67,21 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['coinColorFluent', 'backgroundColor', 'physicalSize'],
+      ['coinColorFluent', 'backgroundColor', 'physicalSize', ...borderStyles.keys],
     ),
     photo: buildProps(
-      (tokens: JSAvatarTokens) => {
+      (tokens: JSAvatarTokens, theme: Theme) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
 
         return {
           style: {
-            borderRadius: physicalSize / 2,
+            ...borderStyles.from(tokens, theme),
             width: physicalSize,
             height: physicalSize,
           },
         };
       },
-      ['physicalSize'],
+      ['physicalSize', ...borderStyles.keys],
     ),
     icon: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -116,16 +120,16 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             borderStyle: 'solid',
             borderColor: ringColor,
             borderWidth: effectiveRingThickness,
-            borderRadius: effectiveSize / 2,
             width: effectiveSize,
             height: effectiveSize,
             position: 'absolute',
             top: -effectiveRingThickness,
             left: -effectiveRingThickness,
+            ...borderStyles.from(tokens, theme),
           },
         };
       },
-      ['physicalSize', 'ring', 'physicalSize'],
+      ['physicalSize', 'ring', 'physicalSize', ...borderStyles.keys],
     ),
     glow: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -144,16 +148,16 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             borderStyle: 'solid',
             borderColor: glowColor,
             borderWidth: effectiveRingThickness - innerGap,
-            borderRadius: effectiveSize / 2,
             width: effectiveSize,
             height: effectiveSize,
             position: 'absolute',
             top: -effectiveRingThickness,
             left: -effectiveRingThickness,
+            ...borderStyles.from(tokens, theme),
           },
         };
       },
-      ['physicalSize', 'ring'],
+      ['physicalSize', 'ring', ...borderStyles.keys],
     ),
   },
 };
