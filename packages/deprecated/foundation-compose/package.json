@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.10.22",
+  "version": "1.11.0",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -32,21 +32,21 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.8.11 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.1.4",
-    "@fluentui-react-native/theme-types": ">=0.12.4 <1.0.0",
-    "@uifabricshared/themed-settings": ">=0.7.2 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.9.3 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.10.3 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.10.3 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.15.11 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0",
+    "@uifabricshared/themed-settings": ">=0.8.0 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.10.0 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.11.0 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.11.0 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.16.0 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "react": "16.13.1"
+    "react": "17.0.1"
   },
   "peerDependencies": {
-    "react": ">=16.13.1"
+    "react": ">=17.0.1"
   },
   "depcheck": {
     "ignoreMatches": [

@@ -72,8 +72,8 @@ The benefit is that if the UI changes for the test page, the tests themselves do
 Page Objects should be put in apps/fluent-tester/src/E2E/_ *ComponentToBeTested* _/pages/.
 
 ```
-// CheckboxTestPage.win.ts
-class CheckboxTestPage extends BasePage {
+// CheckboxPageObject.win.ts
+class CheckboxPageObject extends BasePage {
   // This function clicks on the Checkbox component you selected below
   toggleCheckbox() {
     this._testPage.click();
@@ -85,7 +85,7 @@ class CheckboxTestPage extends BasePage {
   }
 }
 
-export default new CheckboxTestPage();
+export default new CheckboxPageObject();
 ```
 
 ### More on Page Objects (Technical Information)
@@ -114,7 +114,7 @@ Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTest
 describe('Click on each test page and check if it renders', function() {
   it('Checkbox Test Page', () => {
     NavigateAppPage.clickAndGoToCheckboxPage();
-    expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
+    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
   });
 });
 ```

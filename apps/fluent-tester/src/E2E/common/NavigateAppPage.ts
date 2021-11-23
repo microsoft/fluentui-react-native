@@ -7,6 +7,7 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../FluentTester/TestComponents
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../FluentTester/TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../FluentTester/TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../FluentTester/TestComponents/Link/consts';
+import { HOMEPAGE_MENU_BUTTON } from '../../FluentTester/TestComponents/MenuButton/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../FluentTester/TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../FluentTester/TestComponents/PersonaCoin/consts';
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../../FluentTester/TestComponents/Pressable/consts';
@@ -50,6 +51,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToLinkPage() {
     this.linkPage.click();
+  }
+
+  clickAndGoToMenuButtonPage() {
+    this.menuButtonPage.click();
   }
 
   clickAndGoToPersonaPage() {
@@ -130,6 +135,10 @@ class NavigateAppPage extends BasePage {
 
   private get linkPage() {
     return By(HOMEPAGE_LINK_BUTTON);
+  }
+
+  private get menuButtonPage() {
+    return By(HOMEPAGE_MENU_BUTTON);
   }
 
   private get personaPage() {

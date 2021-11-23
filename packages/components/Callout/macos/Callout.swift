@@ -95,7 +95,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	private func showCallout() {
 		updateCalloutFrameToAnchor()
-		calloutWindow.display()
+		calloutWindow.makeKeyAndOrderFront(self)
 		didShowCallout()
 	}
 
@@ -317,8 +317,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			visualEffect.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 		])
 
-		contentView.addSubview(proxyView)
-		window.setIsVisible(true)
+		visualEffect.addSubview(proxyView)
 
 		return window
 	}()

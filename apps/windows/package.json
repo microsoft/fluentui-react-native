@@ -17,16 +17,16 @@
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.47.3",
-    "react": "16.13.1",
-    "react-native": "^0.63.2",
+    "@fluentui-react-native/tester": "^0.48.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
     "react-native-svg": "^12.1.1",
-    "react-native-windows": "^0.64.0",
+    "react-native-windows": "^0.64.3",
     "tslib": "^1.13.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.2",
-    "@babel/runtime": "^7.6.2",
+    "@babel/core": "^7.8.0",
+    "@babel/runtime": "^7.8.0",
     "@rnx-kit/cli": "^0.5.27",
     "@rnx-kit/metro-config": "^1.2.3",
     "@types/jasmine": "3.5.10",
@@ -40,10 +40,10 @@
     "@wdio/sync": "5.20.1",
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
-    "metro-config": "^0.59.0",
-    "metro-react-native-babel-preset": "^0.59.0",
-    "react-native-test-app": "^0.7.0",
-    "react-test-renderer": "~16.13.1",
+    "metro-config": "^0.66.2",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-native-test-app": "^0.9.13",
+    "react-test-renderer": "17.0.1",
     "rimraf": "~3.0.2",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -59,8 +59,15 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.63",
+    "reactNativeVersion": "0.64",
     "kitType": "app",
+    "detectCyclicDependencies": {
+      "throwOnError": true
+    },
+    "detectDuplicateDependencies": {
+      "throwOnError": true
+    },
+    "typescriptValidation": true,
     "bundle": {
       "targets": [
         "windows"

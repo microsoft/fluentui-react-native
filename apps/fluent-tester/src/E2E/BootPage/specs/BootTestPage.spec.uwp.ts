@@ -2,12 +2,12 @@ import ButtonTestPage from '../../Button/pages/ButtonPageObject';
 import CalloutTestPage from '../../Callout/pages/CalloutPageObject.win';
 import CheckboxTestPage from '../../Checkbox/pages/CheckboxPageObject';
 import LinkPageObject from '../../Link/pages/LinkPageObject';
-import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinTestPage.win';
-import PressableTestPage from '../../Pressable/pages/PressableTestPage.win';
-import SeparatorTestPage from '../../Separator/pages/SeparatorTestPage.win';
+import PersonaCoinTestPage from '../../PersonaCoin/pages/PersonaCoinPageObject.win';
+import PressableTestPage from '../../Pressable/pages/PressablePageObject.win';
+import SeparatorTestPage from '../../Separator/pages/SeparatorPageObject.win';
 import TextTestPage from '../../Text/pages/TextPageObject.win';
 import TabsTestPage from '../../Tabs/pages/TabsPageObject.win';
-import ThemeTestPage from '../../Theme/pages/ThemeTestPage.win';
+import ThemeTestPage from '../../Theme/pages/ThemePageObject.win';
 import NavigateAppPage from '../../common/NavigateAppPage';
 
 const BOOT_APP_TIMEOUT = 60000;

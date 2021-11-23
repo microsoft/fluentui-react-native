@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 09 Nov 2021 23:04:33 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- fix Avatar not working on iOS (sanajmi@microsoft.com)
+
+## 0.13.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Moved Avatar (PersonaCoin) to framework v2. (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/adapters to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.3.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/use-styling to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.10.0 (afoxman@microsoft.com)
 
 ## 0.12.19
 
