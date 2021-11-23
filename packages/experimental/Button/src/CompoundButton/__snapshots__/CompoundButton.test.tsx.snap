@@ -11,6 +11,7 @@ exports[`CompoundButton default 1`] = `
   }
   accessible={true}
   focusable={true}
+  iconPosition="before"
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
