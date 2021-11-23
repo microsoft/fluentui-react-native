@@ -28,6 +28,12 @@ export const ButtonIconTest: React.FunctionComponent = () => {
         content="Font icon"
         style={commonTestStyles.vmargin}
       />
+      <Button
+        icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: '#060' }}
+        content="Icon after"
+        style={commonTestStyles.vmargin}
+        iconPosition="after"
+      />
       <Button icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
       <Button appearance="primary" icon={{ fontSource: fontBuiltInProps }} content="Font icon" style={commonTestStyles.vmargin} />
       {svgIconsEnabled && (
