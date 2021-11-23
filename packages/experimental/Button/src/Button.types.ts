@@ -9,6 +9,7 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonAppearance = 'primary' | 'subtle';
+export type ButtonShape = 'rounded' | 'circular' | 'square';
 
 export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -67,6 +68,9 @@ export interface ButtonTokens extends ButtonCoreTokens {
   small?: ButtonTokens;
   medium?: ButtonTokens;
   large?: ButtonTokens;
+  rounded?: ButtonTokens;
+  circular?: ButtonTokens;
+  square?: ButtonTokens;
 }
 
 export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -106,6 +110,12 @@ export interface ButtonProps extends ButtonCoreProps {
 
   /** Sets style of button to a preset size style  */
   size?: ButtonSize;
+
+  /**
+   * Button shape: 'rounded' | 'circular' | 'square'
+   * @defaultvalue rounded
+   */
+  shape?: ButtonShape;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
