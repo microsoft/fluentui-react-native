@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Initial migration file for button",
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}

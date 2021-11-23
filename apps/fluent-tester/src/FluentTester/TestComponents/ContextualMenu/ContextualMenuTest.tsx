@@ -14,7 +14,7 @@ import {
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
-
+import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 
 const contextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
@@ -483,6 +483,10 @@ const contextualMenuSections: TestSection[] = [
     name: 'ContextalMenu with ScrollView',
     component: ScrollViewContextualMenu,
   },
+  {
+    name: 'ContextualMenu E2E Test',
+    component: E2EContextualMenuTest,
+  },  
 ];
 
 export const ContextualMenuTest: React.FunctionComponent = () => {
