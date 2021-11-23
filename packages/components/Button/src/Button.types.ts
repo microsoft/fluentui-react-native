@@ -115,6 +115,8 @@ export interface IButtonProps extends Omit<IPressableProps, 'onPress'> {
   tooltip?: string;
   startIcon?: IconSourcesType;
   endIcon?: IconSourcesType;
+
+  accessibilityId?: string;
 }
 
 export interface IButtonSlotProps {

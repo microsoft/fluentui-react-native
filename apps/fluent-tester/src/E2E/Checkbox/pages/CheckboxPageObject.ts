@@ -19,9 +19,11 @@ class CheckboxPageObject extends BasePage {
       () => {
         return !this.isCheckboxChecked();
       },
-      timeout ?? this.waitForPageTimeout,
-      'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
-      2000,
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: 'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
+        interval: 1000,
+      },
     );
   }
 

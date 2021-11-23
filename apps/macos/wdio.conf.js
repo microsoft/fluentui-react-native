@@ -1,12 +1,10 @@
-const fs = require('fs');
-
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.uwp.ts'],
+  specs: ['../fluent-tester/src/E2E/**/specs/*.macos.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -15,10 +13,10 @@ exports.config = {
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
-      platformName: 'windows',
-      deviceName: 'WindowsPC',
-      app: '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
-    },
+      platformName: 'mac',
+      automationName: 'Mac2',
+      bundleId: 'com.microsoft.ReactTestApp'
+    }
   ],
 
   /*
@@ -48,11 +46,17 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
+    requires: ['ts-node/register', '@babel/register'],
+    helpers: [
+      require.resolve('ts-node/register'),
+      require.resolve('@babel/register')
+    ]
+    //requires: ['ts-node/register', 'babel/register', '@babel/register'],
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 3,
+  specFileRetries: 1,
 
   reporters: ['spec'],
 
@@ -70,11 +74,11 @@ exports.config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  //   require('ts-node/register');
-  //   // require('ts-node').register({ files: true });
-  //   console.log('<<< NATIVE APP TESTS STARTED >>>');
-  // },
+   onPrepare: function (config, capabilities) {
+     //require('@babel/register');
+     // require('ts-node').register({ files: true });
+     //console.log('<<< NATIVE APP TESTS STARTED >>>');
+   },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -93,8 +97,14 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (/* config, capabilities, specs */) {
-    fs.mkdirSync('./errorShots', {recursive: true});
+  beforeSession: function (config, capabilities, specs) {
+    require('ts-node').register({ files: true });
+    require('@babel/register');
+    // Delete old screenshots and create empty directory
+    //if (fs.existsSync('./errorShots')) {
+    //  rimraf.sync('./errorShots');
+    //}
+    //fs.mkdirSync('./errorShots');
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -103,10 +113,8 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    // not needed for Cucumber
     require('ts-node').register({ files: true });
     require('@babel/register');
-    browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -142,19 +150,20 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: function (test, context, results) {
-    // if test passed, ignore, else take and save screenshot.
-    if (results.passed) {
-      return;
-    }
+    // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
+    // it may be useful to have a screenshot of the app on load.
+    //if (results.passed) {
+    //  return;
+    //}
 
     // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
+    //const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
 
     // build file path
-    const filePath = './errorShots/' + fileName + '.png';
+    //const filePath = './errorShots/' + fileName + '.png';
 
     // save screenshot
-    browser.saveScreenshot(filePath);
+    //browser.saveScreenshot(filePath);
   },
 
   /**
@@ -197,8 +206,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (/* exitCode, config, capabilities, results */) {
-    console.log('<<< TESTING FINISHED >>>');
+  onComplete: function (exitCode, config, capabilities, results) {
+    //console.log('<<< TESTING FINISHED >>>');
   },
   /**
    * Gets executed when a refresh happens.

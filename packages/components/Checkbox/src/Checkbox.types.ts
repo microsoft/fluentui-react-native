@@ -76,6 +76,8 @@ export interface ICheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Provides a tooltip while hovering over Checkbox component
    */
   tooltip?: string;
+
+  accessibilityId?: string;
 }
 
 export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
