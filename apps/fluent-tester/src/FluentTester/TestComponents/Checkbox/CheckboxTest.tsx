@@ -4,6 +4,7 @@ import * as React from 'react';
 import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
+import { E2ECheckboxTest } from './CheckboxE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 function onChangeUncontrolled(isChecked: boolean) {
@@ -156,6 +157,10 @@ const checkboxSections: TestSection[] = [
   {
     name: 'Token Customized Checkboxes',
     component: tokenCheckbox,
+  },
+  {
+    name: 'Checkbox for E2E Testing',
+    component: E2ECheckboxTest,
   },
 ];
 

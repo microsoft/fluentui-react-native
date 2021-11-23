@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme-tokens",
-  "version": "0.9.2",
+  "version": "0.10.0",
   "description": "Defines values for tokens used to fill out themes.",
   "repository": {
     "type": "git",
@@ -32,16 +32,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.12.4 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@uifabricshared/build-native": "^0.1.1",
-    "react-native": "^0.63.4"
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-native": "^0.63.4"
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   }
 }

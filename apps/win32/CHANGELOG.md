@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 12 Nov 2021 16:07:20 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.48.1 (sanajmi@microsoft.com)
+
+## 0.16.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Adding E2E Testing pages for each component (safreibe@microsoft.com)
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.48.0 (afoxman@microsoft.com)
 
 ## 0.15.4
 

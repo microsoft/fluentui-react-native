@@ -5,6 +5,7 @@ import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ICON_TESTPAGE } from './consts';
+import { E2ETestingIcon } from './IconE2ETest';
 
 const testImage = require('./assets/testicon.png');
 const testTtf = require('./assets/Font Awesome 5 Free-Solid-900.otf');
@@ -94,6 +95,10 @@ const iconSections: TestSection[] = [
     name: 'Icon',
     testID: ICON_TESTPAGE,
     component: icons,
+  },
+  {
+    name: 'Icon for E2E Testing',
+    component: E2ETestingIcon,
   },
 ];
 

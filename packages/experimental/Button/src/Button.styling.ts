@@ -1,4 +1,4 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
+import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
@@ -6,8 +6,9 @@ import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { Platform } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
+export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIcon'];
+
 export const buttonStates: (keyof ButtonTokens)[] = [
-  'fab',
   'block',
   'primary',
   'subtle',
