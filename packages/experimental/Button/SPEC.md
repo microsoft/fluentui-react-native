@@ -158,10 +158,10 @@ A loading `Button` renders a `loader` before all the other content to indicate t
 
 The following is a set of keys that interact with the `Button` component:
 
-| Key     | Description                   |
-| ------- | ----------------------------- |
-| `Enter` | Executes the `Button` action. |
-| `Space` | Executes the `Button` action. |
+| Key     | Description                                           |
+| ------- | ----------------------------------------------------- |
+| `Enter` | Executes the function passed into the `onClick` prop. |
+| `Space` | Executes the function passed into the `onClick` prop. |
 
 #### Cursor interaction
 

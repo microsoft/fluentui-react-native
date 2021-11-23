@@ -8,7 +8,7 @@ This Migration guide is a work in progress and is not yet ready for use.
 
 ### Component renames
 
-Common buttons now all map to `Button`:
+Primary and Stealth buttons now map to `Button`:
 
 | v0 `Button`                             | v1 `Button`                                          |
 | --------------------------------------- | ---------------------------------------------------- |
