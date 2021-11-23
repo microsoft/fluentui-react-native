@@ -47,9 +47,6 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
    */
   spacingIconContent?: number;
 
-  rightIcon?: ButtonTokens;
-  leftIcon?: ButtonTokens;
-
   /**
    * States that can be applied to a button
    */
@@ -122,7 +119,7 @@ export interface ButtonProps extends ButtonCoreProps {
 
   /**
    * Icon can be placed before or after Button's content.
-   * @default 'before'
+   * @default before
    */
   iconPosition?: 'before' | 'after';
 }
