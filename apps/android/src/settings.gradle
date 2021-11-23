@@ -10,6 +10,3 @@ rootProject.name = 'FluentTester'
 
 apply from: file("../../../node_modules/react-native-test-app/test-app.gradle")
 applyTestAppSettings(settings)
-
-include ':Drawer'
-project(':Drawer').projectDir = new File('./packages/experimental/furn-drawer/android')
