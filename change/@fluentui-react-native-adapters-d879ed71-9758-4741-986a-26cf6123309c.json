@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "Rename fluid to block",
-  "packageName": "@fluentui-react-native/tester",
+  "comment": "Fix build",
+  "packageName": "@fluentui-react-native/adapters",
   "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
 }

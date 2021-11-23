@@ -56,20 +56,6 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
           backgroundColor: 'menuItemBackgroundHovered',
         },
       },
-      focused: {
-        tokens: {
-          color: 'menuItemTextHovered',
-          backgroundColor: 'menuItemBackgroundHovered',
-          borderColor: 'focusBorder',
-        },
-        _overrides: {
-          hovered: {
-            tokens: {
-              borderColor: 'transparent',
-            },
-          },
-        },
-      },
     },
   },
   contextualMenuItemName,

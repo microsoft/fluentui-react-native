@@ -97,10 +97,10 @@ const standardCallout: React.FunctionComponent = () => {
   const [selectedBackgroundColor, setSelectedBackgroundColor] = React.useState<string | undefined>(undefined);
   const [selectedBorderColor, setSelectedBorderColor] = React.useState<string | undefined>(undefined);
 
-  const borderWidthDefault: string = 'default (1)';
-  const borderWidthSelections: (number | string)[] = ['default (1)', 2, 4, 10];
+  const borderWidthDefault: string = '1';
+  const borderWidthSelections: string[] = ['1', '2', '4', '10'];
 
-  const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<number | undefined>(undefined);
+  const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<string | undefined>(undefined);
 
   const [showScrollViewCallout, setShowScrollViewCalout] = React.useState(false);
   const [scrollviewContents, setScrollviewContents] = React.useState([1, 2, 3]);
@@ -175,7 +175,7 @@ const standardCallout: React.FunctionComponent = () => {
             onValueChange={(width) => setSelectedBorderWidth(width === borderWidthDefault ? undefined : width)}
           >
             {borderWidthSelections.map((width, index) => (
-              <Picker.Item label={width.toString()} key={index} value={width} />
+              <Picker.Item label={width} key={index} value={width} />
             ))}
           </Picker>
         </View>
@@ -218,7 +218,7 @@ const standardCallout: React.FunctionComponent = () => {
             isBeakVisible: isBeakVisible,
             ...(selectedBorderColor && { borderColor: selectedBorderColor }),
             ...(selectedBackgroundColor && { backgroundColor: selectedBackgroundColor }),
-            ...(selectedBorderWidth && { borderWidth: selectedBorderWidth }),
+            ...(selectedBorderWidth && { borderWidth: parseInt(selectedBorderWidth) }),
             ...(calloutDismissBehaviors && { dismissBehaviors: calloutDismissBehaviors }),
           }}
         >

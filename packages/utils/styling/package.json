@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/styling-utils",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Utility functions for styling components in FURN",
   "main": "src/index.ts",
   "module": "lib/index.js",
@@ -25,8 +25,8 @@
     "@uifabricshared/build-native": "^0.1.1"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-native": "^0.63.4"
+    "react": "^17.0.1",
+    "react-native": "^0.64.3"
   },
   "author": "",
   "license": "MIT"
