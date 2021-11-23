@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.9.0 (afoxman@microsoft.com)
+
+## 0.10.54
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.30 (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.53
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- revert changes in useAsPressable (sanajmi@microsoft.com)
+
+## 0.10.52
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
 
 ## 0.10.51
 

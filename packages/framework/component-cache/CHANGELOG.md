@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/component-cache
 
-This log was last generated on Wed, 04 Aug 2021 06:26:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
 
 ## 1.2.3
 

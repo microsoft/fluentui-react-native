@@ -131,7 +131,10 @@
 		"fillColorRest": "#616161"
 	},
 	"neutralForeground1": {
-		"fillColorRest": "#242424"
+		"fillColorRest": "#242424",
+		"fillColorHover": "#242424",
+		"fillColorPressed": "#242424",
+		"fillColorSelected": "#242424"
 	},
 	"neutralForeground2": {
 		"fillColorRest": "#424242",
@@ -167,7 +170,10 @@
 		"fillColorSelected": "#ffffff"
 	},
 	"neutralForegroundOnBrand": {
-		"fillColorRest": "#ffffff"
+		"fillColorRest": "#ffffff",
+		"fillColorHover": "#ffffff",
+		"fillColorPressed": "#ffffff",
+		"fillColorSelected": "#ffffff"
 	},
 	"neutralStencil1": {
 		"fillColorRest": "#e6e6e6"

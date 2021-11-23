@@ -1,8 +1,28 @@
 # Change Log - @uifabricshared/themed-settings
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.11.0 (afoxman@microsoft.com)
+
+## 0.7.2
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.3 (ruaraki@microsoft.com)
 
 ## 0.7.1
 

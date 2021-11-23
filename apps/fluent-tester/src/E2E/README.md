@@ -48,7 +48,23 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 
 # Authoring E2E Test
 
-## Create a new Page Object
+Testing is split-up on a **per-component** basis. Each component's testing story is made up of two parts - a **Page Object** and a **Spec Document**.
+
+Example File Structure:
+
+-> Checkbox Folder
+
+----> CheckboxPageObject.ts
+
+----> CheckboxSpec.ts
+
+Now, what are Page Objects and Spec Documents?
+
+## Page Objects
+
+A page object is an object-oriented class. The purpose of this class is to act as an interface for you to interact with a page of your testing app. In layman's terms, **it selects UI elements and performs some functions on them to obtain the scenario you want.**
+
+For each component/scenario you want to test, you will have a page object class for it.
 
 Page Object is a design pattern which has become popular in test automation for enhancing test maintenance and reducing code duplication. A [page object](https://webdriver.io/docs/pageobjects.html) is an object-oriented class that serves as an interface to a page of you testing app. The tests then use the methods of this Page Object whenever they need to interact with the UI of that page.
 The benefit is that if the UI changes for the test page, the tests themselves don’t need to change, only the code within the page object needs to change.
@@ -56,20 +72,27 @@ The benefit is that if the UI changes for the test page, the tests themselves do
 Page Objects should be put in apps/fluent-tester/src/E2E/_ *ComponentToBeTested* _/pages/.
 
 ```
-// CheckboxTestPage.win.ts
-class CheckboxTestPage extends BasePage {
-
+// CheckboxPageObject.win.ts
+class CheckboxPageObject extends BasePage {
+  // This function clicks on the Checkbox component you selected below
   toggleCheckbox() {
     this._testPage.click();
   }
 
-  get _testPage() {
+  // This function selects a UI element with the prop `testID = CHECKBOX_TESTPAGE`
+  get _checkboxComponent() {
     return By(CHECKBOX_TESTPAGE);
   }
 }
 
-export default new CheckboxTestPage();
+export default new CheckboxPageObject();
 ```
+
+### More on Page Objects (Technical Information)
+
+Each page object should extend BasePage.ts. The BasePage class contains a baseline set of methods/variables that all page objects should have. This allows us to write the most efficient code possible.
+
+For example, a common task we want to perform is selecting a UI element and getting its accessibilityRole attribute. Instead of doing this in all 20 page objects for each component, we write it once in the BasePage, and have the 20 page objects extend it. Enables code-reuse and allows for easy comprehension.
 
 ### **Selectors**
 
@@ -90,8 +113,8 @@ Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTest
 ```
 describe('Click on each test page and check if it renders', function() {
   it('Checkbox Test Page', () => {
-    BootTestPage.clickAndGoToCheckboxPage();
-    expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
+    NavigateAppPage.clickAndGoToCheckboxPage();
+    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
   });
 });
 ```

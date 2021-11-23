@@ -1,8 +1,51 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/persona-coin to v0.10.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-composable to v0.10.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-settings to v0.11.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-tokens to v0.11.0 (afoxman@microsoft.com)
+
+## 0.11.26
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona-coin to v0.9.26 (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.25
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/persona-coin to v0.9.25 (ruaraki@microsoft.com)
+
+## 0.11.24
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.2 (ruaraki@microsoft.com)
 
 ## 0.11.23
 

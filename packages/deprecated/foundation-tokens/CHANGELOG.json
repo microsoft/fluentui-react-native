@@ -2,6 +2,65 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@uifabricshared/foundation-tokens"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.10.3",
+      "version": "0.10.3",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.10.3",
+      "version": "0.10.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.10.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@uifabricshared/foundation-tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.10.2",
       "version": "0.10.2",

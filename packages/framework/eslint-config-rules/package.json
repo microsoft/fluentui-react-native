@@ -1,7 +1,8 @@
 {
-  "name": "@uifabricshared/eslint-config-rules",
+  "name": "@fluentui-react-native/eslint-config-rules",
   "version": "0.1.1",
   "description": "ESLint ruleset for UI Fabric React Native",
+  "private": "true",
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/ui-fabric-react-native",
@@ -14,11 +15,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
+    "@rnx-kit/eslint-plugin": "^0.2.0",
     "eslint": "^8.0.0",
-    "eslint-plugin-jest": "^25.0.0",
-    "eslint-plugin-react": "^7.26.0"
+    "eslint-plugin-jest": "^25.0.0"
   },
   "beachball": {
     "shouldPublish": false,

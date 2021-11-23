@@ -18,6 +18,8 @@ export const settings: IComposeSettings<SubmenuType> = [
     container: {
       style: {
         padding: 1,
+        minWidth: 180,
+        flex: 1
       },
     },
   },

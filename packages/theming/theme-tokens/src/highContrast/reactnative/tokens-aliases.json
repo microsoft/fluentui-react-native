@@ -131,7 +131,10 @@
 		"fillColorRest": "PlatformColor(WindowText)"
 	},
 	"neutralForeground1": {
-		"fillColorRest": "PlatformColor(WindowText)"
+		"fillColorRest": "PlatformColor(WindowText)",
+		"fillColorHover": "PlatformColor(HighlightText)",
+		"fillColorPressed": "PlatformColor(HighlightText)",
+		"fillColorSelected": "PlatformColor(HighlightText)"
 	},
 	"neutralForeground2": {
 		"fillColorRest": "PlatformColor(WindowText)",
@@ -167,7 +170,10 @@
 		"fillColorSelected": "PlatformColor(Hotlight)"
 	},
 	"neutralForegroundOnBrand": {
-		"fillColorRest": "PlatformColor(Window)"
+		"fillColorRest": "PlatformColor(ButtonText)",
+		"fillColorHover": "PlatformColor(HighlightText)",
+		"fillColorPressed": "PlatformColor(HighlightText)",
+		"fillColorSelected": "PlatformColor(HighlightText)"
 	},
 	"neutralStencil1": {
 		"fillColorRest": "#141414"

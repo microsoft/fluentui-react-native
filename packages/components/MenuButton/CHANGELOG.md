@@ -1,8 +1,62 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.12.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.9.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.3.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-composable to v0.10.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-settings to v0.11.0 (afoxman@microsoft.com)
+
+## 0.6.18
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.16 (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.17
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Patches
+
+- Adding accessibilityLabel integration for MenuButton (safreibe@microsoft.com)
+- Bump macOS minimum version to 10.15 (sanajmi@microsoft.com)
+- fixing capitalization in some of the native code for macOS (sanajmi@microsoft.com)
+
+## 0.6.16
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.15 (sanajmi@microsoft.com)
+
+## 0.6.15
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.20.14 (ruaraki@microsoft.com)
 
 ## 0.6.14
 

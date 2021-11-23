@@ -1,8 +1,74 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.48.1 (sanajmi@microsoft.com)
+
+## 0.16.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Adding E2E Testing pages for each component (safreibe@microsoft.com)
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.48.0 (afoxman@microsoft.com)
+
+## 0.15.4
+
+Fri, 12 Nov 2021 16:07:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.47.3 (4123478+tido64@users.noreply.github.com)
+
+## 0.15.3
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.47.2 (67026167+chiuam@users.noreply.github.com)
+
+## 0.15.2
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.47.1 (sanajmi@microsoft.com)
+
+## 0.15.1
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Checkbox redesign (v.kozlova13@gmail.com)
+
+## 0.15.0
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Minor changes
+
+- Transferring E2E Improvements to this branch. Other branch had weird CI errors (safreibe@microsoft.com)
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.46.0 (ruaraki@microsoft.com)
 
 ## 0.14.1
 

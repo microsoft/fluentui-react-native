@@ -115,7 +115,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         <View style={fluentTesterStyles.header}>
           {/* on iOS, display a back Button */}
           <Button
-            subtle
+            appearance="subtle"
             content="‹ Back"
             style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
             onClick={onBackPress}
@@ -137,7 +137,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           {sortedTestComponents.map((description, index) => {
             return (
               <Button
-                subtle
+                appearance="subtle"
                 key={index}
                 disabled={index == selectedTestIndex}
                 content={description.name}

@@ -4,6 +4,7 @@ import { Tabs, TabsItem, Text, Button } from '@fluentui/react-native';
 import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2ETabsTest } from './TabsE2ETest';
 import TestSvg from './test.svg';
 
 const tabs: React.FunctionComponent = () => {
@@ -269,6 +270,10 @@ const tabsSections: TestSection[] = [
   {
     name: 'More Flexibility',
     component: tabsWithFlexibility,
+  },
+  {
+    name: 'E2E Tabs Test',
+    component: E2ETabsTest,
   },
 ];
 

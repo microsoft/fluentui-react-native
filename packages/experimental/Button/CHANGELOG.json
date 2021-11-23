@@ -2,6 +2,179 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Change button props to add appearance",
+            "author": "ruaraki@microsoft.com",
+            "commit": "dc0b4baf06b511d31cc5c7a2fa8cd6a8e0900d3a",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Rename fluid to block",
+            "author": "ruaraki@microsoft.com",
+            "commit": "65e7f9e1557c8bbf17539185c7d0eb7f46a388db",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/icon to v0.9.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.7.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.10.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/test-tools to v0.1.1",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Nov 2021 16:07:20 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.9.6",
+      "version": "0.9.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.6",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "25673699e6c6c064b41f1246c2c995baa67a74ad",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.9.6",
+      "version": "0.9.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.9.6",
+      "version": "0.9.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.9.2",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.9.5",
+      "version": "0.9.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix disabled state not working properly",
+            "author": "ruaraki@microsoft.com",
+            "commit": "8f6029ff1340896ce4b3971f6130f7fc465adb9d",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix color on buttons",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Use tslib where spreadArray is used",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/experimental-button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Oct 2021 03:46:25 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.9.2",
       "version": "0.9.2",

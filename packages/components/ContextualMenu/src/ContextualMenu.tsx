@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import {
   contextualMenuName,
   ContextualMenuProps,
@@ -31,7 +31,7 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { setShowMenu, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
+    const { setShowMenu, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
@@ -65,6 +65,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
         onBlur: toggleContainerFocus,
+        style: {maxHeight: maxHeight, width: maxWidth}
       },
     });
 
@@ -83,10 +84,15 @@ export const ContextualMenu = compose<ContextualMenuType>({
     if (renderData.state == undefined) {
       return null;
     }
+
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
-          <Slots.container>{children}</Slots.container>
+          <Slots.container>
+            <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1}} showsVerticalScrollIndicator={true}>
+              {children}
+            </ScrollView>
+          </Slots.container>
         </Slots.root>
       </CMContext.Provider>
     );

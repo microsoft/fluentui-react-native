@@ -2,6 +2,80 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.6.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/android-theme"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-types to v0.13.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.18",
+      "version": "0.4.18",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.18",
+      "version": "0.4.18",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.23",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.4.17",
+      "version": "0.4.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/theme to v0.5.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/android-theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.4.16",
       "version": "0.4.16",

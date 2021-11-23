@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+- Change button props to add appearance (ruaraki@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.12.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.10.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+
+## 0.0.11
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.9.6 (67026167+chiuam@users.noreply.github.com)
+
+## 0.0.10
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Patches
+
+- Fix tests (ruaraki@microsoft.com)
+- Adding accessibilityLabel integration with experimental MenuButton also (safreibe@microsoft.com)
+
+## 0.0.9
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.9.4 (ruaraki@microsoft.com)
+
+## 0.0.8
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.10.29 (ruaraki@microsoft.com)
 
 ## 0.0.7
 

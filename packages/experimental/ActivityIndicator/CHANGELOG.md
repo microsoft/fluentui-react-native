@@ -1,8 +1,52 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
-This log was last generated on Wed, 20 Oct 2021 03:46:25 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+
+## 0.3.27
+
+Fri, 12 Nov 2021 16:07:20 GMT
+
+### Patches
+
+- Use the native driver for the animation (sanajmi@microsoft.com)
+
+## 0.3.26
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.6 (67026167+chiuam@users.noreply.github.com)
+
+## 0.3.25
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.5 (ruaraki@microsoft.com)
+
+## 0.3.24
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.4 (ruaraki@microsoft.com)
 
 ## 0.3.23
 

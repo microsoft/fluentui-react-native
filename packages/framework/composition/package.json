@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/composition",
-  "version": "0.6.11",
+  "version": "0.7.0",
   "description": "Composition factories for building HOCs",
   "repository": {
     "type": "git",
@@ -32,17 +32,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/immutable-merge": "^1.1.3",
-    "@fluentui-react-native/use-slot": ">=0.1.6 <1.0.0",
-    "@fluentui-react-native/use-slots": ">=0.5.8 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.7.1 <1.0.0"
+    "@fluentui-react-native/immutable-merge": "^1.1.4",
+    "@fluentui-react-native/use-slot": ">=0.2.0 <1.0.0",
+    "@fluentui-react-native/use-slots": ">=0.6.0 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.8.0 <1.0.0"
   },
   "devDependencies": {
-    "@types/react-native": "^0.63.0",
+    "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "react-native": "^0.63.4"
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
-    "react-native": ">=0.63.4"
+    "react-native": ">=0.64.3"
   }
 }

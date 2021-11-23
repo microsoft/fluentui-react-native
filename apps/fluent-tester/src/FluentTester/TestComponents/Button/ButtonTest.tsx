@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ButtonFocusTest } from './ButtonFocusTest';
 import { ButtonIconTest } from './ButtonIconTest';
 import { BUTTON_TESTPAGE } from './consts';
+import { E2EButtonTest } from './E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const buttonSections: TestSection[] = [
@@ -13,6 +14,10 @@ const buttonSections: TestSection[] = [
   {
     name: 'Icon Button',
     component: ButtonIconTest,
+  },
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonTest,
   },
 ];
 

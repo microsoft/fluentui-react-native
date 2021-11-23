@@ -1,7 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonTokens } from './Button.types';
-import { shadowStyleFromGlobalToken } from './shadowStyle';
 
 export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
@@ -9,38 +8,6 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     color: t.colors.neutralForeground1,
     borderColor: t.colors.neutralStroke1,
     iconColor: t.colors.neutralForeground1,
-    fab: {
-      ...shadowStyleFromGlobalToken(8),
-      // coloring same as primary
-      backgroundColor: t.colors.brandBackground,
-      color: t.colors.neutralForegroundOnBrand,
-      borderColor: t.colors.brandBackground,
-      iconColor: t.colors.neutralForegroundOnBrand,
-      disabled: {
-        backgroundColor: t.colors.neutralBackgroundDisabled,
-        color: t.colors.neutralForegroundDisabled,
-        borderColor: t.colors.neutralStrokeDisabled,
-        iconColor: t.colors.neutralForegroundDisabled,
-      },
-      hovered: {
-        backgroundColor: t.colors.brandBackgroundHover,
-        color: t.colors.neutralForegroundOnBrand,
-        borderColor: t.colors.brandBackgroundHover,
-        iconColor: t.colors.neutralForegroundOnBrand,
-      },
-      pressed: {
-        backgroundColor: t.colors.brandBackgroundPressed,
-        color: t.colors.neutralForegroundOnBrand,
-        borderColor: t.colors.brandBackgroundPressed,
-        iconColor: t.colors.neutralForegroundOnBrand,
-      },
-      focused: {
-        backgroundColor: t.colors.brandBackgroundHover,
-        color: t.colors.neutralForegroundOnBrand,
-        borderColor: t.colors.strokeFocus2,
-        iconColor: t.colors.neutralForegroundOnBrand,
-      },
-    },
     disabled: {
       backgroundColor: t.colors.neutralBackgroundDisabled,
       color: t.colors.neutralForegroundDisabled,
@@ -49,80 +16,80 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     },
     hovered: {
       backgroundColor: t.colors.neutralBackground1Hover,
-      color: t.colors.neutralForeground1,
+      color: t.colors.neutralForeground1Hover,
       borderColor: t.colors.neutralStroke1Hover,
-      iconColor: t.colors.neutralForeground1,
+      iconColor: t.colors.neutralForeground1Hover,
     },
     pressed: {
       backgroundColor: t.colors.neutralBackground1Pressed,
-      color: t.colors.neutralForeground1,
+      color: t.colors.neutralForeground1Pressed,
       borderColor: t.colors.neutralStroke1Pressed,
-      iconColor: t.colors.neutralForeground1,
+      iconColor: t.colors.neutralForeground1Pressed,
     },
     focused: {
       backgroundColor: t.colors.neutralBackground1Hover,
-      color: t.colors.neutralforeground1,
+      color: t.colors.neutralForeground1Hover,
       borderColor: t.colors.strokeFocus2,
-      icon: t.colors.neutralforeground1,
+      icon: t.colors.neutralForeground1Hover,
     },
     primary: {
       backgroundColor: t.colors.brandBackground,
       color: t.colors.neutralForegroundOnBrand,
-      borderColor: t.colors.brandBackground,
+      borderColor: t.colors.brandStroke1,
       iconColor: t.colors.neutralForegroundOnBrand,
       disabled: {
         backgroundColor: t.colors.neutralBackgroundDisabled,
-        color: t.colors.neutralForegroundOnBrand,
+        color: t.colors.neutralForegroundDisabled,
         borderColor: t.colors.neutralStrokeDisabled,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        iconColor: t.colors.neutralForegroundDisabled,
       },
       hovered: {
         backgroundColor: t.colors.brandBackgroundHover,
-        color: t.colors.neutralForegroundOnBrand,
+        color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.brandBackgroundHover,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        iconColor: t.colors.neutralForegroundOnBrandHover,
       },
       pressed: {
         backgroundColor: t.colors.brandBackgroundPressed,
-        color: t.colors.neutralForegroundOnBrand,
+        color: t.colors.neutralForegroundOnBrandPressed,
         borderColor: t.colors.brandBackgroundPressed,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        iconColor: t.colors.neutralForegroundOnBrandPressed,
       },
       focused: {
         backgroundColor: t.colors.brandBackgroundHover,
-        color: t.colors.neutralForegroundOnBrand,
+        color: t.colors.neutralForegroundOnBrandHover,
         borderColor: t.colors.strokeFocus2,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        iconColor: t.colors.neutralForegroundOnBrandHover,
       },
     },
     subtle: {
       backgroundColor: t.colors.subtleBackground,
       color: t.colors.neutralForeground1,
-      borderColor: t.colors.subtleBackground,
+      borderColor: t.colors.transparentStroke,
       iconColor: t.colors.neutralForeground2,
       disabled: {
+        backgroundColor: t.colors.subtleBackground,
         color: t.colors.neutralForegroundDisabled,
-        backgroundColor: 'transparent',
-        borderColor: 'transparent',
+        borderColor: t.colors.transparentStroke,
         iconColor: t.colors.neutralForegroundDisabled,
       },
       hovered: {
         backgroundColor: t.colors.subtleBackgroundHover,
-        color: t.colors.neutralForeground1,
+        color: t.colors.neutralForeground1Hover,
         borderColor: t.colors.subtleBackgroundHover,
         iconColor: t.colors.neutralForeground2BrandHover,
       },
       pressed: {
         backgroundColor: t.colors.subtleBackgroundPressed,
-        color: t.colors.neutralForeground1,
+        color: t.colors.neutralForeground1Pressed,
         borderColor: t.colors.subtleBackgroundPressed,
         iconColor: t.colors.neutralForeground2BrandPressed,
       },
       focused: {
-        backgroundColor: t.colors.subtleBackground,
-        color: t.colors.neutralForeground1,
+        backgroundColor: t.colors.subtleBackgroundHover,
+        color: t.colors.neutralForeground1Hover,
         borderColor: t.colors.strokeFocus2,
-        iconColor: t.colors.neutralForeground2,
+        iconColor: t.colors.neutralForeground1Hover,
       },
     },
   } as ButtonTokens);
