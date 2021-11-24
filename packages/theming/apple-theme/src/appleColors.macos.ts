@@ -3,6 +3,7 @@ import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
+import { aliasTokens } from '@fluentui-react-native/theme-tokens';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -332,22 +333,22 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the default button tokens to match the Acrylic Button style
-    buttonBackground: fluentUIApple.neutralBackground3,
-    buttonBackgroundChecked: fluentUIApple.neutralBackground3,
-    buttonBackgroundHovered: fluentUIApple.neutralBackground3,
-    buttonBackgroundCheckedHovered: fluentUIApple.neutralBackground3,
-    buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
-    buttonBackgroundDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
-    buttonBorder: 'transparent',
-    buttonText: fluentUIApple.neutralForeground3,
-    buttonTextHovered: fluentUIApple.neutralForeground3,
-    buttonTextChecked: fluentUIApple.neutralForeground3,
-    buttonTextCheckedHovered: fluentUIApple.neutralForeground3,
-    buttonTextPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    buttonTextDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'disabled'),
+    buttonBackground: aliasTokens.neutralBackground3.fillColorRest,
+    buttonBackgroundChecked: aliasTokens.neutralBackground3.fillColorRest,
+    buttonBackgroundHovered: aliasTokens.neutralBackground3.fillColorRest,
+    buttonBackgroundCheckedHovered: aliasTokens.neutralBackground3.fillColorRest,
+    buttonBackgroundPressed: ColorWithSystemEffectMacOS(aliasTokens.neutralBackground3.fillColorRest, 'pressed'),
+    buttonBackgroundDisabled: ColorWithSystemEffectMacOS(aliasTokens.neutralBackground3.fillColorRest, 'disabled'),
+    buttonBorder: aliasTokens.transparentBackground.fillColorRest,
+    buttonText: aliasTokens.neutralForeground3.fillColorRest,
+    buttonTextHovered: aliasTokens.neutralForeground3.fillColorRest,
+    buttonTextChecked: aliasTokens.neutralForeground3.fillColorRest,
+    buttonTextCheckedHovered: aliasTokens.neutralForeground3.fillColorRest,
+    buttonTextPressed: ColorWithSystemEffectMacOS(aliasTokens.neutralForeground3.fillColorRest, 'pressed'),
+    buttonTextDisabled: ColorWithSystemEffectMacOS(aliasTokens.neutralForeground3.fillColorRest, 'disabled'),
 
-    buttonBorderDisabled: 'transparent',
-    buttonBorderFocused: 'transparent',
+    buttonBorderDisabled: aliasTokens.transparentBackground.fillColorRest,
+    buttonBorderFocused: aliasTokens.transparentBackground.fillColorRest,
 
     primaryButtonBackground: fluentUIApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentUIApple.communicationBlue,
