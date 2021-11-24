@@ -5,12 +5,17 @@ import { ExperimentalButtonTestPageId } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonIconTest } from './ButtonIconTestSection';
 import { ButtonSizeTest } from './ButtonSizeTestSection';
+import { ButtonShapeTest } from './ButtonShapeTestSection';
 
 const buttonSections: TestSection[] = [
   {
     name: 'Button Variants',
     testID: ExperimentalButtonTestPageId,
     component: ButtonVariantTest,
+  },
+  {
+    name: 'Button Shape',
+    component: ButtonShapeTest,
   },
   {
     name: 'Icon Button',

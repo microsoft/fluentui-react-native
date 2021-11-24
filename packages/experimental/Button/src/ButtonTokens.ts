@@ -11,7 +11,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     medium: {
       padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
-      borderRadius: globalTokens.corner.radius.medium,
       iconSize: 16,
       hasContent: {
         minWidth: 96,
@@ -25,7 +24,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     small: {
       padding: globalTokens.spacing.xs - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
-      borderRadius: globalTokens.corner.radius.medium,
       iconSize: 16,
       hasContent: {
         minWidth: 64,
@@ -39,7 +37,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     large: {
       padding: globalTokens.spacing.s - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
-      borderRadius: globalTokens.corner.radius.medium,
       iconSize: 20,
       hasContent: {
         minWidth: 96,
@@ -49,5 +46,14 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
           spacingIconContent: globalTokens.spacing.sNudge,
         },
       },
+    },
+    rounded: {
+      borderRadius: globalTokens.corner.radius.medium,
+    },
+    circular: {
+      borderRadius: globalTokens.corner.radius.circle,
+    },
+    square: {
+      borderRadius: globalTokens.corner.radius.none,
     },
   } as ButtonTokens);
