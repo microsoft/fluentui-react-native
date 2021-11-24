@@ -53,10 +53,11 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           color: tokens.color,
           ...getTextMarginAdjustment(),
           ...(tokens.spacingIconContent && { marginLeft: tokens.spacingIconContent }),
+          ...(tokens.afterIconSpacing && { marginRight: tokens.afterIconSpacing }),
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'spacingIconContent', ...fontStyles.keys],
+      ['color', 'spacingIconContent', 'afterIconSpacing', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ButtonTokens) => ({

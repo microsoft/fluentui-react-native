@@ -48,6 +48,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   spacingIconContent?: number;
 
   /**
+   * The amount of spacing between "after" icon and the content
+   */
+  afterIconSpacing?: number;
+
+  /**
    * States that can be applied to a button
    */
   hovered?: ButtonTokens;
@@ -105,6 +110,7 @@ export interface ButtonProps extends ButtonCoreProps {
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    */
   appearance?: ButtonAppearance;
+
   /** A button can fill the width of its container. */
   block?: boolean;
 
@@ -122,6 +128,11 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default before
    */
   iconPosition?: 'before' | 'after';
+
+  /**
+   * Button contains only icon
+   */
+  iconOnly?: boolean;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

@@ -184,7 +184,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button content="View Next Tab" onClick={goToNextTab} />
+      <Button onClick={goToNextTab}>View Next Tab</Button>
     </View>
   );
 };
@@ -216,7 +216,7 @@ const tabsWithFlexibility: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button content="View Home Tab" onClick={goHomeTab} />
+      <Button onClick={goHomeTab}>View Home Tab</Button>
     </View>
   );
 };
