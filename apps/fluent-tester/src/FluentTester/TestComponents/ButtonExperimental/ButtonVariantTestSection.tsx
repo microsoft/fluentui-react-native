@@ -14,8 +14,10 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
       <Button content="Default" style={commonTestStyles.vmargin} />
+      <Button disabled content="Disabled" style={commonTestStyles.vmargin} />
       <Button appearance="primary" content="Primary" style={commonTestStyles.vmargin} />
       <Button appearance="subtle" content="Subtle" style={commonTestStyles.vmargin} />
+      <Button loading content="Loading Button" />
       <Button block content="Block" style={commonTestStyles.vmargin} />
       <Button appearance="primary" block content="Block Primary" style={commonTestStyles.vmargin} />
       <Button appearance="subtle" block content="Block Subtle" style={commonTestStyles.vmargin} />

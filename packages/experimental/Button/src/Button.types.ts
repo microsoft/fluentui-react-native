@@ -122,6 +122,13 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default before
    */
   iconPosition?: 'before' | 'after';
+
+  /**
+   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
+   * be interacted with.
+   * @default false
+   */
+  loading?: boolean;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

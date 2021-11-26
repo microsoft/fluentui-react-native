@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
@@ -47,10 +47,11 @@ export const Button = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, iconPosition, content, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconPosition, content, loading, ...mergedProps } = mergeProps(button.props, final);
       return (
         <Slots.root {...mergedProps}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {loading && <ActivityIndicator />}
           {content && <Slots.content key="content">{content}</Slots.content>}
           {children}
           {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
