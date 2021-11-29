@@ -2556,9 +2556,9 @@
     "@rnx-kit/tools-node" "^1.2.5"
 
 "@rnx-kit/eslint-plugin@^0.2.0":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.6.tgz#bdc053a3b187b1f4bb5bcd5c805de9631e81a507"
-  integrity sha512-a7ACaj4bv5tsBRz7AJ/MQ8s59yL0PO2NvRPVYSJahEqdREsVWPUcJVw+9xzd6OazOVm80mdVkPya47O8xPqp9A==
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.7.tgz#cd897b4c2916bf423df8b09751534034186a97a2"
+  integrity sha512-LhTYbLry5zqmNNwRPgdyWlhUAeVj8RV+Xsz3vUtfq5MxT9HyS1hSXdUJ2UGnaC54Nd5kIeqRVeupw/r4oe4pHg==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
@@ -14688,9 +14688,9 @@ react-native-svg@^12.1.1:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^0.9.13:
-  version "0.9.13"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.13.tgz#6e1e9f05aff2476f0c5e2ee59d672031042bae69"
-  integrity sha512-8mm2EyepDXOlQ9F70KonaFVExlSwfCIWu1zBNyXSb7bivWhrek/zGrQVbqs8rQJU0tjAYdKxBEnaT7m2/G4OnQ==
+  version "0.9.16"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.16.tgz#aa96e5cf6542a994caefebd7451f345a9d0cd604"
+  integrity sha512-vmvuc6/33samzQpvZIPDvOeQ74kFun62HP3EJyZcq3Pbmo7kI+IoOOpELf7tB8RkcbE8tCp/Z4wS6TzFrp+x7Q==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
