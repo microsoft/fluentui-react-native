@@ -27,6 +27,7 @@ const _viewMask: IFilterMask<IViewProps> = {
   accessibilityValue: true,
   animationClass: true,
   cursor: true,
+  enableFocusRing: true,
   hitSlop: true,
   onLayout: true,
   pointerEvents: true,

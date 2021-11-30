@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added new props for Button (shape, icon-position)",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}

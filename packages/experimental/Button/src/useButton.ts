@@ -22,6 +22,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
       focusable: true,
       ref: useViewCommandFocus(componentRef),
       onKeyUp: onKeyUp,
+      iconPosition: props.iconPosition || 'before',
     },
     state: pressable.state,
   };

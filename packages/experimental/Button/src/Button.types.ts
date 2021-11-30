@@ -8,9 +8,10 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonAppearance = 'primary' | 'outline' | 'subtle' | 'transparent';
+export type ButtonAppearance = 'primary' | 'subtle';
+export type ButtonShape = 'rounded' | 'circular' | 'square';
 
-export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
    * The icon color.
    */
@@ -53,26 +54,26 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   focused?: ButtonTokens;
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
-  primary?: ButtonTokens;
-  subtle?: ButtonTokens;
-  block?: ButtonTokens;
-  fab?: ButtonTokens;
-  small?: ButtonTokens;
-  medium?: ButtonTokens;
-  large?: ButtonTokens;
   hasContent?: ButtonTokens;
   hasIcon?: ButtonTokens;
 }
 
-export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonTokens extends ButtonCoreTokens {
   /**
-   * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary': Emphasizes the button as a primary action.
-   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
-   * - 'transparent': NYI. Removes background and border styling.
+   * Additional states that can be applied to a button
    */
-  appearance?: ButtonAppearance;
+  primary?: ButtonTokens;
+  subtle?: ButtonTokens;
+  block?: ButtonTokens;
+  small?: ButtonTokens;
+  medium?: ButtonTokens;
+  large?: ButtonTokens;
+  rounded?: ButtonTokens;
+  circular?: ButtonTokens;
+  square?: ButtonTokens;
+}
 
+export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Text to show on the Button.
    */
@@ -95,15 +96,32 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   testID?: string;
   tooltip?: string;
+}
 
+export interface ButtonProps extends ButtonCoreProps {
+  /**
+   * A button can have its content and borders styled for greater emphasis or to be subtle.
+   * - 'primary': Emphasizes the button as a primary action.
+   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+   */
+  appearance?: ButtonAppearance;
   /** A button can fill the width of its container. */
   block?: boolean;
 
-  /** A floating action button  */
-  fab?: boolean;
-
   /** Sets style of button to a preset size style  */
   size?: ButtonSize;
+
+  /**
+   * Button shape: 'rounded' | 'circular' | 'square'
+   * @defaultvalue rounded
+   */
+  shape?: ButtonShape;
+
+  /**
+   * Icon can be placed before or after Button's content.
+   * @default before
+   */
+  iconPosition?: 'before' | 'after';
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
