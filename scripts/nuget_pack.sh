@@ -20,10 +20,12 @@ Options:
         3+: Make xcodebuild and zip verbose.
 -c: Clean beforehand.
     Multiple levels of cleanliness are available, indicating how much of previous build,
-    copy or zip output to remove before beginning a new nuget pack operation:
+    copy or zip output to remove before beginning a new nuget pack operation.  Each level
+    includes all cleaning from lower levels:
         0 (default): Do not remove any previous build, copy or zip outputs.
         1: Remove nuget folder, including copy and zip outputs.
-        2+: Remove DerivedData folder, including build outputs and nuget folder.
+        2: Remove DerivedData folder, including build outputs and nuget folder.
+        3+: Clean the git repo using \`git clean -dfx\`.
 -p: Include prerequisite steps.
     This attempts to run the steps necessary to generate a NuGet package from a brand new
     git repo, without requiring the user to run steps such as `pod install` beforehand.
@@ -45,8 +47,8 @@ but can be overridden with the XCODE_PATH_OVERRIDE environment variable.  See
 # Process command-line arguments.
 declare -i verbosity=0
 declare -i cleanliness=0
-declare prerequisites=0
-declare debug=0
+declare prerequisites
+declare debug
 while getopts "$options" option
 do
 	case "$option"
@@ -72,7 +74,7 @@ exit_code=0
 # Print message with red text.
 #
 # \param $1+ message text
-function print_error
+function log_error
 {
 	/usr/bin/tput setaf 1  # red
 	echo "$@"
@@ -90,11 +92,19 @@ function run_subprocess
 		echo "$@"
 		/usr/bin/tput sgr0
 	fi
-	"$@"
+
+	if [[ $verbosity -le 1 ]] && [[ $1 =~ pushd|popd ]]
+	then
+		# Special output handling for pushd/popd
+		"$@" >/dev/null
+	else
+		"$@"
+	fi
+
 	local last_exit=$?
 	if [[ $last_exit -ne 0 ]]
 	then
-		print_error "Previous subprocess exited with non-zero exit code $last_exit"
+		log_error "Previous subprocess exited with non-zero exit code $last_exit"
 		# Intentionally changing the global exit_code variable
 		exit_code=1
 	fi
@@ -153,12 +163,64 @@ if [[ $cleanliness -eq 1 ]]
 then
 	log_action 🧼 "Cleaning nuget folder"
 	run_subprocess /bin/rm -R -f $verbosity_arg "$nuget_dir"
-elif [[ $cleanliness -eq 2 ]]
+elif [[ $cleanliness -ge 2 ]]
 then
 	log_action 🧼 "Cleaning derived data folder"
 	run_subprocess /bin/rm -R -f $verbosity_arg "$derived_data_dir"
 fi
+
+# Clean the git repo.
+function git_clean
+{
+	local verbosity_arg
+	[[ $verbosity -le 1 ]] && verbosity_arg='--quiet'
+
+	log_action 🧼 "Cleaning git repo"
+	run_subprocess pushd "$git_root"
+	run_subprocess git clean -dfx $verbosity_arg
+	run_subprocess popd
+}
+[[ $cleanliness -ge 3 ]] && git_clean
+
 run_subprocess /bin/mkdir -p $verbosity_arg "$nuget_dir"
+
+# Set up git repo to build native macOS and iOS libraries.
+function do_prerequisites
+{
+	# The same verbosity arg applies to `yarn`, `gem` and `pod`
+	local verbosity_arg
+	if [[ $verbosity -le 1 ]]
+	then
+		verbosity_arg='--silent'
+	elif [[ $verbosity -ge 3 ]]
+	then
+		verbosity_arg='--verbose'
+	fi
+
+	log_action 📦 "Installing yarn dependencies"
+	run_subprocess pushd "$git_root"
+	run_subprocess yarn install $verbosity_arg
+	log_action 🏗 "Building yarn tools"
+	run_subprocess yarn build-tools $verbosity_arg
+	run_subprocess popd
+	
+	log_action 📦 "Installing CocoaPods gem"
+	run_subprocess /usr/bin/sudo gem install cocoapods $verbosity_arg
+	
+	log_action 🔨 "Selecting officially supported Xcode version"
+	run_subprocess "${git_root}/.ado/scripts/xcode_select_current_version.sh"
+
+	log_action 📦 "Installing CocoaPods dependencies for macOS"
+	run_subprocess pushd "${git_root}/apps/macos/src"
+	run_subprocess pod install $verbosity_arg
+	run_subprocess popd
+
+	log_action 📦 "Installing CocoaPods dependencies for iOS"
+	run_subprocess pushd "${git_root}/apps/ios/src"
+	run_subprocess pod install $verbosity_arg
+	run_subprocess popd
+}
+[[ $prerequisites ]] && do_prerequisites
 
 # Invoke xcodebuild and copy output to nuget folder.
 #
@@ -208,7 +270,7 @@ function build_and_copy_output()
 		iphonesimulator)
 			platform='iOS Simulator';;
 		*)
-			print_error "Invalid sdk: $sdk";
+			log_error "Invalid sdk: $sdk";
 			return 1;;
 	esac
 	local destination=generic/platform="$platform"
@@ -293,7 +355,7 @@ function build_and_copy_ios_simulator()
 }
 
 # Determine platform to build
-[[ $debug == 1 ]] && config=Debug || config=Release
+[[ $debug ]] && config=Debug || config=Release
 
 # Build and copy outputs for all platforms
 build_and_copy_macos $config
@@ -304,7 +366,7 @@ build_and_copy_ios_simulator $config
 if [[ $exit_code -eq 0 ]]
 then
 	log_action 🗜 "Archiving nuget folder contents into BuildOutput.zip"
-	run_subprocess pushd "$nuget_dir" >/dev/null  # zip is always relative to the current directory
+	run_subprocess pushd "$nuget_dir"  # zip is always relative to the current directory
 	if [[ $verbosity -le 1 ]]
 	then
 		verbosity_arg='--quiet'
@@ -320,7 +382,7 @@ then
 		$verbosity_arg \
 		BuildOutput.zip \
 		Ship-{macosx,iphoneos,iphonesimulator}/
-	run_subprocess popd >/dev/null
+	run_subprocess popd
 fi
 
 check_exit
