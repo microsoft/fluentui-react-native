@@ -39,7 +39,7 @@ export const MenuButton = compose<MenuButtonType>({
       appearance,
       icon,
       style,
-      componentRef: stdBtnRef,
+      ref: stdBtnRef,
       onClick: toggleShowContextualMenu,
       ...rest,
     };
