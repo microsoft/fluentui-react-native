@@ -28,7 +28,7 @@ Options:
         3+: Clean the git repo using \`git clean -dfx\`.
 -p: Include prerequisite steps.
     This attempts to run the steps necessary to generate a NuGet package from a brand new
-    git repo, without requiring the user to run steps such as `pod install` beforehand.
+    git repo, without requiring the user to run steps such as \`pod install\` beforehand.
 -d: Debug build with Ship packaging.
     The Fluent React Native NuGet package is that it includes only Ship binaries.
     Downstream consumers are expected to link these in both Debug and Ship builds.  To
