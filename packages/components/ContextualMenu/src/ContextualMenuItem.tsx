@@ -107,6 +107,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         onMouseEnter: onMouseEnter,
         onMouseLeave: onMouseLeave,
         accessibilityLabel: accessibilityLabel,
+        focusable: !disabled,
+        accessible: !disabled,
         ...rest,
       },
       content: { children: text },
