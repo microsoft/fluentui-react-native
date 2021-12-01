@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
@@ -102,6 +102,11 @@ export interface ButtonProps extends ButtonCoreProps {
   appearance?: ButtonAppearance;
   /** A button can fill the width of its container. */
   block?: boolean;
+
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  ref?: React.RefObject<IFocusable>;
 
   /** Sets style of button to a preset size style  */
   size?: ButtonSize;

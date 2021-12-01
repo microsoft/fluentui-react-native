@@ -27,7 +27,7 @@ Primary and Stealth buttons now map to `Button`:
 
 ### Props no longer supported with an equivalent functionality in v1 Button
 
-- `componentRef` => Use regular `ref` instead
+- `componentRef` => Use `ref` instead
 - `content` => Pass the content as `children` instead
 - `endIcon` => Use `right` value for `iconPosition` prop and pass icon information into `icon` prop instead
 - `startIcon` => Use `left` value for `iconPosition` prop and pass icon information into `icon` prop instead

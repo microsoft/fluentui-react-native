@@ -99,12 +99,18 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
    */
   iconPosition?: 'before' | 'after';
 
-  // /**
-  //  * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
-  //  * be interacted with.
-  //  * @default false
-  //  */
+  /**
+   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
+   * be interacted with.
+   * @default false
+   */
   loading?: boolean;
+
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   * Note that this does not allow for a ref callback to be passed in.
+   */
+  ref?: React.RefObject<IFocusable>;
 
   /**
    * A button can be rounded, circular, or square.
