@@ -2,7 +2,7 @@
 
 options='h?vcpd'
 usage="
-nuget_pack.sh [-${options}]
+nuget_pack_apple.sh [-${options}]
 
 Builds macOS and iOS targets and packages the results into a form usable for NuGet
 imports, for use in local sideloading/debugging/validation by NuGet consumers.
