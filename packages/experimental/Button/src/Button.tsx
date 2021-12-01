@@ -24,6 +24,8 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     layer === userProps['appearance'] ||
     layer === userProps['size'] ||
     (!userProps['size'] && layer === getDefaultSize()) ||
+    layer === userProps['shape'] ||
+    (!userProps['shape'] && layer === 'rounded') ||
     (layer === 'hasContent' && userProps.content) ||
     (layer === 'hasIcon' && userProps.icon)
   );
@@ -45,12 +47,13 @@ export const Button = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, content, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconPosition, content, ...mergedProps } = mergeProps(button.props, final);
       return (
         <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps} />}
+          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {content && <Slots.content key="content">{content}</Slots.content>}
           {children}
+          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };

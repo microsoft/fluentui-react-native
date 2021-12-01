@@ -21,6 +21,9 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'large',
   'hasContent',
   'hasIcon',
+  'rounded',
+  'circular',
+  'square',
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
