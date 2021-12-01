@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "*": ["*", "*.macos"],
+      "*": ["*"],
       "src/*": ["./src/*"]
     },
     "types": ["@wdio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]

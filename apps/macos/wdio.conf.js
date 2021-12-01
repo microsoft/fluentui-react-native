@@ -46,12 +46,11 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
-    requires: ['ts-node/register', '@babel/register'],
-    helpers: [
+    requires: ['ts-node/register', '@babel/register', 'tsconfig-paths/register'],
+    /*helpers: [
       require.resolve('ts-node/register'),
       require.resolve('@babel/register')
-    ]
-    //requires: ['ts-node/register', 'babel/register', '@babel/register'],
+    ]*/
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
@@ -98,7 +97,8 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (config, capabilities, specs) {
-    require('ts-node').register({ files: true });
+    require('tsconfig-paths/register');
+    //require('ts-node').register({ files: true });
     require('@babel/register');
     // Delete old screenshots and create empty directory
     //if (fs.existsSync('./errorShots')) {
@@ -113,8 +113,8 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    require('ts-node').register({ files: true });
-    require('@babel/register');
+    //require('ts-node').register({ files: true });
+    //require('@babel/register');
   },
   /**
    * Runs before a WebdriverIO command gets executed.
