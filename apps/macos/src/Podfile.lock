@@ -485,8 +485,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost-for-react-native: dabda8622e76020607c2ae1e65cc0cda8b61479d
-  DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
+  boost-for-react-native: d5ad1140010aa8cb622323a781ecbeab4425d19a
+  DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
   FBLazyVector: 54b0b353a19db053cc037451ecd8060b03703779
   FBReactNativeSpec: e6bfefb210153c648c73791493561b4731f34db6
   FRNAvatar: 0428d40426e812920dab291f6d49c1f5b981391a
@@ -494,9 +494,9 @@ SPEC CHECKSUMS:
   FRNCheckbox: 0a55a3b3be9325f6ae3d9819d422cc40159ea302
   FRNMenuButton: 0be2eed5de64a6a3b8d4e8bd72c2400d5ec7badf
   FRNRadioButton: b39e1e0234758f1e2e1fb7cc20af46cda4c1aa8c
-  glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
+  glog: 0dc7efada961c0793012970b60faebbd58b0decb
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
-  RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
+  RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
   RCTFocusZone: c218fc9fe24da09e94582bea518cfe0f35488c10
   RCTRequired: cdbab69b8c393735711d3a009b8585d86678fb20
   RCTTypeSafety: f05485788ac8a6dcc0da42f18314626cc1cec708
