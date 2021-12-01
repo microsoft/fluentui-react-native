@@ -48,11 +48,6 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   spacingIconContent?: number;
 
   /**
-   * The amount of spacing between "after" icon and the content
-   */
-  afterIconSpacing?: number;
-
-  /**
    * States that can be applied to a button
    */
   hovered?: ButtonTokens;
@@ -130,7 +125,7 @@ export interface ButtonProps extends ButtonCoreProps {
   iconPosition?: 'before' | 'after';
 
   /**
-   * Button contains only icon
+   * Button contains only icon, there's no text content
    */
   iconOnly?: boolean;
 }

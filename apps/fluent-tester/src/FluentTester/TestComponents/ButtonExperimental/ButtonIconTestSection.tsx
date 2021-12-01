@@ -41,7 +41,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
       </Button>
       <Button style={commonTestStyles.vmargin} icon={{ svgSource: svgProps }}>
         Icon Button and Chevron
-        <SvgXml xml={chevronXml} style={{ marginLeft: 4 }} />
+        <SvgXml xml={chevronXml} />
       </Button>
       <Button icon={{ fontSource: fontBuiltInProps }} style={commonTestStyles.vmargin}>
         Font icon

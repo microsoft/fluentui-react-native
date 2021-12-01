@@ -18,7 +18,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         variant: 'bodySemibold',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.sNudge,
-          afterIconSpacing: globalTokens.spacing.sNudge,
         },
       },
     },
@@ -32,7 +31,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         variant: 'secondaryStandard',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.xs,
-          afterIconSpacing: globalTokens.spacing.xs,
         },
       },
     },
@@ -46,7 +44,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         variant: 'subheaderSemibold',
         hasIcon: {
           spacingIconContent: globalTokens.spacing.sNudge,
-          afterIconSpacing: globalTokens.spacing.sNudge,
         },
       },
     },
