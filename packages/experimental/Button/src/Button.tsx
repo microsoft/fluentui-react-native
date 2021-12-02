@@ -51,8 +51,8 @@ export const Button = compose<ButtonType>({
       return (
         <Slots.root {...mergedProps}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {Object.keys(children).map((key) =>
-            typeof children[key] === 'string' ? <Slots.content key="content">{children[key]}</Slots.content> : children[key],
+          {React.Children.map(children, (child) =>
+            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
           {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
