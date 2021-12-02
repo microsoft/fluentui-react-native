@@ -208,7 +208,8 @@ interface FluentUIAppleBasePalette {
 interface FluentAppleButtonTokens {
   brandForegroundDisabled: ColorValue;
   brandBackgroundDisabled: ColorValue;
-  neutralInverted: ColorValue;
+  neutralBackgroundInverted: ColorValue;
+  neutralForegroundInverted: ColorValue;
   neutralForeground2: ColorValue;
   neutralBackground2: ColorValue;
   neutralStroke2: ColorValue;
