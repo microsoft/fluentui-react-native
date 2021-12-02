@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
 import { ToggleButtonTest } from './ToggleButtonTestSection';
-import { ExperimentalButtonTestPageId } from './consts';
+import { EXPERIMENTAL_BUTTON_TEST_PAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonIconTest } from './ButtonIconTestSection';
 import { ButtonSizeTest } from './ButtonSizeTestSection';
@@ -10,7 +10,7 @@ import { ButtonShapeTest } from './ButtonShapeTestSection';
 const buttonSections: TestSection[] = [
   {
     name: 'Button Variants',
-    testID: ExperimentalButtonTestPageId,
+    testID: EXPERIMENTAL_BUTTON_TEST_PAGE,
     component: ButtonVariantTest,
   },
   {
