@@ -104,7 +104,7 @@
     "fillColorSelected": "#e6e6e6"
   },
   "neutralBackground3": {
-    "fillColorRest": "#0000000C",
+    "fillColorRest": "#f5f5f5",
     "fillColorHover": "#ebebeb",
     "fillColorPressed": "#d6d6d6",
     "fillColorSelected": "#e0e0e0"
@@ -137,7 +137,7 @@
     "fillColorSelected": "#242424"
   },
   "neutralForeground2": {
-    "fillColorRest": "#000000D8",
+    "fillColorRest": "#424242",
     "fillColorHover": "#242424",
     "fillColorPressed": "#242424",
     "fillColorBrandHover": "#1651aa",
