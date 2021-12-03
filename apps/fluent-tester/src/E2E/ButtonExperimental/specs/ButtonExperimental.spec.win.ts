@@ -20,7 +20,7 @@ describe('Button Testing Initialization', function () {
     ButtonExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToButtonPage();
+    NavigateAppPage.clickAndGoToExperimentalButtonPage();
     ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy();
