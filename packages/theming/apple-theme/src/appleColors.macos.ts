@@ -358,7 +358,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
-    menuIcon: macOSAliasColorTokens.neutralForeground3,
+    menuIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
     menuHeader: applePlatform.headerTextColor,
     menuItemBackgroundHovered: applePlatform.controlAccentColor,
     menuItemBackgroundPressed: ColorWithSystemEffectMacOS(applePlatform.controlAccentColor, 'pressed'),
@@ -386,27 +386,27 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultBackground: fluentUIApple.neutralBackground3,
     defaultBorder: 'transparent',
     defaultContent: fluentUIApple.neutralForeground3,
-    defaultIcon: macOSAliasColorTokens.neutralForeground3,
+    defaultIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultHoveredBackground: fluentUIApple.neutralBackground3,
     defaultHoveredBorder: 'transparent',
     defaultHoveredContent: fluentUIApple.neutralForeground3,
-    defaultHoveredIcon: macOSAliasColorTokens.neutralForeground3,
+    defaultHoveredIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultFocusedBackground: fluentUIApple.neutralBackground3,
     defaultFocusedBorder: 'transparent',
     defaultFocusedContent: fluentUIApple.neutralForeground3,
-    defaultFocusedIcon: macOSAliasColorTokens.neutralForeground3,
+    defaultFocusedIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
     defaultPressedBorder: 'transparent',
     defaultPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    defaultPressedIcon: macOSAliasColorTokens.neutralForeground3,
+    defaultPressedIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultDisabledBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
     defaultDisabledBorder: 'transparent',
     defaultDisabledContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    defaultDisabledIcon: macOSAliasColorTokens.neutralForeground3,
+    defaultDisabledIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -426,7 +426,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
     ghostPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
-    ghostPressedIcon: macOSAliasColorTokens.neutralForeground3,
+    ghostPressedIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
