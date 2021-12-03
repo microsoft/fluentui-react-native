@@ -2514,10 +2514,10 @@
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-1.0.0.tgz#05bb0031533598f9458cf65a502b8df0eecae780"
   integrity sha512-0jbp4RxjYopTsIdLl+/Fy2TiwVYHy4mgeu07DG4b/LyM0OS/+lPP5c9sbnt/AMlnF6qz2JRZpPpGw1eMNS6A4w==
 
-"@rnx-kit/babel-preset-metro-react-native@^1.0.16":
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.16.tgz#7ed756516fe9dd2f23e2ed9999c7a561f6abda1e"
-  integrity sha512-m9OcFZhriYCiNV7CkDQIztgCDPNEQuVaVkX7PbALeZwCB3Loqsv+LWahHswwJvl9WmedX3sdZzsUi8mxqvRKgA==
+"@rnx-kit/babel-preset-metro-react-native@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/babel-preset-metro-react-native/-/babel-preset-metro-react-native-1.0.17.tgz#16dbd16a08ea2510f71b0a3297c849fb48fdf7c7"
+  integrity sha512-x/7InOIrE2+3p8bDYBQw2OdLulgYtM79HBuACqCd5PkQJoWxVYHSbjJWkO6NiBg1XUrbGPikngi3MQu9wo145w==
   dependencies:
     babel-plugin-const-enum "^1.0.0"
 
@@ -2547,9 +2547,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.9.5.tgz#ee6a657f258c952a0c684083f99adf495e526e6c"
-  integrity sha512-5BCbWsvzZz6tlZVt9BwIGPmsv83lmSeI5Pb4Km7ltMGuevAsxCdzpFCPXGW/IhliP31slnanP//UlehSjl2haA==
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.9.6.tgz#f56247306f335d86a6f1306ae3f0c15b873d805a"
+  integrity sha512-zhaTl03u/oyM3lKo0BdNF85xtsIwpu7OXM9rMZq33gXaGD8nhNCYizLOQKLeTbGV7fnZCXviiyQkgz8j419Afw==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-language" "^1.2.6"
@@ -2576,12 +2576,12 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.3":
-  version "1.2.25"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.25.tgz#8b51183e972355228e74a30e0b59cb2ca8fd8163"
-  integrity sha512-HrCb3/O5+9msQXE9wbTs0+2NcAB6Uw2HI5gJBkUohz+sKfwgM5hjZM21QGqIfXoMAHSxDnyUWdztWQ8o0ybtyw==
+  version "1.2.26"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.26.tgz#abd2dc866d5e4b560fbe1f0f881d29025db30b07"
+  integrity sha512-YJhglbDbNIPrLsO1HfijlxPIV+r4eJEXO6No4atyG7E5iQhaf98gKBKlyStx4WMSC4uGqqKKAOZ8+PkGyD2jVg==
   dependencies:
-    "@rnx-kit/babel-preset-metro-react-native" "^1.0.16"
-    "@rnx-kit/tools-node" "^1.2.5"
+    "@rnx-kit/babel-preset-metro-react-native" "^1.0.17"
+    "@rnx-kit/tools-node" "^1.2.6"
     workspace-tools "^0.16.2"
 
 "@rnx-kit/third-party-notices@1.0.1":
@@ -2598,7 +2598,7 @@
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.2.6.tgz#ced63a53ce9821d14acb57a927237e5c39801387"
   integrity sha512-8pq4JlFIkOqjwkN6amYebQ2CTAa1EeYjSBurGh8upYZtqUZBXDOK7FUAx+OVHs/7qQfmF2lU7QpqA7DZGv4xJA==
 
-"@rnx-kit/tools-node@^1.2.5", "@rnx-kit/tools-node@^1.2.6":
+"@rnx-kit/tools-node@^1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-node/-/tools-node-1.2.6.tgz#34de31b1c2ec681a3009b27c137cc1f2c57b7e9c"
   integrity sha512-oiVbP801aabLCBl42l448QPlui/SEQcuWURZOmVbg04ntyLGgUNgYN87Zen+2yr/LnnI2ec1SOtftHbK6Ro+5A==
@@ -14626,9 +14626,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.64.6:
-  version "0.64.14"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.14.tgz#4f58c0514a5a99ccfa29060f514d1bfa66fa7174"
-  integrity sha512-fRdwQBazHr+yR4IqSXWuKrJE2hfAepSHKsKAvzezyvLr3Jxwq/Eo6W4gChZGRvsy6YXeipiP1EA2RS2TOWTfwA==
+  version "0.64.15"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.15.tgz#41bfdf6eb3ef56cf9a1dc294a4703648f97ba81c"
+  integrity sha512-twmt4n57NehUgAJhCjT5j6EkJrE3hjtKw8ye//rlOa4LbDKfi+IMLi9yx0FKCfQqhWkoV3yynsGhWW/+s8s/sQ==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@react-native-community/cli" "^5.0.1-alpha.1"
