@@ -63,7 +63,6 @@ exports[`Button component tests Button circular 1`] = `
 
 exports[`Button component tests Button default 1`] = `
 <View
-  accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
