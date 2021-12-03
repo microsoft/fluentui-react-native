@@ -9,6 +9,36 @@ describe('Button component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Button primary', () => {
+    const tree = renderer.create(<Button appearance="primary" content="Primary Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button subtle', () => {
+    const tree = renderer.create(<Button appearance="subtle" content="Subtle Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button circular', () => {
+    const tree = renderer.create(<Button shape="circular" content="Circular Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button square', () => {
+    const tree = renderer.create(<Button shape="square" content="Square Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button small', () => {
+    const tree = renderer.create(<Button size="small" content="Small Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button large', () => {
+    const tree = renderer.create(<Button size="large" content="Large Button" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Button simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <Button content="Default button" />, 2);
   });
