@@ -5,9 +5,10 @@ export const settings: IComposeSettings<SubmenuItemType> = [
   {
     tokens: {
       backgroundColor: 'menuBackground',
-      color: 'menuItemText',
       borderColor: 'transparent',
       borderWidth: 2,
+      chevronColor: 'black',
+      color: 'menuItemText',
     },
     root: {
       accessible: true,
@@ -63,19 +64,20 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       pressed: {
         tokens: {
           backgroundColor: 'menuItemBackgroundPressed',
-          color: 'menuItemTextHovered',
         },
       },
       focused: {
         tokens: {
-          color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
+          chevronColor: 'white',
+          color: 'white',
         },
       },
       submenuItemHovered: {
         tokens: {
-          color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
+          chevronColor: 'white',
+          color: 'white',
         },
       },
     },
