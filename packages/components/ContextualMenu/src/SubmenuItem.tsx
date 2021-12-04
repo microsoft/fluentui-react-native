@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -94,7 +94,22 @@ export const SubmenuItem = compose<SubmenuItemType>({
         ref: cmRef,
         onKeyUp,
         onMouseEnter,
-        accessibilityLabel,
+        accessible: true,
+        accessibilityLabel: accessibilityLabel,
+        accessibilityRole: 'menuitem',
+        accessibilityState: { disabled: state.disabled, selected: state.selected },
+        accessibilityValue: { text: itemKey },
+        focusable: Platform.select({
+          /**
+           * GH #1208: On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
+           * To mimic the non VoiceOver-enabled functionality, let's set focusable to !disabled for now.
+           * As a followup, we could query AccessibilityInfo.isScreenReaderEnabled, and pass that info to
+           * CMContext so that the event handler is only handled once per ContextualMenu.
+           */
+          macos: !disabled,
+          // Keep win32 behavior as is
+          default: true,
+        }),
         ...rest,
       },
       content: { children: text },
