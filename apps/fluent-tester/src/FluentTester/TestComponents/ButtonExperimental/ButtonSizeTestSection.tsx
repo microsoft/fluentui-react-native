@@ -39,6 +39,9 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       <Button size="large" style={commonTestStyles.vmargin}>
         Large
       </Button>
+      <Button loading size="small" style={commonTestStyles.vmargin}>Loading Button Small</Button>
+      <Button loading size="medium" style={commonTestStyles.vmargin}>Loading Button Medium</Button>
+      <Button loading size="large" style={commonTestStyles.vmargin}>Loading Button Large</Button>
       <CompoundButton content="Compound Button" secondaryContent="rounded" shape="rounded" style={commonTestStyles.vmargin} />
       <CompoundButton content="Compound Button" secondaryContent="square" shape="square" style={commonTestStyles.vmargin} />
       <CompoundButton content="Compound Button" secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin} />

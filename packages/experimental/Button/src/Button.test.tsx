@@ -10,32 +10,32 @@ describe('Button component tests', () => {
   });
 
   it('Button primary', () => {
-    const tree = renderer.create(<Button appearance="primary" content="Primary Button" />).toJSON();
+    const tree = renderer.create(<Button appearance="primary">Primary Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Button subtle', () => {
-    const tree = renderer.create(<Button appearance="subtle" content="Subtle Button" />).toJSON();
+    const tree = renderer.create(<Button appearance="subtle">Subtle Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Button circular', () => {
-    const tree = renderer.create(<Button shape="circular" content="Circular Button" />).toJSON();
+    const tree = renderer.create(<Button shape="circular">Circular Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Button square', () => {
-    const tree = renderer.create(<Button shape="square" content="Square Button" />).toJSON();
+    const tree = renderer.create(<Button shape="square">Square Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Button small', () => {
-    const tree = renderer.create(<Button size="small" content="Small Button" />).toJSON();
+    const tree = renderer.create(<Button size="small">Small Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Button large', () => {
-    const tree = renderer.create(<Button size="large" content="Large Button" />).toJSON();
+    const tree = renderer.create(<Button size="large">Large Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
