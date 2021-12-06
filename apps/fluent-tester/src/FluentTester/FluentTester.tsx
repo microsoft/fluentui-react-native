@@ -116,11 +116,12 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           {/* on iOS, display a back Button */}
           <Button
             appearance="subtle"
-            content="‹ Back"
             style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
             onClick={onBackPress}
             disabled={onTestListView}
-          />
+          >
+            ‹ Back
+          </Button>
           <ThemePickers />
         </View>
       </View>
@@ -140,11 +141,12 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 appearance="subtle"
                 key={index}
                 disabled={index == selectedTestIndex}
-                content={description.name}
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
-              />
+              >
+                {description.name}
+              </Button>
             );
           })}
         </ScrollView>

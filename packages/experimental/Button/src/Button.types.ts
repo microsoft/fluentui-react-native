@@ -105,6 +105,7 @@ export interface ButtonProps extends ButtonCoreProps {
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    */
   appearance?: ButtonAppearance;
+
   /** A button can fill the width of its container. */
   block?: boolean;
 
@@ -122,6 +123,18 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default before
    */
   iconPosition?: 'before' | 'after';
+
+  /**
+   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
+   * be interacted with.
+   * @default false
+   */
+  loading?: boolean;
+  
+  /**
+   * Button contains only icon, there's no text content
+   */
+  iconOnly?: boolean;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

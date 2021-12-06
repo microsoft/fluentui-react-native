@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { ScreenRect, ViewProps, ViewStyle } from 'react-native';
+import { ScreenRect, ViewStyle } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
@@ -97,8 +98,9 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   minPadding?: number;
 }
 
-export interface ICalloutProps extends ViewProps, ICalloutTokens {
-  /*
+export interface ICalloutProps extends IViewProps, ICalloutTokens {
+  /**
+   * @platform win32
    * A string that should be announced when the callout is shown.
    */
   accessibilityOnShowAnnouncement?: string;
@@ -109,6 +111,7 @@ export interface ICalloutProps extends ViewProps, ICalloutTokens {
   componentRef?: React.RefObject<IFocusable>;
 
   /**
+   * @platform win32
    * Adds a beak to the Callout, pointing to the anchor target.
    * Notable Win32 limitation: Beak rendering currently limits the border width to its default, and the
    * border width prop will not be honored.
@@ -121,6 +124,7 @@ export interface ICalloutProps extends ViewProps, ICalloutTokens {
   onDismiss?: () => void;
 
   /**
+   * @platform win32
    * Callback invoked during callout dismissal; if set, focus will not be restored by the callout and onRestoreFocus must
    * result in focus being moved to the appropriate focusable target.
    *
@@ -138,6 +142,7 @@ export interface ICalloutProps extends ViewProps, ICalloutTokens {
   onShow?: () => void;
 
   /**
+   * @platform win32
    * If true then the callout will attempt to focus the first focusable element that it contains.
    * If it doesn't find an element, no focus will be set. This means that it's the contents responsibility
    * to either set focus or have focusable items.
