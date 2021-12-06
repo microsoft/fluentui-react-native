@@ -1,4 +1,9 @@
 {
+  "ignorePatterns": [
+    {
+      "pattern": "^https://badge.fury.io/js/%40fluentui%2Freact-native"
+    }
+  ],
   "timeout": "5s",
   "aliveStatusCodes": [200, 206, 0, 503]
 }
