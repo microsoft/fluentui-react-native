@@ -89,6 +89,11 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
    */
   onClick?: () => void;
 
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  ref?: React.RefObject<IFocusable>;
+
   testID?: string;
   tooltip?: string;
 }
@@ -102,11 +107,6 @@ export interface ButtonProps extends ButtonCoreProps {
   appearance?: ButtonAppearance;
   /** A button can fill the width of its container. */
   block?: boolean;
-
-  /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
-   */
-  ref?: React.RefObject<IFocusable>;
 
   /** Sets style of button to a preset size style  */
   size?: ButtonSize;
