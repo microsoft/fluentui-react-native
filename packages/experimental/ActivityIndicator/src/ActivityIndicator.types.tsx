@@ -1,11 +1,13 @@
-import { Animated, ViewProps } from 'react-native';
+import { Animated, ActivityIndicatorProps as CoreActivityIndicatorProps } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
 export const activityIndicatorName = 'ActivityIndicator';
 /**
- * Specifies the possible sizes of the ActivityIndicator
+ * Specifies the possible sizes of the ActivityIndicator.
+ * We extend the RN Core size ramp of 'small' | 'large' to get the final
+ * number | 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge'
  */
-export type ActivityIndicatorSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
+export type ActivityIndicatorSize = CoreActivityIndicatorProps['size'] | 'xSmall' | 'medium' | 'xLarge';
 
 export interface ActivityIndicatorTokens {
   /**
@@ -25,12 +27,7 @@ export interface ActivityIndicatorTokens {
   size?: ActivityIndicatorSize;
 }
 
-export interface ActivityIndicatorSlotProps {
-  root: ViewProps & ActivityIndicatorTokens;
-  svg: Animated.AnimatedProps<SvgProps>;
-}
-
-export interface ActivityIndicatorProps extends ActivityIndicatorTokens, ViewProps {
+export interface ActivityIndicatorProps extends ActivityIndicatorTokens, Omit<CoreActivityIndicatorProps, 'size'> {
   /**
    * ActivityIndicator animating or not
    * @defaultValue 'true'
@@ -43,8 +40,22 @@ export interface ActivityIndicatorProps extends ActivityIndicatorTokens, ViewPro
   hidesWhenStopped?: boolean;
 }
 
-export interface ActivityIndicatorType {
+export interface FluentActivityIndicatorSlotProps {
+  root: ActivityIndicatorProps;
+  svg: Animated.AnimatedProps<SvgProps>;
+}
+export interface FluentActivityIndicatorType {
   props: ActivityIndicatorProps;
-  slotProps: ActivityIndicatorSlotProps;
+  slotProps: FluentActivityIndicatorSlotProps;
+  tokens: ActivityIndicatorTokens;
+}
+
+export interface CoreActivityIndicatorSlotProps {
+  root: CoreActivityIndicatorProps;
+}
+
+export interface CoreActivityIndicatorType {
+  props: ActivityIndicatorProps;
+  slotProps: CoreActivityIndicatorSlotProps;
   tokens: ActivityIndicatorTokens;
 }

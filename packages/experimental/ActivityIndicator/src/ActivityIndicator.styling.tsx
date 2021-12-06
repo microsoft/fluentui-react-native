@@ -1,11 +1,14 @@
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { Appearance } from 'react-native';
+import { ActivityIndicator, ActivityIndicatorProps as CoreActivityIndicatorProps, Appearance } from 'react-native';
 import {
   activityIndicatorName,
   ActivityIndicatorProps,
-  ActivityIndicatorSlotProps,
+  FluentActivityIndicatorSlotProps,
   ActivityIndicatorTokens,
+  CoreActivityIndicatorSlotProps,
+  ActivityIndicatorSize,
 } from './ActivityIndicator.types';
+import assertNever from 'assert-never';
 
 export const diameterSizeMap: { [key: string]: number } = {
   xSmall: 12,
@@ -22,7 +25,33 @@ export const lineThicknessSizeMap: { [key: string]: number } = {
   xLarge: 4,
 };
 
-export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, ActivityIndicatorSlotProps, ActivityIndicatorTokens> = {
+export function coreSizeFromFluentSize(fluentSize: ActivityIndicatorSize): CoreActivityIndicatorProps['size'] {
+  if (typeof fluentSize === 'number') {
+    return fluentSize;
+  }
+
+  if (typeof fluentSize === 'undefined') {
+    return fluentSize;
+  }
+
+  switch (fluentSize) {
+    case 'xSmall':
+      return 'small';
+    case 'small':
+      return 'small';
+    case 'medium':
+      return 'small';
+    case 'large':
+      return 'large';
+    case 'xLarge':
+      return 'large';
+    default:
+      console.log(fluentSize);
+      assertNever(fluentSize);
+  }
+}
+
+export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, FluentActivityIndicatorSlotProps, ActivityIndicatorTokens> = {
   tokens: [
     () => ({
       activityIndicatorColor: Appearance.getColorScheme() === 'light' ? '#BDBDBD' : '#666666',
@@ -53,6 +82,26 @@ export const stylingSettings: UseStylingOptions<ActivityIndicatorProps, Activity
         height: diameterSizeMap[tokens.size],
       }),
       ['size'],
+    ),
+  },
+};
+
+// Minimal styling settings for the RN Core ActivityIndicator
+export const coreStylingSettings: UseStylingOptions<ActivityIndicatorProps, CoreActivityIndicatorSlotProps, ActivityIndicatorTokens> = {
+  tokens: [
+    () => ({
+      size: 'small',
+    }),
+    activityIndicatorName,
+  ],
+  tokensThatAreAlsoProps: 'all',
+  slotProps: {
+    root: buildProps(
+      (tokens: ActivityIndicatorTokens) => ({
+        color: tokens.activityIndicatorColor,
+        size: coreSizeFromFluentSize(tokens.size),
+      }),
+      ['activityIndicatorColor', 'size'],
     ),
   },
 };
