@@ -7,9 +7,10 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { NativeModules } from 'react-native';
 
 const basicDrawer: React.FunctionComponent = () => {
+  console.log(NativeModules.DrawerModule);
   return (
     <Stack style={stackStyle} gap={5}>
-      <Text>{NativeModules.DrawerModule}</Text>
+      <Text>test to come</Text>
     </Stack>
   );
 };

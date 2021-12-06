@@ -1,9 +1,9 @@
 package com.microsoft.frnandroid.drawer
 
+import android.view.View
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContextBaseJavaModule
 import com.facebook.react.bridge.ReactMethod
-import com.microsoft.fluentui.drawer.Drawer
 
 /*This class will communicate with react-native*/
 class DrawerModule(context: ReactApplicationContext) : ReactContextBaseJavaModule(context) {
