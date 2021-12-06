@@ -2547,9 +2547,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
-  version "1.9.6"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.9.6.tgz#f56247306f335d86a6f1306ae3f0c15b873d805a"
-  integrity sha512-zhaTl03u/oyM3lKo0BdNF85xtsIwpu7OXM9rMZq33gXaGD8nhNCYizLOQKLeTbGV7fnZCXviiyQkgz8j419Afw==
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.10.0.tgz#61c8e50efa95e6db0fb9205de26ffac966a74756"
+  integrity sha512-AfwmzCzeim/ewFI23cMoBUxBNO1lrHM3xeXD5K3Wm0RdRj/k6udKUOEc1jSqv5gUd+BtNXOYJ2//i7ZbV+N1/g==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-language" "^1.2.6"
@@ -14714,9 +14714,9 @@ react-native-web@0.17.5, react-native-web@^0.17.5:
     prop-types "^15.6.0"
 
 react-native-windows@^0.64.3:
-  version "0.64.26"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.26.tgz#f6c3940edef9054cbcc21cd8b987bb59ec1e9f43"
-  integrity sha512-5wSti+qpWkoYNxBAaJY0oR88g2r06T/O6OL1JiNhwMb9ZYz3JuWzpwz6ft2AKBc+RHHFMVZxzXwShzxgfjYLdg==
+  version "0.64.27"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.27.tgz#93864cd32e8c59644149c6007a95ae048d9b4611"
+  integrity sha512-VL8Jy6MxENCu1hIr/jQCynsL4thVghFBKQlc/0W8mCXRXhP//Otag+WxwLkqCnMuRs30SsePZ13Q0gHkvqz9FA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^26.5.0"
