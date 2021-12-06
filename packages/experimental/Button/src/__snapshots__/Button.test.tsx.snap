@@ -2,7 +2,6 @@
 
 exports[`Button component tests Button circular 1`] = `
 <View
-  accessibilityLabel="Circular Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -122,7 +121,6 @@ exports[`Button component tests Button default 1`] = `
 
 exports[`Button component tests Button large 1`] = `
 <View
-  accessibilityLabel="Large Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -183,7 +181,6 @@ exports[`Button component tests Button large 1`] = `
 
 exports[`Button component tests Button primary 1`] = `
 <View
-  accessibilityLabel="Primary Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -244,7 +241,6 @@ exports[`Button component tests Button primary 1`] = `
 
 exports[`Button component tests Button small 1`] = `
 <View
-  accessibilityLabel="Small Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -305,7 +301,6 @@ exports[`Button component tests Button small 1`] = `
 
 exports[`Button component tests Button square 1`] = `
 <View
-  accessibilityLabel="Square Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -366,7 +361,6 @@ exports[`Button component tests Button square 1`] = `
 
 exports[`Button component tests Button subtle 1`] = `
 <View
-  accessibilityLabel="Subtle Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
