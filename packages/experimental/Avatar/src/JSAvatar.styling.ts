@@ -70,18 +70,18 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       ['coinColorFluent', 'backgroundColor', 'physicalSize', ...borderStyles.keys],
     ),
     photo: buildProps(
-      (tokens: JSAvatarTokens, theme: Theme) => {
+      (tokens: JSAvatarTokens) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
 
         return {
           style: {
-            ...borderStyles.from(tokens, theme),
+            borderRadius: tokens.borderRadius,
             width: physicalSize,
             height: physicalSize,
           },
         };
       },
-      ['physicalSize', ...borderStyles.keys],
+      ['physicalSize', 'borderRadius'],
     ),
     icon: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
