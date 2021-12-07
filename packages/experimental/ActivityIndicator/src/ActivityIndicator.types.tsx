@@ -4,10 +4,8 @@ import { SvgProps } from 'react-native-svg';
 export const activityIndicatorName = 'ActivityIndicator';
 /**
  * Specifies the possible sizes of the ActivityIndicator.
- * We extend the RN Core size ramp of 'small' | 'large' to get the final
- * number | 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge'
  */
-export type ActivityIndicatorSize = CoreActivityIndicatorProps['size'] | 'xSmall' | 'medium' | 'xLarge';
+export type ActivityIndicatorSize = 'xSmall' | 'small' | 'medium' | 'large' | 'xLarge';
 
 export interface ActivityIndicatorTokens {
   /**

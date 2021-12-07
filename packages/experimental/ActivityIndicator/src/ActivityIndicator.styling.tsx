@@ -1,5 +1,5 @@
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { ActivityIndicator, ActivityIndicatorProps as CoreActivityIndicatorProps, Appearance } from 'react-native';
+import { ActivityIndicatorProps as CoreActivityIndicatorProps, Appearance } from 'react-native';
 import {
   activityIndicatorName,
   ActivityIndicatorProps,
@@ -25,11 +25,8 @@ export const lineThicknessSizeMap: { [key: string]: number } = {
   xLarge: 4,
 };
 
+// Size coversion ramp from the Fluent ActivityIndicator size to the RN ActivityIndicator.
 export function coreSizeFromFluentSize(fluentSize: ActivityIndicatorSize): CoreActivityIndicatorProps['size'] {
-  if (typeof fluentSize === 'number') {
-    return fluentSize;
-  }
-
   if (typeof fluentSize === 'undefined') {
     return fluentSize;
   }
@@ -46,7 +43,6 @@ export function coreSizeFromFluentSize(fluentSize: ActivityIndicatorSize): CoreA
     case 'xLarge':
       return 'large';
     default:
-      console.log(fluentSize);
       assertNever(fluentSize);
   }
 }
@@ -99,7 +95,7 @@ export const coreStylingSettings: UseStylingOptions<ActivityIndicatorProps, Core
     root: buildProps(
       (tokens: ActivityIndicatorTokens) => ({
         color: tokens.activityIndicatorColor,
-        size: coreSizeFromFluentSize(tokens.size),
+        ...(tokens.size && { size: coreSizeFromFluentSize(tokens.size) }), // Only pass in the prop if defined
       }),
       ['activityIndicatorColor', 'size'],
     ),
