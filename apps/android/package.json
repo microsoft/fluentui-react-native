@@ -73,7 +73,8 @@
       "@react-native-community/slider",
       "@react-native-picker/picker",
       "hermes-engine",
-      "react-native-test-app"
+      "react-native-test-app",
+      "@fluentui-react-native/experimental-drawer"
     ]
   }
 }
