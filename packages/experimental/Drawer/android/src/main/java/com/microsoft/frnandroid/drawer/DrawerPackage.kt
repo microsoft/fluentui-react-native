@@ -17,12 +17,6 @@ class DrawerPackage: ReactPackage {
         return modules
     }
 
-    /*override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager> {
-        val viewManagers = ArrayList<ViewManager>()
-        viewManagers.add(DrawerViewManager())
-
-        return viewManagers
-    }*/
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
         return Collections.emptyList<ViewManager<*, *>>()
     }
