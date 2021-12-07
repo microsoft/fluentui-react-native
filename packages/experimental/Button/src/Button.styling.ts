@@ -48,14 +48,22 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     content: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
-        style: {
-          color: tokens.color,
-          ...getTextMarginAdjustment(),
-          ...(tokens.spacingIconContent && { marginLeft: tokens.spacingIconContent }),
-          ...fontStyles.from(tokens, theme),
-        },
-      }),
+      (tokens: ButtonTokens, theme: Theme) => {
+        const spacingIconContent = tokens.spacingIconContent
+          ? {
+              marginLeft: tokens.spacingIconContent,
+              marginRight: tokens.spacingIconContent,
+            }
+          : {};
+        return {
+          style: {
+            color: tokens.color,
+            ...getTextMarginAdjustment(),
+            ...spacingIconContent,
+            ...fontStyles.from(tokens, theme),
+          },
+        };
+      },
       ['color', 'spacingIconContent', ...fontStyles.keys],
     ),
     icon: buildProps(

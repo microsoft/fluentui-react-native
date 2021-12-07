@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
@@ -26,8 +26,8 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     (!userProps['size'] && layer === getDefaultSize()) ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
-    (layer === 'hasContent' && userProps.content) ||
-    (layer === 'hasIcon' && userProps.icon)
+    (layer === 'hasContent' && !userProps.iconOnly) ||
+    (layer === 'hasIcon' && (userProps.icon || userProps.loading))
   );
 };
 
@@ -47,12 +47,14 @@ export const Button = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, iconPosition, content, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconPosition, loading, ...mergedProps } = mergeProps(button.props, final);
       return (
         <Slots.root {...mergedProps}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {content && <Slots.content key="content">{content}</Slots.content>}
-          {children}
+          {loading && <ActivityIndicator />}
+          {React.Children.map(children, (child) =>
+            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+          )}
           {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IPressableProps } from '@fluentui-react-native/pressable';
@@ -80,8 +80,8 @@ export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'
 }
 
 export interface ContextualMenuItemSlotProps {
-  root: React.PropsWithRef<ViewProps>;
-  stack: ViewProps;
+  root: React.PropsWithRef<IViewProps>;
+  stack: IViewProps;
   icon: IconProps;
   content: ITextProps;
 }

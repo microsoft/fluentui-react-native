@@ -13,12 +13,28 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
-      <Button content="Default" style={commonTestStyles.vmargin} />
-      <Button appearance="primary" content="Primary" style={commonTestStyles.vmargin} />
-      <Button appearance="subtle" content="Subtle" style={commonTestStyles.vmargin} />
-      <Button block content="Block" style={commonTestStyles.vmargin} />
-      <Button appearance="primary" block content="Block Primary" style={commonTestStyles.vmargin} />
-      <Button appearance="subtle" block content="Block Subtle" style={commonTestStyles.vmargin} />
+      <Button style={commonTestStyles.vmargin}>Default</Button>
+      <Button disabled style={commonTestStyles.vmargin}>
+        Disabled
+      </Button>
+      <Button appearance="primary" style={commonTestStyles.vmargin}>
+        Primary
+      </Button>
+      <Button appearance="subtle" style={commonTestStyles.vmargin}>
+        Subtle
+      </Button>
+      <Button loading>
+        Loading Button
+      </Button>
+      <Button block style={commonTestStyles.vmargin}>
+        Block
+      </Button>
+      <Button appearance="primary" block style={commonTestStyles.vmargin}>
+        Block Primary
+      </Button>
+      <Button appearance="subtle" block style={commonTestStyles.vmargin}>
+        Block Subtle
+      </Button>
       <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       <CompoundButton appearance="primary" content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
       <CompoundButton appearance="subtle" content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
