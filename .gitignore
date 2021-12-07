@@ -100,3 +100,6 @@ typings/
 # VS Code debugging
 .vscode/.react/
 apps/*/.vscode/.react/
+
+# Ignore Gradle build output directory
+**/build
