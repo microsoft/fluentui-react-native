@@ -5,11 +5,11 @@ export const drawerName = 'Drawer';
 export interface DrawerProps extends ViewProps {
   onShow?: () => void;
   onDismiss?: () => void;
-  target?: React.RefObject<React.Component> | string;
+  target?: React.RefObject<React.Component>;
 }
 
 export interface NativeDrawerProps extends Omit<DrawerProps, 'target'> {
-  target?: string | number | null;
+  target?: number | null;
 }
 
 export type DrawerSlotProps = {

@@ -18,12 +18,20 @@ export const Drawer = compose<DrawerType>({
     })),
   },
   render: (props: DrawerProps, useSlots: UseSlots<DrawerType>) => {
-    const { ...rest } = props;
+    const { target, ...rest } = props;
+    const [nativeTarget, setNativeTarget] = React.useState<number | null>(null);
+
+    React.useLayoutEffect(() => {
+      if (target?.current) {
+        // Pass the tagID for a valid ref `target`
+        setNativeTarget(findNodeHandle(target.current));
+      }
+    }, [target]);
 
     const rootProps = { ...rest };
     const Root = useSlots(props).root;
     return (rest: DrawerProps) => {
-      return <Root {...mergeProps(rootProps, rest)} />;
+      return <Root {...mergeProps(rootProps, rest)} {...(nativeTarget && { target: nativeTarget })} />;
     };
   },
 });

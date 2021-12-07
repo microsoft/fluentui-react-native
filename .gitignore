@@ -102,4 +102,4 @@ typings/
 apps/*/.vscode/.react/
 
 # Ignore Gradle build output directory
-**/build
+**/android/**/build
