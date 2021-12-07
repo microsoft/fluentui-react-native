@@ -21,10 +21,10 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
+    "@fluentui-react-native/experimental-drawer": "*",
     "@fluentui-react-native/tester": "^0.48.1",
     "@react-native-community/slider": "^4.1.12",
     "@react-native-picker/picker": "^1.16.7",
-    "@fluentui-react-native/experimental-drawer": "*",
     "hermes-engine": "~0.5.0",
     "react": "17.0.1",
     "react-native": "^0.64.3",
