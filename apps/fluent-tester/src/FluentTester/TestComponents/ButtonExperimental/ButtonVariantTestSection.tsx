@@ -23,9 +23,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <Button appearance="subtle" style={commonTestStyles.vmargin}>
         Subtle
       </Button>
-      <Button loading>
-        Loading Button
-      </Button>
+      <Button loading>Loading Button</Button>
       <Button block style={commonTestStyles.vmargin}>
         Block
       </Button>
@@ -35,11 +33,19 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <Button appearance="subtle" block style={commonTestStyles.vmargin}>
         Block Subtle
       </Button>
-      <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton appearance="primary" content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton appearance="subtle" content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <CompoundButton secondaryContent="Compound" style={commonTestStyles.vmargin}>
+        Default
+      </CompoundButton>
+      <CompoundButton appearance="primary" secondaryContent="Compound" style={commonTestStyles.vmargin}>
+        Primary
+      </CompoundButton>
+      <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
+        Subtle
+      </CompoundButton>
       <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
-      <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} content="FAB" style={commonTestStyles.vmargin} />
+      <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin}>
+        FAB
+      </FAB>
     </View>
   );
 };
