@@ -7,7 +7,7 @@ import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -31,7 +31,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-export const Button = compose<ButtonType>({
+const ButtonCompose = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
@@ -59,5 +59,7 @@ export const Button = compose<ButtonType>({
     };
   },
 });
+
+export const Button = React.forwardRef<IFocusable, ButtonProps>((props, ref) => <ButtonCompose {...props} innerRef={ref} />);
 
 export default Button;
