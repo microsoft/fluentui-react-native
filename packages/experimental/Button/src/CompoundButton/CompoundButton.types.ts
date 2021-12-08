@@ -28,12 +28,12 @@ export interface CompoundButtonProps extends ButtonProps {
   /**
    * Second line of text that describes the action this button takes.
    */
-  secondaryContent?: string;
+  secondaryText?: string;
 }
 
 export interface CompoundButtonSlotProps extends ButtonSlotProps {
   contentContainer: ViewProps;
-  secondaryContent: TextProps;
+  secondaryText: TextProps;
 }
 
 export interface CompoundButtonType {

@@ -17,7 +17,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     root: View,
     icon: Icon,
     content: Text,
-    secondaryContent: Text,
+    secondaryText: Text,
     contentContainer: View,
   },
   render: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
@@ -25,11 +25,11 @@ export const CompoundButton = compose<CompoundButtonType>({
     const iconProps = createIconProps(userProps.icon);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, secondaryContent, iconPosition, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, secondaryText, iconPosition, ...mergedProps } = mergeProps(button.props, final);
 
       return (
         <Slots.root {...mergedProps}>
@@ -37,7 +37,7 @@ export const CompoundButton = compose<CompoundButtonType>({
           {React.Children.map(children, (child) => (
             <Slots.contentContainer>
               {typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child}
-              {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
+              {secondaryText && <Slots.secondaryText key="secondaryText">{secondaryText}</Slots.secondaryText>}
             </Slots.contentContainer>
           ))}
           {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}

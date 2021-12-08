@@ -49,7 +49,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
       }),
       ['color', ...fontStyles.keys],
     ),
-    secondaryContent: buildProps(
+    secondaryText: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => ({
         style: {
           ...getTextMarginAdjustment(),
