@@ -31,7 +31,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-const ButtonCompose = compose<ButtonType>({
+const ButtonComposed = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
@@ -60,6 +60,6 @@ const ButtonCompose = compose<ButtonType>({
   },
 });
 
-export const Button = React.forwardRef<IFocusable, ButtonProps>((props, ref) => <ButtonCompose {...props} innerRef={ref} />);
+export const Button = React.forwardRef<IFocusable, ButtonProps>((props, ref) => <ButtonComposed {...props} innerRef={ref} />);
 
 export default Button;

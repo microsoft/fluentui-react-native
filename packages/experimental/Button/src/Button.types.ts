@@ -73,7 +73,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   square?: ButtonTokens;
 }
 
-export interface ButtonComposeCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonComposedCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Text to show on the Button.
    */
@@ -95,9 +95,9 @@ export interface ButtonComposeCoreProps extends Omit<IWithPressableOptions<ViewP
   tooltip?: string;
 }
 
-export type ButtonCoreProps = Omit<ButtonComposeCoreProps, 'innerRef'>;
+export type ButtonCoreProps = Omit<ButtonComposedCoreProps, 'innerRef'>;
 
-export interface ButtonComposedProps extends ButtonComposeCoreProps {
+export interface ButtonComposedProps extends ButtonComposedCoreProps {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.

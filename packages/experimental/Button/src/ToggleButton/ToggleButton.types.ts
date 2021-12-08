@@ -6,7 +6,7 @@ export interface ToggleButtonTokens extends ButtonTokens {
   checked?: ToggleButtonTokens;
 }
 
-export interface ToggleButtonProps extends ButtonComposedProps {
+export interface ToggleButtonComposedProps extends ButtonComposedProps {
   /**
    * Defines the controlled checked state of the `ToggleButton`.
    * Mutually exclusive to `defaultChecked`.
@@ -21,10 +21,12 @@ export interface ToggleButtonProps extends ButtonComposedProps {
   defaultChecked?: boolean;
 }
 
+export type ToggleButtonProps = Omit<ToggleButtonComposedProps, 'innerRef'>;
+
 export interface ToggleButtonSlotProps extends ButtonSlotProps {}
 
 export interface ToggleButtonType {
-  props: ToggleButtonProps;
+  props: ToggleButtonComposedProps;
   tokens: ToggleButtonTokens;
   slotProps: ToggleButtonSlotProps;
 }

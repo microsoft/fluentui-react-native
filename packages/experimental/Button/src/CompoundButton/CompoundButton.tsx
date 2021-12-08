@@ -1,16 +1,16 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
+import { CompoundButtonComposedProps, compoundButtonName, CompoundButtonType, CompoundButtonProps } from './CompoundButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './CompoundButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { buttonLookup } from '../Button';
 
-export const CompoundButton = compose<CompoundButtonType>({
+const CompoundButtonComposed = compose<CompoundButtonType>({
   displayName: compoundButtonName,
   ...stylingSettings,
   slots: {
@@ -20,15 +20,15 @@ export const CompoundButton = compose<CompoundButtonType>({
     secondaryContent: Text,
     contentContainer: View,
   },
-  render: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
+  render: (userProps: CompoundButtonComposedProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
+    return (final: CompoundButtonComposedProps, ...children: React.ReactNode[]) => {
       const { icon, content, secondaryContent, ...mergedProps } = mergeProps(button.props, final);
 
       return (
@@ -46,5 +46,9 @@ export const CompoundButton = compose<CompoundButtonType>({
     };
   },
 });
+
+export const CompoundButton = React.forwardRef<IFocusable, CompoundButtonProps>((props, ref) => (
+  <CompoundButtonComposed {...props} innerRef={ref} />
+));
 
 export default CompoundButton;

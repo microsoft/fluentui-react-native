@@ -24,12 +24,14 @@ export interface CompoundButtonTokens extends ButtonTokens {
   hasContent?: CompoundButtonTokens;
 }
 
-export interface CompoundButtonProps extends ButtonComposedProps {
+export interface CompoundButtonComposedProps extends ButtonComposedProps {
   /**
    * Second line of text that describes the action this button takes.
    */
   secondaryContent?: string;
 }
+
+export type CompoundButtonProps = Omit<CompoundButtonComposedProps, 'innerRef'>;
 
 export interface CompoundButtonSlotProps extends ButtonSlotProps {
   contentContainer: ViewProps;
@@ -37,7 +39,7 @@ export interface CompoundButtonSlotProps extends ButtonSlotProps {
 }
 
 export interface CompoundButtonType {
-  props: CompoundButtonProps;
+  props: CompoundButtonComposedProps;
   tokens: CompoundButtonTokens;
   slotProps: CompoundButtonSlotProps;
 }
