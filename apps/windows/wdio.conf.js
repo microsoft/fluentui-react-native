@@ -13,7 +13,6 @@ exports.config = {
     '../fluent-tester/src/E2E/Callout/specs/*.win.ts',
     '../fluent-tester/src/E2E/Checkbox/specs/*.win.ts',
     '../fluent-tester/src/E2E/Link/specs/*.win.ts',
-    '../fluent-tester/src/E2E/MenuButton/specs/*.win.ts',
     '../fluent-tester/src/E2E/PersonaCoin/specs/*.win.ts',
     '../fluent-tester/src/E2E/Pressable/specs/*.win.ts',
     '../fluent-tester/src/E2E/RadioGroup/specs/*.win.ts',
