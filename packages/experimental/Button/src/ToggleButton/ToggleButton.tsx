@@ -20,7 +20,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     content: Text,
   },
   render: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
-    const { icon, content, defaultChecked, checked, onClick, ...rest } = userProps;
+    const { icon, defaultChecked, checked, onClick, iconPosition, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
 
     // Warns defaultChecked and checked being mutually exclusive.
@@ -31,7 +31,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     const button = useButton({ onClick: toggle, ...rest });
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {
@@ -39,9 +39,11 @@ export const ToggleButton = compose<ToggleButtonType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps} />}
-          {content && <Slots.content key="content">{content}</Slots.content>}
-          {children}
+          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {React.Children.map(children, (child) =>
+            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+          )}
+          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };
