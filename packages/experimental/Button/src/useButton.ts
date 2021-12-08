@@ -6,7 +6,7 @@ import { memoize } from '@fluentui-react-native/framework';
 export const useButton = (props: ButtonComposedProps): ButtonState => {
   // attach the pressable state handlers
   const defaultRef = React.useRef(null);
-  const { onClick, innerRef, disabled, ...rest } = props;
+  const { onClick, innerRef, disabled, loading, ...rest } = props;
   const ref = innerRef !== null ? innerRef : defaultRef;
   const onClickWithFocus = useOnPressWithFocus(ref, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
@@ -19,11 +19,12 @@ export const useButton = (props: ButtonComposedProps): ButtonState => {
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
       accessibilityLabel: props.accessibilityLabel || props.content,
-      accessibilityState: getAccessibilityState(!!disabled),
+      accessibilityState: getAccessibilityState(!!disabled || !!loading),
       focusable: true,
       ref: useViewCommandFocus(ref),
       onKeyUp: onKeyUp,
       iconPosition: props.iconPosition || 'before',
+      loading,
     },
     state: pressable.state,
   };

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useCallback, FunctionComponent } from 'react';
 import { AvatarSize, AvatarColor, JSAvatar, AvatarPresence } from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
@@ -60,16 +60,17 @@ const StyledPicker = (props) => {
   );
 };
 
-export const StandardUsage: React.FunctionComponent = () => {
+export const StandardUsage: FunctionComponent = () => {
   const tokens: JSAvatarTokens = {};
-  const [showImage, setShowImage] = React.useState(true);
-  const [imageSize, setImageSize] = React.useState<WithUndefined<AvatarSize>>('size72');
-  const [coinColor, setCoinColor] = React.useState<WithUndefined<AvatarColor>>('brass');
-  const [presence, setPresence] = React.useState<WithUndefined<AvatarPresence>>('online');
+  const [isSquare, setSquare] = useState(false);
+  const [showImage, setShowImage] = useState(true);
+  const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
+  const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
+  const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('online');
 
-  const onSizeChange = React.useCallback((value) => setImageSize(value), []);
-  const onColorChange = React.useCallback((value) => setCoinColor(value), []);
-  const onPresenceChange = React.useCallback((value) => setPresence(value), []);
+  const onSizeChange = useCallback((value) => setImageSize(value), []);
+  const onColorChange = useCallback((value) => setCoinColor(value), []);
+  const onPresenceChange = useCallback((value) => setPresence(value), []);
 
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };
@@ -83,6 +84,10 @@ export const StandardUsage: React.FunctionComponent = () => {
           <Text style={textStyles}>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
+        <View style={commonStyles.switch}>
+          <Text style={textStyles}>Set square Avatar</Text>
+          <Switch value={isSquare} onValueChange={() => setSquare(!isSquare)} />
+        </View>
 
         <StyledPicker prompt="Size" selected={imageSize} onChange={onSizeChange} collection={allSizes} />
         <StyledPicker prompt="Coin color" selected={coinColor} onChange={onColorChange} collection={allColors} />
@@ -92,6 +97,7 @@ export const StandardUsage: React.FunctionComponent = () => {
       <JSAvatar
         size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
+        shape={isSquare ? 'square' : 'circular'}
         imageDescription="Photo of Satya Nadella"
         presence={presence === undefinedText ? undefined : presence}
         imageUrl={showImage ? satyaPhotoUrl : undefined}

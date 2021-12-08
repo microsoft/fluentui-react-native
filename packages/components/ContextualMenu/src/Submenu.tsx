@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
 import { settings } from './Submenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
@@ -10,6 +10,8 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { CMContext } from './ContextualMenu';
+import { IViewProps } from '@fluentui-react-native/adapters';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
 
 export const Submenu = compose<SubmenuType>({
   displayName: submenuName,
@@ -53,6 +55,13 @@ export const Submenu = compose<SubmenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    const containerPropsWin32: IViewProps = {
+      accessible: shouldFocusOnContainer,
+      focusable: shouldFocusOnContainer && containerFocus,
+      onBlur: toggleContainerFocus,
+      style: { maxHeight: maxHeight, width: maxWidth },
+    };
+
     const slotProps = mergeSettings<SubmenuSlotProps>(styleProps, {
       root: {
         ...rest,
@@ -60,12 +69,10 @@ export const Submenu = compose<SubmenuType>({
         onDismiss: onDismiss,
         setInitialFocus: shouldFocusOnMount,
       },
-      container: {
-        accessible: shouldFocusOnContainer,
-        focusable: shouldFocusOnContainer && containerFocus,
-        onBlur: toggleContainerFocus,
-        style: {maxHeight: maxHeight, width: maxWidth}
-      },
+      container: Platform.select({
+        macos: {},
+        default: containerPropsWin32,
+      }),
     });
 
     return { slotProps, state };
@@ -86,10 +93,14 @@ export const Submenu = compose<SubmenuType>({
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
-        <Slots.container>
-            <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1}} showsVerticalScrollIndicator={true}>
-              {children}
-            </ScrollView>
+          <Slots.container>
+            {Platform.OS === 'macos' ? (
+              <FocusZone>{children}</FocusZone>
+            ) : (
+              <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
+                {children}
+              </ScrollView>
+            )}
           </Slots.container>
         </Slots.root>
       </CMContext.Provider>
