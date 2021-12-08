@@ -7,4 +7,4 @@ else
 fi
 
 echo "Running command: sudo xcode-select --switch $XCODE_PATH"
-sudo xcode-select --switch "$XCODE_PATH"
+/usr/bin/sudo /usr/bin/xcode-select --switch "$XCODE_PATH"
