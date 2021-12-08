@@ -352,7 +352,7 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
-  - SwiftLint (0.43.1)
+  - SwiftLint (0.45.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -524,7 +524,7 @@ SPEC CHECKSUMS:
   ReactTestApp-Resources: 4397038d4bf3b15e109ade7ce4a7df489d172bee
   RNCPicker: 0991c56da7815c0cf946d6f63cf920b25296e5f6
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
-  SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
+  SwiftLint: 06ac37e4d38c7068e0935bb30cda95f093bec761
   Yoga: bf8790053f3991990f196d6b1a2e8beee9a97b24
 
 PODFILE CHECKSUM: 568704fb95966cf7ad6daa54a1d36eb2d5c3bba6
