@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Button - Renamed secondaryContent to secondaryText",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
