@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { buttonName, ButtonType, ButtonProps } from './Button.types';
+import { buttonName, ButtonType, ButtonProps, ButtonComposedProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
@@ -17,7 +17,7 @@ import { createIconProps, IFocusable, IPressableState } from '@fluentui-react-na
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
+export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonComposedProps): boolean => {
   return (
     state[layer] ||
     userProps[layer] ||
@@ -39,14 +39,14 @@ const ButtonCompose = compose<ButtonType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
+  render: (userProps: ButtonComposedProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonProps, ...children: React.ReactNode[]) => {
+    return (final: ButtonComposedProps, ...children: React.ReactNode[]) => {
       const { icon, iconPosition, content, ...mergedProps } = mergeProps(button.props, final);
       return (
         <Slots.root {...mergedProps}>

@@ -1,9 +1,9 @@
-import { ButtonSlotProps, ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
+import { ButtonSlotProps, ButtonCoreTokens, ButtonComposeCoreProps } from '../Button.types';
 
 export const fabName = 'FAB';
 
 export interface FABType {
-  props: ButtonCoreProps;
+  props: ButtonComposeCoreProps;
   tokens: ButtonCoreTokens;
   slotProps: ButtonSlotProps;
 }
