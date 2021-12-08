@@ -15,7 +15,6 @@ exports.config = {
     '../fluent-tester/src/E2E/Link/specs/*.win.ts',
     '../fluent-tester/src/E2E/PersonaCoin/specs/*.win.ts',
     '../fluent-tester/src/E2E/Pressable/specs/*.win.ts',
-    '../fluent-tester/src/E2E/RadioGroup/specs/*.win.ts',
     '../fluent-tester/src/E2E/Separator/specs/*.win.ts',
     '../fluent-tester/src/E2E/Tabs/specs/*.win.ts',
     '../fluent-tester/src/E2E/Text/specs/*.win.ts',
