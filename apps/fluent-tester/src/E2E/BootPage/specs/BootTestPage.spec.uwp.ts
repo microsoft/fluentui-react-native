@@ -8,7 +8,7 @@ import SeparatorTestPage from '../../Separator/pages/SeparatorPageObject.win';
 import TextTestPage from '../../Text/pages/TextPageObject.win';
 import TabsTestPage from '../../Tabs/pages/TabsPageObject.win';
 import ThemeTestPage from '../../Theme/pages/ThemePageObject.win';
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 
 const BOOT_APP_TIMEOUT = 60000;
 const PAGE_TIMEOUT = 15000;
