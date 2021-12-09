@@ -56,10 +56,6 @@
     "tslib": "^1.13.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
-    "@babel/register": "^7.16.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.5.27",
     "@types/jasmine": "3.5.10",
@@ -86,7 +82,11 @@
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
-    "webdriverio": "^6.5.0"
+    "webdriverio": "^6.5.0",
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.0",
+    "@babel/register": "^7.8.0",
+    "@babel/cli": "^7.8.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.64.8",
