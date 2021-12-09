@@ -25,18 +25,10 @@
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-macos": "^0.64.6",
-    "react-native-svg": "^12.1.1",
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/register": "^7.7.4"
+    "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
-    "@babel/register": "^7.7.4",
-    "@babel/runtime": "^7.8.0",
+    "@babel/core": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.5.27",
     "@rnx-kit/metro-config": "^1.2.3",
