@@ -27,9 +27,10 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       iconColor: t.colors.neutralForeground1Pressed,
     },
     focused: {
+      // Focused border matches background so latency betwen native and JS visuals isn't as noticable
       backgroundColor: t.colors.neutralBackground1Hover,
       color: t.colors.neutralForeground1Hover,
-      borderColor: t.colors.strokeFocus2,
+      borderColor: t.colors.neutralBackground1Hover,
       icon: t.colors.neutralForeground1Hover,
     },
     primary: {
@@ -56,9 +57,10 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForegroundOnBrandPressed,
       },
       focused: {
+        // Focused border matches background so latency betwen native and JS visuals isn't as noticable
         backgroundColor: t.colors.brandBackgroundHover,
         color: t.colors.neutralForegroundOnBrandHover,
-        borderColor: t.colors.strokeFocus2,
+        borderColor: t.colors.brandBackgroundHover,
         iconColor: t.colors.neutralForegroundOnBrandHover,
       },
     },
@@ -86,9 +88,10 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
         iconColor: t.colors.neutralForeground2BrandPressed,
       },
       focused: {
+        // Focused border matches background so latency betwen native and JS visuals isn't as noticable
         backgroundColor: t.colors.subtleBackgroundHover,
         color: t.colors.neutralForeground1Hover,
-        borderColor: t.colors.strokeFocus2,
+        borderColor: t.colors.subtleBackgroundHover,
         iconColor: t.colors.neutralForeground1Hover,
       },
     },

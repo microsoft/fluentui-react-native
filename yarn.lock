@@ -2244,10 +2244,10 @@
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
 
-"@office-iss/rex-win32@0.63.36-devmain.14419.10000":
-  version "0.63.36-devmain.14419.10000"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.63.36-devmain.14419.10000.tgz#c6a0f23f08a290ed21506871d4e8a2cd923fa11a"
-  integrity sha512-mhdbfVi1wzaKdLzNZ3VyX/vRYjwTotLcFSjRJ8nCw8NqKzesBAExNQGReTPfjOe9P/lDinWtBUsly8l2nSVviQ==
+"@office-iss/rex-win32@0.64.26-devmain.14807.10000":
+  version "0.64.26-devmain.14807.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.64.26-devmain.14807.10000.tgz#b862c79db5105cb9077e752e2e36f4b3931d5bae"
+  integrity sha512-oO7g4BrNWW0LnvBjRz903QC5HviLFIbExlIicWuY5jXy/lS3nqj9XEdrrE/obxVHiYDlFA+v2YLSNKNNTvf5lA==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
