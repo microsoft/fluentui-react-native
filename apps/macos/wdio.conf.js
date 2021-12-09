@@ -15,8 +15,8 @@ exports.config = {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'mac',
       automationName: 'Mac2',
-      bundleId: 'com.microsoft.ReactTestApp'
-    }
+      bundleId: 'com.microsoft.ReactTestApp',
+    },
   ],
 
   /*
@@ -46,11 +46,6 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
-    requires: ['ts-node/register', '@babel/register', 'tsconfig-paths/register'],
-    /*helpers: [
-      require.resolve('ts-node/register'),
-      require.resolve('@babel/register')
-    ]*/
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
@@ -73,11 +68,11 @@ exports.config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-   onPrepare: function (config, capabilities) {
-     //require('@babel/register');
-     // require('ts-node').register({ files: true });
-     //console.log('<<< NATIVE APP TESTS STARTED >>>');
-   },
+  onPrepare: function (config, capabilities) {
+    //require('@babel/register');
+    // require('ts-node').register({ files: true });
+    //console.log('<<< NATIVE APP TESTS STARTED >>>');
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -98,7 +93,6 @@ exports.config = {
    */
   beforeSession: function (config, capabilities, specs) {
     require('tsconfig-paths/register');
-    //require('ts-node').register({ files: true });
     require('@babel/register');
     // Delete old screenshots and create empty directory
     //if (fs.existsSync('./errorShots')) {
@@ -155,13 +149,10 @@ exports.config = {
     //if (results.passed) {
     //  return;
     //}
-
     // get current test title and clean it, to use it as file name
     //const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
-
     // build file path
     //const filePath = './errorShots/' + fileName + '.png';
-
     // save screenshot
     //browser.saveScreenshot(filePath);
   },

@@ -2,7 +2,7 @@ const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 export function By(identifier: string): WebdriverIO.Element {
-  return $('~' + identifier);
+  return $('//*[@identifier="' + identifier + '"]');
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
