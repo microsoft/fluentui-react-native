@@ -4,7 +4,7 @@ import {
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
 } from '../../../FluentTester/TestComponents/Checkbox/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class CheckboxPageObject extends BasePage {
   /******************************************************************/

@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupPageObject, { RadioButtonSelector } from '../pages/RadioGroupPageObject.win';
-import { ComponentSelector } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage.win';
 import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 import {
   RADIOGROUP_ACCESSIBILITY_LABEL,

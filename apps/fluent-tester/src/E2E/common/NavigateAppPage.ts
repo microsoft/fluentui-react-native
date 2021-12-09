@@ -18,7 +18,7 @@ import { HOMEPAGE_TEXT_BUTTON } from '../../FluentTester/TestComponents/Text/con
 import { HOMEPAGE_TABS_BUTTON } from '../../FluentTester/TestComponents/Tabs/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../FluentTester/TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../FluentTester/TestComponents/Common/consts';
-import { By, BasePage } from './BasePage';
+import { By, BasePage } from './BasePage.win';
 
 class NavigateAppPage extends BasePage {
   clickAndGoToButtonPage() {
