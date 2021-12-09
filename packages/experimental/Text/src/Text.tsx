@@ -40,10 +40,6 @@ export type TextProps<TBase = ITextProps> = TBase &
 
     /** whether or not this text should be presented as disabled */
     disabled?: boolean;
-
-    accessibilityId?: string;
-    className?: string;
-    name?: string;
   };
 
 const useTextTokens = buildUseTokens<TextTokens>(

@@ -106,8 +106,6 @@ export interface ButtonProps extends ButtonCoreProps {
 
   /** Sets style of button to a preset size style  */
   size?: ButtonSize;
-
-  accessibilityId?: string;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

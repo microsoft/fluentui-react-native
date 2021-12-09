@@ -1,6 +1,7 @@
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
+/* Mac-Specific Selector. We use this to get elements on the test page */
 export function By(identifier: string): WebdriverIO.Element {
   return $('//*[@identifier="' + identifier + '"]');
 }
