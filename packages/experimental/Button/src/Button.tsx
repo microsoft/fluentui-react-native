@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View } from 'react-native';
+import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
