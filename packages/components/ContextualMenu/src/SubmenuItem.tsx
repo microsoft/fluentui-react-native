@@ -73,9 +73,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const onMouseEnter = React.useCallback(
       (e) => {
-        console.log('mouseEnter');
         setSubmenuItemHovered(true);
-        pressable.props.onHoverIn && pressable.props.onHoverIn(e);
+        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
         e.stopPropagation();
       },
       [pressable, setSubmenuItemHovered],
