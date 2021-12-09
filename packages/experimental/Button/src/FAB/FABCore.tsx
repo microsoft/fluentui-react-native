@@ -31,7 +31,7 @@ const FABComposed = compose<FABType>({
     content: Text,
   },
   render: (userProps: ButtonComposedCoreProps, useSlots: UseSlots<FABType>) => {
-    const { icon, content, onClick, ...rest } = userProps;
+    const { icon, onClick, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
 
     const button = useButton(rest);
@@ -46,8 +46,9 @@ const FABComposed = compose<FABType>({
       return (
         <Slots.root {...mergedProps}>
           {icon && <Slots.icon {...iconProps} />}
-          {content && <Slots.content key="content">{content}</Slots.content>}
-          {children}
+          {React.Children.map(children, (child) =>
+            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+          )}
         </Slots.root>
       );
     };

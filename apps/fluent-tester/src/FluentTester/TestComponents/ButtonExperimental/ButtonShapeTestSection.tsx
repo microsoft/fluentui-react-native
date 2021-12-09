@@ -24,9 +24,15 @@ export const ButtonShapeTest: React.FunctionComponent = () => {
       <Button appearance="primary" shape="circular" style={commonTestStyles.vmargin}>
         Circular Button
       </Button>
-      <CompoundButton content="Compound Button" secondaryContent="rounded" shape="rounded" style={commonTestStyles.vmargin} />
-      <CompoundButton content="Compound Button" secondaryContent="square" shape="square" style={commonTestStyles.vmargin} />
-      <CompoundButton content="Compound Button" secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin} />
+      <CompoundButton secondaryContent="rounded" shape="rounded" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton secondaryContent="square" shape="square" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
     </View>
   );
 };

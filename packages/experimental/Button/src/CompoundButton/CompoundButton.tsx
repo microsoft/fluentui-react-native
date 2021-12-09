@@ -29,18 +29,18 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
 
     // now return the handler for finishing render
     return (final: CompoundButtonComposedProps, ...children: React.ReactNode[]) => {
-      const { icon, content, secondaryContent, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, secondaryContent, iconPosition, ...mergedProps } = mergeProps(button.props, final);
 
       return (
         <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps} />}
-          {(content || secondaryContent) && (
+          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {React.Children.map(children, (child) => (
             <Slots.contentContainer>
-              {content && <Slots.content key="content">{content}</Slots.content>}
+              {typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child}
               {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
             </Slots.contentContainer>
-          )}
-          {children}
+          ))}
+          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };
