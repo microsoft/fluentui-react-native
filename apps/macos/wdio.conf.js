@@ -68,11 +68,7 @@ exports.config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  onPrepare: function (config, capabilities) {
-    //require('@babel/register');
-    // require('ts-node').register({ files: true });
-    //console.log('<<< NATIVE APP TESTS STARTED >>>');
-  },
+  //onPrepare: function (config, capabilities) {},
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -91,15 +87,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (config, capabilities, specs) {
-    require('tsconfig-paths/register');
-    require('@babel/register');
-    // Delete old screenshots and create empty directory
-    //if (fs.existsSync('./errorShots')) {
-    //  rimraf.sync('./errorShots');
-    //}
-    //fs.mkdirSync('./errorShots');
-  },
+  //beforeSession: function (config, capabilities, specs) {},
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
@@ -107,8 +95,10 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    //require('ts-node').register({ files: true });
-    //require('@babel/register');
+    require('ts-node').register({files: true});
+    require('@babel/register');
+
+    browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
