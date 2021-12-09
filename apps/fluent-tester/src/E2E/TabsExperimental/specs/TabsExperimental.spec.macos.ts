@@ -1,5 +1,5 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import ExperimentalTabsPageObject from '../pages/ExperimentalTabsPageObject.win';
+import NavigateAppPage from '../../common/NavigateAppPage.macos';
+import ExperimentalTabsPageObject from '../pages/ExperimentalTabsPageObject.macos';
 import { BOOT_APP_TIMEOUT, PAGE_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open

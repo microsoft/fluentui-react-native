@@ -1,5 +1,5 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import PersonaCoinPageObject from '../pages/PersonaCoinPageObject.win';
+import NavigateAppPage from '../../common/NavigateAppPage.macos';
+import PersonaCoinPageObject from '../pages/PersonaCoinPageObject.macos';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
