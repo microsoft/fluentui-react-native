@@ -112,6 +112,8 @@ jobs:
         parameters:
           relative_directory: $(relative_directory)
 
+      - template: templates/e2e-testing-macos.yml
+
   - job: AndroidPR
     displayName: Android PR
     pool:

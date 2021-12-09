@@ -1,0 +1,18 @@
+steps:
+  - script: |
+      yarn macos
+    workingDirectory: apps/macos
+    displayName: "build and run the MacOS test app"
+
+  - script: |
+      yarn e2etest
+    workingDirectory: apps/macos
+    displayName: "Run MacOS E2E Tests"
+    condition: succeeded()
+    continueOnError: true
+
+  # - template: e2e-publish-artifacts.yml
+  #   parameters:
+  #     applicationType: win32
+  #     platform: win32
+  #     buildArtifacts: variables['task.Build.status']
