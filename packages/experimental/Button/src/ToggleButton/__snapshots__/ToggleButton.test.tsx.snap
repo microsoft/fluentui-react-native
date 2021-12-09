@@ -10,6 +10,7 @@ exports[`ToggleButton default 1`] = `
   }
   accessible={true}
   focusable={true}
+  iconPosition="before"
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}

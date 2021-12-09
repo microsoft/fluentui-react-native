@@ -9,6 +9,7 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonAppearance = 'primary' | 'subtle';
+export type ButtonShape = 'rounded' | 'circular' | 'square';
 
 export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -67,6 +68,9 @@ export interface ButtonTokens extends ButtonCoreTokens {
   small?: ButtonTokens;
   medium?: ButtonTokens;
   large?: ButtonTokens;
+  rounded?: ButtonTokens;
+  circular?: ButtonTokens;
+  square?: ButtonTokens;
 }
 
 export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -101,11 +105,36 @@ export interface ButtonProps extends ButtonCoreProps {
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    */
   appearance?: ButtonAppearance;
+
   /** A button can fill the width of its container. */
   block?: boolean;
 
   /** Sets style of button to a preset size style  */
   size?: ButtonSize;
+
+  /**
+   * Button shape: 'rounded' | 'circular' | 'square'
+   * @defaultvalue rounded
+   */
+  shape?: ButtonShape;
+
+  /**
+   * Icon can be placed before or after Button's content.
+   * @default before
+   */
+  iconPosition?: 'before' | 'after';
+
+  /**
+   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
+   * be interacted with.
+   * @default false
+   */
+  loading?: boolean;
+  
+  /**
+   * Button contains only icon, there's no text content
+   */
+  iconOnly?: boolean;
 }
 
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;

@@ -3,6 +3,6 @@ import { CompoundButton } from './CompoundButton';
 import * as renderer from 'react-test-renderer';
 
 it('CompoundButton default', () => {
-  const tree = renderer.create(<CompoundButton content="Default Button" secondaryContent="sublabel" />).toJSON();
+  const tree = renderer.create(<CompoundButton secondaryContent="sublabel">Default Button</CompoundButton>).toJSON();
   expect(tree).toMatchSnapshot();
 });
