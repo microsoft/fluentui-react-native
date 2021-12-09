@@ -3,8 +3,8 @@ import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -130,7 +130,7 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default false
    */
   loading?: boolean;
-  
+
   /**
    * Button contains only icon, there's no text content
    */
@@ -140,7 +140,7 @@ export interface ButtonProps extends ButtonCoreProps {
 export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<IViewProps>;
   icon: IconProps;
   content: TextProps;
 }
