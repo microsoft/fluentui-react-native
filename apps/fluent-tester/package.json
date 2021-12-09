@@ -82,11 +82,7 @@
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
-    "webdriverio": "^6.5.0",
-    "@babel/core": "^7.8.0",
-    "@babel/preset-env": "^7.8.0",
-    "@babel/register": "^7.8.0",
-    "@babel/cli": "^7.8.0"
+    "webdriverio": "^6.5.0"
   },
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.64.8",
