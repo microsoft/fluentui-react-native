@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "Refactor useKeyCallback",
   "packageName": "@fluentui/react-native",
   "email": "sanajmi@microsoft.com",
