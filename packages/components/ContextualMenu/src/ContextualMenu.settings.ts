@@ -18,6 +18,8 @@ export const settings: IComposeSettings<ContextualMenuType> = [
     container: {
       style: {
         padding: 1,
+        minWidth: 180,
+        flex: 1,
       },
     },
   },

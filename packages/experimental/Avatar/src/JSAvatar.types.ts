@@ -1,10 +1,14 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
-import { IBackgroundColorTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
+import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 
 export const JSAvatarName = 'Avatar';
 
 export type AvatarSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
+
+export type AvatarShape = 'circular' | 'square';
+export type AvatarActive = 'active' | 'inactive' | 'unset';
+export type AvatarActiveAppearance = 'ring' | 'shadow' | 'glow' | 'ring-shadow' | 'ring-glow';
 
 /**
  * Sets color of the avatar when there is no picture. Uses fluent color names
@@ -51,11 +55,14 @@ export interface AvatarConfigurableProps {
 }
 
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
+  active?: AvatarActive;
+  activeAppearance?: AvatarActiveAppearance;
   imageUrl?: string;
   imageDescription?: string;
   initials?: string;
   presence?: AvatarPresence;
   isOutOfOffice?: boolean;
+  shape?: AvatarShape;
 }
 
 export interface AvatarSlotProps {
@@ -70,7 +77,7 @@ export interface AvatarSlotProps {
 
 export type IconAlignment = 'start' | 'center' | 'end';
 
-export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps {
+export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens {
   avatarSize?: number;
   iconSize?: number;
   iconStrokeWidth?: number;
@@ -79,6 +86,8 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
   physicalSize?: number;
+  circular?: JSAvatarTokens;
+  square?: JSAvatarTokens;
 }
 
 export interface JSAvatarState {

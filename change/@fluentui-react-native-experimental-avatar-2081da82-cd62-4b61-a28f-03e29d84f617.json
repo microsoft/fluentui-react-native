@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added shape prop to Avatar",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}

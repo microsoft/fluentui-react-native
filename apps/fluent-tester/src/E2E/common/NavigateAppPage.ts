@@ -1,5 +1,6 @@
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../FluentTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../FluentTester/TestComponents/Button/consts';
+import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from '../../FluentTester/TestComponents/ButtonExperimental/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../FluentTester/TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../FluentTester/TestComponents/ContextualMenu/consts';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../FluentTester/TestComponents/TabsExperimental/consts';
@@ -7,6 +8,7 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../FluentTester/TestComponents
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../FluentTester/TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../FluentTester/TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../FluentTester/TestComponents/Link/consts';
+import { HOMEPAGE_MENU_BUTTON } from '../../FluentTester/TestComponents/MenuButton/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../FluentTester/TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../FluentTester/TestComponents/PersonaCoin/consts';
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../../FluentTester/TestComponents/Pressable/consts';
@@ -52,6 +54,10 @@ class NavigateAppPage extends BasePage {
     this.linkPage.click();
   }
 
+  clickAndGoToMenuButtonPage() {
+    this.menuButtonPage.click();
+  }
+
   clickAndGoToPersonaPage() {
     this.personaPage.click();
   }
@@ -86,6 +92,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToThemePage() {
     this.themePage.click();
+  }
+
+  clickAndGoToExperimentalButtonPage() {
+    this.experimentalButtonPage.click();
   }
 
   clickAndGoToExperimentalTabsPage() {
@@ -132,6 +142,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_LINK_BUTTON);
   }
 
+  private get menuButtonPage() {
+    return By(HOMEPAGE_MENU_BUTTON);
+  }
+
   private get personaPage() {
     return By(HOMEPAGE_PERSONA_BUTTON);
   }
@@ -166,6 +180,10 @@ class NavigateAppPage extends BasePage {
 
   private get themePage() {
     return By(HOMEPAGE_THEME_BUTTON);
+  }
+
+  private get experimentalButtonPage() {
+    return By(HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL);
   }
 
   private get experimentalTabsPage() {
