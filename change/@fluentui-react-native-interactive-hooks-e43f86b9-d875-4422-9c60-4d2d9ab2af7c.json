@@ -1,5 +1,5 @@
 {
-  "type": "patch",
+  "type": "minor",
   "comment": "Refactor useKeyCallback",
   "packageName": "@fluentui-react-native/interactive-hooks",
   "email": "sanajmi@microsoft.com",
