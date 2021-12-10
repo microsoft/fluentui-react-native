@@ -24,13 +24,18 @@ export function useKeyCallback(_userCallback?: KeyCallback, ..._keys: string[]) 
   return noOp;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noOp2 = (_userCallback: KeyCallback, ..._keys: string[]) => {
+  return {};
+};
+
 /**
  * Re-usable hook for an onKeyUp event. noOp on unsupported platforms.
  * @param userCallback The function you want to be called once the key has been activated on key up
  * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
  * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
  */
-export const useKeyUpProps = noOp;
+export const useKeyUpProps = noOp2;
 
 /**
  * Re-usable hook for an onKeyDown event. noOp on unsupported platforms.
@@ -38,4 +43,4 @@ export const useKeyUpProps = noOp;
  * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
  * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
  */
-export const useKeyDownProps = noOp;
+export const useKeyDownProps = noOp2;
