@@ -21,6 +21,7 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
+    "@fluentui-react-native/adapters": "^0.8.0",
     "@fluentui-react-native/experimental-activity-indicator": "^0.4.0",
     "@fluentui-react-native/experimental-text": ">=0.7.0 <1.0.0",
     "@fluentui-react-native/framework": "0.7.0",
