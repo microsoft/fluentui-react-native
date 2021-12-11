@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { I18nManager, Platform, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -121,39 +121,45 @@ export const SubmenuItem = compose<SubmenuItemType>({
   },
   settings,
   render: (Slots: ISlots<SubmenuItemSlotProps>, renderData: SubmenuItemRenderData, ...children: React.ReactNode[]) => {
+    I18nManager.forceRTL(false);
+    // Mirror the Chevron SVG in RTL
+    const svgTransfrom = I18nManager.isRTL ? `transform="translate(2048,0) scale(1, 1)"` : ``;
+
     const xml = `
-    <svg width="12" height="12" viewBox="0 0 2048 2048" >
-      <path class='OfficeIconColors_HighContrast' fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
-      <path class='OfficeIconColors_m22' fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+    <svg width="12" height="12" viewBox="0 0 2048 2048">
+      <g ${svgTransfrom}>
+        <path class='OfficeIconColors_HighContrast' fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+        <path class='OfficeIconColors_m22'          fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+      </g>
     </svg>`;
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
       <Slots.root>
-        <Slots.leftstack>
+        <Slots.startstack>
           {renderData!.state.icon && <Slots.icon />}
           {renderData!.state.content && <Slots.content />}
           {children}
-        </Slots.leftstack>
-        <Slots.rightstack>
+        </Slots.startstack>
+        <Slots.endstack>
           <Slots.chevron xml={xml} />
-        </Slots.rightstack>
+        </Slots.endstack>
       </Slots.root>
     );
   },
   slots: {
     root: View,
-    leftstack: { slotType: View },
-    icon: { slotType: Icon as React.ComponentType },
+    startstack: View,
+    icon: Icon as React.ComponentType,
     content: Text,
-    rightstack: { slotType: View },
+    endstack: View,
     chevron: SvgXml,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
-    leftstack: [],
+    startstack: [],
     icon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
     content: [textTokens, foregroundColorTokens],
-    rightstack: [],
+    endstack: [],
     chevron: [{ source: 'chevronColor', lookup: getPaletteFromTheme, target: 'color' }],
   },
 });

@@ -10,10 +10,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       borderWidth: 2,
     },
     root: {
-      accessible: true,
-      accessibilityRole: 'menuitem',
       enableFocusRing: false,
-      focusable: true,
       style: {
         display: 'flex',
         alignItems: 'flex-start',

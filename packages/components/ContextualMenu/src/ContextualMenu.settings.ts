@@ -12,9 +12,6 @@ export const settings: IComposeSettings<ContextualMenuType> = [
       gapSpace: 0,
       minPadding: 0,
     },
-    root: {
-      accessibilityRole: 'menu',
-    },
     container: {
       style: {
         padding: 1,
