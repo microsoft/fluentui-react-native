@@ -81,7 +81,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
   },
   settings: settings,
   slots: {
-    root: View,
+    root: Callout,
     container: View,
   },
   styles: {
