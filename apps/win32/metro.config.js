@@ -22,7 +22,7 @@ module.exports = (async () => {
   return {
     watchFolders: defaultWatchFolders(__dirname),
     resolver: {
-      assetExts: [assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
+      assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
       blacklistRE: blockList,
       blockList,
