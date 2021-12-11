@@ -10,9 +10,6 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       borderWidth: 2,
     },
     root: {
-      accessible: true,
-      accessibilityRole: 'menuitem',
-      focusable: true,
       style: {
         display: 'flex',
         flex: 1,
@@ -22,14 +19,13 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         justifyContent: 'space-between',
       },
     },
-    content: {},
     icon: {
       style: {
         marginEnd: 5,
         color: 'menuIcon',
       },
     },
-    leftstack: {
+    startstack: {
       style: {
         display: 'flex',
         flex: 1,
@@ -41,7 +37,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         justifyContent: 'flex-start',
       },
     },
-    rightstack: {
+    endstack: {
       style: {
         display: 'flex',
         flex: 1,
