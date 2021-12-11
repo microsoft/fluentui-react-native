@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { I18nManager, Platform, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
