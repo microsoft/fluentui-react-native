@@ -27,8 +27,8 @@
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
-    "@rnx-kit/cli": "^0.5.27",
-    "@rnx-kit/metro-config": "^1.2.3",
+    "@rnx-kit/cli": "^0.9.56",
+    "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
     "@uifabricshared/build-native": "0.1.1",
     "@wdio/allure-reporter": "5.22.4",
@@ -40,6 +40,7 @@
     "@wdio/sync": "5.20.1",
     "allure-commandline": "2.13.0",
     "appium": "1.17.1",
+    "flow-bin": "^0.113.0",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-test-app": "^0.9.13",
@@ -61,18 +62,18 @@
   "rnx-kit": {
     "reactNativeVersion": "0.64",
     "kitType": "app",
-    "detectCyclicDependencies": {
-      "throwOnError": true
-    },
-    "detectDuplicateDependencies": {
-      "throwOnError": true
-    },
-    "typescriptValidation": true,
     "bundle": {
       "targets": [
         "windows"
       ],
-      "entryPath": "index.js"
+      "entryPath": "index.js",
+      "detectCyclicDependencies": {
+        "throwOnError": true
+      },
+      "detectDuplicateDependencies": {
+        "throwOnError": true
+      },
+      "typescriptValidation": true
     },
     "capabilities": [
       "core",
