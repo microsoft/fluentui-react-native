@@ -121,10 +121,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
   },
   settings,
   render: (Slots: ISlots<SubmenuItemSlotProps>, renderData: SubmenuItemRenderData, ...children: React.ReactNode[]) => {
-    I18nManager.forceRTL(false);
-    // Mirror the Chevron SVG in RTL
-    const svgTransfrom = I18nManager.isRTL ? `transform="translate(2048,0) scale(1, 1)"` : ``;
-
     const xml = `
     <svg width="12" height="12" viewBox="0 0 2048 2048">
       <g ${svgTransfrom}>
