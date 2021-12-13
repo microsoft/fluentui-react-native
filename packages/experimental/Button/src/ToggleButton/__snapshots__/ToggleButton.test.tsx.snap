@@ -33,9 +33,8 @@ exports[`ToggleButton default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }

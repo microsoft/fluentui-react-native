@@ -32,9 +32,8 @@ exports[`Button component tests Button circular 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -90,9 +89,8 @@ exports[`Button component tests Button default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -149,7 +147,6 @@ exports[`Button component tests Button large 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 7,
       "paddingHorizontal": 15,
       "width": undefined,
@@ -208,9 +205,8 @@ exports[`Button component tests Button primary 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -267,9 +263,8 @@ exports[`Button component tests Button small 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 64,
       "padding": 3,
-      "paddingHorizontal": 11,
+      "paddingHorizontal": 7,
       "width": undefined,
     }
   }
@@ -326,9 +321,8 @@ exports[`Button component tests Button square 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -385,9 +379,8 @@ exports[`Button component tests Button subtle 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
