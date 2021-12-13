@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Removed content prop from Toggle, Compound Buttons and FAB",
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}

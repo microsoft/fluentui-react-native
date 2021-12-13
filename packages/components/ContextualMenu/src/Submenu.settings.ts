@@ -19,7 +19,7 @@ export const settings: IComposeSettings<SubmenuType> = [
       style: {
         padding: 1,
         minWidth: 180,
-        flex: 1
+        flex: 1,
       },
     },
   },

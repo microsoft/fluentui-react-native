@@ -1,5 +1,5 @@
 import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
-import { ViewProps } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuName = 'ContextualMenu';
@@ -35,33 +35,34 @@ export interface ContextualMenuState {
 }
 
 export type ContextualMenuTokens = ICalloutTokens;
-/**
- * Properties and Tokens for FluentUI React Native ContextualMenu
- */
 
-export interface ContextualMenuProps extends ViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
-  /*
+export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
+  /**
+   * @platform win32
    * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
    */
   shouldFocusOnContainer?: boolean;
 
-  /*
+  /**
+   * @platform win32
    * Whether to focus on the menu when mounted
    */
   shouldFocusOnMount?: boolean;
-  /*
-   ** Callback for when menu item is clicked
+
+  /**
+   * Callback for when menu item is clicked
    */
   onItemClick?: (key: string) => void;
-  /*
-   ** Callback to toggle showContextualMenu to false and close menu on item click
+
+  /**
+   * Callback to toggle showContextualMenu to false and close menu on item click
    */
   setShowMenu?: (showMenu: boolean) => void;
 }
 
 export type ContextualMenuSlotProps = {
   root: ContextualMenuProps;
-  container: ViewProps;
+  container: IViewProps;
 };
 
 export type ContextualMenuRenderData = IRenderData<ContextualMenuSlotProps, ContextualMenuState>;

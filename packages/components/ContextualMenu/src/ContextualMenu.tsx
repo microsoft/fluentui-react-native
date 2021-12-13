@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Platform } from 'react-native';
 import {
   contextualMenuName,
   ContextualMenuProps,
@@ -17,6 +17,8 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
@@ -56,17 +58,23 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    const containerPropsWin32: IViewProps = {
+      accessible: shouldFocusOnContainer,
+      focusable: shouldFocusOnContainer && containerFocus,
+      onBlur: toggleContainerFocus,
+      style: { maxHeight: maxHeight, width: maxWidth },
+    };
+
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        ...rest,
+        accessibilityRole: 'menu',
         setInitialFocus: shouldFocusOnMount,
+        ...rest,
       },
-      container: {
-        accessible: shouldFocusOnContainer,
-        focusable: shouldFocusOnContainer && containerFocus,
-        onBlur: toggleContainerFocus,
-        style: {maxHeight: maxHeight, width: maxWidth}
-      },
+      container: Platform.select({
+        macos: {},
+        default: containerPropsWin32,
+      }),
     });
 
     return { slotProps, state };
@@ -89,9 +97,13 @@ export const ContextualMenu = compose<ContextualMenuType>({
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
-            <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1}} showsVerticalScrollIndicator={true}>
-              {children}
-            </ScrollView>
+            {Platform.OS === 'macos' ? (
+              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
+            ) : (
+              <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
+                {children}
+              </ScrollView>
+            )}
           </Slots.container>
         </Slots.root>
       </CMContext.Provider>

@@ -272,7 +272,7 @@ PODS:
     - DoubleConversion
     - glog
     - RCT-Folly (= 2020.01.13.00)
-  - React-jsiexecutor (0.64.17):
+    - React-jsiexecutor (0.64.17):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2020.01.13.00)
@@ -352,7 +352,7 @@ PODS:
     - React-Core
   - RNSVG (12.1.1):
     - React
-  - SwiftLint (0.43.1)
+  - SwiftLint (0.45.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:

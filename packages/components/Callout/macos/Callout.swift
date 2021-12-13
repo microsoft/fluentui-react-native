@@ -291,12 +291,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private lazy var calloutWindow: CalloutWindow = {
 		let window = CalloutWindow()
 		window.windowLifeCycleDelegate = self
-		window.isReleasedWhenClosed = true
-
-		window.styleMask = [.fullSizeContentView]
-		window.level = .popUpMenu
-		window.backgroundColor = .clear
-		window.isMovableByWindowBackground = false
 
 		let visualEffect = NSVisualEffectView()
 		visualEffect.translatesAutoresizingMaskIntoConstraints = false

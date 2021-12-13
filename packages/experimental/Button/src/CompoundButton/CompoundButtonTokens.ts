@@ -6,7 +6,6 @@ import { CompoundButtonTokens } from './CompoundButton.types';
 export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Theme> = (): CompoundButtonTokens => ({
   small: {
     padding: globalTokens.spacing.s - globalTokens.stroke.width.thin,
-    borderRadius: globalTokens.corner.radius.medium,
     hasContent: {
       paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width.thin,
       minWidth: 64,
