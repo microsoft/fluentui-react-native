@@ -15,4 +15,4 @@ steps:
     parameters:
       applicationType: macos
       platform: macos
-      buildArtifacts: variables['task.Build.status']
+      buildArtifacts: true
