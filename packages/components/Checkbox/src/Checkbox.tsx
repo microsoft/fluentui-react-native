@@ -13,7 +13,7 @@ import {
   useAsToggle,
   useAsPressable,
   useViewCommandFocus,
-  useKeyCallback,
+  useKeyUpProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
@@ -54,7 +54,7 @@ export const Checkbox = compose<ICheckboxType>({
     const buttonRef = useViewCommandFocus(componentRef);
 
     // Handles the "Space" key toggling the Checkbox
-    const onKeyUpSpace = useKeyCallback(toggleChecked, ' ');
+    const onKeyUpProps = useKeyUpProps(toggleChecked, ' ');
 
     const state: ICheckboxState = {
       ...pressable.state,
@@ -90,7 +90,7 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
-        onKeyUp: onKeyUpSpace,
+        ...onKeyUpProps,
       },
       // Temporary checkmark until SVG functionality
       checkmark: { children: '✓' },
