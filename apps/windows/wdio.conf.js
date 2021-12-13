@@ -118,8 +118,8 @@ exports.config = {
    */
   before: function () {
     // not needed for Cucumber
-    require('ts-node').register({ files: true });
-    require('@babel/register');
+    require('ts-node').register({files: true});
+
     browser.maximizeWindow();
   },
   /**
