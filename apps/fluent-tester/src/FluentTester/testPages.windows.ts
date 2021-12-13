@@ -15,8 +15,14 @@ import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 
 export const tests = [
+  {
+    name: 'ActivityIndicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
