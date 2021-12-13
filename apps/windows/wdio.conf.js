@@ -5,8 +5,21 @@ const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
-  runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.uwp.ts'],
+  runner: 'local',
+  /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
+  so we must specify which ones we want to test here. */
+  specs: [
+    '../fluent-tester/src/E2E/Button/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Callout/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Checkbox/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Link/specs/*.win.ts',
+    '../fluent-tester/src/E2E/PersonaCoin/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Pressable/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Separator/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Tabs/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Text/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Theme/specs/*.win.ts',
+  ],
   exclude: [
     /* 'path/to/excluded/files' */
   ],

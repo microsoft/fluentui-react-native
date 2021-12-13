@@ -18,10 +18,10 @@ export interface SubmenuItemState extends ContextualMenuItemState {
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  leftstack: IViewProps;
+  startstack: IViewProps;
   icon: IconProps;
   content: ITextProps;
-  rightstack: IViewProps;
+  endstack: IViewProps;
   chevron: XmlProps;
 }
 

@@ -67,8 +67,9 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        ...rest,
+        accessibilityRole: 'menu',
         setInitialFocus: shouldFocusOnMount,
+        ...rest,
       },
       container: Platform.select({
         macos: {},
@@ -97,7 +98,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         <Slots.root>
           <Slots.container>
             {Platform.OS === 'macos' ? (
-              <FocusZone>{children}</FocusZone>
+              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
             ) : (
               <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
                 {children}
