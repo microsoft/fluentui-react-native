@@ -73,7 +73,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   square?: ButtonTokens;
 }
 
-export interface ButtonComposedCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Text to show on the Button.
    */
@@ -95,9 +95,9 @@ export interface ButtonComposedCoreProps extends Omit<IWithPressableOptions<View
   tooltip?: string;
 }
 
-export type ButtonCoreProps = Omit<ButtonComposedCoreProps, 'innerRef'>;
+export type ButtonCoreProps = Omit<ButtonCorePropsWithInnerRef, 'innerRef'>;
 
-export interface ButtonComposedProps extends ButtonComposedCoreProps {
+export interface ButtonPropsWithInnerRef extends ButtonCorePropsWithInnerRef {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
@@ -129,16 +129,16 @@ export interface ButtonComposedProps extends ButtonComposedCoreProps {
    * @default false
    */
   loading?: boolean;
-  
+
   /**
    * Button contains only icon, there's no text content
    */
   iconOnly?: boolean;
 }
 
-export type ButtonProps = Omit<ButtonComposedProps, 'innerRef'>;
+export type ButtonProps = Omit<ButtonPropsWithInnerRef, 'innerRef'>;
 
-export type ButtonState = IPressableHooks<ButtonComposedProps & React.ComponentPropsWithRef<any>>;
+export type ButtonState = IPressableHooks<ButtonPropsWithInnerRef & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
@@ -147,7 +147,7 @@ export interface ButtonSlotProps {
 }
 
 export interface ButtonType {
-  props: ButtonComposedProps;
+  props: ButtonPropsWithInnerRef;
   tokens: ButtonTokens;
   slotProps: ButtonSlotProps;
 }

@@ -8,7 +8,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { ButtonComposedCoreProps, ButtonCoreProps } from '../Button.types';
+import { ButtonCorePropsWithInnerRef, ButtonCoreProps } from '../Button.types';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -18,7 +18,7 @@ import { ButtonComposedCoreProps, ButtonCoreProps } from '../Button.types';
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonComposedCoreProps): boolean => {
+const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCorePropsWithInnerRef): boolean => {
   return state[layer] || userProps[layer] || (layer === 'hasContent' && userProps.content) || (layer === 'hasIcon' && userProps.icon);
 };
 
@@ -30,7 +30,7 @@ const FABComposed = compose<FABType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonComposedCoreProps, useSlots: UseSlots<FABType>) => {
+  render: (userProps: ButtonCorePropsWithInnerRef, useSlots: UseSlots<FABType>) => {
     const { icon, onClick, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
 
@@ -40,7 +40,7 @@ const FABComposed = compose<FABType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonComposedCoreProps, ...children: React.ReactNode[]) => {
+    return (final: ButtonCorePropsWithInnerRef, ...children: React.ReactNode[]) => {
       const mergedProps = mergeProps(button.props, final);
 
       return (

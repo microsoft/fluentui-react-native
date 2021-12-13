@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { CompoundButtonComposedProps, compoundButtonName, CompoundButtonType, CompoundButtonProps } from './CompoundButton.types';
+import { CompoundButtonPropsWithInnerRef, compoundButtonName, CompoundButtonType, CompoundButtonProps } from './CompoundButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './CompoundButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
@@ -20,7 +20,7 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
     secondaryContent: Text,
     contentContainer: View,
   },
-  render: (userProps: CompoundButtonComposedProps, useSlots: UseSlots<CompoundButtonType>) => {
+  render: (userProps: CompoundButtonPropsWithInnerRef, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
 
@@ -28,7 +28,7 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: CompoundButtonComposedProps, ...children: React.ReactNode[]) => {
+    return (final: CompoundButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
       const { icon, secondaryContent, iconPosition, ...mergedProps } = mergeProps(button.props, final);
 
       return (
