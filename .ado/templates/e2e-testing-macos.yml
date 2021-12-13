@@ -11,8 +11,8 @@ steps:
     condition: succeeded()
     continueOnError: true
 
-  # - template: e2e-publish-artifacts.yml
-  #   parameters:
-  #     applicationType: win32
-  #     platform: win32
-  #     buildArtifacts: variables['task.Build.status']
+  - template: e2e-publish-artifacts.yml
+    parameters:
+      applicationType: macos
+      platform: macos
+      buildArtifacts: variables['task.Build.status']
