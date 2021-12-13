@@ -67,8 +67,9 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        ...rest,
+        accessibilityRole: 'menu',
         setInitialFocus: shouldFocusOnMount,
+        ...rest,
       },
       container: Platform.select({
         macos: {},
