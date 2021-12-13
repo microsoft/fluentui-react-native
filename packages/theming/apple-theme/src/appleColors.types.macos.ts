@@ -215,6 +215,7 @@ interface FluentAppleButtonTokens {
   neutralStroke2: ColorValue;
   neutralForeground3: ColorValue;
   neutralBackground3: ColorValue;
+  transparentBackground: ColorValue;
 }
 
 export type FluentUIApplePalette = FluentUIAppleBasePalette & FluentAppleButtonTokens;
