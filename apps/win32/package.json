@@ -55,7 +55,6 @@
     "tsconfig-paths": "^3.9.0",
     "typescript": "3.8.3",
     "webdriverio": "^6.5.0",
-    "appium-mac2-driver": "0.14.1",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",
     "@wdio/jasmine-framework": "^6.5.0",
