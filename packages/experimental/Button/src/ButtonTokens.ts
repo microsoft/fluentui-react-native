@@ -11,7 +11,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     medium: {
       padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
-      iconSize: 20,
+      iconSize: 16,
       hasContent: {
         paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width.thin,
         variant: 'bodySemibold',
@@ -23,7 +23,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     small: {
       padding: globalTokens.spacing.xs - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
-      iconSize: 20,
+      iconSize: 16,
       hasContent: {
         paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width.thin,
         variant: 'secondaryStandard',
@@ -35,7 +35,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     large: {
       padding: globalTokens.spacing.s - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
-      iconSize: 24,
+      iconSize: 20,
       hasContent: {
         paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width.thin,
         variant: 'subheaderSemibold',
