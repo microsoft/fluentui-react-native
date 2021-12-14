@@ -29,7 +29,7 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 1,
+  bail: 0,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
@@ -88,7 +88,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  //beforeSession: function (config, capabilities, specs) {},
+  beforeSession: function (/*config, capabilities, specs*/) {
+    fs.mkdirSync('./errorShots', {recursive: true});
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
@@ -136,15 +138,18 @@ exports.config = {
   afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
-    //if (results.passed) {
-    //  return;
-    //}
+    if (results.passed) {
+      return;
+    }
+
     // get current test title and clean it, to use it as file name
-    //const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
+
     // build file path
-    //const filePath = './errorShots/' + fileName + '.png';
+    const filePath = './errorShots/' + fileName + '.png';
+
     // save screenshot
-    //browser.saveScreenshot(filePath);
+    browser.saveScreenshot(filePath);
   },
 
   /**
