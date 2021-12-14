@@ -276,6 +276,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     neutralStroke2: macOSAliasColorTokens.neutralStroke2,
     neutralForeground3: macOSAliasColorTokens.neutralForeground3,
     neutralBackground3: macOSAliasColorTokens.neutralBackground3,
+    neutralStrokeDisabled: macOSAliasColorTokens.neutralStrokeDisabled,
     transparentBackground: macOSAliasColorTokens.transparentBackground,
   };
 }
@@ -408,7 +409,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
     defaultPressedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultDisabledBackground: fluentUIApple.defaultBackgroundDisabled,
+    defaultDisabledBackground: fluentUIApple.neutralStrokeDisabled,
     defaultDisabledBorder: 'transparent',
     defaultDisabledContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
     defaultDisabledIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
