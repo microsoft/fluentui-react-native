@@ -10,6 +10,8 @@ Basic examples:
 
 ```jsx
 <Button>Text</Button>
+<Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} />
+<Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</Button>
 <Button appearance="primary">Text</Button>
 <Button disabled>Text</Button>
 <Button size="small">Text</Button>
@@ -30,17 +32,17 @@ The `Button` component has several apparance variants depending on where it's be
 
 ### Icon
 
-The `Button` component can include an `icon` that appears before or after its `children`. If an `icon` is provided without any `children`, then the `Button` becomes an icon-only `Button`.
+The `Button` component can include an `icon` that appears before or after its `children`. If an `icon` is provided without any other `children` passed into `Button`, then the `Button` becomes an icon-only `Button`.
 
 ### Shape
 
-- shape="rounded": The button as rounded corners. This is the default is shape is not set.
+- shape="rounded": The button as rounded corners. This is the default if shape is not set.
 - shape="circular": The button has completely round corners. A button of equal width and height will be a circle.
 - shape="square": The button has right-angle corners.
 
 ### Sizes
 
-The `Button` component supports different sizing with at least three different sizes: `small`, `medium` (default) and `large`.
+The `Button` component supports different sizing with at least three different sizes: `small`, `medium`, and `large`. `Small` is the default on `win32`, `medium` is the default on other platforms.
 
 ### Block
 
@@ -88,22 +90,22 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
   block?: boolean;
 
   /**
-   * A button can show that it cannot be interacted with.
-   * @default false
-   */
-  disabled?: boolean;
-
-  /**
    * A button can format its icon to appear before or after its content.
    * @default 'before'
    */
   iconPosition?: 'before' | 'after';
 
-  // /**
-  //  * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
-  //  * be interacted with.
-  //  * @default false
-  //  */
+  /**
+   * Button contains only icon, there's no text content
+   * Must be set for button to style correctly when button has not content.
+   */
+  iconOnly?: boolean;
+
+  /**
+   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
+   * be interacted with.
+   * @default false
+   */
   loading?: boolean;
 
   /**
@@ -117,6 +119,16 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
    * @default 'medium'
    */
   size?: 'small' | 'medium' | 'large';
+
+  /**
+   * Text that should show in a tooltip when the user hovers over a button.
+   */
+  tooltip?: string;
+
+  /**
+   * A callback to call on button click event
+   */
+  onClick?: () => void;
 };
 ```
 
