@@ -1,10 +1,5 @@
 steps:
   - script: |
-      yarn macos
-    workingDirectory: apps/macos
-    displayName: "build and run the MacOS test app"
-
-  - script: |
       yarn e2etest
     workingDirectory: apps/macos
     displayName: "Run MacOS E2E Tests"
