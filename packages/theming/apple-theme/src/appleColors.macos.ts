@@ -268,6 +268,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     brandedBackground: macOSAliasColorTokens.brandBackground,
     brandBackgroundPressed: macOSAliasColorTokens.brandBackgroundPressed,
     brandBackgroundHovered: macOSAliasColorTokens.brandBackgroundHover,
+    defaultBackgroundDisabled: macOSAliasColorTokens.neutralBackgroundDisabled,
     neutralBackgroundInverted: macOSAliasColorTokens.neutralBackgroundInverted,
     neutralForegroundInverted: macOSAliasColorTokens.neutralForegroundInverted,
     neutralForeground2: macOSAliasColorTokens.neutralForeground2,
@@ -407,7 +408,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
     defaultPressedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultDisabledBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
+    defaultDisabledBackground: fluentUIApple.defaultBackgroundDisabled,
     defaultDisabledBorder: 'transparent',
     defaultDisabledContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
     defaultDisabledIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
