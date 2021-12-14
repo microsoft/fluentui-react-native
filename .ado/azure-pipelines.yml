@@ -90,6 +90,22 @@ jobs:
         persistCredentials: true
 
       - script: |
+          cd .. && pwd && ls
+        displayName: '** Path + Home Directory Contents'
+
+      - script: |
+          cd .. && cd .. && pwd && ls
+        displayName: '** Path + Home Directory Contents'
+
+      - script: |
+          cd .. && cd .. && cd .. && pwd && ls
+        displayName: '** Path + Home Directory Contents'
+
+      - script: |
+          cd .. && cd .. && cd .. && cd .. && pwd && ls
+        displayName: '** Path + Home Directory Contents'
+
+      - script: |
           pwd && ls
         displayName: '** Path + Home Directory Contents'
 
