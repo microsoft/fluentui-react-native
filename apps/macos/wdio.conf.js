@@ -99,8 +99,6 @@ exports.config = {
    */
   before: function () {
     require('ts-node').register({files: true});
-
-    browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
