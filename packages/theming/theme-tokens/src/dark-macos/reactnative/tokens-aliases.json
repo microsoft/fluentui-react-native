@@ -20,10 +20,10 @@
     "strokeWidth": 1
   },
   "brandBackground": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a",
-    "fillColorSelected": "#13458f"
+    "fillColorRest": "#0086F0",
+    "fillColorHover": "#0078D4",
+    "fillColorPressed": "#6CB8F6",
+    "fillColorSelected": "#3AA0F3"
   },
   "brandBackground2": {
     "fillColorRest": "#d2e0f4"
