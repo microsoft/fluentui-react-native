@@ -90,8 +90,8 @@ jobs:
         persistCredentials: true
 
       - script: |
-          cd .. && cd .. && cd .. && pwd && ls
-        displayName: '** Path + Home Directory Contents'
+          brew install tccutil
+        displayName: '** Download tccutil'
 
       - script: |
           cd /Applications/ && ls && pwd
