@@ -25,7 +25,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     const iconProps = createIconProps(userProps.icon);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, layer => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
