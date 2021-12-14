@@ -90,8 +90,8 @@ jobs:
         persistCredentials: true
 
       - script: |
-          ls
-        displayName: 'Home Directory Contents'
+          pwd && ls
+        displayName: '** Path + Home Directory Contents'
 
       # Clean Derived Data
       - script: |
