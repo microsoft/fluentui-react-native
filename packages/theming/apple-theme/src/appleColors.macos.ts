@@ -264,6 +264,10 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
       light: '#2525253F',
       dark: '#5656567F',
     }),
+
+    brandedBackground: macOSAliasColorTokens.brandBackground,
+    brandBackgroundPressed: macOSAliasColorTokens.brandBackgroundPressed,
+    brandBackgroundHovered: macOSAliasColorTokens.brandBackgroundHover,
     neutralBackgroundInverted: macOSAliasColorTokens.neutralBackgroundInverted,
     neutralForegroundInverted: macOSAliasColorTokens.neutralForegroundInverted,
     neutralForeground2: macOSAliasColorTokens.neutralForeground2,
@@ -276,7 +280,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
 }
 
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
- * The fallback palette is loaded while we wait for the native theming module to load, or if the module is not found
+ * The fallback palette is loaded while we wait for  the native theming module to load, or if the module is not found
  */
 export function fallbackApplePalette(): ThemeColorDefinition {
   const fluentUIApple = getFluentUIApplePalette();
@@ -433,12 +437,12 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     ghostDisabledContent: fluentUIApple.brandForegroundDisabled,
     ghostDisabledIcon: fluentUIApple.brandForegroundDisabled,
 
-    brandedBackground: fluentUIApple.communicationBlue,
+    brandedBackground: fluentUIApple.brandedBackground,
     brandedBorder: 'transparent',
     brandedContent: fluentUIApple.neutralForegroundInverted,
     brandedIcon: fluentUIApple.neutralForegroundInverted,
 
-    brandedHoveredBackground: fluentUIApple.communicationBlue,
+    brandedHoveredBackground: fluentUIApple.brandBackgroundHovered,
     brandedHoveredBorder: 'transparent',
     brandedHoveredContent: fluentUIApple.neutralForegroundInverted,
     brandedHoveredIcon: fluentUIApple.neutralForegroundInverted,
@@ -448,7 +452,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     brandedFocusedContent: fluentUIApple.neutralForegroundInverted,
     brandedFocusedIcon: fluentUIApple.neutralForegroundInverted,
 
-    brandedPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
+    brandedPressedBackground: fluentUIApple.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     brandedPressedBorder: 'transparent',
     brandedPressedContent: fluentUIApple.neutralForegroundInverted,
     brandedPressedIcon: fluentUIApple.neutralForegroundInverted,
