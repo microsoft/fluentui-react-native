@@ -38,8 +38,8 @@
     "webpack-dev-server": "3.10.3"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.63",
-    "reactNativeDevVersion": "0.63.0",
+    "reactNativeVersion": "^0.64",
+    "reactNativeDevVersion": "0.64.0",
     "kitType": "app",
     "capabilities": [
       "core",

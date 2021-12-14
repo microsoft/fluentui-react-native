@@ -1,10 +1,11 @@
 import { IFilterMask } from './filter.types';
-import { TextProps, ViewProps, ImageProps } from 'react-native-web';
+import { TextProps, ViewProps, ImageProps } from 'react-native';
+import { TextProps as TextPropsWeb, ViewProps as ViewPropsWeb, ImageProps as ImagePropsWeb } from 'react-native-web';
 
 // export core interface types
-export type ITextProps = TextProps;
-export type IViewProps = ViewProps;
-export type IImageProps = ImageProps;
+export type ITextProps = TextProps & Partial<TextPropsWeb>;
+export type IViewProps = ViewProps & Partial<ViewPropsWeb>;
+export type IImageProps = ImageProps & Partial<ImagePropsWeb>;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,

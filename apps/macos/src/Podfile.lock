@@ -272,7 +272,7 @@ PODS:
     - DoubleConversion
     - glog
     - RCT-Folly (= 2020.01.13.00)
-  - React-jsiexecutor (0.64.17):
+    - React-jsiexecutor (0.64.17):
     - DoubleConversion
     - glog
     - RCT-Folly (= 2020.01.13.00)

@@ -10,9 +10,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
       borderWidth: 2,
     },
     root: {
-      accessible: true,
-      accessibilityRole: 'menuitem',
-      focusable: true,
+      enableFocusRing: false,
       style: {
         display: 'flex',
         alignItems: 'flex-start',
@@ -50,7 +48,7 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
           color: 'menuItemTextHovered',
         },
       },
-      hovered: {
+      focused: {
         tokens: {
           color: 'menuItemTextHovered',
           backgroundColor: 'menuItemBackgroundHovered',
