@@ -13,7 +13,6 @@ exports[`CompoundButton default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

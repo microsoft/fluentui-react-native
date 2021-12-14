@@ -1,12 +1,10 @@
-const fs = require('fs');
-
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/Button/specs/*.macos.ts'],
+  specs: ['../fluent-tester/src/E2E/**/specs/*.macos.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
