@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
