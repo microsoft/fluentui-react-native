@@ -141,7 +141,64 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
 
 ### Styling Tokens
 
-TBD once we decide on tokens set.
+```ts
+export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+  /**
+   * The icon color.
+   */
+  iconColor?: ColorValue;
+
+  /**
+   * The icon color when hovering over the Button.
+   */
+  iconColorHovered?: ColorValue;
+
+  /**
+   * The icon color when the Button is being pressed.
+   */
+  iconColorPressed?: ColorValue;
+
+  /**
+   * The size of the icon.
+   */
+  iconSize?: number;
+
+  /**
+   * The weight of the lines used when drawing the icon.
+   */
+  iconWeight?: number;
+
+  /**
+   * The width of the button.
+   */
+  width?: ViewStyle['width'];
+
+  /**
+   * The amount of spacing between an icon and the content, in pixels
+   */
+  spacingIconContent?: number;
+
+  /**
+   * States that can be applied to a button.
+   * These can be used to modify styles of the button when under the specified state.
+   */
+  hovered?: ButtonTokens;
+  focused?: ButtonTokens;
+  pressed?: ButtonTokens;
+  disabled?: ButtonTokens;
+  hasContent?: ButtonTokens;
+  hasIcon?: ButtonTokens;
+  primary?: ButtonTokens;
+  subtle?: ButtonTokens;
+  block?: ButtonTokens;
+  small?: ButtonTokens;
+  medium?: ButtonTokens;
+  large?: ButtonTokens;
+  rounded?: ButtonTokens;
+  circular?: ButtonTokens;
+  square?: ButtonTokens;
+}
+```
 
 ## Behaviors
 
