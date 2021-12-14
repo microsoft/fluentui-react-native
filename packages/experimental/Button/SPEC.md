@@ -109,6 +109,13 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
   loading?: boolean;
 
   /**
+   * A ref to access the IButton interface. Use this to access the public methods and properties of the component.
+   *
+   * NOTE: Callbacks will not invoke focus on click behavior, caller will need to add that behavior if desired.
+   */
+  ref?: React.ForwardedRef<IFocusable>;
+
+  /**
    * A button can be rounded, circular, or square.
    * @default 'rounded'
    */
