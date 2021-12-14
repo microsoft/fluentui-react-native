@@ -8,5 +8,5 @@ export * from './useAsToggle';
 export * from './Pressability/Pressability.types';
 export * from './Pressability/InternalTypes';
 export * from './Pressability/CoreEventTypes';
-export * from './useKeyCallback';
+export * from './useKeyProps';
 export * from './useOnPressWithFocus';
