@@ -6,6 +6,11 @@ steps:
     condition: succeeded()
     continueOnError: true
 
+  - script: |
+      ls
+    workingDirectory: apps/macos
+    displayName: 'List contents of apps/macos'
+
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: macos
