@@ -110,7 +110,7 @@ jobs:
         displayName: '** Path + Home Directory Contents'
 
       - script: |
-          cd /Applications && ls && pwd
+          cd /Applications/Xcode_13.0/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents && ls && pwd
         displayName: '** Applications'
 
       # Clean Derived Data
