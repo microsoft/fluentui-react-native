@@ -98,12 +98,8 @@ jobs:
         displayName: '** Applications'
 
       - script: |
-          cd /Applications/Xcode_13.0/ && ls && pwd
+          cd /Applications/Xcode_13.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents && ls && pwd
         displayName: '** Applications'
-
-      #- script: |
-      #    cd /Applications/Xcode_13.0/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents && ls && pwd
-      #  displayName: '** Applications'
 
       # Clean Derived Data
       - script: |
