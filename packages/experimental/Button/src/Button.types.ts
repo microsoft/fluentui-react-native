@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewStyle, ColorValue, ViewProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
@@ -73,7 +73,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   square?: ButtonTokens;
 }
 
-export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Text to show on the Button.
    */
@@ -84,10 +84,7 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
    */
   icon?: IconSourcesType;
 
-  /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
-   */
-  componentRef?: React.RefObject<IFocusable>;
+  innerRef?: React.ForwardedRef<IFocusable>;
 
   /**
    * A callback to call on button click event
@@ -98,7 +95,9 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
   tooltip?: string;
 }
 
-export interface ButtonProps extends ButtonCoreProps {
+export type ButtonCoreProps = Omit<ButtonCorePropsWithInnerRef, 'innerRef'>;
+
+export interface ButtonPropsWithInnerRef extends ButtonCorePropsWithInnerRef {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
@@ -137,7 +136,9 @@ export interface ButtonProps extends ButtonCoreProps {
   iconOnly?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+export type ButtonProps = Omit<ButtonPropsWithInnerRef, 'innerRef'>;
+
+export type ButtonState = IPressableHooks<ButtonPropsWithInnerRef & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
@@ -146,7 +147,7 @@ export interface ButtonSlotProps {
 }
 
 export interface ButtonType {
-  props: ButtonProps;
+  props: ButtonPropsWithInnerRef;
   tokens: ButtonTokens;
   slotProps: ButtonSlotProps;
 }
