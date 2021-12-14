@@ -109,6 +109,10 @@ jobs:
           pwd && ls
         displayName: '** Path + Home Directory Contents'
 
+      - script: |
+          cd /Applications && ls && pwd
+        displayName: '** Applications'
+
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
