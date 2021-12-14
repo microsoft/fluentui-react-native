@@ -216,7 +216,7 @@ Every component should have one (or more) snapshot tests to ensure that the data
 
 - Create test file under the \_\_tests\_\_ folder in your component's root directory.
 
-  packages/components/Component/src/\_\_tests\_\_/Component.test.win32.tsx
+  packages/components/Component/src/\_\_tests\_\_/Component.test.tsx
 
 - Import [react-test-renderer](https://reactjs.org/docs/test-renderer.html)
 
