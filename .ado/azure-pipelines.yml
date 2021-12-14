@@ -90,28 +90,16 @@ jobs:
         persistCredentials: true
 
       - script: |
-          cd .. && pwd && ls
-        displayName: '** Path + Home Directory Contents'
-
-      - script: |
-          cd .. && cd .. && pwd && ls
-        displayName: '** Path + Home Directory Contents'
-
-      - script: |
           cd .. && cd .. && cd .. && pwd && ls
         displayName: '** Path + Home Directory Contents'
 
       - script: |
-          cd .. && cd .. && cd .. && cd .. && pwd && ls
-        displayName: '** Path + Home Directory Contents'
-
-      - script: |
-          pwd && ls
-        displayName: '** Path + Home Directory Contents'
-
-      - script: |
-          cd /Applications/Xcode_13.0/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents && ls && pwd
+          cd /Applications/Xcode_13.0/ && ls && pwd
         displayName: '** Applications'
+
+      #- script: |
+      #    cd /Applications/Xcode_13.0/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents && ls && pwd
+      #  displayName: '** Applications'
 
       # Clean Derived Data
       - script: |
