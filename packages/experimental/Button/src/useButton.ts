@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyUpProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { ButtonProps, ButtonState } from './Button.types';
 import { memoize } from '@fluentui-react-native/framework';
 
@@ -9,7 +9,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
   const { onClick, componentRef = defaultComponentRef, disabled, loading, ...rest } = props;
   const onClickWithFocus = useOnPressWithFocus(componentRef, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
-  const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
+  const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
 
   return {
     props: {
@@ -22,7 +22,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
       enableFocusRing: true,
       focusable: true,
       ref: useViewCommandFocus(componentRef),
-      onKeyUp: onKeyUp,
+      ...onKeyUpProps,
       iconPosition: props.iconPosition || 'before',
       loading,
     },
