@@ -89,6 +89,10 @@ jobs:
       - checkout: self
         persistCredentials: true
 
+      - script: |
+          ls
+        displayName: 'Home Directory Contents'
+
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
