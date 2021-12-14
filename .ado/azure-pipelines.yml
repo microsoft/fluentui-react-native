@@ -94,6 +94,10 @@ jobs:
         displayName: '** Path + Home Directory Contents'
 
       - script: |
+          cd /Applications/ && ls && pwd
+        displayName: '** Applications'
+
+      - script: |
           cd /Applications/Xcode_13.0/ && ls && pwd
         displayName: '** Applications'
 
