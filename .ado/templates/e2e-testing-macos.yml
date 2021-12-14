@@ -11,6 +11,16 @@ steps:
     workingDirectory: apps/macos
     displayName: 'List contents of apps/macos'
 
+  - script: |
+      cd reports && ls
+    workingDirectory: apps/macos
+    displayName: 'List contents reports'
+
+  - script: |
+      cd errorShots && ls
+    workingDirectory: apps/macos
+    displayName: 'List contents of errorShots'
+
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: macos
