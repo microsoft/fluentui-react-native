@@ -54,11 +54,6 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
 
     const onItemHoverIn = React.useCallback(() => {
       componentRef.current.focus();
-      context?.setSubmenuItemHovered && context.setSubmenuItemHovered(false);
-      // dismiss submenu
-      if (!disabled && context?.isSubmenuOpen) {
-        context?.dismissSubmenu && context.dismissSubmenu();
-      }
     }, [componentRef, disabled, context]);
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
