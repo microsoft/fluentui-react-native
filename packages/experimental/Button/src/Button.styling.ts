@@ -1,9 +1,9 @@
 import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonPropsWithInnerRef, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles, shadowStyles, FontTokens } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
-import { Platform } from 'react-native';
+import { Platform, ColorValue } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIcon'];
@@ -49,18 +49,9 @@ export const stylingSettings: UseStylingOptions<ButtonPropsWithInnerRef, ButtonS
     ),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => {
-        const spacingIconContent = tokens.spacingIconContent
-          ? {
-              marginLeft: tokens.spacingIconContent,
-              marginRight: tokens.spacingIconContent,
-            }
-          : {};
         return {
           style: {
-            color: tokens.color,
-            ...getTextMarginAdjustment(),
-            ...spacingIconContent,
-            ...fontStyles.from(tokens, theme),
+            ...contentStyling(tokens, theme, tokens.color, tokens),
           },
         };
       },
@@ -87,4 +78,19 @@ export const getDefaultSize = (): ButtonSize => {
   }
 
   return 'medium';
+};
+
+export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {
+  const spacingIconContent = tokens.spacingIconContent
+    ? {
+        marginLeft: tokens.spacingIconContent,
+        marginRight: tokens.spacingIconContent,
+      }
+    : {};
+  return {
+    color: contentColor,
+    ...getTextMarginAdjustment(),
+    ...spacingIconContent,
+    ...fontStyles.from(fontStylesTokens, theme),
+  };
 };

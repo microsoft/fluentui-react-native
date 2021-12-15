@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed duplicated content and icon for CompoundButton",
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}

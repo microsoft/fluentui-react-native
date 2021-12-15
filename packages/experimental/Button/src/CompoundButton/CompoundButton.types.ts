@@ -24,7 +24,7 @@ export interface CompoundButtonTokens extends ButtonTokens {
   hasContent?: CompoundButtonTokens;
 }
 
-export interface CompoundButtonPropsWithInnerRef extends ButtonPropsWithInnerRef {
+export interface CompoundButtonPropsWithInnerRef extends Omit<ButtonPropsWithInnerRef, 'iconOnly'> {
   /**
    * Second line of text that describes the action this button takes.
    */

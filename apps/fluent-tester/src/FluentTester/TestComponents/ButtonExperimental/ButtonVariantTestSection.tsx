@@ -1,6 +1,6 @@
 import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
@@ -41,6 +41,10 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       </CompoundButton>
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
+      </CompoundButton>
+      <CompoundButton secondaryContent="secondaryContent" size="large" style={commonTestStyles.vmargin}>
+        Compound Button
+        <Text>Child element</Text>
       </CompoundButton>
       <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
       <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin}>
