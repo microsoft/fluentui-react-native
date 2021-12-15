@@ -211,7 +211,6 @@ interface FluentAppleButtonTokens {
   brandBackgroundPressed: ColorValue;
   brandForegroundDisabled: ColorValue;
   brandBackgroundDisabled: ColorValue;
-  defaultBackgroundDisabled: ColorValue;
   neutralStrokeDisabled: ColorValue;
   neutralBackgroundInverted: ColorValue;
   neutralForegroundInverted: ColorValue;

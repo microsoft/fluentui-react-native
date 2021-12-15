@@ -268,7 +268,6 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     brandedBackground: macOSAliasColorTokens.brandBackground,
     brandBackgroundPressed: macOSAliasColorTokens.brandBackgroundPressed,
     brandBackgroundHovered: macOSAliasColorTokens.brandBackgroundHover,
-    defaultBackgroundDisabled: macOSAliasColorTokens.neutralBackgroundDisabled,
     neutralBackgroundInverted: macOSAliasColorTokens.neutralBackgroundInverted,
     neutralForegroundInverted: macOSAliasColorTokens.neutralForegroundInverted,
     neutralForeground2: macOSAliasColorTokens.neutralForeground2,
