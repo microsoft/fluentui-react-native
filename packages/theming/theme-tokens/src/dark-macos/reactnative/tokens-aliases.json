@@ -125,7 +125,7 @@
     "fillColorRest": "#333333"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#141414"
+    "fillColorRest": "#D6D6D6"
   },
   "neutralBackgroundInverted": {
     "fillColorRest": "#ffffff"
