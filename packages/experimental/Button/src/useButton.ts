@@ -20,6 +20,7 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
       accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(!!disabled || !!loading),
+      enableFocusRing: true,
       focusable: true,
       ref: useViewCommandFocus(ref),
       ...onKeyUpProps,
