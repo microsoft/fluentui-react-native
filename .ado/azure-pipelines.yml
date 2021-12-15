@@ -90,7 +90,7 @@ jobs:
         persistCredentials: true
 
       - script: |
-          brew install tccutil
+          brew install tccutil.py
         displayName: '** Download tccutil'
 
       - script: |
