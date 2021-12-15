@@ -9,6 +9,7 @@ exports[`CompoundButton default 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
