@@ -52,27 +52,16 @@ export const SubmenuItem = compose<SubmenuItemType>({
     });
 
     const onItemHoverOut = React.useCallback((e) => {
-      // context?.dismissSubmenu && context.dismissSubmenu();
-      if (context.dismissSubmenu) {
-        console.log('hit');
-        context.dismissSubmenu();
-      } else {
-        console.log('no hit');
-      }
+      context?.dismissSubmenu && context.dismissSubmenu();
       userProps.onHoverOut && userProps.onHoverOut(e);
     }, []);
 
     const onItemPress = React.useCallback(() => {
       if (!disabled) {
-        onClick ? onClick() : context?.onItemClick(itemKey);
-        // context?.dismissSubmenu && context.dismissSubmenu();
+        onClick && onClick();
+        context?.onItemClick && context.onItemClick(itemKey);
+        context?.dismissSubmenu && context.dismissSubmenu();
         context?.onDismissMenu();
-        if (context.dismissSubmenu) {
-          console.log('hit');
-          context.dismissSubmenu();
-        } else {
-          console.log('no hit');
-        }
       }
     }, [context, disabled, itemKey, onClick]);
 
@@ -95,6 +84,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const { onMouseEnter, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseEnterModified = React.useCallback(
       (e) => {
+        componentRef.current.focus();
         onMouseEnter && onMouseEnter(e);
       },
       [onMouseEnter],

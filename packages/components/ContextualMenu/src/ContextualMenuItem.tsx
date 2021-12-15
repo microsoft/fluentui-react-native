@@ -43,7 +43,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       (e) => {
         if (!disabled) {
           context?.onDismissMenu();
-          onClick ? onClick() : context?.onItemClick(itemKey);
+          onClick && onClick();
+          context?.onItemClick && context.onItemClick(itemKey);
           e.stopPropagation();
         }
       },
@@ -53,7 +54,13 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const cmRef = useViewCommandFocus(componentRef);
 
     const onItemHoverIn = React.useCallback(() => {
-      componentRef.current.focus();
+      if (!disabled) {
+        componentRef.current.focus();
+        // dismiss submenu
+        if (context?.isSubmenuOpen) {
+          context?.dismissSubmenu && context.dismissSubmenu();
+        }
+      }
     }, [componentRef, disabled, context]);
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
@@ -69,38 +76,33 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       icon: !!icon,
     };
 
-    /*
+    /**
      * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
-     * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+     * onMouseLeave is overridden to explicitly call onBlur to simulate removing focus
+     * To achieve this, we override the onMouseLEave handler returned by useAsPressable, and replace it with our own. Inside our own
+     * onMouseLeave handler, we call useAsPressable's onMouseLEave handler,
      */
-    const onMouseEnter = React.useCallback(
+    const { onMouseLeave, ...restPressableProps } = pressable.props;
+    const onMouseLeaveModified = React.useCallback(
       (e) => {
-        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
-        pressable.props.onFocus && pressable.props.onFocus(e);
-        e.stopPropagation();
+        pressablePropsModified.onBlur(e);
+        onMouseLeave && onMouseLeave(e);
       },
-      [pressable],
+      [onMouseLeave],
     );
-
-    const onMouseLeave = React.useCallback(
-      (e) => {
-        pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
-        pressable.props.onBlur && pressable.props.onBlur(e);
-        e.stopPropagation();
-      },
-      [pressable],
-    );
+    const pressablePropsModified = {
+      onMouseLeave: onMouseLeaveModified,
+      ...restPressableProps,
+    };
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
     const slotProps = mergeSettings<ContextualMenuItemSlotProps>(styleProps, {
       root: {
-        ...pressable.props,
         ref: cmRef,
+        ...pressablePropsModified,
         ...onKeyUpProps,
-        onMouseEnter,
-        onMouseLeave,
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',
