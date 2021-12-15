@@ -94,12 +94,8 @@ jobs:
         displayName: '** Download tccutil'
 
       - script: |
-          cd /Applications/ && ls && pwd
-        displayName: '** Applications'
-
-      - script: |
-          cd /Applications/Xcode_13.0.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents && ls && pwd
-        displayName: '** Applications'
+          sudo tccutil.py --enable com.apple.dt.Xcode-Helper
+        displayName: '** Enabling appium for mac as accessibility app'
 
       # Clean Derived Data
       - script: |
