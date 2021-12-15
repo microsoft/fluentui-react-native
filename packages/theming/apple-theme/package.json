@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.9.0 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.1.5",
     "@fluentui-react-native/theme": ">=0.6.0 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.10.0",
     "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0",
     "@fluentui-react-native/theming-utils": "^0.8.0"
   },

@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Consume mac tokens in Button",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "67026167+chiuam@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
