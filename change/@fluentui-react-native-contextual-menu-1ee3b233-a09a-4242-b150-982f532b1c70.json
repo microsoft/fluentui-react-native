@@ -1,7 +1,7 @@
 {
   "type": "patch",
   "comment": "Escape key closes ContextualMenu on macOS",
-  "packageName": "@fluentui-react-native/callout",
+  "packageName": "@fluentui-react-native/contextual-menu",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
 }
