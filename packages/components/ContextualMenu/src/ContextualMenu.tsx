@@ -12,13 +12,12 @@ import {
 } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
@@ -58,13 +57,6 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const containerPropsWin32: IViewProps = {
-      accessible: shouldFocusOnContainer,
-      focusable: shouldFocusOnContainer && containerFocus,
-      onBlur: toggleContainerFocus,
-      style: { maxHeight: maxHeight, width: maxWidth },
-    };
-
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
         accessibilityRole: 'menu',
@@ -72,8 +64,16 @@ export const ContextualMenu = compose<ContextualMenuType>({
         ...rest,
       },
       container: Platform.select({
-        macos: {},
-        default: containerPropsWin32,
+        macos: {
+          ...useKeyDownProps(dismissCallback, 'Escape'),
+        },
+        default: {
+          // win32
+          accessible: shouldFocusOnContainer,
+          focusable: shouldFocusOnContainer && containerFocus,
+          onBlur: toggleContainerFocus,
+          style: { maxHeight: maxHeight, width: maxWidth },
+        },
       }),
     });
 
