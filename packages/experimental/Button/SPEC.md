@@ -67,7 +67,7 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
    * - 'primary': Emphasizes the button as a primary action.
    * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
    */
-  appearance?: 'primary' | 'outline' | 'subtle' | 'transparent';
+  appearance?: 'primary' | 'outline' | 'subtle';
 
   /**
    * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
