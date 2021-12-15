@@ -49,7 +49,7 @@ Primary and Stealth buttons now map to `Button`:
 
 ### Props renamed to align with ReactNative
 
-No `Button` specific renames. See [this porting guide](https://github.com/microsoft/fluentui-react-native/tree/master/docs/pages/Guides/PortingFromFluentUI.md) for general guidance.
+No `Button` specific renames. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance.
 
 ### Prop differences due to technical differences and limitations
 
