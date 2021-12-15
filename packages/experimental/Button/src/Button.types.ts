@@ -75,14 +75,14 @@ export interface ButtonTokens extends ButtonCoreTokens {
 
 export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
-   * Text to show on the Button.
-   */
-  content?: string;
-
-  /*
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
+
+  /**
+   * Button contains only icon, there's no text content
+   */
+  iconOnly?: boolean;
 
   innerRef?: React.ForwardedRef<IFocusable>;
 
@@ -129,11 +129,6 @@ export interface ButtonPropsWithInnerRef extends ButtonCorePropsWithInnerRef {
    * @default false
    */
   loading?: boolean;
-
-  /**
-   * Button contains only icon, there's no text content
-   */
-  iconOnly?: boolean;
 }
 
 export type ButtonProps = Omit<ButtonPropsWithInnerRef, 'innerRef'>;

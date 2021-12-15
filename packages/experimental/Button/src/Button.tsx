@@ -47,10 +47,23 @@ const ButtonComposed = compose<ButtonType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const { icon, iconPosition, loading, ...mergedProps } = mergeProps(button.props, final);
+    return (final: ButtonPropsWithInnerRef, children: React.ReactNode[]) => {
+      const { icon, iconPosition, loading, accessiblityLabel, ...mergedProps } = mergeProps(button.props, final);
+      let childText = '';
+      if (accessiblityLabel === undefined) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            if (childText.length !== 0) {
+              childText += ' ';
+            }
+            childText += child;
+          }
+        });
+      }
+      const label = accessiblityLabel ? accessiblityLabel : childText;
+
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {loading && <ActivityIndicator />}
           {React.Children.map(children, (child) =>
