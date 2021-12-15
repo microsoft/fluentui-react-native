@@ -89,18 +89,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - script: |
-          csrutil disable && reboot
-        displayName: '** Disable SIP & Reboot'
-
-      - script: |
-          brew install tccutil
-        displayName: '** Download tccutil'
-
-      - script: |
-          sudo tccutil.py --enable com.apple.dt.Xcode-Helper
-        displayName: '** Enabling appium for mac as accessibility app'
-
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
