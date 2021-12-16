@@ -1,4 +1,4 @@
-import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
+import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonPropsWithInnerRef, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
@@ -13,7 +13,6 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'primary',
   'subtle',
   'hovered',
-  'focused',
   'pressed',
   'disabled',
   'small',
@@ -24,9 +23,10 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'rounded',
   'circular',
   'square',
+  'focused',
 ];
 
-export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
+export const stylingSettings: UseStylingOptions<ButtonPropsWithInnerRef, ButtonSlotProps, ButtonTokens> = {
   tokens: [defaultButtonTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
