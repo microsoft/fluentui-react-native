@@ -1,19 +1,26 @@
 # E2E Testing Overview
 
-## Prerequisites
+## Win32/UWP Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher.
 - [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
-- [Java 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Optional) - Used for generating in-depth after-action reports. More information in "Debugging E2E Failures" section below.
-- [Allure Command-Line](https://www.npmjs.com/package/allure-commandline) (Optional) - Used for creating in-depth reporting.
-  - `npm install -g allure-commandline`
 
 ### UWP Additional Prerequisites
 
 - [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/README.md)
+
+## MacOS Prerequisites
+
+- MacOS 10.15 or later
+- XCode 12 or later should be installed
+- XCode Helper app should be enabled for Accessibility access. The app itself is usually found at: _/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/Xcode Helper.app_.
+
+In order to enable Accessibility acess, simply open the parent folder in finder:
+_open /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/_
+and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> Accessibility** list of your **System Preferences**. This action must only be done once.
 
 ## E2E Project Structure
 
@@ -43,6 +50,20 @@
    - C:\repo\fluentui-react-native\apps\windows> `yarn start`
 3. Open a new command prompt and run the E2E tests
    - C:\repo\fluentui-react-native\apps\windows> `yarn e2etest`
+
+_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
+
+## MacOS Steps
+
+1. Follow step #1 from "Win32 Steps" section above.
+2. POD Install
+   - C:\repo\fluentui-react-native> `cd apps\macos\src`
+   - C:\repo\fluentui-react-native\apps\macos\src> `pod install`
+3. Start the server
+   - C:\repo\fluentui-react-native> `cd apps\macos`
+   - C:\repo\fluentui-react-native\apps\macos> `yarn start`
+4. Open a new command prompt and run the E2E tests
+   - C:\repo\fluentui-react-native\apps\macos> `yarn e2etest`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
