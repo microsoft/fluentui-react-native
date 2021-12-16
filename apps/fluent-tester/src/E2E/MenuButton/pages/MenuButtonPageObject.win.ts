@@ -4,7 +4,7 @@ import {
   HOMEPAGE_MENU_BUTTON,
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../FluentTester/TestComponents/MenuButton/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class MenuButtonPageObject extends BasePage {
   /*****************************************/

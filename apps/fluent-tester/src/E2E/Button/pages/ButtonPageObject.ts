@@ -4,7 +4,7 @@ import {
   BUTTON_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_BUTTON_BUTTON,
 } from '../../../FluentTester/TestComponents/Button/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class ButtonPageObject extends BasePage {
   /*****************************************/

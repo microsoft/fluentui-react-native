@@ -3,7 +3,7 @@ import {
   PERSONACOIN_TEST_COMPONENT,
   HOMEPAGE_PERSONACOIN_BUTTON,
 } from '../../../FluentTester/TestComponents/PersonaCoin/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class PersonaCoinPageObject extends BasePage {
   /*****************************************/

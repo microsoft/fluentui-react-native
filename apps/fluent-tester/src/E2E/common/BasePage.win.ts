@@ -1,8 +1,9 @@
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
-export function By(testId: string): WebdriverIO.Element {
-  return $('~' + testId);
+/* Win32/UWP-Specific Selector. We use this to get elements on the test page */
+export function By(identifier: string): WebdriverIO.Element {
+  return $('~' + identifier);
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -66,9 +67,11 @@ export class BasePage {
       () => {
         return this.isPageLoaded();
       },
-      timeout ?? this.waitForPageTimeout,
-      this._pageName + ' did not render correctly. Please see /errorShots of the first failed test for more information.',
-      1000,
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
+        interval: 1000,
+      },
     );
   }
 
@@ -78,11 +81,11 @@ export class BasePage {
       () => {
         return this.isButtonInView();
       },
-      timeout ?? this.waitForPageTimeout,
-      'The button to navigate to the ' +
-        this._pageName +
-        ' was not displayed correctly. Please see /errorShots of the first failed test for more information.',
-      1000,
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
+        interval: 1000,
+      },
     );
   }
 
@@ -92,9 +95,12 @@ export class BasePage {
       () => {
         return this._primaryComponent.isDisplayed();
       },
-      timeout ?? this.waitForPageTimeout,
-      'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
-      1000,
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg:
+          'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+        interval: 1000,
+      },
     );
   }
 
@@ -112,9 +118,11 @@ export class BasePage {
       () => {
         return condition();
       },
-      timeout ?? this.waitForPageTimeout,
-      errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
-      1000,
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
+        interval: 1000,
+      },
     );
   }
 
