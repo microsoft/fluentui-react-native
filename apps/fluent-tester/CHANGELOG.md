@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 16 Dec 2021 19:10:25 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Dec 2021 23:23:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.0
+
+Thu, 16 Dec 2021 23:23:23 GMT
+
+### Minor changes
+
+- Adding MacOS E2E testing to CI pipeline (safreibe@microsoft.com)
 
 ## 0.49.0
 

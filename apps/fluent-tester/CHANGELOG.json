@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:23:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.0",
+      "version": "0.50.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f293bf1103027dcab4fc993e545b4a45e1d8c3fe",
+            "comment": "Adding MacOS E2E testing to CI pipeline"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 23:00:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.49.0",
       "version": "0.49.0",

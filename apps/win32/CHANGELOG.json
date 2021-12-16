@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:23:23 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "f293bf1103027dcab4fc993e545b4a45e1d8c3fe",
+            "comment": "Adding MacOS E2E testing to CI pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.0",
+            "commit": "f293bf1103027dcab4fc993e545b4a45e1d8c3fe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 23:00:57 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.16.2",
       "version": "0.16.2",

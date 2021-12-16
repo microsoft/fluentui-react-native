@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding MacOS E2E testing to CI pipeline",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
