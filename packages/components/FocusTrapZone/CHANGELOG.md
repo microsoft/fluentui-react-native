@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/focus-trap-zone
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Dec 2021 19:10:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.1
+
+Thu, 16 Dec 2021 19:10:27 GMT
+
+### Patches
+
+- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
 
 ## 0.8.0
 

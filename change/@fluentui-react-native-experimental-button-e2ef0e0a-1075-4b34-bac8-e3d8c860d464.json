@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Initial commit for FabButton",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

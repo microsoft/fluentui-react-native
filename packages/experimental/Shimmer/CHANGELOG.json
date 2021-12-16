@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 19:10:27 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "6bc41c5b55447849b86d9c8928aafc022e11f688",
+            "comment": "Flip Shimmer in RTL"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.6.0",
       "version": "0.6.0",

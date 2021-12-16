@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/separator",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 19:10:26 GMT",
+      "tag": "@fluentui-react-native/separator_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/separator",
+            "commit": "e597717b14dce4916740076786391449dd4a7c69",
+            "comment": "Rename Jest snapshots to be platform agnostic "
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/separator",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/separator_v0.11.0",
       "version": "0.11.0",

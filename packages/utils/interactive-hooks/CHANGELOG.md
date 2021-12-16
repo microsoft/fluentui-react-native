@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Dec 2021 19:10:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Thu, 16 Dec 2021 19:10:27 GMT
+
+### Patches
+
+- Change focusRef type (ruaraki@microsoft.com)
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.10.0
 
 ## 0.11.0
 

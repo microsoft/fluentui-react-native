@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 19:10:25 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "c3951e2e75fde520dd5333aa01f4863fca566d18",
+            "comment": "Consume mac tokens in Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.10.0",
       "version": "0.10.0",
