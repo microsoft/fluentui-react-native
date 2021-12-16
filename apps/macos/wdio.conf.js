@@ -11,7 +11,7 @@ exports.config = {
     /* 'path/to/excluded/files' */
   ],
 
-  maxInstances: 1,
+  maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
@@ -53,7 +53,7 @@ exports.config = {
 
   // The number of times to retry the entire specfile when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 1,
+  specFileRetries: 3,
 
   reporters: ['spec'],
 

@@ -18,7 +18,7 @@
 - XCode 12 or later should be installed
 - XCode Helper app should be enabled for Accessibility access. The app itself is usually found at: _/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/Xcode Helper.app_.
 
-In order to enable Accessibility acess, simply open the parent folder in finder:
+In order to enable Accessibility access, simply open the parent folder in finder:
 _open /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/_
 and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> Accessibility** list of your **System Preferences**. This action must only be done once.
 
