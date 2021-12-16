@@ -42,10 +42,6 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
       </CompoundButton>
-      <CompoundButton secondaryContent="secondaryContent" size="large" style={commonTestStyles.vmargin}>
-        Compound Button
-        <Text>Child element</Text>
-      </CompoundButton>
       <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
       <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin}>
         FAB

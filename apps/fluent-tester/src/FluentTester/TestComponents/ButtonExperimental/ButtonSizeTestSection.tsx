@@ -57,7 +57,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       <CompoundButton secondaryContent="Large compound button" size="large" style={commonTestStyles.vmargin}>
         Compound Button
       </CompoundButton>
-      <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" style={commonTestStyles.vmargin}>
+      <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="small" style={commonTestStyles.vmargin}>
         Content
       </CompoundButton>
       <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="medium" style={commonTestStyles.vmargin}>
