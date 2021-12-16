@@ -76,6 +76,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
 export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Text to show on the Button.
+   * Only used in FAB
    */
   content?: string;
 
@@ -91,7 +92,9 @@ export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<
    */
   onClick?: () => void;
 
-  testID?: string;
+  /**
+   * Text that should show in a tooltip when the user hovers over a button.
+   */
   tooltip?: string;
 }
 
@@ -105,21 +108,26 @@ export interface ButtonPropsWithInnerRef extends ButtonCorePropsWithInnerRef {
    */
   appearance?: ButtonAppearance;
 
-  /** A button can fill the width of its container. */
+  /**
+   * A button can fill the width of its container.
+   * @default false
+   */
   block?: boolean;
 
-  /** Sets style of button to a preset size style  */
+  /** Sets style of button to a preset size style
+   * @default 'small' on win32, 'medium' elsewhere
+   */
   size?: ButtonSize;
 
   /**
    * Button shape: 'rounded' | 'circular' | 'square'
-   * @defaultvalue rounded
+   * @default 'rounded'
    */
   shape?: ButtonShape;
 
   /**
    * Icon can be placed before or after Button's content.
-   * @default before
+   * @default 'before'
    */
   iconPosition?: 'before' | 'after';
 
@@ -132,6 +140,7 @@ export interface ButtonPropsWithInnerRef extends ButtonCorePropsWithInnerRef {
 
   /**
    * Button contains only icon, there's no text content
+   * Must be set for button to style correctly when button has not content.
    */
   iconOnly?: boolean;
 }
