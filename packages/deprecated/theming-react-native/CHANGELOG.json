@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:00:57 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 19:10:31 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.13.1",
       "version": "0.13.1",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 19:10:31 GMT",
       "tag": "@fluentui-react-native/tokens_v0.11.1",
       "version": "0.11.1",

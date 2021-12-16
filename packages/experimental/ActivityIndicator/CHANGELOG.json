@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:00:56 GMT",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 19:10:29 GMT",
       "tag": "@fluentui-react-native/experimental-activity-indicator_v0.5.0",
       "version": "0.5.0",

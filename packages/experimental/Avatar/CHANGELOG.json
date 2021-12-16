@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:00:56 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.2",
+      "version": "0.13.2",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 19:10:29 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.13.2",
       "version": "0.13.2",

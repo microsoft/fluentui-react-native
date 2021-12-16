@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/pressable",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/pressable",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Dec 2021 19:10:31 GMT",
       "tag": "@fluentui-react-native/pressable_v0.8.1",
       "version": "0.8.1",
