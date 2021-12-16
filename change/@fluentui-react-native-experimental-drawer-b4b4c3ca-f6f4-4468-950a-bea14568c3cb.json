@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix react version",
-  "packageName": "@fluentui-react-native/experimental-drawer",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

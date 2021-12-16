@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Stub button for non-mobile platforms",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

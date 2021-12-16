@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-activity-indicator",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 19:10:29 GMT",
+      "tag": "@fluentui-react-native/experimental-activity-indicator_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "commit": "31eb26025ce32ef4c98b4af4bdc5495a6344fbac",
+            "comment": "Use Core ActivityIndicator as a fallback for FluentActivityIndicator"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-activity-indicator",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/experimental-activity-indicator_v0.4.0",
       "version": "0.4.0",

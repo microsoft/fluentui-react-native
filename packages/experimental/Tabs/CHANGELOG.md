@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Dec 2021 19:10:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.1
+
+Thu, 16 Dec 2021 19:10:27 GMT
+
+### Patches
+
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/focus-zone to v0.8.1
+- Bump @fluentui-react-native/experimental-text to v0.7.1
+- Bump @fluentui-react-native/tokens to v0.11.1
+- Bump @fluentui-react-native/icon to v0.10.0
+- Bump @fluentui-react-native/adapters to v0.8.1
 
 ## 0.4.0
 

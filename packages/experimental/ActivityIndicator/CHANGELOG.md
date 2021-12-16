@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-activity-indicator
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Dec 2021 19:10:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Thu, 16 Dec 2021 19:10:29 GMT
+
+### Minor changes
+
+- Use Core ActivityIndicator as a fallback for FluentActivityIndicator (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.1
 
 ## 0.4.0
 

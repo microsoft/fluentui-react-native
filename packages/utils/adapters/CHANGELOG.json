@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 16 Dec 2021 19:10:30 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "51cbf7c64d5c52feeec2e845cd4dbd4e23c96e1e",
+            "comment": "Have web adapter export React Native core types"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "10fc82114b48d0f4a2113ed16a6175dbd56b116e",
+            "comment": "Fix build"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/adapters_v0.8.0",
       "version": "0.8.0",

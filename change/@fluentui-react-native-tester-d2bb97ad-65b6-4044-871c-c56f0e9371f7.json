@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Changing UWP to new framework",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

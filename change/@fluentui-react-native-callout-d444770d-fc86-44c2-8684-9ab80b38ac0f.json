@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add up/down arrow key support to macOS ContextualMenu",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
