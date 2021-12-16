@@ -490,7 +490,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForegroundInverted, 'pressed'),
 
     defaultDisabledSecondaryContent: fluentUIApple.brandForegroundDisabled,
-    defaultHoveredSecondaryContent: fluentUIApple.neutralForegroundInverted,
+    defaultHoveredSecondaryContent: fluentUIApple.neutralForeground3,
     defaultPressedSecondaryContent: fluentUIApple.neutralForegroundInverted,
 
     checkboxBackground: fluentUIApple.communicationBlue,
