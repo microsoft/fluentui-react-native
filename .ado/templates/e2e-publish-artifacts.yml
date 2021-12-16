@@ -4,11 +4,6 @@ parameters:
   buildArtifacts:
 
 steps:
-  - script: |
-      ls
-    workingDirectory: $(Build.SourcesDirectory)
-    displayName: '** Sources Directory Content'
-
   # Copy Appium reports to FluentTesterDump
   - task: CopyFiles@2
     inputs:
