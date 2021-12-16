@@ -12,7 +12,7 @@ import {
 } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
@@ -64,9 +64,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         ...rest,
       },
       container: Platform.select({
-        macos: {
-          ...useKeyDownProps(dismissCallback, 'Escape'),
-        },
+        macos: {},
         default: {
           // win32
           accessible: shouldFocusOnContainer,

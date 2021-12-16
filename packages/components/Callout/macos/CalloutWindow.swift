@@ -1,21 +1,14 @@
 import Foundation
 import AppKit
+import Carbon.HIToolbox
 
 protocol CalloutWindowLifeCycleDelegate {
-	/*
-	 * Notify the CalloutWindowLifeCycle object that the user touched/clicked outside the bounds of the callout.
-	 */
-	func didDetectHitOutsideCallout(calloutWindow: CalloutWindow)
-
-	/*
-	 * Notify the CalloutWindowLifeCycle object that the window the callout is in is no longer active.
-	 */
-	func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow)
+	func calloutWillDismiss(window: CalloutWindow)
 }
 
 class CalloutWindow: NSWindow {
 
-	public var windowLifeCycleDelegate: CalloutWindowLifeCycleDelegate?
+	public var lifeCycleDelegate: CalloutWindowLifeCycleDelegate?
 
 	override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
 		super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
@@ -26,11 +19,13 @@ class CalloutWindow: NSWindow {
 		backgroundColor = .clear
 		isMovable = false
 
-		NotificationCenter.default.addObserver(self, selector: #selector(appDidChangeActive(notification:)), name: NSApplication.didResignActiveNotification, object: nil)
+		// Dismiss the Callout if the window is no longer active.
+		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
 
+		// Dismiss the Callout if the user touched/clicked outside the bounds of the callout.
 		mouseEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { (event) -> NSEvent? in
 			if (event.window != self) {
-				self.windowLifeCycleDelegate?.didDetectHitOutsideCallout(calloutWindow: self)
+				self.dismissCallout()
 			}
 			return event
 		})
@@ -43,9 +38,21 @@ class CalloutWindow: NSWindow {
 	override var canBecomeMain: Bool {
 		return false
 	}
+	
+	// Dismiss the Callout if the user presses the Escape Key
+	override func keyDown(with event: NSEvent)  {
+		switch Int(event.keyCode) {
+		case kVK_Escape:
+			dismissCallout()
+		default:
+				return super.keyDown(with: event)
+		}
+	}
 
-	@objc func appDidChangeActive(notification: NSNotification) {
-		windowLifeCycleDelegate?.applicationDidResignActiveForCalloutWindow(calloutWindow: self)
+	
+	@objc private func dismissCallout() {
+		lifeCycleDelegate?.calloutWillDismiss(window: self)
+		close()
 	}
 
 	private var mouseEventMonitor: Any?
