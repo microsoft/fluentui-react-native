@@ -53,10 +53,7 @@ const ButtonComposed = compose<ButtonType>({
       if (accessiblityLabel === undefined) {
         React.Children.forEach(children, (child) => {
           if (typeof child === 'string') {
-            if (childText.length !== 0) {
-              childText += ' ';
-            }
-            childText += child;
+            childText = child; // We only automatically support the one child string.
           }
         });
       }
