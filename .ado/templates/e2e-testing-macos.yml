@@ -1,10 +1,33 @@
 steps:
   - script: |
+      brew install tccutil
+    displayName: '** Download tccutil'
+
+  - script: |
+      sudo tccutil.py --enable com.apple.dt.Xcode-Helper
+    displayName: '** Enabling appium for mac as accessibility app'
+
+  - script: |
       yarn e2etest
     workingDirectory: apps/macos
     displayName: "Run MacOS E2E Tests"
     condition: succeeded()
     continueOnError: true
+
+  - script: |
+      ls
+    workingDirectory: apps/macos
+    displayName: '** List contents of apps/macos'
+
+  - script: |
+      cd reports && ls
+    workingDirectory: apps/macos
+    displayName: '** List contents reports'
+
+  - script: |
+      cd errorShots && ls
+    workingDirectory: apps/macos
+    displayName: '** List contents of errorShots'
 
   - template: e2e-publish-artifacts.yml
     parameters:
