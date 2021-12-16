@@ -2886,31 +2886,36 @@
     babel-plugin-const-enum "^1.0.0"
 
 "@rnx-kit/cli@^0.5.27":
-  version "0.5.28"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.5.28.tgz#f81062a2e0d5881f936f7c181015947adaa11c01"
-  integrity sha512-KtCG29asCRbT4w1dUw0ilr8RC0+icQY91L2CGygE03vMr2UoV4vDCfAoh8Rh3yLizd3LUiSlmVctJqbiqytKJQ==
+  version "0.5.36"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.5.36.tgz#f3e3fefa1643c8ed1ad9a9b09c1b0b29be21a81c"
+  integrity sha512-tnmDXhyq6hw/FK5FZBnxM9pouJPjHEHvgdYqHBU1P53Ysi48bHhFqaiOTc/1PUmYjUbIQbXgqt1Rm6ZME2SQnw==
   dependencies:
-    "@rnx-kit/config" "0.2.9"
-    "@rnx-kit/dep-check" "^1.5.9"
+    "@rnx-kit/config" "0.3.1"
+    "@rnx-kit/dep-check" "^1.5.15"
+    "@rnx-kit/metro-plugin-cyclic-dependencies-detector" "1.0.3"
+    "@rnx-kit/metro-plugin-duplicates-checker" "1.1.3"
+    "@rnx-kit/metro-serializer" "1.0.0"
+    "@rnx-kit/metro-serializer-esbuild" "^0.0.10"
+    "@rnx-kit/metro-service" "1.0.2"
     "@rnx-kit/third-party-notices" "1.0.1"
     chalk "^4.1.0"
 
-"@rnx-kit/config@0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.2.9.tgz#2efd25ed31b6dbeccaa24566cf890cfce88764b7"
-  integrity sha512-ikJ+aZO0pogMes/m71G+rkaeYBP2n0Xeomnr6hRgg5usNDxgTT+mY5d9dlzYu5ZN/GQKduP9zCKJQMgs6SOMyQ==
+"@rnx-kit/config@0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/config/-/config-0.3.1.tgz#4d2715a5c9b171b81c5ec5dbff6d21d7406d225c"
+  integrity sha512-3YoOa7S5hoZEKBRu7+DFe8laatNNrUybOX8WpS1ikziedpNzioZPbLY4cayHQf5HIg7vLg7x/+FIWEEz0nblSw==
   dependencies:
     cosmiconfig "^7.0.0"
     semver "^7.0.0"
 
-"@rnx-kit/console@^1.0.11":
+"@rnx-kit/console@^1.0.0", "@rnx-kit/console@^1.0.11":
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.11.tgz#63c9124080424fefb10252d6b3f6bd16e8f71529"
   integrity sha512-2Iyx56e+kk9YBQt3G5YSqG91dEI+AZhK/S58J64C6muPOdnYi7zuzaX1P/vkDFRSMAybtBi639Onn268suihnA==
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.9":
+"@rnx-kit/dep-check@^1.5.10", "@rnx-kit/dep-check@^1.5.15":
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.10.0.tgz#61c8e50efa95e6db0fb9205de26ffac966a74756"
   integrity sha512-AfwmzCzeim/ewFI23cMoBUxBNO1lrHM3xeXD5K3Wm0RdRj/k6udKUOEc1jSqv5gUd+BtNXOYJ2//i7ZbV+N1/g==
@@ -2947,6 +2952,47 @@
     "@rnx-kit/babel-preset-metro-react-native" "^1.0.17"
     "@rnx-kit/tools-node" "^1.2.6"
     workspace-tools "^0.16.2"
+
+"@rnx-kit/metro-plugin-cyclic-dependencies-detector@1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-plugin-cyclic-dependencies-detector/-/metro-plugin-cyclic-dependencies-detector-1.0.3.tgz#1bada2986d83977b88282e680d0054a3dba23c1c"
+  integrity sha512-vtUVgUR4Cqv//ooY+J2EfehOu3+NOsvltDm97RL09R5R0efzEjgvvkS9hW0QM0Xj8WXN8J91uEStNdjye6GWbA==
+  dependencies:
+    "@rnx-kit/console" "^1.0.0"
+    pkg-dir "^5.0.0"
+
+"@rnx-kit/metro-plugin-duplicates-checker@1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-plugin-duplicates-checker/-/metro-plugin-duplicates-checker-1.1.3.tgz#1d7321056db53b5d09a547b92d88d229295c96ab"
+  integrity sha512-P8eUPcPqlcDyNv9CbpK08dM4q3yhHZ7Y6Sco4OSseip6AadbI5idyRZG7eOV0k/can12ZJZWtRsh877YOInMEg==
+  dependencies:
+    "@rnx-kit/console" "^1.0.0"
+    pkg-dir "^5.0.0"
+
+"@rnx-kit/metro-serializer-esbuild@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-serializer-esbuild/-/metro-serializer-esbuild-0.0.10.tgz#497f9802eda3800b8ac6bd6eb2dd5b451623c378"
+  integrity sha512-51lY8JLRSHgXA5PmMmv6NCzSzlc68BgGcNryiMxdqKBbTgiqCNbZrNpJiErMFt9uc2sDEhQ9Y1WJbb4ekfLnBQ==
+  dependencies:
+    "@rnx-kit/console" "^1.0.0"
+    esbuild "^0.12.8"
+    esbuild-plugin-lodash "^1.0.3"
+    semver "^7.0.0"
+
+"@rnx-kit/metro-serializer@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-serializer/-/metro-serializer-1.0.0.tgz#e9e945871e7463a1b997758cd0e25045322db535"
+  integrity sha512-0ZTWrkHGPsp0qykRhaadInb/PIKieaCocYN65+qm/L5buOihH7jQuxto8mXGtGdqzFkd826kGEVwM2UMWYq9SQ==
+  dependencies:
+    semver "^7.0.0"
+
+"@rnx-kit/metro-service@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-service/-/metro-service-1.0.2.tgz#267e8bfbdc6bb4cfb91677d2dc28d8a3aab352b0"
+  integrity sha512-rPI4zes4ImvL8rblE225OBw4Ih8hzOtCfc5JRgaaNrh+gMf3xn1rAYUcsXt3mOlxTFQtdHLCC95BElI1dTnN0g==
+  dependencies:
+    chalk "^4.1.0"
+    mkdirp "^0.5.3"
 
 "@rnx-kit/third-party-notices@1.0.1":
   version "1.0.1"
@@ -8782,6 +8828,16 @@ es6-weak-map@^2.0.1:
     es5-ext "^0.10.46"
     es6-iterator "^2.0.3"
     es6-symbol "^3.1.1"
+
+esbuild-plugin-lodash@^1.0.3:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/esbuild-plugin-lodash/-/esbuild-plugin-lodash-1.1.0.tgz#ffe3b3020c1131357ba4d21bf3f735e032184b4f"
+  integrity sha512-DtvAnHuALecQguNWeIf2Ea3bCp0Pe9t+knjJNxHJE9PHagorZR92B1Xmx2cLKJz5fzkBzXLFnegiTdWYUi1AyQ==
+
+esbuild@^0.12.8:
+  version "0.12.29"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.12.29.tgz#be602db7c4dc78944a9dbde0d1ea19d36c1f882d"
+  integrity sha512-w/XuoBCSwepyiZtIRsKsetiLDUVGPVw1E/R3VTFSecIy8UR7Cq3SOtwKHJMFoVqqVG36aGkzh4e8BvpO1Fdc7g==
 
 escalade@^3.1.1:
   version "3.1.1"
