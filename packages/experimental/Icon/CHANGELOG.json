@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/icon_v0.10.3",
+      "version": "0.10.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 19:53:21 GMT",
       "tag": "@fluentui-react-native/icon_v0.10.2",
       "version": "0.10.2",

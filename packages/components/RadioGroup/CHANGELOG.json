@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.14.4",
+      "version": "0.14.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.8.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/radio-group",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 19:53:21 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.14.3",
       "version": "0.14.3",

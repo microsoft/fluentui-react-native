@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/framework_v0.7.4",
+      "version": "0.7.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/composition to v0.7.2",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.2",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/use-slots to v0.6.2",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 19:53:21 GMT",
       "tag": "@fluentui-react-native/framework_v0.7.3",
       "version": "0.7.3",

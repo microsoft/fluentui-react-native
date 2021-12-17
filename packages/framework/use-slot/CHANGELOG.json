@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slot",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/use-slot_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/use-slot",
+            "commit": "b9ea5eb1409f37305169f75398fa7f41229cefbd",
+            "comment": "Revert \"Remove content prop (#1257)\""
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 19:53:21 GMT",
       "tag": "@fluentui-react-native/use-slot_v0.2.1",
       "version": "0.2.1",

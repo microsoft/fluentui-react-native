@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 17 Dec 2021 19:53:21 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+- Bump @fluentui-react-native/pressable to v0.8.4
 
 ## 0.21.3
 

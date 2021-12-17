@@ -1,8 +1,31 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 17 Dec 2021 19:53:21 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.4
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.3
+- Bump @fluentui-react-native/experimental-avatar to v0.13.5
+- Bump @fluentui-react-native/experimental-button to v0.11.4
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.4
+- Bump @fluentui-react-native/experimental-expander to v0.3.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.5
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.4
+- Bump @fluentui-react-native/experimental-tabs to v0.4.4
+- Bump @fluentui-react-native/experimental-text to v0.7.4
+- Bump @fluentui-react-native/framework to v0.7.4
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+- Bump @fluentui-react-native/stack to v0.6.4
+- Bump @fluentui/react-native to v0.27.5
 
 ## 0.50.4
 
