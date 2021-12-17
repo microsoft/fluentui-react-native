@@ -26,7 +26,6 @@ export interface MenuButtonProps extends ButtonWithRefProps {
   menuItems?: MenuButtonItemProps[];
   onItemClick?: (key: string) => void;
   contextualMenu?: ContextualMenuProps;
-  content?: string;
 }
 
 export type MenuButtonSlotProps = {
