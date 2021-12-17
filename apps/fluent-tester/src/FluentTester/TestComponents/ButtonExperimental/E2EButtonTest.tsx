@@ -23,12 +23,13 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
-        <Button testID={BUTTONEXPERIMENTAL_TEST_COMPONENT} onClick={onClick} accessibilityLabel={BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL}>
-          This is a button for E2E testing
-        </Button>
-        <Button testID={BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT} onClick={onClick}>
-          {BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL}
-        </Button>
+        <Button
+          content="This is a button for E2E testing"
+          testID={BUTTONEXPERIMENTAL_TEST_COMPONENT}
+          onClick={onClick}
+          accessibilityLabel={BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL}
+        />
+        <Button content={BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL} testID={BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT} onClick={onClick} />
         {buttonPressed ? <Text testID={BUTTONEXPERIMENTAL_ON_PRESS}>Button Pressed</Text> : null}
       </Stack>
     </View>

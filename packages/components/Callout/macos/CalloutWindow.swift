@@ -1,6 +1,5 @@
 import Foundation
 import AppKit
-import Carbon.HIToolbox
 
 protocol CalloutWindowLifeCycleDelegate: AnyObject {
 	/// Notify the delegate that the Callout is about to dismiss
@@ -41,14 +40,9 @@ class CalloutWindow: NSWindow {
 		return false
 	}
 
-	// Dismiss the Callout if the user presses the Escape Key
-	override func keyDown(with event: NSEvent)  {
-		switch Int(event.keyCode) {
-		case kVK_Escape:
-			dismissCallout()
-		default:
-			return super.keyDown(with: event)
-		}
+	// Required to close the window on escape key press
+	override func cancelOperation(_ sender: Any?) {
+		dismissCallout()
 	}
 
 	@objc private func dismissCallout() {
