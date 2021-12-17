@@ -27,7 +27,7 @@ Variant options are the same as the base `Button` component.
 
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `loader` - If specified, renders a `loader` before the `icon` and `children` while the `loading` flag is set to `true`.
+- `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
 
 ### Props
 
