@@ -42,58 +42,88 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const cmRef = useViewCommandFocus(componentRef);
 
     const onItemHoverIn = React.useCallback((e) => {
-      userProps.onHoverIn(e);
+      componentRef.current.focus();
+      userProps.onHoverIn && userProps.onHoverIn(e);
     }, []);
 
-    const onItemClick = React.useCallback(
+    const onHoverInDelay = Platform.select({
+      macos: 100,
+      default: 500, // win32
+    });
+
+    const onItemHoverOut = React.useCallback((e) => {
+      context?.dismissSubmenu && context.dismissSubmenu();
+      userProps.onHoverOut && userProps.onHoverOut(e);
+    }, []);
+
+    const onItemPress = React.useCallback(() => {
+      if (!disabled) {
+        onClick && onClick();
+        context?.onItemClick && context.onItemClick(itemKey);
+        context?.dismissSubmenu && context.dismissSubmenu();
+        context?.onDismissMenu();
+      }
+    }, [context, disabled, itemKey, onClick]);
+
+    const pressable = useAsPressable({
+      ...rest,
+      onPress: onItemPress,
+      onHoverIn: onItemHoverIn,
+      delayHoverIn: onHoverInDelay,
+      onHoverOut: onItemHoverOut,
+    });
+
+    /**
+     * GH #1267
+     * We want onMouseEnter to fire right away to set focus, and then Pressable's onHoverIn to fire after a delay to show the submenu.
+     * To achieve this, we override the onMouseEnter handler returned by useAsPressable, and replace it with our own. Inside our own
+     * onMouseEnter handler, we call useAsPressable's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
+     * In the future, we can avoid needing to override onMouseEnter by handling submenu rendering internally rather than depending on the
+     * client to conditionally render it with onHoverIn.
+     */
+    const { onBlur, onMouseEnter, onMouseLeave, ...restPressableProps } = pressable.props;
+    const onMouseEnterModified = React.useCallback(
       (e) => {
-        if (!disabled) {
-          context?.onDismissMenu();
-          context?.dismissSubmenu && context.dismissSubmenu();
-          onClick ? onClick() : context?.onItemClick(itemKey);
-          e.stopPropagation();
-        }
+        componentRef.current.focus();
+        onMouseEnter && onMouseEnter(e);
       },
-      [context, disabled, itemKey, onClick],
+      [onMouseEnter],
     );
+    const onMouseLeaveModified = React.useCallback(
+      (e) => {
+        onBlur(e);
+        onMouseLeave && onMouseLeave(e);
+      },
+      [onMouseLeave],
+    );
+    const pressablePropsModified = {
+      onBlur: onBlur,
+      onMouseEnter: onMouseEnterModified,
+      onMouseLeave: onMouseLeaveModified,
+      ...restPressableProps,
+    };
 
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn, delayHoverIn: 500 });
-
-    const [submenuItemHovered, setSubmenuItemHovered] = React.useState(false);
-    context.setSubmenuItemHovered = setSubmenuItemHovered;
-    // set up state
     const state: SubmenuItemState = {
       ...pressable.state,
       selected: context.selectedKey === userProps.itemKey,
       disabled: userProps.disabled,
       content: !!text,
       icon: !!icon,
-      submenuItemHovered: submenuItemHovered,
     };
-
-    const onMouseEnter = React.useCallback(
-      (e) => {
-        setSubmenuItemHovered(true);
-        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
-        e.stopPropagation();
-      },
-      [pressable, setSubmenuItemHovered],
-    );
 
     /*
      * SubmenuItem launches the submenu onMouseEnter event. For keyboarding, submenu should be launched with Spacebar, Enter, or right arrow.
      */
-    const onKeyUpProps = useKeyUpProps(onMouseEnter, ' ', 'Enter', 'ArrowRight');
+    const onKeyUpProps = useKeyUpProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
     const slotProps = mergeSettings<SubmenuItemSlotProps>(styleProps, {
       root: {
-        ...pressable.props,
         ref: cmRef,
+        ...pressablePropsModified,
         ...onKeyUpProps,
-        onMouseEnter,
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',

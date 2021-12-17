@@ -12,9 +12,7 @@ export interface SubmenuItemTokens extends ContextualMenuItemTokens {
 }
 export type SubmenuItemProps = ContextualMenuItemProps;
 
-export interface SubmenuItemState extends ContextualMenuItemState {
-  submenuItemHovered?: boolean;
-}
+export type SubmenuItemState = ContextualMenuItemState;
 
 export interface SubmenuItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
