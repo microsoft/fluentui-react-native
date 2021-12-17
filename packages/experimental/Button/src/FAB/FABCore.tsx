@@ -19,7 +19,7 @@ import { ButtonCorePropsWithInnerRef, ButtonCoreProps } from '../Button.types';
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
 const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCorePropsWithInnerRef): boolean => {
-  return state[layer] || userProps[layer] || (layer === 'hasContent' && userProps.content) || (layer === 'hasIcon' && userProps.icon);
+  return state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIcon' && userProps.icon);
 };
 
 const FABComposed = compose<FABType>({
