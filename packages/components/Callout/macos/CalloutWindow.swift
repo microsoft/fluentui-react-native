@@ -41,14 +41,8 @@ class CalloutWindow: NSWindow {
 		return false
 	}
 
-	// Dismiss the Callout if the user presses the Escape Key
-	override func keyDown(with event: NSEvent)  {
-		switch Int(event.keyCode) {
-		case kVK_Escape:
-			dismissCallout()
-		default:
-			return super.keyDown(with: event)
-		}
+	override func cancelOperation(_ sender: Any?) {
+		dismissCallout()
 	}
 
 	@objc private func dismissCallout() {
