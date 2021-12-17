@@ -11,6 +11,7 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
   const onClickWithFocus = useOnPressWithFocus(ref, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
+  const isDisabled = !!disabled || !!loading;
 
   return {
     props: {
@@ -19,9 +20,9 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
       accessibilityLabel: props.accessibilityLabel || props.content,
-      accessibilityState: getAccessibilityState(!!disabled || !!loading),
+      accessibilityState: getAccessibilityState(isDisabled),
       enableFocusRing: true,
-      focusable: true,
+      focusable: !isDisabled,
       ref: useViewCommandFocus(ref),
       ...onKeyUpProps,
       iconPosition: props.iconPosition || 'before',
