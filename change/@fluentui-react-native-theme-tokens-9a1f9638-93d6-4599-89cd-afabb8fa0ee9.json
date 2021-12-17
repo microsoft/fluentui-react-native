@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Move generated tokens under a generated folder",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
