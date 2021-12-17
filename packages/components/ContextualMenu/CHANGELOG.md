@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 17 Dec 2021 01:26:42 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 18:39:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Fri, 17 Dec 2021 18:39:08 GMT
+
+### Patches
+
+- Escape key closes ContextualMenu on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.3
 
 ## 0.13.1
 
