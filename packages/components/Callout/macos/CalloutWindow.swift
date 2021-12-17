@@ -38,18 +38,18 @@ class CalloutWindow: NSWindow {
 	override var canBecomeMain: Bool {
 		return false
 	}
-	
+
 	// Dismiss the Callout if the user presses the Escape Key
 	override func keyDown(with event: NSEvent)  {
 		switch Int(event.keyCode) {
 		case kVK_Escape:
 			dismissCallout()
 		default:
-				return super.keyDown(with: event)
+			return super.keyDown(with: event)
 		}
 	}
 
-	
+
 	@objc private func dismissCallout() {
 		lifeCycleDelegate?.calloutWillDismiss(window: self)
 		close()
