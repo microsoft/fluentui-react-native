@@ -1,6 +1,5 @@
 import Foundation
 import AppKit
-import Carbon.HIToolbox
 
 protocol CalloutWindowLifeCycleDelegate: AnyObject {
 	/// Notify the delegate that the Callout is about to dismiss
@@ -41,6 +40,7 @@ class CalloutWindow: NSWindow {
 		return false
 	}
 
+	// Required to close the window on escape key press
 	override func cancelOperation(_ sender: Any?) {
 		dismissCallout()
 	}
