@@ -48,14 +48,23 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       <Button loading size="large" style={commonTestStyles.vmargin}>
         Loading Button Large
       </Button>
-      <CompoundButton secondaryContent="rounded" shape="rounded" style={commonTestStyles.vmargin}>
+      <CompoundButton secondaryContent="Small compound button" size="small" style={commonTestStyles.vmargin}>
         Compound Button
       </CompoundButton>
-      <CompoundButton secondaryContent="square" shape="square" style={commonTestStyles.vmargin}>
+      <CompoundButton secondaryContent="Medium compound button" size="medium" style={commonTestStyles.vmargin}>
         Compound Button
       </CompoundButton>
-      <CompoundButton secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin}>
+      <CompoundButton secondaryContent="Large compound button" size="large" style={commonTestStyles.vmargin}>
         Compound Button
+      </CompoundButton>
+      <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="small" style={commonTestStyles.vmargin}>
+        Content
+      </CompoundButton>
+      <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="medium" style={commonTestStyles.vmargin}>
+        Content
+      </CompoundButton>
+      <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="large" style={commonTestStyles.vmargin}>
+        Content
       </CompoundButton>
     </View>
   );

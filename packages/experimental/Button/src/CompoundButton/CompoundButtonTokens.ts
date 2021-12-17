@@ -17,6 +17,9 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.spacing.m,
       },
+      hasIcon: {
+        spacingIconContent: globalTokens.spacing.m,
+      },
     },
   },
   small: {
@@ -32,6 +35,9 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.spacing.s,
       },
+      hasIcon: {
+        spacingIconContent: globalTokens.spacing.s,
+      },
     },
   },
   large: {
@@ -46,6 +52,9 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       secondaryContentFont: { variant: 'bodyStandard' },
       focused: {
         paddingHorizontal: globalTokens.spacing.l,
+      },
+      hasIcon: {
+        spacingIconContent: globalTokens.spacing.l,
       },
     },
   },

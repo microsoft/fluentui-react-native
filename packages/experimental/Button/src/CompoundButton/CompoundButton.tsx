@@ -34,12 +34,12 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
       return (
         <Slots.root {...mergedProps}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {React.Children.map(children, (child) => (
-            <Slots.contentContainer>
-              {typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child}
-              {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
-            </Slots.contentContainer>
-          ))}
+          <Slots.contentContainer>
+            {React.Children.map(children, (child) =>
+              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+            )}
+            {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
+          </Slots.contentContainer>
           {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );

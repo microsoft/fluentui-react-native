@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Flip Shimmer in RTL",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Have web adapter export React Native core types",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

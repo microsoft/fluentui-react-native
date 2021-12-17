@@ -4,7 +4,7 @@ import {
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
 } from '../../../FluentTester/TestComponents/Checkbox/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class CheckboxPageObject extends BasePage {
   /******************************************************************/
@@ -19,9 +19,11 @@ class CheckboxPageObject extends BasePage {
       () => {
         return !this.isCheckboxChecked();
       },
-      timeout ?? this.waitForPageTimeout,
-      'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
-      2000,
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: 'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
+        interval: 1000,
+      },
     );
   }
 

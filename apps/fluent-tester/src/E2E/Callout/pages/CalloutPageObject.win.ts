@@ -4,7 +4,7 @@ import {
   HOMEPAGE_CALLOUT_BUTTON,
   BUTTON_TO_OPEN_CALLOUT,
 } from '../../../FluentTester/TestComponents/Callout/consts';
-import { BasePage, By, COMPONENT_SCROLL_COORDINATES } from '../../common/BasePage';
+import { BasePage, By, COMPONENT_SCROLL_COORDINATES } from '../../common/BasePage.win';
 
 class CalloutPageObject extends BasePage {
   /******************************************************************/

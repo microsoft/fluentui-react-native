@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added loading prop",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

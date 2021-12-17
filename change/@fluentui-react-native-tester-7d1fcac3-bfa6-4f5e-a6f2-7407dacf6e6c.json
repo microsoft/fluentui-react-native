@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed paddings, color for Selected state (Toggle Button/src/ButtonTokens.ts), icon sizes",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -17,10 +17,11 @@
     "test": "fluentui-scripts jest",
     "macos": "react-native run-macos --scheme FluentTester --project-path src",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "prettier-fix": "fluentui-scripts prettier --fix true",
+    "e2etest": "wdio"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.48.1",
+    "@fluentui-react-native/tester": "^0.50.3",
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-macos": "^0.64.6",
@@ -33,11 +34,22 @@
     "@rnx-kit/cli": "^0.5.27",
     "@rnx-kit/metro-config": "^1.2.3",
     "@uifabricshared/build-native": "^0.1.1",
+    "@wdio/appium-service": "^6.5.0",
+    "@wdio/cli": "^6.5.0",
+    "@wdio/jasmine-framework": "^6.5.0",
+    "@wdio/local-runner": "^6.5.0",
+    "@wdio/spec-reporter": "^6.5.0",
+    "@wdio/sync": "^6.5.0",
+    "appium-mac2-driver": "0.14.1",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-test-app": "^0.9.13",
-    "react-test-renderer": "17.0.1"
+    "react-test-renderer": "17.0.1",
+    "ts-node": "^8.10.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "3.8.3",
+    "webdriverio": "^6.5.0"
   },
   "jest": {
     "preset": "react-native"

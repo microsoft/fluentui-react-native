@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add simple drawer module without methods",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
