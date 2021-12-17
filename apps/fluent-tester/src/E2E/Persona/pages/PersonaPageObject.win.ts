@@ -1,5 +1,5 @@
 import { PERSONA_TESTPAGE, PERSONA_TEST_COMPONENT, HOMEPAGE_PERSONA_BUTTON } from '../../../FluentTester/TestComponents/Persona/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class PersonaPageObject extends BasePage {
   /*****************************************/

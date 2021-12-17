@@ -3,7 +3,7 @@ import {
   SEPARATOR_TEST_COMPONENT,
   HOMEPAGE_SEPARATOR_BUTTON,
 } from '../../../FluentTester/TestComponents/Separator/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class SeparatorPageObject extends BasePage {
   /*****************************************/

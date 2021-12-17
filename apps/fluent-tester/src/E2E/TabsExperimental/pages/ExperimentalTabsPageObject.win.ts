@@ -4,7 +4,7 @@ import {
   EXPERIMENTAL_TABS_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
 } from '../../../FluentTester/TestComponents/TabsExperimental/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class ExperimentalTabsPageObject extends BasePage {
   /******************************************************************/

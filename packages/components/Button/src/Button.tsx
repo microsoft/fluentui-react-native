@@ -12,7 +12,7 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 
 import {
   useAsPressable,
-  useKeyCallback,
+  useKeyUpProps,
   useViewCommandFocus,
   createIconProps,
   useOnPressWithFocus,
@@ -40,7 +40,7 @@ export const Button = compose<IButtonType>({
     const onPressWithFocus = useOnPressWithFocus(componentRef, onClick);
     // attach the pressable state handlers
     const pressable = useAsPressable({ ...rest, onPress: onPressWithFocus });
-    const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
+    const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
     // set up state
     const state: IButtonState = {
       info: {
@@ -64,7 +64,7 @@ export const Button = compose<IButtonType>({
         onAccessibilityTap: onAccessibilityTap,
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled },
-        onKeyUp: onKeyUp,
+        ...onKeyUpProps,
         testID,
       },
       content: { children: content },

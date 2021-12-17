@@ -2,6 +2,7 @@
 
 exports[`Button component tests Button circular 1`] = `
 <View
+  accessibilityLabel="Circular Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -9,11 +10,11 @@ exports[`Button component tests Button circular 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -35,7 +36,7 @@ exports[`Button component tests Button circular 1`] = `
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -62,6 +63,7 @@ exports[`Button component tests Button circular 1`] = `
 
 exports[`Button component tests Button default 1`] = `
 <View
+  accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -69,11 +71,11 @@ exports[`Button component tests Button default 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -94,7 +96,7 @@ exports[`Button component tests Button default 1`] = `
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -121,6 +123,7 @@ exports[`Button component tests Button default 1`] = `
 
 exports[`Button component tests Button large 1`] = `
 <View
+  accessibilityLabel="Large Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -128,11 +131,11 @@ exports[`Button component tests Button large 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -181,6 +184,7 @@ exports[`Button component tests Button large 1`] = `
 
 exports[`Button component tests Button primary 1`] = `
 <View
+  accessibilityLabel="Primary Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -189,11 +193,11 @@ exports[`Button component tests Button primary 1`] = `
   }
   accessible={true}
   appearance="primary"
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -214,7 +218,7 @@ exports[`Button component tests Button primary 1`] = `
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -241,6 +245,7 @@ exports[`Button component tests Button primary 1`] = `
 
 exports[`Button component tests Button small 1`] = `
 <View
+  accessibilityLabel="Small Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -248,11 +253,11 @@ exports[`Button component tests Button small 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -274,7 +279,7 @@ exports[`Button component tests Button small 1`] = `
       "justifyContent": "center",
       "minWidth": 64,
       "padding": 3,
-      "paddingHorizontal": 11,
+      "paddingHorizontal": 7,
       "width": undefined,
     }
   }
@@ -301,6 +306,7 @@ exports[`Button component tests Button small 1`] = `
 
 exports[`Button component tests Button square 1`] = `
 <View
+  accessibilityLabel="Square Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -308,11 +314,11 @@ exports[`Button component tests Button square 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -334,7 +340,7 @@ exports[`Button component tests Button square 1`] = `
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -361,6 +367,7 @@ exports[`Button component tests Button square 1`] = `
 
 exports[`Button component tests Button subtle 1`] = `
 <View
+  accessibilityLabel="Subtle Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -369,11 +376,11 @@ exports[`Button component tests Button subtle 1`] = `
   }
   accessible={true}
   appearance="subtle"
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -394,7 +401,7 @@ exports[`Button component tests Button subtle 1`] = `
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 15,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }

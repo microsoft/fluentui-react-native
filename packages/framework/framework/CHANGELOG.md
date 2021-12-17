@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 19:53:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/composition to v0.7.1
+- Bump @fluentui-react-native/use-slot to v0.2.1
+- Bump @fluentui-react-native/use-slots to v0.6.1
+
+## 0.7.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.2
+
+## 0.7.1
+
+Thu, 16 Dec 2021 19:10:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.1
+- Bump @fluentui-react-native/tokens to v0.11.1
 
 ## 0.7.0
 

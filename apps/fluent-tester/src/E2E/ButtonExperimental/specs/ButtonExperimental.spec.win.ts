@@ -1,6 +1,6 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 import ButtonExperimentalPageObject from '../pages/ButtonExperimentalPageObject';
-import { ComponentSelector } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/consts';
 import {
   BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL,

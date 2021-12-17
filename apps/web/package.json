@@ -13,7 +13,7 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": ">=0.48.1 <1.0.0",
+    "@fluentui-react-native/tester": ">=0.50.4 <1.0.0",
     "react": "17.0.1",
     "react-art": "^17.0.1",
     "react-dom": "^17.0.1",

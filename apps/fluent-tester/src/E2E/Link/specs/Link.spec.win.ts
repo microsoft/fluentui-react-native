@@ -1,6 +1,6 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 import LinkPageObject from '../pages/LinkPageObject';
-import { ComponentSelector } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage.win';
 import { LINK_ACCESSIBILITY_LABEL } from '../../../FluentTester/TestComponents/Link/consts';
 import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 

@@ -6,21 +6,15 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
   checked: {
     color: t.colors.neutralForeground1Selected,
     backgroundColor: t.colors.neutralBackground1Selected,
-    borderColor: t.colors.neutralStroke1Selected,
-    hovered: {
-      color: t.colors.neutralForeground1Hover,
-      backgroundColor: t.colors.neutralBackground1Hover,
-      borderColor: t.colors.neutralStroke1Hover,
+    borderColor: t.colors.neutralStroke1,
+    primary: {
+      backgroundColor: t.colors.brandBackgroundSelected,
+      borderColor: t.colors.brandBackgroundSelected,
     },
     subtle: {
       color: t.colors.neutralForeground1Selected,
-      backgroundColor: t.colors.neutralBackground1Selected,
-      borderColor: t.colors.neutralBackground1Selected,
-      hovered: {
-        color: t.colors.neutralForeground1Hover,
-        backgroundColor: t.colors.neutralBackground1Hover,
-        borderColor: t.colors.neutralStroke1Hover,
-      },
+      backgroundColor: t.colors.subtleBackgroundSelected,
+      borderColor: t.colors.subtleBackgroundSelected,
     },
   },
 });

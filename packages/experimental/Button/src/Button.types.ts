@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewStyle, ColorValue, ViewProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -73,32 +73,34 @@ export interface ButtonTokens extends ButtonCoreTokens {
   square?: ButtonTokens;
 }
 
-export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  /*
-   * Text to show on the Button.
-   */
-  content?: string;
-
+export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
 
   /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   * Button contains only icon, there's no text content
+   * Must be set for button to style correctly when button has not content.
    */
-  componentRef?: React.RefObject<IFocusable>;
+  iconOnly?: boolean;
+
+  innerRef?: React.ForwardedRef<IFocusable>;
 
   /**
    * A callback to call on button click event
    */
   onClick?: () => void;
 
-  testID?: string;
+  /**
+   * Text that should show in a tooltip when the user hovers over a button.
+   */
   tooltip?: string;
 }
 
-export interface ButtonProps extends ButtonCoreProps {
+export type ButtonCoreProps = Omit<ButtonCorePropsWithInnerRef, 'innerRef'>;
+
+export interface ButtonPropsWithInnerRef extends ButtonCorePropsWithInnerRef {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
@@ -106,21 +108,26 @@ export interface ButtonProps extends ButtonCoreProps {
    */
   appearance?: ButtonAppearance;
 
-  /** A button can fill the width of its container. */
+  /**
+   * A button can fill the width of its container.
+   * @default false
+   */
   block?: boolean;
 
-  /** Sets style of button to a preset size style  */
+  /** Sets style of button to a preset size style
+   * @default 'small' on win32, 'medium' elsewhere
+   */
   size?: ButtonSize;
 
   /**
    * Button shape: 'rounded' | 'circular' | 'square'
-   * @defaultvalue rounded
+   * @default 'rounded'
    */
   shape?: ButtonShape;
 
   /**
    * Icon can be placed before or after Button's content.
-   * @default before
+   * @default 'before'
    */
   iconPosition?: 'before' | 'after';
 
@@ -130,23 +137,20 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default false
    */
   loading?: boolean;
-  
-  /**
-   * Button contains only icon, there's no text content
-   */
-  iconOnly?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+export type ButtonProps = Omit<ButtonPropsWithInnerRef, 'innerRef'>;
+
+export type ButtonState = IPressableHooks<ButtonPropsWithInnerRef & React.ComponentPropsWithRef<any>>;
 
 export interface ButtonSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<IViewProps>;
   icon: IconProps;
   content: TextProps;
 }
 
 export interface ButtonType {
-  props: ButtonProps;
+  props: ButtonPropsWithInnerRef;
   tokens: ButtonTokens;
   slotProps: ButtonSlotProps;
 }

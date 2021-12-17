@@ -1,14 +1,13 @@
-import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
+import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonPropsWithInnerRef } from './CompoundButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonColorTokens } from '../ButtonColorTokens';
-import { buttonStates } from '../Button.styling';
+import { buttonStates, contentStyling } from '../Button.styling';
 import { defaultButtonTokens } from '../ButtonTokens';
 import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
 import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
-import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
-export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
+export const stylingSettings: UseStylingOptions<CompoundButtonPropsWithInnerRef, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
     defaultButtonColorTokens,
@@ -40,32 +39,34 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
       },
     },
     content: buildProps(
-      (tokens: CompoundButtonTokens, theme: Theme) => ({
-        style: {
-          ...getTextMarginAdjustment(),
-          color: tokens.color,
-          ...fontStyles.from(tokens, theme),
-        },
-      }),
-      ['color', ...fontStyles.keys],
+      (tokens: CompoundButtonTokens, theme: Theme) => {
+        return {
+          style: {
+            ...contentStyling(tokens, theme, tokens.color, tokens),
+          },
+        };
+      },
+      ['color', 'spacingIconContent', ...fontStyles.keys],
     ),
     secondaryContent: buildProps(
-      (tokens: CompoundButtonTokens, theme: Theme) => ({
-        style: {
-          ...getTextMarginAdjustment(),
-          color: tokens.secondaryContentColor,
-          ...fontStyles.from(tokens.secondaryContentFont, theme),
-        },
-      }),
-      ['secondaryContentColor', 'secondaryContentFont'],
+      (tokens: CompoundButtonTokens, theme: Theme) => {
+        return {
+          style: {
+            ...contentStyling(tokens, theme, tokens.secondaryContentColor, tokens.secondaryContentFont),
+          },
+        };
+      },
+      ['secondaryContentColor', 'secondaryContentFont', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: CompoundButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['iconColor'],
+      ['iconColor', 'iconSize'],
     ),
   },
 };

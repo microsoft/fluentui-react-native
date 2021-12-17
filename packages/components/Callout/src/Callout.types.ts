@@ -100,8 +100,8 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
 
 export interface ICalloutProps extends IViewProps, ICalloutTokens {
   /**
-   * @platform win32
    * A string that should be announced when the callout is shown.
+   * @platform win32
    */
   accessibilityOnShowAnnouncement?: string;
 
@@ -111,10 +111,10 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * @platform win32
    * Adds a beak to the Callout, pointing to the anchor target.
    * Notable Win32 limitation: Beak rendering currently limits the border width to its default, and the
    * border width prop will not be honored.
+   * @platform win32
    */
   isBeakVisible?: boolean;
 
@@ -124,7 +124,6 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
   onDismiss?: () => void;
 
   /**
-   * @platform win32
    * Callback invoked during callout dismissal; if set, focus will not be restored by the callout and onRestoreFocus must
    * result in focus being moved to the appropriate focusable target.
    *
@@ -133,6 +132,7 @@ export interface ICalloutProps extends IViewProps, ICalloutTokens {
    * this callback is most appropriate for components strictly controlling focus.
    *
    * restoreFocusEvent.nativeEvent.containsFocus is true if the Callout had focus while being dismissed.
+   * @platform win32
    */
   onRestoreFocus?: (restoreFocusEvent: RestoreFocusEvent) => void;
 
