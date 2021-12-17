@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 01:26:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.3
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.2
+- Bump @fluentui-react-native/theme-tokens to v0.11.1
+
+## 0.13.2
+
+Thu, 16 Dec 2021 19:10:29 GMT
+
+### Patches
+
+- Added shape prop to Avatar (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/framework to v0.7.1
+- Bump @fluentui-react-native/theme-tokens to v0.11.0
+- Bump @fluentui-react-native/tokens to v0.11.1
 
 ## 0.13.1
 

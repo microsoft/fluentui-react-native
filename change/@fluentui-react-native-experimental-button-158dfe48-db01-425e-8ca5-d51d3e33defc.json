@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use Core ActivityIndicator as a fallback for FluentActivityIndicator",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

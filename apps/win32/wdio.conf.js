@@ -45,13 +45,14 @@ exports.config = {
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
-  services: ['appium'],
-  appium: {
-    logPath: './reports/',
-    args: {
-      port: '4723',
-    },
-  },
+  services: [
+    [
+      'appium',
+      {
+        logPath: './reports/',
+      },
+    ],
+  ],
 
   framework: 'jasmine',
   jasmineNodeOpts: {
@@ -113,6 +114,7 @@ exports.config = {
   before: function () {
     // not needed for Cucumber
     require('ts-node').register({ files: true });
+
     browser.maximizeWindow();
   },
   /**

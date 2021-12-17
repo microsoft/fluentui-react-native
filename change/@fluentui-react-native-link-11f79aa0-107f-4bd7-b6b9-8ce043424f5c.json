@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Rename Jest snapshots to be platform agnostic ",
-  "packageName": "@fluentui-react-native/link",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

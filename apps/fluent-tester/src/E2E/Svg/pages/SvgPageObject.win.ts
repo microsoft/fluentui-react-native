@@ -1,5 +1,5 @@
 import { SVG_TESTPAGE, SVG_TEST_COMPONENT, HOMEPAGE_SVG_BUTTON } from '../../../FluentTester/TestComponents/Svg/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class SvgPageObject extends BasePage {
   /*****************************************/
