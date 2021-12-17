@@ -20,6 +20,22 @@ Basic examples:
 
 More examples in the Tester App.
 
+## Visual Examples
+
+Win32:
+
+![Button with text on win32 example](./assets/button_example_win32.png)
+
+```tsx
+<Button>Text</Button>
+```
+
+![Button with text and primary appearance on win32 example](./assets/button_primary_example_win32.png)
+
+```tsx
+<Button appearance="primary">Text</Button>
+```
+
 ## Variants
 
 ### Appearance

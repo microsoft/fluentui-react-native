@@ -10,11 +10,29 @@ Basic examples:
 
 ```jsx
 <ToggleButton>Text</ToggleButton>
+<ToggleButton checked={true}>Text</ToggleButton>
+<ToggleButton defaultChecked={true}>Text</ToggleButton>
 <ToggleButton icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} />
 <ToggleButton icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</ToggleButton>
 <ToggleButton appearance="primary">Text</ToggleButton>
 <ToggleButton disabled>Text</ToggleButton>
 <ToggleButton size="small">Text</ToggleButton>
+```
+
+## Visual Examples
+
+Win32:
+
+![ToggleButton with text on win32 example](../../assets/togglebutton_example_win32.png)
+
+```tsx
+<ToggleButton>Text</ToggleButton>
+```
+
+![ToggleButton with text and checked state on win32 example](../../assets/togglebutton_checked_example_win32.png)
+
+```tsx
+<ToggleButton checked={true}>Text</ToggleButton>
 ```
 
 ## Variants

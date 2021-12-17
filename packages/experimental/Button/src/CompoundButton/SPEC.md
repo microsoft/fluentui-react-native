@@ -19,6 +19,24 @@ Basic examples:
 
 More examples in the Tester App.
 
+## Visual Examples
+
+Win32:
+
+![CompoundButton with text on win32 example](../../assets/compoundbutton_example_win32.png)
+
+```tsx
+<CompoundButton secondaryContent="A second line">Text</CompoundButton>
+```
+
+![CompoundButton with text and primary appearance on win32 example](../../assets/compoundbutton_primary_example_win32.png)
+
+```tsx
+<CompoundButton appearance="primary" secondaryContent="A second line">
+  Text
+</CompoundButton>
+```
+
 ## Variants
 
 Variant options are the same as the base `Button` component. This section will note main differences in design from the the base `Button` component.

@@ -16,6 +16,16 @@ Basic examples:
 <FAB disabled>Text</FAB>
 ```
 
+## Visual Examples
+
+Android:
+
+![FAB with text on Android example](../../assets/fab_example_android.png)
+
+```tsx
+<FAB>Text</FAB>
+```
+
 ## API
 
 ### Slots
