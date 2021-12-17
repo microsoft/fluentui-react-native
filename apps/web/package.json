@@ -13,7 +13,7 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": ">=0.48.1 <1.0.0",
+    "@fluentui-react-native/tester": ">=0.50.1 <1.0.0",
     "react": "17.0.1",
     "react-art": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -38,8 +38,8 @@
     "webpack-dev-server": "3.10.3"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.63",
-    "reactNativeDevVersion": "0.63.0",
+    "reactNativeVersion": "^0.64",
+    "reactNativeDevVersion": "0.64.0",
     "kitType": "app",
     "capabilities": [
       "core",

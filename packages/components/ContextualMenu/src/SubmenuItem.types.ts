@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemState } from './ContextualMenuItem.types';
@@ -17,11 +17,11 @@ export interface SubmenuItemState extends ContextualMenuItemState {
 }
 
 export interface SubmenuItemSlotProps {
-  root: React.PropsWithRef<ViewProps>;
-  leftstack: ViewProps;
+  root: React.PropsWithRef<IViewProps>;
+  startstack: IViewProps;
   icon: IconProps;
   content: ITextProps;
-  rightstack: ViewProps;
+  endstack: IViewProps;
   chevron: XmlProps;
 }
 

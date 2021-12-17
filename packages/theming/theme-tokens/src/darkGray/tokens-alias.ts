@@ -1,3 +1,3 @@
-import aliasTokens from './reactnative/tokens-aliases.json';
+import aliasTokens from '../generated/darkGray/reactnative/tokens-aliases.json';
 
 export default aliasTokens;

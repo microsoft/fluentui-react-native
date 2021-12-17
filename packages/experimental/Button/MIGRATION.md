@@ -19,7 +19,6 @@ Primary and Stealth buttons now map to `Button`:
 ### Props that remain as is
 
 - `children`
-- `disabled`
 - `icon`
 - `onClick`
 - `testID`
@@ -27,10 +26,10 @@ Primary and Stealth buttons now map to `Button`:
 
 ### Props no longer supported with an equivalent functionality in v1 Button
 
-- `componentRef` => Use regular `ref` instead
+- `componentRef` => Use `ref` instead
 - `content` => Pass the content as `children` instead
-- `endIcon` => Use `right` value for `iconPosition` prop and pass icon information into `icon` prop instead
-- `startIcon` => Use `left` value for `iconPosition` prop and pass icon information into `icon` prop instead
+- `endIcon` => Use `after` value for `iconPosition` prop and pass icon information into `icon` prop instead
+- `startIcon` => Use `before` value for `iconPosition` prop and pass icon information into `icon` prop instead
 
 ### Props no longer supported without an equivalent functionality in v1 Button
 
@@ -40,13 +39,10 @@ Primary and Stealth buttons now map to `Button`:
 
 | v0 `Button`    | v1 `Button`    |
 | -------------- | -------------- |
-| `children`     | `children`     |
 | `componentRef` | `ref`          |
 | `content`      |                |
-| `disabled`     | `disabled`     |
 | `endIcon`      | `iconPosition` |
 | `icon`         | `icon`         |
 | `onClick`      | `onClick`      |
 | `statIcon`     | `iconPosition` |
-| `testID`       | `testID`       |
 | `tooltip`      | `tooltip`      |

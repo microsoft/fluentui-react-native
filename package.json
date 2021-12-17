@@ -42,7 +42,7 @@
     "@rnx-kit/dep-check": "^1.10.0",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "beachball": "^1.35.0",
+    "beachball": "^2.20.0",
     "lage": ">=0.17.4 <1.0.0",
     "markdown-link-check": "^3.8.7",
     "metro-react-native-babel-preset": "^0.66.0",

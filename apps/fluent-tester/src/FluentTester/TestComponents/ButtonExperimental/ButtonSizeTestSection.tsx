@@ -16,17 +16,47 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
     <View style={[stackStyle, commonTestStyles.view]}>
       {svgIconsEnabled && (
         <>
-          <Button size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
-          <Button size="medium" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
-          <Button size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+          <Button iconOnly size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+          <Button iconOnly size="medium" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+          <Button iconOnly size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin} />
+          <Button size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+            Small Button with icon
+          </Button>
+          <Button size="medium" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+            Medium Button with icon
+          </Button>
+          <Button size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+            Large Button with icon
+          </Button>
         </>
       )}
-      <Button size="small" content="Small" style={commonTestStyles.vmargin} />
-      <Button size="medium" content="Medium" style={commonTestStyles.vmargin} />
-      <Button size="large" content="Large" style={commonTestStyles.vmargin} />
-      <CompoundButton size="small" content="Small" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton size="medium" content="Medium" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton size="large" content="Large" secondaryContent="Compound" style={commonTestStyles.vmargin} />
+      <Button size="small" style={commonTestStyles.vmargin}>
+        Small
+      </Button>
+      <Button size="medium" style={commonTestStyles.vmargin}>
+        Medium
+      </Button>
+      <Button size="large" style={commonTestStyles.vmargin}>
+        Large
+      </Button>
+      <Button loading size="small" style={commonTestStyles.vmargin}>
+        Loading Button Small
+      </Button>
+      <Button loading size="medium" style={commonTestStyles.vmargin}>
+        Loading Button Medium
+      </Button>
+      <Button loading size="large" style={commonTestStyles.vmargin}>
+        Loading Button Large
+      </Button>
+      <CompoundButton secondaryContent="rounded" shape="rounded" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton secondaryContent="square" shape="square" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
+      <CompoundButton secondaryContent="circular" shape="circular" style={commonTestStyles.vmargin}>
+        Compound Button
+      </CompoundButton>
     </View>
   );
 };

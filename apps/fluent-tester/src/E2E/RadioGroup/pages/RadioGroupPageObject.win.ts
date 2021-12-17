@@ -6,7 +6,7 @@ import {
   HOMEPAGE_RADIOGROUP_BUTTON,
   RADIOBUTTON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../FluentTester/TestComponents/RadioGroup/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 export const enum RadioButtonSelector {
   Primary = 0, // this._primaryComponent
