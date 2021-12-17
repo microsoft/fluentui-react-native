@@ -18,7 +18,7 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
       accessible: true,
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
-      accessibilityLabel: props.accessibilityLabel,
+      accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(!!disabled || !!loading),
       enableFocusRing: true,
       focusable: true,
