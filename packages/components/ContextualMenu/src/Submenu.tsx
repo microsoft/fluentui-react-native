@@ -95,7 +95,7 @@ export const Submenu = compose<SubmenuType>({
         <Slots.root>
           <Slots.container>
             {Platform.OS === 'macos' ? (
-              <FocusZone>{children}</FocusZone>
+              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
             ) : (
               <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
                 {children}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"],
+      "src/*": ["./src/*"]
+    },
+    "types": ["@wdio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]
+  },
+  "include": ["src", "../fluent-tester/src"]
+}

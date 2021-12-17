@@ -1,8 +1,86 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.3
+- Bump @fluentui-react-native/experimental-text to v0.7.4
+- Bump @fluentui-react-native/framework to v0.7.4
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+
+## 0.11.3
+
+Fri, 17 Dec 2021 19:53:20 GMT
+
+### Patches
+
+- Remove content prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.2
+- Bump @fluentui-react-native/experimental-text to v0.7.3
+- Bump @fluentui-react-native/framework to v0.7.3
+- Bump @fluentui-react-native/icon to v0.10.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+
+## 0.11.2
+
+Fri, 17 Dec 2021 14:04:45 GMT
+
+### Patches
+
+- Fixed duplicated content and icon for CompoundButton (v.kozlova13@gmail.com)
+
+## 0.11.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.1
+- Bump @fluentui-react-native/experimental-text to v0.7.2
+- Bump @fluentui-react-native/framework to v0.7.2
+- Bump @fluentui-react-native/icon to v0.10.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/theme-tokens to v0.11.1
+
+## 0.11.0
+
+Thu, 16 Dec 2021 19:10:28 GMT
+
+### Minor changes
+
+- Initial commit for FabButton (ruaraki@microsoft.com)
+- Rename componentRef to ref (ruaraki@microsoft.com)
+- Removed content prop from Toggle, Compound Buttons and FAB (v.kozlova13@gmail.com)
+- Removed content prop from Button component. (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.0
+- Bump @fluentui-react-native/experimental-text to v0.7.1
+- Bump @fluentui-react-native/framework to v0.7.1
+- Bump @fluentui-react-native/icon to v0.10.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/theme-tokens to v0.11.0
+- Bump @fluentui-react-native/tokens to v0.11.1
+
+### Patches
+
+- Enable native focus visuals on win32 (ruaraki@microsoft.com)
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- Remove transparent and outline as appearance options (ruaraki@microsoft.com)
+- Fixed paddings, color for Selected state (Toggle Button/src/ButtonTokens.ts), icon sizes (v.kozlova13@gmail.com)
+- Added new props for Button (shape, icon-position) (v.kozlova13@gmail.com)
+- Added loading prop (v.kozlova13@gmail.com)
+- Edit Migration doc (ruaraki@microsoft.com)
+- Use Core ActivityIndicator as a fallback for FluentActivityIndicator (sanajmi@microsoft.com)
+- Add more snapshot test cases (ruaraki@microsoft.com)
 
 ## 0.10.0
 

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/use-slot
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.2
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+
+## 0.2.1
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Fix chevron on menu button (ruaraki@microsoft.com)
 
 ## 0.2.0
 

@@ -4,7 +4,7 @@ import {
   HOMEPAGE_LINK_BUTTON,
   LINK_NO_A11Y_LABEL_COMPONENT,
 } from '../../../FluentTester/TestComponents/Link/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class LinkPageObject extends BasePage {
   /*****************************************/

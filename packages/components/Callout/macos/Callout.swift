@@ -83,12 +83,8 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	// MARK: WindowLifeCycleDelegate
 
-	func didDetectHitOutsideCallout(calloutWindow: CalloutWindow) {
-		 dismissCallout()
-	}
-
-	func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow) {
-		 dismissCallout()
+	func calloutWillDismiss(window: CalloutWindow) {
+		onDismissCallout()
 	}
 
 	// MARK: Private methods
@@ -96,12 +92,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private func showCallout() {
 		updateCalloutFrameToAnchor()
 		calloutWindow.makeKeyAndOrderFront(self)
-		didShowCallout()
+		onShowCallout()
 	}
 
 	private func dismissCallout() {
 		calloutWindow.close()
-		didDismissCallout()
+		onDismissCallout()
 	}
 
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
@@ -268,11 +264,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		return calloutScreenRect
 	}
 
-	private func didShowCallout() {
+	private func onShowCallout() {
 		onShow?([:])
 	}
 
-	private func didDismissCallout() {
+	private func onDismissCallout() {
 		if let onDismiss = onDismiss {
 			guard let reactTag = reactTag else {
 				preconditionFailure("React Tag missing")
@@ -286,11 +282,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	private var anchorView: NSView?
 
-	private var proxyView: RCTView = RCTView()
+	private var proxyView = RCTView()
 
 	private lazy var calloutWindow: CalloutWindow = {
 		let window = CalloutWindow()
-		window.windowLifeCycleDelegate = self
+		window.lifeCycleDelegate = self
 
 		let visualEffect = NSVisualEffectView()
 		visualEffect.translatesAutoresizingMaskIntoConstraints = false

@@ -2,7 +2,6 @@
 
 exports[`CompoundButton default 1`] = `
 <View
-  accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -10,12 +9,11 @@ exports[`CompoundButton default 1`] = `
     }
   }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
-  iconPosition="before"
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding E2E functional testing for rest of phase 2 components",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

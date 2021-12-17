@@ -4,6 +4,7 @@ import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
+import { DrawerTest, HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
@@ -52,6 +53,11 @@ export const tests: TestDescription[] = [
     name: 'ContextualMenu Test',
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+  },
+  {
+    name: 'Drawer Test',
+    component: DrawerTest,
+    testPage: HOMEPAGE_DRAWER_BUTTON,
   },
   {
     name: 'Focus Trap Zone Test',

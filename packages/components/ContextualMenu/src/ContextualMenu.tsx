@@ -18,7 +18,6 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
@@ -58,21 +57,21 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const containerPropsWin32: IViewProps = {
-      accessible: shouldFocusOnContainer,
-      focusable: shouldFocusOnContainer && containerFocus,
-      onBlur: toggleContainerFocus,
-      style: { maxHeight: maxHeight, width: maxWidth },
-    };
-
     const slotProps = mergeSettings<ContextualMenuSlotProps>(styleProps, {
       root: {
-        ...rest,
+        accessibilityRole: 'menu',
         setInitialFocus: shouldFocusOnMount,
+        ...rest,
       },
       container: Platform.select({
         macos: {},
-        default: containerPropsWin32,
+        default: {
+          // win32
+          accessible: shouldFocusOnContainer,
+          focusable: shouldFocusOnContainer && containerFocus,
+          onBlur: toggleContainerFocus,
+          style: { maxHeight: maxHeight, width: maxWidth },
+        },
       }),
     });
 
@@ -97,7 +96,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         <Slots.root>
           <Slots.container>
             {Platform.OS === 'macos' ? (
-              <FocusZone>{children}</FocusZone>
+              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
             ) : (
               <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
                 {children}

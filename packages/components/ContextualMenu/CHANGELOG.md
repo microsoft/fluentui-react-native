@@ -1,8 +1,81 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.5
+- Bump @fluentui-react-native/focus-zone to v0.8.4
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+- Bump @fluentui-react-native/pressable to v0.8.4
+
+## 0.13.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.4
+- Bump @fluentui-react-native/focus-zone to v0.8.3
+- Bump @fluentui-react-native/icon to v0.10.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+- Bump @fluentui-react-native/pressable to v0.8.3
+
+## 0.13.2
+
+Fri, 17 Dec 2021 18:39:08 GMT
+
+### Patches
+
+- Escape key closes ContextualMenu on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.3
+
+## 0.13.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.2
+- Bump @fluentui-react-native/focus-zone to v0.8.2
+- Bump @fluentui-react-native/icon to v0.10.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/text to v0.11.2
+- Bump @uifabricshared/foundation-compose to v1.11.2
+- Bump @fluentui-react-native/pressable to v0.8.2
+
+## 0.13.0
+
+Thu, 16 Dec 2021 19:10:29 GMT
+
+### Minor changes
+
+- Adding E2E functional testing for rest of phase 2 components (safreibe@microsoft.com)
+- Allow maxHeight prop to be set on menu and submenu for Scrollview (email not defined)
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/callout to v0.19.1
+- Bump @fluentui-react-native/focus-zone to v0.8.1
+- Bump @fluentui-react-native/icon to v0.10.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/text to v0.11.1
+- Bump @fluentui-react-native/tokens to v0.11.1
+- Bump @uifabricshared/foundation-compose to v1.11.1
+- Bump @fluentui-react-native/pressable to v0.8.1
+
+### Patches
+
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- remove focus style overrides for macOS contextual menu items (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Add up/down arrow key support to macOS ContextualMenu (sanajmi@microsoft.com)
+- rename slots to be more RTL friendly (sanajmi@microsoft.com)
 
 ## 0.12.0
 

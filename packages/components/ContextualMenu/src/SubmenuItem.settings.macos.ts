@@ -11,10 +11,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       color: 'menuItemText',
     },
     root: {
-      accessible: true,
-      accessibilityRole: 'menuitem',
       enableFocusRing: false,
-      focusable: true,
       style: {
         display: 'flex',
         flex: 1,
@@ -24,14 +21,13 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         borderRadius: 5,
       },
     },
-    content: {},
     icon: {
       style: {
         marginEnd: 5,
         color: 'menuIcon',
       },
     },
-    leftstack: {
+    startstack: {
       style: {
         display: 'flex',
         flex: 1,
@@ -42,7 +38,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         justifyContent: 'flex-start',
       },
     },
-    rightstack: {
+    endstack: {
       style: {
         display: 'flex',
         flex: 1,
@@ -53,7 +49,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         justifyContent: 'flex-end',
       },
     },
-    _precedence: ['focused', 'hovered', 'pressed', 'submenuItemHovered', 'disabled'],
+    _precedence: ['focused', 'hovered', 'pressed', 'disabled'],
     _overrides: {
       disabled: {
         tokens: {
@@ -67,13 +63,6 @@ export const settings: IComposeSettings<SubmenuItemType> = [
         },
       },
       focused: {
-        tokens: {
-          backgroundColor: 'menuItemBackgroundHovered',
-          chevronColor: 'white',
-          color: 'white',
-        },
-      },
-      submenuItemHovered: {
         tokens: {
           backgroundColor: 'menuItemBackgroundHovered',
           chevronColor: 'white',

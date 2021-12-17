@@ -3,31 +3,31 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 
 export const contextualMenuName = 'ContextualMenu';
-
 export interface ContextualMenuContext {
-  /*
-   ** The currently selected ContextualMenu's key
+  /**
+   * The currently selected ContextualMenu's key
    */
   selectedKey: string | null;
 
-  /*
-   ** Updates the clicked menu item and calls the client’s onItemClick callback
+  /**
+   * Updates the clicked menu item and calls the client’s onItemClick callback
    */
   onItemClick?: (key: string) => void;
-  /*
-   ** Parent menu's onDismiss callback that is passed into submenu to call when submenu item is clicked
+
+  /**
+   * Parent menu's onDismiss callback that is passed into submenu to call when submenu item is clicked
    */
   onDismissMenu?: () => void;
-  /*
-   ** Checks if any child menus are open
+
+  /**
+   * Checks if any child menus are open
    */
   isSubmenuOpen?: boolean;
-  /*
-   ** ContextualMenuItems will call this submenu dismissal when they are hovered
+
+  /**
+   * ContextualMenuItems will call this submenu dismissal when they are hovered
    */
   dismissSubmenu?: () => void;
-
-  setSubmenuItemHovered?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ContextualMenuState {
@@ -38,14 +38,14 @@ export type ContextualMenuTokens = ICalloutTokens;
 
 export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
   /**
-   * @platform win32
    * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
+   * @platform win32
    */
   shouldFocusOnContainer?: boolean;
 
   /**
-   * @platform win32
    * Whether to focus on the menu when mounted
+   * @platform win32
    */
   shouldFocusOnMount?: boolean;
 

@@ -1,8 +1,150 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.4
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.3
+- Bump @fluentui-react-native/experimental-avatar to v0.13.5
+- Bump @fluentui-react-native/experimental-button to v0.11.4
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.4
+- Bump @fluentui-react-native/experimental-expander to v0.3.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.5
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.4
+- Bump @fluentui-react-native/experimental-tabs to v0.4.4
+- Bump @fluentui-react-native/experimental-text to v0.7.4
+- Bump @fluentui-react-native/framework to v0.7.4
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+- Bump @fluentui-react-native/stack to v0.6.4
+- Bump @fluentui/react-native to v0.27.5
+
+## 0.50.4
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Remove content prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.3
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.2
+- Bump @fluentui-react-native/experimental-avatar to v0.13.4
+- Bump @fluentui-react-native/experimental-button to v0.11.3
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.3
+- Bump @fluentui-react-native/experimental-expander to v0.3.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.4
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.3
+- Bump @fluentui-react-native/experimental-tabs to v0.4.3
+- Bump @fluentui-react-native/experimental-text to v0.7.3
+- Bump @fluentui-react-native/framework to v0.7.3
+- Bump @fluentui-react-native/icon to v0.10.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+- Bump @fluentui-react-native/stack to v0.6.3
+- Bump @fluentui/react-native to v0.27.4
+
+## 0.50.3
+
+Fri, 17 Dec 2021 18:39:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.3
+- Bump @fluentui/react-native to v0.27.3
+
+## 0.50.2
+
+Fri, 17 Dec 2021 14:04:45 GMT
+
+### Patches
+
+- Fixed duplicated content and icon for CompoundButton (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/experimental-button to v0.11.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.2
+
+## 0.50.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.9.2
+- Bump @fluentui-react-native/button to v0.21.2
+- Bump @fluentui-react-native/default-theme to v0.9.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.1
+- Bump @fluentui-react-native/experimental-avatar to v0.13.3
+- Bump @fluentui-react-native/experimental-button to v0.11.1
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.2
+- Bump @fluentui-react-native/experimental-expander to v0.3.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.1
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.2
+- Bump @fluentui-react-native/experimental-tabs to v0.4.2
+- Bump @fluentui-react-native/experimental-text to v0.7.2
+- Bump @fluentui-react-native/framework to v0.7.2
+- Bump @fluentui-react-native/icon to v0.10.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/stack to v0.6.2
+- Bump @fluentui-react-native/theming-utils to v0.8.2
+- Bump @fluentui-react-native/win32-theme to v0.14.2
+- Bump @fluentui/react-native to v0.27.2
+
+## 0.50.0
+
+Thu, 16 Dec 2021 23:23:23 GMT
+
+### Minor changes
+
+- Adding MacOS E2E testing to CI pipeline (safreibe@microsoft.com)
+
+## 0.49.0
+
+Thu, 16 Dec 2021 19:10:25 GMT
+
+### Minor changes
+
+- Removed content prop from Button component. (v.kozlova13@gmail.com)
+- Adding E2E functional testing for rest of phase 2 components (safreibe@microsoft.com)
+- Stub button for non-mobile platforms (ruaraki@microsoft.com)
+- Changing UWP to new framework (safreibe@microsoft.com)
+- Removed content prop from Toggle, Compound Buttons and FAB (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/apple-theme to v0.9.1
+- Bump @fluentui-react-native/button to v0.21.1
+- Bump @fluentui-react-native/default-theme to v0.9.1
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.0
+- Bump @fluentui-react-native/experimental-avatar to v0.13.2
+- Bump @fluentui-react-native/experimental-button to v0.11.0
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.1
+- Bump @fluentui-react-native/experimental-expander to v0.3.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.0
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.1
+- Bump @fluentui-react-native/experimental-tabs to v0.4.1
+- Bump @fluentui-react-native/experimental-text to v0.7.1
+- Bump @fluentui-react-native/framework to v0.7.1
+- Bump @fluentui-react-native/icon to v0.10.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/stack to v0.6.1
+- Bump @fluentui-react-native/theming-utils to v0.8.1
+- Bump @fluentui-react-native/win32-theme to v0.14.1
+- Bump @fluentui/react-native to v0.27.1
+
+### Patches
+
+- Only show chevron test when SVGs are supported (ruaraki@microsoft.com)
+- Fixed paddings, color for Selected state (Toggle Button/src/ButtonTokens.ts), icon sizes (v.kozlova13@gmail.com)
+- Added loading prop (v.kozlova13@gmail.com)
+- Add e2e tests for experimental button (ruaraki@microsoft.com)
+- Allow maxHeight prop to be set on menu and submenu for Scrollview (email not defined)
+- Use Core ActivityIndicator as a fallback for FluentActivityIndicator (sanajmi@microsoft.com)
+- Add simple drawer module without methods (email not defined)
+- Added new props for Button (shape, icon-position) (v.kozlova13@gmail.com)
+- Added shape prop to Avatar (v.kozlova13@gmail.com)
 
 ## 0.48.1
 

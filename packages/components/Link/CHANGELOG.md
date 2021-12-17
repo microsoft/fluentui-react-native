@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+
+## 0.15.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+
+## 0.15.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/text to v0.11.2
+
+## 0.15.1
+
+Thu, 16 Dec 2021 19:10:26 GMT
+
+### Patches
+
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.1
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/text to v0.11.1
+- Bump @fluentui-react-native/tokens to v0.11.1
 
 ## 0.15.0
 
