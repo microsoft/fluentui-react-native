@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 16 Dec 2021 23:23:23 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 01:26:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.9.2
+- Bump @fluentui-react-native/button to v0.21.2
+- Bump @fluentui-react-native/default-theme to v0.9.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.1
+- Bump @fluentui-react-native/experimental-avatar to v0.13.3
+- Bump @fluentui-react-native/experimental-button to v0.11.1
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.2
+- Bump @fluentui-react-native/experimental-expander to v0.3.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.1
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.2
+- Bump @fluentui-react-native/experimental-tabs to v0.4.2
+- Bump @fluentui-react-native/experimental-text to v0.7.2
+- Bump @fluentui-react-native/framework to v0.7.2
+- Bump @fluentui-react-native/icon to v0.10.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/stack to v0.6.2
+- Bump @fluentui-react-native/theming-utils to v0.8.2
+- Bump @fluentui-react-native/win32-theme to v0.14.2
+- Bump @fluentui/react-native to v0.27.2
 
 ## 0.50.0
 

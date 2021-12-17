@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Thu, 16 Dec 2021 19:10:25 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 01:26:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Move generated tokens under a generated folder (ruaraki@microsoft.com)
 
 ## 0.11.0
 
