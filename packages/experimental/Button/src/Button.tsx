@@ -48,16 +48,16 @@ const ButtonComposed = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonPropsWithInnerRef, children: React.ReactNode[]) => {
-      const { icon, iconPosition, loading, accessiblityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
       let childText = '';
-      if (accessiblityLabel === undefined) {
+      if (accessibilityLabel === undefined) {
         React.Children.forEach(children, (child) => {
           if (typeof child === 'string') {
             childText = child; // We only automatically support the one child string.
           }
         });
       }
-      const label = accessiblityLabel ? accessiblityLabel : childText;
+      const label = accessibilityLabel ? accessibilityLabel : childText;
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
