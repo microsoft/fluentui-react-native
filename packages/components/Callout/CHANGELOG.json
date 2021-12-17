@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 22:42:38 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.6",
+      "version": "0.19.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70",
+            "comment": "remove carbon header"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 22:06:58 GMT",
       "tag": "@fluentui-react-native/callout_v0.19.5",
       "version": "0.19.5",

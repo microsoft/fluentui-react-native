@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Call both ContextualMenu's onClick and each item's onClick on every item click",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

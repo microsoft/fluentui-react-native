@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 22:42:38 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "14e3b0408c0cea62035f4e080d3bbd6b37748721",
+            "comment": "Call both ContextualMenu's onClick and each item's onClick on every item click"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.19.6",
+            "commit": "14e3b0408c0cea62035f4e080d3bbd6b37748721"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 22:06:58 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.13.4",
       "version": "0.13.4",

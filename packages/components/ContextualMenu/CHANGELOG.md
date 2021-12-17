@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 22:42:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Minor changes
+
+- Call both ContextualMenu's onClick and each item's onClick on every item click (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.6
 
 ## 0.13.4
 
