@@ -63,7 +63,7 @@ The `Button` component can be loading if it's waiting for another action to occu
 ### Props
 
 ```ts
-export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
+export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
@@ -136,7 +136,7 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
    * A callback to call on button click event
    */
   onClick?: () => void;
-};
+}
 ```
 
 ### Styling Tokens
@@ -204,7 +204,7 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 
 ### States
 
-The following section describes the different states in which a `Button` can be throughout the course of interaction with it.
+The following section describes the different states which `Button` can be in as a result of interaction.
 
 #### Enabled and Disabled states
 

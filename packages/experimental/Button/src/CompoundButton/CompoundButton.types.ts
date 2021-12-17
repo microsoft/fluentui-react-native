@@ -6,11 +6,19 @@ import { FontTokens } from '@fluentui-react-native/tokens';
 export const compoundButtonName = 'CompoundButton';
 
 export interface CompoundButtonTokens extends ButtonTokens {
+  /**
+   * Font of the second line of text on the button.
+   */
   secondaryContentFont?: FontTokens;
+
+  /**
+   * Color of the second line of text on the button.
+   */
   secondaryContentColor?: ColorValue;
 
   /**
    * States that can be applied to a button
+   * These can be used to modify styles of the button when under the specified state.
    */
   hovered?: CompoundButtonTokens;
   focused?: CompoundButtonTokens;
