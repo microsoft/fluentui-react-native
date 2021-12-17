@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Specifying Experimental Button Test",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "none"
+}
