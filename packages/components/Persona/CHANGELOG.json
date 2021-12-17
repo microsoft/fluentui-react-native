@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/persona",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 19:53:21 GMT",
+      "tag": "@fluentui-react-native/persona_v0.12.3",
+      "version": "0.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona",
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.10.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 01:26:42 GMT",
       "tag": "@fluentui-react-native/persona_v0.12.2",
       "version": "0.12.2",

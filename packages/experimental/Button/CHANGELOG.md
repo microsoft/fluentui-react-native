@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Fri, 17 Dec 2021 14:04:45 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 19:53:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.3
+
+Fri, 17 Dec 2021 19:53:20 GMT
+
+### Patches
+
+- Remove content prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.2
+- Bump @fluentui-react-native/experimental-text to v0.7.3
+- Bump @fluentui-react-native/framework to v0.7.3
+- Bump @fluentui-react-native/icon to v0.10.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
 
 ## 0.11.2
 

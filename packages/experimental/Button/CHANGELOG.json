@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 19:53:20 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b",
+            "comment": "Remove content prop"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.2",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.10.2",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 14:04:45 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.11.2",
       "version": "0.11.2",

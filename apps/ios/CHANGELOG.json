@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-ios",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 19:53:21 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.4",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 18:39:08 GMT",
       "tag": "@fluentui-react-native/tester-ios_v0.0.1",
       "version": "0.0.1",

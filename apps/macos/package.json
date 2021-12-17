@@ -21,7 +21,7 @@
     "e2etest": "wdio"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.50.3",
+    "@fluentui-react-native/tester": "^0.50.4",
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-macos": "^0.64.6",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 19:53:21 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.1",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.6.0",
       "version": "0.6.0",
