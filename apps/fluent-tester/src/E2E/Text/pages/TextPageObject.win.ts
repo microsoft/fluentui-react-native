@@ -1,5 +1,5 @@
 import { TEXT_TESTPAGE, TEXT_TEST_COMPONENT, HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class TextPageObject extends BasePage {
   /*****************************************/

@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 import FocusTrapZonePageObject from '../pages/FocusTrapZonePageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 

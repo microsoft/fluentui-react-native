@@ -4,7 +4,7 @@ import {
   HOMEPAGE_ICON_BUTTON,
   ICON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../FluentTester/TestComponents/Icon/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class IconPageObject extends BasePage {
   /*****************************************/

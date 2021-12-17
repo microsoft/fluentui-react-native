@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 14:04:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.2
+
+Fri, 17 Dec 2021 14:04:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.2
+
+## 0.17.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.1
+
+## 0.17.0
+
+Thu, 16 Dec 2021 23:23:23 GMT
+
+### Minor changes
+
+- Adding MacOS E2E testing to CI pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.0
+
+## 0.16.2
+
+Thu, 16 Dec 2021 19:10:25 GMT
+
+### Patches
+
+- Allow maxHeight prop to be set on menu and submenu for Scrollview (email not defined)
+- Enable native focus visuals on win32 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.49.0
 
 ## 0.16.1
 

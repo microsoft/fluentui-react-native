@@ -38,14 +38,14 @@ export type ContextualMenuTokens = ICalloutTokens;
 
 export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'setInitialFocus'> {
   /**
-   * @platform win32
    * Whether to set initial focus on the contextual menu container, as opposed to the first menu item.
+   * @platform win32
    */
   shouldFocusOnContainer?: boolean;
 
   /**
-   * @platform win32
    * Whether to focus on the menu when mounted
+   * @platform win32
    */
   shouldFocusOnMount?: boolean;
 

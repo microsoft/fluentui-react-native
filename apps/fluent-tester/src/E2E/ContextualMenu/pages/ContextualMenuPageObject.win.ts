@@ -3,7 +3,7 @@ import {
   CONTEXTUALMENU_TEST_COMPONENT,
   HOMEPAGE_CONTEXTUALMENU_BUTTON,
 } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class ContextualMenuPageObject extends BasePage {
   /*****************************************/

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Refactor useKeyCallback",
-  "packageName": "@fluentui-react-native/button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
