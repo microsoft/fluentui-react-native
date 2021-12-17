@@ -82,15 +82,16 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
      * To achieve this, we override the onMouseLEave handler returned by useAsPressable, and replace it with our own. Inside our own
      * onMouseLeave handler, we call useAsPressable's onMouseLEave handler,
      */
-    const { onMouseLeave, ...restPressableProps } = pressable.props;
+    const { onBlur, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseLeaveModified = React.useCallback(
       (e) => {
-        pressablePropsModified.onBlur(e);
+        onBlur(e);
         onMouseLeave && onMouseLeave(e);
       },
-      [onMouseLeave],
+      [onBlur, onMouseLeave],
     );
     const pressablePropsModified = {
+      onBlur: onBlur,
       onMouseLeave: onMouseLeaveModified,
       ...restPressableProps,
     };

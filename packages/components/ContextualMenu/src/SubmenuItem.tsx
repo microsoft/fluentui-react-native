@@ -74,14 +74,14 @@ export const SubmenuItem = compose<SubmenuItemType>({
     });
 
     /**
-     * GH #blah:
+     * GH #1267
      * We want onMouseEnter to fire right away to set focus, and then Pressable's onHoverIn to fire after a delay to show the submenu.
      * To achieve this, we override the onMouseEnter handler returned by useAsPressable, and replace it with our own. Inside our own
      * onMouseEnter handler, we call useAsPressable's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
      * In the future, we can avoid needing to override onMouseEnter by handling submenu rendering internally rather than depending on the
      * client to conditionally render it with onHoverIn.
      */
-    const { onMouseEnter, onMouseLeave, ...restPressableProps } = pressable.props;
+    const { onBlur, onMouseEnter, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseEnterModified = React.useCallback(
       (e) => {
         componentRef.current.focus();
@@ -91,12 +91,13 @@ export const SubmenuItem = compose<SubmenuItemType>({
     );
     const onMouseLeaveModified = React.useCallback(
       (e) => {
-        pressablePropsModified.onBlur(e);
+        onBlur(e);
         onMouseLeave && onMouseLeave(e);
       },
       [onMouseLeave],
     );
     const pressablePropsModified = {
+      onBlur: onBlur,
       onMouseEnter: onMouseEnterModified,
       onMouseLeave: onMouseLeaveModified,
       ...restPressableProps,
