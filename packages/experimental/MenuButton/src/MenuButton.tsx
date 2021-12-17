@@ -40,6 +40,7 @@ export const MenuButton = compose<MenuButtonType>({
       style,
       ref: stdBtnRef,
       onClick: toggleShowContextualMenu,
+      iconOnly: content ? false : true,
       ...rest,
     };
 
