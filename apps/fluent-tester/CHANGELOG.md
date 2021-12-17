@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 17 Dec 2021 01:26:42 GMT and should not be manually modified.
+This log was last generated on Fri, 17 Dec 2021 14:04:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.2
+
+Fri, 17 Dec 2021 14:04:45 GMT
+
+### Patches
+
+- Fixed duplicated content and icon for CompoundButton (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/experimental-button to v0.11.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.2
 
 ## 0.50.1
 

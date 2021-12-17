@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 17 Dec 2021 14:04:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.2",
+      "version": "0.50.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0c4428511ad3bac757c4ca7777b96daa8a361fcf",
+            "comment": "Fixed duplicated content and icon for CompoundButton"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.11.2",
+            "commit": "0c4428511ad3bac757c4ca7777b96daa8a361fcf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.2.2",
+            "commit": "0c4428511ad3bac757c4ca7777b96daa8a361fcf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 01:26:42 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.1",
       "version": "0.50.1",
