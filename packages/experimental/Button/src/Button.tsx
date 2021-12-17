@@ -57,7 +57,7 @@ const ButtonComposed = compose<ButtonType>({
           }
         });
       }
-      const label = accessibilityLabel ? accessibilityLabel : childText;
+      const label = accessibilityLabel ?? childText;
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
