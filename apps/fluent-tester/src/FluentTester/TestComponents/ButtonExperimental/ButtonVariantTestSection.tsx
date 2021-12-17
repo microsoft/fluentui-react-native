@@ -1,6 +1,6 @@
 import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
