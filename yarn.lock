@@ -15765,9 +15765,9 @@ react-native-svg@^12.1.1:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^0.9.13:
-  version "0.9.19"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.19.tgz#cb86b45d7c789483cbb4c3f64a5a402b6e0743ad"
-  integrity sha512-S7div5WeFjbFAhIDaB5DRNQeBT39AHRwMBS5+utsCuUgL71TAtSMMl6elnvpyFaBfe7VOegYLZz1HE1eCS4h9Q==
+  version "0.9.22"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.22.tgz#dd91d7fb4288a53cb2e5bfe9d54e8f3f78ebe57a"
+  integrity sha512-9RQ8tr2N0sRjt3b67smHXlAmT7L62uLmeupeRIOQ2X6lBSB8u3TKJn9cljgRGi8bjUkKAVR48zwppy1V0VP3nA==
   dependencies:
     chalk "^4.1.0"
     prompts "^2.4.0"
