@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Sat, 18 Dec 2021 04:15:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/use-tokens to v0.2.1
 
 ## 0.8.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Sat, 18 Dec 2021 04:15:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.6.1
 
 ## 0.5.0
 

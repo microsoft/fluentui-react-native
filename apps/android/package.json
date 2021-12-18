@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/experimental-drawer": "*",
-    "@fluentui-react-native/tester": "^0.50.7",
+    "@fluentui-react-native/tester": "^0.50.8",
     "@react-native-community/slider": "^4.1.12",
     "@react-native-picker/picker": "^1.16.7",
     "hermes-engine": "~0.5.0",

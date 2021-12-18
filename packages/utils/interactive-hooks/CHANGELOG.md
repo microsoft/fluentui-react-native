@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
+This log was last generated on Sat, 18 Dec 2021 04:15:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.5
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/icon to v0.10.4
 
 ## 0.11.4
 

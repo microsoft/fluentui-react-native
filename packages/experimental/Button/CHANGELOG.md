@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Sat, 18 Dec 2021 01:46:05 GMT and should not be manually modified.
+This log was last generated on Sat, 18 Dec 2021 04:15:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.6
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.4
+- Bump @fluentui-react-native/experimental-text to v0.7.5
+- Bump @fluentui-react-native/framework to v0.7.5
+- Bump @fluentui-react-native/icon to v0.10.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.5
+- Bump @fluentui-react-native/tokens to v0.11.2
+- Bump @fluentui-react-native/use-styling to v0.8.1
 
 ## 0.11.5
 
