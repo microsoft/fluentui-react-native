@@ -2,6 +2,7 @@
   "extends": "@uifabricshared/build-native/tsconfig.json",
   "compilerOptions": {
     "outDir": "lib",
+    "resolveJsonModule": true,
     "types": ["node", "jest"]
   },
   "include": ["src"]
