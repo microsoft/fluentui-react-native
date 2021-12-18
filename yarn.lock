@@ -2885,15 +2885,27 @@
   dependencies:
     babel-plugin-const-enum "^1.0.0"
 
-"@rnx-kit/cli@^0.5.27":
-  version "0.5.28"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.5.28.tgz#f81062a2e0d5881f936f7c181015947adaa11c01"
-  integrity sha512-KtCG29asCRbT4w1dUw0ilr8RC0+icQY91L2CGygE03vMr2UoV4vDCfAoh8Rh3yLizd3LUiSlmVctJqbiqytKJQ==
+"@rnx-kit/cli@^0.9.57":
+  version "0.9.57"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.9.57.tgz#2b8ca28898ac0be53fae3ac088f9e32630f8a028"
+  integrity sha512-XefAs+BIy2kuoFKenjIjCH0kqMHhG5DsQX2hA1R+3r9Al93Ofs3ccfiXud/znDB5r3+49TnlP4a51gNLioffxw==
   dependencies:
-    "@rnx-kit/config" "0.2.9"
-    "@rnx-kit/dep-check" "^1.5.9"
-    "@rnx-kit/third-party-notices" "1.0.1"
+    "@rnx-kit/config" "^0.4.21"
+    "@rnx-kit/console" "^1.0.11"
+    "@rnx-kit/dep-check" "^1.9.5"
+    "@rnx-kit/metro-plugin-cyclic-dependencies-detector" "^1.0.21"
+    "@rnx-kit/metro-plugin-duplicates-checker" "^1.2.15"
+    "@rnx-kit/metro-serializer" "^1.0.11"
+    "@rnx-kit/metro-serializer-esbuild" "^0.0.23"
+    "@rnx-kit/metro-service" "^1.1.13"
+    "@rnx-kit/third-party-notices" "^1.2.13"
+    "@rnx-kit/tools-language" "^1.2.6"
+    "@rnx-kit/tools-node" "^1.2.6"
+    "@rnx-kit/tools-react-native" "^1.0.10"
+    "@rnx-kit/typescript-react-native-resolver" "^0.1.3"
+    "@rnx-kit/typescript-service" "^1.5.3"
     chalk "^4.1.0"
+    readline "^1.3.0"
 
 "@rnx-kit/config@0.2.9":
   version "0.2.9"
@@ -2939,7 +2951,7 @@
     "@babel/preset-typescript" "^7.0.0"
     find-up "^5.0.0"
 
-"@rnx-kit/metro-config@^1.2.3":
+"@rnx-kit/metro-config@^1.2.26":
   version "1.2.26"
   resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.26.tgz#abd2dc866d5e4b560fbe1f0f881d29025db30b07"
   integrity sha512-YJhglbDbNIPrLsO1HfijlxPIV+r4eJEXO6No4atyG7E5iQhaf98gKBKlyStx4WMSC4uGqqKKAOZ8+PkGyD2jVg==
@@ -3284,6 +3296,11 @@
   dependencies:
     "@types/through" "*"
     rxjs "^6.4.0"
+
+"@types/invariant@^2.2.0":
+  version "2.2.35"
+  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.35.tgz#cd3ebf581a6557452735688d8daba6cf0bd5a3be"
+  integrity sha512-DxX1V9P8zdJPYQat1gHyY0xj3efl8gnMVjiM9iCY6y27lj+PoQWkgjt8jDqmovPqULkKVpKRg8J36iQiA+EtEg==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.3"

@@ -27,8 +27,8 @@
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
-    "@rnx-kit/cli": "^0.5.27",
-    "@rnx-kit/metro-config": "^1.2.3",
+    "@rnx-kit/cli": "^0.9.57",
+    "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
     "@uifabricshared/build-native": "0.1.1",
     "@wdio/allure-reporter": "5.22.4",
@@ -72,7 +72,14 @@
       "targets": [
         "windows"
       ],
-      "entryPath": "index.js"
+      "entryPath": "index.js",
+      "detectCyclicDependencies": {
+        "throwOnError": true
+      },
+      "detectDuplicateDependencies": {
+        "throwOnError": false
+      },
+      "typescriptValidation": false
     },
     "capabilities": [
       "core",
