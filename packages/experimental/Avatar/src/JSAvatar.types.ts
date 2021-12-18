@@ -66,7 +66,7 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
 }
 
 export interface AvatarSlotProps {
-  root: ViewProps;
+  root: IViewProps;
   photo: ImageProps;
   initials: TextProps;
   initialsBackground: ViewProps;
