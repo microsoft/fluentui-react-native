@@ -12,9 +12,10 @@ import {
   compressible,
   patchTokens,
 } from '@fluentui-react-native/framework';
-import { Text as RNText, ColorValue } from 'react-native';
+import { ColorValue } from 'react-native';
 import { ITextProps } from '@fluentui-react-native/adapters';
 import React from 'react';
+import { Text as RNText } from './TextComponent';
 
 const textName = 'Text';
 
