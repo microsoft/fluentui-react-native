@@ -2,6 +2,8 @@ import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
+export const tabsItemSelectActionLabel = 'Select a TabsItem';
+
 export const settings: IComposeSettings<TabsItemType> = [
   {
     tokens: {
