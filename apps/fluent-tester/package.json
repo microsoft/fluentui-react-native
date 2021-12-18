@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@rnx-kit/cli": "^0.9.56",
+    "@rnx-kit/cli": "^0.9.57",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
