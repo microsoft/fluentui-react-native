@@ -29,7 +29,7 @@
     "@fluentui-react-native/use-styling": ">=0.8.0 <1.0.0",
     "@fluentui-react-native/icon": "0.10.3",
     "@fluentui-react-native/adapters": "0.8.1",
-    "tslib": "^1.13.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
