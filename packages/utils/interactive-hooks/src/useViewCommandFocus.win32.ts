@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { findNodeHandle, UIManager } from 'react-native';
+import { findNodeHandle, UIManager, View } from 'react-native';
 import { IViewWin32 } from '@office-iss/react-native-win32';
 
 const setAndForwardRef = require('./setAndForwardRef');
 
-export type IFocusable = IViewWin32;
+export interface IFocusable extends View, IViewWin32 {}
 /**
  * A hook to add an imperative focus method to functional components which simply dispatch a focus command to
  * something View-derived on the native side.  In practice, this effectively applies to all components in our Win32
