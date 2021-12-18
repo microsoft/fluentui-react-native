@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 00:43:50 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.6",
+      "version": "0.50.6",
+      "comments": {
+        "none": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a9d419694a3b6884e0bb4ee057b95ef0d70240ce",
+            "comment": "Specifying Experimental Button Test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 22:42:38 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.6",
       "version": "0.50.6",
