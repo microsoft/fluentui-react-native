@@ -36,7 +36,7 @@
     "@fluentui-react-native/use-tokens": ">=0.2.0 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.5",
     "@fluentui-react-native/tokens": ">=0.11.1 <1.0.0",
-    "tslib": "^1.13.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

@@ -53,7 +53,7 @@
     "@react-native-community/slider": "^4.1.12",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^1.16.7",
-    "tslib": "^1.13.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

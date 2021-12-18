@@ -34,7 +34,7 @@
   "dependencies": {
     "@fluentui-react-native/memo-cache": "^1.1.5",
     "@fluentui-react-native/use-tokens": "^0.2.0",
-    "tslib": "^1.13.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",

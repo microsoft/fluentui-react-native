@@ -31,7 +31,7 @@
     "@fluentui-react-native/theme-tokens": ">=0.11.1 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.11.1 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.8.0 <1.0.0",
-    "tslib": "^1.13.0"
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
