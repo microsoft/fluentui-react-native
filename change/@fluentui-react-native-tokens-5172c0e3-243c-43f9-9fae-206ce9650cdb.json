@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update to TypeScript 4.5.4.",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "patch"
+}
