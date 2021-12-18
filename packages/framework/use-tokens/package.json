@@ -4,7 +4,8 @@
   "description": "Utilities and hook function for getting themed tokens for a component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/use-tokens"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

@@ -27,6 +27,11 @@
     "@uifabricshared/foundation-compose": "^1.11.2",
     "react-native-svg": "^12.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/Icon"
+  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@office-iss/react-native-win32": "^0.64.8",

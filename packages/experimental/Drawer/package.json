@@ -25,6 +25,11 @@
     "@fluentui-react-native/framework": "0.7.3",
     "tslib": "^1.13.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/Drawer"
+  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/react-native": "^0.64.0",

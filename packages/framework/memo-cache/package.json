@@ -4,7 +4,8 @@
   "description": "Layered memoization style cache helper",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/memo-cache"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

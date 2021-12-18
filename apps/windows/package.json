@@ -16,6 +16,11 @@
     "prewindows": "install-windows-test-app --use-nuget",
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/windows"
+  },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.50.4",
     "react": "17.0.1",

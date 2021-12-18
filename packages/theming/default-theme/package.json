@@ -4,7 +4,8 @@
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/just"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/default-theme"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

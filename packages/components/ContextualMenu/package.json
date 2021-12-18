@@ -23,6 +23,11 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/components/ContextualMenu"
+  },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.8.1",
     "@fluentui-react-native/callout": ">=0.19.4 <1.0.0",

@@ -4,7 +4,8 @@
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/deprecated/foundation-compose"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
