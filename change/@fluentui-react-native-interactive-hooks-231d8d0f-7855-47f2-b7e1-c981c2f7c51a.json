@@ -1,6 +1,6 @@
 {
-  "type": "patch",
-  "comment": "Enable JSON module resolution in interactive-hooks, as it makes use of this capability and is required for proper type-checking.",
+  "type": "minor",
+  "comment": "Add missing types package to interactive-hooks. Also, update useViewCommandFocus() on win32. It now returns a type that encompasses the union of a View (android/ios-combined) and IViewWin32 (win32 extensions to view).",
   "packageName": "@fluentui-react-native/interactive-hooks",
   "email": "afoxman@microsoft.com",
   "dependentChangeType": "patch"
