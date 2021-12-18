@@ -68,6 +68,12 @@ export interface TabsItemProps extends IPressableProps {
   icon?: IconSourcesType;
 
   testID?: string;
+
+  // Defined in IViewWin32, and duplicated here because RadioButton has already shipped supporting these properties. Rather than
+  // remove them from non-Windows platforms, they are being added here to align the types across all platforms. TypeScript will
+  // merge the prop definitions without complaint.
+  accessibilityPositionInSet?: number;
+  accessibilitySetSize?: number;
 }
 
 export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens, IBorderTokens {

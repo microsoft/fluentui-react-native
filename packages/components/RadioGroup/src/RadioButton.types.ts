@@ -47,6 +47,12 @@ export interface IRadioButtonProps extends IPressableProps {
    */
   ariaSetSize?: number;
 
+  // Defined in IViewWin32, and duplicated here because RadioButton has already shipped supporting these properties. Rather than
+  // remove them from non-Windows platforms, they are being added here to align the types across all platforms. TypeScript will
+  // merge the prop definitions without complaint.
+  accessibilityPositionInSet?: number;
+  accessibilitySetSize?: number;
+
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
