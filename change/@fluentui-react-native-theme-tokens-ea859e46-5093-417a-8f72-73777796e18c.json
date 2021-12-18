@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Enable JSON module resolution in interactive-hooks, as it makes use of this capability and is required for proper type-checking.",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "patch"
+}

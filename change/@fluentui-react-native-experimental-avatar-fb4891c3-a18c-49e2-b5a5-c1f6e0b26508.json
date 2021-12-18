@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Make the JSAvatar's root slot component use IViewProps (plat-specific view props), rather than ViewProps (android/ios-combined props). This matches the JSAvatarProps definition which is based on IViewProps, no ViewProps.",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update the experimental Text control so it exports a Win32 Text control for Win32 bundles and a react-native Text control for all other platforms. This gives the user access to Win32-specific props in the type signatures and at runtime.",
+  "packageName": "@fluentui-react-native/experimental-text",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "RadioButton and TabsItem expose two accessibility props (position in set, set size) across all platforms. These props are only exposed in the types for @office-iss/react-native-win32, not react-native. To compensate for that, add the missing props to each control with a comment explaining why they are in both places.",
+  "packageName": "@fluentui-react-native/tabs",
+  "email": "afoxman@microsoft.com",
+  "dependentChangeType": "patch"
+}
