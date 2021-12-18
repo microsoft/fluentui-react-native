@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-android",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 01:46:05 GMT",
+      "tag": "@fluentui-react-native/tester-android_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-android",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.7",
+            "commit": "402ab46c47688c64629bc0366b1b1e0510111926"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 22:42:38 GMT",
       "tag": "@fluentui-react-native/tester-android_v0.0.1",
       "version": "0.0.1",
