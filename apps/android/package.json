@@ -34,9 +34,10 @@
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@rnx-kit/cli": "^0.5.27",
-    "@rnx-kit/metro-config": "^1.2.3",
+    "@rnx-kit/cli": "^0.9.57",
+    "@rnx-kit/metro-config": "^1.2.26",
     "@uifabricshared/build-native": "^0.1.1",
+    "flow-bin": "^0.113.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^0.14.3",
     "react-native-test-app": "^0.9.13",
@@ -48,18 +49,18 @@
   "rnx-kit": {
     "reactNativeVersion": "0.64",
     "kitType": "app",
-    "detectCyclicDependencies": {
-      "throwOnError": true
-    },
-    "detectDuplicateDependencies": {
-      "throwOnError": true
-    },
-    "typescriptValidation": true,
     "bundle": {
       "targets": [
         "android"
       ],
-      "entryPath": "index.js"
+      "entryPath": "index.js",
+      "detectCyclicDependencies": {
+        "throwOnError": true
+      },
+      "detectDuplicateDependencies": {
+        "throwOnError": false
+      },
+      "typescriptValidation": false
     },
     "capabilities": [
       "core-android",

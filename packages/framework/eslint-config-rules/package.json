@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@rnx-kit/eslint-plugin": "^0.2.0",
+    "@rnx-kit/eslint-plugin": "^0.2.8",
     "eslint": "^8.0.0",
     "eslint-plugin-jest": "^25.0.0"
   },
