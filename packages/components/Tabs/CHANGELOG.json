@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.8.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Dec 2021 04:15:05 GMT",
       "tag": "@fluentui-react-native/tabs_v0.6.5",
       "version": "0.6.5",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo.",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "afoxman@microsoft.com",
-  "dependentChangeType": "patch"
-}

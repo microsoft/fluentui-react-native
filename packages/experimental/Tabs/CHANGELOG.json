@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.4.6",
+      "version": "0.4.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.8.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Dec 2021 04:15:04 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.4.5",
       "version": "0.4.5",

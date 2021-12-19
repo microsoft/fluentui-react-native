@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/link_v0.15.6",
+      "version": "0.15.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Dec 2021 04:15:05 GMT",
       "tag": "@fluentui-react-native/link_v0.15.5",
       "version": "0.15.5",

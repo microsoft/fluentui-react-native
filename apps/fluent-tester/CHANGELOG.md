@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 18 Dec 2021 04:15:04 GMT and should not be manually modified.
+This log was last generated on Sun, 19 Dec 2021 05:07:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.9
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.6
+- Bump @fluentui-react-native/experimental-button to v0.11.7
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.9
+- Bump @fluentui-react-native/experimental-tabs to v0.4.6
+- Bump @fluentui-react-native/interactive-hooks to v0.11.6
+- Bump @fluentui/react-native to v0.27.8
 
 ## 0.50.8
 

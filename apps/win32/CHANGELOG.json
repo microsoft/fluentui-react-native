@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.9",
+      "version": "0.17.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "afoxman@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b",
+            "comment": "Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.9",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Dec 2021 04:15:04 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.17.8",
       "version": "0.17.8",

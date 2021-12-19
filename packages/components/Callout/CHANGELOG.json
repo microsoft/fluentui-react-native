@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.8",
+      "version": "0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Dec 2021 04:15:05 GMT",
       "tag": "@fluentui-react-native/callout_v0.19.7",
       "version": "0.19.7",
