@@ -2,6 +2,27 @@
   "name": "@uifabricshared/foundation-settings",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@uifabricshared/foundation-settings_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-settings",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-settings",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@uifabricshared/foundation-settings_v0.11.0",
       "version": "0.11.0",

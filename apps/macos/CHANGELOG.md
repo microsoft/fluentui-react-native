@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tester-macos
 
-This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
+This log was last generated on Sun, 19 Dec 2021 05:07:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.1
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.9
+
+## 0.0.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.8
+
+## 0.0.1
+
+Sat, 18 Dec 2021 01:46:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.7
+
+## 0.0.1
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.6
 
 ## 0.0.1
 

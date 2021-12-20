@@ -18,16 +18,16 @@ export interface CheckPublishingOptions {
  */
 export function checkPublishingTask(options: CheckPublishingOptions = {}): TaskFunction {
   const dependencyTypes = options.dependencyTypes || ['dependencies'];
-  return function(done: (error?: Error) => void) {
+  return function (done: (error?: Error) => void) {
     const packageInfos = getPackageInfos(findGitRoot(process.cwd()));
     logger.info('Starting scan for publishing errors');
     try {
-      Object.keys(packageInfos).forEach(pkg => {
+      Object.keys(packageInfos).forEach((pkg) => {
         if (!packageInfos[pkg].private) {
           logger.verbose(`Scanning published package ${pkg} for private dependenies`);
-          dependencyTypes.forEach(dependencyType => {
+          dependencyTypes.forEach((dependencyType) => {
             const deps = packageInfos[pkg][dependencyType];
-            Object.keys(deps || {}).forEach(dep => {
+            Object.keys(deps || {}).forEach((dep) => {
               if (packageInfos[dep] && packageInfos[dep].private) {
                 const errorMsg = `${pkg} has a ${dependencyType} on private package ${dep}`;
                 logger.error(errorMsg);
@@ -38,7 +38,7 @@ export function checkPublishingTask(options: CheckPublishingOptions = {}): TaskF
         }
       });
     } catch (err) {
-      done(err);
+      done(err instanceof Error ? err : new Error());
     }
     logger.info('No publishing errors found');
     done();

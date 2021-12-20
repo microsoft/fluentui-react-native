@@ -5,8 +5,8 @@
  * @format
  */
 
-const { defaultWatchFolders, exclusionList } = require('@rnx-kit/metro-config');
-const { getDefaultConfig } = require('metro-config');
+const {defaultWatchFolders, exclusionList} = require('@rnx-kit/metro-config');
+const {getDefaultConfig} = require('metro-config');
 
 const blockList = exclusionList([
   // Exclude other test apps
@@ -17,13 +17,13 @@ const blockList = exclusionList([
 
 module.exports = (async () => {
   const {
-    resolver: { sourceExts, assetExts },
+    resolver: {sourceExts, assetExts},
   } = await getDefaultConfig();
   return {
     watchFolders: defaultWatchFolders(__dirname),
     resolver: {
       // prettier-ignore
-      assetExts: [assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
+      assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
       blacklistRE: blockList,
       blockList,

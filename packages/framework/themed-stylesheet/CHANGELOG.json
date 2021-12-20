@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/themed-stylesheet",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@fluentui-react-native/themed-stylesheet_v1.3.1",
+      "version": "1.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/themed-stylesheet",
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.6",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/themed-stylesheet_v1.3.0",
       "version": "1.3.0",

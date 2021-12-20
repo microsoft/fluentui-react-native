@@ -1,8 +1,45 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 17 Dec 2021 22:06:58 GMT and should not be manually modified.
+This log was last generated on Sun, 19 Dec 2021 05:07:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.2
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.8
+- Bump @fluentui-react-native/focus-zone to v0.8.6
+- Bump @fluentui-react-native/interactive-hooks to v0.11.6
+- Bump @fluentui-react-native/pressable to v0.8.6
+
+## 0.14.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.7
+- Bump @fluentui-react-native/focus-zone to v0.8.5
+- Bump @fluentui-react-native/icon to v0.10.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.5
+- Bump @fluentui-react-native/text to v0.11.3
+- Bump @fluentui-react-native/tokens to v0.11.2
+- Bump @uifabricshared/foundation-composable to v0.10.1
+- Bump @uifabricshared/foundation-compose to v1.11.3
+- Bump @uifabricshared/foundation-settings to v0.11.1
+- Bump @fluentui-react-native/pressable to v0.8.5
+
+## 0.14.0
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Minor changes
+
+- Call both ContextualMenu's onClick and each item's onClick on every item click (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.6
 
 ## 0.13.4
 

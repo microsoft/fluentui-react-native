@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.3",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 22:06:58 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.6.2",
       "version": "0.6.2",

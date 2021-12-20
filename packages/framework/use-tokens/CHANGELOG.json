@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/use-tokens",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@fluentui-react-native/use-tokens_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "afoxman@microsoft.com",
+            "package": "@fluentui-react-native/use-tokens",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789",
+            "comment": "Update to TypeScript 4.5.4."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-tokens",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-tokens",
+            "comment": "Bump @fluentui-react-native/memo-cache to v1.1.6",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-tokens",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/use-tokens_v0.2.0",
       "version": "0.2.0",

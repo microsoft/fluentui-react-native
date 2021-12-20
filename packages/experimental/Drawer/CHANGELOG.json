@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-drawer",
   "entries": [
     {
+      "date": "Sat, 18 Dec 2021 04:15:04 GMT",
+      "tag": "@fluentui-react-native/experimental-drawer_v0.0.6",
+      "version": "0.0.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "afoxman@microsoft.com",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789",
+            "comment": "Update to TypeScript 4.5.4."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Dec 2021 22:06:58 GMT",
       "tag": "@fluentui-react-native/experimental-drawer_v0.0.5",
       "version": "0.0.5",
