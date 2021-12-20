@@ -1,4 +1,6 @@
+import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../FluentTester/TestComponents/ActivityIndicator/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../FluentTester/TestComponents/Checkbox/consts';
+import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../FluentTester/TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../FluentTester/TestComponents/Button/consts';
 import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from '../../FluentTester/TestComponents/ButtonExperimental/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../FluentTester/TestComponents/Callout/consts';
@@ -14,14 +16,21 @@ import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../FluentTester/TestComponents/P
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../../FluentTester/TestComponents/Pressable/consts';
 import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../FluentTester/TestComponents/RadioGroup/consts';
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../FluentTester/TestComponents/Separator/consts';
+import { HOMEPAGE_SHIMMER_BUTTON } from '../../FluentTester/TestComponents/Shimmer/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../FluentTester/TestComponents/Svg/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../FluentTester/TestComponents/Text/consts';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../FluentTester/TestComponents/TextExperimental/consts';
+import { HOMEPAGE_TOKEN_BUTTON } from '../../FluentTester/TestComponents/Tokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../../FluentTester/TestComponents/Tabs/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../FluentTester/TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../FluentTester/TestComponents/Common/consts';
 import { By, BasePage } from './BasePage.win';
 
 class NavigateAppPage extends BasePage {
+  clickAndGoToActivityIndicatorPage() {
+    this.activityIndicatorPage.click();
+  }
+
   clickAndGoToButtonPage() {
     this.buttonPage.click();
   }
@@ -32,6 +41,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToCheckboxPage() {
     this.checkboxPage.click();
+  }
+
+  clickAndGoToCheckboxExperimentalPage() {
+    this.checkboxExperimentalPage.click();
   }
 
   clickAndGoToContextualMenuPage() {
@@ -78,6 +91,10 @@ class NavigateAppPage extends BasePage {
     this.separatorPage.click();
   }
 
+  clickAndGoToShimmerPage() {
+    this.shimmerPage.click();
+  }
+
   clickAndGoToSvgPage() {
     this.svgPage.click();
   }
@@ -86,12 +103,20 @@ class NavigateAppPage extends BasePage {
     this.textPage.click();
   }
 
+  clickAndGoToExperimentalTextPage() {
+    this.textExperimentalPage.click();
+  }
+
   clickAndGoToTabsPage() {
     this.tabsPage.click();
   }
 
   clickAndGoToThemePage() {
     this.themePage.click();
+  }
+
+  clickAndGoToTokensPage() {
+    this.tokensPage.click();
   }
 
   clickAndGoToExperimentalButtonPage() {
@@ -110,6 +135,10 @@ class NavigateAppPage extends BasePage {
     return By(BASE_TESTPAGE);
   }
 
+  private get activityIndicatorPage() {
+    return By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
+  }
+
   private get buttonPage() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
@@ -120,6 +149,10 @@ class NavigateAppPage extends BasePage {
 
   private get checkboxPage() {
     return By(HOMEPAGE_CHECKBOX_BUTTON);
+  }
+
+  private get checkboxExperimentalPage() {
+    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
   }
 
   private get contextualMenuPage() {
@@ -166,6 +199,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_SEPARATOR_BUTTON);
   }
 
+  private get shimmerPage() {
+    return By(HOMEPAGE_SHIMMER_BUTTON);
+  }
+
   private get svgPage() {
     return By(HOMEPAGE_SVG_BUTTON);
   }
@@ -174,12 +211,20 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_TEXT_BUTTON);
   }
 
+  private get textExperimentalPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+  }
+
   private get tabsPage() {
     return By(HOMEPAGE_TABS_BUTTON);
   }
 
   private get themePage() {
     return By(HOMEPAGE_THEME_BUTTON);
+  }
+
+  private get tokensPage() {
+    return By(HOMEPAGE_TOKEN_BUTTON);
   }
 
   private get experimentalButtonPage() {

@@ -3,10 +3,13 @@ import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
+import { EXPERIMENTAL_TEXT_TESTPAGE } from './consts';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
+    testID: EXPERIMENTAL_TEXT_TESTPAGE,
     component: StandardUsage,
   },
   {
@@ -16,6 +19,10 @@ const textSections: TestSection[] = [
   {
     name: 'Pressable Usage',
     component: PressableUsage,
+  },
+  {
+    name: 'E2E Testing for Experimental Text',
+    component: E2EExperimentalTextTest,
   },
 ];
 

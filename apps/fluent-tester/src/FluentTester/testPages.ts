@@ -18,11 +18,11 @@ import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/Focus
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
-import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
+import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
 
@@ -30,7 +30,7 @@ export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
   },
   {
     name: 'Avatar Test',
@@ -115,7 +115,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
   },
   {
     name: 'Svg Test',
@@ -140,7 +140,7 @@ export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
   },
   {
     name: 'MenuButton Test',
