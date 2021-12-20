@@ -23,6 +23,11 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/NativeDatePicker"
+  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/react-native": "^0.64.0",

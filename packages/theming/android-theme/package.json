@@ -4,7 +4,8 @@
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/android-theme"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

@@ -24,6 +24,11 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/deprecated/theming-react-native"
+  },
   "keywords": [],
   "author": "",
   "license": "MIT",

@@ -4,7 +4,8 @@
   "description": "Utility for merging props with styles and caching style combinations",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/merge-props"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

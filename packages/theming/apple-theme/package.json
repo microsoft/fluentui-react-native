@@ -27,6 +27,11 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/apple-theme"
+  },
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.9.3 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.6",

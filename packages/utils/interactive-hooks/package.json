@@ -20,6 +20,11 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/utils/interactive-hooks"
+  },
   "dependencies": {
     "@fluentui-react-native/memo-cache": "^1.1.6",
     "invariant": "^2.2.0",

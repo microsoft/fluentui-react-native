@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add repository property to all package.json files",
+  "packageName": "@fluentui-react-native/theme",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

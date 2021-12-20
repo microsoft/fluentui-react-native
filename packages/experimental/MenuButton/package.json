@@ -20,6 +20,11 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/MenuButton"
+  },
   "dependencies": {
     "@fluentui-react-native/contextual-menu": "^0.14.2",
     "@fluentui-react-native/experimental-button": "^0.11.7",
