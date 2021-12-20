@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add repository property to all package.json files",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
