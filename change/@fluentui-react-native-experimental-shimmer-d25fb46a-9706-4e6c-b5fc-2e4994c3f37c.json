@@ -1,7 +1,7 @@
 {
-  "type": "none",
+  "type": "patch",
   "comment": "Add repository property to all package.json files",
   "packageName": "@fluentui-react-native/experimental-shimmer",
   "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
+  "dependentChangeType": "patch"
 }
