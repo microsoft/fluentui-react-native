@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-slot
 
-This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.5
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Fix chevron on menu button (ruaraki@microsoft.com)
 
 ## 0.2.4
 
