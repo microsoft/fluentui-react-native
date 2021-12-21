@@ -24,7 +24,7 @@ import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
-import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
+import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -160,6 +160,6 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental MenuButton Test',
     component: ExperimentalMenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+    testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   },
 ];

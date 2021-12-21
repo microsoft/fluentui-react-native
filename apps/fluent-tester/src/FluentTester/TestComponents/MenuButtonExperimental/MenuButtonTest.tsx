@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './consts';
+import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
+import { E2ETestExperimentalMenuButton } from './ExperimentalMenuButtonE2ETest';
 import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
 
 const menuButtonSections: TestSection[] = [
   {
     name: 'Standard MenuButton',
-    testID: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+    testID: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
     component: StandardMenuButton,
   },
   {
@@ -18,6 +19,10 @@ const menuButtonSections: TestSection[] = [
   {
     name: 'MenuButton with customized UI',
     component: CustomizedMenuButton,
+  },
+  {
+    name: 'E2E Testing MenuButton',
+    component: E2ETestExperimentalMenuButton,
   },
 ];
 

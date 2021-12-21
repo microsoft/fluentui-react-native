@@ -61,7 +61,7 @@ exports.config = {
 
   // The number of times to retry the entire spec file when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 1,
+  specFileRetries: 3,
 
   reporters: ['spec'],
 

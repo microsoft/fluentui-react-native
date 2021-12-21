@@ -23,7 +23,7 @@ import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
-import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
+import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 
 export const tests: TestDescription[] = [
@@ -70,7 +70,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental MenuButton Test',
     component: ExperimentalMenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+    testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   },
   {
     name: 'Experimental Tabs Test',
