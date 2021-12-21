@@ -3,7 +3,7 @@ import ExperimentalMenuButtonPageObject from '../pages/ExperimentalMenuButtonPag
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
 import {
   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
-  //EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
+  EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
 } from '../../../FluentTester/TestComponents/MenuButtonExperimental/consts';
 import { ComponentSelector } from '../../common/BasePage.win';
 
@@ -43,12 +43,11 @@ describe('Experimental MenuButton Accessibility Testing', () => {
     );
   });
 
-  // This test currently fails due to a bug (ADO #5681166). I will re-enable this test once it gets fixed
-  // it('Do not set accessibilityLabel -> Default to Experimental MenuButton label', () => {
-  //   ExperimentalMenuButtonPageObject.scrollToTestElement();
-  //   ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-  //   expect(ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-  //     EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
-  //   );
-  // });
+  it('Do not set accessibilityLabel -> Default to Experimental MenuButton label', () => {
+    ExperimentalMenuButtonPageObject.scrollToTestElement();
+    ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+    expect(ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
+      EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
+    );
+  });
 });
