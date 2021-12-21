@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './consts';
+import { MENU_BUTTON_EXPERIMENTAL_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
@@ -9,7 +9,7 @@ import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
 const menuButtonSections: TestSection[] = [
   {
     name: 'Standard MenuButton',
-    testID: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
+    testID: MENU_BUTTON_EXPERIMENTAL_TESTPAGE,
     component: StandardMenuButton,
   },
   {
