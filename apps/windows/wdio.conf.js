@@ -11,10 +11,8 @@ exports.config = {
   specs: [
     '../fluent-tester/src/E2E/ActivityIndicator/specs/*.win.ts',
     '../fluent-tester/src/E2E/Button/specs/*.win.ts',
-    '../fluent-tester/src/E2E/ButtonExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/Callout/specs/*.win.ts',
     '../fluent-tester/src/E2E/Checkbox/specs/*.win.ts',
-    '../fluent-tester/src/E2E/CheckboxExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/Link/specs/*.win.ts',
     '../fluent-tester/src/E2E/PersonaCoin/specs/*.win.ts',
     '../fluent-tester/src/E2E/Pressable/specs/*.win.ts',
