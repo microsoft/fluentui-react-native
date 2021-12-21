@@ -48,15 +48,25 @@ const ButtonComposed = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const { icon, iconPosition, loading, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconOnly, iconPosition, loading, ...mergedProps } = mergeProps(button.props, final);
+      const shouldShowIcon = !loading && icon;
+
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
+
       return (
         <Slots.root {...mergedProps}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {loading && <ActivityIndicator />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };
