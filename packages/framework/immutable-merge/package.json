@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/immutable-merge",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "Immutable merge routines for deep customizable merging",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/immutable-merge"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

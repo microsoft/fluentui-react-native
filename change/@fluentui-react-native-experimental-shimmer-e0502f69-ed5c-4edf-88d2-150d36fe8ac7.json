@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add RTL support to win32 Shimmer",
+  "packageName": "@fluentui-react-native/experimental-shimmer",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
