@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Tue, 21 Dec 2021 22:47:33 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "saadnajmi2@gmail.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "693fdf191b3cd3437af403cd101c3d5c2956ea4b",
+            "comment": "Flip chevron in RTL"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Dec 2021 20:56:31 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.14.4",
       "version": "0.14.4",

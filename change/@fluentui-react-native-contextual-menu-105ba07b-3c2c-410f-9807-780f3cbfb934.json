@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Flip chevron in RTL",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "saadnajmi2@gmail.com",
-  "dependentChangeType": "patch"
-}
