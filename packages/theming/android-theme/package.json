@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/android-theme",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/android-theme"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -32,8 +33,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.6.1 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.13.1 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.6.2 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
