@@ -97,9 +97,9 @@ export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderT
   width?: ViewStyle['width'];
 
   /**
-   * The amount of spacing between an icon and the content, in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
-  spacingIconContent?: number;
+  spacingIconContentBefore?: number;
 
   /**
    * States that can be applied to a button
@@ -109,7 +109,7 @@ export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderT
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
-  hasIcon?: ButtonTokens;
+  hasIconBefore?: ButtonTokens;
 }
 ```
 

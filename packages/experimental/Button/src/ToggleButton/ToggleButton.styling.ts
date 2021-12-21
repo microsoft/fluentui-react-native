@@ -2,10 +2,9 @@ import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButt
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultButtonColorTokens } from '../ButtonColorTokens';
-import { buttonStates } from '../Button.styling';
+import { buttonStates, contentStyling } from '../Button.styling';
 import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
 import { defaultButtonTokens } from '../ButtonTokens';
-import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonPropsWithInnerRef, ToggleButtonSlotProps, ToggleButtonTokens> = {
   tokens: [defaultButtonTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
@@ -30,13 +29,10 @@ export const stylingSettings: UseStylingOptions<ToggleButtonPropsWithInnerRef, T
     content: buildProps(
       (tokens: ToggleButtonTokens, theme: Theme) => ({
         style: {
-          color: tokens.color,
-          ...getTextMarginAdjustment(),
-          ...(tokens.spacingIconContent && { marginLeft: tokens.spacingIconContent }),
-          ...fontStyles.from(tokens, theme),
+          ...contentStyling(tokens, theme, tokens.color, tokens),
         },
       }),
-      ['color', 'spacingIconContent', ...fontStyles.keys],
+      ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ToggleButtonTokens) => ({
