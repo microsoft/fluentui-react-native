@@ -9,11 +9,16 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/web"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": ">=0.50.9 <1.0.0",
+    "@fluentui-react-native/tester": ">=0.50.11 <1.0.0",
     "react": "17.0.1",
     "react-art": "^17.0.1",
     "react-dom": "^17.0.1",

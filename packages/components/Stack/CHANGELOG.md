@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Sat, 18 Dec 2021 04:15:05 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.7
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.7
+
+## 0.6.6
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.4
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/framework to v0.7.6
+- Bump @fluentui-react-native/tokens to v0.11.3
+- Bump @uifabricshared/foundation-composable to v0.10.2
+- Bump @uifabricshared/foundation-settings to v0.11.2
+- Bump @uifabricshared/foundation-tokens to v0.11.2
+- Bump @fluentui-react-native/text to v0.11.4
 
 ## 0.6.5
 

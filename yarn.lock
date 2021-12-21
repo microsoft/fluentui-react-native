@@ -2886,9 +2886,9 @@
     babel-plugin-const-enum "^1.0.0"
 
 "@rnx-kit/cli@^0.9.57":
-  version "0.9.57"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.9.57.tgz#2b8ca28898ac0be53fae3ac088f9e32630f8a028"
-  integrity sha512-XefAs+BIy2kuoFKenjIjCH0kqMHhG5DsQX2hA1R+3r9Al93Ofs3ccfiXud/znDB5r3+49TnlP4a51gNLioffxw==
+  version "0.9.58"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.9.58.tgz#1590b002e5efa89bc54a908105d458b2b548ea00"
+  integrity sha512-IJziNWSUjxnLcQ0l0ZnJGMv/acdFqCEm9YrqyymfsIIhDRsKpIKhcZkL+orkunzJhC16a00ikgNEFd+AWWME3w==
   dependencies:
     "@rnx-kit/config" "^0.4.21"
     "@rnx-kit/console" "^1.0.11"
@@ -2902,7 +2902,7 @@
     "@rnx-kit/tools-language" "^1.2.6"
     "@rnx-kit/tools-node" "^1.2.6"
     "@rnx-kit/tools-react-native" "^1.0.10"
-    "@rnx-kit/typescript-react-native-resolver" "^0.1.3"
+    "@rnx-kit/typescript-react-native-resolver" "^0.2.0"
     "@rnx-kit/typescript-service" "^1.5.3"
     chalk "^4.1.0"
     readline "^1.3.0"
@@ -3035,10 +3035,10 @@
   resolved "https://registry.yarnpkg.com/@rnx-kit/tools-react-native/-/tools-react-native-1.1.0.tgz#d7a93bde1c1e5ab3d6bf4692cb1ae27d30df069a"
   integrity sha512-HD6OJoTuID0uF1IDpnj95WTL8q5B0mF9VXH23kHGTTRyj4LD6JODjHKTFEaaiAzau8cUWDzPk1rhuNgH/fHa7A==
 
-"@rnx-kit/typescript-react-native-resolver@^0.1.3":
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/typescript-react-native-resolver/-/typescript-react-native-resolver-0.1.4.tgz#fb636719fbde5155252301f94acbbddbebfa59f6"
-  integrity sha512-ZCcyLVVSFgzkj92Fe5vebH1QKahENUHFJcWrifBFnfF0UBV947pzIJ9D32jv3C+/6VBsy/2nySSQApEMQvw0hw==
+"@rnx-kit/typescript-react-native-resolver@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/typescript-react-native-resolver/-/typescript-react-native-resolver-0.2.0.tgz#92c6511d4872dc3d65720c40328f97d801901a49"
+  integrity sha512-aF1jCOOfjeI/dVafLm+Bl0NMmXm58eZFFJxAdEVR37MFy1ZVEXOLPF41GAW8hdnd2eCDYVJ/Ab32aXqMq3u2kQ==
   dependencies:
     "@rnx-kit/tools-node" "^1.2.6"
     "@rnx-kit/tools-react-native" "^1.0.10"
@@ -18796,9 +18796,9 @@ webpack-merge@^4.2.1:
     lodash "^4.17.15"
 
 webpack-notifier@^1.6.0:
-  version "1.14.1"
-  resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.14.1.tgz#c7fc6769262c06ac186ed45c32be7b7025f3dc7a"
-  integrity sha512-OVOoiOyKHS3z9pN1nLdPY2Pf/R3wiBsN0KiPc3K6ApwMBfHbyUomQc2Mr0naeKxfqXyCBPHfQuqpL9yoL0rgkA==
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/webpack-notifier/-/webpack-notifier-1.15.0.tgz#72644a1a4ec96b3528704d28f79da5e70048e8ee"
+  integrity sha512-N2V8UMgRB5komdXQRavBsRpw0hPhJq2/SWNOGuhrXpIgRhcMexzkGQysUyGStHLV5hkUlgpRiF7IUXoBqyMmzQ==
   dependencies:
     node-notifier "^9.0.0"
     strip-ansi "^6.0.0"

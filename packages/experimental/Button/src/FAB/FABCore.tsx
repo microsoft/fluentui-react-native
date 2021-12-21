@@ -19,7 +19,7 @@ import { ButtonCorePropsWithInnerRef, ButtonCoreProps } from '../Button.types';
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
 const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCorePropsWithInnerRef): boolean => {
-  return state[layer] || userProps[layer] || (layer === 'hasContent' && userProps.content) || (layer === 'hasIcon' && userProps.icon);
+  return state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIcon' && userProps.icon);
 };
 
 const FABComposed = compose<FABType>({
@@ -41,7 +41,7 @@ const FABComposed = compose<FABType>({
 
     // now return the handler for finishing render
     return (final: ButtonCorePropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const { iconOnly, ...mergedProps } = mergeProps(button.props, final);
+      const { iconOnly, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
 
       if (__DEV__ && iconOnly) {
         React.Children.forEach(children, (child) => {
@@ -51,8 +51,18 @@ const FABComposed = compose<FABType>({
         });
       }
 
+      let childText = '';
+      if (accessibilityLabel === undefined) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            childText = child; // We only automatically support the one child string.
+          }
+        });
+      }
+      const label = accessibilityLabel ?? childText;
+
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
           {icon && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
