@@ -20,7 +20,7 @@ export const E2ECheckboxExperimentalTest: React.FunctionComponent = () => {
           label="Testing accessibilityLabel"
           testID={EXPERIMENTAL_CHECKBOX_TEST_COMPONENT}
         />
-        <Checkbox label={EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT} testID={EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL} />
+        <Checkbox label={EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL} testID={EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT} />
       </Stack>
     </View>
   );
