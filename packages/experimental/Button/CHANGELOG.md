@@ -1,8 +1,70 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Fri, 17 Dec 2021 19:53:20 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.8
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.5
+- Bump @fluentui-react-native/experimental-text to v0.7.6
+- Bump @fluentui-react-native/framework to v0.7.6
+- Bump @fluentui-react-native/icon to v0.11.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.7
+- Bump @fluentui-react-native/styling-utils to v0.3.1
+- Bump @fluentui-react-native/theme-tokens to v0.11.2
+- Bump @fluentui-react-native/tokens to v0.11.3
+- Bump @fluentui-react-native/use-styling to v0.8.2
+
+## 0.11.7
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.6
+
+## 0.11.6
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.4
+- Bump @fluentui-react-native/experimental-text to v0.7.5
+- Bump @fluentui-react-native/framework to v0.7.5
+- Bump @fluentui-react-native/icon to v0.10.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.5
+- Bump @fluentui-react-native/tokens to v0.11.2
+- Bump @fluentui-react-native/use-styling to v0.8.1
+
+## 0.11.5
+
+Sat, 18 Dec 2021 01:46:05 GMT
+
+### Patches
+
+- Fix disabled button behavior (ruaraki@microsoft.com)
+
+## 0.11.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.3
+- Bump @fluentui-react-native/experimental-text to v0.7.4
+- Bump @fluentui-react-native/framework to v0.7.4
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
 
 ## 0.11.3
 

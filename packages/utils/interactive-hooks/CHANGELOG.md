@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 17 Dec 2021 19:53:21 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.7
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.7
+- Bump @fluentui-react-native/icon to v0.11.0
+
+## 0.11.6
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo. (afoxman@microsoft.com)
+
+## 0.11.5
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/icon to v0.10.4
+
+## 0.11.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.10.3
 
 ## 0.11.3
 

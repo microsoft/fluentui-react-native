@@ -1,8 +1,67 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Fri, 17 Dec 2021 19:53:20 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.10
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.14.3
+- Bump @fluentui-react-native/experimental-button to v0.11.8
+- Bump @fluentui-react-native/framework to v0.7.6
+- Bump @fluentui-react-native/tokens to v0.11.3
+
+## 0.2.9
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.2
+- Bump @fluentui-react-native/experimental-button to v0.11.7
+
+## 0.2.8
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.1
+- Bump @fluentui-react-native/experimental-button to v0.11.6
+- Bump @fluentui-react-native/framework to v0.7.5
+- Bump @fluentui-react-native/tokens to v0.11.2
+
+## 0.2.7
+
+Sat, 18 Dec 2021 01:46:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.11.5
+
+## 0.2.6
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.0
+
+## 0.2.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.13.4
+- Bump @fluentui-react-native/experimental-button to v0.11.4
+- Bump @fluentui-react-native/framework to v0.7.4
 
 ## 0.2.4
 

@@ -1,8 +1,59 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 17 Dec 2021 19:53:21 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.10
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.10
+
+## 0.17.9
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.9
+
+## 0.17.8
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.8
+
+## 0.17.7
+
+Sat, 18 Dec 2021 01:46:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.7
+
+## 0.17.6
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.6
+
+## 0.17.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.5
 
 ## 0.17.4
 

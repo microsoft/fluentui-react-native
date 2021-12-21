@@ -20,6 +20,22 @@ Basic examples:
 
 More examples in the Tester App.
 
+## Visual Examples
+
+Win32:
+
+![Button with text on win32 example](./assets/button_example_win32.png)
+
+```tsx
+<Button>Text</Button>
+```
+
+![Button with text and primary appearance on win32 example](./assets/button_primary_example_win32.png)
+
+```tsx
+<Button appearance="primary">Text</Button>
+```
+
 ## Variants
 
 ### Appearance
@@ -58,12 +74,12 @@ The `Button` component can be loading if it's waiting for another action to occu
 
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `loader` - If specified, renders a `loader` before the `icon` and `children` while the `loading` flag is set to `true`.
+- `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
 
 ### Props
 
 ```ts
-export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
+export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
@@ -136,7 +152,7 @@ export type ButtonProps = Omit<IWithPressableOptions<ViewProps>, 'onPress'> & {
    * A callback to call on button click event
    */
   onClick?: () => void;
-};
+}
 ```
 
 ### Styling Tokens
@@ -204,7 +220,7 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 
 ### States
 
-The following section describes the different states in which a `Button` can be throughout the course of interaction with it.
+The following section describes the different states which `Button` can be in as a result of interaction.
 
 #### Enabled and Disabled states
 

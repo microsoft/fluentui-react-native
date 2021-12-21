@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 16 Dec 2021 19:10:31 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.3
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @uifabricshared/foundation-tokens to v0.11.2
+- Bump @uifabricshared/theming-ramp to v0.16.2
+
+## 0.11.2
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-tokens to v0.11.1
+- Bump @uifabricshared/theming-ramp to v0.16.1
 
 ## 0.11.1
 

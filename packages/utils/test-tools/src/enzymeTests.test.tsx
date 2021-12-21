@@ -74,7 +74,8 @@ describe('enzyme component test validation', () => {
       checkRenderConsistency(() => <MultiLevelBroken>Broken</MultiLevelBroken>, 2);
       expect('This should have detected an error').toBeFalse();
     } catch (e) {
-      expect(e.message).toContain('Shallow compare');
+      expect(e).toBeInstanceOf(Error);
+      expect((e as Error).message).toContain('Shallow compare');
     }
   });
 });

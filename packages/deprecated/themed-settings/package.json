@@ -1,10 +1,11 @@
 {
   "name": "@uifabricshared/themed-settings",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "description": "Package which drives custom cacheable settings for a component",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/deprecated/themed-settings"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -32,11 +33,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@uifabricshared/foundation-settings": ">=0.11.0 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.11.2 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/memo-cache": "^1.1.5",
+    "@fluentui-react-native/memo-cache": "^1.1.7",
     "@types/jest": "^26.0.0",
     "@types/node": "^10.3.5",
     "@types/react-native": "^0.64.0",

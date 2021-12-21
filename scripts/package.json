@@ -14,12 +14,17 @@
     "prettier": "node ./just-scripts.js prettier",
     "prettier-fix": "node ./just-scripts.js prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "scripts"
+  },
   "peerDependencies": {
     "just-scripts": ">=0.36.1"
   },
   "devDependencies": {
     "@react-native-community/cli": "^5.0.1",
-    "@rnx-kit/jest-preset": "^0.1.0",
+    "@rnx-kit/jest-preset": "^0.1.9",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
@@ -46,7 +51,7 @@
     "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "17.0.1",
     "rimraf": "^3.0.2",
-    "typescript": "3.8.3",
+    "typescript": "4.5.4",
     "webpack": "^4.42.0",
     "webpack-bundle-analyzer": "^3.0.4",
     "webpack-cli": "3.2.3",

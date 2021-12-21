@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/immutable-merge
 
-This log was last generated on Mon, 25 Oct 2021 19:24:43 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.6
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+
+## 1.1.5
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
 
 ## 1.1.4
 

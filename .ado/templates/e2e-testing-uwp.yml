@@ -62,7 +62,6 @@ steps:
     workingDirectory: apps\windows
     displayName: 'run E2E UWP tests'
     condition: succeeded()
-    continueOnError: true
 
   # The following condition (using task.Build.status variable) make it so the reports generate even if the E2E tasks fails,
   # but not if the initial repo build steps fail.
