@@ -37,10 +37,10 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
             childText = child; // We only automatically support the one child string.
           }
         });
-      }
 
-      if (secondaryContent) {
-        childText += ' ' + secondaryContent;
+        if (secondaryContent) {
+          childText += ' ' + secondaryContent;
+        }
       }
 
       const label = accessibilityLabel ?? childText;
