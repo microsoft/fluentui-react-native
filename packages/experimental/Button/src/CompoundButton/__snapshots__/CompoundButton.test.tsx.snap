@@ -2,6 +2,7 @@
 
 exports[`CompoundButton default 1`] = `
 <View
+  accessibilityLabel="Default Button sublabel"
   accessibilityRole="button"
   accessibilityState={
     Object {
