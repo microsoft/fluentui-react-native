@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 22 Dec 2021 17:52:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.12",
+      "version": "0.50.12",
+      "comments": {
+        "none": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9da0b9507beb00c7f0c5e30304f6c3237266ce31",
+            "comment": "Add Experimental Menu Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Dec 2021 22:47:33 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.12",
       "version": "0.50.12",
