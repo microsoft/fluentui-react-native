@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Thu, 23 Dec 2021 01:20:14 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.12",
+      "version": "0.17.12",
+      "comments": {
+        "none": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "6d832e0d23f51a443a513070b2f2b3a864d02696",
+            "comment": "Temporarily remove failing shimmer test to unblock PRs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Dec 2021 22:47:33 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.17.12",
       "version": "0.17.12",
