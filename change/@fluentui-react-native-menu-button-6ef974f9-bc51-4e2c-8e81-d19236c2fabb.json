@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Expose tooltip to MenuButton on macOS",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
