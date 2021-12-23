@@ -7,6 +7,7 @@ import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { TOKENS_TEST_COMPONENT, TOKEN_TESTPAGE } from './consts';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -47,7 +48,7 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
   const themedStyles = getThemedStyles(useTheme());
   return (
     <View style={styles.swatchItem}>
-      <View style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]} />
+      <View style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]} testID={TOKENS_TEST_COMPONENT} />
       <Text>{p.name}</Text>
     </View>
   );
@@ -95,6 +96,7 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
 const themeSections: TestSection[] = [
   {
     name: 'Alias Color Tokens',
+    testID: TOKEN_TESTPAGE,
     component: () => <AliasTokensSwatchList />,
   },
 ];

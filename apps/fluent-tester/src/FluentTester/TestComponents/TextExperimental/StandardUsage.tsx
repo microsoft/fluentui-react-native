@@ -3,13 +3,13 @@ import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { TEXT_TESTPAGE } from './consts';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './consts';
 
 export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <Text variant="captionStandard" testID={TEXT_TESTPAGE}>
+        <Text variant="captionStandard" testID={HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON}>
           CaptionStandard
         </Text>
         <Text variant="secondaryStandard">SecondaryStandard</Text>

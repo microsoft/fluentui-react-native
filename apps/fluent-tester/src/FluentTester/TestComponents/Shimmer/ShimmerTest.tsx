@@ -5,6 +5,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
+import { E2ETestingShimmer } from './ShimmerE2ETest';
 
 const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
@@ -62,6 +63,10 @@ const shimmerSections: TestSection[] = [
     name: 'Border Radius Tests',
     testID: SHIMMER_TESTPAGE,
     component: ShimmerBorderRadii,
+  },
+  {
+    name: 'Shimmer for E2E Testing',
+    component: E2ETestingShimmer,
   },
 ];
 

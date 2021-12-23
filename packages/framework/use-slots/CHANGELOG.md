@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/use-slots
 
-This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.5
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/use-slot to v0.2.5
 
 ## 0.6.4
 

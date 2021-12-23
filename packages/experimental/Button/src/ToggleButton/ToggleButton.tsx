@@ -35,10 +35,20 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
 
     // now return the handler for finishing render
     return (final: ToggleButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const mergedProps = mergeProps(button.props, final);
+      const { accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+
+      let childText = '';
+      if (accessibilityLabel === undefined) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            childText = child; // We only automatically support the one child string.
+          }
+        });
+      }
+      const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
