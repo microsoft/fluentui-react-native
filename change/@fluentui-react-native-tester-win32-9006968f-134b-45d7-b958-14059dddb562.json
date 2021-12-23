@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Temporarily remove failing shimmer test to unblock PRs",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "none"
+}
