@@ -26,7 +26,7 @@
     "directory": "apps/ios"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.50.12",
+    "@fluentui-react-native/tester": "^0.50.13",
     "@react-native-community/slider": "^4.1.12",
     "react": "17.0.1",
     "react-native": "^0.64.3",
