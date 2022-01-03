@@ -34,7 +34,7 @@ type NativeMenuItem = {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, startIcon, disabled, onItemClick, style } = userProps;
+    const { menuItems, content, tooltip, startIcon, disabled, onItemClick, style } = userProps;
 
     function extractResolvedImageSourceFromIcon(icon?: number | string | IconProps): ImageResolvedAssetSource {
       if (!icon) {
@@ -102,6 +102,7 @@ export const MenuButton = compose<MenuButtonType>({
         content: content,
         enabled: !disabled,
         ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
+        tooltip: tooltip,
         menu: transformMenuItems(menuItems),
         onItemClick: OnItemClickRerouted,
         onSubmenuItemClick: OnSubmenuItemClickRerouted,

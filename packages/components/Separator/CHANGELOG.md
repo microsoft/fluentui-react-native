@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Sat, 18 Dec 2021 04:15:05 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.7
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.7
+
+## 0.11.6
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.6
 
 ## 0.11.5
 

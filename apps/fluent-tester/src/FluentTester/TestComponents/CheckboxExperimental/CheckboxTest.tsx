@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ExperimentalCheckboxTestPageId } from './consts';
+import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
@@ -133,7 +134,7 @@ const tokenCheckbox: React.FunctionComponent = () => {
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
-    testID: ExperimentalCheckboxTestPageId,
+    testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
     component: basicCheckbox,
   },
   {
@@ -143,6 +144,10 @@ const checkboxSections: TestSection[] = [
   {
     name: 'Token Customized Checkboxes',
     component: tokenCheckbox,
+  },
+  {
+    name: 'E2E Testing for Experimental Checkbox',
+    component: E2ECheckboxExperimentalTest,
   },
 ];
 

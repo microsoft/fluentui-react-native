@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/theme-types",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/just"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/theme-types"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",

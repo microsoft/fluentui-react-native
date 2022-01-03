@@ -110,6 +110,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		let anchorScreenRect = anchorRect.equalTo(.null) ? calculateAnchorViewScreenRect() : calculateAnchorRectScreenRect()
 		let calloutScreenRect = bestCalloutRect(relativeTo: anchorScreenRect)
 
+		proxyView.frame.origin = .zero
 		calloutWindow.setFrame(calloutScreenRect, display: false)
 	}
 

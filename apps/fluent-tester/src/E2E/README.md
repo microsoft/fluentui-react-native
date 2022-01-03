@@ -69,6 +69,12 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 
 # Authoring E2E Test
 
+You just added a new component to FURN... Awesome! Now we need to make sure we have proper regression testing to make sure we put the safest product out there (don't worry, it's not as hard as it sounds). Here's what we have to do:
+
+## Create New E2E Testing Folder for the New Component
+
+All our E2E testing logic exists in _/apps/fluent-tester/src/E2E/_.
+
 Testing is split-up on a **per-component** basis. Each component's testing story is made up of two parts - a **Page Object** and a **Spec Document**.
 
 Example File Structure:
@@ -78,6 +84,15 @@ Example File Structure:
 ----> CheckboxPageObject.ts
 
 ----> CheckboxSpec.ts
+
+Please follow this structure for the new component.
+
+## Create New Constants
+
+The way we our automation framework interacts with our test app is by selecting UI components based on a string value. For this, we have a **consts.ts** file for each component that defines these values.
+You'll want to make one for your component under **apps/fluent-tester/src/FluentTester/TestComponents/_your-component_/consts.ts**.
+
+**You can simply copy/paste a _consts.ts_ file from another component, and just change the name of the component in the const names and the values.**
 
 Now, what are Page Objects and Spec Documents?
 
@@ -91,6 +106,8 @@ Page Object is a design pattern which has become popular in test automation for 
 The benefit is that if the UI changes for the test page, the tests themselves don’t need to change, only the code within the page object needs to change.
 
 Page Objects should be put in apps/fluent-tester/src/E2E/_ *ComponentToBeTested* _/pages/.
+
+In most cases, you can copy/paste ButtonPageObject.ts and simply change all instances of Button to your new component.
 
 ```
 // CheckboxPageObject.win.ts
@@ -123,6 +140,17 @@ For example, a common task we want to perform is selecting a UI element and gett
   A unique accessiblity id/testID per Window is recommended for React Native Windows E2E testing when authoring the test app and test cases.
 
 - To use this, we must add a prop to our component or UI element in question called “testID”. In our test page, set the “testID” for the component, and we can then select it in our Page Object using the imported **_By_** method above from a base class.
+
+## Setup your Component Test Page in the Test App
+
+In order to test the component, we need a test page in FURNs test app. Once you create that, you'll want to create a separate file for E2E testing (see pattern used by all other controls). Create
+an example and set `testID = {your_components_constant}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testID`.
+
+## Add to NavigateAppPage.ts
+
+This page object is responsible for navigating through the app to each test page. Here, you'll want to add integration for your new component. (Easily reproducible by looking at other components in the file).
+
+**If testID doesn't exist on your component, simply add it to your component's \_types.ts\_ file.**
 
 ## Write a Test Spec
 

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { I18nManager, Platform, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -151,10 +151,13 @@ export const SubmenuItem = compose<SubmenuItemType>({
   },
   settings,
   render: (Slots: ISlots<SubmenuItemSlotProps>, renderData: SubmenuItemRenderData, ...children: React.ReactNode[]) => {
+    const rtlTransfrom = I18nManager.isRTL ? 'translate(2048, 0) scale(-1, 1)' : '';
     const xml = `
     <svg width="12" height="12" viewBox="0 0 2048 2048">
-      <path class='OfficeIconColors_HighContrast' fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
-      <path class='OfficeIconColors_m22'          fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+      <g transform="${rtlTransfrom}">
+        <path class='OfficeIconColors_HighContrast' fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+        <path class='OfficeIconColors_m22'          fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+      </g>
     </svg>`;
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (

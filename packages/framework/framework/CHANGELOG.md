@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Sat, 18 Dec 2021 04:15:04 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.7
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/composition to v0.7.5
+- Bump @fluentui-react-native/use-slot to v0.2.5
+- Bump @fluentui-react-native/use-slots to v0.6.5
+
+## 0.7.6
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.7.4
+- Bump @fluentui-react-native/default-theme to v0.9.4
+- Bump @fluentui-react-native/immutable-merge to v1.1.6
+- Bump @fluentui-react-native/merge-props to v0.4.2
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @fluentui-react-native/use-styling to v0.8.2
+- Bump @fluentui-react-native/use-slot to v0.2.4
+- Bump @fluentui-react-native/use-slots to v0.6.4
+- Bump @fluentui-react-native/use-tokens to v0.2.2
+- Bump @fluentui-react-native/memo-cache to v1.1.7
+- Bump @fluentui-react-native/tokens to v0.11.3
 
 ## 0.7.5
 

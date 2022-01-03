@@ -2,6 +2,7 @@
 
 exports[`ToggleButton default 1`] = `
 <View
+  accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
     Object {

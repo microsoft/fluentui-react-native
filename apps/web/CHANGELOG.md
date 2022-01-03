@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/tester-web
 
-This log was last generated on Sun, 19 Dec 2021 05:07:36 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Dec 2021 02:03:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.0
+
+Thu, 23 Dec 2021 02:03:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.13
+
+## 0.1.0
+
+Tue, 21 Dec 2021 22:47:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.12
+
+## 0.1.0
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.11
+
+## 0.1.0
+
+Mon, 20 Dec 2021 22:56:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.10
 
 ## 0.1.0
 

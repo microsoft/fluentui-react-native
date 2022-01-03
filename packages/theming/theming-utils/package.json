@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/theming-utils",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Utils for dealing with theming",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/theming-utils"
   },
   "main": "src/index.ts",
   "module": "lib/index.js",
@@ -25,9 +26,9 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.6",
-    "@fluentui-react-native/theme-tokens": ">=0.11.1 <1.0.0",
-    "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0"
+    "@fluentui-react-native/memo-cache": "^1.1.7",
+    "@fluentui-react-native/theme-tokens": ">=0.11.2 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.13.1 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

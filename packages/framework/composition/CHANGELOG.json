@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Tue, 21 Dec 2021 20:56:31 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.5",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slots to v0.6.5",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:56:00 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.4",
+      "version": "0.7.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "f4a5b4f5c9c190400e3e34c4a33b3ed30696d41e",
+            "comment": "Add repository property to all package.json files"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.6",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.4",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slots to v0.6.4",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 18 Dec 2021 04:15:05 GMT",
       "tag": "@fluentui-react-native/composition_v0.7.3",
       "version": "0.7.3",

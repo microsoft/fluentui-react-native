@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Sun, 19 Dec 2021 05:07:36 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Dec 2021 02:03:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.12
+
+Thu, 23 Dec 2021 02:03:45 GMT
+
+### Patches
+
+- Expose tooltip to MenuButton on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.14.6
+
+## 0.7.11
+
+Tue, 21 Dec 2021 22:47:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.5
+
+## 0.7.10
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.8
+- Bump @fluentui-react-native/contextual-menu to v0.14.4
+- Bump @fluentui-react-native/icon to v0.11.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.8
+
+## 0.7.9
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.7
+- Bump @fluentui-react-native/component-cache to v1.3.1
+- Bump @fluentui-react-native/contextual-menu to v0.14.3
+- Bump @fluentui-react-native/icon to v0.11.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.7
+- Bump @fluentui-react-native/tokens to v0.11.3
+- Bump @uifabricshared/foundation-composable to v0.10.2
+- Bump @uifabricshared/foundation-compose to v1.11.4
+- Bump @uifabricshared/foundation-settings to v0.11.2
 
 ## 0.7.8
 

@@ -4,7 +4,7 @@ import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { ACTIVITYINDICATOR_TESTPAGE } from './consts';
+import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
 const activityIndicatorTest: React.FunctionComponent = () => {
@@ -64,12 +64,12 @@ const basicActivityIndicator: React.FunctionComponent = () => {
 const activityIndicatorSections: TestSection[] = [
   {
     name: 'BaseActivityIndicator',
-    testID: ACTIVITYINDICATOR_TESTPAGE,
+    testID: ACTIVITY_INDICATOR_TESTPAGE,
     component: basicActivityIndicator,
   },
   {
     name: 'ActivityIndicator',
-    testID: ACTIVITYINDICATOR_TESTPAGE,
+    testID: ACTIVITY_INDICATOR_TESTPAGE,
     component: activityIndicatorTest,
   },
 ];
