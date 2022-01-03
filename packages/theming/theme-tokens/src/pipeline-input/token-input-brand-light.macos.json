@@ -103,13 +103,6 @@
           "40": { "value": "#d2e0f4" }
         }
       }
-    },
-    "Font": {
-      "Family": {
-        "Default": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" },
-        "Monospace": { "value": "\"Courier New\"" },
-        "Numeric": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" }
-      }
     }
   }
 }
