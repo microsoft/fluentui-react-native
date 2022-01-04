@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Change marginLeft/Right to marginStart/End",
+  "packageName": "@fluentui-react-native/styling-utils",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
