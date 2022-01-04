@@ -1,12 +1,12 @@
 {
   "body": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 20,
     "fontSize": 14,
     "fontWeight": "400"
   },
   "bodyStrong": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 20,
     "fontSize": 14,
     "fontWeight": "600"
@@ -20,73 +20,82 @@
     "strokeWidth": 1
   },
   "brandBackground": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a",
-    "fillColorSelected": "#13458f"
+    "fillColorRest": "#0078d4",
+    "fillColorHover": "#106ebe",
+    "fillColorPressed": "#004578",
+    "fillColorDisabled": "#e0e0e0",
+    "fillColorSelected": "#005a9e"
   },
   "brandBackground2": {
-    "fillColorRest": "#d2e0f4"
+    "fillColorRest": "#eff6fc"
   },
   "brandBackgroundStatic": {
-    "fillColorRest": "#185abd"
+    "fillColorRest": "#0078d4"
   },
   "brandForeground1": {
-    "fillColorRest": "#185abd"
+    "fillColorRest": "#0078d4",
+    "fillColorHover": "#106ebe",
+    "fillColorPressed": "#004578",
+    "fillColorDisabled": "#bdbdbd",
+    "fillColorSelected": "#005a9e"
   },
   "brandForeground2": {
-    "fillColorRest": "#1651aa"
+    "fillColorRest": "#106ebe"
   },
   "brandForegroundLink": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a",
-    "fillColorSelected": "#13458f"
+    "fillColorRest": "#0078d4",
+    "fillColorHover": "#106ebe",
+    "fillColorPressed": "#004578",
+    "fillColorSelected": "#005a9e"
   },
   "brandStroke1": {
-    "strokeColorRest": "#185abd",
+    "strokeColorRest": "#0078d4",
+    "strokeColorHover": "#106ebe",
+    "strokeColorPressed": "#004578",
+    "strokeColorDisabled": "#e0e0e0",
+    "strokeColorSelected": "#005a9e",
     "strokeWidth": 1
   },
   "brandStroke2": {
-    "strokeColorRest": "#6794d7",
+    "strokeColorRest": "#c7e0f4",
     "strokeWidth": 1
   },
   "caption": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 16,
     "fontSize": 12,
     "fontWeight": "400"
   },
   "compoundBrandBackground1": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a"
+    "fillColorRest": "#0078d4",
+    "fillColorHover": "#106ebe",
+    "fillColorPressed": "#004578"
   },
   "compoundBrandForeground1": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a"
+    "fillColorRest": "#0078d4",
+    "fillColorHover": "#106ebe",
+    "fillColorPressed": "#004578"
   },
   "compoundBrandStroke1": {
-    "strokeColorRest": "#185abd",
-    "strokeColorHover": "#1651aa",
-    "strokeColorPressed": "#0e336a",
+    "strokeColorRest": "#0078d4",
+    "strokeColorHover": "#106ebe",
+    "strokeColorPressed": "#004578",
     "strokeWidth": 1
   },
   "display": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 92,
     "fontSize": 68,
     "fontWeight": "600"
   },
   "headline": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 28,
     "fontSize": 20,
     "fontWeight": "600"
   },
   "largeTitle": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 52,
     "fontSize": 40,
     "fontWeight": "600"
@@ -140,22 +149,22 @@
     "fillColorRest": "#424242",
     "fillColorHover": "#242424",
     "fillColorPressed": "#242424",
-    "fillColorBrandHover": "#1651aa",
-    "fillColorBrandPressed": "#0e336a",
-    "fillColorBrandSelected": "#13458f",
+    "fillColorBrandHover": "#106ebe",
+    "fillColorBrandPressed": "#004578",
+    "fillColorBrandSelected": "#005a9e",
     "fillColorSelected": "#242424"
   },
   "neutralForeground3": {
     "fillColorRest": "#616161",
     "fillColorHover": "#424242",
     "fillColorPressed": "#424242",
-    "fillColorBrandHover": "#1651aa",
-    "fillColorBrandPressed": "#0e336a",
-    "fillColorBrandSelected": "#13458f",
+    "fillColorBrandHover": "#106ebe",
+    "fillColorBrandPressed": "#004578",
+    "fillColorBrandSelected": "#005a9e",
     "fillColorSelected": "#424242"
   },
   "neutralForeground4": {
-    "fillColorRest": "#707070"
+    "fillColorRest": "#808080"
   },
   "neutralForegroundDisabled": {
     "fillColorRest": "#bdbdbd"
@@ -182,7 +191,7 @@
     "fillColorRest": "#fafafa"
   },
   "neutralStroke1": {
-    "strokeColorRest": "#d1d1d1",
+    "strokeColorRest": "#f0f0f0",
     "strokeColorHover": "#c7c7c7",
     "strokeColorPressed": "#b3b3b3",
     "strokeColorSelected": "#bdbdbd",
@@ -200,7 +209,7 @@
     "strokeColorRest": "#616161",
     "strokeColorHover": "#575757",
     "strokeColorPressed": "#4d4d4d",
-    "strokeColorSelected": "#185abd",
+    "strokeColorSelected": "#0078d4",
     "strokeWidth": 1
   },
   "neutralStrokeDisabled": {
@@ -216,7 +225,7 @@
     "strokeWidth": 1
   },
   "subheadline": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 22,
     "fontSize": 16,
     "fontWeight": "600"
@@ -228,19 +237,19 @@
     "fillColorSelected": "#ebebeb"
   },
   "title1": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 40,
     "fontSize": 32,
     "fontWeight": "600"
   },
   "title2": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 36,
     "fontSize": 28,
     "fontWeight": "600"
   },
   "title3": {
-    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
+    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
     "fontLineHeight": 32,
     "fontSize": 24,
     "fontWeight": "600"

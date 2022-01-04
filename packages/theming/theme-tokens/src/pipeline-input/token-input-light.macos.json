@@ -114,6 +114,7 @@
       "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.Grey.94" }
+        }
       }
     },
     "BrandStroke1": {
