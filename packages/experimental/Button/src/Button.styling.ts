@@ -85,12 +85,12 @@ export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor:
   const textAdjustment = getTextMarginAdjustment();
   const spacingIconContentBefore = tokens.spacingIconContentBefore
     ? {
-        marginLeft: textAdjustment.marginLeft + tokens.spacingIconContentBefore,
+        marginStart: textAdjustment.marginStart + tokens.spacingIconContentBefore,
       }
     : {};
   const spacingIconContentAfter = tokens.spacingIconContentAfter
     ? {
-        marginRight: textAdjustment.marginRight + tokens.spacingIconContentAfter,
+        marginEnd: textAdjustment.marginEnd + tokens.spacingIconContentAfter,
       }
     : {};
   return {

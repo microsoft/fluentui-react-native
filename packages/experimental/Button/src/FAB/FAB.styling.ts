@@ -31,7 +31,7 @@ export const stylingSettings: UseStylingOptions<ButtonCorePropsWithInnerRef, But
         style: {
           color: tokens.color,
           ...getTextMarginAdjustment(),
-          ...(tokens.spacingIconContentBefore && { marginLeft: tokens.spacingIconContentBefore }),
+          ...(tokens.spacingIconContentBefore && { marginStart: tokens.spacingIconContentBefore }),
           ...fontStyles.from(tokens, theme),
         },
       }),
