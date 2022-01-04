@@ -1,12 +1,12 @@
 {
   "body": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 20,
     "fontSize": 14,
     "fontWeight": "400"
   },
   "bodyStrong": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 20,
     "fontSize": 14,
     "fontWeight": "600"
@@ -61,7 +61,7 @@
     "strokeWidth": 1
   },
   "caption": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 16,
     "fontSize": 12,
     "fontWeight": "400"
@@ -83,19 +83,19 @@
     "strokeWidth": 1
   },
   "display": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 92,
     "fontSize": 68,
     "fontWeight": "600"
   },
   "headline": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 28,
     "fontSize": 20,
     "fontWeight": "600"
   },
   "largeTitle": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 52,
     "fontSize": 40,
     "fontWeight": "600"
@@ -225,7 +225,7 @@
     "strokeWidth": 1
   },
   "subheadline": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 22,
     "fontSize": 16,
     "fontWeight": "600"
@@ -237,19 +237,19 @@
     "fillColorSelected": "#ebebeb"
   },
   "title1": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 40,
     "fontSize": 32,
     "fontWeight": "600"
   },
   "title2": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 36,
     "fontSize": 28,
     "fontWeight": "600"
   },
   "title3": {
-    "fontFamily": "\"Segoe UI\", Roboto, \"SF Pro Text\", \"Helvetica Neue\", Helvetica, Arial, sans-serif",
+    "fontFamily": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"",
     "fontLineHeight": 32,
     "fontSize": 24,
     "fontWeight": "600"
