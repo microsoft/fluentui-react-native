@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
+import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { CompoundButtonPropsWithInnerRef, compoundButtonName, CompoundButtonType, CompoundButtonProps } from './CompoundButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './CompoundButton.styling';
@@ -29,7 +30,20 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
 
     // now return the handler for finishing render
     return (final: CompoundButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const { icon, secondaryContent, iconPosition, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconOnly, secondaryContent, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(
+        button.props,
+        final,
+      );
+
+      const shouldShowIcon = !loading && icon;
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
+
       let childText = '';
       if (accessibilityLabel === undefined) {
         React.Children.forEach(children, (child) => {
@@ -42,19 +56,19 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
           childText += ' ' + secondaryContent;
         }
       }
-
       const label = accessibilityLabel ?? childText;
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {loading && <ActivityIndicator />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           <Slots.contentContainer>
             {React.Children.map(children, (child) =>
               typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
             )}
             {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
           </Slots.contentContainer>
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };

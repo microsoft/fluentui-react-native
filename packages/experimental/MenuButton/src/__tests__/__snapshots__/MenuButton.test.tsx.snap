@@ -12,7 +12,6 @@ exports[`ContextualMenu default 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={true}
-  iconOnly={false}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
