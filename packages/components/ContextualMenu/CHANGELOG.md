@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Dec 2021 02:03:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.6
+
+Thu, 23 Dec 2021 02:03:45 GMT
+
+### Patches
+
+- Fix RTL for ContextualMenu on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.11
+
+## 0.14.5
+
+Tue, 21 Dec 2021 22:47:33 GMT
+
+### Patches
+
+- Flip chevron in RTL (saadnajmi2@gmail.com)
 
 ## 0.14.4
 
