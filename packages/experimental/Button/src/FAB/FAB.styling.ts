@@ -31,11 +31,11 @@ export const stylingSettings: UseStylingOptions<ButtonCorePropsWithInnerRef, But
         style: {
           color: tokens.color,
           ...getTextMarginAdjustment(),
-          ...(tokens.spacingIconContent && { marginLeft: tokens.spacingIconContent }),
+          ...(tokens.spacingIconContentBefore && { marginStart: tokens.spacingIconContentBefore }),
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'spacingIconContent', ...fontStyles.keys],
+      ['color', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ButtonCoreTokens) => ({

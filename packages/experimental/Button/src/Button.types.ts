@@ -43,9 +43,14 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   width?: ViewStyle['width'];
 
   /**
-   * The amount of spacing between an icon and the content, in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
-  spacingIconContent?: number;
+  spacingIconContentBefore?: number;
+
+  /**
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   */
+  spacingIconContentAfter?: number;
 
   /**
    * States that can be applied to a button
@@ -55,7 +60,7 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
-  hasIcon?: ButtonTokens;
+  hasIconBefore?: ButtonTokens;
 }
 
 export interface ButtonTokens extends ButtonCoreTokens {
@@ -71,6 +76,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   rounded?: ButtonTokens;
   circular?: ButtonTokens;
   square?: ButtonTokens;
+  hasIconAfter?: ButtonTokens;
 }
 
 export interface ButtonCorePropsWithInnerRef extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {

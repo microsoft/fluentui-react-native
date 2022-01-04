@@ -28,7 +28,8 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
     (layer === 'hasContent' && !userProps.iconOnly) ||
-    (layer === 'hasIcon' && (userProps.icon || userProps.loading))
+    (layer === 'hasIconAfter' && (userProps.icon || userProps.loading) && userProps.iconPosition === 'after') ||
+    (layer === 'hasIconBefore' && (userProps.icon || userProps.loading) && (!userProps.iconPosition || userProps.iconPosition === 'before'))
   );
 };
 

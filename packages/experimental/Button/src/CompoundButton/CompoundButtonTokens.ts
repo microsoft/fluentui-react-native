@@ -17,8 +17,11 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.spacing.m,
       },
-      hasIcon: {
-        spacingIconContent: globalTokens.spacing.m,
+      hasIconAfter: {
+        spacingIconContentAfter: globalTokens.spacing.m,
+      },
+      hasIconBefore: {
+        spacingIconContentBefore: globalTokens.spacing.m,
       },
     },
   },
@@ -35,8 +38,11 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.spacing.s,
       },
-      hasIcon: {
-        spacingIconContent: globalTokens.spacing.s,
+      hasIconAfter: {
+        spacingIconContentAfter: globalTokens.spacing.s,
+      },
+      hasIconBefore: {
+        spacingIconContentBefore: globalTokens.spacing.s,
       },
     },
   },
@@ -53,8 +59,11 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
       focused: {
         paddingHorizontal: globalTokens.spacing.l,
       },
-      hasIcon: {
-        spacingIconContent: globalTokens.spacing.l,
+      hasIconAfter: {
+        spacingIconContentAfter: globalTokens.spacing.l,
+      },
+      hasIconBefore: {
+        spacingIconContentBefore: globalTokens.spacing.l,
       },
     },
   },

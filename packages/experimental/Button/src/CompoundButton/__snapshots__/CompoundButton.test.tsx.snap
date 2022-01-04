@@ -56,8 +56,8 @@ exports[`CompoundButton default 1`] = `
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
-          "marginLeft": 0,
-          "marginRight": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
           "marginTop": 0,
         }
       }
@@ -72,8 +72,8 @@ exports[`CompoundButton default 1`] = `
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
-          "marginLeft": 0,
-          "marginRight": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
           "marginTop": 0,
         }
       }
