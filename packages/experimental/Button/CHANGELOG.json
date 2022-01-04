@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Tue, 04 Jan 2022 23:05:12 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "e1b58bc5c15bd8e340a1181d17ed8e9b58a216d5",
+            "comment": "Add checks for mutually exclusive props"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "63bdbdb4e34834e7ae2ded3a39d38fe530fd30c0",
+            "comment": "Fix spacing around icon"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.2",
+            "commit": "166402412a975f4890c0e95606ffea9606f818ed"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Dec 2021 20:56:31 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.11.9",
       "version": "0.11.9",

@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Jan 2022 23:05:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.10
+
+Tue, 04 Jan 2022 23:05:12 GMT
+
+### Patches
+
+- Add checks for mutually exclusive props (ruaraki@microsoft.com)
+- Fix spacing around icon (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/styling-utils to v0.3.2
 
 ## 0.11.9
 

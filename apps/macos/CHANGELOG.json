@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-macos",
   "entries": [
     {
+      "date": "Tue, 04 Jan 2022 23:05:12 GMT",
+      "tag": "@fluentui-react-native/tester-macos_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-macos",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.14",
+            "commit": "166402412a975f4890c0e95606ffea9606f818ed"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Dec 2021 02:03:45 GMT",
       "tag": "@fluentui-react-native/tester-macos_v0.0.1",
       "version": "0.0.1",
