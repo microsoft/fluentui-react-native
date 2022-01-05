@@ -497,6 +497,14 @@ export function getStockWebHCPalette(): ThemeColorDefinition {
     defaultDisabledSecondaryContent: '#ffffff',
     defaultHoveredSecondaryContent: '#000000',
     defaultPressedSecondaryContent: '#000000',
+
+    checkmarkColor: '#ffffff',
+    checkboxBackground: '#000000',
+    checkboxBackgroundDisabled: '#000000',
+    checkboxBorderColor: '#ffffff',
+
+    personaActivityRing: '#ffffff',
+    personaActivityGlow: 'transparent', // glow probably doesn't make sense on HC
     ...createAliasTokens('highContrast'),
   };
 }
