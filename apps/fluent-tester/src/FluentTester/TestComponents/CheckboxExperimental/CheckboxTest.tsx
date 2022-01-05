@@ -46,7 +46,7 @@ const otherCheckbox: React.FunctionComponent = () => {
       <Checkbox
         label="Checkbox rendered with boxSide 'end' (controlled)"
         onChange={onChangeControlled2}
-        boxSide="end"
+        labelPosition="after"
         checked={Boolean(isCheckedControlled2)}
       />
     </View>
@@ -106,7 +106,7 @@ const tokenCheckbox: React.FunctionComponent = () => {
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
-        boxSide="end"
+        labelPosition="after"
         defaultChecked={false}
       />
 
