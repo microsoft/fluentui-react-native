@@ -209,6 +209,14 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultDisabledSecondaryContent: p.neutralTertiary,
     defaultHoveredSecondaryContent: p.neutralTertiary,
     defaultPressedSecondaryContent: p.neutralTertiary,
+
+    checkmarkColor: p.white,
+    checkboxBackground: p.themePrimary,
+    checkboxBackgroundDisabled: p.neutralLighter,
+    checkboxBorderColor: p.neutralSecondaryAlt,
+
+    personaActivityRing: p.white,
+    personaActivityGlow: p.themePrimary,
   };
 }
 

@@ -444,6 +444,7 @@ export interface ControlColorTokens {
   checkboxBackground: ColorValue;
   checkboxBackgroundDisabled: ColorValue;
   checkmarkColor: ColorValue;
+  checkboxBorderColor: ColorValue;
 
   personaActivityRing: ColorValue;
   personaActivityGlow: ColorValue;
