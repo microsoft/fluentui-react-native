@@ -30,6 +30,13 @@
       }
     },
 
+    "NeutralBackground1": {
+      "Fill": {
+        "Color": {
+          "Pressed": { "aliasOf": "Global.Color.Grey.92" }
+        }
+      }
+    },
     "BrandForegroundLink": {
       "Fill": {
         "Color": {
