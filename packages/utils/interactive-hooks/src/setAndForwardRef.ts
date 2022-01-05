@@ -41,14 +41,12 @@ type Args = {
  *     }
  *   }
  *
- *   const MyViewWithRef = React.forwardRef((props, ref) => (
+ *   export const MyViewWithRef = React.forwardRef((props, ref) => (
  *     <MyView {...props} forwardedRef={ref} />
  *   ));
- *
- *   module.exports = MyViewWithRef;
  */
 
-function setAndForwardRef({ getForwardedRef, setLocalRef }: Args): (ref: ElementRef<any>) => void {
+export function setAndForwardRef({ getForwardedRef, setLocalRef }: Args): (ref: ElementRef<any>) => void {
   return function forwardRef(ref: ElementRef<any>) {
     const forwardedRef = getForwardedRef();
 
@@ -64,5 +62,3 @@ function setAndForwardRef({ getForwardedRef, setLocalRef }: Args): (ref: Element
     }
   };
 }
-
-module.exports = setAndForwardRef;
