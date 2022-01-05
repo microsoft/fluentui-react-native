@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Wed, 05 Jan 2022 19:33:53 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "32fe9fb425d57d69cbed8b127798d000c8c3a836",
+            "comment": "Fallback to WhiteColors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 20 Dec 2021 22:56:02 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.14.4",
       "version": "0.14.4",

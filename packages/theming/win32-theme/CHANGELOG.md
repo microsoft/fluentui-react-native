@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jan 2022 19:33:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.5
+
+Wed, 05 Jan 2022 19:33:53 GMT
+
+### Patches
+
+- Fallback to WhiteColors (ruaraki@microsoft.com)
 
 ## 0.14.4
 
