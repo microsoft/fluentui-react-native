@@ -24,7 +24,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     accessibilityRole,
     checked,
     defaultChecked,
-    boxSide,
+    labelPosition,
     label,
     onChange,
     componentRef = defaultComponentRef,
@@ -54,7 +54,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     ...pressable.state,
     disabled: !!props.disabled,
     checked: isChecked,
-    boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
+    boxAtEnd: labelPosition === 'after' ? true : false,
   };
 
   const onAccessibilityAction = React.useCallback(
