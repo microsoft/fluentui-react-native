@@ -24,14 +24,12 @@ cd apps/android
 yarn start
 ```
 
-3. Open a new command prompt and run:
+3. To boot the app, open a new command prompt and run:
 
 ```sh
 cd apps/android
 yarn android
 ```
-
-to boot the app. You may need to boot the emulator before running this step.
 
 ## Using an Apple Silicon Mac (As of July 2021)
 
