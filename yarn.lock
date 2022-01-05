@@ -2956,10 +2956,10 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/dep-check@^1.10.0", "@rnx-kit/dep-check@^1.9.5":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.10.0.tgz#61c8e50efa95e6db0fb9205de26ffac966a74756"
-  integrity sha512-AfwmzCzeim/ewFI23cMoBUxBNO1lrHM3xeXD5K3Wm0RdRj/k6udKUOEc1jSqv5gUd+BtNXOYJ2//i7ZbV+N1/g==
+"@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.10.1.tgz#f3a5c2c2e697b8878a19d05207bfd27805637006"
+  integrity sha512-NcVl1+rOJbUx4TXt7GvA7r133KTow8FGwRdFvI9q8NcCC6XMil38aE1XZsow8c8LNiNGWGElm/aLEhSkIOD3jQ==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-language" "^1.2.6"
@@ -4436,6 +4436,16 @@ ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.4, ajv@^6.12.5, ajv@^6.5.5:
     fast-deep-equal "^3.1.1"
     fast-json-stable-stringify "^2.0.0"
     json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+ajv@^8.0.0:
+  version "8.8.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-8.8.2.tgz#01b4fef2007a28bf75f0b7fc009f62679de4abbb"
+  integrity sha512-x9VuX+R/jcFj1DHo/fCp99esgGDWiHENrKxaCENuCxpoMCmAt/COCGVDwA7kleEpEzJjDnvh3yGoOuLu0Dtllw==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
 allure-commandline@2.13.0:
@@ -10567,11 +10577,6 @@ he@^1.2.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
-hermes-engine@~0.5.0:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/hermes-engine/-/hermes-engine-0.5.1.tgz#601115e4b1e0a17d9aa91243b96277de4e926e09"
-  integrity sha512-hLwqh8dejHayjlpvZY40e1aDCDvyP98cWx/L5DhAjSJLH8g4z9Tp08D7y4+3vErDsncPOdf1bxm+zUWpx0/Fxg==
-
 hermes-engine@~0.7.0:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/hermes-engine/-/hermes-engine-0.7.2.tgz#303cd99d23f68e708b223aec2d49d5872985388b"
@@ -12442,6 +12447,11 @@ json-schema-traverse@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz#69f6a87d9513ab8bb8fe63bdb0979c448e684660"
   integrity sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
+
+json-schema-traverse@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz#ae7bcb3656ab77a73ba5c49bf654f38e6b6860e2"
+  integrity sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==
 
 json-schema@0.2.3:
   version "0.2.3"
@@ -15711,7 +15721,7 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
-react-native-macos@^0.64.6:
+react-native-macos@^0.64.0, react-native-macos@^0.64.6:
   version "0.64.20"
   resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.20.tgz#1e423777c172696e3b30e041c27a527f498b4f11"
   integrity sha512-03SdwxxJoPHE83p0CnnKZC99DU3ykkhcLHRlY+dqzkSgSxcxVAFEmhXZc1xtmcTg12xr05P3Tcwwq3+xgcVwbg==
@@ -15774,11 +15784,12 @@ react-native-svg@^12.1.1:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^0.9.13:
-  version "0.9.22"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.9.22.tgz#dd91d7fb4288a53cb2e5bfe9d54e8f3f78ebe57a"
-  integrity sha512-9RQ8tr2N0sRjt3b67smHXlAmT7L62uLmeupeRIOQ2X6lBSB8u3TKJn9cljgRGi8bjUkKAVR48zwppy1V0VP3nA==
+react-native-test-app@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-0.10.2.tgz#29fc90265f29f3d5f07fe702a02869b1b38f4dd9"
+  integrity sha512-v2O4e01nenZ2KvGeOls73+n36p0IrUC8Kgj2d85t4x87VuIF6mWeyOO1p33TMgnCJMB9BsJCG+j4CQzRKoNd/w==
   dependencies:
+    ajv "^8.0.0"
     chalk "^4.1.0"
     prompts "^2.4.0"
     rimraf "^3.0.0"
@@ -15799,7 +15810,7 @@ react-native-web@0.17.5, react-native-web@^0.17.5:
     normalize-css-color "^1.0.2"
     prop-types "^15.6.0"
 
-react-native-windows@^0.64.3:
+react-native-windows@^0.64.0, react-native-windows@^0.64.3:
   version "0.64.27"
   resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.27.tgz#93864cd32e8c59644149c6007a95ae048d9b4611"
   integrity sha512-VL8Jy6MxENCu1hIr/jQCynsL4thVghFBKQlc/0W8mCXRXhP//Otag+WxwLkqCnMuRs30SsePZ13Q0gHkvqz9FA==
@@ -15839,7 +15850,7 @@ react-native-windows@^0.64.3:
     whatwg-fetch "^3.0.0"
     ws "^7.4.6"
 
-react-native@^0.64.3:
+react-native@^0.64.2, react-native@^0.64.3:
   version "0.64.3"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.64.3.tgz#40db6385963b4b17325f9cc86dd19132394b03fc"
   integrity sha512-2OEU74U0Ek1/WeBzPbg6XDsCfjF/9fhrNX/5TFgEiBKd5mNc9LOZ/OlMmkb7iues/ZZ/oc51SbEfLRQdcW0fVw==
@@ -16218,6 +16229,11 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
+
+require-from-string@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
+  integrity sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==
 
 require-main-filename@^1.0.1:
   version "1.0.1"
