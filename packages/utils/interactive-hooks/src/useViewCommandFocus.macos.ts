@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { findNodeHandle, UIManager, View } from 'react-native';
-
-const setAndForwardRef = require('./setAndForwardRef');
+import { setAndForwardRef } from './setAndForwardRef';
 
 export type IFocusable = View;
 /**

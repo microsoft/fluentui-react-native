@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { findNodeHandle, UIManager } from 'react-native';
 import { IViewWin32 } from '@office-iss/react-native-win32';
-
-const setAndForwardRef = require('./setAndForwardRef');
+import { setAndForwardRef } from './setAndForwardRef';
 
 export type IFocusable = IViewWin32;
 /**
