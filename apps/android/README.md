@@ -17,20 +17,14 @@ yarn
 yarn build
 ```
 
-2. To build the bundle run:
+2. Start the server by running:
 
 ```sh
 cd apps/android
-yarn bundle
-```
-
-3. Start the server by running:
-
-```sh
 yarn start
 ```
 
-4. Open a new command prompt and run:
+3. Open a new command prompt and run:
 
 ```sh
 cd apps/android
