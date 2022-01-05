@@ -18,10 +18,10 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     }
   }
   accessible={true}
-  boxSide="end"
   defaultChecked={true}
   disabled={true}
   focusable={false}
+  labelPosition="before"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onChange={[Function]}
@@ -72,7 +72,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
         "borderRadius": 2,
         "borderStyle": "solid",
         "borderWidth": 1,
-        "marginEnd": 0,
+        "marginEnd": 4,
         "marginLeft": undefined,
         "minHeight": 16,
         "minWidth": 16,
