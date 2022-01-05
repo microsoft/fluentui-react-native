@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 05 Jan 2022 20:58:09 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.15",
+      "version": "0.17.15",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "7b3987cb212318fa3103f93d2c11c82843ee87e6",
+            "comment": "Align dependencies"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Jan 2022 19:33:53 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.17.15",
       "version": "0.17.15",
