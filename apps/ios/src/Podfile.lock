@@ -9,11 +9,11 @@ PODS:
     - React-Core (= 0.64.3)
     - React-jsi (= 0.64.3)
     - ReactCommon/turbomodule/core (= 0.64.3)
-  - FRNAvatar (0.13.1):
+  - FRNAvatar (0.13.8):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNDatePicker (0.4.0):
+  - FRNDatePicker (0.4.1):
     - MicrosoftFluentUI (= 0.3.0)
     - React
   - glog (0.3.5)
@@ -172,7 +172,6 @@ PODS:
     - MicrosoftFluentUI/EasyTapButton_ios
     - MicrosoftFluentUI/Label_ios
   - MicrosoftFluentUI/Utilities_ios (0.3.0)
-  - QRCodeReader.swift (10.1.0)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -434,7 +433,7 @@ PODS:
     - React-cxxreact (= 0.64.3)
     - React-jsi (= 0.64.3)
     - React-perflogger (= 0.64.3)
-  - ReactTestApp-DevSupport (0.9.13):
+  - ReactTestApp-DevSupport (0.10.2):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -450,7 +449,6 @@ DEPENDENCIES:
   - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
   - FRNDatePicker (from `../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
-  - QRCodeReader.swift
   - RCT-Folly (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
   - RCTTypeSafety (from `../../../node_modules/react-native/Libraries/TypeSafety`)
@@ -488,7 +486,6 @@ SPEC REPOS:
   trunk:
     - boost-for-react-native
     - MicrosoftFluentUI
-    - QRCodeReader.swift
     - SwiftLint
 
 EXTERNAL SOURCES:
@@ -567,12 +564,11 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: 96e0ac3698e5ebbc3aab6e67bcd98508c0767abc
-  FRNAvatar: 0428d40426e812920dab291f6d49c1f5b981391a
-  FRNDatePicker: e11db0ff8876944672374ec40bec723aebbe6473
+  FBReactNativeSpec: 771ef19aaf6635986511379f82e14d416ea528ba
+  FRNAvatar: 7b67903073ba2c0ded69f9c1801f3ca93167c6b8
+  FRNDatePicker: 58e321df06792fd68b4e0e3e1844a916652fa172
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
-  QRCodeReader.swift: 373a389fe9a22d513c879a32a6f647c58f4ef572
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: d34bf57e17cb6e3b2681f4809b13843c021feb6c
   RCTTypeSafety: 8dab4933124ed39bb0c1d88d74d61b1eb950f28f
@@ -598,7 +594,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: c7f845861e79eae13dc1e8217a3cf47a3945b504
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
-  ReactTestApp-DevSupport: 37726b4af5c9717f93532dd9eec72245dcb65481
+  ReactTestApp-DevSupport: 0556335e9e3fbfd74e2309c5a5d2842902b0500f
   ReactTestApp-Resources: 73c2660013d746f9ffc6762e0123d22950ccd740
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52

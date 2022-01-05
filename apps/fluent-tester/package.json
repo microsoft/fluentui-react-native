@@ -78,11 +78,11 @@
     "flow-bin": "^0.98.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react": "17.0.1",
-    "react-native": "^0.64.3",
-    "react-native-macos": "^0.64.6",
+    "react-native": "^0.64.2",
+    "react-native-macos": "^0.64.0",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^0.14.3",
-    "react-native-windows": "^0.64.3",
+    "react-native-windows": "^0.64.0",
     "react-test-renderer": "17.0.1",
     "rnpm-plugin-windows": "^0.5.1-0",
     "ts-node": "^8.10.1",
@@ -93,17 +93,17 @@
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.64.8",
     "react": "17.0.1",
-    "react-native": "^0.64.3",
-    "react-native-macos": "^0.64.6",
+    "react-native": "^0.64.2",
+    "react-native-macos": "^0.64.0",
     "react-native-svg": "^12.1.1",
-    "react-native-windows": "^0.64.3"
+    "react-native-windows": "^0.64.0"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.63",
-    "reactNativeDevVersion": "0.63.0",
+    "reactNativeVersion": "^0.64",
+    "reactNativeDevVersion": "0.64.0",
     "kitType": "library",
     "capabilities": [
       "core-android",
