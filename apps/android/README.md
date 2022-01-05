@@ -17,11 +17,27 @@ yarn
 yarn build
 ```
 
-2. Then go into `apps/android` folder and simply run the the following
+2. To build the bundle run:
 
 ```sh
+cd apps/android
+yarn bundle
+```
+
+3. Start the server by running:
+
+```sh
+yarn start
+```
+
+4. Open a new command prompt and run:
+
+```sh
+cd apps/android
 yarn android
 ```
+
+to boot the app. You may need to boot the emulator before running this step.
 
 ## Using an Apple Silicon Mac (As of July 2021)
 
