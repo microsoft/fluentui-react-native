@@ -28,7 +28,7 @@ export const Checkbox = compose<CheckboxType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {Checkbox.state.boxAtEnd && <Slots.content key="content">{label}</Slots.content>}
+          {Checkbox.state.labelIsBefore && <Slots.content key="content">{label}</Slots.content>}
           <Slots.checkbox>
             <Slots.checkmark key="checkmark" viewBox="0 0 11 8">
               <Path
@@ -37,7 +37,7 @@ export const Checkbox = compose<CheckboxType>({
               />
             </Slots.checkmark>
           </Slots.checkbox>
-          {!Checkbox.state.boxAtEnd && <Slots.content key="content">{label}</Slots.content>}
+          {!Checkbox.state.labelIsBefore && <Slots.content key="content">{label}</Slots.content>}
           {children}
         </Slots.root>
       );

@@ -46,6 +46,8 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
+   *
+   * @default: 'after'
    */
   labelPosition?: 'before' | 'after';
 
@@ -87,9 +89,9 @@ export interface CheckboxState extends IPressableState {
   disabled?: boolean;
 
   /**
-   * Determines position of Checkbox. True if labelPosition is set to 'after'
+   * Determines position of Checkbox. True if labelPosition is set to 'before'
    */
-  boxAtEnd?: boolean;
+  labelIsBefore?: boolean;
 }
 
 export interface CheckboxInfo {

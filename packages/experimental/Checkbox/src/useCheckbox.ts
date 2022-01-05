@@ -54,7 +54,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     ...pressable.state,
     disabled: !!props.disabled,
     checked: isChecked,
-    boxAtEnd: labelPosition === 'after' ? true : false,
+    labelIsBefore: labelPosition === 'before' ? true : false,
   };
 
   const onAccessibilityAction = React.useCallback(
