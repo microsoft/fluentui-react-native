@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jan 2022 23:53:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Rename boxside to labelPosition (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+- Bump @fluentui-react-native/pressable to v0.8.9
 
 ## 0.4.8
 

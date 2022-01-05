@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Jan 2022 23:53:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.8.9
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+- Bump @fluentui-react-native/pressable to v0.8.9
 
 ## 0.6.8
 
