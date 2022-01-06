@@ -24,7 +24,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "depcheck": "rnx-dep-check && lage depcheck",
+    "depcheck": "lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
     "prettier": "lage prettier",
@@ -56,6 +56,7 @@
     ]
   },
   "resolutions": {
+    "@babel/parser": "7.16.4",
     "@office-iss/react-native-win32": "^0.64.8",
     "@react-native-community/cli": "^5.0.1",
     "@react-native-community/cli-platform-ios": "^5.0.2",
