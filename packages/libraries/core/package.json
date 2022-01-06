@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.27.13",
+  "version": "0.27.14",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -30,22 +30,22 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": ">=0.21.9 <1.0.0",
-    "@fluentui-react-native/callout": ">=0.19.12 <1.0.0",
-    "@fluentui-react-native/checkbox": ">=0.14.9 <1.0.0",
-    "@fluentui-react-native/contextual-menu": "0.14.7",
-    "@fluentui-react-native/focus-trap-zone": ">=0.8.9 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.8.9 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.11.9 <1.0.0",
-    "@fluentui-react-native/link": ">=0.15.9 <1.0.0",
-    "@fluentui-react-native/menu-button": ">=0.7.13 <1.0.0",
-    "@fluentui-react-native/persona": ">=0.12.7 <1.0.0",
-    "@fluentui-react-native/persona-coin": ">=0.10.7 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.8.9 <1.0.0",
-    "@fluentui-react-native/radio-group": ">=0.14.9 <1.0.0",
-    "@fluentui-react-native/separator": ">=0.11.7 <1.0.0",
-    "@fluentui-react-native/tabs": ">=0.6.9 <1.0.0",
-    "@fluentui-react-native/text": ">=0.11.4 <1.0.0"
+    "@fluentui-react-native/button": ">=0.21.10 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.19.13 <1.0.0",
+    "@fluentui-react-native/checkbox": ">=0.14.10 <1.0.0",
+    "@fluentui-react-native/contextual-menu": "0.14.8",
+    "@fluentui-react-native/focus-trap-zone": ">=0.8.10 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.8.10 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.11.10 <1.0.0",
+    "@fluentui-react-native/link": ">=0.15.10 <1.0.0",
+    "@fluentui-react-native/menu-button": ">=0.7.14 <1.0.0",
+    "@fluentui-react-native/persona": ">=0.12.8 <1.0.0",
+    "@fluentui-react-native/persona-coin": ">=0.10.8 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.8.10 <1.0.0",
+    "@fluentui-react-native/radio-group": ">=0.14.10 <1.0.0",
+    "@fluentui-react-native/separator": ">=0.11.8 <1.0.0",
+    "@fluentui-react-native/tabs": ">=0.6.10 <1.0.0",
+    "@fluentui-react-native/text": ">=0.11.5 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

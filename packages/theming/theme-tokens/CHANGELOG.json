@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Thu, 06 Jan 2022 21:30:08 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0",
+            "comment": "Fix brand color"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 20 Dec 2021 22:56:01 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.11.2",
       "version": "0.11.2",

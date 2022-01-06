@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-react-native",
-  "version": "0.13.5",
+  "version": "0.13.6",
   "description": "A library of functions which produce React Native styles from a Theme",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -33,8 +33,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.9.4 <1.0.0",
-    "@fluentui-react-native/win32-theme": ">=0.14.5 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.9.5 <1.0.0",
+    "@fluentui-react-native/win32-theme": ">=0.14.6 <1.0.0",
     "@uifabricshared/theme-registry": ">=0.7.2 <1.0.0",
     "@uifabricshared/theming-ramp": ">=0.16.2 <1.0.0"
   },
