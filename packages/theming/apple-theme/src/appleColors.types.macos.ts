@@ -215,6 +215,7 @@ interface FluentAppleButtonTokens {
   neutralBackgroundInverted: ColorValue;
   neutralForegroundInverted: ColorValue;
   neutralForeground2: ColorValue;
+  neutralBackground1: ColorValue;
   neutralBackground2: ColorValue;
   neutralStroke2: ColorValue;
   neutralForeground3: ColorValue;
