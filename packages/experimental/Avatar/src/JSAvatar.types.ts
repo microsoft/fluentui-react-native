@@ -5,6 +5,7 @@ import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@
 export const JSAvatarName = 'Avatar';
 
 export type AvatarSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
+export type Size = 20 | 24 | 28 | 32 | 36 | 40 | 48 | 56 | 64 | 72 | 96 | 120;
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
@@ -37,15 +38,13 @@ export type AvatarColor =
 
 export type AvatarPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
-export type RingThickness = number | 'xSmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
-
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
   ringColor?: ColorValue; // glow
   ringBackgroundColor?: ColorValue; // inner/outer rings
-  ringThickness?: RingThickness;
-  innerGap?: RingThickness;
+  ringThickness?: number;
+  innerGap?: number;
 }
 
 export interface AvatarConfigurableProps {
@@ -88,6 +87,9 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   physicalSize?: number;
   circular?: JSAvatarTokens;
   square?: JSAvatarTokens;
+  inactive?: JSAvatarTokens;
+  avatarOpacity?: number;
+  ringColor?: ColorValue;
 }
 
 export interface JSAvatarState {
