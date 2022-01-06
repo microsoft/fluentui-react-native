@@ -13,6 +13,7 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'primary',
   'subtle',
   'hovered',
+  'focused',
   'pressed',
   'disabled',
   'small',
@@ -24,7 +25,6 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'rounded',
   'circular',
   'square',
-  'focused',
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonPropsWithInnerRef, ButtonSlotProps, ButtonTokens> = {
