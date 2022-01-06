@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add fallback entries",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
