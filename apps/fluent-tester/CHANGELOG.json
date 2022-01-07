@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 07 Jan 2022 21:27:06 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.19",
+      "version": "0.50.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.11.14",
+            "commit": "9d751030b87c268575b67fa943ade67d6ac5c4ff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.2.18",
+            "commit": "9d751030b87c268575b67fa943ade67d6ac5c4ff"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Jan 2022 23:14:38 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.18",
       "version": "0.50.18",
