@@ -41,6 +41,8 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * Allows you to set the checkbox to have circular styling.
+   *
+   * @platform Android, iOS, windows, win32
    */
   circular?: boolean;
 
