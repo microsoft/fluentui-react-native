@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Implement circular styling",
+  "packageName": "@fluentui-react-native/experimental-checkbox",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
