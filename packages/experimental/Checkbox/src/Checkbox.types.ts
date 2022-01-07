@@ -24,11 +24,12 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    * States that can be applied to a checkbox
    */
   disabled?: CheckboxTokens;
-  boxAtEnd?: CheckboxTokens;
+  labelIsBefore?: CheckboxTokens;
   hovered?: CheckboxTokens;
   focused?: CheckboxTokens;
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
+  circular?: CheckboxTokens;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
@@ -39,6 +40,13 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   checked?: boolean;
 
   /**
+   * Allows you to set the checkbox to have circular styling.
+   *
+   * @platform Android, iOS, windows, win32
+   */
+  circular?: boolean;
+
+  /**
    * Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
    * want the Checkbox instance to maintain its own state.
    */
@@ -47,7 +55,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
    *
-   * @default: 'after'
+   * @default after
    */
   labelPosition?: 'before' | 'after';
 

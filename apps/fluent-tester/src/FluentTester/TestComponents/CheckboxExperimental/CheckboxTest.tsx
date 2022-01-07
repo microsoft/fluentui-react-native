@@ -25,6 +25,7 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
       <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
+      <Checkbox label="A circular checkbox" circular onChange={onChangeUncontrolled} defaultChecked={false} />
     </View>
   );
 };
@@ -54,10 +55,7 @@ const otherCheckbox: React.FunctionComponent = () => {
 };
 
 const tokenCheckbox: React.FunctionComponent = () => {
-  const CircularCheckbox = Checkbox.customize({ borderRadius: 50 });
-
   const CircleColorCheckbox = Checkbox.customize({
-    borderRadius: 50,
     checkboxBackgroundColor: 'white',
     checked: {
       checkboxBackgroundColor: 'green',
@@ -100,9 +98,8 @@ const tokenCheckbox: React.FunctionComponent = () => {
   };
   return (
     <View>
-      <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
       <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
+      <CircleColorCheckbox label="A circular token-customized checkbox" circular onChange={onChangeUncontrolled} defaultChecked={true} />
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
