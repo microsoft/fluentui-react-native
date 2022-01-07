@@ -1,9 +1,7 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { CheckboxTokens } from '.';
-
-export const checkboxStates: (keyof CheckboxTokens)[] = ['labelIsBefore', 'hovered', 'focused', 'pressed', 'checked', 'disabled'];
+import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
@@ -52,12 +50,14 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxBorderColor: t.colors.brandBackground,
       checkmarkOpacity: 1,
       checkmarkColor: t.colors.neutralForegroundOnBrand,
-      borderRadius: globalTokens.corner.radius.medium,
       disabled: {
         checkmarkColor: t.colors.neutralForegroundDisabled,
       },
     },
     labelIsBefore: {
       checkboxMarginEnd: 0,
+    },
+    circular: {
+      borderRadius: globalTokens.corner.radius.circle,
     },
   } as CheckboxTokens);

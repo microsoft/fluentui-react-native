@@ -29,6 +29,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   focused?: CheckboxTokens;
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
+  circular?: CheckboxTokens;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
@@ -37,6 +38,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * and plan to pass in the correct value based on handling onChange events and re-rendering.
    */
   checked?: boolean;
+
+  /**
+   * Allows you to set the checkbox to have circular styling.
+   */
+  circular?: boolean;
 
   /**
    * Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and

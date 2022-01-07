@@ -1,8 +1,18 @@
 import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps } from './Checkbox.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { checkboxStates, defaultCheckboxTokens } from './CheckboxTokens';
+import { defaultCheckboxTokens } from './CheckboxTokens';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
+export const checkboxStates: (keyof CheckboxTokens)[] = [
+  'labelIsBefore',
+  'circular',
+  'hovered',
+  'focused',
+  'pressed',
+  'checked',
+  'disabled',
+];
 
 export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps, CheckboxTokens> = {
   tokens: [defaultCheckboxTokens, checkboxName],
