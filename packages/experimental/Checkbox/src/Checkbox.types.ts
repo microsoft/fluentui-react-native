@@ -24,7 +24,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    * States that can be applied to a checkbox
    */
   disabled?: CheckboxTokens;
-  boxAtEnd?: CheckboxTokens;
+  labelIsBefore?: CheckboxTokens;
   hovered?: CheckboxTokens;
   focused?: CheckboxTokens;
   pressed?: CheckboxTokens;
