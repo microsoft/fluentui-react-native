@@ -7,16 +7,16 @@
     "Color": {
       "Brand": {
         "Shade": {
-          "30": { "value": "#0e336a" },
-          "20": { "value": "#13458f" },
-          "10": { "value": "#1651aa" }
+          "30": { "value": "#004578" },
+          "20": { "value": "#005A9E" },
+          "10": { "value": "#106EBE" }
         },
-        "Primary": { "value": "#185abd" },
+        "Primary": { "value": "#0078D4" },
         "Tint": {
-          "10": { "value": "#2e6ac5" },
-          "20": { "value": "#6794d7" },
-          "30": { "value": "#aec6eb" },
-          "40": { "value": "#d2e0f4" }
+          "10": { "value": "#2B88D8" },
+          "20": { "value": "#C7E0F4" },
+          "30": { "value": "#DEECF9" },
+          "40": { "value": "#EFF6FC" }
         }
       },
       "Excel": {
@@ -102,13 +102,6 @@
           "30": { "value": "#aec6eb" },
           "40": { "value": "#d2e0f4" }
         }
-      }
-    },
-    "Font": {
-      "Family": {
-        "Default": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" },
-        "Monospace": { "value": "\"Courier New\"" },
-        "Numeric": { "value": "\"Helvetica Neue\", Helvetica, Arial, \"Microsoft Sans Serif\"" }
       }
     }
   }

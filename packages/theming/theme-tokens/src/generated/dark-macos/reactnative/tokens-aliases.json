@@ -20,35 +20,44 @@
     "strokeWidth": 1
   },
   "brandBackground": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a",
-    "fillColorSelected": "#13458f"
+    "fillColorRest": "#0086f0",
+    "fillColorHover": "#1890f1",
+    "fillColorPressed": "#6cb8f6",
+    "fillColorDisabled": "#d6d6d6",
+    "fillColorSelected": "#3aa0f3"
   },
   "brandBackground2": {
-    "fillColorRest": "#d2e0f4"
+    "fillColorRest": "#092c47"
   },
   "brandBackgroundStatic": {
-    "fillColorRest": "#185abd"
+    "fillColorRest": "#0086f0"
   },
   "brandForeground1": {
-    "fillColorRest": "#aec6eb"
+    "fillColorRest": "#0086f0",
+    "fillColorHover": "#1890f1",
+    "fillColorPressed": "#6cb8f6",
+    "fillColorDisabled": "#5c5c5c",
+    "fillColorSelected": "#3aa0f3"
   },
   "brandForeground2": {
-    "fillColorRest": "#d2e0f4"
+    "fillColorRest": "#092c47"
   },
   "brandForegroundLink": {
-    "fillColorRest": "#aec6eb",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#2e6ac5",
-    "fillColorSelected": "#d2e0f4"
+    "fillColorRest": "#043862",
+    "fillColorHover": "#092c47",
+    "fillColorPressed": "#0078d4",
+    "fillColorSelected": "#092c47"
   },
   "brandStroke1": {
-    "strokeColorRest": "#185abd",
+    "strokeColorRest": "#0086f0",
+    "strokeColorHover": "#1890f1",
+    "strokeColorPressed": "#6cb8f6",
+    "strokeColorDisabled": "#d6d6d6",
+    "strokeColorSelected": "#3aa0f3",
     "strokeWidth": 1
   },
   "brandStroke2": {
-    "strokeColorRest": "#6794d7",
+    "strokeColorRest": "#004c87",
     "strokeWidth": 1
   },
   "caption": {
@@ -58,19 +67,19 @@
     "fontWeight": "400"
   },
   "compoundBrandBackground1": {
-    "fillColorRest": "#185abd",
-    "fillColorHover": "#1651aa",
-    "fillColorPressed": "#0e336a"
+    "fillColorRest": "#0086f0",
+    "fillColorHover": "#1890f1",
+    "fillColorPressed": "#6cb8f6"
   },
   "compoundBrandForeground1": {
-    "fillColorRest": "#aec6eb",
-    "fillColorHover": "#d2e0f4",
-    "fillColorPressed": "#2e6ac5"
+    "fillColorRest": "#043862",
+    "fillColorHover": "#092c47",
+    "fillColorPressed": "#0078d4"
   },
   "compoundBrandStroke1": {
-    "strokeColorRest": "#185abd",
-    "strokeColorHover": "#1651aa",
-    "strokeColorPressed": "#0e336a",
+    "strokeColorRest": "#0086f0",
+    "strokeColorHover": "#1890f1",
+    "strokeColorPressed": "#6cb8f6",
     "strokeWidth": 1
   },
   "display": {
@@ -92,13 +101,13 @@
     "fontWeight": "600"
   },
   "neutralBackground1": {
-    "fillColorRest": "#292929",
+    "fillColorRest": "#000000",
     "fillColorHover": "#3d3d3d",
-    "fillColorPressed": "#1f1f1f",
+    "fillColorPressed": "#5c5c5c",
     "fillColorSelected": "#383838"
   },
   "neutralBackground2": {
-    "fillColorRest": "#1f1f1f",
+    "fillColorRest": "#0a0a0a",
     "fillColorHover": "#333333",
     "fillColorPressed": "#141414",
     "fillColorSelected": "#2e2e2e"
@@ -110,13 +119,13 @@
     "fillColorSelected": "#242424"
   },
   "neutralBackground4": {
-    "fillColorRest": "#0a0a0a",
+    "fillColorRest": "#1f1f1f",
     "fillColorHover": "#1f1f1f",
     "fillColorPressed": "#000000",
     "fillColorSelected": "#1a1a1a"
   },
   "neutralBackground5": {
-    "fillColorRest": "#000000",
+    "fillColorRest": "#5c5c5c",
     "fillColorHover": "#141414",
     "fillColorPressed": "#050505",
     "fillColorSelected": "#0f0f0f"
@@ -125,7 +134,7 @@
     "fillColorRest": "#333333"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#141414"
+    "fillColorRest": "#d6d6d6"
   },
   "neutralBackgroundInverted": {
     "fillColorRest": "#ffffff"
@@ -140,22 +149,22 @@
     "fillColorRest": "#d6d6d6",
     "fillColorHover": "#ffffff",
     "fillColorPressed": "#ffffff",
-    "fillColorBrandHover": "#d2e0f4",
-    "fillColorBrandPressed": "#2e6ac5",
-    "fillColorBrandSelected": "#d2e0f4",
+    "fillColorBrandHover": "#092c47",
+    "fillColorBrandPressed": "#0078d4",
+    "fillColorBrandSelected": "#092c47",
     "fillColorSelected": "#ffffff"
   },
   "neutralForeground3": {
     "fillColorRest": "#adadad",
     "fillColorHover": "#d6d6d6",
     "fillColorPressed": "#d6d6d6",
-    "fillColorBrandHover": "#d2e0f4",
-    "fillColorBrandPressed": "#2e6ac5",
-    "fillColorBrandSelected": "#d2e0f4",
+    "fillColorBrandHover": "#092c47",
+    "fillColorBrandPressed": "#0078d4",
+    "fillColorBrandSelected": "#092c47",
     "fillColorSelected": "#d6d6d6"
   },
   "neutralForeground4": {
-    "fillColorRest": "#999999"
+    "fillColorRest": "#858585"
   },
   "neutralForegroundDisabled": {
     "fillColorRest": "#5c5c5c"
@@ -182,7 +191,7 @@
     "fillColorRest": "#575757"
   },
   "neutralStroke1": {
-    "strokeColorRest": "#666666",
+    "strokeColorRest": "#3d3d3d",
     "strokeColorHover": "#757575",
     "strokeColorPressed": "#6b6b6b",
     "strokeColorSelected": "#707070",
@@ -193,18 +202,18 @@
     "strokeWidth": 1
   },
   "neutralStroke3": {
-    "strokeColorRest": "#3d3d3d",
+    "strokeColorRest": "#666666",
     "strokeWidth": 1
   },
   "neutralStrokeAccessible": {
     "strokeColorRest": "#adadad",
     "strokeColorHover": "#bdbdbd",
     "strokeColorPressed": "#b3b3b3",
-    "strokeColorSelected": "#185abd",
+    "strokeColorSelected": "#0086f0",
     "strokeWidth": 1
   },
   "neutralStrokeDisabled": {
-    "strokeColorRest": "#424242",
+    "strokeColorRest": "#525252",
     "strokeWidth": 1
   },
   "strokeFocus1": {

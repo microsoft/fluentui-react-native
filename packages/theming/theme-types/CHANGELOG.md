@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.2
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Add fallback entries (ruaraki@microsoft.com)
 
 ## 0.13.1
 

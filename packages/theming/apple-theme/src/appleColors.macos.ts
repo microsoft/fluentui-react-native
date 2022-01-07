@@ -271,6 +271,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     neutralBackgroundInverted: macOSAliasColorTokens.neutralBackgroundInverted,
     neutralForegroundInverted: macOSAliasColorTokens.neutralForegroundInverted,
     neutralForeground2: macOSAliasColorTokens.neutralForeground2,
+    neutralBackground1: macOSAliasColorTokens.neutralBackground1,
     neutralBackground2: macOSAliasColorTokens.neutralBackground2,
     neutralStroke2: macOSAliasColorTokens.neutralStroke2,
     neutralForeground3: macOSAliasColorTokens.neutralForeground3,
@@ -330,7 +331,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the default button tokens to match the Acrylic Button style
-    buttonBackground: fluentUIApple.neutralBackground3,
+    buttonBackground: fluentUIApple.neutralBackground1,
     buttonBackgroundChecked: fluentUIApple.neutralBackground3,
     buttonBackgroundHovered: fluentUIApple.neutralBackground3,
     buttonBackgroundCheckedHovered: fluentUIApple.neutralBackground3,

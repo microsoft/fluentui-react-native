@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.2
+
+## 0.11.3
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Fix brand color (67026167+chiuam@users.noreply.github.com)
 
 ## 0.11.2
 
