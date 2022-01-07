@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 07 Jan 2022 23:38:55 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.20",
+      "version": "0.50.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "728dad51aa5959d3d727a0ecbb96fb01f8499b4f",
+            "comment": "Implement circular styling"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.5.0",
+            "commit": "728dad51aa5959d3d727a0ecbb96fb01f8499b4f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Jan 2022 21:27:06 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.19",
       "version": "0.50.19",

@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 07 Jan 2022 21:27:06 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jan 2022 23:38:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.20
+
+Fri, 07 Jan 2022 23:38:55 GMT
+
+### Patches
+
+- Implement circular styling (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.5.0
 
 ## 0.50.19
 
