@@ -6169,9 +6169,9 @@ bcrypt-pbkdf@^1.0.0:
     tweetnacl "^0.14.3"
 
 beachball@^2.20.0:
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.20.0.tgz#7fe55e7d86c9c890de15474c84f6a32653bdb6ca"
-  integrity sha512-vVdF6qDDurO66GZigUtqKuXzQM8ImlG7MgN5iTj9rvZ4RM6vy+nklu0EmqaQtqS5K6hZ4WrHDwgcR/kLa0VHpA==
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.21.0.tgz#8ba7f125080ad7395eb8ebb17d54fa6ab0fc17fd"
+  integrity sha512-MOUXS9vwAR5LziPHFvvyqvvFoFyBasTcjizATAcngdgAeNgfGfSrcelBTIVIPF+SgVwSSLhE5Ts60+wNa0RQgg==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
@@ -9873,17 +9873,7 @@ fs-extra@^8.0.1, fs-extra@^8.1.0:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@^9.0.0:
-  version "9.0.1"
-  resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-9.0.1.tgz#910da0062437ba4c39fedd863f1675ccfefcb9fc"
-  integrity sha512-h2iAoN838FqAFJY2/qVpzFXy+EBxfVE220PalAqQLDVsFOHLJrZvut5puAbCdNv6WJk+B8ihI+k0c7JK5erwqQ==
-  dependencies:
-    at-least-node "^1.0.0"
-    graceful-fs "^4.2.0"
-    jsonfile "^6.0.1"
-    universalify "^1.0.0"
-
-fs-extra@^9.0.1:
+fs-extra@^9.0.0, fs-extra@^9.0.1:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.1.0.tgz#5954460c764a8da2094ba3554bf839e6b9a7c86d"
   integrity sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==
