@@ -34,8 +34,8 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
         style: {
-          marginTop: -3,
-          marginBottom: -1,
+          marginTop: -2,
+          marginBottom: -2,
           marginLeft: tokens.spacingLabelAfter,
           marginRight: tokens.spacingLabelBefore,
           ...fontStyles.from(tokens, theme),
