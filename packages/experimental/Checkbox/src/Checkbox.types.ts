@@ -10,15 +10,12 @@ export const checkboxName = 'Checkbox';
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   checkboxBackgroundColor?: ColorValue;
   checkboxBorderColor?: ColorValue;
+  checkboxBorderRadius?: number;
+  checkboxBorderWidth?: number;
   checkmarkColor?: ColorValue;
   checkmarkOpacity?: number;
-  textBorderColor?: ColorValue;
-  rootBorderColor?: ColorValue;
-  checkboxBorderRadius?: number;
-  checkboxMarginStart?: number;
-  checkboxMarginEnd?: number;
-  checkboxOpacity?: number;
-  marginLeft?: number;
+  spacingLabelAfter?: number;
+  spacingLabelBefore?: number;
 
   /**
    * States that can be applied to a checkbox
@@ -111,7 +108,7 @@ export interface CheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
   checkmark?: SvgProps;
-  content: ITextProps;
+  label: ITextProps;
 }
 
 export interface CheckboxType {

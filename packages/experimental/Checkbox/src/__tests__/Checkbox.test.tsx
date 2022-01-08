@@ -27,11 +27,8 @@ describe('Checkbox component tests', () => {
       checkboxBackgroundColor: 'blue',
       checkboxBorderColor: 'red',
       checkboxBorderRadius: 5,
-      checkboxMarginEnd: 10,
-      checkboxMarginStart: 8,
       checkmarkColor: 'pink',
       checkmarkOpacity: 0.7,
-      textBorderColor: 'green',
       backgroundColor: 'purple',
       color: 'yellow',
     });
