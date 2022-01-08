@@ -34,6 +34,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
         style: {
+          color: tokens.color,
           marginTop: -2,
           marginBottom: -2,
           marginLeft: tokens.spacingLabelAfter,
@@ -41,7 +42,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['spacingLabelAfter', 'spacingLabelBefore', ...fontStyles.keys],
+      ['spacingLabelAfter', 'spacingLabelBefore', 'color', ...fontStyles.keys],
     ),
     checkbox: buildProps(
       (tokens: CheckboxTokens) => ({
@@ -56,7 +57,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           justifyContent: 'center',
         },
       }),
-      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'spacing'],
+      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth'],
     ),
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({
