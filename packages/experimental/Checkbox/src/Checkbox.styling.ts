@@ -26,7 +26,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignSelf: 'flex-start',
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
-          padding: 2,
+          padding: 4,
         },
       }),
       ['backgroundColor', ...borderStyles.keys],
@@ -34,6 +34,8 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
         style: {
+          marginTop: -3,
+          marginBottom: -1,
           marginLeft: tokens.spacingLabelAfter,
           marginRight: tokens.spacingLabelBefore,
           ...fontStyles.from(tokens, theme),
