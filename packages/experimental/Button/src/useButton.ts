@@ -8,7 +8,7 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
   const defaultRef = React.useRef(null);
   const { onClick, innerRef, disabled, loading, ...rest } = props;
   const ref = innerRef !== null ? innerRef : defaultRef;
-  const onClickWithFocus = useOnPressWithFocus(ref, onClick);
+  const onClickWithFocus = disabled ? null : useOnPressWithFocus(ref, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
   const isDisabled = !!disabled || !!loading;
