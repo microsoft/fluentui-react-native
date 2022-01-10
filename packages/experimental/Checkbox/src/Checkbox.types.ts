@@ -12,6 +12,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   checkboxBorderColor?: ColorValue;
   checkboxBorderRadius?: number;
   checkboxBorderWidth?: number;
+  checkboxSize?: number;
   checkmarkColor?: ColorValue;
   checkmarkOpacity?: number;
   spacingLabelAfter?: number;

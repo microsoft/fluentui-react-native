@@ -10,6 +10,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checkboxBorderColor: t.colors.menuItemText,
     checkboxBorderRadius: globalTokens.corner.radius.small,
     checkboxBorderWidth: globalTokens.stroke.width.thin,
+    checkboxSize: 16,
     checkmarkColor: t.colors.menuItemTextHovered,
     spacingLabelAfter: globalTokens.spacing.m,
     checkmarkOpacity: 0,
