@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix disabled buttonn",
+  "packageName": "@fluentui-react-native/focus-trap-zone",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
