@@ -16,14 +16,9 @@ export type DrawerSlotProps = {
   root: NativeDrawerProps;
 };
 
+export interface DrawerTokens {}
 
-export interface DrawerTokens {
-
-}
-
-export interface DrawerState {
-
-}
+export interface DrawerState {}
 
 export interface DrawerInfo {
   props: DrawerProps;
