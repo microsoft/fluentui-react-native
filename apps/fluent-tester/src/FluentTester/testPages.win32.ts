@@ -1,4 +1,5 @@
 import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
@@ -37,6 +38,11 @@ export const tests: TestDescription[] = [
     name: 'Avatar Test',
     component: JSAvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
+  {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
   },
   {
     name: 'Button Test',
