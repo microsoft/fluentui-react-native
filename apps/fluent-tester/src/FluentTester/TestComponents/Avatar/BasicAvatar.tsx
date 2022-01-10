@@ -74,8 +74,8 @@ export const StandardUsage: FunctionComponent = () => {
   const tokens: JSAvatarTokens = {};
   const [isSquare, setSquare] = useState(false);
   const [showImage, setShowImage] = useState(true);
-  const [active, setActive] = useState('unset');
-  const [activeAppearance, setActiveAppearance] = useState('ring');
+  const [active, setActive] = useState<AvatarActive>('unset');
+  const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
   const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
   const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('online');

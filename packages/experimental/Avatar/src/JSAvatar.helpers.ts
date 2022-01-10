@@ -24,8 +24,12 @@ const presenceIconCache: { [key in AvatarPresence]: ImageURISource } = {
   },
 };
 
-// TODO: Need icons for the OOF statuses
 const presenceOOFIconCache = presenceIconCache;
+const sizeAdjustment = {
+  small: 8,
+  medium: 12,
+  large: 16,
+};
 
 export function getPresenceIconSource(presence: AvatarPresence, isOutOfOffice: boolean): ImageURISource {
   return isOutOfOffice ? presenceOOFIconCache[presence] : presenceIconCache[presence];
@@ -109,18 +113,18 @@ export function calculateEffectiveSizes(tokens: JSAvatarTokens): AvatarSizeConfi
 export function getRingConfig(size: number): any {
   if (size <= 48)
     return {
-      size: size + 8,
+      size: size + sizeAdjustment.small,
       stroke: globalTokens.stroke.width.thick,
       innerStroke: globalTokens.stroke.width.thick,
     };
   if (size <= 71)
     return {
-      size: size + 12,
+      size: size + sizeAdjustment.medium,
       stroke: globalTokens.stroke.width.thicker,
       innerStroke: globalTokens.stroke.width.thicker,
     };
   return {
-    size: size + 16,
+    size: size + sizeAdjustment.large,
     stroke: globalTokens.stroke.width.thickest,
     innerStroke: globalTokens.stroke.width.thickest,
   };

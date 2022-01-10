@@ -5,7 +5,6 @@ import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@
 export const JSAvatarName = 'Avatar';
 
 export type AvatarSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
-export type Size = 20 | 24 | 28 | 32 | 36 | 40 | 48 | 56 | 64 | 72 | 96 | 120;
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
