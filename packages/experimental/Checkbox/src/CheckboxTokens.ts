@@ -36,7 +36,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkmarkOpacity: 1,
     },
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
+      checkboxBorderRadius: globalTokens.corner.radius.circle,
     },
     labelIsBefore: {
       spacingLabelBefore: globalTokens.spacing.m,
