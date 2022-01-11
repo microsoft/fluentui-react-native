@@ -111,18 +111,20 @@ export function calculateEffectiveSizes(tokens: JSAvatarTokens): AvatarSizeConfi
 }
 
 export function getRingConfig(size: number): any {
-  if (size <= 48)
+  if (size <= 48) {
     return {
       size: size + sizeAdjustment.small,
       stroke: globalTokens.stroke.width.thick,
       innerStroke: globalTokens.stroke.width.thick,
     };
-  if (size <= 71)
+  }
+  if (size <= 71) {
     return {
       size: size + sizeAdjustment.medium,
       stroke: globalTokens.stroke.width.thicker,
       innerStroke: globalTokens.stroke.width.thicker,
     };
+  }
   return {
     size: size + sizeAdjustment.large,
     stroke: globalTokens.stroke.width.thickest,
