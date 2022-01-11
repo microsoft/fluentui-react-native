@@ -47,8 +47,8 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
     checkbox: buildProps(
       (tokens: CheckboxTokens) => ({
         style: {
-          minHeight: tokens.checkboxSize,
-          minWidth: tokens.checkboxSize,
+          height: tokens.checkboxSize,
+          width: tokens.checkboxSize,
           backgroundColor: tokens.checkboxBackgroundColor,
           borderColor: tokens.checkboxBorderColor,
           borderRadius: tokens.checkboxBorderRadius,
