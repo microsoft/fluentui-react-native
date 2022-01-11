@@ -1,10 +1,10 @@
 /** @jsx withSlots */
 import { compose, mergeProps, UseSlots } from '@fluentui-react-native/framework';
-import { View } from 'react-native';
-import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg, SvgProps } from 'react-native-svg';
+import { I18nManager, View } from 'react-native';
+import { ClipPath, Defs, G, LinearGradient, Path, Rect, Stop, Svg, SvgProps, TransformObject } from 'react-native-svg';
 import { stylingSettings } from './Shimmer.styling.win32';
-import { ShimmerElementTypes, shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
-import { ClippingMaskProps, ShimmerType } from './Shimmer.types.win32';
+import { ShimmerElementTypes, shimmerName, ShimmerProps } from './Shimmer.types';
+import { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
 import { RCTNativeAnimatedShimmer } from './consts.win32';
 import { convertRectToSvgPath, convertCircleToSvgPath } from './SvgShapeToPath';
 import { withSlots } from '@fluentui-react-native/framework';
@@ -13,8 +13,17 @@ import { assertNever } from 'assert-never';
 const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: ClippingMaskProps) => {
   /**
    * Absolute positioning is used to overlay the clipping mask on top of the shimmer wave.
+   *
+   * preserveAspectRatio = 'xMinYMin slice' asks the SVG to scale the viewBox up to fit the
+   * viewPort, starting from the origin of the viewPort and minimum coordinates of the viewBox.
+   * 'slice' removes the unnecessary remainder.
    */
-  const svgProps: SvgProps = { style: { position: 'absolute' }, width: '100%', height: '100%' };
+  const { backgroundColor, viewBoxHeight, viewBoxWidth } = props;
+  const svgProps: SvgProps = {
+    style: { position: 'absolute', height: viewBoxHeight, width: viewBoxWidth },
+    viewBox: '0 0 ' + viewBoxWidth + ' ' + viewBoxHeight,
+    preserveAspectRatio: 'xMinYMin slice',
+  };
   return (
     <Svg {...svgProps}>
       <Defs>
@@ -23,16 +32,25 @@ const clippingMask: React.FunctionComponent<ClippingMaskProps> = (props: Clippin
         </ClipPath>
       </Defs>
 
-      <Rect width="100%" height="100%" fill={props.backgroundColor as any} clipPath="url(#shimmerCuts)" />
+      <Rect width="100%" height="100%" fill={backgroundColor as any} clipPath="url(#shimmerCuts)" />
     </Svg>
   );
 };
 
-const wave: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTokens) => {
-  const { shimmerColor, shimmerColorOpacity, shimmerWaveColor, shimmerWaveColorOpacity, ...rest } = props;
+const wave: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps) => {
+  const { shimmerColor, shimmerColorOpacity, shimmerWaveColor, shimmerWaveColorOpacity, viewBoxHeight, viewBoxWidth } = props;
+
+  /**
+   * See the comment above for an explanation of preserveAspectRatio.
+   */
+  const svgProps: SvgProps = {
+    style: { height: viewBoxHeight, width: viewBoxWidth },
+    viewBox: '0 0 ' + viewBoxWidth + ' ' + viewBoxHeight,
+    preserveAspectRatio: 'xMinYMin slice',
+  };
 
   return (
-    <Svg {...rest} width="100%" height="100%">
+    <Svg {...svgProps}>
       <LinearGradient id="gradient">
         <Stop stopColor={shimmerColor} stopOpacity={shimmerColorOpacity} />
         <Stop offset="20%" stopColor={shimmerWaveColor} stopOpacity={shimmerWaveColorOpacity} />
@@ -43,8 +61,19 @@ const wave: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTokens) => {
   );
 };
 
-const waveContainer: React.FunctionComponent<ShimmerTokens> = (props: ShimmerTokens) => {
-  return <RCTNativeAnimatedShimmer {...{ ...props, style: { backgroundColor: props.shimmerColor, overflow: 'hidden' } }} />;
+const waveContainer: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps, children: React.ReactNode[]) => {
+  const { shimmerColor, viewBoxHeight, viewBoxWidth } = props;
+
+  // Flip the SVG if we are running in RTL
+  const rtlTransfrom: TransformObject = I18nManager.isRTL ? { translateX: viewBoxWidth, scaleX: -1 } : {};
+
+  return (
+    <RCTNativeAnimatedShimmer
+      {...{ ...props, style: { backgroundColor: shimmerColor, height: viewBoxHeight, width: viewBoxWidth, overflow: 'hidden' } }}
+    >
+      <G transform={rtlTransfrom}>{children}</G>
+    </RCTNativeAnimatedShimmer>
+  );
 };
 
 export const Shimmer = compose<ShimmerType>({
@@ -64,43 +93,57 @@ export const Shimmer = compose<ShimmerType>({
       const Slots = useSlots(mergedProps);
 
       /**
-       * Win32 D2D1 doesn't directly support SVG mask elements, so we're going to generate a mask
-       * by authoring a clip path for the same effect.  We do so utilizing the clip-rule='evenodd'
-       * and drawing a rectangle around the entire svg viewbox, causing all inner elements to be "clipped out"
-       * instead of "clipped around," generating the visual we desire with the linear gradient below the mask.
-       *
-       * The layout properties and elements we've been given, however, may not be known at render time.  Rather
-       * than try to keep up with the actual size of our control, we'll draw a very large rectangle well outside the range
-       * of our generated coordinates.  This large rectangle will ensure we keep the desired 'evenodd' clipping behavior
-       * without risking intersection with the provided Shimmer elements.
-       */
-      let clipPathsAsMask: string[] = ['M -1 -1 h 100000 v 100000 h -100000 z '];
-
-      /**
-       * Now extend the path to include the provided element shapes, with their path parameter strings generated from their corresponding properties.
+       * Generate a clip path from the provided element shapes, with their path parameter strings generated from their corresponding properties.
        * Ideally this would be better possible with functions from the shape elements themselves and not to rely on our own calculations.
+       *
+       * One nuanced consideration is scaling the SVG with DPI.  Without specifying a viewBox, points are considered to be pixels on an SVG canvas.
+       * When the native control is scaled the SVG canvas will scale up -- but pixel coordinates will not, changing the visual for different pixel densities.
+       * By providing a viewBox appropriate for our SVG the viewBox containing the graphics will be scaled up to fit the viewPort.
+       * Since we're programmatically generating the visual, we can assert our viewBox is `0 0 xMax yMax` where xMax and yMax are the greatest
+       * X and Y points used by a shape.
        */
+
+      let clipPathsAsMask: string[] = [];
+      let xMax = 0;
+      let yMax = 0;
 
       if (elements) {
         elements.forEach((element: ShimmerElementTypes) => {
           if (element.type == 'circle') {
             clipPathsAsMask = clipPathsAsMask.concat(convertCircleToSvgPath(element));
+
+            const xMaxCandidate = element.cx + element.radius;
+            const yMaxCandidate = element.cy + element.radius;
+            xMax = xMax >= xMaxCandidate ? xMax : xMaxCandidate;
+            yMax = yMax >= yMaxCandidate ? yMax : yMaxCandidate;
           } else if (element.type == 'rect') {
             clipPathsAsMask = clipPathsAsMask.concat(convertRectToSvgPath(element));
+
+            const xMaxCandidate = element.x + element.width;
+            const yMaxCandidate = element.y + element.height;
+            xMax = xMax >= xMaxCandidate ? xMax : xMaxCandidate;
+            yMax = yMax >= yMaxCandidate ? yMax : yMaxCandidate;
           } else {
             assertNever(element);
           }
         });
       }
 
-      const mergedClipPath = clipPathsAsMask.join(' ');
+      /**
+       * Win32 D2D1 doesn't directly support SVG mask elements, so we're going to generate a mask
+       * by manipulating our clip path for the same effect.  We do so utilizing the clip-rule='evenodd'
+       * and drawing a rectangle around the entire svg viewBox, causing all inner elements to be "clipped out"
+       * instead of "clipped around," generating the visual we desire with the linear gradient below the mask.
+       */
+
+      const mergedClipPath = clipPathsAsMask.join(' ').concat('M  0 0 h ' + xMax + ' v ' + yMax + ' h -' + xMax + ' z ');
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.shimmerWaveContainer>
-            <Slots.shimmerWave />
+          <Slots.shimmerWaveContainer viewBoxHeight={yMax} viewBoxWidth={xMax}>
+            <Slots.shimmerWave viewBoxHeight={yMax} viewBoxWidth={xMax} />
           </Slots.shimmerWaveContainer>
-          <Slots.clippingMask clipPath={mergedClipPath} />
+          <Slots.clippingMask clipPath={mergedClipPath} viewBoxHeight={yMax} viewBoxWidth={xMax} />
         </Slots.root>
       );
     };

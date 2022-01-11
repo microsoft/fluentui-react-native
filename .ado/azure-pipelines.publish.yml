@@ -8,6 +8,16 @@ trigger:
 
 pr: none
 
+parameters:
+- name: skipNpmPublish
+  displayName: Skip Npm Publish
+  type: boolean
+  default: false
+- name: skipGitPush
+  displayName: Skip Git Push
+  type: boolean
+  default: false
+
 variables:
   - group: 'NPM and Github Secrets'
 
@@ -20,7 +30,7 @@ jobs:
     steps:
       - task: NodeTool@0
         inputs:
-          versionSpec: '12.x'
+          versionSpec: '14.x'
         displayName: 'Install Node.js'
 
       - script: |
@@ -35,7 +45,17 @@ jobs:
         displayName: 'yarn test'
 
       - script: |
-          yarn publish:beachball -- -b origin/master -n $(npmAuth) --access public -y
+          echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
+        displayName: Enable No-Publish (npm)
+        condition: ${{ parameters.skipNpmPublish }}
+
+      - script: |
+          echo ##vso[task.setvariable variable=SkipGitPushPublishArgs]--no-push
+        displayName: Enable No-Publish (git)
+        condition: ${{ parameters.skipGitPush }}
+
+      - script: |
+          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/master -n $(npmAuth) --access public -y
         displayName: 'Publish NPM Packages'
 
   - job: NuGetPublish

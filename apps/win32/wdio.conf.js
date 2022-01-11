@@ -6,18 +6,16 @@ const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32
 const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
-const defaultWaitForTimeout = 10000;
-const defaultConnectionRetryTimeout = 15000;
+const defaultWaitForTimeout = 20000;
+const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
-  exclude: [
-    /* 'path/to/excluded/files' */
-  ],
+  exclude: [ '../fluent-tester/src/E2E/Shimmer/specs/*.win.ts' ],
 
-  maxInstances: 1,
+  maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
@@ -39,34 +37,31 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 1,
+  bail: 0,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
-  connectionRetryCount: 1, // Maximum count of request retries to the Selenium server.
+  connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
 
   port: 4723, // default appium port
-  services: ['appium'],
-  appium: {
-    logPath: './reports/',
-    args: {
-      port: '4723',
-    },
-  },
+  services: [
+    [
+      'appium',
+      {
+        logPath: './reports/',
+      },
+    ],
+  ],
 
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  reporters: [
-    'spec',
-    [
-      'allure',
-      {
-        outputDir: 'allure-results',
-      },
-    ],
-  ],
+  // The number of times to retry the entire spec file when it fails as a whole.
+  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
+  specFileRetries: 3,
+
+  reporters: ['spec'],
 
   /*
    ** ===================
@@ -105,17 +100,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (config, capabilities, specs) {
-    // Delete old screenshots and create empty directory
-    if (fs.existsSync('./errorShots')) {
-      rimraf.sync('./errorShots');
-    }
-    fs.mkdirSync('./errorShots');
-
-    if (fs.existsSync('./allure-results')) {
-      rimraf.sync('./allure-results');
-    }
-    fs.mkdirSync('./allure-results');
+  beforeSession: function (/* config, capabilities, specs */) {
+    fs.mkdirSync('./errorShots', { recursive: true });
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -126,6 +112,7 @@ exports.config = {
   before: function () {
     // not needed for Cucumber
     require('ts-node').register({ files: true });
+
     browser.maximizeWindow();
   },
   /**
@@ -161,14 +148,15 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test) {
-    // if test passed, ignore, else take and save screenshot.
-    if (test.passed) {
+  afterTest: function (test, context, results) {
+    // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
+    // it may be useful to have a screenshot of the app on load.
+    if (results.passed) {
       return;
     }
 
     // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.title.replace(/\s+/g, '-'));
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
 
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
@@ -217,7 +205,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
+  onComplete: function (/* exitCode, config, capabilities, results */) {
     console.log('<<< TESTING FINISHED >>>');
   },
   /**

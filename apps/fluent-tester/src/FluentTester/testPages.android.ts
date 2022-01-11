@@ -1,8 +1,10 @@
 import { TestDescription } from './TestComponents';
+import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
+import { DrawerTest, HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
@@ -15,17 +17,22 @@ import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
-import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
+import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestComponents/TextExperimental';
 
 export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
+  {
+    name: 'Avatar Test',
+    component: JSAvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
   },
   {
     name: 'Button Test',
@@ -46,6 +53,11 @@ export const tests: TestDescription[] = [
     name: 'ContextualMenu Test',
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
+  },
+  {
+    name: 'Drawer Test',
+    component: DrawerTest,
+    testPage: HOMEPAGE_DRAWER_BUTTON,
   },
   {
     name: 'Focus Trap Zone Test',
@@ -110,7 +122,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
   },
   {
     name: 'Svg Test',

@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/use-slot",
-  "version": "0.1.6",
+  "version": "0.2.5",
   "description": "Hook function to use a component as a pluggable slot",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/use-slot"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -32,15 +33,16 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/merge-props": ">=0.3.4 <1.0.0"
+    "@fluentui-react-native/merge-props": ">=0.4.2 <1.0.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@uifabricshared/build-native": "^0.1.1",
-    "react": "16.13.1",
-    "react-native": "^0.63.4"
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-native": ">=0.63.4"
+    "react": ">=17.0.1",
+    "react-native": ">=0.64.3"
   }
 }

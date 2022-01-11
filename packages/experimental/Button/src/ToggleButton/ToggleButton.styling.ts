@@ -1,33 +1,13 @@
-import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonProps } from './ToggleButton.types';
+import { toggleButtonName, ToggleButtonTokens, ToggleButtonSlotProps, ToggleButtonPropsWithInnerRef } from './ToggleButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
+import { defaultButtonColorTokens } from '../ButtonColorTokens';
+import { buttonStates, contentStyling } from '../Button.styling';
+import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
 import { defaultButtonTokens } from '../ButtonTokens';
-import { buttonStates } from '../Button.styling';
 
-export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonTokens> = {
-  tokens: [
-    defaultButtonTokens,
-    (t: Theme): ToggleButtonTokens => ({
-      checked: {
-        color: t.colors.defaultCheckedContent,
-        backgroundColor: t.colors.defaultCheckedBackground,
-        hovered: {
-          color: t.colors.defaultCheckedHoveredContent,
-          backgroundColor: t.colors.defaultCheckedHoveredBackground,
-        },
-        subtle: {
-          color: t.colors.ghostCheckedContent,
-          backgroundColor: t.colors.ghostCheckedBackground,
-          hovered: {
-            color: t.colors.ghostCheckedHoveredContent,
-            backgroundColor: t.colors.ghostCheckedHoveredBackground,
-            borderColor: t.colors.ghostCheckedHoveredBorder,
-          },
-        },
-      },
-    }),
-    toggleButtonName,
-  ],
+export const stylingSettings: UseStylingOptions<ToggleButtonPropsWithInnerRef, ToggleButtonSlotProps, ToggleButtonTokens> = {
+  tokens: [defaultButtonTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
   states: ['checked', ...buttonStates],
   slotProps: {
     root: buildProps(
@@ -38,33 +18,31 @@ export const stylingSettings: UseStylingOptions<ToggleButtonProps, ToggleButtonS
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          minHeight: 32,
-          minWidth: 80,
           width: tokens.width,
-          paddingStart: 16,
-          paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
+          ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     content: buildProps(
       (tokens: ToggleButtonTokens, theme: Theme) => ({
         style: {
-          color: tokens.color,
-          ...fontStyles.from(tokens, theme),
+          ...contentStyling(tokens, theme, tokens.color, tokens),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ToggleButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['iconColor'],
+      ['iconColor', 'iconSize'],
     ),
   },
 };

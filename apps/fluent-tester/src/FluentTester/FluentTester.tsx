@@ -1,5 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { FocusTrapZone, Separator, StealthButton } from '@fluentui/react-native';
+import { FocusTrapZone, Separator } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -115,12 +115,13 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         <View style={fluentTesterStyles.header}>
           {/* on iOS, display a back Button */}
           <Button
-            subtle
-            content="‹ Back"
+            appearance="subtle"
             style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
             onClick={onBackPress}
             disabled={onTestListView}
-          />
+          >
+            ‹ Back
+          </Button>
           <ThemePickers />
         </View>
       </View>
@@ -133,17 +134,19 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestList: React.FunctionComponent = () => {
     return (
       <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
           {sortedTestComponents.map((description, index) => {
             return (
-              <StealthButton
+              <Button
+                appearance="subtle"
                 key={index}
                 disabled={index == selectedTestIndex}
-                content={description.name}
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
-              />
+              >
+                {description.name}
+              </Button>
             );
           })}
         </ScrollView>

@@ -4,6 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardMenuButton } from './StandardMenuButtonTest';
 import { NestedMenuButton } from './NestedMenuButtonTest';
 import { CustomizedMenuButton } from './CustomizedMenuButtonTest';
+import { E2ETestMenuButton } from './MenuButtonE2ETest';
 
 const menuButtonSections: TestSection[] = [
   {
@@ -18,6 +19,10 @@ const menuButtonSections: TestSection[] = [
   {
     name: 'MenuButton with customized UI',
     component: CustomizedMenuButton,
+  },
+  {
+    name: 'MenuButton for E2E Testing',
+    component: E2ETestMenuButton,
   },
 ];
 

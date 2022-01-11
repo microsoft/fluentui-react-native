@@ -1,8 +1,147 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.9
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.9
+
+## 0.7.8
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.8
+
+## 0.7.7
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.7
+
+## 0.7.6
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/framework to v0.7.6
+
+## 0.7.5
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.5
+
+## 0.7.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.4
+
+## 0.7.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.3
+
+## 0.7.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.2
+
+## 0.7.1
+
+Thu, 16 Dec 2021 19:10:27 GMT
+
+### Patches
+
+- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/framework to v0.7.1
+
+## 0.7.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/test-tools to v0.1.1 (afoxman@microsoft.com)
+
+## 0.6.28
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.6 (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.27
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.5 (ruaraki@microsoft.com)
+
+## 0.6.26
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.6.25
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
+
+## 0.6.24
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Fix caching (ruaraki@microsoft.com)
+
+## 0.6.23
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.1 (ruaraki@microsoft.com)
 
 ## 0.6.22
 

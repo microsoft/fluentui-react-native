@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/memo-cache",
-  "version": "1.1.4",
+  "version": "1.1.7",
   "description": "Layered memoization style cache helper",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/memo-cache"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -32,9 +33,10 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/jest": "^26.0.0",
     "@types/node": "^10.3.5",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1"
+    "tslib": "^2.3.1"
   }
 }

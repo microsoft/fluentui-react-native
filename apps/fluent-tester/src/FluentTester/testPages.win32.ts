@@ -1,3 +1,4 @@
+import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
@@ -22,10 +23,21 @@ import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { TestDescription } from './TestComponents';
-import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
-import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
+import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
+import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'ActivityIndicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
+  {
+    name: 'Avatar Test',
+    component: JSAvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -44,7 +56,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
   },
   {
     name: 'ContextualMenu Test',
@@ -149,6 +161,6 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental MenuButton Test',
     component: ExperimentalMenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+    testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   },
 ];

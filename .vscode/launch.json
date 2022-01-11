@@ -5,6 +5,36 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to packager (Android)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/android"
+    },
+    {
+      "name": "Attach to packager (iOS)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/ios"
+    },
+    {
+      "name": "Attach to packager (macOS)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/macos"
+    },
+    {
+      "name": "Attach to packager (Windows)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/windows"
+    },
+    {
+      "name": "Attach to packager (Win32)",
+      "request": "attach",
+      "type": "reactnative",
+      "cwd": "${workspaceFolder}/apps/win32"
+    },
+    {
       "name": "Debug test",
       "type": "node",
       "request": "launch",
@@ -39,7 +69,7 @@
       "type": "node",
       "request": "attach",
       "protocol": "inspector",
-      "port": 9229,
+      "port": 9223,
       "sourceMaps": true
     }
   ]

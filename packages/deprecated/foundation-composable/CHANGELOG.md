@@ -1,8 +1,48 @@
 # Change Log - @uifabricshared/foundation-composable
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Mon, 20 Dec 2021 22:56:02 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/merge-props to v0.4.2
+- Bump @uifabricshared/foundation-settings to v0.11.2
+
+## 0.10.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.4.1
+- Bump @uifabricshared/foundation-settings to v0.11.1
+
+## 0.10.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.4.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-settings to v0.11.0 (afoxman@microsoft.com)
+
+## 0.9.3
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.3 (ruaraki@microsoft.com)
 
 ## 0.9.2
 

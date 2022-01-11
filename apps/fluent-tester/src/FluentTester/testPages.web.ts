@@ -1,4 +1,5 @@
 import { TestDescription } from './TestComponents';
+import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
@@ -11,8 +12,19 @@ import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'ActivityIndicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
+  {
+    name: 'Avatar Test',
+    component: JSAvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,

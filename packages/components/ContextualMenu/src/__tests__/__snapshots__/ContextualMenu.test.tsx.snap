@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextualMenu default props 1`] = `
+<RCTCallout
+  accessibilityRole="menu"
+  backgroundColor="menuBackground"
+  borderColor="buttonBorder"
+  borderWidth={1}
+  setInitialFocus={true}
+  style={
+    Object {
+      "backgroundColor": "#ffffff",
+      "borderColor": "#8a8886",
+      "borderWidth": 1,
+    }
+  }
+>
+  <View
+    accessible={false}
+    focusable={false}
+    onBlur={[Function]}
+    style={
+      Object {
+        "flex": 1,
+        "minWidth": 180,
+        "padding": 1,
+      }
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        Object {
+          "flexDirection": "column",
+          "flexGrow": 1,
+        }
+      }
+      showsVerticalScrollIndicator={true}
+    >
+      <View />
+    </RCTScrollView>
+  </View>
+</RCTCallout>
+`;

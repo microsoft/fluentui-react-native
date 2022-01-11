@@ -1,8 +1,178 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.9
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.6
+- Bump @fluentui-react-native/theme-types to v0.13.2
+- Bump @fluentui-react-native/tokens to v0.11.4
+
+## 0.7.8
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.5
+
+## 0.7.7
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/composition to v0.7.5
+- Bump @fluentui-react-native/use-slot to v0.2.5
+- Bump @fluentui-react-native/use-slots to v0.6.5
+
+## 0.7.6
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.7.4
+- Bump @fluentui-react-native/default-theme to v0.9.4
+- Bump @fluentui-react-native/immutable-merge to v1.1.6
+- Bump @fluentui-react-native/merge-props to v0.4.2
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @fluentui-react-native/use-styling to v0.8.2
+- Bump @fluentui-react-native/use-slot to v0.2.4
+- Bump @fluentui-react-native/use-slots to v0.6.4
+- Bump @fluentui-react-native/use-tokens to v0.2.2
+- Bump @fluentui-react-native/memo-cache to v1.1.7
+- Bump @fluentui-react-native/tokens to v0.11.3
+
+## 0.7.5
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.7.3
+- Bump @fluentui-react-native/default-theme to v0.9.3
+- Bump @fluentui-react-native/immutable-merge to v1.1.5
+- Bump @fluentui-react-native/merge-props to v0.4.1
+- Bump @fluentui-react-native/use-styling to v0.8.1
+- Bump @fluentui-react-native/use-slot to v0.2.3
+- Bump @fluentui-react-native/use-slots to v0.6.3
+- Bump @fluentui-react-native/use-tokens to v0.2.1
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/tokens to v0.11.2
+
+## 0.7.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/composition to v0.7.2
+- Bump @fluentui-react-native/use-slot to v0.2.2
+- Bump @fluentui-react-native/use-slots to v0.6.2
+
+## 0.7.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/composition to v0.7.1
+- Bump @fluentui-react-native/use-slot to v0.2.1
+- Bump @fluentui-react-native/use-slots to v0.6.1
+
+## 0.7.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.2
+
+## 0.7.1
+
+Thu, 16 Dec 2021 19:10:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.1
+- Bump @fluentui-react-native/tokens to v0.11.1
+
+## 0.7.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.7.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/merge-props to v0.4.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/use-slot to v0.2.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/use-slots to v0.6.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/use-tokens to v0.2.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/use-styling to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.13.0 (afoxman@microsoft.com)
+
+## 0.6.6
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.11 (67026167+chiuam@users.noreply.github.com)
+
+## 0.6.5
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.10 (ruaraki@microsoft.com)
+
+## 0.6.4
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Fix dependency (ruaraki@microsoft.com)
+
+## 0.6.3
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Revert "Add props to buildProps (#1039)" (ruaraki@microsoft.com)
+
+## 0.6.2
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.1 (ruaraki@microsoft.com)
+
+## 0.6.1
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.8.7 (ruaraki@microsoft.com)
 
 ## 0.6.0
 

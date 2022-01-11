@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ScreenRect, ViewStyle } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
-
 export const calloutName = 'Callout';
 
 /**
@@ -98,21 +98,12 @@ export interface ICalloutTokens extends IBackgroundColorTokens, CalloutBorderTok
   minPadding?: number;
 }
 
-export interface ICalloutProps extends ICalloutTokens {
-  /*
-   * Used by screen readers to inform the user about the control.
-   */
-  accessibilityLabel?: string;
-
-  /*
+export interface ICalloutProps extends IViewProps, ICalloutTokens {
+  /**
    * A string that should be announced when the callout is shown.
+   * @platform win32
    */
   accessibilityOnShowAnnouncement?: string;
-
-  /*
-   * Used by screen readers to inform the user about the purpose of the control.
-   */
-  accessibilityRole?: string;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
@@ -123,6 +114,7 @@ export interface ICalloutProps extends ICalloutTokens {
    * Adds a beak to the Callout, pointing to the anchor target.
    * Notable Win32 limitation: Beak rendering currently limits the border width to its default, and the
    * border width prop will not be honored.
+   * @platform win32
    */
   isBeakVisible?: boolean;
 
@@ -140,6 +132,7 @@ export interface ICalloutProps extends ICalloutTokens {
    * this callback is most appropriate for components strictly controlling focus.
    *
    * restoreFocusEvent.nativeEvent.containsFocus is true if the Callout had focus while being dismissed.
+   * @platform win32
    */
   onRestoreFocus?: (restoreFocusEvent: RestoreFocusEvent) => void;
 
@@ -149,6 +142,7 @@ export interface ICalloutProps extends ICalloutTokens {
   onShow?: () => void;
 
   /**
+   * @platform win32
    * If true then the callout will attempt to focus the first focusable element that it contains.
    * If it doesn't find an element, no focus will be set. This means that it's the contents responsibility
    * to either set focus or have focusable items.

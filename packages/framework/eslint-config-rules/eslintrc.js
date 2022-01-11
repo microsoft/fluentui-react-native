@@ -1,13 +1,7 @@
 module.exports = {
-  extends: ['plugin:react/recommended', 'plugin:@typescript-eslint/recommended'],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
-  plugins: ['@typescript-eslint'],
+  extends: ['plugin:@rnx-kit/recommended'],
   rules: {
+    '@rnx-kit/no-export-all': ['error', { expand: "external-only" }],
     '@typescript-eslint/consistent-type-assertions': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -16,14 +10,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-inferrable-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
-    'no-undef': 'off',
     'no-prototype-builtins': 'off',
+    'no-undef': 'off',
     'react/display-name': 'off',
-    'react/prop-types': 'off',
-  },
-  settings: {
-    react: {
-      version: "detect",
-    },
   },
 };

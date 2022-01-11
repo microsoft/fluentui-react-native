@@ -27,8 +27,6 @@ use_test_app! do |target|
     pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
     pod 'FRNDatePicker', :path => '../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec'
     pod 'react-native-menu', :path => '../../../node_modules/@react-native-menu/menu'
-    pod 'RNSVG', :path => '../../../node_modules/react-native-svg'
-    pod 'react-native-slider', :path => '../../../node_modules/@react-native-community/slider'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

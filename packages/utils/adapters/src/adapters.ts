@@ -11,11 +11,13 @@ const _viewMask: IFilterMask<IViewProps> = {
   children: true,
   accessible: true,
   accessibilityControls: true,
+  accessibilityItemType: true,
   accessibilityLabel: true,
   accessibilityRole: true,
   accessibilityState: true,
   accessibilityHint: true,
   accessibilityValue: true,
+  enableFocusRing: true,
   hitSlop: true,
   onLayout: true,
   pointerEvents: true,
@@ -94,6 +96,7 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityElementsHidden: true,
   accessibilityHint: true,
   accessibilityIgnoresInvertColors: true,
+  accessibilityItemType: true,
   accessibilityLabel: true,
   accessibilityLiveRegion: true,
   accessibilityRole: true,
@@ -140,6 +143,7 @@ const _textMask: IFilterMask<ITextProps> = {
   onBlurCapture: true,
   onFocus: true,
   onFocusCapture: true,
+  android_hyphenationFrequency: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -185,6 +189,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   width: true,
   height: true,
   fadeDuration: true,
+  nativeID: true,
 };
 
 export function filterViewProps(propName: string): boolean {

@@ -1,6 +1,6 @@
 function mergeOneLevel(a, b = {}) {
   const result = { ...a, ...b };
-  Object.keys(a).forEach(key => {
+  Object.keys(a).forEach((key) => {
     if (Array.isArray(b[key]) && Array.isArray(a[key])) {
       result[key] = [].concat(a[key], b[key]);
     }
@@ -14,7 +14,7 @@ function scriptsDevDeps() {
 }
 
 function depcheckTask() {
-  return function(done) {
+  return function (done) {
     const { logger } = require('just-scripts');
     const depcheck = require('depcheck');
     const path = require('path');
@@ -22,31 +22,31 @@ function depcheckTask() {
     const options = mergeOneLevel(
       {
         ignorePatterns: ['*eslint*', '/lib/*', '/lib-commonjs/*'],
-        ignoreMatches: ['@uifabricshared/build-native', '@uifabricshared/eslint-config-rules', ...scriptsDevDeps()],
-        specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest]
+        ignoreMatches: ['@uifabricshared/build-native', '@fluentui-react-native/eslint-config-rules', 'tslib', ...scriptsDevDeps()],
+        specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest],
       },
-      config.depcheck
+      config.depcheck,
     );
 
-    return depcheck(process.cwd(), options, result => {
+    return depcheck(process.cwd(), options, (result) => {
       try {
         if (result.devDependencies.length > 0) {
           logger.warn('Unused devDependencies');
-          result.devDependencies.forEach(dependency => {
+          result.devDependencies.forEach((dependency) => {
             logger.warn(`-- ${dependency}`);
           });
         }
         if (result.dependencies.length > 0 || Object.keys(result.missing).length > 0) {
           if (result.dependencies.length > 0) {
             logger.error('Unused dependencies');
-            result.dependencies.forEach(dependency => {
+            result.dependencies.forEach((dependency) => {
               logger.error(`-- ${dependency}`);
             });
           }
 
-          Object.keys(result.missing).forEach(dependency => {
+          Object.keys(result.missing).forEach((dependency) => {
             logger.error(`Missing dependency on ${dependency}`);
-            result.missing[dependency].forEach(file => {
+            result.missing[dependency].forEach((file) => {
               logger.error(`-- ${file}`);
             });
           });

@@ -1,8 +1,294 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jan 2022 12:27:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.21
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Patches
+
+- added active and activeAppearance props (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.21
+
+## 0.17.20
+
+Fri, 07 Jan 2022 23:38:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.20
+
+## 0.17.19
+
+Fri, 07 Jan 2022 21:27:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.19
+
+## 0.17.18
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.18
+
+## 0.17.17
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.17
+
+## 0.17.16
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.16
+
+## 0.17.15
+
+Wed, 05 Jan 2022 19:33:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.15
+
+## 0.17.14
+
+Tue, 04 Jan 2022 23:05:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.14
+
+## 0.17.13
+
+Thu, 23 Dec 2021 02:03:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.13
+
+## 0.17.12
+
+Tue, 21 Dec 2021 22:47:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.12
+
+## 0.17.11
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.11
+
+## 0.17.10
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.10
+
+## 0.17.9
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.9
+
+## 0.17.8
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.8
+
+## 0.17.7
+
+Sat, 18 Dec 2021 01:46:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.7
+
+## 0.17.6
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.6
+
+## 0.17.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.5
+
+## 0.17.4
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.4
+
+## 0.17.3
+
+Fri, 17 Dec 2021 18:39:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.3
+
+## 0.17.2
+
+Fri, 17 Dec 2021 14:04:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.2
+
+## 0.17.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.1
+
+## 0.17.0
+
+Thu, 16 Dec 2021 23:23:23 GMT
+
+### Minor changes
+
+- Adding MacOS E2E testing to CI pipeline (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.50.0
+
+## 0.16.2
+
+Thu, 16 Dec 2021 19:10:25 GMT
+
+### Patches
+
+- Allow maxHeight prop to be set on menu and submenu for Scrollview (email not defined)
+- Enable native focus visuals on win32 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.49.0
+
+## 0.16.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.48.1 (sanajmi@microsoft.com)
+
+## 0.16.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Adding E2E Testing pages for each component (safreibe@microsoft.com)
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.48.0 (afoxman@microsoft.com)
+
+## 0.15.4
+
+Fri, 12 Nov 2021 16:07:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.47.3 (4123478+tido64@users.noreply.github.com)
+
+## 0.15.3
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.47.2 (67026167+chiuam@users.noreply.github.com)
+
+## 0.15.2
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.47.1 (sanajmi@microsoft.com)
+
+## 0.15.1
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Checkbox redesign (v.kozlova13@gmail.com)
+
+## 0.15.0
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Minor changes
+
+- Transferring E2E Improvements to this branch. Other branch had weird CI errors (safreibe@microsoft.com)
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.46.0 (ruaraki@microsoft.com)
+
+## 0.14.1
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.45.1 (ruaraki@microsoft.com)
+
+## 0.14.0
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Minor changes
+
+- Increasing timeouts and number of retry attempts for failed E2E runs. This will reduce the risk of intermittent failures engineers will see in our CI pipeline, because usually it corrects itself after the first failed attempt (if it is indeed a false-negative) (safreibe@microsoft.com)
+
+### Patches
+
+- Add VS Code debugging configurations (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.45.0 (safreibe@microsoft.com)
+
+## 0.13.3
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.44.2 (safreibe@microsoft.com)
 
 ## 0.13.2
 

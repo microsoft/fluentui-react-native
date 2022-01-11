@@ -1,8 +1,165 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.11
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.3
+
+## 0.11.10
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.2
+
+## 0.11.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Change export method (ruaraki@microsoft.com)
+
+## 0.11.8
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.1
+
+## 0.11.7
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.7
+- Bump @fluentui-react-native/icon to v0.11.0
+
+## 0.11.6
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo. (afoxman@microsoft.com)
+
+## 0.11.5
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/icon to v0.10.4
+
+## 0.11.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.10.3
+
+## 0.11.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.10.2
+
+## 0.11.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.10.1
+
+## 0.11.1
+
+Thu, 16 Dec 2021 19:10:27 GMT
+
+### Patches
+
+- Change focusRef type (ruaraki@microsoft.com)
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.10.0
+
+## 0.11.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.9.0 (afoxman@microsoft.com)
+
+## 0.10.54
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.30 (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.53
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- revert changes in useAsPressable (sanajmi@microsoft.com)
+
+## 0.10.52
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.10.51
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.27 (ruaraki@microsoft.com)
+
+## 0.10.50
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Fix a regression in useHoverState (sanajmi@microsoft.com)
+- fix setting state with onPress/onLongPress (sanajmi@microsoft.com)
+- Support onPress/onLongPress in usePressableState (sanajmi@microsoft.com)
+- Fix regression in useAsPressable (sanajmi@microsoft.com)
+
+## 0.10.49
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.8.25 (sanajmi@microsoft.com)
 
 ## 0.10.48
 

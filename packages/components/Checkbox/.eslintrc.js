@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['@uifabricshared/eslint-config-rules']
+  extends: ['@fluentui-react-native/eslint-config-rules'],
 };

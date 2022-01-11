@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ExperimentalCheckboxTestPageId } from './consts';
+import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
@@ -24,6 +25,7 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
       <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
+      <Checkbox label="A circular checkbox" circular onChange={onChangeUncontrolled} defaultChecked={false} />
     </View>
   );
 };
@@ -41,22 +43,19 @@ const otherCheckbox: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={isCheckedControlled1} />
+      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
       <Checkbox
-        label="Checkbox rendered with boxSide 'end' (controlled)"
+        label="Checkbox rendered with labelPosition 'before' (controlled)"
         onChange={onChangeControlled2}
-        boxSide="end"
-        checked={isCheckedControlled2}
+        labelPosition="before"
+        checked={Boolean(isCheckedControlled2)}
       />
     </View>
   );
 };
 
 const tokenCheckbox: React.FunctionComponent = () => {
-  const CircularCheckbox = Checkbox.customize({ borderRadius: 50 });
-
   const CircleColorCheckbox = Checkbox.customize({
-    borderRadius: 50,
     checkboxBackgroundColor: 'white',
     checked: {
       checkboxBackgroundColor: 'green',
@@ -99,13 +98,12 @@ const tokenCheckbox: React.FunctionComponent = () => {
   };
   return (
     <View>
-      <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
       <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
+      <CircleColorCheckbox label="A circular token-customized checkbox" circular onChange={onChangeUncontrolled} defaultChecked={true} />
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
-        boxSide="end"
+        labelPosition="before"
         defaultChecked={false}
       />
 
@@ -133,7 +131,7 @@ const tokenCheckbox: React.FunctionComponent = () => {
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
-    testID: ExperimentalCheckboxTestPageId,
+    testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
     component: basicCheckbox,
   },
   {
@@ -143,6 +141,10 @@ const checkboxSections: TestSection[] = [
   {
     name: 'Token Customized Checkboxes',
     component: tokenCheckbox,
+  },
+  {
+    name: 'E2E Testing for Experimental Checkbox',
+    component: E2ECheckboxExperimentalTest,
   },
 ];
 

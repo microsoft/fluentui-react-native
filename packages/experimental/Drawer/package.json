@@ -1,0 +1,51 @@
+{
+  "name": "@fluentui-react-native/experimental-drawer",
+  "version": "0.0.10",
+  "description": "A Native Drawer component using the Fluent Design System. Currently only implemented on Android",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "dependencies": {
+    "@fluentui-react-native/component-cache": "^1.3.1",
+    "@fluentui-react-native/framework": "0.7.9",
+    "tslib": "^2.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/Drawer"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@types/react-native": "^0.64.0",
+    "@uifabricshared/build-native": "^0.1.1",
+    "immediate": "~3.0.5",
+    "lie": "~3.3.0",
+    "pako": "~1.0.2",
+    "react": "17.0.1",
+    "react-native": "^0.64.3",
+    "readable-stream": "~2.3.6",
+    "set-immediate-shim": "~1.0.1"
+  },
+  "peerDependencies": {
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
+  },
+  "author": "",
+  "license": "MIT"
+}

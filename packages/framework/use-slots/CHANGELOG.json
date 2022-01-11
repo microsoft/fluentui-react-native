@@ -2,6 +2,158 @@
   "name": "@fluentui-react-native/use-slots",
   "entries": [
     {
+      "date": "Tue, 21 Dec 2021 20:56:31 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.5",
+      "version": "0.6.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.5",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:56:02 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.4",
+      "version": "0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/use-slots",
+            "commit": "f4a5b4f5c9c190400e3e34c4a33b3ed30696d41e",
+            "comment": "Add repository property to all package.json files"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.4",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.3",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.2",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 19:53:21 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/use-slots",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.1",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/merge-props to v0.4.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/use-slots"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.5.9",
+      "version": "0.5.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/use-slot to v0.1.7",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/use-slots_v0.5.9",
+      "version": "0.5.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/use-slot to v0.1.7",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/use-slots"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Sep 2021 21:08:25 GMT",
       "tag": "@fluentui-react-native/use-slots_v0.5.8",
       "version": "0.5.8",

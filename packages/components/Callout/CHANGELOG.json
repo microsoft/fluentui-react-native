@@ -2,6 +2,559 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Thu, 06 Jan 2022 23:14:38 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.14",
+      "version": "0.19.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.11",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.4",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.6",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Jan 2022 21:30:08 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.13",
+      "version": "0.19.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.10",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.5",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Jan 2022 23:53:54 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.12",
+      "version": "0.19.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.9",
+            "commit": "8622748288aa587df7a433e6741b5d3b9c53655b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Dec 2021 02:03:45 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.11",
+      "version": "0.19.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "e19493c6c474ce520c42b40da52e288d7ed89dce",
+            "comment": "Fix RTL for ContextualMenu on macOS"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Dec 2021 20:56:31 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.10",
+      "version": "0.19.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.8",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:56:00 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.9",
+      "version": "0.19.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "f4a5b4f5c9c190400e3e34c4a33b3ed30696d41e",
+            "comment": "Add repository property to all package.json files"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.3.1",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.7",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.3",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-composable to v0.10.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.4",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.11.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.8",
+      "version": "0.19.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.7",
+      "version": "0.19.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.2",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-composable to v0.10.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.3",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.11.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 22:42:38 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.6",
+      "version": "0.19.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70",
+            "comment": "remove carbon header"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.5",
+      "version": "0.19.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 19:53:21 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.4",
+      "version": "0.19.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 18:39:08 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.3",
+      "version": "0.19.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "b7787516d0c417fbe350793713ffce3330c0f4a7",
+            "comment": "Documentation fixes"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 01:26:42 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.2",
+      "version": "0.19.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.2",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.2",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Dec 2021 23:00:56 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.1",
+      "version": "0.19.1",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Dec 2021 19:10:30 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.1",
+      "version": "0.19.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "51cbf7c64d5c52feeec2e845cd4dbd4e23c96e1e",
+            "comment": "Add up/down arrow key support to macOS ContextualMenu"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "dd2f47a0a2d6aab7361301a16407c76497b45ce7",
+            "comment": "remove focus style overrides for macOS contextual menu items"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "e597717b14dce4916740076786391449dd4a7c69",
+            "comment": "Rename Jest snapshots to be platform agnostic "
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.3.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-composable to v0.10.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Bump @uifabricshared/foundation-settings to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Nov 2021 16:07:20 GMT",
+      "tag": "@fluentui-react-native/callout_v0.18.1",
+      "version": "0.18.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.54",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "25673699e6c6c064b41f1246c2c995baa67a74ad",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/callout_v0.18.1",
+      "version": "0.18.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/callout_v0.18.1",
+      "version": "0.18.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.22",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/callout_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump macOS minimum version to 10.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f6e7e6523713e641227f91113728da3d9816ef22",
+            "package": "@fluentui-react-native/callout"
+          },
+          {
+            "comment": "Use \"FRN\" prefix over \"RCT\" for macOS Callout native code",
+            "author": "sanajmi@microsoft.com",
+            "commit": "10d9d09b2af1bf71ff4253cc17e536dd6d8bfae1",
+            "package": "@fluentui-react-native/callout"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Added macOS support",
+            "author": "sanajmi@microsoft.com",
+            "commit": "ae20d8c84bb0f87703d2fa4d16b54abbea4c5b90",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/callout_v0.17.29",
+      "version": "0.17.29",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.53",
+            "author": "sanajmi@microsoft.com",
+            "commit": "18757ce3c755d20f37bf436b7e99d3caee320c3b",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/callout_v0.17.28",
+      "version": "0.17.28",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.10.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/callout_v0.17.27",
+      "version": "0.17.27",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.10.51",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/callout_v0.17.26",
+      "version": "0.17.26",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.10.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8209c3a6f52871eef88035c2dba2ef2b5ee83e7",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/callout_v0.17.25",
+      "version": "0.17.25",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @uifabricshared/foundation-compose to v1.10.18",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f759f09649d7fd9b8ea8ada78677f5cb65519f6e",
+            "package": "@fluentui-react-native/callout"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 01 Oct 2021 17:52:17 GMT",
       "tag": "@fluentui-react-native/callout_v0.17.24",
       "version": "0.17.24",

@@ -1,8 +1,187 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.11
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.6
+- Bump @fluentui-react-native/interactive-hooks to v0.11.11
+- Bump @fluentui-react-native/text to v0.11.6
+- Bump @fluentui-react-native/tokens to v0.11.4
+
+## 0.15.10
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.5
+- Bump @fluentui-react-native/interactive-hooks to v0.11.10
+- Bump @fluentui-react-native/text to v0.11.5
+
+## 0.15.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+
+## 0.15.8
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.8
+
+## 0.15.7
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.4
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.7
+- Bump @fluentui-react-native/text to v0.11.4
+- Bump @fluentui-react-native/tokens to v0.11.3
+- Bump @uifabricshared/foundation-composable to v0.10.2
+- Bump @uifabricshared/foundation-settings to v0.11.2
+
+## 0.15.6
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.6
+
+## 0.15.5
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.5
+- Bump @fluentui-react-native/text to v0.11.3
+- Bump @fluentui-react-native/tokens to v0.11.2
+- Bump @uifabricshared/foundation-composable to v0.10.1
+- Bump @uifabricshared/foundation-settings to v0.11.1
+
+## 0.15.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+
+## 0.15.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+
+## 0.15.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/text to v0.11.2
+
+## 0.15.1
+
+Thu, 16 Dec 2021 19:10:26 GMT
+
+### Patches
+
+- Refactor useKeyCallback (sanajmi@microsoft.com)
+- Rename Jest snapshots to be platform agnostic  (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.1
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/text to v0.11.1
+- Bump @fluentui-react-native/tokens to v0.11.1
+
+## 0.15.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/text to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-composable to v0.10.0 (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-settings to v0.11.0 (afoxman@microsoft.com)
+
+## 0.14.13
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.22 (67026167+chiuam@users.noreply.github.com)
+
+## 0.14.12
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.53 (sanajmi@microsoft.com)
+
+## 0.14.11
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.10.2 (ruaraki@microsoft.com)
+
+## 0.14.10
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.10.51 (ruaraki@microsoft.com)
+
+## 0.14.9
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.7.5 (ruaraki@microsoft.com)
+
+## 0.14.8
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.10.18 (ruaraki@microsoft.com)
 
 ## 0.14.7
 

@@ -444,6 +444,7 @@ export interface ControlColorTokens {
   checkboxBackground: ColorValue;
   checkboxBackgroundDisabled: ColorValue;
   checkmarkColor: ColorValue;
+  checkboxBorderColor: ColorValue;
 
   personaActivityRing: ColorValue;
   personaActivityGlow: ColorValue;
@@ -451,6 +452,9 @@ export interface ControlColorTokens {
 
 export interface AliasColorTokens {
   neutralForeground1: ColorValue;
+  neutralForeground1Hover: ColorValue;
+  neutralForeground1Pressed: ColorValue;
+  neutralForeground1Selected: ColorValue;
   neutralForeground2: ColorValue;
   neutralForeground2Hover: ColorValue;
   neutralForeground2Pressed: ColorValue;
@@ -480,6 +484,9 @@ export interface AliasColorTokens {
 
   neutralForegroundInverted: ColorValue;
   neutralForegroundOnBrand: ColorValue;
+  neutralForegroundOnBrandHover: ColorValue;
+  neutralForegroundOnBrandPressed: ColorValue;
+  neutralForegroundOnBrandSelected: ColorValue;
   neutralForegroundInvertedLink: ColorValue;
   neutralForegroundInvertedLinkHover: ColorValue;
   neutralForegroundInvertedLinkPressed: ColorValue;

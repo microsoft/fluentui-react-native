@@ -8,6 +8,7 @@ import { EXPERIMENTAL_TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
+import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
 
 const tabs: React.FunctionComponent = () => {
   return (
@@ -183,7 +184,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button content="View Next Tab" onClick={goToNextTab} />
+      <Button onClick={goToNextTab}>View Next Tab</Button>
     </View>
   );
 };
@@ -215,7 +216,7 @@ const tabsWithFlexibility: React.FunctionComponent = () => {
           <Text>Tabs #3</Text>
         </TabsItem>
       </Tabs>
-      <Button content="View Home Tab" onClick={goHomeTab} />
+      <Button onClick={goHomeTab}>View Home Tab</Button>
     </View>
   );
 };
@@ -249,6 +250,10 @@ const tabsSections: TestSection[] = [
   {
     name: 'More Flexibility',
     component: tabsWithFlexibility,
+  },
+  {
+    name: 'E2E Testing Experimental Tabs',
+    component: E2ETestExperimentalTabs,
   },
 ];
 

@@ -2,14 +2,19 @@
 
 exports[`CompoundButton default 1`] = `
 <View
-  accessibilityLabel="Default Button"
+  accessibilityLabel="Default Button sublabel"
   accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
   accessible={true}
+  enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyUp={[Function]}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -23,15 +28,14 @@ exports[`CompoundButton default 1`] = `
       "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
-      "borderRadius": 2,
+      "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 72,
-      "minWidth": 80,
-      "paddingEnd": 16,
-      "paddingStart": 16,
+      "minWidth": 96,
+      "padding": 11,
+      "paddingHorizontal": 11,
     }
   }
 >
@@ -48,9 +52,13 @@ exports[`CompoundButton default 1`] = `
         Object {
           "color": "#323130",
           "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "fontSize": 14,
+          "fontWeight": "600",
           "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 0,
         }
       }
     >
@@ -63,6 +71,10 @@ exports[`CompoundButton default 1`] = `
           "fontSize": 12,
           "fontWeight": "400",
           "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 0,
         }
       }
     >

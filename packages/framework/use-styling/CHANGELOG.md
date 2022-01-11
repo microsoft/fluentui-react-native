@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/use-styling
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.2
+
+Mon, 20 Dec 2021 22:56:02 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.7
+- Bump @fluentui-react-native/use-tokens to v0.2.2
+
+## 0.8.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/use-tokens to v0.2.1
+
+## 0.8.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/use-tokens to v0.2.0 (afoxman@microsoft.com)
+
+## 0.7.2
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
+
+## 0.7.1
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Revert "Add props to buildProps (#1039)" (ruaraki@microsoft.com)
 
 ## 0.7.0
 

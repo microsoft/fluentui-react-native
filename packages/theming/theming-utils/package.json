@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/theming-utils",
-  "version": "0.7.4",
+  "version": "0.8.6",
   "description": "Utils for dealing with theming",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/fluentui-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/theming-utils"
   },
   "main": "src/index.ts",
   "module": "lib/index.js",
@@ -25,21 +26,21 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.4",
-    "@fluentui-react-native/theme-tokens": ">=0.7.3 <1.0.0",
-    "@fluentui-react-native/theme-types": ">=0.12.3 <1.0.0"
+    "@fluentui-react-native/memo-cache": "^1.1.7",
+    "@fluentui-react-native/theme-tokens": ">=0.11.4 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.13.2 <1.0.0"
   },
   "devDependencies": {
-    "@types/react-native": "^0.63.0",
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@types/react-native": "^0.64.0",
     "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "^0.63.4",
-    "react-native-windows": "^0.64.0"
+    "react-native": "^0.64.3",
+    "react-native-windows": "^0.64.3"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-native": ">=0.63.4",
-    "react-native-windows": "^0.64.0"
+    "react": ">=17.0.1",
+    "react-native": ">=0.64.3",
+    "react-native-windows": "^0.64.3"
   },
   "author": "",
   "license": "MIT"
