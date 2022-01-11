@@ -8,7 +8,9 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
   const defaultRef = React.useRef(null);
   const { onClick, innerRef, disabled, loading, ...rest } = props;
   const ref = innerRef !== null ? innerRef : defaultRef;
-  const onClickWithFocus = disabled ? null : useOnPressWithFocus(ref, onClick);
+  // Set focusRef to null if button is disabled to prevent getting keyboard focus. This is a workaround for GH:1336
+  const focusRef = disabled ? null : ref;
+  const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
   const isDisabled = !!disabled || !!loading;
