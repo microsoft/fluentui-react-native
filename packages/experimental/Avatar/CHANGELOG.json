@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 11 Jan 2022 12:27:30 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb",
+            "comment": "added active and activeAppearance props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Jan 2022 23:14:38 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.13.10",
       "version": "0.13.10",

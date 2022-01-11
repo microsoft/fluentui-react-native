@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 11 Jan 2022 12:27:30 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.21",
+      "version": "0.17.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb",
+            "comment": "added active and activeAppearance props"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.21",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Jan 2022 23:38:55 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.17.20",
       "version": "0.17.20",

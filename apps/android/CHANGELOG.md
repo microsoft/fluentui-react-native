@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-android
 
-This log was last generated on Fri, 07 Jan 2022 23:38:55 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jan 2022 12:27:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.1
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.50.21
 
 ## 0.0.1
 

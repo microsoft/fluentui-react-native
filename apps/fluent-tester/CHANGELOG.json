@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 11 Jan 2022 12:27:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.21",
+      "version": "0.50.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb",
+            "comment": "added active and activeAppearance props"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.0",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Jan 2022 23:38:55 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.20",
       "version": "0.50.20",

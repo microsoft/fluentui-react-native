@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "added active and activeAppearance props",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

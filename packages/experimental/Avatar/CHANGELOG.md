@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jan 2022 12:27:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Minor changes
+
+- added active and activeAppearance props (vkozlova@microsoft.com)
 
 ## 0.13.10
 
