@@ -11,7 +11,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalSize] = React.useState<number>(80);
+  const [physicalSize, setPhysicalSize] = React.useState<number>(96);
   const [iconSize, setIconSize] = React.useState<number>(24);
   const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
   const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
@@ -138,6 +138,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       </View>
 
       <CustomizedAvatar
+        active="active"
+        activeAppearance="ring"
         initials="SB"
         imageDescription="Former CEO of Microsoft"
         presence="blocked"

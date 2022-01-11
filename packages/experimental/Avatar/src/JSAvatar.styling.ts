@@ -2,7 +2,7 @@ import { JSAvatarName, JSAvatarTokens, AvatarSlotProps, JSAvatarProps } from './
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
-import { calculateEffectiveSizes, convertCoinColorFluent, getRingThickness } from './JSAvatar.helpers';
+import { calculateEffectiveSizes, convertCoinColorFluent, getRingConfig } from './JSAvatar.helpers';
 import { borderStyles } from '@fluentui-react-native/tokens';
 
 const nameMap: { [key: string]: string } = {
@@ -11,7 +11,7 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end',
 };
 
-export const avatarStates: (keyof JSAvatarTokens)[] = ['circular', 'square'];
+export const avatarStates: (keyof JSAvatarTokens)[] = ['circular', 'square', 'inactive'];
 
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
@@ -30,10 +30,11 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             alignItems: nameMap[verticalIconAlignment || 'end'] as ViewStyle['alignItems'],
             horizontalIconAlignment,
             verticalIconAlignment,
+            opacity: tokens.avatarOpacity,
           },
         };
       },
-      ['horizontalIconAlignment', 'verticalIconAlignment'],
+      ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity'],
     ),
     initials: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -106,25 +107,19 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
-        const { ring } = tokens;
+        const ringConfig = getRingConfig(physicalSize);
 
-        if (!ring) return {};
-
-        const innerGap = ring.innerGap != undefined ? getRingThickness(ring.innerGap) : getRingThickness(ring.ringThickness || 'xxlarge');
-
-        const effectiveRingThickness = 2 * getRingThickness(ring.ringThickness || 'xxlarge') + innerGap;
-        const effectiveSize = physicalSize + 2 * effectiveRingThickness;
-        const ringColor = ring.ringBackgroundColor || theme.colors.personaActivityRing;
+        const ringColor = tokens.ringColor;
         return {
           style: {
             borderStyle: 'solid',
             borderColor: ringColor,
-            borderWidth: effectiveRingThickness,
-            width: effectiveSize,
-            height: effectiveSize,
+            borderWidth: ringConfig.stroke,
+            width: ringConfig.size,
+            height: ringConfig.size,
             position: 'absolute',
-            top: -effectiveRingThickness,
-            left: -effectiveRingThickness,
+            top: -ringConfig.stroke * 2,
+            left: -ringConfig.stroke * 2,
             ...borderStyles.from(tokens, theme),
           },
         };
@@ -134,25 +129,19 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     glow: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
-        const { ring } = tokens;
+        const ringConfig = getRingConfig(physicalSize);
 
-        if (!ring) return {};
-
-        const innerGap = ring.innerGap != undefined ? getRingThickness(ring.innerGap) : getRingThickness(ring.ringThickness || 'xxlarge');
-
-        const effectiveRingThickness = getRingThickness(ring.ringThickness || 'xxlarge') + innerGap;
-        const effectiveSize = physicalSize + 2 * effectiveRingThickness;
-        const glowColor = ring.accent ? theme.colors.accentButtonBackground : ring.ringColor || theme.colors.personaActivityGlow;
+        const glowColor = tokens.ringColor;
         return {
           style: {
             borderStyle: 'solid',
             borderColor: glowColor,
-            borderWidth: effectiveRingThickness - innerGap,
-            width: effectiveSize,
-            height: effectiveSize,
+            borderWidth: ringConfig.stroke - ringConfig.innerStroke,
+            width: ringConfig.size,
+            height: ringConfig.size,
             position: 'absolute',
-            top: -effectiveRingThickness,
-            left: -effectiveRingThickness,
+            top: -ringConfig.stroke * 2,
+            left: -ringConfig.stroke * 2,
             ...borderStyles.from(tokens, theme),
           },
         };

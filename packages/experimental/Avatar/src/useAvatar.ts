@@ -9,7 +9,7 @@ import { getPresenceIconSource } from './JSAvatar.helpers';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ring, shape, ...rest } = props;
+  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ring, shape, active, activeAppearance, ...rest } = props;
 
   const personaPhotoSource =
     imageUrl === undefined
@@ -19,7 +19,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
         };
 
   const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
-  const showRing = !!ring;
+  const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
 
   const state: JSAvatarState = {
@@ -35,6 +35,8 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
       accessibilityLabel: imageDescription,
       shape: shape || 'circular',
       ...rest,
+      active,
+      activeAppearance,
     },
     state: {
       ...state,
