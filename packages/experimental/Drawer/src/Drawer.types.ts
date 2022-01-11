@@ -6,6 +6,10 @@ export interface DrawerProps extends ViewProps {
   onShow?: () => void;
   onDismiss?: () => void;
   target?: React.RefObject<React.Component>;
+  /* Component will check showDrawer boolean to toggle show*/
+  showDrawer?: Boolean;
+  /* Callback function that the component will call to toggle collapse after rendering*/
+  toggleShow?: () => void;
 }
 
 export interface NativeDrawerProps extends Omit<DrawerProps, 'target'> {

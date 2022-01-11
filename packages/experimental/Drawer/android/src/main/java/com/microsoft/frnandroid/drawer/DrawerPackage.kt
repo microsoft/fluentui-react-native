@@ -18,6 +18,6 @@ class DrawerPackage: ReactPackage {
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return Collections.emptyList<ViewManager<*, *>>()
+        return listOf(DrawerViewManager())
     }
 }

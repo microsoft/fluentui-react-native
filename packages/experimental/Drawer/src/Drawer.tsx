@@ -18,20 +18,29 @@ export const Drawer = compose<DrawerType>({
     })),
   },
   render: (props: DrawerProps, useSlots: UseSlots<DrawerType>) => {
-    const { target, ...rest } = props;
-    const [nativeTarget, setNativeTarget] = React.useState<number | null>(null);
+    const { target, showDrawer, toggleShow, /*contentRef,*/ ...rest} = props;
+    const [nativeTarget, setNativeTarget] = React.useState<number>(undefined);
+    //const [contentId, setContentId] = React.useState<number | null>(null);
 
     React.useLayoutEffect(() => {
       if (target?.current) {
         // Pass the tagID for a valid ref `target`
-        setNativeTarget(findNodeHandle(target.current));
+        const node = findNodeHandle(target.current);
+        setNativeTarget(node);
       }
     }, [target]);
 
-    const rootProps = { ...rest };
+    React.useEffect(() => {
+        if(showDrawer) {
+          // After, rendering, setShowDrawer back to false
+          toggleShow();
+        }
+    }, [showDrawer, toggleShow]);
+
+    const rootProps = { ...rest, showDrawer, ...(nativeTarget && {target : nativeTarget}) };
     const Root = useSlots(props).root;
-    return (rest: DrawerProps) => {
-      return <Root {...mergeProps(rootProps, rest)} {...(nativeTarget && { target: nativeTarget })} />;
+    return () => {
+      return <Root {...mergeProps(rootProps)} />;
     };
   },
 });
