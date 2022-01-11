@@ -41,7 +41,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": undefined,
-      "borderRadius": 9999,
+      "borderRadius": 2,
       "display": "flex",
       "flexDirection": "row",
       "padding": 4,
@@ -71,11 +71,11 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
         "alignItems": "center",
         "backgroundColor": "#ffffff",
         "borderColor": "#f3f2f1",
-        "borderRadius": 2,
+        "borderRadius": 9999,
         "borderWidth": 1,
+        "height": 16,
         "justifyContent": "center",
-        "minHeight": 16,
-        "minWidth": 16,
+        "width": 16,
       }
     }
   >
@@ -188,9 +188,9 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
         "borderColor": "red",
         "borderRadius": 5,
         "borderWidth": 2,
+        "height": 16,
         "justifyContent": "center",
-        "minHeight": 16,
-        "minWidth": 16,
+        "width": 16,
       }
     }
   >
@@ -317,9 +317,9 @@ exports[`Checkbox component tests Checkbox default 1`] = `
         "borderColor": "#323130",
         "borderRadius": 2,
         "borderWidth": 1,
+        "height": 16,
         "justifyContent": "center",
-        "minHeight": 16,
-        "minWidth": 16,
+        "width": 16,
       }
     }
   >
