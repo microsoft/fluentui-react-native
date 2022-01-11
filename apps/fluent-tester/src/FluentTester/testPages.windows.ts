@@ -71,11 +71,12 @@ export const tests = [
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
-  {
-    name: 'Experimental Checkbox',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
-  },
+  // GH#935 Temporarily disabling while SVGs don't work in windows
+  // {
+  //   name: 'Experimental Checkbox',
+  //   component: ExperimentalCheckboxTest,
+  //   testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
+  // },
   {
     name: 'Tabs Test',
     component: TabsTest,
