@@ -13,7 +13,9 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checkboxSize: 16,
     color: t.colors.neutralForeground1,
     spacingLabelAfter: globalTokens.spacing.m,
-    variant: 'bodyStandard',
+    fontSize: globalTokens.font.size[200],
+    fontWeight: globalTokens.font.weight.regular,
+    fontFamily: t.typography.families.primary,
     checkmarkOpacity: 0,
     disabled: {
       checkboxBorderColor: t.colors.neutralStrokeDisabled,
