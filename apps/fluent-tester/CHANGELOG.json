@@ -2,6 +2,78 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 20:13:01 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.21",
+      "version": "0.50.21",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "not available",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Jan 2022 19:27:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.21",
+      "version": "0.50.21",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "446757f8607e479aa95f474665c39f3292cdeaf9",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Jan 2022 12:27:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.21",
+      "version": "0.50.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb",
+            "comment": "added active and activeAppearance props"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.0",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jan 2022 23:38:55 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.20",
+      "version": "0.50.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "728dad51aa5959d3d727a0ecbb96fb01f8499b4f",
+            "comment": "Implement circular styling"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.5.0",
+            "commit": "728dad51aa5959d3d727a0ecbb96fb01f8499b4f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Jan 2022 21:27:06 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.19",
       "version": "0.50.19",

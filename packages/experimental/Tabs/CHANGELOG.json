@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 20:13:01 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.4.11",
+      "version": "0.4.11",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "not available",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 12 Jan 2022 19:27:56 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.4.11",
+      "version": "0.4.11",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "446757f8607e479aa95f474665c39f3292cdeaf9",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Jan 2022 23:14:38 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.4.11",
       "version": "0.4.11",

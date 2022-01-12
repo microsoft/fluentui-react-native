@@ -115,7 +115,6 @@ const contextualMenu: React.FunctionComponent = () => {
 };
 
 const nestedContextualMenu: React.FunctionComponent = () => {
-
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -162,7 +161,6 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => {
     console.log('submenu item clicked');
   }, []);
-
 
   return (
     <View>
@@ -235,7 +233,6 @@ const nestedContextualMenu: React.FunctionComponent = () => {
 };
 
 const IconContextualMenu: React.FunctionComponent = () => {
-
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -442,7 +439,13 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
             componentRef={stdMenuItemRef}
           />
           {showSubmenu && (
-            <Submenu maxHeight={200} target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
+            <Submenu
+              maxHeight={200}
+              target={stdMenuItemRef}
+              onDismiss={onDismissSubmenu}
+              onShow={onShowSubmenu}
+              setShowMenu={toggleShowSubmenu}
+            >
               <ContextualMenuItem text="MenuItem 4" itemKey="4" />
               <ContextualMenuItem text="MenuItem 5" itemKey="5" />
               <ContextualMenuItem text="MenuItem 6" itemKey="6" />
@@ -486,7 +489,7 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'ContextualMenu E2E Test',
     component: E2EContextualMenuTest,
-  },  
+  },
 ];
 
 export const ContextualMenuTest: React.FunctionComponent = () => {

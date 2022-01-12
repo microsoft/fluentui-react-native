@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 07 Jan 2022 21:27:06 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jan 2022 12:27:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.21
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Patches
+
+- added active and activeAppearance props (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.0
+
+## 0.50.20
+
+Fri, 07 Jan 2022 23:38:55 GMT
+
+### Patches
+
+- Implement circular styling (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.5.0
 
 ## 0.50.19
 

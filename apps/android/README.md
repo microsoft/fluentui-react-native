@@ -17,9 +17,17 @@ yarn
 yarn build
 ```
 
-2. Then go into `apps/android` folder and simply run the the following
+2. Start the server by running:
 
 ```sh
+cd apps/android
+yarn start
+```
+
+3. To boot the app, open a new command prompt and run:
+
+```sh
+cd apps/android
 yarn android
 ```
 

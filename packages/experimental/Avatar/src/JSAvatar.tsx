@@ -14,7 +14,13 @@ import { useAvatar } from './useAvatar';
  * @returns Whether the styles that are assigned to the layer should be applied to the avatar
  */
 export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSAvatarProps): boolean => {
-  return state[layer] || userProps[layer] || layer === userProps['shape'] || (!userProps['shape'] && layer === 'circular');
+  return (
+    state[layer] ||
+    userProps[layer] ||
+    layer === userProps['shape'] ||
+    (!userProps['shape'] && layer === 'circular') ||
+    (userProps.active === 'inactive' && layer === 'inactive')
+  );
 };
 
 export const JSAvatar = compose<JSAvatarType>({
@@ -34,7 +40,7 @@ export const JSAvatar = compose<JSAvatarType>({
     const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
 
     return (final: JSAvatarProps) => {
-      const { children, accessibilityLabel, ...mergedProps } = mergeProps(avatar.props, final);
+      const { children, accessibilityLabel, activeAppearance, ...mergedProps } = mergeProps(avatar.props, final);
       const { personaPhotoSource, iconSource, showRing, transparentRing } = avatar.state;
 
       return (
@@ -47,7 +53,7 @@ export const JSAvatar = compose<JSAvatarType>({
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
-          {showRing && <Slots.glow />}
+          {activeAppearance === 'glow' && <Slots.glow />}
           {!!iconSource && !!iconSource.uri && <Slots.icon source={iconSource} />}
         </Slots.root>
       );
