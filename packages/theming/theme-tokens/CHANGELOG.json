@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 20:13:01 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "not available",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Jan 2022 19:27:57 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.11.4",
       "version": "0.11.4",

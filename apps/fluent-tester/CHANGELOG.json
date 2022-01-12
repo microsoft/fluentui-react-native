@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 20:13:01 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.21",
+      "version": "0.50.21",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "not available",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Jan 2022 19:27:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.21",
       "version": "0.50.21",

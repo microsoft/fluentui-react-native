@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 20:13:01 GMT",
+      "tag": "@fluentui-react-native/button_v0.21.11",
+      "version": "0.21.11",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "not available",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Jan 2022 19:27:56 GMT",
       "tag": "@fluentui-react-native/button_v0.21.11",
       "version": "0.21.11",

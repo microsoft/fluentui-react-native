@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-drawer",
   "entries": [
     {
+      "date": "Wed, 12 Jan 2022 20:13:01 GMT",
+      "tag": "@fluentui-react-native/experimental-drawer_v0.0.10",
+      "version": "0.0.10",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-drawer",
+            "commit": "not available",
+            "comment": "Rerun prettier"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Jan 2022 19:27:56 GMT",
       "tag": "@fluentui-react-native/experimental-drawer_v0.0.10",
       "version": "0.0.10",
