@@ -19,7 +19,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
   const changeSelection = React.useCallback(() => {
     info.focusZoneRef?.current?.focus(); // GH #964, FocusZone not implemented on windows.
     info.onTabsClick && info.onTabsClick(itemKey);
-    info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex(x => x == itemKey) + 1);
+    info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
     info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
   }, [componentRef, info, itemKey]);
 
@@ -65,13 +65,13 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
       focusable: false,
       headerText: headerText ?? '',
       accessibilityState: { disabled: disabled, selected: info.selectedKey === itemKey },
-      accessibilityActions: [{ name: 'Select'}],
+      accessibilityActions: [{ name: 'Select' }],
       onAccessibilityAction: onAccessibilityAction,
       itemCount: itemCount,
       itemKey: itemKey,
     },
     state: {
-      ...state
+      ...state,
     },
   };
 };
