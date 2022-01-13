@@ -37,15 +37,13 @@ export type AvatarColor =
 
 export type AvatarPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
 
-export type RingThickness = number | 'xSmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge';
-
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
   ringColor?: ColorValue; // glow
   ringBackgroundColor?: ColorValue; // inner/outer rings
-  ringThickness?: RingThickness;
-  innerGap?: RingThickness;
+  ringThickness?: number;
+  innerGap?: number;
 }
 
 export interface AvatarConfigurableProps {
@@ -88,6 +86,9 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   physicalSize?: number;
   circular?: JSAvatarTokens;
   square?: JSAvatarTokens;
+  inactive?: JSAvatarTokens;
+  avatarOpacity?: number;
+  ringColor?: ColorValue;
 }
 
 export interface JSAvatarState {

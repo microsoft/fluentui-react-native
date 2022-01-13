@@ -10,8 +10,8 @@ export const defaultFABTokens: TokenSettings<ButtonCoreTokens, Theme> = () =>
     minWidth: 56,
     padding: globalTokens.spacing.l,
     hasContent: {
-      hasIcon: {
-        spacingIconContent: globalTokens.spacing.mNudge,
+      hasIconBefore: {
+        spacingIconContentBefore: globalTokens.spacing.mNudge,
       },
     },
   } as ButtonCoreTokens);

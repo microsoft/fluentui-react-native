@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
+import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { ToggleButtonPropsWithInnerRef, ToggleButtonProps, toggleButtonName, ToggleButtonType } from './ToggleButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './ToggleButton.styling';
@@ -20,7 +21,7 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
     content: Text,
   },
   render: (userProps: ToggleButtonPropsWithInnerRef, useSlots: UseSlots<ToggleButtonType>) => {
-    const { icon, defaultChecked, checked, onClick, iconPosition, ...rest } = userProps;
+    const { defaultChecked, checked, onClick, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
 
     // Warns defaultChecked and checked being mutually exclusive.
@@ -35,7 +36,16 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
 
     // now return the handler for finishing render
     return (final: ToggleButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const { accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconPosition, iconOnly, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const shouldShowIcon = !loading && icon;
+
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
 
       let childText = '';
       if (accessibilityLabel === undefined) {
@@ -49,11 +59,12 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {loading && <ActivityIndicator />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };

@@ -1,8 +1,51 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Jan 2022 23:38:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Fri, 07 Jan 2022 23:38:55 GMT
+
+### Minor changes
+
+- Implement circular styling (ruaraki@microsoft.com)
+
+## 0.4.11
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.9
+- Bump @fluentui-react-native/framework to v0.7.9
+- Bump @fluentui-react-native/interactive-hooks to v0.11.11
+- Bump @fluentui-react-native/pressable to v0.8.11
+- Bump @fluentui-react-native/theme-tokens to v0.11.4
+- Bump @fluentui-react-native/tokens to v0.11.4
+
+## 0.4.10
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.8
+- Bump @fluentui-react-native/framework to v0.7.8
+- Bump @fluentui-react-native/interactive-hooks to v0.11.10
+- Bump @fluentui-react-native/pressable to v0.8.10
+- Bump @fluentui-react-native/theme-tokens to v0.11.3
+
+## 0.4.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Rename boxside to labelPosition (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+- Bump @fluentui-react-native/pressable to v0.8.9
 
 ## 0.4.8
 

@@ -28,7 +28,8 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
     (layer === 'hasContent' && !userProps.iconOnly) ||
-    (layer === 'hasIcon' && (userProps.icon || userProps.loading))
+    (layer === 'hasIconAfter' && (userProps.icon || userProps.loading) && userProps.iconPosition === 'after') ||
+    (layer === 'hasIconBefore' && (userProps.icon || userProps.loading) && (!userProps.iconPosition || userProps.iconPosition === 'before'))
   );
 };
 
@@ -47,8 +48,18 @@ const ButtonComposed = compose<ButtonType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonPropsWithInnerRef, children: React.ReactNode[]) => {
-      const { icon, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+    return (final: ButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
+      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+
+      const shouldShowIcon = !loading && icon;
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
+
       let childText = '';
       if (accessibilityLabel === undefined) {
         React.Children.forEach(children, (child) => {
@@ -61,12 +72,12 @@ const ButtonComposed = compose<ButtonType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {loading && <ActivityIndicator />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };

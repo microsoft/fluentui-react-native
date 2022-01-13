@@ -50,8 +50,8 @@ exports[`Button component tests Button circular 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
@@ -110,8 +110,8 @@ exports[`Button component tests Button default 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
@@ -171,8 +171,8 @@ exports[`Button component tests Button large 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
@@ -232,8 +232,8 @@ exports[`Button component tests Button primary 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
@@ -293,8 +293,8 @@ exports[`Button component tests Button small 1`] = `
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
@@ -354,8 +354,8 @@ exports[`Button component tests Button square 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
@@ -415,8 +415,8 @@ exports[`Button component tests Button subtle 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }

@@ -18,10 +18,10 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     }
   }
   accessible={true}
-  boxSide="end"
   defaultChecked={true}
   disabled={true}
   focusable={false}
+  labelPosition="before"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onChange={[Function]}

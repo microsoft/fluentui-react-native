@@ -46,7 +46,7 @@ export const stylingSettings: UseStylingOptions<CompoundButtonPropsWithInnerRef,
           },
         };
       },
-      ['color', 'spacingIconContent', ...fontStyles.keys],
+      ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     secondaryContent: buildProps(
       (tokens: CompoundButtonTokens, theme: Theme) => {

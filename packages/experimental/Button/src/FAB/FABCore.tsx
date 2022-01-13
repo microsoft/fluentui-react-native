@@ -19,7 +19,9 @@ import { ButtonCorePropsWithInnerRef, ButtonCoreProps } from '../Button.types';
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
 const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCorePropsWithInnerRef): boolean => {
-  return state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIcon' && userProps.icon);
+  return (
+    state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIconBefore' && userProps.icon)
+  );
 };
 
 const FABComposed = compose<FABType>({
@@ -32,8 +34,8 @@ const FABComposed = compose<FABType>({
   },
   render: (userProps: ButtonCorePropsWithInnerRef, useSlots: UseSlots<FABType>) => {
     const { icon, onClick, ...rest } = userProps;
-    const iconProps = createIconProps(userProps.icon);
 
+    const iconProps = createIconProps(userProps.icon);
     const button = useButton(rest);
 
     // grab the styled slots
@@ -41,7 +43,16 @@ const FABComposed = compose<FABType>({
 
     // now return the handler for finishing render
     return (final: ButtonCorePropsWithInnerRef, ...children: React.ReactNode[]) => {
-      const { accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const { iconOnly, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
+
       let childText = '';
       if (accessibilityLabel === undefined) {
         React.Children.forEach(children, (child) => {

@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Jan 2022 12:27:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Minor changes
+
+- added active and activeAppearance props (vkozlova@microsoft.com)
+
+## 0.13.10
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.9
+- Bump @fluentui-react-native/theme-tokens to v0.11.4
+- Bump @fluentui-react-native/tokens to v0.11.4
+
+## 0.13.9
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.8
+- Bump @fluentui-react-native/theme-tokens to v0.11.3
 
 ## 0.13.8
 

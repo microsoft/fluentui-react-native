@@ -1,8 +1,45 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.11
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.8.11
+- Bump @fluentui-react-native/icon to v0.11.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.11
+- Bump @fluentui-react-native/pressable to v0.8.11
+- Bump @fluentui-react-native/text to v0.11.6
+- Bump @fluentui-react-native/tokens to v0.11.4
+- Bump @uifabricshared/foundation-compose to v1.11.6
+
+## 0.6.10
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.8.10
+- Bump @fluentui-react-native/icon to v0.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.10
+- Bump @fluentui-react-native/pressable to v0.8.10
+- Bump @fluentui-react-native/text to v0.11.5
+- Bump @uifabricshared/foundation-compose to v1.11.5
+
+## 0.6.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.8.9
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+- Bump @fluentui-react-native/pressable to v0.8.9
 
 ## 0.6.8
 

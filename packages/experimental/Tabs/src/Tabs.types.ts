@@ -42,7 +42,7 @@ export interface TabsContextData {
    * Reference to the Focus Container as there is no FocusZone on windows.
    * GH #964
    */
-   focusZoneRef?: React.RefObject<any> | null;
+  focusZoneRef?: React.RefObject<any> | null;
 }
 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
@@ -98,7 +98,7 @@ export interface TabsState {
    * Array of enabled keys in the group
    * Windows-Specific Prop.
    */
-   enabledKeys?: string[];
+  enabledKeys?: string[];
 }
 export interface TabsInfo {
   props: TabsProps;

@@ -6,24 +6,25 @@ import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { Platform, ColorValue } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
-export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIcon'];
+export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIconBefore'];
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
   'primary',
   'subtle',
   'hovered',
+  'focused',
   'pressed',
   'disabled',
   'small',
   'medium',
   'large',
   'hasContent',
-  'hasIcon',
+  'hasIconAfter',
+  'hasIconBefore',
   'rounded',
   'circular',
   'square',
-  'focused',
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonPropsWithInnerRef, ButtonSlotProps, ButtonTokens> = {
@@ -55,7 +56,7 @@ export const stylingSettings: UseStylingOptions<ButtonPropsWithInnerRef, ButtonS
           },
         };
       },
-      ['color', 'spacingIconContent', ...fontStyles.keys],
+      ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: ButtonTokens) => ({
@@ -81,16 +82,22 @@ export const getDefaultSize = (): ButtonSize => {
 };
 
 export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {
-  const spacingIconContent = tokens.spacingIconContent
+  const textAdjustment = getTextMarginAdjustment();
+  const spacingIconContentBefore = tokens.spacingIconContentBefore
     ? {
-        marginLeft: tokens.spacingIconContent,
-        marginRight: tokens.spacingIconContent,
+        marginStart: textAdjustment.marginStart + tokens.spacingIconContentBefore,
+      }
+    : {};
+  const spacingIconContentAfter = tokens.spacingIconContentAfter
+    ? {
+        marginEnd: textAdjustment.marginEnd + tokens.spacingIconContentAfter,
       }
     : {};
   return {
     color: contentColor,
     ...getTextMarginAdjustment(),
-    ...spacingIconContent,
+    ...spacingIconContentBefore,
+    ...spacingIconContentAfter,
     ...fontStyles.from(fontStylesTokens, theme),
   };
 };

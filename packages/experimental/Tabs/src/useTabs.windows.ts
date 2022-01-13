@@ -12,16 +12,28 @@ import { TabsProps, TabsState, TabsInfo } from './Tabs.types';
 export const useTabs = (props: TabsProps): TabsInfo => {
   const defaultComponentRef = React.useRef(null);
   const focusZoneRef = React.useRef(null);
-  const { componentRef = defaultComponentRef, selectedKey, getTabId, onTabsClick, defaultSelectedKey, isCircularNavigation, headersOnly, label } = props;
+  const {
+    componentRef = defaultComponentRef,
+    selectedKey,
+    getTabId,
+    onTabsClick,
+    defaultSelectedKey,
+    isCircularNavigation,
+    headersOnly,
+    label,
+  } = props;
 
   const data = useSelectedKey(selectedKey || defaultSelectedKey || null, onTabsClick);
 
-  const findTabId = React.useCallback((key: string, index: number) => {
-    if (getTabId) {
-      return getTabId(key, index);
-    }
-    return `${key}-Tab${index}`;
-  }, [getTabId]);
+  const findTabId = React.useCallback(
+    (key: string, index: number) => {
+      if (getTabId) {
+        return getTabId(key, index);
+      }
+      return `${key}-Tab${index}`;
+    },
+    [getTabId],
+  );
 
   // Stores views to be displayed.
   const map = new Map<string, React.ReactNode[]>();
@@ -38,7 +50,6 @@ export const useTabs = (props: TabsProps): TabsInfo => {
     label: !!label,
   };
 
-
   return {
     props: {
       ...props,
@@ -48,7 +59,7 @@ export const useTabs = (props: TabsProps): TabsInfo => {
       isCircularNavigation: isCircularNavigation ?? false,
     },
     state: {
-      ...state
+      ...state,
     },
   };
 };

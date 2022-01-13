@@ -1,4 +1,4 @@
-import { AvatarSize, AvatarColor, AvatarPresence, JSAvatarTokens, RingThickness } from './JSAvatar.types';
+import { AvatarSize, AvatarColor, AvatarPresence, JSAvatarTokens } from './JSAvatar.types';
 import { ImageURISource } from 'react-native';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
@@ -24,8 +24,12 @@ const presenceIconCache: { [key in AvatarPresence]: ImageURISource } = {
   },
 };
 
-// TODO: Need icons for the OOF statuses
 const presenceOOFIconCache = presenceIconCache;
+const sizeAdjustment = {
+  small: 8,
+  medium: 12,
+  large: 16,
+};
 
 export function getPresenceIconSource(presence: AvatarPresence, isOutOfOffice: boolean): ImageURISource {
   return isOutOfOffice ? presenceOOFIconCache[presence] : presenceIconCache[presence];
@@ -106,21 +110,24 @@ export function calculateEffectiveSizes(tokens: JSAvatarTokens): AvatarSizeConfi
   }
 }
 
-export function getRingThickness(thickness: RingThickness): number {
-  switch (thickness) {
-    case 'xSmall':
-      return 1;
-    case 'small':
-      return 1;
-    case 'medium':
-      return 2;
-    case 'large':
-      return 2;
-    case 'xlarge':
-      return 2;
-    case 'xxlarge':
-      return 4;
-    default:
-      return thickness < 0 ? 4 : thickness;
+export function getRingConfig(size: number): any {
+  if (size <= 48) {
+    return {
+      size: size + sizeAdjustment.small,
+      stroke: globalTokens.stroke.width.thick,
+      innerStroke: globalTokens.stroke.width.thick,
+    };
   }
+  if (size <= 71) {
+    return {
+      size: size + sizeAdjustment.medium,
+      stroke: globalTokens.stroke.width.thicker,
+      innerStroke: globalTokens.stroke.width.thicker,
+    };
+  }
+  return {
+    size: size + sizeAdjustment.large,
+    stroke: globalTokens.stroke.width.thickest,
+    innerStroke: globalTokens.stroke.width.thickest,
+  };
 }

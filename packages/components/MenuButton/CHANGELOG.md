@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Thu, 23 Dec 2021 02:03:45 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.15
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.11
+- Bump @fluentui-react-native/contextual-menu to v0.14.9
+- Bump @fluentui-react-native/icon to v0.11.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.11
+- Bump @fluentui-react-native/tokens to v0.11.4
+- Bump @uifabricshared/foundation-compose to v1.11.6
+
+## 0.7.14
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.10
+- Bump @fluentui-react-native/contextual-menu to v0.14.8
+- Bump @fluentui-react-native/icon to v0.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.10
+- Bump @uifabricshared/foundation-compose to v1.11.5
+
+## 0.7.13
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.9
+- Bump @fluentui-react-native/contextual-menu to v0.14.7
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
 
 ## 0.7.12
 

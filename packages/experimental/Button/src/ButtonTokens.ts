@@ -20,8 +20,11 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         minWidth: 96,
         paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width.thin,
         variant: 'bodySemibold',
-        hasIcon: {
-          spacingIconContent: globalTokens.spacing.sNudge,
+        hasIconAfter: {
+          spacingIconContentAfter: globalTokens.spacing.sNudge,
+        },
+        hasIconBefore: {
+          spacingIconContentBefore: globalTokens.spacing.sNudge,
         },
         focused: {
           paddingHorizontal: globalTokens.spacing.m,
@@ -40,8 +43,11 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         minWidth: 64,
         paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width.thin,
         variant: 'secondaryStandard',
-        hasIcon: {
-          spacingIconContent: globalTokens.spacing.xs,
+        hasIconAfter: {
+          spacingIconContentAfter: globalTokens.spacing.xs,
+        },
+        hasIconBefore: {
+          spacingIconContentBefore: globalTokens.spacing.xs,
         },
         focused: {
           paddingHorizontal: globalTokens.spacing.s,
@@ -60,8 +66,11 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
         minWidth: 96,
         paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width.thin,
         variant: 'subheaderSemibold',
-        hasIcon: {
-          spacingIconContent: globalTokens.spacing.sNudge,
+        hasIconAfter: {
+          spacingIconContentAfter: globalTokens.spacing.sNudge,
+        },
+        hasIconBefore: {
+          spacingIconContentBefore: globalTokens.spacing.sNudge,
         },
         focused: {
           paddingHorizontal: globalTokens.spacing.l,

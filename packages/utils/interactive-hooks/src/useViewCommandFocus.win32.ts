@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { findNodeHandle, UIManager } from 'react-native';
 import { IViewWin32 } from '@office-iss/react-native-win32';
-
-const setAndForwardRef = require('./setAndForwardRef');
+import { setAndForwardRef } from './setAndForwardRef';
 
 export type IFocusable = IViewWin32;
 /**
@@ -19,11 +18,11 @@ export function useViewCommandFocus(
   /**
    * Set up the forwarding ref to enable adding the focus method.
    */
-  const focusRef = React.useRef<React.Component>();
+  const focusRef = React.useRef<any>();
 
   const _setNativeRef = setAndForwardRef({
     getForwardedRef: () => forwardedRef,
-    setLocalRef: (localRef) => {
+    setLocalRef: (localRef: any) => {
       focusRef.current = localRef;
 
       /**

@@ -85,7 +85,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * - 'primary': Emphasizes the button as a primary action.
    * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
    */
-  appearance?: 'primary' | 'outline' | 'subtle' | 'transparent';
+  appearance?: 'primary' | 'outline' | 'subtle';
 
   /**
    * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
@@ -190,9 +190,14 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   width?: ViewStyle['width'];
 
   /**
-   * The amount of spacing between an icon and the content, in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
-  spacingIconContent?: number;
+  spacingIconContentBefore?: number;
+
+  /**
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   */
+  spacingIconContentAfter?: number;
 
   /**
    * States that can be applied to a button.
@@ -203,7 +208,8 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   pressed?: ButtonTokens;
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
-  hasIcon?: ButtonTokens;
+  hasIconAfter?: ButtonTokens;
+  hasIconBefore?: ButtonTokens;
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
   block?: ButtonTokens;

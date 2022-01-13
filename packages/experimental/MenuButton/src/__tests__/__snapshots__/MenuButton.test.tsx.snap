@@ -12,7 +12,6 @@ exports[`ContextualMenu default 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={true}
-  iconOnly={false}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -51,8 +50,8 @@ exports[`ContextualMenu default 1`] = `
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
-        "marginLeft": 0,
-        "marginRight": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
         "marginTop": 0,
       }
     }
