@@ -52,7 +52,7 @@ export const settings: IComposeSettings<ILinkType> = [
       },
       focused: {
         tokens: {
-          borderColor: 'strokeFocus2',
+          borderColor: 'focusBorder',
         },
       },
     },
