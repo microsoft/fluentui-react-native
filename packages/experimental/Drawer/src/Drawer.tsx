@@ -32,15 +32,17 @@ export const Drawer = compose<DrawerType>({
 
     React.useEffect(() => {
         if(showDrawer) {
-          // After, rendering, setShowDrawer back to false
+          // After rendering, setShowDrawer back to false
           toggleShow();
         }
     }, [showDrawer, toggleShow]);
 
-    const rootProps = { ...rest, showDrawer, ...(nativeTarget && {target : nativeTarget}) };
+    const rootProps = { ...rest };
     const Root = useSlots(props).root;
-    return () => {
-      return <Root {...mergeProps(rootProps)} />;
+    return (final: DrawerProps, ...children: React.ReactNode[]) => {
+      return <Root {...mergeProps(rootProps, final)} showDrawer {...(nativeTarget && {target : nativeTarget})}>
+        {children}
+        </Root>;
     };
   },
 });

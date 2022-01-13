@@ -1,43 +1,43 @@
 package com.microsoft.frnandroid.drawer
 
-import android.view.View
-import com.facebook.react.uimanager.annotations.ReactProp
-import com.facebook.react.uimanager.SimpleViewManager
+import android.widget.LinearLayout
 import com.facebook.react.uimanager.ThemedReactContext
-import com.facebook.react.common.MapBuilder
+import com.facebook.react.uimanager.ViewGroupManager
+import com.facebook.react.uimanager.annotations.ReactProp
 import com.microsoft.fluentui.drawer.DrawerDialog
 
-class DrawerViewManager : SimpleViewManager<View>() {
+class DrawerViewManager : ViewGroupManager<LinearLayout>() {
     companion object {
         private const val REACT_CLASS = "FRNDrawer"
     }
 
     private lateinit var mDrawerActivity: DrawerDialog
-    private lateinit var mReactContext: ThemedReactContext
+    private lateinit var mRootView: LinearLayout
+    private lateinit var mViews: LinearLayout
 
     override fun getName(): String {
         return REACT_CLASS
     }
 
-    override fun createViewInstance(reactContext: ThemedReactContext): View {
-        val drawerActivity = DrawerDialog(reactContext)
-        mDrawerActivity = drawerActivity
-        mReactContext = reactContext
 
-        mDrawerActivity?.setContentView(R.layout.demo_drawer_content)
-        return View(reactContext)
+    override fun createViewInstance(reactContext: ThemedReactContext): LinearLayout {
+        mDrawerActivity = DrawerDialog(reactContext)
+        mRootView = LinearLayout(reactContext)
+        mDrawerActivity.setContentView(mRootView.getChildAt(0))
+
+        return mRootView
     }
 
     @ReactProp(name="target")
-    fun setTarget(view: View, tagID: Int) {
-        view.invalidate()
+    fun setTarget(viewGroup: LinearLayout, tagID: Int) {
+        viewGroup.invalidate()
     }
 
     @ReactProp(name="showDrawer")
-    fun setShowDrawer(view: View, showDrawer: Boolean) {
+    fun setShowDrawer(viewGroup: LinearLayout, showDrawer: Boolean) {
         if(showDrawer && !mDrawerActivity.isShowing) {
             mDrawerActivity?.show()
         }
-        view.invalidate()
+        viewGroup.invalidate()
     }
 }
