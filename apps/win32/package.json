@@ -47,7 +47,7 @@
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
-    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@wdio/allure-reporter": "5.22.4",
     "allure-commandline": "2.13.0",
