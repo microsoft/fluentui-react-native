@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix HC issues",
+  "packageName": "@fluentui-react-native/link",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
