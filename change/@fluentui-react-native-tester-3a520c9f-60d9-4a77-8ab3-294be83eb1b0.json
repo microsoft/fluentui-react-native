@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "resolve json modules in tsconfig",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "none"
+}
