@@ -35,7 +35,7 @@
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
-    "@uifabricshared/build-native": "0.1.1",
+    "@fluentui-react-native/scripts": "0.1.1",
     "@wdio/allure-reporter": "5.22.4",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",

@@ -66,7 +66,7 @@
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
-    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",
     "@wdio/jasmine-framework": "^6.5.0",
