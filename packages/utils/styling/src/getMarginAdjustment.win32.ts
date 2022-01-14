@@ -1,4 +1,4 @@
-const margins = { marginTop: -1, marginBottom: 1, marginStart: 1, marginEnd: -1 };
+const margins = { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 };
 
 /**
  * Adjusts the margin of text so that it's centered within the layout area of the text.
