@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "resolve json modules in tsconfig",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "none"
-}

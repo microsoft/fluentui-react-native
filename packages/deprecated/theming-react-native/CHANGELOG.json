@@ -2,6 +2,27 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 21:49:07 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.13.9",
+      "version": "0.13.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.9.8",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.14.9",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:04 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.13.8",
       "version": "0.13.8",

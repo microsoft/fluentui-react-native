@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 21:49:07 GMT",
+      "tag": "@fluentui-react-native/text_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.8",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:03 GMT",
       "tag": "@fluentui-react-native/text_v0.11.7",
       "version": "0.11.7",

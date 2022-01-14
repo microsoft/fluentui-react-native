@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 21:49:07 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15",
+            "comment": "resolve json modules in tsconfig"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:03 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.11.5",
       "version": "0.11.5",
