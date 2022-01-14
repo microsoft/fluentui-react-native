@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "fix disabled button",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
