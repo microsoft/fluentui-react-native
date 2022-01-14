@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 00:10:21 GMT",
+      "tag": "@fluentui-react-native/button_v0.21.12",
+      "version": "0.21.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "012e6b9f15d70761bc9f53a4d73547070a2cd8fc",
+            "comment": "Fix HC issues"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Jan 2022 20:13:01 GMT",
       "tag": "@fluentui-react-native/button_v0.21.11",
       "version": "0.21.11",
