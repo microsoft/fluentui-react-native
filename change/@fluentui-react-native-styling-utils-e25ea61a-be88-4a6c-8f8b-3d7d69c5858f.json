@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "More spacing adjustments",
+  "packageName": "@fluentui-react-native/styling-utils",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
