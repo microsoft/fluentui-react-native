@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/test-tools
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.1
+
+Fri, 14 Jan 2022 01:00:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.3
 
 ## 0.1.1
 

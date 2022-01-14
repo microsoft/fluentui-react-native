@@ -2,6 +2,21 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 01:00:04 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.8.2",
+      "version": "0.8.2",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 20 Dec 2021 22:56:02 GMT",
       "tag": "@uifabricshared/themed-settings_v0.8.2",
       "version": "0.8.2",

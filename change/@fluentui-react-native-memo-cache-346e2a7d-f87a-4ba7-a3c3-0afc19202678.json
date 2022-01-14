@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove references to uifabricshared",
-  "packageName": "@fluentui-react-native/memo-cache",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "none"
-}

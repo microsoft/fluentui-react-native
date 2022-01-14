@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove references to uifabricshared",
-  "packageName": "@uifabricshared/foundation-tokens",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "none"
-}

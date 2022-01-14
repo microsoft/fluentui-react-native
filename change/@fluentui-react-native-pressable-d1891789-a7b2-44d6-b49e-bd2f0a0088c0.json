@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove references to uifabricshared",
-  "packageName": "@fluentui-react-native/pressable",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "none"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix disable buttonn",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

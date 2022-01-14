@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 14 Jan 2022 00:10:21 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.23
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/tester to v0.50.23
 
 ## 0.17.22
 

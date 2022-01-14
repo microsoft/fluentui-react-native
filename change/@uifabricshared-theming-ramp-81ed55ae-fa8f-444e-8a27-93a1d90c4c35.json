@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix disabled button",
-  "packageName": "@uifabricshared/theming-ramp",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

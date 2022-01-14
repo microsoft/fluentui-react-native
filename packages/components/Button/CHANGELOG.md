@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 14 Jan 2022 00:10:21 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.13
+
+Fri, 14 Jan 2022 01:00:01 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @uifabricshared/foundation-compose to v1.11.7
+- Bump @fluentui-react-native/icon to v0.11.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+- Bump @fluentui-react-native/pressable to v0.8.12
+- Bump @fluentui-react-native/text to v0.11.7
+- Bump @fluentui-react-native/tokens to v0.11.5
 
 ## 0.21.12
 

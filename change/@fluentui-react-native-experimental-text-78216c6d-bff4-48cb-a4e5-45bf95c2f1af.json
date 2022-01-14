@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fix disabled button",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

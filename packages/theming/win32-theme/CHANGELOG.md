@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.8
+
+Fri, 14 Jan 2022 01:00:04 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/default-theme to v0.9.7
+- Bump @fluentui-react-native/theme-tokens to v0.11.5
+- Bump @fluentui-react-native/theme-types to v0.13.3
+- Bump @fluentui-react-native/theme to v0.6.4
+- Bump @fluentui-react-native/theming-utils to v0.8.7
 
 ## 0.14.7
 

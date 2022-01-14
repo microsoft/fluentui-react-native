@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.15
+
+Fri, 14 Jan 2022 01:00:01 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+- Bump @fluentui-react-native/tokens to v0.11.5
+- Bump @uifabricshared/foundation-compose to v1.11.7
 
 ## 0.19.14
 

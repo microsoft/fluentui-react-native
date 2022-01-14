@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/styling-utils",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 01:00:03 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ],
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "ef3732e4e5b82e3f324ca0eed4b12b6617788299",
+            "comment": "fix disabled button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 04 Jan 2022 23:05:12 GMT",
       "tag": "@fluentui-react-native/styling-utils_v0.3.2",
       "version": "0.3.2",

@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Fri, 14 Jan 2022 00:10:21 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.17
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/button to v0.21.13
+- Bump @fluentui-react-native/contextual-menu to v0.14.10
+- Bump @fluentui-react-native/icon to v0.11.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+- Bump @fluentui-react-native/tokens to v0.11.5
+- Bump @uifabricshared/foundation-compose to v1.11.7
 
 ## 0.7.16
 
