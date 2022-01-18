@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Tue, 18 Jan 2022 20:49:22 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.17",
+      "version": "0.11.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "c648bedc2d3615caf496a61cd0e6d889498b7b01",
+            "comment": "Font fixes"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.4",
+            "commit": "710b23766ae28cd0e62b6c2c0eab33324f3b2740"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 21:49:07 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.11.16",
       "version": "0.11.16",

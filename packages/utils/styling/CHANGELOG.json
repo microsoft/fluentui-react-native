@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/styling-utils",
   "entries": [
     {
+      "date": "Tue, 18 Jan 2022 20:49:22 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "c648bedc2d3615caf496a61cd0e6d889498b7b01",
+            "comment": "More spacing adjustments"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:03 GMT",
       "tag": "@fluentui-react-native/styling-utils_v0.3.3",
       "version": "0.3.3",
