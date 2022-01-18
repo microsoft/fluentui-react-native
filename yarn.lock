@@ -2464,9 +2464,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.64.8":
-  version "0.64.9"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.64.9.tgz#6cfdcb3a0c51e5d8aa275ee3e4f5ae33dcbcae8a"
-  integrity sha512-xlMmO2EnhBTrTt06Q2H71XJvM4r/3/4BE8QjVdaXxDv0BKoxTMXOo2ANx+kZLCsKxaZYxsA+l6kckeEDV4leVQ==
+  version "0.64.10"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.64.10.tgz#c10fa6e64809dc44c977658a0c7ba1e01c794ff6"
+  integrity sha512-PdavETMrqKz4DXA1IDNTT9KPjLrMYEdd1ywCHs5v//aLbYeMpBvlSHYuBIjP5ix6YOdlEK3+sgTjYXCUlPm/dA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^26.5.0"
@@ -15577,9 +15577,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.64.0, react-native-macos@^0.64.6:
-  version "0.64.21"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.21.tgz#fb526e66060a6febd9c8662cbc0c7716fd167b7a"
-  integrity sha512-5nIjp6YRSdHta5/s314YMpet7hyUZF+zhObMGfpd9kXFLRbpo5ivK4IepCJd+yO+MN7v29vSkAlCP9rtjcnAqA==
+  version "0.64.22"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.22.tgz#e538e2f9f932ec923c37c25188e00d3e21536fba"
+  integrity sha512-UwQUGGbQlm0vSsVZZmstn49f8YLfVBuXmpEAfk8hZSX0K4k2K0G8AC5U9i5rxypL2v7MqxWKgnctwWZvVjegaA==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@react-native-community/cli" "^5.0.1-alpha.1"
