@@ -5,6 +5,7 @@ import { defaultButtonTokens } from './ButtonTokens';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { Platform, ColorValue } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { defaultButtonFontTokens } from './ButtonFontTokens';
 
 export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIconBefore'];
 
@@ -28,7 +29,7 @@ export const buttonStates: (keyof ButtonTokens)[] = [
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonPropsWithInnerRef, ButtonSlotProps, ButtonTokens> = {
-  tokens: [defaultButtonTokens, defaultButtonColorTokens, buttonName],
+  tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
     root: buildProps(

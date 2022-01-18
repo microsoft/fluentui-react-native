@@ -5,9 +5,10 @@ import { defaultButtonColorTokens } from '../ButtonColorTokens';
 import { buttonStates, contentStyling } from '../Button.styling';
 import { defaultToggleButtonColorTokens } from './ToggleButtonColorTokens';
 import { defaultButtonTokens } from '../ButtonTokens';
+import { defaultButtonFontTokens } from '../ButtonFontTokens';
 
 export const stylingSettings: UseStylingOptions<ToggleButtonPropsWithInnerRef, ToggleButtonSlotProps, ToggleButtonTokens> = {
-  tokens: [defaultButtonTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
+  tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, defaultToggleButtonColorTokens, toggleButtonName],
   states: ['checked', ...buttonStates],
   slotProps: {
     root: buildProps(
