@@ -31,6 +31,12 @@ steps:
     displayName: "run E2E Win32 tests"
     condition: succeeded()
 
+  - task: PowerShell@2
+    inputs:
+      targetType: 'filePath'
+      filePath: $(System.DefaultWorkingDirectory)\.ado\scripts\assert_tracking_e2e_testing.ps1
+    displayName: "Run script to determine if there was an assert"
+
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: win32
