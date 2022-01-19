@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Badge } from '../Badge';
 import * as renderer from 'react-test-renderer';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 describe('Badge component tests', () => {
   const fontBuiltInProps = {
@@ -36,5 +37,13 @@ describe('Badge component tests', () => {
     });
     const tree = renderer.create(<BadgeStyled text="Badge Tokens" />).toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it('Check checkRenderConsistency for Badge', () => {
+    checkRenderConsistency(() => <Badge />, 2);
+  });
+
+  it('Badge re-renders correctly', () => {
+    checkReRender(() => <Badge />, 2);
   });
 });
