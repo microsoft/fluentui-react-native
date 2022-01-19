@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 19 Jan 2022 00:57:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.26",
+      "version": "0.50.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "399af7c595a662fca7736c4aae35f50a88e4361f",
+            "comment": "Disable checkbox test in uwp"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.6.0",
+            "commit": "399af7c595a662fca7736c4aae35f50a88e4361f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Jan 2022 20:49:22 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.25",
       "version": "0.50.25",
