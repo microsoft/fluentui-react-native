@@ -1,7 +1,7 @@
 import { ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const badgeName = 'Badge';
@@ -122,7 +122,7 @@ export interface BadgeProps {
 }
 
 export interface BadgeSlotProps {
-  root: IViewWin32Props;
+  root: IViewProps;
   icon: IconProps;
   text: TextProps;
 }
