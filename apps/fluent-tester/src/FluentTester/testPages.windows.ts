@@ -1,7 +1,7 @@
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
-import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
+// import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
@@ -71,11 +71,12 @@ export const tests = [
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
-  {
-    name: 'Experimental Checkbox',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
-  },
+  // GH#935 Temporarily disabling while SVGs don't work in windows
+  // {
+  //   name: 'Experimental Checkbox',
+  //   component: ExperimentalCheckboxTest,
+  //   testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
+  // },
   {
     name: 'Tabs Test',
     component: TabsTest,

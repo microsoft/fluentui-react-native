@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.11
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.11
+
+## 0.7.10
+
+Fri, 14 Jan 2022 01:00:02 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/framework to v0.7.10
 
 ## 0.7.9
 

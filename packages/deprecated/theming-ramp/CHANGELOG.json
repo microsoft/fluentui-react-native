@@ -2,6 +2,35 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 01:00:04 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.16.4",
+      "version": "0.16.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "ef3732e4e5b82e3f324ca0eed4b12b6617788299",
+            "comment": "fix disabled button"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-ramp",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.13.3",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          }
+        ],
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Jan 2022 23:14:38 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.16.3",
       "version": "0.16.3",

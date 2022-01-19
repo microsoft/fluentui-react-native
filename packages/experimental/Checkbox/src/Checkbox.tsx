@@ -1,5 +1,4 @@
 /** @jsx withSlots */
-import * as React from 'react';
 import { View } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { Text } from '@fluentui-react-native/experimental-text';
@@ -15,7 +14,7 @@ export const Checkbox = compose<CheckboxType>({
     root: View,
     checkbox: View,
     checkmark: Svg,
-    content: Text,
+    label: Text,
   },
   render: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
     // configure props and state for checkbox based on user props
@@ -23,12 +22,12 @@ export const Checkbox = compose<CheckboxType>({
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => Checkbox.state[layer] || userProps[layer]);
     // now return the handler for finishing render
-    return (final: CheckboxProps, ...children: React.ReactNode[]) => {
+    return (final: CheckboxProps) => {
       const { label, ...mergedProps } = mergeProps(Checkbox.props, final);
 
       return (
         <Slots.root {...mergedProps}>
-          {Checkbox.state.labelIsBefore && <Slots.content key="content">{label}</Slots.content>}
+          {Checkbox.state.labelIsBefore && <Slots.label key="label">{label}</Slots.label>}
           <Slots.checkbox>
             <Slots.checkmark key="checkmark" viewBox="0 0 11 8">
               <Path
@@ -37,8 +36,7 @@ export const Checkbox = compose<CheckboxType>({
               />
             </Slots.checkmark>
           </Slots.checkbox>
-          {!Checkbox.state.labelIsBefore && <Slots.content key="content">{label}</Slots.content>}
-          {children}
+          {!Checkbox.state.labelIsBefore && <Slots.label key="label">{label}</Slots.label>}
         </Slots.root>
       );
     };

@@ -79,6 +79,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessibilityActions: [{ name: 'Toggle' }],
       focusable: !state.disabled,
       onAccessibilityAction: onAccessibilityAction,
+      enableFocusRing: true,
       ...onKeyUpProps,
       ...props,
     },

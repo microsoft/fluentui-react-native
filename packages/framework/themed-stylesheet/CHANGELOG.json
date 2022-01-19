@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/themed-stylesheet",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 01:00:04 GMT",
+      "tag": "@fluentui-react-native/themed-stylesheet_v1.3.2",
+      "version": "1.3.2",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/themed-stylesheet",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 20 Dec 2021 22:56:01 GMT",
       "tag": "@fluentui-react-native/themed-stylesheet_v1.3.2",
       "version": "1.3.2",

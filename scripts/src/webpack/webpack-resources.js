@@ -1,13 +1,5 @@
-const { just } = require('@uifabricshared/build-native');
-const {
-  basicWebpackConfig,
-  htmlOverlay,
-  webpackMerge,
-  tsOverlay,
-  fileOverlay,
-  displayBailoutOverlay,
-  stylesOverlay,
-} = just;
+const { just } = require('@fluentui-react-native/scripts');
+const { basicWebpackConfig, htmlOverlay, webpackMerge, tsOverlay, fileOverlay, displayBailoutOverlay, stylesOverlay } = just;
 
 const _isProduction = process.argv.indexOf('--production') > -1;
 
@@ -18,17 +10,17 @@ const tsOverlayConfig = tsOverlay({
   loaderOptions: {
     transpileOnly: true,
     compilerOptions: {
-      "declaration": false,
-      "declarationMap": false
-    }
+      declaration: false,
+      declarationMap: false,
+    },
   },
   checkerOptions: {
     transpileOnly: true,
     compilerOptions: {
-      "declaration": false,
-      "declarationMap": false
-    }
-  }
+      declaration: false,
+      declarationMap: false,
+    },
+  },
 });
 
 module.exports = {
@@ -46,17 +38,17 @@ module.exports = {
           rules: [
             {
               test: /\.js?$/,
-              use: "source-map-loader",
-              enforce: 'pre'
-            }
-          ]
+              use: 'source-map-loader',
+              enforce: 'pre',
+            },
+          ],
         },
         output: {
-          filename: `${bundleName}.js`
+          filename: `${bundleName}.js`,
         },
-        plugins: getPlugins(bundleName, _isProduction)
+        plugins: getPlugins(bundleName, _isProduction),
       },
-      additionalOptions
+      additionalOptions,
     );
   },
   createAppConfig(bundleName, overlayTarget, additionalOptions) {
@@ -67,30 +59,30 @@ module.exports = {
       fileOverlay(),
       displayBailoutOverlay(),
       htmlOverlay({
-        template: overlayTarget
+        template: overlayTarget,
       }),
       {
         entry: {
-          [bundleName]: './src/index.tsx'
+          [bundleName]: './src/index.tsx',
         },
         devtool: 'cheap-module-eval-source-map',
         output: {
-          filename: `${bundleName}.js`
+          filename: `${bundleName}.js`,
         },
         module: {
           rules: [
             {
               test: /\.js?$/,
-              use: "source-map-loader",
-              enforce: 'pre'
-            }
-          ]
+              use: 'source-map-loader',
+              enforce: 'pre',
+            },
+          ],
         },
-        plugins: getPlugins(bundleName, _isProduction)
+        plugins: getPlugins(bundleName, _isProduction),
       },
-      additionalOptions
+      additionalOptions,
     );
-  }
+  },
 };
 
 function getPlugins(bundleName, isProduction) {
@@ -108,11 +100,11 @@ function getPlugins(bundleName, isProduction) {
         statsOptions: {
           source: false,
           reasons: false,
-          chunks: false
+          chunks: false,
         },
         statsFilename: bundleName + '.stats.json',
-        logLevel: 'warn'
-      })
+        logLevel: 'warn',
+      }),
     );
   }
 

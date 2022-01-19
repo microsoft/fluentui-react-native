@@ -1,8 +1,38 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.14
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.8
+- Bump @fluentui-react-native/interactive-hooks to v0.11.13
+- Bump @fluentui-react-native/text to v0.11.8
+
+## 0.15.13
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @uifabricshared/foundation-compose to v1.11.7
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+- Bump @fluentui-react-native/text to v0.11.7
+- Bump @fluentui-react-native/tokens to v0.11.5
+
+## 0.15.12
+
+Fri, 14 Jan 2022 00:10:21 GMT
+
+### Patches
+
+- Fix HC issues (ruaraki@microsoft.com)
 
 ## 0.15.11
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-tokens",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 01:00:04 GMT",
+      "tag": "@fluentui-react-native/use-tokens_v0.2.2",
+      "version": "0.2.2",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/use-tokens",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 20 Dec 2021 22:56:02 GMT",
       "tag": "@fluentui-react-native/use-tokens_v0.2.2",
       "version": "0.2.2",

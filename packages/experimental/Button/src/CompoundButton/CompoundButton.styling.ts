@@ -6,12 +6,14 @@ import { buttonStates, contentStyling } from '../Button.styling';
 import { defaultButtonTokens } from '../ButtonTokens';
 import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
 import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
+import { defaultCompoundButtonFontTokens } from './CompoundButtonFontTokens';
 
 export const stylingSettings: UseStylingOptions<CompoundButtonPropsWithInnerRef, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
     defaultButtonColorTokens,
     defaultCompoundButtonTokens,
+    defaultCompoundButtonFontTokens,
     defaultCompoundButtonColorTokens,
     compoundButtonName,
   ],

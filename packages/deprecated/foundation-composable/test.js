@@ -1,2 +1,2 @@
-const { createConfig } = require('@uifabricshared/build-native/jest/jest-resources');
+const { createConfig } = require('@fluentui-react-native/scripts/jest/jest-resources');
 console.log(createConfig());
