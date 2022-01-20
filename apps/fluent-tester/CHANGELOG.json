@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 20 Jan 2022 21:05:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.28",
+      "version": "0.50.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ccea4990e137edde8d7c980ee498674b1a0a19bc",
+            "comment": "Added Badge component."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.2",
+            "commit": "bfb00a74fa8f5bcf5dc4d1a9da8cf8e76f0263b3"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.11.18",
+            "commit": "bfb00a74fa8f5bcf5dc4d1a9da8cf8e76f0263b3"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.2.22",
+            "commit": "bfb00a74fa8f5bcf5dc4d1a9da8cf8e76f0263b3"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Jan 2022 20:21:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.27",
       "version": "0.50.27",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added Badge component.",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "v.kozlova13@gmail.com",
-  "dependentChangeType": "patch"
-}

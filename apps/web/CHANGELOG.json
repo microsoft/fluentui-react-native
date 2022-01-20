@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-web",
   "entries": [
     {
+      "date": "Thu, 20 Jan 2022 21:05:26 GMT",
+      "tag": "@fluentui-react-native/tester-web_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-web",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.28",
+            "commit": "bfb00a74fa8f5bcf5dc4d1a9da8cf8e76f0263b3"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Jan 2022 20:21:28 GMT",
       "tag": "@fluentui-react-native/tester-web_v0.1.0",
       "version": "0.1.0",

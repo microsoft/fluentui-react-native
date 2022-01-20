@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 20 Jan 2022 20:21:28 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Jan 2022 21:05:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.50.28
+
+Thu, 20 Jan 2022 21:05:25 GMT
+
+### Patches
+
+- Added Badge component. (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.2
+- Bump @fluentui-react-native/experimental-button to v0.11.18
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.22
 
 ## 0.50.27
 
