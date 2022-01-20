@@ -8,7 +8,7 @@ import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/con
 describe('Link Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Link test page', () => {
@@ -20,9 +20,9 @@ describe('Link Testing Initialization', function () {
     NavigateAppPage.clickAndGoToLinkPage();
     LinkPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(LinkPageObject.isPageLoaded()).toBeTruthy();
+    expect(LinkPageObject.isPageLoaded()).toBeTruthy(LinkPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(LinkPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

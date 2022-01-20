@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Activity Indicator Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Activity Indicator test page', () => {
@@ -18,6 +18,6 @@ describe('Activity Indicator Testing Initialization', function () {
     NavigateAppPage.clickAndGoToActivityIndicatorPage();
     ActivityIndicatorPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ActivityIndicatorPageObject.isPageLoaded()).toBeTruthy();
+    expect(ActivityIndicatorPageObject.isPageLoaded()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_PAGELOAD);
   });
 });

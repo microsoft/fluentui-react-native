@@ -10,7 +10,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE } from '../../common
 describe('Experimental Checkbox Testing Initialization', () => {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(ExperimentalCheckboxPageObject.ERRORMESSAGE_PAGELOAD);
   });
 
   it('Click and navigate to Experimental Checkbox test page', () => {
@@ -22,9 +22,9 @@ describe('Experimental Checkbox Testing Initialization', () => {
     NavigateAppPage.clickAndGoToCheckboxExperimentalPage();
     ExperimentalCheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalCheckboxPageObject.isPageLoaded()).toBeTruthy();
+    expect(ExperimentalCheckboxPageObject.isPageLoaded()).toBeTruthy(ExperimentalCheckboxPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

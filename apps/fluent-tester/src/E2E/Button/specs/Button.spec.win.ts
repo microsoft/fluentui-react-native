@@ -8,7 +8,7 @@ import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../.
 describe('Button Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button test page', () => {
@@ -20,9 +20,9 @@ describe('Button Testing Initialization', function () {
     NavigateAppPage.clickAndGoToButtonPage();
     ButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ButtonPageObject.isPageLoaded()).toBeTruthy();
+    expect(ButtonPageObject.isPageLoaded()).toBeTruthy(ButtonPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

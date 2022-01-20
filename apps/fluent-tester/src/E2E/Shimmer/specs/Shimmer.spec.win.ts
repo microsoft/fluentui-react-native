@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Shimmer Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Shimmer test page', () => {
@@ -18,8 +18,8 @@ describe('Shimmer Testing Initialization', function () {
     NavigateAppPage.clickAndGoToShimmerPage();
     ShimmerPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ShimmerPageObject.isPageLoaded()).toBeTruthy();
+    expect(ShimmerPageObject.isPageLoaded()).toBeTruthy(ShimmerPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(ShimmerPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(ShimmerPageObject.didAssertPopup()).toBeFalsy(ShimmerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

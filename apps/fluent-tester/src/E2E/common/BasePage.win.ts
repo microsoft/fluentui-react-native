@@ -178,6 +178,23 @@ export class BasePage {
     return DUMMY_CHAR;
   }
 
+  /****************** Error Messages ******************/
+  get ERRORMESSAGE_SUFFIX(): string {
+    return 'Please review logs and error screenshots for more information.';
+  }
+
+  get ERRORMESSAGE_APPLOAD(): string {
+    return 'The FluentTester app did not load correctly. ' + this.ERRORMESSAGE_SUFFIX;
+  }
+
+  get ERRORMESSAGE_PAGELOAD(): string {
+    return 'The ' + this._pageName + ' test page did not load correctly. ' + this.ERRORMESSAGE_SUFFIX;
+  }
+
+  get ERRORMESSAGE_ASSERT(): string {
+    return 'An assert popped up. ' + this.ERRORMESSAGE_SUFFIX;
+  }
+
   // Default timeout to wait until page is displayed (10s)
   waitForPageTimeout: number = 15000;
 }

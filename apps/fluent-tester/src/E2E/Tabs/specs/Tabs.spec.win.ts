@@ -6,7 +6,7 @@ import { TAB_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, TABITEM_A11Y_ROLE } from
 describe('Tabs Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tabs test page', () => {
@@ -18,9 +18,9 @@ describe('Tabs Testing Initialization', function () {
     NavigateAppPage.clickAndGoToTabsPage();
     TabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(TabsPageObject.isPageLoaded()).toBeTruthy();
+    expect(TabsPageObject.isPageLoaded()).toBeTruthy(TabsPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(TabsPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(TabsPageObject.didAssertPopup()).toBeFalsy(TabsPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

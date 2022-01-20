@@ -11,7 +11,7 @@ import {
 describe('Experimental Button Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button test page', () => {
@@ -23,9 +23,9 @@ describe('Experimental Button Testing Initialization', function () {
     NavigateAppPage.clickAndGoToExperimentalButtonPage();
     ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy(ButtonExperimentalPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

@@ -11,7 +11,7 @@ import { ComponentSelector } from '../../common/BasePage.win';
 describe('Experimental MenuButton Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Experimental MenuButton test page', () => {
@@ -23,9 +23,9 @@ describe('Experimental MenuButton Testing Initialization', function () {
     NavigateAppPage.clickAndGoToExperimentalMenuButtonPage();
     ExperimentalMenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalMenuButtonPageObject.isPageLoaded()).toBeTruthy();
+    expect(ExperimentalMenuButtonPageObject.isPageLoaded()).toBeTruthy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

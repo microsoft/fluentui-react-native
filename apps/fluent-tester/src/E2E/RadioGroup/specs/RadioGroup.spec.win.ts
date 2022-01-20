@@ -13,7 +13,7 @@ import {
 describe('RadioGroup/RadioButton Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroup test page', () => {
@@ -25,9 +25,9 @@ describe('RadioGroup/RadioButton Testing Initialization', function () {
     NavigateAppPage.clickAndGoToRadioGroupPage();
     RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(RadioGroupPageObject.isPageLoaded()).toBeTruthy();
+    expect(RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Svg Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Svg test page', () => {
@@ -18,8 +18,8 @@ describe('Svg Testing Initialization', function () {
     NavigateAppPage.clickAndGoToSvgPage();
     SvgPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(SvgPageObject.isPageLoaded()).toBeTruthy();
+    expect(SvgPageObject.isPageLoaded()).toBeTruthy(SvgPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(SvgPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(SvgPageObject.didAssertPopup()).toBeFalsy(SvgPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

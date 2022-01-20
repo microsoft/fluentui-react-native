@@ -7,7 +7,7 @@ import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common
 describe('Checkbox Testing Initialization', () => {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Checkbox test page', () => {
@@ -19,9 +19,9 @@ describe('Checkbox Testing Initialization', () => {
     NavigateAppPage.clickAndGoToCheckboxPage();
     CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
+    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy(CheckboxPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

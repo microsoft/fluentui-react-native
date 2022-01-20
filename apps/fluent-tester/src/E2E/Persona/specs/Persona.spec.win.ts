@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Persona Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Persona test page', () => {
@@ -18,8 +18,8 @@ describe('Persona Testing Initialization', function () {
     NavigateAppPage.clickAndGoToPersonaPage();
     PersonaPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(PersonaPageObject.isPageLoaded()).toBeTruthy();
+    expect(PersonaPageObject.isPageLoaded()).toBeTruthy(PersonaPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(PersonaPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(PersonaPageObject.didAssertPopup()).toBeFalsy(PersonaPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

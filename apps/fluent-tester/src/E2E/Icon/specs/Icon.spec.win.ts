@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Icon Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Icon test page', () => {
@@ -18,8 +18,8 @@ describe('Icon Testing Initialization', function () {
     NavigateAppPage.clickAndGoToIconPage();
     IconPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(IconPageObject.isPageLoaded()).toBeTruthy();
+    expect(IconPageObject.isPageLoaded()).toBeTruthy(IconPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(IconPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(IconPageObject.didAssertPopup()).toBeFalsy(IconPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

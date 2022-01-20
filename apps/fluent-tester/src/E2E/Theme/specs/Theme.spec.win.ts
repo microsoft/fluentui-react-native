@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Theme Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Theme test page', () => {
@@ -18,8 +18,8 @@ describe('Theme Testing Initialization', function () {
     NavigateAppPage.clickAndGoToThemePage();
     ThemePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ThemePageObject.isPageLoaded()).toBeTruthy();
+    expect(ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(ThemePageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

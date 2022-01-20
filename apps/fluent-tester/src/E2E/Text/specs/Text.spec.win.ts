@@ -6,7 +6,7 @@ import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/con
 describe('Text Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Text test page', () => {
@@ -18,9 +18,9 @@ describe('Text Testing Initialization', function () {
     NavigateAppPage.clickAndGoToTextPage();
     TextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(TextPageObject.isPageLoaded()).toBeTruthy();
+    expect(TextPageObject.isPageLoaded()).toBeTruthy(TextPageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(TextPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(TextPageObject.didAssertPopup()).toBeFalsy(TextPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

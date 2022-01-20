@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Pressable Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Pressable test page', () => {
@@ -18,8 +18,8 @@ describe('Pressable Testing Initialization', function () {
     NavigateAppPage.clickAndGoToPressablePage();
     PressablePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(PressablePageObject.isPageLoaded()).toBeTruthy();
+    expect(PressablePageObject.isPageLoaded()).toBeTruthy(PressablePageObject.ERRORMESSAGE_PAGELOAD);
 
-    expect(PressablePageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
+    expect(PressablePageObject.didAssertPopup()).toBeFalsy(PressablePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
