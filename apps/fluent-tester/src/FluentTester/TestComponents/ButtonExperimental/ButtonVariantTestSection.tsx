@@ -1,6 +1,6 @@
-import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
+import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
@@ -13,21 +13,39 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
-      <Button content="Default" style={commonTestStyles.vmargin} />
-      <Button primary content="Primary" style={commonTestStyles.vmargin} />
-      <Button subtle content="Subtle" style={commonTestStyles.vmargin} />
-      <Button fluid content="Fluid" style={commonTestStyles.vmargin} />
-      <Button primary fluid content="Fluid Primary" style={commonTestStyles.vmargin} />
-      <Button subtle fluid content="Fluid Subtle" style={commonTestStyles.vmargin} />
-      <CompoundButton content="Default" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton primary content="Primary" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      <CompoundButton subtle content="Subtle" secondaryContent="Compound" style={commonTestStyles.vmargin} />
-      {Platform.OS !== 'windows' && (
-        <>
-          <Button fab icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
-          <Button fab icon={{ svgSource: svgProps, width: 20, height: 20 }} content="FAB" style={commonTestStyles.vmargin} />
-        </>
-      )}
+      <Button style={commonTestStyles.vmargin}>Default</Button>
+      <Button disabled style={commonTestStyles.vmargin}>
+        Disabled
+      </Button>
+      <Button appearance="primary" style={commonTestStyles.vmargin}>
+        Primary
+      </Button>
+      <Button appearance="subtle" style={commonTestStyles.vmargin}>
+        Subtle
+      </Button>
+      <Button loading>Loading Button</Button>
+      <Button block style={commonTestStyles.vmargin}>
+        Block
+      </Button>
+      <Button appearance="primary" block style={commonTestStyles.vmargin}>
+        Block Primary
+      </Button>
+      <Button appearance="subtle" block style={commonTestStyles.vmargin}>
+        Block Subtle
+      </Button>
+      <CompoundButton secondaryContent="Compound" style={commonTestStyles.vmargin}>
+        Default
+      </CompoundButton>
+      <CompoundButton appearance="primary" secondaryContent="Compound" style={commonTestStyles.vmargin}>
+        Primary
+      </CompoundButton>
+      <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
+        Subtle
+      </CompoundButton>
+      <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
+      <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin}>
+        FAB
+      </FAB>
     </View>
   );
 };

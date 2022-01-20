@@ -3,29 +3,31 @@ import { ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
+import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   checkboxBackgroundColor?: ColorValue;
   checkboxBorderColor?: ColorValue;
+  checkboxBorderRadius?: number;
+  checkboxBorderWidth?: number;
+  checkboxSize?: number;
   checkmarkColor?: ColorValue;
   checkmarkOpacity?: number;
-  textBorderColor?: ColorValue;
-  checkboxBorderRadius?: number;
-  checkboxMarginStart?: number;
-  checkboxMarginEnd?: number;
-  checkboxOpacity?: number;
+  spacingLabelAfter?: number;
+  spacingLabelBefore?: number;
 
   /**
    * States that can be applied to a checkbox
    */
   disabled?: CheckboxTokens;
-  boxAtEnd?: CheckboxTokens;
+  labelIsBefore?: CheckboxTokens;
   hovered?: CheckboxTokens;
   focused?: CheckboxTokens;
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
+  circular?: CheckboxTokens;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
@@ -36,6 +38,13 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   checked?: boolean;
 
   /**
+   * Allows you to set the checkbox to have circular styling.
+   *
+   * @platform Android, iOS, windows, win32
+   */
+  circular?: boolean;
+
+  /**
    * Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
    * want the Checkbox instance to maintain its own state.
    */
@@ -43,8 +52,10 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
+   *
+   * @default after
    */
-  boxSide?: 'start' | 'end';
+  labelPosition?: 'before' | 'after';
 
   /**
    * Disabled state of the checkbox.
@@ -84,9 +95,9 @@ export interface CheckboxState extends IPressableState {
   disabled?: boolean;
 
   /**
-   * Determines position of Checkbox. True if boxSide='end'
+   * Determines position of Checkbox. True if labelPosition is set to 'before'
    */
-  boxAtEnd?: boolean;
+  labelIsBefore?: boolean;
 }
 
 export interface CheckboxInfo {
@@ -97,8 +108,8 @@ export interface CheckboxInfo {
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
-  checkmark?: ITextProps;
-  content: ITextProps;
+  checkmark?: SvgProps;
+  label: ITextProps;
 }
 
 export interface CheckboxType {

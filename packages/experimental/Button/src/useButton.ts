@@ -1,14 +1,19 @@
 import * as React from 'react';
-import { useAsPressable, useKeyCallback, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { ButtonProps, ButtonState } from './Button.types';
+import { useAsPressable, useKeyUpProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { ButtonPropsWithInnerRef, ButtonState } from './Button.types';
+import { memoize } from '@fluentui-react-native/framework';
 
-export const useButton = (props: ButtonProps): ButtonState => {
+export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
   // attach the pressable state handlers
-  const defaultComponentRef = React.useRef(null);
-  const { onClick, componentRef = defaultComponentRef, ...rest } = props;
-  const onClickWithFocus = useOnPressWithFocus(componentRef, onClick);
+  const defaultRef = React.useRef(null);
+  const { onClick, innerRef, disabled, loading, ...rest } = props;
+  const ref = innerRef !== null ? innerRef : defaultRef;
+  // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
+  const focusRef = disabled ? null : ref;
+  const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
-  const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
+  const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
+  const isDisabled = !!disabled || !!loading;
 
   return {
     props: {
@@ -16,11 +21,20 @@ export const useButton = (props: ButtonProps): ButtonState => {
       accessible: true,
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
-      accessibilityLabel: props.accessibilityLabel || props.content,
-      focusable: true,
-      ref: useViewCommandFocus(componentRef),
-      onKeyUp: onKeyUp,
+      accessibilityLabel: props.accessibilityLabel,
+      accessibilityState: getAccessibilityState(isDisabled),
+      enableFocusRing: true,
+      focusable: !isDisabled,
+      ref: useViewCommandFocus(ref),
+      ...onKeyUpProps,
+      iconPosition: props.iconPosition || 'before',
+      loading,
     },
     state: pressable.state,
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean) {
+  return { disabled: disabled };
+}

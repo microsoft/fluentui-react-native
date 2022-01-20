@@ -1,19 +1,26 @@
 # E2E Testing Overview
 
-## Prerequisites
+## Win32/UWP Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher.
 - [React Native Windows Development Dependencies](https://microsoft.github.io/react-native-windows/docs/rnw-dependencies)
   - **NOTE:** Please make sure you grab all of the items listed there and the appropriate versions.
 - [WinAppDriver](https://github.com/microsoft/WinAppDriver) - Version 1.1
 - Enable [_Developer Mode_](https://docs.microsoft.com/en-us/windows/uwp/get-started/enable-your-device-for-development) in Windows settings
-- [Java 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html) (Optional) - Used for generating in-depth after-action reports. More information in "Debugging E2E Failures" section below.
-- [Allure Command-Line](https://www.npmjs.com/package/allure-commandline) (Optional) - Used for creating in-depth reporting.
-  - `npm install -g allure-commandline`
 
 ### UWP Additional Prerequisites
 
 - [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/README.md)
+
+## MacOS Prerequisites
+
+- MacOS 10.15 or later
+- XCode 12 or later should be installed
+- XCode Helper app should be enabled for Accessibility access. The app itself is usually found at: _/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/Xcode Helper.app_.
+
+In order to enable Accessibility access, simply open the parent folder in finder:
+_open /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/_
+and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> Accessibility** list of your **System Preferences**. This action must only be done once.
 
 ## E2E Project Structure
 
@@ -46,30 +53,84 @@
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
+## MacOS Steps
+
+1. Follow step #1 from "Win32 Steps" section above.
+2. POD Install
+   - C:\repo\fluentui-react-native> `cd apps\macos\src`
+   - C:\repo\fluentui-react-native\apps\macos\src> `pod install`
+3. Start the server
+   - C:\repo\fluentui-react-native> `cd apps\macos`
+   - C:\repo\fluentui-react-native\apps\macos> `yarn start`
+4. Open a new command prompt and run the E2E tests
+   - C:\repo\fluentui-react-native\apps\macos> `yarn e2etest`
+
+_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
+
 # Authoring E2E Test
 
-## Create a new Page Object
+You just added a new component to FURN... Awesome! Now we need to make sure we have proper regression testing to make sure we put the safest product out there (don't worry, it's not as hard as it sounds). Here's what we have to do:
+
+## Create New E2E Testing Folder for the New Component
+
+All our E2E testing logic exists in _/apps/fluent-tester/src/E2E/_.
+
+Testing is split-up on a **per-component** basis. Each component's testing story is made up of two parts - a **Page Object** and a **Spec Document**.
+
+Example File Structure:
+
+-> Checkbox Folder
+
+----> CheckboxPageObject.ts
+
+----> CheckboxSpec.ts
+
+Please follow this structure for the new component.
+
+## Create New Constants
+
+The way we our automation framework interacts with our test app is by selecting UI components based on a string value. For this, we have a **consts.ts** file for each component that defines these values.
+You'll want to make one for your component under **apps/fluent-tester/src/FluentTester/TestComponents/_your-component_/consts.ts**.
+
+**You can simply copy/paste a _consts.ts_ file from another component, and just change the name of the component in the const names and the values.**
+
+Now, what are Page Objects and Spec Documents?
+
+## Page Objects
+
+A page object is an object-oriented class. The purpose of this class is to act as an interface for you to interact with a page of your testing app. In layman's terms, **it selects UI elements and performs some functions on them to obtain the scenario you want.**
+
+For each component/scenario you want to test, you will have a page object class for it.
 
 Page Object is a design pattern which has become popular in test automation for enhancing test maintenance and reducing code duplication. A [page object](https://webdriver.io/docs/pageobjects.html) is an object-oriented class that serves as an interface to a page of you testing app. The tests then use the methods of this Page Object whenever they need to interact with the UI of that page.
 The benefit is that if the UI changes for the test page, the tests themselves don’t need to change, only the code within the page object needs to change.
 
 Page Objects should be put in apps/fluent-tester/src/E2E/_ *ComponentToBeTested* _/pages/.
 
-```
-// CheckboxTestPage.win.ts
-class CheckboxTestPage extends BasePage {
+In most cases, you can copy/paste ButtonPageObject.ts and simply change all instances of Button to your new component.
 
+```
+// CheckboxPageObject.win.ts
+class CheckboxPageObject extends BasePage {
+  // This function clicks on the Checkbox component you selected below
   toggleCheckbox() {
     this._testPage.click();
   }
 
-  get _testPage() {
+  // This function selects a UI element with the prop `testID = CHECKBOX_TESTPAGE`
+  get _checkboxComponent() {
     return By(CHECKBOX_TESTPAGE);
   }
 }
 
-export default new CheckboxTestPage();
+export default new CheckboxPageObject();
 ```
+
+### More on Page Objects (Technical Information)
+
+Each page object should extend BasePage.ts. The BasePage class contains a baseline set of methods/variables that all page objects should have. This allows us to write the most efficient code possible.
+
+For example, a common task we want to perform is selecting a UI element and getting its accessibilityRole attribute. Instead of doing this in all 20 page objects for each component, we write it once in the BasePage, and have the 20 page objects extend it. Enables code-reuse and allows for easy comprehension.
 
 ### **Selectors**
 
@@ -79,6 +140,17 @@ export default new CheckboxTestPage();
   A unique accessiblity id/testID per Window is recommended for React Native Windows E2E testing when authoring the test app and test cases.
 
 - To use this, we must add a prop to our component or UI element in question called “testID”. In our test page, set the “testID” for the component, and we can then select it in our Page Object using the imported **_By_** method above from a base class.
+
+## Setup your Component Test Page in the Test App
+
+In order to test the component, we need a test page in FURNs test app. Once you create that, you'll want to create a separate file for E2E testing (see pattern used by all other controls). Create
+an example and set `testID = {your_components_constant}` on your new control. Now, our automation framework can select this component using the constant you passed in to `testID`.
+
+## Add to NavigateAppPage.ts
+
+This page object is responsible for navigating through the app to each test page. Here, you'll want to add integration for your new component. (Easily reproducible by looking at other components in the file).
+
+**If testID doesn't exist on your component, simply add it to your component's \_types.ts\_ file.**
 
 ## Write a Test Spec
 
@@ -90,8 +162,8 @@ Spec documents should be put in apps/fluent-tester/src/E2E/\_ _ComponentToBeTest
 ```
 describe('Click on each test page and check if it renders', function() {
   it('Checkbox Test Page', () => {
-    BootTestPage.clickAndGoToCheckboxPage();
-    expect(CheckboxTestPage.isPageLoaded()).toBeTruthy();
+    NavigateAppPage.clickAndGoToCheckboxPage();
+    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
   });
 });
 ```

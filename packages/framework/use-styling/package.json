@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/use-styling",
-  "version": "0.7.0",
+  "version": "0.8.2",
   "description": "Opinionated use styling hook implementation",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/use-styling"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -32,14 +33,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.4",
-    "@fluentui-react-native/use-tokens": "^0.1.6"
+    "@fluentui-react-native/memo-cache": "^1.1.7",
+    "@fluentui-react-native/use-tokens": "^0.2.2",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.0",
-    "@types/react-native": "^0.63.0",
-    "@uifabricshared/build-native": "^0.1.1",
-    "react": "16.13.1",
-    "react-native": "^0.63.4"
+    "@types/react-native": "^0.64.0",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   }
 }

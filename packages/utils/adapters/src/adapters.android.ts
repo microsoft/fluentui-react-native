@@ -88,6 +88,7 @@ const _textMask: IFilterMask<ITextProps> = {
   maxFontSizeMultiplier: true,
   onTextLayout: true,
   dataDetectorType: true,
+  android_hyphenationFrequency: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -129,6 +130,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   width: true,
   height: true,
   fadeDuration: true,
+  nativeID: true,
 };
 
 export function filterViewProps(propName: string): boolean {

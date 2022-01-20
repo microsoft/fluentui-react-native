@@ -14,7 +14,7 @@ An extremely simple example might look like:
 const useSyling = buildUseStyling(myComponentOptions, themeHelper);
 
 // component implementation, consuming the styling hook
-const MyComponent = props => {
+const MyComponent = (props) => {
   // get some default/styled props for the container and content child components
   const { container, content } = useStyling(props);
   // render as normal but mixin those values to pass the props to the sub-components
@@ -205,7 +205,7 @@ const Button = (props: ButtonProps) => {
   // get some state value that figures out whether the button is pressed and/or hovered
   const buttonState: ButtonState = useButtonState(props);
   // get styling values based on props and the current state
-  const { container, icon, label } = useStyling(props, stateName => buttonState[stateName]);
+  const { container, icon, label } = useStyling(props, (stateName) => buttonState[stateName]);
 
   const buttonProps = useButtonMagic(props, container);
   return (
@@ -257,36 +257,38 @@ const useStyling = buildUseStyling({
 The functions are assumed to have the following signature:
 
 ```ts
-function propBuilder(tokens: Tokens, theme: Theme, props: OuterProps, cache: GetMemoValue<Props>): Props;
+function propBuilder(tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>): Props;
 ```
 
 While tokens and theme have been discussed at length above, the cache will be a cache instance keyed on:
 
 - The theme
 - The tokens coming from the theme
-- The props that are being passed through from the outer component
 - This slot
 
 If there are no tokens which are also props, i.e. if `tokensProps` is falsy, this is sufficient and the function could be written as:
 
 ```ts
-const slotFn = (tokens: Tokens, theme: Theme, props: OuterProps, cache: GetMemoValue<Props>) =>
-  cache(() => {
-    return {
-      style: {
-        backgroundColor: tokens.backgroundColor,
-        // etc.
-      },
-    };
-  }, [
-    /* no keys, just direct cache the function result*/
-  ])[0];
+const slotFn = (tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>) =>
+  cache(
+    () => {
+      return {
+        style: {
+          backgroundColor: tokens.backgroundColor,
+          // etc.
+        },
+      };
+    },
+    [
+      /* no keys, just direct cache the function result*/
+    ],
+  )[0];
 ```
 
 If some all props are tokens then those keys should be considered in the caching. This would then turn into:
 
 ```ts
-const slotFn = (tokens: Tokens, theme: Theme, props: OuterProps, cache: GetMemoValue<Props>) => {
+const slotFn = (tokens: Tokens, theme: Theme, cache: GetMemoValue<Props>) => {
   const { backgroundColor, color, borderRadius } = tokens;
   return cache(
     () => ({
@@ -303,7 +305,7 @@ The library provides a helper called buildProps to make this more ergonomic. It 
 
 ```ts
 const slotFn = buildProps(
-  (tokens: Tokens, theme: Theme, props: OuterProps) => ({
+  (tokens: Tokens, theme: Theme) => ({
     style: {
       backgroundColor: tokens.backgroundColor,
       color: tokens.color,

@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/theme
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.4
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.13.3
+
+## 0.6.3
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.2
+
+## 0.6.2
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/immutable-merge to v1.1.6
+- Bump @fluentui-react-native/theme-types to v0.13.1
+
+## 0.6.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.5
+
+## 0.6.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/test-tools to v0.1.1 (afoxman@microsoft.com)
+
+## 0.5.23
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.12.4 (ruaraki@microsoft.com)
+
+## 0.5.22
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.4 (ruaraki@microsoft.com)
 
 ## 0.5.21
 

@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.3
+
+Fri, 14 Jan 2022 01:00:04 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+
+## 0.13.2
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Add fallback entries (ruaraki@microsoft.com)
+
+## 0.13.1
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+
+## 0.13.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+## 0.12.4
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Pipe changes through theme system (ruaraki@microsoft.com)
 
 ## 0.12.3
 

@@ -4,9 +4,9 @@ import { IComposeSettings } from '@uifabricshared/foundation-compose';
 export const settings: IComposeSettings<IButtonType> = [
   {
     tokens: {
-      backgroundColor: 'brandBackground',
-      color: 'neutralForegroundOnBrand',
-      borderColor: 'brandBackground',
+      backgroundColor: 'primaryButtonBackground',
+      color: 'primaryButtonText',
+      borderColor: 'primaryButtonBorder',
     },
     // TODO - #728: neutralForegroundOnBrand is not working for icon color.
     endIcon: {
@@ -18,30 +18,30 @@ export const settings: IComposeSettings<IButtonType> = [
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'neutralBackgroundDisabled',
-          color: 'neutralForegroundDisabled',
-          borderColor: 'neutralBackgroundDisabled',
+          backgroundColor: 'primaryButtonBackgroundDisabled',
+          color: 'primaryButtonTextDisabled',
+          borderColor: 'primaryButtonBackgroundDisabled',
         },
       },
       hovered: {
         tokens: {
-          backgroundColor: 'brandBackgroundHover',
-          color: 'neutralForegroundOnBrand',
-          borderColor: 'brandBackgroundHover',
+          backgroundColor: 'primaryButtonBackgroundHovered',
+          color: 'primaryButtonTextHovered',
+          borderColor: 'primaryButtonBorderHovered',
         },
       },
       pressed: {
         tokens: {
-          backgroundColor: 'brandBackgroundPressed',
-          color: 'neutralForegroundOnBrand',
-          borderColor: 'brandBackgroundPressed',
+          backgroundColor: 'primaryButtonBackgroundPressed',
+          color: 'primaryButtonTextPressed',
+          borderColor: 'primaryButtonBorderPressed',
         },
       },
       focused: {
         tokens: {
-          backgroundColor: 'brandBackgroundHover',
-          borderColor: 'strokeFocus2',
-          color: 'neutralForegroundInvertedLinkHover',
+          borderColor: 'primaryButtonBorderFocused',
+          backgroundColor: 'primaryButtonBackgroundHovered',
+          color: 'primaryButtonTextHovered',
         },
       },
     },

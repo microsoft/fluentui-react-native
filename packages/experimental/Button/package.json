@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-button",
-  "version": "0.8.25",
+  "version": "0.11.17",
   "description": "A cross-platform Button component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -20,27 +20,36 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/Button"
+  },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.6.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.10.48 <1.0.0",
-    "@fluentui-react-native/experimental-text": ">=0.6.22 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.9.25 <1.0.0",
-    "@fluentui-react-native/use-styling": ">=0.7.0 <1.0.0",
-    "@fluentui-react-native/icon": "0.8.24",
-    "@fluentui-react-native/theme-tokens": ">=0.7.3 <1.0.0"
+    "@fluentui-react-native/adapters": "^0.8.2",
+    "@fluentui-react-native/experimental-activity-indicator": "^0.5.10",
+    "@fluentui-react-native/experimental-text": ">=0.7.11 <1.0.0",
+    "@fluentui-react-native/framework": "0.7.11",
+    "@fluentui-react-native/icon": "0.11.5",
+    "@fluentui-react-native/interactive-hooks": ">=0.11.13 <1.0.0",
+    "@fluentui-react-native/styling-utils": ">=0.3.4 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.11.6 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.11.5 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.8.2 <1.0.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@office-iss/react-native-win32": "^0.63.7",
-    "@types/react-native": "^0.63.0",
-    "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react": "16.13.1",
-    "react-native": "^0.63.4"
+    "@office-iss/react-native-win32": "^0.64.8",
+    "@types/react-native": "^0.64.0",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-native": ">=0.63.4"
+    "react": ">=17.0.1",
+    "react-native": ">=0.64.3"
   },
   "author": "",
   "license": "MIT"

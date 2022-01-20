@@ -1,28 +1,11 @@
 /** @jsx withSlots */
-import { useRef, useEffect, useMemo } from 'react';
-import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import { useRef, useEffect, useMemo, useCallback } from 'react';
+import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G, TransformObject } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import { Animated } from 'react-native';
+import { Animated, I18nManager } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 import assertNever from 'assert-never';
-
-export function useShimmerAnimation(memoData: any) {
-  const startValue = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(startValue, {
-          toValue: 30,
-          duration: memoData.duration,
-          delay: memoData.delay,
-          useNativeDriver: false,
-        }),
-      ]),
-    ).start();
-  });
-  return startValue;
-}
 
 const useStyling = buildUseStyling(stylingSettings);
 export const Shimmer = compose<ShimmerType>({
@@ -35,7 +18,6 @@ export const Shimmer = compose<ShimmerType>({
     const Slots = useSlots(props);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
-
     const memoizedShimmerData = useMemo(
       () => ({
         angle: props.angle ? props.angle : tokens['angle'],
@@ -60,7 +42,31 @@ export const Shimmer = compose<ShimmerType>({
       ],
     );
 
-    const startValue = useShimmerAnimation(memoizedShimmerData);
+    const startValue = useRef(new Animated.Value(0)).current;
+
+    /**
+     * https://github.com/facebook/react-native/pull/29585
+     * For Animated.loop() to work with the native driver, React Native needs this fix.
+     * It's only available in React Native 0.66+, and React Native macOS 0.62+
+     * To workaround this, let's just rerun the loop everytime the animation finishes
+     */
+    const shimmerAnimation = useCallback(() => {
+      Animated.sequence([
+        Animated.timing(startValue, {
+          toValue: 30,
+          duration: memoizedShimmerData.duration,
+          delay: memoizedShimmerData.delay,
+          useNativeDriver: true,
+        }),
+      ]).start(() => {
+        startValue.setValue(0);
+        shimmerAnimation();
+      });
+    }, [memoizedShimmerData.duration, memoizedShimmerData.delay]);
+
+    useEffect(() => {
+      shimmerAnimation();
+    });
 
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);
@@ -89,6 +95,9 @@ export const Shimmer = compose<ShimmerType>({
         }
       }
 
+      // Flip the SVG if we are running in RTL
+      const rtlTransfrom: TransformObject = I18nManager.isRTL ? { translateX: memoizedShimmerData.containerWidth, scaleX: -1 } : {};
+
       return (
         <Slots.root {...mergedProps}>
           <Defs>
@@ -103,14 +112,16 @@ export const Shimmer = compose<ShimmerType>({
             </AnimatedLinearGradient>
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
-          <Rect
-            x="0"
-            y="0"
-            width={memoizedShimmerData.containerWidth}
-            height={memoizedShimmerData.containerHeight}
-            fill="url(#gradient)"
-            clipPath="url(#shimmerView)"
-          />
+          <G transform={rtlTransfrom}>
+            <Rect
+              x="0"
+              y="0"
+              width={memoizedShimmerData.containerWidth}
+              height={memoizedShimmerData.containerHeight}
+              fill="url(#gradient)"
+              clipPath="url(#shimmerView)"
+            />
+          </G>
         </Slots.root>
       );
     };

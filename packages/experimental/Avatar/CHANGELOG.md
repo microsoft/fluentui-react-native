@@ -1,8 +1,206 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Fri, 01 Oct 2021 17:52:17 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.2
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.11
+- Bump @fluentui-react-native/theme-tokens to v0.11.6
+
+## 0.14.1
+
+Fri, 14 Jan 2022 01:00:02 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/framework to v0.7.10
+- Bump @fluentui-react-native/theme-tokens to v0.11.5
+- Bump @fluentui-react-native/tokens to v0.11.5
+
+## 0.14.0
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Minor changes
+
+- added active and activeAppearance props (vkozlova@microsoft.com)
+
+## 0.13.10
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.9
+- Bump @fluentui-react-native/theme-tokens to v0.11.4
+- Bump @fluentui-react-native/tokens to v0.11.4
+
+## 0.13.9
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.8
+- Bump @fluentui-react-native/theme-tokens to v0.11.3
+
+## 0.13.8
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.7
+
+## 0.13.7
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/component-cache to v1.3.1
+- Bump @fluentui-react-native/framework to v0.7.6
+- Bump @fluentui-react-native/theme-tokens to v0.11.2
+- Bump @fluentui-react-native/tokens to v0.11.3
+- Bump @fluentui-react-native/use-styling to v0.8.2
+
+## 0.13.6
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.5
+- Bump @fluentui-react-native/tokens to v0.11.2
+- Bump @fluentui-react-native/use-styling to v0.8.1
+
+## 0.13.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.4
+
+## 0.13.4
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.3
+
+## 0.13.3
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.2
+- Bump @fluentui-react-native/theme-tokens to v0.11.1
+
+## 0.13.2
+
+Thu, 16 Dec 2021 19:10:29 GMT
+
+### Patches
+
+- Added shape prop to Avatar (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/framework to v0.7.1
+- Bump @fluentui-react-native/theme-tokens to v0.11.0
+- Bump @fluentui-react-native/tokens to v0.11.1
+
+## 0.13.1
+
+Wed, 17 Nov 2021 21:07:06 GMT
+
+### Patches
+
+- fix Avatar not working on iOS (sanajmi@microsoft.com)
+
+## 0.13.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Moved Avatar (PersonaCoin) to framework v2. (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/adapters to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.3.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/use-styling to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.10.0 (afoxman@microsoft.com)
+
+## 0.12.19
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.6 (67026167+chiuam@users.noreply.github.com)
+
+## 0.12.18
+
+Mon, 08 Nov 2021 20:52:15 GMT
+
+### Patches
+
+- Bump macOS minimum version to 10.15 (sanajmi@microsoft.com)
+
+## 0.12.17
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.5 (ruaraki@microsoft.com)
+
+## 0.12.16
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.4 (ruaraki@microsoft.com)
+
+## 0.12.15
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.3 (ruaraki@microsoft.com)
+
+## 0.12.14
+
+Tue, 19 Oct 2021 20:23:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.2 (ruaraki@microsoft.com)
+
+## 0.12.13
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.6.1 (ruaraki@microsoft.com)
 
 ## 0.12.12
 

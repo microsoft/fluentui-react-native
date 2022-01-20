@@ -96,3 +96,10 @@ typings/
 
 # Generated Nuget Package
 *.nupkg
+
+# VS Code debugging
+.vscode/.react/
+apps/*/.vscode/.react/
+
+# Ignore Gradle build output directory
+**/android/**/build

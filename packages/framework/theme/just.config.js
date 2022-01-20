@@ -1,3 +1,3 @@
-const { preset } = require('@uifabricshared/build-native');
+const { preset } = require('@fluentui-react-native/scripts');
 
 preset();

@@ -14,7 +14,7 @@ Global tokens can be imported directly:
 
 `import { globalTokens } from '@fluentui-react-native\theme-tokens'`
 
-If accessing a specific color, you can find it in the `globalTokens.color` property. The token object can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-tokens/src/global/reactnative/tokens-global.json) or [here for win32](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-tokens/src/global-win32/reactnative/tokens-global.json).
+If accessing a specific color, you can find it in the `globalTokens.color` property. The token object can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-tokens/src/generated/global/reactnative/tokens-global.json) or [here for win32](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-tokens/src/generated/global-win32/reactnative/tokens-global.json).
 
 An example of usage is in our PersonaCoin, where we use colors for the coin background if an image is not used.
 

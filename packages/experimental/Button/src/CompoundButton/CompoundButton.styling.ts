@@ -1,54 +1,20 @@
-import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonProps } from './CompoundButton.types';
+import { compoundButtonName, CompoundButtonTokens, CompoundButtonSlotProps, CompoundButtonPropsWithInnerRef } from './CompoundButton.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { defaultButtonColorTokens } from '../ButtonColorTokens';
+import { buttonStates, contentStyling } from '../Button.styling';
 import { defaultButtonTokens } from '../ButtonTokens';
-import { ButtonTokens } from '../Button.types';
-import { buttonStates } from '../Button.styling';
+import { defaultCompoundButtonColorTokens } from './CompoundButtonColorTokens';
+import { defaultCompoundButtonTokens } from './CompoundButtonTokens';
+import { defaultCompoundButtonFontTokens } from './CompoundButtonFontTokens';
 
-export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens> = {
+export const stylingSettings: UseStylingOptions<CompoundButtonPropsWithInnerRef, CompoundButtonSlotProps, CompoundButtonTokens> = {
   tokens: [
     defaultButtonTokens,
-    (t: Theme): ButtonTokens =>
-      ({
-        minHeight: 72,
-        secondaryContentFont: {
-          variant: 'secondaryStandard',
-        },
-        secondaryContentColor: t.colors.defaultSecondaryContent,
-        hovered: {
-          secondaryContentColor: t.colors.defaultHoveredSecondaryContent,
-        },
-        focused: {
-          secondaryContentColor: t.colors.defaultFocusedSecondaryContent,
-        },
-        pressed: {
-          secondaryContentColor: t.colors.defaultPressedSecondaryContent,
-        },
-        primary: {
-          secondaryContentColor: t.colors.brandedSecondaryContent,
-          hovered: {
-            secondaryContentColor: t.colors.brandedHoveredSecondaryContent,
-          },
-          focused: {
-            secondaryContentColor: t.colors.brandedFocusedSecondaryContent,
-          },
-          pressed: {
-            secondaryContentColor: t.colors.brandedPressedSecondaryContent,
-          },
-        },
-        subtle: {
-          secondaryContentColor: t.colors.ghostSecondaryContent,
-          hovered: {
-            secondaryContentColor: t.colors.ghostHoveredSecondaryContent,
-          },
-          focused: {
-            secondaryContentColor: t.colors.ghostFocusedSecondaryContent,
-          },
-          pressed: {
-            secondaryContentColor: t.colors.ghostPressedSecondaryContent,
-          },
-        },
-      } as ButtonTokens),
+    defaultButtonColorTokens,
+    defaultCompoundButtonTokens,
+    defaultCompoundButtonFontTokens,
+    defaultCompoundButtonColorTokens,
     compoundButtonName,
   ],
   states: buttonStates,
@@ -61,8 +27,6 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          paddingStart: 16,
-          paddingEnd: 16,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
@@ -77,30 +41,34 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
       },
     },
     content: buildProps(
-      (tokens: CompoundButtonTokens, theme: Theme) => ({
-        style: {
-          color: tokens.color,
-          ...fontStyles.from(tokens, theme),
-        },
-      }),
-      ['color', ...fontStyles.keys],
+      (tokens: CompoundButtonTokens, theme: Theme) => {
+        return {
+          style: {
+            ...contentStyling(tokens, theme, tokens.color, tokens),
+          },
+        };
+      },
+      ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     secondaryContent: buildProps(
-      (tokens: CompoundButtonTokens, theme: Theme) => ({
-        style: {
-          color: tokens.secondaryContentColor,
-          ...fontStyles.from(tokens.secondaryContentFont, theme),
-        },
-      }),
-      ['secondaryContentColor', 'secondaryContentFont'],
+      (tokens: CompoundButtonTokens, theme: Theme) => {
+        return {
+          style: {
+            ...contentStyling(tokens, theme, tokens.secondaryContentColor, tokens.secondaryContentFont),
+          },
+        };
+      },
+      ['secondaryContentColor', 'secondaryContentFont', ...fontStyles.keys],
     ),
     icon: buildProps(
       (tokens: CompoundButtonTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['iconColor'],
+      ['iconColor', 'iconSize'],
     ),
   },
 };

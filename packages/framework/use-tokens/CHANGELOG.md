@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/use-tokens
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.2
+
+Mon, 20 Dec 2021 22:56:02 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/immutable-merge to v1.1.6
+- Bump @fluentui-react-native/memo-cache to v1.1.7
+- Bump @fluentui-react-native/merge-props to v0.4.2
+
+## 0.2.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/immutable-merge to v1.1.5
+- Bump @fluentui-react-native/memo-cache to v1.1.6
+- Bump @fluentui-react-native/merge-props to v0.4.1
+
+## 0.2.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.4.0 (afoxman@microsoft.com)
+
+## 0.1.7
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Use tslib where spreadArray is used (ruaraki@microsoft.com)
 
 ## 0.1.6
 

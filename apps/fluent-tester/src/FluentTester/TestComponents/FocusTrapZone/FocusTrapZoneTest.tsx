@@ -40,7 +40,7 @@ interface IComponentTwiddlerProps {
   onPress?: TouchableHighlightProps['onPress'];
 }
 
-const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
+export const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps> = (props: IComponentTwiddlerProps) => {
   const [focusProps, focusState] = useFocusState({});
 
   return (

@@ -1,64 +1,69 @@
 import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps } from './Checkbox.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-import { checkboxStates, defaultCheckboxTokens } from './CheckboxTokens';
+import { defaultCheckboxTokens } from './CheckboxTokens';
+
+export const checkboxStates: (keyof CheckboxTokens)[] = [
+  'labelIsBefore',
+  'circular',
+  'hovered',
+  'focused',
+  'pressed',
+  'checked',
+  'disabled',
+];
 
 export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps, CheckboxTokens> = {
   tokens: [defaultCheckboxTokens, checkboxName],
   states: checkboxStates,
   slotProps: {
     root: buildProps(
-      (tokens: CheckboxTokens) => ({
+      (tokens: CheckboxTokens, theme: Theme) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
-          minHeight: 14,
-          marginTop: 0,
-          position: 'relative',
+          alignSelf: 'flex-start',
           backgroundColor: tokens.backgroundColor,
+          ...borderStyles.from(tokens, theme),
+          padding: 4,
         },
       }),
-      ['backgroundColor'],
+      ['backgroundColor', ...borderStyles.keys],
     ),
-    content: buildProps(
+    label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
-          borderColor: tokens.textBorderColor,
-          borderStyle: 'solid',
-          borderWidth: 2,
-          marginTop: 3,
+          marginTop: -2,
+          marginBottom: -2,
+          marginLeft: tokens.spacingLabelAfter,
+          marginRight: tokens.spacingLabelBefore,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'textBorderColor', ...fontStyles.keys],
+      ['spacingLabelAfter', 'spacingLabelBefore', 'color', ...fontStyles.keys],
     ),
     checkbox: buildProps(
-      (tokens: CheckboxTokens, theme: Theme) => ({
+      (tokens: CheckboxTokens) => ({
         style: {
-          borderStyle: 'solid',
-          borderWidth: 1,
-          minHeight: 16,
-          minWidth: 16,
-          marginEnd: tokens.checkboxMarginEnd,
-          marginStart: tokens.checkboxMarginStart,
+          height: tokens.checkboxSize,
+          width: tokens.checkboxSize,
           backgroundColor: tokens.checkboxBackgroundColor,
           borderColor: tokens.checkboxBorderColor,
-          ...borderStyles.from(tokens, theme),
+          borderRadius: tokens.checkboxBorderRadius,
+          borderWidth: tokens.checkboxBorderWidth,
+          alignItems: 'center',
+          justifyContent: 'center',
         },
       }),
-      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxMarginStart', 'checkboxMarginEnd', ...borderStyles.keys],
+      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize'],
     ),
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({
         style: {
-          aspectRatio: 1,
-          position: 'relative',
-          fontSize: 10,
-          textAlign: 'center',
-          textAlignVertical: 'center',
-          top: -1,
+          width: 10,
+          height: 10,
           color: tokens.checkmarkColor,
           opacity: tokens.checkmarkOpacity,
         },

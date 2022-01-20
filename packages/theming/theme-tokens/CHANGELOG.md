@@ -1,8 +1,110 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.6
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- resolve json modules in tsconfig (sanajmi@microsoft.com)
+
+## 0.11.5
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.13.3
+
+## 0.11.4
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.2
+
+## 0.11.3
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Fix brand color (67026167+chiuam@users.noreply.github.com)
+
+## 0.11.2
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.13.1
+
+## 0.11.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Move generated tokens under a generated folder (ruaraki@microsoft.com)
+
+## 0.11.0
+
+Thu, 16 Dec 2021 19:10:25 GMT
+
+### Minor changes
+
+- Consume mac tokens in Button (67026167+chiuam@users.noreply.github.com)
+
+## 0.10.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.0 (afoxman@microsoft.com)
+
+## 0.9.2
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Add mac design tokens (67026167+chiuam@users.noreply.github.com)
+
+## 0.9.1
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Pipe changes through theme system (ruaraki@microsoft.com)
+
+## 0.9.0
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Minor changes
+
+- add global and alias tokens for Android (email not defined)
+
+## 0.8.0
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Minor changes
+
+- Fix font for UWP (ruaraki@microsoft.com)
 
 ## 0.7.3
 

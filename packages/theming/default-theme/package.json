@@ -1,10 +1,11 @@
 {
   "name": "@fluentui-react-native/default-theme",
-  "version": "0.8.6",
+  "version": "0.9.8",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/just"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/theming/default-theme"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -32,21 +33,21 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/theme-tokens": "^0.7.3",
-    "@fluentui-react-native/theme-types": ">=0.12.3 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.5.21 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.7.4 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.11.6",
+    "@fluentui-react-native/theme-types": ">=0.13.3 <1.0.0",
+    "@fluentui-react-native/theme": ">=0.6.4 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.8.8 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
-    "@types/react": ">=16.9.34 < 16.14.0",
-    "react": "16.13.1",
-    "@uifabricshared/build-native": "^0.1.1",
-    "@uifabricshared/eslint-config-rules": "^0.1.1",
-    "react-native": "^0.63.4"
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@types/react": "^17.0.2",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
-    "react": ">=16.13.1",
-    "react-native": ">=0.63.4"
+    "react": ">=17.0.1",
+    "react-native": ">=0.64.3"
   }
 }

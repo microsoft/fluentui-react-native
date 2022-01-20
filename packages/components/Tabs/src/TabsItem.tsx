@@ -23,7 +23,6 @@ export const TabsItem = compose<TabsItemType>({
       headerText = '',
       accessibilityLabel = userProps.headerText,
       componentRef = defaultComponentRef,
-      testID,
       itemKey,
       itemCount,
       accessibilityPositionInSet,
@@ -115,7 +114,7 @@ export const TabsItem = compose<TabsItemType>({
         onAccessibilityAction: onAccessibilityAction,
         focusable: Platform.select({ default: true, macos: !userProps.disabled }),
       },
-      content: { children: headerText + countText, testID: testID },
+      content: { children: headerText + countText },
       icon: createIconProps(icon),
     });
 

@@ -5,12 +5,12 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 export const settings: IComposeSettings<IButtonType> = [
   {
     tokens: {
-      backgroundColor: 'neutralBackground1',
-      color: 'neutralForeground1',
-      borderColor: 'neutralStroke1',
+      backgroundColor: 'buttonBackground',
+      color: 'buttonText',
+      borderColor: 'buttonBorder',
       borderWidth: 1,
       borderRadius: 4,
-      wrapperBorderColor: 'transparent'
+      wrapperBorderColor: 'transparent',
     },
     root: {
       accessible: true,
@@ -28,7 +28,7 @@ export const settings: IComposeSettings<IButtonType> = [
         display: 'flex',
         flexGrow: 1,
         borderWidth: 1,
-      }
+      },
     },
     endIcon: {
       style: {
@@ -63,31 +63,31 @@ export const settings: IComposeSettings<IButtonType> = [
     _overrides: {
       disabled: {
         tokens: {
-          backgroundColor: 'neutralBackgroundDisabled',
-          color: 'neutralForegroundDisabled',
-          borderColor: 'neutralStrokeDisabled',
+          backgroundColor: 'buttonBackgroundDisabled',
+          color: 'buttonTextDisabled',
+          borderColor: 'buttonBorderDisabled',
         },
       },
       hovered: {
         tokens: {
-          backgroundColor: 'neutralBackground1Hover',
-          color: 'neutralForeground1',
-          borderColor: 'neutralStroke1',
+          backgroundColor: 'buttonBackgroundHovered',
+          color: 'buttonTextHovered',
+          borderColor: 'buttonBorderHovered',
         },
       },
       pressed: {
         tokens: {
-          backgroundColor: 'neutralBackground1Pressed',
-          color: 'neutralForeground1',
-          borderColor: 'neutralStroke1',
+          backgroundColor: 'buttonBackgroundPressed',
+          color: 'buttonTextPressed',
+          borderColor: 'buttonPressedBorder',
         },
       },
       focused: {
         tokens: {
-          backgroundColor: 'neutralBackground1Hover',
-          color: 'neutralForeground1',
-          borderColor: 'strokeFocus2',
-          wrapperBorderColor: 'strokeFocus2',
+          borderColor: 'buttonBorderFocused',
+          color: 'buttonTextHovered',
+          backgroundColor: 'buttonBackgroundHovered',
+          wrapperBorderColor: 'buttonBorderFocused',
         },
       },
     },

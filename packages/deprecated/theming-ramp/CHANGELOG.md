@@ -1,8 +1,75 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 01:00:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.4
+
+Fri, 14 Jan 2022 01:00:04 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.13.3
+
+## 0.16.3
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.2
+
+## 0.16.2
+
+Mon, 20 Dec 2021 22:56:02 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @uifabricshared/foundation-settings to v0.11.2
+- Bump @fluentui-react-native/immutable-merge to v1.1.6
+- Bump @fluentui-react-native/theme-types to v0.13.1
+
+## 0.16.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.11.1
+- Bump @fluentui-react-native/immutable-merge to v1.1.5
+
+## 0.16.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.11.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.13.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/test-tools to v0.1.1 (afoxman@microsoft.com)
+
+## 0.15.11
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.12.4 (ruaraki@microsoft.com)
+
+## 0.15.10
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-settings to v0.10.3 (ruaraki@microsoft.com)
 
 ## 0.15.9
 

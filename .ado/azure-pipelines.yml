@@ -25,6 +25,10 @@ jobs:
         displayName: 'yarn buildci'
 
       - script: |
+          yarn prettier
+        displayName: 'check prettier'
+
+      - script: |
           yarn checkchange
         displayName: 'check change'
 

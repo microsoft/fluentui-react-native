@@ -1,15 +1,17 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
+import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
+import { CompoundButtonPropsWithInnerRef, compoundButtonName, CompoundButtonType, CompoundButtonProps } from './CompoundButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './CompoundButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { buttonLookup } from '../Button';
 
-export const CompoundButton = compose<CompoundButtonType>({
+const CompoundButtonComposed = compose<CompoundButtonType>({
   displayName: compoundButtonName,
   ...stylingSettings,
   slots: {
@@ -19,31 +21,62 @@ export const CompoundButton = compose<CompoundButtonType>({
     secondaryContent: Text,
     contentContainer: View,
   },
-  render: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
+  render: (userProps: CompoundButtonPropsWithInnerRef, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => button.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, content, secondaryContent, ...mergedProps } = mergeProps(button.props, final);
+    return (final: CompoundButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
+      const { icon, iconOnly, secondaryContent, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(
+        button.props,
+        final,
+      );
+
+      const shouldShowIcon = !loading && icon;
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
+
+      let childText = '';
+      if (accessibilityLabel === undefined) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            childText = child; // We only automatically support the one child string.
+          }
+        });
+
+        if (secondaryContent) {
+          childText += ' ' + secondaryContent;
+        }
+      }
+      const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps} />}
-          {(content || secondaryContent) && (
-            <Slots.contentContainer>
-              {content && <Slots.content key="content">{content}</Slots.content>}
-              {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
-            </Slots.contentContainer>
-          )}
-          {children}
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
+          {loading && <ActivityIndicator />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          <Slots.contentContainer>
+            {React.Children.map(children, (child) =>
+              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+            )}
+            {secondaryContent && <Slots.secondaryContent key="secondaryContent">{secondaryContent}</Slots.secondaryContent>}
+          </Slots.contentContainer>
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
     };
   },
 });
+
+export const CompoundButton = React.forwardRef<IFocusable, CompoundButtonProps>((props, ref) => (
+  <CompoundButtonComposed {...props} innerRef={ref} />
+));
 
 export default CompoundButton;

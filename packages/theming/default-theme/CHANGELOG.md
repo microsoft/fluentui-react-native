@@ -1,8 +1,144 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Tue, 28 Sep 2021 21:08:25 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.8
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.11.6
+- Bump @fluentui-react-native/theming-utils to v0.8.8
+
+## 0.9.7
+
+Fri, 14 Jan 2022 01:00:02 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.11.5
+- Bump @fluentui-react-native/theme-types to v0.13.3
+- Bump @fluentui-react-native/theme to v0.6.4
+- Bump @fluentui-react-native/theming-utils to v0.8.7
+
+## 0.9.6
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Add fallback entries (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.11.4
+- Bump @fluentui-react-native/theme-types to v0.13.2
+- Bump @fluentui-react-native/theme to v0.6.3
+- Bump @fluentui-react-native/theming-utils to v0.8.6
+
+## 0.9.5
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.11.3
+- Bump @fluentui-react-native/theming-utils to v0.8.5
+
+## 0.9.4
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.11.2
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @fluentui-react-native/theme to v0.6.2
+- Bump @fluentui-react-native/theming-utils to v0.8.4
+
+## 0.9.3
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.6.1
+- Bump @fluentui-react-native/theming-utils to v0.8.3
+
+## 0.9.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.11.1
+- Bump @fluentui-react-native/theming-utils to v0.8.2
+
+## 0.9.1
+
+Thu, 16 Dec 2021 19:10:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.11.0
+- Bump @fluentui-react-native/theming-utils to v0.8.1
+
+## 0.9.0
+
+Wed, 17 Nov 2021 19:28:07 GMT
+
+### Minor changes
+
+- Update to react-native 0.64 (afoxman@microsoft.com)
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.6.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.10.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theming-utils to v0.8.0 (afoxman@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.13.0 (afoxman@microsoft.com)
+
+## 0.8.11
+
+Tue, 09 Nov 2021 23:04:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.9.2 (67026167+chiuam@users.noreply.github.com)
+
+## 0.8.10
+
+Mon, 01 Nov 2021 18:53:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.9.1 (ruaraki@microsoft.com)
+
+## 0.8.9
+
+Mon, 25 Oct 2021 19:24:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.5.22 (ruaraki@microsoft.com)
+
+## 0.8.8
+
+Wed, 20 Oct 2021 03:46:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.9.0 (email not defined)
+
+## 0.8.7
+
+Thu, 07 Oct 2021 20:59:20 GMT
+
+### Patches
+
+- Fix font for UWP (ruaraki@microsoft.com)
 
 ## 0.8.6
 
