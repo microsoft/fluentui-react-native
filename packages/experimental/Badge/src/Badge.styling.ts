@@ -58,7 +58,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
         variant: tokens.variant,
         color: tokens.color,
       }),
-      [],
+      ['variant', 'color'],
     ),
   },
 };
