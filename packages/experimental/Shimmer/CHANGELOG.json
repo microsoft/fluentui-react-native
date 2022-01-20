@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Thu, 20 Jan 2022 20:21:28 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.6.13",
+      "version": "0.6.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "0af901b7ce194baa6daccb02df35438e3ab75496",
+            "comment": "Revert RTL changes to Win32 Shimmer"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 21:49:07 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.6.12",
       "version": "0.6.12",

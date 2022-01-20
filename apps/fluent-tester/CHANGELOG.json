@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 20 Jan 2022 20:21:28 GMT",
+      "tag": "@fluentui-react-native/tester_v0.50.27",
+      "version": "0.50.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.6.13",
+            "commit": "0af901b7ce194baa6daccb02df35438e3ab75496"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jan 2022 00:57:04 GMT",
       "tag": "@fluentui-react-native/tester_v0.50.26",
       "version": "0.50.26",

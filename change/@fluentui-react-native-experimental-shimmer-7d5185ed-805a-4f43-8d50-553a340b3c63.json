@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Revert RTL changes to Win32 Shimmer",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
