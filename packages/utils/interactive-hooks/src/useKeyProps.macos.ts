@@ -36,8 +36,8 @@ function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
 
 function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
   return {
-    onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
-    validKeysUp: keys, // macOS needs an array of supported keys passed as well
+    onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
+    validKeysDown: keys, // macOS needs an array of supported keys passed as well
   };
 }
 
@@ -63,3 +63,11 @@ export const useKeyUpProps = memoize(getKeyUpPropsWorker);
  * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
  */
 export const useKeyDownProps = memoize(getKeyDownPropsWorker);
+
+/**
+ * Re-usable hook for keyboard events. on macOS, this is onKeyDown, while on windows this is onKeyUp.
+ * @param userCallback The function you want to be called once the key has been activated on key down
+ * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
+ * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
+ */
+export const useKeyProps = memoize(getKeyDownPropsWorker);
