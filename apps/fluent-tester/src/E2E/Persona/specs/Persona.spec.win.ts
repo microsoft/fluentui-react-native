@@ -19,5 +19,7 @@ describe('Persona Testing Initialization', function () {
     PersonaPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(PersonaPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(PersonaPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });

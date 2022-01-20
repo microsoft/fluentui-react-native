@@ -21,6 +21,8 @@ describe('MenuButton Testing Initialization', function () {
     MenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(MenuButtonPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

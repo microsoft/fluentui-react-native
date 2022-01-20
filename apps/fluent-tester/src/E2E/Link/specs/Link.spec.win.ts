@@ -21,6 +21,8 @@ describe('Link Testing Initialization', function () {
     LinkPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(LinkPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(LinkPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

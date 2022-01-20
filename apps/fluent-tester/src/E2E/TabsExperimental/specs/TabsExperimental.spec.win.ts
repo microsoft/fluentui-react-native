@@ -19,6 +19,8 @@ describe('Experimental Tabs Testing Initialization', function () {
     ExperimentalTabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ExperimentalTabsPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

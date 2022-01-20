@@ -19,6 +19,8 @@ describe('Experimental Text Testing Initialization', function () {
     ExperimentalTextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ExperimentalTextPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

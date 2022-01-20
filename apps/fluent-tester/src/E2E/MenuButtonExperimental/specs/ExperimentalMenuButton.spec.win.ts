@@ -24,6 +24,8 @@ describe('Experimental MenuButton Testing Initialization', function () {
     ExperimentalMenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ExperimentalMenuButtonPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

@@ -126,6 +126,17 @@ export class BasePage {
     );
   }
 
+  didAssertPopup(): boolean {
+    const windowHandles = browser.getWindowHandles();
+    // If more than 1 instance of the app is open, we know an assert diolague popped up.
+    if (windowHandles.length > 1) {
+      console.log('\n\n\n an assert popped up! \n\n\n');
+      return true;
+    }
+    console.log('\n\n\n an assert DID NOT pop up! \n\n\n');
+    return false;
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/

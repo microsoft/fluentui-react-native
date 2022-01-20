@@ -19,5 +19,7 @@ describe('Pressable Testing Initialization', function () {
     PressablePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(PressablePageObject.isPageLoaded()).toBeTruthy();
+
+    expect(PressablePageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });

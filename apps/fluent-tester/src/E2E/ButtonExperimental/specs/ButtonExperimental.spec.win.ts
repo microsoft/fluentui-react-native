@@ -24,6 +24,8 @@ describe('Experimental Button Testing Initialization', function () {
     ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

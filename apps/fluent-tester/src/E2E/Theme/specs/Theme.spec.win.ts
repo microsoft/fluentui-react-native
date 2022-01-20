@@ -19,5 +19,7 @@ describe('Theme Testing Initialization', function () {
     ThemePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ThemePageObject.isPageLoaded()).toBeTruthy();
+
+    expect(ThemePageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });

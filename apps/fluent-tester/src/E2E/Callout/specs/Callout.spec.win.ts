@@ -19,6 +19,8 @@ describe('Callout Testing Initialization', function () {
     CalloutPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(CalloutPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(CalloutPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

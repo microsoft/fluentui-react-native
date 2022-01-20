@@ -19,5 +19,7 @@ describe('FocusZone Testing Initialization', function () {
     FocusZonePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(FocusZonePageObject.isPageLoaded()).toBeTruthy();
+
+    expect(FocusZonePageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });

@@ -21,5 +21,7 @@ describe('ContextualMenu Functional Tests', () => {
     ContextualMenuPageObjectObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ContextualMenuPageObjectObject.isPageLoaded()).toBeTruthy();
+
+    expect(ContextualMenuPageObjectObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });

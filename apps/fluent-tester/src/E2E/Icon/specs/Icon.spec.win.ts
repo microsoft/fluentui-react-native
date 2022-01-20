@@ -19,5 +19,7 @@ describe('Icon Testing Initialization', function () {
     IconPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(IconPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(IconPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });

@@ -26,6 +26,8 @@ describe('RadioGroup/RadioButton Testing Initialization', function () {
     RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(RadioGroupPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

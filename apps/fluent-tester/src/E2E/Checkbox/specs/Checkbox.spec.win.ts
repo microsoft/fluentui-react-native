@@ -20,6 +20,8 @@ describe('Checkbox Testing Initialization', () => {
     CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
 

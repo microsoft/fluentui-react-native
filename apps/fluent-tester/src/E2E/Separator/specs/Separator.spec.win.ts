@@ -19,5 +19,7 @@ describe('Separator Testing Initialization', function () {
     SeparatorPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(SeparatorPageObject.isPageLoaded()).toBeTruthy();
+
+    expect(SeparatorPageObject.didAssertPopup()).toBeFalsy(); // Ensure no asserts popped up
   });
 });
