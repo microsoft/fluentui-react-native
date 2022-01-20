@@ -17,7 +17,7 @@ Basic examples:
 <CompoundButton size="small" secondaryContent="A second line">Text</CompoundButton>
 ```
 
-More examples in the Tester App.
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -65,6 +65,23 @@ export interface CompoundButtonProps extends ButtonProps {
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control.
+
+```jsx
+const CustomCompoundButton = CompoundButton.customize({
+  iconSize: 10,
+  spacingIconContentBefore: 10,
+})
+
+<CustomCompoundButton>Button with small icon and large gap between icon and label</CustomCompoundButton>
+
+const CustomHoverCompoundButton = CompoundButton.customize({
+  hovered: { backgroundColor: 'pink' },
+})
+
+<CustomHoverCompoundButton>Button with pink background on hover</CustomHoverCompoundButton>
+```
 
 ```ts
 export interface CompoundButtonTokens extends ButtonTokens {

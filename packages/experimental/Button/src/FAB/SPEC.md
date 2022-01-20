@@ -16,6 +16,8 @@ Basic examples:
 <FAB disabled>Text</FAB>
 ```
 
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
+
 ## Visual Examples
 
 Android:
@@ -63,6 +65,23 @@ export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPres
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control.
+
+```jsx
+const CustomFAB = FAB.customize({
+  iconSize: 10,
+  spacingIconContentBefore: 10,
+})
+
+<CustomFAB>Button with small icon and large gap between icon and label</CustomFAB>
+
+const CustomHoverFAB = FAB.customize({
+  hovered: { backgroundColor: 'pink' },
+})
+
+<CustomHoverFAB>Button with pink background on hover</CustomHoverFAB>
+```
 
 ```ts
 export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {

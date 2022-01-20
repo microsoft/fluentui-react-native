@@ -18,7 +18,7 @@ Basic examples:
 <Button size="large">Text</Button>
 ```
 
-More examples in the Tester App.
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -77,6 +77,8 @@ The `Button` component can be loading if it's waiting for another action to occu
 - `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
 
 ### Props
+
+Below is the set of props the button supports:
 
 ```ts
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -156,6 +158,23 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control.
+
+```jsx
+const CustomButton = Button.customize({
+  iconSize: 10,
+  spacingIconContentBefore: 10,
+})
+
+<CustomButton>Button with small icon and large gap between icon and label</CustomButton>
+
+const CustomHoverButton = Button.customize({
+  hovered: { backgroundColor: 'pink' },
+})
+
+<CustomHoverButton>Button with pink background on hover</CustomButton>
+```
 
 ```ts
 export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {

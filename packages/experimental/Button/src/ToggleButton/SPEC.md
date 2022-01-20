@@ -19,6 +19,8 @@ Basic examples:
 <ToggleButton size="small">Text</ToggleButton>
 ```
 
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
+
 ## Visual Examples
 
 Win32:
@@ -68,6 +70,23 @@ export interface ToggleButtonProps extends ButtonProps {
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control.
+
+```jsx
+const CustomToggleButton = ToggleButton.customize({
+  iconSize: 10,
+  spacingIconContentBefore: 10,
+})
+
+<CustomToggleButton>Button with small icon and large gap between icon and label</CustomToggleButton>
+
+const CustomHoverToggleButton = ToggleButton.customize({
+  hovered: { backgroundColor: 'pink' },
+})
+
+<CustomHoverToggleButton>Button with pink background on hover</CustomHoverToggleButton>
+```
 
 ```ts
 export interface CompoundButtonTokens extends ButtonTokens {
