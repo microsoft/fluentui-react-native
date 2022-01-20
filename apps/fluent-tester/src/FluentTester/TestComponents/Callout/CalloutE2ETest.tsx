@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ScreenRect, Text, View } from 'react-native';
 import { Button, Callout } from '@fluentui/react-native';
-import { CALLOUT_TEST_COMPONENT, BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL } from './consts';
+import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL } from './consts';
 
 export const E2ECalloutTest: React.FunctionComponent = () => {
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
@@ -41,7 +41,6 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
           accessibilityLabel={CALLOUT_ACCESSIBILITY_LABEL}
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
-          testID={CALLOUT_TEST_COMPONENT}
         >
           <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
             <Text>just some text so it does not take focus and is not empty.</Text>
