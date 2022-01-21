@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding Button/Checkbox functional tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
