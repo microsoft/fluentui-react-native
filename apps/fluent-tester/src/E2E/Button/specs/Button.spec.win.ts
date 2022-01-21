@@ -21,8 +21,7 @@ describe('Button Testing Initialization', function () {
     ButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ButtonPageObject.isPageLoaded()).toBeTruthy(ButtonPageObject.ERRORMESSAGE_PAGELOAD);
-
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -30,18 +29,24 @@ describe('Button Accessibility Testing', () => {
   it('Button - Validate accessibilityRole is correct', () => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ButtonPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Button - Set accessibilityLabel', () => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Button - Do not set accessibilityLabel -> Default to Button label', () => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });

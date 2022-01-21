@@ -126,15 +126,21 @@ export class BasePage {
     );
   }
 
+  /* FUNCTIONALITY: Determines if an Assert has fired. True if yes; false otherwise
+   *
+   * WHY/HOW: Unfortunately, some Asserts don't take focus away from the test app. Because of this, the test execution is able
+   * to continue without realizing an assert as popped up (unless the assert is a crashing one).
+   *
+   * In order to detect an assert, this function gets the number of window handles currently open within the test app.
+   * Only one instance SHOULD be open at a time (the app itself). If another instance of the app is open, we know an assert dialogue
+   * has popped up. With this information, we know to fail the test.
+   *
+   * Additionally, you might think it's logical to simply place this in the afterEach() hook so it's called after every test (rather than duplicating this call in every test).
+   * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
+   * */
   didAssertPopup(): boolean {
-    const windowHandles = browser.getWindowHandles();
-    // If more than 1 instance of the app is open, we know an assert diolague popped up.
-    if (windowHandles.length > 1) {
-      console.log('\n\n\n an assert popped up! \n\n\n');
-      return true;
-    }
-    console.log('\n\n\n an assert DID NOT pop up! \n\n\n');
-    return false;
+    // If more than 1 instance of the app is open, we know an assert dialogue popped up.
+    return browser.getWindowHandles().length > 1;
   }
 
   /*****************************************/

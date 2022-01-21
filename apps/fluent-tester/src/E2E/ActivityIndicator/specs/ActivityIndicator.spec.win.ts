@@ -19,5 +19,6 @@ describe('Activity Indicator Testing Initialization', function () {
     ActivityIndicatorPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ActivityIndicatorPageObject.isPageLoaded()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(ActivityIndicatorPageObject.didAssertPopup()).toBeFalsy(ActivityIndicatorPageObject.ERRORMESSAGE_ASSERT);
   });
 });
