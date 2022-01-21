@@ -59,6 +59,7 @@ describe('Checkbox Functional Testing', () => {
   it("Click on a Checkbox -> Validate it toggles correctly AND calls the user's onChange", () => {
     /* Validate the Checkbox is initially toggled OFF */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeFalsy();
+    console.log('Checkbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
 
     /* Click on the Checkbox to toggle on */
     CheckboxPageObject.clickComponent();

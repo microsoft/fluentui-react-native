@@ -9,19 +9,19 @@ exports.config = {
   /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
   so we must specify which ones we want to test here. */
   specs: [
-    '../fluent-tester/src/E2E/ActivityIndicator/specs/*.win.ts',
+    //'../fluent-tester/src/E2E/ActivityIndicator/specs/*.win.ts',
     '../fluent-tester/src/E2E/Button/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Callout/specs/*.win.ts',
+    //'../fluent-tester/src/E2E/Callout/specs/*.win.ts',
     '../fluent-tester/src/E2E/Checkbox/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Link/specs/*.win.ts',
-    '../fluent-tester/src/E2E/PersonaCoin/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Pressable/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Separator/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Tabs/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Text/specs/*.win.ts',
-    '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Theme/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Tokens/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Link/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/PersonaCoin/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Pressable/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Separator/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Tabs/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Text/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Theme/specs/*.win.ts',
+    // '../fluent-tester/src/E2E/Tokens/specs/*.win.ts',
   ],
   exclude: [
     /* 'path/to/excluded/files' */
@@ -111,7 +111,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   beforeSession: function (/* config, capabilities, specs */) {
-    fs.mkdirSync('./errorShots', {recursive: true});
+    fs.mkdirSync('./errorShots', { recursive: true });
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -121,7 +121,7 @@ exports.config = {
    */
   before: function () {
     // not needed for Cucumber
-    require('ts-node').register({files: true});
+    require('ts-node').register({ files: true });
 
     browser.maximizeWindow();
   },
