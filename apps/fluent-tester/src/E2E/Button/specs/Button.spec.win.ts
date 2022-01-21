@@ -53,18 +53,20 @@ describe('Button Functional Testing', () => {
   beforeEach(() => {
     ButtonPageObject.scrollToTestElement();
     ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
-    ButtonPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Click', () => {
     ButtonPageObject.clickComponent();
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+
+    ButtonPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', () => {
     ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT, Keys.Enter);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+
+    ButtonPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {

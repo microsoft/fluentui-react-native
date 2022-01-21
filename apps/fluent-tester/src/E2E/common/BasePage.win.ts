@@ -52,6 +52,10 @@ export class BasePage {
     return this._pageButton.isDisplayed();
   }
 
+  clickComponent(): void {
+    this._primaryComponent.click();
+  }
+
   /* ****TODO****: I need to better use the ComponentSelector for this. We shouldn't have the spec needing to import the constant string */
   sendKey(componentID?: string, key?: string): void {
     const component = By(componentID);
