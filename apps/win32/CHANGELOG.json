@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Thu, 20 Jan 2022 21:05:26 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.28",
+      "version": "0.17.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "ccea4990e137edde8d7c980ee498674b1a0a19bc",
+            "comment": "Added Badge component."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.28",
+            "commit": "bfb00a74fa8f5bcf5dc4d1a9da8cf8e76f0263b3"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Jan 2022 20:21:28 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.27",
+      "version": "0.17.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.27",
+            "commit": "0af901b7ce194baa6daccb02df35438e3ab75496"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jan 2022 00:57:04 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.17.26",
       "version": "0.17.26",

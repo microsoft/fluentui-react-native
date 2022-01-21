@@ -10,6 +10,7 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
     primary: {
       backgroundColor: t.colors.brandBackgroundSelected,
       borderColor: t.colors.brandBackgroundSelected,
+      color: t.colors.neutralForeground1Selected,
     },
     subtle: {
       color: t.colors.neutralForeground1Selected,

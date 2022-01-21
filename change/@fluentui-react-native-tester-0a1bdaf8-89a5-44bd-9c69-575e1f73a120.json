@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding Text A11y Tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}

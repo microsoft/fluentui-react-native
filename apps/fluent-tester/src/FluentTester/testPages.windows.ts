@@ -1,4 +1,5 @@
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 // import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
@@ -22,6 +23,11 @@ export const tests = [
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
     testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
+  {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
   },
   {
     name: 'Button Test',
