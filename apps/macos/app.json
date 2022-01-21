@@ -1,7 +1,6 @@
 {
   "name": "FluentTester",
   "displayName": "FluentTester",
-  "components": [
-    { "appKey": "FluentTester" }
-  ]
+  "components": [{ "appKey": "FluentTester" }],
+  "resources": ["dist/assets", "dist/index.macos.bundle"]
 }

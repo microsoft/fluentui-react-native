@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Thu, 20 Jan 2022 21:05:25 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.18",
+      "version": "0.11.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "e5ac2f4d57c853844028510cd658c304ff22698d",
+            "comment": "Fixed Toggle selected state for the Button"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Jan 2022 20:49:22 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.11.17",
       "version": "0.11.17",
