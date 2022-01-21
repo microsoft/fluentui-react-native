@@ -69,7 +69,7 @@ jobs:
     steps:
       - template: templates/apple-nuget-publish.yml
 
-  - job: NuGetPublish
+  - job: Win32NuGetPublish
     displayName: Win32 FluentTester NuGet Publish
     pool:
       vmImage: 'windows-2019'
