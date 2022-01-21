@@ -5654,10 +5654,10 @@ async@^2.4.0, async@^2.6.0, async@^2.6.1, async@^2.6.2, async@^2.6.3:
   dependencies:
     lodash "^4.17.14"
 
-async@^3.2.0, async@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/async/-/async-3.2.2.tgz#2eb7671034bb2194d45d30e31e24ec7e7f9670cd"
-  integrity sha512-H0E+qZaDEfx/FY4t7iLRv1W2fFI6+pyCeTw1uN20AQPiwqwM6ojPxHxdLv4z8hi2DtnW9BOckSspLucW7pIE5g==
+async@^3.2.0, async@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.3.tgz#ac53dafd3f4720ee9e8a160628f18ea91df196c9"
+  integrity sha512-spZRyzKL5l5BZQrr/6m/SqFdBN0q3OCI0f9rjfBzCMBIP4p75P620rR3gTmaksNOhmzgdxcaxdNfMy6anrbM0g==
 
 asyncbox@2.x, asyncbox@^2.0.2, asyncbox@^2.0.4, asyncbox@^2.3.0, asyncbox@^2.3.1, asyncbox@^2.3.2, asyncbox@^2.5.2, asyncbox@^2.5.3, asyncbox@^2.6.0:
   version "2.6.0"
@@ -12646,10 +12646,10 @@ lines-and-columns@^1.1.6:
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
-link-check@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/link-check/-/link-check-5.0.1.tgz#f6c779f2b771bfe9229fdb5f847d54e0d376421f"
-  integrity sha512-SAPnWm0XYp6cke1ho9DieUJGeSaQ6v7LVvK6dSO52zDuEGDryvlPlw0XjB7LKyHFzXRsgg9DSGu3j88U/NoFQg==
+link-check@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/link-check/-/link-check-5.0.2.tgz#f9d79a27e6298e5ed133399d1770b2086b8a7883"
+  integrity sha512-F7k7HzOFY3lh11o3nQTCfi3HTrUMbn/0LQ5aBU7vgronoh8HWGZfRC4Jh0ghuQDbtTGNO4u4is6AoqK0hsYDJg==
   dependencies:
     is-relative-url "^3.0.0"
     isemail "^3.2.0"
@@ -13038,25 +13038,25 @@ map-visit@^1.0.0:
     object-visit "^1.0.0"
 
 markdown-link-check@^3.8.7:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.9.0.tgz#aea9083f0c2383665e8d8f37dfba722bd96eb94e"
-  integrity sha512-Vo5vOc7jL1yproWT8AVxazr8rsd0HTJb00W1Qj4qV/Iff8A8Zww709/aNi0FypnOeJNoN523z2fQF1M0Z02BPA==
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.9.1.tgz#88ba0143588fcb61dc62f392ba7f069662c74ef0"
+  integrity sha512-dYLiArP7ue2/cgwF0x30VUHM3tepoqsdENNOCsdZJwJj1s0UhY1Xteb1PKnzPh9JCfrZ167TK6muqvUh51K3yA==
   dependencies:
-    async "^3.2.2"
+    async "^3.2.3"
     chalk "^4.1.2"
     commander "^6.2.0"
-    link-check "^5.0.1"
+    link-check "^5.0.2"
     lodash "^4.17.21"
-    markdown-link-extractor "^1.3.0"
+    markdown-link-extractor "^1.3.1"
     needle "^3.0.0"
     progress "^2.0.3"
 
-markdown-link-extractor@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-1.3.0.tgz#a11954f683134f23edecd74ba35ae7bf7ad3d874"
-  integrity sha512-1qXoYqhsU5qgWtUF9HQlBF82jRrakENh+7nmPUxoMJw13kf92jzb72EchrSsw5vdqbDLJurkpNL50xLFRhjmbw==
+markdown-link-extractor@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-1.3.1.tgz#b21e797baa9247ab107a32439287afbc64eae24a"
+  integrity sha512-IosNBtHXplzEq2n9WoSi83LNLCWgLnb+8Xq379Ct5xrLLzmqPUtc+A1oqo6Sd32YfKus9uLedFNSwFK1sCzoNQ==
   dependencies:
-    marked "^2.0.5"
+    marked "^4.0.10"
 
 marked-terminal@^3.3.0:
   version "3.3.0"
@@ -13075,10 +13075,10 @@ marked@^0.7.0:
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
   integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
 
-marked@^2.0.5:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-2.1.3.tgz#bd017cef6431724fd4b27e0657f5ceb14bff3753"
-  integrity sha512-/Q+7MGzaETqifOMWYEA7HVMaZb4XbcRfaOzcSsHZEith83KGlvaSG33u0SKu89Mj5h+T8V2hM+8O45Qc5XTgwA==
+marked@^4.0.10:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.10.tgz#423e295385cc0c3a70fa495e0df68b007b879423"
+  integrity sha512-+QvuFj0nGgO970fySghXGmuw+Fd0gD2x3+MqCWLIPf5oxdv1Ka6b2q+z9RP01P/IaKPMEramy+7cNy/Lw8c3hw==
 
 marky@^1.2.0:
   version "1.2.1"
