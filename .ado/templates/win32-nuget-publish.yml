@@ -4,37 +4,24 @@ steps:
 
   - template: setup-repo-min-build.yml
 
-  # Clean Derived Data
-  - script: |
-      rm -rf $(Build.Repository.LocalPath)/DerivedData
-    displayName: 'Clean DerivedData'
-
-  - script: |
-      sudo gem install cocoapods
-    displayName: 'Install CocoaPods Environment'
-
   - script: |
       yarn bundle
     workingDirectory: apps/win32
     displayName: 'Bundling win32'
 
-  # generate the sanitizedBuildNumber environment variable
-  - bash: '.ado/scripts/generate_build_number.sh'
-    displayName: 'Generate Build Number'
-
-  # pack the nuspec
-  - task: NuGetCommand@2
-    displayName: 'NuGet pack'
+  # Pack the NuGet package
+  - task: CmdLine@1
+    displayName: 'Create NuGet package for Win32 FluentTester bundle.'
     inputs:
-      command: pack
-      packagesToPack: 'package.nuspec'
-      buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
+        filename: nuget
+        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory)/nuget -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
+        workingFolder: 'apps/win32/nuget'
 
   # push the package package
   - task: NuGetCommand@2
-    displayName: 'NuGet push'
+    displayName: 'Publish NuGet package'
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/'
       nuGetFeedType: external
       publishFeedCredentials: react-native

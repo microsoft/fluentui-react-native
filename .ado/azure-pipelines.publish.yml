@@ -68,3 +68,15 @@ jobs:
 
     steps:
       - template: templates/apple-nuget-publish.yml
+
+  - job: NuGetPublish
+    displayName: Win32 FluentTester NuGet Publish
+    pool:
+      vmImage: 'windows-2019'
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - template: templates/win32-nuget-publish.yml
+
+
