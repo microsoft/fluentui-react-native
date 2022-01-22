@@ -47,7 +47,7 @@ export interface CompoundButtonSlotProps extends ButtonSlotProps {
 }
 
 export interface CompoundButtonType {
-  props: CompoundButtonPropsWithInnerRef;
+  props: CompoundButtonProps;
   tokens: CompoundButtonTokens;
   slotProps: CompoundButtonSlotProps;
 }

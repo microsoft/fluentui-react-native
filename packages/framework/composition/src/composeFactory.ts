@@ -21,7 +21,7 @@ export type ComposeFactoryOptions<TProps, TSlotProps, TTokens, TTheme, TStatics 
     /**
      * staged render function that takes props and a useSlots hook as an input
      */
-    render: (props: TProps, useSlots: UseStyledSlots<TProps, TSlotProps>) => React.FunctionComponent<TProps>;
+    render: (props: TProps, useSlots: UseStyledSlots<TProps, TSlotProps>, ref: any) => React.FunctionComponent<TProps>;
 
     /**
      * optional statics to attach to the component
@@ -64,7 +64,7 @@ export function composeFactory<TProps, TSlotProps, TTokens, TTheme, TStatics ext
   const useSlots = buildUseSlots(options) as UseStyledSlots<TProps, TSlotProps>;
 
   // build the staged component
-  const component = stagedComponent<TProps>((props) => options.render(props, useSlots)) as LocalComponent;
+  const component = stagedComponent<TProps>((props, ref) => options.render(props, useSlots, ref)) as LocalComponent;
 
   // attach additional props to the returned component
   component.displayName = options.displayName;

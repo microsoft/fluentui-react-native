@@ -31,7 +31,7 @@ export function useSlot<TProps>(
   type MemoTuple = [SlotFn<TProps>, ResultHolder];
 
   // extract the staged component function if that pattern is being used, will be undefined if it is a standard component
-  const stagedComponent = getStagedRender<TProps>(component);
+  const stagedRenderFn = getStagedRender<TProps>(component);
 
   // build the secondary processing function and the result holder, done via useMemo so the function identity stays the same. Rebuilding the closure every time would invalidate render
   const [fn, results] = React.useMemo<MemoTuple>(() => {
@@ -60,7 +60,7 @@ export function useSlot<TProps>(
   }, [component, filter]);
 
   // if it is a staged component executre the first part with the props, otherwise just remember the props
-  results.result = stagedComponent ? stagedComponent(props) : props;
+  results.result = stagedRenderFn ? stagedRenderFn(props) : props;
 
   // return the function
   return fn;

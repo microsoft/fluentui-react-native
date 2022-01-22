@@ -156,7 +156,7 @@ export interface ButtonSlotProps {
 }
 
 export interface ButtonType {
-  props: ButtonPropsWithInnerRef;
+  props: ButtonProps;
   tokens: ButtonTokens;
   slotProps: ButtonSlotProps;
 }

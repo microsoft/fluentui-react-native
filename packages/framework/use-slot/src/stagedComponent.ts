@@ -30,7 +30,11 @@ export type StagedRender<TProps> = (props: TProps, ...args: any[]) => FinalRende
  * A composable function may have a two stage render function as an attached property. This allows the function to work
  * in all the standard react flows, but allows for pulling out the staged render when components understand it.
  */
-export type ComposableFunction<TProps> = React.FunctionComponent<TProps> & { _staged?: StagedRender<TProps> };
+export type ComposableFunction<TProps> = React.ForwardRefExoticComponent<
+  React.PropsWithoutRef<React.PropsWithChildren<TProps>> & React.RefAttributes<any>
+> & {
+  _staged?: StagedRender<TProps>;
+};
 
 function asArray<T>(val: T | T[]): T[] {
   return Array.isArray(val) ? val : [val];
@@ -43,10 +47,10 @@ function asArray<T>(val: T | T[]): T[] {
  * @param memo - optional flag to enable wrapping the created component in a React.memo HOC
  */
 export function stagedComponent<TProps>(staged: StagedRender<TProps>, memo?: boolean): ComposableFunction<TProps> {
-  const component = (props: React.PropsWithChildren<TProps>) => {
+  const component = React.forwardRef((props: React.PropsWithChildren<TProps>, ref: any) => {
     const { children, ...rest } = props;
-    return staged(rest as TProps)({} as React.PropsWithChildren<TProps>, asArray(children));
-  };
+    return staged(rest as TProps, ref)({} as React.PropsWithChildren<TProps>, asArray(children));
+  });
   const stagedComponent = memo ? React.memo(component) : component;
   Object.assign(stagedComponent, { _staged: staged });
   return stagedComponent as ComposableFunction<TProps>;

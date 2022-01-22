@@ -26,7 +26,7 @@ export type ToggleButtonProps = Omit<ToggleButtonPropsWithInnerRef, 'innerRef'>;
 export interface ToggleButtonSlotProps extends ButtonSlotProps {}
 
 export interface ToggleButtonType {
-  props: ToggleButtonPropsWithInnerRef;
+  props: ToggleButtonProps;
   tokens: ToggleButtonTokens;
   slotProps: ToggleButtonSlotProps;
 }
