@@ -1,4 +1,4 @@
-import { ButtonSlotProps, ButtonTokens, ButtonPropsWithInnerRef } from '../Button.types';
+import { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
 
 export const toggleButtonName = 'ToggleButton';
 
@@ -6,7 +6,7 @@ export interface ToggleButtonTokens extends ButtonTokens {
   checked?: ToggleButtonTokens;
 }
 
-export interface ToggleButtonPropsWithInnerRef extends ButtonPropsWithInnerRef {
+export interface ToggleButtonProps extends ButtonProps {
   /**
    * Defines the controlled checked state of the `ToggleButton`.
    * Mutually exclusive to `defaultChecked`.
@@ -20,8 +20,6 @@ export interface ToggleButtonPropsWithInnerRef extends ButtonPropsWithInnerRef {
    */
   defaultChecked?: boolean;
 }
-
-export type ToggleButtonProps = Omit<ToggleButtonPropsWithInnerRef, 'innerRef'>;
 
 export interface ToggleButtonSlotProps extends ButtonSlotProps {}
 

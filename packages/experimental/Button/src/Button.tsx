@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { buttonName, ButtonType, ButtonProps, ButtonPropsWithInnerRef } from './Button.types';
+import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
@@ -18,7 +18,7 @@ import { createIconProps, IPressableState } from '@fluentui-react-native/interac
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonPropsWithInnerRef): boolean => {
+export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
   return (
     state[layer] ||
     userProps[layer] ||
