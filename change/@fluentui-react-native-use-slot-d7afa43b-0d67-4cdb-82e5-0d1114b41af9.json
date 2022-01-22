@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Get customize and ref to work",
+  "packageName": "@fluentui-react-native/use-slot",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
