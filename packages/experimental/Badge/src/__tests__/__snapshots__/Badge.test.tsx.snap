@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Badge component tests Badge all props 1`] = `
+<View
+  appearance="outline"
+  shape="rounded"
+  size="large"
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "transparent",
+      "borderColor": "#0078d4",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "height": 24,
+      "justifyContent": "center",
+      "minWidth": 24,
+      "paddingHorizontal": 4,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Arial",
+        "fontSize": 16,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    ♣
+  </Text>
+  <Text
+    style={
+      Object {
+        "color": "#0078d4",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    Badge
+  </Text>
+</View>
+`;
+
+exports[`Badge component tests Badge tokens 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 4,
+      "display": "flex",
+      "flexDirection": "row",
+      "height": 24,
+      "justifyContent": "center",
+      "minWidth": 24,
+      "paddingHorizontal": 4,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    Badge Tokens
+  </Text>
+</View>
+`;
+
+exports[`Badge component tests Empty Badge 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "height": 24,
+      "justifyContent": "center",
+      "minWidth": 24,
+      "paddingHorizontal": 4,
+    }
+  }
+/>
+`;
