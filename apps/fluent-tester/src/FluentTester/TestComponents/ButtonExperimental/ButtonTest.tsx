@@ -7,6 +7,7 @@ import { ButtonIconTest } from './ButtonIconTestSection';
 import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonShapeTest } from './ButtonShapeTestSection';
 import { E2EButtonExperimentalTest } from './E2EButtonTest';
+import { ButtonHOCTest } from './ButtonHOCTestSection';
 
 const buttonSections: TestSection[] = [
   {
@@ -29,6 +30,10 @@ const buttonSections: TestSection[] = [
   {
     name: 'Sizes',
     component: ButtonSizeTest,
+  },
+  {
+    name: 'Customize, Compose, and Ref',
+    component: ButtonHOCTest,
   },
   {
     name: 'E2E Button Testing',
