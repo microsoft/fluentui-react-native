@@ -36,8 +36,8 @@ function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
 
 function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
   return {
-    onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
-    validKeysDown: keys, // macOS needs an array of supported keys passed as well
+    onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
+    validKeysUp: keys, // macOS needs an array of supported keys passed as well
   };
 }
 
