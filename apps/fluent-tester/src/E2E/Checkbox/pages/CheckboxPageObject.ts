@@ -13,8 +13,9 @@ class CheckboxPageObject extends BasePage {
   /******************************************************************/
   isCheckboxChecked(): boolean {
     //return this._primaryComponent.isSelected();
-    console.log('isCheckboxChecked: ' + this._primaryComponent.getAttribute('isselected'));
-    return this._primaryComponent.getAttribute('isselected') == 'true';
+    console.log('isCheckboxChecked: ' + this._primaryComponent.getAttribute('isSelected'));
+    console.log('\n\nisCheckboxChecked: ' + this._primaryComponent.getAttribute('selected'));
+    return this._primaryComponent.getAttribute('isSelected') == 'true';
   }
 
   waitForCheckboxChecked(timeout?: number): void {
