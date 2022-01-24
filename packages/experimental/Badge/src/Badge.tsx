@@ -46,13 +46,14 @@ export const Badge = compose<BadgeType>({
 
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
-    return (final: BadgeProps) => {
+    return (final: BadgeProps, ...children: React.ReactNode[]) => {
       const { text, icon, iconPosition = 'before', ...mergedProps } = mergeProps(badge, final);
       return (
         <Slots.root {...mergedProps}>
           {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {text && <Slots.text key="text">{text}</Slots.text>}
           {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {children}
         </Slots.root>
       );
     };
