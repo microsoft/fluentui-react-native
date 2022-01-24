@@ -5,6 +5,10 @@ steps:
   - template: setup-repo-min-build.yml
 
   - script: |
+      yarn build
+    displayName: 'Building the repo'
+
+  - script: |
       yarn bundle
     workingDirectory: apps/win32
     displayName: 'Bundling win32'
