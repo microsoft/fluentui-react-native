@@ -30,6 +30,6 @@ jobs:
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
-      - template: templates/win32-nuget-publish.yml
+      - template: templates/win32-nuget-publish.ymls
 
 
