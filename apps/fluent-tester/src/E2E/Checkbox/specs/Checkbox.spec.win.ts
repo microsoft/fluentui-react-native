@@ -63,7 +63,6 @@ describe('Checkbox Functional Testing', () => {
 
     /* Click on the Checkbox to toggle on */
     CheckboxPageObject.clickComponent();
-
     CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     expect(CheckboxPageObject.didOnChangeCallbackFire()).toBeTruthy();
