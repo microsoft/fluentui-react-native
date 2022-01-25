@@ -23,7 +23,7 @@ describe('ContextualMenu Testing Initialization', function () {
 });
 
 describe('ContextualMenu Functional Tests', () => {
-  /* Scrolls and waits for the MenuButton to be visible on the Test Page */
+  /* Scrolls and waits for the ContextualMenu to be visible on the Test Page */
   beforeEach(() => {
     ContextualMenuPageObjectObject.scrollToTestElement();
     ContextualMenuPageObjectObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
@@ -31,7 +31,7 @@ describe('ContextualMenu Functional Tests', () => {
     ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Escape); // Reset ContextualMenu state for next test
   });
 
-  it('Click on ContextualMenu Button and validate that the lit of ContextualMenu Items open', () => {
+  it('Click on ContextualMenu Button and validate that the list of ContextualMenu Items open', () => {
     /* Click on the ContextualMenu */
     ContextualMenuPageObjectObject.clickComponent();
     ContextualMenuPageObjectObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT);
@@ -39,7 +39,7 @@ describe('ContextualMenu Functional Tests', () => {
     expect(ContextualMenuPageObjectObject.contextualMenuItemDisplayed()).toBeTruthy();
   });
 
-  it('Type "SpaceBar" to select the ContextualMenu and validate that the lit of ContextualMenu Items open', () => {
+  it('Type "SpaceBar" to select the ContextualMenu and validate that the list of ContextualMenu Items open', () => {
     /* Type a space on the ContextualMenu */
     ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Spacebar);
     ContextualMenuPageObjectObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT);

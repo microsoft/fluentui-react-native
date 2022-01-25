@@ -54,7 +54,7 @@ describe('MenuButton Functional Testing', () => {
     MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape); // Reset MenuButton state for next test
   });
 
-  it('Click on MenuButton and validate that the lit of Menu Items open', () => {
+  it('Click on MenuButton and validate that the list of Menu Items open', () => {
     /* Click on the MenuButton */
     MenuButtonPageObject.clickComponent();
     MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
@@ -62,7 +62,7 @@ describe('MenuButton Functional Testing', () => {
     expect(MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
   });
 
-  it('Type "SpaceBar" to select the MenuButton and validate that the lit of Menu Items open', () => {
+  it('Type "SpaceBar" to select the MenuButton and validate that the list of Menu Items open', () => {
     /* Type a space on the MenuButton */
     MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Spacebar);
     MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
