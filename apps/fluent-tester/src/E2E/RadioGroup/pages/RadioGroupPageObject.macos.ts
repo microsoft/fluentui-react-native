@@ -2,9 +2,7 @@ import {
   RADIOGROUP_TESTPAGE,
   RADIOGROUP_TEST_COMPONENT,
   RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
-  RADIOBUTTON_TEST_COMPONENT,
   HOMEPAGE_RADIOGROUP_BUTTON,
-  RADIOBUTTON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../FluentTester/TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
@@ -17,20 +15,6 @@ class RadioGroupPage extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  // Get RadioButton's accessibilityLabel
-  getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): string {
-    switch (radioButtonSelector) {
-      case RadioButtonSelector.Primary:
-        return this._radioButton.getAttribute('Name');
-
-      case RadioButtonSelector.Secondary:
-        return this._secondRadioButton.getAttribute('Name');
-    }
-  }
-
-  getRadioButtonAccesibilityRole(): string {
-    return this._radioButton.getAttribute('ControlType');
-  }
 
   /*****************************************/
   /**************** Getters ****************/
@@ -53,17 +37,6 @@ class RadioGroupPage extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_RADIOGROUP_BUTTON);
-  }
-
-  /***************/
-  /* RadioButton *
-  /**************/
-  get _radioButton() {
-    return By(RADIOBUTTON_TEST_COMPONENT);
-  }
-
-  get _secondRadioButton() {
-    return By(RADIOBUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 }
 
