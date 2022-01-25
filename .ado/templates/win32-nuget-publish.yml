@@ -29,7 +29,7 @@ steps:
     displayName: 'Create NuGet package for FluentTester Win32 bundle.'
     inputs:
         filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory)/nuget -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
+        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory)\nuget -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
         workingFolder: 'apps/win32/nuget'
 
   # push the package package
@@ -37,6 +37,6 @@ steps:
     displayName: 'NuGet push'
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/Microsoft.FluentUI.FluentTesterWin32.*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)\nuget\Microsoft.FluentUI.FluentTesterWin32.*.nupkg'
       nuGetFeedType: external
       publishFeedCredentials: react-native
