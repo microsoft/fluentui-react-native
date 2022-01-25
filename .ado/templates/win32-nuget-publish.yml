@@ -13,23 +13,7 @@ steps:
     workingDirectory: apps/win32
     displayName: 'Bundling win32'
 
-  # generate the sanitizedBuildNumber environment variable
-  # - bash: '.ado/scripts/generate_build_number.sh'
-  #   displayName: 'Generate Build Number'
-
-  # pack the nuspec
-  # - task: NuGetCommand@2
-  #   displayName: 'NuGet pack'
-  #   inputs:
-  #     command: pack
-  #     packagesToPack: 'apps/win32/nuget/Microsoft.FluentUI.FluentTesterWin32.nuspec'
-  #     buildProperties: commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri);version=$(Build.BuildNumber)
-
-  - script: |
-      dir
-    workingDirectory: $(Build.ArtifactStagingDirectory)
-    displayName: 'Dir in $(Build.ArtifactStagingDirectory)'
-
+  # Pack the NuGet package
   - task: CmdLine@1
     displayName: 'Create NuGet package for FluentTester Win32 bundle.'
     inputs:
@@ -37,12 +21,7 @@ steps:
         arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
         workingFolder: 'apps/win32/nuget'
 
-  - script: |
-      dir
-    workingDirectory: $(Build.ArtifactStagingDirectory)
-    displayName: 'Dir in $(Build.ArtifactStagingDirectory)'
-
-  # push the package package
+  # Push the NuGet package
   - task: NuGetCommand@2
     displayName: 'NuGet push'
     inputs:

@@ -22,6 +22,53 @@ variables:
   - group: 'NPM and Github Secrets'
 
 jobs:
+  - job: NPMPublish
+    displayName: NPM Publish
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'
+        displayName: 'Install Node.js'
+
+      - script: |
+          git config user.name "UI-Fabric-RN-Bot"
+          git config user.email "uifrnbot@microsoft.com"
+          git remote set-url origin https://$(githubUser):$(githubPAT)@github.com/microsoft/ui-fabric-react-native.git
+        displayName: Git Authentication
+      - template: templates/yarn-install.yml
+
+      - script: |
+          yarn test
+        displayName: 'yarn test'
+
+      - script: |
+          echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
+        displayName: Enable No-Publish (npm)
+        condition: ${{ parameters.skipNpmPublish }}
+
+      - script: |
+          echo ##vso[task.setvariable variable=SkipGitPushPublishArgs]--no-push
+        displayName: Enable No-Publish (git)
+        condition: ${{ parameters.skipGitPush }}
+
+      - script: |
+          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/master -n $(npmAuth) --access public -y
+        displayName: 'Publish NPM Packages'
+
+  - job: NuGetPublish
+    displayName: NuGet Publish
+    pool:
+      vmImage: 'macos-11'
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - template: templates/apple-nuget-publish.yml
+
   - job: Win32NuGetPublish
     displayName: Win32 FluentTester NuGet Publish
     pool:
