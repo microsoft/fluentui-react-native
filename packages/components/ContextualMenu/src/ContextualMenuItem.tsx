@@ -120,6 +120,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
           // Keep win32 behavior as is
           default: true,
         }),
+        testID,
         ...rest,
       },
       content: { children: text },
