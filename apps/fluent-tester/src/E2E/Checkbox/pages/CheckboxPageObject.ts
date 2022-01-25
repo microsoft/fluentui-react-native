@@ -7,6 +7,10 @@ import {
 } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+export const enum CheckboxSelector {
+  Primary, //this._primaryComponent
+}
+
 class CheckboxPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -49,6 +53,18 @@ class CheckboxPageObject extends BasePage {
     );
 
     return callbackText.isDisplayed();
+  }
+
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(selector?: CheckboxSelector, key?: string): void {
+    this.getCheckboxSelector(selector).addValue(key);
+  }
+
+  getCheckboxSelector(selector?: CheckboxSelector): WebdriverIO.Element {
+    if (selector == CheckboxSelector.Primary) {
+      return this._primaryComponent;
+    }
+    return this._primaryComponent;
   }
 
   /*****************************************/
