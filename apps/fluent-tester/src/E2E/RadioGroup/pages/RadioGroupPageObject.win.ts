@@ -10,8 +10,9 @@ import {
 } from '../../../FluentTester/TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
-/* The main RadioGroup we are testing has FOUR RadioButtons. The spec file will
- * import this enum to easily write tests using these 4 radio buttons */
+/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
+ * The main RadioGroup we are testing has FOUR RadioButtons. The spec file will
+ * import this enum to easily write tests using these 4 radio buttons. */
 export const enum RadioButtonSelector {
   First = 0, // this._firstRadioButton
   Second, // this._secondRadioButton

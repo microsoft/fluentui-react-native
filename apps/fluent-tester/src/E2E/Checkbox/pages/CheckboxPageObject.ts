@@ -7,6 +7,8 @@ import {
 } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
+ * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
 export const enum CheckboxSelector {
   Primary, //this._primaryComponent
 }
