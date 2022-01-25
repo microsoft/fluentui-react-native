@@ -37,6 +37,6 @@ steps:
     displayName: 'NuGet push'
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/Microsoft.FluentUI.FluentTesterWin32.*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.*.nupkg'
       nuGetFeedType: external
       publishFeedCredentials: react-native
