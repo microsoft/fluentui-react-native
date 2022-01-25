@@ -36,7 +36,7 @@ class ContextualMenuPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(contextualMenuSelector?: ContextualMenuSelector, key?: string): void {
+  sendKey(contextualMenuSelector: ContextualMenuSelector, key: string): void {
     this.getContextualMenuSelector(contextualMenuSelector).addValue(key);
   }
 

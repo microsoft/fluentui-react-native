@@ -73,7 +73,7 @@ class TabsPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(key?: string, tabItemSelector?: TabItemSelector): void {
+  sendKey(key: string, tabItemSelector: TabItemSelector): void {
     this.getTabItem(tabItemSelector).addValue(key);
   }
 

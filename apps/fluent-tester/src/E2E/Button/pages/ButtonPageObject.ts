@@ -34,7 +34,7 @@ class ButtonPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(buttonSelector?: ButtonSelector, key?: string): void {
+  sendKey(buttonSelector: ButtonSelector, key: string): void {
     this.getButtonSelector(buttonSelector).addValue(key);
   }
 

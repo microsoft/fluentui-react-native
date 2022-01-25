@@ -58,7 +58,7 @@ class CheckboxPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(selector?: CheckboxSelector, key?: string): void {
+  sendKey(selector: CheckboxSelector, key: string): void {
     this.getCheckboxSelector(selector).addValue(key);
   }
 

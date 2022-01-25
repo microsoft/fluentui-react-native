@@ -61,7 +61,7 @@ class RadioGroupPage extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(key?: string, radioButtonSelector?: RadioButtonSelector): void {
+  sendKey(key: string, radioButtonSelector: RadioButtonSelector): void {
     this.getRadioButton(radioButtonSelector).addValue(key);
   }
 
