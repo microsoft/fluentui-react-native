@@ -25,12 +25,22 @@ steps:
   #     packagesToPack: 'apps/win32/nuget/Microsoft.FluentUI.FluentTesterWin32.nuspec'
   #     buildProperties: commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri);version=$(Build.BuildNumber)
 
+  - script: |
+      dir
+    workingDirectory: $(Build.ArtifactStagingDirectory)
+    displayName: 'Dir in $(Build.ArtifactStagingDirectory)'
+
   - task: CmdLine@1
     displayName: 'Create NuGet package for FluentTester Win32 bundle.'
     inputs:
         filename: nuget
         arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
         workingFolder: 'apps/win32/nuget'
+
+  - script: |
+      dir
+    workingDirectory: $(Build.ArtifactStagingDirectory)
+    displayName: 'Dir in $(Build.ArtifactStagingDirectory)'
 
   # push the package package
   - task: NuGetCommand@2
