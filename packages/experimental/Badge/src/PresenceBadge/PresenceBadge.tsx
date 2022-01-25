@@ -2,25 +2,25 @@
 import { Badge } from '../Badge';
 import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, Presence } from './PresenceBadge.types';
 import { compose, withSlots, mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { presenceIcons } from './presenceIcons';
+import { presenceIconPaths } from './presenceIconPaths';
 import { SvgXml } from 'react-native-svg';
 import { useBadge } from '../useBadge';
 
-function getIcon(presence: Presence, isOutOfOffice: boolean) {
+function getIconPath(presence: Presence, isOutOfOffice: boolean) {
   switch (presence) {
     case 'available':
     default:
-      return isOutOfOffice ? presenceIcons.availableOof : presenceIcons.available;
+      return isOutOfOffice ? presenceIconPaths.availableOutOfOffice : presenceIconPaths.available;
     case 'away':
-      return isOutOfOffice ? presenceIcons.oof : presenceIcons.away;
+      return isOutOfOffice ? presenceIconPaths.outOfOffice : presenceIconPaths.away;
     case 'busy':
-      return isOutOfOffice ? presenceIcons.busyOof : presenceIcons.busy;
+      return isOutOfOffice ? presenceIconPaths.busyOutOfOffice : presenceIconPaths.busy;
     case 'doNotDisturb':
-      return isOutOfOffice ? presenceIcons.dndOof : presenceIcons.dnd;
+      return isOutOfOffice ? presenceIconPaths.doNotDisturbOutOfOffice : presenceIconPaths.doNotDisturb;
     case 'offline':
-      return presenceIcons.offline;
+      return presenceIconPaths.offline;
     case 'outOfOffice':
-      return presenceIcons.oof;
+      return presenceIconPaths.outOfOffice;
   }
 }
 
@@ -31,7 +31,9 @@ export const PresenceBadge = compose<PresenceBadgeType>({
   },
   render: (userProps: PresenceBadgeProps) => {
     const badge = useBadge(userProps);
-    const iconXml = getIcon(userProps.presence, userProps.isOutOfOffice);
+    const iconXml = `<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      ${getIconPath(userProps.presence, userProps.isOutOfOffice)}
+    </svg>`;
     const CustomBadge = Badge.customize({
       borderWidth: 0,
       padding: 0,
@@ -51,7 +53,9 @@ export const PresenceBadge = compose<PresenceBadgeType>({
 export const PresenceBadgeStaged = stagedComponent((props: PresenceBadgeProps) => {
   const presence = props.presence || 'available';
   const isOutOfOffice = props.isOutOfOffice || false;
-  const iconXml = getIcon(presence, isOutOfOffice);
+  const iconXml = `<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    ${getIconPath(presence, isOutOfOffice)}
+  </svg>`;
   const CustomBadge = Badge.customize({
     borderWidth: 0,
     padding: 0,
