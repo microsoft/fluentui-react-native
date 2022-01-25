@@ -11,5 +11,6 @@
   </metadata>
   <files>
     <file src="..\dist\index.win32.bundle" target="win32" />
+    <file src="..\dist\assets\**" target="win32\assets" />
   </files>
 </package>
