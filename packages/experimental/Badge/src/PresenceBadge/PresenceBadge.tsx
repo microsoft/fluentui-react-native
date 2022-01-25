@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import { Badge } from '../Badge';
 import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, Presence } from './PresenceBadge.types';
+import { BadgeSize } from '../Badge.types';
 import { compose, withSlots, mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { presenceIconPaths } from './presenceIconPaths';
 import { SvgXml } from 'react-native-svg';
@@ -24,6 +25,24 @@ function getIconPath(presence: Presence, isOutOfOffice: boolean) {
   }
 }
 
+function getIconSize(size: BadgeSize) {
+  switch (size) {
+    case 'smallest':
+      return 6;
+    case 'smaller':
+      return 10;
+    case 'small':
+      return 12;
+    case 'medium':
+    default:
+      return 16;
+    case 'large':
+      return 20;
+    case 'largest':
+      return 28;
+  }
+}
+
 export const PresenceBadge = compose<PresenceBadgeType>({
   displayName: presenceBadgeName,
   slots: {
@@ -31,12 +50,13 @@ export const PresenceBadge = compose<PresenceBadgeType>({
   },
   render: (userProps: PresenceBadgeProps) => {
     const badge = useBadge(userProps);
-    const iconXml = `<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    const size = getIconSize(userProps.size || 'medium');
+    const iconXml = `<svg width="${size}" height="${size}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${getIconPath(userProps.presence, userProps.isOutOfOffice)}
     </svg>`;
     const CustomBadge = Badge.customize({
       borderWidth: 0,
-      padding: 0,
+      paddingHorizontal: 0,
     });
 
     return (final: PresenceBadgeProps) => {
@@ -53,12 +73,13 @@ export const PresenceBadge = compose<PresenceBadgeType>({
 export const PresenceBadgeStaged = stagedComponent((props: PresenceBadgeProps) => {
   const presence = props.presence || 'available';
   const isOutOfOffice = props.isOutOfOffice || false;
-  const iconXml = `<svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    ${getIconPath(presence, isOutOfOffice)}
-  </svg>`;
+  const size = getIconSize(props.size || 'medium');
+  const iconXml = `<svg width="${size}" height="${size}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      ${getIconPath(presence, isOutOfOffice)}
+    </svg>`;
   const CustomBadge = Badge.customize({
     borderWidth: 0,
-    padding: 0,
+    paddingHorizontal: 0,
   });
   return (rest: PresenceBadgeProps) => {
     const { appearance = 'outline', ...mergedProps } = mergeProps<PresenceBadgeProps>(props, rest);
