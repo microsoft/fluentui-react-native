@@ -63,6 +63,18 @@ describe('Checkbox Functional Testing', () => {
 
     /* Click on the Checkbox to toggle on */
     CheckboxPageObject.clickComponent();
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+    console.log('\n\n\nCheckbox is checked: ' + CheckboxPageObject.isCheckboxChecked());
+
     CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     expect(CheckboxPageObject.didOnChangeCallbackFire()).toBeTruthy();
