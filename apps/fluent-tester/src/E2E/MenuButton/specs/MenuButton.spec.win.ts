@@ -1,11 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import MenuButtonPageObject from '../pages/MenuButtonPageObject.win';
+import MenuButtonPageObject, { MenuButtonSelector } from '../pages/MenuButtonPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys } from '../../common/consts';
-import {
-  MENU_BUTTON_ACCESSIBILITY_LABEL,
-  MENU_BUTTON_TEST_COMPONENT_LABEL,
-  MENU_BUTTON_TEST_COMPONENT,
-} from '../../../FluentTester/TestComponents/MenuButton/consts';
+import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } from '../../../FluentTester/TestComponents/MenuButton/consts';
 import { ComponentSelector } from '../../common/BasePage.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -55,7 +51,7 @@ describe('MenuButton Functional Testing', () => {
     MenuButtonPageObject.scrollToTestElement();
     MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    MenuButtonPageObject.sendKey(MENU_BUTTON_TEST_COMPONENT, Keys.Escape); // Reset MenuButton state for next test
+    MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape); // Reset MenuButton state for next test
   });
 
   it('Click on MenuButton and validate that the lit of Menu Items open', () => {
@@ -68,7 +64,7 @@ describe('MenuButton Functional Testing', () => {
 
   it('Type "SpaceBar" to select the MenuButton and validate that the lit of Menu Items open', () => {
     /* Type a space on the MenuButton */
-    MenuButtonPageObject.sendKey(MENU_BUTTON_TEST_COMPONENT, Keys.Spacebar);
+    MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Spacebar);
     MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
 
     expect(MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
@@ -76,6 +72,6 @@ describe('MenuButton Functional Testing', () => {
 
   /* Runs after all tests. This ensures the MenuButton closes. If it stays open, the test driver won't be able to close the test app */
   afterAll(() => {
-    MenuButtonPageObject.sendKey(MENU_BUTTON_TEST_COMPONENT, Keys.Escape);
+    MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape);
   });
 });

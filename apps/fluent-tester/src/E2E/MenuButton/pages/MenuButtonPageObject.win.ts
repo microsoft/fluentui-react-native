@@ -7,6 +7,11 @@ import {
 } from '../../../FluentTester/TestComponents/MenuButton/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+export const enum MenuButtonSelector {
+  MenuButton = 0, // this._primarySelector
+  MenuItem1, // this._menuItem
+}
+
 class MenuButtonPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -27,6 +32,21 @@ class MenuButtonPageObject extends BasePage {
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   menuItemDisplayed(): boolean {
     return this._menuItem.isDisplayed();
+  }
+
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(selector: MenuButtonSelector, key: string): void {
+    this.getMenuButtonSelector(selector).addValue(key);
+  }
+
+  /* Returns the correct WebDriverIO element from the MenuButton Selector */
+  getMenuButtonSelector(selector?: MenuButtonSelector): WebdriverIO.Element {
+    if (selector == MenuButtonSelector.MenuButton) {
+      return this._primaryComponent;
+    } else if (selector == MenuButtonSelector.MenuItem1) {
+      return this._menuItem;
+    }
+    return this._primaryComponent;
   }
 
   /*****************************************/

@@ -62,6 +62,7 @@ class CheckboxPageObject extends BasePage {
     this.getCheckboxSelector(selector).addValue(key);
   }
 
+  /* Returns the correct WebDriverIO element from the Checkbox Selector */
   getCheckboxSelector(selector?: CheckboxSelector): WebdriverIO.Element {
     if (selector == CheckboxSelector.Primary) {
       return this._primaryComponent;

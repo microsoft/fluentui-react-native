@@ -38,6 +38,7 @@ class ButtonPageObject extends BasePage {
     this.getButtonSelector(buttonSelector).addValue(key);
   }
 
+  /* Returns the correct WebDriverIO element from the Button Selector */
   getButtonSelector(buttonSelector?: ButtonSelector): WebdriverIO.Element {
     if (buttonSelector == ButtonSelector.PrimaryButton) {
       return this._primaryComponent;
