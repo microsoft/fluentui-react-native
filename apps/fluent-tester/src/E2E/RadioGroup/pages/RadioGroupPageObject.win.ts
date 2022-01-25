@@ -59,10 +59,9 @@ class RadioGroupPage extends BasePage {
     );
   }
 
-  // Overridden function
-  sendKey(componentID?: string, key?: string, radioButtonSelector?: RadioButtonSelector): void {
-    if (!componentID) this.getRadioButton(radioButtonSelector).addValue(key);
-    else this.sendKey(componentID, key);
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(key?: string, radioButtonSelector?: RadioButtonSelector): void {
+    this.getRadioButton(radioButtonSelector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the RadioButton Selector */

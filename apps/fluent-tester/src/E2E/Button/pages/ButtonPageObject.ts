@@ -7,6 +7,10 @@ import {
 } from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+export const enum ButtonSelector {
+  PrimaryButton, //this._primaryComponent
+}
+
 class ButtonPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -25,6 +29,18 @@ class ButtonPageObject extends BasePage {
     );
 
     return callbackText.isDisplayed();
+  }
+
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(buttonSelector?: ButtonSelector, key?: string): void {
+    this.getButtonSelector(buttonSelector).addValue(key);
+  }
+
+  getButtonSelector(buttonSelector?: ButtonSelector): WebdriverIO.Element {
+    if (buttonSelector == ButtonSelector.PrimaryButton) {
+      return this._primaryComponent;
+    }
+    return this._primaryComponent;
   }
 
   /*****************************************/

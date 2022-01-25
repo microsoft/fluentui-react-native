@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import ContextualMenuPageObjectObject from '../pages/ContextualMenuPageObject.win';
+import ContextualMenuPageObjectObject, { ContextualMenuSelector } from '../pages/ContextualMenuPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
-import { CONTEXTUALMENU_TEST_COMPONENT } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('ContextualMenu Testing Initialization', function () {
@@ -29,7 +28,7 @@ describe('ContextualMenu Functional Tests', () => {
     ContextualMenuPageObjectObject.scrollToTestElement();
     ContextualMenuPageObjectObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    ContextualMenuPageObjectObject.sendKey(CONTEXTUALMENU_TEST_COMPONENT, Keys.Escape); // Reset MenuButton state for next test
+    ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Escape); // Reset ContextualMenu state for next test
   });
 
   it('Click on ContextualMenu Button and validate that the lit of ContextualMenu Items open', () => {
@@ -42,7 +41,7 @@ describe('ContextualMenu Functional Tests', () => {
 
   it('Type "SpaceBar" to select the ContextualMenu and validate that the lit of ContextualMenu Items open', () => {
     /* Type a space on the ContextualMenu */
-    ContextualMenuPageObjectObject.sendKey(CONTEXTUALMENU_TEST_COMPONENT, Keys.Spacebar);
+    ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Spacebar);
     ContextualMenuPageObjectObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT);
 
     expect(ContextualMenuPageObjectObject.contextualMenuItemDisplayed()).toBeTruthy();
@@ -50,6 +49,6 @@ describe('ContextualMenu Functional Tests', () => {
 
   /* Runs after all tests. This ensures the ContextualMenu closes. If it stays open, the test driver won't be able to close the test app */
   afterAll(() => {
-    ContextualMenuPageObjectObject.sendKey(CONTEXTUALMENU_TEST_COMPONENT, Keys.Escape); // Reset MenuButton state for next test
+    ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Escape); // Reset ContextualMenu state for next test
   });
 });

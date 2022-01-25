@@ -59,6 +59,7 @@ class TabsPageObject extends BasePage {
     }
   }
 
+  /* Returns the correct WebDriverIO element from the TabItem Selector */
   getTabItemContent(tabItemSelector: TabItemSelector): WebdriverIO.Element {
     if (tabItemSelector == TabItemSelector.First) {
       return this._firstTabItemContent;
@@ -69,10 +70,9 @@ class TabsPageObject extends BasePage {
     }
   }
 
-  // Overridden function
-  sendKey(componentID?: string, key?: string, tabItemSelector?: TabItemSelector): void {
-    if (!componentID) this.getTabItem(tabItemSelector).addValue(key);
-    else this.sendKey(componentID, key);
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(key?: string, tabItemSelector?: TabItemSelector): void {
+    this.getTabItem(tabItemSelector).addValue(key);
   }
 
   /*****************************************/

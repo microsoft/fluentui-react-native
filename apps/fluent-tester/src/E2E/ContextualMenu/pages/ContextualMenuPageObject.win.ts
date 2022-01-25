@@ -6,6 +6,12 @@ import {
 } from '../../../FluentTester/TestComponents/ContextualMenu/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+/* This enum gives the spec file an easy way to choose which UI elements to interact with on the page */
+export const enum ContextualMenuSelector {
+  ContextualMenu = 0, //this._primaryComponent
+  ContextualMenuItem, //this._contextualMenuItem
+}
+
 class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -26,6 +32,22 @@ class ContextualMenuPageObject extends BasePage {
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   contextualMenuItemDisplayed(): boolean {
     return this._contextualMenuItem.isDisplayed();
+  }
+
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(contextualMenuSelector?: ContextualMenuSelector, key?: string): void {
+    this.getContextualMenuSelector(contextualMenuSelector).addValue(key);
+  }
+
+  /* Returns the correct WebDriverIO element from the ContextualMenuSelector string */
+  getContextualMenuSelector(contextualMenuSelector?: ContextualMenuSelector): WebdriverIO.Element {
+    if (contextualMenuSelector == ContextualMenuSelector.ContextualMenu) {
+      return this._primaryComponent;
+    } else if (contextualMenuSelector == ContextualMenuSelector.ContextualMenuItem) {
+      return this._contextualMenuItem;
+    } else {
+      return this._primaryComponent;
+    }
   }
 
   /*****************************************/

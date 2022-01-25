@@ -84,7 +84,7 @@ describe('RadioGroup Functional Testing', () => {
 
   it('Keyboard to RadioButton and check for Selection state', () => {
     // Presses the ArrowDown key while the first (A) RadioButton is selected
-    RadioGroupPageObject.sendKey(null, Keys.Down_Arrow, RadioButtonSelector.First);
+    RadioGroupPageObject.sendKey(Keys.Down_Arrow, RadioButtonSelector.First);
     RadioGroupPageObject.waitForRadioButtonSelected(RadioButtonSelector.Second, 5000);
 
     /* Validate the RadioButton is selected */
@@ -93,7 +93,7 @@ describe('RadioGroup Functional Testing', () => {
 
   it("Keyboard to DISABLED RadioButton and validate it doesn't get selected", () => {
     // Presses the ArrowDown key while the second (B) RadioButton is selected
-    RadioGroupPageObject.sendKey(null, Keys.Down_Arrow, RadioButtonSelector.Second);
+    RadioGroupPageObject.sendKey(Keys.Down_Arrow, RadioButtonSelector.Second);
     RadioGroupPageObject.waitForRadioButtonSelected(RadioButtonSelector.Fourth, 5000); // It should skip RadioButton 3 since it is disabled
 
     /* Validate the RadioButton is selected */
