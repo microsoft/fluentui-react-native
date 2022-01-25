@@ -14,29 +14,29 @@ steps:
     displayName: 'Bundling win32'
 
   # generate the sanitizedBuildNumber environment variable
-  - bash: '.ado/scripts/generate_build_number.sh'
-    displayName: 'Generate Build Number'
+  # - bash: '.ado/scripts/generate_build_number.sh'
+  #   displayName: 'Generate Build Number'
 
   # pack the nuspec
-  # - task: NuGetCommand@2
-  #   displayName: 'NuGet pack'
-  #   inputs:
-  #     command: pack
-  #     packagesToPack: 'apps/win32/nuget/Microsoft.FluentUI.FluentTesterWin32.nuspec'
-  #     buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
-
-  - task: CmdLine@1
-    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+  - task: NuGetCommand@2
+    displayName: 'NuGet pack'
     inputs:
-        filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory)\nuget -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
-        workingFolder: 'apps/win32/nuget'
+      command: pack
+      packagesToPack: 'apps/win32/nuget/Microsoft.FluentUI.FluentTesterWin32.nuspec'
+      buildProperties: commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri);version=$(Build.BuildNumber)
+
+  # - task: CmdLine@1
+  #   displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+  #   inputs:
+  #       filename: nuget
+  #       arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory)\nuget -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
+  #       workingFolder: 'apps/win32/nuget'
 
   # push the package package
   - task: NuGetCommand@2
     displayName: 'NuGet push'
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)\nuget\Microsoft.FluentUI.FluentTesterWin32.*.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/Microsoft.FluentUI.FluentTesterWin32.*.nupkg'
       nuGetFeedType: external
       publishFeedCredentials: react-native
