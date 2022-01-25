@@ -1,7 +1,11 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import MenuButtonPageObject from '../pages/MenuButtonPageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
-import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } from '../../../FluentTester/TestComponents/MenuButton/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys } from '../../common/consts';
+import {
+  MENU_BUTTON_ACCESSIBILITY_LABEL,
+  MENU_BUTTON_TEST_COMPONENT_LABEL,
+  MENU_BUTTON_TEST_COMPONENT,
+} from '../../../FluentTester/TestComponents/MenuButton/consts';
 import { ComponentSelector } from '../../common/BasePage.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -26,21 +30,52 @@ describe('MenuButton Testing Initialization', function () {
 
 /* This will be re-enabled with a MenuButton Bug is fixed. Currently in PR - "Integrating accessibilityLabel functionality for MenuButton #1117" */
 describe('MenuButton Accessibility Testing', () => {
-  it('MenuButton - Validate accessibilityRole is correct', () => {
+  /* Scrolls and waits for the MenuButton to be visible on the Test Page */
+  beforeEach(() => {
     MenuButtonPageObject.scrollToTestElement();
     MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+
+  it('MenuButton - Validate accessibilityRole is correct', () => {
     expect(MenuButtonPageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
   });
 
   it('MenuButton - Set accessibilityLabel', () => {
-    MenuButtonPageObject.scrollToTestElement();
-    MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
     expect(MenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(MENU_BUTTON_ACCESSIBILITY_LABEL);
   });
 
   it('Do not set accessibilityLabel -> Default to MenuButton label', () => {
+    expect(MenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(MENU_BUTTON_TEST_COMPONENT_LABEL);
+  });
+});
+
+describe('MenuButton Functional Testing', () => {
+  /* Scrolls and waits for the MenuButton to be visible on the Test Page */
+  beforeEach(() => {
     MenuButtonPageObject.scrollToTestElement();
     MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    expect(MenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(MENU_BUTTON_TEST_COMPONENT_LABEL);
+
+    MenuButtonPageObject.sendKey(MENU_BUTTON_TEST_COMPONENT, Keys.Escape); // Reset MenuButton state for next test
+  });
+
+  it('Click on MenuButton and validate that the lit of Menu Items open', () => {
+    /* Click on the MenuButton */
+    MenuButtonPageObject.clickComponent();
+    MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
+
+    expect(MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
+  });
+
+  it('Type "SpaceBar" to select the MenuButton and validate that the lit of Menu Items open', () => {
+    /* Type a space on the MenuButton */
+    MenuButtonPageObject.sendKey(MENU_BUTTON_TEST_COMPONENT, Keys.Spacebar);
+    MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
+
+    expect(MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
+  });
+
+  /* Runs after all tests. This ensures the MenuButton closes. If it stays open, the test driver won't be able to close the test app */
+  afterAll(() => {
+    MenuButtonPageObject.sendKey(MENU_BUTTON_TEST_COMPONENT, Keys.Escape);
   });
 });
