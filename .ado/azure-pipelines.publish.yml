@@ -78,5 +78,3 @@ jobs:
 
     steps:
       - template: templates/win32-nuget-publish.yml
-
-
