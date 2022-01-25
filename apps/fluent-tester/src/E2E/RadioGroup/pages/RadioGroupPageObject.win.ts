@@ -2,15 +2,21 @@ import {
   RADIOGROUP_TESTPAGE,
   RADIOGROUP_TEST_COMPONENT,
   RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
-  RADIOBUTTON_TEST_COMPONENT,
   HOMEPAGE_RADIOGROUP_BUTTON,
-  RADIOBUTTON_NO_A11Y_LABEL_COMPONENT,
+  FIRST_RADIO_BUTTON,
+  SECOND_RADIO_BUTTON,
+  THIRD_RADIO_BUTTON,
+  FOURTH_RADIO_BUTTON,
 } from '../../../FluentTester/TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+/* The main RadioGroup we are testing has FOUR RadioButtons. The spec file will
+ * import this enum to easily write tests using these 4 radio buttons */
 export const enum RadioButtonSelector {
-  Primary = 0, // this._primaryComponent
-  Secondary, // this._secondaryComponent
+  First = 0, // this._firstRadioButton
+  Second, // this._secondRadioButton
+  Third, // this._thirdRadioButton
+  Fourth, // this._fourthRadioButton
 }
 
 class RadioGroupPage extends BasePage {
@@ -19,17 +25,57 @@ class RadioGroupPage extends BasePage {
   /******************************************************************/
   // Get RadioButton's accessibilityLabel
   getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): string {
-    switch (radioButtonSelector) {
-      case RadioButtonSelector.Primary:
-        return this._radioButton.getAttribute('Name');
+    return this.getRadioButton(radioButtonSelector).getAttribute('Name');
+  }
 
-      case RadioButtonSelector.Secondary:
-        return this._secondRadioButton.getAttribute('Name');
-    }
+  /* This resets the RadioGroup selection by clicking/selecting the 1st RadioButton in the RadioGroup.
+   * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
+  resetRadioGroupSelection(): void {
+    this._firstRadioButton.click();
   }
 
   getRadioButtonAccesibilityRole(): string {
-    return this._radioButton.getAttribute('ControlType');
+    return this._firstRadioButton.getAttribute('ControlType');
+  }
+
+  isRadioButtonSelected(radioButtonSelector: RadioButtonSelector): boolean {
+    return this.getRadioButton(radioButtonSelector).isSelected();
+  }
+
+  clickRadioButton(radioButtonSelector: RadioButtonSelector): void {
+    this.getRadioButton(radioButtonSelector).click();
+  }
+
+  waitForRadioButtonSelected(radioButtonSelector: RadioButtonSelector, timeout?: number): void {
+    browser.waitUntil(
+      () => {
+        return this.isRadioButtonSelected(radioButtonSelector);
+      },
+      {
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: 'RadioButton was not selected correctly.',
+        interval: 1000,
+      },
+    );
+  }
+
+  // Overridden function
+  sendKey(componentID?: string, key?: string, radioButtonSelector?: RadioButtonSelector): void {
+    if (!componentID) this.getRadioButton(radioButtonSelector).addValue(key);
+    else this.sendKey(componentID, key);
+  }
+
+  /* Returns the correct WebDriverIO element from the RadioButton Selector */
+  getRadioButton(radioButtonSelector: RadioButtonSelector): WebdriverIO.Element {
+    if (radioButtonSelector == RadioButtonSelector.First) {
+      return this._firstRadioButton;
+    } else if (radioButtonSelector == RadioButtonSelector.Second) {
+      return this._secondRadioButton;
+    } else if (radioButtonSelector == RadioButtonSelector.Third) {
+      return this._thirdRadioButton;
+    } else {
+      return this._fourthRadioButton;
+    }
   }
 
   /*****************************************/
@@ -58,12 +104,22 @@ class RadioGroupPage extends BasePage {
   /***************/
   /* RadioButton *
   /**************/
-  get _radioButton() {
-    return By(RADIOBUTTON_TEST_COMPONENT);
+
+  /* The first RadioGroup has 4 radio buttons, all listed below */
+  get _firstRadioButton() {
+    return By(FIRST_RADIO_BUTTON);
   }
 
   get _secondRadioButton() {
-    return By(RADIOBUTTON_NO_A11Y_LABEL_COMPONENT);
+    return By(SECOND_RADIO_BUTTON);
+  }
+
+  get _thirdRadioButton() {
+    return By(THIRD_RADIO_BUTTON);
+  }
+
+  get _fourthRadioButton() {
+    return By(FOURTH_RADIO_BUTTON);
   }
 }
 
