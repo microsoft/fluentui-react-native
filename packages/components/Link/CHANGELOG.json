@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Tue, 25 Jan 2022 21:55:30 GMT",
+      "tag": "@fluentui-react-native/link_v0.15.16",
+      "version": "0.15.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/link",
+            "commit": "ca505d0e9d6b3286c0025bde70305f4bbb49a7f2",
+            "comment": "Default to onKeyDown on macOS"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.15",
+            "commit": "ca505d0e9d6b3286c0025bde70305f4bbb49a7f2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Jan 2022 16:48:23 GMT",
       "tag": "@fluentui-react-native/link_v0.15.15",
       "version": "0.15.15",

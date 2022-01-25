@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Default to onKeyDown on macOS",
-  "packageName": "@fluentui/react-native",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
