@@ -17,7 +17,7 @@ export const ButtonHOCTest: React.FunctionComponent = () => {
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
-      <CustomButton style={commonTestStyles.vmargin} ref={buttonRef}>
+      <CustomButton style={commonTestStyles.vmargin} componentRef={buttonRef}>
         Customized Button with ref
       </CustomButton>
       <Button
