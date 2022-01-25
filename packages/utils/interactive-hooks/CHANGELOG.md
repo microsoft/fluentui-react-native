@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jan 2022 16:48:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.14
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Add Keyboarding integration for Windows (safreibe@microsoft.com)
 
 ## 0.11.13
 
