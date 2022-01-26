@@ -55,7 +55,7 @@ The `CompoundButton` component has three slots, or parts. The slots behave as fo
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
 
-The slots can be modified using the `compose` function on the `CompoundButton`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
+The slots can be modified using the `compose` function on the `CompoundButton`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
 
 ### Props
 
@@ -70,7 +70,7 @@ export interface CompoundButtonProps extends ButtonProps {
 
 ### Styling Tokens
 
-Tokens can be used to customize the styling of the control by using the `customize` function on the `Button`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `CompoundButton` has the following tokens:
+Tokens can be used to customize the styling of the control by using the `customize` function on the `Button`. For more information on using the `customize` API, please see [this page](../../../../framework/composition/README.md). The `CompoundButton` has the following tokens:
 
 ```ts
 export interface CompoundButtonTokens extends ButtonTokens {
