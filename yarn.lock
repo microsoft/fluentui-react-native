@@ -3406,9 +3406,9 @@
     "@types/react" "^16"
 
 "@types/react-native@^0.64.0":
-  version "0.64.21"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.21.tgz#f45aaac377ae2b2195e03597d4fd9fe366b2fcb5"
-  integrity sha512-62eOyNblPNzhCcLczhGnyJpokMnRH+cnkFg/LdLhFEu04USqBPJPwa1q90d7Iv7llprOaUGaeGKOsNLrjMCWYw==
+  version "0.64.23"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.23.tgz#5a0cd846efcfc7c6ad28550172d1041df7b5d7b0"
+  integrity sha512-glxMEAmG1PKeTA6ZvPb81oYg4Q+sgCsCJKnkeoGSqBIR2z38XispNb1+Sar+0I7E4dJXg+NC9pZhWl9HnxOG1A==
   dependencies:
     "@types/react" "*"
 
@@ -15569,9 +15569,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.64.0, react-native-macos@^0.64.6:
-  version "0.64.22"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.22.tgz#e538e2f9f932ec923c37c25188e00d3e21536fba"
-  integrity sha512-UwQUGGbQlm0vSsVZZmstn49f8YLfVBuXmpEAfk8hZSX0K4k2K0G8AC5U9i5rxypL2v7MqxWKgnctwWZvVjegaA==
+  version "0.64.25"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.25.tgz#08574cd4ee7ac7ad2753ab26dbcd2fd08d231fb3"
+  integrity sha512-YxmuANb6wqnGZ8TpVsrGZ0kUm+Ai/lKL7LcBqq9aGGEgZ/qvcOErxZ7bBvZ5I8d7//px4s9bhpJuL41qzjze2A==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@react-native-community/cli" "^5.0.1-alpha.1"
