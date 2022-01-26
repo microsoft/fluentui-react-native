@@ -32,8 +32,12 @@ Android:
 
 ### Slots
 
+The `FAB` component has two slots, or parts. The slots behave as follows:
+
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
+
+The slots can be modified using the `compose` function on the `Button`. For more information on using the `compose` API, please see [this page]().
 
 ### Props
 
@@ -66,22 +70,7 @@ export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPres
 
 ### Styling Tokens
 
-Tokens can be used to customize the styling of the control.
-
-```jsx
-const CustomFAB = FAB.customize({
-  iconSize: 10,
-  spacingIconContentBefore: 10,
-})
-
-<CustomFAB>Button with small icon and large gap between icon and label</CustomFAB>
-
-const CustomHoverFAB = FAB.customize({
-  hovered: { backgroundColor: 'pink' },
-})
-
-<CustomHoverFAB>Button with pink background on hover</CustomHoverFAB>
-```
+Tokens can be used to customize the styling of the control by using the `customize` function on the `FAB`. For more information on using the `customize` API, please see [this page](). The `FAB` has the following tokens:
 
 ```ts
 export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {

@@ -4,6 +4,10 @@
 
 The `Button` component enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
 
+## Requirements
+
+If using FURN's theming, the `Button` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+
 ## Sample Code
 
 Basic examples:
@@ -72,9 +76,13 @@ The `Button` component can be loading if it's waiting for another action to occu
 
 ### Slots
 
+The `Button` component has three slots, or parts. The slots behave as follows:
+
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
+
+The slots can be modified using the `compose` function on the `Button`. For more information on using the `compose` API, please see [this page]().
 
 ### Props
 
@@ -159,22 +167,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
 ### Styling Tokens
 
-Tokens can be used to customize the styling of the control.
-
-```jsx
-const CustomButton = Button.customize({
-  iconSize: 10,
-  spacingIconContentBefore: 10,
-})
-
-<CustomButton>Button with small icon and large gap between icon and label</CustomButton>
-
-const CustomHoverButton = Button.customize({
-  hovered: { backgroundColor: 'pink' },
-})
-
-<CustomHoverButton>Button with pink background on hover</CustomButton>
-```
+Tokens can be used to customize the styling of the control by using the `customize` function on the `Button`. For more information on using the `customize` API, please see [this page](). The `Button` has the following tokens:
 
 ```ts
 export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {

@@ -45,9 +45,13 @@ Variant options are the same as the base `Button` component.
 
 ### Slots
 
+The `ToggleButton` component has three slots, or parts. The slots behave as follows:
+
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
+
+The slots can be modified using the `compose` function on the `ToggleButton`. For more information on using the `compose` API, please see [this page]().
 
 ### Props
 
@@ -71,22 +75,7 @@ export interface ToggleButtonProps extends ButtonProps {
 
 ### Styling Tokens
 
-Tokens can be used to customize the styling of the control.
-
-```jsx
-const CustomToggleButton = ToggleButton.customize({
-  iconSize: 10,
-  spacingIconContentBefore: 10,
-})
-
-<CustomToggleButton>Button with small icon and large gap between icon and label</CustomToggleButton>
-
-const CustomHoverToggleButton = ToggleButton.customize({
-  hovered: { backgroundColor: 'pink' },
-})
-
-<CustomHoverToggleButton>Button with pink background on hover</CustomHoverToggleButton>
-```
+Tokens can be used to customize the styling of the control by using the `customize` function on the `ToggleButton`. For more information on using the `customize` API, please see [this page](). The `ToggleButton` has the following tokens:
 
 ```ts
 export interface CompoundButtonTokens extends ButtonTokens {
