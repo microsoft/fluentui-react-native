@@ -2,11 +2,11 @@ import {
   TABS_TESTPAGE,
   TABS_TEST_COMPONENT,
   HOMEPAGE_TABS_BUTTON,
-  SECOND_TABS_ITEM_CONTENT,
   FIRST_TABS_ITEM,
-  FIRST_TABS_ITEM_CONTENT,
   SECOND_TABS_ITEM,
   THIRD_TABS_ITEM,
+  FIRST_TABS_ITEM_CONTENT,
+  SECOND_TABS_ITEM_CONTENT,
   THIRD_TABS_ITEM_CONTENT,
 } from '../../../FluentTester/TestComponents/Tabs/consts';
 import { BasePage, By } from '../../common/BasePage.win';
