@@ -2,7 +2,11 @@
 
 ## Background
 
-The `FAB` is a `Button` that is designed for mobile scenarios. This button only renders on mobile platforms.
+`FAB` stands for `Floating Action Button`. The `FAB` is a `Button` that is designed for mobile scenarios to signal primary actions to the user. This button only renders on mobile platforms.
+
+## Requirements
+
+If using FURN's theming, the `Button` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
 
 ## Sample Code
 
