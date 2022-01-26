@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 26 Jan 2022 17:02:27 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "883ef66b94a1efb5d429c5ecad015f312be3b4c3",
+            "comment": "Adding code that was added to usKeyProps.win32. I believe this was accidently left out of a previous PR and it broke our UWP app"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Jan 2022 21:55:30 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.11.15",
       "version": "0.11.15",
