@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 26 Jan 2022 20:31:04 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.17.32",
+      "version": "0.17.32",
+      "comments": {
+        "none": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "ce9cae587b2a0002ecd1fb875c74f7303fac5738",
+            "comment": "Attempting to publish Win32 FluentTester bundle to the react-native office feed for internal use so I can then pull the bundle into Devmain"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.3",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jan 2022 17:02:27 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.17.31",
       "version": "0.17.31",

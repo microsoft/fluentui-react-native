@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Attempting to publish Win32 FluentTester bundle to the react-native office feed for internal use so I can then pull the bundle into Devmain",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "none"
-}

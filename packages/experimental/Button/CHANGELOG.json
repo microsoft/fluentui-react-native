@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Wed, 26 Jan 2022 20:31:03 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4",
+            "comment": "Revert \"Add ref to v1 Button (#1218)\""
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.12.1",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jan 2022 17:02:27 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.11.21",
       "version": "0.11.21",

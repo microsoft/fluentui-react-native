@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 26 Jan 2022 20:31:04 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4",
+            "comment": "Revert \"Add ref to v1 Button (#1218)\""
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jan 2022 17:02:27 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.12.0",
       "version": "0.12.0",

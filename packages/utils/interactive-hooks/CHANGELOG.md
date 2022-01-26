@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 26 Jan 2022 17:02:27 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 20:31:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.1
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Revert "Add ref to v1 Button (#1218)" (ruaraki@microsoft.com)
 
 ## 0.12.0
 
