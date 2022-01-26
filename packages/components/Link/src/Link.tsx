@@ -7,7 +7,7 @@ import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose'
 import { ILinkProps, ILinkSlotProps, ILinkState, ILinkRenderData, IWithLinkOptions, linkName, ILinkType } from './Link.types';
 import { settings } from './Link.settings';
 import { foregroundColorTokens, textTokens, borderTokens } from '@fluentui-react-native/tokens';
-import { useAsPressable, useKeyUpProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { IViewProps } from '@fluentui-react-native/adapters';
@@ -34,7 +34,7 @@ export function useAsLink(userProps: IWithLinkOptions<IViewProps>, ref: React.Re
   const linkOnPressWithFocus = useOnPressWithFocus(ref, linkOnPress);
 
   const pressable = useAsPressable({ onPress: linkOnPressWithFocus, ...rest });
-  const onKeyUpProps = useKeyUpProps(linkOnPress, ' ', 'Enter');
+  const onKeyUpProps = useKeyProps(linkOnPress, ' ', 'Enter');
 
   const newState = {
     ...pressable.state,

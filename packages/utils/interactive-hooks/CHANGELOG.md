@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Tue, 25 Jan 2022 16:48:23 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Jan 2022 21:55:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.15
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
 
 ## 0.11.14
 
