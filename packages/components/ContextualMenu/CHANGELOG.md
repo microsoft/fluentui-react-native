@@ -1,8 +1,42 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 17:02:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.14
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.19
+- Bump @fluentui-react-native/focus-zone to v0.8.16
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui-react-native/pressable to v0.8.16
+
+## 0.14.13
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.18
+- Bump @fluentui-react-native/focus-zone to v0.8.15
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+- Bump @fluentui-react-native/pressable to v0.8.15
+
+## 0.14.12
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.17
+- Bump @fluentui-react-native/focus-zone to v0.8.14
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+- Bump @fluentui-react-native/pressable to v0.8.14
 
 ## 0.14.11
 

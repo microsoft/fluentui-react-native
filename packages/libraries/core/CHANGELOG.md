@@ -1,8 +1,66 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 17:02:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.21
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.17
+- Bump @fluentui-react-native/callout to v0.19.19
+- Bump @fluentui-react-native/checkbox to v0.14.16
+- Bump @fluentui-react-native/contextual-menu to v0.14.14
+- Bump @fluentui-react-native/focus-trap-zone to v0.8.16
+- Bump @fluentui-react-native/focus-zone to v0.8.16
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui-react-native/link to v0.15.17
+- Bump @fluentui-react-native/menu-button to v0.7.21
+- Bump @fluentui-react-native/pressable to v0.8.16
+- Bump @fluentui-react-native/radio-group to v0.14.16
+- Bump @fluentui-react-native/tabs to v0.6.16
+
+## 0.27.20
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.16
+- Bump @fluentui-react-native/callout to v0.19.18
+- Bump @fluentui-react-native/checkbox to v0.14.15
+- Bump @fluentui-react-native/contextual-menu to v0.14.13
+- Bump @fluentui-react-native/focus-trap-zone to v0.8.15
+- Bump @fluentui-react-native/focus-zone to v0.8.15
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+- Bump @fluentui-react-native/link to v0.15.16
+- Bump @fluentui-react-native/menu-button to v0.7.20
+- Bump @fluentui-react-native/pressable to v0.8.15
+- Bump @fluentui-react-native/radio-group to v0.14.15
+- Bump @fluentui-react-native/tabs to v0.6.15
+
+## 0.27.19
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.15
+- Bump @fluentui-react-native/callout to v0.19.17
+- Bump @fluentui-react-native/checkbox to v0.14.14
+- Bump @fluentui-react-native/contextual-menu to v0.14.12
+- Bump @fluentui-react-native/focus-trap-zone to v0.8.14
+- Bump @fluentui-react-native/focus-zone to v0.8.14
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+- Bump @fluentui-react-native/link to v0.15.15
+- Bump @fluentui-react-native/menu-button to v0.7.19
+- Bump @fluentui-react-native/pressable to v0.8.14
+- Bump @fluentui-react-native/radio-group to v0.14.14
+- Bump @fluentui-react-native/tabs to v0.6.14
 
 ## 0.27.18
 

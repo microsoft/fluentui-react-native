@@ -3,6 +3,7 @@ import {
   CHECKBOX_TEST_COMPONENT,
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
+  CHECKBOX_ON_PRESS,
 } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
@@ -14,17 +15,40 @@ class CheckboxPageObject extends BasePage {
     return this._primaryComponent.isSelected();
   }
 
-  waitForCheckboxUnchecked(timeout?: number): void {
+  waitForCheckboxChecked(timeout?: number): void {
     browser.waitUntil(
       () => {
-        return !this.isCheckboxChecked();
+        return this.isCheckboxChecked();
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
+        timeoutMsg: 'The Checkbox was not toggled correctly',
         interval: 1000,
       },
     );
+  }
+
+  /* Useful in beforeEach() hook to reset the checkbox before every test */
+  toggleCheckboxToUnchecked(): void {
+    if (this.isCheckboxChecked()) {
+      this._primaryComponent.click();
+    }
+  }
+
+  didOnChangeCallbackFire(): boolean {
+    const callbackText = By(CHECKBOX_ON_PRESS);
+    browser.waitUntil(
+      () => {
+        return callbackText.isDisplayed();
+      },
+      {
+        timeout: this.waitForPageTimeout,
+        timeoutMsg: 'The OnChange callback did not fire.',
+        interval: 1000,
+      },
+    );
+
+    return callbackText.isDisplayed();
   }
 
   /*****************************************/

@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 17:02:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui-react-native/pressable to v0.8.16
+
+## 0.6.2
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+- Bump @fluentui-react-native/pressable to v0.8.15
+
+## 0.6.1
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+- Bump @fluentui-react-native/pressable to v0.8.14
+
+## 0.6.0
+
+Wed, 19 Jan 2022 00:57:04 GMT
+
+### Minor changes
+
+- Initial styling (ruaraki@microsoft.com)
 
 ## 0.5.2
 

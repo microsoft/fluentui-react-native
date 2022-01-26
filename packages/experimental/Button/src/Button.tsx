@@ -2,13 +2,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { buttonName, ButtonType, ButtonProps, ButtonPropsWithInnerRef } from './Button.types';
+import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps, IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -18,7 +18,7 @@ import { createIconProps, IFocusable, IPressableState } from '@fluentui-react-na
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonPropsWithInnerRef): boolean => {
+export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
   return (
     state[layer] ||
     userProps[layer] ||
@@ -33,7 +33,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-const ButtonComposed = compose<ButtonType>({
+export const Button = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
@@ -41,14 +41,14 @@ const ButtonComposed = compose<ButtonType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonPropsWithInnerRef, useSlots: UseSlots<ButtonType>) => {
+  render: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
+    return (final: ButtonProps, ...children: React.ReactNode[]) => {
       const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
 
       const shouldShowIcon = !loading && icon;
@@ -83,7 +83,5 @@ const ButtonComposed = compose<ButtonType>({
     };
   },
 });
-
-export const Button = React.forwardRef<IFocusable, ButtonProps>((props, ref) => <ButtonComposed {...props} innerRef={ref} />);
 
 export default Button;

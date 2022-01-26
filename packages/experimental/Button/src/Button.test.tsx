@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Button } from './Button';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { Text, View } from 'react-native';
+import { Icon } from '@fluentui-react-native/icon';
 
 describe('Button component tests', () => {
   it('Button default', () => {
@@ -36,6 +38,24 @@ describe('Button component tests', () => {
 
   it('Button large', () => {
     const tree = renderer.create(<Button size="large">Large Button</Button>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button customized', () => {
+    const CustomButton = Button.customize({ backgroundColor: 'pink' });
+    const tree = renderer.create(<CustomButton>Custom Button</CustomButton>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button composed', () => {
+    const ComposedButton = Button.compose({
+      slots: {
+        root: View,
+        icon: Icon,
+        content: Text,
+      },
+    });
+    const tree = renderer.create(<ComposedButton>Composed Button with RNText</ComposedButton>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

@@ -19,6 +19,7 @@ Primary and Stealth buttons now map to `Button`:
 ### Props that remain as is
 
 - `children`
+- `componentRef`
 - `icon`
 - `onClick`
 - `testID`
@@ -26,7 +27,6 @@ Primary and Stealth buttons now map to `Button`:
 
 ### Props no longer supported with an equivalent functionality in v1 Button
 
-- `componentRef` => Use `ref` instead
 - `content` => Pass the content as `children` instead
 - `endIcon` => Use `after` value for `iconPosition` prop and pass icon information into `icon` prop instead
 - `startIcon` => Use `before` value for `iconPosition` prop and pass icon information into `icon` prop instead
@@ -54,6 +54,7 @@ No `Button` specific renames. See [this porting guide](../../../docs/pages/Guide
 
 - `icon` takes in a props object instead of the JSX element itself. This is due to framework differences from FluentUI.
 - `iconOnly` must be supplied for components do not have any text content for them to be styled correctly. This is due to framework differences from FluentUI.
+- `ref` is exposed as `componentRef`, similar to previous versions of FluentUI. This is due to framework differences from FluentUI.
 
 ### Other Prop differences
 
@@ -64,7 +65,7 @@ No `Button` specific renames. See [this porting guide](../../../docs/pages/Guide
 
 | v0 `Button`    | v1 `Button`    |
 | -------------- | -------------- |
-| `componentRef` | `ref`          |
+| `componentRef` | `componentRef` |
 | `content`      |                |
 | `endIcon`      | `iconPosition` |
 | `icon`         | `icon`         |

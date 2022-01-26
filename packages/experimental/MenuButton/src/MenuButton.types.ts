@@ -1,6 +1,6 @@
 import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { ButtonProps as ButtonWithRefProps } from '@fluentui-react-native/experimental-button';
+import { ButtonProps } from '@fluentui-react-native/experimental-button';
 import { SvgProps, XmlProps } from 'react-native-svg';
 
 export const menuButtonName = 'MenuButton';
@@ -22,7 +22,7 @@ export interface MenuButtonItemProps extends ContextualMenuItemProps {
   showSubmenu?: boolean;
 }
 
-export interface MenuButtonProps extends ButtonWithRefProps {
+export interface MenuButtonProps extends ButtonProps {
   menuItems?: MenuButtonItemProps[];
   onItemClick?: (key: string) => void;
   contextualMenu?: ContextualMenuProps;

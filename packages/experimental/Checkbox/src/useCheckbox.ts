@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
   useAsPressable,
-  useKeyUpProps,
+  useKeyProps,
   useOnPressWithFocus,
   useViewCommandFocus,
   useAsToggle,
@@ -48,7 +48,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const buttonRef = useViewCommandFocus(componentRef);
 
   // Handles the "Space" key toggling the Checkbox
-  const onKeyUpProps = useKeyUpProps(toggleChecked, ' ');
+  const onKeyUpProps = useKeyProps(toggleChecked, ' ');
 
   const state: CheckboxState = {
     ...pressable.state,
@@ -79,6 +79,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessibilityActions: [{ name: 'Toggle' }],
       focusable: !state.disabled,
       onAccessibilityAction: onAccessibilityAction,
+      enableFocusRing: true,
       ...onKeyUpProps,
       ...props,
     },

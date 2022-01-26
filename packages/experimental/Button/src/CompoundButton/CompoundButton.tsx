@@ -2,16 +2,16 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { CompoundButtonPropsWithInnerRef, compoundButtonName, CompoundButtonType, CompoundButtonProps } from './CompoundButton.types';
+import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './CompoundButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps, IFocusable } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { buttonLookup } from '../Button';
 
-const CompoundButtonComposed = compose<CompoundButtonType>({
+export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
   ...stylingSettings,
   slots: {
@@ -21,7 +21,7 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
     secondaryContent: Text,
     contentContainer: View,
   },
-  render: (userProps: CompoundButtonPropsWithInnerRef, useSlots: UseSlots<CompoundButtonType>) => {
+  render: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
 
@@ -29,7 +29,7 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: CompoundButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
+    return (final: CompoundButtonProps, ...children: React.ReactNode[]) => {
       const { icon, iconOnly, secondaryContent, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(
         button.props,
         final,
@@ -74,9 +74,5 @@ const CompoundButtonComposed = compose<CompoundButtonType>({
     };
   },
 });
-
-export const CompoundButton = React.forwardRef<IFocusable, CompoundButtonProps>((props, ref) => (
-  <CompoundButtonComposed {...props} innerRef={ref} />
-));
 
 export default CompoundButton;

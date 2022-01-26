@@ -1,0 +1,31 @@
+steps:
+  - checkout: self
+    persistCredentials: true
+
+  - template: setup-repo-min-build.yml
+
+  - script: |
+      yarn build
+    displayName: 'Building the repo'
+
+  - script: |
+      yarn bundle
+    workingDirectory: apps/win32
+    displayName: 'Bundling win32'
+
+  # Pack the NuGet package
+  - task: CmdLine@1
+    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+    inputs:
+        filename: nuget
+        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+        workingFolder: 'apps/win32/nuget'
+
+  # Push the NuGet package
+  - task: NuGetCommand@2
+    displayName: 'NuGet push'
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
+      nuGetFeedType: external
+      publishFeedCredentials: react-native

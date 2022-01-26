@@ -160,6 +160,7 @@ export {
   useAsToggle,
   useFocusState,
   useHoverState,
+  useKeyProps,
   useKeyUpProps,
   useKeyDownProps,
   useOnPressWithFocus,

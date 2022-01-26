@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Tue, 18 Jan 2022 20:49:22 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 17:02:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.21
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+
+## 0.11.20
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+
+## 0.11.19
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+
+## 0.11.18
+
+Thu, 20 Jan 2022 21:05:25 GMT
+
+### Patches
+
+- Fixed Toggle selected state for the Button (v.kozlova13@gmail.com)
 
 ## 0.11.17
 

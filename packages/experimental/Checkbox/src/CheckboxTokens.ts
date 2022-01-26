@@ -1,21 +1,21 @@
 import { Theme } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    checkboxBorderColor: t.colors.menuItemText,
-    color: t.colors.menuItemText,
+    borderRadius: globalTokens.corner.radius.small,
     checkboxBackgroundColor: t.colors.menuBackground,
-    textBorderColor: 'transparent',
+    checkboxBorderColor: t.colors.menuItemText,
+    checkboxBorderRadius: globalTokens.corner.radius.small,
+    checkboxBorderWidth: globalTokens.stroke.width.thin,
+    checkboxSize: 16,
     checkmarkColor: t.colors.menuItemTextHovered,
-    variant: 'bodyStandard',
+    spacingLabelAfter: globalTokens.spacing.m,
     checkmarkOpacity: 0,
-    checkboxMarginStart: 0,
-    checkboxMarginEnd: 4,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 2,
+    color: t.colors.menuItemText,
+    variant: 'bodyStandard',
     disabled: {
       checkboxBorderColor: t.colors.buttonBorderDisabled,
       color: t.colors.disabledBodyText,
@@ -27,7 +27,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     focused: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundHovered,
-      textBorderColor: t.colors.focusBorder,
+      borderColor: t.colors.focusBorder,
     },
     pressed: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundPressed,
@@ -35,11 +35,11 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checked: {
       checkmarkOpacity: 1,
     },
-    labelIsBefore: {
-      checkboxMarginStart: 4,
-      checkboxMarginEnd: 0,
-    },
     circular: {
-      borderRadius: 9999,
+      checkboxBorderRadius: globalTokens.corner.radius.circle,
+    },
+    labelIsBefore: {
+      spacingLabelBefore: globalTokens.spacing.m,
+      spacingLabelAfter: 0,
     },
   } as CheckboxTokens);
