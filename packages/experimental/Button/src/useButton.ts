@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAsPressable, useKeyUpProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { ButtonPropsWithInnerRef, ButtonState } from './Button.types';
 import { memoize } from '@fluentui-react-native/framework';
 
@@ -12,7 +12,7 @@ export const useButton = (props: ButtonPropsWithInnerRef): ButtonState => {
   const focusRef = disabled ? null : ref;
   const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
-  const onKeyUpProps = useKeyUpProps(onClick, ' ', 'Enter');
+  const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const isDisabled = !!disabled || !!loading;
 
   return {

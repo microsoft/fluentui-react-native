@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Tue, 25 Jan 2022 16:48:23 GMT and should not be manually modified.
+This log was last generated on Wed, 26 Jan 2022 17:02:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.16
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui-react-native/focus-zone to v0.8.16
+
+## 0.4.15
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+- Bump @fluentui-react-native/focus-zone to v0.8.15
 
 ## 0.4.14
 
