@@ -18,7 +18,7 @@ steps:
     displayName: 'Create NuGet package for FluentTester Win32 bundle.'
     inputs:
         filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber)'
+        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
         workingFolder: 'apps/win32/nuget'
 
   # Push the NuGet package

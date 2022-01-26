@@ -8,6 +8,9 @@
     <projectUrl>https://github.com/microsoft/fluentui-react-native.git</projectUrl>
     <description>This package contains the React Native JS bundle of FluentUI-React-Native's Win32 Test App.</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="git"
+      url="https://github.com/microsoft/fluentui-react-native.git"
+      commit="$CommitId$" />
   </metadata>
   <files>
     <file src="..\dist\index.win32.bundle" target="win32" />
