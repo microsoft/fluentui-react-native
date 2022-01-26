@@ -57,12 +57,12 @@ describe('Tabs Functional Tests', () => {
 
   it('Keyboarding: Arrow Navigation: Right -> Down -> Left -> Up -> Validate the correct TabItem content is shown', () => {
     /* At First tab element, press Right Arrow to navigate to the Second tab element */
-    browser.saveScreenshot('../../../../../../apps/windows/errorShots/beforeRightArrow.png');
+    browser.saveScreenshot('../../../apps/windows/errorShots/beforeRightArrow.png');
 
     TabsPageObject.sendKey(Keys.Right_Arrow, TabItemSelector.First);
     TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
-    browser.saveScreenshot('../../../../../../apps/windows/errorShots/afterRightArrow_shouldBe2ndTabItem.png');
+    browser.saveScreenshot('../../../apps/windows/errorShots/afterRightArrow_shouldBe2ndTabItem.png');
 
     expect(TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
 
@@ -70,7 +70,7 @@ describe('Tabs Functional Tests', () => {
     TabsPageObject.sendKey(Keys.Down_Arrow, TabItemSelector.Second);
     TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Third, PAGE_TIMEOUT);
 
-    browser.saveScreenshot('../../../../../../apps/windows/errorShots/afterRightArrow_shouldBe3rdTabItem.png');
+    browser.saveScreenshot('../../../apps/windows/errorShots/afterRightArrow_shouldBe3rdTabItem.png');
 
     expect(TabsPageObject.didTabItemContentLoad(TabItemSelector.Third)).toBeTruthy();
 
