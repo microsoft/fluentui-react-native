@@ -60,7 +60,8 @@ describe('Tabs Functional Tests', () => {
     browser.saveScreenshot('../../apps/windows/errorShots/beforeRightArrow.png');
 
     TabsPageObject.sendKey(Keys.Right_Arrow, TabItemSelector.First);
-    TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
+    TabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+    //TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     browser.saveScreenshot('../../apps/windows/errorShots/afterRightArrow_shouldBe2ndTabItem.png');
 
