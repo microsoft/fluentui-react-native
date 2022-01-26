@@ -49,7 +49,7 @@ The `ToggleButton` component has three slots, or parts. The slots behave as foll
 
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
+- `content` - If specified, renders the first entry of `children` as text.
 
 The slots can be modified using the `compose` function on the `ToggleButton`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
 
