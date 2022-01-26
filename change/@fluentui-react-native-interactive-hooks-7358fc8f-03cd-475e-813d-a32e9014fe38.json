@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding code that was added to usKeyProps.win32. I believe this was accidently left out of a previous PR and it broke our UWP app",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
