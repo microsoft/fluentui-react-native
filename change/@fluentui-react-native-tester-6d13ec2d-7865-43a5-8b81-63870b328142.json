@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding additional E2E Functional tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
