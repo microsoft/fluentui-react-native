@@ -2,7 +2,7 @@
 import { Badge } from '../Badge';
 import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, Presence } from './PresenceBadge.types';
 import { BadgeSize } from '../Badge.types';
-import { compose, withSlots, mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { presenceIconPaths } from './presenceIconPaths';
 import { SvgXml } from 'react-native-svg';
 import { useBadge } from '../useBadge';
@@ -68,25 +68,4 @@ export const PresenceBadge = compose<PresenceBadgeType>({
       );
     };
   },
-});
-
-export const PresenceBadgeStaged = stagedComponent((props: PresenceBadgeProps) => {
-  const presence = props.presence || 'available';
-  const isOutOfOffice = props.isOutOfOffice || false;
-  const size = getIconSize(props.size || 'medium');
-  const iconXml = `<svg width="${size}" height="${size}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      ${getIconPath(presence, isOutOfOffice)}
-    </svg>`;
-  const CustomBadge = Badge.customize({
-    borderWidth: 0,
-    paddingHorizontal: 0,
-  });
-  return (rest: PresenceBadgeProps) => {
-    const { appearance = 'outline', ...mergedProps } = mergeProps<PresenceBadgeProps>(props, rest);
-    return (
-      <CustomBadge appearance={appearance} {...mergedProps}>
-        <SvgXml xml={iconXml} />
-      </CustomBadge>
-    );
-  };
 });

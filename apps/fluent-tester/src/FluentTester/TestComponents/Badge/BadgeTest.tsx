@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BADGE_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { View, Platform, Text } from 'react-native';
-import { Badge, CompressibleBadge, PresenceBadge, PresenceBadgeStaged } from '@fluentui-react-native/badge';
+import { Badge, CompressibleBadge, PresenceBadge } from '@fluentui-react-native/badge';
 import BadgeSvg from './oof.svg';
 
 import { SvgIconProps } from '@fluentui-react-native/icon';
@@ -75,7 +75,7 @@ export const BasicBadge: React.FunctionComponent = () => {
           <PresenceBadge presence="busy" size="smallest" />
           <PresenceBadge presence="offline" />
           <PresenceBadge presence="outOfOffice" />
-          <PresenceBadgeStaged presence="away" />
+          <PresenceBadge presence="away" />
         </>
       )}
     </View>
