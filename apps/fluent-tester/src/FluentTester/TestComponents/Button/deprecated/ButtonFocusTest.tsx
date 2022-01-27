@@ -3,7 +3,7 @@ import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
-import { stackStyle } from '../Common/styles';
+import { stackStyle } from '../../Common/styles';
 
 export const ButtonFocusTest: React.FunctionComponent = () => {
   const [state, setState] = React.useState({

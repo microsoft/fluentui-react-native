@@ -3,7 +3,7 @@ import {
   BUTTONEXPERIMENTAL_TEST_COMPONENT,
   BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
-} from '../../../FluentTester/TestComponents/ButtonExperimental/consts';
+} from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class ButtonExperimentalPageObject extends BasePage {

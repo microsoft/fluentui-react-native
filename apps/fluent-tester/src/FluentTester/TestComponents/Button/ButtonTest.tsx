@@ -1,13 +1,11 @@
 import * as React from 'react';
-import { ButtonFocusTest } from './ButtonFocusTest';
-import { ButtonIconTest } from './ButtonIconTest';
-import { BUTTON_TESTPAGE } from './consts';
-import { E2EButtonTest } from './E2EButtonTest';
+import { ButtonFocusTest } from './deprecated/ButtonFocusTest';
+import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
+import { BUTTON_TESTPAGE, EXPERIMENTAL_BUTTON_TEST_PAGE } from './consts';
+import { E2EButtonTest } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
 import { ToggleButtonTest } from './ToggleButtonTestSection';
-import { EXPERIMENTAL_BUTTON_TEST_PAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonIconTest } from '../Button/ButtonIconTestSection';
 import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonShapeTest } from './ButtonShapeTestSection';
@@ -15,19 +13,6 @@ import { E2EButtonExperimentalTest } from './E2EButtonTest';
 import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 
 const buttonSections: TestSection[] = [
-  {
-    name: 'Basic Button',
-    testID: BUTTON_TESTPAGE,
-    component: ButtonFocusTest,
-  },
-  {
-    name: 'Icon Button',
-    component: ButtonIconTest,
-  },
-  {
-    name: 'E2E Button Testing',
-    component: E2EButtonTest,
-  },
   {
     name: 'Button Variants',
     testID: EXPERIMENTAL_BUTTON_TEST_PAGE,
@@ -57,6 +42,19 @@ const buttonSections: TestSection[] = [
     name: 'E2E Button Testing',
     component: E2EButtonExperimentalTest,
   },
+  {
+    name: 'Deprecated Basic Button',
+    testID: BUTTON_TESTPAGE,
+    component: ButtonFocusTest,
+  },
+  {
+    name: 'Deprecated Icon Button',
+    component: ButtonIconTest_deprecated,
+  },
+  {
+    name: 'Deprecated E2E Button Testing',
+    component: E2EButtonTest,
+  },
 ];
 
 export const ButtonTest: React.FunctionComponent = () => {
@@ -64,7 +62,7 @@ export const ButtonTest: React.FunctionComponent = () => {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

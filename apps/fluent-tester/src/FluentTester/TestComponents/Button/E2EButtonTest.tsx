@@ -1,18 +1,19 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import { Button, Text } from '@fluentui/react-native';
+import { Text } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/experimental-button';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import {
-  BUTTON_TEST_COMPONENT,
-  BUTTON_ON_PRESS,
-  BUTTON_NO_A11Y_LABEL_COMPONENT,
-  BUTTON_ACCESSIBILITY_LABEL,
-  BUTTON_TEST_COMPONENT_LABEL,
+  BUTTONEXPERIMENTAL_TEST_COMPONENT,
+  BUTTONEXPERIMENTAL_ON_PRESS,
+  BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT,
+  BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL,
+  BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL,
 } from './consts';
 
-export const E2EButtonTest: React.FunctionComponent = () => {
+export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);
 
   const onClick = React.useCallback(() => {
@@ -22,14 +23,13 @@ export const E2EButtonTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
-        <Button
-          content="This is a button for E2E testing"
-          testID={BUTTON_TEST_COMPONENT}
-          onClick={onClick}
-          accessibilityLabel={BUTTON_ACCESSIBILITY_LABEL}
-        />
-        <Button content={BUTTON_TEST_COMPONENT_LABEL} testID={BUTTON_NO_A11Y_LABEL_COMPONENT} onClick={onClick} />
-        {buttonPressed ? <Text testID={BUTTON_ON_PRESS}>Button Pressed</Text> : null}
+        <Button testID={BUTTONEXPERIMENTAL_TEST_COMPONENT} onClick={onClick} accessibilityLabel={BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL}>
+          This is a button for E2E testing
+        </Button>
+        <Button testID={BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT} onClick={onClick}>
+          {BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL}
+        </Button>
+        {buttonPressed ? <Text testID={BUTTONEXPERIMENTAL_ON_PRESS}>Button Pressed</Text> : null}
       </Stack>
     </View>
   );

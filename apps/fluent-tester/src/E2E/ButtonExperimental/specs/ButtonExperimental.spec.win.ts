@@ -5,7 +5,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/c
 import {
   BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL,
   BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL,
-} from '../../../FluentTester/TestComponents/ButtonExperimental/consts';
+} from '../../../FluentTester/TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Button Testing Initialization', function () {
@@ -20,7 +20,7 @@ describe('Experimental Button Testing Initialization', function () {
     ButtonExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToExperimentalButtonPage();
+    NavigateAppPage.clickAndGoToButtonPage();
     ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy();
