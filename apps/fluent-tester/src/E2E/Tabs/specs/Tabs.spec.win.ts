@@ -57,21 +57,14 @@ describe('Tabs Functional Tests', () => {
 
   it('Keyboarding: Arrow Navigation: Right -> Down -> Left -> Up -> Validate the correct TabItem content is shown', () => {
     /* At First tab element, press Right Arrow to navigate to the Second tab element */
-    browser.saveScreenshot('../../apps/windows/errorShots/beforeRightArrow.png');
-
     TabsPageObject.sendKey(Keys.Right_Arrow, TabItemSelector.First);
-    TabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    //TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
-
-    browser.saveScreenshot('../../apps/windows/errorShots/afterRightArrow_shouldBe2ndTabItem.png');
+    TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     expect(TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
 
     /* At Second tab element, press Down Arrow to navigate to the Third tab element */
     TabsPageObject.sendKey(Keys.Down_Arrow, TabItemSelector.Second);
     TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Third, PAGE_TIMEOUT);
-
-    browser.saveScreenshot('../../apps/windows/errorShots/afterRightArrow_shouldBe3rdTabItem.png');
 
     expect(TabsPageObject.didTabItemContentLoad(TabItemSelector.Third)).toBeTruthy();
 
