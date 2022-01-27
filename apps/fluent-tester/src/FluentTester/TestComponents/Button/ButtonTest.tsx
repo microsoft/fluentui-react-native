@@ -4,6 +4,15 @@ import { ButtonIconTest } from './ButtonIconTest';
 import { BUTTON_TESTPAGE } from './consts';
 import { E2EButtonTest } from './E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { ButtonVariantTest } from './ButtonVariantTestSection';
+import { ToggleButtonTest } from './ToggleButtonTestSection';
+import { EXPERIMENTAL_BUTTON_TEST_PAGE } from './consts';
+import { Test, TestSection, PlatformStatus } from '../Test';
+import { ButtonIconTest } from '../Button/ButtonIconTestSection';
+import { ButtonSizeTest } from './ButtonSizeTestSection';
+import { ButtonShapeTest } from './ButtonShapeTestSection';
+import { E2EButtonExperimentalTest } from './E2EButtonTest';
+import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 
 const buttonSections: TestSection[] = [
   {
@@ -18,6 +27,35 @@ const buttonSections: TestSection[] = [
   {
     name: 'E2E Button Testing',
     component: E2EButtonTest,
+  },
+  {
+    name: 'Button Variants',
+    testID: EXPERIMENTAL_BUTTON_TEST_PAGE,
+    component: ButtonVariantTest,
+  },
+  {
+    name: 'Button Shape',
+    component: ButtonShapeTest,
+  },
+  {
+    name: 'Icon Button',
+    component: ButtonIconTest,
+  },
+  {
+    name: 'Toggle Button',
+    component: ToggleButtonTest,
+  },
+  {
+    name: 'Sizes',
+    component: ButtonSizeTest,
+  },
+  {
+    name: 'Customize, Compose, and Ref',
+    component: ButtonHOCTest,
+  },
+  {
+    name: 'E2E Button Testing',
+    component: E2EButtonExperimentalTest,
   },
 ];
 
