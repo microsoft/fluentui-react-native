@@ -28,19 +28,28 @@
   "dependencies": {
     "@uifabricshared/foundation-compose": "^1.11.8",
     "@fluentui-react-native/adapters": ">=0.8.2 <1.0.0",
+    "@fluentui-react-native/experimental-activity-indicator": "^0.5.10",
+    "@fluentui-react-native/experimental-text": ">=0.7.11 <1.0.0",
+    "@fluentui-react-native/framework": "0.7.11",
     "@fluentui-react-native/icon": "0.11.5",
     "@fluentui-react-native/interactive-hooks": ">=0.12.1 <1.0.0",
     "@fluentui-react-native/pressable": ">=0.8.17 <1.0.0",
+    "@fluentui-react-native/styling-utils": ">=0.3.4 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.11.6 <1.0.0",
     "@fluentui-react-native/text": ">=0.11.8 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.11.5 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.8.2 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.10.2 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.11.2 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.11.2 <1.0.0",
+    "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@office-iss/react-native-win32": "^0.64.8",
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.1",
     "react-native": "^0.64.3"
   },
   "peerDependencies": {
