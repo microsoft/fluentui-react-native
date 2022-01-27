@@ -58,17 +58,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: RCTComponent Overrides
 
 	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
-		/*
-		  If we attach a touch handler to the proxy view directly, the touch coordinates
-		  are incorrect and the wrong subview recieves the touch event, most likely
-		  because macOS screen coordinates have a flipped Y axis. The workaround is to
-		  attach a separate touch handler to each subview
-		 */
-		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
-			preconditionFailure("Callout could not create RCTTouchHandler")
-		}
-		touchHandler.attach(to: subview as? RCTUIView)
-
 		proxyView.insertReactSubview(subview, at: atIndex)
 	}
 
@@ -281,37 +270,53 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	// MARK: Private variables
 
+	/// The view the Callout is presented from, if anchorRect is nil.
 	private var anchorView: NSView?
 
-	private var proxyView = RCTView()
+	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
+	/// view heirarchy, ensuring our React Views are not placed in the main window.
+	private lazy var proxyView: NSView = {
+		let visualEffectView = FlippedVisualEffectView()
+		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+		visualEffectView.material = .menu
+		visualEffectView.state = .active
+		visualEffectView.wantsLayer = true
+		visualEffectView.layer?.cornerRadius = calloutWindowCornerRadius
+
+		/**
+		 * We can't directly call touchHandler.attach(to:) because `visualEffectView` is not an RCTUIView.
+		 * We get around this limitation by just replicating what `attach` did internally: add a gestureRecognizer.
+		 */
+		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
+			preconditionFailure("Callout could not create RCTTouchHandler")
+		}
+		visualEffectView.addGestureRecognizer(touchHandler)
+
+		return visualEffectView
+	}()
 
 	private lazy var calloutWindow: CalloutWindow = {
 		let window = CalloutWindow()
 		window.lifeCycleDelegate = self
 
-		let visualEffect = NSVisualEffectView()
-		visualEffect.translatesAutoresizingMaskIntoConstraints = false
-		visualEffect.material = .menu
-		visualEffect.state = .active
-		visualEffect.wantsLayer = true
-		visualEffect.layer?.cornerRadius = calloutWindowCornerRadius
-
 		guard let contentView = window.contentView else {
 			preconditionFailure("Callout window has no content view")
 		}
 
-		contentView.addSubview(visualEffect)
-		NSLayoutConstraint.activate([
-			visualEffect.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-			visualEffect.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-			visualEffect.topAnchor.constraint(equalTo: contentView.topAnchor),
-			visualEffect.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-		])
-
-		visualEffect.addSubview(proxyView)
+		contentView.addSubview(proxyView)
+		window.initialFirstResponder = proxyView
 
 		return window
 	}()
+}
+
+/// React Native macOS uses a flipped coordinate space by default. Let's stay consistent and
+/// ensure any views hosting React Native views are also flipped. This helps RCTTouchHandler
+/// register clicks in the right location.
+private class FlippedVisualEffectView: NSVisualEffectView {
+	override var isFlipped: Bool {
+		return true
+	}
 }
 
 private var calloutWindowCornerRadius: CGFloat = 5.0
