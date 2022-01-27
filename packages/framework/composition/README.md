@@ -1,6 +1,8 @@
 # @fluentui-react-native/composition
 
-This package contains the `composeFactory` which all components created using the `compose` function under `@fluentui-react-native/framework` use to construct the component itself. The `composeFactory` returns a [staged component](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/use-slot) with two additional functions, `customize` and `compose`. These functions allow for these components to have a degree of extensibility.
+This package contains the component factory for all components created using the `compose` function under `@fluentui-react-native/framework`. We generally refer to this as the `compose` framework. This framework has built-in functionality for integrating a theme with a component to style it, and allows for extensibility of the created component using two additional functions, `customize` and `compose`, which you can call on the component to create a new component.
+
+The component factory takes in a set of options. The options object allows the component's author to define a component's [slots](https://github.com/microsoft/fluentui-react-native/blob/master/CONTRIBUTING.md#slots), how the props for those slots are calculated, additional states of the component (such as hovered, pressed, or selected), the component's [tokens](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/use-tokens) and their default values, and the component's render function.
 
 ## Customize
 
