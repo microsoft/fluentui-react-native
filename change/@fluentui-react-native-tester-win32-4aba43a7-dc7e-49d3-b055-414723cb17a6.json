@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added Presence Badge",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "v.kozlova13@gmail.com",
+  "dependentChangeType": "patch"
+}
