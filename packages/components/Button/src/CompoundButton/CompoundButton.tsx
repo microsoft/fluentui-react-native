@@ -74,5 +74,3 @@ export const CompoundButton = compose<CompoundButtonType>({
     };
   },
 });
-
-export default CompoundButton;

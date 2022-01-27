@@ -70,5 +70,3 @@ export const ToggleButton = compose<ToggleButtonType>({
     };
   },
 });
-
-export default ToggleButton;

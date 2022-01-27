@@ -74,5 +74,3 @@ export const FAB = compose<FABType>({
     };
   },
 });
-
-export default FAB;
