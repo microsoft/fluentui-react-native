@@ -51,7 +51,7 @@ Variant options are the same as the base `Button` component.
 
 The `ToggleButton` component has three slots, or parts. The slots behave as follows:
 
-- `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
+- `root` - The outer container representing the `ToggleButton` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `content` - If specified, renders the first entry of `children` as text.
 

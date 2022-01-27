@@ -38,11 +38,11 @@ Android:
 
 The `FAB` component has two slots, or parts. The slots behave as follows:
 
-- `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
+- `root` - The outer container representing the `FAB` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `content` - If specified, renders the first entry of `children` as text.
 
-The slots can be modified using the `compose` function on the `Button`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
+The slots can be modified using the `compose` function on the `FAB`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
 
 ### Props
 
