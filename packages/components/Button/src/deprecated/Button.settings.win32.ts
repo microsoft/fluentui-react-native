@@ -2,6 +2,10 @@ import { buttonName, IButtonType } from './Button.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Button.
+ */
 export const settings: IComposeSettings<IButtonType> = [
   {
     tokens: {
