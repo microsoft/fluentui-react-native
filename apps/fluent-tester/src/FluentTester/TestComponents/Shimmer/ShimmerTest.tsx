@@ -23,11 +23,11 @@ const RectCircleShimmers: React.FunctionComponent<Record<string, never>> = () =>
   );
 };
 
-const CustomizedShimmer: React.FunctionComponent<Record<string, never>> = () => {
-  const PinkShimmer = Shimmer.customize({
-    shimmerWaveColor: 'pink',
-  });
+const PinkShimmer = Shimmer.customize({
+  shimmerWaveColor: 'pink',
+});
 
+const CustomizedShimmer: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
       <PinkShimmer elements={shimmerRectsAndCircle()} duration={1500} delay={500} style={{ height: 100, maxWidth: '50%' }} />

@@ -54,29 +54,29 @@ const otherCheckbox: React.FunctionComponent = () => {
   );
 };
 
+const CircleColorCheckbox = Checkbox.customize({
+  checkboxBackgroundColor: 'white',
+  checked: {
+    checkboxBackgroundColor: 'green',
+    checkboxBorderColor: 'green',
+    checkmarkColor: 'white',
+  },
+  focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+  hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+  pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
+});
+
+const HoverCheckbox = Checkbox.customize({
+  checked: {
+    checkboxBackgroundColor: 'black',
+    checkmarkColor: 'white',
+  },
+  hovered: {
+    checkmarkOpacity: 1,
+  },
+});
+
 const tokenCheckbox: React.FunctionComponent = () => {
-  const CircleColorCheckbox = Checkbox.customize({
-    checkboxBackgroundColor: 'white',
-    checked: {
-      checkboxBackgroundColor: 'green',
-      checkboxBorderColor: 'green',
-      checkmarkColor: 'white',
-    },
-    focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
-  });
-
-  const HoverCheckbox = Checkbox.customize({
-    checked: {
-      checkboxBackgroundColor: 'black',
-      checkmarkColor: 'white',
-    },
-    hovered: {
-      checkmarkOpacity: 1,
-    },
-  });
-
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 

@@ -51,6 +51,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   };
 
   const CustomizedPersona = Persona.customize({ tokens });
+
   return (
     <View style={commonStyles.root}>
       {/* settings */}

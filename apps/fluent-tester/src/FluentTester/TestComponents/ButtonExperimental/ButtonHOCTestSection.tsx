@@ -5,22 +5,23 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
+const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
+const CustomButton = Button.customize({ backgroundColor: 'pink' });
+const ComposedButton = Button.compose({
+  slots: {
+    root: View,
+    icon: Icon,
+    content: CustomText,
+  },
+  slotProps: {
+    content: {
+      style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
+    },
+  },
+});
+
 export const ButtonHOCTest: React.FunctionComponent = () => {
   const buttonRef = React.useRef(null);
-  const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
-  const CustomButton = Button.customize({ backgroundColor: 'pink' });
-  const ComposedButton = Button.compose({
-    slots: {
-      root: View,
-      icon: Icon,
-      content: CustomText,
-    },
-    slotProps: {
-      content: {
-        style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
-      },
-    },
-  });
 
   return (
     <View style={stackStyle}>

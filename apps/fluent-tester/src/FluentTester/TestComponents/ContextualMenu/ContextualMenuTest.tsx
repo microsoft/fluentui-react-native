@@ -232,6 +232,9 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   );
 };
 
+// custom text
+const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
+
 const IconContextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
@@ -257,9 +260,6 @@ const IconContextualMenu: React.FunctionComponent = () => {
     setShowContextualMenu(false);
     setIsContextualMenuVisible(false);
   }, [setShowContextualMenu]);
-
-  // custom text
-  const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
 
   return (
     <View>
