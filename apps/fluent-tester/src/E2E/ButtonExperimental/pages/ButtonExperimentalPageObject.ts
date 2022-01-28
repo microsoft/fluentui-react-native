@@ -2,7 +2,7 @@ import {
   EXPERIMENTAL_BUTTON_TEST_PAGE,
   BUTTONEXPERIMENTAL_TEST_COMPONENT,
   BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT,
-  HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
+  HOMEPAGE_BUTTON_BUTTON,
 } from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
@@ -27,7 +27,7 @@ class ButtonExperimentalPageObject extends BasePage {
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL);
+    return By(HOMEPAGE_BUTTON_BUTTON);
   }
 }
 

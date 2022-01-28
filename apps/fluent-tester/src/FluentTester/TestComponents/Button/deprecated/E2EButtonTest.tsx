@@ -12,7 +12,7 @@ import {
   BUTTON_TEST_COMPONENT_LABEL,
 } from '../consts';
 
-export const E2EButtonTest: React.FunctionComponent = () => {
+export const E2EButtonTest_deprecated: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);
 
   const onClick = React.useCallback(() => {

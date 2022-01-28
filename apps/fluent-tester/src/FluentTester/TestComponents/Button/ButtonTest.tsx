@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ButtonFocusTest } from './deprecated/ButtonFocusTest';
+import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
 import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
 import { BUTTON_TESTPAGE, EXPERIMENTAL_BUTTON_TEST_PAGE } from './consts';
-import { E2EButtonTest } from './deprecated/E2EButtonTest';
+import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
 import { ToggleButtonTest } from './ToggleButtonTestSection';
@@ -45,7 +45,7 @@ const buttonSections: TestSection[] = [
   {
     name: 'Deprecated Basic Button',
     testID: BUTTON_TESTPAGE,
-    component: ButtonFocusTest,
+    component: ButtonFocusTest_deprecated,
   },
   {
     name: 'Deprecated Icon Button',
@@ -53,7 +53,7 @@ const buttonSections: TestSection[] = [
   },
   {
     name: 'Deprecated E2E Button Testing',
-    component: E2EButtonTest,
+    component: E2EButtonTest_deprecated,
   },
 ];
 
