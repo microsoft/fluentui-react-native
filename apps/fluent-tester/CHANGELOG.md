@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 26 Jan 2022 20:31:04 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Jan 2022 10:39:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.51.4
+
+Thu, 27 Jan 2022 10:39:35 GMT
+
+### Patches
+
+- Added Presence Badge (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.7
 
 ## 0.51.3
 
