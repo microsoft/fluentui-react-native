@@ -1,4 +1,4 @@
-import { ToggleButton } from '@fluentui-react-native/experimental-button';
+import { ToggleButton } from '@fluentui-react-native/button';
 import { Checkbox } from '@fluentui/react-native';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';

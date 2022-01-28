@@ -5,6 +5,7 @@ import { commonTestStyles, stackStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 
+// Test also pulls button from deprecated package to ensure it's still working
 export const ButtonVariantTest: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
     src: TestSvg,

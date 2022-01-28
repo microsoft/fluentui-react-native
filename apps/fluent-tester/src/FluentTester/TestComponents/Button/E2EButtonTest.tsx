@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Text } from '@fluentui/react-native';
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV2 as Button } from '@fluentui-react-native/button';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { View } from 'react-native';

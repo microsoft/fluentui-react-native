@@ -1,4 +1,4 @@
-import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
+import { ButtonV2 as Button, CompoundButton } from '@fluentui-react-native/button';
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
