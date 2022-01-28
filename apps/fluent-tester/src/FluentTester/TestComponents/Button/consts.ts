@@ -11,8 +11,6 @@ export const BUTTON_TEST_COMPONENT_LABEL = 'Test Button2 - No Accessibility Labe
 
 export const BUTTON_ON_PRESS = 'Button_On_Press'; // For testing the press functionality on a button
 
-export const EXPERIMENTAL_BUTTON_TEST_PAGE = 'ButtonExperimental_TestPage'; // A component on each specific test page.
-
 /* Test Button 1 */
 export const BUTTONEXPERIMENTAL_TEST_COMPONENT = 'Button_Test_Component'; // A component on each specific test page
 export const BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL = 'E2E testing Button accessibility label';

@@ -1,5 +1,5 @@
 import {
-  EXPERIMENTAL_BUTTON_TEST_PAGE,
+  BUTTON_TESTPAGE,
   BUTTONEXPERIMENTAL_TEST_COMPONENT,
   BUTTONEXPERIMENTAL_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_BUTTON_BUTTON,
@@ -11,11 +11,11 @@ class ButtonExperimentalPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(EXPERIMENTAL_BUTTON_TEST_PAGE);
+    return By(BUTTON_TESTPAGE);
   }
 
   get _pageName() {
-    return EXPERIMENTAL_BUTTON_TEST_PAGE;
+    return BUTTON_TESTPAGE;
   }
 
   get _primaryComponent() {

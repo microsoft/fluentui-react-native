@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
 import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
-import { BUTTON_TESTPAGE, EXPERIMENTAL_BUTTON_TEST_PAGE } from './consts';
+import { BUTTON_TESTPAGE } from './consts';
 import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ButtonVariantTest } from './ButtonVariantTestSection';
@@ -15,7 +15,7 @@ import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 const buttonSections: TestSection[] = [
   {
     name: 'Button Variants',
-    testID: EXPERIMENTAL_BUTTON_TEST_PAGE,
+    testID: BUTTON_TESTPAGE,
     component: ButtonVariantTest,
   },
   {
@@ -44,7 +44,6 @@ const buttonSections: TestSection[] = [
   },
   {
     name: 'Deprecated Basic Button',
-    testID: BUTTON_TESTPAGE,
     component: ButtonFocusTest_deprecated,
   },
   {
