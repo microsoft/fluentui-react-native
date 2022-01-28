@@ -8,6 +8,17 @@ import BadgeSvg from './oof.svg';
 
 import { SvgIconProps } from '@fluentui-react-native/icon';
 
+const BadgeNoBorder = Badge.customize({
+  borderColor: 'transparent',
+  borderWidth: 0,
+});
+
+const StyledBadge = Badge.customize({
+  backgroundColor: 'yellow',
+  borderColor: '#f09',
+  borderWidth: 4,
+});
+
 export const BasicBadge: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
     src: BadgeSvg,
@@ -19,17 +30,6 @@ export const BasicBadge: React.FunctionComponent = () => {
     codepoint: 0x2663,
     fontSize: 16,
   };
-
-  const BadgeNoBorder = Badge.customize({
-    borderColor: 'transparent',
-    borderWidth: 0,
-  });
-
-  const StyledBadge = Badge.customize({
-    backgroundColor: 'yellow',
-    borderColor: '#f09',
-    borderWidth: 4,
-  });
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };

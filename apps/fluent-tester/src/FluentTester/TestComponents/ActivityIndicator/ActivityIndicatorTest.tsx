@@ -7,14 +7,15 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
+const CustomizedActivityIndicator = ActivityIndicator.customize({
+  activityIndicatorColor: 'orange',
+});
+
 const activityIndicatorTest: React.FunctionComponent = () => {
   /** Customize doesn't do anything
    * Tried having tokens not be props, but didn't work
    * Not sure how to test/check where the tokens are passed through other than just looking at the final render
    */
-  const CustomizedActivityIndicator = ActivityIndicator.customize({
-    activityIndicatorColor: 'orange',
-  });
   return (
     <Stack style={stackStyle}>
       <Text>Extra Small</Text>
