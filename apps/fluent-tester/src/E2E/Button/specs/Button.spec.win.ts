@@ -3,9 +3,9 @@ import ButtonPageObject from '../pages/ButtonPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import {
-  BUTTON_TEST_COMPONENT,
-  BUTTON_ACCESSIBILITY_LABEL,
-  BUTTON_TEST_COMPONENT_LABEL,
+  BUTTON_TEST_COMPONENT_DEPRECATED,
+  BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
+  BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
 } from '../../../FluentTester/TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -40,11 +40,11 @@ describe('Button Accessibility Testing', () => {
   });
 
   it('Button - Set accessibilityLabel', () => {
-    expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL);
+    expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL_DEPRECATED);
   });
 
   it('Button - Do not set accessibilityLabel -> Default to Button label', () => {
-    expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);
+    expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL_DEPRECATED);
   });
 });
 
@@ -63,14 +63,14 @@ describe('Button Functional Testing', () => {
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', () => {
-    ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT, Keys.Enter);
+    ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT_DEPRECATED, Keys.Enter);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
 
     ButtonPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {
-    ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT, Keys.Spacebar);
+    ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT_DEPRECATED, Keys.Spacebar);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
   });
 });

@@ -2,10 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage.win';
 import ButtonExperimentalPageObject from '../pages/ButtonExperimentalPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/consts';
-import {
-  BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL,
-  BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL,
-} from '../../../FluentTester/TestComponents/Button/consts';
+import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../FluentTester/TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Button Testing Initialization', function () {
@@ -37,14 +34,12 @@ describe('Experimental Button Accessibility Testing', () => {
   it('Experimental Button - Set accessibilityLabel', () => {
     ButtonExperimentalPageObject.scrollToTestElement();
     ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL);
+    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL);
   });
 
   it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', () => {
     ButtonExperimentalPageObject.scrollToTestElement();
     ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL,
-    );
+    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);
   });
 });
