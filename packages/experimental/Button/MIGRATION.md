@@ -35,7 +35,9 @@ Primary and Stealth buttons now map to `Button`:
 
 - Cannot use both `startIcon` and `endIcon` at the same time in v1
 
-## Migration from FluentUI v9 Button
+## Porting from FluentUI v9 Button
+
+The FURN button cannot be used in place of a FluentUI button - these buttons are intended to be used on their respective platforms.
 
 ### Props that remain as is
 
@@ -67,8 +69,10 @@ No `Button` specific renames. See [this porting guide](../../../docs/pages/Guide
 | -------------- | -------------- |
 | `componentRef` | `componentRef` |
 | `content`      |                |
+| `disabled`     | `disabled`     |
 | `endIcon`      | `iconPosition` |
 | `icon`         | `icon`         |
 | `onClick`      | `onClick`      |
 | `statIcon`     | `iconPosition` |
+| `testId`       | `testId`       |
 | `tooltip`      | `tooltip`      |

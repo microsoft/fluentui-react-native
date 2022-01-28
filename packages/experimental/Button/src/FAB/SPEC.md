@@ -2,7 +2,11 @@
 
 ## Background
 
-The `FAB` is a `Button` that is designed for mobile scenarios. This button only renders on mobile platforms.
+`FAB` stands for `Floating Action Button`. The `FAB` is a `Button` that is designed for mobile scenarios to signal primary actions to the user. This button only renders on mobile platforms.
+
+## Requirements
+
+If using FURN's theming, the `FAB` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
 
 ## Sample Code
 
@@ -15,6 +19,8 @@ Basic examples:
 <FAB appearance="primary">Text</FAB>
 <FAB disabled>Text</FAB>
 ```
+
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -30,8 +36,13 @@ Android:
 
 ### Slots
 
-- `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
+The `FAB` component has two slots, or parts. The slots behave as follows:
+
+- `root` - The outer container representing the `FAB` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
+- `content` - If specified, renders the first entry of `children` as text.
+
+The slots can be modified using the `compose` function on the `FAB`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
 
 ### Props
 
@@ -63,6 +74,8 @@ export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPres
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control by using the `customize` function on the `FAB`. For more information on using the `customize` API, please see [this page(../../../../framework/composition/README.md). The `FAB` has the following tokens:
 
 ```ts
 export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
