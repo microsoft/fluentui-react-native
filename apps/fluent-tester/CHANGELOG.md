@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 27 Jan 2022 10:39:35 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Jan 2022 20:52:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.51.5
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.1
+- Bump @fluentui/react-native to v0.27.23
 
 ## 0.51.4
 
