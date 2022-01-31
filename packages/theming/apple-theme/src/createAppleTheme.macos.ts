@@ -10,6 +10,10 @@ export function createAppleTheme(): ThemeReference {
   appleThemeReference = new ThemeReference({} as Theme, () => {
     return getBaseAppleThemeMacOS();
   });
+  // Invalidate theme and set prop when high contrast setting changes
+  AccessibilityInfo.addEventListener('highContrastChanged', () => {
+    highContrastHandler();
+  });
 
   Appearance.addChangeListener(() => {
     appleThemeReference.invalidate();
