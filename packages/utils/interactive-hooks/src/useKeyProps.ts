@@ -18,7 +18,7 @@ const noOp = () => {};
  * @param userCallback The function you want to be called once the key has been activated on key up
  * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
  * @returns onKeyEvent() - Callback to determine if key was pressed, if so, call userCallback
- * @deprecated use useKeyUpProps or useKeyDownProps instead
+ * @deprecated use the hook `useKeyProps` instead
  */
 export function useKeyCallback(_userCallback?: KeyCallback, ..._keys: string[]) {
   return noOp;
@@ -44,3 +44,11 @@ export const useKeyUpProps = noOp2;
  * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
  */
 export const useKeyDownProps = noOp2;
+
+/**
+ * Re-usable hook for keyboard events. on macOS, this is onKeyDown, while on windows this is onKeyUp.
+ * @param userCallback The function you want to be called once the key has been activated on key down
+ * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
+ * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
+ */
+export const useKeyProps = noOp2;

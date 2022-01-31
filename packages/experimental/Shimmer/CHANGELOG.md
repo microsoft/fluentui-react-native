@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Jan 2022 20:21:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.13
+
+Thu, 20 Jan 2022 20:21:28 GMT
+
+### Patches
+
+- Revert RTL changes to Win32 Shimmer (sanajmi@microsoft.com)
 
 ## 0.6.12
 

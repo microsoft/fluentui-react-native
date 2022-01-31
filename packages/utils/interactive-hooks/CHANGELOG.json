@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 26 Jan 2022 20:31:04 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4",
+            "comment": "Revert \"Add ref to v1 Button (#1218)\""
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 26 Jan 2022 17:02:27 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "883ef66b94a1efb5d429c5ecad015f312be3b4c3",
+            "comment": "Adding code that was added to usKeyProps.win32. I believe this was accidently left out of a previous PR and it broke our UWP app"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Jan 2022 21:55:30 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.11.15",
+      "version": "0.11.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "ca505d0e9d6b3286c0025bde70305f4bbb49a7f2",
+            "comment": "Default to onKeyDown on macOS"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Jan 2022 16:48:23 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.11.14",
+      "version": "0.11.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "f522217240f2b510443e2f898d212df2ee114398",
+            "comment": "Add Keyboarding integration for Windows"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 21:49:07 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.11.13",
       "version": "0.11.13",

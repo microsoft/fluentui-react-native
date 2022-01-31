@@ -2,17 +2,17 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
-import { ToggleButtonPropsWithInnerRef, ToggleButtonProps, toggleButtonName, ToggleButtonType } from './ToggleButton.types';
+import { ToggleButtonProps, toggleButtonName, ToggleButtonType } from './ToggleButton.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './ToggleButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
-import { IFocusable, useAsToggle } from '@fluentui-react-native/interactive-hooks';
+import { useAsToggle } from '@fluentui-react-native/interactive-hooks';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { buttonLookup } from '../Button';
 
-const ToggleButtonComposed = compose<ToggleButtonType>({
+export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
   ...stylingSettings,
   slots: {
@@ -20,7 +20,7 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ToggleButtonPropsWithInnerRef, useSlots: UseSlots<ToggleButtonType>) => {
+  render: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
     const { defaultChecked, checked, onClick, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
 
@@ -35,7 +35,7 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
     const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ToggleButtonPropsWithInnerRef, ...children: React.ReactNode[]) => {
+    return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {
       const { icon, iconPosition, iconOnly, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
       const shouldShowIcon = !loading && icon;
 
@@ -70,9 +70,5 @@ const ToggleButtonComposed = compose<ToggleButtonType>({
     };
   },
 });
-
-export const ToggleButton = React.forwardRef<IFocusable, ToggleButtonProps>((props, ref) => (
-  <ToggleButtonComposed {...props} innerRef={ref} />
-));
 
 export default ToggleButton;

@@ -1,4 +1,4 @@
-import { TEXT_TESTPAGE, TEXT_TEST_COMPONENT, HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
+import { TEXT_TESTPAGE, FIRST_TEXT_COMPONENT, HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 class TextPageObject extends BasePage {
@@ -14,7 +14,7 @@ class TextPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(TEXT_TEST_COMPONENT);
+    return By(FIRST_TEXT_COMPONENT);
   }
 
   get _pageButton() {

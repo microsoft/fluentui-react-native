@@ -1,8 +1,108 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 19 Jan 2022 00:57:04 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Jan 2022 20:52:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.51.5
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.1
+- Bump @fluentui/react-native to v0.27.23
+
+## 0.51.4
+
+Thu, 27 Jan 2022 10:39:35 GMT
+
+### Patches
+
+- Added Presence Badge (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.7
+
+## 0.51.3
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Let's add some tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.6
+- Bump @fluentui-react-native/button to v0.21.18
+- Bump @fluentui-react-native/experimental-button to v0.12.0
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.0
+- Bump @fluentui-react-native/experimental-tabs to v0.4.17
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+- Bump @fluentui/react-native to v0.27.22
+
+## 0.51.2
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.5
+- Bump @fluentui-react-native/button to v0.21.17
+- Bump @fluentui-react-native/experimental-button to v0.11.21
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.25
+- Bump @fluentui-react-native/experimental-tabs to v0.4.16
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui/react-native to v0.27.21
+
+## 0.51.1
+
+Tue, 25 Jan 2022 21:55:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.4
+- Bump @fluentui-react-native/button to v0.21.16
+- Bump @fluentui-react-native/experimental-button to v0.11.20
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.24
+- Bump @fluentui-react-native/experimental-tabs to v0.4.15
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+- Bump @fluentui/react-native to v0.27.20
+
+## 0.51.0
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Minor changes
+
+- Adding Text A11y Tests (safreibe@microsoft.com)
+- Adding Button/Checkbox functional tests (safreibe@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.3
+- Bump @fluentui-react-native/button to v0.21.15
+- Bump @fluentui-react-native/experimental-button to v0.11.19
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.23
+- Bump @fluentui-react-native/experimental-tabs to v0.4.14
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+- Bump @fluentui/react-native to v0.27.19
+
+## 0.50.28
+
+Thu, 20 Jan 2022 21:05:25 GMT
+
+### Patches
+
+- Added Badge component. (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.2
+- Bump @fluentui-react-native/experimental-button to v0.11.18
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.22
+
+## 0.50.27
+
+Thu, 20 Jan 2022 20:21:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.13
 
 ## 0.50.26
 

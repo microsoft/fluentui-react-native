@@ -52,6 +52,18 @@ export class BasePage {
     return this._pageButton.isDisplayed();
   }
 
+  clickComponent(): void {
+    this._primaryComponent.click();
+  }
+
+  /* ****TODO****: I need to better use the ComponentSelector for this. We shouldn't have the spec needing to import the constant string */
+  sendKey(componentID?: string, key?: string): void {
+    const component = By(componentID);
+    if (component.isDisplayed()) {
+      component.addValue(key); // Adding a value sends the key on that component
+    }
+  }
+
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
@@ -109,6 +121,7 @@ export class BasePage {
     while (!this._primaryComponent.isDisplayed()) {
       driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
     }
+    driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,

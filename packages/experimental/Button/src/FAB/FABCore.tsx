@@ -7,8 +7,8 @@ import { stylingSettings } from './FAB.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps, IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { ButtonCorePropsWithInnerRef, ButtonCoreProps } from '../Button.types';
+import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { ButtonCoreProps } from '../Button.types';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -18,13 +18,13 @@ import { ButtonCorePropsWithInnerRef, ButtonCoreProps } from '../Button.types';
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCorePropsWithInnerRef): boolean => {
+const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCoreProps): boolean => {
   return (
     state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIconBefore' && userProps.icon)
   );
 };
 
-const FABComposed = compose<FABType>({
+export const FAB = compose<FABType>({
   displayName: fabName,
   ...stylingSettings,
   slots: {
@@ -32,7 +32,7 @@ const FABComposed = compose<FABType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonCorePropsWithInnerRef, useSlots: UseSlots<FABType>) => {
+  render: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
     const { icon, onClick, ...rest } = userProps;
 
     const iconProps = createIconProps(userProps.icon);
@@ -42,7 +42,7 @@ const FABComposed = compose<FABType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonCorePropsWithInnerRef, ...children: React.ReactNode[]) => {
+    return (final: ButtonCoreProps, ...children: React.ReactNode[]) => {
       const { iconOnly, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
 
       if (__DEV__ && iconOnly) {
@@ -74,7 +74,5 @@ const FABComposed = compose<FABType>({
     };
   },
 });
-
-export const FAB = React.forwardRef<IFocusable, ButtonCoreProps>((props, ref) => <FABComposed {...props} innerRef={ref} />);
 
 export default FAB;
