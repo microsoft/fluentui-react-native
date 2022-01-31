@@ -8,9 +8,9 @@ export const defaultToggleButtonColorTokens: TokenSettings<ToggleButtonTokens, T
     backgroundColor: t.colors.neutralBackground1Selected,
     borderColor: t.colors.neutralStroke1,
     primary: {
+      color: t.colors.neutralForegroundOnBrandSelected,
       backgroundColor: t.colors.brandBackgroundSelected,
       borderColor: t.colors.brandBackgroundSelected,
-      color: t.colors.neutralForeground1Selected,
     },
     subtle: {
       color: t.colors.neutralForeground1Selected,
