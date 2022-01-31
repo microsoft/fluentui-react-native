@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/styling-utils",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "description": "Utility functions for styling components in FURN",
   "main": "src/index.ts",
   "module": "lib/index.js",
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@uifabricshared/build-native": "^0.1.1"
+    "@fluentui-react-native/scripts": "^0.1.1"
   },
   "peerDependencies": {
     "react": "^17.0.1",

@@ -26,18 +26,21 @@ export const useTabs = (props: TabsProps): TabsInfo => {
     [setSelectedTabsItemRef],
   );
 
-  const findTabId = React.useCallback((key: string, index: number) => {
-    if (getTabId) {
-      return getTabId(key, index);
-    }
-    return `${key}-Tab${index}`;
-  }, [getTabId]);
+  const findTabId = React.useCallback(
+    (key: string, index: number) => {
+      if (getTabId) {
+        return getTabId(key, index);
+      }
+      return `${key}-Tab${index}`;
+    },
+    [getTabId],
+  );
 
   // Stores views to be displayed.
   const map = new Map<string, React.ReactNode[]>();
 
   const state: TabsState = {
-    context:{
+    context: {
       selectedKey: selectedKey ?? data.selectedKey,
       onTabsClick: data.onKeySelect,
       getTabId: findTabId,
@@ -58,7 +61,7 @@ export const useTabs = (props: TabsProps): TabsInfo => {
       isCircularNavigation: props.isCircularNavigation ?? false,
     },
     state: {
-      ...state
+      ...state,
     },
   };
 };

@@ -1,8 +1,65 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Thu, 06 Jan 2022 23:14:38 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.18
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.14
+- Bump @fluentui-react-native/callout to v0.19.16
+- Bump @fluentui-react-native/checkbox to v0.14.13
+- Bump @fluentui-react-native/contextual-menu to v0.14.11
+- Bump @fluentui-react-native/focus-trap-zone to v0.8.13
+- Bump @fluentui-react-native/focus-zone to v0.8.13
+- Bump @fluentui-react-native/interactive-hooks to v0.11.13
+- Bump @fluentui-react-native/link to v0.15.14
+- Bump @fluentui-react-native/menu-button to v0.7.18
+- Bump @fluentui-react-native/persona to v0.12.11
+- Bump @fluentui-react-native/persona-coin to v0.10.11
+- Bump @fluentui-react-native/pressable to v0.8.13
+- Bump @fluentui-react-native/radio-group to v0.14.13
+- Bump @fluentui-react-native/separator to v0.11.11
+- Bump @fluentui-react-native/tabs to v0.6.13
+- Bump @fluentui-react-native/text to v0.11.8
+
+## 0.27.17
+
+Fri, 14 Jan 2022 01:00:01 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/button to v0.21.13
+- Bump @fluentui-react-native/callout to v0.19.15
+- Bump @fluentui-react-native/checkbox to v0.14.12
+- Bump @fluentui-react-native/contextual-menu to v0.14.10
+- Bump @fluentui-react-native/focus-trap-zone to v0.8.12
+- Bump @fluentui-react-native/focus-zone to v0.8.12
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+- Bump @fluentui-react-native/link to v0.15.13
+- Bump @fluentui-react-native/menu-button to v0.7.17
+- Bump @fluentui-react-native/persona to v0.12.10
+- Bump @fluentui-react-native/persona-coin to v0.10.10
+- Bump @fluentui-react-native/pressable to v0.8.12
+- Bump @fluentui-react-native/radio-group to v0.14.12
+- Bump @fluentui-react-native/separator to v0.11.10
+- Bump @fluentui-react-native/tabs to v0.6.12
+- Bump @fluentui-react-native/text to v0.11.7
+
+## 0.27.16
+
+Fri, 14 Jan 2022 00:10:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.12
+- Bump @fluentui-react-native/link to v0.15.12
+- Bump @fluentui-react-native/menu-button to v0.7.16
 
 ## 0.27.15
 

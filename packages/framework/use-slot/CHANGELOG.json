@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/use-slot",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 01:00:04 GMT",
+      "tag": "@fluentui-react-native/use-slot_v0.2.5",
+      "version": "0.2.5",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/use-slot",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Dec 2021 20:56:31 GMT",
       "tag": "@fluentui-react-native/use-slot_v0.2.5",
       "version": "0.2.5",

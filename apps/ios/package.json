@@ -26,7 +26,7 @@
     "directory": "apps/ios"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.50.21",
+    "@fluentui-react-native/tester": "^0.50.26",
     "@react-native-community/slider": "^4.1.12",
     "react": "17.0.1",
     "react-native": "^0.64.2",
@@ -38,7 +38,7 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
-    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "flow-bin": "^0.113.0",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",

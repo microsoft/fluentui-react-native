@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/experimental-drawer": "*",
-    "@fluentui-react-native/tester": "^0.50.21",
+    "@fluentui-react-native/tester": "^0.50.26",
     "@react-native-community/slider": "^4.1.12",
     "@react-native-picker/picker": "^1.16.7",
     "hermes-engine": "~0.7.0",
@@ -41,7 +41,7 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
-    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "flow-bin": "^0.113.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^0.14.3",

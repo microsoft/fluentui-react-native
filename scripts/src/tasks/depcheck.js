@@ -9,7 +9,7 @@ function mergeOneLevel(a, b = {}) {
 }
 
 function scriptsDevDeps() {
-  const config = require('@uifabricshared/build-native/package.json');
+  const config = require('@fluentui-react-native/scripts/package.json');
   return Object.keys(config.devDependencies);
 }
 
@@ -22,7 +22,7 @@ function depcheckTask() {
     const options = mergeOneLevel(
       {
         ignorePatterns: ['*eslint*', '/lib/*', '/lib-commonjs/*'],
-        ignoreMatches: ['@uifabricshared/build-native', '@fluentui-react-native/eslint-config-rules', 'tslib', ...scriptsDevDeps()],
+        ignoreMatches: ['@fluentui-react-native/scripts', '@fluentui-react-native/eslint-config-rules', 'tslib', ...scriptsDevDeps()],
         specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest],
       },
       config.depcheck,

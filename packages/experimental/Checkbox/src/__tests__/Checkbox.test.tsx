@@ -14,7 +14,7 @@ describe('Checkbox component tests', () => {
 
   it('Checkbox all props', () => {
     const tree = renderer
-      .create(<Checkbox label="All Props Checkbox" onChange={onChange} defaultChecked={true} labelPosition="before" disabled />)
+      .create(<Checkbox label="All Props Checkbox" onChange={onChange} defaultChecked={true} labelPosition="before" disabled circular />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -27,13 +27,15 @@ describe('Checkbox component tests', () => {
       checkboxBackgroundColor: 'blue',
       checkboxBorderColor: 'red',
       checkboxBorderRadius: 5,
-      checkboxMarginEnd: 10,
-      checkboxMarginStart: 8,
+      checkboxBorderWidth: 2,
       checkmarkColor: 'pink',
       checkmarkOpacity: 0.7,
-      textBorderColor: 'green',
       backgroundColor: 'purple',
       color: 'yellow',
+      spacingLabelAfter: 7,
+      borderColor: 'green',
+      borderRadius: 4,
+      borderWidth: 1,
     });
     const tree = renderer.create(<BoldCheckbox label="All Tokens Checkbox" onChange={onChange} defaultChecked={false} />).toJSON();
     expect(tree).toMatchSnapshot();

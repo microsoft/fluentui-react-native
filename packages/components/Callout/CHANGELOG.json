@@ -2,6 +2,68 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 14 Jan 2022 21:49:07 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.16",
+      "version": "0.19.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.13",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.8",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jan 2022 01:00:01 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.15",
+      "version": "0.19.15",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ],
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/callout",
+            "commit": "ef3732e4e5b82e3f324ca0eed4b12b6617788299",
+            "comment": "fix disabled button"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.12",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.7",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Jan 2022 23:14:38 GMT",
       "tag": "@fluentui-react-native/callout_v0.19.14",
       "version": "0.19.14",

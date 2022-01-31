@@ -37,7 +37,7 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.1",
     "react-native": "^0.64.3"
   },

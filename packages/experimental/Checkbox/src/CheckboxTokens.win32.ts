@@ -5,19 +5,18 @@ import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    checkboxBorderColor: t.colors.neutralStrokeAccessible,
-    color: t.colors.neutralForeground1,
-    checkboxBackgroundColor: t.colors.neutralBackground1,
-    textBorderColor: 'transparent',
-    rootBorderColor: 'transparent',
-    checkmarkColor: t.colors.neutralForeground4,
-    variant: 'bodyStandard',
-    checkmarkOpacity: 0,
-    checkboxMarginEnd: 4,
-    borderStyle: 'solid',
-    borderWidth: globalTokens.stroke.width.thin,
     borderRadius: globalTokens.corner.radius.small,
-    marginLeft: 0,
+    checkboxBorderWidth: globalTokens.stroke.width.thin,
+    checkboxBorderRadius: globalTokens.corner.radius.small,
+    checkboxBackgroundColor: t.colors.neutralBackground1,
+    checkboxBorderColor: t.colors.neutralStrokeAccessible,
+    checkboxSize: 16,
+    color: t.colors.neutralForeground1,
+    spacingLabelAfter: globalTokens.spacing.m,
+    fontSize: globalTokens.font.size[200],
+    fontWeight: globalTokens.font.weight.regular,
+    fontFamily: t.typography.families.primary,
+    checkmarkOpacity: 0,
     disabled: {
       checkboxBorderColor: t.colors.neutralStrokeDisabled,
       color: t.colors.neutralForegroundDisabled,
@@ -26,20 +25,20 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     hovered: {
       checkboxBackgroundColor: t.colors.neutralBackground1,
       checkboxBorderColor: t.colors.neutralStrokeAccessibleHover,
+      checkmarkColor: t.colors.neutralForeground4,
       checkmarkOpacity: 1,
+      color: t.colors.neutralForeground1,
       checked: {
         checkboxBackgroundColor: t.colors.brandBackgroundHover,
         checkboxBorderColor: t.colors.brandBackgroundHover,
       },
     },
-    focused: {
-      rootBorderColor: t.colors.strokeFocus2,
-      marginLeft: 1,
-    },
     pressed: {
       checkboxBackgroundColor: t.colors.neutralBackground1,
       checkboxBorderColor: t.colors.neutralStrokeAccessiblePressed,
       checkmarkColor: t.colors.neutralForeground1,
+      checkmarkOpacity: 1,
+      color: t.colors.neutralForeground1,
       checked: {
         checkboxBackgroundColor: t.colors.brandBackgroundPressed,
         checkboxBorderColor: t.colors.brandBackgroundPressed,
@@ -54,10 +53,11 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
         checkmarkColor: t.colors.neutralForegroundDisabled,
       },
     },
-    labelIsBefore: {
-      checkboxMarginEnd: 0,
-    },
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
+      checkboxBorderRadius: globalTokens.corner.radius.circle,
+    },
+    labelIsBefore: {
+      spacingLabelBefore: globalTokens.spacing.m,
+      spacingLabelAfter: 0,
     },
   } as CheckboxTokens);

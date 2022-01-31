@@ -1,2 +1,2 @@
-const { configureJest } = require('@uifabricshared/build-native');
+const { configureJest } = require('@fluentui-react-native/scripts');
 module.exports = configureJest();
