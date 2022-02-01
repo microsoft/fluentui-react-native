@@ -1,0 +1,99 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/fluentui-token-pipeline/main/docs/token.schema.json",
+  "Meta": {
+    "FluentUITokensVersion": 0
+  },
+  "Set": {
+    "NeutralForeground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.0" },
+          "Hover": { "aliasOf": "Global.Color.Grey.0" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.0" },
+          "Selected": { "aliasOf": "Global.Color.Grey.0" }
+        }
+      }
+    },
+    "NeutralForeground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.0" }
+        }
+      }
+    },
+    "NeutralForeground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.0" }
+        }
+      }
+    },
+    "NeutralForeground4": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.26" }
+        }
+      }
+    },
+
+    "NeutralBackgroundDisabled": {
+      "Fill": {
+        "Color": {
+          "Selected": { "aliasOf": "Global.Color.HC.Canvas" }
+        }
+      }
+    },
+    "NeutralStrokeAccessible": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.14" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStroke1": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.38" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStroke2": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.38" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStroke3": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.38" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "NeutralStrokeDisabled": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.88" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "TransparentStroke": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.0" },
+          "Hover": { "aliasOf": "Global.Color.Grey.14" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.8" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.74" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" },
+        "Alignment": { "value": "inner" }
+      }
+    }
+  }
+}
