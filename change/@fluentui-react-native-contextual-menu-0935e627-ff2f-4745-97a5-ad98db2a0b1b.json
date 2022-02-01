@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding MenuButton E2E Tests",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
