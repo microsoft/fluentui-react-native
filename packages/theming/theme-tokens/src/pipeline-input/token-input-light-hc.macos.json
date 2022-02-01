@@ -86,9 +86,9 @@
     "TransparentStroke": {
       "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.0" },
-          "Hover": { "aliasOf": "Global.Color.Grey.14" },
-          "Pressed": { "aliasOf": "Global.Color.Grey.8" },
+          "Rest": { "aliasOf": "Global.Color.Grey.52" },
+          "Hover": { "aliasOf": "Global.Color.Grey.40" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.16" },
           "Disabled": { "aliasOf": "Global.Color.Grey.74" }
         },
         "Width": { "aliasOf": "Global.Stroke.Width.Thin" },
