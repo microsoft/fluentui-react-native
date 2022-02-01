@@ -278,9 +278,9 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     neutralBackground3: macOSAliasColorTokens.neutralBackground3,
     neutralStrokeDisabled: macOSAliasColorTokens.neutralStrokeDisabled,
     transparentBackground: macOSAliasColorTokens.transparentBackground,
+    transparentStroke: macOSAliasColorTokens.transparentStroke,
   };
 }
-
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
  * The fallback palette is loaded while we wait for  the native theming module to load, or if the module is not found
  */
@@ -309,7 +309,6 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     variantBorder: applePlatform.separatorColor,
     variantBorderHovered: applePlatform.separatorColor,
     defaultStateBackground: applePlatform.controlBackgroundColor,
-
     errorText: fluentUIApple.dangerPrimary,
     warningText: fluentUIApple.warningPrimary,
     errorBackground: fluentUIApple.dangerTint10,
@@ -337,7 +336,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonBackgroundCheckedHovered: fluentUIApple.neutralBackground3,
     buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
     buttonBackgroundDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
-    buttonBorder: fluentUIApple.transparentBackground,
+    buttonBorder: fluentUIApple.transparentStroke,
     buttonText: fluentUIApple.neutralForeground3,
     buttonTextHovered: fluentUIApple.neutralForeground3,
     buttonTextChecked: fluentUIApple.neutralForeground3,
