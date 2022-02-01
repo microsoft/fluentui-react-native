@@ -19,7 +19,6 @@ export interface Spacing {
 export interface Theme {
   name?: string;
   colors: ThemeColorDefinition;
-  isHighContrastMode?: boolean;
   typography: Typography;
   components: {
     [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
