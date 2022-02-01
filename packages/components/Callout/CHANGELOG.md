@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Wed, 26 Jan 2022 20:31:04 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Jan 2022 20:52:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.21
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- ContextualMenu macOS: fix focus shifting on click (sanajmi@microsoft.com)
 
 ## 0.19.20
 
