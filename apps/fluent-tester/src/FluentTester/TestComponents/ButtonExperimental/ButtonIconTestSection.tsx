@@ -39,12 +39,6 @@ export const ButtonIconTest: React.FunctionComponent = () => {
       >
         Icon after
       </Button>
-      {svgIconsEnabled && (
-        <Button style={commonTestStyles.vmargin} icon={{ svgSource: svgProps }}>
-          Icon Button and Chevron
-          <SvgXml xml={chevronXml} />
-        </Button>
-      )}
       <Button icon={{ fontSource: fontBuiltInProps }} style={commonTestStyles.vmargin}>
         Font icon
       </Button>
@@ -67,6 +61,14 @@ export const ButtonIconTest: React.FunctionComponent = () => {
       <Button icon={testImage} style={commonTestStyles.vmargin}>
         PNG
       </Button>
+      {svgIconsEnabled && (
+        <Button style={commonTestStyles.vmargin} icon={{ svgSource: svgProps }}>
+          Icon Button and Chevron
+          <View style={{ paddingStart: 4 }}>
+            <SvgXml xml={chevronXml} />
+          </View>
+        </Button>
+      )}
     </View>
   );
 };
