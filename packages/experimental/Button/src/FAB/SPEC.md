@@ -48,6 +48,11 @@ The slots can be modified using the `compose` function on the `FAB`. For more in
 
 ```ts
 export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<IFocusable>;
+
   /*
    * Text to show on the Button.
    * Only used in FAB
@@ -58,8 +63,6 @@ export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPres
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
-
-  innerRef?: React.ForwardedRef<IFocusable>;
 
   /**
    * A callback to call on button click event
@@ -83,16 +86,6 @@ export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderT
    * The icon color.
    */
   iconColor?: ColorValue;
-
-  /**
-   * The icon color when hovering over the Button.
-   */
-  iconColorHovered?: ColorValue;
-
-  /**
-   * The icon color when the Button is being pressed.
-   */
-  iconColorPressed?: ColorValue;
 
   /**
    * The size of the icon.
