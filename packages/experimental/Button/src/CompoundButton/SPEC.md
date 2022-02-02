@@ -4,6 +4,10 @@
 
 The `CompoundButton` is a `Button` that is designed to show an extra line of text.
 
+## Requirements
+
+If using FURN's theming, the `CompoundButton` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+
 ## Sample Code
 
 Basic examples:
@@ -17,7 +21,7 @@ Basic examples:
 <CompoundButton size="small" secondaryContent="A second line">Text</CompoundButton>
 ```
 
-More examples in the Tester App.
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -49,9 +53,15 @@ The space for the icon is larger in a `CompoundButton`. The `CompoundButton` is 
 
 ### Slots
 
-- `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
+The `CompoundButton` component has three slots, or parts. The slots behave as follows:
+
+- `root` - The outer container representing the `CompoundButton` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
+- `contentContainer` - An inner container which wraps the text of the control.
+- `content` - If specified, renders the first entry of `children` as text.
+- `secondaryContent` - If specified, renders `text`, usually in a smaller font than the `content` slot to show that it is descriptive text.
+
+The slots can be modified using the `compose` function on the `CompoundButton`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
 
 ### Props
 
@@ -65,6 +75,8 @@ export interface CompoundButtonProps extends ButtonProps {
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control by using the `customize` function on the `Button`. For more information on using the `customize` API, please see [this page](../../../../framework/composition/README.md). The `CompoundButton` has the following tokens:
 
 ```ts
 export interface CompoundButtonTokens extends ButtonTokens {

@@ -4,6 +4,10 @@
 
 The `Button` component enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
 
+## Requirements
+
+If using FURN's theming, the `Button` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+
 ## Sample Code
 
 Basic examples:
@@ -18,7 +22,7 @@ Basic examples:
 <Button size="large">Text</Button>
 ```
 
-More examples in the Tester App.
+More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/ButtonExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -72,11 +76,17 @@ The `Button` component can be loading if it's waiting for another action to occu
 
 ### Slots
 
+The `Button` component has three slots, or parts. The slots behave as follows:
+
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `loader` - If specified, renders a `loader` before `children` while the `loading` flag is set to `true` in place of an icon. This slot is mutually exclusive to the icon slot.
+- `content` - If specified, renders the first entry of `children` as text.
+
+The slots can be modified using the `compose` function on the `Button`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
 
 ### Props
+
+Below is the set of props the button supports:
 
 ```ts
 export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -88,28 +98,21 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   appearance?: 'primary' | 'outline' | 'subtle';
 
   /**
-   * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
-   * `iconPosition` prop.
-   */
-  icon?: IconSourcesType;
-
-  /**
-   * Loader slot that, if specified, renders a `loader` before the `icon` and `children` while the `loading` flag
-   * is set to `true`.
-   */
-  loader?: ActivityIndicator;
-
-  /**
    * A button can fill the width of its container.
    * @default false
    */
   block?: boolean;
 
   /**
-   * A button can format its icon to appear before or after its content.
-   * @default 'before'
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
-  iconPosition?: 'before' | 'after';
+  componentRef?: IconSourcesType;
+
+  /**
+   * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
+   * `iconPosition` prop.
+   */
+  icon?: IconSourcesType;
 
   /**
    * Button contains only icon, there's no text content
@@ -118,18 +121,17 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   iconOnly?: boolean;
 
   /**
+   * A button can format its icon to appear before or after its content.
+   * @default 'before'
+   */
+  iconPosition?: 'before' | 'after';
+
+  /**
    * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
    * be interacted with.
    * @default false
    */
   loading?: boolean;
-
-  /**
-   * A ref to access the IButton interface. Use this to access the public methods and properties of the component.
-   *
-   * NOTE: Callbacks will not invoke focus on click behavior, caller will need to add that behavior if desired.
-   */
-  ref?: React.ForwardedRef<IFocusable>;
 
   /**
    * A button can be rounded, circular, or square.
@@ -156,6 +158,8 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 ```
 
 ### Styling Tokens
+
+Tokens can be used to customize the styling of the control by using the `customize` function on the `Button`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Button` has the following tokens:
 
 ```ts
 export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {

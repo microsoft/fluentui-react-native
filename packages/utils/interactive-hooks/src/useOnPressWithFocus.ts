@@ -11,13 +11,11 @@ export type OnPressWithFocusCallback = () => void;
  * RETURNS:
  *         onPressWithFocus() - Callback to set focus after calling the userCallback for onPress
  */
-export function useOnPressWithFocus(focusRef: React.ForwardedRef<any>, userCallback: OnPressCallback): OnPressWithFocusCallback {
+export function useOnPressWithFocus(focusRef: React.RefObject<any>, userCallback: OnPressCallback): OnPressWithFocusCallback {
   const onPressWithFocus = React.useCallback(
     (args?: any) => {
       userCallback && userCallback(args);
-      if (typeof focusRef !== 'function') {
-        focusRef?.current?.focus();
-      }
+      focusRef?.current?.focus();
     },
     [userCallback, focusRef],
   );

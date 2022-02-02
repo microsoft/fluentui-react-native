@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Tue, 25 Jan 2022 21:55:31 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.22
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @uifabricshared/foundation-compose to v1.11.9
+
+## 0.19.21
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- ContextualMenu macOS: fix focus shifting on click (sanajmi@microsoft.com)
+
+## 0.19.20
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+
+## 0.19.19
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
 
 ## 0.19.18
 

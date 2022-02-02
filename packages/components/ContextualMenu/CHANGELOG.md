@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Tue, 25 Jan 2022 21:55:30 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Minor changes
+
+- Adding MenuButton E2E Tests (safreibe@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.22
+- Bump @fluentui-react-native/focus-zone to v0.8.18
+- Bump @fluentui-react-native/icon to v0.11.6
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/text to v0.11.9
+- Bump @uifabricshared/foundation-compose to v1.11.9
+- Bump @fluentui-react-native/pressable to v0.8.18
+
+## 0.14.16
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.21
+
+## 0.14.15
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.20
+- Bump @fluentui-react-native/focus-zone to v0.8.17
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+- Bump @fluentui-react-native/pressable to v0.8.17
+
+## 0.14.14
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.19
+- Bump @fluentui-react-native/focus-zone to v0.8.16
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui-react-native/pressable to v0.8.16
 
 ## 0.14.13
 
