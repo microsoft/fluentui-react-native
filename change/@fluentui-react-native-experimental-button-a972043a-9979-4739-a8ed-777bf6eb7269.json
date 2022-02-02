@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update documentation",
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
