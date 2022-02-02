@@ -1,0 +1,10 @@
+{
+  "type": "patch",
+  "comment": {
+    "title": "",
+    "value": ""
+  },
+  "packageName": "@fluentui-react-native/experimental-button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
