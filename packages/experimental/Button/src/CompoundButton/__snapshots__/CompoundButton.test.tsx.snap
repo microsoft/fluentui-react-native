@@ -36,6 +36,7 @@ exports[`CompoundButton default 1`] = `
       "minWidth": 96,
       "padding": 11,
       "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
