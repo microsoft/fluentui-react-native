@@ -12,8 +12,8 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
-  exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
+  specs: ['../fluent-tester/src/E2E/Icon/specs/*.win.ts', '../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
+  exclude: [],
 
   maxInstances: 30,
   capabilities: [
@@ -155,8 +155,6 @@ exports.config = {
     if (results.passed) {
       return;
     }
-
-    console.log('\n\n\n\n\n\n In After Test \n\n\n\n\n\n');
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));

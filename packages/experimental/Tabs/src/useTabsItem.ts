@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAsPressable, useKeyUpProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
@@ -32,7 +32,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
     onFocus: changeSelection,
   });
 
-  const onKeyUpProps = useKeyUpProps(changeSelection, ' ', 'Enter');
+  const onKeyUpProps = useKeyProps(changeSelection, ' ', 'Enter');
 
   // Used when creating accessibility properties in mergeSettings below.
   const onAccessibilityAction = React.useCallback(

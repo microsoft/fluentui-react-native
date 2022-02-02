@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.18
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.9
+- Bump @fluentui-react-native/pressable to v0.8.18
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/text to v0.11.9
+
+## 0.14.17
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.8.17
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+
+## 0.14.16
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.8.16
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+
+## 0.14.15
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/pressable to v0.8.15
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+
+## 0.14.14
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.8.14
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
 
 ## 0.14.13
 

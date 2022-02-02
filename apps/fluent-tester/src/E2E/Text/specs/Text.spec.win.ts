@@ -21,7 +21,6 @@ describe('Text Testing Initialization', function () {
     TextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(TextPageObject.isPageLoaded()).toBeTruthy(TextPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(TextPageObject.didAssertPopup()).toBeFalsy(TextPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -34,13 +33,16 @@ describe('Text Accessibility Testing', () => {
 
   it('Text - Validate accessibilityRole is correct', () => {
     expect(TextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
+    expect(TextPageObject.didAssertPopup()).toBeFalsy(TextPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Text - Set accessibilityLabel', () => {
     expect(TextPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(TEXT_ACCESSIBILITY_LABEL);
+    expect(TextPageObject.didAssertPopup()).toBeFalsy(TextPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Text - Do not accessibilityLabel -> Default to content', () => {
     expect(TextPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(TEXT_COMPONENT_CONTENT);
+    expect(TextPageObject.didAssertPopup()).toBeFalsy(TextPageObject.ERRORMESSAGE_ASSERT);
   });
 });

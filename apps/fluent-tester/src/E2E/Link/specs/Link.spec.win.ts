@@ -21,7 +21,6 @@ describe('Link Testing Initialization', function () {
     LinkPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(LinkPageObject.isPageLoaded()).toBeTruthy(LinkPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -30,13 +29,17 @@ describe('Link Accessibility Testing', () => {
   it('Link - Validate accessibilityRole is correct', () => {
     LinkPageObject.scrollToTestElement();
     LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(LinkPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
+    expect(LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
   it('Link - Set accessibilityLabel', () => {
     LinkPageObject.scrollToTestElement();
     LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(LinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);
+    expect(LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
   // No need to test not setting a11y label. The content prop gets passed down to the child Text component. This equates to not setting the a11y label

@@ -1,8 +1,63 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Thu, 20 Jan 2022 21:05:26 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.2
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.15.0
+- Bump @fluentui-react-native/experimental-button to v0.12.1
+- Bump @fluentui-react-native/framework to v0.7.12
+
+## 0.3.1
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.16
+
+## 0.3.0
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Minor changes
+
+- Revert "Add ref to v1 Button (#1218)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.14.15
+- Bump @fluentui-react-native/experimental-button to v0.12.0
+
+## 0.2.25
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.14
+- Bump @fluentui-react-native/experimental-button to v0.11.21
+
+## 0.2.24
+
+Tue, 25 Jan 2022 21:55:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.13
+- Bump @fluentui-react-native/experimental-button to v0.11.20
+
+## 0.2.23
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.14.12
+- Bump @fluentui-react-native/experimental-button to v0.11.19
 
 ## 0.2.22
 

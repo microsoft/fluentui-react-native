@@ -19,7 +19,6 @@ describe('Shimmer Testing Initialization', function () {
     ShimmerPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ShimmerPageObject.isPageLoaded()).toBeTruthy(ShimmerPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(ShimmerPageObject.didAssertPopup()).toBeFalsy(ShimmerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

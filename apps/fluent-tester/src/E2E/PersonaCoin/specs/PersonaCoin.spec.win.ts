@@ -19,7 +19,6 @@ describe('PersonaCoin Testing Initialization', function () {
     PersonaCoinPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(PersonaCoinPageObject.isPageLoaded()).toBeTruthy(PersonaCoinPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(PersonaCoinPageObject.didAssertPopup()).toBeFalsy(PersonaCoinPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

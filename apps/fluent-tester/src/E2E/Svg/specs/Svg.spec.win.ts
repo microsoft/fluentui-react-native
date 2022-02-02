@@ -19,7 +19,6 @@ describe('Svg Testing Initialization', function () {
     SvgPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(SvgPageObject.isPageLoaded()).toBeTruthy(SvgPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(SvgPageObject.didAssertPopup()).toBeFalsy(SvgPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

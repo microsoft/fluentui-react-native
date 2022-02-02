@@ -19,7 +19,6 @@ describe('Theme Testing Initialization', function () {
     ThemePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

@@ -23,7 +23,6 @@ describe('Experimental Checkbox Testing Initialization', () => {
     ExperimentalCheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ExperimentalCheckboxPageObject.isPageLoaded()).toBeTruthy(ExperimentalCheckboxPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -32,22 +31,28 @@ describe('Experimental Checkbox Accessibility Testing', () => {
   it('Experimental Checkbox - Validate accessibilityRole is correct', () => {
     ExperimentalCheckboxPageObject.scrollToTestElement();
     ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ExperimentalCheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
+    expect(ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Experimental Checkbox - Set accessibilityLabel', () => {
     ExperimentalCheckboxPageObject.scrollToTestElement();
     ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ExperimentalCheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
       EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
     );
+    expect(ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Experimental Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', () => {
     ExperimentalCheckboxPageObject.scrollToTestElement();
     ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ExperimentalCheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
       EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
     );
+    expect(ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });

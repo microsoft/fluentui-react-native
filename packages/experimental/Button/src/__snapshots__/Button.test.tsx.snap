@@ -61,6 +61,125 @@ exports[`Button component tests Button circular 1`] = `
 </View>
 `;
 
+exports[`Button component tests Button composed 1`] = `
+<View
+  accessibilityLabel="Composed Button with RNText"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Composed Button with RNText
+  </Text>
+</View>
+`;
+
+exports[`Button component tests Button customized 1`] = `
+<View
+  accessibilityLabel="Custom Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "pink",
+      "borderColor": "#8a8886",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Custom Button
+  </Text>
+</View>
+`;
+
 exports[`Button component tests Button default 1`] = `
 <View
   accessibilityLabel="Default Button"

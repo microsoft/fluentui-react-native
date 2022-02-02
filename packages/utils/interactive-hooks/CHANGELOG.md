@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.6
+
+## 0.12.1
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Revert "Add ref to v1 Button (#1218)" (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Minor changes
+
+- Adding code that was added to usKeyProps.win32. I believe this was accidently left out of a previous PR and it broke our UWP app (safreibe@microsoft.com)
+
+## 0.11.15
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+
+## 0.11.14
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Add Keyboarding integration for Windows (safreibe@microsoft.com)
 
 ## 0.11.13
 

@@ -19,7 +19,6 @@ describe('Icon Testing Initialization', function () {
     IconPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(IconPageObject.isPageLoaded()).toBeTruthy(IconPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(IconPageObject.didAssertPopup()).toBeFalsy(IconPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

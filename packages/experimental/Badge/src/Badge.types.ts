@@ -8,7 +8,6 @@ export const badgeName = 'Badge';
 export type BadgeSize = 'smallest' | 'smaller' | 'small' | 'medium' | 'large' | 'largest';
 export type BadgeAppearance = 'filled' | 'outline' | 'tint' | 'ghost' | 'filledInverted';
 export type BadgeShape = 'rounded' | 'circular' | 'square';
-export type Presence = 'DND' | 'busy' | 'unknown' | 'blocked' | 'OOF' | 'away' | 'available' | 'offline';
 
 export interface BadgeTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -108,11 +107,6 @@ export interface BadgeProps {
    * @defaultvalue rounded
    */
   shape?: BadgeShape;
-
-  /**
-   * Badge presence
-   */
-  presence?: Presence;
 
   /**
    * Icon can be placed before or after Button's content.

@@ -19,7 +19,6 @@ describe('Experimental Text Testing Initialization', function () {
     ExperimentalTextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ExperimentalTextPageObject.isPageLoaded()).toBeTruthy(ExperimentalTextPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -28,6 +27,8 @@ describe('Experimental Text Accessibility Testing', () => {
   it('Text - Validate accessibilityRole is correct', () => {
     ExperimentalTextPageObject.scrollToTestElement();
     ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ExperimentalTextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
+    expect(ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
   });
 });

@@ -19,7 +19,6 @@ describe('Experimental Tabs Testing Initialization', function () {
     ExperimentalTabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(ExperimentalTabsPageObject.isPageLoaded()).toBeTruthy(ExperimentalTabsPageObject.ERRORMESSAGE_PAGELOAD);
-
     expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
@@ -28,12 +27,16 @@ describe('Experimental Tabs Accessibility Testing', () => {
   it("Validate Experimental Tab's accessibilityRole is correct", () => {
     ExperimentalTabsPageObject.scrollToTestElement();
     ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ExperimentalTabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
+    expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it("Validate Experimental TabItem's accessibilityRole is correct", () => {
     ExperimentalTabsPageObject.scrollToTestElement();
     ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ExperimentalTabsPageObject.getTabItemAccesibilityRole()).toEqual(TABITEM_A11Y_ROLE);
+    expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
   });
 });

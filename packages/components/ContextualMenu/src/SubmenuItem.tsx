@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyUpProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SvgXml } from 'react-native-svg';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
@@ -114,7 +114,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     /*
      * SubmenuItem launches the submenu onMouseEnter event. For keyboarding, submenu should be launched with Spacebar, Enter, or right arrow.
      */
-    const onKeyUpProps = useKeyUpProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
+    const onKeyUpProps = useKeyProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);

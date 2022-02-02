@@ -8,7 +8,7 @@ import * as React from 'react';
  * @param userCallback The function you want to be called once the key has been activated on key up
  * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
  * @returns onKeyEvent() - Callback to determine if key was pressed, if so, call userCallback
- * @deprecated use useKeyUpProps or useKeyDownProps instead
+ * @deprecated use the hook `useKeyProps` instead
  */
 export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
   const onKeyEvent = React.useCallback(
@@ -61,3 +61,11 @@ export const useKeyUpProps = memoize(getKeyUpPropsWorker);
  * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
  */
 export const useKeyDownProps = memoize(getKeyDownPropsWorker);
+
+/**
+ * Re-usable hook for keyboard events. on macOS, this is onKeyDown, while on windows this is onKeyUp.
+ * @param userCallback The function you want to be called once the key has been activated on key down
+ * @param keys A string of the key you want to perform some action on. If undefined, always invokes userCallback
+ * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
+ */
+export const useKeyProps = memoize(getKeyUpPropsWorker);

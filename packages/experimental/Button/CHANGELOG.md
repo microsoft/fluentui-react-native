@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Thu, 20 Jan 2022 21:05:25 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.1
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- [object Object] (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.11
+- Bump @fluentui-react-native/experimental-text to v0.7.12
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/icon to v0.11.6
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/theme-tokens to v0.12.0
+
+## 0.12.0
+
+Wed, 26 Jan 2022 20:31:03 GMT
+
+### Minor changes
+
+- Revert "Add ref to v1 Button (#1218)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+
+## 0.11.21
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+
+## 0.11.20
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+
+## 0.11.19
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
 
 ## 0.11.18
 

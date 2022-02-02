@@ -19,5 +19,6 @@ describe('Tokens Testing Initialization', function () {
     TokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(TokenPageObject.isPageLoaded()).toBeTruthy(TokenPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(TokenPageObject.didAssertPopup()).toBeFalsy(TokenPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
