@@ -1,10 +1,14 @@
 import { Button } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, View, StyleSheet } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 import { SvgXml } from 'react-native-svg';
+
+const styles = StyleSheet.create({
+  chevron: { paddingStart: 4 },
+});
 
 export const ButtonIconTest: React.FunctionComponent = () => {
   const fontBuiltInProps = {
@@ -64,7 +68,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
       {svgIconsEnabled && (
         <Button style={commonTestStyles.vmargin} icon={{ svgSource: svgProps }}>
           Icon Button and Chevron
-          <View style={{ paddingStart: 4 }}>
+          <View style={styles.chevron}>
             <SvgXml xml={chevronXml} />
           </View>
         </Button>
