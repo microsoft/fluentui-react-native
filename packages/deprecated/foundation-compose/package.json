@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.11.8",
+  "version": "1.11.9",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.9.8 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.9.9 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.1.6",
     "@fluentui-react-native/theme-types": ">=0.13.3 <1.0.0",
     "@uifabricshared/themed-settings": ">=0.8.2 <1.0.0",
