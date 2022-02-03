@@ -114,7 +114,6 @@ exports.config = {
     require('ts-node').register({ files: true });
 
     browser.maximizeWindow();
-    console.log('\n\n\n\n\n Window handle: ' + browser.getWindowHandles() + '\n\n\n\n\n\n');
   },
   /**
    * Runs before a WebdriverIO command gets executed.
