@@ -12,9 +12,9 @@ Primary and Stealth buttons now map to `Button`:
 
 | v0 `Button`                             | v1 `Button`                                          |
 | --------------------------------------- | ---------------------------------------------------- |
-| `<Button text="Hello, world" />`        | `<Button>Hello, world</Button>`                      |
-| `<PrimaryButton text="Hello, world" />` | `<Button appearance='primary'>Hello, world</Button>` |
-| `<StealthButton text="Hello, world" />` | `<Button appearance='subtle'>Hello, world</Button>`  |
+| `<Button content="Hello, world" />`        | `<Button>Hello, world</Button>`                      |
+| `<PrimaryButton content="Hello, world" />` | `<Button appearance='primary'>Hello, world</Button>` |
+| `<StealthButton content="Hello, world" />` | `<Button appearance='subtle'>Hello, world</Button>`  |
 
 ### Props that remain as is
 
@@ -35,9 +35,20 @@ Primary and Stealth buttons now map to `Button`:
 
 - Cannot use both `startIcon` and `endIcon` at the same time in v1
 
+### Updating ThemeProvider
+
+If you are using the older theme provider `ThemeProvider` from `@uifabricshared/theming-react-native`, you will need to update the `ThemeProvider` to pull from `@fluentui-react-native/theme` to have the control work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for guidance.
+
+### Migrating customized Buttons
+
+Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
+
+### Migrating composed Buttons
+
+
 ## Porting from FluentUI v9 Button
 
-The FURN button cannot be used in place of a FluentUI button - these buttons are intended to be used on their respective platforms.
+The FURN button cannot be used in place of a FluentUI button - these buttons are intended to be used on their respective platforms. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance on coming from FluentUI to FURN.
 
 ### Props that remain as is
 
@@ -50,7 +61,7 @@ The FURN button cannot be used in place of a FluentUI button - these buttons are
 
 ### Props renamed to align with ReactNative
 
-No `Button` specific renames. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance.
+No `Button` specific renames.
 
 ### Prop differences due to technical differences and limitations
 
