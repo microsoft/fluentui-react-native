@@ -27,12 +27,13 @@ export const stylingSettings: UseStylingOptions<CompoundButtonProps, CompoundBut
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
+          width: tokens.width,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     contentContainer: {
       style: {
