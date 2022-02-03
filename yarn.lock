@@ -2447,9 +2447,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.64.8":
-  version "0.64.10"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.64.10.tgz#c10fa6e64809dc44c977658a0c7ba1e01c794ff6"
-  integrity sha512-PdavETMrqKz4DXA1IDNTT9KPjLrMYEdd1ywCHs5v//aLbYeMpBvlSHYuBIjP5ix6YOdlEK3+sgTjYXCUlPm/dA==
+  version "0.64.11"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.64.11.tgz#cf12f4083e75a62b6df0aa4ab2e3b41eecb77238"
+  integrity sha512-N2eg2poMQaHhUG6/NS/GkZhSof3errWM/Dqh53J8g6WzMDDV/cKfhkDFUt3qEXy4qMY0THJu2UmYZMDfmLNzeQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^26.5.0"
@@ -8806,9 +8806,9 @@ eslint-visitor-keys@^3.0.0, eslint-visitor-keys@^3.1.0, eslint-visitor-keys@^3.2
   integrity sha512-IOzT0X126zn7ALX0dwFiUQEdsfzrm4+ISsQS8nukaJXwEyYKRSnEIIDULYg1mCtGp7UUXgfGl7BIolXREQK+XQ==
 
 eslint@^8.0.0:
-  version "8.7.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.7.0.tgz#22e036842ee5b7cf87b03fe237731675b4d3633c"
-  integrity sha512-ifHYzkBGrzS2iDU7KjhCAVMGCvF6M3Xfs8X8b37cgrUlDt6bWRTpRh6T/gtSXv1HJ/BUGgmjvNvOEGu85Iif7w==
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.8.0.tgz#9762b49abad0cb4952539ffdb0a046392e571a2d"
+  integrity sha512-H3KXAzQGBH1plhYS3okDix2ZthuYJlQQEGE5k0IKuEqUSiyu4AmxxlJ2MtTYeJ3xB4jDhcYCwGOg2TXYdnDXlQ==
   dependencies:
     "@eslint/eslintrc" "^1.0.5"
     "@humanwhocodes/config-array" "^0.9.2"
@@ -15658,9 +15658,9 @@ react-native-web@0.17.5, react-native-web@^0.17.5:
     prop-types "^15.6.0"
 
 react-native-windows@^0.64.0, react-native-windows@^0.64.3:
-  version "0.64.28"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.28.tgz#51b322b05c6769045ea434f77042918a0ff18edb"
-  integrity sha512-VRbt4sdX9fWppWjd5NsJ0E9e31IBn5ZswlP3tWWUKxuTPXP7O3WB5pm9QTYHZSiXad941r1S3FP1/g/evHIquQ==
+  version "0.64.29"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.64.29.tgz#b6977958a01a4d9f92cd0c0ecd0c6696140e22a5"
+  integrity sha512-SwnYPS9racFoBgzJfQ8kID7BoWe8pDtkEOZmGThx8wNOc/NJLI6MrX0Ld7X81QpvH8iQWaGPSeLK4kbd+VW6ZA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^26.5.0"

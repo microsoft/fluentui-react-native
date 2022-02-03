@@ -7,6 +7,12 @@ import {
 } from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
+ * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
+export const enum ButtonSelector {
+  PrimaryButton, //this._primaryComponent
+}
+
 class ButtonPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -25,6 +31,19 @@ class ButtonPageObject extends BasePage {
     );
 
     return callbackText.isDisplayed();
+  }
+
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(buttonSelector: ButtonSelector, key: string): void {
+    this.getButtonSelector(buttonSelector).addValue(key);
+  }
+
+  /* Returns the correct WebDriverIO element from the Button Selector */
+  getButtonSelector(buttonSelector?: ButtonSelector): WebdriverIO.Element {
+    if (buttonSelector == ButtonSelector.PrimaryButton) {
+      return this._primaryComponent;
+    }
+    return this._primaryComponent;
   }
 
   /*****************************************/

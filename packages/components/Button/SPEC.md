@@ -95,7 +95,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * - 'primary': Emphasizes the button as a primary action.
    * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
    */
-  appearance?: 'primary' | 'outline' | 'subtle';
+  appearance?: 'primary' | 'subtle';
 
   /**
    * A button can fill the width of its container.
@@ -106,7 +106,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
-  componentRef?: IconSourcesType;
+  componentRef?: React.RefObject<IFocusable>;
 
   /**
    * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
@@ -167,16 +167,6 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * The icon color.
    */
   iconColor?: ColorValue;
-
-  /**
-   * The icon color when hovering over the Button.
-   */
-  iconColorHovered?: ColorValue;
-
-  /**
-   * The icon color when the Button is being pressed.
-   */
-  iconColorPressed?: ColorValue;
 
   /**
    * The size of the icon.

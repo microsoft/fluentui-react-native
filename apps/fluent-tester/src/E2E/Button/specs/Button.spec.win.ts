@@ -1,9 +1,8 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import ButtonPageObject from '../pages/ButtonPageObject';
+import ButtonPageObject, { ButtonSelector } from '../pages/ButtonPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import {
-  BUTTON_TEST_COMPONENT_DEPRECATED,
   BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
   BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
 } from '../../../FluentTester/TestComponents/Button/consts';
@@ -63,14 +62,14 @@ describe('Button Functional Testing', () => {
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', () => {
-    ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT_DEPRECATED, Keys.Enter);
+    ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
 
     ButtonPageObject.clickComponent(); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {
-    ButtonPageObject.sendKey(BUTTON_TEST_COMPONENT_DEPRECATED, Keys.Spacebar);
+    ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
   });
 });

@@ -1,11 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import CheckboxPageObject from '../pages/CheckboxPageObject';
+import CheckboxPageObject, { CheckboxSelector } from '../pages/CheckboxPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
-import {
-  CHECKBOX_TEST_COMPONENT_LABEL,
-  CHECKBOX_ACCESSIBILITY_LABEL,
-  CHECKBOX_TEST_COMPONENT,
-} from '../../../FluentTester/TestComponents/Checkbox/consts';
+import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {
@@ -77,7 +73,7 @@ describe('Checkbox Functional Testing', () => {
 
   it('Click the "Spacebar" on a Checkbox and verify it toggles', () => {
     /* Presses the "space bar" to select the Checkbox */
-    CheckboxPageObject.sendKey(CHECKBOX_TEST_COMPONENT, Keys.Spacebar);
+    CheckboxPageObject.sendKey(CheckboxSelector.Primary, Keys.Spacebar);
     CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     /* Validate the Checkbox is selected */
