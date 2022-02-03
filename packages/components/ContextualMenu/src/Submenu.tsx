@@ -4,7 +4,7 @@ import { View, ScrollView, Platform } from 'react-native';
 import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
 import { settings } from './Submenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useKeyDownProps, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
@@ -70,7 +70,9 @@ export const Submenu = compose<SubmenuType>({
         setInitialFocus: shouldFocusOnMount,
       },
       container: Platform.select({
-        macos: {},
+        macos: {
+          ...useKeyDownProps(onDismiss, 'ArrowLeft'),
+        },
         default: containerPropsWin32,
       }),
     });
@@ -90,12 +92,31 @@ export const Submenu = compose<SubmenuType>({
     if (renderData.state == undefined) {
       return null;
     }
+
+    const focusZoneRef = React.useRef(null);
+
+    /**
+     * On macOS, focus isn't placed by default on the first focusable element.
+     * We get around this by focusing on the inner FocusZone hosting the menu.
+     * For whatever reason, to get the timing _just_ right to actually focus,
+     * we need an additional `setTimeout` on top of the `useLayoutEffect` hook.
+     */
+    React.useLayoutEffect(() => {
+      if (Platform.OS === 'macos') {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
+      }
+    }, [focusZoneRef]);
+
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
             {Platform.OS === 'macos' ? (
-              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
+              <FocusZone componentRef={focusZoneRef} focusZoneDirection={'vertical'}>
+                {children}
+              </FocusZone>
             ) : (
               <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
                 {children}

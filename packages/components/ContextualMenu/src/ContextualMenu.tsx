@@ -91,12 +91,30 @@ export const ContextualMenu = compose<ContextualMenuType>({
       return null;
     }
 
+    const focusZoneRef = React.useRef(null);
+
+    /**
+     * On macOS, focus isn't placed by default on the first focusable element.
+     * We get around this by focusing on the inner FocusZone hosting the menu.
+     * For whatever reason, to get the timing _just_ right to actually focus,
+     * we need an additional `setTimeout` on top of the `useLayoutEffect` hook.
+     */
+    React.useLayoutEffect(() => {
+      if (Platform.OS === 'macos') {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
+      }
+    }, [focusZoneRef]);
+
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
             {Platform.OS === 'macos' ? (
-              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
+              <FocusZone componentRef={focusZoneRef} focusZoneDirection={'vertical'}>
+                {children}
+              </FocusZone>
             ) : (
               <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
                 {children}
