@@ -51,9 +51,11 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 		if ([view canBecomeKeyView]) {
 			return view;
 		}
-		
+
 		NSView *match = GetFirstKeyViewWithin(view);
-		if (match) return match;
+		if (match) {
+			return match;
+		}
 	}
 	return nil;
 }
@@ -365,7 +367,6 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 			&& (action == FocusZoneActionUpArrow || action == FocusZoneActionDownArrow))
 		|| (focusZoneDirection == FocusZoneDirectionNone))
 	{
-		// do nothing
 		[super keyDown:event];
 	}
 	else
