@@ -43,6 +43,7 @@ describe('Checkbox Accessibility Testing', () => {
 
   it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', () => {
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -72,6 +73,7 @@ describe('Checkbox Functional Testing', () => {
 
     /* Validate the Checkbox is toggled OFF */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeFalsy();
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Click the "Spacebar" on a Checkbox and verify it toggles', () => {
@@ -81,5 +83,6 @@ describe('Checkbox Functional Testing', () => {
 
     /* Validate the Checkbox is selected */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeTruthy();
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });
