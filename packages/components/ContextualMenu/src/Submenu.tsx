@@ -57,6 +57,7 @@ export const Submenu = compose<SubmenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    // Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
     const onKeyDownProps = useKeyDownProps(onDismiss, 'ArrowLeft');
 
     const containerPropsWin32: IViewProps = {
