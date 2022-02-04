@@ -4,7 +4,7 @@ import { View, ScrollView, Platform } from 'react-native';
 import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
 import { settings } from './Submenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useKeyDownProps, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
@@ -28,11 +28,13 @@ export const Submenu = compose<SubmenuType>({
       userProps?.onShow && userProps.onShow();
       context.isSubmenuOpen = true;
     }, [context]);
+
     const onDismiss = React.useCallback(() => {
       userProps?.onDismiss();
       setShowMenu(false);
       context.isSubmenuOpen = false;
     }, [context, setShowMenu]);
+
     const dismissCallback = React.useCallback(() => {
       onDismiss();
       context?.onDismissMenu();
@@ -55,6 +57,8 @@ export const Submenu = compose<SubmenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    const onKeyDownProps = useKeyDownProps(onDismiss, 'ArrowLeft');
+
     const containerPropsWin32: IViewProps = {
       accessible: shouldFocusOnContainer,
       focusable: shouldFocusOnContainer && containerFocus,
@@ -69,10 +73,10 @@ export const Submenu = compose<SubmenuType>({
         onDismiss: onDismiss,
         setInitialFocus: shouldFocusOnMount,
       },
-      container: Platform.select({
-        macos: {},
-        default: containerPropsWin32,
-      }),
+      container: {
+        ...onKeyDownProps,
+        ...(Platform.OS === ('win32' as string) && { containerPropsWin32 }),
+      },
     });
 
     return { slotProps, state };

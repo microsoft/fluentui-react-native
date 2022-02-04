@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SvgXml } from 'react-native-svg';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
@@ -111,10 +111,11 @@ export const SubmenuItem = compose<SubmenuItemType>({
       icon: !!icon,
     };
 
-    /*
-     * SubmenuItem launches the submenu onMouseEnter event. For keyboarding, submenu should be launched with Spacebar, Enter, or right arrow.
+    /**
+     * SubmenuItem launches the submenu onMouseEnter event. submenu should be launched with Spacebar, Enter, or right arrow.
+     * Explicitly override onKeyDown to override the native windows behavior of moving focus with Arrow keys.
      */
-    const onKeyUpProps = useKeyProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
+    const onKeyDownProps = useKeyDownProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -123,7 +124,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       root: {
         ref: cmRef,
         ...pressablePropsModified,
-        ...onKeyUpProps,
+        ...onKeyDownProps,
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',
