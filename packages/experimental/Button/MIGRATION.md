@@ -10,7 +10,7 @@ This Migration guide is a work in progress and is not yet ready for use.
 
 Primary and Stealth buttons now map to `Button`:
 
-| v0 `Button`                             | v1 `Button`                                          |
+| v0 `Button`                             | v2 `Button`                                          |
 | --------------------------------------- | ---------------------------------------------------- |
 | `<Button content="Hello, world" />`        | `<Button>Hello, world</Button>`                      |
 | `<PrimaryButton content="Hello, world" />` | `<Button appearance='primary'>Hello, world</Button>` |
@@ -26,15 +26,38 @@ Primary and Stealth buttons now map to `Button`:
 - `testID`
 - `tooltip`
 
-### Props no longer supported with an equivalent functionality in v1 Button
+### Props no longer supported with an equivalent functionality in v2 Button
 
 - `content` => Pass the content as `children` instead
 - `endIcon` => Use `after` value for `iconPosition` prop and pass icon information into `icon` prop instead
 - `startIcon` => Use `before` value for `iconPosition` prop and pass icon information into `icon` prop instead
 
-### Props no longer supported without an equivalent functionality in v1 Button
+### Props no longer supported without an equivalent functionality in v2 Button
 
-- Cannot use both `startIcon` and `endIcon` at the same time in v1
+- Cannot use both `startIcon` and `endIcon` at the same time in v2
+
+### Tokens that remain as is
+
+- Any props that are part of `FontTokens`, `IForegroundColorTokens`, `IBackgroundColorTokens`, `IBorderTokens`
+- `iconColor`
+- `iconSize`
+- `iconWeight`
+
+### Tokens no longer supported with an equivalent functionality in v2 Button
+
+- `contentPadding` => Set on `style` property of `root` property under `slotProps` in `compose` API
+- `iconColorHovered` => Use `iconColor` token under the `hovered` state token
+- `iconColorPressed` => Use `iconColor` token under the `pressed` state token
+
+### Tokens no longer supported without an equivalent functionality in v2 Button
+
+- `contentPaddingFocused` => Removed in favor of using native based focus visuals
+- `wrapperBorderColor` => Removed in favor of using native based focus visuals
+
+### Slots no longer supported with an equivalent functionality in v2 Button
+
+- `borderWrapper` has been removed in favor of using native focus visuals. Use `root` instead.
+- `stack` has been removed. Use `root` instead.
 
 ### Updating ThemeProvider
 
@@ -103,7 +126,7 @@ No `Button` specific renames.
 
 ## Property mapping
 
-| v0 `Button`    | v1 `Button`    |
+| v0 `Button`    | v2 `Button`    |
 | -------------- | -------------- |
 | `componentRef` | `componentRef` |
 | `content`      |                |

@@ -87,7 +87,7 @@ slotProps: {
 }
 ```
 
-The `slotProps` property only takes care of the properties of `settings` that are named after slots. For migrating the token portions, you can add a `token` propery with the customized tokens defined. The contnet of the `token` property would be what you would pass into the customize API. See guidance on how to migrate the customize API [here](./UpdatingCustomize.md).
+The `slotProps` property only takes care of the properties of `settings` that are named after slots. For migrating the token portions, you can add a `token` propery with the customized tokens defined. The contnet of the `token` property would be what you would pass into the customize API. See guidance on how to migrate the customize API [here](./UpdatingCustomize.md) for formatting guidance.
 
 ### Replacing `usePrepareProps`
 
