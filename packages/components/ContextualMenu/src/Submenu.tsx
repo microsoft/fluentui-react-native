@@ -99,18 +99,31 @@ export const Submenu = compose<SubmenuType>({
       return null;
     }
 
-    // On macOS, wrap the children in a FocusZone to allow you to arrow-key through the menu items
-    const inner = Platform.OS === 'macos' ? <Slots.focusZone>{children}</Slots.focusZone> : { children };
-
-    return (
-      <CMContext.Provider value={renderData.state.context}>
-        <Slots.root>
-          <Slots.container>
-            <Slots.scrollView>{inner}</Slots.scrollView>
-          </Slots.container>
-        </Slots.root>
-      </CMContext.Provider>
-    );
+    // On macOS, wrap the children in a FocusZone to allow you to arrow-key through the menu items.
+    // Duplicating the JSX trees was the only way I could find to correctly render the optional slot.
+    if (Platform.OS === 'macos') {
+      return (
+        <CMContext.Provider value={renderData.state.context}>
+          <Slots.root>
+            <Slots.container>
+              <Slots.scrollView>
+                <Slots.focusZone>{children}</Slots.focusZone>
+              </Slots.scrollView>
+            </Slots.container>
+          </Slots.root>
+        </CMContext.Provider>
+      );
+    } else {
+      return (
+        <CMContext.Provider value={renderData.state.context}>
+          <Slots.root>
+            <Slots.container>
+              <Slots.scrollView>{children}</Slots.scrollView>
+            </Slots.container>
+          </Slots.root>
+        </CMContext.Provider>
+      );
+    }
   },
 });
 
