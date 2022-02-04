@@ -45,6 +45,21 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 	);
 }
 
+static NSView *GetFirstKeyViewWithin(NSView *parentView)
+{
+	for (NSView *view in [parentView subviews]) {
+		if ([view canBecomeKeyView]) {
+			return view;
+		}
+
+		NSView *match = GetFirstKeyViewWithin(view);
+		if (match) {
+			return match;
+		}
+	}
+	return nil;
+}
+
 static NSView *GetFirstResponder(NSWindow *window)
 {
 	NSResponder *responder = [window firstResponder];
@@ -124,13 +139,14 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 - (BOOL)acceptsFirstResponder
 {
-	// Accept firstResponder on FocusZone itself in order to reassign it to defaultTabbableElement.
+	// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 	return !_disabled;
 }
 
 - (BOOL)becomeFirstResponder
 {
-	return !_disabled && [[self window] makeFirstResponder:_defaultTabbableElement ?: [self nextValidKeyView]];
+	NSView *keyView = _defaultKeyView ?: GetFirstKeyViewWithin(self);
+	return !_disabled && [[self window] makeFirstResponder:keyView];
 }
 
 - (NSView *)nextViewToFocusForCondition:(IsViewLeadingCandidateForNextFocus)isLeadingCandidate
@@ -314,7 +330,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		// If the previous view is in a FocusZone, focus the default tabbable element.
 		// (For FocusZoneActionTab, this is handled by becomeFirstResponder.)
 		RCTFocusZone *nextFocusZone = GetFocusZoneAncestor(nextViewToFocus);
-		NSView *element = [nextFocusZone defaultTabbableElement];
+		NSView *element = [nextFocusZone defaultKeyView];
 		if (element != nil)
 		{
 			nextViewToFocus = element;
@@ -351,7 +367,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 			&& (action == FocusZoneActionUpArrow || action == FocusZoneActionDownArrow))
 		|| (focusZoneDirection == FocusZoneDirectionNone))
 	{
-		// do nothing
+		[super keyDown:event];
 	}
 	else
 	{
@@ -368,7 +384,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	}
 	else
 	{
-		NSBeep();
+		[super keyDown:event];
 	}
 }
 

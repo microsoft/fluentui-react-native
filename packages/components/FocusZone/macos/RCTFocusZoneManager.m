@@ -40,7 +40,7 @@ RCT_CUSTOM_VIEW_PROPERTY(defaultTabbableElement, NSNumber, RCTFocusZone)
 	NSNumber *tag = [RCTConvert NSNumber:json];
 	RCTUIManager *manager = [[self bridge] uiManager];
 	NSView *element = [manager viewForReactTag:tag];
-	[view setDefaultTabbableElement:element];
+	[view setDefaultKeyView:element];
 }
 
 - (RCTView *)view
