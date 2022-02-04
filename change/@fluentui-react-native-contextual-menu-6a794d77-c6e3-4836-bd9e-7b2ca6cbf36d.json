@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add Scrollview and FocusZone slots to ContextualMenu",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

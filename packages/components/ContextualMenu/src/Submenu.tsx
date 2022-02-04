@@ -73,6 +73,16 @@ export const Submenu = compose<SubmenuType>({
         macos: {},
         default: containerPropsWin32,
       }),
+      scrollView: {
+        contentContainerStyle: {
+          flexDirection: 'column',
+          flexGrow: 1,
+        },
+        showsVerticalScrollIndicator: true,
+      },
+      focusZone: {
+        focusZoneDirection: 'vertical',
+      },
     });
 
     return { slotProps, state };
@@ -81,6 +91,8 @@ export const Submenu = compose<SubmenuType>({
   slots: {
     root: Callout,
     container: View,
+    scrollView: ScrollView,
+    focusZone: FocusZone,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
@@ -90,21 +102,32 @@ export const Submenu = compose<SubmenuType>({
     if (renderData.state == undefined) {
       return null;
     }
-    return (
-      <CMContext.Provider value={renderData.state.context}>
-        <Slots.root>
-          <Slots.container>
-            {Platform.OS === 'macos' ? (
-              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
-            ) : (
-              <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
-                {children}
-              </ScrollView>
-            )}
-          </Slots.container>
-        </Slots.root>
-      </CMContext.Provider>
-    );
+
+    // On macOS, wrap the children in a FocusZone to allow you to arrow-key through the menu items.
+    // Duplicating the JSX trees was the only way I could find to correctly render the optional slot.
+    if (Platform.OS === 'macos') {
+      return (
+        <CMContext.Provider value={renderData.state.context}>
+          <Slots.root>
+            <Slots.container>
+              <Slots.scrollView>
+                <Slots.focusZone>{children}</Slots.focusZone>
+              </Slots.scrollView>
+            </Slots.container>
+          </Slots.root>
+        </CMContext.Provider>
+      );
+    } else {
+      return (
+        <CMContext.Provider value={renderData.state.context}>
+          <Slots.root>
+            <Slots.container>
+              <Slots.scrollView>{children}</Slots.scrollView>
+            </Slots.container>
+          </Slots.root>
+        </CMContext.Provider>
+      );
+    }
   },
 });
 
