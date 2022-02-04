@@ -112,7 +112,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     };
 
     /**
-     * SubmenuItem launches the submenu onMouseEnter event. submenu should be launched with Spacebar, Enter, or right arrow.
+     * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow.
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
      */
     const onKeyDownProps = useKeyDownProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
