@@ -73,6 +73,12 @@ export const Submenu = compose<SubmenuType>({
         macos: {},
         default: containerPropsWin32,
       }),
+      scrollView: {
+        showsVerticalScrollIndicator: true,
+      },
+      focusZone: {
+        focusZoneDirection: 'vertical',
+      },
     });
 
     return { slotProps, state };
@@ -81,6 +87,8 @@ export const Submenu = compose<SubmenuType>({
   slots: {
     root: Callout,
     container: View,
+    scrollView: ScrollView,
+    focusZone: FocusZone,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
@@ -94,13 +102,7 @@ export const Submenu = compose<SubmenuType>({
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
-            {Platform.OS === 'macos' ? (
-              <FocusZone focusZoneDirection={'vertical'}>{children}</FocusZone>
-            ) : (
-              <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
-                {children}
-              </ScrollView>
-            )}
+            <Slots.scrollView>{Platform.OS === 'macos' ? <Slots.focusZone>{children}</Slots.focusZone> : { children }}</Slots.scrollView>
           </Slots.container>
         </Slots.root>
       </CMContext.Provider>
