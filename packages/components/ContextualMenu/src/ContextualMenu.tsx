@@ -74,6 +74,10 @@ export const ContextualMenu = compose<ContextualMenuType>({
         },
       }),
       scrollView: {
+        contentContainerStyle: {
+          flexDirection: 'column',
+          flexGrow: 1,
+        },
         showsVerticalScrollIndicator: true,
       },
       focusZone: {

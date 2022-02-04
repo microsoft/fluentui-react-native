@@ -14,12 +14,6 @@ export const settings: IComposeSettings<SubmenuType> = [
         flex: 1,
       },
     },
-    scrollView: {
-      contentContainerStyle: {
-        flexDirection: 'column',
-        flexGrow: 1,
-      },
-    },
   },
   submenuName,
 ];

@@ -74,6 +74,10 @@ export const Submenu = compose<SubmenuType>({
         default: containerPropsWin32,
       }),
       scrollView: {
+        contentContainerStyle: {
+          flexDirection: 'column',
+          flexGrow: 1,
+        },
         showsVerticalScrollIndicator: true,
       },
       focusZone: {

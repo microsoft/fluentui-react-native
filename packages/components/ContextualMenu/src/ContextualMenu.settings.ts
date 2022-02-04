@@ -19,12 +19,6 @@ export const settings: IComposeSettings<ContextualMenuType> = [
         flex: 1,
       },
     },
-    scrollView: {
-      contentContainerStyle: {
-        flexDirection: 'column',
-        flexGrow: 1,
-      },
-    },
   },
   contextualMenuName,
 ];
