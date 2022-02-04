@@ -123,9 +123,7 @@ export const Submenu = compose<SubmenuType>({
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
-            <Slots.scrollView>
-              <Slots.focusZone>{children}</Slots.focusZone>
-            </Slots.scrollView>
+            <Slots.scrollView>{Platform.OS === 'macos' ? <Slots.focusZone>{children}</Slots.focusZone> : { children }}</Slots.scrollView>
           </Slots.container>
         </Slots.root>
       </CMContext.Provider>

@@ -12,8 +12,8 @@ export type SubmenuProps = ContextualMenuProps;
 export type SubmenuSlotProps = {
   root: SubmenuProps;
   container: ViewProps;
-  scrollView?: ScrollViewProps;
-  focusZone?: FocusZoneProps;
+  scrollView: ScrollViewProps;
+  focusZone?: FocusZoneProps; // macOS only
 };
 
 export type SubmenuRenderData = IRenderData<SubmenuSlotProps, SubmenuState>;
