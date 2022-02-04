@@ -14,11 +14,11 @@ Here is an example:
     slots: {
       content: CustomText,
     },
-    settings: {
+    settings: [{
       content: {
         style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
       },
-    },
+    }],
   });
 ```
 
@@ -64,6 +64,11 @@ The old API took care of this through the `settings` and `styles` properties. Th
 import { Theme, buildProps } from '@fluentui-react-native/framework';
 
 slotProps: {
+    // Object example
+    content: {
+      style: { marginTop: -1, marginBottom: 1, marginStart: 0, marginEnd: -2 },
+    },
+    // Function example
     root: buildProps(
       (tokens: TTokens, theme: Theme) => ({
         style: {
@@ -82,7 +87,7 @@ slotProps: {
 }
 ```
 
-The `slotProps` property only takes care of the properties of `settings` that are named after slots. For migrating the token portions, see guidance on how to migrate the customize API [here](./UpdatingCustomize.md).
+The `slotProps` property only takes care of the properties of `settings` that are named after slots. For migrating the token portions, you can add a `token` propery with the customized tokens defined. The contnet of the `token` property would be what you would pass into the customize API. See guidance on how to migrate the customize API [here](./UpdatingCustomize.md).
 
 ### Replacing `usePrepareProps`
 

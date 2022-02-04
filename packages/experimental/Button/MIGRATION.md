@@ -18,6 +18,7 @@ Primary and Stealth buttons now map to `Button`:
 
 ### Props that remain as is
 
+- Any props that are part of `ViewProps`
 - `children`
 - `componentRef`
 - `icon`
@@ -37,11 +38,35 @@ Primary and Stealth buttons now map to `Button`:
 
 ### Updating ThemeProvider
 
-If you are using the older theme provider `ThemeProvider` from `@uifabricshared/theming-react-native`, you will need to update the `ThemeProvider` to pull from `@fluentui-react-native/theme` to have the control work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for guidance.
+If you are using the older theme provider `ThemeProvider` from `@uifabricshared/theming-react-native`, you will need to update the `ThemeProvider` to pull from `@fluentui-react-native/theme` to have the control work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for guidance.
 
 ### Migrating customized Buttons
 
-Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
+Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
+
+If you were using `PrimaryButton` or `StealthButton`, any color customizations will need to be applied under the `primary` and `subtle` tokens, respectively:
+
+```ts
+const Custom = StealthButton.customize({
+  tokens: {
+    borderWidth: 0,
+    color: 'white',
+    backgroundColor: 'red',
+  }
+});
+```
+
+would become
+
+```ts
+const Custom = Button.customize({
+  subtle: {
+    borderWidth: 0,
+    color: 'white',
+    backgroundColor: 'red',
+  }
+});
+```
 
 ### Migrating composed Buttons
 

@@ -59,8 +59,8 @@ All states that were previously under `_overrides` are now at the top level of t
 
 ### No `_precedence` property
 
-There is no equivalent for `_precedence` in the new customize API. Instead, you can change the token entries when the right combination os states is applied.
+There is no equivalent for `_precedence` in the new customize API. If you need this functionality, [please look at using `compose` instead](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/composition#compose).
 
-### No slot props as properties
+### No slots as properties
 
-There is no equivalent for passing in new slot prop building functions in the new customize API. If you need this functionality, [please look at using `compose` instead](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/composition#compose).
+There is no equivalent for passing in new slot props in the new customize API. If you need this functionality, [please look at using the `slotProps` property under `compose` instead](./UpdatingCompose.md).
