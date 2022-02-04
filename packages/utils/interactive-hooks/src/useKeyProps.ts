@@ -9,7 +9,7 @@ export type KeyPressProps = {
   validKeysDown?: string[]; // macOS
   keyDownEvents?: IHandledKeyboardEvent[]; // win32
   onKeyUp?: KeyCallback;
-  validKeysUp?: string[];
+  validKeysUp?: string[]; // macOS
   keyUpEvents?: IHandledKeyboardEvent[]; // win32
 };
 
