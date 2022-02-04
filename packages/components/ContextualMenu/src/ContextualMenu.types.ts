@@ -66,7 +66,7 @@ export type ContextualMenuSlotProps = {
   root: ContextualMenuProps;
   container: IViewProps;
   scrollView: ScrollViewProps;
-  focusZone: FocusZoneProps; // macOS only
+  focusZone?: FocusZoneProps; // macOS only
 };
 
 export type ContextualMenuRenderData = IRenderData<ContextualMenuSlotProps, ContextualMenuState>;
