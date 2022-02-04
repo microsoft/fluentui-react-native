@@ -45,6 +45,8 @@ Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/m
 
 ### Migrating composed Buttons
 
+Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
+
 
 ## Porting from FluentUI v9 Button
 
