@@ -99,11 +99,14 @@ export const ContextualMenu = compose<ContextualMenuType>({
       return null;
     }
 
+    // On macOS, wrap the children in a FocusZone to allow you to arrow-key through the menu items
+    const inner = Platform.OS === 'macos' ? <Slots.focusZone>{children}</Slots.focusZone> : { children };
+
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
-            <Slots.scrollView>{Platform.OS === 'macos' ? <Slots.focusZone>{children}</Slots.focusZone> : { children }}</Slots.scrollView>
+            <Slots.scrollView>{inner}</Slots.scrollView>
           </Slots.container>
         </Slots.root>
       </CMContext.Provider>
