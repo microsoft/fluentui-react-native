@@ -1,6 +1,7 @@
 import { ContextualMenuProps, ContextualMenuTokens, ContextualMenuState } from './ContextualMenu.types';
-import { ViewProps } from 'react-native';
+import { ScrollViewProps, ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
+import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 
 export const submenuName = 'Submenu';
 
@@ -11,6 +12,8 @@ export type SubmenuProps = ContextualMenuProps;
 export type SubmenuSlotProps = {
   root: SubmenuProps;
   container: ViewProps;
+  scrollView?: ScrollViewProps;
+  focusZone?: FocusZoneProps;
 };
 
 export type SubmenuRenderData = IRenderData<SubmenuSlotProps, SubmenuState>;

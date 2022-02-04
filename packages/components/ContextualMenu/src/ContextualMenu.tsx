@@ -34,6 +34,23 @@ export const ContextualMenu = compose<ContextualMenuType>({
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
     const { setShowMenu, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
 
+    /**
+     * On macOS, focus isn't placed by default on the first focusable element.
+     * We get around this by focusing on the inner FocusZone hosting the menu.
+     * For whatever reason, to get the timing _just_ right to actually focus,
+     * we need an additional `setTimeout` on top of the `useLayoutEffect` hook.
+     */
+
+    const focusZoneRef = React.useRef(null);
+
+    React.useLayoutEffect(() => {
+      if (Platform.OS === 'macos') {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
+      }
+    }, []);
+
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
 
@@ -73,6 +90,13 @@ export const ContextualMenu = compose<ContextualMenuType>({
           style: { maxHeight: maxHeight, width: maxWidth },
         },
       }),
+      scrollView: {
+        showsVerticalScrollIndicator: true,
+      },
+      focusZone: {
+        componentRef: focusZoneRef,
+        focusZoneDirection: 'vertical',
+      },
     });
 
     return { slotProps, state };
@@ -81,6 +105,8 @@ export const ContextualMenu = compose<ContextualMenuType>({
   slots: {
     root: Callout,
     container: View,
+    scrollView: ScrollView,
+    focusZone: FocusZone,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],
@@ -91,35 +117,13 @@ export const ContextualMenu = compose<ContextualMenuType>({
       return null;
     }
 
-    const focusZoneRef = React.useRef(null);
-
-    /**
-     * On macOS, focus isn't placed by default on the first focusable element.
-     * We get around this by focusing on the inner FocusZone hosting the menu.
-     * For whatever reason, to get the timing _just_ right to actually focus,
-     * we need an additional `setTimeout` on top of the `useLayoutEffect` hook.
-     */
-    React.useLayoutEffect(() => {
-      if (Platform.OS === 'macos') {
-        setTimeout(() => {
-          focusZoneRef.current?.focus();
-        }, 0);
-      }
-    }, [focusZoneRef]);
-
     return (
       <CMContext.Provider value={renderData.state.context}>
         <Slots.root>
           <Slots.container>
-            {Platform.OS === 'macos' ? (
-              <FocusZone componentRef={focusZoneRef} focusZoneDirection={'vertical'}>
-                {children}
-              </FocusZone>
-            ) : (
-              <ScrollView contentContainerStyle={{ flexDirection: 'column', flexGrow: 1 }} showsVerticalScrollIndicator={true}>
-                {children}
-              </ScrollView>
-            )}
+            <Slots.scrollView>
+              <Slots.focusZone>{children}</Slots.focusZone>
+            </Slots.scrollView>
           </Slots.container>
         </Slots.root>
       </CMContext.Provider>
