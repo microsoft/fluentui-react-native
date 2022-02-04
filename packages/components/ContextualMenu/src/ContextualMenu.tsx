@@ -12,7 +12,7 @@ import {
 } from './ContextualMenu.types';
 import { settings } from './ContextualMenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
@@ -33,6 +33,21 @@ export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
     const { setShowMenu, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
+
+    /**
+     * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
+     * hosting the menu. For whatever reason, to get the timing _just_ right to actually focus, we need an additional `setTimeout`
+     *  on top of the `useLayoutEffect` hook.
+     */
+    const focusZoneRef = React.useRef<IFocusable>(null);
+
+    React.useLayoutEffect(() => {
+      if (Platform.OS === 'macos') {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
+      }
+    }, []);
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
@@ -81,6 +96,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         showsVerticalScrollIndicator: true,
       },
       focusZone: {
+        componentRef: focusZoneRef,
         focusZoneDirection: 'vertical',
       },
     });
