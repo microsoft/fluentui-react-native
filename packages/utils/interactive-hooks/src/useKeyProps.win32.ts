@@ -37,6 +37,7 @@ export function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string
 function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
   return {
     onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
+    // Optional on Win32 to know which key events to suppress natively
     keyUpEvents: keys.map((keyCode) => {
       return { key: keyCode };
     }),
@@ -46,6 +47,7 @@ function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyP
 function getKeyDownPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
   return {
     onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
+    // Optional on Win32 to know which key events to suppress natively
     keyDownEvents: keys.map((keyCode) => {
       return { key: keyCode };
     }),
