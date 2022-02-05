@@ -26,6 +26,7 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
       <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
       <Checkbox label="A circular checkbox" circular onChange={onChangeUncontrolled} defaultChecked={false} />
+      <Checkbox label="Checkbox with smaller margins" smallerMargins onChange={onChangeUncontrolled} defaultChecked={false} />
     </View>
   );
 };

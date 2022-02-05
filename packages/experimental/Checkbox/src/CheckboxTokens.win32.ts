@@ -17,6 +17,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     fontWeight: globalTokens.font.weight.regular,
     fontFamily: t.typography.families.primary,
     checkmarkOpacity: 0,
+    padding: globalTokens.spacing.s,
     disabled: {
       checkboxBorderColor: t.colors.neutralStrokeDisabled,
       color: t.colors.neutralForegroundDisabled,
@@ -59,5 +60,12 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     labelIsBefore: {
       spacingLabelBefore: globalTokens.spacing.m,
       spacingLabelAfter: 0,
+      smallerMargins: {
+        spacingLabelBefore: globalTokens.spacing.xs,
+      },
+    },
+    smallerMargins: {
+      spacingLabelAfter: globalTokens.spacing.xs,
+      padding: globalTokens.spacing.xs,
     },
   } as CheckboxTokens);

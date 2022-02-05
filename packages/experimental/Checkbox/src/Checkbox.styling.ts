@@ -5,6 +5,7 @@ import { defaultCheckboxTokens } from './CheckboxTokens';
 
 export const checkboxStates: (keyof CheckboxTokens)[] = [
   'labelIsBefore',
+  'smallerMargins',
   'circular',
   'hovered',
   'focused',
@@ -26,10 +27,10 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignSelf: 'flex-start',
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
-          padding: 4,
+          padding: tokens.padding,
         },
       }),
-      ['backgroundColor', ...borderStyles.keys],
+      ['backgroundColor', 'padding', ...borderStyles.keys],
     ),
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({

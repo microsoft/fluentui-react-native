@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { ColorValue } from 'react-native';
-import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 
-export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   checkboxBackgroundColor?: ColorValue;
   checkboxBorderColor?: ColorValue;
   checkboxBorderRadius?: number;
@@ -28,6 +28,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
   circular?: CheckboxTokens;
+  smallerMargins?: CheckboxTokens;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
@@ -76,6 +77,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Callback that is called when the checked value has changed.
    */
   onChange?: (isChecked: boolean) => void;
+
+  /**
+   * Inserts smaller margin on the label so that the text is closer to the checkbox
+   */
+  smallerMargins?: boolean;
 
   /**
    * Provides a tooltip while hovering over Checkbox component
