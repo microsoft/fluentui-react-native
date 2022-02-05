@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Make brands in HC not show in tester",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
