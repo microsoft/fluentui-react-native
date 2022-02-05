@@ -4,7 +4,7 @@ import { View, ScrollView, Platform } from 'react-native';
 import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
 import { settings } from './Submenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { Callout } from '@fluentui-react-native/callout';
@@ -17,6 +17,21 @@ export const Submenu = compose<SubmenuType>({
   displayName: submenuName,
   usePrepareProps: (userProps: SubmenuProps, useStyling: IUseComposeStyling<SubmenuType>) => {
     const { setShowMenu, maxWidth, maxHeight, shouldFocusOnMount = true, shouldFocusOnContainer = true, ...rest } = userProps;
+
+    /**
+     * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
+     * hosting the menu. For whatever reason, to get the timing _just_ right to actually focus, we need an additional `setTimeout`
+     *  on top of the `useLayoutEffect` hook.
+     */
+    const focusZoneRef = React.useRef<IFocusable>(null);
+
+    React.useLayoutEffect(() => {
+      if (Platform.OS === 'macos') {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
+      }
+    }, []);
 
     // Grabs the context information from ContextualMenu (onDismissMenu callback)
     const context = React.useContext(CMContext);
@@ -81,6 +96,7 @@ export const Submenu = compose<SubmenuType>({
         showsVerticalScrollIndicator: true,
       },
       focusZone: {
+        componentRef: focusZoneRef,
         focusZoneDirection: 'vertical',
       },
     });
