@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add smallerMargins prop",
+  "packageName": "@fluentui-react-native/experimental-checkbox",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
