@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Wed, 26 Jan 2022 20:31:04 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.5
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.12
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/pressable to v0.8.18
+- Bump @fluentui-react-native/theme-tokens to v0.12.0
 
 ## 0.6.4
 

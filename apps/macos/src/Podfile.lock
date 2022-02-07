@@ -9,17 +9,17 @@ PODS:
     - React-Core (= 0.64.25)
     - React-jsi (= 0.64.25)
     - ReactCommon/turbomodule/core (= 0.64.25)
-  - FRNAvatar (0.14.2):
+  - FRNAvatar (0.14.3):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNCallout (0.19.21):
+  - FRNCallout (0.19.22):
     - React
-  - FRNCheckbox (0.6.4):
+  - FRNCheckbox (0.6.5):
     - React
-  - FRNMenuButton (0.7.23):
+  - FRNMenuButton (0.7.24):
     - React
-  - FRNRadioButton (0.14.17):
+  - FRNRadioButton (0.14.18):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -94,7 +94,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.8.17):
+  - RCTFocusZone (0.8.18):
     - React
   - RCTRequired (0.64.25)
   - RCTTypeSafety (0.64.25):
@@ -488,16 +488,16 @@ SPEC CHECKSUMS:
   boost-for-react-native: d5ad1140010aa8cb622323a781ecbeab4425d19a
   DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
   FBLazyVector: 83defa09b7188cb1255686bab08adda2b5cafecd
-  FBReactNativeSpec: 6e3e213d1409c5d114e857e5ecafbdf45d941ec3
-  FRNAvatar: 88556902a608963bcb9bf6b3219b97e2d1ac8e75
-  FRNCallout: 23c2bfbc727507b5589327b240154106bf706795
-  FRNCheckbox: 676dc90be6e93e2d1bb9b708bdb53049c23ad1d8
-  FRNMenuButton: 9cede37e9ac9d681012d3447481afd65b7e5e2ad
-  FRNRadioButton: 648827e532eb2e35d73e4f594d49c00bbcb3b832
+  FBReactNativeSpec: 8d388b5b295b639127cf59f31934682d6b39c446
+  FRNAvatar: 5e1b7c6304d4132046a9dd77e1b8da2f0bf7fb20
+  FRNCallout: b53d819789cac9ff5024615573335789639cd303
+  FRNCheckbox: d2ad1ecbe47d719ff7139e93b7a0eb17f3cfcb59
+  FRNMenuButton: 0a479294929d7569bea7f9a534b2cdfd6d006110
+  FRNRadioButton: 044455df06b2bd0182e2f945db111ba1c97633a8
   glog: 0dc7efada961c0793012970b60faebbd58b0decb
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
-  RCTFocusZone: 50a17a7ade01b232f72e9f19f0849f6b7f5596eb
+  RCTFocusZone: 77a7896433954ebd7107dcd46648e3971f1c7669
   RCTRequired: e6152197373372893a4e6d627468bbfdf9301311
   RCTTypeSafety: 9654015c2f88d21127cbee2786696aa9439ccee8
   React: d13c50ec2e9d1d84ababb77b85da8e6520e18ec5

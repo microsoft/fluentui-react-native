@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Fri, 28 Jan 2022 20:52:39 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Feb 2022 19:47:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.2
+
+Mon, 07 Feb 2022 19:47:54 GMT
+
+### Patches
+
+- Add Scrollview and FocusZone slots to ContextualMenu (sanajmi@microsoft.com)
+- Focus on Menu with useLayoutEffect (sanajmi@microsoft.com)
+
+## 0.15.1
+
+Fri, 04 Feb 2022 20:31:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.0
+
+## 0.15.0
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Minor changes
+
+- Adding MenuButton E2E Tests (safreibe@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.22
+- Bump @fluentui-react-native/focus-zone to v0.8.18
+- Bump @fluentui-react-native/icon to v0.11.6
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/text to v0.11.9
+- Bump @uifabricshared/foundation-compose to v1.11.9
+- Bump @fluentui-react-native/pressable to v0.8.18
 
 ## 0.14.16
 

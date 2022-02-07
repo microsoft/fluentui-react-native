@@ -2,9 +2,9 @@ import {
   RADIOGROUP_TESTPAGE,
   RADIOGROUP_TEST_COMPONENT,
   RADIOGROUP_NO_A11Y_LABEL_COMPONENT,
-  RADIOBUTTON_TEST_COMPONENT,
   HOMEPAGE_RADIOGROUP_BUTTON,
-  RADIOBUTTON_NO_A11Y_LABEL_COMPONENT,
+  FIRST_RADIO_BUTTON,
+  SECOND_RADIO_BUTTON,
 } from '../../../FluentTester/TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
@@ -59,11 +59,11 @@ class RadioGroupPage extends BasePage {
   /* RadioButton *
   /**************/
   get _radioButton() {
-    return By(RADIOBUTTON_TEST_COMPONENT);
+    return By(FIRST_RADIO_BUTTON);
   }
 
   get _secondRadioButton() {
-    return By(RADIOBUTTON_NO_A11Y_LABEL_COMPONENT);
+    return By(SECOND_RADIO_BUTTON);
   }
 }
 
