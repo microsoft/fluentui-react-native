@@ -6,6 +6,12 @@ This Migration guide is a work in progress and is not yet ready for use.
 
 ## Migration from v0 Button
 
+In the short term, the new `Button` control is named `ButtonV2` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Button`. It may be useful to rename the control to `Button` using the import syntax to simplify the rename:
+
+```ts
+import { ButtonV2 as Button } from '@fluentui-react-native/button'
+```
+
 ### Component renames
 
 Primary and Stealth buttons now map to `Button`:
