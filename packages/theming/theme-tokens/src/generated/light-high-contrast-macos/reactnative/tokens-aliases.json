@@ -263,9 +263,9 @@
   },
   "transparentStroke": {
     "strokeAlignment": "inner",
-    "strokeColorRest": "#000000",
-    "strokeColorHover": "#242424",
-    "strokeColorPressed": "#141414",
+    "strokeColorRest": "#858585",
+    "strokeColorHover": "#666666",
+    "strokeColorPressed": "#292929",
     "strokeColorDisabled": "#bdbdbd",
     "strokeWidth": 1
   }
