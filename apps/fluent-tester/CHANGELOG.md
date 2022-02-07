@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 04 Feb 2022 20:31:52 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Feb 2022 19:47:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.53.0
+
+Mon, 07 Feb 2022 19:47:54 GMT
+
+### Minor changes
+
+- Adding assert checking to BasePage and integrating with all spec files (safreibe@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.5
+- Bump @fluentui/react-native to v0.27.26
 
 ## 0.52.2
 

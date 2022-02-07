@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Tesing assert tracking script - Running only Icon Win32 E2E test because this causes an assert. I want to see if the script will find the assert",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "none"
-}

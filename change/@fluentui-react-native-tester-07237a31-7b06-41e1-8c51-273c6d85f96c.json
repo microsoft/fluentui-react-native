@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding assert checking to BasePage and integrating with all spec files",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
