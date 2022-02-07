@@ -15589,9 +15589,9 @@ react-native-codegen@^0.0.6:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.64.0, react-native-macos@^0.64.6:
-  version "0.64.26"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.26.tgz#7750188cb024bb5597932cd8a011d57a1b86b46e"
-  integrity sha512-t8DXgk/X5nhTapHb1dCo3z8xp3z8rZedW1h1clkWiAvl3L/3iinCAtB6KteC1OcCrs5qaYcnpmUR5OsuhYvyPA==
+  version "0.64.27"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.64.27.tgz#bcc12d50b0fb6252550a3cd7cb70dc17d3a5ed96"
+  integrity sha512-5BzD6MEU3MiDL55mFUNWtnxAmzSLk8Qi40W4ut61MXxhaYLunugR7L/FnUltvnOa/uRAPbxhUbawK5YLZEV4oQ==
   dependencies:
     "@jest/create-cache-key-function" "^26.5.0"
     "@react-native-community/cli" "^5.0.1-alpha.1"
