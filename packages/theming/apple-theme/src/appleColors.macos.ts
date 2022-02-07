@@ -4,6 +4,7 @@ import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
 import { createMacOSAliasTokens } from './createMacOSAliasTokens';
+import { isHighContrastModeEnabled } from './createAppleTheme.macos';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -58,7 +59,7 @@ export function getAppleSemanticPalette(): AppleSemanticPalette {
 function getFluentUIApplePalette(): FluentUIApplePalette {
   const appearance = Appearance.getColorScheme();
   const mode = getCurrentAppearance(appearance, 'light');
-  const macOSAliasColorTokens = createMacOSAliasTokens(mode);
+  const macOSAliasColorTokens = createMacOSAliasTokens(mode, isHighContrastModeEnabled);
 
   return {
     blue10: '#4F6BED',

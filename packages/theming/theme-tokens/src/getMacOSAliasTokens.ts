@@ -5,17 +5,16 @@ import * as macOSDarkHCAliasTokens from './dark-high-contrast-macos/tokens-alias
 import * as hcAliasTokens from './highContrast/tokens-alias';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
-import { isHighContrastMode } from '../../apple-theme/src/createAppleTheme.macos';
 
-export function getAliasTokens(mode: AppearanceOptions) {
+export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boolean) {
   if (mode === 'light') {
-    if (isHighContrastMode) {
+    if (isHighContrast) {
       return macOSLightHCAliasTokens.default;
     } else {
       return macOSLightAliasTokens.default;
     }
   } else if (mode === 'dark') {
-    if (isHighContrastMode) {
+    if (isHighContrast) {
       return macOSDarkHCAliasTokens.default;
     } else {
       return macOSDarkAliasTokens.default;

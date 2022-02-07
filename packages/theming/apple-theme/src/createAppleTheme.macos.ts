@@ -4,7 +4,7 @@ import { Appearance } from 'react-native';
 import { getBaseAppleThemeMacOS } from './appleTheme.macos';
 import { AccessibilityInfo } from 'react-native-macos';
 
-export let isHighContrastMode: boolean;
+export let isHighContrastModeEnabled: boolean;
 let appleThemeReference: ThemeReference;
 
 export function createAppleTheme(): ThemeReference {
@@ -27,6 +27,6 @@ export function createAppleTheme(): ThemeReference {
 function highContrastHandler() {
   AccessibilityInfo.isHighContrastEnabled().then((isEnabled) => {
     appleThemeReference.invalidate();
-    isHighContrastMode = isEnabled;
+    isHighContrastModeEnabled = isEnabled;
   });
 }
