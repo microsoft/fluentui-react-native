@@ -7,7 +7,7 @@ import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../
 describe('Checkbox Testing Initialization', () => {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Checkbox test page', () => {
@@ -19,7 +19,8 @@ describe('Checkbox Testing Initialization', () => {
     NavigateAppPage.clickAndGoToCheckboxPage();
     CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
+    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy(CheckboxPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -32,14 +33,17 @@ describe('Checkbox Accessibility Testing', () => {
 
   it('Checkbox - Validate accessibilityRole is correct', () => {
     expect(CheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Checkbox - Set accessibilityLabel', () => {
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', () => {
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -69,6 +73,7 @@ describe('Checkbox Functional Testing', () => {
 
     /* Validate the Checkbox is toggled OFF */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeFalsy();
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Click the "Spacebar" on a Checkbox and verify it toggles', () => {
@@ -78,5 +83,6 @@ describe('Checkbox Functional Testing', () => {
 
     /* Validate the Checkbox is selected */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeTruthy();
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });

@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 describe('ContextualMenu Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to ContextualMenu test page', () => {
@@ -18,7 +18,8 @@ describe('ContextualMenu Testing Initialization', function () {
     NavigateAppPage.clickAndGoToContextualMenuPage();
     ContextualMenuPageObjectObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ContextualMenuPageObjectObject.isPageLoaded()).toBeTruthy();
+    expect(ContextualMenuPageObjectObject.isPageLoaded()).toBeTruthy(ContextualMenuPageObjectObject.ERRORMESSAGE_PAGELOAD);
+    expect(ContextualMenuPageObjectObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObjectObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -37,6 +38,7 @@ describe('ContextualMenu Functional Tests', () => {
     ContextualMenuPageObjectObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT);
 
     expect(ContextualMenuPageObjectObject.contextualMenuItemDisplayed()).toBeTruthy();
+    expect(ContextualMenuPageObjectObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObjectObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   it('Type "SpaceBar" to select the ContextualMenu and validate that the list of ContextualMenu Items open', () => {
@@ -45,6 +47,7 @@ describe('ContextualMenu Functional Tests', () => {
     ContextualMenuPageObjectObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT);
 
     expect(ContextualMenuPageObjectObject.contextualMenuItemDisplayed()).toBeTruthy();
+    expect(ContextualMenuPageObjectObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObjectObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   /* Runs after all tests. This ensures the ContextualMenu closes. If it stays open, the test driver won't be able to close the test app */
