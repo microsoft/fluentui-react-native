@@ -134,19 +134,20 @@
     "fillColorRest": "#e6e6e6"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#f0f0f0"
+    "fillColorRest": "#f0f0f0",
+    "fillColorSelected": "PlatformColor(Window)"
   },
   "neutralBackgroundInverted": {
     "fillColorRest": "#616161"
   },
   "neutralForeground1": {
-    "fillColorRest": "#242424",
-    "fillColorHover": "#242424",
-    "fillColorPressed": "#242424",
-    "fillColorSelected": "#242424"
+    "fillColorRest": "#000000",
+    "fillColorHover": "#000000",
+    "fillColorPressed": "#000000",
+    "fillColorSelected": "#000000"
   },
   "neutralForeground2": {
-    "fillColorRest": "#424242",
+    "fillColorRest": "#000000",
     "fillColorHover": "#242424",
     "fillColorPressed": "#242424",
     "fillColorBrandHover": "#106ebe",
@@ -155,7 +156,7 @@
     "fillColorSelected": "#242424"
   },
   "neutralForeground3": {
-    "fillColorRest": "#616161",
+    "fillColorRest": "#000000",
     "fillColorHover": "#424242",
     "fillColorPressed": "#424242",
     "fillColorBrandHover": "#106ebe",
@@ -164,7 +165,7 @@
     "fillColorSelected": "#424242"
   },
   "neutralForeground4": {
-    "fillColorRest": "#808080"
+    "fillColorRest": "#424242"
   },
   "neutralForegroundDisabled": {
     "fillColorRest": "#bdbdbd"
@@ -191,22 +192,22 @@
     "fillColorRest": "#fafafa"
   },
   "neutralStroke1": {
-    "strokeColorRest": "#f0f0f0",
+    "strokeColorRest": "#616161",
     "strokeColorHover": "#c7c7c7",
     "strokeColorPressed": "#b3b3b3",
     "strokeColorSelected": "#bdbdbd",
     "strokeWidth": 1
   },
   "neutralStroke2": {
-    "strokeColorRest": "#e0e0e0",
+    "strokeColorRest": "#616161",
     "strokeWidth": 1
   },
   "neutralStroke3": {
-    "strokeColorRest": "#f0f0f0",
+    "strokeColorRest": "#616161",
     "strokeWidth": 1
   },
   "neutralStrokeAccessible": {
-    "strokeColorRest": "#616161",
+    "strokeColorRest": "#242424",
     "strokeColorHover": "#575757",
     "strokeColorPressed": "#4d4d4d",
     "strokeColorSelected": "#0078d4",
@@ -262,10 +263,10 @@
   },
   "transparentStroke": {
     "strokeAlignment": "inner",
-    "strokeColorRest": "transparent",
-    "strokeColorHover": "transparent",
-    "strokeColorPressed": "transparent",
-    "strokeColorDisabled": "transparent",
+    "strokeColorRest": "#858585",
+    "strokeColorHover": "#666666",
+    "strokeColorPressed": "#292929",
+    "strokeColorDisabled": "#bdbdbd",
     "strokeWidth": 1
   }
 }
