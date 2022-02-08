@@ -23,7 +23,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     pressed: {
       backgroundColor: t.colors.defaultPressedBackground,
       color: t.colors.defaultPressedContent,
-      borderColor: t.colors.defaultHoveredBorder,
+      borderColor: t.colors.defaultPressedBorder,
       iconColor: t.colors.defaultPressedIcon,
     },
     focused: {
