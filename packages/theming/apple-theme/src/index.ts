@@ -1,3 +1,3 @@
 export * from './createAppleTheme';
 export * from './createMacOSAliasTokens';
-export { isHighContrastModeEnabled } from './createAppleTheme.macos';
+export * from './appleHighContrast.macos';

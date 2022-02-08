@@ -3,8 +3,8 @@ import { Theme } from '@fluentui-react-native/theme-types';
 import { Appearance } from 'react-native';
 import { getBaseAppleThemeMacOS } from './appleTheme.macos';
 import { AccessibilityInfo } from 'react-native-macos';
+import { setIsHighContrast } from './appleHighContrast.macos';
 
-export let isHighContrastModeEnabled: boolean;
 let appleThemeReference: ThemeReference;
 
 export function createAppleTheme(): ThemeReference {
@@ -27,6 +27,6 @@ export function createAppleTheme(): ThemeReference {
 function highContrastHandler() {
   AccessibilityInfo.isHighContrastEnabled().then((isEnabled) => {
     appleThemeReference.invalidate();
-    isHighContrastModeEnabled = isEnabled;
+    setIsHighContrast(isEnabled);
   });
 }
