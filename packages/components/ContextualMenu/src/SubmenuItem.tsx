@@ -60,8 +60,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       if (!disabled) {
         onClick && onClick();
         context?.onItemClick && context.onItemClick(itemKey);
-        context?.dismissSubmenu && context.dismissSubmenu();
-        context?.onDismissMenu();
       }
     }, [context, disabled, itemKey, onClick]);
 

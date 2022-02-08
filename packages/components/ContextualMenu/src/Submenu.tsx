@@ -43,11 +43,13 @@ export const Submenu = compose<SubmenuType>({
       userProps?.onShow && userProps.onShow();
       context.isSubmenuOpen = true;
     }, [context]);
+
     const onDismiss = React.useCallback(() => {
       userProps?.onDismiss();
       setShowMenu(false);
       context.isSubmenuOpen = false;
     }, [context, setShowMenu]);
+
     const dismissCallback = React.useCallback(() => {
       onDismiss();
       context?.onDismissMenu();
