@@ -1,3 +1,3 @@
-import aliasTokens from '../generated/light-macos/reactnative/tokens-aliases.json';
+import aliasTokens from '../generated/light-high-contrast-macos/reactnative/tokens-aliases.json';
 
 export default aliasTokens;
