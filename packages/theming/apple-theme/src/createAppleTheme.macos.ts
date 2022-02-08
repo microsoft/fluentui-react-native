@@ -26,7 +26,7 @@ export function createAppleTheme(): ThemeReference {
 
 function highContrastHandler() {
   AccessibilityInfo.isHighContrastEnabled().then((isEnabled) => {
-    appleThemeReference.invalidate();
     setIsHighContrast(isEnabled);
+    appleThemeReference.invalidate();
   });
 }
