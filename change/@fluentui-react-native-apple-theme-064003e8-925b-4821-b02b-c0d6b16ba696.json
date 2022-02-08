@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "high contrast support",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "none"
+}
