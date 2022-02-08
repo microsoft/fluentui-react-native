@@ -13,6 +13,7 @@ exports[`ToggleButton default 1`] = `
   accessibilityRole="button"
   accessibilityState={
     Object {
+      "checked": undefined,
       "disabled": false,
     }
   }
@@ -20,7 +21,6 @@ exports[`ToggleButton default 1`] = `
   enableFocusRing={true}
   focusable={true}
   onAccessibilityAction={[Function]}
-  onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
