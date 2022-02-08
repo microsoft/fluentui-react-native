@@ -24,11 +24,10 @@ class CalloutWindow: NSWindow {
 
 		// Dismiss the Callout if the user touched/clicked outside the Callout Window or any of our child windows.
 		mouseEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { [weak self] (event) -> NSEvent? in
-			NSLog("Saad Hitty hit")
 			guard let clickedWindow = event.window else {
 				return event
 			}
-			
+
 			var shouldDismissCallout = false
 
 			if (clickedWindow.isEqual(to: self) ) {
@@ -73,11 +72,11 @@ class CalloutWindow: NSWindow {
 
 	@objc private func dismissCallout() {
 		lifeCycleDelegate?.calloutWillDismiss(window: self)
-		
+
 		if let monitor = mouseEventMonitor {
 			NSEvent.removeMonitor(monitor)
 		}
-		
+
 		orderOut(self)
 	}
 
