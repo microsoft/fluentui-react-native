@@ -2,18 +2,20 @@ import * as React from 'react';
 import { ToggleButtonProps, ToggleButtonState } from './ToggleButton.types';
 import { useButton } from '../useButton';
 import { useAsToggle } from '@fluentui-react-native/interactive-hooks';
+import { memoize } from '@fluentui-react-native/framework';
+import { AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => {
-  const { accessibilityActions, defaultChecked, checked, onAccessibilityAction, onClick, ...rest } = props;
+  const { accessibilityActions, accessibilityState, defaultChecked, checked, onAccessibilityAction, onClick, ...rest } = props;
   // Warns defaultChecked and checked being mutually exclusive.
   if (defaultChecked != undefined && checked != undefined) {
     console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
   }
   const [checkedValue, toggle] = useAsToggle(defaultChecked, checked, onClick);
   const accessibilityActionsProp = accessibilityActions
-    ? [...accessibilityActions, ...defaultAccessibilityActions]
+    ? [...defaultAccessibilityActions, ...accessibilityActions]
     : defaultAccessibilityActions;
   const onAccessibilityActionProp = React.useCallback(
     (event) => {
@@ -30,6 +32,7 @@ export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => 
   const button = useButton({
     onClick: toggle,
     accessibilityActions: accessibilityActionsProp,
+    accessibilityState: getAccessibilityState(checkedValue, accessibilityState),
     onAccessibilityAction: onAccessibilityActionProp,
     ...rest,
   });
@@ -39,3 +42,11 @@ export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => 
     state: { ...button.state, checked: checkedValue },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(toggled: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { selected: toggled, ...accessibilityState };
+  }
+  return { selected: toggled };
+}
