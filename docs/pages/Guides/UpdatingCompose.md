@@ -1,6 +1,6 @@
 # Migrating from old to new compose
 
-The compose API off our components allows clients to supply new arguments for creating the control in order for them to meet their needs. In moving controls from the old to new framework, the compose API usage changes. The compose API has a large range of inputs and is very flexible. This guide will cover more common scenarios. If you need help with something not covered here, please open an issue on the repo.
+The compose API allows clients to supply new arguments for creating the control with specialized requirements. The second version of the FluentUI composition framework changes the compose API. The compose API has a large range of inputs and is very flexible. This guide will cover more common scenarios. Please open an issue on the repo is additional examples of migrating to the new API are necessary for a particular scenario.
 
 ## Old compose
 
@@ -87,8 +87,8 @@ slotProps: {
 }
 ```
 
-The `slotProps` property only takes care of the properties of `settings` that are named after slots. For migrating the token portions, you can add a `token` propery with the customized tokens defined. The contnet of the `token` property would be what you would pass into the customize API. See guidance on how to migrate the customize API [here](./UpdatingCustomize.md) for formatting guidance.
+The `slotProps` property only takes care of the properties of `settings` that are named after slots. For migrating the token portions, you can add a `token` propery with the customized tokens defined. The content of the `token` property would be what you would pass into the customize API. See guidance on how to migrate the customize API [here](./UpdatingCustomize.md) for formatting guidance.
 
 ### Replacing `usePrepareProps`
 
-There is no direct equivalent for `usePrepareProps` in the new compose API. Migrating from `usePrepareProps` can be difficult, so if there are any issues please open an issue on our repo and we will be happy to help.
+There is no direct equivalent for `usePrepareProps` in the new compose API. Hooks that used to be put in `usePrepareProps` are now in the outer closure of the `render` function. Migrating from `usePrepareProps` can be difficult, so if there are any issues please open an issue on our repo and we will be happy to help.
