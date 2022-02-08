@@ -17,13 +17,13 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     hovered: {
       backgroundColor: t.colors.defaultHoveredBackground,
       color: t.colors.defaultHoveredContent,
-      borderColor: t.colors.buttonBorder,
+      borderColor: t.colors.defaultHoveredBorder,
       iconColor: t.colors.defaultHoveredIcon,
     },
     pressed: {
       backgroundColor: t.colors.defaultPressedBackground,
       color: t.colors.defaultPressedContent,
-      borderColor: t.colors.buttonBorder,
+      borderColor: t.colors.defaultHoveredBorder,
       iconColor: t.colors.defaultPressedIcon,
     },
     focused: {

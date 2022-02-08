@@ -2,7 +2,6 @@ import * as macOSLightAliasTokens from './light-macos/tokens-alias';
 import * as macOSDarkAliasTokens from './dark-macos/tokens-alias';
 import * as macOSLightHCAliasTokens from './light-high-contrast-macos/tokens-alias';
 import * as macOSDarkHCAliasTokens from './dark-high-contrast-macos/tokens-alias';
-import * as hcAliasTokens from './highContrast/tokens-alias';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
@@ -20,7 +19,7 @@ export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boo
       return macOSDarkAliasTokens.default;
     }
   } else if (mode === 'highContrast') {
-    return hcAliasTokens.default;
+    throw new Error('highContrast is not a valid AppearanceOptions on macOS');
   } else {
     assertNever(mode);
   }
