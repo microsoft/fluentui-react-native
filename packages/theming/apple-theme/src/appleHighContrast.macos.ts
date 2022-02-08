@@ -1,5 +1,5 @@
-export let isHighContrast = false;
+export let isHighContrastEnabled = false;
 
 export function setIsHighContrast(isHighContrast: boolean) {
-  isHighContrast = isHighContrast;
+  isHighContrastEnabled = isHighContrast;
 }
