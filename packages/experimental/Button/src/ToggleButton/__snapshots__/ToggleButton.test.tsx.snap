@@ -2,6 +2,13 @@
 
 exports[`ToggleButton default 1`] = `
 <View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Toggle",
+      },
+    ]
+  }
   accessibilityLabel="Default Button"
   accessibilityRole="button"
   accessibilityState={
@@ -12,6 +19,7 @@ exports[`ToggleButton default 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={true}
+  onAccessibilityAction={[Function]}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
