@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Mon, 07 Feb 2022 19:47:54 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.15.2",
+      "version": "0.15.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "cac4086914b356774983e1ede6b7abb0081a1413",
+            "comment": "Add Scrollview and FocusZone slots to ContextualMenu"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "7f32c71f2dc39532b22b07101159edf4efabd397",
+            "comment": "Focus on Menu with useLayoutEffect"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 04 Feb 2022 20:31:52 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.15.1",
       "version": "0.15.1",

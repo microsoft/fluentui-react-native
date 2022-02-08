@@ -6,7 +6,7 @@ import { TAB_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, TABITEM_A11Y_ROLE, Keys 
 describe('Tabs Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tabs test page', () => {
@@ -18,7 +18,8 @@ describe('Tabs Testing Initialization', function () {
     NavigateAppPage.clickAndGoToTabsPage();
     TabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(TabsPageObject.isPageLoaded()).toBeTruthy();
+    expect(TabsPageObject.isPageLoaded()).toBeTruthy(TabsPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(TabsPageObject.didAssertPopup()).toBeFalsy(TabsPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -31,10 +32,12 @@ describe('Tabs Accessibility Testing', () => {
 
   it("Validate Tab's accessibilityRole is correct", () => {
     expect(TabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
+    expect(TabsPageObject.didAssertPopup()).toBeFalsy(TabsPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it("Validate TabItem's accessibilityRole is correct", () => {
     expect(TabsPageObject.getTabItemAccesibilityRole(TabItemSelector.First)).toEqual(TABITEM_A11Y_ROLE);
+    expect(TabsPageObject.didAssertPopup()).toBeFalsy(TabsPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -53,6 +56,7 @@ describe('Tabs Functional Tests', () => {
     TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     expect(TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
+    expect(TabsPageObject.didAssertPopup()).toBeFalsy(TabsPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Keyboarding: Arrow Navigation: Right -> Down -> Left -> Up -> Validate the correct TabItem content is shown', () => {
@@ -79,5 +83,6 @@ describe('Tabs Functional Tests', () => {
     TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.First, PAGE_TIMEOUT);
 
     expect(TabsPageObject.didTabItemContentLoad(TabItemSelector.First)).toBeTruthy();
+    expect(TabsPageObject.didAssertPopup()).toBeFalsy(TabsPageObject.ERRORMESSAGE_ASSERT);
   });
 });

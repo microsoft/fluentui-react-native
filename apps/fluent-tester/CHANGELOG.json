@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 07 Feb 2022 19:47:54 GMT",
+      "tag": "@fluentui-react-native/tester_v0.53.0",
+      "version": "0.53.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "46b25d50eca31f88d908226ba0e75135ad5895c8",
+            "comment": "Adding assert checking to BasePage and integrating with all spec files"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.5",
+            "commit": "338ce0f09bf19a71946e821fb02b0ecbdf491c6a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.27.26",
+            "commit": "338ce0f09bf19a71946e821fb02b0ecbdf491c6a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 04 Feb 2022 20:31:52 GMT",
       "tag": "@fluentui-react-native/tester_v0.52.2",
       "version": "0.52.2",

@@ -13,7 +13,7 @@ import {
 describe('RadioGroup/RadioButton Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to RadioGroup test page', () => {
@@ -25,7 +25,8 @@ describe('RadioGroup/RadioButton Testing Initialization', function () {
     NavigateAppPage.clickAndGoToRadioGroupPage();
     RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(RadioGroupPageObject.isPageLoaded()).toBeTruthy();
+    expect(RadioGroupPageObject.isPageLoaded()).toBeTruthy(RadioGroupPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -38,26 +39,32 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
 
   it("Validate RadioGroup's accessibilityRole is correct", () => {
     expect(RadioGroupPageObject.getAccessibilityRole()).toEqual(RADIOGROUP_A11Y_ROLE);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it("Validate RadioButton's accessibilityRole is correct", () => {
     expect(RadioGroupPageObject.getRadioButtonAccesibilityRole()).toEqual(RADIOBUTTON_A11Y_ROLE);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('RadioGroup - Set accessibilityLabel', () => {
     expect(RadioGroupPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(RADIOGROUP_ACCESSIBILITY_LABEL);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('RadioGroup - Do not set accessibilityLabel -> Default to RadioGroup label', () => {
     expect(RadioGroupPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(RADIOGROUP_TEST_COMPONENT_LABEL);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('RadioButton - Set accessibilityLabel', () => {
     expect(RadioGroupPageObject.getRBAccessibilityLabel(RadioButtonSelector.First)).toEqual(FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('RadioButton - Do not set accessibilityLabel -> Default to RadioButton label', () => {
     expect(RadioGroupPageObject.getRBAccessibilityLabel(RadioButtonSelector.Second)).toEqual(SECOND_RADIO_BUTTON_LABEL);
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -80,6 +87,7 @@ describe('RadioGroup Functional Testing', () => {
 
     /* Validate the RadioButton is selected */
     expect(RadioGroupPageObject.isRadioButtonSelected(RadioButtonSelector.Second)).toBeTruthy();
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Keyboard to RadioButton and check for Selection state', () => {
@@ -89,6 +97,7 @@ describe('RadioGroup Functional Testing', () => {
 
     /* Validate the RadioButton is selected */
     expect(RadioGroupPageObject.isRadioButtonSelected(RadioButtonSelector.Second)).toBeTruthy();
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it("Keyboard to DISABLED RadioButton and validate it doesn't get selected", () => {
@@ -98,5 +107,6 @@ describe('RadioGroup Functional Testing', () => {
 
     /* Validate the RadioButton is selected */
     expect(RadioGroupPageObject.isRadioButtonSelected(RadioButtonSelector.Fourth)).toBeTruthy();
+    expect(RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 });

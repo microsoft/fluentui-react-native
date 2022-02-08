@@ -103,7 +103,7 @@
   "neutralBackground1": {
     "fillColorRest": "#ffffff",
     "fillColorHover": "#f5f5f5",
-    "fillColorPressed": "#e0e0e0",
+    "fillColorPressed": "#ebebeb",
     "fillColorSelected": "#ebebeb"
   },
   "neutralBackground2": {
