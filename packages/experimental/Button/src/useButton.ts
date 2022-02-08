@@ -14,13 +14,14 @@ export const useButton = (props: ButtonProps): ButtonState => {
   const pressable = useAsPressable({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const isDisabled = !!disabled || !!loading;
+  const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
   return {
     props: {
       ...pressable.props,
       accessible: true,
       accessibilityRole: 'button',
-      onAccessibilityTap: props.onAccessibilityTap || props.onClick,
+      onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: true,

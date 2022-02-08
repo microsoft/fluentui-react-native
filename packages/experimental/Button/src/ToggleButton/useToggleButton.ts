@@ -46,7 +46,7 @@ export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
 function getAccessibilityStateWorker(toggled: boolean, accessibilityState?: AccessibilityState) {
   if (accessibilityState) {
-    return { selected: toggled, ...accessibilityState };
+    return { checked: toggled, ...accessibilityState };
   }
-  return { selected: toggled };
+  return { checked: toggled };
 }
