@@ -29,17 +29,19 @@ class CalloutWindow: NSWindow {
 			}
 
 			var shouldDismissCallout = true
-
+			
+			// Did the click happened in our own window?
 			if (clickedWindow.isEqual(to: self) ) {
-				// The click happened in our own window. 
 				shouldDismissCallout = false
-			} else if (clickedWindow.isEqual(to: self?.parent) && self?.parent is CalloutWindow) {
-				// We are a child window of a Callout (e.g: a ContextualMenu Submenu), and the click happened in our parent
+
+			// Are we a child window of a Callout (e.g: a ContextualMenu submenu), where the click happened in our parent?
+			} else if (clickedWindow.isEqual(to: self?.parent as? CalloutWindow)) {
 				shouldDismissCallout = false
+
+			// Did the click happened in any of our child windows (e.g: our submenus)?
 			} else if (self?.childWindows?.contains(clickedWindow) ?? false) {
-				// The click happened in any of our child windows (e.g: our submenus)
 				shouldDismissCallout = false
-			} 
+			}
 
 			if (shouldDismissCallout) {
 				self?.dismissCallout()
