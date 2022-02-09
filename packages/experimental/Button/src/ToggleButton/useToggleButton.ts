@@ -24,7 +24,7 @@ export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => 
           toggle();
           break;
       }
-      onAccessibilityAction(event);
+      onAccessibilityAction && onAccessibilityAction(event);
     },
     [toggle, onAccessibilityAction],
   );
