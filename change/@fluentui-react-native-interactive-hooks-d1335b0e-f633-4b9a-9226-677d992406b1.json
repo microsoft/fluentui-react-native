@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Override keyUpEvents / keyDownEvents prop on win32",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
