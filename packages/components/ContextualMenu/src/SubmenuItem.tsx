@@ -109,11 +109,26 @@ export const SubmenuItem = compose<SubmenuItemType>({
       icon: !!icon,
     };
 
+    const showWithArrowKey = React.useCallback(
+      (e: any) => {
+        if (I18nManager.isRTL) {
+          if (e.nativeEvent.key === 'ArrowLeft') {
+            onItemHoverIn(e);
+          }
+        } else {
+          if (e.nativeEvent.key === 'ArrowRight') {
+            onItemHoverIn(e);
+          }
+        }
+      },
+      [onItemHoverIn],
+    );
+
     /**
-     * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow.
+     * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow (flipped for RTL).
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
      */
-    const onKeyDownProps = useKeyDownProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
+    const onKeyDownProps = useKeyDownProps(showWithArrowKey, ' ', 'Enter', 'ArrowLeft', 'ArrowRight');
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
