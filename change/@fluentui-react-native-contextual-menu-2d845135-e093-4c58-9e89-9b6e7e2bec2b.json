@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Flip arrow key navigation in RTL",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
