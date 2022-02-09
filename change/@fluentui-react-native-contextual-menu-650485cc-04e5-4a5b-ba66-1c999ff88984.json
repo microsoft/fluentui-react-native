@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Arrow Right/Left open and close the submenu.",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
