@@ -1,7 +1,7 @@
 {
-  "type": "patch",
-  "comment": "Fix block for CompoundButton",
+  "type": "none",
+  "comment": "Some edits",
   "packageName": "@fluentui-react-native/experimental-button",
   "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
+  "dependentChangeType": "none"
 }

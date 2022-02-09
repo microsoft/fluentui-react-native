@@ -1,8 +1,31 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 02 Feb 2022 22:09:55 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Feb 2022 19:47:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.53.0
+
+Mon, 07 Feb 2022 19:47:54 GMT
+
+### Minor changes
+
+- Adding assert checking to BasePage and integrating with all spec files (safreibe@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.5
+- Bump @fluentui/react-native to v0.27.26
+
+## 0.52.2
+
+Fri, 04 Feb 2022 20:31:52 GMT
+
+### Patches
+
+- Implement some test improvements (ruaraki@microsoft.com)
+- Make brands in HC not show in tester (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.13.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.4
+- Bump @fluentui-react-native/experimental-tabs to v0.4.19
+- Bump @fluentui/react-native to v0.27.25
 
 ## 0.52.1
 

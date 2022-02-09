@@ -11,7 +11,7 @@ import {
 describe('Button Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button test page', () => {
@@ -23,7 +23,8 @@ describe('Button Testing Initialization', function () {
     NavigateAppPage.clickAndGoToButtonPage();
     ButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ButtonPageObject.isPageLoaded()).toBeTruthy();
+    expect(ButtonPageObject.isPageLoaded()).toBeTruthy(ButtonPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -36,14 +37,17 @@ describe('Button Accessibility Testing', () => {
 
   it('Button - Validate accessibilityRole is correct', () => {
     expect(ButtonPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Button - Set accessibilityLabel', () => {
     expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL_DEPRECATED);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Button - Do not set accessibilityLabel -> Default to Button label', () => {
     expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL_DEPRECATED);
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -57,6 +61,7 @@ describe('Button Functional Testing', () => {
   it('Validate OnClick() callback was fired -> Click', () => {
     ButtonPageObject.clickComponent();
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
     ButtonPageObject.clickComponent(); // Reset Button State
   });
@@ -64,6 +69,7 @@ describe('Button Functional Testing', () => {
   it('Validate OnClick() callback was fired -> Type "Enter"', () => {
     ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
     ButtonPageObject.clickComponent(); // Reset Button State
   });
@@ -71,5 +77,6 @@ describe('Button Functional Testing', () => {
   it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {
     ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
     expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });

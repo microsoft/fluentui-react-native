@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Tue, 08 Feb 2022 05:13:39 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "none": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "80492a2aae581602694d82ff32793f0086654083",
+            "comment": "high contrast support"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Feb 2022 20:31:52 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "bd111f6fa337a645cf17d1b335132f7b8fca9a0a",
+            "comment": "Fix block for CompoundButton"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 02 Feb 2022 22:09:55 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.13.0",
       "version": "0.13.0",
