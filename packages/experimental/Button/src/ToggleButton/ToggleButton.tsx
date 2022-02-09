@@ -6,11 +6,10 @@ import { ToggleButtonProps, toggleButtonName, ToggleButtonType } from './ToggleB
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './ToggleButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useButton } from '../useButton';
-import { useAsToggle } from '@fluentui-react-native/interactive-hooks';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { buttonLookup } from '../Button';
+import { useToggleButton } from './useToggleButton';
 
 export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
@@ -21,22 +20,15 @@ export const ToggleButton = compose<ToggleButtonType>({
     content: Text,
   },
   render: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
-    const { defaultChecked, checked, onClick, ...rest } = userProps;
     const iconProps = createIconProps(userProps.icon);
-
-    // Warns defaultChecked and checked being mutually exclusive.
-    if (defaultChecked != undefined && checked != undefined) {
-      console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
-    }
-    const [checkedValue, toggle] = useAsToggle(defaultChecked, checked, onClick);
-    const button = useButton({ onClick: toggle, ...rest });
+    const toggleButton = useToggleButton(userProps);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => (layer === 'checked' && checkedValue) || buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, toggleButton.state, userProps));
 
     // now return the handler for finishing render
     return (final: ToggleButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, iconPosition, iconOnly, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconPosition, iconOnly, loading, accessibilityLabel, ...mergedProps } = mergeProps(toggleButton.props, final);
       const shouldShowIcon = !loading && icon;
 
       if (__DEV__ && iconOnly) {
