@@ -2,6 +2,180 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 09 Feb 2022 20:14:50 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.10",
+      "version": "0.0.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.13.0",
+            "commit": "f7264338409e4a7e4cbb4f4fb815d4ab32276d8a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "f7264338409e4a7e4cbb4f4fb815d4ab32276d8a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "f7264338409e4a7e4cbb4f4fb815d4ab32276d8a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 08 Feb 2022 05:13:39 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.9",
+      "version": "0.0.9",
+      "comments": {
+        "none": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "80492a2aae581602694d82ff32793f0086654083"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "80492a2aae581602694d82ff32793f0086654083"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Feb 2022 19:47:54 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.9",
+      "version": "0.0.9",
+      "comments": {
+        "none": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "338ce0f09bf19a71946e821fb02b0ecbdf491c6a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "338ce0f09bf19a71946e821fb02b0ecbdf491c6a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Feb 2022 20:31:52 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.9",
+      "version": "0.0.9",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "5588e7458b699e44d99bdf67c1440c3c30d8ed51",
+            "comment": "Empty change"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "5588e7458b699e44d99bdf67c1440c3c30d8ed51"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "5588e7458b699e44d99bdf67c1440c3c30d8ed51"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 22:09:55 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.9",
+      "version": "0.0.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "50be92830d119b80e6acf74d9077333d6f925cce",
+            "comment": "Empty bump"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "50be92830d119b80e6acf74d9077333d6f925cce"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "50be92830d119b80e6acf74d9077333d6f925cce"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 02:29:07 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.8",
+      "version": "0.0.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.12",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.12",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.6",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.12.2",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.12.0",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Jan 2022 20:52:39 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.7",
       "version": "0.0.7",

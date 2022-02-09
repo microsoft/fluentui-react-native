@@ -4,6 +4,7 @@ import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
 import { createMacOSAliasTokens } from './createMacOSAliasTokens';
+import { getIsHighContrast } from './appleHighContrast.macos';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -58,7 +59,7 @@ export function getAppleSemanticPalette(): AppleSemanticPalette {
 function getFluentUIApplePalette(): FluentUIApplePalette {
   const appearance = Appearance.getColorScheme();
   const mode = getCurrentAppearance(appearance, 'light');
-  const macOSAliasColorTokens = createMacOSAliasTokens(mode);
+  const macOSAliasColorTokens = createMacOSAliasTokens(mode, getIsHighContrast());
 
   return {
     blue10: '#4F6BED',
@@ -278,9 +279,9 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     neutralBackground3: macOSAliasColorTokens.neutralBackground3,
     neutralStrokeDisabled: macOSAliasColorTokens.neutralStrokeDisabled,
     transparentBackground: macOSAliasColorTokens.transparentBackground,
+    transparentStroke: macOSAliasColorTokens.transparentStroke,
   };
 }
-
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
  * The fallback palette is loaded while we wait for  the native theming module to load, or if the module is not found
  */
@@ -309,7 +310,6 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     variantBorder: applePlatform.separatorColor,
     variantBorderHovered: applePlatform.separatorColor,
     defaultStateBackground: applePlatform.controlBackgroundColor,
-
     errorText: fluentUIApple.dangerPrimary,
     warningText: fluentUIApple.warningPrimary,
     errorBackground: fluentUIApple.dangerTint10,
@@ -337,7 +337,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonBackgroundCheckedHovered: fluentUIApple.neutralBackground3,
     buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
     buttonBackgroundDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
-    buttonBorder: fluentUIApple.transparentBackground,
+    buttonBorder: fluentUIApple.transparentStroke,
     buttonText: fluentUIApple.neutralForeground3,
     buttonTextHovered: fluentUIApple.neutralForeground3,
     buttonTextChecked: fluentUIApple.neutralForeground3,
@@ -390,22 +390,22 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     // Set the default button tokens to match the Acrylic Button style
     defaultBackground: fluentUIApple.neutralBackground3,
-    defaultBorder: 'transparent',
+    defaultBorder: fluentUIApple.transparentStroke,
     defaultContent: fluentUIApple.neutralForeground3,
     defaultIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultHoveredBackground: fluentUIApple.neutralBackground3,
-    defaultHoveredBorder: 'transparent',
+    defaultHoveredBorder: fluentUIApple.transparentStroke,
     defaultHoveredContent: fluentUIApple.neutralForeground3,
     defaultHoveredIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultFocusedBackground: fluentUIApple.neutralBackground3,
-    defaultFocusedBorder: 'transparent',
+    defaultFocusedBorder: fluentUIApple.transparentStroke,
     defaultFocusedContent: fluentUIApple.neutralForeground3,
     defaultFocusedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
-    defaultPressedBorder: 'transparent',
+    defaultPressedBorder: fluentUIApple.transparentStroke,
     defaultPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
     defaultPressedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 

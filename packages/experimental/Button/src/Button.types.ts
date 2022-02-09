@@ -18,16 +18,6 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   iconColor?: ColorValue;
 
   /**
-   * The icon color when hovering over the Button.
-   */
-  iconColorHovered?: ColorValue;
-
-  /**
-   * The icon color when the Button is being pressed.
-   */
-  iconColorPressed?: ColorValue;
-
-  /**
    * The size of the icon.
    */
   iconSize?: number;
