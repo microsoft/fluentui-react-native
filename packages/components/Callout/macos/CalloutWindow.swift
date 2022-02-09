@@ -22,7 +22,7 @@ class CalloutWindow: NSWindow {
 		// Dismiss the Callout if the window is no longer active.
 		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
 
-		// Dismiss the Callout if the user touched/clicked outside the Callout Window or any of our child windows.
+		// Dismiss the Callout if the user clicked outside the Callout Window or any of our child windows.
 		mouseEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { [weak self] (event) -> NSEvent? in
 			guard let clickedWindow = event.window else {
 				return event
@@ -37,15 +37,11 @@ class CalloutWindow: NSWindow {
 			} else if (clickedWindow.isEqual(to: self?.parent) && self?.parent is CalloutWindow) {
 				// We are a child window of a Callout (e.g: a ContextualMenu Submenu), and the click happened in our parent
 				shouldDismissCallout = false
+			} else if (self?.childWindows?.contains(clickedWindow) ?? false) {
+				// The click happened in any of our child windows (e.g: our submenus)
+				shouldDismissCallout = false
 			} else {
-				// Check if the click happened in any of our child windows (e.g: our submenus)
-				if let childWindows = self?.childWindows {
-					if (childWindows.contains(clickedWindow)) {
-						shouldDismissCallout = false
-					} else {
-						shouldDismissCallout = true
-					}
-				}
+				shouldDismissCallout = true
 			}
 
 			if (shouldDismissCallout) {
