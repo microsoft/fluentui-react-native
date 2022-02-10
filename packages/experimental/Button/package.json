@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-button",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "description": "A cross-platform Button component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,7 +26,7 @@
     "directory": "packages/experimental/Button"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "^0.21.19"
+    "@fluentui-react-native/button": "^0.21.20"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
