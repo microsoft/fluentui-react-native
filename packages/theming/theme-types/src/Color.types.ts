@@ -533,6 +533,7 @@ export interface AliasColorTokens {
   brandBackground: ColorValue;
   brandBackgroundHover: ColorValue;
   brandBackgroundPressed: ColorValue;
+  brandBackgroundDisabled: ColorValue;
   brandBackgroundSelected: ColorValue;
   compoundBrandBackground1: ColorValue;
   compoundBrandBackground1Hover: ColorValue;
