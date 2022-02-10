@@ -83,7 +83,7 @@
     "TransparentStroke": {
       "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.66" },
+          "Rest": { "aliasOf": "Global.Color.Brand.Shade.20" },
           "Hover": { "aliasOf": "Global.Color.Grey.66" },
           "Pressed": { "aliasOf": "Global.Color.Grey.92" },
           "Disabled": { "aliasOf": "Global.Color.Grey.84" }

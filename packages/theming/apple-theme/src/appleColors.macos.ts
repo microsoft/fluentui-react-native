@@ -279,6 +279,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     transparentStroke: macOSAliasColorTokens.transparentStroke,
     neutralForegroundDisabled: macOSAliasColorTokens.neutralForegroundDisabled,
     neutralForeground2Pressed: macOSAliasColorTokens.neutralBackground2Pressed,
+    neutralBackground2Pressed: macOSAliasColorTokens.neutralBackground2Pressed,
   };
 }
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
@@ -394,17 +395,17 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultHoveredBackground: fluentUIApple.neutralBackground3,
-    defaultHoveredBorder: fluentUIApple.transparentStroke,
+    defaultHoveredBorder: fluentUIApple.neutralStroke2,
     defaultHoveredContent: fluentUIApple.neutralForeground3,
     defaultHoveredIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultFocusedBackground: fluentUIApple.neutralBackground3,
-    defaultFocusedBorder: fluentUIApple.transparentStroke,
+    defaultFocusedBorder: fluentUIApple.neutralStroke2,
     defaultFocusedContent: fluentUIApple.neutralForeground3,
     defaultFocusedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultPressedBackground: fluentUIApple.neutralForeground2Pressed,
-    defaultPressedBorder: fluentUIApple.transparentStroke,
+    defaultPressedBackground: fluentUIApple.neutralBackgroundPressed,
+    defaultPressedBorder: fluentUIApple.neutralStroke2,
     defaultPressedContent: fluentUIApple.neutralForeground2,
     defaultPressedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
@@ -439,7 +440,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     ghostDisabledIcon: fluentUIApple.brandForegroundDisabled,
 
     brandedBackground: fluentUIApple.brandedBackground,
-    brandedBorder: 'transparent',
+    brandedBorder: fluentUIApple.transparentStroke,
     brandedContent: fluentUIApple.neutralForegroundInverted,
     brandedIcon: fluentUIApple.neutralForegroundInverted,
 
