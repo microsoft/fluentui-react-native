@@ -36,6 +36,7 @@
     "@fluentui-react-native/interactive-hooks": ">=0.13.0 <1.0.0",
     "@fluentui-react-native/text": ">=0.11.9 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.11.5 <1.0.0",
+    "@react-native-community/hooks": "^2.8.1",
     "@uifabricshared/foundation-composable": ">=0.10.2 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.11.9",
     "@uifabricshared/foundation-settings": ">=0.11.2 <1.0.0"
@@ -43,8 +44,8 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/pressable": ">=0.8.19 <1.0.0",
-    "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@types/react-native": "^0.64.0",
     "react-native": "^0.64.3"
   },
   "peerDependencies": {
