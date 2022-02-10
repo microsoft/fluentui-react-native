@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Thu, 10 Feb 2022 17:13:16 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.24",
+      "version": "0.19.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "83351e09339212a1bfd1e76bce25251726082372",
+            "comment": "macOS: Add Childwindow support"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Feb 2022 20:14:50 GMT",
       "tag": "@fluentui-react-native/callout_v0.19.23",
       "version": "0.19.23",

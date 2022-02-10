@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/contextual-menu",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "A cross-platform ContextualMenu component using the Fluent Design System",
   "license": "MIT",
   "author": "",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.8.2",
-    "@fluentui-react-native/callout": ">=0.19.23 <1.0.0",
+    "@fluentui-react-native/callout": ">=0.19.24 <1.0.0",
     "@fluentui-react-native/focus-zone": "^0.9.1",
     "@fluentui-react-native/icon": "0.11.6",
     "@fluentui-react-native/interactive-hooks": ">=0.13.0 <1.0.0",
