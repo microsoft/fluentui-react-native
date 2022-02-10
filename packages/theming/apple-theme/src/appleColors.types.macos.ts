@@ -219,6 +219,8 @@ interface FluentAppleButtonTokens {
   neutralBackground2: ColorValue;
   neutralStroke2: ColorValue;
   neutralForeground3: ColorValue;
+  neutralForegroundDisabled: ColorValue;
+  neutralForeground2Pressed: ColorValue;
   neutralBackground3: ColorValue;
   transparentBackground: ColorValue;
   transparentStroke: ColorValue;
