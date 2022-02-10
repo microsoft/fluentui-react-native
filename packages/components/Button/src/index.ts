@@ -3,7 +3,7 @@ export * from './deprecated/Button';
 export * from './deprecated/PrimaryButton';
 export * from './deprecated/StealthButton';
 export {
-  buttonName as buttonNameV2,
+  buttonName as buttonNameV1,
   ButtonSize,
   ButtonAppearance,
   ButtonShape,
@@ -15,7 +15,7 @@ export {
   ButtonSlotProps,
   ButtonType,
 } from './Button.types';
-export { Button as ButtonV2 } from './Button';
+export { Button as ButtonV1 } from './Button';
 export * from './CompoundButton';
 export * from './FAB';
 export * from './ToggleButton';
