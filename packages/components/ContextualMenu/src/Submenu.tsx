@@ -74,14 +74,9 @@ export const Submenu = compose<SubmenuType>({
 
     const dismissWithArrowKey = React.useCallback(
       (e: any) => {
-        if (I18nManager.isRTL) {
-          if (e.nativeEvent.key === 'ArrowRight') {
-            onDismiss();
-          }
-        } else {
-          if (e.nativeEvent.key === 'ArrowLeft') {
-            onDismiss();
-          }
+        const arrowKey = I18nManager.isRTL ? 'ArrowRight' : 'ArrowLeft';
+        if (e.nativeEvent.key === arrowKey) {
+          onDismiss();
         }
       },
       [onDismiss],
