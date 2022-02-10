@@ -111,7 +111,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const showWithArrowKey = React.useCallback(
       (e: any) => {
-        const arrowKey = I18nManager.isRTL ? 'ArrowRight' : 'ArrowLeft';
+        const arrowKey = I18nManager.isRTL ? 'ArrowLeft' : 'ArrowRight';
         if (e.nativeEvent.key === arrowKey) {
           onItemHoverIn(e);
         }
