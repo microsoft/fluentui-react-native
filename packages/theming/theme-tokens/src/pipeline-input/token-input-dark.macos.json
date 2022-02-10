@@ -93,6 +93,13 @@
         }
       }
     },
+    "NeutralBackground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.34" }
+        }
+      }
+    },
     "NeutralBackground4": {
       "Fill": {
         "Color": {
