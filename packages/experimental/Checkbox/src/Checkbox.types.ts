@@ -6,7 +6,7 @@ import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
-export type CheckboxSize = 'small' | 'medium' | 'large';
+export type CheckboxSize = 'medium' | 'large';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   checkboxBackgroundColor?: ColorValue;
@@ -81,7 +81,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    */
   onChange?: (isChecked: boolean) => void;
 
-  /** Sets style of checkbox to a preset size style
+  /** Sets style of checkbox to a preset size style.
    * @default 'medium'
    */
   size?: CheckboxSize;
