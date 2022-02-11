@@ -2830,9 +2830,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.2.tgz#1bb000820204e5ee1e42336c2b7da9956610fa55"
-  integrity sha512-UuvSiQThR066oqs/jQxi7VTd6GtRVim2vRTfp2c0qzN6VC1hN9KRHGyMp4p8UIWjfXr9gup4DfMzozub6ExDzw==
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.3.tgz#860feff36d67124d9db1f795fd43a8052a4793ea"
+  integrity sha512-l95af1SZ9LDgaGRLLhMFEH02cREv9ryn6nn4AH3UhvzQ0vOfcf1qDKcwekybd4DOR5O3DcEhY56w8iMOpAANZA==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-language" "^1.2.6"
