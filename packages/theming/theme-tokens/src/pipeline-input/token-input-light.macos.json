@@ -33,7 +33,7 @@
     "NeutralForegroundDisabled": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.80" }
+          "Rest": { "aliasOf": "Global.Color.Grey.46" }
         }
       }
     },
