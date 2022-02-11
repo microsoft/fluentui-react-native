@@ -257,13 +257,9 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
       dark: '#291F07',
     }),
 
-    brandForegroundDisabled: DynamicColorMacOS({
-      light: '#2525253F',
-      dark: '#FFFFFF3F',
-    }),
-
     brandedBackground: macOSAliasColorTokens.brandBackground,
     brandBackgroundDisabled: macOSAliasColorTokens.brandBackgroundDisabled,
+    brandForegroundDisabled: macOSAliasColorTokens.brandForeground1Disabled,
     brandBackgroundPressed: macOSAliasColorTokens.brandBackgroundPressed,
     brandBackgroundHovered: macOSAliasColorTokens.brandBackgroundHover,
     neutralBackgroundInverted: macOSAliasColorTokens.neutralBackgroundInverted,
