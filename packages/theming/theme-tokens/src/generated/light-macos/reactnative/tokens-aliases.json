@@ -36,7 +36,7 @@
     "fillColorRest": "#0078d4",
     "fillColorHover": "#106ebe",
     "fillColorPressed": "#004578",
-    "fillColorDisabled": "#bdbdbd",
+    "fillColorDisabled": "#757575",
     "fillColorSelected": "#005a9e"
   },
   "brandForeground2": {
@@ -167,7 +167,7 @@
     "fillColorRest": "#808080"
   },
   "neutralForegroundDisabled": {
-    "fillColorRest": "#cccccc"
+    "fillColorRest": "#757575"
   },
   "neutralForegroundInverted": {
     "fillColorRest": "#ffffff",

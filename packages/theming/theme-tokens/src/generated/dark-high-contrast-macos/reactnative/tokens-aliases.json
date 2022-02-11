@@ -36,7 +36,7 @@
     "fillColorRest": "#0086f0",
     "fillColorHover": "#1890f1",
     "fillColorPressed": "#6cb8f6",
-    "fillColorDisabled": "#5c5c5c",
+    "fillColorDisabled": "#c2c2c2",
     "fillColorSelected": "#3aa0f3"
   },
   "brandForeground2": {
