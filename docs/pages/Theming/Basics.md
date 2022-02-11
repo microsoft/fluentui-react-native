@@ -18,15 +18,15 @@ If you're using FURN components, a benefit of using a theme is that FURN compone
 
 If you're using FURN inside of an Office host, the theme on the win32 platform will also have access to palettes from Office.
 
+## Creating a FURN theme
+
+We have default themes for each platform. See [this page](./DefaultThemes.md) for how to get the default theme for a particular platform. These can also be used as a basis for a custom theme. For more information about customizing themes, take a look at [Custom Themes](./CustomTheme.md).
+
 ## Applying a FURN theme
 
-Below are the steps outlining how to use FURN's theming system.
+### Populating the Theme
 
-### ThemeProvider
-
-The available theme is defined by the `ThemeProvider`. It takes in a `ThemeReference` as a value.
-
-A `ThemeReference` is a class that creates a theme based on either another `Theme` or a parent `ThemeReference`. You can learn more about `ThemeReference` [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/theme/README.md). We have a built in `ThemeReference` which you can access by calling `createDefaultTheme()`
+The theme is made available by the `ThemeProvider`. It takes in a `ThemeReference` as a value, which is the object created by the functions referenced in the pages above.
 
 ```tsx
 import { ThemeProvider } from '@fluentui-react-native/theme';
@@ -46,8 +46,6 @@ export const App = () => {
 };
 ```
 
-For more information about customizing themes, take a look at [Custom Themes](./CustomTheme.md). For information about our default themes, take a look at [Default Themes](./DefaultThemes.md).
-
 ### Accessing theme properties
 
 You can use the `useFluentTheme()` hook to get the current theme inside a component.
@@ -62,6 +60,10 @@ export const Component = () => {
 };
 ```
 
-The component will rerender if the theme is invalidated.
+ This is useful if you are styling a stock React Native component, or want to override the default style of a FURN component. It is not necessary if you are using the default style of a FURN component. The component will rerender if the theme is invalidated.
 
 If you'd prefer to put the component's styles into a `StyleSheet` instead of accessing the `theme` directly, you can use [themed `StyleSheets`](./ThemedStylesheet.md)
+
+## Testing a FURN theme
+
+See [this page](../Testing/TestingThemesWin32.md) for information about testing themes.
