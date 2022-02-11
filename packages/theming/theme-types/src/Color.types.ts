@@ -481,6 +481,7 @@ export interface AliasColorTokens {
   compoundBrandForeground1Pressed: ColorValue;
   brandForeground1: ColorValue;
   brandForeground1Disabled: ColorValue;
+  brandForeground1Pressed: ColorValue;
   brandForeground2: ColorValue;
 
   neutralForegroundInverted: ColorValue;

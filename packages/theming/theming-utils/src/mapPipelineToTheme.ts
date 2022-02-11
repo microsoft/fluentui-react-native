@@ -32,6 +32,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     compoundBrandForeground1Pressed: pipelineOutput.compoundBrandForeground1.fillColorPressed,
     brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
     brandForeground1Disabled: pipelineOutput.brandForeground1.fillColorDisabled,
+    brandForeground1Pressed: pipelineOutput.brandForeground1.fillColorPressed,
     brandForeground2: pipelineOutput.brandForeground2.fillColorRest,
 
     neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,

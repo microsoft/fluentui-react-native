@@ -106,7 +106,7 @@
           "Hover": { "aliasOf": "Global.Color.Brand.Shade.10" },
           "Pressed": { "aliasOf": "Global.Color.Brand.Shade.10" },
           "Selected": { "aliasOf": "Global.Color.Brand.Shade.20" },
-          "Disabled": { "aliasOf": "Global.Color.Grey.92" }
+          "Disabled": { "aliasOf": "Global.Color.Grey.82" }
         }
       }
     },
