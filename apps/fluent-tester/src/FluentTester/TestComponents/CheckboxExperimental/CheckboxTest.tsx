@@ -22,10 +22,11 @@ const basicCheckbox: React.FunctionComponent = () => {
         defaultChecked={true}
         accessibilityLabel="Hello there"
       />
-      <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
-      <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
-      <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
-      <Checkbox label="A circular checkbox" circular onChange={onChangeUncontrolled} defaultChecked={false} />
+      <Checkbox label="Disabled checkbox" disabled={true} />
+      <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+      <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
+      <Checkbox label="A circular checkbox" circular />
+      <Checkbox label="A large checkbox" size="large" />
     </View>
   );
 };
