@@ -6,59 +6,7 @@ You can create a custom theme by either building on top of an existing `ThemeRef
 
 ## Different aspects of customization
 
-There's two main ways to customize a FURN theme - you can specify how to customize components, or you can customize theme tokens directly by overriding certain tokens.
-
-### Components
-
-The FURN theme has a components property which can be used to customize components:
-
-```ts
-interface Theme {
-  ...
-  components: {
-    [key: string]: object,
-  };
-  ...
-}
-```
-
-<font size=1>(Taken from the [`Theme` type definition](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-types/src/Theme.types.ts).)</font>
-
-In order to have the theme override a particular component's styling, you'll need to specify a component's name and provide some overrides for the component's settings. The settings are an object that specifies how a component's tokens or slot's style are filled out.
-
-```ts
-components: {
-  <ComponentName>: {
-    <tokenName>: <overrideValue>
-  },
-},
-```
-
-For example, if you want to change the settings on the [Button component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.settings.ts), you could do something like the following:
-
-```ts
-components: {
-  Button: {
-    tokens: {
-      backgroundColor: 'primaryButtonBackground', // Different semantic color
-      color: 'neutralBackground1', // Alias token
-    },
-    _overrides:{
-      tokens:{
-        hovered: {
-          backgroundColor: theme.host.colors['AppShade10'], // Get brand color from host
-          color: theme.host.colors['Gray96'], // Get gray from host
-          borderColor: theme.host.palette.Bkg, // Get entry from palette from host
-        },
-      },
-    }
-  },
-},
-```
-
-You can see what settings can be customized by looking at a component's settings, styling, or tokens file.
-
-The advantage of this approach is that the customizations are targetted to a particular component, so the changes are localized.
+There's two main ways to customize a FURN theme - you can customize theme tokens directly by overriding certain tokens, or you can specify how to customize components for the whole theme.
 
 ### Changing theme tokens directly
 
@@ -102,6 +50,52 @@ spacing: {
   s1: '10px';
 }
 ```
+
+### Components
+
+The FURN theme has a components property which can be used to customize components:
+
+```ts
+interface Theme {
+  ...
+  components: {
+    [key: string]: object,
+  };
+  ...
+}
+```
+
+<font size=1>(Taken from the [`Theme` type definition](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-types/src/Theme.types.ts).)</font>
+
+In order to have the theme override a particular component's styling, you'll need to specify a component's name and provide some overrides for the component's settings. The settings are an object that specifies how a component's tokens or slot's style are filled out.
+
+```ts
+components: {
+  <ComponentName>: {
+    <tokenName>: <overrideValue>
+  },
+},
+```
+
+For example, if you want to change the settings on the [Button component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button), you could do something like the following:
+
+```ts
+components: {
+  Button: {
+    backgroundColor: 'primaryButtonBackground', // Different semantic color
+    color: 'neutralBackground1', // Alias token
+    hovered: {
+      backgroundColor: theme.host.colors['AppShade10'], // Get brand color from host
+      color: theme.host.colors['Gray96'], // Get gray from host
+      borderColor: theme.host.palette.Bkg, // Get entry from palette from host
+    },
+  },
+}
+```
+
+You can see what settings can be customized by looking at a component's settings, styling, or tokens file.
+
+The advantage of this approach is that the customizations are targetted to a particular component, so the changes are localized.
 
 ## Creating a custom `ThemeReference`
 
