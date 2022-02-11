@@ -23,7 +23,7 @@
     "fillColorRest": "#0078d4",
     "fillColorHover": "#106ebe",
     "fillColorPressed": "#106ebe",
-    "fillColorDisabled": "#ebebeb",
+    "fillColorDisabled": "#d1d1d1",
     "fillColorSelected": "#005a9e"
   },
   "brandBackground2": {
