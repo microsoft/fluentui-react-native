@@ -5,15 +5,37 @@ import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    borderRadius: globalTokens.corner.radius.small,
-    checkboxBorderWidth: globalTokens.stroke.width.thin,
-    checkboxBorderRadius: globalTokens.corner.radius.small,
+    medium: {
+      borderRadius: globalTokens.corner.radius.small,
+      checkboxBorderWidth: globalTokens.stroke.width.thin,
+      checkboxBorderRadius: globalTokens.corner.radius.small,
+      checkboxSize: 16,
+      checkmarkSize: 8,
+      spacingLabelAfter: globalTokens.spacing.m,
+      labelIsBefore: {
+        spacingLabelBefore: globalTokens.spacing.m,
+        spacingLabelAfter: 0,
+      },
+      padding: globalTokens.spacing.s,
+      variant: 'bodyStandard',
+    },
+    large: {
+      borderRadius: globalTokens.corner.radius.small,
+      checkboxBorderWidth: globalTokens.stroke.width.thin,
+      checkboxBorderRadius: globalTokens.corner.radius.small,
+      checkboxSize: 20,
+      checkmarkSize: 10,
+      spacingLabelAfter: globalTokens.spacing.m,
+      labelIsBefore: {
+        spacingLabelBefore: globalTokens.spacing.m,
+        spacingLabelAfter: 0,
+      },
+      padding: globalTokens.spacing.s,
+      variant: 'bodyStandard',
+    },
     checkboxBackgroundColor: t.colors.neutralBackground1,
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
-    checkboxSize: 16,
     color: t.colors.neutralForeground3,
-    spacingLabelAfter: globalTokens.spacing.m,
-    variant: 'bodyStandard',
     checkmarkOpacity: 0,
     disabled: {
       checkboxBorderColor: t.colors.neutralStrokeDisabled,
@@ -53,9 +75,5 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     circular: {
       checkboxBorderRadius: globalTokens.corner.radius.circle,
-    },
-    labelIsBefore: {
-      spacingLabelBefore: globalTokens.spacing.m,
-      spacingLabelAfter: 0,
     },
   } as CheckboxTokens);

@@ -1,9 +1,11 @@
-import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps } from './Checkbox.types';
+import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps, CheckboxSize } from './Checkbox.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultCheckboxTokens } from './CheckboxTokens';
 
 export const checkboxStates: (keyof CheckboxTokens)[] = [
+  'medium',
+  'large',
   'labelIsBefore',
   'circular',
   'hovered',
@@ -26,10 +28,10 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignSelf: 'flex-start',
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
-          padding: 4,
+          padding: tokens.padding,
         },
       }),
-      ['backgroundColor', ...borderStyles.keys],
+      ['backgroundColor', 'padding', ...borderStyles.keys],
     ),
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
@@ -62,13 +64,17 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({
         style: {
-          width: 10,
-          height: 10,
+          width: tokens.checkmarkSize,
+          height: tokens.checkmarkSize,
           color: tokens.checkmarkColor,
           opacity: tokens.checkmarkOpacity,
         },
       }),
-      ['checkmarkColor', 'checkmarkOpacity'],
+      ['checkmarkColor', 'checkmarkSize', 'checkmarkOpacity'],
     ),
   },
+};
+
+export const getDefaultSize = (): CheckboxSize => {
+  return 'medium';
 };
