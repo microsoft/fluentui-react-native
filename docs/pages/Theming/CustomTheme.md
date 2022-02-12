@@ -98,7 +98,7 @@ This approach is useful if you need the customizations to be applied to all comp
 },
 ```
 
-### Components
+### Components (Only for FURN components)
 
 The FURN theme has a components property which can be used to customize all instances of a FURN component used under the theme:
 
