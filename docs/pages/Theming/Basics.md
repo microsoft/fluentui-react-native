@@ -60,7 +60,7 @@ export const Component = () => {
 };
 ```
 
- This is useful if you are styling a stock React Native component, or want to override the default style of a FURN component. It is not necessary if you are using the default style of a FURN component. The component will rerender if the theme is invalidated.
+This is useful if you are styling a stock React Native component, or want to override the default style of a FURN component. It is not necessary if you are using the default style of a FURN component. The component will rerender if the theme is invalidated.
 
 If you'd prefer to put the component's styles into a `StyleSheet` instead of accessing the `theme` directly, you can use [themed `StyleSheets`](./ThemedStylesheet.md)
 
