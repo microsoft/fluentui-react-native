@@ -48,19 +48,20 @@ export const App = () => {
 
 ### Accessing theme properties
 
-You can use the `useFluentTheme()` hook to get the current theme inside a component.
+You can use the `useFluentTheme()` hook to get the current theme inside a component. The hook must be used in a component that is under the `ThemeProvider` in the component tree, since it grabs the `context` from the `ThemeProvider`. If you try to access the theme outside of a `ThemeProvider`, you will get a hardcoded fallback theme.
 
 ```tsx
 import { useFluentTheme } from '@fluentui-react-native/framework';
+import { Text } from 'react-native';
 
-export const Component = () => {
+export const AppContent = () => {
   const theme = useFluentTheme();
 
   return <Text color={theme.colors.bodyText}>Hello World!</Text>;
 };
 ```
 
-This is useful if you are styling a stock React Native component, or want to override the default style of a FURN component. It is not necessary if you are using the default style of a FURN component. The component will rerender if the theme is invalidated.
+This is useful if you are styling a stock React Native component, or want to override the default style of a FURN component. It is not necessary if you are using the default style of a FURN component.
 
 If you'd prefer to put the component's styles into a `StyleSheet` instead of accessing the `theme` directly, you can use [themed `StyleSheets`](./ThemedStylesheet.md)
 
