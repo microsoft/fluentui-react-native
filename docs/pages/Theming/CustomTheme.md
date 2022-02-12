@@ -41,7 +41,7 @@ You can create your own `ThemeReference` and pass it into the `ThemeProvider`. T
 
 ## Theme property customization
 
-There's two main ways to customize a FURN theme's properties - you can customize theme tokens directly by overriding certain tokens, or you can specify how to customize components for the whole theme.
+There's two ways to customize a FURN theme's properties. The main way is to customize theme tokens directly by overriding certain tokens. You can also specify how to customize FURN components for the whole theme.
 
 ### Changing theme tokens directly
 
