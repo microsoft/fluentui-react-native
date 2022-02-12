@@ -114,6 +114,8 @@ interface Theme {
 
 <font size=1>(Taken from the [`Theme` type definition](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-types/src/Theme.types.ts).)</font>
 
+NOTE: If you would prefer to customize one instance of a FURN component instead, use [the customize API](../../../packages/framework/composition/README.md).
+
 In order to have the theme override a particular component's styling, you'll need to specify a component's name and provide some overrides for the component's tokens. The object specifies how a component's tokens should be overridden.
 
 ```ts
