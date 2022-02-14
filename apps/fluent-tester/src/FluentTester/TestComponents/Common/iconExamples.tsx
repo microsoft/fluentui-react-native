@@ -7,7 +7,7 @@ export const svgProps: SvgIconProps = {
   viewBox: '0 0 500 500',
 };
 
-const testTtf = require('../Common/assets/Font_Awesome_900.otf');
+const testTtf = require('../Button/Font Awesome 5 Free-Solid-900.otf');
 
 export const fontProps: FontIconProps = Platform.select({
   macos: {
@@ -23,4 +23,4 @@ export const fontProps: FontIconProps = Platform.select({
   },
 });
 
-export const testImage = require('../Common/assets/icon_24x24.png');
+export const testImage = require('../Button/icon_24x24.png');

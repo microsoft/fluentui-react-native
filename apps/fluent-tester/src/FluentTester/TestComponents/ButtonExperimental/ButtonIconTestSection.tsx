@@ -18,7 +18,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
   };
 
   /* eslint-disable @typescript-eslint/no-var-requires */
-  const testImage = require('../Common/assets/icon_24x24.png');
+  const testImage = require('./icon_24x24.png');
 
   const svgProps: SvgIconProps = {
     src: TestSvg,
