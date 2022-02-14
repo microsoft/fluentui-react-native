@@ -16,10 +16,13 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
     <View style={[stackStyle, commonTestStyles.view]}>
       <Button style={commonTestStyles.vmargin}>Default</Button>
       <Button disabled style={commonTestStyles.vmargin}>
-        Disabled
+        Default Disabled
       </Button>
       <Button appearance="primary" style={commonTestStyles.vmargin}>
         Primary
+      </Button>
+      <Button disabled appearance="primary" style={commonTestStyles.vmargin}>
+        Primary Disabled
       </Button>
       <Button appearance="subtle" style={commonTestStyles.vmargin}>
         Subtle

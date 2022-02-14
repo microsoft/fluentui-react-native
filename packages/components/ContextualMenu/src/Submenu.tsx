@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, ScrollView, Platform } from 'react-native';
+import { View, ScrollView, Platform, I18nManager } from 'react-native';
 import { submenuName, SubmenuProps, SubmenuSlotProps, SubmenuType, SubmenuRenderData, SubmenuState } from './Submenu.types';
 import { settings } from './Submenu.settings';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
@@ -72,8 +72,18 @@ export const Submenu = compose<SubmenuType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
+    const dismissWithArrowKey = React.useCallback(
+      (e: any) => {
+        const arrowKey = I18nManager.isRTL ? 'ArrowRight' : 'ArrowLeft';
+        if (e.nativeEvent.key === arrowKey) {
+          onDismiss();
+        }
+      },
+      [onDismiss],
+    );
+
     // Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
-    const onKeyDownProps = useKeyDownProps(onDismiss, 'ArrowLeft');
+    const onKeyDownProps = useKeyDownProps(dismissWithArrowKey, 'ArrowLeft', 'ArrowRight');
 
     const containerPropsWin32: IViewProps = {
       accessible: shouldFocusOnContainer,

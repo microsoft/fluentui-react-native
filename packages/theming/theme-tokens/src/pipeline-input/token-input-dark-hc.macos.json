@@ -14,13 +14,6 @@
         }
       }
     },
-    "NeutralForeground2": {
-      "Fill": {
-        "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.100" }
-        }
-      }
-    },
     "NeutralForeground3": {
       "Fill": {
         "Color": {
@@ -63,7 +56,10 @@
     "NeutralStroke2": {
       "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.68" }
+          "Rest": { "aliasOf": "Global.Color.Grey.66" },
+          "Hover": { "aliasOf": "Global.Color.Grey.66" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.92" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.84" }
         },
         "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
@@ -87,7 +83,7 @@
     "TransparentStroke": {
       "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.66" },
+          "Rest": { "aliasOf": "Global.Color.Brand.Shade.20" },
           "Hover": { "aliasOf": "Global.Color.Grey.66" },
           "Pressed": { "aliasOf": "Global.Color.Grey.92" },
           "Disabled": { "aliasOf": "Global.Color.Grey.84" }
