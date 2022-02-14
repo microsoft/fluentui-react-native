@@ -8,7 +8,7 @@ There are two ways to make a custom theme: you can tack onto an existing one usi
 
 ### Extending an existing `ThemeReference`
 
-We have a concept of `ThemeRecipes` which allow for layering of partial theme objects to create the ultimately desired theme. `ThemeRecipes` are functions which take a `Theme` and spit out a `PartialTheme`, which is then deep merged into the base them object.
+We have a concept of `ThemeRecipes` which allow for layering of partial theme objects to create the ultimately desired theme. `ThemeRecipes` are functions which take a `Theme` and spit out a [`PartialTheme`](../../../packages/theming/theme-types/src/Theme.types.ts), which is then deep merged into the base theme object.
 
 You can extend one of our default themes by creating a `ThemeReference` using the default theme as the base theme, and then add your customization as a `ThemeRecipe`:
 
@@ -41,7 +41,10 @@ You can create your own `ThemeReference` and pass it into the `ThemeProvider`. T
 
 ## Theme property customization
 
-There's two ways to customize a FURN theme's properties. The main way is to customize theme tokens directly by overriding certain tokens. You can also specify how to customize FURN components for the whole theme.
+There's two ways to customize a FURN theme's properties:
+
+1. Customize theme tokens directly by overriding certain tokens (recommended)
+2. Specify how to customize FURN components for the whole theme
 
 ### Changing theme tokens directly
 
