@@ -44,7 +44,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
       "borderRadius": 2,
       "display": "flex",
       "flexDirection": "row",
-      "padding": 4,
+      "padding": 8,
     }
   }
 >
@@ -81,8 +81,8 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={10}
-      bbWidth={10}
+      bbHeight={8}
+      bbWidth={8}
       color={-4342339}
       focusable={false}
       meetOrSlice={0}
@@ -96,14 +96,14 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
           },
           Object {
             "color": "#bdbdbd",
-            "height": 10,
+            "height": 8,
             "opacity": 1,
-            "width": 10,
+            "width": 8,
           },
           Object {
             "flex": 0,
-            "height": 10,
-            "width": 10,
+            "height": 8,
+            "width": 8,
           },
         ]
       }
@@ -172,11 +172,11 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
       "alignSelf": "flex-start",
       "backgroundColor": "purple",
       "borderColor": "green",
-      "borderRadius": 4,
+      "borderRadius": 2,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "padding": 4,
+      "padding": 8,
     }
   }
 >
@@ -186,8 +186,8 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
         "alignItems": "center",
         "backgroundColor": "blue",
         "borderColor": "red",
-        "borderRadius": 5,
-        "borderWidth": 2,
+        "borderRadius": 2,
+        "borderWidth": 1,
         "height": 16,
         "justifyContent": "center",
         "width": 16,
@@ -196,8 +196,8 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={10}
-      bbWidth={10}
+      bbHeight={8}
+      bbWidth={8}
       color={-16181}
       focusable={false}
       meetOrSlice={0}
@@ -211,14 +211,14 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
           },
           Object {
             "color": "pink",
-            "height": 10,
+            "height": 8,
             "opacity": 0.7,
-            "width": 10,
+            "width": 8,
           },
           Object {
             "flex": 0,
-            "height": 10,
-            "width": 10,
+            "height": 8,
+            "width": 8,
           },
         ]
       }
@@ -254,7 +254,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
         "fontWeight": "900",
         "margin": 0,
         "marginBottom": -2,
-        "marginLeft": 7,
+        "marginLeft": 12,
         "marginTop": -2,
       }
     }
@@ -305,7 +305,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
       "borderRadius": 2,
       "display": "flex",
       "flexDirection": "row",
-      "padding": 4,
+      "padding": 8,
     }
   }
 >
@@ -325,8 +325,8 @@ exports[`Checkbox component tests Checkbox default 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={10}
-      bbWidth={10}
+      bbHeight={8}
+      bbWidth={8}
       color={-14672098}
       focusable={false}
       meetOrSlice={0}
@@ -340,14 +340,14 @@ exports[`Checkbox component tests Checkbox default 1`] = `
           },
           Object {
             "color": "#201f1e",
-            "height": 10,
+            "height": 8,
             "opacity": 0,
-            "width": 10,
+            "width": 8,
           },
           Object {
             "flex": 0,
-            "height": 10,
-            "width": 10,
+            "height": 8,
+            "width": 8,
           },
         ]
       }
