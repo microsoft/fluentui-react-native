@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Mon, 14 Feb 2022 23:29:33 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.16.2",
+      "version": "0.16.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "655c9fbe98b60e4ac837c280d8a1e2fb52bf39a4",
+            "comment": "ContextualMenu macOS: Disabled menu items are focusable if VoiceOver is enabled"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 10 Feb 2022 17:13:16 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.16.1",
       "version": "0.16.1",
