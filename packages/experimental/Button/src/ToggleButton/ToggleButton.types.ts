@@ -1,3 +1,4 @@
+import { ButtonState } from '..';
 import { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
 
 export const toggleButtonName = 'ToggleButton';
@@ -19,6 +20,15 @@ export interface ToggleButtonProps extends ButtonProps {
    * Mutually exclusive to `checked`.
    */
   defaultChecked?: boolean;
+}
+
+export interface ToggleButtonState extends ButtonState {
+  state: ButtonState['state'] & {
+    /**
+     * Whether the ToggleButton is toggled or not
+     */
+    checked?: boolean;
+  };
 }
 
 export interface ToggleButtonSlotProps extends ButtonSlotProps {}

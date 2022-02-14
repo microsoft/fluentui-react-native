@@ -8,7 +8,7 @@ import { ComponentSelector } from '../../common/BasePage.win';
 describe('MenuButton Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to MenuButton test page', () => {
@@ -20,7 +20,8 @@ describe('MenuButton Testing Initialization', function () {
     NavigateAppPage.clickAndGoToMenuButtonPage();
     MenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(MenuButtonPageObject.isPageLoaded()).toBeTruthy();
+    expect(MenuButtonPageObject.isPageLoaded()).toBeTruthy(MenuButtonPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -34,14 +35,17 @@ describe('MenuButton Accessibility Testing', () => {
 
   it('MenuButton - Validate accessibilityRole is correct', () => {
     expect(MenuButtonPageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('MenuButton - Set accessibilityLabel', () => {
     expect(MenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(MENU_BUTTON_ACCESSIBILITY_LABEL);
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Do not set accessibilityLabel -> Default to MenuButton label', () => {
     expect(MenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(MENU_BUTTON_TEST_COMPONENT_LABEL);
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -60,6 +64,7 @@ describe('MenuButton Functional Testing', () => {
     MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
 
     expect(MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Type "SpaceBar" to select the MenuButton and validate that the list of Menu Items open', () => {
@@ -68,6 +73,7 @@ describe('MenuButton Functional Testing', () => {
     MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
 
     expect(MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
+    expect(MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
   /* Runs after all tests. This ensures the MenuButton closes. If it stays open, the test driver won't be able to close the test app */

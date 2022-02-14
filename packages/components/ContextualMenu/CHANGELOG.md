@@ -1,8 +1,55 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Feb 2022 23:29:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.2
+
+Mon, 14 Feb 2022 23:29:33 GMT
+
+### Patches
+
+- ContextualMenu macOS: Disabled menu items are focusable if VoiceOver is enabled (sanajmi@microsoft.com)
+
+## 0.16.1
+
+Thu, 10 Feb 2022 17:13:16 GMT
+
+### Patches
+
+- Flip arrow key navigation in RTL (sanajmi@microsoft.com)
+- Don't dismiss submenu on menu item click (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.24
+
+## 0.16.0
+
+Wed, 09 Feb 2022 20:14:50 GMT
+
+### Minor changes
+
+- Arrow Right/Left open and close the submenu. (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.23
+- Bump @fluentui-react-native/focus-zone to v0.9.1
+- Bump @fluentui-react-native/interactive-hooks to v0.13.0
+- Bump @fluentui-react-native/pressable to v0.8.19
+
+## 0.15.2
+
+Mon, 07 Feb 2022 19:47:54 GMT
+
+### Patches
+
+- Add Scrollview and FocusZone slots to ContextualMenu (sanajmi@microsoft.com)
+- Focus on Menu with useLayoutEffect (sanajmi@microsoft.com)
+
+## 0.15.1
+
+Fri, 04 Feb 2022 20:31:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.0
 
 ## 0.15.0
 
