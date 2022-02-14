@@ -13,7 +13,7 @@ const CustomizedIconButton = Button.customize({
 });
 
 export const ButtonIconTest: React.FunctionComponent = () => {
-  const testImage = require('./icon_24x24.png');
+  const testImage = require('../Common/assets/icon_24x24.png');
 
   const svgProps: SvgIconProps = {
     src: TestSvg,
