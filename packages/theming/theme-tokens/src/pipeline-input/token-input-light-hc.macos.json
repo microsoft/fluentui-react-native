@@ -55,7 +55,7 @@
     "NeutralStroke2": {
       "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.52" },
+          "Rest": { "aliasOf": "Global.Color.Grey.0" },
           "Hover": { "aliasOf": "Global.Color.Grey.40" },
           "Pressed": { "aliasOf": "Global.Color.Grey.16" },
           "Disabled": { "aliasOf": "Global.Color.Grey.74" }

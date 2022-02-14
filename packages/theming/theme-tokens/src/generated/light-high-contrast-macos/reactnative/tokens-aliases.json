@@ -200,7 +200,7 @@
     "strokeWidth": 1
   },
   "neutralStroke2": {
-    "strokeColorRest": "#858585",
+    "strokeColorRest": "#000000",
     "strokeColorHover": "#666666",
     "strokeColorPressed": "#292929",
     "strokeColorDisabled": "#bdbdbd",
