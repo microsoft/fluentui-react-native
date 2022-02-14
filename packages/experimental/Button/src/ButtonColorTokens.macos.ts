@@ -40,7 +40,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       disabled: {
         backgroundColor: t.colors.primaryButtonBackgroundDisabled,
         color: t.colors.brandedDisabledContent,
-        borderColor: t.colors.brandedBorder,
+        borderColor: t.colors.defaultDisabledBorder,
         iconColor: t.colors.brandedDisabledIcon,
       },
       hovered: {
