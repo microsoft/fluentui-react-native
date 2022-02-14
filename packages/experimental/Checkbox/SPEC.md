@@ -2,7 +2,7 @@
 
 ## Background
 
-The `Checkbox` component enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
+The `Checkbox` component enables users to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked).
 
 ## Requirements
 
@@ -13,13 +13,9 @@ If using FURN's theming, the `Checkbox` requires use of the `ThemeProvider` from
 Basic examples:
 
 ```jsx
-<Checkbox>Text</Checkbox>
-<Checkbox icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} />
-<Checkbox icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</Checkbox>
-<Checkbox appearance="primary">Text</Checkbox>
-<Checkbox disabled>Text</Checkbox>
-<Checkbox size="small">Text</Checkbox>
-<Checkbox size="large">Text</Checkbox>
+<Checkbox label="Example Checkbox" />
+<Checkbox label="Circular Checkbox" circular size="large" />
+<Checkbox label="Controlled Checkbox" onChange={onChangeFunction} checked={checked} />
 ```
 
 More examples on the [Test pages for the Checkbox](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/CheckboxExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
