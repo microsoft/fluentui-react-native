@@ -117,7 +117,7 @@
     "NeutralBackgroundDisabled": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.84" }
+          "Rest": { "aliasOf": "Global.Color.Grey.34" }
         }
       }
     },

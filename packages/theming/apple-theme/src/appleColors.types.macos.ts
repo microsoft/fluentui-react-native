@@ -211,13 +211,13 @@ interface FluentAppleButtonTokens {
   brandBackgroundPressed: ColorValue;
   brandForegroundDisabled: ColorValue;
   brandForegroundPressed: ColorValue;
-  brandBackgroundDisabled: ColorValue;
   neutralStrokeDisabled: ColorValue;
   neutralBackgroundInverted: ColorValue;
   neutralForegroundInverted: ColorValue;
   neutralForeground2: ColorValue;
   neutralBackground1: ColorValue;
   neutralBackground2: ColorValue;
+  neutralBackgroundDisabled: ColorValue;
   neutralBackground2Pressed: ColorValue;
   neutralStroke2: ColorValue;
   neutralForeground3: ColorValue;

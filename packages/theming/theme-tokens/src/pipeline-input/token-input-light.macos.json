@@ -71,6 +71,13 @@
         }
       }
     },
+    "NeutralBackgroundDisabled": {
+      "Fill": {
+        "Color": {
+          "Pressed": { "aliasOf": "Global.Color.Grey.82" }
+        }
+      }
+    },
     "CompoundBrandForeground1": {
       "Fill": {
         "Color": {

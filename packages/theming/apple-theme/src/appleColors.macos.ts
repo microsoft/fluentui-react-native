@@ -258,7 +258,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     }),
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
-    brandBackgroundDisabled: macOSAliasColorTokens.brandBackgroundDisabled,
+    neutralBackgroundDisabled: macOSAliasColorTokens.neutralBackgroundDisabled,
     brandForegroundDisabled: macOSAliasColorTokens.brandForeground1Disabled,
     brandForegroundPressed: macOSAliasColorTokens.brandForeground1Pressed,
     brandBackgroundPressed: macOSAliasColorTokens.brandBackgroundPressed,
@@ -348,7 +348,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     primaryButtonBackground: fluentUIApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentUIApple.communicationBlue,
     primaryButtonBackgroundPressed: fluentUIApple.brandBackgroundPressed,
-    primaryButtonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
+    primaryButtonBackgroundDisabled: fluentUIApple.neutralBackgroundDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
     primaryButtonText: fluentUIApple.neutralForegroundInverted,
@@ -456,7 +456,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     brandedPressedContent: fluentUIApple.neutralForegroundInverted,
     brandedPressedIcon: fluentUIApple.neutralForegroundInverted,
 
-    brandedDisabledBackground: fluentUIApple.brandBackgroundDisabled,
+    brandedDisabledBackground: fluentUIApple.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
     brandedDisabledContent: fluentUIApple.brandForegroundDisabled,
     brandedDisabledIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
@@ -492,7 +492,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultPressedSecondaryContent: fluentUIApple.neutralForegroundInverted,
 
     checkboxBackground: fluentUIApple.communicationBlue,
-    checkboxBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
+    checkboxBackgroundDisabled: fluentUIApple.neutralBackgroundDisabled,
     checkboxBorderColor: fluentUIApple.gray600,
     checkmarkColor: fluentUIApple.neutralForegroundInverted,
 

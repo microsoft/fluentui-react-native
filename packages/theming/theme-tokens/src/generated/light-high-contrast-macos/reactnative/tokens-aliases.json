@@ -134,7 +134,7 @@
     "fillColorRest": "#e6e6e6"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#f0f0f0",
+    "fillColorRest": "#d1d1d1",
     "fillColorSelected": "PlatformColor(Window)"
   },
   "neutralBackgroundInverted": {
