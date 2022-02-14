@@ -64,6 +64,17 @@ steps:
   - bash: '.ado/scripts/generate_build_number.sh'
     displayName: 'Generate Build Number'
 
+  - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
+    displayName: 📒 Generate Manifest Apple
+    inputs:
+      BuildDropPath: $(System.DefaultWorkingDirectory)
+
+  - task: PublishPipelineArtifact@1
+    displayName: 📒 Publish Manifest Apple
+    inputs:
+      artifactName: SBom-Apple-$(System.JobAttempt)
+      targetPath: $(System.DefaultWorkingDirectory)/_manifest
+
   # pack the nuspec
   - task: NuGetCommand@2
     displayName: 'NuGet pack'
