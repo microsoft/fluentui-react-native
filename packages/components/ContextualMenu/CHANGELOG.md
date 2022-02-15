@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 10 Feb 2022 17:13:16 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Feb 2022 23:29:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.2
+
+Mon, 14 Feb 2022 23:29:33 GMT
+
+### Patches
+
+- ContextualMenu macOS: Disabled menu items are focusable if VoiceOver is enabled (sanajmi@microsoft.com)
 
 ## 0.16.1
 
