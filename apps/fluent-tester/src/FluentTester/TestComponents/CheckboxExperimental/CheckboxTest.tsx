@@ -14,9 +14,6 @@ function onChangeUncontrolled(isChecked: boolean) {
 const basicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
-      <Checkbox label="Text" />
-      <Checkbox label="Circular Checkbox" circular />
-
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
       <Checkbox

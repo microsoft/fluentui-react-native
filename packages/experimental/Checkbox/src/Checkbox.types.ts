@@ -82,17 +82,15 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   circular?: boolean;
 
   /**
+   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<IFocusable>;
+
+  /**
    * Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
    * want the Checkbox instance to maintain its own state.
    */
   defaultChecked?: boolean;
-
-  /**
-   * Allows you to set the checkbox to be at the before (start) or after (end) the label
-   *
-   * @default after
-   */
-  labelPosition?: 'before' | 'after';
 
   /**
    * Disabled state of the checkbox.
@@ -105,9 +103,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   label?: string;
 
   /**
-   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
+   * Allows you to set the checkbox to be at the before (start) or after (end) the label
+   *
+   * @default after
    */
-  componentRef?: React.RefObject<IFocusable>;
+  labelPosition?: 'before' | 'after';
 
   /**
    * Callback that is called when the checked value has changed.

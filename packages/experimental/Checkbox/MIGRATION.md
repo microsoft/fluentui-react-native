@@ -8,52 +8,47 @@ This Migration guide is a work in progress and is not yet ready for use.
 
 ### Component renames
 
-| v0 `Checkbox`  | v1 `Checkbox`                       |
-| -------------- | ----------------------------------- |
-| `<Checkbox />` | `<Checkbox>Hello, world</Checkbox>` |
+| v0 `Checkbox`                       | v1 `Checkbox`                       |
+| ----------------------------------- | ----------------------------------- |
+| `<Checkbox label="Hello, World" />` | `<Checkbox label="Hello, World" />` |
 
 ### Props that remain as is
 
 - Any props that are part of `ViewProps`
-- `children`
+- `checked`
 - `componentRef`
-- `icon`
-- `onClick`
-- `testID`
+- `defaultChecked`
+- `label`
+- `onChange`
 - `tooltip`
 
 ### Props no longer supported with an equivalent functionality in v1 Checkbox
 
-- `content` => Pass the content as `children` instead
-- `endIcon` => Use `after` value for `iconPosition` prop and pass icon information into `icon` prop instead
-- `startIcon` => Use `before` value for `iconPosition` prop and pass icon information into `icon` prop instead
+- `ariaLabel` => Use `accessibilityLabel` prop instead
+- `boxSide` => Use `after` value for `labelPosition` prop for `start` or `before` value for `labelPosition` prop instead for `after`
 
 ### Props no longer supported without an equivalent functionality in v1 Checkbox
 
-- Cannot use both `startIcon` and `endIcon` at the same time in v2
+- `children` are not supported in the v1 Checkbox
 
 ### Tokens that remain as is
 
 - Any props that are part of `FontTokens`, `IForegroundColorTokens`, `IBackgroundColorTokens`, `IBorderTokens`
-- `iconColor`
-- `iconSize`
-- `iconWeight`
+- `checkboxBackgroundColor`
+- `checkboxBorderColor`
+- `checkmarkColor`
 
 ### Tokens no longer supported with an equivalent functionality in v1 Checkbox
 
-- `contentPadding` => Set on `style` property of `root` property under `slotProps` in `compose` API
-- `iconColorHovered` => Use `iconColor` token under the `hovered` state token
-- `iconColorPressed` => Use `iconColor` token under the `pressed` state token
+- `checkmarkVisibility` => Use `checkmarkOpacity` token instead
 
 ### Tokens no longer supported without an equivalent functionality in v1 Checkbox
 
-- `contentPaddingFocused` => Removed in favor of using native based focus visuals
-- `wrapperBorderColor` => Removed in favor of using native based focus visuals
+- `textBorderColor` => Removed in favor of using native based focus visuals
 
 ### Slots no longer supported with an equivalent functionality in v1 Checkbox
 
-- `borderWrapper` has been removed in favor of using native focus visuals. Use `root` instead.
-- `stack` has been removed. Use `root` instead.
+- `content` has been renamed to `label`.
 
 ### Updating ThemeProvider
 
