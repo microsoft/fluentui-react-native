@@ -118,8 +118,7 @@ async function run() {
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/highContrast/reactnative/tokens-controls.json'));
 
   console.log('Running prettier...');
-  const input = path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated');
-  child_process.execSync('prettier --write ' + input);
+  child_process.execSync('prettier --write ./packages/theming/theme-tokens/src/generated');
 
   console.log('Done!');
 }
