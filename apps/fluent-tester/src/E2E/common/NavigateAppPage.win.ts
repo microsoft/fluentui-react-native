@@ -2,7 +2,6 @@ import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../FluentTester/TestCompo
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../FluentTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../FluentTester/TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../FluentTester/TestComponents/Button/consts';
-import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from '../../FluentTester/TestComponents/ButtonExperimental/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../FluentTester/TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../FluentTester/TestComponents/ContextualMenu/consts';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../FluentTester/TestComponents/TabsExperimental/consts';
@@ -124,10 +123,6 @@ class NavigateAppPage extends BasePage {
     this.tokensPage.click();
   }
 
-  clickAndGoToExperimentalButtonPage() {
-    this.experimentalButtonPage.click();
-  }
-
   clickAndGoToExperimentalTabsPage() {
     this.experimentalTabsPage.click();
   }
@@ -234,10 +229,6 @@ class NavigateAppPage extends BasePage {
 
   private get tokensPage() {
     return By(HOMEPAGE_TOKEN_BUTTON);
-  }
-
-  private get experimentalButtonPage() {
-    return By(HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL);
   }
 
   private get experimentalTabsPage() {

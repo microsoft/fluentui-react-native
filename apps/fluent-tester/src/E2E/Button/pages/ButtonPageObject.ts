@@ -1,9 +1,9 @@
 import {
   BUTTON_TESTPAGE,
-  BUTTON_TEST_COMPONENT,
-  BUTTON_NO_A11Y_LABEL_COMPONENT,
+  BUTTON_TEST_COMPONENT_DEPRECATED,
+  BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   HOMEPAGE_BUTTON_BUTTON,
-  BUTTON_ON_PRESS,
+  BUTTON_ON_PRESS_DEPRECATED,
 } from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
@@ -18,7 +18,7 @@ class ButtonPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   didOnClickCallbackFire(): boolean {
-    const callbackText = By(BUTTON_ON_PRESS);
+    const callbackText = By(BUTTON_ON_PRESS_DEPRECATED);
     browser.waitUntil(
       () => {
         return callbackText.isDisplayed();
@@ -58,11 +58,11 @@ class ButtonPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(BUTTON_TEST_COMPONENT);
+    return By(BUTTON_TEST_COMPONENT_DEPRECATED);
   }
 
   get _secondaryComponent() {
-    return By(BUTTON_NO_A11Y_LABEL_COMPONENT);
+    return By(BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED);
   }
 
   get _pageButton() {
