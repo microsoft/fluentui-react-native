@@ -34,7 +34,7 @@ components: {
 },
 ```
 
-For example, if you want to change the settings on the [Button component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.settings.ts), you could do something like the following:
+For example, if you want to change the settings on the [Button component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.styling.ts), you could do something like the following:
 
 ```ts
 components: {

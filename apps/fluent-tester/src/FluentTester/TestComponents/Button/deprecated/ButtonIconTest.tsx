@@ -13,6 +13,7 @@ const CustomizedIconButton = Button.customize({
 });
 
 export const ButtonIconTest_deprecated: React.FunctionComponent = () => {
+  /* eslint-disable @typescript-eslint/no-var-requires */
   const testImage = require('./../../../../assets/icon_24x24.png');
 
   const svgProps: SvgIconProps = {
