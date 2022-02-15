@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Changing location of assets",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
