@@ -14,7 +14,7 @@ export const fontProps: FontIconProps = Platform.select({
     fontFamily: 'Arial',
     codepoint: 0x2663,
     fontSize: 12,
-  },e
+  },
   default: {
     fontFamily: `Font Awesome 5 Free`,
     fontSrcFile: testTtf,
