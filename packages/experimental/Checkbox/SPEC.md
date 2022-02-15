@@ -6,7 +6,7 @@ The `Checkbox` component enables users to select one or more items from a group,
 
 ## Requirements
 
-If using FURN's theming, the `Checkbox` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+If using FURN's theming, the `Checkbox` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
 
 ## Sample Code
 
@@ -14,11 +14,11 @@ Basic examples:
 
 ```jsx
 <Checkbox label="Example Checkbox" />
-<Checkbox label="Circular Checkbox" circular size="large" />
+<Checkbox label="Large Circular Checkbox" circular size="large" />
 <Checkbox label="Controlled Checkbox" onChange={onChangeFunction} checked={checked} />
 ```
 
-More examples on the [Test pages for the Checkbox](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/CheckboxExperimental). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
+More examples on the [Test pages for the Checkbox](../../../apps/fluent-tester/src/FluentTester/TestComponents/CheckboxExperimental). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -27,52 +27,34 @@ Win32:
 ![Checkbox with text on win32 example](./assets/Checkbox_example_win32.png)
 
 ```tsx
-<Checkbox>Text</Checkbox>
+<Checkbox label="Text" />
 ```
 
 ![Checkbox with text and primary appearance on win32 example](./assets/Checkbox_primary_example_win32.png)
 
 ```tsx
-<Checkbox appearance="primary">Text</Checkbox>
+<Checkbox label="Large Circular Checkbox" circular size="large" />
 ```
 
 ## Variants
 
-### Appearance
+### Checked
 
-The `Checkbox` component has several apparance variants depending on where it's being used:
+The `Checkbox` control supports the `unchecked` and `checked` appearances. It does _not_ support a `intermediate` or `mixed` appearance.
 
-- The default `Checkbox` is rendered with its default styling indicating a trigger for an action.
-- appearance="primary": The `Checkbox` is styled to emphasize that it represents the primary action.
-- appearance="subtle": The `Checkbox` is styled to blend into its background to become less emphasized.
+### Circular
 
-### Icon
-
-The `Checkbox` component can include an `icon` that appears before or after its `children`. If an `icon` is provided without any other `children` passed into `Checkbox`, then the `Checkbox` becomes an icon-only `Checkbox`.
-
-### Shape
-
-- shape="rounded": The Checkbox as rounded corners. This is the default if shape is not set.
-- shape="circular": The Checkbox has completely round corners. A Checkbox of equal width and height will be a circle.
-- shape="square": The Checkbox has right-angle corners.
+The `Checkbox` control supports a `circular` shape variant.
 
 ### Sizes
 
-The `Checkbox` component supports different sizing with at least three different sizes: `small`, `medium`, and `large`. `Small` is the default on `win32`, `medium` is the default on other platforms.
-
-### Block
-
-The `Checkbox` component can completely fill the width of its container.
-
-### Loading
-
-The `Checkbox` component can be loading if it's waiting for another action to occur before allowing itself to be interacted with.
+The `Checkbox` control supports two different sizes: `medium` (default), and `large`.
 
 ## API
 
 ### Slots
 
-The `Checkbox` component has three slots, or parts. The slots behave as follows:
+The `Checkbox` control has three slots, or parts. The slots behave as follows:
 
 - `root` - The outer container representing the `Checkbox` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
@@ -236,9 +218,9 @@ A focused `Checkbox` changes styling to communicate that the user has placed key
 
 A pressed `Checkbox` changes styling to communicate that the user is currently pressing it.
 
-#### Loading state
+#### Checked state
 
-A loading `Checkbox` renders a `loader` before all the other content to indicate that it is waiting for another action before allowing itself to be interacted with.
+A checked `Checkbox` changes styling to communicate that it is currently in a selected state. The checkbox will show a checkmark in it to show the checked state.
 
 ### Interaction
 
@@ -246,16 +228,16 @@ A loading `Checkbox` renders a `loader` before all the other content to indicate
 
 The following is a set of keys that interact with the `Checkbox` component:
 
-| Key     | Description                                           |
-| ------- | ----------------------------------------------------- |
-| `Enter` | Executes the function passed into the `onClick` prop. |
-| `Space` | Executes the function passed into the `onClick` prop. |
+| Key     | Description                                            |
+| ------- | ------------------------------------------------------ |
+| `Enter` | Executes the function passed into the `onChange` prop. |
+| `Space` | Executes the function passed into the `onChange` prop. |
 
 #### Cursor interaction
 
 - Cursor moves onto botton: Should immediately change the styling of the `Checkbox` so that it appears to be hovered.
 - Cursor moves out of botton: Should immediately remove the hovered styling of the `Checkbox`.
-- Mouse click: Should execute the `Checkbox` and move focus to its target.
+- Mouse click: Should toggle the `Checkbox` and move focus to its target.
 
 #### Touch interaction
 
@@ -265,8 +247,8 @@ The same behavior as above translated for touch events. This means that there is
 
 ### Expected behavior
 
-- Should default to adding `role="Checkbox"` to the root slot.
+- Should default to adding `role="checkbox"` to the root slot.
 - Should mix in the accessibility props expected for a `Checkbox` component.
 - Should be keyboard tabbable and focusable.
 
-See [`useCheckbox` hook](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/Checkbox/src/useCheckbox.ts) for details on accessibility props
+See [`useCheckbox` hook](./src/useCheckbox.ts) for details on accessibility props
