@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Move experimental button tests to button test",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
