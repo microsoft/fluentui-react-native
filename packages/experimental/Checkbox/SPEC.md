@@ -26,14 +26,20 @@ Win32:
 
 ![Checkbox with text on win32 example](./assets/Checkbox_example_win32.png)
 
-```tsx
+```jsx
 <Checkbox label="Text" />
 ```
 
-![Checkbox with text and primary appearance on win32 example](./assets/Checkbox_primary_example_win32.png)
+![Checked checkbox with text on win32 example](./assets/Checkbox_checked_example_win32.png)
 
-```tsx
-<Checkbox label="Large Circular Checkbox" circular size="large" />
+```jsx
+<Checkbox label="Text" checked />
+```
+
+![Checkbox with circular appearance on win32 example](./assets/Checkbox_circular_example_win32.png)
+
+```jsx
+<Checkbox label="Circular Checkbox" circular />
 ```
 
 ## Variants
@@ -57,8 +63,9 @@ The `Checkbox` control supports two different sizes: `medium` (default), and `la
 The `Checkbox` control has three slots, or parts. The slots behave as follows:
 
 - `root` - The outer container representing the `Checkbox` itself that wraps everything passed via the `children` prop.
-- `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
-- `content` - If specified, renders the first entry of `children` as text.
+- `label` - If specified, renders text describing the checkbox either before or after the `checkbox` as specified by the `labelPosition` prop.
+- `checkbox` - The box which visually represents the checkbox.
+- `checkmark` - A checkmark icon which shows whether the checkbox is in a checked state.
 
 The slots can be modified using the `compose` function on the `Checkbox`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
 
@@ -67,71 +74,57 @@ The slots can be modified using the `compose` function on the `Checkbox`. For mo
 Below is the set of props the Checkbox supports:
 
 ```ts
-export interface CheckboxProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
-   * A Checkbox can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary': Emphasizes the Checkbox as a primary action.
-   * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
+   * Checked state. Mutually exclusive to “defaultChecked”. Use this if you control the checked state at a higher level
+   * and plan to pass in the correct value based on handling onChange events and re-rendering.
    */
-  appearance?: 'primary' | 'subtle';
+  checked?: boolean;
 
   /**
-   * A Checkbox can fill the width of its container.
-   * @default false
+   * Allows you to set the checkbox to have circular styling.
+   *
+   * @platform Android, iOS, windows, win32
    */
-  block?: boolean;
+  circular?: boolean;
 
   /**
-   * A RefObject to access the ICheckbox interface. Use this to access the public methods and properties of the component.
+   * Default checked state. Mutually exclusive to ‘checked’. Use this if you want an uncontrolled component, and
+   * want the Checkbox instance to maintain its own state.
+   */
+  defaultChecked?: boolean;
+
+  /**
+   * Allows you to set the checkbox to be at the before (start) or after (end) the label
+   *
+   * @default after
+   */
+  labelPosition?: 'before' | 'after';
+
+  /**
+   * Disabled state of the checkbox.
+   */
+  disabled?: boolean;
+
+  /**
+   * Label to display next to the checkbox.
+   */
+  label?: string;
+
+  /**
+   * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
-   * `iconPosition` prop.
+   * Callback that is called when the checked value has changed.
    */
-  icon?: IconSourcesType;
+  onChange?: (isChecked: boolean) => void;
 
   /**
-   * Checkbox contains only icon, there's no text content
-   * Must be set for Checkbox to style correctly when Checkbox has not content.
-   */
-  iconOnly?: boolean;
-
-  /**
-   * A Checkbox can format its icon to appear before or after its content.
-   * @default 'before'
-   */
-  iconPosition?: 'before' | 'after';
-
-  /**
-   * A Checkbox can show a loading indicator if it is waiting for another action to happen before allowing itself to
-   * be interacted with.
-   * @default false
-   */
-  loading?: boolean;
-
-  /**
-   * A Checkbox can be rounded, circular, or square.
-   * @default 'rounded'
-   */
-  shape?: 'rounded' | 'circular' | 'square';
-
-  /**
-   * A Checkbox supports different sizes.
-   * @default 'medium'
-   */
-  size?: 'small' | 'medium' | 'large';
-
-  /**
-   * Text that should show in a tooltip when the user hovers over a Checkbox.
+   * Provides a tooltip while hovering over Checkbox component
    */
   tooltip?: string;
-
-  /**
-   * A callback to call on Checkbox click event
-   */
-  onClick?: () => void;
 }
 ```
 
@@ -140,26 +133,42 @@ export interface CheckboxProps extends Omit<IWithPressableOptions<ViewProps>, 'o
 Tokens can be used to customize the styling of the control by using the `customize` function on the `Checkbox`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Checkbox` has the following tokens:
 
 ```ts
-export interface CheckboxTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
-   * The icon color.
+   * Color of the background of the box containing the checkmark.
    */
-  iconColor?: ColorValue;
+  checkboxBackgroundColor?: ColorValue;
 
   /**
-   * The size of the icon.
+   * Color of the border of the box containing the checkmark.
    */
-  iconSize?: number;
+  checkboxBorderColor?: ColorValue;
 
   /**
-   * The weight of the lines used when drawing the icon.
+   * Border radius of the box containing the checkmark.
    */
-  iconWeight?: number;
+  checkboxBorderRadius?: number;
 
   /**
-   * The width of the Checkbox.
+   * Width of the border around the box containing the checkmark.
    */
-  width?: ViewStyle['width'];
+  checkboxBorderWidth?: number;
+
+  /**
+   * Height and width of the checkbox containing the checkmark.
+   */
+  checkboxSize?: number;
+
+  /**
+   * Color of the checkmark icon.
+   * Note: Due to upstream limitations this currently does not support PlatformColors.
+   */
+  checkmarkColor?: ColorValue;
+
+  /**
+   * The opacity of checkmark as a number between 0 and 1.
+   */
+  checkmarkOpacity?: number;
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
@@ -175,22 +184,13 @@ export interface CheckboxTokens extends LayoutTokens, FontTokens, IBorderTokens,
    * States that can be applied to a Checkbox.
    * These can be used to modify styles of the Checkbox when under the specified state.
    */
+  disabled?: CheckboxTokens;
+  labelIsBefore?: CheckboxTokens;
   hovered?: CheckboxTokens;
   focused?: CheckboxTokens;
   pressed?: CheckboxTokens;
-  disabled?: CheckboxTokens;
-  hasContent?: CheckboxTokens;
-  hasIconAfter?: CheckboxTokens;
-  hasIconBefore?: CheckboxTokens;
-  primary?: CheckboxTokens;
-  subtle?: CheckboxTokens;
-  block?: CheckboxTokens;
-  small?: CheckboxTokens;
-  medium?: CheckboxTokens;
-  large?: CheckboxTokens;
-  rounded?: CheckboxTokens;
+  checked?: CheckboxTokens;
   circular?: CheckboxTokens;
-  square?: CheckboxTokens;
 }
 ```
 
@@ -208,7 +208,7 @@ A disabled `Checkbox` is non-interactive, disallowing the user to click/tap on i
 
 #### Hovered state
 
-A hovered `Checkbox` changes styling to communicate that the user has placed a cursor above it.
+A hovered `Checkbox` changes styling to communicate that the user has placed a cursor above it. On win32, this will show a checkmark in a checkbox.
 
 #### Focused state
 
@@ -230,13 +230,12 @@ The following is a set of keys that interact with the `Checkbox` component:
 
 | Key     | Description                                            |
 | ------- | ------------------------------------------------------ |
-| `Enter` | Executes the function passed into the `onChange` prop. |
 | `Space` | Executes the function passed into the `onChange` prop. |
 
 #### Cursor interaction
 
-- Cursor moves onto botton: Should immediately change the styling of the `Checkbox` so that it appears to be hovered.
-- Cursor moves out of botton: Should immediately remove the hovered styling of the `Checkbox`.
+- Cursor moves onto checkbox hit target: Should immediately change the styling of the `Checkbox` so that it appears to be hovered.
+- Cursor moves out of checkbox hit target: Should immediately remove the hovered styling of the `Checkbox`.
 - Mouse click: Should toggle the `Checkbox` and move focus to its target.
 
 #### Touch interaction
@@ -248,6 +247,7 @@ The same behavior as above translated for touch events. This means that there is
 ### Expected behavior
 
 - Should default to adding `role="checkbox"` to the root slot.
+- Should default to adding the Toggle pattern.
 - Should mix in the accessibility props expected for a `Checkbox` component.
 - Should be keyboard tabbable and focusable.
 

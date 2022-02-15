@@ -8,14 +8,50 @@ import { SvgProps } from 'react-native-svg';
 export const checkboxName = 'Checkbox';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+  /**
+   * Color of the background of the box containing the checkmark.
+   */
   checkboxBackgroundColor?: ColorValue;
+
+  /**
+   * Color of the border of the box containing the checkmark.
+   */
   checkboxBorderColor?: ColorValue;
+
+  /**
+   * Border radius of the box containing the checkmark.
+   */
   checkboxBorderRadius?: number;
+
+  /**
+   * Width of the border around the box containing the checkmark.
+   */
   checkboxBorderWidth?: number;
+
+  /**
+   * Height and width of the box containing the checkmark.
+   */
   checkboxSize?: number;
+
+  /**
+   * Color of the checkmark icon.
+   * Note: Due to upstream limitations this currently does not support PlatformColors.
+   */
   checkmarkColor?: ColorValue;
+
+  /**
+   * The opacity of checkmark as a number between 0 and 1.
+   */
   checkmarkOpacity?: number;
+
+  /**
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
+   */
   spacingLabelAfter?: number;
+
+  /**
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   */
   spacingLabelBefore?: number;
 
   /**
