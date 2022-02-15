@@ -109,7 +109,7 @@ export interface IButtonType {
 
 Settings are collections of props and styles for the parts of a component. They allow for inheritance and the ability to specify overrides for certain states.
 
-[Button.settings](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.settings.ts) defines settings for each of its slots as wells as its tokens and their overrides for each state. How precedence and overrides work are explained in the [Theme Settings](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-settings#_overrides-and-_precedence) page.
+[Button.settings](./Button/src/deprecated/Button.settings.ts) defines settings for each of its slots as wells as its tokens and their overrides for each state. How precedence and overrides work are explained in the [Theme Settings](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-settings#_overrides-and-_precedence) page.
 
 Button's root slot has accessibility props that need default values to fall back to when they aren't specified by its users. These default values are set in settings as well.
 
