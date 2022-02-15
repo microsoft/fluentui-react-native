@@ -273,4 +273,4 @@ The same behavior as above translated for touch events. This means that there is
 - Should mix in the accessibility props expected for a `button` component.
 - Should be keyboard tabbable and focusable.
 
-See [`useButton` hook](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/Button/src/useButton.ts) for details on accessibility props
+See [`useButton` hook](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/useButton.ts) for details on accessibility props

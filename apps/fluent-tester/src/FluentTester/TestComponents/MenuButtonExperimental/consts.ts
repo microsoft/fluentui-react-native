@@ -1,4 +1,4 @@
-export const HOMEPAGE_EXPERIMENTAL_MENU_BUTTON = 'Homepage_MenuButtonExperimental';
+export const HOMEPAGE_EXPERIMENTAL_MENU_BUTTON = 'Homepage_MenuButtonExperimental_Button';
 export const MENU_BUTTON_EXPERIMENTAL_TESTPAGE = 'MenuButtonExperimental_TestPage';
 
 /* E2E Testing Experimental Menu_Button 1 */
