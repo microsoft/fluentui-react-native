@@ -12,7 +12,6 @@
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts lint",
     "start": "react-native start",
-    "test": "fluentui-scripts jest",
     "prewindows": "install-windows-test-app --use-nuget",
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },

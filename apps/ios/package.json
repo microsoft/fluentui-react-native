@@ -13,7 +13,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
-    "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
     "ios": "react-native run-ios --scheme ReactTestApp --project-path src",
