@@ -203,10 +203,10 @@ function do_prerequisites
 	log_action 🏗 "Building yarn tools"
 	run_subprocess yarn build-tools $verbosity_arg
 	run_subprocess popd
-	
-	log_action 📦 "Installing CocoaPods gem"
-	run_subprocess /usr/bin/sudo gem install cocoapods $verbosity_arg
-	
+
+	log_action 📦 "Installing CocoaPods gem if needed"
+	run_subprocess pod --version || /usr/bin/sudo gem install cocoapods $verbosity_arg
+
 	log_action 🔨 "Selecting officially supported Xcode version"
 	run_subprocess "${git_root}/.ado/scripts/xcode_select_current_version.sh"
 
