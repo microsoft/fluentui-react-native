@@ -3,7 +3,7 @@ import {
   BUTTON_TEST_COMPONENT,
   BUTTON_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_BUTTON_BUTTON,
-  BUTTON_ON_PRESS
+  BUTTON_ON_PRESS,
 } from '../../../FluentTester/TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
