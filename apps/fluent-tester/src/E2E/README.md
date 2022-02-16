@@ -98,8 +98,8 @@ You'll want to make one for your component under **apps/fluent-tester/src/Fluent
 
 There are a **two specific** naming conventions we need to follow to keep in-sync with the Native side.
 
-1. The button that navigates to each test page - **Homepage_'componentName'_Button**
-2. The test page itself that lets us validate if the page loaded - **'componentName'_TestPage**
+1. The button that navigates to each test page - **Homepage\_'componentName'\_Button**
+2. The test page itself that lets us validate if the page loaded - **'componentName'\_TestPage**
 
 Now, what are Page Objects and Spec Documents?
 
