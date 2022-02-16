@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding Experimental Button Functional E2E Tests",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

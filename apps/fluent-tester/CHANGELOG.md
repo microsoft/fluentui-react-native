@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 15 Feb 2022 22:48:31 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Feb 2022 21:58:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.55.0
+
+Wed, 16 Feb 2022 21:58:21 GMT
+
+### Minor changes
+
+- Adding Experimental Button Functional E2E Tests (safreibe@microsoft.com)
 
 ## 0.54.0
 
