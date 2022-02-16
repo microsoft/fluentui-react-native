@@ -9,7 +9,6 @@
   "scripts": {
     "build-tools": "just-scripts build",
     "bundlesize": "bundlesize --debug",
-    "code-style": "node ./lib/just-scripts.js code-style",
     "depcheck": "just-scripts depcheck",
     "prettier": "node ./just-scripts.js prettier",
     "prettier-fix": "node ./just-scripts.js prettier --fix true"

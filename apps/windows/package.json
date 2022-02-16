@@ -6,7 +6,6 @@
     "build": "fluentui-scripts build",
     "bundle": "react-native rnx-bundle --dev false",
     "clean": "fluentui-scripts clean",
-    "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "e2etest": "rimraf errorShots/* reports/* && wdio",
     "just": "fluentui-scripts",

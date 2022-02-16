@@ -59,7 +59,6 @@ export function preset() {
     ),
   );
 
-  task('code-style', series('prettier', 'eslint'));
   task('dev', series('clean', 'copy', 'webpack-dev-server'));
 
   task(

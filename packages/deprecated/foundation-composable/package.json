@@ -20,7 +20,6 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "test": "fluentui-scripts jest",
-    "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",

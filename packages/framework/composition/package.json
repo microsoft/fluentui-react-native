@@ -18,7 +18,6 @@
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
-    "code-style": "fluentui-scripts code-style",
     "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
