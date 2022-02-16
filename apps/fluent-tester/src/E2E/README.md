@@ -94,6 +94,13 @@ You'll want to make one for your component under **apps/fluent-tester/src/Fluent
 
 **You can simply copy/paste a _consts.ts_ file from another component, and just change the name of the component in the const names and the values.**
 
+**This is really important!**
+
+There are a **two specific** naming conventions we need to follow to keep in-sync with the Native side.
+
+1. The button that navigates to each test page - **Homepage_'componentName'_Button**
+2. The test page itself that lets us validate if the page loaded - **'componentName'_TestPage**
+
 Now, what are Page Objects and Spec Documents?
 
 ## Page Objects
