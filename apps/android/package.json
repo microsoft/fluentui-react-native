@@ -28,7 +28,7 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.54.0",
     "@react-native-community/slider": "^4.2.0",
-    "@react-native-picker/picker": "^1.16.7",
+    "@react-native-picker/picker": "^2.2.1",
     "hermes-engine": "~0.7.0",
     "react": "17.0.1",
     "react-native": "^0.64.2",
