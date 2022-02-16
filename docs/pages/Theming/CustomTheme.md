@@ -37,7 +37,7 @@ A good example of a custom theme from our repo is [the Caterpillar theme in the 
 
 ### `ThemeReference` from scratch
 
-You can create your own `ThemeReference` and pass it into the `ThemeProvider`. To create a `ThemeReference` you'll need to create a new instance of `ThemeReference`. You can find the type definition [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/theme/src/themeReference.ts).
+You can create your own `ThemeReference` and pass it into the `ThemeProvider`. To create a `ThemeReference` you'll need to create a new instance of `ThemeReference`. You can find the type definition [here](../../../packages/framework/theme/src/themeReference.ts).
 
 ## Theme property customization
 
@@ -48,7 +48,7 @@ There's two ways to customize a FURN theme's properties:
 
 ### Changing theme tokens directly
 
-Theme tokens can be overridden directly. You can specify different values for theme entries and add to the set of colors. You can see what can be overridden by looking at the [Theme type definition](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-types/src/Theme.types.ts).
+Theme tokens can be overridden directly. You can specify different values for theme entries and add to the set of colors. You can see what can be overridden by looking at the [Theme type definition](../../../packages/theming/theme-types/src/Theme.types.ts).
 
 This approach is useful if you need the customizations to be applied to all components.
 
@@ -115,7 +115,7 @@ interface Theme {
 }
 ```
 
-<font size=1>(Taken from the [`Theme` type definition](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/theme-types/src/Theme.types.ts).)</font>
+<font size=1>(Taken from the [`Theme` type definition](../../../packages/theming/theme-types/src/Theme.types.ts).)</font>
 
 NOTE: If you would prefer to customize one instance of a FURN component instead, use [the customize API](../../../packages/framework/composition/README.md).
 
@@ -129,7 +129,7 @@ components: {
 },
 ```
 
-For example, if you want to change the tokens on the [Button component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button) for the whole theme, you could do something like the following:
+For example, if you want to change the tokens on the [Button component](../../../packages/components/Button) for the whole theme, you could do something like the following:
 
 ```ts
 (theme: Theme) => {
