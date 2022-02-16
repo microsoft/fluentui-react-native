@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Fix up index files, mark experimental button package deprecated",
-  "packageName": "@fluentui-react-native/experimental-button",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
