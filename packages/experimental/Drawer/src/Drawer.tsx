@@ -40,7 +40,7 @@ export const Drawer = compose<DrawerType>({
     const rootProps = { ...rest };
     const Root = useSlots(props).root;
     return (final: DrawerProps, ...children: React.ReactNode[]) => {
-      return <Root {...mergeProps(rootProps, final)} showDrawer {...(nativeTarget && {target : nativeTarget})}>
+      return <Root {...mergeProps(rootProps, final)} /*showDrawer*/{...(nativeTarget && {target : nativeTarget})}>
         {children}
         </Root>;
     };

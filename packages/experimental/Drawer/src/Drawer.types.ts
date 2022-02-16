@@ -10,10 +10,12 @@ export interface DrawerProps extends ViewProps {
   showDrawer?: Boolean;
   /* Callback function that the component will call to toggle collapse after rendering*/
   toggleShow?: () => void;
+  contentRef?: React.RefObject<React.Component>;
 }
 
 export interface NativeDrawerProps extends Omit<DrawerProps, 'target'> {
   target?: number | null;
+  contentID?: number | null;
 }
 
 export type DrawerSlotProps = {
