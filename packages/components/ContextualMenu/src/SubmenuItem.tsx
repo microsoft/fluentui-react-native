@@ -20,6 +20,7 @@ import { SvgXml } from 'react-native-svg';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { useAccessibilityInfo } from '@react-native-community/hooks';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -60,8 +61,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       if (!disabled) {
         onClick && onClick();
         context?.onItemClick && context.onItemClick(itemKey);
-        context?.dismissSubmenu && context.dismissSubmenu();
-        context?.onDismissMenu();
       }
     }, [context, disabled, itemKey, onClick]);
 
@@ -111,11 +110,23 @@ export const SubmenuItem = compose<SubmenuItemType>({
       icon: !!icon,
     };
 
+    const showWithArrowKey = React.useCallback(
+      (e: any) => {
+        const arrowKey = I18nManager.isRTL ? 'ArrowLeft' : 'ArrowRight';
+        if (e.nativeEvent.key === arrowKey) {
+          onItemHoverIn(e);
+        }
+      },
+      [onItemHoverIn],
+    );
+
     /**
-     * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow.
+     * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow (flipped for RTL).
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
      */
-    const onKeyDownProps = useKeyDownProps(onItemHoverIn, ' ', 'Enter', 'ArrowRight');
+    const onKeyDownProps = useKeyDownProps(showWithArrowKey, ' ', 'Enter', 'ArrowLeft', 'ArrowRight');
+
+    const accessibilityInfo = useAccessibilityInfo();
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -131,14 +142,9 @@ export const SubmenuItem = compose<SubmenuItemType>({
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
         focusable: Platform.select({
-          /**
-           * GH #1208: On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
-           * To mimic the non VoiceOver-enabled functionality, let's set focusable to !disabled for now.
-           * As a followup, we could query AccessibilityInfo.isScreenReaderEnabled, and pass that info to
-           * CMContext so that the event handler is only handled once per ContextualMenu.
-           */
-          macos: !disabled,
-          // Keep win32 behavior as is
+          // On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
+          macos: !disabled || accessibilityInfo.screenReaderEnabled,
+          // win32
           default: true,
         }),
         ...rest,

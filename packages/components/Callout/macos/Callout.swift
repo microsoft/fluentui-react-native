@@ -304,7 +304,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 
 		contentView.addSubview(proxyView)
-		window.initialFirstResponder = proxyView
+		if let parentWindow = self.window {
+			parentWindow.addChildWindow(window, ordered: .above)
+		}
 
 		return window
 	}()

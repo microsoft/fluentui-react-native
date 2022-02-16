@@ -1,23 +1,58 @@
 import * as React from 'react';
-import { ButtonFocusTest } from './ButtonFocusTest';
-import { ButtonIconTest } from './ButtonIconTest';
+import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
+import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
 import { BUTTON_TESTPAGE } from './consts';
-import { E2EButtonTest } from './E2EButtonTest';
+import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { ButtonVariantTest } from './ButtonVariantTestSection';
+import { ToggleButtonTest } from './ToggleButtonTestSection';
+import { ButtonIconTest } from '../Button/ButtonIconTestSection';
+import { ButtonSizeTest } from './ButtonSizeTestSection';
+import { ButtonShapeTest } from './ButtonShapeTestSection';
+import { E2EButtonExperimentalTest } from './E2EButtonTest';
+import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 
 const buttonSections: TestSection[] = [
   {
-    name: 'Basic Button',
+    name: 'Button Variants',
     testID: BUTTON_TESTPAGE,
-    component: ButtonFocusTest,
+    component: ButtonVariantTest,
+  },
+  {
+    name: 'Button Shape',
+    component: ButtonShapeTest,
   },
   {
     name: 'Icon Button',
     component: ButtonIconTest,
   },
   {
+    name: 'Toggle Button',
+    component: ToggleButtonTest,
+  },
+  {
+    name: 'Sizes',
+    component: ButtonSizeTest,
+  },
+  {
+    name: 'Customize, Compose, and Ref',
+    component: ButtonHOCTest,
+  },
+  {
     name: 'E2E Button Testing',
-    component: E2EButtonTest,
+    component: E2EButtonExperimentalTest,
+  },
+  {
+    name: 'Deprecated Basic Button',
+    component: ButtonFocusTest_deprecated,
+  },
+  {
+    name: 'Deprecated Icon Button',
+    component: ButtonIconTest_deprecated,
+  },
+  {
+    name: 'Deprecated E2E Button Testing',
+    component: E2EButtonTest_deprecated,
   },
 ];
 
@@ -26,7 +61,7 @@ export const ButtonTest: React.FunctionComponent = () => {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

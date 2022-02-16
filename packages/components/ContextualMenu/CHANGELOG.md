@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 09 Feb 2022 20:14:50 GMT and should not be manually modified.
+This log was last generated on Mon, 14 Feb 2022 23:29:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.2
+
+Mon, 14 Feb 2022 23:29:33 GMT
+
+### Patches
+
+- ContextualMenu macOS: Disabled menu items are focusable if VoiceOver is enabled (sanajmi@microsoft.com)
+
+## 0.16.1
+
+Thu, 10 Feb 2022 17:13:16 GMT
+
+### Patches
+
+- Flip arrow key navigation in RTL (sanajmi@microsoft.com)
+- Don't dismiss submenu on menu item click (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.19.24
 
 ## 0.16.0
 
