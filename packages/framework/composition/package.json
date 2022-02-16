@@ -16,7 +16,6 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "bundle": "fluentui-scripts bundle",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "code-style": "fluentui-scripts code-style",

@@ -10,7 +10,6 @@
     "depcheck": "fluentui-scripts depcheck",
     "e2etest": "rimraf errorShots/* reports/* && wdio",
     "just": "fluentui-scripts",
-    "lint": "fluentui-scripts lint",
     "start": "react-native start",
     "prewindows": "install-windows-test-app --use-nuget",
     "windows": "react-native run-windows --sln windows/FluentTester.sln"
