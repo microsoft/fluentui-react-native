@@ -5,7 +5,6 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-
     }
 
     dependencies {
@@ -16,11 +15,11 @@ buildscript {
 
 allprojects {
     repositories {
-        mavenCentral()
-        google()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url("$rootDir/../../../node_modules/react-native/android")
+            url("${rootDir}/../../../node_modules/react-native/android")
         }
+        mavenCentral()
+        google()
     }
 }
