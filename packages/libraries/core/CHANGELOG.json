@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 16 Feb 2022 21:58:20 GMT",
+      "tag": "@fluentui/react-native_v0.27.30",
+      "version": "0.27.30",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Feb 2022 22:48:31 GMT",
       "tag": "@fluentui/react-native_v0.27.30",
       "version": "0.27.30",
