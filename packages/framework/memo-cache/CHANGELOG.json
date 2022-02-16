@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Wed, 16 Feb 2022 21:58:20 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.1.7",
+      "version": "1.1.7",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:03 GMT",
       "tag": "@fluentui-react-native/memo-cache_v1.1.7",
       "version": "1.1.7",

@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 16 Feb 2022 21:58:21 GMT",
+      "tag": "@fluentui-react-native/tester_v0.55.0",
+      "version": "0.55.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Fix tests"
+          }
+        ],
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e7a98f4a0613e49ac35454ac3780c9a9eae906bf",
+            "comment": "Adding Experimental Button Functional E2E Tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 15 Feb 2022 22:48:31 GMT",
       "tag": "@fluentui-react-native/tester_v0.54.0",
       "version": "0.54.0",
