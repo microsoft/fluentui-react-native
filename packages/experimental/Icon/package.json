@@ -38,7 +38,7 @@
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react-native": "^0.64.3",
-    "react-native-svg-transformer": "^0.14.3"
+    "react-native-svg-transformer": "^1.0.0"
   },
   "peerDependencies": {
     "react-native": ">=0.64.3"
