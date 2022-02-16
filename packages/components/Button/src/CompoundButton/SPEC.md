@@ -6,7 +6,7 @@ The `CompoundButton` is a `Button` that is designed to show an extra line of tex
 
 ## Requirements
 
-If using FURN's theming, the `CompoundButton` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
+If using FURN's theming, the `CompoundButton` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](../../../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
 
 ## Sample Code
 
@@ -21,7 +21,7 @@ Basic examples:
 <CompoundButton size="small" secondaryContent="A second line">Text</CompoundButton>
 ```
 
-More examples on the [Test pages for the Button](https://github.com/microsoft/fluentui-react-native/tree/master/apps/fluent-tester/src/FluentTester/TestComponents/Button). Instructions on running the tester app can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/apps/fluent-tester/README.md).
+More examples on the [Test pages for the Button](../../../../../apps/fluent-tester/src/FluentTester/TestComponents/Button). Instructions on running the tester app can be found [here](../../../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
