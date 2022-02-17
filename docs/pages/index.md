@@ -34,7 +34,7 @@
 
 ## Contributing Docs Template
 
-> ```
+> ```md
 > # Component Name
 >
 > ## Purpose
