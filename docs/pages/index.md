@@ -2,12 +2,10 @@
 
 ## Components
 
-- [Button](./Components/Button.md)
 - [Callout](./Components/Callout.md)
 - [Checkbox](./Components/Checkbox.md)
 - [ContextualMenu](./Components/ContextualMenu.md)
 - [Link](./Components/Link.md)
-- [MenuButton](./Components/MenuButton.md)
 - [Persona](./Components/Persona.md)
 - [PersonaCoin](./Components/PersonaCoin.md)
 - [Pressable](./Components/Pressable.md)
@@ -30,7 +28,7 @@
 
 ## Upgrade Guides
 
-- [Moving to newer `ThemeProvder`](./UpgradeGuides/ThemeProvder.md)
+- [Moving to newer `ThemeProvder`](./UpgradeGuides/UpdateThemeProvder.md)
 
 ## Contributing Docs Template
 
