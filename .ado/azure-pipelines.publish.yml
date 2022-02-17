@@ -58,6 +58,17 @@ jobs:
           yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/master -n $(npmAuth) --access public -y
         displayName: 'Publish NPM Packages'
 
+      - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
+        displayName: 📒 Generate Manifest Npm
+        inputs:
+          BuildDropPath: $(System.DefaultWorkingDirectory)
+     
+      - task: PublishPipelineArtifact@1
+        displayName: 📒 Publish Manifest Npm
+        inputs:
+          artifactName: SBom-Npm-$(System.JobAttempt)
+          targetPath: $(System.DefaultWorkingDirectory)/_manifest
+
   - job: NuGetPublish
     displayName: NuGet Publish
     pool:

@@ -1,5 +1,5 @@
-export const HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON = 'Homepage_Text_Experimental_Button';
-export const EXPERIMENTAL_TEXT_TESTPAGE = 'Text_Experimental_TestPage';
+export const HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON = 'Homepage_TextExperimental_Button';
+export const EXPERIMENTAL_TEXT_TESTPAGE = 'TextExperimental_TestPage';
 
 /* E2E Testing Experimental Text 1 */
 export const EXPERIMENTAL_TEXT_TEST_COMPONENT = 'Experimental_Text_Test_Component'; // A component on each specific test page

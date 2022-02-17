@@ -37,14 +37,16 @@ function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
 function getKeyUpPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
   return {
     onKeyUp: getKeyCallbackWorker(userCallback, ...keys),
-    validKeysUp: keys, // macOS needs an array of supported keys passed as well
+    // Required on macOS to know which key events to suppress natively
+    validKeysUp: keys,
   };
 }
 
 function getKeyDownPropsWorker(userCallback: KeyCallback, ...keys: string[]): KeyPressProps {
   return {
     onKeyDown: getKeyCallbackWorker(userCallback, ...keys),
-    validKeysDown: keys, // macOS needs an array of supported keys passed as well
+    // Required on macOS to know which key events to suppress natively
+    validKeysDown: keys,
   };
 }
 

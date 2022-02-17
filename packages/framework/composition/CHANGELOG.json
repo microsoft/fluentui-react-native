@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Wed, 16 Feb 2022 21:58:20 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 28 Jan 2022 20:52:39 GMT",
       "tag": "@fluentui-react-native/composition_v0.7.5",
       "version": "0.7.5",

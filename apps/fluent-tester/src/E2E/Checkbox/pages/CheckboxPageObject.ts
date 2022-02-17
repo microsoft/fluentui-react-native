@@ -7,6 +7,12 @@ import {
 } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
+/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
+ * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
+export const enum CheckboxSelector {
+  Primary, //this._primaryComponent
+}
+
 class CheckboxPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -49,6 +55,19 @@ class CheckboxPageObject extends BasePage {
     );
 
     return callbackText.isDisplayed();
+  }
+
+  /* Sends a Keyboarding command on a specific UI element */
+  sendKey(selector: CheckboxSelector, key: string): void {
+    this.getCheckboxSelector(selector).addValue(key);
+  }
+
+  /* Returns the correct WebDriverIO element from the Checkbox Selector */
+  getCheckboxSelector(selector?: CheckboxSelector): WebdriverIO.Element {
+    if (selector == CheckboxSelector.Primary) {
+      return this._primaryComponent;
+    }
+    return this._primaryComponent;
   }
 
   /*****************************************/
