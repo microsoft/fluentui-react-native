@@ -10,7 +10,6 @@ const { copy } = require('./tasks/copy');
 const { jest } = require('./tasks/jest');
 const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
-const { webpack, webpackDevServer } = require('./tasks/webpack');
 const { depcheckTask } = require('./tasks/depcheck');
 const { checkForModifiedFiles } = require('./tasks/checkForModifiedFilesTask');
 
@@ -22,8 +21,6 @@ export function preset() {
 
   // Adds an alias for 'npm-install-mode' for backwards compatibility
   option('min', { alias: 'npm-install-mode' });
-
-  option('webpackConfig', { alias: 'w' });
 
   // Build only commonjs (not other TS variants) but still run other tasks
   option('commonjs');
@@ -38,8 +35,6 @@ export function preset() {
   task('ts:esm', ts.esm);
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
-  task('webpack', webpack);
-  task('webpack-dev-server', webpackDevServer);
   task('prettier', () => (argv().fix ? prettierTask({ files: ['src/.'] }) : prettierCheckTask({ files: ['src/.'] })));
   task('checkForModifiedFiles', checkForModifiedFiles);
   task('tsall', parallel('ts:commonjs', 'ts:esm'));
@@ -59,8 +54,6 @@ export function preset() {
     ),
   );
 
-  task('dev', series('clean', 'copy', 'webpack-dev-server'));
-
   task(
     'build:node-lib',
     series(
@@ -72,8 +65,6 @@ export function preset() {
       ),
     ),
   );
-
-  task('bundle', series('webpack'));
 
   task('build', series('clean', 'copy', 'ts'));
 
