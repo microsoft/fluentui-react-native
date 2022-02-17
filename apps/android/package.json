@@ -41,7 +41,7 @@
     "@rnx-kit/metro-config": "^1.2.26",
     "flow-bin": "^0.113.0",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react-native-svg-transformer": "^0.14.3",
+    "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^1.1.1",
     "react-test-renderer": "17.0.1"
   },

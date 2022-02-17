@@ -52,7 +52,7 @@
     "appium": "1.20.0",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react-native-svg-transformer": "^0.14.3",
+    "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.1",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",

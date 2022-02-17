@@ -80,7 +80,7 @@
     "react-native": "^0.64.2",
     "react-native-macos": "^0.64.0",
     "react-native-svg": "^12.1.1",
-    "react-native-svg-transformer": "^0.14.3",
+    "react-native-svg-transformer": "^1.0.0",
     "react-native-windows": "^0.64.0",
     "react-test-renderer": "17.0.1",
     "rnpm-plugin-windows": "^0.5.1-0",
