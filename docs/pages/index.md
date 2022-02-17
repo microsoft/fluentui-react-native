@@ -28,7 +28,7 @@
 
 ## Upgrade Guides
 
-- [Moving to newer `ThemeProvder`](./UpgradeGuides/UpdateThemeProvder.md)
+- [Moving to newer `ThemeProvder`](./Guides/UpdateThemeProvider.md)
 
 ## Contributing Docs Template
 
