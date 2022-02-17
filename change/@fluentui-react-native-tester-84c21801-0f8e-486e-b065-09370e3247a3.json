@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Fix ActivityIndicator test constants",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
