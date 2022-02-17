@@ -1,4 +1,5 @@
 import { UseStylingOptions, buildProps, Theme, TokenSettings } from '@fluentui-react-native/framework';
+import { TokensFromTheme } from '@fluentui-react-native/use-styling';
 import { shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
 import { ShimmerSlotProps } from './Shimmer.types.win32';
 
@@ -22,11 +23,14 @@ export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, 
   tokens: [defaultShimmerTokens, shimmerName],
   tokensThatAreAlsoProps: 'all',
   slotProps: {
-    root: buildProps(() => ({
-      accessibilityRole: 'progressbar',
-      accessible: true,
-      style: { overflow: 'hidden' },
-    })),
+    root: buildProps(
+      (tokens: ShimmerTokens) => ({
+        accessibilityRole: 'progressbar',
+        accessible: true,
+        style: { overflow: 'hidden', backgroundColor: tokens.backgroundColor },
+      }),
+      ['backgroundColor'],
+    ),
 
     shimmerWaveContainer: buildProps(
       (tokens: ShimmerTokens) => ({
