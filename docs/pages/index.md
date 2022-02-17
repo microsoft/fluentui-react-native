@@ -2,18 +2,18 @@
 
 ## Components
 
-- [Button](./Components/Button.mdx)
-- [Callout](./Components/Callout.mdx)
-- [Checkbox](./Components/Checkbox.mdx)
-- [ContextualMenu](./Components/ContextualMenu.mdx)
-- [Link](./Components/Link.mdx)
-- [MenuButton](./Components/MenuButton.mdx)
-- [Persona](./Components/Persona.mdx)
-- [PersonaCoin](./Components/PersonaCoin.mdx)
-- [Pressable](./Components/Pressable.mdx)
-- [RadioGroup](./Components/RadioGroup.mdx)
-- [Separator](./Components/Separator.mdx)
-- [Text](./Components/Separator.mdx)
+- [Button](./Components/Button.md)
+- [Callout](./Components/Callout.md)
+- [Checkbox](./Components/Checkbox.md)
+- [ContextualMenu](./Components/ContextualMenu.md)
+- [Link](./Components/Link.md)
+- [MenuButton](./Components/MenuButton.md)
+- [Persona](./Components/Persona.md)
+- [PersonaCoin](./Components/PersonaCoin.md)
+- [Pressable](./Components/Pressable.md)
+- [RadioGroup](./Components/RadioGroup.md)
+- [Separator](./Components/Separator.md)
+- [Text](./Components/Separator.md)
 
 ## Theming
 
@@ -24,9 +24,9 @@
 
 ## Utilities
 
-- [FocusTrapZone](./Utilities/FocusTrapZone.mdx)
-- [FocusZone](./Utilities/FocusZone.mdx)
-- [Stack](./Utilities/Stack.mdx)
+- [FocusTrapZone](./Utilities/FocusTrapZone.md)
+- [FocusZone](./Utilities/FocusZone.md)
+- [Stack](./Utilities/Stack.md)
 
 ## Upgrade Guides
 
