@@ -1,3 +1,4 @@
+#include "publish_staticanalysis.xcconfig"
 // For publish builds, only provide line tables for symbolizing crashes
 CLANG_DEBUG_INFORMATION_LEVEL[config=Release]=line-tables-only
 // The following build setting caused build errors, so it is commented out and placed in every podspec instead
