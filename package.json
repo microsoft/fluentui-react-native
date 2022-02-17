@@ -22,7 +22,7 @@
     "bundle": "lage bundle",
     "clean": "lage clean",
     "change": "beachball change",
-    "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
+    "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
     "depcheck": "rnx-dep-check && lage depcheck",
     "lint": "lage lint",

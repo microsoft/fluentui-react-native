@@ -22,8 +22,8 @@
   "brandBackground": {
     "fillColorRest": "#0078d4",
     "fillColorHover": "#106ebe",
-    "fillColorPressed": "#004578",
-    "fillColorDisabled": "#e0e0e0",
+    "fillColorPressed": "#106ebe",
+    "fillColorDisabled": "#ebebeb",
     "fillColorSelected": "#005a9e"
   },
   "brandBackground2": {
@@ -36,7 +36,7 @@
     "fillColorRest": "#0078d4",
     "fillColorHover": "#106ebe",
     "fillColorPressed": "#004578",
-    "fillColorDisabled": "#bdbdbd",
+    "fillColorDisabled": "#757575",
     "fillColorSelected": "#005a9e"
   },
   "brandForeground2": {
@@ -107,9 +107,9 @@
     "fillColorSelected": "#ebebeb"
   },
   "neutralBackground2": {
-    "fillColorRest": "#fafafa",
+    "fillColorRest": "#ffffff",
     "fillColorHover": "#f0f0f0",
-    "fillColorPressed": "#dbdbdb",
+    "fillColorPressed": "#ebebeb",
     "fillColorSelected": "#e6e6e6"
   },
   "neutralBackground3": {
@@ -134,7 +134,7 @@
     "fillColorRest": "#e6e6e6"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#f0f0f0",
+    "fillColorRest": "#d1d1d1",
     "fillColorSelected": "PlatformColor(Window)"
   },
   "neutralBackgroundInverted": {
@@ -168,10 +168,11 @@
     "fillColorRest": "#424242"
   },
   "neutralForegroundDisabled": {
-    "fillColorRest": "#bdbdbd"
+    "fillColorRest": "#757575"
   },
   "neutralForegroundInverted": {
-    "fillColorRest": "#ffffff"
+    "fillColorRest": "#ffffff",
+    "fillColorPressed": "#f5f5f5"
   },
   "neutralForegroundInvertedLink": {
     "fillColorRest": "#ffffff",
@@ -199,7 +200,10 @@
     "strokeWidth": 1
   },
   "neutralStroke2": {
-    "strokeColorRest": "#616161",
+    "strokeColorRest": "#000000",
+    "strokeColorHover": "#666666",
+    "strokeColorPressed": "#292929",
+    "strokeColorDisabled": "#bdbdbd",
     "strokeWidth": 1
   },
   "neutralStroke3": {
@@ -263,7 +267,7 @@
   },
   "transparentStroke": {
     "strokeAlignment": "inner",
-    "strokeColorRest": "#858585",
+    "strokeColorRest": "#000000",
     "strokeColorHover": "#666666",
     "strokeColorPressed": "#292929",
     "strokeColorDisabled": "#bdbdbd",

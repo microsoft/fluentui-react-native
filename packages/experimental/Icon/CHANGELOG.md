@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
+This log was last generated on Thu, 17 Feb 2022 02:13:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.8
+
+Thu, 17 Feb 2022 02:13:06 GMT
+
+### Patches
+
+- Update svg-transformer version (ruaraki@microsoft.com)
+
+## 0.11.7
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.10
+- Bump @fluentui-react-native/framework to v0.7.13
+- Bump @fluentui-react-native/text to v0.11.10
+- Bump @fluentui-react-native/theming-utils to v0.8.10
+- Bump @uifabricshared/foundation-compose to v1.11.10
 
 ## 0.11.6
 

@@ -6,7 +6,6 @@ import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
-import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
@@ -62,11 +61,6 @@ export const tests: TestDescription[] = [
     name: 'ContextualMenu Test',
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
-  },
-  {
-    name: 'Experimental Button',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Experimental Checkbox',
