@@ -20,10 +20,12 @@ export const defaultShimmerTokens: TokenSettings<ShimmerTokens> = (theme: Theme)
  */
 export const stylingSettings: UseStylingOptions<ShimmerProps, ShimmerSlotProps, ShimmerTokens> = {
   tokens: [defaultShimmerTokens, shimmerName],
+  tokensThatAreAlsoProps: 'all',
   slotProps: {
     root: buildProps(() => ({
       accessibilityRole: 'progressbar',
       accessible: true,
+      style: { overflow: 'hidden' },
     })),
 
     shimmerWaveContainer: buildProps(
