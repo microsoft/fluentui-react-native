@@ -3,7 +3,7 @@
   "version": "0.3.4",
   "description": "Utility functions for styling components in FURN",
   "main": "src/index.ts",
-  "module": "lib/index.js",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "onPublish": {
     "main": "lib-commonjs/index.js",

@@ -10,7 +10,6 @@ const blockList = exclusionList([
 module.exports = makeMetroConfig({
   projectRoot: __dirname,
   resolver: {
-    resolverMainFields: ['main'],
     blacklistRE: blockList,
     blockList,
   },
