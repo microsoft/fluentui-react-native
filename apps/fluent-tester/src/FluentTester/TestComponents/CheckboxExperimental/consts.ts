@@ -1,5 +1,5 @@
-export const HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON = 'HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON'; // Button on the homepage that navigates to the selected test page
-export const EXPERIMENTAL_CHECKBOX_TESTPAGE = 'Checkbox_Experimental_TestPage'; // A component on each specific test page.
+export const HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON = 'Homepage_CheckboxExperimental_Button'; // Button on the homepage that navigates to the selected test page
+export const EXPERIMENTAL_CHECKBOX_TESTPAGE = 'CheckboxExperimental_TestPage'; // A component on each specific test page.
 
 /* Test Experimental Checkbox 1 */
 export const EXPERIMENTAL_CHECKBOX_TEST_COMPONENT = 'Experimental_Checkbox_Test_Component'; // A component on each specific test page

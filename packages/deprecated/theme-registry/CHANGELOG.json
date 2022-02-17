@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Wed, 16 Feb 2022 21:58:21 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:04 GMT",
       "tag": "@uifabricshared/theme-registry_v0.7.2",
       "version": "0.7.2",

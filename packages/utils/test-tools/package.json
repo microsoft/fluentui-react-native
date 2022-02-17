@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Tools and mocks for testing components using jest and enzyme",
   "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "private": true,
   "scripts": {

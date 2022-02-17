@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Wed, 16 Feb 2022 21:58:21 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 14 Feb 2022 23:29:33 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "none": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "368fe5f4565442196f236e421b1c37c79556d2dd",
+            "comment": "update button tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 08 Feb 2022 05:13:39 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.12.0",
       "version": "0.12.0",
