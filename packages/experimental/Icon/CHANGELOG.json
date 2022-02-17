@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Thu, 17 Feb 2022 02:13:06 GMT",
+      "tag": "@fluentui-react-native/icon_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "616c894f75769553fe97f8f2d4550bbd615f2396",
+            "comment": "Update svg-transformer version"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Feb 2022 01:22:02 GMT",
       "tag": "@fluentui-react-native/icon_v0.11.7",
       "version": "0.11.7",
