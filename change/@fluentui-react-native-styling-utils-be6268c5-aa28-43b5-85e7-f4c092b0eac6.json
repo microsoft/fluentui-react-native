@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix up package.json files",
-  "packageName": "@fluentui-react-native/styling-utils",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
