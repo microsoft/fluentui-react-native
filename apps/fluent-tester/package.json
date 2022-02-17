@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.54.0",
+  "version": "0.55.0",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -16,11 +16,9 @@
     "build": "fluentui-scripts build",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
-    "code-style": "fluentui-scripts code-style",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
     "start": "react-native start",
-    "test": "fluentui-scripts jest",
     "bundle": "react-native rnx-bundle --dev false",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
@@ -56,9 +54,9 @@
     "@fluentui-react-native/theming-utils": ">=0.8.9 <1.0.0",
     "@fluentui-react-native/win32-theme": ">=0.14.10 <1.0.0",
     "@fluentui/react-native": ">=0.27.30 <1.0.0",
-    "@react-native-community/slider": "^4.1.12",
+    "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.1.2",
-    "@react-native-picker/picker": "^1.16.7",
+    "@react-native-picker/picker": "^2.2.1",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

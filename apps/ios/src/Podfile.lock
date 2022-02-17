@@ -9,7 +9,7 @@ PODS:
     - React-Core (= 0.64.3)
     - React-jsi (= 0.64.3)
     - ReactCommon/turbomodule/core (= 0.64.3)
-  - FRNAvatar (0.13.8):
+  - FRNAvatar (0.14.3):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
@@ -367,7 +367,7 @@ PODS:
   - React-jsinspector (0.64.3)
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.1.12):
+  - react-native-slider (4.2.0):
     - React-Core
   - React-perflogger (0.64.3)
   - React-RCTActionSheet (0.64.3):
@@ -433,7 +433,7 @@ PODS:
     - React-cxxreact (= 0.64.3)
     - React-jsi (= 0.64.3)
     - React-perflogger (= 0.64.3)
-  - ReactTestApp-DevSupport (0.10.2):
+  - ReactTestApp-DevSupport (1.0.12):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -564,8 +564,8 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: 771ef19aaf6635986511379f82e14d416ea528ba
-  FRNAvatar: 7b67903073ba2c0ded69f9c1801f3ca93167c6b8
+  FBReactNativeSpec: 96e0ac3698e5ebbc3aab6e67bcd98508c0767abc
+  FRNAvatar: 5e1b7c6304d4132046a9dd77e1b8da2f0bf7fb20
   FRNDatePicker: 58e321df06792fd68b4e0e3e1844a916652fa172
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
@@ -581,7 +581,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: df6abc9fafbecb8e5b7a5fbc5e6d4bd017d594d5
   React-jsinspector: 34e23860273a23695342f58eed3ffd3ba10c31e0
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: 6e9b86e76cce4b9e35b3403193a6432ed07e0c81
+  react-native-slider: 37e1cf275dab20d3c015e40969aa9f5c309645a8
   React-perflogger: cc76a4254d19640f1d8ad1c66fdee800414b805c
   React-RCTActionSheet: 7448f049318d8d7e8a9a1ebb742ada721757eea8
   React-RCTAnimation: fb9b3fa1a4a9f5e6ab01b3368693ce69860ba76a
@@ -594,8 +594,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: c7f845861e79eae13dc1e8217a3cf47a3945b504
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
-  ReactTestApp-DevSupport: 0556335e9e3fbfd74e2309c5a5d2842902b0500f
-  ReactTestApp-Resources: 73c2660013d746f9ffc6762e0123d22950ccd740
+  ReactTestApp-DevSupport: 5c964974cab58dfc9ce22a36ddb3924fc97518fa
+  ReactTestApp-Resources: 51437f32bf317329a7c9ca3f68e3a4cc952567ba
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749

@@ -12,6 +12,11 @@ const checkPublishing = () => {
   return checkPublishingTask();
 };
 
+const checkForModifiedFiles = () => {
+  const { checkForModifiedFiles } = require('./lib/tasks/checkForModifiedFilesTask');
+  return checkForModifiedFiles();
+};
+
 module.exports = function preset() {
   option('production');
 
@@ -31,6 +36,7 @@ module.exports = function preset() {
   task('lint', eslintTask({ files: ['src/'] }));
   task('prettier', () => (argv().fix ? prettierTask : prettierCheckTask));
   task('cleanlib', cleanTask([libPath]));
+  task('checkForModifiedFiles', checkForModifiedFiles);
   task('build', series('cleanlib', parallel('lint', 'ts')));
   task('no-op', () => {});
   task('clean', 'no-op');
