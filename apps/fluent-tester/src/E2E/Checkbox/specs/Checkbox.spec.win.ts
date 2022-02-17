@@ -1,17 +1,13 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import CheckboxPageObject from '../pages/CheckboxPageObject';
+import CheckboxPageObject, { CheckboxSelector } from '../pages/CheckboxPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
-import {
-  CHECKBOX_TEST_COMPONENT_LABEL,
-  CHECKBOX_ACCESSIBILITY_LABEL,
-  CHECKBOX_TEST_COMPONENT,
-} from '../../../FluentTester/TestComponents/Checkbox/consts';
+import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../FluentTester/TestComponents/Checkbox/consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Checkbox test page', () => {
@@ -23,7 +19,8 @@ describe('Checkbox Testing Initialization', () => {
     NavigateAppPage.clickAndGoToCheckboxPage();
     CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy();
+    expect(CheckboxPageObject.isPageLoaded()).toBeTruthy(CheckboxPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
@@ -36,14 +33,17 @@ describe('Checkbox Accessibility Testing', () => {
 
   it('Checkbox - Validate accessibilityRole is correct', () => {
     expect(CheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Checkbox - Set accessibilityLabel', () => {
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', () => {
     expect(CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
@@ -73,14 +73,16 @@ describe('Checkbox Functional Testing', () => {
 
     /* Validate the Checkbox is toggled OFF */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeFalsy();
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Click the "Spacebar" on a Checkbox and verify it toggles', () => {
     /* Presses the "space bar" to select the Checkbox */
-    CheckboxPageObject.sendKey(CHECKBOX_TEST_COMPONENT, Keys.Spacebar);
+    CheckboxPageObject.sendKey(CheckboxSelector.Primary, Keys.Spacebar);
     CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     /* Validate the Checkbox is selected */
     expect(CheckboxPageObject.isCheckboxChecked()).toBeTruthy();
+    expect(CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });

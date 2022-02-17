@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Wed, 02 Feb 2022 02:29:07 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.22",
+      "version": "0.19.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.12.2",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.9",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Jan 2022 20:52:39 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.21",
+      "version": "0.19.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "de0a37f48e525af8a22a37be8234731308e585c5",
+            "comment": "ContextualMenu macOS: fix focus shifting on click"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 26 Jan 2022 20:31:04 GMT",
       "tag": "@fluentui-react-native/callout_v0.19.20",
       "version": "0.19.20",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Minor changes
+
+- Fix UWP HC (ruaraki@microsoft.com)
 
 ## 0.11.6
 

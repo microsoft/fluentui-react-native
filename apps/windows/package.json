@@ -22,7 +22,7 @@
     "directory": "apps/windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.51.3",
+    "@fluentui-react-native/tester": "^0.53.0",
     "react": "17.0.1",
     "react-native": "^0.64.2",
     "react-native-svg": "^12.1.1",
