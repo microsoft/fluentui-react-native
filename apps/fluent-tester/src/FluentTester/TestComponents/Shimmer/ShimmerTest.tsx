@@ -7,6 +7,49 @@ import { stackStyle } from '../Common/styles';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
 import { E2ETestingShimmer } from './ShimmerE2ETest';
 
+const TestCompareCustomizeShimmer = Shimmer.customize({
+  shimmerWaveColor: 'blue',
+  shimmerColor: 'orange',
+  backgroundColor: 'red',
+});
+
+export const CustomizeAndTokenPropsShimmers: React.FunctionComponent = () => {
+  return (
+    <Stack style={{ margin: 4 }}>
+      <TestCompareCustomizeShimmer
+        elements={shimmerRectsAndCircle()}
+        duration={2000}
+        delay={1000}
+        style={{ height: 100, width: '50%', borderWidth: 1, borderColor: 'black' }}
+      />
+
+      <Shimmer
+        elements={shimmerRectsAndCircle()}
+        duration={2000}
+        delay={1000}
+        style={{ height: 100, width: '50%', borderWidth: 1, borderColor: 'black' }}
+        shimmerWaveColor="blue"
+        shimmerColor="orange"
+        backgroundColor="red"
+      />
+    </Stack>
+  );
+};
+
+export const RoundedCornerClipCheckShimmer: React.FunctionComponent = () => {
+  return (
+    <Stack style={{ margin: 4 }}>
+      <Shimmer
+        elements={shimmerRectsAndCircle()}
+        duration={2000}
+        delay={1000}
+        style={{ height: 100, width: 150, borderRadius: 16, borderWidth: 2, borderColor: 'black' }}
+        backgroundColor="teal"
+      />
+    </Stack>
+  );
+};
+
 const RectShimmers: React.FunctionComponent<Record<string, never>> = () => {
   return (
     <Stack style={stackStyle}>
@@ -24,13 +67,10 @@ const RectCircleShimmers: React.FunctionComponent<Record<string, never>> = () =>
 };
 
 const CustomizedShimmer: React.FunctionComponent<Record<string, never>> = () => {
-  const PinkShimmer = Shimmer.customize({
-    shimmerWaveColor: 'pink',
-  });
-
   return (
     <Stack style={stackStyle}>
-      <PinkShimmer elements={shimmerRectsAndCircle()} duration={1500} delay={500} style={{ height: 100, maxWidth: '50%' }} />
+      <CustomizeAndTokenPropsShimmers />
+      <RoundedCornerClipCheckShimmer />
     </Stack>
   );
 };
@@ -45,11 +85,6 @@ const ShimmerBorderRadii: React.FunctionComponent<Record<string, never>> = () =>
 
 const shimmerSections: TestSection[] = [
   {
-    name: 'Customized Shimmer',
-    testID: SHIMMER_TESTPAGE,
-    component: CustomizedShimmer,
-  },
-  {
     name: 'Shimmer Rects',
     testID: SHIMMER_TESTPAGE,
     component: RectShimmers,
@@ -63,6 +98,11 @@ const shimmerSections: TestSection[] = [
     name: 'Border Radius Tests',
     testID: SHIMMER_TESTPAGE,
     component: ShimmerBorderRadii,
+  },
+  {
+    name: 'Customized Shimmer',
+    testID: SHIMMER_TESTPAGE,
+    component: CustomizedShimmer,
   },
   {
     name: 'Shimmer for E2E Testing',

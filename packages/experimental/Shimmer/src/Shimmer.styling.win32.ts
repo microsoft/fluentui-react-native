@@ -1,5 +1,4 @@
 import { UseStylingOptions, buildProps, Theme, TokenSettings } from '@fluentui-react-native/framework';
-import { TokensFromTheme } from '@fluentui-react-native/use-styling';
 import { shimmerName, ShimmerProps, ShimmerTokens } from './Shimmer.types';
 import { ShimmerSlotProps } from './Shimmer.types.win32';
 
