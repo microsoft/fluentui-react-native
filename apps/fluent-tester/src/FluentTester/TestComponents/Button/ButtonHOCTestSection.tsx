@@ -1,14 +1,21 @@
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { Icon } from '@fluentui-react-native/icon';
+import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
+import TestSvg from './test.svg';
+
+const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
+const CustomButton = Button.customize({ backgroundColor: 'pink' });
+const CustomIconButton = Button.customize({ iconColor: 'yellow' });
+const svgProps: SvgIconProps = {
+  src: TestSvg,
+  viewBox: '0 0 500 500',
+};
 
 export const ButtonHOCTest: React.FunctionComponent = () => {
   const buttonRef = React.useRef(null);
-  const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
-  const CustomButton = Button.customize({ backgroundColor: 'pink' });
   const ComposedButton = Button.compose({
     slots: {
       root: View,
@@ -27,6 +34,7 @@ export const ButtonHOCTest: React.FunctionComponent = () => {
       <CustomButton style={commonTestStyles.vmargin} componentRef={buttonRef}>
         Customized Button with ref
       </CustomButton>
+      <CustomIconButton icon={{ svgSource: svgProps }}>Customized Icon Button</CustomIconButton>
       <Button
         style={commonTestStyles.vmargin}
         onClick={() => {

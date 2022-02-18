@@ -11,12 +11,11 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-  const CustomButton = Button.customize({ iconColor: 'yellow' });
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
       {svgIconsEnabled && (
         <>
-          <CustomButton
+          <Button
             iconOnly
             size="small"
             icon={{ svgSource: svgProps }}
