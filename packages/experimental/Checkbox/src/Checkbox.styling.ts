@@ -2,6 +2,7 @@ import { checkboxName, CheckboxTokens, CheckboxSlotProps, CheckboxProps, Checkbo
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultCheckboxTokens } from './CheckboxTokens';
+import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 
 export const checkboxStates: (keyof CheckboxTokens)[] = [
   'medium',
@@ -29,20 +30,14 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           padding: tokens.padding,
+          paddingHorizontal: tokens.paddingHorizontal,
         },
       }),
       ['backgroundColor', 'padding', ...borderStyles.keys],
     ),
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
-        style: {
-          color: tokens.color,
-          marginTop: -2,
-          marginBottom: -2,
-          marginLeft: tokens.spacingLabelAfter,
-          marginRight: tokens.spacingLabelBefore,
-          ...fontStyles.from(tokens, theme),
-        },
+        style: contentStyling(tokens, theme),
       }),
       ['spacingLabelAfter', 'spacingLabelBefore', 'color', ...fontStyles.keys],
     ),
@@ -77,4 +72,25 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
 
 export const getDefaultSize = (): CheckboxSize => {
   return 'medium';
+};
+
+const contentStyling = (tokens: CheckboxTokens, theme: Theme) => {
+  const textAdjustment = getTextMarginAdjustment();
+  const spacingLabelAfter = tokens.spacingLabelAfter
+    ? {
+        marginStart: textAdjustment.marginStart + tokens.spacingLabelAfter,
+      }
+    : {};
+  const spacingLabelBefore = tokens.spacingLabelBefore
+    ? {
+        marginEnd: textAdjustment.marginEnd + tokens.spacingLabelBefore,
+      }
+    : {};
+  return {
+    color: tokens.color,
+    ...getTextMarginAdjustment(),
+    ...spacingLabelBefore,
+    ...spacingLabelAfter,
+    ...fontStyles.from(tokens, theme),
+  };
 };
