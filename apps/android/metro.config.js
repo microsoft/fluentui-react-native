@@ -5,19 +5,19 @@
  * @format
  */
 
-const {defaultWatchFolders, exclusionList} = require('@rnx-kit/metro-config');
-const {getDefaultConfig} = require('metro-config');
+const { defaultWatchFolders, exclusionList } = require('@rnx-kit/metro-config');
+const { getDefaultConfig } = require('metro-config');
 
 const blockList = exclusionList([
   // Exclude other test apps
-  /.*\/apps\/(?:ios|macos|web|win32|windows)\/.*/,
+  /.*\/apps\/(?:ios|macos|win32|windows)\/.*/,
   // Exclude build output directory
   /.*\/apps\/android\/dist\/.*/,
 ]);
 
 module.exports = (async () => {
   const {
-    resolver: {sourceExts, assetExts},
+    resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
   return {
     watchFolders: defaultWatchFolders(__dirname),
@@ -34,15 +34,9 @@ module.exports = (async () => {
       enhanceMiddleware: (middleware) => {
         return (req, res, next) => {
           if (req.url.startsWith('/fluent-tester/src')) {
-            req.url = req.url.replace(
-              '/fluent-tester/src',
-              '/assets/../fluent-tester/src',
-            );
+            req.url = req.url.replace('/fluent-tester/src', '/assets/../fluent-tester/src');
           } else if (req.url.startsWith('/node_modules/react-native')) {
-            req.url = req.url.replace(
-              '/node_modules/react-native',
-              '/assets/../../node_modules/react-native',
-            );
+            req.url = req.url.replace('/node_modules/react-native', '/assets/../../node_modules/react-native');
           }
           return middleware(req, res, next);
         };

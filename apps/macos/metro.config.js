@@ -9,7 +9,7 @@ const path = require('path');
 
 const blockList = exclusionList([
   // Exclude other test apps
-  /.*\/apps\/(?:android|ios|web|win32|windows)\/.*/,
+  /.*\/apps\/(?:android|ios|win32|windows)\/.*/,
   // Exclude build output directory
   /.*\/apps\/macos\/dist\/.*/,
 ]);
