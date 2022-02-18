@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove web endpoint",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

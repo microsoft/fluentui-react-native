@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/memo-cache",
   "entries": [
     {
+      "date": "Fri, 18 Feb 2022 23:27:10 GMT",
+      "tag": "@fluentui-react-native/memo-cache_v1.1.7",
+      "version": "1.1.7",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/memo-cache",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54",
+            "comment": "Remove web endpoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Feb 2022 21:58:20 GMT",
       "tag": "@fluentui-react-native/memo-cache_v1.1.7",
       "version": "1.1.7",

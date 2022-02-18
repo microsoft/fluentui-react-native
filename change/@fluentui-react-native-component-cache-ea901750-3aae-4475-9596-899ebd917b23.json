@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove web endpoint",
-  "packageName": "@fluentui-react-native/component-cache",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}

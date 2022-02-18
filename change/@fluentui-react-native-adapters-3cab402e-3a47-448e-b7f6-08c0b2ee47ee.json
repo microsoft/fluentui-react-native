@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Remove web endpoint",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

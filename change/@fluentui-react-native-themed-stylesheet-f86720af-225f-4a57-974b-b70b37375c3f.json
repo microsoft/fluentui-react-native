@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Remove web endpoint",
-  "packageName": "@fluentui-react-native/themed-stylesheet",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
