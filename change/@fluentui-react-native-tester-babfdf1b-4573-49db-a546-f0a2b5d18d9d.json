@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add shimmer customization and prop examples to the test page and correct a build break",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
