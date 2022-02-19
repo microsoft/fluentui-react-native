@@ -36,6 +36,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  size="large"
   style={
     Object {
       "alignItems": "center",
@@ -45,6 +46,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
+      "paddingHorizontal": undefined,
     }
   }
 >
@@ -56,10 +58,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
         "fontSize": 14,
         "fontWeight": "400",
         "margin": 0,
-        "marginBottom": -2,
-        "marginLeft": 0,
-        "marginRight": 12,
-        "marginTop": -2,
+        "marginEnd": 12,
       }
     }
   >
@@ -73,16 +72,16 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
         "borderColor": "#f3f2f1",
         "borderRadius": 9999,
         "borderWidth": 1,
-        "height": 16,
+        "height": 20,
         "justifyContent": "center",
-        "width": 16,
+        "width": 20,
       }
     }
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={8}
-      bbWidth={8}
+      bbHeight={10}
+      bbWidth={10}
       color={-4342339}
       focusable={false}
       meetOrSlice={0}
@@ -96,14 +95,14 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
           },
           Object {
             "color": "#bdbdbd",
-            "height": 8,
+            "height": 10,
             "opacity": 1,
-            "width": 8,
+            "width": 10,
           },
           Object {
             "flex": 0,
-            "height": 8,
-            "width": 8,
+            "height": 10,
+            "width": 10,
           },
         ]
       }
@@ -177,6 +176,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
+      "paddingHorizontal": undefined,
     }
   }
 >
@@ -253,9 +253,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
         "fontSize": 20,
         "fontWeight": "900",
         "margin": 0,
-        "marginBottom": -2,
-        "marginLeft": 12,
-        "marginTop": -2,
+        "marginStart": 12,
       }
     }
   >
@@ -306,6 +304,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
+      "paddingHorizontal": undefined,
     }
   }
 >
@@ -382,9 +381,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
         "fontSize": 14,
         "fontWeight": "400",
         "margin": 0,
-        "marginBottom": -2,
-        "marginLeft": 12,
-        "marginTop": -2,
+        "marginStart": 12,
       }
     }
   >

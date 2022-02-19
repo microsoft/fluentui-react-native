@@ -14,7 +14,17 @@ describe('Checkbox component tests', () => {
 
   it('Checkbox all props', () => {
     const tree = renderer
-      .create(<Checkbox label="All Props Checkbox" onChange={onChange} defaultChecked={true} labelPosition="before" disabled circular />)
+      .create(
+        <Checkbox
+          label="All Props Checkbox"
+          onChange={onChange}
+          defaultChecked={true}
+          labelPosition="before"
+          disabled
+          circular
+          size="large"
+        />,
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
