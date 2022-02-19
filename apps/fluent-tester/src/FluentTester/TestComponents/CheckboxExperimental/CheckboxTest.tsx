@@ -26,7 +26,17 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
       <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
       <Checkbox label="A circular checkbox" circular />
-      <Checkbox label="A large checkbox" size="large" />
+    </View>
+  );
+};
+
+const sizeCheckbox: React.FunctionComponent = () => {
+  return (
+    <View>
+      <Checkbox tooltip="Medium checkbox" size="medium" />
+      <Checkbox tooltip="Large checkbox" size="large" />
+      <Checkbox label="Medium checkbox" size="medium" />
+      <Checkbox label="Large checkbox" size="large" />
     </View>
   );
 };
@@ -134,6 +144,10 @@ const checkboxSections: TestSection[] = [
     name: 'Basic Checkboxes',
     testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
     component: basicCheckbox,
+  },
+  {
+    name: 'Size Checkboxes',
+    component: sizeCheckbox,
   },
   {
     name: 'Other Implementations',
