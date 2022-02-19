@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Fri, 18 Feb 2022 23:27:10 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.9.10",
+      "version": "0.9.10",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54",
+            "comment": "Remove web endpoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 17 Feb 2022 01:22:02 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.9.10",
       "version": "0.9.10",

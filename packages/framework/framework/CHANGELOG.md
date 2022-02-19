@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Thu, 17 Feb 2022 01:22:02 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Feb 2022 23:27:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.14
+
+Fri, 18 Feb 2022 23:27:10 GMT
+
+### Patches
+
+- Remove web endpoint (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tokens to v0.11.6
 
 ## 0.7.13
 

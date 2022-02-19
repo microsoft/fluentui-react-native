@@ -10,7 +10,7 @@ const { getDefaultConfig } = require('metro-config');
 
 const blockList = exclusionList([
   // Exclude other test apps
-  /.*\/apps\/(?:android|macos|web|win32|windows)\/.*/,
+  /.*\/apps\/(?:android|macos|win32|windows)\/.*/,
   // Exclude build output directory
   /.*\/apps\/ios\/dist\/.*/,
 ]);
