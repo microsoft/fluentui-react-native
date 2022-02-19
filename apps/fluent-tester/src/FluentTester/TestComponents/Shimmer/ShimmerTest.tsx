@@ -20,14 +20,14 @@ export const CustomizeAndTokenPropsShimmers: React.FunctionComponent = () => {
         elements={shimmerRectsAndCircle()}
         duration={2000}
         delay={1000}
-        style={{ height: 100, width: '50%', borderWidth: 1, borderColor: 'black' }}
+        style={{ height: 100, width: '50%', borderWidth: 2, borderColor: 'black' }}
       />
 
       <Shimmer
         elements={shimmerRectsAndCircle()}
         duration={2000}
         delay={1000}
-        style={{ height: 100, width: '50%', borderWidth: 1, borderColor: 'black' }}
+        style={{ height: 100, width: '50%', borderWidth: 2, borderColor: 'black' }}
         shimmerWaveColor="blue"
         shimmerColor="orange"
         backgroundColor="red"
