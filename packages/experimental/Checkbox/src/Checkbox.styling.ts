@@ -88,7 +88,6 @@ const contentStyling = (tokens: CheckboxTokens, theme: Theme) => {
     : {};
   return {
     color: tokens.color,
-    ...getTextMarginAdjustment(),
     ...spacingLabelBefore,
     ...spacingLabelAfter,
     ...fontStyles.from(tokens, theme),
