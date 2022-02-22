@@ -25,7 +25,7 @@ This Migration guide is a work in progress and is not yet ready for use.
 ### Props no longer supported with an equivalent functionality in v1 Checkbox
 
 - `ariaLabel` => Use `accessibilityLabel` prop instead
-- `boxSide` => Use `after` value for `labelPosition` prop for `start` or `before` value for `labelPosition` prop instead for `after`
+- `boxSide` => Use `after` value for `labelPosition` prop instead of `start` or `before` value for `labelPosition` prop instead of `after`
 
 ### Props no longer supported without an equivalent functionality in v1 Checkbox
 
@@ -68,12 +68,9 @@ The FURN Checkbox cannot be used in place of a FluentUI Checkbox - these buttons
 
 ### Props that remain as is
 
-- `children`
-- `disabled`
-- `icon`
-- `onClick`
-- `testID`
-- `tooltip`
+- `circular`
+- `labelPosition`
+- `size`
 
 ### Props renamed to align with ReactNative
 
@@ -81,25 +78,29 @@ No `Checkbox` specific renames.
 
 ### Prop differences due to technical differences and limitations
 
-- `icon` takes in a props object instead of the JSX element itself. This is due to framework differences from FluentUI.
-- `iconOnly` must be supplied for components do not have any text content for them to be styled correctly. This is due to framework differences from FluentUI.
-- `ref` is exposed as `componentRef`, similar to previous versions of FluentUI. This is due to framework differences from FluentUI.
+- `onChange` does not pass native event info due to typing difficulties.
 
 ### Other Prop differences
 
-- `appearance` does not include values for `transparent` or `outline` as neither currently are used by native platforms.
-- `iconPosition` uses `before` and `after` as values instead of `left` and `right` for better right to left support.
+- `checked` does not support `mixed` as it is not used by native platforms.
+- `defaultChecked` does not support `mixed` as it is not used by native platforms.
+
+### Slot differences
+
+- `input` => use `root` instead as primary slot.
+- `indicator` is split into `checkbox` and `checkmark` slots.
 
 ## Property mapping
 
-| v0 `Checkbox`  | v1 `Checkbox`  |
-| -------------- | -------------- |
-| `componentRef` | `componentRef` |
-| `content`      |                |
-| `disabled`     | `disabled`     |
-| `endIcon`      | `iconPosition` |
-| `icon`         | `icon`         |
-| `onClick`      | `onClick`      |
-| `statIcon`     | `iconPosition` |
-| `testId`       | `testId`       |
-| `tooltip`      | `tooltip`      |
+| v0 `Checkbox`    | v1 `Checkbox`        |
+| ---------------- | -------------------- |
+| `ariaLabel`      | `accessibilityLabel` |
+| `boxSide`        | `labelPosition`      |
+| `checked`        | `checked`            |
+| `children`       |                      |
+| `componentRef`   | `componentRef`       |
+| `defaultChecked` | `defaultChecked`     |
+| `disabled`       | `disabled`           |
+| `label`          | `label`              |
+| `onChange`       | `onChange`           |
+| `tooltip`        | `tooltip`            |

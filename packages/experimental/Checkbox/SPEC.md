@@ -121,6 +121,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    */
   onChange?: (isChecked: boolean) => void;
 
+  /** Sets style of checkbox to a preset size style.
+   * @default 'medium'
+   */
+  size?: CheckboxSize;
+
   /**
    * Provides a tooltip while hovering over Checkbox component
    */
