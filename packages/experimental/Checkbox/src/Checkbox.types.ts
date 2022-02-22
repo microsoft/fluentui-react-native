@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { ColorValue } from 'react-native';
-import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
+export type CheckboxSize = 'medium' | 'large';
 
-export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   checkboxBackgroundColor?: ColorValue;
   checkboxBorderColor?: ColorValue;
   checkboxBorderRadius?: number;
@@ -15,6 +16,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   checkboxSize?: number;
   checkmarkColor?: ColorValue;
   checkmarkOpacity?: number;
+  checkmarkSize?: number;
   spacingLabelAfter?: number;
   spacingLabelBefore?: number;
 
@@ -28,6 +30,8 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
   circular?: CheckboxTokens;
+  medium?: CheckboxTokens;
+  large?: CheckboxTokens;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
@@ -76,6 +80,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Callback that is called when the checked value has changed.
    */
   onChange?: (isChecked: boolean) => void;
+
+  /** Sets style of checkbox to a preset size style.
+   * @default 'medium'
+   */
+  size?: CheckboxSize;
 
   /**
    * Provides a tooltip while hovering over Checkbox component
