@@ -45,6 +45,9 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    */
   checkmarkOpacity?: number;
 
+  /**
+   * Height and width of the checkmark icon.
+   */
   checkmarkSize?: number;
 
   /**
