@@ -2384,9 +2384,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^2.2.1":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.2.1.tgz#32b9f540d8e88a73d8856f73cca88251cecb9614"
-  integrity sha512-EC7yv22QLHlTfnbC1ez9IUdXTOh1W31x96Oir0PfskSGFFJMWWdLTg4VrcE2DsGLzbfjjkBk123c173vf2a5MQ==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.3.0.tgz#b86a4d3cedd21441ac2d071204d0c46abe246934"
+  integrity sha512-bdpo8T0Bye0TN+xUIMMgmkFk8jYLxHq1GuBeO9fsLMtElGE9iIDQRe5wbIRIih2w+Iw/t6c8nNCROWEFkjj6Sg==
 
 "@react-native-windows/cli@0.64.6":
   version "0.64.6"
