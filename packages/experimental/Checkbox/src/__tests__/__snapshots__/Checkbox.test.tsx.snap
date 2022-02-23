@@ -172,7 +172,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
       "backgroundColor": "purple",
       "borderColor": "green",
       "borderRadius": 2,
-      "borderWidth": 1,
+      "borderWidth": 2,
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
@@ -253,6 +253,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
         "fontSize": 20,
         "fontWeight": "900",
         "margin": 0,
+        "marginEnd": 9,
         "marginStart": 12,
       }
     }
