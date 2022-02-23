@@ -9,7 +9,7 @@ import {
 import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState } from 'react-native';
+import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -32,6 +32,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     defaultChecked,
     labelPosition,
     label,
+    onAccessibilityAction,
     onChange,
     componentRef = defaultComponentRef,
     ...rest
@@ -66,15 +67,16 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     labelIsBefore: labelPosition === 'before' ? true : false,
   };
 
-  const onAccessibilityAction = React.useCallback(
-    (event: { nativeEvent: { actionName: any } }) => {
+  const onAccessibilityActionProp = React.useCallback(
+    (event: AccessibilityActionEvent) => {
       switch (event.nativeEvent.actionName) {
         case 'Toggle':
           toggleChecked();
           break;
       }
+      onAccessibilityAction && onAccessibilityAction(event);
     },
-    [toggleChecked],
+    [toggleChecked, onAccessibilityAction],
   );
 
   return {
@@ -87,7 +89,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessibilityState: getAccessibilityState(state.disabled, state.checked, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
       focusable: !state.disabled,
-      onAccessibilityAction: onAccessibilityAction,
+      onAccessibilityAction: onAccessibilityActionProp,
       enableFocusRing: true,
       ...onKeyUpProps,
       ...props,

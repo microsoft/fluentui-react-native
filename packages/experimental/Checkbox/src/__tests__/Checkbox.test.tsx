@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Checkbox } from '../Checkbox';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
-import { Text, View } from 'react-native';
+import { AccessibilityActionName, Text, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
 function onChange(isChecked: boolean) {
@@ -86,5 +86,10 @@ describe('Checkbox component tests', () => {
   it('Checkbox re-renders correctly with style', () => {
     const style = { borderColor: 'blue' };
     checkReRender(() => <Checkbox style={style}>Shared Style Render</Checkbox>, 2);
+  });
+
+  it('Checkbox re-renders correctly with accessibilityAction', () => {
+    const action = [{ name: 'Expand' as AccessibilityActionName }];
+    checkReRender(() => <Checkbox accessibilityActions={action}>Shared Style Render</Checkbox>, 2);
   });
 });
