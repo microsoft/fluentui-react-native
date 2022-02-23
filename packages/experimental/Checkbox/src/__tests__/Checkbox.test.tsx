@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { Checkbox } from '../Checkbox';
 import * as renderer from 'react-test-renderer';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { Text, View } from 'react-native';
+import { Svg } from 'react-native-svg';
 
 function onChange(isChecked: boolean) {
   console.log(isChecked);
@@ -49,5 +52,36 @@ describe('Checkbox component tests', () => {
     });
     const tree = renderer.create(<BoldCheckbox label="All Tokens Checkbox" onChange={onChange} defaultChecked={false} />).toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it('Checkbox composed', () => {
+    const ComposedCheckbox = Checkbox.compose({
+      slots: {
+        root: View,
+        checkbox: View,
+        checkmark: Svg,
+        label: Text,
+      },
+    });
+    const tree = renderer.create(<ComposedCheckbox>Composed Button with RNText</ComposedCheckbox>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Checkbox simple rendering does not invalidate styling', () => {
+    checkRenderConsistency(() => <Checkbox>Default button</Checkbox>, 2);
+  });
+
+  it('Checkbox re-renders correctly', () => {
+    checkReRender(() => <Checkbox>Render twice</Checkbox>, 2);
+  });
+
+  it('Checkbox shares produced styles across multiple renders', () => {
+    const style = { backgroundColor: 'black' };
+    checkRenderConsistency(() => <Checkbox style={style}>Shared styles</Checkbox>, 2);
+  });
+
+  it('Checkbox re-renders correctly with style', () => {
+    const style = { borderColor: 'blue' };
+    checkReRender(() => <Checkbox style={style}>Shared Style Render</Checkbox>, 2);
   });
 });
