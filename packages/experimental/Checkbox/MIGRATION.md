@@ -12,7 +12,7 @@ This Migration guide is a work in progress and is not yet ready for use.
 | ----------------------------------- | ----------------------------------- |
 | `<Checkbox label="Hello, World" />` | `<Checkbox label="Hello, World" />` |
 
-### Props that remain as is
+### Props unchanged
 
 - Any props that are part of `ViewProps`
 - `checked`
@@ -22,31 +22,31 @@ This Migration guide is a work in progress and is not yet ready for use.
 - `onChange`
 - `tooltip`
 
-### Props no longer supported with an equivalent functionality in v1 Checkbox
+### Props repurposed
 
 - `ariaLabel` => Use `accessibilityLabel` prop instead
 - `boxSide` => Use `after` value for `labelPosition` prop instead of `start` or `before` value for `labelPosition` prop instead of `after`
 
-### Props no longer supported without an equivalent functionality in v1 Checkbox
+### Props removed
 
 - `children` are not supported in the v1 Checkbox
 
-### Tokens that remain as is
+### Tokens unchanged
 
 - Any props that are part of `FontTokens`, `IForegroundColorTokens`, `IBackgroundColorTokens`, `IBorderTokens`
 - `checkboxBackgroundColor`
 - `checkboxBorderColor`
 - `checkmarkColor`
 
-### Tokens no longer supported with an equivalent functionality in v1 Checkbox
+### Tokens repurposed
 
 - `checkmarkVisibility` => Use `checkmarkOpacity` token instead
 
-### Tokens no longer supported without an equivalent functionality in v1 Checkbox
+### Tokens removed
 
 - `textBorderColor` => Removed in favor of using native based focus visuals
 
-### Slots no longer supported with an equivalent functionality in v1 Checkbox
+### Slots repurposed
 
 - `content` has been renamed to `label`.
 
@@ -62,11 +62,11 @@ Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guid
 
 Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
 
-## Porting from FluentUI v9 Checkbox
+## Porting from FluentUI React v9 Checkbox
 
-The FURN Checkbox cannot be used in place of a FluentUI Checkbox - these buttons are intended to be used on their respective platforms. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance on coming from FluentUI to FURN.
+The FURN Checkbox cannot be used in place of a FluentUI React Checkbox - these buttons are intended to be used on their respective platforms. See [this porting guide](../../../docs/pages/Guides/PortingFromFluentUI.md) for general guidance on coming from FluentUI to FURN.
 
-### Props that remain as is
+### Props unchanged
 
 - `circular`
 - `labelPosition`
