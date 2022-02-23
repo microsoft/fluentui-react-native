@@ -2,6 +2,30 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 23 Feb 2022 22:41:19 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.13",
+      "version": "0.0.13",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "5c31a1d16ccb9e334f6ced422cde98edeef43d4f",
+            "comment": {
+              "title": "",
+              "value": ""
+            }
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "5c31a1d16ccb9e334f6ced422cde98edeef43d4f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Feb 2022 23:27:11 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.13",
       "version": "0.0.13",

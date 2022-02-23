@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 18 Feb 2022 23:27:10 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Feb 2022 22:41:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.56.1
+
+Wed, 23 Feb 2022 22:41:19 GMT
+
+### Patches
+
+- Fix iconColor token being no-op (amchiu@microsoft.com)
+- Add test (ruaraki@microsoft.com)
+- Add functional tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.22.4
+- Bump @fluentui-react-native/experimental-button to v0.15.4
+- Bump @fluentui-react-native/experimental-checkbox to v0.7.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.13
+- Bump @fluentui/react-native to v0.27.34
 
 ## 0.56.0
 

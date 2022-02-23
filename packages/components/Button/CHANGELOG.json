@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 23 Feb 2022 22:41:19 GMT",
+      "tag": "@fluentui-react-native/button_v0.22.4",
+      "version": "0.22.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "407965202c15a610921931de2a2f02fd58a10cda",
+            "comment": "Fix iconColor token being no-op"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Feb 2022 23:27:11 GMT",
       "tag": "@fluentui-react-native/button_v0.22.3",
       "version": "0.22.3",

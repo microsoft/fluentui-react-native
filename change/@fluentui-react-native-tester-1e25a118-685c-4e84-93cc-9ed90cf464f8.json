@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix iconColor token being no-op",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "amchiu@microsoft.com",
-  "dependentChangeType": "patch"
-}
