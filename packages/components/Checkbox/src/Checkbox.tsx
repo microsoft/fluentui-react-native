@@ -28,6 +28,7 @@ export const Checkbox = compose<ICheckboxType>({
       accessible,
       accessibilityLabel,
       accessibilityRole,
+      ariaLabel,
       checked,
       defaultChecked,
       boxSide,
