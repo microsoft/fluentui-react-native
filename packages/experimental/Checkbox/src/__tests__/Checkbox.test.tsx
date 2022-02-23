@@ -41,14 +41,17 @@ describe('Checkbox component tests', () => {
       checkboxBorderColor: 'red',
       checkboxBorderRadius: 5,
       checkboxBorderWidth: 2,
+      checkboxSize: 11,
       checkmarkColor: 'pink',
       checkmarkOpacity: 0.7,
+      checkmarkSize: 7,
       backgroundColor: 'purple',
       color: 'yellow',
       spacingLabelAfter: 7,
+      spacingLabelBefore: 9,
       borderColor: 'green',
       borderRadius: 4,
-      borderWidth: 1,
+      borderWidth: 2,
     });
     const tree = renderer.create(<BoldCheckbox label="All Tokens Checkbox" onChange={onChange} defaultChecked={false} />).toJSON();
     expect(tree).toMatchSnapshot();
