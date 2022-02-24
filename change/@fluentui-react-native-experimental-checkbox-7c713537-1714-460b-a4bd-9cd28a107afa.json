@@ -1,7 +1,7 @@
 {
-  "type": "patch",
+  "type": "minor",
   "comment": "Fix types",
   "packageName": "@fluentui-react-native/experimental-checkbox",
   "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
+  "dependentChangeType": "minor"
 }
