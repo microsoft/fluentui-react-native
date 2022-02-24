@@ -1,4 +1,3 @@
-import { SCROLLVIEW_PARENT_CONTAINER } from '../../../../FluentTester/FluentTester';
 import { BasePage, By } from '../../../common/BasePage.win';
 
 class NativeTestingPageObject extends BasePage {
@@ -25,7 +24,7 @@ class NativeTestingPageObject extends BasePage {
   // }
 
   get _scrollViewParent() {
-    return By(SCROLLVIEW_PARENT_CONTAINER);
+    return By('SCROLLVIEW_TEST_ID');
   }
 }
 
