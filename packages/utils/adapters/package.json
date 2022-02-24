@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/adapters",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Adapters for working with react-native types",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -35,7 +35,6 @@
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.64.8",
     "react-native": ">=0.64.3",
-    "react-native-web": ">=0.17.5",
     "react-native-windows": ">=0.64.3",
     "react-native-macos": "^0.64.6"
   },

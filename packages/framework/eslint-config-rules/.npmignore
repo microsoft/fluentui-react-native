@@ -8,6 +8,4 @@ jest.config.js
 .eslintignore
 tsconfig.json
 jsconfig.json
-webpack.config.js
-webpack.serve.config.js
 *.build.log

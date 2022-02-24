@@ -17,7 +17,7 @@
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
     "lib": ["es6"],
-    "types": ["node", "webpack-env", "jest"]
+    "types": ["node", "jest"]
   },
   "include": ["src"]
 }

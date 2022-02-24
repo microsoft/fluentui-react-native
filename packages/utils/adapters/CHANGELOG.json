@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Fri, 18 Feb 2022 23:27:10 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.8.3",
+      "version": "0.8.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54",
+            "comment": "Remove web endpoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:01 GMT",
       "tag": "@fluentui-react-native/adapters_v0.8.2",
       "version": "0.8.2",

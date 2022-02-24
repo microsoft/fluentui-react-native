@@ -61,9 +61,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
     ),
     icon: buildProps(
       (tokens: ButtonTokens) => ({
-        style: {
-          tintColor: tokens.iconColor,
-        },
+        color: tokens.iconColor,
         height: tokens.iconSize,
         width: tokens.iconSize,
       }),
