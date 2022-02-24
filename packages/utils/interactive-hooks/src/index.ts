@@ -5,6 +5,7 @@ export * from './useViewCommandFocus';
 export * from './useSelectedKey.hooks';
 export * from './useIconProps.hooks';
 export * from './useAsToggle';
+export * from './useAsToggleWithEvent';
 export * from './Pressability/Pressability.types';
 export * from './Pressability/InternalTypes';
 export * from './Pressability/CoreEventTypes';
