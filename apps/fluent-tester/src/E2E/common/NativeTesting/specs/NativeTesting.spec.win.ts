@@ -18,4 +18,11 @@ describe('Native Safety Check Testing Initialization', () => {
     NativeTestingPageObject.waitForScrollViewDisplayed(PAGE_TIMEOUT);
     expect(NativeTestingPageObject.doesScrollViewParentExist()).toBeTruthy();
   });
+
+  // In addition to existing, we want to ensure the Children of the ScrollView stay intact. The children are the buttons that
+  // navigate to each test page. Validate these children exist with the proper automation IDs.
+  it('Validate the children of ScrollView are the buttons that navigate to each test page WITH proper automationId', () => {
+    NativeTestingPageObject.waitForScrollViewDisplayed(PAGE_TIMEOUT);
+    expect(NativeTestingPageObject.validateScrollViewChildren()).toBeTruthy();
+  });
 });

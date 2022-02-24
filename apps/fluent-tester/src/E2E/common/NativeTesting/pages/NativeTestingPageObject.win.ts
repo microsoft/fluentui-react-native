@@ -19,9 +19,23 @@ class NativeTestingPageObject extends BasePage {
     return this._scrollViewParent.isExisting();
   }
 
-  // getScrollViewChildren() {
-  //   let testChildren = this._scrollViewParent.chil
-  // }
+  validateScrollViewChildren() {
+    // Gets all the children
+    const testChildren = this._scrollViewParent.$$('//*');
+
+    // All the button children have the same format. We want to find these buttons
+    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
+    const buttonList = [];
+
+    testChildren.forEach((child) => {
+      const autoId = child.getAttribute('AutomationId');
+      if (autoId && child.getAttribute('AutomationId').match(reg)) {
+        buttonList.push(child);
+      }
+    });
+
+    return buttonList.length > 0;
+  }
 
   get _scrollViewParent() {
     return By('SCROLLVIEW_TEST_ID');
