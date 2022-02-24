@@ -2,6 +2,36 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Fri, 18 Feb 2022 23:27:11 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54",
+            "comment": "Remove web endpoint"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Feb 2022 21:58:21 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:04 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.11.2",
       "version": "0.11.2",

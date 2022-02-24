@@ -1,4 +1,4 @@
-export type AllPlatforms = 'win32' | 'ios' | 'android' | 'windows' | 'web' | 'macos';
+export type AllPlatforms = 'win32' | 'ios' | 'android' | 'windows' | 'macos';
 export type PlatformValue = AllPlatforms | 'default';
 
 const _defaultPlatform = 'default';
@@ -9,9 +9,8 @@ const _rnVersions: { [key in PlatformValue]: string } = {
   android: _defaultVersion,
   ios: _defaultVersion,
   macos: 'react-native-macos',
-  web: 'react-native-web',
   win32: '@office-iss/react-native-win32',
-  windows: 'react-native-windows'
+  windows: 'react-native-windows',
 };
 
 export function findPlatformFromArgv(toSet?: PlatformValue): PlatformValue | undefined {

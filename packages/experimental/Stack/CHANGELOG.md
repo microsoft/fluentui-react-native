@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/experimental-stack
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Feb 2022 23:27:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.0
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
+- Bump @fluentui-react-native/framework to v0.7.14
+- Bump @fluentui-react-native/tokens to v0.11.6
+- Bump @fluentui-react-native/text to v0.11.11
+
+## 0.1.0
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.13
+- Bump @fluentui-react-native/text to v0.11.10
+
+## 0.1.0
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/text to v0.11.9
 
 ## 0.1.0
 

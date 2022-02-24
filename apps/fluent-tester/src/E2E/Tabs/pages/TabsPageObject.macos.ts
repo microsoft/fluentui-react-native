@@ -1,7 +1,7 @@
 import {
   TABS_TESTPAGE,
   TABS_TEST_COMPONENT,
-  TABS_ITEM_TEST_COMPONENT,
+  FIRST_TABS_ITEM,
   HOMEPAGE_TABS_BUTTON,
 } from '../../../FluentTester/TestComponents/Tabs/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
@@ -37,7 +37,7 @@ class TabsPageObject extends BasePage {
   /* TabItem *
   /***********/
   get _tabItem() {
-    return By(TABS_ITEM_TEST_COMPONENT);
+    return By(FIRST_TABS_ITEM);
   }
 }
 

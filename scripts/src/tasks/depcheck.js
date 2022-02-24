@@ -23,7 +23,7 @@ function depcheckTask() {
       {
         ignorePatterns: ['*eslint*', '/lib/*', '/lib-commonjs/*'],
         ignoreMatches: ['@fluentui-react-native/scripts', '@fluentui-react-native/eslint-config-rules', 'tslib', ...scriptsDevDeps()],
-        specials: [depcheck.special.eslint, depcheck.special.webpack, depcheck.special.jest],
+        specials: [depcheck.special.eslint, depcheck.special.jest],
       },
       config.depcheck,
     );

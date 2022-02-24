@@ -1,13 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { KeyPressEvent } from './Pressability/CoreEventTypes';
+import { IHandledKeyboardEvent } from '@office-iss/react-native-win32';
 
 export type KeyCallback = (args?: KeyPressEvent) => void;
 
 export type KeyPressProps = {
-  onKeyUp?: KeyCallback;
-  validKeysUp?: string[];
   onKeyDown?: KeyCallback;
-  validKeysDown?: string[];
+  validKeysDown?: string[]; // macOS
+  keyDownEvents?: IHandledKeyboardEvent[]; // win32
+  onKeyUp?: KeyCallback;
+  validKeysUp?: string[]; // macOS
+  keyUpEvents?: IHandledKeyboardEvent[]; // win32
 };
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function

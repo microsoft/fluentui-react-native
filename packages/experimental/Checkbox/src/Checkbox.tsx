@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { stylingSettings } from './Checkbox.styling';
+import { stylingSettings, getDefaultSize } from './Checkbox.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useCheckbox } from './useCheckbox';
 import { Svg, Path } from 'react-native-svg';
@@ -20,7 +20,11 @@ export const Checkbox = compose<CheckboxType>({
     // configure props and state for checkbox based on user props
     const Checkbox = useCheckbox(userProps);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => Checkbox.state[layer] || userProps[layer]);
+    const Slots = useSlots(
+      userProps,
+      (layer) =>
+        Checkbox.state[layer] || userProps[layer] || layer === userProps['size'] || (!userProps['size'] && layer === getDefaultSize()),
+    );
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
       const { label, ...mergedProps } = mergeProps(Checkbox.props, final);

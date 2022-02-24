@@ -39,11 +39,27 @@ async function run() {
   );
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light-macos/reactnative/tokens-controls.json'));
 
+  console.log('Generating macOS light high contrast mode global and alias tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-global.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand-light.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light-hc.macos.json --out ./packages/theming/theme-tokens/src/generated/light-high-contrast-macos --p reactnative',
+  );
+  fs.unlinkSync(
+    path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light-high-contrast-macos/reactnative/tokens-controls.json'),
+  );
+
   console.log('Generating macOS dark mode global and alias tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-global.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand-dark.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.macos.json --out ./packages/theming/theme-tokens/src/generated/dark-macos --p reactnative',
   );
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/dark-macos/reactnative/tokens-controls.json'));
+
+  console.log('Generating macOS dark high contrast mode global and alias tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-global.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand-dark.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.macos.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark-hc.macos.json --out ./packages/theming/theme-tokens/src/generated/dark-high-contrast-macos --p reactnative',
+  );
+  fs.unlinkSync(
+    path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/dark-high-contrast-macos/reactnative/tokens-controls.json'),
+  );
 
   console.log('Generating android global tokens...');
   child_process.execSync(
@@ -102,8 +118,7 @@ async function run() {
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/highContrast/reactnative/tokens-controls.json'));
 
   console.log('Running prettier...');
-  const input = path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated');
-  child_process.execSync('prettier --write ' + input);
+  child_process.execSync('prettier --write ./packages/theming/theme-tokens/src/generated');
 
   console.log('Done!');
 }

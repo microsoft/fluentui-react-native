@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('PersonaCoin Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to PersonaCoin test page', () => {
@@ -18,6 +18,7 @@ describe('PersonaCoin Testing Initialization', function () {
     NavigateAppPage.clickAndGoToPersonaCoinPage();
     PersonaCoinPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(PersonaCoinPageObject.isPageLoaded()).toBeTruthy();
+    expect(PersonaCoinPageObject.isPageLoaded()).toBeTruthy(PersonaCoinPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(PersonaCoinPageObject.didAssertPopup()).toBeFalsy(PersonaCoinPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

@@ -1,8 +1,73 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Wed, 26 Jan 2022 20:31:04 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Feb 2022 23:27:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.23
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.14
+- Bump @fluentui-react-native/interactive-hooks to v0.13.3
+- Bump @fluentui-react-native/focus-zone to v0.9.4
+- Bump @fluentui-react-native/experimental-text to v0.7.14
+- Bump @fluentui-react-native/tokens to v0.11.6
+- Bump @fluentui-react-native/icon to v0.11.9
+- Bump @fluentui-react-native/adapters to v0.8.3
+
+## 0.4.22
+
+Thu, 17 Feb 2022 02:13:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.2
+- Bump @fluentui-react-native/focus-zone to v0.9.3
+- Bump @fluentui-react-native/icon to v0.11.8
+
+## 0.4.21
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.13
+- Bump @fluentui-react-native/interactive-hooks to v0.13.1
+- Bump @fluentui-react-native/focus-zone to v0.9.2
+- Bump @fluentui-react-native/experimental-text to v0.7.13
+- Bump @fluentui-react-native/icon to v0.11.7
+
+## 0.4.20
+
+Wed, 09 Feb 2022 20:14:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.0
+- Bump @fluentui-react-native/focus-zone to v0.9.1
+
+## 0.4.19
+
+Fri, 04 Feb 2022 20:31:52 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.0
+
+## 0.4.18
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/focus-zone to v0.8.18
+- Bump @fluentui-react-native/experimental-text to v0.7.12
+- Bump @fluentui-react-native/icon to v0.11.6
 
 ## 0.4.17
 

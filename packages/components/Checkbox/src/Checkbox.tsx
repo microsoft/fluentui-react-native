@@ -85,7 +85,7 @@ export const Checkbox = compose<ICheckboxType>({
         ...pressable.props,
         accessible: accessible ?? true,
         accessibilityRole: accessibilityRole ?? 'checkbox',
-        accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label,
+        accessibilityLabel: accessibilityLabel ?? label,
         accessibilityState: { disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
         focusable: !state.disabled,

@@ -8,6 +8,10 @@ import {
 } from '@fluentui-react-native/interactive-hooks';
 import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 import { IPressableProps } from '@fluentui-react-native/pressable';
+import { memoize } from '@fluentui-react-native/framework';
+import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+
+const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 /**
  * Re-usable hook for FURN Checkbox.
@@ -20,12 +24,15 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessible,
+    accessibilityActions,
     accessibilityLabel,
     accessibilityRole,
+    accessibilityState,
     checked,
     defaultChecked,
     labelPosition,
     label,
+    onAccessibilityAction,
     onChange,
     componentRef = defaultComponentRef,
     ...rest
@@ -49,6 +56,9 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
 
   // Handles the "Space" key toggling the Checkbox
   const onKeyUpProps = useKeyProps(toggleChecked, ' ');
+  const accessibilityActionsProp = accessibilityActions
+    ? [...defaultAccessibilityActions, ...accessibilityActions]
+    : defaultAccessibilityActions;
 
   const state: CheckboxState = {
     ...pressable.state,
@@ -57,15 +67,16 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     labelIsBefore: labelPosition === 'before' ? true : false,
   };
 
-  const onAccessibilityAction = React.useCallback(
-    (event: { nativeEvent: { actionName: any } }) => {
+  const onAccessibilityActionProp = React.useCallback(
+    (event: AccessibilityActionEvent) => {
       switch (event.nativeEvent.actionName) {
         case 'Toggle':
           toggleChecked();
           break;
       }
+      onAccessibilityAction && onAccessibilityAction(event);
     },
-    [toggleChecked],
+    [toggleChecked, onAccessibilityAction],
   );
 
   return {
@@ -75,10 +86,10 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessible: accessible ?? true,
       accessibilityRole: accessibilityRole ?? 'checkbox',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: { disabled: state.disabled, checked: state.checked },
-      accessibilityActions: [{ name: 'Toggle' }],
+      accessibilityState: getAccessibilityState(state.disabled, state.checked, accessibilityState),
+      accessibilityActions: accessibilityActionsProp,
       focusable: !state.disabled,
-      onAccessibilityAction: onAccessibilityAction,
+      onAccessibilityAction: onAccessibilityActionProp,
       enableFocusRing: true,
       ...onKeyUpProps,
       ...props,
@@ -89,3 +100,11 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean, checked: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { disabled: disabled, checked: checked, ...accessibilityState };
+  }
+  return { disabled: disabled, checked: checked };
+}
