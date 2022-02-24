@@ -44,8 +44,6 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
   };
 });
 
-export const SCROLLVIEW_PARENT_CONTAINER = 'SCROLLVIEW_TEST_ID';
-
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
   // sort tests alphabetically by name
   const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
@@ -136,7 +134,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestList: React.FunctionComponent = () => {
     return (
       <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID={SCROLLVIEW_PARENT_CONTAINER}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
           {sortedTestComponents.map((description, index) => {
             return (
               <Button
