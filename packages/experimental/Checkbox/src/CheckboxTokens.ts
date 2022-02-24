@@ -5,17 +5,39 @@ import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    borderRadius: globalTokens.corner.radius.small,
+    medium: {
+      borderRadius: globalTokens.corner.radius.small,
+      checkboxBorderWidth: globalTokens.stroke.width.thin,
+      checkboxBorderRadius: globalTokens.corner.radius.small,
+      checkboxSize: 16,
+      checkmarkSize: 8,
+      spacingLabelAfter: globalTokens.spacing.m,
+      labelIsBefore: {
+        spacingLabelBefore: globalTokens.spacing.m,
+        spacingLabelAfter: 0,
+      },
+      padding: globalTokens.spacing.s,
+      variant: 'bodyStandard',
+    },
+    large: {
+      borderRadius: globalTokens.corner.radius.small,
+      checkboxBorderWidth: globalTokens.stroke.width.thin,
+      checkboxBorderRadius: globalTokens.corner.radius.small,
+      checkboxSize: 20,
+      checkmarkSize: 10,
+      spacingLabelAfter: globalTokens.spacing.m,
+      labelIsBefore: {
+        spacingLabelBefore: globalTokens.spacing.m,
+        spacingLabelAfter: 0,
+      },
+      padding: globalTokens.spacing.s,
+      variant: 'bodyStandard',
+    },
     checkboxBackgroundColor: t.colors.menuBackground,
     checkboxBorderColor: t.colors.menuItemText,
-    checkboxBorderRadius: globalTokens.corner.radius.small,
-    checkboxBorderWidth: globalTokens.stroke.width.thin,
-    checkboxSize: 16,
     checkmarkColor: t.colors.menuItemTextHovered,
-    spacingLabelAfter: globalTokens.spacing.m,
     checkmarkOpacity: 0,
     color: t.colors.menuItemText,
-    variant: 'bodyStandard',
     disabled: {
       checkboxBorderColor: t.colors.buttonBorderDisabled,
       color: t.colors.disabledBodyText,
@@ -37,9 +59,5 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     circular: {
       checkboxBorderRadius: globalTokens.corner.radius.circle,
-    },
-    labelIsBefore: {
-      spacingLabelBefore: globalTokens.spacing.m,
-      spacingLabelAfter: 0,
     },
   } as CheckboxTokens);

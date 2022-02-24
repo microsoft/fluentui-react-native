@@ -9,7 +9,6 @@
   "scripts": {
     "build-tools": "just-scripts build",
     "bundlesize": "bundlesize --debug",
-    "code-style": "node ./lib/just-scripts.js code-style",
     "depcheck": "just-scripts depcheck",
     "prettier": "node ./just-scripts.js prettier",
     "prettier-fix": "node ./just-scripts.js prettier --fix true"
@@ -20,7 +19,7 @@
     "directory": "scripts"
   },
   "peerDependencies": {
-    "just-scripts": ">=0.36.1"
+    "just-scripts": "^1.8.0"
   },
   "devDependencies": {
     "@react-native-community/cli": "^5.0.1",
@@ -32,7 +31,6 @@
     "@types/node": "^12.11.2",
     "@types/react-native": "^0.64.0",
     "@types/react-test-renderer": "16.9.0",
-    "@types/webpack-env": "1.13.6",
     "@uifabric/prettier-rules": "^7.0.3",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "depcheck": "^1.0.0",
@@ -43,20 +41,15 @@
     "jest": "^27.0.0",
     "jest-diff": "^27.0.0",
     "jsdom": "^16.4.0",
-    "just-scripts": "^0.38.0",
-    "just-task": "^0.14.3",
+    "just-scripts": "^1.8.0",
+    "just-task": "^1.4.2",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-transformer": "^0.66.2",
     "prettier": "^2.4.1",
-    "react-native-svg-transformer": "^0.14.3",
+    "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.1",
     "rimraf": "^3.0.2",
     "typescript": "4.5.4",
-    "webpack": "^4.42.0",
-    "webpack-bundle-analyzer": "^3.0.4",
-    "webpack-cli": "3.2.3",
-    "webpack-dev-server": "3.1.14",
-    "webpack-notifier": "^1.6.0",
     "workspace-tools": "^0.9.3"
   },
   "bundlesize": [

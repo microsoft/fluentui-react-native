@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/styling-utils",
   "entries": [
     {
+      "date": "Thu, 17 Feb 2022 01:22:01 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "039a993d13ae01ff2212e8b91295d1ed5676c82d",
+            "comment": "Fix up package.json files"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Jan 2022 20:49:22 GMT",
       "tag": "@fluentui-react-native/styling-utils_v0.3.4",
       "version": "0.3.4",

@@ -11,7 +11,6 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
       {svgIconsEnabled && (

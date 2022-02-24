@@ -1,8 +1,54 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Wed, 09 Feb 2022 20:14:50 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Feb 2022 22:41:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 23 Feb 2022 22:41:19 GMT
+
+### Minor changes
+
+- Initial size (ruaraki@microsoft.com)
+
+### Patches
+
+- Checkbox spec (ruaraki@microsoft.com)
+- Add snapshot tests (ruaraki@microsoft.com)
+
+## 0.6.9
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
+- Bump @fluentui-react-native/experimental-text to v0.7.14
+- Bump @fluentui-react-native/framework to v0.7.14
+- Bump @fluentui-react-native/interactive-hooks to v0.13.3
+- Bump @fluentui-react-native/pressable to v0.8.22
+- Bump @fluentui-react-native/tokens to v0.11.6
+
+## 0.6.8
+
+Thu, 17 Feb 2022 02:13:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.2
+- Bump @fluentui-react-native/pressable to v0.8.21
+
+## 0.6.7
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.13
+- Bump @fluentui-react-native/framework to v0.7.13
+- Bump @fluentui-react-native/interactive-hooks to v0.13.1
+- Bump @fluentui-react-native/pressable to v0.8.20
 
 ## 0.6.6
 

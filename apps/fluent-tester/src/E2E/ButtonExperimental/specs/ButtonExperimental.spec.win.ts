@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import ButtonExperimentalPageObject from '../pages/ButtonExperimentalPageObject';
+import ButtonExperimentalPageObject, { ButtonSelector } from '../pages/ButtonExperimentalPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../FluentTester/TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -47,6 +47,36 @@ describe('Experimental Button Accessibility Testing', () => {
     ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+});
+
+describe('Experimental Button Functional Testing', () => {
+  /* Scrolls and waits for the Button to be visible on the Test Page */
+  beforeEach(() => {
+    ButtonExperimentalPageObject.scrollToTestElement();
+    ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+
+  it('Validate OnClick() callback was fired -> Click', () => {
+    ButtonExperimentalPageObject.clickComponent();
+    expect(ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+
+    ButtonExperimentalPageObject.clickComponent(); // Reset Button State
+  });
+
+  it('Validate OnClick() callback was fired -> Type "Enter"', () => {
+    ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
+    expect(ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+
+    ButtonExperimentalPageObject.clickComponent(); // Reset Button State
+  });
+
+  it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {
+    ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
+    expect(ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
     expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 });
