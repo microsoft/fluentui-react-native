@@ -4,9 +4,9 @@ import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { AccessibilityActionName, Text, View } from 'react-native';
 import { Svg } from 'react-native-svg';
-import { CallbackEvent } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
-function onChange(_e: CallbackEvent, isChecked: boolean) {
+function onChange(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 

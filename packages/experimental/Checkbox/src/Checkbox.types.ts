@@ -4,7 +4,7 @@ import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorToke
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import { SvgProps } from 'react-native-svg';
-import { CallbackEvent } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';
@@ -121,7 +121,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Callback that is called when the checked value has changed.
    */
-  onChange?: (e: CallbackEvent, isChecked: boolean) => void;
+  onChange?: (e: InteractionEvent, isChecked: boolean) => void;
 
   /** Sets style of checkbox to a preset size style.
    * @default 'medium'

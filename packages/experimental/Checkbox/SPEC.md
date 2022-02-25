@@ -119,7 +119,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Callback that is called when the checked value has changed.
    */
-  onChange?: (e: CallbackEvent, isChecked: boolean) => void;
+  onChange?: (e: InteractionEvent, isChecked: boolean) => void;
 
   /** Sets style of checkbox to a preset size style.
    * @default 'medium'

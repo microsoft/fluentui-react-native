@@ -6,9 +6,9 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
-import { CallbackEvent } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
-function onChangeUncontrolled(_e: CallbackEvent, isChecked: boolean) {
+function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 

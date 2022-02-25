@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { CallbackEvent } from '.';
+import { InteractionEvent } from '.';
 
-export type OnToggleWithEventCallback = (e: CallbackEvent, value?: boolean) => void;
-export type OnChangeWithEventCallback = (e: CallbackEvent) => void;
+export type OnToggleWithEventCallback = (e: InteractionEvent, value?: boolean) => void;
+export type OnChangeWithEventCallback = (e: InteractionEvent) => void;
 
 /* Re-usable hook for toggle components.
  * This hook configures the checked state, the callback to toggle the component
