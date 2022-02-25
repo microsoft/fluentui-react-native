@@ -8,8 +8,7 @@ class NativeTestingPageObject extends BasePage {
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg:
-          'The ScrollView containing all test page buttons was not found. Did you remove the ScrollView or change the testID? The testID must stay constant to align with our native code.',
+        timeoutMsg: 'The Scrollview with proper testID exists for testing purposes.',
         interval: 1000,
       },
     );
@@ -23,7 +22,7 @@ class NativeTestingPageObject extends BasePage {
     // Gets all the children
     const testChildren = this._scrollViewParent.$$('//*');
 
-    // All the button children have the same format. We want to find these buttons
+    // Ensure the AutomationId (maps 1:1 to testID) properties of the button children match the defined testing format
     const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
     const buttonList = [];
 
