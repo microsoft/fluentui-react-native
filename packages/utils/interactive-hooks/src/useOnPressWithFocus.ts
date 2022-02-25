@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { GestureResponderEvent } from 'react-native';
 
-export type OnPressCallback = (args?: GestureResponderEvent) => void;
+export type OnPressCallback = (args: GestureResponderEvent) => void;
 export type OnPressWithFocusCallback = (args: GestureResponderEvent) => void;
 
 /* Re-usable hook for pressable components.
