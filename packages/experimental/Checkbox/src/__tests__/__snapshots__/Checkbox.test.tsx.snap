@@ -18,7 +18,6 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     }
   }
   accessible={true}
-  circular={true}
   defaultChecked={true}
   disabled={true}
   enableFocusRing={true}
@@ -36,6 +35,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
+  shape="circular"
   size="large"
   style={
     Object {
