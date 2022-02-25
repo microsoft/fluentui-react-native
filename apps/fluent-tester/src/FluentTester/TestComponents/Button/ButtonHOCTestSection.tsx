@@ -38,7 +38,8 @@ export const ButtonHOCTest: React.FunctionComponent = () => {
       {svgIconsEnabled && <CustomIconButton icon={{ svgSource: svgProps }}>Customized Icon Button</CustomIconButton>}
       <Button
         style={commonTestStyles.vmargin}
-        onClick={() => {
+        onClick={(e) => {
+          console.log(e.timeStamp);
           if (buttonRef.current) {
             buttonRef.current.focus();
           }
