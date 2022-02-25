@@ -8,10 +8,10 @@ describe('Native Safety Check Testing Initialization', () => {
     expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  // The Scrollview in testing is the one that contains all the buttons that navigate to each component's
-  // test page. This is VITAL for our native testing, as we grab this Scrollview on the native side and
+  // The ScrollView in testing is the one that contains all the buttons that navigate to each component's
+  // test page. This is vital for our native testing, as we grab this ScrollView on the native side and
   // to climb down the UI tree and find all of FURN's testable components.
-  // We need to make sure this Scrollview:
+  // We need to make sure this ScrollView:
   //    1) Continues to parent all the test buttons
   //    2) Keeps testID='SCROLLVIEW_TEST_ID'
   it('Validate the ScrollView containing all the navigational buttons exists', () => {
@@ -21,7 +21,7 @@ describe('Native Safety Check Testing Initialization', () => {
 
   // In addition to existing, we want to ensure the Children of the ScrollView stay intact. The children are the buttons that
   // navigate to each test page. Validate these children exist with the proper automation IDs.
-  it('Validate the children of ScrollView are the buttons that navigate to each test page WITH proper automationId', () => {
+  it('Validate the children of ScrollView are the buttons that navigate to each test page with proper automationId', () => {
     NativeTestingPageObject.waitForScrollViewDisplayed(PAGE_TIMEOUT);
     expect(NativeTestingPageObject.validateScrollViewChildren()).toBeTruthy();
   });

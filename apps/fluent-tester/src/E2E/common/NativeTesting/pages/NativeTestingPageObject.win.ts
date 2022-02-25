@@ -8,7 +8,8 @@ class NativeTestingPageObject extends BasePage {
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The Scrollview with proper testID exists for testing purposes.',
+        timeoutMsg:
+          'For testing purposes we require that the root view contains a non-empty, immutable ScrollView of buttons that navigate to test pages.',
         interval: 1000,
       },
     );
@@ -22,7 +23,7 @@ class NativeTestingPageObject extends BasePage {
     // Gets all the children
     const testChildren = this._scrollViewParent.$$('//*');
 
-    // Ensure the AutomationId (maps 1:1 to testID) properties of the button children match the defined testing format
+    // Ensure the AutomationId (maps 1:1 to testId) properties of the button children match the defined testing format
     const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
     const buttonList = [];
 
