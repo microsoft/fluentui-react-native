@@ -19,22 +19,21 @@ class NativeTestingPageObject extends BasePage {
     return this._scrollViewParent.isExisting();
   }
 
-  validateScrollViewChildren() {
+  validateScrollViewChildren(): boolean {
     // Gets all the children
     const testChildren = this._scrollViewParent.$$('//*');
 
     // Ensure the AutomationId (maps 1:1 to testId) properties of the button children match the defined testing format
     const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
-    const buttonList = [];
 
-    testChildren.forEach((child) => {
+    for (const child of testChildren) {
       const autoId = child.getAttribute('AutomationId');
-      if (autoId && child.getAttribute('AutomationId').match(reg)) {
-        buttonList.push(child);
+      if (autoId && autoId.match(reg)) {
+        return true;
       }
-    });
+    }
 
-    return buttonList.length > 0;
+    return false;
   }
 
   get _scrollViewParent() {
