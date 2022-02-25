@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaCoin, IPersonaCoinTokens } from '@fluentui/react-native';
+import { PersonaCoin } from '@fluentui/react-native';
 import { Switch, View, Text, TextInput } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { steveBallmerPhotoUrl, undefinedText } from './styles';
@@ -63,27 +63,17 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [ringColor, setRingColor] = React.useState<string>('green');
   const [ringBackgroundColor, setRingBackgroundColor] = React.useState<string>(undefined);
 
-  const tokens: Partial<IPersonaCoinTokens> = {};
-  const CustomizedPersonaCoin = PersonaCoin.customize({ tokens });
-
-  if (coinColor) {
-    tokens.backgroundColor = coinColor;
-  }
-  if (textColor) {
-    tokens.color = textColor;
-  }
-  if (showRings) {
-    tokens.ring = { ringColor: 'red' };
-  }
-  if (coinSize) {
-    tokens.coinSize = coinSize;
-  }
-  if (iconSize) {
-    tokens.iconSize = iconSize;
-  }
-  if (iconStrokeWidth) {
-    tokens.iconStrokeWidth = iconStrokeWidth;
-  }
+  const CustomizedPersonaCoin = React.useMemo(() => {
+    const tokens = {
+      backgroundColor: coinColor,
+      color: textColor,
+      ring: { ringColor: 'red' },
+      coinSize: coinSize,
+      iconSize: iconSize,
+      iconStrokeWidth: iconStrokeWidth,
+    };
+    return PersonaCoin.customize({ tokens });
+  }, [coinColor, textColor, showRings, coinSize, iconSize, iconStrokeWidth]);
 
   return (
     <View style={{ flexDirection: 'column', padding: 10, backgroundColor: showColoredBackground ? 'gray' : 'transparent' }}>

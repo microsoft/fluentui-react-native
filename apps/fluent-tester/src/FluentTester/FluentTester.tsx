@@ -44,6 +44,16 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
   };
 });
 
+const HeaderSeparator = Separator.customize((t) => ({
+  color: t.colors.bodyFrameDivider,
+  separatorWidth: 2,
+}));
+
+const TestListSeparator = Separator.customize((t) => ({
+  color: t.colors.menuDivider,
+  separatorWidth: 2,
+}));
+
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
   // sort tests alphabetically by name
   const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
@@ -65,16 +75,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
-
-  const HeaderSeparator = Separator.customize((t) => ({
-    color: t.colors.bodyFrameDivider,
-    separatorWidth: 2,
-  }));
-
-  const TestListSeparator = Separator.customize((t) => ({
-    color: t.colors.menuDivider,
-    separatorWidth: 2,
-  }));
 
   const themedStyles = getThemedStyles(useTheme());
 

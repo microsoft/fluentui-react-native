@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { PersonaCoin, IconAlignment, IPersonaCoinTokens } from '@fluentui/react-native';
+import { PersonaCoin, IconAlignment } from '@fluentui/react-native';
 import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
@@ -29,36 +29,30 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     borderColor: theme.colors.inputBorder,
   };
 
-  const tokens: Partial<IPersonaCoinTokens> = {};
-  if (coinColor) {
-    tokens.backgroundColor = coinColor;
-  }
-  if (textColor) {
-    tokens.color = textColor;
-  }
-  if (horizontalAlignment) {
-    tokens.horizontalIconAlignment = horizontalAlignment;
-  }
-  if (verticalAlignment) {
-    tokens.verticalIconAlignment = verticalAlignment;
-  }
-  if (iconSize) {
-    tokens.iconSize = iconSize;
-  }
-  if (iconStrokeWidth) {
-    tokens.iconStrokeWidth = iconStrokeWidth;
-  }
-  if (iconStrokeColor) {
-    tokens.iconStrokeColor = iconStrokeColor;
-  }
-  if (initialsSize) {
-    tokens.initialsSize = initialsSize;
-  }
-  if (physicalSize) {
-    tokens.coinSize = physicalSize;
-  }
-
-  const CustomizedPersonaCoin = PersonaCoin.customize({ tokens });
+  const CustomizedPersonaCoin = React.useMemo(() => {
+    const tokens = {
+      backgroundColor: coinColor,
+      color: textColor,
+      horizontalIconAlignment: horizontalAlignment,
+      verticalIconAlignment: verticalAlignment,
+      iconSize: iconSize,
+      iconStrokeWidth: iconStrokeWidth,
+      iconStrokeColor: iconStrokeColor,
+      initialsSize: initialsSize,
+      coinSize: physicalSize,
+    };
+    return PersonaCoin.customize({ tokens });
+  }, [
+    coinColor,
+    textColor,
+    horizontalAlignment,
+    verticalAlignment,
+    iconSize,
+    iconStrokeWidth,
+    iconStrokeColor,
+    initialsSize,
+    physicalSize,
+  ]);
 
   return (
     <View style={commonStyles.root}>
