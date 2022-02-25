@@ -14,7 +14,7 @@ Basic examples:
 
 ```jsx
 <Checkbox label="Example Checkbox" />
-<Checkbox label="Large Circular Checkbox" circular size="large" />
+<Checkbox label="Large Circular Checkbox" shape="circular" size="large" />
 <Checkbox label="Controlled Checkbox" onChange={onChangeFunction} checked={checked} />
 ```
 
@@ -39,7 +39,7 @@ Win32:
 ![Checkbox with circular appearance on win32 example](./assets/Checkbox_circular_example_win32.png)
 
 ```jsx
-<Checkbox label="Circular Checkbox" circular />
+<Checkbox label="Circular Checkbox" shape="circular" />
 ```
 
 ## Variants
@@ -48,9 +48,9 @@ Win32:
 
 The `Checkbox` control supports the `unchecked` and `checked` appearances. It does _not_ support a `intermediate` or `mixed` appearance.
 
-### Circular
+### Shapes
 
-The `Checkbox` control supports a `circular` shape variant.
+The `Checkbox` control supports a rounded `square` (default) and `circular` shape variants.
 
 ### Sizes
 
