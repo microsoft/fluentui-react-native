@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { AccessibilityActionEvent, ColorValue, GestureResponderEvent } from 'react-native';
+import { ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import { SvgProps } from 'react-native-svg';
-import { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { CallbackEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';
@@ -121,7 +121,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Callback that is called when the checked value has changed.
    */
-  onChange?: (e: GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent, isChecked: boolean) => void;
+  onChange?: (e: CallbackEvent, isChecked: boolean) => void;
 
   /** Sets style of checkbox to a preset size style.
    * @default 'medium'

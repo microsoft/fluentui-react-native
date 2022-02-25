@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { AccessibilityActionEvent, GestureResponderEvent } from 'react-native';
-import { KeyPressEvent } from '.';
+import { CallbackEvent } from '.';
 
-export type OnToggleWithEventCallback = (e: GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent, value?: boolean) => void;
-export type OnChangeWithEventCallback = (e: GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent) => void;
+export type OnToggleWithEventCallback = (e: CallbackEvent, value?: boolean) => void;
+export type OnChangeWithEventCallback = (e: CallbackEvent) => void;
 
 /* Re-usable hook for toggle components.
  * This hook configures the checked state, the callback to toggle the component

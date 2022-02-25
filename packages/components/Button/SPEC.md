@@ -136,7 +136,7 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   /**
    * A callback to call on button click event
    */
-  onClick?: (e: GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent) => void;
+  onClick?: (e: CallbackEvent) => void;
 
   /**
    * A button can be rounded, circular, or square.

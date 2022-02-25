@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Checkbox } from '../Checkbox';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
-import { AccessibilityActionEvent, AccessibilityActionName, GestureResponderEvent, Text, View } from 'react-native';
+import { AccessibilityActionName, Text, View } from 'react-native';
 import { Svg } from 'react-native-svg';
-import { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { CallbackEvent } from '@fluentui-react-native/interactive-hooks';
 
-function onChange(_e: GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent, isChecked: boolean) {
+function onChange(_e: CallbackEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 

@@ -1,3 +1,4 @@
+export * from './events.types';
 export * from './useAsPressable.types';
 export * from './useAsPressable';
 export * from './usePressability';

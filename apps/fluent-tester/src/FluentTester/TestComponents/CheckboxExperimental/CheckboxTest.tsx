@@ -3,12 +3,12 @@ import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, TextStyle, AccessibilityActionEvent, GestureResponderEvent } from 'react-native';
+import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
-import { KeyPressEvent } from '@fluentui-react-native/interactive-hooks';
+import { CallbackEvent } from '@fluentui-react-native/interactive-hooks';
 
-function onChangeUncontrolled(_e: GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent, isChecked: boolean) {
+function onChangeUncontrolled(_e: CallbackEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 
