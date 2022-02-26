@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding tests to ensure JS + Native stay in sync",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
