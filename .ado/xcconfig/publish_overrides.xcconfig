@@ -13,5 +13,8 @@ ONLY_ACTIVE_ARCH=NO
 // Specify the exact Swift version used for reproducibility
 SWIFT_VERSION = 5.0
 
-// Turn off ASAN for ship builds
-ENABLE_ADDRESS_SANITIZER = NO
+// Turn off Sanitizers for Release Builds
+CLANG_ADDRESS_SANITIZER = NO
+CLANG_UNDEFINED_BEHAVIOR_SANITIZER = NO
+
+
