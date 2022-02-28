@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bump version due to mismatched publish",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "dannyvv@microsoft.com",
+  "dependentChangeType": "none"
+}
