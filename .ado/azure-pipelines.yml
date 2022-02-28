@@ -9,7 +9,8 @@ jobs:
   # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
   - job: BuildAndBundle
     displayName: Build, test, and bundle JavaScript
-    pool: cxe-ubuntu-20-04-small
+    pool:
+      vmImage: 'ubuntu-latest'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -38,7 +39,8 @@ jobs:
   # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
-    pool: cxe-windows-2019-small
+    pool:
+      vmImage: 'windows-2019'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -57,7 +59,8 @@ jobs:
   # Win32 bundling and end to end testing
   - job: Win32PR
     displayName: Win32 PR
-    pool: cxe-windows-2019-small
+    pool:
+      vmImage: 'windows-2019'
     timeoutInMinutes: 60
     cancelTimeoutInMinutes: 5
 
