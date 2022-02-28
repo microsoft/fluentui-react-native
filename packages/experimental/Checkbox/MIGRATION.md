@@ -68,8 +68,8 @@ The FURN Checkbox cannot be used in place of a FluentUI React Checkbox - these b
 
 ### Props unchanged
 
-- `circular`
 - `labelPosition`
+- `shape`
 - `size`
 
 ### Props renamed to align with ReactNative

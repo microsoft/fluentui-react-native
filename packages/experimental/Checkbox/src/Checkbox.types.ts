@@ -7,6 +7,7 @@ import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';
+export type CheckboxShape = 'circular' | 'square';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   /**
@@ -83,13 +84,6 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   checked?: boolean;
 
   /**
-   * Allows you to set the checkbox to have circular styling.
-   *
-   * @platform Android, iOS, windows, win32
-   */
-  circular?: boolean;
-
-  /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
@@ -121,6 +115,14 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Callback that is called when the checked value has changed.
    */
   onChange?: (isChecked: boolean) => void;
+
+  /**
+   * The shape of the checkbox. Can be either (rounded) square or circular.
+   *
+   * @default square
+   * @platform Android, iOS, windows, win32
+   */
+  shape?: CheckboxShape;
 
   /** Sets style of checkbox to a preset size style.
    * @default 'medium'
