@@ -20,8 +20,8 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Disabled checkbox" disabled />
       <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
       <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
-      <Checkbox label="A circular checkbox" circular />
-      <Checkbox label="A circular checkbox" labelPosition="before" />
+      <Checkbox label="A circular checkbox" shape="circular" />
+      <Checkbox label="A checkbox with label placed before" labelPosition="before" />
     </View>
   );
 };
@@ -61,29 +61,29 @@ const otherCheckbox: React.FunctionComponent = () => {
   );
 };
 
+const CircleColorCheckbox = Checkbox.customize({
+  checkboxBackgroundColor: 'white',
+  checked: {
+    checkboxBackgroundColor: 'green',
+    checkboxBorderColor: 'green',
+    checkmarkColor: 'white',
+  },
+  focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+  hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+  pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
+});
+
+const HoverCheckbox = Checkbox.customize({
+  checked: {
+    checkboxBackgroundColor: 'black',
+    checkmarkColor: 'white',
+  },
+  hovered: {
+    checkmarkOpacity: 1,
+  },
+});
+
 const tokenCheckbox: React.FunctionComponent = () => {
-  const CircleColorCheckbox = Checkbox.customize({
-    checkboxBackgroundColor: 'white',
-    checked: {
-      checkboxBackgroundColor: 'green',
-      checkboxBorderColor: 'green',
-      checkmarkColor: 'white',
-    },
-    focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
-  });
-
-  const HoverCheckbox = Checkbox.customize({
-    checked: {
-      checkboxBackgroundColor: 'black',
-      checkmarkColor: 'white',
-    },
-    hovered: {
-      checkmarkOpacity: 1,
-    },
-  });
-
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
@@ -106,7 +106,12 @@ const tokenCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <CircleColorCheckbox label="A circular token-customized checkbox" circular onChange={onChangeUncontrolled} defaultChecked={true} />
+      <CircleColorCheckbox
+        label="A circular token-customized checkbox"
+        shape="circular"
+        onChange={onChangeUncontrolled}
+        defaultChecked={true}
+      />
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}

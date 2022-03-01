@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 01 Mar 2022 04:11:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.57.0",
+      "version": "0.57.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ac28a857c41cbea3b96b48e5cf483b243463b08b",
+            "comment": "Change circular to shape prop"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "121faf006c409651b4499e087f13d9ff2fcef627",
+            "comment": "Move a few components"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3cea62b081b377309e75a6382b479886f039df0b",
+            "comment": "Fix ActivityIndicator customize test"
+          },
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "adfc9d33eb2e84e19fe5a817e80889d18836a931",
+            "comment": "Add shimmer customization and prop examples to the test page and correct a build break"
+          }
+        ],
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0f290d49138c59c1eb508a5d5e56a3ee34c9d517",
+            "comment": "Add tests to codify testing requirements"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.14",
+            "commit": "bf46717a4f55d639c6f8f337c9d0b86c4f7c8157"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.8.0",
+            "commit": "bf46717a4f55d639c6f8f337c9d0b86c4f7c8157"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.6.17",
+            "commit": "bf46717a4f55d639c6f8f337c9d0b86c4f7c8157"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Feb 2022 22:41:19 GMT",
       "tag": "@fluentui-react-native/tester_v0.56.1",
       "version": "0.56.1",

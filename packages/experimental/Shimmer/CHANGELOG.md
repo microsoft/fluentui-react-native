@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Fri, 18 Feb 2022 23:27:11 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Mar 2022 04:11:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.17
+
+Tue, 01 Mar 2022 04:11:39 GMT
+
+### Patches
+
+- Set shimmer tokens as also props and set root style to overflow hidden so the shimmer elements don't overflow the container (patboyd@microsoft.com)
 
 ## 0.6.16
 

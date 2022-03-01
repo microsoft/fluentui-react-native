@@ -24,7 +24,7 @@ describe('Checkbox component tests', () => {
           defaultChecked={true}
           labelPosition="before"
           disabled
-          circular
+          shape="circular"
           size="large"
         />,
       )

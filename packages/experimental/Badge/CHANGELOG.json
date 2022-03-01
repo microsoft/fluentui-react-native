@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Tue, 01 Mar 2022 04:11:39 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.14",
+      "version": "0.0.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "bf46717a4f55d639c6f8f337c9d0b86c4f7c8157",
+            "comment": "Fix badge package dependency"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Feb 2022 22:41:19 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.13",
       "version": "0.0.13",

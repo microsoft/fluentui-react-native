@@ -4,18 +4,19 @@ import { MenuButton } from '@fluentui/react-native';
 import { menuItems } from './testData';
 import { viewWrapperStyle, columnStyle, rowStyle } from './MenuButtonTestStyles';
 
+const StyledMenuButton = MenuButton.customize({
+  button: {
+    borderRadius: 4,
+    backgroundColor: '#0095ff',
+    borderWidth: 0,
+    color: '#fff',
+    variant: 'heroSemibold',
+    fontFamily: 'Georgia',
+  },
+  contextualMenu: { backgroundColor: '#a9dbff' },
+});
+
 export const CustomizedMenuButton: React.FunctionComponent = () => {
-  const StyledMenuButton = MenuButton.customize({
-    button: {
-      borderRadius: 4,
-      backgroundColor: '#0095ff',
-      borderWidth: 0,
-      color: '#fff',
-      variant: 'heroSemibold',
-      fontFamily: 'Georgia',
-    },
-    contextualMenu: { backgroundColor: '#a9dbff' },
-  });
   return (
     <View>
       <View style={viewWrapperStyle}>

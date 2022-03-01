@@ -23,7 +23,11 @@ export const Checkbox = compose<CheckboxType>({
     const Slots = useSlots(
       userProps,
       (layer) =>
-        Checkbox.state[layer] || userProps[layer] || layer === userProps['size'] || (!userProps['size'] && layer === getDefaultSize()),
+        Checkbox.state[layer] ||
+        userProps[layer] ||
+        layer === userProps['shape'] ||
+        layer === userProps['size'] ||
+        (!userProps['size'] && layer === getDefaultSize()),
     );
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
