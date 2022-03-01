@@ -21,7 +21,7 @@ export const MenuButton = compose<MenuButtonType>({
   slotProps: {
     root: {},
   },
-  render: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
+  useRender: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
     const { menuItems, content, icon, disabled, onItemClick, contextualMenu, style, appearance, ...rest } = props;
 
     const stdBtnRef = useRef(null);

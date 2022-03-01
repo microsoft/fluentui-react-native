@@ -20,7 +20,7 @@ export const TabsItem = compose<TabItemType>({
     indicator: View,
     content: Text,
   },
-  render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
+  useRender: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
     const tabsItem = useTabsItem(userProps);
 
     if (!tabsItem.state) return null;

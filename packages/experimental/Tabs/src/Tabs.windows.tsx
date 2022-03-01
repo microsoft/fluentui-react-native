@@ -32,7 +32,7 @@ export const Tabs = compose<TabsType>({
     stack: View,
     tabPanel: View,
   },
-  render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
+  useRender: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
     // configure props and state for tabs based on user props
     const tabs = useTabs(userProps);
 

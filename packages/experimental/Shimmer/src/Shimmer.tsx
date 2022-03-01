@@ -14,7 +14,7 @@ export const Shimmer = compose<ShimmerType>({
   slots: {
     root: Svg,
   },
-  render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
+  useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
