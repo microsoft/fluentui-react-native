@@ -2496,9 +2496,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.4.tgz#83288d93289ac4b8a78ebcdf60e73592dd976dc3"
-  integrity sha512-DDClorlZkCmsQ/Gl4Gz7hCU+v4YiU5qz3aIVEGIfN473teno/5RmeF+WB2pdDLT6rQGaQ7N8H+Fle1kB13vt2w==
+  version "1.12.5"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.5.tgz#2cd1c075a422d87c2c284625bc342d49a6c091c7"
+  integrity sha512-3ATeVXKisYF6V0YrKQtK6XNMc1V3vCjhqbJV5Y/B58G99zKWUmMK3H+DWfCnvxmJsvm1uyzfnqByx6zPnMtZWA==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-language" "^1.2.6"
