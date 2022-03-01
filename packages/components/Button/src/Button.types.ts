@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableHooks, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps } from '@fluentui-react-native/adapters';
 
@@ -89,7 +89,7 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
   /**
    * A callback to call on button click event
    */
-  onClick?: () => void;
+  onClick?: (e: InteractionEvent) => void;
 
   /**
    * Text that should show in a tooltip when the user hovers over a button.

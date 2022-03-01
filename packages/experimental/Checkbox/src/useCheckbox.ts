@@ -4,7 +4,7 @@ import {
   useKeyProps,
   useOnPressWithFocus,
   useViewCommandFocus,
-  useAsToggle,
+  useAsToggleWithEvent,
 } from '@fluentui-react-native/interactive-hooks';
 import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
 import { IPressableProps } from '@fluentui-react-native/pressable';
@@ -44,7 +44,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   }
 
   // Re-usable hook for toggle components.
-  const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
+  const [isChecked, toggleChecked] = useAsToggleWithEvent(defaultChecked, checked, onChange);
 
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
@@ -71,7 +71,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
     (event: AccessibilityActionEvent) => {
       switch (event.nativeEvent.actionName) {
         case 'Toggle':
-          toggleChecked();
+          toggleChecked(event);
           break;
       }
       onAccessibilityAction && onAccessibilityAction(event);
