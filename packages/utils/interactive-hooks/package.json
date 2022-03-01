@@ -35,6 +35,7 @@
     "@fluentui-react-native/icon": "0.11.9",
     "@office-iss/react-native-win32": "^0.64.8",
     "@types/invariant": "^2.2.0",
+    "@types/jest": "^26.0.0",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
