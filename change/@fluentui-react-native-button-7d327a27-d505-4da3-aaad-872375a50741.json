@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add native event to button onClick",
-  "packageName": "@fluentui-react-native/button",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
