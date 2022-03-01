@@ -1,9 +1,8 @@
-import { Theme } from '@fluentui-react-native/framework';
+import { TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { BadgeTokens } from './Badge.types';
 
-export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
+export const defaultBadgeTokens: TokenSettings<BadgeTokens> = () =>
   ({
     iconSize: 5,
     borderWidth: globalTokens.stroke.width.thin,
