@@ -1,4 +1,5 @@
 /** @jsx withSlots */
+import * as React from 'react';
 import { View } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { Text } from '@fluentui-react-native/experimental-text';
@@ -36,7 +37,12 @@ export const Checkbox = compose<CheckboxType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {Checkbox.state.labelIsBefore && <Slots.label key="label">{label}</Slots.label>}
+          {Checkbox.state.labelIsBefore && (
+            <React.Fragment>
+              <Slots.label key="label">{label}</Slots.label>
+              {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
+            </React.Fragment>
+          )}
           <Slots.checkbox>
             <Slots.checkmark key="checkmark" viewBox="0 0 11 8">
               <Path
@@ -46,10 +52,10 @@ export const Checkbox = compose<CheckboxType>({
             </Slots.checkmark>
           </Slots.checkbox>
           {!Checkbox.state.labelIsBefore && (
-            <Slots.label key="label">
-              {label}
-              <Slots.required>{!!required && typeof required === 'string' ? required : '*'}</Slots.required>
-            </Slots.label>
+            <React.Fragment>
+              <Slots.label key="label">{label}</Slots.label>
+              {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
+            </React.Fragment>
           )}
         </Slots.root>
       );
