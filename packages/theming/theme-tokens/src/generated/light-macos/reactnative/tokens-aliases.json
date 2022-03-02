@@ -134,7 +134,8 @@
     "fillColorRest": "#e6e6e6"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#d1d1d1"
+    "fillColorRest": "#f0f0f0",
+    "fillColorPressed": "#d1d1d1"
   },
   "neutralBackgroundInverted": {
     "fillColorRest": "#616161"
@@ -216,6 +217,33 @@
   "neutralStrokeDisabled": {
     "strokeColorRest": "#e0e0e0",
     "strokeWidth": 1
+  },
+  "redBackground1": {
+    "fillColorRest": "#f9f0f2"
+  },
+  "redBackground2": {
+    "fillColorRest": "#d69ca5"
+  },
+  "redBackground3": {
+    "fillColorRest": "#750b1c"
+  },
+  "redBorder1": {
+    "fillColorRest": "#d69ca5"
+  },
+  "redBorder2": {
+    "fillColorRest": "#750b1c"
+  },
+  "redBorderActive": {
+    "fillColorRest": "#750b1c"
+  },
+  "redForeground1": {
+    "fillColorRest": "#690a19"
+  },
+  "redForeground2": {
+    "fillColorRest": "#420610"
+  },
+  "redForeground3": {
+    "fillColorRest": "#750b1c"
   },
   "strokeFocus1": {
     "strokeColorRest": "#ffffff",

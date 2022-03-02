@@ -207,6 +207,33 @@
     "strokeColorRest": "PlatformColor(GrayText)",
     "strokeWidth": 1
   },
+  "redBackground1": {
+    "fillColorRest": "PlatformColor(ButtonFace)"
+  },
+  "redBackground2": {
+    "fillColorRest": "PlatformColor(Window)"
+  },
+  "redBackground3": {
+    "fillColorRest": "PlatformColor(ButtonFace)"
+  },
+  "redBorder1": {
+    "fillColorRest": "PlatformColor(WindowText)"
+  },
+  "redBorder2": {
+    "fillColorRest": "PlatformColor(WindowText)"
+  },
+  "redBorderActive": {
+    "fillColorRest": "PlatformColor(Highlight)"
+  },
+  "redForeground1": {
+    "fillColorRest": "PlatformColor(ButtonText)"
+  },
+  "redForeground2": {
+    "fillColorRest": "PlatformColor(WindowText)"
+  },
+  "redForeground3": {
+    "fillColorRest": "PlatformColor(WindowText)"
+  },
   "strokeFocus1": {
     "strokeColorRest": "PlatformColor(Window)",
     "strokeWidth": 1
