@@ -49,11 +49,11 @@
     "@office-iss/react-native-win32": "^0.64.8",
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react": "17.0.1",
+    "react": "17.0.2",
     "react-native": "^0.66.4"
   },
   "peerDependencies": {
-    "react": ">=17.0.1",
+    "react": ">=17.0.2",
     "react-native": ">=0.66.4"
   },
   "author": "",
