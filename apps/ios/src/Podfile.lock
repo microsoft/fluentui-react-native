@@ -437,8 +437,8 @@ PODS:
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNSVG (12.1.1):
-    - React
+  - RNSVG (12.3.0):
+    - React-Core
   - SwiftLint (0.43.1)
   - Yoga (1.14.0)
 
@@ -596,7 +596,7 @@ SPEC CHECKSUMS:
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
   ReactTestApp-DevSupport: 5b0a4857ecf70fa107d040d204a6af374c5f49e9
   ReactTestApp-Resources: 51437f32bf317329a7c9ca3f68e3a4cc952567ba
-  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
+  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SwiftLint: 99f82d07b837b942dd563c668de129a03fc3fb52
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
 
