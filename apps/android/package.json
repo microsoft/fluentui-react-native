@@ -24,7 +24,7 @@
     "directory": "apps/android"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.56.1",
+    "@fluentui-react-native/tester": "^0.58.0",
     "@react-native-community/slider": "^4.2.0",
     "@react-native-picker/picker": "^2.2.1",
     "hermes-engine": "~0.7.0",
@@ -42,7 +42,7 @@
     "flow-bin": "^0.113.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^1.1.1",
+    "react-native-test-app": "^1.1.4",
     "react-test-renderer": "17.0.1"
   },
   "jest": {

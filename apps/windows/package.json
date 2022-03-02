@@ -19,7 +19,7 @@
     "directory": "apps/windows"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.56.1",
+    "@fluentui-react-native/tester": "^0.58.0",
     "react": "17.0.1",
     "react-native": "^0.64.2",
     "react-native-svg": "^12.1.1",
@@ -45,7 +45,7 @@
     "flow-bin": "^0.113.0",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react-native-test-app": "^1.1.1",
+    "react-native-test-app": "^1.1.4",
     "react-test-renderer": "17.0.1",
     "rimraf": "~3.0.2",
     "ts-node": "^8.10.1",

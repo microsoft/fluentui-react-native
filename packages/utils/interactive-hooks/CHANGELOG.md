@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 18 Feb 2022 23:27:11 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Mar 2022 20:18:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Tue, 01 Mar 2022 20:18:31 GMT
+
+### Minor changes
+
+- Set up initial native event passing (ruaraki@microsoft.com)
 
 ## 0.13.3
 
