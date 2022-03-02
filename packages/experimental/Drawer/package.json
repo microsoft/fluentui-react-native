@@ -38,7 +38,7 @@
     "lie": "~3.3.0",
     "pako": "~1.0.2",
     "react": "17.0.1",
-    "react-native": "^0.64.3",
+    "react-native": "^0.66.4",
     "readable-stream": "~2.3.6",
     "set-immediate-shim": "~1.0.1"
   },
