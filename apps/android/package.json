@@ -27,9 +27,9 @@
     "@fluentui-react-native/tester": "^0.58.0",
     "@react-native-community/slider": "^4.2.0",
     "@react-native-picker/picker": "^2.2.1",
-    "hermes-engine": "~0.7.0",
-    "react": "17.0.1",
-    "react-native": "^0.64.2",
+    "hermes-engine": "~0.9.0",
+    "react": "17.0.2",
+    "react-native": "^0.66.0-0",
     "react-native-svg": "^12.1.1"
   },
   "devDependencies": {
@@ -42,14 +42,14 @@
     "flow-bin": "^0.113.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-test-app": "^1.1.4",
+    "react-native-test-app": "^1.0.6",
     "react-test-renderer": "17.0.1"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.64",
+    "reactNativeVersion": "0.66",
     "kitType": "app",
     "bundle": {
       "targets": [

@@ -40,6 +40,6 @@
     "@types/jest": "^26.0.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.1",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.4"
   }
 }

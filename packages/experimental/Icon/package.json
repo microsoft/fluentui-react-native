@@ -41,7 +41,7 @@
     "react-native-svg-transformer": "^1.0.0"
   },
   "peerDependencies": {
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.4"
   },
   "author": "",
   "license": "MIT"

@@ -43,11 +43,11 @@
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.4"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
-    "react-native": ">=0.64.3",
-    "react-native-macos": ">=0.64.6"
+    "react-native": ">=0.66.4",
+    "react-native-macos": ">=0.66.14"
   }
 }
