@@ -391,24 +391,27 @@
       }
     },
     "RedBorderActive": {
-      "Fill": {
+      "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.HC.Highlight" }
-        }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     },
     "RedBorder1": {
-      "Fill": {
+      "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
-        }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     },
     "RedBorder2": {
-      "Fill": {
+      "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
-        }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     }
   }

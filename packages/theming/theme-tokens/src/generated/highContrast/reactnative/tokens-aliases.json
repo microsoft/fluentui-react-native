@@ -217,13 +217,16 @@
     "fillColorRest": "PlatformColor(ButtonFace)"
   },
   "redBorder1": {
-    "fillColorRest": "PlatformColor(WindowText)"
+    "strokeColorRest": "PlatformColor(WindowText)",
+    "strokeWidth": 1
   },
   "redBorder2": {
-    "fillColorRest": "PlatformColor(WindowText)"
+    "strokeColorRest": "PlatformColor(WindowText)",
+    "strokeWidth": 1
   },
   "redBorderActive": {
-    "fillColorRest": "PlatformColor(Highlight)"
+    "strokeColorRest": "PlatformColor(Highlight)",
+    "strokeWidth": 1
   },
   "redForeground1": {
     "fillColorRest": "PlatformColor(ButtonText)"

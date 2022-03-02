@@ -391,24 +391,27 @@
       }
     },
     "RedBorderActive": {
-      "Fill": {
+      "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.DarkRed.Tint30" }
-        }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     },
     "RedBorder1": {
-      "Fill": {
+      "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.DarkRed.Primary" }
-        }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     },
     "RedBorder2": {
-      "Fill": {
+      "Stroke": {
         "Color": {
           "Rest": { "aliasOf": "Global.Color.DarkRed.Tint20" }
-        }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
     }
   }

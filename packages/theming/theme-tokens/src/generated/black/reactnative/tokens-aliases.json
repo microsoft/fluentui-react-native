@@ -217,13 +217,16 @@
     "fillColorRest": "#750b1c"
   },
   "redBorder1": {
-    "fillColorRest": "#750b1c"
+    "strokeColorRest": "#750b1c",
+    "strokeWidth": 1
   },
   "redBorder2": {
-    "fillColorRest": "#962f3f"
+    "strokeColorRest": "#962f3f",
+    "strokeWidth": 1
   },
   "redBorderActive": {
-    "fillColorRest": "#ac4f5e"
+    "strokeColorRest": "#ac4f5e",
+    "strokeWidth": 1
   },
   "redForeground1": {
     "fillColorRest": "#ac4f5e"
