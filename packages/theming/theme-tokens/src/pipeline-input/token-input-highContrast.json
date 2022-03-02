@@ -347,6 +347,69 @@
         },
         "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
+    },
+    "RedBackground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.ButtonFace" }
+        }
+      }
+    },
+    "RedBackground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.Canvas" }
+        }
+      }
+    },
+    "RedBackground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.ButtonFace" }
+        }
+      }
+    },
+    "RedForeground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.ButtonText" }
+        }
+      }
+    },
+    "RedForeground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
+        }
+      }
+    },
+    "RedForeground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
+        }
+      }
+    },
+    "RedBorderActive": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.Highlight" }
+        }
+      }
+    },
+    "RedBorder1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
+        }
+      }
+    },
+    "RedBorder2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.HC.CanvasText" }
+        }
+      }
     }
   }
 }
