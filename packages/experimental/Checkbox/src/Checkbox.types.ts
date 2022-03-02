@@ -52,7 +52,14 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    */
   checkmarkSize?: number;
 
+  /**
+   * Color of the text that denotes that the checkbox is required
+   */
   requiredColor?: ColorValue;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
   requiredPadding?: ViewStyle['padding'];
 
   /**
