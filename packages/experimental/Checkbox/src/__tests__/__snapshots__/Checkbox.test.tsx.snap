@@ -63,6 +63,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     }
   >
     All Props Checkbox
+
   </Text>
   <Text
     style={
