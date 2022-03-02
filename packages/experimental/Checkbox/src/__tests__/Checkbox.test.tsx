@@ -27,6 +27,7 @@ describe('Checkbox component tests', () => {
           disabled
           shape="circular"
           size="large"
+          required
         />,
       )
       .toJSON();
