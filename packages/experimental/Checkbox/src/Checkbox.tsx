@@ -15,6 +15,7 @@ export const Checkbox = compose<CheckboxType>({
     checkbox: View,
     checkmark: Svg,
     label: Text,
+    required: Text,
   },
   render: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
     // configure props and state for checkbox based on user props
@@ -31,7 +32,7 @@ export const Checkbox = compose<CheckboxType>({
     );
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
-      const { label, ...mergedProps } = mergeProps(Checkbox.props, final);
+      const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
 
       return (
         <Slots.root {...mergedProps}>
@@ -44,7 +45,12 @@ export const Checkbox = compose<CheckboxType>({
               />
             </Slots.checkmark>
           </Slots.checkbox>
-          {!Checkbox.state.labelIsBefore && <Slots.label key="label">{label}</Slots.label>}
+          {!Checkbox.state.labelIsBefore && (
+            <Slots.label key="label">
+              {label}
+              <Slots.required>{!!required && typeof required === 'string' ? required : '*'}</Slots.required>
+            </Slots.label>
+          )}
         </Slots.root>
       );
     };

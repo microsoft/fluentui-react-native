@@ -65,6 +65,7 @@ describe('Checkbox component tests', () => {
         checkbox: View,
         checkmark: Svg,
         label: Text,
+        required: Text,
       },
     });
     const tree = renderer.create(<ComposedCheckbox>Composed Button with RNText</ComposedCheckbox>).toJSON();

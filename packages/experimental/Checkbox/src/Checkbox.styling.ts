@@ -67,6 +67,12 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
       }),
       ['checkmarkColor', 'checkmarkSize', 'checkmarkOpacity'],
     ),
+    required: buildProps(
+      (tokens: CheckboxTokens) => ({
+        style: { color: tokens.requiredColor, paddingStart: tokens.requiredPadding },
+      }),
+      ['requiredColor', 'requiredPadding'],
+    ),
   },
 };
 
