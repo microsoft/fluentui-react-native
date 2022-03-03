@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "New alias tokens",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

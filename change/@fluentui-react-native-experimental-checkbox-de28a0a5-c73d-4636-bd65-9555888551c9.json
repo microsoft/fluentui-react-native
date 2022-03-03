@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Implement required prop",
-  "packageName": "@fluentui-react-native/experimental-checkbox",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
