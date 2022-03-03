@@ -16,6 +16,7 @@ import {
   MenuButtonType,
   MenuButtonRenderData,
   MenuButtonState,
+  MenuButtonItemProps,
 } from './MenuButton.types';
 
 export const MenuButton = compose<MenuButtonType>({
@@ -33,30 +34,6 @@ export const MenuButton = compose<MenuButtonType>({
     const toggleShowContextualMenu = useCallback(() => {
       setShowContextualMenu(!showContextualMenu);
     }, [showContextualMenu, setShowContextualMenu]);
-
-    const menuItemsUpdated = menuItems.map((item) => {
-      if (item.hasSubmenu) {
-        const [showSubmenu, setShowSubmenu] = useState(false);
-
-        const toggleShowSubmenu = React.useCallback(() => {
-          setShowSubmenu(!showSubmenu);
-        }, [showSubmenu, setShowSubmenu]);
-
-        const onDismissSubmenu = React.useCallback(() => {
-          setShowSubmenu(false);
-        }, [setShowSubmenu]);
-        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
-        const menuItemUpdated = {
-          ...restItems,
-          onHoverIn,
-          showSubmenu: item.showSubmenu ? showSubmenu : undefined,
-          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
-        };
-        return menuItemUpdated;
-      }
-      return item;
-    });
 
     const state: MenuButtonState = {
       context: {
@@ -87,7 +64,7 @@ export const MenuButton = compose<MenuButtonType>({
         ...contextualMenu,
       },
       contextualMenuItems: {
-        menuItems: menuItemsUpdated,
+        menuItems,
       },
     });
 
@@ -132,21 +109,12 @@ export const MenuButton = compose<MenuButtonType>({
         {context.showContextualMenu && (
           <Slots.contextualMenu>
             {menuItems.map((menuItem) => {
-              const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
-
-              return hasSubmenu && submenuItems ? (
+              return menuItem.hasSubmenu && menuItem.submenuItems ? (
                 <Slots.contextualMenuItems>
-                  <SubmenuItem componentRef={componentRef} {...items} />
-                  {showSubmenu && (
-                    <Submenu target={componentRef} {...submenuProps}>
-                      {submenuItems.map((submenuItem) => (
-                        <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-                      ))}
-                    </Submenu>
-                  )}
+                  <SubMenuItem {...menuItem} />
                 </Slots.contextualMenuItems>
               ) : (
-                <ContextualMenuItem key={items.itemKey} {...items} />
+                <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />
               );
             })}
           </Slots.contextualMenu>
@@ -155,5 +123,31 @@ export const MenuButton = compose<MenuButtonType>({
     );
   },
 });
+
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+  const [showSubmenuState, setShowSubmenu] = React.useState(false);
+  const toggleShowSubmenu = React.useCallback(() => {
+    setShowSubmenu(!showSubmenuState);
+  }, [showSubmenuState, setShowSubmenu]);
+  const onDismissSubmenu = React.useCallback(() => {
+    setShowSubmenu(false);
+  }, [setShowSubmenu]);
+
+  const { showSubmenu = showSubmenuState, submenuProps, componentRef, submenuItems, onHoverIn = toggleShowSubmenu, ...restItems } = props;
+  const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
+
+  return (
+    <React.Fragment>
+      <SubmenuItem componentRef={componentRef} onHoverIn={onHoverIn} {...restItems} />
+      {showSubmenu && (
+        <Submenu target={componentRef} onDismiss={onDismiss} setShowMenu={setShowMenu} {...restSubmenuProps}>
+          {submenuItems?.map((submenuItem) => (
+            <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
+          ))}
+        </Submenu>
+      )}
+    </React.Fragment>
+  );
+};
 
 export default MenuButton;
