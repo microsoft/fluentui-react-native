@@ -16,7 +16,7 @@ export const E2ECheckboxExperimentalTest: React.FunctionComponent = () => {
   const [checkboxPressed, setCheckboxPressed] = React.useState(false);
 
   const onClick = React.useCallback(
-    (checked) => {
+    (_e, checked) => {
       setCheckboxPressed(checked);
     },
     [setCheckboxPressed],
