@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add snapshot and fix runtime error",
+  "packageName": "@fluentui-react-native/experimental-text",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

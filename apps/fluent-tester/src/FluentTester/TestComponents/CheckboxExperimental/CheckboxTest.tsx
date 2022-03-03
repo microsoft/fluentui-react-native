@@ -23,6 +23,7 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
       <Checkbox label="A circular checkbox" shape="circular" />
       <Checkbox label="A checkbox with label placed before" labelPosition="before" />
+      <Checkbox label="A required checkbox" required />
     </View>
   );
 };
@@ -58,6 +59,7 @@ const otherCheckbox: React.FunctionComponent = () => {
         labelPosition="before"
         checked={Boolean(isCheckedControlled2)}
       />
+      <Checkbox label="A required checkbox with other required text" required="**" />
     </View>
   );
 };
