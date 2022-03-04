@@ -6,7 +6,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
 
-const standardCallout: React.FunctionComponent = () => {
+const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
   const [isStandardCalloutVisible, setIsStandardCalloutVisible] = React.useState(false);
 
@@ -23,29 +23,35 @@ const standardCallout: React.FunctionComponent = () => {
   const [preventDismissOnClickOutside, setPreventDismissOnClickOutside] = React.useState(false);
   const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>([]);
 
-  const onPreventDismissOnKeyDownChange = React.useCallback((value) => {
-    setPreventDismissOnKeyDown(value);
-    if (value) {
-      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnKeyDown'));
-    } else {
-      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
-        value != 'preventDismissOnKeyDown';
-      });
-      setDismissBehaviors(newDismissBehaviors);
-    }
-  }, []);
+  const onPreventDismissOnKeyDownChange = React.useCallback(
+    (value) => {
+      setPreventDismissOnKeyDown(value);
+      if (value) {
+        setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnKeyDown'));
+      } else {
+        const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+          value != 'preventDismissOnKeyDown';
+        });
+        setDismissBehaviors(newDismissBehaviors);
+      }
+    },
+    [calloutDismissBehaviors],
+  );
 
-  const onPreventDismissOnClickOutsideChange = React.useCallback((value) => {
-    setPreventDismissOnClickOutside(value);
-    if (value) {
-      setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnClickOutside'));
-    } else {
-      const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
-        value != 'preventDismissOnClickOutside';
-      });
-      setDismissBehaviors(newDismissBehaviors);
-    }
-  }, []);
+  const onPreventDismissOnClickOutsideChange = React.useCallback(
+    (value) => {
+      setPreventDismissOnClickOutside(value);
+      if (value) {
+        setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnClickOutside'));
+      } else {
+        const newDismissBehaviors = calloutDismissBehaviors.filter((value) => {
+          value != 'preventDismissOnClickOutside';
+        });
+        setDismissBehaviors(newDismissBehaviors);
+      }
+    },
+    [calloutDismissBehaviors],
+  );
 
   const redTargetRef = React.useRef<View>(null);
   const blueTargetRef = React.useRef<View>(null);
@@ -113,7 +119,7 @@ const standardCallout: React.FunctionComponent = () => {
 
   const addButton = React.useCallback(() => {
     setScrollviewContents((arr) => [...arr, 1]);
-  }, [setScrollviewContents, scrollviewContents]);
+  }, [setScrollviewContents]);
 
   return (
     <View>
@@ -245,7 +251,7 @@ const standardCallout: React.FunctionComponent = () => {
   );
 };
 
-const customCallout: React.FunctionComponent = () => {
+const CustomCallout: React.FunctionComponent = () => {
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
   const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
 
@@ -304,11 +310,11 @@ const calloutSections: TestSection[] = [
   {
     name: 'Standard Usage',
     testID: CALLOUT_TESTPAGE,
-    component: standardCallout,
+    component: StandardCallout,
   },
   {
     name: 'Customized Usage',
-    component: customCallout,
+    component: CustomCallout,
   },
   {
     name: 'E2E Testing Callout',

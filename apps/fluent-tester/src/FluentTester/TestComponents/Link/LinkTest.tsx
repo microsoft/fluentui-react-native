@@ -7,7 +7,7 @@ import { LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
 
-const links: React.FunctionComponent = () => {
+const Links: React.FunctionComponent = () => {
   const doPress = (): void => {
     Alert.alert('Alert.', 'You have been alerted.');
   };
@@ -24,7 +24,7 @@ const linkSections: TestSection[] = [
   {
     name: 'Navigation and Alert',
     testID: LINK_TESTPAGE,
-    component: links,
+    component: Links,
   },
   {
     name: 'Link E2E Test',

@@ -30,7 +30,7 @@ const CustomizedExpander = Expander.customize({
   chevronBorderThickness: 2,
 });
 
-const expanderTest: React.FunctionComponent = () => {
+const ExpanderMainTest: React.FunctionComponent = () => {
   /** This test page has not yet been tested and does not currently build because
    * the react-native-test-app does not yet support WinUI 2.6
    * Filed issue in react-native-test-app: https://github.com/microsoft/react-native-test-app/issues/444
@@ -87,7 +87,7 @@ const expanderTest: React.FunctionComponent = () => {
   );
 };
 
-const basicExpander: React.FunctionComponent = () => {
+const BasicExpander: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <View style={commonStyles.root}>
@@ -104,12 +104,12 @@ const expanderSections: TestSection[] = [
   {
     name: 'BaseExpander',
     testID: EXPANDER_TESTPAGE,
-    component: basicExpander,
+    component: BasicExpander,
   },
   {
     name: 'Expander',
     testID: EXPANDER_TESTPAGE,
-    component: expanderTest,
+    component: ExpanderMainTest,
   },
 ];
 
