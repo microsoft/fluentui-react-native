@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

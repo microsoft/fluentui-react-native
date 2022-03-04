@@ -60,7 +60,7 @@ const Base = composeFactory<ViewProps, SlotProps, Tokens, Theme>(
       outer: View,
       content: Text,
     },
-    render: (props: ViewProps, useSlots: UseStyledSlots<ViewProps, SlotProps>) => {
+    useRender: (props: ViewProps, useSlots: UseStyledSlots<ViewProps, SlotProps>) => {
       const Slots = useSlots(props);
       return (extra: ViewProps) => (
         <Slots.outer {...mergeProps(props, extra)}>

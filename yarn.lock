@@ -2505,14 +2505,15 @@
     "@rnx-kit/tools-node" "^1.2.6"
 
 "@rnx-kit/eslint-plugin@^0.2.8":
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.10.tgz#c7d88cd3f98a96d740e5f33a520b19a86def74d0"
-  integrity sha512-ZKOF4N814dDOY2qE7BwwYvr4F8Ebe+SCDihf8azRpc/yhGUKAFzYf9jIv8bO0TUf3GPhOzgQoRGRYclTRFXgKw==
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.11.tgz#ff49840e520f5401a7d61e0cbb9bc6e9c42c61d7"
+  integrity sha512-43N6mQYVwSUZJMEpeovVsXq8acpz2e7BWAkNg59FJA90VfBd8oMyfJ3/B9d9emCSSMCKWJra+aPSF182GlDx2Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
     enhanced-resolve "^5.8.3"
     eslint-plugin-react "^7.26.0"
+    eslint-plugin-react-hooks "^4.3.0"
 
 "@rnx-kit/jest-preset@^0.1.9":
   version "0.1.9"
@@ -7011,6 +7012,11 @@ eslint-plugin-jest@^25.0.0:
   integrity sha512-PWLUEXeeF7C9QGKqvdSbzLOiLTx+bno7/HC9eefePfEb257QFHg7ye3dh80AZVkaa/RQsBB1Q/ORQvg2X7F0NQ==
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
+
+eslint-plugin-react-hooks@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.3.0.tgz#318dbf312e06fab1c835a4abef00121751ac1172"
+  integrity sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==
 
 eslint-plugin-react@^7.26.0:
   version "7.28.0"

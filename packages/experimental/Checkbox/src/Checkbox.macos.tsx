@@ -29,7 +29,7 @@ export const Checkbox = compose<CheckboxTypeMacOS>({
       },
     })),
   },
-  render: (props: CheckboxProps, useSlots: UseSlots<CheckboxTypeMacOS>) => {
+  useRender: (props: CheckboxProps, useSlots: UseSlots<CheckboxTypeMacOS>) => {
     const { onChange, ...restOfUserProps } = props;
     const onPress = (e: any) => {
       if (onChange != null) {

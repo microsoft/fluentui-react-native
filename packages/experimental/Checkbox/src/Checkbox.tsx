@@ -18,7 +18,7 @@ export const Checkbox = compose<CheckboxType>({
     label: Text,
     required: Text,
   },
-  render: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
+  useRender: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
     // configure props and state for checkbox based on user props
     const Checkbox = useCheckbox(userProps);
     // grab the styled slots

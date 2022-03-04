@@ -16,7 +16,7 @@ export const Drawer = compose<DrawerType>({
       style: {},
     })),
   },
-  render: (props: DrawerProps, useSlots: UseSlots<DrawerType>) => {
+  useRender: (props: DrawerProps, useSlots: UseSlots<DrawerType>) => {
     const { target, ...rest } = props;
     const [nativeTarget, setNativeTarget] = React.useState<number | null>(null);
 

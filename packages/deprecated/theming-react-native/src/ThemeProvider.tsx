@@ -7,7 +7,8 @@ import { ThemeContext } from '@uifabricshared/theming-ramp';
 
 export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (props: IThemeProviderProps) => {
   const { registry: registryFromProps, theme: themeName = '', children } = props;
-  const registryToUse = registryFromProps || useThemeRegistry() || getThemeRegistry();
+  const defaultRegistry = useThemeRegistry();
+  const registryToUse = registryFromProps || defaultRegistry || getThemeRegistry();
   const [theme, setThemeState] = React.useState(registryToUse.getTheme(themeName));
 
   React.useEffect(() => {

@@ -11,7 +11,7 @@ function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
 
-const basicCheckbox: React.FunctionComponent = () => {
+const BasicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
@@ -29,7 +29,7 @@ const basicCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const otherCheckbox: React.FunctionComponent = () => {
+const OtherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -87,7 +87,7 @@ const HoverCheckbox = Checkbox.customize({
   },
 });
 
-const tokenCheckbox: React.FunctionComponent = () => {
+const TokenCheckbox: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
@@ -148,15 +148,15 @@ const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
     testID: CHECKBOX_TESTPAGE,
-    component: basicCheckbox,
+    component: BasicCheckbox,
   },
   {
     name: 'Other Implementations',
-    component: otherCheckbox,
+    component: OtherCheckbox,
   },
   {
     name: 'Token Customized Checkboxes',
-    component: tokenCheckbox,
+    component: TokenCheckbox,
   },
   {
     name: 'Checkbox for E2E Testing',

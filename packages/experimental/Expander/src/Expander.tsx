@@ -17,7 +17,7 @@ export const Expander = compose<ExpanderType>({
     root: buildProps((tokens) => ({ ...tokens })),
   },
   slots: { root: ExpanderComponent },
-  render: (userProps: ExpanderProps, useSlots: UseSlots<ExpanderType>) => {
+  useRender: (userProps: ExpanderProps, useSlots: UseSlots<ExpanderType>) => {
     const Root = useSlots(userProps).root;
     const [expandedState, setExpandedState] = React.useState(userProps.expanded);
     const expanderHeight = expandedState ? userProps.expandedHeight : userProps.collapsedHeight;
