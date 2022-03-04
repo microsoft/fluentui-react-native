@@ -16,7 +16,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 
-const ContextualMenu: React.FunctionComponent = () => {
+const ContextualMenuMainTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -472,7 +472,7 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',
     testID: CONTEXTUALMENU_TESTPAGE,
-    component: ContextualMenu,
+    component: ContextualMenuMainTest,
   },
   {
     name: 'Nested ContextualMenu',
