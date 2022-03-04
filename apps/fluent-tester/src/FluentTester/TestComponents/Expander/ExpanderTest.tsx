@@ -7,33 +7,34 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { EXPANDER_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
+const CustomizedExpander = Expander.customize({
+  headerBackground: '#9c9c9c',
+  headerForeground: '#ffffff',
+  contentBackground: '#c3c3c3',
+  chevronBackground: '#ff7f7f',
+  chevronForeground: '#ffffff',
+  chevronPointerOverBackground: '#b5ffb2',
+  chevronPointerOverForeground: '#bfbdbd',
+  chevronPressedBackground: '#ffb2f4',
+  chevronPressedForeground: '#912a2a',
+  headerForegroundPointerOver: '#27f238',
+  headerForegroundPressed: '#f227eb',
+  headerBorderBrush: '#f22727',
+  headerBorderPointerOverBrush: '#27f238',
+  headerBorderPressedBrush: '#f227eb',
+  contentBorderBrush: '#f227eb',
+  headerBorderThickness: 2,
+  chevronBorderBrush: '#f22727',
+  chevronBorderPointerOverBrush: '#27f238',
+  chevronBorderPressedBrush: '#f227eb',
+  chevronBorderThickness: 2,
+});
+
 const expanderTest: React.FunctionComponent = () => {
   /** This test page has not yet been tested and does not currently build because
    * the react-native-test-app does not yet support WinUI 2.6
    * Filed issue in react-native-test-app: https://github.com/microsoft/react-native-test-app/issues/444
    */
-  const CustomizedExpander = Expander.customize({
-    headerBackground: '#9c9c9c',
-    headerForeground: '#ffffff',
-    contentBackground: '#c3c3c3',
-    chevronBackground: '#ff7f7f',
-    chevronForeground: '#ffffff',
-    chevronPointerOverBackground: '#b5ffb2',
-    chevronPointerOverForeground: '#bfbdbd',
-    chevronPressedBackground: '#ffb2f4',
-    chevronPressedForeground: '#912a2a',
-    headerForegroundPointerOver: '#27f238',
-    headerForegroundPressed: '#f227eb',
-    headerBorderBrush: '#f22727',
-    headerBorderPointerOverBrush: '#27f238',
-    headerBorderPressedBrush: '#f227eb',
-    contentBorderBrush: '#f227eb',
-    headerBorderThickness: 2,
-    chevronBorderBrush: '#f22727',
-    chevronBorderPointerOverBrush: '#27f238',
-    chevronBorderPressedBrush: '#f227eb',
-    chevronBorderThickness: 2,
-  });
 
   const [switchValue, setSwitchValue] = React.useState(false);
   const [expanderText, setExpanderText] = React.useState('Initial state');

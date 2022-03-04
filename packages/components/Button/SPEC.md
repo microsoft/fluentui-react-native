@@ -134,6 +134,11 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   loading?: boolean;
 
   /**
+   * A callback to call on button click event
+   */
+  onClick?: (e: InteractionEvent) => void;
+
+  /**
    * A button can be rounded, circular, or square.
    * @default 'rounded'
    */
@@ -149,11 +154,6 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * Text that should show in a tooltip when the user hovers over a button.
    */
   tooltip?: string;
-
-  /**
-   * A callback to call on button click event
-   */
-  onClick?: () => void;
 }
 ```
 

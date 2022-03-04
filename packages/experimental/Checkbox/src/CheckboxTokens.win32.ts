@@ -5,6 +5,8 @@ import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
+    requiredColor: t.colors.redForeground1,
+    requiredPadding: globalTokens.spacing.s,
     medium: {
       borderRadius: globalTokens.corner.radius.small,
       checkboxBorderWidth: globalTokens.stroke.width.thin,

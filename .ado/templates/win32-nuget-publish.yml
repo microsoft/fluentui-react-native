@@ -1,3 +1,9 @@
+parameters:
+  - name: skipNugetPublish
+    displayName: Skip Nuget Publish
+    type: boolean
+    default: false
+
 steps:
   - checkout: self
     persistCredentials: true
@@ -33,11 +39,13 @@ steps:
       artifactName: SBom-FluentTester-$(System.JobAttempt)
       targetPath: $(System.DefaultWorkingDirectory)/_manifest
 
+  - task: ComponentGovernanceComponentDetection@0
+
   # Push the NuGet package
   - task: NuGetCommand@2
     displayName: 'NuGet push'
+    condition: not(${{ parameters.skipNugetPublish }})
     inputs:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
-      nuGetFeedType: external
-      publishFeedCredentials: react-native
+      publishVstsFeed: Office

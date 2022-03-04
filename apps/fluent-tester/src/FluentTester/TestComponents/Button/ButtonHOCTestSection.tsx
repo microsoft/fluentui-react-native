@@ -5,6 +5,7 @@ import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import TestSvg from './test.svg';
+import { InteractionEvent, isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
 
 const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });
@@ -38,7 +39,13 @@ export const ButtonHOCTest: React.FunctionComponent = () => {
       {svgIconsEnabled && <CustomIconButton icon={{ svgSource: svgProps }}>Customized Icon Button</CustomIconButton>}
       <Button
         style={commonTestStyles.vmargin}
-        onClick={() => {
+        onClick={(e: InteractionEvent) => {
+          console.log(e.timeStamp);
+
+          if (isGestureResponderEvent(e)) {
+            console.log('I was clicked!');
+          }
+
           if (buttonRef.current) {
             buttonRef.current.focus();
           }

@@ -14,7 +14,7 @@ Basic examples:
 
 ```jsx
 <Checkbox label="Example Checkbox" />
-<Checkbox label="Large Circular Checkbox" circular size="large" />
+<Checkbox label="Large Circular Checkbox" shape="circular" size="large" />
 <Checkbox label="Controlled Checkbox" onChange={onChangeFunction} checked={checked} />
 ```
 
@@ -39,7 +39,7 @@ Win32:
 ![Checkbox with circular appearance on win32 example](./assets/Checkbox_circular_example_win32.png)
 
 ```jsx
-<Checkbox label="Circular Checkbox" circular />
+<Checkbox label="Circular Checkbox" shape="circular" />
 ```
 
 ## Variants
@@ -48,9 +48,9 @@ Win32:
 
 The `Checkbox` control supports the `unchecked` and `checked` appearances. It does _not_ support a `intermediate` or `mixed` appearance.
 
-### Circular
+### Shapes
 
-The `Checkbox` control supports a `circular` shape variant.
+The `Checkbox` control supports a rounded `square` (default) and `circular` shape variants.
 
 ### Sizes
 
@@ -64,6 +64,7 @@ The `Checkbox` control has three slots, or parts. The slots behave as follows:
 
 - `root` - The outer container representing the `Checkbox` itself that wraps everything passed via the `children` prop.
 - `label` - If specified, renders text describing the checkbox either before or after the `checkbox` as specified by the `labelPosition` prop.
+- `required` - If specified, renders text that denotes a checkbox as required after `label`.
 - `checkbox` - The box which visually represents the checkbox.
 - `checkmark` - A checkmark icon which shows whether the checkbox is in a checked state.
 
@@ -80,13 +81,6 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * and plan to pass in the correct value based on handling onChange events and re-rendering.
    */
   checked?: boolean;
-
-  /**
-   * Allows you to set the checkbox to have circular styling.
-   *
-   * @platform Android, iOS, windows, win32
-   */
-  circular?: boolean;
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
@@ -119,7 +113,20 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Callback that is called when the checked value has changed.
    */
-  onChange?: (isChecked: boolean) => void;
+  onChange?: (e: InteractionEvent, isChecked: boolean) => void;
+
+  /**
+   * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   */
+  required?: boolean | string;
+
+  /**
+   * The shape of the checkbox. Can be either (rounded) square or circular.
+   *
+   * @default square
+   * @platform Android, iOS, windows, win32
+   */
+  shape?: CheckboxShape;
 
   /** Sets style of checkbox to a preset size style.
    * @default 'medium'
@@ -179,6 +186,16 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    * Height and width of the checkmark icon.
    */
   checkmarkSize?: number;
+
+  /**
+   * Color of the text that denotes that the checkbox is required
+   */
+  requiredColor?: ColorValue;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
+  requiredPadding?: ViewStyle['padding'];
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels

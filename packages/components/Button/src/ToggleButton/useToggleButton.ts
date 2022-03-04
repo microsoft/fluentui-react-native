@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ToggleButtonProps, ToggleButtonState } from './ToggleButton.types';
 import { useButton } from '../useButton';
-import { useAsToggle } from '@fluentui-react-native/interactive-hooks';
+import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState } from 'react-native';
 
@@ -13,7 +13,7 @@ export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => 
   if (defaultChecked != undefined && checked != undefined) {
     console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
   }
-  const [checkedValue, toggle] = useAsToggle(defaultChecked, checked, onClick);
+  const [checkedValue, toggle] = useAsToggleWithEvent(defaultChecked, checked, onClick);
   const accessibilityActionsProp = accessibilityActions
     ? [...defaultAccessibilityActions, ...accessibilityActions]
     : defaultAccessibilityActions;
@@ -21,7 +21,7 @@ export const useToggleButton = (props: ToggleButtonProps): ToggleButtonState => 
     (event) => {
       switch (event.nativeEvent.actionName) {
         case 'Toggle':
-          toggle();
+          toggle(event);
           break;
       }
       onAccessibilityAction && onAccessibilityAction(event);

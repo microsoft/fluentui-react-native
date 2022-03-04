@@ -1,8 +1,7 @@
-import { Theme } from '@fluentui-react-native/framework';
-import { TokenSettings } from '@fluentui-react-native/use-styling';
+import { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import { BadgeTokens } from './Badge.types';
 
-export const defaultBadgeColorTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) =>
+export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
     filled: {
       backgroundColor: t.colors.brandedBackground,

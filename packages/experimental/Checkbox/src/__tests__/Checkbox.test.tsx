@@ -4,8 +4,9 @@ import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { AccessibilityActionName, Text, View } from 'react-native';
 import { Svg } from 'react-native-svg';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
-function onChange(isChecked: boolean) {
+function onChange(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 
@@ -24,8 +25,9 @@ describe('Checkbox component tests', () => {
           defaultChecked={true}
           labelPosition="before"
           disabled
-          circular
+          shape="circular"
           size="large"
+          required
         />,
       )
       .toJSON();
@@ -64,6 +66,7 @@ describe('Checkbox component tests', () => {
         checkbox: View,
         checkmark: Svg,
         label: Text,
+        required: Text,
       },
     });
     const tree = renderer.create(<ComposedCheckbox>Composed Button with RNText</ComposedCheckbox>).toJSON();

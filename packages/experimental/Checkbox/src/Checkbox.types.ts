@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { ColorValue } from 'react-native';
+import { ColorValue, ViewStyle } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
 import { SvgProps } from 'react-native-svg';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';
+export type CheckboxShape = 'circular' | 'square';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   /**
@@ -51,6 +53,16 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   checkmarkSize?: number;
 
   /**
+   * Color of the text that denotes that the checkbox is required
+   */
+  requiredColor?: ColorValue;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
+  requiredPadding?: ViewStyle['padding'];
+
+  /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
   spacingLabelAfter?: number;
@@ -83,13 +95,6 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   checked?: boolean;
 
   /**
-   * Allows you to set the checkbox to have circular styling.
-   *
-   * @platform Android, iOS, windows, win32
-   */
-  circular?: boolean;
-
-  /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
@@ -120,7 +125,20 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Callback that is called when the checked value has changed.
    */
-  onChange?: (isChecked: boolean) => void;
+  onChange?: (e: InteractionEvent, isChecked: boolean) => void;
+
+  /**
+   * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   */
+  required?: boolean | string;
+
+  /**
+   * The shape of the checkbox. Can be either (rounded) square or circular.
+   *
+   * @default square
+   * @platform Android, iOS, windows, win32
+   */
+  shape?: CheckboxShape;
 
   /** Sets style of checkbox to a preset size style.
    * @default 'medium'
@@ -158,8 +176,9 @@ export interface CheckboxInfo {
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
-  checkmark?: SvgProps;
+  checkmark: SvgProps;
   label: ITextProps;
+  required: ITextProps;
 }
 
 export interface CheckboxType {

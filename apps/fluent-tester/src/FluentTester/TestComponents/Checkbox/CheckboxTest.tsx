@@ -53,41 +53,41 @@ const otherCheckbox: React.FunctionComponent = () => {
   );
 };
 
+const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
+
+const CircleColorCheckbox = Checkbox.customize({
+  tokens: { borderRadius: 50, checkboxBackgroundColor: 'white' },
+  _overrides: {
+    checked: {
+      tokens: {
+        checkboxBackgroundColor: 'green',
+        checkboxBorderColor: 'green',
+        checkmarkColor: 'white',
+      },
+    },
+    focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
+    hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
+    pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
+  },
+});
+
+const HoverCheckbox = Checkbox.customize({
+  _overrides: {
+    checked: {
+      tokens: {
+        checkboxBackgroundColor: 'black',
+        checkmarkColor: 'white',
+      },
+    },
+    hovered: {
+      tokens: {
+        checkmarkVisibility: 1,
+      },
+    },
+  },
+});
+
 const tokenCheckbox: React.FunctionComponent = () => {
-  const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
-
-  const CircleColorCheckbox = Checkbox.customize({
-    tokens: { borderRadius: 50, checkboxBackgroundColor: 'white' },
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: 'green',
-          checkboxBorderColor: 'green',
-          checkmarkColor: 'white',
-        },
-      },
-      focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
-    },
-  });
-
-  const HoverCheckbox = Checkbox.customize({
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: 'black',
-          checkmarkColor: 'white',
-        },
-      },
-      hovered: {
-        tokens: {
-          checkmarkVisibility: 1,
-        },
-      },
-    },
-  });
-
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
