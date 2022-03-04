@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 04 Mar 2022 21:17:46 GMT and should not be manually modified.
+This log was last generated on Fri, 04 Mar 2022 23:43:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.58.3
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.17
+- Bump @fluentui-react-native/button to v0.22.7
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.15
+- Bump @fluentui-react-native/experimental-avatar to v0.14.7
+- Bump @fluentui-react-native/experimental-button to v0.15.7
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.2
+- Bump @fluentui-react-native/experimental-expander to v0.3.16
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.16
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.19
+- Bump @fluentui-react-native/experimental-tabs to v0.4.26
+- Bump @fluentui-react-native/experimental-text to v0.7.16
+- Bump @fluentui-react-native/framework to v0.7.16
+- Bump @fluentui-react-native/icon to v0.11.11
+- Bump @fluentui-react-native/interactive-hooks to v0.14.2
+- Bump @fluentui-react-native/stack to v0.6.16
+- Bump @fluentui/react-native to v0.27.37
 
 ## 0.58.2
 
