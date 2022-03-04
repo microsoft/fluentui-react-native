@@ -43,9 +43,11 @@ export const ContextualMenu = compose<ContextualMenuType>({
 
     React.useLayoutEffect(() => {
       if (Platform.OS === 'macos') {
-        setTimeout(() => {
-          focusZoneRef.current?.focus();
-        }, 0);
+        if (shouldFocusOnMount) {
+          setTimeout(() => {
+            focusZoneRef.current?.focus();
+          }, 0);
+        }
       }
     }, []);
 
@@ -78,25 +80,22 @@ export const ContextualMenu = compose<ContextualMenuType>({
         setInitialFocus: shouldFocusOnMount,
         ...rest,
       },
-      container: Platform.select({
-        macos: {},
-        default: {
-          // win32
-          accessible: shouldFocusOnContainer,
-          focusable: shouldFocusOnContainer && containerFocus,
-          onBlur: toggleContainerFocus,
-          style: { maxHeight: maxHeight, width: maxWidth },
-        },
-      }),
+      container: {
+        accessible: shouldFocusOnContainer,
+        focusable: shouldFocusOnContainer && containerFocus,
+        onBlur: toggleContainerFocus,
+        style: { maxHeight: maxHeight, width: maxWidth },
+      },
       scrollView: {
         contentContainerStyle: {
           flexDirection: 'column',
           flexGrow: 1,
         },
-        showsVerticalScrollIndicator: true,
+        showsVerticalScrollIndicator: false,
       },
       focusZone: {
         componentRef: focusZoneRef,
+        defaultTabbableElement: focusZoneRef,
         focusZoneDirection: 'vertical',
       },
     });
