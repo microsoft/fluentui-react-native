@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 03 Mar 2022 20:20:09 GMT and should not be manually modified.
+This log was last generated on Fri, 04 Mar 2022 21:17:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.58.2
+
+Fri, 04 Mar 2022 21:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.1
+- Bump @fluentui-react-native/win32-theme to v0.14.13
 
 ## 0.58.1
 

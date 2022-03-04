@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Fri, 04 Mar 2022 21:17:46 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "eb7cd2301e8a73b1211309a19c1b2f8af09fcc1a",
+            "comment": "Update entries"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 03 Mar 2022 20:20:09 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.10.0",
       "version": "0.10.0",
