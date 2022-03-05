@@ -121,7 +121,7 @@ export const Slider: React.FunctionComponent<ISliderProps> = (props: ISliderProp
         setThumbLocation(initialThumbLocation);
       });
     }
-  }, [ref.current, initialValue, maximum, minimum]);
+  }, [ref, initialValue, maximum, minimum]);
 
   return (
     <View style={[userStyle, styles.root]}>

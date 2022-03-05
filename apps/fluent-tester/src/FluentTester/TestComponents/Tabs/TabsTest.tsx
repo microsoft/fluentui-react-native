@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ETabsTest } from './TabsE2ETest';
 import TestSvg from './test.svg';
 
-const tabs: React.FunctionComponent = () => {
+const TabsMainTest: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
@@ -25,7 +25,7 @@ const tabs: React.FunctionComponent = () => {
   );
 };
 
-const disabledTabs: React.FunctionComponent = () => {
+const DisabledTabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
@@ -43,7 +43,7 @@ const disabledTabs: React.FunctionComponent = () => {
   );
 };
 
-const tabsCountIcon: React.FunctionComponent = () => {
+const TabsCountIcon: React.FunctionComponent = () => {
   const svgExample = {
     svgSource: {
       src: TestSvg,
@@ -70,7 +70,7 @@ const tabsCountIcon: React.FunctionComponent = () => {
   );
 };
 
-const onTabsClickEvent: React.FunctionComponent = () => {
+const TabsClickEventTest: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home_key');
 
   const onTabsClick = (key: string) => {
@@ -95,7 +95,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
   );
 };
 
-const tabsChangingViews: React.FunctionComponent = () => {
+const TabsChangingViews: React.FunctionComponent = () => {
   // If user wants to control what gets rendered example.
   const [selectedKey, setSelectedKey] = React.useState('Tabs #1');
 
@@ -117,7 +117,7 @@ const tabsChangingViews: React.FunctionComponent = () => {
   );
 };
 
-const tabsRenderSeparately: React.FunctionComponent = () => {
+const TabsRenderSeparately: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('rectangleRed');
 
   const onTabsClick = (key: string) => {
@@ -149,7 +149,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
   );
 };
 
-const tabsSettingSelectedKey: React.FunctionComponent = () => {
+const TabsSettingSelectedKey: React.FunctionComponent = () => {
   // If user wants to programmatically set the tab's selectedKey with a button example.
   const [selectedKey, setSelectedKey] = React.useState('home');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
@@ -179,7 +179,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
   );
 };
 
-const tabsShowHideItem: React.FunctionComponent = () => {
+const TabsShowHideItem: React.FunctionComponent = () => {
   const [showFirstItem, setshowFirstItem] = React.useState(true);
 
   const toggleShowFirstItem = React.useCallback(() => {
@@ -208,7 +208,7 @@ const tabsShowHideItem: React.FunctionComponent = () => {
   );
 };
 
-const tabsWithFlexibility: React.FunctionComponent = () => {
+const TabsWithFlexibility: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
   const goHomeTab = () => {
@@ -241,35 +241,35 @@ const tabsSections: TestSection[] = [
   {
     name: 'Default Tabs',
     testID: TABS_TESTPAGE,
-    component: tabs,
+    component: TabsMainTest,
   },
   {
     name: 'Tabs with disabled',
-    component: disabledTabs,
+    component: DisabledTabs,
   },
   {
     name: 'Trigger onTabsClick event',
-    component: onTabsClickEvent,
+    component: TabsClickEventTest,
   },
   {
     name: 'User Custom Render',
-    component: tabsChangingViews,
+    component: TabsChangingViews,
   },
   {
     name: 'Render Content Separately',
-    component: tabsRenderSeparately,
+    component: TabsRenderSeparately,
   },
   {
     name: 'Override Selected Key',
-    component: tabsSettingSelectedKey,
+    component: TabsSettingSelectedKey,
   },
   {
     name: 'Show/Hide Tabs item',
-    component: tabsShowHideItem,
+    component: TabsShowHideItem,
   },
   {
     name: 'More Flexibility',
-    component: tabsWithFlexibility,
+    component: TabsWithFlexibility,
   },
   {
     name: 'E2E Tabs Test',
@@ -280,7 +280,7 @@ const tabsSections: TestSection[] = [
 if (Platform.OS !== 'windows') {
   tabsSections.push({
     name: 'Count and Icon',
-    component: tabsCountIcon,
+    component: TabsCountIcon,
   });
 }
 

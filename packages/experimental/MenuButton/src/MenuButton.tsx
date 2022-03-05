@@ -21,7 +21,7 @@ export const MenuButton = compose<MenuButtonType>({
   slotProps: {
     root: {},
   },
-  render: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
+  useRender: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
     const { menuItems, content, icon, disabled, onItemClick, contextualMenu, style, appearance, ...rest } = props;
 
     const stdBtnRef = useRef(null);
@@ -52,28 +52,6 @@ export const MenuButton = compose<MenuButtonType>({
       ...contextualMenu,
     };
 
-    const menuItemsUpdated = menuItems?.map((item) => {
-      if (item.hasSubmenu) {
-        const [showSubmenu, setShowSubmenu] = useState(false);
-        const toggleShowSubmenu = useCallback(() => {
-          setShowSubmenu(!showSubmenu);
-        }, [showSubmenu, setShowSubmenu]);
-        const onDismissSubmenu = useCallback(() => {
-          setShowSubmenu(false);
-        }, [setShowSubmenu]);
-        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
-        const menuItemUpdated = {
-          ...restItems,
-          onHoverIn,
-          showSubmenu: item.showSubmenu ?? showSubmenu,
-          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
-        };
-        return menuItemUpdated;
-      }
-      return item;
-    });
-
     const Slots = useSlots(props);
 
     return () => {
@@ -89,7 +67,7 @@ export const MenuButton = compose<MenuButtonType>({
             {content}
             <Slots.chevronIcon xml={chevronXml} />
           </Button>
-          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItemsUpdated)}
+          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItems)}
         </Slots.root>
       );
     };

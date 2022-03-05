@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Tue, 01 Mar 2022 04:11:39 GMT and should not be manually modified.
+This log was last generated on Fri, 04 Mar 2022 23:43:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.19
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.16
+
+## 0.6.18
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.15
+- Bump @fluentui-react-native/tokens to v0.11.7
 
 ## 0.6.17
 

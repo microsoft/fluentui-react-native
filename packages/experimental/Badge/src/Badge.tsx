@@ -40,7 +40,7 @@ export const Badge = compose<BadgeType>({
     icon: Icon,
     text: Text,
   },
-  render: (userProps: BadgeProps, useSlots: UseSlots<BadgeType>) => {
+  useRender: (userProps: BadgeProps, useSlots: UseSlots<BadgeType>) => {
     const iconProps = createIconProps(userProps.icon);
     const badge = useBadge(userProps);
 

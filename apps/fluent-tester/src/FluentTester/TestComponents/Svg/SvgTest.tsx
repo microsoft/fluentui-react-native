@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const rect: React.FunctionComponent = () => {
+const RectTest: React.FunctionComponent = () => {
   const [useColorA, setUseColorA] = React.useState(false);
   const colorA = 'red';
   const colorB = 'green';
@@ -36,7 +36,7 @@ const rect: React.FunctionComponent = () => {
   );
 };
 
-const circle: React.FunctionComponent = () => {
+const CircleTest: React.FunctionComponent = () => {
   return (
     <Svg width="50" height="50">
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
@@ -44,7 +44,7 @@ const circle: React.FunctionComponent = () => {
   );
 };
 
-const line: React.FunctionComponent = () => {
+const LineTest: React.FunctionComponent = () => {
   return (
     <Svg width="50" height="50">
       <Line x1="10" y1="10" x2="20" y2="20" fill="red" stroke="black" />
@@ -52,7 +52,7 @@ const line: React.FunctionComponent = () => {
   );
 };
 
-const path: React.FunctionComponent = () => {
+const PathTest: React.FunctionComponent = () => {
   return (
     <Svg width="100" height="100">
       <Path d="M 0 0 A 10 10 0 0,1 0 100" fill="magenta" stroke="purple" id="path" />
@@ -60,7 +60,7 @@ const path: React.FunctionComponent = () => {
   );
 };
 
-const polygon: React.FunctionComponent = () => {
+const PolygonTest: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100">
       <Polygon points="40,5 70,80 25,95" fill="lime" stroke="purple" strokeWidth="1" />
@@ -68,7 +68,7 @@ const polygon: React.FunctionComponent = () => {
   );
 };
 
-const linearGradient: React.FunctionComponent = () => {
+const LinearGradientTest: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
       <Defs>
@@ -82,7 +82,7 @@ const linearGradient: React.FunctionComponent = () => {
   );
 };
 
-const radialGradient: React.FunctionComponent = () => {
+const RadialGradientTest: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
       <Defs>
@@ -96,7 +96,7 @@ const radialGradient: React.FunctionComponent = () => {
   );
 };
 
-const rectCircle: React.FunctionComponent = () => {
+const RectCircleTest: React.FunctionComponent = () => {
   return (
     <Svg height="200" width="200">
       <Defs>
@@ -113,11 +113,11 @@ const rectCircle: React.FunctionComponent = () => {
   );
 };
 
-const bundledSvg: React.FunctionComponent = () => {
+const BundledSvgTest: React.FunctionComponent = () => {
   return <TestSvg width={200} height={200} color="red" />;
 };
 
-const remoteSvg: React.FunctionComponent = () => {
+const RemoteSvgTest: React.FunctionComponent = () => {
   return (
     <View>
       <SvgCssUri
@@ -144,43 +144,43 @@ const svgSections: TestSection[] = [
   {
     name: 'Rect',
     testID: SVG_TESTPAGE,
-    component: rect,
+    component: RectTest,
   },
   {
     name: 'Circle',
-    component: circle,
+    component: CircleTest,
   },
   {
     name: 'Line',
-    component: line,
+    component: LineTest,
   },
   {
     name: 'Path',
-    component: path,
+    component: PathTest,
   },
   {
     name: 'Polygon',
-    component: polygon,
+    component: PolygonTest,
   },
   {
     name: 'Linear Gradient',
-    component: linearGradient,
+    component: LinearGradientTest,
   },
   {
     name: 'Radial Gradient',
-    component: radialGradient,
+    component: RadialGradientTest,
   },
   {
     name: 'Rect and Circle via Defs and Use',
-    component: rectCircle,
+    component: RectCircleTest,
   },
   {
     name: 'Bundled Svg',
-    component: bundledSvg,
+    component: BundledSvgTest,
   },
   {
     name: 'Remotely Retrieved Svgs',
-    component: remoteSvg,
+    component: RemoteSvgTest,
   },
 ];
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorValue } from 'react-native';
+import { ColorValue, ViewStyle } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
@@ -51,6 +51,16 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    * Height and width of the checkmark icon.
    */
   checkmarkSize?: number;
+
+  /**
+   * Color of the text that denotes that the checkbox is required
+   */
+  requiredColor?: ColorValue;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
+  requiredPadding?: ViewStyle['padding'];
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
@@ -118,6 +128,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   onChange?: (e: InteractionEvent, isChecked: boolean) => void;
 
   /**
+   * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   */
+  required?: boolean | string;
+
+  /**
    * The shape of the checkbox. Can be either (rounded) square or circular.
    *
    * @default square
@@ -161,8 +176,9 @@ export interface CheckboxInfo {
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
-  checkmark?: SvgProps;
+  checkmark: SvgProps;
   label: ITextProps;
+  required: ITextProps;
 }
 
 export interface CheckboxType {

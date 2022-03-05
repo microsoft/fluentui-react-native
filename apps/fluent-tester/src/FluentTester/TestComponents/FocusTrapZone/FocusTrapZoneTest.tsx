@@ -52,7 +52,7 @@ export const ComponentTwiddler: React.FunctionComponent<IComponentTwiddlerProps>
   );
 };
 
-const basicFocusTrapZone: React.FunctionComponent = () => {
+const BasicFocusTrapZone: React.FunctionComponent = () => {
   const [state, setState] = React.useState({
     useTrapZone: false,
     renderTrapZone: true,
@@ -133,7 +133,7 @@ const focusTrapZoneSections: TestSection[] = [
   {
     name: 'Basic FocusTrapZone Usage',
     testID: FOCUSTRAPZONE_TESTPAGE,
-    component: basicFocusTrapZone,
+    component: BasicFocusTrapZone,
   },
 ];
 

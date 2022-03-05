@@ -23,7 +23,7 @@
     "fillColorRest": "#0078d4",
     "fillColorHover": "#106ebe",
     "fillColorPressed": "#106ebe",
-    "fillColorDisabled": "#ebebeb",
+    "fillColorDisabled": "#d1d1d1",
     "fillColorSelected": "#005a9e"
   },
   "brandBackground2": {
@@ -134,7 +134,8 @@
     "fillColorRest": "#e6e6e6"
   },
   "neutralBackgroundDisabled": {
-    "fillColorRest": "#d1d1d1",
+    "fillColorRest": "#f0f0f0",
+    "fillColorPressed": "#d1d1d1",
     "fillColorSelected": "PlatformColor(Window)"
   },
   "neutralBackgroundInverted": {
@@ -220,6 +221,36 @@
   "neutralStrokeDisabled": {
     "strokeColorRest": "#e0e0e0",
     "strokeWidth": 1
+  },
+  "redBackground1": {
+    "fillColorRest": "#f9f0f2"
+  },
+  "redBackground2": {
+    "fillColorRest": "#d69ca5"
+  },
+  "redBackground3": {
+    "fillColorRest": "#750b1c"
+  },
+  "redBorder1": {
+    "strokeColorRest": "#d69ca5",
+    "strokeWidth": 1
+  },
+  "redBorder2": {
+    "strokeColorRest": "#750b1c",
+    "strokeWidth": 1
+  },
+  "redBorderActive": {
+    "strokeColorRest": "#750b1c",
+    "strokeWidth": 1
+  },
+  "redForeground1": {
+    "fillColorRest": "#690a19"
+  },
+  "redForeground2": {
+    "fillColorRest": "#420610"
+  },
+  "redForeground3": {
+    "fillColorRest": "#750b1c"
   },
   "strokeFocus1": {
     "strokeColorRest": "#ffffff",

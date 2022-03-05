@@ -567,6 +567,16 @@ export interface AliasColorTokens {
 
   strokeFocus1: ColorValue;
   strokeFocus2: ColorValue;
+
+  redBackground1: ColorValue;
+  redBackground2: ColorValue;
+  redBackground3: ColorValue;
+  redForeground1: ColorValue;
+  redForeground2: ColorValue;
+  redForeground3: ColorValue;
+  redBorderActive: ColorValue;
+  redBorder1: ColorValue;
+  redBorder2: ColorValue;
 }
 
 /**

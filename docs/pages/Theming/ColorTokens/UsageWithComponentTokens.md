@@ -34,7 +34,7 @@ export const Foo = compose<TabItemType>({
       ['color', ...fontStyles.keys],
     ),
   },
-  render: (userProps: TProps, useSlots: UseSlots<TType>) => {
+  useRender: (userProps: TProps, useSlots: UseSlots<TType>) => {
     // Grab the styled slots.
     const Slots = useSlots(userProps);
     // Return the handler to finish render.

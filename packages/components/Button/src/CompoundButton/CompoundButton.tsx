@@ -21,7 +21,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     secondaryContent: Text,
     contentContainer: View,
   },
-  render: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
+  useRender: (userProps: CompoundButtonProps, useSlots: UseSlots<CompoundButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Fri, 04 Mar 2022 23:43:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.6
+
+Fri, 04 Mar 2022 23:43:09 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
 
 ## 0.7.5
 

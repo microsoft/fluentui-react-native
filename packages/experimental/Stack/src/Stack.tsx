@@ -47,7 +47,7 @@ export const Stack = compose<StackType>({
   filters: {
     root: filterViewProps,
   },
-  render: (props: StackProps, useSlots: UseSlots<StackType>) => {
+  useRender: (props: StackProps, useSlots: UseSlots<StackType>) => {
     const { gap, horizontal, wrap, ...rest } = props;
     const Slots = useSlots(props);
     return (final: StackProps, ...children: React.ReactNode[]) => {

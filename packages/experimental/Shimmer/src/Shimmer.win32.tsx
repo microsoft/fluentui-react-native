@@ -81,7 +81,7 @@ export const Shimmer = compose<ShimmerType>({
     shimmerWaveContainer: waveContainer,
   },
 
-  render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
+  useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);
       const Slots = useSlots(mergedProps);

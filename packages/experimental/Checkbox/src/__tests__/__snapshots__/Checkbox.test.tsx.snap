@@ -64,6 +64,20 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   >
     All Props Checkbox
   </Text>
+  <Text
+    style={
+      Object {
+        "color": "#690a19",
+        "fontFamily": "Segoe UI",
+        "fontSize": 14,
+        "fontWeight": "400",
+        "margin": 0,
+        "paddingStart": 8,
+      }
+    }
+  >
+    *
+  </Text>
   <View
     style={
       Object {

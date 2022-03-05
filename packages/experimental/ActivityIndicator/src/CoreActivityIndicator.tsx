@@ -15,7 +15,7 @@ export const ActivityIndicator = compose<CoreActivityIndicatorType>({
   slots: {
     root: CoreActivityIndicator,
   },
-  render: (props: ActivityIndicatorProps, useSlots: UseSlots<CoreActivityIndicatorType>) => {
+  useRender: (props: ActivityIndicatorProps, useSlots: UseSlots<CoreActivityIndicatorType>) => {
     const Slots = useSlots(props);
     return () => <Slots.root />;
   },

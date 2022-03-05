@@ -64,6 +64,7 @@ The `Checkbox` control has three slots, or parts. The slots behave as follows:
 
 - `root` - The outer container representing the `Checkbox` itself that wraps everything passed via the `children` prop.
 - `label` - If specified, renders text describing the checkbox either before or after the `checkbox` as specified by the `labelPosition` prop.
+- `required` - If specified, renders text that denotes a checkbox as required after `label`.
 - `checkbox` - The box which visually represents the checkbox.
 - `checkmark` - A checkmark icon which shows whether the checkbox is in a checked state.
 
@@ -113,6 +114,11 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Callback that is called when the checked value has changed.
    */
   onChange?: (e: InteractionEvent, isChecked: boolean) => void;
+
+  /**
+   * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   */
+  required?: boolean | string;
 
   /**
    * The shape of the checkbox. Can be either (rounded) square or circular.
@@ -180,6 +186,16 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
    * Height and width of the checkmark icon.
    */
   checkmarkSize?: number;
+
+  /**
+   * Color of the text that denotes that the checkbox is required
+   */
+  requiredColor?: ColorValue;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
+  requiredPadding?: ViewStyle['padding'];
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
