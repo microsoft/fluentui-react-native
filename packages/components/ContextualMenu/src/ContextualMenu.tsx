@@ -94,6 +94,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         showsVerticalScrollIndicator: false,
       },
       focusZone: {
+        enableFocusRing: false,
         componentRef: focusZoneRef,
         defaultTabbableElement: focusZoneRef,
         focusZoneDirection: 'vertical',

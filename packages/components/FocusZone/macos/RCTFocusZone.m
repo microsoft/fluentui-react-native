@@ -60,6 +60,21 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 	return nil;
 }
 
+static NSView *GetLastKeyViewWithin(NSView *parentView)
+{
+	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
+		if ([view canBecomeKeyView]) {
+			return view;
+		}
+
+		NSView *match = GetFirstKeyViewWithin(view);
+		if (match) {
+			return match;
+		}
+	}
+	return nil;
+}
+
 static NSView *GetFirstResponder(NSWindow *window)
 {
 	NSResponder *responder = [window firstResponder];
@@ -283,6 +298,19 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 - (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action
 {
+	
+	// Special case if we're currently focused on self
+	NSView *firstResponder = GetFirstResponder([self window]);
+	if (self == firstResponder) {
+		if (action == FocusZoneActionDownArrow /* || action == FocusZoneActionHomeKey */)
+		{
+			return GetFirstKeyViewWithin(self);
+		} else if (action == FocusZoneActionUpArrow /* || action == FocusZoneActionEndKey */)
+		{
+			return GetLastKeyViewWithin(self);
+		}
+	}
+	
 	NSView *nextViewToFocus = [self nextViewToFocusForAction:action];
 
 	if (nextViewToFocus == nil)
