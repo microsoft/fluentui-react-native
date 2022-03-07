@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.8",
+      "version": "0.14.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.4",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.17",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.8",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 04 Mar 2022 23:43:09 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.7",
       "version": "0.14.7",

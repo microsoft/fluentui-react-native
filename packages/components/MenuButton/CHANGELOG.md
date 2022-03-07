@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Fri, 04 Mar 2022 23:43:10 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.38
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.8
+- Bump @fluentui-react-native/contextual-menu to v0.16.9
+- Bump @fluentui-react-native/icon to v0.11.12
+- Bump @fluentui-react-native/interactive-hooks to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.11.8
 
 ## 0.7.37
 

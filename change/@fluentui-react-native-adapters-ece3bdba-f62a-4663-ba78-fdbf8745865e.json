@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Pass tooltip to React Native macOS components",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

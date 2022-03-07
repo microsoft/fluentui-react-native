@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/text_v0.11.13",
+      "version": "0.11.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.4",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.8",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 03 Mar 2022 20:20:09 GMT",
       "tag": "@fluentui-react-native/text_v0.11.12",
       "version": "0.11.12",
