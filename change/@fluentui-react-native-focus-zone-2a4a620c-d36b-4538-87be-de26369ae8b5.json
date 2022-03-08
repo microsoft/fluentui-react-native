@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "ContextualMenu macOS: Focus on menu rather than first menu item",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
