@@ -91,7 +91,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
           flexDirection: 'column',
           flexGrow: 1,
         },
-        showsVerticalScrollIndicator: false,
+        showsVerticalScrollIndicator: true,
       },
       focusZone: {
         enableFocusRing: false,
