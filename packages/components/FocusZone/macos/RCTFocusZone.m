@@ -298,19 +298,19 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 - (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action
 {
-	
+
 	// Special case if we're currently focused on self
 	NSView *firstResponder = GetFirstResponder([self window]);
 	if (self == firstResponder) {
-		if (action == FocusZoneActionDownArrow /* || action == FocusZoneActionHomeKey */)
+		if (action == FocusZoneActionDownArrow)
 		{
 			return GetFirstKeyViewWithin(self);
-		} else if (action == FocusZoneActionUpArrow /* || action == FocusZoneActionEndKey */)
+		} else if (action == FocusZoneActionUpArrow)
 		{
 			return GetLastKeyViewWithin(self);
 		}
 	}
-	
+
 	NSView *nextViewToFocus = [self nextViewToFocusForAction:action];
 
 	if (nextViewToFocus == nil)
@@ -395,18 +395,14 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 			&& (action == FocusZoneActionUpArrow || action == FocusZoneActionDownArrow))
 		|| (focusZoneDirection == FocusZoneDirectionNone))
 	{
-		[super keyDown:event];
+		passthrough = YES;
 	}
 	else
 	{
 		viewToFocus = [self nextViewToFocusWithFallback:action];
 	}
 
-	if (passthrough)
-	{
-		[super keyDown:event];
-	}
-	else if (viewToFocus != nil)
+	if (!passthrough && viewToFocus != nil)
 	{
 		[[self window] makeFirstResponder:viewToFocus];
 	}
