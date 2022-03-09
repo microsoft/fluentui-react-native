@@ -45,6 +45,8 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 	);
 }
 
+/// Performs a depth first search looking for the first key view in a parent view's view heirarchy.
+/// This function does not take into account the geometric position of the view.
 static NSView *GetFirstKeyViewWithin(NSView *parentView)
 {
 	for (NSView *view in [parentView subviews]) {
@@ -60,6 +62,9 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 	return nil;
 }
 
+/// Performs a depth first search looking for the last key view in a parent view's view heirarchy.
+/// We find the last view by simply reversing the order of the subview array.
+/// This function does not take into account the geometric position of the view.
 static NSView *GetLastKeyViewWithin(NSView *parentView)
 {
 	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
@@ -67,7 +72,7 @@ static NSView *GetLastKeyViewWithin(NSView *parentView)
 			return view;
 		}
 
-		NSView *match = GetFirstKeyViewWithin(view);
+		NSView *match = GetLastKeyViewWithin(view);
 		if (match) {
 			return match;
 		}
