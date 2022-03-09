@@ -306,11 +306,13 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 	// Special case if we're currently focused on self
 	NSView *firstResponder = GetFirstResponder([self window]);
-	if (self == firstResponder) {
+	if (self == firstResponder)
+	{
 		if (action == FocusZoneActionDownArrow)
 		{
 			return GetFirstKeyViewWithin(self);
-		} else if (action == FocusZoneActionUpArrow)
+		}
+		else if (action == FocusZoneActionUpArrow)
 		{
 			return GetLastKeyViewWithin(self);
 		}
