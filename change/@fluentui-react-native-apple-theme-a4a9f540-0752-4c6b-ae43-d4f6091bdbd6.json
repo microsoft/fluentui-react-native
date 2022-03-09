@@ -1,0 +1,10 @@
+{
+  "type": "patch",
+  "comment": {
+    "title": "",
+    "value": ""
+  },
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}
