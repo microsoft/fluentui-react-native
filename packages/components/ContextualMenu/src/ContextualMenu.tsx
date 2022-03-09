@@ -32,7 +32,7 @@ export const CMContext = React.createContext<ContextualMenuContext>({
 export const ContextualMenu = compose<ContextualMenuType>({
   displayName: contextualMenuName,
   usePrepareProps: (userProps: ContextualMenuProps, useStyling: IUseComposeStyling<ContextualMenuType>) => {
-    const { setShowMenu, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
+    const { setShowMenu, onDismiss, maxHeight, maxWidth, shouldFocusOnMount = true, shouldFocusOnContainer = false, ...rest } = userProps;
 
     /**
      * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
@@ -42,22 +42,20 @@ export const ContextualMenu = compose<ContextualMenuType>({
     const focusZoneRef = React.useRef<IFocusable>(null);
 
     React.useLayoutEffect(() => {
-      if (Platform.OS === 'macos') {
-        if (shouldFocusOnMount) {
-          setTimeout(() => {
-            focusZoneRef.current?.focus();
-          }, 0);
-        }
+      if (Platform.OS === 'macos' && shouldFocusOnMount) {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
       }
-    }, []);
+    }, [shouldFocusOnMount]);
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
 
     const dismissCallback = React.useCallback(() => {
-      userProps.onDismiss();
-      setShowMenu(false);
-    }, [setShowMenu, userProps.onDismiss]);
+      onDismiss();
+      setShowMenu?.(false);
+    }, [setShowMenu, onDismiss]);
 
     const [containerFocus, setContainerFocus] = React.useState(true);
     const toggleContainerFocus = React.useCallback(() => {
