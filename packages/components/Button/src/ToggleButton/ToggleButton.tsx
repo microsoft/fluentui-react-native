@@ -19,7 +19,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
+  useRender: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
     const iconProps = createIconProps(userProps.icon);
     const toggleButton = useToggleButton(userProps);
 

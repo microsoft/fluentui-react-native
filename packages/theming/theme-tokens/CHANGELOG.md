@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Wed, 02 Feb 2022 02:29:07 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Mar 2022 20:20:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Minor changes
+
+- New alias tokens (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.14.0
 
 ## 0.12.0
 

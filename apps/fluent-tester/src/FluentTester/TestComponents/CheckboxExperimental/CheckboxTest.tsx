@@ -12,7 +12,7 @@ function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 
-const basicCheckbox: React.FunctionComponent = () => {
+const BasicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
@@ -23,11 +23,12 @@ const basicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
       <Checkbox label="A circular checkbox" shape="circular" />
       <Checkbox label="A checkbox with label placed before" labelPosition="before" />
+      <Checkbox label="A required checkbox" required />
     </View>
   );
 };
 
-const sizeCheckbox: React.FunctionComponent = () => {
+const SizeCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox tooltip="Medium checkbox" size="medium" />
@@ -38,7 +39,7 @@ const sizeCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const otherCheckbox: React.FunctionComponent = () => {
+const OtherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -58,6 +59,7 @@ const otherCheckbox: React.FunctionComponent = () => {
         labelPosition="before"
         checked={Boolean(isCheckedControlled2)}
       />
+      <Checkbox label="A required checkbox with other required text" required="**" />
     </View>
   );
 };
@@ -84,7 +86,7 @@ const HoverCheckbox = Checkbox.customize({
   },
 });
 
-const tokenCheckbox: React.FunctionComponent = () => {
+const TokenCheckbox: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
@@ -145,19 +147,19 @@ const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
     testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
-    component: basicCheckbox,
+    component: BasicCheckbox,
   },
   {
     name: 'Size Checkboxes',
-    component: sizeCheckbox,
+    component: SizeCheckbox,
   },
   {
     name: 'Other Implementations',
-    component: otherCheckbox,
+    component: OtherCheckbox,
   },
   {
     name: 'Token Customized Checkboxes',
-    component: tokenCheckbox,
+    component: TokenCheckbox,
   },
   {
     name: 'E2E Testing for Experimental Checkbox',

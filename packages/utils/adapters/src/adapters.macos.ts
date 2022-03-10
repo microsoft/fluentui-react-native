@@ -95,6 +95,7 @@ const _textMask: IFilterMask<ITextProps> = {
   style: true,
   suppressHighlighting: true,
   testID: true,
+  tooltip: true,
 };
 
 const _imageMask: IFilterMask<IImageProps> = {
@@ -135,6 +136,7 @@ const _imageMask: IFilterMask<IImageProps> = {
   source: true,
   style: true,
   testID: true,
+  tooltip: true,
 };
 
 export function filterViewProps(propName: string): boolean {

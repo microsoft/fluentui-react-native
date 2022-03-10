@@ -207,6 +207,36 @@
     "strokeColorRest": "#424242",
     "strokeWidth": 1
   },
+  "redBackground1": {
+    "fillColorRest": "#230308"
+  },
+  "redBackground2": {
+    "fillColorRest": "#420610"
+  },
+  "redBackground3": {
+    "fillColorRest": "#750b1c"
+  },
+  "redBorder1": {
+    "strokeColorRest": "#750b1c",
+    "strokeWidth": 1
+  },
+  "redBorder2": {
+    "strokeColorRest": "#962f3f",
+    "strokeWidth": 1
+  },
+  "redBorderActive": {
+    "strokeColorRest": "#ac4f5e",
+    "strokeWidth": 1
+  },
+  "redForeground1": {
+    "fillColorRest": "#ac4f5e"
+  },
+  "redForeground2": {
+    "fillColorRest": "#d69ca5"
+  },
+  "redForeground3": {
+    "fillColorRest": "#962f3f"
+  },
   "strokeFocus1": {
     "strokeColorRest": "#000000",
     "strokeWidth": 1

@@ -35,7 +35,7 @@ export const JSAvatar = compose<JSAvatarType>({
     ring: View,
     glow: View,
   },
-  render: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
+  useRender: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
     const avatar = useAvatar(userProps);
     const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
 

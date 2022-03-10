@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Fri, 18 Feb 2022 23:27:11 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.17
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.17
+
+## 0.3.16
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.16
+
+## 0.3.15
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.15
 
 ## 0.3.14
 

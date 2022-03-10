@@ -69,6 +69,7 @@ The FURN Checkbox cannot be used in place of a FluentUI React Checkbox - these b
 ### Props unchanged
 
 - `labelPosition`
+- `required`
 - `shape`
 - `size`
 
@@ -78,7 +79,7 @@ No `Checkbox` specific renames.
 
 ### Prop differences due to technical differences and limitations
 
-- `onChange` does not pass native event info due to typing difficulties.
+- `onChange` passes a different type for the native event
 
 ### Other Prop differences
 

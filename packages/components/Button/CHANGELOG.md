@@ -1,8 +1,55 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 01 Mar 2022 20:18:31 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.8
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.4
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.16
+- Bump @fluentui-react-native/experimental-text to v0.7.17
+- Bump @fluentui-react-native/framework to v0.7.17
+- Bump @fluentui-react-native/icon to v0.11.12
+- Bump @fluentui-react-native/interactive-hooks to v0.14.3
+- Bump @fluentui-react-native/pressable to v0.8.26
+- Bump @fluentui-react-native/text to v0.11.13
+- Bump @fluentui-react-native/tokens to v0.11.8
+
+## 0.22.7
+
+Fri, 04 Mar 2022 23:43:09 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.15
+- Bump @fluentui-react-native/experimental-text to v0.7.16
+- Bump @fluentui-react-native/framework to v0.7.16
+- Bump @fluentui-react-native/icon to v0.11.11
+- Bump @fluentui-react-native/interactive-hooks to v0.14.2
+- Bump @fluentui-react-native/pressable to v0.8.25
+
+## 0.22.6
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.11
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.14
+- Bump @fluentui-react-native/experimental-text to v0.7.15
+- Bump @fluentui-react-native/framework to v0.7.15
+- Bump @fluentui-react-native/icon to v0.11.10
+- Bump @fluentui-react-native/interactive-hooks to v0.14.1
+- Bump @fluentui-react-native/pressable to v0.8.24
+- Bump @fluentui-react-native/theme-tokens to v0.13.0
+- Bump @fluentui-react-native/text to v0.11.12
+- Bump @fluentui-react-native/tokens to v0.11.7
 
 ## 0.22.5
 

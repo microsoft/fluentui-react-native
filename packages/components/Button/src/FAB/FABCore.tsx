@@ -32,7 +32,7 @@ export const FAB = compose<FABType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
+  useRender: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
     const { icon, onClick, ...rest } = userProps;
 
     const iconProps = createIconProps(userProps.icon);

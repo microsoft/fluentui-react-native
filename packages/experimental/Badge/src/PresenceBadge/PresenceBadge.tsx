@@ -48,7 +48,7 @@ export const PresenceBadge = compose<PresenceBadgeType>({
   slots: {
     badge: Badge,
   },
-  render: (userProps: PresenceBadgeProps) => {
+  useRender: (userProps: PresenceBadgeProps) => {
     const badge = useBadge(userProps);
     const size = getIconSize(userProps.size || 'medium');
     const iconXml = `<svg width="${size}" height="${size}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">

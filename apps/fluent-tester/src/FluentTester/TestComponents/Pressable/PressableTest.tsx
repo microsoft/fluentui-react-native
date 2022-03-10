@@ -92,7 +92,7 @@ const PressComponent: React.FunctionComponent<ViewProps> = (props: ViewProps) =>
   );
 };
 
-const pressable: React.FunctionComponent = () => {
+const PressableMainTest: React.FunctionComponent = () => {
   const [hoverProps, hoverState] = useHoverState({});
 
   return (
@@ -126,7 +126,7 @@ const pressableSections: TestSection[] = [
   {
     name: 'Pressable Components',
     testID: PRESSABLE_TESTPAGE,
-    component: pressable,
+    component: PressableMainTest,
   },
 ];
 

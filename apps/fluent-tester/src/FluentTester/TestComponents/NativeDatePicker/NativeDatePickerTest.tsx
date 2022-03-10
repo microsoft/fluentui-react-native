@@ -7,7 +7,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
 
-const nativeDatePicker: React.FunctionComponent = () => {
+const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date());
   const [endDate, setEndDate] = React.useState<Date>(null);
 
@@ -109,7 +109,7 @@ const nativeDatePickerSections: TestSection[] = [
   {
     name: 'Native Date Picker',
     testID: NATIVEDATEPICKER_TESTPAGE,
-    component: nativeDatePicker,
+    component: NativeDatePickerMainTest,
   },
 ];
 

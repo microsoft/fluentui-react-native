@@ -412,7 +412,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultDisabledIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostBackground: 'transparent',
-    ghostBorder: fluentUIApple.transparentStroke,
+    ghostBorder: 'transparent',
     ghostContent: fluentUIApple.communicationBlue,
     ghostIcon: fluentUIApple.communicationBlue,
 

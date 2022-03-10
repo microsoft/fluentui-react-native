@@ -2,6 +2,63 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Fri, 04 Mar 2022 23:43:10 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.13.14",
+      "version": "0.13.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2",
+            "comment": "Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 21:17:46 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.13.13",
+      "version": "0.13.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.14.13",
+            "commit": "1a80cce6c4a557ca32a719bd476e025ba3822630"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 03 Mar 2022 20:20:09 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.13.12",
+      "version": "0.13.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.9.11",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.14.12",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.16.5",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Feb 2022 23:27:11 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.13.11",
       "version": "0.13.11",

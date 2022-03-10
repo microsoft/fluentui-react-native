@@ -7,7 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
-const basicActivityIndicator: React.FunctionComponent = () => {
+const BasicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
   const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);
 
@@ -30,7 +30,7 @@ const basicActivityIndicator: React.FunctionComponent = () => {
   );
 };
 
-const activityIndicatorTest: React.FunctionComponent = () => {
+const ActivityIndicatorMainTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Extra Small</Text>
@@ -57,7 +57,7 @@ const CustomizedActivityIndicator = ActivityIndicator.customize({
   size: 'large',
 });
 
-const customizedActivityIndicatorTest: React.FunctionComponent = () => {
+const CustomizedActivityIndicatorTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Customized Activity Indicator</Text>
@@ -70,17 +70,17 @@ const activityIndicatorSections: TestSection[] = [
   {
     name: 'Base ActivityIndicator',
     testID: ACTIVITY_INDICATOR_TESTPAGE,
-    component: basicActivityIndicator,
+    component: BasicActivityIndicator,
   },
   {
     name: 'ActivityIndicator',
     testID: ACTIVITY_INDICATOR_TESTPAGE,
-    component: activityIndicatorTest,
+    component: ActivityIndicatorMainTest,
   },
   {
     name: 'Customized ActivityIndicator',
     testID: ACTIVITY_INDICATOR_TESTPAGE,
-    component: customizedActivityIndicatorTest,
+    component: CustomizedActivityIndicatorTest,
   },
 ];
 

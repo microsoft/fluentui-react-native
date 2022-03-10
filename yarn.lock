@@ -2374,9 +2374,9 @@
   integrity sha512-DCmCIC0Gn9m6K0Mlg2MwNmTxMEpBu5lTLsI6b/XUAv/vLGa6o+X7RhCai4FWeqkjCU36+ZOwaLzDo4NBWMXaoQ==
 
 "@react-native-community/slider@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.2.0.tgz#47fa146b2f2c92e45c35c154b1df8a66e71b8048"
-  integrity sha512-7LUDk63cbkDgmTqHBWn0pXzwF/VY9I3wDTnLWNehgQu7GlluHDn02qHgINxS9dRoG96JOqLFxRxnCEKkg5zcmQ==
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.2.1.tgz#8f1c8cf62de1bd91ce1e32585f7eb666f21e5025"
+  integrity sha512-6HUS5HbB9bvEN4GiwBlxECgPWQIugHE+kfnxqX2jHUl1SE57MRpw00m1qVs4hXtEPQndBl6mAQiGbKCOtLPVbg==
 
 "@react-native-menu/menu@^0.1.2":
   version "0.1.2"
@@ -2505,14 +2505,15 @@
     "@rnx-kit/tools-node" "^1.2.6"
 
 "@rnx-kit/eslint-plugin@^0.2.8":
-  version "0.2.10"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.10.tgz#c7d88cd3f98a96d740e5f33a520b19a86def74d0"
-  integrity sha512-ZKOF4N814dDOY2qE7BwwYvr4F8Ebe+SCDihf8azRpc/yhGUKAFzYf9jIv8bO0TUf3GPhOzgQoRGRYclTRFXgKw==
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/eslint-plugin/-/eslint-plugin-0.2.11.tgz#ff49840e520f5401a7d61e0cbb9bc6e9c42c61d7"
+  integrity sha512-43N6mQYVwSUZJMEpeovVsXq8acpz2e7BWAkNg59FJA90VfBd8oMyfJ3/B9d9emCSSMCKWJra+aPSF182GlDx2Q==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^5.0.0"
     "@typescript-eslint/parser" "^5.0.0"
     enhanced-resolve "^5.8.3"
     eslint-plugin-react "^7.26.0"
+    eslint-plugin-react-hooks "^4.3.0"
 
 "@rnx-kit/jest-preset@^0.1.9":
   version "0.1.9"
@@ -7012,6 +7013,11 @@ eslint-plugin-jest@^25.0.0:
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
 
+eslint-plugin-react-hooks@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-4.3.0.tgz#318dbf312e06fab1c835a4abef00121751ac1172"
+  integrity sha512-XslZy0LnMn+84NEG9jSGR6eGqaZB3133L8xewQo3fQagbQuGt7a63gf+P1NGKZavEYEC3UXaWEAA/AqDkuN6xA==
+
 eslint-plugin-react@^7.26.0:
   version "7.28.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.28.0.tgz#8f3ff450677571a659ce76efc6d80b6a525adbdf"
@@ -10031,9 +10037,9 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.5.0.tgz#8312a2d35aa74050e79a824b59d8ff18545b0bb3"
-  integrity sha512-j6Twoob5WgC9Gx1MFE3jU9QH1nc1IgdPskYOoMhbmhpTwMZjH5rdjQi1u4pXsogH0Q06OfIRj/fpZkvugP8EuQ==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.5.1.tgz#6bdbdd6726c736bbef269d15073541a6bdfcf1e6"
+  integrity sha512-0zvD2z8Etc+LenWdj7sxwM9RE0p2TzkG3QixK2Ll0ttF9HAWrE87ULjy8G8OZsqbKzOzQSi06wsPAfAtpN6MLQ==
   dependencies:
     "@xmldom/xmldom" "^0.8.0"
     abort-controller "^3.0.0"
@@ -12398,9 +12404,9 @@ react-native-svg@^12.1.1:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.1.4.tgz#a959e5d847079cbaa290c6ef6174db52ecadcac5"
-  integrity sha512-DiMCRgVEJn9WS0oefwIxdb4aylTAfx6kKf+E6G1xRS/fZN3zR7BwQ7eVsihtijESi9BL2kAjF7LHU79uAUZNlQ==
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.1.7.tgz#1e1b3a75f95e2cbe1cb42d95d7514e412f5a2583"
+  integrity sha512-XtLOA0ns4mup2SmUmxXYXgVHU5XvMQivaDsrKxlq9sjh+8poo4tm1XB4aJxGljC+b9/0ym6HpPL9L8U3lWu+hQ==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
@@ -14180,9 +14186,9 @@ ts-node@^8.10.1:
     yn "3.1.1"
 
 tsconfig-paths@^3.9.0:
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.12.0.tgz#19769aca6ee8f6a1a341e38c8fa45dd9fb18899b"
-  integrity sha512-e5adrnOYT6zqVnWqZu7i/BQ3BnhzvGbjEjejFXO20lKIKpwTaupkCPgEfv4GZK1IBciJUEhYs3J3p75FdaTFVg==
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/tsconfig-paths/-/tsconfig-paths-3.13.0.tgz#f3e9b8f6876698581d94470c03c95b3a48c0e3d7"
+  integrity sha512-nWuffZppoaYK0vQ1SQmkSsQzJoHA4s6uzdb2waRpD806x9yfq153AdVsWz4je2qZcW+pENrMQXbGQ3sMCkXuhw==
   dependencies:
     "@types/json5" "^0.0.29"
     json5 "^1.0.1"

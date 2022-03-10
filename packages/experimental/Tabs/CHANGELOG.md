@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Tue, 01 Mar 2022 20:18:31 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.27
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.17
+- Bump @fluentui-react-native/interactive-hooks to v0.14.3
+- Bump @fluentui-react-native/focus-zone to v0.9.8
+- Bump @fluentui-react-native/experimental-text to v0.7.17
+- Bump @fluentui-react-native/tokens to v0.11.8
+- Bump @fluentui-react-native/icon to v0.11.12
+- Bump @fluentui-react-native/adapters to v0.8.4
+
+## 0.4.26
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.16
+- Bump @fluentui-react-native/interactive-hooks to v0.14.2
+- Bump @fluentui-react-native/focus-zone to v0.9.7
+- Bump @fluentui-react-native/experimental-text to v0.7.16
+- Bump @fluentui-react-native/icon to v0.11.11
+
+## 0.4.25
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.15
+- Bump @fluentui-react-native/interactive-hooks to v0.14.1
+- Bump @fluentui-react-native/focus-zone to v0.9.6
+- Bump @fluentui-react-native/experimental-text to v0.7.15
+- Bump @fluentui-react-native/tokens to v0.11.7
+- Bump @fluentui-react-native/icon to v0.11.10
 
 ## 0.4.24
 
