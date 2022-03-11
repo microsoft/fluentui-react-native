@@ -62,7 +62,7 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.64",
+    "reactNativeVersion": "0.66",
     "kitType": "app",
     "bundle": {
       "targets": [

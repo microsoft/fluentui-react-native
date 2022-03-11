@@ -100,8 +100,8 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.64",
-    "reactNativeDevVersion": "0.64.0",
+    "reactNativeVersion": "^0.66",
+    "reactNativeDevVersion": "0.66.0",
     "kitType": "library",
     "capabilities": [
       "core-android",
