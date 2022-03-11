@@ -43,14 +43,14 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@office-iss/react-native-win32": "^0.64.8",
+    "@office-iss/react-native-win32": "^0.66.0",
     "@types/react-native": "^0.64.0",
-    "react": "17.0.1",
-    "react-native": "^0.64.3"
+    "react": "17.0.2",
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.0"
   },
   "author": "",
   "license": "MIT"

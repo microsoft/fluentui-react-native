@@ -39,9 +39,9 @@
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/memo-cache": "^1.1.7",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.0"
   }
 }

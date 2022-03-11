@@ -41,12 +41,12 @@
     "@types/jest": "^26.0.0",
     "@types/react": "^17.0.2",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react": "17.0.1",
-    "react-native": "^0.64.3",
+    "react": "17.0.2",
+    "react-native": "^0.66.0",
     "typescript": "4.5.4"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.0"
   }
 }

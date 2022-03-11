@@ -33,10 +33,10 @@
     "@fluentui-react-native/scripts": "^0.1.1"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.64.8",
-    "react-native": ">=0.64.3",
-    "react-native-windows": ">=0.64.3",
-    "react-native-macos": "^0.64.6"
+    "@office-iss/react-native-win32": "^0.66.0",
+    "react-native": ">=0.66.0",
+    "react-native-windows": ">=0.66.0",
+    "react-native-macos": "^0.66.0"
   },
   "author": "",
   "license": "MIT"

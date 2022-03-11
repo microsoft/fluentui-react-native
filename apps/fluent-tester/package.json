@@ -89,7 +89,7 @@
     "webdriverio": "^6.5.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.64.8",
+    "@office-iss/react-native-win32": "^0.66.0",
     "react": "17.0.2",
     "react-native": "^0.66.0-0",
     "react-native-macos": "^0.66.0-0",

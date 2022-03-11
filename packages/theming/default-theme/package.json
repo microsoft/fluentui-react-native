@@ -41,11 +41,11 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/react": "^17.0.2",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react": "17.0.1",
-    "react-native": "^0.64.3"
+    "react": "17.0.2",
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.0"
   }
 }
