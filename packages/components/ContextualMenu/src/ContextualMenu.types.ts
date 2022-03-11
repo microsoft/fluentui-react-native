@@ -47,7 +47,6 @@ export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'se
 
   /**
    * Whether to focus on the menu when mounted
-   * @platform win32
    */
   shouldFocusOnMount?: boolean;
 
