@@ -1,8 +1,21 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Mar 2022 00:34:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.39
+
+Fri, 11 Mar 2022 00:34:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.19.32
+- Bump @fluentui-react-native/contextual-menu to v0.16.10
+- Bump @fluentui-react-native/focus-zone to v0.9.9
+- Bump @fluentui-react-native/menu-button to v0.7.39
+- Bump @fluentui-react-native/radio-group to v0.14.28
+- Bump @fluentui-react-native/tabs to v0.6.28
 
 ## 0.27.38
 

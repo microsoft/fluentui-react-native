@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Mar 2022 00:34:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.9
+
+Fri, 11 Mar 2022 00:34:53 GMT
+
+### Patches
+
+- ContextualMenu macOS: Focus on menu rather than first menu item (sanajmi@microsoft.com)
 
 ## 0.9.8
 
