@@ -45,6 +45,8 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 	);
 }
 
+/// Performs a depth first search looking for the first key view in a parent view's view heirarchy.
+/// This function does not take into account the geometric position of the view.
 static NSView *GetFirstKeyViewWithin(NSView *parentView)
 {
 	for (NSView *view in [parentView subviews]) {
@@ -53,6 +55,24 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 		}
 
 		NSView *match = GetFirstKeyViewWithin(view);
+		if (match) {
+			return match;
+		}
+	}
+	return nil;
+}
+
+/// Performs a depth first search looking for the last key view in a parent view's view heirarchy.
+/// We find the last view by simply reversing the order of the subview array.
+/// This function does not take into account the geometric position of the view.
+static NSView *GetLastKeyViewWithin(NSView *parentView)
+{
+	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
+		if ([view canBecomeKeyView]) {
+			return view;
+		}
+
+		NSView *match = GetLastKeyViewWithin(view);
 		if (match) {
 			return match;
 		}
@@ -283,6 +303,21 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 - (NSView *)nextViewToFocusWithFallback:(FocusZoneAction)action
 {
+
+	// Special case if we're currently focused on self
+	NSView *firstResponder = GetFirstResponder([self window]);
+	if (self == firstResponder)
+	{
+		if (action == FocusZoneActionDownArrow)
+		{
+			return GetFirstKeyViewWithin(self);
+		}
+		else if (action == FocusZoneActionUpArrow)
+		{
+			return GetLastKeyViewWithin(self);
+		}
+	}
+
 	NSView *nextViewToFocus = [self nextViewToFocusForAction:action];
 
 	if (nextViewToFocus == nil)
@@ -367,18 +402,14 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 			&& (action == FocusZoneActionUpArrow || action == FocusZoneActionDownArrow))
 		|| (focusZoneDirection == FocusZoneDirectionNone))
 	{
-		[super keyDown:event];
+		passthrough = YES;
 	}
 	else
 	{
 		viewToFocus = [self nextViewToFocusWithFallback:action];
 	}
 
-	if (passthrough)
-	{
-		[super keyDown:event];
-	}
-	else if (viewToFocus != nil)
+	if (!passthrough && viewToFocus != nil)
 	{
 		[[self window] makeFirstResponder:viewToFocus];
 	}

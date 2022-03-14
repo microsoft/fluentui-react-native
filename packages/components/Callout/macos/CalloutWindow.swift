@@ -67,12 +67,13 @@ class CalloutWindow: NSWindow {
 
 	@objc private func dismissCallout() {
 		lifeCycleDelegate?.calloutWillDismiss(window: self)
-
+		orderOut(self)
+	}
+	
+	deinit {
 		if let monitor = mouseEventMonitor {
 			NSEvent.removeMonitor(monitor)
 		}
-
-		orderOut(self)
 	}
 
 	private var mouseEventMonitor: Any?

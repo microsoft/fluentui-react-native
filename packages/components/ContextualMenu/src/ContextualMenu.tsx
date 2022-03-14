@@ -42,19 +42,19 @@ export const ContextualMenu = compose<ContextualMenuType>({
     const focusZoneRef = React.useRef<IFocusable>(null);
 
     React.useLayoutEffect(() => {
-      if (Platform.OS === 'macos') {
+      if (Platform.OS === 'macos' && shouldFocusOnMount) {
         setTimeout(() => {
           focusZoneRef.current?.focus();
         }, 0);
       }
-    }, []);
+    }, [shouldFocusOnMount]);
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
     const data = useSelectedKey(null, userProps.onItemClick);
 
     const dismissCallback = React.useCallback(() => {
       userProps.onDismiss();
-      setShowMenu(false);
+      setShowMenu?.(false);
     }, [setShowMenu, userProps.onDismiss]);
 
     const [containerFocus, setContainerFocus] = React.useState(true);
@@ -78,16 +78,12 @@ export const ContextualMenu = compose<ContextualMenuType>({
         setInitialFocus: shouldFocusOnMount,
         ...rest,
       },
-      container: Platform.select({
-        macos: {},
-        default: {
-          // win32
-          accessible: shouldFocusOnContainer,
-          focusable: shouldFocusOnContainer && containerFocus,
-          onBlur: toggleContainerFocus,
-          style: { maxHeight: maxHeight, width: maxWidth },
-        },
-      }),
+      container: {
+        accessible: shouldFocusOnContainer,
+        focusable: shouldFocusOnContainer && containerFocus,
+        onBlur: toggleContainerFocus,
+        style: { maxHeight: maxHeight, width: maxWidth },
+      },
       scrollView: {
         contentContainerStyle: {
           flexDirection: 'column',
@@ -96,7 +92,9 @@ export const ContextualMenu = compose<ContextualMenuType>({
         showsVerticalScrollIndicator: true,
       },
       focusZone: {
+        enableFocusRing: false,
         componentRef: focusZoneRef,
+        defaultTabbableElement: focusZoneRef,
         focusZoneDirection: 'vertical',
       },
     });

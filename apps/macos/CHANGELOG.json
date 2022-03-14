@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tester-macos",
   "entries": [
     {
+      "date": "Fri, 11 Mar 2022 00:34:53 GMT",
+      "tag": "@fluentui-react-native/tester-macos_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-macos",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.6",
+            "commit": "489339a0f6ebd9a4687c1c84e9bf8d274d8806d5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Mar 2022 01:43:50 GMT",
+      "tag": "@fluentui-react-native/tester-macos_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-macos",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.5",
+            "commit": "bac82a123f7eb99e0d2934f45cadf5853a51e95a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/tester-macos_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-macos",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.4",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 04 Mar 2022 23:43:10 GMT",
       "tag": "@fluentui-react-native/tester-macos_v0.0.1",
       "version": "0.0.1",
