@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Refactor component",
-  "packageName": "@fluentui-react-native/experimental-checkbox",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
