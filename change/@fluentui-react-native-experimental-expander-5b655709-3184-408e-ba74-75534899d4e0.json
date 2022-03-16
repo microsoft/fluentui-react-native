@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "fixes winUI dependency",
-  "packageName": "@fluentui-react-native/experimental-expander",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
