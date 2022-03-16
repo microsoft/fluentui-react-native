@@ -20,17 +20,20 @@ export const TabsItem = compose<TabItemType>({
     indicator: View,
     content: Text,
   },
-  render: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
+  useRender: (userProps: TabsItemProps, useSlots: UseSlots<TabItemType>) => {
     const tabsItem = useTabsItem(userProps);
 
-    if (!tabsItem.state) return null;
-
     const iconProps = createIconProps(userProps.icon);
+    const context = React.useContext(TabsContext);
+
     // Grab the styled slots.
     const Slots = useSlots(userProps, (layer) => tabsItem.state[layer] || userProps[layer]);
     // Return the handler to finish render.
     return (final: TabsItemProps, ...children: React.ReactNode[]) => {
-      const context = React.useContext(TabsContext);
+      if (!tabsItem.state) {
+        return null;
+      }
+
       const { icon, itemKey, itemCount, headerText, ...mergedProps } = mergeProps(tabsItem.props, final);
 
       let containerText = headerText;

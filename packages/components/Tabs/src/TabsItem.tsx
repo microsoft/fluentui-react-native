@@ -71,16 +71,20 @@ export const TabsItem = compose<TabsItemType>({
         headerText: !!headerText || itemCount !== undefined,
       },
     };
+    const refWithFocus = useViewCommandFocus(componentRef);
+    const buttonRef = Platform.OS === 'macos' ? componentRef : refWithFocus;
 
-    const buttonRef = Platform.OS === 'macos' ? componentRef : useViewCommandFocus(componentRef);
-
-    /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
-    element in Tabs. Since the componentRef isn't generated until after initial render,
-    we must update it once here. */
+    /**
+     * We use the componentRef of the currently selected tabsItem to maintain the default tabbable
+     * element in Tabs. Since the componentRef isn't generated until after initial render,
+     * we must update it once here.
+     * Since this is meant to only be run once, surpressing lint error
+     */
     React.useEffect(() => {
       if (itemKey == info.selectedKey) {
         info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
@@ -95,7 +99,7 @@ export const TabsItem = compose<TabsItemType>({
             break;
         }
       },
-      [info, itemKey],
+      [changeSelection],
     );
 
     const countText = itemCount !== undefined ? ` (${itemCount})` : '';
@@ -123,6 +127,7 @@ export const TabsItem = compose<TabsItemType>({
 
   render: (Slots: ISlots<TabsItemSlotProps>, renderData: TabsItemRenderData, ...children: React.ReactNode[]) => {
     const info = renderData.state!.info;
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const context = React.useContext(TabsContext);
     // Sets the view that belongs to a TabItem.
     context.views.set(info.key, children);

@@ -11,7 +11,7 @@ const testImage = require('./../../../../assets/testicon.png');
 const testTtf = require('./../../../../assets/Font_Awesome_900.otf');
 import TestSvg from './assets/test.svg';
 
-const icons: React.FunctionComponent = () => {
+const Icons: React.FunctionComponent = () => {
   const fontCustomFontProps: FontIconProps = {
     fontFamily: 'Font Awesome 5 Free',
     fontSrcFile: testTtf,
@@ -94,7 +94,7 @@ const iconSections: TestSection[] = [
   {
     name: 'Icon',
     testID: ICON_TESTPAGE,
-    component: icons,
+    component: Icons,
   },
   {
     name: 'Icon for E2E Testing',

@@ -2,6 +2,24 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Wed, 09 Mar 2022 01:43:50 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.9.12",
+      "version": "0.9.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "bac82a123f7eb99e0d2934f45cadf5853a51e95a",
+            "comment": {
+              "title": "",
+              "value": ""
+            }
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 03 Mar 2022 20:20:09 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.9.11",
       "version": "0.9.11",

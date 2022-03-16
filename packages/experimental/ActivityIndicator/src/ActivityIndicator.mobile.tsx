@@ -26,7 +26,7 @@ export const ActivityIndicator = compose<FluentActivityIndicatorType>({
     root: View,
     svg: AnimatedSvg,
   },
-  render: (props: ActivityIndicatorProps, useSlots: UseSlots<FluentActivityIndicatorType>) => {
+  useRender: (props: ActivityIndicatorProps, useSlots: UseSlots<FluentActivityIndicatorType>) => {
     const Slots = useSlots(props);
     const slotProps = useStyling(props);
 

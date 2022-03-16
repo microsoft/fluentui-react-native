@@ -10,7 +10,7 @@ import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
 
-const tabs: React.FunctionComponent = () => {
+const TabsMainTest: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
@@ -28,7 +28,7 @@ const tabs: React.FunctionComponent = () => {
   );
 };
 
-const disabledTabs: React.FunctionComponent = () => {
+const DisabledTabs: React.FunctionComponent = () => {
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
@@ -46,7 +46,7 @@ const disabledTabs: React.FunctionComponent = () => {
   );
 };
 
-const tabsCountIcon: React.FunctionComponent = () => {
+const TabsCountIcon: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -69,7 +69,7 @@ const tabsCountIcon: React.FunctionComponent = () => {
   );
 };
 
-const onTabsClickEvent: React.FunctionComponent = () => {
+const TabsClickEventTest: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home_key');
 
   const onTabsClick = React.useCallback(
@@ -97,7 +97,7 @@ const onTabsClickEvent: React.FunctionComponent = () => {
   );
 };
 
-const tabsChangingViews: React.FunctionComponent = () => {
+const TabsChangingViews: React.FunctionComponent = () => {
   // If User wants to control what gets rendered example
   const [selectedKey, setSelectedKey] = React.useState('home');
 
@@ -124,7 +124,7 @@ const tabsChangingViews: React.FunctionComponent = () => {
   );
 };
 
-const tabsRenderSeparately: React.FunctionComponent = () => {
+const TabsRenderSeparately: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('rectangleRed');
 
   const onTabsClick = React.useCallback(
@@ -159,7 +159,7 @@ const tabsRenderSeparately: React.FunctionComponent = () => {
   );
 };
 
-const tabsSettingSelectedKey: React.FunctionComponent = () => {
+const TabsSettingSelectedKey: React.FunctionComponent = () => {
   // If user wants to programmatically set the selectedKey to control the view
   const [selectedKey, setSelectedKey] = React.useState('home');
   const [currTabItemIndex, setCurrTabItemIndex] = React.useState(0);
@@ -189,7 +189,7 @@ const tabsSettingSelectedKey: React.FunctionComponent = () => {
   );
 };
 
-const tabsWithFlexibility: React.FunctionComponent = () => {
+const TabsWithFlexibility: React.FunctionComponent = () => {
   const [selectedKey, setSelectedKey] = React.useState('home');
 
   const goHomeTab = React.useCallback(() => {
@@ -225,31 +225,31 @@ const tabsSections: TestSection[] = [
   {
     name: 'Default Tabs',
     testID: EXPERIMENTAL_TABS_TESTPAGE,
-    component: tabs,
+    component: TabsMainTest,
   },
   {
     name: 'Tabs with disabled',
-    component: disabledTabs,
+    component: DisabledTabs,
   },
   {
     name: 'Trigger onTabsClick event',
-    component: onTabsClickEvent,
+    component: TabsClickEventTest,
   },
   {
     name: 'User Custom Render',
-    component: tabsChangingViews,
+    component: TabsChangingViews,
   },
   {
     name: 'Render Content Separately',
-    component: tabsRenderSeparately,
+    component: TabsRenderSeparately,
   },
   {
     name: 'Override Selected Key',
-    component: tabsSettingSelectedKey,
+    component: TabsSettingSelectedKey,
   },
   {
     name: 'More Flexibility',
-    component: tabsWithFlexibility,
+    component: TabsWithFlexibility,
   },
   {
     name: 'E2E Testing Experimental Tabs',
@@ -260,7 +260,7 @@ const tabsSections: TestSection[] = [
 if (Platform.OS !== 'windows') {
   tabsSections.push({
     name: 'Count and Icon',
-    component: tabsCountIcon,
+    component: TabsCountIcon,
   });
 }
 

@@ -5,7 +5,7 @@ import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ERadioGroupTest } from './RadioGroupE2ETest';
 
-const basicRadioGroup: React.FunctionComponent = () => {
+const BasicRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
   const onChange = (key: string) => {
     console.log(key);
@@ -56,7 +56,7 @@ const radioGroupSections: TestSection[] = [
   {
     name: 'Basic RadioGroup Usage',
     testID: RADIOGROUP_TESTPAGE,
-    component: basicRadioGroup,
+    component: BasicRadioGroup,
   },
   {
     name: 'RadioGroup for E2E Testing',

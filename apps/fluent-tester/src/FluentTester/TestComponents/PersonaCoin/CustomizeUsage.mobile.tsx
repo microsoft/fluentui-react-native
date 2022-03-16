@@ -73,7 +73,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       iconStrokeWidth: iconStrokeWidth,
     };
     return PersonaCoin.customize({ tokens });
-  }, [coinColor, textColor, showRings, coinSize, iconSize, iconStrokeWidth]);
+  }, [coinColor, textColor, coinSize, iconSize, iconStrokeWidth]);
 
   return (
     <View style={{ flexDirection: 'column', padding: 10, backgroundColor: showColoredBackground ? 'gray' : 'transparent' }}>

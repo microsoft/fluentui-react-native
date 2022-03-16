@@ -41,7 +41,7 @@ export const Button = compose<ButtonType>({
     icon: Icon,
     content: Text,
   },
-  render: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
+  useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots

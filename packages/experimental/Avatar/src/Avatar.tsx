@@ -126,7 +126,7 @@ export const Avatar = compose<AvatarType>({
       ['size'],
     ),
   },
-  render: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
+  useRender: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
 
     return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} />;
