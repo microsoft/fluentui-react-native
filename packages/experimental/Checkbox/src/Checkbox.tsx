@@ -34,15 +34,16 @@ export const Checkbox = compose<CheckboxType>({
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
+      const labelComponent = (
+        <React.Fragment>
+          <Slots.label key="label">{label}</Slots.label>
+          {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
+        </React.Fragment>
+      );
 
       return (
         <Slots.root {...mergedProps}>
-          {Checkbox.state.labelIsBefore && (
-            <React.Fragment>
-              <Slots.label key="label">{label}</Slots.label>
-              {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
-            </React.Fragment>
-          )}
+          {Checkbox.state.labelIsBefore && labelComponent}
           <Slots.checkbox>
             <Slots.checkmark key="checkmark" viewBox="0 0 11 8">
               <Path
@@ -51,12 +52,7 @@ export const Checkbox = compose<CheckboxType>({
               />
             </Slots.checkmark>
           </Slots.checkbox>
-          {!Checkbox.state.labelIsBefore && (
-            <React.Fragment>
-              <Slots.label key="label">{label}</Slots.label>
-              {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
-            </React.Fragment>
-          )}
+          {!Checkbox.state.labelIsBefore && labelComponent}
         </Slots.root>
       );
     };
