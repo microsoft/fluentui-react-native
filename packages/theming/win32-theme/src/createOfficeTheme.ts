@@ -45,7 +45,7 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
       return createBrandedThemeWithAlias(ref.themeName, theme);
     },
     (theme: Theme) => {
-      if (!theme.host.palette) {
+      if (!theme.host.palette || ref.themeName === 'HighContrast') {
         return {};
       }
 
