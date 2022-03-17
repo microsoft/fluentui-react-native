@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add documentation",
-  "packageName": "@fluentui-react-native/merge-props",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

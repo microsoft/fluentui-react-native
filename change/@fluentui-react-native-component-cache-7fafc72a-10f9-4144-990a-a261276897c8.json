@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add documentation",
-  "packageName": "@fluentui-react-native/component-cache",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
