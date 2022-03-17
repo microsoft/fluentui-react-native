@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Tools and mocks for testing components using jest and enzyme",
   "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "private": true,
   "scripts": {
@@ -17,14 +17,19 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/utils/test-tools"
+  },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.14.0 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
-    "@uifabricshared/build-native": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.1",
     "react-native": "^0.64.3"
   },

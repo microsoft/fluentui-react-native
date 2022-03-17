@@ -1,34 +1,45 @@
 import * as React from 'react';
-import { ExperimentalCheckboxTestPageId } from './consts';
+import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
-function onChangeUncontrolled(isChecked: boolean) {
+function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
 
-const basicCheckbox: React.FunctionComponent = () => {
+const BasicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
       <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <Checkbox
-        label="Checked checkbox (uncontrolled)"
-        onChange={onChangeUncontrolled}
-        defaultChecked={true}
-        accessibilityLabel="Hello there"
-      />
-      <Checkbox label="Disabled checkbox" onChange={onChangeUncontrolled} defaultChecked={false} disabled={true} />
-      <Checkbox label="Disabled checked checkbox" onChange={onChangeUncontrolled} defaultChecked={true} disabled={true} />
-      <Checkbox label="Checkbox will display a tooltip" onChange={onChangeUncontrolled} tooltip="This is a tooltip" />
+      <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
+      <Checkbox label="Disabled checkbox" disabled />
+      <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+      <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
+      <Checkbox label="A circular checkbox" shape="circular" />
+      <Checkbox label="A checkbox with label placed before" labelPosition="before" />
+      <Checkbox label="A required checkbox" required />
     </View>
   );
 };
 
-const otherCheckbox: React.FunctionComponent = () => {
+const SizeCheckbox: React.FunctionComponent = () => {
+  return (
+    <View>
+      <Checkbox tooltip="Medium checkbox" size="medium" />
+      <Checkbox tooltip="Large checkbox" size="large" />
+      <Checkbox label="Medium checkbox" size="medium" />
+      <Checkbox label="Large checkbox" size="large" />
+    </View>
+  );
+};
+
+const OtherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -43,41 +54,39 @@ const otherCheckbox: React.FunctionComponent = () => {
     <View>
       <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
       <Checkbox
-        label="Checkbox rendered with boxSide 'end' (controlled)"
+        label="Checkbox rendered with labelPosition 'before' (controlled)"
         onChange={onChangeControlled2}
-        boxSide="end"
+        labelPosition="before"
         checked={Boolean(isCheckedControlled2)}
       />
+      <Checkbox label="A required checkbox with other required text" required="**" />
     </View>
   );
 };
 
-const tokenCheckbox: React.FunctionComponent = () => {
-  const CircularCheckbox = Checkbox.customize({ borderRadius: 50 });
+const CircleColorCheckbox = Checkbox.customize({
+  checkboxBackgroundColor: 'white',
+  checked: {
+    checkboxBackgroundColor: 'green',
+    checkboxBorderColor: 'green',
+    checkmarkColor: 'white',
+  },
+  focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+  hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
+  pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
+});
 
-  const CircleColorCheckbox = Checkbox.customize({
-    borderRadius: 50,
-    checkboxBackgroundColor: 'white',
-    checked: {
-      checkboxBackgroundColor: 'green',
-      checkboxBorderColor: 'green',
-      checkmarkColor: 'white',
-    },
-    focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
-  });
+const HoverCheckbox = Checkbox.customize({
+  checked: {
+    checkboxBackgroundColor: 'black',
+    checkmarkColor: 'white',
+  },
+  hovered: {
+    checkmarkOpacity: 1,
+  },
+});
 
-  const HoverCheckbox = Checkbox.customize({
-    checked: {
-      checkboxBackgroundColor: 'black',
-      checkmarkColor: 'white',
-    },
-    hovered: {
-      checkmarkOpacity: 1,
-    },
-  });
-
+const TokenCheckbox: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
@@ -99,13 +108,17 @@ const tokenCheckbox: React.FunctionComponent = () => {
   };
   return (
     <View>
-      <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
       <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <CircleColorCheckbox label="A circular token-customized checkbox" onChange={onChangeUncontrolled} defaultChecked={true} />
+      <CircleColorCheckbox
+        label="A circular token-customized checkbox"
+        shape="circular"
+        onChange={onChangeUncontrolled}
+        defaultChecked={true}
+      />
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
-        boxSide="end"
+        labelPosition="before"
         defaultChecked={false}
       />
 
@@ -133,23 +146,31 @@ const tokenCheckbox: React.FunctionComponent = () => {
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
-    testID: ExperimentalCheckboxTestPageId,
-    component: basicCheckbox,
+    testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
+    component: BasicCheckbox,
+  },
+  {
+    name: 'Size Checkboxes',
+    component: SizeCheckbox,
   },
   {
     name: 'Other Implementations',
-    component: otherCheckbox,
+    component: OtherCheckbox,
   },
   {
     name: 'Token Customized Checkboxes',
-    component: tokenCheckbox,
+    component: TokenCheckbox,
+  },
+  {
+    name: 'E2E Testing for Experimental Checkbox',
+    component: E2ECheckboxExperimentalTest,
   },
 ];
 
 export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
-    uwpStatus: 'Experimental',
+    uwpStatus: 'N/A',
     iosStatus: 'N/A',
     macosStatus: 'Experimental',
     androidStatus: 'N/A',

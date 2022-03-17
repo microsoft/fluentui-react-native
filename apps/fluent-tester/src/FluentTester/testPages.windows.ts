@@ -1,7 +1,8 @@
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
-import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
+// import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
@@ -14,9 +15,19 @@ import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestC
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
-import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 
 export const tests = [
+  {
+    name: 'ActivityIndicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
+  {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
+  },
   {
     name: 'Button Test',
     component: ButtonTest,
@@ -26,11 +37,6 @@ export const tests = [
     name: 'Callout Test',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON,
-  },
-  {
-    name: 'Experimental Button',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Pressable Test',
@@ -65,11 +71,12 @@ export const tests = [
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
-  {
-    name: 'Experimental Checkbox',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
-  },
+  // GH#935 Temporarily disabling while SVGs don't work in windows
+  // {
+  //   name: 'Experimental Checkbox',
+  //   component: ExperimentalCheckboxTest,
+  //   testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
+  // },
   {
     name: 'Tabs Test',
     component: TabsTest,

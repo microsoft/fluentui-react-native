@@ -1,9 +1,9 @@
 /** @jsx withSlots */
 import { useRef, useEffect, useMemo, useCallback } from 'react';
-import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg } from 'react-native-svg';
+import { Circle, ClipPath, Defs, LinearGradient, Rect, Stop, Svg, G, TransformObject } from 'react-native-svg';
 import { shimmerName, ShimmerProps, ShimmerType } from './Shimmer.types';
 import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
-import { Animated } from 'react-native';
+import { Animated, I18nManager } from 'react-native';
 import { stylingSettings } from './Shimmer.styling';
 import assertNever from 'assert-never';
 
@@ -14,7 +14,7 @@ export const Shimmer = compose<ShimmerType>({
   slots: {
     root: Svg,
   },
-  render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
+  useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     const Slots = useSlots(props);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
@@ -95,6 +95,9 @@ export const Shimmer = compose<ShimmerType>({
         }
       }
 
+      // Flip the SVG if we are running in RTL
+      const rtlTransfrom: TransformObject = I18nManager.isRTL ? { translateX: memoizedShimmerData.containerWidth, scaleX: -1 } : {};
+
       return (
         <Slots.root {...mergedProps}>
           <Defs>
@@ -109,14 +112,16 @@ export const Shimmer = compose<ShimmerType>({
             </AnimatedLinearGradient>
             <ClipPath id="shimmerView">{rows}</ClipPath>
           </Defs>
-          <Rect
-            x="0"
-            y="0"
-            width={memoizedShimmerData.containerWidth}
-            height={memoizedShimmerData.containerHeight}
-            fill="url(#gradient)"
-            clipPath="url(#shimmerView)"
-          />
+          <G transform={rtlTransfrom}>
+            <Rect
+              x="0"
+              y="0"
+              width={memoizedShimmerData.containerWidth}
+              height={memoizedShimmerData.containerHeight}
+              fill="url(#gradient)"
+              clipPath="url(#shimmerView)"
+            />
+          </G>
         </Slots.root>
       );
     };

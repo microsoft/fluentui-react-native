@@ -13,14 +13,9 @@ export type DrawerSlotProps = {
   root: DrawerProps;
 };
 
+export interface DrawerTokens {}
 
-export interface DrawerTokens {
-
-}
-
-export interface DrawerState {
-
-}
+export interface DrawerState {}
 
 export interface DrawerInfo {
   props: DrawerProps;

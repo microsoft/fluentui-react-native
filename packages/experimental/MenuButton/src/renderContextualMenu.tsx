@@ -1,5 +1,5 @@
 /* @jsxFrag React.Fragment */
-import React from 'react';
+import * as React from 'react';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu, ContextualMenuProps } from '@fluentui-react-native/contextual-menu';
 import { MenuButtonItemProps } from './MenuButton.types';
 
@@ -7,22 +7,34 @@ export const renderContextualMenu = (contextualMenu: ContextualMenuProps, menuIt
   return (
     <ContextualMenu {...contextualMenu}>
       {menuItems?.map((menuItem) => {
-        const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
-        return hasSubmenu ? (
-          <>
-            <SubmenuItem componentRef={componentRef} {...items} />
-            {showSubmenu && (
-              <Submenu target={componentRef} {...submenuProps}>
-                {submenuItems?.map((submenuItem) => (
-                  <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-                ))}
-              </Submenu>
-            )}
-          </>
-        ) : (
-          <ContextualMenuItem key={items.itemKey} {...items} />
-        );
+        return menuItem.hasSubmenu ? <SubMenuItem {...menuItem} /> : <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />;
       })}
     </ContextualMenu>
+  );
+};
+
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+  const [showSubmenuState, setShowSubmenu] = React.useState(false);
+  const toggleShowSubmenu = React.useCallback(() => {
+    setShowSubmenu(!showSubmenuState);
+  }, [showSubmenuState, setShowSubmenu]);
+  const onDismissSubmenu = React.useCallback(() => {
+    setShowSubmenu(false);
+  }, [setShowSubmenu]);
+
+  const { showSubmenu = showSubmenuState, submenuProps, componentRef, submenuItems, onHoverIn = toggleShowSubmenu, ...restItems } = props;
+  const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
+
+  return (
+    <>
+      <SubmenuItem componentRef={componentRef} onHoverIn={onHoverIn} {...restItems} />
+      {showSubmenu && (
+        <Submenu target={componentRef} onDismiss={onDismiss} setShowMenu={setShowMenu} {...restSubmenuProps}>
+          {submenuItems?.map((submenuItem) => (
+            <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
+          ))}
+        </Submenu>
+      )}
+    </>
   );
 };

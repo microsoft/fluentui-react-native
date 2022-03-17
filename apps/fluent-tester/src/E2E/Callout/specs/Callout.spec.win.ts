@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Callout Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Callout test page', () => {
@@ -18,7 +18,8 @@ describe('Callout Testing Initialization', function () {
     NavigateAppPage.clickAndGoToCalloutPage();
     CalloutPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(CalloutPageObject.isPageLoaded()).toBeTruthy();
+    expect(CalloutPageObject.isPageLoaded()).toBeTruthy(CalloutPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 

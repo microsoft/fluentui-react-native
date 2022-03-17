@@ -21,7 +21,7 @@ export const MenuButton = compose<MenuButtonType>({
   slotProps: {
     root: {},
   },
-  render: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
+  useRender: (props: MenuButtonProps, useSlots: UseSlots<MenuButtonType>) => {
     const { menuItems, content, icon, disabled, onItemClick, contextualMenu, style, appearance, ...rest } = props;
 
     const stdBtnRef = useRef(null);
@@ -34,13 +34,13 @@ export const MenuButton = compose<MenuButtonType>({
     }, [showContextualMenu, setShowContextualMenu]);
 
     const buttonProps = {
-      content,
       disabled,
       appearance,
       icon,
       style,
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
+      iconOnly: content ? false : true,
       ...rest,
     };
 
@@ -52,28 +52,6 @@ export const MenuButton = compose<MenuButtonType>({
       ...contextualMenu,
     };
 
-    const menuItemsUpdated = menuItems?.map((item) => {
-      if (item.hasSubmenu) {
-        const [showSubmenu, setShowSubmenu] = useState(false);
-        const toggleShowSubmenu = useCallback(() => {
-          setShowSubmenu(!showSubmenu);
-        }, [showSubmenu, setShowSubmenu]);
-        const onDismissSubmenu = useCallback(() => {
-          setShowSubmenu(false);
-        }, [setShowSubmenu]);
-        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
-        const menuItemUpdated = {
-          ...restItems,
-          onHoverIn,
-          showSubmenu: item.showSubmenu ?? showSubmenu,
-          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
-        };
-        return menuItemUpdated;
-      }
-      return item;
-    });
-
     const Slots = useSlots(props);
 
     return () => {
@@ -82,15 +60,14 @@ export const MenuButton = compose<MenuButtonType>({
           <svg width="12" height="16" viewBox="0 0 11 6" color=${chevronColor}>
             <path fill='currentColor' d='M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z' />
           </svg>`;
-      const { content, ...restButtonProps } = buttonProps;
 
       return (
         <Slots.root>
-          <Button {...restButtonProps}>
+          <Button {...buttonProps}>
             {content}
             <Slots.chevronIcon xml={chevronXml} />
           </Button>
-          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItemsUpdated)}
+          {showContextualMenu && renderContextualMenu(contextualMenuProps, menuItems)}
         </Slots.root>
       );
     };

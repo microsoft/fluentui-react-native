@@ -5,17 +5,13 @@
   "private": "true",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native",
-    "directory": "eslint-config-rules"
+    "url": "https://github.com/microsoft/fluentui-react-native",
+    "directory": "packages/framework/eslint-config-rules"
   },
   "main": "./eslintrc.js",
-  "scripts": {
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
   "license": "MIT",
-  "dependencies": {
-    "@rnx-kit/eslint-plugin": "^0.2.0",
+  "devDependencies": {
+    "@rnx-kit/eslint-plugin": "^0.2.8",
     "eslint": "^8.0.0",
     "eslint-plugin-jest": "^25.0.0"
   },

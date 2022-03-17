@@ -1,19 +1,11 @@
 import { contextualMenuName, ContextualMenuType } from './ContextualMenu.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
+import { I18nManager } from 'react-native';
 
 export const settings: IComposeSettings<ContextualMenuType> = [
   {
     tokens: {
-      backgroundColor: 'menuBackground',
-      beakWidth: 20,
-      borderColor: 'buttonBorder',
-      borderWidth: 1,
-      directionalHint: 'bottonLeftEdge',
-      gapSpace: 0,
-      minPadding: 0,
-    },
-    root: {
-      accessibilityRole: 'menu',
+      directionalHint: I18nManager.isRTL ? 'bottomRightEdge' : 'bottonLeftEdge',
     },
     container: {
       style: {

@@ -85,9 +85,6 @@ typings/
 # dotenv environment variables file
 .env
 
-# next.js build output
-.next
-
 # document generation directory
 .docz
 

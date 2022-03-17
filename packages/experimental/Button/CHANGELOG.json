@@ -2,6 +2,1237 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.8",
+      "version": "0.15.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.8",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 23:43:10 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.7",
+      "version": "0.15.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.7",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 03 Mar 2022 20:20:09 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.6",
+      "version": "0.15.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.6",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Mar 2022 20:18:31 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.5",
+      "version": "0.15.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.5",
+            "commit": "6b5a35c07a9b7da4df7f250a4607f4fc6927d273"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Feb 2022 22:41:19 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.4",
+      "version": "0.15.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.4",
+            "commit": "5c31a1d16ccb9e334f6ced422cde98edeef43d4f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Feb 2022 23:27:11 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.3",
+      "version": "0.15.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.3",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Feb 2022 02:13:07 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.2",
+      "version": "0.15.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.2",
+            "commit": "616c894f75769553fe97f8f2d4550bbd615f2396"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Feb 2022 01:22:02 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.1",
+      "version": "0.15.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.1",
+            "commit": "039a993d13ae01ff2212e8b91295d1ed5676c82d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Feb 2022 22:48:31 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "ffd67ea594694e73b71776a10eb46ec9ed390734",
+            "comment": "Fix up index files, mark experimental button package deprecated"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.22.0",
+            "commit": "914bc9d1a60f7b2d0dd8e1fb9a8493118e7b8ab9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 14 Feb 2022 23:29:33 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "none": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "368fe5f4565442196f236e421b1c37c79556d2dd",
+            "comment": "update button tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Feb 2022 20:14:50 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "dc350844d09e9e8cf23c5b68bd1222308068f6dc",
+            "comment": "Some edits"
+          }
+        ],
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "88efa3818f1df807f2954ab5082b0e40794682f7",
+            "comment": "useToggleButton and implement accessibilityAction/onAccessibilityAction"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.13.0",
+            "commit": "f7264338409e4a7e4cbb4f4fb815d4ab32276d8a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 08 Feb 2022 05:13:39 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "none": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "80492a2aae581602694d82ff32793f0086654083",
+            "comment": "high contrast support"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Feb 2022 20:31:52 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "bd111f6fa337a645cf17d1b335132f7b8fca9a0a",
+            "comment": "Fix block for CompoundButton"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 22:09:55 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "a1dd8867407ad003483a0ca88dbaa38340ee1679",
+            "comment": "Update documentation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 02:29:07 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa",
+            "comment": {
+              "title": "",
+              "value": ""
+            }
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.11",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.12",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.12",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.6",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.12.2",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.12.0",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Jan 2022 20:52:39 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "7444b2ae84923594dc3c835b2b6d60dd75913410",
+            "comment": "Documentation additions"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 26 Jan 2022 20:31:03 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4",
+            "comment": "Revert \"Add ref to v1 Button (#1218)\""
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.12.1",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 26 Jan 2022 17:02:27 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.21",
+      "version": "0.11.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.12.0",
+            "commit": "883ef66b94a1efb5d429c5ecad015f312be3b4c3"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Jan 2022 21:55:30 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.20",
+      "version": "0.11.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "ca505d0e9d6b3286c0025bde70305f4bbb49a7f2",
+            "comment": "Default to onKeyDown on macOS"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.15",
+            "commit": "ca505d0e9d6b3286c0025bde70305f4bbb49a7f2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Jan 2022 16:48:23 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.19",
+      "version": "0.11.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.14",
+            "commit": "f522217240f2b510443e2f898d212df2ee114398"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Jan 2022 21:05:25 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.18",
+      "version": "0.11.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "e5ac2f4d57c853844028510cd658c304ff22698d",
+            "comment": "Fixed Toggle selected state for the Button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Jan 2022 20:49:22 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.17",
+      "version": "0.11.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "c648bedc2d3615caf496a61cd0e6d889498b7b01",
+            "comment": "Font fixes"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.4",
+            "commit": "710b23766ae28cd0e62b6c2c0eab33324f3b2740"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jan 2022 21:49:07 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.16",
+      "version": "0.11.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.10",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.11",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.11",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.5",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.13",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.6",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jan 2022 01:00:02 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.15",
+      "version": "0.11.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "ef3732e4e5b82e3f324ca0eed4b12b6617788299",
+            "comment": "fix disabled button"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.9",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.10",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.10",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.4",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.12",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.3",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.5",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          }
+        ],
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 07 Jan 2022 21:27:06 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.14",
+      "version": "0.11.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "25a515f38b1638709a25db462a79dfef6adeb7b0",
+            "comment": "Fix styling order"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Jan 2022 23:14:38 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.13",
+      "version": "0.11.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.8",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.9",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.9",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.3",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.11",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.4",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.4",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Jan 2022 21:30:08 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.12",
+      "version": "0.11.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.7",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.8",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.8",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.2",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.10",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.3",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Jan 2022 19:57:13 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.11",
+      "version": "0.11.11",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "63c1592fcbf701177539c8115c1ec5dd0779e823",
+            "comment": "Migration details from fluentui"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 05 Jan 2022 23:53:54 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.11",
+      "version": "0.11.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.9",
+            "commit": "8622748288aa587df7a433e6741b5d3b9c53655b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 04 Jan 2022 23:05:12 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.10",
+      "version": "0.11.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "e1b58bc5c15bd8e340a1181d17ed8e9b58a216d5",
+            "comment": "Add checks for mutually exclusive props"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "63bdbdb4e34834e7ae2ded3a39d38fe530fd30c0",
+            "comment": "Fix spacing around icon"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.2",
+            "commit": "166402412a975f4890c0e95606ffea9606f818ed"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Dec 2021 20:56:31 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.9",
+      "version": "0.11.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b",
+            "comment": "Remove content prop"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.6",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.7",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.7",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.1",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.8",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:56:00 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "f4a5b4f5c9c190400e3e34c4a33b3ed30696d41e",
+            "comment": "Add repository property to all package.json files"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.5",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.6",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.6",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.0",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.7",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/styling-utils to v0.3.1",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.3",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          }
+        ],
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "not available",
+            "comment": "Add more documentation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:02:16 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "90d041b6763636c1470dd52ee2318b5651f8abc8",
+            "comment": "Add more documentation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 19 Dec 2021 05:07:36 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.6",
+            "commit": "caa9260512544269d7e177c2d35f15b7f513965b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Dec 2021 04:15:04 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "afoxman@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789",
+            "comment": "Update to TypeScript 4.5.4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.4",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.10.4",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.2",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Dec 2021 01:46:05 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "402ab46c47688c64629bc0366b1b1e0510111926",
+            "comment": "Fix disabled button behavior"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "b9ea5eb1409f37305169f75398fa7f41229cefbd",
+            "comment": "Revert \"Remove content prop (#1257)\""
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.3",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.10.3",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 19:53:20 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b",
+            "comment": "Remove content prop"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.2",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.10.2",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 14:04:45 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "0c4428511ad3bac757c4ca7777b96daa8a361fcf",
+            "comment": "Fixed duplicated content and icon for CompoundButton"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 01:26:42 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.1",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.2",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.2",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.10.1",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.2",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.1",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Dec 2021 23:00:56 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Dec 2021 19:10:28 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "6b68e97c87213703c2e74fa49516d13987a0f4e8",
+            "comment": "Initial commit for FabButton"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "80accd6a59fb7c2210d88ab97a57f65a7e650417",
+            "comment": "Rename componentRef to ref"
+          },
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "2439f994e7b77b6e53358dd05310cb81079bde9d",
+            "comment": "Removed content prop from Toggle, Compound Buttons and FAB"
+          },
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "02749c244d75f68941afc6343c654438df07cebc",
+            "comment": "Removed content prop from Button component."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.0",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.10.0",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.0",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          }
+        ],
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "82a73fb981c00cbac061e81499d7d03a2570ba41",
+            "comment": "Initial migration file for button"
+          }
+        ],
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "284a7717805f6d672b5de0a1a92232f090f58b19",
+            "comment": "Enable native focus visuals on win32"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "12b8a10d33d93dcb6c0e4565465e3692e7b95d89",
+            "comment": "Refactor useKeyCallback"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "9b203a4c75e9fafd7c010757c0ebd81ffa3a6419",
+            "comment": "Remove transparent and outline as appearance options"
+          },
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "b4e6314d7172f39233fa3a072b3422621e086f5c",
+            "comment": "Fixed paddings, color for Selected state (Toggle Button/src/ButtonTokens.ts), icon sizes"
+          },
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "2f056eb8f34af7a7bd0f4fd529015443eee95e93",
+            "comment": "Added new props for Button (shape, icon-position)"
+          },
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "37556b255edbcaade990a4a9da4046248bcb276e",
+            "comment": "Added loading prop"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "841d2998e8b97fabe0b6dac9c74c3d63d2b3bbd4",
+            "comment": "Edit Migration doc"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "31eb26025ce32ef4c98b4af4bdc5495a6344fbac",
+            "comment": "Use Core ActivityIndicator as a fallback for FluentActivityIndicator"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-button",
+            "commit": "be2730d5e6dec3b6ba87c90e97b2a65e0c669e8e",
+            "comment": "Add more snapshot test cases"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.10.0",
       "version": "0.10.0",

@@ -6,7 +6,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'FluentTester'
+rootProject.name = "FluentTester"
 
-apply from: file("../../../node_modules/react-native-test-app/test-app.gradle")
+apply(from: "../../../node_modules/react-native-test-app/test-app.gradle")
 applyTestAppSettings(settings)

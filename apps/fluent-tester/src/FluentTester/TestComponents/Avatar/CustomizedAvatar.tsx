@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { JSAvatar, IconAlignment, JSAvatarTokens } from '@fluentui-react-native/experimental-avatar';
+import { JSAvatar, IconAlignment } from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
@@ -11,7 +11,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalSize] = React.useState<number>(80);
+  const [physicalSize, setPhysicalSize] = React.useState<number>(96);
   const [iconSize, setIconSize] = React.useState<number>(24);
   const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
   const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
@@ -29,36 +29,30 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     borderColor: theme.colors.inputBorder,
   };
 
-  const tokens: JSAvatarTokens = {};
-  if (coinColor) {
-    tokens.backgroundColor = coinColor;
-  }
-  if (textColor) {
-    tokens.color = textColor;
-  }
-  if (horizontalAlignment) {
-    tokens.horizontalIconAlignment = horizontalAlignment;
-  }
-  if (verticalAlignment) {
-    tokens.verticalIconAlignment = verticalAlignment;
-  }
-  if (iconSize) {
-    tokens.iconSize = iconSize;
-  }
-  if (iconStrokeWidth) {
-    tokens.iconStrokeWidth = iconStrokeWidth;
-  }
-  if (iconStrokeColor) {
-    tokens.iconStrokeColor = iconStrokeColor;
-  }
-  if (initialsSize) {
-    tokens.initialsSize = initialsSize;
-  }
-  if (physicalSize) {
-    tokens.avatarSize = physicalSize;
-  }
-
-  const CustomizedAvatar = JSAvatar.customize(tokens);
+  const CustomizedAvatar = React.useMemo(() => {
+    const tokens = {
+      backgroundColor: coinColor,
+      color: textColor,
+      horizontalIconAlignment: horizontalAlignment,
+      verticalIconAlignment: verticalAlignment,
+      iconSize: iconSize,
+      iconStrokeWidth: iconStrokeWidth,
+      iconStrokeColor: iconStrokeColor,
+      initialsSize: initialsSize,
+      avatarSize: physicalSize,
+    };
+    return JSAvatar.customize(tokens);
+  }, [
+    coinColor,
+    textColor,
+    horizontalAlignment,
+    verticalAlignment,
+    iconSize,
+    iconStrokeWidth,
+    iconStrokeColor,
+    initialsSize,
+    physicalSize,
+  ]);
 
   return (
     <View style={commonStyles.root}>
@@ -138,6 +132,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       </View>
 
       <CustomizedAvatar
+        active="active"
+        activeAppearance="ring"
         initials="SB"
         imageDescription="Former CEO of Microsoft"
         presence="blocked"

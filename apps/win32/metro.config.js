@@ -10,7 +10,7 @@ const { getDefaultConfig } = require('metro-config');
 
 const blockList = exclusionList([
   // Exclude other test apps
-  /.*\/apps\/(?:android|ios|macos|web|windows)\/.*/,
+  /.*\/apps\/(?:android|ios|macos|windows)\/.*/,
   // Exclude build output directory
   /.*\/apps\/win32\/dist\/.*/,
 ]);
@@ -22,7 +22,7 @@ module.exports = (async () => {
   return {
     watchFolders: defaultWatchFolders(__dirname),
     resolver: {
-      assetExts: [assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
+      assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
       blacklistRE: blockList,
       blockList,

@@ -1,8 +1,942 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 17 Nov 2021 21:07:06 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Mar 2022 23:37:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.58.8
+
+Wed, 16 Mar 2022 23:37:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-expander to v0.3.18
+
+## 0.58.7
+
+Wed, 16 Mar 2022 16:43:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.4
+
+## 0.58.6
+
+Fri, 11 Mar 2022 00:34:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.18
+- Bump @fluentui-react-native/experimental-tabs to v0.4.28
+- Bump @fluentui/react-native to v0.27.39
+
+## 0.58.5
+
+Wed, 09 Mar 2022 01:43:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.9.12
+
+## 0.58.4
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.18
+- Bump @fluentui-react-native/button to v0.22.8
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.16
+- Bump @fluentui-react-native/experimental-avatar to v0.14.8
+- Bump @fluentui-react-native/experimental-button to v0.15.8
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.3
+- Bump @fluentui-react-native/experimental-expander to v0.3.17
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.17
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.20
+- Bump @fluentui-react-native/experimental-tabs to v0.4.27
+- Bump @fluentui-react-native/experimental-text to v0.7.17
+- Bump @fluentui-react-native/framework to v0.7.17
+- Bump @fluentui-react-native/icon to v0.11.12
+- Bump @fluentui-react-native/interactive-hooks to v0.14.3
+- Bump @fluentui-react-native/stack to v0.6.17
+- Bump @fluentui/react-native to v0.27.38
+
+## 0.58.3
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.17
+- Bump @fluentui-react-native/button to v0.22.7
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.15
+- Bump @fluentui-react-native/experimental-avatar to v0.14.7
+- Bump @fluentui-react-native/experimental-button to v0.15.7
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.2
+- Bump @fluentui-react-native/experimental-expander to v0.3.16
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.16
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.19
+- Bump @fluentui-react-native/experimental-tabs to v0.4.26
+- Bump @fluentui-react-native/experimental-text to v0.7.16
+- Bump @fluentui-react-native/framework to v0.7.16
+- Bump @fluentui-react-native/icon to v0.11.11
+- Bump @fluentui-react-native/interactive-hooks to v0.14.2
+- Bump @fluentui-react-native/stack to v0.6.16
+- Bump @fluentui/react-native to v0.27.37
+
+## 0.58.2
+
+Fri, 04 Mar 2022 21:17:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.1
+- Bump @fluentui-react-native/win32-theme to v0.14.13
+
+## 0.58.1
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Add tests and fix bugs (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.5.5
+- Bump @fluentui-react-native/apple-theme to v0.9.11
+- Bump @fluentui-react-native/badge to v0.0.16
+- Bump @fluentui-react-native/button to v0.22.6
+- Bump @fluentui-react-native/default-theme to v0.9.11
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.14
+- Bump @fluentui-react-native/experimental-avatar to v0.14.6
+- Bump @fluentui-react-native/experimental-button to v0.15.6
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.0
+- Bump @fluentui-react-native/experimental-expander to v0.3.15
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.15
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.18
+- Bump @fluentui-react-native/experimental-tabs to v0.4.25
+- Bump @fluentui-react-native/experimental-text to v0.7.15
+- Bump @fluentui-react-native/framework to v0.7.15
+- Bump @fluentui-react-native/icon to v0.11.10
+- Bump @fluentui-react-native/interactive-hooks to v0.14.1
+- Bump @fluentui-react-native/stack to v0.6.15
+- Bump @fluentui-react-native/theme to v0.6.5
+- Bump @fluentui-react-native/theme-types to v0.14.0
+- Bump @fluentui-react-native/theming-utils to v0.9.0
+- Bump @fluentui-react-native/win32-theme to v0.14.12
+- Bump @fluentui/react-native to v0.27.36
+
+## 0.58.0
+
+Tue, 01 Mar 2022 20:18:31 GMT
+
+### Minor changes
+
+- Bump @fluentui-react-native/badge to v0.0.15
+- Bump @fluentui-react-native/button to v0.22.5
+- Bump @fluentui-react-native/experimental-button to v0.15.5
+- Bump @fluentui-react-native/experimental-checkbox to v0.9.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.14
+- Bump @fluentui-react-native/experimental-tabs to v0.4.24
+- Bump @fluentui-react-native/interactive-hooks to v0.14.0
+- Bump @fluentui/react-native to v0.27.35
+
+### Patches
+
+- Fix types (ruaraki@microsoft.com)
+
+## 0.57.0
+
+Tue, 01 Mar 2022 04:11:39 GMT
+
+### Minor changes
+
+- Add tests to codify testing requirements (safreibe@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.14
+- Bump @fluentui-react-native/experimental-checkbox to v0.8.0
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.17
+
+### Patches
+
+- Change circular to shape prop (ruaraki@microsoft.com)
+- Move a few components (ruaraki@microsoft.com)
+- Fix ActivityIndicator customize test (sanajmi@microsoft.com)
+- Add shimmer customization and prop examples to the test page and correct a build break (patboyd@microsoft.com)
+
+## 0.56.1
+
+Wed, 23 Feb 2022 22:41:19 GMT
+
+### Patches
+
+- Fix iconColor token being no-op (amchiu@microsoft.com)
+- Add test (ruaraki@microsoft.com)
+- Add functional tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.22.4
+- Bump @fluentui-react-native/experimental-button to v0.15.4
+- Bump @fluentui-react-native/experimental-checkbox to v0.7.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.13
+- Bump @fluentui/react-native to v0.27.34
+
+## 0.56.0
+
+Fri, 18 Feb 2022 23:27:10 GMT
+
+### Minor changes
+
+- Fix ActivityIndicator test constants (safreibe@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.13
+- Bump @fluentui-react-native/button to v0.22.3
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.13
+- Bump @fluentui-react-native/experimental-avatar to v0.14.5
+- Bump @fluentui-react-native/experimental-button to v0.15.3
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.9
+- Bump @fluentui-react-native/experimental-expander to v0.3.14
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.12
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.16
+- Bump @fluentui-react-native/experimental-tabs to v0.4.23
+- Bump @fluentui-react-native/experimental-text to v0.7.14
+- Bump @fluentui-react-native/framework to v0.7.14
+- Bump @fluentui-react-native/icon to v0.11.9
+- Bump @fluentui-react-native/interactive-hooks to v0.13.3
+- Bump @fluentui-react-native/stack to v0.6.14
+- Bump @fluentui/react-native to v0.27.33
+
+## 0.55.2
+
+Thu, 17 Feb 2022 02:13:07 GMT
+
+### Patches
+
+- Update svg-transformer version (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.12
+- Bump @fluentui-react-native/button to v0.22.2
+- Bump @fluentui-react-native/experimental-button to v0.15.2
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.11
+- Bump @fluentui-react-native/experimental-tabs to v0.4.22
+- Bump @fluentui-react-native/icon to v0.11.8
+- Bump @fluentui-react-native/interactive-hooks to v0.13.2
+- Bump @fluentui/react-native to v0.27.32
+
+## 0.55.1
+
+Thu, 17 Feb 2022 01:22:01 GMT
+
+### Patches
+
+- Update RNTA dependency (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.9.10
+- Bump @fluentui-react-native/badge to v0.0.11
+- Bump @fluentui-react-native/button to v0.22.1
+- Bump @fluentui-react-native/default-theme to v0.9.10
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.12
+- Bump @fluentui-react-native/experimental-avatar to v0.14.4
+- Bump @fluentui-react-native/experimental-button to v0.15.1
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.7
+- Bump @fluentui-react-native/experimental-expander to v0.3.13
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.10
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.15
+- Bump @fluentui-react-native/experimental-tabs to v0.4.21
+- Bump @fluentui-react-native/experimental-text to v0.7.13
+- Bump @fluentui-react-native/framework to v0.7.13
+- Bump @fluentui-react-native/icon to v0.11.7
+- Bump @fluentui-react-native/interactive-hooks to v0.13.1
+- Bump @fluentui-react-native/stack to v0.6.13
+- Bump @fluentui-react-native/theming-utils to v0.8.10
+- Bump @fluentui-react-native/win32-theme to v0.14.11
+- Bump @fluentui/react-native to v0.27.31
+
+## 0.55.0
+
+Wed, 16 Feb 2022 21:58:21 GMT
+
+### Minor changes
+
+- Adding Experimental Button Functional E2E Tests (safreibe@microsoft.com)
+
+## 0.54.0
+
+Tue, 15 Feb 2022 22:48:31 GMT
+
+### Minor changes
+
+- Move experimental button tests to button test (ruaraki@microsoft.com)
+- Changing location of assets (safreibe@microsoft.com)
+- Bump @fluentui-react-native/button to v0.22.0
+- Bump @fluentui-react-native/experimental-button to v0.15.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.9
+- Bump @fluentui/react-native to v0.27.30
+
+## 0.53.3
+
+Mon, 14 Feb 2022 23:29:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.8
+- Bump @fluentui/react-native to v0.27.29
+
+## 0.53.2
+
+Thu, 10 Feb 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.7
+- Bump @fluentui/react-native to v0.27.28
+
+## 0.53.1
+
+Wed, 09 Feb 2022 20:14:50 GMT
+
+### Patches
+
+- Fix test (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.10
+- Bump @fluentui-react-native/button to v0.21.20
+- Bump @fluentui-react-native/experimental-button to v0.14.0
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.6
+- Bump @fluentui-react-native/experimental-tabs to v0.4.20
+- Bump @fluentui-react-native/interactive-hooks to v0.13.0
+- Bump @fluentui/react-native to v0.27.27
+
+## 0.53.0
+
+Mon, 07 Feb 2022 19:47:54 GMT
+
+### Minor changes
+
+- Adding assert checking to BasePage and integrating with all spec files (safreibe@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.5
+- Bump @fluentui/react-native to v0.27.26
+
+## 0.52.2
+
+Fri, 04 Feb 2022 20:31:52 GMT
+
+### Patches
+
+- Implement some test improvements (ruaraki@microsoft.com)
+- Make brands in HC not show in tester (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.13.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.4
+- Bump @fluentui-react-native/experimental-tabs to v0.4.19
+- Bump @fluentui/react-native to v0.27.25
+
+## 0.52.1
+
+Wed, 02 Feb 2022 22:09:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.9
+- Bump @fluentui-react-native/experimental-button to v0.13.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.3
+
+## 0.52.0
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Minor changes
+
+- Adding additional E2E Functional tests (safreibe@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.9.9
+- Bump @fluentui-react-native/badge to v0.0.8
+- Bump @fluentui-react-native/button to v0.21.19
+- Bump @fluentui-react-native/default-theme to v0.9.9
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.11
+- Bump @fluentui-react-native/experimental-avatar to v0.14.3
+- Bump @fluentui-react-native/experimental-button to v0.12.1
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.5
+- Bump @fluentui-react-native/experimental-expander to v0.3.12
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.2
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.14
+- Bump @fluentui-react-native/experimental-tabs to v0.4.18
+- Bump @fluentui-react-native/experimental-text to v0.7.12
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/icon to v0.11.6
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @fluentui-react-native/stack to v0.6.12
+- Bump @fluentui-react-native/theming-utils to v0.8.9
+- Bump @fluentui-react-native/win32-theme to v0.14.10
+- Bump @fluentui/react-native to v0.27.24
+
+## 0.51.5
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.1
+- Bump @fluentui/react-native to v0.27.23
+
+## 0.51.4
+
+Thu, 27 Jan 2022 10:39:35 GMT
+
+### Patches
+
+- Added Presence Badge (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.7
+
+## 0.51.3
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Let's add some tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.6
+- Bump @fluentui-react-native/button to v0.21.18
+- Bump @fluentui-react-native/experimental-button to v0.12.0
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.0
+- Bump @fluentui-react-native/experimental-tabs to v0.4.17
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+- Bump @fluentui/react-native to v0.27.22
+
+## 0.51.2
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.5
+- Bump @fluentui-react-native/button to v0.21.17
+- Bump @fluentui-react-native/experimental-button to v0.11.21
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.25
+- Bump @fluentui-react-native/experimental-tabs to v0.4.16
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+- Bump @fluentui/react-native to v0.27.21
+
+## 0.51.1
+
+Tue, 25 Jan 2022 21:55:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.4
+- Bump @fluentui-react-native/button to v0.21.16
+- Bump @fluentui-react-native/experimental-button to v0.11.20
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.24
+- Bump @fluentui-react-native/experimental-tabs to v0.4.15
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+- Bump @fluentui/react-native to v0.27.20
+
+## 0.51.0
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Minor changes
+
+- Adding Text A11y Tests (safreibe@microsoft.com)
+- Adding Button/Checkbox functional tests (safreibe@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.3
+- Bump @fluentui-react-native/button to v0.21.15
+- Bump @fluentui-react-native/experimental-button to v0.11.19
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.23
+- Bump @fluentui-react-native/experimental-tabs to v0.4.14
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+- Bump @fluentui/react-native to v0.27.19
+
+## 0.50.28
+
+Thu, 20 Jan 2022 21:05:25 GMT
+
+### Patches
+
+- Added Badge component. (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.2
+- Bump @fluentui-react-native/experimental-button to v0.11.18
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.22
+
+## 0.50.27
+
+Thu, 20 Jan 2022 20:21:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.13
+
+## 0.50.26
+
+Wed, 19 Jan 2022 00:57:04 GMT
+
+### Patches
+
+- Disable checkbox test in uwp (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.6.0
+
+## 0.50.25
+
+Tue, 18 Jan 2022 20:49:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.11.17
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.21
+
+## 0.50.24
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.9.8
+- Bump @fluentui-react-native/button to v0.21.14
+- Bump @fluentui-react-native/default-theme to v0.9.8
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.10
+- Bump @fluentui-react-native/experimental-avatar to v0.14.2
+- Bump @fluentui-react-native/experimental-button to v0.11.16
+- Bump @fluentui-react-native/experimental-checkbox to v0.5.2
+- Bump @fluentui-react-native/experimental-expander to v0.3.11
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.20
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.12
+- Bump @fluentui-react-native/experimental-tabs to v0.4.13
+- Bump @fluentui-react-native/experimental-text to v0.7.11
+- Bump @fluentui-react-native/framework to v0.7.11
+- Bump @fluentui-react-native/icon to v0.11.5
+- Bump @fluentui-react-native/interactive-hooks to v0.11.13
+- Bump @fluentui-react-native/stack to v0.6.11
+- Bump @fluentui-react-native/theming-utils to v0.8.8
+- Bump @fluentui-react-native/win32-theme to v0.14.9
+- Bump @fluentui/react-native to v0.27.18
+
+## 0.50.23
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/android-theme to v0.5.4
+- Bump @fluentui-react-native/apple-theme to v0.9.7
+- Bump @fluentui-react-native/button to v0.21.13
+- Bump @fluentui-react-native/default-theme to v0.9.7
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.9
+- Bump @fluentui-react-native/experimental-avatar to v0.14.1
+- Bump @fluentui-react-native/experimental-button to v0.11.15
+- Bump @fluentui-react-native/experimental-checkbox to v0.5.1
+- Bump @fluentui-react-native/experimental-expander to v0.3.10
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.19
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.11
+- Bump @fluentui-react-native/experimental-tabs to v0.4.12
+- Bump @fluentui-react-native/experimental-text to v0.7.10
+- Bump @fluentui-react-native/framework to v0.7.10
+- Bump @fluentui-react-native/icon to v0.11.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+- Bump @fluentui-react-native/stack to v0.6.10
+- Bump @fluentui-react-native/theme to v0.6.4
+- Bump @fluentui-react-native/theme-types to v0.13.3
+- Bump @fluentui-react-native/theming-utils to v0.8.7
+- Bump @fluentui-react-native/win32-theme to v0.14.8
+- Bump @fluentui/react-native to v0.27.17
+
+## 0.50.22
+
+Fri, 14 Jan 2022 00:10:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.21.12
+- Bump @fluentui/react-native to v0.27.16
+
+## 0.50.21
+
+Tue, 11 Jan 2022 12:27:30 GMT
+
+### Patches
+
+- added active and activeAppearance props (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.0
+
+## 0.50.20
+
+Fri, 07 Jan 2022 23:38:55 GMT
+
+### Patches
+
+- Implement circular styling (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.5.0
+
+## 0.50.19
+
+Fri, 07 Jan 2022 21:27:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.11.14
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.18
+
+## 0.50.18
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/android-theme to v0.5.3
+- Bump @fluentui-react-native/apple-theme to v0.9.6
+- Bump @fluentui-react-native/button to v0.21.11
+- Bump @fluentui-react-native/default-theme to v0.9.6
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.8
+- Bump @fluentui-react-native/experimental-avatar to v0.13.10
+- Bump @fluentui-react-native/experimental-button to v0.11.13
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.11
+- Bump @fluentui-react-native/experimental-expander to v0.3.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.17
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.10
+- Bump @fluentui-react-native/experimental-tabs to v0.4.11
+- Bump @fluentui-react-native/experimental-text to v0.7.9
+- Bump @fluentui-react-native/framework to v0.7.9
+- Bump @fluentui-react-native/icon to v0.11.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.11
+- Bump @fluentui-react-native/stack to v0.6.9
+- Bump @fluentui-react-native/theme to v0.6.3
+- Bump @fluentui-react-native/theme-types to v0.13.2
+- Bump @fluentui-react-native/theming-utils to v0.8.6
+- Bump @fluentui-react-native/win32-theme to v0.14.7
+- Bump @fluentui/react-native to v0.27.15
+
+## 0.50.17
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.9.5
+- Bump @fluentui-react-native/button to v0.21.10
+- Bump @fluentui-react-native/default-theme to v0.9.5
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.7
+- Bump @fluentui-react-native/experimental-avatar to v0.13.9
+- Bump @fluentui-react-native/experimental-button to v0.11.12
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.10
+- Bump @fluentui-react-native/experimental-expander to v0.3.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.16
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.9
+- Bump @fluentui-react-native/experimental-tabs to v0.4.10
+- Bump @fluentui-react-native/experimental-text to v0.7.8
+- Bump @fluentui-react-native/framework to v0.7.8
+- Bump @fluentui-react-native/icon to v0.11.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.10
+- Bump @fluentui-react-native/stack to v0.6.8
+- Bump @fluentui-react-native/theming-utils to v0.8.5
+- Bump @fluentui-react-native/win32-theme to v0.14.6
+- Bump @fluentui/react-native to v0.27.14
+
+## 0.50.16
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Fix tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.9
+- Bump @fluentui-react-native/experimental-button to v0.11.11
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.15
+- Bump @fluentui-react-native/experimental-tabs to v0.4.9
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+- Bump @fluentui/react-native to v0.27.13
+
+## 0.50.15
+
+Wed, 05 Jan 2022 19:33:53 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/win32-theme to v0.14.5
+
+## 0.50.14
+
+Tue, 04 Jan 2022 23:05:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.11.10
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.14
+
+## 0.50.13
+
+Thu, 23 Dec 2021 02:03:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.13
+- Bump @fluentui/react-native to v0.27.12
+
+## 0.50.12
+
+Tue, 21 Dec 2021 22:47:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.12
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.8
+- Bump @fluentui/react-native to v0.27.11
+
+## 0.50.11
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Remove content prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.8
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.6
+- Bump @fluentui-react-native/experimental-avatar to v0.13.8
+- Bump @fluentui-react-native/experimental-button to v0.11.9
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.8
+- Bump @fluentui-react-native/experimental-expander to v0.3.7
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.11
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.7
+- Bump @fluentui-react-native/experimental-tabs to v0.4.8
+- Bump @fluentui-react-native/experimental-text to v0.7.7
+- Bump @fluentui-react-native/framework to v0.7.7
+- Bump @fluentui-react-native/icon to v0.11.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.8
+- Bump @fluentui-react-native/stack to v0.6.7
+- Bump @fluentui/react-native to v0.27.10
+
+## 0.50.10
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.5.2
+- Bump @fluentui-react-native/apple-theme to v0.9.4
+- Bump @fluentui-react-native/button to v0.21.7
+- Bump @fluentui-react-native/default-theme to v0.9.4
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.5
+- Bump @fluentui-react-native/experimental-avatar to v0.13.7
+- Bump @fluentui-react-native/experimental-button to v0.11.8
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.7
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.4.1
+- Bump @fluentui-react-native/experimental-expander to v0.3.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.10
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.6
+- Bump @fluentui-react-native/experimental-tabs to v0.4.7
+- Bump @fluentui-react-native/experimental-text to v0.7.6
+- Bump @fluentui-react-native/framework to v0.7.6
+- Bump @fluentui-react-native/icon to v0.11.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.7
+- Bump @fluentui-react-native/stack to v0.6.6
+- Bump @fluentui-react-native/theme to v0.6.2
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @fluentui-react-native/themed-stylesheet to v1.3.2
+- Bump @fluentui-react-native/theming-utils to v0.8.4
+- Bump @fluentui-react-native/win32-theme to v0.14.4
+- Bump @fluentui/react-native to v0.27.9
+
+## 0.50.9
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Update rnx-kit packages. Turn typechecking and duplicate package detection failures off, as they reveal errors that already exist in the monorepo. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.6
+- Bump @fluentui-react-native/experimental-button to v0.11.7
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.9
+- Bump @fluentui-react-native/experimental-tabs to v0.4.6
+- Bump @fluentui-react-native/interactive-hooks to v0.11.6
+- Bump @fluentui/react-native to v0.27.8
+
+## 0.50.8
+
+Sat, 18 Dec 2021 04:15:04 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.5.1
+- Bump @fluentui-react-native/apple-theme to v0.9.3
+- Bump @fluentui-react-native/button to v0.21.5
+- Bump @fluentui-react-native/default-theme to v0.9.3
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.4
+- Bump @fluentui-react-native/experimental-avatar to v0.13.6
+- Bump @fluentui-react-native/experimental-button to v0.11.6
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.5
+- Bump @fluentui-react-native/experimental-expander to v0.3.5
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.8
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.5
+- Bump @fluentui-react-native/experimental-tabs to v0.4.5
+- Bump @fluentui-react-native/experimental-text to v0.7.5
+- Bump @fluentui-react-native/framework to v0.7.5
+- Bump @fluentui-react-native/icon to v0.10.4
+- Bump @fluentui-react-native/interactive-hooks to v0.11.5
+- Bump @fluentui-react-native/stack to v0.6.5
+- Bump @fluentui-react-native/theme to v0.6.1
+- Bump @fluentui-react-native/themed-stylesheet to v1.3.1
+- Bump @fluentui-react-native/theming-utils to v0.8.3
+- Bump @fluentui-react-native/win32-theme to v0.14.3
+- Bump @fluentui/react-native to v0.27.7
+
+## 0.50.7
+
+Sat, 18 Dec 2021 01:46:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.11.5
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.7
+
+## 0.50.6
+
+Fri, 17 Dec 2021 22:42:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.6
+- Bump @fluentui/react-native to v0.27.6
+
+## 0.50.5
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Revert "Remove content prop (#1257)" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.4
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.3
+- Bump @fluentui-react-native/experimental-avatar to v0.13.5
+- Bump @fluentui-react-native/experimental-button to v0.11.4
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.4
+- Bump @fluentui-react-native/experimental-expander to v0.3.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.5
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.4
+- Bump @fluentui-react-native/experimental-tabs to v0.4.4
+- Bump @fluentui-react-native/experimental-text to v0.7.4
+- Bump @fluentui-react-native/framework to v0.7.4
+- Bump @fluentui-react-native/icon to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+- Bump @fluentui-react-native/stack to v0.6.4
+- Bump @fluentui/react-native to v0.27.5
+
+## 0.50.4
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Remove content prop (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.21.3
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.2
+- Bump @fluentui-react-native/experimental-avatar to v0.13.4
+- Bump @fluentui-react-native/experimental-button to v0.11.3
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.3
+- Bump @fluentui-react-native/experimental-expander to v0.3.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.4
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.3
+- Bump @fluentui-react-native/experimental-tabs to v0.4.3
+- Bump @fluentui-react-native/experimental-text to v0.7.3
+- Bump @fluentui-react-native/framework to v0.7.3
+- Bump @fluentui-react-native/icon to v0.10.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+- Bump @fluentui-react-native/stack to v0.6.3
+- Bump @fluentui/react-native to v0.27.4
+
+## 0.50.3
+
+Fri, 17 Dec 2021 18:39:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.3
+- Bump @fluentui/react-native to v0.27.3
+
+## 0.50.2
+
+Fri, 17 Dec 2021 14:04:45 GMT
+
+### Patches
+
+- Fixed duplicated content and icon for CompoundButton (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/experimental-button to v0.11.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.2
+
+## 0.50.1
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.9.2
+- Bump @fluentui-react-native/button to v0.21.2
+- Bump @fluentui-react-native/default-theme to v0.9.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.1
+- Bump @fluentui-react-native/experimental-avatar to v0.13.3
+- Bump @fluentui-react-native/experimental-button to v0.11.1
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.2
+- Bump @fluentui-react-native/experimental-expander to v0.3.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.1
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.2
+- Bump @fluentui-react-native/experimental-tabs to v0.4.2
+- Bump @fluentui-react-native/experimental-text to v0.7.2
+- Bump @fluentui-react-native/framework to v0.7.2
+- Bump @fluentui-react-native/icon to v0.10.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+- Bump @fluentui-react-native/stack to v0.6.2
+- Bump @fluentui-react-native/theming-utils to v0.8.2
+- Bump @fluentui-react-native/win32-theme to v0.14.2
+- Bump @fluentui/react-native to v0.27.2
+
+## 0.50.0
+
+Thu, 16 Dec 2021 23:23:23 GMT
+
+### Minor changes
+
+- Adding MacOS E2E testing to CI pipeline (safreibe@microsoft.com)
+
+## 0.49.0
+
+Thu, 16 Dec 2021 19:10:25 GMT
+
+### Minor changes
+
+- Removed content prop from Button component. (v.kozlova13@gmail.com)
+- Adding E2E functional testing for rest of phase 2 components (safreibe@microsoft.com)
+- Stub button for non-mobile platforms (ruaraki@microsoft.com)
+- Changing UWP to new framework (safreibe@microsoft.com)
+- Removed content prop from Toggle, Compound Buttons and FAB (v.kozlova13@gmail.com)
+- Bump @fluentui-react-native/apple-theme to v0.9.1
+- Bump @fluentui-react-native/button to v0.21.1
+- Bump @fluentui-react-native/default-theme to v0.9.1
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.0
+- Bump @fluentui-react-native/experimental-avatar to v0.13.2
+- Bump @fluentui-react-native/experimental-button to v0.11.0
+- Bump @fluentui-react-native/experimental-checkbox to v0.4.1
+- Bump @fluentui-react-native/experimental-expander to v0.3.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.2.0
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.1
+- Bump @fluentui-react-native/experimental-tabs to v0.4.1
+- Bump @fluentui-react-native/experimental-text to v0.7.1
+- Bump @fluentui-react-native/framework to v0.7.1
+- Bump @fluentui-react-native/icon to v0.10.0
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
+- Bump @fluentui-react-native/stack to v0.6.1
+- Bump @fluentui-react-native/theming-utils to v0.8.1
+- Bump @fluentui-react-native/win32-theme to v0.14.1
+- Bump @fluentui/react-native to v0.27.1
+
+### Patches
+
+- Only show chevron test when SVGs are supported (ruaraki@microsoft.com)
+- Fixed paddings, color for Selected state (Toggle Button/src/ButtonTokens.ts), icon sizes (v.kozlova13@gmail.com)
+- Added loading prop (v.kozlova13@gmail.com)
+- Add e2e tests for experimental button (ruaraki@microsoft.com)
+- Allow maxHeight prop to be set on menu and submenu for Scrollview (email not defined)
+- Use Core ActivityIndicator as a fallback for FluentActivityIndicator (sanajmi@microsoft.com)
+- Add simple drawer module without methods (email not defined)
+- Added new props for Button (shape, icon-position) (v.kozlova13@gmail.com)
+- Added shape prop to Avatar (v.kozlova13@gmail.com)
 
 ## 0.48.1
 

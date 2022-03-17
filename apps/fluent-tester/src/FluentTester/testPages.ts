@@ -1,5 +1,6 @@
 import { TestDescription } from './TestComponents';
 import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -13,24 +14,33 @@ import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
-import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL, ExperimentalButtonTest } from './TestComponents/ButtonExperimental';
 import { HOMEPAGE_FOCUSZONE_BUTTON, FocusZoneTest } from './TestComponents/FocusZone';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
-import { HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
+import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
-import { ExperimentalMenuButtonTest, HOMEPAGE_MENU_BUTTON_EXPERIMENTAL } from './TestComponents/MenuButtonExperimental';
+import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 
 export const tests: TestDescription[] = [
+  {
+    name: 'ActivityIndicator Test',
+    component: ActivityIndicatorTest,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
   {
     name: 'Avatar Test',
     component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
+  {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
   },
   {
     name: 'Button Test',
@@ -110,17 +120,12 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
   },
   {
     name: 'Svg Test',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
-  },
-  {
-    name: 'Experimental Button',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Callout Test',
@@ -135,7 +140,7 @@ export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
   },
   {
     name: 'MenuButton Test',
@@ -155,6 +160,6 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental MenuButton Test',
     component: ExperimentalMenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON_EXPERIMENTAL,
+    testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   },
 ];

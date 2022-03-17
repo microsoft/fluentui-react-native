@@ -20,7 +20,7 @@ export const TabsContext = React.createContext<TabsContextData>({
   },
   tabsItemKeys: [],
   views: null,
-  focusZoneRef: null
+  focusZoneRef: null,
 });
 
 export const Tabs = compose<TabsType>({
@@ -30,21 +30,19 @@ export const Tabs = compose<TabsType>({
     root: View,
     label: Text,
     stack: View,
-    tabPanel: View
+    tabPanel: View,
   },
-  render: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
+  useRender: (userProps: TabsProps, useSlots: UseSlots<TabsType>) => {
     // configure props and state for tabs based on user props
     const tabs = useTabs(userProps);
 
-    if(!tabs.state) return null;
-
     // Grab the styled slots.
-    const Slots = useSlots(userProps, layer => tabs.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => tabs.state[layer] || userProps[layer]);
 
     const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
         const length = tabs.state.enabledKeys.length;
-        const currTabItemIndex = tabs.state.enabledKeys.findIndex(x => x == tabs.state.context.selectedKey)
+        const currTabItemIndex = tabs.state.enabledKeys.findIndex((x) => x == tabs.state.context.selectedKey);
         let newCurrTabItemIndex;
         if (ev.nativeEvent.key === 'ArrowRight') {
           if (tabs.props.isCircularNavigation || !(currTabItemIndex + 1 == length)) {
@@ -52,8 +50,7 @@ export const Tabs = compose<TabsType>({
             tabs.state.context.selectedKey = tabs.state.enabledKeys[newCurrTabItemIndex];
             tabs.state.context.onTabsClick(tabs.state.context.selectedKey);
           }
-        }
-        else {
+        } else {
           if (tabs.props.isCircularNavigation || !(currTabItemIndex == 0)) {
             newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
             tabs.state.context.selectedKey = tabs.state.enabledKeys[newCurrTabItemIndex];
@@ -64,11 +61,17 @@ export const Tabs = compose<TabsType>({
     };
 
     const stackProps = {
-      focusable: true, ref: tabs.state.context.focusZoneRef, onKeyDown: onKeyDown
+      focusable: true,
+      ref: tabs.state.context.focusZoneRef,
+      onKeyDown: onKeyDown,
     };
 
     // Return the handler to finish render.
     return (final: TabsProps, ...children: React.ReactNode[]) => {
+      if (!tabs.state) {
+        return null;
+      }
+
       const { label, ...mergedProps } = mergeProps(tabs.props, final);
 
       // Populate the tabsItemKeys array
@@ -104,11 +107,11 @@ export const Tabs = compose<TabsType>({
         >
           <Slots.root {...mergedProps}>
             {tabs?.state?.label && <Slots.label key="label">{label}</Slots.label>}
-              <Slots.stack {...stackProps}>{children}</Slots.stack>
+            <Slots.stack {...stackProps}>{children}</Slots.stack>
             <Slots.tabPanel>
-                <TabsContext.Consumer>
-                  {context => !tabs?.state?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
-                </TabsContext.Consumer>
+              <TabsContext.Consumer>
+                {(context) => !tabs?.state?.headersOnly && <View>{context.views.get(context.selectedKey)}</View>}
+              </TabsContext.Consumer>
             </Slots.tabPanel>
           </Slots.root>
         </TabsContext.Provider>

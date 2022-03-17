@@ -11,10 +11,14 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = () =>
     color: 'white', // initials is always 'white', unless overriden by token
     iconStrokeColor: 'white', // icon stroke color is always 'white', unless overriden by token
     backgroundColor: convertCoinColorFluent('cornflower'),
+    avatarOpacity: 1,
     circular: {
       borderRadius: globalTokens.corner.radius.circle,
     },
     square: {
       borderRadius: globalTokens.corner.radius.medium,
+    },
+    inactive: {
+      avatarOpacity: 0.8,
     },
   } as JSAvatarTokens);

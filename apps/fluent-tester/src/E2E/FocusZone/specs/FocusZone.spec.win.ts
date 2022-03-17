@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 import FocusZonePageObject from '../pages/FocusZonePageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('FocusZone Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to FocusZone test page', () => {
@@ -18,6 +18,7 @@ describe('FocusZone Testing Initialization', function () {
     NavigateAppPage.clickAndGoToFocusZonePage();
     FocusZonePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(FocusZonePageObject.isPageLoaded()).toBeTruthy();
+    expect(FocusZonePageObject.isPageLoaded()).toBeTruthy(FocusZonePageObject.ERRORMESSAGE_PAGELOAD);
+    expect(FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

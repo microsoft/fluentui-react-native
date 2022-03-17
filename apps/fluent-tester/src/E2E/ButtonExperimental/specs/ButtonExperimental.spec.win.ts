@@ -1,17 +1,14 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
-import ButtonExperimentalPageObject from '../pages/ButtonExperimentalPageObject';
-import { ComponentSelector } from '../../common/BasePage';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/consts';
-import {
-  BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL,
-  BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL,
-} from '../../../FluentTester/TestComponents/ButtonExperimental/consts';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
+import ButtonExperimentalPageObject, { ButtonSelector } from '../pages/ButtonExperimentalPageObject';
+import { ComponentSelector } from '../../common/BasePage.win';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
+import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../FluentTester/TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Button Testing Initialization', function () {
+describe('Experimental Button Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Button test page', () => {
@@ -20,31 +17,66 @@ describe('Button Testing Initialization', function () {
     ButtonExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToExperimentalButtonPage();
+    NavigateAppPage.clickAndGoToButtonPage();
     ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy(ButtonExperimentalPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
-describe('Button Accessibility Testing', () => {
-  it('Button - Validate accessibilityRole is correct', () => {
+describe('Experimental Button Accessibility Testing', () => {
+  it('Experimental Button - Validate accessibilityRole is correct', () => {
     ButtonExperimentalPageObject.scrollToTestElement();
     ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     expect(ButtonExperimentalPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Button - Set accessibilityLabel', () => {
+  it('Experimental Button - Set accessibilityLabel', () => {
     ButtonExperimentalPageObject.scrollToTestElement();
     ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTONEXPERIMENTAL_ACCESSIBILITY_LABEL);
+
+    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL);
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Button - Do not set accessibilityLabel -> Default to Button label', () => {
+  it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', () => {
     ButtonExperimentalPageObject.scrollToTestElement();
     ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      BUTTONEXPERIMENTAL_TEST_COMPONENT_LABEL,
-    );
+
+    expect(ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+});
+
+describe('Experimental Button Functional Testing', () => {
+  /* Scrolls and waits for the Button to be visible on the Test Page */
+  beforeEach(() => {
+    ButtonExperimentalPageObject.scrollToTestElement();
+    ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+
+  it('Validate OnClick() callback was fired -> Click', () => {
+    ButtonExperimentalPageObject.clickComponent();
+    expect(ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+
+    ButtonExperimentalPageObject.clickComponent(); // Reset Button State
+  });
+
+  it('Validate OnClick() callback was fired -> Type "Enter"', () => {
+    ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
+    expect(ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
+
+    ButtonExperimentalPageObject.clickComponent(); // Reset Button State
+  });
+
+  it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {
+    ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
+    expect(ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
+    expect(ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 });

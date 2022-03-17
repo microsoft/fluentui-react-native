@@ -1,9 +1,9 @@
 import { TestDescription } from './TestComponents';
 import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
-import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
-import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
+import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
@@ -16,7 +16,7 @@ import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 
@@ -24,12 +24,17 @@ export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
   },
   {
     name: 'Avatar Test',
     component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
+  {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
   },
   {
     name: 'Button Test',
@@ -40,11 +45,6 @@ export const tests: TestDescription[] = [
     name: 'Native Date Picker',
     component: NativeDatePickerTest,
     testPage: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
-  },
-  {
-    name: 'Experimental Button',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Pressable Test',
@@ -104,7 +104,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
   },
   {
     name: 'Svg Test',

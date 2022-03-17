@@ -1,3 +1,9 @@
+parameters:
+  - name: skipNugetPublish
+    displayName: Skip Nuget Publish
+    type: boolean
+    default: false
+
 steps:
   - checkout: self
     persistCredentials: true
@@ -64,6 +70,17 @@ steps:
   - bash: '.ado/scripts/generate_build_number.sh'
     displayName: 'Generate Build Number'
 
+  - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
+    displayName: 📒 Generate Manifest Apple
+    inputs:
+      BuildDropPath: $(System.DefaultWorkingDirectory)
+
+  - task: PublishPipelineArtifact@1
+    displayName: 📒 Publish Manifest Apple
+    inputs:
+      artifactName: SBom-Apple-$(System.JobAttempt)
+      targetPath: $(System.DefaultWorkingDirectory)/_manifest
+
   # pack the nuspec
   - task: NuGetCommand@2
     displayName: 'NuGet pack'
@@ -72,11 +89,14 @@ steps:
       packagesToPack: 'package.nuspec'
       buildProperties: buildNumber=$(sanitizedBuildNumber);commitId=$(Build.SourceVersion);repoUri=$(Build.Repository.Uri)
 
+  - task: ComponentGovernanceComponentDetection@0
+
   # push the package package
   - task: NuGetCommand@2
     displayName: 'NuGet push'
+    condition: not(${{ parameters.skipNugetPublish }})
     inputs:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
-      nuGetFeedType: external
-      publishFeedCredentials: react-native
+      publishVstsFeed: Office
+

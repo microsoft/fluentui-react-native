@@ -15,10 +15,11 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyCallback, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { useAccessibilityInfo } from '@react-native-community/hooks';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,
@@ -43,7 +44,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       (e) => {
         if (!disabled) {
           context?.onDismissMenu();
-          onClick ? onClick() : context?.onItemClick(itemKey);
+          onClick && onClick();
+          context?.onItemClick && context.onItemClick(itemKey);
           e.stopPropagation();
         }
       },
@@ -53,17 +55,18 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     const cmRef = useViewCommandFocus(componentRef);
 
     const onItemHoverIn = React.useCallback(() => {
-      componentRef.current.focus();
-      context?.setSubmenuItemHovered && context.setSubmenuItemHovered(false);
-      // dismiss submenu
-      if (!disabled && context?.isSubmenuOpen) {
-        context?.dismissSubmenu && context.dismissSubmenu();
+      if (!disabled) {
+        componentRef.current.focus();
+        // dismiss submenu
+        if (context?.isSubmenuOpen) {
+          context?.dismissSubmenu && context.dismissSubmenu();
+        }
       }
     }, [componentRef, disabled, context]);
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
-    const onKeyUp = useKeyCallback(onItemClick, ' ', 'Enter');
+    const onKeyUpProps = useKeyProps(onItemClick, ' ', 'Enter');
 
     // set up state
     const state: ContextualMenuItemState = {
@@ -74,54 +77,48 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       icon: !!icon,
     };
 
-    /*
+    /**
      * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
-     * OnMouseEnter and onMouseLeave are overridden with the below callbacks that calls onFocus and onBlur explicitly
+     * onMouseLeave is overridden to explicitly call onBlur to simulate removing focus
+     * To achieve this, we override the onMouseLEave handler returned by useAsPressable, and replace it with our own. Inside our own
+     * onMouseLeave handler, we call useAsPressable's onMouseLEave handler,
      */
-    const onMouseEnter = React.useCallback(
+    const { onBlur, onMouseLeave, ...restPressableProps } = pressable.props;
+    const onMouseLeaveModified = React.useCallback(
       (e) => {
-        pressable.props.onMouseEnter && pressable.props.onMouseEnter(e);
-        pressable.props.onFocus && pressable.props.onFocus(e);
-        e.stopPropagation();
+        onBlur(e);
+        onMouseLeave && onMouseLeave(e);
       },
-      [pressable],
+      [onBlur, onMouseLeave],
     );
+    const pressablePropsModified = {
+      onBlur: onBlur,
+      onMouseLeave: onMouseLeaveModified,
+      ...restPressableProps,
+    };
 
-    const onMouseLeave = React.useCallback(
-      (e) => {
-        pressable.props.onMouseLeave && pressable.props.onMouseLeave(e);
-        pressable.props.onBlur && pressable.props.onBlur(e);
-        e.stopPropagation();
-      },
-      [pressable],
-    );
+    const accessibilityInfo = useAccessibilityInfo();
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
     const slotProps = mergeSettings<ContextualMenuItemSlotProps>(styleProps, {
       root: {
-        ...pressable.props,
         ref: cmRef,
-        onKeyUp,
-        onMouseEnter,
-        onMouseLeave,
+        ...pressablePropsModified,
+        ...onKeyUpProps,
         accessible: true,
         accessibilityLabel: accessibilityLabel,
         accessibilityRole: 'menuitem',
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
         focusable: Platform.select({
-          /**
-           * GH #1208: On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
-           * To mimic the non VoiceOver-enabled functionality, let's set focusable to !disabled for now.
-           * As a followup, we could query AccessibilityInfo.isScreenReaderEnabled, and pass that info to
-           * CMContext so that the event handler is only handled once per ContextualMenu.
-           */
-          macos: !disabled,
-          // Keep win32 behavior as is
+          // On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
+          macos: !disabled || accessibilityInfo.screenReaderEnabled,
+          // win32
           default: true,
         }),
+        testID,
         ...rest,
       },
       content: { children: text },

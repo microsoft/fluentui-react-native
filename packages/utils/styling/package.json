@@ -1,9 +1,9 @@
 {
   "name": "@fluentui-react-native/styling-utils",
-  "version": "0.3.0",
+  "version": "0.3.5",
   "description": "Utility functions for styling components in FURN",
   "main": "src/index.ts",
-  "module": "lib/index.js",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "onPublish": {
     "main": "lib-commonjs/index.js",
@@ -20,9 +20,14 @@
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/utils/styling"
+  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@uifabricshared/build-native": "^0.1.1"
+    "@fluentui-react-native/scripts": "^0.1.1"
   },
   "peerDependencies": {
     "react": "^17.0.1",

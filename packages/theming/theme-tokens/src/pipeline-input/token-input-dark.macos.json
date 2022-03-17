@@ -7,6 +7,8 @@
     "NeutralForeground2": {
       "Fill": {
         "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.100" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.100" },
           "BrandHover": { "aliasOf": "Global.Color.Brand.Tint.40" },
           "BrandPressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
           "BrandSelected": { "aliasOf": "Global.Color.Brand.Tint.40" }
@@ -19,6 +21,20 @@
           "BrandHover": { "aliasOf": "Global.Color.Brand.Tint.40" },
           "BrandPressed": { "aliasOf": "Global.Color.Brand.Tint.10" },
           "BrandSelected": { "aliasOf": "Global.Color.Brand.Tint.40" }
+        }
+      }
+    },
+    "NeutralForeground4": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.52" }
+        }
+      }
+    },
+    "NeutralForegroundDisabled": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.72" }
         }
       }
     },
@@ -45,7 +61,11 @@
     "BrandForeground1": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Brand.Tint.30" }
+          "Rest": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Shade.10" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.30" },
+          "Selected": { "aliasOf": "Global.Color.Brand.Shade.20" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.76" }
         }
       }
     },
@@ -57,10 +77,55 @@
       }
     },
 
+    "NeutralBackground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.0" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralBackground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.34" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.44" }
+        }
+      }
+    },
+    "NeutralBackground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.34" }
+        }
+      }
+    },
+    "NeutralBackground4": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.12" }
+        }
+      }
+    },
+    "NeutralBackground5": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.36" }
+        }
+      }
+    },
+    "NeutralBackgroundDisabled": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.34" }
+        }
+      }
+    },
     "NeutralForegroundInverted": {
       "Fill": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Grey.0" }
+          "Rest": { "aliasOf": "Global.Color.Grey.100" },
+          "Pressed": { "aliasOf": "Global.Color.Grey.96" }
         }
       }
     },
@@ -91,8 +156,9 @@
         "Color": {
           "Rest": { "aliasOf": "Global.Color.Brand.Primary" },
           "Hover": { "aliasOf": "Global.Color.Brand.Shade.10" },
-          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.30" },
-          "Selected": { "aliasOf": "Global.Color.Brand.Shade.20" }
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.10" },
+          "Selected": { "aliasOf": "Global.Color.Brand.Shade.20" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.34" }
         }
       }
     },
@@ -127,10 +193,42 @@
         }
       }
     },
+    "NeutralStroke1": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.24" }
+        }
+      }
+    },
+    "NeutralStroke2": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.34" }
+        }
+      }
+    },
+    "NeutralStroke3": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.40" }
+        }
+      }
+    },
+    "NeutralStrokeDisabled": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.Grey.32" }
+        }
+      }
+    },
     "BrandStroke1": {
       "Stroke": {
         "Color": {
-          "Rest": { "aliasOf": "Global.Color.Brand.Primary" }
+          "Rest": { "aliasOf": "Global.Color.Brand.Primary" },
+          "Hover": { "aliasOf": "Global.Color.Brand.Shade.10" },
+          "Pressed": { "aliasOf": "Global.Color.Brand.Shade.30" },
+          "Selected": { "aliasOf": "Global.Color.Brand.Shade.20" },
+          "Disabled": { "aliasOf": "Global.Color.Grey.84" }
         }
       }
     },

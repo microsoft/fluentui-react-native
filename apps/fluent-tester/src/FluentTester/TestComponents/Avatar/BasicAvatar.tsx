@@ -1,5 +1,12 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
-import { AvatarSize, AvatarColor, JSAvatar, AvatarPresence } from '@fluentui-react-native/experimental-avatar';
+import {
+  AvatarSize,
+  AvatarColor,
+  JSAvatar,
+  AvatarPresence,
+  AvatarActive,
+  AvatarActiveAppearance,
+} from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -7,6 +14,9 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { JSAvatarTokens } from '@fluentui-react-native/experimental-avatar';
 
 type WithUndefined<T> = T | typeof undefinedText;
+
+const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
+const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring', 'shadow', 'glow', 'ring-shadow', 'ring-glow'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [
   undefinedText,
@@ -64,10 +74,14 @@ export const StandardUsage: FunctionComponent = () => {
   const tokens: JSAvatarTokens = {};
   const [isSquare, setSquare] = useState(false);
   const [showImage, setShowImage] = useState(true);
+  const [active, setActive] = useState<AvatarActive>('unset');
+  const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
   const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
   const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('online');
 
+  const onActiveChange = useCallback((value) => setActive(value), []);
+  const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
   const onSizeChange = useCallback((value) => setImageSize(value), []);
   const onColorChange = useCallback((value) => setCoinColor(value), []);
   const onPresenceChange = useCallback((value) => setPresence(value), []);
@@ -90,11 +104,22 @@ export const StandardUsage: FunctionComponent = () => {
         </View>
 
         <StyledPicker prompt="Size" selected={imageSize} onChange={onSizeChange} collection={allSizes} />
+        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+        {active === 'active' ? (
+          <StyledPicker
+            prompt="Active appearance"
+            selected={activeAppearance}
+            onChange={onActiveAppearanceChange}
+            collection={avatarActiveAppearance}
+          />
+        ) : null}
         <StyledPicker prompt="Coin color" selected={coinColor} onChange={onColorChange} collection={allColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
 
       <JSAvatar
+        active={active}
+        activeAppearance={activeAppearance}
         size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
         shape={isSquare ? 'square' : 'circular'}

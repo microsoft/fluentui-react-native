@@ -347,6 +347,72 @@
         },
         "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
       }
+    },
+    "RedBackground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Tint60" }
+        }
+      }
+    },
+    "RedBackground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Tint40" }
+        }
+      }
+    },
+    "RedBackground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Primary" }
+        }
+      }
+    },
+    "RedForeground1": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Shade10" }
+        }
+      }
+    },
+    "RedForeground2": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Shade30" }
+        }
+      }
+    },
+    "RedForeground3": {
+      "Fill": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Primary" }
+        }
+      }
+    },
+    "RedBorderActive": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Primary" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "RedBorder1": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Tint40" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
+    },
+    "RedBorder2": {
+      "Stroke": {
+        "Color": {
+          "Rest": { "aliasOf": "Global.Color.DarkRed.Primary" }
+        },
+        "Width": { "aliasOf": "Global.Stroke.Width.Thin" }
+      }
     }
   }
 }

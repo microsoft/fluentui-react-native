@@ -206,14 +206,26 @@ interface FluentUIAppleBasePalette {
 
 /** A set of control tokens used on the FluentUI Apple macOS button */
 interface FluentAppleButtonTokens {
+  brandedBackground: ColorValue;
+  brandBackgroundHovered: ColorValue;
+  brandBackgroundPressed: ColorValue;
   brandForegroundDisabled: ColorValue;
-  brandBackgroundDisabled: ColorValue;
-  neutralInverted: ColorValue;
+  brandForegroundPressed: ColorValue;
+  neutralStrokeDisabled: ColorValue;
+  neutralBackgroundInverted: ColorValue;
+  neutralForegroundInverted: ColorValue;
   neutralForeground2: ColorValue;
+  neutralBackground1: ColorValue;
   neutralBackground2: ColorValue;
+  neutralBackgroundDisabled: ColorValue;
+  neutralBackground2Pressed: ColorValue;
   neutralStroke2: ColorValue;
   neutralForeground3: ColorValue;
+  neutralForegroundDisabled: ColorValue;
+  neutralForeground2Pressed: ColorValue;
   neutralBackground3: ColorValue;
+  transparentBackground: ColorValue;
+  transparentStroke: ColorValue;
 }
 
 export type FluentUIApplePalette = FluentUIAppleBasePalette & FluentAppleButtonTokens;

@@ -1,8 +1,82 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.8
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.4
+
+## 0.11.7
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.0
+- Bump @uifabricshared/theming-ramp to v0.16.5
+
+## 0.11.6
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
+
+## 0.11.5
+
+Fri, 14 Jan 2022 01:00:04 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.13.3
+- Bump @uifabricshared/theming-ramp to v0.16.4
+
+## 0.11.4
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.2
+- Bump @uifabricshared/theming-ramp to v0.16.3
+
+## 0.11.3
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @uifabricshared/foundation-tokens to v0.11.2
+- Bump @uifabricshared/theming-ramp to v0.16.2
+
+## 0.11.2
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Update to TypeScript 4.5.4. (afoxman@microsoft.com)
+- Bump @uifabricshared/foundation-tokens to v0.11.1
+- Bump @uifabricshared/theming-ramp to v0.16.1
+
+## 0.11.1
+
+Thu, 16 Dec 2021 19:10:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.1
 
 ## 0.11.0
 

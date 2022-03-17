@@ -1,0 +1,51 @@
+parameters:
+  - name: skipNugetPublish
+    displayName: Skip Nuget Publish
+    type: boolean
+    default: false
+
+steps:
+  - checkout: self
+    persistCredentials: true
+
+  - template: setup-repo-min-build.yml
+
+  - script: |
+      yarn build
+    displayName: 'Building the repo'
+
+  - script: |
+      yarn bundle
+    workingDirectory: apps/win32
+    displayName: 'Bundling win32'
+
+  # Pack the NuGet package
+  - task: CmdLine@1
+    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+    inputs:
+        filename: nuget
+        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+        workingFolder: 'apps/win32/nuget'
+
+
+  - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
+    displayName: 📒 Generate Manifest FluentTester
+    inputs:
+      BuildDropPath: $(System.DefaultWorkingDirectory)
+
+  - task: PublishPipelineArtifact@1
+    displayName: 📒 Publish Manifest FluentTester
+    inputs:
+      artifactName: SBom-FluentTester-$(System.JobAttempt)
+      targetPath: $(System.DefaultWorkingDirectory)/_manifest
+
+  - task: ComponentGovernanceComponentDetection@0
+
+  # Push the NuGet package
+  - task: NuGetCommand@2
+    displayName: 'NuGet push'
+    condition: not(${{ parameters.skipNugetPublish }})
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
+      publishVstsFeed: Office

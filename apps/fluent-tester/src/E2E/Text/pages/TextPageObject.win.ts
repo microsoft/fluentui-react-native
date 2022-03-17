@@ -1,5 +1,10 @@
-import { TEXT_TESTPAGE, TEXT_TEST_COMPONENT, HOMEPAGE_TEXT_BUTTON } from '../../../FluentTester/TestComponents/Text/consts';
-import { BasePage, By } from '../../common/BasePage';
+import {
+  TEXT_TESTPAGE,
+  FIRST_TEXT_COMPONENT,
+  HOMEPAGE_TEXT_BUTTON,
+  SECOND_TEXT_COMPONENT,
+} from '../../../FluentTester/TestComponents/Text/consts';
+import { BasePage, By } from '../../common/BasePage.win';
 
 class TextPageObject extends BasePage {
   /*****************************************/
@@ -14,7 +19,11 @@ class TextPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(TEXT_TEST_COMPONENT);
+    return By(FIRST_TEXT_COMPONENT);
+  }
+
+  get _secondaryComponent() {
+    return By(SECOND_TEXT_COMPONENT);
   }
 
   get _pageButton() {

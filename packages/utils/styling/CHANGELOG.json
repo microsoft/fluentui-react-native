@@ -2,6 +2,89 @@
   "name": "@fluentui-react-native/styling-utils",
   "entries": [
     {
+      "date": "Thu, 17 Feb 2022 01:22:01 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.5",
+      "version": "0.3.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "039a993d13ae01ff2212e8b91295d1ed5676c82d",
+            "comment": "Fix up package.json files"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Jan 2022 20:49:22 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.4",
+      "version": "0.3.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "c648bedc2d3615caf496a61cd0e6d889498b7b01",
+            "comment": "More spacing adjustments"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jan 2022 01:00:03 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.3",
+      "version": "0.3.3",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ],
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "ef3732e4e5b82e3f324ca0eed4b12b6617788299",
+            "comment": "fix disabled button"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 04 Jan 2022 23:05:12 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "63bdbdb4e34834e7ae2ded3a39d38fe530fd30c0",
+            "comment": "Change marginLeft/Right to marginStart/End"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:56:01 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "f4a5b4f5c9c190400e3e34c4a33b3ed30696d41e",
+            "comment": "Add repository property to all package.json files"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Nov 2021 19:28:07 GMT",
       "tag": "@fluentui-react-native/styling-utils_v0.3.0",
       "version": "0.3.0",

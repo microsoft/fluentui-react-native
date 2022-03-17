@@ -1,112 +1,85 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { IButtonSlotProps, IButtonState, IButtonProps, IButtonRenderData, buttonName, IButtonType } from './Button.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { Text } from '@fluentui-react-native/text';
-import { settings } from './Button.settings';
-import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import { filterViewProps } from '@fluentui-react-native/adapters';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-
-import {
-  useAsPressable,
-  useKeyCallback,
-  useViewCommandFocus,
-  createIconProps,
-  useOnPressWithFocus,
-} from '@fluentui-react-native/interactive-hooks';
+import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
+import { buttonName, ButtonType, ButtonProps } from './Button.types';
+import { Text } from '@fluentui-react-native/experimental-text';
+import { stylingSettings, getDefaultSize } from './Button.styling';
+import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
+import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 
-export const Button = compose<IButtonType>({
+/**
+ * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
+ *
+ * @param layer The name of the state that is being checked for
+ * @param state The current state of the button
+ * @param userProps The props that were passed into the button
+ * @returns Whether the styles that are assigned to the layer should be applied to the button
+ */
+export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
+  return (
+    state[layer] ||
+    userProps[layer] ||
+    layer === userProps['appearance'] ||
+    layer === userProps['size'] ||
+    (!userProps['size'] && layer === getDefaultSize()) ||
+    layer === userProps['shape'] ||
+    (!userProps['shape'] && layer === 'rounded') ||
+    (layer === 'hasContent' && !userProps.iconOnly) ||
+    (layer === 'hasIconAfter' && (userProps.icon || userProps.loading) && userProps.iconPosition === 'after') ||
+    (layer === 'hasIconBefore' && (userProps.icon || userProps.loading) && (!userProps.iconPosition || userProps.iconPosition === 'before'))
+  );
+};
+
+export const Button = compose<ButtonType>({
   displayName: buttonName,
-  usePrepareProps: (userProps: IButtonProps, useStyling: IUseComposeStyling<IButtonType>) => {
-    const defaultComponentRef = React.useRef(null);
-    const {
-      icon,
-      startIcon,
-      endIcon,
-      content,
-      onAccessibilityTap = userProps.onClick,
-      accessibilityLabel = userProps.content,
-      componentRef = defaultComponentRef,
-      testID,
-      onClick,
-      ...rest
-    } = userProps;
-
-    // Ensure focus is placed on button after click
-    const onPressWithFocus = useOnPressWithFocus(componentRef, onClick);
-    // attach the pressable state handlers
-    const pressable = useAsPressable({ ...rest, onPress: onPressWithFocus });
-    const onKeyUp = useKeyCallback(onClick, ' ', 'Enter');
-    // set up state
-    const state: IButtonState = {
-      info: {
-        ...pressable.state,
-        disabled: !!userProps.disabled,
-        content: !!content,
-        startIcon: !!startIcon || !!icon,
-        endIcon: !!endIcon,
-      },
-    };
-
-    const buttonRef = useViewCommandFocus(componentRef);
-    // grab the styling information, referencing the state as well as the props
-    const styleProps = useStyling(userProps, (override: string) => state.info[override] || userProps[override]);
-    // create the merged slot props
-
-    const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
-      root: {
-        ...pressable.props,
-        ref: buttonRef,
-        onAccessibilityTap: onAccessibilityTap,
-        accessibilityLabel: accessibilityLabel,
-        accessibilityState: { disabled: state.info.disabled },
-        onKeyUp: onKeyUp,
-        testID,
-      },
-      content: { children: content },
-      startIcon: createIconProps(startIcon || icon),
-      endIcon: createIconProps(endIcon),
-    });
-
-    return { slotProps, state };
-  },
-  settings,
-  render: (Slots: ISlots<IButtonSlotProps>, renderData: IButtonRenderData, ...children: React.ReactNode[]) => {
-    const info = renderData.state!.info;
-
-    return (
-      <Slots.root>
-        <Slots.borderWrapper>
-          <Slots.stack>
-            {info.startIcon && <Slots.startIcon />}
-            {info.content && <Slots.content />}
-            {children}
-            {info.endIcon && <Slots.endIcon />}
-          </Slots.stack>
-        </Slots.borderWrapper>
-      </Slots.root>
-    );
-  },
+  ...stylingSettings,
   slots: {
     root: View,
-    stack: { slotType: View, filter: filterViewProps },
-    borderWrapper: { slotType: View, filter: filterViewProps },
-    startIcon: { slotType: Icon as React.ComponentType },
+    icon: Icon,
     content: Text,
-    endIcon: { slotType: Icon as React.ComponentType },
   },
-  styles: {
-    root: [backgroundColorTokens, borderTokens],
-    stack: [],
-    borderWrapper: [{ source: 'wrapperBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }],
-    startIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
-    content: [textTokens, foregroundColorTokens],
-    endIcon: [{ source: 'iconColor', lookup: getPaletteFromTheme, target: 'color' }],
+  useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
+    const button = useButton(userProps);
+    const iconProps = createIconProps(userProps.icon);
+    // grab the styled slots
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+
+    // now return the handler for finishing render
+    return (final: ButtonProps, ...children: React.ReactNode[]) => {
+      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+
+      const shouldShowIcon = !loading && icon;
+      if (__DEV__ && iconOnly) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            console.warn('iconOnly should not be set when Button has content.');
+          }
+        });
+      }
+
+      let childText = '';
+      if (accessibilityLabel === undefined) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            childText = child; // We only automatically support the one child string.
+          }
+        });
+      }
+      const label = accessibilityLabel ?? childText;
+
+      return (
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
+          {loading && <ActivityIndicator />}
+          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          {React.Children.map(children, (child) =>
+            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+          )}
+          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+        </Slots.root>
+      );
+    };
   },
 });
-
-export default Button;

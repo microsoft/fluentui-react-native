@@ -66,8 +66,7 @@ export const DrawerTest: React.FunctionComponent = () => {
     androidStatus: 'Experimental',
   };
 
-  const description =
-    'A Drawer component using the Fluent Design System.  Currently only implemented on Android.';
+  const description = 'A Drawer component using the Fluent Design System.  Currently only implemented on Android.';
 
   return <Test name="Drawer Test" description={description} sections={drawerSections} status={status} />;
 };

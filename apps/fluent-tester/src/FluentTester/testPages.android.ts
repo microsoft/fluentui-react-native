@@ -1,5 +1,6 @@
 import { TestDescription } from './TestComponents';
 import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
@@ -17,17 +18,16 @@ import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_ICON_BUTTON, IconTest } from './TestComponents/Icon';
-import { ActivityIndicatorTest, HOMEPAGE_ACTIVITYINDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
-import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
-import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL } from './TestComponents/CheckboxExperimental';
+import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestComponents/TextExperimental';
 
 export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
-    testPage: HOMEPAGE_ACTIVITYINDICATOR_BUTTON,
+    testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
   },
   {
     name: 'Avatar Test',
@@ -35,14 +35,14 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_AVATAR_BUTTON,
   },
   {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
+  },
+  {
     name: 'Button Test',
     component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON,
-  },
-  {
-    name: 'Experimental Button',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
   },
   {
     name: 'Callout Test',
@@ -122,7 +122,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_CHECKBOXEXPERIMENTAL,
+    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
   },
   {
     name: 'Svg Test',

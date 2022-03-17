@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.4
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Pass tooltip to React Native macOS components (sanajmi@microsoft.com)
+
+## 0.8.3
+
+Fri, 18 Feb 2022 23:27:10 GMT
+
+### Patches
+
+- Remove web endpoint (ruaraki@microsoft.com)
+
+## 0.8.2
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+
+## 0.8.1
+
+Thu, 16 Dec 2021 19:10:30 GMT
+
+### Patches
+
+- Have web adapter export React Native core types (sanajmi@microsoft.com)
+- Fix build (ruaraki@microsoft.com)
 
 ## 0.8.0
 

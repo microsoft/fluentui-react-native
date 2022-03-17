@@ -1,10 +1,11 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.11.0",
+  "version": "1.11.11",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microsoft/ui-fabric-react-native"
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/deprecated/foundation-compose"
   },
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -15,12 +16,10 @@
   },
   "scripts": {
     "build": "fluentui-scripts build",
-    "bundle": "fluentui-scripts bundle",
     "just": "fluentui-scripts",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "test": "fluentui-scripts jest",
-    "code-style": "fluentui-scripts code-style",
     "lint": "fluentui-scripts eslint",
     "start": "fluentui-scripts dev",
     "start-test": "fluentui-scripts jest-watch",
@@ -32,14 +31,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.9.0 <1.0.0",
-    "@fluentui-react-native/immutable-merge": "^1.1.4",
-    "@fluentui-react-native/theme-types": ">=0.13.0 <1.0.0",
-    "@uifabricshared/themed-settings": ">=0.8.0 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.10.0 <1.0.0",
-    "@uifabricshared/foundation-settings": ">=0.11.0 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.11.0 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.16.0 <1.0.0"
+    "@fluentui-react-native/default-theme": ">=0.9.11 <1.0.0",
+    "@fluentui-react-native/immutable-merge": "^1.1.6",
+    "@fluentui-react-native/theme-types": ">=0.14.0 <1.0.0",
+    "@uifabricshared/themed-settings": ">=0.8.2 <1.0.0",
+    "@uifabricshared/foundation-composable": ">=0.10.2 <1.0.0",
+    "@uifabricshared/foundation-settings": ">=0.11.2 <1.0.0",
+    "@uifabricshared/foundation-tokens": ">=0.11.2 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.16.5 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

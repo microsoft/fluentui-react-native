@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
 import SeparatorPageObject from '../pages/SeparatorPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Separator Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Separator test page', () => {
@@ -18,6 +18,7 @@ describe('Separator Testing Initialization', function () {
     NavigateAppPage.clickAndGoToSeparatorPage();
     SeparatorPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(SeparatorPageObject.isPageLoaded()).toBeTruthy();
+    expect(SeparatorPageObject.isPageLoaded()).toBeTruthy(SeparatorPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(SeparatorPageObject.didAssertPopup()).toBeFalsy(SeparatorPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

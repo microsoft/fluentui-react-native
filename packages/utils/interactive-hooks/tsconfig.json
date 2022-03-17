@@ -1,8 +1,9 @@
 {
-  "extends": "@uifabricshared/build-native/tsconfig.json",
+  "extends": "@fluentui-react-native/scripts/tsconfig.json",
   "compilerOptions": {
     "importHelpers": true,
-    "outDir": "lib"
+    "outDir": "lib",
+    "types": ["node", "jest"]
   },
   "include": ["src"]
 }

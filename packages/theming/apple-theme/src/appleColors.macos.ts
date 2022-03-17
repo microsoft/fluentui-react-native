@@ -3,6 +3,8 @@ import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
+import { createMacOSAliasTokens } from './createMacOSAliasTokens';
+import { getIsHighContrast } from './appleHighContrast.macos';
 
 /** Creates a Palette of PlatformColors defined for macOS */
 export function getAppleSemanticPalette(): AppleSemanticPalette {
@@ -55,6 +57,10 @@ export function getAppleSemanticPalette(): AppleSemanticPalette {
 }
 
 function getFluentUIApplePalette(): FluentUIApplePalette {
+  const appearance = Appearance.getColorScheme();
+  const mode = getCurrentAppearance(appearance, 'light');
+  const macOSAliasColorTokens = createMacOSAliasTokens(mode, getIsHighContrast());
+
   return {
     blue10: '#4F6BED',
     blueMagenta20: '#8764B8',
@@ -251,43 +257,34 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
       dark: '#291F07',
     }),
 
-    brandForegroundDisabled: DynamicColorMacOS({
-      light: '#2525253F',
-      dark: '#FFFFFF3F',
-    }),
-    brandBackgroundDisabled: DynamicColorMacOS({
-      light: '#2525253F',
-      dark: '#5656567F',
-    }),
-    neutralInverted: '#FFFFFF',
-    neutralForeground2: '#000000D8',
-    neutralBackground2: DynamicColorMacOS({
-      light: '#FFFFFF',
-      dark: '#555555',
-    }),
-    neutralStroke2: '#00000026',
-    neutralForeground3: DynamicColorMacOS({
-      light: '#272727',
-      dark: '#FFFFFF',
-    }),
-    neutralBackground3: DynamicColorMacOS({
-      light: '#0000000C',
-      dark: '#555555',
-    }),
+    brandedBackground: macOSAliasColorTokens.brandBackground,
+    neutralBackgroundDisabled: macOSAliasColorTokens.neutralBackgroundDisabled,
+    brandForegroundDisabled: macOSAliasColorTokens.brandForeground1Disabled,
+    brandForegroundPressed: macOSAliasColorTokens.brandForeground1Pressed,
+    brandBackgroundPressed: macOSAliasColorTokens.brandBackgroundPressed,
+    brandBackgroundHovered: macOSAliasColorTokens.brandBackgroundHover,
+    neutralBackgroundInverted: macOSAliasColorTokens.neutralBackgroundInverted,
+    neutralForegroundInverted: macOSAliasColorTokens.neutralForegroundInverted,
+    neutralForeground2: macOSAliasColorTokens.neutralForeground2,
+    neutralBackground1: macOSAliasColorTokens.neutralBackground1,
+    neutralBackground2: macOSAliasColorTokens.neutralBackground2,
+    neutralStroke2: macOSAliasColorTokens.neutralStroke2,
+    neutralForeground3: macOSAliasColorTokens.neutralForeground3,
+    neutralBackground3: macOSAliasColorTokens.neutralBackground3,
+    neutralStrokeDisabled: macOSAliasColorTokens.neutralStrokeDisabled,
+    transparentBackground: macOSAliasColorTokens.transparentBackground,
+    transparentStroke: macOSAliasColorTokens.transparentStroke,
+    neutralForegroundDisabled: macOSAliasColorTokens.neutralForegroundDisabled,
+    neutralForeground2Pressed: macOSAliasColorTokens.neutralBackground2Pressed,
+    neutralBackground2Pressed: macOSAliasColorTokens.neutralBackground2Pressed,
   };
 }
-
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
- * The fallback palette is loaded while we wait for the native theming module to load, or if the module is not found
+ * The fallback palette is loaded while we wait for  the native theming module to load, or if the module is not found
  */
 export function fallbackApplePalette(): ThemeColorDefinition {
   const fluentUIApple = getFluentUIApplePalette();
   const applePlatform = getAppleSemanticPalette();
-
-  // GH:728 Until RN-SVG Supports PlatformColor, we need this workaround
-  const appearance = Appearance.getColorScheme();
-  const neutralForeground3 = getCurrentAppearance(appearance, 'light') === 'light' ? '#272727' : '#FFFFFF';
-
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
 
@@ -310,7 +307,6 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     variantBorder: applePlatform.separatorColor,
     variantBorderHovered: applePlatform.separatorColor,
     defaultStateBackground: applePlatform.controlBackgroundColor,
-
     errorText: fluentUIApple.dangerPrimary,
     warningText: fluentUIApple.warningPrimary,
     errorBackground: fluentUIApple.dangerTint10,
@@ -332,13 +328,13 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     inputPlaceholderText: applePlatform.placeholderTextColor,
 
     // Set the default button tokens to match the Acrylic Button style
-    buttonBackground: fluentUIApple.neutralBackground3,
+    buttonBackground: fluentUIApple.neutralBackground1,
     buttonBackgroundChecked: fluentUIApple.neutralBackground3,
     buttonBackgroundHovered: fluentUIApple.neutralBackground3,
     buttonBackgroundCheckedHovered: fluentUIApple.neutralBackground3,
     buttonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
     buttonBackgroundDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
-    buttonBorder: 'transparent',
+    buttonBorder: fluentUIApple.transparentStroke,
     buttonText: fluentUIApple.neutralForeground3,
     buttonTextHovered: fluentUIApple.neutralForeground3,
     buttonTextChecked: fluentUIApple.neutralForeground3,
@@ -346,26 +342,26 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     buttonTextPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
     buttonTextDisabled: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'disabled'),
 
-    buttonBorderDisabled: 'transparent',
-    buttonBorderFocused: 'transparent',
+    buttonBorderDisabled: fluentUIApple.transparentBackground,
+    buttonBorderFocused: fluentUIApple.transparentBackground,
 
     primaryButtonBackground: fluentUIApple.communicationBlue,
     primaryButtonBackgroundHovered: fluentUIApple.communicationBlue,
-    primaryButtonBackgroundPressed: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
-    primaryButtonBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
+    primaryButtonBackgroundPressed: fluentUIApple.brandBackgroundPressed,
+    primaryButtonBackgroundDisabled: fluentUIApple.neutralBackgroundDisabled,
     primaryButtonBorder: 'transparent',
     primaryButtonBorderFocused: 'transparent',
-    primaryButtonText: fluentUIApple.neutralInverted,
-    primaryButtonTextHovered: fluentUIApple.neutralInverted,
-    primaryButtonTextPressed: ColorWithSystemEffectMacOS(fluentUIApple.neutralInverted, 'pressed'),
+    primaryButtonText: fluentUIApple.neutralForegroundInverted,
+    primaryButtonTextHovered: fluentUIApple.neutralForegroundInverted,
+    primaryButtonTextPressed: fluentUIApple.neutralForegroundInverted,
     primaryButtonTextDisabled: fluentUIApple.brandForegroundDisabled,
 
     accentButtonBackground: fluentUIApple.communicationBlue,
-    accentButtonText: fluentUIApple.neutralInverted,
+    accentButtonText: fluentUIApple.neutralForegroundInverted,
 
     menuBackground: 'transparent',
     menuDivider: applePlatform.separatorColor,
-    menuIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    menuIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
     menuHeader: applePlatform.headerTextColor,
     menuItemBackgroundHovered: applePlatform.controlAccentColor,
     menuItemBackgroundPressed: ColorWithSystemEffectMacOS(applePlatform.controlAccentColor, 'pressed'),
@@ -390,30 +386,30 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     /* ControlColorTokens */
 
     // Set the default button tokens to match the Acrylic Button style
-    defaultBackground: fluentUIApple.neutralBackground3,
-    defaultBorder: 'transparent',
-    defaultContent: fluentUIApple.neutralForeground3,
-    defaultIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    defaultBackground: fluentUIApple.neutralBackground2,
+    defaultBorder: fluentUIApple.neutralStroke2,
+    defaultContent: fluentUIApple.neutralForeground2,
+    defaultIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultHoveredBackground: fluentUIApple.neutralBackground3,
-    defaultHoveredBorder: 'transparent',
+    defaultHoveredBorder: fluentUIApple.neutralStroke2,
     defaultHoveredContent: fluentUIApple.neutralForeground3,
-    defaultHoveredIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    defaultHoveredIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultFocusedBackground: fluentUIApple.neutralBackground3,
-    defaultFocusedBorder: 'transparent',
+    defaultFocusedBorder: fluentUIApple.neutralStroke2,
     defaultFocusedContent: fluentUIApple.neutralForeground3,
-    defaultFocusedIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    defaultFocusedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'pressed'),
-    defaultPressedBorder: 'transparent',
-    defaultPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    defaultPressedIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    defaultPressedBackground: fluentUIApple.neutralBackground2Pressed,
+    defaultPressedBorder: fluentUIApple.neutralStroke2,
+    defaultPressedContent: fluentUIApple.neutralForeground2,
+    defaultPressedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultDisabledBackground: ColorWithSystemEffectMacOS(fluentUIApple.neutralBackground3, 'disabled'),
-    defaultDisabledBorder: 'transparent',
-    defaultDisabledContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForeground3, 'pressed'),
-    defaultDisabledIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    defaultDisabledBackground: fluentUIApple.neutralBackground2,
+    defaultDisabledBorder: fluentUIApple.neutralStroke2,
+    defaultDisabledContent: fluentUIApple.neutralForegroundDisabled,
+    defaultDisabledIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostBackground: 'transparent',
     ghostBorder: 'transparent',
@@ -432,48 +428,48 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
-    ghostPressedContent: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
-    ghostPressedIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    ghostPressedContent: fluentUIApple.brandForegroundPressed,
+    ghostPressedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
     ghostDisabledContent: fluentUIApple.brandForegroundDisabled,
     ghostDisabledIcon: fluentUIApple.brandForegroundDisabled,
 
-    brandedBackground: fluentUIApple.communicationBlue,
-    brandedBorder: 'transparent',
-    brandedContent: fluentUIApple.neutralInverted,
-    brandedIcon: fluentUIApple.neutralInverted,
+    brandedBackground: fluentUIApple.brandedBackground,
+    brandedBorder: fluentUIApple.transparentStroke,
+    brandedContent: fluentUIApple.neutralForegroundInverted,
+    brandedIcon: fluentUIApple.neutralForegroundInverted,
 
-    brandedHoveredBackground: fluentUIApple.communicationBlue,
+    brandedHoveredBackground: fluentUIApple.brandBackgroundHovered,
     brandedHoveredBorder: 'transparent',
-    brandedHoveredContent: fluentUIApple.neutralInverted,
-    brandedHoveredIcon: fluentUIApple.neutralInverted,
+    brandedHoveredContent: fluentUIApple.neutralForegroundInverted,
+    brandedHoveredIcon: fluentUIApple.neutralForegroundInverted,
 
     brandedFocusedBackground: fluentUIApple.communicationBlue,
     brandedFocusedBorder: 'transparent',
-    brandedFocusedContent: fluentUIApple.neutralInverted,
-    brandedFocusedIcon: fluentUIApple.neutralInverted,
+    brandedFocusedContent: fluentUIApple.neutralForegroundInverted,
+    brandedFocusedIcon: fluentUIApple.neutralForegroundInverted,
 
-    brandedPressedBackground: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
+    brandedPressedBackground: fluentUIApple.brandBackgroundPressed, //ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'pressed'),
     brandedPressedBorder: 'transparent',
-    brandedPressedContent: fluentUIApple.neutralInverted,
-    brandedPressedIcon: fluentUIApple.neutralInverted,
+    brandedPressedContent: fluentUIApple.neutralForegroundInverted,
+    brandedPressedIcon: fluentUIApple.neutralForegroundInverted,
 
-    brandedDisabledBackground: fluentUIApple.brandBackgroundDisabled,
+    brandedDisabledBackground: fluentUIApple.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
     brandedDisabledContent: fluentUIApple.brandForegroundDisabled,
-    brandedDisabledIcon: neutralForeground3, //GH:728 Icon doesn't support PlatformColor
+    brandedDisabledIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultCheckedBackground: fluentUIApple.communicationBlue,
-    defaultCheckedContent: fluentUIApple.neutralInverted,
+    defaultCheckedContent: fluentUIApple.neutralForegroundInverted,
     defaultCheckedHoveredBackground: fluentUIApple.communicationBlue,
-    defaultCheckedHoveredContent: fluentUIApple.neutralInverted,
+    defaultCheckedHoveredContent: fluentUIApple.neutralForegroundInverted,
 
     brandedCheckedBackground: fluentUIApple.communicationBlue,
-    brandedCheckedContent: fluentUIApple.neutralInverted,
+    brandedCheckedContent: fluentUIApple.neutralForegroundInverted,
     brandedCheckedHoveredBackground: fluentUIApple.communicationBlue,
-    brandedCheckedHoveredContent: fluentUIApple.neutralInverted,
+    brandedCheckedHoveredContent: fluentUIApple.neutralForegroundInverted,
 
     ghostCheckedBackground: 'transparent',
     ghostCheckedContent: fluentUIApple.communicationBlue,
@@ -486,21 +482,21 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     ghostHoveredSecondaryContent: fluentUIApple.communicationBlue,
     ghostPressedSecondaryContent: ColorWithSystemEffectMacOS(fluentUIApple.communicationBlue, 'deepPressed'),
 
-    brandedSecondaryContent: fluentUIApple.neutralInverted,
-    brandedFocusedSecondaryContent: fluentUIApple.neutralInverted,
-    brandedHoveredSecondaryContent: fluentUIApple.neutralInverted,
-    brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralInverted, 'pressed'),
+    brandedSecondaryContent: fluentUIApple.neutralForegroundInverted,
+    brandedFocusedSecondaryContent: fluentUIApple.neutralForegroundInverted,
+    brandedHoveredSecondaryContent: fluentUIApple.neutralForegroundInverted,
+    brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(fluentUIApple.neutralForegroundInverted, 'pressed'),
 
     defaultDisabledSecondaryContent: fluentUIApple.brandForegroundDisabled,
-    defaultHoveredSecondaryContent: fluentUIApple.neutralInverted,
-    defaultPressedSecondaryContent: fluentUIApple.neutralInverted,
+    defaultHoveredSecondaryContent: fluentUIApple.neutralForeground3,
+    defaultPressedSecondaryContent: fluentUIApple.neutralForegroundInverted,
 
     checkboxBackground: fluentUIApple.communicationBlue,
-    checkboxBackgroundDisabled: fluentUIApple.brandBackgroundDisabled,
+    checkboxBackgroundDisabled: fluentUIApple.neutralBackgroundDisabled,
     checkboxBorderColor: fluentUIApple.gray600,
-    checkmarkColor: fluentUIApple.neutralInverted,
+    checkmarkColor: fluentUIApple.neutralForegroundInverted,
 
-    personaActivityRing: fluentUIApple.neutralInverted,
+    personaActivityRing: fluentUIApple.neutralForegroundInverted,
     personaActivityGlow: fluentUIApple.red10,
   };
 }

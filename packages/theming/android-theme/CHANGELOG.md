@@ -1,8 +1,54 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Thu, 03 Mar 2022 20:20:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.5
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.0
+- Bump @fluentui-react-native/theme to v0.6.5
+
+## 0.5.4
+
+Fri, 14 Jan 2022 01:00:01 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.13.3
+- Bump @fluentui-react-native/theme to v0.6.4
+
+## 0.5.3
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.13.2
+- Bump @fluentui-react-native/theme to v0.6.3
+
+## 0.5.2
+
+Mon, 20 Dec 2021 22:56:00 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.13.1
+- Bump @fluentui-react-native/theme to v0.6.2
+
+## 0.5.1
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme to v0.6.1
 
 ## 0.5.0
 

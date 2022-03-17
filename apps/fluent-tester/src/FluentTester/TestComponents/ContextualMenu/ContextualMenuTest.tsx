@@ -16,7 +16,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 
-const contextualMenu: React.FunctionComponent = () => {
+const ContextualMenuMainTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -114,8 +114,7 @@ const contextualMenu: React.FunctionComponent = () => {
   );
 };
 
-const nestedContextualMenu: React.FunctionComponent = () => {
-
+const NestedContextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -162,7 +161,6 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   const onClick = React.useCallback(() => {
     console.log('submenu item clicked');
   }, []);
-
 
   return (
     <View>
@@ -234,8 +232,10 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   );
 };
 
-const IconContextualMenu: React.FunctionComponent = () => {
+// custom text
+const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
 
+const IconContextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -260,9 +260,6 @@ const IconContextualMenu: React.FunctionComponent = () => {
     setShowContextualMenu(false);
     setIsContextualMenuVisible(false);
   }, [setShowContextualMenu]);
-
-  // custom text
-  const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
 
   return (
     <View>
@@ -442,7 +439,13 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
             componentRef={stdMenuItemRef}
           />
           {showSubmenu && (
-            <Submenu maxHeight={200} target={stdMenuItemRef} onDismiss={onDismissSubmenu} onShow={onShowSubmenu} setShowMenu={toggleShowSubmenu}>
+            <Submenu
+              maxHeight={200}
+              target={stdMenuItemRef}
+              onDismiss={onDismissSubmenu}
+              onShow={onShowSubmenu}
+              setShowMenu={toggleShowSubmenu}
+            >
               <ContextualMenuItem text="MenuItem 4" itemKey="4" />
               <ContextualMenuItem text="MenuItem 5" itemKey="5" />
               <ContextualMenuItem text="MenuItem 6" itemKey="6" />
@@ -469,11 +472,11 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',
     testID: CONTEXTUALMENU_TESTPAGE,
-    component: contextualMenu,
+    component: ContextualMenuMainTest,
   },
   {
     name: 'Nested ContextualMenu',
-    component: nestedContextualMenu,
+    component: NestedContextualMenu,
   },
   {
     name: 'IconButton with Customized ContextualMenu',
@@ -486,7 +489,7 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'ContextualMenu E2E Test',
     component: E2EContextualMenuTest,
-  },  
+  },
 ];
 
 export const ContextualMenuTest: React.FunctionComponent = () => {

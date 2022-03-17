@@ -1,8 +1,226 @@
 # Change Log - @fluentui-react-native/pressable
 
-This log was last generated on Wed, 17 Nov 2021 19:28:07 GMT and should not be manually modified.
+This log was last generated on Mon, 07 Mar 2022 19:15:33 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.26
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.4
+- Bump @fluentui-react-native/interactive-hooks to v0.14.3
+
+## 0.8.25
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.2
+
+## 0.8.24
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.1
+
+## 0.8.23
+
+Tue, 01 Mar 2022 20:18:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.0
+
+## 0.8.22
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
+- Bump @fluentui-react-native/interactive-hooks to v0.13.3
+
+## 0.8.21
+
+Thu, 17 Feb 2022 02:13:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.2
+
+## 0.8.20
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.1
+
+## 0.8.19
+
+Wed, 09 Feb 2022 20:14:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.0
+
+## 0.8.18
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+
+## 0.8.17
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+
+## 0.8.16
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+
+## 0.8.15
+
+Tue, 25 Jan 2022 21:55:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+
+## 0.8.14
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
+
+## 0.8.13
+
+Fri, 14 Jan 2022 21:49:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.13
+
+## 0.8.12
+
+Fri, 14 Jan 2022 01:00:03 GMT
+
+### Patches
+
+- fix disabled button (email not defined)
+- Bump @fluentui-react-native/interactive-hooks to v0.11.12
+
+## 0.8.11
+
+Thu, 06 Jan 2022 23:14:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.11
+
+## 0.8.10
+
+Thu, 06 Jan 2022 21:30:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.10
+
+## 0.8.9
+
+Wed, 05 Jan 2022 23:53:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.9
+
+## 0.8.8
+
+Tue, 21 Dec 2021 20:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.8
+
+## 0.8.7
+
+Mon, 20 Dec 2021 22:56:01 GMT
+
+### Patches
+
+- Add repository property to all package.json files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.8.2
+- Bump @fluentui-react-native/interactive-hooks to v0.11.7
+- Bump @uifabricshared/foundation-composable to v0.10.2
+- Bump @uifabricshared/foundation-settings to v0.11.2
+
+## 0.8.6
+
+Sun, 19 Dec 2021 05:07:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.6
+
+## 0.8.5
+
+Sat, 18 Dec 2021 04:15:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.5
+- Bump @uifabricshared/foundation-composable to v0.10.1
+- Bump @uifabricshared/foundation-settings to v0.11.1
+
+## 0.8.4
+
+Fri, 17 Dec 2021 22:06:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.4
+
+## 0.8.3
+
+Fri, 17 Dec 2021 19:53:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.3
+
+## 0.8.2
+
+Fri, 17 Dec 2021 01:26:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.2
+
+## 0.8.1
+
+Thu, 16 Dec 2021 19:10:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.1
+- Bump @fluentui-react-native/interactive-hooks to v0.11.1
 
 ## 0.8.0
 

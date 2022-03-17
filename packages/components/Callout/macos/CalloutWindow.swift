@@ -1,41 +1,57 @@
 import Foundation
 import AppKit
 
-protocol CalloutWindowLifeCycleDelegate {
-	/*
-	 * Notify the CalloutWindowLifeCycle object that the user touched/clicked outside the bounds of the callout.
-	 */
-	func didDetectHitOutsideCallout(calloutWindow: CalloutWindow)
-
-	/*
-	 * Notify the CalloutWindowLifeCycle object that the window the callout is in is no longer active.
-	 */
-	func applicationDidResignActiveForCalloutWindow(calloutWindow: CalloutWindow)
+protocol CalloutWindowLifeCycleDelegate: AnyObject {
+	/// Notify the delegate that the Callout is about to dismiss
+	func calloutWillDismiss(window: CalloutWindow)
 }
 
 class CalloutWindow: NSWindow {
 
-	public var windowLifeCycleDelegate: CalloutWindowLifeCycleDelegate?
+	weak var lifeCycleDelegate: CalloutWindowLifeCycleDelegate?
 
 	override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
 		super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
-		isReleasedWhenClosed = true
+		isReleasedWhenClosed = false
 
 		styleMask = .borderless
 		level = .popUpMenu
 		backgroundColor = .clear
 		isMovable = false
 
-		NotificationCenter.default.addObserver(self, selector: #selector(appDidChangeActive(notification:)), name: NSApplication.didResignActiveNotification, object: nil)
+		// Dismiss the Callout if the window is no longer active.
+		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
 
-		mouseEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { (event) -> NSEvent? in
-			if (event.window != self) {
-				self.windowLifeCycleDelegate?.didDetectHitOutsideCallout(calloutWindow: self)
+		// Dismiss the Callout if the user clicked outside the Callout Window or any of our child windows.
+		mouseEventMonitor = NSEvent.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { [weak self] (event) -> NSEvent? in
+			guard let clickedWindow = event.window else {
+				return event
 			}
+
+			var shouldDismissCallout = true
+			
+			// Did the click happened in our own window?
+			if (clickedWindow.isEqual(to: self) ) {
+				shouldDismissCallout = false
+
+			// Are we a child window of a Callout (e.g: a ContextualMenu submenu), where the click happened in our parent?
+			} else if (clickedWindow.isEqual(to: self?.parent as? CalloutWindow)) {
+				shouldDismissCallout = false
+
+			// Did the click happened in any of our child windows (e.g: our submenus)?
+			} else if (self?.childWindows?.contains(clickedWindow) ?? false) {
+				shouldDismissCallout = false
+			}
+
+			if (shouldDismissCallout) {
+				self?.dismissCallout()
+			}
+
 			return event
 		})
 	}
 
+	// Required to get a key view loop in the window
 	override var canBecomeKey: Bool {
 		return true
 	}
@@ -44,8 +60,20 @@ class CalloutWindow: NSWindow {
 		return false
 	}
 
-	@objc func appDidChangeActive(notification: NSNotification) {
-		windowLifeCycleDelegate?.applicationDidResignActiveForCalloutWindow(calloutWindow: self)
+	// Required to close the window on escape key press
+	override func cancelOperation(_ sender: Any?) {
+		dismissCallout()
+	}
+
+	@objc private func dismissCallout() {
+		lifeCycleDelegate?.calloutWillDismiss(window: self)
+		orderOut(self)
+	}
+	
+	deinit {
+		if let monitor = mouseEventMonitor {
+			NSEvent.removeMonitor(monitor)
+		}
 	}
 
 	private var mouseEventMonitor: Any?

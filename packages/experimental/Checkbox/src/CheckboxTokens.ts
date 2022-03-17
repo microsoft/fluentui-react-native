@@ -1,23 +1,45 @@
 import { Theme } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { CheckboxTokens } from '.';
-
-export const checkboxStates: (keyof CheckboxTokens)[] = ['boxAtEnd', 'hovered', 'focused', 'pressed', 'checked', 'disabled'];
+import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    checkboxBorderColor: t.colors.menuItemText,
-    color: t.colors.menuItemText,
+    requiredColor: t.colors.redForeground1,
+    requiredPadding: globalTokens.spacing.s,
+    medium: {
+      borderRadius: globalTokens.corner.radius.small,
+      checkboxBorderWidth: globalTokens.stroke.width.thin,
+      checkboxBorderRadius: globalTokens.corner.radius.small,
+      checkboxSize: 16,
+      checkmarkSize: 8,
+      spacingLabelAfter: globalTokens.spacing.m,
+      labelIsBefore: {
+        spacingLabelBefore: globalTokens.spacing.m,
+        spacingLabelAfter: 0,
+      },
+      padding: globalTokens.spacing.s,
+      variant: 'bodyStandard',
+    },
+    large: {
+      borderRadius: globalTokens.corner.radius.small,
+      checkboxBorderWidth: globalTokens.stroke.width.thin,
+      checkboxBorderRadius: globalTokens.corner.radius.small,
+      checkboxSize: 20,
+      checkmarkSize: 10,
+      spacingLabelAfter: globalTokens.spacing.m,
+      labelIsBefore: {
+        spacingLabelBefore: globalTokens.spacing.m,
+        spacingLabelAfter: 0,
+      },
+      padding: globalTokens.spacing.s,
+      variant: 'bodyStandard',
+    },
     checkboxBackgroundColor: t.colors.menuBackground,
-    textBorderColor: 'transparent',
+    checkboxBorderColor: t.colors.menuItemText,
     checkmarkColor: t.colors.menuItemTextHovered,
-    variant: 'bodyStandard',
     checkmarkOpacity: 0,
-    checkboxMarginStart: 0,
-    checkboxMarginEnd: 4,
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 2,
+    color: t.colors.menuItemText,
     disabled: {
       checkboxBorderColor: t.colors.buttonBorderDisabled,
       color: t.colors.disabledBodyText,
@@ -29,7 +51,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     },
     focused: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundHovered,
-      textBorderColor: t.colors.focusBorder,
+      borderColor: t.colors.focusBorder,
     },
     pressed: {
       checkboxBackgroundColor: t.colors.menuItemBackgroundPressed,
@@ -37,8 +59,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checked: {
       checkmarkOpacity: 1,
     },
-    boxAtEnd: {
-      checkboxMarginStart: 4,
-      checkboxMarginEnd: 0,
+    circular: {
+      checkboxBorderRadius: globalTokens.corner.radius.circle,
     },
   } as CheckboxTokens);
