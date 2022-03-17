@@ -169,6 +169,49 @@ To add a native Windows module:
       - Run `yarn start`
    5. Run application
 
+## Creating new native Android Components
+
+This section is specifically focused on creating new components for Android platforms.
+
+If you are creating a new component from scratch, you have the most leeway to design your API. In general, you will probably want to expose each property from the native Android control as either a token or prop (or both) to JS.
+
+To add a new control to the FURN component library: [creating a new component](#creating-a-new-component)
+
+To add a native module that wraps a FluentUI Android control:
+
+1. Create the android/src/main/java/com/microsoft/fnandroid/<new-component> subdirectory in your components directory
+
+2. Inside the new directory you just created,  add the following files. In all of the newly created files, add your package name at the top of the file: package com.microsoft.fnandroid.(new-component)
+
+    a. **(new-component)ViewManager.kt**: This Kotlin file imports FluentUI Android, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Android control.
+
+    - Implement the createViewInstance method
+
+    - Expose view property setters using @ReactProp (or @ReactPropGroup) It's important to note that in order for properties and methods to be available to React Native, they must add the @ReactMethod decorator to it's declaration.
+
+    b. **(new-component)Module.kt**: This file will contain your native module class. Your module class will extend the ReactContextBaseJavaModule
+
+    c. **(new-component)Package.kt**
+    - Add the ViewManager in createViewManagers of the applications package
+    - Add the Module in  createNativeModules of the applications package
+
+3. In directory android/src/main, add AndroidManifest.xml and add the package name
+
+4. Autolink Native Module
+
+    a. Gradle Build Init plugin
+    - Run gradle init inside android directory
+    - Select type of project to generate: Basic
+    - Select build script DSL: Groovy
+
+    b. Include dependencies for android build environment
+    - Edit the generated build.gradle file (Example: packages/experimental/Drawer/android/build.gradle)
+    - Add dependencies for kotlin, maven, react-native, etc
+      - Add dependency for FluentUIAndroid
+
+    c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/android/package.json in order for our Fluent Tester app to build and use your new Android component module
+
+
 ## Creating a pull request
 
 Thanks for your interest in contributing to the fluentui-react-native! We welcome all contributions. Here's information on how to prepare your change for a pull request.
