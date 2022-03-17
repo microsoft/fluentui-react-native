@@ -1,18 +1,12 @@
 package com.microsoft.frnandroid.drawer
 
-import android.text.Layout
-import android.util.Log
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import android.view.View
-import android.view.LayoutInflater
-import android.view.ViewGroup
-import android.widget.LinearLayout
+import com.facebook.react.ReactRootView
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.views.view.ReactViewGroup
 import com.microsoft.fluentui.drawer.DrawerDialog
-import com.microsoft.fluentui.widget.Button
 
 class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
     companion object {
@@ -22,12 +16,12 @@ class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
     private lateinit var mAnchor: View
 
     private lateinit var mDrawerDialog: DrawerDialog
-    private lateinit var mContentView: ReactViewGroup
+    private lateinit var mContentView: ReactRootView
     private lateinit var mReactContext: ThemedReactContext
     private var mBehavior = DrawerDialog.BehaviorType.BOTTOM
-    private var mTitleBehavior = DrawerDialog.TitleBehavior.DEFAULT
     private var mDimValue = 0.5f
-    private lateinit var mAnchorView: View
+    private var mTitleBehavior = DrawerDialog.TitleBehavior.DEFAULT
+    private var mAnchorView = null
 
     override fun getName(): String {
         return REACT_CLASS
@@ -36,11 +30,8 @@ class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
     override fun createViewInstance(reactContext: ThemedReactContext): ReactViewGroup {
         mReactContext = reactContext
         mView = ReactViewGroup(reactContext)
-        mContentView = ReactViewGroup(reactContext)
-        mContentView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-        mDrawerDialog = DrawerDialog(mReactContext)
-        mDrawerDialog?.setContentView(mContentView)
+        mContentView = ReactRootView(reactContext)
+        createDrawerDialog()
 
         return mView
     }
@@ -64,21 +55,10 @@ class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
                 mContentView.addView(child)
             }
         }
-        // mView.layoutParams  = LinearLayout.LayoutParams(200, 500)
-
-    }
-
-
-    /*@ReactProp(name="showDrawer")
-    fun setShowDrawer(viewGroup: CoordinatorLayout, showDrawer: Boolean) {
-        if(showDrawer) {
-            mDrawerDialog?.show()
-        }
-        viewGroup.invalidate()
     }
 
     @ReactProp(name="behaviorType")
-    fun setBehaviorType(viewGroup: CoordinatorLayout, behaviorType: String) {
+    fun setBehaviorType(viewGroup: ReactViewGroup, behaviorType: String) {
         when(behaviorType){
             "bottom" -> {
                 mBehavior = DrawerDialog.BehaviorType.BOTTOM
@@ -93,12 +73,12 @@ class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
                 mBehavior = DrawerDialog.BehaviorType.RIGHT
             }
         }
-        // createDrawerDialog()
+        createDrawerDialog()
         viewGroup.invalidate()
     }
 
     @ReactProp(name="titleBehavior")
-    fun setTitleBehavior(viewGroup: CoordinatorLayout, titleBehavior: String) {
+    fun setTitleBehavior(viewGroup: ReactViewGroup, titleBehavior: String) {
         when(titleBehavior){
             "default" -> {
                 mTitleBehavior = DrawerDialog.TitleBehavior.DEFAULT
@@ -111,18 +91,22 @@ class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
             }
 
         }
-        // createDrawerDialog()
+        createDrawerDialog()
         viewGroup.invalidate()
     }
 
     @ReactProp(name="dimValue")
-    fun setTitleBehavior(viewGroup: CoordinatorLayout, dimValue: Float) {
+    fun setTitleBehavior(viewGroup: ReactViewGroup, dimValue: Float) {
         mDimValue = dimValue
-        // createDrawerDialog()
+        createDrawerDialog()
         viewGroup.invalidate()
     }
-*/
 
-
-
+    fun createDrawerDialog() {
+        mDrawerDialog = DrawerDialog(mReactContext, mBehavior, mDimValue, mAnchorView, mTitleBehavior)
+        mDrawerDialog?.setContentView(mContentView)
+    }
 }
+
+
+

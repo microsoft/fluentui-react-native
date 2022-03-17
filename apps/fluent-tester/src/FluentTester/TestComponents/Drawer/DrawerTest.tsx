@@ -34,10 +34,11 @@ const basicDrawer: React.FunctionComponent = () => {
         <Icon svgSource={svgProps} width={100} height={100} color="blue" />
       </Drawer>)}*/}
       <Drawer>
+        {/*<Link content="Click to navigate." />*/}
         {<View><Text>Press for Drawer</Text></View>}
         {/*<Button componentRef={stdBtnRef}>Press for Drawer</Button>*/}
         {/*<View><Icon svgSource={svgProps} width={100} height={100} color="orange" /></View>*/}
-        <View>
+        <View style={{padding: 20 }}>
           <Text>This is content inside Drawer</Text>
           <Link url="https://www.bing.com/" content="Click to navigate." />
           {<Icon svgSource={svgProps} width={100} height={100} color="blue" />}
