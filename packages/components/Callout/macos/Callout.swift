@@ -26,9 +26,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	@objc public var onShow: RCTBubblingEventBlock?
+	@objc public var onShow: RCTDirectEventBlock?
 
-	@objc public var onDismiss: RCTBubblingEventBlock?
+	@objc public var onDismiss: RCTDirectEventBlock?
 
 	public weak var bridge: RCTBridge?
 
@@ -79,14 +79,68 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private methods
 
 	private func showCallout() {
+		guard !isCalloutWindowShown else {
+			return
+		}
+		
 		updateCalloutFrameToAnchor()
 		calloutWindow.makeKeyAndOrderFront(self)
+		
+		// Dismiss the Callout if the window is no longer active.
+		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
+		
+		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { [weak self] (event) -> NSEvent? in
+			guard let clickedWindow = event.window else {
+   				return event
+   			}
+   
+   			var shouldDismissCallout = true
+   
+   			// Did the click happened in our own window?
+   			if (clickedWindow.isEqual(to: self) ) {
+   				shouldDismissCallout = false
+   
+   			// Are we a child window of a Callout (e.g: a ContextualMenu submenu), where the click happened in our parent?
+   			} else if (clickedWindow.isEqual(to: self?.calloutWindow.parent as? CalloutWindow)) {
+   				shouldDismissCallout = false
+   
+   			// Did the click happened in any of our child windows (e.g: our submenus)?
+   			} else if (self?.calloutWindow.childWindows?.contains(clickedWindow) ?? false) {
+   				shouldDismissCallout = false
+   			}
+   
+   			if (shouldDismissCallout) {
+   				self?.dismissCallout()
+   			}
+   
+   			return event
+   		})
+		
+		isCalloutWindowShown = true
+		
 		onShowCallout()
 	}
 
-	private func dismissCallout() {
-		calloutWindow.close()
-		onDismissCallout()
+	@objc private func dismissCallout() {
+		guard isCalloutWindowShown else {
+			return
+		}
+
+		// Dismiss any children Callouts (I.E: Submenus) first
+		if let childWindows = calloutWindow.childWindows {
+			for childWindow in childWindows {
+				if let childCallout = childWindow as? CalloutWindow {
+					childCallout.dismissCallout()
+				}
+			}
+		}
+
+		calloutWindow.dismissCallout()
+
+		NotificationCenter.default.removeObserver(self)
+		mouseEventMonitor.removeMonitor()
+		
+		isCalloutWindowShown = false
 	}
 
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
@@ -307,9 +361,20 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		if let parentWindow = self.window {
 			parentWindow.addChildWindow(window, ordered: .above)
 		}
+		if (self.window as? CalloutWindow != nil) {
+			window.isSubwindow = true
+		}
 
 		return window
 	}()
+	
+	private var mouseEventMonitor = GuardedEventMonitor()
+	
+	private var isCalloutWindowShown = false
+	
+	deinit {
+		if (calloutWindow.isSubwindow) {}
+	}
 }
 
 /// React Native macOS uses a flipped coordinate space by default. Let's stay consistent and
@@ -318,6 +383,32 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 private class FlippedVisualEffectView: NSVisualEffectView {
 	override var isFlipped: Bool {
 		return true
+	}
+}
+
+
+/// NSEvent localMonitors are an _old_ API that requires you to do some  memory management yourself.
+/// You _must_ call `removeMonitor`exactly once per monitor created from. This helper class enforces
+/// that with the use of an extra boolean to track whether we have already allocated/released our monitor.
+/// https://developer.apple.com/documentation/appkit/nsevent/1533709-removemonitor
+private class GuardedEventMonitor: Any {
+	
+	private var isMonitorAllocated = false
+	private var allocatedMonitor: Any?
+	
+	
+	func addLocalMonitorForEvents(matching mask: NSEvent.EventTypeMask, handler block: @escaping (NSEvent) -> NSEvent?) {
+		if (!isMonitorAllocated) {
+			allocatedMonitor = NSEvent.addLocalMonitorForEvents(matching: mask, handler: block)
+			isMonitorAllocated = true
+		}
+	}
+	
+	func removeMonitor() {
+		if (isMonitorAllocated) {
+			NSEvent.removeMonitor(allocatedMonitor as Any)
+			isMonitorAllocated = false
+		}
 	}
 }
 

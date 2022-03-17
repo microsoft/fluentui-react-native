@@ -85,13 +85,6 @@ export const Submenu = compose<SubmenuType>({
     // Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
     const onKeyDownProps = useKeyDownProps(dismissWithArrowKey, 'ArrowLeft', 'ArrowRight');
 
-    const containerPropsWin32: IViewProps = {
-      accessible: shouldFocusOnContainer,
-      focusable: shouldFocusOnContainer && containerFocus,
-      onBlur: toggleContainerFocus,
-      style: { maxHeight: maxHeight, width: maxWidth },
-    };
-
     const slotProps = mergeSettings<SubmenuSlotProps>(styleProps, {
       root: {
         ...rest,
@@ -101,7 +94,10 @@ export const Submenu = compose<SubmenuType>({
       },
       container: {
         ...onKeyDownProps,
-        ...(Platform.OS === ('win32' as string) && { containerPropsWin32 }),
+        accessible: shouldFocusOnContainer,
+        focusable: shouldFocusOnContainer && containerFocus,
+        onBlur: toggleContainerFocus,
+        style: { maxHeight: maxHeight, width: maxWidth },
       },
       scrollView: {
         contentContainerStyle: {
