@@ -30,7 +30,7 @@
     "hermes-engine": "~0.7.0",
     "react": "17.0.1",
     "react-native": "^0.64.2",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",

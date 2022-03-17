@@ -31,7 +31,7 @@
     "@fluentui-react-native/interactive-hooks": "^0.14.3",
     "@fluentui-react-native/theme-tokens": "^0.13.0",
     "@fluentui-react-native/tokens": "^0.11.8",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
