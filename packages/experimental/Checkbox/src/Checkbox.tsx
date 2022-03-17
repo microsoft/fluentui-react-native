@@ -49,6 +49,8 @@ export const Checkbox = compose<CheckboxType>({
               <Path
                 fill="currentColor"
                 d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+                stroke="currentColor"
+                stroke-width="1"
               />
             </Slots.checkmark>
           </Slots.checkbox>

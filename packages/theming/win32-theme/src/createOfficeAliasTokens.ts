@@ -5,6 +5,7 @@ import { mapPipelineToTheme } from '@fluentui-react-native/theming-utils';
 
 function createOfficeAliasTokensWorker(officeTheme: string): AliasColorTokens {
   const aliasTokens = getOfficeAliasTokens(officeTheme);
+
   return mapPipelineToTheme(aliasTokens);
 }
 

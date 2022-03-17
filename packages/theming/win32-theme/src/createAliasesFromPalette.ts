@@ -38,6 +38,10 @@ export function createAliasesFromPalette(palette: OfficePalette): Partial<AliasC
     brandBackgroundHover: palette.BkgCtlEmphasisHover,
     brandBackgroundPressed: palette.BkgCtlEmphasisPressed,
 
+    compoundBrandBackground1: palette.BkgToggleSwitchOn,
+    compoundBrandBackground1Hover: palette.BkgToggleSwitchOnHover,
+    compoundBrandBackground1Pressed: palette.BkgToggleSwitchOnPressed,
+
     neutralStrokeAccessible: palette.StrokeOnlySelected,
     neutralStrokeAccessibleHover: palette.StrokeOnlyHover,
     neutralStrokeAccessiblePressed: palette.StrokeOnlyPressed,

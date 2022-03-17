@@ -21,18 +21,20 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
   states: checkboxStates,
   slotProps: {
     root: buildProps(
-      (tokens: CheckboxTokens, theme: Theme) => ({
-        style: {
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          backgroundColor: tokens.backgroundColor,
-          padding: tokens.padding,
-          paddingHorizontal: tokens.paddingHorizontal,
-          ...borderStyles.from(tokens, theme),
-        },
-      }),
+      (tokens: CheckboxTokens, theme: Theme) => {
+        return {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            alignSelf: 'flex-start',
+            backgroundColor: tokens.backgroundColor,
+            padding: tokens.padding,
+            paddingHorizontal: tokens.paddingHorizontal,
+            ...borderStyles.from(tokens, theme),
+          },
+        };
+      },
       ['backgroundColor', 'padding', ...borderStyles.keys],
     ),
     label: buildProps(
