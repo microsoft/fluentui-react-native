@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-expander",
   "entries": [
     {
+      "date": "Wed, 16 Mar 2022 23:37:24 GMT",
+      "tag": "@fluentui-react-native/experimental-expander_v0.3.18",
+      "version": "0.3.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-expander",
+            "commit": "accaa133a79013c665204b405704ca241c506999",
+            "comment": "fixes winUI dependency"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 07 Mar 2022 19:15:33 GMT",
       "tag": "@fluentui-react-native/experimental-expander_v0.3.17",
       "version": "0.3.17",
