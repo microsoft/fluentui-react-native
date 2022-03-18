@@ -56,7 +56,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkmarkOpacity: 1,
       color: t.colors.neutralForeground1,
       checked: {
-        checkboxBackgroundColor: t.colors.compoundBrandBackground1Hover,
+        checkboxBackgroundColor: t.colors.brandBackgroundHover,
         checkboxBorderColor: t.colors.compoundBrandStroke1Hover,
         checkmarkColor: t.colors.neutralForegroundOnBrandHover,
       },
@@ -68,16 +68,16 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkmarkOpacity: 1,
       color: t.colors.neutralForeground1,
       checked: {
-        checkboxBackgroundColor: t.colors.compoundBrandBackground1Pressed,
+        checkboxBackgroundColor: t.colors.brandBackgroundPressed,
         checkboxBorderColor: t.colors.compoundBrandStroke1Pressed,
         checkmarkColor: t.colors.neutralForegroundOnBrandPressed,
       },
     },
     checked: {
-      checkboxBackgroundColor: t.colors.compoundBrandBackground1,
+      checkboxBackgroundColor: t.colors.brandBackground,
       checkboxBorderColor: t.colors.compoundBrandStroke1Hover,
       checkmarkOpacity: 1,
-      checkmarkColor: t.colors.neutralForegroundOnBrandHover,
+      checkmarkColor: t.colors.neutralForegroundOnBrand,
       disabled: {
         checkmarkColor: t.colors.neutralForegroundDisabled,
       },

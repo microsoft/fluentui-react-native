@@ -7,6 +7,7 @@ export function createAliasesFromPalette(palette: OfficePalette, isHighContrast:
     return {
       neutralForeground1: palette.Text,
       neutralForeground4: palette.TextCtlSubtlePlaceholder,
+      neutralForegroundOnBrand: palette.TextCtlEmphasis,
       neutralForegroundOnBrandHover: palette.TextCtlEmphasisHover,
       neutralForegroundOnBrandPressed: palette.TextCtlEmphasisPressed,
     };
