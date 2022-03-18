@@ -45,11 +45,11 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
       return createBrandedThemeWithAlias(ref.themeName, theme);
     },
     (theme: Theme) => {
-      if (!theme.host.palette || ref.themeName === 'HighContrast') {
+      if (!theme.host.palette) {
         return {};
       }
 
-      return { colors: createAliasesFromPalette(theme.host.palette) };
+      return { colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast') };
     },
   );
 
