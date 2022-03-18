@@ -10,7 +10,6 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { CMContext } from './ContextualMenu';
-import { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 
 export const Submenu = compose<SubmenuType>({
@@ -85,13 +84,6 @@ export const Submenu = compose<SubmenuType>({
     // Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
     const onKeyDownProps = useKeyDownProps(dismissWithArrowKey, 'ArrowLeft', 'ArrowRight');
 
-    const containerPropsWin32: IViewProps = {
-      accessible: shouldFocusOnContainer,
-      focusable: shouldFocusOnContainer && containerFocus,
-      onBlur: toggleContainerFocus,
-      style: { maxHeight: maxHeight, width: maxWidth },
-    };
-
     const slotProps = mergeSettings<SubmenuSlotProps>(styleProps, {
       root: {
         ...rest,
@@ -101,7 +93,10 @@ export const Submenu = compose<SubmenuType>({
       },
       container: {
         ...onKeyDownProps,
-        ...(Platform.OS === ('win32' as string) && { containerPropsWin32 }),
+        accessible: shouldFocusOnContainer,
+        focusable: shouldFocusOnContainer && containerFocus,
+        onBlur: toggleContainerFocus,
+        style: { maxHeight: maxHeight, width: maxWidth },
       },
       scrollView: {
         contentContainerStyle: {

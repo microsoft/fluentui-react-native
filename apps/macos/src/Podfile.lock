@@ -9,17 +9,17 @@ PODS:
     - React-Core (= 0.64.29)
     - React-jsi (= 0.64.29)
     - ReactCommon/turbomodule/core (= 0.64.29)
-  - FRNAvatar (0.14.5):
+  - FRNAvatar (0.14.8):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNCallout (0.19.28):
+  - FRNCallout (0.19.32):
     - React
-  - FRNCheckbox (0.9.0):
+  - FRNCheckbox (0.10.4):
     - React
-  - FRNMenuButton (0.7.35):
+  - FRNMenuButton (0.7.39):
     - React
-  - FRNRadioButton (0.14.24):
+  - FRNRadioButton (0.14.28):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -94,7 +94,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.9.5):
+  - RCTFocusZone (0.9.9):
     - React
   - RCTRequired (0.64.29)
   - RCTTypeSafety (0.64.29):
@@ -344,7 +344,7 @@ PODS:
     - React-cxxreact (= 0.64.29)
     - React-jsi (= 0.64.29)
     - React-perflogger (= 0.64.29)
-  - ReactTestApp-DevSupport (1.1.4):
+  - ReactTestApp-DevSupport (1.2.0):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -485,19 +485,19 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost-for-react-native: d5ad1140010aa8cb622323a781ecbeab4425d19a
-  DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
+  boost-for-react-native: 8f7c9ecfe357664c072ffbe2432569667cbf1f1b
+  DoubleConversion: ed15e075aa758ac0e4c1f8b830bd4e4d40d669e8
   FBLazyVector: 829631c3f7fe7e9a8177011898ecd324f2ceeb4a
   FBReactNativeSpec: 4de01e4efb3b170c85f000696514071b3748a222
-  FRNAvatar: bf720e2693804f2bdd60258313ede00e7219c6b3
-  FRNCallout: 05fae661484019536fc969067b9bb02d01e1c445
-  FRNCheckbox: a3bb79d732c588c6a0ca063986719ac3f14bd7f1
-  FRNMenuButton: 23ddf190403745c538e164affbc5c9adfde365f0
-  FRNRadioButton: 05e5b2e131e340e4a452a7b39aba5ddb77f9a752
-  glog: 0dc7efada961c0793012970b60faebbd58b0decb
+  FRNAvatar: 6d619c9cfaff54cbce08c064c582229fff9678c3
+  FRNCallout: 6106e9875a5a5efe85f83bffdf9111e71b6a6025
+  FRNCheckbox: f2ca924e1d4f833475d17ad0e6d100bc98ff8f82
+  FRNMenuButton: f5f6af94a34f65aace6cbeea60c63b3a44edc5fa
+  FRNRadioButton: ad1db52c48c37c72454b08029ae564fa8f4bea56
+  glog: 42c4bf47024808486e90b25ea9e5ac3959047641
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
-  RCTFocusZone: 2b8ec6bd28dcde87fe50f8ed8b31e091a2f6aaf1
+  RCTFocusZone: b03631501bd89d3b264ae4ef56ab4f70c9a2d731
   RCTRequired: 4faed4f4e7677ee3608201a95f85505a828f5a37
   RCTTypeSafety: 52197108479b90693ad1b58d27295c81e2dd151f
   React: cce411cee511f86ba6819bd7e14419488e5ca8f2
@@ -520,7 +520,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 8306ee340eaec9de278d6746f4d3b22ea21d973e
   React-runtimeexecutor: c613c28c921a1d8409c6ecd215b20f56319a7482
   ReactCommon: 2bd9e562df8a08ad11c933450ac30a1ff8a1e922
-  ReactTestApp-DevSupport: 5b0a4857ecf70fa107d040d204a6af374c5f49e9
+  ReactTestApp-DevSupport: e45da8435821fcbd42bb96e21a43aa593efe2a6e
   ReactTestApp-Resources: 320923a3635f7bf90caa1a28fd29765b577888d9
   RNCPicker: f6c760d4b314585ff35165d8640d7917ae30afb1
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
