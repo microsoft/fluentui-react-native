@@ -82,39 +82,39 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		guard !isCalloutWindowShown else {
 			return
 		}
-		
+
 		updateCalloutFrameToAnchor()
 		calloutWindow.makeKeyAndOrderFront(self)
 		
 		// Dismiss the Callout if the window is no longer active.
 		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
-		
+
 		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { [weak self] (event) -> NSEvent? in
 			guard let clickedWindow = event.window else {
-   				return event
-   			}
-   
-   			var shouldDismissCallout = true
-   
-   			// Did the click happened in our own window?
-   			if (clickedWindow.isEqual(to: self) ) {
-   				shouldDismissCallout = false
-   
-   			// Are we a child window of a Callout (e.g: a ContextualMenu submenu), where the click happened in our parent?
-   			} else if (clickedWindow.isEqual(to: self?.calloutWindow.parent as? CalloutWindow)) {
-   				shouldDismissCallout = false
-   
-   			// Did the click happened in any of our child windows (e.g: our submenus)?
-   			} else if (self?.calloutWindow.childWindows?.contains(clickedWindow) ?? false) {
-   				shouldDismissCallout = false
-   			}
-   
-   			if (shouldDismissCallout) {
-   				self?.dismissCallout()
-   			}
-   
-   			return event
-   		})
+					return event
+				}
+
+				var shouldDismissCallout = true
+
+				// Did the click happened in our own window?
+				if (clickedWindow.isEqual(to: self) ) {
+					shouldDismissCallout = false
+	
+				// Are we a child window of a Callout (e.g: a ContextualMenu submenu), where the click happened in our parent?
+				} else if (clickedWindow.isEqual(to: self?.calloutWindow.parent as? CalloutWindow)) {
+					shouldDismissCallout = false
+
+				// Did the click happened in any of our child windows (e.g: our submenus)?
+				} else if (self?.calloutWindow.childWindows?.contains(clickedWindow) ?? false) {
+					shouldDismissCallout = false
+				}
+	
+				if (shouldDismissCallout) {
+					self?.dismissCallout()
+				}
+
+				return event
+			})
 		
 		isCalloutWindowShown = true
 		
@@ -369,39 +369,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private var isCalloutWindowShown = false
 }
 
-/// React Native macOS uses a flipped coordinate space by default. Let's stay consistent and
-/// ensure any views hosting React Native views are also flipped. This helps RCTTouchHandler
-/// register clicks in the right location.
-private class FlippedVisualEffectView: NSVisualEffectView {
-	override var isFlipped: Bool {
-		return true
-	}
-}
 
-
-/// NSEvent localMonitors are an _old_ API that requires you to do some  memory management yourself.
-/// You _must_ call `removeMonitor`exactly once per monitor created from. This helper class enforces
-/// that with the use of an extra boolean to track whether we have already allocated/released our monitor.
-/// https://developer.apple.com/documentation/appkit/nsevent/1533709-removemonitor
-private class GuardedEventMonitor: Any {
-	
-	private var isMonitorAllocated = false
-	private var allocatedMonitor: Any?
-	
-	
-	func addLocalMonitorForEvents(matching mask: NSEvent.EventTypeMask, handler block: @escaping (NSEvent) -> NSEvent?) {
-		if (!isMonitorAllocated) {
-			allocatedMonitor = NSEvent.addLocalMonitorForEvents(matching: mask, handler: block)
-			isMonitorAllocated = true
-		}
-	}
-	
-	func removeMonitor() {
-		if (isMonitorAllocated) {
-			NSEvent.removeMonitor(allocatedMonitor as Any)
-			isMonitorAllocated = false
-		}
-	}
-}
 
 private var calloutWindowCornerRadius: CGFloat = 5.0
