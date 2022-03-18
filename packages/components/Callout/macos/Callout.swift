@@ -361,20 +361,12 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		if let parentWindow = self.window {
 			parentWindow.addChildWindow(window, ordered: .above)
 		}
-		if (self.window as? CalloutWindow != nil) {
-			window.isSubwindow = true
-		}
-
 		return window
 	}()
 	
 	private var mouseEventMonitor = GuardedEventMonitor()
 	
 	private var isCalloutWindowShown = false
-	
-	deinit {
-		if (calloutWindow.isSubwindow) {}
-	}
 }
 
 /// React Native macOS uses a flipped coordinate space by default. Let's stay consistent and

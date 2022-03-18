@@ -7,14 +7,10 @@ protocol CalloutWindowLifeCycleDelegate: AnyObject {
 }
 
 class CalloutWindow: NSWindow {
-
-	public var isSubwindow = false
-	
 	weak var lifeCycleDelegate: CalloutWindowLifeCycleDelegate?
 
 	override init(contentRect: NSRect, styleMask style: NSWindow.StyleMask, backing backingStoreType: NSWindow.BackingStoreType, defer flag: Bool) {
 		super.init(contentRect: contentRect, styleMask: style, backing: backingStoreType, defer: flag)
-		isReleasedWhenClosed = false
 
 		styleMask = .borderless
 		level = .popUpMenu
@@ -38,11 +34,7 @@ class CalloutWindow: NSWindow {
 
 	@objc public func dismissCallout() {
 		lifeCycleDelegate?.calloutWillDismiss(window: self)
-		close()
-	}
-	
-	deinit {
-		if (isSubwindow) {}
+		orderOut(self)
 	}
 }
 
