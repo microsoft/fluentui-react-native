@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui-react-native/theme-types';
+import { Theme } from '@fluentui-react-native/framework';
 
 export function shouldUseThickCheckmark(theme: Theme): boolean {
   if (theme.name === 'HighContrast') {
