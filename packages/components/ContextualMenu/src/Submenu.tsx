@@ -10,7 +10,6 @@ import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/toke
 import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { CMContext } from './ContextualMenu';
-import { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 
 export const Submenu = compose<SubmenuType>({
