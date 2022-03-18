@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 11 Mar 2022 00:34:53 GMT and should not be manually modified.
+This log was last generated on Fri, 18 Mar 2022 07:19:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.33
+
+Fri, 18 Mar 2022 07:19:17 GMT
+
+### Patches
+
+- ContextualMenu macOS: Improve lifecycle management (sanajmi@microsoft.com)
 
 ## 0.19.32
 

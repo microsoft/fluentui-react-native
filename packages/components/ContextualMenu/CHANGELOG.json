@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Fri, 18 Mar 2022 07:19:17 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.16.11",
+      "version": "0.16.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "be918e28dc086179801a25f9e664ceedbb81e85c",
+            "comment": "ContextualMenu macOS: Improve lifecycle management"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.19.33",
+            "commit": "be918e28dc086179801a25f9e664ceedbb81e85c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Mar 2022 00:34:53 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.16.10",
       "version": "0.16.10",

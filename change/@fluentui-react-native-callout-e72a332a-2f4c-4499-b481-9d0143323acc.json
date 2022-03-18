@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "ContextualMenu macOS: Improve lifecycle management",
-  "packageName": "@fluentui-react-native/callout",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
