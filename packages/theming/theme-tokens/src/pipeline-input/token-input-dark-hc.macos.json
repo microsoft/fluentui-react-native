@@ -32,7 +32,7 @@
     "NeutralBackgroundDisabled": {
       "Fill": {
         "Color": {
-          "Selected": { "aliasOf": "Global.Color.Grey.62" }
+          "Rest": { "aliasOf": "Global.Color.Grey.62" }
         }
       }
     },
