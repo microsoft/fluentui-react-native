@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { drawerName, DrawerTokens, DrawerProps, DrawerType} from './Drawer.types';
+import { drawerName, DrawerTokens, DrawerProps, DrawerType } from './Drawer.types';
 import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
@@ -11,19 +11,13 @@ export const Drawer = compose<DrawerType>({
   tokens: [drawerName],
   slots: { root: FRNDrawer },
   slotProps: {
-    root: buildProps<DrawerProps, DrawerTokens>(() => ({
-      style: {
-      },
-    })),
+    root: buildProps<DrawerProps, DrawerTokens>(() => ({})),
   },
   useRender: (props: DrawerProps, useSlots: UseSlots<DrawerType>) => {
-
     const rootProps = props;
     const Root = useSlots(props).root;
     return (final: DrawerProps, ...children: React.ReactNode[]) => {
-      return <Root {...mergeProps(rootProps, final)} >
-        {children}
-        </Root>;
+      return <Root {...mergeProps(rootProps, final)}>{children}</Root>;
     };
   },
 });

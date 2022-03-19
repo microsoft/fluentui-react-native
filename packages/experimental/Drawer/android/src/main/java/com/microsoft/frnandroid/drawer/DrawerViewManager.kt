@@ -43,7 +43,6 @@ class DrawerViewManager : ViewGroupManager<ReactViewGroup>() {
             0 -> {
                 if (child != null) {
                     mAnchor = child
-                    // mAnchor.isClickable = true
                     mAnchor.setOnClickListener {
                         mDrawerDialog?.show()
                     }

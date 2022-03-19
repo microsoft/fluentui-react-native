@@ -14,12 +14,6 @@ import TestSvg from '../Icon/assets/test.svg';
 const basicDrawer: React.FunctionComponent = () => {
 
   const stdBtnRef = React.useRef(null);
-  //const [showDrawer, setShowDrawer] = React.useState(false);
-  /*const toggleShowDrawer = React.useCallback(() => {
-    setShowDrawer(!showDrawer);
-  }, [showDrawer]);*/
-
-
 
   const svgProps: SvgIconProps = {
     src: TestSvg,
@@ -28,16 +22,8 @@ const basicDrawer: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle} gap={5}>
-      {/*<Button componentRef={stdBtnRef} onClick={toggleShowDrawer}>Press for Drawer</Button>*/}
-      {/*showDrawer && (<Drawer target={stdBtnRef} showDrawer= {showDrawer} toggleShow={toggleShowDrawer}>
-        <Icon svgSource={svgProps} width={100} height={100} color="orange" />
-        <Icon svgSource={svgProps} width={100} height={100} color="blue" />
-      </Drawer>)}*/}
       <Drawer>
-        {/*<Link content="Click to navigate." />*/}
         {<View><Text>Press for Drawer</Text></View>}
-        {/*<Button componentRef={stdBtnRef}>Press for Drawer</Button>*/}
-        {/*<View><Icon svgSource={svgProps} width={100} height={100} color="orange" /></View>*/}
         <View style={{padding: 20 }}>
           <Text>This is content inside Drawer</Text>
           <Link url="https://www.bing.com/" content="Click to navigate." />
