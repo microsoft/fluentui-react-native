@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
