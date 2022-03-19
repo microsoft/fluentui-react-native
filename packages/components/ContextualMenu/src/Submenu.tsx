@@ -96,7 +96,7 @@ export const Submenu = compose<SubmenuType>({
         accessible: shouldFocusOnContainer,
         focusable: shouldFocusOnContainer && containerFocus,
         onBlur: toggleContainerFocus,
-        style: { maxHeight: maxHeight, width: maxWidth },
+        style: { maxHeight: maxHeight, maxWidth: maxWidth },
       },
       scrollView: {
         contentContainerStyle: {
