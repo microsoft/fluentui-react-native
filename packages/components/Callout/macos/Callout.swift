@@ -90,7 +90,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
 
 		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
-			func isClickInsideWindowHeirarchy(window: NSWindow?, event: NSEvent) -> Bool {
+			func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
 				guard let window = window else {
 					return false
 				}
@@ -98,19 +98,19 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 					return false
 				}
 
-				var isClickInHeirarchy = false
+				var isClickInHierarchy = false
 
 				if (window.isEqual(to: clickedWindow)) {
-					isClickInHeirarchy = true
+					isClickInHierarchy = true
 				} else {
 					if let childWindows = window.childWindows {
 						for childWindow in childWindows {
-							isClickInHeirarchy = isClickInsideWindowHeirarchy(window: childWindow, event: event)
+							isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
 						}
 					}
 				}
 
-				return isClickInHeirarchy
+				return isClickInHierarchy
 			}
 
 			var window: NSWindow? = self?.calloutWindow
@@ -118,7 +118,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 				window = window?.parent
 			}
 
-			if (!isClickInsideWindowHeirarchy(window: window, event: event)) {
+			if (!isClickInsideWindowHierarchy(window: window, event: event)) {
 				self?.dismissCallout()
 			}
 
@@ -336,7 +336,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private var anchorView: NSView?
 
 	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
-	/// view heirarchy, ensuring our React Views are not placed in the main window.
+	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
 		let visualEffectView = FlippedVisualEffectView()
 		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
