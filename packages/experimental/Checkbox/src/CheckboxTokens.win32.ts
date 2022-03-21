@@ -8,7 +8,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     requiredColor: t.colors.redForeground1,
     requiredPadding: globalTokens.spacing.s,
     medium: {
-      borderRadius: globalTokens.corner.radius.small,
+      borderRadius: globalTokens.corner.radius.medium,
       checkboxBorderWidth: globalTokens.stroke.width.thin,
       checkboxBorderRadius: globalTokens.corner.radius.small,
       checkboxSize: 16,
@@ -28,7 +28,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       fontFamily: t.typography.families.primary,
     },
     large: {
-      borderRadius: globalTokens.corner.radius.small,
+      borderRadius: globalTokens.corner.radius.medium,
       checkboxBorderWidth: globalTokens.stroke.width.thin,
       checkboxBorderRadius: globalTokens.corner.radius.small,
       checkboxSize: 20,

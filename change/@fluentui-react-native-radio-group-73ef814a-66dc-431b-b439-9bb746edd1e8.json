@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "disable focus on Radio Buton when disabled",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}

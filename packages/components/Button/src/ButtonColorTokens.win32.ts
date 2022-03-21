@@ -30,7 +30,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       backgroundColor: t.colors.neutralBackground1Hover,
       color: t.colors.neutralForeground1Hover,
       borderColor: t.colors.transparentStroke,
-      icon: t.colors.neutralForeground1Hover,
+      iconColor: t.colors.neutralForeground1Hover,
     },
     primary: {
       backgroundColor: t.colors.brandBackground,

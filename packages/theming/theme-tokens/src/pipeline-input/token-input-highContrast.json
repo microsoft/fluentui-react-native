@@ -194,7 +194,7 @@
     "NeutralBackgroundDisabled": {
       "Fill": {
         "Color": {
-          "Selected": { "aliasOf": "Global.Color.HC.Canvas" }
+          "Rest": { "aliasOf": "Global.Color.HC.Canvas" }
         }
       }
     },
