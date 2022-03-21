@@ -38,7 +38,7 @@
     "@uifabricshared/foundation-composable": ">=0.10.2 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.11.11",
     "@uifabricshared/foundation-settings": ">=0.11.2 <1.0.0",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
