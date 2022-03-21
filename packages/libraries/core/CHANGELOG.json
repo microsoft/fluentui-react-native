@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 21 Mar 2022 17:17:36 GMT",
+      "tag": "@fluentui/react-native_v0.27.42",
+      "version": "0.27.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.14.30",
+            "commit": "0bf66a0c909d3e3c6e372ec5604b50e0af8b57d4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 21 Mar 2022 01:47:54 GMT",
       "tag": "@fluentui/react-native_v0.27.41",
       "version": "0.27.41",

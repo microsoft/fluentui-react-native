@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 21 Mar 2022 01:47:54 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Mar 2022 17:17:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.42
+
+Mon, 21 Mar 2022 17:17:36 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/radio-group to v0.14.30
 
 ## 0.27.41
 
