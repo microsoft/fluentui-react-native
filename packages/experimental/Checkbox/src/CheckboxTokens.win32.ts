@@ -14,6 +14,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxSize: 16,
       checkmarkSize: 8,
       label: {
+        paddingHorizontal: globalTokens.spacing.m,
         borderRadius: globalTokens.corner.radius.medium,
         spacingLabelAfter: globalTokens.spacing.s,
         labelIsBefore: {
@@ -22,7 +23,6 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
         },
       },
       padding: globalTokens.spacing.mNudge,
-      paddingHorizontal: globalTokens.spacing.m,
       fontSize: globalTokens.font.size[200],
       fontWeight: globalTokens.font.weight.regular,
       fontFamily: t.typography.families.primary,
