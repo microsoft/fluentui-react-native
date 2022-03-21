@@ -20,7 +20,6 @@ import { SvgXml } from 'react-native-svg';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { useAccessibilityInfo } from '@react-native-community/hooks';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -126,8 +125,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
      */
     const onKeyDownProps = useKeyDownProps(showWithArrowKey, ' ', 'Enter', 'ArrowLeft', 'ArrowRight');
 
-    const accessibilityInfo = useAccessibilityInfo();
-
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     // create the merged slot props
@@ -141,12 +138,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
         accessibilityRole: 'menuitem',
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
-        focusable: Platform.select({
-          // On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
-          macos: !disabled || accessibilityInfo.screenReaderEnabled,
-          // win32
-          default: true,
-        }),
+        focusable: !disabled,
         ...rest,
       },
       content: { children: text },

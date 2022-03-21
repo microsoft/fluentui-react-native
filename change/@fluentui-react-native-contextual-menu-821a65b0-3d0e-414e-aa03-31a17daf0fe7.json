@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "width -> maxWidth",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
