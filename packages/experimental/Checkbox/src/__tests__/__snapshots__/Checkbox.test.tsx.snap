@@ -570,7 +570,7 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
       "borderRadius": 2,
       "display": "flex",
       "flexDirection": "row",
-      "padding": 8,
+      "padding": 4,
       "paddingHorizontal": undefined,
     }
   }

@@ -15,6 +15,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkmarkSize: 8,
       spacingLabelAfter: globalTokens.spacing.m,
       label: {
+        padding: globalTokens.spacing.s,
         borderRadius: globalTokens.corner.radius.medium,
         spacingLabelAfter: globalTokens.spacing.m,
         labelIsBefore: {
@@ -22,7 +23,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.spacing.s,
+      padding: globalTokens.spacing.xs,
       variant: 'bodyStandard',
     },
     large: {
@@ -33,6 +34,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkmarkSize: 10,
       spacingLabelAfter: globalTokens.spacing.m,
       label: {
+        padding: globalTokens.spacing.s,
         borderRadius: globalTokens.corner.radius.medium,
         spacingLabelAfter: globalTokens.spacing.m,
         labelIsBefore: {
@@ -40,7 +42,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.spacing.s,
+      padding: globalTokens.spacing.xs,
       variant: 'bodyStandard',
     },
     checkboxBackgroundColor: t.colors.neutralBackground1,
