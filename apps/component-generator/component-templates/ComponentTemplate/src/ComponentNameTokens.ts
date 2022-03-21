@@ -4,7 +4,7 @@ import { ComponentNameTokens } from './ComponentName.types';
 
 export const defaultComponentNameTokens: TokenSettings<ComponentNameTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: t.colors.brandBackground,
+    backgroundColor: 'red',//t.colors.brandBackground,
     color: t.colors.neutralForegroundInverted,
     small: {},
     medium: {},
