@@ -23,11 +23,11 @@ const basicDrawer: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle} gap={5}>
       <Drawer>
-        {<View><Text>Press for Drawer</Text></View>}
+        <View><Text>Press for Drawer</Text></View>
         <View style={{padding: 20 }}>
           <Text>This is content inside Drawer</Text>
           <Link url="https://www.bing.com/" content="Click to navigate." />
-          {<Icon svgSource={svgProps} width={100} height={100} color="blue" />}
+          <Icon svgSource={svgProps} width={100} height={100} color="blue" />
           <Button componentRef={stdBtnRef}>Press for Drawer</Button>
         </View>
       </Drawer>
