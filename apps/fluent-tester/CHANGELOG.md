@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 16 Mar 2022 23:37:24 GMT and should not be manually modified.
+This log was last generated on Mon, 21 Mar 2022 17:17:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.58.11
+
+Mon, 21 Mar 2022 17:17:36 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.27.42
+
+## 0.58.10
+
+Mon, 21 Mar 2022 01:47:54 GMT
+
+### Patches
+
+- Add more menu items to ContextualMenuTest (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.20
+- Bump @fluentui-react-native/experimental-tabs to v0.4.29
+- Bump @fluentui/react-native to v0.27.41
+
+## 0.58.9
+
+Fri, 18 Mar 2022 07:19:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.19
+- Bump @fluentui/react-native to v0.27.40
 
 ## 0.58.8
 

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Mon, 21 Mar 2022 01:47:54 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.34",
+      "version": "0.19.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "b772dfe4542b7032f216bf5c2faa807c695fa2a7",
+            "comment": "width -> maxWidth"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Mar 2022 07:19:17 GMT",
+      "tag": "@fluentui-react-native/callout_v0.19.33",
+      "version": "0.19.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/callout",
+            "commit": "be918e28dc086179801a25f9e664ceedbb81e85c",
+            "comment": "ContextualMenu macOS: Improve lifecycle management"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Mar 2022 00:34:53 GMT",
       "tag": "@fluentui-react-native/callout_v0.19.32",
       "version": "0.19.32",

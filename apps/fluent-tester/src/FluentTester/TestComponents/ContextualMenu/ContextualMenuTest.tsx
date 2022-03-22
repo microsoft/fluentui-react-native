@@ -462,6 +462,12 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           )}
           <ContextualMenuItem text="Disabled Menu Item" itemKey="11" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="12" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="13" />
+          <ContextualMenuItem text="MenuItem 6" itemKey="14" />
+          <ContextualMenuItem text="MenuItem 7" itemKey="15" />
+          <ContextualMenuItem text="MenuItem 8" itemKey="16" />
+          <ContextualMenuItem text="MenuItem 9" itemKey="17" />
+          <ContextualMenuItem text="MenuItem 10" itemKey="18" />
         </ContextualMenu>
       )}
     </View>

@@ -26,9 +26,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	@objc public var onShow: RCTBubblingEventBlock?
+	@objc public var onShow: RCTDirectEventBlock?
 
-	@objc public var onDismiss: RCTBubblingEventBlock?
+	@objc public var onDismiss: RCTDirectEventBlock?
 
 	public weak var bridge: RCTBridge?
 
@@ -79,14 +79,76 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private methods
 
 	private func showCallout() {
+		guard !isCalloutWindowShown else {
+			return
+		}
+
 		updateCalloutFrameToAnchor()
 		calloutWindow.makeKeyAndOrderFront(self)
+
+		// Dismiss the Callout if the window is no longer active.
+		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
+
+		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
+			func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
+				guard let window = window else {
+					return false
+				}
+				guard let clickedWindow = event.window else {
+					return false
+				}
+
+				var isClickInHierarchy = false
+
+				if (window.isEqual(to: clickedWindow)) {
+					isClickInHierarchy = true
+				} else {
+					if let childWindows = window.childWindows {
+						for childWindow in childWindows {
+							isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
+						}
+					}
+				}
+
+				return isClickInHierarchy
+			}
+
+			var window: NSWindow? = self?.calloutWindow
+			while (window?.parent as? CalloutWindow != nil) {
+				window = window?.parent
+			}
+
+			if (!isClickInsideWindowHierarchy(window: window, event: event)) {
+				self?.dismissCallout()
+			}
+
+			return event
+		})
+
+		isCalloutWindowShown = true
 		onShowCallout()
 	}
 
-	private func dismissCallout() {
-		calloutWindow.close()
-		onDismissCallout()
+	@objc private func dismissCallout() {
+		guard isCalloutWindowShown else {
+			return
+		}
+
+		// Dismiss any children Callouts (I.E: Submenus) first
+		if let childWindows = calloutWindow.childWindows {
+			for childWindow in childWindows {
+				if let childCallout = childWindow as? CalloutWindow {
+					childCallout.dismissCallout()
+				}
+			}
+		}
+
+		calloutWindow.dismissCallout()
+
+		NotificationCenter.default.removeObserver(self)
+		mouseEventMonitor.removeMonitor()
+
+		isCalloutWindowShown = false
 	}
 
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
@@ -274,7 +336,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private var anchorView: NSView?
 
 	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
-	/// view heirarchy, ensuring our React Views are not placed in the main window.
+	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
 		let visualEffectView = FlippedVisualEffectView()
 		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
@@ -307,18 +369,14 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		if let parentWindow = self.window {
 			parentWindow.addChildWindow(window, ordered: .above)
 		}
-
 		return window
 	}()
+
+	private var mouseEventMonitor = GuardedEventMonitor()
+
+	private var isCalloutWindowShown = false
 }
 
-/// React Native macOS uses a flipped coordinate space by default. Let's stay consistent and
-/// ensure any views hosting React Native views are also flipped. This helps RCTTouchHandler
-/// register clicks in the right location.
-private class FlippedVisualEffectView: NSVisualEffectView {
-	override var isFlipped: Bool {
-		return true
-	}
-}
+
 
 private var calloutWindowCornerRadius: CGFloat = 5.0

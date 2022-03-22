@@ -2,6 +2,75 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 21 Mar 2022 17:17:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.58.11",
+      "version": "0.58.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.27.42",
+            "commit": "0bf66a0c909d3e3c6e372ec5604b50e0af8b57d4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Mar 2022 01:47:54 GMT",
+      "tag": "@fluentui-react-native/tester_v0.58.10",
+      "version": "0.58.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b772dfe4542b7032f216bf5c2faa807c695fa2a7",
+            "comment": "Add more menu items to ContextualMenuTest"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.20",
+            "commit": "b772dfe4542b7032f216bf5c2faa807c695fa2a7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.4.29",
+            "commit": "b772dfe4542b7032f216bf5c2faa807c695fa2a7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.27.41",
+            "commit": "b772dfe4542b7032f216bf5c2faa807c695fa2a7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Mar 2022 07:19:17 GMT",
+      "tag": "@fluentui-react-native/tester_v0.58.9",
+      "version": "0.58.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.19",
+            "commit": "be918e28dc086179801a25f9e664ceedbb81e85c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.27.40",
+            "commit": "be918e28dc086179801a25f9e664ceedbb81e85c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Mar 2022 23:37:24 GMT",
       "tag": "@fluentui-react-native/tester_v0.58.8",
       "version": "0.58.8",
