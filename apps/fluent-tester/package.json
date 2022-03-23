@@ -13,15 +13,19 @@
     "module": "lib/index.js"
   },
   "scripts": {
+    "android": "react-native run-android",
     "build": "fluentui-scripts build",
-    "just": "fluentui-scripts",
+    "bundle": "react-native rnx-bundle --dev false",
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
+    "ios": "react-native run-ios",
+    "just": "fluentui-scripts",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native start",
-    "bundle": "react-native rnx-bundle --dev false",
+    "macos": "react-native run-macos --scheme FluentTester",
     "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
+    "prettier-fix": "fluentui-scripts prettier --fix true",
+    "start": "react-native start",
+    "windows": "react-native run-windows --sln windows/FluentTester.sln"
   },
   "repository": {
     "type": "git",
@@ -38,9 +42,9 @@
     "@fluentui-react-native/experimental-avatar": ">=0.14.8 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.15.8",
     "@fluentui-react-native/experimental-checkbox": "0.10.4",
-    "@fluentui-react-native/experimental-native-date-picker": ">=0.4.1 <1.0.0",
     "@fluentui-react-native/experimental-expander": "0.3.18",
     "@fluentui-react-native/experimental-menu-button": ">=0.3.20 <1.0.0",
+    "@fluentui-react-native/experimental-native-date-picker": ">=0.4.1 <1.0.0",
     "@fluentui-react-native/experimental-shimmer": "0.6.20",
     "@fluentui-react-native/experimental-tabs": "0.4.29",
     "@fluentui-react-native/experimental-text": ">=0.7.17 <1.0.0",
@@ -57,15 +61,24 @@
     "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^2.2.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.2",
+    "react-native-macos": "^0.64.0",
+    "react-native-svg": "^12.3.0",
+    "react-native-windows": "^0.64.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui/token-pipeline": "^0.5.1",
     "@rnx-kit/cli": "^0.9.57",
+    "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.64.0",
-    "@fluentui-react-native/scripts": "^0.1.1",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",
     "@wdio/jasmine-framework": "^6.5.0",
@@ -74,14 +87,12 @@
     "@wdio/sync": "^6.5.0",
     "appium": "1.20.0",
     "appium-mac2-driver": "0.14.1",
-    "flow-bin": "^0.98.0",
+    "flow-bin": "^0.113.0",
+    "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react": "17.0.1",
-    "react-native": "^0.64.2",
-    "react-native-macos": "^0.64.0",
-    "react-native-svg": "^12.3.0",
+    "mkdirp": "^1.0.0",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-windows": "^0.64.0",
+    "react-native-test-app": "^1.2.0",
     "react-test-renderer": "17.0.1",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -89,20 +100,23 @@
     "webdriverio": "^6.5.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.64.8",
-    "react": "17.0.1",
-    "react-native": "^0.64.2",
-    "react-native-macos": "^0.64.0",
-    "react-native-svg": "^12.3.0",
-    "react-native-windows": "^0.64.0"
+    "@office-iss/react-native-win32": "^0.64.8"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
     "reactNativeVersion": "^0.64",
-    "reactNativeDevVersion": "0.64.0",
-    "kitType": "library",
+    "kitType": "app",
+    "bundle": {
+      "targets": [
+        "android",
+        "ios",
+        "macos",
+        "windows"
+      ],
+      "entryPath": "index.js"
+    },
     "capabilities": [
       "core-android",
       "core-ios",

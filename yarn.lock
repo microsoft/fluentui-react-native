@@ -1155,9 +1155,9 @@
     source-map-support "^0.5.16"
 
 "@babel/runtime@^7.0.0", "@babel/runtime@^7.11.2", "@babel/runtime@^7.4.3", "@babel/runtime@^7.6.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
-  version "7.17.7"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.7.tgz#a5f3328dc41ff39d803f311cfe17703418cf9825"
-  integrity sha512-L6rvG9GDxaLgFjg41K+5Yv9OMrU98sWe+Ykmc6FDJW/+vYZMhdOMKkISgzptMaERHvS2Y2lw9MDRm2gHhlQQoA==
+  version "7.17.8"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
+  integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -1245,6 +1245,18 @@
   version "0.3.11"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
   integrity sha512-pZSCmUTa/B2fgkAWuL2m3ST6+0M/8B4TjhqU8j30NjyMyGgYb1t6eke+ZYnbKJxIG7CwrpHg3dwNdKZ/DBCn1w==
+  dependencies:
+    args "^5.0.1"
+    esm "^3.2.25"
+    jsonfile "^6.0.1"
+    lodash "4.17.21"
+    style-dictionary "2.10.2"
+    tinycolor2 "^1.4.1"
+
+"@fluentui/token-pipeline@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.5.1.tgz#761d901514c284dcd07ebf1f79d621964a1d47a8"
+  integrity sha512-peXKlNACER/oH3CQJ4h6ynhV5uxRIZ91nE9uN9VzYPa0ch+zrD2KmtOq5KlH04v/Wardjj2MLdu2hNyo/jugxQ==
   dependencies:
     args "^5.0.1"
     esm "^3.2.25"
@@ -7676,11 +7688,6 @@ flow-bin@^0.113.0:
   resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.113.0.tgz#6457d250dbc6f71ca51e75f00a96d23cde5d987a"
   integrity sha512-76uE2LGNe50wm+Jup8Np4FBcMbyy5V2iE+K25PPIYLaEMGHrL1jnQfP9L0hTzA5oh2ZJlexRLMlaPqIYIKH9nw==
 
-flow-bin@^0.98.0:
-  version "0.98.1"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.98.1.tgz#a8d781621c91703df69928acc83c9777e2fcbb49"
-  integrity sha512-y1YzQgbFUX4EG6h2EO8PhyJeS0VxNgER8XsTwU8IXw4KozfneSmGVgw8y3TwAOza7rVhTlHEoli1xNuNW1rhPw==
-
 flow-parser@0.*:
   version "0.171.0"
   resolved "https://registry.yarnpkg.com/flow-parser/-/flow-parser-0.171.0.tgz#5ffae78f050e43513abc86add9f19a97fcbabcdb"
@@ -12405,7 +12412,7 @@ react-native-svg@^12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^1.1.4:
+react-native-test-app@^1.2.0:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.2.1.tgz#1dcf1b3be57689b185e019eced91223d274bbe2e"
   integrity sha512-+M0cps3k95JNdCvcrq2sXmblAOzG/Zv/6xU100kRS/wn5lL/3MHTkKq/0+BKiLB/ov5iHozGcB+Sn3FqezTuhw==
@@ -12965,7 +12972,7 @@ rimraf@^2.5.4:
   dependencies:
     glob "^7.1.3"
 
-rimraf@^3.0.0, rimraf@^3.0.2, rimraf@~3.0.2:
+rimraf@^3.0.0, rimraf@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-3.0.2.tgz#f1a5402ba6220ad52cc1282bac1ae3aa49fd061a"
   integrity sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==
