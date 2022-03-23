@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Wed, 23 Mar 2022 19:49:45 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.6",
+      "version": "0.7.6",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "not available",
+            "comment": "Change links to point not using urls"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Mar 2022 18:37:07 GMT",
       "tag": "@fluentui-react-native/composition_v0.7.6",
       "version": "0.7.6",
