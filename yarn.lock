@@ -12412,7 +12412,7 @@ react-native-svg@^12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^1.2.0:
+react-native-test-app@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.2.1.tgz#1dcf1b3be57689b185e019eced91223d274bbe2e"
   integrity sha512-+M0cps3k95JNdCvcrq2sXmblAOzG/Zv/6xU100kRS/wn5lL/3MHTkKq/0+BKiLB/ov5iHozGcB+Sn3FqezTuhw==

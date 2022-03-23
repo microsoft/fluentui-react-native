@@ -13,7 +13,7 @@ import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
-import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
+// import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 
@@ -92,9 +92,10 @@ export const tests = [
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
   },
-  {
-    name: 'Expander Test',
-    component: ExpanderTest,
-    testPage: HOMEPAGE_EXPANDER_BUTTON,
-  },
+  // Disable while this doesn't run in our test app
+  // {
+  //   name: 'Expander Test',
+  //   component: ExpanderTest,
+  //   testPage: HOMEPAGE_EXPANDER_BUTTON,
+  // },
 ];
