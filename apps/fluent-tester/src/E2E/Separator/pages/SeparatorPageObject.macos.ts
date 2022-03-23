@@ -1,8 +1,4 @@
-import {
-  SEPARATOR_TESTPAGE,
-  SEPARATOR_TEST_COMPONENT,
-  HOMEPAGE_SEPARATOR_BUTTON,
-} from '../../../FluentTester/TestComponents/Separator/consts';
+import { SEPARATOR_TESTPAGE, SEPARATOR_TEST_COMPONENT, HOMEPAGE_SEPARATOR_BUTTON } from '../../../TestComponents/Separator/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 class SeparatorPageObject extends BasePage {

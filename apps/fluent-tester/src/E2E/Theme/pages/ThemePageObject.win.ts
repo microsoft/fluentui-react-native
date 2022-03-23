@@ -1,4 +1,4 @@
-import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../../../FluentTester/TestComponents/Theme/consts';
+import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../../../TestComponents/Theme/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class ThemePageObject extends BasePage {

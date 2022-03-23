@@ -1,8 +1,4 @@
-import {
-  PRESSABLE_TESTPAGE,
-  PRESSABLE_TEST_COMPONENT,
-  HOMEPAGE_PRESSABLE_BUTTON,
-} from '../../../FluentTester/TestComponents/Pressable/consts';
+import { PRESSABLE_TESTPAGE, PRESSABLE_TEST_COMPONENT, HOMEPAGE_PRESSABLE_BUTTON } from '../../../TestComponents/Pressable/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class PressablePageObject extends BasePage {

@@ -4,7 +4,7 @@ import {
   HOMEPAGE_MENU_BUTTON,
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_ITEM_1_COMPONENT,
-} from '../../../FluentTester/TestComponents/MenuButton/consts';
+} from '../../../TestComponents/MenuButton/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 export const enum MenuButtonSelector {

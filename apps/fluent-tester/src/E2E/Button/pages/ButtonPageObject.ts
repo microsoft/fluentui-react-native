@@ -4,7 +4,7 @@ import {
   BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS_DEPRECATED,
-} from '../../../FluentTester/TestComponents/Button/consts';
+} from '../../../TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.

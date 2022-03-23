@@ -2,7 +2,7 @@ import {
   HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
   ACTIVITY_INDICATOR_TESTPAGE,
   ACTIVITY_INDICATOR_TEST_COMPONENT,
-} from '../../../FluentTester/TestComponents/ActivityIndicator/consts';
+} from '../../../TestComponents/ActivityIndicator/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class ActivityIndicatorPageObject extends BasePage {

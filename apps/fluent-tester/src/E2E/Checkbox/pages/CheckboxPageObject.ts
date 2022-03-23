@@ -4,7 +4,7 @@ import {
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
   CHECKBOX_ON_PRESS,
-} from '../../../FluentTester/TestComponents/Checkbox/consts';
+} from '../../../TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.

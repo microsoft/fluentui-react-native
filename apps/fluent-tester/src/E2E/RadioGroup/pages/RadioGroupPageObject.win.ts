@@ -7,7 +7,7 @@ import {
   SECOND_RADIO_BUTTON,
   THIRD_RADIO_BUTTON,
   FOURTH_RADIO_BUTTON,
-} from '../../../FluentTester/TestComponents/RadioGroup/consts';
+} from '../../../TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.

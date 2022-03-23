@@ -3,7 +3,7 @@ import {
   CONTEXTUALMENU_TEST_COMPONENT,
   HOMEPAGE_CONTEXTUALMENU_BUTTON,
   CONTEXTUALMENUITEM_TEST_COMPONENT,
-} from '../../../FluentTester/TestComponents/ContextualMenu/consts';
+} from '../../../TestComponents/ContextualMenu/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.

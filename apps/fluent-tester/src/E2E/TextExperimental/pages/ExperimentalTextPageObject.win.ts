@@ -2,7 +2,7 @@ import {
   EXPERIMENTAL_TEXT_TESTPAGE,
   EXPERIMENTAL_TEXT_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
-} from '../../../FluentTester/TestComponents/TextExperimental/consts';
+} from '../../../TestComponents/TextExperimental/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class ExperimentalTextPageObject extends BasePage {
