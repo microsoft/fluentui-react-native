@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Change links to point not using urls",
-  "packageName": "@fluentui-react-native/composition",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "none"
-}
