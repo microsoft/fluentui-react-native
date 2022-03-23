@@ -115,7 +115,14 @@
         "macos",
         "windows"
       ],
-      "entryPath": "index.js"
+      "entryPath": "index.js",
+      "detectCyclicDependencies": {
+        "throwOnError": true
+      },
+      "detectDuplicateDependencies": {
+        "throwOnError": false
+      },
+      "typescriptValidation": false
     },
     "capabilities": [
       "core-android",

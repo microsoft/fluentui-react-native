@@ -6,6 +6,8 @@
  */
 
 const path = require('path');
+const { defaultWatchFolders } = require('@rnx-kit/metro-config');
+const { getDefaultConfig } = require('metro-config');
 
 const exclusionList = (() => {
   try {
@@ -35,6 +37,7 @@ const blockList = exclusionList([
 ]);
 
 module.exports = {
+  watchFolders: defaultWatchFolders(__dirname),
   resolver: {
     blacklistRE: blockList,
     blockList,
