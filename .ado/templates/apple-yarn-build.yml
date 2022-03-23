@@ -4,9 +4,9 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "pod install --project-directory=src"
+      echo "pod install --project-directory=${{ parameters.relative_directory }}"
       pod install --project-directory=src
-    workingDirectory: apps/${{ parameters.relative_directory }}
+    workingDirectory: apps/fluent-tester
     displayName: 'pod install'
 
   - bash: |
@@ -19,7 +19,7 @@ steps:
   - bash: |
       echo "yarn ${{ parameters.relative_directory }}"
       yarn ${{ parameters.relative_directory }}
-    workingDirectory: apps/${{ parameters.relative_directory }}
+    workingDirectory: apps/fluent-tester
     displayName: 'yarn ${{ parameters.relative_directory }}'
     env:
       platform_directory: ${{ parameters.relative_directory }}

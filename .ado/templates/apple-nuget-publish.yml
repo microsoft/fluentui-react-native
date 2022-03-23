@@ -24,23 +24,23 @@ steps:
 
   # Pod Install iOS
   - bash: |
-      echo "pod install --project-directory=src"
-      pod install --project-directory=src
-    workingDirectory: apps/ios
+      echo "pod install --project-directory=ios"
+      pod install --project-directory=ios
+    workingDirectory: apps/fluent-tester
     displayName: 'pod install iOS'
 
   # Pod Install macOS
   - bash: |
-      echo "pod install --project-directory=src"
-      pod install --project-directory=src
-    workingDirectory: apps/macOS
+      echo "pod install --project-directory=macos"
+      pod install --project-directory=macos
+    workingDirectory: apps/fluent-tester
     displayName: 'pod install macOS'
 
   # macOS Release
   - template: apple-xcode-build.yml
     parameters:
       xcode_sdk: 'macosx'
-      xcode_workspacePath: 'apps/macos/src/FluentTester.xcworkspace'
+      xcode_workspacePath: 'apps/fluent-tester/macos/FluentTester.xcworkspace'
       xcode_actions: 'build'
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
@@ -50,7 +50,7 @@ steps:
   - template: apple-xcode-build.yml
     parameters:
       xcode_sdk: 'iphonesimulator'
-      xcode_workspacePath: 'apps/ios/src/FluentTester.xcworkspace'
+      xcode_workspacePath: 'apps/fluent-tester/ios/FluentTester.xcworkspace'
       xcode_actions: 'build'
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
@@ -60,7 +60,7 @@ steps:
   - template: apple-xcode-build.yml
     parameters:
       xcode_sdk: 'iphoneos'
-      xcode_workspacePath: 'apps/ios/src/FluentTester.xcworkspace'
+      xcode_workspacePath: 'apps/fluent-tester/ios/FluentTester.xcworkspace'
       xcode_actions: 'build'
       xcode_scheme: 'FluentTester'
       xcode_configuration: 'Release'
@@ -99,4 +99,3 @@ steps:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.ReactNative.*.nupkg'
       publishVstsFeed: Office
-
