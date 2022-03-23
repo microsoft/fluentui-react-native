@@ -134,8 +134,8 @@ jobs:
 
       # package android bundle
       - script: |
-          yarn bundle
-        workingDirectory: apps/$(relative_directory)
+          yarn bundle --platform $(relative_directory)
+        workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle $(relative_directory)'
 
       # sets-up specifics for android dependency like NDK & emulator
@@ -144,8 +144,8 @@ jobs:
       # build android apk and run available Instrumented test
       - task: Gradle@2
         inputs:
-          gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
-          workingDirectory: 'apps/$(relative_directory)/src'
+          gradleWrapperFile: 'apps/fluent-tester/gradlew'
+          workingDirectory: 'apps/fluent-tester/src'
           tasks: 'assembleDebug cAT'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
