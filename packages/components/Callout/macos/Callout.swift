@@ -85,39 +85,47 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		updateCalloutFrameToAnchor()
 		calloutWindow.makeKeyAndOrderFront(self)
-		
+
 		// Dismiss the Callout if the window is no longer active.
 		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
 
-		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseUp, handler: { [weak self] (event) -> NSEvent? in
-			guard let clickedWindow = event.window else {
-					return event
+		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
+			func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
+				guard let window = window else {
+					return false
+				}
+				guard let clickedWindow = event.window else {
+					return false
 				}
 
-				var shouldDismissCallout = true
+				var isClickInHierarchy = false
 
-				// Did the click happened in our own window?
-				if (clickedWindow.isEqual(to: self) ) {
-					shouldDismissCallout = false
-	
-				// Are we a child window of a Callout (e.g: a ContextualMenu submenu), where the click happened in our parent?
-				} else if (clickedWindow.isEqual(to: self?.calloutWindow.parent as? CalloutWindow)) {
-					shouldDismissCallout = false
-
-				// Did the click happened in any of our child windows (e.g: our submenus)?
-				} else if (self?.calloutWindow.childWindows?.contains(clickedWindow) ?? false) {
-					shouldDismissCallout = false
-				}
-	
-				if (shouldDismissCallout) {
-					self?.dismissCallout()
+				if (window.isEqual(to: clickedWindow)) {
+					isClickInHierarchy = true
+				} else {
+					if let childWindows = window.childWindows {
+						for childWindow in childWindows {
+							isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
+						}
+					}
 				}
 
-				return event
-			})
-		
+				return isClickInHierarchy
+			}
+
+			var window: NSWindow? = self?.calloutWindow
+			while (window?.parent as? CalloutWindow != nil) {
+				window = window?.parent
+			}
+
+			if (!isClickInsideWindowHierarchy(window: window, event: event)) {
+				self?.dismissCallout()
+			}
+
+			return event
+		})
+
 		isCalloutWindowShown = true
-		
 		onShowCallout()
 	}
 
@@ -139,7 +147,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 		NotificationCenter.default.removeObserver(self)
 		mouseEventMonitor.removeMonitor()
-		
+
 		isCalloutWindowShown = false
 	}
 
@@ -328,7 +336,7 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	private var anchorView: NSView?
 
 	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
-	/// view heirarchy, ensuring our React Views are not placed in the main window.
+	/// view hierarchy, ensuring our React Views are not placed in the main window.
 	private lazy var proxyView: NSView = {
 		let visualEffectView = FlippedVisualEffectView()
 		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
@@ -363,9 +371,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 		return window
 	}()
-	
+
 	private var mouseEventMonitor = GuardedEventMonitor()
-	
+
 	private var isCalloutWindowShown = false
 }
 

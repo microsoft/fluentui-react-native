@@ -6,7 +6,7 @@ We have a deprecated ThemeProvider which takes in a `ThemeRegistry`. The new The
 
 The new `ThemeProvider` takes in a different object as its value, a `ThemeReference`, so you'll need to convert your `ThemeRegistry` into a `ThemeReference` in order to use the new `ThemeProvider`.
 
-If you were using `createPlatformThemeRegistry(<paletteName>)` to create your `ThemeRegistry`, you can get an equivalent `ThemeReference` by calling `createOfficeTheme({ paletteName: <paletteName> })` instead. Details on `createOfficeTheme` can be found [here](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Theming/DefaultThemes.md#integration-with-office).
+If you were using `createPlatformThemeRegistry(<paletteName>)` to create your `ThemeRegistry`, you can get an equivalent `ThemeReference` by calling `createOfficeTheme({ paletteName: <paletteName> })` instead. Details on `createOfficeTheme` can be found [here](../Theming/DefaultThemes.md#integration-with-office).
 
 The gist is that what used to be the `ProcessTheme` function passed into the `ThemeRegistry`'s `setTheme` can now be turned into a `ThemeRecipe` passed into the `ThemeReference`. So where a `ThemeRegistry` might have had:
 
@@ -33,7 +33,7 @@ const themeRef = new ThemeReference(
 );
 ```
 
-`ThemeReferences` can also take advantage of our [default themes](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Theming/DefaultThemes.md). Learn how to create custom themes [here](https://github.com/microsoft/fluentui-react-native/blob/master/docs/pages/Theming/CustomTheme.md).
+`ThemeReferences` can also take advantage of our [default themes](../Theming/DefaultThemes.md). Learn how to create custom themes [here](../Theming/CustomTheme.md).
 
 ## Importing `ThemeProvider` from the new package
 

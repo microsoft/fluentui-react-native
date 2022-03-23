@@ -24,11 +24,11 @@
     "directory": "apps/ios"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.58.9",
+    "@fluentui-react-native/tester": "^0.58.12",
     "@react-native-community/slider": "^4.2.0",
     "react": "17.0.1",
     "react-native": "^0.64.2",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
