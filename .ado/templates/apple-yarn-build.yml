@@ -4,10 +4,10 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "pod install --project-directory=${{ parameters.relative_directory }}"
-      pod install --project-directory=src
-    workingDirectory: apps/fluent-tester
-    displayName: 'pod install'
+      echo "pod install"
+      pod install
+    workingDirectory: apps/fluent-tester/${{ parameters.relative_directory }}
+    displayName: 'pod install ${{ parameters.relative_directory }}'
 
   - bash: |
       echo "Pre boot simulator"
