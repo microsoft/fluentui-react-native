@@ -4,9 +4,15 @@ import { ComponentNameTokens } from './ComponentName.types';
 
 export const defaultComponentNameTokens: TokenSettings<ComponentNameTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: 'red',//t.colors.brandBackground,
+    backgroundColor: t.colors.brandBackground,
     color: t.colors.neutralForegroundInverted,
-    small: {},
-    medium: {},
-    large: {},
+    small: {
+      fontSize: t.typography.sizes.body,
+    },
+    medium: {
+      fontSize: t.typography.sizes.secondary,
+    },
+    large: {
+      fontSize: t.typography.sizes.header,
+    },
   } as ComponentNameTokens);

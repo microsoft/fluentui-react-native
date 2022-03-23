@@ -1,35 +1,79 @@
 const { src, dest } = require('gulp');
+const rename = require('gulp-rename');
 const process = require('process');
+const through2 = require('through2');
+const {
+  COMPONENT_PATH,
+  COMPONENT_TEMPLATE_PATH,
+  TESTER_PATH,
+  TESTER_TEMPLATE_PATH,
+  NAME_CAMEL_CASE,
+  NAME_CAMEL_CASE_REGEXP,
+  NAME_LOWER_CAMEL_CASE_REGEXP,
+  NAME_KEBAB_CASE_REGEXP,
+} = require('./consts');
 
-const COMPONENT_PATH = '../../packages/components/ComponentTemplate/';
-const COMPONENT_TEMPLATE_PATH = './component-templates/ComponentTemplate/';
-
-const TESTER_PATH = '../../apps/fluent-tester/src/FluentTester/TestComponents/TesterComponentTemplate';
-const TESTER_TEMPLATE_PATH = './component-templates/TesterComponentTemplate/*';
-function copy(from, to) {
-  src(from).pipe(dest(to));
+function addComponent(callback) {
+  const componentName = getComponentName();
+  moveAndRenameTemplates(
+    [`${COMPONENT_TEMPLATE_PATH}**/*`, `${COMPONENT_TEMPLATE_PATH}.eslintrc.js`],
+    `${COMPONENT_PATH}${formatName(componentName).camelCase}`,
+    componentName,
+  );
+  moveAndRenameTemplates([TESTER_TEMPLATE_PATH], `${TESTER_PATH}${formatName(componentName).camelCase}`, componentName);
+  callback();
 }
 
-function parseTask() {
-  const tasksArray = process.argv;
-  console.log(tasksArray)
-}
-function add(cb) {
-  // console.log(process.argv)
-  parseTask();
-  // copy([`${COMPONENT_TEMPLATE_PATH}**/*`, `${COMPONENT_TEMPLATE_PATH}.eslintrc.js`], COMPONENT_PATH);
-  // copy([TESTER_TEMPLATE_PATH], TESTER_PATH);
-  cb();
+function moveAndRenameTemplates(from, to, name) {
+  const compNameCamelCase = formatName(name).camelCase;
+  const compNameLowerCamelCase = formatName(name).lowerCamelCase;
+  const compNameKebabCase = formatName(name).kebabCase;
+
+  src(from)
+    .pipe(
+      rename(function (path) {
+        path.basename = path.basename.replace(NAME_CAMEL_CASE, compNameCamelCase);
+      }),
+    )
+    .pipe(
+      through2.obj(function (file, _, callback) {
+        if (!(file.isDirectory() || file.isNull()) && file.isBuffer()) {
+          const code = file.contents && file.contents.toString();
+          const updatedCode = code
+            .replace(NAME_CAMEL_CASE_REGEXP, compNameCamelCase)
+            .replace(NAME_LOWER_CAMEL_CASE_REGEXP, compNameLowerCamelCase)
+            .replace(NAME_KEBAB_CASE_REGEXP, compNameKebabCase);
+          file.contents = Buffer.from(updatedCode);
+        }
+        callback(null, file);
+      }),
+    )
+    .pipe(dest(to));
 }
 
-exports.default = add;
-exports.add = add;
+function formatName(name) {
+  let newName = name
+    .split('-')
+    .map((word) => word.replace(word[0], word[0].toUpperCase()))
+    .join('');
+  return {
+    kebabCase: name,
+    camelCase: newName,
+    lowerCamelCase: newName.replace(newName[0], newName[0].toLowerCase()),
+  };
+}
 
-// TODO
-// 1. Copy files to destination point - partially done
-// 2. lonsole.log what was copied
-// 3. Rename files
-// 4. Rename component name to the name from cmd
-// 5. Install deps with gulp
-// 6. Bundle your new component
-// 7. Run can be add as an option, e.g. gulp add --new component-name --run
+function getComponentName() {
+  const tasks = process.argv;
+  let name = '';
+  for (let i in tasks) {
+    if (tasks[i] === '--new') {
+      name = tasks[parseInt(i) + 1];
+      break;
+    }
+  }
+  return name;
+}
+
+exports.add = addComponent;
+exports.default = addComponent;

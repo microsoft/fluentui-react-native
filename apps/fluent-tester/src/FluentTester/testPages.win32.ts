@@ -26,8 +26,7 @@ import { TestDescription } from './TestComponents';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
-import { COMPONENT_NAME_TESTPAGE, HOMEPAGE_COMPONENT_NAME } from './TestComponents/TesterComponentTemplate';
-import { ComponentName } from '@fluentui-react-native/component-name';
+import { FhlComponentTest, HOMEPAGE_COMPONENT_NAME } from './TestComponents/FhlComponent';
 
 export const tests: TestDescription[] = [
   {
@@ -62,7 +61,7 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'ComponentName Test',
-    component: ComponentName,
+    component: FhlComponentTest,
     testPage: HOMEPAGE_COMPONENT_NAME,
   },
   {

@@ -1,6 +1,6 @@
 import { componentName, ComponentNameTokens, ComponentNameSlotProps, ComponentNameProps } from './ComponentName.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultComponentNameTokens } from './ComponentNameTokens';
 
 export const stylingSettings: UseStylingOptions<ComponentNameProps, ComponentNameSlotProps, ComponentNameTokens> = {
@@ -23,14 +23,15 @@ export const stylingSettings: UseStylingOptions<ComponentNameProps, ComponentNam
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     text: buildProps(
-      (tokens: ComponentNameTokens) => {
+      (tokens: ComponentNameTokens, theme: Theme) => {
         return {
           style: {
             color: tokens.color,
+            ...fontStyles.from(tokens, theme),
           },
         };
       },
-      ['color'],
+      ['color', ...fontStyles.keys],
     ),
   },
 };
