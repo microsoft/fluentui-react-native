@@ -46,7 +46,7 @@ const AppContent = () => {
 };
 ```
 
-You can take a look at how the palette is used to populate theme colors [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/win32-theme/src/paletteFromOfficeColors.ts) and [here](https://github.com/microsoft/fluentui-react-native/blob/master/packages/theming/win32-theme/src/createAliasesFromPalette.ts).
+You can take a look at how the palette is used to populate theme colors [here](../../../packages/theming/win32-theme/src/paletteFromOfficeColors.ts) and [here](../../../packages/theming/win32-theme/src/createAliasesFromPalette.ts).
 
 ## Example
 
