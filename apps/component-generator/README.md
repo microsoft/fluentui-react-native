@@ -14,4 +14,11 @@ It's used to automate process of component creation.
 ## TODO:
 
 1. Write unit tests
-2.
+2. Add platform as an option. Will need to update templates.
+3. Framework method can be also as an option.
+4. Validate name of component. If it's incorrect add warning.
+5. Change component-description
+6. Add tasks for bundle and run.
+7. Add warning if component exists and message "Do you want to replace it?".
+   Currently ir replaces the component.
+8. Improve replacement functionality.

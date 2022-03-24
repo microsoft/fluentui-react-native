@@ -9,3 +9,17 @@ exports.NAME_CAMEL_CASE = NAME_CAMEL_CASE;
 exports.NAME_CAMEL_CASE_REGEXP = getRegExp(NAME_CAMEL_CASE);
 exports.NAME_LOWER_CAMEL_CASE_REGEXP = getRegExp('componentName');
 exports.NAME_KEBAB_CASE_REGEXP = getRegExp('component-name');
+exports.NAME_COBOL_CASE_REGEXP = getRegExp('COMPONENT_NAME');
+
+exports.TEST_PAGES_WIN32_PATH = '../../apps/fluent-tester/src/FluentTester/testPages.win32.ts';
+exports.TEMP_FILES_PATH = './component-templates/TempFiles/';
+// TODO: FIX component name folder
+exports.TEST_PAGE_IMPORT_TO_INSERT = `import { ComponentNameTest, HOMEPAGE_COMPONENT_NAME } from './TestComponents/ComponentName';\n// --> testPage import insert`;
+exports.TEST_PAGE_COMPONENT_TO_INSERT = `{
+  name: 'ComponentName Test',
+  component: ComponentNameTest,
+  testPage: HOMEPAGE_COMPONENT_NAME,
+}
+// --> testPage component insert,`;
+exports.IMPORT_INSERT_TMPL = '// --> testPage import insert';
+exports.COMPONENT_INSERT_TMPL = '// --> testPage component insert';

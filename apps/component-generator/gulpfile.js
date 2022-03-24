@@ -9,8 +9,15 @@ const {
   TESTER_TEMPLATE_PATH,
   NAME_CAMEL_CASE,
   NAME_CAMEL_CASE_REGEXP,
+  NAME_COBOL_CASE_REGEXP,
   NAME_LOWER_CAMEL_CASE_REGEXP,
   NAME_KEBAB_CASE_REGEXP,
+  TEST_PAGES_WIN32_PATH,
+  TEST_PAGE_IMPORT_TO_INSERT,
+  TEST_PAGE_COMPONENT_TO_INSERT,
+  IMPORT_INSERT_TMPL,
+  COMPONENT_INSERT_TMPL,
+  TEMP_FILES_PATH,
 } = require('./consts');
 
 function addComponent(callback) {
@@ -21,13 +28,12 @@ function addComponent(callback) {
     componentName,
   );
   moveAndRenameTemplates([TESTER_TEMPLATE_PATH], `${TESTER_PATH}${formatName(componentName).camelCase}`, componentName);
+  insertCode(componentName);
   callback();
 }
 
 function moveAndRenameTemplates(from, to, name) {
   const compNameCamelCase = formatName(name).camelCase;
-  const compNameLowerCamelCase = formatName(name).lowerCamelCase;
-  const compNameKebabCase = formatName(name).kebabCase;
 
   src(from)
     .pipe(
@@ -39,16 +45,45 @@ function moveAndRenameTemplates(from, to, name) {
       through2.obj(function (file, _, callback) {
         if (!(file.isDirectory() || file.isNull()) && file.isBuffer()) {
           const code = file.contents && file.contents.toString();
-          const updatedCode = code
-            .replace(NAME_CAMEL_CASE_REGEXP, compNameCamelCase)
-            .replace(NAME_LOWER_CAMEL_CASE_REGEXP, compNameLowerCamelCase)
-            .replace(NAME_KEBAB_CASE_REGEXP, compNameKebabCase);
+          const updatedCode = renameComponent(code, name);
           file.contents = Buffer.from(updatedCode);
         }
         callback(null, file);
       }),
     )
     .pipe(dest(to));
+}
+
+function insertCode(name) {
+  src(TEST_PAGES_WIN32_PATH)
+    .pipe(
+      through2.obj(function (file, _, callback) {
+        if (!(file.isDirectory() || file.isNull()) && file.isBuffer()) {
+          const code = file.contents && file.contents.toString();
+          const importToInsert = renameComponent(TEST_PAGE_IMPORT_TO_INSERT, name);
+          const componentToInsert = renameComponent(TEST_PAGE_COMPONENT_TO_INSERT, name);
+          const updatedCode = code.replace(IMPORT_INSERT_TMPL, importToInsert).replace(COMPONENT_INSERT_TMPL, componentToInsert);
+          file.contents = Buffer.from(updatedCode);
+        }
+        callback(null, file);
+      }),
+    )
+    .pipe(dest(TEMP_FILES_PATH));
+
+  // src('./component-templates/TempFiles/testPages.win32.ts').pipe(dest(TEST_PAGES_WIN32_PATH));
+  // src('../../apps/fluent-tester/src/package.json');
+}
+
+function renameComponent(content, componentName) {
+  const compNameCamelCase = formatName(componentName).camelCase;
+  const compNameLowerCamelCase = formatName(componentName).lowerCamelCase;
+  const compNameKebabCase = formatName(componentName).kebabCase;
+  const compNameCobolCase = formatName(componentName).cobolCase;
+  return content
+    .replace(NAME_CAMEL_CASE_REGEXP, compNameCamelCase)
+    .replace(NAME_LOWER_CAMEL_CASE_REGEXP, compNameLowerCamelCase)
+    .replace(NAME_KEBAB_CASE_REGEXP, compNameKebabCase)
+    .replace(NAME_COBOL_CASE_REGEXP, compNameCobolCase);
 }
 
 function formatName(name) {
@@ -60,6 +95,7 @@ function formatName(name) {
     kebabCase: name,
     camelCase: newName,
     lowerCamelCase: newName.replace(newName[0], newName[0].toLowerCase()),
+    cobolCase: name.replace('-', '_').toUpperCase(),
   };
 }
 
