@@ -90,7 +90,7 @@ Please follow this structure for the new component.
 ## Create New Constants
 
 The way we our automation framework interacts with our test app is by selecting UI components based on a string value. For this, we have a **consts.ts** file for each component that defines these values.
-You'll want to make one for your component under **apps/fluent-tester/src/FluentTester/TestComponents/_your-component_/consts.ts**.
+You'll want to make one for your component under **apps/fluent-tester/src/TestComponents/_your-component_/consts.ts**.
 
 **You can simply copy/paste a _consts.ts_ file from another component, and just change the name of the component in the const names and the values.**
 

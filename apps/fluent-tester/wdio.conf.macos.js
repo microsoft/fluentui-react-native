@@ -1,10 +1,4 @@
-const path = require('path');
 const fs = require('fs');
-const rimraf = require('rimraf');
-
-const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
-const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
@@ -12,18 +6,18 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/E2E/**/specs/*.win.ts'],
-  exclude: ['src/E2E/Shimmer/specs/*.win.ts', 'src/E2E/Icon/specs/*.win.ts'],
+  specs: ['src/E2E/**/specs/*.macos.ts'],
+  exclude: [
+    /* 'path/to/excluded/files' */
+  ],
 
   maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
-      platformName: 'windows',
-      deviceName: 'WindowsPC',
-      app: appPath,
-      appArguments: appArgs,
-      appWorkingDir: appDir,
+      platformName: 'mac',
+      automationName: 'Mac2',
+      bundleId: 'com.microsoft.ReactTestApp',
     },
   ],
 
@@ -57,7 +51,7 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire spec file when it fails as a whole.
+  // The number of times to retry the entire specfile when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
@@ -77,11 +71,7 @@ exports.config = {
    * @param {Object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  //   require('ts-node/register');
-  //   // require('ts-node').register({ files: true });
-  //   console.log('<<< NATIVE APP TESTS STARTED >>>');
-  // },
+  //onPrepare: function (config, capabilities) {},
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -100,7 +90,7 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  beforeSession: function (/* config, capabilities, specs */) {
+  beforeSession: function (/*config, capabilities, specs*/) {
     fs.mkdirSync('./errorShots', { recursive: true });
   },
   /**
@@ -110,10 +100,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    // not needed for Cucumber
     require('ts-node').register({ files: true });
-
-    browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -161,22 +148,8 @@ exports.config = {
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
 
-    /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
-     * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
-    const windowHandles = browser.getWindowHandles();
-    if (windowHandles.length > 1) {
-      /* Switch to the Assert window - Take a screenshot and close the assert */
-      browser.switchToWindow(windowHandles[0]);
-      browser.saveScreenshot(filePath);
-      browser.closeWindow();
-
-      /* Switch back to FluentTester and close. The test harness has trouble closing the app when an assert fired */
-      browser.switchToWindow(windowHandles[1]);
-      browser.closeWindow();
-    } else {
-      // save screenshot
-      browser.saveScreenshot(filePath);
-    }
+    // save screenshot
+    browser.saveScreenshot(filePath);
   },
 
   /**
@@ -219,8 +192,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (/* exitCode, config, capabilities, results */) {
-    console.log('<<< TESTING FINISHED >>>');
+  onComplete: function (exitCode, config, capabilities, results) {
+    //console.log('<<< TESTING FINISHED >>>');
   },
   /**
    * Gets executed when a refresh happens.

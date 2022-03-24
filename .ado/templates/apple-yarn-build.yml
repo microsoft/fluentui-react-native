@@ -14,7 +14,7 @@ steps:
       UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS15)
       xcrun simctl boot $UDID
     workingDirectory: apps/fluent-tester
-    condition: and(succeeded(), eq('$(platform)', 'ios'))
+    condition: and(succeeded(), eq('${{ parameters.platform }}', 'ios'))
     displayName: 'Boot simulator'
 
   - bash: |

@@ -58,7 +58,7 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn e2etest
+      yarn e2etest:windows
     workingDirectory: apps\fluent-tester
     displayName: 'run E2E UWP tests'
     condition: succeeded()

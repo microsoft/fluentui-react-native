@@ -7,17 +7,17 @@ steps:
   # Copy Appium reports to FluentTesterDump
   - task: CopyFiles@2
     inputs:
-      sourceFolder: $(Build.SourcesDirectory)/apps/${{parameters.platform}}/reports/
+      sourceFolder: $(Build.SourcesDirectory)/apps/fluent-tester/reports/
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: "Copy Reports"
+    displayName: 'Copy Reports'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
   # Copy errorShots to FluentTesterDump
   - task: CopyFiles@2
     inputs:
-      sourceFolder: $(Build.SourcesDirectory)/apps/${{parameters.platform}}/errorShots/
+      sourceFolder: $(Build.SourcesDirectory)/apps/fluent-tester/errorShots/
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: "Copy tree dump screenshots"
+    displayName: 'Copy tree dump screenshots'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
   # Publish FluentTesterDump
@@ -25,5 +25,5 @@ steps:
     inputs:
       artifactName: E2E_${{parameters.applicationType}}_Dump
       pathtoPublish: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: "Publish Artifact:E2E_${{parameters.applicationType}}_Dump"
+    displayName: 'Publish Artifact:E2E_${{parameters.applicationType}}_Dump'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))

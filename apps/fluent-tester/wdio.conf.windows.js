@@ -1,29 +1,39 @@
-const path = require('path');
 const fs = require('fs');
-const rimraf = require('rimraf');
-
-const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
-const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
-  runner: 'local', // Where should your test be launched
-  specs: ['src/E2E/**/specs/*.win.ts'],
-  exclude: ['src/E2E/Shimmer/specs/*.win.ts', 'src/E2E/Icon/specs/*.win.ts'],
+  runner: 'local',
+  /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
+  so we must specify which ones we want to test here. */
+  specs: [
+    'src/E2E/ActivityIndicator/specs/*.win.ts',
+    'src/E2E/Button/specs/*.win.ts',
+    'src/E2E/Callout/specs/*.win.ts',
+    'src/E2E/Checkbox/specs/*.windows.ts', // See spec file for more information
+    'src/E2E/Link/specs/*.win.ts',
+    'src/E2E/PersonaCoin/specs/*.win.ts',
+    'src/E2E/Pressable/specs/*.win.ts',
+    'src/E2E/Separator/specs/*.win.ts',
+    'src/E2E/Tabs/specs/*.windows.ts', // See spec file for more information
+    'src/E2E/Text/specs/*.win.ts',
+    'src/E2E/TextExperimental/specs/*.win.ts',
+    'src/E2E/Theme/specs/*.win.ts',
+    'src/E2E/Tokens/specs/*.win.ts',
+  ],
+  exclude: [
+    /* 'path/to/excluded/files' */
+  ],
 
-  maxInstances: 30,
+  maxInstances: 1,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       deviceName: 'WindowsPC',
-      app: appPath,
-      appArguments: appArgs,
-      appWorkingDir: appDir,
+      app: '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
     },
   ],
 
@@ -37,7 +47,7 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 1,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
@@ -57,7 +67,7 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire spec file when it fails as a whole.
+  // The number of times to retry the entire specfile when it fails as a whole.
   // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
   specFileRetries: 3,
 
@@ -149,8 +159,7 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: function (test, context, results) {
-    // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
-    // it may be useful to have a screenshot of the app on load.
+    // if test passed, ignore, else take and save screenshot.
     if (results.passed) {
       return;
     }
@@ -161,22 +170,8 @@ exports.config = {
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
 
-    /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
-     * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
-    const windowHandles = browser.getWindowHandles();
-    if (windowHandles.length > 1) {
-      /* Switch to the Assert window - Take a screenshot and close the assert */
-      browser.switchToWindow(windowHandles[0]);
-      browser.saveScreenshot(filePath);
-      browser.closeWindow();
-
-      /* Switch back to FluentTester and close. The test harness has trouble closing the app when an assert fired */
-      browser.switchToWindow(windowHandles[1]);
-      browser.closeWindow();
-    } else {
-      // save screenshot
-      browser.saveScreenshot(filePath);
-    }
+    // save screenshot
+    browser.saveScreenshot(filePath);
   },
 
   /**
