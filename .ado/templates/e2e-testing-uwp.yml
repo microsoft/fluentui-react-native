@@ -70,3 +70,4 @@ steps:
       applicationType: UWP
       platform: windows
       buildArtifacts: variables['task.Build.status']
+      reportDirectory: $(Build.SourcesDirectory)/apps/fluent-tester/reports

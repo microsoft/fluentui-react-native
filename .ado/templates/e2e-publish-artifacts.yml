@@ -2,12 +2,13 @@ parameters:
   platform:
   applicationType:
   buildArtifacts:
+  reportDirectory:
 
 steps:
   # Copy Appium reports to FluentTesterDump
   - task: CopyFiles@2
     inputs:
-      sourceFolder: $(Build.SourcesDirectory)/apps/fluent-tester/reports/
+      sourceFolder: ${{parameters.reportDirectory}}
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
     displayName: 'Copy Reports'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))

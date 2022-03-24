@@ -6,7 +6,7 @@
 
 Prereq: FluentUI Tester on macOS can only run on a Mac.
 
-1. Make sure you have followed the [Getting Started](../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
+1. Make sure you have followed the [Getting Started](../../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
 
 ```sh
 yarn

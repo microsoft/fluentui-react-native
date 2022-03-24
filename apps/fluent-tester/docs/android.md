@@ -10,7 +10,7 @@ Prereqs:
 - Install [Android Studio](https://developer.android.com/studio)
 - Make sure you have setup an [Android Virtual Device](https://developer.android.com/studio/run/managing-avds)
 
-1. Make sure you have followed the [Getting Started](../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
+1. Make sure you have followed the [Getting Started](../../../README.md) instructions to install packages and build the entire FluentUI React Native repository. I.e. from the root of the repo:
 
 ```sh
 yarn
@@ -103,10 +103,10 @@ open -a "Android Studio" .
 # Easiest to open from within Android Studio - see picture below
 ```
 
-![On Windows, it is easiest to open from within Android Studio, and the folder will show an Android Studio icon.](./../../assets/fluent_tester_android_windows_open.png)
+![On Windows, it is easiest to open from within Android Studio, and the folder will show an Android Studio icon.](./../assets/fluent_tester_android_windows_open.png)
 
 Note: if Android Studio does not provide you with an "app" to run after you first open the project from the android folder, you may have to restart Android Studio.
 
 Once Android Studio finishes preparing your app folder, you will be able to build and run your app by clicking on the "app" dropdown in the menu bar. If you have not yet setup an AVD, please see [this page](https://developer.android.com/studio/run/managing-avds) on how to set one up.
 
-![Run your app from Android Studio with the "app" button in the menu bar.](./../../assets/fluent_tester_android_app_built.png)
+![Run your app from Android Studio with the "app" button in the menu bar.](./../assets/fluent_tester_android_app_built.png)

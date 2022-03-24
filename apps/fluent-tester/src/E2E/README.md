@@ -10,7 +10,7 @@
 
 ### UWP Additional Prerequisites
 
-- [UWP Prerequisites](../../../windows/README.md)
+- [UWP Prerequisites](../../../fluent-tester/docs/windows.md.md)
 
 ## MacOS Prerequisites
 

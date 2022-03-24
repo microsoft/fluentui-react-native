@@ -11,7 +11,7 @@ steps:
   - script: |
       yarn bundle
     workingDirectory: apps/win32
-    displayName: "yarn bundle"
+    displayName: 'yarn bundle'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
@@ -19,16 +19,16 @@ steps:
   # E2E testing failures. Thus, if this variable != "Success", we know the build failed, and to not run the reporting tasks.
   - task: PowerShell@2
     inputs:
-      targetType: "inline"
+      targetType: 'inline'
       script: |
         Write-Host "##vso[task.setvariable variable=task.Build.status]Success"
     condition: succeeded()
-    displayName: "Create success build variable"
+    displayName: 'Create success build variable'
 
   - script: |
       yarn e2etest
     workingDirectory: apps/win32
-    displayName: "run E2E Win32 tests"
+    displayName: 'run E2E Win32 tests'
     condition: succeeded()
 
   - template: e2e-publish-artifacts.yml
@@ -36,3 +36,4 @@ steps:
       applicationType: win32
       platform: win32
       buildArtifacts: variables['task.Build.status']
+      reportDirectory: $(Build.SourcesDirectory)/apps/win32/reports
