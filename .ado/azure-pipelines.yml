@@ -138,6 +138,9 @@ jobs:
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle  $(platform)'
 
+      # sets-up specifics for android dependency like NDK & emulator
+      - template: templates/android-dep-setup.yml
+
       - bash: |
           echo "yarn $(platform)"
           yarn $(platform)
