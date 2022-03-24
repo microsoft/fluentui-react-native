@@ -105,16 +105,16 @@ jobs:
       - template: templates/setup-repo-min-build.yml
 
       - script: |
-          yarn bundle --platform  ${{ parameters.platform }}
+          yarn bundle --platform  $(platform)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  ${{ parameters.platform }}'
+        displayName: 'yarn bundle  $(platform)'
 
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-yarn-build.yml
         parameters:
-          platform: ${{ parameters.platform }}
+          platform: $(platform)
 
   - job: AndroidPR
     displayName: Android PR
@@ -134,15 +134,15 @@ jobs:
 
       # package android bundle
       - script: |
-          yarn bundle --platform  ${{ parameters.platform }}
+          yarn bundle --platform  $(platform)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  ${{ parameters.platform }}'
+        displayName: 'yarn bundle  $(platform)'
 
       - bash: |
-          echo "yarn ${{ parameters.platform }}"
-          yarn ${{ parameters.platform }}
+          echo "yarn $(platform)"
+          yarn $(platform)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn ${{ parameters.platform }}'
+        displayName: 'yarn $(platform)'
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks
