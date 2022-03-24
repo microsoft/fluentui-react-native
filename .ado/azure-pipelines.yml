@@ -138,19 +138,11 @@ jobs:
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle $(platform)'
 
-      # sets-up specifics for android dependency like NDK & emulator
-      - template: templates/android-dep-setup.yml
-
-      # build android apk and run available Instrumented test
-      - task: Gradle@2
-        inputs:
-          gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
-          workingDirectory: 'apps/fluent-tester/android'
-          tasks: 'assembleDebug cAT'
-          publishJUnitResults: false
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: '1.11'
-          sonarQubeRunAnalysis: false
+      - bash: |
+          echo "yarn ${{ parameters.platform }}"
+          yarn ${{ parameters.platform }}
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn ${{ parameters.platform }}'
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks

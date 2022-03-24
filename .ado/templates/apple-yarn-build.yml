@@ -22,5 +22,3 @@ steps:
       yarn ${{ parameters.platform }}
     workingDirectory: apps/fluent-tester
     displayName: 'yarn ${{ parameters.platform }}'
-    env:
-      platform_directory: ${{ parameters.platform }}
