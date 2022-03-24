@@ -143,6 +143,9 @@ jobs:
           yarn $(platform)
         workingDirectory: apps/fluent-tester
         displayName: 'yarn $(platform)'
+        env:
+          JAVA_HOME: $(JAVA_HOME_11_X64)
+          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks
