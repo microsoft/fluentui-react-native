@@ -144,8 +144,8 @@ jobs:
       # build android apk and run available Instrumented test
       - task: Gradle@2
         inputs:
-          gradleWrapperFile: 'apps/fluent-tester/gradlew'
-          workingDirectory: 'apps/fluent-tester/src'
+          gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
+          workingDirectory: 'apps/fluent-tester/android'
           tasks: 'assembleDebug cAT'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'

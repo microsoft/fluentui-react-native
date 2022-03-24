@@ -4,7 +4,7 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "pod install"
+      echo "pod install ${{ parameters.platform }}"
       pod install
     workingDirectory: apps/fluent-tester/${{ parameters.platform }}
     displayName: 'pod install ${{ parameters.platform }}'
