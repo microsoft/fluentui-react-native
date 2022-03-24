@@ -71,7 +71,7 @@ export const tests = [
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
-  // GH#935 Temporarily disabling while SVGs don't work in windows
+  // GH#935: Temporarily disabling while SVGs don't work in windows
   // {
   //   name: 'Experimental Checkbox',
   //   component: ExperimentalCheckboxTest,
@@ -92,7 +92,7 @@ export const tests = [
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
   },
-  // Disable while this doesn't run in our test app
+  // GH#1027: Disable while this doesn't run in our test app
   // {
   //   name: 'Expander Test',
   //   component: ExpanderTest,

@@ -3,7 +3,7 @@
   "displayName": "FluentTester",
   "components": [{ "appKey": "FluentTester", "displayName": "Fluent Tester" }],
   "resources": {
-    "android": ["dist/res", "dist/index.android.jsbundle"],
+    "android": ["dist", "dist/index.android.bundle"],
     "ios": ["dist/assets", "dist/index.ios.jsbundle"],
     "macos": ["dist/assets", "dist/index.macos.jsbundle"],
     "windows": ["dist/assets", "dist/index.windows.bundle"]
