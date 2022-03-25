@@ -26,7 +26,6 @@ import { TestDescription } from './TestComponents';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
-import { FhlComponentTest, HOMEPAGE_FHL_COMPONENT } from './TestComponents/FhlComponent';
 // --> testPage import insert
 
 export const tests: TestDescription[] = [

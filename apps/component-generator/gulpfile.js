@@ -55,7 +55,7 @@ function moveAndRenameTemplates(from, to, name) {
 }
 
 function insertCode(name) {
-  src(TEST_PAGES_WIN32_PATH)
+  src(`${TEST_PAGES_WIN32_PATH}testPages.win32.ts`)
     .pipe(
       through2.obj(function (file, _, callback) {
         if (!(file.isDirectory() || file.isNull()) && file.isBuffer()) {
@@ -68,10 +68,7 @@ function insertCode(name) {
         callback(null, file);
       }),
     )
-    .pipe(dest(TEMP_FILES_PATH));
-
-  // src('./component-templates/TempFiles/testPages.win32.ts').pipe(dest(TEST_PAGES_WIN32_PATH));
-  // src('../../apps/fluent-tester/src/package.json');
+    .pipe(dest(TEST_PAGES_WIN32_PATH));
 }
 
 function renameComponent(content, componentName) {
