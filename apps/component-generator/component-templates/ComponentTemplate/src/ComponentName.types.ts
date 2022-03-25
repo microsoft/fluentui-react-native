@@ -1,6 +1,6 @@
 import { ViewProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { IBorderTokens, IColorTokens, LayoutTokens, FontTokens } from '@fluentui-react-native/tokens';
+import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const componentName = 'ComponentName';
 /**
@@ -8,7 +8,7 @@ export const componentName = 'ComponentName';
  */
 export type TextSize = 'small' | 'medium' | 'large';
 
-export interface ComponentNameTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
+export interface ComponentNameTokens extends LayoutTokens, IBorderTokens, IColorTokens {
   small?: ComponentNameTokens;
   medium?: ComponentNameTokens;
   large?: ComponentNameTokens;

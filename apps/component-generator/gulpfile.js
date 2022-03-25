@@ -61,8 +61,10 @@ function insertCode(name) {
           const code = file.contents && file.contents.toString();
           const importToInsert = renameComponent(TEST_PAGE_IMPORT_TO_INSERT, name);
           const componentToInsert = renameComponent(TEST_PAGE_COMPONENT_TO_INSERT, name);
-          const updatedCode = code.replace(IMPORT_INSERT_TMPL, importToInsert).replace(COMPONENT_INSERT_TMPL, componentToInsert);
-          file.contents = Buffer.from(updatedCode);
+          if (code.indexOf(importToInsert) === -1 && code.indexOf(componentToInsert) === -1) {
+            const updatedCode = code.replace(IMPORT_INSERT_TMPL, importToInsert).replace(COMPONENT_INSERT_TMPL, componentToInsert);
+            file.contents = Buffer.from(updatedCode);
+          }
         }
         callback(null, file);
       }),

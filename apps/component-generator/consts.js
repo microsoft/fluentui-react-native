@@ -17,7 +17,7 @@ exports.TEST_PAGE_COMPONENT_TO_INSERT = `{
     name: 'ComponentName Test',
     component: ComponentNameTest,
     testPage: HOMEPAGE_COMPONENT_NAME,
-  }
-// --> testPage component insert,`;
+  },
+  // --> testPage component insert,`;
 exports.IMPORT_INSERT_TMPL = '// --> testPage import insert';
 exports.COMPONENT_INSERT_TMPL = '// --> testPage component insert';

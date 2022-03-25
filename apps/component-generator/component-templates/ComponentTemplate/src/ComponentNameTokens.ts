@@ -9,14 +9,17 @@ export const defaultComponentNameTokens: TokenSettings<ComponentNameTokens, Them
     borderColor: t.colors.brandBackground,
     small: {
       borderWidth: 1,
-      fontSize: t.typography.sizes.body,
+      padding: 10,
+      borderRadius: 2,
     },
     medium: {
       borderWidth: 2,
-      fontSize: t.typography.sizes.secondary,
+      borderRadius: 4,
+      padding: 20,
     },
     large: {
       borderWidth: 4,
-      fontSize: t.typography.sizes.header,
+      borderRadius: 6,
+      padding: 30,
     },
   } as ComponentNameTokens);
