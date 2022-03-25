@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Fri, 25 Mar 2022 20:06:21 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.6",
+      "version": "0.10.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "7f3427875a7711144237cc5de8dbf5ce1a778bd6",
+            "comment": "Fix padding when there is no label and focus border radius when there is label"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Mar 2022 17:24:05 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.10.5",
       "version": "0.10.5",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
+This log was last generated on Fri, 25 Mar 2022 20:06:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.6
+
+Fri, 25 Mar 2022 20:06:21 GMT
+
+### Patches
+
+- Fix padding when there is no label and focus border radius when there is label (ruaraki@microsoft.com)
 
 ## 0.10.5
 
