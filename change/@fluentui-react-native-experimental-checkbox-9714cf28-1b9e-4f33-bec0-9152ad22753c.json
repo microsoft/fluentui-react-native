@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix padding when there is no label and focus border radius when there is label",
+  "packageName": "@fluentui-react-native/experimental-checkbox",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
