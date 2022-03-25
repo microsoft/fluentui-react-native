@@ -5,6 +5,37 @@ variables:
   CI: true
 
 jobs:
+  # Dedicated task to build and bundle JS code, including jest tests, snapshot testing, and linting, because these things can be super
+  # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
+  - job: JSPR
+    displayName: JS PR
+    pool:
+      vmImage: 'ubuntu-latest'
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      - template: templates/setup-repo.yml
+
+      - script: |
+          yarn buildci
+        displayName: 'yarn buildci'
+
+      - script: |
+          yarn prettier
+        displayName: 'check prettier'
+
+      - script: |
+          yarn checkchange
+        displayName: 'check change'
+
+      - script: |
+          yarn check-for-changed-files
+        displayName: 'verify API and Ensure Changed Files'
+
   - job: AndroidPR
     displayName: Android PR
     pool:
@@ -38,37 +69,6 @@ jobs:
         env:
           JAVA_HOME: $(JAVA_HOME_11_X64)
           PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
-
-  # Dedicated task to build and bundle JS code, including jest tests, snapshot testing, and linting, because these things can be super
-  # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
-  - job: JSPR
-    displayName: JS PR
-    pool:
-      vmImage: 'ubuntu-latest'
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-
-    steps:
-      - checkout: self
-        persistCredentials: true
-
-      - template: templates/setup-repo.yml
-
-      - script: |
-          yarn buildci
-        displayName: 'yarn buildci'
-
-      - script: |
-          yarn prettier
-        displayName: 'check prettier'
-
-      - script: |
-          yarn checkchange
-        displayName: 'check change'
-
-      - script: |
-          yarn check-for-changed-files
-        displayName: 'verify API and Ensure Changed Files'
 
   - job: ApplePR
     displayName: Apple PR
