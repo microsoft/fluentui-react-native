@@ -10,7 +10,7 @@
 
 ### UWP Additional Prerequisites
 
-- [UWP Prerequisites](../../../fluent-tester/docs/windows.md.md)
+- [UWP Prerequisites](../../../fluent-tester/docs/windows.md)
 
 ## MacOS Prerequisites
 
