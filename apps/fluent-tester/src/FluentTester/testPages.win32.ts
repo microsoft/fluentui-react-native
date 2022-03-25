@@ -60,11 +60,6 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
   },
   {
-    name: 'ComponentName Test',
-    component: FhlComponentTest,
-    testPage: HOMEPAGE_FHL_COMPONENT,
-  },
-  {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
@@ -169,5 +164,5 @@ export const tests: TestDescription[] = [
     component: ExperimentalMenuButtonTest,
     testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   },
-  // --> testPage component insert,
+  // --> testPage component insert,,
 ];

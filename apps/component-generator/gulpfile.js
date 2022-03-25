@@ -17,7 +17,6 @@ const {
   TEST_PAGE_COMPONENT_TO_INSERT,
   IMPORT_INSERT_TMPL,
   COMPONENT_INSERT_TMPL,
-  TEMP_FILES_PATH,
 } = require('./consts');
 
 function addComponent(callback) {

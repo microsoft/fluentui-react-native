@@ -3,8 +3,11 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultComponentNameTokens } from './ComponentNameTokens';
 
+export const componentNameStates: (keyof ComponentNameTokens)[] = ['small', 'medium', 'large'];
+
 export const stylingSettings: UseStylingOptions<ComponentNameProps, ComponentNameSlotProps, ComponentNameTokens> = {
   tokens: [defaultComponentNameTokens, componentName],
+  states: componentNameStates,
   slotProps: {
     root: buildProps(
       (tokens: ComponentNameTokens, theme: Theme) => ({
