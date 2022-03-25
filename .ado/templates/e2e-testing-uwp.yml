@@ -9,7 +9,7 @@ steps:
     displayName: Replace WinAppDriver 1.2.1 with WinAppDriver 1.1
 
   - script: |
-      yarn bundle --platform windows
+      yarn bundle:windows
     workingDirectory: apps\fluent-tester
     displayName: yarn bundle
 
@@ -70,4 +70,4 @@ steps:
       applicationType: UWP
       platform: windows
       buildArtifacts: variables['task.Build.status']
-      reportDirectory: $(Build.SourcesDirectory)/apps/fluent-tester/reports
+      directory: $(Build.SourcesDirectory)/apps/fluent-tester

@@ -36,4 +36,4 @@ steps:
       applicationType: win32
       platform: win32
       buildArtifacts: variables['task.Build.status']
-      reportDirectory: $(Build.SourcesDirectory)/apps/win32/reports
+      directory: $(Build.SourcesDirectory)/apps/win32

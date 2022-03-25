@@ -5,10 +5,44 @@ variables:
   CI: true
 
 jobs:
+  - job: AndroidPR
+    displayName: Android PR
+    pool:
+      vmImage: 'macos-11'
+    variables:
+      platform: 'android'
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      # setup repo basics
+      - template: templates/setup-repo-min-build.yml
+
+      # package android bundle
+      - script: |
+          yarn bundle:$(platform)
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn bundle  $(platform)'
+
+      # sets-up specifics for android dependency like NDK & emulator
+      - template: templates/android-dep-setup.yml
+
+      - bash: |
+          echo "yarn $(platform)"
+          yarn $(platform)
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn $(platform)'
+        env:
+          JAVA_HOME: $(JAVA_HOME_11_X64)
+          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
+
   # Dedicated task to build and bundle JS code, including jest tests, snapshot testing, and linting, because these things can be super
   # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
-  - job: BuildAndBundle
-    displayName: Build, test, and bundle JavaScript
+  - job: JSPR
+    displayName: JS PR
     pool:
       vmImage: 'ubuntu-latest'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -35,6 +69,48 @@ jobs:
       - script: |
           yarn check-for-changed-files
         displayName: 'verify API and Ensure Changed Files'
+
+  - job: ApplePR
+    displayName: Apple PR
+    pool:
+      vmImage: 'macos-11'
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+    strategy:
+      maxParallel: 4
+      matrix:
+        ios:
+          platform: 'ios'
+        macos:
+          platform: 'macos'
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: 'Clean DerivedData'
+
+      - script: |
+          sudo gem install cocoapods
+        displayName: 'Install Cocoapods Environment'
+
+      - template: templates/setup-repo-min-build.yml
+
+      - script: |
+          yarn bundle:$(platform)
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn bundle  $(platform)'
+
+      # Select proper Xcode version
+      - template: templates/apple-xcode-select.yml
+
+      - template: templates/apple-yarn-build.yml
+        parameters:
+          platform: $(platform)
 
   # Windows bundling and end to end testing
   - job: WindowsPR
@@ -74,82 +150,6 @@ jobs:
       # bundle win32 and do end to end tests
       - template: templates/e2e-testing-win32.yml
 
-  - job: ApplePR
-    displayName: Apple PR
-    pool:
-      vmImage: 'macos-11'
-      demands: ['xcode', 'sh', 'npm']
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    strategy:
-      maxParallel: 4
-      matrix:
-        ios:
-          platform: 'ios'
-        macos:
-          platform: 'macos'
-
-    steps:
-      - checkout: self
-        persistCredentials: true
-
-      # Clean Derived Data
-      - script: |
-          rm -rf $(Build.Repository.LocalPath)/DerivedData
-        displayName: 'Clean DerivedData'
-
-      - script: |
-          sudo gem install cocoapods
-        displayName: 'Install Cocoapods Environment'
-
-      - template: templates/setup-repo-min-build.yml
-
-      - script: |
-          yarn bundle --platform  $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  $(platform)'
-
-      # Select proper Xcode version
-      - template: templates/apple-xcode-select.yml
-
-      - template: templates/apple-yarn-build.yml
-        parameters:
-          platform: $(platform)
-
-  - job: AndroidPR
-    displayName: Android PR
-    pool:
-      vmImage: 'macos-11'
-    variables:
-      platform: 'android'
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-
-    steps:
-      - checkout: self
-        persistCredentials: true
-
-      # setup repo basics
-      - template: templates/setup-repo-min-build.yml
-
-      # package android bundle
-      - script: |
-          yarn bundle --platform  $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  $(platform)'
-
-      # sets-up specifics for android dependency like NDK & emulator
-      - template: templates/android-dep-setup.yml
-
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
-        env:
-          JAVA_HOME: $(JAVA_HOME_11_X64)
-          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
-
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks
     displayName: Test repo links
@@ -166,6 +166,7 @@ jobs:
       - script: |
           find . -name \*.md -not -name CHANGELOG.md -not -path '*/\node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c `pwd`/.ado/markdown-link-check-config.json
         displayName: 'testing links'
+
   # Uncomment this job to test changes to the NuGet package
   # We keep it commented out by default because this job is much longer than the other PR jobs
   # - job: NuGetPublish
