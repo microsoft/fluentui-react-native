@@ -16,7 +16,7 @@
     "android": "react-native run-android",
     "build": "fluentui-scripts build",
     "bundle": "react-native rnx-bundle --dev false",
-    "bundle:android": "react-native rnx-bundle --dev false --platform android --bundle-output dist/index.android.jsbundle --assets-dest dist/res",
+    "bundle:android": "react-native rnx-bundle --dev false --platform android --assets-path dist/res",
     "bundle:ios": "react-native rnx-bundle --dev false --platform ios",
     "bundle:macos": "react-native rnx-bundle --dev false --platform macos",
     "bundle:windows": "react-native rnx-bundle --dev false --platform windows",
