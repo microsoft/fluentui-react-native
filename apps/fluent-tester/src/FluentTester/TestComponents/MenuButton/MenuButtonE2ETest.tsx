@@ -49,7 +49,7 @@ export const E2ETestMenuButton: React.FunctionComponent = () => {
           <View style={{ ...rowStyle, paddingHorizontal: 5 }}>
             <View style={columnStyle}>
               <MenuButton
-                content={MENU_BUTTON_TEST_COMPONENT_LABEL}
+                content={null}
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
