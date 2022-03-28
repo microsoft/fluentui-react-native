@@ -5,7 +5,7 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 ## Contents
 
 1. [Choosing a Component Builder Framework](#choosing-a-component-builder-framework)
-   - [Compose vs Composable](#Compose-vs-Composable)
+   - [Compose vs Composable](#compose-vs-composable)
 2. [Building a Component](#building-a-component)
 
    - [Using the Compose Framework](#using-the-compose-framework)
