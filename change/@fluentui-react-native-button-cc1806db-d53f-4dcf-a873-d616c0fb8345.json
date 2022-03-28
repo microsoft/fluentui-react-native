@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Other fixes",
-  "packageName": "@fluentui-react-native/button",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

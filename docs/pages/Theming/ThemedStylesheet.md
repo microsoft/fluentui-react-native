@@ -43,4 +43,4 @@ export const Component = () => {
 
 ## Additional Reading
 
-For more detailed information, check out [our README](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/themed-stylesheet/README.md).
+For more detailed information, check out [our README](../../../packages/framework/themed-stylesheet/README.md).

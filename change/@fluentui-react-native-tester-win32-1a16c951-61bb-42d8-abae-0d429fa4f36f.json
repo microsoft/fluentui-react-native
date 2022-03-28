@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update minimum rn svg version",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

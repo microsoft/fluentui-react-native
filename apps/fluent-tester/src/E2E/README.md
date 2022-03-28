@@ -10,7 +10,7 @@
 
 ### UWP Additional Prerequisites
 
-- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/README.md)
+- [UWP Prerequisites](../../../windows/README.md)
 
 ## MacOS Prerequisites
 
