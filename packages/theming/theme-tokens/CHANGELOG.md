@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Thu, 03 Mar 2022 20:20:09 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Fix color mappings (ruaraki@microsoft.com)
 
 ## 0.13.0
 
