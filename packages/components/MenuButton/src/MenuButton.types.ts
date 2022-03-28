@@ -1,4 +1,4 @@
-import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui/react-native';
+import { ContextualMenuItemProps, ContextualMenuProps, SubmenuProps } from '@fluentui-react-native/contextual-menu';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IButtonProps } from '@fluentui-react-native/button';
 import { IRenderData } from '@uifabricshared/foundation-composable';
