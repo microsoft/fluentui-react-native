@@ -56,7 +56,7 @@ jobs:
       - script: |
           yarn bundle:$(platform)
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  $(platform)'
+        displayName: 'yarn bundle $(platform)'
 
       # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
