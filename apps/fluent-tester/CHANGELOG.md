@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.58.14
+
+Mon, 28 Mar 2022 15:02:37 GMT
+
+### Patches
+
+- temp fix e2e testing error for menuButton (email not defined)
+- Bump @fluentui-react-native/badge to v0.0.20
+- Bump @fluentui-react-native/button to v0.22.10
+- Bump @fluentui-react-native/experimental-button to v0.15.10
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.7
+- Bump @fluentui-react-native/experimental-drawer to v0.1.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.22
+- Bump @fluentui-react-native/experimental-tabs to v0.4.31
+- Bump @fluentui-react-native/interactive-hooks to v0.14.5
+- Bump @fluentui/react-native to v0.27.44
+
+## 0.58.13
+
+Fri, 25 Mar 2022 20:06:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.6
 
 ## 0.58.12
 

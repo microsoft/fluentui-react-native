@@ -8,34 +8,42 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     requiredColor: t.colors.redForeground1,
     requiredPadding: globalTokens.spacing.s,
     medium: {
-      borderRadius: globalTokens.corner.radius.medium,
+      borderRadius: globalTokens.corner.radius.small,
       checkboxBorderWidth: globalTokens.stroke.width.thin,
       checkboxBorderRadius: globalTokens.corner.radius.small,
       checkboxSize: 16,
       checkmarkSize: 8,
-      spacingLabelAfter: globalTokens.spacing.s,
-      labelIsBefore: {
-        spacingLabelBefore: globalTokens.spacing.s,
-        spacingLabelAfter: 0,
+      label: {
+        padding: globalTokens.spacing.s,
+        paddingHorizontal: globalTokens.spacing.m,
+        borderRadius: globalTokens.corner.radius.medium,
+        spacingLabelAfter: globalTokens.spacing.s,
+        labelIsBefore: {
+          spacingLabelBefore: globalTokens.spacing.s,
+          spacingLabelAfter: 0,
+        },
       },
-      padding: globalTokens.spacing.mNudge,
-      paddingHorizontal: globalTokens.spacing.m,
+      padding: globalTokens.spacing.xs,
       fontSize: globalTokens.font.size[200],
       fontWeight: globalTokens.font.weight.regular,
       fontFamily: t.typography.families.primary,
     },
     large: {
-      borderRadius: globalTokens.corner.radius.medium,
+      borderRadius: globalTokens.corner.radius.small,
       checkboxBorderWidth: globalTokens.stroke.width.thin,
       checkboxBorderRadius: globalTokens.corner.radius.small,
       checkboxSize: 20,
       checkmarkSize: 10,
-      spacingLabelAfter: globalTokens.spacing.m,
-      labelIsBefore: {
-        spacingLabelBefore: globalTokens.spacing.m,
-        spacingLabelAfter: 0,
+      label: {
+        padding: globalTokens.spacing.s,
+        borderRadius: globalTokens.corner.radius.medium,
+        spacingLabelAfter: globalTokens.spacing.m,
+        labelIsBefore: {
+          spacingLabelBefore: globalTokens.spacing.m,
+          spacingLabelAfter: 0,
+        },
       },
-      padding: globalTokens.spacing.s,
+      padding: globalTokens.spacing.xs,
       fontSize: globalTokens.font.size[300],
       fontWeight: globalTokens.font.weight.regular,
       fontFamily: t.typography.families.primary,
@@ -83,6 +91,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     circular: {
+      borderRadius: globalTokens.corner.radius.circle,
       checkboxBorderRadius: globalTokens.corner.radius.circle,
     },
   } as CheckboxTokens);

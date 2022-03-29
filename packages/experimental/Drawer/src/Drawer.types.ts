@@ -6,14 +6,11 @@ export interface DrawerProps extends ViewProps {
   onShow?: () => void;
   onDismiss?: () => void;
   target?: React.RefObject<React.Component>;
-}
-
-export interface NativeDrawerProps extends Omit<DrawerProps, 'target'> {
-  target?: number | null;
+  contentRef?: React.RefObject<React.Component>;
 }
 
 export type DrawerSlotProps = {
-  root: NativeDrawerProps;
+  root: DrawerProps;
 };
 
 export interface DrawerTokens {}
