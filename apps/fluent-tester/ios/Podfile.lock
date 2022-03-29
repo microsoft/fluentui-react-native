@@ -56,7 +56,7 @@ PODS:
   - FlipperKit/SKIOSNetworkPlugin (0.75.1):
     - FlipperKit/Core
     - FlipperKit/FlipperKitNetworkPlugin
-  - FRNAvatar (0.14.8):
+  - FRNAvatar (0.14.9):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
@@ -482,7 +482,7 @@ PODS:
     - React-cxxreact (= 0.64.3)
     - React-jsi (= 0.64.3)
     - React-perflogger (= 0.64.3)
-  - ReactTestApp-DevSupport (1.2.1):
+  - ReactTestApp-DevSupport (1.3.2):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -659,7 +659,7 @@ SPEC CHECKSUMS:
   Flipper-PeerTalk: 116d8f857dc6ef55c7a5a75ea3ceaafe878aadc9
   Flipper-RSocket: 127954abe8b162fcaf68d2134d34dc2bd7076154
   FlipperKit: 8a20b5c5fcf9436cac58551dc049867247f64b00
-  FRNAvatar: 6d619c9cfaff54cbce08c064c582229fff9678c3
+  FRNAvatar: 42327f6346bfb5afe37b142ec2d44fd3638c85da
   FRNDatePicker: 58e321df06792fd68b4e0e3e1844a916652fa172
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
@@ -690,8 +690,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: c7f845861e79eae13dc1e8217a3cf47a3945b504
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
-  ReactTestApp-DevSupport: 12b1db9658a28f0f13272d7e4d68d2439130dd93
-  ReactTestApp-Resources: 73c2660013d746f9ffc6762e0123d22950ccd740
+  ReactTestApp-DevSupport: b581ac76d7b5dcf7c22f213e8012596199504f2f
+  ReactTestApp-Resources: 810cb22ae7c4e042ce930887b2665f26d8011498
   RNCPicker: 6d5d64e7b90c240c779ee0938ec433c11e2dd758
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
