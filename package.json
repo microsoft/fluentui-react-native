@@ -80,6 +80,7 @@
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-windows": "^0.64.3",
-    "react-native-macos": "^0.64.6"
+    "react-native-macos": "^0.64.6",
+    "simple-plist": "2.0.0-rc.0"
   }
 }
