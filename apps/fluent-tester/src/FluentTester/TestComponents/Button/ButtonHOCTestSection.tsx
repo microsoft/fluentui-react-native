@@ -1,4 +1,4 @@
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
