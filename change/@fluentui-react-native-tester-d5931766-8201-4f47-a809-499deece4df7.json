@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Switch tests to use core package for Button",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Mar 2022 16:31:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.58.15
+
+Wed, 30 Mar 2022 16:31:51 GMT
+
+### Patches
+
+- Switch tests to use core package for Button (ruaraki@microsoft.com)
+- Bump @fluentui/react-native to v0.28.0
 
 ## 0.58.14
 
