@@ -1,4 +1,4 @@
-import { getOfficeAliasTokens } from '@fluentui-react-native/theme-tokens';
+import { getOfficeAliasTokens } from './getOfficeAliasTokens';
 import { AliasColorTokens } from '@fluentui-react-native/theme-types';
 import { memoize } from '@fluentui-react-native/memo-cache';
 import { mapPipelineToTheme } from '@fluentui-react-native/theming-utils';
