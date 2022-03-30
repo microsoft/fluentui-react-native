@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 04 Mar 2022 21:17:46 GMT and should not be manually modified.
+This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.14
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Fix color mappings (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.12
+- Bump @fluentui-react-native/theme-tokens to v0.13.1
+- Bump @fluentui-react-native/theming-utils to v0.9.1
 
 ## 0.14.13
 

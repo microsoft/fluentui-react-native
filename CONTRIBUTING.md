@@ -15,7 +15,7 @@ There are some specific quirks to this repository that one should be familiar wi
 
 ### Old framework vs new framework (Compose V2)
 
-There's [documentation](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components) for how to author a control, specifically with the two frameworks [foundation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
+There's [documentation](./packages/components/README.md) for how to author a control, specifically with the two frameworks [foundation-compose](./packages/deprecated/foundation-compose/README.md) and [foundation-composable](./packages/deprecated/foundation-composable/README.md). Since that documentation was written, we have written a new component framework (PR's [here](https://github.com/microsoft/fluentui-react-native/pull/335) and [here](https://github.com/microsoft/fluentui-react-native/pull/400)) at `packages/experimental/framework` that is simpler/easier to use, and is the new preferred way to create components. Components that use this new framework are located at `packages/experimental` and are copies of the controls located at `packages/components` which still uses the old frameworks. Any new components should use the new framework. The old documentation is still good to read, specifically for using foundation-compose, as a lot of it applies to the new component.
 
 There are two directories where components exist, the normal `packages/components` and `packages/experimental`. In general, the `experimental` directory is where components and frameworks we are iterating on get placed.
 
@@ -31,7 +31,7 @@ One caveat is that if a component simply wraps a single native component, then i
 
 ### Tokens
 
-FluentUI React Native (and eventually all of FluentUI) uses the design token system to handle styling / customization. There's extended [documentation](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-tokens/README.md) about this in the repo, but here is a simple overview.
+FluentUI React Native (and eventually all of FluentUI) uses the design token system to handle styling / customization. There's extended [documentation](./packages/deprecated/foundation-tokens/README.md) about this in the repo, but here is a simple overview.
 
 **Tokens** are things you set at design time, via theme, or via customizing the control. An example might be "brandColor", where each app has it's own color token it sets on all if its controls.
 
@@ -44,7 +44,7 @@ Tokens help us achieve simpler customization for complex higher order components
 
 This section covers creating and adding a new component package to FluentUI React Native's monorepo. If you are instead working on an existing component and adding a native module, skip to the next two sections.
 
-Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](https://github.com/microsoft/fluentui-react-native/blob/master/packages/framework/use-slot/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
+Most components should use the compose framework as it offers the comprehensive set of patterns like tokens and slots, but if you're creating a simple component that doesn't require those patterns, there's a lighter pattern called [stagedComponent](./packages/framework/use-slot/src/stagedComponent.ts). The stagedComponent pattern splits up the render function into two stages. Stage 1 handles building props and hook calls (best to separate the hook calls from the render tree since they rely on call order). Stage 2 returns the actual element tree, any conditional branching should happen here (Icon is a good example of using stagedCompoenent).
 
 1. Create a new directory in of these two locations, depending on your component:
 
@@ -168,6 +168,49 @@ To add a native Windows module:
       - Navigate to windows folder (`packages\experimental\<new-component>\windows`)
       - Run `yarn start`
    5. Run application
+
+## Creating new native Android Components
+
+This section is specifically focused on creating new components for Android platforms.
+
+If you are creating a new component from scratch, you have the most leeway to design your API. In general, you will probably want to expose each property from the native Android control as either a token or prop (or both) to JS.
+
+To add a new control to the FURN component library: [creating a new component](#creating-a-new-component)
+
+To add a native module that wraps a FluentUI Android control:
+
+1. Create the android/src/main/java/com/microsoft/fnandroid/<new-component> subdirectory in your components directory
+
+2. Inside the new directory you just created,  add the following files. In all of the newly created files, add your package name at the top of the file: package com.microsoft.fnandroid.(new-component)
+
+    a. **(new-component)ViewManager.kt**: This Kotlin file imports FluentUI Android, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Android control.
+
+    - Implement the createViewInstance method
+
+    - Expose view property setters using @ReactProp (or @ReactPropGroup) It's important to note that in order for properties and methods to be available to React Native, they must add the @ReactMethod decorator to it's declaration.
+
+    b. **(new-component)Module.kt**: This file will contain your native module class. Your module class will extend the ReactContextBaseJavaModule
+
+    c. **(new-component)Package.kt**
+    - Add the ViewManager in createViewManagers of the applications package
+    - Add the Module in  createNativeModules of the applications package
+
+3. In directory android/src/main, add AndroidManifest.xml and add the package name
+
+4. Autolink Native Module
+
+    a. Gradle Build Init plugin
+    - Run gradle init inside android directory
+    - Select type of project to generate: Basic
+    - Select build script DSL: Groovy
+
+    b. Include dependencies for android build environment
+    - Edit the generated build.gradle file (Example: packages/experimental/Drawer/android/build.gradle)
+    - Add dependencies for kotlin, maven, react-native, etc
+      - Add dependency for FluentUIAndroid
+
+    c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/android/package.json in order for our Fluent Tester app to build and use your new Android component module
+
 
 ## Creating a pull request
 

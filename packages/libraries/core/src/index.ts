@@ -1,5 +1,25 @@
-export { Button, PrimaryButton, StealthButton, buttonName } from '@fluentui-react-native/button';
+export {
+  buttonNameV1,
+  ButtonV1,
+  ToggleButton,
+  CompoundButton,
+  FAB,
+  Button,
+  PrimaryButton,
+  StealthButton,
+  buttonName,
+} from '@fluentui-react-native/button';
 export type {
+  ButtonAppearance,
+  ButtonCoreTokens,
+  ButtonCoreProps,
+  ButtonProps,
+  ButtonShape,
+  ButtonSize,
+  ButtonSlotProps,
+  ButtonState,
+  ButtonTokens,
+  ButtonType,
   IButtonInfo,
   IButtonProps,
   IButtonRenderData,

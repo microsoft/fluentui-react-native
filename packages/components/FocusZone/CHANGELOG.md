@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Fri, 11 Mar 2022 00:34:53 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.12
+
+Mon, 28 Mar 2022 15:02:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.5
+
+## 0.9.11
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.4
+
+## 0.9.10
+
+Mon, 21 Mar 2022 01:47:54 GMT
+
+### Patches
+
+- Fix typo (sanajmi@microsoft.com)
 
 ## 0.9.9
 

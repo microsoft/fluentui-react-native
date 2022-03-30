@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Wed, 23 Mar 2022 17:24:05 GMT",
+      "tag": "@fluentui-react-native/stack_v0.6.18",
+      "version": "0.6.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.12",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.18",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.11.14",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 07 Mar 2022 19:15:33 GMT",
       "tag": "@fluentui-react-native/stack_v0.6.17",
       "version": "0.6.17",

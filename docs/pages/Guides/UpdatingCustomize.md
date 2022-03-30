@@ -1,6 +1,6 @@
 # Migrating from old to new customize
 
-The customize API allows clients to make targeted styling modifications to our controls.  The second version of the FluentUI composition framework changes the customize API. This guide will describe how to move from the first to second customize API for our refreshed controls.
+The customize API allows clients to make targeted styling modifications to our controls. The second version of the FluentUI composition framework changes the customize API. This guide will describe how to move from the first to second customize API for our refreshed controls.
 
 ## Old customize
 
@@ -59,7 +59,7 @@ All states that were previously under `_overrides` are now at the top level of t
 
 ### No `_precedence` property
 
-There is no equivalent for `_precedence` in the new customize API. If you need this functionality, [please look at using `compose` instead](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/composition#compose).
+There is no equivalent for `_precedence` in the new customize API. If you need this functionality, [please look at using `compose` instead](../../../packages/framework/composition/README.md#compose).
 
 ### No slots as properties
 
