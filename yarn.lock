@@ -1241,6 +1241,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fluentui-react-native/design-tokens-win32@0.2.0-test":
+  version "0.2.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.2.0-test.tgz#1754e376042123611ae3e407a25bec7e0dcd3e36"
+  integrity sha512-NvgcUPRYCn+jSthUx70n92oNU4vS2mrakGWF3O038R/QCx1LkKmZthe/hKjMAOcFR6SCZDiTuqofIGApBj2gzg==
+
 "@fluentui/token-pipeline@^0.3.11":
   version "0.3.11"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
