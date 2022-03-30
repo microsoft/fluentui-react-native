@@ -24,7 +24,7 @@
     "change": "beachball change",
     "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
-    "depcheck": "lage depcheck",
+    "depcheck": "rnx-dep-check && lage depcheck",
     "lint": "lage lint",
     "preinstall": "node ./scripts/use-yarn-please.js",
     "prettier": "lage prettier",
