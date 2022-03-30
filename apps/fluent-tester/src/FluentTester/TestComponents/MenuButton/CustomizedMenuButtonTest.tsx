@@ -26,7 +26,7 @@ export const CustomizedMenuButton: React.FunctionComponent = () => {
           </View>
         </View>
       </View>
-      <StyledMenuButton content="styled MenuButton" menuItems={menuItems} />
+      <StyledMenuButton menuItems={menuItems}>styled MenuButton</StyledMenuButton>
     </View>
   );
 };

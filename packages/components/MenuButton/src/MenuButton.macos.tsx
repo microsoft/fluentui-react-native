@@ -1,4 +1,5 @@
 /** @jsx withSlots */
+import * as React from 'react';
 import { Image, ImageResolvedAssetSource } from 'react-native';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -34,7 +35,7 @@ type NativeMenuItem = {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, tooltip, startIcon, disabled, onItemClick, style } = userProps;
+    const { menuItems, tooltip, icon, disabled, onItemClick, style } = userProps;
 
     function extractResolvedImageSourceFromIcon(icon?: number | string | IconProps): ImageResolvedAssetSource {
       if (!icon) {
@@ -46,7 +47,7 @@ export const MenuButton = compose<MenuButtonType>({
       return imageSource;
     }
 
-    const imageSource = extractResolvedImageSourceFromIcon(startIcon);
+    const imageSource = extractResolvedImageSourceFromIcon(icon);
 
     // reroute the native component's OnItemClick event to MenuButtons's onItemClick
     const OnItemClickRerouted = (event: any) => {
@@ -99,7 +100,6 @@ export const MenuButton = compose<MenuButtonType>({
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
       root: {
-        content: content,
         enabled: !disabled,
         ...(imageSource && { image: imageSource }), // Only pass in the prop if defined
         tooltip: tooltip,
@@ -123,11 +123,11 @@ export const MenuButton = compose<MenuButtonType>({
     contextualMenu: [backgroundColorTokens, borderTokens],
     button: [backgroundColorTokens, borderTokens],
   },
-  render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData) => {
+  render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData, ...children: React.ReactNode[]) => {
     if (!(renderData.state && renderData.slotProps)) {
       return null;
     }
-    return <Slots.root />;
+    return <Slots.root>{React.Children.map(children, (child) => child)}</Slots.root>;
   },
 });
 

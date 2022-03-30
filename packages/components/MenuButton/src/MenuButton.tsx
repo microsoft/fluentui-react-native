@@ -22,7 +22,7 @@ import {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
+    const { menuItems, icon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -44,9 +44,9 @@ export const MenuButton = compose<MenuButtonType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
-      content,
       disabled,
-      startIcon,
+      icon,
+      iconPosition: 'before',
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
       ...rest,
@@ -55,7 +55,10 @@ export const MenuButton = compose<MenuButtonType>({
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
       root: {},
       button: buttonProps,
-      primaryButton: buttonProps,
+      primaryButton: {
+        appearance: 'primary',
+        ...buttonProps,
+      },
       contextualMenu: {
         onItemClick,
         target: stdBtnRef,
@@ -82,7 +85,7 @@ export const MenuButton = compose<MenuButtonType>({
     contextualMenu: [backgroundColorTokens, borderTokens],
     button: [backgroundColorTokens, borderTokens],
   },
-  render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData) => {
+  render: (Slots: ISlots<MenuButtonSlotProps>, renderData: MenuButtonRenderData, ...children: React.ReactNode[]) => {
     if (!(renderData.state && renderData.slotProps)) {
       return null;
     }
@@ -99,10 +102,12 @@ export const MenuButton = compose<MenuButtonType>({
       <Slots.root>
         {context.primary ? (
           <Slots.primaryButton>
+            {React.Children.map(children, (child) => child)}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.primaryButton>
         ) : (
           <Slots.button>
+            {React.Children.map(children, (child) => child)}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.button>
         )}

@@ -2,7 +2,7 @@
 
 exports[`ContextualMenu default 1`] = `
 <View
-  accessibilityLabel=""
+  accessibilityLabel="Press for Nested MenuButton"
   accessibilityRole="button"
   accessibilityState={
     Object {
@@ -10,7 +10,6 @@ exports[`ContextualMenu default 1`] = `
     }
   }
   accessible={true}
-  content="Press for Nested MenuButton"
   enableFocusRing={true}
   focusable={true}
   onAccessibilityTap={[Function]}
@@ -42,6 +41,23 @@ exports[`ContextualMenu default 1`] = `
     }
   }
 >
+  <Text
+    style={
+      Object {
+        "color": "#323130",
+        "fontFamily": "Segoe UI",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Press for Nested MenuButton
+  </Text>
   <RNSVGSvgView
     align="xMidYMid"
     bbHeight={16}
