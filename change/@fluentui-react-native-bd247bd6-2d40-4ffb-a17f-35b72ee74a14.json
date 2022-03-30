@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Export ButtonV1 from core package",
+  "packageName": "@fluentui/react-native",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
