@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Mar 2022 16:31:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.28.0
+
+Wed, 30 Mar 2022 16:31:51 GMT
+
+### Minor changes
+
+- Export ButtonV1 from core package (ruaraki@microsoft.com)
 
 ## 0.27.44
 
