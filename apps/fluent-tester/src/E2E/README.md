@@ -39,7 +39,7 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 2. Bundle the test app (pick specific platform you want to test, we'll use win32)
    - C:\repo\fluentui-react-native>`cd apps\win32`
    - C:\repo\fluentui-react-native\apps\win32> `yarn bundle`
-3. Hook up appium to the WinAppDriver
+3. Hook up appium to the WinAppDriver (only needed once)
    - C:\repo\fluentui-react-native\apps\win32> `yarn appium driver install windows`
 4. Run E2E tests
    - C:\repo\fluentui-react-native\apps\win32> `yarn e2etest`
@@ -50,7 +50,7 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 2. Start the server
    - C:\repo\fluentui-react-native> `cd apps\windows`
    - C:\repo\fluentui-react-native\apps\windows> `yarn start`
-3. Hook up appium to the WinAppDriver
+3. Hook up appium to the WinAppDriver (only needed once)
    - C:\repo\fluentui-react-native\apps\win32> `yarn appium driver install windows`
 4. Open a new command prompt and run the E2E tests
    - C:\repo\fluentui-react-native\apps\windows> `yarn e2etest`
