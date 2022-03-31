@@ -7,7 +7,7 @@ steps:
   - script: |
       yarn appium driver install windows@^2.0.1
     workingDirectory: apps/windows
-    displayName: 'yarn appium'
+    displayName: 'Installing appium windows driver'
 
   # WinAppDriver 1.2 is being deployed across MS hosted agents. appium-windows-driver is tied to a specific version of WinAppDriver,
   # failing if a hash is mismatched. The latest current available package supports 1.2rc.
