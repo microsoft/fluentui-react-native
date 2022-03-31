@@ -91,24 +91,24 @@ async function run() {
 
   console.log('Generating colorful mode tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-colorful.json --out ./packages/theming/theme-tokens/src/generated/colorful --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-colorful.json --out ./packages/theming/win32-theme/src/generated/colorful --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/colorful/reactnative/tokens-global.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/colorful/reactnative/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/colorful/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/colorful/reactnative/tokens-controls.json'));
 
   console.log('Generating dark gray mode tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-darkgray.json --out ./packages/theming/theme-tokens/src/generated/darkGray --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-darkgray.json --out ./packages/theming/win32-theme/src/generated/darkGray --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/darkGray/reactnative/tokens-global.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/darkGray/reactnative/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/darkGray/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/darkGray/reactnative/tokens-controls.json'));
 
   console.log('Generating black mode tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-black.json --out ./packages/theming/theme-tokens/src/generated/black --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-black.json --out ./packages/theming/win32-theme/src/generated/black --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/black/reactnative/tokens-global.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/black/reactnative/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/black/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/black/reactnative/tokens-controls.json'));
 
   console.log('Generating high contrast mode tokens...');
   child_process.execSync(
@@ -117,8 +117,16 @@ async function run() {
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/highContrast/reactnative/tokens-global.json'));
   fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/highContrast/reactnative/tokens-controls.json'));
 
+  console.log('Generating win32 high contrast mode tokens...');
+  child_process.execSync(
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-highContrast.json --out ./packages/theming/win32-theme/src/generated/highContrast --p reactnative',
+  );
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/highContrast/reactnative/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/win32-theme/src/generated/highContrast/reactnative/tokens-controls.json'));
+
   console.log('Running prettier...');
   child_process.execSync('prettier --write ./packages/theming/theme-tokens/src/generated');
+  child_process.execSync('prettier --write ./packages/theming/win32-theme/src/generated');
 
   console.log('Done!');
 }
