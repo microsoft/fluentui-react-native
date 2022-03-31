@@ -1,2 +1,10 @@
-export * from './Checkbox.types';
-export * from './Checkbox';
+export { checkboxName } from './Checkbox.types';
+export type {
+  ICheckboxProps,
+  ICheckboxRenderData,
+  ICheckboxSlotProps,
+  ICheckboxState,
+  ICheckboxTokens,
+  ICheckboxType,
+} from './Checkbox.types';
+export { Checkbox } from './Checkbox';
