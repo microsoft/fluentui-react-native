@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Ban `export *` in index files for better tree-shakeability",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "4123478+tido64@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
