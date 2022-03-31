@@ -1,2 +1,2 @@
-export * from './CustomSettings.types';
-export * from './CustomSettings';
+export type { IGetSettingsFromTheme, ISettingsEntry, ISettingsFromTheme } from './CustomSettings.types';
+export { getThemedSettings, mergeBaseSettings } from './CustomSettings';
