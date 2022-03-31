@@ -1,5 +1,31 @@
-export * from './Color.types';
-export * from './Theme.types';
-export * from './Typography.types';
-export * from './context';
-export * from './palette.types';
+export type {
+  AliasColorTokens,
+  Color,
+  ControlColorTokens,
+  FabricWebPalette,
+  Palette,
+  PaletteBackgroundColors,
+  PaletteTextColors,
+  PartialPalette,
+  ThemeColorDefinition,
+} from './Color.types';
+export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './Theme.types';
+export type {
+  FontFamilies,
+  FontFamily,
+  FontFamilyValue,
+  FontSize,
+  FontSizeValuePoints,
+  FontSizes,
+  FontWeight,
+  FontWeightValue,
+  FontWeights,
+  PartialTypography,
+  TextStyling,
+  Typography,
+  Variant,
+  VariantValue,
+  Variants,
+} from './Typography.types';
+export { ThemeContext, useTheme } from './context';
+export type { OfficePalette } from './palette.types';
