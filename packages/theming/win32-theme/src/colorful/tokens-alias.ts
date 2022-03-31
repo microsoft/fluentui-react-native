@@ -1,3 +1,3 @@
-import aliasTokens from '../generated/colorful/reactnative/tokens-aliases.json';
+import aliasTokens from '../generated/colorful/tokens-aliases.json';
 
 export default aliasTokens;

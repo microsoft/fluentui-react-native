@@ -1,3 +1,3 @@
-import globalTokens from './generated/global/reactnative/tokens-global.json';
+import globalTokens from './generated/global/tokens-global.json';
 
 export default globalTokens;
