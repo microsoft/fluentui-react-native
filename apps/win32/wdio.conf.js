@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const rimraf = require('rimraf');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
 const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
@@ -20,10 +19,11 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
-      deviceName: 'WindowsPC',
-      app: appPath,
-      appArguments: appArgs,
-      appWorkingDir: appDir,
+      'appium:automationName': 'windows',
+      'appium:deviceName': 'WindowsPC',
+      'appium:app': appPath,
+      'appium:appArguments': appArgs,
+      'appium:appWorkingDir': appDir,
     },
   ],
 
