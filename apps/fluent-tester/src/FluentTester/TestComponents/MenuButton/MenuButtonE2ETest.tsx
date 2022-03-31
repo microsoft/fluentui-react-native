@@ -37,26 +37,24 @@ export const E2ETestMenuButton: React.FunctionComponent = () => {
           <View style={{ ...rowStyle, paddingHorizontal: 5 }}>
             <View style={columnStyle}>
               <MenuButton
+                content="Standard MenuButton with Accessibility Label"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
                 testID={MENU_BUTTON_TEST_COMPONENT}
                 accessibilityLabel={MENU_BUTTON_ACCESSIBILITY_LABEL}
-              >
-                Standard MenuButton with Accessibility Label
-              </MenuButton>
+              />
             </View>
           </View>
           <View style={{ ...rowStyle, paddingHorizontal: 5 }}>
             <View style={columnStyle}>
               <MenuButton
+                content={MENU_BUTTON_TEST_COMPONENT_LABEL}
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
                 testID={MENU_BUTTON_NO_A11Y_LABEL_COMPONENT}
-              >
-                {MENU_BUTTON_TEST_COMPONENT_LABEL}
-              </MenuButton>
+              />
             </View>
           </View>
         </View>

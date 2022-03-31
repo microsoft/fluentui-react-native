@@ -56,29 +56,45 @@ export const StandardMenuButton: React.FunctionComponent = () => {
           </Text>
           <View style={{ ...rowStyle, paddingHorizontal: 5 }}>
             <View style={columnStyle}>
-              <MenuButton menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps}>
-                Standard MenuButton
-              </MenuButton>
+              <MenuButton
+                content="Standard MenuButton"
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
               <Text>MenuButton with icon</Text>
-              <MenuButton icon={iconToShow} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps}>
-                Menu Button
-              </MenuButton>
+              <MenuButton
+                content="Menu Button"
+                icon={iconToShow}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
               <Text>MenuButton with only icon</Text>
               <MenuButton icon={iconToShow} iconOnly menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
               <Text>Disabled MenuButton</Text>
-              <MenuButton disabled menuItems={menuItems}>
-                Disabled MenuButton
-              </MenuButton>
+              <MenuButton content="Disabled MenuButton" disabled menuItems={menuItems} />
             </View>
             <Separator vertical />
             <View style={columnStyle}>
-              <MenuButton primary menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps}>
+              <MenuButton
+                primary
+                content="Primary MenuButton"
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              >
                 Primary MenuButton
               </MenuButton>
               <Text>Primary MenuButton with icon</Text>
-              <MenuButton primary icon={iconToShow} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps}>
-                Primary MenuButton
-              </MenuButton>
+              <MenuButton
+                content="Primary MenuButton"
+                primary
+                icon={iconToShow}
+                menuItems={menuItems}
+                onItemClick={onItemClick}
+                contextualMenu={contextualMenuProps}
+              />
               <Text>Primary MenuButton with only icon</Text>
               <MenuButton
                 primary
@@ -89,9 +105,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
                 contextualMenu={contextualMenuProps}
               />
               <Text>Primary Disabled MenuButton</Text>
-              <MenuButton primary disabled menuItems={menuItems}>
-                Disabled Primary MenuButton
-              </MenuButton>
+              <MenuButton primary disabled content="Disabled Primary MenuButton" menuItems={menuItems} />
             </View>
           </View>
         </View>
