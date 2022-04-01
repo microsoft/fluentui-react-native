@@ -157,10 +157,11 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	return nil;
 }
 
+/// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 - (BOOL)acceptsFirstResponder
 {
-	// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
-	return !_disabled;
+    // Accept firstResponder if FocusZone has at least one element and is not disabled.
+    return !_disabled && !([[self subviews] count]  < 1);
 }
 
 - (BOOL)becomeFirstResponder
