@@ -51,6 +51,9 @@ const DirectionalFocusZone: React.FunctionComponent = () => {
         <Checkbox label="Option D" />
       </FocusZone>
       <Button content="Outside FocusZone" />
+      <Text variant="headerSemibold">FocusZone with no elements</Text>
+      <FocusZone></FocusZone>
+      <Button content="Outside FocusZone" />
     </View>
   );
 };
