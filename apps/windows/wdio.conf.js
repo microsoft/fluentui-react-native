@@ -32,8 +32,9 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
-      deviceName: 'WindowsPC',
-      app: '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
+      'appium:automationName': 'windows',
+      'appium:deviceName': 'WindowsPC',
+      'appium:app': '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
     },
   ],
 

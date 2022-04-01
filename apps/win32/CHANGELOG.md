@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 21:43:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Thu, 31 Mar 2022 21:43:56 GMT
+
+### Minor changes
+
+- Upgrade appium (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.59.0
 
 ## 0.19.16
 

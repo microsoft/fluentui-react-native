@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.58.16",
+  "version": "0.59.0",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -73,8 +73,8 @@
     "@wdio/local-runner": "^6.5.0",
     "@wdio/spec-reporter": "^6.5.0",
     "@wdio/sync": "^6.5.0",
-    "appium": "1.20.0",
-    "appium-mac2-driver": "0.14.1",
+    "appium": "^2.0.0-beta.27",
+    "appium-mac2-driver": "^1.1.4",
     "flow-bin": "^0.98.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react": "17.0.1",
