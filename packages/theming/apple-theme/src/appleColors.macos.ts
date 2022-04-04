@@ -396,9 +396,9 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     defaultHoveredContent: fluentUIApple.neutralForeground3,
     defaultHoveredIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
-    defaultFocusedBackground: fluentUIApple.neutralBackground3,
+    defaultFocusedBackground: fluentUIApple.neutralBackground2,
     defaultFocusedBorder: fluentUIApple.neutralStroke2,
-    defaultFocusedContent: fluentUIApple.neutralForeground3,
+    defaultFocusedContent: fluentUIApple.neutralForeground2,
     defaultFocusedIcon: fluentUIApple.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultPressedBackground: fluentUIApple.neutralBackground2Pressed,
