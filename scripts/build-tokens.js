@@ -73,10 +73,10 @@ async function run() {
 
   console.log('Generating android light mode tokens...');
   child_process.execSync(
-    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.android.json --out ./packages/theming/theme-tokens/src/generated/light-android --p reactnative',
+    'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-brand.win32.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.android.json --out ./packages/theming/android-theme/src/generated/light-android --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light-android/tokens-global.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light-android/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/android-theme/src/generated/light-android/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/android-theme/src/generated/light-android/tokens-controls.json'));
 
   console.log('Generating dark mode tokens...');
   child_process.execSync(
