@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Move apple alias tokens out",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
