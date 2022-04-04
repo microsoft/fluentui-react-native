@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Factor duplicate code and remove dependencies on deprecated components",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
