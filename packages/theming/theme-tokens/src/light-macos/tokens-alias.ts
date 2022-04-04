@@ -1,3 +1,3 @@
-import aliasTokens from '../generated/light-macos/reactnative/tokens-aliases.json';
+import aliasTokens from '@fluentui-react-native/design-tokens-macos/light/tokens-aliases.json';
 
 export default aliasTokens;

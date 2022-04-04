@@ -1335,6 +1335,21 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fluentui-react-native/design-tokens-android@0.3.0-test":
+  version "0.3.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.3.0-test.tgz#dd8977a0c04f48a0b27d01d8be8bff8033edc9a7"
+  integrity sha512-zV4cf9huZ2fh390MhEkgOvZq+ZL8j6RHBlJYFK4CpYlaRGQFBWy1nG/JVFgOQ0TctZ+zxx5PSFtE6OgXS1KJmA==
+
+"@fluentui-react-native/design-tokens-macos@0.3.0-test":
+  version "0.3.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.3.0-test.tgz#862f4660a80922ba3729e0df8c462a27e4d4e76e"
+  integrity sha512-6rxE+yq8JJTyetVRFJ1yc483nP6qRH/k3eA0qEysV8qwPuCqdTcIBm53P6JZh45sA3oWSJ/cqAwMArTm497Xkg==
+
+"@fluentui-react-native/design-tokens-win32@0.3.0-test":
+  version "0.3.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.3.0-test.tgz#200b28a9d12ad3a813ac02c6b9702aef2cfc0902"
+  integrity sha512-NOv0qYQKJVeNBAq7ihxYFbUFn2XUd8jHYwGPb2HvWIAxD79B5RupdURtPKK08jKtVljYDS08TEjoPuMHpBsWpg==
+
 "@fluentui/token-pipeline@^0.3.11":
   version "0.3.11"
   resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
