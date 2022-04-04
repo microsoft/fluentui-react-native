@@ -122,6 +122,8 @@ async function run() {
 
   console.log('Running prettier...');
   child_process.execSync('prettier --write ./packages/theming/theme-tokens/src/generated');
+  child_process.execSync('prettier --write ./packages/theming/apple-theme/src/generated');
+  child_process.execSync('prettier --write ./packages/theming/android-theme/src/generated');
   child_process.execSync('prettier --write ./packages/theming/win32-theme/src/generated');
 
   console.log('Done!');
