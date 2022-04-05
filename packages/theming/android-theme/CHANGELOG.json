@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Tue, 05 Apr 2022 20:05:50 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/android-theme",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f",
+            "comment": "Move android output"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 31 Mar 2022 07:27:47 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.5.6",
       "version": "0.5.6",

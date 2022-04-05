@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 31 Mar 2022 07:27:47 GMT and should not be manually modified.
+This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.38
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.7
+- Bump @uifabricshared/foundation-compose to v1.11.14
 
 ## 0.19.37
 

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/stack",
-  "version": "0.6.19",
+  "version": "0.6.20",
   "description": "A cross-platform opinionated Fluent Text component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,9 +26,9 @@
     "directory": "packages/components/Stack"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.11.13",
+    "@uifabricshared/foundation-compose": "^1.11.14",
     "@fluentui-react-native/adapters": ">=0.8.5 <1.0.0",
-    "@fluentui-react-native/framework": ">=0.7.19 <1.0.0",
+    "@fluentui-react-native/framework": ">=0.7.20 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.11.9 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.10.3 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.11.3 <1.0.0",
@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/text": ">=0.11.15 <1.0.0",
+    "@fluentui-react-native/text": ">=0.11.16 <1.0.0",
     "@types/react-native": "^0.64.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react-native": "^0.64.3"
