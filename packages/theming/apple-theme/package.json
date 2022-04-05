@@ -32,11 +32,12 @@
   },
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.9.13 <1.0.0",
+    "@fluentui-react-native/design-tokens-macos": "^0.4.0-test",
     "@fluentui-react-native/memo-cache": "^1.1.7",
     "@fluentui-react-native/theme": ">=0.6.6 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.13.2",
     "@fluentui-react-native/theme-types": ">=0.14.1 <1.0.0",
-    "@fluentui-react-native/theming-utils": "^0.9.2"
+    "@fluentui-react-native/theming-utils": "^0.9.2",
+    "assert-never": "^1.2.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

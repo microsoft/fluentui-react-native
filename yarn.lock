@@ -1350,10 +1350,10 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.4.0-test.tgz#42ae04ccdb268609f44f8a62aa4a0e38f6056280"
   integrity sha512-qOSznpqJfn06CB/0pRcnktSR4FJ2xEXqiVA5/YwQipskdBRTvnvXlEWDoUqK9Ytx5qcx4xI1JS7OYR0Yvd5tew==
 
-"@fluentui/token-pipeline@^0.3.11":
-  version "0.3.11"
-  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
-  integrity sha512-pZSCmUTa/B2fgkAWuL2m3ST6+0M/8B4TjhqU8j30NjyMyGgYb1t6eke+ZYnbKJxIG7CwrpHg3dwNdKZ/DBCn1w==
+"@fluentui/token-pipeline@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.5.1.tgz#761d901514c284dcd07ebf1f79d621964a1d47a8"
+  integrity sha512-peXKlNACER/oH3CQJ4h6ynhV5uxRIZ91nE9uN9VzYPa0ch+zrD2KmtOq5KlH04v/Wardjj2MLdu2hNyo/jugxQ==
   dependencies:
     args "^5.0.1"
     esm "^3.2.25"

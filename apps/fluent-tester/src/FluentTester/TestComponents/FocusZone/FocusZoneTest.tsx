@@ -1,129 +1,148 @@
 import * as React from 'react';
-import { View, Picker, Switch } from 'react-native';
-import { FocusZone, Button, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
+import { View, Switch } from 'react-native';
+import { FocusZone, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
+import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
-import { focusZoneTestStyles, stackStyleFocusZone } from './styles';
+import { focusZoneTestStyles, GridButton, stackStyleFocusZone, SubheaderText } from './styles';
 import { commonTestStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
+import { MenuButton, MenuButtonItemProps } from '@fluentui-react-native/experimental-menu-button';
+
+const ListOfCheckboxes: React.FunctionComponent = () => {
+  return (
+    <React.Fragment>
+      <Checkbox label="Option A" />
+      <Checkbox label="Option B" />
+      <Checkbox label="Option C" />
+      <Checkbox label="Option D" />
+    </React.Fragment>
+  );
+};
+
+const FocusZoneListWrapper: React.FunctionComponent = (props) => {
+  const buttonProps: ButtonProps = { children: 'Click to Focus', style: { marginVertical: 10 } };
+  return (
+    <React.Fragment>
+      <Button {...buttonProps} />
+      {React.Children.map(props.children, (child) => {
+        return (
+          <React.Fragment>
+            {child}
+            <Button {...buttonProps} />
+          </React.Fragment>
+        );
+      })}
+    </React.Fragment>
+  );
+};
+
+const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
 
 const DirectionalFocusZone: React.FunctionComponent = () => {
   return (
-    <View>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">FocusZone with Bidirectional arrow key navigation</Text>
-      <FocusZone focusZoneDirection="bidirectional">
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
-      </FocusZone>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">FocusZone with Vertical arrow key navigation</Text>
-      <FocusZone focusZoneDirection="vertical">
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
-      </FocusZone>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">FocusZone with Horizontal arrow key navigation</Text>
-      <FocusZone focusZoneDirection="horizontal">
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
-      </FocusZone>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">FocusZone with No arrow key navigation</Text>
-      <FocusZone focusZoneDirection="none">
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
-      </FocusZone>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">FocusZone with no props set</Text>
+    <FocusZoneListWrapper>
       <FocusZone>
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
+        <SubheaderText>FocusZone with no props set</SubheaderText>
+        <ListOfCheckboxes />
       </FocusZone>
-      <Button content="Outside FocusZone" />
-    </View>
+      {FocusZoneDirections.map((direction, index) => (
+        <FocusZone key={index} focusZoneDirection={direction}>
+          <SubheaderText>FocusZone with arrow key navigation: {direction}</SubheaderText>
+          <ListOfCheckboxes />
+        </FocusZone>
+      ))}
+    </FocusZoneListWrapper>
   );
 };
 
 const CommonUsageFocusZone: React.FunctionComponent = () => {
   return (
-    <View>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">FocusZone with Circular Navigation</Text>
+    <FocusZoneListWrapper>
       <FocusZone isCircularNavigation={true}>
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
+        <SubheaderText>FocusZone with Circular Navigation</SubheaderText>
+        <ListOfCheckboxes />
       </FocusZone>
-      <Button content="Outside FocusZone" />
-      <Text variant="headerSemibold">Disabled FocusZone</Text>
       <FocusZone disabled={true}>
-        <Checkbox label="Option A" />
-        <Checkbox label="Option B" />
-        <Checkbox label="Option C" />
-        <Checkbox label="Option D" />
+        <SubheaderText>Disabled FocusZone</SubheaderText>
+        <ListOfCheckboxes />
       </FocusZone>
-      <Button content="Outside FocusZone" />
-    </View>
+    </FocusZoneListWrapper>
+  );
+};
+
+type GridOfButtonsProps = {
+  gridWidth: number;
+  gridHeight: number;
+  buttonRefs?: React.RefObject<View>[];
+  onClick?: (index: number) => void;
+};
+
+const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props: GridOfButtonsProps) => {
+  return (
+    <React.Fragment>
+      {[...Array(props.gridHeight)].map((_value, heightIndex: number) => {
+        return (
+          <View key={heightIndex} style={focusZoneTestStyles.focusZoneViewStyle}>
+            {[...Array(props.gridWidth)].map((_value, widthIndex: number) => {
+              const gridIndex = heightIndex * props.gridWidth + widthIndex + 1;
+              return (
+                <GridButton
+                  key={widthIndex}
+                  style={focusZoneTestStyles.focusZoneButton}
+                  componentRef={props?.buttonRefs?.[gridIndex]}
+                  onClick={() => {
+                    props?.onClick?.(gridIndex);
+                  }}
+                >
+                  <Text>{gridIndex}</Text>
+                </GridButton>
+              );
+            })}
+          </View>
+        );
+      })}
+    </React.Fragment>
   );
 };
 
 const Navigation2DFocusZone: React.FunctionComponent = () => {
-  const buttonRefs = [];
-  const [defaultTabbableElementIndex, setDefaultTabbableElementIndex] = React.useState<number>(5);
-  const onClick = React.useCallback(
-    (i: number) => {
-      setDefaultTabbableElementIndex(i);
-    },
-    [setDefaultTabbableElementIndex],
+  const [defaultTabbableElementIndex, setDefaultTabbableElementIndex] = React.useState<number | null>(5);
+  const gridWidth = 3,
+    gridHeight = 4;
+
+  const refMemo = React.useMemo(
+    () =>
+      Array(gridWidth * gridHeight)
+        .fill(null)
+        .map(() => React.createRef<View>()),
+    [gridWidth, gridHeight],
   );
-
-  for (let i = 0; i <= 9; i++) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const ref = React.useRef<View>(null);
-    buttonRefs.push(i == 0 ? undefined : ref);
-  }
-
+  const buttonRefs = React.useRef(refMemo);
+  const defaultTextNote = 'The defaultTabbableElement is ' + defaultTabbableElementIndex;
   return (
-    <View>
-      <View>
-        <Button content="Outside FocusZone" />
-        <Button content="Clear default tabble element" onClick={() => onClick(0)} />
-      </View>
-      <FocusZone use2DNavigation={true} defaultTabbableElement={buttonRefs[defaultTabbableElementIndex]} isCircularNavigation={true}>
-        <View style={focusZoneTestStyles.focusZoneContainer}>
-          <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button content="#1" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[1]} onClick={() => onClick(1)} />
-            <Button content="#2" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[2]} onClick={() => onClick(2)} />
-            <Button content="#3" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[3]} onClick={() => onClick(3)} />
+    <React.Fragment>
+      <Text>{defaultTextNote}</Text>
+      <Button onClick={() => setDefaultTabbableElementIndex(null)} style={{ marginTop: 10 }}>
+        Clear defaultTabbableElement
+      </Button>
+      <FocusZoneListWrapper>
+        <FocusZone
+          use2DNavigation={true}
+          defaultTabbableElement={defaultTabbableElementIndex ? buttonRefs.current[defaultTabbableElementIndex] : undefined}
+          isCircularNavigation={true}
+        >
+          <View style={focusZoneTestStyles.focusZoneContainer}>
+            {GridOfButtons({
+              gridWidth: 3,
+              gridHeight: 4,
+              buttonRefs: buttonRefs.current,
+              onClick: (index: number) => setDefaultTabbableElementIndex(index),
+            })}
           </View>
-          <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button content="#4" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[4]} onClick={() => onClick(4)} />
-            <Button content="#5" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[5]} onClick={() => onClick(5)} />
-            <Button content="#6" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[6]} onClick={() => onClick(6)} />
-          </View>
-          <View style={focusZoneTestStyles.focusZoneViewStyle}>
-            <Button content="#7" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[7]} onClick={() => onClick(7)} />
-            <Button content="#8" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[8]} onClick={() => onClick(8)} />
-            <Button content="#9" style={focusZoneTestStyles.focusZoneButton} componentRef={buttonRefs[9]} onClick={() => onClick(9)} />
-          </View>
-        </View>
-      </FocusZone>
-      <View>
-        <Button content="Outside FocusZone" />
-      </View>
-    </View>
+        </FocusZone>
+      </FocusZoneListWrapper>
+    </React.Fragment>
   );
 };
 
@@ -143,14 +162,12 @@ function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
   );
 }
 
-const focusZoneDirectionStrings = ['Bidirectional', 'Horizontal', 'Vertical', 'None'];
-
 const CustomizableFocusZone: React.FunctionComponent = () => {
   const [is2DNav, set2dNav] = React.useState(false);
   const [isDisabled, setDisabled] = React.useState(false);
   const [isCircularNav, setIsCircularNav] = React.useState(false);
-
-  const [isFocusZoneDirection, setFocusZoneDirection] = React.useState<FocusZoneDirection>('bidirectional');
+  const [focusZoneDirection, setFocusZoneDirection] = React.useState<FocusZoneDirection>('bidirectional');
+  const menuItems: MenuButtonItemProps[] = FocusZoneDirections.map((direction) => ({ itemKey: direction, text: direction }));
 
   return (
     <View style={commonTestStyles.root}>
@@ -159,63 +176,27 @@ const CustomizableFocusZone: React.FunctionComponent = () => {
           <SwitchWithLabel label="2D Navigation" value={is2DNav} onValueChange={set2dNav} />
           <SwitchWithLabel label="Disabled" value={isDisabled} onValueChange={setDisabled} />
           <SwitchWithLabel label="Circular Navigation" value={isCircularNav} onValueChange={setIsCircularNav} />
-          <Picker
-            prompt="Direction"
-            style={commonTestStyles.header}
-            selectedValue="Bidirectional"
-            onValueChange={(direction) => {
-              switch (direction) {
-                case 'Bidirectional':
-                  setFocusZoneDirection('bidirectional');
-                  break;
-                case 'Horizontal':
-                  setFocusZoneDirection('horizontal');
-                  break;
-                case 'Vertical':
-                  setFocusZoneDirection('vertical');
-                  break;
-                case 'None':
-                  setFocusZoneDirection('none');
-                  break;
-              }
+          <MenuButton
+            content={focusZoneDirection}
+            menuItems={menuItems}
+            onItemClick={(direction) => setFocusZoneDirection(direction as FocusZoneDirection)}
+            contextualMenu={{
+              shouldFocusOnMount: true,
+              shouldFocusOnContainer: true,
             }}
-          >
-            {focusZoneDirectionStrings.map((direction, index) => (
-              <Picker.Item label={direction} key={index} value={direction} />
-            ))}
-          </Picker>
+          />
         </View>
 
-        <View>
-          <Button content="Outside FocusZone" />
-        </View>
-        <FocusZone
-          disabled={isDisabled}
-          use2DNavigation={is2DNav}
-          focusZoneDirection={isFocusZoneDirection}
-          isCircularNavigation={isCircularNav}
-        >
-          <View style={focusZoneTestStyles.focusZoneContainer}>
-            <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button content="#1" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#2" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#3" style={focusZoneTestStyles.focusZoneButton} />
-            </View>
-            <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button content="#4" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#5" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#6" style={focusZoneTestStyles.focusZoneButton} />
-            </View>
-            <View style={focusZoneTestStyles.focusZoneViewStyle}>
-              <Button content="#7" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#8" style={focusZoneTestStyles.focusZoneButton} />
-              <Button content="#9" style={focusZoneTestStyles.focusZoneButton} />
-            </View>
-          </View>
-        </FocusZone>
-        <View>
-          <Button content="Outside FocusZone" />
-        </View>
+        <FocusZoneListWrapper>
+          <FocusZone
+            disabled={isDisabled}
+            use2DNavigation={is2DNav}
+            focusZoneDirection={focusZoneDirection}
+            isCircularNavigation={isCircularNav}
+          >
+            <View style={focusZoneTestStyles.focusZoneContainer}>{GridOfButtons({ gridWidth: 3, gridHeight: 3 })}</View>
+          </FocusZone>
+        </FocusZoneListWrapper>
       </Stack>
     </View>
   );
@@ -232,7 +213,7 @@ const focusZoneSections: TestSection[] = [
     component: CommonUsageFocusZone,
   },
   {
-    name: '2D Navigation with Default Tabbable Element (#5) FocusZone Usage',
+    name: '2D Navigation',
     component: Navigation2DFocusZone,
   },
   {
@@ -250,7 +231,5 @@ export const FocusZoneTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'No description.';
-
-  return <Test name="FocusZone Test" description={description} sections={focusZoneSections} status={status}></Test>;
+  return <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} status={status} />;
 };

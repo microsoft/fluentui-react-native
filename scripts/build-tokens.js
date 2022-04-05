@@ -23,25 +23,28 @@ async function run() {
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --out ./packages/theming/theme-tokens/src/generated/global --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/global/reactnative/tokens-aliases.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/global/reactnative/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/global/tokens-aliases.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/global/tokens-controls.json'));
 
   console.log('Generating light mode tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-light.json --out ./packages/theming/theme-tokens/src/generated/light --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light/reactnative/tokens-global.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light/reactnative/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/light/tokens-controls.json'));
 
   console.log('Generating dark mode tokens...');
   child_process.execSync(
     'yarn transform-tokens --in ./packages/theming/theme-tokens/src/pipeline-input/token-input.json --in ./packages/theming/theme-tokens/src/pipeline-input/token-input-dark.json --out ./packages/theming/theme-tokens/src/generated/dark --p reactnative',
   );
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/dark/reactnative/tokens-global.json'));
-  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/dark/reactnative/tokens-controls.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/dark/tokens-global.json'));
+  fs.unlinkSync(path.join(process.cwd(), 'packages/theming/theme-tokens/src/generated/dark/tokens-controls.json'));
 
   console.log('Running prettier...');
   child_process.execSync('prettier --write ./packages/theming/theme-tokens/src/generated');
+  child_process.execSync('prettier --write ./packages/theming/apple-theme/src/generated');
+  child_process.execSync('prettier --write ./packages/theming/android-theme/src/generated');
+  child_process.execSync('prettier --write ./packages/theming/win32-theme/src/generated');
 
   console.log('Done!');
 }
