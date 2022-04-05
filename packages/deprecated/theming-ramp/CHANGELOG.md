@@ -1,8 +1,19 @@
 # Change Log - @uifabricshared/theming-ramp
 
-This log was last generated on Thu, 03 Mar 2022 20:20:09 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.6
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @uifabricshared/foundation-settings to v0.11.3
+- Bump @fluentui-react-native/immutable-merge to v1.1.7
+- Bump @fluentui-react-native/theme-types to v0.14.1
 
 ## 0.16.5
 

@@ -1,6 +1,15 @@
-export * from './createOfficeTheme';
-export * from './createPartialOfficeTheme';
-export * from './NativeModule/index';
-export * from './paletteFromOfficeColors';
-export * from './createOfficeAliasTokens';
-export * from './createBrandedThemeWithAlias';
+export { createOfficeTheme } from './createOfficeTheme';
+export { createPartialOfficeTheme } from './createPartialOfficeTheme';
+export { fallbackGetPalette, fallbackOfficeModule, getThemingModule } from './NativeModule/index';
+export type {
+  CxxException,
+  IEventEmitter,
+  NativeColorNames,
+  NativeColorRamps,
+  OfficeThemingModule,
+  PlatformDefaultsChangedArgs,
+  PlatformDefaultsChangedCallback,
+} from './NativeModule/index';
+export { paletteFromOfficeColors } from './paletteFromOfficeColors';
+export { createOfficeAliasTokens } from './createOfficeAliasTokens';
+export { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from './createBrandedThemeWithAlias';

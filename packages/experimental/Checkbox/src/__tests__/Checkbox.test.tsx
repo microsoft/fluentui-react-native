@@ -16,6 +16,11 @@ describe('Checkbox component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Checkbox no label', () => {
+    const tree = renderer.create(<Checkbox onChange={onChange} defaultChecked={false} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Checkbox all props', () => {
     const tree = renderer
       .create(
@@ -69,7 +74,7 @@ describe('Checkbox component tests', () => {
         required: Text,
       },
     });
-    const tree = renderer.create(<ComposedCheckbox>Composed Button with RNText</ComposedCheckbox>).toJSON();
+    const tree = renderer.create(<ComposedCheckbox label="Composed Button with RNText" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

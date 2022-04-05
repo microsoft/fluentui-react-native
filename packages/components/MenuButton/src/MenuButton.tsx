@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
-import { PrimaryButton, Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -73,7 +73,7 @@ export const MenuButton = compose<MenuButtonType>({
   slots: {
     root: React.Fragment,
     button: { slotType: Button as React.ComponentType },
-    primaryButton: { slotType: PrimaryButton as React.ComponentType },
+    primaryButton: { slotType: Button as React.ComponentType },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
     chevronSvg: SvgXml,

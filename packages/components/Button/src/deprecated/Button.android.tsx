@@ -39,9 +39,11 @@ export const Button = compose<IButtonType>({
     // create the merged slot props
 
     const slotProps = mergeSettings<IButtonSlotProps>(styleProps, {
+      root: {
+        ref: buttonRef,
+      },
       ripple: {
         ...pressable.props,
-        ref: buttonRef,
         accessibilityLabel: accessibilityLabel,
         accessibilityState: { disabled: state.info.disabled },
         focusable: !state.info.disabled,

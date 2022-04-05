@@ -1,8 +1,10 @@
 export { addThemeRegistryListener, removeThemeRegistryListener, setTheme, getTheme, augmentPlatformTheme } from './Global';
-export * from './Theme.types';
+export { IPartialTheme, ITheme } from './Theme.types';
+export type { IThemeDefinition, ThemeRegistry } from './Theme.types';
 export { IThemeLayerProps, ThemeLayer } from './ThemeLayer';
-export * from './platform';
-export * from './ThemeProvider';
-export * from './ThemeProvider.types';
-export * from './ThemeContext';
-export * from './NativeModule';
+export { createPlatformThemeRegistry } from './platform';
+export { ThemeProvider } from './ThemeProvider';
+export type { IThemeProviderProps } from './ThemeProvider.types';
+export { ThemeContext, ThemeRegistryContext, useTheme, useThemeRegistry } from './ThemeContext';
+export { ThemingModuleHelper, getHostSettingsWin32 } from './NativeModule';
+export type { IEventEmitter, IHostSettingsWin32, IPlatformThemeDefinition, IThemingModuleHelper } from './NativeModule';

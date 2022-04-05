@@ -14,11 +14,16 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxSize: 16,
       checkmarkSize: 8,
       spacingLabelAfter: globalTokens.spacing.m,
-      labelIsBefore: {
-        spacingLabelBefore: globalTokens.spacing.m,
-        spacingLabelAfter: 0,
+      label: {
+        padding: globalTokens.spacing.s,
+        borderRadius: globalTokens.corner.radius.medium,
+        spacingLabelAfter: globalTokens.spacing.m,
+        labelIsBefore: {
+          spacingLabelBefore: globalTokens.spacing.m,
+          spacingLabelAfter: 0,
+        },
       },
-      padding: globalTokens.spacing.s,
+      padding: globalTokens.spacing.xs,
       variant: 'bodyStandard',
     },
     large: {
@@ -28,11 +33,16 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxSize: 20,
       checkmarkSize: 10,
       spacingLabelAfter: globalTokens.spacing.m,
-      labelIsBefore: {
-        spacingLabelBefore: globalTokens.spacing.m,
-        spacingLabelAfter: 0,
+      label: {
+        padding: globalTokens.spacing.s,
+        borderRadius: globalTokens.corner.radius.medium,
+        spacingLabelAfter: globalTokens.spacing.m,
+        labelIsBefore: {
+          spacingLabelBefore: globalTokens.spacing.m,
+          spacingLabelAfter: 0,
+        },
       },
-      padding: globalTokens.spacing.s,
+      padding: globalTokens.spacing.xs,
       variant: 'bodyStandard',
     },
     checkboxBackgroundColor: t.colors.neutralBackground1,
@@ -76,6 +86,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     circular: {
+      borderRadius: globalTokens.corner.radius.circle,
       checkboxBorderRadius: globalTokens.corner.radius.circle,
     },
   } as CheckboxTokens);
