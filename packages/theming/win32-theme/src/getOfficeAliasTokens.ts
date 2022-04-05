@@ -1,18 +1,18 @@
-import * as colorfulAliasTokens from './colorful/tokens-alias';
-import * as darkGrayAliasTokens from './darkGray/tokens-alias';
-import * as blackAliasTokens from './black/tokens-alias';
-import * as hcAliasTokens from './highContrast/tokens-alias';
+import * as colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
+import * as darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
+import * as blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
+import * as hcAliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
 
 export function getOfficeAliasTokens(officeTheme: string) {
   if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return colorfulAliasTokens.default;
+    return colorfulAliasTokens;
   } else if (officeTheme === 'DarkGray') {
-    return darkGrayAliasTokens.default;
+    return darkGrayAliasTokens;
   } else if (officeTheme === 'Black') {
-    return blackAliasTokens.default;
+    return blackAliasTokens;
   } else if (officeTheme === 'HighContrast') {
-    return hcAliasTokens.default;
+    return hcAliasTokens;
   }
 
-  return colorfulAliasTokens.default;
+  return colorfulAliasTokens;
 }
