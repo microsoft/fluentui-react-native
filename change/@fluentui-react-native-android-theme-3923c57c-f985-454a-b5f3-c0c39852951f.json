@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Move android output",
-  "packageName": "@fluentui-react-native/android-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

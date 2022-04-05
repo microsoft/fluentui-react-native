@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/default-theme",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "description": "Typing only package for fluentui-react-native theme types",
   "repository": {
     "type": "git",
@@ -31,10 +31,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/theme-tokens": "^0.13.2",
+    "@fluentui-react-native/theme-tokens": "^0.14.0",
     "@fluentui-react-native/theme-types": ">=0.14.1 <1.0.0",
     "@fluentui-react-native/theme": ">=0.6.6 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.9.2 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.9.3 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
