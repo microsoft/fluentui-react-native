@@ -1,5 +1,5 @@
 import { PlatformColor } from 'react-native';
-import aliasTokens from '../generated/highContrast/reactnative/tokens-aliases.json';
+import aliasTokens from '../generated/highContrast/tokens-aliases.json';
 
 const generatedAliasTokens = processAliasTokens(aliasTokens);
 export default generatedAliasTokens;
