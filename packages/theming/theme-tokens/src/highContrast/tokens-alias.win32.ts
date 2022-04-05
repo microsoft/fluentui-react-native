@@ -8,7 +8,7 @@ function processAliasTokens(aliasTokens: any) {
     for (const innerKey in aliasTokens[key]) {
       const entry = aliasTokens[key][innerKey];
       if (typeof entry === 'string' && entry.includes('PlatformColor')) {
-        const color = 'SystemColor' + entry.substring(14, entry.length - 1) + 'Color';
+        const color = entry.substring(14, entry.length - 1);
         aliasTokens[key][innerKey] = PlatformColor(color);
       }
     }
