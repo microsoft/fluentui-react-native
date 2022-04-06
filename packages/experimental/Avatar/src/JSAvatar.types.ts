@@ -1,10 +1,23 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { Presence } from '../../Badge';
 
 export const JSAvatarName = 'Avatar';
 
-export type AvatarSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
+export type AvatarSize =
+  | 'size20'
+  | 'size24'
+  | 'size28'
+  | 'size32'
+  | 'size36'
+  | 'size40'
+  | 'size48'
+  | 'size56'
+  | 'size64'
+  | 'size72'
+  | 'size96'
+  | 'size120';
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
@@ -35,8 +48,7 @@ export type AvatarColor =
   | 'steel'
   | 'brown';
 
-export type AvatarPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
-
+export type AvatarPresence = Presence;
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
@@ -93,7 +105,6 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
 
 export interface JSAvatarState {
   personaPhotoSource: ImageURISource | undefined;
-  iconSource: ImageURISource | undefined;
   showRing: boolean;
   transparentRing: boolean;
 }

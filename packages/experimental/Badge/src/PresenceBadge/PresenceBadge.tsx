@@ -49,14 +49,18 @@ export const PresenceBadge = compose<PresenceBadgeType>({
     badge: Badge,
   },
   useRender: (userProps: PresenceBadgeProps) => {
-    const badge = useBadge(userProps);
-    const size = getIconSize(userProps.size || 'medium');
+    const { styles = {}, ...props } = userProps;
+    const badge = useBadge(props);
+    const size = getIconSize(props.size || 'medium');
     const iconXml = `<svg width="${size}" height="${size}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${getIconPath(userProps.presence, userProps.isOutOfOffice)}
     </svg>`;
     const CustomBadge = Badge.customize({
+      position: 'absolute',
       borderWidth: 0,
       paddingHorizontal: 0,
+      backgroundColor: 'white',
+      ...styles,
     });
 
     return (final: PresenceBadgeProps) => {

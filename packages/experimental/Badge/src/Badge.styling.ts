@@ -30,18 +30,22 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
     root: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({
         style: {
+          bottom: tokens.bottom,
+          right: tokens.right,
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
           height: tokens.height,
+          width: tokens.width,
+          position: tokens.position,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'height', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'position', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     icon: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({

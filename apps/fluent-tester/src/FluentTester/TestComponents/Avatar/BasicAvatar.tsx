@@ -20,14 +20,17 @@ const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring', 'shadow', 'glo
 
 const allSizes: WithUndefined<AvatarSize>[] = [
   undefinedText,
-  'size8',
+  'size20',
   'size24',
+  'size28',
   'size32',
+  'size36',
   'size40',
   'size48',
   'size56',
+  'size64',
   'size72',
-  'size100',
+  'size96',
   'size120',
 ];
 
@@ -55,7 +58,17 @@ const allColors: WithUndefined<AvatarColor>[] = [
   'brown',
 ];
 
-const allPresences: WithUndefined<AvatarPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
+const allPresences: WithUndefined<AvatarPresence>[] = [
+  undefinedText,
+  'doNotDisturb',
+  'busy',
+  'unknown',
+  'blocked',
+  'outOfOffice',
+  'away',
+  'available',
+  'offline',
+];
 
 const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
@@ -78,7 +91,7 @@ export const StandardUsage: FunctionComponent = () => {
   const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
   const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
-  const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('online');
+  const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('available');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
   const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
