@@ -4,9 +4,6 @@
   "version": "1.0.0",
   "description": "Component-generator is used to automate process of component creation.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
