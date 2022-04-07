@@ -20,6 +20,35 @@ const ListOfCheckboxes: React.FunctionComponent = () => {
   );
 };
 
+const ListOfDisabledCheckboxes: React.FunctionComponent = () => {
+  return (
+    <React.Fragment>
+      <Checkbox label="Option A" disabled={true} />
+      <Checkbox label="Option B" disabled={true} />
+      <Checkbox label="Option C" disabled={true} />
+      <Checkbox label="Option D" disabled={true} />
+    </React.Fragment>
+  );
+};
+
+const EdgeCasesFocusZone: React.FunctionComponent = () => {
+  return (
+    <View>
+      <FocusZone>
+        <SubheaderText>FocusZone with no focusable elements</SubheaderText>
+        <ListOfDisabledCheckboxes />
+      </FocusZone>
+      <FocusZone>
+        <SubheaderText>FocusZone with no props set</SubheaderText>
+        <ListOfCheckboxes />
+      </FocusZone>
+      <FocusZone>
+        <SubheaderText>FocusZone with no elements</SubheaderText>
+      </FocusZone>
+    </View>
+  );
+};
+
 const FocusZoneListWrapper: React.FunctionComponent = (props) => {
   const buttonProps: ButtonProps = { children: 'Click to Focus', style: { marginVertical: 10 } };
   return (
@@ -219,6 +248,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'Customizable FocusZone',
     component: CustomizableFocusZone,
+  },
+  {
+    name: 'FocusZone Edge Cases',
+    component: EdgeCasesFocusZone,
   },
 ];
 

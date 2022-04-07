@@ -157,10 +157,32 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	return nil;
 }
 
+/// Bypass FocusZone if it's empty or has no focusable elements
+static BOOL ShouldSkipFocusZone(NSView *view)
+{
+    if([view isKindOfClass:[RCTFocusZone class]])
+    {
+        // FocusZone has no elements
+        if ([[view subviews] count] < 1)
+        {
+            return YES;
+        }
+        
+        NSView* keyView = GetFirstKeyViewWithin(view);
+        // FocusZone has no focusable elements
+        if (keyView == nil)
+        {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
 - (BOOL)acceptsFirstResponder
 {
 	// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
-	return !_disabled;
+    return !_disabled && !ShouldSkipFocusZone(self);
 }
 
 - (BOOL)becomeFirstResponder
