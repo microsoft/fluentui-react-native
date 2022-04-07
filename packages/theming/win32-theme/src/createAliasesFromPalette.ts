@@ -1,6 +1,12 @@
 import { AliasColorTokens, OfficePalette } from '@fluentui-react-native/theme-types';
 
-export function createAliasesFromPalette(palette: OfficePalette, _isHighContrast: boolean): Partial<AliasColorTokens> {
+export function createAliasesFromPalette(palette: OfficePalette, isHighContrast: boolean): Partial<AliasColorTokens> {
+  // Workaround for getting checkmark to have correct color in HC
+  // while native code doesn't support PlatformColor
+  if (isHighContrast) {
+    return {};
+  }
+
   return {
     neutralForeground1: palette.Text,
     neutralForeground2: palette.TextSecondary,

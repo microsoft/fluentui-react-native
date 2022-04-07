@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { IconProps, SvgIconProps, FontIconProps } from './Icon.types';
-import { Image, ImageStyle, Platform, View, ColorValue, TextStyle } from 'react-native';
+import { Image, ImageStyle, Platform, View, TextStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { stagedComponent, mergeProps, getMemoCache } from '@fluentui-react-native/framework';
-import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { SvgUri } from 'react-native-svg';
 
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
@@ -57,21 +56,16 @@ function renderSvg(iconProps: IconProps) {
   const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
 
-  // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
-  // If a color for the icon is not supplied, fall back to white or black depending on appearance
-  // Tracked by issue #728
-  const iconColor = downgradeColor(color);
-
   if (svgIconProps.src) {
     return (
       <View style={style}>
-        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
+        <svgIconProps.src viewBox={viewBox} width={width} height={height} color={color} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
       <View style={style}>
-        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
+        <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={color} />
       </View>
     );
   } else {
@@ -104,11 +98,3 @@ export const Icon = stagedComponent((props: IconProps) => {
 });
 
 export default Icon;
-
-function downgradeColor(color: ColorValue): string {
-  if (typeof color === 'string') {
-    return color as string;
-  }
-
-  return getCurrentAppearance(useFluentTheme().host.appearance, 'light') === 'dark' ? '#FFFFFF' : '#000000';
-}
