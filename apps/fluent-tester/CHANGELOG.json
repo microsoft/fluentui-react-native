@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 07 Apr 2022 18:40:10 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.5",
+      "version": "0.59.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d5774aab10b3a33d363ad9d5c09e03f737f6dc57",
+            "comment": "Finished component-generator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Apr 2022 22:58:22 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.4",
       "version": "0.59.4",
