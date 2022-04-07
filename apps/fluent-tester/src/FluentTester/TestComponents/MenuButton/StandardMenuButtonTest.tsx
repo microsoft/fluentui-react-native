@@ -64,16 +64,16 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               />
               <Text>MenuButton with icon</Text>
               <MenuButton
-                content="Menu Button"
-                icon={iconToShow}
+                startIcon={iconToShow}
+                content="MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
               />
               <Text>MenuButton with only icon</Text>
-              <MenuButton icon={iconToShow} iconOnly menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
+              <MenuButton startIcon={iconToShow} menuItems={menuItems} onItemClick={onItemClick} contextualMenu={contextualMenuProps} />
               <Text>Disabled MenuButton</Text>
-              <MenuButton content="Disabled MenuButton" disabled menuItems={menuItems} />
+              <MenuButton disabled content="Disabled MenuButton" menuItems={menuItems} />
             </View>
             <Separator vertical />
             <View style={columnStyle}>
@@ -83,14 +83,12 @@ export const StandardMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-              >
-                Primary MenuButton
-              </MenuButton>
+              />
               <Text>Primary MenuButton with icon</Text>
               <MenuButton
-                content="Primary MenuButton"
                 primary
-                icon={iconToShow}
+                startIcon={iconToShow}
+                content="Primary MenuButton"
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
@@ -98,8 +96,7 @@ export const StandardMenuButton: React.FunctionComponent = () => {
               <Text>Primary MenuButton with only icon</Text>
               <MenuButton
                 primary
-                icon={iconToShow}
-                iconOnly
+                startIcon={iconToShow}
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}

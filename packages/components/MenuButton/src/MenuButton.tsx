@@ -22,7 +22,7 @@ import {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, icon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
+    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -45,17 +45,17 @@ export const MenuButton = compose<MenuButtonType>({
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
       disabled,
-      icon,
+      content,
+      icon: startIcon,
       iconPosition: 'before',
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
+      iconOnly: content == undefined ? true : false,
       ...rest,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
-      root: {
-        content,
-      },
+      root: {},
       button: buttonProps,
       primaryButton: {
         appearance: 'primary',
@@ -104,12 +104,12 @@ export const MenuButton = compose<MenuButtonType>({
       <Slots.root>
         {context.primary ? (
           <Slots.primaryButton>
-            {renderData.slotProps.root.content}
+            {renderData.slotProps.primaryButton.content}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.primaryButton>
         ) : (
           <Slots.button>
-            {renderData.slotProps.root.content}
+            {renderData.slotProps.button.content}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.button>
         )}
