@@ -1335,10 +1335,25 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui/token-pipeline@^0.3.11":
-  version "0.3.11"
-  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.3.11.tgz#79552e3a2ef66f2535ebd5e5a99f87ae3c65556c"
-  integrity sha512-pZSCmUTa/B2fgkAWuL2m3ST6+0M/8B4TjhqU8j30NjyMyGgYb1t6eke+ZYnbKJxIG7CwrpHg3dwNdKZ/DBCn1w==
+"@fluentui-react-native/design-tokens-android@^0.5.0-test":
+  version "0.5.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.5.0-test.tgz#b8fe71cdfed2c72a32dca10d5228cc53a7661d87"
+  integrity sha512-a3Kel9gdnSJ9l52VJFBEFEKKxHMSpnG/A0W+4qGKxaMHtDBA+gDncojko++nwe9GJy4/vBSBzpdzbh3AtrlbAg==
+
+"@fluentui-react-native/design-tokens-macos@^0.5.0-test":
+  version "0.5.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.5.0-test.tgz#e207538ff9005912fa56aab2de3fffe825fc550c"
+  integrity sha512-+p0g6pxLdFcRzEAabhTtwrRIPbHLCodDHw5zhErKfc9wph/0LM8hPyFUPKuW3+5nzdrBtV9DJQB8SevTq2S7pA==
+
+"@fluentui-react-native/design-tokens-win32@^0.5.0-test":
+  version "0.5.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.5.0-test.tgz#a16b8987c1a57f94ba2c8bb143910e6503f2f825"
+  integrity sha512-JltrBPXcqk7ELeNFHeRjOjeOyCx7MeLqEeJ0Xjbqb8SvyvEQlYcvHR/jrmMijGqpyDKpE3z8bc9Kl9QbKp4p5w==
+
+"@fluentui/token-pipeline@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@fluentui/token-pipeline/-/token-pipeline-0.5.1.tgz#761d901514c284dcd07ebf1f79d621964a1d47a8"
+  integrity sha512-peXKlNACER/oH3CQJ4h6ynhV5uxRIZ91nE9uN9VzYPa0ch+zrD2KmtOq5KlH04v/Wardjj2MLdu2hNyo/jugxQ==
   dependencies:
     args "^5.0.1"
     esm "^3.2.25"
@@ -8948,9 +8963,9 @@ jsonify@~0.0.0:
     yargs "^16.2.0"
 
 just-scripts@^1.8.0:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/just-scripts/-/just-scripts-1.8.1.tgz#dd0f3fbc7c352ea5a45be3e539efa549958e9069"
-  integrity sha512-l7Pqieekd4ae+GkrloCanfZkLIxHMVEte9a+NRniZQXgpsjsKCG1VSE9jazDg1HN6MzT1x2E6NJhlqhf3sKrBQ==
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/just-scripts/-/just-scripts-1.8.2.tgz#4a3e402fab5eff0948a46b845aa721b04709d5d9"
+  integrity sha512-ZTaWL/r2hdswji60HFrOP3FrqUCXrIr5ElgXH3sr1cySamOeP1aWsvfKXssc7c2gAP8xi3S5JFAAffDOV60/EA==
   dependencies:
     "@types/node" "^10.12.18"
     chalk "^4.0.0"

@@ -1,7 +1,7 @@
-import macOSLightAliasTokens from './light-macos/tokens-alias';
-import macOSDarkAliasTokens from './dark-macos/tokens-alias';
-import macOSLightHCAliasTokens from './light-high-contrast-macos/tokens-alias';
-import macOSDarkHCAliasTokens from './dark-high-contrast-macos/tokens-alias';
+import macOSLightAliasTokens from '@fluentui-react-native/design-tokens-macos/light/tokens-aliases.json';
+import macOSDarkAliasTokens from '@fluentui-react-native/design-tokens-macos/dark/tokens-aliases.json';
+import macOSLightHCAliasTokens from '@fluentui-react-native/design-tokens-macos/hclight/tokens-aliases.json';
+import macOSDarkHCAliasTokens from '@fluentui-react-native/design-tokens-macos/hcdark/tokens-aliases.json';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 

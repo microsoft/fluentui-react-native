@@ -2,6 +2,60 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Wed, 06 Apr 2022 22:58:21 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff",
+            "comment": "Hook up design tokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.9.15",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.9.4",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 05 Apr 2022 20:05:50 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f",
+            "comment": "Move apple alias tokens out"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.9.14",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.9.3",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 04 Apr 2022 18:41:35 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.9.15",
       "version": "0.9.15",

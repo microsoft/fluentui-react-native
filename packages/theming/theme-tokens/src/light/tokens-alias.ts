@@ -1,3 +1,3 @@
-import aliasTokens from '../generated/light/reactnative/tokens-aliases.json';
+import aliasTokens from '../generated/light/tokens-aliases.json';
 
 export default aliasTokens;

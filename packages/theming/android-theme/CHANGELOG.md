@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Thu, 31 Mar 2022 07:27:47 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Apr 2022 22:58:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 06 Apr 2022 22:58:21 GMT
+
+### Minor changes
+
+- Hook up design tokens (ruaraki@microsoft.com)
+
+## 0.6.0
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Minor changes
+
+- Move android output (ruaraki@microsoft.com)
 
 ## 0.5.6
 

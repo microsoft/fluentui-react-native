@@ -1,3 +1,3 @@
-import aliasTokens from '../generated/dark/reactnative/tokens-aliases.json';
+import aliasTokens from '../generated/dark/tokens-aliases.json';
 
 export default aliasTokens;
