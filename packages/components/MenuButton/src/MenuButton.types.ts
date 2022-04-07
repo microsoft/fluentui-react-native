@@ -27,6 +27,7 @@ export interface MenuButtonItemProps extends ContextualMenuItemProps {
 
 export interface MenuButtonProps extends Omit<ButtonProps, 'icon'> {
   startIcon?: IconSourcesType;
+  endIcon?: IconSourcesType;
   content?: string;
   menuItems?: MenuButtonItemProps[];
   onItemClick?: (key: string) => void;

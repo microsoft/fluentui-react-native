@@ -22,7 +22,7 @@ import {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
+    const { menuItems, content, startIcon, endIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -46,8 +46,8 @@ export const MenuButton = compose<MenuButtonType>({
     const buttonProps = {
       disabled,
       content,
-      icon: startIcon,
-      iconPosition: 'before',
+      icon: startIcon != undefined ? startIcon : endIcon,
+      iconPosition: startIcon != undefined ? 'before': 'after',
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
       iconOnly: content == undefined ? true : false,
