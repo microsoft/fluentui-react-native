@@ -101,6 +101,62 @@ This approach is useful if you need the customizations to be applied to all comp
 },
 ```
 
+### Examples of changing theme entries based on host theme
+
+#### Win32
+
+```ts
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { createOfficeTheme } from '@fluentui-react-native/win32-theme';
+import { Theme } from '@fluentui-react-native/framework';
+
+const theme = new ThemeReference(createOfficeTheme({ paletteName: 'palette' }),
+  (theme: Theme) => {
+    // theme.name has the current Office theme
+    if (theme.name === 'Colorful') {
+      return {
+        { colors: { otherToken: '#ffffff' }},
+      }
+    }
+    else if (theme.name === 'Black') {
+      return {
+        { colors: { otherToken: '#000000' }},
+      }
+    }
+    // etc.
+  }
+  // other recipes
+);
+```
+
+#### MacOS
+
+```ts
+import { ThemeReference, ThemeProvider } from '@fluentui-react-native/theme';
+import { createAppleTheme } from '@fluentui-react-native/apple-theme';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { Theme } from '@fluentui-react-native/framework';
+
+const theme = new ThemeReference(createAppleTheme(),
+  (theme: Theme) => {
+    // You can use getCurrentAppearance to get light/dark mode information for MacOS
+    if (getCurrentAppearance(theme.host.appearance, 'light') === 'light') {
+      return {
+        { colors: { otherToken: '#ffffff' }},
+      }
+    }
+    else if (getCurrentAppearance(theme.host.appearance, 'light') === 'dark') {
+      return {
+        { colors: { otherToken: '#000000' }},
+      }
+    }
+
+    return {};
+  }
+  // other recipes
+);
+```
+
 ### Components (Only for FURN components)
 
 The FURN theme has a components property which can be used to customize all instances of a FURN component used under the theme:
