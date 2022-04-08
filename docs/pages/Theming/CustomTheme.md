@@ -114,14 +114,10 @@ const theme = new ThemeReference(createOfficeTheme({ paletteName: 'palette' }),
   (theme: Theme) => {
     // theme.name has the current Office theme
     if (theme.name === 'Colorful') {
-      return {
-        { colors: { otherToken: '#ffffff' }},
-      }
+      return { colors: { otherToken: '#ffffff' }},
     }
     else if (theme.name === 'Black') {
-      return {
-        { colors: { otherToken: '#000000' }},
-      }
+      return { colors: { otherToken: '#000000' }},
     }
     // etc.
   }
@@ -141,14 +137,10 @@ const theme = new ThemeReference(createAppleTheme(),
   (theme: Theme) => {
     // You can use getCurrentAppearance to get light/dark mode information for MacOS
     if (getCurrentAppearance(theme.host.appearance, 'light') === 'light') {
-      return {
-        { colors: { otherToken: '#ffffff' }},
-      }
+      return { colors: { otherToken: '#ffffff' }},
     }
     else if (getCurrentAppearance(theme.host.appearance, 'light') === 'dark') {
-      return {
-        { colors: { otherToken: '#000000' }},
-      }
+      return { colors: { otherToken: '#000000' }},
     }
 
     return {};
