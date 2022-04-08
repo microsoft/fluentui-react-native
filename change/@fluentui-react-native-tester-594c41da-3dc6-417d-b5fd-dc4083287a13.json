@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Handle FocusZone edge cases",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}

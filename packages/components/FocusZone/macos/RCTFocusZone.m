@@ -49,6 +49,11 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 /// This function does not take into account the geometric position of the view.
 static NSView *GetFirstKeyViewWithin(NSView *parentView)
 {
+    if ([[parentView subviews] count] < 1)
+    {
+        return nil;
+    }
+
 	for (NSView *view in [parentView subviews]) {
 		if ([view canBecomeKeyView]) {
 			return view;
@@ -157,10 +162,26 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	return nil;
 }
 
+/// Bypass FocusZone if it's empty or has no focusable elements
+static BOOL ShouldSkipFocusZone(NSView *view)
+{
+    if([view isKindOfClass:[RCTFocusZone class]])
+    {
+        NSView *keyView = GetFirstKeyViewWithin(view);
+        // FocusZone is empty or has no focusable elements
+        if (keyView == nil)
+        {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+/// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 - (BOOL)acceptsFirstResponder
 {
-	// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
-	return !_disabled;
+    // Reject first responder if FocusZone is disabled or should be skipped.
+    return !_disabled && !ShouldSkipFocusZone(self);
 }
 
 - (BOOL)becomeFirstResponder
