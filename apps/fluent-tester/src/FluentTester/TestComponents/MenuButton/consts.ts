@@ -8,5 +8,4 @@ export const MENU_ITEM_1_COMPONENT = 'Menu_Item_1_Component'; // The first menu 
 
 /* E2E Testing Menu_Button 2 */
 export const MENU_BUTTON_NO_A11Y_LABEL_COMPONENT = 'Menu_Button_No_A11y_label_Component';
-// export const MENU_BUTTON_TEST_COMPONENT_LABEL = 'Test Menu_Button2 - No Accessibility Label'; // A component on each specific test page
-export const MENU_BUTTON_TEST_COMPONENT_LABEL = null;
+export const MENU_BUTTON_TEST_COMPONENT_LABEL = 'Test Menu_Button2 - No Accessibility Label'; // A component on each specific test page

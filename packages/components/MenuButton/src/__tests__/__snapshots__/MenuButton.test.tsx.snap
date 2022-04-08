@@ -10,7 +10,6 @@ exports[`ContextualMenu default 1`] = `
     }
   }
   accessible={true}
-  content="Press for Nested MenuButton"
   enableFocusRing={true}
   focusable={true}
   onAccessibilityTap={[Function]}
@@ -35,9 +34,7 @@ exports[`ContextualMenu default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minWidth": 96,
       "padding": 5,
-      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
