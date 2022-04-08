@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update MenuButton to use new V1 Button",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

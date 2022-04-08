@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 08 Apr 2022 17:13:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.6",
+      "version": "0.59.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a1f2da8f9a9259a25963a2527f775f886cd27d1c",
+            "comment": "Update MenuButton to use new V1 Button"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.28.4",
+            "commit": "a1f2da8f9a9259a25963a2527f775f886cd27d1c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Apr 2022 18:40:10 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.5",
       "version": "0.59.5",

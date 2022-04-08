@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 07 Apr 2022 18:40:10 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Apr 2022 17:13:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.6
+
+Fri, 08 Apr 2022 17:13:26 GMT
+
+### Patches
+
+- Update MenuButton to use new V1 Button (email not defined)
+- Bump @fluentui/react-native to v0.28.4
 
 ## 0.59.5
 
