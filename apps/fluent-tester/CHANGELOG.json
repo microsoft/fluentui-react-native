@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 08 Apr 2022 18:53:12 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.7",
+      "version": "0.59.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "15d60684291bc64a6d104448587804bbcfbbb1e4",
+            "comment": "Handle FocusZone edge cases"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.26",
+            "commit": "15d60684291bc64a6d104448587804bbcfbbb1e4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.4.35",
+            "commit": "15d60684291bc64a6d104448587804bbcfbbb1e4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.28.5",
+            "commit": "15d60684291bc64a6d104448587804bbcfbbb1e4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 Apr 2022 17:13:26 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.6",
       "version": "0.59.6",

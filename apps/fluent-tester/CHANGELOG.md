@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 08 Apr 2022 17:13:26 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Apr 2022 18:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.7
+
+Fri, 08 Apr 2022 18:53:12 GMT
+
+### Patches
+
+- Handle FocusZone edge cases (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.26
+- Bump @fluentui-react-native/experimental-tabs to v0.4.35
+- Bump @fluentui/react-native to v0.28.5
 
 ## 0.59.6
 
