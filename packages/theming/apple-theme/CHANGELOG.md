@@ -1,8 +1,49 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
+This log was last generated on Wed, 06 Apr 2022 22:58:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.0
+
+Wed, 06 Apr 2022 22:58:21 GMT
+
+### Minor changes
+
+- Hook up design tokens (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.15
+- Bump @fluentui-react-native/theming-utils to v0.9.4
+
+## 0.10.0
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Minor changes
+
+- Move apple alias tokens out (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.14
+- Bump @fluentui-react-native/theming-utils to v0.9.3
+
+## 0.9.15
+
+Mon, 04 Apr 2022 18:41:35 GMT
+
+### Patches
+
+- Fix button styling (amchiu@microsoft.com)
+
+## 0.9.14
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.9.13
+- Bump @fluentui-react-native/theme to v0.6.6
+- Bump @fluentui-react-native/theme-tokens to v0.13.2
+- Bump @fluentui-react-native/theme-types to v0.14.1
+- Bump @fluentui-react-native/theming-utils to v0.9.2
 
 ## 0.9.13
 

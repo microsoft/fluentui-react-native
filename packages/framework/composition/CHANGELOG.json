@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Thu, 31 Mar 2022 07:27:48 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.7",
+      "version": "0.7.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.7",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.6",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slots to v0.6.6",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.3",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 23 Mar 2022 19:49:45 GMT",
       "tag": "@fluentui-react-native/composition_v0.7.6",
       "version": "0.7.6",

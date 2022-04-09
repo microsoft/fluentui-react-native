@@ -1,8 +1,65 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Apr 2022 18:53:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.48
+
+Fri, 08 Apr 2022 18:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.18
+
+## 0.7.47
+
+Fri, 08 Apr 2022 17:13:26 GMT
+
+### Patches
+
+- Update MenuButton to use new V1 Button (email not defined)
+
+## 0.7.46
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.13
+- Bump @fluentui-react-native/contextual-menu to v0.16.17
+- Bump @fluentui-react-native/icon to v0.11.16
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
+- Bump @uifabricshared/foundation-compose to v1.11.15
+
+## 0.7.45
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.12
+- Bump @fluentui-react-native/contextual-menu to v0.16.16
+- Bump @fluentui-react-native/icon to v0.11.15
+- Bump @fluentui-react-native/interactive-hooks to v0.14.7
+- Bump @uifabricshared/foundation-compose to v1.11.14
+
+## 0.7.44
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.22.11
+- Bump @fluentui-react-native/component-cache to v1.3.2
+- Bump @fluentui-react-native/contextual-menu to v0.16.15
+- Bump @fluentui-react-native/icon to v0.11.14
+- Bump @fluentui-react-native/interactive-hooks to v0.14.6
+- Bump @fluentui-react-native/tokens to v0.11.9
+- Bump @uifabricshared/foundation-composable to v0.10.3
+- Bump @uifabricshared/foundation-compose to v1.11.13
+- Bump @uifabricshared/foundation-settings to v0.11.3
 
 ## 0.7.43
 
