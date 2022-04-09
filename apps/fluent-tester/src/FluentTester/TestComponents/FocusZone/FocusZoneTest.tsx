@@ -4,7 +4,7 @@ import { FocusZone, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-n
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
-import { focusZoneTestStyles, GridButton, stackStyleFocusZone, nes, SubheaderText } from './styles';
+import { focusZoneTestStyles, GridButton, stackStyleFocusZone, SubheaderText } from './styles';
 import { commonTestStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 import { MenuButton, MenuButtonItemProps } from '@fluentui-react-native/experimental-menu-button';
