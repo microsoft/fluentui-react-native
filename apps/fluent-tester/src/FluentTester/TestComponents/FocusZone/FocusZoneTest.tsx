@@ -4,7 +4,7 @@ import { FocusZone, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-n
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
-import { focusZoneTestStyles, GridButton, stackStyleFocusZone, SubheaderText } from './styles';
+import { focusZoneTestStyles, GridButton, stackStyleFocusZone, nes, SubheaderText } from './styles';
 import { commonTestStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 import { MenuButton, MenuButtonItemProps } from '@fluentui-react-native/experimental-menu-button';
@@ -15,7 +15,6 @@ const ListOfCheckboxes: React.FunctionComponent = () => {
       <Checkbox label="Option A" />
       <Checkbox label="Option B" />
       <Checkbox label="Option C" />
-      <Checkbox label="Option D" />
     </React.Fragment>
   );
 };
@@ -26,14 +25,13 @@ const ListOfDisabledCheckboxes: React.FunctionComponent = () => {
       <Checkbox label="Option A" disabled={true} />
       <Checkbox label="Option B" disabled={true} />
       <Checkbox label="Option C" disabled={true} />
-      <Checkbox label="Option D" disabled={true} />
     </React.Fragment>
   );
 };
 
 const EdgeCasesFocusZone: React.FunctionComponent = () => {
   return (
-    <View>
+    <Stack style={stackStyleFocusZone}>
       <FocusZone>
         <SubheaderText>FocusZone with no focusable elements</SubheaderText>
         <ListOfDisabledCheckboxes />
@@ -45,7 +43,28 @@ const EdgeCasesFocusZone: React.FunctionComponent = () => {
       <FocusZone>
         <SubheaderText>FocusZone with no elements</SubheaderText>
       </FocusZone>
-    </View>
+      <SubheaderText>Nested FocusZones</SubheaderText>
+      <Button>Outside Focus Zone</Button>
+      <Text>Parent FocusZone</Text>
+      <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+        <FocusZone>
+          <Text>Inner FocusZone 1</Text>
+          <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+            <FocusZone>
+              <ListOfCheckboxes />
+            </FocusZone>
+          </View>
+          <Text>Inner FocusZone 2</Text>
+          <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+            <FocusZone>
+              <ListOfCheckboxes />
+            </FocusZone>
+          </View>
+          <Button>Inside Focus Zone</Button>
+        </FocusZone>
+      </View>
+      <Button>Outside Focus Zone</Button>
+    </Stack>
   );
 };
 
