@@ -48,7 +48,6 @@
     "@fluentui-react-native/experimental-avatar": ">=0.14.12 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.15.13",
     "@fluentui-react-native/experimental-checkbox": "0.10.10",
-    "@fluentui-react-native/experimental-drawer": ">=0.1.3 <1.0.0",
     "@fluentui-react-native/experimental-native-date-picker": ">=0.4.1 <1.0.0",
     "@fluentui-react-native/experimental-menu-button": ">=0.3.26 <1.0.0",
     "@fluentui-react-native/experimental-shimmer": "0.6.24",
