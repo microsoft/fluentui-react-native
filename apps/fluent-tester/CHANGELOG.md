@@ -1,8 +1,52 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 06 Apr 2022 22:58:22 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Apr 2022 19:26:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.9
+
+Mon, 11 Apr 2022 19:26:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-drawer to v0.1.4
+
+## 0.59.8
+
+Mon, 11 Apr 2022 17:07:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.11
+
+## 0.59.7
+
+Fri, 08 Apr 2022 18:53:12 GMT
+
+### Patches
+
+- Handle FocusZone edge cases (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.26
+- Bump @fluentui-react-native/experimental-tabs to v0.4.35
+- Bump @fluentui/react-native to v0.28.5
+
+## 0.59.6
+
+Fri, 08 Apr 2022 17:13:26 GMT
+
+### Patches
+
+- Update MenuButton to use new V1 Button (email not defined)
+- Bump @fluentui/react-native to v0.28.4
+
+## 0.59.5
+
+Thu, 07 Apr 2022 18:40:10 GMT
+
+### Patches
+
+- Finished component-generator (v.kozova13@gmail.com)
 
 ## 0.59.4
 

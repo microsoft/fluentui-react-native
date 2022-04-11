@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Fri, 08 Apr 2022 18:53:11 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.9.16",
+      "version": "0.9.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "15d60684291bc64a6d104448587804bbcfbbb1e4",
+            "comment": "Handle FocusZone edge cases"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Apr 2022 22:58:22 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.9.15",
       "version": "0.9.15",
