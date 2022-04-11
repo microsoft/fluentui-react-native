@@ -17,7 +17,8 @@ export const focusZoneTestStyles = StyleSheet.create({
   },
   nestedFocusZoneStyle: {
     borderWidth: 1,
-    padding: 10,
+    padding: 8,
+    margin: 8,
   },
   focusZoneButton: {
     height: 50,

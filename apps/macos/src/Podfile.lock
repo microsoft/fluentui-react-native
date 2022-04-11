@@ -9,17 +9,17 @@ PODS:
     - React-Core (= 0.64.30)
     - React-jsi (= 0.64.30)
     - ReactCommon/turbomodule/core (= 0.64.30)
-  - FRNAvatar (0.14.11):
+  - FRNAvatar (0.14.12):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNCallout (0.19.38):
+  - FRNCallout (0.19.39):
     - React
-  - FRNCheckbox (0.10.9):
+  - FRNCheckbox (0.10.10):
     - React
-  - FRNMenuButton (0.7.45):
+  - FRNMenuButton (0.7.48):
     - React
-  - FRNRadioButton (0.14.34):
+  - FRNRadioButton (0.14.36):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -94,7 +94,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.9.14):
+  - RCTFocusZone (0.9.16):
     - React
   - RCTRequired (0.64.30)
   - RCTTypeSafety (0.64.30):
@@ -489,15 +489,15 @@ SPEC CHECKSUMS:
   DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
   FBLazyVector: 8a96f324df8c1bc4e2f7e2163d704ec364f0bc6c
   FBReactNativeSpec: 52bfb636413dc06cf5a57b63f60ef41b5dd9f8c6
-  FRNAvatar: b07d7b17a456112b838d785b602c204a86387221
-  FRNCallout: d872c7ba99c8ffcbbc6f61a930c30f79aef5668a
-  FRNCheckbox: 99e42ac1a8b7c42e449f10ae9e6778dd2a0f04f2
-  FRNMenuButton: 463b050240bfd7cf0efc64b55f56ce03dc800d3f
-  FRNRadioButton: 2452fff884c7608e644bbf14bcc561b71f8f78f5
+  FRNAvatar: 39533725b0070c27460bace57391f2daf85680bb
+  FRNCallout: 3bc6c0d8a8df47054fbe9e84a21180c3153e0214
+  FRNCheckbox: 20f99d5804c5c87e1309c1ceecd3ca790f1f4e87
+  FRNMenuButton: f225ac8082af451a12a4f05904f127fa9fb1f22a
+  FRNRadioButton: f7717a67caf728c2a5f62676a1e0c8c9a0bbe388
   glog: 0dc7efada961c0793012970b60faebbd58b0decb
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
   RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
-  RCTFocusZone: 6d93f2727b66840b0446c1cc4edf47e7fb8ecf10
+  RCTFocusZone: 4fef47c6807d3323adf4aa24b64232ccad7c2026
   RCTRequired: 8903667b081ec6b4b870c6b25ff1038eef62db0d
   RCTTypeSafety: 061b065a52bcd68ca38755bc56784a4889659625
   React: a3c80fce87768d4553ebe658746219431483b620
