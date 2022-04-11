@@ -50,14 +50,24 @@ const EdgeCasesFocusZone: React.FunctionComponent = () => {
         <FocusZone>
           <Text>Inner FocusZone 1</Text>
           <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
-            <FocusZone>
-              <ListOfCheckboxes />
+            <FocusZone focusZoneDirection="horizontal">
+              <View style={focusZoneTestStyles.focusZoneContainer}>
+                {GridOfButtons({
+                  gridWidth: 3,
+                  gridHeight: 1,
+                })}
+              </View>
             </FocusZone>
           </View>
           <Text>Inner FocusZone 2</Text>
           <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
-            <FocusZone>
-              <ListOfCheckboxes />
+            <FocusZone focusZoneDirection="horizontal">
+              <View style={focusZoneTestStyles.focusZoneContainer}>
+                {GridOfButtons({
+                  gridWidth: 3,
+                  gridHeight: 1,
+                })}
+              </View>
             </FocusZone>
           </View>
           <Button>Inside Focus Zone</Button>
