@@ -12,7 +12,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
   const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
-  const pressable = useAsPressable({ ...props, onPress: onClickWithFocus });
+  const pressable = useAsPressable({ ...props, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
