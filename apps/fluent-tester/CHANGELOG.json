@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 12 Apr 2022 21:53:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.12",
+      "version": "0.59.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa",
+            "comment": "Scroll scrollView when Focus moves out of viewport"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.28",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.4.37",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.28.8",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Apr 2022 19:32:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.11",
       "version": "0.59.11",

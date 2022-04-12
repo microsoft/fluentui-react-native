@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Scroll scrollView when Focus moves out of viewport",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

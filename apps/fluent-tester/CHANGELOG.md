@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 12 Apr 2022 19:32:57 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Apr 2022 21:53:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.12
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Scroll scrollView when Focus moves out of viewport (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.28
+- Bump @fluentui-react-native/experimental-tabs to v0.4.37
+- Bump @fluentui/react-native to v0.28.8
 
 ## 0.59.11
 

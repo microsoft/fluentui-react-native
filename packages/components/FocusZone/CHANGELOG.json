@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Tue, 12 Apr 2022 21:53:04 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.9.18",
+      "version": "0.9.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa",
+            "comment": "Scroll scrollView when Focus moves out of viewport"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Apr 2022 00:35:08 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.9.17",
       "version": "0.9.17",
