@@ -468,6 +468,8 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           <ContextualMenuItem text="MenuItem 8" itemKey="16" />
           <ContextualMenuItem text="MenuItem 9" itemKey="17" />
           <ContextualMenuItem text="MenuItem 10" itemKey="18" />
+          <ContextualMenuItem text="MenuItem 11" itemKey="19" />
+          <ContextualMenuItem text="MenuItem 12" itemKey="20" />
         </ContextualMenu>
       )}
     </View>
