@@ -59,14 +59,34 @@ export const PresenceBadge = compose<PresenceBadgeType>({
       position: 'absolute',
       borderWidth: 0,
       paddingHorizontal: 0,
-      backgroundColor: 'white',
+      outline: {
+        backgroundColor: 'white',
+      },
+      smallest: {
+        width: 6,
+      },
+      smaller: {
+        width: 10,
+      },
+      small: {
+        width: 16,
+      },
+      medium: {
+        width: 20,
+      },
+      large: {
+        width: 24,
+      },
+      largest: {
+        width: 32,
+      },
       ...styles,
     });
 
     return (final: PresenceBadgeProps) => {
       const { appearance = 'outline', ...mergedProps } = mergeProps(badge, final);
       return (
-        <CustomBadge appearance={appearance} {...mergedProps}>
+        <CustomBadge shape="circular" appearance={appearance} {...mergedProps}>
           <SvgXml xml={iconXml} />
         </CustomBadge>
       );
