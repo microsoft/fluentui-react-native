@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Fri, 08 Apr 2022 18:53:11 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Apr 2022 00:35:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.17
+
+Tue, 12 Apr 2022 00:35:08 GMT
+
+### Patches
+
+- Add support for nested focus zones (sanajmi@microsoft.com)
 
 ## 0.9.16
 

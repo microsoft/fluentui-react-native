@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 11 Apr 2022 19:26:38 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Apr 2022 00:35:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.10
+
+Tue, 12 Apr 2022 00:35:08 GMT
+
+### Patches
+
+- Add support for nested focus zones (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.27
+- Bump @fluentui-react-native/experimental-tabs to v0.4.36
+- Bump @fluentui/react-native to v0.28.6
 
 ## 0.59.9
 
