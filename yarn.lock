@@ -9,12 +9,12 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.0", "@appium/base-driver@^8.3.1":
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.4.0.tgz#232f4577d1cfe9fdee75f092a8b6bf10f44a496a"
-  integrity sha512-IBHOa/mSKHuDVGr7u7l17uKa4xgezBa1xQy1L/Z0SCJcw3zu9R5TsaPb3fMfdo9X4daQY8uCRLHceOzc8NuNMw==
+"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.0", "@appium/base-driver@^8.4.2":
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.4.2.tgz#b51e8a7eb17cd33fd6037faec8d36e88a2878608"
+  integrity sha512-by+hZalinv61A5USBX4JWdXDGrSYVd4r51sg4y6wi8zSlQS1rosHalIHTDh2CkHzq/BcvktFjHLNelkOKfKAJQ==
   dependencies:
-    "@appium/support" "^2.57.0"
+    "@appium/support" "^2.57.1"
     "@babel/runtime" "7.17.9"
     "@colors/colors" "1.5.0"
     async-lock "1.3.1"
@@ -26,13 +26,12 @@
     express "4.17.3"
     http-status-codes "2.2.0"
     lodash "4.17.21"
-    lru-cache "7.7.3"
+    lru-cache "7.8.1"
     method-override "3.0.0"
     morgan "1.10.0"
     serve-favicon "2.5.0"
     source-map-support "0.5.21"
     validate.js "0.13.1"
-    ws "7.5.7"
 
 "@appium/base-plugin@1.8.1":
   version "1.8.1"
@@ -41,10 +40,15 @@
   dependencies:
     "@appium/support" "2.55.2"
 
-"@appium/support@2.55.2", "@appium/support@^2.55.3", "@appium/support@^2.56.1", "@appium/support@^2.57.0":
-  version "2.57.0"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.57.0.tgz#133675a43e40d8e75e0e6b633fb984ef8ffb7abc"
-  integrity sha512-+e3HfQb08BMeE76LeX4qR2R/f4pZCO6juKnhOKhIt3zKBLjVVGoRagvGVFKZXDx9TFijcmT7+nAAFugHZJZTjA==
+"@appium/schema@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@appium/schema/-/schema-0.0.2.tgz#abccd086a4220b14644992ffa11a41b7c571767d"
+  integrity sha512-231rcqEuHJLPzd6VEudPCFgse/e4rfUfFYUVy8kSlBI7QYYxX4CY8KhACpouxOIgqOUuwDPGg8VhGIMUd+BqiA==
+
+"@appium/support@2.55.2", "@appium/support@^2.55.3", "@appium/support@^2.56.1", "@appium/support@^2.57.0", "@appium/support@^2.57.1":
+  version "2.57.1"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.57.1.tgz#bff14a75c6187cbb552af1e5d575a3bbc02885f9"
+  integrity sha512-H+ejLELc3WXb0f8buRQDOxLsgtPn1R9pzFtPHS0EhnCSYvQbTwVszpX7/8i/DrhsmkiDV/arh0J2PhvlmnbiOg==
   dependencies:
     "@babel/runtime" "7.17.9"
     archiver "5.3.0"
@@ -1214,13 +1218,6 @@
     make-dir "^2.1.0"
     pirates "^4.0.5"
     source-map-support "^0.5.16"
-
-"@babel/runtime@7.17.8":
-  version "7.17.8"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.8.tgz#3e56e4aff81befa55ac3ac6a0967349fd1c5bca2"
-  integrity sha512-dQpEpK0O9o6lj6oPu0gRDbbnk+4LeHlNcBpspf6Olzt3GIX4P1lWF1gS+pHLDFlaJvbR6q7jCfQ08zA4QJBnmA==
-  dependencies:
-    regenerator-runtime "^0.13.4"
 
 "@babel/runtime@7.17.9", "@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
   version "7.17.9"
@@ -3644,14 +3641,15 @@ appium-windows-driver@^2.0.1:
     teen_process "^1.7.0"
 
 appium@^2.0.0-beta.27:
-  version "2.0.0-beta.27"
-  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.27.tgz#a74a8220c141ca02a47b599558577f1d102d0fcb"
-  integrity sha512-djR2rwwJUQPiVYMOl/6uw92j9XKaqiMwj5axvfb3y6NBn+5cqajUYeRZpYAeSl6GQhzKlQIX9HUs2f/TRvgK8g==
+  version "2.0.0-beta.30"
+  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.30.tgz#599177e3e193063197ffc196db7fc8a5cba9e0f3"
+  integrity sha512-sioDLsXRT4OBGASj9pJZqO5oTQsj5/az9sBdUX550GNZGG6fuR00bE05wkfB00Jpt+efWNpszvJgCJpnTmQ2hg==
   dependencies:
-    "@appium/base-driver" "^8.3.1"
+    "@appium/base-driver" "^8.4.2"
     "@appium/base-plugin" "1.8.1"
-    "@appium/support" "^2.56.1"
-    "@babel/runtime" "7.17.8"
+    "@appium/schema" "^0.0.2"
+    "@appium/support" "^2.57.1"
+    "@babel/runtime" "7.17.9"
     "@sidvind/better-ajv-errors" "1.1.1"
     ajv "8.11.0"
     ajv-formats "2.1.1"
@@ -3660,19 +3658,18 @@ appium@^2.0.0-beta.27:
     asyncbox "2.9.2"
     axios "0.26.1"
     bluebird "3.7.2"
-    continuation-local-storage "3.2.1"
     find-up "5.0.0"
-    lilconfig "2.0.4"
+    lilconfig "2.0.5"
     lodash "4.17.21"
     longjohn "0.2.12"
     npmlog "6.0.1"
     ora "5.4.1"
     package-changed "1.9.0"
     resolve-from "5.0.0"
-    semver "7.3.5"
+    semver "7.3.6"
     source-map-support "0.5.21"
     teen_process "1.16.0"
-    winston "3.6.0"
+    winston "3.7.2"
     word-wrap "1.2.3"
     yaml "1.10.2"
 
@@ -5277,7 +5274,7 @@ content-type@~1.0.4:
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
-continuation-local-storage@3.2.1, continuation-local-storage@^3.2.1:
+continuation-local-storage@^3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/continuation-local-storage/-/continuation-local-storage-3.2.1.tgz#11f613f74e914fe9b34c92ad2d28fe6ae1db7ffb"
   integrity sha512-jx44cconVqkCEEyLSKWwkvUXwO561jXMa3LPjTPsm5QR22PA0/mhe33FT4Xb5y74JDvt/Cq+5lm8S8rskLv9ZA==
@@ -9510,10 +9507,10 @@ lighthouse-logger@^1.0.0:
     debug "^2.6.9"
     marky "^1.2.2"
 
-lilconfig@2.0.4:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.4.tgz#f4507d043d7058b380b6a8f5cb7bcd4b34cee082"
-  integrity sha512-bfTIN7lEsiooCocSISTWXkiWJkRqtL9wYtYy+8EK3Y41qh3mpwPU0ycTOgjdY9ErwXCc8QyrQp82bdL0Xkm9yA==
+lilconfig@2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/lilconfig/-/lilconfig-2.0.5.tgz#19e57fd06ccc3848fd1891655b5a447092225b25"
+  integrity sha512-xaYmXZtTHPAw5m+xLN8ab9C+3a8YmV3asNSPOATITbtwrfbwaLJj8h66H1WMIpALCkqsIzK3h7oQ+PdX+LQ9Eg==
 
 lines-and-columns@^1.1.6:
   version "1.2.4"
@@ -9770,10 +9767,10 @@ lowercase-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
   integrity sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==
 
-lru-cache@7.7.3:
-  version "7.7.3"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.7.3.tgz#98cd19eef89ce6a4a3c4502c17c833888677c252"
-  integrity sha512-WY9wjJNQt9+PZilnLbuFKM+SwDull9+6IAguOrarOMoOHTcJ9GnXSO11+Gw6c7xtDkBkthR57OZMtZKYr+1CEw==
+lru-cache@7.8.1, lru-cache@^7.4.0:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.8.1.tgz#68ee3f4807a57d2ba185b7fd90827d5c21ce82bb"
+  integrity sha512-E1v547OCgJvbvevfjgK9sNKIVXO96NnsTsFPBlg4ZxjhsJSODoH9lk8Bm0OxvHNm6Vm5Yqkl/1fErDxhYL8Skg==
 
 lru-cache@^4.0.1:
   version "4.1.5"
@@ -9782,18 +9779,6 @@ lru-cache@^4.0.1:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
-
-lru-cache@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-6.0.0.tgz#6d6fe6570ebd96aaf90fcad1dafa3b2566db3a94"
-  integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
-  dependencies:
-    yallist "^4.0.0"
-
-lru-cache@^7.4.0:
-  version "7.8.1"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.8.1.tgz#68ee3f4807a57d2ba185b7fd90827d5c21ce82bb"
-  integrity sha512-E1v547OCgJvbvevfjgK9sNKIVXO96NnsTsFPBlg4ZxjhsJSODoH9lk8Bm0OxvHNm6Vm5Yqkl/1fErDxhYL8Skg==
 
 luxon@^1.28.0:
   version "1.28.0"
@@ -10381,11 +10366,6 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
-
-moment@2.29.2:
-  version "2.29.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
-  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
 
 moment@2.29.2:
   version "2.29.2"
@@ -12597,14 +12577,7 @@ semver@7.0.0:
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.0.0.tgz#5f3ca35761e47e05b206c6daff2cf814f0316b8e"
   integrity sha512-+GB6zVA9LWh6zovYQLALHwv5rb2PHGlJi3lfiqIHxR0uuwCgefcOJc59v9fv1w8GbStwxuuqqAjI9NMAOOgq1A==
 
-semver@7.3.5, semver@^7.0.0, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5, semver@~7.3.0:
-  version "7.3.5"
-  resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.5.tgz#0b621c879348d8998e4b0e4be94b3f12e6018ef7"
-  integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
-  dependencies:
-    lru-cache "^6.0.0"
-
-semver@7.3.6:
+semver@7.3.6, semver@^7.0.0, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5, semver@~7.3.0:
   version "7.3.6"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.6.tgz#5d73886fb9c0c6602e79440b97165c29581cbb2b"
   integrity sha512-HZWqcgwLsjaX1HBD31msI/rXktuIhS+lWvdE4kN9z+8IVT4Itc7vqU2WvYsyD6/sjYCt4dEKH/m1M3dwI9CC5w==
@@ -14247,10 +14220,10 @@ winston-transport@^4.5.0:
     readable-stream "^3.6.0"
     triple-beam "^1.3.0"
 
-winston@3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/winston/-/winston-3.6.0.tgz#be32587a099a292b88c49fac6fa529d478d93fb6"
-  integrity sha512-9j8T75p+bcN6D00sF/zjFVmPp+t8KMPB1MzbbzYjeN9VWxdsYnTB40TkbNUEXAmILEfChMvAMgidlX64OG3p6w==
+winston@3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/winston/-/winston-3.7.2.tgz#95b4eeddbec902b3db1424932ac634f887c400b1"
+  integrity sha512-QziIqtojHBoyzUOdQvQiar1DH0Xp9nF1A1y7NVy2DGEsz82SBDtOalS0ulTRGVT14xPX3WRWkCsdcJKqNflKng==
   dependencies:
     "@dabh/diagnostics" "^2.0.2"
     async "^3.2.3"
@@ -14381,11 +14354,6 @@ write-file-atomic@^3.0.0, write-file-atomic@^3.0.3:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@7.5.7, ws@^7, ws@^7.2.3, ws@^7.4.6:
-  version "7.5.7"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.7.tgz#9e0ac77ee50af70d58326ecff7e85eb3fa375e67"
-  integrity sha512-KMvVuFzpKBuiIXW3E4u3mySRO2/mCHSyZDJQM5NQ9Q9KHWHWh0NHgfbRMLLrceUK5qAL4ytALJbpRMjixFZh8A==
-
 ws@^1.1.0, ws@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.5.tgz#cbd9e6e75e09fc5d2c90015f21f0c40875e0dd51"
@@ -14400,6 +14368,11 @@ ws@^6.1.4:
   integrity sha512-zmhltoSR8u1cnDsD43TX59mzoMZsLKqUweyYBAIvTngR3shc0W6aOZylZmq/7hqyVxPdi+5Ud2QInblgyE72fw==
   dependencies:
     async-limiter "~1.0.0"
+
+ws@^7, ws@^7.2.3, ws@^7.4.6:
+  version "7.5.7"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.7.tgz#9e0ac77ee50af70d58326ecff7e85eb3fa375e67"
+  integrity sha512-KMvVuFzpKBuiIXW3E4u3mySRO2/mCHSyZDJQM5NQ9Q9KHWHWh0NHgfbRMLLrceUK5qAL4ytALJbpRMjixFZh8A==
 
 xcode@^2.0.0:
   version "2.1.0"
