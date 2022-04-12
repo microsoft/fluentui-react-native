@@ -9,24 +9,24 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.1":
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.3.1.tgz#fd89437128f5afd0eed97396b8b39702ac5574cf"
-  integrity sha512-4URUwQ5Kx2rWFRltDG7couH7PBBGGzuAq2U9Q6g1obQfRbzfTYEYaNV9jSi1SRlwFfhRn7IvNtU7adslVZEqLw==
+"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.0", "@appium/base-driver@^8.3.1":
+  version "8.4.0"
+  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.4.0.tgz#232f4577d1cfe9fdee75f092a8b6bf10f44a496a"
+  integrity sha512-IBHOa/mSKHuDVGr7u7l17uKa4xgezBa1xQy1L/Z0SCJcw3zu9R5TsaPb3fMfdo9X4daQY8uCRLHceOzc8NuNMw==
   dependencies:
-    "@appium/support" "^2.56.1"
-    "@babel/runtime" "7.17.8"
+    "@appium/support" "^2.57.0"
+    "@babel/runtime" "7.17.9"
     "@colors/colors" "1.5.0"
     async-lock "1.3.1"
     asyncbox "2.9.2"
     axios "0.26.1"
     bluebird "3.7.2"
-    body-parser "1.19.2"
+    body-parser "1.20.0"
     es6-error "4.1.1"
     express "4.17.3"
     http-status-codes "2.2.0"
     lodash "4.17.21"
-    lru-cache "7.7.1"
+    lru-cache "7.7.3"
     method-override "3.0.0"
     morgan "1.10.0"
     serve-favicon "2.5.0"
@@ -80,12 +80,12 @@
     which "2.0.2"
     yauzl "2.10.0"
 
-"@appium/support@^2.55.3", "@appium/support@^2.56.1":
-  version "2.56.1"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.56.1.tgz#5954e7e6aa1e0de6de4bddb6023c2b0cc8f9a4a9"
-  integrity sha512-7RvFxkK94MDeisvj15j8DCoOuj2H/RO9MW1kAePc3UJISA/be+wO2yndoeZeRgvvpHonfO57u2s+xzxQCxCfBA==
+"@appium/support@^2.55.3", "@appium/support@^2.56.1", "@appium/support@^2.57.0":
+  version "2.57.0"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.57.0.tgz#133675a43e40d8e75e0e6b633fb984ef8ffb7abc"
+  integrity sha512-+e3HfQb08BMeE76LeX4qR2R/f4pZCO6juKnhOKhIt3zKBLjVVGoRagvGVFKZXDx9TFijcmT7+nAAFugHZJZTjA==
   dependencies:
-    "@babel/runtime" "7.17.8"
+    "@babel/runtime" "7.17.9"
     archiver "5.3.0"
     axios "0.26.1"
     base64-stream "1.0.0"
@@ -100,20 +100,20 @@
     klaw "3.0.0"
     lockfile "1.0.4"
     lodash "4.17.21"
-    moment "2.29.1"
+    moment "2.29.2"
     mv "2.1.1"
     ncp "2.0.0"
     npmlog "6.0.1"
     opencv-bindings "4.5.5"
     pkg-dir "5.0.0"
-    plist "3.0.4"
+    plist "3.0.5"
     pluralize "8.0.0"
     pngjs "6.0.0"
     read-pkg "5.2.0"
     resolve-from "5.0.0"
     rimraf "3.0.2"
     sanitize-filename "1.6.3"
-    semver "7.3.5"
+    semver "7.3.6"
     shell-quote "1.7.3"
     source-map-support "0.5.21"
     teen_process "1.16.0"
@@ -1268,7 +1268,7 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@7.17.9", "@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
   version "7.17.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.17.9.tgz#d19fbf802d01a8cb6cf053a64e472d42c434ba72"
   integrity sha512-lSiBBvodq29uShpWGNbgFdKYNiFDo5/HIYsaCEY9ff4sb10x9jizo2+pRrSyF4jKZCXqgzuqBOQKbUm90gQwJg==
@@ -3674,11 +3674,11 @@ appium-mac2-driver@^1.1.4:
     teen_process "^1.15.0"
 
 appium-windows-driver@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.1.tgz#357eb11c455b63e3f5b99168ebf72923dbaf5394"
-  integrity sha512-e2ZJDLeqyrvU4MaQAz0WX8Fx6Sx4YMlS/9vTQG6EmgfO3JiOp6XA/gIgmvA+ymLN5X6GWRvyaVfr0WD7oa0hog==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.2.tgz#5b97a2839b1991b682dcb0364151b471759e7b9d"
+  integrity sha512-5jhOml2Z9PYh4D9MTaXIrTp5Rb2Ozze430CEjec5/IVm4QvaNREUGDlBTz1hSuXrZk9FxQpDa/pRYyEAybog8A==
   dependencies:
-    "@appium/base-driver" "^8.0.0"
+    "@appium/base-driver" "^8.3.0"
     "@appium/support" "^2.55.3"
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.3.1"
@@ -4526,6 +4526,24 @@ body-parser@1.19.2:
     qs "6.9.7"
     raw-body "2.4.3"
     type-is "~1.6.18"
+
+body-parser@1.20.0:
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.20.0.tgz#3de69bd89011c11573d7bfee6a64f11b6bd27cc5"
+  integrity sha512-DfJ+q6EPcGKZD1QWUjSpqp+Q7bDQTsQIF4zfUAtZ6qk+H/3/QRhg9CEp39ss+/T2vw0+HaidC0ecJj/DRLIaKg==
+  dependencies:
+    bytes "3.1.2"
+    content-type "~1.0.4"
+    debug "2.6.9"
+    depd "2.0.0"
+    destroy "1.2.0"
+    http-errors "2.0.0"
+    iconv-lite "0.4.24"
+    on-finished "2.4.1"
+    qs "6.10.3"
+    raw-body "2.5.1"
+    type-is "~1.6.18"
+    unpipe "1.0.0"
 
 "bole@npm:@zkochan/bole@^3.0.4":
   version "3.0.4"
@@ -9833,10 +9851,10 @@ lowercase-keys@^2.0.0:
   resolved "https://registry.yarnpkg.com/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
   integrity sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==
 
-lru-cache@7.7.1:
-  version "7.7.1"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.7.1.tgz#03d2846b1ad2dcc7931a9340b8711d9798fcb0c6"
-  integrity sha512-cRffBiTW8s73eH4aTXqBcTLU0xQnwGV3/imttRHGWCrbergmnK4D6JXQd8qin5z43HnDwRI+o7mVW0LEB+tpAw==
+lru-cache@7.7.3:
+  version "7.7.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.7.3.tgz#98cd19eef89ce6a4a3c4502c17c833888677c252"
+  integrity sha512-WY9wjJNQt9+PZilnLbuFKM+SwDull9+6IAguOrarOMoOHTcJ9GnXSO11+Gw6c7xtDkBkthR57OZMtZKYr+1CEw==
 
 lru-cache@^4.0.1:
   version "4.1.5"
@@ -9852,6 +9870,11 @@ lru-cache@^6.0.0:
   integrity sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
   dependencies:
     yallist "^4.0.0"
+
+lru-cache@^7.4.0:
+  version "7.8.1"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.8.1.tgz#68ee3f4807a57d2ba185b7fd90827d5c21ce82bb"
+  integrity sha512-E1v547OCgJvbvevfjgK9sNKIVXO96NnsTsFPBlg4ZxjhsJSODoH9lk8Bm0OxvHNm6Vm5Yqkl/1fErDxhYL8Skg==
 
 luxon@^1.28.0:
   version "1.28.0"
@@ -10444,6 +10467,11 @@ moment@2.29.1:
   version "2.29.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.1.tgz#b2be769fa31940be9eeea6469c075e35006fa3d3"
   integrity sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==
+
+moment@2.29.2:
+  version "2.29.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.2.tgz#00910c60b20843bcba52d37d58c628b47b1f20e4"
+  integrity sha512-UgzG4rvxYpN15jgCmVJwac49h9ly9NurikMWGPdVxm8GZD6XjkKPxDTjQQ43gtGgnV3X0cAyWDdP2Wexoquifg==
 
 moo@^0.5.0:
   version "0.5.1"
@@ -11490,7 +11518,7 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
-plist@3.0.4, plist@^3.0.1, plist@^3.0.5:
+plist@3.0.4, plist@3.0.5, plist@^3.0.1, plist@^3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.0.5.tgz#2cbeb52d10e3cdccccf0c11a63a85d830970a987"
   integrity sha512-83vX4eYdQp3vP9SxuYgEM/G/pJQqLUz/V/xzPrzruLs7fz7jxGQ1msZ/mg1nwZxUSuOp4sb+/bEIbRrbzZRxDA==
@@ -11709,17 +11737,17 @@ puppeteer-core@^5.1.0:
     unbzip2-stream "^1.3.3"
     ws "^7.2.3"
 
-qs@6.9.7:
-  version "6.9.7"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.7.tgz#4610846871485e1e048f44ae3b94033f0e675afe"
-  integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
-
-qs@^6.9.4:
+qs@6.10.3, qs@^6.9.4:
   version "6.10.3"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.3.tgz#d6cde1b2ffca87b5aa57889816c5f81535e22e8e"
   integrity sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==
   dependencies:
     side-channel "^1.0.4"
+
+qs@6.9.7:
+  version "6.9.7"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.7.tgz#4610846871485e1e048f44ae3b94033f0e675afe"
+  integrity sha512-IhMFgUmuNpyRfxA90umL7ByLlgRXu6tIfKPpF5TmcfRLlLCckfP/g3IQmju6jjpu+Hh8rA+2p6A27ZSPOOHdKw==
 
 query-ast@^1.0.3:
   version "1.0.4"
@@ -11785,6 +11813,16 @@ raw-body@2.4.3:
   dependencies:
     bytes "3.1.2"
     http-errors "1.8.1"
+    iconv-lite "0.4.24"
+    unpipe "1.0.0"
+
+raw-body@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.5.1.tgz#fe1b1628b181b700215e5fd42389f98b71392857"
+  integrity sha512-qqJBtEyVgS0ZmPGdCFPWJ3FreoqvG4MVQln/kCgF7Olq95IbOp0/BWyMwbdtn4VTvkM8Y7khCQ2Xgk/tcrCXig==
+  dependencies:
+    bytes "3.1.2"
+    http-errors "2.0.0"
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
@@ -12656,6 +12694,13 @@ semver@7.3.5, semver@^7.0.0, semver@^7.3.2, semver@^7.3.4, semver@^7.3.5, semver
   integrity sha512-PoeGJYh8HK4BTO/a9Tf6ZG3veo/A7ZVsYrSA6J8ny9nb3B1VrpkuN+z9OE5wfE5p6H4LchYZsegiQgbJD94ZFQ==
   dependencies:
     lru-cache "^6.0.0"
+
+semver@7.3.6:
+  version "7.3.6"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.6.tgz#5d73886fb9c0c6602e79440b97165c29581cbb2b"
+  integrity sha512-HZWqcgwLsjaX1HBD31msI/rXktuIhS+lWvdE4kN9z+8IVT4Itc7vqU2WvYsyD6/sjYCt4dEKH/m1M3dwI9CC5w==
+  dependencies:
+    lru-cache "^7.4.0"
 
 semver@^6.0.0, semver@^6.1.1, semver@^6.1.2, semver@^6.3.0:
   version "6.3.0"
