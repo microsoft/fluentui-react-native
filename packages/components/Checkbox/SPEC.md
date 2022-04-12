@@ -279,4 +279,4 @@ The same behavior as above translated for touch events. This means that there is
 - Should mix in the accessibility props expected for a `Checkbox` component.
 - Should be keyboard tabbable and focusable.
 
-See [`useCheckbox` hook](./src/useCheckbox.ts) for details on accessibility props
+See [`useCheckbox` hook](../../experimental/Checkbox/src/useCheckbox.ts) for details on accessibility props

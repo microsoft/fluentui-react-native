@@ -147,19 +147,22 @@ static inline BOOL IsHorizontalNavigationWithinZoneAction(FocusZoneAction action
 	return action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow;
 }
 
+/// Returns the topmost view of the given view's superview heirarchy that is a FocusZone.
+/// Returns nil if no FocusZone is found.
 static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 {
 	NSView *candidateView = view;
 	NSView *topLevelView = [[view window] contentView];
+	RCTFocusZone *focusZoneAncestor = nil;
 	while (candidateView != nil && candidateView != topLevelView)
 	{
 		if ([candidateView isKindOfClass:[RCTFocusZone class]])
 		{
-			return (RCTFocusZone *)candidateView;
+			focusZoneAncestor = (RCTFocusZone *)candidateView;
 		}
 		candidateView = [candidateView superview];
 	}
-	return nil;
+	return focusZoneAncestor;
 }
 
 /// Bypass FocusZone if it's empty or has no focusable elements
@@ -362,34 +365,32 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	NSView *nextViewToFocus;
 
 	[[self window] recalculateKeyViewLoop];
+	
+	// Find the first view outside the FocusZone (or any parent FocusZones) to place focus
+	RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(self);
 
 	if (action == FocusZoneActionTab)  // Advance to next zone
 	{
-		IsViewLeadingCandidateForNextFocus block = ^BOOL(NSView *candidateView)
+		nextViewToFocus = [self nextValidKeyView];
+		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
-			return YES;
-		};
-
-		nextViewToFocus = [([self nextViewToFocusForCondition:block] ?: self) nextValidKeyView];
-	}
-	else  // action == FocusZoneActionShiftTab per the conditional in keyDown
-	{
-		nextViewToFocus = [self previousValidKeyView];
-	}
-
-	if ([nextViewToFocus isDescendantOf:self])
-	{
-		nextViewToFocus = nil;
+			nextViewToFocus = [nextViewToFocus nextValidKeyView];
+		}
 	}
 	else if (action == FocusZoneActionShiftTab)
 	{
-		// If the previous view is in a FocusZone, focus the default tabbable element.
-		// (For FocusZoneActionTab, this is handled by becomeFirstResponder.)
-		RCTFocusZone *nextFocusZone = GetFocusZoneAncestor(nextViewToFocus);
-		NSView *element = [nextFocusZone defaultKeyView];
-		if (element != nil)
+		nextViewToFocus = [self previousValidKeyView];
+		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
-			nextViewToFocus = element;
+			nextViewToFocus = [nextViewToFocus previousValidKeyView];
+		}
+		
+		// If the previous view is in a FocusZone, focus on its defaultKeyView
+		// (For FocusZoneActionTab, this is handled by becomeFirstResponder).
+		RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(nextViewToFocus);
+		NSView *ancestorKeyView = [focusZoneAncestor defaultKeyView];
+		if (ancestorKeyView != nil) {
+			nextViewToFocus = [focusZoneAncestor defaultKeyView];
 		}
 	}
 
