@@ -5,7 +5,7 @@ steps:
     displayName: 'yarn bundle'
 
   - script: |
-      yarn appium driver install windows@^2.0.1
+      yarn appium driver install windows
     workingDirectory: apps/windows
     displayName: 'Installing appium windows driver'
 
