@@ -15,6 +15,11 @@ export const focusZoneTestStyles = StyleSheet.create({
     justifyContent: 'space-evenly',
     padding: 4,
   },
+  nestedFocusZoneStyle: {
+    borderWidth: 1,
+    padding: 8,
+    margin: 8,
+  },
   focusZoneButton: {
     height: 50,
     width: 50,

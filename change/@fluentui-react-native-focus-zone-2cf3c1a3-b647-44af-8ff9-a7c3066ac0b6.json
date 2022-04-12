@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add support for nested focus zones",
+  "packageName": "@fluentui-react-native/focus-zone",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
