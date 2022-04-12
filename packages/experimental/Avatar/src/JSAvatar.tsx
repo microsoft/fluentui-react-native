@@ -44,11 +44,6 @@ export const JSAvatar = compose<JSAvatarType>({
       const { children, accessibilityLabel, presence, activeAppearance, isOutOfOffice, ...mergedProps } = mergeProps(avatar.props, final);
       const { personaPhotoSource, showRing, transparentRing } = avatar.state;
 
-      const badgeStyles = {
-        bottom: 0,
-        right: 0,
-      };
-
       return (
         <Slots.root {...mergedProps}>
           {personaPhotoSource ? (
@@ -60,7 +55,7 @@ export const JSAvatar = compose<JSAvatarType>({
           )}
           {showRing && !transparentRing && <Slots.ring />}
           {activeAppearance === 'glow' && <Slots.glow />}
-          <PresenceBadge styles={badgeStyles} size="small" presence={presence} isOutOfOffice={isOutOfOffice} />
+          <PresenceBadge size="small" shape="circular" presence={presence} isOutOfOffice={isOutOfOffice} />
         </Slots.root>
       );
     };

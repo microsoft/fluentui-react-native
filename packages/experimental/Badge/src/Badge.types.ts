@@ -1,4 +1,4 @@
-import { ViewStyle, ColorValue, NativeScrollRectangle, StyleProp } from 'react-native';
+import { ViewStyle, ColorValue, NativeScrollRectangle } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IViewProps } from '@fluentui-react-native/adapters';
@@ -21,7 +21,6 @@ export interface BadgeTokens extends LayoutTokens, FontTokens, IBorderTokens, IS
   left?: NativeScrollRectangle['left'];
   bottom?: NativeScrollRectangle['bottom'];
   right?: NativeScrollRectangle['right'];
-  position?: StyleProp<'absolute' | 'relative'>;
 
   /**
    * States that can be applied to a Badge

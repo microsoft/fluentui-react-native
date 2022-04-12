@@ -1,11 +1,13 @@
 /** @jsx withSlots */
-import { Badge } from '../Badge';
+import { View } from 'react-native';
+import { badgeLookup } from '../Badge';
 import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, Presence } from './PresenceBadge.types';
 import { BadgeSize } from '../Badge.types';
-import { compose, withSlots, mergeProps } from '@fluentui-react-native/framework';
+import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native/framework';
 import { presenceIconPaths } from './presenceIconPaths';
 import { SvgXml } from 'react-native-svg';
 import { useBadge } from '../useBadge';
+import { stylingSettings } from './PresenceBadge.styling';
 
 function getIconPath(presence: Presence, isOutOfOffice: boolean) {
   switch (presence) {
@@ -45,50 +47,24 @@ function getIconSize(size: BadgeSize) {
 
 export const PresenceBadge = compose<PresenceBadgeType>({
   displayName: presenceBadgeName,
+  ...stylingSettings,
   slots: {
-    badge: Badge,
+    root: View,
   },
-  useRender: (userProps: PresenceBadgeProps) => {
-    const { styles = {}, ...props } = userProps;
-    const badge = useBadge(props);
-    const size = getIconSize(props.size || 'medium');
+  useRender: (userProps: PresenceBadgeProps, useSlots: UseSlots<PresenceBadgeType>) => {
+    const badge = useBadge(userProps);
+    const size = getIconSize(userProps.size || 'medium');
     const iconXml = `<svg width="${size}" height="${size}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
       ${getIconPath(userProps.presence, userProps.isOutOfOffice)}
     </svg>`;
-    const CustomBadge = Badge.customize({
-      position: 'absolute',
-      borderWidth: 0,
-      paddingHorizontal: 0,
-      outline: {
-        backgroundColor: 'white',
-      },
-      smallest: {
-        width: 6,
-      },
-      smaller: {
-        width: 10,
-      },
-      small: {
-        width: 16,
-      },
-      medium: {
-        width: 20,
-      },
-      large: {
-        width: 24,
-      },
-      largest: {
-        width: 32,
-      },
-      ...styles,
-    });
+    const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
     return (final: PresenceBadgeProps) => {
-      const { appearance = 'outline', ...mergedProps } = mergeProps(badge, final);
+      const { ...mergedProps } = mergeProps(badge, final);
       return (
-        <CustomBadge shape="circular" appearance={appearance} {...mergedProps}>
+        <Slots.root {...mergedProps}>
           <SvgXml xml={iconXml} />
-        </CustomBadge>
+        </Slots.root>
       );
     };
   },

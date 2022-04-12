@@ -39,13 +39,12 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
           justifyContent: 'center',
           height: tokens.height,
           width: tokens.width,
-          position: tokens.position,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'position', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'height', 'bottom', 'right', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     icon: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({

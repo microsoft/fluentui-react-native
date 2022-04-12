@@ -8,7 +8,6 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens> = () =>
     borderWidth: globalTokens.stroke.width.thin,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
-    position: 'relative',
     smallest: {
       minWidth: 6,
       height: 6,
