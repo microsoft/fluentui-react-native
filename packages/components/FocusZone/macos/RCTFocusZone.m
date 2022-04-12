@@ -435,7 +435,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	if (!passthrough && viewToFocus != nil)
 	{
 		[[self window] makeFirstResponder:viewToFocus];
-		[viewToFocus scrollRectToVisible:[viewToFocus frame]];
+		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
 	}
 	else
 	{
