@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Tue, 12 Apr 2022 00:35:09 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.6.36",
+      "version": "0.6.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.9.17",
+            "commit": "832066543f281fdec866f738d36f7f73f6bbb4f7"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 Apr 2022 18:53:12 GMT",
       "tag": "@fluentui-react-native/tabs_v0.6.35",
       "version": "0.6.35",
