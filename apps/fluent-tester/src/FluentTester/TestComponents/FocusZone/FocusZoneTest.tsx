@@ -45,10 +45,10 @@ const EdgeCasesFocusZone: React.FunctionComponent = () => {
       </FocusZone>
       <SubheaderText>Nested FocusZones</SubheaderText>
       <Button>Outside Focus Zone</Button>
-      <Text>Parent FocusZone</Text>
+      <Text>Parent FocusZone, vertical</Text>
       <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
-        <FocusZone>
-          <Text>Inner FocusZone 1</Text>
+        <FocusZone focusZoneDirection="vertical">
+          <Text>Inner FocusZone 1, horizontal</Text>
           <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
             <FocusZone focusZoneDirection="horizontal">
               <View style={focusZoneTestStyles.focusZoneContainer}>
@@ -59,7 +59,7 @@ const EdgeCasesFocusZone: React.FunctionComponent = () => {
               </View>
             </FocusZone>
           </View>
-          <Text>Inner FocusZone 2</Text>
+          <Text>Inner FocusZone 2, horizontal</Text>
           <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
             <FocusZone focusZoneDirection="horizontal">
               <View style={focusZoneTestStyles.focusZoneContainer}>
