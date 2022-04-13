@@ -105,16 +105,16 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   disabled?: boolean;
 
   /**
+   * Label to display next to the checkbox.
+   */
+  label?: string;
+
+  /**
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
    *
    * @default after
    */
   labelPosition?: 'before' | 'after';
-
-  /**
-   * Label to display next to the checkbox.
-   */
-  label?: string;
 
   /**
    * Callback that is called when the checked value has changed.
@@ -123,6 +123,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   * Also sets accessibility state to have screen reader announce required state.
    */
   required?: boolean | string;
 
@@ -134,7 +135,8 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    */
   shape?: CheckboxShape;
 
-  /** Sets style of checkbox to a preset size style.
+  /**
+   * Sets style of checkbox to a preset size style.
    * @default 'medium'
    */
   size?: CheckboxSize;
@@ -151,7 +153,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 Tokens can be used to customize the styling of the control by using the `customize` function on the `Checkbox`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Checkbox` has the following tokens:
 
 ```ts
-export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   /**
    * Color of the background of the box containing the checkmark.
    */
@@ -206,12 +208,12 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
-  spacingIconContentBefore?: number;
+  spacingLabelAfter?: number;
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
    */
-  spacingIconContentAfter?: number;
+  spacingLabelBefore?: number;
 
   /**
    * States that can be applied to a Checkbox.
@@ -225,6 +227,8 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
   circular?: CheckboxTokens;
+  medium?: CheckboxTokens;
+  large?: CheckboxTokens;
 }
 ```
 
