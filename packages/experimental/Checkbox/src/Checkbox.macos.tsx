@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { checkboxName, CheckboxTokens, CheckboxProps, CheckboxState } from './Checkbox.types';
+import { checkboxName, CheckboxTokens, CheckboxProps, CheckboxState } from '@fluentui-react-native/checkbox';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { IViewProps } from '@fluentui-react-native/adapters';
