@@ -1,6 +1,6 @@
 import { ThemeColorDefinition, AliasColorTokens } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
-import { AppleSemanticPalette, FluentUIApplePalette, FluentAppleAliasColorTokens } from './appleColors.types.macos';
+import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
 import { createMacOSAliasTokens } from './createMacOSAliasTokens';
@@ -255,16 +255,12 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
   };
 }
 
-function getMacOSAliasTokens(): FluentAppleAliasColorTokens & AliasColorTokens {
+function getMacOSAliasTokens(): AliasColorTokens {
   const appearance = Appearance.getColorScheme();
   const mode = getCurrentAppearance(appearance, 'light');
   const macOSAliasColorTokens = createMacOSAliasTokens(mode, getIsHighContrast());
 
   return {
-    /* FluentAppleButtonTokens */
-    brandForegroundDisabled: macOSAliasColorTokens.brandForeground1Disabled,
-    brandForegroundPressed: macOSAliasColorTokens.brandForeground1Pressed,
-
     /* AliasColorTokens */
     neutralForeground1: macOSAliasColorTokens.neutralForeground1,
     neutralForeground1Hover: macOSAliasColorTokens.neutralForeground1Hover,
@@ -469,7 +465,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     primaryButtonText: macOSAliasColorTokens.neutralForegroundInverted,
     primaryButtonTextHovered: macOSAliasColorTokens.neutralForegroundInverted,
     primaryButtonTextPressed: macOSAliasColorTokens.neutralForegroundInverted,
-    primaryButtonTextDisabled: macOSAliasColorTokens.brandForegroundDisabled,
+    primaryButtonTextDisabled: macOSAliasColorTokens.brandForeground1Disabled,
 
     accentButtonBackground: fluentUIApple.communicationBlue,
     accentButtonText: macOSAliasColorTokens.neutralForegroundInverted,
@@ -543,13 +539,13 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     ghostPressedBackground: 'transparent',
     ghostPressedBorder: 'transparent',
-    ghostPressedContent: macOSAliasColorTokens.brandForegroundPressed,
+    ghostPressedContent: macOSAliasColorTokens.brandForeground1Pressed,
     ghostPressedIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     ghostDisabledBackground: 'transparent',
     ghostDisabledBorder: 'transparent',
-    ghostDisabledContent: macOSAliasColorTokens.brandForegroundDisabled,
-    ghostDisabledIcon: macOSAliasColorTokens.brandForegroundDisabled,
+    ghostDisabledContent: macOSAliasColorTokens.brandForeground1Disabled,
+    ghostDisabledIcon: macOSAliasColorTokens.brandForeground1Disabled,
 
     brandedBackground: macOSAliasColorTokens.brandBackground,
     brandedBorder: macOSAliasColorTokens.transparentStroke,
@@ -573,7 +569,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
 
     brandedDisabledBackground: macOSAliasColorTokens.neutralBackgroundDisabled,
     brandedDisabledBorder: 'transparent',
-    brandedDisabledContent: macOSAliasColorTokens.brandForegroundDisabled,
+    brandedDisabledContent: macOSAliasColorTokens.brandForeground1Disabled,
     brandedDisabledIcon: macOSAliasColorTokens.neutralForeground3, //GH:728 Icon doesn't support PlatformColor
 
     defaultCheckedBackground: fluentUIApple.communicationBlue,
@@ -602,7 +598,7 @@ export function fallbackApplePalette(): ThemeColorDefinition {
     brandedHoveredSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
     brandedPressedSecondaryContent: ColorWithSystemEffectMacOS(macOSAliasColorTokens.neutralForegroundInverted, 'pressed'),
 
-    defaultDisabledSecondaryContent: macOSAliasColorTokens.brandForegroundDisabled,
+    defaultDisabledSecondaryContent: macOSAliasColorTokens.brandForeground1Disabled,
     defaultHoveredSecondaryContent: macOSAliasColorTokens.neutralForeground3,
     defaultPressedSecondaryContent: macOSAliasColorTokens.neutralForegroundInverted,
 

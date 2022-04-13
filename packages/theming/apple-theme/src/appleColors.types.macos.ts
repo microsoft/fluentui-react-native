@@ -204,11 +204,4 @@ interface FluentUIAppleBasePalette {
   warningTint40: ColorValue;
 }
 
-/** A set of control tokens used on the FluentUI Apple macOS button */
-interface FluentAppleButtonTokens {
-  brandForegroundDisabled: ColorValue;
-  brandForegroundPressed: ColorValue;
-}
-
 export type FluentUIApplePalette = FluentUIAppleBasePalette;
-export type FluentAppleAliasColorTokens = FluentAppleButtonTokens;
