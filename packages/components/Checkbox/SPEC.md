@@ -1,5 +1,11 @@
 # Checkbox
 
+In the short term, the new `Checkbox` control is named `CheckboxV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Checkbox`. It may be useful to rename the control to `Checkbox` using the import syntax to simplify the rename:
+
+```ts
+import { CheckboxV1 as Checkbox } from '@fluentui-react-native/checkbox';
+```
+
 ## Background
 
 The `Checkbox` component enables users to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked).

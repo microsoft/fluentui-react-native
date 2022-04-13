@@ -1,10 +1,12 @@
 # Checkbox Migration
 
-## STATUS: WIP 🚧
-
-This Migration guide is a work in progress and is not yet ready for use.
-
 ## Migration from v0 Checkbox
+
+In the short term, the new `Checkbox` control is named `CheckboxV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Checkbox`. It may be useful to rename the control to `Checkbox` using the import syntax to simplify the rename:
+
+```ts
+import { CheckboxV1 as Checkbox } from '@fluentui-react-native/checkbox';
+```
 
 ### Component renames
 
