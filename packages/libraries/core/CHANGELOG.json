@@ -2,6 +2,60 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 12 Apr 2022 21:53:04 GMT",
+      "tag": "@fluentui/react-native_v0.28.8",
+      "version": "0.28.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.20",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.9.18",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.7.50",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.14.38",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.6.37",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Apr 2022 19:32:57 GMT",
+      "tag": "@fluentui/react-native_v0.28.7",
+      "version": "0.28.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.14.32",
+            "commit": "07ac1a3c35433fa70d2f3b7ce2e4b262d439a619"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Apr 2022 00:35:09 GMT",
       "tag": "@fluentui/react-native_v0.28.6",
       "version": "0.28.6",
