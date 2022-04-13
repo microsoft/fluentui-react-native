@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update menubutton snapshots",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
