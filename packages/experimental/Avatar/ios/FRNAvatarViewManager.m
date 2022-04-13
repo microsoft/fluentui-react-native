@@ -1,28 +1,24 @@
 #import <React/RCTViewManager.h>
 
-#import "FRNAvatarStorage.h"
-
 @import FluentUI;
 
 // Macros inspired by https://betterprogramming.pub/react-native-meets-swiftui-d1606a8e1681
 
-#define RCT_EXPORT_SWIFTUI_PROPERTY(name, type, proxyClass) \
+#define RCT_EXPORT_SWIFTUI_PROPERTY(name, type, viewClass) \
 RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 - (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC { \
-    NSMutableDictionary *storage = [proxyClass storage]; \
-    proxyClass *proxy = storage[[NSValue valueWithNonretainedObject:view]];  \
+    viewClass *proxy = (viewClass *)view;  \
     proxy.state.name = [RCTConvert type:json]; \
 }
 
-#define RCT_REMAP_SWIFTUI_PROPERTY(name, keyPath, type, proxyClass) \
+#define RCT_REMAP_SWIFTUI_PROPERTY(name, keyPath, type, viewClass) \
 RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 - (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC { \
-    NSMutableDictionary *storage = [proxyClass storage]; \
-    proxyClass *proxy = storage[[NSValue valueWithNonretainedObject:view]];  \
+    viewClass *proxy = (viewClass *)view;  \
     proxy.state.keyPath = [RCTConvert type:json]; \
 }
 
-#define RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(name, type, proxyClass) \
+#define RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(name, type, viewClass) \
 RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
 - (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC
 
@@ -89,13 +85,7 @@ RCT_REMAP_SWIFTUI_PROPERTY(avatarStyle, style, MSFAvatarStyle, MSFAvatar)
 
 RCT_EXPORT_SWIFTUI_PROPERTY(hasRingInnerGap, BOOL, MSFAvatar)
 
-RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(customBorderImageSource, UIImage, MSFAvatar)
-{
-    NSMutableDictionary *storage = [MSFAvatar storage];
-    MSFAvatar *viewWrapper = storage[[NSValue valueWithNonretainedObject:view]];
-    UIImage *customBorderImage = [RCTConvert UIImage:json];
-    [[viewWrapper state] setImageBasedRingColor:customBorderImage];
-}
+RCT_REMAP_SWIFTUI_PROPERTY(customBorderImageSource, imageBasedRingColor, UIImage, MSFAvatar)
 
 @end
 

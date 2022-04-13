@@ -1,6 +1,8 @@
 require_relative '../../../node_modules/react-native-test-app/test_app.rb'
 
 workspace 'FluentTester.xcworkspace'
+source 'https://cdn.cocoapods.org/'
+source 'https://msblox.visualstudio.com/DefaultCollection/_git/CocoaPods'
 
 react_native_path = "#{__dir__}/../../../node_modules/react-native"
 
@@ -22,7 +24,7 @@ fi
 use_flipper!(false)
 use_test_app! do |target|
   target.app do
-    platform :ios, '13.0'
+    platform :ios, '14.0'
 
     pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
     pod 'FRNDatePicker', :path => '../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec'
