@@ -1,4 +1,4 @@
-export { checkboxName } from './Checkbox.types';
+export { checkboxName } from './deprecated/Checkbox.types';
 export type {
   ICheckboxProps,
   ICheckboxRenderData,
@@ -6,5 +6,5 @@ export type {
   ICheckboxState,
   ICheckboxTokens,
   ICheckboxType,
-} from './Checkbox.types';
-export { Checkbox } from './Checkbox';
+} from './deprecated/Checkbox.types';
+export { Checkbox } from './deprecated/Checkbox';
