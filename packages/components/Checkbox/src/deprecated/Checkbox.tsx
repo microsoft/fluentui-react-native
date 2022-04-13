@@ -19,6 +19,10 @@ import {
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
 

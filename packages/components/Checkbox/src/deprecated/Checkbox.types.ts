@@ -7,8 +7,16 @@ import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderToke
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ColorValue } from 'react-native';
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export const checkboxName = 'Checkbox';
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export interface ICheckboxState extends IPressableState {
   /**
    * Whether the Checkbox is checked or not
@@ -26,6 +34,10 @@ export interface ICheckboxState extends IPressableState {
   boxAtEnd?: boolean;
 }
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export interface ICheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * An string for screen readers to read. If not provided, this will be set to the Checkbox label
@@ -78,6 +90,10 @@ export interface ICheckboxProps extends Omit<IViewProps, 'onPress'> {
   tooltip?: string;
 }
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   checkboxBackgroundColor?: ColorValue;
   checkboxBorderColor?: ColorValue;
@@ -86,6 +102,10 @@ export interface ICheckboxTokens extends FontTokens, IForegroundColorTokens, IBa
   textBorderColor?: ColorValue;
 }
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export interface ICheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   checkbox: IViewProps;
@@ -93,8 +113,16 @@ export interface ICheckboxSlotProps {
   content: ITextProps;
 }
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export type ICheckboxRenderData = IRenderData<ICheckboxSlotProps, ICheckboxState>;
 
+/**
+ * @deprecated This will be removed when the package moves to 1.0.0.
+ * Please see MIGRATION.md for details on how to move to the new Checkbox.
+ */
 export interface ICheckboxType {
   props: ICheckboxProps;
   tokens: ICheckboxTokens;
