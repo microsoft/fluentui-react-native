@@ -2,6 +2,33 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 13 Apr 2022 15:51:04 GMT",
+      "tag": "@fluentui/react-native_v0.28.9",
+      "version": "0.28.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.22.14",
+            "commit": "9056781c0c1db98bafae7d8f24da19400a2c1903"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.14.33",
+            "commit": "9056781c0c1db98bafae7d8f24da19400a2c1903"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.7.51",
+            "commit": "9056781c0c1db98bafae7d8f24da19400a2c1903"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Apr 2022 21:53:04 GMT",
       "tag": "@fluentui/react-native_v0.28.8",
       "version": "0.28.8",

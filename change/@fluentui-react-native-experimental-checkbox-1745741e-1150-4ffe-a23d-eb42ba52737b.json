@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add more details on spec/migration",
-  "packageName": "@fluentui-react-native/experimental-checkbox",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
