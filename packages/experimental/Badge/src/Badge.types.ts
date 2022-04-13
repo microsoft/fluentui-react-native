@@ -10,23 +10,60 @@ export type BadgeAppearance = 'filled' | 'outline' | 'tint' | 'ghost' | 'filledI
 export type BadgeShape = 'rounded' | 'circular' | 'square';
 
 export interface BadgeTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
-  iconColor?: ColorValue;
-  iconColorHovered?: ColorValue;
-  iconColorPressed?: ColorValue;
-  iconSize?: number;
-  iconWeight?: number;
-  height?: ViewStyle['height'];
-  width?: ViewStyle['width'];
-  top?: NativeScrollRectangle['top'];
-  left?: NativeScrollRectangle['left'];
+  /**
+   * Set the bottom edge of the Badge
+   */
   bottom?: NativeScrollRectangle['bottom'];
+
+  /**
+   * The height of the Badge.
+   */
+  height?: ViewStyle['height'];
+
+  /**
+   * The icon color.
+   */
+  iconColor?: ColorValue;
+
+  /**
+   * The icon color when hovering over the Badge.
+   */
+  iconColorHovered?: ColorValue;
+
+  /**
+   * The icon color when the Badge is being pressed.
+   */
+  iconColorPressed?: ColorValue;
+
+  /**
+   * The size of the icon.
+   */
+  iconSize?: number;
+
+  /**
+   * The weight of the lines used when drawing the icon.
+   */
+  iconWeight?: number;
+
+  /**
+   * Set the left edge of the Badge
+   */
+  left?: NativeScrollRectangle['left'];
+
+  /**
+   * Set the right edge of the Badge
+   */
   right?: NativeScrollRectangle['right'];
 
   /**
-   * States that can be applied to a Badge
+   * Set the top edge of the Badge
    */
-  hovered?: BadgeTokens;
-  focused?: BadgeTokens;
+  top?: NativeScrollRectangle['top'];
+
+  /**
+   * The width of the Badge.
+   */
+  width?: ViewStyle['width'];
 
   /**
    * Additional states that can be applied to a Badge
@@ -37,6 +74,9 @@ export interface BadgeTokens extends LayoutTokens, FontTokens, IBorderTokens, IS
   ghost?: BadgeTokens;
   filledInverted?: BadgeTokens;
 
+  /**
+   * Sizes of the Badge
+   */
   smallest?: BadgeTokens;
   smaller?: BadgeTokens;
   small?: BadgeTokens;
@@ -44,35 +84,52 @@ export interface BadgeTokens extends LayoutTokens, FontTokens, IBorderTokens, IS
   large?: BadgeTokens;
   largest?: BadgeTokens;
 
+  /**
+   * Shapes of the Badge
+   */
   rounded?: BadgeTokens;
   circular?: BadgeTokens;
   square?: BadgeTokens;
 
-  DND?: BadgeTokens;
-  busy?: BadgeTokens;
-  unknown?: BadgeTokens;
-  blocked?: BadgeTokens;
-  OOF?: BadgeTokens;
-  away?: BadgeTokens;
-  available?: BadgeTokens;
-  offline?: BadgeTokens;
+  /**
+   * States that can be applied to a Badge
+   */
+  hovered?: BadgeTokens;
+  focused?: BadgeTokens;
 }
 
 export interface BadgeProps {
-  text?: string;
-  icon?: IconSourcesType;
+  /**
+   * A Badge can have its content and borders styled for greater emphasis or to be subtle.
+   * filled -
+   * outline -
+   */
   appearance?: BadgeAppearance;
-  size?: BadgeSize;
+
+  /*
+   * Source URL or name of the icon to show on the Badge.
+   */
+  icon?: IconSourcesType;
 
   /**
+   * Icon can be placed before or after Button's content.
+   * @default before
+   */
+  iconPosition?: 'before' | 'after';
+
+  /**
+   * Badge shape: 'rounded' | 'circular' | 'square'
    * @defaultvalue rounded
    */
   shape?: BadgeShape;
 
-  /**
-   * @default before
+  /** Sets style of Badge to a preset size style  */
+  size?: BadgeSize;
+
+  /*
+   * Text to show on the Badge.
    */
-  iconPosition?: 'before' | 'after';
+  text?: string;
 }
 
 export interface BadgeSlotProps {
