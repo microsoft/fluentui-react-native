@@ -7,12 +7,12 @@ import { AccessibilityState } from 'react-native';
 export const useButton = (props: ButtonProps): ButtonState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, loading } = props;
+  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, loading, ...rest } = props;
   const isDisabled = !!disabled || !!loading;
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
   const onClickWithFocus = useOnPressWithFocus(focusRef, onClick);
-  const pressable = useAsPressable({ ...props, disabled: isDisabled, onPress: onClickWithFocus });
+  const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
