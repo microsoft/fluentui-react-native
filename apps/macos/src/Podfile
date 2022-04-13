@@ -1,6 +1,8 @@
 require_relative '../../../node_modules/react-native-test-app/macos/test_app.rb'
 
 workspace 'FluentTester.xcworkspace'
+source 'https://cdn.cocoapods.org/'
+source 'https://msblox.visualstudio.com/DefaultCollection/_git/CocoaPods'
 
 react_native_path = "#{__dir__}/../../../node_modules/react-native-macos"
 
