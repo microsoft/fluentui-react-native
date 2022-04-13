@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add disabled prop to useAsPressable hook",
+  "packageName": "@fluentui-react-native/button",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
