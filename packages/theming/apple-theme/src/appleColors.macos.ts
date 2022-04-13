@@ -1,4 +1,4 @@
-import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
+import { ThemeColorDefinition, AliasColorTokens } from '@fluentui-react-native/theme-types';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette, FluentAppleAliasColorTokens } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
@@ -255,7 +255,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
   };
 }
 
-function getMacOSAliasTokens(): FluentAppleAliasColorTokens {
+function getMacOSAliasTokens(): FluentAppleAliasColorTokens & AliasColorTokens {
   const appearance = Appearance.getColorScheme();
   const mode = getCurrentAppearance(appearance, 'light');
   const macOSAliasColorTokens = createMacOSAliasTokens(mode, getIsHighContrast());
