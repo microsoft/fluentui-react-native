@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Define all alias tokens in the apple theme",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}
