@@ -14,7 +14,6 @@
   "scripts": {
     "build": "lage build",
     "build-tools": "lage build-tools",
-    "build-tokens": "node ./scripts/build-tokens.js",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/clean-all.js",

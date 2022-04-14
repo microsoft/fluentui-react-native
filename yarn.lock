@@ -1301,20 +1301,25 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/design-tokens-android@^0.5.0-test":
-  version "0.5.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.5.0-test.tgz#b8fe71cdfed2c72a32dca10d5228cc53a7661d87"
-  integrity sha512-a3Kel9gdnSJ9l52VJFBEFEKKxHMSpnG/A0W+4qGKxaMHtDBA+gDncojko++nwe9GJy4/vBSBzpdzbh3AtrlbAg==
+"@fluentui-react-native/design-tokens-android@^0.6.0-test":
+  version "0.6.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.6.0-test.tgz#76c004901d92080ec80ef14f1531a6bc70dd21aa"
+  integrity sha512-9PHK8JR7omLpa4z7yDYijV7iFsSVeomekJc9JwL19V/GLc2nMxjWztFXztUOa0pYtpmffW1bYGI/fsdRdHwcmA==
 
-"@fluentui-react-native/design-tokens-macos@^0.5.0-test":
-  version "0.5.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.5.0-test.tgz#e207538ff9005912fa56aab2de3fffe825fc550c"
-  integrity sha512-+p0g6pxLdFcRzEAabhTtwrRIPbHLCodDHw5zhErKfc9wph/0LM8hPyFUPKuW3+5nzdrBtV9DJQB8SevTq2S7pA==
+"@fluentui-react-native/design-tokens-macos@^0.6.0-test":
+  version "0.6.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.6.0-test.tgz#49c840ba63e234aef2a532e8ce79faf81bae167d"
+  integrity sha512-/DFHlRmCCPqyqaBbAFNRGQfzCFBtnnCC/jj2K6TUNPyc9vrl6QKa7DNi77yJNprDGskv2CWvDSmNwqXp7cDS4g==
 
-"@fluentui-react-native/design-tokens-win32@^0.5.0-test":
-  version "0.5.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.5.0-test.tgz#a16b8987c1a57f94ba2c8bb143910e6503f2f825"
-  integrity sha512-JltrBPXcqk7ELeNFHeRjOjeOyCx7MeLqEeJ0Xjbqb8SvyvEQlYcvHR/jrmMijGqpyDKpE3z8bc9Kl9QbKp4p5w==
+"@fluentui-react-native/design-tokens-win32@^0.6.0-test":
+  version "0.6.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.6.0-test.tgz#78c132fafefb8faf3d6338e78dc2c1e0c31b9af2"
+  integrity sha512-BcUQL8dc0d4FIcHtoGgdRWpproIdlBNCqgouYr7KYkQ9MPGS75wa0hLfQbzgw/p4ZizRx+3q0LHztp178D1ZCw==
+
+"@fluentui-react-native/design-tokens-windows@^0.6.0-test":
+  version "0.6.0-test"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.6.0-test.tgz#21e9500a64b28a78cdcee58bacc0af228ffb3bcb"
+  integrity sha512-VQHk1pHX+dhw4DEXS6PGO0L5+XNgIv3D7GtHS0r3I7gv3UfjWC2Gxwzgfin7VfbcB9dc0Chb3+PU1Q8nR+HtpQ==
 
 "@fluentui/token-pipeline@^0.5.1":
   version "0.5.1"
