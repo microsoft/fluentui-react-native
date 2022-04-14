@@ -3,7 +3,7 @@ import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/fra
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from '../BadgeTokens';
 import { defaultPresenceBadgeTokens } from './PresenceBadgeTokens';
-import { coreBadgeStates } from '../Badge.styling';
+import { coreBadgeStates, getBadgePosition } from '../Badge.styling';
 
 export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeTokens> = {
   tokens: [defaultBadgeTokens, presenceBadgeName, defaultPresenceBadgeTokens],
@@ -12,8 +12,7 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
     root: buildProps(
       (tokens: PresenceBadgeTokens, theme: Theme) => ({
         style: {
-          bottom: tokens.bottom,
-          right: tokens.right,
+          ...getBadgePosition(tokens),
           width: tokens.width,
           height: tokens.height,
           display: 'flex',

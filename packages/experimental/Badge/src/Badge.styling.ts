@@ -33,8 +33,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
     root: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({
         style: {
-          bottom: tokens.bottom,
-          right: tokens.right,
+          ...getBadgePosition(tokens),
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
@@ -68,3 +67,31 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
     ),
   },
 };
+
+export function getBadgePosition(tokens: BadgeCoreTokens) {
+  const verticalPosition =
+    tokens.top !== undefined
+      ? {
+          top: tokens.top,
+        }
+      : tokens.bottom !== undefined
+      ? {
+          bottom: tokens.bottom,
+        }
+      : {};
+  const horizontalPosition =
+    tokens.left !== undefined
+      ? {
+          left: tokens.left,
+        }
+      : tokens.right !== undefined
+      ? {
+          right: tokens.right,
+        }
+      : {};
+
+  return {
+    ...verticalPosition,
+    ...horizontalPosition,
+  };
+}
