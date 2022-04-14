@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 14 Apr 2022 20:25:15 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "1aa91e167531258be39ee11d6ec5ea78a55c0b3e",
+            "comment": "Define all alias tokens in the apple theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Apr 2022 22:58:21 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.11.0",
       "version": "0.11.0",
