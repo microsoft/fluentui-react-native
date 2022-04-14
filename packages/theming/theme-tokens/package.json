@@ -33,9 +33,7 @@
   "dependencies": {
     "@fluentui-react-native/design-tokens-android": "^0.7.0-test",
     "@fluentui-react-native/design-tokens-win32": "^0.7.0-test",
-    "@fluentui-react-native/design-tokens-windows": "^0.7.0-test",
-    "@fluentui-react-native/theme-types": ">=0.14.1 <1.0.0",
-    "assert-never": "^1.2.1"
+    "@fluentui-react-native/design-tokens-windows": "^0.7.0-test"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
