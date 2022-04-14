@@ -1,17 +1,10 @@
-import { badgeName, BadgeTokens, BadgeSlotProps, BadgeProps } from './Badge.types';
+import { badgeName, BadgeCoreTokens, BadgeTokens, BadgeSlotProps, BadgeProps } from './Badge.types';
 import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 
-export const badgeStates: (keyof BadgeTokens)[] = [
-  'hovered',
-  'focused',
-  'filled',
-  'outline',
-  'tint',
-  'ghost',
-  'filledInverted',
+export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
   'smallest',
   'smaller',
   'small',
@@ -21,6 +14,16 @@ export const badgeStates: (keyof BadgeTokens)[] = [
   'rounded',
   'circular',
   'square',
+];
+export const badgeStates: (keyof BadgeTokens)[] = [
+  'hovered',
+  'focused',
+  'filled',
+  'outline',
+  'tint',
+  'ghost',
+  'filledInverted',
+  ...coreBadgeStates,
 ];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
