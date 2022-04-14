@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Run Icon test",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

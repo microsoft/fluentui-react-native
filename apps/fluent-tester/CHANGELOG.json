@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 14 Apr 2022 23:16:07 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.16",
+      "version": "0.59.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "1af7abe504e476081e025e8ce71a67dcb38e981a",
+            "comment": "Fix asserting tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Apr 2022 20:25:15 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.15",
       "version": "0.59.15",
