@@ -119,7 +119,7 @@ const BundledSvgTest: React.FunctionComponent = () => {
 };
 
 const RemoteSvgTest: React.FunctionComponent = () => {
-  // Temporarily stop testing this case until it can be either more robust or removed
+  // GH#1596: Temporarily stop testing this case until it can be either more robust or removed
   const shouldShowLocalNetwork = false;
 
   return (
