@@ -1,12 +1,14 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
 import {
   AvatarSize,
+  AvatarSizes,
   AvatarColor,
   JSAvatar,
   AvatarPresence,
   AvatarActive,
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
+import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
 import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -18,21 +20,7 @@ type WithUndefined<T> = T | typeof undefinedText;
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
 const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring', 'shadow', 'glow', 'ring-shadow', 'ring-glow'];
 
-const allSizes: WithUndefined<AvatarSize>[] = [
-  undefinedText,
-  'size20',
-  'size24',
-  'size28',
-  'size32',
-  'size36',
-  'size40',
-  'size48',
-  'size56',
-  'size64',
-  'size72',
-  'size96',
-  'size120',
-];
+const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
 
 const allColors: WithUndefined<AvatarColor>[] = [
   undefinedText,
@@ -58,17 +46,7 @@ const allColors: WithUndefined<AvatarColor>[] = [
   'brown',
 ];
 
-const allPresences: WithUndefined<AvatarPresence>[] = [
-  undefinedText,
-  'doNotDisturb',
-  'busy',
-  'unknown',
-  'blocked',
-  'outOfOffice',
-  'away',
-  'available',
-  'offline',
-];
+const allPresences: WithUndefined<AvatarPresence>[] = [undefinedText, ...PresenceBadgeStatuses];
 
 const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;

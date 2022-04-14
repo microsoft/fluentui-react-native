@@ -5,9 +5,12 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const badgeName = 'Badge';
-export type BadgeSize = 'smallest' | 'smaller' | 'small' | 'medium' | 'large' | 'largest';
-export type BadgeAppearance = 'filled' | 'outline' | 'tint' | 'ghost' | 'filledInverted';
-export type BadgeShape = 'rounded' | 'circular' | 'square';
+export const BadgeSizes = ['smallest', 'smaller', 'small', 'medium', 'large', 'largest'] as const;
+export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost', 'filledInverted'] as const;
+export const BadgeShapes = ['rounded', 'circular', 'square'] as const;
+export type BadgeSize = typeof BadgeSizes[number];
+export type BadgeAppearance = typeof BadgeAppearances[number];
+export type BadgeShape = typeof BadgeShapes[number];
 
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**

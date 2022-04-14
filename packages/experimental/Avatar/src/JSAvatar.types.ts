@@ -4,20 +4,21 @@ import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@
 import { Presence } from '../../Badge';
 
 export const JSAvatarName = 'Avatar';
-
-export type AvatarSize =
-  | 'size20'
-  | 'size24'
-  | 'size28'
-  | 'size32'
-  | 'size36'
-  | 'size40'
-  | 'size48'
-  | 'size56'
-  | 'size64'
-  | 'size72'
-  | 'size96'
-  | 'size120';
+export const AvatarSizes = [
+  'size20',
+  'size24',
+  'size28',
+  'size32',
+  'size36',
+  'size40',
+  'size48',
+  'size56',
+  'size64',
+  'size72',
+  'size96',
+  'size120',
+] as const;
+export type AvatarSize = typeof AvatarSizes[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
