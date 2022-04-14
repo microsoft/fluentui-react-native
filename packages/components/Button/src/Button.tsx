@@ -27,6 +27,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     (!userProps['size'] && layer === getDefaultSize()) ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
+    (layer === 'hovered' && state[layer] && !userProps.loading) ||
     (layer === 'hasContent' && !userProps.iconOnly) ||
     (layer === 'hasIconAfter' && (userProps.icon || userProps.loading) && userProps.iconPosition === 'after') ||
     (layer === 'hasIconBefore' && (userProps.icon || userProps.loading) && (!userProps.iconPosition || userProps.iconPosition === 'before'))
