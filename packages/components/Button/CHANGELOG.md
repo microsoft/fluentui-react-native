@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Wed, 06 Apr 2022 22:58:22 GMT and should not be manually modified.
+This log was last generated on Wed, 13 Apr 2022 23:44:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.15
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- add disabled prop to useAsPressable hook (krsiler@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+- Bump @fluentui-react-native/pressable to v0.8.32
+
+## 0.22.14
+
+Wed, 13 Apr 2022 15:51:04 GMT
+
+### Patches
+
+- Add more details on spec/migration (ruaraki@microsoft.com)
 
 ## 0.22.13
 

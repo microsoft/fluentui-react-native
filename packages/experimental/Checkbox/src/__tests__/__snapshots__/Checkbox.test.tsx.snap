@@ -15,6 +15,7 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     Object {
       "checked": true,
       "disabled": true,
+      "required": true,
     }
   }
   accessible={true}
@@ -161,6 +162,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
     Object {
       "checked": false,
       "disabled": false,
+      "required": false,
     }
   }
   accessible={true}
@@ -292,6 +294,7 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
     Object {
       "checked": undefined,
       "disabled": false,
+      "required": false,
     }
   }
   accessible={true}
@@ -417,6 +420,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
     Object {
       "checked": false,
       "disabled": false,
+      "required": false,
     }
   }
   accessible={true}
@@ -544,6 +548,7 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
     Object {
       "checked": false,
       "disabled": false,
+      "required": false,
     }
   }
   accessible={true}

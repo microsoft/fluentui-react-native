@@ -1,8 +1,98 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 08 Apr 2022 18:53:12 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Apr 2022 23:16:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.16
+
+Thu, 14 Apr 2022 23:16:07 GMT
+
+### Patches
+
+- Fix asserting tests (ruaraki@microsoft.com)
+
+## 0.59.15
+
+Thu, 14 Apr 2022 20:25:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.11.1
+
+## 0.59.14
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.24
+- Bump @fluentui-react-native/button to v0.22.15
+- Bump @fluentui-react-native/experimental-button to v0.15.15
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.13
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.30
+- Bump @fluentui-react-native/experimental-tabs to v0.4.38
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+- Bump @fluentui/react-native to v0.28.10
+
+## 0.59.13
+
+Wed, 13 Apr 2022 15:51:04 GMT
+
+### Patches
+
+- Add more checkbox tests (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.22.14
+- Bump @fluentui-react-native/experimental-button to v0.15.14
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.12
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.29
+- Bump @fluentui/react-native to v0.28.9
+
+## 0.59.12
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Scroll scrollView when Focus moves out of viewport (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.28
+- Bump @fluentui-react-native/experimental-tabs to v0.4.37
+- Bump @fluentui/react-native to v0.28.8
+
+## 0.59.11
+
+Tue, 12 Apr 2022 19:32:57 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.28.7
+
+## 0.59.10
+
+Tue, 12 Apr 2022 00:35:08 GMT
+
+### Patches
+
+- Add support for nested focus zones (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.27
+- Bump @fluentui-react-native/experimental-tabs to v0.4.36
+- Bump @fluentui/react-native to v0.28.6
+
+## 0.59.9
+
+Mon, 11 Apr 2022 19:26:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-drawer to v0.1.4
+
+## 0.59.8
+
+Mon, 11 Apr 2022 17:07:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.10.11
 
 ## 0.59.7
 

@@ -10,6 +10,7 @@ exports[`ContextualMenu default 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityTap={[Function]}

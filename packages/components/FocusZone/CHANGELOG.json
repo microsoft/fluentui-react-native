@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Wed, 13 Apr 2022 23:44:28 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.9.19",
+      "version": "0.9.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.0",
+            "commit": "129f628a9676a93f10466cea6efdfff1243e86f0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Apr 2022 21:53:04 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.9.18",
+      "version": "0.9.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa",
+            "comment": "Scroll scrollView when Focus moves out of viewport"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Apr 2022 00:35:08 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.9.17",
+      "version": "0.9.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "832066543f281fdec866f738d36f7f73f6bbb4f7",
+            "comment": "Add support for nested focus zones"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 Apr 2022 18:53:11 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.9.16",
       "version": "0.9.16",

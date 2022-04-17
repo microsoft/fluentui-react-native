@@ -1,8 +1,81 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Fri, 08 Apr 2022 18:53:12 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Apr 2022 23:16:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.16
+
+Thu, 14 Apr 2022 23:16:07 GMT
+
+### Patches
+
+- Run Icon test (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.59.16
+
+## 0.20.15
+
+Thu, 14 Apr 2022 20:25:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.15
+
+## 0.20.14
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.14
+
+## 0.20.13
+
+Wed, 13 Apr 2022 15:51:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.13
+
+## 0.20.12
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.12
+
+## 0.20.11
+
+Tue, 12 Apr 2022 19:32:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.11
+
+## 0.20.10
+
+Tue, 12 Apr 2022 00:35:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.10
+
+## 0.20.9
+
+Mon, 11 Apr 2022 19:26:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.9
+
+## 0.20.8
+
+Mon, 11 Apr 2022 17:07:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.8
 
 ## 0.20.7
 

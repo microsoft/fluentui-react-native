@@ -21,16 +21,16 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          yarn buildci
-        displayName: 'yarn buildci'
+          yarn checkchange
+        displayName: 'check change'
 
       - script: |
           yarn prettier
         displayName: 'check prettier'
 
       - script: |
-          yarn checkchange
-        displayName: 'check change'
+          yarn buildci
+        displayName: 'yarn buildci'
 
       - script: |
           yarn check-for-changed-files
