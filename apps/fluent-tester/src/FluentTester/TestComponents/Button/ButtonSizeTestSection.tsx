@@ -1,4 +1,4 @@
-import { ButtonV1 as Button, CompoundButton } from '@fluentui-react-native/button';
+import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -21,6 +21,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
             icon={{ svgSource: svgProps }}
             accessibilityLabel="Small size button with accessibility icon"
             style={commonTestStyles.vmargin}
+            tooltip="button tooltip"
           />
           <Button
             iconOnly

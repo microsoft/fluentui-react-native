@@ -10,6 +10,7 @@ exports[`Button component tests Button circular 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -71,6 +72,7 @@ exports[`Button component tests Button composed 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -130,6 +132,7 @@ exports[`Button component tests Button customized 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -190,6 +193,7 @@ exports[`Button component tests Button default 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -250,6 +254,7 @@ exports[`Button component tests Button large 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -312,6 +317,7 @@ exports[`Button component tests Button primary 1`] = `
   }
   accessible={true}
   appearance="primary"
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -372,6 +378,7 @@ exports[`Button component tests Button small 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -433,6 +440,7 @@ exports[`Button component tests Button square 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
@@ -495,6 +503,7 @@ exports[`Button component tests Button subtle 1`] = `
   }
   accessible={true}
   appearance="subtle"
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}

@@ -14,4 +14,12 @@ module.exports = {
     'no-undef': 'off',
     'react/display-name': 'off',
   },
+  overrides: [
+    {
+      files: '**/src/index.{js,ts,tsx}',
+      rules: {
+        '@rnx-kit/no-export-all': ['error', { expand: 'all' }],
+      },
+    },
+  ],
 };

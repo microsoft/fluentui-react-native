@@ -6,7 +6,7 @@ import { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemSt
 import { IconProps } from '@fluentui-react-native/icon';
 import { XmlProps } from 'react-native-svg';
 
-export const submenuItemName = 'submenuItem';
+export const submenuItemName = 'SubmenuItem';
 export interface SubmenuItemTokens extends ContextualMenuItemTokens {
   chevronColor?: string;
 }

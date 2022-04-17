@@ -7,8 +7,9 @@ import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 export const checkboxStates: (keyof CheckboxTokens)[] = [
   'medium',
   'large',
-  'labelIsBefore',
   'circular',
+  'label',
+  'labelIsBefore',
   'hovered',
   'focused',
   'pressed',

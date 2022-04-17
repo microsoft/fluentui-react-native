@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
-import { PrimaryButton, Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -22,7 +22,7 @@ import {
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
+    const { menuItems, content, startIcon, endIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -44,18 +44,23 @@ export const MenuButton = compose<MenuButtonType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
-      content,
       disabled,
-      startIcon,
+      content,
+      icon: startIcon != undefined ? startIcon : endIcon,
+      iconPosition: startIcon != undefined ? 'before' : 'after',
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
+      iconOnly: content == undefined ? true : false,
       ...rest,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
       root: {},
       button: buttonProps,
-      primaryButton: buttonProps,
+      primaryButton: {
+        appearance: 'primary',
+        ...buttonProps,
+      },
       contextualMenu: {
         onItemClick,
         target: stdBtnRef,
@@ -73,7 +78,7 @@ export const MenuButton = compose<MenuButtonType>({
   slots: {
     root: React.Fragment,
     button: { slotType: Button as React.ComponentType },
-    primaryButton: { slotType: PrimaryButton as React.ComponentType },
+    primaryButton: { slotType: Button as React.ComponentType },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
     chevronSvg: SvgXml,
@@ -99,10 +104,12 @@ export const MenuButton = compose<MenuButtonType>({
       <Slots.root>
         {context.primary ? (
           <Slots.primaryButton>
+            {renderData.slotProps.primaryButton.content}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.primaryButton>
         ) : (
           <Slots.button>
+            {renderData.slotProps.button.content}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.button>
         )}

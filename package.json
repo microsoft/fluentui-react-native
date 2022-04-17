@@ -38,7 +38,7 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@fluentui/token-pipeline": "^0.3.11",
+    "@fluentui/token-pipeline": "^0.5.1",
     "@rnx-kit/dep-check": "^1.10.1",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -53,5 +53,12 @@
       "packages/**",
       "scripts"
     ]
+  },
+  "resolutions": {
+    "@appium/support": "^2.57.0",
+    "@react-native-community/cli": "^8.0.0",
+    "@react-native-community/cli-platform-ios": "^8.0.0",
+    "es5-ext": "0.10.53",
+    "simple-plist": "2.0.0-rc.0"
   }
 }

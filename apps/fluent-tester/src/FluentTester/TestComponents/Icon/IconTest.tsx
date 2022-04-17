@@ -53,6 +53,7 @@ const Icons: React.FunctionComponent = () => {
   const showFontIcons = true;
   const showSvgIcons = true;
   const showRasterIcons = true;
+  const shouldShowDataUri = Platform.OS !== 'android' && Platform.OS !== ('win32' as any);
 
   return (
     <View>
@@ -63,7 +64,7 @@ const Icons: React.FunctionComponent = () => {
             // We've seen some issues getting Font Awesome to link properly on Apple platforms in the FURN test app specifically.
             // This shouldn't be an issue in other apps, though, so keeping this icon Windows-only for now is an easy workaround.
             // When Android support comes, the platform check can be adjusted accordingly.
-            Platform.OS == 'windows' ? <Icon fontSource={fontCustomFontProps} width={100} height={100} color="purple" /> : null
+            Platform.OS === 'windows' ? <Icon fontSource={fontCustomFontProps} width={100} height={100} color="purple" /> : null
           }
           <Icon fontSource={fontBuiltInProps} width={100} height={100} color="#060" />
         </View>
@@ -74,7 +75,7 @@ const Icons: React.FunctionComponent = () => {
           <Icon svgSource={svgProps} width={100} height={100} color="orange" />
           {
             // TODO: Causes TypeError: Network request failed on Android
-            Platform.OS == 'android' ? null : <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" />
+            shouldShowDataUri ? <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" /> : null
           }
           <Icon svgSource={svgUriProps} width={100} height={100} color="red" />
         </View>

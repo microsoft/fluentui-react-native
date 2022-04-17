@@ -86,7 +86,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
       accessible: accessible ?? true,
       accessibilityRole: accessibilityRole ?? 'checkbox',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: getAccessibilityState(state.disabled, state.checked, accessibilityState),
+      accessibilityState: getAccessibilityState(state.disabled, state.checked, !!props.required, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
       focusable: !state.disabled,
       onAccessibilityAction: onAccessibilityActionProp,
@@ -102,9 +102,9 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
 };
 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(disabled: boolean, checked: boolean, accessibilityState?: AccessibilityState) {
+function getAccessibilityStateWorker(disabled: boolean, checked: boolean, required: boolean, accessibilityState?: AccessibilityState) {
   if (accessibilityState) {
-    return { disabled: disabled, checked: checked, ...accessibilityState };
+    return { disabled, checked, required, ...accessibilityState };
   }
-  return { disabled: disabled, checked: checked };
+  return { disabled, checked, required };
 }

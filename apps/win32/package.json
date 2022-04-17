@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.19.6",
+  "version": "0.20.16",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -31,10 +31,10 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.58.6",
-    "react": "17.0.2",
-    "react-native": "^0.66.0-0",
-    "react-native-svg": "^12.1.1",
+    "@fluentui-react-native/tester": "^0.59.16",
+    "react": "17.0.1",
+    "react-native": "^0.64.2",
+    "react-native-svg": "^12.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -49,7 +49,8 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@wdio/allure-reporter": "5.22.4",
     "allure-commandline": "2.13.0",
-    "appium": "1.20.0",
+    "appium": "^2.0.0-beta.27",
+    "appium-windows-driver": "^2.0.1",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^1.0.0",

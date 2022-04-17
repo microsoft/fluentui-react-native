@@ -1,8 +1,7 @@
 import { PlatformColor } from 'react-native';
-import aliasTokens from '../generated/highContrast/reactnative/tokens-aliases.json';
+import aliasTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-aliases.json';
 
-const generatedAliasTokens = processAliasTokens(aliasTokens);
-export default generatedAliasTokens;
+export const hcAliasTokens = processAliasTokens(aliasTokens);
 
 function processAliasTokens(aliasTokens: any) {
   for (const key in aliasTokens) {

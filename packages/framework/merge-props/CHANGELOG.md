@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/merge-props
 
-This log was last generated on Mon, 20 Dec 2021 22:56:01 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.3
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.7
 
 ## 0.4.2
 
