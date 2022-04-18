@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Disable hovered visuals on loading buttons",
+  "packageName": "@fluentui-react-native/button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
