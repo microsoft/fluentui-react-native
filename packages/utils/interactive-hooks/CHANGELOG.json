@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Mon, 18 Apr 2022 17:51:06 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.15.1",
+      "version": "0.15.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "924f19a6cda14eabbadcf4ece5e9f7e92e5c6986",
+            "comment": "Disable hovered visuals on loading buttons"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Apr 2022 23:44:28 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.15.0",
       "version": "0.15.0",
