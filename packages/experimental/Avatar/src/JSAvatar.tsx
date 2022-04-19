@@ -4,7 +4,7 @@ import { JSAvatarProps, JSAvatarType, JSAvatarName, JSAvatarState } from './JSAv
 import { stylingSettings } from './JSAvatar.styling';
 import { compose, UseSlots, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useAvatar } from './useAvatar';
-import { PresenceBadge } from '../../Badge';
+import { PresenceBadge } from '@fluentui-react-native/badge';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the avatar.
