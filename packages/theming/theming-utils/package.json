@@ -26,8 +26,6 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme-tokens": ">=0.15.0 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.14.1 <1.0.0"
   },
   "devDependencies": {
