@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Move alias tokens to default theme",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

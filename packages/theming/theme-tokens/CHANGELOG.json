@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1",
+            "comment": "Move alias tokens to default theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Apr 2022 22:58:21 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.15.0",
       "version": "0.15.0",
