@@ -125,7 +125,7 @@ export interface BadgeProps extends BadgeCoreProps {
   icon?: IconSourcesType;
 
   /**
-   * Icon can be placed before or after Button's content.
+   * Icon can be placed before or after Badge's content.
    * @default before
    */
   iconPosition?: 'before' | 'after';

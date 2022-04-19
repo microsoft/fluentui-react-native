@@ -1,7 +1,7 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { Presence } from '../../Badge';
+import { Presence } from '@fluentui-react-native/badge';
 
 export const JSAvatarName = 'Avatar';
 export const AvatarSizes = [

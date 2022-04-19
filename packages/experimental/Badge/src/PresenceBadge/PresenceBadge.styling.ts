@@ -26,7 +26,7 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', 'height', 'bottom', 'right', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
   },
 };
