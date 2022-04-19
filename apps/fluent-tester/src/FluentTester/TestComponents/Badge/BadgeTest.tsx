@@ -57,10 +57,10 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Badge icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }} />
           <Text>Badge with icon and text</Text>
           <Badge appearance="outline" icon={iconProps} />
+          <Text>Customized Badge</Text>
+          <BadgeNoBorder appearance="outline" icon={iconProps} />
         </>
       )}
-      <Text>Customized Badge</Text>
-      <BadgeNoBorder appearance="outline" icon={iconProps} />
       <StyledBadge appearance="outline" text="styled badge" />
       <Text>Compressible badge</Text>
       <CompressibleBadge />
