@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Apr 2022 10:53:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.27
+
+Wed, 20 Apr 2022 10:53:38 GMT
+
+### Patches
+
+- Replaced presence prop from PersonaCoin with the new PresenceBadge (v.kozova13@gmail.com)
 
 ## 0.0.26
 

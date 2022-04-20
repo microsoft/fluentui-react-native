@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Apr 2022 10:53:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.14
+
+Wed, 20 Apr 2022 10:53:38 GMT
+
+### Patches
+
+- Replaced presence prop from PersonaCoin with the new PresenceBadge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.27
 
 ## 0.14.13
 
