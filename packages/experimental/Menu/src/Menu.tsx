@@ -1,15 +1,14 @@
 /** @jsx withSlots */
-import { menuName, MenuType } from './Menu.types';
-import { compose } from '@fluentui-react-native/framework';
+import { menuName, MenuProps, MenuTokens } from './Menu.types';
+import { compressible, buildUseTokens, UseTokens } from '@fluentui-react-native/framework';
 
-export const Menu = compose<MenuType>({
-  displayName: menuName,
-  slots: {},
-  useRender: () => {
-    return () => {
-      return null;
-    };
-  },
-});
+const useMenuTokens = buildUseTokens<MenuTokens>(() => ({}), menuName);
+
+export const Menu = compressible<MenuProps, MenuTokens>((_props: MenuProps, _useTokens: UseTokens<MenuTokens>) => {
+  return () => {
+    return null;
+  };
+}, useMenuTokens);
+Menu.displayName = menuName;
 
 export default Menu;
