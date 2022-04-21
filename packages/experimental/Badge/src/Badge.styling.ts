@@ -1,17 +1,10 @@
-import { badgeName, BadgeTokens, BadgeSlotProps, BadgeProps } from './Badge.types';
+import { badgeName, BadgeCoreTokens, BadgeTokens, BadgeSlotProps, BadgeProps } from './Badge.types';
 import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 
-export const badgeStates: (keyof BadgeTokens)[] = [
-  'hovered',
-  'focused',
-  'filled',
-  'outline',
-  'tint',
-  'ghost',
-  'filledInverted',
+export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
   'smallest',
   'smaller',
   'small',
@@ -22,6 +15,16 @@ export const badgeStates: (keyof BadgeTokens)[] = [
   'circular',
   'square',
 ];
+export const badgeStates: (keyof BadgeTokens)[] = [
+  'hovered',
+  'focused',
+  'filled',
+  'outline',
+  'tint',
+  'ghost',
+  'filledInverted',
+  ...coreBadgeStates,
+];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeName],
@@ -30,18 +33,20 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
     root: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({
         style: {
+          ...getBadgePosition(tokens),
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
           height: tokens.height,
+          width: tokens.width,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'height', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     icon: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({
@@ -62,3 +67,31 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
     ),
   },
 };
+
+export function getBadgePosition(tokens: BadgeCoreTokens) {
+  const verticalPosition =
+    tokens.top !== undefined
+      ? {
+          top: tokens.top,
+        }
+      : tokens.bottom !== undefined
+      ? {
+          bottom: tokens.bottom,
+        }
+      : {};
+  const horizontalPosition =
+    tokens.left !== undefined
+      ? {
+          left: tokens.left,
+        }
+      : tokens.right !== undefined
+      ? {
+          right: tokens.right,
+        }
+      : {};
+
+  return {
+    ...verticalPosition,
+    ...horizontalPosition,
+  };
+}

@@ -2,6 +2,54 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.32",
+      "version": "0.3.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.23",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.17",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.22",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 18 Apr 2022 17:51:06 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.31",
+      "version": "0.3.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.22",
+            "commit": "924f19a6cda14eabbadcf4ece5e9f7e92e5c6986"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.16",
+            "commit": "924f19a6cda14eabbadcf4ece5e9f7e92e5c6986"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 13 Apr 2022 23:44:28 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.3.30",
       "version": "0.3.30",

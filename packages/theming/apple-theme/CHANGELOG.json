@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1",
+            "comment": "Fix dependencies"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.10.0",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.10.0",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Apr 2022 20:25:15 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "1aa91e167531258be39ee11d6ec5ea78a55c0b3e",
+            "comment": "Define all alias tokens in the apple theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 06 Apr 2022 22:58:21 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.11.0",
       "version": "0.11.0",

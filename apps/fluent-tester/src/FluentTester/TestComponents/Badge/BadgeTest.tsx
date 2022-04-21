@@ -57,10 +57,10 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Badge icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }} />
           <Text>Badge with icon and text</Text>
           <Badge appearance="outline" icon={iconProps} />
+          <Text>Customized Badge</Text>
+          <BadgeNoBorder appearance="outline" icon={iconProps} />
         </>
       )}
-      <Text>Customized Badge</Text>
-      <BadgeNoBorder appearance="outline" icon={iconProps} />
       <StyledBadge appearance="outline" text="styled badge" />
       <Text>Compressible badge</Text>
       <CompressibleBadge />
@@ -70,7 +70,7 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Text>Presence Badge</Text>
           <PresenceBadge presence="available" size="largest" />
           <PresenceBadge presence="available" isOutOfOffice={true} size="large" />
-          <PresenceBadge presence="doNotDisturb" text="doNotDisturb" isOutOfOffice={true} />
+          <PresenceBadge presence="doNotDisturb" isOutOfOffice={true} />
           <PresenceBadge presence="away" size="small" />
           <PresenceBadge presence="busy" size="smallest" />
           <PresenceBadge presence="offline" />

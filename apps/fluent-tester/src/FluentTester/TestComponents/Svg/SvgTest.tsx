@@ -17,6 +17,7 @@ const RectTest: React.FunctionComponent = () => {
   const [useColorA, setUseColorA] = React.useState(false);
   const colorA = 'red';
   const colorB = 'green';
+
   return (
     <React.Fragment>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -118,6 +119,9 @@ const BundledSvgTest: React.FunctionComponent = () => {
 };
 
 const RemoteSvgTest: React.FunctionComponent = () => {
+  // GH#1596: Temporarily stop testing this case until it can be either more robust or removed
+  const shouldShowLocalNetwork = false;
+
   return (
     <View>
       <SvgCssUri
@@ -127,15 +131,17 @@ const RemoteSvgTest: React.FunctionComponent = () => {
         height="100"
         uri="https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg"
       />
-      <SvgCssUri
-        x="50"
-        y="50"
-        viewBox="0 0 500 500"
-        style={styles.svg}
-        width="100"
-        height="100"
-        uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
-      />
+      {shouldShowLocalNetwork && (
+        <SvgCssUri
+          x="50"
+          y="50"
+          viewBox="0 0 500 500"
+          style={styles.svg}
+          width="100"
+          height="100"
+          uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
+        />
+      )}
     </View>
   );
 };
