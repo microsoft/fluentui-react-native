@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe",
+            "comment": "Bump design tokens packages"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.10.1",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Apr 2022 16:54:55 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.11.2",
       "version": "0.11.2",

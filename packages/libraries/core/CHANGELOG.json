@@ -2,6 +2,111 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui/react-native_v0.28.13",
+      "version": "0.28.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.22.18",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.19.43",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.14.37",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.24",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.8.35",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.9.22",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.3",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.15.36",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.7.55",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona to v0.12.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.10.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.35",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.14.42",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/separator to v0.11.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.6.41",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/text to v0.11.19",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Apr 2022 16:54:55 GMT",
       "tag": "@fluentui/react-native_v0.28.12",
       "version": "0.28.12",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bump design tokens packages",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
