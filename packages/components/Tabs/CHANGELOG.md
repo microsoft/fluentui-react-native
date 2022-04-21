@@ -1,8 +1,78 @@
 # Change Log - @fluentui-react-native/tabs
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.40
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.21
+- Bump @fluentui-react-native/icon to v0.11.17
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+- Bump @fluentui-react-native/pressable to v0.8.34
+- Bump @fluentui-react-native/text to v0.11.18
+- Bump @uifabricshared/foundation-compose to v1.11.16
+
+## 0.6.39
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+- Bump @fluentui-react-native/pressable to v0.8.33
+
+## 0.6.38
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.19
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+- Bump @fluentui-react-native/pressable to v0.8.32
+
+## 0.6.37
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.18
+
+## 0.6.36
+
+Tue, 12 Apr 2022 00:35:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.17
+
+## 0.6.35
+
+Fri, 08 Apr 2022 18:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.16
+
+## 0.6.34
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.15
+- Bump @fluentui-react-native/icon to v0.11.16
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
+- Bump @fluentui-react-native/pressable to v0.8.31
+- Bump @fluentui-react-native/text to v0.11.17
+- Bump @uifabricshared/foundation-compose to v1.11.15
 
 ## 0.6.33
 

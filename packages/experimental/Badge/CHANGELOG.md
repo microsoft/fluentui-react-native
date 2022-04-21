@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Apr 2022 10:53:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.27
+
+Wed, 20 Apr 2022 10:53:38 GMT
+
+### Patches
+
+- Replaced presence prop from PersonaCoin with the new PresenceBadge (v.kozova13@gmail.com)
+
+## 0.0.26
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.22
+- Bump @fluentui-react-native/framework to v0.7.22
+- Bump @fluentui-react-native/icon to v0.11.17
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+- Bump @fluentui-react-native/theme-tokens to v0.16.0
+
+## 0.0.25
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+
+## 0.0.24
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+
+## 0.0.23
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.21
+- Bump @fluentui-react-native/framework to v0.7.21
+- Bump @fluentui-react-native/icon to v0.11.16
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
+- Bump @fluentui-react-native/theme-tokens to v0.15.0
 
 ## 0.0.22
 

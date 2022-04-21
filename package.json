@@ -14,7 +14,6 @@
   "scripts": {
     "build": "lage build",
     "build-tools": "lage build-tools",
-    "build-tokens": "node ./scripts/build-tokens.js",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/clean-all.js",
@@ -38,7 +37,6 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@fluentui/token-pipeline": "^0.5.1",
     "@rnx-kit/dep-check": "^1.10.1",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
@@ -56,6 +54,7 @@
     ]
   },
   "resolutions": {
+    "@appium/support": "^2.57.0",
     "@office-iss/react-native-win32": "^0.64.8",
     "@react-native-community/cli": "^5.0.1",
     "@react-native-community/cli-platform-ios": "^5.0.2",
@@ -78,7 +77,6 @@
     "metro-symbolicate": "^0.66.2",
     "metro-transform-plugins": "^0.66.2",
     "metro-transform-worker": "^0.66.2",
-    "plist": "^3.0.5",
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-windows": "^0.64.3",

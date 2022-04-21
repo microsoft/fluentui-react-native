@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.2
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.17
+
+## 0.15.1
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Disable hovered visuals on loading buttons (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Minor changes
+
+- Prevent onHoverIn when disabled (krsiler@microsoft.com)
+
+## 0.14.8
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.16
 
 ## 0.14.7
 

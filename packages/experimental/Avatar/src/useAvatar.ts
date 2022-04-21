@@ -1,6 +1,4 @@
 import { JSAvatarProps, AvatarInfo, JSAvatarState } from './JSAvatar.types';
-import { getPresenceIconSource } from './JSAvatar.helpers';
-
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -9,7 +7,7 @@ import { getPresenceIconSource } from './JSAvatar.helpers';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ring, shape, active, activeAppearance, ...rest } = props;
+  const { imageUrl, imageDescription, initials, isOutOfOffice, presence, ring, shape, active, activeAppearance, ...rest } = props;
 
   const personaPhotoSource =
     imageUrl === undefined
@@ -18,12 +16,10 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
           uri: imageUrl,
         };
 
-  const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
 
   const state: JSAvatarState = {
-    iconSource,
     personaPhotoSource,
     showRing,
     transparentRing,
@@ -31,6 +27,8 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
 
   return {
     props: {
+      isOutOfOffice: isOutOfOffice || false,
+      presence: presence || 'available',
       children: initials,
       accessibilityLabel: imageDescription,
       shape: shape || 'circular',

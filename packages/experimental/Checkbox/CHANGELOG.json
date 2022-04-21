@@ -2,6 +2,156 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.15",
+      "version": "0.10.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.22",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.22",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.2",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.34",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.16.0",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 18 Apr 2022 17:51:06 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.14",
+      "version": "0.10.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.1",
+            "commit": "924f19a6cda14eabbadcf4ece5e9f7e92e5c6986"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.33",
+            "commit": "924f19a6cda14eabbadcf4ece5e9f7e92e5c6986"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Apr 2022 23:44:28 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.13",
+      "version": "0.10.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.0",
+            "commit": "129f628a9676a93f10466cea6efdfff1243e86f0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.32",
+            "commit": "129f628a9676a93f10466cea6efdfff1243e86f0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Apr 2022 15:51:04 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.12",
+      "version": "0.10.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "9056781c0c1db98bafae7d8f24da19400a2c1903",
+            "comment": "Add more details on spec/migration"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 Apr 2022 17:07:32 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.11",
+      "version": "0.10.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "86ef89eb22764957ea925d78a417d21e5029b94f",
+            "comment": "Implement required"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Apr 2022 22:58:22 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.10.10",
+      "version": "0.10.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.21",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.21",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.14.8",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.31",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.15.0",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Apr 2022 20:05:50 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.10.9",
       "version": "0.10.9",

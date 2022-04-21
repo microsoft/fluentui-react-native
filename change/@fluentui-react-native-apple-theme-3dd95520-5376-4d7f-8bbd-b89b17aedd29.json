@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Hook up design tokens",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

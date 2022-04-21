@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Minor changes
+
+- Move alias tokens to default theme (ruaraki@microsoft.com)
+
+## 0.9.4
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.15.0
 
 ## 0.9.3
 

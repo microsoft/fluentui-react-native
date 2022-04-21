@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.21
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+
+## 0.9.20
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+
+## 0.9.19
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+
+## 0.9.18
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Scroll scrollView when Focus moves out of viewport (sanajmi@microsoft.com)
+
+## 0.9.17
+
+Tue, 12 Apr 2022 00:35:08 GMT
+
+### Patches
+
+- Add support for nested focus zones (sanajmi@microsoft.com)
+
+## 0.9.16
+
+Fri, 08 Apr 2022 18:53:11 GMT
+
+### Patches
+
+- Handle FocusZone edge cases (amchiu@microsoft.com)
+
+## 0.9.15
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
 
 ## 0.9.14
 

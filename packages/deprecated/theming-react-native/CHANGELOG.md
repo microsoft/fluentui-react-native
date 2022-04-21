@@ -1,8 +1,26 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.19
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.0
+- Bump @fluentui-react-native/win32-theme to v0.16.1
+
+## 0.13.18
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.15
+- Bump @fluentui-react-native/win32-theme to v0.16.0
 
 ## 0.13.17
 

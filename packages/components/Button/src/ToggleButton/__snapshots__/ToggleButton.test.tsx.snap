@@ -18,6 +18,7 @@ exports[`ToggleButton default 1`] = `
     }
   }
   accessible={true}
+  disabled={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityAction={[Function]}

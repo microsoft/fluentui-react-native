@@ -1,8 +1,93 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Tue, 05 Apr 2022 20:05:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.54
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.17
+- Bump @fluentui-react-native/contextual-menu to v0.16.23
+- Bump @fluentui-react-native/icon to v0.11.17
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+- Bump @uifabricshared/foundation-compose to v1.11.16
+
+## 0.7.53
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.16
+- Bump @fluentui-react-native/contextual-menu to v0.16.22
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+
+## 0.7.52
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- update menubutton snapshots (krsiler@microsoft.com)
+- Bump @fluentui-react-native/button to v0.22.15
+- Bump @fluentui-react-native/contextual-menu to v0.16.21
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+
+## 0.7.51
+
+Wed, 13 Apr 2022 15:51:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.14
+
+## 0.7.50
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.20
+
+## 0.7.49
+
+Tue, 12 Apr 2022 00:35:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.19
+
+## 0.7.48
+
+Fri, 08 Apr 2022 18:53:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.18
+
+## 0.7.47
+
+Fri, 08 Apr 2022 17:13:26 GMT
+
+### Patches
+
+- Update MenuButton to use new V1 Button (email not defined)
+
+## 0.7.46
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.13
+- Bump @fluentui-react-native/contextual-menu to v0.16.17
+- Bump @fluentui-react-native/icon to v0.11.16
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
+- Bump @uifabricshared/foundation-compose to v1.11.15
 
 ## 0.7.45
 

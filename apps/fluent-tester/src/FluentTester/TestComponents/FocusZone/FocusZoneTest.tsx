@@ -15,8 +15,66 @@ const ListOfCheckboxes: React.FunctionComponent = () => {
       <Checkbox label="Option A" />
       <Checkbox label="Option B" />
       <Checkbox label="Option C" />
-      <Checkbox label="Option D" />
     </React.Fragment>
+  );
+};
+
+const ListOfDisabledCheckboxes: React.FunctionComponent = () => {
+  return (
+    <React.Fragment>
+      <Checkbox label="Option A" disabled={true} />
+      <Checkbox label="Option B" disabled={true} />
+      <Checkbox label="Option C" disabled={true} />
+    </React.Fragment>
+  );
+};
+
+const EdgeCasesFocusZone: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyleFocusZone}>
+      <FocusZone>
+        <SubheaderText>FocusZone with no focusable elements</SubheaderText>
+        <ListOfDisabledCheckboxes />
+      </FocusZone>
+      <FocusZone>
+        <SubheaderText>FocusZone with no props set</SubheaderText>
+        <ListOfCheckboxes />
+      </FocusZone>
+      <FocusZone>
+        <SubheaderText>FocusZone with no elements</SubheaderText>
+      </FocusZone>
+      <SubheaderText>Nested FocusZones</SubheaderText>
+      <Button>Outside Focus Zone</Button>
+      <Text>Parent FocusZone, vertical</Text>
+      <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+        <FocusZone focusZoneDirection="vertical">
+          <Text>Inner FocusZone 1, horizontal</Text>
+          <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+            <FocusZone focusZoneDirection="horizontal">
+              <View style={focusZoneTestStyles.focusZoneContainer}>
+                {GridOfButtons({
+                  gridWidth: 3,
+                  gridHeight: 1,
+                })}
+              </View>
+            </FocusZone>
+          </View>
+          <Text>Inner FocusZone 2, horizontal</Text>
+          <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+            <FocusZone focusZoneDirection="horizontal">
+              <View style={focusZoneTestStyles.focusZoneContainer}>
+                {GridOfButtons({
+                  gridWidth: 3,
+                  gridHeight: 1,
+                })}
+              </View>
+            </FocusZone>
+          </View>
+          <Button>Inside Focus Zone</Button>
+        </FocusZone>
+      </View>
+      <Button>Outside Focus Zone</Button>
+    </Stack>
   );
 };
 
@@ -219,6 +277,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'Customizable FocusZone',
     component: CustomizableFocusZone,
+  },
+  {
+    name: 'FocusZone Edge Cases',
+    component: EdgeCasesFocusZone,
   },
 ];
 

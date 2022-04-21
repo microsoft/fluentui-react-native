@@ -130,6 +130,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   * Also sets accessibility state to have screen reader announce required state.
    */
   required?: boolean | string;
 
@@ -141,7 +142,8 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    */
   shape?: CheckboxShape;
 
-  /** Sets style of checkbox to a preset size style.
+  /**
+   * Sets style of checkbox to a preset size style.
    * @default 'medium'
    */
   size?: CheckboxSize;
