@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add empty Menu and Popover packages",
-  "packageName": "@fluentui-react-native/popover",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
