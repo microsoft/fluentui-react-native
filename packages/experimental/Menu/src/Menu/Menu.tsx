@@ -13,25 +13,14 @@ export const Menu = stagedComponent((props: MenuProps) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
 
     if (__DEV__) {
-      if (childrenArray.length === 0) {
+      if (childrenArray.length === 2) {
         // eslint-disable-next-line no-console
-        console.warn('Menu must contain at least one child');
-      }
-
-      if (childrenArray.length > 2) {
-        // eslint-disable-next-line no-console
-        console.warn('Menu must contain at most two children');
+        console.warn('Menu must contain two children');
       }
     }
 
-    let menuTrigger = undefined;
-    let menuPopover = undefined;
-    if (childrenArray.length === 2) {
-      menuTrigger = childrenArray[0];
-      menuPopover = childrenArray[1];
-    } else if (childrenArray.length === 1) {
-      menuPopover = childrenArray[0];
-    }
+    const menuTrigger = childrenArray[0];
+    const menuPopover = childrenArray[1];
 
     return (
       <MenuProvider value={contextValue}>
