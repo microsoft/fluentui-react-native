@@ -1,7 +1,9 @@
-/** @jsx withSlots */
+import React from 'react';
 import { menuName, MenuProps } from './Menu.types';
 import { stagedComponent } from '@fluentui-react-native/framework';
-import React from 'react';
+import { useMenu } from './useMenu';
+import { useMenuContextValue } from './useMenuContextValue';
+import { MenuProvider } from '../context/menuContext';
 
 export const Menu = stagedComponent((props: MenuProps) => {
   const state = useMenu(props);
