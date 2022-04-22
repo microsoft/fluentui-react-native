@@ -7,10 +7,11 @@ export const useMenuTrigger = (_props: MenuTriggerProps) => {
 
   const setOpen = context.setOpen;
   const open = context.open;
+  const triggerRef = context.triggerRef;
 
   const onClick = (_e: InteractionEvent) => {
     setOpen(!open);
   };
 
-  return { onClick };
+  return { onClick, componentRef: triggerRef };
 };

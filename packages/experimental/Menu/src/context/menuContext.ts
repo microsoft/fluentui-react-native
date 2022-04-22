@@ -9,6 +9,7 @@ export type MenuContextValue = MenuState;
 export const MenuContext = React.createContext<MenuContextValue>({
   open: false,
   setOpen: () => false,
+  triggerRef: null,
 });
 
 export const MenuProvider = MenuContext.Provider;
