@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Apr 2022 21:50:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.23
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.17
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
 
 ## 0.10.22
 
