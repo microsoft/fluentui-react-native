@@ -16,7 +16,7 @@ const MenuDefault: React.FunctionComponent = () => {
           <Button>Test</Button>
         </MenuTrigger>
         <MenuPopover>
-          <View>
+          <View style={{ backgroundColor: 'red', height: 50, width: 200 }}>
             <Text>Hello world!!!</Text>
           </View>
         </MenuPopover>

@@ -10,7 +10,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
   const contextValue = useMenuContextValue(state);
 
   return (_rest: MenuProps, children: React.ReactNode) => {
-    const childrenArray = React.Children.toArray(props.children) as React.ReactElement[];
+    const childrenArray = React.Children.toArray(children) as React.ReactElement[];
 
     if (__DEV__) {
       if (childrenArray.length === 0) {
@@ -24,7 +24,21 @@ export const Menu = stagedComponent((props: MenuProps) => {
       }
     }
 
-    return <MenuProvider value={contextValue}>{children}</MenuProvider>;
+    let menuTrigger = undefined;
+    let menuPopover = undefined;
+    if (childrenArray.length === 2) {
+      menuTrigger = childrenArray[0];
+      menuPopover = childrenArray[1];
+    } else if (childrenArray.length === 1) {
+      menuPopover = childrenArray[0];
+    }
+
+    return (
+      <MenuProvider value={contextValue}>
+        {menuTrigger}
+        {state.open && menuPopover}
+      </MenuProvider>
+    );
   };
 });
 Menu.displayName = menuName;
