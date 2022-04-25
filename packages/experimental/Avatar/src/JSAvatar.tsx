@@ -4,6 +4,7 @@ import { JSAvatarProps, JSAvatarType, JSAvatarName, JSAvatarState } from './JSAv
 import { stylingSettings } from './JSAvatar.styling';
 import { compose, UseSlots, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useAvatar } from './useAvatar';
+import { PresenceBadge } from '@fluentui-react-native/badge';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the avatar.
@@ -40,8 +41,8 @@ export const JSAvatar = compose<JSAvatarType>({
     const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
 
     return (final: JSAvatarProps) => {
-      const { children, accessibilityLabel, activeAppearance, ...mergedProps } = mergeProps(avatar.props, final);
-      const { personaPhotoSource, iconSource, showRing, transparentRing } = avatar.state;
+      const { children, accessibilityLabel, presence, activeAppearance, isOutOfOffice, ...mergedProps } = mergeProps(avatar.props, final);
+      const { personaPhotoSource, showRing, transparentRing } = avatar.state;
 
       return (
         <Slots.root {...mergedProps}>
@@ -54,7 +55,7 @@ export const JSAvatar = compose<JSAvatarType>({
           )}
           {showRing && !transparentRing && <Slots.ring />}
           {activeAppearance === 'glow' && <Slots.glow />}
-          {!!iconSource && !!iconSource.uri && <Slots.icon source={iconSource} />}
+          <PresenceBadge size="small" shape="circular" presence={presence} isOutOfOffice={isOutOfOffice} />
         </Slots.root>
       );
     };

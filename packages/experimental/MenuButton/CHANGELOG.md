@@ -1,8 +1,37 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Wed, 13 Apr 2022 23:44:28 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Apr 2022 21:50:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.33
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.24
+- Bump @fluentui-react-native/experimental-button to v0.15.18
+- Bump @fluentui-react-native/framework to v0.7.23
+
+## 0.3.32
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.23
+- Bump @fluentui-react-native/experimental-button to v0.15.17
+- Bump @fluentui-react-native/framework to v0.7.22
+
+## 0.3.31
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.22
+- Bump @fluentui-react-native/experimental-button to v0.15.16
 
 ## 0.3.30
 

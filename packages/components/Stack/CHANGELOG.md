@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Wed, 06 Apr 2022 22:58:22 GMT and should not be manually modified.
+This log was last generated on Thu, 21 Apr 2022 21:50:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.23
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.17
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/text to v0.11.19
+
+## 0.6.22
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.16
+- Bump @fluentui-react-native/framework to v0.7.22
+- Bump @fluentui-react-native/text to v0.11.18
 
 ## 0.6.21
 

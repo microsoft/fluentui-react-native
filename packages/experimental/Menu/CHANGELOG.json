@@ -1,0 +1,50 @@
+{
+  "name": "@fluentui-react-native/menu",
+  "entries": [
+    {
+      "date": "Fri, 22 Apr 2022 22:51:25 GMT",
+      "tag": "@fluentui-react-native/menu_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "087580922ea5f0d196a90be24ca47f1fa52666ee",
+            "comment": "Stand up trigger open behavior"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/menu_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Apr 2022 18:15:38 GMT",
+      "tag": "@fluentui-react-native/menu_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7668160bf4e893e13932af2f13e9e1cc9ea511cf",
+            "comment": "Add empty Menu and Popover packages"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@fluentui-react-native/popover",
+  "entries": [
+    {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/popover_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/popover",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Apr 2022 18:15:38 GMT",
+      "tag": "@fluentui-react-native/popover_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/popover",
+            "commit": "7668160bf4e893e13932af2f13e9e1cc9ea511cf",
+            "comment": "Add empty Menu and Popover packages"
+          }
+        ]
+      }
+    }
+  ]
+}

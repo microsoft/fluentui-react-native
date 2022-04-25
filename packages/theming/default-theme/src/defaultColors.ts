@@ -1,6 +1,6 @@
 import { Palette, FabricWebPalette, ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { createAliasTokens } from '@fluentui-react-native/theming-utils';
+import { createAliasTokens } from './createAliasTokens';
 
 /**
  * Generate a palette from a set of fabric web colors, like those output from the theme designer.
