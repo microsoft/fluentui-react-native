@@ -1,4 +1,4 @@
-import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants } from '@fluentui-react-native/theme-types';
+import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Variants, FontFamily } from '@fluentui-react-native/theme-types';
 import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
@@ -40,6 +40,20 @@ function _defaultTypography(): Typography {
       heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
+      //v1 text variants
+      caption1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['100'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      body1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['200'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      body1Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['200'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      body2: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['300'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      body2Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['300'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      subtitle2: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['400'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      subtitle2Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['400'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      subtitle1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['500'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      subtitle1Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['500'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      title1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['700'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      title1Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['700'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      largeTitle: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['900'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      display: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['900'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
     } as Variants,
   };
 
@@ -81,6 +95,20 @@ function _defaultTypography(): Typography {
       heroSemibold: { face: 'secondary', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
       heroLargeSemibold: { face: 'secondary', size: 'heroLarge', weight: 'semiBold' },
+      //v2 text variants
+      caption1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['100'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      body1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['200'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      body1Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['200'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      body2: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['300'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      body2Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['300'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      subtitle2: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['400'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      subtitle2Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['400'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      subtitle1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['500'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      subtitle1Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['500'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      title1: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['700'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      title1Strong: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['700'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
+      largeTitle: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['900'] as FontSize, weight: globalTokens.font.weight.regular as FontWeightValue },
+      display: { face: globalTokens.font.family['base'] as FontFamily, size: globalTokens.font.size['900'] as FontSize, weight: globalTokens.font.weight.semibold as FontWeightValue },
     } as Variants;
     defaultsDict.variants = variantsDictWin32;
   }
