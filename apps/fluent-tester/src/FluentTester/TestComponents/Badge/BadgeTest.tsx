@@ -68,14 +68,14 @@ export const BasicBadge: React.FunctionComponent = () => {
       {svgIconsEnabled && (
         <>
           <Text>Presence Badge</Text>
-          <PresenceBadge presence="available" size="largest" />
-          <PresenceBadge presence="available" isOutOfOffice={true} size="large" />
-          <PresenceBadge presence="doNotDisturb" isOutOfOffice={true} />
-          <PresenceBadge presence="away" size="small" />
-          <PresenceBadge presence="busy" size="smallest" />
-          <PresenceBadge presence="offline" />
-          <PresenceBadge presence="outOfOffice" />
-          <PresenceBadge presence="away" />
+          <PresenceBadge status="available" size="largest" />
+          <PresenceBadge status="available" isOutOfOffice={true} size="large" />
+          <PresenceBadge status="doNotDisturb" isOutOfOffice={true} />
+          <PresenceBadge status="away" size="small" />
+          <PresenceBadge status="busy" size="smallest" />
+          <PresenceBadge status="offline" />
+          <PresenceBadge status="outOfOffice" />
+          <PresenceBadge status="away" />
         </>
       )}
     </View>

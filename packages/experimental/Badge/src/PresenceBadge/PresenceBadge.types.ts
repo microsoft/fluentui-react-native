@@ -3,11 +3,11 @@ import { BadgeCoreTokens } from '../Badge.types';
 
 export const presenceBadgeName = 'PresenceBadge';
 export const PresenceBadgeStatuses = ['doNotDisturb', 'busy', 'unknown', 'blocked', 'outOfOffice', 'away', 'available', 'offline'] as const;
-export type Presence = typeof PresenceBadgeStatuses[number];
+export type PresenceBadgeStatus = typeof PresenceBadgeStatuses[number];
 
 export interface PresenceBadgeTokens extends BadgeCoreTokens {}
 export interface PresenceBadgeProps extends BadgeCoreProps {
-  presence?: Presence;
+  status?: PresenceBadgeStatus;
   isOutOfOffice?: boolean;
 }
 

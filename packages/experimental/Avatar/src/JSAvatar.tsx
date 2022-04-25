@@ -29,33 +29,31 @@ export const JSAvatar = compose<JSAvatarType>({
   ...stylingSettings,
   slots: {
     root: View,
-    photo: Image,
+    image: Image,
     initials: Text,
     initialsBackground: View,
     icon: Image,
     ring: View,
-    glow: View,
   },
   useRender: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
     const avatar = useAvatar(userProps);
     const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
 
     return (final: JSAvatarProps) => {
-      const { children, accessibilityLabel, presence, activeAppearance, isOutOfOffice, ...mergedProps } = mergeProps(avatar.props, final);
-      const { personaPhotoSource, showRing, transparentRing } = avatar.state;
+      const { activeAppearance, children, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
+      const { showRing, transparentRing } = avatar.state;
 
       return (
         <Slots.root {...mergedProps}>
-          {personaPhotoSource ? (
-            <Slots.photo accessibilityLabel={accessibilityLabel} source={personaPhotoSource} />
+          {image.source ? (
+            <Slots.image {...image} />
           ) : (
             <Slots.initialsBackground>
               <Slots.initials>{children}</Slots.initials>
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
-          {activeAppearance === 'glow' && <Slots.glow />}
-          <PresenceBadge size="small" shape="circular" presence={presence} isOutOfOffice={isOutOfOffice} />
+          <PresenceBadge {...badge} />
         </Slots.root>
       );
     };

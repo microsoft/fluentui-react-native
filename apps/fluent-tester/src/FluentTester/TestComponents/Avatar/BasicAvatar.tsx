@@ -4,11 +4,10 @@ import {
   AvatarSizes,
   AvatarColor,
   JSAvatar,
-  AvatarPresence,
   AvatarActive,
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
-import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
+import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, Picker, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -46,7 +45,7 @@ const allColors: WithUndefined<AvatarColor>[] = [
   'brown',
 ];
 
-const allPresences: WithUndefined<AvatarPresence>[] = [undefinedText, ...PresenceBadgeStatuses];
+const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
 
 const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
@@ -69,7 +68,7 @@ export const StandardUsage: FunctionComponent = () => {
   const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
   const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
-  const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('available');
+  const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
   const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
@@ -114,9 +113,9 @@ export const StandardUsage: FunctionComponent = () => {
         size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
         shape={isSquare ? 'square' : 'circular'}
-        imageDescription="Photo of Satya Nadella"
-        presence={presence === undefinedText ? undefined : presence}
-        imageUrl={showImage ? satyaPhotoUrl : undefined}
+        accessibilityLabel="Photo of Satya Nadella"
+        badge={{ status: presence === undefinedText ? undefined : presence }}
+        src={showImage ? satyaPhotoUrl : undefined}
         coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
       />
     </View>
