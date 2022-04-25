@@ -30,6 +30,7 @@
     "@fluentui-react-native/callout": ">=0.19.43 <1.0.0",
     "@fluentui-react-native/framework": "0.7.23",
     "@fluentui-react-native/interactive-hooks": ">=0.15.3 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.11.9 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
