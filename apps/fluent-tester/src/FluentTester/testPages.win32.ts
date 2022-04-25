@@ -7,7 +7,7 @@ import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestCompon
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest, HOMEPAGE_FOCUSZONE_BUTTON } from './TestComponents/FocusZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
-import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
+import { MenuButtonTest, HOMEPAGE_MENUBUTTON_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -26,6 +26,7 @@ import { TestDescription } from './TestComponents';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
 // --> testPage import insert
 
 export const tests: TestDescription[] = [
@@ -92,7 +93,7 @@ export const tests: TestDescription[] = [
   {
     name: 'MenuButton Test',
     component: MenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON,
+    testPage: HOMEPAGE_MENUBUTTON_BUTTON,
   },
   {
     name: 'Persona Test',
@@ -163,6 +164,11 @@ export const tests: TestDescription[] = [
     name: 'Experimental MenuButton Test',
     component: ExperimentalMenuButtonTest,
     testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
+  },
+  {
+    name: 'Menu Test',
+    component: MenuTest,
+    testPage: HOMEPAGE_MENU_BUTTON,
   },
   // --> testPage component insert,,
 ];

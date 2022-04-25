@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/persona-coin",
   "entries": [
     {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/persona-coin_v0.10.23",
+      "version": "0.10.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.17",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/persona-coin",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.16.1",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Apr 2022 16:54:55 GMT",
       "tag": "@fluentui-react-native/persona-coin_v0.10.22",
       "version": "0.10.22",

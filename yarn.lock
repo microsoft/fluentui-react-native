@@ -1299,10 +1299,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@eslint/eslintrc@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.2.1.tgz#8b5e1c49f4077235516bc9ec7d41378c0f69b8c6"
-  integrity sha512-bxvbYnBPN1Gibwyp6NrpnFzA3YtRL3BBAyEAFVIpNTm2Rn4Vy87GA5M4aSn3InRrlsbX5N0GW7XIx+U4SAEKdQ==
+"@eslint/eslintrc@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@eslint/eslintrc/-/eslintrc-1.2.2.tgz#4989b9e8c0216747ee7cca314ae73791bb281aae"
+  integrity sha512-lTVWHs7O2hjBFZunXTZYnYqtB9GakA1lnxIf+gKq2nY5gxkkNi/lQvveW6t8gFdOHTg6nG50Xs95PrLqVpcaLg==
   dependencies:
     ajv "^6.12.4"
     debug "^4.3.2"
@@ -1314,25 +1314,25 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/design-tokens-android@^0.7.0-test":
-  version "0.7.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.7.0-test.tgz#7fc0a19dea681132f50bc7ec4799ac8cd9902399"
-  integrity sha512-uSmlyH1cFeZxv2KM5j+wEujRaaNXh8faTV1nGBmiLvJsgqtSaA3QmLdz5WEmAupFFlgSZm/ubeZCw651e5QDNA==
+"@fluentui-react-native/design-tokens-android@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.8.0.tgz#48742ef91c99631e2f461c877a285828e2a665ec"
+  integrity sha512-2loMuNsxj2eToYa+5fgbVD/r3Rk1lQI1TEhkSJ1IYSt3k8kWJdIwCHEGY78RkxddL1nZ4M8kA7zYvBbNFW7gmA==
 
-"@fluentui-react-native/design-tokens-macos@^0.7.0-test":
-  version "0.7.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.7.0-test.tgz#c40b876c6e4e083ee87387aa456d7c8449abf5b4"
-  integrity sha512-zvbTUlU3gwZb/Cyr+Ebi24Y01hpzeH9lCUn62/9n65Sky+dD8hc6RVE0H5SdfMevvjqMVI8kWr9qGrhtyG41Tg==
+"@fluentui-react-native/design-tokens-macos@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.8.0.tgz#502ff510363703b03b6efd0e460807efaa692769"
+  integrity sha512-Ua6q9wDAOKLGylUlnN8b+HUsv1rZM5P/k+QKmFDUIHoMKjBuNWmPw3y2tKKIX+J8iOmmw1mH6mFJgsXsLENcDQ==
 
-"@fluentui-react-native/design-tokens-win32@^0.7.0-test":
-  version "0.7.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.7.0-test.tgz#9843a9e8d534d7dcb7b64ffd9d636e50eff6f8b9"
-  integrity sha512-7dteQBtOtWZ3n1TlPMh/uUMlThfaRduXKcmV1ZhAKkV8IWdjhJH6/vRDYC/f3cNluXskvSrUO2cydP0wxEawnw==
+"@fluentui-react-native/design-tokens-win32@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.8.0.tgz#8d66f6446ef77830f5689968a75ace88b6036e03"
+  integrity sha512-RhrKMi7MuOweg7UjeBfrDkWKskAwUE/r83B21MbtNUPgZFfDJFx9l3WlhzkFxxNgQu2ywFfpdLppy42b8c4tpg==
 
-"@fluentui-react-native/design-tokens-windows@^0.7.0-test":
-  version "0.7.0-test"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.7.0-test.tgz#cefed2e4de7a8e1483e95303170ea6b5c495e532"
-  integrity sha512-IBMvI64PNkN/ADsLAeXKaB8NIOvEDnPA6JUn8yuGO/5TTiKhJoXonbmlgq92NqevCxWEx34QwckMGdGk7zNl+A==
+"@fluentui-react-native/design-tokens-windows@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.8.0.tgz#69db35d39142348de540f6986886ff871ef946d5"
+  integrity sha512-TePY3wU2ZBzL33VIAX1dXwv0E9CZ6B0WeAbwzfJk6NvP5zGj2MYrUYyesSjX51DdZ0E381WJ4V/Og9ZfOv6ELA==
 
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
@@ -2210,9 +2210,9 @@
     wcwidth "^1.0.1"
 
 "@react-native-community/slider@^4.2.0":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.2.1.tgz#8f1c8cf62de1bd91ce1e32585f7eb666f21e5025"
-  integrity sha512-6HUS5HbB9bvEN4GiwBlxECgPWQIugHE+kfnxqX2jHUl1SE57MRpw00m1qVs4hXtEPQndBl6mAQiGbKCOtLPVbg==
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.2.2.tgz#06a0de89c26c6bd03d95798b777db1872b60c066"
+  integrity sha512-C1ldx1ypQo+uDWx78TUBG0evLVopKYHK2mQencl+vxi4ebMTL+ipJv5MF5mEvmZWLUOAMm5AsoQNHChYUdyWrQ==
 
 "@react-native-menu/menu@^0.1.2":
   version "0.1.2"
@@ -2332,9 +2332,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.12"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.12.tgz#b1bea0dad08a95aee0cd7303de5a3b8026210189"
-  integrity sha512-VTpRVBTLcmNxhTKQ7KOrw0d9aNLtyviJpJmm/79RSzw+XSjiF6PVWoR1I/d4a3COp1VIrRNhP69N24zRT8jEWg==
+  version "1.12.13"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.13.tgz#507e5640f6cb6f3b6317a1d381af1f625801dbd4"
+  integrity sha512-nAfJSWW14dSGpZXfKdWl8owKOHGXa2yC426U6w+toy3CJRQEYZxUMl2pa5KM1DuWRDKXbWOzx2Q46Lspyh9E0Q==
   dependencies:
     "@rnx-kit/console" "^1.0.11"
     "@rnx-kit/tools-language" "^1.2.6"
@@ -6232,11 +6232,11 @@ eslint-visitor-keys@^3.0.0, eslint-visitor-keys@^3.3.0:
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
 eslint@^8.0.0:
-  version "8.13.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.13.0.tgz#6fcea43b6811e655410f5626cfcf328016badcd7"
-  integrity sha512-D+Xei61eInqauAyTJ6C0q6x9mx7kTUC1KZ0m0LSEexR0V+e94K12LmWX076ZIsldwfQ2RONdaJe0re0TRGQbRQ==
+  version "8.14.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.14.0.tgz#62741f159d9eb4a79695b28ec4989fcdec623239"
+  integrity sha512-3/CE4aJX7LNEiE3i6FeodHmI/38GZtWCsAtsymScmzYapx8q1nVVb+eLcLSzATmCPXw5pT4TqVs1E0OmxAd9tw==
   dependencies:
-    "@eslint/eslintrc" "^1.2.1"
+    "@eslint/eslintrc" "^1.2.2"
     "@humanwhocodes/config-array" "^0.9.2"
     ajv "^6.10.0"
     chalk "^4.0.0"
@@ -13091,9 +13091,9 @@ tslib@^1.10.0, tslib@^1.14.1, tslib@^1.8.1, tslib@^1.9.0:
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
 tslib@^2.0.0, tslib@^2.0.1, tslib@^2.0.3, tslib@^2.2.0, tslib@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
-  integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
+  integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
 tsutils@^3.21.0:
   version "3.21.0"
