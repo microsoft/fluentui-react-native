@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 25 Apr 2022 18:31:09 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.24",
+      "version": "0.59.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "add49a0b6438cb088e99b50648f09a69bdaaecdb",
+            "comment": "Add Menu to MacOS test page"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.3.0",
+            "commit": "add49a0b6438cb088e99b50648f09a69bdaaecdb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Apr 2022 17:11:13 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.23",
       "version": "0.59.23",

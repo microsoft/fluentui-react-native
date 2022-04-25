@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Implement target behavior",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
