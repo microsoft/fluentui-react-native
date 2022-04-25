@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Menu prototype/initial impl (#1607)",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
