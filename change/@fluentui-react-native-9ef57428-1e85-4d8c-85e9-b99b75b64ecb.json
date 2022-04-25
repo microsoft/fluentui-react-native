@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Export checkbox v1 from core library",
-  "packageName": "@fluentui/react-native",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

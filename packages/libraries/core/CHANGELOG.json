@@ -2,6 +2,27 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 25 Apr 2022 17:11:12 GMT",
+      "tag": "@fluentui/react-native_v0.29.0",
+      "version": "0.29.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "1640642e124940f31577f214176e7634e51647fa",
+            "comment": "Export checkbox v1 from core library"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.15.0",
+            "commit": "1640642e124940f31577f214176e7634e51647fa"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Apr 2022 21:50:03 GMT",
       "tag": "@fluentui/react-native_v0.28.13",
       "version": "0.28.13",

@@ -1,8 +1,17 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Thu, 21 Apr 2022 21:50:03 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Apr 2022 17:11:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.29.0
+
+Mon, 25 Apr 2022 17:11:12 GMT
+
+### Minor changes
+
+- Export checkbox v1 from core library (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/checkbox to v0.15.0
 
 ## 0.28.13
 
