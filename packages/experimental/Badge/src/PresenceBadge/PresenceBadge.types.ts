@@ -8,7 +8,7 @@ export type PresenceBadgeStatus = typeof PresenceBadgeStatuses[number];
 export interface PresenceBadgeTokens extends BadgeCoreTokens {}
 export interface PresenceBadgeProps extends BadgeCoreProps {
   status?: PresenceBadgeStatus;
-  isOutOfOffice?: boolean;
+  outOfOffice?: boolean;
 }
 
 export interface PresenceBadgeSlotProps extends Omit<BadgeSlotProps, 'text' | 'icon'> {}

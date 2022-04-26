@@ -56,11 +56,11 @@ export const PresenceBadge = compose<PresenceBadgeType>({
     const Slots = useSlots(badge, (layer) => badgeLookup(layer, badge));
 
     return (final: PresenceBadgeProps) => {
-      const { size, status, isOutOfOffice, ...mergedProps } = mergeProps(badge, final);
+      const { size, status, outOfOffice, ...mergedProps } = mergeProps(badge, final);
       const badgeSize = getIconSize(size);
-      const outOfOffice = isOutOfOffice || false;
+      const isOutOfOffice = outOfOffice || false;
       const iconXml = `<svg width="${badgeSize}" height="${badgeSize}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        ${getIconPath(status, outOfOffice)}
+        ${getIconPath(status, isOutOfOffice)}
       </svg>`;
 
       return (

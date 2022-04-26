@@ -69,8 +69,8 @@ export const BasicBadge: React.FunctionComponent = () => {
         <>
           <Text>Presence Badge</Text>
           <PresenceBadge status="available" size="largest" />
-          <PresenceBadge status="available" isOutOfOffice={true} size="large" />
-          <PresenceBadge status="doNotDisturb" isOutOfOffice={true} />
+          <PresenceBadge status="available" outOfOffice={true} size="large" />
+          <PresenceBadge status="doNotDisturb" outOfOffice={true} />
           <PresenceBadge status="away" size="small" />
           <PresenceBadge status="busy" size="smallest" />
           <PresenceBadge status="offline" />
