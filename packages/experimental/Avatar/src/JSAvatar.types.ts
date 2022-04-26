@@ -1,7 +1,7 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { PresenceBadgeProps } from '@fluentui-react-native/badge';
+import { BadgeProps, PresenceBadgeProps } from '@fluentui-react-native/badge';
 
 export const JSAvatarName = 'Avatar';
 export const AvatarSizes = [
@@ -81,6 +81,7 @@ export interface AvatarSlotProps {
   initialsBackground: ViewProps;
   icon: ImageProps;
   ring: ViewProps;
+  badge: BadgeProps;
 }
 
 export type IconAlignment = 'start' | 'center' | 'end';

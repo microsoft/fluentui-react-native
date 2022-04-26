@@ -126,5 +126,11 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       },
       ['physicalSize', 'ring', 'physicalSize', ...borderStyles.keys],
     ),
+    badge: buildProps((_tokens: JSAvatarTokens) => {
+      return {
+        size: 'medium',
+        shape: 'circular',
+      };
+    }, []),
   },
 };

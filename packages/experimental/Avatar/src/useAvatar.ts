@@ -21,7 +21,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
 
   const badgeProps: PresenceBadgeProps = {
     size: 'small',
-    shape: 'circular',
     ...badge,
   };
 

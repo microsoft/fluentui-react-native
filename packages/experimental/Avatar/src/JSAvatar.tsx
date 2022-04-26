@@ -34,6 +34,7 @@ export const JSAvatar = compose<JSAvatarType>({
     initialsBackground: View,
     icon: Image,
     ring: View,
+    badge: PresenceBadge,
   },
   useRender: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
     const avatar = useAvatar(userProps);
@@ -53,7 +54,7 @@ export const JSAvatar = compose<JSAvatarType>({
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
-          <PresenceBadge {...badge} />
+          <Slots.badge {...badge} />
         </Slots.root>
       );
     };
