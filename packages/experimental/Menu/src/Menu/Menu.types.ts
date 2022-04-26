@@ -8,6 +8,7 @@ export interface MenuProps extends Omit<IViewProps, 'onPress'> {
 }
 
 export interface MenuState extends MenuProps {
+  isSubmenu: boolean;
   setOpen: (isOpen: boolean) => void;
   triggerRef: React.RefObject<React.Component>;
 }

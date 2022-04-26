@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuTrigger, MenuPopover } from '@fluentui-react-native/menu';
+import { Menu, MenuItem, MenuTrigger, MenuPopover } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
@@ -25,11 +25,41 @@ const MenuDefault: React.FunctionComponent = () => {
   );
 };
 
+const MenuSubMenu: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <View style={{ backgroundColor: 'red', height: 50, width: 200, alignItems: 'center' }}>
+            <Menu>
+              <MenuTrigger>
+                <MenuItem content="A MenuItem" />
+              </MenuTrigger>
+              <MenuPopover>
+                <View style={{ backgroundColor: 'blue', height: 50, width: 200 }}>
+                  <Text>Hello world!!!</Text>
+                </View>
+              </MenuPopover>
+            </Menu>
+          </View>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
     testID: MENU_TESTPAGE,
     component: MenuDefault,
+  },
+  {
+    name: 'Menu Submenu',
+    component: MenuSubMenu,
   },
 ];
 
