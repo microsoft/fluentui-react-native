@@ -9,7 +9,7 @@ import { PresenceBadgeProps } from '@fluentui-react-native/badge';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { active, accessibilityLabel, activeAppearance, badge, src, initials, ring, shape, ...rest } = props;
+  const { active, accessibilityLabel, activeAppearance, badge, src, ring, shape, ...rest } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
@@ -31,7 +31,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
 
   return {
     props: {
-      children: initials,
       shape: shape || 'circular',
       ...rest,
       active,

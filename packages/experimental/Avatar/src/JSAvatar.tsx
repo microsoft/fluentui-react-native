@@ -41,7 +41,7 @@ export const JSAvatar = compose<JSAvatarType>({
     const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
 
     return (final: JSAvatarProps) => {
-      const { activeAppearance, children, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
+      const { activeAppearance, initials, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
       const { showRing, transparentRing } = avatar.state;
 
       return (
@@ -50,7 +50,7 @@ export const JSAvatar = compose<JSAvatarType>({
             <Slots.image {...image} />
           ) : (
             <Slots.initialsBackground>
-              <Slots.initials>{children}</Slots.initials>
+              <Slots.initials>{initials}</Slots.initials>
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
