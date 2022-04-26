@@ -33,10 +33,11 @@ const MenuSubMenu: React.FunctionComponent = () => {
           <Button>Test</Button>
         </MenuTrigger>
         <MenuPopover>
-          <View style={{ backgroundColor: 'red', height: 50, width: 200, alignItems: 'center' }}>
+          <View style={{ backgroundColor: 'red', width: 200, alignItems: 'center' }}>
+            <MenuItem content="A MenuItem" />
             <Menu>
               <MenuTrigger>
-                <MenuItem content="A MenuItem" />
+                <MenuItem content="A second MenuItem" />
               </MenuTrigger>
               <MenuPopover>
                 <View style={{ backgroundColor: 'blue', height: 50, width: 200 }}>

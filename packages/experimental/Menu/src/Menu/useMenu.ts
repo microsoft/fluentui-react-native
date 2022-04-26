@@ -5,7 +5,8 @@ import { MenuProps, MenuState } from './Menu.types';
 export const useMenu = (props: MenuProps): MenuState => {
   const [open, setOpen] = useMenuOpenState(props);
   const triggerRef = React.useRef(null);
-  const isSubmenu = useMenuContext() !== undefined;
+  const context = useMenuContext();
+  const isSubmenu = context.triggerRef !== null;
 
   return {
     open,
