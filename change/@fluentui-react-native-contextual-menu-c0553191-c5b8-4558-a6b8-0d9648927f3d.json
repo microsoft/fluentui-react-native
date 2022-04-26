@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Only show the scrollbars if we need them",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
