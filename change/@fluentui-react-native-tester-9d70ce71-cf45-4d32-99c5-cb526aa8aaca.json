@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Changed props according to the spec",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}

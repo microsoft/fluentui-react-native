@@ -70,7 +70,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       },
       ['coinColorFluent', 'backgroundColor', 'physicalSize', ...borderStyles.keys],
     ),
-    photo: buildProps(
+    image: buildProps(
       (tokens: JSAvatarTokens) => {
         const { physicalSize } = calculateEffectiveSizes(tokens);
 
@@ -126,27 +126,11 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       },
       ['physicalSize', 'ring', 'physicalSize', ...borderStyles.keys],
     ),
-    glow: buildProps(
-      (tokens: JSAvatarTokens, theme: Theme) => {
-        const { physicalSize } = calculateEffectiveSizes(tokens);
-        const ringConfig = getRingConfig(physicalSize);
-
-        const glowColor = tokens.ringColor;
-        return {
-          style: {
-            borderStyle: 'solid',
-            borderColor: glowColor,
-            borderWidth: ringConfig.stroke - ringConfig.innerStroke,
-            width: ringConfig.size,
-            height: ringConfig.size,
-            position: 'absolute',
-            top: -ringConfig.stroke * 2,
-            left: -ringConfig.stroke * 2,
-            ...borderStyles.from(tokens, theme),
-          },
-        };
-      },
-      ['physicalSize', 'ring', ...borderStyles.keys],
-    ),
+    badge: buildProps((_tokens: JSAvatarTokens) => {
+      return {
+        size: 'medium',
+        shape: 'circular',
+      };
+    }, []),
   },
 };
