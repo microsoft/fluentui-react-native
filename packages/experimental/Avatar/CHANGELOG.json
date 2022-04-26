@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 26 Apr 2022 20:45:13 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.16",
+      "version": "0.14.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c",
+            "comment": "Changed props according to the spec"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.29",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 21 Apr 2022 21:50:03 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.15",
       "version": "0.14.15",

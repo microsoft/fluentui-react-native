@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 26 Apr 2022 20:45:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.26",
+      "version": "0.59.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c",
+            "comment": "Changed props according to the spec"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.29",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.16",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Apr 2022 06:35:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.25",
       "version": "0.59.25",
