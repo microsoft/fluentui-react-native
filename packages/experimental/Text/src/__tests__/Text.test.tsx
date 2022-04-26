@@ -10,13 +10,7 @@ describe('Text component tests', () => {
   });
 
   it('Text all props', () => {
-    const tree = renderer
-      .create(
-        <Text variant="bodyStandard">
-          All props
-        </Text>,
-      )
-      .toJSON();
+    const tree = renderer.create(<Text variant="bodyStandard">All props</Text>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

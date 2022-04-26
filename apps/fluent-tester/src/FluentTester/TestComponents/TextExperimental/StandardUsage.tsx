@@ -9,22 +9,7 @@ export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        {/*<Text variant="captionStandard" testID={HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON}>
-          CaptionStandard
-        </Text>
-        <Text variant="secondaryStandard">SecondaryStandard</Text>
-        <Text variant="secondarySemibold">SecondarySemibold</Text>
-        <Text variant="bodyStandard">BodyStandard</Text>
-        <Text variant="bodySemibold">BodySemibold</Text>
-        <Text variant="subheaderStandard">SubheaderStandard</Text>
-        <Text variant="subheaderSemibold">SubheaderSemibold</Text>
-        <Text variant="headerStandard">HeaderStandard</Text>
-        <Text variant="headerSemibold">HeaderSemibold</Text>
-        <Text variant="heroStandard">HeroStandard</Text>
-        <Text variant="heroSemibold">HeroSemibold</Text>
-        <Text variant="heroLargeStandard">HeroLargeStandard</Text>
-  <Text variant="heroLargeSemibold">HeroLargeSemibold</Text>*/}
-      <Text variant="caption1" testID={HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON}>
+        <Text variant="caption1" testID={HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON}>
           Caption1
         </Text>
         <Text variant="body1">Body1</Text>

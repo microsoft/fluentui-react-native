@@ -1,21 +1,13 @@
 /** @jsx withSlots */
-import {
-  fontStyles,
-  withSlots,
-  UseTokens,
-  useFluentTheme,
-  mergeStyles,
-  compressible,
-  patchTokens,
-} from '@fluentui-react-native/framework';
+import { fontStyles, withSlots, UseTokens, useFluentTheme, mergeStyles, compressible, patchTokens } from '@fluentui-react-native/framework';
 import { Text as RNText } from 'react-native';
-import { textName, TextProps, useTextTokens, TextTokens } from './Text.types';
+import { textName, TextProps, TextTokens } from './Text.types';
+import { useTextTokens } from './TextTokens';
 import React from 'react';
-
 
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
   // split out color and variant from props
-  const {color, variant, style, ...rest } = props;
+  const { color, variant, style, ...rest } = props;
   const theme = useFluentTheme();
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
