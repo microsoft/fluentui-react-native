@@ -1,7 +1,6 @@
 # Checkbox
 
-_Not available on MacOS_
-Please use Checkbox V0 under the deprecated folder until further notice.
+**Not available on MacOS** - Please use Checkbox V0 under the deprecated folder until further notice.
 
 In the short term, the new `Checkbox` control is named `CheckboxV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Checkbox`. It may be useful to rename the control to `Checkbox` using the import syntax to simplify the rename:
 
