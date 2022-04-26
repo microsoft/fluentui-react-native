@@ -11,7 +11,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalSize] = React.useState<number>(96);
+  const [size, setSize] = React.useState<number>(96);
   const [iconSize, setIconSize] = React.useState<number>(24);
   const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
   const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
@@ -39,20 +39,11 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       iconStrokeWidth: iconStrokeWidth,
       iconStrokeColor: iconStrokeColor,
       initialsSize: initialsSize,
-      avatarSize: physicalSize,
+      width: size,
+      height: size,
     };
     return JSAvatar.customize(tokens);
-  }, [
-    coinColor,
-    textColor,
-    horizontalAlignment,
-    verticalAlignment,
-    iconSize,
-    iconStrokeWidth,
-    iconStrokeColor,
-    initialsSize,
-    physicalSize,
-  ]);
+  }, [coinColor, textColor, horizontalAlignment, verticalAlignment, iconSize, iconStrokeWidth, iconStrokeColor, initialsSize, size]);
 
   return (
     <View style={commonStyles.root}>
@@ -119,7 +110,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
         <Text>Coin size</Text>
-        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.vmargin} onChange={setPhysicalSize} />
+        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.vmargin} onChange={setSize} />
 
         <Text>Icon size</Text>
         <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.vmargin} onChange={setIconSize} />

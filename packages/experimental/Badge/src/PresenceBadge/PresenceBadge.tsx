@@ -2,7 +2,6 @@
 import { View } from 'react-native';
 import { badgeLookup } from '../Badge';
 import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, PresenceBadgeStatus } from './PresenceBadge.types';
-import { BadgeSize } from '../Badge.types';
 import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native/framework';
 import { presenceIconPaths } from './presenceIconPaths';
 import { SvgXml } from 'react-native-svg';
@@ -27,29 +26,12 @@ function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean) {
   }
 }
 
-function getIconSize(size: BadgeSize) {
-  switch (size) {
-    case 'smallest':
-      return 6;
-    case 'smaller':
-      return 10;
-    case 'small':
-      return 12;
-    case 'medium':
-    default:
-      return 16;
-    case 'large':
-      return 20;
-    case 'largest':
-      return 28;
-  }
-}
-
 export const PresenceBadge = compose<PresenceBadgeType>({
   displayName: presenceBadgeName,
   ...stylingSettings,
   slots: {
     root: View,
+    svgXml: SvgXml,
   },
   useRender: (userProps: PresenceBadgeProps, useSlots: UseSlots<PresenceBadgeType>) => {
     const badge = useBadge(userProps) as PresenceBadgeProps;
@@ -57,15 +39,14 @@ export const PresenceBadge = compose<PresenceBadgeType>({
 
     return (final: PresenceBadgeProps) => {
       const { size, status, outOfOffice, ...mergedProps } = mergeProps(badge, final);
-      const badgeSize = getIconSize(size);
       const isOutOfOffice = outOfOffice || false;
-      const iconXml = `<svg width="${badgeSize}" height="${badgeSize}" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      const iconXml = `<svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         ${getIconPath(status, isOutOfOffice)}
       </svg>`;
 
       return (
         <Slots.root {...mergedProps}>
-          <SvgXml xml={iconXml} />
+          <Slots.svgXml xml={iconXml} />
         </Slots.root>
       );
     };

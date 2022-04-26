@@ -1,3 +1,4 @@
+import { XmlProps } from 'react-native-svg';
 import { BadgeCoreProps, BadgeSlotProps } from '../';
 import { BadgeCoreTokens } from '../Badge.types';
 
@@ -11,7 +12,9 @@ export interface PresenceBadgeProps extends BadgeCoreProps {
   outOfOffice?: boolean;
 }
 
-export interface PresenceBadgeSlotProps extends Omit<BadgeSlotProps, 'text' | 'icon'> {}
+export interface PresenceBadgeSlotProps extends Omit<BadgeSlotProps, 'text' | 'icon'> {
+  svgXml: XmlProps;
+}
 
 export interface PresenceBadgeType {
   props: PresenceBadgeProps;
