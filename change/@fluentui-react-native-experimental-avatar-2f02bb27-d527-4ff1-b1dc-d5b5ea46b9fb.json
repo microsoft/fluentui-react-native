@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update badge test",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "update badge test",
-  "packageName": "@fluentui-react-native/link",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

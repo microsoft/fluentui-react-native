@@ -1,7 +1,7 @@
 {
-  "type": "none",
+  "type": "patch",
   "comment": "update badge test",
   "packageName": "@fluentui-react-native/badge",
   "email": "email not defined",
-  "dependentChangeType": "none"
+  "dependentChangeType": "patch"
 }
