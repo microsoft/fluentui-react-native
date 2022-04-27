@@ -1,8 +1,47 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 22 Apr 2022 22:51:25 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Apr 2022 20:45:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.26
+
+Tue, 26 Apr 2022 20:45:13 GMT
+
+### Patches
+
+- Changed props according to the spec (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.29
+- Bump @fluentui-react-native/experimental-avatar to v0.14.16
+
+## 0.59.25
+
+Tue, 26 Apr 2022 06:35:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.35
+- Bump @fluentui/react-native to v0.29.1
+
+## 0.59.24
+
+Mon, 25 Apr 2022 18:31:09 GMT
+
+### Patches
+
+- Add Menu to MacOS test page (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.3.0
+
+## 0.59.23
+
+Mon, 25 Apr 2022 17:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.15.19
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.0
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.34
+- Bump @fluentui/react-native to v0.29.0
 
 ## 0.59.22
 

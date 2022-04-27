@@ -135,9 +135,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         active="active"
         activeAppearance="ring"
         initials="SB"
-        imageDescription="Former CEO of Microsoft"
-        presence="blocked"
-        imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+        accessibilityLabel="Former CEO of Microsoft"
+        badge={{ status: 'blocked' }}
+        src={showImage ? steveBallmerPhotoUrl : undefined}
         ring={
           showRing
             ? {

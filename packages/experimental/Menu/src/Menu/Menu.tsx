@@ -13,7 +13,7 @@ export const Menu = stagedComponent((props: MenuProps) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
 
     if (__DEV__) {
-      if (childrenArray.length === 2) {
+      if (childrenArray.length !== 2) {
         // eslint-disable-next-line no-console
         console.warn('Menu must contain two children');
       }

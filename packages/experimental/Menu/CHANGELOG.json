@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Mon, 25 Apr 2022 18:31:09 GMT",
+      "tag": "@fluentui-react-native/menu_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "add49a0b6438cb088e99b50648f09a69bdaaecdb",
+            "comment": "Implement target behavior"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 22 Apr 2022 22:51:25 GMT",
       "tag": "@fluentui-react-native/menu_v0.2.0",
       "version": "0.2.0",

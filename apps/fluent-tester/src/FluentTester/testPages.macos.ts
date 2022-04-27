@@ -25,6 +25,7 @@ import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestC
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { HOMEPAGE_MENU_BUTTON, MenuTest } from './TestComponents/Menu';
 
 export const tests: TestDescription[] = [
   {
@@ -96,6 +97,11 @@ export const tests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
+  },
+  {
+    name: 'Menu Test',
+    component: MenuTest,
+    testPage: HOMEPAGE_MENU_BUTTON,
   },
   {
     name: 'MenuButton Test',
