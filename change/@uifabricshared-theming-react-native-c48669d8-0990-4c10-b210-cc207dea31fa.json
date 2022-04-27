@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "initial Text implementation",
-  "packageName": "@uifabricshared/theming-react-native",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Apr 2022 19:30:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.14.2
 
 ## 0.10.0
 

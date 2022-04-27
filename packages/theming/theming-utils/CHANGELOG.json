@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Wed, 27 Apr 2022 19:30:38 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1",
+            "comment": "initial Text implementation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.14.2",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Apr 2022 16:54:55 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.10.0",
       "version": "0.10.0",
