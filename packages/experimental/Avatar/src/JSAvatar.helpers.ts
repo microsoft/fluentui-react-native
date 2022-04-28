@@ -43,23 +43,23 @@ export function convertCoinColorFluent(coinColor: AvatarColor): string {
   return colorTableFluent[coinColor];
 }
 
-export function getRingConfig(size: string | number): any {
+export function getRingConfig(size: number): any {
   if (size <= 48) {
     return {
-      size: (size as number) + sizeAdjustment.small,
+      size: size + sizeAdjustment.small,
       stroke: globalTokens.stroke.width.thick,
       innerStroke: globalTokens.stroke.width.thick,
     };
   }
   if (size <= 71) {
     return {
-      size: (size as number) + sizeAdjustment.medium,
+      size: size + sizeAdjustment.medium,
       stroke: globalTokens.stroke.width.thicker,
       innerStroke: globalTokens.stroke.width.thicker,
     };
   }
   return {
-    size: (size as number) + sizeAdjustment.large,
+    size: size + sizeAdjustment.large,
     stroke: globalTokens.stroke.width.thickest,
     innerStroke: globalTokens.stroke.width.thickest,
   };

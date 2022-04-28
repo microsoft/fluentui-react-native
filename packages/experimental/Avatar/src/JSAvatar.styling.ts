@@ -96,23 +96,16 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       ['borderRadius', 'width', 'height'],
     ),
     icon: buildProps(
-      (tokens: JSAvatarTokens, theme: Theme) => {
-        const iconSizeAdjusted = tokens.iconSize + tokens.iconStrokeWidth * 2;
-        const iconStrokeColor = tokens.iconStrokeColor || theme.colors.background;
+      (tokens: JSAvatarTokens) => {
         return {
           style: {
             position: 'absolute',
-            width: iconSizeAdjusted,
-            height: iconSizeAdjusted,
-            bottom: -tokens.iconStrokeWidth,
-            end: -tokens.iconStrokeWidth,
-            borderRadius: tokens.iconSize / 2,
-            borderWidth: tokens.iconStrokeWidth,
-            borderColor: iconStrokeColor,
+            width: tokens.iconSize,
+            height: tokens.iconSize,
           },
         };
       },
-      ['iconSize', 'iconStrokeWidth', 'iconStrokeColor'],
+      ['iconSize'],
     ),
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {

@@ -1,5 +1,5 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ImageProps, ViewProps, TextProps, ColorValue, ViewStyle } from 'react-native';
+import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { BadgeProps, PresenceBadgeProps, BadgeSize } from '@fluentui-react-native/badge';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
@@ -93,7 +93,7 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   iconStrokeWidth?: number;
   iconStrokeColor?: string;
   initialsSize?: number;
-  height?: ViewStyle['height'];
+  height?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
   circular?: JSAvatarTokens;
@@ -113,7 +113,7 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   size72?: JSAvatarTokens;
   size96?: JSAvatarTokens;
   size120?: JSAvatarTokens;
-  width?: ViewStyle['width'];
+  width?: number;
   badgeSize?: BadgeSize;
 }
 
