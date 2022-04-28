@@ -119,7 +119,7 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: 'internal-macos12'
+      vmImage: 'macos-11'
     variables:
       relative_directory: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
