@@ -4,7 +4,7 @@ exports[`Text component tests Text all props 1`] = `
 <Text
   style={
     Object {
-      "color": "#323130",
+      "color": "#a19f9d",
       "fontFamily": "Segoe UI",
       "fontSize": 14,
       "fontWeight": "400",
@@ -37,8 +37,8 @@ exports[`Text component tests Text default 1`] = `
   style={
     Object {
       "color": "#323130",
-      "fontFamily": undefined,
-      "fontSize": 14,
+      "fontFamily": "Segoe UI",
+      "fontSize": 12,
       "fontWeight": "400",
       "margin": 0,
     }

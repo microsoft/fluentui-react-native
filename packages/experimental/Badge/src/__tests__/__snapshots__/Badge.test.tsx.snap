@@ -42,8 +42,8 @@ exports[`Badge component tests Badge all props 1`] = `
     style={
       Object {
         "color": "#0078d4",
-        "fontFamily": undefined,
-        "fontSize": 14,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -81,8 +81,8 @@ exports[`Badge component tests Badge tokens 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": undefined,
-        "fontSize": 14,
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
