@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 20:16:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.29
+
+Thu, 28 Apr 2022 20:16:39 GMT
+
+### Patches
+
+- Use ButtonV1 in FluentTester (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.59.28
 

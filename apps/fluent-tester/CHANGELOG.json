@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 28 Apr 2022 20:16:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.29",
+      "version": "0.59.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "457a7eb89d12823f045c7ebf5194487159a79ba6",
+            "comment": "Use ButtonV1 in FluentTester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Apr 2022 19:09:51 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.28",
       "version": "0.59.28",
