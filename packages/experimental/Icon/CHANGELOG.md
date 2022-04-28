@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Wed, 27 Apr 2022 19:30:38 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.20
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/text to v0.11.21
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theming-utils to v0.10.2
+- Bump @fluentui-react-native/tokens to v0.11.11
+- Bump @uifabricshared/foundation-compose to v1.11.19
 
 ## 0.11.19
 
