@@ -1,7 +1,7 @@
 import {
   MENU_BUTTON_TESTPAGE,
   MENU_BUTTON_TEST_COMPONENT,
-  HOMEPAGE_MENU_BUTTON,
+  HOMEPAGE_MENUBUTTON_BUTTON,
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_ITEM_1_COMPONENT,
 } from '../../../FluentTester/TestComponents/MenuButton/consts';
@@ -69,7 +69,7 @@ class MenuButtonPageObject extends BasePage {
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_MENU_BUTTON);
+    return By(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   get _menuItem() {

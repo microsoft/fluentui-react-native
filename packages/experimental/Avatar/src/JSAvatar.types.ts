@@ -1,10 +1,24 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ImageProps, ViewProps, ImageURISource, TextProps, ColorValue } from 'react-native';
+import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { BadgeProps, PresenceBadgeProps } from '@fluentui-react-native/badge';
 
 export const JSAvatarName = 'Avatar';
-
-export type AvatarSize = 'size8' | 'size24' | 'size32' | 'size40' | 'size48' | 'size56' | 'size72' | 'size100' | 'size120';
+export const AvatarSizes = [
+  'size20',
+  'size24',
+  'size28',
+  'size32',
+  'size36',
+  'size40',
+  'size48',
+  'size56',
+  'size64',
+  'size72',
+  'size96',
+  'size120',
+] as const;
+export type AvatarSize = typeof AvatarSizes[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
@@ -34,9 +48,6 @@ export type AvatarColor =
   | 'platinum'
   | 'steel'
   | 'brown';
-
-export type AvatarPresence = 'none' | 'offline' | 'online' | 'away' | 'dnd' | 'blocked' | 'busy';
-
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
@@ -55,22 +66,22 @@ export interface AvatarConfigurableProps {
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   active?: AvatarActive;
   activeAppearance?: AvatarActiveAppearance;
-  imageUrl?: string;
-  imageDescription?: string;
+  image?: ImageProps;
+  src?: string;
   initials?: string;
-  presence?: AvatarPresence;
-  isOutOfOffice?: boolean;
+  name?: string;
   shape?: AvatarShape;
+  badge?: PresenceBadgeProps;
 }
 
 export interface AvatarSlotProps {
   root: ViewProps;
-  photo: ImageProps;
+  image: ImageProps;
   initials: TextProps;
   initialsBackground: ViewProps;
   icon: ImageProps;
   ring: ViewProps;
-  glow: ViewProps;
+  badge: BadgeProps;
 }
 
 export type IconAlignment = 'start' | 'center' | 'end';
@@ -92,8 +103,6 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
 }
 
 export interface JSAvatarState {
-  personaPhotoSource: ImageURISource | undefined;
-  iconSource: ImageURISource | undefined;
   showRing: boolean;
   transparentRing: boolean;
 }

@@ -1,8 +1,42 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Wed, 06 Apr 2022 22:58:22 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.25
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Revert "Add Text props and test new Variant types (#1615)" (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.25
+
+## 0.7.24
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/framework to v0.7.24
+
+## 0.7.23
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.23
+
+## 0.7.22
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.22
 
 ## 0.7.21
 

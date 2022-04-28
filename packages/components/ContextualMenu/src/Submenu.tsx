@@ -103,7 +103,8 @@ export const Submenu = compose<SubmenuType>({
           flexDirection: 'column',
           flexGrow: 1,
         },
-        showsVerticalScrollIndicator: true,
+        showsVerticalScrollIndicator: maxHeight != undefined,
+        showsHorizontalScrollIndicator: maxWidth != undefined,
       },
       focusZone: {
         componentRef: focusZoneRef,

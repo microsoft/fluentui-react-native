@@ -1,6 +1,6 @@
 import { JSAvatarProps, AvatarInfo, JSAvatarState } from './JSAvatar.types';
-import { getPresenceIconSource } from './JSAvatar.helpers';
-
+import { ImageProps, ImageSourcePropType } from 'react-native';
+import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -9,34 +9,34 @@ import { getPresenceIconSource } from './JSAvatar.helpers';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { imageUrl, imageDescription, initials, presence, isOutOfOffice, ring, shape, active, activeAppearance, ...rest } = props;
+  const { active, accessibilityLabel, activeAppearance, badge, src, ring, shape, ...rest } = props;
 
-  const personaPhotoSource =
-    imageUrl === undefined
-      ? undefined
-      : {
-          uri: imageUrl,
-        };
-
-  const iconSource = presence === undefined ? undefined : getPresenceIconSource(presence, isOutOfOffice || false);
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
 
+  const imageProps: ImageProps = {
+    accessibilityLabel,
+    source: src ? ({ uri: src } as ImageSourcePropType) : undefined,
+  };
+
+  const badgeProps: PresenceBadgeProps = {
+    size: 'small',
+    ...badge,
+  };
+
   const state: JSAvatarState = {
-    iconSource,
-    personaPhotoSource,
     showRing,
     transparentRing,
   };
 
   return {
     props: {
-      children: initials,
-      accessibilityLabel: imageDescription,
       shape: shape || 'circular',
       ...rest,
       active,
       activeAppearance,
+      image: imageProps,
+      badge: badgeProps,
     },
     state: {
       ...state,

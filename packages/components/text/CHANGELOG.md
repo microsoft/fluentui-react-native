@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Wed, 06 Apr 2022 22:58:22 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.21
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.19
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.11.20
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @uifabricshared/foundation-compose to v1.11.18
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.11.19
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.17
+
+## 0.11.18
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.16
 
 ## 0.11.17
 
