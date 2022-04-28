@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { View } from 'react-native';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuTrigger, MenuPopover } from '@fluentui-react-native/menu';
+import { Menu, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
@@ -16,9 +15,9 @@ const MenuDefault: React.FunctionComponent = () => {
           <Button>Test</Button>
         </MenuTrigger>
         <MenuPopover>
-          <View style={{ backgroundColor: 'red', height: 50, width: 200 }}>
+          <MenuList>
             <Text>Hello world!!!</Text>
-          </View>
+          </MenuList>
         </MenuPopover>
       </Menu>
     </Stack>
