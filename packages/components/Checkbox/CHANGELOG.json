@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Thu, 28 Apr 2022 22:00:28 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.15.3",
+      "version": "0.15.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "d2ee7f9a0afd0b935380f33c3b78abe753db3074",
+            "comment": "Update checkbox documentation for MacOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Apr 2022 19:09:51 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.15.2",
       "version": "0.15.2",
