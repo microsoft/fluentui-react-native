@@ -7,9 +7,6 @@ import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
   tokens: [],
-  slotProps: {
-    root: {},
-  },
   slots: {
     root: View,
   },
