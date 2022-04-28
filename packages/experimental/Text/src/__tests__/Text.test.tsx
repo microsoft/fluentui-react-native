@@ -10,7 +10,13 @@ describe('Text component tests', () => {
   });
 
   it('Text all props', () => {
-    const tree = renderer.create(<Text variant="bodyStandard">All props</Text>).toJSON();
+    const tree = renderer
+      .create(
+        <Text disabled variant="bodyStandard">
+          All props
+        </Text>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -26,17 +32,24 @@ describe('Text component tests', () => {
 
   it('Text simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <Text>Default</Text>);
+    checkRenderConsistency(() => <Text disabled>Default</Text>);
     checkRenderConsistency(() => <Text variant="headerStandard">Default</Text>);
   });
 
   it('Text re-renders correctly', () => {
     checkReRender(() => <Text>Default</Text>);
+    checkReRender(() => <Text disabled>Default</Text>);
     checkReRender(() => <Text variant="headerStandard">Default</Text>);
   });
 
   it('Text shares produced styles across multiple renders', () => {
     const style = { color: 'black' };
     checkRenderConsistency(() => <Text style={style}>Default</Text>);
+    checkRenderConsistency(() => (
+      <Text style={style} disabled>
+        Default
+      </Text>
+    ));
     checkRenderConsistency(() => (
       <Text style={style} variant="headerStandard">
         Default
@@ -47,6 +60,11 @@ describe('Text component tests', () => {
   it('Text re-renders correctly with style', () => {
     const style = { color: 'blue' };
     checkReRender(() => <Text style={style}>Default</Text>);
+    checkReRender(() => (
+      <Text style={style} disabled>
+        Default
+      </Text>
+    ));
     checkReRender(() => (
       <Text style={style} variant="headerStandard">
         Default

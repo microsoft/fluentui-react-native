@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Revert \"Add Text props and test new Variant types (#1615)\"",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
