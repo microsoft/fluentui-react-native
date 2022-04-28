@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update checkbox documentation for MacOS",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
