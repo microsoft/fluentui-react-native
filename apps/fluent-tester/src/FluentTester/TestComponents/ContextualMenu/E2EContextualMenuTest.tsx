@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
-import { Button, ContextualMenu, ContextualMenuItem, Separator } from '@fluentui/react-native';
+import { ButtonV1 as Button, ContextualMenu, ContextualMenuItem, Separator } from '@fluentui/react-native';
 import { CONTEXTUALMENUITEM_TEST_COMPONENT, CONTEXTUALMENU_TEST_COMPONENT } from './consts';
 
 export const E2EContextualMenuTest: React.FunctionComponent = () => {
@@ -75,12 +75,9 @@ export const E2EContextualMenuTest: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button
-            content="Press for ContextualMenu"
-            onClick={toggleShowContextualMenu}
-            componentRef={stdBtnRef}
-            testID={CONTEXTUALMENU_TEST_COMPONENT}
-          />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef} testID={CONTEXTUALMENU_TEST_COMPONENT}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 

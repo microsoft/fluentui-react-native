@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import {
   Text as FURNText,
-  Button,
+  ButtonV1 as Button,
   ContextualMenu,
   ContextualMenuItem,
   Submenu,
@@ -87,7 +87,9 @@ const ContextualMenuMainTest: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 
@@ -189,7 +191,9 @@ const NestedContextualMenu: React.FunctionComponent = () => {
             <Text>Submenu Visibility: </Text>
             {isSubmenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 
@@ -412,7 +416,9 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           <Text>
             <Text>Menu and Submenu max height set to 200</Text>
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 
