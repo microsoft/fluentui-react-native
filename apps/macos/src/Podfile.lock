@@ -9,17 +9,17 @@ PODS:
     - React-Core (= 0.64.30)
     - React-jsi (= 0.64.30)
     - ReactCommon/turbomodule/core (= 0.64.30)
-  - FRNAvatar (0.14.15):
+  - FRNAvatar (0.14.17):
     - MicrosoftFluentUI (= 0.3.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
     - React
-  - FRNCallout (0.19.43):
+  - FRNCallout (0.19.44):
     - React
-  - FRNCheckbox (0.10.16):
+  - FRNCheckbox (0.11.1):
     - React
-  - FRNMenuButton (0.7.55):
+  - FRNMenuButton (0.7.57):
     - React
-  - FRNRadioButton (0.14.42):
+  - FRNRadioButton (0.14.43):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.3.0):
@@ -94,7 +94,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.9.22):
+  - RCTFocusZone (0.9.23):
     - React
   - RCTRequired (0.64.30)
   - RCTTypeSafety (0.64.30):
@@ -485,19 +485,19 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-macos/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  boost-for-react-native: d5ad1140010aa8cb622323a781ecbeab4425d19a
-  DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
+  boost-for-react-native: dabda8622e76020607c2ae1e65cc0cda8b61479d
+  DoubleConversion: 56a44bcfd14ab2ff66f5a146b2e875eb4b69b19b
   FBLazyVector: 8a96f324df8c1bc4e2f7e2163d704ec364f0bc6c
-  FBReactNativeSpec: 52bfb636413dc06cf5a57b63f60ef41b5dd9f8c6
-  FRNAvatar: c2ad92e454278c4ecff55e705224eb1368e8ddda
-  FRNCallout: c6a13a3e22b95d0c0db395e8f9eb75e484b59b0c
-  FRNCheckbox: fee69e9e776074b8337578984f620a5081ff1a19
-  FRNMenuButton: 97bda376b4af6780a01094195e4efe44fce3e0a2
-  FRNRadioButton: 47ab47b5c340c970d66c9498d85802bd4c111eaf
-  glog: 0dc7efada961c0793012970b60faebbd58b0decb
+  FBReactNativeSpec: cc89d4a42ae6eda9b7e3f7b2790e50812d6d5b3d
+  FRNAvatar: 5bacfae4125ac868eacbdc3a51b7eee6e6993995
+  FRNCallout: 94280d5b2e3f0b92c962c25c4fd206d0046c08a5
+  FRNCheckbox: f91497a700af6181187091a1153de810b298103a
+  FRNMenuButton: 2f061b7d908024d93f0c9a425b5775c3009ec3a6
+  FRNRadioButton: 2a5af22aec98d341b8d2726aece64c6f86150f33
+  glog: 1cb7c408c781ae8f35bbababe459b45e3dee4ec1
   MicrosoftFluentUI: b98d877a2122804132365aa167944f58ef4adb69
-  RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
-  RCTFocusZone: 85fe6e7e4f5fa510df280ee975a0be08fb7edee1
+  RCT-Folly: 1347093ffe75e152d846f7e45a3ef901b60021aa
+  RCTFocusZone: c5c6ccb473d3c076f933f561b2bfa0330da792e4
   RCTRequired: 8903667b081ec6b4b870c6b25ff1038eef62db0d
   RCTTypeSafety: 061b065a52bcd68ca38755bc56784a4889659625
   React: a3c80fce87768d4553ebe658746219431483b620
@@ -529,4 +529,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 568704fb95966cf7ad6daa54a1d36eb2d5c3bba6
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2
