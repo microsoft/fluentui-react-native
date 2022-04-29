@@ -7,6 +7,16 @@ import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
 export const MenuList = compose<MenuListType>({
   displayName: menuListName,
   tokens: [],
+  slotProps: {
+    root: {
+      style: {
+        // TODO convert to tokens
+        paddingVertical: 4,
+        minWidth: 128,
+        backgroundColor: 'neutralBackground1',
+      },
+    },
+  },
   slots: {
     root: View,
   },
