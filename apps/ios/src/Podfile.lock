@@ -371,7 +371,7 @@ PODS:
   - React-jsinspector (0.64.3)
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.2.1):
+  - react-native-slider (4.2.2):
     - React-Core
   - React-perflogger (0.64.3)
   - React-RCTActionSheet (0.64.3):
@@ -437,7 +437,7 @@ PODS:
     - React-cxxreact (= 0.64.3)
     - React-jsi (= 0.64.3)
     - React-perflogger (= 0.64.3)
-  - ReactTestApp-DevSupport (1.3.6):
+  - ReactTestApp-DevSupport (1.3.7):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -585,7 +585,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: df6abc9fafbecb8e5b7a5fbc5e6d4bd017d594d5
   React-jsinspector: 34e23860273a23695342f58eed3ffd3ba10c31e0
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: 241935e3ea8e47599c317f512f96ee8de607d4cb
+  react-native-slider: 2f25c919f1dc309b90e2cc8346b8042ecec2102f
   React-perflogger: cc76a4254d19640f1d8ad1c66fdee800414b805c
   React-RCTActionSheet: 7448f049318d8d7e8a9a1ebb742ada721757eea8
   React-RCTAnimation: fb9b3fa1a4a9f5e6ab01b3368693ce69860ba76a
@@ -598,7 +598,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: c7f845861e79eae13dc1e8217a3cf47a3945b504
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
-  ReactTestApp-DevSupport: 01831bc572cff28e1ca4b54f32215e8f9f54bb29
+  ReactTestApp-DevSupport: 184027604fa0bff24e3467092ba799c2fc6be16f
   ReactTestApp-Resources: 51437f32bf317329a7c9ca3f68e3a4cc952567ba
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
