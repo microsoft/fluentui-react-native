@@ -1,7 +1,8 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { BadgeProps, PresenceBadgeProps } from '@fluentui-react-native/badge';
+import { BadgeProps, PresenceBadgeProps, BadgeSize } from '@fluentui-react-native/badge';
+import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const JSAvatarName = 'Avatar';
 export const AvatarSizes = [
@@ -66,12 +67,13 @@ export interface AvatarConfigurableProps {
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   active?: AvatarActive;
   activeAppearance?: AvatarActiveAppearance;
+  badge?: PresenceBadgeProps;
+  icon?: IconSourcesType;
   image?: ImageProps;
-  src?: string;
   initials?: string;
   name?: string;
   shape?: AvatarShape;
-  badge?: PresenceBadgeProps;
+  src?: string;
 }
 
 export interface AvatarSlotProps {
@@ -79,7 +81,7 @@ export interface AvatarSlotProps {
   image: ImageProps;
   initials: TextProps;
   initialsBackground: ViewProps;
-  icon: ImageProps;
+  icon: IconProps;
   ring: ViewProps;
   badge: BadgeProps;
 }
@@ -87,19 +89,32 @@ export interface AvatarSlotProps {
 export type IconAlignment = 'start' | 'center' | 'end';
 
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens {
-  avatarSize?: number;
   iconSize?: number;
   iconStrokeWidth?: number;
   iconStrokeColor?: string;
   initialsSize?: number;
+  height?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
-  physicalSize?: number;
   circular?: JSAvatarTokens;
   square?: JSAvatarTokens;
   inactive?: JSAvatarTokens;
   avatarOpacity?: number;
   ringColor?: ColorValue;
+  size20?: JSAvatarTokens;
+  size24?: JSAvatarTokens;
+  size28?: JSAvatarTokens;
+  size32?: JSAvatarTokens;
+  size36?: JSAvatarTokens;
+  size40?: JSAvatarTokens;
+  size48?: JSAvatarTokens;
+  size56?: JSAvatarTokens;
+  size64?: JSAvatarTokens;
+  size72?: JSAvatarTokens;
+  size96?: JSAvatarTokens;
+  size120?: JSAvatarTokens;
+  width?: number;
+  badgeSize?: BadgeSize;
 }
 
 export interface JSAvatarState {

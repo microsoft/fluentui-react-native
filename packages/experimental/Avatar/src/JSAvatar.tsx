@@ -5,6 +5,8 @@ import { stylingSettings } from './JSAvatar.styling';
 import { compose, UseSlots, mergeProps, withSlots } from '@fluentui-react-native/framework';
 import { useAvatar } from './useAvatar';
 import { PresenceBadge } from '@fluentui-react-native/badge';
+import { Icon } from '@fluentui-react-native/icon';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the avatar.
@@ -20,6 +22,8 @@ export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSA
     userProps[layer] ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
+    layer === userProps['size'] ||
+    (!userProps['size'] && layer === 'size56') ||
     (userProps.active === 'inactive' && layer === 'inactive')
   );
 };
@@ -32,16 +36,17 @@ export const JSAvatar = compose<JSAvatarType>({
     image: Image,
     initials: Text,
     initialsBackground: View,
-    icon: Image,
+    icon: Icon,
     ring: View,
     badge: PresenceBadge,
   },
   useRender: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
     const avatar = useAvatar(userProps);
+    const iconProps = createIconProps(userProps.icon);
     const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
 
     return (final: JSAvatarProps) => {
-      const { activeAppearance, initials, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
+      const { activeAppearance, icon, initials, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
       const { showRing, transparentRing } = avatar.state;
 
       return (
@@ -50,11 +55,11 @@ export const JSAvatar = compose<JSAvatarType>({
             <Slots.image {...image} />
           ) : (
             <Slots.initialsBackground>
-              <Slots.initials>{initials}</Slots.initials>
+              {initials ? <Slots.initials>{initials}</Slots.initials> : userProps.icon && <Slots.icon {...iconProps} />}
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
-          <Slots.badge {...badge} />
+          {badge.status && <Slots.badge {...badge} />}
         </Slots.root>
       );
     };
