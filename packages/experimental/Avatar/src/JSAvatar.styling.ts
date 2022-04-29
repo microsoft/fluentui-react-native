@@ -1,8 +1,8 @@
-import { JSAvatarName, JSAvatarTokens, AvatarSlotProps, JSAvatarProps } from './JSAvatar.types';
+import { JSAvatarName, JSAvatarTokens, AvatarSlotProps, JSAvatarProps, AvatarColors, AvatarSizes } from './JSAvatar.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
-import { convertCoinColorFluent, getRingConfig } from './JSAvatar.helpers';
+import { getRingConfig } from './JSAvatar.helpers';
 import { borderStyles } from '@fluentui-react-native/tokens';
 
 const nameMap: { [key: string]: string } = {
@@ -11,23 +11,7 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end',
 };
 
-export const avatarStates: (keyof JSAvatarTokens)[] = [
-  'circular',
-  'square',
-  'inactive',
-  'size20',
-  'size24',
-  'size28',
-  'size32',
-  'size36',
-  'size40',
-  'size48',
-  'size56',
-  'size64',
-  'size72',
-  'size96',
-  'size120',
-];
+export const avatarStates: (keyof JSAvatarTokens)[] = [...AvatarColors, ...AvatarSizes, 'circular', 'square', 'inactive'];
 
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
@@ -35,17 +19,17 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { horizontalIconAlignment, verticalIconAlignment } = tokens;
+        const { horizontalIconAlignment, verticalIconAlignment, width, height, avatarOpacity } = tokens;
         return {
           style: {
             flexDirection: 'row',
-            width: tokens.width,
-            height: tokens.height,
+            width: width,
+            height: height,
             justifyContent: nameMap[horizontalIconAlignment || 'end'] as ViewStyle['justifyContent'],
             alignItems: nameMap[verticalIconAlignment || 'end'] as ViewStyle['alignItems'],
             horizontalIconAlignment,
             verticalIconAlignment,
-            opacity: tokens.avatarOpacity,
+            opacity: avatarOpacity,
           },
         };
       },
@@ -56,18 +40,16 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             fontSize: tokens.initialsSize,
+            color: tokens.color,
           },
         };
       },
-      ['initialsSize'],
+      ['initialsSize', 'color'],
     ),
     initialsBackground: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const { backgroundColor, coinColorFluent } = tokens;
-        let effectiveBackgroundColor = backgroundColor;
-        if (coinColorFluent) {
-          effectiveBackgroundColor = convertCoinColorFluent(coinColorFluent);
-        }
+        const { backgroundColor } = tokens;
+
         return {
           style: {
             ...borderStyles.from(tokens, theme),
@@ -77,11 +59,11 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             alignSelf: 'stretch',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: effectiveBackgroundColor,
+            backgroundColor: backgroundColor,
           },
         };
       },
-      ['coinColorFluent', 'backgroundColor', 'width', 'height', ...borderStyles.keys],
+      ['backgroundColor', 'width', 'height', ...borderStyles.keys],
     ),
     image: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -110,12 +92,10 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
         const ringConfig = getRingConfig(tokens.width);
-
-        const ringColor = tokens.ringColor;
         return {
           style: {
             borderStyle: 'solid',
-            borderColor: ringColor,
+            borderColor: tokens.ringColor,
             borderWidth: ringConfig.stroke,
             width: ringConfig.size,
             height: ringConfig.size,
@@ -126,7 +106,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['width', 'height', ...borderStyles.keys],
+      ['width', 'height', 'ringColor', ...borderStyles.keys],
     ),
     badge: buildProps(
       (tokens: JSAvatarTokens) => {

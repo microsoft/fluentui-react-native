@@ -3,6 +3,7 @@ import {
   AvatarSize,
   AvatarSizes,
   AvatarColor,
+  AvatarColors,
   JSAvatar,
   AvatarActive,
   AvatarActiveAppearance,
@@ -12,39 +13,14 @@ import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { JSAvatarTokens } from '@fluentui-react-native/experimental-avatar';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
+const avatarColors: AvatarColor[] = ['neutral', 'brand', 'colorful', ...AvatarColors];
 const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring', 'shadow', 'glow', 'ring-shadow', 'ring-glow'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
-
-const allColors: WithUndefined<AvatarColor>[] = [
-  undefinedText,
-  'cornflower',
-  'blue',
-  'royalBlue',
-  'teal',
-  'forest',
-  'darkGreen',
-  'berry',
-  'hotPink',
-  'grape',
-  'purple',
-  'pumpkin',
-  'red',
-  'burgundy',
-  'orchid',
-  'brass',
-  'darkRed',
-  'beige',
-  'platinum',
-  'steel',
-  'brown',
-];
-
 const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
 
 const StyledPicker = (props) => {
@@ -61,25 +37,23 @@ const StyledPicker = (props) => {
 };
 
 export const StandardUsage: FunctionComponent = () => {
-  const tokens: JSAvatarTokens = {};
   const [isSquare, setSquare] = useState(false);
   const [showImage, setShowImage] = useState(true);
   const [active, setActive] = useState<AvatarActive>('unset');
   const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
-  const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
   const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
+  const [avatarColor, setAvatarColor] = useState<AvatarColor>('brass');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
   const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
+  const onAvatarColorChange = useCallback((value) => setAvatarColor(value), []);
   const onSizeChange = useCallback((value) => setImageSize(value), []);
-  const onColorChange = useCallback((value) => setCoinColor(value), []);
+
   const onPresenceChange = useCallback((value) => setPresence(value), []);
 
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };
-
-  tokens.backgroundColor = coinColor;
 
   const fontBuiltInProps = {
     fontFamily: 'Arial',
@@ -111,7 +85,7 @@ export const StandardUsage: FunctionComponent = () => {
             collection={avatarActiveAppearance}
           />
         ) : null}
-        <StyledPicker prompt="Coin color" selected={coinColor} onChange={onColorChange} collection={allColors} />
+        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
 
@@ -124,7 +98,7 @@ export const StandardUsage: FunctionComponent = () => {
         accessibilityLabel="Photo of Satya Nadella"
         badge={{ status: presence === undefinedText ? undefined : presence }}
         src={showImage ? satyaPhotoUrl : undefined}
-        coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+        avatarColor={avatarColor}
       />
       {svgIconsEnabled && (
         <JSAvatar
@@ -134,7 +108,7 @@ export const StandardUsage: FunctionComponent = () => {
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="Icon"
           icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
-          coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+          avatarColor={avatarColor}
         />
       )}
     </View>

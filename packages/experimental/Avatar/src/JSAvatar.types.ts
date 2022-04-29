@@ -19,36 +19,51 @@ export const AvatarSizes = [
   'size96',
   'size120',
 ] as const;
-export type AvatarSize = typeof AvatarSizes[number];
-
-export type AvatarShape = 'circular' | 'square';
-export type AvatarActive = 'active' | 'inactive' | 'unset';
-export type AvatarActiveAppearance = 'ring' | 'shadow' | 'glow' | 'ring-shadow' | 'ring-glow';
 
 /**
  * Sets color of the avatar when there is no picture. Uses fluent color names
  */
-export type AvatarColor =
-  | 'cornflower'
-  | 'blue'
-  | 'royalBlue'
-  | 'teal'
-  | 'forest'
-  | 'darkGreen'
-  | 'berry'
-  | 'hotPink'
-  | 'grape'
-  | 'purple'
-  | 'pumpkin'
-  | 'red'
-  | 'burgundy'
-  | 'orchid'
-  | 'brass'
-  | 'darkRed'
-  | 'beige'
-  | 'platinum'
-  | 'steel'
-  | 'brown';
+export const AvatarColors = [
+  'darkRed',
+  'cranberry',
+  'red',
+  'pumpkin',
+  'peach',
+  'marigold',
+  'gold',
+  'brass',
+  'brown',
+  'forest',
+  'seafoam',
+  'darkGreen',
+  'lightTeal',
+  'teal',
+  'steel',
+  'blue',
+  'royalBlue',
+  'cornflower',
+  'navy',
+  'lavender',
+  'purple',
+  'grape',
+  'lilac',
+  'pink',
+  'magenta',
+  'plum',
+  'beige',
+  'mink',
+  'platinum',
+  'anchor',
+] as const;
+export type AvatarSize = typeof AvatarSizes[number];
+export type AvatarNamedColor = typeof AvatarColors[number];
+
+export type AvatarShape = 'circular' | 'square';
+export type AvatarActive = 'active' | 'inactive' | 'unset';
+export type AvatarActiveAppearance = 'ring' | 'shadow' | 'glow' | 'ring-shadow' | 'ring-glow';
+export type AvatarColor = 'neutral' | 'brand' | 'colorful' | AvatarNamedColor;
+export type IconAlignment = 'start' | 'center' | 'end';
+
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
@@ -59,9 +74,18 @@ export interface RingConfig {
 }
 
 export interface AvatarConfigurableProps {
+  /**
+   * The color when displaying either an icon or initials.
+   * * neutral (default): gray
+   * * brand: color from the brand palette
+   * * colorful: picks a color from a set of pre-defined colors, based on a hash of the name (or idForColor if provided)
+   * * [AvatarNamedColor]: a specific color from the theme
+   *
+   * @defaultvalue neutral
+   */
+  avatarColor?: AvatarColor;
   size?: AvatarSize;
   ring?: RingConfig;
-  coinColorFluent?: AvatarColor;
 }
 
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
@@ -69,6 +93,13 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   activeAppearance?: AvatarActiveAppearance;
   badge?: PresenceBadgeProps;
   icon?: IconSourcesType;
+
+  /**
+   * Specify a string to be used instead of the name, to determine which color to use when color="colorful".
+   * Use this when a name is not available, but there is another unique identifier that can be used instead.
+   */
+  idForColor?: string | undefined;
+
   image?: ImageProps;
   initials?: string;
   name?: string;
@@ -76,22 +107,8 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   src?: string;
 }
 
-export interface AvatarSlotProps {
-  root: ViewProps;
-  image: ImageProps;
-  initials: TextProps;
-  initialsBackground: ViewProps;
-  icon: IconProps;
-  ring: ViewProps;
-  badge: BadgeProps;
-}
-
-export type IconAlignment = 'start' | 'center' | 'end';
-
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens {
   iconSize?: number;
-  iconStrokeWidth?: number;
-  iconStrokeColor?: string;
   initialsSize?: number;
   height?: number;
   horizontalIconAlignment?: IconAlignment;
@@ -115,6 +132,48 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   size120?: JSAvatarTokens;
   width?: number;
   badgeSize?: BadgeSize;
+  neutral?: JSAvatarTokens;
+  brand?: JSAvatarTokens;
+  darkRed?: JSAvatarTokens;
+  cranberry?: JSAvatarTokens;
+  red?: JSAvatarTokens;
+  pumpkin?: JSAvatarTokens;
+  peach?: JSAvatarTokens;
+  marigold?: JSAvatarTokens;
+  gold?: JSAvatarTokens;
+  brass?: JSAvatarTokens;
+  brown?: JSAvatarTokens;
+  forest?: JSAvatarTokens;
+  seafoam?: JSAvatarTokens;
+  darkGreen?: JSAvatarTokens;
+  lightTeal?: JSAvatarTokens;
+  teal?: JSAvatarTokens;
+  steel?: JSAvatarTokens;
+  blue?: JSAvatarTokens;
+  royalBlue?: JSAvatarTokens;
+  cornflower?: JSAvatarTokens;
+  navy?: JSAvatarTokens;
+  lavender?: JSAvatarTokens;
+  purple?: JSAvatarTokens;
+  grape?: JSAvatarTokens;
+  lilac?: JSAvatarTokens;
+  pink?: JSAvatarTokens;
+  magenta?: JSAvatarTokens;
+  plum?: JSAvatarTokens;
+  beige?: JSAvatarTokens;
+  mink?: JSAvatarTokens;
+  platinum?: JSAvatarTokens;
+  anchor?: JSAvatarTokens;
+}
+
+export interface AvatarSlotProps {
+  root: ViewProps;
+  image: ImageProps;
+  initials: TextProps;
+  initialsBackground: ViewProps;
+  icon: IconProps;
+  ring: ViewProps;
+  badge: BadgeProps;
 }
 
 export interface JSAvatarState {
