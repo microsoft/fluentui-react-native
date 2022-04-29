@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 29 Apr 2022 01:39:17 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.31",
+      "version": "0.59.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "844986636ca3090059b1f86f4cd224d65ca5eec4",
+            "comment": "Use ButtonV1 in ContextualMenu"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Apr 2022 22:00:29 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.30",
       "version": "0.59.30",
