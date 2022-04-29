@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added sizes to the Avatar",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}

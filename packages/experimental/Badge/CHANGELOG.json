@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Fri, 29 Apr 2022 21:54:17 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.32",
+      "version": "0.0.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "aa5abb9b11a1e8c07b7c3b2d67d010543af60d4a",
+            "comment": "Added sizes to the Avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Apr 2022 19:09:51 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.31",
       "version": "0.0.31",

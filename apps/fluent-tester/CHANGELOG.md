@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 29 Apr 2022 01:39:17 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Apr 2022 21:54:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.32
+
+Fri, 29 Apr 2022 21:54:17 GMT
+
+### Patches
+
+- Added sizes to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.32
+- Bump @fluentui-react-native/experimental-avatar to v0.14.19
 
 ## 0.59.31
 
