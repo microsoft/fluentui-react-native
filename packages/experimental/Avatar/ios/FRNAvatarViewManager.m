@@ -2,26 +2,6 @@
 
 @import FluentUI;
 
-// Macros inspired by https://betterprogramming.pub/react-native-meets-swiftui-d1606a8e1681
-
-#define RCT_EXPORT_SWIFTUI_PROPERTY(name, type, viewClass) \
-RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
-- (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC { \
-    viewClass *proxy = (viewClass *)view;  \
-    proxy.state.name = [RCTConvert type:json]; \
-}
-
-#define RCT_REMAP_SWIFTUI_PROPERTY(name, keyPath, type, viewClass) \
-RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
-- (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC { \
-    viewClass *proxy = (viewClass *)view;  \
-    proxy.state.keyPath = [RCTConvert type:json]; \
-}
-
-#define RCT_EXPORT_CUSTOM_SWIFTUI_PROPERTY(name, type, viewClass) \
-RCT_REMAP_VIEW_PROPERTY(name, __custom__, type)  \
-- (void)set_##name:(id)json forView:(UIView *)view withDefaultView:(UIView *)defaultView RCT_DYNAMIC
-
 NS_ASSUME_NONNULL_BEGIN
 
 @implementation RCTConvert (FRNAvatarAdditions)
@@ -59,33 +39,33 @@ RCT_ENUM_CONVERTER(MSFAvatarStyle, (@{
 
 @interface RCT_EXTERN_MODULE(FRNAvatarViewManager, RCTViewManager)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(primaryText, NSString, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(primaryText, state.primaryText, NSString)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(secondaryText, NSString, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(secondaryText, state.secondaryText, NSString)
 
-RCT_REMAP_SWIFTUI_PROPERTY(imageSource, image, UIImage, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(imageSource, state.image, UIImage)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(ringColor, UIColor, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(ringColor, state.ringColor, UIColor)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(foregroundColor, UIColor, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(foregroundColor, state.foregroundColor, UIColor)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(backgroundColor, UIColor, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(backgroundColor, state.backgroundColor, UIColor)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(presence, MSFAvatarPresence, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(presence, state.presence, MSFAvatarPresence)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(isRingVisible, BOOL, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(isRingVisible, state.isRingVisible, BOOL)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(isTransparent, BOOL, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(isTransparent, state.isTransparent, BOOL)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(isOutOfOffice, BOOL, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(isOutOfOffice, state.isOutOfOffice, BOOL)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(size, MSFAvatarSize, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(size, state.size, MSFAvatarSize)
 
-RCT_REMAP_SWIFTUI_PROPERTY(avatarStyle, style, MSFAvatarStyle, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(avatarStyle, state.style, MSFAvatarStyle)
 
-RCT_EXPORT_SWIFTUI_PROPERTY(hasRingInnerGap, BOOL, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(hasRingInnerGap, state.hasRingInnerGap, BOOL)
 
-RCT_REMAP_SWIFTUI_PROPERTY(customBorderImageSource, imageBasedRingColor, UIImage, MSFAvatar)
+RCT_REMAP_VIEW_PROPERTY(customBorderImageSource, state.imageBasedRingColor, UIImage)
 
 @end
 
