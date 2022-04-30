@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Move to official 0.5.0 release",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "mischreiber@microsoft.com",
-  "dependentChangeType": "patch"
-}

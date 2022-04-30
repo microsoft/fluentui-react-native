@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Sat, 30 Apr 2022 06:33:42 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.20",
+      "version": "0.14.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "mischreiber@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c9c1e71e25fac45d2266ee2bea387dfa0d05598b",
+            "comment": "Move to official 0.5.0 release"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.20",
+            "commit": "c9c1e71e25fac45d2266ee2bea387dfa0d05598b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.5",
+            "commit": "c9c1e71e25fac45d2266ee2bea387dfa0d05598b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 29 Apr 2022 21:54:17 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.19",
       "version": "0.14.19",
