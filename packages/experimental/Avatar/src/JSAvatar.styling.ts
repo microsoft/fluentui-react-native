@@ -2,7 +2,7 @@ import { JSAvatarName, JSAvatarTokens, AvatarSlotProps, JSAvatarProps } from './
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
-import { calculateEffectiveSizes, convertCoinColorFluent, getRingConfig } from './JSAvatar.helpers';
+import { convertCoinColorFluent, getRingConfig } from './JSAvatar.helpers';
 import { borderStyles } from '@fluentui-react-native/tokens';
 
 const nameMap: { [key: string]: string } = {
@@ -11,7 +11,23 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end',
 };
 
-export const avatarStates: (keyof JSAvatarTokens)[] = ['circular', 'square', 'inactive'];
+export const avatarStates: (keyof JSAvatarTokens)[] = [
+  'circular',
+  'square',
+  'inactive',
+  'size20',
+  'size24',
+  'size28',
+  'size32',
+  'size36',
+  'size40',
+  'size48',
+  'size56',
+  'size64',
+  'size72',
+  'size96',
+  'size120',
+];
 
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
@@ -19,13 +35,12 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { physicalSize } = calculateEffectiveSizes(tokens);
         const { horizontalIconAlignment, verticalIconAlignment } = tokens;
         return {
           style: {
             flexDirection: 'row',
-            width: physicalSize,
-            height: physicalSize,
+            width: tokens.width,
+            height: tokens.height,
             justifyContent: nameMap[horizontalIconAlignment || 'end'] as ViewStyle['justifyContent'],
             alignItems: nameMap[verticalIconAlignment || 'end'] as ViewStyle['alignItems'],
             horizontalIconAlignment,
@@ -34,14 +49,13 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity'],
+      ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity', 'height', 'width'],
     ),
     initials: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { initialsSize } = calculateEffectiveSizes(tokens);
         return {
           style: {
-            fontSize: initialsSize,
+            fontSize: tokens.initialsSize,
           },
         };
       },
@@ -49,7 +63,6 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ),
     initialsBackground: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const { physicalSize } = calculateEffectiveSizes(tokens);
         const { backgroundColor, coinColorFluent } = tokens;
         let effectiveBackgroundColor = backgroundColor;
         if (coinColorFluent) {
@@ -58,8 +71,8 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             ...borderStyles.from(tokens, theme),
-            width: physicalSize,
-            height: physicalSize,
+            width: tokens.width,
+            height: tokens.height,
             flexGrow: 1,
             alignSelf: 'stretch',
             justifyContent: 'center',
@@ -68,46 +81,35 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['coinColorFluent', 'backgroundColor', 'physicalSize', ...borderStyles.keys],
+      ['coinColorFluent', 'backgroundColor', 'width', 'height', ...borderStyles.keys],
     ),
-    photo: buildProps(
+    image: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { physicalSize } = calculateEffectiveSizes(tokens);
-
         return {
           style: {
             borderRadius: tokens.borderRadius,
-            width: physicalSize,
-            height: physicalSize,
+            width: tokens.width,
+            height: tokens.height,
           },
         };
       },
-      ['physicalSize', 'borderRadius'],
+      ['borderRadius', 'width', 'height'],
     ),
     icon: buildProps(
-      (tokens: JSAvatarTokens, theme: Theme) => {
-        const { iconSize, iconStrokeWidth } = calculateEffectiveSizes(tokens);
-        const iconSizeAdjusted = iconSize + iconStrokeWidth * 2;
-        const iconStrokeColor = tokens.iconStrokeColor || theme.colors.background;
+      (tokens: JSAvatarTokens) => {
         return {
           style: {
             position: 'absolute',
-            width: iconSizeAdjusted,
-            height: iconSizeAdjusted,
-            bottom: -iconStrokeWidth,
-            end: -iconStrokeWidth,
-            borderRadius: iconSizeAdjusted / 2,
-            borderWidth: iconStrokeWidth,
-            borderColor: iconStrokeColor,
+            width: tokens.iconSize,
+            height: tokens.iconSize,
           },
         };
       },
-      ['iconSize', 'iconStrokeWidth', 'iconStrokeColor'],
+      ['iconSize'],
     ),
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const { physicalSize } = calculateEffectiveSizes(tokens);
-        const ringConfig = getRingConfig(physicalSize);
+        const ringConfig = getRingConfig(tokens.width);
 
         const ringColor = tokens.ringColor;
         return {
@@ -124,29 +126,16 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['physicalSize', 'ring', 'physicalSize', ...borderStyles.keys],
+      ['width', 'height', ...borderStyles.keys],
     ),
-    glow: buildProps(
-      (tokens: JSAvatarTokens, theme: Theme) => {
-        const { physicalSize } = calculateEffectiveSizes(tokens);
-        const ringConfig = getRingConfig(physicalSize);
-
-        const glowColor = tokens.ringColor;
+    badge: buildProps(
+      (tokens: JSAvatarTokens) => {
         return {
-          style: {
-            borderStyle: 'solid',
-            borderColor: glowColor,
-            borderWidth: ringConfig.stroke - ringConfig.innerStroke,
-            width: ringConfig.size,
-            height: ringConfig.size,
-            position: 'absolute',
-            top: -ringConfig.stroke * 2,
-            left: -ringConfig.stroke * 2,
-            ...borderStyles.from(tokens, theme),
-          },
+          size: tokens.badgeSize,
+          shape: 'circular',
         };
       },
-      ['physicalSize', 'ring', ...borderStyles.keys],
+      ['size'],
     ),
   },
 };

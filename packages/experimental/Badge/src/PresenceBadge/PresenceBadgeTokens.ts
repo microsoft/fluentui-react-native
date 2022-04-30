@@ -4,7 +4,8 @@ import { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (): PresenceBadgeTokens =>
   ({
-    borderWidth: 0,
+    borderWidth: 2,
+    borderColor: globalTokens.color.white,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
     paddingHorizontal: globalTokens.spacing.none,

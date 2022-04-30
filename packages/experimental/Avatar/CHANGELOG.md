@@ -1,8 +1,59 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 21 Apr 2022 21:50:03 GMT and should not be manually modified.
+This log was last generated on Sat, 30 Apr 2022 06:33:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.20
+
+Sat, 30 Apr 2022 06:33:42 GMT
+
+### Patches
+
+- Move to official 0.5.0 release (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.14.19
+
+Fri, 29 Apr 2022 21:54:17 GMT
+
+### Patches
+
+- Added sizes to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.32
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.14.18
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.31
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.14.17
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.30
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/theme-tokens to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.14.16
+
+Tue, 26 Apr 2022 20:45:13 GMT
+
+### Patches
+
+- Changed props according to the spec (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.29
 
 ## 0.14.15
 

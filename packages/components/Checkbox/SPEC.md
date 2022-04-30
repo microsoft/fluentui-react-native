@@ -1,5 +1,7 @@
 # Checkbox
 
+**Not available on MacOS** - Please use `import { Checkbox } from @'fluentui-react-native/checkbox'` and ignore the deprecation message until further notice.
+
 In the short term, the new `Checkbox` control is named `CheckboxV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Checkbox`. It may be useful to rename the control to `Checkbox` using the import syntax to simplify the rename:
 
 ```ts
@@ -289,4 +291,4 @@ The same behavior as above translated for touch events. This means that there is
 - Should mix in the accessibility props expected for a `Checkbox` component.
 - Should be keyboard tabbable and focusable.
 
-See [`useCheckbox` hook](../../experimental/Checkbox/src/useCheckbox.ts) for details on accessibility props
+See [`useCheckbox` hook](./src/useCheckbox.ts) for details on accessibility props

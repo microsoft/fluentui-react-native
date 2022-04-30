@@ -4,4 +4,6 @@ export const menuPopoverName = 'MenuPopover';
 
 export interface MenuPopoverProps extends Omit<IViewProps, 'onPress'> {}
 
-export interface MenuPopoverState {}
+export interface MenuPopoverState {
+  triggerRef: React.RefObject<React.Component>;
+}

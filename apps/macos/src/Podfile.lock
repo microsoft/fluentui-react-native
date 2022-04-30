@@ -24,68 +24,73 @@ PODS:
   - FRNRadioButton (0.14.28):
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.3.0):
-    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.3.0)
-    - MicrosoftFluentUI/ActivityViewAnimating_ios (= 0.3.0)
-    - MicrosoftFluentUI/Appearance_mac (= 0.3.0)
-    - MicrosoftFluentUI/Avatar_ios (= 0.3.0)
-    - MicrosoftFluentUI/AvatarGroup_ios (= 0.3.0)
-    - MicrosoftFluentUI/AvatarView_mac (= 0.3.0)
-    - MicrosoftFluentUI/BadgeField_ios (= 0.3.0)
-    - MicrosoftFluentUI/BarButtonItems_ios (= 0.3.0)
-    - MicrosoftFluentUI/BottomCommanding_ios (= 0.3.0)
-    - MicrosoftFluentUI/BottomSheet_ios (= 0.3.0)
-    - MicrosoftFluentUI/Button_ios (= 0.3.0)
-    - MicrosoftFluentUI/Button_mac (= 0.3.0)
-    - MicrosoftFluentUI/Calendar_ios (= 0.3.0)
-    - MicrosoftFluentUI/Card_ios (= 0.3.0)
-    - MicrosoftFluentUI/CommandBar_ios (= 0.3.0)
-    - MicrosoftFluentUI/Core_ios (= 0.3.0)
-    - MicrosoftFluentUI/Core_mac (= 0.3.0)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.3.0)
-    - MicrosoftFluentUI/DotView_ios (= 0.3.0)
-    - MicrosoftFluentUI/Drawer_ios (= 0.3.0)
-    - MicrosoftFluentUI/DynamicColor_mac (= 0.3.0)
-    - MicrosoftFluentUI/EasyTapButton_ios (= 0.3.0)
-    - MicrosoftFluentUI/HUD_ios (= 0.3.0)
-    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.3.0)
-    - MicrosoftFluentUI/Label_ios (= 0.3.0)
-    - MicrosoftFluentUI/Link_mac (= 0.3.0)
-    - MicrosoftFluentUI/Navigation_ios (= 0.3.0)
-    - MicrosoftFluentUI/Notification_ios (= 0.3.0)
-    - MicrosoftFluentUI/Obscurable_ios (= 0.3.0)
-    - MicrosoftFluentUI/OtherCells_ios (= 0.3.0)
-    - MicrosoftFluentUI/PeoplePicker_ios (= 0.3.0)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.3.0)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.3.0)
-    - MicrosoftFluentUI/Presenters_ios (= 0.3.0)
-    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.3.0)
-    - MicrosoftFluentUI/ScrollView_ios (= 0.3.0)
-    - MicrosoftFluentUI/SegmentedControl_ios (= 0.3.0)
-    - MicrosoftFluentUI/Separator_ios (= 0.3.0)
-    - MicrosoftFluentUI/Separator_mac (= 0.3.0)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.3.0)
-    - MicrosoftFluentUI/TabBar_ios (= 0.3.0)
-    - MicrosoftFluentUI/TableView_ios (= 0.3.0)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.3.0)
-    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.3.0)
-    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.3.0)
-    - MicrosoftFluentUI/Utilities_ios (= 0.3.0)
-  - MicrosoftFluentUI/Appearance_mac (0.3.0)
-  - MicrosoftFluentUI/AvatarView_mac (0.3.0):
+  - MicrosoftFluentUI (0.5.0):
+    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.5.0)
+    - MicrosoftFluentUI/Appearance_mac (= 0.5.0)
+    - MicrosoftFluentUI/Avatar_ios (= 0.5.0)
+    - MicrosoftFluentUI/AvatarGroup_ios (= 0.5.0)
+    - MicrosoftFluentUI/AvatarView_mac (= 0.5.0)
+    - MicrosoftFluentUI/BadgeField_ios (= 0.5.0)
+    - MicrosoftFluentUI/BadgeView_mac (= 0.5.0)
+    - MicrosoftFluentUI/BarButtonItems_ios (= 0.5.0)
+    - MicrosoftFluentUI/BottomCommanding_ios (= 0.5.0)
+    - MicrosoftFluentUI/BottomSheet_ios (= 0.5.0)
+    - MicrosoftFluentUI/Button_ios (= 0.5.0)
+    - MicrosoftFluentUI/Button_mac (= 0.5.0)
+    - MicrosoftFluentUI/Calendar_ios (= 0.5.0)
+    - MicrosoftFluentUI/Card_ios (= 0.5.0)
+    - MicrosoftFluentUI/CardNudge_ios (= 0.5.0)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.5.0)
+    - MicrosoftFluentUI/Core_ios (= 0.5.0)
+    - MicrosoftFluentUI/Core_mac (= 0.5.0)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.5.0)
+    - MicrosoftFluentUI/DotView_ios (= 0.5.0)
+    - MicrosoftFluentUI/Drawer_ios (= 0.5.0)
+    - MicrosoftFluentUI/DynamicColor_mac (= 0.5.0)
+    - MicrosoftFluentUI/EasyTapButton_ios (= 0.5.0)
+    - MicrosoftFluentUI/HUD_ios (= 0.5.0)
+    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.5.0)
+    - MicrosoftFluentUI/Label_ios (= 0.5.0)
+    - MicrosoftFluentUI/Link_mac (= 0.5.0)
+    - MicrosoftFluentUI/Navigation_ios (= 0.5.0)
+    - MicrosoftFluentUI/Notification_ios (= 0.5.0)
+    - MicrosoftFluentUI/Obscurable_ios (= 0.5.0)
+    - MicrosoftFluentUI/OtherCells_ios (= 0.5.0)
+    - MicrosoftFluentUI/PeoplePicker_ios (= 0.5.0)
+    - MicrosoftFluentUI/PersonaButton_ios (= 0.5.0)
+    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.5.0)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.5.0)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.5.0)
+    - MicrosoftFluentUI/Presenters_ios (= 0.5.0)
+    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.5.0)
+    - MicrosoftFluentUI/SegmentedControl_ios (= 0.5.0)
+    - MicrosoftFluentUI/Separator_ios (= 0.5.0)
+    - MicrosoftFluentUI/Separator_mac (= 0.5.0)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.5.0)
+    - MicrosoftFluentUI/TabBar_ios (= 0.5.0)
+    - MicrosoftFluentUI/TableView_ios (= 0.5.0)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.5.0)
+    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.5.0)
+    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.5.0)
+    - MicrosoftFluentUI/Utilities_ios (= 0.5.0)
+  - MicrosoftFluentUI/Appearance_mac (0.5.0)
+  - MicrosoftFluentUI/AvatarView_mac (0.5.0):
     - MicrosoftFluentUI/Core_mac
     - MicrosoftFluentUI/DynamicColor_mac
-  - MicrosoftFluentUI/Button_mac (0.3.0):
+  - MicrosoftFluentUI/BadgeView_mac (0.5.0):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Core_mac (0.3.0)
-  - MicrosoftFluentUI/DatePicker_mac (0.3.0):
+    - MicrosoftFluentUI/DynamicColor_mac
+  - MicrosoftFluentUI/Button_mac (0.5.0):
+    - MicrosoftFluentUI/Core_mac
+  - MicrosoftFluentUI/Core_mac (0.5.0)
+  - MicrosoftFluentUI/DatePicker_mac (0.5.0):
     - MicrosoftFluentUI/Appearance_mac
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/DynamicColor_mac (0.3.0):
+  - MicrosoftFluentUI/DynamicColor_mac (0.5.0):
     - MicrosoftFluentUI/Appearance_mac
-  - MicrosoftFluentUI/Link_mac (0.3.0):
+  - MicrosoftFluentUI/Link_mac (0.5.0):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Separator_mac (0.3.0):
+  - MicrosoftFluentUI/Separator_mac (0.5.0):
     - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -360,7 +365,7 @@ PODS:
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
-  - SwiftLint (0.46.2)
+  - SwiftLint (0.47.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
