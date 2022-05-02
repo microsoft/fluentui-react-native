@@ -5,7 +5,7 @@ import { MenuListTokens } from './MenuList.types';
 
 export const defaultMenuListTokens: TokenSettings<MenuListTokens, Theme> = (t: Theme): MenuListTokens => ({
   gap: globalTokens.spacing.xxs,
-  paddingVertical: globalTokens.spacing.xs,
+  padding: globalTokens.spacing.xs,
   minWidth: 128,
   maxWidth: 300,
   backgroundColor: t.colors.neutralBackground1,

@@ -11,10 +11,10 @@ export const MenuItem = compose<MenuItemType>({
   tokens: [],
   slotProps: {
     root: {
-      style: { height: 48, width: 200, flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent' },
+      style: { display: 'flex', height: 48, width: 200, flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent' },
     },
     content: {
-      color: 'white',
+      color: 'black',
     },
   },
   slots: {
