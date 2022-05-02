@@ -25,6 +25,21 @@ const MenuDefault: React.FunctionComponent = () => {
   );
 };
 
+const Submenu: React.FunctionComponent = () => {
+  return (
+    <Menu>
+      <MenuTrigger>
+        <MenuItem content="A second MenuItem" />
+      </MenuTrigger>
+      <MenuPopover>
+        <View style={{ backgroundColor: 'blue', height: 50, width: 200 }}>
+          <Text>Hello world!!!</Text>
+        </View>
+      </MenuPopover>
+    </Menu>
+  );
+};
+
 const MenuSubMenu: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
@@ -35,16 +50,7 @@ const MenuSubMenu: React.FunctionComponent = () => {
         <MenuPopover>
           <View style={{ backgroundColor: 'red', width: 200, alignItems: 'center' }}>
             <MenuItem content="A MenuItem" />
-            <Menu>
-              <MenuTrigger>
-                <MenuItem content="A second MenuItem" />
-              </MenuTrigger>
-              <MenuPopover>
-                <View style={{ backgroundColor: 'blue', height: 50, width: 200 }}>
-                  <Text>Hello world!!!</Text>
-                </View>
-              </MenuPopover>
-            </Menu>
+            <Submenu />
           </View>
         </MenuPopover>
       </Menu>
