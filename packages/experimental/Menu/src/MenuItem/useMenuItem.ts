@@ -10,7 +10,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
   const pressable = useAsPressable({ ...rest, disabled, onPress: onClick });
-  const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
+  const onKeyProps = useKeyProps(onClick, ' ', 'Enter');
   const hasSubmenu = useMenuContext().isSubmenu;
 
   return {
@@ -25,7 +25,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       focusable: !disabled,
       hasSubmenu,
       ref: componentRef,
-      ...onKeyUpProps,
+      ...onKeyProps,
     },
     state: pressable.state,
   };
@@ -34,7 +34,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
 function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: AccessibilityState) {
   if (accessibilityState) {
-    return { disabled: disabled, ...accessibilityState };
+    return { disabled, ...accessibilityState };
   }
-  return { disabled: disabled };
+  return { disabled };
 }
