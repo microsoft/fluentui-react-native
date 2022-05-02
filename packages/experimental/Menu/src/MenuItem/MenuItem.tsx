@@ -13,9 +13,6 @@ export const MenuItem = compose<MenuItemType>({
     root: {
       style: { display: 'flex', height: 48, width: 200, flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent' },
     },
-    content: {
-      color: 'black',
-    },
   },
   slots: {
     root: View,
