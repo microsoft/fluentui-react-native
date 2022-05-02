@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
+import { SvgProps, XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { IFocusable, InteractionEvent, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
@@ -23,6 +24,11 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
   componentRef?: React.RefObject<IFocusable>;
 
   /**
+   * If the menu item is a trigger for a submenu
+   */
+  hasSubmenu?: boolean;
+
+  /**
    * A callback to call on button click event
    */
   onClick?: (e: InteractionEvent) => void;
@@ -33,6 +39,7 @@ export type MenuItemState = IPressableHooks<MenuItemProps & React.ComponentProps
 export interface MenuItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
   content?: TextProps;
+  submenuIndicator?: SvgProps | XmlProps;
 }
 
 export interface MenuItemType {

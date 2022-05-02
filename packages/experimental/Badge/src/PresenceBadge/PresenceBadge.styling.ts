@@ -28,5 +28,14 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
       }),
       ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
+    svgXml: buildProps(
+      (tokens: PresenceBadgeTokens) => ({
+        style: {
+          width: tokens.width,
+          height: tokens.height,
+        },
+      }),
+      ['width', 'height'],
+    ),
   },
 };

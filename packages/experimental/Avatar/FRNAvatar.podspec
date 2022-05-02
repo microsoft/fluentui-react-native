@@ -16,13 +16,13 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'BUILD_LIBRARY_FOR_DISTRIBUTION' => 'YES', 'OTHER_SWIFT_FLAGS' => '-gline-tables-only' }
 
-  s.ios.deployment_target = "13.0"
+  s.ios.deployment_target = "14.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
-  s.ios.dependency 'MicrosoftFluentUI/Avatar_ios', '0.3.0'
+  s.ios.dependency 'MicrosoftFluentUI/Avatar_ios', '0.5.0'
 
   s.osx.deployment_target = "10.15"
   s.osx.source_files      = "macos/*.{swift,h,m}"
-  s.osx.dependency 'MicrosoftFluentUI', '0.3.0'
+  s.osx.dependency 'MicrosoftFluentUI', '0.5.0'
 
   s.dependency 'React'
 end

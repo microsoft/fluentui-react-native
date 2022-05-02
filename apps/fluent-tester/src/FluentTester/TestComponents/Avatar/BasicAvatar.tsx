@@ -8,7 +8,7 @@ import {
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
-import { Switch, View, Text, Picker, ColorValue } from 'react-native';
+import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -81,6 +81,14 @@ export const StandardUsage: FunctionComponent = () => {
 
   tokens.backgroundColor = coinColor;
 
+  const fontBuiltInProps = {
+    fontFamily: 'Arial',
+    codepoint: 0x2663,
+    fontSize: 40,
+  };
+
+  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+
   return (
     <View style={commonStyles.root}>
       <View style={commonStyles.settings}>
@@ -118,6 +126,17 @@ export const StandardUsage: FunctionComponent = () => {
         src={showImage ? satyaPhotoUrl : undefined}
         coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
       />
+      {svgIconsEnabled && (
+        <JSAvatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={imageSize === undefinedText ? undefined : imageSize}
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="Icon"
+          icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
+          coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+        />
+      )}
     </View>
   );
 };

@@ -1,8 +1,85 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 27 Apr 2022 19:30:38 GMT and should not be manually modified.
+This log was last generated on Sat, 30 Apr 2022 06:33:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.33
+
+Sat, 30 Apr 2022 06:33:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-avatar to v0.14.20
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.4.2
+
+## 0.59.32
+
+Fri, 29 Apr 2022 21:54:17 GMT
+
+### Patches
+
+- Added sizes to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.32
+- Bump @fluentui-react-native/experimental-avatar to v0.14.19
+
+## 0.59.31
+
+Fri, 29 Apr 2022 01:39:17 GMT
+
+### Patches
+
+- Use ButtonV1 in ContextualMenu (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.59.30
+
+Thu, 28 Apr 2022 22:00:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.3
+- Bump @fluentui/react-native to v0.29.4
+
+## 0.59.29
+
+Thu, 28 Apr 2022 20:16:39 GMT
+
+### Patches
+
+- Use ButtonV1 in FluentTester (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.59.28
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Revert "Add Text props and test new Variant types (#1615)" (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/android-theme to v0.7.2
+- Bump @fluentui-react-native/apple-theme to v0.11.5
+- Bump @fluentui-react-native/badge to v0.0.31
+- Bump @fluentui-react-native/button to v0.22.20
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.24
+- Bump @fluentui-react-native/experimental-avatar to v0.14.18
+- Bump @fluentui-react-native/experimental-button to v0.15.21
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.2
+- Bump @fluentui-react-native/experimental-drawer to v0.1.8
+- Bump @fluentui-react-native/experimental-expander to v0.3.26
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.37
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.28
+- Bump @fluentui-react-native/experimental-tabs to v0.4.43
+- Bump @fluentui-react-native/experimental-text to v0.7.25
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+- Bump @fluentui-react-native/menu to v0.3.2
+- Bump @fluentui-react-native/stack to v0.6.25
+- Bump @fluentui-react-native/theme to v0.6.8
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theming-utils to v0.10.2
+- Bump @fluentui-react-native/win32-theme to v0.16.4
+- Bump @fluentui/react-native to v0.29.3
 
 ## 0.59.27
 
