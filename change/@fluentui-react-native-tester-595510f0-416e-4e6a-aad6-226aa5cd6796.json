@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use SvgUri instead of SvgCssUri",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
