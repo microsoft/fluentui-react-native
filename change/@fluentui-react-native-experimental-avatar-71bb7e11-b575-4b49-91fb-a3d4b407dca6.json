@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix avatar dependency",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Mon, 02 May 2022 22:14:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Mon, 02 May 2022 22:14:40 GMT
+
+### Minor changes
+
+- Implement submenu proto (ruaraki@microsoft.com)
 
 ## 0.3.2
 

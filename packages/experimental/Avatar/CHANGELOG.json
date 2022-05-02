@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Mon, 02 May 2022 22:14:40 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.21",
+      "version": "0.14.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "7f2a2366130cbed420d6c81846f0c06b40b8c948",
+            "comment": "Fix avatar dependency"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 30 Apr 2022 06:33:42 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.20",
       "version": "0.14.20",
