@@ -4,12 +4,11 @@ import {
   AvatarSizes,
   AvatarColor,
   JSAvatar,
-  AvatarPresence,
   AvatarActive,
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
-import { PresenceBadgeStatuses } from '@fluentui-react-native/badge';
-import { Switch, View, Text, Picker, ColorValue } from 'react-native';
+import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -46,7 +45,7 @@ const allColors: WithUndefined<AvatarColor>[] = [
   'brown',
 ];
 
-const allPresences: WithUndefined<AvatarPresence>[] = [undefinedText, ...PresenceBadgeStatuses];
+const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
 
 const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
@@ -69,7 +68,7 @@ export const StandardUsage: FunctionComponent = () => {
   const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
   const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
-  const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('available');
+  const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
   const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
@@ -81,6 +80,14 @@ export const StandardUsage: FunctionComponent = () => {
   const textStyles = { color: theme.colors.inputText as ColorValue };
 
   tokens.backgroundColor = coinColor;
+
+  const fontBuiltInProps = {
+    fontFamily: 'Arial',
+    codepoint: 0x2663,
+    fontSize: 40,
+  };
+
+  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
   return (
     <View style={commonStyles.root}>
@@ -114,11 +121,22 @@ export const StandardUsage: FunctionComponent = () => {
         size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
         shape={isSquare ? 'square' : 'circular'}
-        imageDescription="Photo of Satya Nadella"
-        presence={presence === undefinedText ? undefined : presence}
-        imageUrl={showImage ? satyaPhotoUrl : undefined}
+        accessibilityLabel="Photo of Satya Nadella"
+        badge={{ status: presence === undefinedText ? undefined : presence }}
+        src={showImage ? satyaPhotoUrl : undefined}
         coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
       />
+      {svgIconsEnabled && (
+        <JSAvatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={imageSize === undefinedText ? undefined : imageSize}
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="Icon"
+          icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
+          coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+        />
+      )}
     </View>
   );
 };

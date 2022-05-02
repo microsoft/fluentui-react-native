@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Thu, 21 Apr 2022 21:50:03 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.25
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.7.24
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.2
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/tokens to v0.11.10
 
 ## 0.7.23
 

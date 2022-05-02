@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/tester-windows",
   "entries": [
     {
+      "date": "Thu, 28 Apr 2022 19:09:51 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-windows",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.28",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 27 Apr 2022 19:30:38 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-windows",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.27",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Apr 2022 20:45:13 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-windows",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.26",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Apr 2022 06:35:28 GMT",
+      "tag": "@fluentui-react-native/tester-windows_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-windows",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.25",
+            "commit": "0f39d217397302ddfcea63148c7f7672028e1cb1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Apr 2022 18:31:09 GMT",
       "tag": "@fluentui-react-native/tester-windows_v0.0.1",
       "version": "0.0.1",

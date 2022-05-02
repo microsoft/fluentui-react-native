@@ -1,8 +1,82 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Mon, 25 Apr 2022 18:31:09 GMT and should not be manually modified.
+This log was last generated on Sat, 30 Apr 2022 06:33:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.33
+
+Sat, 30 Apr 2022 06:33:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.33
+
+## 0.20.32
+
+Fri, 29 Apr 2022 21:54:17 GMT
+
+### Patches
+
+- Added sizes to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/tester to v0.59.32
+
+## 0.20.31
+
+Fri, 29 Apr 2022 01:39:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.31
+
+## 0.20.30
+
+Thu, 28 Apr 2022 22:00:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.30
+
+## 0.20.29
+
+Thu, 28 Apr 2022 20:16:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.29
+
+## 0.20.28
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.28
+
+## 0.20.27
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/tester to v0.59.27
+
+## 0.20.26
+
+Tue, 26 Apr 2022 20:45:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.26
+
+## 0.20.25
+
+Tue, 26 Apr 2022 06:35:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.59.25
 
 ## 0.20.24
 

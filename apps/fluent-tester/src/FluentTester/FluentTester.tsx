@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
