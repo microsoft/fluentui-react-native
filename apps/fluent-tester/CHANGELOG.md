@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 02 May 2022 22:14:40 GMT and should not be manually modified.
+This log was last generated on Mon, 02 May 2022 23:05:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.35
+
+Mon, 02 May 2022 23:05:40 GMT
+
+### Patches
+
+- Use SvgUri instead of SvgCssUri (ruaraki@microsoft.com)
 
 ## 0.59.34
 

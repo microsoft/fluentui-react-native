@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 02 May 2022 23:05:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.35",
+      "version": "0.59.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9ccb36d51b687d93f59a5c69fbba9691e9b1c6e8",
+            "comment": "Use SvgUri instead of SvgCssUri"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 May 2022 22:14:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.34",
       "version": "0.59.34",
