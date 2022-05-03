@@ -15,6 +15,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
           alignItems: 'center',
           backgroundColor: tokens.backgroundColor,
           display: 'flex',
+          flexDirection: 'row',
           ...layoutStyles.from(tokens, theme),
         },
       }),
@@ -24,12 +25,21 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
       (tokens: MenuItemTokens, theme: Theme) => {
         return {
           style: {
+            flexGrow: 1,
             color: tokens.color,
             ...fontStyles.from(tokens, theme),
           },
         };
       },
       ['color', ...fontStyles.keys],
+    ),
+    submenuIndicator: buildProps(
+      (tokens: MenuItemTokens) => {
+        return {
+          color: tokens.color,
+        };
+      },
+      ['color'],
     ),
   },
 };
