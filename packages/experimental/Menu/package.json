@@ -31,7 +31,9 @@
     "@fluentui-react-native/experimental-text": ">=0.7.25 <1.0.0",
     "@fluentui-react-native/framework": "0.7.25",
     "@fluentui-react-native/interactive-hooks": ">=0.15.5 <1.0.0",
+    "@fluentui-react-native/theme-tokens": ">=0.16.2 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.11.11 <1.0.0",
+    "@fluentui-react-native/use-styling": ">=0.8.3 <1.0.0",
     "react-native-svg": "^12.3.0",
     "tslib": "^2.3.1"
   },
