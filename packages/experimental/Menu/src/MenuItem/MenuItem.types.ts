@@ -4,11 +4,16 @@ import { SvgProps, XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { IFocusable, InteractionEvent, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const menuItemName = 'MenuItem';
 
-export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {}
+export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+  disabled?: MenuItemTokens;
+  focused?: MenuItemTokens;
+  hovered?: MenuItemTokens;
+  pressed?: MenuItemTokens;
+}
 
 export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   content: string;

@@ -5,15 +5,11 @@ import { compose, mergeProps, UseSlots, withSlots } from '@fluentui-react-native
 import { Text } from '@fluentui-react-native/experimental-text';
 import { menuItemName, MenuItemProps, MenuItemType } from './MenuItem.types';
 import { useMenuItem } from './useMenuItem';
+import { stylingSettings } from './MenuItem.styling';
 
 export const MenuItem = compose<MenuItemType>({
   displayName: menuItemName,
-  tokens: [],
-  slotProps: {
-    root: {
-      style: { display: 'flex', height: 48, width: 200, flexDirection: 'row', alignItems: 'center', backgroundColor: 'transparent' },
-    },
-  },
+  ...stylingSettings,
   slots: {
     root: View,
     content: Text,
@@ -21,7 +17,6 @@ export const MenuItem = compose<MenuItemType>({
   },
   useRender: (userProps: MenuItemProps, useSlots: UseSlots<MenuItemType>) => {
     const menuItem = useMenuItem(userProps);
-    // grab the styled slots
     const Slots = useSlots(userProps);
 
     return (final: MenuItemProps) => {
