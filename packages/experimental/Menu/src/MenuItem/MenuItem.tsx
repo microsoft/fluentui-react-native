@@ -17,7 +17,7 @@ export const MenuItem = compose<MenuItemType>({
   },
   useRender: (userProps: MenuItemProps, useSlots: UseSlots<MenuItemType>) => {
     const menuItem = useMenuItem(userProps);
-    const Slots = useSlots(userProps);
+    const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer]);
 
     return (final: MenuItemProps) => {
       const mergedProps = mergeProps(menuItem.props, final);
