@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added Avatar to Windows platform",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
