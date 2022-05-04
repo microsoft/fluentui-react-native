@@ -15,7 +15,6 @@ export const MenuList = compose<MenuListType>({
     const Slots = useSlots(userProps);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
-      // TODO add gap between children
       return <Slots.root>{children}</Slots.root>;
     };
   },
