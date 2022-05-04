@@ -7369,6 +7369,11 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
+html-link-extractor@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/html-link-extractor/-/html-link-extractor-1.0.2.tgz#8713c33faa217a4dbf12971e77602dd7baa71a64"
+  integrity sha512-mtXyns/sR4woPfmZkTgN6z30Y89jvBnX0CBRA/LganmNh4jihckyavA/EhVDSecbDKSHN18van0FJckDAGQ0wA==
+
 htmlparser2@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/htmlparser2/-/htmlparser2-6.1.0.tgz#c4d762b6c3371a05dbe65e94ae43a9f845fb8fb7"
@@ -7448,12 +7453,19 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@^0.4.4:
+iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
+
+iconv-lite@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.6.3.tgz#a52f80bf38da1952eb5c681790719871a1a72501"
+  integrity sha512-4fCk79wshMdzMp2rH06qWrJE4iolqLhCUH+OiuIgU++RB0+94NlDL81atO7GX55uUKueo0txHNtvEyI6D7WdMw==
+  dependencies:
+    safer-buffer ">= 2.1.2 < 3.0.0"
 
 ieee754@^1.1.13:
   version "1.2.1"
@@ -9501,25 +9513,26 @@ markdown-it@^12.3.2:
     uc.micro "^1.0.5"
 
 markdown-link-check@^3.8.7:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.10.0.tgz#9b5892257f56d5546e341c482341c081786ecf30"
-  integrity sha512-P2WeISLd669q4yxmX3rU6zoGcmAXdvvRK8paXxLvOlTjtxY6cObpMv0blVtampmJGMeE7QcF4Q/9YT/wfXUNaw==
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.10.1.tgz#23410911d4a454bb10ea1dcb951e590580f0d939"
+  integrity sha512-5OA7LjbVu1+9T/ZHkCLNO/xjQzxEn8dyWP29Tz4Tzq8xR+M8rw0455l7O7blwuvnUpLF8BWSpsN0XTLMOpNNQA==
   dependencies:
     async "^3.2.3"
     chalk "^4.1.2"
     commander "^6.2.0"
     link-check "^5.1.0"
     lodash "^4.17.21"
-    markdown-link-extractor "^2.0.1"
-    needle "^3.0.0"
+    markdown-link-extractor "^3.0.1"
+    needle "^3.1.0"
     progress "^2.0.3"
 
-markdown-link-extractor@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-2.0.1.tgz#10184cd6892ea657a724d1835b783cfb2520f9f9"
-  integrity sha512-Qy5AcoW7CDfIAB3I6cz2QFGHoLQYSH15lmfEqRgPvC/DEEMhb/EK0yeXmpIk+GSuJveYxLvkpXVFEZhgvubxTw==
+markdown-link-extractor@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-3.0.1.tgz#980f33ed77d6e1f4beb8d77df6ab13a64b56ac47"
+  integrity sha512-m11SWdcqfqJCXZnYQxhuN8hfnrboxTXPUPo1216HSmNdu5P8fNUSTDnflBKzX/ZU6+uHBZjyzQnL1Pod41MCfw==
   dependencies:
-    marked "^4.0.12"
+    html-link-extractor "^1.0.2"
+    marked "^4.0.15"
 
 marked-terminal@^4.1.0:
   version "4.2.0"
@@ -9542,6 +9555,11 @@ marked@^4.0.12:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.12.tgz#2262a4e6fd1afd2f13557726238b69a48b982f7d"
   integrity sha512-hgibXWrEDNBWgGiK18j/4lkS6ihTe9sxtV4Q1OQppb/0zzyPSzoFANBa5MfsG/zgsWklmNnhm0XACZOH/0HBiQ==
+
+marked@^4.0.15:
+  version "4.0.15"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.15.tgz#0216b7c9d5fcf6ac5042343c41d81a8b1b5e1b4a"
+  integrity sha512-esX5lPdTfG4p8LDkv+obbRCyOKzB+820ZZyMOXJZygZBHrH9b3xXR64X4kT3sPe9Nx8qQXbmcz6kFSMt4Nfk6Q==
 
 marky@^1.2.2:
   version "1.2.4"
@@ -10192,13 +10210,13 @@ nearley@^2.7.10:
     railroad-diagrams "^1.0.0"
     randexp "0.4.6"
 
-needle@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/needle/-/needle-3.0.0.tgz#5808f20246d69ffd7ebd42109eb58d1442b98e6e"
-  integrity sha512-eGr0qnfHxAjr+Eptl1zr2lgUQUPC1SZfTkg2kFi0kxr1ChJonHUVYobkug8siBKMlyUVVp56MSkp6CSeXH/jgw==
+needle@^3.0.0, needle@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/needle/-/needle-3.1.0.tgz#3bf5cd090c28eb15644181ab6699e027bd6c53c9"
+  integrity sha512-gCE9weDhjVGCRqS8dwDR/D3GTAeyXLXuqp7I8EzH6DllZGXSUyxuqqLh+YX9rMAWaaTFyVAg6rHGL25dqvczKw==
   dependencies:
     debug "^3.2.6"
-    iconv-lite "^0.4.4"
+    iconv-lite "^0.6.3"
     sax "^1.2.4"
 
 negotiator@0.6.3:
@@ -11996,7 +12014,7 @@ safe-stable-stringify@^2.3.1:
   resolved "https://registry.yarnpkg.com/safe-stable-stringify/-/safe-stable-stringify-2.3.1.tgz#ab67cbe1fe7d40603ca641c5e765cb942d04fc73"
   integrity sha512-kYBSfT+troD9cDA85VDnHZ1rpHC50O0g1e6WlGHVCz/g+JS+9WKLj+XwFYyR8UbrZN8ll9HUpDAAddY58MGisg==
 
-"safer-buffer@>= 2.1.2 < 3":
+"safer-buffer@>= 2.1.2 < 3", "safer-buffer@>= 2.1.2 < 3.0.0":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
