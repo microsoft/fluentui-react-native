@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 04 May 2022 09:56:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.36",
+      "version": "0.59.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e234b88cdff692b01168fd190678f297f5d79c89",
+            "comment": "Changed colors for the Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.22",
+            "commit": "e234b88cdff692b01168fd190678f297f5d79c89"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 02 May 2022 23:05:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.35",
       "version": "0.59.35",
