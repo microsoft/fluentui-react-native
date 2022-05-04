@@ -4,7 +4,6 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { MenuListTokens } from './MenuList.types';
 
 export const defaultMenuListTokens: TokenSettings<MenuListTokens, Theme> = (t: Theme): MenuListTokens => ({
-  gap: globalTokens.spacing.xxs,
   padding: globalTokens.spacing.xs,
   minWidth: 128,
   maxWidth: 300,

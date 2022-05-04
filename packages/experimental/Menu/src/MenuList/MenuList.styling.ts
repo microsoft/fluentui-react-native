@@ -11,7 +11,6 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
         style: {
           backgroundColor: tokens.backgroundColor,
           display: 'flex',
-          gap: tokens.gap,
           ...layoutStyles.from(tokens, theme),
         },
       }),

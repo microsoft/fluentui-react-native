@@ -3,9 +3,7 @@ import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tok
 
 export const menuListName = 'MenuList';
 
-export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
-  gap?: number;
-}
+export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {}
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {}
 
