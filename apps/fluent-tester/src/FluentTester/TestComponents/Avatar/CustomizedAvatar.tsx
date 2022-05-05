@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { JSAvatar, IconAlignment } from '@fluentui-react-native/experimental-avatar';
-import { Switch, View, Text, TextInput, TextStyle, Platform } from 'react-native';
+import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -40,8 +40,6 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     };
     return JSAvatar.customize(tokens);
   }, [coinColor, textColor, horizontalAlignment, verticalAlignment, iconSize, initialsSize, size]);
-
-  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
   return (
     <View style={commonStyles.root}>
@@ -114,7 +112,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         activeAppearance="ring"
         initials="SB"
         accessibilityLabel="Former CEO of Microsoft"
-        badge={{ status: svgIconsEnabled ? 'blocked' : undefined }}
+        badge={{ status: 'blocked' }}
         src={showImage ? steveBallmerPhotoUrl : undefined}
         ring={
           showRing
