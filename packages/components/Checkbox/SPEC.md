@@ -1,5 +1,13 @@
 # Checkbox
 
+**Not available on MacOS** - Please use `import { Checkbox } from @'fluentui-react-native/checkbox'` and ignore the deprecation message until further notice.
+
+In the short term, the new `Checkbox` control is named `CheckboxV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Checkbox`. It may be useful to rename the control to `Checkbox` using the import syntax to simplify the rename:
+
+```ts
+import { CheckboxV1 as Checkbox } from '@fluentui-react-native/checkbox';
+```
+
 ## Background
 
 The `Checkbox` component enables users to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked).
@@ -99,16 +107,16 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   disabled?: boolean;
 
   /**
+   * Label to display next to the checkbox.
+   */
+  label?: string;
+
+  /**
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
    *
    * @default after
    */
   labelPosition?: 'before' | 'after';
-
-  /**
-   * Label to display next to the checkbox.
-   */
-  label?: string;
 
   /**
    * Callback that is called when the checked value has changed.
@@ -117,6 +125,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 
   /**
    * If true, adds an asterisk which denotes that this checkbox is required. Can also be set a custom string.
+   * Also sets accessibility state to have screen reader announce required state.
    */
   required?: boolean | string;
 
@@ -128,7 +137,8 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    */
   shape?: CheckboxShape;
 
-  /** Sets style of checkbox to a preset size style.
+  /**
+   * Sets style of checkbox to a preset size style.
    * @default 'medium'
    */
   size?: CheckboxSize;
@@ -145,7 +155,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
 Tokens can be used to customize the styling of the control by using the `customize` function on the `Checkbox`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Checkbox` has the following tokens:
 
 ```ts
-export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   /**
    * Color of the background of the box containing the checkmark.
    */
@@ -200,12 +210,12 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
-  spacingIconContentBefore?: number;
+  spacingLabelAfter?: number;
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
    */
-  spacingIconContentAfter?: number;
+  spacingLabelBefore?: number;
 
   /**
    * States that can be applied to a Checkbox.
@@ -219,6 +229,8 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   pressed?: CheckboxTokens;
   checked?: CheckboxTokens;
   circular?: CheckboxTokens;
+  medium?: CheckboxTokens;
+  large?: CheckboxTokens;
 }
 ```
 
@@ -279,4 +291,4 @@ The same behavior as above translated for touch events. This means that there is
 - Should mix in the accessibility props expected for a `Checkbox` component.
 - Should be keyboard tabbable and focusable.
 
-See [`useCheckbox` hook](../../experimental/Checkbox/src/useCheckbox.ts) for details on accessibility props
+See [`useCheckbox` hook](./src/useCheckbox.ts) for details on accessibility props

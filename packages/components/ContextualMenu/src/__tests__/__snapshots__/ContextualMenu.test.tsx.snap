@@ -34,7 +34,8 @@ exports[`ContextualMenu default props 1`] = `
           "flexGrow": 1,
         }
       }
-      showsVerticalScrollIndicator={true}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
     >
       <View />
     </RCTScrollView>

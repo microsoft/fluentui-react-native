@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Minor changes
+
+- MenuList styling (ruaraki@microsoft.com)
+
+## 0.11.11
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @uifabricshared/theming-ramp to v0.16.8
+
+## 0.11.10
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @uifabricshared/theming-ramp to v0.16.7
 
 ## 0.11.9
 

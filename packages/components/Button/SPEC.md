@@ -1,5 +1,11 @@
 # Button
 
+In the short term, the new `Button` control is named `ButtonV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Button`. It may be useful to rename the control to `Button` using the import syntax to simplify the rename:
+
+```ts
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+```
+
 ## Background
 
 The `Button` component enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.

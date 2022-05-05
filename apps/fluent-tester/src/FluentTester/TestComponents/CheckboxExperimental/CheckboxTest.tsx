@@ -65,24 +65,29 @@ const OtherCheckbox: React.FunctionComponent = () => {
 };
 
 const CircleColorCheckbox = Checkbox.customize({
-  checkboxBackgroundColor: 'white',
   checked: {
     checkboxBackgroundColor: 'green',
     checkboxBorderColor: 'green',
     checkmarkColor: 'white',
   },
-  focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-  hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-  pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
 });
 
 const HoverCheckbox = Checkbox.customize({
-  checked: {
-    checkboxBackgroundColor: 'black',
-    checkmarkColor: 'white',
-  },
   hovered: {
     checkmarkOpacity: 1,
+  },
+});
+
+const BigLabelCheckbox = Checkbox.customize({
+  label: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+});
+
+const ComposedCheckbox = Checkbox.compose({
+  slotProps: {
+    label: { style: { color: 'hotpink' } },
   },
 });
 
@@ -91,37 +96,31 @@ const TokenCheckbox: React.FunctionComponent = () => {
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
   const BlueCheckbox = Checkbox.customize({
-    checkboxBackgroundColor: 'white',
     checked: {
       checkboxBackgroundColor: checkboxColor,
       checkboxBorderColor: checkboxColor,
       checkmarkColor: checkmarkColor,
     },
-    focused: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    hovered: { checkboxBackgroundColor: 'menuItemBackgroundHovered' },
-    pressed: { checkboxBackgroundColor: 'menuItemBackgroundPressed' },
   });
 
   const theme = useTheme();
   const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
   };
+
   return (
     <View>
-      <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} defaultChecked={false} />
-      <CircleColorCheckbox
-        label="A circular token-customized checkbox"
-        shape="circular"
-        onChange={onChangeUncontrolled}
-        defaultChecked={true}
-      />
+      <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} />
+      <CircleColorCheckbox label="A circular token-customized checkbox" shape="circular" onChange={onChangeUncontrolled} defaultChecked />
+      <BigLabelCheckbox label="A checkbox with a bold large font label" />
+      <ComposedCheckbox label="A checkbox with a hot pink label and no padding" />
+
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
         labelPosition="before"
         defaultChecked={false}
       />
-
       <TextInput
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Background color"

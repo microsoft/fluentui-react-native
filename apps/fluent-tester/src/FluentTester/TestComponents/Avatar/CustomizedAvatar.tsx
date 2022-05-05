@@ -11,10 +11,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalSize] = React.useState<number>(96);
+  const [size, setSize] = React.useState<number>(96);
   const [iconSize, setIconSize] = React.useState<number>(24);
-  const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
-  const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
   const [initialsSize, setInitialsSize] = React.useState<number>(14);
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
@@ -36,23 +34,12 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       horizontalIconAlignment: horizontalAlignment,
       verticalIconAlignment: verticalAlignment,
       iconSize: iconSize,
-      iconStrokeWidth: iconStrokeWidth,
-      iconStrokeColor: iconStrokeColor,
       initialsSize: initialsSize,
-      avatarSize: physicalSize,
+      width: size,
+      height: size,
     };
     return JSAvatar.customize(tokens);
-  }, [
-    coinColor,
-    textColor,
-    horizontalAlignment,
-    verticalAlignment,
-    iconSize,
-    iconStrokeWidth,
-    iconStrokeColor,
-    initialsSize,
-    physicalSize,
-  ]);
+  }, [coinColor, textColor, horizontalAlignment, verticalAlignment, iconSize, initialsSize, size]);
 
   return (
     <View style={commonStyles.root}>
@@ -88,14 +75,6 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             setTextColor(e.nativeEvent.text);
           }}
         />
-        <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
-          placeholder="Icon stroke color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setIconStrokeColor(e.nativeEvent.text);
-          }}
-        />
 
         <TextInput
           style={[commonStyles.textBox, textBoxBorderStyle]}
@@ -119,13 +98,10 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
 
         <Text>Coin size</Text>
-        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.vmargin} onChange={setPhysicalSize} />
+        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.vmargin} onChange={setSize} />
 
         <Text>Icon size</Text>
         <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.vmargin} onChange={setIconSize} />
-
-        <Text>Icon stroke width</Text>
-        <Slider minimum={0} maximum={8} initialValue={2} style={commonStyles.vmargin} onChange={setIconStrokeWidth} />
 
         <Text>Font size</Text>
         <Slider minimum={5} maximum={50} initialValue={14} style={commonStyles.vmargin} onChange={setInitialsSize} />
@@ -135,9 +111,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         active="active"
         activeAppearance="ring"
         initials="SB"
-        imageDescription="Former CEO of Microsoft"
-        presence="blocked"
-        imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+        accessibilityLabel="Former CEO of Microsoft"
+        badge={{ status: 'blocked' }}
+        src={showImage ? steveBallmerPhotoUrl : undefined}
         ring={
           showRing
             ? {

@@ -1,8 +1,115 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 06 Apr 2022 22:58:22 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.23
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.33
+- Bump @fluentui-react-native/icon to v0.11.21
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.14.22
+
+Wed, 04 May 2022 09:56:42 GMT
+
+### Patches
+
+- Changed colors for the Avatar (v.kozova13@gmail.com)
+
+## 0.14.21
+
+Mon, 02 May 2022 22:14:40 GMT
+
+### Patches
+
+- Fix avatar dependency (ruaraki@microsoft.com)
+
+## 0.14.20
+
+Sat, 30 Apr 2022 06:33:42 GMT
+
+### Patches
+
+- Move to official 0.5.0 release (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.14.19
+
+Fri, 29 Apr 2022 21:54:17 GMT
+
+### Patches
+
+- Added sizes to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.32
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.14.18
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.31
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.14.17
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.30
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/theme-tokens to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.14.16
+
+Tue, 26 Apr 2022 20:45:13 GMT
+
+### Patches
+
+- Changed props according to the spec (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.29
+
+## 0.14.15
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.28
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
+
+## 0.14.14
+
+Wed, 20 Apr 2022 10:53:38 GMT
+
+### Patches
+
+- Replaced presence prop from PersonaCoin with the new PresenceBadge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.27
+
+## 0.14.13
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.22
+- Bump @fluentui-react-native/theme-tokens to v0.16.0
 
 ## 0.14.12
 

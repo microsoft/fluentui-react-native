@@ -1,10 +1,12 @@
 import { BadgeProps } from './Badge.types';
 
 export const useBadge = (props: BadgeProps): BadgeProps => {
-  const { iconPosition, ...rest } = props;
+  if (!props) return {};
+  const { iconPosition = 'before', size = 'medium', ...rest } = props;
 
   return {
-    iconPosition: iconPosition || 'before',
+    iconPosition: iconPosition,
+    size,
     ...rest,
   };
 };

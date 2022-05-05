@@ -9,7 +9,7 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../FluentTester/TestComponents
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../FluentTester/TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../FluentTester/TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../FluentTester/TestComponents/Link/consts';
-import { HOMEPAGE_MENU_BUTTON } from '../../FluentTester/TestComponents/MenuButton/consts';
+import { HOMEPAGE_MENUBUTTON_BUTTON } from '../../FluentTester/TestComponents/MenuButton/consts';
 import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../../FluentTester/TestComponents/MenuButtonExperimental/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../FluentTester/TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../FluentTester/TestComponents/PersonaCoin/consts';
@@ -176,7 +176,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get menuButtonPage() {
-    return By(HOMEPAGE_MENU_BUTTON);
+    return By(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   private get menuButtonExperimentalPage() {

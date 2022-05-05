@@ -1,8 +1,102 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Mon, 11 Apr 2022 17:07:32 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.4
+- Bump @fluentui-react-native/framework to v0.7.26
+
+## 0.11.3
+
+Thu, 28 Apr 2022 22:00:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.3
+
+## 0.11.2
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.2
+- Bump @fluentui-react-native/framework to v0.7.25
+
+## 0.11.1
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.1
+- Bump @fluentui-react-native/framework to v0.7.24
+
+## 0.11.0
+
+Mon, 25 Apr 2022 17:11:13 GMT
+
+### Minor changes
+
+- Move experimental files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/checkbox to v0.15.0
+
+## 0.10.16
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.23
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
+- Bump @fluentui-react-native/pressable to v0.8.35
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
+
+## 0.10.15
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.22
+- Bump @fluentui-react-native/framework to v0.7.22
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+- Bump @fluentui-react-native/pressable to v0.8.34
+- Bump @fluentui-react-native/theme-tokens to v0.16.0
+
+## 0.10.14
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+- Bump @fluentui-react-native/pressable to v0.8.33
+
+## 0.10.13
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+- Bump @fluentui-react-native/pressable to v0.8.32
+
+## 0.10.12
+
+Wed, 13 Apr 2022 15:51:04 GMT
+
+### Patches
+
+- Add more details on spec/migration (ruaraki@microsoft.com)
 
 ## 0.10.11
 
