@@ -4792,7 +4792,7 @@ cheerio-select@^1.5.0:
     domhandler "^4.3.1"
     domutils "^2.8.0"
 
-cheerio@^1.0.0-rc.3:
+cheerio@^1.0.0-rc.10, cheerio@^1.0.0-rc.3:
   version "1.0.0-rc.10"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.10.tgz#2ba3dcdfcc26e7956fc1f440e61d51c643379f3e"
   integrity sha512-g0J0q/O6mW8z5zxQ3A8E8J1hUgp4SMOvEoW/x84OwyHKe/Zccz83PVT4y5Crcr530FV6NgmKI1qvGTKVl9XXVw==
@@ -7369,10 +7369,12 @@ html-escaper@^2.0.0:
   resolved "https://registry.yarnpkg.com/html-escaper/-/html-escaper-2.0.2.tgz#dfd60027da36a36dfcbe236262c00a5822681453"
   integrity sha512-H2iMtd0I4Mt5eYiapRdIDjp+XzelXQ0tFE4JS7YFwFevXXMmOp9myNrUvCg0D6ws8iqkRPBfKHgbwig1SmlLfg==
 
-html-link-extractor@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/html-link-extractor/-/html-link-extractor-1.0.2.tgz#8713c33faa217a4dbf12971e77602dd7baa71a64"
-  integrity sha512-mtXyns/sR4woPfmZkTgN6z30Y89jvBnX0CBRA/LganmNh4jihckyavA/EhVDSecbDKSHN18van0FJckDAGQ0wA==
+html-link-extractor@^1.0.3:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/html-link-extractor/-/html-link-extractor-1.0.5.tgz#a4be345cb13b8c3352d82b28c8b124bb7bf5dd6f"
+  integrity sha512-ADd49pudM157uWHwHQPUSX4ssMsvR/yHIswOR5CUfBdK9g9ZYGMhVSE6KZVHJ6kCkR0gH4htsfzU6zECDNVwyw==
+  dependencies:
+    cheerio "^1.0.0-rc.10"
 
 htmlparser2@^6.1.0:
   version "6.1.0"
@@ -9513,25 +9515,25 @@ markdown-it@^12.3.2:
     uc.micro "^1.0.5"
 
 markdown-link-check@^3.8.7:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.10.1.tgz#23410911d4a454bb10ea1dcb951e590580f0d939"
-  integrity sha512-5OA7LjbVu1+9T/ZHkCLNO/xjQzxEn8dyWP29Tz4Tzq8xR+M8rw0455l7O7blwuvnUpLF8BWSpsN0XTLMOpNNQA==
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/markdown-link-check/-/markdown-link-check-3.10.2.tgz#2b220465020e5fc0ad2adacd1c57ee4db96b00d9"
+  integrity sha512-5yQEVtjLxAjxWy82+iTgxrekr1tuD4sKGgwXiyLrCep8RERFH3yCdpZdeA12em2S2SEwXGxp6qHI73jVhuScKA==
   dependencies:
     async "^3.2.3"
     chalk "^4.1.2"
     commander "^6.2.0"
     link-check "^5.1.0"
     lodash "^4.17.21"
-    markdown-link-extractor "^3.0.1"
+    markdown-link-extractor "^3.0.2"
     needle "^3.1.0"
     progress "^2.0.3"
 
-markdown-link-extractor@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-3.0.1.tgz#980f33ed77d6e1f4beb8d77df6ab13a64b56ac47"
-  integrity sha512-m11SWdcqfqJCXZnYQxhuN8hfnrboxTXPUPo1216HSmNdu5P8fNUSTDnflBKzX/ZU6+uHBZjyzQnL1Pod41MCfw==
+markdown-link-extractor@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/markdown-link-extractor/-/markdown-link-extractor-3.0.2.tgz#56a7c9a74104e8c318716f885e33bf80cc8e12a9"
+  integrity sha512-vmTTAWSa49Lqojr6L4ALGLV0TLz4+1movDb6saDS6c6FLGGbPFSkhjevpXsQTXEYY9lCWYcVQqb7l41WEZsM7Q==
   dependencies:
-    html-link-extractor "^1.0.2"
+    html-link-extractor "^1.0.3"
     marked "^4.0.15"
 
 marked-terminal@^4.1.0:
