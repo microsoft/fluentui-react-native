@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Thu, 05 May 2022 19:08:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.59.38
+
+Thu, 05 May 2022 19:08:12 GMT
+
+### Patches
+
+- Added Avatar to Windows platform (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.24
 
 ## 0.59.37
 
