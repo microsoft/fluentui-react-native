@@ -16,10 +16,10 @@ import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { useAsPressable, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { SvgXml } from 'react-native-svg';
 import { CMContext } from './ContextualMenu';
-import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
+import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import chevronSvg from '../assets/chevron.svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -119,13 +119,6 @@ export const SubmenuItem = compose<SubmenuItemType>({
       [onItemHoverIn],
     );
 
-    const svgProps: SvgIconProps = {
-      src: chevronSvg,
-      viewBox: '0 0 2048 2048',
-    };
-
-    const rtlTransform = I18nManager.isRTL ? [{ translateX: 2048 }, { scaleX: -1 }] : [];
-
     /**
      * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow (flipped for RTL).
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
@@ -150,13 +143,21 @@ export const SubmenuItem = compose<SubmenuItemType>({
       },
       content: { children: text },
       icon: createIconProps(icon),
-      chevron: createIconProps({ svgSource: svgProps, width: 12, height: 12, style: { transform: rtlTransform } }),
+      chevron: {},
     });
 
     return { slotProps, state };
   },
   settings,
   render: (Slots: ISlots<SubmenuItemSlotProps>, renderData: SubmenuItemRenderData, ...children: React.ReactNode[]) => {
+    const rtlTransfrom = I18nManager.isRTL ? 'translate(2048, 0) scale(-1, 1)' : '';
+    const xml = `
+    <svg width="12" height="12" viewBox="0 0 2048 2048">
+      <g transform="${rtlTransfrom}">
+        <path class='OfficeIconColors_HighContrast' fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+        <path class='OfficeIconColors_m22'          fill='currentColor' d='M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z' />
+      </g>
+    </svg>`;
     // We shouldn't have to specify the source prop on Slots.icon, here, but we need another drop from @uifabricshared
     return (
       <Slots.root>
@@ -166,7 +167,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
           {children}
         </Slots.startstack>
         <Slots.endstack>
-          <Slots.chevron />
+          <Slots.chevron xml={xml} />
         </Slots.endstack>
       </Slots.root>
     );
@@ -177,7 +178,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     icon: Icon as React.ComponentType,
     content: Text,
     endstack: View,
-    chevron: Icon as React.ComponentType,
+    chevron: SvgXml,
   },
   styles: {
     root: [backgroundColorTokens, borderTokens],

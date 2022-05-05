@@ -4,6 +4,7 @@ import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
 import { ContextualMenuItemProps, ContextualMenuItemTokens, ContextualMenuItemState } from './ContextualMenuItem.types';
 import { IconProps } from '@fluentui-react-native/icon';
+import { XmlProps } from 'react-native-svg';
 
 export const submenuItemName = 'SubmenuItem';
 export interface SubmenuItemTokens extends ContextualMenuItemTokens {
@@ -19,7 +20,7 @@ export interface SubmenuItemSlotProps {
   icon: IconProps;
   content: ITextProps;
   endstack: IViewProps;
-  chevron: IconProps;
+  chevron: XmlProps;
 }
 
 export type SubmenuItemRenderData = IRenderData<SubmenuItemSlotProps, SubmenuItemState>;
