@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Changed badge appearance according to the spec, changed sizes to align with Web",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
