@@ -18,15 +18,18 @@ export const useMenu = (props: MenuProps): MenuState => {
   };
 };
 
-const useMenuOpenState = (props: MenuProps): [boolean, (e: InteractionEvent) => void] => {
+const useMenuOpenState = (props: MenuProps): [boolean, (e: InteractionEvent, isOpen: boolean) => void] => {
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
 
   const setOpen = React.useCallback(
-    (e: InteractionEvent) => {
-      setOpenInternal(!openInternal);
-      onOpenChange(e, !openInternal);
+    (e: InteractionEvent, isOpen: boolean) => {
+      const openPrev = openInternal;
+      setOpenInternal(isOpen);
+      if (onOpenChange && openPrev !== isOpen) {
+        onOpenChange(e, isOpen);
+      }
     },
     [openInternal, onOpenChange, setOpenInternal],
   );

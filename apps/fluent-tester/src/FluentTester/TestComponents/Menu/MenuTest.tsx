@@ -57,11 +57,33 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
+const MenuOpenOnHover: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu openOnHover>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <Submenu />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
     testID: MENU_TESTPAGE,
     component: MenuDefault,
+  },
+  {
+    name: 'Menu open on hover',
+    component: MenuOpenOnHover,
   },
   {
     name: 'Menu Submenu',
