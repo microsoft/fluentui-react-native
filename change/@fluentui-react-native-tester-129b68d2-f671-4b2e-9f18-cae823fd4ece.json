@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add doNotTakeCapture example with a hover callout test page entry",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
