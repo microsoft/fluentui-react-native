@@ -105,6 +105,11 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * @defaultvalue ring
    */
   activeAppearance?: AvatarActiveAppearance;
+
+  /**
+   * Badge shows the avatar's presence status.
+   * Badge can be shown only if `active` prop is undefined or unset
+   */
   badge?: PresenceBadgeProps;
 
   /**
@@ -120,6 +125,9 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    */
   idForColor?: string | undefined;
 
+  /**
+   * The Avatar's image.
+   */
   image?: ImageProps;
 
   /**
@@ -155,6 +163,10 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * @defaultvalue circular
    */
   shape?: AvatarShape;
+
+  /**
+   * Currently used for image URL, will be deprecated when image prop works
+   */
   src?: string;
 }
 
