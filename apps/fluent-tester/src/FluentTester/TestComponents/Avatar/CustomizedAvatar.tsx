@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { JSAvatar, IconAlignment } from '@fluentui-react-native/experimental-avatar';
-import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
+import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
@@ -17,15 +16,10 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
   const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
 
-  const [ringColor, setRingColor] = React.useState<string>('red');
+  const [borderColor, setBorderColor] = React.useState<string>('red');
   const [ringBackgroundColor, setRingBackgroundColor] = React.useState<string>(undefined);
   const [showRing, setShowRing] = React.useState<boolean>(true);
   const [transparent, setTransparent] = React.useState<boolean>(false);
-
-  const theme = useTheme();
-  const textBoxBorderStyle: TextStyle = {
-    borderColor: theme.colors.inputBorder,
-  };
 
   const CustomizedAvatar = React.useMemo(() => {
     const tokens = {
@@ -37,9 +31,10 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       initialsSize: initialsSize,
       width: size,
       height: size,
+      borderColor,
     };
     return JSAvatar.customize(tokens);
-  }, [coinColor, textColor, horizontalAlignment, verticalAlignment, iconSize, initialsSize, size]);
+  }, [coinColor, textColor, horizontalAlignment, verticalAlignment, iconSize, initialsSize, size, borderColor]);
 
   return (
     <View style={commonStyles.root}>
@@ -60,7 +55,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         </View>
 
         <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox]}
           placeholder="Background color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -68,7 +63,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           }}
         />
         <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox]}
           placeholder="Initials text color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -77,16 +72,16 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
 
         <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox]}
           placeholder="Ring color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
-            setRingColor(e.nativeEvent.text);
+            setBorderColor(e.nativeEvent.text);
           }}
         />
 
         <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={[commonStyles.textBox]}
           placeholder="Ring background color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -118,7 +113,6 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         ring={
           showRing
             ? {
-                ringColor,
                 ringBackgroundColor,
                 ringThickness: 4,
                 innerGap: 4,
