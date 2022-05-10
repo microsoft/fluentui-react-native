@@ -17,6 +17,7 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
         borderWidth={1}
         onDismiss={() => context.setOpen(undefined, false /* isOpen */)}
         borderColor={theme.colors.neutralStrokeAccessible}
+        dismissBehaviors={context.isControlled ? ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] : undefined}
       >
         {children}
       </Callout>

@@ -75,6 +75,26 @@ const MenuOpenOnHover: React.FunctionComponent = () => {
   );
 };
 
+const MenuControlledOpen: React.FunctionComponent = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  return (
+    <Stack style={[stackStyle, { flexDirection: 'row' }]}>
+      <Button onClick={() => setOpen(!open)}>Toggle open</Button>
+      <Menu open={open}>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <Submenu />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
@@ -84,6 +104,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu open on hover',
     component: MenuOpenOnHover,
+  },
+  {
+    name: 'Menu open controlled',
+    component: MenuControlledOpen,
   },
   {
     name: 'Menu Submenu',
