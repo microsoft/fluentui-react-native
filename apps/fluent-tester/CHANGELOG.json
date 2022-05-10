@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 10 May 2022 20:49:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.60.0",
+      "version": "0.60.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1",
+            "comment": "Add doNotTakeCapture example with a hover callout test page entry"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.39",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.5.1",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.29.6",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 May 2022 18:33:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.40",
+      "version": "0.59.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4e9f60254753ef5f7d297b197b10f35e638308cf",
+            "comment": "Added font and color tokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.26",
+            "commit": "4e9f60254753ef5f7d297b197b10f35e638308cf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 May 2022 17:20:22 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.39",
+      "version": "0.59.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0f5452155b6b43062ca60262cf256fbd67538c1f",
+            "comment": "Changed badge appearance according to the spec, changed sizes to align with Web"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.25",
+            "commit": "0f5452155b6b43062ca60262cf256fbd67538c1f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 05 May 2022 19:08:12 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.38",
       "version": "0.59.38",

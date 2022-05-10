@@ -41,7 +41,7 @@ export const StandardUsage: FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
   const [active, setActive] = useState<AvatarActive>('unset');
   const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
-  const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
+  const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>(72);
   const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
   const [avatarColor, setAvatarColor] = useState<AvatarColor>('brass');
 
@@ -54,6 +54,7 @@ export const StandardUsage: FunctionComponent = () => {
 
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };
+  const avatarSizesForPicker = allSizes.map((size) => size.toString());
 
   const fontBuiltInProps = {
     fontFamily: 'Arial',
@@ -75,7 +76,7 @@ export const StandardUsage: FunctionComponent = () => {
           <Switch value={isSquare} onValueChange={() => setSquare(!isSquare)} />
         </View>
 
-        <StyledPicker prompt="Size" selected={imageSize} onChange={onSizeChange} collection={allSizes} />
+        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
         <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
         {active === 'active' ? (
           <StyledPicker
