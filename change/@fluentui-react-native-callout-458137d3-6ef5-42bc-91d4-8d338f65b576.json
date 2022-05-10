@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add doNotTakePointerCapture prop to Callout interface",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "patboyd@microsoft.com",
+  "dependentChangeType": "patch"
+}
