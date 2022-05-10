@@ -1,3 +1,4 @@
+import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
@@ -21,6 +22,11 @@ export const tests = [
     name: 'ActivityIndicator Test',
     component: ActivityIndicatorTest,
     testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
+  },
+  {
+    name: 'Avatar Test',
+    component: JSAvatarTest,
+    testPage: HOMEPAGE_AVATAR_BUTTON,
   },
   {
     name: 'Badge Test',

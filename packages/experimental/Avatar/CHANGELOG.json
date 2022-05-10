@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Thu, 05 May 2022 19:08:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.24",
+      "version": "0.14.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "0b1077c4ac2440f81483d796a72e8be15bc5c577",
+            "comment": "Added svgEnabled check to the Avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 May 2022 21:06:04 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.23",
       "version": "0.14.23",

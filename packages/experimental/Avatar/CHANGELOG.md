@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Thu, 05 May 2022 19:08:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.24
+
+Thu, 05 May 2022 19:08:12 GMT
+
+### Patches
+
+- Added svgEnabled check to the Avatar (v.kozova13@gmail.com)
 
 ## 0.14.23
 

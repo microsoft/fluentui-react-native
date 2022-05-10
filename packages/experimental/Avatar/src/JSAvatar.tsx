@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, Platform } from 'react-native';
 import { JSAvatarProps, JSAvatarType, JSAvatarName, JSAvatarState } from './JSAvatar.types';
 import { stylingSettings } from './JSAvatar.styling';
 import { compose, UseSlots, mergeProps, withSlots } from '@fluentui-react-native/framework';
@@ -50,6 +50,7 @@ export const JSAvatar = compose<JSAvatarType>({
     return (final: JSAvatarProps) => {
       const { activeAppearance, icon, initials, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
       const { showRing, transparentRing } = avatar.state;
+      const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
       return (
         <Slots.root {...mergedProps}>
@@ -61,7 +62,7 @@ export const JSAvatar = compose<JSAvatarType>({
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
-          {badge.status && <Slots.badge {...badge} />}
+          {svgIconsEnabled && badge.status && <Slots.badge {...badge} />}
         </Slots.root>
       );
     };
