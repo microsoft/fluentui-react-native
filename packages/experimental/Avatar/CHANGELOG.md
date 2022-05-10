@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 10 May 2022 17:20:22 GMT and should not be manually modified.
+This log was last generated on Tue, 10 May 2022 18:33:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.26
+
+Tue, 10 May 2022 18:33:23 GMT
+
+### Patches
+
+- Added font and color tokens (v.kozova13@gmail.com)
 
 ## 0.14.25
 

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 10 May 2022 18:33:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.59.40",
+      "version": "0.59.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4e9f60254753ef5f7d297b197b10f35e638308cf",
+            "comment": "Added font and color tokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.26",
+            "commit": "4e9f60254753ef5f7d297b197b10f35e638308cf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 May 2022 17:20:22 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.39",
       "version": "0.59.39",

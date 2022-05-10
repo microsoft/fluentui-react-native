@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 10 May 2022 18:33:23 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.26",
+      "version": "0.14.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "4e9f60254753ef5f7d297b197b10f35e638308cf",
+            "comment": "Added font and color tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 May 2022 17:20:22 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.25",
       "version": "0.14.25",
