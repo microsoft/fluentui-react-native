@@ -44,7 +44,6 @@ export type MenuItemCheckboxState = IPressableHooks<MenuItemCheckboxProps & Reac
 export interface MenuItemCheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
   content?: TextProps;
-  submenuIndicator?: SvgProps | XmlProps;
 }
 
 export interface MenuItemCheckboxType {

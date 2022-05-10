@@ -33,13 +33,5 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
       },
       ['color', ...fontStyles.keys],
     ),
-    submenuIndicator: buildProps(
-      (tokens: MenuItemCheckboxTokens) => {
-        return {
-          color: tokens.color,
-        };
-      },
-      ['color'],
-    ),
   },
 };
