@@ -8,7 +8,6 @@ export interface MenuProps extends Omit<IViewProps, 'onPress'> {
   defaultOpen?: boolean;
   open?: boolean;
   onOpenChange?: (e: InteractionEvent, isOpen: boolean) => void;
-  openOnContext?: boolean;
   openOnHover?: boolean;
 }
 
