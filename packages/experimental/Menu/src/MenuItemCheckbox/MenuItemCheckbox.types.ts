@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
-import { SvgProps, XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { IFocusable, InteractionEvent, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
