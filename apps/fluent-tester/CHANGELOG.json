@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 10 May 2022 20:49:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.60.0",
+      "version": "0.60.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1",
+            "comment": "Add doNotTakeCapture example with a hover callout test page entry"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.39",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.5.1",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.29.6",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 May 2022 18:33:23 GMT",
       "tag": "@fluentui-react-native/tester_v0.59.40",
       "version": "0.59.40",
