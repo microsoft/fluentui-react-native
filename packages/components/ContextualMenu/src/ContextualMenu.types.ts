@@ -1,6 +1,8 @@
 import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
+import { ScrollViewProps } from 'react-native';
+import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 
 export const contextualMenuName = 'ContextualMenu';
 export interface ContextualMenuContext {
@@ -45,7 +47,6 @@ export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'se
 
   /**
    * Whether to focus on the menu when mounted
-   * @platform win32
    */
   shouldFocusOnMount?: boolean;
 
@@ -63,6 +64,8 @@ export interface ContextualMenuProps extends IViewProps, Omit<ICalloutProps, 'se
 export type ContextualMenuSlotProps = {
   root: ContextualMenuProps;
   container: IViewProps;
+  scrollView: ScrollViewProps;
+  focusZone?: FocusZoneProps; // macOS only
 };
 
 export type ContextualMenuRenderData = IRenderData<ContextualMenuSlotProps, ContextualMenuState>;

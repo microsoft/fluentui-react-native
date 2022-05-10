@@ -34,7 +34,7 @@ export const Foo = compose<TabItemType>({
       ['color', ...fontStyles.keys],
     ),
   },
-  render: (userProps: TProps, useSlots: UseSlots<TType>) => {
+  useRender: (userProps: TProps, useSlots: UseSlots<TType>) => {
     // Grab the styled slots.
     const Slots = useSlots(userProps);
     // Return the handler to finish render.
@@ -49,7 +49,7 @@ export const Foo = compose<TabItemType>({
 export default Foo;
 ```
 
-Our [Tab control](https://github.com/microsoft/fluentui-react-native/blob/master/packages/experimental/Tabs/src/TabsItemTokens.ts) uses this system to integrate alias tokens.
+Our [Tab control](../../../../packages/experimental/Tabs/src/TabsItemTokens.ts) uses this system to integrate alias tokens.
 
 ## Using useTokens hook
 
@@ -75,4 +75,4 @@ export const Component = (props: TProps) => {
 };
 ```
 
-This hook is what the `compose` framework uses to create style tokens based on the current theme. You can read more on `useTokens` [here](https://github.com/microsoft/fluentui-react-native/tree/master/packages/framework/use-tokens).
+This hook is what the `compose` framework uses to create style tokens based on the current theme. You can read more on `useTokens` [here](../../../../packages/framework/use-tokens/README.md).

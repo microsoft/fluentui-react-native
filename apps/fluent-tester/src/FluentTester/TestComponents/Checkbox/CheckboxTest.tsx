@@ -11,7 +11,7 @@ function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
 
-const basicCheckbox: React.FunctionComponent = () => {
+const BasicCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
@@ -29,7 +29,7 @@ const basicCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const otherCheckbox: React.FunctionComponent = () => {
+const OtherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -53,41 +53,41 @@ const otherCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const tokenCheckbox: React.FunctionComponent = () => {
-  const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
+const CircularCheckbox = Checkbox.customize({ tokens: { borderRadius: 50 } });
 
-  const CircleColorCheckbox = Checkbox.customize({
-    tokens: { borderRadius: 50, checkboxBackgroundColor: 'white' },
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: 'green',
-          checkboxBorderColor: 'green',
-          checkmarkColor: 'white',
-        },
-      },
-      focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
-      pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
-    },
-  });
-
-  const HoverCheckbox = Checkbox.customize({
-    _overrides: {
-      checked: {
-        tokens: {
-          checkboxBackgroundColor: 'black',
-          checkmarkColor: 'white',
-        },
-      },
-      hovered: {
-        tokens: {
-          checkmarkVisibility: 1,
-        },
+const CircleColorCheckbox = Checkbox.customize({
+  tokens: { borderRadius: 50, checkboxBackgroundColor: 'white' },
+  _overrides: {
+    checked: {
+      tokens: {
+        checkboxBackgroundColor: 'green',
+        checkboxBorderColor: 'green',
+        checkmarkColor: 'white',
       },
     },
-  });
+    focused: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
+    hovered: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundHovered' } },
+    pressed: { tokens: { checkboxBackgroundColor: 'menuItemBackgroundPressed' } },
+  },
+});
 
+const HoverCheckbox = Checkbox.customize({
+  _overrides: {
+    checked: {
+      tokens: {
+        checkboxBackgroundColor: 'black',
+        checkmarkColor: 'white',
+      },
+    },
+    hovered: {
+      tokens: {
+        checkmarkVisibility: 1,
+      },
+    },
+  },
+});
+
+const TokenCheckbox: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
@@ -148,15 +148,15 @@ const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
     testID: CHECKBOX_TESTPAGE,
-    component: basicCheckbox,
+    component: BasicCheckbox,
   },
   {
     name: 'Other Implementations',
-    component: otherCheckbox,
+    component: OtherCheckbox,
   },
   {
     name: 'Token Customized Checkboxes',
-    component: tokenCheckbox,
+    component: TokenCheckbox,
   },
   {
     name: 'Checkbox for E2E Testing',

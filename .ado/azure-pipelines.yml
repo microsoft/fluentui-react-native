@@ -21,16 +21,16 @@ jobs:
       - template: templates/setup-repo.yml
 
       - script: |
-          yarn buildci
-        displayName: 'yarn buildci'
+          yarn checkchange
+        displayName: 'check change'
 
       - script: |
           yarn prettier
         displayName: 'check prettier'
 
       - script: |
-          yarn checkchange
-        displayName: 'check change'
+          yarn buildci
+        displayName: 'yarn buildci'
 
       - script: |
           yarn check-for-changed-files
@@ -77,7 +77,7 @@ jobs:
   - job: ApplePR
     displayName: Apple PR
     pool:
-      vmImage: 'macos-11'
+      vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
@@ -149,13 +149,13 @@ jobs:
           tasks: 'assembleDebug cAT'
           publishJUnitResults: false
           javaHomeOption: 'JDKVersion'
+          jdkVersionOption: '1.11'
           sonarQubeRunAnalysis: false
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks
     displayName: Test repo links
-    pool:
-      vmImage: 'ubuntu-latest'
+    pool: cxe-ubuntu-20-04-small
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -173,7 +173,7 @@ jobs:
   # - job: NuGetPublish
   #   displayName: NuGet Publish
   #   pool:
-  #     vmImage: 'macos-11'
+  #     vmImage: 'internal-macos12'
   #     demands: ['xcode', 'sh', 'npm']
   #   timeoutInMinutes: 90 # how long to run the job before automatically cancelling
   #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them

@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { compose, mergeProps, UseSlots } from '@fluentui-react-native/framework';
-import { I18nManager, View } from 'react-native';
-import { ClipPath, Defs, G, LinearGradient, Path, Rect, Stop, Svg, SvgProps, TransformObject } from 'react-native-svg';
+import { View } from 'react-native';
+import { ClipPath, Defs, LinearGradient, Path, Rect, Stop, Svg, SvgProps } from 'react-native-svg';
 import { stylingSettings } from './Shimmer.styling.win32';
 import { ShimmerElementTypes, shimmerName, ShimmerProps } from './Shimmer.types';
 import { ClippingMaskProps, ShimmerType, ShimmerWaveProps } from './Shimmer.types.win32';
@@ -61,18 +61,12 @@ const wave: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps
   );
 };
 
-const waveContainer: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps, children: React.ReactNode[]) => {
+const waveContainer: React.FunctionComponent<ShimmerWaveProps> = (props: ShimmerWaveProps) => {
   const { shimmerColor, viewBoxHeight, viewBoxWidth } = props;
-
-  // Flip the SVG if we are running in RTL
-  const rtlTransfrom: TransformObject = I18nManager.isRTL ? { translateX: viewBoxWidth, scaleX: -1 } : {};
-
   return (
     <RCTNativeAnimatedShimmer
       {...{ ...props, style: { backgroundColor: shimmerColor, height: viewBoxHeight, width: viewBoxWidth, overflow: 'hidden' } }}
-    >
-      <G transform={rtlTransfrom}>{children}</G>
-    </RCTNativeAnimatedShimmer>
+    />
   );
 };
 
@@ -87,7 +81,7 @@ export const Shimmer = compose<ShimmerType>({
     shimmerWaveContainer: waveContainer,
   },
 
-  render: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
+  useRender: (props: ShimmerProps, useSlots: UseSlots<ShimmerType>) => {
     return (rest: ShimmerProps) => {
       const { elements, ...mergedProps } = mergeProps(props, rest);
       const Slots = useSlots(mergedProps);

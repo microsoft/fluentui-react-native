@@ -11,13 +11,12 @@ variables:
     value: https://github.com/Microsoft/ui-fabric-ts-validation.git
   - name: NodeVersion
     value: '10.x'
-  - name: VmImage
-    value: 'Ubuntu 16.04'
+  - name: UbuntuPool
+    value: 'cxe-ubuntu-20-04-small'
 
 jobs:
   - job: Build
-    pool:
-      vmImage: $(VmImage)
+    pool: $(UbuntuPool)
     timeoutInMinutes: 60
     steps:
       - checkout: self
@@ -66,8 +65,7 @@ jobs:
     dependsOn: Build
     condition: succeeded()
     timeoutInMinutes: 60
-    pool:
-      vmImage: $(VmImage)
+    pool: $(UbuntuPool)
     strategy:
       maxParallel: 1
       matrix:
@@ -143,8 +141,7 @@ jobs:
     dependsOn: Compatibility
     condition: always()
     timeoutInMinutes: 60
-    pool:
-      vmImage: $(VmImage)
+    pool: $(UbuntuPool)
     steps:
       # Download build library
       - task: DownloadBuildArtifacts@0

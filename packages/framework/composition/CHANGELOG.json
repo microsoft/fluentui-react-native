@@ -2,6 +2,129 @@
   "name": "@fluentui-react-native/composition",
   "entries": [
     {
+      "date": "Thu, 31 Mar 2022 07:27:48 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.7",
+      "version": "0.7.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/immutable-merge to v1.1.7",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.2.6",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-slots to v0.6.6",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/composition",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.3",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Mar 2022 19:49:45 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.6",
+      "version": "0.7.6",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "not available",
+            "comment": "Change links to point not using urls"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Mar 2022 18:37:07 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.6",
+      "version": "0.7.6",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "0bbf3a115ed286da7ea14c458af701c8a2a5a075",
+            "comment": "Change links to point not using urls"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 23:43:09 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.6",
+      "version": "0.7.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2",
+            "comment": "Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Feb 2022 23:27:10 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54",
+            "comment": "Remove web endpoint"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Feb 2022 21:58:20 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "fc506e0ea21def220cd2e7b4fe36361446c5f8c6",
+            "comment": "Update just"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Jan 2022 20:52:39 GMT",
+      "tag": "@fluentui-react-native/composition_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "none": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/composition",
+            "commit": "7444b2ae84923594dc3c835b2b6d60dd75913410",
+            "comment": "Documentation of compose and customize"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:01 GMT",
       "tag": "@fluentui-react-native/composition_v0.7.5",
       "version": "0.7.5",

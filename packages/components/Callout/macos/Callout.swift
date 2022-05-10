@@ -26,9 +26,9 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 		}
 	}
 
-	@objc public var onShow: RCTBubblingEventBlock?
+	@objc public var onShow: RCTDirectEventBlock?
 
-	@objc public var onDismiss: RCTBubblingEventBlock?
+	@objc public var onDismiss: RCTDirectEventBlock?
 
 	public weak var bridge: RCTBridge?
 
@@ -58,17 +58,6 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: RCTComponent Overrides
 
 	override func insertReactSubview(_ subview: NSView!, at atIndex: Int) {
-		/*
-		  If we attach a touch handler to the proxy view directly, the touch coordinates
-		  are incorrect and the wrong subview recieves the touch event, most likely
-		  because macOS screen coordinates have a flipped Y axis. The workaround is to
-		  attach a separate touch handler to each subview
-		 */
-		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
-			preconditionFailure("Callout could not create RCTTouchHandler")
-		}
-		touchHandler.attach(to: subview as? RCTUIView)
-
 		proxyView.insertReactSubview(subview, at: atIndex)
 	}
 
@@ -90,14 +79,76 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	// MARK: Private methods
 
 	private func showCallout() {
+		guard !isCalloutWindowShown else {
+			return
+		}
+
 		updateCalloutFrameToAnchor()
 		calloutWindow.makeKeyAndOrderFront(self)
+
+		// Dismiss the Callout if the window is no longer active.
+		NotificationCenter.default.addObserver(self, selector: #selector(dismissCallout), name: NSApplication.didResignActiveNotification, object: nil)
+
+		mouseEventMonitor.addLocalMonitorForEvents(matching: .leftMouseDown, handler: { [weak self] (event) -> NSEvent? in
+			func isClickInsideWindowHierarchy(window: NSWindow?, event: NSEvent) -> Bool {
+				guard let window = window else {
+					return false
+				}
+				guard let clickedWindow = event.window else {
+					return false
+				}
+
+				var isClickInHierarchy = false
+
+				if (window.isEqual(to: clickedWindow)) {
+					isClickInHierarchy = true
+				} else {
+					if let childWindows = window.childWindows {
+						for childWindow in childWindows {
+							isClickInHierarchy = isClickInsideWindowHierarchy(window: childWindow, event: event)
+						}
+					}
+				}
+
+				return isClickInHierarchy
+			}
+
+			var window: NSWindow? = self?.calloutWindow
+			while (window?.parent as? CalloutWindow != nil) {
+				window = window?.parent
+			}
+
+			if (!isClickInsideWindowHierarchy(window: window, event: event)) {
+				self?.dismissCallout()
+			}
+
+			return event
+		})
+
+		isCalloutWindowShown = true
 		onShowCallout()
 	}
 
-	private func dismissCallout() {
-		calloutWindow.close()
-		onDismissCallout()
+	@objc private func dismissCallout() {
+		guard isCalloutWindowShown else {
+			return
+		}
+
+		// Dismiss any children Callouts (I.E: Submenus) first
+		if let childWindows = calloutWindow.childWindows {
+			for childWindow in childWindows {
+				if let childCallout = childWindow as? CalloutWindow {
+					childCallout.dismissCallout()
+				}
+			}
+		}
+
+		calloutWindow.dismissCallout()
+
+		NotificationCenter.default.removeObserver(self)
+		mouseEventMonitor.removeMonitor()
+
+		isCalloutWindowShown = false
 	}
 
 	/// Sets the frame of the Callout Window (in screen coordinates to be off of the Anchor on the preferred edge
@@ -281,37 +332,51 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 
 	// MARK: Private variables
 
+	/// The view the Callout is presented from, if anchorRect is nil.
 	private var anchorView: NSView?
 
-	private var proxyView = RCTView()
+	/// The  view we forward Callout's Children to. It's hosted within the CalloutWindow's
+	/// view hierarchy, ensuring our React Views are not placed in the main window.
+	private lazy var proxyView: NSView = {
+		let visualEffectView = FlippedVisualEffectView()
+		visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+		visualEffectView.material = .menu
+		visualEffectView.state = .active
+		visualEffectView.wantsLayer = true
+		visualEffectView.layer?.cornerRadius = calloutWindowCornerRadius
+
+		/**
+		 * We can't directly call touchHandler.attach(to:) because `visualEffectView` is not an RCTUIView.
+		 * We get around this limitation by just replicating what `attach` did internally: add a gestureRecognizer.
+		 */
+		guard let touchHandler = RCTTouchHandler(bridge: bridge) else {
+			preconditionFailure("Callout could not create RCTTouchHandler")
+		}
+		visualEffectView.addGestureRecognizer(touchHandler)
+
+		return visualEffectView
+	}()
 
 	private lazy var calloutWindow: CalloutWindow = {
 		let window = CalloutWindow()
 		window.lifeCycleDelegate = self
 
-		let visualEffect = NSVisualEffectView()
-		visualEffect.translatesAutoresizingMaskIntoConstraints = false
-		visualEffect.material = .menu
-		visualEffect.state = .active
-		visualEffect.wantsLayer = true
-		visualEffect.layer?.cornerRadius = calloutWindowCornerRadius
-
 		guard let contentView = window.contentView else {
 			preconditionFailure("Callout window has no content view")
 		}
 
-		contentView.addSubview(visualEffect)
-		NSLayoutConstraint.activate([
-			visualEffect.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-			visualEffect.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-			visualEffect.topAnchor.constraint(equalTo: contentView.topAnchor),
-			visualEffect.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-		])
-
-		visualEffect.addSubview(proxyView)
-
+		contentView.addSubview(proxyView)
+		if let parentWindow = self.window {
+			parentWindow.addChildWindow(window, ordered: .above)
+		}
 		return window
 	}()
+
+	private var mouseEventMonitor = GuardedEventMonitor()
+
+	private var isCalloutWindowShown = false
 }
+
+
 
 private var calloutWindowCornerRadius: CGFloat = 5.0

@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Tools and mocks for testing components using jest and enzyme",
   "main": "lib-commonjs/index.js",
-  "module": "lib/index.js",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "private": true,
   "scripts": {
@@ -23,7 +23,7 @@
     "directory": "packages/utils/test-tools"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.13.3 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.14.3 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

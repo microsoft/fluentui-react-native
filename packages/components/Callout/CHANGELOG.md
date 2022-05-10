@@ -1,8 +1,273 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.46
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.19.45
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+- Bump @fluentui-react-native/tokens to v0.11.11
+- Bump @uifabricshared/foundation-compose to v1.11.19
+
+## 0.19.44
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.4
+- Bump @fluentui-react-native/tokens to v0.11.10
+- Bump @uifabricshared/foundation-compose to v1.11.18
+
+## 0.19.43
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
+- Bump @uifabricshared/foundation-compose to v1.11.17
+
+## 0.19.42
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+- Bump @uifabricshared/foundation-compose to v1.11.16
+
+## 0.19.41
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+
+## 0.19.40
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+
+## 0.19.39
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
+- Bump @uifabricshared/foundation-compose to v1.11.15
+
+## 0.19.38
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.7
+- Bump @uifabricshared/foundation-compose to v1.11.14
+
+## 0.19.37
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.8.5
+- Bump @fluentui-react-native/component-cache to v1.3.2
+- Bump @fluentui-react-native/interactive-hooks to v0.14.6
+- Bump @fluentui-react-native/tokens to v0.11.9
+- Bump @uifabricshared/foundation-composable to v0.10.3
+- Bump @uifabricshared/foundation-compose to v1.11.13
+- Bump @uifabricshared/foundation-settings to v0.11.3
+
+## 0.19.36
+
+Mon, 28 Mar 2022 15:02:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.5
+
+## 0.19.35
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.4
+- Bump @uifabricshared/foundation-compose to v1.11.12
+
+## 0.19.34
+
+Mon, 21 Mar 2022 01:47:54 GMT
+
+### Patches
+
+- width -> maxWidth (sanajmi@microsoft.com)
+
+## 0.19.33
+
+Fri, 18 Mar 2022 07:19:17 GMT
+
+### Patches
+
+- ContextualMenu macOS: Improve lifecycle management (sanajmi@microsoft.com)
+
+## 0.19.32
+
+Fri, 11 Mar 2022 00:34:53 GMT
+
+### Patches
+
+- ContextualMenu macOS: Focus on menu rather than first menu item (sanajmi@microsoft.com)
+
+## 0.19.31
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.4
+- Bump @fluentui-react-native/interactive-hooks to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.11.8
+
+## 0.19.30
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.2
+
+## 0.19.29
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.1
+- Bump @fluentui-react-native/tokens to v0.11.7
+- Bump @uifabricshared/foundation-compose to v1.11.11
+
+## 0.19.28
+
+Tue, 01 Mar 2022 20:18:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.0
+
+## 0.19.27
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
+- Bump @fluentui-react-native/interactive-hooks to v0.13.3
+- Bump @fluentui-react-native/tokens to v0.11.6
+
+## 0.19.26
+
+Thu, 17 Feb 2022 02:13:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.2
+
+## 0.19.25
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.1
+- Bump @uifabricshared/foundation-compose to v1.11.10
+
+## 0.19.24
+
+Thu, 10 Feb 2022 17:13:16 GMT
+
+### Patches
+
+- macOS: Add Childwindow support (sanajmi@microsoft.com)
+
+## 0.19.23
+
+Wed, 09 Feb 2022 20:14:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.13.0
+
+## 0.19.22
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.2
+- Bump @uifabricshared/foundation-compose to v1.11.9
+
+## 0.19.21
+
+Fri, 28 Jan 2022 20:52:39 GMT
+
+### Patches
+
+- ContextualMenu macOS: fix focus shifting on click (sanajmi@microsoft.com)
+
+## 0.19.20
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.1
+
+## 0.19.19
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.12.0
+
+## 0.19.18
+
+Tue, 25 Jan 2022 21:55:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.15
+
+## 0.19.17
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.11.14
 
 ## 0.19.16
 

@@ -1,8 +1,219 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Thu, 05 May 2022 19:08:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.24
+
+Thu, 05 May 2022 19:08:12 GMT
+
+### Patches
+
+- Added svgEnabled check to the Avatar (v.kozova13@gmail.com)
+
+## 0.14.23
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.33
+- Bump @fluentui-react-native/icon to v0.11.21
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.14.22
+
+Wed, 04 May 2022 09:56:42 GMT
+
+### Patches
+
+- Changed colors for the Avatar (v.kozova13@gmail.com)
+
+## 0.14.21
+
+Mon, 02 May 2022 22:14:40 GMT
+
+### Patches
+
+- Fix avatar dependency (ruaraki@microsoft.com)
+
+## 0.14.20
+
+Sat, 30 Apr 2022 06:33:42 GMT
+
+### Patches
+
+- Move to official 0.5.0 release (mischreiber@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.14.19
+
+Fri, 29 Apr 2022 21:54:17 GMT
+
+### Patches
+
+- Added sizes to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.32
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.14.18
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.31
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.14.17
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.30
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/theme-tokens to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.14.16
+
+Tue, 26 Apr 2022 20:45:13 GMT
+
+### Patches
+
+- Changed props according to the spec (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.29
+
+## 0.14.15
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.28
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
+
+## 0.14.14
+
+Wed, 20 Apr 2022 10:53:38 GMT
+
+### Patches
+
+- Replaced presence prop from PersonaCoin with the new PresenceBadge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.27
+
+## 0.14.13
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.22
+- Bump @fluentui-react-native/theme-tokens to v0.16.0
+
+## 0.14.12
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.21
+- Bump @fluentui-react-native/theme-tokens to v0.15.0
+
+## 0.14.11
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.20
+- Bump @fluentui-react-native/theme-tokens to v0.14.0
+
+## 0.14.10
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.5
+- Bump @fluentui-react-native/component-cache to v1.3.2
+- Bump @fluentui-react-native/framework to v0.7.19
+- Bump @fluentui-react-native/theme-tokens to v0.13.2
+- Bump @fluentui-react-native/tokens to v0.11.9
+- Bump @fluentui-react-native/use-styling to v0.8.3
+
+## 0.14.9
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.18
+- Bump @fluentui-react-native/theme-tokens to v0.13.1
+
+## 0.14.8
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.4
+- Bump @fluentui-react-native/framework to v0.7.17
+- Bump @fluentui-react-native/tokens to v0.11.8
+
+## 0.14.7
+
+Fri, 04 Mar 2022 23:43:09 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.16
+
+## 0.14.6
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.15
+- Bump @fluentui-react-native/theme-tokens to v0.13.0
+- Bump @fluentui-react-native/tokens to v0.11.7
+
+## 0.14.5
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
+- Bump @fluentui-react-native/framework to v0.7.14
+- Bump @fluentui-react-native/tokens to v0.11.6
+
+## 0.14.4
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.13
+
+## 0.14.3
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/theme-tokens to v0.12.0
 
 ## 0.14.2
 

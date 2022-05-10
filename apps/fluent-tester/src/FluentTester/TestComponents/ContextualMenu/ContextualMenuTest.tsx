@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text, View, Switch } from 'react-native';
 import {
   Text as FURNText,
-  Button,
+  ButtonV1 as Button,
   ContextualMenu,
   ContextualMenuItem,
   Submenu,
@@ -16,7 +16,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
 
-const contextualMenu: React.FunctionComponent = () => {
+const ContextualMenuMainTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -87,7 +87,9 @@ const contextualMenu: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 
@@ -114,7 +116,7 @@ const contextualMenu: React.FunctionComponent = () => {
   );
 };
 
-const nestedContextualMenu: React.FunctionComponent = () => {
+const NestedContextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
   const [showContextualMenu, setShowContextualMenu] = React.useState(false);
@@ -189,7 +191,9 @@ const nestedContextualMenu: React.FunctionComponent = () => {
             <Text>Submenu Visibility: </Text>
             {isSubmenuVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 
@@ -232,6 +236,9 @@ const nestedContextualMenu: React.FunctionComponent = () => {
   );
 };
 
+// custom text
+const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
+
 const IconContextualMenu: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
 
@@ -257,9 +264,6 @@ const IconContextualMenu: React.FunctionComponent = () => {
     setShowContextualMenu(false);
     setIsContextualMenuVisible(false);
   }, [setShowContextualMenu]);
-
-  // custom text
-  const IndigoHeroBold = FURNText.customize({ tokens: { variant: 'heroStandard', fontWeight: '100', color: '#4b0082' } });
 
   return (
     <View>
@@ -412,7 +416,9 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           <Text>
             <Text>Menu and Submenu max height set to 200</Text>
           </Text>
-          <Button content="Press for ContextualMenu" onClick={toggleShowContextualMenu} componentRef={stdBtnRef} />
+          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef}>
+            Press for ContextualMenu
+          </Button>
         </View>
       </View>
 
@@ -462,6 +468,14 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
           )}
           <ContextualMenuItem text="Disabled Menu Item" itemKey="11" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="12" />
+          <ContextualMenuItem text="MenuItem 5" itemKey="13" />
+          <ContextualMenuItem text="MenuItem 6" itemKey="14" />
+          <ContextualMenuItem text="MenuItem 7" itemKey="15" />
+          <ContextualMenuItem text="MenuItem 8" itemKey="16" />
+          <ContextualMenuItem text="MenuItem 9" itemKey="17" />
+          <ContextualMenuItem text="MenuItem 10" itemKey="18" />
+          <ContextualMenuItem text="MenuItem 11" itemKey="19" />
+          <ContextualMenuItem text="MenuItem 12" itemKey="20" />
         </ContextualMenu>
       )}
     </View>
@@ -472,11 +486,11 @@ const contextualMenuSections: TestSection[] = [
   {
     name: 'Standard ContextualMenu',
     testID: CONTEXTUALMENU_TESTPAGE,
-    component: contextualMenu,
+    component: ContextualMenuMainTest,
   },
   {
     name: 'Nested ContextualMenu',
-    component: nestedContextualMenu,
+    component: NestedContextualMenu,
   },
   {
     name: 'IconButton with Customized ContextualMenu',

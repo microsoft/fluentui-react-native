@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Tokens Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
   it('Click and navigate to Tokens test page', () => {
@@ -18,6 +18,7 @@ describe('Tokens Testing Initialization', function () {
     NavigateAppPage.clickAndGoToTokensPage();
     TokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(TokenPageObject.isPageLoaded()).toBeTruthy();
+    expect(TokenPageObject.isPageLoaded()).toBeTruthy(TokenPageObject.ERRORMESSAGE_PAGELOAD);
+    expect(TokenPageObject.didAssertPopup()).toBeFalsy(TokenPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

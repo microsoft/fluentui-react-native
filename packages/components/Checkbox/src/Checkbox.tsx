@@ -1,143 +1,76 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { Text } from '@fluentui-react-native/text';
-import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
-import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
-import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { filterViewProps } from '@fluentui-react-native/adapters';
-import { settings, checkboxSelectActionLabel } from './Checkbox.settings';
-import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { foregroundColorTokens, textTokens, borderTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
-import {
-  useAsToggle,
-  useAsPressable,
-  useViewCommandFocus,
-  useKeyUpProps,
-  useOnPressWithFocus,
-} from '@fluentui-react-native/interactive-hooks';
-import { backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
+import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
+import { Text } from '@fluentui-react-native/experimental-text';
+import { stylingSettings, getDefaultSize } from './Checkbox.styling';
+import { compose, mergeProps, withSlots, UseSlots, useFluentTheme } from '@fluentui-react-native/framework';
+import { useCheckbox } from './useCheckbox';
+import { Svg, Path } from 'react-native-svg';
+import { shouldUseThickCheckmark } from './shouldUseThickCheckmark';
 
-export const Checkbox = compose<ICheckboxType>({
+export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
-
-  usePrepareProps: (userProps: ICheckboxProps, useStyling: IUseComposeStyling<ICheckboxType>) => {
-    const defaultComponentRef = React.useRef(null);
-    const {
-      accessible,
-      accessibilityLabel,
-      accessibilityRole,
-      ariaLabel,
-      checked,
-      defaultChecked,
-      boxSide,
-      label,
-      onChange,
-      componentRef = defaultComponentRef,
-      ...rest
-    } = userProps;
-
-    // Warns defaultChecked and checked being mutually exclusive.
-    if (defaultChecked != undefined && checked != undefined) {
-      console.warn('defaultChecked and checked are mutually exclusive to one another. Use one or the other.');
-    }
-
-    // Re-usable hook for toggle components.
-    const [isChecked, toggleChecked] = useAsToggle(defaultChecked, checked, onChange);
-
-    // Ensure focus is placed on checkbox after click
-    const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
-
-    const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
-
-    const buttonRef = useViewCommandFocus(componentRef);
-
-    // Handles the "Space" key toggling the Checkbox
-    const onKeyUpProps = useKeyUpProps(toggleChecked, ' ');
-
-    const state: ICheckboxState = {
-      ...pressable.state,
-      disabled: !!userProps.disabled,
-      checked: isChecked,
-      boxAtEnd: boxSide == undefined || boxSide == 'start' ? false : true,
-    };
-
-    // Grab the styling information from the userProps, referencing the state as well as the props.
-    const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
-
-    // Used when creating accessibility properties in mergeSettings below
-    const onAccessibilityAction = React.useCallback(
-      (event: { nativeEvent: { actionName: any } }) => {
-        switch (event.nativeEvent.actionName) {
-          case 'Toggle':
-            toggleChecked();
-            break;
-        }
-      },
-      [toggleChecked, userProps, state, pressable.props],
-    );
-
-    const slotProps = mergeSettings<ICheckboxSlotProps>(styleProps, {
-      root: {
-        rest,
-        ref: buttonRef,
-        ...pressable.props,
-        accessible: accessible ?? true,
-        accessibilityRole: accessibilityRole ?? 'checkbox',
-        accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label,
-        accessibilityState: { disabled: state.disabled, checked: state.checked },
-        accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
-        focusable: !state.disabled,
-        onAccessibilityAction: onAccessibilityAction,
-        ...onKeyUpProps,
-      },
-      // Temporary checkmark until SVG functionality
-      checkmark: { children: '✓' },
-      content: { children: label },
-    });
-
-    return { slotProps, state };
-  },
-
-  render: (Slots: ISlots<ICheckboxSlotProps>, renderData: ICheckboxRenderData, ...children: React.ReactNode[]) => {
-    return (
-      <Slots.root>
-        {renderData?.state.boxAtEnd && <Slots.content />}
-        <Slots.checkbox>
-          <Slots.checkmark />
-        </Slots.checkbox>
-        {!renderData?.state.boxAtEnd && <Slots.content />}
-        {children}
-      </Slots.root>
-    );
-  },
-
-  settings,
+  ...stylingSettings,
   slots: {
     root: View,
-    checkbox: { slotType: View, filter: filterViewProps },
-    checkmark: Text,
-    content: Text,
+    checkbox: View,
+    checkmark: Svg,
+    label: Text,
+    required: Text,
   },
-  styles: {
-    root: [],
-    checkbox: [
-      backgroundColorTokens,
-      borderTokens,
-      [
-        { source: 'checkboxBackgroundColor', lookup: getPaletteFromTheme, target: 'backgroundColor' },
-        { source: 'checkboxBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' },
-      ],
-    ],
-    checkmark: [
-      foregroundColorTokens,
-      [
-        { source: 'checkmarkColor', lookup: getPaletteFromTheme, target: 'color' },
-        { source: 'checkmarkVisibility', target: 'opacity' },
-      ],
-    ],
-    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
+  useRender: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
+    // configure props and state for checkbox based on user props
+    const Checkbox = useCheckbox(userProps);
+    // grab the styled slots
+    const Slots = useSlots(
+      userProps,
+      (layer) =>
+        Checkbox.state[layer] ||
+        userProps[layer] ||
+        layer === userProps['shape'] ||
+        layer === userProps['size'] ||
+        (!userProps['size'] && layer === getDefaultSize()),
+    );
+    const thickCheckmark = shouldUseThickCheckmark(useFluentTheme());
+
+    // now return the handler for finishing render
+    return (final: CheckboxProps) => {
+      const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
+      const labelComponent = (
+        <React.Fragment>
+          <Slots.label key="label">{label}</Slots.label>
+          {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
+        </React.Fragment>
+      );
+
+      // We want a thicker checkmark in HC to make the checkmark stand out more.
+      const checkmarkPath = thickCheckmark ? (
+        <Path
+          fill="currentColor"
+          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+          stroke="currentColor"
+          strokeWidth="1"
+        />
+      ) : (
+        <Path
+          fill="currentColor"
+          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+        />
+      );
+
+      return (
+        <Slots.root {...mergedProps}>
+          {Checkbox.state.labelIsBefore && labelComponent}
+          <Slots.checkbox>
+            <Slots.checkmark key="checkmark" viewBox="0 0 11 8">
+              {checkmarkPath}
+            </Slots.checkmark>
+          </Slots.checkbox>
+          {!Checkbox.state.labelIsBefore && labelComponent}
+        </Slots.root>
+      );
+    };
   },
 });
 

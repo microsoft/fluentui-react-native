@@ -1,13 +1,13 @@
 import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
-import { ExperimentalButtonTest, HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from './TestComponents/ButtonExperimental';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
 import { FocusZoneTest, HOMEPAGE_FOCUSZONE_BUTTON } from './TestComponents/FocusZone';
 import { HOMEPAGE_LINK_BUTTON, LinkTest } from './TestComponents/Link';
-import { MenuButtonTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/MenuButton';
+import { MenuButtonTest, HOMEPAGE_MENUBUTTON_BUTTON } from './TestComponents/MenuButton';
 import { HOMEPAGE_PERSONA_BUTTON, PersonaTest } from './TestComponents/Persona';
 import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/PersonaCoin';
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
@@ -26,6 +26,8 @@ import { TestDescription } from './TestComponents';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
+// --> testPage import insert
 
 export const tests: TestDescription[] = [
   {
@@ -37,6 +39,11 @@ export const tests: TestDescription[] = [
     name: 'Avatar Test',
     component: JSAvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
+  {
+    name: 'Badge Test',
+    component: BadgeTest,
+    testPage: HOMEPAGE_BADGE,
   },
   {
     name: 'Button Test',
@@ -64,11 +71,6 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
   },
   {
-    name: 'Experimental Button',
-    component: ExperimentalButtonTest,
-    testPage: HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL,
-  },
-  {
     name: 'Focus Trap Zone Test',
     component: FocusTrapTest,
     testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
@@ -91,7 +93,7 @@ export const tests: TestDescription[] = [
   {
     name: 'MenuButton Test',
     component: MenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON,
+    testPage: HOMEPAGE_MENUBUTTON_BUTTON,
   },
   {
     name: 'Persona Test',
@@ -163,4 +165,10 @@ export const tests: TestDescription[] = [
     component: ExperimentalMenuButtonTest,
     testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   },
+  {
+    name: 'Menu Test',
+    component: MenuTest,
+    testPage: HOMEPAGE_MENU_BUTTON,
+  },
+  // --> testPage component insert,,
 ];

@@ -1,61 +1,27 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
 import {
   AvatarSize,
+  AvatarSizes,
   AvatarColor,
+  AvatarColors,
   JSAvatar,
-  AvatarPresence,
   AvatarActive,
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
-import { Switch, View, Text, Picker, ColorValue } from 'react-native';
+import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
+import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
-import { JSAvatarTokens } from '@fluentui-react-native/experimental-avatar';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
+const avatarColors: AvatarColor[] = ['neutral', 'brand', 'colorful', ...AvatarColors];
 const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring', 'shadow', 'glow', 'ring-shadow', 'ring-glow'];
 
-const allSizes: WithUndefined<AvatarSize>[] = [
-  undefinedText,
-  'size8',
-  'size24',
-  'size32',
-  'size40',
-  'size48',
-  'size56',
-  'size72',
-  'size100',
-  'size120',
-];
-
-const allColors: WithUndefined<AvatarColor>[] = [
-  undefinedText,
-  'cornflower',
-  'blue',
-  'royalBlue',
-  'teal',
-  'forest',
-  'darkGreen',
-  'berry',
-  'hotPink',
-  'grape',
-  'purple',
-  'pumpkin',
-  'red',
-  'burgundy',
-  'orchid',
-  'brass',
-  'darkRed',
-  'beige',
-  'platinum',
-  'steel',
-  'brown',
-];
-
-const allPresences: WithUndefined<AvatarPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
+const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
+const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
 
 const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
@@ -71,25 +37,31 @@ const StyledPicker = (props) => {
 };
 
 export const StandardUsage: FunctionComponent = () => {
-  const tokens: JSAvatarTokens = {};
   const [isSquare, setSquare] = useState(false);
   const [showImage, setShowImage] = useState(true);
   const [active, setActive] = useState<AvatarActive>('unset');
   const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>('size72');
-  const [coinColor, setCoinColor] = useState<WithUndefined<AvatarColor>>('brass');
-  const [presence, setPresence] = useState<WithUndefined<AvatarPresence>>('online');
+  const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
+  const [avatarColor, setAvatarColor] = useState<AvatarColor>('brass');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
   const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
+  const onAvatarColorChange = useCallback((value) => setAvatarColor(value), []);
   const onSizeChange = useCallback((value) => setImageSize(value), []);
-  const onColorChange = useCallback((value) => setCoinColor(value), []);
+
   const onPresenceChange = useCallback((value) => setPresence(value), []);
 
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };
 
-  tokens.backgroundColor = coinColor;
+  const fontBuiltInProps = {
+    fontFamily: 'Arial',
+    codepoint: 0x2663,
+    fontSize: 40,
+  };
+
+  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
   return (
     <View style={commonStyles.root}>
@@ -113,7 +85,7 @@ export const StandardUsage: FunctionComponent = () => {
             collection={avatarActiveAppearance}
           />
         ) : null}
-        <StyledPicker prompt="Coin color" selected={coinColor} onChange={onColorChange} collection={allColors} />
+        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
 
@@ -123,11 +95,22 @@ export const StandardUsage: FunctionComponent = () => {
         size={imageSize === undefinedText ? undefined : imageSize}
         initials="SN"
         shape={isSquare ? 'square' : 'circular'}
-        imageDescription="Photo of Satya Nadella"
-        presence={presence === undefinedText ? undefined : presence}
-        imageUrl={showImage ? satyaPhotoUrl : undefined}
-        coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+        accessibilityLabel="Photo of Satya Nadella"
+        badge={{ status: presence === undefinedText ? undefined : presence }}
+        src={showImage ? satyaPhotoUrl : undefined}
+        avatarColor={avatarColor}
       />
+      {svgIconsEnabled && (
+        <JSAvatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={imageSize === undefinedText ? undefined : imageSize}
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="Icon"
+          icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
+          avatarColor={avatarColor}
+        />
+      )}
     </View>
   );
 };

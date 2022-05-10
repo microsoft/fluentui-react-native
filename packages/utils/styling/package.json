@@ -1,9 +1,9 @@
 {
   "name": "@fluentui-react-native/styling-utils",
-  "version": "0.3.4",
+  "version": "0.3.6",
   "description": "Utility functions for styling components in FURN",
   "main": "src/index.ts",
-  "module": "lib/index.js",
+  "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "onPublish": {
     "main": "lib-commonjs/index.js",

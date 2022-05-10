@@ -2,6 +2,273 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Wed, 04 May 2022 21:06:04 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.26",
+      "version": "0.7.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.26",
+            "commit": "d503e2af4e84ba5c8c1c40ea3698fcbd1691dda6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 28 Apr 2022 19:09:51 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.25",
+      "version": "0.7.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132",
+            "comment": "Revert \"Add Text props and test new Variant types (#1615)\""
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.25",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 27 Apr 2022 19:30:38 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.24",
+      "version": "0.7.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1",
+            "comment": "initial Text implementation"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.24",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.23",
+      "version": "0.7.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.22",
+      "version": "0.7.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.22",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Apr 2022 22:58:22 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.21",
+      "version": "0.7.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.21",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 05 Apr 2022 20:05:50 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.20",
+      "version": "0.7.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.20",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 31 Mar 2022 07:27:47 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.19",
+      "version": "0.7.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed",
+            "comment": "Ban `export *` in index files for better tree-shakeability"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.5",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.19",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Mar 2022 17:24:05 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.18",
+      "version": "0.7.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.18",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.17",
+      "version": "0.7.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.4",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.17",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 23:43:10 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.16",
+      "version": "0.7.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.16",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 03 Mar 2022 20:20:09 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.15",
+      "version": "0.7.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45",
+            "comment": "Add snapshot and fix runtime error"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.15",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Feb 2022 23:27:11 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.14",
+      "version": "0.7.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.3",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.14",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Feb 2022 01:22:02 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.13",
+      "version": "0.7.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.13",
+            "commit": "039a993d13ae01ff2212e8b91295d1ed5676c82d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 02:29:07 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.7.12",
+      "version": "0.7.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.12",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 21:49:07 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.7.11",
       "version": "0.7.11",

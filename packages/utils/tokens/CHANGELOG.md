@@ -1,8 +1,71 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Fri, 14 Jan 2022 01:00:04 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Minor changes
+
+- MenuList styling (ruaraki@microsoft.com)
+
+## 0.11.11
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @uifabricshared/theming-ramp to v0.16.8
+
+## 0.11.10
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @uifabricshared/theming-ramp to v0.16.7
+
+## 0.11.9
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/adapters to v0.8.5
+- Bump @fluentui-react-native/theme-types to v0.14.1
+- Bump @uifabricshared/foundation-tokens to v0.11.3
+- Bump @uifabricshared/theming-ramp to v0.16.6
+
+## 0.11.8
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.4
+
+## 0.11.7
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.0
+- Bump @uifabricshared/theming-ramp to v0.16.5
+
+## 0.11.6
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.8.3
 
 ## 0.11.5
 

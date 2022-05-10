@@ -9,7 +9,7 @@ export const StackItem = compose<StackItemType>({
   displayName: stackItemName,
   ...stylingSettings,
   slots: { root: View },
-  render: (props: StackItemProps, useSlots: UseSlots<StackItemType>) => {
+  useRender: (props: StackItemProps, useSlots: UseSlots<StackItemType>) => {
     const Root = useSlots(props).root;
     return (final: StackItemProps, ...children: React.ReactNode[]) => <Root {...mergeProps(props, final)}>{children}</Root>;
   },

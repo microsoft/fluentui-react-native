@@ -17,16 +17,21 @@ parameters:
   displayName: Skip Git Push
   type: boolean
   default: false
+- name: skipNugetPublish
+  displayName: Skip Nuget Publish
+  type: boolean
+  default: false
 
 variables:
-  - group: 'NPM and Github Secrets'
+  - group: 'FluentUI React Native Secrets'
+  - group: InfoSec-SecurityResults
+  - name: tags
+    value: production,externalfacing
 
 jobs:
   - job: NPMPublish
     displayName: NPM Publish
-    pool:
-      vmImage: 'ubuntu-latest'
-
+    pool: Azure-Pipelines-EO-Ubuntu20.04-Office
     steps:
       - task: NodeTool@0
         inputs:
@@ -58,13 +63,42 @@ jobs:
           yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/master -n $(npmAuth) --access public -y
         displayName: 'Publish NPM Packages'
 
+      - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
+        displayName: 📒 Generate Manifest Npm
+        inputs:
+          BuildDropPath: $(System.DefaultWorkingDirectory)
+
+      - task: PublishPipelineArtifact@1
+        displayName: 📒 Publish Manifest Npm
+        inputs:
+          artifactName: SBom-Npm-$(System.JobAttempt)
+          targetPath: $(System.DefaultWorkingDirectory)/_manifest
+
+      - task: ComponentGovernanceComponentDetection@0
+
   - job: NuGetPublish
     displayName: NuGet Publish
     pool:
-      vmImage: 'macos-11'
+      vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
+    variables:
+      - name: BUILDSECMON_OPT_IN
+        value: true
     timeoutInMinutes: 90 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
       - template: templates/apple-nuget-publish.yml
+        parameters:
+          skipNugetPublish: ${{ parameters.skipNugetPublish }}
+
+  - job: Win32NuGetPublish
+    displayName: Win32 FluentTester NuGet Publish
+    pool: OE-OfficePublic
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - template: templates/win32-nuget-publish.yml
+        parameters:
+          skipNugetPublish: ${{ parameters.skipNugetPublish }}

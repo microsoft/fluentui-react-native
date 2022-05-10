@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const rimraf = require('rimraf');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
 const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
@@ -13,17 +12,18 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
-  exclude: [ '../fluent-tester/src/E2E/Shimmer/specs/*.win.ts' ],
+  exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
   maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
-      deviceName: 'WindowsPC',
-      app: appPath,
-      appArguments: appArgs,
-      appWorkingDir: appDir,
+      'appium:automationName': 'windows',
+      'appium:deviceName': 'WindowsPC',
+      'appium:app': appPath,
+      'appium:appArguments': appArgs,
+      'appium:appWorkingDir': appDir,
     },
   ],
 
@@ -161,8 +161,22 @@ exports.config = {
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
 
-    // save screenshot
-    browser.saveScreenshot(filePath);
+    /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
+     * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
+    const windowHandles = browser.getWindowHandles();
+    if (windowHandles.length > 1) {
+      /* Switch to the Assert window - Take a screenshot and close the assert */
+      browser.switchToWindow(windowHandles[0]);
+      browser.saveScreenshot(filePath);
+      browser.closeWindow();
+
+      /* Switch back to FluentTester and close. The test harness has trouble closing the app when an assert fired */
+      browser.switchToWindow(windowHandles[1]);
+      browser.closeWindow();
+    } else {
+      // save screenshot
+      browser.saveScreenshot(filePath);
+    }
   },
 
   /**

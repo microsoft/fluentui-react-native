@@ -13,3 +13,14 @@ export const TEXT_A11Y_ROLE = 'ControlType.Text';
 /* Jasmine Timeouts */
 export const BOOT_APP_TIMEOUT = 60000;
 export const PAGE_TIMEOUT = 15000;
+
+/* Keyboard Key Constants */
+export const enum Keys {
+  Up_Arrow = 'ArrowUp',
+  Right_Arrow = 'ArrowRight',
+  Down_Arrow = 'ArrowDown',
+  Left_Arrow = 'ArrowLeft',
+  Spacebar = ' ',
+  Enter = 'Enter',
+  Escape = 'Escape',
+}

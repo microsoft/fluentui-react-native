@@ -49,7 +49,7 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
         return {};
       }
 
-      return { colors: createAliasesFromPalette(theme.host.palette) };
+      return { colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast') };
     },
   );
 

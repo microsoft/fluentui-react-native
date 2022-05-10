@@ -51,7 +51,7 @@ Bump `reactNativeVersion`, and run `yarn rnx-dep-check --write`. This command
 will ensure that all relevant packages are bumped correctly.
 
 You can read more about this tool here:
-[`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/packages/dep-check/DESIGN.md)
+[`@rnx-kit/dep-check` design document](https://github.com/microsoft/rnx-kit/blob/main/docsite/docs/architecture/dependency-management.md)
 
 ## Debugging
 

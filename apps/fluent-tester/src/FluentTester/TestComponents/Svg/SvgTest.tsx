@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import { Separator } from '@fluentui/react-native';
-import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from 'react-native-svg';
+import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -13,10 +13,11 @@ const styles = StyleSheet.create({
   },
 });
 
-const rect: React.FunctionComponent = () => {
+const RectTest: React.FunctionComponent = () => {
   const [useColorA, setUseColorA] = React.useState(false);
   const colorA = 'red';
   const colorB = 'green';
+
   return (
     <React.Fragment>
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
@@ -36,7 +37,7 @@ const rect: React.FunctionComponent = () => {
   );
 };
 
-const circle: React.FunctionComponent = () => {
+const CircleTest: React.FunctionComponent = () => {
   return (
     <Svg width="50" height="50">
       <Circle cx="25" cy="25" r="20" fill="red" stroke="black" />
@@ -44,7 +45,7 @@ const circle: React.FunctionComponent = () => {
   );
 };
 
-const line: React.FunctionComponent = () => {
+const LineTest: React.FunctionComponent = () => {
   return (
     <Svg width="50" height="50">
       <Line x1="10" y1="10" x2="20" y2="20" fill="red" stroke="black" />
@@ -52,7 +53,7 @@ const line: React.FunctionComponent = () => {
   );
 };
 
-const path: React.FunctionComponent = () => {
+const PathTest: React.FunctionComponent = () => {
   return (
     <Svg width="100" height="100">
       <Path d="M 0 0 A 10 10 0 0,1 0 100" fill="magenta" stroke="purple" id="path" />
@@ -60,7 +61,7 @@ const path: React.FunctionComponent = () => {
   );
 };
 
-const polygon: React.FunctionComponent = () => {
+const PolygonTest: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100">
       <Polygon points="40,5 70,80 25,95" fill="lime" stroke="purple" strokeWidth="1" />
@@ -68,7 +69,7 @@ const polygon: React.FunctionComponent = () => {
   );
 };
 
-const linearGradient: React.FunctionComponent = () => {
+const LinearGradientTest: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
       <Defs>
@@ -82,7 +83,7 @@ const linearGradient: React.FunctionComponent = () => {
   );
 };
 
-const radialGradient: React.FunctionComponent = () => {
+const RadialGradientTest: React.FunctionComponent = () => {
   return (
     <Svg height="100" width="100" style={{ backgroundColor: 'black' }} viewBox="0 0 10 10" color="yellow">
       <Defs>
@@ -96,7 +97,7 @@ const radialGradient: React.FunctionComponent = () => {
   );
 };
 
-const rectCircle: React.FunctionComponent = () => {
+const RectCircleTest: React.FunctionComponent = () => {
   return (
     <Svg height="200" width="200">
       <Defs>
@@ -113,29 +114,34 @@ const rectCircle: React.FunctionComponent = () => {
   );
 };
 
-const bundledSvg: React.FunctionComponent = () => {
+const BundledSvgTest: React.FunctionComponent = () => {
   return <TestSvg width={200} height={200} color="red" />;
 };
 
-const remoteSvg: React.FunctionComponent = () => {
+const RemoteSvgTest: React.FunctionComponent = () => {
+  // GH#1596: Temporarily stop testing this case until it can be either more robust or removed
+  const shouldShowLocalNetwork = false;
+
   return (
     <View>
-      <SvgCssUri
+      <SvgUri
         style={styles.svg}
         viewBox="0 0 200 200"
         width="100"
         height="100"
         uri="https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg"
       />
-      <SvgCssUri
-        x="50"
-        y="50"
-        viewBox="0 0 500 500"
-        style={styles.svg}
-        width="100"
-        height="100"
-        uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
-      />
+      {shouldShowLocalNetwork && (
+        <SvgUri
+          x="50"
+          y="50"
+          viewBox="0 0 500 500"
+          style={styles.svg}
+          width="100"
+          height="100"
+          uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
+        />
+      )}
     </View>
   );
 };
@@ -144,43 +150,43 @@ const svgSections: TestSection[] = [
   {
     name: 'Rect',
     testID: SVG_TESTPAGE,
-    component: rect,
+    component: RectTest,
   },
   {
     name: 'Circle',
-    component: circle,
+    component: CircleTest,
   },
   {
     name: 'Line',
-    component: line,
+    component: LineTest,
   },
   {
     name: 'Path',
-    component: path,
+    component: PathTest,
   },
   {
     name: 'Polygon',
-    component: polygon,
+    component: PolygonTest,
   },
   {
     name: 'Linear Gradient',
-    component: linearGradient,
+    component: LinearGradientTest,
   },
   {
     name: 'Radial Gradient',
-    component: radialGradient,
+    component: RadialGradientTest,
   },
   {
     name: 'Rect and Circle via Defs and Use',
-    component: rectCircle,
+    component: RectCircleTest,
   },
   {
     name: 'Bundled Svg',
-    component: bundledSvg,
+    component: BundledSvgTest,
   },
   {
     name: 'Remotely Retrieved Svgs',
-    component: remoteSvg,
+    component: RemoteSvgTest,
   },
 ];
 

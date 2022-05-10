@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, Text, Switch, TextInput, TextStyle } from 'react-native';
-import { IPersonaTokens, Persona } from '@fluentui/react-native';
+import { Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -19,38 +19,25 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [horizontalGap, setHorizontalGap] = React.useState<number>();
   const [verticalGap, setVerticalGap] = React.useState<number>();
 
-  const tokens: Partial<IPersonaTokens> = {};
-  if (coinColor) {
-    tokens.coinBackgroundColor = coinColor;
-  }
-  if (textColor) {
-    tokens.color = textColor;
-  }
-  if (textSize) {
-    tokens.textFont = { fontSize: textSize };
-  }
-  if (secondarySize) {
-    tokens.secondaryFont = { fontSize: secondarySize };
-  }
-  if (tertiarySize) {
-    tokens.tertiaryFont = { fontSize: tertiarySize };
-  }
-  if (optionalSize) {
-    tokens.optionalFont = { fontSize: optionalSize };
-  }
-  if (horizontalGap !== undefined) {
-    tokens.horizontalGap = horizontalGap;
-  }
-  if (verticalGap !== undefined) {
-    tokens.verticalGap = verticalGap;
-  }
-
   const theme = useTheme();
   const textBoxBorderStyle: TextStyle = {
     borderColor: theme.colors.inputBorder,
   };
 
-  const CustomizedPersona = Persona.customize({ tokens });
+  const CustomizedPersona = React.useMemo(() => {
+    const tokens = {
+      backgroundColor: coinColor,
+      color: textColor,
+      textFont: { fontSize: textSize },
+      secondaryFont: { fontSize: secondarySize },
+      tertiaryFont: { fontSize: tertiarySize },
+      optionalFont: { fontSize: optionalSize },
+      horizontalGap: horizontalGap,
+      verticalGap: verticalGap,
+    };
+    return Persona.customize({ tokens });
+  }, [coinColor, textColor, textSize, secondarySize, tertiarySize, optionalSize, horizontalGap, verticalGap]);
+
   return (
     <View style={commonStyles.root}>
       {/* settings */}

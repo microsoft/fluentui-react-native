@@ -9,7 +9,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const BlueSeparator = Separator.customize({ color: 'blue' });
 const RedSeparator = Separator.customize({ color: 'red' });
 
-const separator: React.FunctionComponent = () => {
+const SeparatorMainTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle} gap={5}>
       <Stack gap={4} style={separatorStackStyle}>
@@ -31,7 +31,7 @@ const separatorSections: TestSection[] = [
   {
     name: 'Basic Button',
     testID: SEPARATOR_TESTPAGE,
-    component: separator,
+    component: SeparatorMainTest,
   },
 ];
 

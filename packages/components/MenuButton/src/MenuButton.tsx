@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React, { useRef, useState, useCallback } from 'react';
-import { PrimaryButton, Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { ContextualMenu, ContextualMenuItem, SubmenuItem, Submenu } from '@fluentui-react-native/contextual-menu';
 import { IUseComposeStyling, compose } from '@uifabricshared/foundation-compose';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -16,12 +16,13 @@ import {
   MenuButtonType,
   MenuButtonRenderData,
   MenuButtonState,
+  MenuButtonItemProps,
 } from './MenuButton.types';
 
 export const MenuButton = compose<MenuButtonType>({
   displayName: MenuButtonName,
   usePrepareProps: (userProps: MenuButtonProps, useStyling: IUseComposeStyling<MenuButtonType>) => {
-    const { menuItems, content, startIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
+    const { menuItems, content, startIcon, endIcon, disabled, onItemClick, contextualMenu, primary, ...rest } = userProps;
 
     const stdBtnRef = useRef(null);
     const [showContextualMenu, setShowContextualMenu] = useState(false);
@@ -34,30 +35,6 @@ export const MenuButton = compose<MenuButtonType>({
       setShowContextualMenu(!showContextualMenu);
     }, [showContextualMenu, setShowContextualMenu]);
 
-    const menuItemsUpdated = menuItems.map((item) => {
-      if (item.hasSubmenu) {
-        const [showSubmenu, setShowSubmenu] = useState(false);
-
-        const toggleShowSubmenu = React.useCallback(() => {
-          setShowSubmenu(!showSubmenu);
-        }, [showSubmenu, setShowSubmenu]);
-
-        const onDismissSubmenu = React.useCallback(() => {
-          setShowSubmenu(false);
-        }, [setShowSubmenu]);
-        const { onHoverIn = toggleShowSubmenu, submenuProps = {}, ...restItems } = item;
-        const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
-        const menuItemUpdated = {
-          ...restItems,
-          onHoverIn,
-          showSubmenu: item.showSubmenu ? showSubmenu : undefined,
-          submenuProps: { ...restSubmenuProps, onDismiss, setShowMenu },
-        };
-        return menuItemUpdated;
-      }
-      return item;
-    });
-
     const state: MenuButtonState = {
       context: {
         showContextualMenu: !!showContextualMenu,
@@ -67,18 +44,23 @@ export const MenuButton = compose<MenuButtonType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
     const buttonProps = {
-      content,
       disabled,
-      startIcon,
+      content,
+      icon: startIcon != undefined ? startIcon : endIcon,
+      iconPosition: startIcon != undefined ? 'before' : 'after',
       componentRef: stdBtnRef,
       onClick: toggleShowContextualMenu,
+      iconOnly: content == undefined ? true : false,
       ...rest,
     };
 
     const slotProps = mergeSettings<MenuButtonSlotProps>(styleProps, {
       root: {},
       button: buttonProps,
-      primaryButton: buttonProps,
+      primaryButton: {
+        appearance: 'primary',
+        ...buttonProps,
+      },
       contextualMenu: {
         onItemClick,
         target: stdBtnRef,
@@ -87,7 +69,7 @@ export const MenuButton = compose<MenuButtonType>({
         ...contextualMenu,
       },
       contextualMenuItems: {
-        menuItems: menuItemsUpdated,
+        menuItems,
       },
     });
 
@@ -96,7 +78,7 @@ export const MenuButton = compose<MenuButtonType>({
   slots: {
     root: React.Fragment,
     button: { slotType: Button as React.ComponentType },
-    primaryButton: { slotType: PrimaryButton as React.ComponentType },
+    primaryButton: { slotType: Button as React.ComponentType },
     contextualMenu: { slotType: ContextualMenu as React.ComponentType },
     contextualMenuItems: React.Fragment,
     chevronSvg: SvgXml,
@@ -122,31 +104,24 @@ export const MenuButton = compose<MenuButtonType>({
       <Slots.root>
         {context.primary ? (
           <Slots.primaryButton>
+            {renderData.slotProps.primaryButton.content}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.primaryButton>
         ) : (
           <Slots.button>
+            {renderData.slotProps.button.content}
             <Slots.chevronSvg xml={chevronXml} />
           </Slots.button>
         )}
         {context.showContextualMenu && (
           <Slots.contextualMenu>
             {menuItems.map((menuItem) => {
-              const { hasSubmenu, submenuProps, showSubmenu, componentRef, submenuItems, ...items } = menuItem;
-
-              return hasSubmenu && submenuItems ? (
+              return menuItem.hasSubmenu && menuItem.submenuItems ? (
                 <Slots.contextualMenuItems>
-                  <SubmenuItem componentRef={componentRef} {...items} />
-                  {showSubmenu && (
-                    <Submenu target={componentRef} {...submenuProps}>
-                      {submenuItems.map((submenuItem) => (
-                        <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
-                      ))}
-                    </Submenu>
-                  )}
+                  <SubMenuItem {...menuItem} />
                 </Slots.contextualMenuItems>
               ) : (
-                <ContextualMenuItem key={items.itemKey} {...items} />
+                <ContextualMenuItem key={menuItem.itemKey} {...menuItem} />
               );
             })}
           </Slots.contextualMenu>
@@ -155,5 +130,31 @@ export const MenuButton = compose<MenuButtonType>({
     );
   },
 });
+
+const SubMenuItem: React.FunctionComponent<MenuButtonItemProps> = (props: MenuButtonItemProps): JSX.Element => {
+  const [showSubmenuState, setShowSubmenu] = React.useState(false);
+  const toggleShowSubmenu = React.useCallback(() => {
+    setShowSubmenu(!showSubmenuState);
+  }, [showSubmenuState, setShowSubmenu]);
+  const onDismissSubmenu = React.useCallback(() => {
+    setShowSubmenu(false);
+  }, [setShowSubmenu]);
+
+  const { showSubmenu = showSubmenuState, submenuProps, componentRef, submenuItems, onHoverIn = toggleShowSubmenu, ...restItems } = props;
+  const { onDismiss = onDismissSubmenu, setShowMenu = toggleShowSubmenu, ...restSubmenuProps } = submenuProps;
+
+  return (
+    <React.Fragment>
+      <SubmenuItem componentRef={componentRef} onHoverIn={onHoverIn} {...restItems} />
+      {showSubmenu && (
+        <Submenu target={componentRef} onDismiss={onDismiss} setShowMenu={setShowMenu} {...restSubmenuProps}>
+          {submenuItems?.map((submenuItem) => (
+            <ContextualMenuItem key={submenuItem.itemKey} {...submenuItem} />
+          ))}
+        </Submenu>
+      )}
+    </React.Fragment>
+  );
+};
 
 export default MenuButton;

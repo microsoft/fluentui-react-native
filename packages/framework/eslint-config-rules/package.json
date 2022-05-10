@@ -9,12 +9,8 @@
     "directory": "packages/framework/eslint-config-rules"
   },
   "main": "./eslintrc.js",
-  "scripts": {
-    "prettier": "fluentui-scripts prettier",
-    "prettier-fix": "fluentui-scripts prettier --fix true"
-  },
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "@rnx-kit/eslint-plugin": "^0.2.8",
     "eslint": "^8.0.0",
     "eslint-plugin-jest": "^25.0.0"

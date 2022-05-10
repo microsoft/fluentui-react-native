@@ -2,7 +2,6 @@ import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../FluentTester/TestCompo
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../FluentTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../FluentTester/TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../FluentTester/TestComponents/Button/consts';
-import { HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL } from '../../FluentTester/TestComponents/ButtonExperimental/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../FluentTester/TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../FluentTester/TestComponents/ContextualMenu/consts';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../FluentTester/TestComponents/TabsExperimental/consts';
@@ -10,7 +9,7 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../FluentTester/TestComponents
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../FluentTester/TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../FluentTester/TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../FluentTester/TestComponents/Link/consts';
-import { HOMEPAGE_MENU_BUTTON } from '../../FluentTester/TestComponents/MenuButton/consts';
+import { HOMEPAGE_MENUBUTTON_BUTTON } from '../../FluentTester/TestComponents/MenuButton/consts';
 import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../../FluentTester/TestComponents/MenuButtonExperimental/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../FluentTester/TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../FluentTester/TestComponents/PersonaCoin/consts';
@@ -124,10 +123,6 @@ class NavigateAppPage extends BasePage {
     this.tokensPage.click();
   }
 
-  clickAndGoToExperimentalButtonPage() {
-    this.experimentalButtonPage.click();
-  }
-
   clickAndGoToExperimentalTabsPage() {
     this.experimentalTabsPage.click();
   }
@@ -181,7 +176,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get menuButtonPage() {
-    return By(HOMEPAGE_MENU_BUTTON);
+    return By(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   private get menuButtonExperimentalPage() {
@@ -234,10 +229,6 @@ class NavigateAppPage extends BasePage {
 
   private get tokensPage() {
     return By(HOMEPAGE_TOKEN_BUTTON);
-  }
-
-  private get experimentalButtonPage() {
-    return By(HOMEPAGE_BUTTON_BUTTONEXPERIMENTAL);
   }
 
   private get experimentalTabsPage() {

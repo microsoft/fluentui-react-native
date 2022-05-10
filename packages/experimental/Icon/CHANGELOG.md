@@ -1,8 +1,194 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.21
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/text to v0.11.22
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.11.20
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/text to v0.11.21
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theming-utils to v0.10.2
+- Bump @fluentui-react-native/tokens to v0.11.11
+- Bump @uifabricshared/foundation-compose to v1.11.19
+
+## 0.11.19
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.2
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/text to v0.11.20
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/theming-utils to v0.10.1
+- Bump @fluentui-react-native/tokens to v0.11.10
+- Bump @uifabricshared/foundation-compose to v1.11.18
+
+## 0.11.18
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.1
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/text to v0.11.19
+- Bump @uifabricshared/foundation-compose to v1.11.17
+
+## 0.11.17
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.0
+- Bump @fluentui-react-native/framework to v0.7.22
+- Bump @fluentui-react-native/text to v0.11.18
+- Bump @fluentui-react-native/theming-utils to v0.10.0
+- Bump @uifabricshared/foundation-compose to v1.11.16
+
+## 0.11.16
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.15
+- Bump @fluentui-react-native/framework to v0.7.21
+- Bump @fluentui-react-native/text to v0.11.17
+- Bump @fluentui-react-native/theming-utils to v0.9.4
+- Bump @uifabricshared/foundation-compose to v1.11.15
+
+## 0.11.15
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.14
+- Bump @fluentui-react-native/framework to v0.7.20
+- Bump @fluentui-react-native/text to v0.11.16
+- Bump @fluentui-react-native/theming-utils to v0.9.3
+- Bump @uifabricshared/foundation-compose to v1.11.14
+
+## 0.11.14
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.13
+- Bump @fluentui-react-native/framework to v0.7.19
+- Bump @fluentui-react-native/text to v0.11.15
+- Bump @fluentui-react-native/theme-types to v0.14.1
+- Bump @fluentui-react-native/theming-utils to v0.9.2
+- Bump @fluentui-react-native/tokens to v0.11.9
+- Bump @uifabricshared/foundation-compose to v1.11.13
+
+## 0.11.13
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Update minimum rn svg version (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.12
+- Bump @fluentui-react-native/framework to v0.7.18
+- Bump @fluentui-react-native/text to v0.11.14
+- Bump @fluentui-react-native/theming-utils to v0.9.1
+- Bump @uifabricshared/foundation-compose to v1.11.12
+
+## 0.11.12
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.17
+- Bump @fluentui-react-native/text to v0.11.13
+- Bump @fluentui-react-native/tokens to v0.11.8
+
+## 0.11.11
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.16
+
+## 0.11.10
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.11
+- Bump @fluentui-react-native/framework to v0.7.15
+- Bump @fluentui-react-native/text to v0.11.12
+- Bump @fluentui-react-native/theme-types to v0.14.0
+- Bump @fluentui-react-native/theming-utils to v0.9.0
+- Bump @fluentui-react-native/tokens to v0.11.7
+- Bump @uifabricshared/foundation-compose to v1.11.11
+
+## 0.11.9
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.14
+- Bump @fluentui-react-native/text to v0.11.11
+- Bump @fluentui-react-native/tokens to v0.11.6
+
+## 0.11.8
+
+Thu, 17 Feb 2022 02:13:06 GMT
+
+### Patches
+
+- Update svg-transformer version (ruaraki@microsoft.com)
+
+## 0.11.7
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.10
+- Bump @fluentui-react-native/framework to v0.7.13
+- Bump @fluentui-react-native/text to v0.11.10
+- Bump @fluentui-react-native/theming-utils to v0.8.10
+- Bump @uifabricshared/foundation-compose to v1.11.10
+
+## 0.11.6
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.9
+- Bump @fluentui-react-native/framework to v0.7.12
+- Bump @fluentui-react-native/text to v0.11.9
+- Bump @fluentui-react-native/theming-utils to v0.8.9
+- Bump @uifabricshared/foundation-compose to v1.11.9
 
 ## 0.11.5
 

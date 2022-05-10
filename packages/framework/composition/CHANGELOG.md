@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/composition
 
-This log was last generated on Tue, 21 Dec 2021 20:56:31 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.7
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/immutable-merge to v1.1.7
+- Bump @fluentui-react-native/use-slot to v0.2.6
+- Bump @fluentui-react-native/use-slots to v0.6.6
+- Bump @fluentui-react-native/use-styling to v0.8.3
+
+## 0.7.6
+
+Fri, 04 Mar 2022 23:43:09 GMT
+
+### Patches
+
+- Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11 (ruaraki@microsoft.com)
 
 ## 0.7.5
 

@@ -7,38 +7,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
-const activityIndicatorTest: React.FunctionComponent = () => {
-  /** Customize doesn't do anything
-   * Tried having tokens not be props, but didn't work
-   * Not sure how to test/check where the tokens are passed through other than just looking at the final render
-   */
-  const CustomizedActivityIndicator = ActivityIndicator.customize({
-    activityIndicatorColor: 'orange',
-  });
-  return (
-    <Stack style={stackStyle}>
-      <Text>Extra Small</Text>
-      <ActivityIndicator size="xSmall" />
-      <Text>Small</Text>
-      <ActivityIndicator size="small" />
-      <Text>Medium</Text>
-      <ActivityIndicator size="medium" />
-      <Text>Large</Text>
-      <ActivityIndicator size="large" />
-      <Text>Extra Large</Text>
-      <ActivityIndicator size="xLarge" />
-
-      <Text>Size=xLarge and Line Thickness=large</Text>
-      <ActivityIndicator size="xLarge" lineThickness="large" />
-      <Text>Color props</Text>
-      <ActivityIndicator activityIndicatorColor="orange" accessibilityLabel="orange progressbar" />
-      <Text>Customized Activity Indicator (currently not working)</Text>
-      <CustomizedActivityIndicator />
-    </Stack>
-  );
-};
-
-const basicActivityIndicator: React.FunctionComponent = () => {
+const BasicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
   const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);
 
@@ -61,16 +30,57 @@ const basicActivityIndicator: React.FunctionComponent = () => {
   );
 };
 
+const ActivityIndicatorMainTest: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Text>Extra Small</Text>
+      <ActivityIndicator size="xSmall" />
+      <Text>Small</Text>
+      <ActivityIndicator size="small" />
+      <Text>Medium</Text>
+      <ActivityIndicator size="medium" />
+      <Text>Large</Text>
+      <ActivityIndicator size="large" />
+      <Text>Extra Large</Text>
+      <ActivityIndicator size="xLarge" />
+
+      <Text>Size=xLarge and Line Thickness=large</Text>
+      <ActivityIndicator size="xLarge" lineThickness="large" />
+      <Text>Color props</Text>
+      <ActivityIndicator activityIndicatorColor="orange" accessibilityLabel="orange progressbar" />
+    </Stack>
+  );
+};
+
+const CustomizedActivityIndicator = ActivityIndicator.customize({
+  activityIndicatorColor: 'orange',
+  size: 'large',
+});
+
+const CustomizedActivityIndicatorTest: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Text>Customized Activity Indicator</Text>
+      <CustomizedActivityIndicator />
+    </Stack>
+  );
+};
+
 const activityIndicatorSections: TestSection[] = [
   {
-    name: 'BaseActivityIndicator',
+    name: 'Base ActivityIndicator',
     testID: ACTIVITY_INDICATOR_TESTPAGE,
-    component: basicActivityIndicator,
+    component: BasicActivityIndicator,
   },
   {
     name: 'ActivityIndicator',
     testID: ACTIVITY_INDICATOR_TESTPAGE,
-    component: activityIndicatorTest,
+    component: ActivityIndicatorMainTest,
+  },
+  {
+    name: 'Customized ActivityIndicator',
+    testID: ACTIVITY_INDICATOR_TESTPAGE,
+    component: CustomizedActivityIndicatorTest,
   },
 ];
 

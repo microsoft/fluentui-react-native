@@ -2,6 +2,1026 @@
   "name": "@fluentui-react-native/tester-ios",
   "entries": [
     {
+      "date": "Thu, 28 Apr 2022 19:09:51 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.28",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 27 Apr 2022 19:30:38 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.27",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Apr 2022 20:45:13 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.26",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Apr 2022 06:35:28 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.25",
+            "commit": "0f39d217397302ddfcea63148c7f7672028e1cb1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Apr 2022 18:31:09 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.24",
+            "commit": "add49a0b6438cb088e99b50648f09a69bdaaecdb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Apr 2022 17:11:13 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.23",
+            "commit": "1640642e124940f31577f214176e7634e51647fa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 22 Apr 2022 22:51:25 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.22",
+            "commit": "087580922ea5f0d196a90be24ca47f1fa52666ee"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.21",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Apr 2022 10:53:38 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.20",
+            "commit": "c6d615f926aaca616737ab0382ebde9109a5556f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Apr 2022 18:03:34 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.19",
+            "commit": "7f50ae15e1294e99b899a1b5d576518e2623db90"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.18",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 18 Apr 2022 17:51:06 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.17",
+            "commit": "924f19a6cda14eabbadcf4ece5e9f7e92e5c6986"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Apr 2022 23:16:07 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.16",
+            "commit": "1af7abe504e476081e025e8ce71a67dcb38e981a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Apr 2022 20:25:15 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.15",
+            "commit": "1aa91e167531258be39ee11d6ec5ea78a55c0b3e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Apr 2022 23:44:28 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.14",
+            "commit": "129f628a9676a93f10466cea6efdfff1243e86f0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Apr 2022 15:51:04 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.13",
+            "commit": "9056781c0c1db98bafae7d8f24da19400a2c1903"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Apr 2022 21:53:04 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.12",
+            "commit": "86b38c2e20e29fb4248bfd64e534da45deb35dfa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Apr 2022 19:32:57 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.11",
+            "commit": "07ac1a3c35433fa70d2f3b7ce2e4b262d439a619"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Apr 2022 00:35:09 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.10",
+            "commit": "832066543f281fdec866f738d36f7f73f6bbb4f7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 Apr 2022 19:26:38 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.9",
+            "commit": "278ef34c398c8dd8b7505f1ce4bf313cc3157ea7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 Apr 2022 17:07:32 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.8",
+            "commit": "79590fa49de73c938cfacb077e930a1194bda985"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 Apr 2022 18:53:12 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.7",
+            "commit": "15d60684291bc64a6d104448587804bbcfbbb1e4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 Apr 2022 17:13:26 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.6",
+            "commit": "a1f2da8f9a9259a25963a2527f775f886cd27d1c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Apr 2022 18:40:10 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.5",
+            "commit": "d5774aab10b3a33d363ad9d5c09e03f737f6dc57"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Apr 2022 22:58:22 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.4",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 05 Apr 2022 20:05:50 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.3",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 04 Apr 2022 23:40:49 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.2",
+            "commit": "40fcd13b0557e64d206a5ad29f705ff2d47c1f5f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 04 Apr 2022 18:41:35 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.1",
+            "commit": "535124a01c7ebb054cbe871a72d042fb699c6601"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 31 Mar 2022 21:43:56 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.59.0",
+            "commit": "1e8f6072f5d8720bf6c49b92fe15ec93bb6899fc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 31 Mar 2022 07:27:48 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.16",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 30 Mar 2022 16:31:51 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.15",
+            "commit": "852de045b5b2dbf041734bac2a225d9a122b70eb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Mar 2022 15:02:37 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.14",
+            "commit": "c85943cf17fb111a721e006e1619084e27650b39"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Mar 2022 20:06:21 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.13",
+            "commit": "7f3427875a7711144237cc5de8dbf5ce1a778bd6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Mar 2022 17:24:05 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.12",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Mar 2022 17:17:36 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.11",
+            "commit": "0bf66a0c909d3e3c6e372ec5604b50e0af8b57d4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 21 Mar 2022 01:47:54 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.10",
+            "commit": "b772dfe4542b7032f216bf5c2faa807c695fa2a7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Mar 2022 07:19:17 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.9",
+            "commit": "be918e28dc086179801a25f9e664ceedbb81e85c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Mar 2022 23:37:24 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.8",
+            "commit": "accaa133a79013c665204b405704ca241c506999"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Mar 2022 16:43:32 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.7",
+            "commit": "462e18ffbc4e661665e35f107775e2016b09f176"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Mar 2022 00:34:53 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.6",
+            "commit": "489339a0f6ebd9a4687c1c84e9bf8d274d8806d5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Mar 2022 01:43:50 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.5",
+            "commit": "bac82a123f7eb99e0d2934f45cadf5853a51e95a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.4",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 23:43:10 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.3",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 21:17:46 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.2",
+            "commit": "1a80cce6c4a557ca32a719bd476e025ba3822630"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 03 Mar 2022 20:20:09 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.1",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Mar 2022 20:18:31 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "minor": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.58.0",
+            "commit": "6b5a35c07a9b7da4df7f250a4607f4fc6927d273"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Mar 2022 04:11:39 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.57.0",
+            "commit": "bf46717a4f55d639c6f8f337c9d0b86c4f7c8157"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Feb 2022 22:41:19 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.56.1",
+            "commit": "5c31a1d16ccb9e334f6ced422cde98edeef43d4f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Feb 2022 23:27:11 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.56.0",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Feb 2022 02:13:07 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.55.2",
+            "commit": "616c894f75769553fe97f8f2d4550bbd615f2396"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Feb 2022 01:22:02 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.55.1",
+            "commit": "039a993d13ae01ff2212e8b91295d1ed5676c82d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 16 Feb 2022 21:58:21 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.55.0",
+            "commit": "6e42cf1f72495be924087e36fd088061cb6537e9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Feb 2022 22:48:31 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.54.0",
+            "commit": "914bc9d1a60f7b2d0dd8e1fb9a8493118e7b8ab9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 14 Feb 2022 23:29:33 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.53.3",
+            "commit": "368fe5f4565442196f236e421b1c37c79556d2dd"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 10 Feb 2022 17:13:16 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.53.2",
+            "commit": "6894ede69c18ae909e0ddff97fc42adf31e81acc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Feb 2022 20:14:50 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.53.1",
+            "commit": "f7264338409e4a7e4cbb4f4fb815d4ab32276d8a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Feb 2022 19:47:54 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.53.0",
+            "commit": "338ce0f09bf19a71946e821fb02b0ecbdf491c6a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Feb 2022 20:31:52 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.52.2",
+            "commit": "5588e7458b699e44d99bdf67c1440c3c30d8ed51"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 22:09:55 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.52.1",
+            "commit": "50be92830d119b80e6acf74d9077333d6f925cce"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 02:29:07 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.52.0",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 28 Jan 2022 20:52:39 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.5",
+            "commit": "7444b2ae84923594dc3c835b2b6d60dd75913410"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 27 Jan 2022 10:39:35 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.4",
+            "commit": "23fc5537a032d1e421db408b0f1257ed5677f798"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 26 Jan 2022 20:31:04 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.3",
+            "commit": "1f6a66699e8a06bfd55a613ee9019ba8ca27d0b4"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 26 Jan 2022 17:02:27 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.2",
+            "commit": "883ef66b94a1efb5d429c5ecad015f312be3b4c3"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Jan 2022 21:55:31 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.1",
+            "commit": "ca505d0e9d6b3286c0025bde70305f4bbb49a7f2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Jan 2022 16:48:23 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.51.0",
+            "commit": "f522217240f2b510443e2f898d212df2ee114398"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Jan 2022 21:05:26 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.28",
+            "commit": "bfb00a74fa8f5bcf5dc4d1a9da8cf8e76f0263b3"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Jan 2022 20:21:28 GMT",
+      "tag": "@fluentui-react-native/tester-ios_v0.0.1",
+      "version": "0.0.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-ios",
+            "comment": "Bump @fluentui-react-native/tester to v0.50.27",
+            "commit": "0af901b7ce194baa6daccb02df35438e3ab75496"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 19 Jan 2022 00:57:04 GMT",
       "tag": "@fluentui-react-native/tester-ios_v0.0.1",
       "version": "0.0.1",

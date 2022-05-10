@@ -1,5 +1,25 @@
-export { Button, PrimaryButton, StealthButton, buttonName } from '@fluentui-react-native/button';
+export {
+  buttonNameV1,
+  ButtonV1,
+  ToggleButton,
+  CompoundButton,
+  FAB,
+  Button,
+  PrimaryButton,
+  StealthButton,
+  buttonName,
+} from '@fluentui-react-native/button';
 export type {
+  ButtonAppearance,
+  ButtonCoreTokens,
+  ButtonCoreProps,
+  ButtonProps,
+  ButtonShape,
+  ButtonSize,
+  ButtonSlotProps,
+  ButtonState,
+  ButtonTokens,
+  ButtonType,
   IButtonInfo,
   IButtonProps,
   IButtonRenderData,
@@ -21,8 +41,16 @@ export type {
   RestoreFocusEvent,
 } from '@fluentui-react-native/callout';
 
-export { Checkbox, checkboxName } from '@fluentui-react-native/checkbox';
+export { Checkbox, checkboxName, CheckboxV1, checkboxNameV1 } from '@fluentui-react-native/checkbox';
 export type {
+  CheckboxInfo,
+  CheckboxProps,
+  CheckboxSize,
+  CheckboxShape,
+  CheckboxSlotProps,
+  CheckboxState,
+  CheckboxTokens,
+  CheckboxType,
   ICheckboxProps,
   ICheckboxRenderData,
   ICheckboxSlotProps,
@@ -160,6 +188,7 @@ export {
   useAsToggle,
   useFocusState,
   useHoverState,
+  useKeyProps,
   useKeyUpProps,
   useKeyDownProps,
   useOnPressWithFocus,

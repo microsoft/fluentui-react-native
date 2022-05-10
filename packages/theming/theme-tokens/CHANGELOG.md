@@ -1,8 +1,81 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Apr 2022 19:30:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.2
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+
+## 0.16.1
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump design tokens packages (ruaraki@microsoft.com)
+
+## 0.16.0
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Minor changes
+
+- Move alias tokens to default theme (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Wed, 06 Apr 2022 22:58:21 GMT
+
+### Minor changes
+
+- Pull in design tokens (ruaraki@microsoft.com)
+
+## 0.14.0
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Minor changes
+
+- Move win32 alias tokens out (ruaraki@microsoft.com)
+
+## 0.13.2
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.1
+
+## 0.13.1
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Fix color mappings (ruaraki@microsoft.com)
+
+## 0.13.0
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Minor changes
+
+- New alias tokens (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.14.0
+
+## 0.12.0
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Minor changes
+
+- Fix UWP HC (ruaraki@microsoft.com)
 
 ## 0.11.6
 

@@ -14,7 +14,6 @@
   "scripts": {
     "build": "lage build",
     "build-tools": "lage build-tools",
-    "build-tokens": "node ./scripts/build-tokens.js",
     "buildci": "lage buildci",
     "bump-versions": "beachball bump",
     "clean-all": "node ./scripts/clean-all.js",
@@ -22,7 +21,7 @@
     "bundle": "lage bundle",
     "clean": "lage clean",
     "change": "beachball change",
-    "check-for-changed-files": "cd scripts && yarn fluentui-scripts check-for-modified-files",
+    "check-for-changed-files": "cd scripts && yarn fluentui-scripts checkForModifiedFiles",
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
     "depcheck": "rnx-dep-check && lage depcheck",
     "lint": "lage lint",
@@ -38,12 +37,11 @@
     "@babel/preset-env": "^7.8.0",
     "@babel/preset-react": "^7.8.0",
     "@babel/preset-typescript": "^7.8.0",
-    "@fluentui/token-pipeline": "^0.3.11",
     "@rnx-kit/dep-check": "^1.10.1",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "beachball": "^2.20.0",
-    "lage": ">=0.17.4 <1.0.0",
+    "lage": "^1.5.0",
     "markdown-link-check": "^3.8.7",
     "metro-react-native-babel-preset": "^0.66.0",
     "react-dom": "17.0.1"
@@ -56,9 +54,11 @@
     ]
   },
   "resolutions": {
+    "@appium/support": "^2.57.0",
     "@office-iss/react-native-win32": "^0.64.8",
     "@react-native-community/cli": "^5.0.1",
     "@react-native-community/cli-platform-ios": "^5.0.2",
+    "es5-ext": "0.10.53",
     "metro": "^0.66.2",
     "metro-babel-register": "^0.66.2",
     "metro-babel-transformer": "^0.66.2",
@@ -80,6 +80,7 @@
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-windows": "^0.64.3",
-    "react-native-macos": "^0.64.6"
+    "react-native-macos": "^0.64.6",
+    "simple-plist": "2.0.0-rc.0"
   }
 }

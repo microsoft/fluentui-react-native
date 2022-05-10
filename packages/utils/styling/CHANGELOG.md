@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/styling-utils
 
-This log was last generated on Tue, 18 Jan 2022 20:49:22 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.6
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+
+## 0.3.5
+
+Thu, 17 Feb 2022 01:22:01 GMT
+
+### Patches
+
+- Fix up package.json files (ruaraki@microsoft.com)
 
 ## 0.3.4
 

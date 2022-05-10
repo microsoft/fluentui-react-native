@@ -1,8 +1,61 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Fri, 14 Jan 2022 01:00:01 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.2
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theme to v0.6.8
+
+## 0.7.1
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/theme to v0.6.7
+
+## 0.7.0
+
+Wed, 06 Apr 2022 22:58:21 GMT
+
+### Minor changes
+
+- Hook up design tokens (ruaraki@microsoft.com)
+
+## 0.6.0
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Minor changes
+
+- Move android output (ruaraki@microsoft.com)
+
+## 0.5.6
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-types to v0.14.1
+- Bump @fluentui-react-native/theme to v0.6.6
+
+## 0.5.5
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.0
+- Bump @fluentui-react-native/theme to v0.6.5
 
 ## 0.5.4
 

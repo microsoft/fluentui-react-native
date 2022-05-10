@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { checkboxName, CheckboxTokens, CheckboxProps, CheckboxState } from './Checkbox.types';
+import { checkboxName, CheckboxTokens, CheckboxProps, CheckboxState } from '@fluentui-react-native/checkbox';
 import { compose, mergeProps, withSlots, UseSlots, buildProps } from '@fluentui-react-native/framework';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { IViewProps } from '@fluentui-react-native/adapters';
@@ -29,11 +29,11 @@ export const Checkbox = compose<CheckboxTypeMacOS>({
       },
     })),
   },
-  render: (props: CheckboxProps, useSlots: UseSlots<CheckboxTypeMacOS>) => {
+  useRender: (props: CheckboxProps, useSlots: UseSlots<CheckboxTypeMacOS>) => {
     const { onChange, ...restOfUserProps } = props;
     const onPress = (e: any) => {
       if (onChange != null) {
-        onChange(e.nativeEvent.isChecked);
+        onChange(e, e.nativeEvent.isChecked);
       }
     };
     const rootProps = { ...restOfUserProps };

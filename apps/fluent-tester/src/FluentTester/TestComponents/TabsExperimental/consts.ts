@@ -1,5 +1,5 @@
-export const HOMEPAGE_EXPERIMENTAL_TABS_BUTTON = 'HOMEPAGE_EXPERIMENTAL_TABS_BUTTON';
-export const EXPERIMENTAL_TABS_TESTPAGE = 'Experimental_Tabs_TestPage';
+export const HOMEPAGE_EXPERIMENTAL_TABS_BUTTON = 'Homepage_TabsExperimental_Button';
+export const EXPERIMENTAL_TABS_TESTPAGE = 'TabsExperimental_TestPage';
 
 /* E2E Testing Experimental Tabs 1 */
 export const EXPERIMENTAL_TABS_TEST_COMPONENT = 'Experimental_Tabs_Test_Component'; // A component on each specific test page

@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Thu, 31 Mar 2022 07:27:47 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.8.5",
+      "version": "0.8.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed",
+            "comment": "Ban `export *` in index files for better tree-shakeability"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.8.4",
+      "version": "0.8.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee",
+            "comment": "Pass tooltip to React Native macOS components"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Feb 2022 23:27:10 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.8.3",
+      "version": "0.8.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54",
+            "comment": "Remove web endpoint"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Jan 2022 01:00:01 GMT",
       "tag": "@fluentui-react-native/adapters_v0.8.2",
       "version": "0.8.2",

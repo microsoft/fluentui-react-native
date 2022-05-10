@@ -10,7 +10,7 @@
 
 ### UWP Additional Prerequisites
 
-- [UWP Prerequisites](https://github.com/microsoft/fluentui-react-native/blob/master/apps/windows/README.md)
+- [UWP Prerequisites](../../../windows/README.md)
 
 ## MacOS Prerequisites
 
@@ -39,7 +39,9 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 2. Bundle the test app (pick specific platform you want to test, we'll use win32)
    - C:\repo\fluentui-react-native>`cd apps\win32`
    - C:\repo\fluentui-react-native\apps\win32> `yarn bundle`
-3. Run E2E tests
+3. Hook up appium to the WinAppDriver (only needed once)
+   - C:\repo\fluentui-react-native\apps\win32> `yarn appium driver install windows`
+4. Run E2E tests
    - C:\repo\fluentui-react-native\apps\win32> `yarn e2etest`
 
 ## UWP Steps
@@ -48,7 +50,9 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 2. Start the server
    - C:\repo\fluentui-react-native> `cd apps\windows`
    - C:\repo\fluentui-react-native\apps\windows> `yarn start`
-3. Open a new command prompt and run the E2E tests
+3. Hook up appium to the WinAppDriver (only needed once)
+   - C:\repo\fluentui-react-native\apps\win32> `yarn appium driver install windows`
+4. Open a new command prompt and run the E2E tests
    - C:\repo\fluentui-react-native\apps\windows> `yarn e2etest`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
@@ -93,6 +97,13 @@ The way we our automation framework interacts with our test app is by selecting 
 You'll want to make one for your component under **apps/fluent-tester/src/FluentTester/TestComponents/_your-component_/consts.ts**.
 
 **You can simply copy/paste a _consts.ts_ file from another component, and just change the name of the component in the const names and the values.**
+
+**This is really important!**
+
+There are a **two specific** naming conventions we need to follow to keep in-sync with the Native side.
+
+1. The button that navigates to each test page - **Homepage\_'componentName'\_Button**
+2. The test page itself that lets us validate if the page loaded - **'componentName'\_TestPage**
 
 Now, what are Page Objects and Spec Documents?
 

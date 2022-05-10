@@ -5,7 +5,7 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 ## Contents
 
 1. [Choosing a Component Builder Framework](#choosing-a-component-builder-framework)
-   - [Compose vs Composable](#Compose-vs-Composable)
+   - [Compose vs Composable](#compose-vs-composable)
 2. [Building a Component](#building-a-component)
 
    - [Using the Compose Framework](#using-the-compose-framework)
@@ -24,7 +24,7 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 
 ### Compose vs Composable
 
-You have to choose an appropriate framework package to build a component. We have two packages: [foudation-compose](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-compose) and [foundation-composable](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable).
+You have to choose an appropriate framework package to build a component. We have two packages: [foudation-compose](../deprecated/foundation-compose/README.md) and [foundation-composable](../deprecated/foundation-composable/README.md).
 
 **Compose**'s primary purpose is the injection of our idea of what the useStyling implementation should be into the composable pattern. So, any component that wants to utilize our Theming and Styling system should use the Compose framework.
 
@@ -40,11 +40,11 @@ Simply put,
 
 ### Using the Compose Framework
 
-Let's look at how to write a complex component using the compose framework. This guideline will walk through how the [Button](https://github.com/microsoft/fluentui-react-native/tree/master/packages/components/Button) control was built.
+Let's look at how to write a complex component using the compose framework. This guideline will walk through how the [Button](./Button/src/deprecated/) control was built.
 
 #### Types
 
-Each control dedicates file using the format [Button.types.ts](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.types.ts) to define the component's tokens, props, and slots.
+Each control dedicates file using the format [Button.types.ts](./Button/src/deprecated/Button.types.ts) to define the component's tokens, props, and slots.
 
 Button is essentially a composition of View which is a layout element, a Text element, and an Icon element. The Button's slots reflect this composition. The root slot is a View which will wrap another View, represented as a stack slot which will contain the image and text content.
 
@@ -109,7 +109,7 @@ export interface IButtonType {
 
 Settings are collections of props and styles for the parts of a component. They allow for inheritance and the ability to specify overrides for certain states.
 
-[Button.settings](https://github.com/microsoft/fluentui-react-native/blob/master/packages/components/Button/src/Button.settings.ts) defines settings for each of its slots as wells as its tokens and their overrides for each state. How precedence and overrides work are explained in the [Theme Settings](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-settings#_overrides-and-_precedence) page.
+[Button.settings](./Button/src/deprecated/Button.settings.ts) defines settings for each of its slots as wells as its tokens and their overrides for each state. How precedence and overrides work are explained in the [Theme Settings](../deprecated/foundation-settings/README.md#_overrides-and-_precedence) page.
 
 Button's root slot has accessibility props that need default values to fall back to when they aren't specified by its users. These default values are set in settings as well.
 
@@ -169,7 +169,7 @@ export const settings: IComposeSettings<IButtonType> = [
 
 #### Putting it all together
 
-Lastly, Button imports and uses the compose framework to build the final function component. A compose component will have the following parameters. Each parameter is explained in detail in the [Parameters](https://github.com/microsoft/fluentui-react-native/tree/master/packages/deprecated/foundation-composable/README.md#parameters) section under foundation-composable.
+Lastly, Button imports and uses the compose framework to build the final function component. A compose component will have the following parameters. Each parameter is explained in detail in the [Parameters](../deprecated/foundation-composable/README.md#parameters) section under foundation-composable.
 
 - displayName
 - usePrepareProps
@@ -206,7 +206,7 @@ export const Button = compose<IButtonType>({
 
 ### Using the Composable Framework
 
-How to write a component using the composable framework is documented in the following locations: [Getting Started - Writing a simple component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-composable/docs/GuideSimple.md) and [Getting Started - Writing a Complex Component](https://github.com/microsoft/fluentui-react-native/blob/master/packages/deprecated/foundation-composable/docs/GuideHOC.md).
+How to write a component using the composable framework is documented in the following locations: [Getting Started - Writing a simple component](../deprecated/foundation-composable/docs/GuideSimple.md) and [Getting Started - Writing a Complex Component](../deprecated/foundation-composable/docs/GuideHOC.md).
 
 ## Jest Snapshot Testing for FluentUI
 

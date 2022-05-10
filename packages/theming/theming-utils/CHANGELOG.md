@@ -1,8 +1,93 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.3
+
+## 0.10.1
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.14.2
+
+## 0.10.0
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Minor changes
+
+- Move alias tokens to default theme (ruaraki@microsoft.com)
+
+## 0.9.4
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.15.0
+
+## 0.9.3
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.14.0
+
+## 0.9.2
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/theme-tokens to v0.13.2
+- Bump @fluentui-react-native/theme-types to v0.14.1
+
+## 0.9.1
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.13.1
+
+## 0.9.0
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Minor changes
+
+- New alias tokens (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.13.0
+- Bump @fluentui-react-native/theme-types to v0.14.0
+
+## 0.8.10
+
+Thu, 17 Feb 2022 01:22:01 GMT
+
+### Patches
+
+- Fix up package.json files (ruaraki@microsoft.com)
+
+## 0.8.9
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.12.0
 
 ## 0.8.8
 

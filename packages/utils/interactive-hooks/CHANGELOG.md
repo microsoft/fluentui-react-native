@@ -1,8 +1,209 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 14 Jan 2022 21:49:07 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.6
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.21
+
+## 0.15.5
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.20
+
+## 0.15.4
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.19
+
+## 0.15.3
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.18
+
+## 0.15.2
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.17
+
+## 0.15.1
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Disable hovered visuals on loading buttons (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Minor changes
+
+- Prevent onHoverIn when disabled (krsiler@microsoft.com)
+
+## 0.14.8
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.16
+
+## 0.14.7
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.15
+
+## 0.14.6
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/icon to v0.11.14
+
+## 0.14.5
+
+Mon, 28 Mar 2022 15:02:37 GMT
+
+### Patches
+
+- temp fix e2e testing error for menuButton (email not defined)
+
+## 0.14.4
+
+Wed, 23 Mar 2022 17:24:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.13
+
+## 0.14.3
+
+Mon, 07 Mar 2022 19:15:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.12
+
+## 0.14.2
+
+Fri, 04 Mar 2022 23:43:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.11
+
+## 0.14.1
+
+Thu, 03 Mar 2022 20:20:09 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.10
+
+## 0.14.0
+
+Tue, 01 Mar 2022 20:18:31 GMT
+
+### Minor changes
+
+- Set up initial native event passing (ruaraki@microsoft.com)
+
+## 0.13.3
+
+Fri, 18 Feb 2022 23:27:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.9
+
+## 0.13.2
+
+Thu, 17 Feb 2022 02:13:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.8
+
+## 0.13.1
+
+Thu, 17 Feb 2022 01:22:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.7
+
+## 0.13.0
+
+Wed, 09 Feb 2022 20:14:50 GMT
+
+### Minor changes
+
+- Override keyUpEvents / keyDownEvents prop on win32 (sanajmi@microsoft.com)
+
+## 0.12.2
+
+Wed, 02 Feb 2022 02:29:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.6
+
+## 0.12.1
+
+Wed, 26 Jan 2022 20:31:04 GMT
+
+### Patches
+
+- Revert "Add ref to v1 Button (#1218)" (ruaraki@microsoft.com)
+
+## 0.12.0
+
+Wed, 26 Jan 2022 17:02:27 GMT
+
+### Minor changes
+
+- Adding code that was added to usKeyProps.win32. I believe this was accidently left out of a previous PR and it broke our UWP app (safreibe@microsoft.com)
+
+## 0.11.15
+
+Tue, 25 Jan 2022 21:55:30 GMT
+
+### Patches
+
+- Default to onKeyDown on macOS (sanajmi@microsoft.com)
+
+## 0.11.14
+
+Tue, 25 Jan 2022 16:48:23 GMT
+
+### Patches
+
+- Add Keyboarding integration for Windows (safreibe@microsoft.com)
 
 ## 0.11.13
 

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyUpProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
@@ -65,7 +65,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
 
     const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
-    const onKeyUpProps = useKeyUpProps(onItemClick, ' ', 'Enter');
+    const onKeyUpProps = useKeyProps(onItemClick, ' ', 'Enter');
 
     // set up state
     const state: ContextualMenuItemState = {
@@ -109,17 +109,8 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         accessibilityRole: 'menuitem',
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
-        focusable: Platform.select({
-          /**
-           * GH #1208: On macOS, disabled NSMenuItems are not focusable unless VoiceOver is enabled.
-           * To mimic the non VoiceOver-enabled functionality, let's set focusable to !disabled for now.
-           * As a followup, we could query AccessibilityInfo.isScreenReaderEnabled, and pass that info to
-           * CMContext so that the event handler is only handled once per ContextualMenu.
-           */
-          macos: !disabled,
-          // Keep win32 behavior as is
-          default: true,
-        }),
+        focusable: !disabled,
+        testID,
         ...rest,
       },
       content: { children: text },

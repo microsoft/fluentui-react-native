@@ -22,7 +22,7 @@ export const Separator = compose<SeparatorType>({
     ),
   },
   slots: { root: View },
-  render: (props: SeparatorProps, useSlots: UseSlots<SeparatorType>) => {
+  useRender: (props: SeparatorProps, useSlots: UseSlots<SeparatorType>) => {
     const Root = useSlots(props).root;
     return (rest: SeparatorProps, children: React.ReactNode) => <Root {...mergeProps(props, rest, propMask)}>{children}</Root>;
   },

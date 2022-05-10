@@ -1,10 +1,10 @@
-import { getAliasTokens } from '@fluentui-react-native/theme-tokens';
+import { getMacOSAliasTokens } from './getMacOSAliasTokens';
 import { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/theme-types';
-import { memoize } from '@fluentui-react-native/memo-cache';
 import { mapPipelineToTheme } from '@fluentui-react-native/theming-utils';
+import { memoize } from '@fluentui-react-native/memo-cache';
 
-function createMacOSAliasTokensWorker(mode: AppearanceOptions): AliasColorTokens {
-  const aliasTokens = getAliasTokens(mode);
+function createMacOSAliasTokensWorker(mode: AppearanceOptions, isHighContrast: boolean): AliasColorTokens {
+  const aliasTokens = getMacOSAliasTokens(mode, isHighContrast);
   return mapPipelineToTheme(aliasTokens);
 }
 

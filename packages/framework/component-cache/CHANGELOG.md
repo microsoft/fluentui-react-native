@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/component-cache
 
-This log was last generated on Mon, 20 Dec 2021 22:56:00 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.2
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
 
 ## 1.3.1
 

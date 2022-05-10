@@ -52,6 +52,10 @@ export class BasePage {
     return this._pageButton.isDisplayed();
   }
 
+  clickComponent(): void {
+    this._primaryComponent.click();
+  }
+
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
@@ -109,6 +113,7 @@ export class BasePage {
     while (!this._primaryComponent.isDisplayed()) {
       driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
     }
+    driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
@@ -124,6 +129,23 @@ export class BasePage {
         interval: 1000,
       },
     );
+  }
+
+  /* FUNCTIONALITY: Determines if an Assert has fired. True if yes; false otherwise
+   *
+   * WHY/HOW: Unfortunately, some Asserts don't take focus away from the test app. Because of this, the test execution is able
+   * to continue without realizing an assert as popped up (unless the assert is a crashing one).
+   *
+   * In order to detect an assert, this function gets the number of window handles currently open within the test app.
+   * Only one instance SHOULD be open at a time (the app itself). If another instance of the app is open, we know an assert dialogue
+   * has popped up. With this information, we know to fail the test.
+   *
+   * Additionally, you might think it's logical to simply place this in the afterEach() hook so it's called after every test (rather than duplicating this call in every test).
+   * Unfortunately, afterEach() is designed for setup/teardown - not for determining if a test should fail or not.
+   * */
+  didAssertPopup(): boolean {
+    // If more than 1 instance of the app is open, we know an assert dialogue popped up.
+    return browser.getWindowHandles().length > 1;
   }
 
   /*****************************************/
@@ -165,6 +187,23 @@ export class BasePage {
   // Returns the name of the test page. Useful for error messages (see above).
   get _pageName(): string {
     return DUMMY_CHAR;
+  }
+
+  /****************** Error Messages ******************/
+  get ERRORMESSAGE_SUFFIX(): string {
+    return 'Please review logs and error screenshots for more information.';
+  }
+
+  get ERRORMESSAGE_APPLOAD(): string {
+    return 'The FluentTester app did not load correctly. ' + this.ERRORMESSAGE_SUFFIX;
+  }
+
+  get ERRORMESSAGE_PAGELOAD(): string {
+    return 'The ' + this._pageName + ' test page did not load correctly. ' + this.ERRORMESSAGE_SUFFIX;
+  }
+
+  get ERRORMESSAGE_ASSERT(): string {
+    return 'An assert popped up. ' + this.ERRORMESSAGE_SUFFIX;
   }
 
   // Default timeout to wait until page is displayed (10s)
