@@ -1,6 +1,6 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
-import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { BadgeProps, PresenceBadgeProps, BadgeSize } from '@fluentui-react-native/badge';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
@@ -67,7 +67,6 @@ export type IconAlignment = 'start' | 'center' | 'end';
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
-  ringColor?: ColorValue; // glow
   ringBackgroundColor?: ColorValue; // inner/outer rings
   ringThickness?: number;
   innerGap?: number;
@@ -107,9 +106,8 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   src?: string;
 }
 
-export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens {
+export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
   iconSize?: number;
-  initialsSize?: number;
   height?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
@@ -117,7 +115,6 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   square?: JSAvatarTokens;
   inactive?: JSAvatarTokens;
   avatarOpacity?: number;
-  ringColor?: ColorValue;
   size20?: JSAvatarTokens;
   size24?: JSAvatarTokens;
   size28?: JSAvatarTokens;

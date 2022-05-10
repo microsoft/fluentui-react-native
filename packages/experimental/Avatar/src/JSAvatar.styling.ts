@@ -3,7 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
 import { getRingConfig } from './JSAvatar.helpers';
-import { borderStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 
 const nameMap: { [key: string]: string } = {
   start: 'flex-start',
@@ -36,15 +36,15 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
       ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity', 'height', 'width'],
     ),
     initials: buildProps(
-      (tokens: JSAvatarTokens) => {
+      (tokens: JSAvatarTokens, theme: Theme) => {
         return {
           style: {
-            fontSize: tokens.initialsSize,
+            ...fontStyles.from(tokens, theme),
             color: tokens.color,
           },
         };
       },
-      ['initialsSize', 'color'],
+      ['color', ...fontStyles.keys],
     ),
     initialsBackground: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -95,7 +95,6 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             borderStyle: 'solid',
-            borderColor: tokens.ringColor,
             borderWidth: ringConfig.stroke,
             width: ringConfig.size,
             height: ringConfig.size,
@@ -106,7 +105,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['width', 'height', 'ringColor', ...borderStyles.keys],
+      ['width', 'height', ...borderStyles.keys],
     ),
     badge: buildProps(
       (tokens: JSAvatarTokens) => {
