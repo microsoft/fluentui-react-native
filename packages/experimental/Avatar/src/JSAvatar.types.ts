@@ -58,7 +58,6 @@ export const AvatarColors = [
   'anchor',
 ] as const;
 export type AvatarSize = typeof AvatarSizes[number];
-export type AvatarSizeToken = typeof AvatarSizesForTokens[number];
 export type AvatarNamedColor = typeof AvatarColors[number];
 
 export type AvatarShape = 'circular' | 'square';
@@ -87,7 +86,6 @@ export interface AvatarConfigurableProps {
    * @defaultvalue neutral
    */
   avatarColor?: AvatarColor;
-  avatarSize?: AvatarSizeToken;
   ring?: RingConfig;
 }
 
