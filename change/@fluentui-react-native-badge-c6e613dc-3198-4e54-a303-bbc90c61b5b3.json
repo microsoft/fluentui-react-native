@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added fall back icon and more statuses to PresenceBadge",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
