@@ -3641,9 +3641,9 @@ appium-mac2-driver@^1.1.4:
     teen_process "^1.15.0"
 
 appium-windows-driver@^2.0.1:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.3.tgz#16538d1b0795dae75a4874696560f9bc848bf7fe"
-  integrity sha512-cMl+pI4VxvSvtsw5kxDNRimT2sEL0fkQUbVtYViJK8NxWk5WaLpEu6hDmqgJGRqwhSKdnBogJOCoSlGKLimHzw==
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.4.tgz#a788362c743b03ad841f39c364eb489dd91bb141"
+  integrity sha512-fcZOTiOo04kPR9Rc0uKE6t1ZpRyiPOsQ3j0I0v+d3/R0qnW5kP7u72izXFHyEAXidAHBRMmnp3sF2RUXRgKdmQ==
   dependencies:
     "@appium/base-driver" "^8.3.0"
     "@appium/support" "^2.55.3"
