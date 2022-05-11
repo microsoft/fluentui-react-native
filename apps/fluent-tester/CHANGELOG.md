@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 11 May 2022 19:33:59 GMT and should not be manually modified.
+This log was last generated on Wed, 11 May 2022 22:26:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.61.0
+
+Wed, 11 May 2022 22:26:25 GMT
+
+### Minor changes
+
+- Dismiss and openOnHover (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.6.0
 
 ## 0.60.1
 
