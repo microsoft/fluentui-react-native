@@ -7,7 +7,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const triggerRef = React.useRef(null);
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
-  const isControlled = typeof props.open === 'undefined' ? false : true;
+  const isControlled = typeof props.open !== 'undefined';
   const [open, setOpen] = useMenuOpenState(isControlled, props);
 
   return {
