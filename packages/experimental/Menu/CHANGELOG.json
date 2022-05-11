@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 11 May 2022 19:33:59 GMT",
+      "tag": "@fluentui-react-native/menu_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "cd21471b444c9005b14d07af0cad289008093a83",
+            "comment": "Add MenuItemCheckbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 May 2022 20:49:25 GMT",
       "tag": "@fluentui-react-native/menu_v0.5.1",
       "version": "0.5.1",
