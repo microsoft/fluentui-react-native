@@ -3625,9 +3625,9 @@ appdirsjs@^1.2.4:
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
 appium-mac2-driver@^1.1.4:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.1.6.tgz#ba9a107c1dd432c191b64f61dba1e4838945677d"
-  integrity sha512-bnYOxTd1USuni9OCkekGaXPDYICXBXjXsNjt6G+1g9uUuNRNrHW1RHILD5c/8OdlUGeN3GYAvFV+ORakUeLkSg==
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.1.7.tgz#dee974421f01dd835190d320bf7ba47625863a46"
+  integrity sha512-MgJy7FPB95fJ2QY1u1s9tC/geEoHWObFa0xlXG2731gb2H/pGZLm+j6PSItq4rcf3z4xz83sEHP85nKG/SJw1w==
   dependencies:
     "@appium/base-driver" "^8.0.0"
     "@appium/support" "^2.56.1"
