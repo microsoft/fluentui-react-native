@@ -38,11 +38,11 @@ export interface Theme {
 }
 
 /**
- * Generally a partial theme is comprised of partial versions of the objects within the theme, with the exception of typography
+ * Generally a partial theme is comprised of partial versions of the objects within the theme, with the exception of shadow and typography
  * which has additional levels of hierarchy
  */
-export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'shadow' | 'typography' | 'host'> & {
-  shadow?: PartialShadowDefinition;
+export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'shadows' | 'typography' | 'host'> & {
+  shadows?: PartialShadowDefinition;
   typography?: PartialTypography;
   host?: TwoLevelPartial<Theme['host']>;
 };

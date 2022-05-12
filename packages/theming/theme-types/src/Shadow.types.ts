@@ -46,11 +46,6 @@ export type ThemeShadowDefinition = BaseShadowAliasTokens & {
 };
 
 /**
- * A partially specified shadow token.
- */
-export type PartialShadowToken = { [P in keyof ShadowToken]?: Partial<ShadowStyle> };
-
-/**
  * A partially specified shadow definition.
  */
-export type PartialShadowDefinition = { [P in keyof ThemeShadowDefinition]?: PartialShadowToken };
+export type PartialShadowDefinition = { [P in keyof ThemeShadowDefinition]?: Partial<ThemeShadowDefinition[P]> };
