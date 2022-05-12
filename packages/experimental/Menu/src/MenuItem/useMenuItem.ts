@@ -24,11 +24,11 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: true,
       focusable: !disabled,
-      hasSubmenu,
       ref: componentRef,
       ...onKeyProps,
     },
     state: pressable.state,
+    hasSubmenu,
     hasCheckmarks,
   };
 };

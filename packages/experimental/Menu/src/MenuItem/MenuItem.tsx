@@ -31,7 +31,7 @@ export const MenuItem = compose<MenuItemType>({
         <Slots.root {...mergedProps}>
           {menuItem.hasCheckmarks && <Slots.checkmark />}
           {mergedProps.content && <Slots.content>{mergedProps.content}</Slots.content>}
-          {mergedProps.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
+          {menuItem.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>
       );
     };

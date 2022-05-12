@@ -32,11 +32,6 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * If the menu item is a trigger for a submenu
-   */
-  hasSubmenu?: boolean;
-
-  /**
    * A callback to call on button click event
    */
   onClick?: (e: InteractionEvent) => void;
@@ -44,6 +39,11 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
 
 export interface MenuItemState extends IPressableHooks<MenuItemProps & React.ComponentPropsWithRef<any>> {
   hasCheckmarks?: boolean;
+
+  /**
+   * If the menu item is a trigger for a submenu
+   */
+  hasSubmenu?: boolean;
 }
 
 export interface MenuItemSlotProps {
