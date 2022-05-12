@@ -121,9 +121,26 @@ const appleComponents = {
   },
 };
 
+// mocked out
+const iOSShadows = {
+  shadow2: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow4: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow8: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow16: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow28: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow64: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow2brand: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow4brand: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow8brand: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow16brand: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow28brand: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+  shadow64brand: { ambient: { x: 0, y: 0, blur: 0, color: 'transparent' }, key: { x: 0, y: 0, blur: 0, color: 'transparent' } },
+};
+
 export const BaseAppleLightThemeIOS: Theme = {
   colors: paletteFromAppleColors(false),
   typography: appleTypography(),
+  shadows: iOSShadows,
   spacing: appleSpacing(),
   components: appleComponents,
   host: { appearance: 'light' },
@@ -132,6 +149,7 @@ export const BaseAppleLightThemeIOS: Theme = {
 export const BaseAppleDarkThemeIOS: Theme = {
   colors: paletteFromAppleColors(true),
   typography: appleTypography(),
+  shadows: iOSShadows,
   spacing: appleSpacing(),
   components: appleComponents,
   host: { appearance: 'dark' },
