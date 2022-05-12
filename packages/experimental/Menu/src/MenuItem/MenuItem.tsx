@@ -12,6 +12,7 @@ export const MenuItem = compose<MenuItemType>({
   ...stylingSettings,
   slots: {
     root: View,
+    checkmark: View,
     content: Text,
     submenuIndicator: SvgXml,
   },
@@ -28,6 +29,7 @@ export const MenuItem = compose<MenuItemType>({
 
       return (
         <Slots.root {...mergedProps}>
+          {menuItem.hasCheckmarks && <Slots.checkmark />}
           {mergedProps.content && <Slots.content>{mergedProps.content}</Slots.content>}
           {mergedProps.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>

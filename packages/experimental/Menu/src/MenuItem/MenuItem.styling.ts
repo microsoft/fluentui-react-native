@@ -21,6 +21,16 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
       }),
       ['backgroundColor', ...layoutStyles.keys],
     ),
+    checkmark: buildProps(
+      (tokens: MenuItemTokens) => ({
+        style: {
+          height: tokens.checkmarkSize,
+          width: tokens.checkmarkSize,
+          marginEnd: tokens.gap,
+        },
+      }),
+      ['checkmarkSize', 'gap'],
+    ),
     content: buildProps(
       (tokens: MenuItemTokens, theme: Theme) => {
         return {

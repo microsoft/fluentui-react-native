@@ -12,6 +12,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const pressable = useAsPressable({ ...rest, disabled, onPress: onClick });
   const onKeyProps = useKeyProps(onClick, ' ', 'Enter');
   const hasSubmenu = useMenuContext().isSubmenu;
+  const hasCheckmarks = useMenuContext().hasCheckmarks;
 
   return {
     props: {
@@ -28,6 +29,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       ...onKeyProps,
     },
     state: pressable.state,
+    hasCheckmarks,
   };
 };
 

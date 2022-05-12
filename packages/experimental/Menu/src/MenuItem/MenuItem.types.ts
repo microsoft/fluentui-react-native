@@ -9,6 +9,9 @@ import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui
 export const menuItemName = 'MenuItem';
 
 export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+  checkmarkSize?: number;
+  gap?: number;
+
   disabled?: MenuItemTokens;
   focused?: MenuItemTokens;
   hovered?: MenuItemTokens;
@@ -39,11 +42,14 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
   onClick?: (e: InteractionEvent) => void;
 }
 
-export type MenuItemState = IPressableHooks<MenuItemProps & React.ComponentPropsWithRef<any>>;
+export interface MenuItemState extends IPressableHooks<MenuItemProps & React.ComponentPropsWithRef<any>> {
+  hasCheckmarks?: boolean;
+}
 
 export interface MenuItemSlotProps {
   root: React.PropsWithRef<IViewProps>;
   content?: TextProps;
+  checkmark?: React.PropsWithRef<IViewProps>;
   submenuIndicator?: SvgProps | XmlProps;
 }
 
