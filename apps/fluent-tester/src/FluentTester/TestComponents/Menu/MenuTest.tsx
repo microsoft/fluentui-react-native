@@ -24,6 +24,23 @@ const MenuDefault: React.FunctionComponent = () => {
   );
 };
 
+const MenuCheckmarks: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu hasCheckmarks>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const Submenu: React.FunctionComponent = () => {
   return (
     <Menu>
@@ -62,6 +79,10 @@ const menuSections: TestSection[] = [
     name: 'Menu Default',
     testID: MENU_TESTPAGE,
     component: MenuDefault,
+  },
+  {
+    name: 'Menu Checkmarks',
+    component: MenuCheckmarks,
   },
   {
     name: 'Menu Submenu',

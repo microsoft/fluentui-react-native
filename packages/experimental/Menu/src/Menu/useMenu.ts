@@ -9,6 +9,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const isSubmenu = context.triggerRef !== null;
 
   return {
+    ...props,
     open,
     setOpen,
     triggerRef,

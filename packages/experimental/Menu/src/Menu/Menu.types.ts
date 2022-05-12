@@ -1,9 +1,9 @@
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { MenuListProps } from '../MenuList/MenuList.types';
 import React from 'react';
 
 export const menuName = 'Menu';
 
-export interface MenuProps extends Omit<IViewProps, 'onPress'> {
+export interface MenuProps extends MenuListProps {
   open?: boolean;
 }
 
