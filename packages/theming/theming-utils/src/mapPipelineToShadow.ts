@@ -1,6 +1,6 @@
-import { BaseShadowAliasTokens } from '@fluentui-react-native/theme-types/src/Shadow.types';
+import { ThemeShadowDefinition } from '@fluentui-react-native/theme-types/src/Shadow.types';
 
-export function mapPipelineToShadow(pipelineOutput: any): BaseShadowAliasTokens {
+export function mapPipelineToShadow(pipelineOutput: any): ThemeShadowDefinition {
   return {
     shadow2: { ambient: pipelineOutput.shadow[2][0], key: pipelineOutput.shadow[2][1] },
     shadow4: { ambient: pipelineOutput.shadow[4][0], key: pipelineOutput.shadow[4][1] },

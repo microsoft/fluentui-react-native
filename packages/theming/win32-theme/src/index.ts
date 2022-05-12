@@ -11,5 +11,5 @@ export type {
   PlatformDefaultsChangedCallback,
 } from './NativeModule/index';
 export { paletteFromOfficeColors } from './paletteFromOfficeColors';
-export { createOfficeAliasTokens } from './createOfficeAliasTokens';
+export { createOfficeColorAliasTokens as createOfficeAliasTokens } from './createOfficeAliasTokens';
 export { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from './createBrandedThemeWithAlias';
