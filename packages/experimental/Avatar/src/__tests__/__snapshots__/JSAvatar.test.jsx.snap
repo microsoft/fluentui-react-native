@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Avatar 1`] = `
+<View
+  active="active"
+  avatarColor="beige"
+  shape="circular"
+  size="size120"
+  style={
+    Object {
+      "alignItems": "flex-end",
+      "flexDirection": "row",
+      "height": 24,
+      "horizontalIconAlignment": "end",
+      "justifyContent": "flex-end",
+      "opacity": 1,
+      "verticalIconAlignment": "end",
+      "width": 24,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "backgroundColor": "#7a7574",
+        "borderRadius": 9999,
+        "flexGrow": 1,
+        "height": 24,
+        "justifyContent": "center",
+        "width": 24,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "borderColor": undefined,
+        "borderRadius": 9999,
+        "borderStyle": "solid",
+        "borderWidth": 2,
+        "height": 32,
+        "left": -4,
+        "position": "absolute",
+        "top": -4,
+        "width": 32,
+      }
+    }
+  />
+</View>
+`;
