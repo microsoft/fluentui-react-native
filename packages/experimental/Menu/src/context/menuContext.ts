@@ -7,6 +7,7 @@ import type { MenuState } from '../Menu/Menu.types';
 export type MenuContextValue = MenuState;
 
 export const MenuContext = React.createContext<MenuContextValue>({
+  isControlled: false,
   isSubmenu: false,
   open: false,
   setOpen: () => false,

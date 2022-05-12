@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 11 May 2022 22:26:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.61.0",
+      "version": "0.61.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0a383e3d6a736a89e628c14d27d82388cf154f2b",
+            "comment": "Dismiss and openOnHover"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.6.0",
+            "commit": "0a383e3d6a736a89e628c14d27d82388cf154f2b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 May 2022 19:33:59 GMT",
       "tag": "@fluentui-react-native/tester_v0.60.1",
       "version": "0.60.1",
