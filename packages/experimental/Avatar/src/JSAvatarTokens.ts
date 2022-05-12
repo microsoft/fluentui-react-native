@@ -15,6 +15,11 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     fontSize: globalTokens.font.size[200],
     width: 24,
     height: 24,
+    iconSize: 16,
+    iconColor: globalTokens.color.white,
+    ringColor: t.colors.transparentStroke,
+    borderColor: globalTokens.color.white,
+    borderWidth: t.host.appearance === 'highContrast' ? 1 : 0,
     circular: {
       borderRadius: globalTokens.corner.radius.circle,
     },
@@ -132,161 +137,135 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     neutral: {
       backgroundColor: t.colors.neutralBackground6,
       color: t.colors.neutralForeground3,
-      borderColor: t.colors.defaultBorder,
+      ringColor: t.colors.transparentStroke,
     },
     brand: {
       backgroundColor: t.colors.brandBackgroundStatic,
       color: t.colors.neutralForegroundOnBrand,
-      borderColor: t.colors.brandedBorder,
+      ringColor: t.colors.transparentStroke,
     },
     darkRed: {
-      backgroundColor: globalTokens.color.darkRed.tint40,
-      color: globalTokens.color.darkRed.shade30,
-      borderColor: globalTokens.color.darkRed.primary,
+      ...getColorProps('darkRed', t),
     },
     cranberry: {
-      backgroundColor: globalTokens.color.cranberry.tint40,
-      color: globalTokens.color.cranberry.shade30,
-      borderColor: globalTokens.color.cranberry.primary,
+      ...getColorProps('cranberry', t),
     },
     red: {
-      backgroundColor: globalTokens.color.red.tint40,
-      color: globalTokens.color.red.shade30,
-      borderColor: globalTokens.color.red.primary,
+      ...getColorProps('red', t),
     },
     pumpkin: {
-      backgroundColor: globalTokens.color.pumpkin.tint40,
-      color: globalTokens.color.pumpkin.shade30,
-      borderColor: globalTokens.color.pumpkin.primary,
+      ...getColorProps('pumpkin', t),
     },
     peach: {
-      backgroundColor: globalTokens.color.peach.tint40,
-      color: globalTokens.color.peach.shade30,
-      borderColor: globalTokens.color.peach.primary,
+      ...getColorProps('peach', t),
     },
     marigold: {
-      backgroundColor: globalTokens.color.marigold.tint40,
-      color: globalTokens.color.marigold.shade30,
-      borderColor: globalTokens.color.marigold.primary,
+      ...getColorProps('marigold', t),
     },
     gold: {
-      backgroundColor: globalTokens.color.gold.tint40,
-      color: globalTokens.color.gold.shade30,
-      borderColor: globalTokens.color.gold.primary,
+      ...getColorProps('gold', t),
     },
     brass: {
-      backgroundColor: globalTokens.color.brass.tint40,
-      color: globalTokens.color.brass.shade30,
-      borderColor: globalTokens.color.brass.primary,
+      ...getColorProps('brass', t),
     },
     brown: {
-      backgroundColor: globalTokens.color.brown.tint40,
-      color: globalTokens.color.brown.shade30,
-      borderColor: globalTokens.color.brown.primary,
+      ...getColorProps('brown', t),
     },
     forest: {
-      backgroundColor: globalTokens.color.forest.tint40,
-      color: globalTokens.color.forest.shade30,
-      borderColor: globalTokens.color.forest.primary,
+      ...getColorProps('forest', t),
     },
     seafoam: {
-      backgroundColor: globalTokens.color.seafoam.tint40,
-      color: globalTokens.color.seafoam.shade30,
-      borderColor: globalTokens.color.seafoam.primary,
+      ...getColorProps('seafoam', t),
     },
     darkGreen: {
-      backgroundColor: globalTokens.color.darkGreen.tint40,
-      color: globalTokens.color.darkGreen.shade30,
-      borderColor: globalTokens.color.darkGreen.primary,
+      ...getColorProps('darkGreen', t),
     },
     lightTeal: {
-      backgroundColor: globalTokens.color.lightTeal.tint40,
-      color: globalTokens.color.lightTeal.shade30,
-      borderColor: globalTokens.color.lightTeal.primary,
+      ...getColorProps('lightTeal', t),
     },
     teal: {
-      backgroundColor: globalTokens.color.teal.tint40,
-      color: globalTokens.color.teal.shade30,
-      borderColor: globalTokens.color.teal.primary,
+      ...getColorProps('teal', t),
     },
     steel: {
-      backgroundColor: globalTokens.color.steel.tint40,
-      color: globalTokens.color.steel.shade30,
-      borderColor: globalTokens.color.steel.primary,
+      ...getColorProps('steel', t),
     },
     blue: {
-      backgroundColor: globalTokens.color.blue.tint40,
-      color: globalTokens.color.blue.shade30,
-      borderColor: globalTokens.color.blue.primary,
+      ...getColorProps('blue', t),
     },
     royalBlue: {
-      backgroundColor: globalTokens.color.royalBlue.tint40,
-      color: globalTokens.color.royalBlue.shade30,
-      borderColor: globalTokens.color.royalBlue.primary,
+      ...getColorProps('royalBlue', t),
     },
     cornflower: {
-      backgroundColor: globalTokens.color.cornflower.tint40,
-      color: globalTokens.color.cornflower.shade30,
-      borderColor: globalTokens.color.cornflower.primary,
+      ...getColorProps('cornflower', t),
     },
     navy: {
-      backgroundColor: globalTokens.color.navy.tint40,
-      color: globalTokens.color.navy.shade30,
-      borderColor: globalTokens.color.navy.primary,
+      ...getColorProps('navy', t),
     },
     lavender: {
-      backgroundColor: globalTokens.color.lavender.tint40,
-      color: globalTokens.color.lavender.shade30,
-      borderColor: globalTokens.color.lavender.primary,
+      ...getColorProps('lavender', t),
     },
     purple: {
-      backgroundColor: globalTokens.color.purple.tint40,
-      color: globalTokens.color.purple.shade30,
-      borderColor: globalTokens.color.purple.primary,
+      ...getColorProps('purple', t),
     },
     grape: {
-      backgroundColor: globalTokens.color.grape.tint40,
-      color: globalTokens.color.grape.shade30,
-      borderColor: globalTokens.color.grape.primary,
+      ...getColorProps('grape', t),
     },
     lilac: {
-      backgroundColor: globalTokens.color.lilac.tint40,
-      color: globalTokens.color.lilac.shade30,
-      borderColor: globalTokens.color.lilac.primary,
+      ...getColorProps('lilac', t),
     },
     pink: {
-      backgroundColor: globalTokens.color.pink.tint40,
-      color: globalTokens.color.pink.shade30,
-      borderColor: globalTokens.color.pink.primary,
+      ...getColorProps('pink', t),
     },
     magenta: {
-      backgroundColor: globalTokens.color.magenta.tint40,
-      color: globalTokens.color.magenta.shade30,
-      borderColor: globalTokens.color.magenta.primary,
+      ...getColorProps('magenta', t),
     },
     plum: {
-      backgroundColor: globalTokens.color.plum.tint40,
-      color: globalTokens.color.plum.shade30,
-      borderColor: globalTokens.color.plum.primary,
+      ...getColorProps('plum', t),
     },
     beige: {
-      backgroundColor: globalTokens.color.beige.tint40,
-      color: globalTokens.color.beige.shade30,
-      borderColor: globalTokens.color.beige.primary,
+      ...getColorProps('beige', t),
     },
     mink: {
-      backgroundColor: globalTokens.color.mink.tint40,
-      color: globalTokens.color.mink.shade30,
-      borderColor: globalTokens.color.mink.primary,
+      ...getColorProps('mink', t),
     },
     platinum: {
-      backgroundColor: globalTokens.color.platinum.tint40,
-      color: globalTokens.color.platinum.shade30,
-      borderColor: globalTokens.color.platinum.primary,
+      ...getColorProps('platinum', t),
     },
     anchor: {
-      backgroundColor: globalTokens.color.anchor.tint40,
-      color: globalTokens.color.anchor.shade30,
-      borderColor: globalTokens.color.anchor.primary,
+      ...getColorProps('anchor', t),
     },
   } as JSAvatarTokens);
+
+/**
+ * A function which returns object of props depending on color and theme.
+ * @param color
+ * @param theme
+ * @returns object of props - backgroundColor, color and ringColor
+ */
+function getColorProps(color: string, theme: Theme) {
+  const themeAppearance = theme.host.appearance;
+  switch (themeAppearance) {
+    case 'light':
+    default:
+      return {
+        backgroundColor: globalTokens.color[color].tint40,
+        color: globalTokens.color[color].shade30,
+        iconColor: globalTokens.color[color].shade30,
+        ringColor: globalTokens.color[color].primary,
+      };
+    case 'dark':
+      return {
+        backgroundColor: globalTokens.color[color].shade30,
+        color: globalTokens.color[color].tint40,
+        iconColor: globalTokens.color[color].tint40,
+        ringColor: globalTokens.color[color].tint30,
+      };
+    case 'highContrast':
+      return {
+        backgroundColor: globalTokens.color.black,
+        color: globalTokens.color.white,
+        iconColor: globalTokens.color.white,
+        ringColor: theme.colors.brandBackgroundSelected,
+      };
+  }
+}

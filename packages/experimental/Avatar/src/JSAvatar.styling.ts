@@ -11,7 +11,16 @@ const nameMap: { [key: string]: string } = {
   end: 'flex-end',
 };
 
-export const avatarStates: (keyof JSAvatarTokens)[] = [...AvatarColors, ...AvatarSizesForTokens, 'circular', 'square', 'inactive'];
+export const avatarStates: (keyof JSAvatarTokens)[] = [
+  ...AvatarColors,
+  ...AvatarSizesForTokens,
+  'circular',
+  'square',
+  'inactive',
+  'ringColor',
+  'ringBackgroundColor',
+  'iconColor',
+];
 
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
@@ -60,10 +69,12 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: backgroundColor,
+            borderWidth: tokens.borderWidth,
+            borderColor: tokens.borderColor,
           },
         };
       },
-      ['backgroundColor', 'width', 'height', ...borderStyles.keys],
+      ['backgroundColor', 'width', 'height', 'borderColor', 'borderWidth', ...borderStyles.keys],
     ),
     image: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -72,22 +83,25 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             borderRadius: tokens.borderRadius,
             width: tokens.width,
             height: tokens.height,
+            borderWidth: tokens.borderWidth,
+            borderColor: tokens.borderColor,
           },
         };
       },
-      ['borderRadius', 'width', 'height'],
+      ['borderRadius', 'width', 'height', 'borderColor', 'borderWidth'],
     ),
     icon: buildProps(
       (tokens: JSAvatarTokens) => {
         return {
           style: {
             position: 'absolute',
+            color: tokens.iconColor,
             width: tokens.iconSize,
             height: tokens.iconSize,
           },
         };
       },
-      ['iconSize'],
+      ['iconSize', 'iconColor'],
     ),
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -95,17 +109,18 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             borderStyle: 'solid',
-            borderWidth: ringConfig.stroke,
             width: ringConfig.size,
             height: ringConfig.size,
             position: 'absolute',
             top: -ringConfig.stroke * 2,
             left: -ringConfig.stroke * 2,
             ...borderStyles.from(tokens, theme),
+            borderWidth: ringConfig.stroke,
+            borderColor: tokens.ringColor,
           },
         };
       },
-      ['width', 'height', ...borderStyles.keys],
+      ['width', 'height', 'ringColor', ...borderStyles.keys],
     ),
     badge: buildProps(
       (tokens: JSAvatarTokens) => {
