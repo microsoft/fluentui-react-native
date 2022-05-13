@@ -27,9 +27,31 @@ const MenuDefault: React.FunctionComponent = () => {
 const MenuCheckmarks: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>All checkmark items</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItemCheckbox content="A MenuItem" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
       <Menu hasCheckmarks>
         <MenuTrigger>
-          <Button>Test</Button>
+          <Button>Some checkmark items with alignment</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <MenuItemCheckbox content="A MenuItem" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <Menu>
+        <MenuTrigger>
+          <Button>Some checkmark items without alignment</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
