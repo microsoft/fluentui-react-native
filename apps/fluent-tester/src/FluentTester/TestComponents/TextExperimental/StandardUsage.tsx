@@ -72,6 +72,8 @@ export const StandardUsage: React.FunctionComponent = () => {
       return <V1Usage />;
     case 'ios':
       return <V1Usage />;
+    case 'macos':
+      return <V1Usage />;
     default:
       return (
         <View>
