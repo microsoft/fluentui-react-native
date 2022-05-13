@@ -816,13 +816,16 @@ exports[`Tabs header text and count 1`] = `
           }
         >
           <Text
+            numberOfLines={0}
             style={
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
+                "fontStyle": "normal",
                 "fontWeight": "600",
                 "margin": 0,
+                "textDecorationLine": "none",
               }
             }
           >
@@ -900,13 +903,16 @@ exports[`Tabs header text and count 1`] = `
           }
         >
           <Text
+            numberOfLines={0}
             style={
               Object {
                 "color": "#616161",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
+                "fontStyle": "normal",
                 "fontWeight": "400",
                 "margin": 0,
+                "textDecorationLine": "none",
               }
             }
           >
@@ -984,13 +990,16 @@ exports[`Tabs header text and count 1`] = `
           }
         >
           <Text
+            numberOfLines={0}
             style={
               Object {
                 "color": "#616161",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
+                "fontStyle": "normal",
                 "fontWeight": "400",
                 "margin": 0,
+                "textDecorationLine": "none",
               }
             }
           >
@@ -1280,13 +1289,16 @@ exports[`Tabs props 1`] = `
   }
 >
   <Text
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 16,
+        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
+        "textDecorationLine": "none",
       }
     }
   >
@@ -1361,13 +1373,16 @@ exports[`Tabs props 1`] = `
           }
         >
           <Text
+            numberOfLines={0}
             style={
               Object {
                 "color": "#bdbdbd",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
+                "fontStyle": "normal",
                 "fontWeight": "400",
                 "margin": 0,
+                "textDecorationLine": "none",
               }
             }
           >
@@ -1445,13 +1460,16 @@ exports[`Tabs props 1`] = `
           }
         >
           <Text
+            numberOfLines={0}
             style={
               Object {
                 "color": "#242424",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
+                "fontStyle": "normal",
                 "fontWeight": "600",
                 "margin": 0,
+                "textDecorationLine": "none",
               }
             }
           >
@@ -1529,13 +1547,16 @@ exports[`Tabs props 1`] = `
           }
         >
           <Text
+            numberOfLines={0}
             style={
               Object {
                 "color": "#616161",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
+                "fontStyle": "normal",
                 "fontWeight": "400",
                 "margin": 0,
+                "textDecorationLine": "none",
               }
             }
           >

@@ -1,4 +1,4 @@
-import { AliasColorTokens } from '@fluentui-react-native/theme-types';
+import { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
 
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
@@ -129,4 +129,26 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     redBorder1: pipelineOutput.redBorder1.strokeColorRest,
     redBorder2: pipelineOutput.redBorder2.strokeColorRest,
   };
+}
+
+export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
+  return {
+    caption1: createVariantValue(pipelineOutput.caption1),
+    body1: createVariantValue(pipelineOutput.body1),
+    body1Strong: createVariantValue(pipelineOutput.body1Strong),
+    body2: createVariantValue(pipelineOutput.body2),
+    body2Strong: createVariantValue(pipelineOutput.body2Strong),
+    subtitle1: createVariantValue(pipelineOutput.subtitle1),
+    subtitle1Strong: createVariantValue(pipelineOutput.subtitle1Strong),
+    subtitle2: createVariantValue(pipelineOutput.subtitle2),
+    subtitle2Strong: createVariantValue(pipelineOutput.subtitle2Strong),
+    title1: createVariantValue(pipelineOutput.title1),
+    title1Strong: createVariantValue(pipelineOutput.title1Strong),
+    largeTitle: createVariantValue(pipelineOutput.largeTitle),
+    display: createVariantValue(pipelineOutput.display),
+  };
+}
+
+function createVariantValue(variant: any) {
+  return { face: variant.fontFamily, size: variant.fontSize, weight: variant.fontWeight };
 }

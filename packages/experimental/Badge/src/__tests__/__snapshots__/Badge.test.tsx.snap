@@ -39,13 +39,17 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    numberOfLines={0}
     style={
       Object {
         "color": "#0078d4",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
+        "fontStyle": "normal",
         "fontWeight": "400",
         "margin": 0,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
       }
     }
   >
@@ -78,13 +82,17 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
+        "fontStyle": "normal",
         "fontWeight": "400",
         "margin": 0,
+        "textAlign": undefined,
+        "textDecorationLine": "none",
       }
     }
   >

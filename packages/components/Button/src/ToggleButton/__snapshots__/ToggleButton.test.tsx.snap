@@ -51,17 +51,20 @@ exports[`ToggleButton default 1`] = `
   }
 >
   <Text
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
+        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
+        "textDecorationLine": "none",
       }
     }
   >

@@ -47,6 +47,34 @@ const Helvetica = Text.customize({ variant: 'heroLargeStandard', fontFamily: 'He
 const Arial = Text.customize({ variant: 'heroLargeStandard', fontFamily: 'arial' });
 
 export const CustomizeUsage: React.FunctionComponent = () => {
+  const BlockText = () => {
+    return (
+      <>
+        <Text font="monospace" weight="semibold" truncate>
+          I am very very very very very very very very very very very very very very very very very very very very very very very very very
+          very very very very very very very very very very very very very very very very very very very very very very very very very very
+          very very very very very very very very very long block text.{' '}
+        </Text>
+        <Text underline>Since text components are inside a View</Text>
+        <Text strikethrough>every block of text</Text>
+        <Text underline strikethrough align="end">
+          gets its own line. This line has been underlined, striked through, and right aligned.
+        </Text>
+      </>
+    );
+  };
+
+  const NonBlockText = () => {
+    return (
+      <Text>
+        <Text italic>I am italisized inline text.</Text>
+        <Text weight="medium">Since text components are inside a Text, (medium) </Text>
+        <Text weight="bold">every block of text (bolded) </Text>
+        <Text size={600}>gets placed inline.</Text>
+      </Text>
+    );
+  };
+
   const CustomUsageStack = () => {
     return (
       <Stack style={stackStyle} gap={5}>
@@ -73,6 +101,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       </Stack>
     );
   };
+
   const CustomFontStackAndroid = () => {
     return (
       <Stack style={stackStyle} gap={5}>
@@ -116,6 +145,10 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     default:
       return (
         <View>
+          <BlockText />
+          <Text>{'\n'}</Text>
+          <NonBlockText />
+          <Text>{'\n'}</Text>
           <CustomUsageStack />
           <CustomFontStack />
         </View>

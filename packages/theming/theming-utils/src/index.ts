@@ -1,2 +1,2 @@
 export { getCurrentAppearance } from './getCurrentAppearance';
-export { mapPipelineToTheme } from './mapPipelineToTheme';
+export { mapPipelineToTheme, mapFontPipelineToTheme } from './mapPipelineToTheme';

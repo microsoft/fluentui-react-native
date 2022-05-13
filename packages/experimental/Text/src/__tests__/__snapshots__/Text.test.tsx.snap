@@ -2,13 +2,17 @@
 
 exports[`Text component tests Text all props 1`] = `
 <Text
+  numberOfLines={0}
   style={
     Object {
-      "color": "#a19f9d",
+      "color": "#323130",
       "fontFamily": "Segoe UI",
       "fontSize": 14,
+      "fontStyle": "normal",
       "fontWeight": "400",
       "margin": 0,
+      "textAlign": undefined,
+      "textDecorationLine": "none",
     }
   }
 >
@@ -18,13 +22,17 @@ exports[`Text component tests Text all props 1`] = `
 
 exports[`Text component tests Text all tokens 1`] = `
 <Text
+  numberOfLines={0}
   style={
     Object {
       "color": "#323130",
       "fontFamily": "Wingdings",
       "fontSize": 20,
+      "fontStyle": "normal",
       "fontWeight": "900",
       "margin": 0,
+      "textAlign": undefined,
+      "textDecorationLine": "none",
     }
   }
 >
@@ -34,13 +42,17 @@ exports[`Text component tests Text all tokens 1`] = `
 
 exports[`Text component tests Text default 1`] = `
 <Text
+  numberOfLines={0}
   style={
     Object {
       "color": "#323130",
       "fontFamily": "Segoe UI",
       "fontSize": 12,
+      "fontStyle": "normal",
       "fontWeight": "400",
       "margin": 0,
+      "textAlign": undefined,
+      "textDecorationLine": "none",
     }
   }
 >
@@ -50,15 +62,18 @@ exports[`Text component tests Text default 1`] = `
 
 exports[`Text component tests Text variants render correctly with style 1`] = `
 <Text
+  numberOfLines={0}
   style={
     Object {
       "color": "blue",
       "fontFamily": "Segoe UI",
       "fontSize": 42,
+      "fontStyle": "normal",
       "fontWeight": "600",
       "margin": 0,
       "marginBottom": 8,
       "marginTop": 4,
+      "textDecorationLine": "none",
     }
   }
 >
