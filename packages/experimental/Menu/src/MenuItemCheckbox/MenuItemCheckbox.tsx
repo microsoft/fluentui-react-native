@@ -28,7 +28,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {menuItem.hasCheckmarks && <Slots.checkmark xml={chevronXml} />}
+          <Slots.checkmark xml={chevronXml} />
           {mergedProps.content && <Slots.content>{mergedProps.content}</Slots.content>}
         </Slots.root>
       );
