@@ -10,7 +10,13 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
 
   return (_rest: MenuPopoverProps, children: React.ReactNode) => {
     return (
-      <Callout target={state.triggerRef} borderWidth={1} borderColor={theme.colors.neutralStrokeAccessible}>
+      <Callout
+        borderWidth={1}
+        borderColor={theme.colors.neutralStrokeAccessible}
+        target={state.triggerRef}
+        onDismiss={state.onDismiss}
+        dismissBehaviors={state.dismissBehaviors}
+      >
         {children}
       </Callout>
     );
