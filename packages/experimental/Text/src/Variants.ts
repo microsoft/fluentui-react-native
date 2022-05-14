@@ -2,7 +2,7 @@ import { Variants } from '@fluentui-react-native/theme-types';
 import { Text } from './Text';
 import { createFontAliasTokens } from '@fluentui-react-native/win32-theme';
 
-const variantsWin32: Partial<Variants> = createFontAliasTokens('light');
+const variantsWin32: Partial<Variants> = createFontAliasTokens('Colorful');
 
 export const Caption1 = Text.customize({
   fontFamily: variantsWin32.caption1.face,
