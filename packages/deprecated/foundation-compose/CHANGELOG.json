@@ -2,33 +2,6 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
-      "date": "Fri, 13 May 2022 23:29:47 GMT",
-      "tag": "@uifabricshared/foundation-compose_v1.11.20",
-      "version": "1.11.20",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@uifabricshared/foundation-compose",
-            "comment": "Bump @fluentui-react-native/default-theme to v0.11.0",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@uifabricshared/foundation-compose",
-            "comment": "Bump @fluentui-react-native/theme-types to v0.15.0",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@uifabricshared/foundation-compose",
-            "comment": "Bump @uifabricshared/theming-ramp to v0.16.9",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          }
-        ]
-      }
-    },
-    {
       "date": "Thu, 28 Apr 2022 19:09:51 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.11.19",
       "version": "1.11.19",

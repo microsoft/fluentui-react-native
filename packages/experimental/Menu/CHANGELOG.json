@@ -2,51 +2,6 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
-      "date": "Fri, 13 May 2022 23:29:47 GMT",
-      "tag": "@fluentui-react-native/menu_v0.5.1",
-      "version": "0.5.1",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/menu",
-            "comment": "Bump @fluentui-react-native/callout to v0.19.47",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/menu",
-            "comment": "Bump @fluentui-react-native/experimental-text to v0.8.0",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/menu",
-            "comment": "Bump @fluentui-react-native/framework to v0.7.27",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/menu",
-            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.7",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/menu",
-            "comment": "Bump @fluentui-react-native/theme-tokens to v0.17.0",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/menu",
-            "comment": "Bump @fluentui-react-native/tokens to v0.13.0",
-            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
-          }
-        ]
-      }
-    },
-    {
       "date": "Wed, 04 May 2022 21:06:04 GMT",
       "tag": "@fluentui-react-native/menu_v0.5.0",
       "version": "0.5.0",

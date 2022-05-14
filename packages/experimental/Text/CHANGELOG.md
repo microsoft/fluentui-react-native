@@ -1,17 +1,8 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Fri, 13 May 2022 23:29:47 GMT and should not be manually modified.
+This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
 
 <!-- Start content -->
-
-## 0.8.0
-
-Fri, 13 May 2022 23:29:47 GMT
-
-### Minor changes
-
-- Add text implementation v2 (email not defined)
-- Bump @fluentui-react-native/framework to v0.7.27
 
 ## 0.7.26
 

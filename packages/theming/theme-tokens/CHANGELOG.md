@@ -1,16 +1,8 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Fri, 13 May 2022 23:29:46 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Apr 2022 19:30:38 GMT and should not be manually modified.
 
 <!-- Start content -->
-
-## 0.17.0
-
-Fri, 13 May 2022 23:29:46 GMT
-
-### Minor changes
-
-- Add text implementation v2 (email not defined)
 
 ## 0.16.2
 
