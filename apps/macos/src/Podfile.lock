@@ -9,17 +9,17 @@ PODS:
     - React-Core (= 0.64.30)
     - React-jsi (= 0.64.30)
     - ReactCommon/turbomodule/core (= 0.64.30)
-  - FRNAvatar (0.14.18):
+  - FRNAvatar (0.14.26):
     - MicrosoftFluentUI (= 0.5.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.0)
     - React
-  - FRNCallout (0.19.45):
+  - FRNCallout (0.20.0):
     - React
-  - FRNCheckbox (0.11.3):
+  - FRNCheckbox (0.11.4):
     - React
-  - FRNMenuButton (0.7.58):
+  - FRNMenuButton (0.7.60):
     - React
-  - FRNRadioButton (0.14.44):
+  - FRNRadioButton (0.14.45):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.5.0):
@@ -99,7 +99,7 @@ PODS:
     - boost-for-react-native
     - DoubleConversion
     - glog
-  - RCTFocusZone (0.9.24):
+  - RCTFocusZone (0.9.25):
     - React
   - RCTRequired (0.64.30)
   - RCTTypeSafety (0.64.30):
@@ -493,16 +493,16 @@ SPEC CHECKSUMS:
   boost-for-react-native: d5ad1140010aa8cb622323a781ecbeab4425d19a
   DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
   FBLazyVector: 8a96f324df8c1bc4e2f7e2163d704ec364f0bc6c
-  FBReactNativeSpec: c25b2714c0306d4ba100d02293a808cb5723cdf0
-  FRNAvatar: 1430d4e7359483316f5b2b322a6924dbed892dce
-  FRNCallout: 0cf5fde31be59d054db7aed0425d8a728cb3649a
-  FRNCheckbox: 5edd7cb3bb1c7ddb25de126c5ffddb2da9d9ed78
-  FRNMenuButton: 98cddbb73669e82f31c1ef51b5d0841ca1d8cc84
-  FRNRadioButton: d39e36a8bb699dc229969b6b68e6ee2630c0bd43
+  FBReactNativeSpec: 52bfb636413dc06cf5a57b63f60ef41b5dd9f8c6
+  FRNAvatar: 974d535fb03728d69e98668a9dd4080c3c82d61e
+  FRNCallout: 0b94a3990847a8d16ab94e05673c2b9e776f650c
+  FRNCheckbox: 3fa2418dbcc5f8e1d62141eb0d7ec9ddff09ea0a
+  FRNMenuButton: 19f90cffdb8720d3a968b7bab5c3213d989ca1ab
+  FRNRadioButton: c4b7954776c3bd4b0b2563f00e78f1c9a4116b08
   glog: 0dc7efada961c0793012970b60faebbd58b0decb
   MicrosoftFluentUI: 4c12374f2eab4c8f37b9d0c9a1e96210e96db78e
   RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
-  RCTFocusZone: 214c1e25c069fab53f85e10188c3efb1cc4c875b
+  RCTFocusZone: 0e5fa8b06946154beb7de742161170fb01f440d5
   RCTRequired: 8903667b081ec6b4b870c6b25ff1038eef62db0d
   RCTTypeSafety: 061b065a52bcd68ca38755bc56784a4889659625
   React: a3c80fce87768d4553ebe658746219431483b620

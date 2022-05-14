@@ -7,11 +7,18 @@ export const useMenuTrigger = (_props: MenuTriggerProps) => {
 
   const setOpen = context.setOpen;
   const open = context.open;
+  const openOnHover = context.openOnHover;
   const triggerRef = context.triggerRef;
 
-  const onClick = (_e: InteractionEvent) => {
-    setOpen(!open);
+  const onHoverIn = (e: InteractionEvent) => {
+    if (openOnHover) {
+      setOpen(e, true /* isOpen */);
+    }
   };
 
-  return { onClick, componentRef: triggerRef };
+  const onClick = (e: InteractionEvent) => {
+    setOpen(e, !open);
+  };
+
+  return { onClick, onHoverIn, componentRef: triggerRef };
 };
