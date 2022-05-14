@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Fri, 13 May 2022 23:29:47 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "0cc6dfe79788d2df6ac1d04304a483e78d22ebb3",
+            "comment": "Add text implementation v2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.27",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 May 2022 21:06:04 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.7.26",
       "version": "0.7.26",

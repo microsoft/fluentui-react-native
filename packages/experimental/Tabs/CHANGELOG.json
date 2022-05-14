@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Fri, 13 May 2022 23:29:47 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.4.45",
+      "version": "0.4.45",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "0cc6dfe79788d2df6ac1d04304a483e78d22ebb3",
+            "comment": "Add text implementation v2"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.27",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.7",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.9.26",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.8.0",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/tokens to v0.13.0",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.22",
+            "commit": "95bdd22bd83060743fc54e831c81783647e6047e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 May 2022 21:06:04 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.4.44",
       "version": "0.4.44",

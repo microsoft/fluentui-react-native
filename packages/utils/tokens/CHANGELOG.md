@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Fri, 13 May 2022 23:29:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Fri, 13 May 2022 23:29:46 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @uifabricshared/theming-ramp to v0.16.9
 
 ## 0.12.0
 

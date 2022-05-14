@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Fri, 13 May 2022 23:29:46 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "0cc6dfe79788d2df6ac1d04304a483e78d22ebb3",
+            "comment": "Add text implementation v2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 27 Apr 2022 19:30:38 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.16.2",
       "version": "0.16.2",

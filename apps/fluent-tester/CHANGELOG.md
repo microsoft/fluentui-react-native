@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 05 May 2022 19:08:12 GMT and should not be manually modified.
+This log was last generated on Fri, 13 May 2022 23:29:47 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.60.0
+
+Fri, 13 May 2022 23:29:47 GMT
+
+### Minor changes
+
+- [object Object] (email not defined)
+- Bump @fluentui-react-native/android-theme to v0.7.3
+- Bump @fluentui-react-native/apple-theme to v0.11.6
+- Bump @fluentui-react-native/badge to v0.0.34
+- Bump @fluentui-react-native/button to v0.22.22
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.26
+- Bump @fluentui-react-native/experimental-avatar to v0.14.25
+- Bump @fluentui-react-native/experimental-button to v0.15.23
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.5
+- Bump @fluentui-react-native/experimental-drawer to v0.1.10
+- Bump @fluentui-react-native/experimental-expander to v0.3.28
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.39
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.30
+- Bump @fluentui-react-native/experimental-tabs to v0.4.45
+- Bump @fluentui-react-native/experimental-text to v0.8.0
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/icon to v0.11.22
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+- Bump @fluentui-react-native/menu to v0.5.1
+- Bump @fluentui-react-native/stack to v0.6.27
+- Bump @fluentui-react-native/theme to v0.6.9
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theming-utils to v0.11.0
+- Bump @fluentui-react-native/win32-theme to v0.17.0
+- Bump @fluentui/react-native to v0.29.6
 
 ## 0.59.38
 
