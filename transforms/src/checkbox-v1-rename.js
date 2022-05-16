@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (fileInfo, api, options) {
   const j = api.jscodeshift;
 
