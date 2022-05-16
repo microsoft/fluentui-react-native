@@ -19,7 +19,8 @@ import { useAsPressable, useKeyDownProps, useViewCommandFocus } from '@fluentui-
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import chevronSvg from '../assets/chevron.svg';
+import { Svg, G, Path} from 'react-native-svg';
+// import chevronSvg from '../assets/chevron.svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -119,12 +120,22 @@ export const SubmenuItem = compose<SubmenuItemType>({
       [onItemHoverIn],
     );
 
+    const chevronSvg: React.FunctionComponent<{}> = () => {
+      return (
+        <Svg width="12" height="12" viewBox="0 0 2048 2048">
+          <G transform={I18nManager.isRTL ? 'translate(2048, 0) scale(-1, 1)' : ''}>
+            <Path
+              fill="currentColor"
+              d="M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z"
+            ></Path>
+          </G>
+        </Svg>
+      );
+    };
     const svgProps: SvgIconProps = {
       src: chevronSvg,
       viewBox: '0 0 2048 2048',
     };
-
-    const rtlTransform = I18nManager.isRTL ? [{ translateX: 2048 }, { scaleX: -1 }] : [];
 
     /**
      * SubmenuItem launches the submenu onMouseEnter event. Submenu should be launched with Spacebar, Enter, or right arrow (flipped for RTL).
@@ -150,7 +161,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       },
       content: { children: text },
       icon: createIconProps(icon),
-      chevron: createIconProps({ svgSource: svgProps, width: 12, height: 12, style: { transform: rtlTransform } }),
+      chevron: createIconProps({ svgSource: svgProps }),
     });
 
     return { slotProps, state };
@@ -166,7 +177,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
           {children}
         </Slots.startstack>
         <Slots.endstack>
-          <Slots.chevron />
+          <Slots.chevron color={'red'}/>
         </Slots.endstack>
       </Slots.root>
     );
