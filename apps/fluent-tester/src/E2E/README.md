@@ -147,7 +147,7 @@ For example, a common task we want to perform is selecting a UI element and gett
 
 - In order for a Page Object to access a component from the test page, you must use [selectors](https://webdriver.io/docs/selectors.html). The WebDriver Protocol provides several selector strategies to query an element.
 
-- If [testID](https://reactnative.dev/docs/picker-item#testid) is specified in React Native app for Windows, the locator strategy should choose accessibility id.
+- If [testID](https://reactnative.dev/docs/next/view#testid) is specified in React Native app for Windows, the locator strategy should choose accessibility id.
   A unique accessiblity id/testID per Window is recommended for React Native Windows E2E testing when authoring the test app and test cases.
 
 - To use this, we must add a prop to our component or UI element in question called “testID”. In our test page, set the “testID” for the component, and we can then select it in our Page Object using the imported **_By_** method above from a base class.

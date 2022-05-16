@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
+import { Menu, MenuItem, MenuItemCheckbox, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
@@ -17,6 +17,46 @@ const MenuDefault: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <Text>Hello world!!!</Text>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuCheckmarks: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>All checkmark items</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItemCheckbox content="A MenuItem" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <Menu hasCheckmarks>
+        <MenuTrigger>
+          <Button>Some checkmark items with alignment</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <MenuItemCheckbox content="A MenuItem" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <Menu>
+        <MenuTrigger>
+          <Button>Some checkmark items without alignment</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <MenuItemCheckbox content="A MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -100,6 +140,10 @@ const menuSections: TestSection[] = [
     name: 'Menu Default',
     testID: MENU_TESTPAGE,
     component: MenuDefault,
+  },
+  {
+    name: 'Menu Checkmarks',
+    component: MenuCheckmarks,
   },
   {
     name: 'Menu open on hover',
