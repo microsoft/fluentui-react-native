@@ -1,0 +1,33 @@
+{
+  "name": "@fluentui-react-native/transforms",
+  "version": "0.0.1",
+  "description": "Transform files to make refactoring FURN code easier",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/transforms"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1"
+  },
+  "author": "",
+  "license": "MIT"
+}
