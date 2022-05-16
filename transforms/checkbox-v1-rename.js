@@ -14,6 +14,21 @@ module.exports = function (fileInfo, api, options) {
   });
 
   root
+    .find(
+      j.ImportDeclaration,
+      (path) => path.source.value === '@fluentui/react-native' || path.source.value === '@fluentui-react-native/checkbox',
+    )
+    .forEach((path) => {
+      path.value.specifiers.forEach((specifier) => {
+        console.log(specifier);
+        if (specifier.imported.name === 'CheckboxV1') {
+          specifier.imported = 'Checkbox';
+          specifier.local = '';
+        }
+      });
+    });
+
+  root
     .find(j.Identifier, {
       name: 'CheckboxV1',
     })
