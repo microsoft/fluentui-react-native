@@ -51,9 +51,14 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     return (
       <>
         <Text font="monospace" weight="semibold" truncate>
-          I am very very very very very very very very very very very very very very very very very very very very very very very very very
+          I am going to be truncated since I am very very very very very very very very very very very very very very very very very very very very very very very very very
           very very very very very very very very very very very very very very very very very very very very very very very very very very
-          very very very very very very very very very long block text.{' '}
+          very very very very very very very very very long block text.
+        </Text>
+        <Text font="monospace" weight="semibold" wrap={false}>
+          I am not going to be wrapped since I am a very very very very very very very very very very very very very very very very very very very very very very very very very
+          very very very very very very very very very very very very very very very very very very very very very very very very very very
+          very very very very very very very very very long block text.
         </Text>
         <Text underline>Since text components are inside a View</Text>
         <Text strikethrough>every block of text</Text>
