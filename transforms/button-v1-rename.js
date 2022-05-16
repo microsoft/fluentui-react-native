@@ -8,17 +8,17 @@ module.exports = function (fileInfo, api, options) {
 
   const root = j(fileInfo.source);
 
-  root.findJSXElements('CheckboxV1').forEach((path) => {
-    path.value.openingElement.name = 'Checkbox';
-    path.value.closingElement.name = 'Checkbox';
+  root.findJSXElements('ButtonV1').forEach((path) => {
+    path.value.openingElement.name = 'Button';
+    path.value.closingElement.name = 'Button';
   });
 
   root
     .find(j.Identifier, {
-      name: 'CheckboxV1',
+      name: 'ButtonV1',
     })
     .forEach((path) => {
-      path.value.name = 'Checkbox';
+      path.value.name = 'Button';
     });
 
   return root.toSource(printOptions);
