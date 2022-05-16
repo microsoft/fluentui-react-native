@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 13 May 2022 18:55:00 GMT and should not be manually modified.
+This log was last generated on Mon, 16 May 2022 17:35:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.61.2
+
+Mon, 16 May 2022 17:35:49 GMT
+
+### Patches
+
+- Add standup code for hasCheckmarks (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.7.0
 
 ## 0.61.1
 
