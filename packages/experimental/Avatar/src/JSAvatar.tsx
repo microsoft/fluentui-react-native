@@ -17,15 +17,16 @@ import { createIconProps } from '@fluentui-react-native/interactive-hooks';
  * @returns Whether the styles that are assigned to the layer should be applied to the avatar
  */
 export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSAvatarProps): boolean => {
+  const avatarSize = `size${userProps.size || 24}`;
   return (
     state[layer] ||
     userProps[layer] ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['avatarColor'] ||
-    (!userProps['avatarColor'] && layer === 'brand') ||
-    layer === userProps['size'] ||
-    (!userProps['size'] && layer === 'size56') ||
+    (!userProps['avatarColor'] && layer === 'neutral') ||
+    layer === avatarSize ||
+    (!userProps['size'] && layer === 'size24') ||
     (userProps.active === 'inactive' && layer === 'inactive')
   );
 };
@@ -45,11 +46,11 @@ export const JSAvatar = compose<JSAvatarType>({
   useRender: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
     const avatar = useAvatar(userProps);
     const iconProps = createIconProps(userProps.icon);
-    const Slots = useSlots(userProps, (layer) => avatarLookup(layer, avatar.state, userProps));
+    const Slots = useSlots(avatar.props, (layer) => avatarLookup(layer, avatar.state, avatar.props));
 
     return (final: JSAvatarProps) => {
       const { activeAppearance, icon, initials, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
-      const { showRing, transparentRing } = avatar.state;
+      const { showRing, transparentRing, showBadge } = avatar.state;
       const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
       return (
@@ -62,7 +63,7 @@ export const JSAvatar = compose<JSAvatarType>({
             </Slots.initialsBackground>
           )}
           {showRing && !transparentRing && <Slots.ring />}
-          {svgIconsEnabled && badge.status && <Slots.badge {...badge} />}
+          {svgIconsEnabled && showBadge && <Slots.badge {...badge} />}
         </Slots.root>
       );
     };

@@ -69,11 +69,9 @@ export const StandardUsage: React.FunctionComponent = () => {
 
   switch (Platform.OS) {
     case 'android':
-      return <V1Usage />;
     case 'ios':
-      return <V1Usage />;
     case 'macos':
-      return <V1Usage />;
+    return <V1Usage />;
     default:
       return (
         <View>
