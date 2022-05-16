@@ -37,8 +37,6 @@ module.exports = function (fileInfo, api, options) {
   // Migrate props
   root.findJSXElements('Checkbox').forEach((path) => {
     path.value.openingElement.attributes.forEach((attribute) => {
-      console.log(attribute);
-
       if (attribute.name.name === 'ariaLabel') {
         attribute.name.name = 'accessibilityLabel';
       }
@@ -50,7 +48,7 @@ module.exports = function (fileInfo, api, options) {
         }
         if (attribute.value.value === 'end') {
           attribute.name.name = 'labelPosition';
-          attribute.value.value = 'end';
+          attribute.value.value = 'before';
         }
       }
     });
