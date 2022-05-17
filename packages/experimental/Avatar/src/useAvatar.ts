@@ -63,8 +63,8 @@ export const getInitials = (name: string): string => {
     return '';
   }
   // prettier-ignore
-  const nonWordRegExp = new RegExp(/\W+(?<!\S-)/, 'g');
-  const wordsInBracesRegExp = new RegExp(/(\(|\[|\{)\w+(\)|\]|\})/, 'g');
+  const nonWordRegExp = new RegExp('\\W+(?<!\\S-)', 'g');
+  const wordsInBracesRegExp = new RegExp('(\\(|\\[|\\{)\\w+(\\)|\\]|\\})', 'g');
   let words = name.replace(wordsInBracesRegExp, ' ').replace(nonWordRegExp, ' ').trim().split(' ');
   words = removeTitlesFromName(words);
   const wordsLength = words.length;
@@ -82,7 +82,7 @@ export const getInitials = (name: string): string => {
  * fall back to icon.
  */
 export const validateAlphabeticalCharacters = (name: string): boolean => {
-  const alphabeticalRegExp = new RegExp(/[a-zA-Z]/, 'g');
+  const alphabeticalRegExp = new RegExp('[a-zA-Z]', 'g');
   return name ? alphabeticalRegExp.test(name) : false;
 };
 

@@ -81,6 +81,10 @@ describe('getInitials method', () => {
     }
   });
 
+  it("returns initials when there's a coma", () => {
+    expect(getInitials('Second, First')).toEqual('SF');
+  });
+
   // Unit tests from Web
   it('handles null inputs', () => {
     expect(getInitials(null)).toEqual('');

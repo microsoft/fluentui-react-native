@@ -101,6 +101,7 @@ export const titles = new Set<string>([
   'The Rt Hon Sir',
   'The Rt Hon Visc',
   'Viscount',
+  'van',
   'I',
   'II',
   'III',
