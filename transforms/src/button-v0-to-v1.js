@@ -16,7 +16,11 @@ module.exports = function (fileInfo, api, options) {
     )
     .forEach((path) => {
       path.value.specifiers.forEach((specifier) => {
-        if (specifier.imported.name === 'Button') {
+        if (
+          specifier.imported.name === 'Button' ||
+          specifier.imported.name === 'PrimaryButton' ||
+          specifier.imported.name === 'StealthButton'
+        ) {
           specifier.imported = 'ButtonV1';
           specifier.local.name = 'Button';
         }
