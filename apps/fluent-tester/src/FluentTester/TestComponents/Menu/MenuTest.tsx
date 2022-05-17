@@ -33,8 +33,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItemCheckbox content="A MenuItem" />
-            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItemCheckbox name="itemOne" content="A MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -45,7 +45,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem content="A MenuItem" />
-            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -56,7 +56,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem content="A MenuItem" />
-            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
