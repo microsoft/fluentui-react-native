@@ -18,7 +18,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     props: {
       ...pressable.props,
       accessible: true,
-      accessibilityRole: 'button',
+      accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),

@@ -34,16 +34,9 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
-
-  /**
-   * A callback to call on button click event
-   */
-  onClick?: (e: InteractionEvent) => void;
 }
 
-export interface MenuItemCheckboxState extends IPressableHooks<MenuItemCheckboxProps & React.ComponentPropsWithRef<any>> {
-  hasCheckmarks?: boolean;
-}
+export interface MenuItemCheckboxState extends IPressableHooks<MenuItemCheckboxProps & React.ComponentPropsWithRef<any>> {}
 
 export interface MenuItemCheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;
