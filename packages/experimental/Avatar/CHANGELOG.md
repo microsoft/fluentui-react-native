@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 10 May 2022 18:33:23 GMT and should not be manually modified.
+This log was last generated on Tue, 17 May 2022 16:41:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.27
+
+Tue, 17 May 2022 16:41:49 GMT
+
+### Patches
+
+- Added getInitials method and tests for that (v.kozova13@gmail.com)
 
 ## 0.14.26
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added getInitials method and tests for that",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}
