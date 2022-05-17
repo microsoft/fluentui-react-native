@@ -15,11 +15,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/transforms"
+    "directory": "transforms"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1"
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "jscodeshift": "^0.13.1"
   },
   "author": "",
   "license": "MIT"
