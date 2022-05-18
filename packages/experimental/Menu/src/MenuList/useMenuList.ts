@@ -9,20 +9,25 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   // MenuList v2 needs to be able to be standalone, but this is not in scope for v1
   // Assuming that checked information will come from parent Menu
   const isCheckedControlled = typeof context.checked !== 'undefined';
-  const [checked, onCheckedChange] = useMenuCheckedState(isCheckedControlled, context);
+  const [checked, onCheckedChange, selectRadio] = useMenuCheckedState(isCheckedControlled, context);
 
   return {
     ...context,
     isCheckedControlled,
     checked,
     onCheckedChange,
+    selectRadio,
   };
 };
 
 const useMenuCheckedState = (
   isControlled: boolean,
   props: MenuListProps,
-): [Record<string, boolean>, (e: InteractionEvent, name: string, isChecked: boolean) => void] => {
+): [
+  Record<string, boolean>,
+  (e: InteractionEvent, name: string, isChecked: boolean) => void,
+  (e: InteractionEvent, name: string, isChecked: boolean) => void,
+] => {
   const { defaultChecked, onCheckedChange, checked } = props;
   const initialState = defaultChecked ?? checked ?? {};
   const [checkedInternal, setCheckedInternal] = React.useState<Record<string, boolean>>(initialState);
@@ -45,5 +50,19 @@ const useMenuCheckedState = (
     [isControlled, state, onCheckedChange, setCheckedInternal],
   );
 
-  return [state, setChecked];
+  const selectRadio = React.useCallback(
+    (e: InteractionEvent, name: string, isChecked: boolean) => {
+      if (!isControlled) {
+        const updatedChecked = { [name]: true };
+        setCheckedInternal(updatedChecked);
+      }
+
+      if (onCheckedChange) {
+        onCheckedChange(e, name, isChecked);
+      }
+    },
+    [isControlled, onCheckedChange, setCheckedInternal],
+  );
+
+  return [state, setChecked, selectRadio];
 };
