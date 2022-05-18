@@ -30,14 +30,12 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
   const checked = context.checked?.[name];
   const onCheckedChange = context.onCheckedChange;
 
-  const onChange = React.useCallback(
-    (e: InteractionEvent, isChecked: boolean) => {
-      onCheckedChange(e, name, isChecked);
+  const toggleChecked = React.useCallback(
+    (e: InteractionEvent) => {
+      onCheckedChange(e, name, !checked);
     },
-    [name, onCheckedChange],
+    [checked, name, onCheckedChange],
   );
-  const [isChecked, toggleChecked] = useAsToggleWithEvent(undefined /*defaultChecked*/, checked, onChange);
-
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
@@ -63,7 +61,7 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
   const state = {
     ...pressable.state,
     disabled: !!props.disabled,
-    checked: isChecked,
+    checked: checked,
   };
 
   return {
