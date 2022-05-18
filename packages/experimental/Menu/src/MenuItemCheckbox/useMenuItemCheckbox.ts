@@ -10,7 +10,7 @@ import {
   useOnPressWithFocus,
   useViewCommandFocus,
 } from '@fluentui-react-native/interactive-hooks';
-import { useMenuContext } from '../context/menuContext';
+import { useMenuListContext } from '../context/menuListContext';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -26,19 +26,17 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
     onAccessibilityAction,
     ...rest
   } = props;
-  const context = useMenuContext();
-  const defaultChecked = context.defaultChecked[name];
-  const checked = context.checked[name];
+  const context = useMenuListContext();
+  const checked = context.checked?.name;
   const onCheckedChange = context.onCheckedChange;
 
   const onChange = React.useCallback(
     (e: InteractionEvent, isChecked: boolean) => {
-      // TODO: figure this out???
-      onCheckedChange(e, name, !isChecked);
+      onCheckedChange(e, name, isChecked);
     },
     [name, onCheckedChange],
   );
-  const [isChecked, toggleChecked] = useAsToggleWithEvent(defaultChecked, checked, onChange);
+  const [isChecked, toggleChecked] = useAsToggleWithEvent(undefined /*defaultChecked*/, checked, onChange);
 
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);

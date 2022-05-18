@@ -23,6 +23,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
     ),
     checkmark: buildProps(
       (tokens: MenuItemCheckboxTokens) => ({
+        opacity: tokens.checkmarkVisibility,
         color: tokens.color,
         height: tokens.checkmarkSize,
         width: tokens.checkmarkSize,

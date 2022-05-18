@@ -13,6 +13,10 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
 }
 
+export interface MenuListState extends MenuListProps {
+  isCheckedControlled: boolean;
+}
+
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps>;
 }
