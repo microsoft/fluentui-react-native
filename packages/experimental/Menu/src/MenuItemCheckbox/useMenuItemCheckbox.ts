@@ -27,7 +27,7 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
     ...rest
   } = props;
   const context = useMenuListContext();
-  const checked = context.checked?.name;
+  const checked = context.checked?.[name];
   const onCheckedChange = context.onCheckedChange;
 
   const onChange = React.useCallback(

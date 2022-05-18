@@ -27,7 +27,7 @@ const MenuDefault: React.FunctionComponent = () => {
 const MenuCheckmarks: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu>
+      <Menu defaultChecked={{ itemOne: true }}>
         <MenuTrigger>
           <Button>All checkmark items</Button>
         </MenuTrigger>
@@ -38,9 +38,9 @@ const MenuCheckmarks: React.FunctionComponent = () => {
           </MenuList>
         </MenuPopover>
       </Menu>
-      <Menu hasCheckmarks>
+      <Menu hasCheckmarks checked={{ itemTwo: true }}>
         <MenuTrigger>
-          <Button>Some checkmark items with alignment</Button>
+          <Button>Some controlled checkmark items with alignment</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
