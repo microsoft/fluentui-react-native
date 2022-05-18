@@ -5,7 +5,6 @@ import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
   useAsPressable,
-  useAsToggleWithEvent,
   useKeyProps,
   useOnPressWithFocus,
   useViewCommandFocus,
