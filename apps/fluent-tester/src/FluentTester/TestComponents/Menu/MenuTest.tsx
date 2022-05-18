@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuItemCheckbox, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
+import { Menu, MenuItem, MenuItemCheckbox, MenuItemRadio, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
@@ -59,6 +59,25 @@ const MenuCheckmarks: React.FunctionComponent = () => {
             <MenuItem content="A plain MenuItem" />
             <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
             <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuRadioItem: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu defaultChecked={{ itemOne: true }}>
+        <MenuTrigger>
+          <Button>Items with radio selection</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItemRadio name="itemOne" content="A MenuItem with checkmark" />
+            <MenuItemRadio name="itemTwo" content="Another MenuItem with checkmark" />
+            <MenuItemRadio name="itemThree" content="A third MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -146,6 +165,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Checkmarks',
     component: MenuCheckmarks,
+  },
+  {
+    name: 'Menu Radioitem',
+    component: MenuRadioItem,
   },
   {
     name: 'Menu open on hover',
