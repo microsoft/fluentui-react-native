@@ -3,7 +3,7 @@ import React from 'react';
 import { useMenuContext } from '../context/menuContext';
 import { MenuListProps, MenuListState } from './MenuList.types';
 
-export const useMenuList = (props: MenuListProps): MenuListState => {
+export const useMenuList = (_props: MenuListProps): MenuListState => {
   const context = useMenuContext();
 
   // MenuList v2 needs to be able to be standalone, but this is not in scope for v1
@@ -12,7 +12,7 @@ export const useMenuList = (props: MenuListProps): MenuListState => {
   const [checked, onCheckedChange] = useMenuCheckedState(isCheckedControlled, context);
 
   return {
-    ...props,
+    ...context,
     isCheckedControlled,
     checked,
     onCheckedChange,
