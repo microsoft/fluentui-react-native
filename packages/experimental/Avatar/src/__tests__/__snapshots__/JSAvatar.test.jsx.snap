@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Avatar 1`] = `
+exports[`Avatar rendering renders Avatar 1`] = `
 <View
   shape="circular"
   style={
