@@ -67,7 +67,6 @@ export type AvatarColor = 'neutral' | 'brand' | 'colorful' | AvatarNamedColor;
 export type IconAlignment = 'start' | 'center' | 'end';
 
 export interface RingConfig {
-  accent?: boolean;
   transparent?: boolean;
   ringThickness?: number;
   innerGap?: number;
