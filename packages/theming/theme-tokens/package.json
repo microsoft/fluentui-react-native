@@ -31,9 +31,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/design-tokens-android": "^0.8.0",
-    "@fluentui-react-native/design-tokens-win32": "^0.8.0",
-    "@fluentui-react-native/design-tokens-windows": "^0.8.0"
+    "@fluentui-react-native/design-tokens-android": "^0.12.0",
+    "@fluentui-react-native/design-tokens-win32": "^0.12.0",
+    "@fluentui-react-native/design-tokens-windows": "^0.12.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
