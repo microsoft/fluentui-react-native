@@ -11,7 +11,7 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
   const pressable = useAsPressable({ ...rest, disabled, onPress: onClick });
   const onKeyProps = useKeyProps(onClick, ' ', 'Enter');
-  const hasSubmenu = useMenuContext().isSubmenu;
+  const hasCheckmarks = useMenuContext().hasCheckmarks;
 
   return {
     props: {
@@ -23,11 +23,11 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: true,
       focusable: !disabled,
-      hasSubmenu,
       ref: componentRef,
       ...onKeyProps,
     },
     state: pressable.state,
+    hasCheckmarks,
   };
 };
 

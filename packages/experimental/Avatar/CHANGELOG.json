@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 17 May 2022 16:41:49 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.27",
+      "version": "0.14.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "eac718d8d0ba53e731489a66f412a2f19eccc8b5",
+            "comment": "Added getInitials method and tests for that"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 10 May 2022 18:33:23 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.26",
       "version": "0.14.26",
