@@ -94,7 +94,7 @@ export const StandardUsage: FunctionComponent = () => {
         active={active}
         activeAppearance={activeAppearance}
         size={imageSize === undefinedText ? undefined : imageSize}
-        initials="SN"
+        name="Satya Nadella"
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Photo of Satya Nadella"
         badge={{ status: presence === undefinedText ? undefined : presence }}
@@ -108,6 +108,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={imageSize === undefinedText ? undefined : imageSize}
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="Icon"
+          name="* Richard Faynman *"
           icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
           avatarColor={avatarColor}
         />

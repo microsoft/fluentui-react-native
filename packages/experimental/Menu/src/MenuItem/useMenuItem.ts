@@ -12,6 +12,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const pressable = useAsPressable({ ...rest, disabled, onPress: onClick });
   const onKeyProps = useKeyProps(onClick, ' ', 'Enter');
   const hasSubmenu = useMenuContext().isSubmenu;
+  const hasCheckmarks = useMenuContext().hasCheckmarks;
 
   return {
     props: {
@@ -23,11 +24,12 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: true,
       focusable: !disabled,
-      hasSubmenu,
       ref: componentRef,
       ...onKeyProps,
     },
     state: pressable.state,
+    hasSubmenu,
+    hasCheckmarks,
   };
 };
 
