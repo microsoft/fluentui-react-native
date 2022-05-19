@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Thu, 19 May 2022 20:09:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.34
+
+Thu, 19 May 2022 20:09:25 GMT
+
+### Patches
+
+- Added fall back icon and more statuses to PresenceBadge (v.kozova13@gmail.com)
 
 ## 0.0.33
 
