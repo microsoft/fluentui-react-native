@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added more icons to the Tester, added more options to customize,",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
