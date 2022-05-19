@@ -1,4 +1,4 @@
-import { getMacOSAliasTokens } from './getMacOSAliasTokens';
+import { getMacOSAliasTokens } from './getMacOSTokens';
 import { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/theming-utils';
 import { memoize } from '@fluentui-react-native/memo-cache';
