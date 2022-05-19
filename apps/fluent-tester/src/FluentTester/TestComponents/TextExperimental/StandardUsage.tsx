@@ -54,10 +54,10 @@ export const StandardUsage: React.FunctionComponent = () => {
           <Body1Strong>Body1Strong</Body1Strong>
           <Body2>Body2</Body2>
           <Body2Strong>Body2Strong</Body2Strong>
-          <Subtitle1>Subtitle1</Subtitle1>
-          <Subtitle1Strong>Subtitle1Strong</Subtitle1Strong>
           <Subtitle2>Subtitle2</Subtitle2>
           <Subtitle2Strong>Subtitle2Strong</Subtitle2Strong>
+          <Subtitle1>Subtitle1</Subtitle1>
+          <Subtitle1Strong>Subtitle1Strong</Subtitle1Strong>
           <Title1>Title1</Title1>
           <Title1Strong>Title1Strong</Title1Strong>
           <LargeTitle>LargeTitle</LargeTitle>
@@ -71,7 +71,7 @@ export const StandardUsage: React.FunctionComponent = () => {
     case 'android':
     case 'ios':
     case 'macos':
-    return <V1Usage />;
+      return <V1Usage />;
     default:
       return (
         <View>

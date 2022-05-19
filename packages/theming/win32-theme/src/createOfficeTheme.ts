@@ -7,6 +7,7 @@ import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 import { createOfficeAliasTokens } from './createOfficeAliasTokens';
 import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
 import { createAliasesFromPalette } from './createAliasesFromPalette';
+import { win32Typography } from './getThemeTypography';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
   const exception = palette as CxxException;
@@ -39,7 +40,10 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
         return {};
       }
 
-      return { colors: { ...createOfficeAliasTokens(ref.themeName) } };
+      return {
+        colors: { ...createOfficeAliasTokens(ref.themeName) },
+        typography: win32Typography(),
+      };
     },
     (theme: Theme) => {
       return createBrandedThemeWithAlias(ref.themeName, theme);
@@ -49,7 +53,10 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
         return {};
       }
 
-      return { colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast') };
+      return {
+        colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast'),
+        typography: win32Typography(),
+      };
     },
   );
 

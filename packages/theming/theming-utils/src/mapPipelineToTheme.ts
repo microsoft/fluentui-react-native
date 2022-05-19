@@ -150,5 +150,5 @@ export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
 }
 
 function createVariantValue(variant: any) {
-  return { face: variant.fontFamily, size: variant.fontSize, weight: variant.fontWeight };
+  return { face: 'primary', size: variant.fontSize, weight: variant.fontWeight };
 }

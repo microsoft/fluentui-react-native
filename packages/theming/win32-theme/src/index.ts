@@ -14,3 +14,4 @@ export { paletteFromOfficeColors } from './paletteFromOfficeColors';
 export { createOfficeAliasTokens } from './createOfficeAliasTokens';
 export { createFontAliasTokens } from './createFontAliasTokens';
 export { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from './createBrandedThemeWithAlias';
+export { win32Typography } from './getThemeTypography';

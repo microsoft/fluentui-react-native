@@ -50,18 +50,18 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const BlockText = () => {
     return (
       <>
-        <Text font="monospace" weight="semibold" truncate>
-          I am going to be truncated since I am very very very very very very very very very very very very very very very very very very very very very very very very very
+        <Text style={{ textTransform: 'uppercase' }} font="base" weight="medium">
+          I am going to be truncated since I am very very very very very very very very very very very very very very very very very very
           very very very very very very very very very very very very very very very very very very very very very very very very very very
-          very very very very very very very very very long block text.
+          very very very very very very very very very very very very very very very very long block text.
         </Text>
         <Text font="monospace" weight="semibold" wrap={false}>
-          I am not going to be wrapped since I am a very very very very very very very very very very very very very very very very very very very very very very very very very
+          I am not going to be wrapped since I am a very very very very very very very very very very very very very very very very very
           very very very very very very very very very very very very very very very very very very very very very very very very very very
-          very very very very very very very very very long block text.
+          very very very very very very very very very very very very very very very very very long block text.
         </Text>
         <Text underline>Since text components are inside a View</Text>
-        <Text strikethrough>every block of text</Text>
+        <Text>every block of text</Text>
         <Text underline strikethrough align="end">
           gets its own line. This line has been underlined, striked through, and right aligned.
         </Text>
