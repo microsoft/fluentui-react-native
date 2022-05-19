@@ -1,9 +1,9 @@
 import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
 import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
 import { hcAliasTokens } from './highContrast/tokens-alias';
-import lightGlobalTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-global.json';
-import darkGlobalTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-global.json';
-import hcGlobalTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-global.json';
+import lightShadowTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-shadow.json';
+import darkShadowTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-shadow.json';
+import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { assertNever } from 'assert-never';
 
@@ -23,11 +23,11 @@ export function getAliasTokens(mode: AppearanceOptions) {
 
 export function getShadowTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
-    return lightGlobalTokens.shadow;
+    return lightShadowTokens.shadow;
   } else if (mode === 'dark') {
-    return darkGlobalTokens.shadow;
+    return darkShadowTokens.shadow;
   } else if (mode === 'highContrast') {
-    return hcGlobalTokens.shadow;
+    return hcShadowTokens.shadow;
   } else {
     assertNever(mode);
   }

@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.10.3 <1.0.0",
-    "@fluentui-react-native/design-tokens-win32": "^0.12.0",
+    "@fluentui-react-native/design-tokens-win32": "^0.13.0",
     "@fluentui-react-native/memo-cache": "^1.1.7",
     "@fluentui-react-native/theme-tokens": ">=0.16.2 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.14.3 <1.0.0",

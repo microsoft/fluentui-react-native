@@ -2,10 +2,10 @@ import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colo
 import darkGrayAliasTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-aliases.json';
 import blackAliasTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-aliases.json';
 import { hcAliasTokens } from './highContrast/tokens-alias';
-import colorfulGlobalTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-global.json';
-import darkGrayGlobalTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-global.json';
-import blackGlobalTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-global.json';
-import hcGlobalTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-global.json';
+import colorfulShadowTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-shadow.json';
+import darkGrayShadowTokens from '@fluentui-react-native/design-tokens-win32/darkgray/tokens-shadow.json';
+import blackShadowTokens from '@fluentui-react-native/design-tokens-win32/black/tokens-shadow.json';
+import hcShadowTokens from '@fluentui-react-native/design-tokens-win32/hc/tokens-shadow.json';
 
 export function getOfficeAliasTokens(officeTheme: string) {
   if (officeTheme === 'White' || officeTheme === 'Colorful') {
@@ -23,13 +23,13 @@ export function getOfficeAliasTokens(officeTheme: string) {
 
 export function getOfficeShadowTokens(officeTheme: string) {
   if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return colorfulGlobalTokens.shadow;
+    return colorfulShadowTokens.shadow;
   } else if (officeTheme === 'DarkGray') {
-    return darkGrayGlobalTokens.shadow;
+    return darkGrayShadowTokens.shadow;
   } else if (officeTheme === 'Black') {
-    return blackGlobalTokens.shadow;
+    return blackShadowTokens.shadow;
   } else if (officeTheme === 'HighContrast') {
-    return hcGlobalTokens.shadow;
+    return hcShadowTokens.shadow;
   }
 
   return colorfulAliasTokens;
