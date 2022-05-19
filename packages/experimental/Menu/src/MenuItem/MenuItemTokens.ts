@@ -6,10 +6,12 @@ import { MenuItemTokens } from './MenuItem.types';
 export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
   backgroundColor: t.colors.neutralBackground1,
   borderRadius: globalTokens.corner.radius.medium,
+  checkmarkSize: 16,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size[300],
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
+  gap: globalTokens.spacing.xs,
   minHeight: 32,
   minWidth: 160,
   maxWidth: 300,

@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 17 May 2022 16:41:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.61.3",
+      "version": "0.61.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "eac718d8d0ba53e731489a66f412a2f19eccc8b5",
+            "comment": "Added getInitials method and tests for that"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.27",
+            "commit": "8b1f702694fc2502d25b8d748e98390e378a4d8a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 16 May 2022 17:35:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.61.2",
+      "version": "0.61.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "824d5093e18c6a1c16c2c23b3f4e0a717303d2ae",
+            "comment": "Add standup code for hasCheckmarks"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.7.0",
+            "commit": "824d5093e18c6a1c16c2c23b3f4e0a717303d2ae"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 13 May 2022 18:55:00 GMT",
       "tag": "@fluentui-react-native/tester_v0.61.1",
       "version": "0.61.1",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 11 May 2022 22:26:25 GMT and should not be manually modified.
+This log was last generated on Mon, 16 May 2022 17:35:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Mon, 16 May 2022 17:35:49 GMT
+
+### Minor changes
+
+- Add standup code for hasCheckmarks (ruaraki@microsoft.com)
 
 ## 0.6.0
 

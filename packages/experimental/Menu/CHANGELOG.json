@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Mon, 16 May 2022 17:35:49 GMT",
+      "tag": "@fluentui-react-native/menu_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "824d5093e18c6a1c16c2c23b3f4e0a717303d2ae",
+            "comment": "Add standup code for hasCheckmarks"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 11 May 2022 22:26:25 GMT",
       "tag": "@fluentui-react-native/menu_v0.6.0",
       "version": "0.6.0",
