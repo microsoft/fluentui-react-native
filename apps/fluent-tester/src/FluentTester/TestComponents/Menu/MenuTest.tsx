@@ -27,25 +27,26 @@ const MenuDefault: React.FunctionComponent = () => {
 const MenuCheckmarks: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu>
+      <Menu defaultChecked={{ itemOne: true }}>
         <MenuTrigger>
           <Button>All checkmark items</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItemCheckbox content="A MenuItem" />
-            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItemCheckbox name="itemOne" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemTwo" content="Another MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
-      <Menu hasCheckmarks>
+      <Menu hasCheckmarks checked={{ itemTwo: true }}>
         <MenuTrigger>
-          <Button>Some checkmark items with alignment</Button>
+          <Button>Some controlled checkmark items with alignment</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A MenuItem" />
-            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItem content="A plain MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -55,8 +56,9 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A MenuItem" />
-            <MenuItemCheckbox content="A MenuItem" />
+            <MenuItem content="A plain MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
