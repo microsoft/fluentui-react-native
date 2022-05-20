@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Implement toggle behavior on MenuItemCheckbox",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
