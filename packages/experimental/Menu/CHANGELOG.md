@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 20 May 2022 18:23:41 GMT and should not be manually modified.
+This log was last generated on Fri, 20 May 2022 19:53:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Fri, 20 May 2022 19:53:48 GMT
+
+### Minor changes
+
+- Implement MenuDivider (ruaraki@microsoft.com)
 
 ## 0.8.0
 

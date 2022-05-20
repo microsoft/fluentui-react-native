@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 20 May 2022 19:53:48 GMT",
+      "tag": "@fluentui-react-native/menu_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "1b2eb8874e0571a19cdbab4ba78e3b112d025817",
+            "comment": "Implement MenuDivider"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 20 May 2022 18:23:41 GMT",
       "tag": "@fluentui-react-native/menu_v0.8.0",
       "version": "0.8.0",
