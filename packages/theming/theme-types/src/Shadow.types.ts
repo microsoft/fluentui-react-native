@@ -3,7 +3,7 @@ import { ColorValue } from 'react-native';
 /**
  * Base structure of a shadow style, which has x and y offset, blur amount, and color specified
  */
-export interface ShadowStyle {
+export interface ShadowValue {
   x: number;
   y: number;
   blur: number;
@@ -16,8 +16,8 @@ export interface ShadowStyle {
  * The key shadow is the offset shadow which gives the control a sense of elevation or distance from the page
  */
 export interface ShadowToken {
-  ambient: ShadowStyle;
-  key: ShadowStyle;
+  ambient: ShadowValue;
+  key: ShadowValue;
 }
 
 /**
