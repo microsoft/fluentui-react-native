@@ -19,7 +19,7 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     iconColor: globalTokens.color.white,
     ringColor: t.colors.transparentStroke,
     borderColor: globalTokens.color.white,
-    borderWidth: t.host.appearance === 'highContrast' ? 1 : 0,
+    borderWidth: t.name === 'HighContrast' ? 1 : 0,
     circular: {
       borderRadius: globalTokens.corner.radius.circle,
     },
@@ -137,13 +137,11 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     neutral: {
       backgroundColor: t.colors.neutralBackground6,
       color: t.colors.neutralForeground3,
-      iconColor: t.colors.neutralForeground3,
       ringColor: t.colors.transparentStroke,
     },
     brand: {
       backgroundColor: t.colors.brandBackgroundStatic,
       color: t.colors.neutralForegroundOnBrand,
-      iconColor: t.colors.neutralForegroundOnBrand,
       ringColor: t.colors.transparentStroke,
     },
     darkRed: getColorProps('darkRed', t),
@@ -185,9 +183,10 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
  * @returns object of props - backgroundColor, color and ringColor
  */
 function getColorProps(color: string, theme: Theme) {
-  const themeAppearance = theme.host.appearance;
+  const themeAppearance = theme.name;
   switch (themeAppearance) {
-    case 'light':
+    case 'White':
+    case 'Colorful':
     default:
       return {
         backgroundColor: globalTokens.color[color].tint40,
@@ -195,14 +194,15 @@ function getColorProps(color: string, theme: Theme) {
         iconColor: globalTokens.color[color].shade30,
         ringColor: globalTokens.color[color].primary,
       };
-    case 'dark':
+    case 'DarkGray':
+    case 'Black':
       return {
         backgroundColor: globalTokens.color[color].shade30,
         color: globalTokens.color[color].tint40,
         iconColor: globalTokens.color[color].tint40,
         ringColor: globalTokens.color[color].tint30,
       };
-    case 'highContrast':
+    case 'HighContrast':
       return {
         backgroundColor: theme.colors.neutralBackground6,
         color: theme.colors.neutralForeground3,

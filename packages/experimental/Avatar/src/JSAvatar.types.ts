@@ -69,7 +69,6 @@ export type IconAlignment = 'start' | 'center' | 'end';
 export interface RingConfig {
   accent?: boolean;
   transparent?: boolean;
-  ringBackgroundColor?: ColorValue; // inner/outer rings
   ringThickness?: number;
   innerGap?: number;
 }
@@ -159,11 +158,14 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
 }
 
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
+  iconColor?: ColorValue;
   iconSize?: number;
   height?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
   circular?: JSAvatarTokens;
+  ringColor?: ColorValue;
+  ringBackgroundColor?: ColorValue;
   square?: JSAvatarTokens;
   inactive?: JSAvatarTokens;
   avatarOpacity?: number;

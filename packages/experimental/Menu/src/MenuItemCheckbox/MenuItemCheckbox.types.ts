@@ -3,7 +3,7 @@ import { ColorValue, ViewProps } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { IFocusable, InteractionEvent, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const menuItemCheckboxName = 'MenuItemCheckbox';
@@ -36,14 +36,12 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * A callback to call on button click event
+   * Identifier for the control
    */
-  onClick?: (e: InteractionEvent) => void;
+  name: string;
 }
 
-export interface MenuItemCheckboxState extends IPressableHooks<MenuItemCheckboxProps & React.ComponentPropsWithRef<any>> {
-  hasCheckmarks?: boolean;
-}
+export interface MenuItemCheckboxState extends IPressableHooks<MenuItemCheckboxProps & React.ComponentPropsWithRef<any>> {}
 
 export interface MenuItemCheckboxSlotProps {
   root: React.PropsWithRef<IViewProps>;

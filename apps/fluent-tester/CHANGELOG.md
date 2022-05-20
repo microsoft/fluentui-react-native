@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 17 May 2022 16:41:49 GMT and should not be manually modified.
+This log was last generated on Fri, 20 May 2022 18:23:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.61.5
+
+Fri, 20 May 2022 18:23:41 GMT
+
+### Patches
+
+- Fix bug, add test (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.8.0
+
+## 0.61.4
+
+Thu, 19 May 2022 20:09:25 GMT
+
+### Patches
+
+- Added more icons to the Tester, added more options to customize, (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.34
+- Bump @fluentui-react-native/experimental-avatar to v0.14.28
 
 ## 0.61.3
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 20 May 2022 18:23:41 GMT",
+      "tag": "@fluentui-react-native/menu_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "e121f1b23ba443ebacff6d74cae04f48eff8e329",
+            "comment": "Implement toggle behavior on MenuItemCheckbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 16 May 2022 17:35:49 GMT",
       "tag": "@fluentui-react-native/menu_v0.7.0",
       "version": "0.7.0",
