@@ -51,7 +51,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     return (
       <>
         <Text style={{ textTransform: 'uppercase' }} font="base" weight="medium">
-          I am going to be truncated since I am very very very very very very very very very very very very very very very very very very
+          I am going to be truncated since I am a very very very very very very very very very very very very very very very very very very
           very very very very very very very very very very very very very very very very very very very very very very very very very very
           very very very very very very very very very very very very very very very very long block text.
         </Text>

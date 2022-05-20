@@ -8,7 +8,6 @@ export const textName = 'Text';
  * Text tokens, these are the internally configurable values for Text elements. In particular these
  * drive decisions on how to build the styles
  */
-
 export type TextTokens = Omit<FontTokens, 'fontFamily'> & IForegroundColorTokens & Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'>;
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify';

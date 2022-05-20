@@ -10,7 +10,7 @@ import {
   FontWeightValue,
 } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
-import { I18nManager, Text as RNText } from 'react-native';
+import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
@@ -39,14 +39,14 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   let [tokens, cache] = useTokens(theme);
 
   const textAlign = I18nManager.isRTL
-    ? align == 'start'
+    ? align === 'start'
       ? 'right'
-      : align == 'end'
+      : align === 'end'
       ? 'left'
       : align
-    : align == 'start'
+    : align === 'start'
     ? 'left'
-    : align == 'end'
+    : align === 'end'
     ? 'right'
     : align;
 
@@ -81,6 +81,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   return (extra: TextProps, children: React.ReactNode) => {
     const mergedProps = {
       numberOfLines: truncate || !wrap ? 1 : 0,
+      onKeyDown: Platform.OS === ('win32' as any || 'windows') ? onKeyDown : undefined,
       ...rest,
       ...extra,
       style: mergeStyles(tokenStyle, props.style, extra?.style),
