@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { JSAvatar, IconAlignment } from '@fluentui-react-native/experimental-avatar';
+import { JSAvatar, IconAlignment, AvatarSize } from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, TextInput } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
@@ -9,7 +9,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [coinColor, setCoinColor] = React.useState<string>();
   const [textColor, setTextColor] = React.useState<string>();
-  const [size, setSize] = React.useState<number>(96);
+  const [size, setSize] = React.useState<AvatarSize>(96);
   const [iconSize, setIconSize] = React.useState<number>(24);
   const [initialsSize, setInitialsSize] = React.useState<number>(14);
   const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
@@ -84,7 +84,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           placeholder="Avatar size"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
-            setSize(parseInt(e.nativeEvent.text));
+            const size = e.nativeEvent.text as unknown as AvatarSize;
+            setSize(size);
           }}
         />
 
