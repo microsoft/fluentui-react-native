@@ -62,7 +62,7 @@ export type AvatarNamedColor = typeof AvatarColors[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
-export type AvatarActiveAppearance = 'ring' | 'shadow' | 'glow' | 'ring-shadow' | 'ring-glow';
+export type AvatarActiveAppearance = 'ring';
 export type AvatarColor = 'neutral' | 'brand' | 'colorful' | AvatarNamedColor;
 export type IconAlignment = 'start' | 'center' | 'end';
 
@@ -123,7 +123,7 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * Specify a string to be used instead of the name, to determine which color to use when color="colorful".
    * Use this when a name is not available, but there is another unique identifier that can be used instead.
    */
-  idForColor?: string | undefined;
+  idForColor?: string;
 
   /**
    * The Avatar's image.

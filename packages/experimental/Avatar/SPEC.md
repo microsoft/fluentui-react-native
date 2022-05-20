@@ -35,8 +35,8 @@ Active prop can be `unset`, `active` and `inactive`. Default is `unset`.
 
 ### ActiveAppearance
 
-According to Web spec there should be `ring`, `shadow`, `glow`, `ring-shadow`, `ring-glow`.
-Currently we support only `ring`. activeAppearance can be used when active prop set to `active`
+`activeAppearance` can be used when `active` prop set to `active`.
+It adds `ring` as extra visual.
 
 ### Badge
 
@@ -81,7 +81,7 @@ The Avatar supports a circular and square (with rounded corners) shape.
 
 ### Sizes
 
-`Avatar` sopports next sizes: `20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120`.
+`Avatar` supports next sizes: `20, 24, 28, 32, 36, 40, 48, 56, 64, 72, 96, 120`.
 Default size for win32 is 24.
 
 ## API
@@ -105,7 +105,7 @@ The slots can be modified using the `compose` function on the `Avatar`. For more
 ```ts
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   /**
-   * Optional activity indicator
+   * Activity indicator
    * * active: the avatar will be decorated according to activeAppearance
    * * inactive: the avatar will be reduced in size and partially transparent
    * * unset: normal display
@@ -138,7 +138,7 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * Specify a string to be used instead of the name, to determine which color to use when color="colorful".
    * Use this when a name is not available, but there is another unique identifier that can be used instead.
    */
-  idForColor?: string | undefined;
+  idForColor?: string;
 
   /**
    * The Avatar's image.
@@ -146,12 +146,9 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   image?: ImageProps;
 
   /**
-   * (optional) Custom initials.
-   *
-   * It is usually not necessary to specify custom initials; by default they will be derived from the `name` prop,
-   * using the `getInitials` function.
-   *
    * The initials are displayed when there is no image (including while the image is loading).
+   *
+   * It is usually not necessary to specify custom initials; by default they will be derived from the `name` prop, using the `getInitials` function.
    */
   initials?: string;
 
@@ -201,6 +198,7 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
    * The size of presence badge.
    */
   badgeSize?: BadgeSize;
+
   /**
    * The icon color.
    */
@@ -210,6 +208,7 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
    * The size of the icon.
    */
   iconSize?: number;
+
   /**
    * The height of the avatar.
    */
@@ -305,7 +304,7 @@ showBadge is set to true when `active` prop is `unset` or undefined
 
 ### Interaction
 
-For now we won't add props for interactions.
+For now Avatar doesn't support interactions.
 For the next step we will need to add tooltip and onClick handler.
 
 ## Accessibility
