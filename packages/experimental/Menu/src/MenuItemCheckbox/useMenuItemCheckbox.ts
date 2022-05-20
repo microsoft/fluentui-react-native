@@ -47,10 +47,8 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
     : defaultAccessibilityActions;
   const onAccessibilityActionProp = React.useCallback(
     (event: AccessibilityActionEvent) => {
-      switch (event.nativeEvent.actionName) {
-        case 'Toggle':
-          toggleChecked(event);
-          break;
+      if (event.nativeEvent.actionName === 'Toggle') {
+        toggleChecked(event);
       }
       onAccessibilityAction && onAccessibilityAction(event);
     },
