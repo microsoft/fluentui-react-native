@@ -11,6 +11,7 @@ export interface IShadowTokens {
   };
   shadowOpacity?: number;
   shadowRadius?: number;
+  elevation?: number;
 }
 
 export const shadowTokens: IOperationSet<IShadowTokens, ITheme> = [
