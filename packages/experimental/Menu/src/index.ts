@@ -4,3 +4,4 @@ export { MenuPopover } from './MenuPopover/MenuPopover';
 export { MenuItem } from './MenuItem/MenuItem';
 export { MenuItemCheckbox } from './MenuItemCheckbox/MenuItemCheckbox';
 export { MenuList } from './MenuList/MenuList';
+export { MenuDivider } from './MenuDivider/MenuDivider';
