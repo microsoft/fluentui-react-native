@@ -1,10 +1,10 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonCoreTokens } from '../Button.types';
-import { shadowStyleFromGlobalToken } from '../shadowStyle';
+import { shadowStyleFromTheme } from '../shadowStyle';
 
 export const defaultFABColorTokens: TokenSettings<ButtonCoreTokens, Theme> = (t: Theme): ButtonCoreTokens => ({
-  ...shadowStyleFromGlobalToken(8),
+  ...shadowStyleFromTheme(t, 'shadow8'),
   // coloring same as primary
   backgroundColor: t.colors.brandedBackground,
   color: t.colors.brandedContent,

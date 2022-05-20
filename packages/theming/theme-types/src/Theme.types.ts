@@ -2,6 +2,7 @@ import { ThemeColorDefinition } from './Color.types';
 import { OfficePalette } from './palette.types';
 import { Typography, PartialTypography } from './Typography.types';
 import { ColorValue } from 'react-native';
+import { PartialShadowDefinition, ThemeShadowDefinition } from './Shadow.types';
 
 type TwoLevelPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
@@ -23,6 +24,7 @@ export interface Theme {
   components: {
     [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
   };
+  shadows: ThemeShadowDefinition;
   spacing: Spacing;
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten
@@ -36,10 +38,11 @@ export interface Theme {
 }
 
 /**
- * Generally a partial theme is comprised of partial versions of the objects within the theme, with the exception of typography
+ * Generally a partial theme is comprised of partial versions of the objects within the theme, with the exception of shadow and typography
  * which has additional levels of hierarchy
  */
-export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'typography' | 'host'> & {
+export type PartialTheme = Omit<TwoLevelPartial<Theme>, 'shadows' | 'typography' | 'host'> & {
+  shadows?: PartialShadowDefinition;
   typography?: PartialTypography;
   host?: TwoLevelPartial<Theme['host']>;
 };

@@ -11,7 +11,7 @@ export interface IShadowTokens {
   };
   shadowOpacity?: number;
   shadowRadius?: number;
-  elevation?: number; // for android shadows
+  elevation?: number;
 }
 
 export const shadowTokens: IOperationSet<IShadowTokens, ITheme> = [
@@ -19,7 +19,6 @@ export const shadowTokens: IOperationSet<IShadowTokens, ITheme> = [
   { source: 'shadowOffset' },
   { source: 'shadowOpacity' },
   { source: 'shadowRadius' },
-  { source: 'elevation' },
 ];
 
-export const shadowStyles = tokenBuilder<IShadowTokens>('shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius', 'elevation');
+export const shadowStyles = tokenBuilder<IShadowTokens>('shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius');
