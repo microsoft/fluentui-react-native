@@ -1,6 +1,15 @@
 import * as React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuItemCheckbox, MenuItemRadio, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
+import {
+  Menu,
+  MenuItem,
+  MenuItemCheckbox,
+  MenuItemRadio,
+  MenuTrigger,
+  MenuPopover,
+  MenuList,
+  MenuDivider,
+} from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
@@ -34,6 +43,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItemCheckbox name="itemOne" content="A MenuItem with checkmark" />
+            <MenuDivider />
             <MenuItemCheckbox name="itemTwo" content="Another MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>

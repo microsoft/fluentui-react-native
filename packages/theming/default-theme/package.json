@@ -31,8 +31,8 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/design-tokens-win32": "^0.8.0",
-    "@fluentui-react-native/design-tokens-windows": "^0.8.0",
+    "@fluentui-react-native/design-tokens-win32": "^0.13.0",
+    "@fluentui-react-native/design-tokens-windows": "^0.13.0",
     "@fluentui-react-native/memo-cache": "^1.1.7",
     "@fluentui-react-native/theme-tokens": "^0.16.2",
     "@fluentui-react-native/theme-types": ">=0.14.3 <1.0.0",
