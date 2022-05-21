@@ -8,4 +8,5 @@ export const defaultMenuListTokens: TokenSettings<MenuListTokens, Theme> = (t: T
   minWidth: 128,
   maxWidth: 300,
   backgroundColor: t.colors.neutralBackground1,
+  gap: globalTokens.spacing.xxs,
 });
