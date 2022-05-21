@@ -19,6 +19,7 @@ export const shadowTokens: IOperationSet<IShadowTokens, ITheme> = [
   { source: 'shadowOffset' },
   { source: 'shadowOpacity' },
   { source: 'shadowRadius' },
+  { source: 'elevation' },
 ];
 
 export const shadowStyles = tokenBuilder<IShadowTokens>('shadowColor', 'shadowOffset', 'shadowOpacity', 'shadowRadius');
