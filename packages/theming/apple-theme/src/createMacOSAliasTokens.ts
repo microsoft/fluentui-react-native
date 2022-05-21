@@ -1,4 +1,4 @@
-import { getMacOSAliasTokens } from './getMacOSTokens';
+import { getMacOSAliasTokens, getMacOSShadowTokens } from './getMacOSTokens';
 import { AliasColorTokens, AppearanceOptions } from '@fluentui-react-native/theme-types';
 import { mapPipelineToTheme, mapPipelineToShadow } from '@fluentui-react-native/theming-utils';
 import { memoize } from '@fluentui-react-native/memo-cache';
@@ -6,13 +6,14 @@ import { ThemeShadowDefinition } from '@fluentui-react-native/theme-types/lib/Sh
 
 function createMacOSColorAliasTokensWorker(mode: AppearanceOptions, isHighContrast: boolean): AliasColorTokens {
   const aliasTokens = getMacOSAliasTokens(mode, isHighContrast);
+  console.log(aliasTokens);
   return mapPipelineToTheme(aliasTokens);
 }
 
 export const createMacOSColorAliasTokens = memoize(createMacOSColorAliasTokensWorker);
 
 function createMacOSShadowAliasTokensWorker(mode: AppearanceOptions, isHighContrast: boolean): ThemeShadowDefinition {
-  const aliasTokens = getMacOSAliasTokens(mode, isHighContrast);
+  const aliasTokens = getMacOSShadowTokens(mode, isHighContrast);
   return mapPipelineToShadow(aliasTokens);
 }
 
