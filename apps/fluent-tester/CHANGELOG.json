@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 17:39:28 GMT",
+      "tag": "@fluentui-react-native/tester_v0.61.9",
+      "version": "0.61.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "402f3b57a1ed394acde8d43a83699cadd76502c4",
+            "comment": "Fixed size customization"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.31",
+            "commit": "402f3b57a1ed394acde8d43a83699cadd76502c4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 16:18:06 GMT",
       "tag": "@fluentui-react-native/tester_v0.61.8",
       "version": "0.61.8",

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester",
-  "version": "0.61.8",
+  "version": "0.61.9",
   "description": "A test app to test FluentUI React Native Components during development",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -35,7 +35,7 @@
     "@fluentui-react-native/button": ">=0.22.23 <1.0.0",
     "@fluentui-react-native/default-theme": ">=0.11.0 <1.0.0",
     "@fluentui-react-native/experimental-activity-indicator": ">=0.5.27 <1.0.0",
-    "@fluentui-react-native/experimental-avatar": ">=0.14.30 <1.0.0",
+    "@fluentui-react-native/experimental-avatar": ">=0.14.31 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.15.24",
     "@fluentui-react-native/experimental-checkbox": "0.11.6",
     "@fluentui-react-native/experimental-drawer": ">=0.1.11 <1.0.0",
