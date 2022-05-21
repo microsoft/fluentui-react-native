@@ -22,9 +22,11 @@ const otherTestNames = ['(206) 123-4567', '耿盈盈']; // will return this case
 const namesWithTitles = ['Mr Feynman', 'Dr Richard Feynman'];
 const initialsForNameWithTitles = ['F', 'RF'];
 
-it('renders Avatar', () => {
-  const tree = renderer.create(<JSAvatar />).toJSON();
-  expect(tree).toMatchSnapshot();
+describe('Avatar rendering', () => {
+  it('renders Avatar', () => {
+    const tree = renderer.create(<JSAvatar />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
 
 describe('validateAlphabeticalCharacters method', () => {

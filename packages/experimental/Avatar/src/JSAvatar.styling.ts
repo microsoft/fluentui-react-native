@@ -20,6 +20,7 @@ export const avatarStates: (keyof JSAvatarTokens)[] = [
   'ringColor',
   'ringBackgroundColor',
   'iconColor',
+  'size',
 ];
 
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
@@ -28,12 +29,12 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { horizontalIconAlignment, verticalIconAlignment, width, height, avatarOpacity } = tokens;
+        const { horizontalIconAlignment, verticalIconAlignment, size, avatarOpacity } = tokens;
         return {
           style: {
             flexDirection: 'row',
-            width: width,
-            height: height,
+            width: size,
+            height: size,
             justifyContent: nameMap[horizontalIconAlignment || 'end'] as ViewStyle['justifyContent'],
             alignItems: nameMap[verticalIconAlignment || 'end'] as ViewStyle['alignItems'],
             horizontalIconAlignment,
@@ -42,7 +43,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity', 'height', 'width'],
+      ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity', 'size'],
     ),
     initials: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -58,13 +59,13 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ),
     initialsBackground: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const { backgroundColor } = tokens;
+        const { backgroundColor, size } = tokens;
 
         return {
           style: {
             ...borderStyles.from(tokens, theme),
-            width: tokens.width,
-            height: tokens.height,
+            width: size,
+            height: size,
             flexGrow: 1,
             alignSelf: 'stretch',
             justifyContent: 'center',
@@ -75,21 +76,22 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['backgroundColor', 'width', 'height', 'borderColor', 'borderWidth', ...borderStyles.keys],
+      ['backgroundColor', 'size', 'borderColor', 'borderWidth', ...borderStyles.keys],
     ),
     image: buildProps(
       (tokens: JSAvatarTokens) => {
+        const { borderRadius, size, borderWidth, borderColor } = tokens;
         return {
           style: {
-            borderRadius: tokens.borderRadius,
-            width: tokens.width,
-            height: tokens.height,
-            borderWidth: tokens.borderWidth,
-            borderColor: tokens.borderColor,
+            borderRadius: borderRadius,
+            width: size,
+            height: size,
+            borderWidth: borderWidth,
+            borderColor: borderColor,
           },
         };
       },
-      ['borderRadius', 'width', 'height', 'borderColor', 'borderWidth'],
+      ['borderRadius', 'size', 'borderColor', 'borderWidth'],
     ),
     icon: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -106,7 +108,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ),
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const ringConfig = getRingConfig(tokens.width);
+        const ringConfig = getRingConfig(tokens.size);
         return {
           style: {
             borderStyle: 'solid',
@@ -121,7 +123,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['width', 'height', 'ringColor', ...borderStyles.keys],
+      ['size', 'ringColor', ...borderStyles.keys],
     ),
     badge: buildProps(
       (tokens: JSAvatarTokens) => {

@@ -18,7 +18,8 @@ import { SvgXml } from 'react-native-svg';
  * @returns Whether the styles that are assigned to the layer should be applied to the avatar
  */
 export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSAvatarProps): boolean => {
-  const avatarSize = `size${userProps.size || 24}`;
+  const size = userProps.size;
+  const avatarSize = size ? `size${size}` : '';
   return (
     state[layer] ||
     userProps[layer] ||
@@ -27,7 +28,6 @@ export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSA
     layer === userProps['avatarColor'] ||
     (!userProps['avatarColor'] && layer === 'neutral') ||
     layer === avatarSize ||
-    (!userProps['size'] && layer === 'size24') ||
     (userProps.active === 'inactive' && layer === 'inactive')
   );
 };

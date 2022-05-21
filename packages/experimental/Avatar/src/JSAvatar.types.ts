@@ -85,6 +85,16 @@ export interface AvatarConfigurableProps {
    */
   avatarColor?: AvatarColor;
   ring?: RingConfig;
+
+  /**
+   * Size of the avatar in pixels.
+   *
+   * Size is restricted to a limited set of supported values recommended for most uses (see `AvatarSizeValue`) and
+   * based on design guidelines for the Avatar control.
+   *
+   * @defaultvalue 24
+   */
+  size?: AvatarSize;
 }
 
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
@@ -148,16 +158,6 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   name?: string;
 
   /**
-   * Size of the avatar in pixels.
-   *
-   * Size is restricted to a limited set of supported values recommended for most uses (see `AvatarSizeValue`) and
-   * based on design guidelines for the Avatar control.
-   *
-   * @defaultvalue 24
-   */
-  size?: AvatarSize;
-
-  /**
    * The avatar can have a circular or square shape.
    * @defaultvalue circular
    */
@@ -172,7 +172,6 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
   iconColor?: ColorValue;
   iconSize?: number;
-  height?: number;
   horizontalIconAlignment?: IconAlignment;
   verticalIconAlignment?: IconAlignment;
   circular?: JSAvatarTokens;
@@ -193,7 +192,6 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   size72?: JSAvatarTokens;
   size96?: JSAvatarTokens;
   size120?: JSAvatarTokens;
-  width?: number;
   badgeSize?: BadgeSize;
   neutral?: JSAvatarTokens;
   brand?: JSAvatarTokens;
