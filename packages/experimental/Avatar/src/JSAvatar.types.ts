@@ -62,7 +62,7 @@ export type AvatarNamedColor = typeof AvatarColors[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
-export type AvatarActiveAppearance = 'ring' | 'shadow' | 'glow' | 'ring-shadow' | 'ring-glow';
+export type AvatarActiveAppearance = 'ring';
 export type AvatarColor = 'neutral' | 'brand' | 'colorful' | AvatarNamedColor;
 export type IconAlignment = 'start' | 'center' | 'end';
 
@@ -104,6 +104,11 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * @defaultvalue ring
    */
   activeAppearance?: AvatarActiveAppearance;
+
+  /**
+   * Badge shows the avatar's presence status.
+   * Badge can be shown only if `active` prop is undefined or unset
+   */
   badge?: PresenceBadgeProps;
 
   /**
@@ -117,8 +122,11 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * Specify a string to be used instead of the name, to determine which color to use when color="colorful".
    * Use this when a name is not available, but there is another unique identifier that can be used instead.
    */
-  idForColor?: string | undefined;
+  idForColor?: string;
 
+  /**
+   * The Avatar's image.
+   */
   image?: ImageProps;
 
   /**
@@ -154,6 +162,10 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
    * @defaultvalue circular
    */
   shape?: AvatarShape;
+
+  /**
+   * Currently used for image URL, will be deprecated when image prop works
+   */
   src?: string;
 }
 
