@@ -16,6 +16,7 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
         target={state.triggerRef}
         onDismiss={state.onDismiss}
         dismissBehaviors={state.dismissBehaviors}
+        setInitialFocus={true}
       >
         {children}
       </Callout>
