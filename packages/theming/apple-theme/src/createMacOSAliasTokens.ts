@@ -6,7 +6,6 @@ import { ThemeShadowDefinition } from '@fluentui-react-native/theme-types/lib/Sh
 
 function createMacOSColorAliasTokensWorker(mode: AppearanceOptions, isHighContrast: boolean): AliasColorTokens {
   const aliasTokens = getMacOSAliasTokens(mode, isHighContrast);
-  console.log(aliasTokens);
   return mapPipelineToTheme(aliasTokens);
 }
 
