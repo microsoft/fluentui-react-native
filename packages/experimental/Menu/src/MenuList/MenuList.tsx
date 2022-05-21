@@ -9,7 +9,7 @@ import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
 
-export const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
+const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
   return (final: React.PropsWithRef<IViewProps> & { gap?: number }, children: React.ReactNode) => {
     if (gap && gap > 0 && children) {
