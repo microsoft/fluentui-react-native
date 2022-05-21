@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Separate out elevation from iOS Shadow styles",
-  "packageName": "@fluentui-react-native/tokens",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

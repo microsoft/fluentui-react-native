@@ -2,6 +2,45 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 01:47:57 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "3fdd5fccdcd5e76c90bac7ad2fa436917b1c84e0",
+            "comment": "Add shadows to macOS and mock shadows to iOS"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.11.0",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.6.9",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.15.0",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.11.0",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Apr 2022 19:09:51 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.11.5",
       "version": "0.11.5",

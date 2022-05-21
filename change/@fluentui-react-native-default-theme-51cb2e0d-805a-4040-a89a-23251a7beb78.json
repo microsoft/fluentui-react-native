@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add shadows to default",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
