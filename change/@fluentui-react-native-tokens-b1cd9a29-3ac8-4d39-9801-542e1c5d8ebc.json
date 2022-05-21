@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "add back elevation as a token",
-  "packageName": "@fluentui-react-native/tokens",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

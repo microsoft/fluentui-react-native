@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/button_v0.22.23",
+      "version": "0.22.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.27",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.7.28",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.28",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.23",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.8",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.40",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/text to v0.11.24",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.2",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:57 GMT",
       "tag": "@fluentui-react-native/button_v0.22.22",
       "version": "0.22.22",

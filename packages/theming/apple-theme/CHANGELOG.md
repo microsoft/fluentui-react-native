@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Sat, 21 May 2022 01:47:57 GMT and should not be manually modified.
+This log was last generated on Sat, 21 May 2022 16:18:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.1
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Fix shadow tokens not getting mapped properly (sanajmi@microsoft.com)
 
 ## 0.12.0
 

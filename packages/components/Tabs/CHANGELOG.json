@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.6.46",
+      "version": "0.6.46",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.9.27",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.23",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.8",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.40",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.11.24",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.2",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:58 GMT",
       "tag": "@fluentui-react-native/tabs_v0.6.45",
       "version": "0.6.45",

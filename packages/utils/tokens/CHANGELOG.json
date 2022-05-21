@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.12.2",
+      "version": "0.12.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade",
+            "comment": "add back elevation as a token"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:57 GMT",
       "tag": "@fluentui-react-native/tokens_v0.12.1",
       "version": "0.12.1",

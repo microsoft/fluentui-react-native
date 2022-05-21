@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added documentation for the Avatar",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}

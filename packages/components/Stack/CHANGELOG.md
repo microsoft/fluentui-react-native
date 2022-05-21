@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Sat, 21 May 2022 01:47:58 GMT and should not be manually modified.
+This log was last generated on Sat, 21 May 2022 16:18:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.28
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/tokens to v0.12.2
+- Bump @fluentui-react-native/text to v0.11.24
 
 ## 0.6.27
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade",
+            "comment": "Fix shadow tokens not getting mapped properly"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:57 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.12.0",
       "version": "0.12.0",

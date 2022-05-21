@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.30",
+      "version": "0.14.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35",
+            "comment": "Added documentation for the Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.36",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.28",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.23",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.8",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.2",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:58 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.29",
       "version": "0.14.29",
