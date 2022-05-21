@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix focus button size",
+  "packageName": "@fluentui-react-native/button",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
