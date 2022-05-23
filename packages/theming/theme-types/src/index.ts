@@ -9,6 +9,7 @@ export type {
   PartialPalette,
   ThemeColorDefinition,
 } from './Color.types';
+export type { ShadowValue, ShadowToken, BaseShadowAliasTokens, ThemeShadowDefinition, PartialShadowDefinition } from './Shadow.types';
 export type { AppearanceOptions, PartialTheme, Spacing, Theme, ThemeOptions } from './Theme.types';
 export type {
   FontFamilies,

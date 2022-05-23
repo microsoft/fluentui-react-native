@@ -23,6 +23,10 @@ function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean) {
       return presenceIconPaths.offline;
     case 'outOfOffice':
       return presenceIconPaths.outOfOffice;
+    case 'unknown':
+      return presenceIconPaths.unknown;
+    case 'blocked':
+      return presenceIconPaths.blocked;
   }
 }
 
