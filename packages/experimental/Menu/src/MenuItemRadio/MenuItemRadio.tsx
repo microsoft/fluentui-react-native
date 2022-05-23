@@ -1,25 +1,15 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
-import { SvgXml } from 'react-native-svg';
-import { compose, mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
-import { Text } from '@fluentui-react-native/experimental-text';
-import { menuItemRadioName, MenuItemRadioProps, MenuItemRadioType } from './MenuItemRadio.types';
+import { mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { useMenuItemRadio } from './useMenuItemRadio';
-import { stylingSettings } from './MenuItemRadio.styling';
+import { MenuItemCheckbox } from '../MenuItemCheckbox/MenuItemCheckbox';
+import { MenuItemCheckboxProps, MenuItemCheckboxType } from '../MenuItemCheckbox/MenuItemCheckbox.types';
 
-export const MenuItemRadio = compose<MenuItemRadioType>({
-  displayName: menuItemRadioName,
-  ...stylingSettings,
-  slots: {
-    root: View,
-    checkmark: SvgXml,
-    content: Text,
-  },
-  useRender: (userProps: MenuItemRadioProps, useSlots: UseSlots<MenuItemRadioType>) => {
+export const MenuItemRadio = MenuItemCheckbox.compose({
+  useRender: (userProps: MenuItemCheckboxProps, useSlots: UseSlots<MenuItemCheckboxType>) => {
     const menuItem = useMenuItemRadio(userProps);
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer]);
 
-    return (final: MenuItemRadioProps) => {
+    return (final: MenuItemCheckboxProps) => {
       const mergedProps = mergeProps(menuItem.props, final);
       const chevronXml = `
       <svg>

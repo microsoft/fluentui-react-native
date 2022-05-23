@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
-import { MenuItemRadioProps, MenuItemRadioState } from './MenuItemRadio.types';
 import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
@@ -10,10 +9,11 @@ import {
   useViewCommandFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { useMenuListContext } from '../context/menuListContext';
+import { MenuItemCheckboxProps, MenuItemCheckboxState } from '../MenuItemCheckbox/MenuItemCheckbox.types';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
-export const useMenuItemRadio = (props: MenuItemRadioProps): MenuItemRadioState => {
+export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const {
