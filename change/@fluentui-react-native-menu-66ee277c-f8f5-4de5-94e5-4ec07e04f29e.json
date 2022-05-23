@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Implement gap token",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
