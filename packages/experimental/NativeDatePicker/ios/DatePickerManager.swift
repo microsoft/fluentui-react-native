@@ -59,6 +59,19 @@ public class DatePickerManager: NSObject {
                 titles: titles)
         }
     }
+    
+    @objc public func setDefaultCalendarConfiguration(
+        referenceStartDate: Date?,
+        referenceEndDate: Date?
+    ) {
+        if let referenceStartDate = referenceStartDate {
+            CalendarConfiguration.default.referenceStartDate = referenceStartDate
+        }
+        
+        if let referenceEndDate = referenceEndDate {
+            CalendarConfiguration.default.referenceEndDate = referenceEndDate
+        }
+    }
 
     func releaseLastDelegate(_ delegate: DatePickerDelegate) {
         precondition(delegate === lastDelegate, "DatePickerDelegate requested to be released should match the last one initialized.")
