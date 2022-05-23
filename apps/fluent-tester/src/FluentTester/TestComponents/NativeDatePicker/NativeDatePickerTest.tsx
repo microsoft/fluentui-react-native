@@ -20,6 +20,8 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const fixedDates = {
     startDate: NativeDatePicker.parseISOString('2020-02-29T12:25:00.000Z'),
     endDate: NativeDatePicker.parseISOString('2020-03-07T11:55:00.000Z'),
+    referenceStartDate: NativeDatePicker.parseISOString('1990-01-01T00:00:00.000Z'),
+    referenceEndDate: NativeDatePicker.parseISOString('1999-01-01T00:00:00.000Z'),
   };
   const titles = {
     startTitle: 'Start Title',
@@ -36,14 +38,14 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Text variant="headerStandard">Start Date/Time</Text>
+      <Text variant="headerStandard">Selected Start Date/Time</Text>
       <Text variant="subheaderStandard">
         {startDate?.toString()} {'\n'}
       </Text>
 
-      <Text variant="headerStandard">End Date/Time</Text>
+      <Text variant="headerStandard">Selected End Date/Time</Text>
       <Text variant="subheaderStandard">
-        {endDate?.toString()} {'\n'}
+        {endDate?.toString() ?? 'N/A'} {'\n'}
       </Text>
 
       <Button content="Date picker" onClick={() => NativeDatePicker.present({ callback: didPickDates })} />
@@ -100,6 +102,17 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
       <Button
         content="Date time range with custom titles (tabbed)"
         onClick={() => NativeDatePicker.present({ mode: 'dateTimeRange', ...fixedDates, ...titles, callback: didPickDates })}
+      />
+
+      <Text variant="headerStandard">Change default calendar reference start and end dates to 1900 - 1999</Text>
+      <Button
+        content="Update to 1900 - 1999"
+        onClick={() =>
+          NativeDatePicker.setDefaultCalendarConfiguration({
+            referenceStartDate: fixedDates.referenceStartDate,
+            referenceEndDate: fixedDates.referenceEndDate,
+          })
+        }
       />
     </Stack>
   );

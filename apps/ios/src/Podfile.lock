@@ -9,11 +9,11 @@ PODS:
     - React-Core (= 0.64.3)
     - React-jsi (= 0.64.3)
     - ReactCommon/turbomodule/core (= 0.64.3)
-  - FRNAvatar (0.14.18):
+  - FRNAvatar (0.14.31):
     - MicrosoftFluentUI (= 0.5.0)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.0)
     - React
-  - FRNDatePicker (0.4.1):
+  - FRNDatePicker (0.4.2):
     - MicrosoftFluentUI (= 0.5.0)
     - React
   - glog (0.3.5)
@@ -568,9 +568,9 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: 7189a9ff15d719a773adfd8fa4b819ad238d15c3
-  FRNAvatar: 1430d4e7359483316f5b2b322a6924dbed892dce
-  FRNDatePicker: ed80987a29e17c2e26f5b825e726d4a1195aae70
+  FBReactNativeSpec: e46380c3ebf05dc813f8b8e5ca403e47822318f6
+  FRNAvatar: cdd0c28b495bdeb236e292b2f10cc5003d83a9ba
+  FRNDatePicker: cc3390f45f874ecd01e2675563e6bc9c059450db
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   MicrosoftFluentUI: 4c12374f2eab4c8f37b9d0c9a1e96210e96db78e
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
