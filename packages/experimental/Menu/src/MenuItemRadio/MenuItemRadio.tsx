@@ -4,7 +4,10 @@ import { useMenuItemRadio } from './useMenuItemRadio';
 import { MenuItemCheckbox } from '../MenuItemCheckbox/MenuItemCheckbox';
 import { MenuItemCheckboxProps, MenuItemCheckboxType } from '../MenuItemCheckbox/MenuItemCheckbox.types';
 
+export const menuItemRadioName = 'MenuItemRadio';
+
 export const MenuItemRadio = MenuItemCheckbox.compose({
+  displayName: menuItemRadioName,
   useRender: (userProps: MenuItemCheckboxProps, useSlots: UseSlots<MenuItemCheckboxType>) => {
     const menuItem = useMenuItemRadio(userProps);
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer]);
