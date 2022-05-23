@@ -17,14 +17,7 @@ const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap
       // @ts-ignore - TODO, fix typing error
       children = React.Children.map(children, (child: React.ReactChild, index: number) => {
         if (React.isValidElement(child) && index > 0) {
-          return React.cloneElement(
-            child,
-            mergeProps(child.props, {
-              style: {
-                ...{ marginTop: gap },
-              },
-            }),
-          );
+          return React.cloneElement(child, mergeProps(child.props, { style: { marginTop: gap } }));
         }
         return child;
       });
