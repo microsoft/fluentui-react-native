@@ -4,7 +4,7 @@ import { getThemingModule } from './NativeModule/getThemingModule';
 import { CxxException, PlatformDefaultsChangedArgs } from './NativeModule/officeThemingModule';
 import { OfficePalette, Theme, ThemeOptions } from '@fluentui-react-native/theme-types';
 import { createPartialOfficeTheme } from './createPartialOfficeTheme';
-import { createOfficeAliasTokens } from './createOfficeAliasTokens';
+import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './createOfficeAliasTokens';
 import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
 import { createAliasesFromPalette } from './createAliasesFromPalette';
 import { win32Typography } from './getThemeTypography';
@@ -41,7 +41,17 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
       }
 
       return {
-        colors: { ...createOfficeAliasTokens(ref.themeName) },
+        shadows: { ...createOfficeShadowAliasTokens(ref.themeName) },
+        typography: win32Typography(),
+      };
+    },
+    () => {
+      if (!ref.themeName || ref.themeName === '') {
+        return {};
+      }
+
+      return {
+        colors: { ...createOfficeColorAliasTokens(ref.themeName) },
         typography: win32Typography(),
       };
     },

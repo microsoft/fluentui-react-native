@@ -62,7 +62,6 @@ export const getInitials = (name: string): string => {
   if (!name && !validateAlphabeticalCharacters(name)) {
     return '';
   }
-  // prettier-ignore
   const nonWordRegExp = new RegExp('\\W+(?<!\\S-)', 'g');
   const wordsInBracesRegExp = new RegExp('(\\(|\\[|\\{)\\w+(\\)|\\]|\\})', 'g');
   let words = name.replace(wordsInBracesRegExp, ' ').replace(nonWordRegExp, ' ').trim().split(' ');

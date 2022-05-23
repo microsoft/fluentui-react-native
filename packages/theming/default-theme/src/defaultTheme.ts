@@ -2,6 +2,7 @@ import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Varia
 import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { createShadowAliasTokens } from './createAliasTokens';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
@@ -80,6 +81,7 @@ export const defaultFluentTheme: Theme = {
   colors: getStockWebPalette(),
   typography: _defaultTypography(),
   spacing: defaultSpacing(),
+  shadows: createShadowAliasTokens('light'),
   components: {},
   host: { appearance: 'light' },
 };
@@ -87,6 +89,7 @@ export const defaultFluentTheme: Theme = {
 export const defaultFluentDarkTheme: Theme = {
   colors: getStockWebDarkPalette(),
   typography: defaultFluentTheme.typography,
+  shadows: createShadowAliasTokens('dark'),
   spacing: defaultFluentTheme.spacing,
   components: {},
   host: { appearance: 'dark' },
@@ -95,6 +98,7 @@ export const defaultFluentDarkTheme: Theme = {
 export const defaultFluentHighConstrastTheme: Theme = {
   colors: getStockWebHCPalette(),
   typography: defaultFluentTheme.typography,
+  shadows: createShadowAliasTokens('highContrast'),
   spacing: defaultFluentTheme.spacing,
   components: {},
   host: { appearance: 'highContrast' },
