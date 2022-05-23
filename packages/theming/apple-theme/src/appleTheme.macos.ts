@@ -1,5 +1,6 @@
 import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { fallbackApplePalette } from './appleColors.macos';
+import { fallbackAppleShadows } from './appleShadows.macos';
 import { fallbackAppleTypography } from './appleTypography.macos';
 
 export function appleSpacing(): Spacing {
@@ -74,6 +75,7 @@ export function getBaseAppleThemeMacOS(): Theme {
   return {
     colors: fallbackApplePalette(),
     typography: fallbackAppleTypography(),
+    shadows: fallbackAppleShadows(),
     spacing: appleSpacing(),
     components: appleComponents,
     host: { appearance: 'dynamic' },

@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Sat, 21 May 2022 16:18:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- add back elevation as a token (sanajmi@microsoft.com)
+
+## 0.12.1
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Patches
+
+- Separate out elevation from iOS Shadow styles (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @uifabricshared/theming-ramp to v0.16.9
 
 ## 0.12.0
 

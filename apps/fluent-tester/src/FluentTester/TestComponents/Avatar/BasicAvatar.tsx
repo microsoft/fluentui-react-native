@@ -13,12 +13,14 @@ import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
+import TestSvg from '../../test-data/test.svg';
+import { SvgIconProps } from '@fluentui-react-native/icon';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
 const avatarColors: AvatarColor[] = ['neutral', 'brand', 'colorful', ...AvatarColors];
-const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring', 'shadow', 'glow', 'ring-shadow', 'ring-glow'];
+const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
 const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
@@ -59,8 +61,13 @@ export const StandardUsage: FunctionComponent = () => {
   const fontBuiltInProps = {
     fontFamily: 'Arial',
     codepoint: 0x2663,
-    fontSize: 40,
   };
+
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
+  const iconProps = { svgSource: svgProps, width: 20, height: 20, color: 'red' };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
@@ -89,7 +96,9 @@ export const StandardUsage: FunctionComponent = () => {
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-
+      <JSAvatar />
+      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }} size={56} />
+      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }} size={120} />
       <JSAvatar
         active={active}
         activeAppearance={activeAppearance}
@@ -101,17 +110,37 @@ export const StandardUsage: FunctionComponent = () => {
         src={showImage ? satyaPhotoUrl : undefined}
         avatarColor={avatarColor}
       />
+      <JSAvatar
+        active={active}
+        activeAppearance={activeAppearance}
+        size={imageSize === undefinedText ? undefined : imageSize}
+        shape={isSquare ? 'square' : 'circular'}
+        accessibilityLabel="Icon"
+        name="* Richard Faynman *"
+        icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
+        avatarColor={avatarColor}
+      />
       {svgIconsEnabled && (
-        <JSAvatar
-          active={active}
-          activeAppearance={activeAppearance}
-          size={imageSize === undefinedText ? undefined : imageSize}
-          shape={isSquare ? 'square' : 'circular'}
-          accessibilityLabel="Icon"
-          name="* Richard Faynman *"
-          icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
-          avatarColor={avatarColor}
-        />
+        <>
+          <JSAvatar
+            active={active}
+            activeAppearance={activeAppearance}
+            size={imageSize === undefinedText ? undefined : imageSize}
+            shape={isSquare ? 'square' : 'circular'}
+            accessibilityLabel="SVG Icon"
+            icon={iconProps}
+            avatarColor={avatarColor}
+          />
+          <JSAvatar
+            active={active}
+            activeAppearance={activeAppearance}
+            size={imageSize === undefinedText ? undefined : imageSize}
+            shape={isSquare ? 'square' : 'circular'}
+            accessibilityLabel="SVG Icon"
+            icon={{ svgSource: svgProps, width: 20, height: 20 }}
+            avatarColor={avatarColor}
+          />
+        </>
       )}
     </View>
   );

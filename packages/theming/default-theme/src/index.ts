@@ -1,3 +1,3 @@
 export { defaultFluentTheme, defaultFluentDarkTheme } from './defaultTheme';
 export { createDefaultTheme } from './createDefaultTheme';
-export { createAliasTokens } from './createAliasTokens';
+export { createColorAliasTokens as createAliasTokens } from './createAliasTokens';

@@ -121,9 +121,62 @@ const appleComponents = {
   },
 };
 
+// mocked out
+const iOSShadows = {
+  shadow2: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
+    key: { x: 0, y: 1, blur: 2, color: '#00000024' },
+  },
+  shadow4: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
+    key: { x: 0, y: 2, blur: 4, color: '#00000024' },
+  },
+  shadow8: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
+    key: { x: 0, y: 4, blur: 8, color: '#00000024' },
+  },
+  shadow16: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
+    key: { x: 0, y: 8, blur: 16, color: '#00000024' },
+  },
+  shadow28: {
+    ambient: { x: 0, y: 0, blur: 8, color: '#00000033' },
+    key: { x: 0, y: 14, blur: 28, color: '#0000003d' },
+  },
+  shadow64: {
+    ambient: { x: 0, y: 0, blur: 8, color: '#00000033' },
+    key: { x: 0, y: 32, blur: 64, color: '#0000003d' },
+  },
+  shadow2brand: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000004d' },
+    key: { x: 0, y: 1, blur: 2, color: '#00000040' },
+  },
+  shadow4brand: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000004d' },
+    key: { x: 0, y: 2, blur: 4, color: '#00000040' },
+  },
+  shadow8brand: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000004d' },
+    key: { x: 0, y: 4, blur: 8, color: '#00000040' },
+  },
+  shadow16brand: {
+    ambient: { x: 0, y: 0, blur: 2, color: '#0000004d' },
+    key: { x: 0, y: 8, blur: 16, color: '#00000040' },
+  },
+  shadow28brand: {
+    ambient: { x: 0, y: 0, blur: 8, color: '#0000004d' },
+    key: { x: 0, y: 14, blur: 28, color: '#00000040' },
+  },
+  shadow64brand: {
+    ambient: { x: 0, y: 0, blur: 8, color: '#0000004d' },
+    key: { x: 0, y: 32, blur: 64, color: '#00000040' },
+  },
+};
+
 export const BaseAppleLightThemeIOS: Theme = {
   colors: paletteFromAppleColors(false),
   typography: appleTypography(),
+  shadows: iOSShadows,
   spacing: appleSpacing(),
   components: appleComponents,
   host: { appearance: 'light' },
@@ -132,6 +185,7 @@ export const BaseAppleLightThemeIOS: Theme = {
 export const BaseAppleDarkThemeIOS: Theme = {
   colors: paletteFromAppleColors(true),
   typography: appleTypography(),
+  shadows: iOSShadows,
   spacing: appleSpacing(),
   components: appleComponents,
   host: { appearance: 'dark' },
