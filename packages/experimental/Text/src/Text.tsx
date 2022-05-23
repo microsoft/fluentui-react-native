@@ -81,7 +81,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   return (extra: TextProps, children: React.ReactNode) => {
     const mergedProps = {
       numberOfLines: truncate || !wrap ? 1 : 0,
-      onKeyDown: Platform.OS === ('win32' as any || 'windows') ? onKeyDown : undefined,
+      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
       ...rest,
       ...extra,
       style: mergeStyles(tokenStyle, props.style, extra?.style),
