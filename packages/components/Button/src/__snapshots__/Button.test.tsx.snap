@@ -43,20 +43,19 @@ exports[`Button component tests Button circular 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -167,20 +166,19 @@ exports[`Button component tests Button customized 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -231,20 +229,19 @@ exports[`Button component tests Button default 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -296,20 +293,19 @@ exports[`Button component tests Button large 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 16,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -361,20 +357,19 @@ exports[`Button component tests Button primary 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -426,20 +421,19 @@ exports[`Button component tests Button small 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontStyle": "normal",
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -491,20 +485,19 @@ exports[`Button component tests Button square 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
@@ -556,20 +549,19 @@ exports[`Button component tests Button subtle 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
-        "fontStyle": "normal",
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,
         "marginTop": 0,
-        "textDecorationLine": "none",
       }
     }
   >
