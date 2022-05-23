@@ -19,8 +19,7 @@ import { useAsPressable, useKeyDownProps, useViewCommandFocus } from '@fluentui-
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { Svg, G, Path} from 'react-native-svg';
-// import chevronSvg from '../assets/chevron.svg';
+import { Svg, G, Path, SvgProps } from 'react-native-svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
   displayName: submenuItemName,
@@ -120,21 +119,17 @@ export const SubmenuItem = compose<SubmenuItemType>({
       [onItemHoverIn],
     );
 
-    const chevronSvg: React.FunctionComponent<{}> = () => {
+    const chevronSvg: React.FunctionComponent<SvgProps> = (props: SvgProps) => {
       return (
-        <Svg width="12" height="12" viewBox="0 0 2048 2048">
+        <Svg width={props.width} height={props.height} viewBox="0 0 2048 2048" color={props.color}>
           <G transform={I18nManager.isRTL ? 'translate(2048, 0) scale(-1, 1)' : ''}>
-            <Path
-              fill="currentColor"
-              d="M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z"
-            ></Path>
+            <Path fill="currentColor" d="M 743 1767 l -121 -121 l 708 -707 l -708 -708 l 121 -121 l 828 829 z"></Path>
           </G>
         </Svg>
       );
     };
     const svgProps: SvgIconProps = {
       src: chevronSvg,
-      viewBox: '0 0 2048 2048',
     };
 
     /**
@@ -161,7 +156,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       },
       content: { children: text },
       icon: createIconProps(icon),
-      chevron: createIconProps({ svgSource: svgProps }),
+      chevron: createIconProps({ svgSource: svgProps, width: 12, height: 12 }),
     });
 
     return { slotProps, state };
@@ -177,7 +172,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
           {children}
         </Slots.startstack>
         <Slots.endstack>
-          <Slots.chevron color={'red'}/>
+          <Slots.chevron color={'red'} />
         </Slots.endstack>
       </Slots.root>
     );
