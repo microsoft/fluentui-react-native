@@ -1,11 +1,12 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { DismissBehaviors } from '@fluentui-react-native/callout';
+import { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 
 export const menuPopoverName = 'MenuPopover';
 
 export interface MenuPopoverProps extends Omit<IViewProps, 'onPress'> {}
 
 export interface MenuPopoverState {
+  directionalHint?: DirectionalHint;
   dismissBehaviors: DismissBehaviors[];
   onDismiss: () => void;
   setInitialFocus: boolean;
