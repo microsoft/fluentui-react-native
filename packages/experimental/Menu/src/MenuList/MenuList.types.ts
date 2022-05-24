@@ -4,7 +4,9 @@ import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tok
 
 export const menuListName = 'MenuList';
 
-export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {}
+export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
+  gap?: number;
+}
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   checked?: Record<string, boolean>;
@@ -18,7 +20,7 @@ export interface MenuListState extends MenuListProps {
 }
 
 export interface MenuListSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<IViewProps> & { gap?: number };
 }
 export interface MenuListType {
   props: MenuListProps;

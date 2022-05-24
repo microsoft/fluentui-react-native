@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Sat, 21 May 2022 16:18:06 GMT and should not be manually modified.
+This log was last generated on Tue, 24 May 2022 00:36:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.3
+
+Tue, 24 May 2022 00:36:43 GMT
+
+### Patches
+
+- Implement gap token (ruaraki@microsoft.com)
 
 ## 0.9.2
 

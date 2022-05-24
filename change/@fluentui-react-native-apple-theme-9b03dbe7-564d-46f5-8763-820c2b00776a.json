@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add Variants.win32 and win32 typography as part of Office theme",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

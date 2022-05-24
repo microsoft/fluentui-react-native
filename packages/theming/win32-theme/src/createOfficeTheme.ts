@@ -7,6 +7,7 @@ import { createPartialOfficeTheme } from './createPartialOfficeTheme';
 import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from './createOfficeAliasTokens';
 import { createBrandedThemeWithAlias } from './createBrandedThemeWithAlias';
 import { createAliasesFromPalette } from './createAliasesFromPalette';
+import { win32Typography } from './getThemeTypography';
 
 function handlePaletteCall(palette: OfficePalette | CxxException): OfficePalette | undefined {
   const exception = palette as CxxException;
@@ -39,14 +40,20 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
         return {};
       }
 
-      return { shadows: { ...createOfficeShadowAliasTokens(ref.themeName) } };
+      return {
+        shadows: { ...createOfficeShadowAliasTokens(ref.themeName) },
+        typography: win32Typography(),
+      };
     },
     () => {
       if (!ref.themeName || ref.themeName === '') {
         return {};
       }
 
-      return { colors: { ...createOfficeColorAliasTokens(ref.themeName) } };
+      return {
+        colors: { ...createOfficeColorAliasTokens(ref.themeName) },
+        typography: win32Typography(),
+      };
     },
     (theme: Theme) => {
       return createBrandedThemeWithAlias(ref.themeName, theme);
@@ -56,7 +63,10 @@ export function createOfficeTheme(options: ThemeOptions = {}): ThemeReference {
         return {};
       }
 
-      return { colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast') };
+      return {
+        colors: createAliasesFromPalette(theme.host.palette, ref.themeName === 'HighContrast'),
+        typography: win32Typography(),
+      };
     },
   );
 

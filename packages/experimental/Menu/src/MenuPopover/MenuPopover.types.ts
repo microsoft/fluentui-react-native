@@ -8,5 +8,6 @@ export interface MenuPopoverProps extends Omit<IViewProps, 'onPress'> {}
 export interface MenuPopoverState {
   dismissBehaviors: DismissBehaviors[];
   onDismiss: () => void;
+  setInitialFocus: boolean;
   triggerRef: React.RefObject<React.Component>;
 }
