@@ -120,7 +120,7 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
             NativeDatePicker.setDefaultCalendarConfiguration({
               referenceStartDate: value ? fixedDates.overrideReferenceStartDate : fixedDates.defaultReferenceStartDate,
               referenceEndDate: value ? fixedDates.overrideReferenceEndDate : fixedDates.defaultReferenceEndDate,
-              firstWeekday: value ? fixedDates.overrideFirstWeekday : fixedDates.defaultFirstWeekday,
+              //firstWeekday: value ? fixedDates.overrideFirstWeekday : fixedDates.defaultFirstWeekday,
             });
           }}
         />
