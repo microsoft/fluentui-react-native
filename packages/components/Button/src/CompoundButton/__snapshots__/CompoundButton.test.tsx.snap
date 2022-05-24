@@ -50,6 +50,8 @@ exports[`CompoundButton default 1`] = `
     }
   >
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
       style={
         Object {
           "color": "#323130",
@@ -67,6 +69,8 @@ exports[`CompoundButton default 1`] = `
       Default Button
     </Text>
     <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
       style={
         Object {
           "fontFamily": "Segoe UI",

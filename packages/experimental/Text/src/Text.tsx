@@ -1,84 +1,96 @@
 /** @jsx withSlots */
 import {
-  FontTokens,
-  FontVariantTokens,
   fontStyles,
   withSlots,
-  buildUseTokens,
   UseTokens,
   useFluentTheme,
-  applyTokenLayers,
   mergeStyles,
   compressible,
   patchTokens,
+  FontWeightValue,
 } from '@fluentui-react-native/framework';
-import { Text as RNText, ColorValue } from 'react-native';
-import { ITextProps } from '@fluentui-react-native/adapters';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { I18nManager, Platform, Text as RNText } from 'react-native';
+import { textName, TextProps, TextTokens } from './Text.types';
+import { useTextTokens } from './TextTokens';
 import React from 'react';
-
-const textName = 'Text';
-
-/**
- * Text tokens, these are the internally configurable values for Text elements. In particular these
- * drive decisions on how to build the styles
- */
-export interface TextTokens extends FontTokens {
-  /** foreground text color */
-  color?: ColorValue;
-
-  /** alternate mode for disabled look and feel */
-  disabled?: TextTokens;
-}
-
-/**
- * Text props, based off of the standard react-native TextProps with some new extensions
- */
-export type TextProps<TBase = ITextProps> = TBase &
-  FontVariantTokens & {
-    /** foreground text color */
-    color?: ColorValue;
-
-    /** whether or not this text should be presented as disabled */
-    disabled?: boolean;
-  };
-
-const useTextTokens = buildUseTokens<TextTokens>(
-  (t) => ({
-    variant: 'secondaryStandard',
-    color: t.colors.bodyText,
-    disabled: {
-      color: t.colors.disabledText,
-    },
-  }),
-  textName,
-);
 
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
   // split out color and variant from props
-  const { color, variant, style, disabled, ...rest } = props;
+  const {
+    align,
+    block,
+    color,
+    font,
+    italic,
+    size,
+    strikethrough,
+    style,
+    truncate = false,
+    underline,
+    variant,
+    weight,
+    wrap = true,
+    onKeyDown,
+    ...rest
+  } = props;
   const theme = useFluentTheme();
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 
-  // apply states like disabled if specified in props
-  [tokens, cache] = applyTokenLayers(tokens, ['disabled'], cache, (state) => props[state]);
-  // override variant or color from props
-  [tokens, cache] = patchTokens(tokens, cache, { color, variant });
+  const textAlign = I18nManager.isRTL
+    ? align === 'start'
+      ? 'right'
+      : align === 'end'
+      ? 'left'
+      : align
+    : align === 'start'
+    ? 'left'
+    : align === 'end'
+    ? 'right'
+    : align;
+
+  // override tokens from props
+  [tokens, cache] = patchTokens(tokens, cache, {
+    color,
+    variant,
+    fontFamily: font == 'base' ? 'primary' : font,
+    fontSize: globalTokens.font.size[size],
+    fontWeight: globalTokens.font.weight[weight] as FontWeightValue,
+    // leave it undefined for tokens to be set by user
+    fontStyle: italic ? 'italic' : undefined,
+    textAlign: textAlign,
+    textDecorationLine:
+      underline && strikethrough ? 'underline line-through' : underline ? 'underline' : strikethrough ? 'line-through' : undefined,
+  });
 
   // now build the text style from tokens that can be shared between different Text instances
   const [tokenStyle] = cache(
     () => ({
       margin: 0,
       color: tokens.color,
+      fontStyle: tokens.fontStyle,
+      textAlign: tokens.textAlign,
+      textDecorationLine: tokens.textDecorationLine,
       ...fontStyles.from(tokens, theme),
     }),
-    ['color', ...fontStyles.keys],
+    ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
 
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
-    const mergedProps = { ...rest, ...extra, style: mergeStyles(tokenStyle, props.style, extra?.style) };
-    return <RNText {...mergedProps}>{children}</RNText>;
+    const mergedProps = {
+      numberOfLines: truncate || !wrap ? 1 : 0,
+      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+      ...rest,
+      ...extra,
+      style: mergeStyles(tokenStyle, props.style, extra?.style),
+    };
+    return (
+      <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
+        {children}
+      </RNText>
+    );
   };
 }, useTextTokens);
 Text.displayName = textName;

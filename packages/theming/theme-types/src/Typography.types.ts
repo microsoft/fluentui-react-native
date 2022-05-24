@@ -92,6 +92,11 @@ export interface FontWeights {
 export type FontWeight = keyof FontWeights | FontWeightValue;
 
 /**
+ * A font line height value, specified in CSS pixels (px).
+ */
+export type FontLightHeight = number;
+
+/**
  * A font variant value.
  */
 export type VariantValue = {
@@ -117,6 +122,20 @@ export interface Variants {
   heroSemibold: VariantValue;
   heroLargeStandard: VariantValue;
   heroLargeSemibold: VariantValue;
+  //v2 variants
+  caption1?: VariantValue;
+  body1?: VariantValue;
+  body1Strong?: VariantValue;
+  body2?: VariantValue;
+  body2Strong?: VariantValue;
+  subtitle1?: VariantValue;
+  subtitle1Strong?: VariantValue;
+  subtitle2?: VariantValue;
+  subtitle2Strong?: VariantValue;
+  title1?: VariantValue;
+  title1Strong?: VariantValue;
+  largeTitle?: VariantValue;
+  display?: VariantValue;
 }
 
 /**
