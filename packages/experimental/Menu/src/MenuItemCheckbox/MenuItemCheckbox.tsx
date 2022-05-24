@@ -12,7 +12,6 @@ import {
 } from './MenuItemCheckbox.types';
 import { useMenuItemCheckbox } from './useMenuItemCheckbox';
 import { stylingSettings } from './MenuItemCheckbox.styling';
-import { UseStyledSlots } from '@fluentui-react-native/composition';
 
 export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
   displayName: menuItemCheckboxName,
