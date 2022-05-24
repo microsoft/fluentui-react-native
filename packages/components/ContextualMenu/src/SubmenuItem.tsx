@@ -172,7 +172,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
           {children}
         </Slots.startstack>
         <Slots.endstack>
-          <Slots.chevron color={'red'} />
+          <Slots.chevron />
         </Slots.endstack>
       </Slots.root>
     );
