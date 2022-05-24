@@ -75,7 +75,8 @@ const Submenu: React.FunctionComponent = () => {
       </MenuTrigger>
       <MenuPopover>
         <MenuList>
-          <Text>Hello world!!!</Text>
+          <MenuItem content="A nested MenuItem" />
+          <MenuItem content="A second nested MenuItem" />
         </MenuList>
       </MenuPopover>
     </Menu>
