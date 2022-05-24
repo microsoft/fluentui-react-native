@@ -14,7 +14,33 @@ import { useMenuListContext } from '../context/menuListContext';
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
-  // attach the pressable state handlers
+  const { name } = props;
+  const context = useMenuListContext();
+  const checked = context.checked?.[name];
+  const onCheckedChange = context.onCheckedChange;
+
+  const toggleChecked = React.useCallback(
+    (e: InteractionEvent) => {
+      onCheckedChange(e, name, !checked);
+    },
+    [checked, name, onCheckedChange],
+  );
+
+  return useMenuCheckboxInteraction(props, toggleChecked);
+};
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean, checked: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { disabled, checked, ...accessibilityState };
+  }
+  return { disabled, checked };
+}
+
+export const useMenuCheckboxInteraction = (
+  props: MenuItemCheckboxProps,
+  toggleCallback: (e: InteractionEvent) => void,
+): MenuItemCheckboxState => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessibilityActions,
@@ -27,32 +53,25 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
   } = props;
   const context = useMenuListContext();
   const checked = context.checked?.[name];
-  const onCheckedChange = context.onCheckedChange;
 
-  const toggleChecked = React.useCallback(
-    (e: InteractionEvent) => {
-      onCheckedChange(e, name, !checked);
-    },
-    [checked, name, onCheckedChange],
-  );
   // Ensure focus is placed on checkbox after click
-  const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
+  const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleCallback);
 
   const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
   const buttonRef = useViewCommandFocus(componentRef);
 
-  const onKeyProps = useKeyProps(toggleChecked, ' ');
+  const onKeyProps = useKeyProps(toggleCallback, ' ');
   const accessibilityActionsProp = accessibilityActions
     ? [...defaultAccessibilityActions, ...accessibilityActions]
     : defaultAccessibilityActions;
   const onAccessibilityActionProp = React.useCallback(
     (event: AccessibilityActionEvent) => {
       if (event.nativeEvent.actionName === 'Toggle') {
-        toggleChecked(event);
+        toggleCallback(event);
       }
       onAccessibilityAction && onAccessibilityAction(event);
     },
-    [toggleChecked, onAccessibilityAction],
+    [toggleCallback, onAccessibilityAction],
   );
 
   const state = {
@@ -78,11 +97,3 @@ export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheck
     state: state,
   };
 };
-
-const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(disabled: boolean, checked: boolean, accessibilityState?: AccessibilityState) {
-  if (accessibilityState) {
-    return { disabled, checked, ...accessibilityState };
-  }
-  return { disabled, checked };
-}
