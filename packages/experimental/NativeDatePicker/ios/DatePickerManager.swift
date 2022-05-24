@@ -63,19 +63,14 @@ public class DatePickerManager: NSObject {
     
     @objc public func setDefaultCalendarConfiguration(
         referenceStartDate: Date?,
-        referenceEndDate: Date?,
-        firstWeekday: NSNumber?
+        referenceEndDate: Date?
     ) {
         if let referenceStartDate = referenceStartDate {
             CalendarConfiguration.default.referenceStartDate = referenceStartDate
         }
-        
+
         if let referenceEndDate = referenceEndDate {
             CalendarConfiguration.default.referenceEndDate = referenceEndDate
-        }
-        
-        if let firstWeekday = firstWeekday {
-            CalendarConfiguration.default.firstWeekday = firstWeekday.intValue
         }
     }
 

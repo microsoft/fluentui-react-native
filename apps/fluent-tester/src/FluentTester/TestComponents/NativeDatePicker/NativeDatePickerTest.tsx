@@ -24,10 +24,8 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
     endDate: NativeDatePicker.parseISOString('2020-03-07T11:55:00.000Z'),
     overrideReferenceStartDate: NativeDatePicker.parseISOString('1999-01-01T00:00:00.000Z'),
     overrideReferenceEndDate: NativeDatePicker.parseISOString('2000-01-01T00:00:00.000Z'),
-    overrideFirstWeekday: 2,
     defaultReferenceStartDate: new Date(new Date().getFullYear() - 3, 1, 1),
     defaultReferenceEndDate: new Date(new Date().getFullYear() + 7, 1, 1),
-    defaultFirstWeekday: 1,
   };
   const titles = {
     startTitle: 'Start Title',
@@ -120,7 +118,6 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
             NativeDatePicker.setDefaultCalendarConfiguration({
               referenceStartDate: value ? fixedDates.overrideReferenceStartDate : fixedDates.defaultReferenceStartDate,
               referenceEndDate: value ? fixedDates.overrideReferenceEndDate : fixedDates.defaultReferenceEndDate,
-              //firstWeekday: value ? fixedDates.overrideFirstWeekday : fixedDates.defaultFirstWeekday,
             });
           }}
         />
@@ -131,7 +128,6 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
       <Text variant="subheaderStandard">
         Override reference end date: {fixedDates.overrideReferenceEndDate.getUTCFullYear().toString()}
       </Text>
-      <Text variant="subheaderStandard">Override first weekday: {fixedDates.overrideFirstWeekday.toString()}</Text>
     </Stack>
   );
 };

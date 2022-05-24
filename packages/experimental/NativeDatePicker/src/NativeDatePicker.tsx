@@ -68,18 +68,15 @@ NativeDatePicker.present = ({
 interface CalendarConfigurationObject {
   referenceStartDate?: Date;
   referenceEndDate?: Date;
-  firstWeekday?: number;
 }
 
 NativeDatePicker.setDefaultCalendarConfiguration = ({
   referenceStartDate = null,
   referenceEndDate = null,
-  firstWeekday = 1,
 }: CalendarConfigurationObject) => {
   NativeDatePicker.setDefaultCalendarConfigurationWithReferenceStartDate(
     referenceStartDate?.toISOString(),
     referenceEndDate?.toISOString(),
-    firstWeekday,
   );
 };
 
