@@ -1,16 +1,17 @@
 import { Button } from '@fluentui-react-native/button';
-import { Checkbox } from '@fluentui/react-native';
 import { NativeDatePicker } from '@fluentui-react-native/experimental-native-date-picker';
 import { NATIVEDATEPICKER_TESTPAGE } from './consts';
 import { PlatformStatus, Test, TestSection } from '../Test';
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import { Switch, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 
 const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date());
   const [endDate, setEndDate] = React.useState<Date>(null);
+  const [overrideDefaultCalendarConfiguration, setOverrideDefaultCalendarConfiguration] = React.useState(false);
 
   function didPickDates(pickedStartDate: string, pickedEndDate: string) {
     setStartDate(NativeDatePicker.parseISOString(pickedStartDate));
@@ -110,16 +111,20 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
       />
 
       <Text variant="headerStandard">Calendar configuration</Text>
-      <Checkbox
-        label="Override default calendar configuration"
-        onChange={(isChecked: boolean) =>
-          NativeDatePicker.setDefaultCalendarConfiguration({
-            referenceStartDate: isChecked ? fixedDates.referenceStartDate : fixedDates.defaultReferenceStartDate,
-            referenceEndDate: isChecked ? fixedDates.referenceEndDate : fixedDates.defaultReferenceEndDate,
-            firstWeekday: isChecked ? fixedDates.firstWeekday : fixedDates.defaultFirstWeekday,
-          })
-        }
-      />
+      <View style={commonStyles.switch}>
+        <Text>Override default calendar configuration</Text>
+        <Switch
+          value={overrideDefaultCalendarConfiguration}
+          onValueChange={(value) => {
+            setOverrideDefaultCalendarConfiguration(value);
+            NativeDatePicker.setDefaultCalendarConfiguration({
+              referenceStartDate: value ? fixedDates.referenceStartDate : fixedDates.defaultReferenceStartDate,
+              referenceEndDate: value ? fixedDates.referenceEndDate : fixedDates.defaultReferenceEndDate,
+              firstWeekday: value ? fixedDates.firstWeekday : fixedDates.defaultFirstWeekday,
+            });
+          }}
+        />
+      </View>
       <Text variant="subheaderStandard">Override reference start date: {fixedDates.referenceStartDate.getUTCFullYear().toString()}</Text>
       <Text variant="subheaderStandard">Override reference end date: {fixedDates.referenceEndDate.getUTCFullYear().toString()}</Text>
       <Text variant="subheaderStandard">Override first weekday: {fixedDates.firstWeekday.toString()}</Text>
