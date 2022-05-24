@@ -37,6 +37,14 @@ function getAccessibilityStateWorker(disabled: boolean, checked: boolean, access
   return { disabled, checked };
 }
 
+/**
+ * Create interactivity and accessibility props to be passed into the inner render.
+ * This logic is shared between Checkbox and Radio versions of MenuItem.
+ *
+ * @param props Props passed into the outer compoennt
+ * @param toggleCallback Function to be called when item is toggled
+ * @returns Props and additional state needed to render the component
+ */
 export const useMenuCheckboxInteraction = (
   props: MenuItemCheckboxProps,
   toggleCallback: (e: InteractionEvent) => void,
