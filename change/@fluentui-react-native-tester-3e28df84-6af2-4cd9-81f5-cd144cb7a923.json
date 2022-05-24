@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Proper submenu test",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
