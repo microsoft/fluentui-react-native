@@ -5,6 +5,7 @@ import { memoize } from '@fluentui-react-native/framework';
 import { useAsPressable, useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
+import { useMenuTriggerContext } from '../context/menuTriggerContext';
 
 export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   // attach the pressable state handlers
@@ -12,7 +13,8 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
   const pressable = useAsPressable({ ...rest, disabled, onPress: onClick });
   const onKeyProps = useKeyProps(onClick, ' ', 'Enter');
-  const hasSubmenu = useMenuContext().isSubmenu;
+  const isTrigger = useMenuTriggerContext();
+  const hasSubmenu = useMenuContext().isSubmenu && isTrigger;
   const hasCheckmarks = useMenuListContext().hasCheckmarks;
 
   return {

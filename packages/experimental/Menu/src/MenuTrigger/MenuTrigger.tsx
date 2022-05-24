@@ -2,9 +2,10 @@ import React from 'react';
 import { stagedComponent } from '@fluentui-react-native/framework';
 import { menuTriggerName, MenuTriggerProps } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';
+import { MenuTriggerProvider } from '../context/menuTriggerContext';
 
 export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
-  const state = useMenuTrigger(props);
+  const menuTrigger = useMenuTrigger(props);
 
   return (_rest: MenuTriggerProps, children: React.ReactNode) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
@@ -16,9 +17,9 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     }
 
     const child = childrenArray[0];
-    const revised = React.cloneElement(child, state);
+    const revised = React.cloneElement(child, menuTrigger.props);
 
-    return <>{revised}</>;
+    return <MenuTriggerProvider value={menuTrigger.isSubmenu}>{revised}</MenuTriggerProvider>;
   };
 });
 MenuTrigger.displayName = menuTriggerName;
