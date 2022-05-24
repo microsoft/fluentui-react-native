@@ -66,6 +66,7 @@ RCT_EXTERN_METHOD(presentWithMode:(MSFDateTimePickerMode)mode
                   callback:(RCTResponseSenderBlock)callback)
 
 RCT_EXTERN_METHOD(setDefaultCalendarConfigurationWithReferenceStartDate:(nullable NSDate *)referenceStartDate
-                  referenceEndDate:(nullable NSDate *)referenceEndDate)
+                  referenceEndDate:(nullable NSDate *)referenceEndDate
+                  firstWeekday:(nullable NSNumber *)firstWeekday)
 
 @end

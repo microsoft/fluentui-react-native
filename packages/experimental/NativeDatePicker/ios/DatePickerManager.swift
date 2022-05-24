@@ -1,4 +1,5 @@
 import FluentUI
+import Foundation
 
 @objc(FRNDatePickerManager)
 public class DatePickerManager: NSObject {
@@ -62,7 +63,8 @@ public class DatePickerManager: NSObject {
     
     @objc public func setDefaultCalendarConfiguration(
         referenceStartDate: Date?,
-        referenceEndDate: Date?
+        referenceEndDate: Date?,
+        firstWeekday: NSNumber?
     ) {
         if let referenceStartDate = referenceStartDate {
             CalendarConfiguration.default.referenceStartDate = referenceStartDate
@@ -70,6 +72,10 @@ public class DatePickerManager: NSObject {
         
         if let referenceEndDate = referenceEndDate {
             CalendarConfiguration.default.referenceEndDate = referenceEndDate
+        }
+        
+        if let firstWeekday = firstWeekday {
+            CalendarConfiguration.default.firstWeekday = firstWeekday.intValue
         }
     }
 
