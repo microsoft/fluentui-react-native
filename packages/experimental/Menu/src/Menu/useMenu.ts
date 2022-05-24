@@ -9,8 +9,10 @@ export const useMenu = (props: MenuProps): MenuState => {
   const isSubmenu = context.triggerRef !== null;
   const isControlled = typeof props.open !== 'undefined';
   const [open, setOpen] = useMenuOpenState(isControlled, props);
+  const openOnHover = isSubmenu;
 
   return {
+    openOnHover,
     ...props,
     open,
     setOpen,
