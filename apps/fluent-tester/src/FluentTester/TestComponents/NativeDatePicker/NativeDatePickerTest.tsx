@@ -1,4 +1,5 @@
 import { Button } from '@fluentui-react-native/button';
+import { Checkbox } from '@fluentui/react-native';
 import { NativeDatePicker } from '@fluentui-react-native/experimental-native-date-picker';
 import { NATIVEDATEPICKER_TESTPAGE } from './consts';
 import { PlatformStatus, Test, TestSection } from '../Test';
@@ -22,6 +23,10 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
     endDate: NativeDatePicker.parseISOString('2020-03-07T11:55:00.000Z'),
     referenceStartDate: NativeDatePicker.parseISOString('1999-01-01T00:00:00.000Z'),
     referenceEndDate: NativeDatePicker.parseISOString('2000-01-01T00:00:00.000Z'),
+    firstWeekday: 2,
+    defaultReferenceStartDate: new Date(new Date().getFullYear() - 3, 1, 1),
+    defaultReferenceEndDate: new Date(new Date().getFullYear() + 7, 1, 1),
+    defaultFirstWeekday: 1,
   };
   const titles = {
     startTitle: 'Start Title',
@@ -104,16 +109,20 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
         onClick={() => NativeDatePicker.present({ mode: 'dateTimeRange', ...fixedDates, ...titles, callback: didPickDates })}
       />
 
-      <Text variant="headerStandard">Change default calendar reference start and end dates to 1999 - 2000</Text>
-      <Button
-        content="Update to 1999 - 2000"
-        onClick={() =>
+      <Text variant="headerStandard">Calendar configuration</Text>
+      <Checkbox
+        label="Override default calendar configuration"
+        onChange={(isChecked: boolean) =>
           NativeDatePicker.setDefaultCalendarConfiguration({
-            referenceStartDate: fixedDates.referenceStartDate,
-            referenceEndDate: fixedDates.referenceEndDate,
+            referenceStartDate: isChecked ? fixedDates.referenceStartDate : fixedDates.defaultReferenceStartDate,
+            referenceEndDate: isChecked ? fixedDates.referenceEndDate : fixedDates.defaultReferenceEndDate,
+            firstWeekday: isChecked ? fixedDates.firstWeekday : fixedDates.defaultFirstWeekday,
           })
         }
       />
+      <Text variant="subheaderStandard">Override reference start date: {fixedDates.referenceStartDate.getUTCFullYear().toString()}</Text>
+      <Text variant="subheaderStandard">Override reference end date: {fixedDates.referenceEndDate.getUTCFullYear().toString()}</Text>
+      <Text variant="subheaderStandard">Override first weekday: {fixedDates.firstWeekday.toString()}</Text>
     </Stack>
   );
 };
