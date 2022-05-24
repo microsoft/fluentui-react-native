@@ -1,5 +1,5 @@
 import { useMenuContext } from '../context/menuContext';
-import { InteractionEvent, MouseEvent } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
 
 export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
@@ -10,9 +10,9 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const openOnHover = context.openOnHover;
   const triggerRef = context.triggerRef;
 
-  const onHoverIn = (e: MouseEvent) => {
+  const onHoverIn = (e: InteractionEvent) => {
     if (openOnHover) {
-      setOpen(e as any, true /* isOpen */);
+      setOpen(e, true /* isOpen */);
     }
   };
 
