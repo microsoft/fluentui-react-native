@@ -25,7 +25,9 @@ const MenuDefault: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <Text>Hello world!!!</Text>
+            <MenuItem content="A plain MenuItem" />
+            <MenuItem content="A second plain MenuItem" />
+            <MenuItem content="A third plain MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
