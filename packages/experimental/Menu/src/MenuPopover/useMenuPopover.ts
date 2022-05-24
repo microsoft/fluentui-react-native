@@ -17,6 +17,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   // Initial focus behavior differs per platform, Windows platforms move focus
   // automatically onto first element of Callout
   const setInitialFocus = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
+  const accessibilityRole = 'menu';
 
-  return { triggerRef, onDismiss, dismissBehaviors, setInitialFocus };
+  return { accessibilityRole, triggerRef, onDismiss, dismissBehaviors, setInitialFocus };
 };

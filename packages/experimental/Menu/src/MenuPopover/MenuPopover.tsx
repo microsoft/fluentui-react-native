@@ -11,6 +11,7 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
   return (_rest: MenuPopoverProps, children: React.ReactNode) => {
     return (
       <Callout
+        accessibilityRole={state.accessibilityRole}
         borderWidth={1}
         borderColor={theme.colors.neutralStrokeAccessible}
         target={state.triggerRef}
