@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 24 May 2022 00:36:43 GMT",
+      "tag": "@fluentui-react-native/menu_v0.9.3",
+      "version": "0.9.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "f0ea5a1602a636e49778c77f94aae23d6faee485",
+            "comment": "Implement gap token"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 16:18:06 GMT",
       "tag": "@fluentui-react-native/menu_v0.9.2",
       "version": "0.9.2",
