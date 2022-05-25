@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "update packages",
+  "packageName": "@fluentui-react-native/default-theme",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
