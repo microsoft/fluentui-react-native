@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 24 May 2022 00:36:43 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Minor changes
+
+- Add MenuItemRadio (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.20.3
+- Bump @fluentui-react-native/experimental-text to v0.9.0
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/interactive-hooks to v0.15.10
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.14.0
+
+### Patches
+
+- Implement a slight delay on the hover behavior (ruaraki@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Focus first element when popover opens (ruaraki@microsoft.com)
 
 ## 0.9.3
 
