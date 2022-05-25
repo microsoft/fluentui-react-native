@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "beachball sync",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

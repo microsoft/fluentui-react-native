@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:10 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          }
+        ],
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "18480e3fdf2038a34147995f413a45d14f012a73",
+            "comment": "Add text implementation v2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:57 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.16.3",
       "version": "0.16.3",

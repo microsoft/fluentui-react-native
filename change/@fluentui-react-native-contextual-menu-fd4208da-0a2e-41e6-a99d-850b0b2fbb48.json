@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "change to using Svg component",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

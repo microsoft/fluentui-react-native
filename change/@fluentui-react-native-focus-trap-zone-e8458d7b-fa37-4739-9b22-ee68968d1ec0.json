@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "beachball sync",
-  "packageName": "@fluentui-react-native/focus-trap-zone",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

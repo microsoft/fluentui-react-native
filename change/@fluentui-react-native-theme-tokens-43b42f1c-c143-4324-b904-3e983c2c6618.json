@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Version bump for packages to attempt to fix NPM publish pipeline",
-  "packageName": "@fluentui-react-native/theme-tokens",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

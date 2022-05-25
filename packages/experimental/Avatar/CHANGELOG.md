@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Sat, 21 May 2022 17:39:28 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.32
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.37
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/icon to v0.11.25
+- Bump @fluentui-react-native/interactive-hooks to v0.15.10
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.14.0
 
 ## 0.14.31
 
