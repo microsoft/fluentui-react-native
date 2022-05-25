@@ -18,8 +18,9 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   // Initial focus behavior differs per platform, Windows platforms move focus
   // automatically onto first element of Callout
   const setInitialFocus = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
+  const doNotTakePointerCapture = context.openOnHover;
 
-  return { triggerRef, onDismiss, directionalHint, dismissBehaviors, setInitialFocus };
+  return { triggerRef, onDismiss, directionalHint, dismissBehaviors, doNotTakePointerCapture, setInitialFocus };
 };
 
 const getDirectionalHint = (isSubmenu: boolean, isRtl: boolean): DirectionalHint | undefined => {

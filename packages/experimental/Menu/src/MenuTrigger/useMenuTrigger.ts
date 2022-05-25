@@ -1,6 +1,7 @@
 import { useMenuContext } from '../context/menuContext';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
+import { Platform } from 'react-native';
 
 export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const context = useMenuContext();
@@ -10,9 +11,20 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const openOnHover = context.openOnHover;
   const triggerRef = context.triggerRef;
 
+  const delayHover = Platform.select({
+    macos: 100,
+    default: 500, // win32
+  });
+
   const onHoverIn = (e: InteractionEvent) => {
     if (openOnHover) {
       setOpen(e, true /* isOpen */);
+    }
+  };
+
+  const onHoverOut = (e: InteractionEvent) => {
+    if (openOnHover) {
+      setOpen(e, false /* isOpen */);
     }
   };
 
@@ -20,5 +32,8 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
     setOpen(e, !open);
   };
 
-  return { props: { onClick, onHoverIn, componentRef: triggerRef }, isSubmenu: context.isSubmenu };
+  return {
+    props: { onClick, onHoverIn, onHoverOut, componentRef: triggerRef, delayHoverIn: delayHover, delayHoverOut: delayHover },
+    isSubmenu: context.isSubmenu,
+  };
 };
