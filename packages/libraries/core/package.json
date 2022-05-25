@@ -34,7 +34,7 @@
     "@fluentui-react-native/contextual-menu": "0.16.31",
     "@fluentui-react-native/focus-trap-zone": ">=0.8.40 <1.0.0",
     "@fluentui-react-native/focus-zone": ">=0.9.27 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.15.8 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.15.9 <1.0.0",
     "@fluentui-react-native/link": ">=0.15.41 <1.0.0",
     "@fluentui-react-native/menu-button": ">=0.7.63 <1.0.0",
     "@fluentui-react-native/persona": ">=0.12.28 <1.0.0",
@@ -43,7 +43,7 @@
     "@fluentui-react-native/radio-group": ">=0.14.47 <1.0.0",
     "@fluentui-react-native/separator": ">=0.11.28 <1.0.0",
     "@fluentui-react-native/tabs": ">=0.6.46 <1.0.0",
-    "@fluentui-react-native/text": ">=0.11.24 <1.0.0"
+    "@fluentui-react-native/text": ">=0.11.25 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

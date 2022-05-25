@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "beachball sync",
+  "packageName": "@uifabricshared/theming-ramp",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}

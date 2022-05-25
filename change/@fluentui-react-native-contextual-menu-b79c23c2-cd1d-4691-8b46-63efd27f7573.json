@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "beachball sync",
+  "packageName": "@fluentui-react-native/contextual-menu",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}

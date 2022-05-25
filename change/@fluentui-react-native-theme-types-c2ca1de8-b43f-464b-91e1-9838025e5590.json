@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "beachball sync",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
