@@ -28,8 +28,8 @@
   "dependencies": {
     "@fluentui-react-native/contextual-menu": "^0.16.31",
     "@fluentui-react-native/experimental-button": "^0.15.24",
-    "@fluentui-react-native/framework": "0.7.28",
-    "@fluentui-react-native/tokens": ">=0.12.2 <1.0.0",
+    "@fluentui-react-native/framework": "0.7.29",
+    "@fluentui-react-native/tokens": ">=0.13.0 <1.0.0",
     "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
