@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-text",
-  "version": "0.7.29",
+  "version": "0.7.28",
   "description": "A cross-platform Text component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
