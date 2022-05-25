@@ -1,6 +1,15 @@
 import * as React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
+import {
+  Menu,
+  MenuItem,
+  MenuItemCheckbox,
+  MenuItemRadio,
+  MenuTrigger,
+  MenuPopover,
+  MenuList,
+  MenuDivider,
+} from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
@@ -17,6 +26,68 @@ const MenuDefault: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <Text>Hello world!!!</Text>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuCheckmarks: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu defaultChecked={{ itemOne: true }}>
+        <MenuTrigger>
+          <Button>All checkmark items</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItemCheckbox name="itemOne" content="A MenuItem with checkmark" />
+            <MenuDivider />
+            <MenuItemCheckbox name="itemTwo" content="Another MenuItem with checkmark" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <Menu hasCheckmarks checked={{ itemTwo: true }}>
+        <MenuTrigger>
+          <Button>Some controlled checkmark items with alignment</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A plain MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+      <Menu>
+        <MenuTrigger>
+          <Button>Some checkmark items without alignment</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A plain MenuItem" />
+            <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuRadioItem: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu defaultChecked={{ itemOne: true }}>
+        <MenuTrigger>
+          <Button>Items with radio selection</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItemRadio name="itemOne" content="A MenuItem with checkmark" />
+            <MenuItemRadio name="itemTwo" content="Another MenuItem with checkmark" />
+            <MenuItemRadio name="itemThree" content="A third MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -57,11 +128,65 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
+const MenuOpenOnHover: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu openOnHover>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <Submenu />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuControlledOpen: React.FunctionComponent = () => {
+  const [open, setOpen] = React.useState<boolean>(false);
+  return (
+    <Stack style={[stackStyle, { flexDirection: 'row' }]}>
+      <Button onClick={() => setOpen(!open)}>Toggle open</Button>
+      <Menu open={open}>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <Submenu />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
     testID: MENU_TESTPAGE,
     component: MenuDefault,
+  },
+  {
+    name: 'Menu Checkmarks',
+    component: MenuCheckmarks,
+  },
+  {
+    name: 'Menu Radioitem',
+    component: MenuRadioItem,
+  },
+  {
+    name: 'Menu open on hover',
+    component: MenuOpenOnHover,
+  },
+  {
+    name: 'Menu open controlled',
+    component: MenuControlledOpen,
   },
   {
     name: 'Menu Submenu',

@@ -43,6 +43,8 @@ exports[`Button component tests Button circular 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -164,6 +166,8 @@ exports[`Button component tests Button customized 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -225,6 +229,8 @@ exports[`Button component tests Button default 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -287,6 +293,8 @@ exports[`Button component tests Button large 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -349,6 +357,8 @@ exports[`Button component tests Button primary 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
@@ -411,6 +421,8 @@ exports[`Button component tests Button small 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -473,6 +485,8 @@ exports[`Button component tests Button square 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -535,6 +549,8 @@ exports[`Button component tests Button subtle 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",

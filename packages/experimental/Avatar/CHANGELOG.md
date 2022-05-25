@@ -1,8 +1,75 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 05 May 2022 19:08:12 GMT and should not be manually modified.
+This log was last generated on Sat, 21 May 2022 17:39:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.31
+
+Sat, 21 May 2022 17:39:28 GMT
+
+### Patches
+
+- Fixed size customization (v.kozova13@gmail.com)
+
+## 0.14.30
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Added documentation for the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.36
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/icon to v0.11.23
+- Bump @fluentui-react-native/interactive-hooks to v0.15.8
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.14.29
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.35
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/icon to v0.11.22
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/tokens to v0.12.1
+
+## 0.14.28
+
+Thu, 19 May 2022 20:09:25 GMT
+
+### Patches
+
+- Added color generator depending on theme (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.34
+
+## 0.14.27
+
+Tue, 17 May 2022 16:41:49 GMT
+
+### Patches
+
+- Added getInitials method and tests for that (v.kozova13@gmail.com)
+
+## 0.14.26
+
+Tue, 10 May 2022 18:33:23 GMT
+
+### Patches
+
+- Added font and color tokens (v.kozova13@gmail.com)
+
+## 0.14.25
+
+Tue, 10 May 2022 17:20:22 GMT
+
+### Patches
+
+- Changed badge appearance according to the spec, changed sizes to align with Web (v.kozova13@gmail.com)
 
 ## 0.14.24
 

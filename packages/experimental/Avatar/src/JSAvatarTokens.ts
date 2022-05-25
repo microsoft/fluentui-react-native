@@ -10,6 +10,15 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     color: globalTokens.color.white,
     backgroundColor: globalTokens.color.cornflower.primary,
     avatarOpacity: 1,
+    fontFamily: t.typography.families.primary,
+    fontWeight: globalTokens.font.weight.semibold,
+    fontSize: globalTokens.font.size[200],
+    size: 24,
+    iconSize: 16,
+    iconColor: globalTokens.color.white,
+    ringColor: t.colors.transparentStroke,
+    borderColor: globalTokens.color.white,
+    borderWidth: t.host.appearance === 'highContrast' ? 1 : 0,
     circular: {
       borderRadius: globalTokens.corner.radius.circle,
     },
@@ -20,187 +29,172 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
       avatarOpacity: 0.8,
     },
     size20: {
-      width: 20,
-      height: 20,
+      size: 20,
       badgeSize: 'smallest',
-      iconSize: 10,
-      initialsSize: 16,
+      iconSize: 16,
+      fontSize: globalTokens.font.size[100],
+      square: {
+        borderRadius: globalTokens.corner.radius.small,
+      },
     },
     size24: {
-      width: 24,
-      height: 24,
+      size: 24,
       badgeSize: 'smallest',
-      iconSize: 10,
-      initialsSize: 16,
+      iconSize: 16,
+      fontSize: globalTokens.font.size[100],
+      square: {
+        borderRadius: globalTokens.corner.radius.small,
+      },
     },
     size28: {
-      width: 28,
-      height: 28,
+      size: 28,
       badgeSize: 'smaller',
-      iconSize: 16,
-      initialsSize: 20,
+      iconSize: 20,
+      fontWeight: globalTokens.font.weight.semibold,
+      fontSize: globalTokens.font.size[100],
     },
     size32: {
-      width: 32,
-      height: 32,
+      size: 32,
       badgeSize: 'smaller',
-      iconSize: 16,
-      initialsSize: 20,
+      iconSize: 20,
+      fontSize: globalTokens.font.size[100],
     },
     size36: {
-      width: 36,
-      height: 36,
+      size: 36,
       badgeSize: 'smaller',
-      iconSize: 16,
-      initialsSize: 20,
+      iconSize: 20,
     },
     size40: {
-      width: 40,
-      height: 40,
-      badgeSize: 'small',
-      iconSize: 16,
-      initialsSize: 20,
-    },
-    size48: {
-      width: 48,
-      height: 48,
+      size: 40,
       badgeSize: 'small',
       iconSize: 20,
-      initialsSize: 24,
+    },
+    size48: {
+      size: 48,
+      badgeSize: 'small',
+      iconSize: 24,
     },
     size56: {
-      width: 56,
-      height: 56,
+      size: 56,
       badgeSize: 'medium',
-      iconSize: 24,
-      initialsSize: 28,
+      iconSize: 28,
+      fontSize: globalTokens.font.size[400],
+      square: {
+        borderRadius: globalTokens.corner.radius.large,
+      },
     },
     size64: {
-      width: 64,
-      height: 64,
+      size: 64,
       badgeSize: 'large',
-      iconSize: 28,
-      initialsSize: 32,
+      iconSize: 32,
+      fontSize: globalTokens.font.size[500],
+      square: {
+        borderRadius: globalTokens.corner.radius.large,
+      },
     },
     size72: {
-      width: 72,
-      height: 72,
+      size: 72,
       badgeSize: 'large',
-      iconSize: 28,
-      initialsSize: 32,
+      iconSize: 32,
+      fontSize: globalTokens.font.size[500],
+      square: {
+        borderRadius: globalTokens.corner.radius.large,
+      },
     },
     size96: {
-      width: 96,
-      height: 96,
+      size: 96,
       badgeSize: 'largest',
-      iconSize: 40,
-      initialsSize: 48,
+      iconSize: 48,
+      fontWeight: globalTokens.font.weight.regular,
+      fontSize: globalTokens.font.size[700],
+      square: {
+        borderRadius: globalTokens.corner.radius.extraLarge,
+      },
     },
     size120: {
-      width: 120,
-      height: 120,
+      size: 120,
       badgeSize: 'largest',
-      iconSize: 40,
-      initialsSize: 48,
+      iconSize: 48,
+      fontWeight: globalTokens.font.weight.regular,
+      fontSize: globalTokens.font.size[900],
+      square: {
+        borderRadius: globalTokens.corner.radius.extraLarge,
+      },
     },
     neutral: {
       backgroundColor: t.colors.neutralBackground6,
       color: t.colors.neutralForeground3,
-      ringColor: t.colors.defaultBorder,
+      iconColor: t.colors.neutralForeground3,
+      ringColor: t.colors.transparentStroke,
     },
     brand: {
       backgroundColor: t.colors.brandBackgroundStatic,
       color: t.colors.neutralForegroundOnBrand,
-      ringColor: t.colors.brandedBorder,
+      iconColor: t.colors.neutralForegroundOnBrand,
+      ringColor: t.colors.transparentStroke,
     },
-    darkRed: {
-      backgroundColor: globalTokens.color.darkRed.primary,
-    },
-    cranberry: {
-      backgroundColor: globalTokens.color.cranberry.primary,
-    },
-    red: {
-      backgroundColor: globalTokens.color.red.primary,
-    },
-    pumpkin: {
-      backgroundColor: globalTokens.color.pumpkin.primary,
-    },
-    peach: {
-      backgroundColor: globalTokens.color.peach.primary,
-    },
-    marigold: {
-      backgroundColor: globalTokens.color.marigold.primary,
-    },
-    gold: {
-      backgroundColor: globalTokens.color.gold.primary,
-    },
-    brass: {
-      backgroundColor: globalTokens.color.brass.primary,
-    },
-    brown: {
-      backgroundColor: globalTokens.color.brown.primary,
-    },
-    forest: {
-      backgroundColor: globalTokens.color.forest.primary,
-    },
-    seafoam: {
-      backgroundColor: globalTokens.color.seafoam.primary,
-    },
-    darkGreen: {
-      backgroundColor: globalTokens.color.darkGreen.primary,
-    },
-    lightTeal: {
-      backgroundColor: globalTokens.color.lightTeal.primary,
-    },
-    teal: {
-      backgroundColor: globalTokens.color.teal.primary,
-    },
-    steel: {
-      backgroundColor: globalTokens.color.steel.primary,
-    },
-    blue: {
-      backgroundColor: globalTokens.color.blue.primary,
-    },
-    royalBlue: {
-      backgroundColor: globalTokens.color.royalBlue.primary,
-    },
-    cornflower: {
-      backgroundColor: globalTokens.color.cornflower.primary,
-    },
-    navy: {
-      backgroundColor: globalTokens.color.navy.primary,
-    },
-    lavender: {
-      backgroundColor: globalTokens.color.lavender.primary,
-    },
-    purple: {
-      backgroundColor: globalTokens.color.purple.primary,
-    },
-    grape: {
-      backgroundColor: globalTokens.color.grape.primary,
-    },
-    lilac: {
-      backgroundColor: globalTokens.color.lilac.primary,
-    },
-    pink: {
-      backgroundColor: globalTokens.color.pink.primary,
-    },
-    magenta: {
-      backgroundColor: globalTokens.color.magenta.primary,
-    },
-    plum: {
-      backgroundColor: globalTokens.color.plum.primary,
-    },
-    beige: {
-      backgroundColor: globalTokens.color.beige.primary,
-    },
-    mink: {
-      backgroundColor: globalTokens.color.mink.primary,
-    },
-    platinum: {
-      backgroundColor: globalTokens.color.platinum.primary,
-    },
-    anchor: {
-      backgroundColor: globalTokens.color.anchor.primary,
-    },
+    darkRed: getColorProps('darkRed', t),
+    cranberry: getColorProps('cranberry', t),
+    red: getColorProps('red', t),
+    pumpkin: getColorProps('pumpkin', t),
+    peach: getColorProps('peach', t),
+    marigold: getColorProps('marigold', t),
+    gold: getColorProps('gold', t),
+    brass: getColorProps('brass', t),
+    brown: getColorProps('brown', t),
+    forest: getColorProps('forest', t),
+    seafoam: getColorProps('seafoam', t),
+    darkGreen: getColorProps('darkGreen', t),
+    lightTeal: getColorProps('lightTeal', t),
+    teal: getColorProps('teal', t),
+    steel: getColorProps('steel', t),
+    blue: getColorProps('blue', t),
+    royalBlue: getColorProps('royalBlue', t),
+    cornflower: getColorProps('cornflower', t),
+    navy: getColorProps('navy', t),
+    lavender: getColorProps('lavender', t),
+    purple: getColorProps('purple', t),
+    grape: getColorProps('grape', t),
+    lilac: getColorProps('lilac', t),
+    pink: getColorProps('pink', t),
+    magenta: getColorProps('magenta', t),
+    plum: getColorProps('plum', t),
+    beige: getColorProps('beige', t),
+    mink: getColorProps('mink', t),
+    platinum: getColorProps('platinum', t),
+    anchor: getColorProps('anchor', t),
   } as JSAvatarTokens);
+
+/**
+ * A function which returns object of props depending on color and theme.
+ * @param color
+ * @param theme
+ * @returns object of props - backgroundColor, color and ringColor
+ */
+function getColorProps(color: string, theme: Theme) {
+  const themeAppearance = theme.host.appearance;
+  switch (themeAppearance) {
+    case 'light':
+    default:
+      return {
+        backgroundColor: globalTokens.color[color].tint40,
+        color: globalTokens.color[color].shade30,
+        iconColor: globalTokens.color[color].shade30,
+        ringColor: globalTokens.color[color].primary,
+      };
+    case 'dark':
+      return {
+        backgroundColor: globalTokens.color[color].shade30,
+        color: globalTokens.color[color].tint40,
+        iconColor: globalTokens.color[color].tint40,
+        ringColor: globalTokens.color[color].tint30,
+      };
+    case 'highContrast':
+      return {
+        backgroundColor: theme.colors.neutralBackground6,
+        color: theme.colors.neutralForeground3,
+        iconColor: theme.colors.neutralForeground3,
+        ringColor: theme.colors.transparentStroke,
+      };
+  }
+}

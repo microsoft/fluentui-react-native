@@ -1,8 +1,89 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Tue, 24 May 2022 00:36:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.3
+
+Tue, 24 May 2022 00:36:43 GMT
+
+### Patches
+
+- Implement gap token (ruaraki@microsoft.com)
+
+## 0.9.2
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.2
+- Bump @fluentui-react-native/experimental-text to v0.7.28
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/interactive-hooks to v0.15.8
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.9.1
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.1
+- Bump @fluentui-react-native/experimental-text to v0.7.27
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/tokens to v0.12.1
+
+## 0.9.0
+
+Fri, 20 May 2022 19:53:48 GMT
+
+### Minor changes
+
+- Implement MenuDivider (ruaraki@microsoft.com)
+
+## 0.8.0
+
+Fri, 20 May 2022 18:23:41 GMT
+
+### Minor changes
+
+- Implement toggle behavior on MenuItemCheckbox (ruaraki@microsoft.com)
+
+## 0.7.0
+
+Mon, 16 May 2022 17:35:49 GMT
+
+### Minor changes
+
+- Add standup code for hasCheckmarks (ruaraki@microsoft.com)
+
+## 0.6.0
+
+Wed, 11 May 2022 22:26:25 GMT
+
+### Minor changes
+
+- Dismiss and openOnHover (ruaraki@microsoft.com)
+
+## 0.5.2
+
+Wed, 11 May 2022 19:33:59 GMT
+
+### Patches
+
+- Add MenuItemCheckbox (ruaraki@microsoft.com)
+
+## 0.5.1
+
+Tue, 10 May 2022 20:49:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.0
 
 ## 0.5.0
 

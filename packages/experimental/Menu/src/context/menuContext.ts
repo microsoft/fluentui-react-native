@@ -7,8 +7,13 @@ import type { MenuState } from '../Menu/Menu.types';
 export type MenuContextValue = MenuState;
 
 export const MenuContext = React.createContext<MenuContextValue>({
+  isControlled: false,
+  checked: {},
+  defaultChecked: {},
+  hasCheckmarks: false,
   isSubmenu: false,
   open: false,
+  onCheckedChange: () => false,
   setOpen: () => false,
   triggerRef: null,
 });
