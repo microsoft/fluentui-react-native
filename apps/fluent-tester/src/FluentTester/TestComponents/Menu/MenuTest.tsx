@@ -21,7 +21,7 @@ const MenuDefault: React.FunctionComponent = () => {
     <Stack style={stackStyle}>
       <Menu>
         <MenuTrigger>
-          <Button>Test</Button>
+          <Button disabled>Test</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
