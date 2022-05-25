@@ -19,7 +19,7 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     const child = childrenArray[0];
     const revised = React.cloneElement(child, menuTrigger.props);
 
-    return <MenuTriggerProvider value={menuTrigger.isSubmenu}>{revised}</MenuTriggerProvider>;
+    return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
   };
 });
 MenuTrigger.displayName = menuTriggerName;

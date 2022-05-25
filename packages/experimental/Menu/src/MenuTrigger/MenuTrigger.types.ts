@@ -14,5 +14,5 @@ export interface MenuTriggerProps extends Omit<IWithPressableOptions<ViewProps>,
 
 export interface MenuTriggerState {
   props: MenuTriggerProps;
-  isSubmenu: boolean;
+  hasSubmenu: boolean;
 }

@@ -34,6 +34,6 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
 
   return {
     props: { onClick, onHoverIn, onHoverOut, componentRef: triggerRef, delayHoverIn: delayHover, delayHoverOut: delayHover },
-    isSubmenu: context.isSubmenu,
+    hasSubmenu: context.isSubmenu,
   };
 };
