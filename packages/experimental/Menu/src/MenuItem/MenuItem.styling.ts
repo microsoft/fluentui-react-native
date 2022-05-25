@@ -2,7 +2,6 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultMenuItemTokens } from './MenuItemTokens';
 import { menuItemName, MenuItemProps, MenuItemTokens, MenuItemSlotProps } from './MenuItem.types';
-import { I18nManager } from 'react-native';
 
 export const menuItemStates: (keyof MenuItemTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
 
@@ -55,7 +54,6 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
             (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2) +
             ' ' +
             (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2),
-          transform: I18nManager.isRTL && 'translate(2048, 0) scale(-1, 1)',
         };
       },
       ['color'],
