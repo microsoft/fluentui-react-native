@@ -50,7 +50,11 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
           color: tokens.color,
           height: 16,
           width: 16,
-          viewBox: '0 0 ' + (tokens.chevronSize - tokens.chevronPadding * 2) + ' ' + (tokens.chevronSize - tokens.chevronPadding * 2),
+          viewBox:
+            '0 0 ' +
+            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2) +
+            ' ' +
+            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2),
           transform: I18nManager.isRTL && 'translate(2048, 0) scale(-1, 1)',
         };
       },

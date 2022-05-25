@@ -10,8 +10,8 @@ export const menuItemName = 'MenuItem';
 
 export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
   checkmarkSize?: number;
-  chevronPadding?: number;
-  chevronSize?: number;
+  submenuIndicatorPadding?: number;
+  submenuIndicatorSize?: number;
   gap?: number;
 
   disabled?: MenuItemTokens;

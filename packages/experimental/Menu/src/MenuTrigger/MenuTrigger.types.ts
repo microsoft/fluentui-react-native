@@ -5,7 +5,7 @@ export const menuTriggerName = 'MenuTrigger';
 
 export interface MenuTriggerProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   * A RefObject to refer to the trigger component.
    */
   componentRef?: React.RefObject<React.Component>;
 
