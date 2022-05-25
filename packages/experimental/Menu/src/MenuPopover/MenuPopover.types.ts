@@ -8,6 +8,7 @@ export type MenuPopoverProps = ICalloutProps;
 export interface MenuPopoverState {
   accessibilityRole: AccessibilityRole;
   dismissBehaviors: DismissBehaviors[];
+  doNotTakePointerCapture: boolean;
   onDismiss: () => void;
   setInitialFocus: boolean;
   triggerRef: React.RefObject<React.Component>;

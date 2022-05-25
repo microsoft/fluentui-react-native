@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/experimental-text",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:08 GMT",
+      "tag": "@fluentui-react-native/experimental-text_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "18480e3fdf2038a34147995f413a45d14f012a73",
+            "comment": "Add text implementation v2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.30",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.18.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ],
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-text",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 16:18:06 GMT",
       "tag": "@fluentui-react-native/experimental-text_v0.7.28",
       "version": "0.7.28",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:08 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "eaebc100b5c4b73d38ee9e0157c1cccd570c2e4a",
+            "comment": "Add method to set default calendar configuration"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 30 Apr 2022 06:33:42 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.2",
       "version": "0.4.2",

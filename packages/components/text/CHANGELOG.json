@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:09 GMT",
+      "tag": "@fluentui-react-native/text_v0.11.26",
+      "version": "0.11.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.22",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.14.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 16:18:06 GMT",
       "tag": "@fluentui-react-native/text_v0.11.24",
       "version": "0.11.24",

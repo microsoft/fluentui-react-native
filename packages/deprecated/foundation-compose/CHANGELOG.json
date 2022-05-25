@@ -2,6 +2,45 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:10 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.11.22",
+      "version": "1.11.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.13.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.17.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-compose",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.16.11",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:58 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.11.20",
       "version": "1.11.20",

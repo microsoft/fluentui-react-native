@@ -2,6 +2,33 @@
   "name": "@uifabricshared/theming-ramp",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:10 GMT",
+      "tag": "@uifabricshared/theming-ramp_v0.16.11",
+      "version": "0.16.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/theming-ramp",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-ramp",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.17.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:58 GMT",
       "tag": "@uifabricshared/theming-ramp_v0.16.9",
       "version": "0.16.9",
