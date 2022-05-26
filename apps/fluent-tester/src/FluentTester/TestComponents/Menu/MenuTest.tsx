@@ -57,7 +57,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
           <MenuList>
             <MenuItem content="A plain MenuItem" />
             <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
-            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox disabled name="itemThree" content="A disabled MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
