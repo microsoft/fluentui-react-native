@@ -16,7 +16,15 @@ function renderRasterImage(iconProps: IconProps) {
     rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
   );
 
-  return <Image source={iconProps.rasterImageSource.src} style={style} />;
+  return (
+    <Image
+      source={iconProps.rasterImageSource.src}
+      style={style}
+      accessible={true}
+      accessibilityRole="image"
+      accessibilityLabel={iconProps.accessibilityLabel}
+    />
+  );
 }
 
 function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
@@ -64,13 +72,13 @@ function renderSvg(iconProps: IconProps) {
 
   if (svgIconProps.src) {
     return (
-      <View style={style}>
+      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
         <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
-      <View style={style}>
+      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
         <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
