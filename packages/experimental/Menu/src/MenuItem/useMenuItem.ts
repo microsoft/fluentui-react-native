@@ -15,10 +15,12 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const setOpen = useMenuContext().setOpen;
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
-      onClick && onClick(e);
-      setOpen(e, false /*isOpen*/);
+      if (!disabled) {
+        onClick && onClick(e);
+        setOpen(e, false /*isOpen*/);
+      }
     },
-    [onClick, setOpen],
+    [disabled, onClick, setOpen],
   );
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
   const onKeyProps = useKeyProps(onInvoke, ' ', 'Enter');
@@ -35,7 +37,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: true,
-      focusable: !disabled,
+      focusable: true,
       ref: componentRef,
       ...onKeyProps,
     },
