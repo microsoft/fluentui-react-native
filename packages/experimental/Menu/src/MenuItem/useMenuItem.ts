@@ -1,31 +1,58 @@
 import * as React from 'react';
-import { AccessibilityState } from 'react-native';
+import { AccessibilityState, I18nManager } from 'react-native';
 import { MenuItemProps, MenuItemState } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
-import { InteractionEvent, useAsPressable, useKeyProps } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent, isKeyPressEvent, useAsPressable, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
+
+const triggerKeys = [' ', 'Enter'];
+const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
 
 export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const isTrigger = useMenuTriggerContext();
+  const isSubmenu = useMenuContext().isSubmenu;
+  const hasSubmenu = isSubmenu && isTrigger;
+  const isInSubmenu = isSubmenu && !isTrigger;
 
   const setOpen = useMenuContext().setOpen;
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       if (!disabled) {
+        if (
+          isKeyPressEvent(e) &&
+          hasSubmenu &&
+          ((I18nManager.isRTL && e.nativeEvent.key === 'ArrowRight') || (!I18nManager.isRTL && e.nativeEvent.key === 'ArrowLeft'))
+        ) {
+          return;
+        }
+        if (
+          isKeyPressEvent(e) &&
+          isInSubmenu &&
+          ((I18nManager.isRTL && e.nativeEvent.key === 'ArrowLeft') || (!I18nManager.isRTL && e.nativeEvent.key === 'ArrowRight'))
+        ) {
+          return;
+        }
+
         onClick && onClick(e);
-        setOpen(e, false /*isOpen*/);
+        if (!hasSubmenu) {
+          setOpen(e, false /*isOpen*/);
+        }
       }
     },
-    [disabled, onClick, setOpen],
+    [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
   );
+
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
-  const onKeyProps = useKeyProps(onInvoke, ' ', 'Enter');
-  const isTrigger = useMenuTriggerContext();
-  const hasSubmenu = useMenuContext().isSubmenu && isTrigger;
+  const keys = hasSubmenu || isInSubmenu ? submenuTriggerKeys : triggerKeys;
+  /**
+   * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
+   */
+  const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
   const hasCheckmarks = useMenuListContext().hasCheckmarks;
 
   return {
@@ -39,7 +66,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       enableFocusRing: true,
       focusable: true,
       ref: componentRef,
-      ...onKeyProps,
+      ...onKeyDownProps,
     },
     state: pressable.state,
     hasSubmenu,
