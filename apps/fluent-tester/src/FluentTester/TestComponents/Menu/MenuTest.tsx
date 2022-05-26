@@ -11,7 +11,6 @@ import {
   MenuDivider,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -25,7 +24,9 @@ const MenuDefault: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <Text>Hello world!!!</Text>
+            <MenuItem content="A plain MenuItem" />
+            <MenuItem disabled content="A plain MenuItem" />
+            <MenuItem content="A plain MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
