@@ -18,7 +18,7 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     }
 
     const child = childrenArray[0];
-    const revisedState = getRevisedState(menuTrigger.props, child.props);
+    const revisedState = getRevisedState(menuTrigger, child.props);
     const revised = React.cloneElement(child, revisedState);
 
     return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
@@ -30,16 +30,16 @@ const getRevisedState = memoize(getRevisedStateWorker);
 function getRevisedStateWorker(state: MenuTriggerState, props: any): MenuTriggerState {
   const revisedState = { ...state };
   if (props.accessibilityState) {
-    revisedState.accessibilityState = { ...state.accessibilityState, ...props.accessibilityState };
+    revisedState.props.accessibilityState = { ...state.props.accessibilityState, ...props.accessibilityState };
   }
 
   if (props.accessibilityActions) {
-    revisedState.accessibilityActions = { ...state.accessibilityActions, ...props.accessibilityActions };
+    revisedState.props.accessibilityActions = { ...state.props.accessibilityActions, ...props.accessibilityActions };
   }
 
   if (props.onAccessibilityAction) {
-    revisedState.onAccessibilityAction = (e: AccessibilityActionEvent) => {
-      state.onAccessibilityAction(e);
+    revisedState.props.onAccessibilityAction = (e: AccessibilityActionEvent) => {
+      state.props.onAccessibilityAction(e);
       props.onAccessibilityAction(e);
     };
   }
