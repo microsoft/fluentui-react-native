@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Icon accesibility update",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
