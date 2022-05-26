@@ -24,7 +24,7 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
             break;
 
           case 'Collapse':
-            setOpen(e, true /* isOpen */);
+            setOpen(e, false /* isOpen */);
             break;
         }
       }
