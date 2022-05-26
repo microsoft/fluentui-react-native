@@ -11,7 +11,6 @@ import {
   MenuDivider,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
