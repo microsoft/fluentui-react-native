@@ -4,7 +4,8 @@ import { MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
 
-const accessibilityActions = [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }];
+const accessibilityActions =
+  Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
 
 export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const context = useMenuContext();
@@ -16,14 +17,16 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const accessibilityState = context.open ? { expanded: true } : { expanded: false };
   const onAccessibilityAction = React.useCallback(
     (e: AccessibilityActionEvent) => {
-      switch (e.nativeEvent.actionName) {
-        case 'Expand':
-          setOpen(e, true /* isOpen */);
-          break;
+      if (Platform.OS === ('win32' as any)) {
+        switch (e.nativeEvent.actionName) {
+          case 'Expand':
+            setOpen(e, true /* isOpen */);
+            break;
 
-        case 'Collapse':
-          setOpen(e, true /* isOpen */);
-          break;
+          case 'Collapse':
+            setOpen(e, true /* isOpen */);
+            break;
+        }
       }
     },
     [setOpen],
@@ -53,10 +56,10 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   return {
     onClick,
     onHoverIn,
-    onHoverOut,
+    onHoverOut: Platform.OS === ('win32' as any) && onHoverOut,
     componentRef: triggerRef,
     delayHoverIn: delayHover,
-    delayHoverOut: delayHover,
+    delayHoverOut: Platform.OS === ('win32' as any) && delayHover,
     accessibilityState,
     accessibilityActions,
     onAccessibilityAction,
