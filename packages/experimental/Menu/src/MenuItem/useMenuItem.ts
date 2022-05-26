@@ -49,9 +49,8 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
 
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
-  /**
-   * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
-   */
+
+  // Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
   const hasCheckmarks = useMenuListContext().hasCheckmarks;
 
