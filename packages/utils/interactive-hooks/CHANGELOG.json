@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Thu, 26 May 2022 00:33:11 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00",
+            "comment": "Type cleanup"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 May 2022 18:43:09 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.15.10",
       "version": "0.15.10",
