@@ -16,7 +16,8 @@ function renderRasterImage(iconProps: IconProps) {
     rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
   );
 
-  return <Image source={iconProps.rasterImageSource.src} style={style} />;
+  const accessibilityLabel = iconProps.accessibilityLabel ?? 'Image';
+  return <Image source={iconProps.rasterImageSource.src} style={style} accessible={true} accessibilityRole="image" accessibilityLabel={accessibilityLabel}/>;
 }
 
 function fontFamilyFromFontSrcFile(fontSrcFile: string, fontFamily: string): string {
@@ -56,6 +57,7 @@ function renderSvg(iconProps: IconProps) {
   const { width, height, color } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
+  const accessibilityLabel = iconProps.accessibilityLabel ?? 'Image';
 
   // react-native-svg is still on 0.61, and their color prop doesn't handle ColorValue
   // If a color for the icon is not supplied, fall back to white or black depending on appearance
@@ -64,13 +66,13 @@ function renderSvg(iconProps: IconProps) {
 
   if (svgIconProps.src) {
     return (
-      <View style={style}>
+      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
         <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
-      <View style={style}>
+      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
         <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );

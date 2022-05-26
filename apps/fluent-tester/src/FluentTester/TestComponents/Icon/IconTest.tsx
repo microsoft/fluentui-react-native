@@ -72,7 +72,7 @@ const Icons: React.FunctionComponent = () => {
       {showSvgIcons ? (
         <View>
           <Text>SVG icons</Text>
-          <Icon svgSource={svgProps} width={100} height={100} color="orange" />
+          <Icon svgSource={svgProps} width={100} height={100} color="orange" accessibilityLabel='Wheelchair'/>
           {
             // TODO: Causes TypeError: Network request failed on Android
             shouldShowDataUri ? <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" /> : null
