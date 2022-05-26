@@ -1,5 +1,6 @@
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
+import { Platform } from 'react-native';
 import { useMenuContext } from '../context/menuContext';
 import { MenuProps, MenuState } from './Menu.types';
 
@@ -9,6 +10,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const isSubmenu = context.triggerRef !== null;
   const isControlled = typeof props.open !== 'undefined';
   const [open, setOpen] = useMenuOpenState(isControlled, props);
+  const shouldFocusOnContainer = Platform.OS !== ('win32' as any) ? false : props.shouldFocusOnContainer;
 
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
@@ -20,6 +22,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     ...props,
     open,
     setOpen,
+    shouldFocusOnContainer,
     triggerRef,
     isSubmenu,
     isControlled,

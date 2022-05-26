@@ -9,6 +9,13 @@ export interface MenuProps extends MenuListProps {
   open?: boolean;
   onOpenChange?: (e: InteractionEvent, isOpen: boolean) => void;
   openOnHover?: boolean;
+
+  /**
+   * Whether to set initial focus on the contextual menu container.
+   * @default false
+   * @platform win32
+   */
+  shouldFocusOnContainer?: boolean;
 }
 
 export interface MenuState extends MenuProps {

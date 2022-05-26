@@ -139,7 +139,6 @@ const MenuOpenOnHover: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem content="A MenuItem" />
-            <Submenu />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -159,7 +158,25 @@ const MenuControlledOpen: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem content="A MenuItem" />
-            <Submenu />
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
+const MenuContainer: React.FunctionComponent = () => {
+  return (
+    <Stack style={[stackStyle, { flexDirection: 'row' }]}>
+      <Menu shouldFocusOnContainer>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            <MenuItem content="A MenuItem" />
+            <MenuItem content="A MenuItem" />
+            <MenuItem content="A MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -192,6 +209,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Submenu',
     component: MenuSubMenu,
+  },
+  {
+    name: 'Menu focus on container',
+    component: MenuContainer,
   },
 ];
 

@@ -39,10 +39,11 @@ export const MenuList = compose<MenuListType>({
     const contextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList);
 
-    return (_final: MenuListProps, children: React.ReactNode) => {
+    return (final: MenuListProps, children: React.ReactNode) => {
+      const mergedProps = mergeProps(menuList, final);
       return (
         <MenuListProvider value={contextValue}>
-          <Slots.root>{children}</Slots.root>
+          <Slots.root {...mergedProps}>{children}</Slots.root>
         </MenuListProvider>
       );
     };

@@ -15,6 +15,7 @@ export const MenuContext = React.createContext<MenuContextValue>({
   open: false,
   onCheckedChange: () => false,
   setOpen: () => false,
+  shouldFocusOnContainer: false,
   triggerRef: null,
 });
 
