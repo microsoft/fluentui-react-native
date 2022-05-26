@@ -3,9 +3,10 @@ import { memoize, stagedComponent } from '@fluentui-react-native/framework';
 import { menuTriggerName, MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';
 import { AccessibilityActionEvent } from 'react-native';
+import { MenuTriggerProvider } from '../context/menuTriggerContext';
 
 export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
-  const state = useMenuTrigger(props);
+  const menuTrigger = useMenuTrigger(props);
 
   return (_rest: MenuTriggerProps, children: React.ReactNode) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
@@ -17,10 +18,10 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     }
 
     const child = childrenArray[0];
-    const revisedState = getRevisedState(state, child.props);
+    const revisedState = getRevisedState(menuTrigger.props, child.props);
     const revised = React.cloneElement(child, revisedState);
 
-    return <>{revised}</>;
+    return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
   };
 });
 MenuTrigger.displayName = menuTriggerName;

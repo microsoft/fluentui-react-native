@@ -54,14 +54,17 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   };
 
   return {
-    onClick,
-    onHoverIn,
-    onHoverOut: Platform.OS === ('win32' as any) && onHoverOut,
-    componentRef: triggerRef,
-    delayHoverIn: delayHover,
-    delayHoverOut: Platform.OS === ('win32' as any) && delayHover,
-    accessibilityState,
-    accessibilityActions,
-    onAccessibilityAction,
+    props: {
+      onClick,
+      onHoverIn,
+      onHoverOut: Platform.OS === ('win32' as any) && onHoverOut,
+      componentRef: triggerRef,
+      delayHoverIn: delayHover,
+      delayHoverOut: Platform.OS === ('win32' as any) && delayHover,
+      accessibilityState,
+      accessibilityActions,
+      onAccessibilityAction,
+    },
+    hasSubmenu: context.isSubmenu,
   };
 };

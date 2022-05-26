@@ -18,6 +18,7 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
         onDismiss={state.onDismiss}
         dismissBehaviors={state.dismissBehaviors}
         setInitialFocus={state.setInitialFocus}
+        directionalHint={state.directionalHint}
         doNotTakePointerCapture={state.doNotTakePointerCapture}
       >
         {children}
