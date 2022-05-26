@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 26 May 2022 00:33:11 GMT and should not be manually modified.
+This log was last generated on Thu, 26 May 2022 21:22:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.1
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.0
 
 ## 0.16.0
 

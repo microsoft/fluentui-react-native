@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
+This log was last generated on Thu, 26 May 2022 21:22:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.0
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Minor changes
+
+- Icon accesibility update (ruaraki@microsoft.com)
 
 ## 0.11.25
 
