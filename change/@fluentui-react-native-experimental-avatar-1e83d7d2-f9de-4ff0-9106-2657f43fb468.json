@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added font customization, fixed neutral, colorful and brand colors",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
