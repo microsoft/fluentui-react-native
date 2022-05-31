@@ -22,26 +22,29 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const setOpen = useMenuContext().setOpen;
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
-      if (!disabled) {
-        if (
-          isKeyPressEvent(e) &&
-          hasSubmenu &&
-          ((I18nManager.isRTL && e.nativeEvent.key === 'ArrowRight') || (!I18nManager.isRTL && e.nativeEvent.key === 'ArrowLeft'))
-        ) {
-          return;
-        }
-        if (
-          isKeyPressEvent(e) &&
-          isInSubmenu &&
-          ((I18nManager.isRTL && e.nativeEvent.key === 'ArrowLeft') || (!I18nManager.isRTL && e.nativeEvent.key === 'ArrowRight'))
-        ) {
-          return;
-        }
+      if (disabled) {
+        return;
+      }
 
-        onClick && onClick(e);
-        if (!hasSubmenu) {
-          setOpen(e, false /*isOpen*/);
-        }
+      const isRtl = I18nManager.isRTL;
+      if (
+        isKeyPressEvent(e) &&
+        hasSubmenu &&
+        ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'))
+      ) {
+        return;
+      }
+      if (
+        isKeyPressEvent(e) &&
+        isInSubmenu &&
+        ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'))
+      ) {
+        return;
+      }
+
+      onClick && onClick(e);
+      if (!hasSubmenu) {
+        setOpen(e, false /*isOpen*/);
       }
     },
     [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
