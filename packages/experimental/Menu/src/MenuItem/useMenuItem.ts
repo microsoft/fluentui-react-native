@@ -23,7 +23,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessible: true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || props.onClick,
-      accessibilityLabel: props.accessibilityLabel,
+      accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: true,
       focusable: !disabled,

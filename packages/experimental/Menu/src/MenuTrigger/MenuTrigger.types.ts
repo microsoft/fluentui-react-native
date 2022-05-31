@@ -9,6 +9,9 @@ export interface MenuTriggerProps extends Omit<IWithPressableOptions<ViewProps>,
    */
   componentRef?: React.RefObject<React.Component>;
 
+  /**
+   * A callback to call on button click event
+   */
   onClick?: (e: InteractionEvent) => void;
 }
 

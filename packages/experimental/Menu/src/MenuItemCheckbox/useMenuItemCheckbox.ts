@@ -93,7 +93,7 @@ export const useMenuCheckboxInteraction = (
       ...pressable.props,
       accessible: true,
       accessibilityActions: accessibilityActionsProp,
-      accessibilityLabel: props.accessibilityLabel,
+      accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityRole: 'menuitem',
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
       enableFocusRing: true,

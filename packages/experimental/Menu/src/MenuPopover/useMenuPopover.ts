@@ -19,8 +19,9 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   // automatically onto first element of Callout
   const setInitialFocus = Platform.OS === ('win32' as any) || Platform.OS === 'windows';
   const doNotTakePointerCapture = context.openOnHover;
+  const accessibilityRole = 'menu';
 
-  return { triggerRef, onDismiss, directionalHint, dismissBehaviors, doNotTakePointerCapture, setInitialFocus };
+  return { accessibilityRole, triggerRef, onDismiss, directionalHint, dismissBehaviors, doNotTakePointerCapture, setInitialFocus };
 };
 
 const getDirectionalHint = (isSubmenu: boolean, isRtl: boolean): DirectionalHint | undefined => {
