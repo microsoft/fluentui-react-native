@@ -17,6 +17,9 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
       }
     }
 
+    // In order to properly support accessibility without erasing props set on the
+    // child component which may affect accessibility, we need to modify the
+    // state in the inner render so we can access the child component and its props.
     const child = childrenArray[0];
     const revisedState = getRevisedState(menuTrigger, child.props);
     const revised = React.cloneElement(child, revisedState);
