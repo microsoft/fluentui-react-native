@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
+This log was last generated on Tue, 31 May 2022 20:37:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.62.3
+
+Tue, 31 May 2022 20:37:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-expander to v0.3.32
+
+## 0.62.2
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Icon accesibility update (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.39
+- Bump @fluentui-react-native/button to v0.22.26
+- Bump @fluentui-react-native/experimental-avatar to v0.14.34
+- Bump @fluentui-react-native/experimental-button to v0.15.27
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.44
+- Bump @fluentui-react-native/experimental-tabs to v0.4.49
+- Bump @fluentui-react-native/icon to v0.12.0
+- Bump @fluentui-react-native/interactive-hooks to v0.16.1
+- Bump @fluentui-react-native/menu to v0.11.1
+- Bump @fluentui/react-native to v0.29.12
+
+## 0.62.1
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Proper submenu test (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.0.38
+- Bump @fluentui-react-native/button to v0.22.25
+- Bump @fluentui-react-native/experimental-avatar to v0.14.33
+- Bump @fluentui-react-native/experimental-button to v0.15.26
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.43
+- Bump @fluentui-react-native/experimental-tabs to v0.4.48
+- Bump @fluentui-react-native/interactive-hooks to v0.16.0
+- Bump @fluentui-react-native/menu to v0.11.0
+- Bump @fluentui/react-native to v0.29.11
 
 ## 0.62.0
 

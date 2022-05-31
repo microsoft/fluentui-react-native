@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 25 May 2022 18:43:08 GMT and should not be manually modified.
+This log was last generated on Thu, 26 May 2022 21:22:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.34
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.39
+- Bump @fluentui-react-native/icon to v0.12.0
+- Bump @fluentui-react-native/interactive-hooks to v0.16.1
+
+## 0.14.33
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.38
+- Bump @fluentui-react-native/interactive-hooks to v0.16.0
 
 ## 0.14.32
 

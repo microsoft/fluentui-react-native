@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Proper submenu test",
+  "comment": "Create a normal example of a menu",
   "packageName": "@fluentui-react-native/tester",
   "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"

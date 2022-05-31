@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "Implement submenu properly",
+  "comment": "Add accessibility role menu",
   "packageName": "@fluentui-react-native/menu",
   "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"

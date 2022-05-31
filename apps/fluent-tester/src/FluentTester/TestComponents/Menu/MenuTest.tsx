@@ -25,8 +25,8 @@ const MenuDefault: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem content="A plain MenuItem" />
-            <MenuItem disabled content="A plain MenuItem" />
-            <MenuItem content="A plain MenuItem" />
+            <MenuItem disabled content="A second disabled plain MenuItem" />
+            <MenuItem content="A third plain MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>

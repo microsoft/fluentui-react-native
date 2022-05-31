@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Thu, 26 May 2022 21:22:22 GMT",
+      "tag": "@fluentui-react-native/icon_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6",
+            "comment": "Icon accesibility update"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 May 2022 18:43:09 GMT",
       "tag": "@fluentui-react-native/icon_v0.11.25",
       "version": "0.11.25",
