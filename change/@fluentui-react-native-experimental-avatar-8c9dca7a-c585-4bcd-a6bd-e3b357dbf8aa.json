@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added Avatar migration and added image prop",
+  "packageName": "@fluentui-react-native/experimental-avatar",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
