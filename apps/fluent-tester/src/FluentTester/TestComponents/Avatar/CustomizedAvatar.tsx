@@ -4,12 +4,13 @@ import { Switch, View, Text, TextInput } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { FontWeight } from '@fluentui-react-native/theme-types';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
   const [coinColor, setCoinColor] = useState<string>();
   const [textColor, setTextColor] = useState<string>();
-  const [size, setSize] = useState<AvatarSize>(96);
+  const [size, setSize] = useState<string>('96');
   const [iconSize, setIconSize] = useState<number>(24);
   const [initialsSize, setInitialsSize] = useState<number>(16);
   const [fontWeight, setFontWeight] = useState<string>('normal');
@@ -30,9 +31,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       verticalIconAlignment: verticalAlignment,
       iconSize: iconSize,
       fontSize: initialsSize,
-      fontWeight: fontWeight,
-      fontFamily: fontFamily,
-      size,
+      fontWeight: fontWeight as FontWeight,
+      fontFamily,
+      size: parseInt(size) as AvatarSize,
       ringColor,
       ringBackgroundColor,
     };
@@ -93,8 +94,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             placeholder="Avatar size"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              const size = e.nativeEvent.text as unknown as AvatarSize;
-              setSize(size);
+              setSize(e.nativeEvent.text);
             }}
           />
 
@@ -158,9 +158,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       <CustomizedAvatar
         active="active"
         activeAppearance="ring"
+        avatarColor="colorful"
         initials="SB"
         accessibilityLabel="Former CEO of Microsoft"
-        badge={{ status: 'blocked' }}
         src={showImage ? steveBallmerPhotoUrl : undefined}
         ring={
           showRing
