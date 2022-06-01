@@ -3,6 +3,7 @@ import { stagedComponent, useFluentTheme } from '@fluentui-react-native/framewor
 import { Callout } from '@fluentui-react-native/callout';
 import { menuPopoverName, MenuPopoverProps } from './MenuPopover.types';
 import { useMenuPopover } from './useMenuPopover';
+import { View } from 'react-native';
 
 export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
   const state = useMenuPopover(props);
@@ -21,7 +22,9 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
         directionalHint={state.directionalHint}
         doNotTakePointerCapture={state.doNotTakePointerCapture}
       >
-        {children}
+        <View onMouseEnter={state.onMouseEnter} onMouseLeave={state.onMouseLeave}>
+          {children}
+        </View>
       </Callout>
     );
   };

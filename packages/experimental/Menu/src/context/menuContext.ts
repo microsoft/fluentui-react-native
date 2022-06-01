@@ -4,7 +4,10 @@ import type { MenuState } from '../Menu/Menu.types';
 /**
  * Context shared between Menu and its child components
  */
-export type MenuContextValue = MenuState;
+export interface MenuContextValue extends MenuState {
+  triggerHoverOutTimer?: NodeJS.Timeout;
+  setTriggerHoverOutTimer?: (timer: NodeJS.Timeout) => void;
+}
 
 export const MenuContext = React.createContext<MenuContextValue>({
   isControlled: false,
