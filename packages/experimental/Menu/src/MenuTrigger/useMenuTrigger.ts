@@ -39,13 +39,17 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
 
   const onHoverIn = (e: InteractionEvent) => {
     if (openOnHover) {
-      setOpen(e, true /* isOpen */);
+      setTimeout(() => {
+        setOpen(e, true /* isOpen */);
+      }, delayHover);
     }
   };
 
   const onHoverOut = (e: InteractionEvent) => {
     if (openOnHover) {
-      setOpen(e, false /* isOpen */);
+      setTimeout(() => {
+        setOpen(e, false /* isOpen */);
+      }, delayHover);
     }
   };
 
@@ -59,8 +63,6 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
       onHoverIn,
       onHoverOut: Platform.OS === ('win32' as any) && onHoverOut,
       componentRef: triggerRef,
-      delayHoverIn: delayHover,
-      delayHoverOut: Platform.OS === ('win32' as any) && delayHover,
       accessibilityState,
       accessibilityActions,
       onAccessibilityAction,
