@@ -15,9 +15,13 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
+  const accessibilityText = `${name || 'User'}${showBadge ? `, ${badge.status}` : ''}`;
+  const accessibilityHint = 'A picture representing a user';
 
   const imageProps: ImageProps = {
-    accessibilityLabel,
+    accessibilityLabel: accessibilityLabel || accessibilityText,
+    accessibilityHint,
+    accessible: true,
     source: src ? ({ uri: src } as ImageSourcePropType) : undefined,
   };
 
@@ -43,6 +47,8 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
       image: imageProps,
       badge: badgeProps,
       initials: _initials,
+      accessibilityLabel: accessibilityText,
+      accessibilityHint,
     },
     state: {
       ...state,

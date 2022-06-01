@@ -130,6 +130,7 @@ export const StandardUsage: FunctionComponent = () => {
             accessibilityLabel="SVG Icon"
             icon={iconProps}
             avatarColor={avatarColor}
+            badge={{ status: 'outOfOffice' }}
           />
           <JSAvatar
             active={active}
@@ -139,6 +140,7 @@ export const StandardUsage: FunctionComponent = () => {
             accessibilityLabel="SVG Icon"
             icon={{ svgSource: svgProps, width: 20, height: 20 }}
             avatarColor={avatarColor}
+            badge={{ status: 'away' }}
           />
         </>
       )}

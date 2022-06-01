@@ -50,7 +50,10 @@ export const JSAvatar = compose<JSAvatarType>({
     const Slots = useSlots(avatar.props, (layer) => avatarLookup(layer, avatar.state, avatar.props));
 
     return (final: JSAvatarProps) => {
-      const { activeAppearance, icon, initials, image, badge, ...mergedProps } = mergeProps(avatar.props, final);
+      const { accessibilityLabel, accessibilityHint, activeAppearance, icon, initials, image, badge, ...mergedProps } = mergeProps(
+        avatar.props,
+        final,
+      );
       const { showRing, transparentRing, showBadge } = avatar.state;
       const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
       const fallBackIconXml = `<svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +66,7 @@ export const JSAvatar = compose<JSAvatarType>({
           {image.source ? (
             <Slots.image {...image} />
           ) : (
-            <Slots.initialsBackground>
+            <Slots.initialsBackground accessible={true} accessibilityLabel={accessibilityLabel} accessibilityHint={accessibilityHint}>
               {initials ? (
                 <Slots.initials>{initials}</Slots.initials>
               ) : userProps.icon ? (
