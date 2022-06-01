@@ -14,7 +14,6 @@
 ### Props that remain as is
 
 - `icon`
-- `idForColor`
 - `initials`
 - `size`
 
@@ -31,9 +30,10 @@
 
 - `active`
 - `activeAppearance` - According to Web spec there should be `ring`, `shadow`, `glow`, `ring-shadow`, `ring-glow`.
-  Currently we support only `ring`. `activeAppearance` can be used when `active` prop set to `active`
+  Currently we support only `ring`. `activeAppearance` can be used when `active` prop set to `active`.
 - `name` - is used for generation initials with `getInitials` method.
 - `shape` - can be `circular` and `square`.
+- `idForColor`
 
 ### Tokens that remain as is
 
@@ -146,7 +146,7 @@ Color tokens:
 |                    | `badge`              |
 | `coinColorFluent`  | `avatarColor`        |
 | `icon`             | `icon`               |
-| `idForColor`       | `idForColor`         |
+|                    | `idForColor`         |
 | `imageUrl`         | `iamge`              |
 | `imageDescription` | `accessibilityLabel` |
 | `isOutOfOffice`    |                      |
