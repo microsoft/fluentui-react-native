@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 01 Jun 2022 18:18:40 GMT",
+      "tag": "@fluentui-react-native/menu_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7c7b95a0c0697315aefdbb1a849e0017dcfc63c2",
+            "comment": "Fix keyboarding"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Jun 2022 00:08:47 GMT",
       "tag": "@fluentui-react-native/menu_v0.12.0",
       "version": "0.12.0",

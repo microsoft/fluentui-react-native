@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 01 Jun 2022 18:18:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.5",
+      "version": "0.62.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7c7b95a0c0697315aefdbb1a849e0017dcfc63c2",
+            "comment": "Create a normal example of a menu"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.13.0",
+            "commit": "7db4e834c3801fb475ea02757b78051bf78cf11e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Jun 2022 00:08:47 GMT",
       "tag": "@fluentui-react-native/tester_v0.62.4",
       "version": "0.62.4",
