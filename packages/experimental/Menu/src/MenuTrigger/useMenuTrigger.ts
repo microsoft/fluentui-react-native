@@ -9,13 +9,9 @@ const accessibilityActions =
 
 export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const context = useMenuContext();
+  const { open, openOnHover, popoverHoverOutTimer, setOpen, setTriggerHoverOutTimer, triggerHoverOutTimer, triggerRef } = context;
 
-  const setOpen = context.setOpen;
-  const open = context.open;
-  const openOnHover = context.openOnHover;
-  const triggerRef = context.triggerRef;
-  const accessibilityState = context.open ? { expanded: true } : { expanded: false };
-  const setTriggerHoverOutTimer = context.setTriggerHoverOutTimer;
+  const accessibilityState = open ? { expanded: true } : { expanded: false };
 
   const onAccessibilityAction = React.useCallback(
     (e: AccessibilityActionEvent) => {
@@ -42,12 +38,14 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const onHoverIn = React.useCallback(
     (e: InteractionEvent) => {
       if (openOnHover) {
+        clearTimeout(popoverHoverOutTimer);
+        clearTimeout(triggerHoverOutTimer);
         setTimeout(() => {
           setOpen(e, true /* isOpen */);
         }, delayHover);
       }
     },
-    [openOnHover, setOpen, delayHover],
+    [openOnHover, setOpen, delayHover, triggerHoverOutTimer, popoverHoverOutTimer],
   );
 
   const onHoverOut = React.useCallback(

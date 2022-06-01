@@ -7,7 +7,8 @@ import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   const context = useMenuContext();
-  const { setOpen, triggerRef, isControlled, isSubmenu, openOnHover, triggerHoverOutTimer } = context;
+  const { setOpen, triggerRef, isControlled, isSubmenu, openOnHover, popoverHoverOutTimer, setPopoverHoverOutTimer, triggerHoverOutTimer } =
+    context;
 
   const onDismiss = React.useCallback(() => setOpen(undefined, false /* isOpen */), [setOpen]);
   const dismissBehaviors = isControlled ? (['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[]) : undefined;
@@ -19,20 +20,18 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   const doNotTakePointerCapture = openOnHover;
   const accessibilityRole = 'menu';
 
-  const [timer, setTimer] = React.useState<NodeJS.Timeout>();
   const onMouseEnter = React.useCallback(() => {
     clearTimeout(triggerHoverOutTimer);
-    clearTimeout(timer);
-  }, [timer, triggerHoverOutTimer]);
+    clearTimeout(popoverHoverOutTimer);
+  }, [popoverHoverOutTimer, triggerHoverOutTimer]);
   const onMouseLeave = React.useCallback(
     (e: InteractionEvent) => {
-      setTimer(
-        setTimeout(() => {
-          setOpen(e, false /* isOpen */);
-        }, 500),
-      );
+      const timer = setTimeout(() => {
+        setOpen(e, false /* isOpen */);
+      }, 500);
+      setPopoverHoverOutTimer(timer);
     },
-    [setOpen, setTimer],
+    [setOpen, setPopoverHoverOutTimer],
   );
 
   return {

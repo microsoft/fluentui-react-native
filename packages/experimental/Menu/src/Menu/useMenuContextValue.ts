@@ -4,5 +4,6 @@ import { MenuState } from './Menu.types';
 
 export const useMenuContextValue = (state: MenuState): MenuContextValue => {
   const [triggerHoverOutTimer, setTriggerHoverOutTimer] = React.useState<NodeJS.Timeout | undefined>();
-  return { ...state, triggerHoverOutTimer, setTriggerHoverOutTimer };
+  const [popoverHoverOutTimer, setPopoverHoverOutTimer] = React.useState<NodeJS.Timeout>();
+  return { ...state, popoverHoverOutTimer, triggerHoverOutTimer, setPopoverHoverOutTimer, setTriggerHoverOutTimer };
 };
