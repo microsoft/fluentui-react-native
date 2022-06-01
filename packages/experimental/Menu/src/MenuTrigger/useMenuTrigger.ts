@@ -37,25 +37,34 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
     default: 500, // win32
   });
 
-  const onHoverIn = (e: InteractionEvent) => {
-    if (openOnHover) {
-      setTimeout(() => {
-        setOpen(e, true /* isOpen */);
-      }, delayHover);
-    }
-  };
+  const onHoverIn = React.useCallback(
+    (e: InteractionEvent) => {
+      if (openOnHover) {
+        setTimeout(() => {
+          setOpen(e, true /* isOpen */);
+        }, delayHover);
+      }
+    },
+    [openOnHover, setOpen, delayHover],
+  );
 
-  const onHoverOut = (e: InteractionEvent) => {
-    if (openOnHover) {
-      setTimeout(() => {
-        setOpen(e, false /* isOpen */);
-      }, delayHover);
-    }
-  };
+  const onHoverOut = React.useCallback(
+    (e: InteractionEvent) => {
+      if (openOnHover) {
+        setTimeout(() => {
+          setOpen(e, false /* isOpen */);
+        }, delayHover);
+      }
+    },
+    [openOnHover, setOpen, delayHover],
+  );
 
-  const onClick = (e: InteractionEvent) => {
-    setOpen(e, !open);
-  };
+  const onClick = React.useCallback(
+    (e: InteractionEvent) => {
+      setOpen(e, !open);
+    },
+    [open, setOpen],
+  );
 
   return {
     props: {
