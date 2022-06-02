@@ -11,12 +11,15 @@ export const MenuPopover = stagedComponent((props: MenuPopoverProps) => {
   return (_rest: MenuPopoverProps, children: React.ReactNode) => {
     return (
       <Callout
+        accessibilityRole={state.accessibilityRole}
         borderWidth={1}
         borderColor={theme.colors.neutralStrokeAccessible}
         target={state.triggerRef}
         onDismiss={state.onDismiss}
         dismissBehaviors={state.dismissBehaviors}
         setInitialFocus={state.setInitialFocus}
+        directionalHint={state.directionalHint}
+        doNotTakePointerCapture={state.doNotTakePointerCapture}
       >
         {children}
       </Callout>

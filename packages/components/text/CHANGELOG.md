@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Sat, 21 May 2022 16:18:06 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.26
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.22
+- Bump @fluentui-react-native/tokens to v0.14.0
 
 ## 0.11.24
 

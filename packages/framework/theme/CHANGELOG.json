@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Wed, 25 May 2022 18:43:09 GMT",
+      "tag": "@fluentui-react-native/theme_v0.6.11",
+      "version": "0.6.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.17.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 21 May 2022 01:47:58 GMT",
       "tag": "@fluentui-react-native/theme_v0.6.9",
       "version": "0.6.9",

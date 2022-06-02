@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Sat, 21 May 2022 01:47:57 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Wed, 25 May 2022 18:43:07 GMT
+
+### Minor changes
+
+- add Variants.win32 and win32 typography as part of Office theme (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theme to v0.6.11
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
 
 ## 0.8.0
 

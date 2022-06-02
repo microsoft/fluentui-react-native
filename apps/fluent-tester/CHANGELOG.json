@@ -2,6 +2,434 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 02 Jun 2022 09:23:22 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.6",
+      "version": "0.62.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "246105f999eb8e2592029e4ed34291ffec603c60",
+            "comment": "Added font customization, fixed neutral, colorful and brand colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.35",
+            "commit": "246105f999eb8e2592029e4ed34291ffec603c60"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Jun 2022 18:18:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.5",
+      "version": "0.62.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7c7b95a0c0697315aefdbb1a849e0017dcfc63c2",
+            "comment": "Create a normal example of a menu"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.13.0",
+            "commit": "7db4e834c3801fb475ea02757b78051bf78cf11e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Jun 2022 00:08:47 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.4",
+      "version": "0.62.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d8e53b094ad51baa4c0ef7761345c2711f433914",
+            "comment": "Create a normal example of a menu"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.12.0",
+            "commit": "5594a5195c640250cda3791efcdde8f6a7169518"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 May 2022 20:37:12 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.3",
+      "version": "0.62.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.3.32",
+            "commit": "d8e53b094ad51baa4c0ef7761345c2711f433914"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 21:22:22 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.2",
+      "version": "0.62.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6",
+            "comment": "Icon accesibility update"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.39",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/button to v0.22.26",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.34",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.27",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.11.9",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.44",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.4.49",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/icon to v0.12.0",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.1",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.11.1",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.29.12",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 00:33:11 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.1",
+      "version": "0.62.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00",
+            "comment": "Proper submenu test"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.38",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/button to v0.22.25",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.33",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.26",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.11.8",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.43",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.4.48",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.0",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.11.0",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.29.11",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:09 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.0",
+      "version": "0.62.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "cf2154459c5d89e0917af1daf2d559c4bc3e5644",
+            "comment": "Add MenuItemRadio test"
+          },
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "eaebc100b5c4b73d38ee9e0157c1cccd570c2e4a",
+            "comment": "Add method to set default calendar configuration"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          }
+        ],
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "18480e3fdf2038a34147995f413a45d14f012a73",
+            "comment": {
+              "title": "",
+              "value": ""
+            }
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/android-theme to v0.10.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.12.3",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.37",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/button to v0.22.24",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.13.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.5.29",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.32",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.25",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.11.7",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-drawer to v0.1.13",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.4.3",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-expander to v0.3.31",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.42",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shimmer to v0.6.33",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.4.47",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.30",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.25",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.10",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.10.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/stack to v0.6.29",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/theme to v0.6.11",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.17.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.13.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.19.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.29.10",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 May 2022 00:36:43 GMT",
       "tag": "@fluentui-react-native/tester_v0.61.10",
       "version": "0.61.10",

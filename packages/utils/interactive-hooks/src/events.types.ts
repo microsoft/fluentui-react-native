@@ -1,10 +1,18 @@
 import { AccessibilityActionEvent, GestureResponderEvent } from 'react-native';
-import { KeyPressEvent } from './Pressability/CoreEventTypes';
+import { KeyPressEvent, MouseEvent } from './Pressability/CoreEventTypes';
 
-export type InteractionEvent = GestureResponderEvent | KeyPressEvent | AccessibilityActionEvent;
+export type InteractionEvent = GestureResponderEvent | MouseEvent | KeyPressEvent | AccessibilityActionEvent;
 
 export const isGestureResponderEvent = (e: InteractionEvent): e is GestureResponderEvent => {
   if ('touches' in e.nativeEvent) {
+    return true;
+  }
+
+  return false;
+};
+
+export const isMouseEvent = (e: InteractionEvent): e is MouseEvent => {
+  if ('clientX' in e.nativeEvent) {
     return true;
   }
 

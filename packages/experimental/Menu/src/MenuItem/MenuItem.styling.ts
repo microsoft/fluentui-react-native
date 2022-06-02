@@ -47,6 +47,13 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
       (tokens: MenuItemTokens) => {
         return {
           color: tokens.color,
+          height: 16,
+          width: 16,
+          viewBox:
+            '0 0 ' +
+            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2) +
+            ' ' +
+            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2),
         };
       },
       ['color'],

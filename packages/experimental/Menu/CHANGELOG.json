@@ -2,6 +2,155 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 01 Jun 2022 18:18:40 GMT",
+      "tag": "@fluentui-react-native/menu_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7c7b95a0c0697315aefdbb1a849e0017dcfc63c2",
+            "comment": "Fix keyboarding"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Jun 2022 00:08:47 GMT",
+      "tag": "@fluentui-react-native/menu_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "d8e53b094ad51baa4c0ef7761345c2711f433914",
+            "comment": "Add accessibility role menu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 21:22:22 GMT",
+      "tag": "@fluentui-react-native/menu_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.5",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.1",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 00:33:11 GMT",
+      "tag": "@fluentui-react-native/menu_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00",
+            "comment": "Implement submenu properly"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.4",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.0",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:09 GMT",
+      "tag": "@fluentui-react-native/menu_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "cf2154459c5d89e0917af1daf2d559c4bc3e5644",
+            "comment": "Add MenuItemRadio"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.3",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.30",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.10",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.18.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.14.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ],
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "ee63b639bdf529d774b51e6a87d3ba608c029249",
+            "comment": "Implement a slight delay on the hover behavior"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "5fdd7f9b6346ef953f50340cf07fca832aece25c",
+            "comment": "Focus first element when popover opens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 24 May 2022 00:36:43 GMT",
       "tag": "@fluentui-react-native/menu_v0.9.3",
       "version": "0.9.3",
