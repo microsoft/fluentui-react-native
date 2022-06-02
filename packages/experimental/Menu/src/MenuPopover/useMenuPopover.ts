@@ -27,12 +27,16 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   }, [popoverHoverOutTimer, triggerHoverOutTimer]);
   const onMouseLeave = React.useCallback(
     (e: InteractionEvent) => {
+      if (!openOnHover) {
+        return;
+      }
+
       const timer = setTimeout(() => {
         setOpen(e, false /* isOpen */);
       }, 500);
       setPopoverHoverOutTimer(timer);
     },
-    [setOpen, setPopoverHoverOutTimer],
+    [openOnHover, setOpen, setPopoverHoverOutTimer],
   );
 
   return {
