@@ -60,7 +60,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     [componentRef, onHoverIn, disabled],
   );
 
-  const pressable = useAsPressable({ ...rest, disabled, onHoverInWithFocus, onPress: onInvoke });
+  const pressable = useAsPressable({ ...rest, disabled, onHoverIn: onHoverInWithFocus, onPress: onInvoke });
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.

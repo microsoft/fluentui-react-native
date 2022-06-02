@@ -22,7 +22,7 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     // state in the inner render so we can access the child component and its props.
     const child = childrenArray[0];
     const revisedState = getRevisedState(menuTrigger, child.props);
-    const revised = React.cloneElement(child, revisedState);
+    const revised = React.cloneElement(child, revisedState.props);
 
     return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
   };

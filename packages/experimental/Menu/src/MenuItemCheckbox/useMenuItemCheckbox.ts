@@ -78,7 +78,7 @@ export const useMenuCheckboxInteraction = (
     [componentRef, onHoverIn, disabled],
   );
 
-  const pressable = useAsPressable({ ...rest, disabled, onHoverInWithFocus, onPress: toggleCheckedWithFocus });
+  const pressable = useAsPressable({ ...rest, disabled, onHoverIn: onHoverInWithFocus, onPress: toggleCheckedWithFocus });
   const buttonRef = useViewCommandFocus(componentRef);
 
   const onKeyProps = useKeyProps(toggleCallback, ' ');
