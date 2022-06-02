@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 01 Jun 2022 18:18:40 GMT and should not be manually modified.
+This log was last generated on Thu, 02 Jun 2022 09:23:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.62.6
+
+Thu, 02 Jun 2022 09:23:22 GMT
+
+### Patches
+
+- Added font customization, fixed neutral, colorful and brand colors (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.35
 
 ## 0.62.5
 
