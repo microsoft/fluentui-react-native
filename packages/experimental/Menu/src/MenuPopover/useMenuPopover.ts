@@ -3,7 +3,6 @@ import { I18nManager, Platform } from 'react-native';
 import { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 import { useMenuContext } from '../context/menuContext';
 import { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { isCloseOnHoverOutEnabled } from '../consts';
 
 export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
@@ -35,31 +34,32 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     clearTimeout(popoverHoverOutTimer);
     clearTimeout(parentPopoverHoverOutTimer);
   }, [parentPopoverHoverOutTimer, popoverHoverOutTimer, triggerHoverOutTimer]);
-  const onMouseLeave = React.useCallback(
-    (e: InteractionEvent) => {
-      if (!openOnHover) {
-        return;
-      }
+  const onMouseLeave = React.useCallback(() => {
+    if (!openOnHover) {
+      return;
+    }
 
-      const timer = setTimeout(() => {
-        setOpen(e, false /* isOpen */);
-      }, 500);
-      console.log('popoverout');
-      setPopoverHoverOutTimer(timer);
-    },
-    [openOnHover, setOpen, setPopoverHoverOutTimer],
-  );
+    const timer = setTimeout(() => {
+      setOpen(undefined, false /* isOpen */);
+    }, 500);
+    console.log('popoverout');
+    setPopoverHoverOutTimer(timer);
+  }, [openOnHover, setOpen, setPopoverHoverOutTimer]);
 
   return {
-    accessibilityRole,
-    triggerRef,
-    onDismiss,
-    onMouseEnter,
-    onMouseLeave: isCloseOnHoverOutEnabled && onMouseLeave,
-    directionalHint,
-    dismissBehaviors,
-    doNotTakePointerCapture,
-    setInitialFocus,
+    props: {
+      accessibilityRole,
+      target: triggerRef,
+      onDismiss,
+      directionalHint,
+      dismissBehaviors,
+      doNotTakePointerCapture,
+      setInitialFocus,
+    },
+    innerView: {
+      onMouseEnter,
+      onMouseLeave: isCloseOnHoverOutEnabled && onMouseLeave,
+    },
   };
 };
 
