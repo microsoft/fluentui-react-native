@@ -3690,9 +3690,9 @@ appium-windows-driver@^2.0.1:
     teen_process "^1.7.0"
 
 appium@^2.0.0-beta.27:
-  version "2.0.0-beta.37"
-  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.37.tgz#d94e1710e62157486d81e89fedb47ac27c43a490"
-  integrity sha512-bvnEEQFIUwr4T0ma/VVvHoAWFGLn007iEfUjZAvdObXi+q0oGep5Kb49mobsJNGfMtbvHCSVxoRg47388TWfKA==
+  version "2.0.0-beta.38"
+  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.38.tgz#e2819bb40039e1aa5b91368a0ec56e74df9e257c"
+  integrity sha512-SQi9iUXqSlCC8sODpT8t3PumWlH/Y5OdxeLuRpN/NYKaJ0XbVbxFVJicSVrbh18ykdrnbYRmuFe4UU/MQx2ppA==
   dependencies:
     "@appium/base-driver" "^8.5.5"
     "@appium/base-plugin" "^1.9.1"
