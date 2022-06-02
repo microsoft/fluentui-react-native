@@ -5,4 +5,4 @@ export const delayHover = Platform.select({
   default: 500, // win32
 });
 
-export const isCloseOnHoverOutEnabled = Platform.OS === ('win32' as any);
+export const isCloseOnHoverOutEnabled = true;

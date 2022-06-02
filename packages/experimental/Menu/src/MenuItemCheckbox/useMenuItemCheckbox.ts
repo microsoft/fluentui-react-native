@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+import { AccessibilityActionEvent, AccessibilityState, Platform } from 'react-native';
 import { MenuItemCheckboxProps, MenuItemCheckboxState } from './MenuItemCheckbox.types';
 import { memoize } from '@fluentui-react-native/framework';
 import {
@@ -67,7 +67,13 @@ export const useMenuCheckboxInteraction = (
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleCallback);
 
-  const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
+  const onHover = React.useCallback(() => {
+    if (!disabled) {
+      componentRef.current.focus();
+    }
+  }, [componentRef, disabled]);
+
+  const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, onHoverIn: onHover, ...rest });
   const buttonRef = useViewCommandFocus(componentRef);
 
   const onKeyProps = useKeyProps(toggleCallback, ' ');
@@ -100,7 +106,10 @@ export const useMenuCheckboxInteraction = (
       accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityRole: 'menuitem',
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
-      enableFocusRing: true,
+      enableFocusRing: Platform.select({
+        macos: false,
+        default: true, // win32
+      }),
       focusable: true,
       onAccessibilityAction: onAccessibilityActionProp,
       ref: buttonRef,

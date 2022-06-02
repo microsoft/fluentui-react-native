@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AccessibilityState, I18nManager } from 'react-native';
+import { AccessibilityState, I18nManager, Platform } from 'react-native';
 import { MenuItemProps, MenuItemState } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
 import { InteractionEvent, isKeyPressEvent, useAsPressable, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
@@ -50,7 +50,13 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
   );
 
-  const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
+  const onHover = React.useCallback(() => {
+    if (!disabled) {
+      componentRef.current.focus();
+    }
+  }, [componentRef, disabled]);
+
+  const pressable = useAsPressable({ ...rest, onHoverIn: onHover, disabled, onPress: onInvoke });
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
@@ -65,8 +71,11 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
-      enableFocusRing: true,
-      focusable: true,
+      enableFocusRing: Platform.select({
+        macos: false,
+        default: true, // win32
+      }),
+      focusable: !disabled,
       ref: componentRef,
       ...onKeyDownProps,
     },
