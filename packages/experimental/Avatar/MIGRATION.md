@@ -4,23 +4,23 @@
 
 ### Component renames
 
-| `PersonaCoin`                                    | `Avatar`                                                     |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| `<Avatar size={24} initials="SN" />`             | `<PersonaCoin size='size24' initials="SN" />`                |
-| `<Avatar size={24} initials="SN" />`             | `<PersonaCoin presence='available' coinColorFluent="red" />` |
-| `<Avatar image={{source: './path/name.png'}} />` | `<PersonaCoin imageUrl="./path/name.png" />`                 |
-| `<Avatar accessibilityLabel="Photo" />`          | `<PersonaCoin imageDescription="Photo" />`                   |
+| `PersonaCoin`                                                | `Avatar`                                         |
+| ------------------------------------------------------------ | ------------------------------------------------ |
+| `<PersonaCoin size='size24' initials="SN" />`                | `<Avatar size={24} initials="SN" />`             |
+| `<PersonaCoin presence='available' coinColorFluent="red" />` | `<Avatar size={24} initials="SN" />`             |
+| `<PersonaCoin imageUrl="./path/name.png" />`                 | `<Avatar image={{source: './path/name.png'}} />` |
+| `<PersonaCoin imageDescription="Photo" />`                   | `<Avatar accessibilityLabel="Photo" />`          |
 
 ### Props that remain as is
 
 - `icon`
 - `initials`
 - `size`
+- `imageUrl`
 
 ### Props no longer supported with an equivalent functionality in Avatar
 
 - `coinColorFluent` => Use `avatarColor` instead.
-- `imageUrl` => Images passes using `image` slot: `image={{ src: './image.jpg' }} />`.
 - `imageDescription` => Use `accessibilityLabel` instead.
 - `isOutOfOffice` => `outOfOffice` is part of `badge` slot. Use `badge={{ outOfOffice: true }} />`.
 - `presence` => It's part of `badge` slot. Use `badge={{ presence: 'available' }} />`.
@@ -34,6 +34,7 @@
 - `name` - is used for generation initials with `getInitials` method.
 - `shape` - can be `circular` and `square`.
 - `idForColor`
+- `image` - Images passe using `image` slot: `image={{ source: { uri: './name.jpg' } }} />`. `imageUrl` left as a shorthand for passing URL.
 
 ### Tokens that remain as is
 
@@ -119,7 +120,7 @@ Color tokens:
 
 ### Slots no longer supported with an equivalent functionality in v1 Avatar
 
-- `photo` => Use `image` slot instead
+- `photo` => Use `image` slot instead or `imageUrl` prop.
 
 ### Slots no longer supported without an equivalent functionality in v1 Avatar
 
@@ -131,7 +132,7 @@ Color tokens:
 
 ### Prop differences due to technical differences and limitations
 
-- Web uses `image` slot which is part of `react-image` component. They use syntax `image={{ src: './MonaKane.jpg' }}`. If we use similar syntax, our users will need to write `image={{ source: { uri: './MonaKane.jpg' } }} />`. In majority of cases users pass image URL that's why we still have opportunity to pass this parameter using `src` prop. But there's also a way to pass `image` object similar to Web.
+- Web uses `image` slot which is part of `react-image` component. They use syntax `image={{ src: './MonaKane.jpg' }}`. If we use similar syntax, our users will need to write `image={{ source: { uri: './MonaKane.jpg' } }} />`. In majority of cases users pass image URL that's why we still have opportunity to pass this parameter using `imageUrl` prop. But there's also a way to pass `image` object similar to Web.
 
 ### Other Prop differences
 
@@ -147,7 +148,8 @@ Color tokens:
 | `coinColorFluent`  | `avatarColor`        |
 | `icon`             | `icon`               |
 |                    | `idForColor`         |
-| `imageUrl`         | `iamge`              |
+| `imageUrl`         | `imageUrl`           |
+|                    | `image`              |
 | `imageDescription` | `accessibilityLabel` |
 | `isOutOfOffice`    |                      |
 | `initials`         | `initials`           |

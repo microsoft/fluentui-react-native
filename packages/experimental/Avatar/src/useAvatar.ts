@@ -10,7 +10,7 @@ import { titles } from './titles';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { active, accessibilityLabel, activeAppearance, badge, image, initials, name, src, ring, shape, ...rest } = props;
+  const { active, accessibilityLabel, activeAppearance, badge, image, initials, name, imageUrl, ring, shape, ...rest } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
@@ -18,7 +18,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
 
   const imageProps: ImageProps = {
     accessibilityLabel,
-    source: src ? ({ uri: src } as ImageSourcePropType) : undefined,
+    source: imageUrl ? ({ uri: imageUrl } as ImageSourcePropType) : undefined,
   };
 
   const badgeProps: PresenceBadgeProps = {

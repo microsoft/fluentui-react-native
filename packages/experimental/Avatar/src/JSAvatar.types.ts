@@ -163,9 +163,9 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   shape?: AvatarShape;
 
   /**
-   * Currently used for image URL, will be deprecated when image prop works
+   * Shorthand for passing image URL instead of using `image` prop
    */
-  src?: string;
+  imageUrl?: string;
 }
 
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
