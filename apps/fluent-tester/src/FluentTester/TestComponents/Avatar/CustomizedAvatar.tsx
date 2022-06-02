@@ -1,39 +1,56 @@
-import * as React from 'react';
+import React, { useState, useMemo } from 'react';
 import { JSAvatar, IconAlignment, AvatarSize } from '@fluentui-react-native/experimental-avatar';
 import { Switch, View, Text, TextInput } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { FontWeight } from '@fluentui-react-native/theme-types';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
-  const [showImage, setShowImage] = React.useState(true);
-  const [coinColor, setCoinColor] = React.useState<string>();
-  const [textColor, setTextColor] = React.useState<string>();
-  const [size, setSize] = React.useState<AvatarSize>(96);
-  const [iconSize, setIconSize] = React.useState<number>(24);
-  const [initialsSize, setInitialsSize] = React.useState<number>(14);
-  const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
-  const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
+  const [showImage, setShowImage] = useState(true);
+  const [coinColor, setCoinColor] = useState<string>();
+  const [textColor, setTextColor] = useState<string>();
+  const [size, setSize] = useState<string>('96');
+  const [iconSize, setIconSize] = useState<number>(24);
+  const [initialsSize, setInitialsSize] = useState<number>(16);
+  const [fontWeight, setFontWeight] = useState<string>('normal');
+  const [fontFamily, setFontFamily] = useState<string>('Georgia');
+  const [horizontalAlignment, setHorizontalAlignment] = useState<IconAlignment>();
+  const [verticalAlignment, setVerticalAlignment] = useState<IconAlignment>();
 
-  const [ringColor, setRingColor] = React.useState<string>('red');
-  const [ringBackgroundColor, setRingBackgroundColor] = React.useState<string>(undefined);
-  const [showRing, setShowRing] = React.useState<boolean>(true);
-  const [transparent, setTransparent] = React.useState<boolean>(false);
+  const [ringColor, setRingColor] = useState<string>('red');
+  const [ringBackgroundColor, setRingBackgroundColor] = useState<string>(undefined);
+  const [showRing, setShowRing] = useState<boolean>(true);
+  const [transparent, setTransparent] = useState<boolean>(false);
 
-  const CustomizedAvatar = React.useMemo(() => {
+  const CustomizedAvatar = useMemo(() => {
     const tokens = {
       backgroundColor: coinColor,
       color: textColor,
       horizontalIconAlignment: horizontalAlignment,
       verticalIconAlignment: verticalAlignment,
       iconSize: iconSize,
-      initialsSize: initialsSize,
-      size,
+      fontSize: initialsSize,
+      fontWeight: fontWeight as FontWeight,
+      fontFamily,
+      size: parseInt(size) as AvatarSize,
       ringColor,
       ringBackgroundColor,
     };
     return JSAvatar.customize(tokens);
-  }, [coinColor, textColor, horizontalAlignment, verticalAlignment, iconSize, initialsSize, size, ringColor, ringBackgroundColor]);
+  }, [
+    coinColor,
+    textColor,
+    horizontalAlignment,
+    verticalAlignment,
+    iconSize,
+    initialsSize,
+    size,
+    ringColor,
+    ringBackgroundColor,
+    fontWeight,
+    fontFamily,
+  ]);
 
   return (
     <View style={commonStyles.root}>
@@ -53,68 +70,85 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           <Switch value={transparent} onValueChange={setTransparent} />
         </View>
 
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Background color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setCoinColor(e.nativeEvent.text);
-          }}
-        />
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Initials text color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setTextColor(e.nativeEvent.text);
-          }}
-        />
+        <View>
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Background color"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setCoinColor(e.nativeEvent.text);
+            }}
+          />
 
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Ring color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setRingColor(e.nativeEvent.text);
-          }}
-        />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Ring color"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setRingColor(e.nativeEvent.text);
+            }}
+          />
 
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Avatar size"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            const size = e.nativeEvent.text as unknown as AvatarSize;
-            setSize(size);
-          }}
-        />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Avatar size"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setSize(e.nativeEvent.text);
+            }}
+          />
 
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Icon size"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setIconSize(parseInt(e.nativeEvent.text));
-          }}
-        />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Icon size"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setIconSize(parseInt(e.nativeEvent.text));
+            }}
+          />
 
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Initials size"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setInitialsSize(parseInt(e.nativeEvent.text));
-          }}
-        />
-
-        <TextInput
-          style={[commonStyles.textBox]}
-          placeholder="Ring background color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setRingBackgroundColor(e.nativeEvent.text);
-          }}
-        />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Ring background color"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setRingBackgroundColor(e.nativeEvent.text);
+            }}
+          />
+          <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Initials text color"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setTextColor(e.nativeEvent.text);
+            }}
+          />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Initials size"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setInitialsSize(parseInt(e.nativeEvent.text));
+            }}
+          />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Font weight"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setFontWeight(e.nativeEvent.text);
+            }}
+          />
+          <TextInput
+            style={[commonStyles.textBox]}
+            placeholder="Font family"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setFontFamily(e.nativeEvent.text);
+            }}
+          />
+        </View>
 
         <Text>These features will be available later</Text>
         <AlignmentPicker style={commonStyles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
@@ -124,9 +158,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       <CustomizedAvatar
         active="active"
         activeAppearance="ring"
+        avatarColor="colorful"
         initials="SB"
         accessibilityLabel="Former CEO of Microsoft"
-        badge={{ status: 'blocked' }}
         src={showImage ? steveBallmerPhotoUrl : undefined}
         ring={
           showRing

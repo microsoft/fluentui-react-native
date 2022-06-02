@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 02 Jun 2022 09:23:22 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.6",
+      "version": "0.62.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "246105f999eb8e2592029e4ed34291ffec603c60",
+            "comment": "Added font customization, fixed neutral, colorful and brand colors"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.35",
+            "commit": "246105f999eb8e2592029e4ed34291ffec603c60"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 01 Jun 2022 18:18:40 GMT",
+      "tag": "@fluentui-react-native/tester_v0.62.5",
+      "version": "0.62.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7c7b95a0c0697315aefdbb1a849e0017dcfc63c2",
+            "comment": "Create a normal example of a menu"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.13.0",
+            "commit": "7db4e834c3801fb475ea02757b78051bf78cf11e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Jun 2022 00:08:47 GMT",
       "tag": "@fluentui-react-native/tester_v0.62.4",
       "version": "0.62.4",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Thu, 02 Jun 2022 09:23:22 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.35",
+      "version": "0.14.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "246105f999eb8e2592029e4ed34291ffec603c60",
+            "comment": "Added font customization, fixed neutral, colorful and brand colors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 May 2022 21:22:22 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.34",
       "version": "0.14.34",

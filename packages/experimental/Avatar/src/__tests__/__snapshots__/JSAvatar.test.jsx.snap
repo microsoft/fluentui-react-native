@@ -23,7 +23,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#4f6bed",
+        "backgroundColor": "#e6e6e6",
         "borderColor": "#ffffff",
         "borderRadius": 9999,
         "borderWidth": 0,

@@ -1,7 +1,8 @@
-import { JSAvatarProps, AvatarInfo, JSAvatarState } from './JSAvatar.types';
+import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
 import { ImageProps, ImageSourcePropType } from 'react-native';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
+import { getHashCodeWeb } from './getHashCode';
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -36,9 +37,12 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
   };
 
   const _initials = initials || getInitials(name);
+  const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
+  const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
 
   return {
     props: {
+      avatarColor: _avatarColor,
       shape: shape || 'circular',
       ...rest,
       active,
