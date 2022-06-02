@@ -17,8 +17,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
   }
 >
   <View
-    accessibilityHint="A picture representing a user"
-    accessibilityLabel="User"
+    accessibilityLabel=""
     accessible={true}
     style={
       Object {
