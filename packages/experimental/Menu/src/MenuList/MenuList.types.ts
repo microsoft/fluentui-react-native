@@ -1,10 +1,11 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { IBackgroundColorTokens, IBorderTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const menuListName = 'MenuList';
 
-export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
+export interface MenuListTokens extends LayoutTokens, IBorderTokens, IBackgroundColorTokens {
   gap?: number;
 }
 
@@ -22,6 +23,7 @@ export interface MenuListState extends MenuListProps {
 
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
+  focusZone: FocusZoneProps;
 }
 export interface MenuListType {
   props: MenuListProps;

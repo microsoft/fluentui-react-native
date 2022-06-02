@@ -4,10 +4,7 @@ import { IComposeSettings } from '@uifabricshared/foundation-compose';
 export const settings: IComposeSettings<ContextualMenuItemType> = [
   {
     tokens: {
-      backgroundColor: 'menuBackground',
       color: 'menuItemText',
-      borderColor: 'transparent',
-      borderWidth: 2,
     },
     root: {
       enableFocusRing: false,
@@ -25,8 +22,8 @@ export const settings: IComposeSettings<ContextualMenuItemType> = [
     stack: {
       style: {
         display: 'flex',
-        paddingStart: 5,
-        paddingEnd: 5,
+        paddingHorizontal: 5,
+        paddingVertical: 3,
         alignItems: 'center',
         flexDirection: 'row',
         alignSelf: 'flex-start',

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { compose, mergeProps, stagedComponent, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
@@ -8,6 +8,8 @@ import { MenuListProvider } from '../context/menuListContext';
 import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
+import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
@@ -33,18 +35,53 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
+    focusZone: FocusZone,
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
     const contextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList);
 
+    /**
+     * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
+     * hosting the menu. For whatever reason, to get the timing _just_ right to actually focus, we need an additional `setTimeout`
+     *  on top of the `useLayoutEffect` hook.
+     */
+    const focusZoneRef = React.useRef<IFocusable>(null);
+
+    React.useLayoutEffect(() => {
+      if (Platform.OS === 'macos') {
+        setTimeout(() => {
+          focusZoneRef.current?.focus();
+        }, 0);
+      }
+    });
+
     return (_final: MenuListProps, children: React.ReactNode) => {
-      return (
-        <MenuListProvider value={contextValue}>
-          <Slots.root>{children}</Slots.root>
-        </MenuListProvider>
-      );
+      if (Platform.OS === 'macos') {
+        return (
+          <MenuListProvider value={contextValue}>
+            <Slots.root>
+              <Slots.focusZone
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                enableFocusRing={false}
+                componentRef={focusZoneRef}
+                defaultTabbableElement={focusZoneRef}
+                focusZoneDirection={'vertical'}
+              >
+                {children}
+              </Slots.focusZone>
+            </Slots.root>
+          </MenuListProvider>
+        );
+      } else {
+        return (
+          <MenuListProvider value={contextValue}>
+            <Slots.root>{children}</Slots.root>
+          </MenuListProvider>
+        );
+      }
     };
   },
 });
