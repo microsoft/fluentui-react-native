@@ -46,7 +46,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
       image: imageProps,
       badge: badgeProps,
       initials: _initials,
-      accessibilityLabel: accessibilityText,
+      accessibilityLabel: accessibilityLabel || accessibilityText,
       accessibilityHint,
     },
     state: {
