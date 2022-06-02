@@ -3,6 +3,7 @@ import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
+import { delayHover, isCloseOnHoverOutEnabled } from '../consts';
 
 const accessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
@@ -30,11 +31,6 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
     [setOpen],
   );
 
-  const delayHover = Platform.select({
-    macos: 100,
-    default: 500, // win32
-  });
-
   const onHoverIn = React.useCallback(
     (e: InteractionEvent) => {
       if (openOnHover) {
@@ -45,7 +41,7 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
         }, delayHover);
       }
     },
-    [openOnHover, setOpen, delayHover, triggerHoverOutTimer, popoverHoverOutTimer],
+    [openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
   );
 
   const onHoverOut = React.useCallback(
@@ -57,7 +53,7 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
         setTriggerHoverOutTimer(timer);
       }
     },
-    [openOnHover, setOpen, delayHover, setTriggerHoverOutTimer],
+    [openOnHover, setOpen, setTriggerHoverOutTimer],
   );
 
   const onClick = React.useCallback(
@@ -71,7 +67,7 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
     props: {
       onClick,
       onHoverIn,
-      onHoverOut: Platform.OS === ('win32' as any) && onHoverOut,
+      onHoverOut: isCloseOnHoverOutEnabled && onHoverOut,
       componentRef: triggerRef,
       accessibilityState,
       accessibilityActions,

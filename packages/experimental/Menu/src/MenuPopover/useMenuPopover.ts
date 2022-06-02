@@ -4,6 +4,7 @@ import { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callou
 import { useMenuContext } from '../context/menuContext';
 import { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { isCloseOnHoverOutEnabled } from '../consts';
 
 export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   const context = useMenuContext();
@@ -39,7 +40,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     triggerRef,
     onDismiss,
     onMouseEnter,
-    onMouseLeave: Platform.OS === ('win32' as any) && onMouseLeave,
+    onMouseLeave: isCloseOnHoverOutEnabled && onMouseLeave,
     directionalHint,
     dismissBehaviors,
     doNotTakePointerCapture,
