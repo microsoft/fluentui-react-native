@@ -14,6 +14,8 @@ const nameMap: { [key: string]: string } = {
 export const avatarStates: (keyof JSAvatarTokens)[] = [
   ...AvatarColors,
   ...AvatarSizesForTokens,
+  'neutral',
+  'brand',
   'circular',
   'square',
   'inactive',
