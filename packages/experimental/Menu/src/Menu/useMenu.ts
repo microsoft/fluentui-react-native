@@ -7,6 +7,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const triggerRef = React.useRef(null);
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
+  const parentPopoverHoverOutTimer = isSubmenu ? context.popoverHoverOutTimer : undefined;
   const isControlled = typeof props.open !== 'undefined';
   const [open, setOpen] = useMenuOpenState(isControlled, props);
 
@@ -23,6 +24,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     triggerRef,
     isSubmenu,
     isControlled,
+    parentPopoverHoverOutTimer,
   };
 };
 

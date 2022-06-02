@@ -8,8 +8,17 @@ import { isCloseOnHoverOutEnabled } from '../consts';
 
 export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   const context = useMenuContext();
-  const { setOpen, triggerRef, isControlled, isSubmenu, openOnHover, popoverHoverOutTimer, setPopoverHoverOutTimer, triggerHoverOutTimer } =
-    context;
+  const {
+    setOpen,
+    triggerRef,
+    isControlled,
+    isSubmenu,
+    openOnHover,
+    parentPopoverHoverOutTimer,
+    popoverHoverOutTimer,
+    setPopoverHoverOutTimer,
+    triggerHoverOutTimer,
+  } = context;
 
   const onDismiss = React.useCallback(() => setOpen(undefined, false /* isOpen */), [setOpen]);
   const dismissBehaviors = isControlled ? (['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[]) : undefined;
@@ -24,7 +33,8 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   const onMouseEnter = React.useCallback(() => {
     clearTimeout(triggerHoverOutTimer);
     clearTimeout(popoverHoverOutTimer);
-  }, [popoverHoverOutTimer, triggerHoverOutTimer]);
+    clearTimeout(parentPopoverHoverOutTimer);
+  }, [parentPopoverHoverOutTimer, popoverHoverOutTimer, triggerHoverOutTimer]);
   const onMouseLeave = React.useCallback(
     (e: InteractionEvent) => {
       if (!openOnHover) {
@@ -34,6 +44,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
       const timer = setTimeout(() => {
         setOpen(e, false /* isOpen */);
       }, 500);
+      console.log('popoverout');
       setPopoverHoverOutTimer(timer);
     },
     [openOnHover, setOpen, setPopoverHoverOutTimer],
