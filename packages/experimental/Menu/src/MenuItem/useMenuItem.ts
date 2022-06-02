@@ -56,7 +56,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     }
   }, [componentRef, disabled]);
 
-  const pressable = useAsPressable({ ...rest, onHoverIn: onHover, disabled, onPress: onInvoke });
+  const pressable = useAsPressable({ ...rest, ...(Platform.OS === 'macos' && { onHoverIn: onHover }), disabled, onPress: onInvoke });
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
