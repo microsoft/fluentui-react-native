@@ -5,10 +5,10 @@ import { useMenuTrigger } from './useMenuTrigger';
 import { AccessibilityActionEvent } from 'react-native';
 import { MenuTriggerProvider } from '../context/menuTriggerContext';
 
-export const MenuTrigger = stagedComponent((_props: Record<string, never>) => {
+export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Record<never, any>>) => {
   const menuTrigger = useMenuTrigger();
 
-  return (_rest: Record<string, never>, children: React.ReactNode) => {
+  return (_rest: React.PropsWithChildren<Record<never, any>>, children: React.ReactNode) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
 
     if (__DEV__) {
