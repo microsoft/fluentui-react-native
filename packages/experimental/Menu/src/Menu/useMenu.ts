@@ -10,10 +10,16 @@ export const useMenu = (props: MenuProps): MenuState => {
   const isControlled = typeof props.open !== 'undefined';
   const [open, setOpen] = useMenuOpenState(isControlled, props);
 
-  // Default behaviot for submenu is to open on hover
+  // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
   // or apply openOnHover if passed into a root Menu.
   const openOnHover = isSubmenu;
+
+  // We need to be able to cancel the timer that gets set on
+  // hover out of the parent popover if the parent popover
+  // is also set to open/close on hover out. Otherwise
+  // the parent menu will close when the timeout passes.
+  const parentPopoverHoverOutTimer = isSubmenu ? context.popoverHoverOutTimer : undefined;
 
   return {
     openOnHover,
@@ -23,6 +29,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     triggerRef,
     isSubmenu,
     isControlled,
+    parentPopoverHoverOutTimer,
   };
 };
 
