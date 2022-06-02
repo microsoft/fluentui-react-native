@@ -21,7 +21,7 @@ export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Reco
     // child component which may affect accessibility, we need to modify the
     // state in the inner render so we can access the child component and its props.
     const child = childrenArray[0];
-    const revisedState = getRevisedState(menuTrigger, child.props);
+    const revisedState = getRevisedProps(menuTrigger, child.props);
     const revised = React.cloneElement(child, revisedState);
 
     return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
@@ -29,8 +29,8 @@ export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Reco
 });
 MenuTrigger.displayName = menuTriggerName;
 
-const getRevisedState = memoize(getRevisedStateWorker);
-function getRevisedStateWorker(state: MenuTriggerState, props: any): MenuTriggerChildProps {
+const getRevisedProps = memoize(getRevisedPropsWorker);
+function getRevisedPropsWorker(state: MenuTriggerState, props: any): MenuTriggerChildProps {
   const revisedState = { ...state };
   if (props.accessibilityState) {
     revisedState.props.accessibilityState = { ...state.props.accessibilityState, ...props.accessibilityState };
