@@ -133,6 +133,7 @@ export const StandardUsage: FunctionComponent = () => {
             badge={{ status: 'outOfOffice' }}
           />
           <JSAvatar
+            accessibilityHint="A picture representing a user"
             active={active}
             activeAppearance={activeAppearance}
             size={imageSize === undefinedText ? undefined : imageSize}
