@@ -42,7 +42,6 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     const timer = setTimeout(() => {
       setOpen(undefined, false /* isOpen */);
     }, 500);
-    console.log('popoverout');
     setPopoverHoverOutTimer(timer);
   }, [openOnHover, setOpen, setPopoverHoverOutTimer]);
 
