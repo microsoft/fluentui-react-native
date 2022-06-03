@@ -38,8 +38,10 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@fluentui-react-native/button": ">=0.22.26 <1.0.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@types/react-native": "^0.64.0",
     "react-native": "^0.64.3"
   },
