@@ -5,6 +5,8 @@ import { useMenuContext } from '../context/menuContext';
 import { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
 import { isCloseOnHoverOutEnabled } from '../consts';
 
+const controlledDismissBehaviors = ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[];
+
 export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   const context = useMenuContext();
   const {
@@ -20,7 +22,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
   } = context;
 
   const onDismiss = React.useCallback(() => setOpen(undefined, false /* isOpen */), [setOpen]);
-  const dismissBehaviors = isControlled ? (['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[]) : undefined;
+  const dismissBehaviors = isControlled ? controlledDismissBehaviors : undefined;
   const directionalHint = getDirectionalHint(isSubmenu, I18nManager.isRTL);
 
   // Initial focus behavior differs per platform, Windows platforms move focus

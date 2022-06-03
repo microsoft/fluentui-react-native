@@ -31,18 +31,18 @@ MenuTrigger.displayName = menuTriggerName;
 
 const getRevisedState = memoize(getRevisedStateWorker);
 function getRevisedStateWorker(state: MenuTriggerState, props: any): MenuTriggerProps {
-  const revisedProps = { ...state.props };
+  const revisedProps = state.props;
   if (props.accessibilityState) {
-    revisedProps.accessibilityState = { ...state.props.accessibilityState, ...props.accessibilityState };
+    revisedProps.accessibilityState = { ...revisedProps.accessibilityState, ...props.accessibilityState };
   }
 
   if (props.accessibilityActions) {
-    revisedProps.accessibilityActions = { ...state.props.accessibilityActions, ...props.accessibilityActions };
+    revisedProps.accessibilityActions = { ...revisedProps.accessibilityActions, ...props.accessibilityActions };
   }
 
   if (props.onAccessibilityAction) {
     revisedProps.onAccessibilityAction = (e: AccessibilityActionEvent) => {
-      state.props.onAccessibilityAction(e);
+      revisedProps.onAccessibilityAction(e);
       props.onAccessibilityAction(e);
     };
   }

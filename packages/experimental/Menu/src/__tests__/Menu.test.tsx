@@ -2,7 +2,7 @@ import * as React from 'react';
 import { AccessibilityActionName } from 'react-native';
 import * as renderer from 'react-test-renderer';
 import { Menu } from '../Menu/Menu';
-import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { checkReRender } from '@fluentui-react-native/test-tools';
 import MenuTrigger from '../MenuTrigger/MenuTrigger';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import MenuPopover from '../MenuPopover/MenuPopover';
@@ -177,28 +177,10 @@ describe('Checkbox component tests', () => {
 });
 
 describe('Menu rerender tests', () => {
-  it('Menu simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(
-      () => (
-        <Menu>
-          <MenuTrigger>
-            <Button>Rerender</Button>
-          </MenuTrigger>
-          <MenuPopover>
-            <MenuList>
-              <MenuItem content="Option 1" />
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-      ),
-      2,
-    );
-  });
-
   it('Menu re-renders correctly', () => {
     checkReRender(
       () => (
-        <Menu>
+        <Menu open>
           <MenuTrigger>
             <Button>Rerender twice</Button>
           </MenuTrigger>
@@ -209,44 +191,26 @@ describe('Menu rerender tests', () => {
           </MenuPopover>
         </Menu>
       ),
-      2,
-    );
-  });
-
-  it('Menu shares produced styles across multiple renders', () => {
-    const style = { backgroundColor: 'black' };
-    checkRenderConsistency(
-      () => (
-        <Menu>
-          <MenuTrigger>
-            <Button>Rerender twice</Button>
-          </MenuTrigger>
-          <MenuPopover>
-            <MenuList style={style}>
-              <MenuItem content="Option 1" />
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-      ),
-      2,
+      3,
     );
   });
 
   it('Menu re-renders correctly with style', () => {
+    const style = { backgroundColor: 'black' };
     checkReRender(
       () => (
         <Menu>
           <MenuTrigger>
-            <Button>Rerender twice</Button>
+            <Button style={style}>Rerender twice</Button>
           </MenuTrigger>
-          <MenuPopover borderColor={'blue'}>
+          <MenuPopover>
             <MenuList>
               <MenuItem content="Option 1" />
             </MenuList>
           </MenuPopover>
         </Menu>
       ),
-      2,
+      3,
     );
   });
 
@@ -265,7 +229,7 @@ describe('Menu rerender tests', () => {
           </MenuPopover>
         </Menu>
       ),
-      2,
+      3,
     );
   });
 });
