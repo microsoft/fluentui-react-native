@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add a test for infinite submenus",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

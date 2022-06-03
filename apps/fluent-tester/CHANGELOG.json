@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 03 Jun 2022 21:01:53 GMT",
+      "tag": "@fluentui-react-native/tester_v0.63.2",
+      "version": "0.63.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "1bb29226c22a816199a5e02a93402f055b25f1a5",
+            "comment": "Add a test for infinite submenus"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Jun 2022 19:33:31 GMT",
       "tag": "@fluentui-react-native/tester_v0.63.1",
       "version": "0.63.1",
