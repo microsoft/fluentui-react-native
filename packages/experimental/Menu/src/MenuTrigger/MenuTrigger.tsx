@@ -21,8 +21,8 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     // child component which may affect accessibility, we need to modify the
     // state in the inner render so we can access the child component and its props.
     const child = childrenArray[0];
-    const revisedState = getRevisedState(menuTrigger, child.props);
-    const revised = React.cloneElement(child, revisedState);
+    const revisedProps = getRevisedState(menuTrigger, child.props);
+    const revised = React.cloneElement(child, revisedProps);
 
     return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
   };
@@ -30,24 +30,24 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
 MenuTrigger.displayName = menuTriggerName;
 
 const getRevisedState = memoize(getRevisedStateWorker);
-function getRevisedStateWorker(state: MenuTriggerState, props: any): MenuTriggerState {
-  const revisedState = { ...state };
+function getRevisedStateWorker(state: MenuTriggerState, props: any): MenuTriggerProps {
+  const revisedProps = { ...state.props };
   if (props.accessibilityState) {
-    revisedState.props.accessibilityState = { ...state.props.accessibilityState, ...props.accessibilityState };
+    revisedProps.accessibilityState = { ...state.props.accessibilityState, ...props.accessibilityState };
   }
 
   if (props.accessibilityActions) {
-    revisedState.props.accessibilityActions = { ...state.props.accessibilityActions, ...props.accessibilityActions };
+    revisedProps.accessibilityActions = { ...state.props.accessibilityActions, ...props.accessibilityActions };
   }
 
   if (props.onAccessibilityAction) {
-    revisedState.props.onAccessibilityAction = (e: AccessibilityActionEvent) => {
+    revisedProps.onAccessibilityAction = (e: AccessibilityActionEvent) => {
       state.props.onAccessibilityAction(e);
       props.onAccessibilityAction(e);
     };
   }
 
-  return revisedState;
+  return revisedProps;
 }
 
 export default MenuTrigger;
