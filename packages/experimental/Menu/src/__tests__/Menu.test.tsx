@@ -148,7 +148,7 @@ describe('Checkbox component tests', () => {
   });
 });
 
-describe('Checkbox rerender tests', () => {
+describe('Menu rerender tests', () => {
   it('Menu simple rendering does not invalidate styling', () => {
     checkRenderConsistency(
       () => (
@@ -167,7 +167,7 @@ describe('Checkbox rerender tests', () => {
     );
   });
 
-  it('Checkbox re-renders correctly', () => {
+  it('Menu re-renders correctly', () => {
     checkReRender(
       () => (
         <Menu>
@@ -185,7 +185,7 @@ describe('Checkbox rerender tests', () => {
     );
   });
 
-  it('Checkbox shares produced styles across multiple renders', () => {
+  it('Menu shares produced styles across multiple renders', () => {
     const style = { backgroundColor: 'black' };
     checkRenderConsistency(
       () => (
@@ -204,7 +204,7 @@ describe('Checkbox rerender tests', () => {
     );
   });
 
-  it('Checkbox re-renders correctly with style', () => {
+  it('Menu re-renders correctly with style', () => {
     checkReRender(
       () => (
         <Menu>
@@ -222,7 +222,7 @@ describe('Checkbox rerender tests', () => {
     );
   });
 
-  it('Checkbox re-renders correctly with accessibilityAction', () => {
+  it('Menu re-renders correctly with accessibilityAction', () => {
     const action = [{ name: 'Expand' as AccessibilityActionName }];
     checkReRender(
       () => (
