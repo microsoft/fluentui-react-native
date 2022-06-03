@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { AccessibilityActionName } from 'react-native';
+import * as renderer from 'react-test-renderer';
 import { Menu } from '../Menu/Menu';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import MenuTrigger from '../MenuTrigger/MenuTrigger';
@@ -6,9 +8,88 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import MenuPopover from '../MenuPopover/MenuPopover';
 import { MenuList } from '../MenuList/MenuList';
 import { MenuItem } from '../MenuItem/MenuItem';
-import { AccessibilityActionName } from 'react-native';
+import { MenuItemCheckbox } from '../MenuItemCheckbox/MenuItemCheckbox';
+import { MenuDivider } from '../MenuDivider/MenuDivider';
+import { MenuItemRadio } from '../MenuItemRadio/MenuItemRadio';
 
 describe('Checkbox component tests', () => {
+  it('Menu default', () => {
+    const tree = renderer
+      .create(
+        <Menu>
+          <MenuTrigger>
+            <Button>Default</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem content="Option 1" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Menu open', () => {
+    const tree = renderer
+      .create(
+        <Menu open>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem content="Option 1" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Menu open checkbox and divider', () => {
+    const tree = renderer
+      .create(
+        <Menu open>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuDivider />
+              <MenuItemCheckbox content="Option 2" name="Option 2" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Menu open radio', () => {
+    const tree = renderer
+      .create(
+        <Menu open>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItemRadio content="Option 1" name="Option 1" />
+              <MenuItemRadio content="Option 2" name="Option 2" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+describe('Checkbox rerender tests', () => {
   it('Menu simple rendering does not invalidate styling', () => {
     checkRenderConsistency(
       () => (
