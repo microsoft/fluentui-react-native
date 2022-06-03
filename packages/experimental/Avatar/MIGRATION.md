@@ -34,7 +34,6 @@
 - `name` - is used for generation initials with `getInitials` method.
 - `shape` - can be `circular` and `square`.
 - `idForColor`
-- `image` - Images passed using `image` slot: `image={{ source: { uri: './name.jpg' } }} />`. `imageUrl` left as a shorthand for passing URL.
 
 ### Tokens that remain as is
 
@@ -149,7 +148,6 @@ Color tokens:
 | `icon`             | `icon`               |
 |                    | `idForColor`         |
 | `imageUrl`         | `imageUrl`           |
-|                    | `image`              |
 | `imageDescription` | `accessibilityLabel` |
 | `isOutOfOffice`    |                      |
 | `initials`         | `initials`           |

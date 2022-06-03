@@ -141,11 +141,6 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   idForColor?: string;
 
   /**
-   * The Avatar's image.
-   */
-  image?: ImageProps;
-
-  /**
    * The initials are displayed when there is no image (including while the image is loading).
    *
    * It is usually not necessary to specify custom initials; by default they will be derived from the `name` prop, using the `getInitials` function.
