@@ -5,16 +5,18 @@ import { MenuItemCheckboxProps, MenuItemCheckboxState } from '../MenuItemCheckbo
 import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheckbox';
 
 export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
-  const { name } = props;
+  const { disabled, name } = props;
   const context = useMenuListContext();
   const checked = context.checked?.[name];
   const selectRadio = context.selectRadio;
 
   const toggleChecked = React.useCallback(
     (e: InteractionEvent) => {
-      selectRadio(e, name, !checked);
+      if (!disabled) {
+        selectRadio(e, name, !checked);
+      }
     },
-    [checked, name, selectRadio],
+    [checked, disabled, name, selectRadio],
   );
 
   return useMenuCheckboxInteraction(props, toggleChecked);
