@@ -101,7 +101,7 @@ A `Menu` can be divided into sections using dividers. The `Menu` does not suppor
 
 ### Disabled option(s)
 
-All options in a `Menu` component can be disabled and should provide a visible indication for this purpose. Although disabled actions cannot be invoked, they can are keyboard focusable for the purposes of accessibility.
+All options in a `Menu` component can be disabled and should provide a visible indication for this purpose. Although disabled actions cannot be invoked, they are keyboard focusable for the purposes of accessibility.
 
 ## API
 
@@ -307,11 +307,11 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
 
 ### Keyboard interactions
 
-- When Context menu is invoked via keyboard, open the menu and place focus on the first focusable element by default.
+- When a menu is invoked via keyboard, open the menu and place focus on the first focusable element by default.
 - Up and down inside of the menu that has focus should navigate vertically between keyboard focusable elements
-- Up and down should circularly navigate through a list of menu items by default
-- Right key on a menu item that has an available submenu or split button should invoke the submenu, and move focus into it onto the first focusable item
-- Left key when in a submenu should close the submenu and place focus back on the parent menu's item that opened the submenu.
+- On win32, up and down should circularly navigate through a list of menu items. On MacOS, circular navigation does not occur.
+- Right key on a menu item that has an available submenu or split button should invoke the submenu, and move focus into it onto the first focusable item (Left in RTL)
+- Left key when in a submenu should close the submenu and place focus back on the parent menu's item that opened the submenu. (Right in RTL)
 - ESC on a menu should close the currently focused menu. If focus is in a submenu and ESC is hit, it should only close the current submenu and return focus to the parent's element where focus was previously.
 - Space and Enter key execute the action that is currently focused in the menu.
 
@@ -338,7 +338,7 @@ The default positioning for the root `Menu` is below the trigger and aligned wit
 
 The default positioning for a submenu is to the right of the menu item trigger (or left in RTL) and aligned with the top edge.
 
-## Accessibiltiy
+## Accessibility
 
 The `MenuTrigger` will set `expand` or `collapsed` state and will respond to actions which explicitly tell it to expand or collapse (win32 only)
 The `MenuPopover` has its role set to `menu`, and `MenuItmes` and variants have their role set to `menuitem`.
