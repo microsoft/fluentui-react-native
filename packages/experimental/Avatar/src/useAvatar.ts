@@ -11,7 +11,21 @@ import { getHashCodeWeb } from './getHashCode';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { avatarColor, active, accessibilityLabel, activeAppearance, badge, idForColor, image, initials, name, imageUrl, ring, shape, ...rest } = props;
+  const {
+    avatarColor,
+    active,
+    accessibilityLabel,
+    activeAppearance,
+    badge,
+    idForColor,
+    image,
+    initials,
+    name,
+    imageUrl,
+    ring,
+    shape,
+    ...rest
+  } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
