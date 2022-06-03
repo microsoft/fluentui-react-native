@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 03 Jun 2022 02:18:28 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Jun 2022 10:09:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.63.0
+
+Fri, 03 Jun 2022 10:09:31 GMT
+
+### Minor changes
+
+- Initial empty test page for shadows (78454019+lyzhan7@users.noreply.github.com)
+
+### Patches
+
+- Added E2E tests for the Avatar (v.kozova13@gmail.com)
 
 ## 0.62.7
 

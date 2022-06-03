@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 03 Jun 2022 10:09:31 GMT",
+      "tag": "@fluentui-react-native/tester_v0.63.0",
+      "version": "0.63.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7bfc55bc4ecbcb55b058c027108dd1794ad2d9a4",
+            "comment": "Added E2E tests for the Avatar"
+          }
+        ],
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ce78fe663c965f0c2165e8b964e75ef299d7234e",
+            "comment": "Initial empty test page for shadows"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Jun 2022 02:18:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.62.7",
       "version": "0.62.7",
