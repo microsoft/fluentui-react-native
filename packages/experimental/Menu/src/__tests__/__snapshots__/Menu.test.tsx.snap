@@ -2,21 +2,26 @@
 
 exports[`Checkbox component tests Menu default 1`] = `
 <View
+  accessibilityActions={Array []}
   accessibilityLabel="Default"
   accessibilityRole="button"
   accessibilityState={
     Object {
       "disabled": false,
+      "expanded": false,
     }
   }
   accessible={true}
   disabled={false}
   enableFocusRing={true}
   focusable={true}
-  hasSubmenu={false}
+  onAccessibilityAction={[Function]}
+  onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={false}
   onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -24,23 +29,6 @@ exports[`Checkbox component tests Menu default 1`] = `
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
-  props={
-    Object {
-      "accessibilityActions": Array [],
-      "accessibilityState": Object {
-        "expanded": false,
-      },
-      "componentRef": Object {
-        "current": null,
-      },
-      "delayHoverIn": 500,
-      "delayHoverOut": false,
-      "onAccessibilityAction": [Function],
-      "onClick": [Function],
-      "onHoverIn": [Function],
-      "onHoverOut": false,
-    }
-  }
   style={
     Object {
       "alignItems": "center",
@@ -84,21 +72,26 @@ exports[`Checkbox component tests Menu default 1`] = `
 exports[`Checkbox component tests Menu defaultOpen 1`] = `
 Array [
   <View
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
+        "expanded": true,
       }
     }
     accessible={true}
     disabled={false}
     enableFocusRing={true}
     focusable={true}
-    hasSubmenu={false}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
     onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -106,23 +99,6 @@ Array [
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    props={
-      Object {
-        "accessibilityActions": Array [],
-        "accessibilityState": Object {
-          "expanded": true,
-        },
-        "componentRef": Object {
-          "current": null,
-        },
-        "delayHoverIn": 500,
-        "delayHoverOut": false,
-        "onAccessibilityAction": [Function],
-        "onClick": [Function],
-        "onHoverIn": [Function],
-        "onHoverOut": false,
-      }
-    }
     style={
       Object {
         "alignItems": "center",
@@ -177,123 +153,128 @@ Array [
     }
   >
     <View
-      style={
-        Object {
-          "backgroundColor": "#ffffff",
-          "display": "flex",
-          "maxWidth": 300,
-          "minWidth": 128,
-          "padding": 4,
-        }
-      }
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
     >
       <View
-        accessibilityLabel="Option 1"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 1"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityTap={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
             "backgroundColor": "#ffffff",
             "display": "flex",
-            "flexDirection": "row",
             "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
+            "minWidth": 128,
+            "padding": 4,
           }
         }
       >
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+        <View
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityTap={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 1
-        </Text>
-      </View>
-      <View
-        accessibilityLabel="Option 2"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "disabled": true,
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
+          accessibilityLabel="Option 2"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "disabled": true,
+            }
           }
-        }
-        accessible={true}
-        content="Option 2"
-        disabled={true}
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityTap={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "display": "flex",
-            "flexDirection": "row",
-            "marginTop": 2,
-            "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
-          }
-        }
-      >
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessible={true}
+          content="Option 2"
+          disabled={true}
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityTap={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#bdbdbd",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "marginTop": 2,
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 2
-        </Text>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#bdbdbd",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 2
+          </Text>
+        </View>
       </View>
     </View>
   </RCTCallout>,
@@ -303,21 +284,26 @@ Array [
 exports[`Checkbox component tests Menu open 1`] = `
 Array [
   <View
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
+        "expanded": true,
       }
     }
     accessible={true}
     disabled={false}
     enableFocusRing={true}
     focusable={true}
-    hasSubmenu={false}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
     onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -325,23 +311,6 @@ Array [
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    props={
-      Object {
-        "accessibilityActions": Array [],
-        "accessibilityState": Object {
-          "expanded": true,
-        },
-        "componentRef": Object {
-          "current": null,
-        },
-        "delayHoverIn": 500,
-        "delayHoverOut": false,
-        "onAccessibilityAction": [Function],
-        "onClick": [Function],
-        "onHoverIn": [Function],
-        "onHoverOut": false,
-      }
-    }
     style={
       Object {
         "alignItems": "center",
@@ -402,68 +371,73 @@ Array [
     }
   >
     <View
-      style={
-        Object {
-          "backgroundColor": "#ffffff",
-          "display": "flex",
-          "maxWidth": 300,
-          "minWidth": 128,
-          "padding": 4,
-        }
-      }
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
     >
       <View
-        accessibilityLabel="Option 1"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 1"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityTap={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
             "backgroundColor": "#ffffff",
             "display": "flex",
-            "flexDirection": "row",
             "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
+            "minWidth": 128,
+            "padding": 4,
           }
         }
       >
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+        <View
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityTap={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 1
-        </Text>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
       </View>
     </View>
   </RCTCallout>,
@@ -473,21 +447,26 @@ Array [
 exports[`Checkbox component tests Menu open checkbox and divider 1`] = `
 Array [
   <View
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
+        "expanded": true,
       }
     }
     accessible={true}
     disabled={false}
     enableFocusRing={true}
     focusable={true}
-    hasSubmenu={false}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
     onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -495,23 +474,6 @@ Array [
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    props={
-      Object {
-        "accessibilityActions": Array [],
-        "accessibilityState": Object {
-          "expanded": true,
-        },
-        "componentRef": Object {
-          "current": null,
-        },
-        "delayHoverIn": 500,
-        "delayHoverOut": false,
-        "onAccessibilityAction": [Function],
-        "onClick": [Function],
-        "onHoverIn": [Function],
-        "onHoverOut": false,
-      }
-    }
     style={
       Object {
         "alignItems": "center",
@@ -572,254 +534,259 @@ Array [
     }
   >
     <View
-      style={
-        Object {
-          "backgroundColor": "#ffffff",
-          "display": "flex",
-          "maxWidth": 300,
-          "minWidth": 128,
-          "padding": 4,
-        }
-      }
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 1"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": undefined,
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 1"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
             "backgroundColor": "#ffffff",
             "display": "flex",
-            "flexDirection": "row",
             "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
+            "minWidth": 128,
+            "padding": 4,
           }
         }
       >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
+        <View
+          accessibilityActions={
             Array [
               Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 0,
-                "width": 16,
+                "name": "Toggle",
               },
             ]
           }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": undefined,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 1
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "backgroundColor": "#d1d1d1",
-            "display": "flex",
-            "height": 1,
-            "margin": 2,
-            "marginVertical": undefined,
-            "width": undefined,
-          }
-        }
-      />
-      <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 2"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": undefined,
-            "disabled": true,
-          }
-        }
-        accessible={true}
-        content="Option 2"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "display": "flex",
-            "flexDirection": "row",
-            "marginTop": 2,
-            "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
-          }
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-4342339}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 0,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
           style={
+            Object {
+              "backgroundColor": "#d1d1d1",
+              "display": "flex",
+              "height": 1,
+              "margin": 2,
+              "marginVertical": undefined,
+              "width": undefined,
+            }
+          }
+        />
+        <View
+          accessibilityActions={
             Array [
               Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 0,
-                "width": 16,
+                "name": "Toggle",
               },
             ]
           }
-          tintColor={-4342339}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessibilityLabel="Option 2"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": undefined,
+              "disabled": true,
+            }
+          }
+          accessible={true}
+          content="Option 2"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#bdbdbd",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "marginTop": 2,
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 2
-        </Text>
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-4342339}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 0,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-4342339}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#bdbdbd",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 2
+          </Text>
+        </View>
       </View>
     </View>
   </RCTCallout>,
@@ -829,21 +796,26 @@ Array [
 exports[`Checkbox component tests Menu open checkbox checked 1`] = `
 Array [
   <View
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
+        "expanded": true,
       }
     }
     accessible={true}
     disabled={false}
     enableFocusRing={true}
     focusable={true}
-    hasSubmenu={false}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
     onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -851,23 +823,6 @@ Array [
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    props={
-      Object {
-        "accessibilityActions": Array [],
-        "accessibilityState": Object {
-          "expanded": true,
-        },
-        "componentRef": Object {
-          "current": null,
-        },
-        "delayHoverIn": 500,
-        "delayHoverOut": false,
-        "onAccessibilityAction": [Function],
-        "onClick": [Function],
-        "onHoverIn": [Function],
-        "onHoverOut": false,
-      }
-    }
     style={
       Object {
         "alignItems": "center",
@@ -928,254 +883,259 @@ Array [
     }
   >
     <View
-      style={
-        Object {
-          "backgroundColor": "#ffffff",
-          "display": "flex",
-          "maxWidth": 300,
-          "minWidth": 128,
-          "padding": 4,
-        }
-      }
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 1"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": true,
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 1"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
             "backgroundColor": "#ffffff",
             "display": "flex",
-            "flexDirection": "row",
             "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
+            "minWidth": 128,
+            "padding": 4,
           }
         }
       >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
+        <View
+          accessibilityActions={
             Array [
               Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 1,
-                "width": 16,
+                "name": "Toggle",
               },
             ]
           }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": true,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 1
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "backgroundColor": "#d1d1d1",
-            "display": "flex",
-            "height": 1,
-            "margin": 2,
-            "marginVertical": undefined,
-            "width": undefined,
-          }
-        }
-      />
-      <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 2"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": undefined,
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 2"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "display": "flex",
-            "flexDirection": "row",
-            "marginTop": 2,
-            "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
-          }
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 1,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
           style={
+            Object {
+              "backgroundColor": "#d1d1d1",
+              "display": "flex",
+              "height": 1,
+              "margin": 2,
+              "marginVertical": undefined,
+              "width": undefined,
+            }
+          }
+        />
+        <View
+          accessibilityActions={
             Array [
               Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 0,
-                "width": 16,
+                "name": "Toggle",
               },
             ]
           }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessibilityLabel="Option 2"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": undefined,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 2"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "marginTop": 2,
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 2
-        </Text>
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 0,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 2
+          </Text>
+        </View>
       </View>
     </View>
   </RCTCallout>,
@@ -1185,21 +1145,26 @@ Array [
 exports[`Checkbox component tests Menu open checkbox defaultChecked 1`] = `
 Array [
   <View
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
+        "expanded": true,
       }
     }
     accessible={true}
     disabled={false}
     enableFocusRing={true}
     focusable={true}
-    hasSubmenu={false}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
     onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -1207,23 +1172,6 @@ Array [
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    props={
-      Object {
-        "accessibilityActions": Array [],
-        "accessibilityState": Object {
-          "expanded": true,
-        },
-        "componentRef": Object {
-          "current": null,
-        },
-        "delayHoverIn": 500,
-        "delayHoverOut": false,
-        "onAccessibilityAction": [Function],
-        "onClick": [Function],
-        "onHoverIn": [Function],
-        "onHoverOut": false,
-      }
-    }
     style={
       Object {
         "alignItems": "center",
@@ -1284,254 +1232,259 @@ Array [
     }
   >
     <View
-      style={
-        Object {
-          "backgroundColor": "#ffffff",
-          "display": "flex",
-          "maxWidth": 300,
-          "minWidth": 128,
-          "padding": 4,
-        }
-      }
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
     >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 1"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": true,
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 1"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
             "backgroundColor": "#ffffff",
             "display": "flex",
-            "flexDirection": "row",
             "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
+            "minWidth": 128,
+            "padding": 4,
           }
         }
       >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
+        <View
+          accessibilityActions={
             Array [
               Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 1,
-                "width": 16,
+                "name": "Toggle",
               },
             ]
           }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": true,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 1
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "backgroundColor": "#d1d1d1",
-            "display": "flex",
-            "height": 1,
-            "margin": 2,
-            "marginVertical": undefined,
-            "width": undefined,
-          }
-        }
-      />
-      <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 2"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": undefined,
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 2"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "display": "flex",
-            "flexDirection": "row",
-            "marginTop": 2,
-            "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
-          }
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 1,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
           style={
+            Object {
+              "backgroundColor": "#d1d1d1",
+              "display": "flex",
+              "height": 1,
+              "margin": 2,
+              "marginVertical": undefined,
+              "width": undefined,
+            }
+          }
+        />
+        <View
+          accessibilityActions={
             Array [
               Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 0,
-                "width": 16,
+                "name": "Toggle",
               },
             ]
           }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessibilityLabel="Option 2"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": undefined,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 2"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "marginTop": 2,
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 2
-        </Text>
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 0,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 2
+          </Text>
+        </View>
       </View>
     </View>
   </RCTCallout>,
@@ -1541,21 +1494,26 @@ Array [
 exports[`Checkbox component tests Menu open radio 1`] = `
 Array [
   <View
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
+        "expanded": true,
       }
     }
     accessible={true}
     disabled={false}
     enableFocusRing={true}
     focusable={true}
-    hasSubmenu={false}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
     onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -1563,23 +1521,6 @@ Array [
     onResponderTerminate={[Function]}
     onResponderTerminationRequest={[Function]}
     onStartShouldSetResponder={[Function]}
-    props={
-      Object {
-        "accessibilityActions": Array [],
-        "accessibilityState": Object {
-          "expanded": true,
-        },
-        "componentRef": Object {
-          "current": null,
-        },
-        "delayHoverIn": 500,
-        "delayHoverOut": false,
-        "onAccessibilityAction": [Function],
-        "onClick": [Function],
-        "onHoverIn": [Function],
-        "onHoverOut": false,
-      }
-    }
     style={
       Object {
         "alignItems": "center",
@@ -1640,242 +1581,516 @@ Array [
     }
   >
     <View
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#ffffff",
+            "display": "flex",
+            "maxWidth": 300,
+            "minWidth": 128,
+            "padding": 4,
+          }
+        }
+      >
+        <View
+          accessibilityActions={
+            Array [
+              Object {
+                "name": "Toggle",
+              },
+            ]
+          }
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": undefined,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
+            }
+          }
+        >
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 0,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
+          accessibilityActions={
+            Array [
+              Object {
+                "name": "Toggle",
+              },
+            ]
+          }
+          accessibilityLabel="Option 2"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "checked": undefined,
+              "disabled": undefined,
+            }
+          }
+          accessible={true}
+          content="Option 2"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "marginTop": 2,
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
+            }
+          }
+        >
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "marginEnd": 4,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "opacity": 0,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+    <svg>
+      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
+    </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 2
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTCallout>,
+]
+`;
+
+exports[`Checkbox component tests Menu submenu 1`] = `
+Array [
+  <View
+    accessibilityActions={Array []}
+    accessibilityLabel="Default"
+    accessibilityRole="button"
+    accessibilityState={
+      Object {
+        "disabled": false,
+        "expanded": true,
+      }
+    }
+    accessible={true}
+    disabled={false}
+    enableFocusRing={true}
+    focusable={true}
+    onAccessibilityAction={[Function]}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={false}
+    onPress={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#f3f2f1",
+        "borderColor": "#8a8886",
+        "borderRadius": 4,
+        "borderWidth": 1,
+        "display": "flex",
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "minWidth": 96,
+        "padding": 5,
+        "paddingHorizontal": 11,
+        "width": undefined,
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
       style={
         Object {
-          "backgroundColor": "#ffffff",
-          "display": "flex",
-          "maxWidth": 300,
-          "minWidth": 128,
-          "padding": 4,
+          "color": "#323130",
+          "fontFamily": "Segoe UI",
+          "fontSize": 14,
+          "fontWeight": "600",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 0,
+          "marginTop": 0,
         }
       }
     >
+      Default
+    </Text>
+  </View>,
+  <RCTCallout
+    accessibilityRole="menu"
+    borderColor="#616161"
+    borderWidth={1}
+    dismissBehaviors={
+      Array [
+        "preventDismissOnKeyDown",
+        "preventDismissOnClickOutside",
+      ]
+    }
+    doNotTakePointerCapture={false}
+    onDismiss={[Function]}
+    setInitialFocus={false}
+    style={
+      Object {
+        "backgroundColor": "#faf9f8",
+        "borderColor": "#616161",
+        "borderWidth": 1,
+      }
+    }
+  >
+    <View
+      onMouseEnter={[Function]}
+      onMouseLeave={false}
+    >
       <View
-        accessibilityActions={
-          Array [
-            Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 1"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": undefined,
-            "disabled": undefined,
-          }
-        }
-        accessible={true}
-        content="Option 1"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
             "backgroundColor": "#ffffff",
             "display": "flex",
-            "flexDirection": "row",
             "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
+            "minWidth": 128,
+            "padding": 4,
           }
         }
       >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 0,
-                "width": 16,
-              },
-            ]
+        <View
+          accessibilityLabel="Option 1"
+          accessibilityRole="menuitem"
+          accessibilityState={
+            Object {
+              "disabled": undefined,
+            }
           }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessible={true}
+          content="Option 1"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityTap={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 1
-        </Text>
-      </View>
-      <View
-        accessibilityActions={
-          Array [
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 1
+          </Text>
+        </View>
+        <View
+          accessibilityActions={Array []}
+          accessibilityLabel="Option 2"
+          accessibilityRole="menuitem"
+          accessibilityState={
             Object {
-              "name": "Toggle",
-            },
-          ]
-        }
-        accessibilityLabel="Option 2"
-        accessibilityRole="menuitem"
-        accessibilityState={
-          Object {
-            "checked": undefined,
-            "disabled": undefined,
+              "disabled": undefined,
+              "expanded": false,
+            }
           }
-        }
-        accessible={true}
-        content="Option 2"
-        enableFocusRing={true}
-        focusable={true}
-        onAccessibilityAction={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "display": "flex",
-            "flexDirection": "row",
-            "marginTop": 2,
-            "maxWidth": 300,
-            "minHeight": 32,
-            "minWidth": 160,
-            "padding": 6,
-          }
-        }
-      >
-        <RNSVGSvgView
-          align="xMidYMid"
-          bbHeight={16}
-          bbWidth={16}
-          color={-12434878}
-          focusable={false}
-          height={16}
-          meetOrSlice={0}
-          minX={0}
-          minY={0}
-          style={
-            Array [
-              Object {
-                "backgroundColor": "transparent",
-                "borderWidth": 0,
-              },
-              Object {
-                "marginEnd": 4,
-              },
-              Object {
-                "flex": 0,
-                "height": 16,
-                "opacity": 0,
-                "width": 16,
-              },
-            ]
-          }
-          tintColor={-12434878}
-          vbHeight={16}
-          vbWidth={16}
-          width={16}
-          xml="
-    <svg>
-      <path fill='currentColor' d='M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z' />
-    </svg>"
-        >
-          <RNSVGGroup>
-            <RNSVGPath
-              d="M9.85355 3.14645C10.0488 3.34171 10.0488 3.65829 9.85355 3.85355L5.35355 8.35355C5.15829 8.54882 4.84171 8.54882 4.64645 8.35355L2.64645 6.35355C2.45118 6.15829 2.45118 5.84171 2.64645 5.64645C2.84171 5.45118 3.15829 5.45118 3.35355 5.64645L5 7.29289L9.14645 3.14645C9.34171 2.95118 9.65829 2.95118 9.85355 3.14645Z"
-              fill={
-                Array [
-                  2,
-                ]
-              }
-              propList={
-                Array [
-                  "fill",
-                ]
-              }
-            />
-          </RNSVGGroup>
-        </RNSVGSvgView>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+          accessible={true}
+          content="Option 2"
+          enableFocusRing={true}
+          focusable={true}
+          onAccessibilityAction={[Function]}
+          onAccessibilityTap={[Function]}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onHoverIn={[Function]}
+          onHoverOut={false}
+          onPress={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "color": "#424242",
-              "flexGrow": 1,
-              "fontFamily": "Segoe UI",
-              "fontSize": 14,
-              "fontWeight": "400",
-              "margin": 0,
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "display": "flex",
+              "flexDirection": "row",
+              "maxWidth": 300,
+              "minHeight": 32,
+              "minWidth": 160,
+              "padding": 6,
             }
           }
         >
-          Option 2
-        </Text>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#424242",
+                "flexGrow": 1,
+                "fontFamily": "Segoe UI",
+                "fontSize": 14,
+                "fontWeight": "400",
+                "margin": 0,
+              }
+            }
+          >
+            Option 2
+          </Text>
+          <RNSVGSvgView
+            align="xMidYMid"
+            bbHeight={16}
+            bbWidth={16}
+            color={-12434878}
+            focusable={false}
+            height={16}
+            meetOrSlice={0}
+            minX={0}
+            minY={0}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": 16,
+                  "width": 16,
+                },
+              ]
+            }
+            tintColor={-12434878}
+            vbHeight={16}
+            vbWidth={16}
+            width={16}
+            xml="
+          <svg>
+            <path fill='currentColor' d='M4.64645 2.14645C4.45118 2.34171 4.45118 2.65829 4.64645 2.85355L7.79289 6L4.64645 9.14645C4.45118 9.34171 4.45118 9.65829 4.64645 9.85355C4.84171 10.0488 5.15829 10.0488 5.35355 9.85355L8.85355 6.35355C9.04882 6.15829 9.04882 5.84171 8.85355 5.64645L5.35355 2.14645C5.15829 1.95118 4.84171 1.95118 4.64645 2.14645Z' />
+          </svg>"
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M4.64645 2.14645C4.45118 2.34171 4.45118 2.65829 4.64645 2.85355L7.79289 6L4.64645 9.14645C4.45118 9.34171 4.45118 9.65829 4.64645 9.85355C4.84171 10.0488 5.15829 10.0488 5.35355 9.85355L8.85355 6.35355C9.04882 6.15829 9.04882 5.84171 8.85355 5.64645L5.35355 2.14645C5.15829 1.95118 4.84171 1.95118 4.64645 2.14645Z"
+                fill={
+                  Array [
+                    2,
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
       </View>
     </View>
   </RCTCallout>,

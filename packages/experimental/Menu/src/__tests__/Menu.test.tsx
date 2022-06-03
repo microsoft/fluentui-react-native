@@ -146,6 +146,34 @@ describe('Checkbox component tests', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('Menu submenu', () => {
+    const tree = renderer
+      .create(
+        <Menu open>
+          <MenuTrigger>
+            <Button>Default</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem content="Option 1" />
+              <Menu>
+                <MenuTrigger>
+                  <MenuItem content="Option 2" />
+                </MenuTrigger>
+                <MenuPopover>
+                  <MenuList>
+                    <MenuItem content="Option 1" />
+                  </MenuList>
+                </MenuPopover>
+              </Menu>
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
 
 describe('Menu rerender tests', () => {
