@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix the link again",
+  "packageName": "@fluentui-react-native/experimental-expander",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
