@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 02 Jun 2022 09:23:22 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Jun 2022 19:33:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.63.1
+
+Fri, 03 Jun 2022 19:33:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.13.1
+
+## 0.63.0
+
+Fri, 03 Jun 2022 10:09:31 GMT
+
+### Minor changes
+
+- Initial empty test page for shadows (78454019+lyzhan7@users.noreply.github.com)
+
+### Patches
+
+- Added E2E tests for the Avatar (v.kozova13@gmail.com)
+
+## 0.62.7
+
+Fri, 03 Jun 2022 02:18:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-expander to v0.3.33
 
 ## 0.62.6
 
