@@ -1,4 +1,5 @@
 import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../FluentTester/TestComponents/ActivityIndicator/consts';
+import { HOMEPAGE_AVATAR_BUTTON } from '../../FluentTester/TestComponents/Avatar/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../FluentTester/TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../FluentTester/TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../FluentTester/TestComponents/Button/consts';
@@ -29,6 +30,10 @@ import { By, BasePage } from './BasePage.win';
 class NavigateAppPage extends BasePage {
   clickAndGoToActivityIndicatorPage() {
     this.activityIndicatorPage.click();
+  }
+
+  clickAndGoToAvatarPage() {
+    this.avatarPage.click();
   }
 
   clickAndGoToButtonPage() {
@@ -137,6 +142,10 @@ class NavigateAppPage extends BasePage {
 
   private get activityIndicatorPage() {
     return By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
+  }
+
+  private get avatarPage() {
+    return By(HOMEPAGE_AVATAR_BUTTON);
   }
 
   private get buttonPage() {
