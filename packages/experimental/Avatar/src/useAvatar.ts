@@ -11,21 +11,7 @@ import { getHashCodeWeb } from './getHashCode';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const {
-    avatarColor,
-    active,
-    accessibilityLabel,
-    accessibilityHint,
-    activeAppearance,
-    badge,
-    idForColor,
-    initials,
-    name,
-    src,
-    ring,
-    shape,
-    ...rest
-  } = props;
+  const { avatarColor, active, accessibilityLabel, activeAppearance, badge, idForColor, initials, name, src, ring, shape, ...rest } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
@@ -33,9 +19,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
   const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
 
   const imageProps: ImageProps = {
-    accessibilityLabel: accessibilityLabel || accessibilityText,
-    accessibilityHint,
-    accessible: true,
     source: src ? ({ uri: src } as ImageSourcePropType) : undefined,
   };
 
@@ -56,6 +39,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
 
   return {
     props: {
+      accessible: true,
       avatarColor: _avatarColor,
       shape: shape || 'circular',
       ...rest,
@@ -65,7 +49,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
       badge: badgeProps,
       initials: _initials,
       accessibilityLabel: accessibilityLabel || accessibilityText,
-      accessibilityHint,
     },
     state: {
       ...state,

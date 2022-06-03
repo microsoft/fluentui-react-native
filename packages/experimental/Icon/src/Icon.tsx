@@ -41,6 +41,7 @@ const fontStyleMemoCache = getMemoCache();
 
 function renderFontIcon(iconProps: IconProps) {
   const fontSource: FontIconProps = iconProps.fontSource;
+  const accessible = iconProps.accessible === undefined ? true : iconProps.accessible;
 
   const style: TextStyle = fontStyleMemoCache(
     {
@@ -56,7 +57,11 @@ function renderFontIcon(iconProps: IconProps) {
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
-  return <Text style={style}>{char}</Text>;
+  return (
+    <Text accessible={accessible} style={style}>
+      {char}
+    </Text>
+  );
 }
 
 function renderSvg(iconProps: IconProps) {
@@ -69,16 +74,17 @@ function renderSvg(iconProps: IconProps) {
   // If a color for the icon is not supplied, fall back to white or black depending on appearance
   // Tracked by issue #728
   const iconColor = downgradeColor(color);
+  const accessible = iconProps.accessible === undefined ? true : iconProps.accessible;
 
   if (svgIconProps.src) {
     return (
-      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
+      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
         <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
-      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
+      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
         <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
