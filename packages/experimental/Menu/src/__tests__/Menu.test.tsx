@@ -49,6 +49,25 @@ describe('Checkbox component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Menu defaultOpen', () => {
+    const tree = renderer
+      .create(
+        <Menu defaultOpen>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItem content="Option 1" />
+              <MenuItem disabled content="Option 2" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Menu open checkbox and divider', () => {
     const tree = renderer
       .create(
@@ -60,7 +79,7 @@ describe('Checkbox component tests', () => {
             <MenuList>
               <MenuItemCheckbox content="Option 1" name="Option 1" />
               <MenuDivider />
-              <MenuItemCheckbox content="Option 2" name="Option 2" />
+              <MenuItemCheckbox disabled content="Option 2" name="Option 2" />
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -80,6 +99,46 @@ describe('Checkbox component tests', () => {
             <MenuList>
               <MenuItemRadio content="Option 1" name="Option 1" />
               <MenuItemRadio content="Option 2" name="Option 2" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Menu open checkbox defaultChecked', () => {
+    const tree = renderer
+      .create(
+        <Menu open defaultChecked={{ 'Option 1': true }}>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuDivider />
+              <MenuItemCheckbox content="Option 2" name="Option 2" />
+            </MenuList>
+          </MenuPopover>
+        </Menu>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Menu open checkbox checked', () => {
+    const tree = renderer
+      .create(
+        <Menu open checked={{ 'Option 1': true }}>
+          <MenuTrigger>
+            <Button>Open</Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuDivider />
+              <MenuItemCheckbox content="Option 2" name="Option 2" />
             </MenuList>
           </MenuPopover>
         </Menu>,
