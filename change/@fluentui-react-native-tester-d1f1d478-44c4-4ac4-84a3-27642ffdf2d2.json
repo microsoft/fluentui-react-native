@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Initial empty test page for shadows",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
