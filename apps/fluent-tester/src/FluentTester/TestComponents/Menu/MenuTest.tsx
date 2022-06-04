@@ -14,6 +14,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { E2EMenuTest } from './E2EMenuTest';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -194,6 +195,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Submenu',
     component: MenuSubMenu,
+  },
+  {
+    name: 'Menu E2E',
+    component: E2EMenuTest,
   },
 ];
 
