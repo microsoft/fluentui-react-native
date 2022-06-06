@@ -1,5 +1,6 @@
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
+import { Platform } from 'react-native';
 import { useMenuContext } from '../context/menuContext';
 import { MenuListProps, MenuListState } from './MenuList.types';
 
@@ -11,12 +12,28 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   const isCheckedControlled = typeof context.checked !== 'undefined';
   const [checked, onCheckedChange, selectRadio] = useMenuCheckedState(isCheckedControlled, context);
 
+  /**
+   * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
+   * hosting the menu. For whatever reason, to get the timing _just_ right to actually focus, we need an additional `setTimeout`
+   *  on top of the `useLayoutEffect` hook.
+   */
+  const focusZoneRef = React.useRef<IFocusable>(null);
+
+  React.useLayoutEffect(() => {
+    if (Platform.OS === 'macos') {
+      setTimeout(() => {
+        focusZoneRef.current.focus();
+      }, 0);
+    }
+  });
+
   return {
     ...context,
     isCheckedControlled,
     checked,
     onCheckedChange,
     selectRadio,
+    focusZoneRef,
   };
 };
 

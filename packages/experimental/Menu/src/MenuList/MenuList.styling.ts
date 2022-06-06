@@ -1,5 +1,5 @@
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultMenuListTokens } from './MenuListTokens';
 import { menuListName, MenuListProps, MenuListTokens, MenuListSlotProps } from './MenuList.types';
 
@@ -12,7 +12,6 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
           backgroundColor: tokens.backgroundColor,
           display: 'flex',
           ...layoutStyles.from(tokens, theme),
-          ...borderStyles.from(tokens, theme),
         },
         gap: tokens.gap,
       }),

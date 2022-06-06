@@ -1,11 +1,12 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { IBackgroundColorTokens, IBorderTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { IFocusable, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import React from 'react';
 
 export const menuListName = 'MenuList';
 
-export interface MenuListTokens extends LayoutTokens, IBorderTokens, IBackgroundColorTokens {
+export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
   gap?: number;
 }
 
@@ -19,6 +20,7 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
 export interface MenuListState extends MenuListProps {
   isCheckedControlled: boolean;
   selectRadio?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  focusZoneRef: React.RefObject<IFocusable>;
 }
 
 export interface MenuListSlotProps {

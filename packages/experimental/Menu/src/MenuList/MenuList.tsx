@@ -42,46 +42,29 @@ export const MenuList = compose<MenuListType>({
     const contextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList);
 
-    /**
-     * On macOS, focus isn't placed by default on the first focusable element. We get around this by focusing on the inner FocusZone
-     * hosting the menu. For whatever reason, to get the timing _just_ right to actually focus, we need an additional `setTimeout`
-     *  on top of the `useLayoutEffect` hook.
-     */
-    const focusZoneRef = React.useRef<IFocusable>(null);
-
-    React.useLayoutEffect(() => {
-      if (Platform.OS === 'macos') {
-        setTimeout(() => {
-          focusZoneRef.current?.focus();
-        }, 0);
-      }
-    });
-
     return (_final: MenuListProps, children: React.ReactNode) => {
-      if (Platform.OS === 'macos') {
-        return (
-          <MenuListProvider value={contextValue}>
-            <Slots.root>
-              <Slots.focusZone
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                enableFocusRing={false}
-                componentRef={focusZoneRef}
-                defaultTabbableElement={focusZoneRef}
-                focusZoneDirection={'vertical'}
-              >
-                {children}
-              </Slots.focusZone>
-            </Slots.root>
-          </MenuListProvider>
+      // macOS needs an extra FocusZone slot to get proper keyboarding behavior with menus.
+      const content =
+        Platform.OS === 'macos' ? (
+          <Slots.focusZone
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore - FocusZoneProps inherits ViewProps, though on macOS they are supported
+            enableFocusRing={false}
+            componentRef={menuList.focusZoneRef}
+            defaultTabbableElement={menuList.focusZoneRef}
+            focusZoneDirection={'vertical'}
+          >
+            {children}
+          </Slots.focusZone>
+        ) : (
+          { children }
         );
-      } else {
-        return (
-          <MenuListProvider value={contextValue}>
-            <Slots.root>{children}</Slots.root>
-          </MenuListProvider>
-        );
-      }
+
+      return (
+        <MenuListProvider value={contextValue}>
+          <Slots.root>{content}</Slots.root>
+        </MenuListProvider>
+      );
     };
   },
 });
