@@ -11,7 +11,6 @@ const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height, color } = iconProps;
-  const accessible = iconProps.accessible ?? true;
   const style = mergeStyles(
     iconProps.style,
     rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
@@ -21,7 +20,7 @@ function renderRasterImage(iconProps: IconProps) {
     <Image
       source={iconProps.rasterImageSource.src}
       style={style}
-      accessible={accessible}
+      accessible={iconProps.accessible}
       accessibilityRole="image"
       accessibilityLabel={iconProps.accessibilityLabel}
     />
@@ -42,7 +41,6 @@ const fontStyleMemoCache = getMemoCache();
 
 function renderFontIcon(iconProps: IconProps) {
   const fontSource: FontIconProps = iconProps.fontSource;
-  const accessible = iconProps.accessible ?? true;
 
   const style: TextStyle = fontStyleMemoCache(
     {
@@ -59,7 +57,7 @@ function renderFontIcon(iconProps: IconProps) {
 
   const char = String.fromCharCode(fontSource.codepoint);
   return (
-    <Text accessible={accessible} style={style}>
+    <Text accessible={iconProps.accessible} style={style}>
       {char}
     </Text>
   );
@@ -67,7 +65,7 @@ function renderFontIcon(iconProps: IconProps) {
 
 function renderSvg(iconProps: IconProps) {
   const svgIconProps: SvgIconProps = iconProps.svgSource;
-  const { width, height, color } = iconProps;
+  const { accessible, accessibilityLabel, width, height, color } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
 
@@ -75,17 +73,16 @@ function renderSvg(iconProps: IconProps) {
   // If a color for the icon is not supplied, fall back to white or black depending on appearance
   // Tracked by issue #728
   const iconColor = downgradeColor(color);
-  const accessible = iconProps.accessible ?? true;
 
   if (svgIconProps.src) {
     return (
-      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
+      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
         <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
-      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
+      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
         <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
@@ -99,9 +96,11 @@ export const Icon = stagedComponent((props: IconProps) => {
 
   return (rest: IconProps) => {
     const color = props.color || theme.colors.buttonText;
+    const accessible = props.accessible ?? true;
 
     const baseProps: IconProps = {
       color: color,
+      accessible,
     };
 
     const newProps = mergeProps<IconProps>(baseProps, props, rest);
