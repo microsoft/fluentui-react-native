@@ -26,6 +26,7 @@ exports[`Badge component tests Badge all props 1`] = `
   }
 >
   <Text
+    accessible={true}
     style={
       Object {
         "color": "#fff",

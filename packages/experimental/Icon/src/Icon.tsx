@@ -11,6 +11,7 @@ const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
 function renderRasterImage(iconProps: IconProps) {
   const { width, height, color } = iconProps;
+  const accessible = iconProps.accessible ?? true;
   const style = mergeStyles(
     iconProps.style,
     rasterImageStyleCache({ width: width, height: height, tintColor: color }, [width, height, color])[0],
@@ -20,7 +21,7 @@ function renderRasterImage(iconProps: IconProps) {
     <Image
       source={iconProps.rasterImageSource.src}
       style={style}
-      accessible={true}
+      accessible={accessible}
       accessibilityRole="image"
       accessibilityLabel={iconProps.accessibilityLabel}
     />
@@ -41,7 +42,7 @@ const fontStyleMemoCache = getMemoCache();
 
 function renderFontIcon(iconProps: IconProps) {
   const fontSource: FontIconProps = iconProps.fontSource;
-  const accessible = iconProps.accessible === undefined ? true : iconProps.accessible;
+  const accessible = iconProps.accessible ?? true;
 
   const style: TextStyle = fontStyleMemoCache(
     {
@@ -74,7 +75,7 @@ function renderSvg(iconProps: IconProps) {
   // If a color for the icon is not supplied, fall back to white or black depending on appearance
   // Tracked by issue #728
   const iconColor = downgradeColor(color);
-  const accessible = iconProps.accessible === undefined ? true : iconProps.accessible;
+  const accessible = iconProps.accessible ?? true;
 
   if (svgIconProps.src) {
     return (
