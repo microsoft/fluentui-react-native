@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import MenuPageObject, { MenuComponentSelector } from '../pages/MenuPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, MENUITEM_A11Y_ROLE, MENU_A11Y_ROLE } from '../../common/consts';
-import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from 'src/FluentTester/TestComponents/Menu';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, MENU_A11Y_ROLE } from '../../common/consts';
+import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../../../FluentTester/TestComponents/Menu';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Button Testing Initialization', function () {
