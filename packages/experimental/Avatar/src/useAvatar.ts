@@ -1,5 +1,4 @@
 import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
-import { ImageProps, ImageSourcePropType } from 'react-native';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
@@ -21,7 +20,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
     idForColor,
     initials,
     name,
-    src,
     ring,
     shape,
     ...rest
@@ -31,10 +29,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
   const transparentRing = !!ring?.transparent;
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
   const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
-
-  const imageProps: ImageProps = {
-    source: src ? ({ uri: src } as ImageSourcePropType) : undefined,
-  };
 
   const badgeProps: PresenceBadgeProps = {
     size: 'small',
@@ -61,7 +55,6 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
       ...rest,
       active,
       activeAppearance,
-      image: imageProps,
       badge: badgeProps,
       initials: _initials,
     },
