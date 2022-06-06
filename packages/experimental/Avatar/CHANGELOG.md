@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Mon, 06 Jun 2022 08:34:25 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jun 2022 18:30:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.37
+
+Mon, 06 Jun 2022 18:30:37 GMT
+
+### Patches
+
+- Added Avatar migration and added image prop (v.kozova13@gmail.com)
 
 ## 0.14.36
 

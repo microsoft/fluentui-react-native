@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 18:30:37 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "e07a112e088d569bde0da58b21f97a4fdc9a5024",
+            "comment": "Write initial snapshot and rerender tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Jun 2022 19:33:31 GMT",
       "tag": "@fluentui-react-native/menu_v0.13.1",
       "version": "0.13.1",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 03 Jun 2022 19:33:31 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jun 2022 18:30:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Mon, 06 Jun 2022 18:30:37 GMT
+
+### Minor changes
+
+- Write initial snapshot and rerender tests (ruaraki@microsoft.com)
 
 ## 0.13.1
 

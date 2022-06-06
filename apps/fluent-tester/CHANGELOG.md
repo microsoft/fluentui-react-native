@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 06 Jun 2022 08:34:26 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jun 2022 18:30:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.63.4
+
+Mon, 06 Jun 2022 18:30:37 GMT
+
+### Patches
+
+- Added Avatar migration and added image prop (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.37
+- Bump @fluentui-react-native/menu to v0.14.0
 
 ## 0.63.3
 

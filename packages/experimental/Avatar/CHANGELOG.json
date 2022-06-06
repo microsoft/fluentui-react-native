@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 18:30:37 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.37",
+      "version": "0.14.37",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "21bc6e21158561bf2654a5fb1d532db3f45264a8",
+            "comment": "Added Avatar migration and added image prop"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 08:34:25 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.36",
       "version": "0.14.36",

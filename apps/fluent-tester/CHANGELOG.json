@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 18:30:37 GMT",
+      "tag": "@fluentui-react-native/tester_v0.63.4",
+      "version": "0.63.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "21bc6e21158561bf2654a5fb1d532db3f45264a8",
+            "comment": "Added Avatar migration and added image prop"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.37",
+            "commit": "e07a112e088d569bde0da58b21f97a4fdc9a5024"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.14.0",
+            "commit": "e07a112e088d569bde0da58b21f97a4fdc9a5024"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 08:34:26 GMT",
       "tag": "@fluentui-react-native/tester_v0.63.3",
       "version": "0.63.3",
