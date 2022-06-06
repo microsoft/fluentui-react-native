@@ -67,7 +67,6 @@ export type AvatarColor = 'neutral' | 'brand' | 'colorful' | AvatarNamedColor;
 export type IconAlignment = 'start' | 'center' | 'end';
 
 export interface RingConfig {
-  accent?: boolean;
   transparent?: boolean;
   ringThickness?: number;
   innerGap?: number;
@@ -135,11 +134,6 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   idForColor?: string;
 
   /**
-   * The Avatar's image.
-   */
-  image?: ImageProps;
-
-  /**
    * (optional) Custom initials.
    *
    * It is usually not necessary to specify custom initials; by default they will be derived from the `name` prop,
@@ -164,9 +158,9 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
   shape?: AvatarShape;
 
   /**
-   * Currently used for image URL, will be deprecated when image prop works
+   * Shorthand for passing image URL instead of using `image` prop
    */
-  src?: string;
+  imageUrl?: string;
 }
 
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {

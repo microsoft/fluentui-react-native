@@ -107,7 +107,7 @@ export const StandardUsage: FunctionComponent = () => {
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Photo of Satya Nadella"
         badge={{ status: presence === undefinedText ? undefined : presence }}
-        src={showImage ? satyaPhotoUrl : undefined}
+        imageUrl={showImage ? satyaPhotoUrl : undefined}
         avatarColor={avatarColor}
       />
       <JSAvatar
