@@ -25,6 +25,7 @@ export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
   focusZone: FocusZoneProps;
 }
+
 export interface MenuListType {
   props: MenuListProps;
   tokens: MenuListTokens;

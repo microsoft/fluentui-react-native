@@ -1,8 +1,90 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 02 Jun 2022 09:23:22 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jun 2022 20:30:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.63.6
+
+Mon, 06 Jun 2022 20:30:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.14.2
+
+## 0.63.5
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Fixed accessibility bug (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.40
+- Bump @fluentui-react-native/button to v0.22.27
+- Bump @fluentui-react-native/experimental-avatar to v0.14.38
+- Bump @fluentui-react-native/experimental-button to v0.15.28
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.10
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.45
+- Bump @fluentui-react-native/experimental-tabs to v0.4.50
+- Bump @fluentui-react-native/icon to v0.12.1
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
+- Bump @fluentui-react-native/menu to v0.14.1
+- Bump @fluentui/react-native to v0.29.13
+
+## 0.63.4
+
+Mon, 06 Jun 2022 18:30:37 GMT
+
+### Patches
+
+- Added Avatar migration and added image prop (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.37
+- Bump @fluentui-react-native/menu to v0.14.0
+
+## 0.63.3
+
+Mon, 06 Jun 2022 08:34:26 GMT
+
+### Patches
+
+- Fixed SVG icon size and color for the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.36
+
+## 0.63.2
+
+Fri, 03 Jun 2022 21:01:53 GMT
+
+### Patches
+
+- Add a test for infinite submenus (sanajmi@microsoft.com)
+
+## 0.63.1
+
+Fri, 03 Jun 2022 19:33:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.13.1
+
+## 0.63.0
+
+Fri, 03 Jun 2022 10:09:31 GMT
+
+### Minor changes
+
+- Initial empty test page for shadows (78454019+lyzhan7@users.noreply.github.com)
+
+### Patches
+
+- Added E2E tests for the Avatar (v.kozova13@gmail.com)
+
+## 0.62.7
+
+Fri, 03 Jun 2022 02:18:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-expander to v0.3.33
 
 ## 0.62.6
 

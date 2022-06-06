@@ -107,6 +107,7 @@ const Submenu: React.FunctionComponent = () => {
         <MenuList>
           <MenuItem content="A nested MenuItem" />
           <MenuItem content="A second nested MenuItem" />
+          <Submenu />
         </MenuList>
       </MenuPopover>
     </Menu>

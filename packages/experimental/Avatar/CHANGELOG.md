@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 02 Jun 2022 09:23:22 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jun 2022 19:20:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.38
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Fixed accessibility bug (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.40
+- Bump @fluentui-react-native/icon to v0.12.1
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
+
+## 0.14.37
+
+Mon, 06 Jun 2022 18:30:37 GMT
+
+### Patches
+
+- Added Avatar migration and added image prop (v.kozova13@gmail.com)
+
+## 0.14.36
+
+Mon, 06 Jun 2022 08:34:25 GMT
+
+### Patches
+
+- Fixed SVG icon size and color for the Avatar (v.kozova13@gmail.com)
 
 ## 0.14.35
 

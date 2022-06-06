@@ -2,6 +2,78 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 20:30:26 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.2",
+      "version": "0.14.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "59f213110a277b6414c0ab505d4fce2e825f4b81",
+            "comment": "Spec and minor fixes"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 19:20:10 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.1",
+      "version": "0.14.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.6",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.2",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.22.27",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 18:30:37 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "e07a112e088d569bde0da58b21f97a4fdc9a5024",
+            "comment": "Write initial snapshot and rerender tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Jun 2022 19:33:31 GMT",
+      "tag": "@fluentui-react-native/menu_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "add97d2ed7de9c3e4c9aa4517ba3ff66cc1b7db6",
+            "comment": "Fix some hover shenanigans"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 01 Jun 2022 18:18:40 GMT",
       "tag": "@fluentui-react-native/menu_v0.13.0",
       "version": "0.13.0",

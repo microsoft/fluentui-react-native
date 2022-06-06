@@ -2,6 +2,69 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 19:20:10 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.38",
+      "version": "0.14.38",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92",
+            "comment": "Fixed accessibility bug"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.40",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.12.1",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.2",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 18:30:37 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.37",
+      "version": "0.14.37",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "21bc6e21158561bf2654a5fb1d532db3f45264a8",
+            "comment": "Added Avatar migration and added image prop"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 08:34:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.36",
+      "version": "0.14.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "17e31c4ec04628cb14f7cf58246b1d9ce5399863",
+            "comment": "Fixed SVG icon size and color for the Avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jun 2022 09:23:22 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.35",
       "version": "0.14.35",
