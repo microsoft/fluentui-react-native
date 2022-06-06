@@ -1,6 +1,6 @@
 import { useMenuContext } from '../context/menuContext';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
+import { MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
 import { delayHover, isCloseOnHoverOutEnabled } from '../consts';
@@ -10,7 +10,7 @@ const accessibilityActions =
 const expandedState = { expanded: true };
 const collapsedState = { expanded: false };
 
-export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
+export const useMenuTrigger = (): MenuTriggerState => {
   const context = useMenuContext();
   const { open, openOnHover, popoverHoverOutTimer, setOpen, setTriggerHoverOutTimer, triggerHoverOutTimer, triggerRef } = context;
 

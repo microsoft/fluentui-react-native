@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Spec and minor fixes",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
