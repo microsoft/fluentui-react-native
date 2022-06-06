@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed SVG icon size and color for the Avatar",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
