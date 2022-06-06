@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 02 Jun 2022 09:23:22 GMT and should not be manually modified.
+This log was last generated on Mon, 06 Jun 2022 08:34:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.36
+
+Mon, 06 Jun 2022 08:34:25 GMT
+
+### Patches
+
+- Fixed SVG icon size and color for the Avatar (v.kozova13@gmail.com)
 
 ## 0.14.35
 

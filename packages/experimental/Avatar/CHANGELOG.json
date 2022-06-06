@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 08:34:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.36",
+      "version": "0.14.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "17e31c4ec04628cb14f7cf58246b1d9ce5399863",
+            "comment": "Fixed SVG icon size and color for the Avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 02 Jun 2022 09:23:22 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.35",
       "version": "0.14.35",
