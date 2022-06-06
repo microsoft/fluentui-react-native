@@ -98,7 +98,7 @@ export const StandardUsage: FunctionComponent = () => {
       </View>
       <JSAvatar name="Richard" avatarColor="colorful" />
       <JSAvatar icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }} size={56} />
-      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps } }} size={120} />
+      <JSAvatar accessibilityLabel="Fall-back Icon" accessibilityHint="A picture representing a user" size={120} />
       <JSAvatar
         active={active}
         activeAppearance={activeAppearance}
@@ -129,8 +129,10 @@ export const StandardUsage: FunctionComponent = () => {
             accessibilityLabel="SVG Icon"
             icon={iconProps}
             avatarColor={avatarColor}
+            badge={{ status: 'outOfOffice' }}
           />
           <JSAvatar
+            accessibilityHint="A picture representing a user"
             active={active}
             activeAppearance={activeAppearance}
             size={imageSize === undefinedText ? undefined : imageSize}
@@ -138,6 +140,7 @@ export const StandardUsage: FunctionComponent = () => {
             accessibilityLabel="SVG Icon"
             icon={{ svgSource: svgProps }}
             avatarColor={avatarColor}
+            badge={{ status: 'away' }}
             idForColor="15"
           />
         </>

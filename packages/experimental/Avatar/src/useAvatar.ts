@@ -10,11 +10,25 @@ import { getHashCodeWeb } from './getHashCode';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { avatarColor, active, activeAppearance, badge, idForColor, initials, name, ring, shape, ...rest } = props;
+  const {
+    avatarColor,
+    active,
+    accessibilityLabel,
+    accessibilityRole,
+    activeAppearance,
+    badge,
+    idForColor,
+    initials,
+    name,
+    ring,
+    shape,
+    ...rest
+  } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
+  const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
 
   const badgeProps: PresenceBadgeProps = {
     size: 'small',
@@ -33,6 +47,9 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
 
   return {
     props: {
+      accessible: true,
+      accessibilityLabel: accessibilityLabel || accessibilityText,
+      accessibilityRole: accessibilityRole ?? 'image',
       avatarColor: _avatarColor,
       shape: shape || 'circular',
       ...rest,
