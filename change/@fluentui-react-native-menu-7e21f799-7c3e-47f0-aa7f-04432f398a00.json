@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Write initial snapshot and rerender tests",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

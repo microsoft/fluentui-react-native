@@ -7,12 +7,14 @@ import { delayHover, isCloseOnHoverOutEnabled } from '../consts';
 
 const accessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
+const expandedState = { expanded: true };
+const collapsedState = { expanded: false };
 
 export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
   const context = useMenuContext();
   const { open, openOnHover, popoverHoverOutTimer, setOpen, setTriggerHoverOutTimer, triggerHoverOutTimer, triggerRef } = context;
 
-  const accessibilityState = open ? { expanded: true } : { expanded: false };
+  const accessibilityState = open ? expandedState : collapsedState;
 
   const onAccessibilityAction = React.useCallback(
     (e: AccessibilityActionEvent) => {
