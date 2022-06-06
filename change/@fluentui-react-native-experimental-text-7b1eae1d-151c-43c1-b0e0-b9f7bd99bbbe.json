@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add text implementation v2",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

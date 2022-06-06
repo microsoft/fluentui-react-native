@@ -14,12 +14,15 @@ const nameMap: { [key: string]: string } = {
 export const avatarStates: (keyof JSAvatarTokens)[] = [
   ...AvatarColors,
   ...AvatarSizesForTokens,
+  'neutral',
+  'brand',
   'circular',
   'square',
   'inactive',
   'ringColor',
   'ringBackgroundColor',
   'iconColor',
+  'iconSize',
   'size',
 ];
 
@@ -98,10 +101,11 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             position: 'absolute',
-            color: tokens.iconColor,
-            width: tokens.iconSize,
-            height: tokens.iconSize,
+            fontSize: tokens.iconSize,
           },
+          color: tokens.color,
+          width: tokens.iconSize,
+          height: tokens.iconSize,
         };
       },
       ['iconSize', 'iconColor'],

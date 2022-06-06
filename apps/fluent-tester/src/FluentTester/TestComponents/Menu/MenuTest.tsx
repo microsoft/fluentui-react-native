@@ -11,7 +11,6 @@ import {
   MenuDivider,
 } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
-import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -25,7 +24,9 @@ const MenuDefault: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <Text>Hello world!!!</Text>
+            <MenuItem content="A plain MenuItem" />
+            <MenuItem disabled content="A second disabled plain MenuItem" />
+            <MenuItem content="A third plain MenuItem" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -56,7 +57,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
           <MenuList>
             <MenuItem content="A plain MenuItem" />
             <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
-            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox disabled name="itemThree" content="A disabled MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -103,7 +105,9 @@ const Submenu: React.FunctionComponent = () => {
       </MenuTrigger>
       <MenuPopover>
         <MenuList>
-          <Text>Hello world!!!</Text>
+          <MenuItem content="A nested MenuItem" />
+          <MenuItem content="A second nested MenuItem" />
+          <Submenu />
         </MenuList>
       </MenuPopover>
     </Menu>

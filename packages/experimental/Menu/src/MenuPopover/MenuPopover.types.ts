@@ -1,14 +1,11 @@
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import { DismissBehaviors } from '@fluentui-react-native/callout';
+import { IViewProps } from '@fluentui-react-native/adapters';
+import { ICalloutProps } from '@fluentui-react-native/callout';
 
 export const menuPopoverName = 'MenuPopover';
 
-export interface MenuPopoverProps extends Omit<IViewProps, 'onPress'> {}
+export type MenuPopoverProps = ICalloutProps;
 
 export interface MenuPopoverState {
-  dismissBehaviors: DismissBehaviors[];
-  doNotTakePointerCapture: boolean;
-  onDismiss: () => void;
-  setInitialFocus: boolean;
-  triggerRef: React.RefObject<React.Component>;
+  props: ICalloutProps;
+  innerView: IViewProps;
 }

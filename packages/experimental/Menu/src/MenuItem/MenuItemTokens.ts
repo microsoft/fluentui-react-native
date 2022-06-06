@@ -7,6 +7,8 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   backgroundColor: t.colors.neutralBackground1,
   borderRadius: globalTokens.corner.radius.medium,
   checkmarkSize: 16,
+  submenuIndicatorPadding: globalTokens.spacing.none,
+  submenuIndicatorSize: 16,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size[300],

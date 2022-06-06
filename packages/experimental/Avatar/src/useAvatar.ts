@@ -1,7 +1,7 @@
-import { JSAvatarProps, AvatarInfo, JSAvatarState } from './JSAvatar.types';
-import { ImageProps, ImageSourcePropType } from 'react-native';
+import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
+import { getHashCodeWeb } from './getHashCode';
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -10,16 +10,25 @@ import { titles } from './titles';
  * @returns configured props and state for FURN Avatar
  */
 export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
-  const { active, accessibilityLabel, activeAppearance, badge, initials, name, src, ring, shape, ...rest } = props;
+  const {
+    avatarColor,
+    active,
+    accessibilityLabel,
+    accessibilityRole,
+    activeAppearance,
+    badge,
+    idForColor,
+    initials,
+    name,
+    ring,
+    shape,
+    ...rest
+  } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
   const transparentRing = !!ring?.transparent;
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
-
-  const imageProps: ImageProps = {
-    accessibilityLabel,
-    source: src ? ({ uri: src } as ImageSourcePropType) : undefined,
-  };
+  const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
 
   const badgeProps: PresenceBadgeProps = {
     size: 'small',
@@ -33,14 +42,19 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
   };
 
   const _initials = initials || getInitials(name);
+  const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
+  const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
 
   return {
     props: {
+      accessible: true,
+      accessibilityLabel: accessibilityLabel || accessibilityText,
+      accessibilityRole: accessibilityRole ?? 'image',
+      avatarColor: _avatarColor,
       shape: shape || 'circular',
       ...rest,
       active,
       activeAppearance,
-      image: imageProps,
       badge: badgeProps,
       initials: _initials,
     },

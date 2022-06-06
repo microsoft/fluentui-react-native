@@ -2,6 +2,9 @@
 
 exports[`Avatar rendering renders Avatar 1`] = `
 <View
+  accessibilityLabel=""
+  accessibilityRole="image"
+  accessible={true}
   shape="circular"
   style={
     Object {
@@ -17,11 +20,12 @@ exports[`Avatar rendering renders Avatar 1`] = `
   }
 >
   <View
+    accessible={false}
     style={
       Object {
         "alignItems": "center",
         "alignSelf": "stretch",
-        "backgroundColor": "#4f6bed",
+        "backgroundColor": "#e6e6e6",
         "borderColor": "#ffffff",
         "borderRadius": 9999,
         "borderWidth": 0,

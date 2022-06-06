@@ -23,7 +23,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
   },
   useRender: (userProps: MenuItemCheckboxProps, useSlots: UseSlots<MenuItemCheckboxType>) => {
     const menuItem = useMenuItemCheckbox(userProps);
-    const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer]);
+    const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer] || userProps[layer]);
 
     return menuItemFinalRender(menuItem, Slots);
   },

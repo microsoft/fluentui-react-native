@@ -14,16 +14,18 @@ import { useMenuListContext } from '../context/menuListContext';
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
 export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
-  const { name } = props;
+  const { disabled, name } = props;
   const context = useMenuListContext();
   const checked = context.checked?.[name];
   const onCheckedChange = context.onCheckedChange;
 
   const toggleChecked = React.useCallback(
     (e: InteractionEvent) => {
-      onCheckedChange(e, name, !checked);
+      if (!disabled) {
+        onCheckedChange(e, name, !checked);
+      }
     },
-    [checked, name, onCheckedChange],
+    [checked, disabled, name, onCheckedChange],
   );
 
   return useMenuCheckboxInteraction(props, toggleChecked);
@@ -74,12 +76,14 @@ export const useMenuCheckboxInteraction = (
     : defaultAccessibilityActions;
   const onAccessibilityActionProp = React.useCallback(
     (event: AccessibilityActionEvent) => {
-      if (event.nativeEvent.actionName === 'Toggle') {
-        toggleCallback(event);
+      if (!disabled) {
+        if (event.nativeEvent.actionName === 'Toggle') {
+          toggleCallback(event);
+        }
+        onAccessibilityAction && onAccessibilityAction(event);
       }
-      onAccessibilityAction && onAccessibilityAction(event);
     },
-    [toggleCallback, onAccessibilityAction],
+    [disabled, toggleCallback, onAccessibilityAction],
   );
 
   const state = {
@@ -93,11 +97,11 @@ export const useMenuCheckboxInteraction = (
       ...pressable.props,
       accessible: true,
       accessibilityActions: accessibilityActionsProp,
-      accessibilityLabel: props.accessibilityLabel,
+      accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityRole: 'menuitem',
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
       enableFocusRing: true,
-      focusable: !disabled,
+      focusable: true,
       onAccessibilityAction: onAccessibilityActionProp,
       ref: buttonRef,
       ...onKeyProps,
