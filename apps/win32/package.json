@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@office-iss/react-native-win32": "^0.64.8",
-    "@office-iss/rex-win32": "0.64.26-devmain.14807.10000",
+    "@office-iss/rex-win32": "0.64.30-devmain.15128.10000",
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
