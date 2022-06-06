@@ -9,12 +9,12 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.0", "@appium/base-driver@^8.5.5":
-  version "8.5.5"
-  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.5.5.tgz#a5f755a4df735b416236ed2627c0c6db802a3912"
-  integrity sha512-Sxuyqznyia2RRE1P+2HVKQZj4hGWydboEIp/hxiOOLECBs8SSXiBCIpYHhrYAKZb+vcrN8Z4mWfyRupg12AUog==
+"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.0", "@appium/base-driver@^8.5.7":
+  version "8.5.7"
+  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.5.7.tgz#67d63c45fbc9f70f8ee7a4ab4fcf6c07f9c7eb53"
+  integrity sha512-r8iNuh3Ivo2jgVfu942sQf5wOsTbYn7jsRaB/1pCrH/4AXkLz6EL1KLTS7Zo2P2auJp6d9wO4S0550/W8iy2jA==
   dependencies:
-    "@appium/support" "^2.59.1"
+    "@appium/support" "^2.59.2"
     "@babel/runtime" "7.18.3"
     "@colors/colors" "1.5.0"
     async-lock "1.3.1"
@@ -33,19 +33,19 @@
     source-map-support "0.5.21"
     validate.js "0.13.1"
 
-"@appium/base-plugin@^1.9.1":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@appium/base-plugin/-/base-plugin-1.9.1.tgz#099b7b22eec0ad955cc3209c4a7c4534eff254d8"
-  integrity sha512-OPXH2fL2JVPj6vgnrcPOJG/k2UHJ2Ra/L5bhc4hvp2vPgFI7rTlEYdOch+H99qDm2heFZxC/y1lj5YKYHdjBXw==
+"@appium/base-plugin@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@appium/base-plugin/-/base-plugin-1.9.2.tgz#17e83d31784bb173fa217111047ec20970c80a12"
+  integrity sha512-CI6AMwmkIg7gZ/dWk70wZI8YX2tUugRh82uRNEWgw6KBt1Xa1rKuaxSxWDqYS724+m8S760KlTwTW8tFD3fDkA==
   dependencies:
-    "@appium/support" "^2.59.1"
+    "@appium/support" "^2.59.2"
 
-"@appium/docutils@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@appium/docutils/-/docutils-0.0.6.tgz#bde970db08f43b9d61f8c415d7c25bf93180c7d1"
-  integrity sha512-irrAqdB02N3CHJ10RKeP831w4tw4Pxxi0w8BdlIUs1fRsaTVwJrqgHdcxA3NYqmtkSskXIvuNhgtUtFes7lnnA==
+"@appium/docutils@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@appium/docutils/-/docutils-0.0.7.tgz#b99a10d61bdae29059c967203b95527eb6e51615"
+  integrity sha512-xql/9J48CVbUtPttQkKpY7QYsPEP+g6Ckg7Wiq3ltpAYr0cxJwfg9/SKEDdIpljDn9HkFaHl9OspBRg9rZVgaw==
   dependencies:
-    "@appium/support" "^2.59.1"
+    "@appium/support" "^2.59.2"
     "@babel/runtime" "7.18.3"
     docdash "1.2.0"
     jsdoc "3.6.10"
@@ -58,12 +58,13 @@
   resolved "https://registry.yarnpkg.com/@appium/schema/-/schema-0.0.7.tgz#381a41179ac87328865d2e80fb5d85d3a299e546"
   integrity sha512-SYStJIY2XStAwpskJHXzP89no5qV+pWjUJ40wPH1XkruSW1my8MUNEBoRKNSNhzB8Ly0ZIfiQihlZgPX/NfF5Q==
 
-"@appium/support@^2.55.3", "@appium/support@^2.56.1", "@appium/support@^2.57.0", "@appium/support@^2.59.1":
-  version "2.59.1"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.1.tgz#aad221506c303ea623052e0d24bf584759e6ad0c"
-  integrity sha512-+gKgph7hj33LXh0Pkx4APWvj48KMOaDkQ/lwK+Alq0ElfOcmwjxPtGXqvdIu5Niy29nCHwrlHMCAA8OGa096Lw==
+"@appium/support@^2.55.3", "@appium/support@^2.56.1", "@appium/support@^2.57.0", "@appium/support@^2.59.2":
+  version "2.59.2"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.2.tgz#73ce49e4fba609817bca9b2c7af87c3d0bfb9c57"
+  integrity sha512-mmBjbpsW6SgKUH+MF7xXciPZvUgiTB7PqkqcMl1y3K7Q9qsVg6O/YB+cis9fNAEn8UFnMzIsuPupH11O88wsCg==
   dependencies:
     "@babel/runtime" "7.18.3"
+    "@colors/colors" "1.5.0"
     archiver "5.3.1"
     axios "0.27.2"
     base64-stream "1.0.0"
@@ -78,6 +79,7 @@
     klaw "3.0.0"
     lockfile "1.0.4"
     lodash "4.17.21"
+    log-symbols "4.1.0"
     moment "2.29.3"
     mv "2.1.1"
     ncp "2.0.0"
@@ -94,17 +96,18 @@
     semver "7.3.7"
     shell-quote "1.7.3"
     source-map-support "0.5.21"
+    supports-color "8.1.1"
     teen_process "1.16.0"
     uuid "8.3.2"
     which "2.0.2"
     yauzl "2.10.0"
 
-"@appium/test-support@^1.3.21":
-  version "1.3.21"
-  resolved "https://registry.yarnpkg.com/@appium/test-support/-/test-support-1.3.21.tgz#b4cf6918c14071eeadcdc79e617c4eed47e8c780"
-  integrity sha512-v79YFBLlamAwGx1G238UYm+bbYrVn7CcOy6qvTEyL+GiB0/O+WeOS7O6zNmI+3pL1hDk5a59OGu+GDZF9Hm8dw==
+"@appium/test-support@^1.3.22":
+  version "1.3.22"
+  resolved "https://registry.yarnpkg.com/@appium/test-support/-/test-support-1.3.22.tgz#076cbac7c7e5067c47628afb5bd413e464b8f641"
+  integrity sha512-8/BRIWQ1V40xjXAoDWXyccaykiQyYcoIE3Cv3r+l1RdvPD8HvDBKEK5zjRATN8Da/pADEL/xgSLaN7VIYszLvg==
   dependencies:
-    "@appium/support" "^2.59.1"
+    "@appium/support" "^2.59.2"
     "@babel/runtime" "7.18.3"
     bluebird "3.7.2"
     lodash "4.17.21"
@@ -3690,16 +3693,16 @@ appium-windows-driver@^2.0.1:
     teen_process "^1.7.0"
 
 appium@^2.0.0-beta.27:
-  version "2.0.0-beta.38"
-  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.38.tgz#e2819bb40039e1aa5b91368a0ec56e74df9e257c"
-  integrity sha512-SQi9iUXqSlCC8sODpT8t3PumWlH/Y5OdxeLuRpN/NYKaJ0XbVbxFVJicSVrbh18ykdrnbYRmuFe4UU/MQx2ppA==
+  version "2.0.0-beta.40"
+  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.40.tgz#298cc55807ddafe6d7fbd2b3718127665a5d66d9"
+  integrity sha512-tkhAbWaS7dUTuX4thnrD0HoFQk02T0f+fLwlQ8pT4DOhlQeDSP7w63aCgFAOpd1xJjzIOeQah+xFyBNpfW4anQ==
   dependencies:
-    "@appium/base-driver" "^8.5.5"
-    "@appium/base-plugin" "^1.9.1"
-    "@appium/docutils" "^0.0.6"
+    "@appium/base-driver" "^8.5.7"
+    "@appium/base-plugin" "^1.9.2"
+    "@appium/docutils" "^0.0.7"
     "@appium/schema" "^0.0.7"
-    "@appium/support" "^2.59.1"
-    "@appium/test-support" "^1.3.21"
+    "@appium/support" "^2.59.2"
+    "@appium/test-support" "^1.3.22"
     "@babel/runtime" "7.18.3"
     "@sidvind/better-ajv-errors" "2.0.0"
     ajv "8.11.0"
@@ -9358,20 +9361,20 @@ lodash@4.17.21, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
-log-symbols@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
-  integrity sha512-VeIAFslyIerEJLXHziedo2basKbMKtTw3vfn5IzG0XTjhAVEJyNHnL2p7vc+wBDSdQuUpNw3M2u6xb9QsAY5Eg==
-  dependencies:
-    chalk "^2.0.1"
-
-log-symbols@^4.1.0:
+log-symbols@4.1.0, log-symbols@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-4.1.0.tgz#3fbdbb95b4683ac9fc785111e792e558d4abd503"
   integrity sha512-8XPvpAA8uyhfteu8pIvQxpJZ7SYYdpUivZpGy6sFsBuKRY/7rQGavedeB8aK+Zkyq6upMFVL/9AW6vOYzfRyLg==
   dependencies:
     chalk "^4.1.0"
     is-unicode-supported "^0.1.0"
+
+log-symbols@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
+  integrity sha512-VeIAFslyIerEJLXHziedo2basKbMKtTw3vfn5IzG0XTjhAVEJyNHnL2p7vc+wBDSdQuUpNw3M2u6xb9QsAY5Eg==
+  dependencies:
+    chalk "^2.0.1"
 
 logform@^2.3.2, logform@^2.4.0:
   version "2.4.0"

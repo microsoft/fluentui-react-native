@@ -98,7 +98,7 @@ export const StandardUsage: FunctionComponent = () => {
       </View>
       <JSAvatar name="Richard" avatarColor="colorful" />
       <JSAvatar icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }} size={56} />
-      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }} size={120} />
+      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps } }} size={120} />
       <JSAvatar
         active={active}
         activeAppearance={activeAppearance}
@@ -107,7 +107,7 @@ export const StandardUsage: FunctionComponent = () => {
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Photo of Satya Nadella"
         badge={{ status: presence === undefinedText ? undefined : presence }}
-        src={showImage ? satyaPhotoUrl : undefined}
+        imageUrl={showImage ? satyaPhotoUrl : undefined}
         avatarColor={avatarColor}
       />
       <JSAvatar
@@ -117,7 +117,6 @@ export const StandardUsage: FunctionComponent = () => {
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Icon"
         name="* Richard Faynman *"
-        icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
         avatarColor={avatarColor}
       />
       {svgIconsEnabled && (
@@ -137,7 +136,7 @@ export const StandardUsage: FunctionComponent = () => {
             size={imageSize === undefinedText ? undefined : imageSize}
             shape={isSquare ? 'square' : 'circular'}
             accessibilityLabel="SVG Icon"
-            icon={{ svgSource: svgProps, width: 20, height: 20 }}
+            icon={{ svgSource: svgProps }}
             avatarColor={avatarColor}
             idForColor="15"
           />

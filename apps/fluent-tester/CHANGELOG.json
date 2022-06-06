@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 08:34:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.63.3",
+      "version": "0.63.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "17e31c4ec04628cb14f7cf58246b1d9ce5399863",
+            "comment": "Fixed SVG icon size and color for the Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.36",
+            "commit": "17e31c4ec04628cb14f7cf58246b1d9ce5399863"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 03 Jun 2022 21:01:53 GMT",
+      "tag": "@fluentui-react-native/tester_v0.63.2",
+      "version": "0.63.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "1bb29226c22a816199a5e02a93402f055b25f1a5",
+            "comment": "Add a test for infinite submenus"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 03 Jun 2022 19:33:31 GMT",
       "tag": "@fluentui-react-native/tester_v0.63.1",
       "version": "0.63.1",
