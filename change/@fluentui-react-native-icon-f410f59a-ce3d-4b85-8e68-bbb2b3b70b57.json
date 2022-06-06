@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added a11y props to the root",
-  "packageName": "@fluentui-react-native/icon",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}
