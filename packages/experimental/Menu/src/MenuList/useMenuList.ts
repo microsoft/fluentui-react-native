@@ -4,6 +4,9 @@ import { useMenuContext } from '../context/menuContext';
 import { MenuListProps, MenuListState } from './MenuList.types';
 
 // Track the radio items so we know what to clear selection from when selectRadio is called
+// Purposefully left out of the hook because
+// 1. RadioItems just keeps track of information - changing this array doesn't need to force rerender
+// 2. Keeping them here means these consts are not recreated on every render, which would force rerendering of all children
 const radioItems = [];
 const addRadioItem = (name: string) => {
   radioItems.push(name);
@@ -44,7 +47,8 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
         const updatedChecked = {};
         for (const checkedName of Object.keys(checked)) {
           if (!radioItems.includes(checkedName)) {
-            updatedChecked[checkedName] = true;
+            // Preserve checked state if non-radio items
+            updatedChecked[checkedName] = checkedInternal[checkedName];
           }
         }
         updatedChecked[name] = true;
@@ -55,7 +59,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
         onCheckedChangeOriginal(e, name, isChecked);
       }
     },
-    [isCheckedControlled, onCheckedChangeOriginal, setCheckedInternal, radioItems, checked],
+    [isCheckedControlled, onCheckedChangeOriginal, setCheckedInternal, checked],
   );
 
   return {
