@@ -12,6 +12,8 @@ export const MenuListContext = React.createContext<MenuListContextValue>({
   defaultChecked: {},
   hasCheckmarks: false,
   onCheckedChange: () => false,
+  addRadioItem: () => false,
+  removeRadioItem: () => false,
 });
 
 export const MenuListProvider = MenuListContext.Provider;

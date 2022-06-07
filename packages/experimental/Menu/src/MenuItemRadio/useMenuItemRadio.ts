@@ -19,5 +19,14 @@ export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckbox
     [checked, disabled, name, selectRadio],
   );
 
+  // Explicitly only run on mount and unmount
+  React.useEffect(() => {
+    context.addRadioItem(name);
+
+    return () => {
+      context.removeRadioItem(name);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return useMenuCheckboxInteraction(props, toggleChecked);
 };

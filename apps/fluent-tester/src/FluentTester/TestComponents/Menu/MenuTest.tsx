@@ -90,6 +90,7 @@ const MenuRadioItem: React.FunctionComponent = () => {
             <MenuItemRadio name="itemOne" content="A MenuItem with checkmark" />
             <MenuItemRadio name="itemTwo" content="Another MenuItem with checkmark" />
             <MenuItemRadio name="itemThree" content="A third MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark" />
           </MenuList>
         </MenuPopover>
       </Menu>

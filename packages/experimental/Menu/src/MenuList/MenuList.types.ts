@@ -18,6 +18,8 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
 export interface MenuListState extends MenuListProps {
   isCheckedControlled: boolean;
   selectRadio?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  addRadioItem: (name: string) => void;
+  removeRadioItem: (name: string) => void;
 }
 
 export interface MenuListSlotProps {
