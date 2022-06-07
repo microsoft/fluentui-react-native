@@ -21,42 +21,73 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   // MenuList v2 needs to be able to be standalone, but this is not in scope for v1
   // Assuming that checked information will come from parent Menu
   const { defaultChecked, onCheckedChange: onCheckedChangeOriginal, checked: checkedOriginal } = context;
-  const [checkedInternal, setCheckedInternal] = React.useState<Record<string, boolean>>(defaultChecked ?? checkedOriginal ?? {});
+
+  // Convert passed in array to map so that i's easier to look up checked state
+  const checkedMap = React.useMemo(() => {
+    const state = {};
+    if (!checkedOriginal) {
+      return state;
+    }
+
+    for (const key of checkedOriginal) {
+      state[key] = true;
+    }
+    return state;
+  }, [checkedOriginal]);
+
+  const [checkedInternal, setCheckedInternal] = React.useState<Record<string, boolean>>(() => {
+    if (checkedMap) {
+      return checkedMap;
+    }
+
+    const initialChecked = defaultChecked ?? [];
+    const state = {};
+    for (const key of initialChecked) {
+      state[key] = true;
+    }
+    return state;
+  });
 
   const isCheckedControlled = typeof checkedOriginal !== 'undefined';
-  const checked = isCheckedControlled ? checkedOriginal : checkedInternal;
+  const checked = isCheckedControlled ? checkedMap : checkedInternal;
 
   const onCheckedChange = React.useCallback(
     (e: InteractionEvent, name: string, isChecked: boolean) => {
+      const updatedChecked = { ...checked };
+      if (isChecked) {
+        updatedChecked[name] = true;
+      } else {
+        delete updatedChecked[name];
+      }
+
       if (!isCheckedControlled) {
-        const updatedChecked = { ...checked };
-        updatedChecked[name] = isChecked;
         setCheckedInternal(updatedChecked);
       }
 
       if (onCheckedChangeOriginal) {
-        onCheckedChangeOriginal(e, name, isChecked, false /*isRadio*/);
+        onCheckedChangeOriginal(e, Object.keys(updatedChecked));
       }
     },
     [isCheckedControlled, checked, onCheckedChangeOriginal, setCheckedInternal],
   );
 
   const selectRadio = React.useCallback(
-    (e: InteractionEvent, name: string, isChecked: boolean) => {
-      if (!isCheckedControlled) {
-        const updatedChecked = {};
-        for (const checkedName of Object.keys(checked)) {
-          if (!radioItems.includes(checkedName)) {
-            // Preserve checked state if non-radio items
-            updatedChecked[checkedName] = checked[checkedName];
-          }
+    (e: InteractionEvent, name: string) => {
+      const updatedChecked = {};
+      for (const checkedName of Object.keys(checked)) {
+        if (!radioItems.includes(checkedName)) {
+          // Preserve checked state if non-radio items
+          updatedChecked[checkedName] = checked[checkedName];
         }
-        updatedChecked[name] = true;
+      }
+      updatedChecked[name] = true;
+
+      if (!isCheckedControlled) {
         setCheckedInternal(updatedChecked);
       }
 
       if (onCheckedChangeOriginal) {
-        onCheckedChangeOriginal(e, name, isChecked, true /*isRadio*/);
+        onCheckedChangeOriginal(e, Object.keys(updatedChecked));
       }
     },
     [isCheckedControlled, onCheckedChangeOriginal, setCheckedInternal, checked],

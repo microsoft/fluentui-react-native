@@ -9,7 +9,7 @@ export type MenuListContextValue = MenuListState;
 export const MenuListContext = React.createContext<MenuListContextValue>({
   isCheckedControlled: false,
   checked: {},
-  defaultChecked: {},
+  defaultChecked: [],
   hasCheckmarks: false,
   onCheckedChange: () => false,
   addRadioItem: () => false,

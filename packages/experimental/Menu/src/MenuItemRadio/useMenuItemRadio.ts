@@ -7,16 +7,15 @@ import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheck
 export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
   const { disabled, name } = props;
   const context = useMenuListContext();
-  const checked = context.checked?.[name];
   const selectRadio = context.selectRadio;
 
   const toggleChecked = React.useCallback(
     (e: InteractionEvent) => {
       if (!disabled) {
-        selectRadio(e, name, !checked);
+        selectRadio(e, name);
       }
     },
-    [checked, disabled, name, selectRadio],
+    [disabled, name, selectRadio],
   );
 
   // Explicitly only run on mount and unmount

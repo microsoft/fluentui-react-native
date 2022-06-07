@@ -7,8 +7,10 @@ export const useMenu = (props: MenuProps): MenuState => {
   const triggerRef = React.useRef();
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
-  const isControlled = typeof props.open !== 'undefined';
-  const [open, setOpen] = useMenuOpenState(isControlled, props);
+  const isOpenControlled = typeof props.open !== 'undefined';
+  const [open, setOpen] = useMenuOpenState(isOpenControlled, props);
+
+  const [checked, onCheckedChange] = useMenuCheckedState(props);
 
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
@@ -26,9 +28,11 @@ export const useMenu = (props: MenuProps): MenuState => {
     ...props,
     open,
     setOpen,
+    checked,
+    onCheckedChange,
     triggerRef,
     isSubmenu,
-    isControlled,
+    isControlled: isOpenControlled,
     parentPopoverHoverOutTimer,
   };
 };
@@ -54,4 +58,25 @@ const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e
   );
 
   return [state, setOpen];
+};
+
+const useMenuCheckedState = (props: MenuProps): [string[], (e: InteractionEvent, checked: string[]) => void] => {
+  const { checked, defaultChecked, onCheckedChange: onCheckedChangeOriginal } = props;
+  const [checkedInternal, setCheckedInternal] = React.useState(defaultChecked ?? checked ?? []);
+
+  const isControlled = typeof checked !== 'undefined';
+  const state = isControlled ? checked : checkedInternal;
+
+  const onCheckedChange = React.useCallback(
+    (e: InteractionEvent, checked: string[]) => {
+      if (!isControlled) {
+        setCheckedInternal(checked);
+      }
+
+      onCheckedChangeOriginal?.(e, checked);
+    },
+    [isControlled, setCheckedInternal, onCheckedChangeOriginal],
+  );
+
+  return [state, onCheckedChange];
 };
