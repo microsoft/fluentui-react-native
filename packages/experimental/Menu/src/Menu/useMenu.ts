@@ -1,5 +1,6 @@
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent, isMouseEvent } from '@fluentui-react-native/interactive-hooks';
 import React from 'react';
+import { Platform } from 'react-native';
 import { useMenuContext } from '../context/menuContext';
 import { MenuProps, MenuState } from './Menu.types';
 
@@ -8,7 +9,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
   const isControlled = typeof props.open !== 'undefined';
-  const [open, setOpen] = useMenuOpenState(isControlled, props);
+  const [open, shouldFocusOnContainer, setOpen] = useMenuOpenState(isControlled, props);
 
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
@@ -26,6 +27,7 @@ export const useMenu = (props: MenuProps): MenuState => {
     ...props,
     open,
     setOpen,
+    shouldFocusOnContainer,
     triggerRef,
     isSubmenu,
     isControlled,
@@ -33,10 +35,11 @@ export const useMenu = (props: MenuProps): MenuState => {
   };
 };
 
-const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e: InteractionEvent, isOpen: boolean) => void] => {
+const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, boolean, (e: InteractionEvent, isOpen: boolean) => void] => {
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
+  let shouldFocusOnContainer = false;
 
   const state = isControlled ? open : openInternal;
 
@@ -45,7 +48,13 @@ const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e
       const openPrev = state;
       if (!isControlled) {
         setOpenInternal(isOpen);
+        if (isOpen && Platform.OS === ('win32' as any)) {
+          if (isMouseEvent(e)) {
+            shouldFocusOnContainer = true;
+          }
+        }
       }
+
       if (onOpenChange && openPrev !== isOpen) {
         onOpenChange(e, isOpen);
       }
@@ -53,5 +62,5 @@ const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e
     [isControlled, state, onOpenChange, setOpenInternal],
   );
 
-  return [state, setOpen];
+  return [state, shouldFocusOnContainer, setOpen];
 };
