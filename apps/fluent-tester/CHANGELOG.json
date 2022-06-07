@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 07 Jun 2022 16:56:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.64.0",
+      "version": "0.64.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ab4552de824e662d5fddf578ae083d3b3a8113fe",
+            "comment": "Add e2e tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 20:30:26 GMT",
       "tag": "@fluentui-react-native/tester_v0.63.6",
       "version": "0.63.6",

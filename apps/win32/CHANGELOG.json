@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 07 Jun 2022 16:56:26 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.20.69",
+      "version": "0.20.69",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.64.0",
+            "commit": "ab4552de824e662d5fddf578ae083d3b3a8113fe"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 20:30:26 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.20.68",
       "version": "0.20.68",
