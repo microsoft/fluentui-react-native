@@ -35,7 +35,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
       }
 
       if (onCheckedChangeOriginal) {
-        onCheckedChangeOriginal(e, name, isChecked);
+        onCheckedChangeOriginal(e, name, isChecked, false /*isRadio*/);
       }
     },
     [isCheckedControlled, checked, onCheckedChangeOriginal, setCheckedInternal],
@@ -48,7 +48,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
         for (const checkedName of Object.keys(checked)) {
           if (!radioItems.includes(checkedName)) {
             // Preserve checked state if non-radio items
-            updatedChecked[checkedName] = checkedInternal[checkedName];
+            updatedChecked[checkedName] = checked[checkedName];
           }
         }
         updatedChecked[name] = true;
@@ -56,7 +56,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
       }
 
       if (onCheckedChangeOriginal) {
-        onCheckedChangeOriginal(e, name, isChecked);
+        onCheckedChangeOriginal(e, name, isChecked, true /*isRadio*/);
       }
     },
     [isCheckedControlled, onCheckedChangeOriginal, setCheckedInternal, checked],

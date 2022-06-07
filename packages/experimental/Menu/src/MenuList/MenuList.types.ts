@@ -12,7 +12,7 @@ export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
   checked?: Record<string, boolean>;
   defaultChecked?: Record<string, boolean>;
   hasCheckmarks?: boolean;
-  onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean, isRadio: boolean) => void;
 }
 
 export interface MenuListState extends MenuListProps {
