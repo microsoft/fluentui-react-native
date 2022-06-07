@@ -8,7 +8,7 @@ export const useMenu = (props: MenuProps): MenuState => {
   const context = useMenuContext();
   const isSubmenu = context.triggerRef !== null;
   const isControlled = typeof props.open !== 'undefined';
-  const [open, setOpen] = useMenuOpenState(isControlled, props);
+  const [open, setOpen] = useMenuOpenState(isControlled, props, context.setOpen);
 
   // Default behavior for submenu is to open on hover
   // the ...props line below will override this behavior for a submenu
@@ -33,7 +33,11 @@ export const useMenu = (props: MenuProps): MenuState => {
   };
 };
 
-const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e: InteractionEvent, isOpen: boolean) => void] => {
+const useMenuOpenState = (
+  isControlled: boolean,
+  props: MenuProps,
+  parentSetOpen: (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void,
+): [boolean, (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void] => {
   const { defaultOpen, onOpenChange, open } = props;
   const initialState = typeof defaultOpen !== 'undefined' ? defaultOpen : !!open;
   const [openInternal, setOpenInternal] = React.useState<boolean>(initialState);
@@ -41,7 +45,7 @@ const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e
   const state = isControlled ? open : openInternal;
 
   const setOpen = React.useCallback(
-    (e: InteractionEvent, isOpen: boolean) => {
+    (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => {
       const openPrev = state;
       if (!isControlled) {
         setOpenInternal(isOpen);
@@ -49,8 +53,12 @@ const useMenuOpenState = (isControlled: boolean, props: MenuProps): [boolean, (e
       if (onOpenChange && openPrev !== isOpen) {
         onOpenChange(e, isOpen);
       }
+
+      if (bubble && parentSetOpen) {
+        parentSetOpen(e, isOpen, bubble);
+      }
     },
-    [isControlled, state, onOpenChange, setOpenInternal],
+    [isControlled, state, onOpenChange, setOpenInternal, parentSetOpen],
   );
 
   return [state, setOpen];
