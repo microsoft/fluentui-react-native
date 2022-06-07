@@ -1,6 +1,13 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import AvatarPageObject from '../pages/AvatarPageObject';
+import AvatarPageObject, { AvatarComponentSelector } from '../pages/AvatarPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { ComponentSelector } from '../../common/BasePage.win';
+import {
+  JSAVATAR_ACCESSIBILITY_LABEL,
+  JSAVATAR_ACCESSIBILITY_LABEL_BY_NAME,
+  JSAVATAR_ACCESSIBILITY_HINT,
+  JSAVATAR_ACCESSIBILITY_ROLE,
+} from '../../../FluentTester/TestComponents/Avatar/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', function () {
@@ -20,5 +27,27 @@ describe('Avatar Testing Initialization', function () {
 
     expect(AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
     expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
+  });
+});
+
+describe('Avatar Accessibility Testing', () => {
+  beforeEach(() => {
+    AvatarPageObject.scrollToTestElement();
+    AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+  it('Validate accessibilityLabel', () => {
+    expect(AvatarPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL);
+  });
+  it('Validate accessibilityLabel from `name` prop', () => {
+    expect(AvatarPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL_BY_NAME);
+  });
+  it('Validate accessibilityHint', () => {
+    expect(AvatarPageObject.getAvatarAccessibilityHint(AvatarComponentSelector.PrimaryComponent)).toEqual(JSAVATAR_ACCESSIBILITY_HINT);
+  });
+  it('Validate accessibilityRole', () => {
+    expect(AvatarPageObject.getAvatarAccessibilityRole(AvatarComponentSelector.PrimaryComponent)).toEqual(JSAVATAR_ACCESSIBILITY_ROLE);
+  });
+  it('Validate default accessibilityRole', () => {
+    expect(AvatarPageObject.getAvatarAccessibilityRole(AvatarComponentSelector.SecondaryComponent)).toEqual('ControlType.Image');
   });
 });
