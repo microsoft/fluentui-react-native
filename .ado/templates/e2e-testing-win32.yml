@@ -1,8 +1,8 @@
 steps:
   - script: |
-      yarn bundle
+      yarn appium driver list --installed
     workingDirectory: apps/win32
-    displayName: 'yarn bundle'
+    displayName: 'appium driver list --installed'
 
   # - script: |
   #     yarn appium driver install windows
@@ -17,6 +17,11 @@ steps:
       Start-Process msiexec -ArgumentList "/quiet","/x","{087BBF93-D9E3-4D27-BDBE-9C702E0066FC}" -Verb runAs -Wait
       Start-Process msiexec -ArgumentList "/quiet","/i","$(Agent.TempDirectory)\WinAppDriver.msi" -Verb runAs -Wait
     displayName: Replace WinAppDriver 1.2.99 with WinAppDriver 1.1
+
+  - script: |
+      yarn bundle
+    workingDirectory: apps/win32
+    displayName: 'yarn bundle'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
