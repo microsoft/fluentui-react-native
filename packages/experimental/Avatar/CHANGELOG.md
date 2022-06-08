@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Mon, 06 Jun 2022 19:20:10 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Jun 2022 21:52:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.39
+
+Wed, 08 Jun 2022 21:52:34 GMT
+
+### Patches
+
+- Added missing colors from PersonaCoin, exposed colors as props (v.kozova13@gmail.com)
 
 ## 0.14.38
 
