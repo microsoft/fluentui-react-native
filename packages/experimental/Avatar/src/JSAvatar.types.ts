@@ -56,14 +56,19 @@ export const AvatarColors = [
   'mink',
   'platinum',
   'anchor',
+  'burgundy',
+  'hotPink',
+  'orchid',
 ] as const;
+export const ColorSchemes = ['neutral', 'brand', 'colorful'] as const;
 export type AvatarSize = typeof AvatarSizes[number];
 export type AvatarNamedColor = typeof AvatarColors[number];
+export type AvatarColorSchemes = typeof ColorSchemes[number];
 
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
 export type AvatarActiveAppearance = 'ring';
-export type AvatarColor = 'neutral' | 'brand' | 'colorful' | AvatarNamedColor;
+export type AvatarColor = AvatarColorSchemes | AvatarNamedColor | ColorValue;
 export type IconAlignment = 'start' | 'center' | 'end';
 
 export interface RingConfig {
@@ -83,6 +88,7 @@ export interface AvatarConfigurableProps {
    * @defaultvalue neutral
    */
   avatarColor?: AvatarColor;
+  initialsColor?: ColorValue;
   ring?: RingConfig;
 
   /**
@@ -219,6 +225,9 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   mink?: JSAvatarTokens;
   platinum?: JSAvatarTokens;
   anchor?: JSAvatarTokens;
+  burgundy?: JSAvatarTokens;
+  hotPink?: JSAvatarTokens;
+  orchid?: JSAvatarTokens;
 }
 
 export interface AvatarSlotProps {
