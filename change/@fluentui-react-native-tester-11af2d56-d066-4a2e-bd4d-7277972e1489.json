@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added missing colors from PersonaCoin, exposed colors as props",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
