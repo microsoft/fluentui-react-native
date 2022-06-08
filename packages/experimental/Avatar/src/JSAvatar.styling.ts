@@ -71,7 +71,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['color', ...fontStyles.keys],
+      ['color', 'initialsColor', ...fontStyles.keys],
     ),
     initialsBackground: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -96,7 +96,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['backgroundColor', 'size', 'borderColor', 'borderWidth', ...borderStyles.keys],
+      ['avatarColor', 'backgroundColor', 'size', 'borderColor', 'borderWidth', ...borderStyles.keys],
     ),
     image: buildProps(
       (tokens: JSAvatarTokens) => {
