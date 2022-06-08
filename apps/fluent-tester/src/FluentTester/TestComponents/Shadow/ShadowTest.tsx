@@ -1,39 +1,26 @@
 import * as React from 'react';
-import { Text } from 'react-native';
-import { Test, TestSection, PlatformStatus } from '../Test';
 import { SHADOW_TESTPAGE } from './consts';
-
-const ShadowDepthRampTest: React.FunctionComponent = () => {
-  return <Text>TODO</Text>;
-};
-
-const ShadowButtonTest: React.FunctionComponent = () => {
-  return <Text>TODO</Text>;
-};
+import { ShadowDefault } from './ShadowDefault';
+import { Test, TestSection, PlatformStatus } from '../Test';
 
 const shadowSections: TestSection[] = [
   {
-    name: 'Shadow Depth Ramp',
+    name: 'Shadow Page',
     testID: SHADOW_TESTPAGE,
-    component: ShadowDepthRampTest,
-  },
-  {
-    name: 'Shadows on Button Examples',
-    testID: SHADOW_TESTPAGE,
-    component: ShadowButtonTest,
+    component: ShadowDefault,
   },
 ];
 
 export const ShadowTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    macosStatus: 'Beta',
+    androidStatus: 'Backlog',
   };
 
-  const description = 'A Shadow component using the Fluent Design System. Shadow components can be added to other components.';
+  const description = 'component-description';
 
-  return <Test name="Shadow Test" description={description} sections={shadowSections} status={status} />;
+  return <Test name="Shadow Test" description={description} sections={shadowSections} status={status}></Test>;
 };
