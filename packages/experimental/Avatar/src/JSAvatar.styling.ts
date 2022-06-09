@@ -1,4 +1,15 @@
-import { JSAvatarName, JSAvatarTokens, AvatarSlotProps, JSAvatarProps, AvatarColors, AvatarSizesForTokens } from './JSAvatar.types';
+import {
+  JSAvatarName,
+  JSAvatarTokens,
+  AvatarConfigurableProps,
+  AvatarSlotProps,
+  JSAvatarProps,
+  AvatarColors,
+  AvatarSizesForTokens,
+  AvatarNamedColor,
+  ColorSchemes,
+  AvatarColorSchemes,
+} from './JSAvatar.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
 import { ViewStyle } from 'react-native';
@@ -20,14 +31,16 @@ export const avatarStates: (keyof JSAvatarTokens)[] = [
   'square',
   'inactive',
   'ringColor',
-  'ringBackgroundColor',
   'iconColor',
   'iconSize',
   'size',
 ];
 
+const tokensThatAreAlsoProps: (keyof AvatarConfigurableProps)[] = ['avatarColor', 'initialsColor', 'ring'];
+
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
+  tokensThatAreAlsoProps,
   states: avatarStates,
   slotProps: {
     root: buildProps(
@@ -53,16 +66,20 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             ...fontStyles.from(tokens, theme),
-            color: tokens.color,
+            color: tokens.initialsColor || tokens.color,
             textAlign: 'center',
           },
         };
       },
-      ['color', ...fontStyles.keys],
+      ['color', 'initialsColor', ...fontStyles.keys],
     ),
     initialsBackground: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const { backgroundColor, size } = tokens;
+        const { backgroundColor, size, avatarColor } = tokens;
+        const _avatarColor =
+          !avatarColor || AvatarColors.includes(avatarColor as AvatarNamedColor) || ColorSchemes.includes(avatarColor as AvatarColorSchemes)
+            ? backgroundColor
+            : avatarColor;
 
         return {
           style: {
@@ -73,13 +90,13 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             alignSelf: 'stretch',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: backgroundColor,
+            backgroundColor: _avatarColor,
             borderWidth: tokens.borderWidth,
             borderColor: tokens.borderColor,
           },
         };
       },
-      ['backgroundColor', 'size', 'borderColor', 'borderWidth', ...borderStyles.keys],
+      ['avatarColor', 'backgroundColor', 'size', 'borderColor', 'borderWidth', ...borderStyles.keys],
     ),
     image: buildProps(
       (tokens: JSAvatarTokens) => {

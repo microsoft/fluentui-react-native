@@ -163,6 +163,9 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     mink: getColorProps('mink', t),
     platinum: getColorProps('platinum', t),
     anchor: getColorProps('anchor', t),
+    burgundy: getColorProps('burgundy', t),
+    hotPink: getColorProps('hotPink', t),
+    orchid: getColorProps('orchid', t),
   } as JSAvatarTokens);
 
 /**

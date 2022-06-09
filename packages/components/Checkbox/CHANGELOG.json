@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Tue, 07 Jun 2022 22:59:24 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.15.11",
+      "version": "0.15.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "9ee0e7ea1ac807958d436ce2a84066a2cd33c179",
+            "comment": "Fix focus override"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 19:20:10 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.15.10",
       "version": "0.15.10",
