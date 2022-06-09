@@ -4,7 +4,7 @@ steps:
     workingDirectory: apps/win32
     displayName: 'appium driver list --installed'
 
-  # - script: |
+  - script: |
       yarn appium driver install windows
     workingDirectory: apps/win32
     displayName: 'Installing appium windows driver'
