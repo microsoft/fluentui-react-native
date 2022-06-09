@@ -13,8 +13,6 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
 
   return {
     ...context,
-    accessible: context.shouldFocusOnContainer,
-    focusable: context.shouldFocusOnContainer,
     isCheckedControlled,
     checked,
     onCheckedChange,

@@ -18,6 +18,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     parentPopoverHoverOutTimer,
     popoverHoverOutTimer,
     setPopoverHoverOutTimer,
+    shouldFocusOnContainer,
     triggerHoverOutTimer,
   } = context;
 
@@ -60,6 +61,8 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     innerView: {
       onMouseEnter,
       onMouseLeave: isCloseOnHoverOutEnabled && onMouseLeave,
+      accessible: shouldFocusOnContainer,
+      focusable: shouldFocusOnContainer,
     },
   };
 };
