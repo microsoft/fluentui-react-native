@@ -15,6 +15,7 @@ import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Text } from '@fluentui-react-native/experimental-text';
+import { E2EMenuTest } from './E2EMenuTest';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -207,6 +208,10 @@ const menuSections: TestSection[] = [
     name: 'Menu Submenu',
     component: MenuSubMenu,
   },
+  {
+    name: 'Menu E2E',
+    component: E2EMenuTest,
+  },
 ];
 
 export const MenuTest: React.FunctionComponent = () => {
@@ -218,7 +223,8 @@ export const MenuTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = '!!!!!!!TODO TODO TODO TODO!!!!!!!!';
+  const description =
+    'A Menu is an component that displays a list of options on a temporary surface. They are invoked when users interact with a button, action, or other control.';
 
   return <Test name="Menu Test" description={description} sections={menuSections} status={status}></Test>;
 };
