@@ -73,12 +73,19 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
  * Words in braces, titles, special characters, parantheses and dashes should be ignored.
  */
 export const getInitials = (name: string): string => {
-  if (!name && !validateAlphabeticalCharacters(name)) {
+  if (!name) {
     return '';
   }
-  const nonWordRegExp = new RegExp('\\W+(?<!\\S-)', 'g');
-  const wordsInBracesRegExp = new RegExp('(\\(|\\[|\\{)\\w+(\\)|\\]|\\})', 'g');
-  let words = name.replace(wordsInBracesRegExp, ' ').replace(nonWordRegExp, ' ').trim().split(' ');
+  const WORDS_IN_BRACES_REGEXP = new RegExp('[\\(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
+  const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
+  const NON_WORD_REGEXP = new RegExp('\\W+', 'g');
+  let words = name
+    .replace(WORDS_IN_BRACES_REGEXP, ' ')
+    .replace(PHONE_NUMBER_REGEXP, ' ')
+    .replace('-', '')
+    .replace(NON_WORD_REGEXP, ' ')
+    .trim()
+    .split(' ');
   words = removeTitlesFromName(words);
   const wordsLength = words.length;
   const lastWordIdx = wordsLength - 1;

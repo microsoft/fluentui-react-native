@@ -67,7 +67,7 @@ export const JSAvatar = compose<JSAvatarType>({
               ) : userProps.icon ? (
                 <Slots.icon {...iconProps} accessible={false} />
               ) : (
-                <SvgXml xml={fallBackIconXml} />
+                svgIconsEnabled && <SvgXml xml={fallBackIconXml} />
               )}
             </Slots.initialsBackground>
           )}

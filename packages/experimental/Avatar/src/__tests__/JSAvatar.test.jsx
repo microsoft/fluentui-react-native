@@ -18,7 +18,7 @@ const alphabeticalTestNames = [
   'Richard Feynman {Teams}',
 ];
 const alphabeticalInitials = ['M', 'AK', 'MB', 'AK', 'AK', 'WL', 'WL', 'AK', 'RF', 'R', 'RF', 'RF'];
-const otherTestNames = ['(206) 123-4567', '耿盈盈']; // will return this case after bug bash - '耿 James'
+const otherTestNames = ['(206) 123-4567', '耿盈盈', '47 12 34']; // will return these cases after bug bash - '1x1', '耿 James', '+47 12 34 56 78 (X 5678)'
 const namesWithTitles = ['Mr Feynman', 'Dr Richard Feynman'];
 const initialsForNameWithTitles = ['F', 'RF'];
 
@@ -61,6 +61,24 @@ describe('removeTitlesFromName method', () => {
   // });
 });
 
+// describe('getInitials method - language support', () => {
+//   it('returns correct initials cyrillic language', () => {
+//     const test = getInitials('Илон Маск');
+//     expect(test).toBe('ИМ');
+//   });
+//   it('returns correct initials ', () => {
+//     const test = getInitials('-Test   str  with *spaces');
+//     expect(test).toBe('TS');
+//   });
+//   it('returns correct initials', () => {
+//     const test = getInitials('Írissa Þórðardóttir');
+//     expect(test).toBe('ÍÞ');
+//   });
+//   it('returns correct initials', () => {
+//     const test = getInitials('Øyvind Åsen');
+//     expect(test).toBe('ØÅ');
+//   });
+// });
 describe('getInitials method', () => {
   it('returns correct initials', () => {
     const test = getInitials('-Test   str  with *spaces');
@@ -102,9 +120,9 @@ describe('getInitials method', () => {
     expect(getInitials('David Zearing-Goff')).toEqual('DZ');
   });
 
-  // it('calculates an expected initials in LTR with numbers', () => {
-  //   expect(getInitials('4lex 5loo')).toEqual('45');
-  // });
+  it('calculates an expected initials in LTR with numbers', () => {
+    expect(getInitials('4lex 5loo')).toEqual('LL');
+  });
   it('calculates an expected initials in LTR with multiple parentheses, extra spaces, and unwanted characters', () => {
     const result = getInitials(' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)    ');
     expect(result).toEqual('DG');
@@ -137,22 +155,22 @@ describe('getInitials method', () => {
     expect(getInitials('かり')).toEqual('');
   });
 
-  // it('validates phone numbers', () => {
-  // expect(getInitials('12345678')).toEqual('');
-  // expect(getInitials('+1 (555) 123-4567 ext.4567')).toEqual('');
-  // expect(getInitials('+47 12 34 56 78 (X 5678)')).toEqual('4');
-  // expect(getInitials('47 12 34')).toEqual('');
-  // expect(getInitials('47 12')).toEqual('');
-  // expect(getInitials('1 Ext 2')).toEqual('');
-  // result = getInitials('James Ext 2');
-  // expect(result).toEqual('JE');
-  // result = getInitials('1x1');
-  // expect(result).toEqual('');
-  // result = getInitials('1y1');
-  // expect(result).toEqual('');
-  // result = getInitials('1');
-  // expect(result).toEqual('');
-  // result = getInitials('A 2');
-  // expect(result).toEqual('A');
-  // });
+  it('validates phone numbers', () => {
+    expect(getInitials('12345678')).toEqual('');
+    // expect(getInitials('+1 (555) 123-4567 ext.4567')).toEqual('');
+    // expect(getInitials('+47 12 34 56 78 (X 5678)')).toEqual('4');
+    expect(getInitials('47 12 34')).toEqual('');
+    expect(getInitials('47 12')).toEqual('');
+    // expect(getInitials('1 Ext 2')).toEqual('');
+    result = getInitials('James Ext 2');
+    expect(result).toEqual('JE');
+    // result = getInitials('1x1');
+    // expect(result).toEqual('');
+    // result = getInitials('1y1');
+    // expect(result).toEqual('');
+    result = getInitials('1');
+    expect(result).toEqual('');
+    result = getInitials('A 2');
+    expect(result).toEqual('A');
+  });
 });
