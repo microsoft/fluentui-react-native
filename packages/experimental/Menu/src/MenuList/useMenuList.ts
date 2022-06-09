@@ -94,7 +94,9 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
   );
 
   return {
-    ...context,
+    props: {
+      ...context,
+    },
     isCheckedControlled,
     checked,
     onCheckedChange,
