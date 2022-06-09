@@ -14,6 +14,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { Text } from '@fluentui-react-native/experimental-text';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -79,18 +80,27 @@ const MenuCheckmarks: React.FunctionComponent = () => {
 };
 
 const MenuRadioItem: React.FunctionComponent = () => {
+  const [checked, setChecked] = React.useState(['itemOne']);
+  const onCheckedChange = React.useCallback(
+    (_e, checkedChange) => {
+      setChecked(checkedChange);
+    },
+    [setChecked],
+  );
+
   return (
     <Stack style={stackStyle}>
-      <Menu defaultChecked={['itemOne']}>
+      <Text>Current checked: {checked.join(' ')}</Text>
+      <Menu defaultChecked={['itemOne']} onCheckedChange={onCheckedChange}>
         <MenuTrigger>
           <Button>Items with radio selection</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItemRadio name="itemOne" content="A MenuItem with checkmark" />
-            <MenuItemRadio name="itemTwo" content="Another MenuItem with checkmark" />
-            <MenuItemRadio name="itemThree" content="A third MenuItem with checkmark" />
-            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark" />
+            <MenuItemRadio name="itemOne" content="A MenuItem with checkmark and radio selection" />
+            <MenuItemRadio name="itemTwo" content="Another MenuItem with checkmark and radio selection" />
+            <MenuItemRadio name="itemThree" content="A third MenuItem with checkmark and radio selection" />
+            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark and toggle selection" />
           </MenuList>
         </MenuPopover>
       </Menu>
