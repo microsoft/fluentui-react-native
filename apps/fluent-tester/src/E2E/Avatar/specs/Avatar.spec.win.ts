@@ -1,12 +1,15 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import AvatarPageObject, { AvatarComponentSelector } from '../pages/AvatarPageObject';
+import AvatarPageObject from '../pages/AvatarPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { ComponentSelector } from '../../common/BasePage.win';
 import {
   JSAVATAR_ACCESSIBILITY_LABEL,
   JSAVATAR_ACCESSIBILITY_LABEL_BY_NAME,
   JSAVATAR_ACCESSIBILITY_HINT,
   JSAVATAR_ACCESSIBILITY_ROLE,
+  ACCESSIBILITY_LABEL_ATTR,
+  ACCESSIBILITY_HINT_ATTRIBUTE,
+  ACCESSIBILITY_ROLE_ATTRIBUTE,
+  ACCESSIBILITY_ROLE_IMAGE,
 } from '../../../FluentTester/TestComponents/Avatar/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -36,18 +39,18 @@ describe('Avatar Accessibility Testing', () => {
     AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
   it('Validate accessibilityLabel', () => {
-    expect(AvatarPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL);
+    expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL);
   });
   it('Validate accessibilityLabel from `name` prop', () => {
-    expect(AvatarPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL_BY_NAME);
+    expect(AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL_BY_NAME);
   });
   it('Validate accessibilityHint', () => {
-    expect(AvatarPageObject.getAvatarAccessibilityHint(AvatarComponentSelector.PrimaryComponent)).toEqual(JSAVATAR_ACCESSIBILITY_HINT);
+    expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_HINT_ATTRIBUTE)).toEqual(JSAVATAR_ACCESSIBILITY_HINT);
   });
   it('Validate accessibilityRole', () => {
-    expect(AvatarPageObject.getAvatarAccessibilityRole(AvatarComponentSelector.PrimaryComponent)).toEqual(JSAVATAR_ACCESSIBILITY_ROLE);
+    expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(JSAVATAR_ACCESSIBILITY_ROLE);
   });
   it('Validate default accessibilityRole', () => {
-    expect(AvatarPageObject.getAvatarAccessibilityRole(AvatarComponentSelector.SecondaryComponent)).toEqual('ControlType.Image');
+    expect(AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_IMAGE);
   });
 });

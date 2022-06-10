@@ -11,6 +11,12 @@ export const enum AvatarComponentSelector {
   SecondaryComponent, //this._secondaryComponent
 }
 class AvatarPageObject extends BasePage {
+  getPrimaryComponentAttribute(attribute: string): string {
+    return this._primaryComponent.getAttribute(attribute);
+  }
+  getSecondaryComponentAttribute(attribute: string): string {
+    return this._secondaryComponent.getAttribute(attribute);
+  }
   getAvatarAccessibilityLabel(componentSelector: AvatarComponentSelector): string {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
       ? this._secondaryComponent.getAttribute('Name')
