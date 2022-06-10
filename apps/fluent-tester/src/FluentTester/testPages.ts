@@ -27,6 +27,8 @@ import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from 
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
+import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
+
 
 export const tests: TestDescription[] = [
   {
@@ -173,5 +175,10 @@ export const tests: TestDescription[] = [
     name: 'Menu Test',
     component: MenuTest,
     testPage: HOMEPAGE_MENU_BUTTON,
+  },
+  {
+    name: 'Notification Test',
+    component: NotificationTest,
+    testPage: HOMEPAGE_NOTIFICATION_BUTTON,
   },
 ];
