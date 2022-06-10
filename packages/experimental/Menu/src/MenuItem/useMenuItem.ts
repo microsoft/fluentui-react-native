@@ -2,7 +2,13 @@ import * as React from 'react';
 import { AccessibilityState, I18nManager } from 'react-native';
 import { MenuItemProps, MenuItemState } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
-import { InteractionEvent, isKeyPressEvent, useAsPressable, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
+import {
+  InteractionEvent,
+  isKeyPressEvent,
+  useAsPressable,
+  useKeyDownProps,
+  useViewCommandFocus,
+} from '@fluentui-react-native/interactive-hooks';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
@@ -20,6 +26,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const isInSubmenu = isSubmenu && !isTrigger;
 
   const setOpen = useMenuContext().setOpen;
+
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       if (disabled) {
@@ -51,11 +58,20 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   );
 
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
+  const itemRef = useViewCommandFocus(componentRef);
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
   const hasCheckmarks = useMenuListContext().hasCheckmarks;
+
+  React.useEffect(() => {
+    if (pressable.state.hovered) {
+      componentRef?.current?.focus();
+    } else {
+      componentRef?.current?.blur();
+    }
+  }, [pressable.state.hovered, componentRef]);
 
   return {
     props: {
@@ -65,9 +81,9 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
-      enableFocusRing: true,
+      enableFocusRing: !pressable.state.hovered,
       focusable: true,
-      ref: componentRef,
+      ref: itemRef,
       ...onKeyDownProps,
     },
     state: pressable.state,
