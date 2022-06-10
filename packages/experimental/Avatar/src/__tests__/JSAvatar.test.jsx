@@ -18,7 +18,7 @@ const alphabeticalTestNames = [
   'Richard Feynman {Teams}',
 ];
 const alphabeticalInitials = ['M', 'AK', 'MB', 'AK', 'AK', 'WL', 'WL', 'AK', 'RF', 'R', 'RF', 'RF'];
-const otherTestNames = ['(206) 123-4567', '耿盈盈', '47 12 34']; // will return these cases after bug bash - '1x1', '耿 James', '+47 12 34 56 78 (X 5678)'
+const otherTestNames = ['(206) 123-4567', '耿盈盈', '47 12 34'];
 const namesWithTitles = ['Mr Feynman', 'Dr Richard Feynman'];
 const initialsForNameWithTitles = ['F', 'RF'];
 
