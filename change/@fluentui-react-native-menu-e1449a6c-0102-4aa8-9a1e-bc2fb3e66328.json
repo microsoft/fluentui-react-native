@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "A fix for hover focus?",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
