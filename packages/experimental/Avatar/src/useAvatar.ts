@@ -1,4 +1,5 @@
 import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
+import { I18nManager } from 'react-native';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
@@ -41,7 +42,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
     showBadge,
   };
 
-  const _initials = initials || getInitials(name);
+  const _initials = initials || getInitials(name, I18nManager.isRTL);
   const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
   const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
 
@@ -72,38 +73,43 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
  * First letters of the first and last words if more words were provided.
  * Words in braces, titles, special characters, parantheses and dashes should be ignored.
  */
-export const getInitials = (name: string): string => {
-  if (!name) {
+export const getInitials = (name: string, isRtl?: boolean): string => {
+  const NOT_SUPPORTED_CHARACTERS_REGEXP = new RegExp(
+    '[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]|[\uD840-\uD869][\uDC00-\uDED6]',
+    'g',
+  );
+  if (!name || NOT_SUPPORTED_CHARACTERS_REGEXP.test(name)) {
     return '';
   }
-  const WORDS_IN_BRACES_REGEXP = new RegExp('[\\(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
-  const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
-  const NON_WORD_REGEXP = new RegExp('\\W+', 'g');
-  let words = name
-    .replace(WORDS_IN_BRACES_REGEXP, ' ')
-    .replace(PHONE_NUMBER_REGEXP, ' ')
-    .replace('-', '')
-    .replace(NON_WORD_REGEXP, ' ')
-    .trim()
-    .split(' ');
-  words = removeTitlesFromName(words);
+  const words = removeRedundantCharacters(name);
   const wordsLength = words.length;
   const lastWordIdx = wordsLength - 1;
-  const initials = `${words[0].charAt(0).toUpperCase()}${wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : ''}`;
+  const firstLetter = words[0].charAt(0).toUpperCase();
+  const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
+  const initials = isRtl ? `${lastLetter}${firstLetter}` : `${firstLetter}${lastLetter}`;
   return initials;
 };
 
 /**
- * A function which verifies whether a name contains non-alphabetical characters
+ * A function which takes a name and returns array of valid words
  *
  * @param name
- * @returns true if the name contains alphabetical characters. Returns false if there are
- * numeric values or the first character is non-alphabetical. In this case avatar should
- * fall back to icon.
+ * @returns array of words without phone numbers and special characters.
  */
-export const validateAlphabeticalCharacters = (name: string): boolean => {
-  const alphabeticalRegExp = new RegExp('[a-zA-Z]', 'g');
-  return name ? alphabeticalRegExp.test(name) : false;
+export const removeRedundantCharacters = (name: string): string[] => {
+  if (!name) {
+    return [];
+  }
+  const WORDS_IN_BRACES_REGEXP = new RegExp('[(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
+  const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
+  const SPECIAL_CHARACTERS_REGEXP = new RegExp('[!"#\'$%&*+,-./:;>=<?@^_`|~¡¢£¤¥¦§¨©ª«¬®ˉ°±²¼½¾¿×÷]', 'g');
+  const words = name
+    .replace(WORDS_IN_BRACES_REGEXP, '')
+    .replace(PHONE_NUMBER_REGEXP, ' ')
+    .replace(SPECIAL_CHARACTERS_REGEXP, '')
+    .trim()
+    .split(' ');
+  return removeTitlesFromName(words);
 };
 
 /**
