@@ -2,17 +2,20 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const PrimaryToastTest: React.FunctionComponent = () => {
+// const NotificationVariant string: 'primary' | 'neutral' | 'danger' | 'warning';
+enum NotificationVariant { primary = 1, neutral, danger, warning };
 
-  const styles = {
+const Notification = (props) => {
+  const variant = props.variant;
+  let leftText = ''; 
+  let rightText = '';
+
+  const styles: {[key: string]: any} = {
     container: {
       width: null,
-      backgroundColor: 'skyblue',
       borderRadius: 12,
 
       flexDirection: 'row',
-      justifyContent: 'space-between',
-
       padding: 16,
     },
     left: {
@@ -23,114 +26,82 @@ const PrimaryToastTest: React.FunctionComponent = () => {
       fontWeight: '500',
     },
   };
+  
+  if (variant === 'primary') {
+    styles.container['backgroundColor'] = 'skyblue';
+    styles.container['justifyContent'] = 'space-between';
+    
+    leftText = 'Mail Archived';
+    rightText = 'Undo';
+  }
+  else if (variant === 'neutral') {
+    styles.container['backgroundColor'] = 'lightgrey';
+    styles.container['alignItems'] = 'center';
 
+    styles.left['width'] = 0;
+    styles.left['flexGrow'] = 1;
+    styles.left['flex'] = 1;
+    
+    styles.right['marginLeft'] = 34;
+    
+    leftText = 'Some items require you to sign in to view them';
+    rightText = 'Sign in';
+  }
+  else if (variant === 'danger') {
+    styles.container['backgroundColor'] = 'pink';
+    styles.container['alignItems'] = 'center';
+
+    styles.left['color'] = 'maroon';
+    styles.left['width'] = 0;
+    styles.left['flexGrow'] = 1;
+    styles.left['flex'] = 1;
+    
+    styles.right['color'] = 'maroon';
+    
+    leftText = 'There was a problem, and your recent changes may not have saved';
+    rightText = 'Retry';
+  }
+  else if (variant === 'warning') {
+    styles.container['backgroundColor'] = 'lightyellow';
+    styles.container['justifyContent'] = 'space-between';
+
+    styles.left['color'] = 'brown';
+
+    styles.right['color'] = 'brown';
+    
+    leftText = 'Read Only';
+    rightText = 'X';
+  }
+  
   return (
     <View style={styles.container as any}>
-      <Text style={styles.left as any}>Mail Archived</Text>
-      <Text style={styles.right as any}>Undo</Text>
+      <Text style={styles.left as any}>{leftText}</Text>
+      <Text style={styles.right as any}>{rightText}</Text>
     </View>
+  );
+}
+
+const PrimaryToastTest: React.FunctionComponent = () => {
+  return (
+    <Notification variant={NotificationVariant[NotificationVariant.primary]}/>
   );
 };
 
 const NeutralToastTest: React.FunctionComponent = () => {
-
-  const styles = {
-    container: {
-      width: null,
-      backgroundColor: 'lightgrey',
-      borderRadius: 12,
-
-      flexDirection: 'row',
-      alignItems: 'center',
-
-      padding: 16,
-    },
-    left: {
-      fontSize: 16,
-      width: 0,
-      flexGrow: 1,
-      flex: 1,
-    },
-    right: {
-      fontSize: 16,
-      fontWeight: '500',
-      
-      marginLeft: 34,
-    },
-  };
-
   return (
-    <View style={styles.container as any}>
-      <Text style={styles.left as any}>Some items require you to sign in to view them</Text>
-      <Text style={styles.right as any}>Sign in</Text>
-    </View>
+    <Notification variant={NotificationVariant[NotificationVariant.neutral]}/>
   );
 };
 
 const DangerToastTest: React.FunctionComponent = () => {
-
-  const styles = {
-    container: {
-      width: null,
-      backgroundColor: 'pink',
-      borderRadius: 12,
-
-      flexDirection: 'row',
-      alignItems: 'center',
-
-      padding: 16,
-    },
-    left: {
-      color: 'maroon',
-      fontSize: 16,
-      width: 0,
-      flexGrow: 1,
-      flex: 1,
-    },
-    right: {
-      color: 'maroon',
-      fontSize: 16,
-      fontWeight: '500',
-    },
-  };
-
   return (
-    <View style={styles.container as any}>
-      <Text style={styles.left as any}>There was a problem, and your recent changes may not have saved</Text>
-      <Text style={styles.right as any}>Retry</Text>
-    </View>
+    <Notification variant={NotificationVariant[NotificationVariant.danger]}/>
   );
 };
 
 const WarningToastTest: React.FunctionComponent = () => {
-
-  const styles = {
-    container: {
-      width: null,
-      backgroundColor: 'lightyellow',
-      borderRadius: 12,
-
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-
-      padding: 16,
-    },
-    left: {
-      color: 'brown',
-      fontSize: 16,
-    },
-    right: {
-      color: 'brown',
-      fontSize: 16,
-      fontWeight: '500',
-    },
-  };
-
   return (
-    <View style={styles.container as any}>
-      <Text style={styles.left as any}>Read Only</Text>
-      <Text style={styles.right as any}>X</Text>
-    </View>
+    <Notification variant={NotificationVariant[NotificationVariant.warning]}/>
   );
 };
 
