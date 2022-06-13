@@ -156,20 +156,19 @@ export type MenuListProps = {
   /**
    * Callback when checked items change for value with a name
    *
-   * @param name - the name of the value
-   * @param isChecked - whether the item is checked
+   * @param checked Array of all checked values
    */
-  onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  onCheckedChange?: (e: InteractionEvent, checked[]) => void;
 
   /**
-   * Map of all checked items
+   * Array of all checked items
    */
-  checked?: Record<string, boolean>;
+  checked?: string[];
 
   /**
    * Default items to be checked on mount
    */
-  defaultChecked?: Record<string, boolean>;
+  defaultChecked?: string[];
 
   /**
    * States that menu items can contain selectable items and reserve slots for item alignment

@@ -37,7 +37,7 @@ export const MenuList = compose<MenuListType>({
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
     const contextValue = useMenuListContextValue(menuList);
-    const Slots = useSlots(menuList);
+    const Slots = useSlots(menuList.props);
 
     return (_final: MenuListProps, children: React.ReactNode) => {
       return (
