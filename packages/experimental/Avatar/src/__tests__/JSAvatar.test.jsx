@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { JSAvatar } from '..';
-import { getInitials, removeTitlesFromName } from '../useAvatar';
+import { getInitials } from '../useAvatar';
 import * as renderer from 'react-test-renderer';
 
 const alphabeticalTestNames = [
@@ -28,15 +28,14 @@ describe('Avatar rendering', () => {
   });
 });
 
-describe('removeTitlesFromName method', () => {
-  it('removes titles from the name', () => {
-    const words = ['Mr', 'Faynman'];
-    expect(removeTitlesFromName(words)).toStrictEqual(['Faynman']);
+describe('getInitials - names with titles', () => {
+  it('returns initials without title', () => {
+    expect(getInitials('Mr Faynman')).toBe('F');
   });
-  // it('removes multiword titles from the name', () => {
-  //   const name = 'Consul General Richard Faynman';
-  //   expect(removeTitlesFromName(name)).toStrictEqual(['Richard Faynman']);
-  // });
+  it('returns initials for names with multi-word titles', () => {
+    expect(getInitials('Consul General Richard Faynman')).toBe('RF');
+    expect(getInitials('Major General Victor')).toBe('V');
+  });
 });
 
 describe('getInitials method - language support', () => {
