@@ -13,8 +13,8 @@ export interface MenuContextValue extends MenuState {
 
 export const MenuContext = React.createContext<MenuContextValue>({
   isControlled: false,
-  checked: {},
-  defaultChecked: {},
+  checked: [],
+  defaultChecked: [],
   hasCheckmarks: false,
   isSubmenu: false,
   open: false,
