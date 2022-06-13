@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 13 Jun 2022 21:38:26 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jun 2022 23:05:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.64.4
+
+Mon, 13 Jun 2022 23:05:44 GMT
+
+### Patches
+
+- Fix selection not persisting between menu sessions, and API type (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.14.4
 
 ## 0.64.3
 

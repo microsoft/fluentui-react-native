@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix selection not persisting between menu sessions, and API type",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
