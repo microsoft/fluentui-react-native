@@ -5,8 +5,6 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: Theme) =>
   ({
-    horizontalIconAlignment: 'end',
-    verticalIconAlignment: 'end',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground6,
     avatarOpacity: 1,

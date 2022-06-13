@@ -12,15 +12,8 @@ import {
 } from './JSAvatar.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultJSAvatarTokens } from './JSAvatarTokens';
-import { ViewStyle } from 'react-native';
-import { getRingConfig } from './JSAvatar.helpers';
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
-
-const nameMap: { [key: string]: string } = {
-  start: 'flex-start',
-  center: 'center',
-  end: 'flex-end',
-};
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 export const avatarStates: (keyof JSAvatarTokens)[] = [
   ...AvatarColors,
@@ -30,13 +23,19 @@ export const avatarStates: (keyof JSAvatarTokens)[] = [
   'circular',
   'square',
   'inactive',
-  'ringColor',
   'iconColor',
   'iconSize',
   'size',
 ];
 
-const tokensThatAreAlsoProps: (keyof AvatarConfigurableProps)[] = ['avatarColor', 'initialsColor', 'ring'];
+const tokensThatAreAlsoProps: (keyof AvatarConfigurableProps)[] = [
+  'avatarColor',
+  'initialsColor',
+  'ringBackgroundColor',
+  'ringColor',
+  'ringInnerGap',
+  'ringThickness',
+];
 
 export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, JSAvatarTokens> = {
   tokens: [defaultJSAvatarTokens, JSAvatarName],
@@ -45,21 +44,17 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { horizontalIconAlignment, verticalIconAlignment, size, avatarOpacity } = tokens;
+        const { size, avatarOpacity } = tokens;
         return {
           style: {
             flexDirection: 'row',
             width: size,
             height: size,
-            justifyContent: nameMap[horizontalIconAlignment || 'end'] as ViewStyle['justifyContent'],
-            alignItems: nameMap[verticalIconAlignment || 'end'] as ViewStyle['alignItems'],
-            horizontalIconAlignment,
-            verticalIconAlignment,
             opacity: avatarOpacity,
           },
         };
       },
-      ['horizontalIconAlignment', 'verticalIconAlignment', 'avatarOpacity', 'size'],
+      ['avatarOpacity', 'size'],
     ),
     initials: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
@@ -80,19 +75,20 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           !avatarColor || AvatarColors.includes(avatarColor as AvatarNamedColor) || ColorSchemes.includes(avatarColor as AvatarColorSchemes)
             ? backgroundColor
             : avatarColor;
+        const ringConfig = getRingConfig(tokens);
 
         return {
           style: {
             ...borderStyles.from(tokens, theme),
             width: size,
             height: size,
-            flexGrow: 1,
-            alignSelf: 'stretch',
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: _avatarColor,
             borderWidth: tokens.borderWidth,
             borderColor: tokens.borderColor,
+            marginTop: ringConfig.ringThickness,
+            marginLeft: ringConfig.ringThickness,
           },
         };
       },
@@ -101,6 +97,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     image: buildProps(
       (tokens: JSAvatarTokens) => {
         const { borderRadius, size, borderWidth, borderColor } = tokens;
+        const ringConfig = getRingConfig(tokens);
         return {
           style: {
             borderRadius: borderRadius,
@@ -108,6 +105,8 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
             height: size,
             borderWidth: borderWidth,
             borderColor: borderColor,
+            marginTop: ringConfig.ringThickness,
+            marginLeft: ringConfig.ringThickness,
           },
         };
       },
@@ -129,22 +128,21 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ),
     ring: buildProps(
       (tokens: JSAvatarTokens, theme: Theme) => {
-        const ringConfig = getRingConfig(tokens.size);
+        const { ringColor, ringBackgroundColor } = tokens;
+        const ringConfig = getRingConfig(tokens);
         return {
           style: {
             borderStyle: 'solid',
             width: ringConfig.size,
             height: ringConfig.size,
-            position: 'absolute',
-            top: -ringConfig.stroke * 2,
-            left: -ringConfig.stroke * 2,
             ...borderStyles.from(tokens, theme),
-            borderWidth: ringConfig.stroke,
-            borderColor: tokens.ringColor,
+            borderWidth: ringConfig.ringThickness,
+            backgroundColor: ringBackgroundColor || 'transparent',
+            borderColor: ringColor,
           },
         };
       },
-      ['size', 'ringColor', ...borderStyles.keys],
+      ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
     ),
     badge: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -157,3 +155,39 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
     ),
   },
 };
+
+function getRingConfig(tokens: JSAvatarTokens): any {
+  const { size, ringThickness } = tokens;
+  const strokeSize = {
+    small: globalTokens.stroke.width.thick,
+    medium: globalTokens.stroke.width.thicker,
+    large: globalTokens.stroke.width.thickest,
+  };
+  if (ringThickness) {
+    return {
+      size: size + ringThickness * 4,
+      ringThickness,
+      innerStroke: ringThickness,
+    };
+  } else {
+    if (size <= 48) {
+      return {
+        size: size + strokeSize.small * 4,
+        ringThickness: strokeSize.small,
+        innerStroke: strokeSize.small,
+      };
+    }
+    if (size <= 71) {
+      return {
+        size: size + strokeSize.medium * 4,
+        ringThickness: strokeSize.medium,
+        innerStroke: strokeSize.medium,
+      };
+    }
+    return {
+      size: size + strokeSize.large * 4,
+      ringThickness: strokeSize.large,
+      innerStroke: strokeSize.large,
+    };
+  }
+}

@@ -185,7 +185,7 @@ Tokens can be used to customize the styling of the control by using the `customi
 ```ts
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
   /**
-   * Avatar ocality which is changed depending on `active` prop.
+   * Avatar opacity which is changed depending on `active` prop.
    */
   avatarOpacity?: number;
 
@@ -205,11 +205,6 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   iconSize?: number;
 
   /**
-   * The height of the avatar.
-   */
-  height?: number;
-
-  /**
    * Avatar shapes:
    */
   circular?: JSAvatarTokens;
@@ -219,11 +214,6 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
    * Token for inactive value of `active` prop
    */
   inactive?: JSAvatarTokens;
-
-  /**
-   * The width of the avatar.
-   */
-  width?: number;
 
   /**
    * Avatar sizes:

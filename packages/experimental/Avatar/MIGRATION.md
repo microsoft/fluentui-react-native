@@ -41,8 +41,6 @@
 
 - `iconSize`
 - `iconWeight`
-- `horizontalIconAlignment`
-- `verticalIconAlignment`
 - `size`
 
 ### Tokens no longer supported with an equivalent functionality in Avatar
@@ -56,6 +54,7 @@
 
 - `iconStrokeWidth` and `iconStrokeColor` => This was for activity ring around the Avatar.
   We support ring in `activeAppearance` prop. `borderColor` will be changed using `ringColor` token and `borderWidth` using ringThickness token.
+- `horizontalIconAlignment` and `verticalIconAlignment` => these props were responsible for presence badge position.
 
 ### New tokens
 
