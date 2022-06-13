@@ -96,7 +96,7 @@ export const StandardUsage: FunctionComponent = () => {
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-      <JSAvatar name="Richard" avatarColor="colorful" />
+      <JSAvatar name="Richard" avatarColor="#ff0099" initialsColor="yellow" />
       <JSAvatar icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }} size={56} />
       <JSAvatar accessibilityLabel="Fall-back Icon" accessibilityHint="A picture representing a user" size={120} />
       <JSAvatar

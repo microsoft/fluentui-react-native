@@ -26,7 +26,6 @@ export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSA
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['avatarColor'] ||
-    (!userProps['avatarColor'] && layer === 'neutral') ||
     layer === avatarSize ||
     (userProps.active === 'inactive' && layer === 'inactive')
   );
