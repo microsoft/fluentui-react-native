@@ -1,14 +1,14 @@
 import React from 'react';
 import { memoize, stagedComponent } from '@fluentui-react-native/framework';
-import { menuTriggerName, MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
+import { menuTriggerName, MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';
 import { AccessibilityActionEvent } from 'react-native';
 import { MenuTriggerProvider } from '../context/menuTriggerContext';
 
-export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
-  const menuTrigger = useMenuTrigger(props);
+export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Record<never, any>>) => {
+  const menuTrigger = useMenuTrigger();
 
-  return (_rest: MenuTriggerProps, children: React.ReactNode) => {
+  return (_rest: React.PropsWithChildren<Record<never, any>>, children: React.ReactNode) => {
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
 
     if (__DEV__) {
@@ -21,7 +21,7 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
     // child component which may affect accessibility, we need to modify the
     // state in the inner render so we can access the child component and its props.
     const child = childrenArray[0];
-    const revisedProps = getRevisedState(menuTrigger, child.props);
+    const revisedProps = getRevisedProps(menuTrigger, child.props);
     const revised = React.cloneElement(child, revisedProps);
 
     return <MenuTriggerProvider value={menuTrigger.hasSubmenu}>{revised}</MenuTriggerProvider>;
@@ -29,8 +29,8 @@ export const MenuTrigger = stagedComponent((props: MenuTriggerProps) => {
 });
 MenuTrigger.displayName = menuTriggerName;
 
-const getRevisedState = memoize(getRevisedStateWorker);
-function getRevisedStateWorker(state: MenuTriggerState, props: any): MenuTriggerProps {
+const getRevisedProps = memoize(getRevisedPropsWorker);
+function getRevisedPropsWorker(state: MenuTriggerState, props: any): MenuTriggerChildProps {
   const revisedProps = state.props;
   if (props.accessibilityState) {
     revisedProps.accessibilityState = { ...revisedProps.accessibilityState, ...props.accessibilityState };

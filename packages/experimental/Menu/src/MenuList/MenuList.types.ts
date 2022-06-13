@@ -23,6 +23,7 @@ export interface MenuListState extends MenuListProps {
 export interface MenuListSlotProps {
   root: React.PropsWithRef<IViewProps> & { gap?: number };
 }
+
 export interface MenuListType {
   props: MenuListProps;
   tokens: MenuListTokens;

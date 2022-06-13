@@ -7,15 +7,15 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
   ({
     horizontalIconAlignment: 'end',
     verticalIconAlignment: 'end',
-    color: globalTokens.color.white,
-    backgroundColor: globalTokens.color.cornflower.primary,
+    color: t.colors.neutralForeground3,
+    backgroundColor: t.colors.neutralBackground6,
     avatarOpacity: 1,
     fontFamily: t.typography.families.primary,
     fontWeight: globalTokens.font.weight.semibold,
     fontSize: globalTokens.font.size[200],
     size: 24,
     iconSize: 16,
-    iconColor: globalTokens.color.white,
+    iconColor: t.colors.neutralForeground3,
     ringColor: t.colors.transparentStroke,
     borderColor: globalTokens.color.white,
     borderWidth: t.host.appearance === 'highContrast' ? 1 : 0,
@@ -163,6 +163,9 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     mink: getColorProps('mink', t),
     platinum: getColorProps('platinum', t),
     anchor: getColorProps('anchor', t),
+    burgundy: getColorProps('burgundy', t),
+    hotPink: getColorProps('hotPink', t),
+    orchid: getColorProps('orchid', t),
   } as JSAvatarTokens);
 
 /**

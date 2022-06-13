@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Mon, 06 Jun 2022 19:20:10 GMT and should not be manually modified.
+This log was last generated on Tue, 07 Jun 2022 22:59:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.11
+
+Tue, 07 Jun 2022 22:59:24 GMT
+
+### Patches
+
+- Fix focus override (ruaraki@microsoft.com)
 
 ## 0.15.10
 
