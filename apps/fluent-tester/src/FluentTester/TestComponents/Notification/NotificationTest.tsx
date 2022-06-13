@@ -7,8 +7,8 @@ enum NotificationVariant { primary = 1, neutral, danger, warning };
 
 const Notification = (props) => {
   const variant = props.variant;
-  let leftText = ''; 
-  let rightText = '';
+  let startText = ''; 
+  let endText = '';
 
   const styles: {[key: string]: any} = {
     container: {
@@ -18,10 +18,10 @@ const Notification = (props) => {
       flexDirection: 'row',
       padding: 16,
     },
-    left: {
+    start: {
       fontSize: 16,
     },
-    right: {
+    end: {
       fontSize: 16,
       fontWeight: '500',
     },
@@ -31,52 +31,52 @@ const Notification = (props) => {
     styles.container['backgroundColor'] = 'skyblue';
     styles.container['justifyContent'] = 'space-between';
     
-    leftText = 'Mail Archived';
-    rightText = 'Undo';
+    startText = 'Mail Archived';
+    endText = 'Undo';
   }
   else if (variant === 'neutral') {
     styles.container['backgroundColor'] = 'lightgrey';
     styles.container['alignItems'] = 'center';
 
-    styles.left['width'] = 0;
-    styles.left['flexGrow'] = 1;
-    styles.left['flex'] = 1;
+    styles.start['width'] = 0;
+    styles.start['flexGrow'] = 1;
+    styles.start['flex'] = 1;
     
-    styles.right['marginLeft'] = 34;
+    styles.end['marginLeft'] = 34;
     
-    leftText = 'Some items require you to sign in to view them';
-    rightText = 'Sign in';
+    startText = 'Some items require you to sign in to view them';
+    endText = 'Sign in';
   }
   else if (variant === 'danger') {
     styles.container['backgroundColor'] = 'pink';
     styles.container['alignItems'] = 'center';
 
-    styles.left['color'] = 'maroon';
-    styles.left['width'] = 0;
-    styles.left['flexGrow'] = 1;
-    styles.left['flex'] = 1;
+    styles.start['color'] = 'maroon';
+    styles.start['width'] = 0;
+    styles.start['flexGrow'] = 1;
+    styles.start['flex'] = 1;
     
-    styles.right['color'] = 'maroon';
+    styles.end['color'] = 'maroon';
     
-    leftText = 'There was a problem, and your recent changes may not have saved';
-    rightText = 'Retry';
+    startText = 'There was a problem, and your recent changes may not have saved';
+    endText = 'Retry';
   }
   else if (variant === 'warning') {
     styles.container['backgroundColor'] = 'lightyellow';
     styles.container['justifyContent'] = 'space-between';
 
-    styles.left['color'] = 'brown';
+    styles.start['color'] = 'brown';
 
-    styles.right['color'] = 'brown';
+    styles.end['color'] = 'brown';
     
-    leftText = 'Read Only';
-    rightText = 'X';
+    startText = 'Read Only';
+    endText = 'X';
   }
   
   return (
     <View style={styles.container as any}>
-      <Text style={styles.left as any}>{leftText}</Text>
-      <Text style={styles.right as any}>{rightText}</Text>
+      <Text style={styles.start as any}>{startText}</Text>
+      <Text style={styles.end as any}>{endText}</Text>
     </View>
   );
 }
