@@ -44,7 +44,12 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
 
       onClick?.(e);
       if (!hasSubmenu) {
-        setOpen(e, false /*isOpen*/);
+        const isArrowClose =
+          isKeyPressEvent(e) &&
+          isInSubmenu &&
+          ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
+
+        setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
       }
     },
     [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],

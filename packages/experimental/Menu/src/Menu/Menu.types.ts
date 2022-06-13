@@ -15,7 +15,7 @@ export interface MenuState extends MenuProps {
   isControlled: boolean;
   isSubmenu: boolean;
   parentPopoverHoverOutTimer?: NodeJS.Timeout;
-  setOpen: (e: InteractionEvent, isOpen: boolean) => void;
+  setOpen: (e: InteractionEvent, isOpen: boolean, bubble?: boolean) => void;
   shouldFocusOnContainer: boolean;
   triggerRef: React.RefObject<React.Component>;
 }
