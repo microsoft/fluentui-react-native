@@ -59,15 +59,15 @@ const useMenuOpenState = (
       const openPrev = state;
       if (!isControlled && (!isOpen || lastCloseTimestamp + delayOpen <= Date.now())) {
         setOpenInternal(isOpen);
+      }
 
-        if (isOpen && Platform.OS === ('win32' as any) && isMouseEvent(e)) {
-          setShouldFocusOnContainer(true);
-        }
+      if (isOpen && Platform.OS === ('win32' as any) && isMouseEvent(e)) {
+        setShouldFocusOnContainer(true);
+      }
 
-        if (!isOpen) {
-          setShouldFocusOnContainer(false);
-          lastCloseTimestamp = Date.now();
-        }
+      if (!isOpen) {
+        setShouldFocusOnContainer(false);
+        lastCloseTimestamp = Date.now();
       }
 
       if (onOpenChange && openPrev !== isOpen) {
