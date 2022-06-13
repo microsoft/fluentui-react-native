@@ -74,11 +74,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
  * Words in braces, titles, special characters, parantheses and dashes should be ignored.
  */
 export const getInitials = (name: string, isRtl?: boolean): string => {
-  const NOT_SUPPORTED_CHARACTERS_REGEXP = new RegExp(
-    '[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]', //|[\uD840-\uD869][\uDC00-\uDED6]',
-    'g',
-  );
-  if (!name || NOT_SUPPORTED_CHARACTERS_REGEXP.test(name)) {
+  if (!name) {
     return '';
   }
   const words = removeRedundantCharacters(name);
