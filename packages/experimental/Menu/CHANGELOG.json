@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Mon, 13 Jun 2022 23:58:18 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e",
+            "comment": "Fix focus on open"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.7",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.3",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.22.28",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 13 Jun 2022 23:05:44 GMT",
       "tag": "@fluentui-react-native/menu_v0.14.4",
       "version": "0.14.4",

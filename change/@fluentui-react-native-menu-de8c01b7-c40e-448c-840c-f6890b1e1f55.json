@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix focus on open",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
