@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Close all menus when submenu item clicked",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
