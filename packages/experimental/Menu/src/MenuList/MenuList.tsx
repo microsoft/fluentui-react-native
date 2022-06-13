@@ -9,7 +9,6 @@ import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
-import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
