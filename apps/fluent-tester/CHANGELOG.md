@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 07 Jun 2022 16:56:26 GMT and should not be manually modified.
+This log was last generated on Wed, 08 Jun 2022 21:52:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.64.2
+
+Wed, 08 Jun 2022 21:52:34 GMT
+
+### Patches
+
+- Added missing colors from PersonaCoin, exposed colors as props (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.39
+
+## 0.64.1
+
+Tue, 07 Jun 2022 22:59:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.11
+- Bump @fluentui/react-native to v0.29.14
 
 ## 0.64.0
 

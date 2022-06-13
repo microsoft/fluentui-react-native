@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 08 Jun 2022 21:52:34 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.39",
+      "version": "0.14.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "b4b3b769fb664df2d3c3ff64670439bae57b2817",
+            "comment": "Added missing colors from PersonaCoin, exposed colors as props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 19:20:10 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.38",
       "version": "0.14.38",
