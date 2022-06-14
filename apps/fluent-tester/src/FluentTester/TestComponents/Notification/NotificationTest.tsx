@@ -2,8 +2,7 @@ import * as React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-// const NotificationVariant string: 'primary' | 'neutral' | 'danger' | 'warning';
-enum NotificationVariant { primary = 1, neutral, danger, warning };
+const NotificationVariants = ['primary', 'neutral', 'danger', 'warning'] as const;
 
 const Notification = (props) => {
   const variant = props.variant;
@@ -32,10 +31,10 @@ const Notification = (props) => {
 
   let styles = StyleSheet.create({
     container: {
-      width: null,
       borderRadius: 12,
       backgroundColor: containerBackgroundColor,
   
+      flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
@@ -46,8 +45,8 @@ const Notification = (props) => {
       color: foregroundColor,
 
       width: 0,
-      flexGrow: 1,
       flex: 1,
+      flexGrow: 1,
     },
     end: {
       fontSize: 16,
@@ -68,14 +67,14 @@ const Notification = (props) => {
 
 const PrimaryTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.primary]}
+    <Notification variant={NotificationVariants[0]}
                   startText = 'Mail Archived' endText = 'Undo'/>
   );
 };
 
 const NeutralTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.neutral]}
+    <Notification variant={NotificationVariants[1]}
                   startText = 'Some items require you to sign in to view them'
                   endText = 'Sign in'/>
   );
@@ -83,7 +82,7 @@ const NeutralTest: React.FunctionComponent = () => {
 
 const DangerTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.danger]}
+    <Notification variant={NotificationVariants[2]}
                   startText = 'There was a problem, and your recent changes may not have saved'
                   endText = 'Retry'/>
   );
@@ -91,7 +90,7 @@ const DangerTest: React.FunctionComponent = () => {
 
 const WarningTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.warning]} 
+    <Notification variant={NotificationVariants[3]} 
                   startText = 'Read Only' endText = 'X'/>
   );
 };
