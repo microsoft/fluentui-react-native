@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "macOS menu tokens + behavior",
+  "comment": "macOS menu tokens",
   "packageName": "@fluentui-react-native/menu",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
