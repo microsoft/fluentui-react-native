@@ -13,7 +13,7 @@ const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
 export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, onHoverIn, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
   const isTrigger = useMenuTriggerContext();
   const isSubmenu = useMenuContext().isSubmenu;
   const hasSubmenu = isSubmenu && isTrigger;
@@ -55,17 +55,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
   );
 
-  const onHoverInWithFocus = React.useCallback(
-    (e) => {
-      if (!disabled) {
-        componentRef.current.focus();
-        onHoverIn?.(e);
-      }
-    },
-    [componentRef, onHoverIn, disabled],
-  );
-
-  const pressable = useAsPressable({ ...rest, disabled, onHoverIn: onHoverInWithFocus, onPress: onInvoke });
+  const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
@@ -84,7 +74,10 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
         macos: false,
         default: true, // win32
       }),
-      focusable: !disabled,
+      focusable: Platform.select({
+        macos: !disabled,
+        default: true, // win32
+      }),
       ref: componentRef,
       ...onKeyDownProps,
     },
