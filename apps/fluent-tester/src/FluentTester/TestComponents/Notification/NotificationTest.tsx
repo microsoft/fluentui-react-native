@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 // const NotificationVariant string: 'primary' | 'neutral' | 'danger' | 'warning';
@@ -10,64 +10,61 @@ const Notification = (props) => {
   const startText = props.startText;
   const endText = props.endText;
 
-  const styles: {[key: string]: any} = {
+  let containerBackgroundColor = 'skyblue';
+  let foregroundColor = 'black';
+  
+  switch(variant) {
+    case 'primary':
+      containerBackgroundColor = 'skyblue';
+      break;
+    case 'neutral':
+      containerBackgroundColor = 'lightgrey';
+      break;
+    case 'danger':
+      containerBackgroundColor = 'pink';
+      foregroundColor = 'maroon';
+      break;
+    case 'warning':
+      containerBackgroundColor = 'lightyellow';
+      foregroundColor = 'brown';
+      break;
+  };
+
+  let styles = StyleSheet.create({
     container: {
       width: null,
       borderRadius: 12,
-
+      backgroundColor: containerBackgroundColor,
+  
       flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       padding: 16,
     },
     start: {
       fontSize: 16,
+      color: foregroundColor,
+
+      width: 0,
+      flexGrow: 1,
+      flex: 1,
     },
     end: {
       fontSize: 16,
       fontWeight: '500',
+      color: foregroundColor,
+
+      marginLeft: 34,
     },
-  };
-  
-  if (variant === 'primary') {
-    styles.container['backgroundColor'] = 'skyblue';
-    styles.container['justifyContent'] = 'space-between';
-  }
-  else if (variant === 'neutral') {
-    styles.container['backgroundColor'] = 'lightgrey';
-    styles.container['alignItems'] = 'center';
-
-    styles.start['width'] = 0;
-    styles.start['flexGrow'] = 1;
-    styles.start['flex'] = 1;
-    
-    styles.end['marginLeft'] = 34;
-  }
-  else if (variant === 'danger') {
-    styles.container['backgroundColor'] = 'pink';
-    styles.container['alignItems'] = 'center';
-
-    styles.start['color'] = 'maroon';
-    styles.start['width'] = 0;
-    styles.start['flexGrow'] = 1;
-    styles.start['flex'] = 1;
-    
-    styles.end['color'] = 'maroon';
-  }
-  else if (variant === 'warning') {
-    styles.container['backgroundColor'] = 'lightyellow';
-    styles.container['justifyContent'] = 'space-between';
-
-    styles.start['color'] = 'brown';
-
-    styles.end['color'] = 'brown';
-  }
+  });
   
   return (
-    <View style={styles.container as any}>
-      <Text style={styles.start as any}>{startText}</Text>
-      <Text style={styles.end as any}>{endText}</Text>
+    <View style={styles.container}>
+      <Text style={styles.start}>{startText}</Text>
+      <Text style={styles.end}>{endText}</Text>
     </View>
   );
-}
+};
 
 const PrimaryTest: React.FunctionComponent = () => {
   return (
