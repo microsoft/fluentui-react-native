@@ -1,6 +1,6 @@
 # Menu Migration
 
-## Migration from Context Menu
+## Migration from ContextualMenu
 
 ### Component rename
 
@@ -182,35 +182,39 @@ const onSubmenuItemClick = React.useCallback(
 
 There is no separate `SubmenuItem` or `Submenu` component. You can wrap a `MenuItem` in a `Menu` component, and it will take care of showing an indicator for the submenu and opening the menu in a reasonable direction.
 
-### Props no longer supported in ContextualMenu with an equivalent functionality in v1 Menu
+### Prop and token mapping from ContextualMenu to Menu
 
-- `content` => Pass the content as `children` instead
-- `endIcon` => Use `after` value for `iconPosition` prop and pass icon information into `icon` prop instead
-- `startIcon` => Use `before` value for `iconPosition` prop and pass icon information into `icon` prop instead
+#### Props no longer supported in ContextualMenu with an equivalent functionality in v1 Menu
 
-### Props no longer supported in ContextualMenu without an equivalent functionality in v1 Menu
+- `shouldFocusOnMount` => Use `setInitialFocus` on `MenuPopover` instead. Defaults to `true`.
+- `onItemClick` => Use `onClick` on the individual `MenuItem` instead.
+- `setShowMenu` => Use `onOpenChange` on `Menu` instead. This is not required to toggle showing the `MenuPopover`, the `Menu` component will take care of it unless you want to control the component's `open` state.
 
-- Cannot use both `startIcon` and `endIcon` at the same time in v1
+#### Props no longer supported in ContextualMenu without an equivalent functionality in v1 Menu
 
-### Tokens that remain as is
+- `shouldFocusOnContainer` - Default behavior is taken care of by `Menu`
 
-- Any props that are part of `FontTokens`, `IForegroundColorTokens`, `IBackgroundColorTokens`, `IBorderTokens`
+#### Tokens with an equivalent functionality in v1 Menu
 
-### Tokens no longer supported with an equivalent functionality in v1 Menu
+- `backgroundColor` => Use `backgroundColor` token on `MenuList`
+- All other tokens can be passed as props to `MenuPopover`
 
-- `contentPadding` => Set on `style` property of `root` property under `slotProps` in `compose` API
-- `iconColorHovered` => Use `iconColor` token under the `hovered` state token
-- `iconColorPressed` => Use `iconColor` token under the `pressed` state token
+### Prop and token mapping from ContextualMenuItem to MenuItem
 
-### Tokens no longer supported without an equivalent functionality in v1 Menu
+#### Props no longer supported in ContextualMenuItem with an equivalent functionality in v1 MenuItem
 
-- `contentPaddingFocused` => Removed in favor of using native based focus visuals
-- `wrapperBorderColor` => Removed in favor of using native based focus visuals
+- `itemKey` => Use `name` instead.
+- `text` => Use `content` instead.
 
-### Slots no longer supported with an equivalent functionality in v1 Menu
+#### Props no longer supported in ContextualMenuItem without an equivalent functionality in v1 MenuItem
 
-- `borderWrapper` has been removed in favor of using native focus visuals. Use `root` instead.
-- `stack` has been removed. Use `root` instead.
+- `icon` - Not yet supported
+- `title` - Not yet supported
+- `dismissMenu`
+
+#### Tokens with an equivalent functionality in v1 MenuItem
+
+- `FontTokens`, `IColorTokens`, `IBorderTokens`
 
 ### Updating ThemeProvider
 
@@ -238,18 +242,27 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 - Custom triggers for Menus (i.e. have a Menu trigger be a component that is not under MenuTrigger)
 - Standalone MenuList
 
-### Props that remain as is
+### Menu
 
-- `children`
-- `disabled`
-- `icon`
-- `onClick`
-- `testID`
-- `tooltip`
+### MenuTrigger
+
+### MenuPopover
+
+### MenuList
+
+### MenuItem
+
+### MenuItemCheckbox
+
+### MenuItemRadio
+
+### MenuDivider
+
+### Props that remain as is
 
 ### Props renamed to align with ReactNative
 
-No `Button` specific renames.
+No `Menu*` specific renames.
 
 ### Prop differences due to technical differences and limitations
 
