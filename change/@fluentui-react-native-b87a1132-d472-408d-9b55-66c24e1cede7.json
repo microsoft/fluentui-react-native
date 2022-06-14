@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Pin core package dependencies to specific versions",
+  "packageName": "@fluentui/react-native",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
