@@ -44,7 +44,6 @@ const Notification = (props) => {
       fontSize: 16,
       color: foregroundColor,
 
-      width: 0,
       flex: 1,
       flexGrow: 1,
     },
