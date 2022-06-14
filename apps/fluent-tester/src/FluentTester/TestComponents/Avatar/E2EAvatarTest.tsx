@@ -1,6 +1,5 @@
 import { JSAvatar } from '@fluentui-react-native/experimental-avatar';
 import * as React from 'react';
-import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { View } from 'react-native';
 import {
   JSAVATAR_ACCESSIBILITY_LABEL,
