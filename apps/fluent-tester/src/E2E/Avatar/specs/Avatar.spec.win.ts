@@ -5,7 +5,6 @@ import {
   JSAVATAR_ACCESSIBILITY_LABEL,
   JSAVATAR_ACCESSIBILITY_LABEL_BY_NAME,
   JSAVATAR_ACCESSIBILITY_HINT,
-  JSAVATAR_ACCESSIBILITY_ROLE,
   ACCESSIBILITY_LABEL_ATTR,
   ACCESSIBILITY_HINT_ATTRIBUTE,
   ACCESSIBILITY_ROLE_ATTRIBUTE,
@@ -38,6 +37,9 @@ describe('Avatar Accessibility Testing', () => {
   beforeEach(() => {
     AvatarPageObject.scrollToTestElement();
     AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+  afterEach(() => {
+    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate accessibilityLabel', () => {
     expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(JSAVATAR_ACCESSIBILITY_LABEL);
