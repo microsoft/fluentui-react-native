@@ -10,6 +10,7 @@ import {
   ACCESSIBILITY_HINT_ATTRIBUTE,
   ACCESSIBILITY_ROLE_ATTRIBUTE,
   ACCESSIBILITY_ROLE_IMAGE,
+  ACCESSIBILITY_ROLE_LINK,
 } from '../../../FluentTester/TestComponents/Avatar/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -48,7 +49,7 @@ describe('Avatar Accessibility Testing', () => {
     expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_HINT_ATTRIBUTE)).toEqual(JSAVATAR_ACCESSIBILITY_HINT);
   });
   it('Validate accessibilityRole', () => {
-    expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(JSAVATAR_ACCESSIBILITY_ROLE);
+    expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_LINK);
   });
   it('Validate default accessibilityRole', () => {
     expect(AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_IMAGE);

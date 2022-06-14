@@ -12,5 +12,6 @@ export const AVATAR_SECONDARY_TEST_COMPONENT = 'AVATAR_SECONDARY_TEST_COMPONENT'
 
 export const ACCESSIBILITY_LABEL_ATTR = 'Name';
 export const ACCESSIBILITY_HINT_ATTRIBUTE = 'HelpText';
-export const ACCESSIBILITY_ROLE_ATTRIBUTE = 'ControlType.HyperLink';
+export const ACCESSIBILITY_ROLE_ATTRIBUTE = 'ControlType';
 export const ACCESSIBILITY_ROLE_IMAGE = 'ControlType.Image';
+export const ACCESSIBILITY_ROLE_LINK = 'ControlType.HyperLink';
