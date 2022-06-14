@@ -22,7 +22,7 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -40,7 +40,7 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -58,8 +58,8 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
-              <MenuItem disabled content="Option 2" />
+              <MenuItem>Option 1</MenuItem>
+              <MenuItem disabled>Option 2</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -156,14 +156,14 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
               <Menu>
                 <MenuTrigger>
-                  <MenuItem content="Option 2" />
+                  <MenuItem>Option 2</MenuItem>
                 </MenuTrigger>
                 <MenuPopover>
                   <MenuList>
-                    <MenuItem content="Option 1" />
+                    <MenuItem>Option 1</MenuItem>
                   </MenuList>
                 </MenuPopover>
               </Menu>
@@ -186,7 +186,7 @@ describe('Menu rerender tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
@@ -205,7 +205,7 @@ describe('Menu rerender tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
@@ -224,7 +224,7 @@ describe('Menu rerender tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem accessibilityActions={action} content="Option 1" />
+              <MenuItem accessibilityActions={action}>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>

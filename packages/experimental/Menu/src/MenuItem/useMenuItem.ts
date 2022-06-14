@@ -68,7 +68,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessible: true,
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
-      accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: true,
       focusable: true,

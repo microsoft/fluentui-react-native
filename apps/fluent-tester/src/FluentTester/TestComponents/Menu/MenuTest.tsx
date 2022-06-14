@@ -26,9 +26,9 @@ const MenuDefault: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A plain MenuItem" />
-            <MenuItem disabled content="A second disabled plain MenuItem" />
-            <MenuItem content="A third plain MenuItem" />
+            <MenuItem>A plain MenuItem</MenuItem>
+            <MenuItem disabled>A second disabled plain MenuItem</MenuItem>
+            <MenuItem>A third plain MenuItem</MenuItem>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -57,7 +57,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A plain MenuItem" />
+            <MenuItem>A plain MenuItem</MenuItem>
             <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
             <MenuItemCheckbox disabled name="itemThree" content="A disabled MenuItem with checkmark" />
             <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark" />
@@ -70,7 +70,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A plain MenuItem" />
+            <MenuItem>A plain MenuItem</MenuItem>
             <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
             <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
           </MenuList>
@@ -113,12 +113,12 @@ const Submenu: React.FunctionComponent = () => {
   return (
     <Menu>
       <MenuTrigger>
-        <MenuItem content="A second MenuItem" />
+        <MenuItem>A second MenuItem</MenuItem>
       </MenuTrigger>
       <MenuPopover>
         <MenuList>
-          <MenuItem content="A nested MenuItem" />
-          <MenuItem content="A second nested MenuItem" />
+          <MenuItem>A nested MenuItem</MenuItem>
+          <MenuItem>A second nested MenuItem</MenuItem>
           <Submenu />
         </MenuList>
       </MenuPopover>
@@ -135,7 +135,7 @@ const MenuSubMenu: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A MenuItem" />
+            <MenuItem>A MenuItem</MenuItem>
             <Submenu />
           </MenuList>
         </MenuPopover>
@@ -153,7 +153,7 @@ const MenuOpenOnHover: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A MenuItem" />
+            <MenuItem>A MenuItem</MenuItem>
             <Submenu />
           </MenuList>
         </MenuPopover>
@@ -173,7 +173,7 @@ const MenuControlledOpen: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItem content="A MenuItem" />
+            <MenuItem>A MenuItem</MenuItem>
             <Submenu />
           </MenuList>
         </MenuPopover>

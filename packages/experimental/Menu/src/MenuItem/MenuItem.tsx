@@ -6,6 +6,7 @@ import { Text } from '@fluentui-react-native/experimental-text';
 import { menuItemName, MenuItemProps, MenuItemType } from './MenuItem.types';
 import { useMenuItem } from './useMenuItem';
 import { stylingSettings } from './MenuItem.styling';
+import React from 'react';
 
 export const MenuItem = compose<MenuItemType>({
   displayName: menuItemName,
@@ -20,8 +21,8 @@ export const MenuItem = compose<MenuItemType>({
     const menuItem = useMenuItem(userProps);
     const Slots = useSlots(userProps, (layer): boolean => menuItem.state[layer] || userProps[layer]);
 
-    return (final: MenuItemProps) => {
-      const mergedProps = mergeProps(menuItem.props, final);
+    return (final: MenuItemProps, children: React.ReactNode) => {
+      const { accessibilityLabel, ...mergedProps } = mergeProps(menuItem.props, final);
       const chevronXml = I18nManager.isRTL
         ? `
           <svg>
@@ -32,10 +33,20 @@ export const MenuItem = compose<MenuItemType>({
             <path fill='currentColor' d='M4.64645 2.14645C4.45118 2.34171 4.45118 2.65829 4.64645 2.85355L7.79289 6L4.64645 9.14645C4.45118 9.34171 4.45118 9.65829 4.64645 9.85355C4.84171 10.0488 5.15829 10.0488 5.35355 9.85355L8.85355 6.35355C9.04882 6.15829 9.04882 5.84171 8.85355 5.64645L5.35355 2.14645C5.15829 1.95118 4.84171 1.95118 4.64645 2.14645Z' />
           </svg>`;
 
+      let childText = '';
+      if (accessibilityLabel === undefined) {
+        React.Children.forEach(children, (child) => {
+          if (typeof child === 'string') {
+            childText = child; // We only automatically support the one child string.
+          }
+        });
+      }
+      const label = accessibilityLabel ?? childText;
+
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
           {menuItem.hasCheckmarks && <Slots.checkmark />}
-          {mergedProps.content && <Slots.content>{mergedProps.content}</Slots.content>}
+          {children && <Slots.content>{children}</Slots.content>}
           {menuItem.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>
       );

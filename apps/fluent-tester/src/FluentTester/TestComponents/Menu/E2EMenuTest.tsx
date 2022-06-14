@@ -33,9 +33,11 @@ export const E2EMenuTest: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover testID={MENUPOPOVER_TEST_COMPONENT}>
           <MenuList>
-            <MenuItem testID={MENUITEM_TEST_COMPONENT} accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL} content="A plain MenuItem" />
-            <MenuItem disabled content="A second disabled plain MenuItem" />
-            <MenuItem testID={MENUITEM_NO_A11Y_LABEL_COMPONENT} content={MENUITEM_TEST_LABEL} />
+            <MenuItem testID={MENUITEM_TEST_COMPONENT} accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}>
+              A plain MenuItem
+            </MenuItem>
+            <MenuItem disabled>A second disabled plain MenuItem</MenuItem>
+            <MenuItem testID={MENUITEM_NO_A11Y_LABEL_COMPONENT}>{MENUITEM_TEST_LABEL}</MenuItem>
           </MenuList>
         </MenuPopover>
       </Menu>
