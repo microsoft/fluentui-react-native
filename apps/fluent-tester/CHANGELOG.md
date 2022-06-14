@@ -1,8 +1,42 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 08 Jun 2022 21:52:34 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.64.5
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.41
+- Bump @fluentui-react-native/button to v0.22.28
+- Bump @fluentui-react-native/experimental-avatar to v0.14.40
+- Bump @fluentui-react-native/experimental-button to v0.15.29
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.12
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.46
+- Bump @fluentui-react-native/experimental-tabs to v0.4.51
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+- Bump @fluentui-react-native/menu to v0.14.5
+- Bump @fluentui/react-native to v0.29.15
+
+## 0.64.4
+
+Mon, 13 Jun 2022 23:05:44 GMT
+
+### Patches
+
+- Fix selection not persisting between menu sessions, and API type (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.14.4
+
+## 0.64.3
+
+Mon, 13 Jun 2022 21:38:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.14.3
 
 ## 0.64.2
 

@@ -11,15 +11,20 @@ export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
-  checked?: Record<string, boolean>;
-  defaultChecked?: Record<string, boolean>;
+  checked?: string[];
+  defaultChecked?: string[];
   hasCheckmarks?: boolean;
-  onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  onCheckedChange?: (e: InteractionEvent, checked: string[]) => void;
 }
 
-export interface MenuListState extends MenuListProps {
+export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onCheckedChange'> {
+  props: MenuListProps;
+  checked?: Record<string, boolean>;
   isCheckedControlled: boolean;
-  selectRadio?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
+  selectRadio?: (e: InteractionEvent, name: string) => void;
+  addRadioItem: (name: string) => void;
+  removeRadioItem: (name: string) => void;
   focusZoneRef?: React.RefObject<IFocusable>;
 }
 
