@@ -7,8 +7,8 @@ enum NotificationVariant { primary = 1, neutral, danger, warning };
 
 const Notification = (props) => {
   const variant = props.variant;
-  let startText = ''; 
-  let endText = '';
+  const startText = props.startText;
+  const endText = props.endText;
 
   const styles: {[key: string]: any} = {
     container: {
@@ -30,9 +30,6 @@ const Notification = (props) => {
   if (variant === 'primary') {
     styles.container['backgroundColor'] = 'skyblue';
     styles.container['justifyContent'] = 'space-between';
-    
-    startText = 'Mail Archived';
-    endText = 'Undo';
   }
   else if (variant === 'neutral') {
     styles.container['backgroundColor'] = 'lightgrey';
@@ -43,9 +40,6 @@ const Notification = (props) => {
     styles.start['flex'] = 1;
     
     styles.end['marginLeft'] = 34;
-    
-    startText = 'Some items require you to sign in to view them';
-    endText = 'Sign in';
   }
   else if (variant === 'danger') {
     styles.container['backgroundColor'] = 'pink';
@@ -57,9 +51,6 @@ const Notification = (props) => {
     styles.start['flex'] = 1;
     
     styles.end['color'] = 'maroon';
-    
-    startText = 'There was a problem, and your recent changes may not have saved';
-    endText = 'Retry';
   }
   else if (variant === 'warning') {
     styles.container['backgroundColor'] = 'lightyellow';
@@ -68,9 +59,6 @@ const Notification = (props) => {
     styles.start['color'] = 'brown';
 
     styles.end['color'] = 'brown';
-    
-    startText = 'Read Only';
-    endText = 'X';
   }
   
   return (
@@ -81,46 +69,52 @@ const Notification = (props) => {
   );
 }
 
-const PrimaryToastTest: React.FunctionComponent = () => {
+const PrimaryTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.primary]}/>
+    <Notification variant={NotificationVariant[NotificationVariant.primary]}
+                  startText = 'Mail Archived' endText = 'Undo'/>
   );
 };
 
-const NeutralToastTest: React.FunctionComponent = () => {
+const NeutralTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.neutral]}/>
+    <Notification variant={NotificationVariant[NotificationVariant.neutral]}
+                  startText = 'Some items require you to sign in to view them'
+                  endText = 'Sign in'/>
   );
 };
 
-const DangerToastTest: React.FunctionComponent = () => {
+const DangerTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.danger]}/>
+    <Notification variant={NotificationVariant[NotificationVariant.danger]}
+                  startText = 'There was a problem, and your recent changes may not have saved'
+                  endText = 'Retry'/>
   );
 };
 
-const WarningToastTest: React.FunctionComponent = () => {
+const WarningTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariant[NotificationVariant.warning]}/>
+    <Notification variant={NotificationVariant[NotificationVariant.warning]} 
+                  startText = 'Read Only' endText = 'X'/>
   );
 };
 
 const notificationSections: TestSection[] = [
   {
-    name: 'Primary Toast',
-    component: PrimaryToastTest,
+    name: 'Primary',
+    component: PrimaryTest,
   },
   {
-    name: 'Neutral Toast',
-    component: NeutralToastTest,
+    name: 'Neutral',
+    component: NeutralTest,
   },
   {
-    name: 'Danger Toast',
-    component: DangerToastTest,
+    name: 'Danger',
+    component: DangerTest,
   },
   {
-    name: 'Warning Toast',
-    component: WarningToastTest,
+    name: 'Warning',
+    component: WarningTest,
   },
 ];
 
@@ -135,5 +129,6 @@ export const NotificationTest: React.FunctionComponent = () => {
 
   const description = 'Testing notification component';
 
-  return <Test name="Notification Test" description={description} sections={notificationSections} status={status}></Test>;
+  return <Test name="Notification Test" description={description} 
+               sections={notificationSections} status={status}></Test>;
 };
