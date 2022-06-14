@@ -94,7 +94,7 @@ describe('getInitials method', () => {
     expect(result).toEqual('DG');
   });
   it('calculates an expected initials for Arabic names', () => {
-    expect(getInitials('خسرو رحیمی')).toEqual('خ ر');
+    expect(getInitials('خسرو رحیمی')).toEqual('خ');
   });
   it('calculates an expected initials for Chinese names', () => {
     expect(getInitials('桂英')).toEqual('桂');
@@ -104,7 +104,7 @@ describe('getInitials method', () => {
   it('calculates an expected initials for Korean names', () => {
     expect(getInitials('강현')).toEqual('강');
     expect(getInitials('최종래')).toEqual('최');
-    expect(getInitials('남궁 성종')).toEqual('남성');
+    expect(getInitials('남궁 성종')).toEqual('남');
   });
   it('calculates an expected initials for Japanese names', () => {
     expect(getInitials('松田')).toEqual('松');

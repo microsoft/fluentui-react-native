@@ -77,8 +77,8 @@ export const getInitials = (name: string): string => {
   if (!name) {
     return '';
   }
-  const ARABIC_REGEXP = new RegExp(
-    '[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]',
+  const ARABIC_ASIAN_REGEXP = new RegExp(
+    '[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\uD840-\uD869]',
     'g',
   );
   const words = removeRedundantCharacters(name);
@@ -86,7 +86,7 @@ export const getInitials = (name: string): string => {
   const lastWordIdx = wordsLength - 1;
   const firstLetter = words[0].charAt(0).toUpperCase();
   const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
-  const initials = `${firstLetter}${lastLetter && ARABIC_REGEXP.test(name) ? '.' : ''}${lastLetter}`;
+  const initials = `${firstLetter}${ARABIC_ASIAN_REGEXP.test(name) ? '' : lastLetter}`;
   return initials;
 };
 
