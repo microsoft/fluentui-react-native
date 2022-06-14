@@ -27,7 +27,7 @@ const onItemClick = React.useCallback(
   (key) => {
     // Do something
   },
-  [setLastMenuItemClicked],
+  [],
 );
 
 <>
@@ -60,7 +60,7 @@ const onOption1Click = React.useCallback(
   () => {
     // Do something
   },
-  [setLastMenuItemClicked],
+  [],
 );
 
 <Menu>
@@ -100,12 +100,9 @@ const toggleShowContextualMenu = React.useCallback(() => {
 const onDismissContextualMenu = React.useCallback(() => {
   setShowContextualMenu(false);
 }, [setShowContextualMenu]);
-const onItemClick = React.useCallback(
-  (key) => {
-    // Do something
-  },
-  [setLastMenuItemClicked],
-);
+const onItemClick = React.useCallback((key) => {
+  // Do something
+}, []);
 
 const stdMenuItemRef = React.useRef(null);
 
@@ -151,7 +148,7 @@ const onSubmenuItemClick = React.useCallback(
   () => {
     // Do something
   },
-  [setLastMenuItemClicked],
+  [],
 );
 
 <Menu>
