@@ -53,12 +53,6 @@ describe('getInitials method - language support', () => {
   });
 });
 
-describe('getInitials method - RTL', () => {
-  it('returns correct initials in RTL', () => {
-    const test = getInitials('Richard Feynman', true);
-    expect(test).toBe('FR');
-  });
-});
 describe('getInitials method', () => {
   it('returns correct initials', () => {
     const test = getInitials('-Test   str  with *spaces');
@@ -99,9 +93,9 @@ describe('getInitials method', () => {
     const result = getInitials(" !@#$%^&*()=+ (Alpha) /David   (The man) `~<>,./?[]{}|   'Goff   (Gamma)  [Beta]  ");
     expect(result).toEqual('DG');
   });
-  // it('calculates an expected initials for Arabic names', () => {
-  //   expect(getInitials('خسرو رحیمی')).toEqual('خ ر');
-  // });
+  it('calculates an expected initials for Arabic names', () => {
+    expect(getInitials('خسرو رحیمی')).toEqual('خ ر');
+  });
   it('calculates an expected initials for Chinese names', () => {
     expect(getInitials('桂英')).toEqual('桂');
     expect(getInitials('佳')).toEqual('佳');

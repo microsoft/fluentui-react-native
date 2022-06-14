@@ -73,16 +73,20 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
  * First letters of the first and last words if more words were provided.
  * Words in braces, titles, special characters, parantheses and dashes should be ignored.
  */
-export const getInitials = (name: string, isRtl?: boolean): string => {
+export const getInitials = (name: string): string => {
   if (!name) {
     return '';
   }
+  const ARABIC_REGEXP = new RegExp(
+    '[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF]',
+    'g',
+  );
   const words = removeRedundantCharacters(name);
   const wordsLength = words.length;
   const lastWordIdx = wordsLength - 1;
   const firstLetter = words[0].charAt(0).toUpperCase();
   const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
-  const initials = isRtl ? `${lastLetter}${firstLetter}` : `${firstLetter}${lastLetter}`;
+  const initials = `${firstLetter}${lastLetter && ARABIC_REGEXP.test(name) ? '.' : ''}${lastLetter}`;
   return initials;
 };
 
