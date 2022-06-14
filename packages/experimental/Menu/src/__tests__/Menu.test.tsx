@@ -110,7 +110,7 @@ describe('Checkbox component tests', () => {
   it('Menu open checkbox defaultChecked', () => {
     const tree = renderer
       .create(
-        <Menu open defaultChecked={{ 'Option 1': true }}>
+        <Menu open defaultChecked={['Option 1']}>
           <MenuTrigger>
             <Button>Open</Button>
           </MenuTrigger>
@@ -130,7 +130,7 @@ describe('Checkbox component tests', () => {
   it('Menu open checkbox checked', () => {
     const tree = renderer
       .create(
-        <Menu open checked={{ 'Option 1': true }}>
+        <Menu open checked={['Option 1']}>
           <MenuTrigger>
             <Button>Open</Button>
           </MenuTrigger>

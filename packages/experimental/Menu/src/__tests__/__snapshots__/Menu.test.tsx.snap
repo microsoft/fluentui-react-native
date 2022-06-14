@@ -153,6 +153,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -371,6 +373,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -534,6 +538,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -883,6 +889,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -1232,6 +1240,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -1581,6 +1591,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -1918,6 +1930,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
