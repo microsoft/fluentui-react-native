@@ -244,33 +244,86 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 
 ### Menu
 
+#### Menu Props that remain as is
+
+- `children`
+- `defaultOpen`
+- `open`
+- `openOnHover`
+
+#### Menu Prop differences due to technical differences and limitations
+
+- `onOpenChange` has a different event type and a bool for `isOpen` instead of `data` for its call signature.
+
+#### Not implemented on Menu
+
+- `hoverDelay`
+- `inline`
+- `openOnContext`
+- `positioning` (`directionalHint` can be passed into `MenuPopover` instead)
+- `closeOnScroll`
+
 ### MenuTrigger
+
+`MenuTrigger` should not need any changes.
 
 ### MenuPopover
 
+`MenuPopover` should not need any changes.
+
 ### MenuList
+
+#### MenuList Props that remain as is
+
+- `hasCheckmarks`
+- `children`
+
+#### MenuList Prop differences due to technical differences and limitations
+
+`MenuItem*` only uses `name` and not `value` since it is not based on an `input` HTML element. This changes the following props:
+
+- `checkedValues` takes in `string[]` of names to be checked instead of `Record<string, string[]>`
+- `defaultCheckedValues` takes in `string[]` of names to be checked instead of `Record<string, string[]>`
+- `onCheckedValueChange` returns a `string[]` of names of items that are checked instead of `Record<string, string[]>`
+
+#### Not implemented on MenuList
+
+- `hasIcons`
 
 ### MenuItem
 
-### MenuItemCheckbox
+#### MenuItem Props that remain as is
 
-### MenuItemRadio
+- `children`
+- `disabled`
+
+#### MenuItem Prop differences due to technical differences and limitations
+
+- `componentRef` instead of `ref`
+- `content` for the text of a menu item instead of passing it in as a child
+
+#### Not implemented on MenuItem
+
+- `hasSubmenu` - currently automatically handled
+- `persistOnClick`
+
+### MenuItemCheckbox and MenuItemRadio
+
+#### MenuItemCheckbox Props that remain as is
+
+- `children`
+- `disabled`
+- `name`
+
+#### MenuItemCheckbox Prop differences due to technical differences and limitations
+
+- `componentRef` instead of `ref`
+- `content` for the text of a menu item instead of passing it in as a child
+
+#### Not implemented on MenuItemCheckbox
+
+- `value`
 
 ### MenuDivider
 
-### Props that remain as is
-
-### Props renamed to align with ReactNative
-
-No `Menu*` specific renames.
-
-### Prop differences due to technical differences and limitations
-
-- `icon` takes in a props object instead of the JSX element itself. This is due to framework differences from FluentUI.
-- `iconOnly` must be supplied for components do not have any text content for them to be styled correctly. This is due to framework differences from FluentUI.
-- `ref` is exposed as `componentRef`, similar to previous versions of FluentUI. This is due to framework differences from FluentUI.
-
-### Other Prop differences
-
-- `appearance` does not include values for `transparent` or `outline` as neither currently are used by native platforms.
-- `iconPosition` uses `before` and `after` as values instead of `left` and `right` for better right to left support.
+`MenuDivider` should not need any changes.
