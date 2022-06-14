@@ -5,16 +5,14 @@ exports[`Avatar rendering renders Avatar 1`] = `
   accessibilityLabel=""
   accessibilityRole="image"
   accessible={true}
+  icon={null}
+  initials=""
   shape="circular"
   style={
     Object {
-      "alignItems": "flex-end",
       "flexDirection": "row",
       "height": 24,
-      "horizontalIconAlignment": "end",
-      "justifyContent": "flex-end",
       "opacity": 1,
-      "verticalIconAlignment": "end",
       "width": 24,
     }
   }
@@ -24,14 +22,14 @@ exports[`Avatar rendering renders Avatar 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "alignSelf": "stretch",
         "backgroundColor": "#e6e6e6",
         "borderColor": "#ffffff",
         "borderRadius": 9999,
         "borderWidth": 0,
-        "flexGrow": 1,
         "height": 24,
         "justifyContent": "center",
+        "marginLeft": 2,
+        "marginTop": 2,
         "width": 24,
       }
     }

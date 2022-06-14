@@ -158,6 +158,9 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
 
 function getRingConfig(tokens: JSAvatarTokens): any {
   const { size, ringThickness } = tokens;
+  const SMALL_SIZE = 48;
+  const MEDIUM_SIZE = 71;
+
   const strokeSize = {
     small: globalTokens.stroke.width.thick,
     medium: globalTokens.stroke.width.thicker,
@@ -170,14 +173,14 @@ function getRingConfig(tokens: JSAvatarTokens): any {
       innerStroke: ringThickness,
     };
   } else {
-    if (size <= 48) {
+    if (size <= SMALL_SIZE) {
       return {
         size: size + strokeSize.small * 4,
         ringThickness: strokeSize.small,
         innerStroke: strokeSize.small,
       };
     }
-    if (size <= 71) {
+    if (size <= MEDIUM_SIZE) {
       return {
         size: size + strokeSize.medium * 4,
         ringThickness: strokeSize.medium,
