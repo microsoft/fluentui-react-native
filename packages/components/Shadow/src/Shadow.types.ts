@@ -3,10 +3,8 @@ import { TextProps } from '@fluentui-react-native/experimental-text';
 import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const shadow = 'Shadow';
-/**
- * This type is an example. Feel free to remove it.
- */
-export type TextSize = 'small' | 'medium' | 'large';
+
+export type ShadowDepth = '2' | '4' | '8' | '16' | '28' | '64';
 
 export interface ShadowTokens extends LayoutTokens, IBorderTokens, IColorTokens {
   small?: ShadowTokens;
@@ -15,13 +13,15 @@ export interface ShadowTokens extends LayoutTokens, IBorderTokens, IColorTokens 
 }
 
 export interface ShadowProps {
-  textSize?: TextSize;
-  text?: string;
+  depth?: ShadowDepth;
+}
+
+export interface ShadowProps extends ViewProps, ViewStyle, IBorderTokens {
+  depth?: ShadowDepth;
 }
 
 export interface ShadowSlotProps {
   root: ViewProps;
-  text: TextProps;
 }
 
 export interface ShadowType {
