@@ -16,8 +16,8 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
         return {
           style: {
             ...getBadgePosition(tokens),
-            width: (width as number) + borderGap,
-            height: (height as number) + borderGap,
+            width: width + borderGap,
+            height: height + borderGap,
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'row',
