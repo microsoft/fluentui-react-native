@@ -180,13 +180,15 @@ const onSubmenuItemClick = React.useCallback(
 <Menu>
 ```
 
-### Props no longer supported with an equivalent functionality in v1 Menu
+There is no separate `SubmenuItem` or `Submenu` component. You can wrap a `MenuItem` in a `Menu` component, and it will take care of showing an indicator for the submenu and opening the menu in a reasonable direction.
+
+### Props no longer supported in ContextualMenu with an equivalent functionality in v1 Menu
 
 - `content` => Pass the content as `children` instead
 - `endIcon` => Use `after` value for `iconPosition` prop and pass icon information into `icon` prop instead
 - `startIcon` => Use `before` value for `iconPosition` prop and pass icon information into `icon` prop instead
 
-### Props no longer supported without an equivalent functionality in v1 Menu
+### Props no longer supported in ContextualMenu without an equivalent functionality in v1 Menu
 
 - Cannot use both `startIcon` and `endIcon` at the same time in v1
 
