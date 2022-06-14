@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 14 Jun 2022 21:35:30 GMT",
+      "tag": "@fluentui/react-native_v0.30.0",
+      "version": "0.30.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "6120896ab0730c483c81848d07e69af72f8c4c23",
+            "comment": "Pin core package dependencies to specific versions"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 13 Jun 2022 23:58:18 GMT",
       "tag": "@fluentui/react-native_v0.29.15",
       "version": "0.29.15",
