@@ -72,6 +72,15 @@ export type AvatarColor = AvatarColorSchemes | AvatarNamedColor | ColorValue;
 
 export interface AvatarConfigurableProps {
   /**
+   * Optional activity indicator
+   * * active: the avatar will be decorated according to activeAppearance
+   * * inactive: the avatar will be reduced in size and partially transparent
+   * * unset: normal display
+   *
+   * @defaultvalue unset
+   */
+  active?: AvatarActive;
+  /**
    * The color when displaying either an icon or initials.
    * * neutral (default): gray
    * * brand: color from the brand palette
@@ -104,16 +113,6 @@ export interface AvatarConfigurableProps {
 }
 
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
-  /**
-   * Optional activity indicator
-   * * active: the avatar will be decorated according to activeAppearance
-   * * inactive: the avatar will be reduced in size and partially transparent
-   * * unset: normal display
-   *
-   * @defaultvalue unset
-   */
-  active?: AvatarActive;
-
   /**
    * The appearance when `active="active"`
    *

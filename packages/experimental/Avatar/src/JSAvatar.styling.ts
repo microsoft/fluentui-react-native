@@ -29,6 +29,7 @@ export const avatarStates: (keyof JSAvatarTokens)[] = [
 ];
 
 const tokensThatAreAlsoProps: (keyof AvatarConfigurableProps)[] = [
+  'active',
   'avatarColor',
   'initialsColor',
   'ringBackgroundColor',
@@ -44,12 +45,16 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
   slotProps: {
     root: buildProps(
       (tokens: JSAvatarTokens) => {
-        const { size, avatarOpacity } = tokens;
+        const { size, active, avatarOpacity } = tokens;
+        const ringConfig = getRingConfig(tokens);
+        const avatarSize = active === 'active' ? ringConfig.size : size;
+
         return {
           style: {
-            flexDirection: 'row',
-            width: size,
-            height: size,
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: avatarSize,
+            height: avatarSize,
             opacity: avatarOpacity,
           },
         };
