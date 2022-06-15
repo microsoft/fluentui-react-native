@@ -11,8 +11,8 @@ const Notification = (props) => {
 
   let containerBackgroundColor = 'skyblue';
   let foregroundColor = 'black';
-  
-  switch(variant) {
+
+  switch (variant) {
     case 'primary':
       containerBackgroundColor = 'skyblue';
       break;
@@ -27,13 +27,13 @@ const Notification = (props) => {
       containerBackgroundColor = 'lightyellow';
       foregroundColor = 'brown';
       break;
-  };
+  }
 
   let styles = StyleSheet.create({
     container: {
       borderRadius: 12,
       backgroundColor: containerBackgroundColor,
-  
+
       flex: 1,
       flexDirection: 'row',
       justifyContent: 'space-between',
@@ -55,7 +55,7 @@ const Notification = (props) => {
       marginLeft: 34,
     },
   });
-  
+
   return (
     <View style={styles.container}>
       <Text style={styles.start}>{startText}</Text>
@@ -65,33 +65,25 @@ const Notification = (props) => {
 };
 
 const PrimaryTest: React.FunctionComponent = () => {
-  return (
-    <Notification variant={NotificationVariants[0]}
-                  startText = 'Mail Archived' endText = 'Undo'/>
-  );
+  return <Notification variant={NotificationVariants[0]} startText="Mail Archived" endText="Undo" />;
 };
 
 const NeutralTest: React.FunctionComponent = () => {
-  return (
-    <Notification variant={NotificationVariants[1]}
-                  startText = 'Some items require you to sign in to view them'
-                  endText = 'Sign in'/>
-  );
+  return <Notification variant={NotificationVariants[1]} startText="Some items require you to sign in to view them" endText="Sign in" />;
 };
 
 const DangerTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={NotificationVariants[2]}
-                  startText = 'There was a problem, and your recent changes may not have saved'
-                  endText = 'Retry'/>
+    <Notification
+      variant={NotificationVariants[2]}
+      startText="There was a problem, and your recent changes may not have saved"
+      endText="Retry"
+    />
   );
 };
 
 const WarningTest: React.FunctionComponent = () => {
-  return (
-    <Notification variant={NotificationVariants[3]} 
-                  startText = 'Read Only' endText = 'X'/>
-  );
+  return <Notification variant={NotificationVariants[3]} startText="Read Only" endText="X" />;
 };
 
 const notificationSections: TestSection[] = [
@@ -124,6 +116,5 @@ export const NotificationTest: React.FunctionComponent = () => {
 
   const description = 'Testing notification component';
 
-  return <Test name="Notification Test" description={description} 
-               sections={notificationSections} status={status}></Test>;
+  return <Test name="Notification Test" description={description} sections={notificationSections} status={status}></Test>;
 };
