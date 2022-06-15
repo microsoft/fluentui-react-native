@@ -1,6 +1,7 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import React from 'react';
 
 export const menuListName = 'MenuList';
 
