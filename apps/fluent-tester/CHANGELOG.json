@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 15 Jun 2022 06:58:18 GMT",
+      "tag": "@fluentui-react-native/tester_v0.64.9",
+      "version": "0.64.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f27d62a7c59b847cb0fbca246c0201171d8992ad",
+            "comment": "Added E2E Accessibility tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 00:46:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.64.8",
+      "version": "0.64.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.47",
+            "commit": "66d727cc3220d850042e97318cc8aeee9185542d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.14.6",
+            "commit": "66d727cc3220d850042e97318cc8aeee9185542d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.30.1",
+            "commit": "66d727cc3220d850042e97318cc8aeee9185542d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Jun 2022 21:35:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.64.7",
+      "version": "0.64.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.30.0",
+            "commit": "6120896ab0730c483c81848d07e69af72f8c4c23"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 14 Jun 2022 00:55:29 GMT",
       "tag": "@fluentui-react-native/tester_v0.64.6",
       "version": "0.64.6",

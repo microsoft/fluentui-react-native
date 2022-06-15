@@ -70,84 +70,88 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           <Switch value={transparent} onValueChange={setTransparent} />
         </View>
 
-        <View>
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Background color"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setCoinColor(e.nativeEvent.text);
-            }}
-          />
+        <View style={{ flexDirection: 'row' }}>
+          <View>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Background color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setCoinColor(e.nativeEvent.text);
+              }}
+            />
 
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Ring color"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setRingColor(e.nativeEvent.text);
-            }}
-          />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingColor(e.nativeEvent.text);
+              }}
+            />
 
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Avatar size"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setSize(e.nativeEvent.text);
-            }}
-          />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Avatar size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setSize(e.nativeEvent.text);
+              }}
+            />
 
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Icon size"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setIconSize(parseInt(e.nativeEvent.text));
-            }}
-          />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Icon size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setIconSize(parseInt(e.nativeEvent.text));
+              }}
+            />
 
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Ring background color"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setRingBackgroundColor(e.nativeEvent.text);
-            }}
-          />
-          <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Initials text color"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setTextColor(e.nativeEvent.text);
-            }}
-          />
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Initials size"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setInitialsSize(parseInt(e.nativeEvent.text));
-            }}
-          />
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Font weight"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setFontWeight(e.nativeEvent.text);
-            }}
-          />
-          <TextInput
-            style={[commonStyles.textBox]}
-            placeholder="Font family"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setFontFamily(e.nativeEvent.text);
-            }}
-          />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring background color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingBackgroundColor(e.nativeEvent.text);
+              }}
+            />
+          </View>
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials text color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setTextColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setInitialsSize(parseInt(e.nativeEvent.text));
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Font weight"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setFontWeight(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Font family"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setFontFamily(e.nativeEvent.text);
+              }}
+            />
+          </View>
         </View>
 
         <Text>These features will be available later</Text>

@@ -24,7 +24,7 @@
     "directory": "apps/android"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.64.6",
+    "@fluentui-react-native/tester": "^0.64.9",
     "@react-native-community/slider": "^4.2.0",
     "@react-native-picker/picker": "^2.2.1",
     "hermes-engine": "~0.7.0",

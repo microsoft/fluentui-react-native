@@ -3,6 +3,7 @@ import { JSAVATAR_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
+import { E2EAvatarTest } from './E2EAvatarTest';
 
 const avatarSections: TestSection[] = [
   {
@@ -13,6 +14,10 @@ const avatarSections: TestSection[] = [
   {
     name: 'Customize Usage',
     component: CustomizeUsage,
+  },
+  {
+    name: 'Avatar E2E',
+    component: E2EAvatarTest,
   },
 ];
 

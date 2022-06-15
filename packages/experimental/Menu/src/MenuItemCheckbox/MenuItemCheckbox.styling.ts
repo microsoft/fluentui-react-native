@@ -1,5 +1,5 @@
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultMenuItemCheckboxTokens } from './MenuItemCheckboxTokens';
 import { menuItemCheckboxName, MenuItemCheckboxProps, MenuItemCheckboxTokens, MenuItemCheckboxSlotProps } from './MenuItemCheckbox.types';
 
@@ -17,6 +17,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
           display: 'flex',
           flexDirection: 'row',
           ...layoutStyles.from(tokens, theme),
+          ...borderStyles.from(tokens, theme),
         },
       }),
       ['backgroundColor', ...layoutStyles.keys],

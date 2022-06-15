@@ -196,6 +196,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -250,6 +251,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -416,6 +418,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -589,6 +592,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -697,6 +701,7 @@ Array [
           }
           accessible={true}
           content="Option 2"
+          disabled={true}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -714,6 +719,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -940,6 +946,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1065,6 +1072,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -1291,6 +1299,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1416,6 +1425,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -1642,6 +1652,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1755,6 +1766,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -1973,6 +1985,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -2031,6 +2044,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
