@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "minor change to settings",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
