@@ -92,7 +92,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['avatarColor', 'backgroundColor', 'size', 'borderColor', 'borderWidth', ...borderStyles.keys],
+      ['avatarColor', 'backgroundColor', 'size', 'borderColor', 'borderWidth', 'ringThickness', ...borderStyles.keys],
     ),
     image: buildProps(
       (tokens: JSAvatarTokens) => {
@@ -110,7 +110,7 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
           },
         };
       },
-      ['borderRadius', 'size', 'borderColor', 'borderWidth'],
+      ['borderRadius', 'size', 'borderColor', 'borderWidth', 'ringThickness'],
     ),
     icon: buildProps(
       (tokens: JSAvatarTokens) => {
