@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 15 Jun 2022 07:59:57 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.42",
+      "version": "0.0.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "f6e0fc83a7c93fc80dc89849d3d518ce6a94dc84",
+            "comment": "Fixed presenceBadge icon size"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 13 Jun 2022 23:58:18 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.41",
       "version": "0.0.41",
