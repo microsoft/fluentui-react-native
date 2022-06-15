@@ -217,11 +217,11 @@ There is no separate `SubmenuItem` or `Submenu` component. You can wrap a `MenuI
 
 If you are using the older theme provider `ThemeProvider` from `@uifabricshared/theming-react-native`, you will need to update the `ThemeProvider` to pull from `@fluentui-react-native/theme` to have the control work properly with themes. Please see [this page](../../../docs/pages/Guides/UpdateThemeProvider.md) for guidance.
 
-### Migrating customized ContextalMenus
+### Migrating customized ContextualMenus
 
 Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
 
-### Migrating composed ContextalMenus
+### Migrating composed ContextualMenus
 
 Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
 
