@@ -70,7 +70,6 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           <Text>Show rings</Text>
           <Switch value={showRing} onValueChange={setShowRing} />
         </View>
-
         <View>
           <TextInput
             style={[commonStyles.textBox]}
@@ -164,6 +163,42 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               setFontFamily(e.nativeEvent.text);
             }}
           />
+          </View>
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials text color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setTextColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setInitialsSize(parseInt(e.nativeEvent.text));
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Font weight"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setFontWeight(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Font family"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setFontFamily(e.nativeEvent.text);
+              }}
+            />
+          </View>
         </View>
       </View>
 

@@ -2,6 +2,84 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 15 Jun 2022 00:46:04 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.6",
+      "version": "0.14.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "66d727cc3220d850042e97318cc8aeee9185542d",
+            "comment": "macOS menu tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Jun 2022 23:58:18 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e",
+            "comment": "Fix focus on open"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.7",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.3",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.22.28",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Jun 2022 23:05:44 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.4",
+      "version": "0.14.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "4b0ff05c94a8c8ea7a1b00347c9b6590461d973a",
+            "comment": "Add comments"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Jun 2022 21:38:26 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.3",
+      "version": "0.14.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7c5c2341dfa4faf9f72ced717e488a76d64581af",
+            "comment": "Close all menus when submenu item clicked"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 20:30:26 GMT",
       "tag": "@fluentui-react-native/menu_v0.14.2",
       "version": "0.14.2",
