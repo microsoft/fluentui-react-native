@@ -29,7 +29,6 @@ import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '.
 import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
 import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
 
-
 export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',

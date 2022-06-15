@@ -21,7 +21,6 @@ import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { HOMEPAGE_NOTIFICATION_BUTTON, NotificationTest } from './TestComponents/Notification';
 
-
 export const tests: TestDescription[] = [
   {
     name: 'ActivityIndicator Test',
