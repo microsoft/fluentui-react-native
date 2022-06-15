@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
+This log was last generated on Wed, 15 Jun 2022 18:26:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.29
+
+Wed, 15 Jun 2022 18:26:37 GMT
+
+### Patches
+
+- Explicitly expose enableFocusRing (ruaraki@microsoft.com)
 
 ## 0.22.28
 
