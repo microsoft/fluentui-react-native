@@ -29,7 +29,7 @@ const Notification = (props) => {
       break;
   }
 
-  let styles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
       borderRadius: 12,
       backgroundColor: containerBackgroundColor,
