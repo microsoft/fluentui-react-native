@@ -122,9 +122,9 @@ export const stylingSettings: UseStylingOptions<JSAvatarProps, AvatarSlotProps, 
         return {
           style: {
             position: 'absolute',
-            fontSize: tokens.iconSize,
+            fontSize: tokens.iconSize || tokens.fontSize,
           },
-          color: tokens.color,
+          color: tokens.iconColor || tokens.color,
           width: tokens.iconSize,
           height: tokens.iconSize,
         };

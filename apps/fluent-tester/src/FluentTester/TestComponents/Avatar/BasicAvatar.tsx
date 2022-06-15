@@ -67,7 +67,6 @@ export const StandardUsage: FunctionComponent = () => {
     src: TestSvg,
     viewBox: '0 0 500 500',
   };
-  const iconProps = { svgSource: svgProps, width: 20, height: 20, color: 'red' };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
@@ -96,10 +95,11 @@ export const StandardUsage: FunctionComponent = () => {
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-      <JSAvatar badge={{ status: 'available' }} />
-      <JSAvatar name="Richard" avatarColor="#ff0099" initialsColor="yellow" />
-      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }} size={56} />
-      <JSAvatar accessibilityLabel="Fall-back Icon" accessibilityHint="A picture representing a user" size={120} />
+      <JSAvatar
+        accessibilityLabel="Fall-back Icon"
+        accessibilityHint="A picture representing a user"
+        size={imageSize === undefinedText ? undefined : imageSize}
+      />
       <JSAvatar
         active={active}
         activeAppearance={activeAppearance}
@@ -118,7 +118,8 @@ export const StandardUsage: FunctionComponent = () => {
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Icon"
         name="* Richard Faynman *"
-        avatarColor={avatarColor}
+        avatarColor="#ff0099"
+        initialsColor="yellow"
       />
       {svgIconsEnabled && (
         <>
@@ -128,7 +129,7 @@ export const StandardUsage: FunctionComponent = () => {
             size={imageSize === undefinedText ? undefined : imageSize}
             shape={isSquare ? 'square' : 'circular'}
             accessibilityLabel="SVG Icon"
-            icon={iconProps}
+            icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }}
             avatarColor={avatarColor}
             badge={{ status: 'outOfOffice' }}
           />

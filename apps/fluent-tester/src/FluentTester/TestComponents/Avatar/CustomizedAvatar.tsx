@@ -9,6 +9,7 @@ import TestSvg from '../../test-data/test.svg';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
+  const [showInitials, setShowInitials] = useState(true);
   const [avatarColor, setAvatarColor] = useState<string>();
   const [textColor, setTextColor] = useState<string>();
   const [size, setSize] = useState<string>('96');
@@ -64,6 +65,10 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <View style={commonStyles.switch}>
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
+        </View>
+        <View style={commonStyles.switch}>
+          <Text>Show initials</Text>
+          <Switch value={showInitials} onValueChange={setShowInitials} />
         </View>
 
         <View style={commonStyles.switch}>
@@ -170,31 +175,34 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           </View>
         </View>
       </View>
-
-      <CustomizedAvatar
-        active="active"
-        activeAppearance="ring"
-        initials="SB"
-        accessibilityLabel="Former CEO of Microsoft"
-        badge={{ status: 'blocked' }}
-        imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
-        transparentRing={!showRing}
-      />
-      {svgIconsEnabled && (
+      <View>
+        <Text>Customized Avatar</Text>
+        <CustomizedAvatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={avatarColor}
+          accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? 'SB' : undefined}
+          imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          icon={svgIconsEnabled ? { svgSource: svgProps } : undefined}
+          transparentRing={!showRing}
+        />
+      </View>
+      <View style={{ marginLeft: 20 }}>
+        <Text>Avatar customized with props</Text>
         <JSAvatar
           active="active"
           activeAppearance="ring"
           avatarColor={avatarColor}
           accessibilityLabel="Former CEO of Microsoft"
-          badge={{ status: 'blocked' }}
           imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
-          icon={{ svgSource: svgProps }}
           ringBackgroundColor={ringBackgroundColor}
           ringColor={ringColor}
           ringThickness={parseInt(ringThickness)}
           size={parseInt(size) as AvatarSize}
+          transparentRing={!showRing}
         />
-      )}
+      </View>
     </View>
   );
 };
