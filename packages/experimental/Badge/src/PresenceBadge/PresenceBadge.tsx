@@ -44,7 +44,7 @@ export const PresenceBadge = compose<PresenceBadgeType>({
     return (final: PresenceBadgeProps) => {
       const { size, status, outOfOffice, ...mergedProps } = mergeProps(badge, final);
       const isOutOfOffice = outOfOffice || false;
-      const iconXml = `<svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      const iconXml = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         ${getIconPath(status, isOutOfOffice)}
       </svg>`;
 
