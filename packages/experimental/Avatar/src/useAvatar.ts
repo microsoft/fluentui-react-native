@@ -1,5 +1,4 @@
 import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
-import { I18nManager } from 'react-native';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
@@ -42,7 +41,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
     showBadge,
   };
 
-  const _initials = initials || getInitials(name, I18nManager.isRTL);
+  const _initials = initials || getInitials(name);
   const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
   const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
 
