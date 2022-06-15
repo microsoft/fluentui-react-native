@@ -45,9 +45,9 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItemCheckbox name="itemOne" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemOne">A MenuItem with checkmark</MenuItemCheckbox>
             <MenuDivider />
-            <MenuItemCheckbox name="itemTwo" content="Another MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemTwo">Another MenuItem with checkmark</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -58,9 +58,11 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
-            <MenuItemCheckbox disabled name="itemThree" content="A disabled MenuItem with checkmark" />
-            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
+            <MenuItemCheckbox disabled name="itemThree">
+              A disabled MenuItem with checkmark
+            </MenuItemCheckbox>
+            <MenuItemCheckbox name="itemFour">A MenuItem with checkmark</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -71,8 +73,8 @@ const MenuCheckmarks: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItemCheckbox name="itemTwo" content="A MenuItem with checkmark" />
-            <MenuItemCheckbox name="itemThree" content="A MenuItem with checkmark" />
+            <MenuItemCheckbox name="itemTwo">A MenuItem with checkmark</MenuItemCheckbox>
+            <MenuItemCheckbox name="itemThree">A MenuItem with checkmark</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>
@@ -98,10 +100,10 @@ const MenuRadioItem: React.FunctionComponent = () => {
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            <MenuItemRadio name="itemOne" content="A MenuItem with checkmark and radio selection" />
-            <MenuItemRadio name="itemTwo" content="Another MenuItem with checkmark and radio selection" />
-            <MenuItemRadio name="itemThree" content="A third MenuItem with checkmark and radio selection" />
-            <MenuItemCheckbox name="itemFour" content="A MenuItem with checkmark and toggle selection" />
+            <MenuItemRadio name="itemOne">A MenuItem with checkmark and radio selection</MenuItemRadio>
+            <MenuItemRadio name="itemTwo">Another MenuItem with checkmark and radio selection</MenuItemRadio>
+            <MenuItemRadio name="itemThree">A third MenuItem with checkmark and radio selection</MenuItemRadio>
+            <MenuItemCheckbox name="itemFour">A MenuItem with checkmark and toggle selection</MenuItemCheckbox>
           </MenuList>
         </MenuPopover>
       </Menu>

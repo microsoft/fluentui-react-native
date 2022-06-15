@@ -77,9 +77,11 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuItemCheckbox name="Option 1">Option 1</MenuItemCheckbox>
               <MenuDivider />
-              <MenuItemCheckbox disabled content="Option 2" name="Option 2" />
+              <MenuItemCheckbox disabled name="Option 2">
+                Option 2
+              </MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -97,8 +99,8 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemRadio content="Option 1" name="Option 1" />
-              <MenuItemRadio content="Option 2" name="Option 2" />
+              <MenuItemRadio name="Option 1">Option 1</MenuItemRadio>
+              <MenuItemRadio name="Option 2">Option 2</MenuItemRadio>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -116,9 +118,9 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuItemCheckbox name="Option 1">Option 1</MenuItemCheckbox>
               <MenuDivider />
-              <MenuItemCheckbox content="Option 2" name="Option 2" />
+              <MenuItemCheckbox name="Option 2">Option 2</MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -136,9 +138,9 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuItemCheckbox name="Option 1">Option 1</MenuItemCheckbox>
               <MenuDivider />
-              <MenuItemCheckbox content="Option 2" name="Option 2" />
+              <MenuItemCheckbox name="Option 2">Option 2</MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
         </Menu>,

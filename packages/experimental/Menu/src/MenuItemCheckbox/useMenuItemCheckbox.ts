@@ -54,6 +54,7 @@ export const useMenuCheckboxInteraction = (
   const defaultComponentRef = React.useRef(null);
   const {
     accessibilityActions,
+    accessibilityLabel,
     accessibilityState,
     componentRef = defaultComponentRef,
     disabled,
@@ -97,7 +98,7 @@ export const useMenuCheckboxInteraction = (
       ...pressable.props,
       accessible: true,
       accessibilityActions: accessibilityActionsProp,
-      accessibilityLabel: props.accessibilityLabel || props.content,
+      accessibilityLabel,
       accessibilityRole: 'menuitem',
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
       enableFocusRing: true,

@@ -178,7 +178,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
@@ -231,7 +230,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           disabled={true}
           enableFocusRing={true}
           focusable={true}
@@ -398,7 +396,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
@@ -571,7 +568,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -696,7 +692,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -922,7 +917,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1047,7 +1041,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1273,7 +1266,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1398,7 +1390,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1624,7 +1615,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1737,7 +1727,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1955,7 +1944,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
@@ -2010,7 +1998,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
