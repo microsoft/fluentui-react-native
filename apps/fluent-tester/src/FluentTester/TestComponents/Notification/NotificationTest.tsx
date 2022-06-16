@@ -3,8 +3,18 @@ import { StyleSheet, View, Text } from 'react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const NotificationVariants = ['primary', 'neutral', 'danger', 'warning'] as const;
+type NotificationVariant = typeof NotificationVariants[number];
 
-const Notification = (props) => {
+interface NotificationProps {
+  /**
+   * Notification variants: 'primary' | 'neutral' |'danger' | 'warning'
+   */
+  variant: NotificationVariant;
+  startText: string;
+  endText: string;
+}
+
+const Notification = (props: NotificationProps) => {
   const variant = props.variant;
   const startText = props.startText;
   const endText = props.endText;
