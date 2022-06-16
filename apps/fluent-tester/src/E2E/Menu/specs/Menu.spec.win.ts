@@ -4,13 +4,13 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, MENU_A11Y_ROL
 import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../../../FluentTester/TestComponents/Menu';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Experimental Button Testing Initialization', function () {
+describe('Menu Testing Initialization', function () {
   it('Wait for app load', () => {
     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Button test page', () => {
+  it('Click and navigate to Menu test page', () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     MenuPageObject.scrollToComponentButton();
     MenuPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
@@ -24,8 +24,8 @@ describe('Experimental Button Testing Initialization', function () {
   });
 });
 
-describe('Experimental Button Functional Testing', () => {
-  /* Scrolls and waits for the Button to be visible on the Test Page */
+describe('Menu Functional Testing', () => {
+  /* Scrolls and waits for the Menu to be visible on the Test Page */
   beforeEach(() => {
     MenuPageObject.scrollToTestElement();
     MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
@@ -62,8 +62,8 @@ describe('Experimental Button Functional Testing', () => {
   });
 });
 
-describe('Experimental Button Accessibility Testing', () => {
-  it('Experimental Button - Validate accessibilityRole of menu item is correct', () => {
+describe('Menu Accessibility Testing', () => {
+  it('Menu - Validate accessibilityRole of menu item is correct', () => {
     MenuPageObject.scrollToTestElement();
     MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
@@ -77,7 +77,7 @@ describe('Experimental Button Accessibility Testing', () => {
     MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
   });
 
-  it('Experimental Button - Validate accessibilityRole of menu is correct', () => {
+  it('Menu - Validate accessibilityRole of menu is correct', () => {
     MenuPageObject.scrollToTestElement();
     MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
@@ -91,7 +91,7 @@ describe('Experimental Button Accessibility Testing', () => {
     MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
   });
 
-  it('Experimental Button - Set accessibilityLabel', () => {
+  it('Menu - Set accessibilityLabel', () => {
     MenuPageObject.scrollToTestElement();
     MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
@@ -105,7 +105,7 @@ describe('Experimental Button Accessibility Testing', () => {
     MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
   });
 
-  it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', () => {
+  it('Menu - Do not set accessibilityLabel -> Default to MenuItem label', () => {
     MenuPageObject.scrollToTestElement();
     MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 

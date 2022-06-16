@@ -1,4 +1,4 @@
-import { ViewStyle, ColorValue, FlexStyle } from 'react-native';
+import { ColorValue, FlexStyle } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IViewProps } from '@fluentui-react-native/adapters';
@@ -21,7 +21,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   /**
    * The height of the Badge.
    */
-  height?: ViewStyle['height'];
+  height?: number;
   /**
    * Set the left edge of the Badge
    */
@@ -40,7 +40,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   /**
    * The width of the Badge.
    */
-  width?: ViewStyle['width'];
+  width?: number;
 
   /**
    * Sizes of the Badge
