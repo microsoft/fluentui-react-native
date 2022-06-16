@@ -112,6 +112,11 @@ The root level component serves as a simplified interface for configuring the tr
 ```ts
 export interface MenuProps extends MenuListProps {
   /**
+   * Whether the popup is open on mount
+   */
+  defaultOpen?: boolean;
+
+  /**
    * Whether the popup is open
    */
   open?: boolean;
@@ -121,13 +126,8 @@ export interface MenuProps extends MenuListProps {
    */
   onOpenChange?: (e: InteractionEvent, isOpen: boolean) => void;
 
-  /**
-   * Whether the popup is open by default
-   */
-  defaultOpen?: boolean;
-
   /*
-   * Opens the menu on hover
+   * Opens the menu on hovering over the trigger
    */
   openOnHover?: boolean;
 }
@@ -154,13 +154,6 @@ This component is used internally by `Menu` and manages the context and layout o
 ```ts
 export type MenuListProps = {
   /**
-   * Callback when checked items change for value with a name
-   *
-   * @param checked Array of all checked values
-   */
-  onCheckedChange?: (e: InteractionEvent, checked[]) => void;
-
-  /**
    * Array of all checked items
    */
   checked?: string[];
@@ -171,9 +164,17 @@ export type MenuListProps = {
   defaultChecked?: string[];
 
   /**
-   * States that menu items can contain selectable items and reserve slots for item alignment
+   * States that menu items can contain selectable items and reserves space for item alignment
    */
   hasCheckmarks?: boolean;
+
+  /**
+   * Callback when checked items change
+   *
+   * @param checked Array of all currently checked values
+   */
+  onCheckedChange?: (e: InteractionEvent, checked[]) => void;
+
 };
 ```
 
@@ -223,11 +224,29 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
 
 ```ts
 export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+  /**
+   * Height and width in pixels of the space that is reserved to align the item's text with other items which have checkmarks
+   */
   checkmarkSize?: number;
+
+  /**
+   * Amount of space in pixels around the indicator that shows that an item has a submenu
+   */
   submenuIndicatorPadding?: number;
+
+  /**
+   * Height and width in pixels of the indicator that shows that an item has a submenu
+   */
   submenuIndicatorSize?: number;
+
+  /**
+   * Space between parts of the item control in pixels
+   */
   gap?: number;
 
+  /**
+   * States of the item control
+   */
   disabled?: MenuItemTokens;
   focused?: MenuItemTokens;
   hovered?: MenuItemTokens;
@@ -253,11 +272,6 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
   content: string;
 
   /**
-   * Applies disabled styles to menu item but remains focusable
-   */
-  disabled?: boolean;
-
-  /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
@@ -273,12 +287,34 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
 
 ```ts
 export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+  /**
+   * Color of the checkmark icon
+   */
   checkmarkColor?: ColorValue;
+
+  /**
+   * Amount of space in pixels around the checkmark icon
+   */
   checkmarkPadding?: number;
+
+  /**
+   * Height and width in pixels of the checkmark icon
+   */
   checkmarkSize?: number;
+
+  /**
+   * Visibility of the checkmark icon from 0 to 1
+   */
   checkmarkVisibility?: number;
+
+  /**
+   * Space between parts of the item control in pixels
+   */
   gap?: number;
 
+  /**
+   * States of the item control
+   */
   checked?: MenuItemCheckboxTokens;
   disabled?: MenuItemCheckboxTokens;
   focused?: MenuItemCheckboxTokens;

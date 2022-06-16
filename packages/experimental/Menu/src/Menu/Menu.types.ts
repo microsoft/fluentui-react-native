@@ -5,9 +5,24 @@ import type { MenuListProps } from '../MenuList/MenuList.types';
 export const menuName = 'Menu';
 
 export interface MenuProps extends MenuListProps {
+  /**
+   * Whether the popup is open on mount
+   */
   defaultOpen?: boolean;
+
+  /**
+   * Whether the popup is open
+   */
   open?: boolean;
+
+  /**
+   * Call back when the component requests to change value
+   */
   onOpenChange?: (e: InteractionEvent, isOpen: boolean) => void;
+
+  /*
+   * Opens the menu on hovering over the trigger
+   */
   openOnHover?: boolean;
 }
 
