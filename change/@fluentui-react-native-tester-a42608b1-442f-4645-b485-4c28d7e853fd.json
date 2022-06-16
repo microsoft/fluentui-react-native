@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Added styled toasts",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}

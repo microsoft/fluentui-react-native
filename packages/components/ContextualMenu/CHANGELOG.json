@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.16.38",
+      "version": "0.16.38",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.8",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.9.33",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 15 Jun 2022 00:46:04 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.16.37",
       "version": "0.16.37",
