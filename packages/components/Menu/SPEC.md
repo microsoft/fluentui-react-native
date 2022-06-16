@@ -307,7 +307,7 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
   checkmarkSize?: number;
 
   /**
-   * Visibility of the checkmark icon from 0 to 1
+   * Opacity of the checkmark icon from 0 to 1
    */
   checkmarkVisibility?: number;
 
