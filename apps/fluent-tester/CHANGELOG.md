@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 16 Jun 2022 17:09:28 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Jun 2022 19:11:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.65.0
+
+Thu, 16 Jun 2022 19:11:01 GMT
+
+### Minor changes
+
+- Added styled toasts (joannaquu@gmail.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.14.44
+
+### Patches
+
+- Added ring configuration (v.kozova13@gmail.com)
 
 ## 0.64.13
 

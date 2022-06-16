@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 16 Jun 2022 19:11:01 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.0",
+      "version": "0.65.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f573ef363290fae037d1e41ff67a57328c231ca4",
+            "comment": "Added styled toasts"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.44",
+            "commit": "531fc8d94b1452887b43073ea629838a72f0a7f5"
+          }
+        ],
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "531fc8d94b1452887b43073ea629838a72f0a7f5",
+            "comment": "Added ring configuration"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jun 2022 17:09:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.64.13",
       "version": "0.64.13",
