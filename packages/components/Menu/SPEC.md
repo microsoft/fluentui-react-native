@@ -17,7 +17,9 @@ The below samples do not represent the definitive props of the final implemented
 ```tsx
 const menu = (
   <Menu>
-    <MenuTrigger><Button>Open menu</Button></MenuTrigger>
+    <MenuTrigger>
+      <Button>Open menu</Button>
+    </MenuTrigger>
     <MenuPopover>
       <MenuList>
         <MenuItem>Option 1</MenuItem>
@@ -34,7 +36,9 @@ const menu = (
 ```tsx
 const menu = (
   <Menu>
-    <MenuTrigger><Button>Open menu</Button></MenuTrigger>
+    <MenuTrigger>
+      <Button>Open menu</Button>
+    </MenuTrigger>
     <MenuPopover>
       <MenuList>
         <MenuItem>Option 1</MenuItem>

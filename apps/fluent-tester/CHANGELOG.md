@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 15 Jun 2022 18:26:37 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Jun 2022 17:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.64.13
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-avatar to v0.14.43
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.14
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.4.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.49
+- Bump @fluentui-react-native/experimental-tabs to v0.4.52
+- Bump @fluentui-react-native/menu to v0.14.8
+- Bump @fluentui/react-native to v0.30.3
+
+## 0.64.12
+
+Thu, 16 Jun 2022 09:39:38 GMT
+
+### Patches
+
+- Updated presenceBadge icons according to Web (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.43
+- Bump @fluentui-react-native/experimental-avatar to v0.14.42
 
 ## 0.64.11
 
