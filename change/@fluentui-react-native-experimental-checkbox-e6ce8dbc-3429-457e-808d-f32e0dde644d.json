@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "apple: remove unneccesary build settings from podspec",
-  "packageName": "@fluentui-react-native/experimental-checkbox",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
