@@ -203,11 +203,6 @@ Creates a divider element in the `MenuList`. This divider is purely visual and d
 ```ts
 export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /**
-   * Text to show for the item
-   */
-  content: string;
-
-  /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
@@ -250,8 +245,6 @@ Variants of `MenuItem` that allows a single or multiple selection state based on
 
 ```ts
 export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  content: string;
-
   /**
    * Applies disabled styles to menu item but remains focusable
    */
