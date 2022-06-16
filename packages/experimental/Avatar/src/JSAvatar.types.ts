@@ -69,15 +69,17 @@ export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
 export type AvatarActiveAppearance = 'ring';
 export type AvatarColor = AvatarColorSchemes | AvatarNamedColor | ColorValue;
-export type IconAlignment = 'start' | 'center' | 'end';
-
-export interface RingConfig {
-  transparent?: boolean;
-  ringThickness?: number;
-  innerGap?: number;
-}
 
 export interface AvatarConfigurableProps {
+  /**
+   * Optional activity indicator
+   * * active: the avatar will be decorated according to activeAppearance
+   * * inactive: the avatar will be reduced in size and partially transparent
+   * * unset: normal display
+   *
+   * @defaultvalue unset
+   */
+  active?: AvatarActive;
   /**
    * The color when displaying either an icon or initials.
    * * neutral (default): gray
@@ -89,7 +91,15 @@ export interface AvatarConfigurableProps {
    */
   avatarColor?: AvatarColor;
   initialsColor?: ColorValue;
-  ring?: RingConfig;
+
+  /**
+   * Ring props
+   */
+  ringInnerGap?: number;
+  ringBackgroundColor?: ColorValue;
+  ringColor?: ColorValue;
+  ringThickness?: number;
+  transparentRing?: boolean;
 
   /**
    * Size of the avatar in pixels.
@@ -103,16 +113,6 @@ export interface AvatarConfigurableProps {
 }
 
 export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
-  /**
-   * Optional activity indicator
-   * * active: the avatar will be decorated according to activeAppearance
-   * * inactive: the avatar will be reduced in size and partially transparent
-   * * unset: normal display
-   *
-   * @defaultvalue unset
-   */
-  active?: AvatarActive;
-
   /**
    * The appearance when `active="active"`
    *
@@ -170,16 +170,40 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
 }
 
 export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
-  iconColor?: ColorValue;
-  iconSize?: number;
-  horizontalIconAlignment?: IconAlignment;
-  verticalIconAlignment?: IconAlignment;
-  circular?: JSAvatarTokens;
-  ringColor?: ColorValue;
-  ringBackgroundColor?: ColorValue;
-  square?: JSAvatarTokens;
-  inactive?: JSAvatarTokens;
+  /**
+   * Avatar opacity which is changed depending on `active` prop.
+   */
   avatarOpacity?: number;
+
+  /**
+   * The size of presence badge.
+   */
+  badgeSize?: BadgeSize;
+
+  /**
+   * The icon color.
+   */
+  iconColor?: ColorValue;
+
+  /**
+   * The size of the icon.
+   */
+  iconSize?: number;
+
+  /**
+   * Avatar shapes:
+   */
+  circular?: JSAvatarTokens;
+  square?: JSAvatarTokens;
+
+  /**
+   * Token for inactive value of `active` prop
+   */
+  inactive?: JSAvatarTokens;
+
+  /**
+   * Avatar sizes:
+   */
   size20?: JSAvatarTokens;
   size24?: JSAvatarTokens;
   size28?: JSAvatarTokens;
@@ -192,7 +216,10 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   size72?: JSAvatarTokens;
   size96?: JSAvatarTokens;
   size120?: JSAvatarTokens;
-  badgeSize?: BadgeSize;
+
+  /**
+   * Avatar colors:
+   */
   neutral?: JSAvatarTokens;
   brand?: JSAvatarTokens;
   darkRed?: JSAvatarTokens;
