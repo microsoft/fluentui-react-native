@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { JSAvatar } from '..';
-import { getInitials, validateAlphabeticalCharacters, removeTitlesFromName } from '../useAvatar';
+import { getInitials } from '../useAvatar';
 import * as renderer from 'react-test-renderer';
 
 const alphabeticalTestNames = [
@@ -18,7 +18,6 @@ const alphabeticalTestNames = [
   'Richard Feynman {Teams}',
 ];
 const alphabeticalInitials = ['M', 'AK', 'MB', 'AK', 'AK', 'WL', 'WL', 'AK', 'RF', 'R', 'RF', 'RF'];
-const otherTestNames = ['(206) 123-4567', '耿盈盈']; // will return this case after bug bash - '耿 James'
 const namesWithTitles = ['Mr Feynman', 'Dr Richard Feynman'];
 const initialsForNameWithTitles = ['F', 'RF'];
 
@@ -29,36 +28,29 @@ describe('Avatar rendering', () => {
   });
 });
 
-describe('validateAlphabeticalCharacters method', () => {
-  it('validates alphabetical characters', () => {
-    for (let i = 0; i < alphabeticalTestNames.length; i++) {
-      expect(validateAlphabeticalCharacters(alphabeticalTestNames[i])).toBeTruthy();
-    }
-    for (let i = 0; i < otherTestNames.length; i++) {
-      expect(validateAlphabeticalCharacters(otherTestNames[i])).toBeFalsy();
-    }
+describe('getInitials - names with titles', () => {
+  it('returns initials without title', () => {
+    expect(getInitials('Mr Faynman')).toBe('F');
   });
-
-  it("doesn't validate undefined name", () => {
-    expect(validateAlphabeticalCharacters(undefined)).toBeFalsy();
-  });
-  it("doesn't validate an empty string", () => {
-    expect(validateAlphabeticalCharacters('')).toBeFalsy();
-  });
-  it("doesn't validate null name", () => {
-    expect(validateAlphabeticalCharacters(null)).toBeFalsy();
+  it('returns initials for names with multi-word titles', () => {
+    expect(getInitials('Consul General Richard Faynman')).toBe('RF');
+    expect(getInitials('Major General Victor')).toBe('V');
   });
 });
 
-describe('removeTitlesFromName method', () => {
-  it('removes titles from the name', () => {
-    const words = ['Mr', 'Faynman'];
-    expect(removeTitlesFromName(words)).toStrictEqual(['Faynman']);
+describe('getInitials method - language support', () => {
+  it('returns correct initials cyrillic language', () => {
+    const test = getInitials('Илон Маск');
+    expect(test).toBe('ИМ');
   });
-  // it('removes multiword titles from the name', () => {
-  //   const name = 'Consul General Richard Faynman';
-  //   expect(removeTitlesFromName(name)).toStrictEqual(['Richard Faynman']);
-  // });
+  it('calculates correct initials for non-ASCII characters', () => {
+    const test = getInitials('Írissa Þórðardóttir');
+    expect(test).toBe('ÍÞ');
+  });
+  it('returns correct initials for non-ASCII characters', () => {
+    const test = getInitials('Øyvind Åsen');
+    expect(test).toBe('ØÅ');
+  });
 });
 
 describe('getInitials method', () => {
@@ -66,93 +58,72 @@ describe('getInitials method', () => {
     const test = getInitials('-Test   str  with *spaces');
     expect(test).toBe('TS');
   });
-
   it('returns an empty string if name is undefined', () => {
     expect(getInitials(undefined)).toBe('');
   });
-
   it('return initials for alphabetical words', () => {
     for (let i = 0; i < alphabeticalTestNames.length; i++) {
       expect(getInitials(alphabeticalTestNames[i])).toBe(alphabeticalInitials[i]);
     }
   });
-
   it('return initials for words with titles', () => {
     for (let i = 0; i < namesWithTitles.length; i++) {
       expect(getInitials(namesWithTitles[i])).toBe(initialsForNameWithTitles[i]);
     }
   });
-
   it("returns initials when there's a coma", () => {
     expect(getInitials('Second, First')).toEqual('SF');
   });
-
   // Unit tests from Web
   it('handles null inputs', () => {
     expect(getInitials(null)).toEqual('');
     expect(getInitials(undefined)).toEqual('');
   });
-
-  // it('calculates an expected initials in LTR for non-ASCII characters', () => {
-  //   expect(getInitials('Írissa Þórðardóttir')).toEqual('ÍÞ');
-  //   expect(getInitials('Øyvind Åsen')).toEqual('ØÅ');
-  // });
-
   it('calculates an expected initials in LTR with a hypen', () => {
     expect(getInitials('David Zearing-Goff')).toEqual('DZ');
   });
-
-  // it('calculates an expected initials in LTR with numbers', () => {
-  //   expect(getInitials('4lex 5loo')).toEqual('45');
-  // });
+  it('calculates an expected initials in LTR with numbers', () => {
+    expect(getInitials('4lex 5loo')).toEqual('LL');
+  });
   it('calculates an expected initials in LTR with multiple parentheses, extra spaces, and unwanted characters', () => {
     const result = getInitials(' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)    ');
     expect(result).toEqual('DG');
   });
-
   it('calculates an expected initials in LTR with multiple types of unwanted text', () => {
-    const result = getInitials(' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)  [Beta]  ');
+    const result = getInitials(" !@#$%^&*()=+ (Alpha) /David   (The man) `~<>,./?[]{}|   'Goff   (Gamma)  [Beta]  ");
     expect(result).toEqual('DG');
   });
-
   it('calculates an expected initials for Arabic names', () => {
-    expect(getInitials('خسرو رحیمی')).toEqual('');
+    expect(getInitials('خسرو رحیمی')).toEqual('خ');
   });
-
   it('calculates an expected initials for Chinese names', () => {
-    expect(getInitials('桂英')).toEqual('');
-    expect(getInitials('佳')).toEqual('');
-    expect(getInitials('宋智洋')).toEqual('');
+    expect(getInitials('桂英')).toEqual('桂');
+    expect(getInitials('佳')).toEqual('佳');
+    expect(getInitials('宋智洋')).toEqual('宋');
   });
-
   it('calculates an expected initials for Korean names', () => {
-    expect(getInitials('강현')).toEqual('');
-    expect(getInitials('최종래')).toEqual('');
-    expect(getInitials('남궁 성종')).toEqual('');
+    expect(getInitials('강현')).toEqual('강');
+    expect(getInitials('최종래')).toEqual('최');
+    expect(getInitials('남궁 성종')).toEqual('남');
   });
-
   it('calculates an expected initials for Japanese names', () => {
-    expect(getInitials('松田')).toEqual('');
-    expect(getInitials('海野')).toEqual('');
-    expect(getInitials('かり')).toEqual('');
+    expect(getInitials('松田')).toEqual('松');
+    expect(getInitials('海野')).toEqual('海');
+    expect(getInitials('かり')).toEqual('か');
   });
+  it('validates phone numbers', () => {
+    expect(getInitials('12345678')).toEqual('');
+    // expect(getInitials('+1 (555) 123-4567 ext.4567')).toEqual('');
+    expect(getInitials('+47 12 34 56 78 (X 5678)')).toEqual('');
+    expect(getInitials('47 12 34')).toEqual('');
+    expect(getInitials('47 12')).toEqual('');
 
-  // it('validates phone numbers', () => {
-  // expect(getInitials('12345678')).toEqual('');
-  // expect(getInitials('+1 (555) 123-4567 ext.4567')).toEqual('');
-  // expect(getInitials('+47 12 34 56 78 (X 5678)')).toEqual('4');
-  // expect(getInitials('47 12 34')).toEqual('');
-  // expect(getInitials('47 12')).toEqual('');
-  // expect(getInitials('1 Ext 2')).toEqual('');
-  // result = getInitials('James Ext 2');
-  // expect(result).toEqual('JE');
-  // result = getInitials('1x1');
-  // expect(result).toEqual('');
-  // result = getInitials('1y1');
-  // expect(result).toEqual('');
-  // result = getInitials('1');
-  // expect(result).toEqual('');
-  // result = getInitials('A 2');
-  // expect(result).toEqual('A');
-  // });
+    expect(getInitials('James Ext 2')).toEqual('JE');
+    // expect(getInitials('1 Ext 2')).toEqual('');
+    // expect(getInitials('1x1')).toEqual('');
+    result = getInitials('1');
+    expect(result).toEqual('');
+    result = getInitials('A 2');
+    expect(result).toEqual('A');
+  });
 });

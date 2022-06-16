@@ -73,30 +73,42 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
  * Words in braces, titles, special characters, parantheses and dashes should be ignored.
  */
 export const getInitials = (name: string): string => {
-  if (!name && !validateAlphabeticalCharacters(name)) {
+  if (!name) {
     return '';
   }
-  const nonWordRegExp = new RegExp('\\W+(?<!\\S-)', 'g');
-  const wordsInBracesRegExp = new RegExp('(\\(|\\[|\\{)\\w+(\\)|\\]|\\})', 'g');
-  let words = name.replace(wordsInBracesRegExp, ' ').replace(nonWordRegExp, ' ').trim().split(' ');
-  words = removeTitlesFromName(words);
+  const ARABIC_ASIAN_REGEXP = new RegExp(
+    '[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u1100-\u11FF\u3130-\u318F\uA960-\uA97F\uAC00-\uD7AF\uD7B0-\uD7FF\u3040-\u309F\u30A0-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uF900-\uFAFF\uD840-\uD869]',
+    'g',
+  );
+  const words = removeRedundantCharacters(name);
   const wordsLength = words.length;
   const lastWordIdx = wordsLength - 1;
-  const initials = `${words[0].charAt(0).toUpperCase()}${wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : ''}`;
+  const firstLetter = words[0].charAt(0).toUpperCase();
+  const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
+  const initials = `${firstLetter}${ARABIC_ASIAN_REGEXP.test(name) ? '' : lastLetter}`;
   return initials;
 };
 
 /**
- * A function which verifies whether a name contains non-alphabetical characters
+ * A function which takes a name and returns array of valid words
  *
  * @param name
- * @returns true if the name contains alphabetical characters. Returns false if there are
- * numeric values or the first character is non-alphabetical. In this case avatar should
- * fall back to icon.
+ * @returns array of words without phone numbers and special characters.
  */
-export const validateAlphabeticalCharacters = (name: string): boolean => {
-  const alphabeticalRegExp = new RegExp('[a-zA-Z]', 'g');
-  return name ? alphabeticalRegExp.test(name) : false;
+export const removeRedundantCharacters = (name: string): string[] => {
+  if (!name) {
+    return [];
+  }
+  const WORDS_IN_BRACES_REGEXP = new RegExp('[(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
+  const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
+  const SPECIAL_CHARACTERS_REGEXP = new RegExp('[!"#\'$%&*+,-./:;>=<?@^_`|~¡¢£¤¥¦§¨©ª«¬®ˉ°±²¼½¾¿×÷]', 'g');
+  const words = name
+    .replace(WORDS_IN_BRACES_REGEXP, '')
+    .replace(PHONE_NUMBER_REGEXP, ' ')
+    .replace(SPECIAL_CHARACTERS_REGEXP, '')
+    .trim()
+    .split(' ');
+  return removeTitlesFromName(words);
 };
 
 /**
