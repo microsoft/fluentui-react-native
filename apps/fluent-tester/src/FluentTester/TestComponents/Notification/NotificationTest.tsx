@@ -65,25 +65,19 @@ const Notification = (props) => {
 };
 
 const PrimaryTest: React.FunctionComponent = () => {
-  return <Notification variant={NotificationVariants[0]} startText="Mail Archived" endText="Undo" />;
+  return <Notification variant={'primary'} startText="Mail Archived" endText="Undo" />;
 };
 
 const NeutralTest: React.FunctionComponent = () => {
-  return <Notification variant={NotificationVariants[1]} startText="Some items require you to sign in to view them" endText="Sign in" />;
+  return <Notification variant={'neutral'} startText="Some items require you to sign in to view them" endText="Sign in" />;
 };
 
 const DangerTest: React.FunctionComponent = () => {
-  return (
-    <Notification
-      variant={NotificationVariants[2]}
-      startText="There was a problem, and your recent changes may not have saved"
-      endText="Retry"
-    />
-  );
+  return <Notification variant={'danger'} startText="There was a problem, and your recent changes may not have saved" endText="Retry" />;
 };
 
 const WarningTest: React.FunctionComponent = () => {
-  return <Notification variant={NotificationVariants[3]} startText="Read Only" endText="X" />;
+  return <Notification variant={'warning'} startText="Read Only" endText="X" />;
 };
 
 const notificationSections: TestSection[] = [
