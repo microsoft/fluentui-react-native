@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Fix MenuItemCheckbox/Radio",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

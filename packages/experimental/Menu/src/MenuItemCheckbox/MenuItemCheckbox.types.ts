@@ -23,8 +23,6 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
 }
 
 export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  content: string;
-
   /**
    * Applies disabled styles to menu item but remains focusable
    */

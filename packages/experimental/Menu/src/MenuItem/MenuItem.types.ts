@@ -21,8 +21,6 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
 }
 
 export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  content: string;
-
   /**
    * Applies disabled styles to menu item but remains focusable
    */
