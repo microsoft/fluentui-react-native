@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 15 Jun 2022 18:26:37 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Jun 2022 09:39:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.64.12
+
+Thu, 16 Jun 2022 09:39:38 GMT
+
+### Patches
+
+- Updated presenceBadge icons according to Web (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.43
+- Bump @fluentui-react-native/experimental-avatar to v0.14.42
 
 ## 0.64.11
 
