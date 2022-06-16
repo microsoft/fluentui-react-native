@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 16 Jun 2022 17:09:28 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Jun 2022 20:44:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Thu, 16 Jun 2022 20:44:45 GMT
+
+### Minor changes
+
+- Fix MenuItemCheckbox/Radio (ruaraki@microsoft.com)
 
 ## 0.14.8
 
