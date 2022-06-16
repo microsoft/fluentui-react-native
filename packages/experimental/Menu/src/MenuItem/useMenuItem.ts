@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AccessibilityState, I18nManager } from 'react-native';
+import { AccessibilityState, I18nManager, Platform } from 'react-native';
 import { MenuItemProps, MenuItemState } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
 import { InteractionEvent, isKeyPressEvent, useAsPressable, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
@@ -44,7 +44,12 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
 
       onClick?.(e);
       if (!hasSubmenu) {
-        setOpen(e, false /*isOpen*/);
+        const isArrowClose =
+          isKeyPressEvent(e) &&
+          isInSubmenu &&
+          ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
+
+        setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
       }
     },
     [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
@@ -65,8 +70,14 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityLabel: props.accessibilityLabel || props.content,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
-      enableFocusRing: true,
-      focusable: true,
+      enableFocusRing: Platform.select({
+        macos: false,
+        default: true, // win32
+      }),
+      focusable: Platform.select({
+        macos: !disabled,
+        default: true, // win32
+      }),
       ref: componentRef,
       ...onKeyDownProps,
     },

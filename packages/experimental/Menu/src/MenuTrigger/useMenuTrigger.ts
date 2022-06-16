@@ -38,6 +38,7 @@ export const useMenuTrigger = (): MenuTriggerState => {
       if (openOnHover) {
         clearTimeout(popoverHoverOutTimer);
         clearTimeout(triggerHoverOutTimer);
+        e.persist();
         setTimeout(() => {
           setOpen(e, true /* isOpen */);
         }, delayHover);
@@ -49,6 +50,7 @@ export const useMenuTrigger = (): MenuTriggerState => {
   const onHoverOut = React.useCallback(
     (e: InteractionEvent) => {
       if (openOnHover) {
+        e.persist();
         const timer = setTimeout(() => {
           setOpen(e, false /* isOpen */);
         }, delayHover);

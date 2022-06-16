@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "apple: remove unneccesary build settings from podspec",
+  "packageName": "@fluentui-react-native/experimental-native-date-picker",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

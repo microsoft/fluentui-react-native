@@ -111,6 +111,12 @@ export interface ButtonProps extends ButtonCoreProps {
    */
   block?: boolean;
 
+  /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
+
   /** Sets style of button to a preset size style
    * @default 'small' on win32, 'medium' elsewhere
    */
