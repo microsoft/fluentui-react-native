@@ -56,11 +56,7 @@ export const JSAvatar = compose<JSAvatarType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {showRing && !transparentRing ? (
-            <RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent>
-          ) : (
-            renderAvatar(final, avatar.props, Slots, svgIconsEnabled)
-          )}
+          <RingComponent>{renderAvatar(final, avatar.props, Slots, svgIconsEnabled)}</RingComponent>
           {svgIconsEnabled && showBadge && <Slots.badge {...badge} />}
         </Slots.root>
       );
