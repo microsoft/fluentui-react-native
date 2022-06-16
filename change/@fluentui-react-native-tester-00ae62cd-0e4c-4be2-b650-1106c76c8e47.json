@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Added a new example to Tester",
+  "comment": "Updated presenceBadge icons according to Web",
   "packageName": "@fluentui-react-native/tester",
   "email": "v.kozova13@gmail.com",
   "dependentChangeType": "patch"

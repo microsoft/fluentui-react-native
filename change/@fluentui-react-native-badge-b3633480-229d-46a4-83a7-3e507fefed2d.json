@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Fixed presenceBadge icon size",
+  "comment": "Updated presenceBadge icons according to Web",
   "packageName": "@fluentui-react-native/badge",
   "email": "v.kozova13@gmail.com",
   "dependentChangeType": "patch"

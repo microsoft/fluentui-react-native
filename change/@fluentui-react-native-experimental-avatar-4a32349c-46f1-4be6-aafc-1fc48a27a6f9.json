@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Added a new example to Tester",
+  "comment": "Fixed error on Mac and Windows in getINitials method",
   "packageName": "@fluentui-react-native/experimental-avatar",
   "email": "v.kozova13@gmail.com",
   "dependentChangeType": "patch"
