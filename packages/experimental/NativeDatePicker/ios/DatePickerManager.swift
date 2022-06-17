@@ -1,5 +1,4 @@
 import FluentUI
-import Foundation
 
 @objc(FRNDatePickerManager)
 public class DatePickerManager: NSObject {
@@ -58,19 +57,6 @@ public class DatePickerManager: NSObject {
                 datePickerType: datePickerType,
                 dateRangePresentation: dateRangePresentation,
                 titles: titles)
-        }
-    }
-    
-    @objc public func setDefaultCalendarConfiguration(
-        referenceStartDate: Date?,
-        referenceEndDate: Date?
-    ) {
-        if let referenceStartDate = referenceStartDate {
-            CalendarConfiguration.default.referenceStartDate = referenceStartDate
-        }
-
-        if let referenceEndDate = referenceEndDate {
-            CalendarConfiguration.default.referenceEndDate = referenceEndDate
         }
     }
 

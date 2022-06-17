@@ -65,7 +65,4 @@ RCT_EXTERN_METHOD(presentWithMode:(MSFDateTimePickerMode)mode
                   timeSubtitle:(nullable NSString *)timeSubtitle
                   callback:(RCTResponseSenderBlock)callback)
 
-RCT_EXTERN_METHOD(setDefaultCalendarConfigurationWithReferenceStartDate:(nullable NSDate *)referenceStartDate
-                  referenceEndDate:(nullable NSDate *)referenceEndDate)
-
 @end

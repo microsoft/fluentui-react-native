@@ -65,21 +65,6 @@ NativeDatePicker.present = ({
   );
 };
 
-interface CalendarConfigurationObject {
-  referenceStartDate?: Date;
-  referenceEndDate?: Date;
-}
-
-NativeDatePicker.setDefaultCalendarConfiguration = ({
-  referenceStartDate = null,
-  referenceEndDate = null,
-}: CalendarConfigurationObject) => {
-  NativeDatePicker.setDefaultCalendarConfigurationWithReferenceStartDate(
-    referenceStartDate?.toISOString(),
-    referenceEndDate?.toISOString(),
-  );
-};
-
 // We get date values back from the native side as strings in ISO 8601 format and UTC.
 // We want to immediately put them back into `Date` objects in local time.
 NativeDatePicker.parseISOString = (dateISOString: string): Date => {
@@ -94,7 +79,6 @@ NativeDatePicker.parseISOString = (dateISOString: string): Date => {
 
 interface NativeDatePickerInterface {
   present(object: DatePickerParameterObject): void;
-  setDefaultCalendarConfiguration(object: CalendarConfigurationObject): void;
   parseISOString(dateISOString: string): Date;
 }
 

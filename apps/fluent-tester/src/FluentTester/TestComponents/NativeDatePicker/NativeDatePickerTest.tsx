@@ -115,10 +115,6 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
           value={overrideDefaultCalendarConfiguration}
           onValueChange={(value) => {
             setOverrideDefaultCalendarConfiguration(value);
-            NativeDatePicker.setDefaultCalendarConfiguration({
-              referenceStartDate: value ? fixedDates.overrideReferenceStartDate : fixedDates.defaultReferenceStartDate,
-              referenceEndDate: value ? fixedDates.overrideReferenceEndDate : fixedDates.defaultReferenceEndDate,
-            });
           }}
         />
       </View>
