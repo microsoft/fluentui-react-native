@@ -1,3 +1,3 @@
+export * from './NativeAvatar';
 export * from './AvatarTest';
-export * from './JSAvatarTest';
 export * from './consts';
