@@ -9,7 +9,6 @@ import {
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
@@ -17,6 +16,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import TestSvg from '../../test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { Button } from '@fluentui/react-native';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -32,7 +32,7 @@ const StyledPicker = (props) => {
   const theme = useTheme();
   const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
   return (
-    <View style={{ flexDirection: 'row', alignContent: 'center' }}>
+    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
       <Text>{prompt}</Text>
       <Menu style={pickerStyles}>
         <MenuTrigger>
