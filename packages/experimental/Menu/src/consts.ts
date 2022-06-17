@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-export const delayHover = Platform.select({
+export const hoverDelayDefault = Platform.select({
   macos: 100,
   default: 500, // win32
 });
