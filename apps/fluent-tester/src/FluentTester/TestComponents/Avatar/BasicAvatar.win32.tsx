@@ -8,9 +8,10 @@ import {
   AvatarActive,
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
+import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, ColorValue, Platform } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -31,11 +32,23 @@ const StyledPicker = (props) => {
   const theme = useTheme();
   const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
   return (
-    <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
-      {collection.map((value, index) => (
-        <Picker.Item label={value} key={index} value={value} />
-      ))}
-    </Picker>
+    <View style={{ flexDirection: 'row', alignContent: 'center' }}>
+      <Text>{prompt}</Text>
+      <Menu style={pickerStyles}>
+        <MenuTrigger>
+          <Button>{selected}</Button>
+        </MenuTrigger>
+        <MenuPopover>
+          <MenuList>
+            {collection.map((value, index) => (
+              <MenuItem onClick={() => onChange(value)} key={index}>
+                {value}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </MenuPopover>
+      </Menu>
+    </View>
   );
 };
 
