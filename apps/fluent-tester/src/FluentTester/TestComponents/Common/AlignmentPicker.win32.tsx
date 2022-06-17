@@ -14,12 +14,18 @@ interface IAlignmentPickerProps {
 
 export const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: IAlignmentPickerProps) => {
   const { label, onSelectionChange, style } = props;
+  const [selectedValue, setSelectedValue] = React.useState<IconAlignment>();
+  console.log(selectedValue);
   return (
     <MenuPicker
       style={style}
       prompt={label}
-      selectedValue={undefinedText}
-      onChange={(value: IconAlignment, index) => onSelectionChange(index == 0 ? undefined : value)}
+      selected={selectedValue || undefinedText}
+      onChange={(value: IconAlignment, index) => {
+        const alignmentValue = index == 0 ? undefined : value;
+        onSelectionChange(alignmentValue);
+        setSelectedValue(alignmentValue);
+      }}
       collection={alignmentValues}
     />
   );
