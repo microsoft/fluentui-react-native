@@ -15,7 +15,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import TestSvg from '../../test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
-import { MenuPicker } from '../../utilityComponents/MenuPicker';
+import { MenuPicker } from '../Common/MenuPicker';
 
 type WithUndefined<T> = T | typeof undefinedText;
 

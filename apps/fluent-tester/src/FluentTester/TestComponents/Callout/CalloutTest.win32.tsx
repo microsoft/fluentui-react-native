@@ -14,7 +14,7 @@ import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
-import { MenuPicker } from '../../utilityComponents/MenuPicker';
+import { MenuPicker } from '../Common/MenuPicker';
 
 const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
