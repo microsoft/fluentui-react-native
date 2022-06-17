@@ -13,8 +13,8 @@ export const MenuPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Text>{prompt}</Text>
+    <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
+      <Text style={{ marginRight: 5 }}>{prompt}</Text>
       <Menu>
         <MenuTrigger>
           <Button>
