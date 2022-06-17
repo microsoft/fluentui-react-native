@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
@@ -43,13 +43,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
     },
     [setValue, onChange],
   );
-  return (
-    <Picker selectedValue={value} style={themePickerStyles.dropdown} onValueChange={onValueChange}>
-      {contents.map((entry: PartPickerEntry, index: number) => (
-        <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-      ))}
-    </Picker>
-  );
+  return <MenuPicker selected={value} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
 };
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });

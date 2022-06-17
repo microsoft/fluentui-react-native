@@ -9,7 +9,7 @@ const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedT
 interface IAlignmentPickerProps {
   style?: StyleProp<ViewStyle>;
   label: string;
-  onSelectionChange: (value: IconAlignment | typeof undefinedText) => void;
+  onSelectionChange: (value: IconAlignment) => void;
 }
 
 export const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: IAlignmentPickerProps) => {
@@ -18,8 +18,8 @@ export const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (
     <Picker
       style={style}
       prompt={label}
-      selectedValue={undefinedText}
-      onValueChange={(value: IconAlignment | typeof undefinedText, index) => onSelectionChange(index == 0 ? undefined : value)}
+      selectedValue={undefined}
+      onValueChange={(value: IconAlignment, index) => onSelectionChange(index == 0 ? undefined : value)}
     >
       {alignmentValues.map((alignment, index) => (
         <Picker.Item label={alignment} key={index} value={alignment} />
