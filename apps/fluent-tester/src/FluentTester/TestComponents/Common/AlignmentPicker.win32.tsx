@@ -2,7 +2,7 @@ import * as React from 'react';
 import { undefinedText } from '../PersonaCoin/styles';
 import { IconAlignment } from '@fluentui/react-native';
 import { StyleProp, ViewStyle } from 'react-native';
-import { MenuPicker } from '../../utilityComponents/MenuPicker';
+import { MenuPicker } from './MenuPicker';
 
 const alignmentValues: Array<typeof undefinedText | IconAlignment> = [undefinedText, 'start', 'center', 'end'];
 
