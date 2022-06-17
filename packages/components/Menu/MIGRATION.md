@@ -245,6 +245,7 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 
 - `children`
 - `defaultOpen`
+- `hoverDelay`
 - `open`
 - `openOnHover`
 
@@ -254,7 +255,6 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 
 #### Not implemented on Menu
 
-- `hoverDelay`
 - `inline`
 - `openOnContext`
 - `positioning` (`directionalHint` can be passed into `MenuPopover` instead)
