@@ -9,7 +9,8 @@ import {
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
-import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
+import { Switch, View, Text, ColorValue, Platform } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';

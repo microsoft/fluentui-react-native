@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect, Text, View, Switch, Picker, ScrollView } from 'react-native';
+import { ScreenRect, Text, View, Switch, ScrollView } from 'react-native';
 import {
   Button,
   Callout,
@@ -10,6 +10,7 @@ import {
   DismissBehaviors,
   StealthButton,
 } from '@fluentui/react-native';
+import { Picker } from '@react-native-picker/picker';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { View, Picker, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
