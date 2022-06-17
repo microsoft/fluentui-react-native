@@ -8,7 +8,6 @@ import {
   AvatarActive,
   AvatarActiveAppearance,
 } from '@fluentui-react-native/experimental-avatar';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
@@ -16,7 +15,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import TestSvg from '../../test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
-import { Button } from '@fluentui/react-native';
+import { MenuPicker } from '../../utilityComponents/MenuPicker';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -26,31 +25,6 @@ const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
 const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
-
-const StyledPicker = (props) => {
-  const { prompt, selected, onChange, collection } = props;
-  const theme = useTheme();
-  const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-  return (
-    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-      <Text>{prompt}</Text>
-      <Menu style={pickerStyles}>
-        <MenuTrigger>
-          <Button>{selected}</Button>
-        </MenuTrigger>
-        <MenuPopover>
-          <MenuList>
-            {collection.map((value, index) => (
-              <MenuItem onClick={() => onChange(value)} key={index}>
-                {value}
-              </MenuItem>
-            ))}
-          </MenuList>
-        </MenuPopover>
-      </Menu>
-    </View>
-  );
-};
 
 export const StandardUsage: FunctionComponent = () => {
   const [isSquare, setSquare] = useState(false);
@@ -101,18 +75,18 @@ export const StandardUsage: FunctionComponent = () => {
           <Switch value={outOfOffice} onValueChange={() => setOutOfOffice(!outOfOffice)} />
         </View>
 
-        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
-        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+        <MenuPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
+        <MenuPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
         {active === 'active' ? (
-          <StyledPicker
+          <MenuPicker
             prompt="Active appearance"
             selected={activeAppearance}
             onChange={onActiveAppearanceChange}
             collection={avatarActiveAppearance}
           />
         ) : null}
-        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
-        <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
+        <MenuPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
+        <MenuPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
       <JSAvatar
         accessibilityLabel="Fall-back Icon"

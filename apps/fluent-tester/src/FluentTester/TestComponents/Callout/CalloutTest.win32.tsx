@@ -10,11 +10,11 @@ import {
   DismissBehaviors,
   StealthButton,
 } from '@fluentui/react-native';
-import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
+import { MenuPicker } from '../../utilityComponents/MenuPicker';
 
 const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
@@ -195,32 +195,6 @@ const StandardCallout: React.FunctionComponent = () => {
     setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents]);
 
-  const StyledPicker = (props) => {
-    const { prompt, selected, onChange, collection } = props;
-
-    return (
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Text>{prompt}</Text>
-        <Menu>
-          <MenuTrigger>
-            <Button>
-              <Text>{selected}</Text>
-            </Button>
-          </MenuTrigger>
-          <MenuPopover>
-            <MenuList>
-              {collection.map((value, index) => (
-                <MenuItem onClick={() => onChange(value)} key={index}>
-                  {value}
-                </MenuItem>
-              ))}
-            </MenuList>
-          </MenuPopover>
-        </Menu>
-      </View>
-    );
-  };
-
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -260,21 +234,21 @@ const StandardCallout: React.FunctionComponent = () => {
             <Text>Enable ScrollView Callout</Text>
           </View>
 
-          <StyledPicker
+          <MenuPicker
             prompt="Background Color"
             selected={selectedBackgroundColor || colorDefault}
             onChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
             collection={colorSelections}
           />
 
-          <StyledPicker
+          <MenuPicker
             prompt="Border Color"
             selected={selectedBorderColor || colorDefault}
             onChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
             collection={colorSelections}
           />
 
-          <StyledPicker
+          <MenuPicker
             prompt="Border Width"
             selected={selectedBorderWidth || borderWidthDefault}
             onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
