@@ -3,7 +3,7 @@ import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
-import { delayHover, isCloseOnHoverOutEnabled } from '../consts';
+import { hoverDelayDefault, isCloseOnHoverOutEnabled } from '../consts';
 
 const accessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
@@ -12,7 +12,16 @@ const collapsedState = { expanded: false };
 
 export const useMenuTrigger = (): MenuTriggerState => {
   const context = useMenuContext();
-  const { open, openOnHover, popoverHoverOutTimer, setOpen, setTriggerHoverOutTimer, triggerHoverOutTimer, triggerRef } = context;
+  const {
+    hoverDelay = hoverDelayDefault,
+    open,
+    openOnHover,
+    popoverHoverOutTimer,
+    setOpen,
+    setTriggerHoverOutTimer,
+    triggerHoverOutTimer,
+    triggerRef,
+  } = context;
 
   const accessibilityState = open ? expandedState : collapsedState;
 
@@ -41,10 +50,10 @@ export const useMenuTrigger = (): MenuTriggerState => {
         e.persist();
         setTimeout(() => {
           setOpen(e, true /* isOpen */);
-        }, delayHover);
+        }, hoverDelay);
       }
     },
-    [openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
+    [hoverDelay, openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
   );
 
   const onHoverOut = React.useCallback(
@@ -53,11 +62,11 @@ export const useMenuTrigger = (): MenuTriggerState => {
         e.persist();
         const timer = setTimeout(() => {
           setOpen(e, false /* isOpen */);
-        }, delayHover);
+        }, hoverDelay);
         setTriggerHoverOutTimer(timer);
       }
     },
-    [openOnHover, setOpen, setTriggerHoverOutTimer],
+    [hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer],
   );
 
   const onClick = React.useCallback(
