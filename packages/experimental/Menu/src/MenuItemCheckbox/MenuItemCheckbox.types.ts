@@ -9,12 +9,34 @@ import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui
 export const menuItemCheckboxName = 'MenuItemCheckbox';
 
 export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+  /**
+   * Color of the checkmark icon
+   */
   checkmarkColor?: ColorValue;
+
+  /**
+   * Amount of space in pixels around the checkmark icon
+   */
   checkmarkPadding?: number;
+
+  /**
+   * Height and width in pixels of the checkmark icon
+   */
   checkmarkSize?: number;
+
+  /**
+   * Visibility of the checkmark icon from 0 to 1
+   */
   checkmarkVisibility?: number;
+
+  /**
+   * Space between parts of the item control in pixels
+   */
   gap?: number;
 
+  /**
+   * States of the item control
+   */
   checked?: MenuItemCheckboxTokens;
   disabled?: MenuItemCheckboxTokens;
   focused?: MenuItemCheckboxTokens;
@@ -23,11 +45,6 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
 }
 
 export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  /**
-   * Applies disabled styles to menu item but remains focusable
-   */
-  disabled?: boolean;
-
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */

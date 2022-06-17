@@ -9,11 +9,29 @@ import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui
 export const menuItemName = 'MenuItem';
 
 export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+  /**
+   * Height and width in pixels of the space that is reserved to align the item's text with other items which have checkmarks
+   */
   checkmarkSize?: number;
+
+  /**
+   * Amount of space in pixels around the indicator that shows that an item has a submenu
+   */
   submenuIndicatorPadding?: number;
+
+  /**
+   * Height and width in pixels of the indicator that shows that an item has a submenu
+   */
   submenuIndicatorSize?: number;
+
+  /**
+   * Space between parts of the item control in pixels
+   */
   gap?: number;
 
+  /**
+   * States of the item control
+   */
   disabled?: MenuItemTokens;
   focused?: MenuItemTokens;
   hovered?: MenuItemTokens;
@@ -21,11 +39,6 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
 }
 
 export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  /**
-   * Applies disabled styles to menu item but remains focusable
-   */
-  disabled?: boolean;
-
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
