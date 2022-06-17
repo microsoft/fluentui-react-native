@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, Size } from '@fluentui-react-native/experimental-avatar/';
+import { NativeAvatar, Size } from '@fluentui-react-native/experimental-avatar/';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { AVATAR_TESTPAGE } from './consts';
@@ -31,7 +31,7 @@ export const BasicAvatar: React.FunctionComponent = () => {
         </View>
       </View>
       {/* component under test */}
-      <Avatar
+      <NativeAvatar
         primaryText="Kat Larrson"
         secondaryText="Kat.Larrson@example.com"
         imageSource={showImage ? testImageSource : undefined}
@@ -76,7 +76,7 @@ export const CustomizeColors: React.FunctionComponent = () => {
         </View>
       </View>
       {/* component under test */}
-      <Avatar
+      <NativeAvatar
         primaryText="Kat Larrson"
         secondaryText="Kat.Larrson@example.com"
         ringColor={showCustomRingColor ? 'red' : null}
@@ -97,7 +97,7 @@ const AvatarSizeRamp: React.FunctionComponent = () => {
   return (
     <Stack style={{ flexDirection: 'row' }}>
       {allSizes.map((size, index) => (
-        <Avatar key={index} primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" size={size} />
+        <NativeAvatar key={index} primaryText="Kat Larrson" secondaryText="Kat.Larrson@example.com" size={size} />
       ))}
     </Stack>
   );
