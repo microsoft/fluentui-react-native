@@ -18,5 +18,5 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     warning: {
       backgroundColor: 'lightyellow',
       color: 'brown',
-    }
+    },
   } as NotificationTokens);
