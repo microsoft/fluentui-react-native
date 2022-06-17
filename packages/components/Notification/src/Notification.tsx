@@ -1,5 +1,4 @@
 /** @jsx withSlots */
-import * as React from 'react';
 import { View } from 'react-native';
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Text } from '@fluentui-react-native/experimental-text';
