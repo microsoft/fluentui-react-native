@@ -1,78 +1,6 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { Notification } from '@fluentui-react-native/Notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-
-const NotificationVariants = ['primary', 'neutral', 'danger', 'warning'] as const;
-type NotificationVariant = typeof NotificationVariants[number];
-
-interface NotificationProps {
-  /**
-   * Notification variants: 'primary' | 'neutral' |'danger' | 'warning'
-   */
-  variant: NotificationVariant;
-  startText: string;
-  endText: string;
-}
-
-const Notification = (props: NotificationProps) => {
-  const variant = props.variant;
-  const startText = props.startText;
-  const endText = props.endText;
-
-  let containerBackgroundColor = 'skyblue';
-  let foregroundColor = 'black';
-
-  switch (variant) {
-    case 'primary':
-      containerBackgroundColor = 'skyblue';
-      break;
-    case 'neutral':
-      containerBackgroundColor = 'lightgrey';
-      break;
-    case 'danger':
-      containerBackgroundColor = 'pink';
-      foregroundColor = 'maroon';
-      break;
-    case 'warning':
-      containerBackgroundColor = 'lightyellow';
-      foregroundColor = 'brown';
-      break;
-  }
-
-  const styles = StyleSheet.create({
-    container: {
-      borderRadius: 12,
-      backgroundColor: containerBackgroundColor,
-
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: 16,
-    },
-    start: {
-      fontSize: 16,
-      color: foregroundColor,
-
-      flex: 1,
-      flexGrow: 1,
-    },
-    end: {
-      fontSize: 16,
-      fontWeight: '500',
-      color: foregroundColor,
-
-      marginLeft: 34,
-    },
-  });
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.start}>{startText}</Text>
-      <Text style={styles.end}>{endText}</Text>
-    </View>
-  );
-};
 
 const PrimaryTest: React.FunctionComponent = () => {
   return <Notification variant={'primary'} startText="Mail Archived" endText="Undo" />;
@@ -113,7 +41,7 @@ export const NotificationTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };
