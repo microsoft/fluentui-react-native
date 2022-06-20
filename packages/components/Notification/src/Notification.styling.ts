@@ -23,7 +23,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
-    startText: buildProps(
+    message: buildProps(
       (tokens: NotificationTokens) => {
         return {
           style: {

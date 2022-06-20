@@ -18,13 +18,12 @@ export interface NotificationProps {
    * Notification variants: 'primary' | 'neutral' |'danger' | 'warning'
    */
   variant: NotificationVariant;
-  startText: string;
   endText: string;
 }
 
 export interface NotificationSlotProps {
   root: ViewProps;
-  startText: TextProps;
+  message: TextProps;
   endText: TextProps;
 }
 

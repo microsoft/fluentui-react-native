@@ -3,19 +3,35 @@ import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const PrimaryTest: React.FunctionComponent = () => {
-  return <Notification variant={'primary'} startText="Mail Archived" endText="Undo" />;
+  return (
+    <Notification variant={'primary'} endText="Undo">
+      Mail Archived
+    </Notification>
+  );
 };
 
 const NeutralTest: React.FunctionComponent = () => {
-  return <Notification variant={'neutral'} startText="Some items require you to sign in to view them" endText="Sign in" />;
+  return (
+    <Notification variant={'neutral'} endText="Sign in">
+      Some items require you to sign in to view them
+    </Notification>
+  );
 };
 
 const DangerTest: React.FunctionComponent = () => {
-  return <Notification variant={'danger'} startText="There was a problem, and your recent changes may not have saved" endText="Retry" />;
+  return (
+    <Notification variant={'danger'} endText="Retry">
+      There was a problem, and your recent changes may not have saved
+    </Notification>
+  );
 };
 
 const WarningTest: React.FunctionComponent = () => {
-  return <Notification variant={'warning'} startText="Read Only" endText="X" />;
+  return (
+    <Notification variant={'warning'} endText="X">
+      Read Only
+    </Notification>
+  );
 };
 
 const notificationSections: TestSection[] = [

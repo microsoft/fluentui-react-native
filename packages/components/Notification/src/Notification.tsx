@@ -21,19 +21,19 @@ export const Notification = compose<NotificationType>({
   ...stylingSettings,
   slots: {
     root: View,
-    startText: Text,
+    message: Text,
     endText: Text,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const notificationProps = useNotification(userProps);
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
 
-    return (final: NotificationProps) => {
-      const { variant, startText, endText, ...mergedProps } = mergeProps(notificationProps, final);
+    return (final: NotificationProps, ...children: React.ReactNode[]) => {
+      const { variant, endText, ...mergedProps } = mergeProps(notificationProps, final);
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.startText>{startText}</Slots.startText>
+          <Slots.message>{children}</Slots.message>
           <Slots.endText>{endText}</Slots.endText>
         </Slots.root>
       );
