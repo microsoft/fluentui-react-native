@@ -1,11 +1,15 @@
 {
-  "name": "@fluentui-react-native/Notification",
+  "name": "@fluentui-react-native/notification",
   "version": "0.0.1",
   "description": "add component-description",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "private": true,
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
   "scripts": {
     "build": "fluentui-scripts build",
     "clean": "fluentui-scripts clean",
@@ -20,7 +24,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/ComponentTemplate"
+    "directory": "packages/components/Notification"
   },
   "dependencies": {
     "@fluentui-react-native/experimental-text": ">=0.9.0 <1.0.0",
@@ -31,7 +35,11 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@fluentui-react-native/scripts": "^0.1.1"
+    "@office-iss/react-native-win32": "^0.64.8",
+    "@types/react-native": "^0.64.0",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
