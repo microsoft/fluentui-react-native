@@ -1,8 +1,9 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { SvgXml } from 'react-native-svg';
+import { Picker } from '@react-native-picker/picker';
 
 const chevronXml = `
 <svg width="12" height="16" viewBox="0 0 11 6" color="#000">
@@ -17,31 +18,52 @@ interface MenuPickerProps {
   style?: any;
 }
 
-export const MenuPicker = (props: MenuPickerProps) => {
-  const { prompt, selected, onChange, collection } = props;
+export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
+  const { prompt, selected, onChange, collection, style } = props;
 
-  return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
-      <Text style={{ marginRight: 5 }}>{prompt}</Text>
-      <Menu>
-        <MenuTrigger>
-          <Button>
-            <Text>{selected}</Text>
-            <View style={{ padding: 4 }}>
-              <SvgXml xml={chevronXml} />
-            </View>
-          </Button>
-        </MenuTrigger>
-        <MenuPopover>
-          <MenuList>
-            {collection.map((value, index) => (
-              <MenuItem onClick={() => onChange(value, index)} key={index}>
-                {value}
-              </MenuItem>
-            ))}
-          </MenuList>
-        </MenuPopover>
-      </Menu>
-    </View>
-  );
+  const renderDesktopPicker = Platform.OS == ('win32' as any) || Platform.OS == 'macos';
+
+  const DesktopPicker = () => {
+    return (
+      <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
+        <Text style={{ marginRight: 5 }}>{prompt}</Text>
+        <Menu>
+          <MenuTrigger>
+            <Button>
+              <Text>{selected}</Text>
+              <View style={{ padding: 4 }}>
+                <SvgXml xml={chevronXml} />
+              </View>
+            </Button>
+          </MenuTrigger>
+          <MenuPopover>
+            <MenuList>
+              {collection.map((value, index) => (
+                <MenuItem onClick={() => onChange(value, index)} key={index}>
+                  {value}
+                </MenuItem>
+              ))}
+            </MenuList>
+          </MenuPopover>
+        </Menu>
+      </View>
+    );
+  };
+
+  const MobilePicker = () => {
+    return (
+      <Picker
+        prompt="Background Color"
+        selectedValue={selected}
+        onValueChange={(itemValue: any, index: number) => onChange(itemValue, index)}
+        style={{ ...style }}
+      >
+        {collection.map((value, index) => (
+          <Picker.Item label={value} key={index} value={value} />
+        ))}
+      </Picker>
+    );
+  };
+
+  return <View>{renderDesktopPicker ? <DesktopPicker /> : <MobilePicker />}</View>;
 };

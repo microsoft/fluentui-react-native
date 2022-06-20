@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect, Text, View, Switch, ScrollView, Platform } from 'react-native';
+import { ScreenRect, Text, View, Switch, ScrollView } from 'react-native';
 import {
   Button,
   Callout,
@@ -10,7 +10,6 @@ import {
   DismissBehaviors,
   StealthButton,
 } from '@fluentui/react-native';
-import { Picker } from '@react-native-picker/picker';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
@@ -196,68 +195,6 @@ const StandardCallout: React.FunctionComponent = () => {
     setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents]);
 
-  const renderMenuPicker = Platform.OS == ('win32' as any) || Platform.OS == 'macos';
-  console.log(renderMenuPicker);
-
-  const MenuPickers = () => {
-    return (
-      <View>
-        <MenuPicker
-          prompt="Background Color"
-          selected={selectedBackgroundColor || colorDefault}
-          onChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
-          collection={colorSelections}
-        />
-        <MenuPicker
-          prompt="Border Color"
-          selected={selectedBorderColor || colorDefault}
-          onChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
-          collection={colorSelections}
-        />
-        <MenuPicker
-          prompt="Border Width"
-          selected={selectedBorderWidth || borderWidthDefault}
-          onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
-          collection={borderWidthSelections}
-        />
-      </View>
-    );
-  };
-
-  const Pickers = () => {
-    return (
-      <View>
-        <Picker
-          prompt="Background Color"
-          selectedValue={selectedBackgroundColor || colorDefault}
-          onValueChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
-        >
-          {colorSelections.map((color, index) => (
-            <Picker.Item label={color} key={index} value={color} />
-          ))}
-        </Picker>
-        <Picker
-          prompt="Border Color"
-          selectedValue={selectedBorderColor || colorDefault}
-          onValueChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
-        >
-          {colorSelections.map((color, index) => (
-            <Picker.Item label={color} key={index} value={color} />
-          ))}
-        </Picker>
-        <Picker
-          prompt="Border Width"
-          selectedValue={selectedBorderWidth || borderWidthDefault}
-          onValueChange={(width) => setSelectedBorderWidth(width === borderWidthDefault ? undefined : width)}
-        >
-          {borderWidthSelections.map((width, index) => (
-            <Picker.Item label={width} key={index} value={width} />
-          ))}
-        </Picker>
-      </View>
-    );
-  };
-
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
@@ -297,7 +234,24 @@ const StandardCallout: React.FunctionComponent = () => {
             <Text>Enable ScrollView Callout</Text>
           </View>
 
-          {renderMenuPicker ? <MenuPickers /> : <Pickers />}
+          <MenuPicker
+            prompt="Background Color"
+            selected={selectedBackgroundColor || colorDefault}
+            onChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
+            collection={colorSelections}
+          />
+          <MenuPicker
+            prompt="Border Color"
+            selected={selectedBorderColor || colorDefault}
+            onChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
+            collection={colorSelections}
+          />
+          <MenuPicker
+            prompt="Border Width"
+            selected={selectedBorderWidth || borderWidthDefault}
+            onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
+            collection={borderWidthSelections}
+          />
         </View>
 
         <Separator vertical />

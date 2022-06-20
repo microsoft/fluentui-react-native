@@ -10,7 +10,6 @@ import {
 } from '@fluentui-react-native/experimental-avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, ColorValue, Platform } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -60,57 +59,11 @@ export const StandardUsage: FunctionComponent = () => {
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
-  const renderMenuPicker = Platform.OS == ('win32' as any) || Platform.OS == 'macos';
-
-  const MenuPickers = () => {
-    return (
-      <View>
-        <MenuPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
-        <MenuPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
-        {active === 'active' ? (
-          <MenuPicker
-            prompt="Active appearance"
-            selected={activeAppearance}
-            onChange={onActiveAppearanceChange}
-            collection={avatarActiveAppearance}
-          />
-        ) : null}
-        <MenuPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
-        <MenuPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
-      </View>
-    );
-  };
-
   const StyledPicker = (props) => {
     const { prompt, selected, onChange, collection } = props;
     const theme = useTheme();
     const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-    return (
-      <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
-        {collection.map((value, index) => (
-          <Picker.Item label={value} key={index} value={value} />
-        ))}
-      </Picker>
-    );
-  };
-
-  const StyledPickers = () => {
-    return (
-      <View>
-        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
-        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
-        {active === 'active' ? (
-          <StyledPicker
-            prompt="Active appearance"
-            selected={activeAppearance}
-            onChange={onActiveAppearanceChange}
-            collection={avatarActiveAppearance}
-          />
-        ) : null}
-        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
-        <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
-      </View>
-    );
+    return <MenuPicker prompt={prompt} style={pickerStyles} selected={selected} onChange={onChange} collection={collection} />;
   };
 
   return (
@@ -129,7 +82,18 @@ export const StandardUsage: FunctionComponent = () => {
           <Switch value={outOfOffice} onValueChange={() => setOutOfOffice(!outOfOffice)} />
         </View>
 
-        {renderMenuPicker ? <MenuPickers /> : <StyledPickers />}
+        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
+        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+        {active === 'active' ? (
+          <StyledPicker
+            prompt="Active appearance"
+            selected={activeAppearance}
+            onChange={onActiveAppearanceChange}
+            collection={avatarActiveAppearance}
+          />
+        ) : null}
+        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
+        <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
       <JSAvatar
         accessibilityLabel="Fall-back Icon"
