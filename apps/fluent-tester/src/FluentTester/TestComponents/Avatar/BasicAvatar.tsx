@@ -95,20 +95,22 @@ export const StandardUsage: FunctionComponent = () => {
   };
 
   const StyledPickers = () => {
-    <View>
-      <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
-      <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
-      {active === 'active' ? (
-        <StyledPicker
-          prompt="Active appearance"
-          selected={activeAppearance}
-          onChange={onActiveAppearanceChange}
-          collection={avatarActiveAppearance}
-        />
-      ) : null}
-      <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
-      <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
-    </View>;
+    return (
+      <View>
+        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
+        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+        {active === 'active' ? (
+          <StyledPicker
+            prompt="Active appearance"
+            selected={activeAppearance}
+            onChange={onActiveAppearanceChange}
+            collection={avatarActiveAppearance}
+          />
+        ) : null}
+        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
+        <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
+      </View>
+    );
   };
 
   return (

@@ -199,7 +199,7 @@ const StandardCallout: React.FunctionComponent = () => {
   const renderMenuPicker = Platform.OS == ('win32' as any) || Platform.OS == 'macos';
   console.log(renderMenuPicker);
 
-  const MenuPickerCustomizeCallOut = () => {
+  const MenuPickers = () => {
     return (
       <View>
         <MenuPicker
@@ -224,7 +224,7 @@ const StandardCallout: React.FunctionComponent = () => {
     );
   };
 
-  const PickerCustomizeCallOut = () => {
+  const Pickers = () => {
     return (
       <View>
         <Picker
@@ -297,7 +297,7 @@ const StandardCallout: React.FunctionComponent = () => {
             <Text>Enable ScrollView Callout</Text>
           </View>
 
-          {renderMenuPicker ? <MenuPickerCustomizeCallOut /> : <PickerCustomizeCallOut />}
+          {renderMenuPicker ? <MenuPickers /> : <Pickers />}
         </View>
 
         <Separator vertical />
