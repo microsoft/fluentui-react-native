@@ -43,8 +43,10 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
     },
     [setValue, onChange],
   );
-
-  return <MenuPicker selected={value} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
+  const MenuPickerCollection = contents.map((entry: PartPickerEntry) => {
+    return entry.label;
+  });
+  return <MenuPicker selected={value} style={themePickerStyles.dropdown} onChange={onValueChange} collection={MenuPickerCollection} />;
 };
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });

@@ -9,7 +9,15 @@ const chevronXml = `
   <path fill='currentColor' d='M0.646447 0.646447C0.841709 0.451184 1.15829 0.451184 1.35355 0.646447L5.5 4.79289L9.64645 0.646447C9.84171 0.451185 10.1583 0.451185 10.3536 0.646447C10.5488 0.841709 10.5488 1.15829 10.3536 1.35355L5.85355 5.85355C5.65829 6.04882 5.34171 6.04882 5.14645 5.85355L0.646447 1.35355C0.451184 1.15829 0.451184 0.841709 0.646447 0.646447Z' />
 </svg>`;
 
-export const MenuPicker = (props) => {
+interface MenuPickerProps {
+  prompt?: string;
+  selected?: any;
+  onChange?: (value: any, index?: number) => void;
+  collection?: any[];
+  style?: any;
+}
+
+export const MenuPicker = (props: MenuPickerProps) => {
   const { prompt, selected, onChange, collection } = props;
 
   return (
@@ -27,7 +35,7 @@ export const MenuPicker = (props) => {
         <MenuPopover>
           <MenuList>
             {collection.map((value, index) => (
-              <MenuItem onClick={() => onChange(value)} key={index}>
+              <MenuItem onClick={() => onChange(value, index)} key={index}>
                 {value}
               </MenuItem>
             ))}
