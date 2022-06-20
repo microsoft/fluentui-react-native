@@ -3,7 +3,7 @@ import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-
 import { ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const avatarName = 'Avatar';
+const avatarName = 'NativeAvatar';
 
 const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
 

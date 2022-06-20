@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { JSAVATAR_TESTPAGE } from './consts';
+import { AVATAR_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
@@ -8,7 +8,7 @@ import { E2EAvatarTest } from './E2EAvatarTest';
 const avatarSections: TestSection[] = [
   {
     name: 'Standard Usage',
-    testID: JSAVATAR_TESTPAGE,
+    testID: AVATAR_TESTPAGE,
     component: StandardUsage,
   },
   {
@@ -21,7 +21,7 @@ const avatarSections: TestSection[] = [
   },
 ];
 
-export const JSAvatarTest: React.FunctionComponent = () => {
+export const AvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',

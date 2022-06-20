@@ -2,7 +2,7 @@ import * as React from 'react';
 import { NativeAvatar, Size } from '@fluentui-react-native/experimental-avatar/';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
-import { AVATAR_TESTPAGE } from './consts';
+import { NATIVE_AVATAR_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { testImageSource, rainbowGradientSource } from './testImageSources';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -106,12 +106,12 @@ const AvatarSizeRamp: React.FunctionComponent = () => {
 const avatarSections: TestSection[] = [
   {
     name: 'Basic Avatar',
-    testID: AVATAR_TESTPAGE,
+    testID: NATIVE_AVATAR_TESTPAGE,
     component: BasicAvatar,
   },
   {
     name: 'Custom Colors',
-    testID: AVATAR_TESTPAGE,
+    testID: NATIVE_AVATAR_TESTPAGE,
     component: CustomizeColors,
   },
   {
@@ -120,7 +120,7 @@ const avatarSections: TestSection[] = [
   },
 ];
 
-export const AvatarTest: React.FunctionComponent = () => {
+export const NativeAvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
