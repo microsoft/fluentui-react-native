@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinFluentColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
-import { Switch, View, Text, ColorValue } from 'react-native';
+import { Switch, View, Text, ColorValue, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { MenuPicker } from '../Common/MenuPicker';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -51,13 +52,23 @@ const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
   const theme = useTheme();
   const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-  return (
-    <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
-      {collection.map((value, index) => (
-        <Picker.Item label={value} key={index} value={value} />
-      ))}
-    </Picker>
-  );
+  const renderMenuPicker = Platform.OS == ('win32' as any) || Platform.OS == 'macos';
+
+  const MenuPickers = () => {
+    return <MenuPicker prompt={prompt} style={pickerStyles} selected={selected} onChange={onChange} collection={collection} />;
+  };
+
+  const Pickers = () => {
+    return (
+      <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
+        {collection.map((value, index) => (
+          <Picker.Item label={value} key={index} value={value} />
+        ))}
+      </Picker>
+    );
+  };
+
+  return <View>{renderMenuPicker ? <MenuPickers /> : <Pickers />}</View>;
 };
 
 export const StandardUsage: React.FunctionComponent = () => {
