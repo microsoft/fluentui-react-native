@@ -1,6 +1,11 @@
 import * as React from 'react';
 import { Picker } from '@react-native-picker/picker';
 
+/*
+ * The MenuPicker was created because the RN Core Picker was deprecated (preventing us from updating to RN 0.66).
+ * MenuPicker uses the community Picker package for iOS/Win32 and our own Picker for Win32/MacOS.
+ */
+
 interface MenuPickerProps {
   prompt?: string;
   selected?: any;
