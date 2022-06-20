@@ -5,15 +5,35 @@ import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/te
 
 describe('Notification component tests', () => {
   it('Notification default', () => {
-    const tree = renderer.create(<Notification variant={'primary'} startText="Mail Archived" endText="Undo"></Notification>).toJSON();
+    const tree = renderer
+      .create(
+        <Notification variant={'primary'} endText="Undo">
+          Mail Archived
+        </Notification>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Notification simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <Notification variant={'primary'} startText="Mail Archived" endText="Undo"></Notification>, 2);
+    checkRenderConsistency(
+      () => (
+        <Notification variant={'primary'} endText="Undo">
+          Mail Archived
+        </Notification>
+      ),
+      2,
+    );
   });
 
   it('Notification re-renders correctly', () => {
-    checkReRender(() => <Notification variant={'primary'} startText="Mail Archived" endText="Undo"></Notification>, 2);
+    checkReRender(
+      () => (
+        <Notification variant={'primary'} endText="Undo">
+          Mail Archived
+        </Notification>
+      ),
+      2,
+    );
   });
 });
