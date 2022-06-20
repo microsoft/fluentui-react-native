@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, Platform } from 'react-native';
+import { Text, View, Platform, StyleSheet } from 'react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { SvgXml } from 'react-native-svg';
@@ -25,13 +25,13 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
 
   const DesktopPicker = () => {
     return (
-      <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
-        <Text style={{ marginRight: 5 }}>{prompt}</Text>
+      <View style={menuPickerStyles.container}>
+        <Text style={menuPickerStyles.prompt}>{prompt}</Text>
         <Menu>
           <MenuTrigger>
             <Button>
               <Text>{selected}</Text>
-              <View style={{ padding: 4 }}>
+              <View style={menuPickerStyles.chevronContainer}>
                 <SvgXml xml={chevronXml} />
               </View>
             </Button>
@@ -67,3 +67,17 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
 
   return <View>{renderDesktopPicker ? <DesktopPicker /> : <MobilePicker />}</View>;
 };
+
+const menuPickerStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 5,
+  },
+  prompt: {
+    marginRight: 5,
+  },
+  chevronContainer: {
+    padding: 4,
+  },
+});
