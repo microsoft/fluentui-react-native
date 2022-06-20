@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
 import { ThemeOptions } from '@fluentui-react-native/theme-types';
+import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {
@@ -43,6 +43,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
     },
     [setValue, onChange],
   );
+
   return <MenuPicker selected={value} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
 };
 
