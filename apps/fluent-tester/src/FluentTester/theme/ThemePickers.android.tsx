@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, PickerPropsAndroid } from 'react-native';
+import { View, PickerProps } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
@@ -52,7 +52,7 @@ export const ThemePickers: React.FunctionComponent = () => {
 
   type DropdownEntry = { label: string; value: string };
 
-  const dropdownProps: PickerPropsAndroid = {
+  const dropdownProps: PickerProps = {
     style: themedPickerStyles.dropdown,
     mode: 'dropdown',
   };
