@@ -5,7 +5,6 @@
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
-  "private": true,
   "onPublish": {
     "main": "lib-commonjs/index.js",
     "module": "lib/index.js"
