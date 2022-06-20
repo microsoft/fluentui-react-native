@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinFluentColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
+import { StyledPicker } from '../Common/StyledPicker';
 import { Switch, View, Text, ColorValue } from 'react-native';
-import { MenuPicker } from '../Common/MenuPicker';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -46,13 +46,6 @@ const allColors: WithUndefined<PersonaCoinFluentColor>[] = [
 ];
 
 const allPresences: WithUndefined<PersonaPresence>[] = [undefinedText, 'none', 'online', 'offline', 'busy', 'dnd', 'blocked', 'away'];
-
-const StyledPicker = (props) => {
-  const { prompt, selected, onChange, collection } = props;
-  const theme = useTheme();
-  const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-  return <MenuPicker prompt={prompt} style={pickerStyles} selected={selected} onChange={onChange} collection={collection} />;
-};
 
 export const StandardUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);

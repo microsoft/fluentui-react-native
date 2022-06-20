@@ -15,7 +15,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import TestSvg from '../../test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
-import { MenuPicker } from '../Common/MenuPicker';
+import { StyledPicker } from '../Common/StyledPicker';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -58,13 +58,6 @@ export const StandardUsage: FunctionComponent = () => {
   };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-
-  const StyledPicker = (props) => {
-    const { prompt, selected, onChange, collection } = props;
-    const theme = useTheme();
-    const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-    return <MenuPicker prompt={prompt} style={pickerStyles} selected={selected} onChange={onChange} collection={collection} />;
-  };
 
   return (
     <View style={commonStyles.root}>
