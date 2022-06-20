@@ -16,6 +16,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import TestSvg from '../../test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { MenuPicker } from '../Common/MenuPicker';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -25,19 +26,6 @@ const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
 const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
-
-const StyledPicker = (props) => {
-  const { prompt, selected, onChange, collection } = props;
-  const theme = useTheme();
-  const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-  return (
-    <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
-      {collection.map((value, index) => (
-        <Picker.Item label={value} key={index} value={value} />
-      ))}
-    </Picker>
-  );
-};
 
 export const StandardUsage: FunctionComponent = () => {
   const [isSquare, setSquare] = useState(false);
@@ -72,6 +60,57 @@ export const StandardUsage: FunctionComponent = () => {
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
+  const renderMenuPicker = Platform.OS == ('win32' as any) || Platform.OS == 'macos';
+
+  const MenuPickers = () => {
+    return (
+      <View>
+        <MenuPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
+        <MenuPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+        {active === 'active' ? (
+          <MenuPicker
+            prompt="Active appearance"
+            selected={activeAppearance}
+            onChange={onActiveAppearanceChange}
+            collection={avatarActiveAppearance}
+          />
+        ) : null}
+        <MenuPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
+        <MenuPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
+      </View>
+    );
+  };
+
+  const StyledPicker = (props) => {
+    const { prompt, selected, onChange, collection } = props;
+    const theme = useTheme();
+    const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
+    return (
+      <Picker prompt={prompt} style={pickerStyles} selectedValue={selected} onValueChange={onChange}>
+        {collection.map((value, index) => (
+          <Picker.Item label={value} key={index} value={value} />
+        ))}
+      </Picker>
+    );
+  };
+
+  const StyledPickers = () => {
+    <View>
+      <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
+      <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
+      {active === 'active' ? (
+        <StyledPicker
+          prompt="Active appearance"
+          selected={activeAppearance}
+          onChange={onActiveAppearanceChange}
+          collection={avatarActiveAppearance}
+        />
+      ) : null}
+      <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
+      <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
+    </View>;
+  };
+
   return (
     <View style={commonStyles.root}>
       <View style={commonStyles.settings}>
@@ -88,18 +127,7 @@ export const StandardUsage: FunctionComponent = () => {
           <Switch value={outOfOffice} onValueChange={() => setOutOfOffice(!outOfOffice)} />
         </View>
 
-        <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
-        <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
-        {active === 'active' ? (
-          <StyledPicker
-            prompt="Active appearance"
-            selected={activeAppearance}
-            onChange={onActiveAppearanceChange}
-            collection={avatarActiveAppearance}
-          />
-        ) : null}
-        <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
-        <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
+        {renderMenuPicker ? <MenuPickers /> : <StyledPickers />}
       </View>
       <JSAvatar
         accessibilityLabel="Fall-back Icon"
