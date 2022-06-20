@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Notification } from '@fluentui-react-native/Notification';
+import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const PrimaryTest: React.FunctionComponent = () => {
