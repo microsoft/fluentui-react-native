@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 21 Jun 2022 21:07:14 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Jun 2022 21:43:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.90
+
+Tue, 21 Jun 2022 21:43:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.66.1
 
 ## 0.20.89
 
