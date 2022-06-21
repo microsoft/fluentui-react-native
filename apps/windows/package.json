@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.65.2",
+    "@react-native-picker/picker": "^2.2.1",
     "react": "17.0.1",
     "react-native": "^0.64.2",
     "react-native-svg": "^12.3.0",
@@ -89,7 +90,8 @@
   "depcheck": {
     "ignoreMatches": [
       "react-native-test-app",
-      "react-native-windows"
+      "react-native-windows",
+      "@react-native-picker/picker"
     ]
   }
 }
