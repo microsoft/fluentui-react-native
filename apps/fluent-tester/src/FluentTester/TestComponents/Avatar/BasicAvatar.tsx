@@ -4,10 +4,10 @@ import {
   AvatarSizes,
   AvatarColor,
   AvatarColors,
-  JSAvatar,
+  Avatar,
   AvatarActive,
   AvatarActiveAppearance,
-} from '@fluentui-react-native/experimental-avatar';
+} from '@fluentui-react-native/avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
@@ -88,12 +88,12 @@ export const StandardUsage: FunctionComponent = () => {
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-      <JSAvatar
+      <Avatar
         accessibilityLabel="Fall-back Icon"
         accessibilityHint="A picture representing a user"
         size={imageSize === undefinedText ? undefined : imageSize}
       />
-      <JSAvatar
+      <Avatar
         active={active}
         activeAppearance={activeAppearance}
         size={imageSize === undefinedText ? undefined : imageSize}
@@ -104,7 +104,7 @@ export const StandardUsage: FunctionComponent = () => {
         imageUrl={showImage ? satyaPhotoUrl : undefined}
         avatarColor={avatarColor}
       />
-      <JSAvatar
+      <Avatar
         active={active}
         activeAppearance={activeAppearance}
         size={imageSize === undefinedText ? undefined : imageSize}
@@ -116,7 +116,7 @@ export const StandardUsage: FunctionComponent = () => {
       />
       {svgIconsEnabled && (
         <>
-          <JSAvatar
+          <Avatar
             active={active}
             activeAppearance={activeAppearance}
             size={imageSize === undefinedText ? undefined : imageSize}
@@ -126,7 +126,7 @@ export const StandardUsage: FunctionComponent = () => {
             avatarColor={avatarColor}
             badge={{ status: 'outOfOffice', outOfOffice }}
           />
-          <JSAvatar
+          <Avatar
             accessibilityHint="A picture representing a user"
             active={active}
             activeAppearance={activeAppearance}

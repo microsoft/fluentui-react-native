@@ -1,5 +1,5 @@
 import {
-  JSAVATAR_TESTPAGE,
+  AVATAR_TESTPAGE,
   HOMEPAGE_AVATAR_BUTTON,
   AVATAR_TEST_COMPONENT,
   AVATAR_SECONDARY_TEST_COMPONENT,
@@ -38,7 +38,7 @@ class AvatarPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(JSAVATAR_TESTPAGE);
+    return By(AVATAR_TESTPAGE);
   }
 
   get _pageButton() {

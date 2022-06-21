@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 17 Jun 2022 00:27:10 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Jun 2022 21:43:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.4
+
+Tue, 21 Jun 2022 21:43:45 GMT
+
+### Patches
+
+- Some refactoring (ruaraki@microsoft.com)
+
+## 0.15.3
+
+Tue, 21 Jun 2022 18:57:19 GMT
+
+### Patches
+
+- Add tokens to MenuPopover (ruaraki@microsoft.com)
+
+## 0.15.2
+
+Fri, 17 Jun 2022 20:00:18 GMT
+
+### Patches
+
+- Add hoverDelay prop (ruaraki@microsoft.com)
 
 ## 0.15.1
 

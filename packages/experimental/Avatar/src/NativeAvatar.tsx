@@ -3,7 +3,7 @@ import { compose, UseSlots, buildProps, mergeProps, withSlots } from '@fluentui-
 import { ImageURISource, NativeModules, ViewProps, ColorValue } from 'react-native';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 
-const avatarName = 'Avatar';
+const avatarName = 'NativeAvatar';
 
 const NativeAvatarView = ensureNativeComponent('FRNAvatarView');
 
@@ -19,7 +19,7 @@ interface ExportedConstants {
 
 const ExportedNativeConstants: ExportedConstants = NativeModules.FRNAvatarViewManager;
 
-export type AvatarTokens = {
+export type NativeAvatarTokens = {
   /**
    * Supported Avatar sizes
    */
@@ -31,7 +31,7 @@ export type AvatarTokens = {
   avatarStyle?: AvatarStyle;
 };
 
-export type AvatarProps = AvatarTokens & {
+export type NativeAvatarProps = NativeAvatarTokens & {
   /**
    * The image to be displayed
    */
@@ -94,16 +94,16 @@ export type AvatarProps = AvatarTokens & {
   customBorderImageSource?: ImageURISource;
 };
 
-const tokensThatAreAlsoProps: (keyof AvatarTokens)[] = ['size', 'avatarStyle'];
+const tokensThatAreAlsoProps: (keyof NativeAvatarTokens)[] = ['size', 'avatarStyle'];
 
-export type NativeAvatarViewProps = ViewProps & AvatarProps;
+export type NativeAvatarViewProps = ViewProps & NativeAvatarProps;
 interface AvatarType {
-  props: AvatarProps;
+  props: NativeAvatarProps;
   slotProps: { root: NativeAvatarViewProps };
-  tokens: AvatarTokens;
+  tokens: NativeAvatarTokens;
 }
 
-export const Avatar = compose<AvatarType>({
+export const NativeAvatar = compose<AvatarType>({
   displayName: avatarName,
   tokens: [
     {
@@ -115,7 +115,7 @@ export const Avatar = compose<AvatarType>({
   tokensThatAreAlsoProps,
   slots: { root: NativeAvatarView },
   slotProps: {
-    root: buildProps<NativeAvatarViewProps, AvatarTokens>(
+    root: buildProps<NativeAvatarViewProps, NativeAvatarTokens>(
       (tokens) => ({
         size: tokens.size,
         style: {
@@ -126,9 +126,9 @@ export const Avatar = compose<AvatarType>({
       ['size'],
     ),
   },
-  useRender: (props: AvatarProps, useSlots: UseSlots<AvatarType>) => {
+  useRender: (props: NativeAvatarProps, useSlots: UseSlots<AvatarType>) => {
     const Root = useSlots(props).root;
 
-    return (rest: AvatarProps) => <Root {...mergeProps(props, rest)} />;
+    return (rest: NativeAvatarProps) => <Root {...mergeProps(props, rest)} />;
   },
 });

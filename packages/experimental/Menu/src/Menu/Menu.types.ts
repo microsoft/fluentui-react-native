@@ -11,6 +11,11 @@ export interface MenuProps extends MenuListProps {
   defaultOpen?: boolean;
 
   /**
+   * How much delay to have between hover in and showing the menu, in ms.
+   */
+  hoverDelay?: number;
+
+  /**
    * Whether the popup is open
    */
   open?: boolean;
