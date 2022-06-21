@@ -153,6 +153,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -176,7 +178,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
@@ -194,6 +195,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -229,7 +231,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           disabled={true}
           enableFocusRing={true}
           focusable={true}
@@ -248,6 +249,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -371,6 +373,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -394,7 +398,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
@@ -412,6 +415,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -534,6 +538,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -565,7 +571,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -583,6 +588,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -690,7 +696,7 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
+          disabled={true}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -708,6 +714,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -883,6 +890,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -914,7 +923,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -932,6 +940,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1039,7 +1048,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1057,6 +1065,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -1232,6 +1241,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -1263,7 +1274,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1281,6 +1291,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1388,7 +1399,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1406,6 +1416,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -1581,6 +1592,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -1612,7 +1625,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1630,6 +1642,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1725,7 +1738,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1743,6 +1755,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "marginTop": 2,
@@ -1918,6 +1931,8 @@ Array [
     }
   >
     <View
+      accessible={false}
+      focusable={false}
       onMouseEnter={[Function]}
       onMouseLeave={false}
     >
@@ -1941,7 +1956,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 1"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
@@ -1959,6 +1973,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
@@ -1996,7 +2011,6 @@ Array [
             }
           }
           accessible={true}
-          content="Option 2"
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -2017,6 +2031,7 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
