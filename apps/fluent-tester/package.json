@@ -31,11 +31,12 @@
   "dependencies": {
     "@fluentui-react-native/android-theme": ">=0.10.0 <1.0.0",
     "@fluentui-react-native/apple-theme": ">=0.12.3 <1.0.0",
+    "@fluentui-react-native/avatar": "^1.0.0",
     "@fluentui-react-native/badge": ">=0.0.43 <1.0.0",
     "@fluentui-react-native/button": ">=0.22.29 <1.0.0",
     "@fluentui-react-native/default-theme": ">=0.13.0 <1.0.0",
     "@fluentui-react-native/experimental-activity-indicator": ">=0.5.29 <1.0.0",
-    "@fluentui-react-native/avatar": "^1.0.0",
+    "@fluentui-react-native/experimental-avatar": ">=0.14.44 <1.0.0",
     "@fluentui-react-native/experimental-button": "0.15.30",
     "@fluentui-react-native/experimental-checkbox": "0.11.14",
     "@fluentui-react-native/experimental-drawer": ">=0.1.13 <1.0.0",
