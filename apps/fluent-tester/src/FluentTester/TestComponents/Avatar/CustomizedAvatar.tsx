@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { JSAvatar, AvatarSize } from '@fluentui-react-native/experimental-avatar';
+import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
 import { Switch, View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -38,7 +38,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       ringBackgroundColor,
       ringThickness: parseInt(ringThickness),
     };
-    return JSAvatar.customize(tokens);
+    return Avatar.customize(tokens);
   }, [
     avatarColor,
     textColor,
@@ -190,7 +190,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       </View>
       <View style={{ marginLeft: 20 }}>
         <Text>Avatar customized with props</Text>
-        <JSAvatar
+        <Avatar
           active="active"
           activeAppearance="ring"
           avatarColor={avatarColor}

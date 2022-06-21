@@ -1,8 +1,8 @@
 /** @jsx withSlots */
 import { Image, View, Text, Platform } from 'react-native';
 import { Fragment } from 'react';
-import { JSAvatarProps, JSAvatarType, JSAvatarName, JSAvatarState, AvatarSlotProps } from './JSAvatar.types';
-import { stylingSettings } from './JSAvatar.styling';
+import { AvatarProps, AvatarType, AvatarName, AvatarState, AvatarSlotProps } from './Avatar.types';
+import { stylingSettings } from './Avatar.styling';
 import { compose, UseSlots, mergeProps, withSlots, Slots } from '@fluentui-react-native/framework';
 import { useAvatar } from './useAvatar';
 import { PresenceBadge } from '@fluentui-react-native/badge';
@@ -18,7 +18,7 @@ import { SvgIconProps } from '@fluentui-react-native/icon';
  * @param userProps The props that were passed into the avatar
  * @returns Whether the styles that are assigned to the layer should be applied to the avatar
  */
-export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSAvatarProps): boolean => {
+export const avatarLookup = (layer: string, state: AvatarState, userProps: AvatarProps): boolean => {
   const size = userProps.size;
   const avatarSize = size ? `size${size}` : '';
   return (
@@ -32,8 +32,8 @@ export const avatarLookup = (layer: string, state: JSAvatarState, userProps: JSA
   );
 };
 
-export const JSAvatar = compose<JSAvatarType>({
-  displayName: JSAvatarName,
+export const Avatar = compose<AvatarType>({
+  displayName: AvatarName,
   ...stylingSettings,
   slots: {
     root: View,
@@ -44,11 +44,11 @@ export const JSAvatar = compose<JSAvatarType>({
     ring: View,
     badge: PresenceBadge,
   },
-  useRender: (userProps: JSAvatarProps, useSlots: UseSlots<JSAvatarType>) => {
+  useRender: (userProps: AvatarProps, useSlots: UseSlots<AvatarType>) => {
     const avatar = useAvatar(userProps);
     const Slots = useSlots(avatar.props, (layer) => avatarLookup(layer, avatar.state, avatar.props));
 
-    return (final: JSAvatarProps) => {
+    return (final: AvatarProps) => {
       const { showRing, transparentRing, showBadge } = avatar.state;
       const { badge, ...mergedProps } = avatar.props;
       const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
@@ -64,7 +64,7 @@ export const JSAvatar = compose<JSAvatarType>({
   },
 });
 
-function renderAvatar(final: JSAvatarProps, avatarProps: JSAvatarProps, Slots: Slots<AvatarSlotProps>, svgIconsEnabled?: boolean) {
+function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots<AvatarSlotProps>, svgIconsEnabled?: boolean) {
   const { icon, initials, imageUrl } = mergeProps(avatarProps, final);
   return imageUrl ? (
     <Slots.image source={{ uri: imageUrl }} />

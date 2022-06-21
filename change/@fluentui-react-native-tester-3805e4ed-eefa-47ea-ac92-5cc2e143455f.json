@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Renamed Avatar to NativeAvatar, JSAvatar to Avatar",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
