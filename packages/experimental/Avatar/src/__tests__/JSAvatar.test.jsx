@@ -3,23 +3,69 @@ import { JSAvatar } from '..';
 import { getInitials } from '../useAvatar';
 import * as renderer from 'react-test-renderer';
 
-const alphabeticalTestNames = [
-  'Marie',
-  'Aadi KaPoor',
-  'Marie Beaudouin',
-  'Aadi Meni KaPoor',
-  'Aadi Meni Ka Jr',
-  'Will Little (Teams)',
-  'Will Little-Tanaka',
-  '-Aadi Kapoor',
-  'Richard 23 Feynman',
-  '* Richard *',
-  'Richard Feynman [Teams]',
-  'Richard Feynman {Teams}',
+const emptyData = [
+  [undefined, ''],
+  [null, ''],
+  ['', ''],
 ];
-const alphabeticalInitials = ['M', 'AK', 'MB', 'AK', 'AK', 'WL', 'WL', 'AK', 'RF', 'R', 'RF', 'RF'];
-const namesWithTitles = ['Mr Feynman', 'Dr Richard Feynman'];
-const initialsForNameWithTitles = ['F', 'RF'];
+const testData = [
+  ['Marie', 'M'],
+  ['Aadi KaPoor', 'AK'],
+  ['Marie Beaudouin', 'MB'],
+  ['Aadi Meni KaPoor', 'AK'],
+  ['Will Little (Teams)', 'WL'],
+  ['Will Little-Tanaka', 'WL'],
+  ['-Aadi Kapoor', 'AK'],
+  ['Richard 23 Feynman', 'RF'],
+  ['* Richard *', 'R'],
+  ['Richard Feynman [Teams],', 'RF'],
+  ['Richard Feynman {Teams}', 'RF'],
+  ['-Test   str  with *spaces', 'TS'],
+  ['Second, First', 'SF'],
+];
+const namesWithTitles = [
+  ['Mr Feynman', 'F'],
+  ['Dr Richard Feynman', 'RF'],
+  ['Aadi Meni Ka Jr', 'AK'],
+  ['Consul General Richard Faynman', 'RF'],
+  ['Major General Victor', 'V'],
+];
+
+const languageTestData = [
+  ['خسرو رحیمی', 'خ'], // Arabic
+  ['桂英', '桂'], // Chinese
+  ['佳', '佳'],
+  ['宋智洋', '宋'],
+  ['강현', '강'], // Korean
+  ['최종래', '최'],
+  ['남궁 성종', '남'],
+  ['松田', '松'], // Japanese
+  ['海野', '海'],
+  ['かり', 'か'],
+  ['Илон Маск', 'ИМ'], // Cyrillic
+  ['Írissa Þórðardóttir', 'ÍÞ'], // non-ASCII characters
+  ['Øyvind Åsen', 'ØÅ'],
+  ['ثابت بن قره', 'ث'], // Thābit ibn Qurra - result in PCX - ثابت
+  ['שירה לוי', 'של'], // Hebrew - Shira Levi
+];
+
+const phoneNumbersAndDigits = [
+  ['12345678', ''],
+  ['+47 12 34 56 78 (X 5678)', ''],
+  ['47 12 34', ''],
+  ['47 12', ''],
+  ['James Ext 2', 'JE'],
+  ['1', ''],
+  ['A2', 'A'],
+];
+
+const edgeCaseData = [
+  ['4lex 5loo', 'LL'],
+  [' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)    ', 'DG'],
+  ['+1 (555) 123-4567 ext.4567', 'E'],
+  ['1 Ext 2', 'E'],
+  ['1x1', 'X'],
+];
 
 describe('Avatar rendering', () => {
   it('renders Avatar', () => {
@@ -28,102 +74,23 @@ describe('Avatar rendering', () => {
   });
 });
 
-describe('getInitials - names with titles', () => {
-  it('returns initials without title', () => {
-    expect(getInitials('Mr Faynman')).toBe('F');
-  });
-  it('returns initials for names with multi-word titles', () => {
-    expect(getInitials('Consul General Richard Faynman')).toBe('RF');
-    expect(getInitials('Major General Victor')).toBe('V');
-  });
-});
-
-describe('getInitials method - language support', () => {
-  it('returns correct initials cyrillic language', () => {
-    const test = getInitials('Илон Маск');
-    expect(test).toBe('ИМ');
-  });
-  it('calculates correct initials for non-ASCII characters', () => {
-    const test = getInitials('Írissa Þórðardóttir');
-    expect(test).toBe('ÍÞ');
-  });
-  it('returns correct initials for non-ASCII characters', () => {
-    const test = getInitials('Øyvind Åsen');
-    expect(test).toBe('ØÅ');
-  });
-});
-
 describe('getInitials method', () => {
-  it('returns correct initials', () => {
-    const test = getInitials('-Test   str  with *spaces');
-    expect(test).toBe('TS');
+  it.each(emptyData)("returns an empty string for '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
   });
-  it('returns an empty string if name is undefined', () => {
-    expect(getInitials(undefined)).toBe('');
+  it.each(testData)("render correct initials for input '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
   });
-  it('return initials for alphabetical words', () => {
-    for (let i = 0; i < alphabeticalTestNames.length; i++) {
-      expect(getInitials(alphabeticalTestNames[i])).toBe(alphabeticalInitials[i]);
-    }
+  it.each(namesWithTitles)("render initials for names with titles: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
   });
-  it('return initials for words with titles', () => {
-    for (let i = 0; i < namesWithTitles.length; i++) {
-      expect(getInitials(namesWithTitles[i])).toBe(initialsForNameWithTitles[i]);
-    }
+  it.each(languageTestData)("render initials for different languages: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
   });
-  it("returns initials when there's a coma", () => {
-    expect(getInitials('Second, First')).toEqual('SF');
+  it.each(phoneNumbersAndDigits)("returns an empty string for phone numbers: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
   });
-  // Unit tests from Web
-  it('handles null inputs', () => {
-    expect(getInitials(null)).toEqual('');
-    expect(getInitials(undefined)).toEqual('');
-  });
-  it('calculates an expected initials in LTR with a hypen', () => {
-    expect(getInitials('David Zearing-Goff')).toEqual('DZ');
-  });
-  it('calculates an expected initials in LTR with numbers', () => {
-    expect(getInitials('4lex 5loo')).toEqual('LL');
-  });
-  it('calculates an expected initials in LTR with multiple parentheses, extra spaces, and unwanted characters', () => {
-    const result = getInitials(' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)    ');
-    expect(result).toEqual('DG');
-  });
-  it('calculates an expected initials in LTR with multiple types of unwanted text', () => {
-    const result = getInitials(" !@#$%^&*()=+ (Alpha) /David   (The man) `~<>,./?[]{}|   'Goff   (Gamma)  [Beta]  ");
-    expect(result).toEqual('DG');
-  });
-  it('calculates an expected initials for Arabic names', () => {
-    expect(getInitials('خسرو رحیمی')).toEqual('خ');
-  });
-  it('calculates an expected initials for Chinese names', () => {
-    expect(getInitials('桂英')).toEqual('桂');
-    expect(getInitials('佳')).toEqual('佳');
-    expect(getInitials('宋智洋')).toEqual('宋');
-  });
-  it('calculates an expected initials for Korean names', () => {
-    expect(getInitials('강현')).toEqual('강');
-    expect(getInitials('최종래')).toEqual('최');
-    expect(getInitials('남궁 성종')).toEqual('남');
-  });
-  it('calculates an expected initials for Japanese names', () => {
-    expect(getInitials('松田')).toEqual('松');
-    expect(getInitials('海野')).toEqual('海');
-    expect(getInitials('かり')).toEqual('か');
-  });
-  it('validates phone numbers', () => {
-    expect(getInitials('12345678')).toEqual('');
-    // expect(getInitials('+1 (555) 123-4567 ext.4567')).toEqual('');
-    expect(getInitials('+47 12 34 56 78 (X 5678)')).toEqual('');
-    expect(getInitials('47 12 34')).toEqual('');
-    expect(getInitials('47 12')).toEqual('');
-
-    expect(getInitials('James Ext 2')).toEqual('JE');
-    // expect(getInitials('1 Ext 2')).toEqual('');
-    // expect(getInitials('1x1')).toEqual('');
-    result = getInitials('1');
-    expect(result).toEqual('');
-    result = getInitials('A 2');
-    expect(result).toEqual('A');
+  it.each(edgeCaseData)("render initials for edge cases: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
   });
 });

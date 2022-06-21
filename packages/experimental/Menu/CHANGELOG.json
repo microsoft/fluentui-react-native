@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 21 Jun 2022 18:57:19 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.3",
+      "version": "0.15.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "842bfbf392c70c12da4774d2c4295d442fe8fd02",
+            "comment": "Add tokens to MenuPopover"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 17 Jun 2022 20:00:18 GMT",
       "tag": "@fluentui-react-native/menu_v0.15.2",
       "version": "0.15.2",
