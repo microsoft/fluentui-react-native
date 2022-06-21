@@ -1,13 +1,10 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { JSAvatarTokens } from '.';
+import { AvatarTokens } from '.';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: Theme) =>
+export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
-    badgeSize: 'smallest',
-    horizontalIconAlignment: 'end',
-    verticalIconAlignment: 'end',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground6,
     avatarOpacity: 1,
@@ -19,7 +16,7 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     iconColor: t.colors.neutralForeground3,
     ringColor: t.colors.transparentStroke,
     borderColor: globalTokens.color.white,
-    borderWidth: t.name === 'HighContrast' ? 1 : 0,
+    borderWidth: t.host.appearance === 'highContrast' ? 1 : 0,
     circular: {
       borderRadius: globalTokens.corner.radius.circle,
     },
@@ -167,7 +164,7 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     burgundy: getColorProps('burgundy', t),
     hotPink: getColorProps('hotPink', t),
     orchid: getColorProps('orchid', t),
-  } as JSAvatarTokens);
+  } as AvatarTokens);
 
 /**
  * A function which returns object of props depending on color and theme.
@@ -176,10 +173,9 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
  * @returns object of props - backgroundColor, color and ringColor
  */
 function getColorProps(color: string, theme: Theme) {
-  const themeAppearance = theme.name;
+  const themeAppearance = theme.host.appearance;
   switch (themeAppearance) {
-    case 'White':
-    case 'Colorful':
+    case 'light':
     default:
       return {
         backgroundColor: globalTokens.color[color].tint40,
@@ -187,15 +183,14 @@ function getColorProps(color: string, theme: Theme) {
         iconColor: globalTokens.color[color].shade30,
         ringColor: globalTokens.color[color].primary,
       };
-    case 'DarkGray':
-    case 'Black':
+    case 'dark':
       return {
         backgroundColor: globalTokens.color[color].shade30,
         color: globalTokens.color[color].tint40,
         iconColor: globalTokens.color[color].tint40,
         ringColor: globalTokens.color[color].tint30,
       };
-    case 'HighContrast':
+    case 'highContrast':
       return {
         backgroundColor: theme.colors.neutralBackground6,
         color: theme.colors.neutralForeground3,

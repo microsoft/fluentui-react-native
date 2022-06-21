@@ -1,56 +1,63 @@
 import React, { useState, useMemo } from 'react';
-import { JSAvatar, IconAlignment, AvatarSize } from '@fluentui-react-native/experimental-avatar';
-import { Switch, View, Text, TextInput } from 'react-native';
+import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
+import { Switch, View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
-import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { FontWeight } from '@fluentui-react-native/theme-types';
+import { SvgIconProps } from '@fluentui-react-native/icon';
+import TestSvg from '../../test-data/test.svg';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
-  const [coinColor, setCoinColor] = useState<string>();
+  const [showInitials, setShowInitials] = useState(true);
+  const [avatarColor, setAvatarColor] = useState<string>();
   const [textColor, setTextColor] = useState<string>();
   const [size, setSize] = useState<string>('96');
   const [iconSize, setIconSize] = useState<number>(24);
+  const [iconColor, setIconColor] = useState<string>(undefined);
   const [initialsSize, setInitialsSize] = useState<number>(16);
   const [fontWeight, setFontWeight] = useState<string>('normal');
   const [fontFamily, setFontFamily] = useState<string>('Georgia');
-  const [horizontalAlignment, setHorizontalAlignment] = useState<IconAlignment>();
-  const [verticalAlignment, setVerticalAlignment] = useState<IconAlignment>();
 
-  const [ringColor, setRingColor] = useState<string>('red');
-  const [ringBackgroundColor, setRingBackgroundColor] = useState<string>(undefined);
+  const [ringColor, setRingColor] = useState<string>(undefined);
+  const [ringBackgroundColor, setRingBackgroundColor] = useState<string>('yellow');
+  const [ringThickness, setRingThickness] = useState<string>('4');
   const [showRing, setShowRing] = useState<boolean>(true);
-  const [transparent, setTransparent] = useState<boolean>(false);
 
   const CustomizedAvatar = useMemo(() => {
     const tokens = {
-      backgroundColor: coinColor,
+      avatarColor,
       color: textColor,
-      horizontalIconAlignment: horizontalAlignment,
-      verticalIconAlignment: verticalAlignment,
+      size: parseInt(size) as AvatarSize,
       iconSize: iconSize,
+      iconColor,
       fontSize: initialsSize,
       fontWeight: fontWeight as FontWeight,
       fontFamily,
-      size: parseInt(size) as AvatarSize,
       ringColor,
       ringBackgroundColor,
+      ringThickness: parseInt(ringThickness),
     };
-    return JSAvatar.customize(tokens);
+    return Avatar.customize(tokens);
   }, [
-    coinColor,
+    avatarColor,
     textColor,
-    horizontalAlignment,
-    verticalAlignment,
+    iconColor,
     iconSize,
     initialsSize,
     size,
     ringColor,
     ringBackgroundColor,
+    ringThickness,
     fontWeight,
     fontFamily,
   ]);
+
+  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
 
   return (
     <View style={commonStyles.root}>
@@ -59,34 +66,24 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           <Text>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
+        <View style={commonStyles.switch}>
+          <Text>Show initials</Text>
+          <Switch value={showInitials} onValueChange={setShowInitials} />
+        </View>
 
         <View style={commonStyles.switch}>
           <Text>Show rings</Text>
           <Switch value={showRing} onValueChange={setShowRing} />
         </View>
-
-        <View style={commonStyles.switch}>
-          <Text>Transparent Ring</Text>
-          <Switch value={transparent} onValueChange={setTransparent} />
-        </View>
-
         <View style={{ flexDirection: 'row' }}>
           <View>
+            <Text style={{ fontWeight: 'bold' }}>Avatar tokens</Text>
             <TextInput
               style={[commonStyles.textBox]}
               placeholder="Background color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
-                setCoinColor(e.nativeEvent.text);
-              }}
-            />
-
-            <TextInput
-              style={[commonStyles.textBox]}
-              placeholder="Ring color"
-              blurOnSubmit={true}
-              onSubmitEditing={(e) => {
-                setRingColor(e.nativeEvent.text);
+                setAvatarColor(e.nativeEvent.text);
               }}
             />
 
@@ -107,13 +104,37 @@ export const CustomizeUsage: React.FunctionComponent = () => {
                 setIconSize(parseInt(e.nativeEvent.text));
               }}
             />
-
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Icon color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setIconColor(e.nativeEvent.text);
+              }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>Ring tokens</Text>
             <TextInput
               style={[commonStyles.textBox]}
               placeholder="Ring background color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
                 setRingBackgroundColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring thickness"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingThickness(e.nativeEvent.text);
               }}
             />
           </View>
@@ -153,30 +174,35 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             />
           </View>
         </View>
-
-        <Text>These features will be available later</Text>
-        <AlignmentPicker style={commonStyles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
-        <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
       </View>
-
-      <CustomizedAvatar
-        active="active"
-        activeAppearance="ring"
-        avatarColor="colorful"
-        initials="SB"
-        accessibilityLabel="Former CEO of Microsoft"
-        badge={{ status: 'blocked' }}
-        imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
-        ring={
-          showRing
-            ? {
-                ringThickness: 4,
-                innerGap: 4,
-                transparent,
-              }
-            : undefined
-        }
-      />
+      <View>
+        <Text>Customized Avatar</Text>
+        <CustomizedAvatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={avatarColor}
+          accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? 'SB' : undefined}
+          imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          icon={svgIconsEnabled ? { svgSource: svgProps } : undefined}
+          transparentRing={!showRing}
+        />
+      </View>
+      <View style={{ marginLeft: 20 }}>
+        <Text>Avatar customized with props</Text>
+        <Avatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={avatarColor}
+          accessibilityLabel="Former CEO of Microsoft"
+          imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          ringBackgroundColor={ringBackgroundColor}
+          ringColor={ringColor}
+          ringThickness={parseInt(ringThickness)}
+          size={parseInt(size) as AvatarSize}
+          transparentRing={!showRing}
+        />
+      </View>
     </View>
   );
 };

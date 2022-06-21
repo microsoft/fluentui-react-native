@@ -1,7 +1,8 @@
-import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
+import { AvatarProps, AvatarInfo, AvatarState, AvatarColors } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -9,7 +10,7 @@ import { getHashCodeWeb } from './getHashCode';
  * @param props user props sent to FURN Avatar
  * @returns configured props and state for FURN Avatar
  */
-export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
+export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const {
     avatarColor,
     active,
@@ -20,13 +21,13 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
     idForColor,
     initials,
     name,
-    ring,
     shape,
+    transparentRing,
+    icon,
     ...rest
   } = props;
 
   const showRing = active === 'active' && activeAppearance === 'ring';
-  const transparentRing = !!ring?.transparent;
   const showBadge = (!active || active === 'unset') && !!badge && !!badge.status;
   const accessibilityText = `${name || ''}${showBadge ? `, ${badge.status}` : ''}`;
 
@@ -35,15 +36,17 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
     ...badge,
   };
 
-  const state: JSAvatarState = {
+  const state: AvatarState = {
     showRing,
-    transparentRing,
+    transparentRing: !!transparentRing,
     showBadge,
   };
 
   const _initials = initials || getInitials(name);
   const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
   const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
+
+  const iconProps = createIconProps(icon);
 
   return {
     props: {
@@ -57,6 +60,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
       activeAppearance,
       badge: badgeProps,
       initials: _initials,
+      icon: iconProps,
     },
     state: {
       ...state,

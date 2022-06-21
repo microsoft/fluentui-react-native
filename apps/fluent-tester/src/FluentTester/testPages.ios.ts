@@ -1,5 +1,5 @@
 import { TestDescription } from './TestComponents';
-import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { AvatarTest, NativeAvatarTest, HOMEPAGE_AVATAR_BUTTON, HOMEPAGE_NATIVE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
@@ -31,6 +31,11 @@ export const tests: TestDescription[] = [
     name: 'Avatar Test',
     component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
+  {
+    name: 'NativeAvatar Test',
+    component: NativeAvatarTest,
+    testPage: HOMEPAGE_NATIVE_AVATAR_BUTTON,
   },
   {
     name: 'Badge Test',
