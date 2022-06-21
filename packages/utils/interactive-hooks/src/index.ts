@@ -1,4 +1,4 @@
-export { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent } from './events.types';
+export { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent, isMouseEvent } from './events.types';
 export type { InteractionEvent } from './events.types';
 export type {
   IFocusState,
