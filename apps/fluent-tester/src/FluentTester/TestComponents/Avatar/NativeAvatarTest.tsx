@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NativeAvatar, Size } from '@fluentui-react-native/experimental-avatar/';
+import { NativeAvatar, Size } from '@fluentui-react-native/avatar/';
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { NATIVE_AVATAR_TESTPAGE } from './consts';

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Avatar, AvatarSize } from '@fluentui-react-native/experimental-avatar';
+import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
 import { Switch, View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';

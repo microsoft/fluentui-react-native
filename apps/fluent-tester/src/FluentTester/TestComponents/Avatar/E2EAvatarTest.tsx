@@ -1,4 +1,4 @@
-import { Avatar } from '@fluentui-react-native/experimental-avatar';
+import { Avatar } from '@fluentui-react-native/avatar';
 import * as React from 'react';
 import { View } from 'react-native';
 import {
