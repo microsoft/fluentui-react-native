@@ -58,6 +58,7 @@
     "@react-native-community/cli": "^5.0.1",
     "@react-native-community/cli-platform-ios": "^5.0.2",
     "es5-ext": "0.10.53",
+    "jpeg-js": "^0.4.4",
     "metro": "^0.66.2",
     "metro-babel-register": "^0.66.2",
     "metro-babel-transformer": "^0.66.2",
