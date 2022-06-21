@@ -1,4 +1,4 @@
-import { JSAvatarProps, AvatarInfo, JSAvatarState, AvatarColors } from './JSAvatar.types';
+import { AvatarProps, AvatarInfo, AvatarState, AvatarColors } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
@@ -10,7 +10,7 @@ import { createIconProps } from '@fluentui-react-native/interactive-hooks';
  * @param props user props sent to FURN Avatar
  * @returns configured props and state for FURN Avatar
  */
-export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
+export const useAvatar = (props: AvatarProps): AvatarInfo => {
   const {
     avatarColor,
     active,
@@ -36,7 +36,7 @@ export const useAvatar = (props: JSAvatarProps): AvatarInfo => {
     ...badge,
   };
 
-  const state: JSAvatarState = {
+  const state: AvatarState = {
     showRing,
     transparentRing: !!transparentRing,
     showBadge,

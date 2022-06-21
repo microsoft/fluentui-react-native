@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 21 Jun 2022 20:05:26 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Jun 2022 21:43:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.66.1
+
+Tue, 21 Jun 2022 21:43:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.15.4
+
+## 0.66.0
+
+Tue, 21 Jun 2022 21:07:14 GMT
+
+### Minor changes
+
+- Renamed Avatar to NativeAvatar, JSAvatar to Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.0
+- Bump @fluentui-react-native/experimental-avatar to v0.15.0
 
 ## 0.65.5
 

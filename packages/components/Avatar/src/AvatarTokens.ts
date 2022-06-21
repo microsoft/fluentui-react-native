@@ -1,9 +1,9 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { JSAvatarTokens } from '.';
+import { AvatarTokens } from '.';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: Theme) =>
+export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground6,
@@ -164,7 +164,7 @@ export const defaultJSAvatarTokens: TokenSettings<JSAvatarTokens, Theme> = (t: T
     burgundy: getColorProps('burgundy', t),
     hotPink: getColorProps('hotPink', t),
     orchid: getColorProps('orchid', t),
-  } as JSAvatarTokens);
+  } as AvatarTokens);
 
 /**
  * A function which returns object of props depending on color and theme.

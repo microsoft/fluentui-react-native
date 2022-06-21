@@ -6,7 +6,7 @@ The Avatar component represents a person or entity. It displays the person's ima
 Previously it was a component PersonaCoin which used an old version of framework. There are more details in MIGRATION.md.
 
 ```ts
-import { JSAvatar } from '@fluentui-react-native/experimental-avatar';
+import { Avatar } from '@fluentui-react-native/avatar';
 ```
 
 ## Sample Code
@@ -14,10 +14,10 @@ import { JSAvatar } from '@fluentui-react-native/experimental-avatar';
 Basic examples:
 
 ```jsx
-  <JSAvatar />
-  <JSAvatar icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} size={120} />
-  <JSAvatar src="../../path-to-image.png" active="active" activeAppearance="ring" size={56} />
-  <JSAvatar shape="square" avatarColor="purple" name="Richard Feynman" />
+  <Avatar />
+  <Avatar icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} size={120} />
+  <Avatar src="../../path-to-image.png" active="active" activeAppearance="ring" size={56} />
+  <Avatar shape="square" avatarColor="purple" name="Richard Feynman" />
 ```
 
 More examples on the [Test pages for the Avatar](../../../apps/fluent-tester/src/FluentTester/TestComponents/Avatar). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
@@ -103,7 +103,7 @@ The slots can be modified using the `compose` function on the `Avatar`. For more
 ### Props
 
 ```ts
-export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
+export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
   /**
    * Activity indicator
    * * active: the avatar will be decorated according to activeAppearance
@@ -183,7 +183,7 @@ export interface JSAvatarProps extends IViewProps, AvatarConfigurableProps {
 Tokens can be used to customize the styling of the control by using the `customize` function on the `Avatar`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Avatar` has the following tokens:
 
 ```ts
-export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
+export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTokens, AvatarConfigurableProps, IBorderTokens, FontTokens {
   /**
    * Avatar opacity which is changed depending on `active` prop.
    */
@@ -207,65 +207,65 @@ export interface JSAvatarTokens extends IBackgroundColorTokens, IForegroundColor
   /**
    * Avatar shapes:
    */
-  circular?: JSAvatarTokens;
-  square?: JSAvatarTokens;
+  circular?: AvatarTokens;
+  square?: AvatarTokens;
 
   /**
    * Token for inactive value of `active` prop
    */
-  inactive?: JSAvatarTokens;
+  inactive?: AvatarTokens;
 
   /**
    * Avatar sizes:
    */
-  size20?: JSAvatarTokens;
-  size24?: JSAvatarTokens;
-  size28?: JSAvatarTokens;
-  size32?: JSAvatarTokens;
-  size36?: JSAvatarTokens;
-  size40?: JSAvatarTokens;
-  size48?: JSAvatarTokens;
-  size56?: JSAvatarTokens;
-  size64?: JSAvatarTokens;
-  size72?: JSAvatarTokens;
-  size96?: JSAvatarTokens;
-  size120?: JSAvatarTokens;
+  size20?: AvatarTokens;
+  size24?: AvatarTokens;
+  size28?: AvatarTokens;
+  size32?: AvatarTokens;
+  size36?: AvatarTokens;
+  size40?: AvatarTokens;
+  size48?: AvatarTokens;
+  size56?: AvatarTokens;
+  size64?: AvatarTokens;
+  size72?: AvatarTokens;
+  size96?: AvatarTokens;
+  size120?: AvatarTokens;
 
   /**
    * Avatar colors:
    */
-  neutral?: JSAvatarTokens;
-  brand?: JSAvatarTokens;
-  darkRed?: JSAvatarTokens;
-  cranberry?: JSAvatarTokens;
-  red?: JSAvatarTokens;
-  pumpkin?: JSAvatarTokens;
-  peach?: JSAvatarTokens;
-  marigold?: JSAvatarTokens;
-  gold?: JSAvatarTokens;
-  brass?: JSAvatarTokens;
-  brown?: JSAvatarTokens;
-  forest?: JSAvatarTokens;
-  seafoam?: JSAvatarTokens;
-  darkGreen?: JSAvatarTokens;
-  lightTeal?: JSAvatarTokens;
-  teal?: JSAvatarTokens;
-  steel?: JSAvatarTokens;
-  blue?: JSAvatarTokens;
-  royalBlue?: JSAvatarTokens;
-  cornflower?: JSAvatarTokens;
-  navy?: JSAvatarTokens;
-  lavender?: JSAvatarTokens;
-  purple?: JSAvatarTokens;
-  grape?: JSAvatarTokens;
-  lilac?: JSAvatarTokens;
-  pink?: JSAvatarTokens;
-  magenta?: JSAvatarTokens;
-  plum?: JSAvatarTokens;
-  beige?: JSAvatarTokens;
-  mink?: JSAvatarTokens;
-  platinum?: JSAvatarTokens;
-  anchor?: JSAvatarTokens;
+  neutral?: AvatarTokens;
+  brand?: AvatarTokens;
+  darkRed?: AvatarTokens;
+  cranberry?: AvatarTokens;
+  red?: AvatarTokens;
+  pumpkin?: AvatarTokens;
+  peach?: AvatarTokens;
+  marigold?: AvatarTokens;
+  gold?: AvatarTokens;
+  brass?: AvatarTokens;
+  brown?: AvatarTokens;
+  forest?: AvatarTokens;
+  seafoam?: AvatarTokens;
+  darkGreen?: AvatarTokens;
+  lightTeal?: AvatarTokens;
+  teal?: AvatarTokens;
+  steel?: AvatarTokens;
+  blue?: AvatarTokens;
+  royalBlue?: AvatarTokens;
+  cornflower?: AvatarTokens;
+  navy?: AvatarTokens;
+  lavender?: AvatarTokens;
+  purple?: AvatarTokens;
+  grape?: AvatarTokens;
+  lilac?: AvatarTokens;
+  pink?: AvatarTokens;
+  magenta?: AvatarTokens;
+  plum?: AvatarTokens;
+  beige?: AvatarTokens;
+  mink?: AvatarTokens;
+  platinum?: AvatarTokens;
+  anchor?: AvatarTokens;
 }
 ```
 

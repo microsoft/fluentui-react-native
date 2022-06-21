@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 21 Jun 2022 21:43:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.66.1",
+      "version": "0.66.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.4",
+            "commit": "b63cb286a24e78999adee82781f58d2610b3b776"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.66.0",
+      "version": "0.66.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "Renamed Avatar to NativeAvatar, JSAvatar to Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.0",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.15.0",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Jun 2022 20:05:26 GMT",
       "tag": "@fluentui-react-native/tester_v0.65.5",
       "version": "0.65.5",
