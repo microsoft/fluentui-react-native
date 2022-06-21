@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Fix jest",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
