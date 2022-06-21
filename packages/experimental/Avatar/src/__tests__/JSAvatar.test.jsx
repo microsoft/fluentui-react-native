@@ -57,14 +57,14 @@ const phoneNumbersAndDigits = [
   ['James Ext 2', 'JE'],
   ['1', ''],
   ['A2', 'A'],
-  ['+1 (555) 123-4567 ext.4567', 'E'],
-  ['1 Ext 2', 'E'],
-  ['1x1', 'X'],
 ];
 
 const edgeCaseData = [
   ['4lex 5loo', 'LL'],
   [' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)    ', 'DG'],
+  ['+1 (555) 123-4567 ext.4567', 'E'],
+  ['1 Ext 2', 'E'],
+  ['1x1', 'X'],
 ];
 
 describe('Avatar rendering', () => {
@@ -75,10 +75,22 @@ describe('Avatar rendering', () => {
 });
 
 describe('getInitials method', () => {
-  it.each([...emptyData, ...testData, ...namesWithTitles, ...languageTestData, ...phoneNumbersAndDigits, ...edgeCaseData])(
-    "render correct initials for input '%s'",
-    (text, expected) => {
-      expect(getInitials(text)).toBe(expected);
-    },
-  );
+  it.each(emptyData)("returns an empty string for '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
+  it.each(testData)("render correct initials for input '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
+  it.each(namesWithTitles)("render initials for names with titles: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
+  it.each(languageTestData)("render initials for different languages: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
+  it.each(phoneNumbersAndDigits)("returns an empty string for phone numbers: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
+  it.each(edgeCaseData)("render initials for edge cases: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
 });
