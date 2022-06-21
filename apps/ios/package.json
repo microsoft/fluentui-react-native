@@ -74,7 +74,8 @@
     "ignoreMatches": [
       "react-native-test-app",
       "react-native-svg",
-      "@react-native-community/slider"
+      "@react-native-community/slider",
+      "@react-native-picker/picker"
     ]
   }
 }
