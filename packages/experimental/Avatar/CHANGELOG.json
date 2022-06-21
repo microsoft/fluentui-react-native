@@ -1,0 +1,2514 @@
+{
+  "name": "@fluentui-react-native/experimental-avatar",
+  "entries": [
+    {
+      "date": "Thu, 16 Jun 2022 19:11:01 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.44",
+      "version": "0.14.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "531fc8d94b1452887b43073ea629838a72f0a7f5",
+            "comment": "Added ring configuration"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.43",
+      "version": "0.14.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "3080fa33cf5408c754ed55811456bed58536bf2c",
+            "comment": "Fixed error on Mac and Windows in getINitials method"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7",
+            "comment": "apple: remove unneccesary build settings from podspec"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 09:39:38 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.42",
+      "version": "0.14.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.43",
+            "commit": "3080fa33cf5408c754ed55811456bed58536bf2c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 07:59:57 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.41",
+      "version": "0.14.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "f6e0fc83a7c93fc80dc89849d3d518ce6a94dc84",
+            "comment": "Added a new example to Tester"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.42",
+            "commit": "f6e0fc83a7c93fc80dc89849d3d518ce6a94dc84"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Jun 2022 23:58:18 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.40",
+      "version": "0.14.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.41",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.3",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 Jun 2022 21:52:34 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.39",
+      "version": "0.14.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "b4b3b769fb664df2d3c3ff64670439bae57b2817",
+            "comment": "Added missing colors from PersonaCoin, exposed colors as props"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 19:20:10 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.38",
+      "version": "0.14.38",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92",
+            "comment": "Fixed accessibility bug"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.40",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.12.1",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.2",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 18:30:37 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.37",
+      "version": "0.14.37",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "21bc6e21158561bf2654a5fb1d532db3f45264a8",
+            "comment": "Added Avatar migration and added image prop"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 08:34:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.36",
+      "version": "0.14.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "17e31c4ec04628cb14f7cf58246b1d9ce5399863",
+            "comment": "Fixed SVG icon size and color for the Avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 02 Jun 2022 09:23:22 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.35",
+      "version": "0.14.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "246105f999eb8e2592029e4ed34291ffec603c60",
+            "comment": "Added font customization, fixed neutral, colorful and brand colors"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 21:22:22 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.34",
+      "version": "0.14.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.39",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.12.0",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.1",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 00:33:11 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.33",
+      "version": "0.14.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.38",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.0",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:08 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.32",
+      "version": "0.14.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.37",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.30",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.25",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.10",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.18.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.14.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 21 May 2022 17:39:28 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.31",
+      "version": "0.14.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "402f3b57a1ed394acde8d43a83699cadd76502c4",
+            "comment": "Fixed size customization"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.30",
+      "version": "0.14.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35",
+            "comment": "Added documentation for the Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.36",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.28",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.23",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.8",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.2",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 21 May 2022 01:47:58 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.29",
+      "version": "0.14.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.35",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.27",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.22",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.7",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.16.3",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.1",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 19 May 2022 20:09:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.28",
+      "version": "0.14.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "afc5faf340ee104daf976801ce76962637fe0a61",
+            "comment": "Added color generator depending on theme"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.34",
+            "commit": "afc5faf340ee104daf976801ce76962637fe0a61"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 May 2022 16:41:49 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.27",
+      "version": "0.14.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "eac718d8d0ba53e731489a66f412a2f19eccc8b5",
+            "comment": "Added getInitials method and tests for that"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 May 2022 18:33:23 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.26",
+      "version": "0.14.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "4e9f60254753ef5f7d297b197b10f35e638308cf",
+            "comment": "Added font and color tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 May 2022 17:20:22 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.25",
+      "version": "0.14.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "0f5452155b6b43062ca60262cf256fbd67538c1f",
+            "comment": "Changed badge appearance according to the spec, changed sizes to align with Web"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 05 May 2022 19:08:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.24",
+      "version": "0.14.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "0b1077c4ac2440f81483d796a72e8be15bc5c577",
+            "comment": "Added svgEnabled check to the Avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 May 2022 21:06:04 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.23",
+      "version": "0.14.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.33",
+            "commit": "d503e2af4e84ba5c8c1c40ea3698fcbd1691dda6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.21",
+            "commit": "d503e2af4e84ba5c8c1c40ea3698fcbd1691dda6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.6",
+            "commit": "d503e2af4e84ba5c8c1c40ea3698fcbd1691dda6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.26",
+            "commit": "d503e2af4e84ba5c8c1c40ea3698fcbd1691dda6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.0",
+            "commit": "d503e2af4e84ba5c8c1c40ea3698fcbd1691dda6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 May 2022 09:56:42 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.22",
+      "version": "0.14.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "e234b88cdff692b01168fd190678f297f5d79c89",
+            "comment": "Changed colors for the Avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 02 May 2022 22:14:40 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.21",
+      "version": "0.14.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "7f2a2366130cbed420d6c81846f0c06b40b8c948",
+            "comment": "Fix avatar dependency"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 30 Apr 2022 06:33:42 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.20",
+      "version": "0.14.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "mischreiber@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c9c1e71e25fac45d2266ee2bea387dfa0d05598b",
+            "comment": "Move to official 0.5.0 release"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.20",
+            "commit": "c9c1e71e25fac45d2266ee2bea387dfa0d05598b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.5",
+            "commit": "c9c1e71e25fac45d2266ee2bea387dfa0d05598b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 29 Apr 2022 21:54:17 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.19",
+      "version": "0.14.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "aa5abb9b11a1e8c07b7c3b2d67d010543af60d4a",
+            "comment": "Added sizes to the Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.32",
+            "commit": "aa5abb9b11a1e8c07b7c3b2d67d010543af60d4a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.11.20",
+            "commit": "aa5abb9b11a1e8c07b7c3b2d67d010543af60d4a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.15.5",
+            "commit": "aa5abb9b11a1e8c07b7c3b2d67d010543af60d4a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 28 Apr 2022 19:09:51 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.18",
+      "version": "0.14.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.31",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.25",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.11",
+            "commit": "8cff404ca31eaa61017551a1d73fd3fdae7da132"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 27 Apr 2022 19:30:38 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.17",
+      "version": "0.14.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.30",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.24",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.16.2",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.10",
+            "commit": "f3481f50e20c6ab33f7f3ffca63e9f1e424fe2c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Apr 2022 20:45:13 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.16",
+      "version": "0.14.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c",
+            "comment": "Changed props according to the spec"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.29",
+            "commit": "37bcceffcf2ca8af5d745815da4ba6a4da9ef72c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 21 Apr 2022 21:50:03 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.15",
+      "version": "0.14.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.28",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.23",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.16.1",
+            "commit": "9d96c6b126ce5293d5315054216af4bd3a447fbe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Apr 2022 10:53:38 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.14",
+      "version": "0.14.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c6d615f926aaca616737ab0382ebde9109a5556f",
+            "comment": "Replaced presence prop from PersonaCoin with the new PresenceBadge"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.27",
+            "commit": "c6d615f926aaca616737ab0382ebde9109a5556f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Apr 2022 16:54:55 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.13",
+      "version": "0.14.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.22",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.16.0",
+            "commit": "cf5789633ef5230512cb21ab923cc9f71bfed4c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 06 Apr 2022 22:58:22 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.12",
+      "version": "0.14.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.21",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.15.0",
+            "commit": "bcd4ac6dc74295095a0564905024ef32d6450cff"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 05 Apr 2022 20:05:50 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.11",
+      "version": "0.14.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.20",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.14.0",
+            "commit": "c183b7eb02925bf1d1284ad1b3c80c0f2e0c442f"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 31 Mar 2022 07:27:48 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.10",
+      "version": "0.14.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.5",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.3.2",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.19",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.13.2",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.9",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.3",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 23 Mar 2022 17:24:05 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.9",
+      "version": "0.14.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.18",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.13.1",
+            "commit": "0a18d2f8bb6505c6c6e2445ff3ba62ac79334872"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Mar 2022 19:15:33 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.8",
+      "version": "0.14.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.4",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.17",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.8",
+            "commit": "d437b204aa63de4c9d4dd2f58ccf541c388ddaee"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Mar 2022 23:43:09 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.7",
+      "version": "0.14.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2",
+            "comment": "Bump @rnx-kit/eslint-plugin from 0.2.10 to 0.2.11"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.16",
+            "commit": "051e390caabfc13c4e53f9812f0ec7c5b56094a2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 03 Mar 2022 20:20:09 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.6",
+      "version": "0.14.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.15",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.13.0",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.7",
+            "commit": "54222b74c7d5f16d1108fab470a6f549de8e9b45"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Feb 2022 23:27:11 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.3",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.14",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.6",
+            "commit": "597b1e6bd7b3791df8fad2e0ec83810872261c54"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Feb 2022 01:22:02 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.4",
+      "version": "0.14.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.13",
+            "commit": "039a993d13ae01ff2212e8b91295d1ed5676c82d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Feb 2022 02:29:07 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.3",
+      "version": "0.14.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.12",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.12.0",
+            "commit": "c42dec6d24b24ded9a85dd11076e49d9b92980aa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jan 2022 21:49:07 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.2",
+      "version": "0.14.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.11",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.6",
+            "commit": "5ff1c8ba46f401679119d71fe4035642dc175e15"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Jan 2022 01:00:02 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.1",
+      "version": "0.14.1",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca",
+            "comment": "Remove references to uifabricshared"
+          }
+        ],
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "ef3732e4e5b82e3f324ca0eed4b12b6617788299",
+            "comment": "fix disabled button"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.10",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.5",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.5",
+            "commit": "163defba33412f6f44117750a540b8fdecd3bdca"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Jan 2022 12:27:30 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c64035399b0c64acffaa962c045aa00a3918c6cb",
+            "comment": "added active and activeAppearance props"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Jan 2022 23:14:38 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.10",
+      "version": "0.13.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.9",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.4",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.4",
+            "commit": "58c54eff228ec071098f3c18a91f11b4a89a6c15"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 06 Jan 2022 21:30:08 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.9",
+      "version": "0.13.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.8",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.3",
+            "commit": "06307699c93ffe31a57f8f1c1fb60beec83583e0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Dec 2021 20:56:31 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.8",
+      "version": "0.13.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.7",
+            "commit": "a7d19d410d5714e2bdb61529d2687182061020a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 20 Dec 2021 22:56:00 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.7",
+      "version": "0.13.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "f4a5b4f5c9c190400e3e34c4a33b3ed30696d41e",
+            "comment": "Add repository property to all package.json files"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/component-cache to v1.3.1",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.6",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.3",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.2",
+            "commit": "bc86b4fbf5f07c0bfbc950a1a99a3cf4b35807d1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 18 Dec 2021 04:15:05 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.6",
+      "version": "0.13.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.5",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.2",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.1",
+            "commit": "38fe241a385ecd1ce4e51b5bcba57a9dd0426789"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 22:06:58 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.5",
+      "version": "0.13.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.4",
+            "commit": "9dc61df83605c035822518c18cc46fb5503dff70"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 19:53:21 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.4",
+      "version": "0.13.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.3",
+            "commit": "3012e075ca89e36931357442679b73d20540af8b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Dec 2021 01:26:42 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.3",
+      "version": "0.13.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.2",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.1",
+            "commit": "511aeb31982a5fb9dd2f7196c0c7217cc4a3dbc6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Dec 2021 23:00:56 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.2",
+      "version": "0.13.2",
+      "comments": {
+        "none": [
+          {
+            "author": "dannyvv@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "25b3989739737bc598a5d699a941af4c0b4a421f",
+            "comment": "📦 applying package updates ***NO_CI***"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Dec 2021 19:10:29 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.2",
+      "version": "0.13.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozlova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "ea7b9238079f53af55ce3c37458b925bb3dfa922",
+            "comment": "Added shape prop to Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.11.0",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.1",
+            "commit": "6a9f067ae2510481b6ff3512c10c08e7de84f86e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Nov 2021 21:07:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.1",
+      "version": "0.13.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix Avatar not working on iOS",
+            "author": "sanajmi@microsoft.com",
+            "commit": "7356f363aa7ef56ecd1221ba4b36411701438c2e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 17 Nov 2021 19:28:07 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.13.0",
+      "version": "0.13.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Moved Avatar (PersonaCoin) to framework v2.",
+            "author": "v.kozlova13@gmail.com",
+            "commit": "6f1258d182196549bdd747a752ab8c28e5b60e2a",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/adapters to v0.8.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/tokens to v0.11.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.7.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.3.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/use-styling to v0.8.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.10.0",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.64",
+            "author": "afoxman@microsoft.com",
+            "commit": "f16d742b5c2d5b97e49ac1ef7b740cbf89fc42e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Nov 2021 16:07:20 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.19",
+      "version": "0.12.19",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.6",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "25673699e6c6c064b41f1246c2c995baa67a74ad",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Nov 2021 23:17:41 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.19",
+      "version": "0.12.19",
+      "comments": {
+        "none": [
+          {
+            "comment": "Rename uifabricshared/eslint-config-rules to fluentui-react-native/eslint-config-rules",
+            "author": "ruaraki@microsoft.com",
+            "commit": "110fba2a1721a914501404f6040f07656307549e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 09 Nov 2021 23:04:33 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.19",
+      "version": "0.12.19",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.6",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "8baa72ed4ec06f90a51cf757e1924e946f76a537",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Nov 2021 20:52:15 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.18",
+      "version": "0.12.18",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump macOS minimum version to 10.15",
+            "author": "sanajmi@microsoft.com",
+            "commit": "f6e7e6523713e641227f91113728da3d9816ef22",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Nov 2021 18:53:37 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.17",
+      "version": "0.12.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.5",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f05bda9db60753eb07b2688526ed158d690b8b63",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 25 Oct 2021 19:24:43 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.16",
+      "version": "0.12.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.4",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f6578742d6c957cf7e346db82f89171f80bedc3b",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Oct 2021 03:46:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.15",
+      "version": "0.12.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "273f5addbeb5abeaec0b517e5416f52d8878152f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 19 Oct 2021 20:23:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.14",
+      "version": "0.12.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.2",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8209c3a6f52871eef88035c2dba2ef2b5ee83e7",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Oct 2021 20:59:20 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.13",
+      "version": "0.12.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.1",
+            "author": "ruaraki@microsoft.com",
+            "commit": "f759f09649d7fd9b8ea8ada78677f5cb65519f6e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 01 Oct 2021 17:52:17 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.12",
+      "version": "0.12.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.6.0",
+            "author": "ruaraki@microsoft.com",
+            "commit": "cb59746a9358af9ae32ea386aad1cfaa1922605d",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Sep 2021 21:08:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.11",
+      "version": "0.12.11",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Delete NativeButton",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "335503904094894a91e53c6de328bf13e13bcc1c",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 19:08:16 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.10",
+      "version": "0.12.10",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e52c9b3d031599af4f43c261cb0a0327bc68a5ab",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Sep 2021 16:32:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.10",
+      "version": "0.12.10",
+      "comments": {
+        "patch": [
+          {
+            "comment": "adding an adapter for macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "2d8e314d1cbdbccbd87251fbe125b14b1014486e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 14 Sep 2021 19:31:04 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.9",
+      "version": "0.12.9",
+      "comments": {
+        "none": [
+          {
+            "comment": "Revert \"Bump Prettier and run it (#997)\"",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c3eefc2cd6e8e23d64ca72460586f33120edc336",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Sep 2021 23:22:43 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.9",
+      "version": "0.12.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.38",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a7179bb7cc1b8d1da09a0a11831b7b1712b8b720",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 21:30:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.8",
+      "version": "0.12.8",
+      "comments": {
+        "none": [
+          {
+            "comment": "Run the prettier",
+            "author": "ruaraki@microsoft.com",
+            "commit": "7ac71c6add6f05230c649dad60b5f7442f08cbb3",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 10 Sep 2021 18:16:59 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.8",
+      "version": "0.12.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.37",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5f282af0873151b9f7a8eb75369619af42d092d4",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 22:12:19 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.7",
+      "version": "0.12.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.36",
+            "author": "ruaraki@microsoft.com",
+            "commit": "6a82ccdd6a0cf0226f59e1f81ec34a0eb7e3d912",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 09 Sep 2021 20:03:01 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.6",
+      "version": "0.12.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.35",
+            "author": "ruaraki@microsoft.com",
+            "commit": "30bcd9859911c2bb83f2d6ea29dda12cc029265e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 31 Aug 2021 18:48:34 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.5",
+      "version": "0.12.5",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add logic to pick a selected button when tabbing to a FocusZone",
+            "author": "chripear@microsoft.com",
+            "commit": "f72d366a82afcc1a40c0dd14e8a67c3d8ce94f74",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 21:02:08 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.5",
+      "version": "0.12.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.34",
+            "author": "ruaraki@microsoft.com",
+            "commit": "4628684e9b1b337af67c5d0a1833ad8646db170a",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 Aug 2021 04:48:40 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.4",
+      "version": "0.12.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "fix text truncation for radio button",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "b8c866644b2c5b64530990e59153424b0d6f5dcc",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 23 Aug 2021 23:35:47 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.3",
+      "version": "0.12.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.32",
+            "author": "dake.3601@gmail.com",
+            "commit": "84a24da6bdddd85adad1f5824e7af3d1804b1c1c",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 19 Aug 2021 18:31:21 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.2",
+      "version": "0.12.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.31",
+            "author": "ruaraki@microsoft.com",
+            "commit": "5849d234f12ab30c929e0b8ab256a2fc7523cbe9",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 23:00:57 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.30",
+            "author": "ruaraki@microsoft.com",
+            "commit": "345d1de930ff42359260da7f1e68a16059f4d763",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 18 Aug 2021 20:17:46 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.12.0",
+      "version": "0.12.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "fix for radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "eae3b80724f357040f5a6d724bdf0fe14ac6d5f5",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 17 Aug 2021 20:02:00 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.9",
+      "version": "0.11.9",
+      "comments": {
+        "patch": [
+          {
+            "comment": "MSF -> FRN for most objective C prefixes",
+            "author": "sanajmi@microsoft.com",
+            "commit": "2b95227026008b40cea7c2e5640874a8df392e17",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 16:12:26 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.8",
+      "version": "0.11.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fix icons in experimental button and add fab",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "8946966df6ddc0ef1c0b43e576a4124c678d7c89",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 13 Aug 2021 09:05:57 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.7",
+      "version": "0.11.7",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update apple native code and build flags",
+            "author": "sanajmi@microsoft.com",
+            "commit": "183bcbe111614b4baf896ec73f4985d988dd46f7",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 12 Aug 2021 17:23:44 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.6",
+      "version": "0.11.6",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.28",
+            "author": "ruaraki@microsoft.com",
+            "commit": "e524662e3e40fe45a2dcc6e2acd3aca1197b5b5a",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 Aug 2021 21:12:30 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.5",
+      "version": "0.11.5",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.27",
+            "author": "ruaraki@microsoft.com",
+            "commit": "ce49f33c08add7892191cf840d2fdcccfd0a16bb",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 22:49:01 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.26",
+            "author": "ruaraki@microsoft.com",
+            "commit": "c5b7e91e087c4f9c3fead8c52bdf20f5c86e9824",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 09 Aug 2021 19:16:08 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.3",
+      "version": "0.11.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.25",
+            "author": "ruaraki@microsoft.com",
+            "commit": "18e08c6879e7d56088ed62ab090fea979a2c31f9",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 07 Aug 2021 00:40:04 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.2",
+      "version": "0.11.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "enable usePressableState with stock Pressable component",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.24",
+            "author": "jasonmo@microsoft.com",
+            "commit": "e506337e109ef24e675c2ac794179db86fcb7e86",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 23:18:21 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.1",
+      "version": "0.11.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.23",
+            "author": "ruaraki@microsoft.com",
+            "commit": "a8ae5b0cadbfb7ff6224b35a15995dd2def2ae45",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 06 Aug 2021 00:36:02 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update Avatar to use latest SwiftUI Implementation from FluentUI Apple",
+            "author": "sanajmi@microsoft.com",
+            "commit": "8fc964aec272d1c75e418f1ef1cb678d9a3c453d",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "none": [
+          {
+            "comment": "Remove api-extractor related files",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.22",
+            "author": "ruaraki@microsoft.com",
+            "commit": "56ccce452d0dbbd5c24f53ebdd467f2d01dda694",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 16:54:20 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.10.1",
+      "version": "0.10.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "move experimental Text to be written as compressible",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4136f64930de10457a984863998c4a553b0b0efc",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 04 Aug 2021 06:26:25 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "radio group on macOS",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/component-cache to v1.2.3",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          },
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.20",
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "commit": "68dd61bd45ca8ffacc1580e468f3c01810e3093e",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 23:48:50 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.17",
+      "version": "0.9.17",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.19",
+            "author": "jasonmo@microsoft.com",
+            "commit": "69771570b94318ba208eb327d1edf15b5db0ec49",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 03 Aug 2021 22:33:17 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.16",
+      "version": "0.9.16",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.18",
+            "author": "jasonmo@microsoft.com",
+            "commit": "317097b2f51d04d33bfc2b14b2850a2774e0acbc",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Jul 2021 06:26:34 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.15",
+      "version": "0.9.15",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.17",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "925cf4eb5fe6bfadf20208b5b3d3a4454fc5c9fa",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 29 Jul 2021 17:53:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.15",
+      "version": "0.9.15",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.17",
+            "author": "jasonmo@microsoft.com",
+            "commit": "f1fb0f1e8fc3973daa7e640ec33ad4559cd00053",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 27 Jul 2021 22:17:20 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.14",
+      "version": "0.9.14",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add compressible utility and a snapshot test / demo to framework",
+            "author": "jasonmo@microsoft.com",
+            "commit": "1cd8611e1e88848ab66f7c0e9113c946f968260c",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 27 Jul 2021 18:55:58 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.13",
+      "version": "0.9.13",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.15",
+            "author": "4123478+tido64@users.noreply.github.com",
+            "commit": "07d04d166b13ff79e07a8c4cbc2e06afb1e4c3e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 26 Jul 2021 20:41:04 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.13",
+      "version": "0.9.13",
+      "comments": {
+        "patch": [
+          {
+            "comment": "add new use-slot package, move framework to consume that package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "ad02fbbe9eaa5fbe6ec6126ccb719a1280f108a6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sun, 25 Jul 2021 16:30:17 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.12",
+      "version": "0.9.12",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.14",
+            "author": "email not defined",
+            "commit": "6e298f4bfda7d7cae2c1f52c942bae20ab29b641",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 18:36:14 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.11",
+      "version": "0.9.11",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.13",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Jul 2021 17:42:51 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.11",
+      "version": "0.9.11",
+      "comments": {
+        "none": [
+          {
+            "comment": "Bump @fluentui-react-native/framework to v0.5.13",
+            "author": "jasonmo@microsoft.com",
+            "commit": "4687ff096fd25b07e0a4e782616b6b2ec0fa2d9f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Jul 2021 22:55:40 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.8",
+      "version": "0.9.8",
+      "comments": {
+        "patch": [
+          {
+            "comment": "expose use-tokens in framework package",
+            "author": "jasonmo@microsoft.com",
+            "commit": "af44164cf47abb856e567e9976043aafe414ade6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 16 Jul 2021 18:25:45 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.6",
+      "version": "0.9.6",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add ActivityIndicator Component Test",
+            "author": "t-lindaweng@microsoft.com",
+            "commit": "31c4b78d59d4068ebed0417cc16d9e5142141c51",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 25 Jun 2021 19:39:16 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.4",
+      "version": "0.9.4",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add chevron to submenu",
+            "author": "lehon@microsoft.com",
+            "commit": "c02e69f9e9ac03db75d410794beaa2cd0ab644a6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 18 Jun 2021 00:38:19 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Apply prettier to experimental, run",
+            "author": "ruaraki@microsoft.com",
+            "commit": "907fea51098ba59a8235128e17fb82a327b7adb2",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 15 Jun 2021 00:55:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.9.0",
+      "version": "0.9.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Handle ColorValue instead of string as color type",
+            "author": "ruaraki@microsoft.com",
+            "commit": "90e0dcb92a4ea4ee5ea5373f2c54defa127749bf",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 May 2021 00:42:50 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Add hideInsideGapForBorder prop to experimental avatar",
+            "author": "sanajmi@microsoft.com",
+            "commit": "0767317b2c3dbfb3bf7e754b1246d91bfb2cd87b",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 15 Apr 2021 20:08:17 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Merge remote-tracking branch 'upstream/master' into amgleitman/icon-macos",
+            "author": "adam.gleitman@gmail.com",
+            "commit": "06834001f0f0238d2a7ad99a51a430b28eaa8daa",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Apr 2021 23:41:02 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add the rainbow gradient border image test case to experimental avatar (#654)",
+            "author": "tamasane@gmail.com",
+            "commit": "b8f260a8b9ebfb579c059a5c9dd73ed6a90d558c",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 07 Apr 2021 22:19:35 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add an NSNull check to the image property",
+            "author": "sanajmi@microsoft.com",
+            "commit": "ef2f33032f73046d8a661df5b8a95f4219c7dec5",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "add test case for custom border image",
+            "author": "sanajmi@microsoft.com",
+            "commit": "3c0f5496f0daeb748c6b2daac8d0465a1d58a672",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 11 Mar 2021 19:48:16 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentTester to be mobile friendly on iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "78158ad0818a26320974a12797d2b9fc757649f0",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 10 Mar 2021 04:33:26 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Add a native theming module for iOS",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "35117f9c9d72fc6ecd1ed74fc0facc07fab8d18f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Mar 2021 18:43:59 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Update FluentUI Apple dependency to 0.2.2, set minimum iOS to 13",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "b67f9fe5e0aaaf1c145a68ab1878655678715248",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 06 Mar 2021 00:20:05 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Base theme on macOS changed to apple theme",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "1b3d9f6ef10c1138b6f9701b5edf9ef52be623e6",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ],
+        "minor": [
+          {
+            "comment": "Update to react-native 0.63",
+            "author": "30809111+acoates-ms@users.noreply.github.com",
+            "commit": "d35d3b45f12a670648edaa7143b210ed43360996",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 01 Mar 2021 22:53:12 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update deps",
+            "author": "warleu@microsoft.com",
+            "commit": "23cd3d437e63e105f5feee16a1b8ef8e769b61c1",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 12 Feb 2021 19:45:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.2",
+      "version": "0.4.2",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Update FluentUI Apple version",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "73a55fb4635adc8be808fff2dc6312763011977d",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jan 2021 16:44:06 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Added macOS implementation of experimental avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "4b8fb620a3a0525f744b47c77367aa51f5176b57",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 17 Dec 2020 00:09:27 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "Add readme for svg",
+            "author": "warleu@microsoft.com",
+            "commit": "c2c28c356aabbd3e74a8d085015a3f4507fbdbe9",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 12 Dec 2020 04:27:11 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Fixed bug where AvatarSize was not properly set",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "0298941e07ca23f56f407bd50f061a128a491b17",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 10 Dec 2020 08:37:43 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Changed image prop name and type to imageSource and ImageURISource",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6d83b73ad8ad16fe3119e8f43f47cd3dc8df8650",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 24 Oct 2020 06:35:04 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.2.3",
+      "version": "0.2.3",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Updated Avatar metadata in podspec and package.json",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "046031640c02dcd301c1c140131193e9c59d573f",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Oct 2020 21:21:59 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "none": [
+          {
+            "comment": "onDismiss not called when contextual menu is dismissed with item click",
+            "author": "lehon@microsoft.com",
+            "commit": "4f3ed9d5555e86a6017901aa2f010732d6d6fe5a",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 19 Oct 2020 18:16:36 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "comment": "New experimental component avatar",
+            "author": "saadnajmi2@gmail.com",
+            "commit": "6a48956ff1f79ed666cf2810af00be7474c39740",
+            "package": "@fluentui-react-native/experimental-avatar"
+          }
+        ]
+      }
+    }
+  ]
+}
