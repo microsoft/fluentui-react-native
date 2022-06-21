@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "Renamed Avatar to NativeAvatar, JSAvatar to Avatar"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Jun 2022 20:05:26 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.45",
       "version": "0.14.45",
