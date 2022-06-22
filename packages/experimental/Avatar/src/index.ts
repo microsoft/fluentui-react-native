@@ -1,3 +1,1 @@
-export * from './Avatar';
-export * from './JSAvatar';
-export * from './JSAvatar.types';
+export * from './NativeAvatar';

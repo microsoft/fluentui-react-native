@@ -6,13 +6,33 @@ import React from 'react';
 export const menuListName = 'MenuList';
 
 export interface MenuListTokens extends LayoutTokens, IBackgroundColorTokens {
+  /**
+   * Space between items in pixels
+   */
   gap?: number;
 }
 
 export interface MenuListProps extends Omit<IViewProps, 'onPress'> {
+  /**
+   * Array of all checked items
+   */
   checked?: string[];
+
+  /**
+   * Default items to be checked on mount
+   */
   defaultChecked?: string[];
+
+  /**
+   * States that menu items can contain selectable items and reserves space for item alignment
+   */
   hasCheckmarks?: boolean;
+
+  /**
+   * Callback when checked items change
+   *
+   * @param checked Array of all currently checked values
+   */
   onCheckedChange?: (e: InteractionEvent, checked: string[]) => void;
 }
 

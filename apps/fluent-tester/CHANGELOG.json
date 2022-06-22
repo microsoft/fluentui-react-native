@@ -2,6 +2,158 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 21 Jun 2022 21:43:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.66.1",
+      "version": "0.66.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.4",
+            "commit": "b63cb286a24e78999adee82781f58d2610b3b776"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.66.0",
+      "version": "0.66.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "Renamed Avatar to NativeAvatar, JSAvatar to Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.0",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.15.0",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 20:05:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.5",
+      "version": "0.65.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.45",
+            "commit": "f93c1716455fb220897d993f4450f00b05f0bf0a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 18:57:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.4",
+      "version": "0.65.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.3",
+            "commit": "842bfbf392c70c12da4774d2c4295d442fe8fd02"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Jun 2022 20:00:18 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.3",
+      "version": "0.65.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.2",
+            "commit": "0521256cec60beb1ed3418be7aa593b6ec6eef85"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Jun 2022 00:27:10 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.2",
+      "version": "0.65.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.1",
+            "commit": "90f04c4334bf46ae5b359f226177e0a8a22349c5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 20:44:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.1",
+      "version": "0.65.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "dc4cf3719172a00b9dd9a9a4bfbff1ec4d14b2ac",
+            "comment": "Fix MenuItemCheckbox/Radio"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.0",
+            "commit": "dc4cf3719172a00b9dd9a9a4bfbff1ec4d14b2ac"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 19:11:01 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.0",
+      "version": "0.65.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f573ef363290fae037d1e41ff67a57328c231ca4",
+            "comment": "Added styled toasts"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.44",
+            "commit": "531fc8d94b1452887b43073ea629838a72f0a7f5"
+          }
+        ],
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "531fc8d94b1452887b43073ea629838a72f0a7f5",
+            "comment": "Added ring configuration"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jun 2022 17:09:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.64.13",
       "version": "0.64.13",

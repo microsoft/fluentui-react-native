@@ -1,93 +1,37 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
-const NotificationVariants = ['primary', 'neutral', 'danger', 'warning'] as const;
-type NotificationVariant = typeof NotificationVariants[number];
-
-interface NotificationProps {
-  /**
-   * Notification variants: 'primary' | 'neutral' |'danger' | 'warning'
-   */
-  variant: NotificationVariant;
-  startText: string;
-  endText: string;
-}
-
-const Notification = (props: NotificationProps) => {
-  const variant = props.variant;
-  const startText = props.startText;
-  const endText = props.endText;
-
-  let containerBackgroundColor = 'skyblue';
-  let foregroundColor = 'black';
-
-  switch (variant) {
-    case 'primary':
-      containerBackgroundColor = 'skyblue';
-      break;
-    case 'neutral':
-      containerBackgroundColor = 'lightgrey';
-      break;
-    case 'danger':
-      containerBackgroundColor = 'pink';
-      foregroundColor = 'maroon';
-      break;
-    case 'warning':
-      containerBackgroundColor = 'lightyellow';
-      foregroundColor = 'brown';
-      break;
-  }
-
-  const styles = StyleSheet.create({
-    container: {
-      borderRadius: 12,
-      backgroundColor: containerBackgroundColor,
-
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: 16,
-    },
-    start: {
-      fontSize: 16,
-      color: foregroundColor,
-
-      flex: 1,
-      flexGrow: 1,
-    },
-    end: {
-      fontSize: 16,
-      fontWeight: '500',
-      color: foregroundColor,
-
-      marginLeft: 34,
-    },
-  });
-
+const PrimaryTest: React.FunctionComponent = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.start}>{startText}</Text>
-      <Text style={styles.end}>{endText}</Text>
-    </View>
+    <Notification variant={'primary'} endText="Undo">
+      Mail Archived
+    </Notification>
   );
 };
 
-const PrimaryTest: React.FunctionComponent = () => {
-  return <Notification variant={'primary'} startText="Mail Archived" endText="Undo" />;
-};
-
 const NeutralTest: React.FunctionComponent = () => {
-  return <Notification variant={'neutral'} startText="Some items require you to sign in to view them" endText="Sign in" />;
+  return (
+    <Notification variant={'neutral'} endText="Sign in">
+      Some items require you to sign in to view them
+    </Notification>
+  );
 };
 
 const DangerTest: React.FunctionComponent = () => {
-  return <Notification variant={'danger'} startText="There was a problem, and your recent changes may not have saved" endText="Retry" />;
+  return (
+    <Notification variant={'danger'} endText="Retry">
+      There was a problem, and your recent changes may not have saved
+    </Notification>
+  );
 };
 
 const WarningTest: React.FunctionComponent = () => {
-  return <Notification variant={'warning'} startText="Read Only" endText="X" />;
+  return (
+    <Notification variant={'warning'} endText="X">
+      Read Only
+    </Notification>
+  );
 };
 
 const notificationSections: TestSection[] = [
@@ -113,7 +57,7 @@ export const NotificationTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Backlog',
     uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
+    iosStatus: 'Experimental',
     macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };

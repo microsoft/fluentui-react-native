@@ -201,7 +201,7 @@ There is no separate `SubmenuItem` or `Submenu` component. You can wrap a `MenuI
 #### Props no longer supported in ContextualMenuItem with an equivalent functionality in v1 MenuItem
 
 - `itemKey` => Use `name` instead.
-- `text` => Use `content` instead.
+- `text` => Pass text as child to component instead.
 
 #### Props no longer supported in ContextualMenuItem without an equivalent functionality in v1 MenuItem
 
@@ -245,6 +245,7 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 
 - `children`
 - `defaultOpen`
+- `hoverDelay`
 - `open`
 - `openOnHover`
 
@@ -254,7 +255,6 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 
 #### Not implemented on Menu
 
-- `hoverDelay`
 - `inline`
 - `openOnContext`
 - `positioning` (`directionalHint` can be passed into `MenuPopover` instead)
@@ -297,7 +297,6 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 #### MenuItem Prop differences due to technical differences and limitations
 
 - `componentRef` instead of `ref`
-- `content` for the text of a menu item instead of passing it in as a child
 
 #### Not implemented on MenuItem
 
@@ -315,7 +314,6 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 #### MenuItemCheckbox Prop differences due to technical differences and limitations
 
 - `componentRef` instead of `ref`
-- `content` for the text of a menu item instead of passing it in as a child
 
 #### Not implemented on MenuItemCheckbox
 

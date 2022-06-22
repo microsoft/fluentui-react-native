@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { JSAvatar } from '..';
+import { Avatar } from '..';
 import { getInitials } from '../useAvatar';
 import * as renderer from 'react-test-renderer';
 
@@ -23,7 +23,7 @@ const initialsForNameWithTitles = ['F', 'RF'];
 
 describe('Avatar rendering', () => {
   it('renders Avatar', () => {
-    const tree = renderer.create(<JSAvatar />).toJSON();
+    const tree = renderer.create(<Avatar />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
