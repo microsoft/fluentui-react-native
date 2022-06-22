@@ -2,6 +2,141 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 21 Jun 2022 23:39:02 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.4",
+      "version": "0.15.4",
+      "comments": {
+        "none": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "6426ed850d4667d8cefdd7140017959dca5642fe",
+            "comment": "merge"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:43:45 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.4",
+      "version": "0.15.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "c606f6deb5e1be500fc4183e6537dbf523c84194",
+            "comment": "Some refactoring"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 18:57:19 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.3",
+      "version": "0.15.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "842bfbf392c70c12da4774d2c4295d442fe8fd02",
+            "comment": "Add tokens to MenuPopover"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Jun 2022 20:00:18 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.2",
+      "version": "0.15.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "0521256cec60beb1ed3418be7aa593b6ec6eef85",
+            "comment": "Add hoverDelay prop"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 17 Jun 2022 00:27:10 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.1",
+      "version": "0.15.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "90f04c4334bf46ae5b359f226177e0a8a22349c5",
+            "comment": "Update comments"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 20:44:45 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "dc4cf3719172a00b9dd9a9a4bfbff1ec4d14b2ac",
+            "comment": "Fix MenuItemCheckbox/Radio"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.8",
+      "version": "0.14.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.20.8",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 18:26:37 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.7",
+      "version": "0.14.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.22.29",
+            "commit": "8b1db1f9ea5c58bca1e88ce0a5a2298292dff345"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 00:46:04 GMT",
+      "tag": "@fluentui-react-native/menu_v0.14.6",
+      "version": "0.14.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "66d727cc3220d850042e97318cc8aeee9185542d",
+            "comment": "macOS menu tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 13 Jun 2022 23:58:18 GMT",
       "tag": "@fluentui-react-native/menu_v0.14.5",
       "version": "0.14.5",

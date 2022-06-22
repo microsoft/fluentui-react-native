@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/avatar",
+  "entries": [
+    {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "renamed experimental-avatar to avatar"
+          }
+        ]
+      }
+    }
+  ]
+}
