@@ -1,12 +1,6 @@
 pr:
   - master
 
-parameters:
-  - name: skipNugetPublish
-    displayName: Skip Nuget Publish
-    type: boolean
-    default: false
-
 variables:
   CI: true
 
@@ -189,5 +183,3 @@ jobs:
 
     steps:
       - template: templates/apple-nuget-publish.yml
-        parameters:
-          skipNugetPublish: ${{ parameters.skipNugetPublish }}
