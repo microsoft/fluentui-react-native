@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add ability to set custom reference start/end dates",
+  "packageName": "@fluentui-react-native/experimental-native-date-picker",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
