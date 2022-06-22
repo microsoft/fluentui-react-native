@@ -1,5 +1,5 @@
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultMenuItemTokens } from './MenuItemTokens';
 import { menuItemName, MenuItemProps, MenuItemTokens, MenuItemSlotProps } from './MenuItem.types';
 
@@ -17,9 +17,20 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
           display: 'flex',
           flexDirection: 'row',
           ...layoutStyles.from(tokens, theme),
+          ...borderStyles.from(tokens, theme),
         },
       }),
       ['backgroundColor', ...layoutStyles.keys],
+    ),
+    checkmark: buildProps(
+      (tokens: MenuItemTokens) => ({
+        style: {
+          height: tokens.checkmarkSize,
+          width: tokens.checkmarkSize,
+          marginEnd: tokens.gap,
+        },
+      }),
+      ['checkmarkSize', 'gap'],
     ),
     content: buildProps(
       (tokens: MenuItemTokens, theme: Theme) => {
@@ -37,6 +48,13 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
       (tokens: MenuItemTokens) => {
         return {
           color: tokens.color,
+          height: tokens.submenuIndicatorSize,
+          width: tokens.submenuIndicatorSize,
+          viewBox:
+            '0 0 ' +
+            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2) +
+            ' ' +
+            (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2),
         };
       },
       ['color'],

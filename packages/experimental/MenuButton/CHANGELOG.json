@@ -2,6 +2,263 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.49",
+      "version": "0.3.49",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.38",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 18:26:37 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.48",
+      "version": "0.3.48",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.30",
+            "commit": "8b1db1f9ea5c58bca1e88ce0a5a2298292dff345"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 00:46:04 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.47",
+      "version": "0.3.47",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.37",
+            "commit": "66d727cc3220d850042e97318cc8aeee9185542d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Jun 2022 23:58:18 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.46",
+      "version": "0.3.46",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.36",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.29",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 06 Jun 2022 19:20:10 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.45",
+      "version": "0.3.45",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.35",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.28",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 21:22:22 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.44",
+      "version": "0.3.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.34",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.27",
+            "commit": "5ce45ff0909feaa0c8a83401be198050727659c6"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 26 May 2022 00:33:11 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.43",
+      "version": "0.3.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.33",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.26",
+            "commit": "61bb86f8797b05c8c0557dedebdba630abd3ef00"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:08 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.42",
+      "version": "0.3.42",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "18480e3fdf2038a34147995f413a45d14f012a73",
+            "comment": "Add text implementation v2"
+          }
+        ],
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.32",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.25",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.30",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.14.0",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 21 May 2022 16:18:06 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.41",
+      "version": "0.3.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.31",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.24",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.28",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.2",
+            "commit": "313cc45fbeb5bfaff0b266194cc48608bf6d2c35"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 21 May 2022 01:47:58 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.40",
+      "version": "0.3.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.30",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.15.23",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.27",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/tokens to v0.12.1",
+            "commit": "36ea0d81629f9326eb8c23912d9949381014dade"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 10 May 2022 20:49:25 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.3.39",
+      "version": "0.3.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.16.29",
+            "commit": "d21b7b13c7a7ea38b81c23b9eca7461fffb801e1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 04 May 2022 21:06:04 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.3.38",
       "version": "0.3.38",

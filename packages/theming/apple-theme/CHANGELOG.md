@@ -1,8 +1,42 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.3
+
+Wed, 25 May 2022 18:43:07 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- add Variants.win32 and win32 typography as part of Office theme (email not defined)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.13.0
+- Bump @fluentui-react-native/theme to v0.6.11
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theming-utils to v0.13.0
+
+## 0.12.1
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Fix shadow tokens not getting mapped properly (sanajmi@microsoft.com)
+
+## 0.12.0
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Minor changes
+
+- Add shadows to macOS and mock shadows to iOS (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/theme to v0.6.9
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theming-utils to v0.11.0
 
 ## 0.11.5
 

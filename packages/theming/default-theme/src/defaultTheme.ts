@@ -2,6 +2,7 @@ import { Theme, Typography, Spacing, FontWeightValue, FontSize, FontSizes, Varia
 import { Platform } from 'react-native';
 import { getStockWebPalette, getStockWebDarkPalette, getStockWebHCPalette } from './defaultColors';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
+import { createShadowAliasTokens } from './createAliasTokens';
 
 function _defaultTypography(): Typography {
   const defaultsDict = {
@@ -12,7 +13,7 @@ function _defaultTypography(): Typography {
       subheader: globalTokens.font.size['400'] as FontSize,
       header: globalTokens.font.size['500'] as FontSize,
       hero: globalTokens.font.size['700'] as FontSize,
-      heroLarge: 42 as FontSize,
+      heroLarge: globalTokens.font.size['900'] as FontSize,
     } as FontSizes,
     weights: {
       regular: globalTokens.font.weight.regular as FontWeightValue,
@@ -40,6 +41,20 @@ function _defaultTypography(): Typography {
       heroSemibold: { face: 'primary', size: 'hero', weight: 'semiBold' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
+      // mocked out
+      caption1: { face: 'primary', size: 'caption', weight: 'regular' },
+      body1: { face: 'primary', size: 'secondary', weight: 'regular' },
+      body1Strong: { face: 'primary', size: 'secondary', weight: 'semiBold' },
+      body2: { face: 'primary', size: 'body', weight: 'regular' },
+      body2Strong: { face: 'primary', size: 'body', weight: 'semiBold' },
+      subtitle1: { face: 'primary', size: 'header', weight: 'regular' },
+      subtitle1Strong: { face: 'primary', size: 'header', weight: 'semiBold' },
+      subtitle2: { face: 'primary', size: 'subheader', weight: 'regular' },
+      subtitle2Strong: { face: 'primary', size: 'subheader', weight: 'semiBold' },
+      title1: { face: 'primary', size: 'hero', weight: 'regular' },
+      title1Strong: { face: 'primary', size: 'hero', weight: 'semiBold' },
+      largeTitle: { face: 'primary', size: 'heroLarge', weight: 'regular' },
+      display: { face: 'primary', size: 'heroLarge', weight: 'semiBold' },
     } as Variants,
   };
 
@@ -55,36 +70,6 @@ function _defaultTypography(): Typography {
     defaultsDict.families = familiesDictApple;
   }
 
-  // In certain cases on win32, semibold font renders incorrectly so 'Segoe UI Semibold' is used
-  if (Platform.OS === ('win32' as any)) {
-    const familiesDictWin32 = {
-      primary: 'Segoe UI',
-      secondary: 'Segoe UI Semibold',
-      cursive: 'System',
-      monospace: 'System',
-      sansSerif: 'System',
-      serif: 'System',
-    };
-    defaultsDict.families = familiesDictWin32;
-
-    const variantsDictWin32 = {
-      captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
-      secondaryStandard: { face: 'primary', size: 'secondary', weight: 'regular' },
-      secondarySemibold: { face: 'secondary', size: 'secondary', weight: 'semiBold' },
-      bodyStandard: { face: 'primary', size: 'body', weight: 'regular' },
-      bodySemibold: { face: 'secondary', size: 'body', weight: 'semiBold' },
-      subheaderStandard: { face: 'primary', size: 'subheader', weight: 'regular' },
-      subheaderSemibold: { face: 'secondary', size: 'subheader', weight: 'semiBold' },
-      headerStandard: { face: 'primary', size: 'header', weight: 'regular' },
-      headerSemibold: { face: 'secondary', size: 'header', weight: 'semiBold' },
-      heroStandard: { face: 'primary', size: 'hero', weight: 'regular' },
-      heroSemibold: { face: 'secondary', size: 'hero', weight: 'semiBold' },
-      heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: 'regular' },
-      heroLargeSemibold: { face: 'secondary', size: 'heroLarge', weight: 'semiBold' },
-    } as Variants;
-    defaultsDict.variants = variantsDictWin32;
-  }
-
   return defaultsDict;
 }
 
@@ -96,6 +81,7 @@ export const defaultFluentTheme: Theme = {
   colors: getStockWebPalette(),
   typography: _defaultTypography(),
   spacing: defaultSpacing(),
+  shadows: createShadowAliasTokens('light'),
   components: {},
   host: { appearance: 'light' },
 };
@@ -103,6 +89,7 @@ export const defaultFluentTheme: Theme = {
 export const defaultFluentDarkTheme: Theme = {
   colors: getStockWebDarkPalette(),
   typography: defaultFluentTheme.typography,
+  shadows: createShadowAliasTokens('dark'),
   spacing: defaultFluentTheme.spacing,
   components: {},
   host: { appearance: 'dark' },
@@ -111,6 +98,7 @@ export const defaultFluentDarkTheme: Theme = {
 export const defaultFluentHighConstrastTheme: Theme = {
   colors: getStockWebHCPalette(),
   typography: defaultFluentTheme.typography,
+  shadows: createShadowAliasTokens('highContrast'),
   spacing: defaultFluentTheme.spacing,
   components: {},
   host: { appearance: 'highContrast' },

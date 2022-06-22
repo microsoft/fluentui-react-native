@@ -1,0 +1,31 @@
+import * as React from 'react';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { useMenuListContext } from '../context/menuListContext';
+import { MenuItemCheckboxProps, MenuItemCheckboxState } from '../MenuItemCheckbox/MenuItemCheckbox.types';
+import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheckbox';
+
+export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
+  const { disabled, name } = props;
+  const context = useMenuListContext();
+  const selectRadio = context.selectRadio;
+
+  const toggleChecked = React.useCallback(
+    (e: InteractionEvent) => {
+      if (!disabled) {
+        selectRadio(e, name);
+      }
+    },
+    [disabled, name, selectRadio],
+  );
+
+  // Explicitly only run on mount and unmount
+  React.useEffect(() => {
+    context.addRadioItem(name);
+
+    return () => {
+      context.removeRadioItem(name);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return useMenuCheckboxInteraction(props, toggleChecked);
+};

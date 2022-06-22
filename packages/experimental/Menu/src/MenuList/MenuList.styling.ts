@@ -13,8 +13,9 @@ export const stylingSettings: UseStylingOptions<MenuListProps, MenuListSlotProps
           display: 'flex',
           ...layoutStyles.from(tokens, theme),
         },
+        gap: tokens.gap,
       }),
-      ['backgroundColor', ...layoutStyles.keys],
+      ['backgroundColor', 'gap', ...layoutStyles.keys],
     ),
   },
 };

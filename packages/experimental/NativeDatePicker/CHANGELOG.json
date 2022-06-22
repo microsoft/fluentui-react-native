@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.4",
+      "version": "0.4.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7",
+            "comment": "apple: remove unneccesary build settings from podspec"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:08 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "eaebc100b5c4b73d38ee9e0157c1cccd570c2e4a",
+            "comment": "Add method to set default calendar configuration"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 30 Apr 2022 06:33:42 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.2",
       "version": "0.4.2",

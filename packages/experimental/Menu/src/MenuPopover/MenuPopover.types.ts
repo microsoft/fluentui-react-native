@@ -1,9 +1,15 @@
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import { IViewProps } from '@fluentui-react-native/adapters';
+import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 
 export const menuPopoverName = 'MenuPopover';
 
-export interface MenuPopoverProps extends Omit<IViewProps, 'onPress'> {}
+// Support for anchorRect and beakWidth will come at a later time.
+// Omitting dismissBehaviors as it doesn't seem to make sense as a token
+export type MenuPopoverTokens = Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'>;
+
+export type MenuPopoverProps = ICalloutProps;
 
 export interface MenuPopoverState {
-  triggerRef: React.RefObject<React.Component>;
+  props: ICalloutProps;
+  innerView: IViewProps;
 }

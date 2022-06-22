@@ -4,12 +4,14 @@ import { NATIVEDATEPICKER_TESTPAGE } from './consts';
 import { PlatformStatus, Test, TestSection } from '../Test';
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
-import { stackStyle } from '../Common/styles';
+import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
+import { Switch, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 
 const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const [startDate, setStartDate] = React.useState<Date>(new Date());
   const [endDate, setEndDate] = React.useState<Date>(null);
+  const [overrideDefaultCalendarConfiguration, setOverrideDefaultCalendarConfiguration] = React.useState(false);
 
   function didPickDates(pickedStartDate: string, pickedEndDate: string) {
     setStartDate(NativeDatePicker.parseISOString(pickedStartDate));
@@ -20,6 +22,10 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
   const fixedDates = {
     startDate: NativeDatePicker.parseISOString('2020-02-29T12:25:00.000Z'),
     endDate: NativeDatePicker.parseISOString('2020-03-07T11:55:00.000Z'),
+    overrideReferenceStartDate: NativeDatePicker.parseISOString('1999-01-01T00:00:00.000Z'),
+    overrideReferenceEndDate: NativeDatePicker.parseISOString('2000-01-01T00:00:00.000Z'),
+    defaultReferenceStartDate: new Date(new Date().getFullYear() - 3, 1, 1),
+    defaultReferenceEndDate: new Date(new Date().getFullYear() + 7, 1, 1),
   };
   const titles = {
     startTitle: 'Start Title',
@@ -36,14 +42,14 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Text variant="headerStandard">Start Date/Time</Text>
+      <Text variant="headerStandard">Selected Start Date/Time</Text>
       <Text variant="subheaderStandard">
         {startDate?.toString()} {'\n'}
       </Text>
 
-      <Text variant="headerStandard">End Date/Time</Text>
+      <Text variant="headerStandard">Selected End Date/Time</Text>
       <Text variant="subheaderStandard">
-        {endDate?.toString()} {'\n'}
+        {endDate?.toString() ?? 'N/A'} {'\n'}
       </Text>
 
       <Button content="Date picker" onClick={() => NativeDatePicker.present({ callback: didPickDates })} />
@@ -101,6 +107,27 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
         content="Date time range with custom titles (tabbed)"
         onClick={() => NativeDatePicker.present({ mode: 'dateTimeRange', ...fixedDates, ...titles, callback: didPickDates })}
       />
+
+      <Text variant="headerStandard">Calendar configuration</Text>
+      <View style={commonStyles.switch}>
+        <Text>Override default calendar configuration</Text>
+        <Switch
+          value={overrideDefaultCalendarConfiguration}
+          onValueChange={(value) => {
+            setOverrideDefaultCalendarConfiguration(value);
+            NativeDatePicker.setDefaultCalendarConfiguration({
+              referenceStartDate: value ? fixedDates.overrideReferenceStartDate : fixedDates.defaultReferenceStartDate,
+              referenceEndDate: value ? fixedDates.overrideReferenceEndDate : fixedDates.defaultReferenceEndDate,
+            });
+          }}
+        />
+      </View>
+      <Text variant="subheaderStandard">
+        Override reference start date: {fixedDates.overrideReferenceStartDate.getUTCFullYear().toString()}
+      </Text>
+      <Text variant="subheaderStandard">
+        Override reference end date: {fixedDates.overrideReferenceEndDate.getUTCFullYear().toString()}
+      </Text>
     </Stack>
   );
 };
