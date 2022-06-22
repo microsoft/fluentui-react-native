@@ -3662,9 +3662,9 @@ appdirsjs@^1.2.4:
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
 appium-mac2-driver@^1.1.4:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.2.0.tgz#b0857bbcf2bd78d138b10db0dbca9c042053e6f6"
-  integrity sha512-QGXAEAYytxT1Yyf2J+4ZyfS7u2YD2JxVGPwQh1m0nG2IEusbrnvvlqyA9LzbIIDW7YfFa2LRDeQQJFIQeQA4Pw==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.2.1.tgz#cb885e66cea200efd7d7b201c28a8af00cfb4f36"
+  integrity sha512-BE6o+TNdc6tzdBfya/CLAWa55NRxs06pBtH5MptyC8t/WF4d/sEE2wCnKAd5uI5sjGVOMssiRPMfR6hVayXglQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.0.2"
