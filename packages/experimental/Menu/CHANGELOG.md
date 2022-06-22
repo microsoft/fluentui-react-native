@@ -1,8 +1,99 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 06 Jun 2022 20:30:26 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Jun 2022 21:43:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.4
+
+Tue, 21 Jun 2022 21:43:45 GMT
+
+### Patches
+
+- Some refactoring (ruaraki@microsoft.com)
+
+## 0.15.3
+
+Tue, 21 Jun 2022 18:57:19 GMT
+
+### Patches
+
+- Add tokens to MenuPopover (ruaraki@microsoft.com)
+
+## 0.15.2
+
+Fri, 17 Jun 2022 20:00:18 GMT
+
+### Patches
+
+- Add hoverDelay prop (ruaraki@microsoft.com)
+
+## 0.15.1
+
+Fri, 17 Jun 2022 00:27:10 GMT
+
+### Patches
+
+- Update comments (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Thu, 16 Jun 2022 20:44:45 GMT
+
+### Minor changes
+
+- Fix MenuItemCheckbox/Radio (ruaraki@microsoft.com)
+
+## 0.14.8
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.8
+
+## 0.14.7
+
+Wed, 15 Jun 2022 18:26:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.29
+
+## 0.14.6
+
+Wed, 15 Jun 2022 00:46:04 GMT
+
+### Patches
+
+- macOS menu tokens (sanajmi@microsoft.com)
+
+## 0.14.5
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Fix focus on open (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/callout to v0.20.7
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+- Bump @fluentui-react-native/button to v0.22.28
+
+## 0.14.4
+
+Mon, 13 Jun 2022 23:05:44 GMT
+
+### Patches
+
+- Add comments (ruaraki@microsoft.com)
+
+## 0.14.3
+
+Mon, 13 Jun 2022 21:38:26 GMT
+
+### Patches
+
+- Close all menus when submenu item clicked (ruaraki@microsoft.com)
 
 ## 0.14.2
 

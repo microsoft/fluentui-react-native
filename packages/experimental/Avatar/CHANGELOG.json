@@ -2,6 +2,159 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Tue, 21 Jun 2022 23:39:02 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "none": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "6426ed850d4667d8cefdd7140017959dca5642fe",
+            "comment": "merge"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "Renamed Avatar to NativeAvatar, JSAvatar to Avatar"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 20:05:26 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.45",
+      "version": "0.14.45",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "f93c1716455fb220897d993f4450f00b05f0bf0a",
+            "comment": "Rewrote tests using it.each method"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 19:11:01 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.44",
+      "version": "0.14.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "531fc8d94b1452887b43073ea629838a72f0a7f5",
+            "comment": "Added ring configuration"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.43",
+      "version": "0.14.43",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "3080fa33cf5408c754ed55811456bed58536bf2c",
+            "comment": "Fixed error on Mac and Windows in getINitials method"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7",
+            "comment": "apple: remove unneccesary build settings from podspec"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 09:39:38 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.42",
+      "version": "0.14.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.43",
+            "commit": "3080fa33cf5408c754ed55811456bed58536bf2c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 15 Jun 2022 07:59:57 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.41",
+      "version": "0.14.41",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "f6e0fc83a7c93fc80dc89849d3d518ce6a94dc84",
+            "comment": "Added a new example to Tester"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.42",
+            "commit": "f6e0fc83a7c93fc80dc89849d3d518ce6a94dc84"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 13 Jun 2022 23:58:18 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.40",
+      "version": "0.14.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.41",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.3",
+            "commit": "0a93815f7fc4d837b1f0167a0029a90541ce045e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 08 Jun 2022 21:52:34 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.14.39",
+      "version": "0.14.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "b4b3b769fb664df2d3c3ff64670439bae57b2817",
+            "comment": "Added missing colors from PersonaCoin, exposed colors as props"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 06 Jun 2022 19:20:10 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.14.38",
       "version": "0.14.38",

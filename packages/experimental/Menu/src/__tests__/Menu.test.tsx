@@ -22,7 +22,7 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -40,7 +40,7 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -58,8 +58,8 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
-              <MenuItem disabled content="Option 2" />
+              <MenuItem>Option 1</MenuItem>
+              <MenuItem disabled>Option 2</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -77,9 +77,11 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuItemCheckbox name="Option 1">Option 1</MenuItemCheckbox>
               <MenuDivider />
-              <MenuItemCheckbox disabled content="Option 2" name="Option 2" />
+              <MenuItemCheckbox disabled name="Option 2">
+                Option 2
+              </MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -97,8 +99,8 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemRadio content="Option 1" name="Option 1" />
-              <MenuItemRadio content="Option 2" name="Option 2" />
+              <MenuItemRadio name="Option 1">Option 1</MenuItemRadio>
+              <MenuItemRadio name="Option 2">Option 2</MenuItemRadio>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -110,15 +112,15 @@ describe('Checkbox component tests', () => {
   it('Menu open checkbox defaultChecked', () => {
     const tree = renderer
       .create(
-        <Menu open defaultChecked={{ 'Option 1': true }}>
+        <Menu open defaultChecked={['Option 1']}>
           <MenuTrigger>
             <Button>Open</Button>
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuItemCheckbox name="Option 1">Option 1</MenuItemCheckbox>
               <MenuDivider />
-              <MenuItemCheckbox content="Option 2" name="Option 2" />
+              <MenuItemCheckbox name="Option 2">Option 2</MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -130,15 +132,15 @@ describe('Checkbox component tests', () => {
   it('Menu open checkbox checked', () => {
     const tree = renderer
       .create(
-        <Menu open checked={{ 'Option 1': true }}>
+        <Menu open checked={['Option 1']}>
           <MenuTrigger>
             <Button>Open</Button>
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItemCheckbox content="Option 1" name="Option 1" />
+              <MenuItemCheckbox name="Option 1">Option 1</MenuItemCheckbox>
               <MenuDivider />
-              <MenuItemCheckbox content="Option 2" name="Option 2" />
+              <MenuItemCheckbox name="Option 2">Option 2</MenuItemCheckbox>
             </MenuList>
           </MenuPopover>
         </Menu>,
@@ -156,14 +158,14 @@ describe('Checkbox component tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
               <Menu>
                 <MenuTrigger>
-                  <MenuItem content="Option 2" />
+                  <MenuItem>Option 2</MenuItem>
                 </MenuTrigger>
                 <MenuPopover>
                   <MenuList>
-                    <MenuItem content="Option 1" />
+                    <MenuItem>Option 1</MenuItem>
                   </MenuList>
                 </MenuPopover>
               </Menu>
@@ -186,7 +188,7 @@ describe('Menu rerender tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
@@ -205,7 +207,7 @@ describe('Menu rerender tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem content="Option 1" />
+              <MenuItem>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
@@ -224,7 +226,7 @@ describe('Menu rerender tests', () => {
           </MenuTrigger>
           <MenuPopover>
             <MenuList>
-              <MenuItem accessibilityActions={action} content="Option 1" />
+              <MenuItem accessibilityActions={action}>Option 1</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
