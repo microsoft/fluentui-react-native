@@ -1,6 +1,12 @@
 pr:
   - master
 
+parameters:
+  - name: skipNugetPublish
+    displayName: Skip Nuget Publish
+    type: boolean
+    default: false
+
 variables:
   CI: true
 
