@@ -19,8 +19,7 @@
     "directory": "apps/windows"
   },
   "dependencies": {
-    "@react-native-picker/picker": "^2.2.1",
-    "@fluentui-react-native/tester": "^0.66.1",
+    "@fluentui-react-native/tester": "^0.66.0",
     "react": "17.0.1",
     "react-native": "^0.64.2",
     "react-native-svg": "^12.3.0",
