@@ -18,18 +18,21 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
     setEndDate(NativeDatePicker.parseISOString(pickedEndDate));
   }
 
+  const today = new Date();
+
   // Here we set up some common options and use the spread operator to copy them repeatedly into examples.
   const fixedDates = {
-    startDate: NativeDatePicker.parseISOString('2020-02-29T12:25:00.000Z'),
-    endDate: NativeDatePicker.parseISOString('2020-03-07T11:55:00.000Z'),
+    startDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 7),
+    endDate: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 14),
   };
-  const referenceStartDate = customCalendarConfiguration
-    ? NativeDatePicker.parseISOString('1999-01-01T00:00:00.000Z')
-    : new Date(new Date().getFullYear() - 3, 1, 1);
 
-  const referenceEndDate = customCalendarConfiguration
-    ? NativeDatePicker.parseISOString('2000-01-01T00:00:00.000Z')
-    : new Date(new Date().getFullYear() + 7, 1, 1);
+  const customReferenceStartDate = today;
+  const customReferenceEndDate = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+  const defaultReferenceStartDate = new Date(today.getFullYear() - 3, 1, 1);
+  const defaultReferenceEndDate = new Date(defaultReferenceStartDate.getFullYear() + 10, 1, 1);
+
+  const referenceStartDate = customCalendarConfiguration ? customReferenceStartDate : defaultReferenceStartDate;
+  const referenceEndDate = customCalendarConfiguration ? customReferenceEndDate : defaultReferenceEndDate;
 
   const titles = {
     startTitle: 'Start Title',
@@ -175,13 +178,21 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
         }
       />
 
-      {/* WARNING:  The paged presenetation mode of the date time range picker is bugged.
+      {/* WARNING:  The paged presentation mode of the date time range picker is bugged.
                     It shows only a time picker with start and end tabs. */}
       {/* <Button
-        content='Date time range with custom titles (paged)'
-        onClick={() => NativeDatePicker.present(
-          {mode: 'dateTimeRange', dateRangePresentation: 'paged', ...fixedDates, ...titles, callback: didPickDates}
-        )}
+        content="Date time range with custom titles (paged)"
+        onClick={() =>
+          NativeDatePicker.present({
+            mode: 'dateTimeRange',
+            dateRangePresentation: 'paged',
+            ...fixedDates,
+            referenceStartDate: referenceStartDate,
+            referenceEndDate: referenceEndDate,
+            ...titles,
+            callback: didPickDates,
+          })
+        }
       /> */}
 
       {/* Shows 'Date Title', 'Date Subtitle', 'Start Tab' and 'End Tab' on the first page;
@@ -209,8 +220,8 @@ const NativeDatePickerMainTest: React.FunctionComponent = () => {
           }}
         />
       </View>
-      <Text variant="subheaderStandard">Reference start date: 1999-01-01</Text>
-      <Text variant="subheaderStandard">Reference end date: 2000-01-01</Text>
+      <Text variant="subheaderStandard">Reference start date: {customReferenceStartDate.toDateString()}</Text>
+      <Text variant="subheaderStandard">Reference end date: {customReferenceEndDate.toDateString()}</Text>
     </Stack>
   );
 };
