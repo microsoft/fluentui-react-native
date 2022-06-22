@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 21 Jun 2022 21:07:14 GMT and should not be manually modified.
+This log was last generated on Tue, 21 Jun 2022 23:39:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.67.0
+
+Tue, 21 Jun 2022 23:39:02 GMT
+
+### Minor changes
+
+- added notification component (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.1.0
+
+## 0.66.1
+
+Tue, 21 Jun 2022 21:43:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.15.4
 
 ## 0.66.0
 
@@ -2982,7 +2999,7 @@ Fri, 25 Jun 2021 06:21:11 GMT
 
 ### Minor changes
 
-- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
+- 📦 applying package updates **_NO_CI_** (tamasane@gmail.com)
 
 ## 0.27.0
 
