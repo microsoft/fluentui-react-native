@@ -2991,9 +2991,9 @@
     "@types/node" "*"
 
 "@types/react-native@^0.64.0":
-  version "0.64.24"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.24.tgz#54d8aaadc12d429004b0a573dc3a65ad27430cc6"
-  integrity sha512-qgqOJub7BYsAkcg3VSL3w63cgJdLoMmAX6TSTAPL53heCzUkIdtpWqjyNRH0n7jPjxPGG1Qmsv6GSUh7IfyqRg==
+  version "0.64.25"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.25.tgz#ad6f215f339f7737f33da53f246642b3adbdf5c6"
+  integrity sha512-Cq7Pi6T9pbETl3M1McdERA/9C7Y2x2yWt97NXsdnklGxt3LMPcS4mtIJNlpZgyGUVV0VWMUOLQZxjXmV04toPA==
   dependencies:
     "@types/react" "*"
 
@@ -12497,7 +12497,7 @@ statuses@~1.5.0:
 stream-buffers@2.2.x, stream-buffers@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
-  integrity sha1-kdX1Ew0c75bc+n9yaUUYh0HQnuQ=
+  integrity sha512-uyQK/mx5QjHun80FLJTfaWE7JtwfRMKBLkMne6udYOmvH0CawotVa7TfgYHzAnpphn4+TweIx1QKMnRIbipmUg==
 
 stream-buffers@^3.0.2:
   version "3.0.2"
