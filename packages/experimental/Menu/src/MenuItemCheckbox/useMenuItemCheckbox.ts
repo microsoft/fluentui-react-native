@@ -106,7 +106,7 @@ export const useMenuCheckboxInteraction = (
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
       enableFocusRing: Platform.select({
         macos: false,
-        default: true, // win32
+        default: !pressable.state.hovered, // win32
       }),
       focusable: Platform.select({
         macos: !disabled,
