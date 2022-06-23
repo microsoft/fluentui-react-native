@@ -2,6 +2,111 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 23 Jun 2022 16:08:07 GMT",
+      "tag": "@fluentui-react-native/tester_v0.68.0",
+      "version": "0.68.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7880dae12f6e2283020d0a6413fdb7e8193afb2b",
+            "comment": "Add ability to set custom reference start/end dates"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.15.1",
+            "commit": "7880dae12f6e2283020d0a6413fdb7e8193afb2b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.5.0",
+            "commit": "7880dae12f6e2283020d0a6413fdb7e8193afb2b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 23:39:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.67.0",
+      "version": "0.67.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6426ed850d4667d8cefdd7140017959dca5642fe",
+            "comment": "added notification component"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.1.0",
+            "commit": "6426ed850d4667d8cefdd7140017959dca5642fe"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:43:45 GMT",
+      "tag": "@fluentui-react-native/tester_v0.66.1",
+      "version": "0.66.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v0.15.4",
+            "commit": "b63cb286a24e78999adee82781f58d2610b3b776"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.66.0",
+      "version": "0.66.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "Renamed Avatar to NativeAvatar, JSAvatar to Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.0",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.15.0",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 20:05:26 GMT",
+      "tag": "@fluentui-react-native/tester_v0.65.5",
+      "version": "0.65.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.14.45",
+            "commit": "f93c1716455fb220897d993f4450f00b05f0bf0a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Jun 2022 18:57:19 GMT",
       "tag": "@fluentui-react-native/tester_v0.65.4",
       "version": "0.65.4",

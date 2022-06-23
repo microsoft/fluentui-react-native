@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 21 Jun 2022 18:57:19 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Jun 2022 16:08:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.68.0
+
+Thu, 23 Jun 2022 16:08:07 GMT
+
+### Minor changes
+
+- Add ability to set custom reference start/end dates (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.15.1
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.5.0
+
+## 0.67.0
+
+Tue, 21 Jun 2022 23:39:02 GMT
+
+### Minor changes
+
+- added notification component (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.1.0
+
+## 0.66.1
+
+Tue, 21 Jun 2022 21:43:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.15.4
+
+## 0.66.0
+
+Tue, 21 Jun 2022 21:07:14 GMT
+
+### Minor changes
+
+- Renamed Avatar to NativeAvatar, JSAvatar to Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.0
+- Bump @fluentui-react-native/experimental-avatar to v0.15.0
+
+## 0.65.5
+
+Tue, 21 Jun 2022 20:05:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-avatar to v0.14.45
 
 ## 0.65.4
 
