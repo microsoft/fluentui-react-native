@@ -83,9 +83,5 @@
     "react-native-macos": "^0.64.6",
     "shell-quote": "^1.7.3",
     "simple-plist": "2.0.0-rc.0"
-  },
-  "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-rename": "^2.0.0"
   }
 }

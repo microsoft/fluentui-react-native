@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/Shadow",
+  "name": "@fluentui-react-native/shadow",
   "version": "0.0.1",
-  "description": "add component-description",
+  "description": "A cross-platform Shadow component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -23,7 +23,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/components/ComponentTemplate"
+    "directory": "packages/components/Shadow"
   },
   "dependencies": {
     "@fluentui-react-native/experimental-text": ">=0.7.17 <1.0.0",
