@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 21 Jun 2022 21:07:14 GMT and should not be manually modified.
+This log was last generated on Thu, 23 Jun 2022 16:08:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.1
+
+Thu, 23 Jun 2022 16:08:07 GMT
+
+### Patches
+
+- Bump FUA podspecs/podfile.lock to 0.5.2 (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.15.0
 
