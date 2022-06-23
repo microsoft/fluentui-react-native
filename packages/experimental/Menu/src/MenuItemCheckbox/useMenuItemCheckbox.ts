@@ -72,7 +72,7 @@ export const useMenuCheckboxInteraction = (
   const pressable = useAsPressable({ ...rest, disabled, onPress: toggleCheckedWithFocus });
   const buttonRef = useViewCommandFocus(componentRef);
 
-  const onKeyProps = useKeyProps(toggleCallback, ' ');
+  const onKeyProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const accessibilityActionsProp = accessibilityActions
     ? [...defaultAccessibilityActions, ...accessibilityActions]
     : defaultAccessibilityActions;
