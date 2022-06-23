@@ -10,6 +10,7 @@ import {
   useViewCommandFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { useMenuListContext } from '../context/menuListContext';
+import { useHoverFocusEffect } from '../MenuItem/useMenuItem';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -87,6 +88,8 @@ export const useMenuCheckboxInteraction = (
     [disabled, toggleCallback, onAccessibilityAction],
   );
 
+  useHoverFocusEffect(pressable.state.hovered, componentRef);
+
   const state = {
     ...pressable.state,
     disabled: !!props.disabled,
@@ -103,7 +106,7 @@ export const useMenuCheckboxInteraction = (
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
       enableFocusRing: Platform.select({
         macos: false,
-        default: true, // win32
+        default: !pressable.state.hovered, // win32
       }),
       focusable: Platform.select({
         macos: !disabled,
