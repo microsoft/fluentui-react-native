@@ -70,13 +70,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
   const hasCheckmarks = useMenuListContext().hasCheckmarks;
 
-  React.useEffect(() => {
-    if (pressable.state.hovered) {
-      componentRef?.current?.focus();
-    } else {
-      componentRef?.current?.blur();
-    }
-  }, [pressable.state.hovered, componentRef]);
+  useHoverFocusEffect(pressable.state.hovered, componentRef);
 
   return {
     props: {
@@ -109,3 +103,13 @@ function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: Acc
   }
   return { disabled };
 }
+
+export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>) => {
+  React.useEffect(() => {
+    if (hovered) {
+      componentRef?.current?.focus();
+    } else {
+      componentRef?.current?.blur();
+    }
+  }, [hovered, componentRef]);
+};
