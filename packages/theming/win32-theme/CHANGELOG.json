@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Fri, 24 Jun 2022 18:52:57 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.19.1",
+      "version": "0.19.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "5fd0e4bcc2aa3d09d17ab018562b64d41d8c5b62",
+            "comment": "Override colors for checkmark in MenuItem"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 May 2022 18:43:10 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.19.0",
       "version": "0.19.0",

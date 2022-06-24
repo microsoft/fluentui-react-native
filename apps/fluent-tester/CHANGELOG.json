@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 24 Jun 2022 18:52:57 GMT",
+      "tag": "@fluentui-react-native/tester_v0.68.2",
+      "version": "0.68.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.19.1",
+            "commit": "143106ff88f12c3ad92412d554aaf055e0bab2ed"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Jun 2022 22:10:22 GMT",
       "tag": "@fluentui-react-native/tester_v0.68.1",
       "version": "0.68.1",
