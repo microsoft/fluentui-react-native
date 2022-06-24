@@ -14,6 +14,8 @@ interface DatePickerParameterObject {
   datePickerType?: NativeDatePickerType;
   startDate?: Date;
   endDate?: Date;
+  referenceStartDate?: Date;
+  referenceEndDate?: Date;
   startTitle?: string;
   startSubtitle?: string;
   startTab?: string;
@@ -33,6 +35,8 @@ NativeDatePicker.present = ({
   datePickerType = 'calendar',
   startDate = null,
   endDate = null,
+  referenceStartDate = null,
+  referenceEndDate = null,
   startTitle = null,
   startSubtitle = null,
   startTab = null,
@@ -51,6 +55,8 @@ NativeDatePicker.present = ({
     datePickerType,
     startDate?.toISOString(),
     endDate?.toISOString(),
+    referenceStartDate?.toISOString(),
+    referenceEndDate?.toISOString(),
     startTitle,
     startSubtitle,
     startTab,
@@ -62,21 +68,6 @@ NativeDatePicker.present = ({
     timeTitle,
     timeSubtitle,
     callback,
-  );
-};
-
-interface CalendarConfigurationObject {
-  referenceStartDate?: Date;
-  referenceEndDate?: Date;
-}
-
-NativeDatePicker.setDefaultCalendarConfiguration = ({
-  referenceStartDate = null,
-  referenceEndDate = null,
-}: CalendarConfigurationObject) => {
-  NativeDatePicker.setDefaultCalendarConfigurationWithReferenceStartDate(
-    referenceStartDate?.toISOString(),
-    referenceEndDate?.toISOString(),
   );
 };
 
@@ -94,7 +85,6 @@ NativeDatePicker.parseISOString = (dateISOString: string): Date => {
 
 interface NativeDatePickerInterface {
   present(object: DatePickerParameterObject): void;
-  setDefaultCalendarConfiguration(object: CalendarConfigurationObject): void;
   parseISOString(dateISOString: string): Date;
 }
 

@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 21 Jun 2022 23:39:02 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Jun 2022 18:52:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.68.2
+
+Fri, 24 Jun 2022 18:52:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/win32-theme to v0.19.1
+
+## 0.68.1
+
+Thu, 23 Jun 2022 22:10:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.15.5
+
+## 0.68.0
+
+Thu, 23 Jun 2022 16:08:07 GMT
+
+### Minor changes
+
+- Add ability to set custom reference start/end dates (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.15.1
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.5.0
 
 ## 0.67.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Wed, 25 May 2022 18:43:10 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Jun 2022 18:52:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Fri, 24 Jun 2022 18:52:57 GMT
+
+### Patches
+
+- Override colors for checkmark in MenuItem (ruaraki@microsoft.com)
 
 ## 0.19.0
 
