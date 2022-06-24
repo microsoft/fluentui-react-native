@@ -2276,9 +2276,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^2.2.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.1.tgz#92feb7e0672d739624517dae04bf4de1452dfcdc"
-  integrity sha512-1XWy3IQgwr7MWd30KdY1iUh2gQZD+JiotN1ifj/ptFUYKon/0UFwngKQaWCO/CP/FdLl20/huSSLwKedYrdMMA==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.2.tgz#2925eb8e76ff6b584c80529adc251df963be9141"
+  integrity sha512-0nY8638h1J3wKz6P3IJMpOoxJDdOj7Dk/K2hP/xpqP3KnIY0lmoqYlhyNihuyVPocDGajf6SA7LFFsFepQ56ag==
 
 "@react-native-windows/cli@0.64.6":
   version "0.64.6"
@@ -2388,9 +2388,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.16"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.16.tgz#7d837b99c252b8e6696f3a1b0083f7a6b8e60c4d"
-  integrity sha512-+KZV3jwaKdOGLs48wLIOa9r4EhV3DpsNAVcCaWJFHiQXGAIQf7spkDWNEuYIX08PfKyrjAy8CrxwobRCShDAwQ==
+  version "1.12.17"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.17.tgz#8d1dc00b86ea4f82e09f58d625f2f51b7358edb9"
+  integrity sha512-brsxYlc5Ej9O2iOGdw4qfC2lN1WcLK7UsS3HIYOcd9qSqY9Jv6D0cVR/go05ICBHIRB4GqsoipQUPzB3H4Jz/Q==
 
 "@rnx-kit/eslint-plugin@^0.2.8":
   version "0.2.13"
@@ -3002,9 +3002,9 @@
     "@types/node" "*"
 
 "@types/react-native@^0.64.0":
-  version "0.64.24"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.24.tgz#54d8aaadc12d429004b0a573dc3a65ad27430cc6"
-  integrity sha512-qgqOJub7BYsAkcg3VSL3w63cgJdLoMmAX6TSTAPL53heCzUkIdtpWqjyNRH0n7jPjxPGG1Qmsv6GSUh7IfyqRg==
+  version "0.64.25"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.25.tgz#ad6f215f339f7737f33da53f246642b3adbdf5c6"
+  integrity sha512-Cq7Pi6T9pbETl3M1McdERA/9C7Y2x2yWt97NXsdnklGxt3LMPcS4mtIJNlpZgyGUVV0VWMUOLQZxjXmV04toPA==
   dependencies:
     "@types/react" "*"
 
@@ -3673,9 +3673,9 @@ appdirsjs@^1.2.4:
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
 appium-mac2-driver@^1.1.4:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.2.0.tgz#b0857bbcf2bd78d138b10db0dbca9c042053e6f6"
-  integrity sha512-QGXAEAYytxT1Yyf2J+4ZyfS7u2YD2JxVGPwQh1m0nG2IEusbrnvvlqyA9LzbIIDW7YfFa2LRDeQQJFIQeQA4Pw==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.2.1.tgz#cb885e66cea200efd7d7b201c28a8af00cfb4f36"
+  integrity sha512-BE6o+TNdc6tzdBfya/CLAWa55NRxs06pBtH5MptyC8t/WF4d/sEE2wCnKAd5uI5sjGVOMssiRPMfR6hVayXglQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.0.2"
@@ -12499,7 +12499,7 @@ statuses@~1.5.0:
 stream-buffers@2.2.x, stream-buffers@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
-  integrity sha1-kdX1Ew0c75bc+n9yaUUYh0HQnuQ=
+  integrity sha512-uyQK/mx5QjHun80FLJTfaWE7JtwfRMKBLkMne6udYOmvH0CawotVa7TfgYHzAnpphn4+TweIx1QKMnRIbipmUg==
 
 stream-buffers@^3.0.2:
   version "3.0.2"

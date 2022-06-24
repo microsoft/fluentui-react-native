@@ -10,84 +10,84 @@ PODS:
     - React-jsi (= 0.64.3)
     - ReactCommon/turbomodule/core (= 0.64.3)
   - FRNAvatar (0.15.0):
-    - MicrosoftFluentUI (= 0.5.0)
-    - MicrosoftFluentUI/Avatar_ios (= 0.5.0)
+    - MicrosoftFluentUI (= 0.5.2)
+    - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
   - FRNDatePicker (0.4.4):
-    - MicrosoftFluentUI (= 0.5.0)
+    - MicrosoftFluentUI (= 0.5.2)
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.5.0):
-    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.5.0)
-    - MicrosoftFluentUI/Appearance_mac (= 0.5.0)
-    - MicrosoftFluentUI/Avatar_ios (= 0.5.0)
-    - MicrosoftFluentUI/AvatarGroup_ios (= 0.5.0)
-    - MicrosoftFluentUI/AvatarView_mac (= 0.5.0)
-    - MicrosoftFluentUI/BadgeField_ios (= 0.5.0)
-    - MicrosoftFluentUI/BadgeView_mac (= 0.5.0)
-    - MicrosoftFluentUI/BarButtonItems_ios (= 0.5.0)
-    - MicrosoftFluentUI/BottomCommanding_ios (= 0.5.0)
-    - MicrosoftFluentUI/BottomSheet_ios (= 0.5.0)
-    - MicrosoftFluentUI/Button_ios (= 0.5.0)
-    - MicrosoftFluentUI/Button_mac (= 0.5.0)
-    - MicrosoftFluentUI/Calendar_ios (= 0.5.0)
-    - MicrosoftFluentUI/Card_ios (= 0.5.0)
-    - MicrosoftFluentUI/CardNudge_ios (= 0.5.0)
-    - MicrosoftFluentUI/CommandBar_ios (= 0.5.0)
-    - MicrosoftFluentUI/Core_ios (= 0.5.0)
-    - MicrosoftFluentUI/Core_mac (= 0.5.0)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.5.0)
-    - MicrosoftFluentUI/DotView_ios (= 0.5.0)
-    - MicrosoftFluentUI/Drawer_ios (= 0.5.0)
-    - MicrosoftFluentUI/DynamicColor_mac (= 0.5.0)
-    - MicrosoftFluentUI/EasyTapButton_ios (= 0.5.0)
-    - MicrosoftFluentUI/HUD_ios (= 0.5.0)
-    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.5.0)
-    - MicrosoftFluentUI/Label_ios (= 0.5.0)
-    - MicrosoftFluentUI/Link_mac (= 0.5.0)
-    - MicrosoftFluentUI/Navigation_ios (= 0.5.0)
-    - MicrosoftFluentUI/Notification_ios (= 0.5.0)
-    - MicrosoftFluentUI/Obscurable_ios (= 0.5.0)
-    - MicrosoftFluentUI/OtherCells_ios (= 0.5.0)
-    - MicrosoftFluentUI/PeoplePicker_ios (= 0.5.0)
-    - MicrosoftFluentUI/PersonaButton_ios (= 0.5.0)
-    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.5.0)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.5.0)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.5.0)
-    - MicrosoftFluentUI/Presenters_ios (= 0.5.0)
-    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.5.0)
-    - MicrosoftFluentUI/SegmentedControl_ios (= 0.5.0)
-    - MicrosoftFluentUI/Separator_ios (= 0.5.0)
-    - MicrosoftFluentUI/Separator_mac (= 0.5.0)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.5.0)
-    - MicrosoftFluentUI/TabBar_ios (= 0.5.0)
-    - MicrosoftFluentUI/TableView_ios (= 0.5.0)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.5.0)
-    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.5.0)
-    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.5.0)
-    - MicrosoftFluentUI/Utilities_ios (= 0.5.0)
-  - MicrosoftFluentUI/ActivityIndicator_ios (0.5.0):
+  - MicrosoftFluentUI (0.5.2):
+    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.5.2)
+    - MicrosoftFluentUI/Appearance_mac (= 0.5.2)
+    - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
+    - MicrosoftFluentUI/AvatarGroup_ios (= 0.5.2)
+    - MicrosoftFluentUI/AvatarView_mac (= 0.5.2)
+    - MicrosoftFluentUI/BadgeField_ios (= 0.5.2)
+    - MicrosoftFluentUI/BadgeView_mac (= 0.5.2)
+    - MicrosoftFluentUI/BarButtonItems_ios (= 0.5.2)
+    - MicrosoftFluentUI/BottomCommanding_ios (= 0.5.2)
+    - MicrosoftFluentUI/BottomSheet_ios (= 0.5.2)
+    - MicrosoftFluentUI/Button_ios (= 0.5.2)
+    - MicrosoftFluentUI/Button_mac (= 0.5.2)
+    - MicrosoftFluentUI/Calendar_ios (= 0.5.2)
+    - MicrosoftFluentUI/Card_ios (= 0.5.2)
+    - MicrosoftFluentUI/CardNudge_ios (= 0.5.2)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.5.2)
+    - MicrosoftFluentUI/Core_ios (= 0.5.2)
+    - MicrosoftFluentUI/Core_mac (= 0.5.2)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.5.2)
+    - MicrosoftFluentUI/DotView_ios (= 0.5.2)
+    - MicrosoftFluentUI/Drawer_ios (= 0.5.2)
+    - MicrosoftFluentUI/DynamicColor_mac (= 0.5.2)
+    - MicrosoftFluentUI/EasyTapButton_ios (= 0.5.2)
+    - MicrosoftFluentUI/HUD_ios (= 0.5.2)
+    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.5.2)
+    - MicrosoftFluentUI/Label_ios (= 0.5.2)
+    - MicrosoftFluentUI/Link_mac (= 0.5.2)
+    - MicrosoftFluentUI/Navigation_ios (= 0.5.2)
+    - MicrosoftFluentUI/Notification_ios (= 0.5.2)
+    - MicrosoftFluentUI/Obscurable_ios (= 0.5.2)
+    - MicrosoftFluentUI/OtherCells_ios (= 0.5.2)
+    - MicrosoftFluentUI/PeoplePicker_ios (= 0.5.2)
+    - MicrosoftFluentUI/PersonaButton_ios (= 0.5.2)
+    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.5.2)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.5.2)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.5.2)
+    - MicrosoftFluentUI/Presenters_ios (= 0.5.2)
+    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.5.2)
+    - MicrosoftFluentUI/SegmentedControl_ios (= 0.5.2)
+    - MicrosoftFluentUI/Separator_ios (= 0.5.2)
+    - MicrosoftFluentUI/Separator_mac (= 0.5.2)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.5.2)
+    - MicrosoftFluentUI/TabBar_ios (= 0.5.2)
+    - MicrosoftFluentUI/TableView_ios (= 0.5.2)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.5.2)
+    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.5.2)
+    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.5.2)
+    - MicrosoftFluentUI/Utilities_ios (= 0.5.2)
+  - MicrosoftFluentUI/ActivityIndicator_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Avatar_ios (0.5.0):
+  - MicrosoftFluentUI/Avatar_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/AvatarGroup_ios (0.5.0):
+  - MicrosoftFluentUI/AvatarGroup_ios (0.5.2):
     - MicrosoftFluentUI/Avatar_ios
-  - MicrosoftFluentUI/BadgeField_ios (0.5.0):
+  - MicrosoftFluentUI/BadgeField_ios (0.5.2):
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/BarButtonItems_ios (0.5.0):
+  - MicrosoftFluentUI/BarButtonItems_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/BottomCommanding_ios (0.5.0):
+  - MicrosoftFluentUI/BottomCommanding_ios (0.5.2):
     - MicrosoftFluentUI/BottomSheet_ios
     - MicrosoftFluentUI/OtherCells_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TabBar_ios
     - MicrosoftFluentUI/TableView_ios
-  - MicrosoftFluentUI/BottomSheet_ios (0.5.0):
+  - MicrosoftFluentUI/BottomSheet_ios (0.5.2):
     - MicrosoftFluentUI/Obscurable_ios
     - MicrosoftFluentUI/ResizingHandleView_ios
-  - MicrosoftFluentUI/Button_ios (0.5.0):
+  - MicrosoftFluentUI/Button_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Calendar_ios (0.5.0):
+  - MicrosoftFluentUI/Calendar_ios (0.5.2):
     - MicrosoftFluentUI/BarButtonItems_ios
     - MicrosoftFluentUI/DotView_ios
     - MicrosoftFluentUI/Label_ios
@@ -95,87 +95,87 @@ PODS:
     - MicrosoftFluentUI/SegmentedControl_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TwoLineTitleView_ios
-  - MicrosoftFluentUI/Card_ios (0.5.0):
+  - MicrosoftFluentUI/Card_ios (0.5.2):
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/CardNudge_ios (0.5.0):
+  - MicrosoftFluentUI/CardNudge_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/CommandBar_ios (0.5.0):
+  - MicrosoftFluentUI/CommandBar_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Core_ios (0.5.0)
-  - MicrosoftFluentUI/DotView_ios (0.5.0):
+  - MicrosoftFluentUI/Core_ios (0.5.2)
+  - MicrosoftFluentUI/DotView_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Drawer_ios (0.5.0):
+  - MicrosoftFluentUI/Drawer_ios (0.5.2):
     - MicrosoftFluentUI/Obscurable_ios
     - MicrosoftFluentUI/ResizingHandleView_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TouchForwardingView_ios
-  - MicrosoftFluentUI/EasyTapButton_ios (0.5.0):
+  - MicrosoftFluentUI/EasyTapButton_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/HUD_ios (0.5.0):
+  - MicrosoftFluentUI/HUD_ios (0.5.2):
     - MicrosoftFluentUI/ActivityIndicator_ios
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/TouchForwardingView_ios
-  - MicrosoftFluentUI/IndeterminateProgressBar_ios (0.5.0):
+  - MicrosoftFluentUI/IndeterminateProgressBar_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Label_ios (0.5.0):
+  - MicrosoftFluentUI/Label_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Navigation_ios (0.5.0):
+  - MicrosoftFluentUI/Navigation_ios (0.5.2):
     - MicrosoftFluentUI/ActivityIndicator_ios
     - MicrosoftFluentUI/Avatar_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TwoLineTitleView_ios
-  - MicrosoftFluentUI/Notification_ios (0.5.0):
+  - MicrosoftFluentUI/Notification_ios (0.5.2):
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Obscurable_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/Obscurable_ios (0.5.0):
+  - MicrosoftFluentUI/Obscurable_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/OtherCells_ios (0.5.0):
+  - MicrosoftFluentUI/OtherCells_ios (0.5.2):
     - MicrosoftFluentUI/ActivityIndicator_ios
     - MicrosoftFluentUI/TableView_ios
-  - MicrosoftFluentUI/PeoplePicker_ios (0.5.0):
+  - MicrosoftFluentUI/PeoplePicker_ios (0.5.2):
     - MicrosoftFluentUI/Avatar_ios
     - MicrosoftFluentUI/BadgeField_ios
     - MicrosoftFluentUI/OtherCells_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/PersonaButton_ios (0.5.0):
+  - MicrosoftFluentUI/PersonaButton_ios (0.5.2):
     - MicrosoftFluentUI/Avatar_ios
-  - MicrosoftFluentUI/PersonaButtonCarousel_ios (0.5.0):
+  - MicrosoftFluentUI/PersonaButtonCarousel_ios (0.5.2):
     - MicrosoftFluentUI/PersonaButton_ios
-  - MicrosoftFluentUI/PillButtonBar_ios (0.5.0):
+  - MicrosoftFluentUI/PillButtonBar_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/PopupMenu_ios (0.5.0):
+  - MicrosoftFluentUI/PopupMenu_ios (0.5.2):
     - MicrosoftFluentUI/Drawer_ios
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Separator_ios
     - MicrosoftFluentUI/TableView_ios
-  - MicrosoftFluentUI/Presenters_ios (0.5.0):
+  - MicrosoftFluentUI/Presenters_ios (0.5.2):
     - MicrosoftFluentUI/Obscurable_ios
-  - MicrosoftFluentUI/ResizingHandleView_ios (0.5.0):
+  - MicrosoftFluentUI/ResizingHandleView_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/SegmentedControl_ios (0.5.0):
+  - MicrosoftFluentUI/SegmentedControl_ios (0.5.2):
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/Separator_ios (0.5.0):
+  - MicrosoftFluentUI/Separator_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/Shimmer_ios (0.5.0):
+  - MicrosoftFluentUI/Shimmer_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
     - MicrosoftFluentUI/Utilities_ios
-  - MicrosoftFluentUI/TabBar_ios (0.5.0):
+  - MicrosoftFluentUI/TabBar_ios (0.5.2):
     - MicrosoftFluentUI/Avatar_ios
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/TableView_ios (0.5.0):
+  - MicrosoftFluentUI/TableView_ios (0.5.2):
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/Separator_ios
-  - MicrosoftFluentUI/Tooltip_ios (0.5.0):
+  - MicrosoftFluentUI/Tooltip_ios (0.5.2):
     - MicrosoftFluentUI/Label_ios
     - MicrosoftFluentUI/TouchForwardingView_ios
-  - MicrosoftFluentUI/TouchForwardingView_ios (0.5.0):
+  - MicrosoftFluentUI/TouchForwardingView_ios (0.5.2):
     - MicrosoftFluentUI/Core_ios
-  - MicrosoftFluentUI/TwoLineTitleView_ios (0.5.0):
+  - MicrosoftFluentUI/TwoLineTitleView_ios (0.5.2):
     - MicrosoftFluentUI/EasyTapButton_ios
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/Utilities_ios (0.5.0)
+  - MicrosoftFluentUI/Utilities_ios (0.5.2)
   - RCT-Folly (2020.01.13.00):
     - boost-for-react-native
     - DoubleConversion
@@ -573,11 +573,11 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: 84b86db7b0a2a6d8e0d8a07a7384f8bd3c502cc8
-  FRNAvatar: 64738a0853a00b0c83c491ba5ad892bac6b77f22
-  FRNDatePicker: 90bc29c5651b29a616c63448d0cad0115aaf67d4
+  FBReactNativeSpec: e46380c3ebf05dc813f8b8e5ca403e47822318f6
+  FRNAvatar: e176ece0a413636c7ea6b82ec603dfb772c92090
+  FRNDatePicker: a2be59f115ff637d41837ca7a7b809ffd4905ee7
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
-  MicrosoftFluentUI: 4c12374f2eab4c8f37b9d0c9a1e96210e96db78e
+  MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
   RCTRequired: d34bf57e17cb6e3b2681f4809b13843c021feb6c
   RCTTypeSafety: 8dab4933124ed39bb0c1d88d74d61b1eb950f28f

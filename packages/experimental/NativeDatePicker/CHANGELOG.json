@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Thu, 23 Jun 2022 16:08:07 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "7880dae12f6e2283020d0a6413fdb7e8193afb2b",
+            "comment": "Add ability to set custom reference start/end dates"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jun 2022 17:09:28 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.4",
       "version": "0.4.4",
