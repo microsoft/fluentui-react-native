@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 24 Jun 2022 22:38:56 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Jun 2022 23:12:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.7
+
+Fri, 24 Jun 2022 23:12:59 GMT
+
+### Patches
+
+- Focus visuals should show as soon as component is hovered (ruaraki@microsoft.com)
 
 ## 0.15.6
 
