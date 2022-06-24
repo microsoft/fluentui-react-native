@@ -1,2 +1,2 @@
-export * from './Shadow';
-export * from './Shadow.types';
+export { Shadow } from './Shadow';
+export { ShadowDepth, ShadowProps } from './Shadow.types';
