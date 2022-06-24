@@ -6,20 +6,24 @@ import { useMenuCheckboxInteraction } from '../MenuItemCheckbox/useMenuItemCheck
 import { useMenuContext } from '../context/menuContext';
 
 export const useMenuItemRadio = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
-  const { disabled, name } = props;
+  const { disabled, name, persistOnClick } = props;
   const context = useMenuContext();
   const listContext = useMenuListContext();
   const selectRadio = listContext.selectRadio;
   const setOpen = context.setOpen;
+  let shouldPersist = context.persistOnItemClick;
+  shouldPersist = persistOnClick ?? shouldPersist;
 
   const toggleChecked = React.useCallback(
     (e: InteractionEvent) => {
       if (!disabled) {
         selectRadio(e, name);
-        setOpen(e, false /*isOpen*/, true /*bubble*/);
+        if (!shouldPersist) {
+          setOpen(e, false /*isOpen*/, true /*bubble*/);
+        }
       }
     },
-    [disabled, name, selectRadio, setOpen],
+    [disabled, name, selectRadio, setOpen, shouldPersist],
   );
 
   // Explicitly only run on mount and unmount
