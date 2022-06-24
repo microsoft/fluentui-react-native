@@ -9,7 +9,7 @@ PODS:
     - React-Core (= 0.64.30)
     - React-jsi (= 0.64.30)
     - ReactCommon/turbomodule/core (= 0.64.30)
-  - FRNAvatar (0.15.0):
+  - FRNAvatar (0.15.1):
     - MicrosoftFluentUI (= 0.5.2)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
@@ -353,7 +353,7 @@ PODS:
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (2.4.1):
+  - RNCPicker (2.4.2):
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
@@ -493,15 +493,15 @@ SPEC CHECKSUMS:
   boost-for-react-native: d5ad1140010aa8cb622323a781ecbeab4425d19a
   DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
   FBLazyVector: 8a96f324df8c1bc4e2f7e2163d704ec364f0bc6c
-  FBReactNativeSpec: 625af937353349e558cc2651adf11201e2660f1c
-  FRNAvatar: e176ece0a413636c7ea6b82ec603dfb772c92090
+  FBReactNativeSpec: 565b9e3e0d677e88cebf57f4d847e30dfaaf6a32
+  FRNAvatar: a532bbf467cf1c49c9762b1838808b1482a11835
   FRNCallout: a91af06afd4ac99fe854d722bbd3dc5ed12b52c4
   FRNCheckbox: 8e81d152fe7a0447b5eeb70595c96ac3c491b95f
   FRNMenuButton: 4f8646e57af2781043844d391f90bf11c8e9dcbc
   FRNRadioButton: e98049db228b2ea3cdf7eb8f02dd085408629f06
-  glog: 0dc7efada961c0793012970b60faebbd58b0decb
+  glog: 05f0ec9bc4f27fdfeffe017aef0c06d454a18b31
   MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
-  RCT-Folly: b3998425a8ee9f695f57a204dc494534246f0fe9
+  RCT-Folly: 02d00279d7b23f9c1966297e57a66a8ff9d5d2f6
   RCTFocusZone: e13db0cc2e4d324259579e3c29afe771423a0e87
   RCTRequired: 8903667b081ec6b4b870c6b25ff1038eef62db0d
   RCTTypeSafety: 061b065a52bcd68ca38755bc56784a4889659625
@@ -527,11 +527,11 @@ SPEC CHECKSUMS:
   ReactCommon: 0665778a9e30416d3bff636251a34d1e93ee59af
   ReactTestApp-DevSupport: 6275cb3b001d9d971f8328580f757409a1c1cf64
   ReactTestApp-Resources: 320923a3635f7bf90caa1a28fd29765b577888d9
-  RNCPicker: abc646b53a3d28ccfa3232c927a0ca52e0cf024d
+  RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
   Yoga: 1ea22d438a06b78c080c477ecadd4eae4c4907f4
 
-PODFILE CHECKSUM: 568704fb95966cf7ad6daa54a1d36eb2d5c3bba6
+PODFILE CHECKSUM: 75b2b8a2e78c08bffa7e05387a19800c139d5c86
 
 COCOAPODS: 1.11.3
