@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Focus visuals should show as soon as component is hovered",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
