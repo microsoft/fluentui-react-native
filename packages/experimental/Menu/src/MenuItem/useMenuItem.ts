@@ -105,7 +105,7 @@ function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: Acc
 }
 
 export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>) => {
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (hovered) {
       componentRef?.current?.focus();
     } else {
