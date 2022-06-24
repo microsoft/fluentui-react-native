@@ -31,4 +31,8 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForegroundDisabled,
   },
+  focused: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    color: t.colors.neutralForeground1Hover,
+  },
 });
