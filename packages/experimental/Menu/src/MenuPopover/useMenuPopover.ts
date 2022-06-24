@@ -48,10 +48,10 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     setPopoverHoverOutTimer(timer);
   }, [openOnHover, setOpen, setPopoverHoverOutTimer]);
 
-  const [canFocusOnContainer, setCanFocusOnContainer] = React.useState<boolean>(shouldFocusOnContainer);
+  const [canFocusOnPopover, setCanFocusOnPopover] = React.useState<boolean>(shouldFocusOnContainer);
   const onBlur = React.useCallback(() => {
-    setCanFocusOnContainer(false);
-  }, [setCanFocusOnContainer]);
+    setCanFocusOnPopover(false);
+  }, [setCanFocusOnPopover]);
 
   return {
     props: {
@@ -67,7 +67,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
       onMouseEnter,
       onMouseLeave: isCloseOnHoverOutEnabled && onMouseLeave,
       accessible: shouldFocusOnContainer,
-      focusable: canFocusOnContainer,
+      focusable: canFocusOnPopover,
       onBlur,
     },
   };
