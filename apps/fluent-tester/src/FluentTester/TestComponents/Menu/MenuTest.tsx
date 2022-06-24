@@ -184,6 +184,57 @@ const MenuControlledOpen: React.FunctionComponent = () => {
   );
 };
 
+const CustomMenuPopover = MenuPopover.customize({ borderWidth: 4, borderColor: 'blue' });
+const CustomMenuList = MenuList.customize({ gap: 5, padding: 6, backgroundColor: 'pink' });
+const CustomMenuItem = MenuItem.customize({
+  gap: 5,
+  padding: 8,
+  backgroundColor: 'red',
+  color: 'white',
+  borderRadius: 2,
+  checkmarkSize: 10,
+  submenuIndicatorPadding: 4,
+  submenuIndicatorSize: 10,
+  fontSize: 14,
+});
+const CustomMenuCheckmark = MenuItemCheckbox.customize({
+  gap: 5,
+  padding: 8,
+  backgroundColor: 'red',
+  color: 'white',
+  borderRadius: 2,
+  checkmarkSize: 10,
+  fontSize: 14,
+  checkmarkColor: 'blue',
+});
+const CustomMenuDivider = MenuDivider.customize({
+  height: 8,
+  margin: 4,
+  marginVertical: 6,
+  width: 100,
+  backgroundColor: 'purple',
+});
+
+const MenuCustomized: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <CustomMenuPopover>
+          <CustomMenuList>
+            <CustomMenuItem>A MenuItem</CustomMenuItem>
+            <CustomMenuItem>A MenuItem</CustomMenuItem>
+            <CustomMenuDivider />
+            <CustomMenuCheckmark name={'custom'}>A MenuItem</CustomMenuCheckmark>
+          </CustomMenuList>
+        </CustomMenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const menuSections: TestSection[] = [
   {
     name: 'Menu Default',
@@ -209,6 +260,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Submenu',
     component: MenuSubMenu,
+  },
+  {
+    name: 'Menu Customized',
+    component: MenuCustomized,
   },
   {
     name: 'Menu E2E',

@@ -2,7 +2,13 @@ import * as React from 'react';
 import { AccessibilityState, I18nManager, Platform } from 'react-native';
 import { MenuItemProps, MenuItemState } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
-import { InteractionEvent, isKeyPressEvent, useAsPressable, useKeyDownProps } from '@fluentui-react-native/interactive-hooks';
+import {
+  InteractionEvent,
+  isKeyPressEvent,
+  useAsPressable,
+  useKeyDownProps,
+  useViewCommandFocus,
+} from '@fluentui-react-native/interactive-hooks';
 import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
@@ -20,6 +26,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const isInSubmenu = isSubmenu && !isTrigger;
 
   const setOpen = useMenuContext().setOpen;
+
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       if (disabled) {
@@ -56,11 +63,14 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   );
 
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
+  const itemRef = useViewCommandFocus(componentRef);
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
   const hasCheckmarks = useMenuListContext().hasCheckmarks;
+
+  useHoverFocusEffect(pressable.state.hovered, componentRef);
 
   return {
     props: {
@@ -71,13 +81,13 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
       enableFocusRing: Platform.select({
         macos: false,
-        default: true, // win32
+        default: !pressable.state.hovered, // win32
       }),
       focusable: Platform.select({
         macos: !disabled,
         default: true, // win32
       }),
-      ref: componentRef,
+      ref: itemRef,
       ...onKeyDownProps,
     },
     state: pressable.state,
@@ -93,3 +103,13 @@ function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: Acc
   }
   return { disabled };
 }
+
+export const useHoverFocusEffect = (hovered: boolean, componentRef: React.MutableRefObject<any>) => {
+  React.useLayoutEffect(() => {
+    if (hovered) {
+      componentRef?.current?.focus();
+    } else {
+      componentRef?.current?.blur();
+    }
+  }, [hovered, componentRef]);
+};

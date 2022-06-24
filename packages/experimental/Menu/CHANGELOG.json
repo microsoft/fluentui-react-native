@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 24 Jun 2022 22:38:56 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.6",
+      "version": "0.15.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "03b76df2f66ffdee8f3560c601cf798586444fc5",
+            "comment": "Fix container being tab stop"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "143106ff88f12c3ad92412d554aaf055e0bab2ed",
+            "comment": "Minor Menu bug fixes"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jun 2022 22:10:22 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.5",
+      "version": "0.15.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "c9f9853ae52c6d76236069fc71655e7cfa655c27",
+            "comment": "A fix for hover focus?"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Jun 2022 23:39:02 GMT",
       "tag": "@fluentui-react-native/menu_v0.15.4",
       "version": "0.15.4",

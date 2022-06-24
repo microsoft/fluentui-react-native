@@ -2260,9 +2260,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^2.2.1":
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.1.tgz#92feb7e0672d739624517dae04bf4de1452dfcdc"
-  integrity sha512-1XWy3IQgwr7MWd30KdY1iUh2gQZD+JiotN1ifj/ptFUYKon/0UFwngKQaWCO/CP/FdLl20/huSSLwKedYrdMMA==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.2.tgz#2925eb8e76ff6b584c80529adc251df963be9141"
+  integrity sha512-0nY8638h1J3wKz6P3IJMpOoxJDdOj7Dk/K2hP/xpqP3KnIY0lmoqYlhyNihuyVPocDGajf6SA7LFFsFepQ56ag==
 
 "@react-native-windows/cli@0.64.6":
   version "0.64.6"
@@ -2371,15 +2371,10 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/dep-check@^1.12.17":
+"@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
   version "1.12.17"
   resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.17.tgz#8d1dc00b86ea4f82e09f58d625f2f51b7358edb9"
   integrity sha512-brsxYlc5Ej9O2iOGdw4qfC2lN1WcLK7UsS3HIYOcd9qSqY9Jv6D0cVR/go05ICBHIRB4GqsoipQUPzB3H4Jz/Q==
-
-"@rnx-kit/dep-check@^1.9.5":
-  version "1.12.16"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.16.tgz#7d837b99c252b8e6696f3a1b0083f7a6b8e60c4d"
-  integrity sha512-+KZV3jwaKdOGLs48wLIOa9r4EhV3DpsNAVcCaWJFHiQXGAIQf7spkDWNEuYIX08PfKyrjAy8CrxwobRCShDAwQ==
 
 "@rnx-kit/eslint-plugin@^0.2.8":
   version "0.2.13"

@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 21 Jun 2022 21:43:45 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Jun 2022 22:38:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.6
+
+Fri, 24 Jun 2022 22:38:56 GMT
+
+### Patches
+
+- Fix container being tab stop (ruaraki@microsoft.com)
+- Minor Menu bug fixes (ruaraki@microsoft.com)
+
+## 0.15.5
+
+Thu, 23 Jun 2022 22:10:22 GMT
+
+### Patches
+
+- A fix for hover focus? (ruaraki@microsoft.com)
 
 ## 0.15.4
 
