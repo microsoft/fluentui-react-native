@@ -9,9 +9,9 @@ It's used to automate process of component creation.
 
 ## Build your component
 
-1. Run `gulp add --new component-name`. This should be run from apps/component-generator, not the root. Before running this command you may need to install gulp and gulp-rename (i.e. `npm install gulp` `npm install gulp rename`). Also ensure that component-name is in lower camelcase (ex. testyTest)
+1. Run `gulp add --new component-name`. This should be run from apps/component-generator, not the root. Before running this command you may need to install gulp and gulp-rename (i.e. `npm install gulp` `npm install gulp rename`).
 2. Change your newly generated component.
-3. When you're done, remove `"private": true` from the package.json
+3. Check dependencies in componentName’s package.json (may be out of date), and remove `"private": true` from the package.json
 4. Add to the package.json after "typings":
 
 ```json
@@ -20,6 +20,10 @@ It's used to automate process of component creation.
     "module": "lib/index.js"
   },
 ```
+
+5. Delete package-lock.json in root dir (see todo item 9 below)
+6. Delete dependencies: {"gulp": "^4.0.2", "gulp-rename": "^2.0.0”} in root dir’s package.json
+7. Add "@fluentui-react-native/componentName”: "0.1.0", to apps/fluent-tester/package.json
 
 ## TODO:
 
