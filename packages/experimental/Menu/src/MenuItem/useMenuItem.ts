@@ -30,31 +30,22 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
       const isRtl = I18nManager.isRTL;
-      if (
-        isKeyPressEvent(e) &&
-        hasSubmenu &&
-        ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'))
-      ) {
-        return;
-      }
-      if (
-        isKeyPressEvent(e) &&
-        isInSubmenu &&
-        ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'))
-      ) {
-        return;
-      }
 
-      const isArrowClose =
+      const isArrowKey = isKeyPressEvent(e) && (e.nativeEvent.key === 'ArrowLeft' || e.nativeEvent.key === 'ArrowRight');
+      const isArrowOpen =
+        hasSubmenu &&
         isKeyPressEvent(e) &&
+        ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'));
+      const isArrowClose =
         isInSubmenu &&
+        isKeyPressEvent(e) &&
         ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
 
-      if (!disabled && !isArrowClose) {
+      if (!disabled && (!isArrowKey || isArrowOpen)) {
         onClick?.(e);
       }
 
-      if (!hasSubmenu) {
+      if (!isArrowKey || isArrowClose) {
         setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
       }
     },
