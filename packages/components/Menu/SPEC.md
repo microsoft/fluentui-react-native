@@ -139,6 +139,11 @@ export interface MenuProps extends MenuListProps {
    * Opens the menu on hovering over the trigger
    */
   openOnHover?: boolean;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnItemClick?: boolean;
 }
 ```
 
@@ -221,6 +226,11 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
    * A callback to call on button click event
    */
   onClick?: (e: InteractionEvent) => void;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnClick?: boolean;
 }
 ```
 
@@ -282,6 +292,11 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
    * Identifier for the control
    */
   name: string;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnClick?: boolean;
 }
 ```
 

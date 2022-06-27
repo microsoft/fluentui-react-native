@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Mon, 27 Jun 2022 16:56:31 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "3e70d755ab862baea7c13543478a9179ee3292dd",
+            "comment": "Fixed react peer dependency"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 21 Jun 2022 21:07:14 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.0",
       "version": "1.1.0",
