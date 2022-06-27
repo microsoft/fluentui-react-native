@@ -4,12 +4,12 @@ It's used to automate process of component creation.
 
 ## Setup
 
-1. Run in your command prompt `yarn i -g gulp-cli`
-2. Run `yarn i` inside the component-generator directory
+1. Run in your command prompt `npm i -g gulp-cli`. May need to run this with `sudo`
+2. Run `npm i` inside the component-generator directory. May need to run this with `sudo`
 
 ## Build your component
 
-1. Run `gulp add --new component-name`
+1. Run `gulp add --new component-name`. This should be run from apps/component-generator, not the root. Before running this command you may need to install gulp and gulp-rename (i.e. `npm install gulp` `npm install gulp rename`). Also ensure that component-name is in lower camelcase (ex. testyTest)
 2. Change your newly generated component.
 3. When you're done, remove `"private": true` from the package.json
 4. Add to the package.json after "typings":
@@ -32,3 +32,5 @@ It's used to automate process of component creation.
 7. Add warning if component exists and message "Do you want to replace it?".
    Currently it replaces the component.
 8. Improve replacement functionality.
+9. Use yarn instead of npm, using npm is generating a package.lock file that we later need to delete
+10. Support compressible-based components
