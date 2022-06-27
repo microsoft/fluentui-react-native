@@ -4,19 +4,39 @@ import { NotificationTokens } from './Notification.types';
 
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
   ({
-    backgroundColor: 'skyblue',
-    color: t.colors.bodyText,
-    borderRadius: 12,
+    backgroundColor: t.colors.background,
+    color: t.colors.brandForeground1,
     padding: 16,
-    neutral: {
-      backgroundColor: 'lightgrey',
+    primary: {
+      backgroundColor: '#EFF6FC',
+      color: '#106EBE',
+      borderRadius: 12,
     },
+    neutral: {
+      backgroundColor: '#F7F7F7',
+      color: '#393939',
+      borderRadius: 12,
+    },
+    // primaryBar: {
+    //   backgroundColor: '#EFF6FC',
+    //   color: '#005A9E',
+    // },
+    // primaryOutlineBar: {
+    //   backgroundColor: '#FFFFFF',
+    //   color: '#0078D4',
+    // },
+    // neutralBar: {
+    //   backgroundColor: '#090909',
+    //   color: '#005A9E',
+    // },
     danger: {
-      backgroundColor: 'pink',
-      color: 'maroon',
+      backgroundColor: '#FDF6F6',
+      color: '#BC2F34',
+      borderRadius: 12,
     },
     warning: {
-      backgroundColor: 'lightyellow',
-      color: 'brown',
+      backgroundColor: '#FFFBD6',
+      color: '#4C4400',
+      borderRadius: 12,
     },
   } as NotificationTokens);
