@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 27 Jun 2022 16:56:31 GMT",
+      "tag": "@fluentui-react-native/tester_v0.68.6",
+      "version": "0.68.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.1",
+            "commit": "3e70d755ab862baea7c13543478a9179ee3292dd"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 27 Jun 2022 15:59:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.68.5",
       "version": "0.68.5",
