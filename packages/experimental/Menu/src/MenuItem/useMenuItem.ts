@@ -19,11 +19,13 @@ const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
 export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
   const isTrigger = useMenuTriggerContext();
   const isSubmenu = useMenuContext().isSubmenu;
   const hasSubmenu = isSubmenu && isTrigger;
   const isInSubmenu = isSubmenu && !isTrigger;
+  let shouldPersist = useMenuContext().persistOnItemClick;
+  shouldPersist = persistOnClick ?? shouldPersist;
 
   const setOpen = useMenuContext().setOpen;
 
@@ -56,10 +58,12 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
           isInSubmenu &&
           ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
 
-        setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
+        if (isArrowClose || !shouldPersist) {
+          setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
+        }
       }
     },
-    [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
+    [disabled, hasSubmenu, isInSubmenu, onClick, setOpen, shouldPersist],
   );
 
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });

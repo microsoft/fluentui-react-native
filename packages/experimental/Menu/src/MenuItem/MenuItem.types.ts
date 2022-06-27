@@ -48,6 +48,11 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
    * A callback to call on button click event
    */
   onClick?: (e: InteractionEvent) => void;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnClick?: boolean;
 }
 
 export interface MenuItemState extends IPressableHooks<MenuItemProps & React.ComponentPropsWithRef<any>> {
