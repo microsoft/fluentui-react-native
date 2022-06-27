@@ -18,6 +18,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [initialsSize, setInitialsSize] = useState<number>(16);
   const [fontWeight, setFontWeight] = useState<string>('normal');
   const [fontFamily, setFontFamily] = useState<string>('Georgia');
+  const [name, setName] = useState<string>('Steve Ballmer');
+  const [initials, setInitials] = useState<string>('');
 
   const [ringColor, setRingColor] = useState<string>(undefined);
   const [ringBackgroundColor, setRingBackgroundColor] = useState<string>('yellow');
@@ -77,6 +79,22 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <View>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Name for generating initials"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setName(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setInitials(e.nativeEvent.text);
+              }}
+            />
             <Text style={{ fontWeight: 'bold' }}>Avatar tokens</Text>
             <TextInput
               style={[commonStyles.textBox]}
@@ -182,7 +200,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           activeAppearance="ring"
           avatarColor={avatarColor}
           accessibilityLabel="Former CEO of Microsoft"
-          initials={showInitials ? 'SB' : undefined}
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
           imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
           icon={svgIconsEnabled ? { svgSource: svgProps } : undefined}
           transparentRing={!showRing}
@@ -195,6 +214,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           activeAppearance="ring"
           avatarColor={avatarColor}
           accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
           imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
           ringBackgroundColor={ringBackgroundColor}
           ringColor={ringColor}
