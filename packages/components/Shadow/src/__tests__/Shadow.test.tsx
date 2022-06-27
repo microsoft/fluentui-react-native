@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from '@fluentui/react-native';
+import { Text } from 'react-native';
 import { Shadow } from '../Shadow';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';

@@ -3,17 +3,7 @@
 exports[`Shadow component tests Shadow default 1`] = `
 <View>
   <View>
-    <Text
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
-          "margin": 0,
-        }
-      }
-    >
+    <Text>
       Shadow default test
     </Text>
   </View>
