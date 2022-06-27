@@ -5,9 +5,11 @@ import { defaultBadgeTokens } from '../BadgeTokens';
 import { defaultPresenceBadgeTokens } from './PresenceBadgeTokens';
 import { coreBadgeStates, getBadgePosition } from '../Badge.styling';
 
+export const badgeStates: (keyof PresenceBadgeTokens)[] = [...coreBadgeStates, 'available', 'away', 'offline', 'outOfOffice'];
+
 export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeTokens> = {
   tokens: [defaultBadgeTokens, presenceBadgeName, defaultPresenceBadgeTokens],
-  states: coreBadgeStates,
+  states: badgeStates,
   slotProps: {
     root: buildProps(
       (tokens: PresenceBadgeTokens, theme: Theme) => {
@@ -32,14 +34,15 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
       },
       ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
-    svgXml: buildProps(
+    svg: buildProps(
       (tokens: PresenceBadgeTokens) => ({
         style: {
           width: tokens.width,
           height: tokens.height,
+          color: tokens.iconColor,
         },
       }),
-      ['width', 'height'],
+      ['width', 'height', 'iconColor'],
     ),
   },
 };
