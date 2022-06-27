@@ -13,8 +13,8 @@ import { useMenuContext } from '../context/menuContext';
 import { useMenuListContext } from '../context/menuListContext';
 import { useMenuTriggerContext } from '../context/menuTriggerContext';
 
-const triggerKeys = [' ', 'Enter'];
-const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
+export const triggerKeys = [' ', 'Enter'];
+export const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
 
 export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   // attach the pressable state handlers
@@ -29,10 +29,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
 
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
-      if (disabled) {
-        return;
-      }
-
       const isRtl = I18nManager.isRTL;
       if (
         isKeyPressEvent(e) &&
@@ -49,13 +45,16 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
         return;
       }
 
-      onClick?.(e);
-      if (!hasSubmenu) {
-        const isArrowClose =
-          isKeyPressEvent(e) &&
-          isInSubmenu &&
-          ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
+      const isArrowClose =
+        isKeyPressEvent(e) &&
+        isInSubmenu &&
+        ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
 
+      if (!disabled && !isArrowClose) {
+        onClick?.(e);
+      }
+
+      if (!hasSubmenu) {
         setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
       }
     },
