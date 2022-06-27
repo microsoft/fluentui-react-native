@@ -7,7 +7,7 @@ It's used to automate process of component creation.
 1. Run in your command prompt `yarn i -g gulp-cli`
 2. Run `yarn i` inside the component-generator directory
 
-## Build you component
+## Build your component
 
 1. Run `gulp add --new component-name`
 2. Change your newly generated component.
