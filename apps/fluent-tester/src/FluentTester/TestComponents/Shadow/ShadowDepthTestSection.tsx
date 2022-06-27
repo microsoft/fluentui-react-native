@@ -11,13 +11,10 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
     effectBox: {
       width: 366,
       minHeight: 64,
-    },
-    shadowColor: {
-      shadowColor: 'black',
       backgroundColor: t.colors.background,
     },
     padding: {
-      padding: 12,
+      padding: 20,
       paddingHorizontal: 24,
     },
     vmargin: {
@@ -35,10 +32,7 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
   const themedStyles = getThemedStyles(theme);
   return (
     <Shadow depth={props.depth}>
-      <Text
-        style={[commonTestStyles.view, themedStyles.effectBox, themedStyles.vmargin, themedStyles.shadowColor, { padding: 20 }]}
-        variant="bodySemibold"
-      >
+      <Text style={[commonTestStyles.view, themedStyles.effectBox, themedStyles.vmargin, themedStyles.padding]} variant="bodySemibold">
         Shadow Depth: {props.depth}
       </Text>
     </Shadow>
@@ -47,7 +41,7 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
 
 export const ShadowDepthTestSection: React.FunctionComponent = () => {
   return (
-    <View style={[commonTestStyles.view, getThemedStyles(useTheme()).padding]}>
+    <View>
       <ShadowTestBox depth="2" />
       <ShadowTestBox depth="4" />
       <ShadowTestBox depth="8" />
