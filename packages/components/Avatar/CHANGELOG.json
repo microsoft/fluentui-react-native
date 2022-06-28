@@ -1,0 +1,65 @@
+{
+  "name": "@fluentui-react-native/avatar",
+  "entries": [
+    {
+      "date": "Tue, 28 Jun 2022 16:48:37 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.3",
+      "version": "1.1.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "85f6d8488877d86b6ca30801600ca449a90ae67d",
+            "comment": "Fixed absence of icon in HC"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 28 Jun 2022 08:52:48 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.2",
+      "version": "1.1.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.44",
+            "commit": "11b3b82c74173c54ba6c5c8e2a53de29f5153c62"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 27 Jun 2022 16:56:31 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.1",
+      "version": "1.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "3e70d755ab862baea7c13543478a9179ee3292dd",
+            "comment": "Fixed react peer dependency"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 21:07:14 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "2ad8751db36583b42e819bbf6667161d2687cf7a",
+            "comment": "renamed experimental-avatar to avatar"
+          }
+        ]
+      }
+    }
+  ]
+}

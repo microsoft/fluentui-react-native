@@ -1,13 +1,5 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
-import {
-  AvatarSize,
-  AvatarSizes,
-  AvatarColor,
-  AvatarColors,
-  JSAvatar,
-  AvatarActive,
-  AvatarActiveAppearance,
-} from '@fluentui-react-native/experimental-avatar';
+import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, Picker, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
@@ -20,7 +12,6 @@ type WithUndefined<T> = T | typeof undefinedText;
 
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
 const avatarColors: AvatarColor[] = ['neutral', 'brand', 'colorful', ...AvatarColors];
-const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
 const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
@@ -41,14 +32,13 @@ const StyledPicker = (props) => {
 export const StandardUsage: FunctionComponent = () => {
   const [isSquare, setSquare] = useState(false);
   const [showImage, setShowImage] = useState(true);
+  const [outOfOffice, setOutOfOffice] = useState(false);
   const [active, setActive] = useState<AvatarActive>('unset');
-  const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>(72);
   const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
   const [avatarColor, setAvatarColor] = useState<AvatarColor>('brass');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
-  const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
   const onAvatarColorChange = useCallback((value) => setAvatarColor(value), []);
   const onSizeChange = useCallback((value) => setImageSize(value), []);
 
@@ -57,6 +47,8 @@ export const StandardUsage: FunctionComponent = () => {
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };
   const avatarSizesForPicker = allSizes.map((size) => size.toString());
+
+  const activeAppearance = 'ring';
 
   const fontBuiltInProps = {
     fontFamily: 'Arial',
@@ -67,7 +59,6 @@ export const StandardUsage: FunctionComponent = () => {
     src: TestSvg,
     viewBox: '0 0 500 500',
   };
-  const iconProps = { svgSource: svgProps, width: 20, height: 20, color: 'red' };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
@@ -82,63 +73,65 @@ export const StandardUsage: FunctionComponent = () => {
           <Text style={textStyles}>Set square Avatar</Text>
           <Switch value={isSquare} onValueChange={() => setSquare(!isSquare)} />
         </View>
+        <View style={commonStyles.switch}>
+          <Text style={textStyles}>Set outOfOffice</Text>
+          <Switch value={outOfOffice} onValueChange={() => setOutOfOffice(!outOfOffice)} />
+        </View>
 
         <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
         <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
-        {active === 'active' ? (
-          <StyledPicker
-            prompt="Active appearance"
-            selected={activeAppearance}
-            onChange={onActiveAppearanceChange}
-            collection={avatarActiveAppearance}
-          />
-        ) : null}
+        {active === 'active' && <Text>Active appearance is ring</Text>}
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-      <JSAvatar name="Richard" avatarColor="colorful" />
-      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }} size={56} />
-      <JSAvatar icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }} size={120} />
-      <JSAvatar
+      <Avatar
+        accessibilityLabel="Fall-back Icon"
+        accessibilityHint="A picture representing a user"
+        size={imageSize === undefinedText ? undefined : imageSize}
+      />
+      <Avatar
         active={active}
         activeAppearance={activeAppearance}
         size={imageSize === undefinedText ? undefined : imageSize}
         name="Satya Nadella"
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Photo of Satya Nadella"
-        badge={{ status: presence === undefinedText ? undefined : presence }}
-        src={showImage ? satyaPhotoUrl : undefined}
+        badge={{ status: presence === undefinedText ? undefined : presence, outOfOffice }}
+        imageUrl={showImage ? satyaPhotoUrl : undefined}
         avatarColor={avatarColor}
       />
-      <JSAvatar
+      <Avatar
         active={active}
         activeAppearance={activeAppearance}
         size={imageSize === undefinedText ? undefined : imageSize}
         shape={isSquare ? 'square' : 'circular'}
         accessibilityLabel="Icon"
         name="* Richard Faynman *"
-        icon={{ fontSource: { ...fontBuiltInProps }, color: 'white' }}
-        avatarColor={avatarColor}
+        avatarColor="#ff0099"
+        initialsColor="yellow"
       />
       {svgIconsEnabled && (
         <>
-          <JSAvatar
+          <Avatar
             active={active}
             activeAppearance={activeAppearance}
             size={imageSize === undefinedText ? undefined : imageSize}
             shape={isSquare ? 'square' : 'circular'}
             accessibilityLabel="SVG Icon"
-            icon={iconProps}
+            icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }}
             avatarColor={avatarColor}
+            badge={{ status: 'outOfOffice', outOfOffice }}
           />
-          <JSAvatar
+          <Avatar
+            accessibilityHint="A picture representing a user"
             active={active}
             activeAppearance={activeAppearance}
             size={imageSize === undefinedText ? undefined : imageSize}
             shape={isSquare ? 'square' : 'circular'}
             accessibilityLabel="SVG Icon"
-            icon={{ svgSource: svgProps, width: 20, height: 20 }}
+            icon={{ svgSource: svgProps }}
             avatarColor={avatarColor}
+            badge={{ status: 'away', outOfOffice }}
             idForColor="15"
           />
         </>

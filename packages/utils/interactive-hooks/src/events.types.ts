@@ -12,7 +12,7 @@ export const isGestureResponderEvent = (e: InteractionEvent): e is GestureRespon
 };
 
 export const isMouseEvent = (e: InteractionEvent): e is MouseEvent => {
-  if ('clientX' in e.nativeEvent) {
+  if ('pageX' in e.nativeEvent) {
     return true;
   }
 

@@ -107,6 +107,12 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   disabled?: boolean;
 
   /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
+
+  /**
    * Label to display next to the checkbox.
    */
   label?: string;

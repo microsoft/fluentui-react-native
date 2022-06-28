@@ -1,16 +1,15 @@
-import { DirectionalHint, DismissBehaviors, ICalloutProps } from '@fluentui-react-native/callout';
-import { AccessibilityRole } from 'react-native';
+import { IViewProps } from '@fluentui-react-native/adapters';
+import { ICalloutProps, ICalloutTokens } from '@fluentui-react-native/callout';
 
 export const menuPopoverName = 'MenuPopover';
+
+// Support for anchorRect and beakWidth will come at a later time.
+// Omitting dismissBehaviors as it doesn't seem to make sense as a token
+export type MenuPopoverTokens = Omit<ICalloutTokens, 'anchorRect' | 'beakWidth' | 'dismissBehaviors'>;
 
 export type MenuPopoverProps = ICalloutProps;
 
 export interface MenuPopoverState {
-  accessibilityRole: AccessibilityRole;
-  directionalHint?: DirectionalHint;
-  dismissBehaviors: DismissBehaviors[];
-  doNotTakePointerCapture: boolean;
-  onDismiss: () => void;
-  setInitialFocus: boolean;
-  triggerRef: React.RefObject<React.Component>;
+  props: ICalloutProps;
+  innerView: IViewProps;
 }

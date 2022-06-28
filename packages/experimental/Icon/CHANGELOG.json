@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Mon, 06 Jun 2022 19:20:10 GMT",
+      "tag": "@fluentui-react-native/icon_v0.12.1",
+      "version": "0.12.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/icon",
+            "commit": "1042260cedd07b3d36af2bfee16166eb86e51a92",
+            "comment": "Added a11y props to the root"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 26 May 2022 21:22:22 GMT",
       "tag": "@fluentui-react-native/icon_v0.12.0",
       "version": "0.12.0",

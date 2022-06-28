@@ -1,15 +1,18 @@
 import * as React from 'react';
-import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
+import { AccessibilityActionEvent, AccessibilityState, I18nManager, Platform } from 'react-native';
 import { MenuItemCheckboxProps, MenuItemCheckboxState } from './MenuItemCheckbox.types';
 import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
+  KeyPressEvent,
   useAsPressable,
-  useKeyProps,
+  useKeyDownProps,
   useOnPressWithFocus,
   useViewCommandFocus,
 } from '@fluentui-react-native/interactive-hooks';
 import { useMenuListContext } from '../context/menuListContext';
+import { submenuTriggerKeys, triggerKeys, useHoverFocusEffect } from '../MenuItem/useMenuItem';
+import { useMenuContext } from '../context/menuContext';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
@@ -54,6 +57,7 @@ export const useMenuCheckboxInteraction = (
   const defaultComponentRef = React.useRef(null);
   const {
     accessibilityActions,
+    accessibilityLabel,
     accessibilityState,
     componentRef = defaultComponentRef,
     disabled,
@@ -61,16 +65,39 @@ export const useMenuCheckboxInteraction = (
     onAccessibilityAction,
     ...rest
   } = props;
-  const context = useMenuListContext();
-  const checked = context.checked?.[name];
+
+  const isSubmenu = useMenuContext().isSubmenu;
+
+  const { checked, onArrowClose } = useMenuListContext();
+  const isChecked = checked?.[name];
 
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleCallback);
 
-  const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...rest });
+  const pressable = useAsPressable({ ...rest, disabled, onPress: toggleCheckedWithFocus });
   const buttonRef = useViewCommandFocus(componentRef);
 
-  const onKeyProps = useKeyProps(toggleCallback, ' ');
+  const onKeysPressed = React.useCallback(
+    (e: KeyPressEvent) => {
+      const invokeKey = e.nativeEvent.key === ' ' || e.nativeEvent.key === 'Enter';
+      if (!disabled && invokeKey) {
+        toggleCallback(e);
+        return;
+      }
+
+      const isRtl = I18nManager.isRTL;
+      const isArrowClose = isSubmenu && ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
+
+      if (isArrowClose) {
+        onArrowClose?.(e);
+      }
+    },
+    [disabled, isSubmenu, onArrowClose, toggleCallback],
+  );
+
+  const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
+  const onKeyProps = useKeyDownProps(onKeysPressed, ...keys);
+
   const accessibilityActionsProp = accessibilityActions
     ? [...defaultAccessibilityActions, ...accessibilityActions]
     : defaultAccessibilityActions;
@@ -86,10 +113,12 @@ export const useMenuCheckboxInteraction = (
     [disabled, toggleCallback, onAccessibilityAction],
   );
 
+  useHoverFocusEffect(pressable.state.hovered, componentRef);
+
   const state = {
     ...pressable.state,
     disabled: !!props.disabled,
-    checked: checked,
+    checked: isChecked,
   };
 
   return {
@@ -97,11 +126,17 @@ export const useMenuCheckboxInteraction = (
       ...pressable.props,
       accessible: true,
       accessibilityActions: accessibilityActionsProp,
-      accessibilityLabel: props.accessibilityLabel || props.content,
+      accessibilityLabel,
       accessibilityRole: 'menuitem',
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
-      enableFocusRing: true,
-      focusable: true,
+      enableFocusRing: Platform.select({
+        macos: false,
+        default: !pressable.state.hovered, // win32
+      }),
+      focusable: Platform.select({
+        macos: !disabled,
+        default: true, // win32
+      }),
       onAccessibilityAction: onAccessibilityActionProp,
       ref: buttonRef,
       ...onKeyProps,

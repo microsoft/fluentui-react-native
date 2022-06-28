@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Thu, 26 May 2022 21:22:22 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 08:52:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.0.44
+
+Tue, 28 Jun 2022 08:52:48 GMT
+
+### Patches
+
+- Fixed busy icon, added HC icons and fixed Tester (v.kozova13@gmail.com)
+
+## 0.0.43
+
+Thu, 16 Jun 2022 09:39:38 GMT
+
+### Patches
+
+- Updated presenceBadge icons according to Web (v.kozova13@gmail.com)
+
+## 0.0.42
+
+Wed, 15 Jun 2022 07:59:57 GMT
+
+### Patches
+
+- Fixed presenceBadge icon size (v.kozova13@gmail.com)
+
+## 0.0.41
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+
+## 0.0.40
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- PR fix and updated snapshots (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/icon to v0.12.1
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
 
 ## 0.0.39
 

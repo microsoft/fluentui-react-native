@@ -1,20 +1,30 @@
 import { useMenuContext } from '../context/menuContext';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { MenuTriggerProps, MenuTriggerState } from './MenuTrigger.types';
+import { MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
+import { hoverDelayDefault, isCloseOnHoverOutEnabled } from '../consts';
 
 const accessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
+const expandedState = { expanded: true };
+const collapsedState = { expanded: false };
 
-export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
+export const useMenuTrigger = (): MenuTriggerState => {
   const context = useMenuContext();
+  const {
+    hoverDelay = hoverDelayDefault,
+    open,
+    openOnHover,
+    popoverHoverOutTimer,
+    setOpen,
+    setTriggerHoverOutTimer,
+    triggerHoverOutTimer,
+    triggerRef,
+  } = context;
 
-  const setOpen = context.setOpen;
-  const open = context.open;
-  const openOnHover = context.openOnHover;
-  const triggerRef = context.triggerRef;
-  const accessibilityState = context.open ? { expanded: true } : { expanded: false };
+  const accessibilityState = open ? expandedState : collapsedState;
+
   const onAccessibilityAction = React.useCallback(
     (e: AccessibilityActionEvent) => {
       if (Platform.OS === ('win32' as any)) {
@@ -32,35 +42,46 @@ export const useMenuTrigger = (_props: MenuTriggerProps): MenuTriggerState => {
     [setOpen],
   );
 
-  const delayHover = Platform.select({
-    macos: 100,
-    default: 500, // win32
-  });
+  const onHoverIn = React.useCallback(
+    (e: InteractionEvent) => {
+      if (openOnHover) {
+        clearTimeout(popoverHoverOutTimer);
+        clearTimeout(triggerHoverOutTimer);
+        e.persist();
+        setTimeout(() => {
+          setOpen(e, true /* isOpen */);
+        }, hoverDelay);
+      }
+    },
+    [hoverDelay, openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
+  );
 
-  const onHoverIn = (e: InteractionEvent) => {
-    if (openOnHover) {
-      setOpen(e, true /* isOpen */);
-    }
-  };
+  const onHoverOut = React.useCallback(
+    (e: InteractionEvent) => {
+      if (openOnHover) {
+        e.persist();
+        const timer = setTimeout(() => {
+          setOpen(e, false /* isOpen */);
+        }, hoverDelay);
+        setTriggerHoverOutTimer(timer);
+      }
+    },
+    [hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer],
+  );
 
-  const onHoverOut = (e: InteractionEvent) => {
-    if (openOnHover) {
-      setOpen(e, false /* isOpen */);
-    }
-  };
-
-  const onClick = (e: InteractionEvent) => {
-    setOpen(e, !open);
-  };
+  const onClick = React.useCallback(
+    (e: InteractionEvent) => {
+      setOpen(e, !open);
+    },
+    [open, setOpen],
+  );
 
   return {
     props: {
       onClick,
       onHoverIn,
-      onHoverOut: Platform.OS === ('win32' as any) && onHoverOut,
+      onHoverOut: isCloseOnHoverOutEnabled && onHoverOut,
       componentRef: triggerRef,
-      delayHoverIn: delayHover,
-      delayHoverOut: Platform.OS === ('win32' as any) && delayHover,
       accessibilityState,
       accessibilityActions,
       onAccessibilityAction,

@@ -39,6 +39,7 @@ export const Checkbox = compose<ICheckboxType>({
       label,
       onChange,
       componentRef = defaultComponentRef,
+      focusable,
       ...rest
     } = userProps;
 
@@ -92,7 +93,7 @@ export const Checkbox = compose<ICheckboxType>({
         accessibilityLabel: accessibilityLabel ?? label,
         accessibilityState: { disabled: state.disabled, checked: state.checked },
         accessibilityActions: [{ name: 'Toggle', label: checkboxSelectActionLabel }],
-        focusable: !state.disabled,
+        focusable: focusable ?? !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
         ...onKeyProps,
       },

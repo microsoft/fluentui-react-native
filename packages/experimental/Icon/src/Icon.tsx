@@ -20,7 +20,7 @@ function renderRasterImage(iconProps: IconProps) {
     <Image
       source={iconProps.rasterImageSource.src}
       style={style}
-      accessible={true}
+      accessible={iconProps.accessible}
       accessibilityRole="image"
       accessibilityLabel={iconProps.accessibilityLabel}
     />
@@ -56,12 +56,16 @@ function renderFontIcon(iconProps: IconProps) {
   )[0];
 
   const char = String.fromCharCode(fontSource.codepoint);
-  return <Text style={style}>{char}</Text>;
+  return (
+    <Text accessible={iconProps.accessible} style={style}>
+      {char}
+    </Text>
+  );
 }
 
 function renderSvg(iconProps: IconProps) {
   const svgIconProps: SvgIconProps = iconProps.svgSource;
-  const { width, height, color } = iconProps;
+  const { accessible, accessibilityLabel, width, height, color } = iconProps;
   const viewBox = iconProps.svgSource.viewBox;
   const style = mergeStyles(iconProps.style, rasterImageStyleCache({ width, height }, [width, height])[0]);
 
@@ -72,13 +76,13 @@ function renderSvg(iconProps: IconProps) {
 
   if (svgIconProps.src) {
     return (
-      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
+      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
         <svgIconProps.src viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
   } else if (svgIconProps.uri) {
     return (
-      <View style={style} accessible={true} accessibilityRole="image" accessibilityLabel={iconProps.accessibilityLabel}>
+      <View style={style} accessible={accessible} accessibilityRole="image" accessibilityLabel={accessibilityLabel}>
         <SvgUri uri={svgIconProps.uri} viewBox={viewBox} width={width} height={height} color={iconColor} />
       </View>
     );
@@ -92,9 +96,11 @@ export const Icon = stagedComponent((props: IconProps) => {
 
   return (rest: IconProps) => {
     const color = props.color || theme.colors.buttonText;
+    const accessible = props.accessible ?? true;
 
     const baseProps: IconProps = {
       color: color,
+      accessible,
     };
 
     const newProps = mergeProps<IconProps>(baseProps, props, rest);

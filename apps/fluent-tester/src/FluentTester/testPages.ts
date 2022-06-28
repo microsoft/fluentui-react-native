@@ -1,5 +1,5 @@
 import { TestDescription } from './TestComponents';
-import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { NativeAvatarTest, HOMEPAGE_NATIVE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
@@ -10,6 +10,7 @@ import { HOMEPAGE_PERSONACOIN_BUTTON, PersonaCoinTest } from './TestComponents/P
 import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Pressable';
 import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from './TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separator';
+import { HOMEPAGE_SHADOW_BUTTON, ShadowTest } from './TestComponents/Shadow';
 import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
@@ -26,6 +27,7 @@ import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from 
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
+import { NotificationTest, HOMEPAGE_NOTIFICATION_BUTTON } from './TestComponents/Notification';
 
 export const tests: TestDescription[] = [
   {
@@ -35,8 +37,8 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'Avatar Test',
-    component: AvatarTest,
-    testPage: HOMEPAGE_AVATAR_BUTTON,
+    component: NativeAvatarTest,
+    testPage: HOMEPAGE_NATIVE_AVATAR_BUTTON,
   },
   {
     name: 'Badge Test',
@@ -72,6 +74,11 @@ export const tests: TestDescription[] = [
     name: 'Link Test',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
+  },
+  {
+    name: 'Shadow Test',
+    component: ShadowTest,
+    testPage: HOMEPAGE_SHADOW_BUTTON,
   },
   {
     name: 'Separator Test',
@@ -167,5 +174,10 @@ export const tests: TestDescription[] = [
     name: 'Menu Test',
     component: MenuTest,
     testPage: HOMEPAGE_MENU_BUTTON,
+  },
+  {
+    name: 'Notification Test',
+    component: NotificationTest,
+    testPage: HOMEPAGE_NOTIFICATION_BUTTON,
   },
 ];

@@ -3,7 +3,7 @@ import { ViewProps } from 'react-native';
 
 export const menuTriggerName = 'MenuTrigger';
 
-export interface MenuTriggerProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface MenuTriggerChildProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   /**
    * A RefObject to refer to the trigger component.
    */
@@ -16,6 +16,6 @@ export interface MenuTriggerProps extends Omit<IWithPressableOptions<ViewProps>,
 }
 
 export interface MenuTriggerState {
-  props: MenuTriggerProps;
+  props: MenuTriggerChildProps;
   hasSubmenu: boolean;
 }

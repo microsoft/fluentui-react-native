@@ -1,20 +1,33 @@
 import * as React from 'react';
-import { ColorValue, ViewProps } from 'react-native';
+import { ColorValue } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/experimental-text';
-import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { IPressableHooks } from '@fluentui-react-native/interactive-hooks';
+import { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
 
 export const menuItemCheckboxName = 'MenuItemCheckbox';
 
-export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+export interface MenuItemCheckboxTokens
+  extends Omit<MenuItemTokens, 'submenuIndicatorPadding' | 'submenuIndicatorSize' | 'disabled' | 'focused' | 'hovered' | 'pressed'> {
+  /**
+   * Color of the checkmark icon
+   */
   checkmarkColor?: ColorValue;
-  checkmarkPadding?: number;
-  checkmarkSize?: number;
-  checkmarkVisibility?: number;
-  gap?: number;
 
+  /**
+   * Amount of space in pixels around the checkmark icon
+   */
+  checkmarkPadding?: number;
+
+  /**
+   * Visibility of the checkmark icon from 0 to 1
+   */
+  checkmarkVisibility?: number;
+
+  /**
+   * States of the item control
+   */
   checked?: MenuItemCheckboxTokens;
   disabled?: MenuItemCheckboxTokens;
   focused?: MenuItemCheckboxTokens;
@@ -22,19 +35,7 @@ export interface MenuItemCheckboxTokens extends LayoutTokens, FontTokens, IBorde
   pressed?: MenuItemCheckboxTokens;
 }
 
-export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  content: string;
-
-  /**
-   * Applies disabled styles to menu item but remains focusable
-   */
-  disabled?: boolean;
-
-  /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
-   */
-  componentRef?: React.RefObject<IFocusable>;
-
+export interface MenuItemCheckboxProps extends MenuItemProps {
   /**
    * Identifier for the control
    */

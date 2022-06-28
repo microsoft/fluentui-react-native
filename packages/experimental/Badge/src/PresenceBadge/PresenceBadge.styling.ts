@@ -10,22 +10,26 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
   states: coreBadgeStates,
   slotProps: {
     root: buildProps(
-      (tokens: PresenceBadgeTokens, theme: Theme) => ({
-        style: {
-          ...getBadgePosition(tokens),
-          width: tokens.width,
-          height: tokens.height,
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          justifyContent: 'center',
-          position: 'absolute',
-          backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-        },
-      }),
+      (tokens: PresenceBadgeTokens, theme: Theme) => {
+        const { width, height, borderWidth } = tokens;
+        const borderGap = borderWidth * 2;
+        return {
+          style: {
+            ...getBadgePosition(tokens),
+            width: width + borderGap,
+            height: height + borderGap,
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row',
+            alignSelf: 'flex-start',
+            justifyContent: 'center',
+            position: 'absolute',
+            backgroundColor: tokens.backgroundColor,
+            ...borderStyles.from(tokens, theme),
+            ...layoutStyles.from(tokens, theme),
+          },
+        };
+      },
       ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     svgXml: buildProps(
