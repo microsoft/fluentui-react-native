@@ -26,6 +26,17 @@ export const themePickerStyles = StyleSheet.create({
   },
 });
 
+const themeMenuPickerStyles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: 5,
+  },
+  svg: {
+    padding: 4,
+  },
+});
+
 type PartPickerEntry = { label: string; value: string };
 
 type PartPickerProps = {
@@ -41,12 +52,12 @@ const ThemeMenuPicker = ({ selected, onChange, collection, style }) => {
   </svg>`;
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5, ...style }}>
+    <View style={{ ...themeMenuPickerStyles.container, ...style }}>
       <Menu>
         <MenuTrigger>
           <Button>
             <Text>{selected}</Text>
-            <View style={{ padding: 4 }}>
+            <View style={themeMenuPickerStyles.svg}>
               <SvgXml xml={chevronXml} />
             </View>
           </Button>
