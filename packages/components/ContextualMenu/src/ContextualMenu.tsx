@@ -19,6 +19,10 @@ import { Callout } from '@fluentui-react-native/callout';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 
+if (__DEV__ && Platform.OS === ('win32' as any)) {
+  console.warn('The ContextualMenu is deprecated on win32. Please use Menu from @fluentui-react-native/menu instead.');
+}
+
 export const CMContext = React.createContext<ContextualMenuContext>({
   selectedKey: null,
   onItemClick: (/* key: string */) => {
