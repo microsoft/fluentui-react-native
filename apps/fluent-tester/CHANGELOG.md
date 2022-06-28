@@ -3095,7 +3095,7 @@ Fri, 25 Jun 2021 06:21:11 GMT
 
 ### Minor changes
 
-- 📦 applying package updates **_NO_CI_** (tamasane@gmail.com)
+- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
 
 ## 0.27.0
 
