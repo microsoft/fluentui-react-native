@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Shadow component tests Shadow default 1`] = `
+<View>
+  <View>
+    <Text>
+      Shadow default test
+    </Text>
+  </View>
+</View>
+`;
