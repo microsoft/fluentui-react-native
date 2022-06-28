@@ -27,6 +27,7 @@ const menuPickerStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     margin: 5,
+    width: 500,
   },
   prompt: {
     marginRight: 5,
