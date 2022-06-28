@@ -21,6 +21,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       (tokens: NotificationTokens, theme: Theme) => ({
         style: {
           backgroundColor: tokens.backgroundColor,
+          borderColor: tokens.borderColor,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',

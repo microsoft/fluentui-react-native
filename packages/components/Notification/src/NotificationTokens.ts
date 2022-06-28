@@ -7,6 +7,10 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     backgroundColor: t.colors.background,
     color: t.colors.brandForeground1,
     padding: 16,
+
+    borderColor: '#FFFFFF',
+    borderWidth: 1,
+
     primary: {
       backgroundColor: '#EFF6FC',
       color: '#106EBE',
@@ -20,14 +24,17 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     primaryBar: {
       backgroundColor: '#EFF6FC',
       color: '#005A9E',
+      borderColor: '#F0F0F0',
     },
     primaryOutlineBar: {
       backgroundColor: '#FFFFFF',
       color: '#0078D4',
+      borderColor: '#F0F0F0',
     },
     neutralBar: {
       backgroundColor: '#DFDFDF',
       color: '#090909',
+      borderColor: '#F0F0F0',
     },
     danger: {
       backgroundColor: '#FDF6F6',
