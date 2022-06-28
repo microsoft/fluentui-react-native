@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 08:52:48 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.44",
+      "version": "0.0.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "11b3b82c74173c54ba6c5c8e2a53de29f5153c62",
+            "comment": "Fixed busy icon, added HC icons and fixed Tester"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 16 Jun 2022 09:39:38 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.43",
       "version": "0.0.43",

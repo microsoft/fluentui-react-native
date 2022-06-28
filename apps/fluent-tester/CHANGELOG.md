@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 28 Jun 2022 00:53:43 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 08:52:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.69.1
+
+Tue, 28 Jun 2022 08:52:48 GMT
+
+### Patches
+
+- Fixed busy icon, added HC icons and fixed Tester (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.2
+- Bump @fluentui-react-native/badge to v0.0.44
 
 ## 0.69.0
 

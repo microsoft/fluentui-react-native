@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 08:52:48 GMT",
+      "tag": "@fluentui-react-native/tester_v0.69.1",
+      "version": "0.69.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "11b3b82c74173c54ba6c5c8e2a53de29f5153c62",
+            "comment": "Fixed busy icon, added HC icons and fixed Tester"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.2",
+            "commit": "11b3b82c74173c54ba6c5c8e2a53de29f5153c62"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.44",
+            "commit": "11b3b82c74173c54ba6c5c8e2a53de29f5153c62"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Jun 2022 00:53:43 GMT",
       "tag": "@fluentui-react-native/tester_v0.69.0",
       "version": "0.69.0",
