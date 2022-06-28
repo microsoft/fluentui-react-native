@@ -1,13 +1,5 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
-import {
-  AvatarSize,
-  AvatarSizes,
-  AvatarColor,
-  AvatarColors,
-  Avatar,
-  AvatarActive,
-  AvatarActiveAppearance,
-} from '@fluentui-react-native/avatar';
+import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { Switch, View, Text, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
@@ -21,7 +13,6 @@ type WithUndefined<T> = T | typeof undefinedText;
 
 const avatarActive: AvatarActive[] = ['unset', 'active', 'inactive'];
 const avatarColors: AvatarColor[] = ['neutral', 'brand', 'colorful', ...AvatarColors];
-const avatarActiveAppearance: AvatarActiveAppearance[] = ['ring'];
 
 const allSizes: WithUndefined<AvatarSize>[] = [undefinedText, ...AvatarSizes];
 const allPresences: WithUndefined<PresenceBadgeStatus>[] = [undefinedText, ...PresenceBadgeStatuses];
@@ -31,13 +22,11 @@ export const StandardUsage: FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
   const [outOfOffice, setOutOfOffice] = useState(false);
   const [active, setActive] = useState<AvatarActive>('unset');
-  const [activeAppearance, setActiveAppearance] = useState<AvatarActiveAppearance>('ring');
   const [imageSize, setImageSize] = useState<WithUndefined<AvatarSize>>(72);
   const [presence, setPresence] = useState<WithUndefined<PresenceBadgeStatus>>('available');
   const [avatarColor, setAvatarColor] = useState<AvatarColor>('brass');
 
   const onActiveChange = useCallback((value) => setActive(value), []);
-  const onActiveAppearanceChange = useCallback((value) => setActiveAppearance(value), []);
   const onAvatarColorChange = useCallback((value) => setAvatarColor(value), []);
   const onSizeChange = useCallback((value) => setImageSize(value), []);
 
@@ -46,6 +35,8 @@ export const StandardUsage: FunctionComponent = () => {
   const theme = useTheme();
   const textStyles = { color: theme.colors.inputText as ColorValue };
   const avatarSizesForPicker = allSizes.map((size) => size.toString());
+
+  const activeAppearance = 'ring';
 
   const fontBuiltInProps = {
     fontFamily: 'Arial',
@@ -77,14 +68,7 @@ export const StandardUsage: FunctionComponent = () => {
 
         <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
         <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />
-        {active === 'active' ? (
-          <StyledPicker
-            prompt="Active appearance"
-            selected={activeAppearance}
-            onChange={onActiveAppearanceChange}
-            collection={avatarActiveAppearance}
-          />
-        ) : null}
+        {active === 'active' && <Text>Active appearance is ring</Text>}
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>

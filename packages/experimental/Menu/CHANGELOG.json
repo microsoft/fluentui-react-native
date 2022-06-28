@@ -2,6 +2,72 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 18:04:00 GMT",
+      "tag": "@fluentui-react-native/menu_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "bb8994fb90ff02dab0270e4005558b21d7be50e1",
+            "comment": "Fix arrow close not working"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 27 Jun 2022 15:59:57 GMT",
+      "tag": "@fluentui-react-native/menu_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "2ade5cd87fd447075f875e144b631f38424c925e",
+            "comment": "Implement persisting behavior"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Jun 2022 23:12:59 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.7",
+      "version": "0.15.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "5f0322361e9fab11c378620cbc021162bcca1d1a",
+            "comment": "Focus visuals should show as soon as component is hovered"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 24 Jun 2022 22:38:56 GMT",
+      "tag": "@fluentui-react-native/menu_v0.15.6",
+      "version": "0.15.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "03b76df2f66ffdee8f3560c601cf798586444fc5",
+            "comment": "Fix container being tab stop"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "143106ff88f12c3ad92412d554aaf055e0bab2ed",
+            "comment": "Minor Menu bug fixes"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 23 Jun 2022 22:10:22 GMT",
       "tag": "@fluentui-react-native/menu_v0.15.5",
       "version": "0.15.5",

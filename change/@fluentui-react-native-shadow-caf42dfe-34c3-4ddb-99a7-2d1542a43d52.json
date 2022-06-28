@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "New component made with the new component generator",
+  "packageName": "@fluentui-react-native/shadow",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

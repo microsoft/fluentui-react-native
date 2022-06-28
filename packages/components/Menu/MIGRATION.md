@@ -301,7 +301,6 @@ The FURN menu cannot be used in place of a FluentUI menu - these componentss are
 #### Not implemented on MenuItem
 
 - `hasSubmenu` - currently automatically handled
-- `persistOnClick`
 
 ### MenuItemCheckbox and MenuItemRadio
 
