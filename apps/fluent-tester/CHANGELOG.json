@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 00:53:43 GMT",
+      "tag": "@fluentui-react-native/tester_v0.69.0",
+      "version": "0.69.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b2d247cc39d7d3c8ca426f362a05f04e06b54d9b",
+            "comment": "New component made with the new component generator"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.0",
+            "commit": "b2d247cc39d7d3c8ca426f362a05f04e06b54d9b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 27 Jun 2022 16:56:31 GMT",
       "tag": "@fluentui-react-native/tester_v0.68.6",
       "version": "0.68.6",

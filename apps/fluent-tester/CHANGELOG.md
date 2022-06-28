@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 27 Jun 2022 16:56:31 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 00:53:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.69.0
+
+Tue, 28 Jun 2022 00:53:43 GMT
+
+### Minor changes
+
+- New component made with the new component generator (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.0
 
 ## 0.68.6
 
