@@ -13,7 +13,7 @@ export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Reco
 
     if (__DEV__) {
       if (childrenArray.length !== 1) {
-        console.log('Only expecting one child for MenuTrigger');
+        console.warn('Only expecting one child for MenuTrigger');
       }
     }
 

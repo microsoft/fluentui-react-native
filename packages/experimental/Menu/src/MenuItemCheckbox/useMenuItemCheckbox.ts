@@ -65,12 +65,11 @@ export const useMenuCheckboxInteraction = (
     onAccessibilityAction,
     ...rest
   } = props;
-  const context = useMenuContext();
-  const isSubmenu = context.isSubmenu;
-  const setOpen = context.setOpen;
 
-  const listContext = useMenuListContext();
-  const checked = listContext.checked?.[name];
+  const isSubmenu = useMenuContext().isSubmenu;
+
+  const { checked, onArrowClose } = useMenuListContext();
+  const isChecked = checked?.[name];
 
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleCallback);
@@ -88,14 +87,14 @@ export const useMenuCheckboxInteraction = (
 
       const isRtl = I18nManager.isRTL;
       const isArrowClose = isSubmenu && ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
-      console.log(e.nativeEvent.key);
 
       if (isArrowClose) {
-        setOpen(e, false /*isOpen*/, false /*bubble*/);
+        onArrowClose?.(e);
       }
     },
-    [disabled, isSubmenu, toggleCallback, setOpen],
+    [disabled, isSubmenu, onArrowClose, toggleCallback],
   );
+
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
   const onKeyProps = useKeyDownProps(onKeysPressed, ...keys);
 
@@ -119,7 +118,7 @@ export const useMenuCheckboxInteraction = (
   const state = {
     ...pressable.state,
     disabled: !!props.disabled,
-    checked: checked,
+    checked: isChecked,
   };
 
   return {

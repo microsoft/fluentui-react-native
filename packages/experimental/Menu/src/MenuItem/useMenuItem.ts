@@ -20,12 +20,11 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const { isSubmenu, setOpen } = useMenuContext();
+  const { hasCheckmarks, onArrowClose } = useMenuListContext();
   const isTrigger = useMenuTriggerContext();
-  const isSubmenu = useMenuContext().isSubmenu;
-  const hasSubmenu = isSubmenu && isTrigger;
-  const isInSubmenu = isSubmenu && !isTrigger;
 
-  const setOpen = useMenuContext().setOpen;
+  const hasSubmenu = isSubmenu && isTrigger;
 
   const onInvoke = React.useCallback(
     (e: InteractionEvent) => {
@@ -36,20 +35,22 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
         hasSubmenu &&
         isKeyPressEvent(e) &&
         ((isRtl && e.nativeEvent.key === 'ArrowLeft') || (!isRtl && e.nativeEvent.key === 'ArrowRight'));
-      const isArrowClose =
-        isInSubmenu &&
-        isKeyPressEvent(e) &&
-        ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
 
       if (!disabled && (!isArrowKey || isArrowOpen)) {
         onClick?.(e);
       }
 
-      if (!isArrowKey || isArrowClose) {
-        setOpen(e, false /*isOpen*/, !isArrowClose /*bubble*/);
+      if (!hasSubmenu && !isArrowKey) {
+        setOpen(e, false /*isOpen*/, false /*bubble*/);
+      }
+
+      const isArrowClose =
+        isKeyPressEvent(e) && ((isRtl && e.nativeEvent.key === 'ArrowRight') || (!isRtl && e.nativeEvent.key === 'ArrowLeft'));
+      if (isArrowClose) {
+        onArrowClose?.(e);
       }
     },
-    [disabled, hasSubmenu, isInSubmenu, onClick, setOpen],
+    [disabled, hasSubmenu, onArrowClose, onClick, setOpen],
   );
 
   const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
@@ -58,7 +59,6 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
 
   // Explicitly override onKeyDown to override the native behavior of moving focus with arrow keys.
   const onKeyDownProps = useKeyDownProps(onInvoke, ...keys);
-  const hasCheckmarks = useMenuListContext().hasCheckmarks;
 
   useHoverFocusEffect(pressable.state.hovered, componentRef);
 
