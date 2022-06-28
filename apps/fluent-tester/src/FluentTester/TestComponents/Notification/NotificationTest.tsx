@@ -34,18 +34,6 @@ const WarningTest: React.FunctionComponent = () => {
   );
 };
 
-const PrimaryBarTest: React.FunctionComponent = () => {
-  return <Notification variant={'primaryBar'}>Updating...</Notification>;
-};
-
-const PrimaryOutlineBarTest: React.FunctionComponent = () => {
-  return <Notification variant={'primaryOutlineBar'}>Mail Sent</Notification>;
-};
-
-const NeutralBarTest: React.FunctionComponent = () => {
-  return <Notification variant={'neutralBar'}>No internet connection</Notification>;
-};
-
 const notificationSections: TestSection[] = [
   {
     name: 'Primary',
@@ -54,18 +42,6 @@ const notificationSections: TestSection[] = [
   {
     name: 'Neutral',
     component: NeutralTest,
-  },
-  {
-    name: 'Primary Bar',
-    component: PrimaryBarTest,
-  },
-  {
-    name: 'Primary Outline Bar',
-    component: PrimaryOutlineBarTest,
-  },
-  {
-    name: 'Neutral Bar',
-    component: NeutralBarTest,
   },
   {
     name: 'Danger',

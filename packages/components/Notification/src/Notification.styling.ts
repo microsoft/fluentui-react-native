@@ -3,15 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultNotificationTokens } from './NotificationTokens';
 
-export const notificationStates: (keyof NotificationTokens)[] = [
-  'primary',
-  'neutral',
-  'primaryBar',
-  'primaryOutlineBar',
-  'neutralBar',
-  'danger',
-  'warning',
-];
+export const notificationStates: (keyof NotificationTokens)[] = ['primary', 'neutral', 'danger', 'warning'];
 
 export const stylingSettings: UseStylingOptions<NotificationProps, NotificationSlotProps, NotificationTokens> = {
   tokens: [defaultNotificationTokens, notification],

@@ -17,18 +17,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: '#393939',
       borderRadius: 12,
     },
-    primaryBar: {
-      backgroundColor: '#EFF6FC',
-      color: '#005A9E',
-    },
-    primaryOutlineBar: {
-      backgroundColor: '#FFFFFF',
-      color: '#0078D4',
-    },
-    neutralBar: {
-      backgroundColor: '#DFDFDF',
-      color: '#090909',
-    },
     danger: {
       backgroundColor: '#FDF6F6',
       color: '#BC2F34',
