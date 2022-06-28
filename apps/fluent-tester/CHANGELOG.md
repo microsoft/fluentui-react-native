@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 28 Jun 2022 08:52:48 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 16:48:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.69.2
+
+Tue, 28 Jun 2022 16:48:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.3
+- Bump @fluentui-react-native/win32-theme to v0.19.2
 
 ## 0.69.1
 

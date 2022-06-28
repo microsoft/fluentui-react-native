@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 28 Jun 2022 08:52:48 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 16:48:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.3
+
+Tue, 28 Jun 2022 16:48:37 GMT
+
+### Patches
+
+- Fixed absence of icon in HC (vkozlova@microsoft.com)
 
 ## 1.1.2
 

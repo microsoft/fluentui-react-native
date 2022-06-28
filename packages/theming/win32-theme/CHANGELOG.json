@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/win32-theme",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 16:48:37 GMT",
+      "tag": "@fluentui-react-native/win32-theme_v0.19.2",
+      "version": "0.19.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/win32-theme",
+            "commit": "85f6d8488877d86b6ca30801600ca449a90ae67d",
+            "comment": "Fixed absence of icon in HC"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 24 Jun 2022 18:52:57 GMT",
       "tag": "@fluentui-react-native/win32-theme_v0.19.1",
       "version": "0.19.1",
