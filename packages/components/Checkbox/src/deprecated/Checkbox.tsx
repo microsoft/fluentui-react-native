@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { ICheckboxState, ICheckboxProps, ICheckboxSlotProps, ICheckboxRenderData, ICheckboxType, checkboxName } from './Checkbox.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -19,10 +19,10 @@ import {
 import { backgroundColorTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 
-/**
- * @deprecated This will be removed when the package moves to 1.0.0.
- * Please see MIGRATION.md for details on how to move to the new Checkbox.
- */
+if (__DEV__ && Platform.OS === ('win32' as any)) {
+  console.warn('This version of the component is deprecated for win32. Please use CheckboxV1 from @fluentui-react-native/checkbox.');
+}
+
 export const Checkbox = compose<ICheckboxType>({
   displayName: checkboxName,
 
