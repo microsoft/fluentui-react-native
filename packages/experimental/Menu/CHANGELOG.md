@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 27 Jun 2022 15:59:57 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 18:04:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.1
+
+Tue, 28 Jun 2022 18:04:00 GMT
+
+### Patches
+
+- Fix arrow close not working (ruaraki@microsoft.com)
 
 ## 0.16.0
 

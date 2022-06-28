@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 18:04:00 GMT",
+      "tag": "@fluentui-react-native/menu_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "bb8994fb90ff02dab0270e4005558b21d7be50e1",
+            "comment": "Fix arrow close not working"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 27 Jun 2022 15:59:57 GMT",
       "tag": "@fluentui-react-native/menu_v0.16.0",
       "version": "0.16.0",
