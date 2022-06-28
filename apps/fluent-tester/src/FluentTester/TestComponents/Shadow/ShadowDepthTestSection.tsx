@@ -2,7 +2,7 @@ import * as React from 'react';
 import { commonTestStyles } from '../Common/styles';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { Shadow, ShadowDepth } from '@fluentui-react-native/shadow';
+import { Shadow, ShadowDepth } from '@fluentui-react-native/experimental-shadow';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
