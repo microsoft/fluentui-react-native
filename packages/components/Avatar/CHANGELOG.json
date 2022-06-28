@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Tue, 28 Jun 2022 22:01:06 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.4",
+      "version": "1.1.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "46767277f2408687a94a808360affee37683673e",
+            "comment": "Update package.json version"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Jun 2022 16:48:37 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.3",
       "version": "1.1.3",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update package.json version",
-  "packageName": "@fluentui-react-native/avatar",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

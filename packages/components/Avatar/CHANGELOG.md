@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 28 Jun 2022 16:48:37 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 22:01:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.4
+
+Tue, 28 Jun 2022 22:01:06 GMT
+
+### Patches
+
+- Update package.json version (ruaraki@microsoft.com)
 
 ## 1.1.3
 
