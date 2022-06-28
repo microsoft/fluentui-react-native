@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed absence of icon in HC",
+  "packageName": "@fluentui-react-native/win32-theme",
+  "email": "vkozlova@microsoft.com",
+  "dependentChangeType": "patch"
+}

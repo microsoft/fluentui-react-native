@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed absence of icon in HC",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "vkozlova@microsoft.com",
+  "dependentChangeType": "patch"
+}
