@@ -7,7 +7,7 @@ describe('Notification component tests', () => {
   it('Notification default', () => {
     const tree = renderer
       .create(
-        <Notification variant={'primary'} endText="Undo">
+        <Notification variant={'primary'} action="Undo">
           Mail Archived
         </Notification>,
       )
@@ -18,7 +18,7 @@ describe('Notification component tests', () => {
   it('Notification simple rendering does not invalidate styling', () => {
     checkRenderConsistency(
       () => (
-        <Notification variant={'primary'} endText="Undo">
+        <Notification variant={'primary'} action="Undo">
           Mail Archived
         </Notification>
       ),
@@ -29,7 +29,7 @@ describe('Notification component tests', () => {
   it('Notification re-renders correctly', () => {
     checkReRender(
       () => (
-        <Notification variant={'primary'} endText="Undo">
+        <Notification variant={'primary'} action="Undo">
           Mail Archived
         </Notification>
       ),

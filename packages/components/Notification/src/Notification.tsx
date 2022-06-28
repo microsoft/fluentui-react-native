@@ -22,21 +22,29 @@ export const Notification = compose<NotificationType>({
   slots: {
     root: View,
     message: Text,
-    endText: Text,
+    action: Text,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const notificationProps = useNotification(userProps);
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, endText, ...mergedProps } = mergeProps(notificationProps, final);
+      const { variant, action, ...mergedProps } = mergeProps(notificationProps, final);
 
-      return (
-        <Slots.root {...mergedProps}>
-          <Slots.message>{children}</Slots.message>
-          <Slots.endText>{endText}</Slots.endText>
-        </Slots.root>
-      );
+      if (action) {
+        return (
+          <Slots.root {...mergedProps}>
+            <Slots.message>{children}</Slots.message>
+            <Slots.action>{action}</Slots.action>
+          </Slots.root>
+        );
+      } else {
+        return (
+          <Slots.root {...mergedProps}>
+            <Slots.message>{children}</Slots.message>
+          </Slots.root>
+        );
+      }
     };
   },
 });

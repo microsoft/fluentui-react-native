@@ -1,11 +1,11 @@
 import { NotificationProps } from './Notification.types';
 
 export const useNotification = (props: NotificationProps): NotificationProps => {
-  const { variant, endText, ...rest } = props;
+  const { variant, action, ...rest } = props;
 
   return {
     variant,
-    endText,
+    action,
     ...rest,
   };
 };
