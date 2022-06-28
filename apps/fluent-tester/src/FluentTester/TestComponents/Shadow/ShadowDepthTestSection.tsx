@@ -18,7 +18,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       paddingHorizontal: 24,
     },
     vmargin: {
-      marginVertical: 64,
+      marginVertical: 32,
     },
   };
 });
@@ -41,7 +41,7 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
 
 export const ShadowDepthTestSection: React.FunctionComponent = () => {
   return (
-    <View>
+    <View style={{ padding: 20 }}>
       <ShadowTestBox depth="2" />
       <ShadowTestBox depth="4" />
       <ShadowTestBox depth="8" />
