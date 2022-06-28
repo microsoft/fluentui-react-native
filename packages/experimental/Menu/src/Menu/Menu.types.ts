@@ -29,6 +29,11 @@ export interface MenuProps extends MenuListProps {
    * Opens the menu on hovering over the trigger
    */
   openOnHover?: boolean;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnItemClick?: boolean;
 }
 
 export interface MenuState extends MenuProps {

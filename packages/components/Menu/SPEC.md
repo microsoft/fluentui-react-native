@@ -14,6 +14,8 @@ The below samples do not represent the definitive props of the final implemented
 
 ### Basic Menu
 
+![Basic menu with three options](./assets/Menu.png)
+
 ```tsx
 const menu = (
   <Menu>
@@ -27,11 +29,13 @@ const menu = (
         <MenuItem>Option 3</MenuItem>
       </MenuList>
     </MenuPopover>
-  <Menu>
-)
+  </Menu>
+);
 ```
 
 ### Submenus
+
+![A menu with a submenu with three options](./assets/Submenu.png)
 
 ```tsx
 const menu = (
@@ -56,20 +60,28 @@ const menu = (
         </Menu>
       </MenuList>
     </MenuPopover>
-  <Menu>
-)
+  </Menu>
+);
 ```
 
 ### Selection
 
+![A menu with three options that support selection](./assets/checkbox.png)
+
 ```tsx
 const [selectedItems, setSelectedItems] = React.useState([]);
+const onCheckedChange = React.useCallback(
+  (e, checked) => {
+    setSelectedItems(checked);
+  },
+  [setSelectedItems],
+);
+
 const menuCheckbox = (
-  <Menu
-    selectedItems={selectedItems}
-    onSelectionChange={setSeelctedItems}
-  >
-    <MenuTrigger><Button>Open menu</Button></MenuTrigger>
+  <Menu checked={selectedItems} onCheckedChange={onCheckedChange}>
+    <MenuTrigger>
+      <Button>Open menu</Button>
+    </MenuTrigger>
     <MenuPopover>
       <MenuList>
         <MenuItemCheckbox name="checkbox1">Option 1</MenuItemCheckbox>
@@ -77,13 +89,9 @@ const menuCheckbox = (
         <MenuItemCheckbox name="checkbox3">Option 3</MenuItemCheckbox>
       </MenuList>
     </MenuPopover>
-<Menu>
-)
+  </Menu>
+);
 ```
-
-## Visual Examples
-
-Coming soon
 
 ## Variants
 
@@ -139,6 +147,11 @@ export interface MenuProps extends MenuListProps {
    * Opens the menu on hovering over the trigger
    */
   openOnHover?: boolean;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnItemClick?: boolean;
 }
 ```
 
@@ -221,6 +234,11 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'o
    * A callback to call on button click event
    */
   onClick?: (e: InteractionEvent) => void;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnClick?: boolean;
 }
 ```
 
@@ -282,6 +300,11 @@ export interface MenuItemCheckboxProps extends Omit<IWithPressableOptions<ViewPr
    * Identifier for the control
    */
   name: string;
+
+  /**
+   * Do not dismiss the menu when a menu item is clicked
+   */
+  persistOnClick?: boolean;
 }
 ```
 
