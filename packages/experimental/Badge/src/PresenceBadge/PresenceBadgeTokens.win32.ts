@@ -5,11 +5,11 @@ import { PresenceBadgeTokens } from './PresenceBadge.types';
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t: Theme): PresenceBadgeTokens =>
   ({
     borderWidth: 2,
-    borderColor: t.host.appearance === 'highContrast' ? 'transparent' : globalTokens.color.white,
+    borderColor: t.name === 'HighContrast' ? 'transparent' : globalTokens.color.white,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
     paddingHorizontal: globalTokens.spacing.none,
-    backgroundColor: t.host.appearance === 'highContrast' ? globalTokens.color.black : globalTokens.color.white,
+    backgroundColor: t.name === 'HighContrast' ? globalTokens.color.black : globalTokens.color.white,
     smallest: {
       width: 6,
       height: 6,
