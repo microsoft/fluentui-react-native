@@ -1,8 +1,116 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.30
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.13.0
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/tokens to v0.14.0
+
+## 0.7.28
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.7.27
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/tokens to v0.12.1
+
+## 0.7.26
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.7.25
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.7.24
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.2
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.7.23
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.1
+
+## 0.7.22
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.0
+
+## 0.7.21
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.15
+
+## 0.7.20
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.9.14
+
+## 0.7.19
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/composition to v0.7.7
+- Bump @fluentui-react-native/default-theme to v0.9.13
+- Bump @fluentui-react-native/immutable-merge to v1.1.7
+- Bump @fluentui-react-native/merge-props to v0.4.3
+- Bump @fluentui-react-native/theme-types to v0.14.1
+- Bump @fluentui-react-native/use-styling to v0.8.3
+- Bump @fluentui-react-native/use-slot to v0.2.6
+- Bump @fluentui-react-native/use-slots to v0.6.6
+- Bump @fluentui-react-native/use-tokens to v0.2.3
+- Bump @fluentui-react-native/tokens to v0.11.9
 
 ## 0.7.18
 

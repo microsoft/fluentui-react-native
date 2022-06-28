@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Thu, 03 Mar 2022 20:20:09 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.0
+
+Wed, 25 May 2022 18:43:10 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+
+## 0.15.0
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Minor changes
+
+- Add shadows to the theme (ruaraki@microsoft.com)
+
+## 0.14.3
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Revert "Add Text props and test new Variant types (#1615)" (sanajmi@microsoft.com)
+
+## 0.14.2
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+
+## 0.14.1
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
 
 ## 0.14.0
 

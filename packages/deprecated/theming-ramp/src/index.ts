@@ -1,5 +1,5 @@
-export * from './SettingsWorker';
-export * from './Theme';
+export { getSettings, returnAsSlotProps } from './SettingsWorker';
+export { resolvePartialTheme } from './Theme';
 export {
   OfficePalette,
   Palette as IPalette,

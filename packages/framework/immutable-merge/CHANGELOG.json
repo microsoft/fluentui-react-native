@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/immutable-merge",
   "entries": [
     {
+      "date": "Thu, 31 Mar 2022 07:27:47 GMT",
+      "tag": "@fluentui-react-native/immutable-merge_v1.1.7",
+      "version": "1.1.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/immutable-merge",
+            "commit": "c39b4436f2ca160a31ca1d7ca9fa8bf7d59512ed",
+            "comment": "Ban `export *` in index files for better tree-shakeability"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 18 Feb 2022 23:27:10 GMT",
       "tag": "@fluentui-react-native/immutable-merge_v1.1.6",
       "version": "1.1.6",

@@ -1,5 +1,11 @@
 # Button
 
+In the short term, the new `Button` control is named `ButtonV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Button`. It may be useful to rename the control to `Button` using the import syntax to simplify the rename:
+
+```ts
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+```
+
 ## Background
 
 The `Button` component enables users to trigger an action or event, such as submitting a form, opening a dialog, canceling an action, or performing a delete operation.
@@ -107,6 +113,12 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
+  /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
 
   /**
    * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the

@@ -1,8 +1,181 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
+This log was last generated on Thu, 16 Jun 2022 17:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.33
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- apple: remove unneccesary build settings from podspec (sanajmi@microsoft.com)
+
+## 0.9.32
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+
+## 0.9.31
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
+
+## 0.9.30
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.1
+
+## 0.9.29
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.0
+
+## 0.9.28
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.15.10
+
+## 0.9.27
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.8
+
+## 0.9.26
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+
+## 0.9.25
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+
+## 0.9.24
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.9.23
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.4
+
+## 0.9.22
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
+
+## 0.9.21
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.2
+
+## 0.9.20
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.1
+
+## 0.9.19
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.0
+
+## 0.9.18
+
+Tue, 12 Apr 2022 21:53:04 GMT
+
+### Patches
+
+- Scroll scrollView when Focus moves out of viewport (sanajmi@microsoft.com)
+
+## 0.9.17
+
+Tue, 12 Apr 2022 00:35:08 GMT
+
+### Patches
+
+- Add support for nested focus zones (sanajmi@microsoft.com)
+
+## 0.9.16
+
+Fri, 08 Apr 2022 18:53:11 GMT
+
+### Patches
+
+- Handle FocusZone edge cases (amchiu@microsoft.com)
+
+## 0.9.15
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.8
+
+## 0.9.14
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.14.7
+
+## 0.9.13
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/component-cache to v1.3.2
+- Bump @fluentui-react-native/interactive-hooks to v0.14.6
+- Bump @uifabricshared/foundation-composable to v0.10.3
+- Bump @uifabricshared/foundation-settings to v0.11.3
 
 ## 0.9.12
 

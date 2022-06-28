@@ -1,8 +1,107 @@
 # Change Log - @fluentui-react-native/experimental-drawer
 
-This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
+This log was last generated on Wed, 25 May 2022 18:43:08 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.13
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.30
+
+## 0.1.11
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+
+## 0.1.10
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.27
+
+## 0.1.9
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.26
+
+## 0.1.8
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.25
+
+## 0.1.7
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.24
+
+## 0.1.6
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.23
+
+## 0.1.5
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.22
+
+## 0.1.4
+
+Mon, 11 Apr 2022 19:26:38 GMT
+
+### Patches
+
+- Remove unused deps (ruaraki@microsoft.com)
+
+## 0.1.3
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.21
+
+## 0.1.2
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.20
+
+## 0.1.1
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.3.2
+- Bump @fluentui-react-native/framework to v0.7.19
 
 ## 0.1.0
 

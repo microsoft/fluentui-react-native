@@ -1,8 +1,147 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Mon, 28 Mar 2022 15:02:37 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.3
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Fix focus on open (ruaraki@microsoft.com)
+
+## 0.16.2
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.1
+
+## 0.16.1
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.0
+
+## 0.16.0
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Minor changes
+
+- Type cleanup (ruaraki@microsoft.com)
+
+## 0.15.10
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.11.25
+
+## 0.15.8
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.23
+
+## 0.15.7
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.22
+
+## 0.15.6
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.21
+
+## 0.15.5
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.20
+
+## 0.15.4
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.19
+
+## 0.15.3
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.18
+
+## 0.15.2
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.17
+
+## 0.15.1
+
+Mon, 18 Apr 2022 17:51:06 GMT
+
+### Patches
+
+- Disable hovered visuals on loading buttons (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Wed, 13 Apr 2022 23:44:28 GMT
+
+### Minor changes
+
+- Prevent onHoverIn when disabled (krsiler@microsoft.com)
+
+## 0.14.8
+
+Wed, 06 Apr 2022 22:58:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.16
+
+## 0.14.7
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.15
+
+## 0.14.6
+
+Thu, 31 Mar 2022 07:27:47 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/icon to v0.11.14
 
 ## 0.14.5
 

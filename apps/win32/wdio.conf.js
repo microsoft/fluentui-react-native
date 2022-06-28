@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const rimraf = require('rimraf');
 
 const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
 const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
@@ -13,17 +12,18 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
-  exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts', '../fluent-tester/src/E2E/Icon/specs/*.win.ts'],
+  exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
   maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
-      deviceName: 'WindowsPC',
-      app: appPath,
-      appArguments: appArgs,
-      appWorkingDir: appDir,
+      'appium:automationName': 'windows',
+      'appium:deviceName': 'WindowsPC',
+      'appium:app': appPath,
+      'appium:appArguments': appArgs,
+      'appium:appWorkingDir': appDir,
     },
   ],
 

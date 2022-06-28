@@ -1,1 +1,1 @@
-export * from './createAndroidTheme';
+export { createAndroidTheme } from './createAndroidTheme';

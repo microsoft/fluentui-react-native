@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.3
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/immutable-merge to v1.1.7
 
 ## 0.7.2
 

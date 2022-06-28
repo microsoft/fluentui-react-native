@@ -79,7 +79,7 @@ jobs:
   - job: NuGetPublish
     displayName: NuGet Publish
     pool:
-      vmImage: 'macos-11'
+      vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
     variables:
       - name: BUILDSECMON_OPT_IN

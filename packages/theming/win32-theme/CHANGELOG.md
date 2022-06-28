@@ -1,8 +1,127 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Wed, 23 Mar 2022 17:24:05 GMT and should not be manually modified.
+This log was last generated on Fri, 24 Jun 2022 18:52:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Fri, 24 Jun 2022 18:52:57 GMT
+
+### Patches
+
+- Override colors for checkmark in MenuItem (ruaraki@microsoft.com)
+
+## 0.19.0
+
+Wed, 25 May 2022 18:43:10 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/default-theme to v0.13.0
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theme to v0.6.11
+- Bump @fluentui-react-native/theming-utils to v0.13.0
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+
+## 0.17.0
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Minor changes
+
+- Add shadows to win32 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theme to v0.6.9
+- Bump @fluentui-react-native/theming-utils to v0.11.0
+
+## 0.16.4
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theme to v0.6.8
+- Bump @fluentui-react-native/theming-utils to v0.10.2
+
+## 0.16.3
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/default-theme to v0.10.2
+- Bump @fluentui-react-native/theme-tokens to v0.16.2
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/theme to v0.6.7
+- Bump @fluentui-react-native/theming-utils to v0.10.1
+
+## 0.16.2
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump design tokens packages (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.10.1
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
+
+## 0.16.1
+
+Tue, 19 Apr 2022 16:54:55 GMT
+
+### Patches
+
+- Fix dependencies (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.10.0
+- Bump @fluentui-react-native/theme-tokens to v0.16.0
+- Bump @fluentui-react-native/theming-utils to v0.10.0
+
+## 0.16.0
+
+Wed, 06 Apr 2022 22:58:21 GMT
+
+### Minor changes
+
+- Hook up design tokens (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.15
+- Bump @fluentui-react-native/theme-tokens to v0.15.0
+- Bump @fluentui-react-native/theming-utils to v0.9.4
+
+## 0.15.0
+
+Tue, 05 Apr 2022 20:05:50 GMT
+
+### Minor changes
+
+- Move win32 alias tokens out (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.9.14
+- Bump @fluentui-react-native/theme-tokens to v0.14.0
+- Bump @fluentui-react-native/theming-utils to v0.9.3
+
+## 0.14.15
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Ban `export *` in index files for better tree-shakeability (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/default-theme to v0.9.13
+- Bump @fluentui-react-native/theme-tokens to v0.13.2
+- Bump @fluentui-react-native/theme-types to v0.14.1
+- Bump @fluentui-react-native/theme to v0.6.6
+- Bump @fluentui-react-native/theming-utils to v0.9.2
 
 ## 0.14.14
 

@@ -6,6 +6,8 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens> = () =>
   ({
     iconSize: 5,
     borderWidth: globalTokens.stroke.width.thin,
+    bottom: globalTokens.spacing.none,
+    right: globalTokens.spacing.none,
     smallest: {
       minWidth: 6,
       height: 6,

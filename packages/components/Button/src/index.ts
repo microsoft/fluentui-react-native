@@ -1,7 +1,16 @@
-export * from './deprecated/Button.types';
-export * from './deprecated/Button';
-export * from './deprecated/PrimaryButton';
-export * from './deprecated/StealthButton';
+export { buttonName } from './deprecated/Button.types';
+export type {
+  IButtonInfo,
+  IButtonProps,
+  IButtonRenderData,
+  IButtonSlotProps,
+  IButtonState,
+  IButtonTokens,
+  IButtonType,
+} from './deprecated/Button.types';
+export { Button } from './deprecated/Button';
+export { PrimaryButton } from './deprecated/PrimaryButton';
+export { StealthButton } from './deprecated/StealthButton';
 export {
   buttonName as buttonNameV1,
   ButtonSize,
@@ -16,6 +25,9 @@ export {
   ButtonType,
 } from './Button.types';
 export { Button as ButtonV1 } from './Button';
-export * from './CompoundButton';
-export * from './FAB';
-export * from './ToggleButton';
+export { CompoundButton, compoundButtonName } from './CompoundButton';
+export type { CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens, CompoundButtonType } from './CompoundButton';
+export { FAB, fabName } from './FAB';
+export type { FABType } from './FAB';
+export { ToggleButton, toggleButtonName } from './ToggleButton';
+export type { ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonState, ToggleButtonTokens, ToggleButtonType } from './ToggleButton';

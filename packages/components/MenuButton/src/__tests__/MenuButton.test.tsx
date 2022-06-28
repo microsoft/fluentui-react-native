@@ -43,6 +43,6 @@ it('ContextualMenu default', () => {
       text: 'Menu Item',
     },
   ];
-  const tree = renderer.create(<MenuButton content="Press for Nested MenuButton" menuItems={menuItems} />).toJSON();
+  const tree = renderer.create(<MenuButton menuItems={menuItems}>Press for Nested MenuButton</MenuButton>).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -79,8 +79,20 @@ export type {
   Variants,
 } from '@fluentui-react-native/theme-types';
 
-export * from './compose';
-export * from './compressible';
-export * from './useFluentTheme';
-export * from './useStyling';
-export * from './useTokens';
+export { compose } from './compose';
+export type {
+  ComposableComponent,
+  ComposeOptions,
+  ComposeType,
+  ExtractProps,
+  ExtractSlotProps,
+  ExtractStatics,
+  ExtractTokens,
+  UseSlots,
+} from './compose';
+export { compressible } from './compressible';
+export { useFluentTheme } from './useFluentTheme';
+export { HasLayer, TokensThatAreAlsoProps, UseStyling, buildProps, buildUseStyling } from './useStyling';
+export type { BuildProps, TokenSettings, TokensFromTheme, UseStylingOptions } from './useStyling';
+export { applyPropsToTokens, applyTokenLayers, buildUseTokens, customizable, patchTokens } from './useTokens';
+export type { UseTokens } from './useTokens';

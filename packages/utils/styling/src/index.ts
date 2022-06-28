@@ -1,1 +1,1 @@
-export * from './getMarginAdjustment';
+export { getTextMarginAdjustment } from './getMarginAdjustment';

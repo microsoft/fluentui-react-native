@@ -21,6 +21,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
             icon={{ svgSource: svgProps }}
             accessibilityLabel="Small size button with accessibility icon"
             style={commonTestStyles.vmargin}
+            tooltip="button tooltip"
           />
           <Button
             iconOnly

@@ -1,3 +1,3 @@
-export * from './createAliasTokens';
-export * from './getCurrentAppearance';
-export * from './mapPipelineToTheme';
+export { getCurrentAppearance } from './getCurrentAppearance';
+export { mapPipelineToTheme, mapFontPipelineToTheme } from './mapPipelineToTheme';
+export { mapPipelineToShadow } from './mapPipelineToShadow';

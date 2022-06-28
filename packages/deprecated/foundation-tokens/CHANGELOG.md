@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/foundation-tokens
 
-This log was last generated on Mon, 20 Dec 2021 22:56:02 GMT and should not be manually modified.
+This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.3
+
+Thu, 31 Mar 2022 07:27:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/merge-props to v0.4.3
+- Bump @uifabricshared/foundation-settings to v0.11.3
 
 ## 0.11.2
 
