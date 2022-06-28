@@ -40,6 +40,7 @@ export interface MenuListState extends Omit<MenuListProps, 'checked' | 'onChecke
   props: MenuListProps;
   checked?: Record<string, boolean>;
   isCheckedControlled: boolean;
+  onArrowClose?: (e: InteractionEvent) => void;
   onCheckedChange?: (e: InteractionEvent, name: string, isChecked: boolean) => void;
   selectRadio?: (e: InteractionEvent, name: string) => void;
   addRadioItem: (name: string) => void;
