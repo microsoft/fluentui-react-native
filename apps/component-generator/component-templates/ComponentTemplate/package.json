@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/component-name",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "add component-description",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -31,7 +31,9 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@fluentui-react-native/scripts": "^0.1.1"
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "react": "17.0.1",
+    "react-native": "^0.64.3"
   },
   "peerDependencies": {
     "react": ">=17.0.1",
