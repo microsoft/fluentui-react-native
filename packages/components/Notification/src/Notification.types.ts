@@ -9,16 +9,13 @@ export type NotificationVariant = typeof NotificationVariants[number];
 export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens {
   primary: NotificationTokens;
   neutral: NotificationTokens;
-  primaryBar: NotificationTokens;
-  primaryOutlineBar: NotificationTokens;
-  neutralBar: NotificationTokens;
   danger: NotificationTokens;
   warning: NotificationTokens;
 }
 
 export interface NotificationProps {
   /**
-   * Notification variants: 'primary' | 'neutral' | 'primaryBar' | 'primaryOutlineBar' | 'neutralBar' | 'danger' | 'warning'
+   * Notification variants: 'primary' | 'neutral' | 'danger' | 'warning'
    */
   variant: NotificationVariant;
   endText?: string;
