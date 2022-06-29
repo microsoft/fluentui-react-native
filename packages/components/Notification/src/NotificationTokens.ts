@@ -8,13 +8,13 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     color: t.colors.brandForeground1,
     padding: 16,
     primary: {
-      backgroundColor: '#EFF6FC',
-      color: '#106EBE',
+      backgroundColor: '#EBF3FC',
+      color: '#0F6CBD',
       borderRadius: 12,
     },
     neutral: {
-      backgroundColor: '#F7F7F7',
-      color: '#393939',
+      backgroundColor: '#FAFAFA',
+      color: '#616161',
       borderRadius: 12,
     },
     danger: {

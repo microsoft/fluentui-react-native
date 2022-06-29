@@ -5,7 +5,7 @@ exports[`Notification component tests Notification default 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#EFF6FC",
+      "backgroundColor": "#EBF3FC",
       "borderRadius": 12,
       "flex": 1,
       "flexDirection": "row",
@@ -19,7 +19,7 @@ exports[`Notification component tests Notification default 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#106EBE",
+        "color": "#0F6CBD",
         "flex": 1,
         "flexGrow": 1,
         "fontFamily": "Segoe UI",
@@ -36,7 +36,7 @@ exports[`Notification component tests Notification default 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#106EBE",
+        "color": "#0F6CBD",
         "fontFamily": "Segoe UI",
         "fontSize": 16,
         "fontWeight": "500",
