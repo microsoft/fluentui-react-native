@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add warning that ContextualMenu is deprecated if loaded on win32.",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

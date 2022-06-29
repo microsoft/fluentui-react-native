@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-menu-button",
-  "version": "0.3.49",
+  "version": "0.3.50",
   "description": "A cross-platform MenuButton component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,7 +26,7 @@
     "directory": "packages/experimental/MenuButton"
   },
   "dependencies": {
-    "@fluentui-react-native/contextual-menu": "^0.16.38",
+    "@fluentui-react-native/contextual-menu": "^0.16.39",
     "@fluentui-react-native/experimental-button": "^0.15.30",
     "@fluentui-react-native/framework": "0.7.30",
     "@fluentui-react-native/tokens": ">=0.14.0 <1.0.0",

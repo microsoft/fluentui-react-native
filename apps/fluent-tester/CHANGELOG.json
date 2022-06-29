@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 29 Jun 2022 17:36:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.69.5",
+      "version": "0.69.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f90f82266a877f63dd5f73c41dcf98df7c9675f5",
+            "comment": "Add warning that ContextualMenu is deprecated if loaded on win32."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.3.50",
+            "commit": "f90f82266a877f63dd5f73c41dcf98df7c9675f5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.30.4",
+            "commit": "f90f82266a877f63dd5f73c41dcf98df7c9675f5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 28 Jun 2022 22:01:06 GMT",
       "tag": "@fluentui-react-native/tester_v0.69.4",
       "version": "0.69.4",

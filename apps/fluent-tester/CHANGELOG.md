@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 28 Jun 2022 22:01:06 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Jun 2022 17:36:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.69.5
+
+Wed, 29 Jun 2022 17:36:04 GMT
+
+### Patches
+
+- Add warning that ContextualMenu is deprecated if loaded on win32. (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.50
+- Bump @fluentui/react-native to v0.30.4
 
 ## 0.69.4
 
