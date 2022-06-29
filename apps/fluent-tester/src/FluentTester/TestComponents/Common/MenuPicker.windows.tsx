@@ -25,9 +25,9 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
 const menuPickerStyles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     alignItems: 'center',
     margin: 5,
-    width: 500,
   },
   prompt: {
     marginRight: 5,

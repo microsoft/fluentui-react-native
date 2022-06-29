@@ -1,7 +1,7 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
 import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
-import { Switch, View, Text, ColorValue, Platform } from 'react-native';
+import { Switch, View, Text, ColorValue, Platform, StyleSheet } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -52,7 +52,7 @@ export const StandardUsage: FunctionComponent = () => {
 
   return (
     <View style={commonStyles.root}>
-      <View style={commonStyles.settings}>
+      <View style={styles.settings}>
         <View style={commonStyles.switch}>
           <Text style={textStyles}>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
@@ -72,58 +72,70 @@ export const StandardUsage: FunctionComponent = () => {
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-      <Avatar
-        accessibilityLabel="Fall-back Icon"
-        accessibilityHint="A picture representing a user"
-        size={imageSize === undefinedText ? undefined : imageSize}
-      />
-      <Avatar
-        active={active}
-        activeAppearance={activeAppearance}
-        size={imageSize === undefinedText ? undefined : imageSize}
-        name="Satya Nadella"
-        shape={isSquare ? 'square' : 'circular'}
-        accessibilityLabel="Photo of Satya Nadella"
-        badge={{ status: presence === undefinedText ? undefined : presence, outOfOffice }}
-        imageUrl={showImage ? satyaPhotoUrl : undefined}
-        avatarColor={avatarColor}
-      />
-      <Avatar
-        active={active}
-        activeAppearance={activeAppearance}
-        size={imageSize === undefinedText ? undefined : imageSize}
-        shape={isSquare ? 'square' : 'circular'}
-        accessibilityLabel="Icon"
-        name="* Richard Faynman *"
-        avatarColor="#ff0099"
-        initialsColor="yellow"
-      />
-      {svgIconsEnabled && (
-        <>
-          <Avatar
-            active={active}
-            activeAppearance={activeAppearance}
-            size={imageSize === undefinedText ? undefined : imageSize}
-            shape={isSquare ? 'square' : 'circular'}
-            accessibilityLabel="SVG Icon"
-            icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }}
-            avatarColor={avatarColor}
-            badge={{ status: 'outOfOffice', outOfOffice }}
-          />
-          <Avatar
-            accessibilityHint="A picture representing a user"
-            active={active}
-            activeAppearance={activeAppearance}
-            size={imageSize === undefinedText ? undefined : imageSize}
-            shape={isSquare ? 'square' : 'circular'}
-            accessibilityLabel="SVG Icon"
-            icon={{ svgSource: svgProps }}
-            avatarColor={avatarColor}
-            badge={{ status: 'away', outOfOffice }}
-            idForColor="15"
-          />
-        </>
-      )}
+      <View style={styles.avatars}>
+        <Avatar
+          accessibilityLabel="Fall-back Icon"
+          accessibilityHint="A picture representing a user"
+          size={imageSize === undefinedText ? undefined : imageSize}
+        />
+        <Avatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={imageSize === undefinedText ? undefined : imageSize}
+          name="Satya Nadella"
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="Photo of Satya Nadella"
+          badge={{ status: presence === undefinedText ? undefined : presence, outOfOffice }}
+          imageUrl={showImage ? satyaPhotoUrl : undefined}
+          avatarColor={avatarColor}
+        />
+        <Avatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={imageSize === undefinedText ? undefined : imageSize}
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="Icon"
+          name="* Richard Faynman *"
+          avatarColor="#ff0099"
+          initialsColor="yellow"
+        />
+        {svgIconsEnabled && (
+          <>
+            <Avatar
+              active={active}
+              activeAppearance={activeAppearance}
+              size={imageSize === undefinedText ? undefined : imageSize}
+              shape={isSquare ? 'square' : 'circular'}
+              accessibilityLabel="SVG Icon"
+              icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }}
+              avatarColor={avatarColor}
+              badge={{ status: 'outOfOffice', outOfOffice }}
+            />
+            <Avatar
+              accessibilityHint="A picture representing a user"
+              active={active}
+              activeAppearance={activeAppearance}
+              size={imageSize === undefinedText ? undefined : imageSize}
+              shape={isSquare ? 'square' : 'circular'}
+              accessibilityLabel="SVG Icon"
+              icon={{ svgSource: svgProps }}
+              avatarColor={avatarColor}
+              badge={{ status: 'away', outOfOffice }}
+              idForColor="15"
+            />
+          </>
+        )}
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  settings: {
+    flex: 1,
+  },
+  avatars: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+});
