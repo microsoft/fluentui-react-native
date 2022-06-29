@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinFluentColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
 import { StyledPicker } from '../Common/StyledPicker';
-import { Switch, View, Text, ColorValue } from 'react-native';
+import { Switch, View, Text, ColorValue, StyleSheet } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -63,26 +63,27 @@ export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View style={commonStyles.root}>
       {/* settings */}
-      <View style={commonStyles.settings}>
+      <View style={commonStyles.settingsPicker}>
         <View style={commonStyles.switch}>
           <Text style={textStyles}>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
         </View>
-
         <StyledPicker prompt="Size" selected={imageSize} onChange={onSizeChange} collection={allSizes} />
         <StyledPicker prompt="Coin color" selected={coinColor} onChange={onColorChange} collection={allColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
 
       {/* component under test */}
-      <PersonaCoin
-        size={imageSize === undefinedText ? undefined : imageSize}
-        initials="SN"
-        imageDescription="Photo of Satya Nadella"
-        presence={presence === undefinedText ? undefined : presence}
-        imageUrl={showImage ? satyaPhotoUrl : undefined}
-        coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
-      />
+      <View style={commonStyles.pickerControlled}>
+        <PersonaCoin
+          size={imageSize === undefinedText ? undefined : imageSize}
+          initials="SN"
+          imageDescription="Photo of Satya Nadella"
+          presence={presence === undefinedText ? undefined : presence}
+          imageUrl={showImage ? satyaPhotoUrl : undefined}
+          coinColorFluent={coinColor === undefinedText ? undefined : coinColor}
+        />
+      </View>
     </View>
   );
 };

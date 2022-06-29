@@ -1,7 +1,7 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
 import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
-import { Switch, View, Text, ColorValue, Platform, StyleSheet } from 'react-native';
+import { Switch, View, Text, ColorValue, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -52,7 +52,7 @@ export const StandardUsage: FunctionComponent = () => {
 
   return (
     <View style={commonStyles.root}>
-      <View style={styles.settings}>
+      <View style={commonStyles.settingsPicker}>
         <View style={commonStyles.switch}>
           <Text style={textStyles}>Show image</Text>
           <Switch value={showImage} onValueChange={setShowImage} />
@@ -72,7 +72,7 @@ export const StandardUsage: FunctionComponent = () => {
         <StyledPicker prompt="Avatar Color" selected={avatarColor} onChange={onAvatarColorChange} collection={avatarColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />
       </View>
-      <View style={styles.avatars}>
+      <View style={commonStyles.pickerControlled}>
         <Avatar
           accessibilityLabel="Fall-back Icon"
           accessibilityHint="A picture representing a user"
@@ -129,13 +129,3 @@ export const StandardUsage: FunctionComponent = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  settings: {
-    flex: 1,
-  },
-  avatars: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-});
