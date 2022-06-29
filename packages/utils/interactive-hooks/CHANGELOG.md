@@ -1,8 +1,74 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.3
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Fix focus on open (ruaraki@microsoft.com)
+
+## 0.16.2
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.1
+
+## 0.16.1
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.0
+
+## 0.16.0
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Minor changes
+
+- Type cleanup (ruaraki@microsoft.com)
+
+## 0.15.10
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.11.25
+
+## 0.15.8
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.23
+
+## 0.15.7
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.22
+
+## 0.15.6
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.21
 
 ## 0.15.5
 

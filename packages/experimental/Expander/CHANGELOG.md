@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/experimental-expander
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 03 Jun 2022 02:18:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.33
+
+Fri, 03 Jun 2022 02:18:28 GMT
+
+### Patches
+
+- Fix the link again (ruaraki@microsoft.com)
+
+## 0.3.32
+
+Tue, 31 May 2022 20:37:12 GMT
+
+### Patches
+
+- Replace link (ruaraki@microsoft.com)
+
+## 0.3.31
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.30
+
+## 0.3.29
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+
+## 0.3.28
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.27
+
+## 0.3.27
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.26
 
 ## 0.3.26
 

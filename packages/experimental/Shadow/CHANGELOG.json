@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/experimental-shadow",
+  "entries": [
+    {
+      "date": "Tue, 28 Jun 2022 00:53:43 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "b2d247cc39d7d3c8ca426f362a05f04e06b54d9b",
+            "comment": "Rename shadow to experimental-shadow"
+          }
+        ]
+      }
+    }
+  ]
+}

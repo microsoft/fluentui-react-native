@@ -14,6 +14,8 @@ interface DatePickerParameterObject {
   datePickerType?: NativeDatePickerType;
   startDate?: Date;
   endDate?: Date;
+  referenceStartDate?: Date;
+  referenceEndDate?: Date;
   startTitle?: string;
   startSubtitle?: string;
   startTab?: string;
@@ -33,6 +35,8 @@ NativeDatePicker.present = ({
   datePickerType = 'calendar',
   startDate = null,
   endDate = null,
+  referenceStartDate = null,
+  referenceEndDate = null,
   startTitle = null,
   startSubtitle = null,
   startTab = null,
@@ -51,6 +55,8 @@ NativeDatePicker.present = ({
     datePickerType,
     startDate?.toISOString(),
     endDate?.toISOString(),
+    referenceStartDate?.toISOString(),
+    referenceEndDate?.toISOString(),
     startTitle,
     startSubtitle,
     startTab,
