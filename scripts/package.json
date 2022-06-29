@@ -29,7 +29,7 @@
     "@types/es6-promise": "0.0.32",
     "@types/jest": "^26.0.0",
     "@types/node": "^12.11.2",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@types/react-test-renderer": "16.9.0",
     "@uifabric/prettier-rules": "^7.0.3",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",

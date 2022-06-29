@@ -44,7 +44,7 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/pressable": ">=0.8.45 <1.0.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "react-native": "^0.66.0",
     "react-native-svg-transformer": "^1.0.0"
   },
