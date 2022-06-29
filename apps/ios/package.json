@@ -26,6 +26,7 @@
   "dependencies": {
     "@fluentui-react-native/tester": "^0.69.5",
     "@react-native-community/slider": "^4.2.0",
+    "@react-native-picker/picker": "^2.2.1",
     "react": "17.0.1",
     "react-native": "^0.64.2",
     "react-native-svg": "^12.3.0"
@@ -73,7 +74,8 @@
     "ignoreMatches": [
       "react-native-test-app",
       "react-native-svg",
-      "@react-native-community/slider"
+      "@react-native-community/slider",
+      "@react-native-picker/picker"
     ]
   }
 }

@@ -98,5 +98,8 @@ typings/
 .vscode/.react/
 apps/*/.vscode/.react/
 
+# Visual Studio
+.vs/
+
 # Ignore Gradle build output directory
 **/android/**/build
