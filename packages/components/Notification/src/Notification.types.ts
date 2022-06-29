@@ -1,5 +1,6 @@
-import { ViewProps } from 'react-native';
+import { PressableProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
+import { ButtonProps } from '@fluentui-react-native/button';
 import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const notification = 'Notification';
@@ -25,9 +26,9 @@ export interface NotificationProps {
 }
 
 export interface NotificationSlotProps {
-  root: ViewProps;
+  root: PressableProps;
   message: TextProps;
-  action?: TextProps;
+  action?: ButtonProps;
 }
 
 export interface NotificationType {

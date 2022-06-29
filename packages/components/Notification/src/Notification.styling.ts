@@ -50,10 +50,13 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 16,
-            fontWeight: '500',
             marginLeft: 34,
+            alignSelf: 'center',
           },
+          appearance: 'subtle',
+          padding: 0,
+          paddingHorizontal: 0,
+          minWidth: 0,
         };
       },
       ['color'],
