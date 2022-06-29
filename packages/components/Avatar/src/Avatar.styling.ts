@@ -124,10 +124,14 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             position: 'absolute',
             fontSize: tokens.iconSize || tokens.fontSize,
           },
-          color: tokens.iconColor || tokens.color,
-          width: tokens.iconSize,
-          height: tokens.iconSize,
+          ...getIconStyles(tokens),
         };
+      },
+      ['iconSize', 'iconColor'],
+    ),
+    fallbackIcon: buildProps(
+      (tokens: AvatarTokens) => {
+        return getIconStyles(tokens);
       },
       ['iconSize', 'iconColor'],
     ),
@@ -198,4 +202,12 @@ function getRingConfig(tokens: AvatarTokens): any {
       innerStroke: strokeSize.large,
     };
   }
+}
+
+function getIconStyles(tokens: AvatarTokens) {
+  return {
+    color: tokens.iconColor || tokens.color,
+    width: tokens.iconSize,
+    height: tokens.iconSize,
+  };
 }

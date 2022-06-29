@@ -20,7 +20,7 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
 
   // MenuList v2 needs to be able to be standalone, but this is not in scope for v1
   // Assuming that checked information will come from parent Menu
-  const { defaultChecked, onCheckedChange: onCheckedChangeOriginal, checked: checkedOriginal } = context;
+  const { defaultChecked, onCheckedChange: onCheckedChangeOriginal, checked: checkedOriginal, isSubmenu, setOpen } = context;
 
   // Convert passed in array to map so that i's easier to look up checked state
   const checkedMap = React.useMemo(() => {
@@ -93,12 +93,29 @@ export const useMenuList = (_props: MenuListProps): MenuListState => {
     [isCheckedControlled, onCheckedChangeOriginal, setCheckedInternal, checked],
   );
 
+  // The close arrow key must be handled at this level so that close arrow is responsive when arrowing
+  // on a submenu trigger inside a submenu. Otherwise the arrowing event gets "swallowed up" by the trigger,
+  // because it is considered to be inside the submenu due to the Menu component wrapping both the
+  // trigger and popover. Listening to key events directly here to handle this case doesn't work
+  // since left and right arrow key events are already handled and swallowed by native behavior
+  const onArrowClose = React.useCallback(
+    (e: InteractionEvent) => {
+      if (!isSubmenu) {
+        return;
+      }
+
+      setOpen(e, false /* isOpen */, false /* bubble */);
+    },
+    [isSubmenu, setOpen],
+  );
+
   return {
     props: {
       ...context,
     },
     isCheckedControlled,
     checked,
+    onArrowClose,
     onCheckedChange,
     selectRadio,
     addRadioItem,
