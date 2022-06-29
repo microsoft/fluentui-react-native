@@ -89,8 +89,7 @@
   "depcheck": {
     "ignoreMatches": [
       "react-native-test-app",
-      "react-native-windows",
-      "@react-native-picker/picker"
+      "react-native-windows"
     ]
   }
 }
