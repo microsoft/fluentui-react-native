@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinFluentColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
 import { StyledPicker } from '../Common/StyledPicker';
-import { Switch, View, Text, ColorValue, StyleSheet } from 'react-native';
+import { Switch, View, Text, ColorValue } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
