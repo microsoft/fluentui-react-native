@@ -10,6 +10,7 @@ export function createAliasesFromPalette(palette: OfficePalette, isHighContrast:
       neutralForeground1Pressed: palette.TextPressed,
       neutralForeground1Selected: palette.TextSelected,
       neutralForeground2: palette.TextSecondary,
+      neutralForeground3: palette.TextSecondary,
       neutralForeground4: palette.TextCtlSubtlePlaceholder,
       neutralForegroundDisabled: palette.TextDisabled,
       neutralForegroundOnBrand: palette.TextCtlEmphasis,

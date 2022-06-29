@@ -1,8 +1,98 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 24 Jun 2022 18:52:57 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Jun 2022 17:36:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.69.5
+
+Wed, 29 Jun 2022 17:36:04 GMT
+
+### Patches
+
+- Add warning that ContextualMenu is deprecated if loaded on win32. (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.50
+- Bump @fluentui/react-native to v0.30.4
+
+## 0.69.4
+
+Tue, 28 Jun 2022 22:01:06 GMT
+
+### Patches
+
+- Update package.json version (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.4
+- Bump @fluentui-react-native/menu to v1.0.1
+
+## 0.69.3
+
+Tue, 28 Jun 2022 18:04:00 GMT
+
+### Patches
+
+- Modify a test (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.16.1
+
+## 0.69.2
+
+Tue, 28 Jun 2022 16:48:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.3
+- Bump @fluentui-react-native/win32-theme to v0.19.2
+
+## 0.69.1
+
+Tue, 28 Jun 2022 08:52:48 GMT
+
+### Patches
+
+- Fixed busy icon, added HC icons and fixed Tester (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.2
+- Bump @fluentui-react-native/badge to v0.0.44
+
+## 0.69.0
+
+Tue, 28 Jun 2022 00:53:43 GMT
+
+### Minor changes
+
+- New component made with the new component generator (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.0
+
+## 0.68.6
+
+Mon, 27 Jun 2022 16:56:31 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.1
+
+## 0.68.5
+
+Mon, 27 Jun 2022 15:59:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.16.0
+
+## 0.68.4
+
+Fri, 24 Jun 2022 23:12:59 GMT
+
+### Patches
+
+- Add Customize test for (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/menu to v0.15.7
+
+## 0.68.3
+
+Fri, 24 Jun 2022 22:38:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v0.15.6
 
 ## 0.68.2
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Fri, 24 Jun 2022 18:52:57 GMT and should not be manually modified.
+This log was last generated on Tue, 28 Jun 2022 16:48:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.2
+
+Tue, 28 Jun 2022 16:48:37 GMT
+
+### Patches
+
+- Fixed absence of icon in HC (vkozlova@microsoft.com)
 
 ## 0.19.1
 

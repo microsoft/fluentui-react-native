@@ -9,7 +9,7 @@ PODS:
     - React-Core (= 0.64.30)
     - React-jsi (= 0.64.30)
     - ReactCommon/turbomodule/core (= 0.64.30)
-  - FRNAvatar (0.15.0):
+  - FRNAvatar (0.15.1):
     - MicrosoftFluentUI (= 0.5.2)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
@@ -494,7 +494,7 @@ SPEC CHECKSUMS:
   DoubleConversion: 0ea4559a49682230337df966e735d6cc7760108e
   FBLazyVector: 8a96f324df8c1bc4e2f7e2163d704ec364f0bc6c
   FBReactNativeSpec: 625af937353349e558cc2651adf11201e2660f1c
-  FRNAvatar: e176ece0a413636c7ea6b82ec603dfb772c92090
+  FRNAvatar: a532bbf467cf1c49c9762b1838808b1482a11835
   FRNCallout: a91af06afd4ac99fe854d722bbd3dc5ed12b52c4
   FRNCheckbox: 8e81d152fe7a0447b5eeb70595c96ac3c491b95f
   FRNMenuButton: 4f8646e57af2781043844d391f90bf11c8e9dcbc
