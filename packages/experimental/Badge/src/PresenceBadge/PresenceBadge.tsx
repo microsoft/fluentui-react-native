@@ -69,7 +69,7 @@ export const PresenceBadge = compose<PresenceBadgeType>({
       const isHighContrast = isHighContrastEnabled(Platform.OS, theme);
 
       const isOutOfOffice = outOfOffice || false;
-      const iconXml = `<svg viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      const iconXml = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         ${isHighContrast ? getIconPathHC(status, isOutOfOffice) : getIconPath(status, isOutOfOffice)}
       </svg>`;
 
