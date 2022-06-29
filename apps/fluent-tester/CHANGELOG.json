@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 29 Jun 2022 21:06:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.69.6",
+      "version": "0.69.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "a32e272b0b52817dd4c32e71634e21d48f481c4f",
+            "comment": "replaced deprecated RN picker controls for a community control for iOS/Android and MenuPicker for Win32/MacOS"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.0.2",
+            "commit": "a32e272b0b52817dd4c32e71634e21d48f481c4f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jun 2022 17:36:04 GMT",
       "tag": "@fluentui-react-native/tester_v0.69.5",
       "version": "0.69.5",
