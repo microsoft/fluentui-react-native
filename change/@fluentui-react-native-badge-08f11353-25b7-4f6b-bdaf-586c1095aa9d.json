@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "merge",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}

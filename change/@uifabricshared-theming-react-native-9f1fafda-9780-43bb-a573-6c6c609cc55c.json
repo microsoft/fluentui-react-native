@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "merge",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
