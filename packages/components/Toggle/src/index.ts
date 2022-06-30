@@ -11,4 +11,4 @@ export {
   ButtonSlotProps,
   ButtonType,
 } from './Toggle.types';
-export { Button as ButtonV1 } from './Toggle';
+export { Button as Toggle } from './Toggle';

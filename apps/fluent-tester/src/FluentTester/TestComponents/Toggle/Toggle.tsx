@@ -2,12 +2,21 @@ import * as React from 'react';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TOGGLE_TESTPAGE } from './consts';
 import { View } from 'react-native';
+import { Toggle } from '@fluentui-react-native/toggle';
+
+const StandardUsage: React.FunctionComponent = () => {
+  return (
+    <View>
+      <Toggle />
+    </View>
+  );
+};
 
 const toggleSections: TestSection[] = [
   {
     name: 'Standard Usage',
     testID: TOGGLE_TESTPAGE,
-    component: () => <View />,
+    component: () => <StandardUsage />,
   },
 ];
 
