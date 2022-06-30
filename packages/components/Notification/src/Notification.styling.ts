@@ -37,7 +37,10 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 16,
+            fontSize: 15,
+            fontWeight: '600',
+            lineHeight: 20,
+            letterSpacing: -0.24,
             flex: 1,
             flexGrow: 1,
           },
