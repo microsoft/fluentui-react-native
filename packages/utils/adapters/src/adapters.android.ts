@@ -2,7 +2,7 @@ import { TextProps, TextPropsIOS, ViewProps, ViewPropsIOS, ImageProps, ImageProp
 import { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = Omit<TextProps, keyof TextPropsIOS>;
+export type ITextProps = Omit<TextProps, keyof TextPropsIOS | 'onPressIn' | 'onPressOut'>;
 export type IViewProps = Omit<ViewProps, keyof ViewPropsIOS>;
 export type IImageProps = Omit<ImageProps, keyof ImagePropsIOS>;
 

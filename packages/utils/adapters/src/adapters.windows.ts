@@ -4,7 +4,7 @@ import { ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
 // export core interface types from RN
-export type ITextProps = TextProps;
+export type ITextProps = Omit<TextProps, 'onPressIn' | 'onPressOut'>;
 export type IViewProps = IViewWindowsProps;
 export type IImageProps = ImageProps;
 

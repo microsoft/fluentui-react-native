@@ -2,7 +2,7 @@ import { TextProps, TextPropsAndroid, ViewProps, ViewPropsAndroid, ImageProps, I
 import { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = Omit<TextProps, keyof TextPropsAndroid>;
+export type ITextProps = Omit<TextProps, keyof TextPropsAndroid | 'onPressIn' | 'onPressOut'>;
 export type IViewProps = Omit<ViewProps, keyof ViewPropsAndroid>;
 export type IImageProps = Omit<ImageProps, keyof ImagePropsAndroid>;
 
