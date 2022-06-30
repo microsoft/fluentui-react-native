@@ -4,8 +4,15 @@ steps:
     workingDirectory: apps/win32
     displayName: 'yarn bundle'
 
+  # The shrinkwrap file forces installation of all the dev dependencies of the package as well, which are unnecessary.
+  # Delete the file so we only install the necessary files
+  - powershell: |
+      Remove-Item '..\..\node_modules\appium-windows-driver\npm-shrinkwrap.json'
+    workingDirectory:
+    displayName: 'remove npm shrinkwrap'
+
   - script: |
-      yarn appium driver install windows
+      yarn appium driver install --source=local ../../node_modules/appium-windows-driver
     workingDirectory: apps/win32
     displayName: 'Installing appium windows driver'
 
