@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps, ViewStyle, ColorValue, Animated } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableHooks, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps } from '@fluentui-react-native/adapters';
+import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -51,6 +52,7 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
   hasIconBefore?: ButtonTokens;
+  checked?: ButtonTokens;
 }
 
 export interface ButtonTokens extends ButtonCoreTokens {
@@ -89,7 +91,7 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
   /**
    * A callback to call on button click event
    */
-  onClick?: (e: InteractionEvent) => void;
+  onClick?: (e: InteractionEvent, checked: boolean) => void;
 
   /**
    * Text that should show in a tooltip when the user hovers over a button.
@@ -140,13 +142,19 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default false
    */
   loading?: boolean;
+
+  checked?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+// export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+export interface ButtonState {
+  props: IWithPressableEvents<ButtonProps & React.ComponentPropsWithRef<any>>;
+  state: IPressableState & { checked: boolean; thumbX: Animated.Value };
+}
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  icon: IconProps;
+  thumb: Animated.AnimatedProps<IViewProps>;
   content: TextProps;
 }
 

@@ -26,6 +26,7 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'focused',
   'pressed',
   'disabled',
+  'checked',
 ];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
@@ -59,13 +60,16 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       },
       ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
-    icon: buildProps(
-      (tokens: ButtonTokens) => ({
-        color: tokens.iconColor,
-        height: tokens.iconSize,
-        width: tokens.iconSize,
+    thumb: buildProps(
+      () => ({
+        style: {
+          backgroundColor: 'red',
+          height: 10,
+          width: 10,
+          borderRadius: 25,
+        },
       }),
-      ['iconColor', 'iconSize'],
+      ['backgroundColor'],
     ),
   },
 };

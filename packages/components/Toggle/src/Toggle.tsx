@@ -1,14 +1,12 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
-import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
+import { View, Animated } from 'react-native';
 import { buttonName, ButtonType, ButtonProps } from './Toggle.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Toggle.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
-import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -39,27 +37,17 @@ export const Button = compose<ButtonType>({
   ...stylingSettings,
   slots: {
     root: View,
-    icon: Icon,
+    thumb: Animated.View,
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
-    const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
       const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
-
-      const shouldShowIcon = !loading && icon;
-      if (__DEV__ && iconOnly) {
-        React.Children.forEach(children, (child) => {
-          if (typeof child === 'string') {
-            console.warn('iconOnly should not be set when Button has content.');
-          }
-        });
-      }
 
       let childText = '';
       if (accessibilityLabel === undefined) {
@@ -73,12 +61,7 @@ export const Button = compose<ButtonType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {loading && <ActivityIndicator />}
-          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {React.Children.map(children, (child) =>
-            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
-          )}
-          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          <Slots.thumb style={[{ left: button.state.thumbX }]} />
         </Slots.root>
       );
     };
