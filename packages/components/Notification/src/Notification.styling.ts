@@ -22,6 +22,8 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           backgroundColor: tokens.backgroundColor,
           borderColor: tokens.borderColor,
+          marginLeft: 16,
+          marginRight: 16,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -53,7 +55,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            marginLeft: 34,
+            marginLeft: 16,
             alignSelf: 'center',
           },
           appearance: 'subtle',

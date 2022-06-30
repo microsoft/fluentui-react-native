@@ -1,8 +1,8 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
-import { Pressable } from 'react-native';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Pressable } from '@fluentui-react-native/pressable';
 import { Text } from '@fluentui-react-native/experimental-text';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useNotification } from './useNotification';
@@ -33,20 +33,12 @@ export const Notification = compose<NotificationType>({
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, action, ...mergedProps } = mergeProps(notificationProps, final);
 
-      if (action) {
-        return (
-          <Slots.root {...mergedProps}>
-            <Slots.message>{children}</Slots.message>
-            <Slots.action>{action}</Slots.action>
-          </Slots.root>
-        );
-      } else {
-        return (
-          <Slots.root {...mergedProps}>
-            <Slots.message>{children}</Slots.message>
-          </Slots.root>
-        );
-      }
+      return (
+        <Slots.root {...mergedProps}>
+          <Slots.message>{children}</Slots.message>
+          {action && <Slots.action>{action}</Slots.action>}
+        </Slots.root>
+      );
     };
   },
 });
