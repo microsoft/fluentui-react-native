@@ -1,31 +1,43 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ShadowProps } from './Shadow.types';
+import { ShadowProps, ShadowTokens, shadowName } from './Shadow.types';
+import { compressible, buildUseTokens, useFluentTheme, UseTokens } from '@fluentui-react-native/framework';
+import { shadowStyleFromTheme } from './shadowStyle';
 
-export const Shadow: React.FunctionComponent<ShadowProps> = (props: ShadowProps) => {
-  const noOffset = { width: 0, height: 0 };
-  const neutralShadowAmbient = { shadowOffset: noOffset, shadowOpacity: 0.12, shadowRadius: 2 };
-  const neutralShadowAmbientDarker = { shadowOffset: noOffset, shadowOpacity: 0.2, shadowRadius: 8 };
-  const ambientShadow = {
-    '2': neutralShadowAmbient,
-    '4': neutralShadowAmbient,
-    '8': neutralShadowAmbient,
-    '16': neutralShadowAmbient,
-    '28': neutralShadowAmbientDarker,
-    '64': neutralShadowAmbientDarker,
-  };
-  const keyShadow = {
-    '2': { shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.14, shadowRadius: 2 },
-    '4': { shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.14, shadowRadius: 4 },
-    '8': { shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.14, shadowRadius: 8 },
-    '16': { shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.14, shadowRadius: 16 },
-    '28': { shadowOffset: { width: 0, height: 14 }, shadowOpacity: 0.24, shadowRadius: 28 },
-    '64': { shadowOffset: { width: 0, height: 32 }, shadowOpacity: 0.24, shadowRadius: 64 },
-  };
+const useShadowTokens = buildUseTokens<ShadowTokens>(() => ({}), shadowName);
 
-  return (
-    <View style={ambientShadow[props.depth]}>
-      <View style={keyShadow[props.depth]}>{props.children}</View>
-    </View>
-  );
-};
+export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProps) => {
+  //const { depth, ...rest } = props;
+  //const { depth } = props;
+  const theme = useFluentTheme();
+  //const [tokens, cache] = useTokens(theme);
+
+  // // override tokens from props? leave undefined for tokens set by the user
+  //[tokens, cache] = patchTokens(tokens, cache, {});
+
+  // // build style from tokens that can be shared between different Component instances
+  // const [tokenStyle] = cache(
+  // 	() => ({
+  // 	}),
+  // 	[]
+  // };
+
+  // // return a continuation function that allows this component to be compressed
+  // return (extra/final: ComponentProps, children: React.ReactNode) => {
+  // 	const mergedProps = {...};
+  // 	return null;
+  // }, useShadowTokens);
+
+  const shadowStyle = shadowStyleFromTheme(theme, 'shadow' + props.depth.toString());
+
+  return (extra: ShadowProps, children: React.ReactNode) => {
+    return (
+      <View style={shadowStyle.ambient}>
+        <View style={shadowStyle.key}>{children}</View>
+      </View>
+    );
+  };
+}, useShadowTokens);
+Shadow.displayName = shadowName;
+
+export default Shadow;
