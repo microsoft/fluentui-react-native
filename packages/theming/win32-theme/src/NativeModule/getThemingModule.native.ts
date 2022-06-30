@@ -6,10 +6,10 @@ declare module 'react-native' {
   interface ITurboModuleRegistry {
     get: (name: 'Theming') => OfficeThemingModule & EventSubscriptionVendor;
   }
-  const TurboModuleRegistry: ITurboModuleRegistry;
+  const win32TurboModuleRegistry: ITurboModuleRegistry;
 }
 
-import { TurboModuleRegistry } from 'react-native';
+import { win32TurboModuleRegistry } from 'react-native';
 
 /**
  *  If we have a userAgent string, let's assume we're web debugging.  __DEV__ is for developer bundles.  Currently,
@@ -22,7 +22,7 @@ function disableGetPalette(): boolean {
 }
 
 export function getThemingModule(): [OfficeThemingModule, NativeEventEmitter | undefined] {
-  const module = TurboModuleRegistry.get('Theming');
+  const module = win32TurboModuleRegistry.get('Theming');
   // if the native module exists return the module + an emitter for it
   if (module) {
     // mock getPalette if it should be disabled, otherwise return the module directly

@@ -3,7 +3,7 @@ import { IFilterMask } from './filter.types';
 import type { ITextWin32Props, IViewWin32Props } from '@office-iss/react-native-win32';
 
 // export core interface types
-export type ITextProps = TextProps & Partial<ITextWin32Props>;
+export type ITextProps = Omit<TextProps, 'onPressIn' | 'onPressOut'> & Partial<Omit<ITextWin32Props, 'onPressIn' | 'onPressOut'>>;
 export type IViewProps = ViewProps & Partial<IViewWin32Props>;
 export type IImageProps = ImageProps;
 

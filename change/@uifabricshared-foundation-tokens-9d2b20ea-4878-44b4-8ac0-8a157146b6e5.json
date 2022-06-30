@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Update to React Native 0.66",
+  "packageName": "@uifabricshared/foundation-tokens",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}

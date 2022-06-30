@@ -32,19 +32,19 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.69.7",
-    "react": "17.0.1",
-    "react-native": "^0.64.2",
+    "react": "17.0.2",
+    "react-native": "^0.66.0",
     "react-native-svg": "^12.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@office-iss/react-native-win32": "^0.64.8",
-    "@office-iss/rex-win32": "0.64.26-devmain.14807.10000",
+    "@office-iss/react-native-win32": "^0.66.0",
+    "@office-iss/rex-win32": "0.66.17-devmain.15229.10000",
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@wdio/allure-reporter": "5.22.4",
@@ -70,7 +70,7 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.64",
+    "reactNativeVersion": "0.66",
     "kitType": "app",
     "bundle": {
       "targets": [
