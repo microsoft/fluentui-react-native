@@ -34,18 +34,18 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   states: buttonStates,
   slotProps: {
     root: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
+      (tokens: ButtonTokens) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
-          justifyContent: 'center',
-          width: tokens.width,
+          height: 25,
+          borderRadius: 50,
+          width: 70,
           backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-          ...shadowStyles.from(tokens, theme),
+          borderColor: 'black',
+          borderWidth: 1,
         },
       }),
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
@@ -64,9 +64,9 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
       () => ({
         style: {
           backgroundColor: 'red',
-          height: 10,
-          width: 10,
-          borderRadius: 25,
+          height: 25,
+          width: 25,
+          borderRadius: 12.5,
         },
       }),
       ['backgroundColor'],

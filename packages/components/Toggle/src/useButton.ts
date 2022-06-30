@@ -35,7 +35,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
   const moveRight = () => {
     // Will change fadeAnim value to 1 in 5 seconds
     Animated.timing(thumbX, {
-      toValue: 100,
+      toValue: 45, // maxWidth - SizeofThumb
       duration: 100,
       useNativeDriver: false,
     }).start();
