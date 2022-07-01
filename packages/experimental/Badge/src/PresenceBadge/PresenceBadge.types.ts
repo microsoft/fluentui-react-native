@@ -12,6 +12,10 @@ export interface PresenceBadgeTokens extends BadgeCoreTokens {
   awayOutOfOffice?: PresenceBadgeTokens;
   offline?: PresenceBadgeTokens;
   outOfOffice?: PresenceBadgeTokens;
+  doNotDisturb?: PresenceBadgeTokens;
+  busy?: PresenceBadgeTokens;
+  unknown?: PresenceBadgeTokens;
+  blocked?: PresenceBadgeTokens;
   status?: PresenceBadgeStatus;
 }
 export interface PresenceBadgeProps extends BadgeCoreProps {

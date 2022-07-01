@@ -9,7 +9,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
     paddingHorizontal: globalTokens.spacing.none,
-    backgroundColor: t.name === 'HighContrast' ? globalTokens.color.black : globalTokens.color.white,
+    backgroundColor: t.colors.neutralBackground1,
     ...getBadgeColor('lightGreen', t),
     smallest: {
       width: 6,
@@ -40,15 +40,26 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     awayOutOfOffice: getBadgeColor('berry', t),
     busy: getBadgeColor('red', t),
     blocked: getBadgeColor('red', t),
+    unknown: getBadgeColor('red', t),
     doNotDisturb: getBadgeColor('red', t),
     offline: {
-      iconColor: t.name === 'HighContrast' ? globalTokens.color.white : globalTokens.color.grey[38],
+      iconColor: t.name === 'HighContrast' ? t.colors.neutralForeground3 : globalTokens.color.grey[38],
     },
-    outOfOffice: getBadgeColor('berry', t),
+    outOfOffice: {
+      ...getBadgeColor('berry', t),
+    },
+    // outOfOffice: {
+    // ...getBadgeColor('berry', t),
+    // available: getBadgeColor('lightGreen', t),
+    // busy: getBadgeColor('red', t),
+    // },
   } as PresenceBadgeTokens);
 
 function getBadgeColor(color: string, t: Theme) {
   return {
-    iconColor: t.name === 'HighContrast' ? globalTokens.color.white : globalTokens.color[color].primary,
+    iconColor: t.name === 'HighContrast' ? t.colors.neutralForeground3 : globalTokens.color[color].primary,
+    outOfOffice: {
+      iconColor: t.name === 'HighContrast' ? t.colors.neutralForeground3 : globalTokens.color[color].primary,
+    },
   };
 }

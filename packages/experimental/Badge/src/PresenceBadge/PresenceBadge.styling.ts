@@ -5,7 +5,18 @@ import { defaultBadgeTokens } from '../BadgeTokens';
 import { defaultPresenceBadgeTokens } from './PresenceBadgeTokens';
 import { coreBadgeStates, getBadgePosition } from '../Badge.styling';
 
-export const badgeStates: (keyof PresenceBadgeTokens)[] = [...coreBadgeStates, 'available', 'away', 'offline', 'outOfOffice'];
+export const badgeStates: (keyof PresenceBadgeTokens)[] = [
+  ...coreBadgeStates,
+  'doNotDisturb',
+  'busy',
+  'unknown',
+  'blocked',
+  'outOfOffice',
+  'away',
+  'available',
+  'offline',
+  'awayOutOfOffice',
+];
 
 export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeTokens> = {
   tokens: [defaultBadgeTokens, presenceBadgeName, defaultPresenceBadgeTokens],
