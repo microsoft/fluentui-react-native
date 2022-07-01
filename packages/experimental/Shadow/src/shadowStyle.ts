@@ -3,8 +3,8 @@ import { ColorValue } from 'react-native';
 import { ShadowDepth } from './Shadow.types';
 
 export const shadowStyleFromTheme = (t: Theme, depth: ShadowDepth) => {
-  const keyShadow = t.shadows['shadow' + depth.toString()].key;
-  const ambientShadow = t.shadows['shadow' + depth.toString()].ambient;
+  const keyShadow = t.shadows[depth.toString()].key;
+  const ambientShadow = t.shadows[depth.toString()].ambient;
 
   return {
     key: {
