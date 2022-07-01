@@ -6,6 +6,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
 import { E2ETestingShimmer } from './ShimmerE2ETest';
+import { Toggle } from '@fluentui-react-native/toggle';
 
 const TestCompareCustomizeShimmer = Shimmer.customize({
   shimmerWaveColor: 'blue',
@@ -32,6 +33,7 @@ export const CustomizeAndTokenPropsShimmers: React.FunctionComponent = () => {
         shimmerColor="orange"
         backgroundColor="red"
       />
+      <Toggle />
     </Stack>
   );
 };

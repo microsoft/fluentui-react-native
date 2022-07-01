@@ -62,6 +62,7 @@ export const Button = compose<ButtonType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           <Slots.thumb style={[{ left: button.state.thumbX }]} />
+          {/* <Slots.thumb style={[button.state.checked ? { left: 0 } : { left: 45 }]} /> */}
         </Slots.root>
       );
     };

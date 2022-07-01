@@ -8,6 +8,7 @@ const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Toggle />
+      <Toggle />
     </View>
   );
 };

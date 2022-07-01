@@ -16,6 +16,8 @@ export const useButton = (props: ButtonProps): ButtonState => {
   const toggleCallback = (e: any) => {
     const newCheckedState = !checkedState;
     onClick && onClick(e, newCheckedState);
+
+    // LayoutAnimation.configureNext(LayoutAnimation.create(500, LayoutAnimation.Types.spring, LayoutAnimation.Properties.scaleXY));
     setCheckedState(newCheckedState);
 
     if (newCheckedState) {
