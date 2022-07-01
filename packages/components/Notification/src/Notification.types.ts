@@ -2,6 +2,7 @@ import { PressableProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { ButtonProps } from '@fluentui-react-native/button';
 import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const notification = 'Notification';
 export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
@@ -23,6 +24,7 @@ export interface NotificationProps {
    */
   variant: NotificationVariant;
   action?: string;
+  onPress?: (e: InteractionEvent) => void;
 }
 
 export interface NotificationSlotProps {
