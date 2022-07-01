@@ -1,13 +1,13 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { ColorValue } from 'react-native';
+import { ShadowDepth } from './Shadow.types';
 
-export const shadowStyleFromTheme = (t: Theme, shadowToken: string) => {
-  const keyShadow = t.shadows[shadowToken].key;
-  const ambientShadow = t.shadows[shadowToken].ambient;
+export const shadowStyleFromTheme = (t: Theme, depth: ShadowDepth) => {
+  const keyShadow = t.shadows['shadow' + depth.toString()].key;
+  const ambientShadow = t.shadows['shadow' + depth.toString()].ambient;
 
   return {
     key: {
-      // iOS Shadow props
       shadowColor: shadowColorFromRGBAColor(keyShadow.color),
       shadowOpacity: shadowOpacityFromRGBAColor(keyShadow.color),
       shadowRadius: keyShadow.blur,
@@ -15,11 +15,8 @@ export const shadowStyleFromTheme = (t: Theme, shadowToken: string) => {
         width: keyShadow.x,
         height: keyShadow.y,
       },
-      // Android shadow props
-      elevation: keyShadow.blur,
     },
     ambient: {
-      // iOS Shadow props
       shadowColor: shadowColorFromRGBAColor(ambientShadow.color),
       shadowOpacity: shadowOpacityFromRGBAColor(ambientShadow.color),
       shadowRadius: ambientShadow.blur,
@@ -27,8 +24,6 @@ export const shadowStyleFromTheme = (t: Theme, shadowToken: string) => {
         width: ambientShadow.x,
         height: ambientShadow.y,
       },
-      // Android shadow props
-      elevation: ambientShadow.blur,
     },
   };
 };

@@ -5,7 +5,7 @@ import { shadowStyleFromTheme } from '@fluentui-react-native/experimental-shadow
 
 export const defaultFABColorTokens: TokenSettings<ButtonCoreTokens, Theme> = (t: Theme): ButtonCoreTokens => ({
   // Grab the second shadow from the global token, as we only support displaying one shadow
-  ...shadowStyleFromTheme(t, 'shadow8').key,
+  ...shadowStyleFromTheme(t, '8').key,
 
   // coloring same as primary
   backgroundColor: t.colors.brandedBackground,
