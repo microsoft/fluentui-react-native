@@ -1,8 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Shadow component tests Shadow default 1`] = `
-<View>
-  <View>
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 2,
+      }
+    }
+  >
     <Text>
       Shadow default test
     </Text>

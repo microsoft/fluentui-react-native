@@ -8,7 +8,7 @@ describe('Shadow component tests', () => {
   it('Shadow default', () => {
     const tree = renderer
       .create(
-        <Shadow>
+        <Shadow depth="2">
           <Text>Shadow default test</Text>
         </Shadow>,
       )
@@ -19,7 +19,7 @@ describe('Shadow component tests', () => {
   it('Shadow simple rendering does not invalidate styling', () => {
     checkRenderConsistency(
       () => (
-        <Shadow>
+        <Shadow depth="2">
           <Text>Shadow render test</Text>
         </Shadow>
       ),
@@ -30,7 +30,7 @@ describe('Shadow component tests', () => {
   it('Shadow re-renders correctly', () => {
     checkReRender(
       () => (
-        <Shadow>
+        <Shadow depth="2">
           <Text>Shadow render twice test</Text>
         </Shadow>
       ),
