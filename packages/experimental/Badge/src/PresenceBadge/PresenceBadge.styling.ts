@@ -11,7 +11,7 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
   slotProps: {
     root: buildProps(
       (tokens: PresenceBadgeTokens, theme: Theme) => {
-        const { width, height, borderWidth } = tokens;
+        const { width, height, borderWidth, right, bottom } = tokens;
         const borderGap = borderWidth * 2;
         return {
           style: {
@@ -27,6 +27,8 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
             backgroundColor: tokens.backgroundColor,
             ...borderStyles.from(tokens, theme),
             ...layoutStyles.from(tokens, theme),
+            right,
+            bottom,
           },
         };
       },
