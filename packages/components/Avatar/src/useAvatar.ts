@@ -61,7 +61,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       initials: _initials,
       icon: iconProps,
       outOfOffice: badge?.outOfOffice,
-      shape: shape || 'circular',
+      shape: shape ?? 'circular',
       ...rest,
     },
     state: {
