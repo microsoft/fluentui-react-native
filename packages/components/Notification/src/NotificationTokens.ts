@@ -9,6 +9,9 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     borderColor: 'transparent',
     borderWidth: 1,
     padding: 16,
+    hasTitle: {
+      paddingVertical: 12,
+    },
     primary: {
       backgroundColor: '#EBF3FC',
       color: '#0F6CBD',

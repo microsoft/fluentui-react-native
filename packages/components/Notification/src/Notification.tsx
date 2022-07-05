@@ -1,6 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
+import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stylingSettings } from './Notification.styling';
@@ -14,7 +15,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
  * @returns Whether the styles that are assigned to the layer should be applied to the Notification
  */
 export const notificationLookup = (layer: string, userProps: NotificationProps): boolean => {
-  return userProps['variant'] === layer;
+  return userProps['variant'] === layer || (layer === 'hasTitle' && userProps.title != undefined);
 };
 
 export const Notification = compose<NotificationType>({
@@ -22,6 +23,8 @@ export const Notification = compose<NotificationType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
+    inner: View,
+    title: Text,
     message: Text,
     action: Button,
   },
@@ -29,11 +32,14 @@ export const Notification = compose<NotificationType>({
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, action, ...mergedProps } = mergeProps(userProps, final);
+      const { variant, title, action, ...mergedProps } = mergeProps(userProps, final);
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.message>{children}</Slots.message>
+          <Slots.inner>
+            {title && <Slots.title>{title}</Slots.title>}
+            <Slots.message>{children}</Slots.message>
+          </Slots.inner>
           {action && <Slots.action>{action}</Slots.action>}
         </Slots.root>
       );

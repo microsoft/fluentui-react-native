@@ -1,4 +1,4 @@
-import { PressableProps } from 'react-native';
+import { PressableProps, ViewProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { ButtonProps } from '@fluentui-react-native/button';
 import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
@@ -16,6 +16,7 @@ export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorT
   neutralBar: NotificationTokens;
   danger: NotificationTokens;
   warning: NotificationTokens;
+  hasTitle: NotificationTokens;
 }
 
 export interface NotificationProps {
@@ -23,12 +24,15 @@ export interface NotificationProps {
    * Notification variants: 'primary' | 'neutral' | 'primaryBar' | 'primaryOutlineBar' | 'neutralBar' | 'danger' | 'warning'
    */
   variant: NotificationVariant;
+  title?: string;
   action?: string;
   onPress?: (e: InteractionEvent) => void;
 }
 
 export interface NotificationSlotProps {
   root: PressableProps;
+  inner: ViewProps;
+  title: TextProps;
   message: TextProps;
   action?: ButtonProps;
 }

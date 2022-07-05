@@ -16,6 +16,21 @@ const PrimaryTest: React.FunctionComponent = () => {
   );
 };
 
+const PrimaryTestWithTitle: React.FunctionComponent = () => {
+  return (
+    <Notification
+      variant={'primary'}
+      title="Kat's iPhone X"
+      action="X"
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
+      Listen to Emails • 7 mins
+    </Notification>
+  );
+};
+
 const NeutralTest: React.FunctionComponent = () => {
   return (
     <Notification
@@ -62,6 +77,10 @@ const notificationSections: TestSection[] = [
   {
     name: 'Primary',
     component: PrimaryTest,
+  },
+  {
+    name: 'Primary With Title',
+    component: PrimaryTestWithTitle,
   },
   {
     name: 'Neutral',
