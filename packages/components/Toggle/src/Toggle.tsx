@@ -37,7 +37,7 @@ export const Button = compose<ButtonType>({
   ...stylingSettings,
   slots: {
     root: View,
-    thumb: ViewWin32,
+    thumb: View,
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
@@ -60,10 +60,19 @@ export const Button = compose<ButtonType>({
       const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
+        <Slots.root
+          {...mergedProps}
+          accessibilityLabel={label}
+          // animationClass={'Ribbon_SwitchBackground'}
+          style={[!button.state.checked ? { backgroundColor: 'white' } : { backgroundColor: 'blue' }]}
+        >
           {/* <ViewWin32 animationClass={'Shared_QuickClass'}> */}
           {/* <Slots.thumb animationClass={'Shared_QuickClass'} style={[{ left: button.state.thumbX }]} /> */}
-          <Slots.thumb animationClass={'Shared_BasicClass'} style={[button.state.checked ? { left: 0 } : { left: 45 }]} />
+
+          <Slots.thumb
+            animationClass={'Ribbon_SwitchThumb'}
+            style={[!button.state.checked ? { left: 0, backgroundColor: 'grey' } : { left: 45, backgroundColor: 'white' }]}
+          />
           {/* </ViewWin32> */}
         </Slots.root>
       );
