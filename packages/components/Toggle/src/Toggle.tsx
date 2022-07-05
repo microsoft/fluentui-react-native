@@ -7,7 +7,7 @@ import { stylingSettings, getDefaultSize } from './Toggle.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
-
+import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
  *
@@ -37,7 +37,7 @@ export const Button = compose<ButtonType>({
   ...stylingSettings,
   slots: {
     root: View,
-    thumb: Animated.View,
+    thumb: ViewWin32,
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
@@ -61,8 +61,10 @@ export const Button = compose<ButtonType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          <Slots.thumb style={[{ left: button.state.thumbX }]} />
-          {/* <Slots.thumb style={[button.state.checked ? { left: 0 } : { left: 45 }]} /> */}
+          {/* <ViewWin32 animationClass={'Shared_QuickClass'}> */}
+          {/* <Slots.thumb animationClass={'Shared_QuickClass'} style={[{ left: button.state.thumbX }]} /> */}
+          <Slots.thumb animationClass={'Shared_BasicClass'} style={[button.state.checked ? { left: 0 } : { left: 45 }]} />
+          {/* </ViewWin32> */}
         </Slots.root>
       );
     };
