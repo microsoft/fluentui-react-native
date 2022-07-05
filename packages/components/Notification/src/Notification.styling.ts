@@ -3,7 +3,15 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultNotificationTokens } from './NotificationTokens';
 
-export const notificationStates: (keyof NotificationTokens)[] = ['primary', 'neutral', 'danger', 'warning'];
+export const notificationStates: (keyof NotificationTokens)[] = [
+  'primary',
+  'neutral',
+  'primaryBar',
+  'primaryOutlineBar',
+  'neutralBar',
+  'danger',
+  'warning',
+];
 
 export const stylingSettings: UseStylingOptions<NotificationProps, NotificationSlotProps, NotificationTokens> = {
   tokens: [defaultNotificationTokens, notification],
@@ -13,6 +21,8 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       (tokens: NotificationTokens, theme: Theme) => ({
         style: {
           backgroundColor: tokens.backgroundColor,
+          borderColor: tokens.borderColor,
+          marginHorizontal: 16,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -28,7 +38,10 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 16,
+            fontSize: 15,
+            fontWeight: '600',
+            lineHeight: 20,
+            letterSpacing: -0.24,
             flex: 1,
             flexGrow: 1,
           },
@@ -36,15 +49,18 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color'],
     ),
-    endText: buildProps(
+    action: buildProps(
       (tokens: NotificationTokens) => {
         return {
           style: {
             color: tokens.color,
-            fontSize: 16,
-            fontWeight: '500',
-            marginLeft: 34,
+            marginLeft: 16,
+            alignSelf: 'center',
           },
+          appearance: 'subtle',
+          padding: 0,
+          paddingHorizontal: 0,
+          minWidth: 0,
         };
       },
       ['color'],
