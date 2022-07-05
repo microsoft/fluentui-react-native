@@ -11,27 +11,26 @@ export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProp
   const theme = useFluentTheme();
 
   const [tokens, cache] = useTokens(theme);
-  const shadowStyle = shadowStyleFromTheme(theme, depth);
 
-  const [keyShadowTokenStyle] = cache(
-    () => ({
-      shadowColor: shadowStyle.key.shadowColor,
-      shadowOpacity: shadowStyle.key.shadowOpacity,
-      shadowRadius: shadowStyle.key.shadowRadius,
-      shadowOffset: shadowStyle.key.shadowOffset,
-    }),
-    ['shadowColor', 'shadowOpacity', 'shadowRadius', 'shadowOffset'],
-  );
+  const [keyShadowTokenStyle] = cache(() => {
+    const keyShadowStyle = shadowStyleFromTheme(theme, depth).key;
+    return {
+      shadowColor: keyShadowStyle.shadowColor,
+      shadowOpacity: keyShadowStyle.shadowOpacity,
+      shadowRadius: keyShadowStyle.shadowRadius,
+      shadowOffset: keyShadowStyle.shadowOffset,
+    };
+  }, ['shadowColor', 'shadowOpacity', 'shadowRadius', 'shadowOffset']);
 
-  const [ambientShadowTokenStyle] = cache(
-    () => ({
-      shadowColor: shadowStyle.ambient.shadowColor,
-      shadowOpacity: shadowStyle.ambient.shadowOpacity,
-      shadowRadius: shadowStyle.ambient.shadowRadius,
-      shadowOffset: shadowStyle.ambient.shadowOffset,
-    }),
-    ['shadowColor', 'shadowOpacity', 'shadowRadius', 'shadowOffset'],
-  );
+  const [ambientShadowTokenStyle] = cache(() => {
+    const ambientShadowStyle = shadowStyleFromTheme(theme, depth).ambient;
+    return {
+      shadowColor: ambientShadowStyle.shadowColor,
+      shadowOpacity: ambientShadowStyle.shadowOpacity,
+      shadowRadius: ambientShadowStyle.shadowRadius,
+      shadowOffset: ambientShadowStyle.shadowOffset,
+    };
+  }, ['shadowColor', 'shadowOpacity', 'shadowRadius', 'shadowOffset']);
 
   return (extra: ShadowProps, children: React.ReactNode) => {
     const mergedProps = mergeProps(tokens, { style: keyShadowTokenStyle }, extra);
