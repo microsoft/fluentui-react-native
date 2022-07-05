@@ -18,8 +18,8 @@ const getThemedStyles = themedStyleSheet(() => {
       paddingHorizontal: 24,
     },
     vmargin: {
-      marginVertical: 32,
-      marginHorizontal: 16,
+      marginVertical: 16,
+      marginHorizontal: 32,
     },
   };
 });
@@ -30,7 +30,7 @@ interface ShadowTestBoxProps {
 }
 
 const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: ShadowTestBoxProps) => {
-  const themedStyles = getThemedStyles();
+  const themedStyles = getThemedStyles(useTheme());
   return (
     <Shadow depth={props.depth}>
       <Text
