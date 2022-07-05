@@ -4,9 +4,7 @@ import { ButtonCoreTokens } from '../Button.types';
 import { shadowStyleFromTheme } from '../shadowStyle';
 
 export const defaultFABColorTokens: TokenSettings<ButtonCoreTokens, Theme> = (t: Theme): ButtonCoreTokens => ({
-  // Grab the second shadow from the global token, as we only support displaying one shadow
   ...shadowStyleFromTheme(t, 'shadow8'),
-
   // coloring same as primary
   backgroundColor: t.colors.brandedBackground,
   color: t.colors.brandedContent,
