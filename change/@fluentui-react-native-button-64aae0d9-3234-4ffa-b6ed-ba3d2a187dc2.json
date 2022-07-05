@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Revert shadowStyle changes in Button",
+  "packageName": "@fluentui-react-native/button",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "none"
+}
