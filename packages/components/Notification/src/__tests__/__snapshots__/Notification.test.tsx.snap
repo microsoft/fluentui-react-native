@@ -16,7 +16,7 @@ exports[`Notification component tests Notification default 1`] = `
     Object {
       "alignItems": "center",
       "backgroundColor": "#EBF3FC",
-      "borderColor": "#FFFFFF",
+      "borderColor": "transparent",
       "borderRadius": 12,
       "borderWidth": 1,
       "flex": 1,
