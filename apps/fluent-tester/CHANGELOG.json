@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 06 Jul 2022 04:31:20 GMT",
+      "tag": "@fluentui-react-native/tester_v0.70.0",
+      "version": "0.70.0",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "13e7b897779dc28e158c605e25b0391445f3f66b",
+            "comment": "fix :button and icon - PNG Icon not showing up"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 05 Jul 2022 20:47:13 GMT",
       "tag": "@fluentui-react-native/tester_v0.70.0",
       "version": "0.70.0",
