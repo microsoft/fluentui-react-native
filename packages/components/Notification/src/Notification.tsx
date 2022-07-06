@@ -15,7 +15,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
  * @returns Whether the styles that are assigned to the layer should be applied to the Notification
  */
 export const notificationLookup = (layer: string, userProps: NotificationProps): boolean => {
-  return userProps['variant'] === layer || (layer === 'hasTitle' && userProps.title != undefined);
+  return userProps.variant === layer || (layer === 'hasTitle' && userProps.title != undefined);
 };
 
 export const Notification = compose<NotificationType>({
