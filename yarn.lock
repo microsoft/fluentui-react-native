@@ -2362,13 +2362,13 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.26":
-  version "1.2.33"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.33.tgz#91b7d056a37ea076bfea3adc2824bef27b508ec2"
-  integrity sha512-fOZTE3g5KA4OgnHxcNVtj6+KVEWv9trJFP+1VWUjKlGna5WwcEx5RsQMMVW2VJWCCc5GFjru8NYFyjAf2eLsZw==
+  version "1.2.34"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.34.tgz#da0cfcff674c1a1b95b2329c04fefd7698f45dd3"
+  integrity sha512-EkgnxkIGFyX3ZulmKdeiFgbwkjPljxN0hvCWO/A8Lg9ewPmbifqFGjzOXLl5iQKlWQVCxmX5WBdHT9GR200pZA==
   dependencies:
     "@rnx-kit/babel-preset-metro-react-native" "^1.0.17"
     "@rnx-kit/tools-node" "^1.3.0"
-    workspace-tools "^0.18.3"
+    "@rnx-kit/tools-workspaces" "^0.1.0"
 
 "@rnx-kit/metro-plugin-cyclic-dependencies-detector@^1.0.21":
   version "1.0.21"
@@ -2444,6 +2444,15 @@
   integrity sha512-NnWoWvpG+bbWdzEZroVIthD/K36R9i3HmDdlbvp6qzI31xvqYPXHCB2eeBEdXDceKcKpmnMhmCHvAOgsiRgU+w==
   dependencies:
     "@rnx-kit/tools-node" "^1.2.7"
+
+"@rnx-kit/tools-workspaces@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-workspaces/-/tools-workspaces-0.1.0.tgz#40336be940d2b9e15da36e044c563850234faa04"
+  integrity sha512-ums7+UAuvCDvDvkBB6h/9XRjnFBHG1w3OBE49VLc07iajlZYX9jfnBhhdQaua1C7SeGGbYafiT/lMcKH11uqMw==
+  dependencies:
+    fast-glob "^3.2.7"
+    find-up "^5.0.0"
+    read-yaml-file "^2.1.0"
 
 "@rnx-kit/typescript-react-native-resolver@^0.2.0":
   version "0.2.1"
@@ -6546,7 +6555,7 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
-fast-glob@^3.2.2, fast-glob@^3.2.9:
+fast-glob@^3.2.2, fast-glob@^3.2.7, fast-glob@^3.2.9:
   version "3.2.11"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.11.tgz#a1172ad95ceb8a16e20caa5c5e56480e5129c1d9"
   integrity sha512-xrO3+1bxSo3ZVHAnqzyuewYT6aMFHRAd4Kcs92MAonjwQZLsK9d0SF1IyQ3k5PoirxTW0Oe/RqFgMQ6TcNE5Ew==
@@ -11537,7 +11546,7 @@ read-pkg@^3.0.0:
     normalize-package-data "^2.3.2"
     path-type "^3.0.0"
 
-read-yaml-file@^2.0.0:
+read-yaml-file@^2.0.0, read-yaml-file@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/read-yaml-file/-/read-yaml-file-2.1.0.tgz#c5866712db9ef5343b4d02c2413bada53c41c4a9"
   integrity sha512-UkRNRIwnhG+y7hpqnycCL/xbTk7+ia9VuVTC0S+zVbwd65DI9eUpRMfsWIGrCWxTU/mi+JW8cHQCrv+zfCbEPQ==
@@ -13551,7 +13560,7 @@ wordwrapjs@^3.0.0:
     reduce-flatten "^1.0.1"
     typical "^2.6.1"
 
-workspace-tools@^0.18.2, workspace-tools@^0.18.3, workspace-tools@^0.18.4:
+workspace-tools@^0.18.2, workspace-tools@^0.18.4:
   version "0.18.4"
   resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.18.4.tgz#a59ca6dc864d07aafc06a9ff4a9ff093456b8765"
   integrity sha512-ZdhlB4NEC3uJ4eW7snyHKOfzMC00HXWO2QbIU3aY8XBdtE+VrU2ajv+oxDUIZfCLD4Wlk3ltWaPt4Jk6IC9bMA==
