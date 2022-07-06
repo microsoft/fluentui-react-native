@@ -6,6 +6,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
   ({
     backgroundColor: t.colors.background,
     color: t.colors.brandForeground1,
+    fontFamily: 'primary',
     fontSize: 15,
     fontWeight: '600',
     fontLineHeight: 20,
