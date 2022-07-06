@@ -9,7 +9,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontSize: 15,
     fontWeight: '600',
     fontLineHeight: 20,
-    // letterSpacing: -0.24,
+    fontLetterSpacing: -0.24,
     borderColor: 'transparent',
     borderWidth: 1,
     padding: 16,
@@ -18,7 +18,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       fontSize: 13,
       fontWeight: '400',
       fontLineHeight: 18,
-      // fontLetterSpacing: -0.08,
+      fontLetterSpacing: -0.08,
     },
     primary: {
       backgroundColor: '#EBF3FC',

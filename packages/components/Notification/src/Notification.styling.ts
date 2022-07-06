@@ -65,7 +65,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
             fontSize: tokens.fontSize,
             fontWeight: tokens.fontWeight,
             lineHeight: tokens.fontLineHeight,
-            // letterSpacing: -0.08,
+            letterSpacing: tokens.fontLetterSpacing,
             flex: 1,
             flexGrow: 1,
           },
