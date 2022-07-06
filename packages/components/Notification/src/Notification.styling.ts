@@ -2,6 +2,7 @@ import { notification, NotificationTokens, NotificationSlotProps, NotificationPr
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultNotificationTokens } from './NotificationTokens';
+import { TextStyle } from 'react-native';
 
 export const notificationStates: (keyof NotificationTokens)[] = [
   'primary',
@@ -72,7 +73,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         };
       },
       ['color'],
-    ),
+    ) as TextStyle,
     action: buildProps(
       (tokens: NotificationTokens) => {
         return {
