@@ -23,7 +23,7 @@ export const Notification = compose<NotificationType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
-    inner: View,
+    contentContainer: View,
     title: Text,
     message: Text,
     action: Button,
@@ -36,10 +36,10 @@ export const Notification = compose<NotificationType>({
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.inner>
+          <Slots.contentContainer>
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message>{children}</Slots.message>
-          </Slots.inner>
+          </Slots.contentContainer>
           {action && <Slots.action>{action}</Slots.action>}
         </Slots.root>
       );

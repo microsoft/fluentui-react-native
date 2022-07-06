@@ -34,7 +34,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
-    inner: buildProps(() => {
+    contentContainer: buildProps(() => {
       return {
         style: {
           flex: 1,
@@ -72,7 +72,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           },
         };
       },
-      ['color'],
+      ['color', 'fontSize', 'fontWeight', 'fontLineHeight', 'fontLetterSpacing'],
     ) as TextStyle,
     action: buildProps(
       (tokens: NotificationTokens) => {

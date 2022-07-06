@@ -1,5 +1,5 @@
-import { PressableProps, ViewProps } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { PressableProps } from 'react-native';
+import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
 import { ButtonProps } from '@fluentui-react-native/button';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -31,9 +31,9 @@ export interface NotificationProps {
 
 export interface NotificationSlotProps {
   root: PressableProps;
-  inner: ViewProps;
-  title: TextProps;
-  message: TextProps;
+  contentContainer: IViewProps;
+  title: ITextProps;
+  message: ITextProps;
   action?: ButtonProps;
 }
 
