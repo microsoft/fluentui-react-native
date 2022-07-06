@@ -12,31 +12,13 @@ export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProp
 
   const [tokens, cache] = useTokens(theme);
 
-  const [keyShadowTokenStyle] = cache(() => {
-    const keyShadowStyle = shadowStyleFromTheme(theme, depth).key;
-    return {
-      shadowColor: keyShadowStyle.shadowColor,
-      shadowOpacity: keyShadowStyle.shadowOpacity,
-      shadowRadius: keyShadowStyle.shadowRadius,
-      shadowOffset: keyShadowStyle.shadowOffset,
-    };
-  }, ['shadowColor', 'shadowOpacity', 'shadowRadius', 'shadowOffset']);
-
-  const [ambientShadowTokenStyle] = cache(() => {
-    const ambientShadowStyle = shadowStyleFromTheme(theme, depth).ambient;
-    return {
-      shadowColor: ambientShadowStyle.shadowColor,
-      shadowOpacity: ambientShadowStyle.shadowOpacity,
-      shadowRadius: ambientShadowStyle.shadowRadius,
-      shadowOffset: ambientShadowStyle.shadowOffset,
-    };
-  }, ['shadowColor', 'shadowOpacity', 'shadowRadius', 'shadowOffset']);
+  const [shadowTokenStyleSet] = cache(() => shadowStyleFromTheme(theme, depth), ['theme', 'depth']);
 
   return (extra: ShadowProps, children: React.ReactNode) => {
-    const mergedProps = mergeProps(tokens, { style: keyShadowTokenStyle }, extra);
+    const mergedProps = mergeProps(tokens, { style: shadowTokenStyleSet.key }, extra);
 
     return (
-      <View style={ambientShadowTokenStyle}>
+      <View style={shadowTokenStyleSet.ambient}>
         <View {...mergedProps}>{children}</View>
       </View>
     );
