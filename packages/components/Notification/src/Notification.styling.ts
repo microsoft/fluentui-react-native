@@ -27,7 +27,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
-          alignItems: 'center',
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
@@ -63,10 +62,10 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 13,
-            fontWeight: '400',
-            lineHeight: 18,
-            letterSpacing: -0.08,
+            fontSize: tokens.fontSize,
+            fontWeight: tokens.fontWeight,
+            lineHeight: tokens.fontLineHeight,
+            // letterSpacing: -0.08,
             flex: 1,
             flexGrow: 1,
           },

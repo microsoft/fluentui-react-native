@@ -14,7 +14,6 @@ exports[`Notification component tests Notification default 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#EBF3FC",
       "borderColor": "transparent",
       "borderRadius": 12,
@@ -44,10 +43,9 @@ exports[`Notification component tests Notification default 1`] = `
           "flex": 1,
           "flexGrow": 1,
           "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "400",
-          "letterSpacing": -0.08,
-          "lineHeight": 18,
+          "fontSize": 15,
+          "fontWeight": "600",
+          "lineHeight": 20,
           "margin": 0,
         }
       }
