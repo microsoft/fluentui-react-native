@@ -10,3 +10,5 @@ export { shadowStyles, shadowTokens } from './shadow-tokens';
 export type { IShadowTokens } from './shadow-tokens';
 export { tokenBuilder } from './tokenBuilder';
 export type { TokenBuilder } from './tokenBuilder';
+export type { LookupThemePart, OperationSet, StyleFactoryOperation, StyleFactoryFunction, StyleFactoryFunctionRaw } from './token.types';
+export { styleFunction } from './token.function';
