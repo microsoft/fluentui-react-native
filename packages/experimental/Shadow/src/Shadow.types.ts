@@ -19,5 +19,3 @@ export type ShadowDepth =
 export interface ShadowProps extends ViewProps {
   depth?: ShadowDepth;
 }
-
-export interface ShadowTokens {}

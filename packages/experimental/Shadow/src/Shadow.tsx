@@ -1,21 +1,15 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ShadowProps, ShadowTokens, shadowName } from './Shadow.types';
-import { compressible, buildUseTokens, useFluentTheme, mergeProps, UseTokens } from '@fluentui-react-native/framework';
+import { ShadowProps, shadowName, ShadowDepth } from './Shadow.types';
+import { useFluentTheme, memoize, mergeProps, stagedComponent, Theme } from '@fluentui-react-native/framework';
 import { shadowStyleFromTheme } from './shadowStyle';
 
-const useShadowTokens = buildUseTokens<ShadowTokens>(() => ({}), shadowName);
-
-export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProps, useTokens: UseTokens<ShadowTokens>) => {
-  const { depth } = props;
+export const Shadow = stagedComponent((props: ShadowProps) => {
   const theme = useFluentTheme();
 
-  const [tokens, cache] = useTokens(theme);
-
-  const [shadowTokenStyleSet] = cache(() => shadowStyleFromTheme(theme, depth), ['theme', 'depth']);
-
-  return (extra: ShadowProps, children: React.ReactNode) => {
-    const mergedProps = mergeProps(tokens, { style: shadowTokenStyleSet.key }, extra);
+  return (final: ShadowProps, ...children: React.ReactNode[]) => {
+    const shadowTokenStyleSet = getShadowTokenStyleSet(theme, props.depth);
+    const mergedProps = mergeProps(final, { style: shadowTokenStyleSet.key });
 
     return (
       <View style={shadowTokenStyleSet.ambient}>
@@ -23,7 +17,13 @@ export const Shadow = compressible<ShadowProps, ShadowTokens>((props: ShadowProp
       </View>
     );
   };
-}, useShadowTokens);
+});
+
 Shadow.displayName = shadowName;
+
+const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
+function getShadowTokenStyleSetWorker(theme: Theme, depth: ShadowDepth) {
+  return shadowStyleFromTheme(theme, depth);
+}
 
 export default Shadow;
