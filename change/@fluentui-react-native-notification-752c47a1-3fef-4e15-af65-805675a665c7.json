@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "added optional title",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
