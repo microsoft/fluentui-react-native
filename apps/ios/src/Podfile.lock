@@ -10,12 +10,12 @@ PODS:
     - React-jsi (= 0.66.4)
     - ReactCommon/turbomodule/core (= 0.66.4)
   - fmt (6.2.1)
-  - FRNAvatar (0.14.20):
-    - MicrosoftFluentUI (= 0.5.0)
-    - MicrosoftFluentUI/Avatar_ios (= 0.5.0)
+  - FRNAvatar (0.15.1):
+    - MicrosoftFluentUI (= 0.5.2)
+    - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
-  - FRNDatePicker (0.4.2):
-    - MicrosoftFluentUI (= 0.5.0)
+  - FRNDatePicker (0.5.0):
+    - MicrosoftFluentUI (= 0.5.2)
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.5.2):
@@ -176,7 +176,7 @@ PODS:
   - MicrosoftFluentUI/TwoLineTitleView_ios (0.5.2):
     - MicrosoftFluentUI/EasyTapButton_ios
     - MicrosoftFluentUI/Label_ios
-  - MicrosoftFluentUI/Utilities_ios (0.5.0)
+  - MicrosoftFluentUI/Utilities_ios (0.5.2)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -377,7 +377,7 @@ PODS:
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.2.3):
+  - react-native-slider (4.2.4):
     - React-Core
   - React-perflogger (0.66.4)
   - React-RCTActionSheet (0.66.4):
@@ -584,14 +584,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: e5569e42a1c79ca00521846c223173a57aca1fe1
   FBReactNativeSpec: fe08c1cd7e2e205718d77ad14b34957cce949b58
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: ca7d86923cc7854a09ac2a4383741a0248c9455c
-  FRNDatePicker: cc3390f45f874ecd01e2675563e6bc9c059450db
-  glog: 5337263514dd6f09803962437687240c5dc39aa4
-  MicrosoftFluentUI: 4c12374f2eab4c8f37b9d0c9a1e96210e96db78e
+  FRNAvatar: a532bbf467cf1c49c9762b1838808b1482a11835
+  FRNDatePicker: 961e96f437d1dcd25fe6d7a80790dade00ef714b
+  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
+  MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 4bf86c70714490bca4bf2696148638284622644b
   RCTTypeSafety: c475a7059eb77935fa53d2c17db299893f057d5d
@@ -605,7 +605,7 @@ SPEC CHECKSUMS:
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: 2f25c919f1dc309b90e2cc8346b8042ecec2102f
+  react-native-slider: cecabb58ecffad671d2ad3ccc58c7f4d2d029e95
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
   React-RCTAnimation: 743e88b55ac62511ae5c2e22803d4f503f2a3a13
