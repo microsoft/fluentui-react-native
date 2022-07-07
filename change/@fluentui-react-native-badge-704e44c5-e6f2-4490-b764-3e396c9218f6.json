@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed badge position",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
