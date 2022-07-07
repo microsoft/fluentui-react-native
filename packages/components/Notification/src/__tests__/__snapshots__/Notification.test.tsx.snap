@@ -14,7 +14,6 @@ exports[`Notification component tests Notification default 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "center",
       "backgroundColor": "#EBF3FC",
       "borderColor": "transparent",
       "borderRadius": 12,
@@ -27,25 +26,32 @@ exports[`Notification component tests Notification default 1`] = `
     }
   }
 >
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
+  <View
     style={
       Object {
-        "color": "#0F6CBD",
         "flex": 1,
-        "flexGrow": 1,
-        "fontFamily": "Segoe UI",
-        "fontSize": 15,
-        "fontWeight": "600",
-        "letterSpacing": -0.24,
-        "lineHeight": 20,
-        "margin": 0,
+        "flexDirection": "column",
       }
     }
   >
-    Mail Archived
-  </Text>
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#0F6CBD",
+          "flex": 1,
+          "flexGrow": 1,
+          "fontFamily": "Segoe UI",
+          "fontSize": 15,
+          "fontWeight": "600",
+          "margin": 0,
+        }
+      }
+    >
+      Mail Archived
+    </Text>
+  </View>
   <View
     accessibilityLabel="Undo"
     accessibilityRole="button"
