@@ -6,28 +6,22 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
   ({
     borderWidth: 2,
     borderColor: globalTokens.color.white,
-    bottom: -globalTokens.spacing.xs,
-    right: -globalTokens.spacing.xs,
+    bottom: globalTokens.spacing.none,
+    right: globalTokens.spacing.none,
     paddingHorizontal: globalTokens.spacing.none,
     backgroundColor: globalTokens.color.white,
     smallest: {
       width: 6,
       height: 6,
       borderWidth: 1,
-      bottom: -globalTokens.spacing.xxs,
-      right: -globalTokens.spacing.xxs,
     },
     smaller: {
       width: 10,
       height: 10,
-      bottom: -globalTokens.spacing.xxs,
-      right: -globalTokens.spacing.xxs,
     },
     small: {
       width: 12,
       height: 12,
-      bottom: -globalTokens.spacing.xxs,
-      right: -globalTokens.spacing.xxs,
     },
     medium: {
       width: 20,
