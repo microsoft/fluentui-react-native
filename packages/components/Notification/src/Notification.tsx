@@ -18,8 +18,7 @@ export const notificationLookup = (layer: string, userProps: NotificationProps):
   return (
     layer === userProps.variant ||
     (layer === 'hasTitle' && userProps.title != undefined) ||
-    (layer === 'isBar' &&
-      (userProps.variant == 'primaryBar' || userProps.variant == 'primaryOutlineBar' || userProps.variant == 'neutralBar'))
+    (layer === 'isBar' && ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
   );
 };
 

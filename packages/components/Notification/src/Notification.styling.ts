@@ -50,7 +50,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
             fontSize: 15,
             fontWeight: '600',
             lineHeight: 20,
-            letterSpacing: -0.24,
+            letterSpacing: -0.24, // iOS only prop
             flex: 1,
             flexGrow: 1,
           },

@@ -11,14 +11,14 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     borderWidth: 1,
     color: t.colors.brandForeground1,
     fontFamily: 'primary',
-    fontLetterSpacing: -0.24,
+    fontLetterSpacing: -0.24, // iOS only prop
     fontLineHeight: 20,
     fontSize: 15,
     fontWeight: '600',
     marginHorizontal: 16,
     padding: 16,
     hasTitle: {
-      fontLetterSpacing: -0.08,
+      fontLetterSpacing: -0.08, // iOS only prop
       fontLineHeight: 18,
       fontSize: 13,
       fontWeight: '400',
