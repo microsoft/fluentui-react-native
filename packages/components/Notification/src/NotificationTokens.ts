@@ -6,6 +6,8 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
   ({
     backgroundColor: t.colors.background,
     color: t.colors.brandForeground1,
+    borderColor: 'transparent',
+    borderWidth: 1,
     padding: 16,
     primary: {
       backgroundColor: '#EBF3FC',

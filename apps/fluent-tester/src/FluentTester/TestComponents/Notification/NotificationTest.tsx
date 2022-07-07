@@ -4,7 +4,13 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 
 const PrimaryTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={'primary'} endText="Undo">
+    <Notification
+      variant={'primary'}
+      action="Undo"
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
       Mail Archived
     </Notification>
   );
@@ -12,7 +18,13 @@ const PrimaryTest: React.FunctionComponent = () => {
 
 const NeutralTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={'neutral'} endText="Sign in">
+    <Notification
+      variant={'neutral'}
+      action="Sign in"
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
       Some items require you to sign in to view them
     </Notification>
   );
@@ -20,7 +32,13 @@ const NeutralTest: React.FunctionComponent = () => {
 
 const DangerTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={'danger'} endText="Retry">
+    <Notification
+      variant={'danger'}
+      action="Retry"
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
       There was a problem, and your recent changes may not have saved
     </Notification>
   );
@@ -28,7 +46,13 @@ const DangerTest: React.FunctionComponent = () => {
 
 const WarningTest: React.FunctionComponent = () => {
   return (
-    <Notification variant={'warning'} endText="X">
+    <Notification
+      variant={'warning'}
+      action="X"
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
       Read Only
     </Notification>
   );
