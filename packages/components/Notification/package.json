@@ -26,6 +26,7 @@
     "directory": "packages/components/Notification"
   },
   "dependencies": {
+    "@fluentui-react-native/adapters": "^0.8.5",
     "@fluentui-react-native/button": ">=0.22.29 <1.0.0",
     "@fluentui-react-native/experimental-text": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/framework": "0.7.30",

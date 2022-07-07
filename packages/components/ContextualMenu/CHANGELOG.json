@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 07 Jul 2022 17:57:30 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.16.40",
+      "version": "0.16.40",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "fa82600d9215e74ac769bb37b886596e9b27dac5",
+            "comment": "Revert \"Fire warning that ContextualMenu is deprecated on win32 (#1804)\""
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 29 Jun 2022 17:36:04 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.16.39",
       "version": "0.16.39",
