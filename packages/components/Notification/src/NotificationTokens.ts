@@ -4,41 +4,61 @@ import { NotificationTokens } from './Notification.types';
 
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
   ({
+    alignSelf: 'flex-start',
     backgroundColor: t.colors.background,
+    borderColor: 'transparent',
+    borderRadius: 12,
+    borderWidth: 1,
     color: t.colors.brandForeground1,
     fontFamily: 'primary',
+    fontLetterSpacing: -0.24,
+    fontLineHeight: 20,
     fontSize: 15,
     fontWeight: '600',
-    fontLineHeight: 20,
-    fontLetterSpacing: -0.24,
-    borderColor: 'transparent',
-    borderWidth: 1,
+    marginHorizontal: 16,
     padding: 16,
     hasTitle: {
-      paddingVertical: 12,
+      fontLetterSpacing: -0.08,
+      fontLineHeight: 18,
       fontSize: 13,
       fontWeight: '400',
-      fontLineHeight: 18,
-      fontLetterSpacing: -0.08,
+      paddingVertical: 12,
+    },
+    isBar: {
+      alignSelf: 'center',
+      borderRadius: 0,
+      fontWeight: '400',
+      marginHorizontal: 0,
     },
     primary: {
       backgroundColor: '#EBF3FC',
       color: '#0F6CBD',
-      borderRadius: 12,
     },
     neutral: {
       backgroundColor: '#FAFAFA',
       color: '#616161',
-      borderRadius: 12,
     },
     danger: {
       backgroundColor: '#FDF6F6',
       color: '#BC2F34',
-      borderRadius: 12,
     },
     warning: {
       backgroundColor: '#FFFBD6',
       color: '#4C4400',
-      borderRadius: 12,
+    },
+    primaryBar: {
+      backgroundColor: '#EBF3FC',
+      borderWidth: 0,
+      color: '#0F6CBD',
+    },
+    primaryOutlineBar: {
+      backgroundColor: '#FFFFFF',
+      borderColor: '#E0E0E0',
+      color: '#0F6CBD',
+    },
+    neutralBar: {
+      backgroundColor: '#F0F0F0',
+      borderWidth: 0,
+      color: '#616161',
     },
   } as NotificationTokens);

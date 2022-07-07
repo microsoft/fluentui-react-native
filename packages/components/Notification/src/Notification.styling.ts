@@ -12,6 +12,7 @@ export const notificationStates: (keyof NotificationTokens)[] = [
   'danger',
   'warning',
   'hasTitle',
+  'isBar',
 ];
 
 export const stylingSettings: UseStylingOptions<NotificationProps, NotificationSlotProps, NotificationTokens> = {
@@ -23,7 +24,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           backgroundColor: tokens.backgroundColor,
           borderColor: tokens.borderColor,
-          marginHorizontal: 16,
+          marginHorizontal: tokens.marginHorizontal,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -64,6 +65,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
             color: tokens.color,
             flex: 1,
             flexGrow: 1,
+            alignSelf: tokens.alignSelf,
             ...fontStyles.from(tokens, theme),
           },
         };

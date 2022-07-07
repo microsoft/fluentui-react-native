@@ -39,6 +39,7 @@ exports[`Notification component tests Notification default 1`] = `
       numberOfLines={0}
       style={
         Object {
+          "alignSelf": "flex-start",
           "color": "#0F6CBD",
           "flex": 1,
           "flexGrow": 1,

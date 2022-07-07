@@ -73,6 +73,45 @@ const WarningTest: React.FunctionComponent = () => {
   );
 };
 
+const PrimaryBarTest: React.FunctionComponent = () => {
+  return (
+    <Notification
+      variant={'primaryBar'}
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
+      Updating...
+    </Notification>
+  );
+};
+
+const PrimaryOutlineBarTest: React.FunctionComponent = () => {
+  return (
+    <Notification
+      variant={'primaryOutlineBar'}
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
+      Mail Sent
+    </Notification>
+  );
+};
+
+const NeutralBarTest: React.FunctionComponent = () => {
+  return (
+    <Notification
+      variant={'neutralBar'}
+      onPress={() => {
+        console.log('Notification tapped');
+      }}
+    >
+      No internet connection
+    </Notification>
+  );
+};
+
 const notificationSections: TestSection[] = [
   {
     name: 'Primary',
@@ -93,6 +132,18 @@ const notificationSections: TestSection[] = [
   {
     name: 'Warning',
     component: WarningTest,
+  },
+  {
+    name: 'Primary Bar',
+    component: PrimaryBarTest,
+  },
+  {
+    name: 'Primary Outline Bar',
+    component: PrimaryOutlineBarTest,
+  },
+  {
+    name: 'Neutral Bar',
+    component: NeutralBarTest,
   },
 ];
 
