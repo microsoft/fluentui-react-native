@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 29 Jun 2022 17:36:04 GMT and should not be manually modified.
+This log was last generated on Wed, 29 Jun 2022 21:55:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.69.7
+
+Wed, 29 Jun 2022 21:55:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.2.0
+
+## 0.69.6
+
+Wed, 29 Jun 2022 21:06:49 GMT
+
+### Patches
+
+- replaced deprecated RN picker controls for a community control for iOS/Android and MenuPicker for Win32/MacOS (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/menu to v1.0.2
 
 ## 0.69.5
 

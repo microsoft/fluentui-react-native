@@ -583,6 +583,27 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+<<<<<<< HEAD
+  boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
+  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
+  FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
+  FBReactNativeSpec: 2e23f365db4551ce59b5411a90f7ad9bc0aabffe
+  FRNAvatar: a532bbf467cf1c49c9762b1838808b1482a11835
+  FRNDatePicker: 961e96f437d1dcd25fe6d7a80790dade00ef714b
+  glog: 7a8788d88d2a384c05df45e95c5e763e4d81f3ad
+  MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
+  RCT-Folly: 91521e05ace43e89980cabd1fb54685f7827ddb9
+  RCTRequired: d34bf57e17cb6e3b2681f4809b13843c021feb6c
+  RCTTypeSafety: 8dab4933124ed39bb0c1d88d74d61b1eb950f28f
+  React: ef700aeb19afabff83a9cc5799ac955a9c6b5e0f
+  React-callinvoker: 5547633d44f3e114b17c03c660ccb5faefd9ed2d
+  React-Core: 3858d60185d71567962468bf176d582e36e4e25b
+  React-CoreModules: 29b3397adac0c04915cf93089328664868510717
+  React-cxxreact: 7e6cc1f4cdfcd40e483dd228fa8a3d3e0ed16f4a
+  React-jsi: a8b09c29521c798f1783348b37b511ba7b3dbeb3
+  React-jsiexecutor: df6abc9fafbecb8e5b7a5fbc5e6d4bd017d594d5
+  React-jsinspector: 34e23860273a23695342f58eed3ffd3ba10c31e0
+=======
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: e5569e42a1c79ca00521846c223173a57aca1fe1
@@ -604,6 +625,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 94ce921e1d8ce7023366873ec371f3441383b396
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
+>>>>>>> 70929e5c86ffc1ef2aa2767f8be796d2a0129545
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
   react-native-slider: 2f25c919f1dc309b90e2cc8346b8042ecec2102f
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd

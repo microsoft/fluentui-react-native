@@ -15,16 +15,16 @@ export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorT
 
 export interface NotificationProps {
   /**
-   * Notification variants: 'primary' | 'neutral' |'danger' | 'warning'
+   * Notification variants: 'primary' | 'neutral' | 'danger' | 'warning'
    */
   variant: NotificationVariant;
-  endText: string;
+  endText?: string;
 }
 
 export interface NotificationSlotProps {
   root: ViewProps;
   message: TextProps;
-  endText: TextProps;
+  endText?: TextProps;
 }
 
 export interface NotificationType {

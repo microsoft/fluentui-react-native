@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "replaced deprecated RN picker controls for a community control for iOS/Android and MenuPicker for Win32/MacOS",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}
