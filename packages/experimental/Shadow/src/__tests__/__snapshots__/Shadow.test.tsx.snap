@@ -6,10 +6,10 @@ exports[`Shadow component tests Shadow default 1`] = `
     Object {
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 1,
+        "height": 0,
         "width": 0,
       },
-      "shadowOpacity": 0.14,
+      "shadowOpacity": 0.12,
       "shadowRadius": 2,
     }
   }
