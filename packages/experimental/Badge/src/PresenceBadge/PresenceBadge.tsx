@@ -5,6 +5,7 @@ import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native
 import { presenceIconPaths } from './presenceIconPaths';
 import { Svg, Path } from 'react-native-svg';
 import { stylingSettings } from './PresenceBadge.styling';
+import { useBadge } from '../useBadge';
 
 export const prensenceBadgeLookup = (layer: string, userProps: PresenceBadgeProps): boolean => {
   return (
@@ -46,10 +47,11 @@ export const PresenceBadge = compose<PresenceBadgeType>({
     svg: Svg,
   },
   useRender: (userProps: PresenceBadgeProps, useSlots: UseSlots<PresenceBadgeType>) => {
-    const Slots = useSlots(userProps, (layer) => prensenceBadgeLookup(layer, userProps));
+    const badge = useBadge(userProps) as PresenceBadgeProps;
+    const Slots = useSlots(badge, (layer) => prensenceBadgeLookup(layer, badge));
 
     return (final: PresenceBadgeProps) => {
-      const { size, status, outOfOffice, ...mergedProps } = mergeProps(userProps, final);
+      const { size, status, outOfOffice, ...mergedProps } = mergeProps(badge, final);
       const isOutOfOffice = outOfOffice || false;
       const path = getIconPath(status, isOutOfOffice);
 
