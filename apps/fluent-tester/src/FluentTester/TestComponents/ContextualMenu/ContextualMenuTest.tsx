@@ -508,7 +508,7 @@ const contextualMenuSections: TestSection[] = [
 
 export const ContextualMenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Deprecated',
+    win32Status: 'Experimental',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',

@@ -9,7 +9,7 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@appium/base-driver@^8.3.0", "@appium/base-driver@^8.5.7":
+"@appium/base-driver@^8.5.7":
   version "8.5.7"
   resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.5.7.tgz#67d63c45fbc9f70f8ee7a4ab4fcf6c07f9c7eb53"
   integrity sha512-r8iNuh3Ivo2jgVfu942sQf5wOsTbYn7jsRaB/1pCrH/4AXkLz6EL1KLTS7Zo2P2auJp6d9wO4S0550/W8iy2jA==
@@ -58,7 +58,7 @@
   resolved "https://registry.yarnpkg.com/@appium/schema/-/schema-0.0.7.tgz#381a41179ac87328865d2e80fb5d85d3a299e546"
   integrity sha512-SYStJIY2XStAwpskJHXzP89no5qV+pWjUJ40wPH1XkruSW1my8MUNEBoRKNSNhzB8Ly0ZIfiQihlZgPX/NfF5Q==
 
-"@appium/support@^2.55.3", "@appium/support@^2.59.2":
+"@appium/support@^2.59.2":
   version "2.59.2"
   resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.2.tgz#73ce49e4fba609817bca9b2c7af87c3d0bfb9c57"
   integrity sha512-mmBjbpsW6SgKUH+MF7xXciPZvUgiTB7PqkqcMl1y3K7Q9qsVg6O/YB+cis9fNAEn8UFnMzIsuPupH11O88wsCg==
@@ -3636,9 +3636,9 @@ appdirsjs@^1.2.4:
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
 appium-mac2-driver@^1.1.4:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.3.0.tgz#ee13a2c1901c97118a0218adda316cccc1555284"
-  integrity sha512-f5vDWIha7GSzWI58yeEKbz41TP13itn0Vu4SwEBLHYlazATdNqXiolaUAygX+QjhxShUZqzpjCtZbqo2gKfVAw==
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.3.1.tgz#3ad80154911416cfe8e9815600a9cfd612238a64"
+  integrity sha512-Qz92h9qebVRDlwb+/zsXL1MS1ca/9IwLY0gd8wkwovK1PiRlWTfebe/5tBO4r3mb/wuf4BvxRlObHTniQHPuig==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.0.2"
@@ -3650,12 +3650,10 @@ appium-mac2-driver@^1.1.4:
     teen_process "^1.15.0"
 
 appium-windows-driver@^2.0.1:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.5.tgz#502df72f7d9715cd63868c111eaff965378d3510"
-  integrity sha512-ZA9Oy13pxS/0NU8rKfZsuEqlVc4NFpP7r9aGqJw8r6sF2jI837fmxZPb8I0t3iYSM59N+m16btHI3RRmTBANNg==
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.6.tgz#e462bc3100d464d3c50b0cabef0e4cd37613ef5f"
+  integrity sha512-uZuUIGXfY7IzS31xtPigxPl5X52xSSh1J3w/mYHV48k22MCJ0bF86DUBCf5O4GtJJhUxLwM1ZpYPF0EBxpAXSQ==
   dependencies:
-    "@appium/base-driver" "^8.3.0"
-    "@appium/support" "^2.55.3"
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.3.1"
     bluebird "^3.5.1"
@@ -4385,9 +4383,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.23.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.23.0.tgz#b223602b88d459dec8ce92c940568fa72f057874"
-  integrity sha512-wcjzgQqAu6A0l7G5T2xZtO5Op84Vz6AWhe0ODJBwgKVRvxs0eH8X/4rcF37DysLhI38Gz5E4FAT7Vco+9Bg0aA==
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.24.0.tgz#e907fc95a9f315c5289e9b4c76e855407093202e"
+  integrity sha512-UMZWX7BfmXwEw3CW8gOWnErbR7I1JYO6msa4vQav1EiUbPF1TxEN5vvQiKBu1wDHXKbPIWi3/elXAUphqT90gQ==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
@@ -4402,7 +4400,7 @@ beachball@^2.20.0:
     semver "^6.1.1"
     toposort "^2.0.2"
     uuid "^8.3.1"
-    workspace-tools "^0.19.0"
+    workspace-tools "^0.21.0"
     yargs-parser "^20.2.4"
 
 big-integer@1.6.x, big-integer@^1.6.44:
@@ -11397,9 +11395,9 @@ react-native-svg@^12.3.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^1.1.4:
-  version "1.3.10"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.3.10.tgz#db8e9238b2a174ca6b265a06593d09a207770be8"
-  integrity sha512-6VA/SJoKjyW3jBucUvBFumIB8bLBf2FoNw4UJYe7FNeXMFTjxua1miQ65mJheR0R3hLZ319MCRpILTIfTxnIvA==
+  version "1.3.11"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.3.11.tgz#73253fea7c9c7e5ce7f1cb5c1d616d2e6a341ee6"
+  integrity sha512-IpQDLbtgKKat1NQXJpWdSKxNloXJqFMU2WqlDHqqdc0xsRxk3xZ08Ia5dAQwJKUDTejky0lFX9QocRKl3IkU9Q==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
@@ -13590,19 +13588,6 @@ workspace-tools@^0.18.2, workspace-tools@^0.18.4:
   version "0.18.4"
   resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.18.4.tgz#a59ca6dc864d07aafc06a9ff4a9ff093456b8765"
   integrity sha512-ZdhlB4NEC3uJ4eW7snyHKOfzMC00HXWO2QbIU3aY8XBdtE+VrU2ajv+oxDUIZfCLD4Wlk3ltWaPt4Jk6IC9bMA==
-  dependencies:
-    "@yarnpkg/lockfile" "^1.1.0"
-    find-up "^4.1.0"
-    git-url-parse "^11.1.2"
-    globby "^11.0.0"
-    jju "^1.4.0"
-    multimatch "^4.0.0"
-    read-yaml-file "^2.0.0"
-
-workspace-tools@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.19.0.tgz#96d5a18b425b898e722cb2295f13773ad238181b"
-  integrity sha512-2I/b9dwxeWxJp5iOMs1uc7hAGuQOd2terwtu/SBAbrU6YbZfR5TWarFteTzwMPlt1y0VzIoZZg5M7o63eFj4Nw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"

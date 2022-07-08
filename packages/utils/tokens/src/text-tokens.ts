@@ -13,6 +13,7 @@ export interface FontStyleTokens {
   fontSize?: keyof Typography['sizes'] | TextStyle['fontSize'];
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
+  fontLetterSpacing?: TextStyle['letterSpacing'];
 }
 
 export type FontTokens = FontStyleTokens & FontVariantTokens;
