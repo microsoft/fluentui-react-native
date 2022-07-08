@@ -1,5 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+// moving marginHorizontal into style object prompts the error "Shallow compare failed for Notification, key: style"
 exports[`Notification component tests Notification default 1`] = `
 <View
   marginHorizontal={16}
