@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Move used tokens types to tokens package",
-  "packageName": "@uifabricshared/foundation-tokens",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
