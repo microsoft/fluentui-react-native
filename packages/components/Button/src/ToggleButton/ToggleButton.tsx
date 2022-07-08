@@ -10,6 +10,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { buttonLookup } from '../Button';
 import { useToggleButton } from './useToggleButton';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
@@ -18,6 +19,7 @@ export const ToggleButton = compose<ToggleButtonType>({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: ToggleButtonProps, useSlots: UseSlots<ToggleButtonType>) => {
     const iconProps = createIconProps(userProps.icon);

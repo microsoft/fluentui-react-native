@@ -9,6 +9,7 @@ import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ButtonCoreProps } from '../Button.types';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -31,6 +32,7 @@ export const FAB = compose<FABType>({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
     const { icon, onClick, ...rest } = userProps;

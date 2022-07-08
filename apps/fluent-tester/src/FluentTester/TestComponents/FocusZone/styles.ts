@@ -3,6 +3,7 @@ import { IStackProps } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Icon } from '@fluentui-react-native/icon';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const focusZoneTestStyles = StyleSheet.create({
   focusZoneViewStyle: {
@@ -31,6 +32,7 @@ export const GridButton = Button.compose({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
   },
   slotProps: {
     content: {

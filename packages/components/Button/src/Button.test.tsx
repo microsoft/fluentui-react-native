@@ -4,6 +4,7 @@ import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Text, View } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 describe('Button component tests', () => {
   it('Button default', () => {
@@ -53,6 +54,7 @@ describe('Button component tests', () => {
         root: View,
         icon: Icon,
         content: Text,
+        shadow: Shadow,
       },
     });
     const tree = renderer.create(<ComposedButton>Composed Button with RNText</ComposedButton>).toJSON();

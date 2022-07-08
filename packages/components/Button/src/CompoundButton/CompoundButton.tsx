@@ -10,6 +10,7 @@ import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { buttonLookup } from '../Button';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
@@ -18,6 +19,7 @@ export const CompoundButton = compose<CompoundButtonType>({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
     secondaryContent: Text,
     contentContainer: View,
   },
