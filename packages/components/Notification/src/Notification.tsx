@@ -36,15 +36,14 @@ export const Notification = compose<NotificationType>({
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
-    const marginHorizontal = isBar ? 0 : 16;
-    const alignSelf = isBar ? 'center' : 'flex-start';
-
     const rootStyle = useMemo(() => {
+      const marginHorizontal = isBar ? 0 : 16;
       return { variant: userProps.variant, marginHorizontal: marginHorizontal };
-    }, ['variant', 'marginHorizontal']);
+    }, ['variant', 'isBar']);
     const messageStyle: ViewStyle = useMemo(() => {
+      const alignSelf = isBar ? 'center' : 'flex-start';
       return { alignSelf: alignSelf };
-    }, ['alignSelf']);
+    }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { title, action, ...mergedProps } = mergeProps(userProps, rootStyle, final);
