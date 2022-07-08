@@ -2,7 +2,7 @@ import * as React from 'react';
 import { commonTestStyles } from '../Common/styles';
 import { ColorValue, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { Shadow, ShadowDepth, shadowStyleFromTheme } from '@fluentui-react-native/experimental-shadow';
+import { Shadow, ShadowDepth, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { useFluentTheme } from '@fluentui-react-native/framework';
@@ -73,7 +73,7 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
 };
 
 function getShadowDescription(depth: ShadowDepth, t: Theme): string {
-  const shadowStyle = shadowStyleFromTheme(t, depth);
+  const shadowStyle = getShadowTokenStyleSet(t, depth);
 
   return (
     '\nAmbient: ' +

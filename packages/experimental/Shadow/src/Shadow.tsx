@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { ShadowProps, shadowName, ShadowDepth } from './Shadow.types';
-import { useFluentTheme, memoize, mergeProps, stagedComponent, Theme } from '@fluentui-react-native/framework';
-import { shadowStyleFromTheme } from './shadowStyle';
+import { ShadowProps, shadowName } from './Shadow.types';
+import { useFluentTheme, mergeProps, stagedComponent } from '@fluentui-react-native/framework';
+import { getShadowTokenStyleSet } from './shadowStyle';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   const theme = useFluentTheme();
@@ -20,10 +20,5 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 });
 
 Shadow.displayName = shadowName;
-
-const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
-function getShadowTokenStyleSetWorker(theme: Theme, depth: ShadowDepth) {
-  return shadowStyleFromTheme(theme, depth);
-}
 
 export default Shadow;
