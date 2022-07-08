@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 07 Jul 2022 21:24:07 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Jul 2022 17:53:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.71.1
+
+Fri, 08 Jul 2022 17:53:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.7
+- Bump @fluentui-react-native/badge to v0.0.47
 
 ## 0.71.0
 
