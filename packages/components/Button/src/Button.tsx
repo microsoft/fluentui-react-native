@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { Text } from '@fluentui-react-native/experimental-text';
@@ -9,6 +9,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -41,6 +42,7 @@ export const Button = compose<ButtonType>({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
@@ -50,7 +52,7 @@ export const Button = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, appearance, ...mergedProps } = mergeProps(button.props, final);
 
       const shouldShowIcon = !loading && icon;
       if (__DEV__ && iconOnly) {
@@ -71,7 +73,7 @@ export const Button = compose<ButtonType>({
       }
       const label = accessibilityLabel ?? childText;
 
-      return (
+      const buttonWithoutShadow = (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {loading && <ActivityIndicator />}
           {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
@@ -81,6 +83,13 @@ export const Button = compose<ButtonType>({
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
+
+      const shouldShowShadow = !appearance && Platform.OS === 'macos';
+      if (shouldShowShadow) {
+        return <Slots.shadow>{buttonWithoutShadow}</Slots.shadow>;
+      } else {
+        return buttonWithoutShadow;
+      }
     };
   },
 });
