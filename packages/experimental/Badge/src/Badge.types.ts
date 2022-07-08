@@ -23,6 +23,10 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    */
   height?: number;
   /**
+   * The icon color.
+   */
+  iconColor?: ColorValue;
+  /**
    * Set the left edge of the Badge
    */
   left?: FlexStyle['left'];
@@ -60,11 +64,6 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   square?: BadgeTokens;
 }
 export interface BadgeTokens extends BadgeCoreTokens {
-  /**
-   * The icon color.
-   */
-  iconColor?: ColorValue;
-
   /**
    * The icon color when hovering over the Badge.
    */

@@ -31,7 +31,9 @@ export const avatarStates: (keyof AvatarTokens)[] = [
 const tokensThatAreAlsoProps: (keyof AvatarConfigurableProps)[] = [
   'active',
   'avatarColor',
+  'badgeStatus',
   'initialsColor',
+  'outOfOffice',
   'ringBackgroundColor',
   'ringColor',
   'ringInnerGap',
@@ -157,10 +159,12 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       (tokens: AvatarTokens) => {
         return {
           size: tokens.badgeSize,
+          status: tokens.badgeStatus,
           shape: 'circular',
+          outOfOffice: tokens.outOfOffice,
         };
       },
-      ['badgeSize'],
+      ['badgeSize', 'badgeStatus'],
     ),
   },
 };

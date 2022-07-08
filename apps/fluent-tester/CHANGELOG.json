@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 08 Jul 2022 18:26:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.71.2",
+      "version": "0.71.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ef2a18b53bbc59178c30d1250ff89e64bb2ca5be",
+            "comment": "Change shadowDepth type from '2' to 'shadow2'"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.1",
+            "commit": "ef2a18b53bbc59178c30d1250ff89e64bb2ca5be"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 Jul 2022 17:53:30 GMT",
+      "tag": "@fluentui-react-native/tester_v0.71.1",
+      "version": "0.71.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.7",
+            "commit": "46386028c3e78892915d3c41b275ee7e788d3f2e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.0.47",
+            "commit": "46386028c3e78892915d3c41b275ee7e788d3f2e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Jul 2022 21:24:07 GMT",
       "tag": "@fluentui-react-native/tester_v0.71.0",
       "version": "0.71.0",
