@@ -6,29 +6,22 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
   ({
     borderWidth: 2,
     borderColor: isHighContrast(t) ? 'transparent' : globalTokens.color.white,
-    bottom: -globalTokens.spacing.xs,
-    right: -globalTokens.spacing.xs,
+    bottom: globalTokens.spacing.none,
+    right: globalTokens.spacing.none,
     paddingHorizontal: globalTokens.spacing.none,
     backgroundColor: t.colors.neutralBackground1,
     ...getBadgeColor('lightGreen', t),
     smallest: {
       width: 6,
       height: 6,
-      borderWidth: 1,
-      bottom: -globalTokens.spacing.xxs,
-      right: -globalTokens.spacing.xxs,
     },
     smaller: {
       width: 10,
       height: 10,
-      bottom: -globalTokens.spacing.xxs,
-      right: -globalTokens.spacing.xxs,
     },
     small: {
-      width: 12,
-      height: 12,
-      bottom: -globalTokens.spacing.xxs,
-      right: -globalTokens.spacing.xxs,
+      width: 16,
+      height: 16,
     },
     medium: {
       width: 20,
@@ -39,8 +32,8 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       height: 24,
     },
     largest: {
-      width: 28,
-      height: 28,
+      width: 32,
+      height: 32,
     },
     available: getBadgeColor('lightGreen', t),
     away: getBadgeColor('marigold', t),
@@ -48,10 +41,13 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     busy: getBadgeColor('red', t),
     blocked: getBadgeColor('red', t),
     unknown: getBadgeColor('red', t),
+    doNotDisturb: getBadgeColor('red', t),
     offline: {
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color.grey[38],
     },
-    outOfOffice: getBadgeColor('berry', t),
+    outOfOffice: {
+      ...getBadgeColor('berry', t),
+    },
   } as PresenceBadgeTokens);
 
 function getBadgeColor(color: string, t: Theme) {
@@ -64,5 +60,5 @@ function getBadgeColor(color: string, t: Theme) {
 }
 
 function isHighContrast(t: Theme) {
-  return t.host.appearance === 'highContrast';
+  return t.name === 'HighContrast';
 }
