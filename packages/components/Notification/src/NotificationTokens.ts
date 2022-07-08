@@ -6,7 +6,21 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
   ({
     backgroundColor: t.colors.background,
     color: t.colors.brandForeground1,
+    fontFamily: 'primary',
+    fontSize: 15,
+    fontWeight: '600',
+    fontLineHeight: 20,
+    fontLetterSpacing: -0.24,
+    borderColor: 'transparent',
+    borderWidth: 1,
     padding: 16,
+    hasTitle: {
+      paddingVertical: 12,
+      fontSize: 13,
+      fontWeight: '400',
+      fontLineHeight: 18,
+      fontLetterSpacing: -0.08,
+    },
     primary: {
       backgroundColor: '#EBF3FC',
       color: '#0F6CBD',

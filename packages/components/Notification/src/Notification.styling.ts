@@ -1,9 +1,18 @@
 import { notification, NotificationTokens, NotificationSlotProps, NotificationProps } from './Notification.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultNotificationTokens } from './NotificationTokens';
 
-export const notificationStates: (keyof NotificationTokens)[] = ['primary', 'neutral', 'danger', 'warning'];
+export const notificationStates: (keyof NotificationTokens)[] = [
+  'primary',
+  'neutral',
+  'primaryBar',
+  'primaryOutlineBar',
+  'neutralBar',
+  'danger',
+  'warning',
+  'hasTitle',
+];
 
 export const stylingSettings: UseStylingOptions<NotificationProps, NotificationSlotProps, NotificationTokens> = {
   tokens: [defaultNotificationTokens, notification],
@@ -13,22 +22,34 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       (tokens: NotificationTokens, theme: Theme) => ({
         style: {
           backgroundColor: tokens.backgroundColor,
+          borderColor: tokens.borderColor,
+          marginHorizontal: 16,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
-          alignItems: 'center',
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
-    message: buildProps(
+    contentContainer: buildProps(() => {
+      return {
+        style: {
+          flex: 1,
+          flexDirection: 'column',
+        },
+      };
+    }),
+    title: buildProps(
       (tokens: NotificationTokens) => {
         return {
           style: {
             color: tokens.color,
-            fontSize: 16,
+            fontSize: 15,
+            fontWeight: '600',
+            lineHeight: 20,
+            letterSpacing: -0.24,
             flex: 1,
             flexGrow: 1,
           },
@@ -36,15 +57,31 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color'],
     ),
-    endText: buildProps(
+    message: buildProps(
+      (tokens: NotificationTokens, theme: Theme) => {
+        return {
+          style: {
+            color: tokens.color,
+            flex: 1,
+            flexGrow: 1,
+            ...fontStyles.from(tokens, theme),
+          },
+        };
+      },
+      ['color', ...fontStyles.keys],
+    ),
+    action: buildProps(
       (tokens: NotificationTokens) => {
         return {
           style: {
             color: tokens.color,
-            fontSize: 16,
-            fontWeight: '500',
-            marginLeft: 34,
+            marginLeft: 16,
+            alignSelf: 'center',
           },
+          appearance: 'subtle',
+          padding: 0,
+          paddingHorizontal: 0,
+          minWidth: 0,
         };
       },
       ['color'],
