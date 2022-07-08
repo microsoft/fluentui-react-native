@@ -2,8 +2,8 @@ import * as React from 'react';
 import { commonTestStyles } from '../Common/styles';
 import { ColorValue, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
-import { Shadow, ShadowDepth } from '@fluentui-react-native/experimental-shadow';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { Shadow, ShadowDepth, shadowStyleFromTheme } from '@fluentui-react-native/experimental-shadow';
+import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 
@@ -30,10 +30,12 @@ interface ShadowTestBoxProps {
 }
 
 const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: ShadowTestBoxProps) => {
-  const themedStyles = getThemedStyles(useTheme());
+  const theme = useTheme();
+  const themedStyles = getThemedStyles(theme);
+
   return (
     <Shadow depth={props.depth}>
-      <Text
+      <View
         style={[
           commonTestStyles.view,
           themedStyles.effectBox,
@@ -41,10 +43,10 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
           themedStyles.padding,
           { backgroundColor: props.backgroundColor },
         ]}
-        variant="bodySemibold"
       >
-        {props.depth}
-      </Text>
+        <Text variant="bodySemibold">{props.depth}</Text>
+        <Text>{getShadowDescription(props.depth, theme)}</Text>
+      </View>
     </Shadow>
   );
 };
@@ -53,7 +55,7 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
   const theme = useFluentTheme();
 
   return (
-    <View style={{ padding: 20 }}>
+    <View>
       <ShadowTestBox depth="shadow2" backgroundColor={theme.colors.background} />
       <ShadowTestBox depth="shadow4" backgroundColor={theme.colors.background} />
       <ShadowTestBox depth="shadow8" backgroundColor={theme.colors.background} />
@@ -69,3 +71,14 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
     </View>
   );
 };
+
+function getShadowDescription(depth: ShadowDepth, t: Theme): string {
+  const shadowStyle = shadowStyleFromTheme(t, depth);
+
+  return (
+    '\nAmbient: ' +
+    JSON.stringify(shadowStyle.ambient, undefined, ' ').split('\n').join('').replace(/['"]+/g, '') +
+    '\n\nKey: ' +
+    JSON.stringify(shadowStyle.key, undefined, ' ').split('\n').join('').replace(/['"]+/g, '')
+  );
+}
