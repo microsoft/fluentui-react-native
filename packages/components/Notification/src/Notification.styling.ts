@@ -24,10 +24,10 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           backgroundColor: tokens.backgroundColor,
           borderColor: tokens.borderColor,
-          marginHorizontal: tokens.marginHorizontal,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
+          marginHorizontal: tokens.marginHorizontal,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
@@ -47,12 +47,12 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 15,
-            fontWeight: '600',
-            lineHeight: 20,
-            letterSpacing: -0.24, // iOS only prop
             flex: 1,
             flexGrow: 1,
+            fontSize: 15,
+            fontWeight: '600',
+            letterSpacing: -0.24, // iOS only prop
+            lineHeight: 20,
           },
         };
       },
@@ -62,28 +62,28 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       (tokens: NotificationTokens, theme: Theme) => {
         return {
           style: {
+            alignSelf: tokens.alignSelf,
             color: tokens.color,
             flex: 1,
             flexGrow: 1,
-            alignSelf: tokens.alignSelf,
             ...fontStyles.from(tokens, theme),
           },
         };
       },
-      ['color', ...fontStyles.keys],
+      ['alignSelf', 'color', ...fontStyles.keys],
     ),
     action: buildProps(
       (tokens: NotificationTokens) => {
         return {
           style: {
+            alignSelf: 'center',
             color: tokens.color,
             marginLeft: 16,
-            alignSelf: 'center',
           },
           appearance: 'subtle',
+          minWidth: 0,
           padding: 0,
           paddingHorizontal: 0,
-          minWidth: 0,
         };
       },
       ['color'],
