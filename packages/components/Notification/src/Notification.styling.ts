@@ -27,7 +27,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
-          marginHorizontal: tokens.marginHorizontal,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
@@ -62,7 +61,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       (tokens: NotificationTokens, theme: Theme) => {
         return {
           style: {
-            alignSelf: tokens.alignSelf,
             color: tokens.color,
             flex: 1,
             flexGrow: 1,
@@ -70,7 +68,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           },
         };
       },
-      ['alignSelf', 'color', ...fontStyles.keys],
+      ['color', ...fontStyles.keys],
     ),
     action: buildProps(
       (tokens: NotificationTokens) => {

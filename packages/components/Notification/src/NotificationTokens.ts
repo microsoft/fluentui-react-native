@@ -4,7 +4,6 @@ import { NotificationTokens } from './Notification.types';
 
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
   ({
-    alignSelf: 'flex-start',
     backgroundColor: t.colors.background,
     borderColor: 'transparent',
     borderRadius: 12,
@@ -15,7 +14,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontLineHeight: 20,
     fontSize: 15,
     fontWeight: '600',
-    marginHorizontal: 16,
     padding: 16,
     hasTitle: {
       fontLetterSpacing: -0.08, // iOS only prop
@@ -25,10 +23,8 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       paddingVertical: 12,
     },
     isBar: {
-      alignSelf: 'center',
       borderRadius: 0,
       fontWeight: '400',
-      marginHorizontal: 0,
     },
     primary: {
       backgroundColor: '#EBF3FC',

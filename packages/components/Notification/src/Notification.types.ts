@@ -3,13 +3,13 @@ import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
 import { ButtonProps } from '@fluentui-react-native/button';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { FlexStyle } from 'react-native';
+import { FlexAlignType } from 'react-native';
 
 export const notification = 'Notification';
 export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
 export type NotificationVariant = typeof NotificationVariants[number];
 
-export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens, FlexStyle {
+export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
   primary: NotificationTokens;
   neutral: NotificationTokens;
   primaryBar: NotificationTokens;
@@ -29,6 +29,8 @@ export interface NotificationProps {
   title?: string;
   action?: string;
   onPress?: (e: InteractionEvent) => void;
+  alignSelf?: FlexAlignType;
+  marginHorizontal?: number;
 }
 
 export interface NotificationSlotProps {
