@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Thu, 07 Jul 2022 21:24:07 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "0bd7f44b8568fef76490f87cfd3f2de384807d13",
+            "comment": "added letter spacing"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 May 2022 18:43:10 GMT",
       "tag": "@fluentui-react-native/tokens_v0.14.0",
       "version": "0.14.0",

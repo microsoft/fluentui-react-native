@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
+This log was last generated on Thu, 07 Jul 2022 21:24:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.27
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.15.0
 
 ## 0.11.26
 
