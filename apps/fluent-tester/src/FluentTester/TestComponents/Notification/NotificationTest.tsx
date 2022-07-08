@@ -77,6 +77,7 @@ const PrimaryBarTest: React.FunctionComponent = () => {
   return (
     <Notification
       variant={'primaryBar'}
+      title="Kat's iPhone X"
       onPress={() => {
         console.log('Notification tapped');
       }}

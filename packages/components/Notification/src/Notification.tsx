@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { View, ViewStyle } from 'react-native';
+import { PressableProps, View, ViewStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stylingSettings } from './Notification.styling';
@@ -36,17 +36,18 @@ export const Notification = compose<NotificationType>({
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
-    const rootStyle = useMemo(() => {
+    const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
-      return { variant: userProps.variant, marginHorizontal: marginHorizontal };
-    }, ['variant', 'isBar']);
+      return { marginHorizontal: marginHorizontal };
+    }, ['isBar']);
     const messageStyle: ViewStyle = useMemo(() => {
       const alignSelf = isBar ? 'center' : 'flex-start';
       return { alignSelf: alignSelf };
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { title, action, ...mergedProps } = mergeProps(userProps, rootStyle, final);
+      const { title, action, variant, ...rest } = mergeProps(userProps, final);
+      const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
       return (
         <Slots.root {...mergedProps}>

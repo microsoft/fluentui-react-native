@@ -70,21 +70,17 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    action: buildProps(
-      (tokens: NotificationTokens) => {
-        return {
-          style: {
-            alignSelf: 'center',
-            color: tokens.color,
-            marginLeft: 16,
-          },
-          appearance: 'subtle',
-          minWidth: 0,
-          padding: 0,
-          paddingHorizontal: 0,
-        };
-      },
-      ['color'],
-    ),
+    action: buildProps(() => {
+      return {
+        style: {
+          alignSelf: 'center',
+          marginLeft: 16,
+        },
+        appearance: 'subtle',
+        minWidth: 0,
+        padding: 0,
+        paddingHorizontal: 0,
+      };
+    }, ['color']),
   },
 };
