@@ -35,19 +35,15 @@ export const Notification = compose<NotificationType>({
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
-    let marginHorizontal = 16;
-    let alignSelf: FlexAlignType = 'flex-start';
+    const isBar = (['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
+    const marginHorizontal = isBar ? 0: 16
+    const alignSelf = isBar ? 'center' : 'flex-start';
 
-    if (['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant)) {
-      marginHorizontal = 0;
-      alignSelf = 'center' as FlexAlignType;
-    }
-
-    let rootStyle = useMemo(() => {
-      return { variant: userProps.variant, marginHorizontal: marginHorizontal };
+    const rootStyle: ViewStyle = useMemo(() => {
+      return { style: { marginHorizontal: marginHorizontal } };
     }, ['variant', 'marginHorizontal']);
-    let messageStyle = useMemo(() => {
-      return { alignSelf: alignSelf };
+    let messageStyle: ViewStyle = useMemo(() => {
+      return { style: {alignSelf: alignSelf } };
     }, ['alignSelf']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
