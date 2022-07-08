@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Fri, 08 Jul 2022 17:53:30 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.47",
+      "version": "0.0.47",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "46386028c3e78892915d3c41b275ee7e788d3f2e",
+            "comment": "Fixed colorful icons in HC"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Jul 2022 21:24:07 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.46",
       "version": "0.0.46",
