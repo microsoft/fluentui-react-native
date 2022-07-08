@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "added letter spacing",
-  "packageName": "@fluentui-react-native/tokens",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
