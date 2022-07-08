@@ -8,6 +8,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     color: t.colors.defaultContent,
     borderColor: t.colors.defaultBorder,
     iconColor: t.colors.defaultContent,
+    shadowDepth: 'shadow2',
     disabled: {
       backgroundColor: t.colors.defaultDisabledBackground,
       color: t.colors.defaultDisabledContent,
@@ -37,6 +38,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       color: t.colors.primaryButtonText,
       borderColor: t.colors.brandedBorder,
       iconColor: t.colors.brandedIcon,
+      shadowDepth: undefined,
       disabled: {
         backgroundColor: t.colors.primaryButtonBackgroundDisabled,
         color: t.colors.brandedDisabledContent,
@@ -67,6 +69,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       color: t.colors.ghostContent,
       borderColor: t.colors.ghostBorder,
       iconColor: t.colors.ghostIcon,
+      shadowDepth: undefined,
       disabled: {
         color: t.colors.ghostDisabledContent,
         borderColor: t.colors.ghostDisabledBorder,
