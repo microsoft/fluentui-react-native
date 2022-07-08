@@ -29,8 +29,6 @@ export interface NotificationProps {
   title?: string;
   action?: string;
   onPress?: (e: InteractionEvent) => void;
-  alignSelf?: FlexAlignType;
-  marginHorizontal?: number;
 }
 
 export interface NotificationSlotProps {
