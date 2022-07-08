@@ -81,6 +81,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         padding: 0,
         paddingHorizontal: 0,
       };
-    }, ['color']),
+    }),
   },
 };

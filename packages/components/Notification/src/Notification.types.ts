@@ -33,7 +33,7 @@ export interface NotificationProps {
 export interface NotificationSlotProps {
   root: PressableProps;
   contentContainer: IViewProps;
-  title: ITextProps;
+  title?: ITextProps;
   message: ITextProps;
   action?: ButtonProps;
 }

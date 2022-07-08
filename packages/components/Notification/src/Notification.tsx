@@ -46,7 +46,7 @@ export const Notification = compose<NotificationType>({
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { title, action, variant, ...rest } = mergeProps(userProps, final);
+      const { variant, title, action, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
       return (
