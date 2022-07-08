@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { View, FlexAlignType } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stylingSettings } from './Notification.styling';
@@ -35,15 +35,15 @@ export const Notification = compose<NotificationType>({
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
-    const isBar = (['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
-    const marginHorizontal = isBar ? 0: 16
+    const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
+    const marginHorizontal = isBar ? 0 : 16;
     const alignSelf = isBar ? 'center' : 'flex-start';
 
-    const rootStyle: ViewStyle = useMemo(() => {
-      return { style: { marginHorizontal: marginHorizontal } };
+    const rootStyle = useMemo(() => {
+      return { variant: userProps.variant, marginHorizontal: marginHorizontal };
     }, ['variant', 'marginHorizontal']);
-    let messageStyle: ViewStyle = useMemo(() => {
-      return { style: {alignSelf: alignSelf } };
+    const messageStyle: ViewStyle = useMemo(() => {
+      return { alignSelf: alignSelf };
     }, ['alignSelf']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
