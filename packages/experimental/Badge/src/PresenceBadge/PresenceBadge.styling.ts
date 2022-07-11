@@ -1,6 +1,6 @@
 import { PresenceBadgeTokens, PresenceBadgeSlotProps, PresenceBadgeProps, presenceBadgeName } from './PresenceBadge.types';
 import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from '../BadgeTokens';
 import { defaultPresenceBadgeTokens } from './PresenceBadgeTokens';
 import { coreBadgeStates, getBadgePosition } from '../Badge.styling';
@@ -24,14 +24,13 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
   slotProps: {
     root: buildProps(
       (tokens: PresenceBadgeTokens, theme: Theme) => {
-        const { width, height, borderWidth, right, bottom } = tokens;
+        const { width, height, borderWidth } = tokens;
         const borderGap = borderWidth * 2;
         return {
           style: {
             ...getBadgePosition(tokens),
             width: width + borderGap,
             height: height + borderGap,
-            display: 'flex',
             alignItems: 'center',
             flexDirection: 'row',
             alignSelf: 'flex-start',
@@ -39,13 +38,11 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
             position: 'absolute',
             backgroundColor: tokens.backgroundColor,
             ...borderStyles.from(tokens, theme),
-            ...layoutStyles.from(tokens, theme),
-            right,
-            bottom,
+            paddingHorizontal: tokens.paddingHorizontal,
           },
         };
       },
-      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', 'borderWidth', 'paddingHorizontal', ...borderStyles.keys],
     ),
     svg: buildProps(
       (tokens: PresenceBadgeTokens) => ({
