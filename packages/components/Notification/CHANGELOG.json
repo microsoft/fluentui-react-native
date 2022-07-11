@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Mon, 11 Jul 2022 18:16:56 GMT",
+      "tag": "@fluentui-react-native/notification_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "2f0729d12058a516a029ceb7316b302388a89c4c",
+            "comment": "add bar tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 Jul 2022 21:23:37 GMT",
       "tag": "@fluentui-react-native/notification_v0.4.1",
       "version": "0.4.1",

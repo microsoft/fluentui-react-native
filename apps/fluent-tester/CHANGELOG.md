@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 11 Jul 2022 15:40:06 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Jul 2022 18:16:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.72.0
+
+Mon, 11 Jul 2022 18:16:56 GMT
+
+### Minor changes
+
+- add bar tests (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.5.0
 
 ## 0.71.4
 
