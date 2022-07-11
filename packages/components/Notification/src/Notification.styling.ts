@@ -12,6 +12,7 @@ export const notificationStates: (keyof NotificationTokens)[] = [
   'danger',
   'warning',
   'hasTitle',
+  'isBar',
 ];
 
 export const stylingSettings: UseStylingOptions<NotificationProps, NotificationSlotProps, NotificationTokens> = {
@@ -23,7 +24,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           backgroundColor: tokens.backgroundColor,
           borderColor: tokens.borderColor,
-          marginHorizontal: 16,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -46,12 +46,12 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            fontSize: 15,
-            fontWeight: '600',
-            lineHeight: 20,
-            letterSpacing: -0.24,
             flex: 1,
             flexGrow: 1,
+            fontSize: 15,
+            fontWeight: '600',
+            letterSpacing: -0.24, // iOS only prop
+            lineHeight: 20,
           },
         };
       },
@@ -70,21 +70,17 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    action: buildProps(
-      (tokens: NotificationTokens) => {
-        return {
-          style: {
-            color: tokens.color,
-            marginLeft: 16,
-            alignSelf: 'center',
-          },
-          appearance: 'subtle',
-          padding: 0,
-          paddingHorizontal: 0,
-          minWidth: 0,
-        };
-      },
-      ['color'],
-    ),
+    action: buildProps(() => {
+      return {
+        style: {
+          alignSelf: 'center',
+          marginLeft: 16,
+        },
+        appearance: 'subtle',
+        minWidth: 0,
+        padding: 0,
+        paddingHorizontal: 0,
+      };
+    }),
   },
 };

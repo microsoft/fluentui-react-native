@@ -2,6 +2,27 @@
   "name": "@uifabricshared/foundation-tokens",
   "entries": [
     {
+      "date": "Fri, 08 Jul 2022 21:23:36 GMT",
+      "tag": "@uifabricshared/foundation-tokens_v0.11.4",
+      "version": "0.11.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/foundation-tokens",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000",
+            "comment": "Move used tokens types to tokens package"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/foundation-tokens",
+            "comment": "Bump @fluentui-react-native/tokens to v0.15.1",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 31 Mar 2022 07:27:48 GMT",
       "tag": "@uifabricshared/foundation-tokens_v0.11.3",
       "version": "0.11.3",

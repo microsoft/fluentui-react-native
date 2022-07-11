@@ -1,8 +1,54 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 08 Jul 2022 18:26:51 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Jul 2022 18:16:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.72.0
+
+Mon, 11 Jul 2022 18:16:56 GMT
+
+### Minor changes
+
+- add bar tests (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.5.0
+
+## 0.71.4
+
+Mon, 11 Jul 2022 15:40:06 GMT
+
+### Patches
+
+- Fixed tester with Toggle buttons (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.9
+
+## 0.71.3
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.8
+- Bump @fluentui-react-native/badge to v0.0.48
+- Bump @fluentui-react-native/button to v0.22.31
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.31
+- Bump @fluentui-react-native/experimental-avatar to v0.15.3
+- Bump @fluentui-react-native/experimental-button to v0.15.32
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.16
+- Bump @fluentui-react-native/experimental-drawer to v0.1.15
+- Bump @fluentui-react-native/experimental-expander to v0.3.35
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.53
+- Bump @fluentui-react-native/experimental-shadow to v0.2.2
+- Bump @fluentui-react-native/experimental-shimmer to v0.6.35
+- Bump @fluentui-react-native/experimental-tabs to v0.4.54
+- Bump @fluentui-react-native/experimental-text to v0.9.2
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/icon to v0.12.3
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/menu to v1.0.4
+- Bump @fluentui-react-native/notification to v0.4.1
+- Bump @fluentui-react-native/stack to v0.6.31
+- Bump @fluentui/react-native to v0.30.7
 
 ## 0.71.2
 

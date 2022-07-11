@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Fri, 08 Jul 2022 21:23:37 GMT",
+      "tag": "@fluentui-react-native/callout_v0.20.10",
+      "version": "0.20.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.5",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.15.1",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.11.23",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 07 Jul 2022 21:24:07 GMT",
       "tag": "@fluentui-react-native/callout_v0.20.9",
       "version": "0.20.9",

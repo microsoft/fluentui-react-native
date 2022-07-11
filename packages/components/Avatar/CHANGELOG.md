@@ -1,8 +1,28 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Fri, 08 Jul 2022 17:53:30 GMT and should not be manually modified.
+This log was last generated on Mon, 11 Jul 2022 15:40:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.9
+
+Mon, 11 Jul 2022 15:40:06 GMT
+
+### Patches
+
+- Fixed bug with text-scaling (v.kozova13@gmail.com)
+
+## 1.1.8
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.48
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/icon to v0.12.3
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/tokens to v0.15.1
 
 ## 1.1.7
 
