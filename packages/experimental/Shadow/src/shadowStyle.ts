@@ -50,7 +50,7 @@ const shadowOpacityFromRGBAColor = (rgbaColor: ColorValue) => {
 };
 
 const emptyShadowStyle = {
-  shadowColor: 0,
+  shadowColor: '000000',
   shadowOpacity: 0,
   shadowRadius: 0,
   shadowOffset: {
