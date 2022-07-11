@@ -6,9 +6,10 @@ import { svgProps } from '../Common/iconExamples';
 
 export const ShadowButtonTestSection: React.FunctionComponent = () => {
   if (Platform.OS === 'ios') {
+    const iconProps = { svgSource: svgProps, width: 20, height: 20 };
     return (
       <View style={{ padding: 24, margin: 16 }}>
-        <FAB style={commonTestStyles.vmargin} icon={{ svgSource: svgProps, width: 20, height: 20 }}>
+        <FAB style={commonTestStyles.vmargin} icon={iconProps}>
           FAB
         </FAB>
       </View>
