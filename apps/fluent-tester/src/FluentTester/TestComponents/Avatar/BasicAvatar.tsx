@@ -1,13 +1,13 @@
 import React, { useState, useCallback, FunctionComponent } from 'react';
 import { AvatarSize, AvatarSizes, AvatarColor, AvatarColors, Avatar, AvatarActive } from '@fluentui-react-native/avatar';
 import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-native/badge';
-import { Switch, View, Text, ColorValue, Platform } from 'react-native';
+import { View, Text, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
 import TestSvg from '../../test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { StyledPicker } from '../Common/StyledPicker';
+import { ToggleButton } from '@fluentui/react-native';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -31,9 +31,6 @@ export const StandardUsage: FunctionComponent = () => {
   const onSizeChange = useCallback((value) => setImageSize(value), []);
 
   const onPresenceChange = useCallback((value) => setPresence(value), []);
-
-  const theme = useTheme();
-  const textStyles = { color: theme.colors.inputText as ColorValue };
   const avatarSizesForPicker = allSizes.map((size) => size.toString());
 
   const activeAppearance = 'ring';
@@ -53,18 +50,15 @@ export const StandardUsage: FunctionComponent = () => {
   return (
     <View style={commonStyles.root}>
       <View style={commonStyles.settingsPicker}>
-        <View style={commonStyles.switch}>
-          <Text style={textStyles}>Show image</Text>
-          <Switch value={showImage} onValueChange={setShowImage} />
-        </View>
-        <View style={commonStyles.switch}>
-          <Text style={textStyles}>Set square Avatar</Text>
-          <Switch value={isSquare} onValueChange={() => setSquare(!isSquare)} />
-        </View>
-        <View style={commonStyles.switch}>
-          <Text style={textStyles}>Set outOfOffice</Text>
-          <Switch value={outOfOffice} onValueChange={() => setOutOfOffice(!outOfOffice)} />
-        </View>
+        <ToggleButton onClick={() => setShowImage(!showImage)} checked={showImage} style={commonStyles.vmargin}>
+          {showImage ? 'Hide' : 'Show'} image
+        </ToggleButton>
+        <ToggleButton onClick={() => setSquare(!isSquare)} checked={isSquare} style={commonStyles.vmargin}>
+          Set {isSquare ? ' circle' : ' square'} Avatar
+        </ToggleButton>
+        <ToggleButton onClick={() => setOutOfOffice(!outOfOffice)} checked={outOfOffice} style={commonStyles.vmargin}>
+          Set {outOfOffice ? ' In office' : ' Out of office'}
+        </ToggleButton>
 
         <StyledPicker prompt="Size" selected={imageSize.toString()} onChange={onSizeChange} collection={avatarSizesForPicker} />
         <StyledPicker prompt="Active" selected={active} onChange={onActiveChange} collection={avatarActive} />

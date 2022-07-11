@@ -1,6 +1,6 @@
 import { ColorValue } from 'react-native';
-import { IOperationSet } from '@uifabricshared/foundation-tokens';
-import { ITheme } from '@uifabricshared/theming-ramp';
+import { OperationSet } from './token.types';
+import { Theme } from '@fluentui-react-native/theme-types';
 import { tokenBuilder } from './tokenBuilder';
 
 export interface IShadowTokens {
@@ -14,7 +14,7 @@ export interface IShadowTokens {
   elevation?: number;
 }
 
-export const shadowTokens: IOperationSet<IShadowTokens, ITheme> = [
+export const shadowTokens: OperationSet<IShadowTokens, Theme> = [
   { source: 'shadowColor' },
   { source: 'shadowOffset' },
   { source: 'shadowOpacity' },
