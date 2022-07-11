@@ -82,11 +82,11 @@
     "flow-bin": "^0.98.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react": "17.0.2",
-    "react-native": "^0.66.0-0",
-    "react-native-macos": "^0.66.0-0",
+    "react-native": "^0.66.0",
+    "react-native-macos": "^0.66.0",
     "react-native-svg": "^12.1.1",
     "react-native-svg-transformer": "^1.0.0",
-    "react-native-windows": "^0.66.0-0",
+    "react-native-windows": "^0.66.0",
     "react-test-renderer": "17.0.1",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -96,10 +96,10 @@
   "peerDependencies": {
     "@office-iss/react-native-win32": "^0.66.0",
     "react": "17.0.2",
-    "react-native": "^0.66.0-0",
-    "react-native-macos": "^0.66.0-0",
+    "react-native": "^0.66.0",
+    "react-native-macos": "^0.66.0",
     "react-native-svg": "^12.1.1",
-    "react-native-windows": "^0.66.0-0"
+    "react-native-windows": "^0.66.0"
   },
   "jest": {
     "preset": "react-native"
