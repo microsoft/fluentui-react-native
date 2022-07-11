@@ -6,7 +6,6 @@ import { Platform, View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import TestSvg from './test.svg';
 import { InteractionEvent, isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
-import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });
@@ -16,7 +15,6 @@ const ComposedButton = Button.compose({
     root: View,
     icon: Icon,
     content: CustomText,
-    shadow: Shadow,
   },
   slotProps: {
     content: {

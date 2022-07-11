@@ -6,7 +6,6 @@ import { Text } from '@fluentui-react-native/experimental-text';
 import { compose, UseSlots } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { ButtonCoreProps } from '../Button.types';
-import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const FAB = compose<FABType>({
   displayName: fabName,
@@ -14,7 +13,6 @@ export const FAB = compose<FABType>({
     root: View,
     icon: Icon,
     content: Text,
-    shadow: Shadow,
   },
   useRender: (_userProps: ButtonCoreProps, _useSlots: UseSlots<FABType>) => {
     return (_final: ButtonCoreProps, ..._children: React.ReactNode[]) => {
