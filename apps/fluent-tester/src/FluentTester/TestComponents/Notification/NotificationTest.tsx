@@ -7,6 +7,7 @@ import PlayButton from './assets/play_button.svg';
 const svgProps: SvgIconProps = {
   src: PlayButton,
 };
+const iconProps = { svgSource: svgProps };
 
 const PrimaryTest: React.FunctionComponent = () => {
   return (
@@ -26,7 +27,7 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
   return (
     <Notification
       variant={'primary'}
-      icon={{ svgSource: svgProps }}
+      icon={iconProps}
       title="Kat's iPhone X"
       action="X"
       onPress={() => {

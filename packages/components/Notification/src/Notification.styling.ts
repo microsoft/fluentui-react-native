@@ -38,6 +38,8 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         alignSelf: 'center',
         marginRight: 16,
       },
+      height: 24,
+      width: 24,
     })),
     contentContainer: buildProps(() => {
       return {
