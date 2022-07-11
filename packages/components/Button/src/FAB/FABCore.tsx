@@ -66,12 +66,14 @@ export const FAB = compose<FABType>({
       const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {icon && <Slots.icon {...iconProps} />}
-          {React.Children.map(children, (child) =>
-            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
-          )}
-        </Slots.root>
+        <Slots.shadow>
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {icon && <Slots.icon {...iconProps} />}
+            {React.Children.map(children, (child) =>
+              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+            )}
+          </Slots.root>
+        </Slots.shadow>
       );
     };
   },
