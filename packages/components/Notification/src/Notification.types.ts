@@ -17,6 +17,7 @@ export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorT
   danger: NotificationTokens;
   warning: NotificationTokens;
   hasTitle: NotificationTokens;
+  isBar: NotificationTokens;
 }
 
 export interface NotificationProps {
@@ -32,7 +33,7 @@ export interface NotificationProps {
 export interface NotificationSlotProps {
   root: PressableProps;
   contentContainer: IViewProps;
-  title: ITextProps;
+  title?: ITextProps;
   message: ITextProps;
   action?: ButtonProps;
 }
