@@ -52,7 +52,7 @@ export const Button = compose<ButtonType>({
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, appearance, ...mergedProps } = mergeProps(button.props, final);
+      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
 
       const shouldShowIcon = !loading && icon;
       if (__DEV__ && iconOnly) {
@@ -73,7 +73,7 @@ export const Button = compose<ButtonType>({
       }
       const label = accessibilityLabel ?? childText;
 
-      const buttonWithoutShadow = (
+      return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {loading && <ActivityIndicator />}
           {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
@@ -83,13 +83,6 @@ export const Button = compose<ButtonType>({
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
         </Slots.root>
       );
-
-      const shouldShowShadow = !appearance && Platform.OS === 'macos';
-      if (shouldShowShadow) {
-        return <Slots.shadow>{buttonWithoutShadow}</Slots.shadow>;
-      } else {
-        return buttonWithoutShadow;
-      }
     };
   },
 });
