@@ -53,6 +53,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           style: {
             alignItems: 'center',
             justifyContent: 'center',
+            flexDirection: 'row',
+            alignSelf: 'flex-start',
             minWidth: avatarSize,
             minHeight: avatarSize,
             opacity: avatarOpacity,
@@ -95,6 +97,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             borderColor: tokens.borderColor,
             marginTop: ringConfig.ringThickness,
             marginLeft: ringConfig.ringThickness,
+            aspectRatio: 1,
           },
         };
       },
@@ -113,6 +116,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             borderColor: borderColor,
             marginTop: ringConfig.ringThickness,
             marginLeft: ringConfig.ringThickness,
+            aspectRatio: 1,
           },
         };
       },
@@ -149,6 +153,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             borderWidth: ringConfig.ringThickness,
             backgroundColor: ringBackgroundColor || 'transparent',
             borderColor: ringColor,
+            aspectRatio: 1,
           },
         };
       },
