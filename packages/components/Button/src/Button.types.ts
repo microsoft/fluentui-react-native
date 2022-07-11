@@ -154,7 +154,7 @@ export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
   icon: IconProps;
   content: TextProps;
-  shadow: ShadowProps;
+  shadow?: ShadowProps;
 }
 
 export interface ButtonType {
