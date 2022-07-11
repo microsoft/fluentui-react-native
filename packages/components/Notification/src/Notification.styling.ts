@@ -33,6 +33,12 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
+    icon: buildProps(() => ({
+      style: {
+        alignSelf: 'center',
+        marginRight: 16,
+      },
+    })),
     contentContainer: buildProps(() => {
       return {
         style: {

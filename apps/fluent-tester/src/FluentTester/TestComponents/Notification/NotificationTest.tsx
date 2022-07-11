@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { SvgIconProps } from '@fluentui-react-native/icon';
+import PlayButton from './assets/play_button.svg';
+
+const svgProps: SvgIconProps = {
+  src: PlayButton,
+};
 
 const PrimaryTest: React.FunctionComponent = () => {
   return (
@@ -16,10 +22,11 @@ const PrimaryTest: React.FunctionComponent = () => {
   );
 };
 
-const PrimaryTestWithTitle: React.FunctionComponent = () => {
+const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
   return (
     <Notification
       variant={'primary'}
+      icon={{ svgSource: svgProps }}
       title="Kat's iPhone X"
       action="X"
       onPress={() => {
@@ -118,8 +125,8 @@ const notificationSections: TestSection[] = [
     component: PrimaryTest,
   },
   {
-    name: 'Primary With Title',
-    component: PrimaryTestWithTitle,
+    name: 'Primary with Title and Icon',
+    component: PrimaryTestWithTitleAndIcon,
   },
   {
     name: 'Neutral',

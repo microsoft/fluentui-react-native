@@ -2,6 +2,7 @@
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
+import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stylingSettings } from './Notification.styling';
@@ -28,6 +29,7 @@ export const Notification = compose<NotificationType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
+    icon: Icon,
     contentContainer: View,
     title: Text,
     message: Text,
@@ -46,11 +48,12 @@ export const Notification = compose<NotificationType>({
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, title, action, ...rest } = mergeProps(userProps, final);
+      const { variant, icon, title, action, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
       return (
         <Slots.root {...mergedProps}>
+          {icon && <Slots.icon {...icon} width={24} height={24}></Slots.icon>}
           <Slots.contentContainer>
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
