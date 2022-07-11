@@ -4,6 +4,7 @@ exports[`Text component tests Text all props 1`] = `
 <Text
   ellipsizeMode="tail"
   numberOfLines={0}
+  onAccessibilityTap={[Function]}
   style={
     Object {
       "color": "#323130",
@@ -25,6 +26,7 @@ exports[`Text component tests Text all tokens 1`] = `
 <Text
   ellipsizeMode="tail"
   numberOfLines={0}
+  onAccessibilityTap={[Function]}
   style={
     Object {
       "color": "#323130",
@@ -46,6 +48,7 @@ exports[`Text component tests Text default 1`] = `
 <Text
   ellipsizeMode="tail"
   numberOfLines={0}
+  onAccessibilityTap={[Function]}
   style={
     Object {
       "color": "#323130",
@@ -67,6 +70,7 @@ exports[`Text component tests Text variants render correctly with style 1`] = `
 <Text
   ellipsizeMode="tail"
   numberOfLines={0}
+  onAccessibilityTap={[Function]}
   style={
     Object {
       "color": "blue",
