@@ -11,7 +11,9 @@ exports[`Avatar rendering renders Avatar 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "alignSelf": "flex-start",
       "aspectRatio": 1,
+      "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
@@ -24,6 +26,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
     style={
       Object {
         "alignItems": "center",
+        "aspectRatio": 1,
         "backgroundColor": "#e6e6e6",
         "borderColor": "#ffffff",
         "borderRadius": 9999,
