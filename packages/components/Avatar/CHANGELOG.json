@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Mon, 11 Jul 2022 15:40:06 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.9",
+      "version": "1.1.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "7e6cd0c2098367efabcd3914e3e84f12c1894740",
+            "comment": "Fixed bug with text-scaling"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 Jul 2022 21:23:37 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.8",
       "version": "1.1.8",
