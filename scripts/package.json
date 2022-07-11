@@ -22,7 +22,7 @@
     "just-scripts": "^1.8.0"
   },
   "devDependencies": {
-    "@react-native-community/cli": "^5.0.1",
+    "@react-native-community/cli": "^6.0.0",
     "@rnx-kit/jest-preset": "^0.1.9",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
