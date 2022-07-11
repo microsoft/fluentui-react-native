@@ -55,9 +55,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
 
   React.useEffect(() => {
     return function cleanup() {
-      clearTimeout(triggerHoverOutTimer);
       clearTimeout(popoverHoverOutTimer);
-      clearTimeout(parentPopoverHoverOutTimer);
     };
   });
 
