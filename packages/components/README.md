@@ -46,7 +46,7 @@ Let's look at how to write a complex component using the compose framework. This
 
 Each control dedicates file using the format [Button.types.ts](./Button/src/deprecated/Button.types.ts) to define the component's tokens, props, and slots.
 
-Button is essentially a composition of View which is a layout element, a Text element, an Icon element, and a Shadow element. The Button's slots reflect this composition. The root slot is a View which will wrap another View, represented as a stack slot which will contain the image and text content.
+Button is essentially a composition of View which is a layout element, a Text element, and an Icon element. The Button's slots reflect this composition. The root slot is a View which will wrap another View, represented as a stack slot which will contain the image and text content.
 
 ```javascript
 export interface IButtonSlotProps {
@@ -54,7 +54,6 @@ export interface IButtonSlotProps {
   stack: ViewProps;
   icon: ImageProps;
   content: ITextProps;
-  shadow: ShadowProps;
 }
 ```
 

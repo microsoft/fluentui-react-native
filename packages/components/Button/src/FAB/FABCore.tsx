@@ -74,11 +74,9 @@ export const FAB = compose<FABType>({
         </Slots.root>
       );
 
-      const fabWithShadow = <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
-
       const hasShadow = Platform.OS === 'ios';
       if (hasShadow) {
-        return fabWithShadow;
+        return <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
       } else {
         return fabWithoutShadow;
       }
