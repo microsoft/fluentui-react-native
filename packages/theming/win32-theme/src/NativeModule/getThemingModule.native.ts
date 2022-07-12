@@ -2,15 +2,6 @@ import { OfficeThemingModule } from './officeThemingModule';
 import { NativeEventEmitter, TurboModuleRegistry, EventSubscriptionVendor, TurboModule } from 'react-native';
 import { fallbackGetPalette, fallbackOfficeModule } from './fallbackOfficeModule';
 
-// declare module 'react-native' {
-//   interface ITurboModuleRegistry {
-//     get: (name: 'Theming') => OfficeThemingModule & EventSubscriptionVendor;
-//   }
-//   const TurboModuleRegistry: ITurboModuleRegistry;
-// }
-
-// import { TurboModuleRegistry } from 'react-native';
-
 /**
  *  If we have a userAgent string, let's assume we're web debugging.  __DEV__ is for developer bundles.  Currently,
  *  react-native only polyfills navigator with { product: 'ReactNative', geolocation: NativeModules.Geolocation }

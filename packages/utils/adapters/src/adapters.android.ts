@@ -2,7 +2,7 @@ import { TextProps, TextPropsIOS, ViewProps, ViewPropsIOS, ImageProps, ImageProp
 import { IFilterMask } from './filter.types';
 
 // export core interface types
-export type ITextProps = Omit<TextProps, keyof TextPropsIOS | 'onPressIn' | 'onPressOut'>;
+export type ITextProps = Omit<TextProps, keyof TextPropsIOS>;
 export type IViewProps = Omit<ViewProps, keyof ViewPropsIOS>;
 export type IImageProps = Omit<ImageProps, keyof ImagePropsIOS>;
 
@@ -80,6 +80,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onLongPress: true,
   onMagicTap: true,
   onPress: true,
+  onPressIn: true,
+  onPressOut: true,
   selectable: true,
   selectionColor: true,
   style: true,

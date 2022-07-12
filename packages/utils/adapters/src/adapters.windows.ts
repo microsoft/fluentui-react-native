@@ -4,7 +4,7 @@ import { ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
 // export core interface types from RN
-export type ITextProps = Omit<TextProps, 'onPressIn' | 'onPressOut'>;
+export type ITextProps = TextProps;
 export type IViewProps = IViewWindowsProps;
 export type IImageProps = ImageProps;
 
@@ -98,6 +98,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onLongPress: true,
   onMagicTap: true,
   onPress: true,
+  onPressIn: true,
+  onPressOut: true,
   style: true,
   nativeID: true,
   maxFontSizeMultiplier: true,
