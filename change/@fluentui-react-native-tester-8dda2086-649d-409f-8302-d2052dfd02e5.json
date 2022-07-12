@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add optional icon",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}

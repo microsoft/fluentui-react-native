@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 12 Jul 2022 18:02:07 GMT",
+      "tag": "@fluentui-react-native/tester_v0.73.0",
+      "version": "0.73.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "ff827a5fcc714ea296983898fcb7e95871bccb0a",
+            "comment": "add optional icon"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.6.0",
+            "commit": "ff827a5fcc714ea296983898fcb7e95871bccb0a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Jul 2022 17:07:10 GMT",
       "tag": "@fluentui-react-native/tester_v0.72.2",
       "version": "0.72.2",
