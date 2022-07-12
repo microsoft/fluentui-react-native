@@ -51,10 +51,14 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ? 'right'
     : align;
 
-  const onAccTap = onAccessibilityTap ??
-    React.useCallback((event?) => {
-      props.onPress(event);
-    }, [props.onPress]);
+  const onAccTap =
+    onAccessibilityTap ??
+    React.useCallback(
+      (event?) => {
+        props.onPress(event);
+      },
+      [props.onPress],
+    );
 
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
