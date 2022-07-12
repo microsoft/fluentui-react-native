@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Cancel timers when unmounting popover",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
