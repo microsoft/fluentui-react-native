@@ -95,8 +95,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         >
           ⚛ FluentUI Tests
         </Text>
-        {/* Workaround for testID prop on text component affecting text size */}
-        {/* <Text > </Text> */}
         <ThemePickers />
       </View>
     );
