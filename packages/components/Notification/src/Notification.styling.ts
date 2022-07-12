@@ -94,5 +94,30 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         paddingHorizontal: 0,
       };
     }),
+    actionText: buildProps(
+      (tokens: NotificationTokens, theme: Theme) => {
+        return {
+          style: {
+            color: tokens.color,
+            ...fontStyles.from(tokens, theme),
+          },
+        };
+      },
+      ['color', ...fontStyles.keys],
+    ),
+    dismissIcon: buildProps(
+      (tokens: NotificationTokens) => {
+        return {
+          style: {
+            alignSelf: 'center',
+            flex: 1,
+            height: 20,
+            width: 20,
+          },
+          color: tokens.color,
+        };
+      },
+      ['color'],
+    ),
   },
 };
