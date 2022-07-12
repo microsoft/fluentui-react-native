@@ -28,7 +28,7 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
     <Notification
       variant={'primary'}
       icon={iconProps}
-      title="Kat's iPhone X"
+      title="Kat's iPhoneX"
       onPress={() => {
         console.log('Notification tapped');
       }}
