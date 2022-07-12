@@ -42,7 +42,7 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
           },
         };
       },
-      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', 'borderWidth', 'paddingHorizontal', ...borderStyles.keys],
+      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', 'paddingHorizontal', ...borderStyles.keys],
     ),
     svg: buildProps(
       (tokens: PresenceBadgeTokens) => ({
