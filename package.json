@@ -55,6 +55,8 @@
   },
   "resolutions": {
     "@appium/support": "^2.57.0",
+    "jpeg-js": "^0.4.4",
+    "moment": "^2.29.4",
     "es5-ext": "0.10.53"
   }
 }
