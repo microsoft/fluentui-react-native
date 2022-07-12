@@ -2965,11 +2965,11 @@
     "@types/node" "*"
 
 "@types/react-native@^0.64.0":
-  version "0.64.25"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.25.tgz#ad6f215f339f7737f33da53f246642b3adbdf5c6"
-  integrity sha512-Cq7Pi6T9pbETl3M1McdERA/9C7Y2x2yWt97NXsdnklGxt3LMPcS4mtIJNlpZgyGUVV0VWMUOLQZxjXmV04toPA==
+  version "0.64.26"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.64.26.tgz#f19fdfe7f0d8a36f6864409b28e69c5f7d602cf3"
+  integrity sha512-L1U0+wM7GSq1uGu6d/Z9wKB705xyr7Pg47JiXjp9P8DZAFpqP4xsEM/PQ8hcCopEupo6ltQ8ipqoDJ4Nb9Lw5Q==
   dependencies:
-    "@types/react" "*"
+    "@types/react" "^17"
 
 "@types/react-test-renderer@16.9.0":
   version "16.9.0"
@@ -2978,7 +2978,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.2":
+"@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
   version "17.0.47"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.47.tgz#4ee71aaf4c5a9e290e03aa4d0d313c5d666b3b78"
   integrity sha512-mk0BL8zBinf2ozNr3qPnlu1oyVTYq+4V7WA76RgxUAtf0Em/Wbid38KN6n4abEkvO4xMTBWmnP1FtQzgkEiJoA==
