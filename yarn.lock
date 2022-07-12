@@ -9057,9 +9057,9 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.6.10.tgz#47c1c77d608552a3ba4425e6ceabc162979eeee9"
-  integrity sha512-c1LWerzNmydAjbMmpaYOQjYj6N1MaDUCyDVu6LkfGdztsgxJQZTusBgpI4bdb99Frwxw+kNhK8z19j+IgqeQzg==
+  version "1.6.11"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.6.11.tgz#890e9def44beb432c854b6ee088fa85ac1870cf7"
+  integrity sha512-jgcQ4m+4xsx3a0F1Ah7zb0gTE0e0Yf2Eu0k+bB5T7wYQe6q7OExNwhLyBEtHmtUi6DpOrREz95ZCCUKgT1EM2w==
   dependencies:
     "@xmldom/xmldom" "^0.8.0"
     abort-controller "^3.0.0"
