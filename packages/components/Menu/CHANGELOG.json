@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 12 Jul 2022 15:30:28 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.5",
+      "version": "1.0.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "9b325918111c2f818d34ecb938a7f616042cef07",
+            "comment": "Cancel timers when unmounting popover"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "7bb565722b1ea4d661183591ed7b04005b736b6f",
+            "comment": "Fix accessibilityActions"
+          },
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "10f2568ac352e89e61cbd309a16b6a3bffb3eba8",
+            "comment": "Fix submenu close bug"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 08 Jul 2022 21:23:37 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.4",
       "version": "1.0.4",

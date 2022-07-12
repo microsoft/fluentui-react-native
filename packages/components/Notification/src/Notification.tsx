@@ -2,11 +2,13 @@
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
+import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -28,6 +30,7 @@ export const Notification = compose<NotificationType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
+    icon: Icon,
     contentContainer: View,
     title: Text,
     message: Text,
@@ -46,11 +49,13 @@ export const Notification = compose<NotificationType>({
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, title, action, ...rest } = mergeProps(userProps, final);
+      const { variant, icon, title, action, ...rest } = mergeProps(userProps, final);
+      const iconProps = createIconProps(icon);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
       return (
         <Slots.root {...mergedProps}>
+          {icon && <Slots.icon {...iconProps} />}
           <Slots.contentContainer>
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>

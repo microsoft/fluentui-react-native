@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 08 Jul 2022 21:23:37 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Jul 2022 15:30:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.5
+
+Tue, 12 Jul 2022 15:30:28 GMT
+
+### Patches
+
+- Cancel timers when unmounting popover (ruaraki@microsoft.com)
+- Fix accessibilityActions (ruaraki@microsoft.com)
+- Fix submenu close bug (ruaraki@microsoft.com)
 
 ## 1.0.4
 

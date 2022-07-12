@@ -3212,7 +3212,7 @@
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.66.18.tgz#924fdbf413047e7ac2c18aead60142345814dede"
   integrity sha512-a+xIlll1Wo4rhBPdoecH6VfvMgm8dcMScJgO5GSt+BB+7rMX/UOTWmfAV7BXx/x4okf2Tu6nSbEygnNYgNtp2A==
   dependencies:
-    "@types/react" "*"
+    "@types/react" "^17"
 
 "@types/react-test-renderer@16.9.0":
   version "16.9.0"
@@ -3221,7 +3221,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^17.0.2":
+"@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
   version "17.0.47"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.47.tgz#4ee71aaf4c5a9e290e03aa4d0d313c5d666b3b78"
   integrity sha512-mk0BL8zBinf2ozNr3qPnlu1oyVTYq+4V7WA76RgxUAtf0Em/Wbid38KN6n4abEkvO4xMTBWmnP1FtQzgkEiJoA==
@@ -9303,9 +9303,9 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.6.10"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.6.10.tgz#47c1c77d608552a3ba4425e6ceabc162979eeee9"
-  integrity sha512-c1LWerzNmydAjbMmpaYOQjYj6N1MaDUCyDVu6LkfGdztsgxJQZTusBgpI4bdb99Frwxw+kNhK8z19j+IgqeQzg==
+  version "1.6.11"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.6.11.tgz#890e9def44beb432c854b6ee088fa85ac1870cf7"
+  integrity sha512-jgcQ4m+4xsx3a0F1Ah7zb0gTE0e0Yf2Eu0k+bB5T7wYQe6q7OExNwhLyBEtHmtUi6DpOrREz95ZCCUKgT1EM2w==
   dependencies:
     "@xmldom/xmldom" "^0.8.0"
     abort-controller "^3.0.0"

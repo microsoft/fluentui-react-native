@@ -33,6 +33,18 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
+    icon: buildProps(
+      (tokens: NotificationTokens) => ({
+        style: {
+          alignSelf: 'center',
+          marginEnd: 16,
+        },
+        color: tokens.color,
+        height: 24,
+        width: 24,
+      }),
+      ['color'],
+    ),
     contentContainer: buildProps(() => {
       return {
         style: {
@@ -74,7 +86,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       return {
         style: {
           alignSelf: 'center',
-          marginLeft: 16,
+          marginStart: 16,
         },
         appearance: 'subtle',
         minWidth: 0,
