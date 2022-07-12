@@ -19,7 +19,7 @@ export const PressableUsage: React.FunctionComponent = () => {
   };
 
   const _onPress3 = (): void => {
-    Alert.alert('Alert', 'onaccessibilityTap invoked!');
+    Alert.alert('Alert', 'onAccessibilityTap invoked!');
   };
 
   const _onKeyDown2 = (ev: IKeyboardEvent) => {
