@@ -4,7 +4,6 @@ import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Svg } from 'react-native-svg';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
@@ -36,8 +35,7 @@ export const Notification = compose<NotificationType>({
     contentContainer: View,
     title: Text,
     message: Text,
-    action: Button,
-    actionText: Text,
+    action: Text,
     dismissIcon: Svg,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
@@ -64,11 +62,7 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {!isBar && (
-            <Slots.action>
-              {action ? <Slots.actionText>{action}</Slots.actionText> : <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>}
-            </Slots.action>
-          )}
+          {action ? <Slots.action>{action}</Slots.action> : !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>}
         </Slots.root>
       );
     };

@@ -82,23 +82,13 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    action: buildProps(() => {
-      return {
-        style: {
-          alignSelf: 'center',
-          marginStart: 16,
-        },
-        appearance: 'subtle',
-        minWidth: 0,
-        padding: 0,
-        paddingHorizontal: 0,
-      };
-    }),
-    actionText: buildProps(
+    action: buildProps(
       (tokens: NotificationTokens, theme: Theme) => {
         return {
           style: {
+            alignSelf: 'center',
             color: tokens.color,
+            marginStart: 16,
             ...fontStyles.from(tokens, theme),
           },
         };

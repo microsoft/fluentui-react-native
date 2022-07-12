@@ -1,7 +1,6 @@
 import { PressableProps } from 'react-native';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
-import { ButtonProps } from '@fluentui-react-native/button';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { SvgProps } from 'react-native-svg';
@@ -39,8 +38,7 @@ export interface NotificationSlotProps {
   contentContainer: IViewProps;
   title?: ITextProps;
   message: ITextProps;
-  action?: ButtonProps;
-  actionText?: ITextProps;
+  action?: ITextProps;
   dismissIcon?: SvgProps;
 }
 
