@@ -126,7 +126,6 @@ export const settings: IComposeSettings<IButtonType> = [
     } as ViewProps,
     content: {},
     icon: {},
-    shadow: {},
     stack: {
       style: {
         ...
