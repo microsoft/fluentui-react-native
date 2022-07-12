@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { fabName, FABType } from './FAB.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './FAB.styling';
@@ -65,16 +65,23 @@ export const FAB = compose<FABType>({
       }
       const label = accessibilityLabel ?? childText;
 
-      return (
-        <Slots.shadow>
-          <Slots.root {...mergedProps} accessibilityLabel={label}>
-            {icon && <Slots.icon {...iconProps} />}
-            {React.Children.map(children, (child) =>
-              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
-            )}
-          </Slots.root>
-        </Slots.shadow>
+      const fabWithoutShadow = (
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
+          {icon && <Slots.icon {...iconProps} />}
+          {React.Children.map(children, (child) =>
+            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+          )}
+        </Slots.root>
       );
+
+      const fabWithShadow = <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
+
+      const hasShadow = Platform.OS === 'ios';
+      if (hasShadow) {
+        return fabWithShadow;
+      } else {
+        return fabWithoutShadow;
+      }
     };
   },
 });

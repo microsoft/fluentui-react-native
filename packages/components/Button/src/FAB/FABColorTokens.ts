@@ -8,7 +8,6 @@ export const defaultFABColorTokens: TokenSettings<ButtonCoreTokens, Theme> = (t:
   color: t.colors.brandedContent,
   borderColor: t.colors.brandedBorder,
   iconColor: t.colors.brandedIcon,
-  shadowDepth: 'shadow8',
   disabled: {
     backgroundColor: t.colors.brandedDisabledBackground,
     color: t.colors.brandedDisabledContent,

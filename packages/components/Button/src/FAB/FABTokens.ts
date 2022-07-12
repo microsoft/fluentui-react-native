@@ -14,4 +14,5 @@ export const defaultFABTokens: TokenSettings<ButtonCoreTokens, Theme> = () =>
         spacingIconContentBefore: globalTokens.spacing.mNudge,
       },
     },
+    shadowDepth: 'shadow8',
   } as ButtonCoreTokens);
