@@ -37,7 +37,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       (tokens: NotificationTokens) => ({
         style: {
           alignSelf: 'center',
-          marginRight: 16,
+          marginEnd: 16,
         },
         color: tokens.color,
         height: 24,
@@ -86,7 +86,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       return {
         style: {
           alignSelf: 'center',
-          marginLeft: 16,
+          marginStart: 16,
         },
         appearance: 'subtle',
         minWidth: 0,

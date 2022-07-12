@@ -55,7 +55,7 @@ export const Notification = compose<NotificationType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps}></Slots.icon>}
+          {icon && <Slots.icon {...iconProps} />}
           <Slots.contentContainer>
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
