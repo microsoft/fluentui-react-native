@@ -4,7 +4,7 @@ import { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (): PresenceBadgeTokens =>
   ({
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: globalTokens.color.white,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
@@ -13,7 +13,6 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
     smallest: {
       width: 6,
       height: 6,
-      borderWidth: 1,
     },
     smaller: {
       width: 10,
@@ -24,15 +23,17 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
       height: 12,
     },
     medium: {
-      width: 20,
-      height: 20,
+      width: 16,
+      height: 16,
     },
     large: {
-      width: 24,
-      height: 24,
+      width: 20,
+      height: 20,
+      borderWidth: 2,
     },
     largest: {
       width: 28,
       height: 28,
+      borderWidth: 2,
     },
   } as PresenceBadgeTokens);

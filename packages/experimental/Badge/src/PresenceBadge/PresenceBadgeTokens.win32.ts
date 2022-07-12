@@ -4,10 +4,10 @@ import { PresenceBadgeTokens } from './PresenceBadge.types';
 
 export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t: Theme): PresenceBadgeTokens =>
   ({
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: isHighContrast(t) ? 'transparent' : globalTokens.color.white,
-    bottom: globalTokens.spacing.none,
-    right: globalTokens.spacing.none,
+    bottom: -1,
+    right: -1,
     paddingHorizontal: globalTokens.spacing.none,
     backgroundColor: t.colors.neutralBackground1,
     ...getBadgeColor('lightGreen', t),
@@ -20,20 +20,26 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       height: 10,
     },
     small: {
+      width: 12,
+      height: 12,
+    },
+    medium: {
       width: 16,
       height: 16,
     },
-    medium: {
+    large: {
       width: 20,
       height: 20,
-    },
-    large: {
-      width: 24,
-      height: 24,
+      borderWidth: 2,
+      bottom: -globalTokens.spacing.xxs,
+      right: -globalTokens.spacing.xxs,
     },
     largest: {
-      width: 32,
-      height: 32,
+      width: 28,
+      height: 28,
+      borderWidth: 2,
+      bottom: -globalTokens.spacing.xxs,
+      right: -globalTokens.spacing.xxs,
     },
     available: getBadgeColor('lightGreen', t),
     away: getBadgeColor('marigold', t),
@@ -45,9 +51,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     offline: {
       iconColor: isHighContrast(t) ? t.colors.neutralForeground3 : globalTokens.color.grey[38],
     },
-    outOfOffice: {
-      ...getBadgeColor('berry', t),
-    },
+    outOfOffice: getBadgeColor('berry', t),
   } as PresenceBadgeTokens);
 
 function getBadgeColor(color: string, t: Theme) {
