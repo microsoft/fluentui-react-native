@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 12 Jul 2022 18:02:07 GMT and should not be manually modified.
+This log was last generated on Wed, 13 Jul 2022 23:23:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.73.1
+
+Wed, 13 Jul 2022 23:23:59 GMT
+
+### Patches
+
+- Add shadow to FAB (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.23.0
+- Bump @fluentui-react-native/experimental-button to v0.15.33
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.54
+- Bump @fluentui-react-native/experimental-shadow to v0.2.3
+- Bump @fluentui-react-native/menu to v1.0.6
+- Bump @fluentui-react-native/notification to v0.6.1
+- Bump @fluentui/react-native to v0.30.8
 
 ## 0.73.0
 

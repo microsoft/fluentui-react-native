@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Fri, 08 Jul 2022 21:23:37 GMT and should not be manually modified.
+This log was last generated on Wed, 13 Jul 2022 23:23:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.0
+
+Wed, 13 Jul 2022 23:23:59 GMT
+
+### Minor changes
+
+- Add shadow to FAB (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.3
 
 ## 0.22.31
 
