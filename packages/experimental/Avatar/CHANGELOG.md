@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Thu, 16 Jun 2022 19:11:01 GMT and should not be manually modified.
+This log was last generated on Fri, 08 Jul 2022 21:23:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.3
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.32
+
+## 0.15.2
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+
+## 0.15.1
+
+Thu, 23 Jun 2022 16:08:07 GMT
+
+### Patches
+
+- Bump FUA podspecs/podfile.lock to 0.5.2 (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.15.0
+
+Tue, 21 Jun 2022 21:07:14 GMT
+
+### Minor changes
+
+- Renamed Avatar to NativeAvatar, JSAvatar to Avatar (v.kozova13@gmail.com)
+
+## 0.14.45
+
+Tue, 21 Jun 2022 20:05:26 GMT
+
+### Patches
+
+- Rewrote tests using it.each method (v.kozova13@gmail.com)
 
 ## 0.14.44
 

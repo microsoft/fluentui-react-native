@@ -4,14 +4,18 @@ It's used to automate process of component creation.
 
 ## Setup
 
-1. Run in your command prompt `npm i -g gulp-cli`
-2. Run `npm i` inside the component-generator directory
+1. Run in your command prompt `npm i -g gulp-cli`.
+   - May need to run this with `sudo` if you are on a mac
+2. Run `npm i` inside the component-generator directory.
+   - May need to run this with `sudo` if you are on a mac
 
-## Build you component
+## Build your component
 
-1. Run `gulp add --new component-name`
+1. Run `gulp add --new component-name`. This should be run from apps/component-generator, not the root.
+   - Before running this command you may need to install gulp and gulp-rename (i.e. `npm install gulp` `npm install gulp rename`).
+   - `component-name` should be all lowercase.
 2. Change your newly generated component.
-3. When you're done, remove `"private": true` from the package.json
+3. Check dependencies in componentName’s package.json (may be out of date), and remove `"private": true` from the package.json
 4. Add to the package.json after "typings":
 
 ```json
@@ -20,6 +24,10 @@ It's used to automate process of component creation.
     "module": "lib/index.js"
   },
 ```
+
+5. Delete package-lock.json in root dir (see todo item 9 below)
+6. Delete dependencies: {"gulp": "^4.0.2", "gulp-rename": "^2.0.0”} in root dir’s package.json
+7. Add "@fluentui-react-native/componentName”: "0.1.0", to apps/fluent-tester/package.json (make sure the version matches the version in ComponentName/package.json)
 
 ## TODO:
 
@@ -32,3 +40,6 @@ It's used to automate process of component creation.
 7. Add warning if component exists and message "Do you want to replace it?".
    Currently it replaces the component.
 8. Improve replacement functionality.
+9. Use yarn instead of npm, using npm is generating a package.lock file that we later need to delete
+10. Support compressible-based components
+11. Add option to add component to the `experimental` folder instead of the `components` folder

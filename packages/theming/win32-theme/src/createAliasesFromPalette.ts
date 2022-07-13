@@ -6,7 +6,11 @@ export function createAliasesFromPalette(palette: OfficePalette, isHighContrast:
   if (isHighContrast) {
     return {
       neutralForeground1: palette.Text,
+      neutralForeground1Hover: palette.TextHover,
+      neutralForeground1Pressed: palette.TextPressed,
+      neutralForeground1Selected: palette.TextSelected,
       neutralForeground2: palette.TextSecondary,
+      neutralForeground3: palette.TextSecondary,
       neutralForeground4: palette.TextCtlSubtlePlaceholder,
       neutralForegroundDisabled: palette.TextDisabled,
       neutralForegroundOnBrand: palette.TextCtlEmphasis,
@@ -17,6 +21,9 @@ export function createAliasesFromPalette(palette: OfficePalette, isHighContrast:
 
   return {
     neutralForeground1: palette.Text,
+    neutralForeground1Hover: palette.TextHover,
+    neutralForeground1Pressed: palette.TextPressed,
+    neutralForeground1Selected: palette.TextSelected,
     neutralForeground2: palette.TextSecondary,
     neutralForeground2Hover: palette.TextSecondaryHover,
     neutralForeground2Pressed: palette.TextSecondaryPressed,

@@ -1,11 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { JSAvatar, AvatarSize } from '@fluentui-react-native/experimental-avatar';
-import { Switch, View, Text, TextInput, Platform } from 'react-native';
+import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
+import { View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { FontWeight } from '@fluentui-react-native/theme-types';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../../test-data/test.svg';
+import { ToggleButton } from '@fluentui/react-native';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
@@ -18,6 +19,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [initialsSize, setInitialsSize] = useState<number>(16);
   const [fontWeight, setFontWeight] = useState<string>('normal');
   const [fontFamily, setFontFamily] = useState<string>('Georgia');
+  const [name, setName] = useState<string>('Steve Ballmer');
+  const [initials, setInitials] = useState<string>('');
 
   const [ringColor, setRingColor] = useState<string>(undefined);
   const [ringBackgroundColor, setRingBackgroundColor] = useState<string>('yellow');
@@ -38,7 +41,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       ringBackgroundColor,
       ringThickness: parseInt(ringThickness),
     };
-    return JSAvatar.customize(tokens);
+    return Avatar.customize(tokens);
   }, [
     avatarColor,
     textColor,
@@ -62,21 +65,33 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   return (
     <View style={commonStyles.root}>
       <View style={commonStyles.settings}>
-        <View style={commonStyles.switch}>
-          <Text>Show image</Text>
-          <Switch value={showImage} onValueChange={setShowImage} />
-        </View>
-        <View style={commonStyles.switch}>
-          <Text>Show initials</Text>
-          <Switch value={showInitials} onValueChange={setShowInitials} />
-        </View>
-
-        <View style={commonStyles.switch}>
-          <Text>Show rings</Text>
-          <Switch value={showRing} onValueChange={setShowRing} />
-        </View>
+        <ToggleButton onClick={() => setShowImage(!showImage)} checked={showImage} style={commonStyles.vmargin}>
+          {showImage ? 'Hide' : 'Show'} image
+        </ToggleButton>
+        <ToggleButton onClick={() => setShowInitials(!showInitials)} checked={showInitials} style={commonStyles.vmargin}>
+          {showInitials ? 'Hide' : 'Show'} initials
+        </ToggleButton>
+        <ToggleButton onClick={() => setShowRing(!showRing)} checked={showRing} style={commonStyles.vmargin}>
+          {showRing ? 'Hide' : 'Show'} ring
+        </ToggleButton>
         <View style={{ flexDirection: 'row' }}>
           <View>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Name for generating initials"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setName(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setInitials(e.nativeEvent.text);
+              }}
+            />
             <Text style={{ fontWeight: 'bold' }}>Avatar tokens</Text>
             <TextInput
               style={[commonStyles.textBox]}
@@ -182,7 +197,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           activeAppearance="ring"
           avatarColor={avatarColor}
           accessibilityLabel="Former CEO of Microsoft"
-          initials={showInitials ? 'SB' : undefined}
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
           imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
           icon={svgIconsEnabled ? { svgSource: svgProps } : undefined}
           transparentRing={!showRing}
@@ -190,11 +206,13 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       </View>
       <View style={{ marginLeft: 20 }}>
         <Text>Avatar customized with props</Text>
-        <JSAvatar
+        <Avatar
           active="active"
           activeAppearance="ring"
           avatarColor={avatarColor}
           accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
           imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
           ringBackgroundColor={ringBackgroundColor}
           ringColor={ringColor}

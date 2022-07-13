@@ -1,4 +1,4 @@
-import { JSAvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
@@ -27,6 +27,7 @@ import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from 
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
+import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
 // --> testPage import insert
 
 export const tests: TestDescription[] = [
@@ -37,7 +38,7 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'Avatar Test',
-    component: JSAvatarTest,
+    component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
   },
   {
@@ -170,5 +171,10 @@ export const tests: TestDescription[] = [
     component: MenuTest,
     testPage: HOMEPAGE_MENU_BUTTON,
   },
-  // --> testPage component insert,,
+  {
+    name: 'Shadow Test',
+    component: ShadowTest,
+    testPage: HOMEPAGE_SHADOW_BUTTON,
+  },
+  // --> testPage component insert,,,
 ];
