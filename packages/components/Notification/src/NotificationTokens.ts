@@ -29,6 +29,8 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     primary: {
       backgroundColor: '#EBF3FC',
       color: '#0F6CBD',
+
+      disabledColor: '#2886DE',
     },
     neutral: {
       backgroundColor: '#FAFAFA',
@@ -46,15 +48,23 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       backgroundColor: '#EBF3FC',
       borderWidth: 0,
       color: '#0F6CBD',
+
+      disabledColor: '#2886DE',
     },
     primaryOutlineBar: {
       backgroundColor: '#FFFFFF',
       borderColor: '#E0E0E0',
       color: '#0F6CBD',
+
+      disabledColor: '#2886DE',
+      hoveredColor: '0F548C',
+      pressedColor: '#0E4775',
     },
     neutralBar: {
       backgroundColor: '#F0F0F0',
       borderWidth: 0,
       color: '#616161',
+
+      disabledColor: '#FFFFFF',
     },
   } as NotificationTokens);

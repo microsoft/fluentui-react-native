@@ -9,7 +9,7 @@ import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { getDismissIconPath } from './Notification.helper';
+import { ActionButton, getDismissIconPath } from './Notification.helper';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -35,7 +35,7 @@ export const Notification = compose<NotificationType>({
     contentContainer: View,
     title: Text,
     message: Text,
-    action: Text,
+    action: ActionButton,
     dismissIcon: Svg,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {

@@ -1,5 +1,41 @@
 import React from 'react';
+import { ButtonProps, ButtonTokens, ButtonV1 as Button } from '@fluentui-react-native/button';
+import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { Path } from 'react-native-svg';
+
+export type ActionButtonColorStates = { disabledColor; hoveredColor; pressedColor; focusedColor };
+type ActionButtonProps = ButtonProps & ButtonTokens & ActionButtonColorStates;
+export const ActionButton = stagedComponent((props: ActionButtonProps) => {
+  const CustomizedButton = Button.customize({
+    subtle: {
+      backgroundColor: 'transparent',
+      color: props.color,
+      borderColor: 'transparent',
+      iconColor: props.color,
+      fontSize: 15,
+      fontWeight: '600',
+      fontLineHeight: -0.24, // iOS only prop
+      fontLetterSpacing: 20,
+      disabled: {
+        color: props.disabledColor,
+      },
+      focused: {
+        color: props.focusedColor,
+      },
+      hovered: {
+        color: props.hoveredColor,
+      },
+      pressed: {
+        color: props.pressedColor,
+      },
+    },
+  });
+
+  return (final: ActionButtonProps, children: React.ReactNode) => {
+    const mergedProps = mergeProps(props, final);
+    return <CustomizedButton {...mergedProps}>{children}</CustomizedButton>;
+  };
+}, true);
 
 export function getDismissIconPath() {
   const path =

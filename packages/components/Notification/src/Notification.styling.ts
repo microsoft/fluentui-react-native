@@ -83,14 +83,21 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       ['color', ...fontStyles.keys],
     ),
     action: buildProps(
-      (tokens: NotificationTokens, theme: Theme) => {
+      (tokens: NotificationTokens) => {
         return {
           style: {
             alignSelf: 'center',
-            color: tokens.color,
             marginStart: 16,
-            ...fontStyles.from(tokens, theme),
           },
+          appearance: 'subtle',
+          color: tokens.color,
+          disabledColor: tokens.disabledColor,
+          hoveredColor: tokens.hoveredColor,
+          pressedColor: tokens.pressedColor,
+          focusedColor: tokens.focusedColor,
+          minWidth: 0,
+          padding: 0,
+          paddingHorizontal: 0,
         };
       },
       ['color', ...fontStyles.keys],

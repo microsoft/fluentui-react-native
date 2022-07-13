@@ -1,15 +1,17 @@
 import { PressableProps } from 'react-native';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
+import { ButtonProps } from '@fluentui-react-native/button';
+import { SvgProps } from 'react-native-svg';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { SvgProps } from 'react-native-svg';
+import { ActionButtonColorStates } from './Notification.helper';
 
 export const notification = 'Notification';
 export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
 export type NotificationVariant = typeof NotificationVariants[number];
 
-export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
+export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens, ActionButtonColorStates {
   primary: NotificationTokens;
   neutral: NotificationTokens;
   primaryBar: NotificationTokens;
@@ -38,7 +40,7 @@ export interface NotificationSlotProps {
   contentContainer: IViewProps;
   title?: ITextProps;
   message: ITextProps;
-  action?: ITextProps;
+  action?: ButtonProps;
   dismissIcon?: SvgProps;
 }
 
