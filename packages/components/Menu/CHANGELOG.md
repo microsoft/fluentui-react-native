@@ -1,8 +1,68 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 27 Jun 2022 15:59:57 GMT and should not be manually modified.
+This log was last generated on Tue, 12 Jul 2022 15:30:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.5
+
+Tue, 12 Jul 2022 15:30:28 GMT
+
+### Patches
+
+- Cancel timers when unmounting popover (ruaraki@microsoft.com)
+- Fix accessibilityActions (ruaraki@microsoft.com)
+- Fix submenu close bug (ruaraki@microsoft.com)
+
+## 1.0.4
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.10
+- Bump @fluentui-react-native/experimental-text to v0.9.2
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @fluentui-react-native/button to v0.22.31
+
+## 1.0.3
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.9
+- Bump @fluentui-react-native/experimental-text to v0.9.1
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/tokens to v0.15.0
+- Bump @fluentui-react-native/button to v0.22.30
+
+## 1.0.2
+
+Wed, 29 Jun 2022 21:06:49 GMT
+
+### Patches
+
+- Some refactoring (ruaraki@microsoft.com)
+
+## 1.0.1
+
+Tue, 28 Jun 2022 22:01:06 GMT
+
+### Patches
+
+- Update package.json version (ruaraki@microsoft.com)
+
+## 0.16.1
+
+Tue, 28 Jun 2022 18:04:00 GMT
+
+### Patches
+
+- Fix arrow close not working (ruaraki@microsoft.com)
 
 ## 0.16.0
 

@@ -9,11 +9,11 @@ PODS:
     - React-Core (= 0.64.3)
     - React-jsi (= 0.64.3)
     - ReactCommon/turbomodule/core (= 0.64.3)
-  - FRNAvatar (0.15.0):
+  - FRNAvatar (0.15.3):
     - MicrosoftFluentUI (= 0.5.2)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
-  - FRNDatePicker (0.4.4):
+  - FRNDatePicker (0.5.0):
     - MicrosoftFluentUI (= 0.5.2)
     - React
   - glog (0.3.5)
@@ -371,7 +371,7 @@ PODS:
   - React-jsinspector (0.64.3)
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.2.3):
+  - react-native-slider (4.2.4):
     - React-Core
   - React-perflogger (0.64.3)
   - React-RCTActionSheet (0.64.3):
@@ -441,6 +441,8 @@ PODS:
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
+  - RNCPicker (2.4.2):
+    - React-Core
   - RNSVG (12.3.0):
     - React-Core
   - SwiftLint (0.47.1)
@@ -482,6 +484,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../../../node_modules/react-native/ReactCommon`)
   - ReactTestApp-DevSupport (from `../../../node_modules/react-native-test-app`)
   - ReactTestApp-Resources (from `..`)
+  - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
   - RNSVG (from `../../../node_modules/react-native-svg`)
   - SwiftLint
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
@@ -559,6 +562,8 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native-test-app"
   ReactTestApp-Resources:
     :path: ".."
+  RNCPicker:
+    :path: "../../../node_modules/@react-native-picker/picker"
   RNSVG:
     :path: "../../../node_modules/react-native-svg"
   Yoga:
@@ -568,9 +573,9 @@ SPEC CHECKSUMS:
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: c71c5917ec0ad2de41d5d06a5855f6d5eda06971
-  FBReactNativeSpec: e46380c3ebf05dc813f8b8e5ca403e47822318f6
-  FRNAvatar: e176ece0a413636c7ea6b82ec603dfb772c92090
-  FRNDatePicker: a2be59f115ff637d41837ca7a7b809ffd4905ee7
+  FBReactNativeSpec: 2e23f365db4551ce59b5411a90f7ad9bc0aabffe
+  FRNAvatar: 92dcf2c9e1790cfd13edd7633af280f2be6b2b1b
+  FRNDatePicker: 961e96f437d1dcd25fe6d7a80790dade00ef714b
   glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
   MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
   RCT-Folly: ec7a233ccc97cc556cf7237f0db1ff65b986f27c
@@ -585,7 +590,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: df6abc9fafbecb8e5b7a5fbc5e6d4bd017d594d5
   React-jsinspector: 34e23860273a23695342f58eed3ffd3ba10c31e0
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: 98b724cd3e44c3454a6d0724e796d4e9c52189ce
+  react-native-slider: cecabb58ecffad671d2ad3ccc58c7f4d2d029e95
   React-perflogger: cc76a4254d19640f1d8ad1c66fdee800414b805c
   React-RCTActionSheet: 7448f049318d8d7e8a9a1ebb742ada721757eea8
   React-RCTAnimation: fb9b3fa1a4a9f5e6ab01b3368693ce69860ba76a
@@ -600,6 +605,7 @@ SPEC CHECKSUMS:
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
   ReactTestApp-DevSupport: 6275cb3b001d9d971f8328580f757409a1c1cf64
   ReactTestApp-Resources: 51437f32bf317329a7c9ca3f68e3a4cc952567ba
+  RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749

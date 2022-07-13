@@ -1,12 +1,21 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
-import { badgeLookup } from '../Badge';
 import { presenceBadgeName, PresenceBadgeType, PresenceBadgeProps, PresenceBadgeStatus } from './PresenceBadge.types';
 import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native/framework';
 import { presenceIconPaths } from './presenceIconPaths';
-import { SvgXml } from 'react-native-svg';
-import { useBadge } from '../useBadge';
+import { Svg, Path } from 'react-native-svg';
 import { stylingSettings } from './PresenceBadge.styling';
+import { useBadge } from '../useBadge';
+
+export const prensenceBadgeLookup = (layer: string, userProps: PresenceBadgeProps): boolean => {
+  return (
+    userProps[layer] ||
+    layer === userProps['size'] ||
+    layer === userProps['shape'] ||
+    layer === userProps['status'] ||
+    (userProps['status'] === 'away' && userProps.outOfOffice && layer === 'awayOutOfOffice')
+  );
+};
 
 function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean) {
   switch (status) {
@@ -16,7 +25,7 @@ function getIconPath(status: PresenceBadgeStatus, isOutOfOffice: boolean) {
     case 'away':
       return isOutOfOffice ? presenceIconPaths.outOfOffice : presenceIconPaths.away;
     case 'busy':
-      return isOutOfOffice ? presenceIconPaths.busyOutOfOffice : presenceIconPaths.busy;
+      return isOutOfOffice ? presenceIconPaths.unknown : presenceIconPaths.busy;
     case 'doNotDisturb':
       return isOutOfOffice ? presenceIconPaths.doNotDisturbOutOfOffice : presenceIconPaths.doNotDisturb;
     case 'offline':
@@ -35,22 +44,22 @@ export const PresenceBadge = compose<PresenceBadgeType>({
   ...stylingSettings,
   slots: {
     root: View,
-    svgXml: SvgXml,
+    svg: Svg,
   },
   useRender: (userProps: PresenceBadgeProps, useSlots: UseSlots<PresenceBadgeType>) => {
     const badge = useBadge(userProps) as PresenceBadgeProps;
-    const Slots = useSlots(badge, (layer) => badgeLookup(layer, badge));
+    const Slots = useSlots(badge, (layer) => prensenceBadgeLookup(layer, badge));
 
     return (final: PresenceBadgeProps) => {
       const { size, status, outOfOffice, ...mergedProps } = mergeProps(badge, final);
       const isOutOfOffice = outOfOffice || false;
-      const iconXml = `<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        ${getIconPath(status, isOutOfOffice)}
-      </svg>`;
+      const path = getIconPath(status, isOutOfOffice);
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.svgXml xml={iconXml} />
+          <Slots.svg viewBox="0 0 16 16" fill="none">
+            <Path fill="currentColor" d={path} />
+          </Slots.svg>
         </Slots.root>
       );
     };

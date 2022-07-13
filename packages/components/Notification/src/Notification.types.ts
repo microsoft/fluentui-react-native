@@ -1,30 +1,44 @@
-import { ViewProps } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
-import { IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { PressableProps } from 'react-native';
+import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
+import { ButtonProps } from '@fluentui-react-native/button';
+import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const notification = 'Notification';
-export const NotificationVariants = ['primary', 'neutral', 'danger', 'warning'] as const;
+export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
 export type NotificationVariant = typeof NotificationVariants[number];
 
-export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens {
+export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens {
   primary: NotificationTokens;
   neutral: NotificationTokens;
+  primaryBar: NotificationTokens;
+  primaryOutlineBar: NotificationTokens;
+  neutralBar: NotificationTokens;
   danger: NotificationTokens;
   warning: NotificationTokens;
+  hasTitle: NotificationTokens;
+  isBar: NotificationTokens;
 }
 
 export interface NotificationProps {
   /**
-   * Notification variants: 'primary' | 'neutral' |'danger' | 'warning'
+   * Notification variants: 'primary' | 'neutral' | 'primaryBar' | 'primaryOutlineBar' | 'neutralBar' | 'danger' | 'warning'
    */
   variant: NotificationVariant;
-  endText: string;
+  icon?: IconSourcesType;
+  title?: string;
+  action?: string;
+  onPress?: (e: InteractionEvent) => void;
 }
 
 export interface NotificationSlotProps {
-  root: ViewProps;
-  message: TextProps;
-  endText: TextProps;
+  root: PressableProps;
+  icon?: IconProps;
+  contentContainer: IViewProps;
+  title?: ITextProps;
+  message: ITextProps;
+  action?: ButtonProps;
 }
 
 export interface NotificationType {

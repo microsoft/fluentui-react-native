@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { View, PickerPropsAndroid } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
 import { Theme, useTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { Picker } from '@react-native-picker/picker';
+import { Picker, PickerProps } from '@react-native-picker/picker';
 
 const getThemedDropdownStyles = themedStyleSheet((t: Theme) => {
   return {
@@ -52,12 +52,12 @@ export const ThemePickers: React.FunctionComponent = () => {
 
   type DropdownEntry = { label: string; value: string };
 
-  const dropdownProps: PickerPropsAndroid = {
+  type DropdownProps = { initial: string; onValueChange: (value: string) => void; options: DropdownEntry[] };
+
+  const dropdownProps: Omit<PickerProps, 'onValueChange' | 'selectedValue'> = {
     style: themedPickerStyles.dropdown,
     mode: 'dropdown',
   };
-
-  type DropdownProps = { initial: string; onValueChange: (value: string) => void; options: DropdownEntry[] };
 
   const Dropdown = (props: DropdownProps) => {
     const { initial, onValueChange, options } = props;

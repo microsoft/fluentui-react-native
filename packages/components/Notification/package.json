@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/notification",
-  "version": "0.1.0",
+  "version": "0.6.0",
   "description": "add component-description",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,9 +26,14 @@
     "directory": "packages/components/Notification"
   },
   "dependencies": {
-    "@fluentui-react-native/experimental-text": ">=0.9.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.7.30",
-    "@fluentui-react-native/tokens": ">=0.14.0 <1.0.0",
+    "@fluentui-react-native/adapters": "^0.8.5",
+    "@fluentui-react-native/button": ">=0.22.31 <1.0.0",
+    "@fluentui-react-native/experimental-text": ">=0.9.2 <1.0.0",
+    "@fluentui-react-native/framework": "0.7.32",
+    "@fluentui-react-native/icon": "0.12.3",
+    "@fluentui-react-native/interactive-hooks": ">=0.16.5 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.8.47 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.15.1 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.8.3 <1.0.0"
   },
   "devDependencies": {
