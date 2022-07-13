@@ -37,7 +37,7 @@ function getRevisedPropsWorker(state: MenuTriggerState, props: any): MenuTrigger
   }
 
   if (props.accessibilityActions) {
-    revisedProps.accessibilityActions = { ...revisedProps.accessibilityActions, ...props.accessibilityActions };
+    revisedProps.accessibilityActions = [...revisedProps.accessibilityActions, ...props.accessibilityActions];
   }
 
   if (props.onAccessibilityAction) {

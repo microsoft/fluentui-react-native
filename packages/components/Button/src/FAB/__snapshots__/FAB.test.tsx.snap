@@ -73,7 +73,7 @@ exports[`Default FAB (iOS) 1`] = `
         style={
           Object {
             "color": "#ffffff",
-            "fontFamily": "System",
+            "fontFamily": "Segoe UI",
             "fontSize": 12,
             "fontWeight": "400",
             "margin": 0,

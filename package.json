@@ -77,11 +77,11 @@
     "metro-symbolicate": "^0.66.2",
     "metro-transform-plugins": "^0.66.2",
     "metro-transform-worker": "^0.66.2",
+    "moment": "^2.29.4",
     "react": "17.0.1",
     "react-native": "^0.64.3",
     "react-native-windows": "^0.64.3",
     "react-native-macos": "^0.64.6",
-    "shell-quote": "^1.7.3",
-    "simple-plist": "2.0.0-rc.0"
+    "shell-quote": "^1.7.3"
   }
 }

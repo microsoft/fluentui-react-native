@@ -42,7 +42,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       }
 
       if (!hasSubmenu && !isArrowKey && !shouldPersist) {
-        setOpen(e, false /*isOpen*/, false /*bubble*/);
+        setOpen(e, false /*isOpen*/, true /*bubble*/);
       }
 
       const isArrowClose =

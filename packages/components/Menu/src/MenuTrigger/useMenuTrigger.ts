@@ -76,6 +76,12 @@ export const useMenuTrigger = (): MenuTriggerState => {
     [open, setOpen],
   );
 
+  React.useEffect(() => {
+    return function cleanup() {
+      clearTimeout(triggerHoverOutTimer);
+    };
+  });
+
   return {
     props: {
       onClick,
