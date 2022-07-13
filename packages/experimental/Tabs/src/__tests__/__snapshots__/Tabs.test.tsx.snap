@@ -818,6 +818,7 @@ exports[`Tabs header text and count 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#242424",
@@ -904,6 +905,7 @@ exports[`Tabs header text and count 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
@@ -990,6 +992,7 @@ exports[`Tabs header text and count 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
@@ -1288,6 +1291,7 @@ exports[`Tabs props 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#323130",
@@ -1371,6 +1375,7 @@ exports[`Tabs props 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
@@ -1457,6 +1462,7 @@ exports[`Tabs props 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#242424",
@@ -1543,6 +1549,7 @@ exports[`Tabs props 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#616161",
