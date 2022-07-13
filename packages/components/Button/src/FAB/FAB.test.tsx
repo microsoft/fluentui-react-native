@@ -3,10 +3,12 @@ import { FAB } from './FAB';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import * as renderer from 'react-test-renderer';
 
-jest.mock('react-native/Libraries/Utilities/Platform', () => ({
-  OS: 'ios',
-  select: () => null,
-}));
+beforeAll(() => {
+  jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+    OS: 'ios',
+    select: () => null,
+  }));
+});
 
 it('Default FAB (iOS)', () => {
   const tree = renderer.create(<FAB>Default FAB (iOS)</FAB>).toJSON();
@@ -29,4 +31,8 @@ it('FAB shares produced styles across multiple renders', () => {
 it('FAB re-renders correctly with style', () => {
   const style = { borderColor: 'blue' };
   checkReRender(() => <FAB style={style}>Shared Style Render</FAB>, 2);
+});
+
+afterAll(() => {
+  jest.unmock('react-native/Libraries/Utilities/Platform');
 });
