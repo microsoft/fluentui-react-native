@@ -25,6 +25,7 @@ const getThemedStyles = themedStyleSheet(() => {
 });
 
 interface ShadowTestBoxProps {
+  shadowDepthText: string;
   shadowToken: ShadowToken;
   backgroundColor: ColorValue;
 }
@@ -44,7 +45,7 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
           { backgroundColor: props.backgroundColor },
         ]}
       >
-        {/* <Text variant="bodySemibold">{props.depth}</Text> */}
+        <Text variant="bodySemibold">{props.shadowDepthText}</Text>
         <Text>{getShadowDescription(props.shadowToken)}</Text>
       </View>
     </Shadow>
@@ -56,18 +57,42 @@ export const ShadowDepthTestSection: React.FunctionComponent = () => {
 
   return (
     <View>
-      <ShadowTestBox shadowToken={theme.shadows.shadow2} backgroundColor={theme.colors.background} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow4} backgroundColor={theme.colors.background} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow8} backgroundColor={theme.colors.background} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow16} backgroundColor={theme.colors.background} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow28} backgroundColor={theme.colors.background} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow64} backgroundColor={theme.colors.background} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow2brand} backgroundColor={theme.colors.brandBackground} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow4brand} backgroundColor={theme.colors.brandBackground} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow8brand} backgroundColor={theme.colors.brandBackground} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow16brand} backgroundColor={theme.colors.brandBackground} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow28brand} backgroundColor={theme.colors.brandBackground} />
-      <ShadowTestBox shadowToken={theme.shadows.shadow64brand} backgroundColor={theme.colors.brandBackground} />
+      <ShadowTestBox shadowDepthText="Shadow 2" shadowToken={theme.shadows.shadow2} backgroundColor={theme.colors.background} />
+      <ShadowTestBox shadowDepthText="Shadow 4" shadowToken={theme.shadows.shadow4} backgroundColor={theme.colors.background} />
+      <ShadowTestBox shadowDepthText="Shadow 8" shadowToken={theme.shadows.shadow8} backgroundColor={theme.colors.background} />
+      <ShadowTestBox shadowDepthText="Shadow 16" shadowToken={theme.shadows.shadow16} backgroundColor={theme.colors.background} />
+      <ShadowTestBox shadowDepthText="Shadow 28" shadowToken={theme.shadows.shadow28} backgroundColor={theme.colors.background} />
+      <ShadowTestBox shadowDepthText="Shadow 64" shadowToken={theme.shadows.shadow64} backgroundColor={theme.colors.background} />
+      <ShadowTestBox
+        shadowDepthText="Brand Shadow 2"
+        shadowToken={theme.shadows.shadow2brand}
+        backgroundColor={theme.colors.brandBackground}
+      />
+      <ShadowTestBox
+        shadowDepthText="Brand Shadow 4"
+        shadowToken={theme.shadows.shadow4brand}
+        backgroundColor={theme.colors.brandBackground}
+      />
+      <ShadowTestBox
+        shadowDepthText="Brand Shadow 8"
+        shadowToken={theme.shadows.shadow8brand}
+        backgroundColor={theme.colors.brandBackground}
+      />
+      <ShadowTestBox
+        shadowDepthText="Brand Shadow 16"
+        shadowToken={theme.shadows.shadow16brand}
+        backgroundColor={theme.colors.brandBackground}
+      />
+      <ShadowTestBox
+        shadowDepthText="Brand Shadow 28"
+        shadowToken={theme.shadows.shadow28brand}
+        backgroundColor={theme.colors.brandBackground}
+      />
+      <ShadowTestBox
+        shadowDepthText="Brand Shadow 64"
+        shadowToken={theme.shadows.shadow64brand}
+        backgroundColor={theme.colors.brandBackground}
+      />
     </View>
   );
 };
