@@ -37,6 +37,7 @@
     "@fluentui-react-native/pressable": ">=0.8.47 <1.0.0",
     "@fluentui-react-native/styling-utils": ">=0.3.6 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.18.0 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.17.0 <1.0.0",
     "@fluentui-react-native/text": ">=0.11.28 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.15.1 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.8.3 <1.0.0",

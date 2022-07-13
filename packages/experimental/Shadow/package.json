@@ -26,7 +26,8 @@
     "directory": "packages/experimental/Shadow"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.7.32"
+    "@fluentui-react-native/framework": "0.7.32",
+    "@fluentui-react-native/theme-types": ">=0.17.0 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

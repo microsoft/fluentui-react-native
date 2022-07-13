@@ -51,9 +51,9 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, ButtonSlotProps
     ),
     shadow: buildProps(
       (tokens: ButtonCoreTokens) => ({
-        depth: tokens.shadowDepth,
+        shadowToken: tokens.shadowToken,
       }),
-      ['shadowDepth'],
+      ['shadowToken'],
     ),
   },
 };
