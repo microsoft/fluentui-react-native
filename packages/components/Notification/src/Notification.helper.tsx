@@ -4,7 +4,15 @@ import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { Path } from 'react-native-svg';
 
 export type ActionButtonColorStates = { disabledColor; hoveredColor; pressedColor; focusedColor };
+
 type ActionButtonProps = ButtonProps & ButtonTokens & ActionButtonColorStates;
+
+/**
+ * We need to customize Notification's `action` slot's tokens based on Notification's variant prop.
+ * Compose doesn't let us easily do that via styling settings
+ *    (e.g. setting color in Notification.styling.ts will not apply to the action button text)
+ * This helper component is used to customize tokens via props.
+ */
 export const ActionButton = stagedComponent((props: ActionButtonProps) => {
   const CustomizedButton = Button.customize({
     subtle: {
