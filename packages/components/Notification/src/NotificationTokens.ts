@@ -31,18 +31,25 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: '#0F6CBD',
 
       disabledColor: '#2886DE',
+      pressedColor: '#0F6CBD30',
     },
     neutral: {
       backgroundColor: '#FAFAFA',
       color: '#616161',
+
+      pressedColor: '#61616145',
     },
     danger: {
       backgroundColor: '#FDF6F6',
       color: '#BC2F34',
+
+      pressedColor: '#BC2F3433',
     },
     warning: {
       backgroundColor: '#FFFBD6',
       color: '#4C4400',
+
+      pressedColor: '#4C440033',
     },
     primaryBar: {
       backgroundColor: '#EBF3FC',
@@ -50,6 +57,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: '#0F6CBD',
 
       disabledColor: '#2886DE',
+      pressedColor: '#0F6CBD30',
     },
     primaryOutlineBar: {
       backgroundColor: '#FFFFFF',
@@ -58,7 +66,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
 
       disabledColor: '#2886DE',
       hoveredColor: '0F548C',
-      pressedColor: '#0E4775',
+      pressedColor: '#0F6CBD30',
     },
     neutralBar: {
       backgroundColor: '#F0F0F0',
@@ -66,5 +74,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: '#616161',
 
       disabledColor: '#FFFFFF',
+      pressedColor: '#61616145',
     },
   } as NotificationTokens);
