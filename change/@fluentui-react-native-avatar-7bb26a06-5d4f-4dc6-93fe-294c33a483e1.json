@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "updated to rn 0.66",
-  "packageName": "@fluentui-react-native/avatar",
-  "email": "duomaster01@gmail.com",
-  "dependentChangeType": "patch"
-}
