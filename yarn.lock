@@ -4383,15 +4383,13 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.24.0.tgz#e907fc95a9f315c5289e9b4c76e855407093202e"
-  integrity sha512-UMZWX7BfmXwEw3CW8gOWnErbR7I1JYO6msa4vQav1EiUbPF1TxEN5vvQiKBu1wDHXKbPIWi3/elXAUphqT90gQ==
+  version "2.25.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.25.0.tgz#e82bd35369bd8b9ced7eb54559fe5bb5d7f6dbe1"
+  integrity sha512-pfvbEtCTNP1rZEKUbjxjJWCHtpJaAJ3eq4EfwdkL8b98VU8kkVRf0aW2h0PfN9qoQhKT0TKaw5Rr5DXaBVoJrA==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
     fs-extra "^8.0.1"
-    git-url-parse "^11.1.2"
-    glob "^7.1.4"
     human-id "^2.0.1"
     lodash "^4.17.15"
     minimatch "^3.0.4"
@@ -4400,7 +4398,7 @@ beachball@^2.20.0:
     semver "^6.1.1"
     toposort "^2.0.2"
     uuid "^8.3.1"
-    workspace-tools "^0.21.0"
+    workspace-tools "^0.22.0"
     yargs-parser "^20.2.4"
 
 big-integer@1.6.x:
@@ -7106,12 +7104,27 @@ git-up@^4.0.0:
     is-ssh "^1.3.0"
     parse-url "^6.0.0"
 
+git-up@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/git-up/-/git-up-6.0.0.tgz#dbd6e4eee270338be847a0601e6d0763c90b74db"
+  integrity sha512-6RUFSNd1c/D0xtGnyWN2sxza2bZtZ/EmI9448n6rCZruFwV/ezeEn2fJP7XnUQGwf0RAtd/mmUCbtH6JPYA2SA==
+  dependencies:
+    is-ssh "^1.4.0"
+    parse-url "^7.0.2"
+
 git-url-parse@^11.1.2:
   version "11.6.0"
   resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-11.6.0.tgz#c634b8de7faa66498a2b88932df31702c67df605"
   integrity sha512-WWUxvJs5HsyHL6L08wOusa/IXYtMuCAhrMmnTjQPpBU0TTHyDhnOATNH3xNQz7YOQUsqIIPTGr4xiVti1Hsk5g==
   dependencies:
     git-up "^4.0.0"
+
+git-url-parse@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/git-url-parse/-/git-url-parse-12.0.0.tgz#4ba70bc1e99138321c57e3765aaf7428e5abb793"
+  integrity sha512-I6LMWsxV87vysX1WfsoglXsXg6GjQRKq7+Dgiseo+h0skmp5Hp2rzmcEIRQot9CPA+uzU7x1x7jZdqvTFGnB+Q==
+  dependencies:
+    git-up "^6.0.0"
 
 glob-parent@^5.1.2, glob-parent@~5.1.2:
   version "5.1.2"
@@ -7891,7 +7904,7 @@ is-shared-array-buffer@^1.0.1:
   resolved "https://registry.yarnpkg.com/is-shared-array-buffer/-/is-shared-array-buffer-1.0.1.tgz#97b0c85fbdacb59c9c446fe653b82cf2b5b7cfe6"
   integrity sha512-IU0NmyknYZN0rChcKhRO1X8LYz5Isj/Fsqh8NJOSf+N/hCOTwy29F32Ik7a+QszE63IdvmwdTPDd6cZ5pg4cwA==
 
-is-ssh@^1.3.0:
+is-ssh@^1.3.0, is-ssh@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/is-ssh/-/is-ssh-1.4.0.tgz#4f8220601d2839d8fa624b3106f8e8884f01b8b2"
   integrity sha512-x7+VxdxOdlV3CYpjvRLBv5Lo9OJerlYanjwFrPR9fuGPjCiNiCzFgAWpiLAohSbsnH4ZAys3SBh+hq5rJosxUQ==
@@ -10804,6 +10817,13 @@ parse-path@^4.0.4:
     qs "^6.9.4"
     query-string "^6.13.8"
 
+parse-path@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/parse-path/-/parse-path-5.0.0.tgz#f933152f3c6d34f4cf36cfc3d07b138ac113649d"
+  integrity sha512-qOpH55/+ZJ4jUu/oLO+ifUKjFPNZGfnPJtzvGzKN/4oLMil5m9OH4VpOj6++9/ytJcfks4kzH2hhi87GL/OU9A==
+  dependencies:
+    protocols "^2.0.0"
+
 parse-url@^6.0.0:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-6.0.2.tgz#4a30b057bfc452af64512dfb1a7755c103db3ea1"
@@ -10813,6 +10833,16 @@ parse-url@^6.0.0:
     normalize-url "^6.1.0"
     parse-path "^4.0.4"
     protocols "^1.4.0"
+
+parse-url@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/parse-url/-/parse-url-7.0.2.tgz#d21232417199b8d371c6aec0cedf1406fd6393f0"
+  integrity sha512-PqO4Z0eCiQ08Wj6QQmrmp5YTTxpYfONdOEamrtvK63AmzXpcavIVQubGHxOEwiIoDZFb8uDOoQFS0NCcjqIYQg==
+  dependencies:
+    is-ssh "^1.4.0"
+    normalize-url "^6.1.0"
+    parse-path "^5.0.0"
+    protocols "^2.0.1"
 
 parse5-htmlparser2-tree-adapter@^6.0.1:
   version "6.0.1"
@@ -11153,7 +11183,7 @@ protocols@^1.4.0:
   resolved "https://registry.yarnpkg.com/protocols/-/protocols-1.4.8.tgz#48eea2d8f58d9644a4a32caae5d5db290a075ce8"
   integrity sha512-IgjKyaUSjsROSO8/D49Ab7hP8mJgTYcqApOqdPhLoPxAplXmkp+zRvsrSQjFn5by0rhm4VH0GAUELIPpx7B1yg==
 
-protocols@^2.0.1:
+protocols@^2.0.0, protocols@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/protocols/-/protocols-2.0.1.tgz#8f155da3fc0f32644e83c5782c8e8212ccf70a86"
   integrity sha512-/XJ368cyBJ7fzLMwLKv1e4vLxOju2MNAIokcr7meSaNcVbWz/CPcW22cP04mwxOErdA5mwjA8Q6w/cdAQxVn7Q==
@@ -13594,6 +13624,19 @@ workspace-tools@^0.21.0:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
     git-url-parse "^11.1.2"
+    globby "^11.0.0"
+    jju "^1.4.0"
+    multimatch "^4.0.0"
+    read-yaml-file "^2.0.0"
+
+workspace-tools@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.22.0.tgz#485ab42664812980c1e3394cdc6c4393245d8d16"
+  integrity sha512-3BNHTncmtUCptpb5EWrcb88tRqYXqOqmfj8ASLp7445ixP2g9ddXzh2cbmH/vHb3KJXCM8nS+N/PQsrmhJxr5w==
+  dependencies:
+    "@yarnpkg/lockfile" "^1.1.0"
+    find-up "^4.1.0"
+    git-url-parse "^12.0.0"
     globby "^11.0.0"
     jju "^1.4.0"
     multimatch "^4.0.0"
