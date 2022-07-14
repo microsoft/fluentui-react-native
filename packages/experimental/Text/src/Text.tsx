@@ -23,6 +23,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     color,
     font,
     italic,
+    onAccessibilityTap,
     size,
     strikethrough,
     style,
@@ -49,6 +50,15 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     : align === 'end'
     ? 'right'
     : align;
+
+  const onAccTap =
+    onAccessibilityTap ??
+    React.useCallback(
+      (event?) => {
+        props.onPress(event);
+      },
+      [props.onPress],
+    );
 
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
@@ -82,6 +92,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     const mergedProps = {
       numberOfLines: truncate || !wrap ? 1 : 0,
       onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+      onAccessibilityTap: onAccTap,
       ...rest,
       ...extra,
       style: mergeStyles(tokenStyle, props.style, extra?.style),

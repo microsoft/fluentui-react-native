@@ -42,6 +42,7 @@ exports[`Badge component tests Badge all props 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#0078d4",
@@ -86,6 +87,7 @@ exports[`Badge component tests Badge tokens 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#ffffff",
