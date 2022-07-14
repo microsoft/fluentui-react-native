@@ -5,6 +5,13 @@ import { ShadowDepth } from './Shadow.types';
 export const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
 
 function getShadowTokenStyleSetWorker(t: Theme, depth: ShadowDepth) {
+  if (!depth) {
+    return {
+      key: emptyShadowStyle,
+      ambient: emptyShadowStyle,
+    };
+  }
+
   const keyShadow = t.shadows[depth.toString()].key;
   const ambientShadow = t.shadows[depth.toString()].ambient;
 
@@ -40,4 +47,14 @@ const shadowOpacityFromRGBAColor = (rgbaColor: ColorValue) => {
 
   // Round to two decimal places
   return Math.round(opacityAsDecimal * 100) / 100;
+};
+
+const emptyShadowStyle = {
+  shadowColor: '000000',
+  shadowOpacity: 0,
+  shadowRadius: 0,
+  shadowOffset: {
+    width: 0,
+    height: 0,
+  },
 };
