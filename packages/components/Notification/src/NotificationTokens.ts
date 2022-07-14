@@ -32,7 +32,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       disabledColor: '#2886DE', // brandForegroundDisabled
       /**
        * None of the foreground tokens here have pressed versions so the foreground color with an alpha value was used.
-       * The FUA NotificationView was used to color match.
+       * The FluentUI Apple NotificationView was used to color match.
        */
       pressedColor: '#0F6CBD30',
     },
@@ -42,13 +42,13 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       disabledColor: '#FFFFFF', // foregroundDisabled2
       pressedColor: '#61616145',
     },
-    // hardcoded values from FUA NotificationView
+    // hardcoded values from FluentUI Apple NotificationView
     danger: {
       backgroundColor: '#FDF6F6',
       color: '#BC2F34',
       pressedColor: '#BC2F3433',
     },
-    // hardcoded values from FUA NotificationView
+    // hardcoded values from FluentUI Apple NotificationView
     warning: {
       backgroundColor: '#FFFBD6',
       color: '#4C4400',
