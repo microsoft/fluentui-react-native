@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 14 Jul 2022 16:13:45 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 17:13:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.74.0
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Minor changes
+
+- add support for onAccessibilityTap on Text (email not defined)
+- Bump @fluentui-react-native/avatar to v1.1.11
+- Bump @fluentui-react-native/badge to v0.0.50
+- Bump @fluentui-react-native/button to v0.23.2
+- Bump @fluentui-react-native/experimental-button to v0.15.35
+- Bump @fluentui-react-native/experimental-checkbox to v0.11.17
+- Bump @fluentui-react-native/experimental-menu-button to v0.3.56
+- Bump @fluentui-react-native/experimental-tabs to v0.4.55
+- Bump @fluentui-react-native/experimental-text to v0.9.3
+- Bump @fluentui-react-native/menu to v1.0.8
+- Bump @fluentui-react-native/notification to v0.6.3
+- Bump @fluentui/react-native to v0.30.10
 
 ## 0.73.2
 
