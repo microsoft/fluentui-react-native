@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Revert \"Add support for onAccessibilityTap on Text\" ",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "amchiu@microsoft.com",
-  "dependentChangeType": "patch"
-}

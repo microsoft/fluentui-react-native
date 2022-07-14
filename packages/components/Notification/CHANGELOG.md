@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 20:03:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.5
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Bump @fluentui-react-native/button to v0.24.1
+- Bump @fluentui-react-native/experimental-text to v0.10.1
 
 ## 0.6.4
 
