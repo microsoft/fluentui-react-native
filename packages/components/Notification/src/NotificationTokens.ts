@@ -37,8 +37,9 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       pressedColor: '#0F6CBD30',
     },
     neutral: {
-      backgroundColor: '#FAFAFA', // neutralBackground4
-      color: '#616161', // neutralForeground4
+      backgroundColor: '#FAFAFA', // background4
+      color: '#616161', // foreground2
+      disabledColor: '#FFFFFF', // foregroundDisabled2
       pressedColor: '#61616145',
     },
     // hardcoded values from FUA NotificationView
@@ -62,7 +63,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     },
     primaryOutlineBar: {
       backgroundColor: '#FFFFFF', // background1
-      borderColor: '#E0E0E0', // neutralStroke2
+      borderColor: '#E0E0E0', // stroke2
       color: '#0F6CBD', // brandForeground1
       disabledColor: '#2886DE', // brandForegroundDisabled
       pressedColor: '#0F6CBD30',
