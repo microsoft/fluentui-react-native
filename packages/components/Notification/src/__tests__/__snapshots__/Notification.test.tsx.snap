@@ -1,5 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+// moving marginHorizontal into style object prompts the error "Shallow compare failed for Notification, key: style"
 exports[`Notification component tests Notification default 1`] = `
 <View
   marginHorizontal={16}
@@ -37,7 +38,6 @@ exports[`Notification component tests Notification default 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "alignSelf": "flex-start",
@@ -101,7 +101,6 @@ exports[`Notification component tests Notification default 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",

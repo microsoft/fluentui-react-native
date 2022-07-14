@@ -50,7 +50,6 @@ exports[`Checkbox component tests Menu default 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
-    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#323130",
@@ -121,7 +120,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -211,7 +209,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -267,7 +264,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
@@ -339,7 +335,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -435,7 +430,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -507,7 +501,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -663,7 +656,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -791,7 +783,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
@@ -863,7 +854,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -1019,7 +1009,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -1146,7 +1135,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -1218,7 +1206,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -1374,7 +1361,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -1501,7 +1487,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -1573,7 +1558,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -1729,7 +1713,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -1844,7 +1827,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -1916,7 +1898,6 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -2012,7 +1993,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
@@ -2071,7 +2051,6 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#424242",
