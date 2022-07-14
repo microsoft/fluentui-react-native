@@ -49,11 +49,5 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, ButtonSlotProps
       }),
       ['iconColor', 'iconSize'],
     ),
-    shadow: buildProps(
-      (tokens: ButtonCoreTokens) => ({
-        depth: tokens.shadowDepth,
-      }),
-      ['shadowDepth'],
-    ),
   },
 };

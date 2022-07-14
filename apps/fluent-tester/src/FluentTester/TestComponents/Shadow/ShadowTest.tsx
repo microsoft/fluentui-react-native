@@ -1,8 +1,12 @@
 import * as React from 'react';
+import { Text } from '@fluentui/react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SHADOW_TESTPAGE } from './consts';
 import { ShadowDepthTestSection } from './ShadowDepthTestSection';
-import { ShadowButtonTestSection } from './ShadowButtonTestSection';
+
+const ShadowButtonTest: React.FunctionComponent = () => {
+  return <Text>TODO</Text>;
+};
 
 const shadowSections: TestSection[] = [
   {
@@ -13,7 +17,7 @@ const shadowSections: TestSection[] = [
   {
     name: 'Shadows on Button Examples',
     testID: SHADOW_TESTPAGE,
-    component: ShadowButtonTestSection,
+    component: ShadowButtonTest,
   },
 ];
 
