@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 14 Jul 2022 17:13:16 GMT",
+      "tag": "@fluentui-react-native/button_v0.23.2",
+      "version": "0.23.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/button",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1",
+            "comment": "update all necessary snapshots"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.3",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 16:13:45 GMT",
       "tag": "@fluentui-react-native/button_v0.23.1",
       "version": "0.23.1",

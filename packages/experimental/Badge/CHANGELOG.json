@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Thu, 14 Jul 2022 17:13:15 GMT",
+      "tag": "@fluentui-react-native/badge_v0.0.50",
+      "version": "0.0.50",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/badge",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1",
+            "comment": "update snapshots"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.3",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 12 Jul 2022 17:07:10 GMT",
       "tag": "@fluentui-react-native/badge_v0.0.49",
       "version": "0.0.49",
