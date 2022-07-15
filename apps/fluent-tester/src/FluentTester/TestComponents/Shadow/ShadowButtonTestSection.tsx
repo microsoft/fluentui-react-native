@@ -3,8 +3,10 @@ import { Platform, View } from 'react-native';
 import { FAB, Text } from '@fluentui/react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 
-const CustomFABNoShadow = FAB.customize({ shadowDepth: undefined });
-const CustomFABShadow64 = FAB.customize({ shadowDepth: 'shadow64' });
+const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
+const CustomFABShadow64 = FAB.customize({
+  shadowToken: { ambient: { x: 0, y: 0, blur: 8, color: '#00000033' }, key: { x: 0, y: 32, blur: 64, color: '#0000003d' } },
+});
 
 export const ShadowButtonTestSection: React.FunctionComponent = () => {
   if (Platform.OS === 'ios') {

@@ -1,19 +1,19 @@
-import { Theme, memoize } from '@fluentui-react-native/framework';
+import { memoize } from '@fluentui-react-native/framework';
+import { ShadowToken } from '@fluentui-react-native/theme-types';
 import { ColorValue } from 'react-native';
-import { ShadowDepth } from './Shadow.types';
 
 export const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
 
-function getShadowTokenStyleSetWorker(t: Theme, depth: ShadowDepth) {
-  if (!depth) {
+function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
+  if (!shadowToken) {
     return {
       key: emptyShadowStyle,
       ambient: emptyShadowStyle,
     };
   }
 
-  const keyShadow = t.shadows[depth.toString()].key;
-  const ambientShadow = t.shadows[depth.toString()].ambient;
+  const keyShadow = shadowToken.key;
+  const ambientShadow = shadowToken.ambient;
 
   return {
     key: {
