@@ -1,6 +1,8 @@
 import { DynamicColorIOS } from 'react-native';
 
-// add comment
+/**
+ * Fluent 2 colors are not yet tokenized for iOS so DynamicColorIOS is necessary for dark mode
+ */
 export const notificationColors = {
   background1: DynamicColorIOS({
     light: '#FFFFFF',
