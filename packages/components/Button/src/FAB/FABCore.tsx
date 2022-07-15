@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { fabName, FABType } from './FAB.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './FAB.styling';
@@ -9,6 +9,7 @@ import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ButtonCoreProps } from '../Button.types';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -31,6 +32,7 @@ export const FAB = compose<FABType>({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
     const { icon, onClick, ...rest } = userProps;
@@ -63,7 +65,7 @@ export const FAB = compose<FABType>({
       }
       const label = accessibilityLabel ?? childText;
 
-      return (
+      const fabWithoutShadow = (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           {icon && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
@@ -71,6 +73,13 @@ export const FAB = compose<FABType>({
           )}
         </Slots.root>
       );
+
+      const hasShadow = Platform.OS === 'ios';
+      if (hasShadow) {
+        return <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
+      } else {
+        return fabWithoutShadow;
+      }
     };
   },
 });

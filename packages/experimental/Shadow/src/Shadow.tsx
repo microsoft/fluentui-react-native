@@ -7,7 +7,7 @@ import { getShadowTokenStyleSet } from './shadowStyle';
 export const Shadow = stagedComponent((props: ShadowProps) => {
   const theme = useFluentTheme();
 
-  return (final: ShadowProps, ...children: React.ReactNode[]) => {
+  return (final: ShadowProps, children: React.ReactNode) => {
     const shadowTokenStyleSet = getShadowTokenStyleSet(theme, props.depth);
     const mergedProps = mergeProps(final, { style: shadowTokenStyleSet.key });
 
