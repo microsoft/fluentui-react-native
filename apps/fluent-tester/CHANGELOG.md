@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 15 Jul 2022 00:29:27 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Jul 2022 01:22:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.75.3
+
+Fri, 15 Jul 2022 01:22:54 GMT
+
+### Patches
+
+- Replace shadowDepth with shadowToken (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.24.3
+- Bump @fluentui-react-native/experimental-button to v0.16.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.3
+- Bump @fluentui-react-native/experimental-shadow to v0.2.7
+- Bump @fluentui-react-native/menu to v1.0.12
+- Bump @fluentui-react-native/notification to v0.6.7
+- Bump @fluentui/react-native to v0.31.3
 
 ## 0.75.2
 
