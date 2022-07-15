@@ -28,8 +28,7 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
     <Notification
       variant={'primary'}
       icon={iconProps}
-      title="Kat's iPhone X"
-      action="X"
+      title="Kat's iPhoneX"
       onPress={() => {
         console.log('Notification tapped');
       }}
@@ -71,7 +70,6 @@ const WarningTest: React.FunctionComponent = () => {
   return (
     <Notification
       variant={'warning'}
-      action="X"
       onPress={() => {
         console.log('Notification tapped');
       }}
