@@ -11,8 +11,9 @@ interface ShadowTestProps {
 }
 
 const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestProps) => {
+  const theme = useFluentTheme();
   return (
-    <Shadow shadowToken={useFluentTheme().shadows[props.depth]}>
+    <Shadow shadowToken={theme.shadows[props.depth]}>
       <Text>{props.displayText}</Text>
     </Shadow>
   );
