@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Jul 2022 00:29:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.6
+
+Fri, 15 Jul 2022 00:29:27 GMT
+
+### Patches
+
+- Fix some versions (ruaraki@microsoft.com)
+- Add shadow to iOS FAB (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.5
 
