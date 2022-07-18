@@ -4,7 +4,7 @@ This document explains how to override tokens from the Fluent Design System usin
 
 ## Overriding Global Tokens
 
-When components using tokens were developed, it was assumed that global tokens would not be allowed to change. Because of this, any global tokens that are used directly by components, such as border radius tokens or shared colors, will not have changed reflected within components even if they are overridden in a codebase.
+When components using tokens were developed, it was assumed that global tokens would not be allowed to change. Because of this, any global tokens that are used directly by components, such as border radius tokens or shared colors, will not have changes reflected within components even if they are overridden in a codebase.
 
 For example, the following will not result in any changes to FURN components:
 
