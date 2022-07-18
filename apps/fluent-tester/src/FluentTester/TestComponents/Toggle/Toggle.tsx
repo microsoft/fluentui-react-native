@@ -3,12 +3,14 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { TOGGLE_TESTPAGE } from './consts';
 import { View } from 'react-native';
 import { Toggle } from '@fluentui-react-native/toggle';
-
+import { Switch } from 'react-native';
 const StandardUsage: React.FunctionComponent = () => {
+  const [ss, css] = React.useState(true);
+
   return (
     <View>
       <Toggle />
-      <Toggle />
+      <Switch value={ss} onValueChange={css} />
     </View>
   );
 };

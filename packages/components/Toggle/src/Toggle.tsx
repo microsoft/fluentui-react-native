@@ -1,13 +1,13 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View, Animated } from 'react-native';
+import { View } from 'react-native';
 import { buttonName, ButtonType, ButtonProps } from './Toggle.types';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Toggle.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { ViewWin32 } from '@office-iss/react-native-win32';
+// import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
  *
@@ -71,7 +71,7 @@ export const Button = compose<ButtonType>({
 
           <Slots.thumb
             animationClass={'Ribbon_SwitchThumb'}
-            style={[!button.state.checked ? { left: 0, backgroundColor: 'grey' } : { left: 45, backgroundColor: 'white' }]}
+            style={[!button.state.checked ? { left: 2, backgroundColor: 'grey' } : { left: 22, backgroundColor: 'white' }]}
           />
           {/* </ViewWin32> */}
         </Slots.root>
