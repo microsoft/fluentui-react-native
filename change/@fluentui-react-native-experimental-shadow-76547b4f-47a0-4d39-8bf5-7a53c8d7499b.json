@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Shadows for Android",
+  "comment": "Empty change",
   "packageName": "@fluentui-react-native/experimental-shadow",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
