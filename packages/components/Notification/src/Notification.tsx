@@ -73,10 +73,22 @@ export const Notification = compose<NotificationType>({
             action ? (
               <Slots.action onClick={onActionPress}>{action}</Slots.action>
             ) : (
-              <Slots.action icon={dismissIconProps} />
+              <Slots.action
+                icon={dismissIconProps}
+                onClick={() => {
+                  console.log('Dismiss button tapped');
+                }}
+              />
             )
           ) : (
-            !isBar && <Slots.action icon={dismissIconProps} />
+            !isBar && (
+              <Slots.action
+                icon={dismissIconProps}
+                onClick={() => {
+                  console.log('Dismiss button tapped');
+                }}
+              />
+            )
           )}
         </Slots.root>
       );
