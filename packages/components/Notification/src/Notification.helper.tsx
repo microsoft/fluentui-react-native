@@ -44,13 +44,7 @@ export function getDismissSvg(color: Color) {
   return (
     <Svg color={color}>
       <G>
-        <Path
-          fill="currentColor"
-          d={path}
-          onPress={() => {
-            console.log('Dismiss button tapped');
-          }}
-        />
+        <Path fill="currentColor" d={path} />
       </G>
     </Svg>
   );
