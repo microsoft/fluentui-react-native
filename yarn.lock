@@ -9053,9 +9053,9 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.0.tgz#03c29d7ba9cfb5d1b140b8cfef102df76b0778a9"
-  integrity sha512-FpmlCJDa1bFC40E6y/4iwzdtWbljTwzTLQg9R1MfSHjQokoi/ls4NV9D8gg91eVO5ZA0zennvi8NhcZI5RnPYQ==
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.1.tgz#55526193b8df0eb34d1e6831e0428bf9834c1973"
+  integrity sha512-00AxOLJQhJPQHwExageTZrG4zwdDbbd40USNFyb4VddBv5VmS1e830W8HOBDKThpUhfYufspWFxO6E1sXQcfLA==
   dependencies:
     "@xmldom/xmldom" "^0.8.0"
     abort-controller "^3.0.0"
@@ -9074,7 +9074,7 @@ lage@^1.5.0:
     p-graph "^1.1.1"
     p-limit "^3.1.0"
     p-profiler "^0.2.1"
-    workspace-tools "^0.21.0"
+    workspace-tools "^0.23.0"
     yargs-parser "^18.1.3"
 
 last-run@^1.1.0:
@@ -13571,23 +13571,23 @@ workspace-tools@^0.18.2, workspace-tools@^0.18.4:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.21.0:
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.21.0.tgz#eab13d4fac2cace36f6ecef1fe30ed6d912124cb"
-  integrity sha512-ZOGOr42brfDFJcKUz8AonRabORtq0UbuoF6chmcQUwRYmu+Qs85/ZhfflrrMSJLP3yRoqcBe/lvDjGzkWYViww==
+workspace-tools@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.22.0.tgz#485ab42664812980c1e3394cdc6c4393245d8d16"
+  integrity sha512-3BNHTncmtUCptpb5EWrcb88tRqYXqOqmfj8ASLp7445ixP2g9ddXzh2cbmH/vHb3KJXCM8nS+N/PQsrmhJxr5w==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
-    git-url-parse "^11.1.2"
+    git-url-parse "^12.0.0"
     globby "^11.0.0"
     jju "^1.4.0"
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.22.0:
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.22.0.tgz#485ab42664812980c1e3394cdc6c4393245d8d16"
-  integrity sha512-3BNHTncmtUCptpb5EWrcb88tRqYXqOqmfj8ASLp7445ixP2g9ddXzh2cbmH/vHb3KJXCM8nS+N/PQsrmhJxr5w==
+workspace-tools@^0.23.0:
+  version "0.23.3"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.23.3.tgz#1833c848170d1370675535963778524d0ad0aef4"
+  integrity sha512-8JWfnW9Kj24X8l4sOvwN77cxExBM57fpbjo+UqvFzY7L9FeyY4MUCqpLKpKARkK8okF/PFPOL9Dl1QgsEMT4yw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
