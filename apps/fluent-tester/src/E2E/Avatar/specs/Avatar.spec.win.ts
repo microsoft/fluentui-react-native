@@ -38,22 +38,24 @@ describe('Avatar Accessibility Testing', () => {
     AvatarPageObject.scrollToTestElement();
     AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
-  afterEach(() => {
-    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
-  });
   it('Validate accessibilityLabel', () => {
     expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(AVATAR_ACCESSIBILITY_LABEL);
+    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate accessibilityLabel from `name` prop', () => {
     expect(AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(AVATAR_ACCESSIBILITY_LABEL_BY_NAME);
+    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate accessibilityHint', () => {
     expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_HINT_ATTRIBUTE)).toEqual(AVATAR_ACCESSIBILITY_HINT);
+    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate accessibilityRole', () => {
     expect(AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_LINK);
+    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate default accessibilityRole', () => {
     expect(AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_IMAGE);
+    expect(AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 });
