@@ -1,4 +1,4 @@
-# Using Color Tokens
+# Using Tokens
 
 With the Fluent Design System, we have a set of colors that we have agreed to use for our UI.
 This page describes how to access these colors.
