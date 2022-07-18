@@ -52,7 +52,6 @@ exports[`CompoundButton default 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "color": "#323130",
@@ -72,7 +71,6 @@ exports[`CompoundButton default 1`] = `
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
           "fontFamily": "Segoe UI",
