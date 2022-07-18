@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Wed, 25 May 2022 18:43:10 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+
+## 0.15.1
+
+Fri, 08 Jul 2022 21:23:36 GMT
+
+### Patches
+
+- Move used tokens types to tokens package (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Minor changes
+
+- added letter spacing (joannaquu@gmail.com)
 
 ## 0.14.0
 

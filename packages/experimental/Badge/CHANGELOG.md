@@ -1,8 +1,112 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 20:03:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.10.1
+
+## 0.1.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/experimental-text to v0.10.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/icon to v0.13.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+
+## 0.0.50
+
+Thu, 14 Jul 2022 17:13:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.3
+
+## 0.0.49
+
+Tue, 12 Jul 2022 17:07:10 GMT
+
+### Patches
+
+- UI fixes (v.kozova13@gmail.com)
+
+## 0.0.48
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.2
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/icon to v0.12.3
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/tokens to v0.15.1
+
+## 0.0.47
+
+Fri, 08 Jul 2022 17:53:30 GMT
+
+### Patches
+
+- Fixed colorful icons in HC (vkozlova@microsoft.com)
+
+## 0.0.46
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.1
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/icon to v0.12.2
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.0.45
+
+Thu, 07 Jul 2022 12:16:12 GMT
+
+### Patches
+
+- Fixed badge position (vkozlova@microsoft.com)
+
+## 0.0.44
+
+Tue, 28 Jun 2022 08:52:48 GMT
+
+### Patches
+
+- Fixed busy icon, added HC icons and fixed Tester (v.kozova13@gmail.com)
+
+## 0.0.43
+
+Thu, 16 Jun 2022 09:39:38 GMT
+
+### Patches
+
+- Updated presenceBadge icons according to Web (v.kozova13@gmail.com)
+
+## 0.0.42
+
+Wed, 15 Jun 2022 07:59:57 GMT
+
+### Patches
+
+- Fixed presenceBadge icon size (v.kozova13@gmail.com)
 
 ## 0.0.41
 

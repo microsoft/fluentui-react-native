@@ -1,26 +1,19 @@
 import * as React from 'react';
-import { Text } from 'react-native';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SHADOW_TESTPAGE } from './consts';
-
-const ShadowDepthRampTest: React.FunctionComponent = () => {
-  return <Text>TODO</Text>;
-};
-
-const ShadowButtonTest: React.FunctionComponent = () => {
-  return <Text>TODO</Text>;
-};
+import { ShadowDepthTestSection } from './ShadowDepthTestSection';
+import { ShadowButtonTestSection } from './ShadowButtonTestSection';
 
 const shadowSections: TestSection[] = [
   {
     name: 'Shadow Depth Ramp',
     testID: SHADOW_TESTPAGE,
-    component: ShadowDepthRampTest,
+    component: ShadowDepthTestSection,
   },
   {
     name: 'Shadows on Button Examples',
     testID: SHADOW_TESTPAGE,
-    component: ShadowButtonTest,
+    component: ShadowButtonTestSection,
   },
 ];
 

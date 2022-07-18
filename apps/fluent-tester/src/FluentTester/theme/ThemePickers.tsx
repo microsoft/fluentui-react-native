@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Picker, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
 import { ThemeOptions } from '@fluentui-react-native/theme-types';
+import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {
@@ -42,13 +43,10 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
     },
     [setValue, onChange],
   );
-  return (
-    <Picker selectedValue={value} style={themePickerStyles.dropdown} onValueChange={onValueChange}>
-      {contents.map((entry: PartPickerEntry, index: number) => (
-        <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-      ))}
-    </Picker>
-  );
+  const MenuPickerCollection = contents.map((entry: PartPickerEntry) => {
+    return entry.label;
+  });
+  return <MenuPicker selected={value} style={themePickerStyles.dropdown} onChange={onValueChange} collection={MenuPickerCollection} />;
 };
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });

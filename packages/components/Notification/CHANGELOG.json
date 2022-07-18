@@ -1,0 +1,359 @@
+{
+  "name": "@fluentui-react-native/notification",
+  "entries": [
+    {
+      "date": "Fri, 15 Jul 2022 01:22:54 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.24.3",
+            "commit": "4a2991bd1d5bbcc38cfb023c84845557f4791de9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 15 Jul 2022 00:29:27 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.6",
+      "version": "0.6.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.24.2",
+            "commit": "368fee7d4df7596cab2638938835f7ded84bc6c9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Jul 2022 20:03:37 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.5",
+      "version": "0.6.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "3c2728e993014ee36272608ce23165aa8212bb31",
+            "comment": "Revert \"Add support for onAccessibilityTap on Text\" "
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.24.1",
+            "commit": "32c99c628be487a61c9ad2f792accc4360e1cfe7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.10.1",
+            "commit": "32c99c628be487a61c9ad2f792accc4360e1cfe7"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Jul 2022 18:09:51 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.4",
+      "version": "0.6.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "duomaster01@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b",
+            "comment": "updated to rn 0.66"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.24.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.10.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.17.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/tokens to v0.16.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.9.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Jul 2022 17:13:16 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.3",
+      "version": "0.6.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/notification",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1",
+            "comment": "update all necessary snapshots"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.23.2",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.3",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Jul 2022 16:13:45 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.2",
+      "version": "0.6.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.23.1",
+            "commit": "3066715e32b200e751633c1979f5f2155fbd42fa"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 13 Jul 2022 23:23:59 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.23.0",
+            "commit": "d4320c9f7385a7f37dc8ce521c413071b8cb55a0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 12 Jul 2022 18:02:07 GMT",
+      "tag": "@fluentui-react-native/notification_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "ff827a5fcc714ea296983898fcb7e95871bccb0a",
+            "comment": "add optional icon"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 11 Jul 2022 18:16:56 GMT",
+      "tag": "@fluentui-react-native/notification_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "2f0729d12058a516a029ceb7316b302388a89c4c",
+            "comment": "add bar tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 Jul 2022 21:23:37 GMT",
+      "tag": "@fluentui-react-native/notification_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.22.31",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.2",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.32",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.5",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.47",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/tokens to v0.15.1",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Jul 2022 21:24:07 GMT",
+      "tag": "@fluentui-react-native/notification_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "0bd7f44b8568fef76490f87cfd3f2de384807d13",
+            "comment": "added optional title"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.22.30",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.9.1",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.31",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.16.4",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/pressable to v0.8.46",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/tokens to v0.15.0",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 05 Jul 2022 20:47:13 GMT",
+      "tag": "@fluentui-react-native/notification_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "4a6ddb0228c4a69881bc809789691934456005d2",
+            "comment": "add bar tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 29 Jun 2022 21:55:35 GMT",
+      "tag": "@fluentui-react-native/notification_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "2fb2d0b15e4ae7cc2f34c5f5065b0cb08b347ad8",
+            "comment": "update background colors"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 21 Jun 2022 23:39:02 GMT",
+      "tag": "@fluentui-react-native/notification_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "6426ed850d4667d8cefdd7140017959dca5642fe",
+            "comment": "Fix jest"
+          }
+        ]
+      }
+    }
+  ]
+}

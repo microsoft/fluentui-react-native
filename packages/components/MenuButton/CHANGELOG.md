@@ -1,8 +1,138 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
+This log was last generated on Fri, 15 Jul 2022 01:22:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.3
+
+Fri, 15 Jul 2022 01:22:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.3
+
+## 0.8.2
+
+Fri, 15 Jul 2022 00:29:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.2
+
+## 0.8.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.1
+
+## 0.8.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.24.0
+- Bump @fluentui-react-native/component-cache to v1.4.0
+- Bump @fluentui-react-native/contextual-menu to v0.17.0
+- Bump @fluentui-react-native/icon to v0.13.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+
+## 0.7.78
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.23.2
+
+## 0.7.77
+
+Thu, 14 Jul 2022 16:13:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.23.1
+
+## 0.7.76
+
+Wed, 13 Jul 2022 23:23:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.23.0
+
+## 0.7.75
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.31
+- Bump @fluentui-react-native/contextual-menu to v0.16.42
+- Bump @fluentui-react-native/icon to v0.12.3
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @uifabricshared/foundation-compose to v1.11.23
+
+## 0.7.74
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.30
+- Bump @fluentui-react-native/contextual-menu to v0.16.41
+- Bump @fluentui-react-native/icon to v0.12.2
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.7.73
+
+Thu, 07 Jul 2022 17:57:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.40
+
+## 0.7.72
+
+Wed, 29 Jun 2022 17:36:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.39
+
+## 0.7.71
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.38
+
+## 0.7.70
+
+Wed, 15 Jun 2022 18:26:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.22.29
+
+## 0.7.69
+
+Wed, 15 Jun 2022 00:46:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.37
 
 ## 0.7.68
 

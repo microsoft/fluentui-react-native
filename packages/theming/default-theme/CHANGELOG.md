@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Wed, 25 May 2022 18:43:08 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+- Bump @fluentui-react-native/theme to v0.7.0
+- Bump @fluentui-react-native/theming-utils to v0.14.0
 
 ## 0.13.0
 

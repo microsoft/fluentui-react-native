@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/icon",
-  "version": "0.12.1",
+  "version": "0.13.0",
   "description": "A cross-platform opinionated Fluent Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -18,13 +18,12 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.13.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.7.30",
-    "@fluentui-react-native/text": "^0.11.26",
-    "@fluentui-react-native/theme-types": ">=0.17.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.13.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.14.0 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.11.22",
+    "@fluentui-react-native/default-theme": ">=0.14.0 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.0",
+    "@fluentui-react-native/text": "^0.12.0",
+    "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.14.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.16.0 <1.0.0",
     "react-native-svg": "^12.3.0"
   },
   "repository": {
@@ -34,14 +33,14 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@office-iss/react-native-win32": "^0.64.8",
-    "@types/react-native": "^0.64.0",
+    "@office-iss/react-native-win32": "^0.66.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.64.3",
+    "react-native": "^0.66.0",
     "react-native-svg-transformer": "^1.0.0"
   },
   "peerDependencies": {
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.0"
   },
   "author": "",
   "license": "MIT"

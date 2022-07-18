@@ -26,6 +26,14 @@ export const commonTestStyles = StyleSheet.create({
   settings: {
     flexGrow: 1,
   },
+  settingsPicker: {
+    flexDirection: 'column',
+    flex: 1,
+  },
+  pickerControlled: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   vmargin: {
     marginVertical: 6,
   },

@@ -1,8 +1,92 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Mon, 13 Jun 2022 23:58:18 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.4.0
+- Bump @fluentui-react-native/framework to v0.8.0
+
+## 0.15.3
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.32
+
+## 0.15.2
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+
+## 0.15.1
+
+Thu, 23 Jun 2022 16:08:07 GMT
+
+### Patches
+
+- Bump FUA podspecs/podfile.lock to 0.5.2 (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.15.0
+
+Tue, 21 Jun 2022 21:07:14 GMT
+
+### Minor changes
+
+- Renamed Avatar to NativeAvatar, JSAvatar to Avatar (v.kozova13@gmail.com)
+
+## 0.14.45
+
+Tue, 21 Jun 2022 20:05:26 GMT
+
+### Patches
+
+- Rewrote tests using it.each method (v.kozova13@gmail.com)
+
+## 0.14.44
+
+Thu, 16 Jun 2022 19:11:01 GMT
+
+### Patches
+
+- Added ring configuration (v.kozova13@gmail.com)
+
+## 0.14.43
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- Fixed error on Mac and Windows in getINitials method (v.kozova13@gmail.com)
+- apple: remove unneccesary build settings from podspec (sanajmi@microsoft.com)
+
+## 0.14.42
+
+Thu, 16 Jun 2022 09:39:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.0.43
+
+## 0.14.41
+
+Wed, 15 Jun 2022 07:59:57 GMT
+
+### Patches
+
+- Added a new example to Tester (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.0.42
 
 ## 0.14.40
 

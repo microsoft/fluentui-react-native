@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Thu, 14 Jul 2022 18:09:50 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b",
+            "comment": "Update to React Native 0.66"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tokens",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.18.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 Jul 2022 21:23:36 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.15.1",
+      "version": "0.15.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000",
+            "comment": "Move used tokens types to tokens package"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Jul 2022 21:24:07 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "0bd7f44b8568fef76490f87cfd3f2de384807d13",
+            "comment": "added letter spacing"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 May 2022 18:43:10 GMT",
       "tag": "@fluentui-react-native/tokens_v0.14.0",
       "version": "0.14.0",

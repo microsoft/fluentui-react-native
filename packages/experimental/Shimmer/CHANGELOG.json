@@ -2,6 +2,75 @@
   "name": "@fluentui-react-native/experimental-shimmer",
   "entries": [
     {
+      "date": "Thu, 14 Jul 2022 18:09:51 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b",
+            "comment": "Update to React Native 0.66"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.16.0",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 08 Jul 2022 21:23:37 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.6.35",
+      "version": "0.6.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.32",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.15.1",
+            "commit": "c489bb685c8dbe94b7b6fe88957e7ce4d3c2d000"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 07 Jul 2022 21:24:07 GMT",
+      "tag": "@fluentui-react-native/experimental-shimmer_v0.6.34",
+      "version": "0.6.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/framework to v0.7.31",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shimmer",
+            "comment": "Bump @fluentui-react-native/tokens to v0.15.0",
+            "commit": "b4030a050a2c7223f45f498f3ab8cfc7f87059d9"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 25 May 2022 18:43:08 GMT",
       "tag": "@fluentui-react-native/experimental-shimmer_v0.6.33",
       "version": "0.6.33",
