@@ -173,12 +173,24 @@ const StandardCallout: React.FunctionComponent = () => {
 
   const colorDefault: string = 'default';
   const colorSelections: string[] = [colorDefault, 'red', 'green', 'blue'];
+  const menuPickerColorCollection = colorSelections.map((color) => {
+    return {
+      label: color,
+      value: color,
+    };
+  });
 
   const [selectedBackgroundColor, setSelectedBackgroundColor] = React.useState<string | undefined>(undefined);
   const [selectedBorderColor, setSelectedBorderColor] = React.useState<string | undefined>(undefined);
 
   const borderWidthDefault: string = '1';
   const borderWidthSelections: string[] = ['1', '2', '4', '10'];
+  const menuPickerBorderWidthCollection = borderWidthSelections.map((width) => {
+    return {
+      label: width,
+      value: width,
+    };
+  });
 
   const [selectedBorderWidth, setSelectedBorderWidth] = React.useState<string | undefined>(undefined);
 
@@ -238,19 +250,19 @@ const StandardCallout: React.FunctionComponent = () => {
             prompt="Background Color"
             selected={selectedBackgroundColor || colorDefault}
             onChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
-            collection={colorSelections}
+            collection={menuPickerColorCollection}
           />
           <MenuPicker
             prompt="Border Color"
             selected={selectedBorderColor || colorDefault}
             onChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
-            collection={colorSelections}
+            collection={menuPickerColorCollection}
           />
           <MenuPicker
             prompt="Border Width"
             selected={selectedBorderWidth || borderWidthDefault}
             onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
-            collection={borderWidthSelections}
+            collection={menuPickerBorderWidthCollection}
           />
         </View>
 
