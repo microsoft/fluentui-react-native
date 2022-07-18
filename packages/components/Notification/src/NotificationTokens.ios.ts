@@ -92,7 +92,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     primary: {
       backgroundColor: notificationColors.brandBackground4,
       color: notificationColors.brandForeground4,
-      // color: '#0F6CBD',
       disabledColor: notificationColors.brandForegroundDisabled,
       /**
        * None of the foreground tokens here have pressed versions so the foreground color with an alpha value was used.
@@ -114,7 +113,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     warning: {
       backgroundColor: notificationColors.PaletteYellowBackground1,
       color: notificationColors.PaletteYellowForeground1,
-      // color: '#4C4400',
       pressedColor: '#4C440033', // opacity: 0.2
     },
     primaryBar: {
