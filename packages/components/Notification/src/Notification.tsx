@@ -69,8 +69,8 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {action ? (
-            onActionPress ? (
+          {onActionPress ? (
+            action ? (
               <Slots.action onClick={onActionPress}>{action}</Slots.action>
             ) : (
               <Slots.action icon={dismissIconProps} />
