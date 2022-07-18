@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Fri, 08 Jul 2022 21:23:37 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 20:03:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+
+## 0.10.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+
+## 0.9.3
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- add support for onAccessibilityTap on Text (email not defined)
 
 ## 0.9.2
 

@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Fri, 08 Jul 2022 21:23:37 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 20:03:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.10.1
+
+## 0.5.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/focus-zone to v0.10.0
+- Bump @fluentui-react-native/experimental-text to v0.10.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @fluentui-react-native/use-styling to v0.9.0
+- Bump @fluentui-react-native/icon to v0.13.0
+- Bump @fluentui-react-native/adapters to v0.9.0
+
+## 0.4.55
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.3
 
 ## 0.4.54
 
