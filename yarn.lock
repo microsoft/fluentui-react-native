@@ -2415,9 +2415,9 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.26":
-  version "1.2.34"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.34.tgz#da0cfcff674c1a1b95b2329c04fefd7698f45dd3"
-  integrity sha512-EkgnxkIGFyX3ZulmKdeiFgbwkjPljxN0hvCWO/A8Lg9ewPmbifqFGjzOXLl5iQKlWQVCxmX5WBdHT9GR200pZA==
+  version "1.2.35"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.35.tgz#d38ce63bbcde2e7658f315f78cfb67646ebd73a7"
+  integrity sha512-cGzl9eQKA9BtCo3gNkaOTfRxT8Cc4NjBD8w7YCq+yTNSeqXODTTpiDM2AgwRWDBcmSkdMAzu+r2zdEvFfigg2Q==
   dependencies:
     "@rnx-kit/babel-preset-metro-react-native" "^1.0.17"
     "@rnx-kit/tools-node" "^1.3.0"
