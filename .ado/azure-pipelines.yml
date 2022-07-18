@@ -93,6 +93,10 @@ jobs:
       - checkout: self
         persistCredentials: true
 
+      - script: |
+          csrutil status
+        displayName: 'Check SIP Status'
+
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
