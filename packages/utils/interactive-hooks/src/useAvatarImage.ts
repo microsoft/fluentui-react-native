@@ -1,16 +1,9 @@
 import * as React from 'react';
 import { TurboModuleRegistry } from 'react-native';
-import { JSAvatarProps } from '@fluentui-react-native/experimental-avatar';
+import { AvatarProps } from './useAvatarImage.types';
 
 interface PeoplePictureModule {
   getUriForPerson: (email: string) => Promise<string>;
-}
-
-declare module 'react-native' {
-  interface TurboModuleRegistry {
-    get: (name: 'PeoplePictureModule') => PeoplePictureModule & EventSubscriptionVendor;
-  }
-  const TurboModuleRegistry: TurboModuleRegistry;
 }
 
 const _stubNativeModule: PeoplePictureModule = {
@@ -24,7 +17,7 @@ const _nativeModuleAvatarImageProvider = {
     if (email === '') {
       return Promise.resolve({ imageUrl: '' });
     }
-    const module = TurboModuleRegistry.get('PeoplePictureModule') || _stubNativeModule;
+    const module = (TurboModuleRegistry.get('PeoplePictureModule') as PeoplePictureModule) || _stubNativeModule;
     return module.getUriForPerson(email).then(
       (uri: string) => {
         return { imageUrl: uri };
@@ -49,10 +42,10 @@ const _nativeModuleAvatarImageProvider = {
 // signature. The idea being the config is the params to the service, the provider exposes the promise to fetch the
 // URI, and we can generalize any (NYI) hook state/caching benefits in the hook.
 //
-// Returns an Partial<JSAvatarProps> in case future iterations of Avatar have different image-related props that a
+// Returns an Partial<AvatarProps> in case future iterations of Avatar have different image-related props that a
 // provider prefers.
-export const useAvatarImage = (email: string): Partial<JSAvatarProps> => {
-  const [avatarProps, setAvatarProps] = React.useState<Partial<JSAvatarProps>>();
+export const useAvatarImage = (email: string): Partial<AvatarProps> => {
+  const [avatarProps, setAvatarProps] = React.useState<Partial<AvatarProps>>();
   React.useEffect(() => {
     _nativeModuleAvatarImageProvider.getPropsForConfig(email).then((props) => {
       setAvatarProps(props);

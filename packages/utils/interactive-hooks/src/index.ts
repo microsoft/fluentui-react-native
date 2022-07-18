@@ -61,3 +61,4 @@ export type { KeyCallback, KeyPressProps } from './useKeyProps';
 export { useOnPressWithFocus } from './useOnPressWithFocus';
 export type { OnPressCallback, OnPressWithFocusCallback } from './useOnPressWithFocus';
 export { useAvatarImage } from './useAvatarImage';
+export { AvatarProps } from './useAvatarImage.types';

@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { TextInput, View } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { JSAvatarProps, AvatarSizes, JSAvatar } from '@fluentui-react-native/experimental-avatar';
+import { AvatarProps, AvatarSizes, Avatar } from '@fluentui-react-native/avatar';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { useAvatarImage } from '@fluentui-react-native/interactive-hooks';
 
-const DataBackedAvatar: React.FunctionComponent<{ email?: string } & JSAvatarProps> = ({ email, ...props }) => {
+const DataBackedAvatar: React.FunctionComponent<{ email?: string } & AvatarProps> = ({ email, ...props }) => {
   const imageProps = useAvatarImage(email);
-  return <JSAvatar {...imageProps} {...props} />;
+  return <Avatar {...imageProps} {...props} />;
 };
 
 export const AvatarImageHookUsage: React.FunctionComponent = () => {
@@ -16,7 +16,7 @@ export const AvatarImageHookUsage: React.FunctionComponent = () => {
     setEmail(e.nativeEvent.text);
   }, []);
 
-  const { imageUrl } = useAvatarImage(email);
+  const imageUrl = useAvatarImage(email)?.imageUrl;
 
   return (
     <View style={commonStyles.root}>
@@ -28,7 +28,7 @@ export const AvatarImageHookUsage: React.FunctionComponent = () => {
         <Text variant="subheaderStandard">{'URI: ' + imageUrl}</Text>
         <View style={commonStyles.root}>
           {AvatarSizes.map((size) => {
-            // return <JSAvatar key={size} imageUrl={uri} size={size} />;
+            // return <Avatar key={size} imageUrl={uri} size={size} />;
             return <DataBackedAvatar key={size} email={email} size={size} />;
           })}
         </View>
