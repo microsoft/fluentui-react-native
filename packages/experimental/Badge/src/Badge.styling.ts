@@ -14,6 +14,7 @@ export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
   'rounded',
   'circular',
   'square',
+  'iconColor',
 ];
 export const badgeStates: (keyof BadgeTokens)[] = [
   'hovered',

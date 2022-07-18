@@ -119,8 +119,8 @@ const Submenu: React.FunctionComponent = () => {
       </MenuTrigger>
       <MenuPopover>
         <MenuList>
+          <MenuItemCheckbox name={'a'}>A nested MenuItemCheckbox</MenuItemCheckbox>
           <MenuItem>A nested MenuItem</MenuItem>
-          <MenuItem>A second nested MenuItem</MenuItem>
           <Submenu />
         </MenuList>
       </MenuPopover>

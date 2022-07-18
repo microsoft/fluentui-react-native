@@ -9,6 +9,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -41,6 +42,7 @@ export const Button = compose<ButtonType>({
     root: View,
     icon: Icon,
     content: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);

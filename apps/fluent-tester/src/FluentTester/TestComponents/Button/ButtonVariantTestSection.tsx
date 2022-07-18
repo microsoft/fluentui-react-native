@@ -11,6 +11,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
     src: TestSvg,
     viewBox: '0 0 500 500',
   };
+  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   return (
     <View style={[stackStyle, commonTestStyles.view]}>
@@ -46,8 +47,8 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
       </CompoundButton>
-      <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin} />
-      <FAB icon={{ svgSource: svgProps, width: 20, height: 20 }} style={commonTestStyles.vmargin}>
+      <FAB icon={iconProps} style={commonTestStyles.vmargin} />
+      <FAB icon={iconProps} style={commonTestStyles.vmargin}>
         FAB
       </FAB>
     </View>

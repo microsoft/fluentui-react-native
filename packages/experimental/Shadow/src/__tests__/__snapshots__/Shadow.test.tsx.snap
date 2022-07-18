@@ -1,10 +1,408 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Shadow component tests Shadow default 1`] = `
-<View>
-  <View>
+exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 2,
+      }
+    }
+  >
     <Text>
-      Shadow default test
+      Brand shadow (depth=2)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 4,
+      }
+    }
+  >
+    <Text>
+      Brand shadow (depth=4)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 8,
+      }
+    }
+  >
+    <Text>
+      Brand shadow (depth=8)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 8,
+          "width": 0,
+        },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 16,
+      }
+    }
+  >
+    <Text>
+      Brand shadow (depth=16)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 14,
+          "width": 0,
+        },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 28,
+      }
+    }
+  >
+    <Text>
+      Brand shadow (depth=28)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.3,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 32,
+          "width": 0,
+        },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 64,
+      }
+    }
+  >
+    <Text>
+      Brand shadow (depth=64)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow (depth=2) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 2,
+      }
+    }
+  >
+    <Text>
+      Shadow (depth=2)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow (depth=4) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 4,
+      }
+    }
+  >
+    <Text>
+      Shadow (depth=4)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow (depth=8) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
+      }
+    }
+  >
+    <Text>
+      Shadow (depth=8)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow (depth=16) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 8,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 16,
+      }
+    }
+  >
+    <Text>
+      Shadow (depth=16)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow (depth=28) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 14,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 28,
+      }
+    }
+  >
+    <Text>
+      Shadow (depth=28)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow (depth=64) 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.2,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 32,
+          "width": 0,
+        },
+        "shadowOpacity": 0.24,
+        "shadowRadius": 64,
+      }
+    }
+  >
+    <Text>
+      Shadow (depth=64)
     </Text>
   </View>
 </View>

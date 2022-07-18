@@ -31,7 +31,9 @@ export const avatarStates: (keyof AvatarTokens)[] = [
 const tokensThatAreAlsoProps: (keyof AvatarConfigurableProps)[] = [
   'active',
   'avatarColor',
+  'badgeStatus',
   'initialsColor',
+  'outOfOffice',
   'ringBackgroundColor',
   'ringColor',
   'ringInnerGap',
@@ -53,9 +55,12 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           style: {
             alignItems: 'center',
             justifyContent: 'center',
-            width: avatarSize,
-            height: avatarSize,
+            flexDirection: 'row',
+            alignSelf: 'flex-start',
+            minWidth: avatarSize,
+            minHeight: avatarSize,
             opacity: avatarOpacity,
+            aspectRatio: 1,
           },
         };
       },
@@ -85,8 +90,8 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           style: {
             ...borderStyles.from(tokens, theme),
-            width: size,
-            height: size,
+            minWidth: size,
+            minHeight: size,
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: _avatarColor,
@@ -94,6 +99,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             borderColor: tokens.borderColor,
             marginTop: ringConfig.ringThickness,
             marginLeft: ringConfig.ringThickness,
+            aspectRatio: 1,
           },
         };
       },
@@ -106,12 +112,13 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           style: {
             borderRadius: borderRadius,
-            width: size,
-            height: size,
+            minWidth: size,
+            minHeight: size,
             borderWidth: borderWidth,
             borderColor: borderColor,
             marginTop: ringConfig.ringThickness,
             marginLeft: ringConfig.ringThickness,
+            aspectRatio: 1,
           },
         };
       },
@@ -124,10 +131,14 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             position: 'absolute',
             fontSize: tokens.iconSize || tokens.fontSize,
           },
-          color: tokens.iconColor || tokens.color,
-          width: tokens.iconSize,
-          height: tokens.iconSize,
+          ...getIconStyles(tokens),
         };
+      },
+      ['iconSize', 'iconColor'],
+    ),
+    fallbackIcon: buildProps(
+      (tokens: AvatarTokens) => {
+        return getIconStyles(tokens);
       },
       ['iconSize', 'iconColor'],
     ),
@@ -138,12 +149,13 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           style: {
             borderStyle: 'solid',
-            width: ringConfig.size,
-            height: ringConfig.size,
+            minWidth: ringConfig.size,
+            minHeight: ringConfig.size,
             ...borderStyles.from(tokens, theme),
             borderWidth: ringConfig.ringThickness,
             backgroundColor: ringBackgroundColor || 'transparent',
             borderColor: ringColor,
+            aspectRatio: 1,
           },
         };
       },
@@ -153,10 +165,12 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       (tokens: AvatarTokens) => {
         return {
           size: tokens.badgeSize,
+          status: tokens.badgeStatus,
           shape: 'circular',
+          outOfOffice: tokens.outOfOffice,
         };
       },
-      ['badgeSize'],
+      ['badgeSize', 'badgeStatus'],
     ),
   },
 };
@@ -198,4 +212,12 @@ function getRingConfig(tokens: AvatarTokens): any {
       innerStroke: strokeSize.large,
     };
   }
+}
+
+function getIconStyles(tokens: AvatarTokens) {
+  return {
+    color: tokens.iconColor || tokens.color,
+    width: tokens.iconSize,
+    height: tokens.iconSize,
+  };
 }
