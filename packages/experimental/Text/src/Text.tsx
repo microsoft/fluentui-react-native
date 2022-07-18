@@ -24,6 +24,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     font,
     italic,
     onAccessibilityTap,
+    onKeyDown,
+    onPress,
     size,
     strikethrough,
     style,
@@ -32,7 +34,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     variant,
     weight,
     wrap = true,
-    onKeyDown,
     ...rest
   } = props;
   const theme = useFluentTheme();
@@ -53,9 +54,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
 
   const onAccTap = React.useCallback(
     (event?) => {
-      onAccessibilityTap ? onAccessibilityTap() : props.onPress(event);
+      onAccessibilityTap ? onAccessibilityTap() : onPress(event);
     },
-    [props.onPress],
+    [onPress, onAccessibilityTap],
   );
 
   // override tokens from props
@@ -91,6 +92,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       numberOfLines: truncate || !wrap ? 1 : 0,
       onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
       ...(Platform.OS === (('win32' as any) || 'windows') && { onAccessibilityTap: onAccTap }),
+      onPress,
       ...rest,
       ...extra,
       style: mergeStyles(tokenStyle, props.style, extra?.style),
