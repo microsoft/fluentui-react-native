@@ -102,20 +102,5 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    dismissIcon: buildProps(
-      (tokens: NotificationTokens) => {
-        return {
-          style: {
-            alignSelf: 'center',
-            flex: 1,
-            height: 20,
-            marginStart: 16,
-            width: 20,
-          },
-          color: tokens.color,
-        };
-      },
-      ['color'],
-    ),
   },
 };

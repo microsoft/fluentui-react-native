@@ -2,14 +2,14 @@
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
-import { Icon } from '@fluentui-react-native/icon';
+import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { Svg } from 'react-native-svg';
+import { SvgProps } from 'react-native-svg';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { ActionButton, getDismissIconPath } from './Notification.helper';
+import { ActionButton, getDismissSvg } from './Notification.helper';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -36,7 +36,6 @@ export const Notification = compose<NotificationType>({
     title: Text,
     message: Text,
     action: ActionButton,
-    dismissIcon: Svg,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
@@ -52,8 +51,16 @@ export const Notification = compose<NotificationType>({
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
-      const iconProps = createIconProps(icon);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
+
+      const iconProps = createIconProps(icon);
+      const dismissSvg: React.FunctionComponent<SvgProps> = () => {
+        return getDismissSvg();
+      };
+      const svgProps: SvgIconProps = {
+        src: dismissSvg,
+      };
+      const dismissIconProps = createIconProps({ svgSource: svgProps, width: 20, height: 20 });
 
       return (
         <Slots.root {...mergedProps}>
@@ -66,10 +73,10 @@ export const Notification = compose<NotificationType>({
             onActionPress ? (
               <Slots.action onClick={onActionPress}>{action}</Slots.action>
             ) : (
-              <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>
+              <Slots.action icon={dismissIconProps} />
             )
           ) : (
-            !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>
+            !isBar && <Slots.action icon={dismissIconProps} />
           )}
         </Slots.root>
       );
