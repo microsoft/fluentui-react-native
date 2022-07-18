@@ -109,6 +109,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
             alignSelf: 'center',
             flex: 1,
             height: 20,
+            marginStart: 16,
             width: 20,
           },
           color: tokens.color,

@@ -32,6 +32,7 @@ export interface NotificationProps {
   title?: string;
   action?: string;
   onPress?: (e: InteractionEvent) => void;
+  onActionPress?: (e: InteractionEvent) => void;
 }
 
 export interface NotificationSlotProps {

@@ -51,7 +51,7 @@ export const Notification = compose<NotificationType>({
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, icon, title, action, ...rest } = mergeProps(userProps, final);
+      const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
       const iconProps = createIconProps(icon);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
@@ -62,7 +62,15 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {action ? <Slots.action>{action}</Slots.action> : !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>}
+          {action ? (
+            onActionPress ? (
+              <Slots.action onClick={onActionPress}>{action}</Slots.action>
+            ) : (
+              <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>
+            )
+          ) : (
+            !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>
+          )}
         </Slots.root>
       );
     };
