@@ -3,7 +3,7 @@ import { ButtonProps, ButtonTokens, ButtonV1 as Button } from '@fluentui-react-n
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import Svg, { Color, G, Path } from 'react-native-svg';
 
-export type ActionButtonColorStates = { disabledColor; hoveredColor; pressedColor; focusedColor };
+export type ActionButtonColorStates = { disabledColor; pressedColor };
 
 type ActionButtonProps = ButtonProps & ButtonTokens & ActionButtonColorStates;
 
@@ -18,7 +18,6 @@ export const ActionButton = stagedComponent((props: ActionButtonProps) => {
     subtle: {
       backgroundColor: 'transparent',
       color: props.color,
-      borderColor: 'transparent',
       iconColor: props.color,
       fontSize: 15,
       fontWeight: '600',
@@ -26,12 +25,6 @@ export const ActionButton = stagedComponent((props: ActionButtonProps) => {
       fontLetterSpacing: 20,
       disabled: {
         color: props.disabledColor,
-      },
-      focused: {
-        color: props.focusedColor,
-      },
-      hovered: {
-        color: props.hoveredColor,
       },
       pressed: {
         color: props.pressedColor,

@@ -92,8 +92,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           appearance: 'subtle',
           color: tokens.color,
           disabledColor: tokens.disabledColor,
-          focusedColor: tokens.focusedColor,
-          hoveredColor: tokens.hoveredColor,
           pressedColor: tokens.pressedColor,
           minWidth: 0,
           padding: 0,
