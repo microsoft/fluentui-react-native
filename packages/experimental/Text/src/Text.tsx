@@ -90,7 +90,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     const mergedProps = {
       numberOfLines: truncate || !wrap ? 1 : 0,
       onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
-      ...(Platform.OS === (('win32' as any) || 'windows') && {onAccessibilityTap: onAccTap})
+      ...(Platform.OS === (('win32' as any) || 'windows') && {onAccessibilityTap: onAccTap}),
       ...rest,
       ...extra,
       style: mergeStyles(tokenStyle, props.style, extra?.style),
