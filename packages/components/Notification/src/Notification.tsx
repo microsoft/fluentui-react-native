@@ -1,10 +1,16 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
 import { notification, NotificationType, NotificationProps } from './Notification.types';
+import { Pressable } from '@fluentui-react-native/pressable';
+import { PressableProps, View, ViewStyle } from 'react-native';
+import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
+import { Svg } from 'react-native-svg';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useNotification } from './useNotification';
+import { useMemo } from 'react';
+import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { ActionButton, getDismissIconPath } from './Notification.helper';
+
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
  *
@@ -13,28 +19,50 @@ import { useNotification } from './useNotification';
  * @returns Whether the styles that are assigned to the layer should be applied to the Notification
  */
 export const notificationLookup = (layer: string, userProps: NotificationProps): boolean => {
-  return userProps['variant'] === layer;
+  return (
+    layer === userProps.variant ||
+    (layer === 'hasTitle' && userProps.title != undefined) ||
+    (layer === 'isBar' && ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
+  );
 };
 
 export const Notification = compose<NotificationType>({
   displayName: notification,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
+    icon: Icon,
+    contentContainer: View,
+    title: Text,
     message: Text,
-    endText: Text,
+    action: ActionButton,
+    dismissIcon: Svg,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
-    const notificationProps = useNotification(userProps);
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
+    const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
+    const rootStyle: ViewStyle = useMemo(() => {
+      const marginHorizontal = isBar ? 0 : 16;
+      return { marginHorizontal: marginHorizontal };
+    }, ['isBar']);
+    const messageStyle: ViewStyle = useMemo(() => {
+      const alignSelf = isBar ? 'center' : 'flex-start';
+      return { alignSelf: alignSelf };
+    }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, endText, ...mergedProps } = mergeProps(notificationProps, final);
+      const { variant, icon, title, action, ...rest } = mergeProps(userProps, final);
+      const iconProps = createIconProps(icon);
+      const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.message>{children}</Slots.message>
-          <Slots.endText>{endText}</Slots.endText>
+          {icon && <Slots.icon {...iconProps} />}
+          <Slots.contentContainer>
+            {title && <Slots.title>{title}</Slots.title>}
+            <Slots.message style={messageStyle}>{children}</Slots.message>
+          </Slots.contentContainer>
+          {action ? <Slots.action>{action}</Slots.action> : !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>}
         </Slots.root>
       );
     };

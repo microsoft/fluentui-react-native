@@ -53,6 +53,12 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     setCanFocusOnPopover(false);
   }, [setCanFocusOnPopover]);
 
+  React.useEffect(() => {
+    return function cleanup() {
+      clearTimeout(popoverHoverOutTimer);
+    };
+  });
+
   return {
     props: {
       accessibilityRole,

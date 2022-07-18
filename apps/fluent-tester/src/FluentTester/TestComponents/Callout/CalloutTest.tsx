@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect, Text, View, Switch, Picker, ScrollView } from 'react-native';
+import { ScreenRect, Text, View, Switch, ScrollView } from 'react-native';
 import {
   Button,
   Callout,
@@ -14,6 +14,7 @@ import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
+import { MenuPicker } from '../Common/MenuPicker';
 
 const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
@@ -233,35 +234,24 @@ const StandardCallout: React.FunctionComponent = () => {
             <Text>Enable ScrollView Callout</Text>
           </View>
 
-          <Picker
+          <MenuPicker
             prompt="Background Color"
-            selectedValue={selectedBackgroundColor || colorDefault}
-            onValueChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
-          >
-            {colorSelections.map((color, index) => (
-              <Picker.Item label={color} key={index} value={color} />
-            ))}
-          </Picker>
-
-          <Picker
+            selected={selectedBackgroundColor || colorDefault}
+            onChange={(color) => setSelectedBackgroundColor(color === colorDefault ? undefined : color)}
+            collection={colorSelections}
+          />
+          <MenuPicker
             prompt="Border Color"
-            selectedValue={selectedBorderColor || colorDefault}
-            onValueChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
-          >
-            {colorSelections.map((color, index) => (
-              <Picker.Item label={color} key={index} value={color} />
-            ))}
-          </Picker>
-
-          <Picker
+            selected={selectedBorderColor || colorDefault}
+            onChange={(color) => setSelectedBorderColor(color === colorDefault ? undefined : color)}
+            collection={colorSelections}
+          />
+          <MenuPicker
             prompt="Border Width"
-            selectedValue={selectedBorderWidth || borderWidthDefault}
-            onValueChange={(width) => setSelectedBorderWidth(width === borderWidthDefault ? undefined : width)}
-          >
-            {borderWidthSelections.map((width, index) => (
-              <Picker.Item label={width} key={index} value={width} />
-            ))}
-          </Picker>
+            selected={selectedBorderWidth || borderWidthDefault}
+            onChange={(color) => setSelectedBorderWidth(color === colorDefault ? undefined : color)}
+            collection={borderWidthSelections}
+          />
         </View>
 
         <Separator vertical />

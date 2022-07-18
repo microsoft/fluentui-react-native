@@ -1,8 +1,46 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Wed, 25 May 2022 18:43:09 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Thu, 14 Jul 2022 18:09:49 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+- Bump @uifabricshared/foundation-tokens to v0.12.0
+- Bump @fluentui-react-native/text to v0.12.0
+
+## 0.6.31
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.23
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @uifabricshared/foundation-tokens to v0.11.4
+- Bump @fluentui-react-native/text to v0.11.28
+
+## 0.6.30
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/tokens to v0.15.0
+- Bump @fluentui-react-native/text to v0.11.27
 
 ## 0.6.29
 

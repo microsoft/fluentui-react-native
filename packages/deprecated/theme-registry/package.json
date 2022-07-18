@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.7.3",
+  "version": "0.8.0",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
@@ -35,8 +35,8 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/immutable-merge": "^1.1.7",
     "@types/jest": "^26.0.0",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.0"
   }
 }

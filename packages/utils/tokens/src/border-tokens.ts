@@ -1,5 +1,5 @@
 import { ViewStyle, ColorValue } from 'react-native';
-import { IOperationSet } from '@uifabricshared/foundation-tokens';
+import { OperationSet } from './token.types';
 import { Theme } from '@fluentui-react-native/theme-types';
 import { getPaletteFromTheme } from './color-tokens';
 import { tokenBuilder } from './tokenBuilder';
@@ -11,7 +11,7 @@ export interface IBorderTokens {
   borderStyle?: ViewStyle['borderStyle'];
 }
 
-export const borderTokens: IOperationSet<IBorderTokens, Theme> = [
+export const borderTokens: OperationSet<IBorderTokens, Theme> = [
   { source: 'borderColor', lookup: getPaletteFromTheme },
   { source: 'borderWidth' },
   { source: 'borderRadius' },
