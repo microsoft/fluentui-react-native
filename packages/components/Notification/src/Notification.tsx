@@ -54,8 +54,8 @@ export const Notification = compose<NotificationType>({
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
 
       const iconProps = createIconProps(icon);
-      const dismissSvg: React.FunctionComponent<SvgProps> = () => {
-        return getDismissSvg();
+      const dismissSvg: React.FunctionComponent<SvgProps> = (props: SvgProps) => {
+        return getDismissSvg(props.color);
       };
       const svgProps: SvgIconProps = {
         src: dismissSvg,
