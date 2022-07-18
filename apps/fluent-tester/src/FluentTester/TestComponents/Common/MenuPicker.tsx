@@ -9,7 +9,7 @@ import { Picker } from '@react-native-picker/picker';
 interface MenuPickerProps {
   prompt?: string;
   selected?: any;
-  onChange?: (value: any, index?: number) => void;
+  onChange?: (label: string, value?: string) => void;
   collection?: any[];
   style?: any;
 }
@@ -21,7 +21,7 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
     <Picker
       prompt={prompt}
       selectedValue={selected}
-      onValueChange={(itemValue: any, index: number) => onChange(itemValue, index)}
+      onValueChange={(itemValue: any, index: number) => onChange(itemValue, index.toString())}
       style={{ ...style }}
     >
       {collection.map((value, index) => (

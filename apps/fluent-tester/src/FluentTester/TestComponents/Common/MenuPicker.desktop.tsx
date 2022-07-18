@@ -16,22 +16,29 @@ interface collectionItem {
 
 interface MenuPickerProps {
   prompt?: string;
-  selected?: any;
-  onChange?: (label: any, value?: string) => void;
+  selected?: string;
+  onChange?: (value: string, index?: number) => void;
   collection?: collectionItem[];
   style?: any;
 }
 
 export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
   const { prompt, selected, onChange, collection } = props;
-  // console.log(collection);
+
+  let label;
+  collection.forEach((item) => {
+    if (item.value == selected) {
+      label = item.label;
+    }
+  });
+
   return (
     <View style={menuPickerStyles.container}>
       <Text style={menuPickerStyles.prompt}>{prompt}</Text>
       <Menu>
         <MenuTrigger>
           <Button>
-            <Text>{selected}s</Text>
+            <Text>{label}</Text>
             <View style={menuPickerStyles.chevronContainer}>
               <SvgXml xml={chevronXml} />
             </View>
@@ -40,10 +47,7 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
         <MenuPopover>
           <MenuList>
             {collection.map((collectionItem: collectionItem, index: number) => (
-              <MenuItem
-                onClick={() => onChange(collectionItem.label, collectionItem.value ?? index.toString())}
-                key={collectionItem.value ?? index}
-              >
+              <MenuItem onClick={() => onChange(collectionItem.value, index)} key={collectionItem.value ?? index}>
                 {collectionItem.label}
               </MenuItem>
             ))}

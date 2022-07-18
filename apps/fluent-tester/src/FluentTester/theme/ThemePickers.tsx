@@ -37,8 +37,8 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
   const { initial, contents, onChange } = props;
   const [selected, setSelected] = React.useState(initial);
   const onValueChange = React.useCallback(
-    (label: string, value: string) => {
-      setSelected(label);
+    (value: string) => {
+      setSelected(value);
       onChange(value);
       console.log(value);
     },
