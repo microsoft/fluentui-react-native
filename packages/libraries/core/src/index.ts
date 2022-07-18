@@ -186,6 +186,7 @@ export {
   normalizeRect,
   useAsPressable,
   useAsToggle,
+  useAvatarImage,
   useFocusState,
   useHoverState,
   useKeyProps,

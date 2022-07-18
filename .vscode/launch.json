@@ -71,6 +71,14 @@
       "protocol": "inspector",
       "port": 9223,
       "sourceMaps": true
+    },
+    {
+      "name": "Debug Lime",
+      "type": "node",
+      "request": "attach",
+      "protocol": "inspector",
+      "port": 9229,
+      "sourceMaps": true
     }
   ]
 }
