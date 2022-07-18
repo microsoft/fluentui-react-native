@@ -98,44 +98,44 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
        * None of the foreground tokens here have pressed versions so the foreground color with an alpha value was used.
        * The FluentUI Apple NotificationView was used to color match.
        */
-      pressedColor: '#0F6CBD30',
+      pressedColor: '#0F6CBD30', // opacity: 0.19
     },
     neutral: {
       backgroundColor: notificationColors.background4,
       color: notificationColors.foreground2,
       disabledColor: notificationColors.foregroundDisabled2,
-      pressedColor: '#61616145',
+      pressedColor: '#61616145', // opacity: 0.27
     },
     danger: {
       backgroundColor: notificationColors.PaletteRedBackground1,
       color: notificationColors.PaletteRedForeground1,
-      pressedColor: '#9F282C32',
+      pressedColor: '#9F282C32', // opacity: 0.2
     },
     warning: {
       backgroundColor: notificationColors.PaletteYellowBackground1,
       color: notificationColors.PaletteYellowForeground1,
       // color: '#4C4400',
-      pressedColor: '#4C440033',
+      pressedColor: '#4C440033', // opacity: 0.2
     },
     primaryBar: {
       backgroundColor: notificationColors.brandBackground4,
       borderWidth: 0,
       color: notificationColors.brandForeground4,
       disabledColor: notificationColors.brandForegroundDisabled,
-      pressedColor: '#0F6CBD30',
+      pressedColor: '#0F6CBD30', // opacity: 0.19
     },
     primaryOutlineBar: {
       backgroundColor: notificationColors.background1,
       borderColor: notificationColors.stroke2,
       color: notificationColors.brandForeground1,
       disabledColor: notificationColors.brandForegroundDisabled,
-      pressedColor: '#0F6CBD30',
+      pressedColor: '#0F6CBD30', // opacity: 0.19
     },
     neutralBar: {
       backgroundColor: notificationColors.background5,
       borderWidth: 0,
       color: notificationColors.foreground2,
       disabledColor: notificationColors.foregroundDisabled2,
-      pressedColor: '#61616145',
+      pressedColor: '#61616145', // opacity: 0.27
     },
   } as NotificationTokens);
