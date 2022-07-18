@@ -94,7 +94,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: notificationColors.brandForeground4,
       disabledColor: notificationColors.brandForegroundDisabled,
       /**
-       * None of the foreground tokens here have pressed versions so the foreground color with an alpha value was used.
+       * None of the foreground tokens here have pressed versions so the foreground color with an alpha value is used.
        * The FluentUI Apple NotificationView was used to color match.
        */
       pressedColor: '#0F6CBD30', // opacity: 0.19
