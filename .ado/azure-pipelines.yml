@@ -1,6 +1,20 @@
 pr:
   - master
 
+parameters:
+  - name: skipNpmPublish
+    displayName: Skip Npm Publish
+    type: boolean
+    default: true
+  - name: skipGitPush
+    displayName: Skip Git Push
+    type: boolean
+    default: true
+  - name: skipNugetPublish
+    displayName: Skip Nuget Publish
+    type: boolean
+    default: false
+
 variables:
   CI: true
 
@@ -168,3 +182,19 @@ jobs:
       - script: |
           find . -name \*.md -not -name CHANGELOG.md -not -path '*/\node_modules/*' -print0 | xargs -0 -n1 yarn test-links -c `pwd`/.ado/markdown-link-check-config.json
         displayName: 'testing links'
+
+  - job: NuGetPublish
+    displayName: NuGet Publish
+    pool:
+      vmImage: 'internal-macos12'
+      demands: ['xcode', 'sh', 'npm']
+    variables:
+      - name: BUILDSECMON_OPT_IN
+        value: true
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - template: templates/apple-nuget-publish.yml
+        parameters:
+          skipNugetPublish: ${{ parameters.skipNugetPublish }}
