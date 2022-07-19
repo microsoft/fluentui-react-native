@@ -11,17 +11,17 @@ PODS:
     - React-jsi (= 0.66.59)
     - ReactCommon/turbomodule/core (= 0.66.59)
   - fmt (6.2.1)
-  - FRNAvatar (0.15.3):
+  - FRNAvatar (0.16.0):
     - MicrosoftFluentUI (= 0.5.2)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
-  - FRNCallout (0.20.10):
+  - FRNCallout (0.21.0):
     - React
-  - FRNCheckbox (0.11.16):
+  - FRNCheckbox (0.12.2):
     - React
-  - FRNMenuButton (0.7.75):
+  - FRNMenuButton (0.8.4):
     - React
-  - FRNRadioButton (0.14.55):
+  - FRNRadioButton (0.15.0):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.5.2):
@@ -103,7 +103,7 @@ PODS:
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
-  - RCTFocusZone (0.9.35):
+  - RCTFocusZone (0.10.0):
     - React
   - RCTRequired (0.66.59)
   - RCTTypeSafety (0.66.59):
@@ -357,7 +357,7 @@ PODS:
     - React-jsi (= 0.66.59)
     - React-logger (= 0.66.59)
     - React-perflogger (= 0.66.59)
-  - ReactTestApp-DevSupport (1.3.11):
+  - ReactTestApp-DevSupport (1.4.0):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -511,15 +511,15 @@ SPEC CHECKSUMS:
   FBLazyVector: 85cfb7fbc0dda13eb9007be7ed98241d8d7068d5
   FBReactNativeSpec: 27fa48f2d8aaf486d79c835664cf3c8efb8679b5
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: 92dcf2c9e1790cfd13edd7633af280f2be6b2b1b
-  FRNCallout: 771e879a593d8b080d2b061d8e48db2a5ea1ee95
-  FRNCheckbox: b982d223596fe15f53f8a0a28686fce274406a3b
-  FRNMenuButton: dc3096ab53dc5cf1666b34eded25fb140c860ac0
-  FRNRadioButton: 2bf2631040b43a57019c6958f8602b08a37cb617
+  FRNAvatar: 827ebe75e839ce442c88cc6a23940aa614ca7946
+  FRNCallout: 9457c30fa1714c715908e8527ceea18ac3766047
+  FRNCheckbox: 4d91fba4c10913109d45c64909d5023fa00ea3e7
+  FRNMenuButton: 37214f18bb2bfde76242df14367f3100b491f869
+  FRNRadioButton: 62a5f69a928df0aa9c2e0bdbe64c9c6c2d874249
   glog: 0dc7efada961c0793012970b60faebbd58b0decb
   MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
   RCT-Folly: 43adc9ce880eb76792f88c011773cb5c664c1419
-  RCTFocusZone: 5bce8a1efb10030015e788c79d60c967ba3bc87d
+  RCTFocusZone: 1784b033ecfe09ae0e325164b1bf4502e5fe152e
   RCTRequired: e62e0f8d96f3920fe74c8b97b5bb3aefb82f8bad
   RCTTypeSafety: 2cf037aff14c2a6bcbc0b91beb520af3c9d55286
   React: 6d3d534fd423a2ca8977cedb069fb2a2de2a6ad3
@@ -543,7 +543,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 1994834ea683e5c4e526379792d6aa32e0fd1247
   React-runtimeexecutor: 2448619cd992835d29e4a1d6a25dfda5944cd862
   ReactCommon: be5050784e4c63c5c497d8ffa05236294180002a
-  ReactTestApp-DevSupport: 5de28a459df0649f64dd7e342bb4bc99c41ab252
+  ReactTestApp-DevSupport: f304d297706114319929405239789b443b5c2fee
   ReactTestApp-Resources: 320923a3635f7bf90caa1a28fd29765b577888d9
   RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
