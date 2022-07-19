@@ -40,7 +40,6 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
     (value: string) => {
       setSelected(value);
       onChange(value);
-      console.log(value);
     },
     [setSelected, onChange],
   );
