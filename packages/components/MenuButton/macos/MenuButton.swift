@@ -64,8 +64,6 @@ class MenuButton: NSPopUpButton {
     }
 
     for (index, menuItem) in menu.items.enumerated() {
-      menuItem.target = self
-      menuItem.action = #selector(sendOnItemClickEvent)
       if let submenu = menuItem.submenu {
         //Add actions to one level of submenu items to support the `onSubmenuItemClick` callback
         for subMenuItem in submenu.items {
@@ -73,7 +71,10 @@ class MenuButton: NSPopUpButton {
           subMenuItem.target = self
           subMenuItem.action = #selector(sendOnSubItemClickEvent)
         }
-      }
+			} else {
+				menuItem.target = self
+				menuItem.action = #selector(sendOnItemClickEvent)
+			}
     }
 
     // Insert an initial empty item into index 0, since index 0 is never displayed.

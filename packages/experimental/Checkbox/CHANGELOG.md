@@ -1,8 +1,202 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.2
+
+## 0.12.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.1
+
+## 0.12.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/checkbox to v0.16.0
+- Bump @fluentui-react-native/component-cache to v1.4.0
+- Bump @fluentui-react-native/framework to v0.8.0
+
+## 0.11.17
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.16
+
+## 0.11.16
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.15
+- Bump @fluentui-react-native/framework to v0.7.32
+
+## 0.11.15
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.14
+- Bump @fluentui-react-native/framework to v0.7.31
+
+## 0.11.14
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- apple: remove unneccesary build settings from podspec (sanajmi@microsoft.com)
+
+## 0.11.13
+
+Wed, 15 Jun 2022 18:26:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.13
+
+## 0.11.12
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.12
+
+## 0.11.11
+
+Tue, 07 Jun 2022 22:59:24 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.11
+
+## 0.11.10
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.10
+
+## 0.11.9
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.9
+
+## 0.11.8
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.8
+
+## 0.11.7
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/checkbox to v0.15.7
+- Bump @fluentui-react-native/framework to v0.7.30
+
+## 0.11.6
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.6
+- Bump @fluentui-react-native/framework to v0.7.28
+
+## 0.11.5
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.5
+- Bump @fluentui-react-native/framework to v0.7.27
+
+## 0.11.4
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.4
+- Bump @fluentui-react-native/framework to v0.7.26
+
+## 0.11.3
+
+Thu, 28 Apr 2022 22:00:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.3
+
+## 0.11.2
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.2
+- Bump @fluentui-react-native/framework to v0.7.25
+
+## 0.11.1
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.1
+- Bump @fluentui-react-native/framework to v0.7.24
+
+## 0.11.0
+
+Mon, 25 Apr 2022 17:11:13 GMT
+
+### Minor changes
+
+- Move experimental files (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/checkbox to v0.15.0
+
+## 0.10.16
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.7.23
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
+- Bump @fluentui-react-native/pressable to v0.8.35
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
 
 ## 0.10.15
 

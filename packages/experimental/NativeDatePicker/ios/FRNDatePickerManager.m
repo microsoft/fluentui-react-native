@@ -53,6 +53,8 @@ RCT_EXTERN_METHOD(presentWithMode:(MSFDateTimePickerMode)mode
                   datePickerType:(MSFDateTimePickerDatePickerType)datePickerType
                   startDate:(nullable NSDate *)startDate
                   endDate:(nullable NSDate *)endDate
+                  referenceStartDate:(nullable NSDate *)referenceStartDate
+                  referenceEndDate:(nullable NSDate *)referenceEndDate
                   startTitle:(nullable NSString *)startTitle
                   startSubtitle:(nullable NSString *)startSubtitle
                   startTab:(nullable NSString *)startTab

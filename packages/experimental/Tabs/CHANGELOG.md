@@ -1,8 +1,212 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.10.2
+
+## 0.5.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.10.1
+
+## 0.5.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/focus-zone to v0.10.0
+- Bump @fluentui-react-native/experimental-text to v0.10.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @fluentui-react-native/use-styling to v0.9.0
+- Bump @fluentui-react-native/icon to v0.13.0
+- Bump @fluentui-react-native/adapters to v0.9.0
+
+## 0.4.55
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.3
+
+## 0.4.54
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/focus-zone to v0.9.35
+- Bump @fluentui-react-native/experimental-text to v0.9.2
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @fluentui-react-native/icon to v0.12.3
+
+## 0.4.53
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/focus-zone to v0.9.34
+- Bump @fluentui-react-native/experimental-text to v0.9.1
+- Bump @fluentui-react-native/tokens to v0.15.0
+- Bump @fluentui-react-native/icon to v0.12.2
+
+## 0.4.52
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.9.33
+
+## 0.4.51
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+- Bump @fluentui-react-native/focus-zone to v0.9.32
+
+## 0.4.50
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
+- Bump @fluentui-react-native/focus-zone to v0.9.31
+- Bump @fluentui-react-native/icon to v0.12.1
+
+## 0.4.49
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.1
+- Bump @fluentui-react-native/focus-zone to v0.9.30
+- Bump @fluentui-react-native/icon to v0.12.0
+
+## 0.4.48
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.0
+- Bump @fluentui-react-native/focus-zone to v0.9.29
+
+## 0.4.47
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/interactive-hooks to v0.15.10
+- Bump @fluentui-react-native/focus-zone to v0.9.28
+- Bump @fluentui-react-native/experimental-text to v0.9.0
+- Bump @fluentui-react-native/tokens to v0.14.0
+- Bump @fluentui-react-native/icon to v0.11.25
+
+## 0.4.46
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/interactive-hooks to v0.15.8
+- Bump @fluentui-react-native/focus-zone to v0.9.27
+- Bump @fluentui-react-native/experimental-text to v0.7.28
+- Bump @fluentui-react-native/tokens to v0.12.2
+- Bump @fluentui-react-native/icon to v0.11.23
+
+## 0.4.45
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+- Bump @fluentui-react-native/focus-zone to v0.9.26
+- Bump @fluentui-react-native/experimental-text to v0.7.27
+- Bump @fluentui-react-native/tokens to v0.12.1
+- Bump @fluentui-react-native/icon to v0.11.22
+
+## 0.4.44
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+- Bump @fluentui-react-native/focus-zone to v0.9.25
+- Bump @fluentui-react-native/experimental-text to v0.7.26
+- Bump @fluentui-react-native/tokens to v0.12.0
+- Bump @fluentui-react-native/icon to v0.11.21
+
+## 0.4.43
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+- Bump @fluentui-react-native/focus-zone to v0.9.24
+- Bump @fluentui-react-native/experimental-text to v0.7.25
+- Bump @fluentui-react-native/tokens to v0.11.11
+- Bump @fluentui-react-native/icon to v0.11.20
+
+## 0.4.42
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/interactive-hooks to v0.15.4
+- Bump @fluentui-react-native/focus-zone to v0.9.23
+- Bump @fluentui-react-native/experimental-text to v0.7.24
+- Bump @fluentui-react-native/tokens to v0.11.10
+- Bump @fluentui-react-native/icon to v0.11.19
+
+## 0.4.41
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
+- Bump @fluentui-react-native/focus-zone to v0.9.22
+- Bump @fluentui-react-native/experimental-text to v0.7.23
+- Bump @fluentui-react-native/icon to v0.11.18
 
 ## 0.4.40
 

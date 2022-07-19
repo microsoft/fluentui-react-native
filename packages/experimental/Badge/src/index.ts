@@ -12,4 +12,4 @@ export type {
 } from './Badge.types';
 export { Badge, CompressibleBadge, badgeLookup } from './Badge';
 export { PresenceBadge, presenceBadgeName, PresenceBadgeStatuses } from './PresenceBadge';
-export type { Presence, PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeType } from './PresenceBadge';
+export type { PresenceBadgeStatus, PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeType } from './PresenceBadge';

@@ -24,19 +24,19 @@
     "directory": "apps/macos"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.59.20",
-    "react": "17.0.1",
-    "react-native": "^0.64.2",
-    "react-native-macos": "^0.64.0",
+    "@fluentui-react-native/tester": "^0.76.0",
+    "react": "17.0.2",
+    "react-native": "^0.66.0",
+    "react-native-macos": "^0.66.0",
     "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.0",
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
-    "@fluentui-react-native/scripts": "^0.1.1",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",
     "@wdio/jasmine-framework": "^6.5.0",
@@ -49,7 +49,7 @@
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^1.1.4",
-    "react-test-renderer": "17.0.1",
+    "react-test-renderer": "17.0.2",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "4.5.4",
@@ -59,7 +59,7 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.64",
+    "reactNativeVersion": "0.66",
     "kitType": "app",
     "bundle": {
       "targets": [

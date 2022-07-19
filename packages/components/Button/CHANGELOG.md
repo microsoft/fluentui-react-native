@@ -1,8 +1,287 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.4
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- update all necessary snapshots (email not defined)
+- Bump @fluentui-react-native/experimental-text to v0.10.2
+- Bump @fluentui-react-native/experimental-shadow to v0.2.8
+
+## 0.24.3
+
+Fri, 15 Jul 2022 01:22:54 GMT
+
+### Patches
+
+- Replace shadowDepth with shadowToken (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.7
+
+## 0.24.2
+
+Fri, 15 Jul 2022 00:29:27 GMT
+
+### Patches
+
+- Add shadow to iOS FAB (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.6
+
+## 0.24.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-text to v0.10.1
+
+## 0.24.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.0
+- Bump @fluentui-react-native/experimental-text to v0.10.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/icon to v0.13.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/pressable to v0.9.0
+- Bump @fluentui-react-native/styling-utils to v0.4.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/text to v0.12.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @fluentui-react-native/use-styling to v0.9.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+
+## 0.23.2
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- update all necessary snapshots (email not defined)
+- Bump @fluentui-react-native/experimental-text to v0.9.3
+
+## 0.23.1
+
+Thu, 14 Jul 2022 16:13:45 GMT
+
+### Patches
+
+- Revert "Add shadows to iOS FAB (#1839)" (ruaraki@microsoft.com)
+
+## 0.23.0
+
+Wed, 13 Jul 2022 23:23:59 GMT
+
+### Minor changes
+
+- Add shadow to FAB (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.3
+
+## 0.22.31
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.23
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.31
+- Bump @fluentui-react-native/experimental-text to v0.9.2
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/icon to v0.12.3
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/pressable to v0.8.47
+- Bump @fluentui-react-native/text to v0.11.28
+- Bump @fluentui-react-native/tokens to v0.15.1
+
+## 0.22.30
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.30
+- Bump @fluentui-react-native/experimental-text to v0.9.1
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/icon to v0.12.2
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/pressable to v0.8.46
+- Bump @fluentui-react-native/text to v0.11.27
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.22.29
+
+Wed, 15 Jun 2022 18:26:37 GMT
+
+### Patches
+
+- Explicitly expose enableFocusRing (ruaraki@microsoft.com)
+
+## 0.22.28
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+- Bump @fluentui-react-native/pressable to v0.8.45
+
+## 0.22.27
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.1
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
+- Bump @fluentui-react-native/pressable to v0.8.44
+
+## 0.22.26
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.0
+- Bump @fluentui-react-native/interactive-hooks to v0.16.1
+- Bump @fluentui-react-native/pressable to v0.8.43
+
+## 0.22.25
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.0
+- Bump @fluentui-react-native/pressable to v0.8.42
+
+## 0.22.24
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.22
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.29
+- Bump @fluentui-react-native/experimental-text to v0.9.0
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/icon to v0.11.25
+- Bump @fluentui-react-native/interactive-hooks to v0.15.10
+- Bump @fluentui-react-native/pressable to v0.8.41
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/text to v0.11.26
+- Bump @fluentui-react-native/tokens to v0.14.0
+
+## 0.22.23
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.27
+- Bump @fluentui-react-native/experimental-text to v0.7.28
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/icon to v0.11.23
+- Bump @fluentui-react-native/interactive-hooks to v0.15.8
+- Bump @fluentui-react-native/pressable to v0.8.40
+- Bump @fluentui-react-native/text to v0.11.24
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.22.22
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Patches
+
+- Fix focus button size (ruaraki@microsoft.com)
+- Fix logic to adjust to new pipeline output structure (ruaraki@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.20
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.26
+- Bump @fluentui-react-native/experimental-text to v0.7.27
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/icon to v0.11.22
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+- Bump @fluentui-react-native/pressable to v0.8.39
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/text to v0.11.23
+- Bump @fluentui-react-native/tokens to v0.12.1
+
+## 0.22.21
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.25
+- Bump @fluentui-react-native/experimental-text to v0.7.26
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/icon to v0.11.21
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+- Bump @fluentui-react-native/pressable to v0.8.38
+- Bump @fluentui-react-native/text to v0.11.22
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.22.20
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.19
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.24
+- Bump @fluentui-react-native/experimental-text to v0.7.25
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/icon to v0.11.20
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+- Bump @fluentui-react-native/pressable to v0.8.37
+- Bump @fluentui-react-native/text to v0.11.21
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.22.19
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.18
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.23
+- Bump @fluentui-react-native/experimental-text to v0.7.24
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/icon to v0.11.19
+- Bump @fluentui-react-native/interactive-hooks to v0.15.4
+- Bump @fluentui-react-native/pressable to v0.8.36
+- Bump @fluentui-react-native/theme-tokens to v0.16.2
+- Bump @fluentui-react-native/text to v0.11.20
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.22.18
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.17
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.5.22
+- Bump @fluentui-react-native/experimental-text to v0.7.23
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/icon to v0.11.18
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
+- Bump @fluentui-react-native/pressable to v0.8.35
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
+- Bump @fluentui-react-native/text to v0.11.19
 
 ## 0.22.17
 

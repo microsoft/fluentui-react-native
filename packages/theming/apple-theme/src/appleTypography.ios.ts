@@ -45,6 +45,20 @@ export function appleTypography(): Typography {
       heroSemibold: { face: 'primary', size: 'hero', weight: '600' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
+      // mocked out
+      caption1: { face: 'primary', size: 'caption', weight: '400' },
+      body1: { face: 'primary', size: 'secondary', weight: '400' },
+      body1Strong: { face: 'primary', size: 'secondary', weight: '600' },
+      body2: { face: 'primary', size: 'body', weight: '400' },
+      body2Strong: { face: 'primary', size: 'body', weight: '600' },
+      subtitle1: { face: 'primary', size: 'header', weight: '400' },
+      subtitle1Strong: { face: 'primary', size: 'header', weight: '600' },
+      subtitle2: { face: 'primary', size: 'subheader', weight: '400' },
+      subtitle2Strong: { face: 'primary', size: 'subheader', weight: '600' },
+      title1: { face: 'primary', size: 'hero', weight: '400' },
+      title1Strong: { face: 'primary', size: 'hero', weight: '600' },
+      largeTitle: { face: 'primary', size: 'heroLarge', weight: '400' },
+      display: { face: 'primary', size: 'heroLarge', weight: '600' },
     } as Variants,
   };
 

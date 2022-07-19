@@ -3,7 +3,7 @@ import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 import { AppleSemanticPalette, FluentUIApplePalette } from './appleColors.types.macos';
 import { PlatformColor, DynamicColorMacOS, ColorWithSystemEffectMacOS } from 'react-native-macos';
 import { Appearance } from 'react-native';
-import { createMacOSAliasTokens } from './createMacOSAliasTokens';
+import { createMacOSColorAliasTokens } from './createMacOSAliasTokens';
 import { getIsHighContrast } from './appleHighContrast.macos';
 
 /** Creates a Palette of PlatformColors defined for macOS */
@@ -100,35 +100,35 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
     cyanBlue20: '#004E8C',
     dangerPrimary: DynamicColorMacOS({
       light: '#D92C2C',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     dangerShade10: DynamicColorMacOS({
       light: '#C32727',
-      dark: '#clear',
+      dark: '#transparent',
     }),
     dangerShade20: DynamicColorMacOS({
       light: '#A52121',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     dangerShade30: DynamicColorMacOS({
       light: '#791818',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     dangerTint10: DynamicColorMacOS({
       light: '#DD4242',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     dangerTint20: DynamicColorMacOS({
       light: '#E87979',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     dangerTint30: DynamicColorMacOS({
       light: '#F4B9B9',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     dangerTint40: DynamicColorMacOS({
       light: '#F9D9D9',
-      dark: '#clear',
+      dark: 'transparent',
     }),
     gray20: '#69797E',
     gray25: '#F8F8F8',
@@ -258,7 +258,7 @@ function getFluentUIApplePalette(): FluentUIApplePalette {
 function getMacOSAliasTokens(): AliasColorTokens {
   const appearance = Appearance.getColorScheme();
   const mode = getCurrentAppearance(appearance, 'light');
-  return createMacOSAliasTokens(mode, getIsHighContrast());
+  return createMacOSColorAliasTokens(mode, getIsHighContrast());
 }
 /** Creates a palette of colors for the apple theme, given the FluentUI Apple Palette and Apple Semantic Palette
  * The fallback palette is loaded while we wait for  the native theming module to load, or if the module is not found

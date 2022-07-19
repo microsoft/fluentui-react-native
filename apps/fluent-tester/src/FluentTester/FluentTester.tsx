@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
@@ -87,11 +87,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
     return (
       <View style={fluentTesterStyles.header}>
-        <Text style={[fluentTesterStyles.testHeader]} variant="heroLargeSemibold" color={theme.host.palette?.TextEmphasis}>
+        <Text
+          testID={BASE_TESTPAGE}
+          style={[fluentTesterStyles.testHeader]}
+          variant="heroLargeSemibold"
+          color={theme.host.palette?.TextEmphasis}
+        >
           ⚛ FluentUI Tests
         </Text>
-        {/* Workaround for testID prop on text component affecting text size */}
-        <Text testID={BASE_TESTPAGE}> </Text>
         <ThemePickers />
       </View>
     );

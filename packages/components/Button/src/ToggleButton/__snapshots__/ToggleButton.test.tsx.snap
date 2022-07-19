@@ -51,6 +51,8 @@ exports[`ToggleButton default 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",

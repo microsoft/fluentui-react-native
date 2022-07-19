@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { View, Picker, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { lightnessOptions, testerTheme } from './CustomThemes';
 import { themeChoices, ThemeNames } from './applyTheme';
 import { brandOptions, OfficeBrand } from './applyBrand';
 import { ThemeOptions } from '@fluentui-react-native/theme-types';
+import { MenuPicker } from '../TestComponents/Common/MenuPicker';
 
 export const themePickerStyles = StyleSheet.create({
   pickerRoot: {
@@ -34,21 +35,16 @@ type PartPickerProps = {
 
 export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: PartPickerProps) => {
   const { initial, contents, onChange } = props;
-  const [value, setValue] = React.useState(initial);
+  const [selected, setSelected] = React.useState(initial);
   const onValueChange = React.useCallback(
-    (newValue: string) => {
-      setValue(newValue);
-      onChange(newValue);
+    (value: string) => {
+      setSelected(value);
+      onChange(value);
     },
-    [setValue, onChange],
+    [setSelected, onChange],
   );
-  return (
-    <Picker selectedValue={value} style={themePickerStyles.dropdown} onValueChange={onValueChange}>
-      {contents.map((entry: PartPickerEntry, index: number) => (
-        <Picker.Item label={entry.label} value={entry.value} key={`entry${index}`} />
-      ))}
-    </Picker>
-  );
+
+  return <MenuPicker selected={selected} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
 };
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });

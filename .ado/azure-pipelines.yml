@@ -77,7 +77,7 @@ jobs:
   - job: ApplePR
     displayName: Apple PR
     pool:
-      vmImage: 'macos-11'
+      vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
@@ -173,7 +173,7 @@ jobs:
   # - job: NuGetPublish
   #   displayName: NuGet Publish
   #   pool:
-  #     vmImage: 'macos-11'
+  #     vmImage: 'internal-macos12'
   #     demands: ['xcode', 'sh', 'npm']
   #   timeoutInMinutes: 90 # how long to run the job before automatically cancelling
   #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them

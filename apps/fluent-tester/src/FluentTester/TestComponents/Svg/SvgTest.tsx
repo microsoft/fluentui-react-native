@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import { Separator } from '@fluentui/react-native';
-import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgCssUri, Use } from 'react-native-svg';
+import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -124,7 +124,7 @@ const RemoteSvgTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <SvgCssUri
+      <SvgUri
         style={styles.svg}
         viewBox="0 0 200 200"
         width="100"
@@ -132,7 +132,7 @@ const RemoteSvgTest: React.FunctionComponent = () => {
         uri="https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg"
       />
       {shouldShowLocalNetwork && (
-        <SvgCssUri
+        <SvgUri
           x="50"
           y="50"
           viewBox="0 0 500 500"

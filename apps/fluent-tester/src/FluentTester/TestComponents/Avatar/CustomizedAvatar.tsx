@@ -1,155 +1,226 @@
-import * as React from 'react';
-import { JSAvatar, IconAlignment } from '@fluentui-react-native/experimental-avatar';
-import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
-import { Slider } from '../Common/Slider';
+import React, { useState, useMemo } from 'react';
+import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
+import { View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { FontWeight } from '@fluentui-react-native/theme-types';
+import { SvgIconProps } from '@fluentui-react-native/icon';
+import TestSvg from '../../test-data/test.svg';
+import { ToggleButton } from '@fluentui/react-native';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
-  const [showImage, setShowImage] = React.useState(true);
-  const [coinColor, setCoinColor] = React.useState<string>();
-  const [textColor, setTextColor] = React.useState<string>();
-  const [physicalSize, setPhysicalSize] = React.useState<number>(96);
-  const [iconSize, setIconSize] = React.useState<number>(24);
-  const [iconStrokeWidth, setIconStrokeWidth] = React.useState<number>(2);
-  const [iconStrokeColor, setIconStrokeColor] = React.useState<string>(undefined);
-  const [initialsSize, setInitialsSize] = React.useState<number>(14);
-  const [horizontalAlignment, setHorizontalAlignment] = React.useState<IconAlignment>();
-  const [verticalAlignment, setVerticalAlignment] = React.useState<IconAlignment>();
+  const [showImage, setShowImage] = useState(true);
+  const [showInitials, setShowInitials] = useState(true);
+  const [avatarColor, setAvatarColor] = useState<string>();
+  const [textColor, setTextColor] = useState<string>();
+  const [size, setSize] = useState<string>('96');
+  const [iconSize, setIconSize] = useState<number>(24);
+  const [iconColor, setIconColor] = useState<string>(undefined);
+  const [initialsSize, setInitialsSize] = useState<number>(16);
+  const [fontWeight, setFontWeight] = useState<string>('normal');
+  const [fontFamily, setFontFamily] = useState<string>('Georgia');
+  const [name, setName] = useState<string>('Steve Ballmer');
+  const [initials, setInitials] = useState<string>('');
 
-  const [ringColor, setRingColor] = React.useState<string>('red');
-  const [ringBackgroundColor, setRingBackgroundColor] = React.useState<string>(undefined);
-  const [showRing, setShowRing] = React.useState<boolean>(true);
-  const [transparent, setTransparent] = React.useState<boolean>(false);
+  const [ringColor, setRingColor] = useState<string>(undefined);
+  const [ringBackgroundColor, setRingBackgroundColor] = useState<string>('yellow');
+  const [ringThickness, setRingThickness] = useState<string>('4');
+  const [showRing, setShowRing] = useState<boolean>(true);
 
-  const theme = useTheme();
-  const textBoxBorderStyle: TextStyle = {
-    borderColor: theme.colors.inputBorder,
-  };
-
-  const CustomizedAvatar = React.useMemo(() => {
+  const CustomizedAvatar = useMemo(() => {
     const tokens = {
-      backgroundColor: coinColor,
+      avatarColor,
       color: textColor,
-      horizontalIconAlignment: horizontalAlignment,
-      verticalIconAlignment: verticalAlignment,
+      size: parseInt(size) as AvatarSize,
       iconSize: iconSize,
-      iconStrokeWidth: iconStrokeWidth,
-      iconStrokeColor: iconStrokeColor,
-      initialsSize: initialsSize,
-      avatarSize: physicalSize,
+      iconColor,
+      fontSize: initialsSize,
+      fontWeight: fontWeight as FontWeight,
+      fontFamily,
+      ringColor,
+      ringBackgroundColor,
+      ringThickness: parseInt(ringThickness),
     };
-    return JSAvatar.customize(tokens);
+    return Avatar.customize(tokens);
   }, [
-    coinColor,
+    avatarColor,
     textColor,
-    horizontalAlignment,
-    verticalAlignment,
+    iconColor,
     iconSize,
-    iconStrokeWidth,
-    iconStrokeColor,
     initialsSize,
-    physicalSize,
+    size,
+    ringColor,
+    ringBackgroundColor,
+    ringThickness,
+    fontWeight,
+    fontFamily,
   ]);
+
+  const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+  const svgProps: SvgIconProps = {
+    src: TestSvg,
+    viewBox: '0 0 500 500',
+  };
 
   return (
     <View style={commonStyles.root}>
       <View style={commonStyles.settings}>
-        <View style={commonStyles.switch}>
-          <Text>Show image</Text>
-          <Switch value={showImage} onValueChange={setShowImage} />
+        <ToggleButton onClick={() => setShowImage(!showImage)} checked={showImage} style={commonStyles.vmargin}>
+          {showImage ? 'Hide' : 'Show'} image
+        </ToggleButton>
+        <ToggleButton onClick={() => setShowInitials(!showInitials)} checked={showInitials} style={commonStyles.vmargin}>
+          {showInitials ? 'Hide' : 'Show'} initials
+        </ToggleButton>
+        <ToggleButton onClick={() => setShowRing(!showRing)} checked={showRing} style={commonStyles.vmargin}>
+          {showRing ? 'Hide' : 'Show'} ring
+        </ToggleButton>
+        <View style={{ flexDirection: 'row' }}>
+          <View>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Name for generating initials"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setName(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setInitials(e.nativeEvent.text);
+              }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>Avatar tokens</Text>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Background color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setAvatarColor(e.nativeEvent.text);
+              }}
+            />
+
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Avatar size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setSize(e.nativeEvent.text);
+              }}
+            />
+
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Icon size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setIconSize(parseInt(e.nativeEvent.text));
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Icon color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setIconColor(e.nativeEvent.text);
+              }}
+            />
+            <Text style={{ fontWeight: 'bold' }}>Ring tokens</Text>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring background color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingBackgroundColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Ring thickness"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingThickness(e.nativeEvent.text);
+              }}
+            />
+          </View>
+          <View style={{ paddingHorizontal: 20 }}>
+            <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials text color"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setTextColor(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Initials size"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setInitialsSize(parseInt(e.nativeEvent.text));
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Font weight"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setFontWeight(e.nativeEvent.text);
+              }}
+            />
+            <TextInput
+              style={[commonStyles.textBox]}
+              placeholder="Font family"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setFontFamily(e.nativeEvent.text);
+              }}
+            />
+          </View>
         </View>
-
-        <View style={commonStyles.switch}>
-          <Text>Show rings</Text>
-          <Switch value={showRing} onValueChange={setShowRing} />
-        </View>
-
-        <View style={commonStyles.switch}>
-          <Text>Transparent Ring</Text>
-          <Switch value={transparent} onValueChange={setTransparent} />
-        </View>
-
-        <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
-          placeholder="Background color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setCoinColor(e.nativeEvent.text);
-          }}
-        />
-        <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
-          placeholder="Initials text color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setTextColor(e.nativeEvent.text);
-          }}
-        />
-        <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
-          placeholder="Icon stroke color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setIconStrokeColor(e.nativeEvent.text);
-          }}
-        />
-
-        <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
-          placeholder="Ring color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setRingColor(e.nativeEvent.text);
-          }}
-        />
-
-        <TextInput
-          style={[commonStyles.textBox, textBoxBorderStyle]}
-          placeholder="Ring background color"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setRingBackgroundColor(e.nativeEvent.text);
-          }}
-        />
-
-        <AlignmentPicker style={commonStyles.header} label="Horizontal icon alignment" onSelectionChange={setHorizontalAlignment} />
-        <AlignmentPicker style={commonStyles.header} label="Vertical icon alignment" onSelectionChange={setVerticalAlignment} />
-
-        <Text>Coin size</Text>
-        <Slider minimum={8} maximum={200} initialValue={80} style={commonStyles.vmargin} onChange={setPhysicalSize} />
-
-        <Text>Icon size</Text>
-        <Slider minimum={8} maximum={100} initialValue={24} style={commonStyles.vmargin} onChange={setIconSize} />
-
-        <Text>Icon stroke width</Text>
-        <Slider minimum={0} maximum={8} initialValue={2} style={commonStyles.vmargin} onChange={setIconStrokeWidth} />
-
-        <Text>Font size</Text>
-        <Slider minimum={5} maximum={50} initialValue={14} style={commonStyles.vmargin} onChange={setInitialsSize} />
       </View>
-
-      <CustomizedAvatar
-        active="active"
-        activeAppearance="ring"
-        initials="SB"
-        imageDescription="Former CEO of Microsoft"
-        presence="blocked"
-        imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
-        ring={
-          showRing
-            ? {
-                ringColor,
-                ringBackgroundColor,
-                ringThickness: 4,
-                innerGap: 4,
-                transparent,
-              }
-            : undefined
-        }
-      />
+      <View>
+        <Text>Customized Avatar</Text>
+        <CustomizedAvatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={avatarColor}
+          accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
+          imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          icon={svgIconsEnabled ? { svgSource: svgProps } : undefined}
+          transparentRing={!showRing}
+        />
+      </View>
+      <View style={{ marginLeft: 20 }}>
+        <Text>Avatar customized with props</Text>
+        <Avatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={avatarColor}
+          accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
+          imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          ringBackgroundColor={ringBackgroundColor}
+          ringColor={ringColor}
+          ringThickness={parseInt(ringThickness)}
+          size={parseInt(size) as AvatarSize}
+          transparentRing={!showRing}
+        />
+      </View>
     </View>
   );
 };

@@ -1,8 +1,133 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.4.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+
+## 0.9.35
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+
+## 0.9.34
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+
+## 0.9.33
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- apple: remove unneccesary build settings from podspec (sanajmi@microsoft.com)
+
+## 0.9.32
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.3
+
+## 0.9.31
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.2
+
+## 0.9.30
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.1
+
+## 0.9.29
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.16.0
+
+## 0.9.28
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.15.10
+
+## 0.9.27
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.8
+
+## 0.9.26
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.7
+
+## 0.9.25
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.6
+
+## 0.9.24
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.5
+
+## 0.9.23
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.4
+
+## 0.9.22
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.15.3
 
 ## 0.9.21
 
