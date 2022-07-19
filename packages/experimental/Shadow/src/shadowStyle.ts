@@ -1,12 +1,19 @@
-import { Theme, memoize } from '@fluentui-react-native/framework';
+import { memoize } from '@fluentui-react-native/framework';
+import { ShadowToken } from '@fluentui-react-native/theme-types';
 import { ColorValue } from 'react-native';
-import { ShadowDepth } from './Shadow.types';
 
 export const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
 
-function getShadowTokenStyleSetWorker(t: Theme, depth: ShadowDepth) {
-  const keyShadow = t.shadows[depth.toString()].key;
-  const ambientShadow = t.shadows[depth.toString()].ambient;
+function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
+  if (!shadowToken) {
+    return {
+      key: emptyShadowStyle,
+      ambient: emptyShadowStyle,
+    };
+  }
+
+  const keyShadow = shadowToken.key;
+  const ambientShadow = shadowToken.ambient;
 
   return {
     key: {
@@ -40,4 +47,14 @@ const shadowOpacityFromRGBAColor = (rgbaColor: ColorValue) => {
 
   // Round to two decimal places
   return Math.round(opacityAsDecimal * 100) / 100;
+};
+
+const emptyShadowStyle = {
+  shadowColor: '000000',
+  shadowOpacity: 0,
+  shadowRadius: 0,
+  shadowOffset: {
+    width: 0,
+    height: 0,
+  },
 };

@@ -82,17 +82,39 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    action: buildProps(() => {
-      return {
-        style: {
-          alignSelf: 'center',
-          marginStart: 16,
-        },
-        appearance: 'subtle',
-        minWidth: 0,
-        padding: 0,
-        paddingHorizontal: 0,
-      };
-    }),
+    action: buildProps(
+      (tokens: NotificationTokens) => {
+        return {
+          style: {
+            alignSelf: 'center',
+            marginStart: 16,
+          },
+          appearance: 'subtle',
+          color: tokens.color,
+          disabledColor: tokens.disabledColor,
+          focusedColor: tokens.focusedColor,
+          hoveredColor: tokens.hoveredColor,
+          pressedColor: tokens.pressedColor,
+          minWidth: 0,
+          padding: 0,
+          paddingHorizontal: 0,
+        };
+      },
+      ['color', ...fontStyles.keys],
+    ),
+    dismissIcon: buildProps(
+      (tokens: NotificationTokens) => {
+        return {
+          style: {
+            alignSelf: 'center',
+            flex: 1,
+            height: 20,
+            width: 20,
+          },
+          color: tokens.color,
+        };
+      },
+      ['color'],
+    ),
   },
 };

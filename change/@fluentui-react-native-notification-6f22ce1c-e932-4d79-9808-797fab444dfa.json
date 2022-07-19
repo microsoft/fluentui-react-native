@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "updated notification button style",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}

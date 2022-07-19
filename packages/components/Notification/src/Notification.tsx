@@ -4,11 +4,12 @@ import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Svg } from 'react-native-svg';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { ActionButton, getDismissIconPath } from './Notification.helper';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -34,7 +35,8 @@ export const Notification = compose<NotificationType>({
     contentContainer: View,
     title: Text,
     message: Text,
-    action: Button,
+    action: ActionButton,
+    dismissIcon: Svg,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
@@ -60,7 +62,7 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {action && <Slots.action>{action}</Slots.action>}
+          {action ? <Slots.action>{action}</Slots.action> : !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>}
         </Slots.root>
       );
     };

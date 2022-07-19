@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.30.7",
+  "version": "0.31.3",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -28,33 +28,33 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "0.22.31",
-    "@fluentui-react-native/callout": "0.20.10",
-    "@fluentui-react-native/checkbox": "0.15.15",
-    "@fluentui-react-native/contextual-menu": "0.16.42",
-    "@fluentui-react-native/focus-trap-zone": "0.8.47",
-    "@fluentui-react-native/focus-zone": "0.9.35",
-    "@fluentui-react-native/interactive-hooks": "0.16.5",
-    "@fluentui-react-native/link": "0.15.48",
-    "@fluentui-react-native/menu-button": "0.7.75",
-    "@fluentui-react-native/persona": "0.12.31",
-    "@fluentui-react-native/persona-coin": "0.10.31",
-    "@fluentui-react-native/pressable": "0.8.47",
-    "@fluentui-react-native/radio-group": "0.14.55",
-    "@fluentui-react-native/separator": "0.11.31",
-    "@fluentui-react-native/tabs": "0.6.54",
-    "@fluentui-react-native/text": "0.11.28"
+    "@fluentui-react-native/button": "0.24.3",
+    "@fluentui-react-native/callout": "0.21.0",
+    "@fluentui-react-native/checkbox": "0.16.1",
+    "@fluentui-react-native/contextual-menu": "0.17.0",
+    "@fluentui-react-native/focus-trap-zone": "0.9.0",
+    "@fluentui-react-native/focus-zone": "0.10.0",
+    "@fluentui-react-native/interactive-hooks": "0.17.0",
+    "@fluentui-react-native/link": "0.16.0",
+    "@fluentui-react-native/menu-button": "0.8.3",
+    "@fluentui-react-native/persona": "0.13.0",
+    "@fluentui-react-native/persona-coin": "0.11.0",
+    "@fluentui-react-native/pressable": "0.9.0",
+    "@fluentui-react-native/radio-group": "0.15.0",
+    "@fluentui-react-native/separator": "0.12.0",
+    "@fluentui-react-native/tabs": "0.7.0",
+    "@fluentui-react-native/text": "0.12.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react": "17.0.1",
-    "react-native": "^0.64.3"
+    "react": "17.0.2",
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
-    "react": ">=17.0.1",
-    "react-native": ">=0.64.3"
+    "react": ">=17.0.2",
+    "react-native": ">=0.66.0"
   },
   "author": "",
   "license": "MIT"

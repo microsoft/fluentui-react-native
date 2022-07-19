@@ -1,6 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-// moving marginHorizontal into style object prompts the error "Shallow compare failed for Notification, key: style"
 exports[`Notification component tests Notification default 1`] = `
 <View
   marginHorizontal={16}
@@ -64,7 +63,9 @@ exports[`Notification component tests Notification default 1`] = `
     }
     accessible={true}
     appearance="subtle"
+    color="#0F6CBD"
     disabled={false}
+    disabledColor="#2886DE"
     enableFocusRing={true}
     focusable={true}
     minWidth={0}
@@ -80,12 +81,13 @@ exports[`Notification component tests Notification default 1`] = `
     onStartShouldSetResponder={[Function]}
     padding={0}
     paddingHorizontal={0}
+    pressedColor="#0F6CBD30"
     style={
       Object {
         "alignItems": "center",
         "alignSelf": "center",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#ffffff",
+        "backgroundColor": "transparent",
+        "borderColor": "transparent",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
@@ -103,9 +105,9 @@ exports[`Notification component tests Notification default 1`] = `
       numberOfLines={0}
       style={
         Object {
-          "color": "#323130",
+          "color": "#0F6CBD",
           "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,

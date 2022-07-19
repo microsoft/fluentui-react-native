@@ -232,7 +232,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
     }
   >
     <Text>
-      Shadow (depth=2) 
+      Shadow (depth=2)
     </Text>
   </View>
 </View>
@@ -300,7 +300,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
     }
   >
     <Text>
-      Shadow (depth=8) 
+      Shadow (depth=8)
     </Text>
   </View>
 </View>
@@ -368,7 +368,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
     }
   >
     <Text>
-      Shadow (depth=28) 
+      Shadow (depth=28)
     </Text>
   </View>
 </View>
