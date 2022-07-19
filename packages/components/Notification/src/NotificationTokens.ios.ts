@@ -63,6 +63,27 @@ const notificationColors = {
     light: '#4C4400',
     dark: '#FDEE65',
   }),
+
+  /**
+   * None of the foreground tokens above have pressed versions so the foreground color with an alpha value is used.
+   * The FluentUI Apple NotificationView was used to color match.
+   */
+  primaryPressed: DynamicColorIOS({
+    light: '#0F6CBD30', // opacity: 0.19
+    dark: '#77B7F756', // opacity: 0.34
+  }),
+  neutralPressed: DynamicColorIOS({
+    light: '#61616145', // opacity: 0.27
+    dark: '#D6D6D682', // opacity: 0.51
+  }),
+  dangerPressed: DynamicColorIOS({
+    light: '#9F282C32', // opacity: 0.2
+    dark: '#E37D8159', // opacity: 0.38
+  }),
+  warningPressed: DynamicColorIOS({
+    light: '#4C440033', // opacity: 0.2
+    dark: '#FDEE6564', // opacity: 0.39
+  }),
 };
 
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
@@ -93,47 +114,43 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       backgroundColor: notificationColors.brandBackground4,
       color: notificationColors.brandForeground4,
       disabledColor: notificationColors.brandForegroundDisabled,
-      /**
-       * None of the foreground tokens here have pressed versions so the foreground color with an alpha value is used.
-       * The FluentUI Apple NotificationView was used to color match.
-       */
-      pressedColor: '#0F6CBD30', // opacity: 0.19
+      pressedColor: notificationColors.primaryPressed,
     },
     neutral: {
       backgroundColor: notificationColors.background4,
       color: notificationColors.foreground2,
       disabledColor: notificationColors.foregroundDisabled2,
-      pressedColor: '#61616145', // opacity: 0.27
+      pressedColor: notificationColors.neutralPressed,
     },
     primaryBar: {
       backgroundColor: notificationColors.brandBackground4,
       borderWidth: 0,
       color: notificationColors.brandForeground4,
       disabledColor: notificationColors.brandForegroundDisabled,
-      pressedColor: '#0F6CBD30', // opacity: 0.19
+      pressedColor: notificationColors.primaryPressed,
     },
     primaryOutlineBar: {
       backgroundColor: notificationColors.background1,
       borderColor: notificationColors.stroke2,
       color: notificationColors.brandForeground1,
       disabledColor: notificationColors.brandForegroundDisabled,
-      pressedColor: '#0F6CBD30', // opacity: 0.19
+      pressedColor: notificationColors.primaryPressed,
     },
     neutralBar: {
       backgroundColor: notificationColors.background5,
       borderWidth: 0,
       color: notificationColors.foreground2,
       disabledColor: notificationColors.foregroundDisabled2,
-      pressedColor: '#61616145', // opacity: 0.27
+      pressedColor: notificationColors.neutralPressed,
     },
     danger: {
       backgroundColor: notificationColors.PaletteRedBackground1,
       color: notificationColors.PaletteRedForeground1,
-      pressedColor: '#9F282C32', // opacity: 0.2
+      pressedColor: notificationColors.dangerPressed,
     },
     warning: {
       backgroundColor: notificationColors.PaletteYellowBackground1,
       color: notificationColors.PaletteYellowForeground1,
-      pressedColor: '#4C440033', // opacity: 0.2
+      pressedColor: notificationColors.warningPressed,
     },
   } as NotificationTokens);
