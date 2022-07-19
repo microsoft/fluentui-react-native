@@ -14,7 +14,7 @@ export interface collectionItem {
 export interface MenuPickerProps {
   prompt?: string;
   selected?: string;
-  onChange?: (value: string, index?: number) => void;
+  onChange?: (value: any, index?: number) => void;
   collection?: collectionItem[];
   style?: any;
 }
