@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Fri, 15 Jul 2022 01:22:54 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.4
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.4
 
 ## 0.16.3
 

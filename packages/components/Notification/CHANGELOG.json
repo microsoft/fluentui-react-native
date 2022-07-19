@@ -2,6 +2,41 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Tue, 19 Jul 2022 18:10:02 GMT",
+      "tag": "@fluentui-react-native/notification_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/notification",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1",
+            "comment": "update all necessary snapshots"
+          }
+        ],
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "4a2991bd1d5bbcc38cfb023c84845557f4791de9",
+            "comment": "updated notification button style"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.24.4",
+            "commit": "1b9087c5526b378e6b35d70cf44d109c1b0dad5e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.10.2",
+            "commit": "1b9087c5526b378e6b35d70cf44d109c1b0dad5e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 15 Jul 2022 01:22:54 GMT",
       "tag": "@fluentui-react-native/notification_v0.6.7",
       "version": "0.6.7",

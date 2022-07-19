@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Tue, 19 Jul 2022 18:10:02 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.5.2",
+      "version": "0.5.2",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "3163d2bf409a3ed50862fe874b351cb642d7d2c1",
+            "comment": "update snapshots for Tabs"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "comment": "Bump @fluentui-react-native/experimental-text to v0.10.2",
+            "commit": "1b9087c5526b378e6b35d70cf44d109c1b0dad5e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 20:03:37 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.5.1",
       "version": "0.5.1",

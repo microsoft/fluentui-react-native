@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Thu, 14 Jul 2022 20:03:37 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.10.2
 
 ## 0.5.1
 
