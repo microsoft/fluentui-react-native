@@ -69,6 +69,7 @@ exports[`Notification component tests Notification default 1`] = `
     enableFocusRing={true}
     focusable={true}
     minWidth={0}
+    onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
