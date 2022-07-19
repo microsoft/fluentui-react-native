@@ -40,16 +40,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       disabledColor: '#FFFFFF', // foregroundDisabled2
       pressedColor: '#61616145', // opacity: 0.27
     },
-    danger: {
-      backgroundColor: '#FDF6F6', // PaletteRedBackground1
-      color: '#9F282C', // PaletteRedForeground1
-      pressedColor: '#9F282C32', // opacity: 0.2
-    },
-    warning: {
-      backgroundColor: '#FFFBD6', // PaletteYellowBackground1
-      color: '#4C4400', // PaletteYellowForeground1
-      pressedColor: '#4C440033', // opacity: 0.2
-    },
     primaryBar: {
       backgroundColor: '#EBF3FC', // brandBackground4
       borderWidth: 0,
@@ -70,5 +60,15 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: '#616161', // foreground2
       disabledColor: '#FFFFFF', // foregroundDisabled2
       pressedColor: '#61616145', // opacity: 0.27
+    },
+    danger: {
+      backgroundColor: '#FDF6F6', // PaletteRedBackground1
+      color: '#9F282C', // PaletteRedForeground1
+      pressedColor: '#9F282C32', // opacity: 0.2
+    },
+    warning: {
+      backgroundColor: '#FFFBD6', // PaletteYellowBackground1
+      color: '#4C4400', // PaletteYellowForeground1
+      pressedColor: '#4C440033', // opacity: 0.2
     },
   } as NotificationTokens);

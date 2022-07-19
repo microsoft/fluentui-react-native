@@ -105,16 +105,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       disabledColor: notificationColors.foregroundDisabled2,
       pressedColor: '#61616145', // opacity: 0.27
     },
-    danger: {
-      backgroundColor: notificationColors.PaletteRedBackground1,
-      color: notificationColors.PaletteRedForeground1,
-      pressedColor: '#9F282C32', // opacity: 0.2
-    },
-    warning: {
-      backgroundColor: notificationColors.PaletteYellowBackground1,
-      color: notificationColors.PaletteYellowForeground1,
-      pressedColor: '#4C440033', // opacity: 0.2
-    },
     primaryBar: {
       backgroundColor: notificationColors.brandBackground4,
       borderWidth: 0,
@@ -135,5 +125,15 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       color: notificationColors.foreground2,
       disabledColor: notificationColors.foregroundDisabled2,
       pressedColor: '#61616145', // opacity: 0.27
+    },
+    danger: {
+      backgroundColor: notificationColors.PaletteRedBackground1,
+      color: notificationColors.PaletteRedForeground1,
+      pressedColor: '#9F282C32', // opacity: 0.2
+    },
+    warning: {
+      backgroundColor: notificationColors.PaletteYellowBackground1,
+      color: notificationColors.PaletteYellowForeground1,
+      pressedColor: '#4C440033', // opacity: 0.2
     },
   } as NotificationTokens);
