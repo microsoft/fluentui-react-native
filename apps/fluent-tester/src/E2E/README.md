@@ -63,10 +63,12 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 2. POD Install
    - C:\repo\fluentui-react-native> `cd apps\macos\src`
    - C:\repo\fluentui-react-native\apps\macos\src> `pod install`
-3. Start the server
+3. Install Appium's MacOS Driver (only needed once)
+   - C:\repo\fluentui-react-native\apps\macos> `yarn appium driver install mac2`
+4. Start the server
    - C:\repo\fluentui-react-native> `cd apps\macos`
    - C:\repo\fluentui-react-native\apps\macos> `yarn start`
-4. Open a new command prompt and run the E2E tests
+5. Open a new command prompt and run the E2E tests
    - C:\repo\fluentui-react-native\apps\macos> `yarn e2etest`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
