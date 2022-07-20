@@ -18,7 +18,7 @@ Toast notifications can include an optional `icon` that appears to the left of t
 
 ## Title
 
-Toast and bar notifications can include an optional `title` that appears on top of the `message`. The `message` will then become subtext.
+Toast notifications can include an optional `title` that appears on top of the `message`. The `message` will then become subtext.
 
 ## Button
 
