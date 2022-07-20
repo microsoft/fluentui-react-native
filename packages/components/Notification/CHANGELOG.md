@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Wed, 20 Jul 2022 16:24:28 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Jul 2022 19:01:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Wed, 20 Jul 2022 19:01:18 GMT
+
+### Minor changes
+
+- add support for dark mode (joannaquu@gmail.com)
 
 ## 0.7.1
 
