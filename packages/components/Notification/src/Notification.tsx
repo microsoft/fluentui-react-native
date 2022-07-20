@@ -8,7 +8,7 @@ import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { NotificationButton, getDismissSvgProps, getNotificationButtonType } from './Notification.helper';
+import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -52,9 +52,7 @@ export const Notification = compose<NotificationType>({
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
       const iconProps = createIconProps(icon);
-
-      const notificationButtonType = getNotificationButtonType(userProps);
-      const dismissIconProps = createIconProps({ svgSource: getDismissSvgProps(), width: 20, height: 20 });
+      const notificationButtonProps = createNotificationButtonProps(userProps);
 
       return (
         <Slots.root {...mergedProps}>
@@ -63,8 +61,7 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {notificationButtonType === 'action' && <Slots.action onClick={onActionPress}>{action}</Slots.action>}
-          {notificationButtonType === 'dismiss' && <Slots.action icon={dismissIconProps} />}
+          <Slots.action {...notificationButtonProps} />
         </Slots.root>
       );
     };
