@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Wed, 20 Jul 2022 17:46:19 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.16",
+      "version": "1.1.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "0f8982f07226299cb46507abb5a4e43c8f1ba80b",
+            "comment": "removed redundunt margin for Avatar and added aspectRatio to presence Badge"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.4",
+            "commit": "0f8982f07226299cb46507abb5a4e43c8f1ba80b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Jul 2022 16:24:28 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.15",
       "version": "1.1.15",

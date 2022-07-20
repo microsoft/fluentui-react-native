@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Wed, 20 Jul 2022 16:24:28 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Jul 2022 17:46:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.16
+
+Wed, 20 Jul 2022 17:46:19 GMT
+
+### Patches
+
+- removed redundunt margin for Avatar and added aspectRatio to presence Badge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.1.4
 
 ## 1.1.15
 
