@@ -2,15 +2,15 @@
 
 ## Variants
 
-- Toast Notifications
-  - Primary
-  - Neutral
-  - Danger
-  - Warning
-- Bar Notifications
-  - PrimaryBar
-  - PrimaryOutlineBar
-  - NeutralBar
+| Variant           | Type  | Light     | Dark      |
+| ----------------- | ----- | --------- | --------- |
+| Primary           | Toast | `#EBF3FC` | `#082338` |
+| Neutral           | Toast | `#FAFAFA` | `#333333` |
+| PrimaryBar        | Bar   | `#EBF3FC` | `#082338` |
+| PrimaryOutlineBar | Bar   | `#FFFFFF` | `#000000` |
+| NeutralBar        | Bar   | `#F0F0F0` | `#3D3D3D` |
+| Danger            | Toast | `#FDF6F6` | `#3F1011` |
+| Warning           | Toast | `#FFFBD6` | `#4C4400` |
 
 ## Icon
 
@@ -34,4 +34,4 @@ Depending on what props are passed in, either an action button or dismiss button
 | Prop            | Description                                          |
 | --------------- | ---------------------------------------------------- |
 | `onPress`       | Action performed by tapping the entire notification. |
-| `onActionPress` | Action performed by the `button`.                    |
+| `onActionPress` | Action performed by the tapping the `button`.        |
