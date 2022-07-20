@@ -2,14 +2,13 @@
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
-import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
+import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { SvgProps } from 'react-native-svg';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { ActionButton, getDismissSvg } from './Notification.helper';
+import { NotificationButton, getDismissSvgProps, getNotificationButtonType } from './Notification.helper';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -35,7 +34,7 @@ export const Notification = compose<NotificationType>({
     contentContainer: View,
     title: Text,
     message: Text,
-    action: ActionButton,
+    action: NotificationButton,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
@@ -52,15 +51,10 @@ export const Notification = compose<NotificationType>({
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
-
       const iconProps = createIconProps(icon);
-      const dismissSvg: React.FunctionComponent<SvgProps> = (props: SvgProps) => {
-        return getDismissSvg(props.color);
-      };
-      const svgProps: SvgIconProps = {
-        src: dismissSvg,
-      };
-      const dismissIconProps = createIconProps({ svgSource: svgProps, width: 20, height: 20 });
+
+      const notificationButtonType = getNotificationButtonType(userProps);
+      const dismissIconProps = createIconProps({ svgSource: getDismissSvgProps(), width: 20, height: 20 });
 
       return (
         <Slots.root {...mergedProps}>
@@ -69,15 +63,8 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {onActionPress ? (
-            action ? (
-              <Slots.action onClick={onActionPress}>{action}</Slots.action>
-            ) : (
-              <Slots.action icon={dismissIconProps} />
-            )
-          ) : (
-            !isBar && <Slots.action icon={dismissIconProps} />
-          )}
+          {notificationButtonType === 'action' && <Slots.action onClick={onActionPress}>{action}</Slots.action>}
+          {notificationButtonType === 'dismiss' && <Slots.action icon={dismissIconProps} />}
         </Slots.root>
       );
     };
