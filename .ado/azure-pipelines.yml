@@ -73,7 +73,7 @@ jobs:
   - job: ApplePR
     displayName: Apple PR
     pool:
-      vmImage: 'macos-11'
+      vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
@@ -149,42 +149,6 @@ jobs:
 
       # bundle win32 and do end to end tests
       - template: templates/e2e-testing-win32.yml
-
-  - job: AndroidPR
-    displayName: Android PR
-    pool:
-      vmImage: 'macos-11'
-    variables:
-      relative_directory: 'android'
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-
-    steps:
-      - checkout: self
-        persistCredentials: true
-
-      # setup repo basics
-      - template: templates/setup-repo-min-build.yml
-
-      # package android bundle
-      - script: |
-          yarn bundle
-        workingDirectory: apps/$(relative_directory)
-        displayName: 'yarn bundle $(relative_directory)'
-
-      # sets-up specifics for android dependency like NDK & emulator
-      - template: templates/android-dep-setup.yml
-
-      # build android apk and run available Instrumented test
-      - task: Gradle@2
-        inputs:
-          gradleWrapperFile: 'apps/$(relative_directory)/src/gradlew'
-          workingDirectory: 'apps/$(relative_directory)/src'
-          tasks: 'assembleDebug cAT'
-          publishJUnitResults: false
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: '1.11'
-          sonarQubeRunAnalysis: false
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks
