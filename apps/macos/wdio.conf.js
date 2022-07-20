@@ -16,8 +16,8 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'mac',
-      automationName: 'Mac2',
-      bundleId: 'com.microsoft.ReactTestApp',
+      'appium:automationName': 'Mac2',
+      'appium:bundleId': 'com.microsoft.ReactTestApp',
     },
   ],
 
