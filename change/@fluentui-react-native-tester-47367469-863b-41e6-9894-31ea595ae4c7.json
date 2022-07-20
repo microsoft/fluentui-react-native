@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "MenuPicker can now have a custom key set",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}
