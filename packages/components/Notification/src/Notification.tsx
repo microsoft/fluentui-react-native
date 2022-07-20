@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import React from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
@@ -55,9 +55,9 @@ export const Notification = compose<NotificationType>({
       const iconProps = createIconProps(icon);
       const notificationButtonProps = createNotificationButtonProps(userProps);
 
-      const [hidden, setHidden] = React.useState<boolean>(!visible);
+      const [hidden, setHidden] = useState<boolean>(!visible);
 
-      React.useLayoutEffect(() => {
+      useLayoutEffect(() => {
         if (visible) {
           setHidden(false);
         } else {
