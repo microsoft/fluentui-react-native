@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "removed redundunt margin for Avatar and added aspectRatio to presence Badge",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
