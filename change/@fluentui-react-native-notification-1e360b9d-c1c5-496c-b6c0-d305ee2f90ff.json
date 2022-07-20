@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add support for dark mode",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
