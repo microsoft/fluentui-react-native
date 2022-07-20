@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Changed API of Badge according to latest Web component",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
