@@ -1,5 +1,5 @@
 import { TestDescription } from './TestComponents';
-import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
+import { AvatarTest, NativeAvatarTest, HOMEPAGE_AVATAR_BUTTON, HOMEPAGE_NATIVE_AVATAR_BUTTON } from './TestComponents/Avatar';
 import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
@@ -15,16 +15,18 @@ import { HOMEPAGE_PRESSABLE_BUTTON, PressableTest } from './TestComponents/Press
 import { HOMEPAGE_SHIMMER_BUTTON, ShimmerTest } from './TestComponents/Shimmer';
 import { HOMEPAGE_RADIOGROUP_BUTTON, RadioGroupTest } from './TestComponents/RadioGroup';
 import { HOMEPAGE_SEPARATOR_BUTTON, SeparatorTest } from './TestComponents/Separator';
+import { HOMEPAGE_SHADOW_BUTTON, ShadowTest } from './TestComponents/Shadow';
 import { HOMEPAGE_SVG_BUTTON, SvgTest } from './TestComponents/Svg';
 import { HOMEPAGE_TEXT_BUTTON, TextTest } from './TestComponents/Text';
 import { HOMEPAGE_THEME_BUTTON, ThemeTest } from './TestComponents/Theme';
-import { HOMEPAGE_MENU_BUTTON, MenuButtonTest } from './TestComponents/MenuButton';
+import { HOMEPAGE_MENUBUTTON_BUTTON, MenuButtonTest } from './TestComponents/MenuButton';
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
+import { HOMEPAGE_MENU_BUTTON, MenuTest } from './TestComponents/Menu';
 
 export const tests: TestDescription[] = [
   {
@@ -36,6 +38,11 @@ export const tests: TestDescription[] = [
     name: 'Avatar Test',
     component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
+  },
+  {
+    name: 'NativeAvatar Test',
+    component: NativeAvatarTest,
+    testPage: HOMEPAGE_NATIVE_AVATAR_BUTTON,
   },
   {
     name: 'Badge Test',
@@ -98,9 +105,14 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_LINK_BUTTON,
   },
   {
+    name: 'Menu Test',
+    component: MenuTest,
+    testPage: HOMEPAGE_MENU_BUTTON,
+  },
+  {
     name: 'MenuButton Test',
     component: MenuButtonTest,
-    testPage: HOMEPAGE_MENU_BUTTON,
+    testPage: HOMEPAGE_MENUBUTTON_BUTTON,
   },
   {
     name: 'Persona Test',
@@ -126,6 +138,11 @@ export const tests: TestDescription[] = [
     name: 'Separator Test',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
+  },
+  {
+    name: 'Shadow Test',
+    component: ShadowTest,
+    testPage: HOMEPAGE_SHADOW_BUTTON,
   },
   {
     name: 'Shimmer Test',

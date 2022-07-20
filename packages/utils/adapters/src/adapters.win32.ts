@@ -100,6 +100,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onLayout: true,
   onLongPress: true,
   onPress: true,
+  onPressIn: true,
+  onPressOut: true,
   onTextLayout: true,
   style: true,
   selectable: true,

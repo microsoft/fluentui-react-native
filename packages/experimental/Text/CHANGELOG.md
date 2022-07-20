@@ -1,8 +1,124 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- add support for onAccessibilityTap on Text (email not defined)
+
+## 0.10.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+
+## 0.10.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+
+## 0.9.3
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- add support for onAccessibilityTap on Text (email not defined)
+
+## 0.9.2
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.32
+
+## 0.9.1
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+
+## 0.9.0
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+
+## 0.7.28
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+
+## 0.7.27
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.27
+
+## 0.7.26
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.26
+
+## 0.7.25
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Revert "Add Text props and test new Variant types (#1615)" (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.25
+
+## 0.7.24
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/framework to v0.7.24
+
+## 0.7.23
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.23
 
 ## 0.7.22
 

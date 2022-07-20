@@ -1,8 +1,93 @@
 # Change Log - @fluentui-react-native/tokens
 
-This log was last generated on Thu, 31 Mar 2022 07:27:48 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+
+## 0.15.1
+
+Fri, 08 Jul 2022 21:23:36 GMT
+
+### Patches
+
+- Move used tokens types to tokens package (ruaraki@microsoft.com)
+
+## 0.15.0
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Minor changes
+
+- added letter spacing (joannaquu@gmail.com)
+
+## 0.14.0
+
+Wed, 25 May 2022 18:43:10 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @uifabricshared/theming-ramp to v0.16.11
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+
+## 0.12.2
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- add back elevation as a token (sanajmi@microsoft.com)
+
+## 0.12.1
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Patches
+
+- Separate out elevation from iOS Shadow styles (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @uifabricshared/theming-ramp to v0.16.9
+
+## 0.12.0
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Minor changes
+
+- MenuList styling (ruaraki@microsoft.com)
+
+## 0.11.11
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @uifabricshared/theming-ramp to v0.16.8
+
+## 0.11.10
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @uifabricshared/theming-ramp to v0.16.7
 
 ## 0.11.9
 

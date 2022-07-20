@@ -41,8 +41,16 @@ export type {
   RestoreFocusEvent,
 } from '@fluentui-react-native/callout';
 
-export { Checkbox, checkboxName } from '@fluentui-react-native/checkbox';
+export { Checkbox, checkboxName, CheckboxV1, checkboxNameV1 } from '@fluentui-react-native/checkbox';
 export type {
+  CheckboxInfo,
+  CheckboxProps,
+  CheckboxSize,
+  CheckboxShape,
+  CheckboxSlotProps,
+  CheckboxState,
+  CheckboxTokens,
+  CheckboxType,
   ICheckboxProps,
   ICheckboxRenderData,
   ICheckboxSlotProps,

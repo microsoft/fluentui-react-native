@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Persona, PersonaSize } from '@fluentui/react-native';
 import { rajeshImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { View, Text, Switch, Picker } from 'react-native';
+import { View, Text, Switch } from 'react-native';
 import { undefinedText } from '../PersonaCoin/styles';
+import { MenuPicker } from '../Common/MenuPicker';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -19,6 +20,13 @@ const allSizes: WithUndefined<PersonaSize>[] = [
   'size100',
   'size120',
 ];
+
+const allSizesCollection = allSizes.map((size) => {
+  return {
+    label: size,
+    value: size,
+  };
+});
 
 interface ISwitchWithLabelProps {
   label: string;
@@ -53,17 +61,13 @@ export const StandardUsage: React.FunctionComponent = () => {
         <SwitchWithLabel label="Show secondary text" value={showSecondary} onValueChange={setShowSecondary} />
         <SwitchWithLabel label="Show tertiary text" value={showTertiary} onValueChange={setShowTertiary} />
         <SwitchWithLabel label="Show optional text" value={showOptional} onValueChange={setShowOptional} />
-
-        <Picker
+        <MenuPicker
           prompt="Size"
           style={commonStyles.header}
-          selectedValue={imageSize || undefinedText}
-          onValueChange={(size) => setImageSize(size === undefinedText ? undefined : size)}
-        >
-          {allSizes.map((size, index) => (
-            <Picker.Item label={size} key={index} value={size} />
-          ))}
-        </Picker>
+          selected={imageSize || undefinedText}
+          onChange={(size: PersonaSize | typeof undefinedText) => setImageSize(size === undefinedText ? undefined : size)}
+          collection={allSizesCollection}
+        />
       </View>
 
       <Persona

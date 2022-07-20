@@ -115,6 +115,12 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   componentRef?: React.RefObject<IFocusable>;
 
   /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
+
+  /**
    * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
    * `iconPosition` prop.
    */

@@ -1,8 +1,81 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+- Bump @fluentui-react-native/theme to v0.7.0
+- Bump @fluentui-react-native/theming-utils to v0.14.0
+
+## 0.13.0
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theme to v0.6.11
+- Bump @fluentui-react-native/theming-utils to v0.13.0
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+
+## 0.11.0
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Minor changes
+
+- Add shadows to default (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theme to v0.6.9
+- Bump @fluentui-react-native/theming-utils to v0.11.0
+
+## 0.10.3
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Revert "Add Text props and test new Variant types (#1615)" (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theme to v0.6.8
+- Bump @fluentui-react-native/theming-utils to v0.10.2
+
+## 0.10.2
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- initial Text implementation (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.16.2
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/theme to v0.6.7
+- Bump @fluentui-react-native/theming-utils to v0.10.1
+
+## 0.10.1
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump design tokens packages (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.16.1
 
 ## 0.10.0
 

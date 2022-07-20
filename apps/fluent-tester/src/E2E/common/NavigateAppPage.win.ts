@@ -1,4 +1,5 @@
 import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../TestComponents/ActivityIndicator/consts';
+import { HOMEPAGE_AVATAR_BUTTON } from '../../TestComponents/Avatar/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
@@ -9,7 +10,8 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../TestComponents/FocusTrapZon
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../TestComponents/Link/consts';
-import { HOMEPAGE_MENU_BUTTON } from '../../TestComponents/MenuButton/consts';
+import { HOMEPAGE_MENU_BUTTON } from '../../TestComponents/Menu/consts';
+import { HOMEPAGE_MENUBUTTON_BUTTON } from '../../TestComponents/MenuButton/consts';
 import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../../TestComponents/MenuButtonExperimental/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../TestComponents/PersonaCoin/consts';
@@ -29,6 +31,10 @@ import { By, BasePage } from './BasePage.win';
 class NavigateAppPage extends BasePage {
   clickAndGoToActivityIndicatorPage() {
     this.activityIndicatorPage.click();
+  }
+
+  clickAndGoToAvatarPage() {
+    this.avatarPage.click();
   }
 
   clickAndGoToButtonPage() {
@@ -65,6 +71,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToLinkPage() {
     this.linkPage.click();
+  }
+
+  clickAndGoToMenuPage() {
+    this.menuPage.click();
   }
 
   clickAndGoToMenuButtonPage() {
@@ -139,6 +149,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
   }
 
+  private get avatarPage() {
+    return By(HOMEPAGE_AVATAR_BUTTON);
+  }
+
   private get buttonPage() {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
@@ -175,8 +189,12 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_LINK_BUTTON);
   }
 
-  private get menuButtonPage() {
+  private get menuPage() {
     return By(HOMEPAGE_MENU_BUTTON);
+  }
+
+  private get menuButtonPage() {
+    return By(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   private get menuButtonExperimentalPage() {

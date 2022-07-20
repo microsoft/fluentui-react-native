@@ -1,8 +1,278 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.4
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- update all necessary snapshots (email not defined)
+- Bump @fluentui-react-native/experimental-button to v0.16.4
+
+## 0.4.3
+
+Fri, 15 Jul 2022 01:22:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.16.3
+
+## 0.4.2
+
+Fri, 15 Jul 2022 00:29:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.16.2
+
+## 0.4.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+- Bump @fluentui-react-native/experimental-button to v0.16.1
+
+## 0.4.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.17.0
+- Bump @fluentui-react-native/experimental-button to v0.16.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+
+## 0.3.56
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- update all necessary snapshots (email not defined)
+- Bump @fluentui-react-native/experimental-button to v0.15.35
+
+## 0.3.55
+
+Thu, 14 Jul 2022 16:13:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.15.34
+
+## 0.3.54
+
+Wed, 13 Jul 2022 23:23:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.15.33
+
+## 0.3.53
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.42
+- Bump @fluentui-react-native/experimental-button to v0.15.32
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/tokens to v0.15.1
+
+## 0.3.52
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.41
+- Bump @fluentui-react-native/experimental-button to v0.15.31
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.3.51
+
+Thu, 07 Jul 2022 17:57:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.40
+
+## 0.3.50
+
+Wed, 29 Jun 2022 17:36:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.39
+
+## 0.3.49
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.38
+
+## 0.3.48
+
+Wed, 15 Jun 2022 18:26:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.15.30
+
+## 0.3.47
+
+Wed, 15 Jun 2022 00:46:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.37
+
+## 0.3.46
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.36
+- Bump @fluentui-react-native/experimental-button to v0.15.29
+
+## 0.3.45
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.35
+- Bump @fluentui-react-native/experimental-button to v0.15.28
+
+## 0.3.44
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.34
+- Bump @fluentui-react-native/experimental-button to v0.15.27
+
+## 0.3.43
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.33
+- Bump @fluentui-react-native/experimental-button to v0.15.26
+
+## 0.3.42
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/contextual-menu to v0.16.32
+- Bump @fluentui-react-native/experimental-button to v0.15.25
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/tokens to v0.14.0
+
+## 0.3.41
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.31
+- Bump @fluentui-react-native/experimental-button to v0.15.24
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.3.40
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.30
+- Bump @fluentui-react-native/experimental-button to v0.15.23
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/tokens to v0.12.1
+
+## 0.3.39
+
+Tue, 10 May 2022 20:49:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.29
+
+## 0.3.38
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.28
+- Bump @fluentui-react-native/experimental-button to v0.15.22
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.3.37
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.27
+- Bump @fluentui-react-native/experimental-button to v0.15.21
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/tokens to v0.11.11
+
+## 0.3.36
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.26
+- Bump @fluentui-react-native/experimental-button to v0.15.20
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/tokens to v0.11.10
+
+## 0.3.35
+
+Tue, 26 Apr 2022 06:35:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.25
+
+## 0.3.34
+
+Mon, 25 Apr 2022 17:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.15.19
+
+## 0.3.33
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.16.24
+- Bump @fluentui-react-native/experimental-button to v0.15.18
+- Bump @fluentui-react-native/framework to v0.7.23
 
 ## 0.3.32
 

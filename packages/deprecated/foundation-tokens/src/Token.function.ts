@@ -7,25 +7,9 @@ import {
   IStyleFactories,
   IStyleFinalizer,
   IStyleFactoryFunction,
-  IStyleFactoryFunctionRaw,
 } from './Token.types';
 import { ITokenPropInfo, ICachedPropHandlers } from './Token.internal';
 import { GetMemoValue } from '@fluentui-react-native/memo-cache';
-
-/**
- * Helper to make it easy to create a style factory function.  Function statics are super convenient
- * but kind of annoying to set up
- *
- * @param fn - function to decorate with keys
- * @param keys - keys to append as a static to the function
- */
-export function styleFunction<TProps, TTokens, TTheme>(
-  fn: IStyleFactoryFunctionRaw<TProps, TTokens, TTheme>,
-  keys: (keyof TTokens)[],
-): IStyleFactoryFunction<TProps, TTokens, TTheme> {
-  (fn as IStyleFactoryFunction<TProps, TTokens, TTheme>)._keys = keys;
-  return fn as IStyleFactoryFunction<TProps, TTokens, TTheme>;
-}
 
 interface ITokensForSlot<TProps, TTokens, TTheme> {
   toStyle: IStyleFactoryOperation<TTokens, TTheme>[];

@@ -1,8 +1,148 @@
 # Change Log - @fluentui-react-native/icon
 
-This log was last generated on Tue, 19 Apr 2022 16:54:55 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.14.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/text to v0.12.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+- Bump @fluentui-react-native/theming-utils to v0.14.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+
+## 0.12.3
+
+Fri, 08 Jul 2022 21:23:36 GMT
+
+### Patches
+
+- Move used tokens types to tokens package (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/text to v0.11.28
+- Bump @fluentui-react-native/tokens to v0.15.1
+
+## 0.12.2
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/text to v0.11.27
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.12.1
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Added a11y props to the root (v.kozova13@gmail.com)
+
+## 0.12.0
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Minor changes
+
+- Icon accesibility update (ruaraki@microsoft.com)
+
+## 0.11.25
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.13.0
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/text to v0.11.26
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theming-utils to v0.13.0
+- Bump @fluentui-react-native/tokens to v0.14.0
+- Bump @uifabricshared/foundation-compose to v1.11.22
+
+## 0.11.23
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/text to v0.11.24
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.11.22
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/text to v0.11.23
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theming-utils to v0.11.0
+- Bump @fluentui-react-native/tokens to v0.12.1
+- Bump @uifabricshared/foundation-compose to v1.11.20
+
+## 0.11.21
+
+Wed, 04 May 2022 21:06:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.26
+- Bump @fluentui-react-native/text to v0.11.22
+- Bump @fluentui-react-native/tokens to v0.12.0
+
+## 0.11.20
+
+Thu, 28 Apr 2022 19:09:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.3
+- Bump @fluentui-react-native/framework to v0.7.25
+- Bump @fluentui-react-native/text to v0.11.21
+- Bump @fluentui-react-native/theme-types to v0.14.3
+- Bump @fluentui-react-native/theming-utils to v0.10.2
+- Bump @fluentui-react-native/tokens to v0.11.11
+- Bump @uifabricshared/foundation-compose to v1.11.19
+
+## 0.11.19
+
+Wed, 27 Apr 2022 19:30:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.2
+- Bump @fluentui-react-native/framework to v0.7.24
+- Bump @fluentui-react-native/text to v0.11.20
+- Bump @fluentui-react-native/theme-types to v0.14.2
+- Bump @fluentui-react-native/theming-utils to v0.10.1
+- Bump @fluentui-react-native/tokens to v0.11.10
+- Bump @uifabricshared/foundation-compose to v1.11.18
+
+## 0.11.18
+
+Thu, 21 Apr 2022 21:50:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.10.1
+- Bump @fluentui-react-native/framework to v0.7.23
+- Bump @fluentui-react-native/text to v0.11.19
+- Bump @uifabricshared/foundation-compose to v1.11.17
 
 ## 0.11.17
 

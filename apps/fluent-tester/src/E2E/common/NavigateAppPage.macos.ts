@@ -7,7 +7,7 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../TestComponents/FocusTrapZon
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../TestComponents/Link/consts';
-import { HOMEPAGE_MENU_BUTTON } from '../../TestComponents/MenuButton/consts';
+import { HOMEPAGE_MENUBUTTON_BUTTON } from '../../TestComponents/MenuButton/consts';
 import { HOMEPAGE_PERSONA_BUTTON } from '../../TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../TestComponents/PersonaCoin/consts';
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../../TestComponents/Pressable/consts';
@@ -138,7 +138,7 @@ class NavigateAppPage extends BasePage {
   }
 
   private get menuButtonPage() {
-    return By(HOMEPAGE_MENU_BUTTON);
+    return By(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   private get personaPage() {

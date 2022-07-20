@@ -1,4 +1,4 @@
-export const HOMEPAGE_MENU_BUTTON = 'Homepage_MenuButton_Button';
+export const HOMEPAGE_MENUBUTTON_BUTTON = 'Homepage_MenuButton_Button';
 export const MENU_BUTTON_TESTPAGE = 'MenuButton_TestPage';
 
 /* E2E Testing Menu_Button 1 */
