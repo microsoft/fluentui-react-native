@@ -7,8 +7,8 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { ICON_TESTPAGE } from './consts';
 import { E2ETestingIcon } from './IconE2ETest';
 
-const testImage = require('../../test-data/icon_24x24.png');
-const testTtf = require('./../../../../assets/Font_Awesome_900.otf');
+const testImage = require('../../FluentTester/test-data/icon_24x24.png');
+const testTtf = require('./../../../assets/Font_Awesome_900.otf');
 import TestSvg from './assets/test.svg';
 
 const Icons: React.FunctionComponent = () => {

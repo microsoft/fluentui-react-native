@@ -5,7 +5,7 @@ import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { FontWeight } from '@fluentui-react-native/theme-types';
 import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../../test-data/test.svg';
+import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
 
 export const CustomizeUsage: React.FunctionComponent = () => {

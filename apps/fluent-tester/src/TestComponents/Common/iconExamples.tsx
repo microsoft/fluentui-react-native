@@ -23,4 +23,4 @@ export const fontProps: FontIconProps = Platform.select({
   },
 });
 
-export const testImage = require('./../../../../assets/icon_24x24.png');
+export const testImage = require('./../../../assets/icon_24x24.png');

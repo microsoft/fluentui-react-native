@@ -4,7 +4,7 @@ import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-nati
 import { View, Text, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import TestSvg from '../../test-data/test.svg';
+import TestSvg from '../../FluentTester/test-data/test.svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { StyledPicker } from '../Common/StyledPicker';
 import { ToggleButton } from '@fluentui/react-native';
