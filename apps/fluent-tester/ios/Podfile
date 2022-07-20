@@ -1,12 +1,10 @@
 require_relative '../../../node_modules/react-native-test-app/test_app'
 
-use_flipper!({ 'Flipper' => '0.75.1', 'Flipper-Folly' => '2.5.3' })
-
 workspace 'FluentTester.xcworkspace'
 
 use_test_app! do |target|
   target.app do
-    platform :ios, '13.0'
+    platform :ios, '14.0'
 
     # There is a bug where autolinking isn't working, do specify these manually.
     pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
