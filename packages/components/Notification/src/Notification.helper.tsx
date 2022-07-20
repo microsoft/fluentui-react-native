@@ -6,9 +6,6 @@ import { SvgIconProps } from '@fluentui-react-native/icon';
 import { NotificationProps } from './Notification.types';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 
-export const NotificationButtonTypes = ['action', 'dismiss', 'none'] as const;
-export type NotificationButtonType = typeof NotificationButtonTypes[number];
-
 export type NotificationButtonColorStates = { disabledColor; pressedColor };
 
 type NotificationButtonProps = ButtonProps & ButtonTokens & NotificationButtonColorStates;
