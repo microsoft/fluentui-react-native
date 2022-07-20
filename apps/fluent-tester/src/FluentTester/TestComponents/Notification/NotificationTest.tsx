@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { View } from 'react-native';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import PlayButton from './assets/play_button.svg';
 
@@ -10,120 +12,192 @@ const svgProps: SvgIconProps = {
 const iconProps = { svgSource: svgProps };
 
 const PrimaryTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'primary'}
-      action="Undo"
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-      onActionPress={() => {
-        console.log('Undo tapped');
-      }}
-    >
-      Mail Archived
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'primary'}
+        visible={visible}
+        action="Undo"
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+        onActionPress={() => {
+          console.log('Undo tapped');
+        }}
+      >
+        Mail Archived
+      </Notification>
+    </View>
   );
 };
 
 const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'primary'}
-      icon={iconProps}
-      title="Kat's iPhoneX"
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-    >
-      Listen to Emails • 7 mins
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'primary'}
+        visible={visible}
+        icon={iconProps}
+        title="Kat's iPhoneX"
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+      >
+        Listen to Emails • 7 mins
+      </Notification>
+    </View>
   );
 };
 
 const NeutralTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'neutral'}
-      action="Sign in"
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-      onActionPress={() => {
-        console.log('Sign in tapped');
-      }}
-    >
-      Some items require you to sign in to view them
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'neutral'}
+        visible={visible}
+        action="Sign in"
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+        onActionPress={() => {
+          console.log('Sign in tapped');
+        }}
+      >
+        Some items require you to sign in to view them
+      </Notification>
+    </View>
   );
 };
 
 const DangerTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'danger'}
-      action="Retry"
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-      onActionPress={() => {
-        console.log('Retry tapped');
-      }}
-    >
-      There was a problem, and your recent changes may not have saved
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'danger'}
+        visible={visible}
+        action="Retry"
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+        onActionPress={() => {
+          console.log('Retry tapped');
+        }}
+      >
+        There was a problem, and your recent changes may not have saved
+      </Notification>
+    </View>
   );
 };
 
 const WarningTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'warning'}
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-    >
-      Read Only
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'warning'}
+        visible={visible}
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+      >
+        Read Only
+      </Notification>
+    </View>
   );
 };
 
 const PrimaryBarTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'primaryBar'}
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-    >
-      Updating...
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'primaryBar'}
+        visible={visible}
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+      >
+        Updating...
+      </Notification>
+    </View>
   );
 };
 
 const PrimaryOutlineBarTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'primaryOutlineBar'}
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-    >
-      Mail Sent
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'primaryOutlineBar'}
+        visible={visible}
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+      >
+        Mail Sent
+      </Notification>
+    </View>
   );
 };
 
 const NeutralBarTest: React.FunctionComponent = () => {
+  const [visible, setVisible] = React.useState(false);
+  const onButtonPress = () => setVisible(!visible);
+
   return (
-    <Notification
-      variant={'neutralBar'}
-      onPress={() => {
-        console.log('Notification tapped');
-      }}
-    >
-      No internet connection
-    </Notification>
+    <View>
+      <Button onClick={onButtonPress} size="small">
+        {visible ? 'Hide' : 'Show'}
+      </Button>
+      <Notification
+        variant={'neutralBar'}
+        visible={visible}
+        onPress={() => {
+          console.log('Notification tapped');
+        }}
+      >
+        No internet connection
+      </Notification>
+    </View>
   );
 };
 

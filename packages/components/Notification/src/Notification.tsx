@@ -1,4 +1,5 @@
 /** @jsx withSlots */
+import React from 'react';
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
@@ -49,12 +50,22 @@ export const Notification = compose<NotificationType>({
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
+      const { variant, visible, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
       const iconProps = createIconProps(icon);
       const notificationButtonProps = createNotificationButtonProps(userProps);
 
-      return (
+      const [hidden, setHidden] = React.useState<boolean>(!visible);
+
+      React.useLayoutEffect(() => {
+        if (visible) {
+          setHidden(false);
+        } else {
+          setHidden(true);
+        }
+      }, [visible]);
+
+      return hidden ? null : (
         <Slots.root {...mergedProps}>
           {icon && <Slots.icon {...iconProps} />}
           <Slots.contentContainer>

@@ -27,6 +27,7 @@ export interface NotificationProps {
    * Notification variants: 'primary' | 'neutral' | 'primaryBar' | 'primaryOutlineBar' | 'neutralBar' | 'danger' | 'warning'
    */
   variant: NotificationVariant;
+  visible: Boolean;
   icon?: IconSourcesType;
   title?: string;
   action?: string;
