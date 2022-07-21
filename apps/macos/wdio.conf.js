@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.macos.ts'],
+  specs: ['../fluent-tester/src/E2E/Button/specs/*.macos.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -102,7 +102,7 @@ exports.config = {
   before: function () {
     require('ts-node').register({files: true});
 
-    browser.maximizeWindow();
+    //browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -138,11 +138,15 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: function (test, context, results) {
+    console.log('In AfterTest() : ' + test.description + '\n');
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
     if (results.passed) {
+      console.log('Test Passed\n');
       return;
     }
+
+    console.log('Test Failed\n');
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
