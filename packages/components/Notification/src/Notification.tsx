@@ -56,7 +56,7 @@ export const Notification = compose<NotificationType>({
       const notificationButtonProps = createNotificationButtonProps(userProps);
 
       const [hidden, setHidden] = useState<boolean>(!visible);
-      const [height, setHeight] = useState(new Animated.Value(0));
+      const height = new Animated.Value(0);
       const showDuration = isBar ? 300 : 600;
       const elasticValue = isBar ? 0 : 1.5;
 
