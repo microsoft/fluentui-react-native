@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { TOGGLE_TESTPAGE } from './consts';
+import { SWITCH_TESTPAGE } from './consts';
 import { View } from 'react-native';
-import { Toggle } from '@fluentui-react-native/toggle';
-import { Switch } from 'react-native';
+import { Switch } from '@fluentui-react-native/switch';
 const StandardUsage: React.FunctionComponent = () => {
-  const [ss, css] = React.useState(true);
-
   return (
     <View>
-      <Toggle />
-      <Switch value={ss} onValueChange={css} />
+      <Switch />
     </View>
   );
 };
@@ -18,7 +14,7 @@ const StandardUsage: React.FunctionComponent = () => {
 const toggleSections: TestSection[] = [
   {
     name: 'Standard Usage',
-    testID: TOGGLE_TESTPAGE,
+    testID: SWITCH_TESTPAGE,
     component: () => <StandardUsage />,
   },
 ];

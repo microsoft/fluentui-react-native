@@ -1,2 +1,2 @@
-export * from './Toggle';
+export * from './Switch';
 export * from './consts';
