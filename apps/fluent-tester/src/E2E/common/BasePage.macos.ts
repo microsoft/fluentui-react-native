@@ -55,9 +55,10 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
-    const scrollViewer = $('//*[@className="RCTCustomScrollView"]');
-    const scrollViewer1 = $('.RCTCustomScrollView');
-    console.log('scrollviewer found: ' + (scrollViewer1 != null));
+    const scrollViewer = $('//*[@class="RCTCustomScrollView"]');
+    //scrollViewer = $('//*[@class="RCTCustomScrollView"]');
+    //const scrollViewer1 = $('.RCTCustomScrollView');
+    console.log('scrollviewer found: ' + (scrollViewer != null));
     // const success1 = browser.waitUntil(
     //   () => {
     //     return By('SCROLLVIEW_TEST_ID').isDisplayed();
