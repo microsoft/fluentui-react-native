@@ -154,6 +154,8 @@ exports.config = {
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
 
+    console.log('Saving screenshot at: ' + filePath + '\n');
+
     // save screenshot
     browser.saveScreenshot(filePath);
   },
