@@ -4433,9 +4433,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.25.1"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.25.1.tgz#534fa3b0de8ba8172a86c2097064100a805d2032"
-  integrity sha512-Mek4bG4hybBBeZgFVUEAAYGYuAewDItlnpzeiNg4LcLN2iqXzCbrVn/XfTsdvx38PrROxaldgYhErknn/SWJvA==
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.26.0.tgz#2bb1ed4d4fcd7f9ae2e9ed1dea7f02e888d8a33f"
+  integrity sha512-jgnGejN0GERtaJGcCnOpyyMs2Hl6WDZenBty6d6Q+6/vNlolaTEqyGfczT1ox9jcS9XTNKHMzhZZHB7doullkQ==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
@@ -4448,7 +4448,7 @@ beachball@^2.20.0:
     semver "^6.1.1"
     toposort "^2.0.2"
     uuid "^8.3.1"
-    workspace-tools "^0.22.0"
+    workspace-tools "^0.24.0"
     yargs-parser "^20.2.4"
 
 big-integer@1.6.x:
@@ -13584,10 +13584,10 @@ workspace-tools@^0.18.2, workspace-tools@^0.18.4:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.22.0:
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.22.0.tgz#485ab42664812980c1e3394cdc6c4393245d8d16"
-  integrity sha512-3BNHTncmtUCptpb5EWrcb88tRqYXqOqmfj8ASLp7445ixP2g9ddXzh2cbmH/vHb3KJXCM8nS+N/PQsrmhJxr5w==
+workspace-tools@^0.23.0:
+  version "0.23.3"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.23.3.tgz#1833c848170d1370675535963778524d0ad0aef4"
+  integrity sha512-8JWfnW9Kj24X8l4sOvwN77cxExBM57fpbjo+UqvFzY7L9FeyY4MUCqpLKpKARkK8okF/PFPOL9Dl1QgsEMT4yw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
@@ -13597,10 +13597,10 @@ workspace-tools@^0.22.0:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.23.0:
-  version "0.23.3"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.23.3.tgz#1833c848170d1370675535963778524d0ad0aef4"
-  integrity sha512-8JWfnW9Kj24X8l4sOvwN77cxExBM57fpbjo+UqvFzY7L9FeyY4MUCqpLKpKARkK8okF/PFPOL9Dl1QgsEMT4yw==
+workspace-tools@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.24.0.tgz#92cd3c75217aa7b1eb4b7eb21eec35e7b6fcb094"
+  integrity sha512-KzFQyQq2bhlLFi38qBi3fpco6bGk+B75NS63Ui3yNwQYUYyZ8XRphQRKMuYWXD5YDuGN+GOjf9ylqdS7s/WZTA==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
