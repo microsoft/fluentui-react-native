@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Wed, 20 Jul 2022 19:01:18 GMT",
+      "tag": "@fluentui-react-native/notification_v0.8.0",
+      "version": "0.8.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "091e4c0e03bdb1816e4183519fec72111de7a976",
+            "comment": "add support for dark mode"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Jul 2022 16:24:28 GMT",
       "tag": "@fluentui-react-native/notification_v0.7.1",
       "version": "0.7.1",

@@ -11351,9 +11351,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.59"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.59.tgz#55ce96460f874ce9554461b9df314381b7ef8775"
-  integrity sha512-Ef9fsCaame0QcMqu7FG3vDwhMuYTGG0guslQD8n6rHM1merSgyhnQrV55hMSYAV8WemmB/SrcEujl7d3qYjg3Q==
+  version "0.66.60"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.60.tgz#666d55a5655221a83c313aa441b037f6b29f8665"
+  integrity sha512-yiPMWswFvYgC+z5aNv3IHpJK8bgS2chvbA8XBVJp4gRa071NmKKf1Aa8g+KhZV4oncRWv9R5UM0XpgZeGYzFog==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"
@@ -11405,9 +11405,9 @@ react-native-svg@^12.3.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^1.1.4:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.4.1.tgz#b3cb4373f8d67b17fb1e3fd713e258425af12582"
-  integrity sha512-3cf4yzhbNbjZtxVdNbJnUHhDmqSwjmNFxv7tZdHvZZihAw+8lmUJQoE9eI576jejeF9oHRmJD54g4XETAoeAfw==
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.4.4.tgz#0d932bea4131ba443de04b0537cc2774453976c9"
+  integrity sha512-AOB1zoHGq2XnyRXYyQyUqF4PAdABl4eMVoN8ub8Fno6Es5PmUS4hFPRzSxaSNxeQ4LEwOIZmKyYMkJlVFEp+9A==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 20 Jul 2022 19:01:18 GMT",
+      "tag": "@fluentui-react-native/tester_v0.78.0",
+      "version": "0.78.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "091e4c0e03bdb1816e4183519fec72111de7a976",
+            "comment": "added dark mode support"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.8.0",
+            "commit": "091e4c0e03bdb1816e4183519fec72111de7a976"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 20 Jul 2022 17:46:19 GMT",
       "tag": "@fluentui-react-native/tester_v0.77.1",
       "version": "0.77.1",
