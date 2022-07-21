@@ -55,55 +55,21 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
-    const success = browser.waitUntil(
+    const scrollViewer = $('//*["RCTCustomScrollView"]');
+
+    const success3 = browser.waitUntil(
       () => {
-        return $('RCTCustomScrollView').isDisplayed();
+        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewer.elementId);
+        return this.isButtonInView();
       },
       {
-        timeout: 7000,
-        timeoutMsg: 'Could not find the ScrollViewer. RCTCustomScrollView',
+        timeout: 15000,
+        timeoutMsg: 'Did not scroll to test page button before timeout.',
         interval: 1000,
       },
     );
-    expect(success).toBeTruthy();
 
-    const success1 = browser.waitUntil(
-      () => {
-        return $('//*[@class="RCTCustomScrollView"]').isDisplayed();
-      },
-      {
-        timeout: 7000,
-        timeoutMsg: 'Could not find the ScrollViewer. /*[@class="RCTCustomScrollView"]',
-        interval: 1000,
-      },
-    );
-    expect(success1).toBeTruthy();
-
-    const success2 = browser.waitUntil(
-      () => {
-        return $('[name="RCTCustomScrollView"]').isDisplayed();
-      },
-      {
-        timeout: 7000,
-        timeoutMsg: 'Could not find the ScrollViewer. [name="RCTCustomScrollView"]',
-        interval: 1000,
-      },
-    );
-    expect(success2).toBeTruthy();
-
-    // const success3 = browser.waitUntil(
-    //   () => {
-    //     driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewer.elementId);
-    //     return this.isButtonInView();
-    //   },
-    //   {
-    //     timeout: 15000,
-    //     timeoutMsg: 'Did not scroll to test page button before timeout.',
-    //     interval: 1000,
-    //   },
-    // );
-
-    // expect(success3).toBeTruthy();
+    expect(success3).toBeTruthy();
   }
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
@@ -153,7 +119,7 @@ export class BasePage {
   scrollToTestElement(): void {
     browser.waitUntil(
       () => {
-        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
+        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('//*["RCTCustomScrollView"]').elementId);
         return this._primaryComponent.isDisplayed();
       },
       {
