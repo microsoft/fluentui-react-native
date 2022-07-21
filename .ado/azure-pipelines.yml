@@ -36,43 +36,43 @@ jobs:
           yarn check-for-changed-files
         displayName: 'verify API and Ensure Changed Files'
 
-  # # Windows bundling and end to end testing
-  # - job: WindowsPR
-  #   displayName: Windows PR
-  #   pool:
-  #     vmImage: 'windows-2019'
-  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  # Windows bundling and end to end testing
+  - job: WindowsPR
+    displayName: Windows PR
+    pool:
+      vmImage: 'windows-2019'
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-  #   # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
-  #   # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
-  #   steps:
-  #     - checkout: self
-  #       persistCredentials: true
+    # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
+    # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-  #     # yarn and minimal build to get set up
-  #     - template: templates/setup-repo-min-build.yml
+      # yarn and minimal build to get set up
+      - template: templates/setup-repo-min-build.yml
 
-  #     # bundle windows adn do end to end tests
-  #     - template: templates/e2e-testing-uwp.yml
+      # bundle windows adn do end to end tests
+      - template: templates/e2e-testing-uwp.yml
 
-  # # Win32 bundling and end to end testing
-  # - job: Win32PR
-  #   displayName: Win32 PR
-  #   pool:
-  #     vmImage: 'windows-2019'
-  #   timeoutInMinutes: 60
-  #   cancelTimeoutInMinutes: 5
+  # Win32 bundling and end to end testing
+  - job: Win32PR
+    displayName: Win32 PR
+    pool:
+      vmImage: 'windows-2019'
+    timeoutInMinutes: 60
+    cancelTimeoutInMinutes: 5
 
-  #   steps:
-  #     - checkout: self
-  #       persistCredentials: true
+    steps:
+      - checkout: self
+        persistCredentials: true
 
-  #     # yarn and minimal build to get set up
-  #     - template: templates/setup-repo-min-build.yml
+      # yarn and minimal build to get set up
+      - template: templates/setup-repo-min-build.yml
 
-  #     # bundle win32 and do end to end tests
-  #     - template: templates/e2e-testing-win32.yml
+      # bundle win32 and do end to end tests
+      - template: templates/e2e-testing-win32.yml
 
   - job: ApplePR
     displayName: Apple PR
@@ -118,14 +118,14 @@ jobs:
 
       - template: templates/e2e-testing-macos.yml
 
-  # - job: AndroidPR
-  #   displayName: Android PR
-  #   pool:
-  #     vmImage: 'macos-11'
-  #   variables:
-  #     relative_directory: 'android'
-  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  - job: AndroidPR
+    displayName: Android PR
+    pool:
+      vmImage: 'macos-11'
+    variables:
+      relative_directory: 'android'
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
     steps:
       - checkout: self
