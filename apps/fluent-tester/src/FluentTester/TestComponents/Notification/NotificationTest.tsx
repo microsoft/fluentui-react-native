@@ -16,7 +16,7 @@ const PrimaryTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -42,7 +42,7 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -66,7 +66,7 @@ const NeutralTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -92,7 +92,7 @@ const DangerTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -118,7 +118,7 @@ const WarningTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -140,7 +140,7 @@ const PrimaryBarTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -162,7 +162,7 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification
@@ -184,7 +184,7 @@ const NeutralBarTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 50 }}>
+      <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       <Notification

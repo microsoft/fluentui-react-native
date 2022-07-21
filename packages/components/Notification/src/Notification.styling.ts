@@ -29,6 +29,8 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           justifyContent: 'space-between',
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
+          position: 'absolute',
+          bottom: 0,
         },
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],

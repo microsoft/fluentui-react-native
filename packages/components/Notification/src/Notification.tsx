@@ -2,7 +2,7 @@
 import { useLayoutEffect, useState } from 'react';
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Animated, PressableProps, View, ViewStyle } from 'react-native';
+import { Animated, Easing, PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Notification.styling';
@@ -58,6 +58,7 @@ export const Notification = compose<NotificationType>({
       const [hidden, setHidden] = useState<boolean>(!visible);
       const [height, setHeight] = useState(new Animated.Value(0));
       const showDuration = isBar ? 300 : 600;
+      const elasticValue = isBar ? 0 : 1.5;
 
       useLayoutEffect(() => {
         if (visible) {
@@ -66,6 +67,7 @@ export const Notification = compose<NotificationType>({
             toValue: -50,
             duration: showDuration,
             useNativeDriver: true,
+            easing: Easing.elastic(elasticValue),
           }).start();
         } else {
           Animated.timing(height, {
