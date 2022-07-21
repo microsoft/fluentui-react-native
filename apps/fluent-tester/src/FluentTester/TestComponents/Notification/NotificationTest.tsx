@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { View } from 'react-native';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Button, View } from 'react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import PlayButton from './assets/play_button.svg';
 
@@ -17,9 +16,9 @@ const PrimaryTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'primary'}
         visible={visible}
@@ -43,9 +42,9 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'primary'}
         visible={visible}
@@ -67,9 +66,9 @@ const NeutralTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'neutral'}
         visible={visible}
@@ -93,9 +92,9 @@ const DangerTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'danger'}
         visible={visible}
@@ -119,9 +118,9 @@ const WarningTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'warning'}
         visible={visible}
@@ -141,9 +140,9 @@ const PrimaryBarTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'primaryBar'}
         visible={visible}
@@ -163,9 +162,9 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'primaryOutlineBar'}
         visible={visible}
@@ -185,9 +184,9 @@ const NeutralBarTest: React.FunctionComponent = () => {
 
   return (
     <View>
-      <Button onClick={onButtonPress} size="small">
-        {visible ? 'Hide' : 'Show'}
-      </Button>
+      <View style={{ marginBottom: 50 }}>
+        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
+      </View>
       <Notification
         variant={'neutralBar'}
         visible={visible}

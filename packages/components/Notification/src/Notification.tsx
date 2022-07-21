@@ -2,7 +2,7 @@
 import { useLayoutEffect, useState } from 'react';
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { PressableProps, View, ViewStyle } from 'react-native';
+import { Animated, PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Notification.styling';
@@ -56,24 +56,37 @@ export const Notification = compose<NotificationType>({
       const notificationButtonProps = createNotificationButtonProps(userProps);
 
       const [hidden, setHidden] = useState<boolean>(!visible);
+      const [height, setHeight] = useState(new Animated.Value(0));
 
       useLayoutEffect(() => {
         if (visible) {
           setHidden(false);
+          Animated.timing(height, {
+            toValue: -50,
+            duration: 1000,
+            useNativeDriver: true,
+          }).start();
         } else {
+          height.setValue(0);
           setHidden(true);
         }
-      }, [visible]);
+      }, [visible, height]);
+
+      const animatedViewProps = {
+        transform: [{ translateY: height }],
+      };
 
       return hidden ? null : (
-        <Slots.root {...mergedProps}>
-          {icon && <Slots.icon {...iconProps} />}
-          <Slots.contentContainer>
-            {title && <Slots.title>{title}</Slots.title>}
-            <Slots.message style={messageStyle}>{children}</Slots.message>
-          </Slots.contentContainer>
-          <Slots.action {...notificationButtonProps} />
-        </Slots.root>
+        <Animated.View style={[animatedViewProps]}>
+          <Slots.root {...mergedProps}>
+            {icon && <Slots.icon {...iconProps} />}
+            <Slots.contentContainer>
+              {title && <Slots.title>{title}</Slots.title>}
+              <Slots.message style={messageStyle}>{children}</Slots.message>
+            </Slots.contentContainer>
+            <Slots.action {...notificationButtonProps} />
+          </Slots.root>
+        </Animated.View>
       );
     };
   },
