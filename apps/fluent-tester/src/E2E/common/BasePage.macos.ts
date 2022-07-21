@@ -55,10 +55,19 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
-    if (!this.isButtonInView()) {
-      const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-      driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
-    }
+    const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
+
+    browser.waitUntil(
+      () => {
+        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
+        return this.isButtonInView();
+      },
+      {
+        timeout: 15000,
+        timeoutMsg: 'Did not scroll to test page button before timeout.',
+        interval: 1000,
+      },
+    );
   }
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
@@ -106,9 +115,17 @@ export class BasePage {
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   scrollToTestElement(): void {
-    while (!this._primaryComponent.isDisplayed()) {
-      driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
-    }
+    browser.waitUntil(
+      () => {
+        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
+        return this._primaryComponent.isDisplayed();
+      },
+      {
+        timeout: 15000,
+        timeoutMsg: 'Did not scroll to test page button before timeout.',
+        interval: 1000,
+      },
+    );
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
