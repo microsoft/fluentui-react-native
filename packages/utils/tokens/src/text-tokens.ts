@@ -1,7 +1,7 @@
 import { TextStyle } from 'react-native';
 import { ITextProps } from '@fluentui-react-native/adapters';
 import { Theme, Typography } from '@fluentui-react-native/theme-types';
-import { styleFunction } from '@uifabricshared/foundation-tokens';
+import { styleFunction } from './token.function';
 import { TokenBuilder } from './tokenBuilder';
 
 export interface FontVariantTokens {
@@ -13,6 +13,7 @@ export interface FontStyleTokens {
   fontSize?: keyof Typography['sizes'] | TextStyle['fontSize'];
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
+  fontLetterSpacing?: TextStyle['letterSpacing'];
 }
 
 export type FontTokens = FontStyleTokens & FontVariantTokens;

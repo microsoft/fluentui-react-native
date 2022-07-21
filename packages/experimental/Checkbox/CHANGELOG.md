@@ -1,8 +1,62 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Thu, 16 Jun 2022 17:09:28 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.2
+
+## 0.12.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.1
+
+## 0.12.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/checkbox to v0.16.0
+- Bump @fluentui-react-native/component-cache to v1.4.0
+- Bump @fluentui-react-native/framework to v0.8.0
+
+## 0.11.17
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.16
+
+## 0.11.16
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.15
+- Bump @fluentui-react-native/framework to v0.7.32
+
+## 0.11.15
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.15.14
+- Bump @fluentui-react-native/framework to v0.7.31
 
 ## 0.11.14
 

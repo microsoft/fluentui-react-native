@@ -1,7 +1,7 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
-import { PresenceBadgeProps, BadgeSize } from '@fluentui-react-native/badge';
+import { PresenceBadgeProps, BadgeSize, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { SvgProps } from 'react-native-svg';
 
@@ -91,8 +91,15 @@ export interface AvatarConfigurableProps {
    * @defaultvalue neutral
    */
   avatarColor?: AvatarColor;
+
+  /**
+   * Badge status: `doNotDisturb`, `busy`, `unknown`, `blocked`, `outOfOffice`, `away`, `available`, `offline`
+   */
+  badgeStatus?: PresenceBadgeStatus;
+
   initialsColor?: ColorValue;
 
+  outOfOffice?: boolean;
   /**
    * Ring props
    */

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-text",
-  "version": "0.9.0",
+  "version": "0.10.2",
   "description": "A cross-platform Text component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,21 +26,21 @@
     "directory": "packages/experimental/Text"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.8.5 <1.0.0",
-    "@fluentui-react-native/framework": "0.7.30",
-    "@fluentui-react-native/theme-tokens": ">=0.18.0 <1.0.0",
+    "@fluentui-react-native/adapters": ">=0.9.0 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.0",
+    "@fluentui-react-native/theme-tokens": ">=0.19.0 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
-    "react": ">=17.0.1",
-    "react-native": ">=0.64.3"
+    "react": ">=17.0.2",
+    "react-native": ">=0.66.0"
   },
   "author": "",
   "license": "MIT"

@@ -1,8 +1,80 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 15 Jun 2022 18:26:37 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.10.2
+
+## 0.16.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.10.1
+
+## 0.16.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/experimental-text to v0.10.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/pressable to v0.9.0
+- Bump @fluentui-react-native/styling-utils to v0.4.0
+- Bump @fluentui-react-native/text to v0.12.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @fluentui-react-native/use-styling to v0.9.0
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+
+## 0.15.16
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.3
+
+## 0.15.15
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.2
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/pressable to v0.8.47
+- Bump @fluentui-react-native/text to v0.11.28
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @uifabricshared/foundation-compose to v1.11.23
+
+## 0.15.14
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.9.1
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/pressable to v0.8.46
+- Bump @fluentui-react-native/text to v0.11.27
+- Bump @fluentui-react-native/tokens to v0.15.0
 
 ## 0.15.13
 

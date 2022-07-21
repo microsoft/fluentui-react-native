@@ -84,6 +84,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onLongPress: true,
   onMagicTap: true,
   onPress: true,
+  onPressIn: true,
+  onPressOut: true,
   style: true,
   nativeID: true,
   maxFontSizeMultiplier: true,

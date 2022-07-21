@@ -11,10 +11,13 @@ exports[`Avatar rendering renders Avatar 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "height": 24,
+      "alignSelf": "flex-start",
+      "aspectRatio": 1,
+      "flexDirection": "row",
       "justifyContent": "center",
+      "minHeight": 24,
+      "minWidth": 24,
       "opacity": 1,
-      "width": 24,
     }
   }
 >
@@ -23,15 +26,14 @@ exports[`Avatar rendering renders Avatar 1`] = `
     style={
       Object {
         "alignItems": "center",
+        "aspectRatio": 1,
         "backgroundColor": "#e6e6e6",
-        "borderColor": "#ffffff",
+        "borderColor": "#d1d1d1",
         "borderRadius": 9999,
         "borderWidth": 0,
-        "height": 24,
         "justifyContent": "center",
-        "marginLeft": 2,
-        "marginTop": 2,
-        "width": 24,
+        "minHeight": 24,
+        "minWidth": 24,
       }
     }
   >

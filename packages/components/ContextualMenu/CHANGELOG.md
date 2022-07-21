@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Wed, 29 Jun 2022 17:36:04 GMT and should not be manually modified.
+This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/callout to v0.21.0
+- Bump @fluentui-react-native/focus-zone to v0.10.0
+- Bump @fluentui-react-native/icon to v0.13.0
+- Bump @fluentui-react-native/interactive-hooks to v0.17.0
+- Bump @fluentui-react-native/text to v0.12.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+- Bump @fluentui-react-native/pressable to v0.9.0
+
+## 0.16.42
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.10
+- Bump @fluentui-react-native/focus-zone to v0.9.35
+- Bump @fluentui-react-native/icon to v0.12.3
+- Bump @fluentui-react-native/interactive-hooks to v0.16.5
+- Bump @fluentui-react-native/text to v0.11.28
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @uifabricshared/foundation-compose to v1.11.23
+- Bump @fluentui-react-native/pressable to v0.8.47
+
+## 0.16.41
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.20.9
+- Bump @fluentui-react-native/focus-zone to v0.9.34
+- Bump @fluentui-react-native/icon to v0.12.2
+- Bump @fluentui-react-native/interactive-hooks to v0.16.4
+- Bump @fluentui-react-native/text to v0.11.27
+- Bump @fluentui-react-native/tokens to v0.15.0
+- Bump @fluentui-react-native/pressable to v0.8.46
+
+## 0.16.40
+
+Thu, 07 Jul 2022 17:57:30 GMT
+
+### Patches
+
+- Revert "Fire warning that ContextualMenu is deprecated on win32 (#1804)" (sanajmi@microsoft.com)
 
 ## 0.16.39
 

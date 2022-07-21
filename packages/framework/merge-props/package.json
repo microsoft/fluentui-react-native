@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/merge-props",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Utility for merging props with styles and caching style combinations",
   "repository": {
     "type": "git",
@@ -38,11 +38,11 @@
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@types/jest": "^26.0.0",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
-    "react-native": ">=0.64.3"
+    "react-native": ">=0.66.0"
   }
 }

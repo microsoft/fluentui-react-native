@@ -44,7 +44,7 @@
     "lage": "^1.5.0",
     "markdown-link-check": "^3.8.7",
     "metro-react-native-babel-preset": "^0.66.0",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.2"
   },
   "workspaces": {
     "packages": [
@@ -54,34 +54,10 @@
     ]
   },
   "resolutions": {
-    "@office-iss/react-native-win32": "^0.64.8",
-    "@react-native-community/cli": "^5.0.1",
-    "@react-native-community/cli-platform-ios": "^5.0.2",
+    "@appium/support": "^2.57.0",
     "es5-ext": "0.10.53",
     "jpeg-js": "^0.4.4",
-    "metro": "^0.66.2",
-    "metro-babel-register": "^0.66.2",
-    "metro-babel-transformer": "^0.66.2",
-    "metro-cache": "^0.66.2",
-    "metro-cache-key": "^0.66.2",
-    "metro-config": "^0.66.2",
-    "metro-core": "^0.66.2",
-    "metro-hermes-compiler": "^0.66.2",
-    "metro-inspector-proxy": "^0.66.2",
-    "metro-minify-uglify": "^0.66.2",
-    "metro-react-native-babel-preset": "^0.66.2",
-    "metro-react-native-babel-transformer": "^0.66.2",
-    "metro-resolver": "^0.66.2",
-    "metro-runtime": "^0.66.2",
-    "metro-source-map": "^0.66.2",
-    "metro-symbolicate": "^0.66.2",
-    "metro-transform-plugins": "^0.66.2",
-    "metro-transform-worker": "^0.66.2",
-    "react": "17.0.1",
-    "react-native": "^0.64.3",
-    "react-native-windows": "^0.64.3",
-    "react-native-macos": "^0.64.6",
-    "shell-quote": "^1.7.3",
-    "simple-plist": "2.0.0-rc.0"
+    "moment": "^2.29.4",
+    "shell-quote": "^1.7.3"
   }
 }

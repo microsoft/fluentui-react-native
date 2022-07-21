@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-drawer",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "description": "A Native Drawer component using the Fluent Design System. Currently only implemented on Android",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -21,8 +21,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "^1.3.2",
-    "@fluentui-react-native/framework": "0.7.30",
+    "@fluentui-react-native/component-cache": "^1.4.0",
+    "@fluentui-react-native/framework": "0.8.0",
     "tslib": "^2.3.1"
   },
   "repository": {
@@ -32,14 +32,14 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@types/react-native": "^0.64.0",
+    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.1",
-    "react-native": "^0.64.3"
+    "react-native": "^0.66.0"
   },
   "peerDependencies": {
-    "react": "17.0.1",
-    "react-native": "^0.64.3"
+    "react": "17.0.2",
+    "react-native": "^0.66.0"
   },
   "author": "",
   "license": "MIT"

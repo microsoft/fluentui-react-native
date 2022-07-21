@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/themed-stylesheet",
   "entries": [
     {
+      "date": "Thu, 14 Jul 2022 18:09:50 GMT",
+      "tag": "@fluentui-react-native/themed-stylesheet_v1.4.0",
+      "version": "1.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/themed-stylesheet",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b",
+            "comment": "Update to React Native 0.66"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 31 Mar 2022 07:27:48 GMT",
       "tag": "@fluentui-react-native/themed-stylesheet_v1.3.3",
       "version": "1.3.3",

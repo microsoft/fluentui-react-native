@@ -10,7 +10,7 @@ export function getCurrentAppearance(appearance: ThemeOptions['appearance'], fal
   const isDynamic = appearance === 'dynamic';
 
   if (isDynamic) {
-    if (!AppTheme || !AppTheme.isAvailable || !Appearance) {
+    if (!AppTheme || !Appearance) {
       return fallback;
     }
 

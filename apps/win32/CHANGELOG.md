@@ -1,8 +1,193 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 29 Jun 2022 21:55:35 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Jul 2022 19:01:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.7
+
+Wed, 20 Jul 2022 19:01:18 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.78.0
+
+## 0.21.6
+
+Wed, 20 Jul 2022 17:46:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.77.1
+
+## 0.21.5
+
+Wed, 20 Jul 2022 16:24:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.77.0
+
+## 0.21.4
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.76.0
+
+## 0.21.3
+
+Fri, 15 Jul 2022 01:22:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.75.3
+
+## 0.21.2
+
+Fri, 15 Jul 2022 00:29:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.75.2
+
+## 0.21.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.75.1
+
+## 0.21.0
+
+Thu, 14 Jul 2022 18:09:49 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.75.0
+
+## 0.20.121
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.74.0
+
+## 0.20.120
+
+Thu, 14 Jul 2022 16:13:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.73.2
+
+## 0.20.119
+
+Wed, 13 Jul 2022 23:23:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.73.1
+
+## 0.20.118
+
+Tue, 12 Jul 2022 18:02:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.73.0
+
+## 0.20.117
+
+Tue, 12 Jul 2022 17:07:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.72.2
+
+## 0.20.116
+
+Tue, 12 Jul 2022 15:30:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.72.1
+
+## 0.20.115
+
+Mon, 11 Jul 2022 18:16:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.72.0
+
+## 0.20.114
+
+Mon, 11 Jul 2022 15:40:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.71.4
+
+## 0.20.113
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.71.3
+
+## 0.20.112
+
+Fri, 08 Jul 2022 18:26:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.71.2
+
+## 0.20.111
+
+Fri, 08 Jul 2022 17:53:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.71.1
+
+## 0.20.110
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.71.0
+
+## 0.20.109
+
+Thu, 07 Jul 2022 17:57:30 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.70.2
+
+## 0.20.108
+
+Thu, 07 Jul 2022 12:16:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.70.1
+
+## 0.20.107
+
+Tue, 05 Jul 2022 20:47:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.70.0
 
 ## 0.20.106
 
