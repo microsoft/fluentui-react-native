@@ -444,7 +444,7 @@ PODS:
     - React-jsi (= 0.66.4)
     - React-logger (= 0.66.4)
     - React-perflogger (= 0.66.4)
-  - ReactTestApp-DevSupport (1.3.12):
+  - ReactTestApp-DevSupport (1.4.6):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -452,7 +452,6 @@ PODS:
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
-  - SwiftLint (0.47.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -495,14 +494,12 @@ DEPENDENCIES:
   - ReactTestApp-Resources (from `..`)
   - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
   - RNSVG (from `../../../node_modules/react-native-svg`)
-  - SwiftLint
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
     - fmt
     - MicrosoftFluentUI
-    - SwiftLint
 
 EXTERNAL SOURCES:
   boost:
@@ -584,13 +581,13 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   boost: a7c83b31436843459a1961bfd74b96033dc77234
-  DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
+  DoubleConversion: 831926d9b8bf8166fd87886c4abab286c2422662
   FBLazyVector: e5569e42a1c79ca00521846c223173a57aca1fe1
   FBReactNativeSpec: fe08c1cd7e2e205718d77ad14b34957cce949b58
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   FRNAvatar: 827ebe75e839ce442c88cc6a23940aa614ca7946
   FRNDatePicker: 5bb2c380d093abc21aa3b930074727ed1d9db425
-  glog: 73c2498ac6884b13ede40eda8228cb1eee9d9d62
+  glog: 5337263514dd6f09803962437687240c5dc39aa4
   MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
   RCTRequired: 4bf86c70714490bca4bf2696148638284622644b
@@ -618,11 +615,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: e3ffca672dd3772536cb844274094b0e2c31b187
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
-  ReactTestApp-DevSupport: 886fcd7c8960998d2a5bad9a010174398c173ac0
-  ReactTestApp-Resources: 51437f32bf317329a7c9ca3f68e3a4cc952567ba
+  ReactTestApp-DevSupport: cd2670f54856f1ee273585fe2498b1a32ad47d3f
+  ReactTestApp-Resources: 0f6e6d4b3b88f408433fc06cc0f93662056c22b9
   RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
-  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
 
 PODFILE CHECKSUM: 2cc422f3c850b8ad8daa73a1a0fb1cb8171cc171
