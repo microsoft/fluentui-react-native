@@ -55,11 +55,21 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
-    const scrollViewElement = By('SCROLLVIEW_TEST_ID');
+    const success1 = browser.waitUntil(
+      () => {
+        return By('SCROLLVIEW_TEST_ID').isDisplayed();
+      },
+      {
+        timeout: 10000,
+        timeoutMsg: 'Could not find the ScrollViewer.',
+        interval: 1000,
+      },
+    );
+    expect(success1).toBeTruthy();
 
     const success = browser.waitUntil(
       () => {
-        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
+        driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, By('SCROLLVIEW_TEST_ID').elementId);
         return this.isButtonInView();
       },
       {
