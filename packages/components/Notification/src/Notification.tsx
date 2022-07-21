@@ -57,24 +57,42 @@ export const Notification = compose<NotificationType>({
 
       const [hidden, setHidden] = useState<boolean>(!visible);
       const [height, setHeight] = useState(new Animated.Value(0));
+      const showDuration = isBar ? 300 : 600;
 
       useLayoutEffect(() => {
         if (visible) {
           setHidden(false);
           Animated.timing(height, {
             toValue: -50,
-            duration: 1000,
+            duration: showDuration,
             useNativeDriver: true,
           }).start();
         } else {
-          height.setValue(0);
-          setHidden(true);
+          Animated.timing(height, {
+            toValue: 0,
+            duration: 250,
+            useNativeDriver: true,
+          }).start(() => {
+            setHidden(true);
+          });
         }
       }, [visible, height]);
 
       const animatedViewProps = {
         transform: [{ translateY: height }],
       };
+
+      if (notificationButtonProps && Object.keys(notificationButtonProps).length === 1) {
+        notificationButtonProps.onClick = () => {
+          Animated.timing(height, {
+            toValue: 0,
+            duration: 250,
+            useNativeDriver: true,
+          }).start(() => {
+            setHidden(true);
+          });
+        };
+      }
 
       return hidden ? null : (
         <Animated.View style={[animatedViewProps]}>
