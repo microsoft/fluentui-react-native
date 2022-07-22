@@ -10,30 +10,49 @@ const svgProps: SvgIconProps = {
 };
 const iconProps = { svgSource: svgProps };
 
-const PrimaryTest: React.FunctionComponent = () => {
+const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const height = React.useRef(new Animated.Value(0)).current;
 
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
+  const show = () => {
+    setHidden(false);
+    Animated.sequence([
       Animated.timing(height, {
         toValue: -50,
         duration: 600,
         useNativeDriver: true,
         easing: Easing.elastic(1.5),
-      }).start();
-    } else {
+      }),
+      Animated.delay(3000),
       Animated.timing(height, {
         toValue: 0,
         duration: 250,
         useNativeDriver: true,
-      }).start(() => {
-        setHidden(true);
-      });
+      }),
+    ]).start(() => {
+      setHidden(true);
+      setVisible(false);
+    });
+  };
+
+  const hide = () => {
+    Animated.timing(height, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      setHidden(true);
+    });
+  };
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      show();
+    } else {
+      hide();
     }
   }, [visible, height]);
 
@@ -447,8 +466,8 @@ const NeutralBarTest: React.FunctionComponent = () => {
 
 const notificationSections: TestSection[] = [
   {
-    name: 'Primary',
-    component: PrimaryTest,
+    name: 'Primary with auto-hide',
+    component: PrimaryTestWithAutoHide,
   },
   {
     name: 'Primary with Title and Icon',
