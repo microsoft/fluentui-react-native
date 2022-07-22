@@ -56,11 +56,6 @@ steps:
       xcode_configuration: 'Release'
       xcode_extraArgs: '-xcconfig $(Build.Repository.LocalPath)/.ado/xcconfig/publish_overrides_ios_simulator.xcconfig'
 
-  # TODO: remove soon: Check simulator binary archs
-  - script: |
-      lipo -archs $(Build.Repository.LocalPath)/DerivedData/Build/Products/Release-iphonesimulator/FRNDatePicker/libFRNDatePicker.a
-    displayName: 'Check simulator binary archs'
-
   # iPhone Device Release
   - template: apple-xcode-build.yml
     parameters:
