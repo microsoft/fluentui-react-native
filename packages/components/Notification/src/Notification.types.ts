@@ -49,12 +49,12 @@ export interface NotificationProps {
   action?: string;
 
   /**
-   * Callback function that is triggered by tapping the entire notification
+   * Callback function that is triggered by pressing the entire notification
    */
   onPress?: (e: InteractionEvent) => void;
 
   /**
-   * Callback function that is triggered by tapping the action button
+   * Callback function that is triggered by pressing the action button
    */
   onActionPress?: (e: InteractionEvent) => void;
 }

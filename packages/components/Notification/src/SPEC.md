@@ -31,7 +31,7 @@ Depending on what props are passed in, either an action button or dismiss button
 
 ## Callback Functions
 
-| Prop            | Description                                          |
-| --------------- | ---------------------------------------------------- |
-| `onPress`       | Action performed by tapping the entire notification. |
-| `onActionPress` | Action performed by the tapping the `button`.        |
+| Prop            | Description                                           |
+| --------------- | ----------------------------------------------------- |
+| `onPress`       | Action performed by pressing the entire notification. |
+| `onActionPress` | Action performed by pressing the `button`.            |
