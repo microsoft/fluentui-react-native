@@ -30,12 +30,7 @@ export function useViewCommandFocus(
        */
       if (localRef) {
         localRef.focus = () => {
-          const commands = UIManager.getViewManagerConfig('RCTView').Commands;
-          if (localRef && 'focus' in commands) {
-            localRef.focus = () => {
-              UIManager.dispatchViewManagerCommand(findNodeHandle(localRef), commands.focus, null);
-            };
-          }
+          UIManager.dispatchViewManagerCommand(findNodeHandle(localRef), UIManager.getViewManagerConfig('RCTView').Commands.focus, null);
         };
       }
     },
