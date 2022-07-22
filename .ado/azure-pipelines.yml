@@ -39,7 +39,7 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-      vmImage: 'ubuntu-latest'
+      vmImage: 'windows-2019'
     variables:
       platform: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
