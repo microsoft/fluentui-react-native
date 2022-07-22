@@ -38,7 +38,7 @@ module.exports = (async () => {
     resolver: { sourceExts, assetExts },
   } = await getDefaultConfig();
   return {
-    watchFolders: defaultWatchFolders(__dirname),
+    watchFolders: defaultWatchFolders(),
     resolver: {
       assetExts: [...assetExts.filter((ext) => ext !== 'svg'), 'ttf', 'otf', 'png'],
       sourceExts: [...sourceExts, 'svg'],
