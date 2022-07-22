@@ -10,5 +10,5 @@ export {
   ButtonState,
   ButtonSlotProps,
   ButtonType,
-} from './Toggle.types';
-export { Button as Toggle } from './Toggle';
+} from './Switch.types';
+export { Switch } from './Switch';

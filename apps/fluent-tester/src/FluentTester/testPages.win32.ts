@@ -23,7 +23,7 @@ import { HOMEPAGE_TABS_BUTTON, TabsTest } from './TestComponents/Tabs';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON, ExperimentalTabsTest } from './TestComponents/TabsExperimental';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON, TextExperimentalTest } from './TestComponents/TextExperimental';
 import { TestDescription } from './TestComponents';
-import { ToggleTest, HOMEPAGE_TOGGLE_BUTTON } from './TestComponents/Switch';
+import { SwitchTest, HOMEPAGE_SWITCH_BUTTON } from './TestComponents/Switch';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON, ExperimentalCheckboxTest } from './TestComponents/CheckboxExperimental';
 import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from './TestComponents/MenuButtonExperimental';
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
@@ -133,6 +133,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_SVG_BUTTON,
   },
   {
+    name: 'Switch Test',
+    component: SwitchTest,
+    testPage: HOMEPAGE_SWITCH_BUTTON,
+  },
+  {
     name: 'Text Test',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
@@ -161,11 +166,6 @@ export const tests: TestDescription[] = [
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
-  },
-  {
-    name: 'Toggle Test',
-    component: ToggleTest,
-    testPage: HOMEPAGE_TOGGLE_BUTTON,
   },
   {
     name: 'Experimental MenuButton Test',

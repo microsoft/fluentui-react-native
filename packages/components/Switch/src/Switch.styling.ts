@@ -1,11 +1,11 @@
-import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Toggle.types';
+import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Switch.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles, FontTokens } from '@fluentui-react-native/tokens';
-import { defaultButtonTokens } from './ToggleTokens';
-import { defaultButtonColorTokens } from './ToggleColorTokens';
+import { defaultButtonTokens } from './SwitchTokens';
+import { defaultButtonColorTokens } from './SwitchColorTokens';
 import { Platform, ColorValue } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
-import { defaultButtonFontTokens } from './ToggleFontTokens';
+import { defaultButtonFontTokens } from './SwitchFontTokens';
 
 export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIconBefore'];
 

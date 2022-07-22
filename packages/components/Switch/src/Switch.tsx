@@ -1,11 +1,11 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { buttonName, ButtonType, ButtonProps } from './Toggle.types';
+import { buttonName, ButtonType, ButtonProps } from './Switch.types';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { stylingSettings, getDefaultSize } from './Toggle.styling';
+import { stylingSettings, getDefaultSize } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useButton } from './useButton';
+import { useSwitch } from './useButton';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 // import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
@@ -32,7 +32,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-export const Button = compose<ButtonType>({
+export const Switch = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
@@ -41,7 +41,7 @@ export const Button = compose<ButtonType>({
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
-    const button = useButton(userProps);
+    const button = useSwitch(userProps);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 

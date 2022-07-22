@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { ButtonProps, ButtonState } from './Toggle.types';
+import { ButtonProps, ButtonState } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState, Animated } from 'react-native';
 
-export const useButton = (props: ButtonProps): ButtonState => {
+export const useSwitch = (props: ButtonProps): ButtonState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, checked, accessibilityState, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, ...rest } = props;

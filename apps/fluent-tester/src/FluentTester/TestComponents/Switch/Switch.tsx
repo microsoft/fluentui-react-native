@@ -19,7 +19,7 @@ const toggleSections: TestSection[] = [
   },
 ];
 
-export const ToggleTest: React.FunctionComponent = () => {
+export const SwitchTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Backlog',
