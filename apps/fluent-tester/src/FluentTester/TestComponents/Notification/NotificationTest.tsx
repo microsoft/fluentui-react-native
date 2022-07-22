@@ -15,7 +15,7 @@ const PrimaryTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -72,7 +72,7 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -127,7 +127,7 @@ const NeutralTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -184,7 +184,7 @@ const DangerTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -241,7 +241,7 @@ const WarningTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -294,7 +294,7 @@ const PrimaryBarTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -346,7 +346,7 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
@@ -398,7 +398,7 @@ const NeutralBarTest: React.FunctionComponent = () => {
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const height = React.useRef(new Animated.Value(0)).current;
 
   React.useLayoutEffect(() => {
     if (visible) {
