@@ -10,6 +10,9 @@ SWIFT_OPTIMIZATION_LEVEL[config=Release]=-Osize
 // Build for all architectures, not just the active one
 ONLY_ACTIVE_ARCH=NO
 
+// react-native/react_native_pods.rb sometimes makes our lives difficult
+EXCLUDED_ARCHS =
+
 // Specify the exact Swift version used for reproducibility
 SWIFT_VERSION = 5.0
 

@@ -1,0 +1,4 @@
+#include "publish_overrides.xcconfig"
+
+// Explicitly build arm64 and x86_64 machines
+ARCHS = arm64 x86_64
