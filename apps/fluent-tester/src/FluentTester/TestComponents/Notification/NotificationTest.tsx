@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Button, View } from 'react-native';
+import { Animated, Button, Easing, View } from 'react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import PlayButton from './assets/play_button.svg';
 
@@ -14,24 +14,57 @@ const PrimaryTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 600;
+  const elasticValue = 1.5;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'primary'}
-        visible={visible}
-        action="Undo"
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-        onActionPress={() => {
-          console.log('Undo tapped');
-        }}
-      >
-        Mail Archived
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'primary'}
+            visible={visible}
+            action="Undo"
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+            onActionPress={() => {
+              console.log('Undo tapped');
+            }}
+          >
+            Mail Archived
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -40,22 +73,55 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 600;
+  const elasticValue = 1.5;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'primary'}
-        visible={visible}
-        icon={iconProps}
-        title="Kat's iPhoneX"
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-      >
-        Listen to Emails • 7 mins
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'primary'}
+            visible={visible}
+            icon={iconProps}
+            title="Kat's iPhoneX"
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+          >
+            Listen to Emails • 7 mins
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -64,24 +130,57 @@ const NeutralTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 600;
+  const elasticValue = 1.5;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'neutral'}
-        visible={visible}
-        action="Sign in"
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-        onActionPress={() => {
-          console.log('Sign in tapped');
-        }}
-      >
-        Some items require you to sign in to view them
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'neutral'}
+            visible={visible}
+            action="Sign in"
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+            onActionPress={() => {
+              console.log('Sign in tapped');
+            }}
+          >
+            Some items require you to sign in to view them
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -90,24 +189,57 @@ const DangerTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 600;
+  const elasticValue = 1.5;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'danger'}
-        visible={visible}
-        action="Retry"
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-        onActionPress={() => {
-          console.log('Retry tapped');
-        }}
-      >
-        There was a problem, and your recent changes may not have saved
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'danger'}
+            visible={visible}
+            action="Retry"
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+            onActionPress={() => {
+              console.log('Retry tapped');
+            }}
+          >
+            There was a problem, and your recent changes may not have saved
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -116,20 +248,53 @@ const WarningTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 600;
+  const elasticValue = 1.5;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'warning'}
-        visible={visible}
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-      >
-        Read Only
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'warning'}
+            visible={visible}
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+          >
+            Read Only
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -138,20 +303,53 @@ const PrimaryBarTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 300;
+  const elasticValue = 0;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'primaryBar'}
-        visible={visible}
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-      >
-        Updating...
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'primaryBar'}
+            visible={visible}
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+          >
+            Updating...
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -160,20 +358,53 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 300;
+  const elasticValue = 0;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'primaryOutlineBar'}
-        visible={visible}
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-      >
-        Mail Sent
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'primaryOutlineBar'}
+            visible={visible}
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+          >
+            Mail Sent
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
@@ -182,20 +413,53 @@ const NeutralBarTest: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
+  const [hidden, setHidden] = React.useState<boolean>(!visible);
+  const [height, _setHeight] = React.useState(new Animated.Value(0));
+  const showDuration = 300;
+  const elasticValue = 0;
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      setHidden(false);
+      Animated.timing(height, {
+        toValue: -50,
+        duration: showDuration,
+        useNativeDriver: true,
+        easing: Easing.elastic(elasticValue),
+      }).start();
+    } else {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setHidden(true);
+      });
+    }
+  }, [visible, height]);
+
+  const animatedViewProps = {
+    transform: [{ translateY: height }],
+  };
+
   return (
     <View>
       <View style={{ marginBottom: 100 }}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
-      <Notification
-        variant={'neutralBar'}
-        visible={visible}
-        onPress={() => {
-          console.log('Notification tapped');
-        }}
-      >
-        No internet connection
-      </Notification>
+      {!hidden && (
+        <Animated.View style={[animatedViewProps]}>
+          <Notification
+            variant={'neutralBar'}
+            visible={visible}
+            onPress={() => {
+              console.log('Notification tapped');
+            }}
+          >
+            No internet connection
+          </Notification>
+        </Animated.View>
+      )}
     </View>
   );
 };
