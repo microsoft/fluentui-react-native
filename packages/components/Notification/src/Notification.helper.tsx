@@ -39,13 +39,7 @@ export function createNotificationButtonProps(userProps: NotificationProps) {
     } else {
       const dismissIconProps = createIconProps({ svgSource: getDismissSvgProps(), width: 20, height: 20 });
       return {
-        icon: dismissIconProps,
-      };
-    }
-  } else {
-    if (['primary', 'neutral', 'danger', 'warning'].includes(userProps.variant)) {
-      const dismissIconProps = createIconProps({ svgSource: getDismissSvgProps(), width: 20, height: 20 });
-      return {
+        onClick: userProps.onActionPress,
         icon: dismissIconProps,
       };
     }

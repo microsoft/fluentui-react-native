@@ -137,6 +137,16 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
             onPress={() => {
               console.log('Notification tapped');
             }}
+            onActionPress={() => {
+              Animated.timing(height, {
+                toValue: 0,
+                duration: hideDuration,
+                useNativeDriver: useNativeDriverIOS,
+              }).start(() => {
+                setHidden(true);
+                setVisible(false);
+              });
+            }}
           >
             Listen to Emails • 7 mins
           </Notification>
@@ -300,6 +310,16 @@ const WarningTest: React.FunctionComponent = () => {
             variant={'warning'}
             onPress={() => {
               console.log('Notification tapped');
+            }}
+            onActionPress={() => {
+              Animated.timing(height, {
+                toValue: 0,
+                duration: hideDuration,
+                useNativeDriver: useNativeDriverIOS,
+              }).start(() => {
+                setHidden(true);
+                setVisible(false);
+              });
             }}
           >
             Read Only
