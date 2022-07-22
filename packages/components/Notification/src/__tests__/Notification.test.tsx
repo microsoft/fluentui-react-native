@@ -9,6 +9,7 @@ describe('Notification component tests', () => {
       .create(
         <Notification
           variant={'primary'}
+          visible={true}
           action="Undo"
           onPress={() => {
             console.log('Notification tapped');
@@ -26,6 +27,7 @@ describe('Notification component tests', () => {
       () => (
         <Notification
           variant={'primary'}
+          visible={true}
           action="Undo"
           onPress={() => {
             console.log('Notification tapped');
@@ -43,6 +45,7 @@ describe('Notification component tests', () => {
       () => (
         <Notification
           variant={'primary'}
+          visible={true}
           action="Undo"
           onPress={() => {
             console.log('Notification tapped');
