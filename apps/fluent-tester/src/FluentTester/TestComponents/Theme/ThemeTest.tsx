@@ -91,9 +91,7 @@ const SwatchList: React.FunctionComponent = () => {
   return (
     <View style={[commonTestStyles.view]}>
       <Text>getHostSettingsWin32(theme: ITheme).palette</Text>
-      <View style={themedStyles.stackStyle}>
-        <FlatList data={paletteAsArray} renderItem={renderSwatch} />
-      </View>
+      <View style={themedStyles.stackStyle}>{paletteAsArray.map((item) => renderSwatch({ item }))}</View>
     </View>
   );
 };

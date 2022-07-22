@@ -87,9 +87,7 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
   return (
     <View style={[commonTestStyles.view]}>
       <Text>Alias Color Tokens from Token Pipeline</Text>
-      <View style={themedStyles.stackStyle}>
-        <FlatList data={aliasTokensAsArray} renderItem={renderSwatch} />
-      </View>
+      <View style={themedStyles.stackStyle}>{aliasTokensAsArray.map((item) => renderSwatch({ item }))}</View>
     </View>
   );
 };
