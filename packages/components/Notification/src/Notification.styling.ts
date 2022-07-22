@@ -1,6 +1,6 @@
 import { notification, NotificationTokens, NotificationSlotProps, NotificationProps } from './Notification.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, fontStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, fontStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultNotificationTokens } from './NotificationTokens';
 
 export const notificationStates: (keyof NotificationTokens)[] = [
@@ -29,6 +29,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           justifyContent: 'space-between',
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
+          ...shadowStyles.from(tokens, theme),
         },
       }),
       ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
@@ -99,6 +100,12 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         };
       },
       ['color', ...fontStyles.keys],
+    ),
+    shadow: buildProps(
+      (tokens: NotificationTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
     ),
   },
 };
