@@ -29,11 +29,6 @@ export interface NotificationProps {
   variant: NotificationVariant;
 
   /**
-   * Whether or not the notification is currently visible
-   */
-  visible: boolean;
-
-  /**
    * Optional icon that appears on the left side of toast notifications
    */
   icon?: IconSourcesType;
