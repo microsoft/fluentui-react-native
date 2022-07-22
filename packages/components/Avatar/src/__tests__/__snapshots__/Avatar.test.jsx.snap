@@ -32,8 +32,6 @@ exports[`Avatar rendering renders Avatar 1`] = `
         "borderRadius": 9999,
         "borderWidth": 0,
         "justifyContent": "center",
-        "marginLeft": 2,
-        "marginTop": 2,
         "minHeight": 24,
         "minWidth": 24,
       }

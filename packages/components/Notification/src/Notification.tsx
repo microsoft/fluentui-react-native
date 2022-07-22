@@ -4,12 +4,11 @@ import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
-import { Svg } from 'react-native-svg';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { ActionButton, getDismissIconPath } from './Notification.helper';
+import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
@@ -35,8 +34,7 @@ export const Notification = compose<NotificationType>({
     contentContainer: View,
     title: Text,
     message: Text,
-    action: ActionButton,
-    dismissIcon: Svg,
+    action: NotificationButton,
   },
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
@@ -51,9 +49,10 @@ export const Notification = compose<NotificationType>({
     }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
-      const { variant, icon, title, action, ...rest } = mergeProps(userProps, final);
-      const iconProps = createIconProps(icon);
+      const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
+      const iconProps = createIconProps(icon);
+      const notificationButtonProps = createNotificationButtonProps(userProps);
 
       return (
         <Slots.root {...mergedProps}>
@@ -62,7 +61,7 @@ export const Notification = compose<NotificationType>({
             {title && <Slots.title>{title}</Slots.title>}
             <Slots.message style={messageStyle}>{children}</Slots.message>
           </Slots.contentContainer>
-          {action ? <Slots.action>{action}</Slots.action> : !isBar && <Slots.dismissIcon>{getDismissIconPath()}</Slots.dismissIcon>}
+          <Slots.action {...notificationButtonProps} />
         </Slots.root>
       );
     };

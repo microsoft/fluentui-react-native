@@ -17,6 +17,9 @@ const PrimaryTest: React.FunctionComponent = () => {
       onPress={() => {
         console.log('Notification tapped');
       }}
+      onActionPress={() => {
+        console.log('Undo tapped');
+      }}
     >
       Mail Archived
     </Notification>
@@ -46,6 +49,9 @@ const NeutralTest: React.FunctionComponent = () => {
       onPress={() => {
         console.log('Notification tapped');
       }}
+      onActionPress={() => {
+        console.log('Sign in tapped');
+      }}
     >
       Some items require you to sign in to view them
     </Notification>
@@ -59,6 +65,9 @@ const DangerTest: React.FunctionComponent = () => {
       action="Retry"
       onPress={() => {
         console.log('Notification tapped');
+      }}
+      onActionPress={() => {
+        console.log('Retry tapped');
       }}
     >
       There was a problem, and your recent changes may not have saved

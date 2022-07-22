@@ -1,8 +1,47 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
+This log was last generated on Wed, 20 Jul 2022 19:01:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.78.0
+
+Wed, 20 Jul 2022 19:01:18 GMT
+
+### Minor changes
+
+- added dark mode support (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.8.0
+
+## 0.77.1
+
+Wed, 20 Jul 2022 17:46:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.16
+- Bump @fluentui-react-native/badge to v0.1.4
+
+## 0.77.0
+
+Wed, 20 Jul 2022 16:24:28 GMT
+
+### Minor changes
+
+- MenuPicker can now have a custom key set (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.15
+- Bump @fluentui-react-native/badge to v0.1.3
+- Bump @fluentui-react-native/button to v0.24.5
+- Bump @fluentui-react-native/experimental-button to v0.16.5
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.5
+- Bump @fluentui-react-native/experimental-shadow to v0.2.9
+- Bump @fluentui-react-native/menu to v1.0.14
+- Bump @fluentui-react-native/notification to v0.7.1
+- Bump @fluentui/react-native to v0.31.5
+
+### Patches
+
+- Changed API of Badge according to latest Web component (v.kozova13@gmail.com)
 
 ## 0.76.0
 
