@@ -13,6 +13,7 @@ const iconProps = { svgSource: svgProps };
 const toastShowDuration = 600;
 const barShowDuration = 300;
 const hideDuration = 250;
+const toastBounciness = 1.5;
 
 const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
@@ -28,7 +29,7 @@ const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
         toValue: -50,
         duration: toastShowDuration,
         useNativeDriver: true,
-        easing: Easing.elastic(1.5),
+        easing: Easing.elastic(toastBounciness),
       }),
       Animated.delay(3000),
       Animated.timing(height, {
@@ -104,7 +105,7 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
         toValue: -50,
         duration: toastShowDuration,
         useNativeDriver: true,
-        easing: Easing.elastic(1.5),
+        easing: Easing.elastic(toastBounciness),
       }).start();
     } else {
       Animated.timing(height, {
@@ -159,7 +160,7 @@ const NeutralTest: React.FunctionComponent = () => {
         toValue: -50,
         duration: toastShowDuration,
         useNativeDriver: true,
-        easing: Easing.elastic(1.5),
+        easing: Easing.elastic(toastBounciness),
       }).start();
     } else {
       Animated.timing(height, {
@@ -216,7 +217,7 @@ const DangerTest: React.FunctionComponent = () => {
         toValue: -50,
         duration: toastShowDuration,
         useNativeDriver: true,
-        easing: Easing.elastic(1.5),
+        easing: Easing.elastic(toastBounciness),
       }).start();
     } else {
       Animated.timing(height, {
@@ -273,7 +274,7 @@ const WarningTest: React.FunctionComponent = () => {
         toValue: -50,
         duration: toastShowDuration,
         useNativeDriver: true,
-        easing: Easing.elastic(1.5),
+        easing: Easing.elastic(toastBounciness),
       }).start();
     } else {
       Animated.timing(height, {
