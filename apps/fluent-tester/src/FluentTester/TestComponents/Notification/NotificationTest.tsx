@@ -16,17 +16,15 @@ const PrimaryTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 600;
-  const elasticValue = 1.5;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 600,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
+        easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
@@ -75,17 +73,15 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 600;
-  const elasticValue = 1.5;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 600,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
+        easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
@@ -132,17 +128,15 @@ const NeutralTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 600;
-  const elasticValue = 1.5;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 600,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
+        easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
@@ -191,17 +185,15 @@ const DangerTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 600;
-  const elasticValue = 1.5;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 600,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
+        easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
@@ -250,17 +242,15 @@ const WarningTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 600;
-  const elasticValue = 1.5;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 600,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
+        easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
@@ -305,17 +295,14 @@ const PrimaryBarTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 300;
-  const elasticValue = 0;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 300,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
       }).start();
     } else {
       Animated.timing(height, {
@@ -360,17 +347,14 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 300;
-  const elasticValue = 0;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 300,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
       }).start();
     } else {
       Animated.timing(height, {
@@ -415,17 +399,14 @@ const NeutralBarTest: React.FunctionComponent = () => {
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const [height, _setHeight] = React.useState(new Animated.Value(0));
-  const showDuration = 300;
-  const elasticValue = 0;
 
   React.useLayoutEffect(() => {
     if (visible) {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: showDuration,
+        duration: 300,
         useNativeDriver: true,
-        easing: Easing.elastic(elasticValue),
       }).start();
     } else {
       Animated.timing(height, {
