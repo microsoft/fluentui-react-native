@@ -10,6 +10,10 @@ const svgProps: SvgIconProps = {
 };
 const iconProps = { svgSource: svgProps };
 
+const toastShowDuration = 600;
+const barShowDuration = 300;
+const hideDuration = 250;
+
 const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
@@ -22,14 +26,14 @@ const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
     Animated.sequence([
       Animated.timing(height, {
         toValue: -50,
-        duration: 600,
+        duration: toastShowDuration,
         useNativeDriver: true,
         easing: Easing.elastic(1.5),
       }),
       Animated.delay(3000),
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }),
     ]).start(() => {
@@ -41,7 +45,7 @@ const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
   const hide = () => {
     Animated.timing(height, {
       toValue: 0,
-      duration: 250,
+      duration: hideDuration,
       useNativeDriver: true,
     }).start(() => {
       setHidden(true);
@@ -98,14 +102,14 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 600,
+        duration: toastShowDuration,
         useNativeDriver: true,
         easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
@@ -153,14 +157,14 @@ const NeutralTest: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 600,
+        duration: toastShowDuration,
         useNativeDriver: true,
         easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
@@ -210,14 +214,14 @@ const DangerTest: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 600,
+        duration: toastShowDuration,
         useNativeDriver: true,
         easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
@@ -267,14 +271,14 @@ const WarningTest: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 600,
+        duration: toastShowDuration,
         useNativeDriver: true,
         easing: Easing.elastic(1.5),
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
@@ -320,13 +324,13 @@ const PrimaryBarTest: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 300,
+        duration: barShowDuration,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
@@ -372,13 +376,13 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 300,
+        duration: barShowDuration,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
@@ -424,13 +428,13 @@ const NeutralBarTest: React.FunctionComponent = () => {
       setHidden(false);
       Animated.timing(height, {
         toValue: -50,
-        duration: 300,
+        duration: barShowDuration,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.timing(height, {
         toValue: 0,
-        duration: 250,
+        duration: hideDuration,
         useNativeDriver: true,
       }).start(() => {
         setHidden(true);
