@@ -88,9 +88,9 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         iconColor: t.colors.neutralForegroundOnBrand,
       },
       outline: {
-        color: '#E26436',
-        iconColor: '#E26436',
-        borderColor: '#E26436',
+        color: globalTokens.color.darkOrange.tint20,
+        iconColor: globalTokens.color.darkOrange.tint20,
+        borderColor: globalTokens.color.darkOrange.tint20,
       },
       tint: {
         backgroundColor: '#411100',
