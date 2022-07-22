@@ -2,7 +2,7 @@ import { PressableProps } from 'react-native';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps, ITextProps } from '@fluentui-react-native/adapters';
 import { ButtonProps } from '@fluentui-react-native/button';
-import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButtonColorStates } from './Notification.helper';
 import { ShadowProps } from '@fluentui-react-native/experimental-shadow';
@@ -12,13 +12,7 @@ export const notification = 'Notification';
 export const NotificationVariants = ['primary', 'neutral', 'primaryBar', 'primaryOutlineBar', 'neutralBar', 'danger', 'warning'] as const;
 export type NotificationVariant = typeof NotificationVariants[number];
 
-export interface NotificationTokens
-  extends LayoutTokens,
-    IBorderTokens,
-    IColorTokens,
-    IShadowTokens,
-    FontTokens,
-    NotificationButtonColorStates {
+export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorTokens, FontTokens, NotificationButtonColorStates {
   primary: NotificationTokens;
   neutral: NotificationTokens;
   primaryBar: NotificationTokens;
