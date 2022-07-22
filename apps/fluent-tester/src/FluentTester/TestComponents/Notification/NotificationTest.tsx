@@ -76,7 +76,6 @@ const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'primary'}
-            visible={visible}
             action="Undo"
             onPress={() => {
               console.log('Notification tapped');
@@ -133,7 +132,6 @@ const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'primary'}
-            visible={visible}
             icon={iconProps}
             title="Kat's iPhoneX"
             onPress={() => {
@@ -188,7 +186,6 @@ const NeutralTest: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'neutral'}
-            visible={visible}
             action="Sign in"
             onPress={() => {
               console.log('Notification tapped');
@@ -245,7 +242,6 @@ const DangerTest: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'danger'}
-            visible={visible}
             action="Retry"
             onPress={() => {
               console.log('Notification tapped');
@@ -302,7 +298,6 @@ const WarningTest: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'warning'}
-            visible={visible}
             onPress={() => {
               console.log('Notification tapped');
             }}
@@ -354,7 +349,6 @@ const PrimaryBarTest: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'primaryBar'}
-            visible={visible}
             onPress={() => {
               console.log('Notification tapped');
             }}
@@ -406,7 +400,6 @@ const PrimaryOutlineBarTest: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'primaryOutlineBar'}
-            visible={visible}
             onPress={() => {
               console.log('Notification tapped');
             }}
@@ -458,7 +451,6 @@ const NeutralBarTest: React.FunctionComponent = () => {
         <Animated.View style={[animatedViewProps]}>
           <Notification
             variant={'neutralBar'}
-            visible={visible}
             onPress={() => {
               console.log('Notification tapped');
             }}
