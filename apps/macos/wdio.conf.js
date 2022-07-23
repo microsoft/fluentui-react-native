@@ -102,7 +102,10 @@ exports.config = {
   before: function () {
     require('ts-node').register({files: true});
 
-    //browser.maximizeWindow();
+    // Maximize app window
+    const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
+    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    maxButton.click();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
