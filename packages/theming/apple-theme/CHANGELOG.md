@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
+This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Fix typo in colors (sanajmi@microsoft.com)
 
 ## 0.13.0
 

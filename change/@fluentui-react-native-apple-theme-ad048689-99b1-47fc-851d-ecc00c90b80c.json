@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Fix typo in colors",
+  "comment": "Fix dead link",
   "packageName": "@fluentui-react-native/apple-theme",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"

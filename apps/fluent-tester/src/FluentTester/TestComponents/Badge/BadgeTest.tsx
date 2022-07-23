@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BADGE_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { View, Platform, Text } from 'react-native';
-import { Badge, CompressibleBadge, PresenceBadge } from '@fluentui-react-native/badge';
+import { Badge, PresenceBadge } from '@fluentui-react-native/badge';
 import BadgeSvg from './oof.svg';
 
 import { SvgIconProps } from '@fluentui-react-native/icon';
@@ -38,18 +38,18 @@ export const BasicBadge: React.FunctionComponent = () => {
     <View>
       <Badge />
       <Text>Appearance</Text>
-      <Badge appearance="outline" text="Outline badge" />
+      <Badge appearance="outline">Outline badge</Badge>
       <Text>Shape</Text>
-      <Badge shape="circular" text="Circular badge" />
-      <Badge shape="rounded" text="rounded badge" />
-      <Badge shape="square" text="Square badge" />
+      <Badge shape="circular">Circular badge</Badge>
+      <Badge shape="rounded">Rounded badge</Badge>
+      <Badge shape="square">Square badge</Badge>
       <Text>Size</Text>
       <Badge size="smallest" shape="circular" />
       <Badge size="smaller" shape="circular" />
-      <Badge size="small" text="Small" />
-      <Badge size="medium" text="Medium" />
-      <Badge size="large" text="Large" />
-      <Badge size="largest" text="Largest" />
+      <Badge size="small">Small</Badge>
+      <Badge size="medium">Medium</Badge>
+      <Badge size="large">Large</Badge>
+      <Badge size="largest">Largest</Badge>
       {svgIconsEnabled && (
         <>
           <Text>Badge with icon</Text>
@@ -61,10 +61,7 @@ export const BasicBadge: React.FunctionComponent = () => {
           <BadgeNoBorder appearance="outline" icon={iconProps} />
         </>
       )}
-      <StyledBadge appearance="outline" text="styled badge" />
-      <Text>Compressible badge</Text>
-      <CompressibleBadge />
-      <CompressibleBadge text="Basic compressible" />
+      <StyledBadge appearance="outline">Styled badge</StyledBadge>
       {svgIconsEnabled && (
         <>
           <Text>Presence Badge</Text>

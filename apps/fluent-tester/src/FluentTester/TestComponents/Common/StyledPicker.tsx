@@ -8,5 +8,11 @@ export const StyledPicker = (props) => {
   const { prompt, selected, onChange, collection } = props;
   const theme = useTheme();
   const pickerStyles = { color: theme.colors.inputText as ColorValue, ...commonStyles.header };
-  return <MenuPicker prompt={prompt} style={pickerStyles} selected={selected} onChange={onChange} collection={collection} />;
+  const styleCollection = collection.map((value) => {
+    return {
+      label: value,
+      value: value,
+    };
+  });
+  return <MenuPicker prompt={prompt} style={pickerStyles} selected={selected} onChange={onChange} collection={styleCollection} />;
 };

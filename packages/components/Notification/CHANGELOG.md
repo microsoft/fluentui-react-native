@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Fri, 15 Jul 2022 01:22:54 GMT and should not be manually modified.
+This log was last generated on Sat, 23 Jul 2022 00:28:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.1
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.6
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
+- Bump @fluentui-react-native/pressable to v0.9.1
+
+## 0.8.0
+
+Wed, 20 Jul 2022 19:01:18 GMT
+
+### Minor changes
+
+- add support for dark mode (joannaquu@gmail.com)
+
+## 0.7.1
+
+Wed, 20 Jul 2022 16:24:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.5
+
+## 0.7.0
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Minor changes
+
+- updated notification button style (joannaquu@gmail.com)
+- Bump @fluentui-react-native/button to v0.24.4
+- Bump @fluentui-react-native/experimental-text to v0.10.2
+
+### Patches
+
+- update all necessary snapshots (email not defined)
 
 ## 0.6.7
 

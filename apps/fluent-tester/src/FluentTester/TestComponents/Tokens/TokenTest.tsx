@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList, View, ViewStyle, StyleSheet, ColorValue } from 'react-native';
+import { View, ViewStyle, StyleSheet, ColorValue } from 'react-native';
 import { useTheme, Theme } from '@fluentui-react-native/theme-types';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
@@ -87,9 +87,7 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
   return (
     <View style={[commonTestStyles.view]}>
       <Text>Alias Color Tokens from Token Pipeline</Text>
-      <View style={themedStyles.stackStyle}>
-        <FlatList data={aliasTokensAsArray} renderItem={renderSwatch} />
-      </View>
+      <View style={themedStyles.stackStyle}>{aliasTokensAsArray.map((item) => renderSwatch({ item }))}</View>
     </View>
   );
 };
