@@ -41,7 +41,7 @@ steps:
     displayName: 'Install Azure Credentials Plugin for NuGet'
 
   - script: |
-      yarn install-windows-test-app --use-nuget
+      yarn install-windows-test-app
     workingDirectory: apps\fluent-tester
     displayName: 'generate UWP app'
 
