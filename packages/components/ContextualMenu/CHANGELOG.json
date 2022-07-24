@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Sun, 24 Jul 2022 01:24:23 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "05567bb5c8fec95d49c2724673560076d6ebb899",
+            "comment": "add onallytap prop to menu items"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 23 Jul 2022 00:28:48 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.17.1",
       "version": "0.17.1",

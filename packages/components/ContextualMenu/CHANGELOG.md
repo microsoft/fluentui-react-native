@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Sat, 23 Jul 2022 00:28:48 GMT and should not be manually modified.
+This log was last generated on Sun, 24 Jul 2022 01:24:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.0
+
+Sun, 24 Jul 2022 01:24:23 GMT
+
+### Minor changes
+
+- add onallytap prop to menu items (email not defined)
 
 ## 0.17.1
 

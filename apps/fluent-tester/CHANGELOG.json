@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sun, 24 Jul 2022 01:24:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.78.2",
+      "version": "0.78.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1",
+            "comment": "remove flatlist usage"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/apple-theme to v0.13.2",
+            "commit": "05567bb5c8fec95d49c2724673560076d6ebb899"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.4.7",
+            "commit": "05567bb5c8fec95d49c2724673560076d6ebb899"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.31.7",
+            "commit": "05567bb5c8fec95d49c2724673560076d6ebb899"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 23 Jul 2022 00:28:48 GMT",
       "tag": "@fluentui-react-native/tester_v0.78.1",
       "version": "0.78.1",

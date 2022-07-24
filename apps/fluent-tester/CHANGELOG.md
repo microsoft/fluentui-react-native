@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 23 Jul 2022 00:28:48 GMT and should not be manually modified.
+This log was last generated on Sun, 24 Jul 2022 01:24:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.78.2
+
+Sun, 24 Jul 2022 01:24:23 GMT
+
+### Patches
+
+- remove flatlist usage (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.13.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.7
+- Bump @fluentui/react-native to v0.31.7
 
 ## 0.78.1
 
