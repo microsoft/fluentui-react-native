@@ -93,7 +93,7 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - bash: echo Staging area is $(Build.SourcesDirectory)
+      - bash: echo Staging area is $(relative_directory)
 
       # Clean Derived Data
       - script: |
