@@ -37,8 +37,6 @@ const styles = StyleSheet.create({
 
 const CustomToast: React.FunctionComponent = () => {
   const [variant, setVariant] = React.useState<NotificationVariant>('primary');
-  const onVariantChange = React.useCallback((value) => setVariant(value), []);
-
   const [title, setTitle] = React.useState("Kat's iPhoneX");
   const [message, setMessage] = React.useState('Listen to Emails • 7 mins');
   const [action, setAction] = React.useState('Listen');
@@ -51,7 +49,7 @@ const CustomToast: React.FunctionComponent = () => {
       <StyledPicker
         prompt="Variant"
         selected={variant}
-        onChange={onVariantChange}
+        onChange={setVariant}
         collection={NotificationVariants.filter((variant) => !variant.endsWith('Bar'))}
       />
       <TextInput value={title} onChangeText={setTitle} style={styles.textInput} />
@@ -87,8 +85,6 @@ const CustomToast: React.FunctionComponent = () => {
 
 const CustomBar: React.FunctionComponent = () => {
   const [variant, setVariant] = React.useState<NotificationVariant>('primaryBar');
-  const onVariantChange = React.useCallback((value) => setVariant(value), []);
-
   const [message, setMessage] = React.useState('Updating...');
 
   return (
@@ -96,7 +92,7 @@ const CustomBar: React.FunctionComponent = () => {
       <StyledPicker
         prompt="Variant"
         selected={variant}
-        onChange={onVariantChange}
+        onChange={setVariant}
         collection={NotificationVariants.filter((variant) => variant.endsWith('Bar'))}
       />
       <TextInput value={message} onChangeText={setMessage} style={styles.textInput} />
