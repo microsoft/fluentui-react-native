@@ -14,11 +14,11 @@ const svgProps: SvgIconProps = {
 };
 const iconProps = { svgSource: svgProps };
 
-const toastShowDuration = 600;
-const barShowDuration = 300;
-const hideDuration = 250;
-const toastBounciness = 1.5;
-const useNativeDriverIOS = true;
+const NOTIFICATION_SHOW_DURATION = 600;
+const BAR_SHOW_DURATION = 300;
+const HIDE_DURATION = 250;
+const NOTIFICATION_BOUNCINESS = 1.5;
+const USE_NATIVE_DRIVER_IOS = true;
 
 const CustomToast: React.FunctionComponent = () => {
   const [variant, setVariant] = React.useState<NotificationVariant>('primary');
@@ -111,15 +111,15 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
     Animated.sequence([
       Animated.timing(height, {
         toValue: -50,
-        duration: toastShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-        easing: Easing.elastic(toastBounciness),
+        duration: NOTIFICATION_SHOW_DURATION,
+        useNativeDriver: USE_NATIVE_DRIVER_IOS,
+        easing: Easing.elastic(NOTIFICATION_BOUNCINESS),
       }),
       Animated.delay(3000),
       Animated.timing(height, {
         toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
+        duration: HIDE_DURATION,
+        useNativeDriver: USE_NATIVE_DRIVER_IOS,
       }),
     ]).start(() => {
       setHidden(true);
@@ -130,8 +130,8 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
   const hide = () => {
     Animated.timing(height, {
       toValue: 0,
-      duration: hideDuration,
-      useNativeDriver: useNativeDriverIOS,
+      duration: HIDE_DURATION,
+      useNativeDriver: USE_NATIVE_DRIVER_IOS,
     }).start(() => {
       setHidden(true);
     });
@@ -185,14 +185,14 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
     Animated.sequence([
       Animated.timing(height, {
         toValue: -50,
-        duration: barShowDuration,
-        useNativeDriver: useNativeDriverIOS,
+        duration: BAR_SHOW_DURATION,
+        useNativeDriver: USE_NATIVE_DRIVER_IOS,
       }),
       Animated.delay(3000),
       Animated.timing(height, {
         toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
+        duration: HIDE_DURATION,
+        useNativeDriver: USE_NATIVE_DRIVER_IOS,
       }),
     ]).start(() => {
       setHidden(true);
@@ -203,8 +203,8 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
   const hide = () => {
     Animated.timing(height, {
       toValue: 0,
-      duration: hideDuration,
-      useNativeDriver: useNativeDriverIOS,
+      duration: HIDE_DURATION,
+      useNativeDriver: USE_NATIVE_DRIVER_IOS,
     }).start(() => {
       setHidden(true);
     });
