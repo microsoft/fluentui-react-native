@@ -43,16 +43,17 @@ export const Notification = compose<NotificationType>({
       const marginHorizontal = isBar ? 0 : 16;
       return { marginHorizontal: marginHorizontal };
     }, ['isBar']);
-    const messageStyle: ViewStyle = useMemo(() => {
-      const alignSelf = isBar ? 'center' : 'flex-start';
-      return { alignSelf: alignSelf };
-    }, ['isBar']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
       const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
       const iconProps = createIconProps(icon);
       const notificationButtonProps = createNotificationButtonProps(userProps);
+
+      const messageStyle: ViewStyle = useMemo(() => {
+        const alignSelf = onActionPress ? 'flex-start' : 'center';
+        return { alignSelf: alignSelf };
+      }, ['onActionPress']);
 
       return (
         <Slots.root {...mergedProps}>

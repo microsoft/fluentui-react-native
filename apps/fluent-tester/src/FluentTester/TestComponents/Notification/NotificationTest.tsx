@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Animated, Button, Easing, View } from 'react-native';
+import { Animated, Button, Easing, Switch, TextInput, View } from 'react-native';
+import { Text } from '@fluentui-react-native/experimental-text';
+import { StyledPicker } from '../Common/StyledPicker';
+import { commonTestStyles as commonStyles } from '../Common/styles';
+import { NotificationVariant, NotificationVariants } from '../../../../../../packages/components/Notification/src/Notification.types';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import PlayButton from './assets/play_button.svg';
 
@@ -14,10 +18,88 @@ const toastShowDuration = 600;
 const barShowDuration = 300;
 const hideDuration = 250;
 const toastBounciness = 1.5;
-
 const useNativeDriverIOS = true;
 
-const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
+const CustomToast: React.FunctionComponent = () => {
+  const [variant, setVariant] = React.useState<NotificationVariant>('primary');
+  const onVariantChange = React.useCallback((value) => setVariant(value), []);
+
+  const [title, setTitle] = React.useState("Kat's iPhoneX");
+  const [message, setMessage] = React.useState('Listen to Emails • 7 mins');
+  const [action, setAction] = React.useState('Listen');
+
+  const [showIcon, setShowIcon] = React.useState(true);
+  const [showTitle, setShowTitle] = React.useState(true);
+
+  return (
+    <View>
+      <StyledPicker
+        prompt="Variant"
+        selected={variant}
+        onChange={onVariantChange}
+        collection={NotificationVariants.filter((variant) => variant.length < 10)}
+      />
+      <TextInput value={title} onChangeText={setTitle} style={{ borderWidth: 1 }} />
+      <TextInput value={message} onChangeText={setMessage} style={{ borderWidth: 1 }} />
+      <TextInput value={action} onChangeText={setAction} style={{ borderWidth: 1 }} />
+      <View style={commonStyles.switch}>
+        <Text>Show icon </Text>
+        <Switch value={showIcon} onValueChange={setShowIcon} />
+      </View>
+      <View style={commonStyles.switch}>
+        <Text>Show title </Text>
+        <Switch value={showTitle} onValueChange={setShowTitle} />
+      </View>
+      <View style={{ marginTop: 70 }}>
+        <Notification
+          variant={variant}
+          icon={showIcon ? iconProps : undefined}
+          title={showTitle ? title : undefined}
+          action={action}
+          onPress={() => {
+            console.log('Notification tapped');
+          }}
+          onActionPress={() => {
+            console.log('Notification action tapped');
+          }}
+        >
+          {message}
+        </Notification>
+      </View>
+    </View>
+  );
+};
+
+const CustomBar: React.FunctionComponent = () => {
+  const [variant, setVariant] = React.useState<NotificationVariant>('primaryBar');
+  const onVariantChange = React.useCallback((value) => setVariant(value), []);
+
+  const [message, setMessage] = React.useState('Updating...');
+
+  return (
+    <View>
+      <StyledPicker
+        prompt="Variant"
+        selected={variant}
+        onChange={onVariantChange}
+        collection={NotificationVariants.filter((variant) => variant.length > 9)}
+      />
+      <TextInput value={message} onChangeText={setMessage} style={{ borderWidth: 1 }} />
+      <View style={{ marginTop: 60 }}>
+        <Notification
+          variant={variant}
+          onPress={() => {
+            console.log('Notification tapped');
+          }}
+        >
+          {message}
+        </Notification>
+      </View>
+    </View>
+  );
+};
+
+const PrimaryWithAutoHide: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
@@ -91,268 +173,48 @@ const PrimaryTestWithAutoHide: React.FunctionComponent = () => {
     </View>
   );
 };
-
-const PrimaryTestWithTitleAndIcon: React.FunctionComponent = () => {
+const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
   const [visible, setVisible] = React.useState(false);
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
   const height = React.useRef(new Animated.Value(0)).current;
 
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
-      Animated.timing(height, {
-        toValue: -50,
-        duration: toastShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-        easing: Easing.elastic(toastBounciness),
-      }).start();
-    } else {
-      Animated.timing(height, {
-        toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
-    }
-  }, [visible, height]);
-
-  const animatedViewProps = {
-    transform: [{ translateY: height }],
-  };
-
-  return (
-    <View>
-      <View style={{ marginBottom: 100 }}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
-      {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
-          <Notification
-            variant={'primary'}
-            icon={iconProps}
-            title="Kat's iPhoneX"
-            onPress={() => {
-              console.log('Notification tapped');
-            }}
-            onActionPress={() => {
-              Animated.timing(height, {
-                toValue: 0,
-                duration: hideDuration,
-                useNativeDriver: useNativeDriverIOS,
-              }).start(() => {
-                setHidden(true);
-                setVisible(false);
-              });
-            }}
-          >
-            Listen to Emails • 7 mins
-          </Notification>
-        </Animated.View>
-      )}
-    </View>
-  );
-};
-
-const NeutralTest: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-  const onButtonPress = () => setVisible(!visible);
-
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const height = React.useRef(new Animated.Value(0)).current;
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
-      Animated.timing(height, {
-        toValue: -50,
-        duration: toastShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-        easing: Easing.elastic(toastBounciness),
-      }).start();
-    } else {
-      Animated.timing(height, {
-        toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
-    }
-  }, [visible, height]);
-
-  const animatedViewProps = {
-    transform: [{ translateY: height }],
-  };
-
-  return (
-    <View>
-      <View style={{ marginBottom: 100 }}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
-      {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
-          <Notification
-            variant={'neutral'}
-            action="Sign in"
-            onPress={() => {
-              console.log('Notification tapped');
-            }}
-            onActionPress={() => {
-              console.log('Sign in tapped');
-            }}
-          >
-            Some items require you to sign in to view them
-          </Notification>
-        </Animated.View>
-      )}
-    </View>
-  );
-};
-
-const DangerTest: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-  const onButtonPress = () => setVisible(!visible);
-
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const height = React.useRef(new Animated.Value(0)).current;
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
-      Animated.timing(height, {
-        toValue: -50,
-        duration: toastShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-        easing: Easing.elastic(toastBounciness),
-      }).start();
-    } else {
-      Animated.timing(height, {
-        toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
-    }
-  }, [visible, height]);
-
-  const animatedViewProps = {
-    transform: [{ translateY: height }],
-  };
-
-  return (
-    <View>
-      <View style={{ marginBottom: 100 }}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
-      {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
-          <Notification
-            variant={'danger'}
-            action="Retry"
-            onPress={() => {
-              console.log('Notification tapped');
-            }}
-            onActionPress={() => {
-              console.log('Retry tapped');
-            }}
-          >
-            There was a problem, and your recent changes may not have saved
-          </Notification>
-        </Animated.View>
-      )}
-    </View>
-  );
-};
-
-const WarningTest: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-  const onButtonPress = () => setVisible(!visible);
-
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const height = React.useRef(new Animated.Value(0)).current;
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
-      Animated.timing(height, {
-        toValue: -50,
-        duration: toastShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-        easing: Easing.elastic(toastBounciness),
-      }).start();
-    } else {
-      Animated.timing(height, {
-        toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
-    }
-  }, [visible, height]);
-
-  const animatedViewProps = {
-    transform: [{ translateY: height }],
-  };
-
-  return (
-    <View>
-      <View style={{ marginBottom: 100 }}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
-      {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
-          <Notification
-            variant={'warning'}
-            onPress={() => {
-              console.log('Notification tapped');
-            }}
-            onActionPress={() => {
-              Animated.timing(height, {
-                toValue: 0,
-                duration: hideDuration,
-                useNativeDriver: useNativeDriverIOS,
-              }).start(() => {
-                setHidden(true);
-                setVisible(false);
-              });
-            }}
-          >
-            Read Only
-          </Notification>
-        </Animated.View>
-      )}
-    </View>
-  );
-};
-
-const PrimaryBarTest: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-  const onButtonPress = () => setVisible(!visible);
-
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const height = React.useRef(new Animated.Value(0)).current;
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
+  const show = () => {
+    setHidden(false);
+    Animated.sequence([
       Animated.timing(height, {
         toValue: -50,
         duration: barShowDuration,
         useNativeDriver: useNativeDriverIOS,
-      }).start();
-    } else {
+      }),
+      Animated.delay(3000),
       Animated.timing(height, {
         toValue: 0,
         duration: hideDuration,
         useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
+      }),
+    ]).start(() => {
+      setHidden(true);
+      setVisible(false);
+    });
+  };
+
+  const hide = () => {
+    Animated.timing(height, {
+      toValue: 0,
+      duration: hideDuration,
+      useNativeDriver: useNativeDriverIOS,
+    }).start(() => {
+      setHidden(true);
+    });
+  };
+
+  React.useLayoutEffect(() => {
+    if (visible) {
+      show();
+    } else {
+      hide();
     }
   }, [visible, height]);
 
@@ -373,109 +235,7 @@ const PrimaryBarTest: React.FunctionComponent = () => {
               console.log('Notification tapped');
             }}
           >
-            Updating...
-          </Notification>
-        </Animated.View>
-      )}
-    </View>
-  );
-};
-
-const PrimaryOutlineBarTest: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-  const onButtonPress = () => setVisible(!visible);
-
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const height = React.useRef(new Animated.Value(0)).current;
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
-      Animated.timing(height, {
-        toValue: -50,
-        duration: barShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start();
-    } else {
-      Animated.timing(height, {
-        toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
-    }
-  }, [visible, height]);
-
-  const animatedViewProps = {
-    transform: [{ translateY: height }],
-  };
-
-  return (
-    <View>
-      <View style={{ marginBottom: 100 }}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
-      {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
-          <Notification
-            variant={'primaryOutlineBar'}
-            onPress={() => {
-              console.log('Notification tapped');
-            }}
-          >
             Mail Sent
-          </Notification>
-        </Animated.View>
-      )}
-    </View>
-  );
-};
-
-const NeutralBarTest: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
-  const onButtonPress = () => setVisible(!visible);
-
-  const [hidden, setHidden] = React.useState<boolean>(!visible);
-  const height = React.useRef(new Animated.Value(0)).current;
-
-  React.useLayoutEffect(() => {
-    if (visible) {
-      setHidden(false);
-      Animated.timing(height, {
-        toValue: -50,
-        duration: barShowDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start();
-    } else {
-      Animated.timing(height, {
-        toValue: 0,
-        duration: hideDuration,
-        useNativeDriver: useNativeDriverIOS,
-      }).start(() => {
-        setHidden(true);
-      });
-    }
-  }, [visible, height]);
-
-  const animatedViewProps = {
-    transform: [{ translateY: height }],
-  };
-
-  return (
-    <View>
-      <View style={{ marginBottom: 100 }}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
-      {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
-          <Notification
-            variant={'neutralBar'}
-            onPress={() => {
-              console.log('Notification tapped');
-            }}
-          >
-            No internet connection
           </Notification>
         </Animated.View>
       )}
@@ -485,36 +245,20 @@ const NeutralBarTest: React.FunctionComponent = () => {
 
 const notificationSections: TestSection[] = [
   {
+    name: 'Custom Toast Notification',
+    component: CustomToast,
+  },
+  {
+    name: 'Custom Bar Notification',
+    component: CustomBar,
+  },
+  {
     name: 'Primary with auto-hide',
-    component: PrimaryTestWithAutoHide,
+    component: PrimaryWithAutoHide,
   },
   {
-    name: 'Primary with Title and Icon',
-    component: PrimaryTestWithTitleAndIcon,
-  },
-  {
-    name: 'Neutral',
-    component: NeutralTest,
-  },
-  {
-    name: 'Danger',
-    component: DangerTest,
-  },
-  {
-    name: 'Warning',
-    component: WarningTest,
-  },
-  {
-    name: 'Primary Bar',
-    component: PrimaryBarTest,
-  },
-  {
-    name: 'Primary Outline Bar',
-    component: PrimaryOutlineBarTest,
-  },
-  {
-    name: 'Neutral Bar',
-    component: NeutralBarTest,
+    name: 'Primary Bar with auto-hide',
+    component: PrimaryBarWithAutoHide,
   },
 ];
 
