@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Combine platform specific test apps",
-  "packageName": "@fluentui-react-native/styling-utils",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
