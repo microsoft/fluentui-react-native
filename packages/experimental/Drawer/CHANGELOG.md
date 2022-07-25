@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-drawer
 
-This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.1
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Patches
+
+- Combine platform specific test apps (sanajmi@microsoft.com)
 
 ## 0.2.0
 

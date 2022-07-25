@@ -350,7 +350,7 @@ function build_and_copy_ios_simulator()
 	FluentTester \
 	"$1" \
 	iphonesimulator \
-	"${git_root}/.ado/xcconfig/publish_overrides.xcconfig" \
+	"${git_root}/.ado/xcconfig/publish_overrides_ios_simulator.xcconfig" \
 	"${products_dir}/${1}-iphonesimulator/FRN*/libFRN*.a"
 }
 

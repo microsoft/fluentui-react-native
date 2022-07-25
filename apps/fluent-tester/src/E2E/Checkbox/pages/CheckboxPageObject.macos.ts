@@ -3,7 +3,7 @@ import {
   CHECKBOX_TEST_COMPONENT,
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
-} from '../../../FluentTester/TestComponents/Checkbox/consts';
+} from '../../../TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 class CheckboxPageObject extends BasePage {

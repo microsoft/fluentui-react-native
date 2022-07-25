@@ -1,8 +1,4 @@
-import {
-  FOCUSZONE_TESTPAGE,
-  FOCUSZONE_TEST_COMPONENT,
-  HOMEPAGE_FOCUSZONE_BUTTON,
-} from '../../../FluentTester/TestComponents/FocusZone/consts';
+import { FOCUSZONE_TESTPAGE, FOCUSZONE_TEST_COMPONENT, HOMEPAGE_FOCUSZONE_BUTTON } from '../../../TestComponents/FocusZone/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 class FocusZonePageObject extends BasePage {

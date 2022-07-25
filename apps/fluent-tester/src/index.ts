@@ -1,1 +1,1 @@
-export { FluentTesterApp } from './FluentTester';
+export { FluentTesterApp } from './FluentTesterApp';

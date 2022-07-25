@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Thu, 14 Jul 2022 20:03:37 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.6
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+
+## 0.1.5
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
+
+## 0.1.4
+
+Wed, 20 Jul 2022 17:46:19 GMT
+
+### Patches
+
+- removed redundunt margin for Avatar and added aspectRatio to presence Badge (v.kozova13@gmail.com)
+
+## 0.1.3
+
+Wed, 20 Jul 2022 16:24:28 GMT
+
+### Patches
+
+- Changed API of Badge according to latest Web component (v.kozova13@gmail.com)
+
+## 0.1.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-text to v0.10.2
 
 ## 0.1.1
 
