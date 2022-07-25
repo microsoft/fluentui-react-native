@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { Notification, NotificationVariant, NotificationVariants } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Animated, Button, Easing, StyleSheet, Switch, TextInput, View } from 'react-native';
+import { Animated, Easing, StyleSheet, Switch, TextInput, View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
@@ -13,14 +14,17 @@ const svgProps: SvgIconProps = {
 };
 const iconProps = { svgSource: svgProps };
 
+const SHOW_HEIGHT = -50;
 const NOTIFICATION_SHOW_DURATION = 600;
 const BAR_SHOW_DURATION = 300;
 const HIDE_DURATION = 250;
+const AUTO_HIDE_DURATION = 3000;
 const NOTIFICATION_BOUNCINESS = 1.5;
 const USE_NATIVE_DRIVER_IOS = true;
 
 const styles = StyleSheet.create({
   button: {
+    alignSelf: 'center',
     marginBottom: 100,
   },
   notification: {
@@ -121,12 +125,12 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
     setHidden(false);
     Animated.sequence([
       Animated.timing(height, {
-        toValue: -50,
+        toValue: SHOW_HEIGHT,
         duration: NOTIFICATION_SHOW_DURATION,
         useNativeDriver: USE_NATIVE_DRIVER_IOS,
         easing: Easing.elastic(NOTIFICATION_BOUNCINESS),
       }),
-      Animated.delay(3000),
+      Animated.delay(AUTO_HIDE_DURATION),
       Animated.timing(height, {
         toValue: 0,
         duration: HIDE_DURATION,
@@ -162,9 +166,9 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={styles.button}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
+      <Button appearance="subtle" onClick={onButtonPress} style={styles.button}>
+        {visible ? 'Hide' : 'Show'}
+      </Button>
       {!hidden && (
         <Animated.View style={[animatedViewProps]}>
           <Notification
@@ -195,11 +199,11 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
     setHidden(false);
     Animated.sequence([
       Animated.timing(height, {
-        toValue: -50,
+        toValue: SHOW_HEIGHT,
         duration: BAR_SHOW_DURATION,
         useNativeDriver: USE_NATIVE_DRIVER_IOS,
       }),
-      Animated.delay(3000),
+      Animated.delay(AUTO_HIDE_DURATION),
       Animated.timing(height, {
         toValue: 0,
         duration: HIDE_DURATION,
@@ -235,9 +239,9 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={styles.button}>
-        <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
-      </View>
+      <Button appearance="subtle" onClick={onButtonPress} style={styles.button}>
+        {visible ? 'Hide' : 'Show'}
+      </Button>
       {!hidden && (
         <Animated.View style={[animatedViewProps]}>
           <Notification

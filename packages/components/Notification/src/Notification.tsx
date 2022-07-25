@@ -46,9 +46,10 @@ export const Notification = compose<NotificationType>({
       return { marginHorizontal: marginHorizontal };
     }, ['isBar']);
     const messageStyle: ViewStyle = useMemo(() => {
-      const alignSelf = userProps.onActionPress ? 'flex-start' : 'center';
+      const onActionPress = userProps.onActionPress;
+      const alignSelf = onActionPress ? 'flex-start' : 'center';
       return { alignSelf: alignSelf };
-    }, ['userProps']);
+    }, ['onActionPress']);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
