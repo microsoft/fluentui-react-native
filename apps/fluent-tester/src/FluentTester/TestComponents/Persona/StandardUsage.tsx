@@ -21,6 +21,13 @@ const allSizes: WithUndefined<PersonaSize>[] = [
   'size120',
 ];
 
+const allSizesCollection = allSizes.map((size) => {
+  return {
+    label: size,
+    value: size,
+  };
+});
+
 interface ISwitchWithLabelProps {
   label: string;
   value: boolean;
@@ -59,7 +66,7 @@ export const StandardUsage: React.FunctionComponent = () => {
           style={commonStyles.header}
           selected={imageSize || undefinedText}
           onChange={(size: PersonaSize | typeof undefinedText) => setImageSize(size === undefinedText ? undefined : size)}
-          collection={allSizes}
+          collection={allSizesCollection}
         />
       </View>
 

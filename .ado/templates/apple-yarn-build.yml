@@ -11,7 +11,7 @@ steps:
 
   - bash: |
       echo "Pre boot simulator"
-      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS15.4)
+      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS15.5)
       xcrun simctl boot $UDID
     workingDirectory: apps/${{ parameters.relative_directory }}
     displayName: 'Boot simulator'

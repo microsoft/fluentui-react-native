@@ -18,6 +18,10 @@ export const PressableUsage: React.FunctionComponent = () => {
     Alert.alert('Alert', 'Success!');
   };
 
+  const _onPress3 = (): void => {
+    Alert.alert('Alert', 'onAccessibilityTap invoked!');
+  };
+
   const _onKeyDown2 = (ev: IKeyboardEvent) => {
     if (ev.nativeEvent.key === 'Enter' || ev.nativeEvent.key == ' ') Alert.alert('Alert', 'Success!');
   };
@@ -29,7 +33,14 @@ export const PressableUsage: React.FunctionComponent = () => {
       <Stack style={stackStyle} gap={5}>
         <Text variant={'bodyStandard'}>
           To learn more about microsoft, visit this{' '}
-          <Text variant={'bodyStandard'} color="blue" keyDownEvents={handledNativeKeyboardEvents} onPress={_onPress} onKeyDown={_onKeyDown}>
+          <Text
+            focusable
+            variant={'bodyStandard'}
+            color="blue"
+            keyDownEvents={handledNativeKeyboardEvents}
+            onPress={_onPress}
+            onKeyDown={_onKeyDown}
+          >
             webpage
           </Text>{' '}
           for more details.
@@ -42,6 +53,7 @@ export const PressableUsage: React.FunctionComponent = () => {
             keyDownEvents={handledNativeKeyboardEvents}
             onPress={_onPress2}
             onKeyDown={_onKeyDown2}
+            onAccessibilityTap={_onPress3}
           >
             here
           </Text>{' '}

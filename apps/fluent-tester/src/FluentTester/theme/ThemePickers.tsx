@@ -35,18 +35,16 @@ type PartPickerProps = {
 
 export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: PartPickerProps) => {
   const { initial, contents, onChange } = props;
-  const [value, setValue] = React.useState(initial);
+  const [selected, setSelected] = React.useState(initial);
   const onValueChange = React.useCallback(
-    (newValue: string) => {
-      setValue(newValue);
-      onChange(newValue);
+    (value: string) => {
+      setSelected(value);
+      onChange(value);
     },
-    [setValue, onChange],
+    [setSelected, onChange],
   );
-  const MenuPickerCollection = contents.map((entry: PartPickerEntry) => {
-    return entry.label;
-  });
-  return <MenuPicker selected={value} style={themePickerStyles.dropdown} onChange={onValueChange} collection={MenuPickerCollection} />;
+
+  return <MenuPicker selected={selected} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
 };
 
 const PickerLabel = Text.customize({ variant: 'bodySemibold' });

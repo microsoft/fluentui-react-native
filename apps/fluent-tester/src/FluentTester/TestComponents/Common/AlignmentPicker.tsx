@@ -15,7 +15,12 @@ interface IAlignmentPickerProps {
 export const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (props: IAlignmentPickerProps) => {
   const { label, onSelectionChange, style } = props;
   const [selectedValue, setSelectedValue] = React.useState<IconAlignment>();
-
+  const alignmentCollection = alignmentValues.map((value) => {
+    return {
+      label: value,
+      value: value,
+    };
+  });
   return (
     <MenuPicker
       style={style}
@@ -26,7 +31,7 @@ export const AlignmentPicker: React.FunctionComponent<IAlignmentPickerProps> = (
         onSelectionChange(alignmentValue);
         setSelectedValue(alignmentValue);
       }}
-      collection={alignmentValues}
+      collection={alignmentCollection}
     />
   );
 };

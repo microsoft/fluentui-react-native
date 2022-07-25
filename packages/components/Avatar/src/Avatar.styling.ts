@@ -85,7 +85,6 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           !avatarColor || AvatarColors.includes(avatarColor as AvatarNamedColor) || ColorSchemes.includes(avatarColor as AvatarColorSchemes)
             ? backgroundColor
             : avatarColor;
-        const ringConfig = getRingConfig(tokens);
 
         return {
           style: {
@@ -97,8 +96,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             backgroundColor: _avatarColor,
             borderWidth: tokens.borderWidth,
             borderColor: tokens.borderColor,
-            marginTop: ringConfig.ringThickness,
-            marginLeft: ringConfig.ringThickness,
+            ...getRingSpacing(tokens),
             aspectRatio: 1,
           },
         };
@@ -108,7 +106,6 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
     image: buildProps(
       (tokens: AvatarTokens) => {
         const { borderRadius, size, borderWidth, borderColor } = tokens;
-        const ringConfig = getRingConfig(tokens);
         return {
           style: {
             borderRadius: borderRadius,
@@ -116,8 +113,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             minHeight: size,
             borderWidth: borderWidth,
             borderColor: borderColor,
-            marginTop: ringConfig.ringThickness,
-            marginLeft: ringConfig.ringThickness,
+            ...getRingSpacing(tokens),
             aspectRatio: 1,
           },
         };
@@ -220,4 +216,14 @@ function getIconStyles(tokens: AvatarTokens) {
     width: tokens.iconSize,
     height: tokens.iconSize,
   };
+}
+
+function getRingSpacing(tokens: AvatarTokens) {
+  const ringConfig = getRingConfig(tokens);
+  return tokens.active === 'active'
+    ? {
+        marginTop: ringConfig.ringThickness,
+        marginLeft: ringConfig.ringThickness,
+      }
+    : {};
 }
