@@ -124,6 +124,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
       />
 
       <TextInput
+        accessibilityLabel="Background color"
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Background color"
         blurOnSubmit={true}
@@ -133,6 +134,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
       />
 
       <TextInput
+        accessibilityLabel="Checkmark color"
         style={[commonStyles.textBox, textBoxBorderStyle]}
         placeholder="Checkmark color"
         blurOnSubmit={true}

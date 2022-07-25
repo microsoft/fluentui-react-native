@@ -3686,9 +3686,9 @@ appdirsjs@^1.2.4:
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
 appium-mac2-driver@^1.1.4:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.3.1.tgz#3ad80154911416cfe8e9815600a9cfd612238a64"
-  integrity sha512-Qz92h9qebVRDlwb+/zsXL1MS1ca/9IwLY0gd8wkwovK1PiRlWTfebe/5tBO4r3mb/wuf4BvxRlObHTniQHPuig==
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.0.tgz#6059bcaada3608505c2b2f2535d33b7cc43c2584"
+  integrity sha512-gKdQOrl1esSfrXh5JCA+cs1YKoj7m+TU9NdpEgd1z5OE+0nAD17E0wqrl89drVzACdugejf7U8KQ2MmIUzXMBQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.0.2"
@@ -4433,9 +4433,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.25.1"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.25.1.tgz#534fa3b0de8ba8172a86c2097064100a805d2032"
-  integrity sha512-Mek4bG4hybBBeZgFVUEAAYGYuAewDItlnpzeiNg4LcLN2iqXzCbrVn/XfTsdvx38PrROxaldgYhErknn/SWJvA==
+  version "2.26.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.26.0.tgz#2bb1ed4d4fcd7f9ae2e9ed1dea7f02e888d8a33f"
+  integrity sha512-jgnGejN0GERtaJGcCnOpyyMs2Hl6WDZenBty6d6Q+6/vNlolaTEqyGfczT1ox9jcS9XTNKHMzhZZHB7doullkQ==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
@@ -4448,7 +4448,7 @@ beachball@^2.20.0:
     semver "^6.1.1"
     toposort "^2.0.2"
     uuid "^8.3.1"
-    workspace-tools "^0.22.0"
+    workspace-tools "^0.24.0"
     yargs-parser "^20.2.4"
 
 big-integer@1.6.x:
@@ -11351,9 +11351,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.59"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.59.tgz#55ce96460f874ce9554461b9df314381b7ef8775"
-  integrity sha512-Ef9fsCaame0QcMqu7FG3vDwhMuYTGG0guslQD8n6rHM1merSgyhnQrV55hMSYAV8WemmB/SrcEujl7d3qYjg3Q==
+  version "0.66.61"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.61.tgz#b54caf6174324f28471e1cc8d8328ab9627dd8f4"
+  integrity sha512-88zRwG+hLhtDzlPDNIyzJ0X6xqv3zo4h1lFehDsB3ZAH5/BWVngti2lBrSqpl78U+gkeiGJes769u7MDQMV3MQ==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"
@@ -11404,10 +11404,10 @@ react-native-svg@^12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^1.1.4:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.4.1.tgz#b3cb4373f8d67b17fb1e3fd713e258425af12582"
-  integrity sha512-3cf4yzhbNbjZtxVdNbJnUHhDmqSwjmNFxv7tZdHvZZihAw+8lmUJQoE9eI576jejeF9oHRmJD54g4XETAoeAfw==
+react-native-test-app@^1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.4.6.tgz#2087d453771676ed499c2a203eb6c867a84a6c1b"
+  integrity sha512-YOR/kQ1etMNc6/+DhYXiZQIqIz8Oox+5QvSuA+t8W0DfuUfIQkcLmEVT/11Eq5x7jcEjZAfc0yIm5yU+mhOTJw==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
@@ -13584,10 +13584,10 @@ workspace-tools@^0.18.2, workspace-tools@^0.18.4:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.22.0:
-  version "0.22.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.22.0.tgz#485ab42664812980c1e3394cdc6c4393245d8d16"
-  integrity sha512-3BNHTncmtUCptpb5EWrcb88tRqYXqOqmfj8ASLp7445ixP2g9ddXzh2cbmH/vHb3KJXCM8nS+N/PQsrmhJxr5w==
+workspace-tools@^0.23.0:
+  version "0.23.3"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.23.3.tgz#1833c848170d1370675535963778524d0ad0aef4"
+  integrity sha512-8JWfnW9Kj24X8l4sOvwN77cxExBM57fpbjo+UqvFzY7L9FeyY4MUCqpLKpKARkK8okF/PFPOL9Dl1QgsEMT4yw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"
@@ -13597,10 +13597,10 @@ workspace-tools@^0.22.0:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.23.0:
-  version "0.23.3"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.23.3.tgz#1833c848170d1370675535963778524d0ad0aef4"
-  integrity sha512-8JWfnW9Kj24X8l4sOvwN77cxExBM57fpbjo+UqvFzY7L9FeyY4MUCqpLKpKARkK8okF/PFPOL9Dl1QgsEMT4yw==
+workspace-tools@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.24.0.tgz#92cd3c75217aa7b1eb4b7eb21eec35e7b6fcb094"
+  integrity sha512-KzFQyQq2bhlLFi38qBi3fpco6bGk+B75NS63Ui3yNwQYUYyZ8XRphQRKMuYWXD5YDuGN+GOjf9ylqdS7s/WZTA==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^4.1.0"

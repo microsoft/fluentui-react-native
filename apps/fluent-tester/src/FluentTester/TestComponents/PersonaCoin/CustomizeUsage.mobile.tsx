@@ -33,7 +33,15 @@ const StyledTextInput = (props) => {
     commonStyles.textBox,
     { flex: 1, marginHorizontal: 5, borderColor: theme.colors.disabledBodyText, color: theme.colors.inputText },
   ];
-  return <TextInput style={textInputStyles} placeholderTextColor={theme.colors.disabledBodyText} blurOnSubmit={true} {...props} />;
+  return (
+    <TextInput
+      accessibilityLabel={props.placeholder}
+      style={textInputStyles}
+      placeholderTextColor={theme.colors.disabledBodyText}
+      blurOnSubmit={true}
+      {...props}
+    />
+  );
 };
 
 const StyledSwitch = (props) => {

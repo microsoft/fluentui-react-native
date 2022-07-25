@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
+This log was last generated on Sat, 23 Jul 2022 00:28:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.1
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- useViewCommandFocus: check focus command exists on RCTView first (sanajmi@microsoft.com)
 
 ## 0.17.0
 

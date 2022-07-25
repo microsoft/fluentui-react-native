@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Sat, 23 Jul 2022 00:28:48 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.16.3",
+      "version": "0.16.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.17.1",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.1",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Jul 2022 18:10:02 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.16.2",
       "version": "0.16.2",

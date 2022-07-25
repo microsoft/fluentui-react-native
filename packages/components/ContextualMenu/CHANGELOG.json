@@ -2,6 +2,54 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Sun, 24 Jul 2022 01:24:23 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "05567bb5c8fec95d49c2724673560076d6ebb899",
+            "comment": "add onallytap prop to menu items"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 23 Jul 2022 00:28:48 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.17.1",
+      "version": "0.17.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.1",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.1",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.17.1",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.1",
+            "commit": "74da6a6410babb413c05e7a5d6df23b1d9bc4ae1"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:51 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.17.0",
       "version": "0.17.0",
