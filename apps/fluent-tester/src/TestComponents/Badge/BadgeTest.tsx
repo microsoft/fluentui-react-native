@@ -44,12 +44,12 @@ export const BasicBadge: React.FunctionComponent = () => {
       <Badge shape="rounded">Rounded badge</Badge>
       <Badge shape="square">Square badge</Badge>
       <Text>Size</Text>
-      <Badge size="smallest" shape="circular" />
-      <Badge size="smaller" shape="circular" />
+      <Badge size="tiny" shape="circular" />
+      <Badge size="extraSmall" shape="circular" />
       <Badge size="small">Small</Badge>
       <Badge size="medium">Medium</Badge>
       <Badge size="large">Large</Badge>
-      <Badge size="largest">Largest</Badge>
+      <Badge size="extraLarge">Extra Large</Badge>
       {svgIconsEnabled && (
         <>
           <Text>Badge with icon</Text>
@@ -65,11 +65,11 @@ export const BasicBadge: React.FunctionComponent = () => {
       {svgIconsEnabled && (
         <>
           <Text>Presence Badge</Text>
-          <PresenceBadge status="available" size="largest" />
+          <PresenceBadge status="available" size="extraLarge" />
           <PresenceBadge status="available" outOfOffice={true} size="large" />
           <PresenceBadge status="doNotDisturb" outOfOffice={true} />
           <PresenceBadge status="away" size="small" />
-          <PresenceBadge status="busy" size="smallest" />
+          <PresenceBadge status="busy" size="tiny" />
           <PresenceBadge status="offline" />
           <PresenceBadge status="outOfOffice" />
           <PresenceBadge status="away" />
