@@ -49,7 +49,7 @@ const CustomToast: React.FunctionComponent = () => {
         prompt="Variant"
         selected={variant}
         onChange={onVariantChange}
-        collection={NotificationVariants.filter((variant) => variant.length < 10)}
+        collection={NotificationVariants.filter((variant) => !variant.endsWith('Bar'))}
       />
       <TextInput value={title} onChangeText={setTitle} style={styles.textInput} />
       <TextInput value={message} onChangeText={setMessage} style={styles.textInput} />
@@ -94,7 +94,7 @@ const CustomBar: React.FunctionComponent = () => {
         prompt="Variant"
         selected={variant}
         onChange={onVariantChange}
-        collection={NotificationVariants.filter((variant) => variant.length > 9)}
+        collection={NotificationVariants.filter((variant) => variant.endsWith('Bar'))}
       />
       <TextInput value={message} onChangeText={setMessage} style={styles.textInput} />
       <View style={styles.notification}>
