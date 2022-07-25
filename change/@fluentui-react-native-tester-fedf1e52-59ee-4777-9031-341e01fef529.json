@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add accessibilityLabels to all text inputs",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
