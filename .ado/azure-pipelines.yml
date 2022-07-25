@@ -90,7 +90,10 @@ jobs:
         persistCredentials: true
 
       - bash: echo Test 3
-        condition: and(succeeded(), eq(variables.relative_directory, macos))
+        condition: and(succeeded(), eq(variables.relative_directory, 'macos'))
+
+      - bash: echo Test 4
+        condition: and(succeeded(), contains(variables['relative_directory'], 'macos'))
 
       # Clean Derived Data
       - script: |
