@@ -2,23 +2,23 @@
 
 ## Variants
 
-| Variant           | Type  | Light     | Dark      |
-| ----------------- | ----- | --------- | --------- |
-| Primary           | Toast | `#EBF3FC` | `#082338` |
-| Neutral           | Toast | `#FAFAFA` | `#333333` |
-| PrimaryBar        | Bar   | `#EBF3FC` | `#082338` |
-| PrimaryOutlineBar | Bar   | `#FFFFFF` | `#000000` |
-| NeutralBar        | Bar   | `#F0F0F0` | `#3D3D3D` |
-| Danger            | Toast | `#FDF6F6` | `#3F1011` |
-| Warning           | Toast | `#FFFBD6` | `#4C4400` |
+| Variant           | Light     | Dark      |
+| ----------------- | --------- | --------- |
+| Primary           | `#EBF3FC` | `#082338` |
+| Neutral           | `#FAFAFA` | `#333333` |
+| PrimaryBar        | `#EBF3FC` | `#082338` |
+| PrimaryOutlineBar | `#FFFFFF` | `#000000` |
+| NeutralBar        | `#F0F0F0` | `#3D3D3D` |
+| Danger            | `#FDF6F6` | `#3F1011` |
+| Warning           | `#FFFBD6` | `#4C4400` |
 
 ## Icon
 
-Toast notifications can include an optional `icon` that appears to the left of the `message`.
+Non-bar notifications can include an optional `icon` that appears to the left of the `message`.
 
 ## Title
 
-Toast notifications can include an optional `title` that appears on top of the `message`. The `message` will then become subtext.
+Non-bar notifications can include an optional `title` that appears on top of the `message`. The `message` will then become subtext.
 
 ## Button
 
