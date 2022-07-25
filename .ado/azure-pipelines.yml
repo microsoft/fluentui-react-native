@@ -82,9 +82,6 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - ${{ if eq(variables.currentPlatform, 'macos') }}:
-          - template: templates/e2e-testing-macos.yml
-
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
