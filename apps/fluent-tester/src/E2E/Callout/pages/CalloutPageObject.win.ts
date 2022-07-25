@@ -3,7 +3,7 @@ import {
   CALLOUT_TEST_COMPONENT,
   HOMEPAGE_CALLOUT_BUTTON,
   BUTTON_TO_OPEN_CALLOUT,
-} from '../../../FluentTester/TestComponents/Callout/consts';
+} from '../../../TestComponents/Callout/consts';
 import { BasePage, By, COMPONENT_SCROLL_COORDINATES } from '../../common/BasePage.win';
 
 class CalloutPageObject extends BasePage {

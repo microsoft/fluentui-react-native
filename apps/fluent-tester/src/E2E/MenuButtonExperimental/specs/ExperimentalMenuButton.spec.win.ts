@@ -4,7 +4,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../comm
 import {
   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
-} from '../../../FluentTester/TestComponents/MenuButtonExperimental/consts';
+} from '../../../TestComponents/MenuButtonExperimental/consts';
 import { ComponentSelector } from '../../common/BasePage.win';
 
 // Before testing begins, allow up to 60 seconds for app to open
