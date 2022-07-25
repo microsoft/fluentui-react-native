@@ -12,7 +12,23 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonAppearance = 'primary' | 'subtle';
 export type ButtonShape = 'rounded' | 'circular' | 'square';
 
-export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+
+  /**
+   * Track color
+   */
+  background?: ColorValue;
+
+  /**
+   * Thumb color
+   */
+  thumb?: ColorValue;
+
+  /**
+   * Stroke color
+   */
+  stroke ?: ColorValue;
+
   /**
    * The icon color.
    */
@@ -46,29 +62,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   /**
    * States that can be applied to a button
    */
-  hovered?: ButtonTokens;
-  focused?: ButtonTokens;
-  pressed?: ButtonTokens;
-  disabled?: ButtonTokens;
-  hasContent?: ButtonTokens;
-  hasIconBefore?: ButtonTokens;
-  checked?: ButtonTokens;
-}
-
-export interface ButtonTokens extends ButtonCoreTokens {
-  /**
-   * Additional states that can be applied to a button
-   */
-  primary?: ButtonTokens;
-  subtle?: ButtonTokens;
-  block?: ButtonTokens;
-  small?: ButtonTokens;
-  medium?: ButtonTokens;
-  large?: ButtonTokens;
-  rounded?: ButtonTokens;
-  circular?: ButtonTokens;
-  square?: ButtonTokens;
-  hasIconAfter?: ButtonTokens;
+  hovered?: SwitchTokens;
+  focused?: SwitchTokens;
+  pressed?: SwitchTokens;
+  disabled?: SwitchTokens;
+  checked?: SwitchTokens;
 }
 
 export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -149,7 +147,7 @@ export interface ButtonProps extends ButtonCoreProps {
 // export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 export interface SwitchState {
   props: IWithPressableEvents<ButtonProps & React.ComponentPropsWithRef<any>>;
-  state: IPressableState & { checked: boolean; thumbX: Animated.Value };
+  state: IPressableState & { checked: boolean };
 }
 
 export interface SwitchSlotProps {
@@ -161,6 +159,6 @@ export interface SwitchSlotProps {
 
 export interface SwitchType {
   props: ButtonProps;
-  tokens: ButtonTokens;
+  tokens: SwitchTokens;
   slotProps: SwitchSlotProps;
 }

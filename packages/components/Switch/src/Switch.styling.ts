@@ -1,107 +1,49 @@
-import { buttonName, ButtonCoreTokens, ButtonTokens, SwitchSlotProps, ButtonProps, ButtonSize } from './Switch.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles, FontTokens } from '@fluentui-react-native/tokens';
-import { defaultButtonTokens } from './SwitchTokens';
-// import { defaultButtonColorTokens } from './SwitchColorTokens';
-import { Platform, ColorValue } from 'react-native';
-import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
-// import { defaultButtonFontTokens } from './SwitchFontTokens';
+import { buttonName, SwitchTokens, SwitchSlotProps, ButtonProps } from './Switch.types';
+import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { borderStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
+import { defaultSwitchTokens } from './SwitchTokens';
 
-export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIconBefore'];
+export const switchStates: (keyof SwitchTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
 
-export const buttonStates: (keyof ButtonTokens)[] = [
-  'block',
-  'primary',
-  'subtle',
-  'hovered',
-  'small',
-  'medium',
-  'large',
-  'hasContent',
-  'hasIconAfter',
-  'hasIconBefore',
-  'rounded',
-  'circular',
-  'square',
-  'focused',
-  'pressed',
-  'disabled',
-  'checked',
-];
-
-export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, ButtonTokens> = {
-  tokens: [defaultButtonTokens, buttonName],
-  states: buttonStates,
+export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, SwitchTokens> = {
+  tokens: [defaultSwitchTokens, buttonName],
+  states: switchStates,
   slotProps: {
     root: buildProps(
       () => ({
-        style: {
-          // width: 44,
-          // height: 44,
-          backgroundColor: 'red',
-        },
-      }),
-      ['width'],
-    ),
-    track: buildProps(
-      (tokens: ButtonTokens) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
+        },
+      }),
+      [],
+    ),
+    track: buildProps(
+      (tokens: SwitchTokens) => ({
+        style: {
           height: 20,
           borderRadius: 50,
           width: 40,
-          backgroundColor: tokens.backgroundColor,
-          borderColor: 'black',
+          backgroundColor: tokens.background,
+          borderColor: tokens.stroke,
           borderWidth: 1,
-          padding: 2,
+          padding: 3,
         },
       }),
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     thumb: buildProps(
-      () => ({
+      (tokens: SwitchTokens) => ({
         style: {
-          backgroundColor: 'red',
+          backgroundColor: tokens.thumb,
           height: 14,
           width: 14,
           borderRadius: 17,
         },
       }),
-      ['backgroundColor'],
+      [],
     ),
   },
-};
-
-export const getDefaultSize = (): ButtonSize => {
-  if (Platform.OS === 'windows') {
-    return 'medium';
-  } else if ((Platform.OS as any) === 'win32') {
-    return 'small';
-  }
-
-  return 'medium';
-};
-
-export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {
-  const textAdjustment = getTextMarginAdjustment();
-  const spacingIconContentBefore = tokens.spacingIconContentBefore
-    ? {
-        marginStart: textAdjustment.marginStart + tokens.spacingIconContentBefore,
-      }
-    : {};
-  const spacingIconContentAfter = tokens.spacingIconContentAfter
-    ? {
-        marginEnd: textAdjustment.marginEnd + tokens.spacingIconContentAfter,
-      }
-    : {};
-  return {
-    color: contentColor,
-    ...getTextMarginAdjustment(),
-    ...spacingIconContentBefore,
-    ...spacingIconContentAfter,
-    ...fontStyles.from(fontStylesTokens, theme),
-  };
 };

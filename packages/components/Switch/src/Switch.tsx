@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View, Text } from 'react-native';
 import { buttonName, SwitchType, ButtonProps } from './Switch.types';
 // import { Text } from '@fluentui-react-native/experimental-text';
-import { stylingSettings, getDefaultSize } from './Switch.styling';
+import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
@@ -22,7 +22,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     userProps[layer] ||
     layer === userProps['appearance'] ||
     layer === userProps['size'] ||
-    (!userProps['size'] && layer === getDefaultSize()) ||
+    (!userProps['size'] && layer === 'small') ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
     (layer === 'hovered' && state[layer] && !userProps.loading) ||
@@ -63,10 +63,9 @@ export const Switch = compose<SwitchType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           <Slots.label>Label</Slots.label>
-          <Slots.track style={[!button.state.checked ? { backgroundColor: 'white' } : { backgroundColor: 'blue' }]}>
+          <Slots.track>
             <Slots.thumb
-              animationClass={'Ribbon_SwitchThumb'}
-              style={[!button.state.checked ? { left: 2, backgroundColor: 'grey' } : { left: 22, backgroundColor: 'white' }]}
+              style={[!button.state.checked ? { left: 0} : { left: 20}]}
             />
           </Slots.track>
         </Slots.root>
