@@ -93,7 +93,14 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - bash: echo Staging area is $(relative_directory)
+      - bash: echo Test 1
+        condition: and(succeeded(), eq($(relative_directory), 'macos'))
+
+      - bash: echo Test 2
+        condition: and(succeeded(), eq($(relative_directory), macos))
+
+      - bash: echo Test 3
+        condition: and(succeeded(), eq(variables.relative_directory, macos))
 
       # Clean Derived Data
       - script: |
@@ -119,6 +126,7 @@ jobs:
           relative_directory: $(relative_directory)
 
       - template: templates/e2e-testing-macos.yml
+        condition: and(succeeded(), eq($(relative_directory), 'macos'))
 
   - job: AndroidPR
     displayName: Android PR
