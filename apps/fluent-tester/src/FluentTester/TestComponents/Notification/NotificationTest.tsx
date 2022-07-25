@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Notification } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Animated, Button, Easing, Switch, TextInput, View } from 'react-native';
+import { Animated, Button, Easing, StyleSheet, Switch, TextInput, View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -19,6 +19,18 @@ const BAR_SHOW_DURATION = 300;
 const HIDE_DURATION = 250;
 const NOTIFICATION_BOUNCINESS = 1.5;
 const USE_NATIVE_DRIVER_IOS = true;
+
+const styles = StyleSheet.create({
+  button: {
+    marginBottom: 100,
+  },
+  notification: {
+    marginTop: 70,
+  },
+  textInput: {
+    borderWidth: 1,
+  },
+});
 
 const CustomToast: React.FunctionComponent = () => {
   const [variant, setVariant] = React.useState<NotificationVariant>('primary');
@@ -39,9 +51,9 @@ const CustomToast: React.FunctionComponent = () => {
         onChange={onVariantChange}
         collection={NotificationVariants.filter((variant) => variant.length < 10)}
       />
-      <TextInput value={title} onChangeText={setTitle} style={{ borderWidth: 1 }} />
-      <TextInput value={message} onChangeText={setMessage} style={{ borderWidth: 1 }} />
-      <TextInput value={action} onChangeText={setAction} style={{ borderWidth: 1 }} />
+      <TextInput value={title} onChangeText={setTitle} style={styles.textInput} />
+      <TextInput value={message} onChangeText={setMessage} style={styles.textInput} />
+      <TextInput value={action} onChangeText={setAction} style={styles.textInput} />
       <View style={commonStyles.switch}>
         <Text>Show icon </Text>
         <Switch value={showIcon} onValueChange={setShowIcon} />
@@ -50,7 +62,7 @@ const CustomToast: React.FunctionComponent = () => {
         <Text>Show title </Text>
         <Switch value={showTitle} onValueChange={setShowTitle} />
       </View>
-      <View style={{ marginTop: 70 }}>
+      <View style={styles.notification}>
         <Notification
           variant={variant}
           icon={showIcon ? iconProps : undefined}
@@ -84,8 +96,8 @@ const CustomBar: React.FunctionComponent = () => {
         onChange={onVariantChange}
         collection={NotificationVariants.filter((variant) => variant.length > 9)}
       />
-      <TextInput value={message} onChangeText={setMessage} style={{ borderWidth: 1 }} />
-      <View style={{ marginTop: 60 }}>
+      <TextInput value={message} onChangeText={setMessage} style={styles.textInput} />
+      <View style={styles.notification}>
         <Notification
           variant={variant}
           onPress={() => {
@@ -151,7 +163,7 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 100 }}>
+      <View style={styles.button}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       {!hidden && (
@@ -224,7 +236,7 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
 
   return (
     <View>
-      <View style={{ marginBottom: 100 }}>
+      <View style={styles.button}>
         <Button onPress={onButtonPress} title={visible ? 'Hide' : 'Show'} />
       </View>
       {!hidden && (
