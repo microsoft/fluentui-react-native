@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomToast: React.FunctionComponent = () => {
+const CustomNotification: React.FunctionComponent = () => {
   const [variant, setVariant] = React.useState<NotificationVariant>('primary');
   const [title, setTitle] = React.useState("Kat's iPhoneX");
   const [message, setMessage] = React.useState('Listen to Emails • 7 mins');
@@ -256,8 +256,8 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
 
 const notificationSections: TestSection[] = [
   {
-    name: 'Custom Toast Notification',
-    component: CustomToast,
+    name: 'Custom Notification',
+    component: CustomNotification,
   },
   {
     name: 'Custom Bar Notification',
