@@ -89,11 +89,8 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - bash: echo Test 3
-        condition: and(succeeded(), eq(variables.platform, 'macos'))
-
-      - bash: echo Test 4
-        condition: and(succeeded(), contains(variables['relative_directory'], 'macos'))
+      - ${{ if and(succeeded(), eq(variables.platform, 'macos')) }}:
+          - template: templates/e2e-testing-macos.yml
 
       # Clean Derived Data
       - script: |
@@ -118,8 +115,8 @@ jobs:
         parameters:
           platform: $(platform)
 
-      # - ${{ if eq(variables[relative_directory], 'macos')}}:
-      #   - template: templates/e2e-testing-macos.yml
+      # - ${{ if and(succeeded(), eq(variables.platform, 'macos')) }}:
+      #     - template: templates/e2e-testing-macos.yml
 
   # Windows bundling and end to end testing
   # - job: WindowsPR
