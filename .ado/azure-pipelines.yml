@@ -93,6 +93,8 @@ jobs:
       - checkout: self
         persistCredentials: true
 
+      - bash: echo Staging area is $Build.StagingDirectory
+
       # Clean Derived Data
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
