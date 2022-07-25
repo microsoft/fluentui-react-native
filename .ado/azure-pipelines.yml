@@ -89,7 +89,15 @@ jobs:
       - checkout: self
         persistCredentials: true
 
-      - ${{ if and(succeeded(), eq(variables.platform, 'macos')) }}:
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "##vso[task.setvariable variable=currentPlatform]$[variables.platform]"
+      condition: succeeded()
+      displayName: 'Set platform'
+
+      - ${{ if eq(variables.currentPlatform, 'macos') }}:
           - template: templates/e2e-testing-macos.yml
 
       # Clean Derived Data

@@ -3,14 +3,17 @@ steps:
       pod install
     workingDirectory: apps/macos/src
     displayName: 'pod install'
+
   - script: |
       yarn appium driver install mac2
     workingDirectory: apps/macos
     displayName: 'Installing appium mac2 driver'
+
   - script: |
       yarn macos
     workingDirectory: apps/macos
     displayName: 'start the server'
+
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
   # those reporting tasks run even on when certain previous tasks fail. This variable allows us to differentiate build failures from
@@ -28,6 +31,7 @@ steps:
     workingDirectory: apps/macos
     displayName: 'run E2E macos tests'
     condition: succeeded()
+
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: macos
