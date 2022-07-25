@@ -8,7 +8,7 @@ import {
   FIRST_TABS_ITEM_CONTENT,
   SECOND_TABS_ITEM_CONTENT,
   THIRD_TABS_ITEM_CONTENT,
-} from '../../../FluentTester/TestComponents/Tabs/consts';
+} from '../../../TestComponents/Tabs/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
