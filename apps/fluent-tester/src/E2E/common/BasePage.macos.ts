@@ -56,7 +56,6 @@ export class BasePage {
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
     // const scrollViewer = $('//*["RCTCustomScrollView"]');
-
     // const success3 = browser.waitUntil(
     //   () => {
     //     driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewer.elementId);
@@ -68,7 +67,6 @@ export class BasePage {
     //     interval: 1000,
     //   },
     // );
-
     // expect(success3).toBeTruthy();
   }
 
