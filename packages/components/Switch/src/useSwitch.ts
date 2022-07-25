@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { ButtonProps, ButtonState } from './Switch.types';
+import { ButtonProps, SwitchState } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState, Animated } from 'react-native';
 
-export const useSwitch = (props: ButtonProps): ButtonState => {
+export const useSwitch = (props: ButtonProps): SwitchState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, checked, accessibilityState, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, ...rest } = props;
@@ -33,24 +33,6 @@ export const useSwitch = (props: ButtonProps): ButtonState => {
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
   const thumbX = React.useRef(new Animated.Value(0)).current;
-
-  // const moveRight = () => {
-  //   // Will change fadeAnim value to 1 in 5 seconds
-  //   Animated.timing(thumbX, {
-  //     toValue: 45, // maxWidth - SizeofThumb
-  //     duration: 100,
-  //     useNativeDriver: false,
-  //   }).start();
-  // };
-
-  // const moveLeft = () => {
-  //   // Will change fadeAnim value to 1 in 5 seconds
-  //   Animated.timing(thumbX, {
-  //     toValue: 0,
-  //     duration: 100,
-  //     useNativeDriver: false,
-  //   }).start();
-  // };
 
   return {
     props: {
