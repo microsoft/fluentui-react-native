@@ -17,9 +17,9 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       iconColor: t.colors.brandForeground1,
     },
     tint: {
-      backgroundColor: globalTokens.color.brand.tint60,
+      backgroundColor: t.colors.brandBackground2,
       color: t.colors.brandForeground1,
-      borderColor: '#B4D6FA',
+      borderColor: t.colors.brandStroke2,
       iconColor: t.colors.brandForeground1,
     },
     brand: {
@@ -36,7 +36,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       tint: {
         backgroundColor: globalTokens.color.brand.tint60,
         color: t.colors.brandForeground1,
-        borderColor: '#B4D6FA',
+        borderColor: t.colors.brandStroke2,
         iconColor: t.colors.brandForeground1,
       },
     },
