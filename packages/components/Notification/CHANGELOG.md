@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Sat, 23 Jul 2022 00:28:48 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Jul 2022 18:59:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Mon, 25 Jul 2022 18:59:03 GMT
+
+### Minor changes
+
+- add shadow (joannaquu@gmail.com)
 
 ## 0.8.1
 

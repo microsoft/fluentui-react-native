@@ -74,6 +74,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         </View>
 
         <TextInput
+          accessibilityLabel="Background color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
@@ -83,6 +84,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
 
         <TextInput
+          accessibilityLabel="Initials text color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}
@@ -92,6 +94,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
 
         <TextInput
+          accessibilityLabel="Icon stroke color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Icon stroke color"
           blurOnSubmit={true}
@@ -101,6 +104,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
 
         <TextInput
+          accessibilityLabel="Ring color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Ring color"
           blurOnSubmit={true}
@@ -110,6 +114,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
 
         <TextInput
+          accessibilityLabel="Ring background color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Ring background color"
           blurOnSubmit={true}

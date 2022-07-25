@@ -48,6 +48,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         </View>
 
         <TextInput
+          accessibilityLabel="Background color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Background color"
           blurOnSubmit={true}
@@ -57,6 +58,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
 
         <TextInput
+          accessibilityLabel="Initials text color"
           style={[commonStyles.textBox, textBoxBorderStyle]}
           placeholder="Initials text color"
           blurOnSubmit={true}

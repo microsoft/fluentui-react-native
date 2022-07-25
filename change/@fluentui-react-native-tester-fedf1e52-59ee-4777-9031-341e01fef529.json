@@ -1,7 +1,7 @@
 {
   "type": "patch",
-  "comment": "remove flatlist usage",
+  "comment": "Add accessibilityLabels to all text inputs",
   "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
+  "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
 }

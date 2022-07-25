@@ -100,5 +100,11 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
+    shadow: buildProps(
+      (tokens: NotificationTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
+    ),
   },
 };

@@ -77,7 +77,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <View style={{ flexDirection: 'row' }}>
           <View>
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Name for generating initials"
+              style={commonStyles.textBox}
               placeholder="Name for generating initials"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -85,7 +86,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Initials"
+              style={commonStyles.textBox}
               placeholder="Initials"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -94,7 +96,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             />
             <Text style={{ fontWeight: 'bold' }}>Avatar tokens</Text>
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Background color"
+              style={commonStyles.textBox}
               placeholder="Background color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -103,7 +106,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             />
 
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Avatar size"
+              style={commonStyles.textBox}
               placeholder="Avatar size"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -112,7 +116,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             />
 
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Icon size"
+              style={commonStyles.textBox}
               placeholder="Icon size"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -120,7 +125,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Icon color"
+              style={commonStyles.textBox}
               placeholder="Icon color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -129,7 +135,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
             />
             <Text style={{ fontWeight: 'bold' }}>Ring tokens</Text>
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Ring background color"
+              style={commonStyles.textBox}
               placeholder="Ring background color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -137,7 +144,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Ring color"
+              style={commonStyles.textBox}
               placeholder="Ring color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -145,7 +153,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Ring thickness"
+              style={commonStyles.textBox}
               placeholder="Ring thickness"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -156,7 +165,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           <View style={{ paddingHorizontal: 20 }}>
             <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Initials text color"
+              style={commonStyles.textBox}
               placeholder="Initials text color"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -164,7 +174,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Initials size"
+              style={commonStyles.textBox}
               placeholder="Initials size"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -172,7 +183,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Font weight"
+              style={commonStyles.textBox}
               placeholder="Font weight"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {
@@ -180,7 +192,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
             <TextInput
-              style={[commonStyles.textBox]}
+              accessibilityLabel="Font family"
+              style={commonStyles.textBox}
               placeholder="Font family"
               blurOnSubmit={true}
               onSubmitEditing={(e) => {

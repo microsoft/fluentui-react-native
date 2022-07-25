@@ -31,6 +31,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       icon,
       text,
       accessibilityLabel = userProps.text,
+      onAccessibilityTap,
       onClick,
       componentRef = defaultComponentRef,
       ...rest
@@ -137,6 +138,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
      * Explicitly override onKeyDown to override the native windows behavior of moving focus with arrow keys.
      */
     const onKeyDownProps = useKeyDownProps(showWithArrowKey, ' ', 'Enter', 'ArrowLeft', 'ArrowRight');
+    const onAccTap = onAccessibilityTap ?? onItemPress;
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -152,6 +154,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
         focusable: !disabled,
+        onAccessibilityTap: onAccTap,
         ...rest,
       },
       content: { children: text },
