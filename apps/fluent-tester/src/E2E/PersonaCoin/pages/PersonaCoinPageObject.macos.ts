@@ -1,8 +1,4 @@
-import {
-  PERSONACOIN_TESTPAGE,
-  PERSONACOIN_TEST_COMPONENT,
-  HOMEPAGE_PERSONACOIN_BUTTON,
-} from '../../../FluentTester/TestComponents/PersonaCoin/consts';
+import { PERSONACOIN_TESTPAGE, PERSONACOIN_TEST_COMPONENT, HOMEPAGE_PERSONACOIN_BUTTON } from '../../../TestComponents/PersonaCoin/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 class PersonaCoinPageObject extends BasePage {
