@@ -54,7 +54,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
 
     iconProps = {
       fontSource: {
-        fontSize: fontSource.fontSize ?? getIconSize(size),
+        fontSize: fontSource.fontSize ?? getFontIconSize(size),
         ...iconProps.fontSource,
       },
       ...restIconProps,
@@ -141,7 +141,7 @@ export const removeTitlesFromName = (words: string[]): string[] => {
   return words.filter((word) => !titles.has(word));
 };
 
-function getIconSize(size: AvatarSize) {
+function getFontIconSize(size: AvatarSize) {
   if (size >= 25 && size <= 47) {
     return 20;
   } else if (size === 48) {
