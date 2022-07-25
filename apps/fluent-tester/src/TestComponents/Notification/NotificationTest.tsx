@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { Notification } from '@fluentui-react-native/notification';
+import { Notification, NotificationVariant, NotificationVariants } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Animated, Button, Easing, StyleSheet, Switch, TextInput, View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { StyledPicker } from '../Common/StyledPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { NotificationVariant, NotificationVariants } from '../../../../../../packages/components/Notification/src/Notification.types';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import PlayButton from './assets/play_button.svg';
 
