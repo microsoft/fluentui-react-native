@@ -7,6 +7,11 @@ const emptyShadowStyle = {
   key: { x: 0, y: 0, blur: 0, color: '#00000000' },
 };
 
+const notificationShadowStyle = {
+  ambient: { x: 0, y: 8, blur: 8, color: '#00000024' },
+  key: { x: 0, y: 0, blur: 1, color: '#0000001f' },
+};
+
 export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme> = (t: Theme) =>
   ({
     backgroundColor: t.colors.background,
@@ -19,7 +24,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontSize: 15,
     fontWeight: '600',
     padding: 16,
-    shadowToken: t.shadows.shadow16,
+    shadowToken: notificationShadowStyle,
     hasTitle: {
       fontLineHeight: 18,
       fontSize: 13,

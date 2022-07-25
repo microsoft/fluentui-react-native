@@ -6,11 +6,11 @@ exports[`Notification component tests Notification default 1`] = `
     Object {
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0,
+        "height": 8,
         "width": 0,
       },
-      "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowOpacity": 0.14,
+      "shadowRadius": 8,
     }
   }
 >
@@ -19,11 +19,11 @@ exports[`Notification component tests Notification default 1`] = `
       Object {
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 8,
+          "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0.14,
-        "shadowRadius": 16,
+        "shadowOpacity": 0.12,
+        "shadowRadius": 1,
       }
     }
   >
