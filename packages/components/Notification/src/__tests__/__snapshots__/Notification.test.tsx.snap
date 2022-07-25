@@ -4,26 +4,26 @@ exports[`Notification component tests Notification default 1`] = `
 <View
   style={
     Object {
-      "shadowColor": "000000",
+      "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 0,
+        "height": 8,
         "width": 0,
       },
-      "shadowOpacity": 0,
-      "shadowRadius": 0,
+      "shadowOpacity": 0.14,
+      "shadowRadius": 8,
     }
   }
 >
   <View
     style={
       Object {
-        "shadowColor": "000000",
+        "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 0,
           "width": 0,
         },
-        "shadowOpacity": 0,
-        "shadowRadius": 0,
+        "shadowOpacity": 0.12,
+        "shadowRadius": 1,
       }
     }
   >
