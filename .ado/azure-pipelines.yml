@@ -125,7 +125,7 @@ jobs:
         parameters:
           relative_directory: $(relative_directory)
 
-      - ${{ if and(succeeded(), eq($(relative_directory), 'macos'))}}:
+      - ${{ if eq($(relative_directory), 'macos')}}:
         - template: templates/e2e-testing-macos.yml
 
 
