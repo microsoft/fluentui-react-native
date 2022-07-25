@@ -33,6 +33,7 @@
   "dependencies": {
     "@fluentui-react-native/default-theme": ">=0.14.0 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.1.7",
+    "@fluentui-react-native/memo-cache": "^1.1.7",
     "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
     "@uifabricshared/themed-settings": ">=0.9.0 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.0 <1.0.0",
