@@ -147,19 +147,20 @@ export interface ButtonProps extends ButtonCoreProps {
 }
 
 // export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
-export interface ButtonState {
+export interface SwitchState {
   props: IWithPressableEvents<ButtonProps & React.ComponentPropsWithRef<any>>;
   state: IPressableState & { checked: boolean; thumbX: Animated.Value };
 }
 
-export interface ButtonSlotProps {
+export interface SwitchSlotProps {
   root: React.PropsWithRef<IViewProps>;
+  label: TextProps;
+  track: React.PropsWithRef<IViewProps>;
   thumb: Animated.AnimatedProps<IViewProps>;
-  content: TextProps;
 }
 
-export interface ButtonType {
+export interface SwitchType {
   props: ButtonProps;
   tokens: ButtonTokens;
-  slotProps: ButtonSlotProps;
+  slotProps: SwitchSlotProps;
 }

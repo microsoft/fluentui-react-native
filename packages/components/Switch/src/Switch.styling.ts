@@ -1,11 +1,11 @@
-import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Switch.types';
+import { buttonName, ButtonCoreTokens, ButtonTokens, SwitchSlotProps, ButtonProps, ButtonSize } from './Switch.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles, FontTokens } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './SwitchTokens';
-import { defaultButtonColorTokens } from './SwitchColorTokens';
+// import { defaultButtonColorTokens } from './SwitchColorTokens';
 import { Platform, ColorValue } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
-import { defaultButtonFontTokens } from './SwitchFontTokens';
+// import { defaultButtonFontTokens } from './SwitchFontTokens';
 
 export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIconBefore'];
 
@@ -29,11 +29,21 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'checked',
 ];
 
-export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, ButtonTokens> = {
-  tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
+export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, ButtonTokens> = {
+  tokens: [defaultButtonTokens, buttonName],
   states: buttonStates,
   slotProps: {
     root: buildProps(
+      () => ({
+        style: {
+          // width: 44,
+          // height: 44,
+          backgroundColor: 'red',
+        },
+      }),
+      ['width'],
+    ),
+    track: buildProps(
       (tokens: ButtonTokens) => ({
         style: {
           display: 'flex',
@@ -50,16 +60,6 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
         },
       }),
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
-    ),
-    content: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => {
-        return {
-          style: {
-            ...contentStyling(tokens, theme, tokens.color, tokens),
-          },
-        };
-      },
-      ['color', 'spacingIconContentAfter', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     thumb: buildProps(
       () => ({

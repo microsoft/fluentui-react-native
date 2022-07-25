@@ -1,11 +1,11 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
-import { buttonName, ButtonType, ButtonProps } from './Switch.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { View, Text } from 'react-native';
+import { buttonName, SwitchType, ButtonProps } from './Switch.types';
+// import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings, getDefaultSize } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useSwitch } from './useButton';
+import { useSwitch } from './useSwitch';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 // import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
@@ -32,15 +32,16 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-export const Switch = compose<ButtonType>({
+export const Switch = compose<SwitchType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
     root: View,
+    label: Text,
+    track: View,
     thumb: View,
-    content: Text,
   },
-  useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
+  useRender: (userProps: ButtonProps, useSlots: UseSlots<SwitchType>) => {
     const button = useSwitch(userProps);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
@@ -60,20 +61,14 @@ export const Switch = compose<ButtonType>({
       const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root
-          {...mergedProps}
-          accessibilityLabel={label}
-          // animationClass={'Ribbon_SwitchBackground'}
-          style={[!button.state.checked ? { backgroundColor: 'white' } : { backgroundColor: 'blue' }]}
-        >
-          {/* <ViewWin32 animationClass={'Shared_QuickClass'}> */}
-          {/* <Slots.thumb animationClass={'Shared_QuickClass'} style={[{ left: button.state.thumbX }]} /> */}
-
-          <Slots.thumb
-            animationClass={'Ribbon_SwitchThumb'}
-            style={[!button.state.checked ? { left: 2, backgroundColor: 'grey' } : { left: 22, backgroundColor: 'white' }]}
-          />
-          {/* </ViewWin32> */}
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
+          <Slots.label>Label</Slots.label>
+          <Slots.track style={[!button.state.checked ? { backgroundColor: 'white' } : { backgroundColor: 'blue' }]}>
+            <Slots.thumb
+              animationClass={'Ribbon_SwitchThumb'}
+              style={[!button.state.checked ? { left: 2, backgroundColor: 'grey' } : { left: 22, backgroundColor: 'white' }]}
+            />
+          </Slots.track>
         </Slots.root>
       );
     };
