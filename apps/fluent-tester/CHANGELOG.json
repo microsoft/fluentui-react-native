@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 25 Jul 2022 19:49:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.78.4",
+      "version": "0.78.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7e99ecd5bf4d3208adf86f1ba76c31b25eda0c32",
+            "comment": "Add accessibilityLabels to all text inputs"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Jul 2022 18:59:03 GMT",
       "tag": "@fluentui-react-native/tester_v0.78.3",
       "version": "0.78.3",
