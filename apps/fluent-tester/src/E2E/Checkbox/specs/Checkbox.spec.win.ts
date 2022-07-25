@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import CheckboxPageObject, { CheckboxSelector } from '../pages/CheckboxPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
-import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../FluentTester/TestComponents/Checkbox/consts';
+import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../TestComponents/Checkbox/consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {

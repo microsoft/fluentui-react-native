@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Mon, 25 Jul 2022 21:27:20 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.17.2",
+      "version": "0.17.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "b19d2af0d4b389e84850c43c9132bae25d3cca2a",
+            "comment": "useViewCommandFocus: check focus command exists on RCTView first"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 23 Jul 2022 00:28:48 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.17.1",
       "version": "0.17.1",

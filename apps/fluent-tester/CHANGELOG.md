@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 25 Jul 2022 18:59:03 GMT and should not be manually modified.
+This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.79.0
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Minor changes
+
+- Combine platform specific test apps (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.18
+- Bump @fluentui-react-native/badge to v0.1.6
+- Bump @fluentui-react-native/button to v0.24.7
+- Bump @fluentui-react-native/experimental-button to v0.16.7
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.8
+- Bump @fluentui-react-native/experimental-shadow to v0.2.10
+- Bump @fluentui-react-native/experimental-tabs to v0.5.4
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+- Bump @fluentui-react-native/menu to v1.0.16
+- Bump @fluentui-react-native/notification to v0.9.1
+- Bump @fluentui/react-native to v0.31.8
+
+## 0.78.4
+
+Mon, 25 Jul 2022 19:49:02 GMT
+
+### Patches
+
+- Add accessibilityLabels to all text inputs (ruaraki@microsoft.com)
 
 ## 0.78.3
 
