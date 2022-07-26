@@ -2390,9 +2390,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.18"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.18.tgz#0f8e9d104174131277292d3a84ae909e897c41ce"
-  integrity sha512-jBk2k57TFtF0Ni6+qzJOi55iIyhI2psVDr1rrCSfGM/ztBk48paNTu4ipvdYTwyFaAwvdf/nu/BLu9fDm7y2LQ==
+  version "1.12.19"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.19.tgz#1c8f30eb8495f93f700dd61939cd0910cf8906e7"
+  integrity sha512-fRRO09jAt0qA5eQBLmvCDfWVCexmth2jOjKSglwmEdsC3gqpebHI7nM9k8gwMfGLut0QxGnN5klIGP3XURO/eQ==
 
 "@rnx-kit/eslint-plugin@^0.2.8":
   version "0.2.13"
