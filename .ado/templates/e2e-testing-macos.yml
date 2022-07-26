@@ -1,0 +1,31 @@
+steps:
+  - script: |
+      yarn appium driver install mac2
+    workingDirectory: apps/fluent-tester
+    displayName: 'Installing appium mac2 driver'
+  - script: |
+      yarn macos
+    workingDirectory: apps/fluent-tester
+    displayName: 'start the server'
+  # Creates a variable that determines whether the previous build tasks succeeded.
+  # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
+  # those reporting tasks run even on when certain previous tasks fail. This variable allows us to differentiate build failures from
+  # E2E testing failures. Thus, if this variable != "Success", we know the build failed, and to not run the reporting tasks.
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host "##vso[task.setvariable variable=task.Build.status]Success"
+    condition: succeeded()
+    displayName: 'Create success build variable'
+
+  - script: |
+      yarn e2etest:macos
+    workingDirectory: apps/fluent-tester
+    displayName: 'run E2E macos tests'
+    condition: succeeded()
+  - template: e2e-publish-artifacts.yml
+    parameters:
+      applicationType: macos
+      platform: macos
+      buildArtifacts: variables['task.Build.status']

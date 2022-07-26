@@ -7,83 +7,76 @@ variables:
 jobs:
   # Dedicated task to build and bundle JS code, including jest tests, snapshot testing, and linting, because these things can be super
   # time consuming they don't need to run on every CI pass, instead do a dedicated JS loop to make the platform specific tests start quicker
-  - job: JSPR
-    displayName: JS PR
-    pool:
-      vmImage: 'ubuntu-latest'
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  # - job: JSPR
+  #   displayName: JS PR
+  #   pool:
+  #     vmImage: 'ubuntu-latest'
+  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-    steps:
-      - checkout: self
-        persistCredentials: true
+  #   steps:
+  #     - checkout: self
+  #       persistCredentials: true
 
-      - template: templates/setup-repo.yml
+  #     - template: templates/setup-repo.yml
 
-      - script: |
-          yarn checkchange
-        displayName: 'check change'
+  #     - script: |
+  #         yarn checkchange
+  #       displayName: 'check change'
 
-      - script: |
-          yarn prettier
-        displayName: 'check prettier'
+  #     - script: |
+  #         yarn prettier
+  #       displayName: 'check prettier'
 
-      - script: |
-          yarn buildci
-        displayName: 'yarn buildci'
+  #     - script: |
+  #         yarn buildci
+  #       displayName: 'yarn buildci'
 
-      - script: |
-          yarn check-for-changed-files
-        displayName: 'verify API and Ensure Changed Files'
+  #     - script: |
+  #         yarn check-for-changed-files
+  #       displayName: 'verify API and Ensure Changed Files'
 
-  - job: AndroidPR
-    displayName: Android PR
-    pool:
-       vmImage: 'macos-11'
-    variables:
-      platform: 'android'
-    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
-    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+  # - job: AndroidPR
+  #   displayName: Android PR
+  #   pool:
+  #     vmImage: 'macos-11'
+  #   variables:
+  #     platform: 'android'
+  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-    steps:
-      - checkout: self
-        persistCredentials: true
+  #   steps:
+  #     - checkout: self
+  #       persistCredentials: true
 
-      # setup repo basics
-      - template: templates/setup-repo-min-build.yml
+  #     # setup repo basics
+  #     - template: templates/setup-repo-min-build.yml
 
-      # package android bundle
-      - script: |
-          yarn bundle:$(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle $(platform)'
+  #     # package android bundle
+  #     - script: |
+  #         yarn bundle:$(platform)
+  #       workingDirectory: apps/fluent-tester
+  #       displayName: 'yarn bundle $(platform)'
 
-      # sets-up specifics for android dependency like NDK & emulator
-      - template: templates/android-dep-setup.yml
+  #     # sets-up specifics for android dependency like NDK & emulator
+  #     - template: templates/android-dep-setup.yml
 
-      - bash: |
-          echo "yarn $(platform)"
-          yarn $(platform)
-        workingDirectory: apps/fluent-tester
-        displayName: 'yarn $(platform)'
-        env:
-          JAVA_HOME: $(JAVA_HOME_11_X64)
-          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
+  #     - bash: |
+  #         echo "yarn $(platform)"
+  #         yarn $(platform)
+  #       workingDirectory: apps/fluent-tester
+  #       displayName: 'yarn $(platform)'
+  #       env:
+  #         JAVA_HOME: $(JAVA_HOME_11_X64)
+  #         PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
-  - job: ApplePR
-    displayName: Apple PR
+  - job: MacPR
+    displayName: MacOS PR
     pool:
       vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    strategy:
-      maxParallel: 4
-      matrix:
-        ios:
-          platform: 'ios'
-        macos:
-          platform: 'macos'
 
     steps:
       - checkout: self
@@ -93,62 +86,93 @@ jobs:
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: 'Clean DerivedData'
-
       - script: |
           sudo gem install cocoapods
         displayName: 'Install Cocoapods Environment'
-
       - template: templates/setup-repo-min-build.yml
 
       - script: |
-          yarn bundle:$(platform)
+          yarn bundle:macos
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  $(platform)'
-
+        displayName: 'yarn bundle macos'
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-yarn-build.yml
         parameters:
-          platform: $(platform)
+          platform: 'macos'
 
-  # Windows bundling and end to end testing
-  - job: WindowsPR
-    displayName: Windows PR
+      - template: templates/e2e-testing-macos.yml
+
+  - job: iOSPR
+    displayName: iOS PR
     pool:
-      vmImage: 'windows-2019'
+      vmImage: 'internal-macos12'
+      demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
-    # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
-    # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
     steps:
       - checkout: self
         persistCredentials: true
 
-      # yarn and minimal build to get set up
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: 'Clean DerivedData'
+      - script: |
+          sudo gem install cocoapods
+        displayName: 'Install Cocoapods Environment'
       - template: templates/setup-repo-min-build.yml
 
-      # bundle windows adn do end to end tests
-      - template: templates/e2e-testing-uwp.yml
+      - script: |
+          yarn bundle:ios
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn bundle ios'
+      # Select proper Xcode version
+      - template: templates/apple-xcode-select.yml
+
+      - template: templates/apple-yarn-build.yml
+        parameters:
+          platform: 'ios'
+
+  # Windows bundling and end to end testing
+  # - job: WindowsPR
+  #   displayName: Windows PR
+  #   pool:
+  #     vmImage: 'windows-2019'
+  #   timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+  #   cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+  #   # The "displayName" of all steps that execute a command within our repo (such as 'yarn build') start lowercase to make it
+  #   # easier to differentiate in-repo scripts from environmental setup. This makes it easier to understand CI pipeline results.
+  #   steps:
+  #     - checkout: self
+  #       persistCredentials: true
+
+  #     # yarn and minimal build to get set up
+  #     - template: templates/setup-repo-min-build.yml
+
+  #     # bundle windows adn do end to end tests
+  #     - template: templates/e2e-testing-uwp.yml
 
   # Win32 bundling and end to end testing
-  - job: Win32PR
-    displayName: Win32 PR
-    pool:
-      vmImage: 'windows-2019'
-    timeoutInMinutes: 60
-    cancelTimeoutInMinutes: 5
+  # - job: Win32PR
+  #   displayName: Win32 PR
+  #   pool:
+  #     vmImage: 'windows-2019'
+  #   timeoutInMinutes: 60
+  #   cancelTimeoutInMinutes: 5
 
-    steps:
-      - checkout: self
-        persistCredentials: true
+  #   steps:
+  #     - checkout: self
+  #       persistCredentials: true
 
-      # yarn and minimal build to get set up
-      - template: templates/setup-repo-min-build.yml
+  #     # yarn and minimal build to get set up
+  #     - template: templates/setup-repo-min-build.yml
 
-      # bundle win32 and do end to end tests
-      - template: templates/e2e-testing-win32.yml
+  #     # bundle win32 and do end to end tests
+  #     - template: templates/e2e-testing-win32.yml
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks

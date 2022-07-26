@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/E2E/**/specs/*.macos.ts'],
+  specs: ['src/E2E/Button/specs/*.macos.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -16,8 +16,8 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'mac',
-      automationName: 'Mac2',
-      bundleId: 'com.microsoft.ReactTestApp',
+      'appium:automationName': 'Mac2',
+      'appium:bundleId': 'com.microsoft.ReactTestApp',
     },
   ],
 
@@ -101,6 +101,11 @@ exports.config = {
    */
   before: function () {
     require('ts-node').register({ files: true });
+
+    // Maximize app window
+    const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
+    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    maxButton.click();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
