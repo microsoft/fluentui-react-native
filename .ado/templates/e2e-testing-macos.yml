@@ -1,10 +1,5 @@
 steps:
   - script: |
-      pod install
-    workingDirectory: apps/macos/src
-    displayName: 'pod install'
-
-  - script: |
       yarn appium driver install mac2
     workingDirectory: apps/macos
     displayName: 'Installing appium mac2 driver'
