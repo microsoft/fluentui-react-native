@@ -6,13 +6,13 @@ import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const badgeName = 'Badge';
 export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'extraLarge'] as const;
-export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost', 'filledInverted'] as const;
+export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost'] as const;
 export const BadgeShapes = ['rounded', 'circular', 'square'] as const;
 export const BadgeColors = ['brand', 'danger', 'important', 'informative', 'severe', 'subtle', 'success', 'warning'] as const;
 export type BadgeSize = typeof BadgeSizes[number];
 export type BadgeAppearance = typeof BadgeAppearances[number];
 export type BadgeShape = typeof BadgeShapes[number];
-export type BadgeColor = typeof BadgeColors[number];
+export type BadgeColor = typeof BadgeColors[number] | ColorValue;
 
 export interface BadgeCoreProps {
   /**
@@ -66,6 +66,10 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    */
   iconColor?: ColorValue;
   /**
+   * The icon size.
+   */
+  iconSize?: number;
+  /**
    * Set the left edge of the Badge
    */
   left?: FlexStyle['left'];
@@ -104,16 +108,6 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
 }
 export interface BadgeTokens extends BadgeCoreTokens {
   /**
-   * The icon color when hovering over the Badge.
-   */
-  iconColorHovered?: ColorValue;
-
-  /**
-   * The icon color when the Badge is being pressed.
-   */
-  iconColorPressed?: ColorValue;
-
-  /**
    * The size of the icon.
    */
   iconSize?: number;
@@ -130,13 +124,18 @@ export interface BadgeTokens extends BadgeCoreTokens {
   outline?: BadgeTokens;
   tint?: BadgeTokens;
   ghost?: BadgeTokens;
-  filledInverted?: BadgeTokens;
 
   /**
-   * States that can be applied to a Badge
+   * Colors of the Badge
    */
-  hovered?: BadgeTokens;
-  focused?: BadgeTokens;
+  brand?: BadgeTokens;
+  danger?: BadgeTokens;
+  important?: BadgeTokens;
+  informative?: BadgeTokens;
+  severe?: BadgeTokens;
+  subtle?: BadgeTokens;
+  success?: BadgeTokens;
+  warning?: BadgeTokens;
 }
 
 export interface BadgeSlotProps {
