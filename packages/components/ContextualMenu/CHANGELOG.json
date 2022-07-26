@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Tue, 26 Jul 2022 19:30:23 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.18.2",
+      "version": "0.18.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.3",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.3",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.1",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.17.3",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/text to v0.12.1",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.1",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.3",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Jul 2022 21:27:20 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.18.1",
       "version": "0.18.1",
