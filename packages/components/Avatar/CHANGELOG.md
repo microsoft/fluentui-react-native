@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Mon, 25 Jul 2022 21:27:19 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Jul 2022 10:52:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.19
+
+Tue, 26 Jul 2022 10:52:03 GMT
+
+### Patches
+
+- Fixed bug with size of font icon (v.kozova13@gmail.com)
 
 ## 1.1.18
 

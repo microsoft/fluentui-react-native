@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Jul 2022 10:52:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.79.1
+
+Tue, 26 Jul 2022 10:52:03 GMT
+
+### Patches
+
+- Fixed bug with size of font icon (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.19
 
 ## 0.79.0
 
