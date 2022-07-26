@@ -6,6 +6,12 @@ exports[`Avatar rendering renders Avatar 1`] = `
   accessibilityRole="image"
   accessible={true}
   icon={null}
+  image={
+    Object {
+      "accessibilityLabel": undefined,
+      "source": undefined,
+    }
+  }
   initials=""
   shape="circular"
   style={
