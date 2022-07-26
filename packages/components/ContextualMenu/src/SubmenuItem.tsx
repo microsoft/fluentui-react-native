@@ -112,9 +112,9 @@ export const SubmenuItem = compose<SubmenuItemType>({
 
     const showSubmenuOnKeyDown = React.useCallback(
       (e: any) => {
-        const rtlOpenArrowKey = I18nManager.isRTL ? 'ArrowLeft' : 'ArrowRight';
+        const rtlAwareOpenArrowKey = I18nManager.isRTL ? 'ArrowLeft' : 'ArrowRight';
 
-        if (e.nativeEvent.key === rtlOpenArrowKey || e.nativeEvent.key === ' ' || e.nativeEvent.key === 'Enter') {
+        if (e.nativeEvent.key === rtlAwareOpenArrowKey || e.nativeEvent.key === ' ' || e.nativeEvent.key === 'Enter') {
           onItemHoverIn(e);
         }
       },
