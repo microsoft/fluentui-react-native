@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.1
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Add missing dependency (ruaraki@microsoft.com)
 
 ## 1.12.0
 

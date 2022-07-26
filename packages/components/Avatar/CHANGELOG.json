@@ -2,6 +2,84 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Tue, 26 Jul 2022 19:30:23 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.22",
+      "version": "1.1.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.9",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.1",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.17.3",
+            "commit": "138a3ae19c80f405dd69525b808c627ef83ee0a0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Jul 2022 12:52:48 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.21",
+      "version": "1.1.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.8",
+            "commit": "1893e04e9bd4d529af6425b7548ce3602cc63946"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Jul 2022 11:47:13 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.20",
+      "version": "1.1.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e",
+            "comment": "Changed Badge sizes according to Web"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.7",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 26 Jul 2022 10:52:03 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.19",
+      "version": "1.1.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "01016c2560c30d2df4932304a39c874ddd09f925",
+            "comment": "Fixed bug with size of font icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 25 Jul 2022 21:27:19 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.18",
       "version": "1.1.18",
