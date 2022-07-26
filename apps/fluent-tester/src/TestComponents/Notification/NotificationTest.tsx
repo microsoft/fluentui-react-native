@@ -15,11 +15,11 @@ const svgProps: SvgIconProps = {
 const iconProps = { svgSource: svgProps };
 
 const SHOW_HEIGHT = -50;
-const NOTIFICATION_SHOW_DURATION = 600;
+const TOAST_SHOW_DURATION = 600;
 const BAR_SHOW_DURATION = 300;
 const HIDE_DURATION = 250;
 const AUTO_HIDE_DURATION = 3000;
-const NOTIFICATION_BOUNCINESS = 1.5;
+const TOAST_BOUNCINESS = 1.5;
 const USE_NATIVE_DRIVER_IOS = true;
 
 const styles = StyleSheet.create({
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const CustomNotification: React.FunctionComponent = () => {
+const CustomToast: React.FunctionComponent = () => {
   const [variant, setVariant] = React.useState<NotificationVariant>('primary');
   const [title, setTitle] = React.useState("Kat's iPhoneX");
   const [message, setMessage] = React.useState('Listen to Emails • 7 mins');
@@ -122,9 +122,9 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
     Animated.sequence([
       Animated.timing(height, {
         toValue: SHOW_HEIGHT,
-        duration: NOTIFICATION_SHOW_DURATION,
+        duration: TOAST_SHOW_DURATION,
         useNativeDriver: USE_NATIVE_DRIVER_IOS,
-        easing: Easing.elastic(NOTIFICATION_BOUNCINESS),
+        easing: Easing.elastic(TOAST_BOUNCINESS),
       }),
       Animated.delay(AUTO_HIDE_DURATION),
       Animated.timing(height, {
@@ -256,11 +256,11 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
 
 const notificationSections: TestSection[] = [
   {
-    name: 'Custom Notification',
-    component: CustomNotification,
+    name: 'Custom Toast',
+    component: CustomToast,
   },
   {
-    name: 'Custom Bar Notification',
+    name: 'Custom Bar',
     component: CustomBar,
   },
   {

@@ -32,12 +32,12 @@ export interface NotificationProps {
   variant: NotificationVariant;
 
   /**
-   * Optional icon that appears on the left side of non-bar notifications
+   * Optional icon that appears on the left side of toast notifications
    */
   icon?: IconSourcesType;
 
   /**
-   * Optional icon that appears at the top of non-bar notifications
+   * Optional icon that appears at the top of toast notifications
    */
   title?: string;
 
