@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed bug with size of font icon",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
