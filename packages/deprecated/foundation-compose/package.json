@@ -51,6 +51,7 @@
   "depcheck": {
     "ignoreMatches": [
       "@fluentui-react-native/default-theme",
+      "@fluentui-react-native/memo-cache",
       "@fluentui-react-native/theme-types"
     ]
   }
