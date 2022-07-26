@@ -8,11 +8,11 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens> = () =>
     borderWidth: globalTokens.stroke.width.thin,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
-    smallest: {
+    tiny: {
       minWidth: 6,
       height: 6,
     },
-    smaller: {
+    extraSmall: {
       minWidth: 10,
       height: 10,
     },
@@ -36,7 +36,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens> = () =>
       paddingHorizontal: globalTokens.spacing.xs,
       iconSize: 16,
     },
-    largest: {
+    extraLarge: {
       minWidth: 32,
       height: 32,
       paddingHorizontal: globalTokens.spacing.sNudge,

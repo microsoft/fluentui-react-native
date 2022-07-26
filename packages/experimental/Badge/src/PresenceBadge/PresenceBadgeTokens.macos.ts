@@ -10,11 +10,11 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
     right: globalTokens.spacing.none,
     paddingHorizontal: globalTokens.spacing.none,
     backgroundColor: globalTokens.color.white,
-    smallest: {
+    tiny: {
       width: 6,
       height: 6,
     },
-    smaller: {
+    extraSmall: {
       width: 10,
       height: 10,
     },
@@ -31,7 +31,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
       height: 20,
       borderWidth: 2,
     },
-    largest: {
+    extraLarge: {
       width: 28,
       height: 28,
       borderWidth: 2,
