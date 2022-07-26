@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/E2E/**/specs/*.macos.ts'],
+  specs: ['src/E2E/Button/specs/*.macos.ts'],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -118,6 +118,21 @@ exports.config = {
     // const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
     // const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
     // maxButton.click();
+    let fluentTesterWindow = null;
+
+    // Maximize app window
+    browser.waitUntil(() => {
+      fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
+      return fluentTesterWindow != null;
+    },
+    {
+      timeout: 10000,
+      timeoutMsg: 'Could not maximize app window. Did not find window.',
+      interval: 500
+    });
+
+    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    maxButton.click();
   },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
