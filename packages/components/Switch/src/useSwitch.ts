@@ -31,7 +31,7 @@ export const useSwitch = (props: ButtonProps): SwitchState => {
     props: {
       ...pressable.props,
       accessible: true,
-      accessibilityRole: 'button',
+      accessibilityRole: 'toggle',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
