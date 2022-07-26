@@ -24,8 +24,9 @@ steps:
     workingDirectory: apps/fluent-tester
     displayName: 'run E2E macos tests'
     condition: succeeded()
+
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: macos
-      platform: macos
+      platform: 'macos'
       buildArtifacts: variables['task.Build.status']
