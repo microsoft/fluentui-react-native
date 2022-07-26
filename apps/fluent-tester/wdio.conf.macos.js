@@ -142,9 +142,9 @@ exports.config = {
   afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
-    if (results.passed) {
-      return;
-    }
+    //if (results.passed) {
+    //  return;
+    //}
 
     // get current test title and clean it, to use it as file name
     const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
