@@ -3,7 +3,7 @@ import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SwitchTokens } from './Switch.types';
 
-export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
+export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = () => ({
   // background: t.host.palette.BkgToggleSwitchOff,
   background: '#FFFFFF',
   // thumb: t.host.palette.ThumbToggleSwitchOff,
