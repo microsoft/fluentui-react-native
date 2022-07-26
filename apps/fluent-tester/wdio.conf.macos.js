@@ -101,11 +101,6 @@ exports.config = {
    */
   before: function () {
     require('ts-node').register({ files: true });
-
-    // Maximize app window
-    const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
-    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
-    maxButton.click();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -118,8 +113,12 @@ exports.config = {
    * Hook that gets executed before the suite starts
    * @param {Object} suite suite details
    */
-  // beforeSuite: function (suite) {
-  // },
+  beforeSuite: function () {
+    // Maximize app window
+    const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
+    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    maxButton.click();
+  },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
