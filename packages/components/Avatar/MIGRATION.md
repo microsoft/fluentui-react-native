@@ -118,7 +118,7 @@ Color tokens:
 
 ### Slots no longer supported with an equivalent functionality in v1 Avatar
 
-- `photo` => Use `image` slot instead or `imageUrl` prop.
+- `photo` => Use `image` prop instead or `imageUrl`.
 
 ### Slots no longer supported without an equivalent functionality in v1 Avatar
 

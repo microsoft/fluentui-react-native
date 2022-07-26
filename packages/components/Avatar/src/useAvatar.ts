@@ -1,3 +1,4 @@
+import { ImageProps, ImageSourcePropType } from 'react-native';
 import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
@@ -19,6 +20,8 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     activeAppearance,
     badge,
     idForColor,
+    image,
+    imageUrl,
     initials,
     name,
     shape,
@@ -42,6 +45,19 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     transparentRing: !!transparentRing,
     showBadge,
   };
+
+  let imageProps: ImageProps = {
+    accessibilityLabel,
+    source: imageUrl ? ({ uri: imageUrl } as ImageSourcePropType) : undefined,
+  };
+
+  if (image && image.source) {
+    const { source, ...restImageProps } = image;
+    imageProps = {
+      source,
+      ...restImageProps,
+    };
+  }
 
   const _initials = initials || getInitials(name);
   const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
@@ -73,6 +89,7 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       badgeStatus: badge?.status,
       initials: _initials,
       icon: iconProps,
+      image: imageProps,
       outOfOffice: badge?.outOfOffice,
       shape: shape ?? 'circular',
       size,
