@@ -5,7 +5,7 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
   ({
-    badgeSize: 'smallest',
+    badgeSize: 'tiny',
     color: t.colors.neutralForeground3,
     backgroundColor: t.colors.neutralBackground6,
     avatarOpacity: 1,
@@ -29,7 +29,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     },
     size20: {
       size: 20,
-      badgeSize: 'smallest',
+      badgeSize: 'tiny',
       iconSize: 16,
       fontSize: globalTokens.font.size[100],
       square: {
@@ -38,7 +38,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     },
     size24: {
       size: 24,
-      badgeSize: 'smallest',
+      badgeSize: 'tiny',
       iconSize: 16,
       fontSize: globalTokens.font.size[100],
       square: {
@@ -47,20 +47,20 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     },
     size28: {
       size: 28,
-      badgeSize: 'smaller',
+      badgeSize: 'extraSmall',
       iconSize: 20,
       fontWeight: globalTokens.font.weight.semibold,
       fontSize: globalTokens.font.size[100],
     },
     size32: {
       size: 32,
-      badgeSize: 'smaller',
+      badgeSize: 'extraSmall',
       iconSize: 20,
       fontSize: globalTokens.font.size[100],
     },
     size36: {
       size: 36,
-      badgeSize: 'smaller',
+      badgeSize: 'extraSmall',
       iconSize: 20,
     },
     size40: {
@@ -102,7 +102,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     },
     size96: {
       size: 96,
-      badgeSize: 'largest',
+      badgeSize: 'extraLarge',
       iconSize: 48,
       fontWeight: globalTokens.font.weight.regular,
       fontSize: globalTokens.font.size[700],
@@ -112,7 +112,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     },
     size120: {
       size: 120,
-      badgeSize: 'largest',
+      badgeSize: 'extraLarge',
       iconSize: 48,
       fontWeight: globalTokens.font.weight.regular,
       fontSize: globalTokens.font.size[900],

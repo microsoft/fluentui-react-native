@@ -5,12 +5,12 @@ import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
-  'smallest',
-  'smaller',
+  'tiny',
+  'extraSmall',
   'small',
   'medium',
   'large',
-  'largest',
+  'extraLarge',
   'rounded',
   'circular',
   'square',
