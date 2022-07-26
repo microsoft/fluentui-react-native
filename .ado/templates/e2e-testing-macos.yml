@@ -1,12 +1,12 @@
 steps:
   - script: |
       yarn appium driver install mac2
-    workingDirectory: apps/macos
+    workingDirectory: apps/fluent-tester
     displayName: 'Installing appium mac2 driver'
 
   - script: |
       yarn macos
-    workingDirectory: apps/macos
+    workingDirectory: apps/fluent-tester
     displayName: 'start the server'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
@@ -22,8 +22,8 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn e2etest
-    workingDirectory: apps/macos
+      yarn e2etest:macos
+    workingDirectory: apps/fluent-tester
     displayName: 'run E2E macos tests'
     condition: succeeded()
 
