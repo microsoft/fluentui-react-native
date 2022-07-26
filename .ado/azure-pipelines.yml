@@ -70,7 +70,7 @@ jobs:
           JAVA_HOME: $(JAVA_HOME_11_X64)
           PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
-  - job: MacPR
+  - job: macOSPR
     displayName: MacOS PR
     pool:
       vmImage: 'internal-macos12'
