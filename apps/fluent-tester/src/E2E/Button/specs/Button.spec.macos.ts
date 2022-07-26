@@ -14,7 +14,7 @@ describe('Button Testing Initialization', function () {
 
     // Maximize app window
     browser.waitUntil(() => {
-      fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
+      fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
       return fluentTesterWindow != null;
     })
 
