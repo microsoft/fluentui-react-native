@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 26 Jul 2022 11:47:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.79.2",
+      "version": "0.79.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e",
+            "comment": "Changed Badge sizes according to Web"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.20",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.7",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 10:52:03 GMT",
       "tag": "@fluentui-react-native/tester_v0.79.1",
       "version": "0.79.1",

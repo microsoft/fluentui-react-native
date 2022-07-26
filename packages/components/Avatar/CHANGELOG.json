@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Tue, 26 Jul 2022 11:47:13 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.20",
+      "version": "1.1.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e",
+            "comment": "Changed Badge sizes according to Web"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.7",
+            "commit": "34e420fb676115a6cb4a10d5b8efea59300d7a0e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 10:52:03 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.19",
       "version": "1.1.19",
