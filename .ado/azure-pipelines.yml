@@ -156,7 +156,7 @@ jobs:
       # bundle windows adn do end to end tests
       - template: templates/e2e-testing-uwp.yml
 
-  Win32 bundling and end to end testing
+  # Win32 bundling and end to end testing
   - job: Win32PR
     displayName: Win32 PR
     pool:
