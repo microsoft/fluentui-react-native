@@ -114,10 +114,10 @@ exports.config = {
    * @param {Object} suite suite details
    */
   beforeSuite: function () {
-    // Maximize app window
-    const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
-    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
-    maxButton.click();
+    // // Maximize app window
+    // const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
+    // const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    // maxButton.click();
   },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
