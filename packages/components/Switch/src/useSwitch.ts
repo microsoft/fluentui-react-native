@@ -19,7 +19,6 @@ export const useSwitch = (props: ButtonProps): SwitchState => {
 
     LayoutAnimation.configureNext(LayoutAnimation.create(250, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
     setCheckedState(newCheckedState);
-
   };
 
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
@@ -31,7 +30,7 @@ export const useSwitch = (props: ButtonProps): SwitchState => {
     props: {
       ...pressable.props,
       accessible: true,
-      accessibilityRole: 'toggle',
+      accessibilityRole: 'switch',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),

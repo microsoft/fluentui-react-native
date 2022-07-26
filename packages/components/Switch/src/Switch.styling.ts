@@ -23,13 +23,14 @@ export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, Sw
     track: buildProps(
       (tokens: SwitchTokens) => ({
         style: {
+          flexDirection: 'row',
           height: 20,
           borderRadius: 50,
-          width: 40,
+          minWidth: 40,
           backgroundColor: tokens.background,
           borderColor: tokens.stroke,
           borderWidth: 1,
-          padding: 3,
+          padding: 2,
         },
       }),
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
