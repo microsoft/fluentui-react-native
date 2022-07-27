@@ -44,7 +44,8 @@ export const useSwitch = (props: ButtonProps): SwitchState => {
     },
     state: {
       ...pressable.state,
-      checked: checkedState,
+      toggleOn: checkedState == true,
+      toggleOff: checkedState == false,
     },
   };
 };

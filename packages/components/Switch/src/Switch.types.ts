@@ -13,7 +13,6 @@ export type ButtonAppearance = 'primary' | 'subtle';
 export type ButtonShape = 'rounded' | 'circular' | 'square';
 
 export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
-
   /**
    * Track color
    */
@@ -27,7 +26,9 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Stroke color
    */
-  stroke ?: ColorValue;
+  stroke?: ColorValue;
+
+  justifyContent?: ViewStyle['justifyContent'];
 
   /**
    * The icon color.
@@ -67,6 +68,8 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   pressed?: SwitchTokens;
   disabled?: SwitchTokens;
   checked?: SwitchTokens;
+  toggleOn?: SwitchTokens;
+  toggleOff?: SwitchTokens;
 }
 
 export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -147,7 +150,7 @@ export interface ButtonProps extends ButtonCoreProps {
 // export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 export interface SwitchState {
   props: IWithPressableEvents<ButtonProps & React.ComponentPropsWithRef<any>>;
-  state: IPressableState & { checked: boolean };
+  state: IPressableState & { toggleOn: boolean; toggleOff: boolean };
 }
 
 export interface SwitchSlotProps {

@@ -63,8 +63,8 @@ export const Switch = compose<SwitchType>({
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           <Slots.label>Label</Slots.label>
-          <Slots.track style={[!button.state.checked ? { justifyContent: 'flex-start' } : { justifyContent: 'flex-end' }]}>
-            <Slots.thumb />
+          <Slots.track>
+            <Slots.thumb style={[!button.state.toggleOn ? { justifyContent: 'flex-start' } : { justifyContent: 'flex-end' }]} />
           </Slots.track>
         </Slots.root>
       );

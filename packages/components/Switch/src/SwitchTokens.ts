@@ -9,5 +9,15 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = () => ({
   // thumb: t.host.palette.ThumbToggleSwitchOff,
   thumb: '#505050',
   stroke: '#505050',
+
   // stroke: t.host.palette.StrokeToggleSwitchOff
+  toggleOn: {
+    background: '#0F6CBD',
+    justifyContent: 'flex-end',
+  },
+
+  toggleOff: {
+    background: '#FFFFFF',
+    justifyContent: 'flex-start',
+  },
 });

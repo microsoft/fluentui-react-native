@@ -3,7 +3,7 @@ import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework'
 import { borderStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
 
-export const switchStates: (keyof SwitchTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
+export const switchStates: (keyof SwitchTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'toggleOn', 'toggleOff'];
 
 export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, SwitchTokens> = {
   tokens: [defaultSwitchTokens, buttonName],
@@ -31,6 +31,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, Sw
           borderColor: tokens.stroke,
           borderWidth: 1,
           padding: 2,
+          justifyContent: tokens.justifyContent,
         },
       }),
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
