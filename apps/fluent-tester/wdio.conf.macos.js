@@ -114,20 +114,15 @@ exports.config = {
    * @param {Object} suite suite details
    */
   beforeSuite: function () {
-    // // Maximize app window
-    // const fluentTesterWindow = $('//*[@title="FluentTester" and @elementType=4]');
-    // const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
-    // maxButton.click();
-    let fluentTesterWindow = null;
-
     // Maximize app window
+    let fluentTesterWindow = null;
     browser.waitUntil(() => {
       fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
       return fluentTesterWindow != null;
     },
     {
       timeout: 10000,
-      timeoutMsg: 'Could not maximize app window. Did not find window.',
+      timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
       interval: 500
     });
 

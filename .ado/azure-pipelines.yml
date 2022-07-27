@@ -71,7 +71,7 @@ jobs:
           PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
   - job: macOSPR
-    displayName: MacOS PR
+    displayName: macOS PR
     pool:
       vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
