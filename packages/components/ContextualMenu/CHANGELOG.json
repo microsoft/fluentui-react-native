@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Wed, 27 Jul 2022 02:32:13 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.18.3",
+      "version": "0.18.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "patboyd@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "ab1ca1326844f8578a4992455366a638125b3c71",
+            "comment": "Enable the Space and Enter keys to open SubmenuItems"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 19:30:23 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.18.2",
       "version": "0.18.2",

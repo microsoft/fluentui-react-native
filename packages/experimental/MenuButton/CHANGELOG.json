@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Wed, 27 Jul 2022 02:32:13 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.4.10",
+      "version": "0.4.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.3",
+            "commit": "ab1ca1326844f8578a4992455366a638125b3c71"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 19:30:23 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.4.9",
       "version": "0.4.9",

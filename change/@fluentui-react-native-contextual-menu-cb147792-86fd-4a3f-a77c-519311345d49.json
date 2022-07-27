@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Enable the Space and Enter keys to open SubmenuItems",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "patboyd@microsoft.com",
-  "dependentChangeType": "patch"
-}

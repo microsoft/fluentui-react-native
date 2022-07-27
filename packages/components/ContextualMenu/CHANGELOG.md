@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Jul 2022 02:32:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.3
+
+Wed, 27 Jul 2022 02:32:13 GMT
+
+### Patches
+
+- Enable the Space and Enter keys to open SubmenuItems (patboyd@microsoft.com)
 
 ## 0.18.2
 
