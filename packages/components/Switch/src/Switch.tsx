@@ -1,12 +1,11 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { buttonName, SwitchType, ButtonProps } from './Switch.types';
+import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 // import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
-import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 // import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -16,24 +15,12 @@ import { IPressableState } from '@fluentui-react-native/interactive-hooks';
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-export const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonProps): boolean => {
-  return (
-    state[layer] ||
-    userProps[layer] ||
-    layer === userProps['appearance'] ||
-    layer === userProps['size'] ||
-    (!userProps['size'] && layer === 'small') ||
-    layer === userProps['shape'] ||
-    (!userProps['shape'] && layer === 'rounded') ||
-    (layer === 'hovered' && state[layer] && !userProps.loading) ||
-    (layer === 'hasContent' && !userProps.iconOnly) ||
-    (layer === 'hasIconAfter' && (userProps.icon || userProps.loading) && userProps.iconPosition === 'after') ||
-    (layer === 'hasIconBefore' && (userProps.icon || userProps.loading) && (!userProps.iconPosition || userProps.iconPosition === 'before'))
-  );
+export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
+  return state[layer] || userProps[layer];
 };
 
 export const Switch = compose<SwitchType>({
-  displayName: buttonName,
+  displayName: switchName,
   ...stylingSettings,
   slots: {
     root: View,
@@ -41,15 +28,15 @@ export const Switch = compose<SwitchType>({
     track: View,
     thumb: View,
   },
-  useRender: (userProps: ButtonProps, useSlots: UseSlots<SwitchType>) => {
-    const button = useSwitch(userProps);
+  useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
+    const switchInfo = useSwitch(userProps);
+
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonProps, ...children: React.ReactNode[]) => {
-      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
-
+    return (final: SwitchProps, ...children: React.ReactNode[]) => {
+      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
       let childText = '';
       if (accessibilityLabel === undefined) {
         React.Children.forEach(children, (child) => {

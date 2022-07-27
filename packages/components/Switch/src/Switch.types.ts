@@ -102,15 +102,28 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   componentRef?: React.RefObject<IFocusable>;
 
-  onClick?: (e: InteractionEvent, checked: boolean) => void;
+  onChange?: (e: InteractionEvent, checked: boolean) => void;
+
+  defaultChecked?: boolean;
 
   checked?: boolean;
+
+  label?: string;
+
+  labelPosition?: 'before' | 'above' | 'after';
 }
 
 // export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
-export interface SwitchState {
+// export interface SwitchState {
+//   props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
+//   state: IPressableState & { toggleOn: boolean; toggleOff: boolean };
+// }
+
+export type SwitchState = IPressableState & { toggleOn: boolean; toggleOff: boolean };
+
+export interface SwitchInfo {
   props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
-  state: IPressableState & { toggleOn: boolean; toggleOff: boolean };
+  state: SwitchState;
 }
 
 export interface SwitchSlotProps {

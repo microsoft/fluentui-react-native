@@ -1,12 +1,12 @@
-import { buttonName, SwitchTokens, SwitchSlotProps, ButtonProps } from './Switch.types';
+import { switchName, SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
 
 export const switchStates: (keyof SwitchTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'toggleOn', 'toggleOff'];
 
-export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, SwitchTokens> = {
-  tokens: [defaultSwitchTokens, buttonName],
+export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, SwitchTokens> = {
+  tokens: [defaultSwitchTokens, switchName],
   states: switchStates,
   slotProps: {
     root: buildProps(

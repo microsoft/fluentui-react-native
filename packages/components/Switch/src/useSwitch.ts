@@ -1,21 +1,22 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { SwitchProps, SwitchState } from './Switch.types';
+import { SwitchProps, SwitchInfo } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState, LayoutAnimation } from 'react-native';
 
-export const useSwitch = (props: SwitchProps): SwitchState => {
+export const useSwitch = (props: SwitchProps): SwitchInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, checked, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const { onChange, checked, defaultChecked, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
   const isDisabled = !!disabled;
-  const [checkedState, setCheckedState] = React.useState(checked);
+  const initialCheckedState = !!(checked ?? defaultChecked);
+  const [checkedState, setCheckedState] = React.useState(initialCheckedState);
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
 
   const toggleCallback = (e: any) => {
     const newCheckedState = !checkedState;
-    onClick && onClick(e, newCheckedState);
+    onChange && onChange(e, newCheckedState);
 
     LayoutAnimation.configureNext(LayoutAnimation.create(250, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
     setCheckedState(newCheckedState);
@@ -31,7 +32,7 @@ export const useSwitch = (props: SwitchProps): SwitchState => {
       ...pressable.props,
       accessible: true,
       accessibilityRole: 'switch',
-      onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
+      onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onChange : undefined),
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: true,
