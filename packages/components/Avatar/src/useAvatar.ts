@@ -52,10 +52,9 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   };
 
   if (image && image.source) {
-    const { source, ...restImageProps } = image;
     imageProps = {
-      source,
-      ...restImageProps,
+      ...image,
+      accessibilityLabel: image.accessibilityLabel ?? accessibilityLabel,
     };
   }
 

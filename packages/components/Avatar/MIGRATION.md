@@ -34,6 +34,8 @@
 - `name` - is used for generation initials with `getInitials` method.
 - `shape` - can be `circular` and `square`.
 - `idForColor`
+- `image`- image object.
+- `imageUrl` - Shorthand for passing image URL instead of using `image` prop.
 
 ### Tokens that remain as is
 
