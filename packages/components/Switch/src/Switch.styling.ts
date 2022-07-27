@@ -16,6 +16,8 @@ export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, Sw
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
+          height: 28,
+          padding: 6,
         },
       }),
       [],
@@ -47,5 +49,10 @@ export const stylingSettings: UseStylingOptions<ButtonProps, SwitchSlotProps, Sw
       }),
       [],
     ),
+    label: buildProps(() => ({
+      style: {
+        marginLeft: 10,
+      },
+    })),
   },
 };

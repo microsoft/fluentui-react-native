@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { ButtonProps, SwitchState } from './Switch.types';
+import { SwitchProps, SwitchState } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState, LayoutAnimation } from 'react-native';
 
-export const useSwitch = (props: ButtonProps): SwitchState => {
+export const useSwitch = (props: SwitchProps): SwitchState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, checked, accessibilityState, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, ...rest } = props;
-  const isDisabled = !!disabled || !!loading;
+  const { onClick, checked, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const isDisabled = !!disabled;
   const [checkedState, setCheckedState] = React.useState(checked);
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
@@ -34,12 +34,10 @@ export const useSwitch = (props: ButtonProps): SwitchState => {
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
-      enableFocusRing: enableFocusRing ?? true,
+      enableFocusRing: true,
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
-      iconPosition: props.iconPosition || 'before',
-      loading,
       checked: props.checked || false,
     },
     state: {

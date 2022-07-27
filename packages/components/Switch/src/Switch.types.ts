@@ -7,7 +7,7 @@ import { IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
-export const buttonName = 'Button';
+export const switchName = 'Switch';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonAppearance = 'primary' | 'subtle';
 export type ButtonShape = 'rounded' | 'circular' | 'square';
@@ -92,7 +92,6 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
   /**
    * A callback to call on button click event
    */
-  onClick?: (e: InteractionEvent, checked: boolean) => void;
 
   /**
    * Text that should show in a tooltip when the user hovers over a button.
@@ -100,56 +99,17 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
   tooltip?: string;
 }
 
-export interface ButtonProps extends ButtonCoreProps {
-  /**
-   * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary': Emphasizes the button as a primary action.
-   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
-   */
-  appearance?: ButtonAppearance;
+export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+  componentRef?: React.RefObject<IFocusable>;
 
-  /**
-   * A button can fill the width of its container.
-   * @default false
-   */
-  block?: boolean;
-
-  /**
-   * Whether to use native focus visuals for the component
-   * @default true
-   */
-  enableFocusRing?: boolean;
-
-  /** Sets style of button to a preset size style
-   * @default 'small' on win32, 'medium' elsewhere
-   */
-  size?: ButtonSize;
-
-  /**
-   * Button shape: 'rounded' | 'circular' | 'square'
-   * @default 'rounded'
-   */
-  shape?: ButtonShape;
-
-  /**
-   * Icon can be placed before or after Button's content.
-   * @default 'before'
-   */
-  iconPosition?: 'before' | 'after';
-
-  /**
-   * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
-   * be interacted with.
-   * @default false
-   */
-  loading?: boolean;
+  onClick?: (e: InteractionEvent, checked: boolean) => void;
 
   checked?: boolean;
 }
 
 // export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
 export interface SwitchState {
-  props: IWithPressableEvents<ButtonProps & React.ComponentPropsWithRef<any>>;
+  props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
   state: IPressableState & { toggleOn: boolean; toggleOff: boolean };
 }
 
@@ -161,7 +121,7 @@ export interface SwitchSlotProps {
 }
 
 export interface SwitchType {
-  props: ButtonProps;
+  props: SwitchProps;
   tokens: SwitchTokens;
   slotProps: SwitchSlotProps;
 }
