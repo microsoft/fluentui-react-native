@@ -6,7 +6,7 @@ parameters:
 
 steps:
   # Copy Appium reports to FluentTesterDump. Only Win32 reports are located within
-  # it's platform-specific folder, not /fluent-tester, which is why I added the last condition
+  # its platform-specific folder, not /fluent-tester, which is why I added the last condition
   - task: CopyFiles@2
     inputs:
       sourceFolder: apps/fluent-tester/reports
