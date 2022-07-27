@@ -8,6 +8,7 @@ export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
   ...BadgeSizes,
   ...BadgeShapes,
   'iconColor',
+  'iconSize',
   'top',
   'right',
   'bottom',
@@ -24,7 +25,6 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       (tokens: BadgeTokens, theme: Theme) => ({
         style: {
           ...getBadgePosition(tokens),
-          display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
@@ -39,14 +39,12 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     icon: buildProps(
-      (tokens: BadgeTokens, theme: Theme) => ({
-        style: {
-          height: tokens.iconSize,
-          width: tokens.iconSize,
-          ...layoutStyles.from(tokens, theme),
-        },
+      (tokens: BadgeTokens) => ({
+        color: tokens.iconColor || tokens.color,
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['width', 'height', ...layoutStyles.keys],
+      ['width', 'height', 'iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
       (tokens: BadgeTokens) => ({
