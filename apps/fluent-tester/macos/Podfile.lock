@@ -15,13 +15,13 @@ PODS:
     - MicrosoftFluentUI (= 0.5.2)
     - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
     - React
-  - FRNCallout (0.21.2):
+  - FRNCallout (0.21.1):
     - React
-  - FRNCheckbox (0.12.4):
+  - FRNCheckbox (0.12.3):
     - React
-  - FRNMenuButton (0.8.8):
+  - FRNMenuButton (0.8.6):
     - React
-  - FRNRadioButton (0.15.2):
+  - FRNRadioButton (0.15.1):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.5.2):
@@ -103,7 +103,7 @@ PODS:
     - DoubleConversion
     - fmt (~> 6.2.1)
     - glog
-  - RCTFocusZone (0.10.2):
+  - RCTFocusZone (0.10.1):
     - React
   - RCTRequired (0.66.61)
   - RCTTypeSafety (0.66.61):
@@ -512,14 +512,14 @@ SPEC CHECKSUMS:
   FBReactNativeSpec: 768546ea603d7382d39bce4acf11897140b5e977
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   FRNAvatar: 827ebe75e839ce442c88cc6a23940aa614ca7946
-  FRNCallout: d9f3f115fb76c682389ef8c0bdade74357e90959
-  FRNCheckbox: 23ef5b95f7682addb8f958def84d795a0a63723d
-  FRNMenuButton: faf1caeadb6ad1cd240ccebe5f965376f2cd4d59
-  FRNRadioButton: 4aae244db04c8cb65e3581f4bb5190236092045a
+  FRNCallout: d7f7c2f2ca08c564898b4fa877bbde9975ab8457
+  FRNCheckbox: e7050c7db1b4c48b92437f012bf034e5f297ae59
+  FRNMenuButton: c736bbb42dc3a1965eca2cea997561438f489103
+  FRNRadioButton: f9bb2366b8077c045d5c6a120eeb0b01b96529b8
   glog: 42c4bf47024808486e90b25ea9e5ac3959047641
   MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
   RCT-Folly: 43adc9ce880eb76792f88c011773cb5c664c1419
-  RCTFocusZone: e6821841ab4346bec77cd06192c068420309f076
+  RCTFocusZone: 959220571a9994ca90490b994d28e79e30f41d2b
   RCTRequired: 5d9c6fe63ff2606a93e9e2812cfede283ff98571
   RCTTypeSafety: 31e44236c2161f101e1135696c3e8f35bb705430
   React: 68fcf6fed1c1607eb7dbf6bf8259b04cc440295a
