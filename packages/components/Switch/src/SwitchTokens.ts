@@ -4,20 +4,27 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
-  // background: t.host.palette.BkgToggleSwitchOff,
-  background: t.colors.ThumbToggleSwitchOff,
-  // thumb: t.host.palette.ThumbToggleSwitchOff,
-  thumb: '#505050',
-  stroke: '#505050',
+  background: t.colors.neutralForegroundInvertedLink,
+  thumb: t.colors.neutralStrokeAccessible,
+  stroke: t.colors.neutralStrokeAccessible,
 
   // stroke: t.host.palette.StrokeToggleSwitchOff
   toggleOn: {
-    background: t.colors.neutralStroke1,
+    background: t.colors.compoundBrandBackground1,
+    thumb: t.colors.neutralForegroundInverted,
+    stroke: t.colors.compoundBrandBackground1,
     justifyContent: 'flex-end',
   },
 
   toggleOff: {
-    background: t.colors.ThumbToggleSwitchOff,
+    background: t.colors.neutralForegroundInvertedLink,
+    thumb: t.colors.neutralStrokeAccessible,
+    stroke: t.colors.neutralStrokeAccessible,
     justifyContent: 'flex-start',
+    hover: {
+      background: t.colors.neutralForegroundInvertedLinkHover,
+      thumb: t.colors.neutralStrokeAccessibleHover,
+      stroke: t.colors.neutralStrokeAccessibleHover,
+    },
   },
 });

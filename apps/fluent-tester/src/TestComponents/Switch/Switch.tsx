@@ -6,7 +6,13 @@ import { Switch } from '@fluentui-react-native/switch';
 const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
-      <Switch />
+      <Switch
+        onChange={(e, s) => {
+          console.log(s);
+        }}
+        defaultChecked={true}
+        label={'demo'}
+      />
     </View>
   );
 };

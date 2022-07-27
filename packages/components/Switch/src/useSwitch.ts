@@ -35,11 +35,11 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onChange : undefined),
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
-      enableFocusRing: true,
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
-      checked: props.checked || false,
+      checked: checkedState,
+      label: props.label,
     },
     state: {
       ...pressable.state,

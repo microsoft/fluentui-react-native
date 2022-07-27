@@ -110,14 +110,12 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   label?: string;
 
+  offText?: string;
+
+  onString?: string;
+
   labelPosition?: 'before' | 'above' | 'after';
 }
-
-// export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
-// export interface SwitchState {
-//   props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
-//   state: IPressableState & { toggleOn: boolean; toggleOff: boolean };
-// }
 
 export type SwitchState = IPressableState & { toggleOn: boolean; toggleOff: boolean };
 

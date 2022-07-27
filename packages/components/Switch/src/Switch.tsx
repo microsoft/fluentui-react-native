@@ -35,24 +35,15 @@ export const Switch = compose<SwitchType>({
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, userProps));
 
     // now return the handler for finishing render
-    return (final: SwitchProps, ...children: React.ReactNode[]) => {
-      const { icon, iconOnly, iconPosition, loading, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
-      let childText = '';
-      if (accessibilityLabel === undefined) {
-        React.Children.forEach(children, (child) => {
-          if (typeof child === 'string') {
-            childText = child; // We only automatically support the one child string.
-          }
-        });
-      }
-      const label = accessibilityLabel ?? childText;
+    return (final: SwitchProps) => {
+      const { label, offText, onText, labelPosition, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           <Slots.track>
             <Slots.thumb />
           </Slots.track>
-          <Slots.label>Label</Slots.label>
+          <Slots.label>{label}</Slots.label>
         </Slots.root>
       );
     };
