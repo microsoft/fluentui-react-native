@@ -3,10 +3,12 @@ steps:
       yarn appium driver install mac2
     workingDirectory: apps/fluent-tester
     displayName: 'Installing appium mac2 driver'
+
   - script: |
       yarn macos
     workingDirectory: apps/fluent-tester
     displayName: 'start the server'
+
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
   # those reporting tasks run even on when certain previous tasks fail. This variable allows us to differentiate build failures from
