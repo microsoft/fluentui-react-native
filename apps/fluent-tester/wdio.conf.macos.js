@@ -114,7 +114,8 @@ exports.config = {
    * @param {Object} suite suite details
    */
   beforeSuite: function () {
-    // Maximize app window
+    // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
+    // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
     let fluentTesterWindow = null;
     browser.waitUntil(() => {
       fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
