@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Changed size tokens, added icon to the Tester for the Badge",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
