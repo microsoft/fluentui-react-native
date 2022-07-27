@@ -25,10 +25,10 @@ const USE_NATIVE_DRIVER_IOS = true;
 const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
-    marginBottom: 100,
+    marginBottom: 50,
   },
   notification: {
-    marginTop: 70,
+    marginTop: 10,
   },
   textInput: {
     borderWidth: 1,

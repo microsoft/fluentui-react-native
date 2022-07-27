@@ -24,11 +24,9 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           backgroundColor: tokens.backgroundColor,
           borderColor: tokens.borderColor,
-          bottom: 0,
           flex: 1,
           flexDirection: 'row',
           justifyContent: 'space-between',
-          position: 'absolute',
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
