@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Notification, NotificationVariant, NotificationVariants } from '@fluentui-react-native/notification';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Animated, Easing, StyleSheet, Switch, TextInput, View } from 'react-native';
+import { Animated, StyleSheet, Switch, TextInput, View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { StyledPicker } from '../Common/StyledPicker';
@@ -15,11 +15,9 @@ const svgProps: SvgIconProps = {
 const iconProps = { svgSource: svgProps };
 
 const SHOW_HEIGHT = -50;
-const TOAST_SHOW_DURATION = 600;
 const BAR_SHOW_DURATION = 300;
 const HIDE_DURATION = 250;
 const AUTO_HIDE_DURATION = 3000;
-const TOAST_BOUNCINESS = 1.5;
 const USE_NATIVE_DRIVER_IOS = true;
 
 const styles = StyleSheet.create({
@@ -120,11 +118,11 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
   const show = () => {
     setHidden(false);
     Animated.sequence([
-      Animated.timing(height, {
+      Animated.spring(height, {
         toValue: SHOW_HEIGHT,
-        duration: TOAST_SHOW_DURATION,
+        bounciness: 16,
+        speed: 20,
         useNativeDriver: USE_NATIVE_DRIVER_IOS,
-        easing: Easing.elastic(TOAST_BOUNCINESS),
       }),
       Animated.delay(AUTO_HIDE_DURATION),
       Animated.timing(height, {
