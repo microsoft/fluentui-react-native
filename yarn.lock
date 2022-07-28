@@ -3679,7 +3679,7 @@ appdirsjs@^1.2.4:
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.6.tgz#fccf9ee543315492867cacfcfd4a2b32257d30ac"
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
-appium-mac2-driver@^1.1.4:
+appium-mac2-driver@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.0.tgz#6059bcaada3608505c2b2f2535d33b7cc43c2584"
   integrity sha512-gKdQOrl1esSfrXh5JCA+cs1YKoj7m+TU9NdpEgd1z5OE+0nAD17E0wqrl89drVzACdugejf7U8KQ2MmIUzXMBQ==
