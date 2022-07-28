@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 28 Jul 2022 22:52:47 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Jul 2022 23:57:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.81.1
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Add PlatformColor case (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.25
+- Bump @fluentui-react-native/badge to v0.1.11
+- Bump @fluentui-react-native/button to v0.24.9
+- Bump @fluentui-react-native/experimental-button to v0.16.9
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.11
+- Bump @fluentui-react-native/experimental-tabs to v0.5.6
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+- Bump @fluentui-react-native/menu to v1.0.18
+- Bump @fluentui-react-native/notification to v0.10.1
+- Bump @fluentui-react-native/win32-theme to v0.20.1
+- Bump @fluentui/react-native to v0.31.11
 
 ## 0.81.0
 
