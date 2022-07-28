@@ -49,6 +49,10 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    */
   width?: ViewStyle['width'];
 
+  flexDirection?: ViewStyle['flexDirection'];
+
+  labelMargin?: ViewStyle['margin'];
+
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
@@ -69,6 +73,9 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   checked?: SwitchTokens;
   toggleOn?: SwitchTokens;
   toggleOff?: SwitchTokens;
+  before?: SwitchTokens;
+  after?: SwitchTokens;
+  above?: SwitchTokens;
 }
 
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {

@@ -17,7 +17,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     const newCheckedState = !checkedState;
     onChange && onChange(e, newCheckedState);
 
-    LayoutAnimation.configureNext(LayoutAnimation.create(250, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
+    LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
     setCheckedState(newCheckedState);
   };
 
@@ -39,6 +39,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       ...onKeyUpProps,
       checked: checkedState,
       label: props.label,
+      labelPosition: props.labelPosition ?? 'after',
     },
     state: {
       ...pressable.state,

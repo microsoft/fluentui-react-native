@@ -4,11 +4,17 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
-  // hovered: {
-  //   background: t.colors.redBackground1,
-  //   thumb: t.colors.redBackground1,
-  //   stroke: t.colors.compoundBrandBackground1Hover,
-  // },
+  before: {
+    flexDirection: 'row-reverse',
+  },
+
+  above: {
+    flexDirection: 'column-reverse',
+  },
+
+  after: {
+    flexDirection: 'row',
+  },
 
   toggleOn: {
     background: t.colors.compoundBrandBackground1,
@@ -38,7 +44,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     stroke: t.colors.neutralStrokeAccessible,
     justifyContent: 'flex-start',
     hovered: {
-      // background: t.colors.neutralForegroundInvertedLinkHover,
       background: t.colors.neutralForegroundInvertedLinkHover,
       thumb: t.colors.neutralStrokeAccessibleHover,
       stroke: t.colors.neutralStrokeAccessibleHover,

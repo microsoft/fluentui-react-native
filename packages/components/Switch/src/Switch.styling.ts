@@ -3,24 +3,34 @@ import { UseStylingOptions, Theme, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
 
-export const switchStates: (keyof SwitchTokens)[] = ['toggleOn', 'toggleOff', 'hovered', 'focused', 'pressed', 'disabled'];
+export const switchStates: (keyof SwitchTokens)[] = [
+  'toggleOn',
+  'toggleOff',
+  'before',
+  'after',
+  'above',
+  'hovered',
+  'focused',
+  'pressed',
+  'disabled',
+];
 
 export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, SwitchTokens> = {
   tokens: [defaultSwitchTokens, switchName],
   states: switchStates,
   slotProps: {
     root: buildProps(
-      () => ({
+      (tokens: SwitchTokens) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
-          flexDirection: 'row',
+          flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
-          height: 28,
+          minHeight: 28,
           padding: 6,
         },
       }),
-      [],
+      ['flexDirection'],
     ),
     track: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
@@ -52,10 +62,14 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       }),
       [],
     ),
-    label: buildProps(() => ({
-      style: {
-        marginLeft: 10,
-      },
-    })),
+    label: buildProps(
+      () => ({
+        style: {
+          color: 'black',
+          margin: 0,
+        },
+      }),
+      ['labelMargin'],
+    ),
   },
 };

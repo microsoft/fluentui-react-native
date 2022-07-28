@@ -16,7 +16,7 @@ import { useSwitch } from './useSwitch';
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
-  return state[layer] || userProps[layer] || (layer === 'hovered' && state[layer]);
+  return state[layer] || userProps[layer] || layer === userProps['labelPosition'];
 };
 
 export const Switch = compose<SwitchType>({
@@ -36,7 +36,7 @@ export const Switch = compose<SwitchType>({
 
     // now return the handler for finishing render
     return (final: SwitchProps) => {
-      const { label, offText, onText, labelPosition, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
+      const { label, offText, onText, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>

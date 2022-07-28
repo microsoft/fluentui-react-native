@@ -12,6 +12,7 @@ const StandardUsage: React.FunctionComponent = () => {
         }}
         defaultChecked={true}
         label={'demo'}
+        labelPosition={'above'}
       />
     </View>
   );
