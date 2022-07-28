@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Thu, 28 Jul 2022 16:25:20 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.21.19",
+      "version": "0.21.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "6fc1d481bc40eff5f1fa2fe2af085303972c8e87",
+            "comment": "Changed size tokens, added icon to the Tester for the Badge"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.79.7",
+            "commit": "41868d80f25da5f298690e2505af1df113fc6e90"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Jul 2022 08:03:43 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.21.18",
       "version": "0.21.18",
