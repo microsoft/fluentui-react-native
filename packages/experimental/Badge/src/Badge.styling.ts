@@ -1,31 +1,21 @@
-import { badgeName, BadgeCoreTokens, BadgeTokens, BadgeSlotProps, BadgeProps } from './Badge.types';
+import { badgeName, BadgeCoreTokens, BadgeTokens, BadgeSlotProps, BadgeProps, BadgeColors, BadgeSizes, BadgeShapes } from './Badge.types';
 import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
-  'smallest',
-  'smaller',
-  'small',
-  'medium',
-  'large',
-  'largest',
-  'rounded',
-  'circular',
-  'square',
+  ...BadgeSizes,
+  ...BadgeShapes,
   'iconColor',
+  'iconSize',
+  'top',
+  'right',
+  'bottom',
+  'left',
+  'width',
 ];
-export const badgeStates: (keyof BadgeTokens)[] = [
-  'hovered',
-  'focused',
-  'filled',
-  'outline',
-  'tint',
-  'ghost',
-  'filledInverted',
-  ...coreBadgeStates,
-];
+export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, 'filled', 'outline', 'tint', 'ghost'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeName],
@@ -35,7 +25,6 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       (tokens: BadgeTokens, theme: Theme) => ({
         style: {
           ...getBadgePosition(tokens),
-          display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
@@ -50,14 +39,12 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     icon: buildProps(
-      (tokens: BadgeTokens, theme: Theme) => ({
-        style: {
-          height: tokens.iconSize,
-          width: tokens.iconSize,
-          ...layoutStyles.from(tokens, theme),
-        },
+      (tokens: BadgeTokens) => ({
+        color: tokens.iconColor || tokens.color,
+        height: tokens.iconSize,
+        width: tokens.iconSize,
       }),
-      ['width', 'height', ...layoutStyles.keys],
+      ['width', 'height', 'iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
       (tokens: BadgeTokens) => ({

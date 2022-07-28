@@ -2,7 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage.win';
 import TextPageObject from '../pages/TextPageObject.win';
 import { ComponentSelector } from '../../common/BasePage.win';
 import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { TEXT_ACCESSIBILITY_LABEL, TEXT_COMPONENT_CONTENT } from '../../../FluentTester/TestComponents/Text/consts';
+import { TEXT_ACCESSIBILITY_LABEL, TEXT_COMPONENT_CONTENT } from '../../../TestComponents/Text/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Text Testing Initialization', function () {

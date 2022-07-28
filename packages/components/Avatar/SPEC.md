@@ -20,7 +20,7 @@ Basic examples:
   <Avatar shape="square" avatarColor="purple" name="Richard Feynman" />
 ```
 
-More examples on the [Test pages for the Avatar](../../../apps/fluent-tester/src/FluentTester/TestComponents/Avatar). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Avatar](../../../apps/fluent-tester/src/TestComponents/Avatar). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Variants
 
@@ -139,6 +139,11 @@ export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
    * Use this when a name is not available, but there is another unique identifier that can be used instead.
    */
   idForColor?: string;
+
+  /**
+   * The Avatar's image.
+   */
+  image?: ImageProps;
 
   /**
    * The initials are displayed when there is no image (including while the image is loading).

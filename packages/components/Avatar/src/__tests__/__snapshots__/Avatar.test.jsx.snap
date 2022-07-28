@@ -6,6 +6,12 @@ exports[`Avatar rendering renders Avatar 1`] = `
   accessibilityRole="image"
   accessible={true}
   icon={null}
+  image={
+    Object {
+      "accessibilityLabel": undefined,
+      "source": undefined,
+    }
+  }
   initials=""
   shape="circular"
   style={
@@ -32,8 +38,6 @@ exports[`Avatar rendering renders Avatar 1`] = `
         "borderRadius": 9999,
         "borderWidth": 0,
         "justifyContent": "center",
-        "marginLeft": 2,
-        "marginTop": 2,
         "minHeight": 24,
         "minWidth": 24,
       }

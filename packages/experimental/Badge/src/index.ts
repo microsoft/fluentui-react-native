@@ -3,13 +3,16 @@ export type {
   BadgeAppearance,
   BadgeProps,
   BadgeCoreProps,
+  BadgeColor,
   BadgeShape,
   BadgeSize,
   BadgeSlotProps,
   BadgeCoreTokens,
   BadgeTokens,
   BadgeType,
+  BadgeIconPosition,
 } from './Badge.types';
-export { Badge, CompressibleBadge, badgeLookup } from './Badge';
+export { BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from './Badge.types';
+export { Badge, badgeLookup } from './Badge';
 export { PresenceBadge, presenceBadgeName, PresenceBadgeStatuses } from './PresenceBadge';
 export type { PresenceBadgeStatus, PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeType } from './PresenceBadge';

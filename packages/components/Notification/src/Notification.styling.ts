@@ -92,8 +92,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           appearance: 'subtle',
           color: tokens.color,
           disabledColor: tokens.disabledColor,
-          focusedColor: tokens.focusedColor,
-          hoveredColor: tokens.hoveredColor,
           pressedColor: tokens.pressedColor,
           minWidth: 0,
           padding: 0,
@@ -102,19 +100,11 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    dismissIcon: buildProps(
-      (tokens: NotificationTokens) => {
-        return {
-          style: {
-            alignSelf: 'center',
-            flex: 1,
-            height: 20,
-            width: 20,
-          },
-          color: tokens.color,
-        };
-      },
-      ['color'],
+    shadow: buildProps(
+      (tokens: NotificationTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
     ),
   },
 };

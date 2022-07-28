@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
+This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.2
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.8
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @fluentui-react-native/pressable to v0.9.3
+
+## 0.9.1
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.7
+- Bump @fluentui-react-native/experimental-shadow to v0.2.10
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+- Bump @fluentui-react-native/pressable to v0.9.2
+
+## 0.9.0
+
+Mon, 25 Jul 2022 18:59:03 GMT
+
+### Minor changes
+
+- add shadow (joannaquu@gmail.com)
+
+## 0.8.1
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.6
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
+- Bump @fluentui-react-native/pressable to v0.9.1
+
+## 0.8.0
+
+Wed, 20 Jul 2022 19:01:18 GMT
+
+### Minor changes
+
+- add support for dark mode (joannaquu@gmail.com)
+
+## 0.7.1
+
+Wed, 20 Jul 2022 16:24:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.5
 
 ## 0.7.0
 

@@ -2,123 +2,153 @@
 
 exports[`Notification component tests Notification default 1`] = `
 <View
-  marginHorizontal={16}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "backgroundColor": "#EBF3FC",
-      "borderColor": "transparent",
-      "borderRadius": 12,
-      "borderWidth": 1,
-      "flex": 1,
-      "flexDirection": "row",
-      "justifyContent": "space-between",
-      "padding": 16,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 8,
+        "width": 0,
+      },
+      "shadowOpacity": 0.14,
+      "shadowRadius": 8,
     }
   }
 >
   <View
     style={
       Object {
-        "flex": 1,
-        "flexDirection": "column",
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.12,
+        "shadowRadius": 1,
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      marginHorizontal={16}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onPress={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "alignSelf": "flex-start",
-          "color": "#0F6CBD",
+          "backgroundColor": "#EBF3FC",
+          "borderColor": "transparent",
+          "borderRadius": 12,
+          "borderWidth": 1,
           "flex": 1,
-          "flexGrow": 1,
-          "fontFamily": "Segoe UI",
-          "fontSize": 15,
-          "fontWeight": "600",
-          "margin": 0,
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+          "minHeight": 64,
+          "padding": 16,
         }
       }
     >
-      Mail Archived
-    </Text>
-  </View>
-  <View
-    accessibilityLabel="Undo"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    appearance="subtle"
-    color="#0F6CBD"
-    disabled={false}
-    disabledColor="#2886DE"
-    enableFocusRing={true}
-    focusable={true}
-    minWidth={0}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    padding={0}
-    paddingHorizontal={0}
-    pressedColor="#0F6CBD30"
-    style={
-      Object {
-        "alignItems": "center",
-        "alignSelf": "center",
-        "backgroundColor": "transparent",
-        "borderColor": "transparent",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "marginStart": 16,
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-      }
-    }
-  >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#0F6CBD",
-          "fontFamily": "Segoe UI",
-          "fontSize": 15,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "flexDirection": "column",
+          }
         }
-      }
-    >
-      Undo
-    </Text>
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "alignSelf": "flex-start",
+              "color": "#0F6CBD",
+              "flex": 1,
+              "flexGrow": 1,
+              "fontFamily": "Segoe UI",
+              "fontSize": 15,
+              "fontWeight": "600",
+              "margin": 0,
+            }
+          }
+        >
+          Mail Archived
+        </Text>
+      </View>
+      <View
+        accessibilityLabel="Undo"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        appearance="subtle"
+        color="#0F6CBD"
+        disabled={false}
+        disabledColor="#2886DE"
+        enableFocusRing={true}
+        focusable={true}
+        minWidth={0}
+        onAccessibilityTap={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onPress={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        padding={0}
+        paddingHorizontal={0}
+        pressedColor="#0F6CBD30"
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "transparent",
+            "borderColor": "#ffffff",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "marginStart": 16,
+            "minWidth": 96,
+            "padding": 5,
+            "paddingHorizontal": 11,
+          }
+        }
+      >
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#0F6CBD",
+              "fontFamily": "Segoe UI",
+              "fontSize": 15,
+              "fontWeight": "600",
+              "margin": 0,
+              "marginBottom": 0,
+              "marginEnd": 0,
+              "marginStart": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Undo
+        </Text>
+      </View>
+    </View>
   </View>
 </View>
 `;

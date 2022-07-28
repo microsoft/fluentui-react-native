@@ -4,23 +4,23 @@ trigger:
   batch: true
   branches:
     include:
-      - master
+      - main
 
 pr: none
 
 parameters:
-- name: skipNpmPublish
-  displayName: Skip Npm Publish
-  type: boolean
-  default: false
-- name: skipGitPush
-  displayName: Skip Git Push
-  type: boolean
-  default: false
-- name: skipNugetPublish
-  displayName: Skip Nuget Publish
-  type: boolean
-  default: false
+  - name: skipNpmPublish
+    displayName: Skip Npm Publish
+    type: boolean
+    default: false
+  - name: skipGitPush
+    displayName: Skip Git Push
+    type: boolean
+    default: false
+  - name: skipNugetPublish
+    displayName: Skip Nuget Publish
+    type: boolean
+    default: false
 
 variables:
   - group: 'FluentUI React Native Secrets'
@@ -60,7 +60,7 @@ jobs:
         condition: ${{ parameters.skipGitPush }}
 
       - script: |
-          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/master -n $(npmAuth) --access public -y
+          yarn publish:beachball -- $(SkipNpmPublishArgs) $(SkipGitPushPublishArgs) -b origin/main -n $(npmAuth) --access public -y
         displayName: 'Publish NPM Packages'
 
       - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0

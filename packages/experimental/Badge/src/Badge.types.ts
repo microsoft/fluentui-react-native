@@ -5,13 +5,53 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 
 export const badgeName = 'Badge';
-export const BadgeSizes = ['smallest', 'smaller', 'small', 'medium', 'large', 'largest'] as const;
-export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost', 'filledInverted'] as const;
+export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'extraLarge'] as const;
+export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost'] as const;
 export const BadgeShapes = ['rounded', 'circular', 'square'] as const;
+export const BadgeColors = ['brand', 'danger', 'important', 'informative', 'severe', 'subtle', 'success', 'warning'] as const;
 export type BadgeSize = typeof BadgeSizes[number];
 export type BadgeAppearance = typeof BadgeAppearances[number];
 export type BadgeShape = typeof BadgeShapes[number];
+export type BadgeColor = typeof BadgeColors[number] | ColorValue;
+export type BadgeIconPosition = 'before' | 'after';
 
+export interface BadgeCoreProps {
+  /**
+   * A Badge can be square, circular or rounded.
+   * @defaultvalue circular
+   */
+  shape?: BadgeShape;
+
+  /** Sets style of Badge to a preset size style
+   * @defaultvalue medium
+   */
+  size?: BadgeSize;
+}
+export interface BadgeProps extends BadgeCoreProps {
+  /**
+   * A Badge can have its content and borders styled for greater emphasis or to be subtle.
+   * It can be filled, outline, ghost, inverted
+   * @defaultvalue filled
+   */
+  appearance?: BadgeAppearance;
+
+  /**
+   * A Badge can be one of preset colors
+   * @defaultvalue brand
+   */
+  color?: BadgeColor;
+
+  /*
+   * Source URL or name of the icon to show on the Badge.
+   */
+  icon?: IconSourcesType;
+
+  /**
+   * Icon can be placed before or after Badge's content.
+   * @default before
+   */
+  iconPosition?: BadgeIconPosition;
+}
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
    * Set the bottom edge of the Badge
@@ -26,6 +66,10 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * The icon color.
    */
   iconColor?: ColorValue;
+  /**
+   * The icon size.
+   */
+  iconSize?: number;
   /**
    * Set the left edge of the Badge
    */
@@ -49,12 +93,12 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   /**
    * Sizes of the Badge
    */
-  smallest?: BadgeTokens;
-  smaller?: BadgeTokens;
+  tiny?: BadgeTokens;
+  extraSmall?: BadgeTokens;
   small?: BadgeTokens;
   medium?: BadgeTokens;
   large?: BadgeTokens;
-  largest?: BadgeTokens;
+  extraLarge?: BadgeTokens;
 
   /**
    * Shapes of the Badge
@@ -64,16 +108,6 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   square?: BadgeTokens;
 }
 export interface BadgeTokens extends BadgeCoreTokens {
-  /**
-   * The icon color when hovering over the Badge.
-   */
-  iconColorHovered?: ColorValue;
-
-  /**
-   * The icon color when the Badge is being pressed.
-   */
-  iconColorPressed?: ColorValue;
-
   /**
    * The size of the icon.
    */
@@ -91,48 +125,18 @@ export interface BadgeTokens extends BadgeCoreTokens {
   outline?: BadgeTokens;
   tint?: BadgeTokens;
   ghost?: BadgeTokens;
-  filledInverted?: BadgeTokens;
 
   /**
-   * States that can be applied to a Badge
+   * Colors of the Badge
    */
-  hovered?: BadgeTokens;
-  focused?: BadgeTokens;
-}
-
-export interface BadgeCoreProps {
-  /**
-   * Badge shape: 'rounded' | 'circular' | 'square'
-   * @defaultvalue rounded
-   */
-  shape?: BadgeShape;
-
-  /** Sets style of Badge to a preset size style  */
-  size?: BadgeSize;
-}
-export interface BadgeProps extends BadgeCoreProps {
-  /**
-   * A Badge can have its content and borders styled for greater emphasis or to be subtle.
-   * filled -
-   * outline -
-   */
-  appearance?: BadgeAppearance;
-
-  /*
-   * Source URL or name of the icon to show on the Badge.
-   */
-  icon?: IconSourcesType;
-
-  /**
-   * Icon can be placed before or after Badge's content.
-   * @default before
-   */
-  iconPosition?: 'before' | 'after';
-
-  /*
-   * Text to show on the Badge.
-   */
-  text?: string;
+  brand?: BadgeTokens;
+  danger?: BadgeTokens;
+  important?: BadgeTokens;
+  informative?: BadgeTokens;
+  severe?: BadgeTokens;
+  subtle?: BadgeTokens;
+  success?: BadgeTokens;
+  warning?: BadgeTokens;
 }
 
 export interface BadgeSlotProps {

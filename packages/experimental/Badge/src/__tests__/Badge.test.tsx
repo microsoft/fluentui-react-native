@@ -17,13 +17,9 @@ describe('Badge component tests', () => {
   it('Badge all props', () => {
     const tree = renderer
       .create(
-        <Badge
-          text="Badge"
-          size="large"
-          appearance="outline"
-          shape="rounded"
-          icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}
-        />,
+        <Badge size="large" appearance="outline" shape="rounded" icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>
+          Badge
+        </Badge>,
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -35,7 +31,7 @@ describe('Badge component tests', () => {
       borderColor: '#f09',
       borderWidth: 4,
     });
-    const tree = renderer.create(<BadgeStyled text="Badge Tokens" />).toJSON();
+    const tree = renderer.create(<BadgeStyled>Badge Tokens</BadgeStyled>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

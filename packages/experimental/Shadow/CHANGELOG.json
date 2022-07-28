@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "entries": [
     {
+      "date": "Mon, 25 Jul 2022 21:27:20 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.10",
+      "version": "0.2.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "0772c5674928d890bf843ca0891f646f58ff0673",
+            "comment": "Combine platform specific test apps"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 20 Jul 2022 16:24:28 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.9",
+      "version": "0.2.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "1de042e4c2b76d468203365a38f4ab4eeb95cc77",
+            "comment": "Fix version of theme-types to align with other packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 19 Jul 2022 18:10:02 GMT",
       "tag": "@fluentui-react-native/experimental-shadow_v0.2.8",
       "version": "0.2.8",

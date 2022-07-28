@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add initial animation to notification",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}

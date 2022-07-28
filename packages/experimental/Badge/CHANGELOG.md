@@ -1,8 +1,73 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 19 Jul 2022 18:10:02 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Jul 2022 16:25:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.10
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Changed size tokens, added icon to the Tester for the Badge (v.kozova13@gmail.com)
+
+## 0.1.9
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+
+## 0.1.8
+
+Tue, 26 Jul 2022 12:52:47 GMT
+
+### Patches
+
+- Added Badge colors (v.kozova13@gmail.com)
+
+## 0.1.7
+
+Tue, 26 Jul 2022 11:47:13 GMT
+
+### Patches
+
+- Changed Badge sizes according to Web (v.kozova13@gmail.com)
+
+## 0.1.6
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+
+## 0.1.5
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
+
+## 0.1.4
+
+Wed, 20 Jul 2022 17:46:19 GMT
+
+### Patches
+
+- removed redundunt margin for Avatar and added aspectRatio to presence Badge (v.kozova13@gmail.com)
+
+## 0.1.3
+
+Wed, 20 Jul 2022 16:24:28 GMT
+
+### Patches
+
+- Changed API of Badge according to latest Web component (v.kozova13@gmail.com)
 
 ## 0.1.2
 
