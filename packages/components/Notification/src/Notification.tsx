@@ -65,7 +65,7 @@ export const Notification = compose<NotificationType>({
               {title && <Slots.title>{title}</Slots.title>}
               <Slots.message style={messageStyle}>{children}</Slots.message>
             </Slots.contentContainer>
-            <Slots.action {...notificationButtonProps} />
+            {onActionPress && <Slots.action {...notificationButtonProps} />}
           </Slots.root>
         </Slots.shadow>
       );
