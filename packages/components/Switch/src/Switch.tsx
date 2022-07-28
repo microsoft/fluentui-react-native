@@ -27,6 +27,7 @@ export const Switch = compose<SwitchType>({
     label: Text,
     track: View,
     thumb: View,
+    onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
     const switchInfo = useSwitch(userProps);
@@ -40,6 +41,7 @@ export const Switch = compose<SwitchType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
+          {(offText || onText) && <Slots.onOffText>{switchInfo.state.toggleOn ? onText : offText}</Slots.onOffText>}
           <Slots.track>
             <Slots.thumb />
           </Slots.track>

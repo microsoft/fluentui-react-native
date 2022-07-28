@@ -91,7 +91,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
   offText?: string;
 
-  onString?: string;
+  onText?: string;
 
   labelPosition?: 'before' | 'above' | 'after';
 }
@@ -108,6 +108,7 @@ export interface SwitchSlotProps {
   label: TextProps;
   track: React.PropsWithRef<IViewProps>;
   thumb: Animated.AnimatedProps<IViewProps>;
+  onOffText: TextProps;
 }
 
 export interface SwitchType {
