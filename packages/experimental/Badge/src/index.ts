@@ -10,6 +10,7 @@ export type {
   BadgeCoreTokens,
   BadgeTokens,
   BadgeType,
+  BadgeIconPosition,
 } from './Badge.types';
 export { BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from './Badge.types';
 export { Badge, badgeLookup } from './Badge';
