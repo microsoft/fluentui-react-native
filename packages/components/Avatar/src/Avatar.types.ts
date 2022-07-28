@@ -172,6 +172,11 @@ export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
   shape?: AvatarShape;
 
   /**
+   * The Avatar's image.
+   */
+  image?: ImageProps;
+
+  /**
    * Shorthand for passing image URL instead of using `image` prop
    */
   imageUrl?: string;
