@@ -13,6 +13,9 @@ describe('Notification component tests', () => {
           onPress={() => {
             console.log('Notification tapped');
           }}
+          onActionPress={() => {
+            console.log('Undo tapped');
+          }}
         >
           Mail Archived
         </Notification>,
@@ -30,6 +33,9 @@ describe('Notification component tests', () => {
           onPress={() => {
             console.log('Notification tapped');
           }}
+          onActionPress={() => {
+            console.log('Undo tapped');
+          }}
         >
           Mail Archived
         </Notification>
@@ -46,6 +52,9 @@ describe('Notification component tests', () => {
           action="Undo"
           onPress={() => {
             console.log('Notification tapped');
+          }}
+          onActionPress={() => {
+            console.log('Undo tapped');
           }}
         >
           Mail Archived
