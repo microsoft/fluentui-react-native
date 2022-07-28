@@ -39,6 +39,7 @@ export function createNotificationButtonProps(userProps: NotificationProps) {
     } else {
       const dismissIconProps = createIconProps({ svgSource: getDismissSvgProps(), width: 20, height: 20 });
       return {
+        accessibilityLabel: 'Dismiss',
         onClick: userProps.onActionPress,
         icon: dismissIconProps,
       };
