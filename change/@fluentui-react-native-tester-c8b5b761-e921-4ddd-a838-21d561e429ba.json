@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add MacOS E2E Testing",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
