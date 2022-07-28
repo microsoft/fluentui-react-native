@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Thu, 28 Jul 2022 21:20:29 GMT",
+      "tag": "@fluentui-react-native/notification_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "56f0d767d6ddcbd2b1ea94e41af5fce9c3953c48",
+            "comment": "add initial animation to notification"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 19:30:23 GMT",
       "tag": "@fluentui-react-native/notification_v0.9.2",
       "version": "0.9.2",

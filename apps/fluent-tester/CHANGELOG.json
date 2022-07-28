@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 28 Jul 2022 21:20:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.80.0",
+      "version": "0.80.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "56f0d767d6ddcbd2b1ea94e41af5fce9c3953c48",
+            "comment": "add initial animation to notification"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.10.0",
+            "commit": "56f0d767d6ddcbd2b1ea94e41af5fce9c3953c48"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Jul 2022 16:25:20 GMT",
       "tag": "@fluentui-react-native/tester_v0.79.7",
       "version": "0.79.7",
