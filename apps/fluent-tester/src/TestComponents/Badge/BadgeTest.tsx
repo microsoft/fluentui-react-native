@@ -3,6 +3,7 @@ import React, { useState, useCallback } from 'react';
 import { BADGE_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { View, Platform, Text, Image } from 'react-native';
+import { commonTestStyles } from '../Common/styles';
 import {
   Badge,
   PresenceBadge,
@@ -27,11 +28,6 @@ const badgeShapes: BadgeShape[] = [...BadgeShapes];
 const badgeSizes: BadgeSize[] = [...BadgeSizes];
 const badgeAppearances: BadgeAppearance[] = [...BadgeAppearances];
 const badgeIconPositions = ['before', 'after'];
-
-const BadgeNoBorder = Badge.customize({
-  borderColor: 'transparent',
-  borderWidth: 0,
-});
 
 const StyledBadge = Badge.customize({
   backgroundColor: 'yellow',
@@ -75,46 +71,92 @@ export const BasicBadge: React.FunctionComponent = () => {
 
   return (
     <View>
-      <StyledPicker prompt="Badge appearance" selected={badgeAppearance} onChange={onBadgeAppearanceChange} collection={badgeAppearances} />
-      <StyledPicker prompt="Badge color" selected={badgeColor} onChange={onBadgeColorChange} collection={badgeColors} />
-      <StyledPicker prompt="Shape" selected={shape} onChange={onShapeChange} collection={badgeShapes} />
-      <StyledPicker prompt="Size" selected={size} onChange={onSizeChange} collection={badgeSizes} />
-      {svgIconsEnabled && (
-        <>
-          <ToggleButton onClick={() => setShowIcon(!showIcon)} checked={showIcon}>
-            Set {showIcon ? ' Hide icon' : ' Show icon'}
-          </ToggleButton>
-          <StyledPicker prompt="Icon position" selected={iconPosition} onChange={onIconPositionChange} collection={badgeIconPositions} />
-        </>
-      )}
+      <View style={{ flexDirection: 'row' }}>
+        <View>
+          <StyledPicker
+            prompt="Badge appearance"
+            selected={badgeAppearance}
+            onChange={onBadgeAppearanceChange}
+            collection={badgeAppearances}
+          />
+          <StyledPicker prompt="Badge color" selected={badgeColor} onChange={onBadgeColorChange} collection={badgeColors} />
+          <StyledPicker prompt="Shape" selected={shape} onChange={onShapeChange} collection={badgeShapes} />
+          <StyledPicker prompt="Size" selected={size} onChange={onSizeChange} collection={badgeSizes} />
+          {svgIconsEnabled && (
+            <>
+              <ToggleButton onClick={() => setShowIcon(!showIcon)} checked={showIcon}>
+                Set {showIcon ? ' Hide icon' : ' Show icon'}
+              </ToggleButton>
+              <StyledPicker
+                prompt="Icon position"
+                selected={iconPosition}
+                onChange={onIconPositionChange}
+                collection={badgeIconPositions}
+              />
+            </>
+          )}
+        </View>
+        <View style={{ paddingHorizontal: 40, ...commonTestStyles.vmargin }}>
+          {svgIconsEnabled && showIcon ? (
+            <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
+              Basic badge
+            </Badge>
+          ) : (
+            <Badge {...badgeConfig}>Basic badge</Badge>
+          )}
+        </View>
+      </View>
+      <View style={{ flexDirection: 'row' }}>
+        <View>
+          <Badge size="small" icon={{ svgSource: svgProps }}></Badge>
+          <Badge size="medium" icon={{ svgSource: svgProps }}></Badge>
+          <Badge size="large" icon={{ svgSource: svgProps }}></Badge>
+          <Badge size="extraLarge" icon={{ svgSource: svgProps }}></Badge>
+        </View>
+        <View>
+          <Badge size="small" icon={{ svgSource: svgProps }}>
+            999+
+          </Badge>
+          <Badge size="medium" icon={{ svgSource: svgProps }}>
+            999+
+          </Badge>
+          <Badge size="large" icon={{ svgSource: svgProps }}>
+            999+
+          </Badge>
+          <Badge size="extraLarge" icon={{ svgSource: svgProps }}>
+            999+
+          </Badge>
+        </View>
+        <View>
+          <Badge icon={{ svgSource: svgProps }} />
+          <Badge icon={{ svgSource: svgProps }}>Icon before by default</Badge>
+          <Badge icon={{ svgSource: svgProps }} iconPosition="before">
+            Icon before
+          </Badge>
+          <Badge icon={{ svgSource: svgProps }} iconPosition="after">
+            Icon after
+          </Badge>
+        </View>
 
-      {svgIconsEnabled && showIcon ? (
-        <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
-          Basic badge
-        </Badge>
-      ) : (
-        <Badge {...badgeConfig}>Basic badge</Badge>
-      )}
-
-      <Text>Size</Text>
-      <Badge size="tiny" shape="circular" />
-      <Badge size="extraSmall" shape="circular" />
-      <Badge size="small">Small</Badge>
-      <Badge size="medium">Medium</Badge>
-      <Badge size="large">Large</Badge>
-      <Badge size="extraLarge">Extra Large</Badge>
+        <Text>Size</Text>
+        <Badge size="tiny" shape="circular" />
+        <Badge size="extraSmall" shape="circular" />
+        <Badge size="small">Small</Badge>
+        <Badge size="medium">Medium</Badge>
+        <Badge size="large">Large</Badge>
+        <Badge size="extraLarge">Extra Large</Badge>
+      </View>
       {svgIconsEnabled && (
         <>
           <Text>Badge with icon</Text>
           <Badge icon={{ svgSource: svgProps }} iconPosition="after">
+            <Image source={{ uri: satyaPhotoUrl }} style={{ width: 20, height: 20 }} />
             Badge with
             <Image source={{ uri: satyaPhotoUrl }} style={{ width: 20, height: 20 }} />
             <Text style={{ backgroundColor: 'yellow' }}>optional content</Text>
           </Badge>
           <Badge appearance="outline" icon={iconProps} />
           <Badge icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>Badge with icon</Badge>
-          <Text>Customized Badge</Text>
-          <BadgeNoBorder appearance="outline" icon={iconProps} />
         </>
       )}
       <StyledBadge appearance="outline">Styled badge</StyledBadge>

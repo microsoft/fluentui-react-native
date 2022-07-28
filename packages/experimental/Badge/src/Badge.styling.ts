@@ -1,18 +1,19 @@
 import { badgeName, BadgeCoreTokens, BadgeTokens, BadgeSlotProps, BadgeProps, BadgeColors, BadgeSizes, BadgeShapes } from './Badge.types';
 import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [
   ...BadgeSizes,
   ...BadgeShapes,
+  'bottom',
   'iconColor',
   'iconSize',
-  'top',
-  'right',
-  'bottom',
   'left',
+  'right',
+  'textPadding',
+  'top',
   'width',
 ];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, 'filled', 'outline', 'tint', 'ghost'];
@@ -47,11 +48,12 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       ['width', 'height', 'iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
-      (tokens: BadgeTokens) => ({
-        variant: tokens.variant,
+      (tokens: BadgeTokens, theme: Theme) => ({
+        ...fontStyles.from(tokens, theme),
         color: tokens.color,
+        paddingHorizontal: tokens.textPadding,
       }),
-      ['variant', 'color'],
+      ['color', 'textPadding', ...fontStyles.keys],
     ),
   },
 };

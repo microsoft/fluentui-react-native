@@ -81,6 +81,11 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   right?: FlexStyle['right'];
 
   /**
+   * Set padding for text container when Badge contains
+   * icons or images
+   */
+  textPadding?: number;
+  /**
    * Set the top edge of the Badge
    */
   top?: FlexStyle['top'];
