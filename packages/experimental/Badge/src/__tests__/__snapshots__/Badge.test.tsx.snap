@@ -40,7 +40,11 @@ exports[`Badge component tests Badge all props 1`] = `
   </Text>
   <Text
     ellipsizeMode="tail"
+    fontFamily="Segoe UI"
+    fontSize={12}
+    fontWeight="600"
     numberOfLines={0}
+    paddingHorizontal={2}
     style={
       Object {
         "color": "#0078d4",
@@ -83,7 +87,11 @@ exports[`Badge component tests Badge tokens 1`] = `
 >
   <Text
     ellipsizeMode="tail"
+    fontFamily="Segoe UI"
+    fontSize={12}
+    fontWeight="600"
     numberOfLines={0}
+    paddingHorizontal={2}
     style={
       Object {
         "color": "#ffffff",
