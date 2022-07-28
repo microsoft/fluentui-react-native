@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Thu, 28 Jul 2022 08:03:43 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.21.18",
+      "version": "0.21.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "4f40579c7b1b879299abf66904fafed0248873b9",
+            "comment": "Returned image prop to the Avatar"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.79.6",
+            "commit": "6fc1d481bc40eff5f1fa2fe2af085303972c8e87"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 27 Jul 2022 02:32:13 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.21.17",
       "version": "0.21.17",

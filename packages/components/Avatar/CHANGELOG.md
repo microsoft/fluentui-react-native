@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Jul 2022 08:03:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.23
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
 
 ## 1.1.22
 
