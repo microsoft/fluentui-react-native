@@ -3,7 +3,7 @@ import { notification, NotificationType, NotificationProps } from './Notificatio
 import { Pressable } from '@fluentui-react-native/pressable';
 import { PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';

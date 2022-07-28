@@ -2,7 +2,7 @@
 import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { compose, mergeProps, Slots, UseSlots, withSlots } from '@fluentui-react-native/framework';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import {
   menuItemCheckboxName,
   MenuItemCheckboxProps,
