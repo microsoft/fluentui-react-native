@@ -11,7 +11,6 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const isDisabled = !!disabled;
   const initialCheckedState = !!(checked ?? defaultChecked);
   const [checkedState, setCheckedState] = React.useState(initialCheckedState);
-  // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
 
   const toggleCallback = (e: any) => {

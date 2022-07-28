@@ -3,7 +3,6 @@ import { ViewProps, ViewStyle, ColorValue, Animated } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
@@ -72,33 +71,6 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   toggleOff?: SwitchTokens;
 }
 
-export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
-  /*
-   * Source URL or name of the icon to show on the Button.
-   */
-  icon?: IconSourcesType;
-
-  /**
-   * Button contains only icon, there's no text content
-   * Must be set for button to style correctly when button has not content.
-   */
-  iconOnly?: boolean;
-
-  /**
-   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
-   */
-  componentRef?: React.RefObject<IFocusable>;
-
-  /**
-   * A callback to call on button click event
-   */
-
-  /**
-   * Text that should show in a tooltip when the user hovers over a button.
-   */
-  tooltip?: string;
-}
-
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   componentRef?: React.RefObject<IFocusable>;
 
@@ -117,7 +89,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   labelPosition?: 'before' | 'above' | 'after';
 }
 
-export type SwitchState = IPressableState & { toggleOn: boolean; toggleOff: boolean };
+export type SwitchState = IPressableState & { toggleOn?: boolean; toggleOff?: boolean };
 
 export interface SwitchInfo {
   props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;

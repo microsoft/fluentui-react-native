@@ -16,7 +16,7 @@ import { useSwitch } from './useSwitch';
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
-  return state[layer] || userProps[layer];
+  return state[layer] || userProps[layer] || (layer === 'hovered' && state[layer]);
 };
 
 export const Switch = compose<SwitchType>({
