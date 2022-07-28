@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
+This log was last generated on Wed, 27 Jul 2022 02:32:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.3
+
+Wed, 27 Jul 2022 02:32:13 GMT
+
+### Patches
+
+- Enable the Space and Enter keys to open SubmenuItems (patboyd@microsoft.com)
+
+## 0.18.2
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.3
+- Bump @fluentui-react-native/focus-zone to v0.10.3
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @fluentui-react-native/text to v0.12.1
+- Bump @uifabricshared/foundation-compose to v1.12.1
+- Bump @fluentui-react-native/pressable to v0.9.3
 
 ## 0.18.1
 

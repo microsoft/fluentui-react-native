@@ -93,6 +93,26 @@ export const StandardUsage: FunctionComponent = () => {
           avatarColor="#ff0099"
           initialsColor="yellow"
         />
+        <Avatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={36}
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="SVG Icon"
+          icon={{ fontSource: { ...fontBuiltInProps } }}
+          avatarColor={avatarColor}
+          badge={{ status: 'outOfOffice', outOfOffice }}
+        />
+        <Avatar
+          active={active}
+          activeAppearance={activeAppearance}
+          size={imageSize === undefinedText ? undefined : imageSize}
+          shape={isSquare ? 'square' : 'circular'}
+          accessibilityLabel="SVG Icon"
+          icon={{ fontSource: { ...fontBuiltInProps }, color: 'green' }}
+          avatarColor={avatarColor}
+          badge={{ status: 'outOfOffice', outOfOffice }}
+        />
         {svgIconsEnabled && (
           <>
             <Avatar
@@ -101,7 +121,7 @@ export const StandardUsage: FunctionComponent = () => {
               size={imageSize === undefinedText ? undefined : imageSize}
               shape={isSquare ? 'square' : 'circular'}
               accessibilityLabel="SVG Icon"
-              icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: 'red' }}
+              icon={{ fontSource: { ...fontBuiltInProps, fontSize: 16 }, color: 'red' }}
               avatarColor={avatarColor}
               badge={{ status: 'outOfOffice', outOfOffice }}
             />
