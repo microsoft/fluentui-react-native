@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Adding button to test buttons that also handle key presses",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
