@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Fri, 29 Jul 2022 18:26:04 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 21:04:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.1
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.10
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/pressable to v0.9.5
+- Bump @fluentui-react-native/text to v0.13.0
 
 ## 0.11.0
 

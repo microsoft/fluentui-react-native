@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "move text from experimental to components dir",
-  "packageName": "@uifabricshared/foundation-compose",
-  "email": "email not defined",
-  "dependentChangeType": "none"
-}

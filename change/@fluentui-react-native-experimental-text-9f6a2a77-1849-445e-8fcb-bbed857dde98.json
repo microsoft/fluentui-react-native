@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "move text from experimental to components dir",
-  "packageName": "@fluentui-react-native/experimental-text",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

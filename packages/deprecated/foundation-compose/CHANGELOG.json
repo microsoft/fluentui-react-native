@@ -2,6 +2,21 @@
   "name": "@uifabricshared/foundation-compose",
   "entries": [
     {
+      "date": "Fri, 29 Jul 2022 21:04:39 GMT",
+      "tag": "@uifabricshared/foundation-compose_v1.12.1",
+      "version": "1.12.1",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@uifabricshared/foundation-compose",
+            "commit": "bee467a2f783a35346bcb76687c200bd372a6086",
+            "comment": "move text from experimental to components dir"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 26 Jul 2022 19:30:23 GMT",
       "tag": "@uifabricshared/foundation-compose_v1.12.1",
       "version": "1.12.1",

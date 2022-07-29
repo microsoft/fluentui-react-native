@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 29 Jul 2022 18:26:04 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 21:04:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.82.1
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.26
+- Bump @fluentui-react-native/badge to v0.1.12
+- Bump @fluentui-react-native/button to v0.24.10
+- Bump @fluentui-react-native/experimental-button to v0.16.10
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.7
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.12
+- Bump @fluentui-react-native/experimental-tabs to v0.5.7
+- Bump @fluentui-react-native/experimental-text to v0.11.0
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/menu to v1.0.19
+- Bump @fluentui-react-native/notification to v0.11.1
+- Bump @fluentui-react-native/stack to v0.7.2
+- Bump @fluentui-react-native/text to v0.13.0
+- Bump @fluentui/react-native to v0.31.12
 
 ## 0.82.0
 
