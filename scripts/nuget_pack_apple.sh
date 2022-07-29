@@ -211,12 +211,12 @@ function do_prerequisites
 	run_subprocess "${git_root}/.ado/scripts/xcode_select_current_version.sh"
 
 	log_action 📦 "Installing CocoaPods dependencies for macOS"
-	run_subprocess pushd "${git_root}/apps/macos/src"
+	run_subprocess pushd "${git_root}/apps/fluent-tester/macos"
 	run_subprocess pod install $verbosity_arg
 	run_subprocess popd
 
 	log_action 📦 "Installing CocoaPods dependencies for iOS"
-	run_subprocess pushd "${git_root}/apps/ios/src"
+	run_subprocess pushd "${git_root}/apps/fluent-tester/ios"
 	run_subprocess pod install $verbosity_arg
 	run_subprocess popd
 }
@@ -318,7 +318,7 @@ function build_and_copy_output()
 function build_and_copy_macos()
 {
 	build_and_copy_output \
-	"${git_root}/apps/macos/src/FluentTester.xcworkspace" \
+	"${git_root}/apps/fluent-tester/macos/FluentTester.xcworkspace" \
 	FluentTester \
 	"$1" \
 	macosx \
@@ -332,7 +332,7 @@ function build_and_copy_macos()
 function build_and_copy_ios_device()
 {
 	build_and_copy_output \
-	"${git_root}/apps/ios/src/FluentTester.xcworkspace" \
+	"${git_root}/apps/fluent-tester/ios/FluentTester.xcworkspace" \
 	FluentTester \
 	"$1" \
 	iphoneos \
@@ -346,7 +346,7 @@ function build_and_copy_ios_device()
 function build_and_copy_ios_simulator()
 {
 	build_and_copy_output \
-	"${git_root}/apps/ios/src/FluentTester.xcworkspace" \
+	"${git_root}/apps/fluent-tester/ios/FluentTester.xcworkspace" \
 	FluentTester \
 	"$1" \
 	iphonesimulator \

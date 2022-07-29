@@ -39,7 +39,7 @@ jobs:
   - job: AndroidPR
     displayName: Android PR
     pool:
-       vmImage: 'macos-11'
+      vmImage: 'macos-11'
     variables:
       platform: 'android'
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
@@ -70,20 +70,13 @@ jobs:
           JAVA_HOME: $(JAVA_HOME_11_X64)
           PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
-  - job: ApplePR
-    displayName: Apple PR
+  - job: macOSPR
+    displayName: macOS PR
     pool:
       vmImage: 'internal-macos12'
       demands: ['xcode', 'sh', 'npm']
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
-    strategy:
-      maxParallel: 4
-      matrix:
-        ios:
-          platform: 'ios'
-        macos:
-          platform: 'macos'
 
     steps:
       - checkout: self
@@ -93,24 +86,59 @@ jobs:
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: 'Clean DerivedData'
-
+        
       - script: |
           sudo gem install cocoapods
         displayName: 'Install Cocoapods Environment'
-
       - template: templates/setup-repo-min-build.yml
 
       - script: |
-          yarn bundle:$(platform)
+          yarn bundle:macos
         workingDirectory: apps/fluent-tester
-        displayName: 'yarn bundle  $(platform)'
-
+        displayName: 'yarn bundle macos'
+        
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-yarn-build.yml
         parameters:
-          platform: $(platform)
+          platform: 'macos'
+
+      - template: templates/e2e-testing-macos.yml
+
+  - job: iOSPR
+    displayName: iOS PR
+    pool:
+      vmImage: 'internal-macos12'
+      demands: ['xcode', 'sh', 'npm']
+    timeoutInMinutes: 60 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - checkout: self
+        persistCredentials: true
+
+      # Clean Derived Data
+      - script: |
+          rm -rf $(Build.Repository.LocalPath)/DerivedData
+        displayName: 'Clean DerivedData'
+        
+      - script: |
+          sudo gem install cocoapods
+        displayName: 'Install Cocoapods Environment'
+      - template: templates/setup-repo-min-build.yml
+
+      - script: |
+          yarn bundle:ios
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn bundle ios'
+        
+      # Select proper Xcode version
+      - template: templates/apple-xcode-select.yml
+
+      - template: templates/apple-yarn-build.yml
+        parameters:
+          platform: 'ios'
 
   # Windows bundling and end to end testing
   - job: WindowsPR

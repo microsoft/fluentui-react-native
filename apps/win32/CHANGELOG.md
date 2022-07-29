@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Wed, 27 Jul 2022 02:32:13 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 02:14:21 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.23
+
+Fri, 29 Jul 2022 02:14:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.81.2
+
+## 0.21.22
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.81.1
+
+## 0.21.21
+
+Thu, 28 Jul 2022 22:52:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.81.0
+
+## 0.21.20
+
+Thu, 28 Jul 2022 21:20:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.80.0
+
+## 0.21.19
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Changed size tokens, added icon to the Tester for the Badge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/tester to v0.79.7
+
+## 0.21.18
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/tester to v0.79.6
 
 ## 0.21.17
 

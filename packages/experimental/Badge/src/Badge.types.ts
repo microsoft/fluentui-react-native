@@ -13,6 +13,7 @@ export type BadgeSize = typeof BadgeSizes[number];
 export type BadgeAppearance = typeof BadgeAppearances[number];
 export type BadgeShape = typeof BadgeShapes[number];
 export type BadgeColor = typeof BadgeColors[number] | ColorValue;
+export type BadgeIconPosition = 'before' | 'after';
 
 export interface BadgeCoreProps {
   /**
@@ -49,7 +50,7 @@ export interface BadgeProps extends BadgeCoreProps {
    * Icon can be placed before or after Badge's content.
    * @default before
    */
-  iconPosition?: 'before' | 'after';
+  iconPosition?: BadgeIconPosition;
 }
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**

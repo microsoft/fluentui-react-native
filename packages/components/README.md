@@ -24,7 +24,7 @@ Building cross platform JS experiences within Office and other SDX Host apps usi
 
 ### Compose vs Composable
 
-You have to choose an appropriate framework package to build a component. We have two packages: [foudation-compose](../deprecated/foundation-compose/README.md) and [foundation-composable](../deprecated/foundation-composable/README.md).
+You have to choose an appropriate framework package to build a component. We have two packages: [foundation-compose](../deprecated/foundation-compose/README.md) and [foundation-composable](../deprecated/foundation-composable/README.md).
 
 **Compose**'s primary purpose is the injection of our idea of what the useStyling implementation should be into the composable pattern. So, any component that wants to utilize our Theming and Styling system should use the Compose framework.
 

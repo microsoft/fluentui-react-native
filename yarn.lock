@@ -2390,9 +2390,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.19"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.19.tgz#1c8f30eb8495f93f700dd61939cd0910cf8906e7"
-  integrity sha512-fRRO09jAt0qA5eQBLmvCDfWVCexmth2jOjKSglwmEdsC3gqpebHI7nM9k8gwMfGLut0QxGnN5klIGP3XURO/eQ==
+  version "1.12.20"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.20.tgz#4257c6bd909740f3b4bef8c2db9686bb31a9989b"
+  integrity sha512-izmMf1j/4mbCuBsIT6K8I11fW+6e0DkkZXCsCb9FOZoX+rcbOoG5z8yNu2WzYpjNuyEduMJ85PrgvpPzOVavEg==
 
 "@rnx-kit/eslint-plugin@^0.2.8":
   version "0.2.13"
@@ -3039,9 +3039,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
-  version "17.0.47"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.47.tgz#4ee71aaf4c5a9e290e03aa4d0d313c5d666b3b78"
-  integrity sha512-mk0BL8zBinf2ozNr3qPnlu1oyVTYq+4V7WA76RgxUAtf0Em/Wbid38KN6n4abEkvO4xMTBWmnP1FtQzgkEiJoA==
+  version "17.0.48"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.48.tgz#a4532a8b91d7b27b8768b6fc0c3bccb760d15a6c"
+  integrity sha512-zJ6IYlJ8cYYxiJfUaZOQee4lh99mFihBoqkOSEGV+dFi9leROW6+PgstzQ+w3gWTnUfskALtQPGHK6dYmPj+2A==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -3679,7 +3679,7 @@ appdirsjs@^1.2.4:
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.6.tgz#fccf9ee543315492867cacfcfd4a2b32257d30ac"
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
-appium-mac2-driver@^1.1.4:
+appium-mac2-driver@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.0.tgz#6059bcaada3608505c2b2f2535d33b7cc43c2584"
   integrity sha512-gKdQOrl1esSfrXh5JCA+cs1YKoj7m+TU9NdpEgd1z5OE+0nAD17E0wqrl89drVzACdugejf7U8KQ2MmIUzXMBQ==
@@ -11340,9 +11340,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.64"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.64.tgz#1409588681f7b922eeaae5ea0bc5d19845ff479f"
-  integrity sha512-GtFWvf75Ay8Ob5tVGpm2yP+gPbn7oZAW5VwQcbV3GwjnoST+FGCK2zmYFOZ5IdV0dQCe6qcPM68IPl2bMCjokg==
+  version "0.66.65"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.65.tgz#612c0a0faacc545c698f092cb6e026ef88b94f58"
+  integrity sha512-B8n9I5rE59+jbC2hvJkfY2vWvzzJ6JX5yFAwHkuT5ZpHMUQvS2So/WbFN3sZlhZTzScgkT5w2Y0VKGd+iY7Btg==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"
