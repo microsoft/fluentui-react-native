@@ -7,6 +7,7 @@ import { FontWeight } from '@fluentui-react-native/theme-types';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
+import { rainbowGradientSource } from './testImageSources';
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
@@ -232,6 +233,21 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           ringThickness={parseInt(ringThickness)}
           size={parseInt(size) as AvatarSize}
           transparentRing={!showRing}
+        />
+      </View>
+      <View style={{ marginLeft: 20 }}>
+        <Text>Avatar with custom border</Text>
+        <CustomizedAvatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={avatarColor}
+          accessibilityLabel="Former CEO of Microsoft"
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
+          imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          icon={svgIconsEnabled ? { svgSource: svgProps } : undefined}
+          transparentRing={!showRing}
+          customBorderImageSource={rainbowGradientSource}
         />
       </View>
     </View>

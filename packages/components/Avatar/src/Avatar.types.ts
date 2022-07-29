@@ -1,5 +1,5 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
-import { ImageProps, ViewProps, TextProps, ColorValue } from 'react-native';
+import { ImageProps, ViewProps, TextProps, ColorValue, ImageURISource, ImageBackgroundProps } from 'react-native';
 import { IBackgroundColorTokens, IForegroundColorTokens, IBorderTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { PresenceBadgeProps, BadgeSize, PresenceBadgeStatus } from '@fluentui-react-native/badge';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
@@ -108,6 +108,7 @@ export interface AvatarConfigurableProps {
   ringColor?: ColorValue;
   ringThickness?: number;
   transparentRing?: boolean;
+  customBorderImageSource?: ImageURISource;
 
   /**
    * Size of the avatar in pixels.
@@ -278,6 +279,7 @@ export interface AvatarSlotProps {
   icon: IconProps;
   fallbackIcon: SvgProps;
   ring: ViewProps;
+  imageRing: ImageBackgroundProps;
   badge: PresenceBadgeProps;
 }
 

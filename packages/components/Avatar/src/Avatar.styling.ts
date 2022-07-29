@@ -157,6 +157,20 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       },
       ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
     ),
+    imageRing: buildProps(
+      (tokens: AvatarTokens, theme: Theme) => {
+        const ringConfig = getRingConfig(tokens);
+        return {
+          style: {
+            minWidth: ringConfig.size,
+            minHeight: ringConfig.size,
+            overflow: 'hidden',
+            ...borderStyles.from(tokens, theme),
+          },
+        };
+      },
+      ['size', ...borderStyles.keys],
+    ),
     badge: buildProps(
       (tokens: AvatarTokens) => {
         return {
