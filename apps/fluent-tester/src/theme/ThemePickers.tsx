@@ -55,11 +55,11 @@ export const ThemePickers: React.FunctionComponent = () => {
   }, []);
 
   const onThemeSelected = React.useCallback((newTheme: string) => {
-    testerTheme.themeName = newTheme.toLowerCase() as ThemeNames;
+    testerTheme.themeName = newTheme as ThemeNames;
   }, []);
 
   const onAppearanceChange = React.useCallback((newAppearance: string) => {
-    testerTheme.appearance = newAppearance.toLowerCase() as ThemeOptions['appearance'];
+    testerTheme.appearance = newAppearance as ThemeOptions['appearance'];
   }, []);
 
   return (
