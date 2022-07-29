@@ -1,4 +1,4 @@
-import * as React from 'React';
+import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
 import { Text } from 'react-native';

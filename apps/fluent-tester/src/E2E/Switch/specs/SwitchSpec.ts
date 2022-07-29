@@ -15,7 +15,7 @@ describe('Switch Testing Initialization', function () {
     SwitchPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToMenuPage();
+    NavigateAppPage.clickAndGoToSwitchPage();
     SwitchPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     expect(SwitchPageObject.isPageLoaded()).toBeTruthy(SwitchPageObject.ERRORMESSAGE_PAGELOAD);
@@ -40,7 +40,7 @@ describe('Switch Functional Testing', () => {
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate OnOpenChange() callback was fired -> Type "Enter"', () => {
+  it('Validate onChange() callback was fired -> Type "Enter"', () => {
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
     expect(SwitchPageObject.didToggleOn()).toBeTruthy();
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
@@ -50,7 +50,7 @@ describe('Switch Functional Testing', () => {
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Validate OnOpenChange() callback was fired -> Type "Spacebar"', () => {
+  it('Validate onChange() callback was fired -> Type "Spacebar"', () => {
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
     expect(SwitchPageObject.didToggleOn()).toBeTruthy();
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);

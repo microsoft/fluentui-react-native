@@ -3,6 +3,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { SWITCH_TESTPAGE } from './consts';
 import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
+import { E2ESwitchTest } from './E2ESwitchTest';
 
 const styles = StyleSheet.create({
   container: {
@@ -81,6 +82,10 @@ const toggleSections: TestSection[] = [
   {
     name: 'On/Off Text',
     component: () => <OnOffText />,
+  },
+  {
+    name: 'Switch E2E Testing',
+    component: () => <E2ESwitchTest />,
   },
 ];
 
