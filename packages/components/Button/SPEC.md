@@ -267,6 +267,8 @@ The following is a set of keys that interact with the `Button` component:
 | `Enter` | Executes the function passed into the `onClick` prop. |
 | `Space` | Executes the function passed into the `onClick` prop. |
 
+It is possible to override key behaviors by specifying `onKeyUp` or `onKeyDown`, depending on what `preferKeyDownForKeyEvents` from the `@fluentui-react-native/interactive-hooks` package indicates. Providing the callback this way will prevent the default behaviors noted above -- you will need to handle `Enter` and `Space` in the provided callback if the default behavior is desired.
+
 #### Cursor interaction
 
 - Cursor moves onto botton: Should immediately change the styling of the `Button` so that it appears to be hovered.
