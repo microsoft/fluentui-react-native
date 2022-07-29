@@ -58,6 +58,7 @@ exports[`Notification component tests Notification default 1`] = `
           Object {
             "flex": 1,
             "flexDirection": "column",
+            "justifyContent": "center",
           }
         }
       >
@@ -68,8 +69,6 @@ exports[`Notification component tests Notification default 1`] = `
             Object {
               "alignSelf": "flex-start",
               "color": "#0F6CBD",
-              "flex": 1,
-              "flexGrow": 1,
               "fontFamily": "Segoe UI",
               "fontSize": 15,
               "fontWeight": "600",
