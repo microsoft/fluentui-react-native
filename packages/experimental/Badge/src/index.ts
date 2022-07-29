@@ -16,3 +16,5 @@ export { BadgeAppearances, BadgeColors, BadgeShapes, BadgeSizes } from './Badge.
 export { Badge, badgeLookup } from './Badge';
 export { PresenceBadge, presenceBadgeName, PresenceBadgeStatuses } from './PresenceBadge';
 export type { PresenceBadgeStatus, PresenceBadgeProps, PresenceBadgeSlotProps, PresenceBadgeType } from './PresenceBadge';
+export { CounterBadge, counterBadgeName } from './CounterBadge';
+export type { CounterBadgeProps, CounterBadgeSlotProps, CounterBadgeType } from './CounterBadge';
