@@ -68,6 +68,7 @@ export const BasicBadge: React.FunctionComponent = () => {
     size,
     shape,
   };
+  const badgeContent = size !== 'tiny' && size !== 'extraSmall' ? 'Basic badge' : '';
 
   return (
     <View>
@@ -99,10 +100,10 @@ export const BasicBadge: React.FunctionComponent = () => {
         <View style={{ paddingHorizontal: 40, ...commonTestStyles.vmargin }}>
           {svgIconsEnabled && showIcon ? (
             <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
-              Basic badge
+              {badgeContent}
             </Badge>
           ) : (
-            <Badge {...badgeConfig}>Basic badge</Badge>
+            <Badge {...badgeConfig}>{badgeContent}</Badge>
           )}
         </View>
       </View>
