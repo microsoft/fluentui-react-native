@@ -22,6 +22,8 @@ const StandardUsage: React.FunctionComponent = () => {
     <View style={styles.container}>
       <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
+      <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
+      <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled />
     </View>
   );
 };
@@ -30,7 +32,7 @@ const OnChangeUsage: React.FunctionComponent = () => {
   const defaultDisplaySquare = true;
   const [displaySquare, setDisplaySquare] = React.useState(defaultDisplaySquare);
 
-  const toggleSquare = (event, checked) => {
+  const toggleSquare = (checked) => {
     setDisplaySquare(checked);
   };
 
@@ -94,7 +96,7 @@ export const SwitchTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'Switch is a button that has 2 states.';
+  const description = 'Switch is a control that has 2 mutually exclusive states.';
 
   return <Test name="Switch Test" description={description} sections={toggleSections} status={status}></Test>;
 };

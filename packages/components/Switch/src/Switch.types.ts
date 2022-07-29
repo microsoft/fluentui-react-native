@@ -80,7 +80,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   componentRef?: React.RefObject<IFocusable>;
 
-  onChange?: (e?: InteractionEvent, checked?: boolean) => void;
+  onChange?: (checked?: boolean, e?: InteractionEvent) => void;
 
   defaultChecked?: boolean;
 

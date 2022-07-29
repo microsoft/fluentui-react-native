@@ -1,12 +1,11 @@
 /** @jsx withSlots */
-import * as React from 'react';
 import { View, Text } from 'react-native';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 // import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
-import { ViewWin32 } from '@office-iss/react-native-win32';
+// import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
  *
@@ -23,10 +22,10 @@ export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
   slots: {
-    root: ViewWin32,
+    root: View,
     label: Text,
     track: View,
-    thumb: ViewWin32,
+    thumb: View,
     toggleContainer: View,
     onOffText: Text,
   },
@@ -45,8 +44,8 @@ export const Switch = compose<SwitchType>({
         <Slots.root {...mergedProps} accessibilityLabel={label}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track animationClass={'Ribbon_SwitchBackground'}>
-              <Slots.thumb animationClass={'Ribbon_SwitchThumb'} />
+            <Slots.track>
+              <Slots.thumb />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
