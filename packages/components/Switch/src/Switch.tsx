@@ -6,7 +6,7 @@ import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types
 import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
-// import { ViewWin32 } from '@office-iss/react-native-win32';
+import { ViewWin32 } from '@office-iss/react-native-win32';
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
  *
@@ -23,29 +23,33 @@ export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: ViewWin32,
     label: Text,
     track: View,
-    thumb: View,
+    thumb: ViewWin32,
+    toggleContainer: View,
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
     const switchInfo = useSwitch(userProps);
-
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, userProps));
+    const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
 
     // now return the handler for finishing render
     return (final: SwitchProps) => {
-      const { label, offText, onText, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
+      const { label, offText, onText, labelPosition, accessibilityLabel, ...mergedProps } = mergeProps(switchInfo.props, final);
+      const onOffText = switchInfo.state.toggleOn ? onText : offText;
+      const displayOnOffText = !!offText || !!onText;
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {(offText || onText) && <Slots.onOffText>{switchInfo.state.toggleOn ? onText : offText}</Slots.onOffText>}
-          <Slots.track>
-            <Slots.thumb />
-          </Slots.track>
           <Slots.label>{label}</Slots.label>
+          <Slots.toggleContainer>
+            <Slots.track animationClass={'Ribbon_SwitchBackground'}>
+              <Slots.thumb animationClass={'Ribbon_SwitchThumb'} />
+            </Slots.track>
+            {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
+          </Slots.toggleContainer>
         </Slots.root>
       );
     };

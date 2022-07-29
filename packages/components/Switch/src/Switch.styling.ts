@@ -27,10 +27,21 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
           minHeight: 28,
+          minWidth: 40,
           padding: 6,
         },
       }),
       ['flexDirection'],
+    ),
+    toggleContainer: buildProps(
+      (tokens: SwitchTokens) => ({
+        style: {
+          display: 'flex',
+          flexDirection: tokens.toggleContainerFlexDirection,
+          alignItems: 'center',
+        },
+      }),
+      ['toggleContainerFlexDirection'],
     ),
     track: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
@@ -38,11 +49,15 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           flexDirection: 'row',
           height: 20,
           borderRadius: 50,
-          minWidth: 40,
+          width: 40,
           backgroundColor: tokens.background,
           borderColor: tokens.stroke,
           borderWidth: 1,
           padding: 2,
+          marginTop: 2,
+          marginBottom: 2,
+          marginLeft: 4,
+          marginRight: 4,
           justifyContent: tokens.justifyContent,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
@@ -66,10 +81,15 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       () => ({
         style: {
           color: 'black',
-          margin: 0,
         },
       }),
       ['labelMargin'],
+    ),
+    onOffText: buildProps(
+      () => ({
+        style: {},
+      }),
+      [],
     ),
   },
 };

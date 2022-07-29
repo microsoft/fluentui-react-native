@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue, Animated } from 'react-native';
+import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/experimental-text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -7,9 +7,6 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const switchName = 'Switch';
-export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonAppearance = 'primary' | 'subtle';
-export type ButtonShape = 'rounded' | 'circular' | 'square';
 
 export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -53,6 +50,8 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 
   labelMargin?: ViewStyle['margin'];
 
+  toggleContainerFlexDirection?: ViewStyle['flexDirection'];
+
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
    */
@@ -81,7 +80,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
   componentRef?: React.RefObject<IFocusable>;
 
-  onChange?: (e: InteractionEvent, checked: boolean) => void;
+  onChange?: (e?: InteractionEvent, checked?: boolean) => void;
 
   defaultChecked?: boolean;
 
@@ -106,8 +105,9 @@ export interface SwitchInfo {
 export interface SwitchSlotProps {
   root: React.PropsWithRef<IViewProps>;
   label: TextProps;
-  track: React.PropsWithRef<IViewProps>;
-  thumb: Animated.AnimatedProps<IViewProps>;
+  track: IViewProps;
+  thumb: IViewProps;
+  toggleContainer: IViewProps;
   onOffText: TextProps;
 }
 

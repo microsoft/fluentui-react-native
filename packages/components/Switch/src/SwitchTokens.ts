@@ -5,15 +5,18 @@ import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
   before: {
-    flexDirection: 'row-reverse',
+    flexDirection: 'row',
+    toggleContainerFlexDirection: 'row',
   },
 
   above: {
-    flexDirection: 'column-reverse',
+    flexDirection: 'column',
+    toggleContainerFlexDirection: 'row',
   },
 
   after: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
+    toggleContainerFlexDirection: 'row-reverse',
   },
 
   toggleOn: {

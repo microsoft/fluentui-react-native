@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState, LayoutAnimation } from 'react-native';
+import { AccessibilityState } from 'react-native';
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
   // attach the pressable state handlers
@@ -16,8 +16,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const toggleCallback = (e: any) => {
     const newCheckedState = !checkedState;
     onChange && onChange(e, newCheckedState);
-
-    LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
+    // LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
     setCheckedState(newCheckedState);
   };
 
@@ -25,7 +24,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
-
+  console.log(props.labelPosition);
   return {
     props: {
       ...pressable.props,
