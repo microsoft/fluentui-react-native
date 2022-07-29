@@ -55,3 +55,6 @@ export const useKeyDownProps = noOp2;
  * @returns KeyPressProps: An object containing the correct platform specific props to  handle key press
  */
 export const useKeyProps = noOp2;
+
+/** Exposes the behavior of useKeyProps for the current platform as a boolean */
+export const preferKeyDownForKeyEvents = false;

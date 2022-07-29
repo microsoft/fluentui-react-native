@@ -18,7 +18,8 @@ export const useButton = (props: ButtonProps): ButtonState => {
 
   return {
     props: {
-      ...pressable.props,
+      ...onKeyUpProps,
+      ...pressable.props, // allow user key events to override those set by us
       accessible: true,
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
@@ -27,7 +28,6 @@ export const useButton = (props: ButtonProps): ButtonState => {
       enableFocusRing: enableFocusRing ?? true,
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
-      ...onKeyUpProps,
       iconPosition: props.iconPosition || 'before',
       loading,
     },

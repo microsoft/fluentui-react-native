@@ -202,6 +202,7 @@ export type {
 export {
   createIconProps,
   normalizeRect,
+  preferKeyDownForKeyEvents,
   useAsPressable,
   useAsToggle,
   useFocusState,
