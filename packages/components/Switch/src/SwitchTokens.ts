@@ -1,5 +1,4 @@
 import { Theme } from '@fluentui-react-native/framework';
-// import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SwitchTokens } from './Switch.types';
 

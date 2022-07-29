@@ -25,7 +25,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
-  console.log(props.labelPosition);
+
   return {
     props: {
       ...pressable.props,
