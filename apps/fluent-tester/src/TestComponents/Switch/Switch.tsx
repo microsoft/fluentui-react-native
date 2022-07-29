@@ -72,17 +72,14 @@ const toggleSections: TestSection[] = [
   },
   {
     name: 'onChange Usage',
-    testID: SWITCH_TESTPAGE,
     component: () => <OnChangeUsage />,
   },
   {
     name: 'Label Position',
-    testID: SWITCH_TESTPAGE,
     component: () => <LabelPosition />,
   },
   {
     name: 'On/Off Text',
-    testID: SWITCH_TESTPAGE,
     component: () => <OnOffText />,
   },
 ];
