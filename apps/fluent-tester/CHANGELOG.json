@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 29 Jul 2022 02:14:20 GMT",
+      "tag": "@fluentui-react-native/tester_v0.81.2",
+      "version": "0.81.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "9eefb3b9dafab206e4510fae2682f5208a42e125",
+            "comment": "Disable Flipper on iOS and macOS test apps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Jul 2022 23:57:03 GMT",
       "tag": "@fluentui-react-native/tester_v0.81.1",
       "version": "0.81.1",

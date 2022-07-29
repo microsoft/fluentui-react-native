@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 28 Jul 2022 23:57:03 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 02:14:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.81.2
+
+Fri, 29 Jul 2022 02:14:20 GMT
+
+### Patches
+
+- Disable Flipper on iOS and macOS test apps (sanajmi@microsoft.com)
 
 ## 0.81.1
 
