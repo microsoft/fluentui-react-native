@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Disable Flipper on iOS and macOS test apps",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
