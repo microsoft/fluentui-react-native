@@ -23,25 +23,11 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * Stroke color
    */
   stroke?: ColorValue;
+
   /**
    * Sets the position of the thumb
    */
   justifyContent?: ViewStyle['justifyContent'];
-
-  /**
-   * The icon color.
-   */
-  iconColor?: ColorValue;
-
-  /**
-   * The size of the icon.
-   */
-  iconSize?: number;
-
-  /**
-   * The weight of the lines used when drawing the icon.
-   */
-  iconWeight?: number;
 
   /**
    * The width of the button.
@@ -57,16 +43,6 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * The toggle container flex direction
    */
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
-
-  /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
-   */
-  spacingIconContentBefore?: number;
-
-  /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
-   */
-  spacingIconContentAfter?: number;
 
   /**
    * States that can be applied to a button
