@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Made Badge not accessible",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "v.kozova13@gmail.com",
+  "dependentChangeType": "patch"
+}
