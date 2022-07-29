@@ -59,11 +59,12 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           marginLeft: 4,
           marginRight: 4,
           justifyContent: tokens.justifyContent,
+          ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
           ...shadowStyles.from(tokens, theme),
         },
       }),
-      ['background', 'stroke', 'justifyContent', ...layoutStyles.keys, ...shadowStyles.keys],
+      ['background', 'stroke', 'justifyContent', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     thumb: buildProps(
       (tokens: SwitchTokens) => ({
