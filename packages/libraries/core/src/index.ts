@@ -184,6 +184,7 @@ export type { ITextProps, ITextType } from '@fluentui-react-native/text';
 export {
   createIconProps,
   normalizeRect,
+  preferKeyDownForKeyEvents,
   useAsPressable,
   useAsToggle,
   useFocusState,
