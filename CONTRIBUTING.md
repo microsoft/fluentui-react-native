@@ -77,6 +77,8 @@ Most components should use the compose framework as it offers the comprehensive 
    1. If your component has native apple code, run `pod install` from the corresponding macOS or iOS test app src folder (`apps/macos/src` or `apps/ios/src` respectively).
 1. Run the test app and you should see your new test!
 
+**Additionally, we require integrating your not component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/fluent-tester/src/E2E. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/fluent-tester/src/E2E#authoring-e2e-test).
+
 ## Adding native code to your new component
 
 Through the power of [Native Modules](https://reactnative.dev/docs/native-modules-intro), we are able to create components that are comprised of native platform code, rather than JS. This is particularly useful if you want platform specific behavior, or if you want a component that feels much more aligned to it's specific platform. The downside is you must implement the Native module for every platform you wish to support. It's worth investigating whether you truly need a native module, or if a more cross platform JS implementation is the better approach.
