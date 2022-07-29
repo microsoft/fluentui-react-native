@@ -23,7 +23,7 @@ describe('Switch Testing Initialization', function () {
   });
 });
 
-describe('Menu Functional Testing', () => {
+describe('Switch Functional Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(() => {
     SwitchPageObject.scrollToTestElement();
