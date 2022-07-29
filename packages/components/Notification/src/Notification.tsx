@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { PressableProps, View, ViewStyle } from 'react-native';
+import { Dimensions, Platform, PressableProps, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Notification.styling';
@@ -43,7 +43,12 @@ export const Notification = compose<NotificationType>({
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
-      return { marginHorizontal: marginHorizontal };
+      if (Platform.isPad) {
+        const width = Dimensions.get('window').width / 2;
+        return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
+      } else {
+        return { marginHorizontal: marginHorizontal };
+      }
     }, ['isBar']);
     const messageStyle: ViewStyle = useMemo(() => {
       const onActionPress = userProps.onActionPress;
