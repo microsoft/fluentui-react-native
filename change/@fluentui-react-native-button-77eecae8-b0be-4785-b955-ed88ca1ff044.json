@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Allow user props to override default button key handling",
-  "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

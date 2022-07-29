@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding flag to determine platform preference for keyUp vs. keyDown",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

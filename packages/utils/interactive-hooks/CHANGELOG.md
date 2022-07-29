@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 29 Jul 2022 21:04:38 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 22:47:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.0
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Minor changes
+
+- Adding flag to determine platform preference for keyUp vs. keyDown (email not defined)
 
 ## 0.17.5
 

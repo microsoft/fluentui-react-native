@@ -1,8 +1,28 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 29 Jul 2022 21:04:38 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 22:47:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.0
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Minor changes
+
+- Adding flag to determine platform preference for keyUp vs. keyDown (email not defined)
+- Bump @fluentui-react-native/button to v0.24.11
+- Bump @fluentui-react-native/callout to v0.21.6
+- Bump @fluentui-react-native/checkbox to v0.16.8
+- Bump @fluentui-react-native/contextual-menu to v0.18.6
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.6
+- Bump @fluentui-react-native/focus-zone to v0.10.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+- Bump @fluentui-react-native/link to v0.16.6
+- Bump @fluentui-react-native/menu-button to v0.8.13
+- Bump @fluentui-react-native/pressable to v0.9.6
+- Bump @fluentui-react-native/radio-group to v0.15.6
+- Bump @fluentui-react-native/tabs to v0.7.6
 
 ## 0.31.12
 
