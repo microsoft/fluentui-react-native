@@ -16,8 +16,8 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'mac',
-      automationName: 'Mac2',
-      bundleId: 'com.microsoft.ReactTestApp',
+      'appium:automationName': 'Mac2',
+      'appium:bundleId': 'com.microsoft.ReactTestApp',
     },
   ],
 
@@ -113,8 +113,23 @@ exports.config = {
    * Hook that gets executed before the suite starts
    * @param {Object} suite suite details
    */
-  // beforeSuite: function (suite) {
-  // },
+  beforeSuite: function () {
+    // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
+    // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
+    let fluentTesterWindow = null;
+    browser.waitUntil(() => {
+      fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
+      return fluentTesterWindow != null;
+    },
+    {
+      timeout: 10000,
+      timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
+      interval: 500
+    });
+
+    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    maxButton.click();
+  },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */

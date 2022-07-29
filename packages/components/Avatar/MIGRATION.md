@@ -34,6 +34,8 @@
 - `name` - is used for generation initials with `getInitials` method.
 - `shape` - can be `circular` and `square`.
 - `idForColor`
+- `image`- image object.
+- `imageUrl` - Shorthand for passing image URL instead of using `image` prop.
 
 ### Tokens that remain as is
 
@@ -118,7 +120,7 @@ Color tokens:
 
 ### Slots no longer supported with an equivalent functionality in v1 Avatar
 
-- `photo` => Use `image` slot instead or `imageUrl` prop.
+- `photo` => Use `image` prop instead or `imageUrl`.
 
 ### Slots no longer supported without an equivalent functionality in v1 Avatar
 

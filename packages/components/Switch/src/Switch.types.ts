@@ -23,7 +23,9 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * Stroke color
    */
   stroke?: ColorValue;
-
+  /**
+   * Sets the position of the thumb
+   */
   justifyContent?: ViewStyle['justifyContent'];
 
   /**
@@ -46,10 +48,14 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    */
   width?: ViewStyle['width'];
 
+  /**
+   * The flex direction of the root
+   */
   flexDirection?: ViewStyle['flexDirection'];
 
-  labelMargin?: ViewStyle['margin'];
-
+  /**
+   * The toggle container flex direction
+   */
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
 
   /**
@@ -78,20 +84,44 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
 }
 
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+  /**
+   * Reference to the Switch
+   */
   componentRef?: React.RefObject<IFocusable>;
 
+  /**
+   * Callback function for changes to the switch's state and interaction event
+   */
   onChange?: (checked?: boolean, e?: InteractionEvent) => void;
 
+  /**
+   * The default state of the Switch
+   */
   defaultChecked?: boolean;
 
+  /**
+   * The Switch's state
+   */
   checked?: boolean;
 
+  /**
+   * A label to describe the Switch
+   */
   label?: string;
 
+  /**
+   * The Switch's text that shows when it is in a false state
+   */
   offText?: string;
 
+  /**
+   * The Switch's text that shows when it is in a true state
+   */
   onText?: string;
 
+  /**
+   * Sets the position of the Switch's label
+   */
   labelPosition?: 'before' | 'above' | 'after';
 }
 

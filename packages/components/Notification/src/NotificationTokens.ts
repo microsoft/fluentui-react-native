@@ -23,6 +23,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontLineHeight: 20,
     fontSize: 15,
     fontWeight: '600',
+    minHeight: 64,
     padding: 16,
     shadowToken: notificationShadowStyle,
     hasTitle: {

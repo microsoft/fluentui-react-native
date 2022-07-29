@@ -1,8 +1,69 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Mon, 25 Jul 2022 21:27:19 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Jul 2022 23:57:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.25
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.11
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+
+## 1.1.24
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.10
+
+## 1.1.23
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
+
+## 1.1.22
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.9
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+
+## 1.1.21
+
+Tue, 26 Jul 2022 12:52:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.8
+
+## 1.1.20
+
+Tue, 26 Jul 2022 11:47:13 GMT
+
+### Patches
+
+- Changed Badge sizes according to Web (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.1.7
+
+## 1.1.19
+
+Tue, 26 Jul 2022 10:52:03 GMT
+
+### Patches
+
+- Fixed bug with size of font icon (v.kozova13@gmail.com)
 
 ## 1.1.18
 

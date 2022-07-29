@@ -1403,15 +1403,6 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.13.0.tgz#1d8610634920bd5decaca669cae8183c0713d2ef"
   integrity sha512-o9ir+tpie+Fm9zO+nCbJLBfzVjUhugRWRsPS8n6wBaujC1qyeUYjhoGg6ejXzKc0nVCkIsFmRRRgC0brfrPIzw==
 
-"@fluentui-react-native/experimental-activity-indicator@^0.5.29":
-  version "0.5.31"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/experimental-activity-indicator/-/experimental-activity-indicator-0.5.31.tgz#28383121367c86b69ddd2e3c509a4ba34ed6d7e5"
-  integrity sha512-vPVl8aFD0WA2EUaah5UP0jFb/DfOL6GLFpsBOtyTOb1ibLpAe+q5HkuXkpe6+IqJYSmD5NLLnGTsj9/TG6ZzYA==
-  dependencies:
-    "@fluentui-react-native/framework" "0.7.32"
-    assert-never "^1.2.1"
-    react-native-svg "^12.3.0"
-
 "@fluentui-react-native/framework@0.7.30":
   version "0.7.30"
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.7.30.tgz#204e934610073791f0b6a32810b9a03cb49fbc32"
@@ -1429,47 +1420,6 @@
     "@fluentui-react-native/use-styling" ">=0.8.3 <1.0.0"
     "@fluentui-react-native/use-tokens" ">=0.2.3 <1.0.0"
     tslib "^2.3.1"
-
-"@fluentui-react-native/framework@0.7.32":
-  version "0.7.32"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.7.32.tgz#2218f681e2fdaafe18d033bd1280f906eaaf94c0"
-  integrity sha512-F2dMTyJMcr8IvaRe3RO7AY2y2fyZId2TlQzFVybwCbZ9QnE18bEbrF9oCdBietJS9P+yAuBpAVV9B3ne1YHIcg==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.7.7 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.13.0 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.7"
-    "@fluentui-react-native/memo-cache" "^1.1.7"
-    "@fluentui-react-native/merge-props" ">=0.4.3 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.17.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.15.1 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.2.6 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.6.6 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.8.3 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.2.3 <1.0.0"
-    tslib "^2.3.1"
-
-"@fluentui-react-native/icon@0.12.1":
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/icon/-/icon-0.12.1.tgz#bd2a45eb7e265167a58274227141466764c0c57b"
-  integrity sha512-rnzQp50fbmbq+RZQxB3anQjwgSxJyHo/Dc3wkLGAk0rJMsXi6Pg/+mkulkVu48JI562QKOUJC2WLSDUGL9Px9A==
-  dependencies:
-    "@fluentui-react-native/default-theme" ">=0.13.0 <1.0.0"
-    "@fluentui-react-native/framework" "0.7.30"
-    "@fluentui-react-native/text" "^0.11.26"
-    "@fluentui-react-native/theme-types" ">=0.17.0 <1.0.0"
-    "@fluentui-react-native/theming-utils" ">=0.13.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.14.0 <1.0.0"
-    "@uifabricshared/foundation-compose" "^1.11.22"
-    react-native-svg "^12.3.0"
-
-"@fluentui-react-native/text@^0.11.26":
-  version "0.11.28"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/text/-/text-0.11.28.tgz#79797c86655f869575b94f1bf25668b537ce5204"
-  integrity sha512-tEHeqpd69IH3tID/54S5CWF5AFjgjjV0jHp6LRx2ZiS0J21ZkWQmICNfRJJx+LKfzcdmaQWIvJRQkG3irOZV6Q==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.8.5 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.15.1 <1.0.0"
-    "@uifabricshared/foundation-compose" "^1.11.23"
 
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
@@ -2458,9 +2408,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.9.5":
-  version "1.12.18"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.18.tgz#0f8e9d104174131277292d3a84ae909e897c41ce"
-  integrity sha512-jBk2k57TFtF0Ni6+qzJOi55iIyhI2psVDr1rrCSfGM/ztBk48paNTu4ipvdYTwyFaAwvdf/nu/BLu9fDm7y2LQ==
+  version "1.12.20"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.12.20.tgz#4257c6bd909740f3b4bef8c2db9686bb31a9989b"
+  integrity sha512-izmMf1j/4mbCuBsIT6K8I11fW+6e0DkkZXCsCb9FOZoX+rcbOoG5z8yNu2WzYpjNuyEduMJ85PrgvpPzOVavEg==
 
 "@rnx-kit/eslint-plugin@^0.2.8":
   version "0.2.13"
@@ -3107,9 +3057,9 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^17", "@types/react@^17.0.2":
-  version "17.0.47"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.47.tgz#4ee71aaf4c5a9e290e03aa4d0d313c5d666b3b78"
-  integrity sha512-mk0BL8zBinf2ozNr3qPnlu1oyVTYq+4V7WA76RgxUAtf0Em/Wbid38KN6n4abEkvO4xMTBWmnP1FtQzgkEiJoA==
+  version "17.0.48"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-17.0.48.tgz#a4532a8b91d7b27b8768b6fc0c3bccb760d15a6c"
+  integrity sha512-zJ6IYlJ8cYYxiJfUaZOQee4lh99mFihBoqkOSEGV+dFi9leROW6+PgstzQ+w3gWTnUfskALtQPGHK6dYmPj+2A==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -3747,7 +3697,7 @@ appdirsjs@^1.2.4:
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.6.tgz#fccf9ee543315492867cacfcfd4a2b32257d30ac"
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
-appium-mac2-driver@^1.1.4:
+appium-mac2-driver@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.0.tgz#6059bcaada3608505c2b2f2535d33b7cc43c2584"
   integrity sha512-gKdQOrl1esSfrXh5JCA+cs1YKoj7m+TU9NdpEgd1z5OE+0nAD17E0wqrl89drVzACdugejf7U8KQ2MmIUzXMBQ==
@@ -11408,9 +11358,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.61"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.61.tgz#b54caf6174324f28471e1cc8d8328ab9627dd8f4"
-  integrity sha512-88zRwG+hLhtDzlPDNIyzJ0X6xqv3zo4h1lFehDsB3ZAH5/BWVngti2lBrSqpl78U+gkeiGJes769u7MDQMV3MQ==
+  version "0.66.65"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.65.tgz#612c0a0faacc545c698f092cb6e026ef88b94f58"
+  integrity sha512-B8n9I5rE59+jbC2hvJkfY2vWvzzJ6JX5yFAwHkuT5ZpHMUQvS2So/WbFN3sZlhZTzScgkT5w2Y0VKGd+iY7Btg==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"

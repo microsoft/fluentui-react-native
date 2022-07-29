@@ -1,8 +1,123 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
+This log was last generated on Thu, 28 Jul 2022 23:57:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.81.1
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Add PlatformColor case (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.25
+- Bump @fluentui-react-native/badge to v0.1.11
+- Bump @fluentui-react-native/button to v0.24.9
+- Bump @fluentui-react-native/experimental-button to v0.16.9
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.11
+- Bump @fluentui-react-native/experimental-tabs to v0.5.6
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+- Bump @fluentui-react-native/menu to v1.0.18
+- Bump @fluentui-react-native/notification to v0.10.1
+- Bump @fluentui-react-native/win32-theme to v0.20.1
+- Bump @fluentui/react-native to v0.31.11
+
+## 0.81.0
+
+Thu, 28 Jul 2022 22:52:47 GMT
+
+### Minor changes
+
+- Add MacOS E2E Testing (safreibe@microsoft.com)
+
+## 0.80.0
+
+Thu, 28 Jul 2022 21:20:29 GMT
+
+### Minor changes
+
+- add initial animation to notification (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.10.0
+
+## 0.79.7
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Changed size tokens, added icon to the Tester for the Badge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.24
+- Bump @fluentui-react-native/badge to v0.1.10
+
+## 0.79.6
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.23
+
+## 0.79.5
+
+Wed, 27 Jul 2022 02:32:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.10
+- Bump @fluentui/react-native to v0.31.10
+
+## 0.79.4
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.22
+- Bump @fluentui-react-native/badge to v0.1.9
+- Bump @fluentui-react-native/button to v0.24.8
+- Bump @fluentui-react-native/experimental-button to v0.16.8
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.5
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.9
+- Bump @fluentui-react-native/experimental-tabs to v0.5.5
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @fluentui-react-native/menu to v1.0.17
+- Bump @fluentui-react-native/notification to v0.9.2
+- Bump @fluentui-react-native/stack to v0.7.1
+- Bump @fluentui/react-native to v0.31.9
+
+## 0.79.3
+
+Tue, 26 Jul 2022 12:52:48 GMT
+
+### Patches
+
+- Added Badge colors (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.21
+- Bump @fluentui-react-native/badge to v0.1.8
+
+## 0.79.2
+
+Tue, 26 Jul 2022 11:47:13 GMT
+
+### Patches
+
+- Changed Badge sizes according to Web (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.20
+- Bump @fluentui-react-native/badge to v0.1.7
+
+## 0.79.1
+
+Tue, 26 Jul 2022 10:52:03 GMT
+
+### Patches
+
+- Fixed bug with size of font icon (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.19
 
 ## 0.79.0
 

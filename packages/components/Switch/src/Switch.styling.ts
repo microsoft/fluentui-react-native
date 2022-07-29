@@ -83,7 +83,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           color: 'black',
         },
       }),
-      ['labelMargin'],
+      [],
     ),
     onOffText: buildProps(
       () => ({
