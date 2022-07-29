@@ -29,7 +29,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          height: tokens.height,
+          minHeight: tokens.minHeight,
           width: tokens.width,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
