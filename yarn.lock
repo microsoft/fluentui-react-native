@@ -3711,7 +3711,7 @@ appium-mac2-driver@^1.4.0:
     source-map-support "^0.x"
     teen_process "^1.15.0"
 
-appium-windows-driver@^2.0.6:
+appium-windows-driver@^2.0.1:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.6.tgz#e462bc3100d464d3c50b0cabef0e4cd37613ef5f"
   integrity sha512-uZuUIGXfY7IzS31xtPigxPl5X52xSSh1J3w/mYHV48k22MCJ0bF86DUBCf5O4GtJJhUxLwM1ZpYPF0EBxpAXSQ==

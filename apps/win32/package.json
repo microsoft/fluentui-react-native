@@ -38,8 +38,6 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
     "@office-iss/react-native-win32": "^0.66.0",
     "@office-iss/rex-win32": "0.66.17-devmain.15229.10000",
     "@rnx-kit/cli": "^0.9.57",
@@ -47,6 +45,8 @@
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.66.0",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@wdio/allure-reporter": "^6.5.0",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",
@@ -56,7 +56,7 @@
     "@wdio/sync": "^6.5.0",
     "allure-commandline": "2.13.0",
     "appium": "^2.0.0-beta.27",
-    "appium-windows-driver": "^2.0.6",
+    "appium-windows-driver": "^2.0.1",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^1.0.0",
