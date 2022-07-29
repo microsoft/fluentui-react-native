@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Fri, 29 Jul 2022 18:26:04 GMT",
+      "tag": "@fluentui-react-native/notification_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "1666287324f60c0ee0fe2f27e5e0681ee8d31234",
+            "comment": "add notification to android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Jul 2022 23:57:03 GMT",
       "tag": "@fluentui-react-native/notification_v0.10.1",
       "version": "0.10.1",

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 29 Jul 2022 18:26:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.0",
+      "version": "0.82.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "1666287324f60c0ee0fe2f27e5e0681ee8d31234",
+            "comment": "add notification to android"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.11.0",
+            "commit": "1666287324f60c0ee0fe2f27e5e0681ee8d31234"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 29 Jul 2022 07:32:38 GMT",
       "tag": "@fluentui-react-native/tester_v0.81.2",
       "version": "0.81.2",
