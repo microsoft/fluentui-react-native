@@ -1,5 +1,5 @@
 import { ColorValue, FlexStyle } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';

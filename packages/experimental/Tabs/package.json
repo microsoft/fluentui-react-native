@@ -29,7 +29,7 @@
     "@fluentui-react-native/framework": "0.8.0",
     "@fluentui-react-native/interactive-hooks": ">=0.17.4 <1.0.0",
     "@fluentui-react-native/focus-zone": ">=0.10.4 <1.0.0",
-    "@fluentui-react-native/experimental-text": ">=0.10.2 <1.0.0",
+    "@fluentui-react-native/text": ">=0.12.1 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.16.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.0 <1.0.0",
     "@fluentui-react-native/icon": "0.13.2",
