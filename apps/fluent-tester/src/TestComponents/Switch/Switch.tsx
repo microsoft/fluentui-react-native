@@ -93,7 +93,7 @@ export const SwitchTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'Switch is a control that has 2 mutually exclusive states.';
+  const description = 'Switch is a control that has two mutually exclusive states.';
 
   return <Test name="Switch Test" description={description} sections={toggleSections} status={status}></Test>;
 };
