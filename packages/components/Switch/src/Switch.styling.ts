@@ -22,7 +22,6 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
     root: buildProps(
       (tokens: SwitchTokens) => ({
         style: {
-          display: 'flex',
           alignItems: 'center',
           flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
@@ -36,7 +35,6 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
     toggleContainer: buildProps(
       (tokens: SwitchTokens) => ({
         style: {
-          display: 'flex',
           flexDirection: tokens.toggleContainerFlexDirection,
           alignItems: 'center',
         },

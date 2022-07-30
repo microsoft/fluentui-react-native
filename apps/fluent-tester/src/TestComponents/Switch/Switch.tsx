@@ -28,14 +28,14 @@ const StandardUsage: React.FunctionComponent = () => {
 const OnChangeUsage: React.FunctionComponent = () => {
   const [displaySquare, setDisplaySquare] = React.useState(true);
   const [evenDisplaySquare, setEvenDisplaySquare] = React.useState(true);
-  const [count, setCount] = React.useState(1);
+  const [count, setCount] = React.useState(0);
 
   const defaultToggleSquare = (checked: boolean) => {
     setDisplaySquare(checked);
   };
 
   const toggleSquareEven = (checked: boolean) => {
-    if (count % 2 == 0) {
+    if (count % 2 == 1) {
       setEvenDisplaySquare(!checked);
       setCount(0);
     }

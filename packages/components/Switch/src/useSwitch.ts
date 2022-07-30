@@ -24,6 +24,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
+  const currentCheckedState = checked ?? checkedState;
 
   return {
     props: {
@@ -36,14 +37,14 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
-      checked: checkedState,
+      checked: currentCheckedState,
       label: props.label,
       labelPosition: props.labelPosition ?? 'after',
     },
     state: {
       ...pressable.state,
-      toggleOn: checkedState == true,
-      toggleOff: checkedState == false,
+      toggleOn: currentCheckedState == true,
+      toggleOff: currentCheckedState == false,
     },
   };
 };

@@ -9,7 +9,7 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   const [showTextChecked, setShowChecked] = React.useState(false);
 
   const onToggleChecked = (checked: boolean) => {
-    setShowChecked(checked);
+    setShowChecked(!checked);
   };
 
   return (
