@@ -6,7 +6,6 @@ import { AccessibilityState, LayoutAnimation } from 'react-native';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
-  // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onChange, checked, defaultChecked, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
   const isDisabled = !!disabled;
