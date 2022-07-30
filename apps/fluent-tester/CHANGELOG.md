@@ -1,8 +1,66 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 28 Jul 2022 23:57:03 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 22:47:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.82.2
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Adding button to test buttons that also handle key presses (email not defined)
+- Bump @fluentui-react-native/avatar to v1.1.27
+- Bump @fluentui-react-native/badge to v0.1.13
+- Bump @fluentui-react-native/button to v0.24.11
+- Bump @fluentui-react-native/experimental-button to v0.16.11
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.13
+- Bump @fluentui-react-native/experimental-tabs to v0.5.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+- Bump @fluentui-react-native/menu to v1.0.20
+- Bump @fluentui-react-native/notification to v0.11.2
+- Bump @fluentui/react-native to v0.32.0
+
+## 0.82.1
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.26
+- Bump @fluentui-react-native/badge to v0.1.12
+- Bump @fluentui-react-native/button to v0.24.10
+- Bump @fluentui-react-native/experimental-button to v0.16.10
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.7
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.12
+- Bump @fluentui-react-native/experimental-tabs to v0.5.7
+- Bump @fluentui-react-native/experimental-text to v0.11.0
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/menu to v1.0.19
+- Bump @fluentui-react-native/notification to v0.11.1
+- Bump @fluentui-react-native/stack to v0.7.2
+- Bump @fluentui-react-native/text to v0.13.0
+- Bump @fluentui/react-native to v0.31.12
+
+## 0.82.0
+
+Fri, 29 Jul 2022 18:26:04 GMT
+
+### Minor changes
+
+- add notification to android (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.11.0
+
+## 0.81.2
+
+Fri, 29 Jul 2022 02:14:20 GMT
+
+### Patches
+
+- Disable Flipper on iOS and macOS test apps (sanajmi@microsoft.com)
 
 ## 0.81.1
 

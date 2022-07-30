@@ -50,6 +50,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           flex: 1,
           flexDirection: 'column',
+          justifyContent: 'center',
         },
       };
     }),
@@ -58,8 +59,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            flex: 1,
-            flexGrow: 1,
             fontSize: 15,
             fontWeight: '600',
             letterSpacing: -0.24, // iOS only prop
@@ -74,8 +73,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            flex: 1,
-            flexGrow: 1,
             ...fontStyles.from(tokens, theme),
           },
         };

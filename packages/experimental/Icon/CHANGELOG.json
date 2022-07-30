@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Fri, 29 Jul 2022 21:04:38 GMT",
+      "tag": "@fluentui-react-native/icon_v0.13.3",
+      "version": "0.13.3",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/icon",
+            "commit": "bee467a2f783a35346bcb76687c200bd372a6086",
+            "comment": "move text from experimental to components dir"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.13.0",
+            "commit": "e6bfd0a36e3f554c1c2c148ed637f7886a0a31d9"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 28 Jul 2022 23:57:03 GMT",
       "tag": "@fluentui-react-native/icon_v0.13.2",
       "version": "0.13.2",

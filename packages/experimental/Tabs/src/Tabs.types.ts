@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { TextProps } from '@fluentui-react-native/text';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';

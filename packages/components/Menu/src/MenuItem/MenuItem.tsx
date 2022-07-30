@@ -2,7 +2,7 @@
 import { I18nManager, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { compose, memoize, mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { menuItemName, MenuItemProps, MenuItemType } from './MenuItem.types';
 import { useMenuItem } from './useMenuItem';
 import { stylingSettings } from './MenuItem.styling';

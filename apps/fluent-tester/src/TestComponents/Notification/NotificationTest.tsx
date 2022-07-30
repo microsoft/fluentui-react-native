@@ -109,7 +109,7 @@ const CustomBar: React.FunctionComponent = () => {
 };
 
 const PrimaryWithAutoHide: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(true);
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);
@@ -183,7 +183,7 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
   );
 };
 const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(true);
   const onButtonPress = () => setVisible(!visible);
 
   const [hidden, setHidden] = React.useState<boolean>(!visible);

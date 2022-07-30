@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger } from '@fluentui-react-native/menu';
 import {
   MENUITEM_ACCESSIBILITY_LABEL,
