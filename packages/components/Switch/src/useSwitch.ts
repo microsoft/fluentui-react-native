@@ -2,44 +2,80 @@ import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState, LayoutAnimation } from 'react-native';
+import { AccessibilityState, LayoutAnimation, AccessibilityActionInfo } from 'react-native';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
-  const { onChange, checked, defaultChecked, accessibilityState, componentRef = defaultComponentRef, disabled, ...rest } = props;
+  const {
+    onChange,
+    checked,
+    defaultChecked,
+    accessibilityRole,
+    accessibilityLabel,
+    onAccessibilityTap,
+    onAccessibilityAction,
+    label,
+    labelPosition,
+    componentRef = defaultComponentRef,
+    disabled,
+    ...rest
+  } = props;
+
   const isDisabled = !!disabled;
   const initialCheckedState = !!(checked ?? defaultChecked);
   const [checkedState, setCheckedState] = React.useState(initialCheckedState);
   const focusRef = isDisabled ? null : componentRef;
 
-  const toggleCallback = (e: InteractionEvent) => {
-    const newCheckedState = checked !== undefined ? checked : !checkedState;
-    onChange && onChange(newCheckedState, e);
-    LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
-    setCheckedState(newCheckedState);
-  };
+  const toggleCallback = React.useCallback(
+    (e: InteractionEvent) => {
+      const newCheckedState = checked !== undefined ? checked : !checkedState;
+      onChange && onChange(newCheckedState, e);
+      LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
+      setCheckedState(newCheckedState);
+    },
+    [onChange, setCheckedState, checkedState, checked],
+  );
 
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
-  const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
   const currentCheckedState = checked ?? checkedState;
+
+  const accessibilityState: AccessibilityState = {
+    checked: props.accessibilityState?.checked ?? currentCheckedState,
+  };
+
+  const accessibilityActionsProp: AccessibilityActionInfo[] = [{ name: 'Toggle' }];
+
+  const onAccessibilityActionProp = React.useCallback(
+    (event: any) => {
+      switch (event.nativeEvent.actionName) {
+        case 'Toggle':
+          toggleCallback(event);
+          break;
+      }
+      onAccessibilityAction && onAccessibilityAction(event);
+    },
+    [toggleCallback, onAccessibilityAction],
+  );
 
   return {
     props: {
       ...pressable.props,
       accessible: true,
-      accessibilityRole: 'switch',
-      onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onChange : undefined),
-      accessibilityLabel: props.accessibilityLabel,
+      accessibilityRole: accessibilityRole ?? 'switch',
+      onAccessibilityTap: onAccessibilityTap ?? onChange,
+      accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
+      accessibilityActions: accessibilityActionsProp,
+      onAccessibilityAction: onAccessibilityActionProp,
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
       checked: currentCheckedState,
-      label: props.label,
-      labelPosition: props.labelPosition ?? 'after',
+      label: label,
+      labelPosition: labelPosition ?? 'after',
     },
     state: {
       ...pressable.state,
