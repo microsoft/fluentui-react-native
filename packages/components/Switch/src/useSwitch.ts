@@ -14,7 +14,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const focusRef = isDisabled ? null : componentRef;
 
   const toggleCallback = (e: InteractionEvent) => {
-    const newCheckedState = !checkedState;
+    const newCheckedState = checked !== undefined ? checked : !checkedState;
     onChange && onChange(newCheckedState, e);
     LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
     setCheckedState(newCheckedState);

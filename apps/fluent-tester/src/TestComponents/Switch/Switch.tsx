@@ -27,15 +27,29 @@ const StandardUsage: React.FunctionComponent = () => {
 
 const OnChangeUsage: React.FunctionComponent = () => {
   const [displaySquare, setDisplaySquare] = React.useState(true);
+  const [evenDisplaySquare, setEvenDisplaySquare] = React.useState(true);
+  const [count, setCount] = React.useState(1);
 
-  const toggleSquare = (checked) => {
+  const defaultToggleSquare = (checked: boolean) => {
     setDisplaySquare(checked);
+  };
+
+  const toggleSquareEven = (checked: boolean) => {
+    if (count % 2 == 0) {
+      setEvenDisplaySquare(!checked);
+      setCount(0);
+    }
+
+    setCount(count + 1);
   };
 
   return (
     <View style={commonTestStyles.settingsPicker}>
-      <Switch defaultChecked={true} onChange={toggleSquare} />
+      <Switch label={'Toggle Square'} defaultChecked={true} onChange={defaultToggleSquare} />
       {displaySquare && <View style={styles.square} />}
+
+      <Switch label={'Toggle Square Every Other Toggle'} checked={evenDisplaySquare} onChange={toggleSquareEven} />
+      {evenDisplaySquare && <View style={styles.square} />}
     </View>
   );
 };
