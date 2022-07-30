@@ -2,10 +2,18 @@
 
 exports[`Switch Default 1`] = `
 <View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Toggle",
+      },
+    ]
+  }
   accessibilityLabel="Default Switch"
   accessibilityRole="switch"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": false,
     }
   }
@@ -13,6 +21,7 @@ exports[`Switch Default 1`] = `
   checked={false}
   disabled={false}
   focusable={true}
+  onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -27,7 +36,6 @@ exports[`Switch Default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "display": "flex",
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
@@ -48,7 +56,6 @@ exports[`Switch Default 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "display": "flex",
         "flexDirection": "row-reverse",
       }
     }
@@ -89,10 +96,18 @@ exports[`Switch Default 1`] = `
 
 exports[`Switch Disabled 1`] = `
 <View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Toggle",
+      },
+    ]
+  }
   accessibilityLabel="Default Switch Disabled"
   accessibilityRole="switch"
   accessibilityState={
     Object {
+      "checked": false,
       "disabled": true,
     }
   }
@@ -100,6 +115,7 @@ exports[`Switch Disabled 1`] = `
   checked={false}
   disabled={true}
   focusable={false}
+  onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -114,7 +130,6 @@ exports[`Switch Disabled 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "display": "flex",
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
@@ -135,7 +150,6 @@ exports[`Switch Disabled 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "display": "flex",
         "flexDirection": "row-reverse",
       }
     }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
 import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState, LayoutAnimation, AccessibilityActionInfo } from 'react-native';
+import { AccessibilityState, AccessibilityActionEvent, LayoutAnimation, AccessibilityActionInfo } from 'react-native';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
@@ -49,10 +49,10 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const accessibilityActionsProp: AccessibilityActionInfo[] = [{ name: 'Toggle' }];
 
   const onAccessibilityActionProp = React.useCallback(
-    (event: any) => {
+    (event: AccessibilityActionEvent) => {
       switch (event.nativeEvent.actionName) {
         case 'Toggle':
-          toggleCallback(event);
+          toggleCallback(event); // will likely replace this with something else
           break;
       }
       onAccessibilityAction && onAccessibilityAction(event);
