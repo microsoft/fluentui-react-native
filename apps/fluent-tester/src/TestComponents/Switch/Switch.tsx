@@ -4,13 +4,9 @@ import { SWITCH_TESTPAGE } from './consts';
 import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
+import { commonTestStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    flex: 1,
-  },
   square: {
     backgroundColor: 'red',
     width: 100,
@@ -20,7 +16,7 @@ const styles = StyleSheet.create({
 
 const StandardUsage: React.FunctionComponent = () => {
   return (
-    <View style={styles.container}>
+    <View style={commonTestStyles.settingsPicker}>
       <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
@@ -38,7 +34,7 @@ const OnChangeUsage: React.FunctionComponent = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={commonTestStyles.settingsPicker}>
       <Switch defaultChecked={defaultDisplaySquare} onChange={toggleSquare} />
       {displaySquare && <View style={styles.square} />}
     </View>
@@ -47,7 +43,7 @@ const OnChangeUsage: React.FunctionComponent = () => {
 
 const LabelPosition: React.FunctionComponent = () => {
   return (
-    <View style={styles.container}>
+    <View style={commonTestStyles.settingsPicker}>
       <Switch defaultChecked={true} labelPosition={'before'} label={'before'} />
       <Switch defaultChecked={true} labelPosition={'after'} label={'after'} />
       <Switch defaultChecked={true} labelPosition={'above'} label={'above'} />
@@ -57,7 +53,7 @@ const LabelPosition: React.FunctionComponent = () => {
 
 const OnOffText: React.FunctionComponent = () => {
   return (
-    <View style={styles.container}>
+    <View style={commonTestStyles.settingsPicker}>
       <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={'On'} offText={'Off'} />
       <Switch defaultChecked={true} labelPosition={'after'} label={'Autosave'} onText={'On'} offText={'Off'} />
       <Switch defaultChecked={true} labelPosition={'above'} label={'Autosave'} onText={'On'} offText={'Off'} />
