@@ -26,8 +26,7 @@ const StandardUsage: React.FunctionComponent = () => {
 };
 
 const OnChangeUsage: React.FunctionComponent = () => {
-  const defaultDisplaySquare = true;
-  const [displaySquare, setDisplaySquare] = React.useState(defaultDisplaySquare);
+  const [displaySquare, setDisplaySquare] = React.useState(true);
 
   const toggleSquare = (checked) => {
     setDisplaySquare(checked);
@@ -35,7 +34,7 @@ const OnChangeUsage: React.FunctionComponent = () => {
 
   return (
     <View style={commonTestStyles.settingsPicker}>
-      <Switch defaultChecked={defaultDisplaySquare} onChange={toggleSquare} />
+      <Switch defaultChecked={true} onChange={toggleSquare} />
       {displaySquare && <View style={styles.square} />}
     </View>
   );
