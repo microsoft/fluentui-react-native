@@ -75,21 +75,15 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           borderRadius: 17,
         },
       }),
-      [],
+      ['thumb'],
     ),
-    label: buildProps(
-      () => ({
-        style: {
-          color: 'black',
-        },
-      }),
-      [],
-    ),
-    onOffText: buildProps(
-      () => ({
-        style: {},
-      }),
-      [],
-    ),
+    label: buildProps(() => ({
+      style: {
+        color: 'black',
+      },
+    })),
+    onOffText: buildProps(() => ({
+      style: {},
+    })),
   },
 };
