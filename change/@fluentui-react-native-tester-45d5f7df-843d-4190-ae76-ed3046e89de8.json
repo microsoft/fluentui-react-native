@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add custom image ring to avatar",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
