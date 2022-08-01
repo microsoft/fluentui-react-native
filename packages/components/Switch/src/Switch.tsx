@@ -39,7 +39,7 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
 
       return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
+        <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
             <Slots.track>
