@@ -5,6 +5,7 @@ import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
 
 const styles = StyleSheet.create({
   square: {
@@ -27,29 +28,35 @@ const StandardUsage: React.FunctionComponent = () => {
 
 const OnChangeUsage: React.FunctionComponent = () => {
   const [displaySquare, setDisplaySquare] = React.useState(true);
-  const [evenDisplaySquare, setEvenDisplaySquare] = React.useState(true);
-  const [count, setCount] = React.useState(0);
 
   const defaultToggleSquare = (checked: boolean) => {
     setDisplaySquare(checked);
-  };
-
-  const toggleSquareEven = (checked: boolean) => {
-    if (count % 2 == 1) {
-      setEvenDisplaySquare(!checked);
-      setCount(0);
-    }
-
-    setCount(count + 1);
   };
 
   return (
     <View style={commonTestStyles.settingsPicker}>
       <Switch label={'Toggle Square'} defaultChecked={true} onChange={defaultToggleSquare} />
       {displaySquare && <View style={styles.square} />}
+    </View>
+  );
+};
 
-      <Switch label={'Toggle Square Every Other Toggle'} checked={evenDisplaySquare} onChange={toggleSquareEven} />
-      {evenDisplaySquare && <View style={styles.square} />}
+const ControlSwitchValues: React.FunctionComponent = () => {
+  const [toggleSwitch, setToggleSwitch] = React.useState(true);
+
+  const toggleSwitchTrue = () => {
+    setToggleSwitch(true);
+  };
+
+  const toggleSwitchFalse = () => {
+    setToggleSwitch(false);
+  };
+
+  return (
+    <View style={commonTestStyles.settingsPicker}>
+      <Button onClick={toggleSwitchTrue}>Toggle Switch True</Button>
+      <Button onClick={toggleSwitchFalse}>Toggle Switch False</Button>
+      <Switch label={'Switch Value Being Controlled'} checked={toggleSwitch} />
     </View>
   );
 };
@@ -83,6 +90,10 @@ const toggleSections: TestSection[] = [
   {
     name: 'onChange Usage',
     component: () => <OnChangeUsage />,
+  },
+  {
+    name: 'Control Switch Values',
+    component: () => <ControlSwitchValues />,
   },
   {
     name: 'Label Position',
