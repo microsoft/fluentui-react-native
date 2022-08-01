@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SWITCH_TESTPAGE } from './consts';
 import { View, StyleSheet } from 'react-native';
-import { Switch } from '@fluentui-react-native/switch';
+import { Switch } from '@fluentui-react-native/experimental-switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
