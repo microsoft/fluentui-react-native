@@ -45,7 +45,7 @@ export const Notification = compose<NotificationType>({
 
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
-      if (Platform.OS == 'ios' && Platform.isPad) {
+      if (Platform.OS == 'ios' && Platform.isPad && !isBar) {
         return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
       } else {
         return { marginHorizontal: marginHorizontal };
