@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "update react-native-svg to 12.4.0",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
