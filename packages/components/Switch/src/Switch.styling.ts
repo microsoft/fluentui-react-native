@@ -47,10 +47,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           flexDirection: 'row',
           height: 20,
           width: 40,
-          backgroundColor: tokens.background,
-          borderColor: tokens.stroke,
-          borderWidth: 1,
-          borderRadius: 50,
+          backgroundColor: tokens.backgroundColor,
           padding: 2,
           marginTop: 2,
           marginBottom: 2,
@@ -62,18 +59,18 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           ...shadowStyles.from(tokens, theme),
         },
       }),
-      ['background', 'stroke', 'justifyContent', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
+      ['backgroundColor', 'justifyContent', ...borderStyles.keys],
     ),
     thumb: buildProps(
       (tokens: SwitchTokens) => ({
         style: {
-          backgroundColor: tokens.thumb,
+          backgroundColor: tokens.thumbColor,
           height: 14,
           width: 14,
           borderRadius: 17,
         },
       }),
-      ['thumb'],
+      ['thumbColor'],
     ),
     label: buildProps(() => ({
       style: {

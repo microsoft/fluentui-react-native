@@ -12,17 +12,12 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Track color
    */
-  background?: ColorValue;
+  backgroundColor?: ColorValue;
 
   /**
    * Thumb color
    */
-  thumb?: ColorValue;
-
-  /**
-   * Stroke color
-   */
-  stroke?: ColorValue;
+  thumbColor?: ColorValue;
 
   /**
    * Sets the position of the thumb

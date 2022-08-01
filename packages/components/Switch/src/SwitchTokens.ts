@@ -3,6 +3,9 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
+  borderWidth: 1,
+  borderRadius: 50,
+
   before: {
     flexDirection: 'row',
     toggleContainerFlexDirection: 'row',
@@ -19,46 +22,46 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   },
 
   toggleOn: {
-    background: t.colors.compoundBrandBackground1,
-    thumb: t.colors.neutralForegroundInverted,
-    stroke: t.colors.compoundBrandBackground1,
+    backgroundColor: t.colors.compoundBrandBackground1,
+    thumbColor: t.colors.neutralForegroundInverted,
+    borderColor: t.colors.compoundBrandBackground1,
     justifyContent: 'flex-end',
     hovered: {
-      background: t.colors.compoundBrandBackground1Hover,
-      thumb: t.colors.neutralForegroundInvertedLink,
-      stroke: t.colors.compoundBrandBackground1Hover,
+      backgroundColor: t.colors.compoundBrandBackground1Hover,
+      thumbColor: t.colors.neutralForegroundInvertedLink,
+      borderColor: t.colors.compoundBrandBackground1Hover,
     },
     pressed: {
-      background: t.colors.compoundBrandBackground1Pressed,
-      thumb: t.colors.neutralForegroundInvertedLink,
-      stroke: t.colors.compoundBrandBackground1Pressed,
+      backgroundColor: t.colors.compoundBrandBackground1Pressed,
+      thumbColor: t.colors.neutralForegroundInvertedLink,
+      borderColor: t.colors.compoundBrandBackground1Pressed,
     },
     disabled: {
-      background: t.colors.neutralBackgroundDisabled,
-      thumb: t.colors.neutralStrokeDisabled,
-      stroke: t.colors.neutralForegroundDisabled,
+      backgroundColor: t.colors.neutralBackgroundDisabled,
+      thumbColor: t.colors.neutralStrokeDisabled,
+      borderColor: t.colors.neutralForegroundDisabled,
     },
   },
 
   toggleOff: {
-    background: t.colors.neutralForegroundInvertedLink,
-    thumb: t.colors.neutralStrokeAccessible,
-    stroke: t.colors.neutralStrokeAccessible,
+    backgroundColor: t.colors.neutralForegroundInvertedLink,
+    thumbColor: t.colors.neutralStrokeAccessible,
+    borderColor: t.colors.neutralStrokeAccessible,
     justifyContent: 'flex-start',
     hovered: {
-      background: t.colors.neutralForegroundInvertedLinkHover,
-      thumb: t.colors.neutralStrokeAccessibleHover,
-      stroke: t.colors.neutralStrokeAccessibleHover,
+      backgroundColor: t.colors.neutralForegroundInvertedLinkHover,
+      thumbColor: t.colors.neutralStrokeAccessibleHover,
+      borderColor: t.colors.neutralStrokeAccessibleHover,
     },
     pressed: {
-      background: t.colors.neutralForegroundInvertedLinkPressed,
-      thumb: t.colors.neutralStrokeAccessiblePressed,
-      stroke: t.colors.neutralStrokeAccessiblePressed,
+      backgroundColor: t.colors.neutralForegroundInvertedLinkPressed,
+      thumbColor: t.colors.neutralStrokeAccessiblePressed,
+      borderColor: t.colors.neutralStrokeAccessiblePressed,
     },
     disabled: {
-      background: t.colors.neutralBackgroundDisabled,
-      thumb: t.colors.neutralStrokeDisabled,
-      stroke: t.colors.neutralStrokeDisabled,
+      backgroundColor: t.colors.neutralBackgroundDisabled,
+      thumbColor: t.colors.neutralStrokeDisabled,
+      borderColor: t.colors.neutralStrokeDisabled,
     },
   },
 });
