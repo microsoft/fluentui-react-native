@@ -24,7 +24,7 @@
     "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
     "@fluentui-react-native/theming-utils": ">=0.14.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.16.0 <1.0.0",
-    "react-native-svg": "^12.3.0"
+    "react-native-svg": "^12.4.0"
   },
   "repository": {
     "type": "git",

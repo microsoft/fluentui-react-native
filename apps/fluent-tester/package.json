@@ -75,7 +75,7 @@
     "react": "17.0.2",
     "react-native": "^0.66.0",
     "react-native-macos": "^0.66.0",
-    "react-native-svg": "^12.3.0",
+    "react-native-svg": "^12.4.0",
     "react-native-windows": "^0.66.0",
     "tslib": "^2.3.1"
   },
@@ -103,7 +103,7 @@
     "react": "17.0.2",
     "react-native": "^0.66.0",
     "react-native-macos": "^0.66.0",
-    "react-native-svg": "^12.3.0",
+    "react-native-svg": "^12.4.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^1.4.0",
     "react-native-windows": "^0.66.0",
@@ -118,7 +118,7 @@
     "react": "17.0.2",
     "react-native": "^0.66.0",
     "react-native-macos": "^0.66.0",
-    "react-native-svg": "^12.3.0",
+    "react-native-svg": "^12.4.0",
     "react-native-windows": "^0.66.0"
   },
   "jest": {

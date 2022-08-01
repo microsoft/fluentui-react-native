@@ -450,7 +450,7 @@ PODS:
   - ReactTestApp-Resources (1.0.0-dev)
   - RNCPicker (2.4.2):
     - React-Core
-  - RNSVG (12.3.0):
+  - RNSVG (12.4.3):
     - React-Core
   - SwiftLint (0.47.1)
   - Yoga (1.14.0)
@@ -621,7 +621,7 @@ SPEC CHECKSUMS:
   ReactTestApp-DevSupport: f304d297706114319929405239789b443b5c2fee
   ReactTestApp-Resources: 810cb22ae7c4e042ce930887b2665f26d8011498
   RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
-  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
+  RNSVG: f3b60aeeaa81960e2e0536c3a9eef50b667ef3a9
   SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
 
