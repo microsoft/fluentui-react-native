@@ -7,7 +7,7 @@ import { radioName, RadioType, RadioProps, RadioSlotProps, RadioRenderData } fro
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { settings, radioSelectActionLabel } from './RadioButton.settings';
+import { settings, radioSelectActionLabel } from './Radio.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
@@ -36,7 +36,7 @@ export const Radio = compose<RadioType>({
 
     /* We don't want to call the user's onChange multiple times on the same selection. */
     const changeSelection = () => {
-      if (value != info.selectedKey) {
+      if (value != info.value) {
         info.onChange && info.onChange(value);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
@@ -46,7 +46,7 @@ export const Radio = compose<RadioType>({
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (value == info.selectedKey) {
+      if (value == info.value) {
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     }, []);
@@ -75,7 +75,7 @@ export const Radio = compose<RadioType>({
 
     const state = {
       ...pressable.state,
-      selected: info.selectedKey === userProps.value,
+      selected: info.value === userProps.value,
       disabled: disabled || false,
     };
 
@@ -96,7 +96,7 @@ export const Radio = compose<RadioType>({
         focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
       },
-      content: { children: label },
+      label: { children: label },
     });
 
     return { slotProps };

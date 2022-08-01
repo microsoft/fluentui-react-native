@@ -5,12 +5,12 @@ import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import {
   radioGroupName,
-  IRadioGroupType,
-  IRadioGroupProps,
-  IRadioGroupState,
-  IRadioGroupSlotProps,
-  IRadioGroupRenderData,
-  IRadioGroupContext,
+  RadioGroupType,
+  RadioGroupProps,
+  RadioGroupState,
+  RadioGroupSlotProps,
+  RadioGroupRenderData,
+  RadioGroupContextType,
 } from './RadioGroup.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
@@ -19,8 +19,8 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens } from '@fluentui-react-native/tokens';
 import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
 
-export const RadioGroupContext = React.createContext<IRadioGroupContext>({
-  selectedKey: null,
+export const RadioGroupContext = React.createContext<RadioGroupContextType>({
+  value: null,
   onChange: (/* key: string */) => {
     return;
   },
@@ -30,14 +30,14 @@ export const RadioGroupContext = React.createContext<IRadioGroupContext>({
   buttonKeys: [],
 });
 
-export const RadioGroup = compose<IRadioGroupType>({
+export const RadioGroup = compose<RadioGroupType>({
   displayName: radioGroupName,
 
-  usePrepareProps: (userProps: IRadioGroupProps, useStyling: IUseComposeStyling<IRadioGroupType>) => {
-    const { label, ariaLabel, accessibilityLabel, selectedKey, defaultSelectedKey, ...rest } = userProps;
+  usePrepareProps: (userProps: RadioGroupProps, useStyling: IUseComposeStyling<RadioGroupType>) => {
+    const { label, accessibilityLabel, value, defaultValue, ...rest } = userProps;
 
     // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-    const data = useSelectedKey(selectedKey || defaultSelectedKey || null, userProps.onChange);
+    const data = useSelectedKey(value || defaultValue || null, userProps.onChange);
 
     const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
 
@@ -48,9 +48,9 @@ export const RadioGroup = compose<IRadioGroupType>({
       [setSelectedButtonRef],
     );
 
-    const state: IRadioGroupState = {
+    const state: RadioGroupState = {
       context: {
-        selectedKey: selectedKey ?? data.selectedKey,
+        value: value ?? data.selectedKey,
         onChange: data.onKeySelect,
         updateSelectedButtonRef: onSelectButtonRef,
       },
@@ -58,8 +58,8 @@ export const RadioGroup = compose<IRadioGroupType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const slotProps = mergeSettings<IRadioGroupSlotProps>(styleProps, {
-      root: { accessibilityLabel: accessibilityLabel ?? ariaLabel ?? label, accessibilityRole: 'radiogroup', ...rest },
+    const slotProps = mergeSettings<RadioGroupSlotProps>(styleProps, {
+      root: { accessibilityLabel: accessibilityLabel ?? label, accessibilityRole: 'radiogroup', ...rest },
       label: { children: label },
       container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
     });
@@ -67,7 +67,7 @@ export const RadioGroup = compose<IRadioGroupType>({
     return { slotProps, state };
   },
 
-  render: (Slots: ISlots<IRadioGroupSlotProps>, renderData: IRadioGroupRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<RadioGroupSlotProps>, renderData: RadioGroupRenderData, ...children: React.ReactNode[]) => {
     if (renderData.state == undefined) {
       return null;
     }

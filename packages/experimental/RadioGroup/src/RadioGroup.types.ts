@@ -7,11 +7,11 @@ import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 
 export const radioGroupName = 'RadioGroup';
 
-export interface IRadioGroupContext {
+export interface RadioGroupContextType {
   /**
    * The currently selected RadioButton's key
    */
-  selectedKey: string | null;
+  value: string | null;
 
   /**
    * Updates the selected button and calls the client’s onChange callback
@@ -29,11 +29,11 @@ export interface IRadioGroupContext {
   buttonKeys?: string[];
 }
 
-export interface IRadioGroupState {
-  context: IRadioGroupContext;
+export interface RadioGroupState {
+  context: RadioGroupContextType;
 }
 
-export interface IRadioGroupProps {
+export interface RadioGroupProps {
   /**
    * Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user.
    */
@@ -42,13 +42,7 @@ export interface IRadioGroupProps {
   /**
    * The key of the RadioButton that will initially be selected
    */
-  defaultSelectedKey?: string;
-
-  /**
-   *  A label for screen readers. If not provided, it will be set to the label of the radio group.
-   * @deprecated Use accessibilityLabel instead.
-   */
-  ariaLabel?: string;
+  defaultValue?: string;
 
   /*
    ** An accessibility label for screen readers. If not provided, it will be set to the label of the radio group.
@@ -60,7 +54,7 @@ export interface IRadioGroupProps {
    * onChange events and passing a new value in when changed. This overrides defaultSelectedKey
    * and makes the RadioGroup a controlled component.
    */
-  selectedKey?: string;
+  value?: string;
 
   /**
    * Callback for receiving a notification when the choice has been changed
@@ -70,19 +64,19 @@ export interface IRadioGroupProps {
   testID?: string;
 }
 
-export interface IRadioGroupTokens extends IForegroundColorTokens, FontTokens {}
+export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
-export interface IRadioGroupSlotProps {
+export interface RadioGroupSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
   label: ITextProps;
   container: FocusZoneProps;
 }
 
-export type IRadioGroupRenderData = IRenderData<IRadioGroupSlotProps, IRadioGroupState>;
+export type RadioGroupRenderData = IRenderData<RadioGroupSlotProps, RadioGroupState>;
 
-export interface IRadioGroupType {
-  props: IRadioGroupProps;
-  tokens: IRadioGroupTokens;
-  slotProps: IRadioGroupSlotProps;
-  state: IRadioGroupState;
+export interface RadioGroupType {
+  props: RadioGroupProps;
+  tokens: RadioGroupTokens;
+  slotProps: RadioGroupSlotProps;
+  state: RadioGroupState;
 }

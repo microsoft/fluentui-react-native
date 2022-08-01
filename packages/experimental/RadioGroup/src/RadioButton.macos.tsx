@@ -19,7 +19,7 @@ export const RadioButton = compose<RadioType>({
     // Reroute the native component's onPress event to RadioGroup's onChange
     const onPressRerouted = () => {
       // Prevent calls to RadioGroup's onChange on the currently selected button
-      if (value != info.selectedKey) {
+      if (value != info.value) {
         info.onChange && info.onChange(value);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
@@ -29,13 +29,13 @@ export const RadioButton = compose<RadioType>({
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (value === info.selectedKey) {
+      if (value === info.value) {
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     }, []);
 
     const styleProps = useStyling(userProps);
-    const isSelected = info.selectedKey === value;
+    const isSelected = info.value === value;
     const slotProps = mergeSettings<RadioSlotProps>(styleProps, {
       root: {
         ref: componentRef,

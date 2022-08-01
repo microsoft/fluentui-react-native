@@ -1,7 +1,7 @@
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import { IRadioGroupType, radioGroupName } from './RadioGroup.types';
+import { RadioGroupType, radioGroupName } from './RadioGroup.types';
 
-export const settings: IComposeSettings<IRadioGroupType> = [
+export const settings: IComposeSettings<RadioGroupType> = [
   {
     tokens: {
       color: 'menuItemText',

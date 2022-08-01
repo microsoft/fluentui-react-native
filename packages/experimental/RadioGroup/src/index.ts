@@ -4,11 +4,11 @@ export type { RadioProps, RadioRenderData, RadioSlotProps, RadioTokens, RadioTyp
 export { RadioGroup, RadioGroupContext } from './RadioGroup';
 export { radioGroupName } from './RadioGroup.types';
 export type {
-  IRadioGroupContext,
-  IRadioGroupProps,
-  IRadioGroupRenderData,
-  IRadioGroupSlotProps,
-  IRadioGroupState,
-  IRadioGroupTokens,
-  IRadioGroupType,
+  RadioGroupContextType,
+  RadioGroupProps,
+  RadioGroupRenderData,
+  RadioGroupSlotProps,
+  RadioGroupState,
+  RadioGroupTokens,
+  RadioGroupType,
 } from './RadioGroup.types';

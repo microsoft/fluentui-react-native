@@ -28,14 +28,14 @@ const BasicRadioGroup: React.FunctionComponent = () => {
 
   return (
     <View>
-      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="X" onChange={onChange}>
+      <RadioGroup label="Uncontrolled RadioGroup" defaultValue="X" onChange={onChange}>
         <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
         <Radio label="Option X" value="X" />
         <Radio label="Option Y (disabled)" value="C" disabled={true} />
         <Radio label="Option Z" value="Z" />
       </RadioGroup>
       <Separator />
-      <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
+      <RadioGroup label="Controlled RadioGroup" value={selectedKey} onChange={onChange2}>
         <View>
           <Radio
             label="Option A"
@@ -74,7 +74,8 @@ export const RadioGroupTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'No description.';
+  const description =
+    'RadioGroup lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.';
 
   return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status} />;
 };
