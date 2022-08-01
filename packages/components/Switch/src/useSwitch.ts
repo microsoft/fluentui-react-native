@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
-import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState, AccessibilityActionEvent, LayoutAnimation, AccessibilityActionInfo } from 'react-native';
+import { LayoutAnimation } from 'react-native';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
@@ -11,14 +10,11 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     onChange,
     checked,
     defaultChecked,
-    accessibilityRole,
-    accessibilityLabel,
-    onAccessibilityTap,
-    onAccessibilityAction,
     label,
     labelPosition,
     componentRef = defaultComponentRef,
     disabled,
+    accessibilityRole,
     ...rest
   } = props;
 
@@ -46,34 +42,11 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const currentCheckedState = checked ?? checkedState;
 
-  const accessibilityState: AccessibilityState = {
-    checked: props.accessibilityState?.checked ?? currentCheckedState,
-  };
-
-  const accessibilityActionsProp: AccessibilityActionInfo[] = [{ name: 'Toggle' }];
-
-  const onAccessibilityActionProp = React.useCallback(
-    (event: AccessibilityActionEvent) => {
-      switch (event.nativeEvent.actionName) {
-        case 'Toggle':
-          toggleCallback(event); // will likely replace this with something else
-          break;
-      }
-      onAccessibilityAction && onAccessibilityAction(event);
-    },
-    [toggleCallback, onAccessibilityAction],
-  );
-
   return {
     props: {
       ...pressable.props,
       accessible: true,
       accessibilityRole: accessibilityRole ?? 'switch',
-      onAccessibilityTap: onAccessibilityTap ?? onChange,
-      accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
-      accessibilityActions: accessibilityActionsProp,
-      onAccessibilityAction: onAccessibilityActionProp,
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
@@ -88,11 +61,3 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     },
   };
 };
-
-const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: AccessibilityState) {
-  if (accessibilityState) {
-    return { disabled: disabled, ...accessibilityState };
-  }
-  return { disabled: disabled };
-}
