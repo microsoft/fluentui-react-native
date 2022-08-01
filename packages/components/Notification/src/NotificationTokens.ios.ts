@@ -3,6 +3,16 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { NotificationTokens } from './Notification.types';
 import { DynamicColorIOS } from 'react-native';
 
+const emptyShadowStyle = {
+  ambient: { x: 0, y: 0, blur: 0, color: '#00000000' },
+  key: { x: 0, y: 0, blur: 0, color: '#00000000' },
+};
+
+const notificationShadowStyle = {
+  ambient: { x: 0, y: 8, blur: 8, color: '#00000024' },
+  key: { x: 0, y: 0, blur: 1, color: '#0000001f' },
+};
+
 /**
  * Fluent 2 colors are not yet in the token pipeline for iOS so DynamicColorIOS is necessary for dark mode
  */
@@ -98,7 +108,9 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontLineHeight: 20,
     fontSize: 15,
     fontWeight: '600',
+    minHeight: 64,
     padding: 16,
+    shadowToken: notificationShadowStyle,
     hasTitle: {
       fontLetterSpacing: -0.08,
       fontLineHeight: 18,
@@ -109,6 +121,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     isBar: {
       borderRadius: 0,
       fontWeight: '400',
+      shadowToken: emptyShadowStyle,
     },
     primary: {
       backgroundColor: notificationColors.brandBackground4,

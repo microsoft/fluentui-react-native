@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
+This log was last generated on Fri, 29 Jul 2022 22:47:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.6
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+
+## 0.21.5
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+
+## 0.21.4
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+
+## 0.21.3
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @uifabricshared/foundation-compose to v1.12.1
+
+## 0.21.2
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+
+## 0.21.1
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
 
 ## 0.21.0
 

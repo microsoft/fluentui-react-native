@@ -5,7 +5,7 @@ import {
   HOMEPAGE_RADIOGROUP_BUTTON,
   FIRST_RADIO_BUTTON,
   SECOND_RADIO_BUTTON,
-} from '../../../FluentTester/TestComponents/RadioGroup/consts';
+} from '../../../TestComponents/RadioGroup/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 export const enum RadioButtonSelector {

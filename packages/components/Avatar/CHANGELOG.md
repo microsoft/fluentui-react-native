@@ -1,8 +1,115 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Wed, 20 Jul 2022 17:46:19 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Aug 2022 18:06:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.28
+
+Mon, 01 Aug 2022 18:06:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.14
+
+## 1.1.27
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.13
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+
+## 1.1.26
+
+Fri, 29 Jul 2022 21:04:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.12
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+
+## 1.1.25
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.11
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+
+## 1.1.24
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.10
+
+## 1.1.23
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
+
+## 1.1.22
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.9
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+
+## 1.1.21
+
+Tue, 26 Jul 2022 12:52:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.8
+
+## 1.1.20
+
+Tue, 26 Jul 2022 11:47:13 GMT
+
+### Patches
+
+- Changed Badge sizes according to Web (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/badge to v0.1.7
+
+## 1.1.19
+
+Tue, 26 Jul 2022 10:52:03 GMT
+
+### Patches
+
+- Fixed bug with size of font icon (v.kozova13@gmail.com)
+
+## 1.1.18
+
+Mon, 25 Jul 2022 21:27:19 GMT
+
+### Patches
+
+- Combine platform specific test apps (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.1.6
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+
+## 1.1.17
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.5
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
 
 ## 1.1.16
 

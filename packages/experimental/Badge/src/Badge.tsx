@@ -2,7 +2,7 @@
 import { Children, ReactNode } from 'react';
 import { View } from 'react-native';
 import { badgeName, BadgeType, BadgeProps } from './Badge.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { compose, withSlots, UseSlots, mergeProps } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
@@ -17,7 +17,9 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['size'] ||
     (!userProps['size'] && layer === 'large') ||
     layer === userProps['shape'] ||
-    (!userProps['shape'] && layer === 'rounded')
+    (!userProps['shape'] && layer === 'rounded') ||
+    layer === userProps['color'] ||
+    (!userProps['color'] && layer === 'brand')
   );
 };
 

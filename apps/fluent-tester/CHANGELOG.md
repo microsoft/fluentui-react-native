@@ -1,8 +1,256 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 20 Jul 2022 19:01:18 GMT and should not be manually modified.
+This log was last generated on Mon, 01 Aug 2022 18:06:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.82.3
+
+Mon, 01 Aug 2022 18:06:17 GMT
+
+### Patches
+
+- Added font/size tokens (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.28
+- Bump @fluentui-react-native/badge to v0.1.14
+
+## 0.82.2
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Adding button to test buttons that also handle key presses (email not defined)
+- Bump @fluentui-react-native/avatar to v1.1.27
+- Bump @fluentui-react-native/badge to v0.1.13
+- Bump @fluentui-react-native/button to v0.24.11
+- Bump @fluentui-react-native/experimental-button to v0.16.11
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.13
+- Bump @fluentui-react-native/experimental-tabs to v0.5.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+- Bump @fluentui-react-native/menu to v1.0.20
+- Bump @fluentui-react-native/notification to v0.11.2
+- Bump @fluentui/react-native to v0.32.0
+
+## 0.82.1
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.26
+- Bump @fluentui-react-native/badge to v0.1.12
+- Bump @fluentui-react-native/button to v0.24.10
+- Bump @fluentui-react-native/experimental-button to v0.16.10
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.7
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.12
+- Bump @fluentui-react-native/experimental-tabs to v0.5.7
+- Bump @fluentui-react-native/experimental-text to v0.11.0
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/menu to v1.0.19
+- Bump @fluentui-react-native/notification to v0.11.1
+- Bump @fluentui-react-native/stack to v0.7.2
+- Bump @fluentui-react-native/text to v0.13.0
+- Bump @fluentui/react-native to v0.31.12
+
+## 0.82.0
+
+Fri, 29 Jul 2022 18:26:04 GMT
+
+### Minor changes
+
+- add notification to android (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.11.0
+
+## 0.81.2
+
+Fri, 29 Jul 2022 02:14:20 GMT
+
+### Patches
+
+- Disable Flipper on iOS and macOS test apps (sanajmi@microsoft.com)
+
+## 0.81.1
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Add PlatformColor case (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.25
+- Bump @fluentui-react-native/badge to v0.1.11
+- Bump @fluentui-react-native/button to v0.24.9
+- Bump @fluentui-react-native/experimental-button to v0.16.9
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.6
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.11
+- Bump @fluentui-react-native/experimental-tabs to v0.5.6
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+- Bump @fluentui-react-native/menu to v1.0.18
+- Bump @fluentui-react-native/notification to v0.10.1
+- Bump @fluentui-react-native/win32-theme to v0.20.1
+- Bump @fluentui/react-native to v0.31.11
+
+## 0.81.0
+
+Thu, 28 Jul 2022 22:52:47 GMT
+
+### Minor changes
+
+- Add MacOS E2E Testing (safreibe@microsoft.com)
+
+## 0.80.0
+
+Thu, 28 Jul 2022 21:20:29 GMT
+
+### Minor changes
+
+- add initial animation to notification (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.10.0
+
+## 0.79.7
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Changed size tokens, added icon to the Tester for the Badge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.24
+- Bump @fluentui-react-native/badge to v0.1.10
+
+## 0.79.6
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.23
+
+## 0.79.5
+
+Wed, 27 Jul 2022 02:32:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.10
+- Bump @fluentui/react-native to v0.31.10
+
+## 0.79.4
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.22
+- Bump @fluentui-react-native/badge to v0.1.9
+- Bump @fluentui-react-native/button to v0.24.8
+- Bump @fluentui-react-native/experimental-button to v0.16.8
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.5
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.9
+- Bump @fluentui-react-native/experimental-tabs to v0.5.5
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @fluentui-react-native/menu to v1.0.17
+- Bump @fluentui-react-native/notification to v0.9.2
+- Bump @fluentui-react-native/stack to v0.7.1
+- Bump @fluentui/react-native to v0.31.9
+
+## 0.79.3
+
+Tue, 26 Jul 2022 12:52:48 GMT
+
+### Patches
+
+- Added Badge colors (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.21
+- Bump @fluentui-react-native/badge to v0.1.8
+
+## 0.79.2
+
+Tue, 26 Jul 2022 11:47:13 GMT
+
+### Patches
+
+- Changed Badge sizes according to Web (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.20
+- Bump @fluentui-react-native/badge to v0.1.7
+
+## 0.79.1
+
+Tue, 26 Jul 2022 10:52:03 GMT
+
+### Patches
+
+- Fixed bug with size of font icon (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.19
+
+## 0.79.0
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Minor changes
+
+- Combine platform specific test apps (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.18
+- Bump @fluentui-react-native/badge to v0.1.6
+- Bump @fluentui-react-native/button to v0.24.7
+- Bump @fluentui-react-native/experimental-button to v0.16.7
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.4
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.8
+- Bump @fluentui-react-native/experimental-shadow to v0.2.10
+- Bump @fluentui-react-native/experimental-tabs to v0.5.4
+- Bump @fluentui-react-native/interactive-hooks to v0.17.2
+- Bump @fluentui-react-native/menu to v1.0.16
+- Bump @fluentui-react-native/notification to v0.9.1
+- Bump @fluentui/react-native to v0.31.8
+
+## 0.78.4
+
+Mon, 25 Jul 2022 19:49:02 GMT
+
+### Patches
+
+- Add accessibilityLabels to all text inputs (ruaraki@microsoft.com)
+
+## 0.78.3
+
+Mon, 25 Jul 2022 18:59:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.9.0
+
+## 0.78.2
+
+Sun, 24 Jul 2022 01:24:23 GMT
+
+### Patches
+
+- remove flatlist usage (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/apple-theme to v0.13.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.7
+- Bump @fluentui/react-native to v0.31.7
+
+## 0.78.1
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.17
+- Bump @fluentui-react-native/badge to v0.1.5
+- Bump @fluentui-react-native/button to v0.24.6
+- Bump @fluentui-react-native/experimental-button to v0.16.6
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.6
+- Bump @fluentui-react-native/experimental-tabs to v0.5.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.1
+- Bump @fluentui-react-native/menu to v1.0.15
+- Bump @fluentui-react-native/notification to v0.8.1
+- Bump @fluentui/react-native to v0.31.6
 
 ## 0.78.0
 

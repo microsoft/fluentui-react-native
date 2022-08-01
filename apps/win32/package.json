@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.21.7",
+  "version": "0.21.27",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -31,7 +31,7 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.78.0",
+    "@fluentui-react-native/tester": "^0.82.3",
     "react": "17.0.2",
     "react-native": "^0.66.0",
     "react-native-svg": "^12.3.0",
@@ -47,7 +47,13 @@
     "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@wdio/allure-reporter": "5.22.4",
+    "@wdio/allure-reporter": "^6.5.0",
+    "@wdio/appium-service": "^6.5.0",
+    "@wdio/cli": "^6.5.0",
+    "@wdio/jasmine-framework": "^6.5.0",
+    "@wdio/local-runner": "^6.5.0",
+    "@wdio/spec-reporter": "^6.5.0",
+    "@wdio/sync": "^6.5.0",
     "allure-commandline": "2.13.0",
     "appium": "^2.0.0-beta.27",
     "appium-windows-driver": "^2.0.1",
@@ -58,13 +64,7 @@
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "4.5.4",
-    "webdriverio": "^6.5.0",
-    "@wdio/appium-service": "^6.5.0",
-    "@wdio/cli": "^6.5.0",
-    "@wdio/jasmine-framework": "^6.5.0",
-    "@wdio/local-runner": "^6.5.0",
-    "@wdio/spec-reporter": "^6.5.0",
-    "@wdio/sync": "^6.5.0"
+    "webdriverio": "^6.5.0"
   },
   "jest": {
     "preset": "react-native"

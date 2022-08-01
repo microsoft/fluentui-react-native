@@ -1,12 +1,12 @@
 steps:
   - script: |
-      yarn bundle
-    workingDirectory: apps/windows
+      yarn bundle:windows
+    workingDirectory: apps/fluent-tester
     displayName: 'yarn bundle'
 
   - script: |
       yarn appium driver install windows
-    workingDirectory: apps/windows
+    workingDirectory: apps/fluent-tester
     displayName: 'Installing appium windows driver'
 
   # WinAppDriver 1.2 is being deployed across MS hosted agents. appium-windows-driver is tied to a specific version of WinAppDriver,
@@ -41,13 +41,13 @@ steps:
     displayName: 'Install Azure Credentials Plugin for NuGet'
 
   - script: |
-      yarn prewindows
-    workingDirectory: apps\windows
+      yarn install-windows-test-app
+    workingDirectory: apps\fluent-tester
     displayName: 'generate UWP app'
 
   - script: |
       yarn windows --arch x64 --logging --no-packager --no-launch
-    workingDirectory: apps\windows
+    workingDirectory: apps\fluent-tester
     displayName: 'build UWP app'
 
   # Creates a variable that determines whether the previous build tasks succeeded.
@@ -63,8 +63,8 @@ steps:
     displayName: 'Create success build variable'
 
   - script: |
-      yarn e2etest
-    workingDirectory: apps\windows
+      yarn e2etest:windows
+    workingDirectory: apps\fluent-tester
     displayName: 'run E2E UWP tests'
     condition: succeeded()
 
@@ -75,3 +75,4 @@ steps:
       applicationType: UWP
       platform: windows
       buildArtifacts: variables['task.Build.status']
+      directory: $(Build.SourcesDirectory)/apps/fluent-tester

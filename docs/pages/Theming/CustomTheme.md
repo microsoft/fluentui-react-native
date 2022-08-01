@@ -33,7 +33,7 @@ const theme = new ThemeReference(createDefaultTheme(),
 </ThemeProvider>
 ```
 
-A good example of a custom theme from our repo is [the Caterpillar theme in the Tester App](../../../apps/fluent-tester/src/FluentTester/theme/applyTheme.ts).
+A good example of a custom theme from our repo is [the Caterpillar theme in the Tester App](../../../apps/fluent-tester/src/theme/applyTheme.ts).
 
 ### `ThemeReference` from scratch
 

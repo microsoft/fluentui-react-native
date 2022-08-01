@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { fabName, FABType } from './FAB.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';

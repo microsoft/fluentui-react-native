@@ -7,7 +7,7 @@ import {
   MENU_ON_CLOSE,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
-} from '../../../FluentTester/TestComponents/Menu/consts';
+} from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.

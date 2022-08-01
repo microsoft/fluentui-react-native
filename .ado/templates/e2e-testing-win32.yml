@@ -39,5 +39,6 @@ steps:
   - template: e2e-publish-artifacts.yml
     parameters:
       applicationType: win32
-      platform: win32
+      platform: 'win32'
       buildArtifacts: variables['task.Build.status']
+      directory: $(Build.SourcesDirectory)/apps/win32

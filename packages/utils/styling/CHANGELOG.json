@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/styling-utils",
   "entries": [
     {
+      "date": "Mon, 25 Jul 2022 21:27:20 GMT",
+      "tag": "@fluentui-react-native/styling-utils_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/styling-utils",
+            "commit": "0772c5674928d890bf843ca0891f646f58ff0673",
+            "comment": "Combine platform specific test apps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:49 GMT",
       "tag": "@fluentui-react-native/styling-utils_v0.4.0",
       "version": "0.4.0",
