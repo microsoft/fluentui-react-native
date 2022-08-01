@@ -19,8 +19,7 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'rounded') ||
     layer === userProps['color'] ||
-    (!userProps['color'] && layer === 'brand') ||
-    (userProps.icon && layer === 'textPadding')
+    (!userProps['color'] && layer === 'brand')
   );
 };
 

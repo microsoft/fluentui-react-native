@@ -108,36 +108,40 @@ export const BasicBadge: React.FunctionComponent = () => {
         </View>
       </View>
       <View style={{ flexDirection: 'row' }}>
-        <View>
-          <Badge size="small" icon={{ svgSource: svgProps }}></Badge>
-          <Badge size="medium" icon={{ svgSource: svgProps }}></Badge>
-          <Badge size="large" icon={{ svgSource: svgProps }}></Badge>
-          <Badge size="extraLarge" icon={{ svgSource: svgProps }}></Badge>
-        </View>
-        <View>
-          <Badge size="small" icon={{ svgSource: svgProps }}>
-            999+
-          </Badge>
-          <Badge size="medium" icon={{ svgSource: svgProps }}>
-            999+
-          </Badge>
-          <Badge size="large" icon={{ svgSource: svgProps }}>
-            999+
-          </Badge>
-          <Badge size="extraLarge" icon={{ svgSource: svgProps }}>
-            999+
-          </Badge>
-        </View>
-        <View>
-          <Badge icon={{ svgSource: svgProps }} />
-          <Badge icon={{ svgSource: svgProps }}>Icon before by default</Badge>
-          <Badge icon={{ svgSource: svgProps }} iconPosition="before">
-            Icon before
-          </Badge>
-          <Badge icon={{ svgSource: svgProps }} iconPosition="after">
-            Icon after
-          </Badge>
-        </View>
+        {svgIconsEnabled && (
+          <>
+            <View>
+              <Badge size="small" icon={{ svgSource: svgProps }}></Badge>
+              <Badge size="medium" icon={{ svgSource: svgProps }}></Badge>
+              <Badge size="large" icon={{ svgSource: svgProps }}></Badge>
+              <Badge size="extraLarge" icon={{ svgSource: svgProps }}></Badge>
+            </View>
+            <View>
+              <Badge size="small" icon={{ svgSource: svgProps }}>
+                999+
+              </Badge>
+              <Badge size="medium" icon={{ svgSource: svgProps }}>
+                999+
+              </Badge>
+              <Badge size="large" icon={{ svgSource: svgProps }}>
+                999+
+              </Badge>
+              <Badge size="extraLarge" icon={{ svgSource: svgProps }}>
+                999+
+              </Badge>
+            </View>
+            <View>
+              <Badge icon={{ svgSource: svgProps }} />
+              <Badge icon={{ svgSource: svgProps }}>Icon before by default</Badge>
+              <Badge icon={{ svgSource: svgProps }} iconPosition="before">
+                Icon before
+              </Badge>
+              <Badge icon={{ svgSource: svgProps }} iconPosition="after">
+                Icon after
+              </Badge>
+            </View>
+          </>
+        )}
 
         <Text>Size</Text>
         <Badge size="tiny" shape="circular" />
