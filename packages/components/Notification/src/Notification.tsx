@@ -50,7 +50,7 @@ export const Notification = compose<NotificationType>({
       } else {
         return { marginHorizontal: marginHorizontal };
       }
-    }, ['isBar']);
+    }, [isBar, width]);
     const messageStyle: ViewStyle = useMemo(() => {
       const onActionPress = userProps.onActionPress;
       const alignSelf = onActionPress ? 'flex-start' : 'center';
