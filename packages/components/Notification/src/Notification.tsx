@@ -43,7 +43,7 @@ export const Notification = compose<NotificationType>({
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
-      if (Platform.isPad) {
+      if (Platform.OS == 'ios' && Platform.isPad) {
         const width = Dimensions.get('window').width / 2;
         return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
       } else {
