@@ -1439,24 +1439,6 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.13.0.tgz#1d8610634920bd5decaca669cae8183c0713d2ef"
   integrity sha512-o9ir+tpie+Fm9zO+nCbJLBfzVjUhugRWRsPS8n6wBaujC1qyeUYjhoGg6ejXzKc0nVCkIsFmRRRgC0brfrPIzw==
 
-"@fluentui-react-native/framework@0.7.30":
-  version "0.7.30"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.7.30.tgz#204e934610073791f0b6a32810b9a03cb49fbc32"
-  integrity sha512-bjf1zhGH3Qs77env2F49LMsjK+mzl/VxaiH+O1u2z8RPLqtPIupNyZ3k7guyBJehapqiE7d3D8Xti45+pRmqLA==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.7.7 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.13.0 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.7"
-    "@fluentui-react-native/memo-cache" "^1.1.7"
-    "@fluentui-react-native/merge-props" ">=0.4.3 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.17.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.14.0 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.2.6 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.6.6 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.8.3 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.2.3 <1.0.0"
-    tslib "^2.3.1"
-
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.1.tgz#9551142a1980503752536b5050fd99f4a7f13b17"
