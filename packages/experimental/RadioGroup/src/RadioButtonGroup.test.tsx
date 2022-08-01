@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { RadioGroup, RadioButton } from '.';
+import { RadioGroup, Radio } from '.';
 import * as renderer from 'react-test-renderer';
 
 describe('RadioButton component tests', () => {
   it('RadioButton default', () => {
     const tree = renderer.create(
       <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="key2">
-        <RadioButton buttonKey="key1" content="RadioButton1" />
-        <RadioButton buttonKey="key2" content="RadioButton2" />
+        <Radio value="key1" label="RadioButton1" />
+        <Radio value="key2" label="RadioButton2" />
       </RadioGroup>,
     );
 
@@ -19,8 +19,8 @@ describe('RadioButton component tests', () => {
     const tree = renderer.create(
       <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="key2">
         <View>
-          <RadioButton buttonKey="key1" content="RadioButton1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <RadioButton buttonKey="key2" content="RadioButton2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+          <Radio value="key1" label="RadioButton1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="RadioButton2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
         </View>
       </RadioGroup>,
     );

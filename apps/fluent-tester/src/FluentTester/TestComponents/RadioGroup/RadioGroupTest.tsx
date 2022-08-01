@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
+import { Separator } from '@fluentui/react-native';
+import { Radio, RadioGroup } from '@fluentui-react-native/experimental-radio-group';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ERadioGroupTest } from './RadioGroupE2ETest';
@@ -28,24 +29,24 @@ const BasicRadioGroup: React.FunctionComponent = () => {
   return (
     <View>
       <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="X" onChange={onChange}>
-        <RadioButton content="Option W" buttonKey="W" accessibilityLabel="Test Accessibility Label" />
-        <RadioButton content="Option X" buttonKey="X" />
-        <RadioButton content="Option Y (disabled)" buttonKey="C" disabled={true} />
-        <RadioButton content="Option Z" buttonKey="Z" />
+        <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
+        <Radio label="Option X" value="X" />
+        <Radio label="Option Y (disabled)" value="C" disabled={true} />
+        <Radio label="Option Z" value="Z" />
       </RadioGroup>
       <Separator />
       <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
         <View>
-          <RadioButton
-            content="Option A"
-            buttonKey="A"
+          <Radio
+            label="Option A"
+            value="A"
             accessibilityLabel="Test Accessibility Label"
             accessibilityPositionInSet={1}
             accessibilitySetSize={4}
           />
-          <RadioButton content="Option B" buttonKey="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
-          <RadioButton content="Option C" buttonKey="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
-          <RadioButton content="Option D" buttonKey="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
+          <Radio label="Option B" value="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
+          <Radio label="Option C" value="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
+          <Radio label="Option D" value="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
         </View>
       </RadioGroup>
     </View>

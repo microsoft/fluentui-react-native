@@ -3,32 +3,29 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { radioButtonName, IRadioButtonType, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonRenderData } from './RadioButton.types';
+import { radioName, RadioType, RadioProps, RadioSlotProps, RadioRenderData } from './Radio.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
-import { settings, radioButtonSelectActionLabel } from './RadioButton.settings';
+import { settings, radioSelectActionLabel } from './RadioButton.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { foregroundColorTokens, textTokens, borderTokens, backgroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { RadioGroupContext } from './RadioGroup';
 
-export const RadioButton = compose<IRadioButtonType>({
-  displayName: radioButtonName,
+export const Radio = compose<RadioType>({
+  displayName: radioName,
 
-  usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
+  usePrepareProps: (userProps: RadioProps, useStyling: IUseComposeStyling<RadioType>) => {
     const defaultComponentRef = React.useRef(null);
     const {
-      content,
-      buttonKey,
+      label,
+      value,
       disabled,
       accessibilityLabel,
-      ariaLabel,
       componentRef = defaultComponentRef,
       accessibilityPositionInSet,
-      ariaPosInSet,
       accessibilitySetSize,
-      ariaSetSize,
       ...rest
     } = userProps;
 
@@ -39,8 +36,8 @@ export const RadioButton = compose<IRadioButtonType>({
 
     /* We don't want to call the user's onChange multiple times on the same selection. */
     const changeSelection = () => {
-      if (buttonKey != info.selectedKey) {
-        info.onChange && info.onChange(buttonKey);
+      if (value != info.selectedKey) {
+        info.onChange && info.onChange(value);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     };
@@ -49,7 +46,7 @@ export const RadioButton = compose<IRadioButtonType>({
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey == info.selectedKey) {
+      if (value == info.selectedKey) {
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     }, []);
@@ -73,45 +70,45 @@ export const RadioButton = compose<IRadioButtonType>({
             break;
         }
       },
-      [info, buttonKey],
+      [info, value],
     );
 
     const state = {
       ...pressable.state,
-      selected: info.selectedKey === userProps.buttonKey,
+      selected: info.selectedKey === userProps.value,
       disabled: disabled || false,
     };
 
     // Grab the styling information from the userProps, referencing the state as well as the props.
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
+    const slotProps = mergeSettings<RadioSlotProps>(styleProps, {
       root: {
         ...rest,
         ref: buttonRef,
         ...pressable.props,
         accessibilityRole: 'radio',
-        accessibilityLabel: accessibilityLabel ?? ariaLabel ?? content,
+        accessibilityLabel: accessibilityLabel ?? label,
         accessibilityState: { disabled: state.disabled, selected: state.selected },
-        accessibilityActions: [{ name: 'Select', label: radioButtonSelectActionLabel }],
-        accessibilityPositionInSet: accessibilityPositionInSet ?? ariaPosInSet ?? info.buttonKeys.findIndex((x) => x == buttonKey) + 1,
-        accessibilitySetSize: accessibilitySetSize ?? ariaSetSize ?? info.buttonKeys.length,
+        accessibilityActions: [{ name: 'Select', label: radioSelectActionLabel }],
+        accessibilityPositionInSet: accessibilityPositionInSet ?? info.buttonKeys.findIndex((x) => x == value) + 1,
+        accessibilitySetSize: accessibilitySetSize ?? info.buttonKeys.length,
         focusable: !state.disabled,
         onAccessibilityAction: onAccessibilityAction,
       },
-      content: { children: content },
+      content: { children: label },
     });
 
     return { slotProps };
   },
 
-  render: (Slots: ISlots<IRadioButtonSlotProps>, _renderData: IRadioButtonRenderData, ...children: React.ReactNode[]) => {
+  render: (Slots: ISlots<RadioSlotProps>, _renderData: RadioRenderData, ...children: React.ReactNode[]) => {
     return (
       <Slots.root>
         <Slots.button>
           <Slots.innerCircle />
         </Slots.button>
-        <Slots.content />
+        <Slots.label />
         {children}
       </Slots.root>
     );
@@ -122,14 +119,14 @@ export const RadioButton = compose<IRadioButtonType>({
     root: View,
     button: { slotType: View, filter: filterViewProps },
     innerCircle: { slotType: View, filter: filterViewProps },
-    content: Text,
+    label: Text,
   },
   styles: {
     root: [],
     button: [borderTokens],
     innerCircle: [backgroundColorTokens],
-    content: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
+    label: [foregroundColorTokens, textTokens, [{ source: 'textBorderColor', lookup: getPaletteFromTheme, target: 'borderColor' }]],
   },
 });
 
-export default RadioButton;
+export default Radio;

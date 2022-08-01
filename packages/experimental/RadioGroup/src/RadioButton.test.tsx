@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { RadioButton } from './RadioButton';
+import { Radio } from './Radio';
 import * as renderer from 'react-test-renderer';
 
 describe('RadioButton component tests', () => {
   it('RadioButton default', () => {
-    const tree = renderer.create(<RadioButton buttonKey="key1" content="Default Button" />).toJSON();
+    const tree = renderer.create(<Radio value="key1" label="Default Button" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

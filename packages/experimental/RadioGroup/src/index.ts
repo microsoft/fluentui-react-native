@@ -1,12 +1,6 @@
-export { RadioButton } from './RadioButton';
-export { radioButtonName } from './RadioButton.types';
-export type {
-  IRadioButtonProps,
-  IRadioButtonRenderData,
-  IRadioButtonSlotProps,
-  IRadioButtonTokens,
-  IRadioButtonType,
-} from './RadioButton.types';
+export { Radio } from './Radio';
+export { radioName } from './Radio.types';
+export type { RadioProps, RadioRenderData, RadioSlotProps, RadioTokens, RadioType } from './Radio.types';
 export { RadioGroup, RadioGroupContext } from './RadioGroup';
 export { radioGroupName } from './RadioGroup.types';
 export type {

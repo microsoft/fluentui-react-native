@@ -1,15 +1,15 @@
-import { radioButtonName, IRadioButtonType } from './RadioButton.types';
+import { radioName, RadioType } from './Radio.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
 
-const radioButtonSize = 20;
-const radioButtonRadius = radioButtonSize / 2;
+const radioSize = 20;
+const radioRadius = radioSize / 2;
 
-const radioButtonInnerCircleSize = 10;
-const radioButtonInnerCircleRadius = radioButtonInnerCircleSize / 2;
+const radioInnerCircleSize = 10;
+const radioInnerCircleRadius = radioInnerCircleSize / 2;
 
-export const radioButtonSelectActionLabel = 'Select a RadioButton';
+export const radioSelectActionLabel = 'Select a Radio';
 
-export const settings: IComposeSettings<IRadioButtonType> = [
+export const settings: IComposeSettings<RadioType> = [
   {
     tokens: {
       borderColor: 'menuItemText',
@@ -33,13 +33,13 @@ export const settings: IComposeSettings<IRadioButtonType> = [
     button: {
       style: {
         backgroundColor: 'transparent',
-        width: radioButtonSize,
-        height: radioButtonSize,
+        width: radioSize,
+        height: radioSize,
         top: 0,
         left: 0,
         borderWidth: 1,
         borderStyle: 'solid',
-        borderRadius: radioButtonRadius,
+        borderRadius: radioRadius,
         marginTop: 4,
         marginRight: 6,
         marginBottom: 6,
@@ -50,14 +50,14 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       style: {
         position: 'relative',
         opacity: 0,
-        borderRadius: radioButtonInnerCircleRadius,
-        height: radioButtonInnerCircleSize,
-        width: radioButtonInnerCircleSize,
+        borderRadius: radioInnerCircleRadius,
+        height: radioInnerCircleSize,
+        width: radioInnerCircleSize,
         left: 4,
         top: 4,
       },
     },
-    content: {
+    label: {
       variant: 'subheaderStandard',
       style: {
         marginTop: 2,
@@ -95,5 +95,5 @@ export const settings: IComposeSettings<IRadioButtonType> = [
       },
     },
   },
-  radioButtonName,
+  radioName,
 ];

@@ -5,22 +5,22 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { RadioGroupContext } from './RadioGroup';
-import { radioButtonName, IRadioButtonProps, IRadioButtonSlotProps, IRadioButtonType } from './RadioButton.types';
+import { radioName, RadioProps, RadioSlotProps, RadioType } from './Radio.types';
 
 const NativeRadioButtonView = ensureNativeComponent('FRNRadioButtonView');
 
-export const RadioButton = compose<IRadioButtonType>({
-  displayName: radioButtonName,
-  usePrepareProps: (userProps: IRadioButtonProps, useStyling: IUseComposeStyling<IRadioButtonType>) => {
+export const RadioButton = compose<RadioType>({
+  displayName: radioName,
+  usePrepareProps: (userProps: RadioProps, useStyling: IUseComposeStyling<RadioType>) => {
     const defaultComponentRef = React.useRef(null);
-    const { content, buttonKey, disabled, componentRef = defaultComponentRef } = userProps;
+    const { label, value, disabled, componentRef = defaultComponentRef } = userProps;
     const info = React.useContext(RadioGroupContext);
 
     // Reroute the native component's onPress event to RadioGroup's onChange
     const onPressRerouted = () => {
       // Prevent calls to RadioGroup's onChange on the currently selected button
-      if (buttonKey != info.selectedKey) {
-        info.onChange && info.onChange(buttonKey);
+      if (value != info.selectedKey) {
+        info.onChange && info.onChange(value);
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     };
@@ -29,18 +29,18 @@ export const RadioButton = compose<IRadioButtonType>({
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
     React.useEffect(() => {
-      if (buttonKey === info.selectedKey) {
+      if (value === info.selectedKey) {
         info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
       }
     }, []);
 
     const styleProps = useStyling(userProps);
-    const isSelected = info.selectedKey === buttonKey;
-    const slotProps = mergeSettings<IRadioButtonSlotProps>(styleProps, {
+    const isSelected = info.selectedKey === value;
+    const slotProps = mergeSettings<RadioSlotProps>(styleProps, {
       root: {
         ref: componentRef,
-        buttonKey: buttonKey,
-        content: content,
+        buttonKey: value,
+        content: label,
         disabled: disabled,
         onPress: onPressRerouted,
         selected: isSelected,
@@ -62,7 +62,7 @@ export const RadioButton = compose<IRadioButtonType>({
   styles: {
     root: [],
   },
-  render: (Slots: ISlots<IRadioButtonSlotProps>) => {
+  render: (Slots: ISlots<RadioSlotProps>) => {
     return <Slots.root />;
   },
 });
