@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added font/size tokens",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}
