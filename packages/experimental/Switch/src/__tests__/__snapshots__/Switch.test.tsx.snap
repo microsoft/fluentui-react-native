@@ -2,26 +2,11 @@
 
 exports[`Switch Default 1`] = `
 <View
-  accessibilityActions={
-    Array [
-      Object {
-        "name": "Toggle",
-      },
-    ]
-  }
-  accessibilityLabel="Default Switch"
   accessibilityRole="switch"
-  accessibilityState={
-    Object {
-      "checked": false,
-      "disabled": false,
-    }
-  }
   accessible={true}
   checked={false}
   disabled={false}
   focusable={true}
-  onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -47,6 +32,10 @@ exports[`Switch Default 1`] = `
     style={
       Object {
         "color": "black",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
       }
     }
   >
@@ -96,26 +85,11 @@ exports[`Switch Default 1`] = `
 
 exports[`Switch Disabled 1`] = `
 <View
-  accessibilityActions={
-    Array [
-      Object {
-        "name": "Toggle",
-      },
-    ]
-  }
-  accessibilityLabel="Default Switch Disabled"
   accessibilityRole="switch"
-  accessibilityState={
-    Object {
-      "checked": false,
-      "disabled": true,
-    }
-  }
   accessible={true}
   checked={false}
   disabled={true}
   focusable={false}
-  onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -141,6 +115,10 @@ exports[`Switch Disabled 1`] = `
     style={
       Object {
         "color": "black",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
       }
     }
   >
