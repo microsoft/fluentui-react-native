@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Dimensions, Platform, PressableProps, View, ViewStyle } from 'react-native';
+import { Platform, PressableProps, useWindowDimensions, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stylingSettings } from './Notification.styling';
@@ -41,10 +41,11 @@ export const Notification = compose<NotificationType>({
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
+    const width = useWindowDimensions().width / 2;
+
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
       if (Platform.OS == 'ios' && Platform.isPad) {
-        const width = Dimensions.get('window').width / 2;
         return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
       } else {
         return { marginHorizontal: marginHorizontal };
