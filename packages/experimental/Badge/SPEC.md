@@ -2,7 +2,7 @@
 
 ## Background
 
-A cross-platform Badge component using the Fluent Design System. A badge is an additional visual discriptor for UI elements.
+A cross-platform Badge component using the Fluent Design System. A badge is an additional visual descriptor for UI elements.
 
 ```ts
 import { Badge } from '@fluentui-react-native/badge';
@@ -25,6 +25,34 @@ Basic examples:
 ```
 
 More examples on the [Test pages for the Badge](../../../apps/fluent-tester/src/TestComponents/Badge). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+
+## Visual Examples
+
+Win32:
+
+![Badge with text on win32 example](./assets/basic_badge_example_win32.png)
+
+```tsx
+<Badge>999+</Badge>
+```
+
+![Badge with icon on win32 example](./assets/badge_with_icon_example_win32.png)
+
+```tsx
+<Badge appearance="severe" icon={{ svgProps }} iconPosition="after">WARNING</Button>
+```
+
+![PresenceBadge on win32 example](./assets/presence_badge_example_win32.png)
+
+```tsx
+<PresenceBadge status="away" />
+```
+
+![CounterBadge on win32 example](./assets/counter_badge_example_win32.png)
+
+```tsx
+<CounterBadge appearance="danger" count={1000} overflowCount={999} />
+```
 
 ## BasicBadge
 
@@ -217,8 +245,8 @@ export interface BadgeTokens extends BadgeCoreTokens {
 
 ### Accessibility
 
-Basic Badges do not recieve focus and are not accessible. Badges should be given a meaningful description.
-This description will be applied, via `accessibilityLabel` to the element decorated by the Badge.
+Basic Badges do not recieve focus and are not accessible.
+Information about the badge should be added to the element that hosts the Badge through the element's `accessibilityLabel`.
 
 ## PresenceBadge
 
