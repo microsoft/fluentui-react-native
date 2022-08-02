@@ -6,6 +6,7 @@ import { Switch } from '@fluentui-react-native/experimental-switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const styles = StyleSheet.create({
   square: {
@@ -29,7 +30,7 @@ const StandardUsage: React.FunctionComponent = () => {
 const OnChangeUsage: React.FunctionComponent = () => {
   const [displaySquare, setDisplaySquare] = React.useState(true);
 
-  const defaultToggleSquare = (checked: boolean) => {
+  const defaultToggleSquare = (_e: InteractionEvent, checked: boolean) => {
     setDisplaySquare(checked);
   };
 

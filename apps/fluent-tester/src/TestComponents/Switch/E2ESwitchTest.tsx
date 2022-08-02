@@ -9,7 +9,7 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   const [switchPressed, setSwitchSwitchPressed] = React.useState(false);
 
   const onToggle = React.useCallback(
-    (checked: boolean) => {
+    (_e, checked) => {
       setSwitchSwitchPressed(checked);
     },
     [setSwitchSwitchPressed],

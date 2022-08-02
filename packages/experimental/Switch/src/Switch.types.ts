@@ -63,7 +63,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   /**
    * Callback function for changes to the switch's state and interaction event
    */
-  onChange?: (checked?: boolean, e?: InteractionEvent) => void;
+  onChange?: (e: InteractionEvent, checked?: boolean) => void;
 
   /**
    * The default state of the Switch

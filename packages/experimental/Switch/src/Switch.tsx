@@ -5,6 +5,7 @@ import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types
 import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
+
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the switch.
  *

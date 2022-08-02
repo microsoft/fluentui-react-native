@@ -2,9 +2,10 @@ import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
 import { LayoutAnimation } from 'react-native';
-import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
+const toggleAnimation = LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX);
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
@@ -21,33 +22,22 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   } = props;
 
   const isDisabled = !!disabled;
-  const initialCheckedState = !!(checked ?? defaultChecked);
-  const [checkedState, setCheckedState] = React.useState(initialCheckedState);
-  const [prevCheckedState, setPrevCheckedState] = React.useState(initialCheckedState);
+  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
+  const [prevCheckedState, setPrevCheckedState] = React.useState(checkedState);
   const focusRef = isDisabled ? null : componentRef;
 
   if (defaultChecked !== undefined && checked !== undefined) {
     console.warn('The props defaultChecked and checked are mutually exclusive. Use only one of the props, do not use both.');
   }
 
-  const toggleCallback = React.useCallback(
-    (e: InteractionEvent) => {
-      const newCheckedState = checked !== undefined ? checked : !checkedState;
-      onChange && onChange(newCheckedState, e);
-      setCheckedState(newCheckedState);
-    },
-    [onChange, setCheckedState, checkedState, checked],
-  );
-
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
-  const currentCheckedState = checked ?? checkedState;
 
   // Triggers animation only when the checked state changes
-  if (prevCheckedState !== currentCheckedState) {
-    LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
-    setPrevCheckedState(currentCheckedState);
+  if (prevCheckedState !== checkedState) {
+    LayoutAnimation.configureNext(toggleAnimation);
+    setPrevCheckedState(checkedState);
   }
 
   return {
@@ -55,18 +45,18 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       ...pressable.props,
       accessible: true,
       accessibilityRole: accessibilityRole ?? 'switch',
-      accessibilityState: { disabled: disabled, checked: currentCheckedState }, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
+      accessibilityState: { disabled: disabled, checked: checkedState }, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
       accessibilityActions: defaultAccessibilityActions, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
-      checked: currentCheckedState,
+      checked: checkedState,
       label: label,
       labelPosition: labelPosition ?? 'after',
     },
     state: {
       ...pressable.state,
-      toggled: currentCheckedState,
+      toggled: checkedState,
     },
   };
 };
