@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Restore ability to create unfocusable buttons",
+  "packageName": "@fluentui-react-native/button",
+  "email": "nakambo@microsoft.com",
+  "dependentChangeType": "patch"
+}
