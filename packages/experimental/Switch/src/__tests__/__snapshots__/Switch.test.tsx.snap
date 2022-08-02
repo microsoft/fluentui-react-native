@@ -2,7 +2,20 @@
 
 exports[`Switch Default 1`] = `
 <View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Toggle",
+      },
+    ]
+  }
   accessibilityRole="switch"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": undefined,
+    }
+  }
   accessible={true}
   checked={false}
   disabled={false}
@@ -85,7 +98,20 @@ exports[`Switch Default 1`] = `
 
 exports[`Switch Disabled 1`] = `
 <View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Toggle",
+      },
+    ]
+  }
   accessibilityRole="switch"
+  accessibilityState={
+    Object {
+      "checked": false,
+      "disabled": true,
+    }
+  }
   accessible={true}
   checked={false}
   disabled={true}
