@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 02 Aug 2022 20:08:43 GMT and should not be manually modified.
+This log was last generated on Tue, 02 Aug 2022 22:19:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.13
+
+Tue, 02 Aug 2022 22:19:18 GMT
+
+### Patches
+
+- Restore ability to create unfocusable buttons (nakambo@microsoft.com)
 
 ## 0.24.12
 

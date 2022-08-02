@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 02 Aug 2022 20:08:43 GMT and should not be manually modified.
+This log was last generated on Tue, 02 Aug 2022 22:19:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.82.5
+
+Tue, 02 Aug 2022 22:19:18 GMT
+
+### Patches
+
+- Add test button for testing un-focusable button (nakambo@microsoft.com)
+- Bump @fluentui-react-native/button to v0.24.13
+- Bump @fluentui-react-native/experimental-button to v0.16.13
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.15
+- Bump @fluentui-react-native/menu to v1.0.22
+- Bump @fluentui-react-native/notification to v0.11.4
+- Bump @fluentui/react-native to v0.32.2
 
 ## 0.82.4
 
