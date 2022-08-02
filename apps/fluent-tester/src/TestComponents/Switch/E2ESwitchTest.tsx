@@ -3,20 +3,22 @@ import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/experimental-switch';
 import { Text } from 'react-native';
 import { stackStyle } from '../Common/styles';
-import { SWITCH_TEST_COMPONENT, SWITCH_TOGGLE_ON, SWITCH_TOGGLE_OFF } from './consts';
+import { SWITCH_TEST_COMPONENT, SWITCH_ON_PRESS } from './consts';
 
 export const E2ESwitchTest: React.FunctionComponent = () => {
-  const [showTextChecked, setShowChecked] = React.useState(false);
+  const [switchPressed, setSwitchSwitchPressed] = React.useState(false);
 
-  const onToggleChecked = (checked: boolean) => {
-    setShowChecked(!checked);
-  };
+  const onToggle = React.useCallback(
+    (checked: boolean) => {
+      setSwitchSwitchPressed(checked);
+    },
+    [setSwitchSwitchPressed],
+  );
 
   return (
     <Stack style={stackStyle}>
-      <Switch testID={SWITCH_TEST_COMPONENT} label={'Checked'} checked={showTextChecked} onChange={onToggleChecked} />
-      {showTextChecked && <Text testID={SWITCH_TOGGLE_ON}>Checked Switch toggled to true</Text>}
-      {!showTextChecked && <Text testID={SWITCH_TOGGLE_OFF}>Checked Switch toggled to false</Text>}
+      <Switch testID={SWITCH_TEST_COMPONENT} label={'Testing Switch'} onChange={onToggle} />
+      {switchPressed ? <Text testID={SWITCH_ON_PRESS}>Switch Toggled On</Text> : null}
     </Stack>
   );
 };

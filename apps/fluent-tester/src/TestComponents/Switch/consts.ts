@@ -5,5 +5,4 @@ export const SWITCH_TESTPAGE = 'Switch_TestPage';
 export const SWITCH_TEST_COMPONENT = 'Switch_Test_Component';
 export const SWITCH_ACCESSIBILITY_LABEL = 'E2E testing Switch accessibility label';
 
-export const SWITCH_TOGGLE_ON = 'Switch_Toggle_On';
-export const SWITCH_TOGGLE_OFF = 'Switch_Toggle_Off';
+export const SWITCH_ON_PRESS = 'Switch_On_Press';

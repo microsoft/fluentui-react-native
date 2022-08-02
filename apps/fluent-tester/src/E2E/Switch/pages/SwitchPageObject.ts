@@ -1,10 +1,4 @@
-import {
-  SWITCH_TESTPAGE,
-  SWITCH_TEST_COMPONENT,
-  HOMEPAGE_SWITCH_BUTTON,
-  SWITCH_TOGGLE_OFF,
-  SWITCH_TOGGLE_ON,
-} from '../../../TestComponents/Switch/consts';
+import { SWITCH_TESTPAGE, SWITCH_TEST_COMPONENT, HOMEPAGE_SWITCH_BUTTON, SWITCH_ON_PRESS } from '../../../TestComponents/Switch/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
@@ -17,31 +11,38 @@ class SwitchPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  didToggleOn(): boolean {
-    const callbackText = By(SWITCH_TOGGLE_ON);
+  isSwitchChecked(): boolean {
+    return this._primaryComponent.isSelected();
+  }
+
+  waitForSwitchChecked(timeout?: number): void {
     browser.waitUntil(
       () => {
-        return callbackText.isDisplayed();
+        return this.isSwitchChecked();
       },
       {
-        timeout: this.waitForPageTimeout,
-        timeoutMsg: 'The Switch did not toggle on.',
+        timeout: timeout ?? this.waitForPageTimeout,
+        timeoutMsg: 'The Switch was not toggled correctly',
         interval: 1000,
       },
     );
-
-    return callbackText.isDisplayed();
   }
 
-  didToggleOff(): boolean {
-    const callbackText = By(SWITCH_TOGGLE_OFF);
+  toggleSwitchToUnchecked(): void {
+    if (this.isSwitchChecked()) {
+      this._primaryComponent.click();
+    }
+  }
+
+  didOnChangeCallbackFire(): boolean {
+    const callbackText = By(SWITCH_ON_PRESS);
     browser.waitUntil(
       () => {
         return callbackText.isDisplayed();
       },
       {
         timeout: this.waitForPageTimeout,
-        timeoutMsg: 'The Switch did not toggle off.',
+        timeoutMsg: 'The OnChange callback did not fire.',
         interval: 1000,
       },
     );
