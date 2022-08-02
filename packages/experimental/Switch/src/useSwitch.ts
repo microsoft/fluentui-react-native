@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
-import { LayoutAnimation, AccessibilityInfo } from 'react-native';
+import { LayoutAnimation, AccessibilityState, AccessibilityInfo, AccessibilityActionEvent } from 'react-native';
+import { memoize } from '@fluentui-react-native/framework';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
@@ -18,6 +19,11 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     componentRef = defaultComponentRef,
     disabled,
     accessibilityRole,
+    accessibilityLabel,
+    accessibilityActions,
+    accessibilityState,
+    accessibilityHint,
+    onAccessibilityAction,
     ...rest
   } = props;
 
@@ -34,6 +40,22 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
 
+  const accessibilityActionsProp = accessibilityActions
+    ? [...defaultAccessibilityActions, ...accessibilityActions]
+    : defaultAccessibilityActions;
+
+  const onAccessibilityActionProp = React.useCallback(
+    (event: AccessibilityActionEvent) => {
+      switch (event.nativeEvent.actionName) {
+        case 'Toggle':
+          toggleCallback(event);
+          break;
+      }
+      onAccessibilityAction && onAccessibilityAction(event);
+    },
+    [toggleCallback, onAccessibilityAction],
+  );
+
   // Triggers animation only when the checked state changes
   React.useLayoutEffect(() => {
     // The `isFirstRender` value lets us apply the animation effect after the control mounts
@@ -48,9 +70,12 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     props: {
       ...pressable.props,
       accessible: true,
+      accessibilityLabel: accessibilityLabel ?? label,
       accessibilityRole: accessibilityRole ?? 'switch',
-      accessibilityState: { disabled: disabled, checked: checkedState }, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
-      accessibilityActions: defaultAccessibilityActions, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
+      accessibilityHint: accessibilityHint,
+      accessibilityActions: accessibilityActionsProp,
+      onAccessibilityAction: onAccessibilityActionProp,
+      accessibilityState: getAccessibilityState(checkedState, isDisabled, accessibilityState),
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
@@ -64,3 +89,11 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(checked: boolean, disabled: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { checked, disabled, ...accessibilityState };
+  }
+  return { checked, disabled };
+}
