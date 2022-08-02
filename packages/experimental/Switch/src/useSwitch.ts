@@ -23,6 +23,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const isDisabled = !!disabled;
   const initialCheckedState = !!(checked ?? defaultChecked);
   const [checkedState, setCheckedState] = React.useState(initialCheckedState);
+  const [prevCheckedState, setPrevCheckedState] = React.useState(initialCheckedState);
   const focusRef = isDisabled ? null : componentRef;
 
   if (defaultChecked !== undefined && checked !== undefined) {
@@ -33,7 +34,6 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     (e: InteractionEvent) => {
       const newCheckedState = checked !== undefined ? checked : !checkedState;
       onChange && onChange(newCheckedState, e);
-      LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
       setCheckedState(newCheckedState);
     },
     [onChange, setCheckedState, checkedState, checked],
@@ -43,6 +43,12 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const currentCheckedState = checked ?? checkedState;
+
+  // Triggers animation only when the checked state changes
+  if (prevCheckedState !== currentCheckedState) {
+    LayoutAnimation.configureNext(LayoutAnimation.create(200, LayoutAnimation.Types.linear, LayoutAnimation.Properties.scaleX));
+    setPrevCheckedState(currentCheckedState);
+  }
 
   return {
     props: {
