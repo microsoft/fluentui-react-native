@@ -60,8 +60,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     },
     state: {
       ...pressable.state,
-      toggleOn: currentCheckedState == true,
-      toggleOff: currentCheckedState == false,
+      toggled: currentCheckedState,
     },
   };
 };

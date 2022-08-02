@@ -14,7 +14,13 @@ import { useSwitch } from './useSwitch';
  * @returns Whether the styles that are assigned to the layer should be applied to the switch
  */
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
-  return state[layer] || userProps[layer] || layer === userProps['labelPosition'];
+  return (
+    state[layer] ||
+    userProps[layer] ||
+    layer === userProps['labelPosition'] ||
+    (state['toggled'] && layer === 'toggleOn') ||
+    (!state['toggled'] && layer === 'toggleOff')
+  );
 };
 
 export const Switch = compose<SwitchType>({
