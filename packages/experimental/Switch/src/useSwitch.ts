@@ -4,6 +4,8 @@ import { SwitchProps, SwitchInfo } from './Switch.types';
 import { LayoutAnimation } from 'react-native';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
+const defaultAccessibilityActions = [{ name: 'Toggle' }];
+
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
@@ -41,7 +43,6 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const currentCheckedState = checked ?? checkedState;
-  const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
   return {
     props: {
