@@ -23,8 +23,8 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
 
   const isDisabled = !!disabled;
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
-  const [prevCheckedState, setPrevCheckedState] = React.useState(checkedState);
   const focusRef = isDisabled ? null : componentRef;
+  const isFirstRender = React.useRef(true);
 
   if (__DEV__ && defaultChecked !== undefined && checked !== undefined) {
     console.warn('The props defaultChecked and checked are mutually exclusive. Use only one of the props, do not use both.');
@@ -35,10 +35,14 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
 
   // Triggers animation only when the checked state changes
-  if (prevCheckedState !== checkedState && AccessibilityInfo.isReduceMotionEnabled) {
-    LayoutAnimation.configureNext(toggleAnimation);
-    setPrevCheckedState(checkedState);
-  }
+  React.useLayoutEffect(() => {
+    // The `isFirstRender` value lets us apply the animation effect after the control mounts
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+    } else if (AccessibilityInfo.isReduceMotionEnabled) {
+      LayoutAnimation.configureNext(toggleAnimation);
+    }
+  }, [checkedState]);
 
   return {
     props: {
