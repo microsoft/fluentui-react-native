@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import SwitchPageObject from '../pages/SwitchPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', function () {
@@ -23,6 +23,19 @@ describe('Switch Testing Initialization', function () {
   });
 });
 
+describe('Switch Accessibility Testing', () => {
+  /* Scrolls and waits for the Switch to be visible on the Test Page */
+  beforeEach(() => {
+    SwitchPageObject.scrollToTestElement();
+    SwitchPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+
+  it('Switch - Validate accessibilityRole is correct', () => {
+    expect(SwitchPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+  });
+});
+
 describe('Switch Functional Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(() => {
@@ -31,21 +44,21 @@ describe('Switch Functional Testing', () => {
   });
 
   it("Click on a Switch -> Validate it toggles correctly AND calls the user's onChange", () => {
-    /* Validate the Checkbox is initially toggled OFF */
+    /* Validate the Switch is initially toggled OFF */
     expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
-    /* Click on the Checkbox to toggle on */
+    /* Click on the Switch to toggle on */
     SwitchPageObject.clickComponent();
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
 
     expect(SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
 
-    /* Validate the Checkbox is toggled ON */
+    /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();
 
     SwitchPageObject.clickComponent();
 
-    /* Validate the Checkbox is toggled OFF */
+    /* Validate the Switch is toggled OFF */
     expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
