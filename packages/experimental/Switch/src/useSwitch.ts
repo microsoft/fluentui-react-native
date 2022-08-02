@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
-import { LayoutAnimation } from 'react-native';
+import { LayoutAnimation, AccessibilityInfo } from 'react-native';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
@@ -35,7 +35,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
 
   // Triggers animation only when the checked state changes
-  if (prevCheckedState !== checkedState) {
+  if (prevCheckedState !== checkedState && AccessibilityInfo.isReduceMotionEnabled) {
     LayoutAnimation.configureNext(toggleAnimation);
     setPrevCheckedState(checkedState);
   }
