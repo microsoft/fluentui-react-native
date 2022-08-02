@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Tue, 02 Aug 2022 20:08:43 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.29",
+      "version": "1.1.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "7b34ebcef818ec3fccc0f8a862280797636b46d8",
+            "comment": "Update exports"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Aug 2022 18:06:17 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.28",
       "version": "1.1.28",
