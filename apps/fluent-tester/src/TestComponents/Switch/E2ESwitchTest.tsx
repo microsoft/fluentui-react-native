@@ -11,13 +11,14 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   const onToggle = React.useCallback(
     (checked: boolean) => {
       setSwitchSwitchPressed(checked);
+      console.log(checked);
     },
     [setSwitchSwitchPressed],
   );
 
   return (
     <Stack style={stackStyle}>
-      <Switch testID={SWITCH_TEST_COMPONENT} label={'Testing Switch'} onChange={onToggle} />
+      <Switch testID={SWITCH_TEST_COMPONENT} label={'Switch Tests...'} onChange={onToggle} />
       {switchPressed ? <Text testID={SWITCH_ON_PRESS}>Switch Toggled On</Text> : null}
     </Stack>
   );

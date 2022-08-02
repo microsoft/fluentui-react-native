@@ -41,13 +41,15 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
   const currentCheckedState = checked ?? checkedState;
+  const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
   return {
     props: {
       ...pressable.props,
       accessible: true,
       accessibilityRole: accessibilityRole ?? 'switch',
-      accessibilityState: { disabled: disabled, checked: currentCheckedState },
+      accessibilityState: { disabled: disabled, checked: currentCheckedState }, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
+      accessibilityActions: defaultAccessibilityActions, // Needed for E2E Testing to detect toggle state, will provide a better implementation in a Accessibility PR
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
       ...onKeyUpProps,
