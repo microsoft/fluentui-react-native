@@ -11,7 +11,6 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   const onToggle = React.useCallback(
     (checked: boolean) => {
       setSwitchSwitchPressed(checked);
-      console.log(checked);
     },
     [setSwitchSwitchPressed],
   );
