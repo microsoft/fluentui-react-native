@@ -26,7 +26,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const [prevCheckedState, setPrevCheckedState] = React.useState(checkedState);
   const focusRef = isDisabled ? null : componentRef;
 
-  if (defaultChecked !== undefined && checked !== undefined) {
+  if (__DEV__ && defaultChecked !== undefined && checked !== undefined) {
     console.warn('The props defaultChecked and checked are mutually exclusive. Use only one of the props, do not use both.');
   }
 
