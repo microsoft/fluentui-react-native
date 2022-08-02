@@ -42,7 +42,7 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const onOffText = switchInfo.state.toggleOn ? onText : offText;
+      const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
 
       return (
