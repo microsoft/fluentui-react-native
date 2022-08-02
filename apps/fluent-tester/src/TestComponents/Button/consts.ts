@@ -23,5 +23,9 @@ export const BUTTON_TEST_COMPONENT_LABEL = 'Test Button2 - No Accessibility Labe
 export const BUTTON_PRESS_TEST_COMPONENT = 'Button_Press_Test_Component';
 export const BUTTON_PRESS_TEST_COMPONENT_LABEL = 'Test Button3 - For Key Presses';
 
+/* Test Button 3 */
+export const BUTTON_FOCUSABLE_TEST_COMPONENT = 'Button_Focusable_Test_Component';
+export const BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL = 'Test Button4 - Not focusable';
+
 export const BUTTON_ON_PRESS = 'Button_On_Press'; // For testing the press functionality on a button
 export const BUTTON_ON_KEY = 'Button_On_Key'; // For testing the key press functionality on a button
