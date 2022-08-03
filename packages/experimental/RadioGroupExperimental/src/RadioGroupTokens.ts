@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { RadioGroupExperimentalTokens } from './RadioGroupExperimental.types';
+import { RadioGroupExperimentalTokens } from './RadioGroup.types';
 
 export const defaultRadioGroupExperimentalTokens: TokenSettings<RadioGroupExperimentalTokens, Theme> = (t: Theme) =>
   ({

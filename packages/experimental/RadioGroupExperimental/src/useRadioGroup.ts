@@ -1,4 +1,4 @@
-import { RadioGroupExperimentalProps } from './RadioGroupExperimental.types';
+import { RadioGroupExperimentalProps } from './RadioGroup.types';
 
 export const useRadioGroupExperimental = (props: RadioGroupExperimentalProps): RadioGroupExperimentalProps => {
   const { text = 'Default text', ...rest } = props;

@@ -1,11 +1,11 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { radioGroupExperimental, RadioGroupExperimentalType, RadioGroupExperimentalProps } from './RadioGroupExperimental.types';
+import { radioGroupExperimental, RadioGroupExperimentalType, RadioGroupExperimentalProps } from './RadioGroup.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings } from './RadioGroupExperimental.styling';
+import { stylingSettings } from './RadioGroup.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useRadioGroupExperimental } from './useRadioGroupExperimental';
+import { useRadioGroupExperimental } from './useRadioGroup';
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the radio-group-experimental.
  *

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RadioGroupExperimental } from '../RadioGroupExperimental';
+import { RadioGroupExperimental } from '../RadioGroup';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 

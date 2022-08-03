@@ -1,11 +1,20 @@
-import { radioGroupExperimental, RadioGroupExperimentalTokens, RadioGroupExperimentalSlotProps, RadioGroupExperimentalProps } from './RadioGroupExperimental.types';
+import {
+  radioGroupExperimental,
+  RadioGroupExperimentalTokens,
+  RadioGroupExperimentalSlotProps,
+  RadioGroupExperimentalProps,
+} from './RadioGroup.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
-import { defaultRadioGroupExperimentalTokens } from './RadioGroupExperimentalTokens';
+import { defaultRadioGroupExperimentalTokens } from './RadioGroupTokens';
 
 export const radioGroupExperimentalStates: (keyof RadioGroupExperimentalTokens)[] = ['small', 'medium', 'large'];
 
-export const stylingSettings: UseStylingOptions<RadioGroupExperimentalProps, RadioGroupExperimentalSlotProps, RadioGroupExperimentalTokens> = {
+export const stylingSettings: UseStylingOptions<
+  RadioGroupExperimentalProps,
+  RadioGroupExperimentalSlotProps,
+  RadioGroupExperimentalTokens
+> = {
   tokens: [defaultRadioGroupExperimentalTokens, radioGroupExperimental],
   states: radioGroupExperimentalStates,
   slotProps: {

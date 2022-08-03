@@ -1,2 +1,2 @@
-export * from './RadioGroupExperimental';
-export * from './RadioGroupExperimental.types';
+export * from './RadioGroup';
+export * from './RadioGroup.types';
