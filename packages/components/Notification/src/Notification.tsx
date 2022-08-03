@@ -14,8 +14,10 @@ import { Shadow } from '@fluentui-react-native/experimental-shadow';
 type SizeClassIOS = 'regular' | 'compact' | undefined;
 
 /**
- * Hook that "guesses" our Size Class on iOS based on our window width
- * For more information about Size Classes, see teh following:
+ * Hook that "guesses" our Size Class on iOS based on our window width.
+ * Note: this is hacky and should not be used.
+ *
+ * For more information about Size Classes, see the following:
  * https://developer.apple.com/documentation/uikit/uitraitcollection
  * https://developer.apple.com/design/human-interface-guidelines/foundations/layout/#platform-considerations
  * @returns SizeClassIOS: enum determining our size class
