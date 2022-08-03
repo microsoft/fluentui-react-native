@@ -8,7 +8,7 @@ import { stylingSettings } from './CounterBadge.styling';
 import { Icon } from '@fluentui-react-native/icon';
 import { badgeLookup } from '../Badge';
 import { useCounterBadge } from './useCounterBadge';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 
 export const CounterBadge = compose<CounterBadgeType>({
   displayName: counterBadgeName,
