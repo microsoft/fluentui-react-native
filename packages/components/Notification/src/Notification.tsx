@@ -11,6 +11,27 @@ import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
+type SizeClassIOS = 'regular' | 'compact' | undefined;
+
+/**
+ * Hook that "guesses" our Size Class on iOS based on our window width
+ * For more information about Size Classes, see teh following:
+ * https://developer.apple.com/documentation/uikit/uitraitcollection
+ * https://developer.apple.com/design/human-interface-guidelines/foundations/layout/#platform-considerations
+ * @returns SizeClassIOS: enum determining our size class
+ */
+const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
+  const width = useWindowDimensions().width;
+  if (Platform.OS === 'ios') {
+    if (Platform.isPad && width > 375) {
+      return 'regular';
+    } else {
+      return 'compact';
+    }
+  } else {
+    return undefined;
+  }
+};
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
  *
@@ -42,10 +63,11 @@ export const Notification = compose<NotificationType>({
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
     const width = useWindowDimensions().width / 2;
+    const sizeClass = useSizeClassIOS_DO_NOT_USE();
 
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
-      if (Platform.OS == 'ios' && Platform.isPad && !isBar) {
+      if (sizeClass === 'regular' && !isBar) {
         return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
       } else {
         return { marginHorizontal: marginHorizontal };
