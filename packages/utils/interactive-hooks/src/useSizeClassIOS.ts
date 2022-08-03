@@ -11,7 +11,7 @@ export type SizeClassIOS = 'regular' | 'compact' | undefined;
  */
 export const useSizeClassIOS: () => SizeClassIOS = () => {
   const width = useWindowDimensions().width;
-  if (Platform.OS === 'ios' && Platform.isPad === true) {
+  if (Platform.OS === 'ios') {
     if (width > 375) {
       return 'regular';
     } else {
