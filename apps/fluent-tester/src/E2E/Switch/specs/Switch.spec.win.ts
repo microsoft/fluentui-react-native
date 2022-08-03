@@ -33,12 +33,12 @@ describe('Switch Accessibility Testing', () => {
     SwitchPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
-  it('Switch - Set accessibilityLabel', () => {
+  it('Switch - Validate accessibilityRole is correct', () => {
     expect(SwitchPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Switch - Validate accessibilityLabel is correct', () => {
+  it('Switch - Set accessibilityLabel', () => {
     expect(SwitchPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(SWITCH_ACCESSIBILITY_LABEL);
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -77,22 +77,40 @@ describe('Switch Functional Testing', () => {
   });
 
   it('Click the "Enter" on a Switch and verify it toggles', () => {
-    /* Presses the "space bar" to select the Checkbox */
+    /* Validate the Switch is initially toggled OFF */
+    expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
+
+    /* Presses the "Enter" to select the Switch */
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
 
-    /* Validate the Checkbox is selected */
+    /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();
+    expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+
+    SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
+
+    /* Validate the Switch is toggled OFF */
+    expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Click the "Spacebar" on a Switch and verify it toggles', () => {
-    /* Presses the "space bar" to select the Checkbox */
+    /* Validate the Switch is initially toggled OFF */
+    expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
+
+    /* Presses the "space bar" to select the Switch */
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
 
-    /* Validate the Checkbox is selected */
+    /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();
+    expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+
+    SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
+
+    /* Validate the Switch is toggled OFF */
+    expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 });

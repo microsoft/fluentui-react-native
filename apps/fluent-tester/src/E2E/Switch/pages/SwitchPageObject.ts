@@ -1,7 +1,7 @@
 import {
   SWITCH_TESTPAGE,
   SWITCH_TEST_COMPONENT,
-  SWITCH_TEST_COMPONENT_LABEL,
+  SWITCH_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_SWITCH_BUTTON,
   SWITCH_ON_PRESS,
 } from '../../../TestComponents/Switch/consts';
@@ -11,6 +11,7 @@ import { BasePage, By } from '../../common/BasePage.win';
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
 export const enum SwitchComponentSelector {
   PrimaryComponent, //this._primaryComponent
+  SecondaryComponent, // this._secondaryComponent
 }
 
 class SwitchPageObject extends BasePage {
@@ -65,6 +66,8 @@ class SwitchPageObject extends BasePage {
   getButtonSelector(switchSelector?: SwitchComponentSelector): WebdriverIO.Element {
     if (switchSelector == SwitchComponentSelector.PrimaryComponent) {
       return this._primaryComponent;
+    } else if (switchSelector === SwitchComponentSelector.SecondaryComponent) {
+      return this._secondaryComponent;
     }
     return this._primaryComponent;
   }
@@ -85,7 +88,7 @@ class SwitchPageObject extends BasePage {
   }
 
   get _secondaryComponent() {
-    return By(SWITCH_TEST_COMPONENT_LABEL);
+    return By(SWITCH_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
