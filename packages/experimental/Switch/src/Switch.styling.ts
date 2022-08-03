@@ -20,17 +20,17 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
   states: switchStates,
   slotProps: {
     root: buildProps(
-      (tokens: SwitchTokens) => ({
+      (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
           flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
           minHeight: tokens.minHeight,
           minWidth: tokens.minWidth,
-          padding: tokens.padding,
+          ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['flexDirection', 'minHeight', 'minWidth', 'padding'],
+      ['flexDirection', ...layoutStyles.keys],
     ),
     toggleContainer: buildProps(
       (tokens: SwitchTokens) => ({
@@ -44,9 +44,9 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
     track: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
-          flexDirection: 'row',
           height: tokens.trackHeight,
           width: tokens.trackWidth,
+          flexDirection: 'row',
           backgroundColor: tokens.backgroundColor,
           padding: 2,
           marginTop: 2,
@@ -55,7 +55,6 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           marginRight: 4,
           justifyContent: tokens.justifyContent,
           ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
           ...shadowStyles.from(tokens, theme),
         },
       }),
