@@ -11,11 +11,11 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
     paddingHorizontal: globalTokens.spacing.none,
     backgroundColor: t.colors.neutralBackground1,
     ...getBadgeColor('lightGreen', t),
-    smallest: {
+    tiny: {
       width: 6,
       height: 6,
     },
-    smaller: {
+    extraSmall: {
       width: 10,
       height: 10,
     },
@@ -34,7 +34,7 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = (t
       bottom: -globalTokens.spacing.xxs,
       right: -globalTokens.spacing.xxs,
     },
-    largest: {
+    extraLarge: {
       borderWidth: 2,
       width: 28,
       height: 28,

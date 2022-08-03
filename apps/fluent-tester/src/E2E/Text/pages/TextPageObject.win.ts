@@ -1,9 +1,4 @@
-import {
-  TEXT_TESTPAGE,
-  FIRST_TEXT_COMPONENT,
-  HOMEPAGE_TEXT_BUTTON,
-  SECOND_TEXT_COMPONENT,
-} from '../../../FluentTester/TestComponents/Text/consts';
+import { TEXT_TESTPAGE, FIRST_TEXT_COMPONENT, HOMEPAGE_TEXT_BUTTON, SECOND_TEXT_COMPONENT } from '../../../TestComponents/Text/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class TextPageObject extends BasePage {

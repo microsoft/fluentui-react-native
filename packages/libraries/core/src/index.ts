@@ -178,12 +178,31 @@ export type {
 export { Separator, separatorName } from '@fluentui-react-native/separator';
 export type { SeparatorProps, SeparatorTokens, SeparatorType } from '@fluentui-react-native/separator';
 
-export { Text, textName } from '@fluentui-react-native/text';
-export type { ITextProps, ITextType } from '@fluentui-react-native/text';
+export { Text, textName, TextV1, textNameV1 } from '@fluentui-react-native/text';
+export type {
+  TextProps,
+  TextTokens,
+  Caption1,
+  Body1,
+  Body1Strong,
+  Body2,
+  Body2Strong,
+  Subtitle1,
+  Subtitle1Strong,
+  Subtitle2,
+  Subtitle2Strong,
+  Title1,
+  Title1Strong,
+  LargeTitle,
+  Display,
+  ITextProps,
+  ITextType,
+} from '@fluentui-react-native/text';
 
 export {
   createIconProps,
   normalizeRect,
+  preferKeyDownForKeyEvents,
   useAsPressable,
   useAsToggle,
   useFocusState,

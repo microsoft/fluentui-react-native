@@ -1,4 +1,4 @@
-import { HOMEPAGE_SHIMMER_BUTTON, SHIMMER_TESTPAGE, SHIMMER_TEST_COMPONENT } from '../../../FluentTester/TestComponents/Shimmer/consts';
+import { HOMEPAGE_SHIMMER_BUTTON, SHIMMER_TESTPAGE, SHIMMER_TEST_COMPONENT } from '../../../TestComponents/Shimmer/consts';
 import { BasePage, By } from '../../common/BasePage.win';
 
 class ShimmerPageObject extends BasePage {

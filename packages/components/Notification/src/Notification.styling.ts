@@ -50,6 +50,7 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         style: {
           flex: 1,
           flexDirection: 'column',
+          justifyContent: 'center',
         },
       };
     }),
@@ -58,8 +59,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            flex: 1,
-            flexGrow: 1,
             fontSize: 15,
             fontWeight: '600',
             letterSpacing: -0.24, // iOS only prop
@@ -74,8 +73,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
         return {
           style: {
             color: tokens.color,
-            flex: 1,
-            flexGrow: 1,
             ...fontStyles.from(tokens, theme),
           },
         };
@@ -92,8 +89,6 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
           appearance: 'subtle',
           color: tokens.color,
           disabledColor: tokens.disabledColor,
-          focusedColor: tokens.focusedColor,
-          hoveredColor: tokens.hoveredColor,
           pressedColor: tokens.pressedColor,
           minWidth: 0,
           padding: 0,
@@ -102,19 +97,11 @@ export const stylingSettings: UseStylingOptions<NotificationProps, NotificationS
       },
       ['color', ...fontStyles.keys],
     ),
-    dismissIcon: buildProps(
-      (tokens: NotificationTokens) => {
-        return {
-          style: {
-            alignSelf: 'center',
-            flex: 1,
-            height: 20,
-            width: 20,
-          },
-          color: tokens.color,
-        };
-      },
-      ['color'],
+    shadow: buildProps(
+      (tokens: NotificationTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
     ),
   },
 };

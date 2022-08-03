@@ -3,7 +3,7 @@ import {
   BUTTON_TEST_COMPONENT_DEPRECATED,
   BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   HOMEPAGE_BUTTON_BUTTON,
-} from '../../../FluentTester/TestComponents/Button/consts';
+} from '../../../TestComponents/Button/consts';
 import { BasePage, By } from '../../common/BasePage.macos';
 
 class ButtonPageObject extends BasePage {

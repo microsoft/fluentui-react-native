@@ -1,7 +1,8 @@
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
-/* Mac-Specific Selector. We use this to get elements on the test page */
+/* Mac-Specific Selector. We use this to get elements on the test page.
+ * Specifically, this is the xpath selector. See https://v6.webdriver.io/docs/selectors.html#xpath */
 export function By(identifier: string): WebdriverIO.Element {
   return $('//*[@identifier="' + identifier + '"]');
 }
@@ -55,10 +56,7 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   scrollToComponentButton(): void {
-    if (!this.isButtonInView()) {
-      const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-      driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
-    }
+    /* TODO: Implement (not needed yet) */
   }
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
@@ -106,9 +104,7 @@ export class BasePage {
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   scrollToTestElement(): void {
-    while (!this._primaryComponent.isDisplayed()) {
-      driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, $('~ScrollViewAreaForComponents').elementId);
-    }
+    /* TODO: Implement (not needed yet) */
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,

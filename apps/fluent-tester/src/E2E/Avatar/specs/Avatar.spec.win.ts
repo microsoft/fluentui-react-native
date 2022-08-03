@@ -10,7 +10,7 @@ import {
   ACCESSIBILITY_ROLE_ATTRIBUTE,
   ACCESSIBILITY_ROLE_IMAGE,
   ACCESSIBILITY_ROLE_LINK,
-} from '../../../FluentTester/TestComponents/Avatar/consts';
+} from '../../../TestComponents/Avatar/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', function () {

@@ -30,6 +30,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       icon,
       text,
       accessibilityLabel = userProps.text,
+      onAccessibilityTap,
       onClick,
       testID,
       componentRef = defaultComponentRef,
@@ -95,6 +96,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       onMouseLeave: onMouseLeaveModified,
       ...restPressableProps,
     };
+    const onAccTap = onAccessibilityTap ?? onItemClick;
 
     // grab the styling information, referencing the state as well as the props
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
@@ -109,6 +111,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         accessibilityRole: 'menuitem',
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
+        onAccessibilityTap: onAccTap,
         focusable: !disabled,
         testID,
         ...rest,

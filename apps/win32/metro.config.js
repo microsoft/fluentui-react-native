@@ -4,13 +4,11 @@
  *
  * @format
  */
-const path = require('path');
+
 const { defaultWatchFolders, exclusionList } = require('@rnx-kit/metro-config');
 const { getDefaultConfig } = require('metro-config');
 
 const blockList = exclusionList([
-  // Exclude other test apps
-  /.*\/apps\/(?:android|ios|macos|windows)\/.*/,
   // Exclude build output directory
   /.*\/apps\/win32\/dist\/.*/,
 ]);

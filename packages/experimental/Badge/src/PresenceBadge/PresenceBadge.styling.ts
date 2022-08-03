@@ -39,6 +39,7 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
             backgroundColor: tokens.backgroundColor,
             ...borderStyles.from(tokens, theme),
             paddingHorizontal: tokens.paddingHorizontal,
+            aspectRatio: 1,
           },
         };
       },
@@ -50,6 +51,7 @@ export const stylingSettings: UseStylingOptions<PresenceBadgeProps, PresenceBadg
           width: tokens.width,
           height: tokens.height,
           color: tokens.iconColor,
+          aspectRatio: 1,
         },
       }),
       ['width', 'height', 'iconColor'],

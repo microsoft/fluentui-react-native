@@ -2,10 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage.win';
 import ButtonPageObject, { ButtonSelector } from '../pages/ButtonPageObject';
 import { ComponentSelector } from '../../common/BasePage.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
-import {
-  BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
-  BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
-} from '../../../FluentTester/TestComponents/Button/consts';
+import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPRECATED } from '../../../TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Button Testing Initialization', function () {
