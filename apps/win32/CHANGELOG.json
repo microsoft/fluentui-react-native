@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Wed, 03 Aug 2022 19:25:34 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.22.0",
+      "version": "0.22.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a",
+            "comment": "Added E2E for Switch"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.82.8",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Aug 2022 11:09:58 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.21.31",
       "version": "0.21.31",

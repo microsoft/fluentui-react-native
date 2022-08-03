@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 03 Aug 2022 11:09:58 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Aug 2022 19:25:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.82.8
+
+Wed, 03 Aug 2022 19:25:34 GMT
+
+### Patches
+
+- Added Switch control for Win32 (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/switch to v0.2.0
 
 ## 0.82.7
 

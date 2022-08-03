@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 03 Aug 2022 19:25:34 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.8",
+      "version": "0.82.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a",
+            "comment": "Added Switch control for Win32"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.2.0",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Aug 2022 11:09:58 GMT",
       "tag": "@fluentui-react-native/tester_v0.82.7",
       "version": "0.82.7",
