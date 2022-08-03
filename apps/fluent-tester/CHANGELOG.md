@@ -1,8 +1,74 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 29 Jul 2022 22:47:07 GMT and should not be manually modified.
+This log was last generated on Wed, 03 Aug 2022 19:25:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.82.8
+
+Wed, 03 Aug 2022 19:25:34 GMT
+
+### Patches
+
+- Added Switch control for Win32 (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/switch to v0.2.0
+
+## 0.82.7
+
+Wed, 03 Aug 2022 11:09:58 GMT
+
+### Patches
+
+- Merge branch 'main' into badge-spec (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.30
+- Bump @fluentui-react-native/badge to v0.1.15
+
+## 0.82.6
+
+Wed, 03 Aug 2022 07:45:46 GMT
+
+### Patches
+
+- Fix toggle test (ruaraki@microsoft.com)
+
+## 0.82.5
+
+Tue, 02 Aug 2022 22:19:18 GMT
+
+### Patches
+
+- Add test button for testing un-focusable button (nakambo@microsoft.com)
+- Bump @fluentui-react-native/button to v0.24.13
+- Bump @fluentui-react-native/experimental-button to v0.16.13
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.15
+- Bump @fluentui-react-native/menu to v1.0.22
+- Bump @fluentui-react-native/notification to v0.11.4
+- Bump @fluentui/react-native to v0.32.2
+
+## 0.82.4
+
+Tue, 02 Aug 2022 20:08:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.29
+- Bump @fluentui-react-native/button to v0.24.12
+- Bump @fluentui-react-native/experimental-button to v0.16.12
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.9
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.14
+- Bump @fluentui-react-native/menu to v1.0.21
+- Bump @fluentui-react-native/notification to v0.11.3
+- Bump @fluentui/react-native to v0.32.1
+
+## 0.82.3
+
+Mon, 01 Aug 2022 18:06:17 GMT
+
+### Patches
+
+- Added font/size tokens (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.1.28
+- Bump @fluentui-react-native/badge to v0.1.14
 
 ## 0.82.2
 
