@@ -17,7 +17,7 @@ export const CounterBadgeTest: React.FunctionComponent = () => {
     <View>
       <Text>Here should be no Badge:</Text>
       <CounterBadge count={0}></CounterBadge>
-      <Text>And here's the Badge with showZero = true</Text>
+      <Text>And here is the Badge with showZero = true</Text>
       <CounterBadge count={0} showZero={true}></CounterBadge>
       <CounterBadge color="informative" count={777}></CounterBadge>
       <CounterBadge color="important" overflowCount={1000} count={777}></CounterBadge>
