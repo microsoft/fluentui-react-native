@@ -30,7 +30,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           padding: tokens.padding,
         },
       }),
-      ['flexDirection'],
+      ['flexDirection', 'minHeight', 'minWidth', 'padding'],
     ),
     toggleContainer: buildProps(
       (tokens: SwitchTokens) => ({
