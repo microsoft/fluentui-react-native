@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 03 Aug 2022 07:45:46 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.6",
+      "version": "0.82.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8a1cbb542cf465fd12788e13b49c95d5921e9a46",
+            "comment": "Fix toggle test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 02 Aug 2022 22:19:18 GMT",
       "tag": "@fluentui-react-native/tester_v0.82.5",
       "version": "0.82.5",
