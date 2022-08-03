@@ -63,7 +63,7 @@ describe('Switch Functional Testing', () => {
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "Enter" on a Switch and verify it toggles', () => {
+  it("Click the 'Enter' on a Switch and verify it toggles correctly AND calls the user's onChange", () => {
     /* Validate the Switch is initially toggled OFF */
     expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
@@ -84,7 +84,7 @@ describe('Switch Functional Testing', () => {
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "Spacebar" on a Switch and verify it toggles', () => {
+  it("Click the 'Spacebar' on a Switch and verify it toggles correctly AND calls the user's onChange", () => {
     /* Validate the Switch is initially toggled OFF */
     expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
