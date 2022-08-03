@@ -14,6 +14,8 @@ import {
   BUTTON_ON_KEY,
   BUTTON_PRESS_TEST_COMPONENT,
   BUTTON_PRESS_TEST_COMPONENT_LABEL,
+  BUTTON_FOCUSABLE_TEST_COMPONENT,
+  BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL,
 } from './consts';
 import { IViewWin32Props } from '@office-iss/react-native-win32';
 
@@ -59,6 +61,14 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
           {...keyPressProps}
         >
           Press &quot;a&quot; or &quot;b&quot; after focusing this button
+        </Button>
+        <Button
+          testID={BUTTON_FOCUSABLE_TEST_COMPONENT}
+          onClick={onClick}
+          accessibilityLabel={BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL}
+          focusable={false}
+        >
+          This button isn&apos;t focusable (but isn&apos;t disabled or indeterminate either)
         </Button>
         {buttonPressed ? <Text testID={BUTTON_ON_PRESS}>Button Pressed</Text> : null}
         {keyDetected ? <Text testID={BUTTON_ON_KEY}>Button Key Press detected: {keyDetected}</Text> : null}

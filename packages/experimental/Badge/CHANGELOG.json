@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 03 Aug 2022 11:09:58 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.15",
+      "version": "0.1.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "7cbce62bfe3c41fd8382bbdb13b630168af684de",
+            "comment": "Wrote a SPEC for Badge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 01 Aug 2022 18:06:17 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.14",
       "version": "0.1.14",
