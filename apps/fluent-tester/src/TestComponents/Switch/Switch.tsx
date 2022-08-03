@@ -82,6 +82,15 @@ const OnOffText: React.FunctionComponent = () => {
   );
 };
 
+const Customized: React.FunctionComponent = () => {
+  // const CustomizedSwitch = Switch.customize((_t) => ({
+  //   trackWidth: 300,
+  //   trackHeight: 300,
+  // }));
+  // return <CustomizedSwitch />;
+  return null;
+};
+
 const toggleSections: TestSection[] = [
   {
     name: 'Standard Usage',
@@ -103,6 +112,10 @@ const toggleSections: TestSection[] = [
   {
     name: 'On/Off Text',
     component: () => <OnOffText />,
+  },
+  {
+    name: 'Customized',
+    component: () => <Customized />,
   },
   {
     name: 'Switch E2E Testing',

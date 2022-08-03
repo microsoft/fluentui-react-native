@@ -15,9 +15,29 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   backgroundColor?: ColorValue;
 
   /**
+   * Track height
+   */
+  trackHeight?: ViewStyle['height'];
+
+  /**
+   * Track width
+   */
+  trackWidth?: ViewStyle['width'];
+
+  /**
    * Thumb color
    */
   thumbColor?: ColorValue;
+
+  /**
+   * Thumb height and width
+   */
+  thumbSize?: number;
+
+  /**
+   * Thumb radius
+   */
+  thumbRadius?: number;
 
   /**
    * Sets the position of the thumb

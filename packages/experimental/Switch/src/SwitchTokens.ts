@@ -7,6 +7,11 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   borderRadius: 50,
   minHeight: 28,
   minWidth: 40,
+  thumbSize: 14,
+  thumbRadius: 17,
+  trackHeight: 20,
+  trackWidth: 40,
+  padding: 6,
 
   before: {
     flexDirection: 'row',

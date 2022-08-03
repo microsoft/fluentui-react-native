@@ -45,8 +45,8 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           flexDirection: 'row',
-          height: 20,
-          width: 40,
+          height: tokens.trackHeight,
+          width: tokens.trackWidth,
           backgroundColor: tokens.backgroundColor,
           padding: 2,
           marginTop: 2,
@@ -65,9 +65,9 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       (tokens: SwitchTokens) => ({
         style: {
           backgroundColor: tokens.thumbColor,
-          height: 14,
-          width: 14,
-          borderRadius: 17,
+          height: tokens.thumbSize,
+          width: tokens.thumbSize,
+          borderRadius: tokens.thumbRadius,
         },
       }),
       ['thumbColor'],
