@@ -25,9 +25,24 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   justifyContent?: ViewStyle['justifyContent'];
 
   /**
-   * The width of the button.
+   * The width of the switch.
    */
   width?: ViewStyle['width'];
+
+  /**
+   * The minWidth of the switch
+   */
+  minWidth?: ViewStyle['minWidth'];
+
+  /**
+   * The minHeight of the switch
+   */
+  minHeight?: ViewStyle['minHeight'];
+
+  /**
+   * The padding of the root
+   */
+  rootPadding?: ViewStyle['padding'];
 
   /**
    * The flex direction of the root
