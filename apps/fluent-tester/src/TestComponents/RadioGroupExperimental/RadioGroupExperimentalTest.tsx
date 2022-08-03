@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { RADIO_GROUP-EXPERIMENTAL_TESTPAGE } from './consts';
-import { RadioGroupExperimentalDefault } from './RadioGroupExperimentalDefault';
+import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from './consts';
+import { DefaultRadioGroup } from './DefaultRadioGroup';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [
   {
-    name: 'RadioGroupExperimental Page',
-    testID: RADIO_GROUP-EXPERIMENTAL_TESTPAGE,
-    component: RadioGroupExperimentalDefault,
+    name: 'Default RadioGroup Usage',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: DefaultRadioGroup,
   },
 ];
 
@@ -20,7 +20,10 @@ export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description = 'component-description';
+  const description =
+    'RadioGroup lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.';
 
-  return <Test name="RadioGroupExperimental Test" description={description} sections={radioGroupExperimentalSections} status={status}></Test>;
+  return (
+    <Test name="RadioGroupExperimental Test" description={description} sections={radioGroupExperimentalSections} status={status}></Test>
+  );
 };

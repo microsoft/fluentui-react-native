@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { Separator } from '@fluentui/react-native';
-import { Radio, RadioGroup } from '@fluentui-react-native/experimental-radio-group';
+import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ERadioGroupTest } from './RadioGroupE2ETest';
@@ -28,25 +27,25 @@ const BasicRadioGroup: React.FunctionComponent = () => {
 
   return (
     <View>
-      <RadioGroup label="Uncontrolled RadioGroup" defaultValue="X" onChange={onChange}>
-        <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
-        <Radio label="Option X" value="X" />
-        <Radio label="Option Y (disabled)" value="C" disabled={true} />
-        <Radio label="Option Z" value="Z" />
+      <RadioGroup label="Uncontrolled RadioGroup" defaultSelectedKey="X" onChange={onChange}>
+        <RadioButton content="Option W" buttonKey="W" accessibilityLabel="Test Accessibility Label" />
+        <RadioButton content="Option X" buttonKey="X" />
+        <RadioButton content="Option Y (disabled)" buttonKey="C" disabled={true} />
+        <RadioButton content="Option Z" buttonKey="Z" />
       </RadioGroup>
       <Separator />
-      <RadioGroup label="Controlled RadioGroup" value={selectedKey} onChange={onChange2}>
+      <RadioGroup label="Controlled RadioGroup" selectedKey={selectedKey} onChange={onChange2}>
         <View>
-          <Radio
-            label="Option A"
-            value="A"
+          <RadioButton
+            content="Option A"
+            buttonKey="A"
             accessibilityLabel="Test Accessibility Label"
             accessibilityPositionInSet={1}
             accessibilitySetSize={4}
           />
-          <Radio label="Option B" value="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
-          <Radio label="Option C" value="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
-          <Radio label="Option D" value="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
+          <RadioButton content="Option B" buttonKey="B" accessibilityPositionInSet={2} accessibilitySetSize={4} />
+          <RadioButton content="Option C" buttonKey="C" accessibilityPositionInSet={3} accessibilitySetSize={4} />
+          <RadioButton content="Option D" buttonKey="D" accessibilityPositionInSet={4} accessibilitySetSize={4} />
         </View>
       </RadioGroup>
     </View>
@@ -74,8 +73,7 @@ export const RadioGroupTest: React.FunctionComponent = () => {
     androidStatus: 'Backlog',
   };
 
-  const description =
-    'RadioGroup lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.';
+  const description = 'No description.';
 
   return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status} />;
 };

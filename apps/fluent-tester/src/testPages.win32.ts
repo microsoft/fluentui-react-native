@@ -28,7 +28,7 @@ import { ExperimentalMenuButtonTest, HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '.
 import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './TestComponents/ActivityIndicator';
 import { MenuTest, HOMEPAGE_MENU_BUTTON } from './TestComponents/Menu';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
-import { ExperimentalRadioGroupTest, HOMEPAGE_EXPERIMENTAL_RADIO-GROUP_BUTTON } from './TestComponents/ExperimentalRadioGroup';
+import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
 // --> testPage import insert
 
 export const tests: TestDescription[] = [
@@ -179,8 +179,8 @@ export const tests: TestDescription[] = [
   },
   {
     name: 'ExperimentalRadioGroup Test',
-    component: ExperimentalRadioGroupTest,
-    testPage: HOMEPAGE_EXPERIMENTAL_RADIO-GROUP_BUTTON,
+    component: RadioGroupExperimentalTest,
+    testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
   },
   // --> testPage component insert,,,,
 ];
