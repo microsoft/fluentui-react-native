@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-react-native/experimental-switch",
+  "name": "@fluentui-react-native/switch",
   "version": "0.1.0",
   "description": "A cross-platform Switch component using the Fluent Design System",
   "main": "src/index.ts",
