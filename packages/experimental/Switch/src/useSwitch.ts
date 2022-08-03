@@ -68,20 +68,19 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
 
   return {
     props: {
-      ...pressable.props,
       accessible: true,
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityRole: accessibilityRole ?? 'switch',
-      accessibilityHint: accessibilityHint,
       accessibilityActions: accessibilityActionsProp,
       onAccessibilityAction: onAccessibilityActionProp,
       accessibilityState: getAccessibilityState(checkedState, isDisabled, accessibilityState),
       focusable: !isDisabled,
       ref: useViewCommandFocus(componentRef),
-      ...onKeyUpProps,
       checked: checkedState,
-      label: label,
       labelPosition: labelPosition ?? 'after',
+      ...pressable.props,
+      ...onKeyUpProps,
+      ...rest,
     },
     state: {
       ...pressable.state,
