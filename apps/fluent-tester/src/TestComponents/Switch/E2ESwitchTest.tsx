@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
-import { Switch } from '@fluentui-react-native/experimental-switch';
+import { Switch } from '@fluentui-react-native/switch';
 import { Text } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { SWITCH_TEST_COMPONENT, SWITCH_ON_PRESS } from './consts';
