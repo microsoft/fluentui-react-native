@@ -19,6 +19,7 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
     <Stack style={stackStyle}>
       <Switch testID={SWITCH_TEST_COMPONENT} label={'Switch Test'} onChange={onToggle} />
       {switchPressed ? <Text testID={SWITCH_ON_PRESS}>Switch Toggled On</Text> : null}
+      <Switch label={SWITCH_TEST_COMPONENT_LABEL} testID={SWITCH_NO_A11Y_LABEL_COMPONENT} />
     </Stack>
   );
 };
