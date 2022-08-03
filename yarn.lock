@@ -1477,19 +1477,6 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.13.0.tgz#1d8610634920bd5decaca669cae8183c0713d2ef"
   integrity sha512-o9ir+tpie+Fm9zO+nCbJLBfzVjUhugRWRsPS8n6wBaujC1qyeUYjhoGg6ejXzKc0nVCkIsFmRRRgC0brfrPIzw==
 
-"@fluentui-react-native/switch@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/switch/-/switch-0.2.0.tgz#abc333c3adb777cb1f6fec888a8a1f61957e4d8d"
-  integrity sha512-PuBhamRR386gXMf0YVK4c+WWC2HCQdFI6tiaJK7bJrX/ZlOqvNrh+u2yMBeed/8xAm3TdkWGmikvZzuW625crg==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.9.0 <1.0.0"
-    "@fluentui-react-native/framework" "0.8.0"
-    "@fluentui-react-native/interactive-hooks" ">=0.18.0 <1.0.0"
-    "@fluentui-react-native/text" ">=0.13.0 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.16.0 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.9.0 <1.0.0"
-    tslib "^2.3.1"
-
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.1.tgz#9551142a1980503752536b5050fd99f4a7f13b17"
