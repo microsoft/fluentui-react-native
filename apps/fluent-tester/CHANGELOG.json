@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 03 Aug 2022 11:09:58 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.7",
+      "version": "0.82.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "7cbce62bfe3c41fd8382bbdb13b630168af684de",
+            "comment": "Merge branch 'main' into badge-spec"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.30",
+            "commit": "7cbce62bfe3c41fd8382bbdb13b630168af684de"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.15",
+            "commit": "7cbce62bfe3c41fd8382bbdb13b630168af684de"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Aug 2022 07:45:46 GMT",
       "tag": "@fluentui-react-native/tester_v0.82.6",
       "version": "0.82.6",
