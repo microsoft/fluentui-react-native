@@ -444,7 +444,7 @@ PODS:
     - React-jsi (= 0.66.4)
     - React-logger (= 0.66.4)
     - React-perflogger (= 0.66.4)
-  - ReactTestApp-DevSupport (1.4.0):
+  - ReactTestApp-DevSupport (1.6.1):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -452,7 +452,6 @@ PODS:
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
-  - SwiftLint (0.47.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -495,14 +494,12 @@ DEPENDENCIES:
   - ReactTestApp-Resources (from `..`)
   - "RNCPicker (from `../../../node_modules/@react-native-picker/picker`)"
   - RNSVG (from `../../../node_modules/react-native-svg`)
-  - SwiftLint
   - Yoga (from `../../../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
     - fmt
     - MicrosoftFluentUI
-    - SwiftLint
 
 EXTERNAL SOURCES:
   boost:
@@ -618,11 +615,10 @@ SPEC CHECKSUMS:
   React-RCTVibration: e3ffca672dd3772536cb844274094b0e2c31b187
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
-  ReactTestApp-DevSupport: f304d297706114319929405239789b443b5c2fee
-  ReactTestApp-Resources: 810cb22ae7c4e042ce930887b2665f26d8011498
+  ReactTestApp-DevSupport: 8f0a689650b85dd1a69213cfed15e5d4415f1bee
+  ReactTestApp-Resources: ecba662266ac5af3e30e1e3004c0fa8c0298b61a
   RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
-  SwiftLint: f80f1be7fa96d30e0aa68e58d45d4ea1ccaac519
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
 
 PODFILE CHECKSUM: 471bcded6dd3e64a1865525c60e6a27d0b4961a9
