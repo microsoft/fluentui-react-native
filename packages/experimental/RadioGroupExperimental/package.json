@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-react-native/radio-group-experimental",
+  "name": "@fluentui-react-native/experimental-radio-group",
   "version": "0.1.0",
   "description": "add component-description",
   "main": "src/index.ts",
