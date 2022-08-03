@@ -20,6 +20,7 @@ import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../TestComponents/RadioGroup/cons
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../TestComponents/Separator/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
+import { HOMEPAGE_SWITCH_BUTTON } from '../../TestComponents/Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../TestComponents/Text/consts';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../TestComponents/TextExperimental/consts';
 import { HOMEPAGE_TOKEN_BUTTON } from '../../TestComponents/Tokens/consts';
@@ -111,6 +112,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToSvgPage() {
     this.svgPage.click();
+  }
+
+  clickAndGoToSwitchPage() {
+    this.switchPage.click();
   }
 
   clickAndGoToTextPage() {
@@ -227,6 +232,10 @@ class NavigateAppPage extends BasePage {
 
   private get svgPage() {
     return By(HOMEPAGE_SVG_BUTTON);
+  }
+
+  private get switchPage() {
+    return By(HOMEPAGE_SWITCH_BUTTON);
   }
 
   private get textPage() {

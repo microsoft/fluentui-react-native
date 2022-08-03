@@ -62,6 +62,7 @@
     "@fluentui-react-native/menu": "^1.0.22",
     "@fluentui-react-native/notification": "0.11.4",
     "@fluentui-react-native/stack": ">=0.7.2 <1.0.0",
+    "@fluentui-react-native/switch": "^0.1.0",
     "@fluentui-react-native/text": ">=0.13.0 <1.0.0",
     "@fluentui-react-native/theme": ">=0.7.0 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
