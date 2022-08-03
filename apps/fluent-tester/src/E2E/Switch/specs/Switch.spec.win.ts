@@ -71,6 +71,8 @@ describe('Switch Functional Testing', () => {
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
 
+    expect(SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
+
     /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
@@ -89,6 +91,8 @@ describe('Switch Functional Testing', () => {
     /* Presses the "space bar" to select the Switch */
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
+
+    expect(SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
 
     /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();
