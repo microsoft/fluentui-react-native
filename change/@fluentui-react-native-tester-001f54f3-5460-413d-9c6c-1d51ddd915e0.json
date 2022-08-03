@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Implement useSizeClass hook",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
