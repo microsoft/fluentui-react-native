@@ -12,7 +12,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   /**
    * Track color
    */
-  backgroundColor?: ColorValue;
+  trackColor?: ColorValue;
 
   /**
    * Track height

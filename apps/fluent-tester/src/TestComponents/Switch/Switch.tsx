@@ -83,12 +83,25 @@ const OnOffText: React.FunctionComponent = () => {
 };
 
 const Customized: React.FunctionComponent = () => {
-  // const CustomizedSwitch = Switch.customize((_t) => ({
-  //   trackWidth: 300,
-  //   trackHeight: 300,
-  // }));
-  // return <CustomizedSwitch />;
-  return null;
+  const CustomizedSwitch = Switch.customize({
+    trackWidth: 100,
+    trackHeight: 30,
+    thumbSize: 20,
+
+    toggleOn: {
+      hovered: {
+        borderColor: 'red',
+        trackColor: 'red',
+      },
+      pressed: {
+        borderColor: 'red',
+        trackColor: 'red',
+      },
+      trackColor: 'red',
+      borderColor: 'red',
+    },
+  });
+  return <CustomizedSwitch />;
 };
 
 const toggleSections: TestSection[] = [
