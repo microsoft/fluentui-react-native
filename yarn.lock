@@ -68,9 +68,9 @@
     json-schema "0.4.0"
 
 "@appium/support@^2.57.0", "@appium/support@^2.59.3":
-  version "2.59.3"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.3.tgz#1ee01cce25e74ec80f168a88c21bd7ef8da7a9d7"
-  integrity sha512-QSVHO9wG91qngJ/VtC5YAEDROZ8L9zax1KftB4BhMHKI8nEg9gYcc2kTL9OHtd23BzB6i+Q6A9obXEBd9brjRw==
+  version "2.59.4"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.4.tgz#5c103071c94b3b4849449b9f2610264dc11e1344"
+  integrity sha512-oqPN+BYvMBLDMrj8WkrCVy3FAkjm3hOouOYg2ZB6Qg7LYUCSkpi+eiDwjyH8WRD9BF5XeNnyt9tuM8b4LLTCuw==
   dependencies:
     "@babel/runtime" "7.18.9"
     "@colors/colors" "1.5.0"
@@ -125,7 +125,7 @@
     source-map-support "0.5.21"
     supports-color "8.1.1"
     teen_process "1.16.0"
-    type-fest "2.17.0"
+    type-fest "2.18.0"
     uuid "8.3.2"
     which "2.0.2"
     yauzl "2.10.0"
@@ -2348,9 +2348,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^2.2.1":
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.2.tgz#2925eb8e76ff6b584c80529adc251df963be9141"
-  integrity sha512-0nY8638h1J3wKz6P3IJMpOoxJDdOj7Dk/K2hP/xpqP3KnIY0lmoqYlhyNihuyVPocDGajf6SA7LFFsFepQ56ag==
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.3.tgz#36a2efae4b874e5b4479fd4f089e7e0bae0c1a79"
+  integrity sha512-YdfRdYdu3jwkeSuBpNMlxQb8HE6zqLmBKwzU8l/RszXRNcXLZQdiq+fR56hHpwjNc+L447eJrnovC5n6cnbkzg==
 
 "@react-native-windows/cli@0.66.3":
   version "0.66.3"
@@ -13411,6 +13411,11 @@ type-fest@2.17.0:
   version "2.17.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.17.0.tgz#c677030ce61e5be0c90c077d52571eb73c506ea9"
   integrity sha512-U+g3/JVXnOki1kLSc+xZGPRll3Ah9u2VIG6Sn9iH9YX6UkPERmt6O/0fIyTgsd2/whV0+gAaHAg8fz6sG1QzMA==
+
+type-fest@2.18.0:
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.18.0.tgz#fdef3a74e0a9e68ebe46054836650fb91ac3881e"
+  integrity sha512-pRS+/yrW5TjPPHNOvxhbNZexr2bS63WjrMU8a+VzEBhUi9Tz1pZeD+vQz3ut0svZ46P+SRqMEPnJmk2XnvNzTw==
 
 type-fest@^0.20.2:
   version "0.20.2"
