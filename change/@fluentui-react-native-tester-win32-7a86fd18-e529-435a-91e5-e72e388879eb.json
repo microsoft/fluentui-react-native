@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added E2E for Switch",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}
