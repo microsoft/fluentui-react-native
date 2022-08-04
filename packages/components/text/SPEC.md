@@ -188,7 +188,7 @@ export type TextProps<TBase = ITextProps> = TBase &
 
 - `block` => On win32, instead of setting it as a boolean prop, block display is applied by default, and is overridden as inline when `<Text>` is wrapped by a parent `<Text>`.
 
-- `font` => According to design token redlines, `font` prop is given a giant string with a delimiter of font families for each enum type (`base`/`numeric`/`monospace`), We currently don't have a way to deal with this fontFamily format. We only support a single
+- `font` => According to design token redlines, `font` prop is given a giant string with a delimiter of font families for each enum type (`base`/`numeric`/`monospace`), We currently don't have a way to deal with this fontFamily format. We only support a single font family for each font type.
 ```
 
 ### Styling Tokens

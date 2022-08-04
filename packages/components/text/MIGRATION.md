@@ -1,6 +1,6 @@
 # Text Migration
 
-## Migration from v0 Checkbox
+## Migration from v0 Text
 
 In the short term, the new `Text` control is named `TextV1` while it clashes with the existing older control. Once we deprecate the old control, it will be renamed to `Text`. It may be useful to rename the control to `Text` using the import syntax to simplify the rename:
 
@@ -21,7 +21,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 
 ### Props changed
 
-- `variant` => Prop name remains identical, but will support a different collection of named font variants. Newly defined v1 variants can be found in[Typography.types](../../theming/theme-types/src/Typography.types.ts.md) under theme-types.
+- `variant` => Prop name remains identical, but will support a different collection of named font variants. Newly defined v1 variants can be found in [Typography.types](../../theming/theme-types/src/Typography.types.ts.md) under theme-types.
 
 ### Props added
 
