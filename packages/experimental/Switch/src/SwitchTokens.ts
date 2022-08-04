@@ -16,6 +16,11 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   focusStrokeColor: t.colors.transparentBackground,
   padding: 2,
   color: t.colors.neutralForeground2,
+  trackMarginTop: 2,
+  trackMarginBottom: 2,
+  trackMarginLeft: 4,
+  trackMarginRight: 4,
+  thumbMargin: 2,
 
   before: {
     flexDirection: 'row',

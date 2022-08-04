@@ -25,6 +25,26 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   trackWidth?: ViewStyle['width'];
 
   /**
+   * Track top margin
+   */
+  trackMarginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Track bottom margin
+   */
+  trackMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * Track left margin
+   */
+  trackMarginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Track right margin
+   */
+  trackMarginRight?: ViewStyle['marginRight'];
+
+  /**
    * Thumb color
    */
   thumbColor?: ColorValue;
@@ -33,6 +53,16 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * Thumb height and width
    */
   thumbSize?: number;
+
+  /**
+   * Thumb radius
+   */
+  thumbRadius?: number;
+
+  /**
+   * Thumb margin
+   */
+  thumbMargin?: ViewStyle['margin'];
 
   /**
    * Color of border when Switch is focused on
@@ -48,11 +78,6 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * Border Radius of border when Switch is focused on
    */
   focusBorderRadius?: number;
-
-  /**
-   * Thumb radius
-   */
-  thumbRadius?: number;
 
   /**
    * Sets the position of the thumb
