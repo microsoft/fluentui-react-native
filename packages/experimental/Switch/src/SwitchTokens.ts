@@ -11,7 +11,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   thumbRadius: 17,
   trackHeight: 20,
   trackWidth: 40,
-  padding: 6,
+  padding: 4,
 
   before: {
     flexDirection: 'row',
@@ -70,5 +70,12 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
       thumbColor: t.colors.neutralStrokeDisabled,
       borderColor: t.colors.neutralStrokeDisabled,
     },
+  },
+
+  focused: {
+    focusBorderRadius: 4,
+    focusBorderWidth: 2,
+    focusStrokeColor: t.colors.strokeFocus2,
+    padding: 2,
   },
 });

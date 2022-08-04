@@ -35,6 +35,21 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   thumbSize?: number;
 
   /**
+   * Color of border when Switch is focused on
+   */
+  focusStrokeColor?: ColorValue;
+
+  /**
+   * Width of border when Switch is focused on
+   */
+  focusBorderWidth?: number;
+
+  /**
+   * Border Radius of border when Switch is focused on
+   */
+  focusBorderRadius?: number;
+
+  /**
    * Thumb radius
    */
   thumbRadius?: number;

@@ -1,6 +1,6 @@
 import { switchName, SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
 import { UseStylingOptions, Theme, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
 
 export const switchStates: (keyof SwitchTokens)[] = [
@@ -27,6 +27,9 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           alignSelf: 'flex-start',
           minHeight: tokens.minHeight,
           minWidth: tokens.minWidth,
+          borderColor: tokens.focusStrokeColor,
+          borderWidth: tokens.focusBorderWidth,
+          borderRadius: tokens.focusBorderRadius,
           ...layoutStyles.from(tokens, theme),
         },
       }),
@@ -55,7 +58,6 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           marginRight: 4,
           justifyContent: tokens.justifyContent,
           ...borderStyles.from(tokens, theme),
-          ...shadowStyles.from(tokens, theme),
         },
       }),
       ['backgroundColor', 'justifyContent', ...borderStyles.keys],
