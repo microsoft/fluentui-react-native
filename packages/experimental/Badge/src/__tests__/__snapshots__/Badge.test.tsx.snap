@@ -145,7 +145,8 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "transparent",
+      "borderColor": "transparent",
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -179,7 +180,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#0078d4",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,

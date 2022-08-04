@@ -1,7 +1,7 @@
-import { ColorValue } from 'react-native';
 import { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
+import { Colors } from './BadgeColorTokens';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
@@ -342,18 +342,6 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
     },
   } as BadgeTokens);
 
-export type Colors = {
-  backgroundColor?: ColorValue;
-  color?: ColorValue;
-  iconColor?: ColorValue;
-  borderColor?: ColorValue;
-  backgroundColorDark?: ColorValue;
-  colorDark?: ColorValue;
-  borderColorDark?: ColorValue;
-  hcBackground?: ColorValue;
-  hcColor?: ColorValue;
-  hcBorderColor?: ColorValue;
-};
 /**
  * A function which returns object of props depending on colors and theme.
  * @param colors object
@@ -369,22 +357,24 @@ function getFilledColorProps(colors: Colors, theme: Theme) {
   const hcColor = restColors.hcColor || theme.colors.neutralForegroundInverted;
   const hcBorderColor = restColors.hcBorderColor || theme.colors.neutralForegroundInverted;
 
-  const themeAppearance = theme.host.appearance;
+  const themeAppearance = theme.name;
   switch (themeAppearance) {
-    case 'light':
+    case 'White':
+    case 'Colorful':
     default:
       return {
         backgroundColor: backgroundColor,
         color: color,
         iconColor: color,
       };
-    case 'dark':
+    case 'DarkGray':
+    case 'Black':
       return {
         backgroundColor: backgroundColorDark,
         color: colorDark,
         iconColor: colorDark,
       };
-    case 'highContrast':
+    case 'HighContrast':
       return {
         backgroundColor: hcBackground,
         color: hcColor,
@@ -403,22 +393,24 @@ function getFilledColorProps(colors: Colors, theme: Theme) {
 function getOutlineColorProps(colors: Colors, theme: Theme) {
   const { color, colorDark } = colors;
   const borderColorDark = colors.borderColorDark || colorDark;
-  const themeAppearance = theme.host.appearance;
+  const themeAppearance = theme.name;
   switch (themeAppearance) {
-    case 'light':
+    case 'White':
+    case 'Colorful':
     default:
       return {
         color: color,
         iconColor: color,
         borderColor: color,
       };
-    case 'dark':
+    case 'DarkGray':
+    case 'Black':
       return {
         color: colorDark,
         iconColor: colorDark,
         borderColor: borderColorDark,
       };
-    case 'highContrast':
+    case 'HighContrast':
       return {
         color: theme.colors.neutralForeground3,
         iconColor: theme.colors.neutralForeground3,
@@ -436,9 +428,10 @@ function getOutlineColorProps(colors: Colors, theme: Theme) {
 function getTintColorProps(colors: Colors, theme: Theme) {
   const { backgroundColor, color, borderColor, backgroundColorDark, colorDark, borderColorDark } = colors;
 
-  const themeAppearance = theme.host.appearance;
+  const themeAppearance = theme.name;
   switch (themeAppearance) {
-    case 'light':
+    case 'White':
+    case 'Colorful':
     default:
       return {
         backgroundColor: backgroundColor,
@@ -446,14 +439,15 @@ function getTintColorProps(colors: Colors, theme: Theme) {
         iconColor: color,
         borderColor: borderColor,
       };
-    case 'dark':
+    case 'DarkGray':
+    case 'Black':
       return {
         backgroundColor: backgroundColorDark,
         color: colorDark,
         iconColor: colorDark,
         borderColor: borderColorDark,
       };
-    case 'highContrast':
+    case 'HighContrast':
       return {
         backgroundColor: theme.colors.transparentBackground,
         color: theme.colors.neutralForeground3,
@@ -471,20 +465,22 @@ function getTintColorProps(colors: Colors, theme: Theme) {
  */
 function getGhostColorProps(colors: Colors, theme: Theme) {
   const { color, colorDark } = colors;
-  const themeAppearance = theme.host.appearance;
+  const themeAppearance = theme.name;
   switch (themeAppearance) {
-    case 'light':
+    case 'White':
+    case 'Colorful':
     default:
       return {
         color: color,
         iconColor: color,
       };
-    case 'dark':
+    case 'DarkGray':
+    case 'Black':
       return {
         color: colorDark,
         iconColor: colorDark,
       };
-    case 'highContrast':
+    case 'HighContrast':
       return {
         color: theme.colors.neutralForeground3,
         iconColor: theme.colors.neutralForeground3,
