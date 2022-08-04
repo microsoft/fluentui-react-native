@@ -52,7 +52,9 @@ exports[`Switch Default 1`] = `
         "margin": 0,
       }
     }
-  />
+  >
+    Default Switch
+  </Text>
   <View
     style={
       Object {
@@ -147,7 +149,9 @@ exports[`Switch Disabled 1`] = `
         "margin": 0,
       }
     }
-  />
+  >
+    Default Switch Disabled
+  </Text>
   <View
     style={
       Object {

@@ -80,7 +80,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       labelPosition: labelPosition ?? 'after',
       ...pressable.props,
       ...onKeyUpProps,
-      ...rest,
+      ...props,
     },
     state: {
       ...pressable.state,
