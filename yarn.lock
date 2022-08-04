@@ -9,12 +9,12 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@appium/base-driver@^8.6.0":
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.6.0.tgz#4df311bac3c41ca69700380261d5a8ebe5c0e01e"
-  integrity sha512-ujRtDr4pa2bstXo3ZACeYiePPSCKmiBMFDuprLTV1KgVt+ZDT/xDq4e9NUMbgHx0jY63aeOZLCqLvfcSFmUkiA==
+"@appium/base-driver@^8.6.1":
+  version "8.6.1"
+  resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.6.1.tgz#d72932e07e0ffef353487bd325e9432f86a4260a"
+  integrity sha512-dPrtUwGuspRROe0+u4MjB6wU8Q7B3LUTYE94SOwG+rtVjd/f83ghrDPpf1wsMK3Cz9avLUyvMBIOW+XvXTIRAQ==
   dependencies:
-    "@appium/support" "^2.59.3"
+    "@appium/support" "^2.59.4"
     "@babel/runtime" "7.18.9"
     "@colors/colors" "1.5.0"
     "@types/async-lock" "1.1.5"
@@ -36,38 +36,39 @@
     morgan "1.10.0"
     serve-favicon "2.5.0"
     source-map-support "0.5.21"
-    type-fest "2.17.0"
+    type-fest "2.18.0"
     validate.js "0.13.1"
 
-"@appium/base-plugin@^1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@appium/base-plugin/-/base-plugin-1.10.0.tgz#5e25b2d7a5005fe6a49e9bbfdebcf15957d4cdb7"
-  integrity sha512-JAVgiNIiSiw868PDsiu+V/bpKJAL57qP0ZdHaclMH4ESsbnytF+XDYREpWd2DF+giuu0RO4LOxKKXo1VRX6t/g==
+"@appium/base-plugin@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@appium/base-plugin/-/base-plugin-1.10.1.tgz#67f1749ceaaaca976d29bfadd16713a3aca96db2"
+  integrity sha512-nPZvUHhH0ElEwISR2kFbLZkMP1HPjoibTbvzVfkE7fbYe7IEjw6vvrhHee7Sw2eQcSEb4Y/DZomhfzLX/Ir0Ig==
   dependencies:
-    "@appium/support" "^2.59.3"
+    "@appium/support" "^2.59.4"
 
-"@appium/docutils@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@appium/docutils/-/docutils-0.0.8.tgz#20db184198213d092b8d45fd8a2432d6e5fc57fe"
-  integrity sha512-nyOiHwWlVRslUcWkIszCpzfBviPeyrdKwiYyF4GEVY7OmOLt5nCijHIzjaLZ9drwwcSM2cr7SaVmHC/hIkab7Q==
+"@appium/docutils@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@appium/docutils/-/docutils-0.0.9.tgz#a12df008e3af1bfebf0c7158eb5296ccf22c81f4"
+  integrity sha512-QgyTmv0bPvLA4jGxliJ0IciFWZwtkmEZtXFROH8uxLFA5vF4vuLwIFRXhnIAcwaH8FmVUrxT4drnSNfiyV46/Q==
   dependencies:
-    "@appium/support" "^2.59.3"
+    "@appium/support" "^2.59.4"
     "@babel/runtime" "7.18.9"
     docdash "1.2.0"
     jsdoc "3.6.11"
-    jsdoc-plugin-typescript "2.1.0"
+    jsdoc-plugin-typescript "2.1.1"
     source-map-support "0.5.21"
     teen_process "1.16.0"
 
-"@appium/schema@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@appium/schema/-/schema-0.0.8.tgz#ce0cc1b58515e0a6d44efa401e0f8e0122319a6f"
-  integrity sha512-PSNLTQoKHm3x3ZAZRT6659rQ1UIdUrPPrVcl45QMWDsmcMRaStvQDExDmRqOBblHJoZj0m18g9gDGH7D504QCw==
+"@appium/schema@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@appium/schema/-/schema-0.0.9.tgz#9ac8f9370801941c49f396be9f1aaa20bc180559"
+  integrity sha512-1QWmxjC7NSKd2rnlNxzgqV6uV1hM4dZ1aWF/lnwxyS6ig2u3GDR0n91iHZuygplc/q9I+xnAhDDhy0dxIb9A2w==
   dependencies:
     "@types/json-schema" "7.0.11"
     json-schema "0.4.0"
+    source-map-support "0.5.21"
 
-"@appium/support@^2.57.0", "@appium/support@^2.59.3":
+"@appium/support@^2.57.0", "@appium/support@^2.59.4":
   version "2.59.4"
   resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.4.tgz#5c103071c94b3b4849449b9f2610264dc11e1344"
   integrity sha512-oqPN+BYvMBLDMrj8WkrCVy3FAkjm3hOouOYg2ZB6Qg7LYUCSkpi+eiDwjyH8WRD9BF5XeNnyt9tuM8b4LLTCuw==
@@ -130,10 +131,10 @@
     which "2.0.2"
     yauzl "2.10.0"
 
-"@appium/test-support@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@appium/test-support/-/test-support-1.4.0.tgz#3bc3d131a091e8d62d7953c528fc7eddd453b2bd"
-  integrity sha512-XC8GwxVvFv/zgTL6XSZBlFUEcLgstjNDH+EsNEVvs+o/5NmqnGp99w/tvia/bZHsytO6QklflDevtDT2bKEPtw==
+"@appium/test-support@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@appium/test-support/-/test-support-1.4.1.tgz#b7b11c5d650b961fe6b3e05be76bee8548684606"
+  integrity sha512-/QLbpgFTzAip8B6JNVgTOO3RCtKlaxXvNqKXTxnsakIPPTjcsG3VnJ6Z880/su9viYlAbBKfO1vHvTTvswnv1Q==
   dependencies:
     "@babel/runtime" "7.18.9"
     "@colors/colors" "1.5.0"
@@ -147,16 +148,16 @@
     source-map-support "0.5.21"
     teen_process "1.16.0"
 
-"@appium/types@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@appium/types/-/types-0.3.0.tgz#d26289de96d30c3de92c9b9a791160a719041594"
-  integrity sha512-IGsOqfMLioJ1q8qWbRxsr2pT2UZZrVZ+JJGuocGH4h30ZMVVK4lVhCPhvh7iwNOzeKP6DJen0iFC/82s2DZ2Hw==
+"@appium/types@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@appium/types/-/types-0.3.1.tgz#f9020c6b4c15ef215fba444b082cc4a053da9612"
+  integrity sha512-C66ZWeno674N7Otx7xQvnJ9ss0WNj9HenTmzbTRBFxj0clC1gKohVywB/2ZY8Vab8LtQVSXjwPMXs6xxRqmLgg==
   dependencies:
-    "@appium/schema" "^0.0.8"
+    "@appium/schema" "^0.0.9"
     "@types/express" "4.17.13"
     "@types/npmlog" "4.1.4"
     "@wdio/types" "7.20.7"
-    type-fest "2.17.0"
+    type-fest "2.18.0"
 
 "@azure/abort-controller@^1.0.0":
   version "1.0.4"
@@ -4006,17 +4007,17 @@ appium-windows-driver@^2.0.1:
     teen_process "^1.7.0"
 
 appium@^2.0.0-beta.27:
-  version "2.0.0-beta.41"
-  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.41.tgz#3e96a73fc2a611f020b0400125e89c0d34cd3271"
-  integrity sha512-lQTp1Buz5MbmScRsDX/+/t3i8jAndnYcJEM01pDzDO7JVjWS46FDXP1lpciVxf9yqsD589ZHMxB0/gMDWvUmWA==
+  version "2.0.0-beta.42"
+  resolved "https://registry.yarnpkg.com/appium/-/appium-2.0.0-beta.42.tgz#a6f291aaefd07a1fd61911360973604b418c74c5"
+  integrity sha512-dTlf/ptu/G7y/bZJ5k+OY8sbv1tvjjh1Fsv+2SmXlIZaoevFBONURzOkZgHXJunWr6CR1pkHY37HP0eibPWkgQ==
   dependencies:
-    "@appium/base-driver" "^8.6.0"
-    "@appium/base-plugin" "^1.10.0"
-    "@appium/docutils" "^0.0.8"
-    "@appium/schema" "^0.0.8"
-    "@appium/support" "^2.59.3"
-    "@appium/test-support" "^1.4.0"
-    "@appium/types" "^0.3.0"
+    "@appium/base-driver" "^8.6.1"
+    "@appium/base-plugin" "^1.10.1"
+    "@appium/docutils" "^0.0.9"
+    "@appium/schema" "^0.0.9"
+    "@appium/support" "^2.59.4"
+    "@appium/test-support" "^1.4.1"
+    "@appium/types" "^0.3.1"
     "@babel/runtime" "7.18.9"
     "@sidvind/better-ajv-errors" "2.0.0"
     "@types/argparse" "2.0.10"
@@ -4032,6 +4033,7 @@ appium@^2.0.0-beta.27:
     asyncbox "2.9.2"
     axios "0.27.2"
     bluebird "3.7.2"
+    cross-env "7.0.3"
     find-up "5.0.0"
     lilconfig "2.0.6"
     lodash "4.17.21"
@@ -4043,7 +4045,7 @@ appium@^2.0.0-beta.27:
     semver "7.3.7"
     source-map-support "0.5.21"
     teen_process "1.16.0"
-    type-fest "2.17.0"
+    type-fest "2.18.0"
     winston "3.8.1"
     wrap-ansi "7.0.0"
     yaml "2.1.1"
@@ -5654,6 +5656,13 @@ cron-parser@^4.2.1:
   dependencies:
     luxon "^1.28.0"
 
+cross-env@7.0.3:
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-7.0.3.tgz#865264b29677dc015ba8418918965dd232fc54cf"
+  integrity sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==
+  dependencies:
+    cross-spawn "^7.0.1"
+
 cross-spawn@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-4.0.2.tgz#7b9247621c23adfdd3856004a823cbe397424d41"
@@ -5673,7 +5682,7 @@ cross-spawn@^6.0.0:
     shebang-command "^1.2.0"
     which "^1.2.9"
 
-cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
+cross-spawn@^7.0.0, cross-spawn@^7.0.1, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
   integrity sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==
@@ -9121,10 +9130,10 @@ jscodeshift@^0.11.0:
     temp "^0.8.1"
     write-file-atomic "^2.3.0"
 
-jsdoc-plugin-typescript@2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jsdoc-plugin-typescript/-/jsdoc-plugin-typescript-2.1.0.tgz#6fc1c192e5f31e4ded9e266d7a17cc378c7560d5"
-  integrity sha512-GYNBCW20YyoFGz8ZYjZS0Prt/arfaCm8yku/yN/d4NXNnF25Ghq9gVpxVdN+8sK5fnA8YRNh8am4kGA8amL99Q==
+jsdoc-plugin-typescript@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/jsdoc-plugin-typescript/-/jsdoc-plugin-typescript-2.1.1.tgz#16d10f2fea5d1e766e14ff1093000d93d8da2941"
+  integrity sha512-zbGdmQ6uxe2yR9vG04hEA+wrYFxOxjQ3P1fRXDTTIttozMIWwUuljSgcR+lOZ5O7jb9P7a/GCtftJzQN22qEsg==
   dependencies:
     string.prototype.matchall "^4.0.0"
 
@@ -13406,11 +13415,6 @@ type-detect@4.0.8, type-detect@^4.0.0, type-detect@^4.0.5, type-detect@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
-
-type-fest@2.17.0:
-  version "2.17.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.17.0.tgz#c677030ce61e5be0c90c077d52571eb73c506ea9"
-  integrity sha512-U+g3/JVXnOki1kLSc+xZGPRll3Ah9u2VIG6Sn9iH9YX6UkPERmt6O/0fIyTgsd2/whV0+gAaHAg8fz6sG1QzMA==
 
 type-fest@2.18.0:
   version "2.18.0"
