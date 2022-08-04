@@ -20,3 +20,4 @@ export type {
   CheckboxType,
 } from './Checkbox.types';
 export { Checkbox as CheckboxV1 } from './Checkbox';
+export { useCheckbox } from './useCheckbox';

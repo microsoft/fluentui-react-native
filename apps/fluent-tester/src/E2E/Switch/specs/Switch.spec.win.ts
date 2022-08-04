@@ -76,13 +76,15 @@ describe('Switch Functional Testing', () => {
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "Enter" on a Switch and verify it toggles', () => {
+  it("Click the 'Enter' on a Switch and verify it toggles correctly AND calls the user's onChange", () => {
     /* Validate the Switch is initially toggled OFF */
     expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
     /* Presses the "Enter" to select the Switch */
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
+
+    expect(SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
 
     /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();
@@ -95,13 +97,15 @@ describe('Switch Functional Testing', () => {
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "Spacebar" on a Switch and verify it toggles', () => {
+  it("Click the 'Spacebar' on a Switch and verify it toggles correctly AND calls the user's onChange", () => {
     /* Validate the Switch is initially toggled OFF */
     expect(SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
     /* Presses the "space bar" to select the Switch */
     SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
     SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
+
+    expect(SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
 
     /* Validate the Switch is toggled ON */
     expect(SwitchPageObject.isSwitchChecked()).toBeTruthy();

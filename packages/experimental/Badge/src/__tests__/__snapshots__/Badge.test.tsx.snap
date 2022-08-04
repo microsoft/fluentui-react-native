@@ -15,8 +15,8 @@ exports[`Badge component tests Badge all props 1`] = `
       "borderWidth": 1,
       "bottom": 0,
       "flexDirection": "row",
-      "height": 24,
       "justifyContent": "center",
+      "minHeight": 24,
       "minWidth": 24,
       "paddingHorizontal": 4,
       "right": 0,
@@ -25,7 +25,7 @@ exports[`Badge component tests Badge all props 1`] = `
   }
 >
   <Text
-    accessible={true}
+    accessible={false}
     style={
       Object {
         "color": "#fff",
@@ -39,8 +39,13 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
+    fontFamily="Segoe UI"
+    fontSize={12}
+    fontWeight="600"
     numberOfLines={0}
+    paddingHorizontal={2}
     style={
       Object {
         "color": "#0078d4",
@@ -72,8 +77,8 @@ exports[`Badge component tests Badge tokens 1`] = `
       "borderWidth": 4,
       "bottom": 0,
       "flexDirection": "row",
-      "height": 24,
       "justifyContent": "center",
+      "minHeight": 24,
       "minWidth": 24,
       "paddingHorizontal": 4,
       "right": 0,
@@ -82,8 +87,13 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
+    fontFamily="Segoe UI"
+    fontSize={12}
+    fontWeight="600"
     numberOfLines={0}
+    paddingHorizontal={2}
     style={
       Object {
         "color": "#ffffff",
@@ -115,8 +125,8 @@ exports[`Badge component tests Empty Badge 1`] = `
       "borderWidth": 1,
       "bottom": 0,
       "flexDirection": "row",
-      "height": 24,
       "justifyContent": "center",
+      "minHeight": 24,
       "minWidth": 24,
       "paddingHorizontal": 4,
       "right": 0,
