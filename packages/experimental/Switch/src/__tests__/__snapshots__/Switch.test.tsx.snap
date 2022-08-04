@@ -9,16 +9,18 @@ exports[`Switch Default 1`] = `
       },
     ]
   }
+  accessibilityLabel="Default Switch"
   accessibilityRole="switch"
   accessibilityState={
     Object {
       "checked": undefined,
-      "disabled": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
   disabled={false}
   focusable={true}
+  onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -104,6 +106,7 @@ exports[`Switch Disabled 1`] = `
       },
     ]
   }
+  accessibilityLabel="Default Switch Disabled"
   accessibilityRole="switch"
   accessibilityState={
     Object {
@@ -114,6 +117,7 @@ exports[`Switch Disabled 1`] = `
   accessible={true}
   disabled={true}
   focusable={false}
+  onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
