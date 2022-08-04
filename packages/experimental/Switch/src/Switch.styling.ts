@@ -74,13 +74,21 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       }),
       ['thumbColor'],
     ),
-    label: buildProps(() => ({
-      style: {
-        color: 'black',
-      },
-    })),
-    onOffText: buildProps(() => ({
-      style: {},
-    })),
+    label: buildProps(
+      (tokens: SwitchTokens) => ({
+        style: {
+          color: tokens.color,
+        },
+      }),
+      ['color'],
+    ),
+    onOffText: buildProps(
+      (tokens: SwitchTokens) => ({
+        style: {
+          color: tokens.color,
+        },
+      }),
+      ['color'],
+    ),
   },
 };

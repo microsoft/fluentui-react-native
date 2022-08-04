@@ -12,6 +12,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   trackHeight: 20,
   trackWidth: 40,
   padding: 4,
+  color: t.colors.neutralForeground2,
 
   before: {
     flexDirection: 'row',
