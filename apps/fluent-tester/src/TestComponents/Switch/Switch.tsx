@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { SWITCH_TESTPAGE } from './consts';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
 import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { commonTestStyles as commonStyles } from '../Common/styles';
+import { CustomizedSwitch } from './CustomizedSwitch';
 
 const styles = StyleSheet.create({
   square: {
@@ -83,103 +83,6 @@ const OnOffText: React.FunctionComponent = () => {
   );
 };
 
-const Customized: React.FunctionComponent = () => {
-  const [trackColor, setTrackColor] = React.useState('blue');
-  const [thumbColorOn, setThumbColorOn] = React.useState('white');
-  const [thumbColorOff, setThumbColorOff] = React.useState('grey');
-  const [thumbSize, setThumbSize] = React.useState(20);
-  const [trackWidth, setTrackWidth] = React.useState(100);
-  const [trackHeight, setTrackHeight] = React.useState(30);
-
-  const CustomizedSwitch = Switch.customize({
-    trackWidth: trackWidth,
-    trackHeight: trackHeight,
-    thumbSize: thumbSize,
-
-    toggleOn: {
-      thumbColor: thumbColorOn,
-      trackColor: trackColor,
-      borderColor: trackColor,
-
-      hovered: {
-        borderColor: trackColor,
-        trackColor: trackColor,
-        thumbColor: thumbColorOn,
-      },
-      pressed: {
-        borderColor: trackColor,
-        trackColor: trackColor,
-        thumbColor: thumbColorOn,
-      },
-    },
-
-    toggleOff: {
-      thumbColor: thumbColorOff,
-    },
-  });
-
-  return (
-    <View>
-      <TextInput
-        accessibilityLabel="Track Color"
-        style={commonStyles.textBox}
-        placeholder="Track color"
-        blurOnSubmit={true}
-        onSubmitEditing={(e) => {
-          setTrackColor(e.nativeEvent.text);
-        }}
-      />
-      <TextInput
-        accessibilityLabel="Thumb on color"
-        style={commonStyles.textBox}
-        placeholder="Thumb on color"
-        blurOnSubmit={true}
-        onSubmitEditing={(e) => {
-          setThumbColorOn(e.nativeEvent.text);
-        }}
-      />
-      <TextInput
-        accessibilityLabel="Thumb off color"
-        style={commonStyles.textBox}
-        placeholder="Thumb off color"
-        blurOnSubmit={true}
-        onSubmitEditing={(e) => {
-          setThumbColorOff(e.nativeEvent.text);
-        }}
-      />
-      <TextInput
-        accessibilityLabel="Thumb size"
-        style={commonStyles.textBox}
-        placeholder="Thumb size"
-        blurOnSubmit={true}
-        onSubmitEditing={(e) => {
-          setThumbSize(parseInt(e.nativeEvent.text));
-        }}
-      />
-      <TextInput
-        accessibilityLabel="Track width"
-        style={commonStyles.textBox}
-        placeholder="Track width"
-        blurOnSubmit={true}
-        onSubmitEditing={(e) => {
-          setTrackWidth(parseInt(e.nativeEvent.text.toString()));
-        }}
-      />
-      <TextInput
-        accessibilityLabel="Track height"
-        style={commonStyles.textBox}
-        placeholder="Track height"
-        blurOnSubmit={true}
-        onSubmitEditing={(e) => {
-          setTrackHeight(parseInt(e.nativeEvent.text.toString()));
-        }}
-      />
-
-      <CustomizedSwitch />
-    </View>
-  );
-};
-
 const toggleSections: TestSection[] = [
   {
     name: 'Standard Usage',
@@ -204,7 +107,7 @@ const toggleSections: TestSection[] = [
   },
   {
     name: 'Customized',
-    component: () => <Customized />,
+    component: () => <CustomizedSwitch />,
   },
   {
     name: 'Switch E2E Testing',
