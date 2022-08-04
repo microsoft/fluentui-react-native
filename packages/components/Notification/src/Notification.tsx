@@ -66,6 +66,7 @@ export const Notification = compose<NotificationType>({
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
     const width = useWindowDimensions().width / 2;
     const sizeClass = useSizeClassIOS_DO_NOT_USE();
+    const onActionPress = userProps.onActionPress;
 
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
@@ -76,10 +77,9 @@ export const Notification = compose<NotificationType>({
       }
     }, [isBar, width]);
     const messageStyle: ViewStyle = useMemo(() => {
-      const onActionPress = userProps.onActionPress;
       const alignSelf = onActionPress ? 'flex-start' : 'center';
       return { alignSelf: alignSelf };
-    }, ['onActionPress']);
+    }, [onActionPress]);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
