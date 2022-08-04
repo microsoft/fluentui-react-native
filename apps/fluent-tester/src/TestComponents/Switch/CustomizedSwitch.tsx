@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View, TextInput, Text, StyleSheet } from 'react-native';
-import { Switch } from '@fluentui-react-native/switch';
+import { Switch, SwitchTokens } from '@fluentui-react-native/switch';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({
@@ -34,7 +34,7 @@ export const CustomizedSwitch: React.FunctionComponent = () => {
   const [borderColor, setBorderColor] = React.useState<string>(trackColor);
 
   const CustomSwitch = React.useMemo(() => {
-    const tokens = {
+    const tokens: SwitchTokens = {
       trackWidth,
       trackHeight,
       minWidth,
