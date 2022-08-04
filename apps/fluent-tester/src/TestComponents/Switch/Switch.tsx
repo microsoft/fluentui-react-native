@@ -7,10 +7,7 @@ import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-<<<<<<< HEAD
 import { CustomizedSwitch } from './CustomizedSwitch';
-=======
->>>>>>> 06349f5cde26a7be2eda16de9cd11fedb71bd525
 
 const styles = StyleSheet.create({
   square: {
