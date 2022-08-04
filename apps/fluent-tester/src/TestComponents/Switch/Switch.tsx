@@ -106,7 +106,7 @@ const toggleSections: TestSection[] = [
     component: () => <OnOffText />,
   },
   {
-    name: 'Customized',
+    name: 'Customized Tokens',
     component: () => <CustomizedSwitch />,
   },
   {
