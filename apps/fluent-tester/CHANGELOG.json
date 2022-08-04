@@ -2,6 +2,69 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 04 Aug 2022 19:24:58 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.10",
+      "version": "0.82.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a",
+            "comment": "Added Switch control for Win32"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.3.0",
+            "commit": "06349f5cde26a7be2eda16de9cd11fedb71bd525"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 04 Aug 2022 11:02:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.9",
+      "version": "0.82.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.1.31",
+            "commit": "0ff6346279a62d682ac168a1b892ae7beb61c586"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.16",
+            "commit": "0ff6346279a62d682ac168a1b892ae7beb61c586"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Aug 2022 19:25:34 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.8",
+      "version": "0.82.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a",
+            "comment": "Added Switch control for Win32"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.2.0",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 03 Aug 2022 11:09:58 GMT",
       "tag": "@fluentui-react-native/tester_v0.82.7",
       "version": "0.82.7",
