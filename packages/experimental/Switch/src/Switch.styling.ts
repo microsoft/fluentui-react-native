@@ -33,7 +33,16 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['flexDirection', ...layoutStyles.keys],
+      [
+        'flexDirection',
+        'minHeight',
+        'minWidth',
+        'minWidth',
+        'focusStrokeColor',
+        'focusBorderWidth',
+        'focusBorderRadius',
+        ...layoutStyles.keys,
+      ],
     ),
     toggleContainer: buildProps(
       (tokens: SwitchTokens) => ({
@@ -60,7 +69,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'justifyContent', ...borderStyles.keys],
+      ['trackColor', 'trackHeight', 'trackWidth', 'justifyContent', ...borderStyles.keys],
     ),
     thumb: buildProps(
       (tokens: SwitchTokens) => ({

@@ -11,7 +11,10 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   thumbRadius: 17,
   trackHeight: 20,
   trackWidth: 40,
-  padding: 4,
+  focusBorderRadius: 4,
+  focusBorderWidth: 2,
+  focusStrokeColor: t.colors.transparentBackground,
+  padding: 2,
   color: t.colors.neutralForeground2,
 
   before: {
@@ -74,9 +77,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   },
 
   focused: {
-    focusBorderRadius: 4,
-    focusBorderWidth: 2,
     focusStrokeColor: t.colors.strokeFocus2,
-    padding: 2,
   },
 });

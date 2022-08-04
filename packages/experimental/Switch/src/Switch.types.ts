@@ -75,11 +75,6 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   minHeight?: ViewStyle['minHeight'];
 
   /**
-   * The padding of the root
-   */
-  rootPadding?: ViewStyle['padding'];
-
-  /**
    * The flex direction of the root
    */
   flexDirection?: ViewStyle['flexDirection'];

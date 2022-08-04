@@ -11,17 +11,20 @@ export const CustomizedSwitch: React.FunctionComponent = () => {
   const [trackWidth, setTrackWidth] = React.useState<number>(100);
   const [trackHeight, setTrackHeight] = React.useState<number>(30);
   const [focusStrokeColor, setFocusStrokeColor] = React.useState<string>('black');
-  const [focusStrokeRadius, setFocusStrokeRadius] = React.useState<number>(4);
+  const [focusBorderRadius, setFocusBorderRadius] = React.useState<number>(4);
   const [focusBorderWidth, setFocusBorderWidth] = React.useState<number>(1);
+  const [thumbRadius, setThumbRadius] = React.useState<number>(20);
+  const [padding, setPadding] = React.useState<number>(4);
+  const [color, setColor] = React.useState<string>('black');
 
   const CustomSwitch = React.useMemo(() => {
     const tokens = {
       trackWidth,
       trackHeight,
       thumbSize,
-      focusStrokeColor,
-      focusStrokeRadius,
-      focusBorderWidth,
+      thumbRadius,
+      padding,
+      color,
 
       toggleOn: {
         thumbColor: thumbColorOn,
@@ -43,17 +46,44 @@ export const CustomizedSwitch: React.FunctionComponent = () => {
 
       toggleOff: {
         thumbColor: thumbColorOff,
+
+        hovered: {
+          thumbColor: thumbColorOff,
+        },
+
+        pressed: {
+          thumbColor: thumbColorOff,
+        },
+      },
+
+      focused: {
+        focusBorderRadius,
+        focusStrokeColor,
+        focusBorderWidth,
       },
     };
     return Switch.customize(tokens);
-  }, [trackColor, thumbColorOn, thumbColorOff, thumbSize, trackWidth, trackHeight, focusStrokeColor, focusStrokeRadius, focusBorderWidth]);
+  }, [
+    trackColor,
+    thumbColorOn,
+    thumbColorOff,
+    thumbSize,
+    thumbRadius,
+    trackWidth,
+    trackHeight,
+    focusStrokeColor,
+    focusBorderRadius,
+    focusBorderWidth,
+    padding,
+    color,
+  ]);
 
   return (
     <View>
       <View>
         <Text>Track Tokens</Text>
         <TextInput
-          accessibilityLabel="Track Color"
+          accessibilityLabel="Track color"
           style={commonStyles.textBox}
           placeholder="Track color"
           blurOnSubmit={true}
@@ -109,39 +139,69 @@ export const CustomizedSwitch: React.FunctionComponent = () => {
             setThumbSize(parseInt(e.nativeEvent.text));
           }}
         />
+        <TextInput
+          accessibilityLabel="Thumb radius"
+          style={commonStyles.textBox}
+          placeholder="Thumb radius"
+          blurOnSubmit={true}
+          onSubmitEditing={(e) => {
+            setThumbRadius(parseInt(e.nativeEvent.text));
+          }}
+        />
       </View>
       <View>
         <Text>Focus Stroke Tokens</Text>
         <TextInput
-          accessibilityLabel="Focus Stroke Color"
+          accessibilityLabel="Focus stroke color"
           style={commonStyles.textBox}
-          placeholder="Focus Stroke Color"
+          placeholder="Focus stroke color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
             setFocusStrokeColor(e.nativeEvent.text);
           }}
         />
         <TextInput
-          accessibilityLabel="Focus Stroke Radius"
+          accessibilityLabel="Focus stroke border radius"
           style={commonStyles.textBox}
-          placeholder="Focus Stroke Radius"
+          placeholder="Focus stroke border radius"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
-            setFocusStrokeRadius(parseInt(e.nativeEvent.text));
+            setFocusBorderRadius(parseInt(e.nativeEvent.text));
           }}
         />
         <TextInput
-          accessibilityLabel="Focus Stroke Border Width"
+          accessibilityLabel="Focus stroke border width"
           style={commonStyles.textBox}
-          placeholder="Focus Stroke Border Width"
+          placeholder="Focus stroke border width"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
             setFocusBorderWidth(parseInt(e.nativeEvent.text));
           }}
         />
       </View>
+      <View>
+        <Text>Other Tokens</Text>
+        <TextInput
+          accessibilityLabel="Padding"
+          style={commonStyles.textBox}
+          placeholder="Padding"
+          blurOnSubmit={true}
+          onSubmitEditing={(e) => {
+            setPadding(parseInt(e.nativeEvent.text));
+          }}
+        />
+        <TextInput
+          accessibilityLabel="Text colors"
+          style={commonStyles.textBox}
+          placeholder="Text colors"
+          blurOnSubmit={true}
+          onSubmitEditing={(e) => {
+            setColor(e.nativeEvent.text);
+          }}
+        />
+      </View>
 
-      <CustomSwitch />
+      <CustomSwitch label="Custom Switch" onText="On" offText="Off" accessibilityLabel="Custom Switch" />
     </View>
   );
 };
