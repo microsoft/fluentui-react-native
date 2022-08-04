@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
+import { View, I18nManager } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -45,16 +45,20 @@ export const Switch = compose<SwitchType>({
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
       const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
+      const isRtl = I18nManager.isRTL;
+      const LabelSlot = <Slots.label>{label}</Slots.label>;
+      const OnOffTextSlot = displayOnOffText ? <Slots.onOffText>{onOffText}</Slots.onOffText> : null;
 
       return (
         <Slots.root {...mergedProps}>
+          {isRtl ? OnOffTextSlot : LabelSlot}
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
             <Slots.track>
               <Slots.thumb />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
+          {isRtl ? LabelSlot : OnOffTextSlot}
         </Slots.root>
       );
     };
