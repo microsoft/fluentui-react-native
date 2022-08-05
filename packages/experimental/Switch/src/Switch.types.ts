@@ -4,6 +4,7 @@ import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IViewProps } from '@fluentui-react-native/adapters';
+import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const switchName = 'Switch';
@@ -106,8 +107,8 @@ export interface SwitchInfo {
 export interface SwitchSlotProps {
   root: React.PropsWithRef<IViewProps>;
   label: TextProps;
-  track: IViewProps;
-  thumb: IViewProps;
+  track: IViewWin32Props;
+  thumb: IViewWin32Props;
   toggleContainer: IViewProps;
   onOffText: TextProps;
 }

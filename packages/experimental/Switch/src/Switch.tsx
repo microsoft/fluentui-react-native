@@ -1,5 +1,6 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
+import { View, AccessibilityInfo } from 'react-native';
+import { ViewWin32 } from '@office-iss/react-native-win32';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -30,8 +31,8 @@ export const Switch = compose<SwitchType>({
   slots: {
     root: View,
     label: Text,
-    track: View,
-    thumb: View,
+    track: ViewWin32,
+    thumb: ViewWin32,
     toggleContainer: View,
     onOffText: Text,
   },
@@ -45,13 +46,16 @@ export const Switch = compose<SwitchType>({
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
       const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
+      const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
+      const trackAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchBackground' } : null;
+      const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
 
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track>
-              <Slots.thumb />
+            <Slots.track {...trackAnimation}>
+              <Slots.thumb {...thumbAnimation} />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
