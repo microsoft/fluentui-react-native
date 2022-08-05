@@ -64,7 +64,6 @@ exports[`Switch Default 1`] = `
     }
   >
     <View
-      animationClass="Ribbon_SwitchBackground"
       style={
         Object {
           "backgroundColor": "#ffffff",
@@ -163,7 +162,6 @@ exports[`Switch Disabled 1`] = `
     }
   >
     <View
-      animationClass="Ribbon_SwitchBackground"
       style={
         Object {
           "backgroundColor": "#f0f0f0",
