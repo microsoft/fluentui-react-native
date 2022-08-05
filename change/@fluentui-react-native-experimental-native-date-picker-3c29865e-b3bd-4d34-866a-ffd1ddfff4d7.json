@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update fua version",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "hyshin@microsoft.com",
-  "dependentChangeType": "patch"
-}
