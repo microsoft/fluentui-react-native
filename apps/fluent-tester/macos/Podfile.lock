@@ -12,8 +12,8 @@ PODS:
     - ReactCommon/turbomodule/core (= 0.66.68)
   - fmt (6.2.1)
   - FRNAvatar (0.16.0):
-    - MicrosoftFluentUI (= 0.5.2)
-    - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
+    - MicrosoftFluentUI (= 0.6.1)
+    - MicrosoftFluentUI/Avatar_ios (= 0.6.1)
     - React
   - FRNCallout (0.21.6):
     - React
@@ -24,73 +24,73 @@ PODS:
   - FRNRadioButton (0.15.6):
     - React
   - glog (0.3.5)
-  - MicrosoftFluentUI (0.5.2):
-    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.5.2)
-    - MicrosoftFluentUI/Appearance_mac (= 0.5.2)
-    - MicrosoftFluentUI/Avatar_ios (= 0.5.2)
-    - MicrosoftFluentUI/AvatarGroup_ios (= 0.5.2)
-    - MicrosoftFluentUI/AvatarView_mac (= 0.5.2)
-    - MicrosoftFluentUI/BadgeField_ios (= 0.5.2)
-    - MicrosoftFluentUI/BadgeView_mac (= 0.5.2)
-    - MicrosoftFluentUI/BarButtonItems_ios (= 0.5.2)
-    - MicrosoftFluentUI/BottomCommanding_ios (= 0.5.2)
-    - MicrosoftFluentUI/BottomSheet_ios (= 0.5.2)
-    - MicrosoftFluentUI/Button_ios (= 0.5.2)
-    - MicrosoftFluentUI/Button_mac (= 0.5.2)
-    - MicrosoftFluentUI/Calendar_ios (= 0.5.2)
-    - MicrosoftFluentUI/Card_ios (= 0.5.2)
-    - MicrosoftFluentUI/CardNudge_ios (= 0.5.2)
-    - MicrosoftFluentUI/CommandBar_ios (= 0.5.2)
-    - MicrosoftFluentUI/Core_ios (= 0.5.2)
-    - MicrosoftFluentUI/Core_mac (= 0.5.2)
-    - MicrosoftFluentUI/DatePicker_mac (= 0.5.2)
-    - MicrosoftFluentUI/DotView_ios (= 0.5.2)
-    - MicrosoftFluentUI/Drawer_ios (= 0.5.2)
-    - MicrosoftFluentUI/DynamicColor_mac (= 0.5.2)
-    - MicrosoftFluentUI/EasyTapButton_ios (= 0.5.2)
-    - MicrosoftFluentUI/HUD_ios (= 0.5.2)
-    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.5.2)
-    - MicrosoftFluentUI/Label_ios (= 0.5.2)
-    - MicrosoftFluentUI/Link_mac (= 0.5.2)
-    - MicrosoftFluentUI/Navigation_ios (= 0.5.2)
-    - MicrosoftFluentUI/Notification_ios (= 0.5.2)
-    - MicrosoftFluentUI/Obscurable_ios (= 0.5.2)
-    - MicrosoftFluentUI/OtherCells_ios (= 0.5.2)
-    - MicrosoftFluentUI/PeoplePicker_ios (= 0.5.2)
-    - MicrosoftFluentUI/PersonaButton_ios (= 0.5.2)
-    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.5.2)
-    - MicrosoftFluentUI/PillButtonBar_ios (= 0.5.2)
-    - MicrosoftFluentUI/PopupMenu_ios (= 0.5.2)
-    - MicrosoftFluentUI/Presenters_ios (= 0.5.2)
-    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.5.2)
-    - MicrosoftFluentUI/SegmentedControl_ios (= 0.5.2)
-    - MicrosoftFluentUI/Separator_ios (= 0.5.2)
-    - MicrosoftFluentUI/Separator_mac (= 0.5.2)
-    - MicrosoftFluentUI/Shimmer_ios (= 0.5.2)
-    - MicrosoftFluentUI/TabBar_ios (= 0.5.2)
-    - MicrosoftFluentUI/TableView_ios (= 0.5.2)
-    - MicrosoftFluentUI/Tooltip_ios (= 0.5.2)
-    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.5.2)
-    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.5.2)
-    - MicrosoftFluentUI/Utilities_ios (= 0.5.2)
-  - MicrosoftFluentUI/Appearance_mac (0.5.2)
-  - MicrosoftFluentUI/AvatarView_mac (0.5.2):
+  - MicrosoftFluentUI (0.6.1):
+    - MicrosoftFluentUI/ActivityIndicator_ios (= 0.6.1)
+    - MicrosoftFluentUI/Appearance_mac (= 0.6.1)
+    - MicrosoftFluentUI/Avatar_ios (= 0.6.1)
+    - MicrosoftFluentUI/AvatarGroup_ios (= 0.6.1)
+    - MicrosoftFluentUI/AvatarView_mac (= 0.6.1)
+    - MicrosoftFluentUI/BadgeField_ios (= 0.6.1)
+    - MicrosoftFluentUI/BadgeView_mac (= 0.6.1)
+    - MicrosoftFluentUI/BarButtonItems_ios (= 0.6.1)
+    - MicrosoftFluentUI/BottomCommanding_ios (= 0.6.1)
+    - MicrosoftFluentUI/BottomSheet_ios (= 0.6.1)
+    - MicrosoftFluentUI/Button_ios (= 0.6.1)
+    - MicrosoftFluentUI/Button_mac (= 0.6.1)
+    - MicrosoftFluentUI/Calendar_ios (= 0.6.1)
+    - MicrosoftFluentUI/Card_ios (= 0.6.1)
+    - MicrosoftFluentUI/CardNudge_ios (= 0.6.1)
+    - MicrosoftFluentUI/CommandBar_ios (= 0.6.1)
+    - MicrosoftFluentUI/Core_ios (= 0.6.1)
+    - MicrosoftFluentUI/Core_mac (= 0.6.1)
+    - MicrosoftFluentUI/DatePicker_mac (= 0.6.1)
+    - MicrosoftFluentUI/DotView_ios (= 0.6.1)
+    - MicrosoftFluentUI/Drawer_ios (= 0.6.1)
+    - MicrosoftFluentUI/DynamicColor_mac (= 0.6.1)
+    - MicrosoftFluentUI/EasyTapButton_ios (= 0.6.1)
+    - MicrosoftFluentUI/HUD_ios (= 0.6.1)
+    - MicrosoftFluentUI/IndeterminateProgressBar_ios (= 0.6.1)
+    - MicrosoftFluentUI/Label_ios (= 0.6.1)
+    - MicrosoftFluentUI/Link_mac (= 0.6.1)
+    - MicrosoftFluentUI/Navigation_ios (= 0.6.1)
+    - MicrosoftFluentUI/Notification_ios (= 0.6.1)
+    - MicrosoftFluentUI/Obscurable_ios (= 0.6.1)
+    - MicrosoftFluentUI/OtherCells_ios (= 0.6.1)
+    - MicrosoftFluentUI/PeoplePicker_ios (= 0.6.1)
+    - MicrosoftFluentUI/PersonaButton_ios (= 0.6.1)
+    - MicrosoftFluentUI/PersonaButtonCarousel_ios (= 0.6.1)
+    - MicrosoftFluentUI/PillButtonBar_ios (= 0.6.1)
+    - MicrosoftFluentUI/PopupMenu_ios (= 0.6.1)
+    - MicrosoftFluentUI/Presenters_ios (= 0.6.1)
+    - MicrosoftFluentUI/ResizingHandleView_ios (= 0.6.1)
+    - MicrosoftFluentUI/SegmentedControl_ios (= 0.6.1)
+    - MicrosoftFluentUI/Separator_ios (= 0.6.1)
+    - MicrosoftFluentUI/Separator_mac (= 0.6.1)
+    - MicrosoftFluentUI/Shimmer_ios (= 0.6.1)
+    - MicrosoftFluentUI/TabBar_ios (= 0.6.1)
+    - MicrosoftFluentUI/TableView_ios (= 0.6.1)
+    - MicrosoftFluentUI/Tooltip_ios (= 0.6.1)
+    - MicrosoftFluentUI/TouchForwardingView_ios (= 0.6.1)
+    - MicrosoftFluentUI/TwoLineTitleView_ios (= 0.6.1)
+    - MicrosoftFluentUI/Utilities_ios (= 0.6.1)
+  - MicrosoftFluentUI/Appearance_mac (0.6.1)
+  - MicrosoftFluentUI/AvatarView_mac (0.6.1):
     - MicrosoftFluentUI/Core_mac
     - MicrosoftFluentUI/DynamicColor_mac
-  - MicrosoftFluentUI/BadgeView_mac (0.5.2):
+  - MicrosoftFluentUI/BadgeView_mac (0.6.1):
     - MicrosoftFluentUI/Core_mac
     - MicrosoftFluentUI/DynamicColor_mac
-  - MicrosoftFluentUI/Button_mac (0.5.2):
+  - MicrosoftFluentUI/Button_mac (0.6.1):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Core_mac (0.5.2)
-  - MicrosoftFluentUI/DatePicker_mac (0.5.2):
+  - MicrosoftFluentUI/Core_mac (0.6.1)
+  - MicrosoftFluentUI/DatePicker_mac (0.6.1):
     - MicrosoftFluentUI/Appearance_mac
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/DynamicColor_mac (0.5.2):
+  - MicrosoftFluentUI/DynamicColor_mac (0.6.1):
     - MicrosoftFluentUI/Appearance_mac
-  - MicrosoftFluentUI/Link_mac (0.5.2):
+  - MicrosoftFluentUI/Link_mac (0.6.1):
     - MicrosoftFluentUI/Core_mac
-  - MicrosoftFluentUI/Separator_mac (0.5.2):
+  - MicrosoftFluentUI/Separator_mac (0.6.1):
     - MicrosoftFluentUI/Core_mac
   - RCT-Folly (2021.06.28.00-v2):
     - boost
@@ -511,13 +511,13 @@ SPEC CHECKSUMS:
   FBLazyVector: 57bd8804c56ae0bde502ee5aef26281d7103f9fe
   FBReactNativeSpec: dc797dc1d82fed388267756b6d7a0d0b7e917379
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: 827ebe75e839ce442c88cc6a23940aa614ca7946
+  FRNAvatar: c516d270e12c0f6bf44bc12da08a5b244bdf4e1a
   FRNCallout: e1c0ce7f3eb95e180544480e96c82d36c87a9d0e
   FRNCheckbox: 23597f9a9ab476ed83d6459e271f66a093da3c48
   FRNMenuButton: 07f7e7207f573fa49e6fcd03a7d54ed933c35e15
   FRNRadioButton: b8415575f94fbd75d448575b1d443cf1122d1fc1
   glog: 42c4bf47024808486e90b25ea9e5ac3959047641
-  MicrosoftFluentUI: 2f4c624fd4606aa2392c09be69a45e297a41f593
+  MicrosoftFluentUI: 28925cbf24aa550b9942f844d293b90d1a5db330
   RCT-Folly: 43adc9ce880eb76792f88c011773cb5c664c1419
   RCTFocusZone: 200ae955445d25b6c7174d8a8b7bbc9605932be4
   RCTRequired: c72379189b8ec7d5e3b09f06d424d52e9c965a71
