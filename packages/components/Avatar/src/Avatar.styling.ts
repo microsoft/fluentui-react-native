@@ -168,7 +168,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
           imageStyle: { borderRadius: ringConfig.size / 2},
         };
       },
-      ['size', ...borderStyles.keys],
+      ['size'],
     ),
     badge: buildProps(
       (tokens: AvatarTokens) => {
