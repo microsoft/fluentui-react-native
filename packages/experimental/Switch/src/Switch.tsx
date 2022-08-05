@@ -46,14 +46,13 @@ export const Switch = compose<SwitchType>({
       const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
-      const trackAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchBackground' } : null;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
 
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track {...trackAnimation}>
+            <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
