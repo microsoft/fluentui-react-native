@@ -48,5 +48,16 @@
     "react-native": ">=0.66.0"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "core-android",
+      "core-ios",
+      "react"
+    ]
+  }
 }

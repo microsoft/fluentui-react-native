@@ -41,5 +41,16 @@
     "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.2",
     "react-native": "^0.68.0"
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "core-android",
+      "core-ios",
+      "react"
+    ]
   }
 }
