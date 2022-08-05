@@ -14,7 +14,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       enableFocusRing: false,
       style: {
         display: 'flex',
-        alignItems: 'flex-start',
+        // alignItems: 'flex-start',
         flexDirection: 'row',
         alignSelf: 'flex-start',
         width: '100%',
