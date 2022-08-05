@@ -64,6 +64,7 @@ exports[`Switch Default 1`] = `
     }
   >
     <View
+      animationClass="Ribbon_SwitchBackground"
       style={
         Object {
           "backgroundColor": "#ffffff",
@@ -83,6 +84,7 @@ exports[`Switch Default 1`] = `
       }
     >
       <View
+        animationClass="Ribbon_SwitchThumb"
         style={
           Object {
             "backgroundColor": "#616161",
@@ -161,6 +163,7 @@ exports[`Switch Disabled 1`] = `
     }
   >
     <View
+      animationClass="Ribbon_SwitchBackground"
       style={
         Object {
           "backgroundColor": "#f0f0f0",
@@ -180,6 +183,7 @@ exports[`Switch Disabled 1`] = `
       }
     >
       <View
+        animationClass="Ribbon_SwitchThumb"
         style={
           Object {
             "backgroundColor": "#e0e0e0",
