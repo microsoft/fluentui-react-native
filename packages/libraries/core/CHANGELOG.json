@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 05 Aug 2022 18:02:32 GMT",
+      "tag": "@fluentui/react-native_v0.32.4",
+      "version": "0.32.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.17",
+            "commit": "14006b3c506f8a5efef92d7a13defb2692656fd0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 07:16:25 GMT",
       "tag": "@fluentui/react-native_v0.32.3",
       "version": "0.32.3",

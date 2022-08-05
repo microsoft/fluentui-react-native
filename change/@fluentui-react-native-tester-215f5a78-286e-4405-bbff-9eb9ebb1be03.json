@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "BUILD_LIBRARY_FOR_DISTRIBUTION no clear benefit. remove.",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "hyshin@microsoft.com",
-  "dependentChangeType": "patch"
-}

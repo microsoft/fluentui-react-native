@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "pod update",
-  "packageName": "@fluentui-react-native/menu-button",
-  "email": "hyshin@microsoft.com",
-  "dependentChangeType": "patch"
-}

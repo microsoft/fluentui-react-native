@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 05 Aug 2022 18:02:32 GMT",
+      "tag": "@fluentui-react-native/tester_v0.82.13",
+      "version": "0.82.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "hyshin@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "14006b3c506f8a5efef92d7a13defb2692656fd0",
+            "comment": "BUILD_LIBRARY_FOR_DISTRIBUTION no clear benefit. remove."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.32.4",
+            "commit": "14006b3c506f8a5efef92d7a13defb2692656fd0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 07:16:25 GMT",
       "tag": "@fluentui-react-native/tester_v0.82.12",
       "version": "0.82.12",
