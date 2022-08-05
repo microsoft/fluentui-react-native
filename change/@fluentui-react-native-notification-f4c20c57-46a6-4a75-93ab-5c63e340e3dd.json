@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Merge branch 'master' into text-documentation",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
