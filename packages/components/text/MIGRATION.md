@@ -21,7 +21,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 
 ### Props changed
 
-- `variant` => Prop name remains identical, but will support a different collection of named font variants. Newly defined v1 variants can be found in [Typography.types](../../theming/theme-types/src/Typography.types.ts.md) under theme-types.
+- `variant` => Prop name remains identical, but will support a different collection of named font variants. Newly defined v1 variants can be found in [Typography.types](../../theming/theme-types/src/Typography.types.ts) under theme-types.
 
 ### Props added
 
