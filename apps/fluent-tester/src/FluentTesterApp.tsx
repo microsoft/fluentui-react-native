@@ -24,6 +24,7 @@ const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
      * Technically this violates the rules of hooks (calling hooks inside conditions) but Platform.OS checks are pretty non-conditional.
      * This is necessary because useWindowDimensions() does not work in win32.
      */
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const width = useWindowDimensions().width;
     if (Platform.isPad && width > 375) {
       return 'regular';
