@@ -1,5 +1,6 @@
 import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../TestComponents/ActivityIndicator/consts';
 import { HOMEPAGE_AVATAR_BUTTON } from '../../TestComponents/Avatar/consts';
+import { HOMEPAGE_BADGE_BUTTON } from '../../TestComponents/Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
@@ -36,6 +37,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToAvatarPage() {
     this.avatarPage.click();
+  }
+
+  clickAndGoToBadgePage() {
+    this.badgePage.click();
   }
 
   clickAndGoToButtonPage() {
@@ -156,6 +161,10 @@ class NavigateAppPage extends BasePage {
 
   private get avatarPage() {
     return By(HOMEPAGE_AVATAR_BUTTON);
+  }
+
+  private get badgePage() {
+    return By(HOMEPAGE_BADGE_BUTTON);
   }
 
   private get buttonPage() {
