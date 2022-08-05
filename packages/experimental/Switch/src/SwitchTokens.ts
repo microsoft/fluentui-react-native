@@ -1,6 +1,11 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { SwitchTokens } from './Switch.types';
+import { I18nManager } from 'react-native';
+
+const isRtl = I18nManager.isRTL;
+const thumbOnFlexDirection = isRtl ? 'flex-start' : 'flex-end';
+const thumbOffFlexDirection = isRtl ? 'flex-end' : 'flex-start';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
   borderWidth: 1,
@@ -41,7 +46,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     trackColor: t.colors.compoundBrandBackground1,
     thumbColor: t.colors.neutralForegroundInverted,
     borderColor: t.colors.compoundBrandBackground1,
-    justifyContent: 'flex-end',
+    justifyContent: thumbOnFlexDirection,
     hovered: {
       trackColor: t.colors.compoundBrandBackground1Hover,
       thumbColor: t.colors.neutralForegroundInvertedLink,
@@ -63,7 +68,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     trackColor: t.colors.neutralForegroundInvertedLink,
     thumbColor: t.colors.neutralStrokeAccessible,
     borderColor: t.colors.neutralStrokeAccessible,
-    justifyContent: 'flex-start',
+    justifyContent: thumbOffFlexDirection,
     hovered: {
       trackColor: t.colors.neutralForegroundInvertedLinkHover,
       thumbColor: t.colors.neutralStrokeAccessibleHover,

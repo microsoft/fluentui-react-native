@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
+import { View, I18nManager } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -14,6 +14,9 @@ import { useSwitch } from './useSwitch';
  * @param userProps The props that were passed into the switch
  * @returns Whether the styles that are assigned to the layer should be applied to the switch
  */
+
+const isRtl = I18nManager.isRTL;
+
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
   return (
     state[layer] ||
@@ -45,16 +48,18 @@ export const Switch = compose<SwitchType>({
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
       const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
+      const LabelSlot = <Slots.label>{label}</Slots.label>;
+      const OnOffTextSlot = displayOnOffText ? <Slots.onOffText>{onOffText}</Slots.onOffText> : null;
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.label>{label}</Slots.label>
+          {isRtl ? OnOffTextSlot : LabelSlot}
           <Slots.toggleContainer>
             <Slots.track>
               <Slots.thumb />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
+          {isRtl ? LabelSlot : OnOffTextSlot}
         </Slots.root>
       );
     };
