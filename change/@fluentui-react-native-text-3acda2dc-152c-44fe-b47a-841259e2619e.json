@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Update out of date documentation (#1964)",
-  "packageName": "@fluentui-react-native/text",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

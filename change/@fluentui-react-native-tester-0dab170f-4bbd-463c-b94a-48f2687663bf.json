@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add support for compact mode",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
