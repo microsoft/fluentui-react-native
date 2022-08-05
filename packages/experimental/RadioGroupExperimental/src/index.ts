@@ -1,2 +1,2 @@
-export * from './RadioGroup';
-export * from './RadioGroup.types';
+export * from './RadioGroup/RadioGroup';
+export * from './RadioGroup/RadioGroup.types';

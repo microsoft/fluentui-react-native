@@ -68,7 +68,7 @@ export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
 export interface RadioGroupSlotProps {
   root: React.PropsWithRef<IViewWin32Props>;
-  label: ITextProps;
+  label?: ITextProps;
   container: FocusZoneProps;
 }
 

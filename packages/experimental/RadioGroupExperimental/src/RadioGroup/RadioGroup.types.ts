@@ -1,34 +1,13 @@
-import { ViewProps } from 'react-native';
+import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import { RadioGroupContextValue } from './radioGroupContext';
 
 export const radioGroupName = 'RadioGroup';
 
-export interface RadioGroupContextType {
-  /**
-   * The currently selected RadioButton's key
-   */
-  value: string | null;
-
-  /**
-   * Updates the selected button and calls the client’s onChange callback
-   */
-  onChange?: (key: string) => void;
-
-  /**
-   * Updates the selected button's ref to set as the default tabbable element
-   */
-  updateSelectedButtonRef?: (ref: React.RefObject<any>) => void;
-
-  /**
-   * Array of radio button keys in the group
-   */
-  buttonKeys?: string[];
-}
-
 export interface RadioGroupState {
-  context: RadioGroupContextType;
+  context: RadioGroupContextValue;
 }
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {}
@@ -37,7 +16,7 @@ export interface RadioGroupProps {
   /**
    * Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user.
    */
-  label: string;
+  label?: string;
 
   /**
    * The key of the RadioButton that will initially be selected
@@ -65,8 +44,8 @@ export interface RadioGroupProps {
 }
 
 export interface RadioGroupSlotProps {
-  root: ViewProps;
-  label: TextProps;
+  root: React.PropsWithRef<IViewProps>;
+  label?: TextProps;
   container: FocusZoneProps;
 }
 
