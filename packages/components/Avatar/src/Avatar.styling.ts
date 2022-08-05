@@ -158,15 +158,14 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
       ['size', 'ringColor', 'ringBackgroundColor', 'ringThickness', ...borderStyles.keys],
     ),
     imageRing: buildProps(
-      (tokens: AvatarTokens, theme: Theme) => {
+      (tokens: AvatarTokens) => {
         const ringConfig = getRingConfig(tokens);
         return {
           style: {
             minWidth: ringConfig.size,
             minHeight: ringConfig.size,
-            overflow: 'hidden',
-            ...borderStyles.from(tokens, theme),
           },
+          imageStyle: { borderRadius: ringConfig.size / 2},
         };
       },
       ['size', ...borderStyles.keys],
