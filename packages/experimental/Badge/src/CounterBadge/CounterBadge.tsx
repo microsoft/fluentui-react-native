@@ -25,18 +25,17 @@ export const CounterBadge = compose<CounterBadgeType>({
     const Slots = useSlots(badge.props, (layer) => badgeLookup(layer, badge.props));
 
     return (final: CounterBadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition = 'before', ...mergedProps } = mergeProps(badge.props, final);
-      const { displayCount, showBadge } = badge.state;
-      return (
-        showBadge && (
-          <Slots.root {...mergedProps}>
-            {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-            <Slots.text>{displayCount}</Slots.text>
-            {Children.map(children, (child) => (typeof child === 'string' ? <Slots.text key="text">{child}</Slots.text> : child))}
-            {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
-          </Slots.root>
-        )
-      );
+      const { count, icon, iconPosition = 'before', overflowCount, ...mergedProps } = mergeProps(badge.props, final);
+      const { showBadge } = badge.state;
+      const displayCount = count && count > overflowCount ? `${overflowCount}+` : `${count}`;
+      return showBadge ? (
+        <Slots.root {...mergedProps}>
+          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+          <Slots.text>{displayCount}</Slots.text>
+          {Children.map(children, (child, i) => (typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child))}
+          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+        </Slots.root>
+      ) : null;
     };
   },
 });

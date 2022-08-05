@@ -2,19 +2,19 @@ import { CounterBadgeProps, CounterBadgeInfo } from './CounterBadge.types';
 
 export const useCounterBadge = (props: CounterBadgeProps): CounterBadgeInfo => {
   const DEFAULT_OVERFLOW_COUNT = 99;
-  const { dot, overflowCount = DEFAULT_OVERFLOW_COUNT, showZero, count, ...rest } = props;
+  const { count, dot, overflowCount = DEFAULT_OVERFLOW_COUNT, showZero, ...rest } = props;
 
-  const _count = count && count > overflowCount ? `${overflowCount}+` : `${count}`;
-  const showBadge = count !== 0 || (count === 0 && !!showZero);
+  const showBadge = count !== 0 || (count === 0 && showZero) || (count === 0 && dot);
 
   return {
     props: {
-      dot: !!dot,
+      count,
+      dot,
       overflowCount,
+      showZero,
       ...rest,
     },
     state: {
-      displayCount: _count,
       showBadge,
     },
   };

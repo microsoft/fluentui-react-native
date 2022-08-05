@@ -55,7 +55,6 @@ export interface CounterBadgeTokens extends BadgeTokens {}
 export interface CounterBadgeSlotProps extends BadgeSlotProps {}
 
 export interface CounterBadgeState {
-  displayCount?: string;
   showBadge?: boolean;
 }
 
