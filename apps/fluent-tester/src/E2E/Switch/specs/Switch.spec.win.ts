@@ -1,6 +1,9 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
-import SwitchPageObject, { SwitchComponentSelector } from '../pages/SwitchPageObject';
+import SwitchPageObject from '../pages/SwitchPageObject';
+import { SwitchComponentSelector } from '../pages/SwitchPageObject';
+import { ComponentSelector } from '../../common/BasePage.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
+import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../../../TestComponents/Switch/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', function () {
@@ -32,6 +35,16 @@ describe('Switch Accessibility Testing', () => {
 
   it('Switch - Validate accessibilityRole is correct', () => {
     expect(SwitchPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Switch - Set accessibilityLabel', () => {
+    expect(SwitchPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(SWITCH_ACCESSIBILITY_LABEL);
+    expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Switch - Do not set accessibilityLabel -> Default to Switch label', () => {
+    expect(SwitchPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(SWITCH_TEST_COMPONENT_LABEL);
     expect(SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 });
