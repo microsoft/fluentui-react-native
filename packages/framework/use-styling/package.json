@@ -36,9 +36,9 @@
     "tslib": "^2.3.1"
   },
   "devDependencies": {
+    "@fluentui-react-native/scripts": "^0.1.1",
     "@types/jest": "^26.0.0",
     "@types/react-native": "^0.66.0",
-    "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.2",
     "react-native": "^0.68.0"
   },
@@ -52,5 +52,9 @@
       "core-ios",
       "react"
     ]
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
+    "react-native": "^0.68.0"
   }
 }

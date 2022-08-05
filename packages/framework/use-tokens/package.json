@@ -37,8 +37,8 @@
   },
   "devDependencies": {
     "@fluentui-react-native/merge-props": "^0.5.0",
-    "@types/jest": "^26.0.0",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@types/jest": "^26.0.0",
     "react": "17.0.2",
     "react-native": "^0.68.0"
   },
@@ -52,5 +52,9 @@
       "core-ios",
       "react"
     ]
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
+    "react-native": "^0.68.0"
   }
 }

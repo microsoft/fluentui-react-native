@@ -70,6 +70,11 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxShiftDistanceY: true,
   tvParallaxTiltAngle: true,
   focusable: true,
+  tooltip: true,
+  tabIndex: true,
+  enableFocusRing: true,
+  onMouseEnter: true,
+  onMouseLeave: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
