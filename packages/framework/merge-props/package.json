@@ -40,7 +40,7 @@
     "@types/jest": "^26.0.0",
     "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.66.0"
+    "react-native": "^0.68.0"
   },
   "peerDependencies": {
     "react-native": ">=0.66.0"
