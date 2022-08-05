@@ -33,13 +33,13 @@ export const ToggleButtonTest: React.FunctionComponent = () => {
       <ToggleButton checked={false} style={commonTestStyles.vmargin}>
         Unchecked Default Toggle
       </ToggleButton>
-      <ToggleButton appearance="primary" style={commonTestStyles.vmargin}>
+      <ToggleButton appearance="primary" defaultChecked style={commonTestStyles.vmargin}>
         Checked Primary Toggle
       </ToggleButton>
       <ToggleButton disabled defaultChecked appearance="primary" style={commonTestStyles.vmargin}>
         Checked Primary Toggle Disabled
       </ToggleButton>
-      <ToggleButton defaultChecked appearance="primary" style={commonTestStyles.vmargin}>
+      <ToggleButton appearance="primary" style={commonTestStyles.vmargin}>
         Unchecked Primary Toggle
       </ToggleButton>
       <View style={styles.row}>

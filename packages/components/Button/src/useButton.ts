@@ -7,7 +7,7 @@ import { AccessibilityState } from 'react-native';
 export const useButton = (props: ButtonProps): ButtonState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, ...rest } = props;
+  const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, focusable, ...rest } = props;
   const isDisabled = !!disabled || !!loading;
   // GH #1336: Set focusRef to null if button is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled ? null : componentRef;
@@ -26,7 +26,7 @@ export const useButton = (props: ButtonProps): ButtonState => {
       accessibilityLabel: props.accessibilityLabel,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: enableFocusRing ?? true,
-      focusable: !isDisabled,
+      focusable: focusable ?? !isDisabled,
       ref: useViewCommandFocus(componentRef),
       iconPosition: props.iconPosition || 'before',
       loading,
