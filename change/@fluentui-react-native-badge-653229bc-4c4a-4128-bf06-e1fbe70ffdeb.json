@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added E2E tests for the Badge",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Fri, 05 Aug 2022 02:53:01 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.17",
+      "version": "0.1.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "f55a232c143ab67fdbff8bd8ec3ce6a64f72d703",
+            "comment": "Added E2E tests for the Badge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 04 Aug 2022 11:02:42 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.16",
       "version": "0.1.16",
