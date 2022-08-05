@@ -4,10 +4,14 @@ import { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
-    // backgroundColor: t.colors.neutralBackground1,
+    borderColor: t.colors.menuItemText,
+    color: t.colors.menuItemText,
+    backgroundColor: t.colors.menuItemText,
+    textBorderColor: t.colors.transparentStroke, //'transparent'
+    // checked
     disabled: {
-      backgroundColor: t.colors.neutralBackgroundDisabled,
-      thumbColor: t.colors.neutralStrokeDisabled,
+      backgroundColor: t.colors.neutralForegroundDisabled,
+      thumbColor: t.colors.neutralForegroundDisabled,
       borderColor: t.colors.neutralForegroundDisabled,
     },
   } as RadioTokens);

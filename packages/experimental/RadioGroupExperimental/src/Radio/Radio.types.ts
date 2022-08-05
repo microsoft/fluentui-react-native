@@ -9,6 +9,10 @@ export const radioName = 'Radio';
 export interface RadioTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   textBorderColor?: string;
 
+  // radioBorder?: ColorValue;
+  // radioFill?: ColorValue;
+  // labelColor?: ColorValue;
+
   /**
    * States that can be applied to a Radio
    */
