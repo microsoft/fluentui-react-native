@@ -1,0 +1,35 @@
+{
+  "name": "@fluentui-react-native/switch",
+  "entries": [
+    {
+      "date": "Thu, 04 Aug 2022 19:24:58 GMT",
+      "tag": "@fluentui-react-native/switch_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a",
+            "comment": "Added Switch control for Win32"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 03 Aug 2022 19:25:34 GMT",
+      "tag": "@fluentui-react-native/switch_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "0628c88875ece4df49bb7893dd35a524eccf900a",
+            "comment": "Added Switch control for Win32"
+          }
+        ]
+      }
+    }
+  ]
+}

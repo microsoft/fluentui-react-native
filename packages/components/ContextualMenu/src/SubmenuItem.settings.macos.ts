@@ -14,10 +14,9 @@ export const settings: IComposeSettings<SubmenuItemType> = [
       enableFocusRing: false,
       style: {
         display: 'flex',
-        flex: 1,
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        justifyContent: 'space-between',
+        width: '100%',
         borderRadius: 5,
       },
     },
@@ -30,7 +29,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     startstack: {
       style: {
         display: 'flex',
-        flex: 1,
+        flexGrow: 1,
         paddingStart: 5,
         alignItems: 'center',
         flexDirection: 'row',
@@ -41,7 +40,6 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     endstack: {
       style: {
         display: 'flex',
-        flex: 1,
         paddingEnd: 5,
         alignItems: 'center',
         flexDirection: 'row',

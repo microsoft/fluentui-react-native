@@ -1,5 +1,6 @@
 import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../TestComponents/ActivityIndicator/consts';
 import { HOMEPAGE_AVATAR_BUTTON } from '../../TestComponents/Avatar/consts';
+import { HOMEPAGE_BADGE_BUTTON } from '../../TestComponents/Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
@@ -20,6 +21,7 @@ import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../TestComponents/RadioGroup/cons
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../TestComponents/Separator/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
+import { HOMEPAGE_SWITCH_BUTTON } from '../../TestComponents/Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../TestComponents/Text/consts';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../TestComponents/TextExperimental/consts';
 import { HOMEPAGE_TOKEN_BUTTON } from '../../TestComponents/Tokens/consts';
@@ -35,6 +37,10 @@ class NavigateAppPage extends BasePage {
 
   clickAndGoToAvatarPage() {
     this.avatarPage.click();
+  }
+
+  clickAndGoToBadgePage() {
+    this.badgePage.click();
   }
 
   clickAndGoToButtonPage() {
@@ -113,6 +119,10 @@ class NavigateAppPage extends BasePage {
     this.svgPage.click();
   }
 
+  clickAndGoToSwitchPage() {
+    this.switchPage.click();
+  }
+
   clickAndGoToTextPage() {
     this.textPage.click();
   }
@@ -151,6 +161,10 @@ class NavigateAppPage extends BasePage {
 
   private get avatarPage() {
     return By(HOMEPAGE_AVATAR_BUTTON);
+  }
+
+  private get badgePage() {
+    return By(HOMEPAGE_BADGE_BUTTON);
   }
 
   private get buttonPage() {
@@ -227,6 +241,10 @@ class NavigateAppPage extends BasePage {
 
   private get svgPage() {
     return By(HOMEPAGE_SVG_BUTTON);
+  }
+
+  private get switchPage() {
+    return By(HOMEPAGE_SWITCH_BUTTON);
   }
 
   private get textPage() {

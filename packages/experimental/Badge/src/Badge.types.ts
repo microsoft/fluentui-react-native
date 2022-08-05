@@ -15,7 +15,7 @@ export type BadgeShape = typeof BadgeShapes[number];
 export type BadgeColor = typeof BadgeColors[number] | ColorValue;
 export type BadgeIconPosition = 'before' | 'after';
 
-export interface BadgeCoreProps {
+export interface BadgeCoreProps extends IViewProps {
   /**
    * A Badge can be square, circular or rounded.
    * @defaultvalue circular
@@ -80,6 +80,11 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    */
   right?: FlexStyle['right'];
 
+  /**
+   * Set padding for text container when Badge contains
+   * icons or images
+   */
+  textPadding?: number;
   /**
    * Set the top edge of the Badge
    */

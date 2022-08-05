@@ -28,7 +28,7 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     startstack: {
       style: {
         display: 'flex',
-        flex: 1,
+        flexGrow: 1,
         paddingStart: 5,
         alignItems: 'center',
         flexDirection: 'row',
@@ -40,7 +40,6 @@ export const settings: IComposeSettings<SubmenuItemType> = [
     endstack: {
       style: {
         display: 'flex',
-        flex: 1,
         paddingEnd: 5,
         alignItems: 'center',
         flexDirection: 'row',

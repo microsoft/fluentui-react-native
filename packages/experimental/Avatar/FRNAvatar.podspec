@@ -16,11 +16,11 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = "14.0"
   s.ios.source_files      = "ios/*.{swift,h,m}"
-  s.ios.dependency 'MicrosoftFluentUI/Avatar_ios', '0.5.2'
+  s.ios.dependency 'MicrosoftFluentUI/Avatar_ios', '0.6.1'
 
   s.osx.deployment_target = "10.15"
   s.osx.source_files      = "macos/*.{swift,h,m}"
-  s.osx.dependency 'MicrosoftFluentUI', '0.5.2'
+  s.osx.dependency 'MicrosoftFluentUI', '0.6.1'
 
   s.dependency 'React'
 end

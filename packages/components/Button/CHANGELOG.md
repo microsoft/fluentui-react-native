@@ -1,8 +1,45 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 28 Jul 2022 23:57:03 GMT and should not be manually modified.
+This log was last generated on Tue, 02 Aug 2022 22:19:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.13
+
+Tue, 02 Aug 2022 22:19:18 GMT
+
+### Patches
+
+- Restore ability to create unfocusable buttons (nakambo@microsoft.com)
+
+## 0.24.12
+
+Tue, 02 Aug 2022 20:08:43 GMT
+
+### Patches
+
+- Update exports (ruaraki@microsoft.com)
+
+## 0.24.11
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Allow user props to override default button key handling (email not defined)
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+- Bump @fluentui-react-native/pressable to v0.9.6
+
+## 0.24.10
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/pressable to v0.9.5
+- Bump @fluentui-react-native/text to v0.13.0
 
 ## 0.24.9
 
