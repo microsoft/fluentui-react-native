@@ -74,10 +74,11 @@
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^2.2.1",
     "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-native": "^0.68.0",
-    "react-native-macos": "^0.66.0",
+    "react-native-macos": "^0.68.0",
     "react-native-svg": "^12.3.0",
-    "react-native-windows": "^0.66.0",
+    "react-native-windows": "^0.68.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
@@ -101,13 +102,8 @@
     "flow-bin": "^0.113.0",
     "metro-config": "^0.66.2",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-macos": "^0.66.0",
-    "react-native-svg": "^12.3.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-native-test-app": "^1.4.0",
-    "react-native-windows": "^0.66.0",
     "react-test-renderer": "17.0.2",
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
@@ -115,18 +111,13 @@
     "webdriverio": "^6.5.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": "^0.66.0",
-    "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-macos": "^0.66.0",
-    "react-native-svg": "^12.3.0",
-    "react-native-windows": "^0.66.0"
+    "@office-iss/react-native-win32": "^0.66.0"
   },
   "jest": {
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "^0.66",
+    "reactNativeVersion": "^0.68",
     "kitType": "app",
     "bundle": {
       "targets": [
