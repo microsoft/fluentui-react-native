@@ -18,6 +18,6 @@ steps:
       signingOption: nosign
       args: '-verbose -derivedDataPath DerivedData ${{ parameters.xcode_extraArgs }}'
 
-    - script: |
-        strip -x -S $(Build.Repository.LocalPath)/DerivedData/${{ parameters.output_folder }}/Build/Products/${{ parameters.xcode_configuration }}/*.a
-      displayName: Strip debug symbols
+  - script: |
+      strip -x -S $(Build.Repository.LocalPath)/DerivedData/${{ parameters.output_folder }}/Build/Products/${{ parameters.xcode_configuration }}/*.a
+    displayName: Strip debug symbols
