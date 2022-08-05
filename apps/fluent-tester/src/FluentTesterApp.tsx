@@ -19,8 +19,12 @@ type SizeClassIOS = 'regular' | 'compact' | undefined;
  * @returns SizeClassIOS: enum determining our size class
  */
 const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
-  const width = useWindowDimensions().width;
   if (Platform.OS === 'ios') {
+    /**
+     * Technically this violates the rules of hooks (calling hooks inside conditions) but Platform.OS checks are pretty non-conditional.
+     * This is necessary because useWindowDimensions() does not work in win32.
+     */
+    const width = useWindowDimensions().width;
     if (Platform.isPad && width > 375) {
       return 'regular';
     } else {
