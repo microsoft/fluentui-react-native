@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { RadioGroupProps, RadioGroupState, RadioGroupSlotProps } from './RadioGroup.types';
-import { useSelectedKey } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-hooks';
 import { View } from 'react-native';
 
 export const useRadioGroup = (props: RadioGroupProps): RadioGroupState => {
   const { label, accessibilityLabel, value, defaultValue, ...rest } = props;
 
   // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-  const data = useSelectedKey(value || defaultValue || null, props.onChange);
+  const data = useValue(value || defaultValue || null, props.onChange);
 
   const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
 

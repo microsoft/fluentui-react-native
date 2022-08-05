@@ -17,7 +17,6 @@ export interface RadioTokens extends FontTokens, IForegroundColorTokens, IBackgr
    * States that can be applied to a Radio
    */
   checked?: RadioTokens;
-  unchecked?: RadioTokens;
   disabled?: RadioTokens;
   hovered?: RadioTokens;
   focused?: RadioTokens;
