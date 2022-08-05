@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Fri, 05 Aug 2022 07:16:25 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.18.7",
+      "version": "0.18.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "7fa139d37b963f6d391de7b68e11c849380540f9",
+            "comment": "Fix layout issue in SubmenuItem"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 29 Jul 2022 22:47:07 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.18.6",
       "version": "0.18.6",
