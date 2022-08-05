@@ -165,7 +165,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
             minWidth: ringConfig.size,
             minHeight: ringConfig.size,
           },
-          imageStyle: { borderRadius: ringConfig.size / 2},
+          imageStyle: { borderRadius: ringConfig.size / 2 },
         };
       },
       ['size'],
