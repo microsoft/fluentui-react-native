@@ -1,6 +1,6 @@
 import { TestDescription } from './TestComponents';
 import { AvatarTest, NativeAvatarTest, HOMEPAGE_AVATAR_BUTTON, HOMEPAGE_NATIVE_AVATAR_BUTTON } from './TestComponents/Avatar';
-import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
+import { BadgeTest, HOMEPAGE_BADGE_BUTTON } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
@@ -47,7 +47,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Badge Test',
     component: BadgeTest,
-    testPage: HOMEPAGE_BADGE,
+    testPage: HOMEPAGE_BADGE_BUTTON,
   },
   {
     name: 'Button Test',
