@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View, I18nManager } from 'react-native';
+import { View, I18nManager, AccessibilityInfo } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -50,13 +50,15 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const LabelSlot = <Slots.label>{label}</Slots.label>;
       const OnOffTextSlot = displayOnOffText ? <Slots.onOffText>{onOffText}</Slots.onOffText> : null;
+      const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
+      const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
 
       return (
         <Slots.root {...mergedProps}>
           {isRtl ? OnOffTextSlot : LabelSlot}
           <Slots.toggleContainer>
             <Slots.track>
-              <Slots.thumb />
+              <Slots.thumb {...thumbAnimation} />
             </Slots.track>
           </Slots.toggleContainer>
           {isRtl ? LabelSlot : OnOffTextSlot}
