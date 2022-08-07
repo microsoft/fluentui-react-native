@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const switchName = 'Switch';
 
-export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
   /**
    * Track color
    */

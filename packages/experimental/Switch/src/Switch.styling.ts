@@ -1,6 +1,6 @@
 import { switchName, SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
 import { UseStylingOptions, Theme, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
 
 export const switchStates: (keyof SwitchTokens)[] = [
@@ -94,20 +94,22 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       ['thumbColor', 'thumbSize', 'thumbRadius', 'thumbMargin'],
     ),
     label: buildProps(
-      (tokens: SwitchTokens) => ({
+      (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color'],
+      ['color', ...fontStyles.keys],
     ),
     onOffText: buildProps(
-      (tokens: SwitchTokens) => ({
+      (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
+          ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color'],
+      ['color', ...fontStyles.keys],
     ),
   },
 };
