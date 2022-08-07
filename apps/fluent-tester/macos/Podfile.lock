@@ -357,7 +357,7 @@ PODS:
     - React-jsi (= 0.66.65)
     - React-logger (= 0.66.65)
     - React-perflogger (= 0.66.65)
-  - ReactTestApp-DevSupport (1.6.1):
+  - ReactTestApp-DevSupport (1.6.2):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
@@ -540,7 +540,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: 61e2a3fadd0388f4579c186b44c91b7652f5f80d
   React-runtimeexecutor: b33723d04b84ddafc86524551da7660c0cffcab3
   ReactCommon: b82383f1be893c6977b08a18e03aeb13652eb0ef
-  ReactTestApp-DevSupport: 8f0a689650b85dd1a69213cfed15e5d4415f1bee
+  ReactTestApp-DevSupport: 2fa32bc5aec307737d9836a8e40dfaa3745e7525
   ReactTestApp-Resources: 8c0164a3cc5052418c92018e2af0e05d564aa307
   RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
