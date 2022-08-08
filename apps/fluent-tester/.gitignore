@@ -12,3 +12,4 @@ dist/
 local.properties
 msbuild.binlog
 node_modules/
+ReactTestApp-Resources.podspec.json

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Fri, 05 Aug 2022 23:22:38 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.7",
+      "version": "0.10.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.1",
+            "commit": "b77d041fc8feb1088d2b4f1a1a755a9061148b97"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 29 Jul 2022 22:47:07 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.10.6",
       "version": "0.10.6",
