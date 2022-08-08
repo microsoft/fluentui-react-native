@@ -8,6 +8,7 @@ import { stylingSettings } from './RadioGroup.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useRadioGroup } from './useRadioGroup';
 import { RadioGroupProvider } from './radioGroupContext';
+import { useRadioGroupContextValue } from './useRadioGroupContextValue';
 
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the radio-group-experimental.
@@ -17,9 +18,9 @@ import { RadioGroupProvider } from './radioGroupContext';
  * @param userProps The props that were passed into the RadioGroup
  * @returns Whether the styles that are assigned to the layer should be applied to the RadioGroup
  */
-export const radioGroupLookup = (layer: string, state: RadioGroupState, userProps: RadioGroupProps): boolean => {
-  return state[layer] || userProps[layer] || layer === userProps['textSize'];
-};
+// export const radioGroupLookup = (layer: string, state: RadioGroupState, userProps: RadioGroupProps): boolean => {
+//   return state[layer] || userProps[layer] || layer === userProps['textSize'];
+// };
 
 export const RadioGroup = compose<RadioGroupType>({
   displayName: radioGroupName,
@@ -31,14 +32,14 @@ export const RadioGroup = compose<RadioGroupType>({
   },
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
     const radioGroup = useRadioGroup(userProps);
-    // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => radioGroupLookup(layer, userProps));
-    const contextValue = useRadioGroupContextValue(state);
+    const contextValue = useRadioGroupContextValue(radioGroup);
+    const Slots = useSlots(userProps, (override: string) => radioGroup[override] || userProps[override]);
+    // const Slots = useSlots(radioGroup.props);
 
     return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
-      const { ...mergedProps } = mergeProps(radioGroup, final);
+      const { accessibilityLabel, label, ...mergedProps } = mergeProps(radioGroup.props, final);
 
-      if (renderData.state == undefined) {
+      if (radioGroup == undefined) {
         return null;
       }
 
@@ -55,9 +56,11 @@ export const RadioGroup = compose<RadioGroupType>({
 
       return (
         <RadioGroupProvider value={contextValue}>
-          <Slots.root>
-            {label && <Slots.label />}
-            <Slots.container>{children}</Slots.container>
+          <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel ?? label} accessibilityRole={'radiogroup'}>
+            {label && <Slots.label>{label}</Slots.label>}
+            <Slots.container isCircularNavigation defaultTabbableElement={radioGroup.selectedButtonRef}>
+              {children}
+            </Slots.container>
           </Slots.root>
         </RadioGroupProvider>
       );
