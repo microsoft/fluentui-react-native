@@ -41,9 +41,17 @@ export const Badge = compose<BadgeType>({
       const { icon, iconPosition = 'before', ...mergedProps } = mergeProps(badge, final);
       return (
         <Slots.root {...mergedProps}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {Children.map(children, (child, i) => (typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child))}
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {icon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+          {Children.map(children, (child, i) =>
+            typeof child === 'string' ? (
+              <Slots.text accessible={false} key={`text-${i}`}>
+                {child}
+              </Slots.text>
+            ) : (
+              child
+            ),
+          )}
+          {icon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
         </Slots.root>
       );
     };

@@ -5,28 +5,10 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to packager (Android)",
+      "name": "Attach to packager",
       "request": "attach",
       "type": "reactnative",
-      "cwd": "${workspaceFolder}/apps/android"
-    },
-    {
-      "name": "Attach to packager (iOS)",
-      "request": "attach",
-      "type": "reactnative",
-      "cwd": "${workspaceFolder}/apps/ios"
-    },
-    {
-      "name": "Attach to packager (macOS)",
-      "request": "attach",
-      "type": "reactnative",
-      "cwd": "${workspaceFolder}/apps/macos"
-    },
-    {
-      "name": "Attach to packager (Windows)",
-      "request": "attach",
-      "type": "reactnative",
-      "cwd": "${workspaceFolder}/apps/windows"
+      "cwd": "${workspaceFolder}/apps/fluent-tester"
     },
     {
       "name": "Attach to packager (Win32)",
