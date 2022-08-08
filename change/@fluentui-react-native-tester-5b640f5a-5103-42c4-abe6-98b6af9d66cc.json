@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Added Token Customization section for Switch",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "nkhalil942@gmail.com",
+  "dependentChangeType": "patch"
+}
