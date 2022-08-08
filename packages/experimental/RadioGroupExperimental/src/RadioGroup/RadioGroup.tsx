@@ -10,18 +10,6 @@ import { useRadioGroup } from './useRadioGroup';
 import { RadioGroupProvider } from './radioGroupContext';
 import { useRadioGroupContextValue } from './useRadioGroupContextValue';
 
-/**
- * A function which determines if a set of styles should be applied to the component given the current state and props of the radio-group-experimental.
- *
- * @param layer The name of the state that is being checked for
- * @param state The current state of the RadioGroup
- * @param userProps The props that were passed into the RadioGroup
- * @returns Whether the styles that are assigned to the layer should be applied to the RadioGroup
- */
-// export const radioGroupLookup = (layer: string, state: RadioGroupState, userProps: RadioGroupProps): boolean => {
-//   return state[layer] || userProps[layer] || layer === userProps['textSize'];
-// };
-
 export const RadioGroup = compose<RadioGroupType>({
   displayName: radioGroupName,
   ...stylingSettings,
