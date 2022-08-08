@@ -63,5 +63,14 @@
     "disallowedChangeTypes": [
       "major"
     ]
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "metro-config",
+      "metro-react-native-babel-transformer"
+    ]
   }
 }

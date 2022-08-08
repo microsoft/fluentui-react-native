@@ -89,7 +89,8 @@
     "capabilities": [
       "core",
       "react",
-      "svg"
+      "svg",
+      "metro-config"
     ]
   }
 }
