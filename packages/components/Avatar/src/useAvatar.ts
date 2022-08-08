@@ -135,10 +135,13 @@ export const removeRedundantCharacters = (name: string): string[] => {
   if (!name) {
     return [];
   }
+
+  const _name = name.length > 100 ? name.trim().substring(0, 100) : name;
+
   const WORDS_IN_BRACES_REGEXP = new RegExp('[(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
   const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
   const SPECIAL_CHARACTERS_REGEXP = new RegExp('[!"#\'$%&*+,-./:;>=<?@^_`|~¡¢£¤¥¦§¨©ª«¬®ˉ°±²¼½¾¿×÷]', 'g');
-  const words = name
+  const words = _name
     .replace(WORDS_IN_BRACES_REGEXP, '')
     .replace(PHONE_NUMBER_REGEXP, ' ')
     .replace(SPECIAL_CHARACTERS_REGEXP, '')
