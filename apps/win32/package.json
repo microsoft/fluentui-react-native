@@ -47,7 +47,7 @@
     "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
-    "@types/react-native": "^0.66.0",
+    "@types/react-native": "^0.68.0",
     "@wdio/allure-reporter": "^6.5.0",
     "@wdio/appium-service": "^6.5.0",
     "@wdio/cli": "^6.5.0",

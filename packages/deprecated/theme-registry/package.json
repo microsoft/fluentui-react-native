@@ -35,7 +35,7 @@
     "@fluentui-react-native/immutable-merge": "^1.1.7",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/jest": "^26.0.0",
-    "@types/react-native": "^0.66.0",
+    "@types/react-native": "^0.68.0",
     "react": "17.0.2",
     "react-native": "^0.68.0"
   },
