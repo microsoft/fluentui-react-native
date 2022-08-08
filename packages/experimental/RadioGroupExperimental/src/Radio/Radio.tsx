@@ -1,7 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { radioName, RadioType, RadioProps } from './Radio.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Radio.styling';
