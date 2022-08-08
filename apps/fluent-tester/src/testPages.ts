@@ -7,7 +7,7 @@ import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
-// import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
+import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 // import { DrawerTest, HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -39,13 +39,13 @@ export const tests: TestDescription[] = [
     name: 'ActivityIndicator',
     component: ActivityIndicatorTest,
     testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Avatar',
     component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'NativeAvatar',
@@ -57,37 +57,37 @@ export const tests: TestDescription[] = [
     name: 'Badge',
     component: BadgeTest,
     testPage: HOMEPAGE_BADGE_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Button',
     component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Callout',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON,
-    platforms: ['android', 'macos', 'windows'],
+    platforms: ['android', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Checkbox',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Experimental Checkbox',
     component: ExperimentalCheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
-    platforms: ['android', 'ios', 'macos'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
+    platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
     name: 'ContextualMenu',
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
-    platforms: ['android', 'macos'],
+    platforms: ['android', 'macos', 'win32'],
   },
   // {
   //   name: 'Native Date Picker',
@@ -112,43 +112,43 @@ export const tests: TestDescription[] = [
     name: 'Focus Trap Zone',
     component: FocusTrapTest,
     testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-    platforms: ['android'],
+    platforms: ['android', 'win32'],
   },
   {
     name: 'FocusZone',
     component: FocusZoneTest,
     testPage: HOMEPAGE_FOCUSZONE_BUTTON,
-    platforms: ['macos'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'Icon',
     component: IconTest,
     testPage: HOMEPAGE_ICON_BUTTON,
-    platforms: ['android', 'ios', 'macos'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Link',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Menu',
     component: MenuTest,
     testPage: HOMEPAGE_MENU_BUTTON,
-    platforms: ['macos'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'MenuButton',
     component: MenuButtonTest,
     testPage: HOMEPAGE_MENUBUTTON_BUTTON,
-    platforms: ['macos'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'Experimental MenuButton',
     component: ExperimentalMenuButtonTest,
     testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
-    platforms: ['macos'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'Notification',
@@ -160,90 +160,90 @@ export const tests: TestDescription[] = [
     name: 'Persona',
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'PersonaCoin',
     component: PersonaCoinTest,
     testPage: HOMEPAGE_PERSONACOIN_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Pressable',
     component: PressableTest,
     testPage: HOMEPAGE_PRESSABLE_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'RadioGroup',
     component: RadioGroupTest,
     testPage: HOMEPAGE_RADIOGROUP_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32'],
   },
   {
     name: 'Separator',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Shadow',
     component: ShadowTest,
     testPage: HOMEPAGE_SHADOW_BUTTON,
-    platforms: ['ios', 'macos'],
+    platforms: ['ios', 'macos', 'win32'],
   },
   {
     name: 'Shimmer',
     component: ShimmerTest,
     testPage: HOMEPAGE_SHIMMER_BUTTON,
-    platforms: ['android', 'ios', 'macos'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Svg',
     component: SvgTest,
     testPage: HOMEPAGE_SVG_BUTTON,
-    platforms: ['android', 'ios', 'macos'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Switch',
     component: SwitchTest,
     testPage: HOMEPAGE_SWITCH_BUTTON,
-    platforms: [],
+    platforms: ['win32'],
   },
   {
     name: 'Tabs',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
-    platforms: ['macos', 'windows'],
+    platforms: ['macos', 'win32', 'windows'],
   },
   {
     name: 'Experimental Tabs',
     component: ExperimentalTabsTest,
     testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
-    platforms: ['macos', 'windows'],
+    platforms: ['macos', 'win32', 'windows'],
   },
   {
     name: 'Text',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Experimental Text',
     component: TextExperimentalTest,
     testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Theme',
     component: ThemeTest,
     testPage: HOMEPAGE_THEME_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
     name: 'Tokens',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
 ];
