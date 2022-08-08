@@ -59,5 +59,12 @@
     "jpeg-js": "^0.4.4",
     "moment": "^2.29.4",
     "shell-quote": "^1.7.3"
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "0.68",
+    "kitType": "library",
+    "capabilities": [
+      "babel-preset-react-native"
+    ]
   }
 }

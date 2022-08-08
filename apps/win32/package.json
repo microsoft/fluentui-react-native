@@ -90,7 +90,8 @@
       "core",
       "react",
       "svg",
-      "metro-config"
+      "metro-config",
+      "babel-preset-react-native"
     ]
   }
 }
