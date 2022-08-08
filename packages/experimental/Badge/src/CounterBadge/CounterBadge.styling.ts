@@ -34,7 +34,7 @@ export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeS
         height: tokens.iconSize,
         width: tokens.iconSize,
       }),
-      ['width', 'height', 'iconSize', 'iconColor', 'color'],
+      ['iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
       (tokens: CounterBadgeTokens) => ({
