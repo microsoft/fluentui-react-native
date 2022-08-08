@@ -4,7 +4,23 @@ import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
   borderWidth: 1,
-  borderRadius: 50,
+  borderRadius: 20,
+  minHeight: 28,
+  minWidth: 40,
+  thumbSize: 14,
+  thumbRadius: 17,
+  trackHeight: 20,
+  trackWidth: 40,
+  focusBorderRadius: 4,
+  focusBorderWidth: 2,
+  focusStrokeColor: t.colors.transparentBackground,
+  padding: 2,
+  color: t.colors.neutralForeground2,
+  trackMarginTop: 2,
+  trackMarginBottom: 2,
+  trackMarginLeft: 4,
+  trackMarginRight: 4,
+  thumbMargin: 2,
 
   before: {
     flexDirection: 'row',
@@ -22,46 +38,50 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   },
 
   toggleOn: {
-    backgroundColor: t.colors.compoundBrandBackground1,
+    trackColor: t.colors.compoundBrandBackground1,
     thumbColor: t.colors.neutralForegroundInverted,
     borderColor: t.colors.compoundBrandBackground1,
     justifyContent: 'flex-end',
     hovered: {
-      backgroundColor: t.colors.compoundBrandBackground1Hover,
+      trackColor: t.colors.compoundBrandBackground1Hover,
       thumbColor: t.colors.neutralForegroundInvertedLink,
       borderColor: t.colors.compoundBrandBackground1Hover,
     },
     pressed: {
-      backgroundColor: t.colors.compoundBrandBackground1Pressed,
+      trackColor: t.colors.compoundBrandBackground1Pressed,
       thumbColor: t.colors.neutralForegroundInvertedLink,
       borderColor: t.colors.compoundBrandBackground1Pressed,
     },
     disabled: {
-      backgroundColor: t.colors.neutralBackgroundDisabled,
+      trackColor: t.colors.neutralBackgroundDisabled,
       thumbColor: t.colors.neutralStrokeDisabled,
       borderColor: t.colors.neutralForegroundDisabled,
     },
   },
 
   toggleOff: {
-    backgroundColor: t.colors.neutralForegroundInvertedLink,
+    trackColor: t.colors.neutralForegroundInvertedLink,
     thumbColor: t.colors.neutralStrokeAccessible,
     borderColor: t.colors.neutralStrokeAccessible,
     justifyContent: 'flex-start',
     hovered: {
-      backgroundColor: t.colors.neutralForegroundInvertedLinkHover,
+      trackColor: t.colors.neutralForegroundInvertedLinkHover,
       thumbColor: t.colors.neutralStrokeAccessibleHover,
       borderColor: t.colors.neutralStrokeAccessibleHover,
     },
     pressed: {
-      backgroundColor: t.colors.neutralForegroundInvertedLinkPressed,
+      trackColor: t.colors.neutralForegroundInvertedLinkPressed,
       thumbColor: t.colors.neutralStrokeAccessiblePressed,
       borderColor: t.colors.neutralStrokeAccessiblePressed,
     },
     disabled: {
-      backgroundColor: t.colors.neutralBackgroundDisabled,
+      trackColor: t.colors.neutralBackgroundDisabled,
       thumbColor: t.colors.neutralStrokeDisabled,
       borderColor: t.colors.neutralStrokeDisabled,
     },
+  },
+
+  focused: {
+    focusStrokeColor: t.colors.strokeFocus2,
   },
 });

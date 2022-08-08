@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 08 Aug 2022 21:40:41 GMT",
+      "tag": "@fluentui-react-native/tester_v0.84.0",
+      "version": "0.84.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "abeef208893a37feffab338d8074de3e064c7703",
+            "comment": "Added Token Customization section for Switch"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.4.0",
+            "commit": "abeef208893a37feffab338d8074de3e064c7703"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Aug 2022 11:50:27 GMT",
       "tag": "@fluentui-react-native/tester_v0.83.2",
       "version": "0.83.2",
