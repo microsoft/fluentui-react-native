@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Fri, 29 Jul 2022 21:04:39 GMT and should not be manually modified.
+This log was last generated on Fri, 05 Aug 2022 23:22:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.0
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Minor changes
+
+- Update out of date documentation (#1964) (email not defined)
 
 ## 0.13.0
 
