@@ -3,6 +3,29 @@
   "displayName": "FluentTester",
   "singleApp": "fluent-tester",
   "components": [{ "appKey": "FluentTester", "displayName": "Fluent Tester", "slug": "fluent-tester" }],
+  "android": {
+    "icons": "assets/res"
+  },
+  "ios": {
+    "icons": {
+      "primaryIcon": {
+        "filename": "assets/fluent_app_icon_ios.png",
+        "prerendered": true
+      }
+    }
+  },
+  "macos": {
+    "icons": {
+      "primaryIcon": {
+        "filename": "assets/fluent_app_icon_macos.png",
+        "prerendered": true
+      },
+      "alternateIcon": {
+        "filename": "assets/fluent_app_icon_macos.png",
+        "prerendered": true
+      }
+    }
+  },
   "resources": {
     "android": ["dist/res", "dist/index.android.bundle"],
     "ios": ["dist/assets", "dist/index.ios.jsbundle"],
