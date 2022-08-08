@@ -139,8 +139,6 @@ exports[`Badge component tests Empty Badge 1`] = `
 exports[`CounterBadge component tests CounterBadge all props 1`] = `
 <View
   appearance="ghost"
-  dot={false}
-  overflowCount={99}
   shape="rounded"
   size="large"
   style={
@@ -199,8 +197,6 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
 
 exports[`CounterBadge component tests CounterBadge tokens 1`] = `
 <View
-  dot={false}
-  overflowCount={99}
   style={
     Object {
       "alignItems": "center",
@@ -244,8 +240,6 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
 
 exports[`CounterBadge component tests Empty Badge 1`] = `
 <View
-  dot={false}
-  overflowCount={99}
   style={
     Object {
       "alignItems": "center",
