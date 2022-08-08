@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View, I18nManager, AccessibilityInfo } from 'react-native';
+import { View, AccessibilityInfo } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -14,8 +14,6 @@ import { useSwitch } from './useSwitch';
  * @param userProps The props that were passed into the switch
  * @returns Whether the styles that are assigned to the layer should be applied to the switch
  */
-
-const isRtl = I18nManager.isRTL;
 
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
   return (
@@ -48,20 +46,18 @@ export const Switch = compose<SwitchType>({
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
       const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
-      const LabelSlot = <Slots.label>{label}</Slots.label>;
-      const OnOffTextSlot = displayOnOffText ? <Slots.onOffText>{onOffText}</Slots.onOffText> : null;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
 
       return (
         <Slots.root {...mergedProps}>
-          {isRtl ? OnOffTextSlot : LabelSlot}
+          <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
           </Slots.toggleContainer>
-          {isRtl ? LabelSlot : OnOffTextSlot}
+          {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
         </Slots.root>
       );
     };
