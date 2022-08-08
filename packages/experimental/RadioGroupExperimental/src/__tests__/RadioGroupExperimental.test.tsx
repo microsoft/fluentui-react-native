@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { RadioGroupExperimental } from '../RadioGroup/RadioGroup';
+import { RadioGroup } from '../RadioGroup/RadioGroup';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
-describe('RadioGroupExperimental component tests', () => {
-  it('RadioGroupExperimental default', () => {
-    const tree = renderer.create(<RadioGroupExperimental>Your component</RadioGroupExperimental>).toJSON();
+describe('RadioGroup component tests', () => {
+  it('RadioGroup default', () => {
+    const tree = renderer.create(<RadioGroup>Your component</RadioGroup>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it('RadioGroupExperimental simple rendering does not invalidate styling', () => {
-    checkRenderConsistency(() => <RadioGroupExperimental>Default RadioGroupExperimental</RadioGroupExperimental>, 2);
+  it('RadioGroup simple rendering does not invalidate styling', () => {
+    checkRenderConsistency(() => <RadioGroup>Default RadioGroup</RadioGroup>, 2);
   });
 
-  it('RadioGroupExperimental re-renders correctly', () => {
-    checkReRender(() => <RadioGroupExperimental>Render twice</RadioGroupExperimental>, 2);
+  it('RadioGroup re-renders correctly', () => {
+    checkReRender(() => <RadioGroup>Render twice</RadioGroup>, 2);
   });
 
   // Feel free to add more tests here

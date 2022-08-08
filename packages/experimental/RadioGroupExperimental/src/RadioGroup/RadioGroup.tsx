@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { radioGroupName, RadioGroupType, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
+import { radioGroupName, RadioGroupType, RadioGroupProps } from './RadioGroup.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { stylingSettings } from './RadioGroup.styling';

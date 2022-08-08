@@ -113,6 +113,11 @@ export const tests: TestDescription[] = [
     testPage: HOMEPAGE_PRESSABLE_BUTTON,
   },
   {
+    name: 'Experimental RadioGroup Test',
+    component: RadioGroupExperimentalTest,
+    testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
+  },
+  {
     name: 'RadioGroup Test',
     component: RadioGroupTest,
     testPage: HOMEPAGE_RADIOGROUP_BUTTON,
@@ -176,11 +181,6 @@ export const tests: TestDescription[] = [
     name: 'Shadow Test',
     component: ShadowTest,
     testPage: HOMEPAGE_SHADOW_BUTTON,
-  },
-  {
-    name: 'ExperimentalRadioGroup Test',
-    component: RadioGroupExperimentalTest,
-    testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
   },
   // --> testPage component insert,,,,
 ];

@@ -24,6 +24,6 @@ export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
     'RadioGroup lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.';
 
   return (
-    <Test name="RadioGroupExperimental Test" description={description} sections={radioGroupExperimentalSections} status={status}></Test>
+    <Test name="Experimental RadioGroup Test" description={description} sections={radioGroupExperimentalSections} status={status}></Test>
   );
 };

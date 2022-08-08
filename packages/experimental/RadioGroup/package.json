@@ -1,5 +1,5 @@
 {
-  "name": "@fluentui-react-native/experimental-radio-group",
+  "name": "@fluentui-react-native/radio-group-wrong",
   "version": "0.15.0",
   "description": "A cross-platform Radio Group component using the Fluent Design System",
   "main": "src/index.ts",
