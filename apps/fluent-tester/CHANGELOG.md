@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 08 Aug 2022 11:50:27 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Aug 2022 21:40:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.84.0
+
+Mon, 08 Aug 2022 21:40:41 GMT
+
+### Minor changes
+
+- Added Token Customization section for Switch (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/switch to v0.4.0
 
 ## 0.83.2
 
