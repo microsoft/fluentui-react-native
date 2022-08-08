@@ -159,8 +159,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   defaultSource: true,
   blurRadius: true,
   capInsets: true,
-  width: true,
-  height: true,
   fadeDuration: true,
   nativeID: true,
 };

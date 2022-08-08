@@ -129,8 +129,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   loadingIndicatorSource: true,
   testID: true,
   defaultSource: true,
-  width: true,
-  height: true,
   fadeDuration: true,
   nativeID: true,
 };
