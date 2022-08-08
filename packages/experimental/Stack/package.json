@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/text": ">=0.13.0 <1.0.0",
+    "@fluentui-react-native/text": ">=0.14.0 <1.0.0",
     "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
     "react": "17.0.2",
