@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Mon, 08 Aug 2022 11:50:27 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.19",
+      "version": "0.1.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "b9e1f165db6bd4bfbb61ce614ede3f8b43e315d2",
+            "comment": "Added CounterBadge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 23:22:38 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.18",
       "version": "0.1.18",
