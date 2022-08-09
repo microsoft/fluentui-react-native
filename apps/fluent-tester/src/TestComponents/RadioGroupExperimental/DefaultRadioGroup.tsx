@@ -1,5 +1,4 @@
-import { RadioGroup } from '@fluentui-react-native/experimental-radio-group';
-// import { Radio } from '@fluentui-react-native/radio-group-wrong';
+import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 import { Separator } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
