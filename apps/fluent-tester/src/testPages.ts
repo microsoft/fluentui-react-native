@@ -48,7 +48,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
-    name: 'NativeAvatar',
+    name: 'Avatar (Native)',
     component: NativeAvatarTest,
     testPage: HOMEPAGE_NATIVE_AVATAR_BUTTON,
     platforms: ['ios', 'macos'],
@@ -78,7 +78,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
-    name: 'Experimental Checkbox',
+    name: 'Checkbox (Experimental)',
     component: ExperimentalCheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
@@ -90,7 +90,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'macos', 'win32'],
   },
   {
-    name: 'Native Date Picker',
+    name: 'Date Picker (Native)',
     component: NativeDatePickerTest,
     testPage: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
     platforms: ['ios'],
@@ -145,7 +145,7 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'Experimental MenuButton',
+    name: 'MenuButton (Experimental)',
     component: ExperimentalMenuButtonTest,
     testPage: HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
     platforms: ['macos', 'win32'],
@@ -217,7 +217,7 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32', 'windows'],
   },
   {
-    name: 'Experimental Tabs',
+    name: 'Tabs (Experimental)',
     component: ExperimentalTabsTest,
     testPage: HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
@@ -229,7 +229,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
-    name: 'Experimental Text',
+    name: 'Text (Experimental)',
     component: TextExperimentalTest,
     testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
     platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],

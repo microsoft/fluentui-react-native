@@ -4,7 +4,6 @@ import { ThemeProvider } from '@fluentui-react-native/theme';
 import * as React from 'react';
 import { Platform, useWindowDimensions } from 'react-native';
 import { FluentTester, FluentTesterProps } from './FluentTester';
-import { tests } from './testPages';
 import { testerTheme } from './theme/index';
 
 type SizeClassIOS = 'regular' | 'compact' | undefined;
@@ -43,11 +42,9 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
   // If on iPad we are presented in a Split View or Slide Over context, show the single pane view.
   const shouldShowSinglePane = isMobile || (!isMobile && sizeClass === 'compact');
 
-  const filteredTests = tests.filter((test) => test.platforms.includes(Platform.OS as string));
-
   return (
     <ThemeProvider theme={testerTheme}>
-      <FluentTester enabledTests={filteredTests} enableSinglePaneView={shouldShowSinglePane} {...props} />
+      <FluentTester enableSinglePaneView={shouldShowSinglePane} {...props} />
     </ThemeProvider>
   );
 };
