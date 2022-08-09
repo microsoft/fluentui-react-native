@@ -43,9 +43,11 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
   // If on iPad we are presented in a Split View or Slide Over context, show the single pane view.
   const shouldShowSinglePane = isMobile || (!isMobile && sizeClass === 'compact');
 
+  const filteredTests = tests.filter((test) => test.platforms.includes(Platform.OS as string));
+
   return (
     <ThemeProvider theme={testerTheme}>
-      <FluentTester enabledTests={tests} enableSinglePaneView={shouldShowSinglePane} {...props} />
+      <FluentTester enabledTests={filteredTests} enableSinglePaneView={shouldShowSinglePane} {...props} />
     </ThemeProvider>
   );
 };
