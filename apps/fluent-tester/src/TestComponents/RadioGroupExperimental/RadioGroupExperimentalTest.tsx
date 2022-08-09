@@ -16,7 +16,7 @@ export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    macosStatus: 'Backlog',
     androidStatus: 'Backlog',
   };
 
