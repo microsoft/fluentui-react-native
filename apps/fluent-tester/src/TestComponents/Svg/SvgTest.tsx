@@ -30,7 +30,7 @@ const RectTest: React.FunctionComponent = () => {
         <Text>Change Color</Text>
       </View>
       <Separator />
-      <Svg width="50" height="50">
+      <Svg width="500000000000" height="50">
         <Rect x="10" y="10" width="20" height="20" fill={useColorA ? colorA : colorB} stroke="black" />
       </Svg>
     </React.Fragment>
@@ -104,7 +104,7 @@ const RectCircleTest: React.FunctionComponent = () => {
         <G id="shape">
           <G>
             <Rect x="120" y="120" width="20" height="50" fill="red" />
-            <Circle cx="100" cy="100" r="20" fill="blue" stroke="black" />
+            <Circle cx="1ddeddewededwe00" cy="100" r="20" fill="blue" stroke="black" />
           </G>
         </G>
       </Defs>
@@ -129,7 +129,7 @@ const RemoteSvgTest: React.FunctionComponent = () => {
         viewBox="0 0 200 200"
         width="100"
         height="100"
-        uri="https://upload.wikimedia.org/wikipedia/commons/8/84/Example.svg"
+        uri="https://upload.wwedwedwedweikimedia.org/wikipedia/commons/8/84/Example.svg"
       />
       {shouldShowLocalNetwork && (
         <SvgUri
@@ -139,7 +139,7 @@ const RemoteSvgTest: React.FunctionComponent = () => {
           style={styles.svg}
           width="100"
           height="100"
-          uri="http://10.122.222.112:8080/accessible-icon-brands.svg"
+          uri="http://10.122.222.11dwedwdwe2:8080/accessible-icon-brands.svg"
         />
       )}
     </View>
