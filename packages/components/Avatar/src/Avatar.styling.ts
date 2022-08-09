@@ -175,6 +175,7 @@ function getRingConfig(tokens: AvatarTokens): any {
   const { size, ringThickness } = tokens;
   const SMALL_SIZE = 48;
   const MEDIUM_SIZE = 71;
+  const innerGap = tokens.ringInnerGap || ringThickness;
 
   const strokeSize = {
     small: globalTokens.stroke.width.thick,
@@ -183,29 +184,29 @@ function getRingConfig(tokens: AvatarTokens): any {
   };
   if (ringThickness) {
     return {
-      size: size + ringThickness * 4,
+      size: size + ringThickness * 2 + innerGap * 2,
       ringThickness,
-      innerStroke: ringThickness,
+      innerGap,
     };
   } else {
     if (size <= SMALL_SIZE) {
       return {
         size: size + strokeSize.small * 4,
         ringThickness: strokeSize.small,
-        innerStroke: strokeSize.small,
+        innerGap: strokeSize.small,
       };
     }
     if (size <= MEDIUM_SIZE) {
       return {
         size: size + strokeSize.medium * 4,
         ringThickness: strokeSize.medium,
-        innerStroke: strokeSize.medium,
+        innerGap: strokeSize.medium,
       };
     }
     return {
       size: size + strokeSize.large * 4,
       ringThickness: strokeSize.large,
-      innerStroke: strokeSize.large,
+      innerGap: strokeSize.large,
     };
   }
 }
@@ -222,8 +223,8 @@ function getRingSpacing(tokens: AvatarTokens) {
   const ringConfig = getRingConfig(tokens);
   return tokens.active === 'active'
     ? {
-        marginTop: ringConfig.ringThickness,
-        marginLeft: ringConfig.ringThickness,
+        marginTop: ringConfig.innerGap,
+        marginLeft: ringConfig.innerGap,
       }
     : {};
 }
