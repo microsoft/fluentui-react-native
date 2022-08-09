@@ -13,10 +13,10 @@ yarn
 yarn build
 ```
 
-2. Then go into `apps/macos/src` folder and run pod install to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
+2. Then go into `apps/fluent-tester/macos` folder and run pod install to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
 
 ```sh
-cd apps/macos/src
+cd apps/fluent-tester/macos
 pod install
 ```
 
@@ -43,7 +43,7 @@ You can debug native code in Xcode. To debug javascript code, you can either use
 Dependencies are managed by
 [`@rnx-kit/dep-check`](https://github.com/microsoft/rnx-kit/tree/main/packages/dep-check).
 If you're looking to upgrade `react-native`, look for the `rnx-kit` section in
-`/apps/macos/package.json`:
+`/apps/fluent-tester/package.json`:
 
 ```json
 {
@@ -69,8 +69,8 @@ You can read more about this tool here:
 - If you want to have a clean rebuild of the generated macOS project, you can do the following:
 
 ```sh
-cd apps/macos/
-rm src/FluentTester.xcworkspace
-rm -r src/Pods/
-pod install --project-directory=src.
+cd apps/fluent-tester/macos
+rm FluentTester.xcworkspace
+rm -r Pods/
+pod install
 ```

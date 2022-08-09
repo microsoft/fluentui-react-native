@@ -4744,9 +4744,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.26.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.26.0.tgz#2bb1ed4d4fcd7f9ae2e9ed1dea7f02e888d8a33f"
-  integrity sha512-jgnGejN0GERtaJGcCnOpyyMs2Hl6WDZenBty6d6Q+6/vNlolaTEqyGfczT1ox9jcS9XTNKHMzhZZHB7doullkQ==
+  version "2.26.1"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.26.1.tgz#ea21c2019a986bf6f8878499debe8c619adc0d07"
+  integrity sha512-cBfx1A+vuOKERSBKXNRgVbmo6JBR+msZCnI4IQDcfKem5LOvXkuvMWHjVTAc4qHC+fT39oQjWcgMldW3LjBpyA==
   dependencies:
     cosmiconfig "^6.0.0"
     execa "^4.0.3"
@@ -11764,10 +11764,10 @@ react-native-svg@^12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.4.0.tgz#0ee3cffd7d920478a7f5a2ae63dcf7f7709ac641"
-  integrity sha512-7gbh1OXRdWiX2tSn6/g3wCwbMyL9S/RGqNq8t+lqDaSnd5eCWwHwhghVHRNKL4fUZ3B//Odz2aMY7U/W5tM7mQ==
+react-native-test-app@^1.6.2:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.3.tgz#ec3c89d6ad83db6c124cbb027717e97e1516ac1d"
+  integrity sha512-U/UUIQSYoBJxMOqu+tMEtw3A82QcMBByBCdhskotg5yTs5TYQv3BDozqsfj29UWcP+/6WRYNZFfznEsLKTRybw==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"

@@ -35,17 +35,20 @@ exports[`Switch Default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 2,
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
-      "padding": 6,
+      "padding": 2,
     }
   }
 >
   <Text
     style={
       Object {
-        "color": "black",
+        "color": "#424242",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -66,9 +69,10 @@ exports[`Switch Default 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#ffffff",
           "borderColor": "#616161",
-          "borderRadius": 50,
+          "borderRadius": 20,
           "borderWidth": 1,
           "flexDirection": "row",
           "height": 20,
@@ -77,7 +81,6 @@ exports[`Switch Default 1`] = `
           "marginLeft": 4,
           "marginRight": 4,
           "marginTop": 2,
-          "padding": 2,
           "width": 40,
         }
       }
@@ -89,6 +92,7 @@ exports[`Switch Default 1`] = `
             "backgroundColor": "#616161",
             "borderRadius": 17,
             "height": 14,
+            "margin": 2,
             "width": 14,
           }
         }
@@ -133,17 +137,20 @@ exports[`Switch Disabled 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
+      "borderColor": "transparent",
+      "borderRadius": 4,
+      "borderWidth": 2,
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
-      "padding": 6,
+      "padding": 2,
     }
   }
 >
   <Text
     style={
       Object {
-        "color": "black",
+        "color": "#424242",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontWeight": "400",
@@ -164,9 +171,10 @@ exports[`Switch Disabled 1`] = `
     <View
       style={
         Object {
+          "alignItems": "center",
           "backgroundColor": "#f0f0f0",
           "borderColor": "#e0e0e0",
-          "borderRadius": 50,
+          "borderRadius": 20,
           "borderWidth": 1,
           "flexDirection": "row",
           "height": 20,
@@ -175,7 +183,6 @@ exports[`Switch Disabled 1`] = `
           "marginLeft": 4,
           "marginRight": 4,
           "marginTop": 2,
-          "padding": 2,
           "width": 40,
         }
       }
@@ -187,6 +194,7 @@ exports[`Switch Disabled 1`] = `
             "backgroundColor": "#e0e0e0",
             "borderRadius": 17,
             "height": 14,
+            "margin": 2,
             "width": 14,
           }
         }
