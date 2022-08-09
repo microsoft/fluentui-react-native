@@ -1,8 +1,220 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Aug 2022 21:40:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.23.8
+
+Mon, 08 Aug 2022 21:40:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.84.0
+
+## 0.23.7
+
+Mon, 08 Aug 2022 11:50:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.83.2
+
+## 0.23.6
+
+Sun, 07 Aug 2022 20:38:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.83.1
+
+## 0.23.5
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.83.0
+
+## 0.23.4
+
+Fri, 05 Aug 2022 20:00:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.14
+
+## 0.23.3
+
+Fri, 05 Aug 2022 18:02:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.13
+
+## 0.23.2
+
+Fri, 05 Aug 2022 07:16:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.12
+
+## 0.23.1
+
+Fri, 05 Aug 2022 02:53:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.11
+
+## 0.23.0
+
+Thu, 04 Aug 2022 19:24:58 GMT
+
+### Minor changes
+
+- Added E2E for Switch (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/tester to v0.82.10
+
+## 0.22.1
+
+Thu, 04 Aug 2022 11:02:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.9
+
+## 0.22.0
+
+Wed, 03 Aug 2022 19:25:34 GMT
+
+### Minor changes
+
+- Added E2E for Switch (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/tester to v0.82.8
+
+## 0.21.31
+
+Wed, 03 Aug 2022 11:09:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.7
+
+## 0.21.30
+
+Wed, 03 Aug 2022 07:45:46 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.6
+
+## 0.21.29
+
+Tue, 02 Aug 2022 22:19:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.5
+
+## 0.21.28
+
+Tue, 02 Aug 2022 20:08:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.4
+
+## 0.21.27
+
+Mon, 01 Aug 2022 18:06:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.3
+
+## 0.21.26
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.2
+
+## 0.21.25
+
+Fri, 29 Jul 2022 21:04:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.1
+
+## 0.21.24
+
+Fri, 29 Jul 2022 18:26:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.82.0
+
+## 0.21.23
+
+Fri, 29 Jul 2022 02:14:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.81.2
+
+## 0.21.22
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.81.1
+
+## 0.21.21
+
+Thu, 28 Jul 2022 22:52:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.81.0
+
+## 0.21.20
+
+Thu, 28 Jul 2022 21:20:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.80.0
+
+## 0.21.19
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Changed size tokens, added icon to the Tester for the Badge (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/tester to v0.79.7
+
+## 0.21.18
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
+- Bump @fluentui-react-native/tester to v0.79.6
+
+## 0.21.17
+
+Wed, 27 Jul 2022 02:32:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.79.5
 
 ## 0.21.16
 

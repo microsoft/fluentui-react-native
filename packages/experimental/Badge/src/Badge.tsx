@@ -2,7 +2,7 @@
 import { Children, ReactNode } from 'react';
 import { View } from 'react-native';
 import { badgeName, BadgeType, BadgeProps } from './Badge.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { compose, withSlots, UseSlots, mergeProps } from '@fluentui-react-native/framework';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
@@ -41,9 +41,17 @@ export const Badge = compose<BadgeType>({
       const { icon, iconPosition = 'before', ...mergedProps } = mergeProps(badge, final);
       return (
         <Slots.root {...mergedProps}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {Children.map(children, (child) => (typeof child === 'string' ? <Slots.text key="text">{child}</Slots.text> : child))}
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {icon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+          {Children.map(children, (child, i) =>
+            typeof child === 'string' ? (
+              <Slots.text accessible={false} key={`text-${i}`}>
+                {child}
+              </Slots.text>
+            ) : (
+              child
+            ),
+          )}
+          {icon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
         </Slots.root>
       );
     };

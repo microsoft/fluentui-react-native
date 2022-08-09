@@ -17,3 +17,13 @@ steps:
       xcWorkspacePath: ${{ parameters.xcode_workspacePath }}
       signingOption: nosign
       args: '-verbose -derivedDataPath DerivedData ${{ parameters.xcode_extraArgs }}'
+
+  - ${{ if ne(parameters.xcode_sdk, 'macosx') }}:
+      - script: |
+          strip -x -S $(Build.Repository.LocalPath)/DerivedData/${{ parameters.output_folder }}/Build/Products/${{ parameters.xcode_configuration }}-${{ parameters.xcode_sdk }}/**/*.a
+        displayName: Strip debug symbols for ios libraries
+
+  - ${{ if eq(parameters.xcode_sdk, 'macosx') }}:
+      - script: |
+          strip -x -S $(Build.Repository.LocalPath)/DerivedData/${{ parameters.output_folder }}/Build/Products/${{ parameters.xcode_configuration }}/**/*.a
+        displayName: Strip debug symbols for macos libraries

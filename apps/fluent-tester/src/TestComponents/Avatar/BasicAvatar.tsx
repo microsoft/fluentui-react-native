@@ -89,6 +89,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={imageSize === undefinedText ? undefined : imageSize}
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="Icon"
+          image={{ source: showImage ? { uri: satyaPhotoUrl } : undefined }}
           name="* Richard Faynman *"
           avatarColor="#ff0099"
           initialsColor="yellow"
@@ -115,16 +116,6 @@ export const StandardUsage: FunctionComponent = () => {
         />
         {svgIconsEnabled && (
           <>
-            <Avatar
-              active={active}
-              activeAppearance={activeAppearance}
-              size={imageSize === undefinedText ? undefined : imageSize}
-              shape={isSquare ? 'square' : 'circular'}
-              accessibilityLabel="SVG Icon"
-              icon={{ fontSource: { ...fontBuiltInProps, fontSize: 16 }, color: 'red' }}
-              avatarColor={avatarColor}
-              badge={{ status: 'outOfOffice', outOfOffice }}
-            />
             <Avatar
               accessibilityHint="A picture representing a user"
               active={active}

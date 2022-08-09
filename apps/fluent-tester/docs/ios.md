@@ -13,10 +13,10 @@ yarn
 yarn build
 ```
 
-2. Then go into `apps/ios/src` folder and run pod install to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
+2. Then go into `apps/fluent-tester/ios` folder and run pod install to pull in the project-level Cocoapod dependencies defined in the podfile, and to generate a valid xcworkspace:
 
 ```sh
-cd apps/ios/src
+apps/fluent-tester/ios
 pod install
 ```
 
@@ -34,7 +34,7 @@ yarn ios
 Dependencies are managed by
 [`@rnx-kit/dep-check`](https://github.com/microsoft/rnx-kit/tree/main/packages/dep-check).
 If you're looking to upgrade `react-native`, look for the `rnx-kit` section in
-`/apps/ios/package.json`:
+`/apps/fluent-tester/package.json`:
 
 ```json
 {
@@ -64,15 +64,15 @@ You can debug native code in Xcode. To debug javascript code, you can either use
 
 ## Troubleshooting
 
-- The first time you yarn ios, you receive an error and have to run "FluentTester.xcworkspace" directly from Xcode. The workspace can be found in the apps/ios/src folder. After running the workspace the first time from Xcode, you will be able to `yarn ios` from the CLI.
-- If the packager didn't launch in a separate terminal and your iOS simulator just shows a white screen for your app, you can run `yarn start` from apps/ios to launch it separately
+- The first time you yarn ios, you receive an error and have to run "FluentTester.xcworkspace" directly from Xcode. The workspace can be found in the apps/fluent-tester/ios folder. After running the workspace the first time from Xcode, you will be able to `yarn ios` from the CLI.
+- If the packager didn't launch in a separate terminal and your iOS simulator just shows a white screen for your app, you can run `yarn start` from apps/fluent-tester to launch it separately
 - If you get the error: "Unable to resolve module... None of these files exist:...", close the packager and restart it by running `yarn start`. Note: you need to restart the packager when you switch to a different platform (e.g. from macOS or Android to iOS), but once it restarts you can reload the tester apps on all running platforms at once.
 - If you want to do direct debugging via xcode, after the pod install, you can launch src/FluentTester.xcworkspace and build/run the scheme "ReactTestApp"
 - If you want to have a clean rebuild of the generated iOS project, you can do the following:
 
 ```sh
-cd apps/ios/
-rm src/FluentTester.xcworkspace
-rm -r src/Pods/
-pod install --project-directory=src.
+cd apps/fluent-tester/ios
+rm FluentTester.xcworkspace
+rm -rf Pods/
+pod install
 ```

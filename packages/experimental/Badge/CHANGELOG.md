@@ -1,8 +1,93 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Aug 2022 11:50:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.19
+
+Mon, 08 Aug 2022 11:50:27 GMT
+
+### Patches
+
+- Added CounterBadge (v.kozova13@gmail.com)
+
+## 0.1.18
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.4
+- Bump @fluentui-react-native/interactive-hooks to v0.18.1
+- Bump @fluentui-react-native/text to v0.14.0
+
+## 0.1.17
+
+Fri, 05 Aug 2022 02:53:01 GMT
+
+### Patches
+
+- Added E2E tests for the Badge (v.kozova13@gmail.com)
+
+## 0.1.16
+
+Thu, 04 Aug 2022 11:02:42 GMT
+
+### Patches
+
+- Made Badge not accessible (v.kozova13@gmail.com)
+
+## 0.1.15
+
+Wed, 03 Aug 2022 11:09:58 GMT
+
+### Patches
+
+- Wrote a SPEC for Badge (v.kozova13@gmail.com)
+
+## 0.1.14
+
+Mon, 01 Aug 2022 18:06:17 GMT
+
+### Patches
+
+- Added font/size tokens (v.kozova13@gmail.com)
+
+## 0.1.13
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+
+## 0.1.12
+
+Fri, 29 Jul 2022 21:04:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/text to v0.13.0
+
+## 0.1.11
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+
+## 0.1.10
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Changed size tokens, added icon to the Tester for the Badge (v.kozova13@gmail.com)
 
 ## 0.1.9
 

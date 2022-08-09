@@ -1,5 +1,5 @@
 import { ColorValue, FlexStyle } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
@@ -13,8 +13,9 @@ export type BadgeSize = typeof BadgeSizes[number];
 export type BadgeAppearance = typeof BadgeAppearances[number];
 export type BadgeShape = typeof BadgeShapes[number];
 export type BadgeColor = typeof BadgeColors[number] | ColorValue;
+export type BadgeIconPosition = 'before' | 'after';
 
-export interface BadgeCoreProps {
+export interface BadgeCoreProps extends IViewProps {
   /**
    * A Badge can be square, circular or rounded.
    * @defaultvalue circular
@@ -49,7 +50,7 @@ export interface BadgeProps extends BadgeCoreProps {
    * Icon can be placed before or after Badge's content.
    * @default before
    */
-  iconPosition?: 'before' | 'after';
+  iconPosition?: BadgeIconPosition;
 }
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
@@ -79,6 +80,11 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    */
   right?: FlexStyle['right'];
 
+  /**
+   * Set padding for text container when Badge contains
+   * icons or images
+   */
+  textPadding?: number;
   /**
    * Set the top edge of the Badge
    */

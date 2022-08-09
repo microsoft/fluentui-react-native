@@ -1,8 +1,111 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 26 Jul 2022 19:30:23 GMT and should not be manually modified.
+This log was last generated on Mon, 08 Aug 2022 11:50:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.34
+
+Mon, 08 Aug 2022 11:50:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.19
+
+## 1.1.33
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.18
+- Bump @fluentui-react-native/icon to v0.13.4
+- Bump @fluentui-react-native/interactive-hooks to v0.18.1
+
+## 1.1.32
+
+Fri, 05 Aug 2022 02:53:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.17
+
+## 1.1.31
+
+Thu, 04 Aug 2022 11:02:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.16
+
+## 1.1.30
+
+Wed, 03 Aug 2022 11:09:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.15
+
+## 1.1.29
+
+Tue, 02 Aug 2022 20:08:43 GMT
+
+### Patches
+
+- Update exports (ruaraki@microsoft.com)
+
+## 1.1.28
+
+Mon, 01 Aug 2022 18:06:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.14
+
+## 1.1.27
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.13
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+
+## 1.1.26
+
+Fri, 29 Jul 2022 21:04:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.12
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+
+## 1.1.25
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.11
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+
+## 1.1.24
+
+Thu, 28 Jul 2022 16:25:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.10
+
+## 1.1.23
+
+Thu, 28 Jul 2022 08:03:43 GMT
+
+### Patches
+
+- Returned image prop to the Avatar (v.kozova13@gmail.com)
 
 ## 1.1.22
 

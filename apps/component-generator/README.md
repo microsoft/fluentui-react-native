@@ -6,16 +6,16 @@ It's used to automate process of component creation.
 
 1. Run in your command prompt `npm i -g gulp-cli`.
    - May need to run this with `sudo` if you are on a mac
-2. Run `npm i` inside the component-generator directory.
-   - May need to run this with `sudo` if you are on a mac
+2. Rename package-no-publish.json to package.json (The package was published, though it's private. This is temporary fix).
+3. Run `yarn` from `fluentui-react-native` folder.
 
 ## Build your component
 
+0. Go to `fluentui-react-native\apps\component-generator`.
 1. Run `gulp add --new component-name`. This should be run from apps/component-generator, not the root.
-   - Before running this command you may need to install gulp and gulp-rename (i.e. `npm install gulp` `npm install gulp rename`).
    - `component-name` should be all lowercase.
 2. Change your newly generated component.
-3. Check dependencies in componentName’s package.json (may be out of date), and remove `"private": true` from the package.json
+3. Check dependencies in componentName's package.json (may be out of date), and remove `"private": true` from the package.json
 4. Add to the package.json after "typings":
 
 ```json
@@ -40,6 +40,6 @@ It's used to automate process of component creation.
 7. Add warning if component exists and message "Do you want to replace it?".
    Currently it replaces the component.
 8. Improve replacement functionality.
-9. Use yarn instead of npm, using npm is generating a package.lock file that we later need to delete
-10. Support compressible-based components
-11. Add option to add component to the `experimental` folder instead of the `components` folder
+9. Support compressible-based components
+10. Add option to add component to the `experimental` folder instead of the `components` folder
+11. Think about not using gulp. There's good alternative: [yeoman](https://yeoman.io/)

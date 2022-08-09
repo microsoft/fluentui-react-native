@@ -1,6 +1,6 @@
 import { TestDescription } from './TestComponents';
 import { AvatarTest, HOMEPAGE_AVATAR_BUTTON } from './TestComponents/Avatar';
-import { BadgeTest, HOMEPAGE_BADGE } from './TestComponents/Badge';
+import { BadgeTest, HOMEPAGE_BADGE_BUTTON } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
@@ -22,6 +22,7 @@ import { ActivityIndicatorTest, HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from './Tes
 import { HOMEPAGE_TOKEN_BUTTON, TokenTest } from './TestComponents/Tokens';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestComponents/TextExperimental';
+import { HOMEPAGE_NOTIFICATION_BUTTON, NotificationTest } from './TestComponents/Notification';
 
 export const tests: TestDescription[] = [
   {
@@ -37,7 +38,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Badge Test',
     component: BadgeTest,
-    testPage: HOMEPAGE_BADGE,
+    testPage: HOMEPAGE_BADGE_BUTTON,
   },
   {
     name: 'Button Test',
@@ -138,5 +139,10 @@ export const tests: TestDescription[] = [
     name: 'Tokens Test',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
+  },
+  {
+    name: 'Notification Test',
+    component: NotificationTest,
+    testPage: HOMEPAGE_NOTIFICATION_BUTTON,
   },
 ];

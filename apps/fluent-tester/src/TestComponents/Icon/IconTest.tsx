@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, PlatformColor, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -78,6 +78,9 @@ const Icons: React.FunctionComponent = () => {
             shouldShowDataUri ? <Icon svgSource={svgD20DataUriProps} width={100} height={100} color="#7a7" /> : null
           }
           <Icon svgSource={svgUriProps} width={100} height={100} color="red" />
+          {Platform.OS === ('win32' as any) && (
+            <Icon svgSource={svgProps} width={100} height={100} color={PlatformColor('WindowText')} accessibilityLabel="Wheelchair" />
+          )}
         </View>
       ) : null}
       {showRasterIcons ? (

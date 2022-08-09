@@ -4,10 +4,10 @@ parameters:
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "pod install $(platform)"
+      echo "pod install ${{parameters.platform}}"
       pod install
-    workingDirectory: apps/fluent-tester/$(platform)
-    displayName: 'pod install $(platform)'
+    workingDirectory: apps/fluent-tester/${{parameters.platform}}
+    displayName: 'pod install ${{parameters.platform}}'
 
   - bash: |
       echo "Pre boot simulator"
@@ -18,7 +18,7 @@ steps:
     displayName: 'Boot simulator'
 
   - bash: |
-      echo "yarn $(platform)"
-      yarn $(platform)
+      echo "yarn ${{parameters.platform}}"
+      yarn ${{parameters.platform}}
     workingDirectory: apps/fluent-tester
-    displayName: 'yarn $(platform)'
+    displayName: 'yarn ${{parameters.platform}}'

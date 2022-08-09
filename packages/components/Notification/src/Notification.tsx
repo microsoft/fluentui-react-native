@@ -1,9 +1,9 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { PressableProps, View, ViewStyle } from 'react-native';
+import { Platform, PressableProps, useWindowDimensions, View, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
@@ -11,6 +11,29 @@ import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
+type SizeClassIOS = 'regular' | 'compact' | undefined;
+
+/**
+ * Hook that "guesses" our Size Class on iOS based on our window width.
+ * Note: this is hacky and should not be used.
+ *
+ * For more information about Size Classes, see the following:
+ * https://developer.apple.com/documentation/uikit/uitraitcollection
+ * https://developer.apple.com/design/human-interface-guidelines/foundations/layout/#platform-considerations
+ * @returns SizeClassIOS: enum determining our size class
+ */
+const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
+  const width = useWindowDimensions().width;
+  if (Platform.OS === 'ios') {
+    if (Platform.isPad && width > 375) {
+      return 'regular';
+    } else {
+      return 'compact';
+    }
+  } else {
+    return undefined;
+  }
+};
 /**
  * A function which determines if a set of styles should be applied to the component given the current state and props of the Notification.
  *
@@ -41,14 +64,22 @@ export const Notification = compose<NotificationType>({
   useRender: (userProps: NotificationProps, useSlots: UseSlots<NotificationType>) => {
     const Slots = useSlots(userProps, (layer) => notificationLookup(layer, userProps));
     const isBar = ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant);
+    const width = useWindowDimensions().width / 2;
+    const sizeClass = useSizeClassIOS_DO_NOT_USE();
+    const onActionPress = userProps.onActionPress;
+
     const rootStyle: ViewStyle = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
-      return { marginHorizontal: marginHorizontal };
-    }, ['isBar']);
+      if (sizeClass === 'regular' && !isBar) {
+        return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
+      } else {
+        return { marginHorizontal: marginHorizontal };
+      }
+    }, [isBar, width]);
     const messageStyle: ViewStyle = useMemo(() => {
-      const alignSelf = isBar ? 'center' : 'flex-start';
+      const alignSelf = onActionPress ? 'flex-start' : 'center';
       return { alignSelf: alignSelf };
-    }, ['isBar']);
+    }, [onActionPress]);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
@@ -64,7 +95,7 @@ export const Notification = compose<NotificationType>({
               {title && <Slots.title>{title}</Slots.title>}
               <Slots.message style={messageStyle}>{children}</Slots.message>
             </Slots.contentContainer>
-            <Slots.action {...notificationButtonProps} />
+            {onActionPress && <Slots.action {...notificationButtonProps} />}
           </Slots.root>
         </Slots.shadow>
       );
