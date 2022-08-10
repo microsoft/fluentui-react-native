@@ -54,6 +54,7 @@ exports[`Notification component tests Notification default 1`] = `
       }
     >
       <View
+        accessible={true}
         style={
           Object {
             "flex": 1,
