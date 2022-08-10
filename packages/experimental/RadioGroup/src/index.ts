@@ -3,8 +3,3 @@ export * from './RadioGroup/RadioGroup.types';
 export * from './RadioGroup/RadioGroupTokens';
 export * from './RadioGroup/radioGroupContext';
 export * from './RadioGroup/useRadioGroup';
-// export * from './RadioGroup/useRadioGroupContextValue';
-export * from './Radio/Radio';
-export * from './Radio/Radio.types';
-export * from './Radio/RadioTokens';
-export * from './Radio/useRadio';

@@ -10,38 +10,6 @@ export interface RadioGroupState {
   context: RadioGroupContextValue;
 }
 
-// export interface RadioGroupState extends Omit<RadioGroupProps, 'value' | 'onChange'> {
-//   /**
-//    * The RadioGroup's props we want to update
-//    */
-//   props: RadioGroupProps;
-
-//   /**
-//    * The currently selected RadioButton's key
-//    */
-//   value: string | null;
-
-//   /**
-//    * Updates the selected button and calls the client’s onChange callback
-//    */
-//   onChange?: (key: string) => void;
-
-//   /**
-//    * Updates the selected button's ref to set as the default tabbable element
-//    */
-//   updateSelectedButtonRef?: (ref: React.RefObject<any>) => void;
-
-//   /**
-//    * Updates the group container's defaultTabbableElement
-//    */
-//   selectedButtonRef?: React.MutableRefObject<any>;
-
-//   /**
-//    * Array of radio button keys in the group
-//    */
-//   buttonKeys?: string[];
-// }
-
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
 export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {

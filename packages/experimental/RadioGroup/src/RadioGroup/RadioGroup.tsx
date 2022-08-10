@@ -8,7 +8,6 @@ import { stylingSettings } from './RadioGroup.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useRadioGroup } from './useRadioGroup';
 import { RadioGroupProvider } from './radioGroupContext';
-// import { useRadioGroupContextValue } from './useRadioGroupContextValue';
 
 export const RadioGroup = compose<RadioGroupType>({
   displayName: radioGroupName,
@@ -20,8 +19,7 @@ export const RadioGroup = compose<RadioGroupType>({
   },
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
     const radioGroup = useRadioGroup(userProps);
-    // console.log('value selected: ' + radioGroup.state.context.value);
-    // const contextValue = radioGroup.state.context;
+    console.log('value selected: ' + radioGroup.state.context.value);
     const Slots = useSlots(userProps, (layer) => radioGroup.state[layer] || userProps[layer]);
 
     return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
@@ -40,8 +38,7 @@ export const RadioGroup = compose<RadioGroupType>({
         // @ts-ignore - TODO, fix typing error
         radioGroup.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
-            // return child.props.buttonKey;
-            return child.props.value;
+            return child.props.buttonKey;
           }
         });
       }
@@ -56,42 +53,6 @@ export const RadioGroup = compose<RadioGroupType>({
           </Slots.root>
         </RadioGroupProvider>
       );
-
-      // const radioGroup = useRadioGroup(userProps);
-      // console.log('radioGroup: ' + radioGroup);
-      // console.log('useRender radioGroup context value: ' + radioGroup.value);
-      // const contextValue = useRadioGroupContextValue(radioGroup);
-      // const Slots = useSlots(userProps, (override: string) => radioGroup[override] || userProps[override]);
-      // // const Slots = useSlots(radioGroup.props);
-
-      // return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
-      //   const { accessibilityLabel, label, ...mergedProps } = mergeProps(radioGroup.props, final);
-
-      //   if (radioGroup == undefined) {
-      //     return null;
-      //   }
-
-      // // Populate the buttonKeys array
-      // if (children) {
-      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //   // @ts-ignore - TODO, fix typing error
-      //   radioGroup.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
-      //     if (React.isValidElement(child)) {
-      //       return child.props.buttonKey;
-      //     }
-      //   });
-      // }
-
-      // return (
-      //   <RadioGroupProvider value={contextValue}>
-      //     <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel ?? label} accessibilityRole={'radiogroup'}>
-      //       {label && <Slots.label>{label}</Slots.label>}
-      //       <Slots.container isCircularNavigation defaultTabbableElement={radioGroup.selectedButtonRef}>
-      //         {children}
-      //       </Slots.container>
-      //     </Slots.root>
-      //   </RadioGroupProvider>
-      // );
     };
   },
 });
