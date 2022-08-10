@@ -1,12 +1,8 @@
 import * as React from 'react';
-// import { RadioGroupState } from './RadioGroup.types';
 
 /**
  * Context shared between RadioGroup and its children Radio components
  */
-// export interface RadioGroupContextValue extends Omit<RadioGroupState, 'props'> {
-//   // isChecked: boolean;
-// }
 export interface RadioGroupContextValue {
   /**
    * The currently selected RadioButton's key
