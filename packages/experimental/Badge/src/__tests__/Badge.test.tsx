@@ -86,4 +86,19 @@ describe('CounterBadge component tests', () => {
     const tree = renderer.create(<CounterBadgeStyled />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('CounterBadge shows 99+', () => {
+    const tree = renderer.create(<CounterBadge count={100} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('CounterBadge shows 1000+', () => {
+    const tree = renderer.create(<CounterBadge overflowCount={1000} count={2000} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('CounterBadge shows zero', () => {
+    const tree = renderer.create(<CounterBadge count={0} showZero={true} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
