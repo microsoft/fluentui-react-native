@@ -3,7 +3,7 @@ import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { E2ETextTest } from './TextE2ETest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 const textSections: TestSection[] = [
   {
@@ -25,15 +25,7 @@ const textSections: TestSection[] = [
 ];
 
 export const TextTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Beta',
-  };
-
   const description = 'Text is a component for displaying text. You can use Text to standardize text across your app.';
 
-  return <Test name="Text Test" description={description} sections={textSections} status={status} />;
+  return <Test name="Text Test" description={description} sections={textSections} />;
 };

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Platform, PlatformColor, View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { ICON_TESTPAGE } from './consts';
 import { E2ETestingIcon } from './IconE2ETest';
 
@@ -107,15 +107,7 @@ const iconSections: TestSection[] = [
 ];
 
 export const IconTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'Icons are styled images that can be fonts, svgs, or bitmaps';
 
-  return <Test name="Icon Test" description={description} sections={iconSections} status={status}></Test>;
+  return <Test name="Icon Test" description={description} sections={iconSections} />;
 };

@@ -5,7 +5,7 @@ import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { commonTestStyles } from '../Common/styles';
 import { Button, PrimaryButton, Text, StealthButton } from '@fluentui/react-native';
 import { THEME_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
   return {
@@ -108,16 +108,8 @@ const themeSections: TestSection[] = [
 ];
 
 export const ThemeTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
-  };
-
   const description =
     'The entire color palette of the controls is themeable. We provide a set of sensible defaults, but you can override all colors individually.';
 
-  return <Test name="Theme Test" description={description} sections={themeSections} status={status} />;
+  return <Test name="Theme Test" description={description} sections={themeSections} />;
 };

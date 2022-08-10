@@ -5,7 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { Square } from '../Common/Square';
 import { Alert, GestureResponderEvent, StyleSheet, View, ViewProps, ViewStyle, Text } from 'react-native';
 import { PRESSABLE_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 const styles = StyleSheet.create({
   dottedBorder: {
@@ -131,15 +131,7 @@ const pressableSections: TestSection[] = [
 ];
 
 export const PressableTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'No description.';
 
-  return <Test name="Pressable Test" description={description} sections={pressableSections} status={status} />;
+  return <Test name="Pressable Test" description={description} sections={pressableSections} />;
 };

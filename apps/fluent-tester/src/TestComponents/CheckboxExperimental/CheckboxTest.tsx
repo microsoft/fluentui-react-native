@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, TextStyle } from 'react-native';
@@ -169,16 +169,8 @@ const checkboxSections: TestSection[] = [
 ];
 
 export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'N/A',
-    iosStatus: 'N/A',
-    macosStatus: 'Experimental',
-    androidStatus: 'N/A',
-  };
-
   const description =
     'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return <Test name="Experimental Checkbox Test" description={description} sections={checkboxSections} status={status} />;
+  return <Test name="Experimental Checkbox Test" description={description} sections={checkboxSections} />;
 };

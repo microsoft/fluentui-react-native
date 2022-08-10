@@ -7,7 +7,7 @@ import { Drawer } from '@fluentui-react-native/experimental-drawer';
 import { Stack } from '@fluentui-react-native/stack';
 import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import { DRAWER_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 import TestSvg from '../Icon/assets/test.svg';
 
@@ -45,15 +45,7 @@ const drawerSections: TestSection[] = [
 ];
 
 export const DrawerTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'N/A',
-    uwpStatus: 'N/A',
-    iosStatus: 'Backlog',
-    macosStatus: 'N/A',
-    androidStatus: 'Experimental',
-  };
-
   const description = 'A Drawer component using the Fluent Design System.  Currently only implemented on Android.';
 
-  return <Test name="Drawer Test" description={description} sections={drawerSections} status={status} />;
+  return <Test name="Drawer Test" description={description} sections={drawerSections} />;
 };

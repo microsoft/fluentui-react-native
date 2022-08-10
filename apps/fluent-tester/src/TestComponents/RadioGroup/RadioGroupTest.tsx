@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { RadioButton, RadioGroup, Separator } from '@fluentui/react-native';
 import { RADIOGROUP_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { E2ERadioGroupTest } from './RadioGroupE2ETest';
 
 const BasicRadioGroup: React.FunctionComponent = () => {
@@ -65,15 +65,7 @@ const radioGroupSections: TestSection[] = [
 ];
 
 export const RadioGroupTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'No description.';
 
-  return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} status={status} />;
+  return <Test name="RadioGroup Test" description={description} sections={radioGroupSections} />;
 };

@@ -5,7 +5,7 @@ import * as React from 'react';
 import { TouchableHighlight, TouchableHighlightProps, View, ViewProps } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { FOCUSTRAPZONE_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 const trapZoneStyle: IFocusTrapZoneProps['style'] = {
   padding: 10,
@@ -138,16 +138,8 @@ const focusTrapZoneSections: TestSection[] = [
 ];
 
 export const FocusTrapTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Backlog',
-    iosStatus: 'N/A',
-    macosStatus: 'N/A',
-    androidStatus: 'N/A',
-  };
-
   const description =
     'FocusTrapZone is used to trap the focus in any html element. Pressing tab will circle focus within the inner focusable elements of the FocusTrapZone.';
 
-  return <Test name="Focus Trap Zone Test" description={description} sections={focusTrapZoneSections} status={status}></Test>;
+  return <Test name="Focus Trap Zone Test" description={description} sections={focusTrapZoneSections} />;
 };

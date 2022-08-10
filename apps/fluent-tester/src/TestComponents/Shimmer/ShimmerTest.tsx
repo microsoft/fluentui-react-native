@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Shimmer } from '@fluentui-react-native/experimental-shimmer';
 import { SHIMMER_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { shimmerBorderRadiusTests, shimmerRectsAndRect, shimmerRectsAndCircle } from './ShimmerTestElementSets';
@@ -111,16 +111,8 @@ const shimmerSections: TestSection[] = [
 ];
 
 export const ShimmerTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
-  };
-
   const description =
     'Shimmer is a temporary animation placeholder for when a service call takes time to return data but the rest of the UI should continue rendering.';
 
-  return <Test name="Shimmer Test" description={description} sections={shimmerSections} status={status} />;
+  return <Test name="Shimmer Test" description={description} sections={shimmerSections} />;
 };

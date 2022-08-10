@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { COMPONENT_NAME_TESTPAGE } from './consts';
 import { ComponentNameDefault } from './ComponentNameDefault';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 const componentNameSections: TestSection[] = [
   {
@@ -12,15 +12,7 @@ const componentNameSections: TestSection[] = [
 ];
 
 export const ComponentNameTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Beta',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'component-description';
 
-  return <Test name="ComponentName Test" description={description} sections={componentNameSections} status={status}></Test>;
+  return <Test name="ComponentName Test" description={description} sections={componentNameSections} />;
 };

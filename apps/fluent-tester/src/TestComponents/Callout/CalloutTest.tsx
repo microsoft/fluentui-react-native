@@ -11,7 +11,7 @@ import {
   StealthButton,
 } from '@fluentui/react-native';
 import { CALLOUT_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
 import { MenuPicker } from '../Common/MenuPicker';
@@ -431,15 +431,7 @@ const calloutSections: TestSection[] = [
 ];
 
 export const CalloutTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'A callout is an anchored tip that can be used to teach people or guide them through the app without blocking them.';
 
-  return <Test name="Callout Test" description={description} sections={calloutSections} status={status}></Test>;
+  return <Test name="Callout Test" description={description} sections={calloutSections} />;
 };

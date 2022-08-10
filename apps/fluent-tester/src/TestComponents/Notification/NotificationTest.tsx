@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Notification, NotificationVariant, NotificationVariants } from '@fluentui-react-native/notification';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { Animated, StyleSheet, Switch, TextInput, View } from 'react-native';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
@@ -272,15 +272,7 @@ const notificationSections: TestSection[] = [
 ];
 
 export const NotificationTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Backlog',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Experimental',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'Testing notification component';
 
-  return <Test name="Notification Test" description={description} sections={notificationSections} status={status}></Test>;
+  return <Test name="Notification Test" description={description} sections={notificationSections} />;
 };

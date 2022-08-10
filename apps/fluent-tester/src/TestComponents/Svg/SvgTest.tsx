@@ -4,7 +4,7 @@ import { Separator } from '@fluentui/react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 const styles = StyleSheet.create({
   svg: {
@@ -191,15 +191,7 @@ const svgSections: TestSection[] = [
 ];
 
 export const SvgTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'No description.';
 
-  return <Test name="Svg Test" description={description} sections={svgSections} status={status} />;
+  return <Test name="Svg Test" description={description} sections={svgSections} />;
 };

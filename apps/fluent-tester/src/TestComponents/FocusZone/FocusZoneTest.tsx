@@ -2,7 +2,7 @@ import * as React from 'react';
 import { View, Switch } from 'react-native';
 import { FocusZone, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
 import { focusZoneTestStyles, GridButton, stackStyleFocusZone, SubheaderText } from './styles';
 import { commonTestStyles } from '../Common/styles';
@@ -285,13 +285,5 @@ const focusZoneSections: TestSection[] = [
 ];
 
 export const FocusZoneTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Experimental',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
-  };
-
-  return <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} status={status} />;
+  return <Test name="FocusZone Test" description={'No description.'} sections={focusZoneSections} />;
 };

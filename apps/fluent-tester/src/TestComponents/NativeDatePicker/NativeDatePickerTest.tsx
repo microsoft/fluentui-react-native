@@ -1,7 +1,7 @@
 import { Button } from '@fluentui-react-native/button';
 import { NativeDatePicker } from '@fluentui-react-native/experimental-native-date-picker';
 import { NATIVEDATEPICKER_TESTPAGE } from './consts';
-import { PlatformStatus, Test, TestSection } from '../Test';
+import { Test, TestSection } from '../Test';
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
@@ -235,15 +235,7 @@ const nativeDatePickerSections: TestSection[] = [
 ];
 
 export const NativeDatePickerTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'N/A',
-    uwpStatus: 'N/A',
-    iosStatus: 'Experimental',
-    macosStatus: 'N/A',
-    androidStatus: 'N/A',
-  };
-
   const description = 'A Native date picker component using the Fluent Design System.  Currently only implemented on iOS.';
 
-  return <Test name="Native Date Picker Test" description={description} sections={nativeDatePickerSections} status={status}></Test>;
+  return <Test name="Native Date Picker Test" description={description} sections={nativeDatePickerSections} />;
 };

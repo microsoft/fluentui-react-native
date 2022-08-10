@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { SWITCH_TESTPAGE } from './consts';
 import { View, StyleSheet } from 'react-native';
 import { Switch } from '@fluentui-react-native/switch';
@@ -116,15 +116,7 @@ const toggleSections: TestSection[] = [
 ];
 
 export const SwitchTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'Switch is a control that has two mutually exclusive states.';
 
-  return <Test name="Switch Test" description={description} sections={toggleSections} status={status}></Test>;
+  return <Test name="Switch Test" description={description} sections={toggleSections} />;
 };

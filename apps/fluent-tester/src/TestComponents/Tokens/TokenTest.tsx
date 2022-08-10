@@ -7,7 +7,7 @@ import { createOfficeAliasTokens } from '@fluentui-react-native/win32-theme';
 import { createAliasTokens } from '@fluentui-react-native/default-theme';
 import { commonTestStyles } from '../Common/styles';
 import { Text } from '@fluentui/react-native';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { TOKENS_TEST_COMPONENT, TOKEN_TESTPAGE } from './consts';
 
 const getThemedStyles = themedStyleSheet((theme: Theme) => {
@@ -101,15 +101,7 @@ const themeSections: TestSection[] = [
 ];
 
 export const TokenTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'Alias tokens given from token pipeline. Currently values are pulled from web. Will be used to style components.';
 
-  return <Test name="Token Test" description={description} sections={themeSections} status={status} />;
+  return <Test name="Token Test" description={description} sections={themeSections} />;
 };

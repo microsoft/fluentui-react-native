@@ -5,7 +5,7 @@ import { Button } from '@fluentui-react-native/experimental-button';
 import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { EXPERIMENTAL_TABS_TESTPAGE } from './consts';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
@@ -265,15 +265,7 @@ if (Platform.OS !== 'windows') {
 }
 
 export const ExperimentalTabsTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Experimental',
-    uwpStatus: 'Experimental',
-    iosStatus: 'Backlog',
-    macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
-  };
-
   const description = 'With Tabs, users can navigate to another view.';
 
-  return <Test name="Experimental Tabs Test" description={description} sections={tabsSections} status={status} />;
+  return <Test name="Experimental Tabs Test" description={description} sections={tabsSections} />;
 };

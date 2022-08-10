@@ -3,7 +3,7 @@ import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-
 import { Text } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
 import { View, Switch } from 'react-native';
 
@@ -85,16 +85,8 @@ const activityIndicatorSections: TestSection[] = [
 ];
 
 export const ActivityIndicatorTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Backlog',
-    uwpStatus: 'Backlog',
-    iosStatus: 'Beta',
-    macosStatus: 'Backlog',
-    androidStatus: 'Beta',
-  };
-
   const description =
     'ActivityIndicator is a visual representation that data is being loaded. It is implemented with a View wrapping an Animated SVG. The View is to ensure that AccessibilityRole works. AccessibilityRole currently does not work on SVGs.';
 
-  return <Test name="ActivityIndicator Test" description={description} sections={activityIndicatorSections} status={status}></Test>;
+  return <Test name="ActivityIndicator Test" description={description} sections={activityIndicatorSections} />;
 };

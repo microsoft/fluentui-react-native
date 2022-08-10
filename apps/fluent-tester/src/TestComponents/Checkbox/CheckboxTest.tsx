@@ -5,7 +5,7 @@ import { View, TextInput, TextStyle } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 import { E2ECheckboxTest } from './CheckboxE2ETest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { Test, TestSection } from '../Test';
 
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
@@ -167,16 +167,8 @@ const checkboxSections: TestSection[] = [
 ];
 
 export const CheckboxTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'N/A',
-    macosStatus: 'Experimental',
-    androidStatus: 'N/A',
-  };
-
   const description =
     'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status} />;
+  return <Test name="Checkbox Test" description={description} sections={checkboxSections} />;
 };
