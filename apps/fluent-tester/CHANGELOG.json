@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 10 Aug 2022 18:25:08 GMT",
+      "tag": "@fluentui-react-native/tester_v0.84.1",
+      "version": "0.84.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.4.1",
+            "commit": "78224dba366013c7396d9962ae38081f59f64a81"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Aug 2022 21:40:41 GMT",
       "tag": "@fluentui-react-native/tester_v0.84.0",
       "version": "0.84.0",
