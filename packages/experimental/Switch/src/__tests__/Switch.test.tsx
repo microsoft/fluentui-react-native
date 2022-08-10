@@ -13,7 +13,7 @@ it('Switch Disabled', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('Switch simple rendering does not invalidate styling', () => {
+it('Simple switch rendering does not invalidate styling', () => {
   checkRenderConsistency(() => <Switch label="Default Switch" />, 2);
 });
 
