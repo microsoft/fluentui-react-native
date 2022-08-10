@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Investigation of codeQL bug",
-  "packageName": "@fluentui-react-native/avatar",
-  "email": "v.kozova13@gmail.com",
-  "dependentChangeType": "patch"
-}
