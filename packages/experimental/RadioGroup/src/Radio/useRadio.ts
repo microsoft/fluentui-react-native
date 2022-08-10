@@ -23,12 +23,18 @@ export const useRadio = (props: RadioProps): RadioState => {
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
-  const changeSelection = () => {
+  // const changeSelection = () => {
+  //   if (value != info.value) {
+  //     info.onChange && info.onChange(value);
+  //     info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+  //   }
+  // };
+  const changeSelection = React.useCallback(() => {
     if (value != info.value) {
       info.onChange && info.onChange(value);
       info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
     }
-  };
+  }, [info, value, componentRef]);
 
   /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
@@ -37,7 +43,7 @@ export const useRadio = (props: RadioProps): RadioState => {
     if (value == info.value) {
       info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
     }
-  }, []);
+  }, [info, value, componentRef]);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -58,7 +64,7 @@ export const useRadio = (props: RadioProps): RadioState => {
           break;
       }
     },
-    [info, value],
+    [changeSelection],
   );
 
   const state = {
