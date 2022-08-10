@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "make NativeDatePicker specific to ios (NativeDatePicker.ios.tsx)",
-  "packageName": "@fluentui-react-native/experimental-native-date-picker",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
