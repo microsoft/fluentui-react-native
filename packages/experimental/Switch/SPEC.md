@@ -37,10 +37,10 @@ Win32:
 
 The `Switch` component has six slots. The slots behave as follows:
 
-- `root` - The outer container representing the `Switch` itself that wraps everything passed via the `children` prop.
+- `root` - The outer container representing the `Switch` itself.
 - `label` - If specified, renders the name of the Switch as text.
 - `track` - The container for the thumb.
-- `thumb` - A shape that's location informs the user of the Switch's toggle state.
+- `thumb` - Typically a circle, its location informs the user of the Switch's toggle state.
 - `toggleContainer` - Container for the thumb and track.
 - `onOffText` - If specified, renders the the toggle state of the Switch as text.
 
