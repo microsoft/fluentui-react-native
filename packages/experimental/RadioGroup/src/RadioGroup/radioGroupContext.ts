@@ -1,11 +1,32 @@
 import * as React from 'react';
-import { RadioGroupState } from './RadioGroup.types';
+// import { RadioGroupState } from './RadioGroup.types';
 
 /**
  * Context shared between RadioGroup and its children Radio components
  */
-export interface RadioGroupContextValue extends Omit<RadioGroupState, 'props'> {
-  // isChecked: boolean;
+// export interface RadioGroupContextValue extends Omit<RadioGroupState, 'props'> {
+//   // isChecked: boolean;
+// }
+export interface RadioGroupContextValue {
+  /**
+   * The currently selected RadioButton's key
+   */
+  value: string | null;
+
+  /**
+   * Updates the selected button and calls the client’s onChange callback
+   */
+  onChange?: (key: string) => void;
+
+  /**
+   * Updates the selected button's ref to set as the default tabbable element
+   */
+  updateSelectedButtonRef?: (ref: React.RefObject<any>) => void;
+
+  /**
+   * Array of radio button keys in the group
+   */
+  buttonKeys?: string[];
 }
 
 export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
