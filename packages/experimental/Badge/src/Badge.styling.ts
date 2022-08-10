@@ -44,7 +44,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
         height: tokens.iconSize,
         width: tokens.iconSize,
       }),
-      ['width', 'height', 'iconSize', 'iconColor', 'color'],
+      ['iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({
