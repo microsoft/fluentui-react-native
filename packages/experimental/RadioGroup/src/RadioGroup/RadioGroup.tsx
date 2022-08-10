@@ -27,7 +27,7 @@ export const RadioGroup = compose<RadioGroupType>({
         return null;
       }
 
-      const { accessibilityLabel, label, defaultTabbableElement, isCircularNavigation, accessibilityRole, ...mergedProps } = mergeProps(
+      const { accessibilityLabel, label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(
         radioGroup.props,
         final,
       );
@@ -45,7 +45,7 @@ export const RadioGroup = compose<RadioGroupType>({
 
       return (
         <RadioGroupProvider value={radioGroup.state.context}>
-          <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel ?? label} accessibilityRole={accessibilityRole}>
+          <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel ?? label}>
             {label && <Slots.label>{label}</Slots.label>}
             <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
               {children}
