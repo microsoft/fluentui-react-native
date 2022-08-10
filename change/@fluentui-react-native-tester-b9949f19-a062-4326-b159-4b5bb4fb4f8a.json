@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "remove platform status",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
