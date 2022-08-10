@@ -40,7 +40,7 @@ The `Switch` component has six slots. The slots behave as follows:
 - `root` - The outer container representing the `Switch` itself.
 - `label` - If specified, renders the name of the Switch as text.
 - `track` - The container for the thumb.
-- `thumb` - Typically a circle, its location informs the user of the Switch's toggle state.
+- `thumb` - By default a circle. Its location informs the user of the Switch's toggle state.
 - `toggleContainer` - Container for the thumb and track.
 - `onOffText` - If specified, renders the the toggle state of the Switch as text.
 
@@ -96,7 +96,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
 ### Styling Tokens
 
-Tokens can be used to customize the styling of the control by using the `customize` function on the `Switch`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Button` has the following tokens:
+Tokens can be used to customize the styling of the control by using the `customize` function on the `Switch`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Switch` has the following tokens:
 
 ```ts
 export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
@@ -234,7 +234,7 @@ A hovered `Switch` changes styling to communicate that the user has placed a cur
 
 #### Focused state
 
-A focused `Switch` changes styling to communicate that the user has placed keyboard focus on it. One aspect of that styling is the addition of a border.
+A focused `Switch` changes styling to communicate that the user has placed keyboard focus on it. Specifically, a border is drawn around the control.
 
 #### Pressed state
 
@@ -257,7 +257,7 @@ It is possible to override key behaviors by specifying `onKeyUp` or `onKeyDown`,
 
 - Cursor moves onto the Switch: Should immediately change the styling of the `Switch` so that it appears to be hovered.
 - Cursor moves out of Switch: Should immediately remove the hovered styling of the `Switch`.
-- Mouse click: Should execute the `Switch` and move focus to its target.
+- Mouse click: Should toggle the `Switch` and move focus to its target.
 
 #### Touch interaction
 
