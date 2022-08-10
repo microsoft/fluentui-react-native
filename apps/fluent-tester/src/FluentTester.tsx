@@ -53,7 +53,7 @@ const TestListSeparator = Separator.customize((t) => ({
 }));
 
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  // filters and sort tests alphabetically
+  // filters and sorts tests alphabetically
   const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
   const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
