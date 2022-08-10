@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "combine testPages",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
