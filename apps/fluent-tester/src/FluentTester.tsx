@@ -53,10 +53,8 @@ const TestListSeparator = Separator.customize((t) => ({
 }));
 
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  // filters for tests specific to each platform
+  // filters and sort tests alphabetically
   const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
-
-  // sort tests alphabetically by name
   const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
   const { initialTest, enableSinglePaneView } = props;
