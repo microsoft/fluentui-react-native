@@ -110,7 +110,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
 
   /**
-   * States that can be applied to a button
+   * States that can be applied to a switch
    */
   hovered?: SwitchTokens;
   focused?: SwitchTokens;
