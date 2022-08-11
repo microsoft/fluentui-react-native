@@ -168,6 +168,8 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
 export type SwitchState = IPressableState & { toggled?: boolean };
 
+export type textBeingTestedStates = 'none' | 'onText' | 'offText' | 'done';
+
 export interface SwitchInfo {
   props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
   state: SwitchState;

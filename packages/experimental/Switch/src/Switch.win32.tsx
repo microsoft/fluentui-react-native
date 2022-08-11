@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View, AccessibilityInfo } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
+import { switchName, SwitchType, SwitchState, SwitchProps, textBeingTestedStates } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
@@ -42,27 +42,69 @@ export const Switch = compose<SwitchType>({
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
     const { onText, offText } = userProps;
     const [testText, setTestText] = React.useState(null);
-    const [finalWidth, setFinalWidth] = React.useState(-1);
-    const [textBeingTested, setTextBeingTested] = React.useState('none');
+    const [finalWidth, setFinalWidth] = React.useState<number>(-1);
+    const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('none');
+    const offTextWidth = React.useRef(-1);
+    const onTextWidth = React.useRef(-1);
+    const switch_ref = React.useRef(null);
+    // const [refVisible, setRefVisible] = useState(false);
+
+    // React.useEffect(()=>{
+    //   measureOnOffTexts(-1);
+    // },[]);
+
+    React.useEffect(() => {
+      // console.log('stage:', textBeingTested);
+      switch_ref?.current?.measure((x, y, width, height) => {
+        measureOnOffTexts(width);
+      });
+    }, [textBeingTested]);
+
+    React.useEffect(() => {
+      if (textBeingTested === 'done') {
+        setTextBeingTested('none');
+      }
+    }, [onText, offText]);
+
+    const measureOnOffTexts = (measuredWidth) => {
+      switch (textBeingTested) {
+        case 'none':
+          setFinalWidth(-1);
+          setTextBeingTested('onText');
+          setTestText(onText);
+          console.log('A', measuredWidth, finalWidth);
+          break;
+        case 'onText':
+          setFinalWidth(-1);
+          onTextWidth.current = measuredWidth;
+          setTextBeingTested('offText');
+          setTestText(offText);
+          console.log('B', measuredWidth, finalWidth);
+          break;
+        case 'offText':
+          if (measuredWidth > finalWidth) {
+            setFinalWidth(measuredWidth);
+          }
+          setTextBeingTested('done');
+          setTestText(null);
+          console.log('C', measuredWidth, finalWidth);
+          offTextWidth.current = measuredWidth;
+          break;
+        case 'done':
+          if (measuredWidth > finalWidth) {
+            setFinalWidth(measuredWidth);
+          }
+          // setFinalWidth(measuredWidth);
+          console.log('D', measuredWidth, finalWidth);
+
+          break;
+      }
+      // console.log('textBeingTested: ', textBeingTested, 'measuredWidth: ', measuredWidth);
+    };
 
     const onLayout = (event) => {
-      const measuredWidth = event.nativeEvent.layout.width;
-      if (textBeingTested === 'none') {
-        setFinalWidth(-1);
-        setTextBeingTested('onText');
-        setTestText(onText);
-        console.log('A');
-      } else if (textBeingTested === 'onText') {
-        setFinalWidth(measuredWidth);
-        setTextBeingTested('offText');
-        setTestText(offText);
-      } else if (textBeingTested === 'offText') {
-        if (measuredWidth > finalWidth) {
-          setFinalWidth(measuredWidth);
-        }
-        setTextBeingTested('done');
-        setTestText(null);
-      }
+      // measureOnOffTexts(event.nativeEvent.layout.width);
+      console.log('layout', event.nativeEvent.layout.width);
     };
 
     // now return the handler for finishing render
@@ -75,9 +117,9 @@ export const Switch = compose<SwitchType>({
       const currentOpacity = testText ? 0 : 1;
       const newMinWidth = testText ? null : { minWidth: finalWidth };
       return (
-        <Slots.root onLayout={onLayout} {...mergedProps} style={[{ opacity: currentOpacity }, newMinWidth]}>
+        <Slots.root {...mergedProps} style={[{ opacity: currentOpacity }]}>
           <Slots.label>{label}</Slots.label>
-          <Slots.toggleContainer>
+          <Slots.toggleContainer onLayout={onLayout} ref={switch_ref} style={newMinWidth}>
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
