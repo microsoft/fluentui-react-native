@@ -42,7 +42,7 @@ export const Switch = compose<SwitchType>({
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
     const { onText, offText } = userProps;
     const [onOffTextTest, setOnOffTextTest] = React.useState(null);
-    const [finalWidth, setFinalWidth] = React.useState<number>(-1);
+    const [finalWidth, setFinalWidth] = React.useState<number>(0);
     const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('init');
     const toggleContainerRef = React.useRef(null);
 
