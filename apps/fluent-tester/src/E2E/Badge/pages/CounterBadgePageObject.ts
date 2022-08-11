@@ -17,7 +17,7 @@ class CounterBadgePageObject extends BasePage {
     return this._primaryComponent.getText();
   }
   getSecondaryComponentText(): string {
-    return this._primaryComponent.getText();
+    return this._secondaryComponent.getText();
   }
   getTertiaryComponentText(): string {
     return this._tertiaryComponent.getText();

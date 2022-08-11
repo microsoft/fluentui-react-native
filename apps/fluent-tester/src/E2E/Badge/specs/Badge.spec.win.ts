@@ -33,11 +33,11 @@ describe('CounterBadge Testing', () => {
     expect(CounterBadgePageObject.getPrimaryComponentText()).toEqual('77');
     expect(CounterBadgePageObject.didAssertPopup()).toBeFalsy(CounterBadgePageObject.ERRORMESSAGE_ASSERT);
   });
-  it('Validate accessibilityLabel from `name` prop', () => {
+  it('Validate overflowCount prop', () => {
     expect(CounterBadgePageObject.getSecondaryComponentText()).toEqual('1000+');
     expect(CounterBadgePageObject.didAssertPopup()).toBeFalsy(CounterBadgePageObject.ERRORMESSAGE_ASSERT);
   });
-  it('Validate accessibilityHint', () => {
+  it('Validate showZero prop', () => {
     expect(CounterBadgePageObject.getTertiaryComponentText()).toEqual('0');
     expect(CounterBadgePageObject.didAssertPopup()).toBeFalsy(CounterBadgePageObject.ERRORMESSAGE_ASSERT);
   });
