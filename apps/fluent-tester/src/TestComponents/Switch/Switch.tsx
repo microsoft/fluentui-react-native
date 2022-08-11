@@ -76,7 +76,7 @@ const LabelPosition: React.FunctionComponent = () => {
 const OnOffText: React.FunctionComponent = () => {
   return (
     <View style={commonTestStyles.settingsPicker}>
-      <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={'On'} offText={'Off'} />
+      <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={'WWW'} offText={'iii'} />
       <Switch defaultChecked={true} labelPosition={'after'} label={'Autosave'} onText={'On'} offText={'Off'} />
       <Switch defaultChecked={true} labelPosition={'above'} label={'Autosave'} onText={'On'} offText={'Off'} />
     </View>

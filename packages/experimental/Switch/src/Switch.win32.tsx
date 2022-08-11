@@ -1,4 +1,5 @@
 /** @jsx withSlots */
+import * as React from 'react';
 import { View, AccessibilityInfo } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
@@ -39,6 +40,30 @@ export const Switch = compose<SwitchType>({
     const switchInfo = useSwitch(userProps);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
+    const { onText, offText } = userProps;
+    const [testText, setTestText] = React.useState(null);
+    const [finalWidth, setFinalWidth] = React.useState(-1);
+    const [textBeingTested, setTextBeingTested] = React.useState('none');
+
+    const onLayout = (event) => {
+      const measuredWidth = event.nativeEvent.layout.width;
+      if (textBeingTested === 'none') {
+        setFinalWidth(-1);
+        setTextBeingTested('onText');
+        setTestText(onText);
+        console.log('A');
+      } else if (textBeingTested === 'onText') {
+        setFinalWidth(measuredWidth);
+        setTextBeingTested('offText');
+        setTestText(offText);
+      } else if (textBeingTested === 'offText') {
+        if (measuredWidth > finalWidth) {
+          setFinalWidth(measuredWidth);
+        }
+        setTextBeingTested('done');
+        setTestText(null);
+      }
+    };
 
     // now return the handler for finishing render
     return (final: SwitchProps) => {
@@ -47,15 +72,16 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-
+      const currentOpacity = testText ? 0 : 1;
+      const newMinWidth = testText ? null : { minWidth: finalWidth };
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root onLayout={onLayout} {...mergedProps} style={[{ opacity: currentOpacity }, newMinWidth]}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
+            {displayOnOffText && <Slots.onOffText>{testText ? testText : onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
         </Slots.root>
       );
