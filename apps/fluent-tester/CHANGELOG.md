@@ -1,8 +1,59 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 08 Aug 2022 21:40:41 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Aug 2022 22:49:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.85.2
+
+Thu, 11 Aug 2022 22:49:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/switch to v0.5.0
+
+## 0.85.1
+
+Thu, 11 Aug 2022 11:02:07 GMT
+
+### Patches
+
+- Added dot to the CounterBadge (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.36
+- Bump @fluentui-react-native/badge to v0.1.20
+
+## 0.85.0
+
+Wed, 10 Aug 2022 23:40:09 GMT
+
+### Minor changes
+
+- combine testPages (joannaquu@gmail.com)
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.7.0
+
+## 0.84.3
+
+Wed, 10 Aug 2022 22:24:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.13.0
+
+## 0.84.2
+
+Wed, 10 Aug 2022 20:10:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.35
+
+## 0.84.1
+
+Wed, 10 Aug 2022 18:25:08 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/switch to v0.4.1
 
 ## 0.84.0
 

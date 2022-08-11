@@ -41,7 +41,7 @@ export const Switch = compose<SwitchType>({
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
     const { onText, offText } = userProps;
-    const [onOffTextText, setOnOffTextTest] = React.useState(null);
+    const [onOffTextTest, setOnOffTextTest] = React.useState(null);
     const [finalWidth, setFinalWidth] = React.useState<number>(-1);
     const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('init');
     const toggleContainerRef = React.useRef(null);
@@ -99,8 +99,8 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-      const currentOpacity = onOffTextText ? 0 : 1; // hides the control during measurements
-      const newMinWidth = onOffTextText ? null : { minWidth: finalWidth };
+      const currentOpacity = onOffTextTest ? 0 : 1; // hides the control during measurements
+      const newMinWidth = onOffTextTest ? null : { minWidth: finalWidth };
 
       return (
         <Slots.root {...mergedProps} style={[{ opacity: currentOpacity }]}>
@@ -109,7 +109,7 @@ export const Switch = compose<SwitchType>({
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffTextText ? onOffTextText : onOffText}</Slots.onOffText>}
+            {displayOnOffText && <Slots.onOffText>{onOffTextTest ? onOffTextTest : onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
         </Slots.root>
       );
