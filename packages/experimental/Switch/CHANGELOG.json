@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Thu, 11 Aug 2022 22:49:12 GMT",
+      "tag": "@fluentui-react-native/switch_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "duomaster01@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "25f9f2b38dc274bb43b5231c4a6ee4d88a555ce9",
+            "comment": "Replaced LayoutAnimation with animationClass"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Aug 2022 18:25:08 GMT",
       "tag": "@fluentui-react-native/switch_v0.4.1",
       "version": "0.4.1",
