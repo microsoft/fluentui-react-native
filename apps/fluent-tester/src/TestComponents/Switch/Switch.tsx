@@ -18,17 +18,12 @@ const styles = StyleSheet.create({
 });
 
 const StandardUsage: React.FunctionComponent = () => {
-  const [onText, setOnText] = React.useState('iii');
   return (
     <View style={commonTestStyles.settingsPicker}>
-      <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={onText} offText={'WWW'} />
-      <Button onClick={() => setOnText('WWWWWWWWW')}>Extend</Button>
-      <Button onClick={() => setOnText('i')}>Shrink</Button>
-
-      {/* <Switch defaultChecked={true} label={'Default Checked True'} />
+      <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
-      <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled /> */}
+      <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled />
     </View>
   );
 };
@@ -81,7 +76,7 @@ const LabelPosition: React.FunctionComponent = () => {
 const OnOffText: React.FunctionComponent = () => {
   return (
     <View style={commonTestStyles.settingsPicker}>
-      <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={'WWW'} offText={'iii'} />
+      <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={'On'} offText={'Off'} />
       <Switch defaultChecked={true} labelPosition={'after'} label={'Autosave'} onText={'On'} offText={'Off'} />
       <Switch defaultChecked={true} labelPosition={'above'} label={'Autosave'} onText={'On'} offText={'Off'} />
     </View>
@@ -94,30 +89,30 @@ const toggleSections: TestSection[] = [
     testID: SWITCH_TESTPAGE,
     component: () => <StandardUsage />,
   },
-  // {
-  //   name: 'onChange Usage',
-  //   component: () => <OnChangeUsage />,
-  // },
-  // {
-  //   name: 'Control Switch Values',
-  //   component: () => <ControlSwitchValues />,
-  // },
-  // {
-  //   name: 'Label Position',
-  //   component: () => <LabelPosition />,
-  // },
-  // {
-  //   name: 'On/Off Text',
-  //   component: () => <OnOffText />,
-  // },
-  // {
-  //   name: 'Customized Tokens',
-  //   component: () => <CustomizedSwitch />,
-  // },
-  // {
-  //   name: 'Switch E2E Testing',
-  //   component: () => <E2ESwitchTest />,
-  // },
+  {
+    name: 'onChange Usage',
+    component: () => <OnChangeUsage />,
+  },
+  {
+    name: 'Control Switch Values',
+    component: () => <ControlSwitchValues />,
+  },
+  {
+    name: 'Label Position',
+    component: () => <LabelPosition />,
+  },
+  {
+    name: 'On/Off Text',
+    component: () => <OnOffText />,
+  },
+  {
+    name: 'Customized Tokens',
+    component: () => <CustomizedSwitch />,
+  },
+  {
+    name: 'Switch E2E Testing',
+    component: () => <E2ESwitchTest />,
+  },
 ];
 
 export const SwitchTest: React.FunctionComponent = () => {
