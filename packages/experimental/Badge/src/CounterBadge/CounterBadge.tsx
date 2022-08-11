@@ -22,7 +22,7 @@ export const CounterBadge = compose<CounterBadgeType>({
     const iconProps = createIconProps(userProps.icon);
     const badge = useCounterBadge(userProps);
 
-    const Slots = useSlots(badge.props, (layer) => badgeLookup(layer, badge.props) || (layer === 'dot' && badge.props['dot']));
+    const Slots = useSlots(badge.props, (layer) => badgeLookup(layer, badge.props));
 
     return (final: CounterBadgeProps, ...children: ReactNode[]) => {
       const { count, icon, iconPosition = 'before', overflowCount, dot, ...mergedProps } = mergeProps(badge.props, final);
