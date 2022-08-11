@@ -15,7 +15,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       borderColor: 'transparent',
     },
     outline: {
-      ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: '#62ABF5' }, t),
+      ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: t.colors.brandForeground1 }, t),
       backgroundColor: t.colors.transparentBackground,
     },
     tint: {
@@ -25,7 +25,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
           color: t.colors.brandForeground1,
           borderColor: t.colors.brandStroke2,
           backgroundColorDark: globalTokens.color.outlook.shade40,
-          colorDark: '#77B7F7',
+          colorDark: globalTokens.color.brand.tint30,
           borderColorDark: globalTokens.color.outlook.shade40,
         },
         t,
@@ -33,11 +33,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
     },
     ghost: {
       backgroundColor: t.colors.transparentBackground,
-      borderColor: 'transparent',
+      borderColor: t.colors.transparentStroke,
       ...getGhostColorProps(
         {
           color: t.colors.brandForeground1,
-          colorDark: '#62ABF5',
+          colorDark: t.colors.brandForeground1,
         },
         t,
       ),
@@ -52,7 +52,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: '#62ABF5' }, t),
+        ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: t.colors.brandForeground1 }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -61,7 +61,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             color: t.colors.brandForeground1,
             borderColor: t.colors.brandStroke2,
             backgroundColorDark: globalTokens.color.outlook.shade40,
-            colorDark: '#77B7F7',
+            colorDark: globalTokens.color.brand.tint30,
             borderColorDark: globalTokens.color.outlook.shade40,
           },
           t,
@@ -71,7 +71,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: t.colors.brandForeground1,
-            colorDark: '#62ABF5',
+            colorDark: t.colors.brandForeground1,
           },
           t,
         ),
@@ -87,14 +87,14 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: '#DC5F63' }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: globalTokens.color.red.tint20 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.red.tint60,
             color: globalTokens.color.red.primary,
-            borderColor: '#F1BBBD',
+            borderColor: globalTokens.color.red.tint40,
             backgroundColorDark: globalTokens.color.red.shade40,
             colorDark: globalTokens.color.red.tint30,
             borderColorDark: globalTokens.color.red.shade30,
@@ -106,7 +106,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.red.primary,
-            colorDark: '#DC5F63',
+            colorDark: globalTokens.color.red.tint20,
           },
           t,
         ),
@@ -122,15 +122,15 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: '#E26436' }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: globalTokens.color.orange.tint20 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.darkOrange.tint60,
-            color: globalTokens.color.office.shade10, //#C33400
+            color: globalTokens.color.office.shade10,
             borderColor: globalTokens.color.office.tint50,
-            backgroundColorDark: '#411100',
+            backgroundColorDark: globalTokens.color.orange.shade40,
             colorDark: globalTokens.color.office.tint40,
             borderColorDark: globalTokens.color.office.shade40,
           },
@@ -141,7 +141,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.darkOrange.primary,
-            colorDark: '#E26436',
+            colorDark: globalTokens.color.orange.tint20,
           },
           t,
         ),
@@ -158,17 +158,17 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: '#8D7F00', colorDark: globalTokens.color.yellow.tint40 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.yellow.shade30, colorDark: globalTokens.color.yellow.tint40 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.yellow.tint60,
-            color: '#8D7F00',
+            color: globalTokens.color.yellow.shade30,
             borderColor: globalTokens.color.yellow.tint40,
             backgroundColorDark: globalTokens.color.yellow.shade40,
             colorDark: globalTokens.color.yellow.tint40,
-            borderColorDark: '#8D7F00',
+            borderColorDark: globalTokens.color.yellow.shade30,
           },
           t,
         ),
@@ -176,7 +176,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       ghost: {
         ...getGhostColorProps(
           {
-            color: '#8D7F00',
+            color: globalTokens.color.yellow.shade30,
             colorDark: globalTokens.color.yellow.tint40,
           },
           t,
@@ -193,17 +193,17 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: '#359C35' }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: globalTokens.color.green.tint20 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.green.tint60,
-            color: '#0F700F',
-            borderColor: '#A0D8A0',
+            color: globalTokens.color.green.primary,
+            borderColor: globalTokens.color.green.tint40,
             backgroundColorDark: globalTokens.color.green.shade40,
-            colorDark: '#55B155',
-            borderColorDark: '#094609',
+            colorDark: globalTokens.color.green.tint30,
+            borderColorDark: globalTokens.color.green.shade30,
           },
           t,
         ),
@@ -212,7 +212,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.green.primary,
-            colorDark: '#359C35',
+            colorDark: globalTokens.color.green.tint20,
           },
           t,
         ),
@@ -342,7 +342,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
     },
   } as BadgeTokens);
 
-export type Colors = {
+export type BadgeColors = {
   backgroundColor?: ColorValue;
   color?: ColorValue;
   iconColor?: ColorValue;
@@ -360,7 +360,7 @@ export type Colors = {
  * @param theme
  * @returns object of props - backgroundColor, color, iconColor
  */
-function getFilledColorProps(colors: Colors, theme: Theme) {
+function getFilledColorProps(colors: BadgeColors, theme: Theme) {
   const { backgroundColor, ...restColors } = colors;
   const color = restColors.color || theme.colors.neutralForegroundOnBrand;
   const backgroundColorDark = restColors.backgroundColorDark || backgroundColor;
@@ -400,7 +400,7 @@ function getFilledColorProps(colors: Colors, theme: Theme) {
  * @param theme
  * @returns object of props - color, iconColor and borderColor
  */
-function getOutlineColorProps(colors: Colors, theme: Theme) {
+function getOutlineColorProps(colors: BadgeColors, theme: Theme) {
   const { color, colorDark } = colors;
   const borderColorDark = colors.borderColorDark || colorDark;
   const themeAppearance = theme.host.appearance;
@@ -433,7 +433,7 @@ function getOutlineColorProps(colors: Colors, theme: Theme) {
  * @param theme
  * @returns object of props - backgroundColor, color, iconColor and borderColor
  */
-function getTintColorProps(colors: Colors, theme: Theme) {
+function getTintColorProps(colors: BadgeColors, theme: Theme) {
   const { backgroundColor, color, borderColor, backgroundColorDark, colorDark, borderColorDark } = colors;
 
   const themeAppearance = theme.host.appearance;
@@ -469,7 +469,7 @@ function getTintColorProps(colors: Colors, theme: Theme) {
  * @param theme
  * @returns object of props - color and iconColor
  */
-function getGhostColorProps(colors: Colors, theme: Theme) {
+function getGhostColorProps(colors: BadgeColors, theme: Theme) {
   const { color, colorDark } = colors;
   const themeAppearance = theme.host.appearance;
   switch (themeAppearance) {
@@ -490,4 +490,8 @@ function getGhostColorProps(colors: Colors, theme: Theme) {
         iconColor: theme.colors.neutralForeground3,
       };
   }
+}
+
+export function getHCProps() {
+  return {};
 }
