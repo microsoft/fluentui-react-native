@@ -1,7 +1,7 @@
-import { ColorValue } from 'react-native';
 import { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
+import { BadgeColors, getHCProps } from './useBadge';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
@@ -342,18 +342,6 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
     },
   } as BadgeTokens);
 
-export type BadgeColors = {
-  backgroundColor?: ColorValue;
-  color?: ColorValue;
-  iconColor?: ColorValue;
-  borderColor?: ColorValue;
-  backgroundColorDark?: ColorValue;
-  colorDark?: ColorValue;
-  borderColorDark?: ColorValue;
-  hcBackground?: ColorValue;
-  hcColor?: ColorValue;
-  hcBorderColor?: ColorValue;
-};
 /**
  * A function which returns object of props depending on colors and theme.
  * @param colors object
@@ -385,12 +373,11 @@ function getFilledColorProps(colors: BadgeColors, theme: Theme) {
         iconColor: colorDark,
       };
     case 'highContrast':
-      return {
-        backgroundColor: hcBackground,
-        color: hcColor,
-        iconColor: hcColor,
-        borderColor: hcBorderColor,
-      };
+      return getHCProps(theme, {
+        hcBackground: hcBackground,
+        hcColor,
+        hcBorderColor,
+      });
   }
 }
 
@@ -419,11 +406,7 @@ function getOutlineColorProps(colors: BadgeColors, theme: Theme) {
         borderColor: borderColorDark,
       };
     case 'highContrast':
-      return {
-        color: theme.colors.neutralForeground3,
-        iconColor: theme.colors.neutralForeground3,
-        borderColor: theme.colors.neutralForeground3,
-      };
+      return getHCProps(theme);
   }
 }
 
@@ -454,12 +437,7 @@ function getTintColorProps(colors: BadgeColors, theme: Theme) {
         borderColor: borderColorDark,
       };
     case 'highContrast':
-      return {
-        backgroundColor: theme.colors.transparentBackground,
-        color: theme.colors.neutralForeground3,
-        iconColor: theme.colors.neutralForeground3,
-        borderColor: theme.colors.neutralForeground3,
-      };
+      return getHCProps(theme);
   }
 }
 
@@ -485,13 +463,6 @@ function getGhostColorProps(colors: BadgeColors, theme: Theme) {
         iconColor: colorDark,
       };
     case 'highContrast':
-      return {
-        color: theme.colors.neutralForeground3,
-        iconColor: theme.colors.neutralForeground3,
-      };
+      return getHCProps(theme);
   }
-}
-
-export function getHCProps() {
-  return {};
 }

@@ -1,7 +1,7 @@
 import { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
-import { BadgeColors } from './BadgeColorTokens';
+import { BadgeColors, getHCProps } from './useBadge';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
@@ -375,12 +375,11 @@ function getFilledColorProps(colors: BadgeColors, theme: Theme) {
         iconColor: colorDark,
       };
     case 'HighContrast':
-      return {
-        backgroundColor: hcBackground,
-        color: hcColor,
-        iconColor: hcColor,
-        borderColor: hcBorderColor,
-      };
+      return getHCProps(theme, {
+        hcBackground,
+        hcColor,
+        hcBorderColor,
+      });
   }
 }
 
@@ -411,11 +410,7 @@ function getOutlineColorProps(colors: BadgeColors, theme: Theme) {
         borderColor: borderColorDark,
       };
     case 'HighContrast':
-      return {
-        color: theme.colors.neutralForeground3,
-        iconColor: theme.colors.neutralForeground3,
-        borderColor: theme.colors.neutralForeground3,
-      };
+      return getHCProps(theme);
   }
 }
 
@@ -448,12 +443,7 @@ function getTintColorProps(colors: BadgeColors, theme: Theme) {
         borderColor: borderColorDark,
       };
     case 'HighContrast':
-      return {
-        backgroundColor: theme.colors.transparentBackground,
-        color: theme.colors.neutralForeground3,
-        iconColor: theme.colors.neutralForeground3,
-        borderColor: theme.colors.neutralForeground3,
-      };
+      return getHCProps(theme);
   }
 }
 
@@ -481,9 +471,6 @@ function getGhostColorProps(colors: BadgeColors, theme: Theme) {
         iconColor: colorDark,
       };
     case 'HighContrast':
-      return {
-        color: theme.colors.neutralForeground3,
-        iconColor: theme.colors.neutralForeground3,
-      };
+      return getHCProps(theme);
   }
 }
