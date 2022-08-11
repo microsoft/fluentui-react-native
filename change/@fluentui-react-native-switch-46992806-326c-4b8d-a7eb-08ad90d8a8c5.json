@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed bug where onText and offText size differences caused the control to 'jiggle'",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "nkhalil942@gmail.com",
+  "dependentChangeType": "patch"
+}
