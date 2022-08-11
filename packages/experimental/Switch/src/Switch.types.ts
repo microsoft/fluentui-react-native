@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps, ViewStyle, ColorValue, View } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -168,19 +168,21 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
 
 export type SwitchState = IPressableState & { toggled?: boolean };
 
-export type textBeingTestedStates = 'none' | 'onText' | 'offText' | 'done';
+export type textBeingTestedStates = 'init' | 'onText' | 'offText' | 'done';
 
 export interface SwitchInfo {
   props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
   state: SwitchState;
 }
 
+export type toggleContainerProps = IViewProps & { ref: React.RefObject<View> };
+
 export interface SwitchSlotProps {
   root: React.PropsWithRef<IViewProps>;
   label: TextProps;
   track: IViewProps;
   thumb: IViewProps;
-  toggleContainer: IViewProps;
+  toggleContainer: toggleContainerProps;
   onOffText: TextProps;
 }
 

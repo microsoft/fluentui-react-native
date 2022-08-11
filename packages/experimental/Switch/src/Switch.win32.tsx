@@ -41,71 +41,56 @@ export const Switch = compose<SwitchType>({
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
     const { onText, offText } = userProps;
-    const [testText, setTestText] = React.useState(null);
+    const [onOffTextText, setOnOffTextTest] = React.useState(null);
     const [finalWidth, setFinalWidth] = React.useState<number>(-1);
-    const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('none');
-    const offTextWidth = React.useRef(-1);
-    const onTextWidth = React.useRef(-1);
-    const switch_ref = React.useRef(null);
-    // const [refVisible, setRefVisible] = useState(false);
+    const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('init');
+    const toggleContainerRef = React.useRef(null);
 
-    // React.useEffect(()=>{
-    //   measureOnOffTexts(-1);
-    // },[]);
+    /*
+      Controls the rendering of the onText and offText in order to take measurements of what the minWidth should
+      be. Having the correct minWidth prevents the control from "jiggling" when the onText and offText
+      are different sizes.
+    */
+    const measureOnOffTexts = React.useCallback(
+      (measuredWidth) => {
+        switch (textBeingTested) {
+          case 'init':
+            setTextBeingTested('onText');
+            setOnOffTextTest(onText);
+            break;
+          case 'onText':
+            setFinalWidth(-1);
+            setTextBeingTested('offText');
+            setOnOffTextTest(offText);
+            break;
+          case 'offText':
+            setFinalWidth(measuredWidth);
+            setTextBeingTested('done');
+            setOnOffTextTest(null);
+            break;
+          case 'done':
+            if (measuredWidth > finalWidth) {
+              setFinalWidth(measuredWidth);
+            }
+            break;
+        }
+      },
+      [textBeingTested, finalWidth, offText, onText],
+    );
 
+    // Each time we reach a new stage in the measureOnOffTexts method we take a measurement.
     React.useEffect(() => {
-      // console.log('stage:', textBeingTested);
-      switch_ref?.current?.measure((x, y, width, height) => {
+      toggleContainerRef?.current?.measure((_x, _y, width, _height) => {
         measureOnOffTexts(width);
       });
-    }, [textBeingTested]);
+    }, [textBeingTested, measureOnOffTexts]);
 
+    // If the user changes the either the onText or offText props we trigger a re-measurement of the onText and offText.
     React.useEffect(() => {
       if (textBeingTested === 'done') {
-        setTextBeingTested('none');
+        setTextBeingTested('init');
       }
     }, [onText, offText]);
-
-    const measureOnOffTexts = (measuredWidth) => {
-      switch (textBeingTested) {
-        case 'none':
-          setFinalWidth(-1);
-          setTextBeingTested('onText');
-          setTestText(onText);
-          console.log('A', measuredWidth, finalWidth);
-          break;
-        case 'onText':
-          setFinalWidth(-1);
-          onTextWidth.current = measuredWidth;
-          setTextBeingTested('offText');
-          setTestText(offText);
-          console.log('B', measuredWidth, finalWidth);
-          break;
-        case 'offText':
-          if (measuredWidth > finalWidth) {
-            setFinalWidth(measuredWidth);
-          }
-          setTextBeingTested('done');
-          setTestText(null);
-          console.log('C', measuredWidth, finalWidth);
-          offTextWidth.current = measuredWidth;
-          break;
-        case 'done':
-          if (measuredWidth > finalWidth) {
-            setFinalWidth(measuredWidth);
-          }
-          // setFinalWidth(measuredWidth);
-          console.log('D', measuredWidth, finalWidth);
-
-          break;
-      }
-      // console.log('textBeingTested: ', textBeingTested, 'measuredWidth: ', measuredWidth);
-    };
-
-    const onLayout = (event) => {
-      // measureOnOffTexts(event.nativeEvent.layout.width);
-      console.log('layout', event.nativeEvent.layout.width);
-    };
 
     // now return the handler for finishing render
     return (final: SwitchProps) => {
@@ -114,16 +99,17 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-      const currentOpacity = testText ? 0 : 1;
-      const newMinWidth = testText ? null : { minWidth: finalWidth };
+      const currentOpacity = onOffTextText ? 0 : 1; // hides the control during measurements
+      const newMinWidth = onOffTextText ? null : { minWidth: finalWidth };
+
       return (
         <Slots.root {...mergedProps} style={[{ opacity: currentOpacity }]}>
           <Slots.label>{label}</Slots.label>
-          <Slots.toggleContainer onLayout={onLayout} ref={switch_ref} style={newMinWidth}>
+          <Slots.toggleContainer ref={toggleContainerRef} style={newMinWidth}>
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{testText ? testText : onOffText}</Slots.onOffText>}
+            {displayOnOffText && <Slots.onOffText>{onOffTextText ? onOffTextText : onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
         </Slots.root>
       );
