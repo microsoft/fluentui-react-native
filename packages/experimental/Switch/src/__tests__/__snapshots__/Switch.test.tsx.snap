@@ -64,7 +64,7 @@ exports[`Switch Default 1`] = `
       Object {
         "alignItems": "center",
         "flexDirection": "row-reverse",
-        "minWidth": -1,
+        "minWidth": 0,
       }
     }
   >
@@ -168,7 +168,7 @@ exports[`Switch Disabled 1`] = `
       Object {
         "alignItems": "center",
         "flexDirection": "row-reverse",
-        "minWidth": -1,
+        "minWidth": 0,
       }
     }
   >
