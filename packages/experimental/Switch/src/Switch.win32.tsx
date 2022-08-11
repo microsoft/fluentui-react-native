@@ -59,7 +59,7 @@ export const Switch = compose<SwitchType>({
             setOnOffTextTest(onText);
             break;
           case 'onText':
-            setFinalWidth(-1);
+            setFinalWidth(0);
             setTextBeingTested('offText');
             setOnOffTextTest(offText);
             break;
