@@ -26,7 +26,6 @@ export interface RadioGroupContextValue {
 }
 
 export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
-  // isChecked: false,
   value: null,
   onChange: (/* key: string */) => {
     return;

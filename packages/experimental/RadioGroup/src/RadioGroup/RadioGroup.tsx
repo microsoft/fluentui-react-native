@@ -19,7 +19,6 @@ export const RadioGroup = compose<RadioGroupType>({
   },
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
     const radioGroup = useRadioGroup(userProps);
-    console.log('value selected: ' + radioGroup.state.context.value);
     const Slots = useSlots(userProps, (layer) => radioGroup.state[layer] || userProps[layer]);
 
     return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
