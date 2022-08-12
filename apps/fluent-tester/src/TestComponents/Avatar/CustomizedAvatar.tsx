@@ -25,6 +25,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [ringColor, setRingColor] = useState<string>(undefined);
   const [ringBackgroundColor, setRingBackgroundColor] = useState<string>('yellow');
   const [ringThickness, setRingThickness] = useState<string>('4');
+  const [ringInnerGap, setRingInnerGap] = useState<string>('4');
   const [showRing, setShowRing] = useState<boolean>(true);
 
   const CustomizedAvatar = useMemo(() => {
@@ -40,6 +41,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
       ringColor,
       ringBackgroundColor,
       ringThickness: parseInt(ringThickness),
+      ringInnerGap: parseInt(ringInnerGap),
     };
     return Avatar.customize(tokens);
   }, [
@@ -51,6 +53,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     size,
     ringColor,
     ringBackgroundColor,
+    ringInnerGap,
     ringThickness,
     fontWeight,
     fontFamily,
@@ -161,6 +164,15 @@ export const CustomizeUsage: React.FunctionComponent = () => {
                 setRingThickness(e.nativeEvent.text);
               }}
             />
+            <TextInput
+              accessibilityLabel="Ring inner gap"
+              style={commonStyles.textBox}
+              placeholder="Ring inner gap"
+              blurOnSubmit={true}
+              onSubmitEditing={(e) => {
+                setRingInnerGap(e.nativeEvent.text);
+              }}
+            />
           </View>
           <View style={{ paddingHorizontal: 20 }}>
             <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
@@ -232,6 +244,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           ringThickness={parseInt(ringThickness)}
           size={parseInt(size) as AvatarSize}
           transparentRing={!showRing}
+          ringInnerGap={parseInt(ringInnerGap)}
         />
       </View>
     </View>
