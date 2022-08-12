@@ -108,7 +108,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontLineHeight: 20,
     fontSize: 15,
     fontWeight: '600',
-    minHeight: 64,
+    minHeight: 52,
     padding: 16,
     shadowToken: notificationShadowStyle,
     hasTitle: {
@@ -116,6 +116,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       fontLineHeight: 18,
       fontSize: 13,
       fontWeight: '400',
+      minHeight: 62,
       paddingVertical: 12,
     },
     isBar: {
