@@ -48,6 +48,7 @@ exports[`Notification component tests Notification default 1`] = `
     }
   >
     <View
+      accessible={true}
       style={
         Object {
           "flex": 1,
@@ -124,8 +125,6 @@ exports[`Notification component tests Notification default 1`] = `
       <Text
         ellipsizeMode="tail"
         numberOfLines={0}
-      <View
-        accessible={true}
         style={
           Object {
             "color": "#0F6CBD",
