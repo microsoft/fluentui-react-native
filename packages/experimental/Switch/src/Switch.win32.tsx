@@ -37,14 +37,16 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const switchInfo = useSwitch(userProps);
-    // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
-    const { onText, offText } = userProps;
     const [onOffTextTest, setOnOffTextTest] = React.useState(null);
     const [finalWidth, setFinalWidth] = React.useState<number>(0);
     const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('init');
+    const { onText, offText } = userProps;
     const toggleContainerRef = React.useRef(null);
+    const switchInfo = useSwitch(userProps);
+    switchInfo.state.measuring = !!onOffTextTest;
+
+    // grab the styled slots
+    const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
 
     /*
       Controls the rendering of the onText and offText in order to take measurements of what the minWidth should
@@ -99,11 +101,10 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-      const currentOpacity = onOffTextTest ? 0 : 1; // hides the control during measurements
       const newMinWidth = onOffTextTest ? null : { minWidth: finalWidth };
 
       return (
-        <Slots.root {...mergedProps} style={[{ opacity: currentOpacity }]}>
+        <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer ref={toggleContainerRef} style={newMinWidth}>
             <Slots.track>

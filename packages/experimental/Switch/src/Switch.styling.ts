@@ -30,6 +30,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           borderColor: tokens.focusStrokeColor,
           borderWidth: tokens.focusBorderWidth,
           borderRadius: tokens.focusBorderRadius,
+          opacity: tokens.opacity,
           ...layoutStyles.from(tokens, theme),
         },
       }),
