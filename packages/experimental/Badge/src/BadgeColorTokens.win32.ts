@@ -1,7 +1,7 @@
 import { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
-import { BadgeColors, getHCProps } from './useBadge';
+import { BadgeColors, getHCProps } from './colorHelper';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
