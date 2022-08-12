@@ -30,7 +30,6 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
       fontLineHeight: 18,
       fontSize: 13,
       fontWeight: '400',
-      minHeight: 62,
       paddingVertical: 12,
     },
     isBar: {
