@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Fri, 05 Aug 2022 20:00:03 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Aug 2022 23:40:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 10 Aug 2022 23:40:09 GMT
+
+### Minor changes
+
+- make NativeDatePicker specific to ios (NativeDatePicker.ios.tsx) (joannaquu@gmail.com)
 
 ## 0.6.1
 

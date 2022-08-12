@@ -1,14 +1,15 @@
 import { CounterBadgeTokens, CounterBadgeProps, CounterBadgeSlotProps, counterBadgeName } from './CounterBadge.types';
 import { UseStylingOptions, buildProps, Theme } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles } from '@fluentui-react-native/tokens';
+import { borderStyles } from '@fluentui-react-native/tokens';
 import { defaultBadgeTokens } from '../BadgeTokens';
 import { defaultBadgeColorTokens } from '../BadgeColorTokens';
 import { badgeStates, getBadgePosition } from '../Badge.styling';
+import { counterBadgeTokens } from './CounterBadgeTokens';
 
-export const counterBadgeStates: (keyof CounterBadgeTokens)[] = [...badgeStates];
+export const counterBadgeStates: (keyof CounterBadgeTokens)[] = [...badgeStates, 'dot'];
 
 export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeSlotProps, CounterBadgeTokens> = {
-  tokens: [defaultBadgeTokens, defaultBadgeColorTokens, counterBadgeName],
+  tokens: [defaultBadgeTokens, defaultBadgeColorTokens, counterBadgeName, counterBadgeTokens],
   states: counterBadgeStates,
   slotProps: {
     root: buildProps(
@@ -19,14 +20,14 @@ export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeS
           flexDirection: 'row',
           alignSelf: 'flex-start',
           justifyContent: 'center',
-          height: tokens.height,
+          minHeight: tokens.minHeight,
           width: tokens.width,
+          paddingHorizontal: tokens.paddingHorizontal,
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'minHeight', 'paddingHorizontal', 'bottom', 'right', 'top', 'left', ...borderStyles.keys],
     ),
     icon: buildProps(
       (tokens: CounterBadgeTokens) => ({

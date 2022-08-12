@@ -1,18 +1,48 @@
 import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const switchName = 'Switch';
 
-export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
   /**
    * Track color
    */
-  backgroundColor?: ColorValue;
+  trackColor?: ColorValue;
+
+  /**
+   * Track height
+   */
+  trackHeight?: ViewStyle['height'];
+
+  /**
+   * Track width
+   */
+  trackWidth?: ViewStyle['width'];
+
+  /**
+   * Track top margin
+   */
+  trackMarginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Track bottom margin
+   */
+  trackMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * Track left margin
+   */
+  trackMarginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Track right margin
+   */
+  trackMarginRight?: ViewStyle['marginRight'];
 
   /**
    * Thumb color
@@ -20,14 +50,54 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   thumbColor?: ColorValue;
 
   /**
+   * Thumb height and width
+   */
+  thumbSize?: number;
+
+  /**
+   * Thumb radius
+   */
+  thumbRadius?: number;
+
+  /**
+   * Thumb margin
+   */
+  thumbMargin?: ViewStyle['margin'];
+
+  /**
+   * Color of border when Switch is focused on
+   */
+  focusStrokeColor?: ColorValue;
+
+  /**
+   * Width of border when Switch is focused on
+   */
+  focusBorderWidth?: number;
+
+  /**
+   * Border Radius of border when Switch is focused on
+   */
+  focusBorderRadius?: number;
+
+  /**
    * Sets the position of the thumb
    */
   justifyContent?: ViewStyle['justifyContent'];
 
   /**
-   * The width of the button.
+   * The width of the switch.
    */
   width?: ViewStyle['width'];
+
+  /**
+   * The minWidth of the switch
+   */
+  minWidth?: ViewStyle['minWidth'];
+
+  /**
+   * The minHeight of the switch
+   */
+  minHeight?: ViewStyle['minHeight'];
 
   /**
    * The flex direction of the root
@@ -40,7 +110,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
 
   /**
-   * States that can be applied to a button
+   * States that can be applied to a switch
    */
   hovered?: SwitchTokens;
   focused?: SwitchTokens;

@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Thu, 11 Aug 2022 11:02:07 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.36",
+      "version": "1.1.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.20",
+            "commit": "302daa476f246fc9383fe9009309e7d6190ec88b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 10 Aug 2022 20:10:58 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.35",
+      "version": "1.1.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "v.kozova13@gmail.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "d9fdb0ca4b7b9437e4741a1c79c046a927f8f6a8",
+            "comment": "Investigation of codeQL bug"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 08 Aug 2022 11:50:27 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.34",
       "version": "1.1.34",
