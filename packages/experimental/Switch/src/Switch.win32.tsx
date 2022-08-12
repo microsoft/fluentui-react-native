@@ -43,7 +43,6 @@ export const Switch = compose<SwitchType>({
     const { onText, offText } = userProps;
     const toggleContainerRef = React.useRef(null);
     const switchInfo = useSwitch(userProps);
-    switchInfo.state.measuring = !!onOffTextTest;
 
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
@@ -101,10 +100,11 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
+      const currentOpacity = onOffTextTest ? 0 : 1;
       const newMinWidth = onOffTextTest ? null : { minWidth: finalWidth };
 
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} style={{opacity: currentOpacity}}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer ref={toggleContainerRef} style={newMinWidth}>
             <Slots.track>

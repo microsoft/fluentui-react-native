@@ -21,11 +21,6 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   trackMarginLeft: 4,
   trackMarginRight: 4,
   thumbMargin: 2,
-  opacity: 1,
-
-  measuring: {
-    opacity: 0,
-  },
 
   before: {
     flexDirection: 'row',

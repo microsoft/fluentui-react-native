@@ -127,7 +127,6 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   before?: SwitchTokens;
   after?: SwitchTokens;
   above?: SwitchTokens;
-  measuring?: SwitchTokens;
 }
 
 export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
@@ -172,7 +171,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   labelPosition?: 'before' | 'above' | 'after';
 }
 
-export type SwitchState = IPressableState & { toggled?: boolean; measuring?: boolean };
+export type SwitchState = IPressableState & { toggled?: boolean };
 
 export type textBeingTestedStates = 'init' | 'onText' | 'offText' | 'done';
 

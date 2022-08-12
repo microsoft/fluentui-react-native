@@ -73,7 +73,6 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     state: {
       ...pressable.state,
       toggled: checkedState,
-      measuring: false,
     },
   };
 };
