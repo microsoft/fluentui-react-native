@@ -23,11 +23,6 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
    */
   defaultValue?: string;
 
-  /*
-   ** An accessibility label for screen readers. If not provided, it will be set to the label of the radio group.
-   */
-  accessibilityLabel?: string;
-
   /**
    * The key of the selected option. If you provide this, you must maintain selection state by observing
    * onChange events and passing a new value in when changed. This overrides defaultSelectedKey
@@ -39,8 +34,6 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
    * Callback for receiving a notification when the choice has been changed
    */
   onChange?: (key: string) => void;
-
-  testID?: string;
 }
 
 export interface RadioGroupInfo {
