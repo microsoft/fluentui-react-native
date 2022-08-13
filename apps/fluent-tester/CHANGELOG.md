@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 11 Aug 2022 22:49:12 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Aug 2022 23:18:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.85.4
+
+Fri, 12 Aug 2022 23:18:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.14.0
+
+## 0.85.3
+
+Fri, 12 Aug 2022 15:05:04 GMT
+
+### Patches
+
+- Added inner gap for the Avatar (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.37
 
 ## 0.85.2
 
