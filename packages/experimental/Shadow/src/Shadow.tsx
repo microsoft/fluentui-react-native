@@ -11,6 +11,16 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
     const child = childrenArray[0];
+
+    if (__DEV__) {
+      if (childrenArray.length !== 1) {
+        console.warn('Shadow must only have one child');
+      }
+      if (child.type != View) {
+        console.warn('Shadow child must be a view');
+      }
+    }
+
     const childWithKeyShadow = React.cloneElement(child, mergeProps(child.props, { style: shadowTokenStyleSet.key }));
 
     return <View {...mergedProps}>{childWithKeyShadow}</View>;
