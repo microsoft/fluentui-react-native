@@ -2,11 +2,6 @@ import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { NotificationTokens } from './Notification.types';
 
-const emptyShadowStyle = {
-  ambient: { x: 0, y: 0, blur: 0, color: '#00000000' },
-  key: { x: 0, y: 0, blur: 0, color: '#00000000' },
-};
-
 const notificationShadowStyle = {
   ambient: { x: 0, y: 8, blur: 8, color: '#00000024' },
   key: { x: 0, y: 0, blur: 1, color: '#0000001f' },
@@ -35,7 +30,7 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     isBar: {
       borderRadius: 0,
       fontWeight: '400',
-      shadowToken: emptyShadowStyle,
+      shadowToken: undefined,
     },
     primary: {
       backgroundColor: '#EBF3FC', // brandBackground4
