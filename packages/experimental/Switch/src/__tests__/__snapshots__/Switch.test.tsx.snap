@@ -41,7 +41,7 @@ exports[`Switch Default 1`] = `
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
-      "opacity": 1,
+      "opacity": undefined,
       "padding": 2,
     }
   }
@@ -64,7 +64,6 @@ exports[`Switch Default 1`] = `
       Object {
         "alignItems": "center",
         "flexDirection": "row-reverse",
-        "minWidth": 0,
       }
     }
   >
@@ -145,7 +144,7 @@ exports[`Switch Disabled 1`] = `
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
-      "opacity": 1,
+      "opacity": undefined,
       "padding": 2,
     }
   }
@@ -168,7 +167,6 @@ exports[`Switch Disabled 1`] = `
       Object {
         "alignItems": "center",
         "flexDirection": "row-reverse",
-        "minWidth": 0,
       }
     }
   >
