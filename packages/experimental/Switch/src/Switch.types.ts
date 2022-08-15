@@ -80,11 +80,6 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   focusBorderRadius?: number;
 
   /**
-   * Opacity of Switch
-   */
-  opacity?: number;
-
-  /**
    * Sets the position of the thumb
    */
   justifyContent?: ViewStyle['justifyContent'];
