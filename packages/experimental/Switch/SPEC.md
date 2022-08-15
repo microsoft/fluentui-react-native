@@ -88,7 +88,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   onText?: string;
 
   /**
-   * Sets the position of the Switch's label
+   * Sets the position of the Switch's label. The position value 'after' is mutually exclusive with the onText and offText props.
    */
   labelPosition?: 'before' | 'above' | 'after';
 }
