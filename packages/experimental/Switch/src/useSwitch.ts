@@ -31,7 +31,15 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const focusRef = isDisabled ? null : componentRef;
 
   if (__DEV__ && defaultChecked !== undefined && checked !== undefined) {
-    console.warn('The props defaultChecked and checked are mutually exclusive. Use only one of the props, do not use both.');
+    console.warn("The props 'defaultChecked' and 'checked' are mutually exclusive. Use only one of the props, do not use both.");
+  }
+
+  if (__DEV__ && labelPosition === 'after' && (!!props.onText || !!props.offText)) {
+    props.onText = null;
+    props.offText = null;
+    console.warn(
+      "The prop labelPosition's value of \"after\" and the props 'onText' or 'offText' are mutually exclusive. Try setting 'labelPosition' value to \"before\" or \"above\" instead.",
+    );
   }
 
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
