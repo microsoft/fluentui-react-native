@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { commonTestStyles } from '../Common/styles';
-import { ColorValue, View } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
 import { ShadowToken, useTheme } from '@fluentui-react-native/theme-types';
