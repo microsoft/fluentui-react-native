@@ -40,7 +40,6 @@ export const Switch = compose<SwitchType>({
     onOffTextContainer: View,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const toggleContainerRef = React.useRef(null);
     const switchInfo = useSwitch(userProps);
 
     // grab the styled slots
@@ -57,7 +56,7 @@ export const Switch = compose<SwitchType>({
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
-          <Slots.toggleContainer ref={toggleContainerRef}>
+          <Slots.toggleContainer>
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>

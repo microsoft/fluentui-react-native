@@ -175,14 +175,12 @@ export interface SwitchInfo {
   state: SwitchState;
 }
 
-export type toggleContainerProps = IViewProps & { ref: React.RefObject<View> };
-
 export interface SwitchSlotProps {
   root: React.PropsWithRef<IViewProps>;
   label: TextProps;
   track: IViewProps;
   thumb: IViewProps;
-  toggleContainer: toggleContainerProps;
+  toggleContainer: IViewProps;
   dummyOnText: TextProps;
   dummyOffText: TextProps;
   onOffText: TextProps;
