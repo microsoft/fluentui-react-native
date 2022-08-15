@@ -34,7 +34,10 @@ export const Switch = compose<SwitchType>({
     track: View,
     thumb: View,
     toggleContainer: View,
+    dummyOnText: Text,
+    dummyOffText: Text,
     onOffText: Text,
+    onOffTextContainer: View,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
     const toggleContainerRef = React.useRef(null);
@@ -46,8 +49,7 @@ export const Switch = compose<SwitchType>({
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const offOpacity = switchInfo.state.toggled ? 0 : 1;
-      const onOpacity = switchInfo.state.toggled ? 1 : 0;
+      const onOffText = switchInfo.state.toggled ? onText : offText;
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
@@ -59,15 +61,13 @@ export const Switch = compose<SwitchType>({
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
-            <View>
-              {displayOnOffText && (
-                <View>
-                  <Text style={{ position: 'relative', opacity: onOpacity }}>{onText}</Text>
-                  <Text style={{ position: 'absolute', opacity: offOpacity }}>{offText}</Text>
-                </View>
-              )}
-            </View>
-            {/* <Text style={{ position: 'absolute', left: 0, opacity: onOpacity }}>???</Text> */}
+            {displayOnOffText && (
+              <Slots.onOffTextContainer>
+                <Slots.onOffText>{onOffText}</Slots.onOffText>
+                <Slots.dummyOnText>{onText}</Slots.dummyOnText>
+                <Slots.dummyOffText>{offText}</Slots.dummyOffText>
+              </Slots.onOffTextContainer>
+            )}
           </Slots.toggleContainer>
         </Slots.root>
       );

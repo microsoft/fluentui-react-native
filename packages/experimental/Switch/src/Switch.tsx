@@ -12,7 +12,10 @@ export const Switch = compose<SwitchType>({
     track: View,
     thumb: View,
     toggleContainer: View,
+    dummyOnText: Text,
+    dummyOffText: Text,
     onOffText: Text,
+    onOffTextContainer: View,
   },
   useRender: (_userProps: SwitchProps) => {
     return (_final: SwitchProps) => {

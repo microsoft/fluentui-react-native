@@ -103,6 +103,16 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
       }),
       ['color', ...fontStyles.keys],
     ),
+    dummyOnText: buildProps(() => ({
+      style: {
+        height: 0,
+      },
+    })),
+    dummyOffText: buildProps(() => ({
+      style: {
+        height: 0,
+      },
+    })),
     onOffText: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {

@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
 const StandardUsage: React.FunctionComponent = () => {
   return (
     <View style={commonTestStyles.settingsPicker}>
-      <Switch defaultChecked={true} labelPosition={'before'} label={'Autosave'} onText={'On'} offText={'Off'} />
       <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />

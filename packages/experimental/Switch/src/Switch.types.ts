@@ -188,7 +188,10 @@ export interface SwitchSlotProps {
   track: IViewProps;
   thumb: IViewProps;
   toggleContainer: toggleContainerProps;
+  dummyOnText: TextProps;
+  dummyOffText: TextProps;
   onOffText: TextProps;
+  onOffTextContainer: IViewProps;
 }
 
 export interface SwitchType {
