@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Mon, 15 Aug 2022 18:42:24 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Aug 2022 22:12:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.1
+
+Mon, 15 Aug 2022 22:12:03 GMT
+
+### Patches
+
+- Pass key shadow props into child instead of a new view (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.24.15
+- Bump @fluentui-react-native/experimental-shadow to v0.2.11
 
 ## 0.15.0
 
