@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Mon, 15 Aug 2022 22:12:03 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Aug 2022 23:29:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.2
+
+Mon, 15 Aug 2022 23:29:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.16
+- Bump @fluentui-react-native/experimental-shadow to v0.2.12
 
 ## 0.15.1
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Mon, 15 Aug 2022 23:29:03 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.8.20",
+      "version": "0.8.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.24.16",
+            "commit": "0f96f121a70581779472908ff4e00a914dcd1bf0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Aug 2022 22:12:03 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.8.19",
       "version": "0.8.19",
