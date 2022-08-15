@@ -41,7 +41,6 @@ exports[`Switch Default 1`] = `
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
-      "opacity": undefined,
       "padding": 2,
     }
   }
@@ -144,7 +143,6 @@ exports[`Switch Disabled 1`] = `
       "flexDirection": "row-reverse",
       "minHeight": 28,
       "minWidth": 40,
-      "opacity": undefined,
       "padding": 2,
     }
   }
