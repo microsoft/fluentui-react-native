@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Fri, 12 Aug 2022 23:18:50 GMT and should not be manually modified.
+This log was last generated on Mon, 15 Aug 2022 18:42:24 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Mon, 15 Aug 2022 18:42:24 GMT
+
+### Minor changes
+
+- remove minHeight: 62 (joannaquu@gmail.com)
 
 ## 0.14.0
 

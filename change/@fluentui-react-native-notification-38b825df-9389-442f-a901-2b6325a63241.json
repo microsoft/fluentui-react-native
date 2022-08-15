@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "remove minHeight: 62",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
