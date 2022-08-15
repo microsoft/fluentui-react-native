@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View, AccessibilityInfo } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
-import { switchName, SwitchType, SwitchState, SwitchProps, textBeingTestedStates } from './Switch.types';
+import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
@@ -37,80 +37,37 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const [onOffTextTest, setOnOffTextTest] = React.useState(null);
-    const [finalWidth, setFinalWidth] = React.useState<number>(0);
-    const [textBeingTested, setTextBeingTested] = React.useState<textBeingTestedStates>('init');
-    const { onText, offText } = userProps;
     const toggleContainerRef = React.useRef(null);
     const switchInfo = useSwitch(userProps);
 
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
 
-    /*
-      Controls the rendering of the onText and offText in order to take measurements of what the minWidth should
-      be. Having the correct minWidth prevents the control from "jiggling" when the onText and offText
-      are different sizes.
-    */
-    const measureOnOffTexts = React.useCallback(
-      (measuredWidth) => {
-        switch (textBeingTested) {
-          case 'init':
-            setTextBeingTested('onText');
-            setOnOffTextTest(onText);
-            break;
-          case 'onText':
-            setFinalWidth(0);
-            setTextBeingTested('offText');
-            setOnOffTextTest(offText);
-            break;
-          case 'offText':
-            setFinalWidth(measuredWidth);
-            setTextBeingTested('done');
-            setOnOffTextTest(null);
-            break;
-          case 'done':
-            if (measuredWidth > finalWidth) {
-              setFinalWidth(measuredWidth);
-            }
-            break;
-        }
-      },
-      [textBeingTested, finalWidth, offText, onText],
-    );
-
-    // Each time we reach a new stage in the measureOnOffTexts method we take a measurement.
-    React.useEffect(() => {
-      toggleContainerRef?.current?.measure((_x, _y, width, _height) => {
-        measureOnOffTexts(width);
-      });
-    }, [textBeingTested, measureOnOffTexts]);
-
-    // If the user changes the either the onText or offText props we trigger a re-measurement of the onText and offText.
-    React.useEffect(() => {
-      if (textBeingTested === 'done') {
-        setTextBeingTested('init');
-      }
-    }, [onText, offText]);
-
     // now return the handler for finishing render
     return (final: SwitchProps) => {
       const { label, offText, onText, labelPosition, ...mergedProps } = mergeProps(switchInfo.props, final);
-      const onOffText = switchInfo.state.toggled ? onText : offText;
+      const offOpacity = switchInfo.state.toggled ? 0 : 1;
+      const onOpacity = switchInfo.state.toggled ? 1 : 0;
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-      const currentOpacity = onOffTextTest ? 0 : 1;
-      const newMinWidth = onOffTextTest ? null : { minWidth: finalWidth };
 
       return (
-        <Slots.root {...mergedProps} style={{opacity: currentOpacity}}>
+        <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
-          <Slots.toggleContainer ref={toggleContainerRef} style={newMinWidth}>
+          <Slots.toggleContainer ref={toggleContainerRef}>
             <Slots.track>
               <Slots.thumb {...thumbAnimation} />
             </Slots.track>
-            {displayOnOffText && <Slots.onOffText>{onOffTextTest ? onOffTextTest : onOffText}</Slots.onOffText>}
+            <View>
+              {displayOnOffText && (
+                <View>
+                  <Text style={{ position: 'relative', opacity: onOpacity }}>{onText}</Text>
+                  <Text style={{ position: 'absolute', opacity: offOpacity }}>{offText}</Text>
+                </View>
+              )}
+            </View>
+            {/* <Text style={{ position: 'absolute', left: 0, opacity: onOpacity }}>???</Text> */}
           </Slots.toggleContainer>
         </Slots.root>
       );
