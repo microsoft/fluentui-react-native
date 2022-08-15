@@ -1,5 +1,4 @@
 /** @jsx withSlots */
-import * as React from 'react';
 import { View, AccessibilityInfo } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
