@@ -6623,9 +6623,9 @@ eslint-visitor-keys@^3.0.0, eslint-visitor-keys@^3.3.0:
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
 eslint@^8.0.0:
-  version "8.21.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.21.0.tgz#1940a68d7e0573cef6f50037addee295ff9be9ef"
-  integrity sha512-/XJ1+Qurf1T9G2M5IHrsjp+xrGT73RZf23xA1z5wB1ZzzEAWSZKvRwhWxTFp1rvkvCfwcvAUNAP31bhKTTGfDA==
+  version "8.22.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.22.0.tgz#78fcb044196dfa7eef30a9d65944f6f980402c48"
+  integrity sha512-ci4t0sz6vSRKdmkOGmprBo6fmI4PrphDFMy5JEq/fNS0gQkJM3rLmrqcp8ipMcdobH3KtUP40KniAE9W19S4wA==
   dependencies:
     "@eslint/eslintrc" "^1.3.0"
     "@humanwhocodes/config-array" "^0.10.4"
@@ -11787,9 +11787,9 @@ react-native-svg@^12.3.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^1.6.2:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.3.tgz#ec3c89d6ad83db6c124cbb027717e97e1516ac1d"
-  integrity sha512-U/UUIQSYoBJxMOqu+tMEtw3A82QcMBByBCdhskotg5yTs5TYQv3BDozqsfj29UWcP+/6WRYNZFfznEsLKTRybw==
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.4.tgz#2cdaa11edc7709b93c6dc32800d4a4262a2d1eb4"
+  integrity sha512-rA6DdziGVV90Q48c75he7DHIhQAMu1PX+b+jQ82wM29ZFH4pCRleFyyd1jmikCudF4a6zBQQHIsMGDlK/aOCqw==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
