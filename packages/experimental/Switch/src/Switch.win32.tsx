@@ -64,7 +64,7 @@ export const Switch = compose<SwitchType>({
                 <Slots.onOffText>{onOffText}</Slots.onOffText>
                 {/*
                   These dummy texts are both rendered, but have a height of 0.
-                  The onOffTextContainer's width as a result takes up the minimum amount
+                  The onOffTextContainer's width as a result takes up the minimum amount of space
                   to prevent the control from "jiggling" as the width of the onOffText changes when the
                   Switch toggles.
                 */}
