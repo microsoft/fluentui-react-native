@@ -23,11 +23,11 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   thumbMargin: 2,
 
   beforeContent: {
-    trackMarginLeft: 6,
+    trackMarginLeft: 8,
   },
 
   afterContent: {
-    trackMarginRight: 6,
+    trackMarginRight: 8,
   },
 
   before: {
