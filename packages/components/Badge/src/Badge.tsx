@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Children, ReactNode } from 'react';
+import { Children, ReactNode, Fragment } from 'react';
 import { View, I18nManager } from 'react-native';
 import { badgeName, BadgeType, BadgeProps } from './Badge.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -8,6 +8,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { stylingSettings } from './Badge.styling';
 import { useBadge } from './useBadge';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
   return (
@@ -29,6 +30,7 @@ export const Badge = compose<BadgeType>({
     root: View,
     icon: Icon,
     text: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: BadgeProps, useSlots: UseSlots<BadgeType>) => {
     const iconProps = createIconProps(userProps.icon);
@@ -37,17 +39,28 @@ export const Badge = compose<BadgeType>({
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge, final);
+      const { icon, iconPosition, size, shadow, ...mergedProps } = mergeProps(badge, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
+      const BadgeComponent = shadow ? Slots.shadow : Fragment;
 
       return (
-        <Slots.root {...mergedProps}>
-          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-          {showContent &&
-            Children.map(children, (child, i) => (typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child))}
-          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
-        </Slots.root>
+        <BadgeComponent>
+          <Slots.root {...mergedProps}>
+            {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+            {showContent &&
+              Children.map(children, (child, i) =>
+                typeof child === 'string' ? (
+                  <Slots.text accessible={false} key={`text-${i}`}>
+                    {child}
+                  </Slots.text>
+                ) : (
+                  child
+                ),
+              )}
+            {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+          </Slots.root>
+        </BadgeComponent>
       );
     };
   },

@@ -2,7 +2,6 @@
 
 exports[`Badge component tests Badge all props 1`] = `
 <View
-  appearance="outline"
   shape="rounded"
   style={
     Object {
@@ -39,6 +38,7 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -80,6 +80,7 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -123,14 +124,13 @@ exports[`Badge component tests Empty Badge 1`] = `
 
 exports[`CounterBadge component tests CounterBadge all props 1`] = `
 <View
-  appearance="ghost"
   shape="rounded"
   size="large"
   style={
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "transparent",
+      "backgroundColor": "#0078d4",
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderWidth": 1,
@@ -350,6 +350,7 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
 <View
   accessible={true}
   iconPosition="before"
+  shadow={false}
   style={
     Object {
       "alignItems": "center",

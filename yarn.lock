@@ -1545,6 +1545,32 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.14.0.tgz#1483caa1dd4e7097ac48a5872e93d7f896e8402c"
   integrity sha512-WNNVTMpRir6a2Voa0yu3BZJmy2w7fofrokL+nyFQM40bACtX68KDRDE96HA5W5+4q8rEaNSXV3DzSzLXm6ekfA==
 
+"@fluentui-react-native/experimental-shadow@0.2.12":
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/experimental-shadow/-/experimental-shadow-0.2.12.tgz#79b82ca1eb1c4ef346deb99bd4729df3d8d04a7d"
+  integrity sha512-g4rcHAUN6mjRTedgaW9OqUsU5bYkVPG1alr/kPH5FKOvkld/42/+ZjVDg8yl0qxYUK+/8BO7floLbGySrwhlpQ==
+  dependencies:
+    "@fluentui-react-native/framework" "0.8.0"
+    "@fluentui-react-native/theme-types" ">=0.18.0 <1.0.0"
+
+"@fluentui-react-native/framework@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.8.0.tgz#95349d454e51fc111edcb7f8dda4f55ffa7cadde"
+  integrity sha512-4p0cgbHrI4Ys1M2BBtkzzkSAP1Kc/A/kG4BBZy/P2kSS1hsLSMF7h47qERDPYyWMiU2kHElE/vQuIPr+FDKgqA==
+  dependencies:
+    "@fluentui-react-native/composition" ">=0.8.0 <1.0.0"
+    "@fluentui-react-native/default-theme" ">=0.14.0 <1.0.0"
+    "@fluentui-react-native/immutable-merge" "^1.1.7"
+    "@fluentui-react-native/memo-cache" "^1.1.7"
+    "@fluentui-react-native/merge-props" ">=0.5.0 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.18.0 <1.0.0"
+    "@fluentui-react-native/tokens" ">=0.16.0 <1.0.0"
+    "@fluentui-react-native/use-slot" ">=0.3.0 <1.0.0"
+    "@fluentui-react-native/use-slots" ">=0.7.0 <1.0.0"
+    "@fluentui-react-native/use-styling" ">=0.9.0 <1.0.0"
+    "@fluentui-react-native/use-tokens" ">=0.3.0 <1.0.0"
+    tslib "^2.3.1"
+
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.2.1.tgz#9551142a1980503752536b5050fd99f4a7f13b17"

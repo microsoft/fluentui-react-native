@@ -18,6 +18,7 @@ import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
@@ -45,6 +46,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   const [size, setSize] = useState<BadgeSize>('medium');
   const [showIcon, setShowIcon] = useState(false);
   const [iconPosition, setIconPosition] = useState<BadgeIconPosition>('before');
+  const [showShadow, setShowShadow] = useState(false);
 
   const onBadgeAppearanceChange = useCallback((value) => setBadgeAppearance(value), []);
   const onBadgeColorChange = useCallback((value) => setBadgeColor(value), []);
@@ -71,7 +73,9 @@ export const BasicBadge: React.FunctionComponent = () => {
     position: 'absolute' as FlexStyle['position'],
     size,
     shape,
+    shadow: showShadow,
   };
+  const theme = useFluentTheme();
 
   return (
     <View>
@@ -87,6 +91,9 @@ export const BasicBadge: React.FunctionComponent = () => {
           <StyledPicker prompt="Icon position" selected={iconPosition} onChange={onIconPositionChange} collection={badgeIconPositions} />
         </>
       )}
+      <ToggleButton onClick={() => setShowShadow(!showShadow)} checked={showShadow}>
+        Set {showShadow ? ' Hide shadow' : ' Show shadow'}
+      </ToggleButton>
 
       <View style={{ position: 'relative', backgroundColor: 'yellow', padding: 20, width: 200 }}>
         <Text>Parent component for the Badge</Text>
@@ -98,7 +105,9 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Badge {...badgeConfig}>Basic badge</Badge>
         )}
       </View>
-
+      <Badge size="extraLarge" shadow={true} shadowToken={theme.shadows.shadow28}>
+        Shadow Badge
+      </Badge>
       <Text>Size</Text>
       <Badge size="tiny" shape="circular" />
       <Badge size="extraSmall" shape="circular" badgeColor="red" />

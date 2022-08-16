@@ -80,6 +80,12 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       },
       ['color', 'textMargin', ...fontStyles.keys],
     ),
+    shadow: buildProps(
+      (tokens: BadgeTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
+    ),
   },
 };
 

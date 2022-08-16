@@ -3,7 +3,7 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
 
-export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
+export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (theme: Theme) =>
   ({
     iconSize: 12,
     borderWidth: globalTokens.stroke.width.thin,
@@ -11,6 +11,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
     right: globalTokens.spacing.none,
     textMargin: globalTokens.spacing.xxs,
     position: 'relative',
+    shadowToken: theme.shadows.shadow4,
     tiny: {
       minWidth: 6,
       minHeight: 6,

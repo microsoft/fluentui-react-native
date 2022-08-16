@@ -3,6 +3,8 @@ import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { ShadowProps } from '@fluentui-react-native/experimental-shadow';
+import { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const badgeName = 'Badge';
 export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'extraLarge'] as const;
@@ -49,6 +51,11 @@ export interface BadgeConfigurableProps {
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
+
+  /**
+   * Sets shadow style with `ambient` and `key` props
+   */
+  shadowToken?: ShadowToken;
 }
 
 export interface BadgeCoreProps extends IViewProps {
@@ -70,6 +77,12 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    * @defaultvalue filled
    */
   appearance?: BadgeAppearance;
+
+  /**
+   * Applies shadow according to the Fluent elevation system.
+   * @default false
+   */
+  shadow?: boolean;
 }
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, Omit<IColorTokens, 'color'> {
   /**
@@ -166,6 +179,7 @@ export interface BadgeSlotProps {
   root: IViewProps;
   icon?: IconProps;
   text: TextProps;
+  shadow?: ShadowProps;
 }
 
 export interface BadgeType {
