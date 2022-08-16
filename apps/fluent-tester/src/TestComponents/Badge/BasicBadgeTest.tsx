@@ -45,6 +45,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   const [size, setSize] = useState<BadgeSize>('medium');
   const [showIcon, setShowIcon] = useState(false);
   const [iconPosition, setIconPosition] = useState<BadgeIconPosition>('before');
+  const [showShadow, setShowShadow] = useState(false);
 
   const onBadgeAppearanceChange = useCallback((value) => setBadgeAppearance(value), []);
   const onBadgeColorChange = useCallback((value) => setBadgeColor(value), []);
@@ -71,6 +72,7 @@ export const BasicBadge: React.FunctionComponent = () => {
     position: 'absolute' as FlexStyle['position'],
     size,
     shape,
+    shadow: showShadow,
   };
 
   return (
@@ -87,6 +89,9 @@ export const BasicBadge: React.FunctionComponent = () => {
           <StyledPicker prompt="Icon position" selected={iconPosition} onChange={onIconPositionChange} collection={badgeIconPositions} />
         </>
       )}
+      <ToggleButton onClick={() => setShowShadow(!showShadow)} checked={showShadow}>
+        Set {showShadow ? ' Hide shadow' : ' Show shadow'}
+      </ToggleButton>
 
       <View style={{ position: 'relative', backgroundColor: 'yellow', padding: 20, width: 200 }}>
         <Text>Parent component for the Badge</Text>

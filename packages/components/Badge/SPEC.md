@@ -197,6 +197,11 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   right?: FlexStyle['right'];
 
   /**
+   * Sets shadow style with `ambient` and `key` props
+   */
+  shadowToken?: ShadowToken;
+
+  /**
    * Set the top edge of the Badge
    */
   top?: FlexStyle['top'];
