@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": " Label position set to 'after' will prevent onText and offText from rendering",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}
