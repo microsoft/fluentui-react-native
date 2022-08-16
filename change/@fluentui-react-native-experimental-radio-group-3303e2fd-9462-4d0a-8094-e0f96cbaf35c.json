@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "added alias tokens",
+  "comment": "Added V1 RadioGroup component",
   "packageName": "@fluentui-react-native/experimental-radio-group",
   "email": "gulnazsayed@microsoft.com",
   "dependentChangeType": "patch"
