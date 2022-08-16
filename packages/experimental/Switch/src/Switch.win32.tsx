@@ -16,7 +16,6 @@ import { useSwitch } from './useSwitch';
  */
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
   const onOffTextExists = !!userProps['onText'] || !!userProps['offText'];
-
   return (
     state[layer] ||
     userProps[layer] ||
