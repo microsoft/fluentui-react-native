@@ -15,7 +15,7 @@ import { useSwitch } from './useSwitch';
  * @returns Whether the styles that are assigned to the layer should be applied to the switch
  */
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
-  const onOffTextExists = userProps['onText'] || userProps['offText'];
+  const onOffTextExists = !!userProps['onText'] || !!userProps['offText'];
 
   return (
     state[layer] ||
