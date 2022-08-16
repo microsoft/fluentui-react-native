@@ -20,22 +20,24 @@ export const RadioGroup = compose<RadioGroupType>({
   },
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
     const radioGroup = useRadioGroup(userProps);
-    const contextValue = useRadioGroupContextValue(radioGroup);
-    const Slots = useSlots(userProps, (override: string) => radioGroup[override] || userProps[override]);
-    // const Slots = useSlots(radioGroup.props);
+    const contextValue = useRadioGroupContextValue(radioGroup.state);
+    const Slots = useSlots(userProps, (layer) => radioGroup.state[layer] || userProps[layer]);
 
     return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
-      const { accessibilityLabel, label, ...mergedProps } = mergeProps(radioGroup.props, final);
-
-      if (radioGroup == undefined) {
+      if (!radioGroup.state) {
         return null;
       }
+
+      const { accessibilityLabel, label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(
+        radioGroup.props,
+        final,
+      );
 
       // Populate the buttonKeys array
       if (children) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore - TODO, fix typing error
-        radioGroup.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
+        contextValue.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
             return child.props.buttonKey;
           }
@@ -44,9 +46,9 @@ export const RadioGroup = compose<RadioGroupType>({
 
       return (
         <RadioGroupProvider value={contextValue}>
-          <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel ?? label} accessibilityRole={'radiogroup'}>
+          <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel}>
             {label && <Slots.label>{label}</Slots.label>}
-            <Slots.container isCircularNavigation defaultTabbableElement={radioGroup.selectedButtonRef}>
+            <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
               {children}
             </Slots.container>
           </Slots.root>

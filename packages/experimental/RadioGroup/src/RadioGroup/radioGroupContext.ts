@@ -4,12 +4,9 @@ import { RadioGroupState } from './RadioGroup.types';
 /**
  * Context shared between RadioGroup and its children Radio components
  */
-export interface RadioGroupContextValue extends Omit<RadioGroupState, 'props'> {
-  // isChecked: boolean;
-}
+export interface RadioGroupContextValue extends RadioGroupState {}
 
 export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
-  // isChecked: false,
   value: null,
   onChange: (/* key: string */) => {
     return;

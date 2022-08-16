@@ -5,12 +5,7 @@ import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 
 export const radioGroupName = 'RadioGroup';
 
-export interface RadioGroupState extends Omit<RadioGroupProps, 'value' | 'onChange'> {
-  /**
-   * The RadioGroup's props we want to update
-   */
-  props: RadioGroupProps;
-
+export interface RadioGroupState extends RadioGroupProps {
   /**
    * The currently selected RadioButton's key
    */
@@ -39,7 +34,7 @@ export interface RadioGroupState extends Omit<RadioGroupProps, 'value' | 'onChan
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {}
 
-export interface RadioGroupProps {
+export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
    * Descriptive label for the RadioGroup. This will be displayed as the title of the radio group to the user.
    */
@@ -49,11 +44,6 @@ export interface RadioGroupProps {
    * The key of the RadioButton that will initially be selected
    */
   defaultValue?: string;
-
-  /*
-   ** An accessibility label for screen readers. If not provided, it will be set to the label of the radio group.
-   */
-  accessibilityLabel?: string;
 
   /**
    * The key of the selected option. If you provide this, you must maintain selection state by observing
@@ -66,8 +56,11 @@ export interface RadioGroupProps {
    * Callback for receiving a notification when the choice has been changed
    */
   onChange?: (key: string) => void;
+}
 
-  testID?: string;
+export interface RadioGroupInfo {
+  props: RadioGroupProps;
+  state: RadioGroupState;
 }
 
 export interface RadioGroupSlotProps {

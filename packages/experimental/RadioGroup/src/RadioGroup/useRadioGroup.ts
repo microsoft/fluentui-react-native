@@ -1,15 +1,13 @@
 import * as React from 'react';
-import { RadioGroupProps, RadioGroupState } from './RadioGroup.types';
+import { RadioGroupInfo, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-hooks';
 import { View } from 'react-native';
-import { useRadioGroupContext } from './radioGroupContext';
 
-export const useRadioGroup = (props: RadioGroupProps): RadioGroupState => {
-  const context = useRadioGroupContext();
-  const { value, defaultValue } = props;
+export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
+  const { value, defaultValue, onChange, isCircularNavigation, accessibilityLabel, label } = props;
 
-  // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-  const data = useValue(value || defaultValue || null, props.onChange);
+  // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
+  const data = useValue(value || defaultValue || null, onChange);
 
   const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
 
@@ -20,43 +18,23 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupState => {
     [setSelectedButtonRef],
   );
 
-  return {
-    props: { ...context },
-    value: value ?? data.selectedKey,
+  const state: RadioGroupState = {
+    value: data.selectedKey,
     onChange: data.onKeySelect,
     updateSelectedButtonRef: onSelectButtonRef,
-    selectedButtonRef,
   };
 
-  // // const { label, accessibilityLabel, value, defaultValue, ...rest } = props;
-
-  // // This hook updates the Selected Button and calls the customer's onClick function. This gets called after a button is pressed.
-  // const data = useValue(value || defaultValue || null, props.onChange);
-
-  // // const [selectedButtonRef, setSelectedButtonRef] = React.useState(React.useRef<View>(null));
-
-  // const onSelectButtonRef = React.useCallback(
-  //   (ref: React.RefObject<View>) => {
-  //     setSelectedButtonRef(ref);
-  //   },
-  //   [setSelectedButtonRef],
-  // );
-
-  // // const state: RadioGroupState = {
-  // //   context: {
-  // //     value: value ?? data.selectedKey,
-  // //     onChange: data.onKeySelect,
-  // //     updateSelectedButtonRef: onSelectButtonRef,
-  // //   },
-  // // };
-
-  // // const styleProps = useStyling(props, (override: string) => state[override] || props[override]);
-
-  // // const slotProps = mergeSettings<RadioGroupSlotProps>(styleProps, {
-  // //   root: { accessibilityLabel: accessibilityLabel ?? label, accessibilityRole: 'radiogroup', ...rest },
-  // //   label: { children: label },
-  // //   container: { isCircularNavigation: true, defaultTabbableElement: selectedButtonRef },
-  // // });
-
-  // // return { slotProps, state };
+  return {
+    props: {
+      ...props,
+      accessible: true,
+      accessibilityRole: 'radiogroup',
+      accessibilityLabel: accessibilityLabel ?? label,
+      defaultTabbableElement: selectedButtonRef,
+      isCircularNavigation: isCircularNavigation ?? true,
+    },
+    state: {
+      ...state,
+    },
+  };
 };
