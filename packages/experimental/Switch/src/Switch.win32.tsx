@@ -19,6 +19,7 @@ export const switchLookup = (layer: string, state: SwitchState, userProps: Switc
     state[layer] ||
     userProps[layer] ||
     layer === userProps['labelPosition'] ||
+    (userProps['labelPosition'] === 'before' && layer === 'contentBefore') ||
     (state['toggled'] && layer === 'toggleOn') ||
     (!state['toggled'] && layer === 'toggleOff')
   );
