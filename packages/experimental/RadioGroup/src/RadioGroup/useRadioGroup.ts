@@ -19,11 +19,9 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
   );
 
   const state: RadioGroupState = {
-    context: {
-      value: value ?? data.selectedKey,
-      onChange: data.onKeySelect,
-      updateSelectedButtonRef: onSelectButtonRef,
-    },
+    value: data.selectedKey,
+    onChange: data.onKeySelect,
+    updateSelectedButtonRef: onSelectButtonRef,
   };
 
   return {

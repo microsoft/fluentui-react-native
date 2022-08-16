@@ -8,6 +8,7 @@ import { stylingSettings } from './RadioGroup.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useRadioGroup } from './useRadioGroup';
 import { RadioGroupProvider } from './radioGroupContext';
+import { useRadioGroupContextValue } from './useRadioGroupContextValue';
 
 export const RadioGroup = compose<RadioGroupType>({
   displayName: radioGroupName,
@@ -19,6 +20,7 @@ export const RadioGroup = compose<RadioGroupType>({
   },
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
     const radioGroup = useRadioGroup(userProps);
+    const contextValue = useRadioGroupContextValue(radioGroup.state);
     const Slots = useSlots(userProps, (layer) => radioGroup.state[layer] || userProps[layer]);
 
     return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
@@ -35,7 +37,7 @@ export const RadioGroup = compose<RadioGroupType>({
       if (children) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore - TODO, fix typing error
-        radioGroup.state.context.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
+        contextValue.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
             return child.props.buttonKey;
           }
@@ -43,7 +45,7 @@ export const RadioGroup = compose<RadioGroupType>({
       }
 
       return (
-        <RadioGroupProvider value={radioGroup.state.context}>
+        <RadioGroupProvider value={contextValue}>
           <Slots.root {...mergedProps} accessibilityLabel={accessibilityLabel}>
             {label && <Slots.label>{label}</Slots.label>}
             <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
