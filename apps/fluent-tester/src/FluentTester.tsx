@@ -4,11 +4,11 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
-import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
+import { tests } from './testPages';
 
 // uncomment the below lines to enable message spy
 /**
@@ -22,7 +22,6 @@ const EmptyComponent: React.FunctionComponent = () => {
 export interface FluentTesterProps {
   initialTest?: string;
   enableSinglePaneView?: boolean;
-  enabledTests: TestDescription[];
 }
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
@@ -54,8 +53,9 @@ const TestListSeparator = Separator.customize((t) => ({
 }));
 
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  // sort tests alphabetically by name
-  const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
+  // filters and sorts tests alphabetically
+  const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
+  const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
   const { initialTest, enableSinglePaneView } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {

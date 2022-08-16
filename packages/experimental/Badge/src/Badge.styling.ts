@@ -36,7 +36,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', 'height', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'minHeight', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     icon: buildProps(
       (tokens: BadgeTokens) => ({
