@@ -22,6 +22,14 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   trackMarginRight: 2,
   thumbMargin: 2,
 
+  beforeContent: {
+    trackMarginLeft: 6,
+  },
+
+  afterContent: {
+    trackMarginRight: 6,
+  },
+
   before: {
     flexDirection: 'row',
     toggleContainerFlexDirection: 'row',

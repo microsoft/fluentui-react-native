@@ -6,11 +6,11 @@ import { defaultSwitchTokens } from './SwitchTokens';
 export const switchStates: (keyof SwitchTokens)[] = [
   'toggleOn',
   'toggleOff',
-  'beforeContent',
-  'afterContent',
   'before',
   'after',
   'above',
+  'beforeContent',
+  'afterContent',
   'hovered',
   'focused',
   'pressed',
