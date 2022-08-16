@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Made content/count display of CounterBadge according to the Web",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "vkozlova@microsoft.com",
+  "dependentChangeType": "patch"
+}
