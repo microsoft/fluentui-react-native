@@ -22,7 +22,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
     tint: {
       ...getTintColorProps(
         {
-          backgroundColor: globalTokens.color.brand.tint60,
+          backgroundColor: t.colors.brandBackground2,
           color: t.colors.brandForeground1,
           borderColor: t.colors.brandStroke2,
           backgroundColorDark: globalTokens.color.outlook.shade40,
@@ -61,7 +61,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       tint: {
         ...getTintColorProps(
           {
-            backgroundColor: globalTokens.color.brand.tint60,
+            backgroundColor: t.colors.brandBackground2,
             color: t.colors.brandForeground1,
             borderColor: t.colors.brandStroke2,
             backgroundColorDark: globalTokens.color.outlook.shade40,
@@ -289,7 +289,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getFilledColorProps(
           {
             backgroundColor: t.colors.neutralBackground1Selected,
-            color: globalTokens.color.grey[38],
+            color: t.colors.neutralForeground3,
             backgroundColorDark: t.colors.black,
             colorDark: globalTokens.color.grey[68],
             hcBackground: t.colors.neutralBackground3,
@@ -311,7 +311,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getTintColorProps(
           {
             backgroundColor: t.colors.neutralBackground1Selected,
-            color: globalTokens.color.grey[38],
+            color: t.colors.neutralForeground3,
             borderColor: globalTokens.color.grey[92],
             backgroundColorDark: globalTokens.color.grey[8],
             colorDark: globalTokens.color.grey[68],
@@ -355,7 +355,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.white,
-            color: globalTokens.color.grey[38],
+            color: t.colors.neutralForeground3,
             borderColor: globalTokens.color.grey[88],
             backgroundColorDark: globalTokens.color.grey[29],
             colorDark: globalTokens.color.grey[68],
