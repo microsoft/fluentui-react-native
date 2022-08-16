@@ -3,3 +3,4 @@ export * from './RadioGroup/RadioGroup.types';
 export * from './RadioGroup/RadioGroupTokens';
 export * from './RadioGroup/radioGroupContext';
 export * from './RadioGroup/useRadioGroup';
+export * from './RadioGroup/useRadioGroupContextValue';
