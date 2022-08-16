@@ -79,7 +79,7 @@ exports[`Switch Default 1`] = `
           "justifyContent": "flex-start",
           "marginBottom": 2,
           "marginLeft": 2,
-          "marginRight": 6,
+          "marginRight": 8,
           "marginTop": 2,
           "width": 40,
         }
@@ -181,7 +181,7 @@ exports[`Switch Disabled 1`] = `
           "justifyContent": "flex-start",
           "marginBottom": 2,
           "marginLeft": 2,
-          "marginRight": 6,
+          "marginRight": 8,
           "marginTop": 2,
           "width": 40,
         }
