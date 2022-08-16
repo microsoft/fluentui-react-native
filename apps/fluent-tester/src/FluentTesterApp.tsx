@@ -4,7 +4,6 @@ import { ThemeProvider } from '@fluentui-react-native/theme';
 import * as React from 'react';
 import { Platform, useWindowDimensions } from 'react-native';
 import { FluentTester, FluentTesterProps } from './FluentTester';
-import { tests } from './testPages';
 import { testerTheme } from './theme/index';
 
 type SizeClassIOS = 'regular' | 'compact' | undefined;
@@ -45,7 +44,7 @@ export const FluentTesterApp: React.FunctionComponent<FluentTesterProps> = (prop
 
   return (
     <ThemeProvider theme={testerTheme}>
-      <FluentTester enabledTests={tests} enableSinglePaneView={shouldShowSinglePane} {...props} />
+      <FluentTester enableSinglePaneView={shouldShowSinglePane} {...props} />
     </ThemeProvider>
   );
 };

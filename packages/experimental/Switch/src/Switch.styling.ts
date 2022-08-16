@@ -1,6 +1,6 @@
 import { switchName, SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch.types';
 import { UseStylingOptions, Theme, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, shadowStyles } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
 
 export const switchStates: (keyof SwitchTokens)[] = [
@@ -20,17 +20,29 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
   states: switchStates,
   slotProps: {
     root: buildProps(
-      (tokens: SwitchTokens) => ({
+      (tokens: SwitchTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
           flexDirection: tokens.flexDirection,
           alignSelf: 'flex-start',
-          minHeight: 28,
-          minWidth: 40,
-          padding: 6,
+          minHeight: tokens.minHeight,
+          minWidth: tokens.minWidth,
+          borderColor: tokens.focusStrokeColor,
+          borderWidth: tokens.focusBorderWidth,
+          borderRadius: tokens.focusBorderRadius,
+          ...layoutStyles.from(tokens, theme),
         },
       }),
-      ['flexDirection'],
+      [
+        'flexDirection',
+        'minHeight',
+        'minWidth',
+        'minWidth',
+        'focusStrokeColor',
+        'focusBorderWidth',
+        'focusBorderRadius',
+        ...layoutStyles.keys,
+      ],
     ),
     toggleContainer: buildProps(
       (tokens: SwitchTokens) => ({
@@ -44,41 +56,60 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
     track: buildProps(
       (tokens: SwitchTokens, theme: Theme) => ({
         style: {
+          height: tokens.trackHeight,
+          width: tokens.trackWidth,
+          alignItems: 'center',
           flexDirection: 'row',
-          height: 20,
-          width: 40,
-          backgroundColor: tokens.backgroundColor,
-          padding: 2,
-          marginTop: 2,
-          marginBottom: 2,
-          marginLeft: 4,
-          marginRight: 4,
+          backgroundColor: tokens.trackColor,
+          marginTop: tokens.trackMarginTop,
+          marginBottom: tokens.trackMarginBottom,
+          marginLeft: tokens.trackMarginLeft,
+          marginRight: tokens.trackMarginRight,
           justifyContent: tokens.justifyContent,
           ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-          ...shadowStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'justifyContent', ...borderStyles.keys],
+      [
+        'trackColor',
+        'trackMarginTop',
+        'trackMarginBottom',
+        'trackMarginLeft',
+        'trackMarginRight',
+        'trackHeight',
+        'trackWidth',
+        'justifyContent',
+        ...borderStyles.keys,
+      ],
     ),
     thumb: buildProps(
       (tokens: SwitchTokens) => ({
         style: {
           backgroundColor: tokens.thumbColor,
-          height: 14,
-          width: 14,
-          borderRadius: 17,
+          height: tokens.thumbSize,
+          width: tokens.thumbSize,
+          borderRadius: tokens.thumbRadius,
+          margin: tokens.thumbMargin,
         },
       }),
-      ['thumbColor'],
+      ['thumbColor', 'thumbSize', 'thumbRadius', 'thumbMargin'],
     ),
-    label: buildProps(() => ({
-      style: {
-        color: 'black',
-      },
-    })),
-    onOffText: buildProps(() => ({
-      style: {},
-    })),
+    label: buildProps(
+      (tokens: SwitchTokens, theme: Theme) => ({
+        style: {
+          color: tokens.color,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      ['color', ...fontStyles.keys],
+    ),
+    onOffText: buildProps(
+      (tokens: SwitchTokens, theme: Theme) => ({
+        style: {
+          color: tokens.color,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      ['color', ...fontStyles.keys],
+    ),
   },
 };

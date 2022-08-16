@@ -15,6 +15,9 @@ export const CounterBadgeTest: React.FunctionComponent = () => {
 
   return (
     <View>
+      <Text>Dot badge</Text>
+      <CounterBadge count={13} dot={true}></CounterBadge>
+      <CounterBadge count={0} dot={true}></CounterBadge>
       <Text>Here should be no Badge:</Text>
       <CounterBadge count={0}></CounterBadge>
       <Text>And here is the Badge with showZero = true</Text>
