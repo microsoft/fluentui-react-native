@@ -30,20 +30,6 @@ type ThemeProps = {
   hc?: ColorProps;
 };
 
-export function getHCProps(theme: Theme, colors?: BadgeColors) {
-  const hcColors = colors || {};
-  const hcBackground = hcColors.hcBackground || theme.colors.transparentBackground;
-  const hcColor = hcColors.hcColor || theme.colors.neutralForeground3;
-  const hcBorderColor = hcColors.hcBorderColor || theme.colors.neutralForeground3;
-
-  return {
-    backgroundColor: hcBackground,
-    color: hcColor,
-    iconColor: hcColor,
-    borderColor: hcBorderColor,
-  };
-}
-
 /**
  * A function which returns object of props depending on colors and theme.
  * @param colors object
@@ -76,9 +62,10 @@ export function getFilledColorProps(
       iconColor: colorDark,
     },
     hc: {
-      hcBackground,
-      hcColor,
-      hcBorderColor,
+      backgroundColor: hcBackground,
+      color: hcColor,
+      iconColor: hcColor,
+      borderColor: hcBorderColor,
     },
   });
 }
@@ -108,7 +95,11 @@ export function getOutlineColorProps(
       iconColor: colorDark,
       borderColor: borderColorDark,
     },
-    hc: getHCProps(theme),
+    hc: {
+      color: theme.colors.neutralForeground3,
+      iconColor: theme.colors.neutralForeground3,
+      borderColor: theme.colors.transparentStroke,
+    },
   });
 }
 
@@ -138,7 +129,12 @@ export function getTintColorProps(
       iconColor: colorDark,
       borderColor: borderColorDark,
     },
-    hc: getHCProps(theme),
+    hc: {
+      backgroundColor: theme.colors.transparentBackground,
+      color: theme.colors.neutralForeground3,
+      iconColor: theme.colors.neutralForeground3,
+      borderColor: theme.colors.transparentStroke,
+    },
   });
 }
 
@@ -164,7 +160,10 @@ export function getGhostColorProps(
       color: colorDark,
       iconColor: colorDark,
     },
-    hc: getHCProps(theme),
+    hc: {
+      color: theme.colors.neutralForeground3,
+      iconColor: theme.colors.neutralForeground3,
+    },
   });
 }
 
@@ -183,9 +182,9 @@ export function getWin32Props(theme: Theme, themeProps: ThemeProps) {
         ...themeProps.dark,
       };
     case 'HighContrast':
-      return getHCProps(theme, {
+      return {
         ...themeProps.hc,
-      });
+      };
   }
 }
 
@@ -202,8 +201,8 @@ export function getDefaultProps(theme: Theme, themeProps: ThemeProps) {
         ...themeProps.dark,
       };
     case 'highContrast':
-      return getHCProps(theme, {
+      return {
         ...themeProps.hc,
-      });
+      };
   }
 }

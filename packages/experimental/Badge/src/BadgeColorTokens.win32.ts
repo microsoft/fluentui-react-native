@@ -168,7 +168,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getFilledColorProps(
           {
             backgroundColor: globalTokens.color.yellow.primary,
-            color: globalTokens.color.grey[14],
+            color: t.colors.neutralForeground1,
           },
           t,
           getWin32Props,
@@ -250,14 +250,14 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
           {
             backgroundColor: globalTokens.color.grey[14],
             backgroundColorDark: globalTokens.color.white,
-            colorDark: globalTokens.color.grey[14],
+            colorDark: t.colors.neutralForeground1,
           },
           t,
           getWin32Props,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.grey[14], colorDark: globalTokens.color.white }, t, getWin32Props),
+        ...getOutlineColorProps({ color: t.colors.neutralForeground1, colorDark: globalTokens.color.white }, t, getWin32Props),
       },
       tint: {
         ...getTintColorProps(
@@ -276,7 +276,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       ghost: {
         ...getGhostColorProps(
           {
-            color: globalTokens.color.grey[14],
+            color: t.colors.neutralForeground1,
             colorDark: globalTokens.color.white,
           },
           t,
@@ -288,7 +288,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       filled: {
         ...getFilledColorProps(
           {
-            backgroundColor: globalTokens.color.grey[92],
+            backgroundColor: t.colors.neutralBackground1Selected,
             color: globalTokens.color.grey[38],
             backgroundColorDark: t.colors.black,
             colorDark: globalTokens.color.grey[68],
@@ -310,7 +310,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       tint: {
         ...getTintColorProps(
           {
-            backgroundColor: globalTokens.color.grey[94],
+            backgroundColor: t.colors.neutralBackground1Selected,
             color: globalTokens.color.grey[38],
             borderColor: globalTokens.color.grey[92],
             backgroundColorDark: globalTokens.color.grey[8],
@@ -337,7 +337,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getFilledColorProps(
           {
             backgroundColor: t.colors.white,
-            color: globalTokens.color.grey[14],
+            color: t.colors.neutralForeground1,
             backgroundColorDark: globalTokens.color.grey[16],
             colorDark: t.colors.neutralForegroundOnBrand,
             hcBackground: t.colors.neutralBackground3,
