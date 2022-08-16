@@ -4,7 +4,7 @@ import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
   borderWidth: 1,
-  borderRadius: 20,
+  borderRadius: 10,
   minHeight: 28,
   minWidth: 40,
   thumbSize: 14,
