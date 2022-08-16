@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "added alias tokens",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}
