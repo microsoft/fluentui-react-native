@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Mon, 08 Aug 2022 21:40:41 GMT and should not be manually modified.
+This log was last generated on Thu, 11 Aug 2022 22:49:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Thu, 11 Aug 2022 22:49:12 GMT
+
+### Minor changes
+
+- Replaced LayoutAnimation with animationClass (duomaster01@gmail.com)
+
+## 0.4.1
+
+Wed, 10 Aug 2022 18:25:08 GMT
+
+### Patches
+
+- Added Switch Documentation (nkhalil942@gmail.com)
 
 ## 0.4.0
 

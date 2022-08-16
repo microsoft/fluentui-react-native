@@ -23,7 +23,7 @@ export const ShadowTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    androidStatus: 'Backlog',
   };
 
   const description = 'A Shadow component using the Fluent Design System. Shadow components can be added to other components.';
