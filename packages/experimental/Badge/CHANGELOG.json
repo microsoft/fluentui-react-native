@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Tue, 16 Aug 2022 18:18:21 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.21",
+      "version": "0.1.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "f076ddd8c09e6d9c2e7b76bc743aee47ea26822e",
+            "comment": "Made content/count display of CounterBadge according to the Web"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 11 Aug 2022 11:02:07 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.20",
       "version": "0.1.20",
