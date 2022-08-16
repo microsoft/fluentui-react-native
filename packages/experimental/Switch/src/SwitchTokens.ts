@@ -18,8 +18,8 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   color: t.colors.neutralForeground2,
   trackMarginTop: 2,
   trackMarginBottom: 2,
-  trackMarginLeft: 4,
-  trackMarginRight: 4,
+  trackMarginLeft: 2,
+  trackMarginRight: 2,
   thumbMargin: 2,
 
   before: {
