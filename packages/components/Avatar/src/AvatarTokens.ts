@@ -161,9 +161,6 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     mink: getColorProps('mink', t),
     platinum: getColorProps('platinum', t),
     anchor: getColorProps('anchor', t),
-    burgundy: getColorProps('burgundy', t),
-    hotPink: getColorProps('hotPink', t),
-    orchid: getColorProps('orchid', t),
   } as AvatarTokens);
 
 /**
