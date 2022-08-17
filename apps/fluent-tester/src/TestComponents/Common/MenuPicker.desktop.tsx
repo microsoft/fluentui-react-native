@@ -20,19 +20,13 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
     }
   });
 
-  const MenuText = Text.customize({
-    tokens: {
-      color: 'neutralForeground2',
-    },
-  });
-
   return (
     <View style={menuPickerStyles.container}>
       <Text style={menuPickerStyles.prompt}>{prompt}</Text>
       <Menu>
         <MenuTrigger>
           <Button>
-            <MenuText>{label}</MenuText>
+            <Text>{label}</Text>
             <View style={menuPickerStyles.chevronContainer}>
               <SvgXml xml={chevronXml} />
             </View>
