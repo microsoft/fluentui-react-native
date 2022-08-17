@@ -15,18 +15,15 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       borderColor: 'transparent',
     },
     outline: {
-      ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: t.colors.brandForeground1 }, t),
+      ...getOutlineColorProps({ color: t.colors.brandForeground1 }, t),
       backgroundColor: t.colors.transparentBackground,
     },
     tint: {
       ...getTintColorProps(
         {
-          backgroundColor: globalTokens.color.brand.tint60,
-          color: t.colors.brandForeground1,
+          backgroundColor: t.colors.brandBackground2,
+          color: t.colors.brandForeground2,
           borderColor: t.colors.brandStroke2,
-          backgroundColorDark: globalTokens.color.outlook.shade40,
-          colorDark: globalTokens.color.brand.tint30,
-          borderColorDark: globalTokens.color.outlook.shade40,
         },
         t,
       ),
@@ -37,7 +34,6 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       ...getGhostColorProps(
         {
           color: t.colors.brandForeground1,
-          colorDark: t.colors.brandForeground1,
         },
         t,
       ),
@@ -52,17 +48,14 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: t.colors.brandForeground1 }, t),
+        ...getOutlineColorProps({ color: t.colors.brandForeground1 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
-            backgroundColor: globalTokens.color.brand.tint60,
-            color: t.colors.brandForeground1,
+            backgroundColor: t.colors.brandBackground2,
+            color: t.colors.brandForeground2,
             borderColor: t.colors.brandStroke2,
-            backgroundColorDark: globalTokens.color.outlook.shade40,
-            colorDark: globalTokens.color.brand.tint30,
-            borderColorDark: globalTokens.color.outlook.shade40,
           },
           t,
         ),
@@ -71,7 +64,6 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: t.colors.brandForeground1,
-            colorDark: t.colors.brandForeground1,
           },
           t,
         ),
@@ -152,7 +144,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getFilledColorProps(
           {
             backgroundColor: globalTokens.color.yellow.primary,
-            color: globalTokens.color.grey[14],
+            color: t.colors.neutralForeground1,
           },
           t,
         ),
@@ -224,13 +216,13 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
           {
             backgroundColor: globalTokens.color.grey[14],
             backgroundColorDark: globalTokens.color.white,
-            colorDark: globalTokens.color.grey[14],
+            colorDark: t.colors.neutralForeground1,
           },
           t,
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.grey[14], colorDark: globalTokens.color.white }, t),
+        ...getOutlineColorProps({ color: t.colors.neutralForeground1, colorDark: globalTokens.color.white }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -248,8 +240,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       ghost: {
         ...getGhostColorProps(
           {
-            color: globalTokens.color.grey[14],
-            colorDark: globalTokens.color.white,
+            color: t.colors.neutralForeground1,
           },
           t,
         ),
@@ -259,10 +250,8 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       filled: {
         ...getFilledColorProps(
           {
-            backgroundColor: globalTokens.color.grey[92],
-            color: globalTokens.color.grey[38],
-            backgroundColorDark: t.colors.black,
-            colorDark: globalTokens.color.grey[68],
+            backgroundColor: t.colors.neutralBackground5,
+            color: t.colors.neutralForeground3,
             hcBackground: t.colors.neutralBackground3,
             hcColor: t.colors.brandForeground1,
             hcBorderColor: t.colors.brandForeground1,
@@ -271,20 +260,14 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps(
-          { color: globalTokens.color.grey[92], colorDark: globalTokens.color.grey[68], borderColorDark: globalTokens.color.grey[32] },
-          t,
-        ),
+        ...getOutlineColorProps({ color: t.colors.neutralForeground3, borderColorDark: t.colors.neutralStroke2 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
-            backgroundColor: globalTokens.color.grey[94],
-            color: globalTokens.color.grey[38],
-            borderColor: globalTokens.color.grey[92],
-            backgroundColorDark: globalTokens.color.grey[8],
-            colorDark: globalTokens.color.grey[68],
-            borderColorDark: globalTokens.color.grey[32],
+            backgroundColor: t.colors.neutralBackground4,
+            color: t.colors.neutralForeground3,
+            borderColor: t.colors.neutralStroke2,
           },
           t,
         ),
@@ -292,8 +275,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       ghost: {
         ...getGhostColorProps(
           {
-            color: globalTokens.color.grey[92],
-            colorDark: globalTokens.color.grey[68],
+            color: t.colors.neutralForeground3,
           },
           t,
         ),
@@ -303,10 +285,8 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       filled: {
         ...getFilledColorProps(
           {
-            backgroundColor: t.colors.white,
-            color: globalTokens.color.grey[14],
-            backgroundColorDark: globalTokens.color.grey[16],
-            colorDark: t.colors.neutralForegroundOnBrand,
+            backgroundColor: t.colors.neutralBackground1,
+            color: t.colors.neutralForeground1,
             hcBackground: t.colors.neutralBackground3,
             hcColor: t.colors.brandForeground1,
             hcBorderColor: t.colors.brandForeground1,
@@ -315,17 +295,14 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.white, colorDark: globalTokens.color.white }, t),
+        ...getOutlineColorProps({ color: t.colors.neutralForegroundOnBrand }, t),
       },
       tint: {
         ...getTintColorProps(
           {
-            backgroundColor: globalTokens.color.white,
-            color: globalTokens.color.grey[38],
-            borderColor: globalTokens.color.grey[88],
-            backgroundColorDark: globalTokens.color.grey[29],
-            colorDark: globalTokens.color.grey[68],
-            borderColorDark: globalTokens.color.grey[32],
+            backgroundColor: t.colors.neutralBackground1,
+            color: t.colors.neutralForeground3,
+            borderColor: t.colors.neutralStroke2,
           },
           t,
         ),
@@ -333,8 +310,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       ghost: {
         ...getGhostColorProps(
           {
-            color: globalTokens.color.white,
-            colorDark: globalTokens.color.white,
+            color: t.colors.neutralForegroundOnBrand,
           },
           t,
         ),
