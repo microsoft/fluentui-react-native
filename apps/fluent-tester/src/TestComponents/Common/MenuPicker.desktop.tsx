@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { MenuPickerProps, collectionItem } from './MenuPicker';
-import { ButtonV1 as Button } from '@fluentui/react-native';
+import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import { SvgXml } from 'react-native-svg';
 
 const chevronXml = `
@@ -20,13 +20,19 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
     }
   });
 
+  const MenuText = Text.customize({
+    tokens: {
+      color: 'neutralForeground2',
+    },
+  });
+
   return (
     <View style={menuPickerStyles.container}>
       <Text style={menuPickerStyles.prompt}>{prompt}</Text>
       <Menu>
         <MenuTrigger>
           <Button>
-            <Text>{label}</Text>
+            <MenuText>{label}</MenuText>
             <View style={menuPickerStyles.chevronContainer}>
               <SvgXml xml={chevronXml} />
             </View>
