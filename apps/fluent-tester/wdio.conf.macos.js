@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/E2E/**/specs/*.macos.ts'],
+  specs: [['src/E2E/**/specs/*.macos.ts']],
   exclude: [
     /* 'path/to/excluded/files' */
   ],
@@ -117,15 +117,17 @@ exports.config = {
     // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
     // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
     let fluentTesterWindow = null;
-    browser.waitUntil(() => {
-      fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
-      return fluentTesterWindow != null;
-    },
-    {
-      timeout: 10000,
-      timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
-      interval: 500
-    });
+    browser.waitUntil(
+      () => {
+        fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
+        return fluentTesterWindow != null;
+      },
+      {
+        timeout: 10000,
+        timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
+        interval: 500,
+      },
+    );
 
     const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
     maxButton.click();
