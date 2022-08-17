@@ -22,16 +22,11 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontFamily: 'primary',
     fontLineHeight: 20,
     fontSize: 15,
-    fontWeight: '600',
+    fontWeight: '400',
     minHeight: 52,
     padding: 16,
+    paddingVertical: 12,
     shadowToken: notificationShadowStyle,
-    hasTitle: {
-      fontLineHeight: 18,
-      fontSize: 13,
-      fontWeight: '400',
-      paddingVertical: 12,
-    },
     isBar: {
       borderRadius: 0,
       fontWeight: '400',
