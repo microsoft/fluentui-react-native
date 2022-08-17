@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Upgrading WebDriverIO from v6 to v7",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
