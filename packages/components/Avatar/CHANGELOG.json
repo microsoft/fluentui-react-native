@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Wed, 17 Aug 2022 08:39:40 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.39",
+      "version": "1.1.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.22",
+            "commit": "1b9b227139bf4caf15b794187a92190e115cb322"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 16 Aug 2022 18:18:21 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.1.38",
+      "version": "1.1.38",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.21",
+            "commit": "f076ddd8c09e6d9c2e7b76bc743aee47ea26822e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 12 Aug 2022 15:05:04 GMT",
       "tag": "@fluentui-react-native/avatar_v1.1.37",
       "version": "1.1.37",

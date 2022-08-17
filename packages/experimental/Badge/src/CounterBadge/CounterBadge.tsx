@@ -28,12 +28,14 @@ export const CounterBadge = compose<CounterBadgeType>({
       const { count, icon, iconPosition = 'before', overflowCount, dot, ...mergedProps } = mergeProps(badge.props, final);
       const { showBadge } = badge.state;
       const displayCount = count && count > overflowCount ? `${overflowCount}+` : `${count}`;
+      const hasChildren = Children.toArray(children)[0];
+
       return showBadge ? (
         <Slots.root {...mergedProps}>
           {!dot && (
             <React.Fragment>
               {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-              <Slots.text>{displayCount}</Slots.text>
+              {!hasChildren && <Slots.text>{displayCount}</Slots.text>}
               {Children.map(children, (child, i) =>
                 typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child,
               )}
