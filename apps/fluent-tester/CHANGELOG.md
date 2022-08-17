@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 17 Aug 2022 18:45:52 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Aug 2022 20:36:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.86.1
+
+Wed, 17 Aug 2022 20:36:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.16.0
 
 ## 0.86.0
 
