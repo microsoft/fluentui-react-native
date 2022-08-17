@@ -43,9 +43,7 @@ const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
  */
 export const notificationLookup = (layer: string, userProps: NotificationProps): boolean => {
   return (
-    layer === userProps.variant ||
-    (layer === 'hasTitle' && userProps.title != undefined) ||
-    (layer === 'isBar' && ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
+    layer === userProps.variant || (layer === 'isBar' && ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
   );
 };
 

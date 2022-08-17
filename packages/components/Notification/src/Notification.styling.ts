@@ -11,7 +11,6 @@ export const notificationStates: (keyof NotificationTokens)[] = [
   'neutralBar',
   'danger',
   'warning',
-  'hasTitle',
   'isBar',
 ];
 
