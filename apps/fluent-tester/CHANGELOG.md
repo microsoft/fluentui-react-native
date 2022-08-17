@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 17 Aug 2022 08:39:40 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Aug 2022 18:45:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.86.0
+
+Wed, 17 Aug 2022 18:45:52 GMT
+
+### Minor changes
+
+- Updated Switch onText/offText example (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/switch to v0.6.0
 
 ## 0.85.9
 

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 17 Aug 2022 18:45:52 GMT",
+      "tag": "@fluentui-react-native/tester_v0.86.0",
+      "version": "0.86.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "0c9ec57d22d8524478abdf49b4fea2d8e93bcb56",
+            "comment": "Updated Switch onText/offText example"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.6.0",
+            "commit": "8b5d74371b1f3c7dc50c8d86f4e77277aac61833"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Aug 2022 08:39:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.85.9",
       "version": "0.85.9",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Thu, 11 Aug 2022 22:49:12 GMT and should not be manually modified.
+This log was last generated on Wed, 17 Aug 2022 18:45:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Wed, 17 Aug 2022 18:45:52 GMT
+
+### Minor changes
+
+-  Label position set to 'after' will prevent onText and offText from rendering (nkhalil942@gmail.com)
 
 ## 0.5.0
 
