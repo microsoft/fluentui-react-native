@@ -4,6 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
 import { E2EAvatarTest } from './E2EAvatarTest';
+import { InitialsAvatar } from './InitialsAvatar';
 
 const avatarSections: TestSection[] = [
   {
@@ -18,6 +19,10 @@ const avatarSections: TestSection[] = [
   {
     name: 'Avatar E2E',
     component: E2EAvatarTest,
+  },
+  {
+    name: 'Initials Avatar',
+    component: InitialsAvatar,
   },
 ];
 
