@@ -6,11 +6,13 @@
  */
 export const getHashCodeWeb = (str: string): number => {
   let hashCode = 0;
-  for (let len: number = str.length - 1; len >= 0; len--) {
+  for (let len: number = 0; len < str.length; len++) {
     const ch = str.charCodeAt(len);
-    const shift = len % 8;
-    hashCode ^= (ch << shift) + (ch >> (8 - shift)); // eslint-disable-line no-bitwise
+    hashCode = 31 * hashCode + ch;
+    if (hashCode < -2147483648 || hashCode > 2147483647) {
+      hashCode = ~hashCode;
+      hashCode = -1 * (hashCode + 1);
+    }
   }
-
-  return hashCode;
+  return Math.abs(hashCode);
 };
