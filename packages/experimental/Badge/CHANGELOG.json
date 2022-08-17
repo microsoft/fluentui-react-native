@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 17 Aug 2022 08:39:40 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.22",
+      "version": "0.1.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "1b9b227139bf4caf15b794187a92190e115cb322",
+            "comment": "Changed colors depending on Theme"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 16 Aug 2022 18:18:21 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.21",
       "version": "0.1.21",

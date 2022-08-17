@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Changed colors depending on Theme",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
