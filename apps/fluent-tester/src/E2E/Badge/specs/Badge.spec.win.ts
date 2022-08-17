@@ -1,6 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import BasicBadgePageObject from '../pages/BasicBadgePageObject';
-import CounterBadgePageObject from '../pages/CounterBadgePageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -21,24 +20,5 @@ describe('Badge Testing Initialization', function () {
 
     expect(BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
     expect(BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
-  });
-});
-
-describe('CounterBadge Testing', () => {
-  beforeEach(() => {
-    CounterBadgePageObject.scrollToTestElement();
-    CounterBadgePageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-  });
-  it('Validate display count', () => {
-    expect(CounterBadgePageObject.getPrimaryComponentText()).toEqual('77');
-    expect(CounterBadgePageObject.didAssertPopup()).toBeFalsy(CounterBadgePageObject.ERRORMESSAGE_ASSERT);
-  });
-  it('Validate overflowCount prop', () => {
-    expect(CounterBadgePageObject.getSecondaryComponentText()).toEqual('1000+');
-    expect(CounterBadgePageObject.didAssertPopup()).toBeFalsy(CounterBadgePageObject.ERRORMESSAGE_ASSERT);
-  });
-  it('Validate showZero prop', () => {
-    expect(CounterBadgePageObject.getTertiaryComponentText()).toEqual('0');
-    expect(CounterBadgePageObject.didAssertPopup()).toBeFalsy(CounterBadgePageObject.ERRORMESSAGE_ASSERT);
   });
 });
