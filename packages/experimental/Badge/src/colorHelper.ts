@@ -47,7 +47,6 @@ export function getFilledColorProps(
   const colorDark = restColors.colorDark || color;
   const hcBackground = restColors.hcBackground || theme.colors.neutralBackgroundInverted;
   const hcColor = restColors.hcColor || theme.colors.neutralForegroundInverted;
-  const hcBorderColor = restColors.hcBorderColor || theme.colors.transparentStroke;
   const getThemeProps = getProps || getDefaultProps;
 
   return getThemeProps(theme, {
@@ -65,7 +64,7 @@ export function getFilledColorProps(
       backgroundColor: hcBackground,
       color: hcColor,
       iconColor: hcColor,
-      borderColor: hcBorderColor,
+      borderColor: theme.colors.transparentStroke,
     },
   });
 }
@@ -82,14 +81,15 @@ export function getOutlineColorProps(
   getProps?: (theme: Theme, themeProps: ThemeProps) => Record<string, unknown>,
 ) {
   const { color } = colors;
+  const borderColor = colors.borderColor || color;
   const colorDark = colors.colorDark || color;
-  const borderColorDark = colors.borderColorDark || colorDark;
+  const borderColorDark = colors.borderColorDark || borderColor || colorDark;
   const getThemeProps = getProps || getDefaultProps;
   return getThemeProps(theme, {
     light: {
       color: color,
       iconColor: color,
-      borderColor: color,
+      borderColor: borderColor,
     },
     dark: {
       color: colorDark,
