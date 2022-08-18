@@ -193,87 +193,9 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
 </View>
 `;
 
-exports[`CounterBadge component tests CounterBadge tokens 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
-      "borderRadius": 4,
-      "borderWidth": 4,
-      "bottom": 0,
-      "flexDirection": "row",
-      "justifyContent": "center",
-      "minHeight": 24,
-      "paddingHorizontal": 4,
-      "right": 0,
-      "width": undefined,
-    }
-  }
->
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
-    style={
-      Object {
-        "color": "#ffffff",
-        "fontFamily": "Segoe UI",
-        "fontSize": 12,
-        "fontStyle": undefined,
-        "fontWeight": "400",
-        "margin": 0,
-        "textAlign": undefined,
-        "textDecorationLine": undefined,
-      }
-    }
-  >
-    undefined
-  </Text>
-</View>
-`;
+exports[`CounterBadge component tests CounterBadge tokens 1`] = `null`;
 
-exports[`CounterBadge component tests Empty Badge 1`] = `
-<View
-  style={
-    Object {
-      "alignItems": "center",
-      "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
-      "borderRadius": 4,
-      "borderWidth": 1,
-      "bottom": 0,
-      "flexDirection": "row",
-      "justifyContent": "center",
-      "minHeight": 24,
-      "paddingHorizontal": 4,
-      "right": 0,
-      "width": undefined,
-    }
-  }
->
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
-    style={
-      Object {
-        "color": "#ffffff",
-        "fontFamily": "Segoe UI",
-        "fontSize": 12,
-        "fontStyle": undefined,
-        "fontWeight": "400",
-        "margin": 0,
-        "textAlign": undefined,
-        "textDecorationLine": undefined,
-      }
-    }
-  >
-    undefined
-  </Text>
-</View>
-`;
+exports[`CounterBadge component tests Empty Badge 1`] = `null`;
 
 exports[`PresenceBadge component tests PresenceBadge props 1`] = `
 <View
