@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added more tests for Badge",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
