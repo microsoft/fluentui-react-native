@@ -212,6 +212,8 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   checked?: SwitchTokens;
   toggleOn?: SwitchTokens;
   toggleOff?: SwitchTokens;
+  beforeContent?: SwitchTokens;
+  afterContent?: SwitchTokens;
   before?: SwitchTokens;
   after?: SwitchTokens;
   above?: SwitchTokens;
