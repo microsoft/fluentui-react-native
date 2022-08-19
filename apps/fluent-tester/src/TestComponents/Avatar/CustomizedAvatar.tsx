@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Avatar, AvatarColors, AvatarSize, getHashCodeIOS } from '@fluentui-react-native/avatar';
+import { Avatar, AvatarColors, AvatarSize, getJavaHashCode } from '@fluentui-react-native/avatar';
 import { View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -65,8 +65,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
 
-  const isIOS = Platform.OS === 'ios';
-  const hashedColor = AvatarColors[getHashCodeIOS(name) % (AvatarColors.length - 3)];
+  const usesJavaHashCode = Platform.OS === 'ios' || Platform.OS === 'macos' || Platform.OS === 'android';
+  const hashedColor = AvatarColors[getJavaHashCode(name) % (AvatarColors.length - 3)];
 
   return (
     <View style={commonStyles.root}>
@@ -250,7 +250,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           ringInnerGap={parseInt(ringInnerGap)}
         />
       </View>
-      {isIOS && (
+      {usesJavaHashCode && (
         <View style={{ marginLeft: 20 }}>
           <Text>Avatar with hashed color</Text>
           <Avatar
