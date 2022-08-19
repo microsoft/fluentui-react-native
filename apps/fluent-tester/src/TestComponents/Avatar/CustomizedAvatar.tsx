@@ -65,7 +65,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
 
-  const usesJavaHashCode = Platform.OS === 'ios' || Platform.OS === 'macos' || Platform.OS === 'android';
+  const useJavaHashCode = Platform.OS === 'ios' || Platform.OS === 'macos' || Platform.OS === 'android';
   const hashedColor = AvatarColors[getJavaHashCode(name) % (AvatarColors.length - 3)];
 
   return (
@@ -250,7 +250,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           ringInnerGap={parseInt(ringInnerGap)}
         />
       </View>
-      {usesJavaHashCode && (
+      {useJavaHashCode && (
         <View style={{ marginLeft: 20 }}>
           <Text>Avatar with hashed color</Text>
           <Avatar
