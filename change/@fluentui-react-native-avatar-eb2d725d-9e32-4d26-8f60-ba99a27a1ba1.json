@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "update avatar hashing to match native avatar",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "joannaquu@gmail.com",
+  "dependentChangeType": "patch"
+}
