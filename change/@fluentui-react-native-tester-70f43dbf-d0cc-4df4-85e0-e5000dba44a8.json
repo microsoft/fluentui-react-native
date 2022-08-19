@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Added font-tokens, color as a prop. Had to rename it to badgeColor (the same reason as in Avatar). And added position as a prop",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "vkozlova@microsoft.com",
+  "dependentChangeType": "patch"
+}
