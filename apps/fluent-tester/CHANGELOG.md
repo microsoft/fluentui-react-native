@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 18 Aug 2022 18:41:33 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Aug 2022 15:32:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.87.0
+
+Fri, 19 Aug 2022 15:32:12 GMT
+
+### Minor changes
+
+- Added RadioGroup Experimental test page (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.0
+- Bump @fluentui-react-native/switch to v0.6.1
+
+### Patches
+
+- Menu Picker for desktop is now using a FURN text  element (nkhalil942@gmail.com)
 
 ## 0.86.2
 

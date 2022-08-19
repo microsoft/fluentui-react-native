@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Wed, 17 Aug 2022 18:45:52 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Aug 2022 15:32:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.1
+
+Fri, 19 Aug 2022 15:32:12 GMT
+
+### Patches
+
+- Added more space between the On/Off text, Label, and Track to align more with Fluent v9. (nkhalil942@gmail.com)
 
 ## 0.6.0
 

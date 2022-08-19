@@ -2,6 +2,41 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 19 Aug 2022 15:32:12 GMT",
+      "tag": "@fluentui-react-native/tester_v0.87.0",
+      "version": "0.87.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "f9ae6affed9978164edddee8913063f255a2d7a8",
+            "comment": "Menu Picker for desktop is now using a FURN text  element"
+          }
+        ],
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "87029244fd0d487f1130262963398b2c8702a741",
+            "comment": "Added RadioGroup Experimental test page"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.2.0",
+            "commit": "d94e6f63087a180a2e78f57eac90fdfb4feb7dd4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/switch to v0.6.1",
+            "commit": "d94e6f63087a180a2e78f57eac90fdfb4feb7dd4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 18 Aug 2022 18:41:33 GMT",
       "tag": "@fluentui-react-native/tester_v0.86.2",
       "version": "0.86.2",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Fri, 19 Aug 2022 15:32:12 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "c91a22dde35ebcc2f3de8fe4a1dc2e7959692594",
+            "comment": "Added more space between the On/Off text, Label, and Track to align more with Fluent v9."
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Aug 2022 18:45:52 GMT",
       "tag": "@fluentui-react-native/switch_v0.6.0",
       "version": "0.6.0",

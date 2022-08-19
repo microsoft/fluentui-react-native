@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added more space between the On/Off text, Label, and Track to align more with Fluent v9.",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Menu Picker for desktop is now using a FURN text  element",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}
