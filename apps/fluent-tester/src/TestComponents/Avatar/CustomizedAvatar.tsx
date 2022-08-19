@@ -65,7 +65,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
 
-  const useJavaHashCode = Platform.OS === 'ios' || Platform.OS === 'macos' || Platform.OS === 'android';
+  const useJavaHashCode = ['ios', 'macos', 'android'].includes(Platform.OS);
   const hashedColor = AvatarColors[getJavaHashCode(name) % (AvatarColors.length - 3)];
 
   return (
