@@ -4,7 +4,7 @@
  * @param str is idForColor or name
  * @returns hash code of the color
  */
-export const getHashCodeWeb = (str: string): number => {
+export const getHashCodeIOS = (str: string): number => {
   let hashCode = 0;
   for (let len: number = 0; len < str.length; len++) {
     const ch = str.charCodeAt(len);

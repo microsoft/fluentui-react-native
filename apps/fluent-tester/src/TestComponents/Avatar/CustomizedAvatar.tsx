@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Avatar, AvatarColors, AvatarSize, getHashCodeWeb } from '@fluentui-react-native/avatar';
+import { Avatar, AvatarColors, AvatarSize, getHashCodeIOS } from '@fluentui-react-native/avatar';
 import { View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -65,8 +65,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
 
-  const numColors = Platform.OS === 'ios' ? AvatarColors.length - 3 : AvatarColors.length;
-  const hashedColor = AvatarColors[getHashCodeWeb(name) % numColors];
+  const isIOS = Platform.OS === 'ios';
+  const hashedColor = AvatarColors[getHashCodeIOS(name) % (AvatarColors.length - 3)];
 
   return (
     <View style={commonStyles.root}>
@@ -250,22 +250,24 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           ringInnerGap={parseInt(ringInnerGap)}
         />
       </View>
-      <View style={{ marginLeft: 20 }}>
-        <Text>Avatar with hashed color</Text>
-        <Avatar
-          active="active"
-          activeAppearance="ring"
-          avatarColor={hashedColor}
-          initials={showInitials ? initials : undefined}
-          name={showInitials ? name : undefined}
-          ringBackgroundColor={ringBackgroundColor}
-          ringColor={ringColor}
-          ringThickness={parseInt(ringThickness)}
-          size={parseInt(size) as AvatarSize}
-          transparentRing={!showRing}
-          ringInnerGap={parseInt(ringInnerGap)}
-        />
-      </View>
+      {isIOS && (
+        <View style={{ marginLeft: 20 }}>
+          <Text>Avatar with hashed color</Text>
+          <Avatar
+            active="active"
+            activeAppearance="ring"
+            avatarColor={hashedColor}
+            initials={showInitials ? initials : undefined}
+            name={showInitials ? name : undefined}
+            ringBackgroundColor={ringBackgroundColor}
+            ringColor={ringColor}
+            ringThickness={parseInt(ringThickness)}
+            size={parseInt(size) as AvatarSize}
+            transparentRing={!showRing}
+            ringInnerGap={parseInt(ringInnerGap)}
+          />
+        </View>
+      )}
     </View>
   );
 };
