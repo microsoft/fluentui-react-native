@@ -15,10 +15,15 @@ import { useSwitch } from './useSwitch';
  * @returns Whether the styles that are assigned to the layer should be applied to the switch
  */
 export const switchLookup = (layer: string, state: SwitchState, userProps: SwitchProps): boolean => {
+  const onOffTextExists = !!userProps['onText'] || !!userProps['offText'];
   return (
     state[layer] ||
     userProps[layer] ||
     layer === userProps['labelPosition'] ||
+    (userProps['labelPosition'] === 'before' && layer === 'beforeContent') ||
+    (userProps['labelPosition'] === 'before' && onOffTextExists && layer === 'afterContent') ||
+    (userProps['labelPosition'] === 'after' && layer === 'afterContent') ||
+    (userProps['labelPosition'] === 'above' && onOffTextExists && layer === 'afterContent') ||
     (state['toggled'] && layer === 'toggleOn') ||
     (!state['toggled'] && layer === 'toggleOff')
   );

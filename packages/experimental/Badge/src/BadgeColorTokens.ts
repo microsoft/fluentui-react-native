@@ -1,145 +1,343 @@
 import { Theme, TokenSettings } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
+import { getFilledColorProps, getOutlineColorProps, getTintColorProps, getGhostColorProps } from './colorHelper';
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
     filled: {
-      backgroundColor: t.colors.brandedBackground,
-      color: t.colors.neutralForegroundInverted,
-      iconColor: t.colors.neutralForegroundInverted,
+      ...getFilledColorProps(
+        {
+          backgroundColor: t.colors.brandBackgroundStatic,
+        },
+        t,
+      ),
       borderColor: 'transparent',
     },
     outline: {
+      ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: t.colors.brandForeground1 }, t),
       backgroundColor: t.colors.transparentBackground,
-      color: t.colors.brandForeground1,
-      borderColor: t.colors.brandForeground1,
-      iconColor: t.colors.brandForeground1,
     },
     tint: {
-      backgroundColor: t.colors.brandBackground2,
-      color: t.colors.brandForeground1,
-      borderColor: t.colors.brandStroke2,
-      iconColor: t.colors.brandForeground1,
+      ...getTintColorProps(
+        {
+          backgroundColor: globalTokens.color.brand.tint60,
+          color: t.colors.brandForeground1,
+          borderColor: t.colors.brandStroke2,
+          backgroundColorDark: globalTokens.color.outlook.shade40,
+          colorDark: globalTokens.color.brand.tint30,
+          borderColorDark: globalTokens.color.outlook.shade40,
+        },
+        t,
+      ),
+    },
+    ghost: {
+      backgroundColor: t.colors.transparentBackground,
+      borderColor: t.colors.transparentStroke,
+      ...getGhostColorProps(
+        {
+          color: t.colors.brandForeground1,
+          colorDark: t.colors.brandForeground1,
+        },
+        t,
+      ),
     },
     brand: {
       filled: {
-        backgroundColor: t.colors.brandBackgroundStatic,
-        color: t.colors.neutralForegroundOnBrand,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        ...getFilledColorProps(
+          {
+            backgroundColor: t.colors.brandBackgroundStatic,
+          },
+          t,
+        ),
       },
       outline: {
-        color: t.colors.brandForeground1,
-        borderColor: t.colors.brandForeground1,
-        iconColor: t.colors.brandForeground1,
+        ...getOutlineColorProps({ color: t.colors.brandForeground1, colorDark: t.colors.brandForeground1 }, t),
       },
       tint: {
-        backgroundColor: globalTokens.color.brand.tint60,
-        color: t.colors.brandForeground1,
-        borderColor: t.colors.brandStroke2,
-        iconColor: t.colors.brandForeground1,
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.brand.tint60,
+            color: t.colors.brandForeground1,
+            borderColor: t.colors.brandStroke2,
+            backgroundColorDark: globalTokens.color.outlook.shade40,
+            colorDark: globalTokens.color.brand.tint30,
+            borderColorDark: globalTokens.color.outlook.shade40,
+          },
+          t,
+        ),
+      },
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: t.colors.brandForeground1,
+            colorDark: t.colors.brandForeground1,
+          },
+          t,
+        ),
       },
     },
     danger: {
       filled: {
-        backgroundColor: globalTokens.color.red.primary,
-        color: t.colors.neutralForegroundOnBrand,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        ...getFilledColorProps(
+          {
+            backgroundColor: globalTokens.color.red.primary,
+          },
+          t,
+        ),
       },
       outline: {
-        color: globalTokens.color.red.primary,
-        borderColor: globalTokens.color.red.primary,
-        iconColor: globalTokens.color.red.primary,
+        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: globalTokens.color.red.tint20 }, t),
       },
       tint: {
-        backgroundColor: globalTokens.color.red.tint60,
-        color: globalTokens.color.red.primary,
-        borderColor: '#F1BBBD',
-        iconColor: globalTokens.color.red.primary,
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.red.tint60,
+            color: globalTokens.color.red.primary,
+            borderColor: globalTokens.color.red.tint40,
+            backgroundColorDark: globalTokens.color.red.shade40,
+            colorDark: globalTokens.color.red.tint30,
+            borderColorDark: globalTokens.color.red.shade30,
+          },
+          t,
+        ),
       },
-    },
-    important: {
-      filled: {
-        backgroundColor: globalTokens.color.grey[14],
-        color: t.colors.neutralForegroundOnBrand,
-        iconColor: t.colors.neutralForegroundOnBrand,
-      },
-      outline: {
-        color: globalTokens.color.grey[14],
-        iconColor: globalTokens.color.grey[14],
-      },
-      tint: {
-        backgroundColor: globalTokens.color.grey[38],
-        color: t.colors.neutralForegroundOnBrand,
-        iconColor: t.colors.neutralForegroundOnBrand,
-      },
-    },
-    informative: {
-      filled: {
-        backgroundColor: globalTokens.color.grey[92],
-        color: globalTokens.color.grey[38],
-        iconColor: globalTokens.color.grey[38],
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.red.primary,
+            colorDark: globalTokens.color.red.tint20,
+          },
+          t,
+        ),
       },
     },
     severe: {
       filled: {
-        backgroundColor: globalTokens.color.darkOrange.primary,
-        color: t.colors.neutralForegroundOnBrand,
-        iconColor: t.colors.neutralForegroundOnBrand,
+        ...getFilledColorProps(
+          {
+            backgroundColor: globalTokens.color.darkOrange.primary,
+          },
+          t,
+        ),
       },
       outline: {
-        color: globalTokens.color.darkOrange.tint20,
-        iconColor: globalTokens.color.darkOrange.tint20,
-        borderColor: globalTokens.color.darkOrange.tint20,
+        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: globalTokens.color.orange.tint20 }, t),
       },
       tint: {
-        backgroundColor: '#411100',
-        color: globalTokens.color.office.tint40,
-        iconColor: globalTokens.color.office.tint40,
-        borderColor: globalTokens.color.office.tint40,
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.darkOrange.tint60,
+            color: globalTokens.color.office.shade10,
+            borderColor: globalTokens.color.office.tint50,
+            backgroundColorDark: globalTokens.color.orange.shade40,
+            colorDark: globalTokens.color.office.tint40,
+            borderColorDark: globalTokens.color.office.shade40,
+          },
+          t,
+        ),
       },
-    },
-    subtle: {
-      filled: {
-        backgroundColor: t.colors.transparentBackground,
-        color: globalTokens.color.grey[14],
-        iconColor: globalTokens.color.grey[14],
-      },
-    },
-    success: {
-      filled: {
-        backgroundColor: globalTokens.color.green.primary,
-        color: t.colors.neutralForegroundOnBrand,
-        iconColor: t.colors.neutralForegroundOnBrand,
-      },
-      outline: {
-        color: globalTokens.color.green.primary,
-        iconColor: globalTokens.color.green.primary,
-        borderColor: globalTokens.color.green.primary,
-      },
-      tint: {
-        backgroundColor: globalTokens.color.green.tint60,
-        color: globalTokens.color.green.primary,
-        iconColor: globalTokens.color.green.primary,
-        borderColor: '#A0D8A0',
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.darkOrange.primary,
+            colorDark: globalTokens.color.orange.tint20,
+          },
+          t,
+        ),
       },
     },
     warning: {
       filled: {
-        backgroundColor: globalTokens.color.yellow.primary,
-        color: globalTokens.color.grey[14],
-        iconColor: globalTokens.color.grey[14],
+        ...getFilledColorProps(
+          {
+            backgroundColor: globalTokens.color.yellow.primary,
+            color: globalTokens.color.grey[14],
+          },
+          t,
+        ),
       },
       outline: {
-        color: globalTokens.color.yellow.tint40,
-        iconColor: globalTokens.color.yellow.tint40,
-        borderColor: globalTokens.color.yellow.tint40,
+        ...getOutlineColorProps({ color: globalTokens.color.yellow.shade30, colorDark: globalTokens.color.yellow.tint40 }, t),
       },
       tint: {
-        backgroundColor: globalTokens.color.yellow.shade40,
-        color: globalTokens.color.yellow.tint40,
-        iconColor: globalTokens.color.yellow.tint40,
-        borderColor: globalTokens.color.yellow.tint40,
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.yellow.tint60,
+            color: globalTokens.color.yellow.shade30,
+            borderColor: globalTokens.color.yellow.tint40,
+            backgroundColorDark: globalTokens.color.yellow.shade40,
+            colorDark: globalTokens.color.yellow.tint40,
+            borderColorDark: globalTokens.color.yellow.shade30,
+          },
+          t,
+        ),
+      },
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.yellow.shade30,
+            colorDark: globalTokens.color.yellow.tint40,
+          },
+          t,
+        ),
+      },
+    },
+    success: {
+      filled: {
+        ...getFilledColorProps(
+          {
+            backgroundColor: globalTokens.color.green.primary,
+          },
+          t,
+        ),
+      },
+      outline: {
+        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: globalTokens.color.green.tint20 }, t),
+      },
+      tint: {
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.green.tint60,
+            color: globalTokens.color.green.primary,
+            borderColor: globalTokens.color.green.tint40,
+            backgroundColorDark: globalTokens.color.green.shade40,
+            colorDark: globalTokens.color.green.tint30,
+            borderColorDark: globalTokens.color.green.shade30,
+          },
+          t,
+        ),
+      },
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.green.primary,
+            colorDark: globalTokens.color.green.tint20,
+          },
+          t,
+        ),
+      },
+    },
+    important: {
+      filled: {
+        ...getFilledColorProps(
+          {
+            backgroundColor: globalTokens.color.grey[14],
+            backgroundColorDark: globalTokens.color.white,
+            colorDark: globalTokens.color.grey[14],
+          },
+          t,
+        ),
+      },
+      outline: {
+        ...getOutlineColorProps({ color: globalTokens.color.grey[14], colorDark: globalTokens.color.white }, t),
+      },
+      tint: {
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.grey[38],
+            color: t.colors.neutralForegroundOnBrand,
+            borderColor: t.colors.transparentBackground,
+            backgroundColorDark: globalTokens.color.grey[68],
+            colorDark: globalTokens.color.grey[16],
+            borderColorDark: globalTokens.color.grey[68],
+          },
+          t,
+        ),
+      },
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.grey[14],
+            colorDark: globalTokens.color.white,
+          },
+          t,
+        ),
+      },
+    },
+    informative: {
+      filled: {
+        ...getFilledColorProps(
+          {
+            backgroundColor: globalTokens.color.grey[92],
+            color: globalTokens.color.grey[38],
+            backgroundColorDark: t.colors.black,
+            colorDark: globalTokens.color.grey[68],
+            hcBackground: t.colors.neutralBackground3,
+            hcColor: t.colors.brandForeground1,
+            hcBorderColor: t.colors.brandForeground1,
+          },
+          t,
+        ),
+      },
+      outline: {
+        ...getOutlineColorProps(
+          { color: globalTokens.color.grey[92], colorDark: globalTokens.color.grey[68], borderColorDark: globalTokens.color.grey[32] },
+          t,
+        ),
+      },
+      tint: {
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.grey[94],
+            color: globalTokens.color.grey[38],
+            borderColor: globalTokens.color.grey[92],
+            backgroundColorDark: globalTokens.color.grey[8],
+            colorDark: globalTokens.color.grey[68],
+            borderColorDark: globalTokens.color.grey[32],
+          },
+          t,
+        ),
+      },
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.grey[92],
+            colorDark: globalTokens.color.grey[68],
+          },
+          t,
+        ),
+      },
+    },
+    subtle: {
+      filled: {
+        ...getFilledColorProps(
+          {
+            backgroundColor: t.colors.white,
+            color: globalTokens.color.grey[14],
+            backgroundColorDark: globalTokens.color.grey[16],
+            colorDark: t.colors.neutralForegroundOnBrand,
+            hcBackground: t.colors.neutralBackground3,
+            hcColor: t.colors.brandForeground1,
+            hcBorderColor: t.colors.brandForeground1,
+          },
+          t,
+        ),
+      },
+      outline: {
+        ...getOutlineColorProps({ color: globalTokens.color.white, colorDark: globalTokens.color.white }, t),
+      },
+      tint: {
+        ...getTintColorProps(
+          {
+            backgroundColor: globalTokens.color.white,
+            color: globalTokens.color.grey[38],
+            borderColor: globalTokens.color.grey[88],
+            backgroundColorDark: globalTokens.color.grey[29],
+            colorDark: globalTokens.color.grey[68],
+            borderColorDark: globalTokens.color.grey[32],
+          },
+          t,
+        ),
+      },
+      ghost: {
+        ...getGhostColorProps(
+          {
+            color: globalTokens.color.white,
+            colorDark: globalTokens.color.white,
+          },
+          t,
+        ),
       },
     },
   } as BadgeTokens);
