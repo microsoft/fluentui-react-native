@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
+import { Avatar, AvatarColors, AvatarSize, getHashCodeWeb } from '@fluentui-react-native/avatar';
 import { View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -64,6 +64,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     src: TestSvg,
     viewBox: '0 0 500 500',
   };
+
+  const numColors = Platform.OS === 'ios' ? AvatarColors.length - 3 : AvatarColors.length;
+  const hashedColor = AvatarColors[getHashCodeWeb(name) % numColors];
 
   return (
     <View style={commonStyles.root}>
@@ -239,6 +242,22 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           initials={showInitials ? initials : undefined}
           name={showInitials ? name : undefined}
           imageUrl={showImage ? steveBallmerPhotoUrl : undefined}
+          ringBackgroundColor={ringBackgroundColor}
+          ringColor={ringColor}
+          ringThickness={parseInt(ringThickness)}
+          size={parseInt(size) as AvatarSize}
+          transparentRing={!showRing}
+          ringInnerGap={parseInt(ringInnerGap)}
+        />
+      </View>
+      <View style={{ marginLeft: 20 }}>
+        <Text>Avatar with hashed color</Text>
+        <Avatar
+          active="active"
+          activeAppearance="ring"
+          avatarColor={hashedColor}
+          initials={showInitials ? initials : undefined}
+          name={showInitials ? name : undefined}
           ringBackgroundColor={ringBackgroundColor}
           ringColor={ringColor}
           ringThickness={parseInt(ringThickness)}

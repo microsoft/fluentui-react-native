@@ -57,6 +57,9 @@ export const AvatarColors = [
   'mink',
   'platinum',
   'anchor',
+  'burgundy',
+  'hotPink',
+  'orchid',
 ] as const;
 export const ColorSchemes = ['neutral', 'brand', 'colorful'] as const;
 export type AvatarSize = typeof AvatarSizes[number];
@@ -262,6 +265,9 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   mink?: AvatarTokens;
   platinum?: AvatarTokens;
   anchor?: AvatarTokens;
+  burgundy?: AvatarTokens;
+  hotPink?: AvatarTokens;
+  orchid?: AvatarTokens;
 }
 
 export interface AvatarSlotProps {
