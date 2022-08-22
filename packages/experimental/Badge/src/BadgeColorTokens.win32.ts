@@ -227,8 +227,8 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
       tint: {
         ...getTintColorProps(
           {
-            backgroundColor: t.colors.neutralBackground3,
-            color: t.colors.neutralForeground3,
+            backgroundColor: t.colors.neutralForeground3,
+            color: t.colors.neutralBackground1,
             borderColor: t.colors.neutralStrokeAccessible,
             backgroundColorDark: globalTokens.color.grey[68],
             colorDark: globalTokens.color.grey[16],
