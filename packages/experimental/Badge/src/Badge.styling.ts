@@ -18,7 +18,7 @@ import { defaultBadgeColorTokens } from './BadgeColorTokens';
 import { badgeFontTokens } from './BadgeFontTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
-export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances];
+export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl', 'ltr'];
 const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'position'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
