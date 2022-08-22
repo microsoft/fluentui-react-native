@@ -30,7 +30,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       (tokens: BadgeTokens, theme: Theme) => {
         const { badgeColor, backgroundColor, position } = tokens;
         const _badgeColor = !badgeColor || BadgeColors.includes(badgeColor as BadgeNamedColor) ? backgroundColor : badgeColor;
-        const _position = position ?? tokens.position;
+
         return {
           style: {
             ...getBadgePosition(tokens),
@@ -41,7 +41,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
             minHeight: tokens.minHeight,
             width: tokens.width,
             backgroundColor: _badgeColor,
-            position: _position,
+            position,
             ...borderStyles.from(tokens, theme),
             ...layoutStyles.from(tokens, theme),
           },
