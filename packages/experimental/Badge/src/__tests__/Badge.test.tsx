@@ -83,7 +83,7 @@ describe('CounterBadge component tests', () => {
       borderColor: '#f09',
       borderWidth: 4,
     });
-    const tree = renderer.create(<CounterBadgeStyled />).toJSON();
+    const tree = renderer.create(<CounterBadgeStyled count={70} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
