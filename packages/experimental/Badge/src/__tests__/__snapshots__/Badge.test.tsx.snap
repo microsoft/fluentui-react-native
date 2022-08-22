@@ -19,6 +19,7 @@ exports[`Badge component tests Badge all props 1`] = `
       "minHeight": 24,
       "minWidth": 24,
       "paddingHorizontal": 4,
+      "position": "absolute",
       "right": 0,
       "width": undefined,
     }
@@ -43,7 +44,7 @@ exports[`Badge component tests Badge all props 1`] = `
     ellipsizeMode="tail"
     fontFamily="Segoe UI"
     fontSize={12}
-    fontWeight="600"
+    fontWeight="400"
     numberOfLines={0}
     paddingHorizontal={2}
     style={
@@ -81,6 +82,7 @@ exports[`Badge component tests Badge tokens 1`] = `
       "minHeight": 24,
       "minWidth": 24,
       "paddingHorizontal": 4,
+      "position": "absolute",
       "right": 0,
       "width": undefined,
     }
@@ -91,7 +93,7 @@ exports[`Badge component tests Badge tokens 1`] = `
     ellipsizeMode="tail"
     fontFamily="Segoe UI"
     fontSize={12}
-    fontWeight="600"
+    fontWeight="400"
     numberOfLines={0}
     paddingHorizontal={2}
     style={
@@ -129,6 +131,7 @@ exports[`Badge component tests Empty Badge 1`] = `
       "minHeight": 24,
       "minWidth": 24,
       "paddingHorizontal": 4,
+      "position": "absolute",
       "right": 0,
       "width": undefined,
     }
