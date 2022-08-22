@@ -70,4 +70,8 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
     square: {
       borderRadius: globalTokens.corner.radius.none,
     },
+    rtl: {
+      left: globalTokens.spacing.none,
+      right: undefined,
+    },
   } as BadgeTokens);
