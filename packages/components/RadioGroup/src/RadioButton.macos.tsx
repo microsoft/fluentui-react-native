@@ -45,9 +45,6 @@ export const RadioButton = compose<IRadioButtonType>({
         onPress: onPressRerouted,
         selected: isSelected,
         style: {
-          // Fluent controls are designed to snap to a 4 px grid
-          marginLeft: 4,
-          marginTop: 4,
           minWidth: '100%',
           minHeight: 20,
         },
