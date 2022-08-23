@@ -7,7 +7,6 @@ import { radioSelectActionLabel } from './Radio.styling';
 export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
   const {
-    label,
     value,
     disabled,
     accessibilityLabel,
@@ -75,6 +74,7 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   return {
     props: {
+      value: value,
       ...rest,
       ref: buttonRef,
       ...pressable.props,

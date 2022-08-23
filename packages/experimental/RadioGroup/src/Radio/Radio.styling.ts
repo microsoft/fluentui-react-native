@@ -5,12 +5,12 @@ import { defaultRadioTokens } from './RadioTokens';
 const radioSize = 20;
 const radioRadius = radioSize / 2;
 
-const radioInnerCircleSize = 10;
+const radioInnerCircleSize = 20;
 const radioInnerCircleRadius = radioInnerCircleSize / 2;
 
 export const radioSelectActionLabel = 'Select a RadioButton';
 
-export const radioStates: (keyof RadioTokens)[] = ['disabled', 'hovered', 'focused', 'pressed', 'selected'];
+export const radioStates: (keyof RadioTokens)[] = ['focused', 'hovered', 'pressed', 'selected', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, RadioTokens> = {
   tokens: [defaultRadioTokens, radioName],
@@ -63,12 +63,14 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       }),
       ['radioVisibility'],
     ),
-    label: buildProps(() => ({
-      variant: 'subheaderStandard',
+    label: buildProps((tokens: RadioTokens) => ({
+      variant: tokens.variant,
       style: {
         marginTop: 2,
         borderStyle: 'solid',
+        borderColor: tokens.textBorderColor,
         borderWidth: 2,
+        color: tokens.labelColor,
       },
     })),
   },
