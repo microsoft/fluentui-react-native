@@ -50,7 +50,9 @@ export interface CounterBadgeProps extends Omit<BadgeCoreProps, 'appearance' | '
   showZero?: boolean;
 }
 
-export interface CounterBadgeTokens extends BadgeTokens {}
+export interface CounterBadgeTokens extends BadgeTokens {
+  dot?: CounterBadgeTokens;
+}
 
 export interface CounterBadgeSlotProps extends BadgeSlotProps {}
 

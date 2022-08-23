@@ -7,6 +7,7 @@ import { E2ESwitchTest } from './E2ESwitchTest';
 import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { CustomizedSwitch } from './CustomizedSwitch';
 
 const styles = StyleSheet.create({
   square: {
@@ -103,6 +104,10 @@ const toggleSections: TestSection[] = [
   {
     name: 'On/Off Text',
     component: () => <OnOffText />,
+  },
+  {
+    name: 'Customized Tokens',
+    component: () => <CustomizedSwitch />,
   },
   {
     name: 'Switch E2E Testing',

@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Children, ReactNode } from 'react';
+import React, { Children, ReactNode } from 'react';
 import { View } from 'react-native';
 import { counterBadgeName, CounterBadgeType, CounterBadgeProps } from './CounterBadge.types';
 import { compose, withSlots, mergeProps, UseSlots } from '@fluentui-react-native/framework';
@@ -25,15 +25,21 @@ export const CounterBadge = compose<CounterBadgeType>({
     const Slots = useSlots(badge.props, (layer) => badgeLookup(layer, badge.props));
 
     return (final: CounterBadgeProps, ...children: ReactNode[]) => {
-      const { count, icon, iconPosition = 'before', overflowCount, ...mergedProps } = mergeProps(badge.props, final);
+      const { count, icon, iconPosition = 'before', overflowCount, dot, ...mergedProps } = mergeProps(badge.props, final);
       const { showBadge } = badge.state;
       const displayCount = count && count > overflowCount ? `${overflowCount}+` : `${count}`;
       return showBadge ? (
         <Slots.root {...mergedProps}>
-          {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          <Slots.text>{displayCount}</Slots.text>
-          {Children.map(children, (child, i) => (typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child))}
-          {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          {!dot && (
+            <React.Fragment>
+              {icon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+              <Slots.text>{displayCount}</Slots.text>
+              {Children.map(children, (child, i) =>
+                typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child,
+              )}
+              {icon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+            </React.Fragment>
+          )}
         </Slots.root>
       ) : null;
     };

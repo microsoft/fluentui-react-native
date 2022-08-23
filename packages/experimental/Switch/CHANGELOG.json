@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Thu, 11 Aug 2022 22:49:12 GMT",
+      "tag": "@fluentui-react-native/switch_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "duomaster01@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "25f9f2b38dc274bb43b5231c4a6ee4d88a555ce9",
+            "comment": "Replaced LayoutAnimation with animationClass"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 10 Aug 2022 18:25:08 GMT",
+      "tag": "@fluentui-react-native/switch_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "2aa1ff6d9d87c5e5eec9fe184c37f24ee1c9951b",
+            "comment": "Added Switch Documentation"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 08 Aug 2022 21:40:41 GMT",
+      "tag": "@fluentui-react-native/switch_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "abeef208893a37feffab338d8074de3e064c7703",
+            "comment": "Added token customization"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 23:22:38 GMT",
       "tag": "@fluentui-react-native/switch_v0.3.1",
       "version": "0.3.1",

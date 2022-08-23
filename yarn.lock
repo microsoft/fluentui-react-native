@@ -67,11 +67,21 @@
     "@types/json-schema" "7.0.11"
     json-schema "0.4.0"
 
-"@appium/support@^2.57.0", "@appium/support@^2.59.3":
-  version "2.59.4"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.4.tgz#5c103071c94b3b4849449b9f2610264dc11e1344"
-  integrity sha512-oqPN+BYvMBLDMrj8WkrCVy3FAkjm3hOouOYg2ZB6Qg7LYUCSkpi+eiDwjyH8WRD9BF5XeNnyt9tuM8b4LLTCuw==
+"@appium/schema@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@appium/schema/-/schema-0.0.9.tgz#9ac8f9370801941c49f396be9f1aaa20bc180559"
+  integrity sha512-1QWmxjC7NSKd2rnlNxzgqV6uV1hM4dZ1aWF/lnwxyS6ig2u3GDR0n91iHZuygplc/q9I+xnAhDDhy0dxIb9A2w==
   dependencies:
+    "@types/json-schema" "7.0.11"
+    json-schema "0.4.0"
+    source-map-support "0.5.21"
+
+"@appium/support@^2.57.0", "@appium/support@^2.59.3":
+  version "2.59.5"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.5.tgz#090c5c711680eddfeb0434b57b975978566e7553"
+  integrity sha512-OtEmiuLikmNjquVT5oVTFNlFilCiRQVICH5NxNcxzDZkIZk3XTpWmLHPz+MEHVP3dKh3pWaLFjrdA1bdEvG7hw==
+  dependencies:
+    "@appium/types" "^0.4.0"
     "@babel/runtime" "7.18.9"
     "@colors/colors" "1.5.0"
     "@types/archiver" "5.3.1"
@@ -157,6 +167,17 @@
     "@types/npmlog" "4.1.4"
     "@wdio/types" "7.20.7"
     type-fest "2.17.0"
+
+"@appium/types@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@appium/types/-/types-0.4.0.tgz#bdb051dd893f6566198f1a32693c6452692a6139"
+  integrity sha512-Vw+UGmbiNsDiDyI2Uhd37igTLx40eg/xdb3u5lJbiyTtlyMhrNv/UDaLXLq/+G5+3ynad3klRPVu0S9YNJ15aQ==
+  dependencies:
+    "@appium/schema" "^0.0.9"
+    "@types/express" "4.17.13"
+    "@types/npmlog" "4.1.4"
+    "@wdio/types" "7.20.7"
+    type-fest "2.18.0"
 
 "@azure/abort-controller@^1.0.0":
   version "1.0.4"
@@ -2108,6 +2129,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@lage-run/logger@*":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@lage-run/logger/-/logger-1.1.0.tgz#1e11cd113968e6a1ec1362025517682fc6faffcf"
+  integrity sha512-BVqPwrIw9I63V4ZdqN1wrk2AWFkN2E32xodiu57hmEsEHE1k/BQvAb4878771P1DvA6sjwwdnqu9YBxvXj4iTg==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
@@ -2348,9 +2374,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^2.2.1":
-  version "2.4.3"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.3.tgz#36a2efae4b874e5b4479fd4f089e7e0bae0c1a79"
-  integrity sha512-YdfRdYdu3jwkeSuBpNMlxQb8HE6zqLmBKwzU8l/RszXRNcXLZQdiq+fR56hHpwjNc+L447eJrnovC5n6cnbkzg==
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.4.tgz#4e4d2ec4b040e24d8b99c6be8f8b3201bb29fad3"
+  integrity sha512-sz5CPAE8cu//RGOSK4tIcbVi/uNihznrIk4D656/5iz5cqg1zHbVeaQf1eLJRlT7EW1KCH40nk3z4Fzqjmaarw==
 
 "@react-native-windows/cli@0.66.3":
   version "0.66.3"
@@ -4744,23 +4770,22 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.26.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.26.0.tgz#2bb1ed4d4fcd7f9ae2e9ed1dea7f02e888d8a33f"
-  integrity sha512-jgnGejN0GERtaJGcCnOpyyMs2Hl6WDZenBty6d6Q+6/vNlolaTEqyGfczT1ox9jcS9XTNKHMzhZZHB7doullkQ==
+  version "2.30.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.30.0.tgz#ee5f9ddd4439d4ac640bf9e4a5e446f51d4fca92"
+  integrity sha512-HGWNuwMXAlNlmOZfE7h8neV+NFjoocNDMUaFcoGOtJlMMcdhs1lamGvBRGZmurI6Mrs8VmAujmpr053dotZevw==
   dependencies:
-    cosmiconfig "^6.0.0"
-    execa "^4.0.3"
-    fs-extra "^8.0.1"
-    human-id "^2.0.1"
+    cosmiconfig "^7.0.0"
+    execa "^5.0.0"
+    fs-extra "^10.0.0"
     lodash "^4.17.15"
     minimatch "^3.0.4"
     p-limit "^3.0.2"
-    prompts "~2.1.0"
-    semver "^6.1.1"
+    prompts "^2.1.0"
+    semver "^7.0.0"
     toposort "^2.0.2"
     uuid "^8.3.1"
-    workspace-tools "^0.24.0"
-    yargs-parser "^20.2.4"
+    workspace-tools "^0.26.0"
+    yargs-parser "^21.0.0"
 
 big-integer@1.6.x:
   version "1.6.51"
@@ -6598,9 +6623,9 @@ eslint-visitor-keys@^3.0.0, eslint-visitor-keys@^3.3.0:
   integrity sha512-mQ+suqKJVyeuwGYHAdjMFqjCyfl8+Ldnxuyp3ldiMBFKkvytrXUZWaiPCEav8qDHKty44bD+qV1IP4T+w+xXRA==
 
 eslint@^8.0.0:
-  version "8.21.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.21.0.tgz#1940a68d7e0573cef6f50037addee295ff9be9ef"
-  integrity sha512-/XJ1+Qurf1T9G2M5IHrsjp+xrGT73RZf23xA1z5wB1ZzzEAWSZKvRwhWxTFp1rvkvCfwcvAUNAP31bhKTTGfDA==
+  version "8.22.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-8.22.0.tgz#78fcb044196dfa7eef30a9d65944f6f980402c48"
+  integrity sha512-ci4t0sz6vSRKdmkOGmprBo6fmI4PrphDFMy5JEq/fNS0gQkJM3rLmrqcp8ipMcdobH3KtUP40KniAE9W19S4wA==
   dependencies:
     "@eslint/eslintrc" "^1.3.0"
     "@humanwhocodes/config-array" "^0.10.4"
@@ -7232,6 +7257,15 @@ fs-extra@^1.0.0:
     jsonfile "^2.1.0"
     klaw "^1.0.0"
 
+fs-extra@^10.0.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
+  integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
@@ -7250,7 +7284,7 @@ fs-extra@^7.0.1, fs-extra@~7.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@^8.0.0, fs-extra@^8.0.1, fs-extra@^8.1.0:
+fs-extra@^8.0.0, fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
   integrity sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==
@@ -7811,11 +7845,6 @@ https-proxy-agent@^5.0.0:
   dependencies:
     agent-base "6"
     debug "4"
-
-human-id@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/human-id/-/human-id-2.0.1.tgz#71aadd0f46d577fd982358133cfd43f2a46f1477"
-  integrity sha512-XWoYbGsEfBB0mtUHiyihsefgf+s1tNQHj7sX1kgDxUM0IEKk8rcZIPTwUpqDdFIQbkViOLejbc0t8jBzz5jL3w==
 
 human-signals@^1.1.1:
   version "1.1.1"
@@ -9395,7 +9424,7 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-kleur@^3.0.2, kleur@^3.0.3:
+kleur@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
@@ -9406,10 +9435,11 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.2.tgz#249585a03b054551d74d798aa2b6f2aada749438"
-  integrity sha512-Vfw7uOz5qqHXNPV1cLnJiFhcL/e9kMR+xX56UTRK23KYaQ3sFurAMtMfvUNJnn++qUP64JE+nXZ6JMMiUxo2Ww==
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.4.tgz#eb08dee0206a29c203b772cb4a5aac78bb396687"
+  integrity sha512-sdFC6z9XFMX4ex4bxrGO5bA/bF54X57l5frXEeXdB2y08bqwmSiDUecQMvzn3q7lxgQ7KL0DewN5au2+PTGNjw==
   dependencies:
+    "@lage-run/logger" "*"
     "@xmldom/xmldom" "^0.8.0"
     abort-controller "^3.0.0"
     backfill "^6.1.20"
@@ -10255,7 +10285,7 @@ micromatch@^3.1.10, micromatch@^3.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
 
-micromatch@^4.0.2, micromatch@^4.0.4:
+micromatch@^4.0.0, micromatch@^4.0.2, micromatch@^4.0.4:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-4.0.5.tgz#bc8999a7cbbf77cdc89f132f6e467051b49090c6"
   integrity sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==
@@ -11504,21 +11534,13 @@ promise@^8.0.3:
   dependencies:
     asap "~2.0.6"
 
-prompts@^2.0.1, prompts@^2.4.0, prompts@^2.4.1:
+prompts@^2.0.1, prompts@^2.1.0, prompts@^2.4.0, prompts@^2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.4.2.tgz#7b57e73b3a48029ad10ebd44f74b01722a4cb069"
   integrity sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==
   dependencies:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
-
-prompts@~2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/prompts/-/prompts-2.1.0.tgz#bf90bc71f6065d255ea2bdc0fe6520485c1b45db"
-  integrity sha512-+x5TozgqYdOwWsQFZizE/Tra3fKvAoy037kOyU6cgz84n8f6zxngLOV4O32kTwt9FcLCxAqw0P/c8rOr9y+Gfg==
-  dependencies:
-    kleur "^3.0.2"
-    sisteransi "^1.0.0"
 
 prop-types@^15.7.0, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
@@ -11711,9 +11733,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.68"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.68.tgz#4793878b5664029ca2da92db455a3e860e92cbdc"
-  integrity sha512-insjR6zRvOwYqn3CmbrDq2kgpjuud6648J1yuksptMrO5AmKVzb97NDz/JCZ+r7ohEY6xrfBBIPWznbyJFKkuQ==
+  version "0.66.69"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.69.tgz#4e47447dcf84e7a746b550e3268cf473c26a1137"
+  integrity sha512-gTCx3YZKUf1hL2p56vnlLhMhkQT4qbS0VGwpMVEEk07WL0ZJrCZRFfQLX8gVG08OyC/q00Jk0H68jO6zivO1zg==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"
@@ -12624,7 +12646,7 @@ sinon@14.0.0:
     nise "^5.1.1"
     supports-color "^7.2.0"
 
-sisteransi@^1.0.0, sisteransi@^1.0.5:
+sisteransi@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/sisteransi/-/sisteransi-1.0.5.tgz#134d681297756437cc05ca01370d3a7a571075ed"
   integrity sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==
@@ -13952,17 +13974,17 @@ workspace-tools@^0.23.0:
     multimatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
-workspace-tools@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.24.0.tgz#92cd3c75217aa7b1eb4b7eb21eec35e7b6fcb094"
-  integrity sha512-KzFQyQq2bhlLFi38qBi3fpco6bGk+B75NS63Ui3yNwQYUYyZ8XRphQRKMuYWXD5YDuGN+GOjf9ylqdS7s/WZTA==
+workspace-tools@^0.26.0:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.26.1.tgz#7967fc2fd9dcb7c590a386370c0e755f20a06c6d"
+  integrity sha512-wNr6nQqmxEyZDSMc0E9eLDiax0aYxkkF7qjqOME13nnYptL5c9pVzv0sdiSChYwz+cxBZh/O51qiyQAYaIXQAw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
-    find-up "^4.1.0"
+    find-up "^5.0.0"
     git-url-parse "^12.0.0"
     globby "^11.0.0"
     jju "^1.4.0"
-    multimatch "^4.0.0"
+    micromatch "^4.0.0"
     read-yaml-file "^2.0.0"
 
 wrap-ansi@7.0.0, wrap-ansi@^7.0.0:
@@ -14176,10 +14198,15 @@ yargs-parser@^18.1.2, yargs-parser@^18.1.3:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs-parser@^20.2.2, yargs-parser@^20.2.3, yargs-parser@^20.2.4:
+yargs-parser@^20.2.2, yargs-parser@^20.2.3:
   version "20.2.9"
   resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-20.2.9.tgz#2eb7dc3b0289718fc295f362753845c41a0c94ee"
   integrity sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==
+
+yargs-parser@^21.0.0:
+  version "21.1.1"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-21.1.1.tgz#9096bceebf990d21bb31fa9516e0ede294a77d35"
+  integrity sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==
 
 yargs@^15.1.0, yargs@^15.3.1:
   version "15.4.1"

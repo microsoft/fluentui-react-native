@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Mon, 08 Aug 2022 11:50:27 GMT and should not be manually modified.
+This log was last generated on Fri, 12 Aug 2022 15:05:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.1.37
+
+Fri, 12 Aug 2022 15:05:04 GMT
+
+### Patches
+
+- Added inner gap for the Avatar (vkozlova@microsoft.com)
+
+## 1.1.36
+
+Thu, 11 Aug 2022 11:02:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.20
+
+## 1.1.35
+
+Wed, 10 Aug 2022 20:10:58 GMT
+
+### Patches
+
+- Investigation of codeQL bug (v.kozova13@gmail.com)
 
 ## 1.1.34
 

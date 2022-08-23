@@ -4,4 +4,5 @@ export type TestDescription = {
   name: string;
   component: React.FunctionComponent;
   testPage: string;
+  platforms: string[];
 };
