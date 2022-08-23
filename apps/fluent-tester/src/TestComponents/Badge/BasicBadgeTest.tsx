@@ -63,7 +63,6 @@ export const BasicBadge: React.FunctionComponent = () => {
   const badgeConfig = {
     appearance: badgeAppearance,
     badgeColor,
-    position: 'absolute',
     size,
     shape,
   };
@@ -87,11 +86,13 @@ export const BasicBadge: React.FunctionComponent = () => {
       <View style={{ position: 'relative', backgroundColor: 'yellow', padding: 20, width: 200 }}>
         <Text>Parent component for the Badge</Text>
         {svgIconsEnabled && showIcon ? (
-          <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
+          <Badge {...badgeConfig} position="absolute" icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
             {badgeContent}
           </Badge>
         ) : (
-          <Badge {...badgeConfig}>{badgeContent}</Badge>
+          <Badge position="absolute" {...badgeConfig}>
+            {badgeContent}
+          </Badge>
         )}
       </View>
 
