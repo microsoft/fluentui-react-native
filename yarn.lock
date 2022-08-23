@@ -9435,9 +9435,9 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.4.tgz#eb08dee0206a29c203b772cb4a5aac78bb396687"
-  integrity sha512-sdFC6z9XFMX4ex4bxrGO5bA/bF54X57l5frXEeXdB2y08bqwmSiDUecQMvzn3q7lxgQ7KL0DewN5au2+PTGNjw==
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.5.tgz#489c0b6ea0919835d213ba0504e08b40a3632bde"
+  integrity sha512-etz0l7Cgo2Lz1SiKgnhvLuhrYF1RoQ79c4CwJo4tXxGTL1nCrd76xcPKt3ju3aX2fEouWLTYHjd7xG2GcEFvHw==
   dependencies:
     "@lage-run/logger" "*"
     "@xmldom/xmldom" "^0.8.0"
