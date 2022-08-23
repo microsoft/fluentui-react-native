@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback } from 'react';
-import { View, Platform, Text, Image } from 'react-native';
+import { View, Platform, Text, Image, FlexStyle } from 'react-native';
 import {
   Badge,
   BadgeAppearance,
@@ -63,7 +63,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   const badgeConfig = {
     appearance: badgeAppearance,
     badgeColor,
-    position: 'absolute',
+    position: 'absolute' as FlexStyle['position'],
     size,
     shape,
   };
