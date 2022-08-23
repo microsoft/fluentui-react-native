@@ -31,7 +31,6 @@ const StyledBadge = Badge.customize({
   borderWidth: 4,
   color: '#f07',
   fontWeight: 'bold',
-  position: 'relative',
 });
 
 export const BasicBadge: React.FunctionComponent = () => {
@@ -64,6 +63,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   const badgeConfig = {
     appearance: badgeAppearance,
     badgeColor,
+    position: 'absolute',
     size,
     shape,
   };
@@ -96,32 +96,22 @@ export const BasicBadge: React.FunctionComponent = () => {
       </View>
 
       <Text>Size</Text>
-      <Badge position="relative" size="tiny" shape="circular" />
-      <Badge position="relative" size="extraSmall" shape="circular" badgeColor="red" />
-      <Badge position="relative" size="small">
-        Small
-      </Badge>
-      <Badge position="relative" size="medium">
-        Medium
-      </Badge>
-      <Badge position="relative" size="large">
-        Large
-      </Badge>
-      <Badge position="relative" size="extraLarge">
-        Extra Large
-      </Badge>
+      <Badge size="tiny" shape="circular" />
+      <Badge size="extraSmall" shape="circular" badgeColor="red" />
+      <Badge size="small">Small</Badge>
+      <Badge size="medium">Medium</Badge>
+      <Badge size="large">Large</Badge>
+      <Badge size="extraLarge">Extra Large</Badge>
       {svgIconsEnabled && (
         <>
           <Text>Badge with icon</Text>
-          <Badge position="relative" icon={{ svgSource: svgProps }} iconPosition="after">
+          <Badge icon={{ svgSource: svgProps }} iconPosition="after">
             Badge with
             <Image source={{ uri: satyaPhotoUrl }} style={{ width: 20, height: 20 }} />
             <Text style={{ backgroundColor: 'yellow' }}>optional content</Text>
           </Badge>
-          <Badge position="relative" appearance="outline" icon={iconProps} />
-          <Badge position="relative" icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>
-            Badge with icon
-          </Badge>
+          <Badge appearance="outline" icon={iconProps} />
+          <Badge icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>Badge with icon</Badge>
         </>
       )}
       <StyledBadge appearance="outline">Styled badge</StyledBadge>
