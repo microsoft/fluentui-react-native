@@ -121,7 +121,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getFilledColorProps(
           {
             backgroundColor: globalTokens.color.yellow.primary,
-            color: globalTokens.color.grey[14],
+            color: globalTokens.color.grey[14], // It should be neutralForegroundStatic1. It's hardcoded because the token doesn't exist right now
           },
           t,
         ),
