@@ -138,11 +138,6 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   rtl?: BadgeTokens;
 
   /**
-   * When isLTR - applies Badge from the right side
-   */
-  ltr?: BadgeTokens;
-
-  /**
    * Additional states that can be applied to a Badge
    */
   filled?: BadgeTokens;
