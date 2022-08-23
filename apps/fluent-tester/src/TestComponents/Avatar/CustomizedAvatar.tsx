@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { Avatar, AvatarSize } from '@fluentui-react-native/avatar';
+import { Avatar, AvatarColors, AvatarSize, getJavaHashCode } from '@fluentui-react-native/avatar';
 import { View, Text, TextInput, Platform } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
@@ -64,6 +64,9 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     src: TestSvg,
     viewBox: '0 0 500 500',
   };
+
+  const useJavaHashCode = ['ios', 'macos', 'android'].includes(Platform.OS);
+  const hashedColor = AvatarColors[getJavaHashCode(name) % (AvatarColors.length - 3)];
 
   return (
     <View style={commonStyles.root}>
@@ -247,6 +250,24 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           ringInnerGap={parseInt(ringInnerGap)}
         />
       </View>
+      {useJavaHashCode && (
+        <View style={{ marginLeft: 20 }}>
+          <Text>Avatar with hashed color</Text>
+          <Avatar
+            active="active"
+            activeAppearance="ring"
+            avatarColor={hashedColor}
+            initials={showInitials ? initials : undefined}
+            name={showInitials ? name : undefined}
+            ringBackgroundColor={ringBackgroundColor}
+            ringColor={ringColor}
+            ringThickness={parseInt(ringThickness)}
+            size={parseInt(size) as AvatarSize}
+            transparentRing={!showRing}
+            ringInnerGap={parseInt(ringInnerGap)}
+          />
+        </View>
+      )}
     </View>
   );
 };

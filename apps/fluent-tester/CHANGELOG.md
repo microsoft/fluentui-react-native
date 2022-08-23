@@ -1,8 +1,67 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 15 Aug 2022 23:29:03 GMT and should not be manually modified.
+This log was last generated on Fri, 19 Aug 2022 15:32:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.87.0
+
+Fri, 19 Aug 2022 15:32:12 GMT
+
+### Minor changes
+
+- Added RadioGroup Experimental test page (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.0
+- Bump @fluentui-react-native/switch to v0.6.1
+
+### Patches
+
+- Menu Picker for desktop is now using a FURN text  element (nkhalil942@gmail.com)
+
+## 0.86.2
+
+Thu, 18 Aug 2022 18:41:33 GMT
+
+### Patches
+
+- Added more tests for Badge (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.1.40
+- Bump @fluentui-react-native/badge to v0.1.23
+
+## 0.86.1
+
+Wed, 17 Aug 2022 20:36:34 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.16.0
+
+## 0.86.0
+
+Wed, 17 Aug 2022 18:45:52 GMT
+
+### Minor changes
+
+- Updated Switch onText/offText example (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/switch to v0.6.0
+
+## 0.85.9
+
+Wed, 17 Aug 2022 08:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.39
+- Bump @fluentui-react-native/badge to v0.1.22
+
+## 0.85.8
+
+Tue, 16 Aug 2022 18:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.1.38
+- Bump @fluentui-react-native/badge to v0.1.21
 
 ## 0.85.7
 

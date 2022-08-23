@@ -111,6 +111,22 @@ The slots can be modified using the `compose` function on the `Badge`. For more 
 ### Props
 
 ```ts
+export interface BadgeConfigurableProps {
+  /**
+   * A Badge can be one of preset colors
+   * @defaultvalue brand
+   */
+  badgeColor?: BadgeColor;
+
+  /**
+   * Badge position
+   * @defaultvalue absolute
+   */
+  position?: FlexStyle['position'];
+}
+```
+
+```ts
 export interface BadgeCoreProps {
   /**
    * A Badge can be square, circular or rounded.
@@ -123,19 +139,13 @@ export interface BadgeCoreProps {
    */
   size?: BadgeSize;
 }
-export interface BadgeProps extends BadgeCoreProps {
+export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
   /**
    * A Badge can have its content and borders styled for greater emphasis or to be subtle.
    * It can be filled, outline, ghost, inverted
    * @defaultvalue filled
    */
   appearance?: BadgeAppearance;
-
-  /**
-   * A Badge can be one of preset colors
-   * @defaultvalue brand
-   */
-  color?: BadgeColor;
 
   /*
    * Source URL or name of the icon to show on the Badge.
@@ -210,7 +220,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   circular?: BadgeTokens;
   square?: BadgeTokens;
 }
-export interface BadgeTokens extends BadgeCoreTokens {
+export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   /**
    * The size of the icon.
    */
