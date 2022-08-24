@@ -64,7 +64,7 @@ const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   const [showStatus, setShowStatus] = React.useState(false);
-  const fontBuiltInProps = {
+  const fontIconProps = {
     fontFamily: 'Arial',
     codepoint: showStatus ? 0x2796 : 0x2795,
     fontSize: 10,
@@ -80,7 +80,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
       <ToggleButton iconOnly={true} onClick={() => setShowStatus(!showStatus)} style={[styles.statusLabel]}>
-        <Icon fontSource={fontBuiltInProps} />
+        <Icon fontSource={fontIconProps} />
       </ToggleButton>
       {!isMobile && showStatus && (
         <Stack style={stackStyle}>
