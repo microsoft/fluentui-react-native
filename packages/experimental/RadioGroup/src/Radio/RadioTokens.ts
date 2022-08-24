@@ -7,8 +7,8 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     borderColor: t.colors.menuItemText,
     color: t.colors.menuItemText,
     backgroundColor: t.colors.menuItemText,
-    textBorderColor: t.colors.transparentStroke, // 'transparent'
-    radioVisibility: 0,
+    textBorderColor: t.colors.transparentStroke,
+    radioVisibility: 1,
     variant: 'subheaderStandard',
     // Unchecked, Rest
     radioBorder: t.colors.neutralStrokeAccessible,
@@ -17,11 +17,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       // Unchecked, Disabled
       radioBorder: t.colors.neutralForegroundDisabled,
       labelColor: t.colors.neutralForegroundDisabled,
-      selected: {
-        // Checked, Disabled
-        radioFill: t.colors.neutralForegroundDisabled,
-        radioVisibility: 1,
-      },
+      radioVisibility: 0,
     },
     hovered: {
       // Unchecked, Hover
@@ -32,7 +28,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioBorder: t.colors.compoundBrandStroke1Hover,
         radioFill: t.colors.compoundBrandBackground1Hover,
         labelColor: t.colors.neutralForeground2,
-        radioVisibility: 1,
+        radioVisibility: 0.5,
       },
     },
     pressed: {
@@ -49,6 +45,10 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     },
     focused: {
       textBorderColor: t.colors.focusBorder,
+      selected: {
+        // Checked, Focused
+        radioVisibility: 1,
+      },
     },
     selected: {
       // Checked, Rest
@@ -56,5 +56,9 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       radioFill: t.colors.compoundBrandStroke1,
       labelColor: t.colors.neutralForeground3,
       radioVisibility: 1,
+      disabled: {
+        // Checked, Disabled
+        radioFill: t.colors.neutralForegroundDisabled,
+      },
     },
   } as RadioTokens);

@@ -22,12 +22,6 @@ export const useRadio = (props: RadioProps): RadioState => {
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
-  // const changeSelection = () => {
-  //   if (value != info.value) {
-  //     info.onChange && info.onChange(value);
-  //     info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
-  //   }
-  // };
   const changeSelection = React.useCallback(() => {
     if (value != info.value) {
       info.onChange && info.onChange(value);
