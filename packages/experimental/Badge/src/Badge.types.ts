@@ -24,10 +24,20 @@ export interface BadgeConfigurableProps {
   badgeColor?: BadgeColor;
 
   /**
+   * The icon color.
+   */
+  iconColor?: ColorValue;
+
+  /**
    * Badge position
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
+
+  /**
+   * Text color.
+   */
+  textColor?: ColorValue;
 }
 
 export interface BadgeCoreProps extends IViewProps {
@@ -71,14 +81,12 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * The height of the Badge.
    */
   height?: number;
-  /**
-   * The icon color.
-   */
-  iconColor?: ColorValue;
+
   /**
    * The icon size.
    */
   iconSize?: number;
+
   /**
    * Set the left edge of the Badge
    */
@@ -94,6 +102,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * icons or images
    */
   textPadding?: number;
+
   /**
    * Set the top edge of the Badge
    */
@@ -122,12 +131,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   square?: BadgeTokens;
 }
 export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
-  /**
-   * The size of the icon.
-   */
-  iconSize?: number;
-
-  /**
+  /*
    * The weight of the lines used when drawing the icon.
    */
   iconWeight?: number;

@@ -5,8 +5,11 @@ import { getFilledColorProps, getOutlineColorProps, getTintColorProps, getGhostC
 
 export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
   ({
+    color: t.colors.neutralForegroundOnBrand,
+    backgroundColor: t.colors.brandBackgroundStatic,
+    borderColor: t.colors.transparentStroke,
     filled: {
-      borderColor: 'transparent',
+      borderColor: t.colors.transparentStroke,
     },
     outline: {
       backgroundColor: t.colors.transparentBackground,

@@ -17,9 +17,9 @@ import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 import { badgeFontTokens } from './BadgeFontTokens';
 
-export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
+export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes, 'textPadding'];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl'];
-const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'position'];
+const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'iconColor', 'position', 'textColor'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeFontTokens, badgeName],
@@ -47,7 +47,19 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
           },
         };
       },
-      ['backgroundColor', 'width', 'minHeight', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
+      [
+        'backgroundColor',
+        'badgeColor',
+        'width',
+        'minHeight',
+        'bottom',
+        'right',
+        'top',
+        'left',
+        'position',
+        ...borderStyles.keys,
+        ...layoutStyles.keys,
+      ],
     ),
     icon: buildProps(
       (tokens: BadgeTokens) => ({
@@ -60,10 +72,10 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
     text: buildProps(
       (tokens: BadgeTokens, theme: Theme) => ({
         ...fontStyles.from(tokens, theme),
-        color: tokens.color,
+        color: tokens.textColor || tokens.color,
         paddingHorizontal: tokens.textPadding,
       }),
-      ['color', 'textPadding', ...fontStyles.keys],
+      ['color', 'textColor', 'textPadding', ...fontStyles.keys],
     ),
   },
 };
