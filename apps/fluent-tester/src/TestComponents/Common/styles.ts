@@ -98,8 +98,6 @@ export const fluentTesterStyles = StyleSheet.create({
   scrollViewStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
-    // height: 200,
-    // width: 200,
   },
 
   scrollViewContainer: {
@@ -109,15 +107,16 @@ export const fluentTesterStyles = StyleSheet.create({
     flexGrow: 0,
     flexDirection: 'column',
   },
-
+  testListSeparator: {
+    marginHorizontal: 8,
+  },
   testListItem: {
     width: '100%',
-    borderRadius: 0,
     justifyContent: 'flex-start',
   },
 
   testSection: {
-    flexGrow: 1,
+    flexShrink: 1,
   },
 
   noTest: {
@@ -145,7 +144,6 @@ export const mobileStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-
   testList: {
     width: '100%',
   },

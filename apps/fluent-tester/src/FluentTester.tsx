@@ -1,9 +1,9 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
+import { FocusZone, FocusTrapZone, Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, FlatList } from 'react-native';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -20,7 +20,6 @@ const EmptyComponent: React.FunctionComponent = () => {
   return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
 };
 export interface FluentTesterProps {
-  initialTest?: string;
   enableSinglePaneView?: boolean;
 }
 
@@ -52,17 +51,27 @@ const TestListSeparator = Separator.customize((t) => ({
   separatorWidth: 2,
 }));
 
+const TestListItem = Button.customize((t) => ({
+  subtle: {
+    color: t.colors.neutralForeground1,
+    hovered: {
+      color: t.colors.neutralForeground1Hover,
+    },
+    pressed: {
+      backgroundColor: t.colors.brandForeground1,
+      color: t.colors.neutralForegroundInverted,
+    },
+  },
+}));
+
+// filters and sorts tests alphabetically
+const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
+const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
+
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  // filters and sorts tests alphabetically
-  const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
-  const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
+  const { enableSinglePaneView } = props;
 
-  const { initialTest, enableSinglePaneView } = props;
-  const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {
-    return description.name === initialTest;
-  });
-
-  const [selectedTestIndex, setSelectedTestIndex] = React.useState(initialSelectedTestIndex);
+  const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
   const [onTestListView, setOnTestListView] = React.useState(true);
 
   const onBackPress = () => {
@@ -77,10 +86,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const themedStyles = getThemedStyles(useTheme());
 
-  const RootView = Platform.select({
-    ios: SafeAreaView,
-    default: View,
-  });
+  // We can't use Platform.select because win32 isn't on there.. so we do this long check instead
+  const RootView = Platform.OS === ('win32' as any) ? FocusTrapZone : Platform.OS === 'ios' ? SafeAreaView : View;
 
   const Header: React.FunctionComponent = () => {
     const theme = useTheme();
@@ -133,28 +140,69 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
-  const TestList: React.FunctionComponent = () => {
-    return (
-      <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
-          {sortedTestComponents.map((description, index) => {
-            return (
-              <Button
-                appearance="subtle"
-                key={index}
-                disabled={index == selectedTestIndex}
-                onClick={() => setSelectedTestIndex(index)}
-                style={fluentTesterStyles.testListItem}
-                testID={description.testPage}
-              >
-                {description.name}
-              </Button>
-            );
-          })}
-        </ScrollView>
+  const listRef = React.useRef<FlatList>();
 
-        <TestListSeparator vertical style={{ marginHorizontal: 8 }} />
-      </View>
+  const ListItem = (props) => {
+    const index = props.index;
+    const itemData = props.item;
+
+    const ref = React.useRef<View>();
+
+    const isSelected = Platform.select({
+      macos: props.isSelected,
+      default: index == selectedTestIndex,
+    });
+
+    React.useEffect(() => {
+      if (isSelected) {
+        ref.current.focus();
+      }
+    });
+
+    return (
+      <TestListItem
+        componentRef={ref}
+        appearance={'subtle'}
+        enableFocusRing={true}
+        key={index}
+        pressed={isSelected}
+        onClick={() => {
+          setSelectedTestIndex(index);
+
+          // Platform.select({
+          //   macos: listRef.current?.selectRowAtIndex(index),
+          //   default: setSelectedTestIndex(index),
+          // });
+        }}
+        style={fluentTesterStyles.testListItem}
+        testID={itemData.testPage}
+      >
+        {itemData.name}
+      </TestListItem>
+    );
+  };
+
+  const TestList: React.FunctionComponent = () => {
+    const keyboardNavigationPropsMacOS = {
+      enableSelectionOnKeyPress: true,
+      initialSelectedIndex: selectedTestIndex,
+      onSelectionChanged: (info) => {
+        setSelectedTestIndex(info.newSelection);
+      },
+    };
+
+    return (
+      <FocusZone focusZoneDirection={'vertical'} style={fluentTesterStyles.testList}>
+        <FlatList
+          ref={listRef}
+          data={sortedTestComponents}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore `ListItemComponent` is `renderItem` with support for hooks
+          ListItemComponent={ListItem}
+          {...(Platform.OS === 'macos' && keyboardNavigationPropsMacOS)}
+        />
+        <TestListSeparator vertical style={fluentTesterStyles.testListSeparator} />
+      </FocusZone>
     );
   };
 
@@ -206,32 +254,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const TesterContent: React.FunctionComponent = () => {
-    return (
-      <View style={{ flex: 1 }}>
-        {enableSinglePaneView ? <MobileHeader /> : <Header />}
-
-        <HeaderSeparator />
-
-        <View style={fluentTesterStyles.testRoot}>
-          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-          {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
-        </View>
-      </View>
-    );
-  };
-
   return (
-    <View style={{ flex: 1 }}>
-      {Platform.OS === ('win32' as any) ? (
-        <FocusTrapZone style={themedStyles.root}>
-          <TesterContent />
-        </FocusTrapZone>
-      ) : (
-        <RootView style={themedStyles.root}>
-          <TesterContent />
-        </RootView>
-      )}
-    </View>
+    <RootView style={themedStyles.root}>
+      {enableSinglePaneView ? <MobileHeader /> : <Header />}
+      <HeaderSeparator />
+      <View style={fluentTesterStyles.testRoot}>
+        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+        {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
+      </View>
+    </RootView>
   );
 };
