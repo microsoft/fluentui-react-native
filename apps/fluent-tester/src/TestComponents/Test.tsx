@@ -3,7 +3,6 @@ import { StyleSheet, View, Platform } from 'react-native';
 import { Text, ToggleButton, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
-import { Icon } from '@fluentui-react-native/icon';
 import { useTheme } from '@fluentui-react-native/theme-types';
 
 export type TestSection = {
