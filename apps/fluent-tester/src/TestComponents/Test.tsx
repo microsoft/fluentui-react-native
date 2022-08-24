@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
-import { Text, Separator } from '@fluentui/react-native';
+import { Text, ToggleButton, Separator, createIconProps } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
+import Svg, { G, Path, SvgProps } from 'react-native-svg';
+import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 
 export type TestSection = {
   name: string;
@@ -62,6 +64,24 @@ const styles = StyleSheet.create({
 const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
+  const [showStatus, setShowStatus] = React.useState(false);
+  const toggleSvg: React.FunctionComponent<SvgProps> = () => {
+    const path = showStatus
+      ? 'M2.75 5.25h6.5s0.75 0 0.75 0.75v0s0 0.75 -0.75 0.75h-6.5s-0.75 0 -0.75 -0.75v0s0 -0.75 0.75 -0.75'
+      : 'M6.5 1.75C6.5 1.33579 6.16421 1 5.75 1C5.33579 1 5 1.33579 5 1.75V5H1.75C1.33579 5 1 5.33579 1 5.75C1 6.16421 1.33579 6.5 1.75 6.5H5V9.75C5 10.1642 5.33579 10.5 5.75 10.5C6.16421 10.5 6.5 10.1642 6.5 9.75V6.5H9.75C10.1642 6.5 10.5 6.16421 10.5 5.75C10.5 5.33579 10.1642 5 9.75 5H6.5V1.75Z';
+    return (
+      <Svg>
+        <G>
+          <Path d={path} fill="black" />
+        </G>
+      </Svg>
+    );
+  };
+  const svgProps: SvgIconProps = {
+    src: toggleSvg,
+  };
+  const toggleIconProps = createIconProps({ svgSource: svgProps, width: 12, height: 12 });
+
   return (
     <View testID="ScrollViewAreaForComponents">
       <Text style={[styles.name]} variant="heroSemibold">
@@ -71,7 +91,10 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
-      {!isMobile && (
+      <ToggleButton onClick={() => setShowStatus(!showStatus)} style={[styles.statusLabel]}>
+        Platform Status <Icon {...toggleIconProps} />
+      </ToggleButton>
+      {!isMobile && showStatus && (
         <Stack style={stackStyle}>
           <Text style={[styles.statusHeader]} variant="headerStandard">
             Platform Status
