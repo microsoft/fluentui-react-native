@@ -33,5 +33,7 @@ export const AvatarTest: React.FunctionComponent = () => {
   const description =
     'AvatarView is a visual representation of a user, entity, or group. If an image is supplied, it is cropped to a circle of the requested size. If an image is not supplied, initials are extracted from the given name and email address provided and displayed on a colorful background.';
 
-  return <Test name="Avatar Test" description={description} sections={avatarSections} status={status} />;
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Avatar/SPEC.md';
+
+  return <Test name="Avatar Test" description={description} spec={spec} sections={avatarSections} status={status} />;
 };
