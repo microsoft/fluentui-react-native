@@ -85,9 +85,12 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
-      <ToggleButton iconOnly={true} onClick={() => setShowStatus(!showStatus)} style={[styles.statusLabel]}>
-        <Icon fontSource={fontIconProps} />
-      </ToggleButton>
+      <ToggleButton
+        iconOnly={true}
+        icon={{ fontSource: fontIconProps }}
+        onClick={() => setShowStatus(!showStatus)}
+        style={[styles.statusLabel]}
+      />
       {!isMobile && showStatus && (
         <Stack style={stackStyle}>
           <Text style={[styles.statusHeader]} variant="headerStandard">
