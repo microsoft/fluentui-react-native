@@ -57,7 +57,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     },
     pressed: {
       trackColor: t.colors.compoundBrandBackground1Pressed,
-      thumbColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHoverPressed : t.colors.neutralForegroundInvertedLink,
+      thumbColor: isHighContrast(t) ? t.colors.neutralForegroundOnBrandHover : t.colors.neutralForegroundInvertedLink,
       borderColor: t.colors.compoundBrandBackground1Pressed,
     },
     disabled: {
