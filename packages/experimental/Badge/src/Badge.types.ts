@@ -133,6 +133,11 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   iconWeight?: number;
 
   /**
+   * When isRTL - applies Badge from the left side
+   */
+  rtl?: BadgeTokens;
+
+  /**
    * Additional states that can be applied to a Badge
    */
   filled?: BadgeTokens;
