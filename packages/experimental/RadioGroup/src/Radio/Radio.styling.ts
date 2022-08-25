@@ -62,7 +62,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           top: 4,
         },
       }),
-      ['radioVisibility'],
+      ['radioVisibility', 'radioFill'],
     ),
     label: buildProps(
       (tokens: RadioTokens) => ({
@@ -71,11 +71,11 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginTop: 2,
           borderStyle: 'solid',
           borderColor: tokens.textBorderColor,
-          borderWidth: 2,
+          borderWidth: tokens.borderWidth,
           color: tokens.labelColor,
         },
       }),
-      ['textBorderColor', 'labelColor'],
+      ['textBorderColor', 'borderWidth', 'labelColor'],
     ),
   },
 };

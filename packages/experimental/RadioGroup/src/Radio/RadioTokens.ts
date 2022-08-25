@@ -1,5 +1,7 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
 import { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
@@ -13,6 +15,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     // Unchecked, Rest
     radioBorder: t.colors.neutralStrokeAccessible,
     labelColor: t.colors.neutralForeground3,
+    borderWidth: globalTokens.stroke.width.thick,
     disabled: {
       // Unchecked, Disabled
       radioBorder: t.colors.neutralForegroundDisabled,
