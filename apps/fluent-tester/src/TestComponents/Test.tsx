@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Text, ToggleButton, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
@@ -27,6 +27,14 @@ export interface TestProps {
   sections: TestSection[];
 }
 
+const definitions = {
+  Production: 'Control is ready for broad partner use and to be used in production-ready scenarios.',
+  Beta: 'Control is ready for partner consumption, but not ready for production release (e.g. fixing bugs).',
+  Experimental: 'Control code checked into repo, but not ready for partner use.',
+  Backlog: 'Control is in plan and on our backlog to deliver.',
+  'N/A': 'Control is not in current plan.',
+};
+
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
@@ -44,11 +52,8 @@ const styles = StyleSheet.create({
   },
   statusView: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
-  },
-  statusHeader: {
-    marginBottom: 6,
   },
   statusLabel: {
     marginTop: 2,
@@ -58,9 +63,6 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
   },
 });
-
-// mobile platform check to not render status components.
-const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   const [showStatus, setShowStatus] = React.useState(false);
@@ -84,63 +86,42 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
       </Stack>
-      {!isMobile && (
-        <Stack style={stackStyle}>
-          <View style={styles.statusView}>
-            <Text style={[styles.statusHeader]} variant="headerStandard">
-              Platform Status
+      <Stack style={stackStyle}>
+        <View style={styles.statusView}>
+          <Text variant="headerStandard">Platform Status</Text>
+          <ToggleButton iconOnly={true} icon={{ fontSource: fontIconProps }} onClick={() => setShowStatus(!showStatus)} />
+        </View>
+        {showStatus && (
+          <View>
+            <Text style={[styles.statusLabel]} variant="bodySemibold">
+              Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
             </Text>
-            <ToggleButton
-              iconOnly={true}
-              icon={{ fontSource: fontIconProps }}
-              onClick={() => setShowStatus(!showStatus)}
-              style={[styles.statusLabel]}
-            />
-          </View>
-          {showStatus && (
-            <View>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                UWP: <Text style={styles.status}>{props.status.uwpStatus}</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                iOS: <Text style={styles.status}>{props.status.iosStatus}</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                macOS: <Text style={styles.status}>{props.status.macosStatus}</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
-              </Text>
+            <Text style={[styles.statusLabel]} variant="bodySemibold">
+              UWP: <Text style={styles.status}>{props.status.uwpStatus}</Text>
+            </Text>
+            <Text style={[styles.statusLabel]} variant="bodySemibold">
+              iOS: <Text style={styles.status}>{props.status.iosStatus}</Text>
+            </Text>
+            <Text style={[styles.statusLabel]} variant="bodySemibold">
+              macOS: <Text style={styles.status}>{props.status.macosStatus}</Text>
+            </Text>
+            <Text style={[styles.statusLabel]} variant="bodySemibold">
+              Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
+            </Text>
 
-              <Text style={[styles.definitionHeader]} variant="headerStandard">
-                Status Definitions
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                Production:{' '}
-                <Text style={styles.status}>Control is ready for broad partner use and to be used in production-ready scenarios.</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                Beta:{' '}
-                <Text style={styles.status}>
-                  Control is ready for partner consumption, but not ready for production release (e.g. fixing bugs).
+            <Text style={[styles.definitionHeader]} variant="headerStandard">
+              Status Definitions
+            </Text>
+            {Object.entries(definitions).map(([key, value]) => {
+              return (
+                <Text style={[styles.statusLabel]} variant="bodySemibold" key={key}>
+                  {key}: <Text style={styles.status}>{value}</Text>
                 </Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                Experimental: <Text style={styles.status}>Control code checked into repo, but not ready for partner use.</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                Backlog: <Text style={styles.status}>Control is in plan and on our backlog to deliver.</Text>
-              </Text>
-              <Text style={[styles.statusLabel]} variant="bodySemibold">
-                N/A: <Text style={styles.status}>Control is not in current plan.</Text>
-              </Text>
-            </View>
-          )}
-        </Stack>
-      )}
+              );
+            })}
+          </View>
+        )}
+      </Stack>
       {props.sections.map((section, index) => {
         const TestComponent = section.component;
         return (
