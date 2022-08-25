@@ -154,7 +154,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     const theme = useTheme();
     return (
       <Shadow shadowToken={theme.shadows.shadow16}>
-        <View style={[fluentTesterStyles.testList, { backgroundColor: theme.colors.neutralBackground3 }]}>
+        <View style={[fluentTesterStyles.testList, { backgroundColor: theme.colors.neutralBackground6 }]}>
           <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
             {sortedTestComponents.map((description, index) => {
               return (
