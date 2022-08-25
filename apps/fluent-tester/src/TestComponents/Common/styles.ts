@@ -159,3 +159,5 @@ export const mobileStyles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export const testContentRootViewStyle = [stackStyle, commonTestStyles.view];
