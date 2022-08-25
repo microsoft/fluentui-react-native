@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import { Text, ToggleButton, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
+import Svg, { G, Path, SvgProps } from 'react-native-svg';
+import { SvgIconProps } from '@fluentui-react-native/icon';
 
 export type TestSection = {
   name: string;
@@ -66,6 +68,25 @@ const styles = StyleSheet.create({
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
   const [showStatus, setShowStatus] = React.useState(false);
+
+  const toggleSvg: React.FunctionComponent<SvgProps> = () => {
+    const plusPath =
+      'M6.5 1.75C6.5 1.33579 6.16421 1 5.75 1C5.33579 1 5 1.33579 5 1.75V5H1.75C1.33579 5 1 5.33579 1 5.75C1 6.16421 1.33579 6.5 1.75 6.5H5V9.75C5 10.1642 5.33579 10.5 5.75 10.5C6.16421 10.5 6.5 10.1642 6.5 9.75V6.5H9.75C10.1642 6.5 10.5 6.16421 10.5 5.75C10.5 5.33579 10.1642 5 9.75 5H6.5V1.75Z';
+    const minusPath = 'M2.75 5.25h6.5s0.75 0 0.75 0.75v0s0 0.75 -0.75 0.75h-6.5s-0.75 0 -0.75 -0.75v0s0 -0.75 0.75 -0.75';
+
+    const path = showStatus ? minusPath : plusPath;
+    return (
+      <Svg>
+        <G>
+          <Path d={path} fill="black" />
+        </G>
+      </Svg>
+    );
+  };
+  const svgProps: SvgIconProps = {
+    src: toggleSvg,
+  };
+
   const theme = useTheme();
   const fontFamily = theme.typography.families.primary;
 
@@ -76,6 +97,8 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
     codepoint: showStatus ? minusCodepoint : plusCodepoint,
     fontSize: 10,
   };
+
+  const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
 
   return (
     <View testID="ScrollViewAreaForComponents">
@@ -89,10 +112,10 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
       <Stack style={stackStyle}>
         <View style={styles.statusView}>
           <Text variant="headerStandard">Platform Status</Text>
-          <ToggleButton iconOnly={true} icon={{ fontSource: fontIconProps }} onClick={() => setShowStatus(!showStatus)} />
+          <ToggleButton iconOnly={true} icon={toggleIconProps} onClick={() => setShowStatus(!showStatus)} />
         </View>
         {showStatus && (
-          <View>
+          <>
             <Text style={[styles.statusLabel]} variant="bodySemibold">
               Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
             </Text>
@@ -119,7 +142,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
                 </Text>
               );
             })}
-          </View>
+          </>
         )}
       </Stack>
       {props.sections.map((section, index) => {
