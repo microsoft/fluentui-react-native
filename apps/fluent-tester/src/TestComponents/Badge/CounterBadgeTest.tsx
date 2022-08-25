@@ -22,9 +22,9 @@ export const CounterBadgeTest: React.FunctionComponent = () => {
       <CounterBadge count={0}></CounterBadge>
       <Text>And here is the Badge with showZero = true</Text>
       <CounterBadge count={0} showZero={true}></CounterBadge>
-      <CounterBadge color="informative" count={777}></CounterBadge>
-      <CounterBadge color="important" overflowCount={1000} count={777}></CounterBadge>
-      <CounterBadge color="danger" overflowCount={1000} count={1500}></CounterBadge>
+      <CounterBadge badgeColor="informative" count={777}></CounterBadge>
+      <CounterBadge badgeColor="important" overflowCount={1000} count={777}></CounterBadge>
+      <CounterBadge badgeColor="danger" overflowCount={1000} count={1500}></CounterBadge>
       <CounterBadge count={13}></CounterBadge>
       <CounterBadge count={13}>CounterBadge</CounterBadge>
       {svgIconsEnabled && <CounterBadge count={17} icon={{ svgSource: svgProps }} iconPosition="after" />}

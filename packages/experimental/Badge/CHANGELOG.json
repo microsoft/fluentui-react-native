@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Thu, 18 Aug 2022 18:41:33 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.23",
+      "version": "0.1.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "f189a4704aa18a6db8847ea2a39766410c0a2fc7",
+            "comment": "Added more tests for Badge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Aug 2022 08:39:40 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.22",
       "version": "0.1.22",

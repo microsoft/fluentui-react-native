@@ -20,7 +20,6 @@ export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorT
   neutralBar: NotificationTokens;
   danger: NotificationTokens;
   warning: NotificationTokens;
-  hasTitle: NotificationTokens;
   isBar: NotificationTokens;
   shadowToken?: ShadowToken;
 }

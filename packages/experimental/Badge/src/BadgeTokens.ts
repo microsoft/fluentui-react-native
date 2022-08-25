@@ -3,20 +3,17 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { BadgeTokens } from './Badge.types';
 
-export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) =>
+export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
   ({
     iconSize: 12,
     borderWidth: globalTokens.stroke.width.thin,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
-    fontSize: 10,
     textPadding: globalTokens.spacing.xxs,
-    fontFamily: t.typography.families.primary,
-    fontWeight: globalTokens.font.weight.semibold,
+    position: 'relative',
     tiny: {
       minWidth: 6,
       minHeight: 6,
-      fontSize: 4,
       rounded: {
         borderRadius: globalTokens.corner.radius.small,
       },
@@ -25,7 +22,6 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) 
       minWidth: 10,
       minHeight: 10,
       iconSize: 10,
-      fontSize: 6,
       rounded: {
         borderRadius: globalTokens.corner.radius.small,
       },
@@ -37,8 +33,6 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) 
       paddingHorizontal: globalTokens.spacing.xxs,
       textPadding: globalTokens.spacing.xxs,
       flexGap: globalTokens.spacing.xxs,
-      fontSize: 8,
-      variant: 'captionStandard',
       rounded: {
         borderRadius: globalTokens.corner.radius.small,
       },
@@ -50,8 +44,6 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) 
       paddingHorizontal: globalTokens.spacing.xs,
       textPadding: globalTokens.spacing.xxs,
       flexGap: globalTokens.spacing.xxs,
-      fontSize: 10,
-      variant: 'secondaryStandard',
     },
     large: {
       minWidth: 24,
@@ -60,8 +52,6 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) 
       paddingHorizontal: globalTokens.spacing.xs,
       textPadding: globalTokens.spacing.xxs,
       flexGap: globalTokens.spacing.xxs,
-      fontSize: 12,
-      variant: 'secondaryStandard',
     },
     extraLarge: {
       minWidth: 32,
@@ -70,8 +60,6 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) 
       paddingHorizontal: globalTokens.spacing.sNudge,
       textPadding: globalTokens.spacing.xxs,
       flexGap: globalTokens.spacing.xs,
-      fontSize: 12,
-      variant: 'secondaryStandard',
     },
     rounded: {
       borderRadius: globalTokens.corner.radius.medium,
@@ -81,5 +69,9 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) 
     },
     square: {
       borderRadius: globalTokens.corner.radius.none,
+    },
+    rtl: {
+      left: globalTokens.spacing.none,
+      right: undefined,
     },
   } as BadgeTokens);

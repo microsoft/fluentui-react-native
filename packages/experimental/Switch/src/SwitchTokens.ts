@@ -4,7 +4,7 @@ import { SwitchTokens } from './Switch.types';
 
 export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme) => ({
   borderWidth: 1,
-  borderRadius: 20,
+  borderRadius: 10,
   minHeight: 28,
   minWidth: 40,
   thumbSize: 14,
@@ -18,9 +18,17 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   color: t.colors.neutralForeground2,
   trackMarginTop: 2,
   trackMarginBottom: 2,
-  trackMarginLeft: 4,
-  trackMarginRight: 4,
+  trackMarginLeft: 2,
+  trackMarginRight: 2,
   thumbMargin: 2,
+
+  beforeContent: {
+    trackMarginLeft: 8,
+  },
+
+  afterContent: {
+    trackMarginRight: 8,
+  },
 
   before: {
     flexDirection: 'row',

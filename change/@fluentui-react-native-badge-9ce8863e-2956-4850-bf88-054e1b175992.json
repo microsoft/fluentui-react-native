@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixed empty badge bug",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "vkozlova@microsoft.com",
+  "dependentChangeType": "patch"
+}

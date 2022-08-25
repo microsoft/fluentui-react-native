@@ -83,7 +83,22 @@ describe('CounterBadge component tests', () => {
       borderColor: '#f09',
       borderWidth: 4,
     });
-    const tree = renderer.create(<CounterBadgeStyled />).toJSON();
+    const tree = renderer.create(<CounterBadgeStyled count={70} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('CounterBadge shows 99+', () => {
+    const tree = renderer.create(<CounterBadge count={100} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('CounterBadge shows 1000+', () => {
+    const tree = renderer.create(<CounterBadge overflowCount={1000} count={2000} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('CounterBadge shows zero', () => {
+    const tree = renderer.create(<CounterBadge count={0} showZero={true} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

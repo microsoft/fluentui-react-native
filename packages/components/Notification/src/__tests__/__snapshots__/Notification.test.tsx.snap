@@ -37,6 +37,7 @@ exports[`Notification component tests Notification default 1`] = `
         "justifyContent": "space-between",
         "minHeight": 52,
         "padding": 16,
+        "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 0,
@@ -66,7 +67,7 @@ exports[`Notification component tests Notification default 1`] = `
             "color": "#0F6CBD",
             "fontFamily": "Segoe UI",
             "fontSize": 15,
-            "fontWeight": "600",
+            "fontWeight": "400",
             "margin": 0,
           }
         }

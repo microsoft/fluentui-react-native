@@ -4,6 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { BasicBadge } from './BasicBadgeTest';
 import { CounterBadgeTest } from './CounterBadgeTest';
 import { PresenceBadgeTest } from './PresenceBadgeTest';
+import { E2EBadgeTest } from './E2EBadgeTest';
 
 const badgeSections: TestSection[] = [
   {
@@ -18,6 +19,10 @@ const badgeSections: TestSection[] = [
   {
     name: 'Presence Badge',
     component: PresenceBadgeTest,
+  },
+  {
+    name: 'Badge E2E',
+    component: E2EBadgeTest,
   },
 ];
 

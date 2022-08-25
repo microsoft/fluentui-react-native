@@ -9,11 +9,26 @@ export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'ex
 export const BadgeAppearances = ['filled', 'outline', 'tint', 'ghost'] as const;
 export const BadgeShapes = ['rounded', 'circular', 'square'] as const;
 export const BadgeColors = ['brand', 'danger', 'important', 'informative', 'severe', 'subtle', 'success', 'warning'] as const;
+export type BadgeNamedColor = typeof BadgeColors[number];
 export type BadgeSize = typeof BadgeSizes[number];
 export type BadgeAppearance = typeof BadgeAppearances[number];
 export type BadgeShape = typeof BadgeShapes[number];
-export type BadgeColor = typeof BadgeColors[number] | ColorValue;
+export type BadgeColor = BadgeNamedColor | ColorValue;
 export type BadgeIconPosition = 'before' | 'after';
+
+export interface BadgeConfigurableProps {
+  /**
+   * A Badge can be one of preset colors
+   * @defaultvalue brand
+   */
+  badgeColor?: BadgeColor;
+
+  /**
+   * Badge position
+   * @defaultvalue absolute
+   */
+  position?: FlexStyle['position'];
+}
 
 export interface BadgeCoreProps extends IViewProps {
   /**
@@ -27,19 +42,13 @@ export interface BadgeCoreProps extends IViewProps {
    */
   size?: BadgeSize;
 }
-export interface BadgeProps extends BadgeCoreProps {
+export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
   /**
    * A Badge can have its content and borders styled for greater emphasis or to be subtle.
    * It can be filled, outline, ghost, inverted
    * @defaultvalue filled
    */
   appearance?: BadgeAppearance;
-
-  /**
-   * A Badge can be one of preset colors
-   * @defaultvalue brand
-   */
-  color?: BadgeColor;
 
   /*
    * Source URL or name of the icon to show on the Badge.
@@ -112,7 +121,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
   circular?: BadgeTokens;
   square?: BadgeTokens;
 }
-export interface BadgeTokens extends BadgeCoreTokens {
+export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
   /**
    * The size of the icon.
    */
@@ -122,6 +131,11 @@ export interface BadgeTokens extends BadgeCoreTokens {
    * The weight of the lines used when drawing the icon.
    */
   iconWeight?: number;
+
+  /**
+   * When isRTL - applies Badge from the left side
+   */
+  rtl?: BadgeTokens;
 
   /**
    * Additional states that can be applied to a Badge

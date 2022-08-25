@@ -47,7 +47,6 @@ export function getFilledColorProps(
   const colorDark = restColors.colorDark || color;
   const hcBackground = restColors.hcBackground || theme.colors.neutralBackgroundInverted;
   const hcColor = restColors.hcColor || theme.colors.neutralForegroundInverted;
-  const hcBorderColor = restColors.hcBorderColor || theme.colors.transparentStroke;
   const getThemeProps = getProps || getDefaultProps;
 
   return getThemeProps(theme, {
@@ -65,7 +64,7 @@ export function getFilledColorProps(
       backgroundColor: hcBackground,
       color: hcColor,
       iconColor: hcColor,
-      borderColor: hcBorderColor,
+      borderColor: theme.colors.transparentStroke,
     },
   });
 }
@@ -81,14 +80,16 @@ export function getOutlineColorProps(
   theme: Theme,
   getProps?: (theme: Theme, themeProps: ThemeProps) => Record<string, unknown>,
 ) {
-  const { color, colorDark } = colors;
-  const borderColorDark = colors.borderColorDark || colorDark;
+  const { color } = colors;
+  const borderColor = colors.borderColor || color;
+  const colorDark = colors.colorDark || color;
+  const borderColorDark = colors.borderColorDark || borderColor || colorDark;
   const getThemeProps = getProps || getDefaultProps;
   return getThemeProps(theme, {
     light: {
       color: color,
       iconColor: color,
-      borderColor: color,
+      borderColor: borderColor,
     },
     dark: {
       color: colorDark,
@@ -114,7 +115,10 @@ export function getTintColorProps(
   theme: Theme,
   getProps?: (theme: Theme, themeProps: ThemeProps) => Record<string, unknown>,
 ) {
-  const { backgroundColor, color, borderColor, backgroundColorDark, colorDark, borderColorDark } = colors;
+  const { backgroundColor, color, borderColor } = colors;
+  const backgroundColorDark = colors.backgroundColorDark || backgroundColor;
+  const colorDark = colors.colorDark || color;
+  const borderColorDark = colors.borderColorDark || borderColor;
   const getThemeProps = getProps || getDefaultProps;
   return getThemeProps(theme, {
     light: {
@@ -149,7 +153,8 @@ export function getGhostColorProps(
   theme: Theme,
   getProps?: (theme: Theme, themeProps: ThemeProps) => Record<string, unknown>,
 ) {
-  const { color, colorDark } = colors;
+  const { color } = colors;
+  const colorDark = colors.colorDark || color;
   const getThemeProps = getProps || getDefaultProps;
   return getThemeProps(theme, {
     light: {
