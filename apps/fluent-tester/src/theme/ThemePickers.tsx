@@ -47,7 +47,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
   return <MenuPicker selected={selected} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
 };
 
-const PickerLabel = Text.customize({ variant: 'bodySemibold', color: 'white' });
+const PickerLabel = Text.customize({ variant: 'bodySemibold' });
 
 export const ThemePickers: React.FunctionComponent = () => {
   const onBrandChange = React.useCallback((newBrand: string) => {
@@ -65,7 +65,7 @@ export const ThemePickers: React.FunctionComponent = () => {
   return (
     <View style={themePickerStyles.pickerRoot}>
       <View style={themePickerStyles.picker}>
-        <PickerLabel>Theme: </PickerLabel>
+        <PickerLabel color={'white'}>Theme: </PickerLabel>
         <PartPicker initial={testerTheme.themeName} onChange={onThemeSelected} contents={themeChoices} />
       </View>
 

@@ -62,67 +62,45 @@ export const commonTestStyles = StyleSheet.create({
 });
 
 export const fluentTesterStyles = StyleSheet.create({
-  testRoot: {
+  root: {
     flex: 1,
-    flexGrow: 1,
-    flexDirection: 'row',
-    minHeight: 550,
-    minWidth: 300,
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
     padding: 4,
   },
-
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 12,
   },
-
-  testHeader: {
+  title: {
     alignSelf: 'center',
   },
-
+  testRoot: {
+    flex: 1,
+    flexDirection: 'row',
+    minHeight: 600,
+    minWidth: 400,
+  },
   testList: {
     minWidth: 160,
-    flexShrink: 0,
-    flexGrow: 1,
+    flex: 1,
     flexDirection: 'row',
     borderRadius: 8,
-    margin: 12,
+    margin: 8,
   },
-
   testListContainerStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
+    flex: 1,
   },
-
-  scrollViewStyle: {
-    flexDirection: 'column',
-    alignItems: 'stretch',
-  },
-
-  scrollViewContainer: {
-    height: 250,
-    width: 150,
-    flexShrink: 0,
-    flexGrow: 0,
-    flexDirection: 'column',
-  },
-
   testListItem: {
-    width: '100%',
-    borderRadius: 0,
     justifyContent: 'flex-start',
+    borderRadius: 8,
   },
-
-  testSection: {
-    flexGrow: 1,
-  },
-
-  noTest: {
-    alignSelf: 'center',
-    fontSize: 18,
+  testComponentView: {
+    flex: 1,
+    borderRadius: 8,
+    margin: 8,
+    padding: 8,
+    width: 500,
   },
 });
 

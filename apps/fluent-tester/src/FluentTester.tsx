@@ -1,9 +1,10 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
+import { FocusTrapZone, Separator } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
+import { ScrollView, View, Platform, SafeAreaView, BackHandler } from 'react-native';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -18,7 +19,7 @@ MessageQueue.spy(true);
  */
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
+  return <Text variant={'heroStandard'}>Select a component from the left.</Text>;
 };
 export interface FluentTesterProps {
   initialTest?: string;
@@ -83,6 +84,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
+  // const TestComponent = EmptyComponent;
 
   const themedStyles = getThemedStyles(useTheme());
 
@@ -108,7 +110,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
             },
           ]}
         >
-          <Text testID={BASE_TESTPAGE} style={[fluentTesterStyles.testHeader]} variant="heroLargeSemibold" color={'white'}>
+          <Text testID={BASE_TESTPAGE} style={fluentTesterStyles.title} variant="heroLargeSemibold" color={'white'}>
             ⚛ FluentUI Tests
           </Text>
           <ThemePickers />
@@ -124,7 +126,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     return (
       <View style={mobileStyles.header}>
         <Text
-          style={[fluentTesterStyles.testHeader]}
+          style={[fluentTesterStyles.title]}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
           testID={BASE_TESTPAGE}
@@ -161,10 +163,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 <TestListItem
                   enableFocusRing={false}
                   appearance="subtle"
+                  block
                   key={index}
                   pressed={index == selectedTestIndex}
                   onClick={() => setSelectedTestIndex(index)}
-                  style={[fluentTesterStyles.testListItem, { borderRadius: 8 }]}
+                  style={fluentTesterStyles.testListItem}
                   testID={description.testPage}
                 >
                   {description.name}
@@ -212,15 +215,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     return (
       <Shadow shadowToken={theme.shadows.shadow16}>
         <View
-          style={{
-            backgroundColor: theme.colors.neutralBackground6,
-            borderRadius: 8,
-            margin: 12,
-            padding: 12,
-            width: '85%',
-          }}
+          style={[
+            fluentTesterStyles.testComponentView,
+            {
+              backgroundColor: theme.colors.neutralBackground6,
+            },
+          ]}
         >
-          <ScrollView style={fluentTesterStyles.testSection}>
+          <ScrollView>
             <TestComponent />
           </ScrollView>
         </View>
@@ -240,27 +242,25 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TesterContent: React.FunctionComponent = () => {
     return (
-      <View style={{ flex: 1 }}>
-        {enableSinglePaneView ? <MobileHeader /> : <Header />}
-
-        {/* <HeaderSeparator /> */}
-
-        <View style={fluentTesterStyles.testRoot}>
-          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-          {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
-        </View>
+      <View style={fluentTesterStyles.testRoot}>
+        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+        {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
       </View>
     );
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={fluentTesterStyles.root}>
       {Platform.OS === ('win32' as any) ? (
         <FocusTrapZone style={themedStyles.root}>
+          {enableSinglePaneView ? <MobileHeader /> : <Header />}
+
           <TesterContent />
         </FocusTrapZone>
       ) : (
         <RootView style={themedStyles.root}>
+          {enableSinglePaneView ? <MobileHeader /> : <Header />}
+
           <TesterContent />
         </RootView>
       )}
