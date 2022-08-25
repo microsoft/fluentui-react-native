@@ -4004,9 +4004,9 @@ appdirsjs@^1.2.4:
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
 appium-mac2-driver@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.0.tgz#6059bcaada3608505c2b2f2535d33b7cc43c2584"
-  integrity sha512-gKdQOrl1esSfrXh5JCA+cs1YKoj7m+TU9NdpEgd1z5OE+0nAD17E0wqrl89drVzACdugejf7U8KQ2MmIUzXMBQ==
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.1.tgz#03ca37f4599c20ac0503180342d92063e6a87fde"
+  integrity sha512-g7dmlLkkbmInHF39ZMExwTcjzxxu3kCdtnoK097VZ45XGvn/4Vj95LX4QvhyCtsFrs1kPibmor1F0wyX+WFCbg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.0.2"
@@ -4015,7 +4015,7 @@ appium-mac2-driver@^1.4.0:
     lodash "^4.17.4"
     portscanner "2.2.0"
     source-map-support "^0.x"
-    teen_process "^1.15.0"
+    teen_process "^2.0.1"
 
 appium-windows-driver@^2.0.1:
   version "2.0.7"
@@ -13165,7 +13165,7 @@ tar@^6.1.9:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-teen_process@1.16.0, teen_process@^1.15.0:
+teen_process@1.16.0:
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-1.16.0.tgz#2bad3e33b4d0a3a271cdd0c836434befa7771b44"
   integrity sha512-RnW7HHZD1XuhSTzD3djYOdIl1adE3oNEprE3HOFFxWs5m4FZsqYRhKJ4mDU2udtNGMLUS7jV7l8vVRLWAvmPDw==
