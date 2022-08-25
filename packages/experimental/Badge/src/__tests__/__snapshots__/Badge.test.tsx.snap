@@ -10,7 +10,7 @@ exports[`Badge component tests Badge all props 1`] = `
       "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "transparent",
-      "borderColor": "#0078d4",
+      "borderColor": "transparent",
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -49,7 +49,7 @@ exports[`Badge component tests Badge all props 1`] = `
     paddingHorizontal={2}
     style={
       Object {
-        "color": "#0078d4",
+        "color": "#ffffff",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
@@ -72,8 +72,8 @@ exports[`Badge component tests Badge tokens 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "yellow",
+      "borderColor": "#f09",
       "borderRadius": 9999,
       "borderWidth": 4,
       "bottom": 0,
@@ -181,7 +181,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#0078d4",
+        "color": "#ffffff",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
         "fontStyle": undefined,
@@ -327,8 +327,8 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": "yellow",
+      "borderColor": "#f09",
       "borderRadius": 9999,
       "borderWidth": 4,
       "bottom": 0,
