@@ -164,7 +164,7 @@ const PrimaryWithAutoHide: React.FunctionComponent = () => {
         {visible ? 'Hide' : 'Show'}
       </Button>
       {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
+        <Animated.View style={animatedViewProps}>
           <Notification
             variant={'primary'}
             action="Undo"
@@ -237,7 +237,7 @@ const PrimaryBarWithAutoHide: React.FunctionComponent = () => {
         {visible ? 'Hide' : 'Show'}
       </Button>
       {!hidden && (
-        <Animated.View style={[animatedViewProps]}>
+        <Animated.View style={animatedViewProps}>
           <Notification
             variant={'primaryBar'}
             onPress={() => {

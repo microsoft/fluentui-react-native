@@ -39,6 +39,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       borderColor: t.colors.menuDivider,
       borderWidth: 0.1,
     },
+    testListSeparator: { marginHorizontal: 8 },
   };
 });
 
@@ -89,7 +90,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       <View style={fluentTesterStyles.header}>
         <Text
           testID={BASE_TESTPAGE}
-          style={[fluentTesterStyles.testHeader]}
+          style={fluentTesterStyles.testHeader}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
         >
@@ -107,7 +108,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     return (
       <View style={mobileStyles.header}>
         <Text
-          style={[fluentTesterStyles.testHeader]}
+          style={fluentTesterStyles.testHeader}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
           testID={BASE_TESTPAGE}
@@ -153,7 +154,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           })}
         </ScrollView>
 
-        <TestListSeparator vertical style={{ marginHorizontal: 8 }} />
+        <TestListSeparator vertical style={themedStyles.testListSeparator} />
       </View>
     );
   };
@@ -206,9 +207,10 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
+  const testerContentViewStyle = { flex: 1 };
   const TesterContent: React.FunctionComponent = () => {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={testerContentViewStyle}>
         {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
         <HeaderSeparator />

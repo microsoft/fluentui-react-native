@@ -89,7 +89,7 @@ const SwatchList: React.FunctionComponent = () => {
     return <SemanticColor key={key} color={color} name={key} />;
   }, []);
   return (
-    <View style={[commonTestStyles.view]}>
+    <View style={commonTestStyles.view}>
       <Text>getHostSettingsWin32(theme: ITheme).palette</Text>
       <View style={themedStyles.stackStyle}>{paletteAsArray.map((item) => renderSwatch({ item }))}</View>
     </View>

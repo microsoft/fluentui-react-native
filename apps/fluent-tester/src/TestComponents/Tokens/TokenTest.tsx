@@ -85,7 +85,7 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
     return <ColorToken key={key} color={color} name={key} />;
   }, []);
   return (
-    <View style={[commonTestStyles.view]}>
+    <View style={commonTestStyles.view}>
       <Text>Alias Color Tokens from Token Pipeline</Text>
       <View style={themedStyles.stackStyle}>{aliasTokensAsArray.map((item) => renderSwatch({ item }))}</View>
     </View>
