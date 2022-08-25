@@ -76,18 +76,20 @@ export const fluentTesterStyles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    marginHorizontal: 12,
   },
 
   testHeader: {
-    marginBottom: 8,
-    marginTop: 4,
+    alignSelf: 'center',
   },
 
   testList: {
     minWidth: 160,
     flexShrink: 0,
-    flexGrow: 0,
+    flexGrow: 1,
     flexDirection: 'row',
+    borderRadius: 8,
+    margin: 12,
   },
 
   testListContainerStyle: {
@@ -98,8 +100,6 @@ export const fluentTesterStyles = StyleSheet.create({
   scrollViewStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
-    // height: 200,
-    // width: 200,
   },
 
   scrollViewContainer: {
@@ -127,7 +127,6 @@ export const fluentTesterStyles = StyleSheet.create({
 });
 
 export const stackStyle: IStackProps['style'] = {
-  borderWidth: 1,
   borderColor: '#bdbdbd',
   paddingVertical: 8,
   paddingHorizontal: 12,

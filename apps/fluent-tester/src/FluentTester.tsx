@@ -9,6 +9,7 @@ import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 // uncomment the below lines to enable message spy
 /**
@@ -35,21 +36,29 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       alignItems: 'stretch',
       padding: 4,
     },
-    testSeparator: {
-      borderColor: t.colors.menuDivider,
-      borderWidth: 0.1,
-    },
   };
 });
 
-const HeaderSeparator = Separator.customize((t) => ({
-  color: t.colors.bodyFrameDivider,
-  separatorWidth: 2,
-}));
-
-const TestListSeparator = Separator.customize((t) => ({
-  color: t.colors.menuDivider,
-  separatorWidth: 2,
+const TestListItem = Button.customize((t) => ({
+  subtle: {
+    color: t.colors.neutralForeground1,
+    shadowToken: undefined,
+    hovered: {
+      backgroundColor: t.colors.neutralBackground1Hover,
+      color: t.colors.neutralForeground1,
+      shadowToken: t.shadows.shadow8brand,
+    },
+    focused: {
+      backgroundColor: t.colors.brandForeground1,
+      color: t.colors.neutralForegroundInverted,
+      shadowToken: t.shadows.shadow2brand,
+    },
+    pressed: {
+      backgroundColor: t.colors.brandForeground1,
+      color: t.colors.neutralForegroundInverted,
+      shadowToken: t.shadows.shadow2brand,
+    },
+  },
 }));
 
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
@@ -86,17 +95,25 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     const theme = useTheme();
 
     return (
-      <View style={fluentTesterStyles.header}>
-        <Text
-          testID={BASE_TESTPAGE}
-          style={[fluentTesterStyles.testHeader]}
-          variant="heroLargeSemibold"
-          color={theme.host.palette?.TextEmphasis}
+      <Shadow shadowToken={theme.shadows.shadow16brand}>
+        <View
+          style={[
+            fluentTesterStyles.header,
+            {
+              backgroundColor: theme.colors.brandForeground1,
+              borderRadius: 12,
+              paddingTop: 8,
+              paddingHorizontal: 16,
+              paddingBottom: 14,
+            },
+          ]}
         >
-          ⚛ FluentUI Tests
-        </Text>
-        <ThemePickers />
-      </View>
+          <Text testID={BASE_TESTPAGE} style={[fluentTesterStyles.testHeader]} variant="heroLargeSemibold" color={'white'}>
+            ⚛ FluentUI Tests
+          </Text>
+          <ThemePickers />
+        </View>
+      </Shadow>
     );
   };
 
@@ -134,27 +151,29 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
   const TestList: React.FunctionComponent = () => {
+    const theme = useTheme();
     return (
-      <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
-          {sortedTestComponents.map((description, index) => {
-            return (
-              <Button
-                appearance="subtle"
-                key={index}
-                disabled={index == selectedTestIndex}
-                onClick={() => setSelectedTestIndex(index)}
-                style={fluentTesterStyles.testListItem}
-                testID={description.testPage}
-              >
-                {description.name}
-              </Button>
-            );
-          })}
-        </ScrollView>
-
-        <TestListSeparator vertical style={{ marginHorizontal: 8 }} />
-      </View>
+      <Shadow shadowToken={theme.shadows.shadow16}>
+        <View style={[fluentTesterStyles.testList, { backgroundColor: theme.colors.neutralBackground3 }]}>
+          <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID="SCROLLVIEW_TEST_ID">
+            {sortedTestComponents.map((description, index) => {
+              return (
+                <TestListItem
+                  enableFocusRing={false}
+                  appearance="subtle"
+                  key={index}
+                  pressed={index == selectedTestIndex}
+                  onClick={() => setSelectedTestIndex(index)}
+                  style={[fluentTesterStyles.testListItem, { borderRadius: 8 }]}
+                  testID={description.testPage}
+                >
+                  {description.name}
+                </TestListItem>
+              );
+            })}
+          </ScrollView>
+        </View>
+      </Shadow>
     );
   };
 
@@ -189,10 +208,23 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   const TestComponentView: React.FunctionComponent = () => {
+    const theme = useTheme();
     return (
-      <ScrollView style={fluentTesterStyles.testSection}>
-        <TestComponent />
-      </ScrollView>
+      <Shadow shadowToken={theme.shadows.shadow16}>
+        <View
+          style={{
+            backgroundColor: theme.colors.neutralBackground6,
+            borderRadius: 8,
+            margin: 12,
+            padding: 12,
+            width: '85%',
+          }}
+        >
+          <ScrollView style={fluentTesterStyles.testSection}>
+            <TestComponent />
+          </ScrollView>
+        </View>
+      </Shadow>
     );
   };
 
@@ -211,7 +243,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       <View style={{ flex: 1 }}>
         {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
-        <HeaderSeparator />
+        {/* <HeaderSeparator /> */}
 
         <View style={fluentTesterStyles.testRoot}>
           {enableSinglePaneView ? <MobileTestList /> : <TestList />}

@@ -47,7 +47,7 @@ export const PartPicker: React.FunctionComponent<PartPickerProps> = (props: Part
   return <MenuPicker selected={selected} style={themePickerStyles.dropdown} onChange={onValueChange} collection={contents} />;
 };
 
-const PickerLabel = Text.customize({ variant: 'bodySemibold' });
+const PickerLabel = Text.customize({ variant: 'bodySemibold', color: 'white' });
 
 export const ThemePickers: React.FunctionComponent = () => {
   const onBrandChange = React.useCallback((newBrand: string) => {

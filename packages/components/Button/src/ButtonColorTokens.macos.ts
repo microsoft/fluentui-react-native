@@ -37,6 +37,7 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
       color: t.colors.primaryButtonText,
       borderColor: t.colors.brandedBorder,
       iconColor: t.colors.brandedIcon,
+      shadowToken: t.shadows.shadow2,
       disabled: {
         backgroundColor: t.colors.primaryButtonBackgroundDisabled,
         color: t.colors.brandedDisabledContent,

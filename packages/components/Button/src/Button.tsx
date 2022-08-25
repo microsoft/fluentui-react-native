@@ -74,14 +74,16 @@ export const Button = compose<ButtonType>({
       const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {loading && <ActivityIndicator />}
-          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {React.Children.map(children, (child) =>
-            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
-          )}
-          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
-        </Slots.root>
+        <Slots.shadow>
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {loading && <ActivityIndicator />}
+            {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+            {React.Children.map(children, (child) =>
+              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+            )}
+            {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          </Slots.root>
+        </Slots.shadow>
       );
     };
   },

@@ -32,6 +32,12 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
+    shadow: buildProps(
+      (tokens: ButtonCoreTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
+    ),
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {

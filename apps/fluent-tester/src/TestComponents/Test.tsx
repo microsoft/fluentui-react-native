@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { StyleSheet, View, Platform } from 'react-native';
-import { Text, Separator } from '@fluentui/react-native';
+import { Text, ToggleButton, Separator } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
+import { useTheme } from '@fluentui-react-native/theme-types';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export type TestSection = {
   name: string;
@@ -29,6 +31,10 @@ export interface TestProps {
 const styles = StyleSheet.create({
   name: {
     marginTop: 4,
+  },
+  definitionHeader: {
+    marginTop: 12,
+    marginBottom: 6,
   },
   description: {
     alignItems: 'flex-start',
@@ -58,22 +64,44 @@ const styles = StyleSheet.create({
 const isMobile = Platform.OS == 'android' || (Platform.OS == 'ios' && !Platform.isPad);
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
+  const [showStatus, setShowStatus] = React.useState(false);
+  const theme = useTheme();
+  const fontFamily = theme.typography.families.primary;
+
+  const plusCodepoint = 0x2795;
+  const minusCodepoint = 0x2796;
+  const fontIconProps = {
+    fontFamily: fontFamily,
+    codepoint: showStatus ? minusCodepoint : plusCodepoint,
+    fontSize: 10,
+  };
+
   return (
     <View testID="ScrollViewAreaForComponents">
       <Text style={[styles.name]} variant="heroSemibold">
         {props.name}
       </Text>
       <Separator />
-      <Stack style={stackStyle}>
-        <Text style={styles.description}>{props.description}</Text>
-      </Stack>
-      {!isMobile && (
-        <Stack style={stackStyle}>
+      <Shadow shadowToken={theme.shadows.shadow2}>
+        <Stack style={[stackStyle, { backgroundColor: theme.colors.neutralBackground3, borderRadius: 8 }]}>
+          <Text style={styles.description}>{props.description}</Text>
+        </Stack>
+      </Shadow>
+      <Shadow shadowToken={theme.shadows.shadow2}>
+        <Stack style={[stackStyle, { backgroundColor: theme.colors.neutralBackground3, borderRadius: 8 }]}>
           <View style={styles.statusView}>
-            <Stack>
-              <Text style={[styles.statusHeader]} variant="headerStandard">
-                Platform Status
-              </Text>
+            <Text style={[styles.statusHeader]} variant="headerStandard">
+              Platform Status
+            </Text>
+            <ToggleButton
+              iconOnly={true}
+              icon={{ fontSource: fontIconProps }}
+              onClick={() => setShowStatus(!showStatus)}
+              style={[styles.statusLabel]}
+            />
+          </View>
+          {showStatus && (
+            <View>
               <Text style={[styles.statusLabel]} variant="bodySemibold">
                 Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
               </Text>
@@ -89,10 +117,8 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
               <Text style={[styles.statusLabel]} variant="bodySemibold">
                 Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
               </Text>
-            </Stack>
 
-            <Stack style={stackStyle}>
-              <Text style={[styles.statusHeader]} variant="headerStandard">
+              <Text style={[styles.definitionHeader]} variant="headerStandard">
                 Status Definitions
               </Text>
               <Text style={[styles.statusLabel]} variant="bodySemibold">
@@ -114,20 +140,22 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
               <Text style={[styles.statusLabel]} variant="bodySemibold">
                 N/A: <Text style={styles.status}>Control is not in current plan.</Text>
               </Text>
-            </Stack>
-          </View>
+            </View>
+          )}
         </Stack>
-      )}
+      </Shadow>
       {props.sections.map((section, index) => {
         const TestComponent = section.component;
         return (
-          <View key={index}>
-            <Text style={[styles.section]} variant="headerSemibold" testID={section.testID}>
-              {section.name}
-            </Text>
-            <Separator />
-            <TestComponent />
-          </View>
+          <Shadow shadowToken={theme.shadows.shadow2}>
+            <View key={index} style={[stackStyle, { backgroundColor: theme.colors.neutralBackground3, borderRadius: 8 }]}>
+              <Text style={[styles.section]} variant="headerSemibold" testID={section.testID}>
+                {section.name}
+              </Text>
+              <Separator />
+              <TestComponent />
+            </View>
+          </Shadow>
         );
       })}
     </View>
