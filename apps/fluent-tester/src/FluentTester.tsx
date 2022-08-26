@@ -206,10 +206,9 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   };
 
-  const testerContentViewStyle = { flex: 1 };
   const TesterContent: React.FunctionComponent = () => {
     return (
-      <View style={testerContentViewStyle}>
+      <View style={commonTestStyles.flex}>
         {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
         <HeaderSeparator />

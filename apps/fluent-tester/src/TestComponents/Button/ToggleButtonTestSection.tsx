@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-  hmargin: {
+  checkbox: {
+    ...commonTestStyles.vmargin,
     marginHorizontal: 8,
   },
 });
-const checkboxStyle = [commonTestStyles.vmargin, styles.hmargin];
 
 export const ToggleButtonTest: React.FunctionComponent = () => {
   const [defaultChecked, setDefaultChecked] = React.useState(false);
@@ -26,7 +26,7 @@ export const ToggleButtonTest: React.FunctionComponent = () => {
         <ToggleButton onClick={onDefaultClicked} checked={defaultChecked} style={commonTestStyles.vmargin}>
           Default Toggle
         </ToggleButton>
-        <Checkbox checked={defaultChecked} label="Default Toggle is Checked" style={checkboxStyle} />
+        <Checkbox checked={defaultChecked} label="Default Toggle is Checked" style={styles.checkbox} />
       </View>
       <ToggleButton checked style={commonTestStyles.vmargin}>
         Checked Default Toggle
@@ -47,7 +47,7 @@ export const ToggleButtonTest: React.FunctionComponent = () => {
         <ToggleButton appearance="subtle" onClick={onGhostClicked} checked={subtleChecked} style={commonTestStyles.vmargin}>
           Subtle Toggle
         </ToggleButton>
-        <Checkbox checked={subtleChecked} label="Subtle Toggle is Checked" style={checkboxStyle} />
+        <Checkbox checked={subtleChecked} label="Subtle Toggle is Checked" style={styles.checkbox} />
       </View>
       <ToggleButton appearance="subtle" checked style={commonTestStyles.vmargin}>
         Checked Subtle Toggle

@@ -16,7 +16,7 @@ import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -168,12 +168,12 @@ const MenuOpenOnHover: React.FunctionComponent = () => {
   );
 };
 
-const rootStackStyle: StyleProp<ViewStyle> = [stackStyle, { flexDirection: 'row' }];
+const rootStackStyle = StyleSheet.create({ root: { ...(stackStyle as object), flexDirection: 'row' } });
 
 const MenuControlledOpen: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   return (
-    <Stack style={rootStackStyle}>
+    <Stack style={rootStackStyle.root}>
       <Button onClick={() => setOpen(!open)}>Toggle open</Button>
       <Menu open={open}>
         <MenuTrigger>
