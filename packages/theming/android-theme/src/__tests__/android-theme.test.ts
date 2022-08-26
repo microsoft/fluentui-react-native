@@ -28,7 +28,7 @@ it('getAndroidTheme dark appearance test', () => {
   expect(darkTheme).toMatchSnapshot();
 });
 
-it.concurrent.each(themeOptions)('createAndroidTheme test', (option: ThemeOptions) => {
+it.concurrent.each(themeOptions)('createAndroidTheme test option %o', (option: ThemeOptions) => {
   const theme = createAndroidTheme(option).theme;
   expect(theme).toMatchSnapshot();
 });
