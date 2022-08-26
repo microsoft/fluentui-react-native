@@ -29,19 +29,20 @@ it('defaultFluentDarkTheme test', () => {
 });
 
 describe('createDefaultTheme test', () => {
-  it.concurrent.each(createDefaultThemeTable)('themeOption => %o', async (themeOption: ThemeOptions) => {
-    expect(createDefaultTheme(themeOption)).toMatchSnapshot();
+  it.concurrent.each(createDefaultThemeTable)('themeOption - %o', async (themeOption: ThemeOptions) => {
+    const defaultTheme = createDefaultTheme(themeOption).theme;
+    expect(defaultTheme).toMatchSnapshot();
   });
 });
 
 describe('createColorAliasTokens test', () => {
-  it.concurrent.each(appearanceOptions)('appearanceOptions => %s', async (appearanceOption: AppearanceOptions) => {
+  it.concurrent.each(appearanceOptions)('appearanceOptions - %s', async (appearanceOption: AppearanceOptions) => {
     expect(createColorAliasTokens(appearanceOption)).toMatchSnapshot();
   });
 });
 
 describe('createShadowAliasTokens test', () => {
-  it.concurrent.each(appearanceOptions)('appearanceOptions => %s', async (appearanceOption: AppearanceOptions) => {
+  it.concurrent.each(appearanceOptions)('appearanceOptions - %s', async (appearanceOption: AppearanceOptions) => {
     expect(createShadowAliasTokens(appearanceOption)).toMatchSnapshot();
   });
 });
