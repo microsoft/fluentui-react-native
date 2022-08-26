@@ -5,7 +5,7 @@ import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
-import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
+import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
@@ -39,7 +39,6 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       borderColor: t.colors.menuDivider,
       borderWidth: 0.1,
     },
-    testListSeparator: { marginHorizontal: 8 },
   };
 });
 
@@ -154,7 +153,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           })}
         </ScrollView>
 
-        <TestListSeparator vertical style={themedStyles.testListSeparator} />
+        <TestListSeparator vertical style={fluentTesterStyles.testListSeparator} />
       </View>
     );
   };
@@ -224,7 +223,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={commonTestStyles.flex}>
       {Platform.OS === ('win32' as any) ? (
         <FocusTrapZone style={themedStyles.root}>
           <TesterContent />

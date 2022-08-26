@@ -8,6 +8,7 @@ export const commonTestStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
+  flex: { flex: 1 },
   header: {
     marginVertical: 6,
     fontSize: 16,
@@ -115,6 +116,8 @@ export const fluentTesterStyles = StyleSheet.create({
     borderRadius: 0,
     justifyContent: 'flex-start',
   },
+
+  testListSeparator: { marginHorizontal: 8 },
 
   testSection: {
     flexGrow: 1,
