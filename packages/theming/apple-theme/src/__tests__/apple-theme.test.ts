@@ -11,14 +11,6 @@ const macOsAliasTokensTable: [AppearanceOptions, boolean][] = [
   ['highContrast', null],
 ];
 
-// const macOsAliasShadowTokensTable = [
-//   ['light', true, macOSLightHCShadowTokens.shadow],
-//   ['light', false, macOSLightShadowTokens.shadow],
-//   ['dark', true, macOSDarkHCShadowTokens.shadow],
-//   ['dark', false, macOSDarkShadowTokens.shadow],
-//   ['highContrast', null, null],
-// ];
-
 it('createAppleTheme test', () => {
   const appleTheme = createAppleTheme().theme;
   expect(appleTheme).toMatchSnapshot();
@@ -30,6 +22,16 @@ describe('createMacOSColorAliasTokens test', () => {
       expect(() => createMacOSColorAliasTokens(mode, isHighContrast)).toThrow();
     } else {
       expect(createMacOSColorAliasTokens(mode, isHighContrast)).toMatchSnapshot();
+    }
+  });
+});
+
+describe('createMacOSShadowAliasTokens test', () => {
+  it.concurrent.each(macOsAliasTokensTable)('mode: %s, isHighContrast: %p', async (mode: AppearanceOptions, isHighContrast: boolean) => {
+    if (mode === 'highContrast') {
+      expect(() => createMacOSShadowAliasTokens(mode, isHighContrast)).toThrow();
+    } else {
+      expect(createMacOSShadowAliasTokens(mode, isHighContrast)).toMatchSnapshot();
     }
   });
 });
