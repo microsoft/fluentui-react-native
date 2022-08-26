@@ -1,4 +1,5 @@
 export { createOfficeTheme } from './createOfficeTheme';
+export { hcAliasTokens } from './highContrast/tokens-alias';
 export { createPartialOfficeTheme } from './createPartialOfficeTheme';
 export { fallbackGetPalette, fallbackOfficeModule, getThemingModule } from './NativeModule/index';
 export type {

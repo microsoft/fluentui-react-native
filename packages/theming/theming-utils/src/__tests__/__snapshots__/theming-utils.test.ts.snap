@@ -1,0 +1,1566 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mapFontPipelineToTheme test blackAliasTokens 1`] = `
+Object {
+  "body1": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "400",
+  },
+  "body1Strong": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "600",
+  },
+  "body2": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "400",
+  },
+  "body2Strong": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "600",
+  },
+  "caption1": Object {
+    "face": "primary",
+    "size": 10,
+    "weight": "400",
+  },
+  "display": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "600",
+  },
+  "largeTitle": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "400",
+  },
+  "subtitle1": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "400",
+  },
+  "subtitle1Strong": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "600",
+  },
+  "subtitle2": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "400",
+  },
+  "subtitle2Strong": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "600",
+  },
+  "title1": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "400",
+  },
+  "title1Strong": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "600",
+  },
+}
+`;
+
+exports[`mapFontPipelineToTheme test colorfulAliasTokens 1`] = `
+Object {
+  "body1": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "400",
+  },
+  "body1Strong": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "600",
+  },
+  "body2": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "400",
+  },
+  "body2Strong": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "600",
+  },
+  "caption1": Object {
+    "face": "primary",
+    "size": 10,
+    "weight": "400",
+  },
+  "display": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "600",
+  },
+  "largeTitle": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "400",
+  },
+  "subtitle1": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "400",
+  },
+  "subtitle1Strong": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "600",
+  },
+  "subtitle2": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "400",
+  },
+  "subtitle2Strong": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "600",
+  },
+  "title1": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "400",
+  },
+  "title1Strong": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "600",
+  },
+}
+`;
+
+exports[`mapFontPipelineToTheme test darkGrayAliasTokens 1`] = `
+Object {
+  "body1": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "400",
+  },
+  "body1Strong": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "600",
+  },
+  "body2": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "400",
+  },
+  "body2Strong": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "600",
+  },
+  "caption1": Object {
+    "face": "primary",
+    "size": 10,
+    "weight": "400",
+  },
+  "display": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "600",
+  },
+  "largeTitle": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "400",
+  },
+  "subtitle1": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "400",
+  },
+  "subtitle1Strong": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "600",
+  },
+  "subtitle2": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "400",
+  },
+  "subtitle2Strong": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "600",
+  },
+  "title1": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "400",
+  },
+  "title1Strong": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "600",
+  },
+}
+`;
+
+exports[`mapFontPipelineToTheme test hcAliasTokens 1`] = `
+Object {
+  "body1": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "400",
+  },
+  "body1Strong": Object {
+    "face": "primary",
+    "size": 12,
+    "weight": "600",
+  },
+  "body2": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "400",
+  },
+  "body2Strong": Object {
+    "face": "primary",
+    "size": 14,
+    "weight": "600",
+  },
+  "caption1": Object {
+    "face": "primary",
+    "size": 10,
+    "weight": "400",
+  },
+  "display": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "600",
+  },
+  "largeTitle": Object {
+    "face": "primary",
+    "size": 40,
+    "weight": "400",
+  },
+  "subtitle1": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "400",
+  },
+  "subtitle1Strong": Object {
+    "face": "primary",
+    "size": 20,
+    "weight": "600",
+  },
+  "subtitle2": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "400",
+  },
+  "subtitle2Strong": Object {
+    "face": "primary",
+    "size": 16,
+    "weight": "600",
+  },
+  "title1": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "400",
+  },
+  "title1Strong": Object {
+    "face": "primary",
+    "size": 28,
+    "weight": "600",
+  },
+}
+`;
+
+exports[`mapPipelineToShadow test darkShadowTokens.shadow 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`mapPipelineToShadow test hcShadowTokens.shadow 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`mapPipelineToShadow test lightShadowTokens.shadow 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`mapPipelineToTheme test darkAliasTokens 1`] = `
+Object {
+  "brandBackground": "#106ebe",
+  "brandBackground2": "#004578",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#0078d4",
+  "brandBackgroundPressed": "#004578",
+  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#3aa0f3",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#6cb8f6",
+  "brandForegroundLink": "#2899f5",
+  "brandForegroundLinkHover": "#6cb8f6",
+  "brandForegroundLinkPressed": "#3aa0f3",
+  "brandForegroundLinkSelected": "#2899f5",
+  "brandStroke1": "#2899f5",
+  "brandStroke2": "#004c87",
+  "compoundBrandBackground1": "#2899f5",
+  "compoundBrandBackground1Hover": "#3aa0f3",
+  "compoundBrandBackground1Pressed": "#0078d4",
+  "compoundBrandForeground1": "#2899f5",
+  "compoundBrandForeground1Hover": "#3aa0f3",
+  "compoundBrandForeground1Pressed": "#0078d4",
+  "compoundBrandStroke1": "#2899f5",
+  "compoundBrandStroke1Hover": "#3aa0f3",
+  "compoundBrandStroke1Pressed": "#0078d4",
+  "neutralBackground1": "#292929",
+  "neutralBackground1Hover": "#3d3d3d",
+  "neutralBackground1Pressed": "#1f1f1f",
+  "neutralBackground1Selected": "#383838",
+  "neutralBackground2": "#1f1f1f",
+  "neutralBackground2Hover": "#333333",
+  "neutralBackground2Pressed": "#141414",
+  "neutralBackground2Selected": "#2e2e2e",
+  "neutralBackground3": "#141414",
+  "neutralBackground3Hover": "#292929",
+  "neutralBackground3Pressed": "#0a0a0a",
+  "neutralBackground3Selected": "#242424",
+  "neutralBackground4": "#0a0a0a",
+  "neutralBackground4Hover": "#1f1f1f",
+  "neutralBackground4Pressed": "#000000",
+  "neutralBackground4Selected": "#1a1a1a",
+  "neutralBackground5": "#000000",
+  "neutralBackground5Hover": "#141414",
+  "neutralBackground5Pressed": "#050505",
+  "neutralBackground5Selected": "#0f0f0f",
+  "neutralBackground6": "#333333",
+  "neutralBackgroundDisabled": "#141414",
+  "neutralBackgroundInverted": "#ffffff",
+  "neutralForeground1": "#ffffff",
+  "neutralForeground1Hover": "#ffffff",
+  "neutralForeground1Pressed": "#ffffff",
+  "neutralForeground1Selected": "#ffffff",
+  "neutralForeground2": "#d6d6d6",
+  "neutralForeground2BrandHover": "#3aa0f3",
+  "neutralForeground2BrandPressed": "#2899f5",
+  "neutralForeground2BrandSelected": "#3aa0f3",
+  "neutralForeground2Hover": "#ffffff",
+  "neutralForeground2Pressed": "#ffffff",
+  "neutralForeground2Selected": "#ffffff",
+  "neutralForeground3": "#adadad",
+  "neutralForeground3BrandHover": "#3aa0f3",
+  "neutralForeground3BrandPressed": "#2899f5",
+  "neutralForeground3BrandSelected": "#3aa0f3",
+  "neutralForeground3Hover": "#d6d6d6",
+  "neutralForeground3Pressed": "#d6d6d6",
+  "neutralForeground3Selected": "#d6d6d6",
+  "neutralForeground4": "#999999",
+  "neutralForegroundDisabled": "#5c5c5c",
+  "neutralForegroundInverted": "#242424",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#333333",
+  "neutralStencil2": "#575757",
+  "neutralStroke1": "#666666",
+  "neutralStroke1Hover": "#757575",
+  "neutralStroke1Pressed": "#6b6b6b",
+  "neutralStroke1Selected": "#707070",
+  "neutralStroke2": "#525252",
+  "neutralStroke3": "#3d3d3d",
+  "neutralStrokeAccessible": "#adadad",
+  "neutralStrokeAccessibleHover": "#bdbdbd",
+  "neutralStrokeAccessiblePressed": "#b3b3b3",
+  "neutralStrokeAccessibleSelected": "#3aa0f3",
+  "neutralStrokeDisabled": "#424242",
+  "redBackground1": "#230308",
+  "redBackground2": "#420610",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#750b1c",
+  "redBorder2": "#962f3f",
+  "redBorderActive": "#ac4f5e",
+  "redForeground1": "#ac4f5e",
+  "redForeground2": "#420610",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#000000",
+  "strokeFocus2": "#ffffff",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#383838",
+  "subtleBackgroundPressed": "#2e2e2e",
+  "subtleBackgroundSelected": "#333333",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "transparent",
+  "transparentStrokeDisabled": "transparent",
+  "transparentStrokeInteractive": "transparent",
+}
+`;
+
+exports[`mapPipelineToTheme test hcAliasTokens 1`] = `
+Object {
+  "brandBackground": Object {
+    "resource_paths": Array [
+      "SystemColorButtonFaceColor",
+    ],
+  },
+  "brandBackground2": Object {
+    "resource_paths": Array [
+      "SystemColorButtonFaceColor",
+    ],
+  },
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "brandBackgroundPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "brandBackgroundSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "brandBackgroundStatic": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "brandForeground1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": Object {
+    "resource_paths": Array [
+      "SystemColorButtonTextColor",
+    ],
+  },
+  "brandForegroundLink": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "brandForegroundLinkHover": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "brandForegroundLinkPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "brandForegroundLinkSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "brandStroke1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "brandStroke2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "compoundBrandBackground1": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandBackground1Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandBackground1Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandForeground1": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandForeground1Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandForeground1Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandStroke1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "compoundBrandStroke1Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "compoundBrandStroke1Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackground1Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground1Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground1Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackground2Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground2Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground2Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground3": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackground3Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground3Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground3Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground4": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackground4Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground4Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground4Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground5": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackground5Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground5Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground5Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralBackground6": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackgroundDisabled": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralBackgroundInverted": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralForeground1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralForeground1Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground1Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground1Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralForeground2BrandHover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground2BrandPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground2BrandSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground2Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground2Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground2Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground3": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralForeground3BrandHover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground3BrandPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground3BrandSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground3Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground3Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground3Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForeground4": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralForegroundDisabled": Object {
+    "resource_paths": Array [
+      "SystemColorGrayTextColor",
+    ],
+  },
+  "neutralForegroundInverted": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "neutralForegroundInvertedLink": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "neutralForegroundInvertedLinkHover": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "neutralForegroundInvertedLinkPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "neutralForegroundInvertedLinkSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHotlightColor",
+    ],
+  },
+  "neutralForegroundOnBrand": Object {
+    "resource_paths": Array [
+      "SystemColorButtonTextColor",
+    ],
+  },
+  "neutralForegroundOnBrandHover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForegroundOnBrandPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralForegroundOnBrandSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightTextColor",
+    ],
+  },
+  "neutralStencil1": "#141414",
+  "neutralStencil2": "#858585",
+  "neutralStroke1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralStroke1Hover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralStroke1Pressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralStroke1Selected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralStroke2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralStroke3": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralStrokeAccessible": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "neutralStrokeAccessibleHover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralStrokeAccessiblePressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralStrokeAccessibleSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "neutralStrokeDisabled": Object {
+    "resource_paths": Array [
+      "SystemColorGrayTextColor",
+    ],
+  },
+  "redBackground1": Object {
+    "resource_paths": Array [
+      "SystemColorButtonFaceColor",
+    ],
+  },
+  "redBackground2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "redBackground3": Object {
+    "resource_paths": Array [
+      "SystemColorButtonFaceColor",
+    ],
+  },
+  "redBorder1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "redBorder2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "redBorderActive": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "redForeground1": Object {
+    "resource_paths": Array [
+      "SystemColorButtonTextColor",
+    ],
+  },
+  "redForeground2": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "redForeground3": Object {
+    "resource_paths": Array [
+      "SystemColorButtonFaceColor",
+    ],
+  },
+  "strokeFocus1": Object {
+    "resource_paths": Array [
+      "SystemColorWindowColor",
+    ],
+  },
+  "strokeFocus2": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "subtleBackgroundPressed": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "subtleBackgroundSelected": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": Object {
+    "resource_paths": Array [
+      "SystemColorWindowTextColor",
+    ],
+  },
+  "transparentStrokeDisabled": Object {
+    "resource_paths": Array [
+      "SystemColorGrayTextColor",
+    ],
+  },
+  "transparentStrokeInteractive": Object {
+    "resource_paths": Array [
+      "SystemColorHighlightColor",
+    ],
+  },
+}
+`;
+
+exports[`mapPipelineToTheme test lightAliasTokens 1`] = `
+Object {
+  "brandBackground": "#0078d4",
+  "brandBackground2": "#eff6fc",
+  "brandBackgroundDisabled": undefined,
+  "brandBackgroundHover": "#106ebe",
+  "brandBackgroundPressed": "#004578",
+  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundStatic": "#0078d4",
+  "brandForeground1": "#0078d4",
+  "brandForeground1Disabled": undefined,
+  "brandForeground1Pressed": undefined,
+  "brandForeground2": "#106ebe",
+  "brandForegroundLink": "#106ebe",
+  "brandForegroundLinkHover": "#005a9e",
+  "brandForegroundLinkPressed": "#004578",
+  "brandForegroundLinkSelected": "#106ebe",
+  "brandStroke1": "#0078d4",
+  "brandStroke2": "#c7e0f4",
+  "compoundBrandBackground1": "#0078d4",
+  "compoundBrandBackground1Hover": "#106ebe",
+  "compoundBrandBackground1Pressed": "#005a9e",
+  "compoundBrandForeground1": "#0078d4",
+  "compoundBrandForeground1Hover": "#106ebe",
+  "compoundBrandForeground1Pressed": "#005a9e",
+  "compoundBrandStroke1": "#0078d4",
+  "compoundBrandStroke1Hover": "#106ebe",
+  "compoundBrandStroke1Pressed": "#005a9e",
+  "neutralBackground1": "#ffffff",
+  "neutralBackground1Hover": "#f5f5f5",
+  "neutralBackground1Pressed": "#e0e0e0",
+  "neutralBackground1Selected": "#ebebeb",
+  "neutralBackground2": "#fafafa",
+  "neutralBackground2Hover": "#f0f0f0",
+  "neutralBackground2Pressed": "#dbdbdb",
+  "neutralBackground2Selected": "#e6e6e6",
+  "neutralBackground3": "#f5f5f5",
+  "neutralBackground3Hover": "#ebebeb",
+  "neutralBackground3Pressed": "#d6d6d6",
+  "neutralBackground3Selected": "#e0e0e0",
+  "neutralBackground4": "#f0f0f0",
+  "neutralBackground4Hover": "#fafafa",
+  "neutralBackground4Pressed": "#f5f5f5",
+  "neutralBackground4Selected": "#ffffff",
+  "neutralBackground5": "#ebebeb",
+  "neutralBackground5Hover": "#f5f5f5",
+  "neutralBackground5Pressed": "#f0f0f0",
+  "neutralBackground5Selected": "#fafafa",
+  "neutralBackground6": "#e6e6e6",
+  "neutralBackgroundDisabled": "#f0f0f0",
+  "neutralBackgroundInverted": "#616161",
+  "neutralForeground1": "#242424",
+  "neutralForeground1Hover": "#242424",
+  "neutralForeground1Pressed": "#242424",
+  "neutralForeground1Selected": "#242424",
+  "neutralForeground2": "#424242",
+  "neutralForeground2BrandHover": "#0078d4",
+  "neutralForeground2BrandPressed": "#106ebe",
+  "neutralForeground2BrandSelected": "#0078d4",
+  "neutralForeground2Hover": "#242424",
+  "neutralForeground2Pressed": "#242424",
+  "neutralForeground2Selected": "#242424",
+  "neutralForeground3": "#616161",
+  "neutralForeground3BrandHover": "#0078d4",
+  "neutralForeground3BrandPressed": "#106ebe",
+  "neutralForeground3BrandSelected": "#0078d4",
+  "neutralForeground3Hover": "#424242",
+  "neutralForeground3Pressed": "#424242",
+  "neutralForeground3Selected": "#424242",
+  "neutralForeground4": "#707070",
+  "neutralForegroundDisabled": "#bdbdbd",
+  "neutralForegroundInverted": "#ffffff",
+  "neutralForegroundInvertedLink": "#ffffff",
+  "neutralForegroundInvertedLinkHover": "#ffffff",
+  "neutralForegroundInvertedLinkPressed": "#ffffff",
+  "neutralForegroundInvertedLinkSelected": "#ffffff",
+  "neutralForegroundOnBrand": "#ffffff",
+  "neutralForegroundOnBrandHover": "#ffffff",
+  "neutralForegroundOnBrandPressed": "#ffffff",
+  "neutralForegroundOnBrandSelected": "#ffffff",
+  "neutralStencil1": "#e6e6e6",
+  "neutralStencil2": "#fafafa",
+  "neutralStroke1": "#d1d1d1",
+  "neutralStroke1Hover": "#c7c7c7",
+  "neutralStroke1Pressed": "#b3b3b3",
+  "neutralStroke1Selected": "#bdbdbd",
+  "neutralStroke2": "#e0e0e0",
+  "neutralStroke3": "#f0f0f0",
+  "neutralStrokeAccessible": "#616161",
+  "neutralStrokeAccessibleHover": "#575757",
+  "neutralStrokeAccessiblePressed": "#4d4d4d",
+  "neutralStrokeAccessibleSelected": "#0078d4",
+  "neutralStrokeDisabled": "#e0e0e0",
+  "redBackground1": "#f9f0f2",
+  "redBackground2": "#d69ca5",
+  "redBackground3": "#750b1c",
+  "redBorder1": "#d69ca5",
+  "redBorder2": "#750b1c",
+  "redBorderActive": "#750b1c",
+  "redForeground1": "#690a19",
+  "redForeground2": "#d69ca5",
+  "redForeground3": "#750b1c",
+  "strokeFocus1": "#ffffff",
+  "strokeFocus2": "#000000",
+  "subtleBackground": "transparent",
+  "subtleBackgroundHover": "#f5f5f5",
+  "subtleBackgroundPressed": "#e0e0e0",
+  "subtleBackgroundSelected": "#ebebeb",
+  "transparentBackground": "transparent",
+  "transparentBackgroundHover": "transparent",
+  "transparentBackgroundPressed": "transparent",
+  "transparentBackgroundSelected": "transparent",
+  "transparentStroke": "transparent",
+  "transparentStrokeDisabled": "transparent",
+  "transparentStrokeInteractive": "transparent",
+}
+`;
