@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 26 Aug 2022 19:52:23 GMT",
+      "tag": "@fluentui-react-native/tester_v0.89.0",
+      "version": "0.89.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "b5681c7c80f8f7518570cd497030cc302861e780",
+            "comment": "fix issue where status definitions don't wrap"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Aug 2022 18:15:17 GMT",
       "tag": "@fluentui-react-native/tester_v0.88.0",
       "version": "0.88.0",

@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/dropdown",
+  "entries": [
+    {
+      "date": "Fri, 26 Aug 2022 19:52:23 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "dafd1715f123ac93deb845cd94bc0be2e1f421ff",
+            "comment": "Initial commit for Dropdown"
+          }
+        ]
+      }
+    }
+  ]
+}

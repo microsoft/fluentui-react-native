@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "fix issue where status definitions don't wrap",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}
