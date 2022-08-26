@@ -16,6 +16,13 @@ it('createAppleTheme test', () => {
   expect(appleTheme).toMatchSnapshot();
 });
 
+it('IsHighContrast test', () => {
+  setIsHighContrast(false);
+  expect(getIsHighContrast()).toBe(false);
+  setIsHighContrast(true);
+  expect(getIsHighContrast()).toBe(true);
+});
+
 describe('createMacOSColorAliasTokens test', () => {
   it.concurrent.each(macOsAliasTokensTable)('mode: %s, isHighContrast: %p', async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {
