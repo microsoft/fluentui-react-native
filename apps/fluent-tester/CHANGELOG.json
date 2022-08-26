@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 26 Aug 2022 22:09:56 GMT",
+      "tag": "@fluentui-react-native/tester_v0.90.0",
+      "version": "0.90.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e6e38f4c544a6b8f3f4aedc86084835c4408910a",
+            "comment": "add link to spec in FluentTester"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.17.0",
+            "commit": "e6e38f4c544a6b8f3f4aedc86084835c4408910a"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Aug 2022 19:52:23 GMT",
       "tag": "@fluentui-react-native/tester_v0.89.0",
       "version": "0.89.0",
