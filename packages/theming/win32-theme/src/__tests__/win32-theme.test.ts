@@ -14,6 +14,20 @@ const themeOptions: ThemeOptions[][] = [
   [{ paletteName: 'TaskPane', appearance: 'dynamic' }],
 ];
 
+it('fallbackGetPalette test given TaskPane pallete', () => {
+  const fallbackPallete = fallbackGetPalette('TaskPane');
+  expect(fallbackPallete).toMatchSnapshot();
+});
+
+it('fallbackGetPalette test given any pallete', () => {
+  const fallbackPallete = fallbackGetPalette('RedColors');
+  expect(fallbackPallete).toMatchSnapshot();
+});
+
+it('fallbackOfficeModule test', () => {
+  expect(fallbackOfficeModule).toMatchSnapshot();
+});
+
 it('getThemingModule test', () => {
   const themingModule = getThemingModule();
   expect(themingModule).toMatchSnapshot();
