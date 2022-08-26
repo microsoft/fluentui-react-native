@@ -3,6 +3,12 @@ import { getAndroidTheme } from '../androidTheme';
 import { ThemeOptions } from '@fluentui-react-native/theme-types';
 
 const defaultAppearance = 'light';
+const themeOptions: ThemeOptions[][] = [
+  [{ appearance: 'light', defaultAppearance: defaultAppearance }],
+  [{ appearance: 'dark', defaultAppearance: defaultAppearance }],
+  [{ appearance: 'highContrast', defaultAppearance: defaultAppearance }],
+  [{ appearance: 'dynamic', defaultAppearance: defaultAppearance }],
+];
 
 beforeAll(() => {
   jest.mock('react-native/Libraries/Utilities/Appearance', () => ({
@@ -10,13 +16,6 @@ beforeAll(() => {
     addChangeListener: () => null,
   }));
 });
-
-const themeOptions: ThemeOptions[][] = [
-  [{ appearance: 'light', defaultAppearance: defaultAppearance }],
-  [{ appearance: 'dark', defaultAppearance: defaultAppearance }],
-  [{ appearance: 'highContrast', defaultAppearance: defaultAppearance }],
-  [{ appearance: 'dynamic', defaultAppearance: defaultAppearance }],
-];
 
 it('getAndroidTheme light appearance test', () => {
   const lightTheme = getAndroidTheme('light');
