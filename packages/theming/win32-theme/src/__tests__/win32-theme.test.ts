@@ -14,14 +14,15 @@ const themeOptions: ThemeOptions[][] = [
   [{ paletteName: 'TaskPane', appearance: 'dynamic' }],
 ];
 
-// it('getThemingModule test', ()=>{
-//   const themingModule = getThemingModule();
-//   expect(themingModule).toMatchSnapshot();
-// })
+it('getThemingModule test', () => {
+  const themingModule = getThemingModule();
+  expect(themingModule).toMatchSnapshot();
+});
 
-// it('createPartialOfficeTheme test', ()=>{
-
-// })
+it('createPartialOfficeTheme test', () => {
+  const themingModule = getThemingModule();
+  expect(createPartialOfficeTheme(themingModule[0])).toMatchSnapshot;
+});
 
 it.concurrent.each(themeOptions)('createOfficeTheme test', async (option: ThemeOptions) => {
   const officeTheme = createOfficeTheme(option).theme;
