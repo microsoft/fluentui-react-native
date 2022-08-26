@@ -1002,6 +1002,871 @@ Object {
 }
 `;
 
+exports[`createOfficeShadowAliasTokens test officeTheme: Black 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`createOfficeShadowAliasTokens test officeTheme: Colorful 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`createOfficeShadowAliasTokens test officeTheme: DarkGray 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`createOfficeShadowAliasTokens test officeTheme: HighContrast 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000047",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000047",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000047",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000066",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000007a",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000047",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
+exports[`createOfficeShadowAliasTokens test officeTheme: White 1`] = `
+Object {
+  "shadow16": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000024",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow16brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 16,
+      "color": "#00000040",
+      "x": 0,
+      "y": 8,
+    },
+  },
+  "shadow2": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000024",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow28": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow28brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 28,
+      "color": "#00000040",
+      "x": 0,
+      "y": 14,
+    },
+  },
+  "shadow2brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 2,
+      "color": "#00000040",
+      "x": 0,
+      "y": 1,
+    },
+  },
+  "shadow4": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000024",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow4brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 4,
+      "color": "#00000040",
+      "x": 0,
+      "y": 2,
+    },
+  },
+  "shadow64": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#00000033",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#0000003d",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow64brand": Object {
+    "ambient": Object {
+      "blur": 8,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 64,
+      "color": "#00000040",
+      "x": 0,
+      "y": 32,
+    },
+  },
+  "shadow8": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000001f",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000024",
+      "x": 0,
+      "y": 4,
+    },
+  },
+  "shadow8brand": Object {
+    "ambient": Object {
+      "blur": 2,
+      "color": "#0000004d",
+      "x": 0,
+      "y": 0,
+    },
+    "key": Object {
+      "blur": 8,
+      "color": "#00000040",
+      "x": 0,
+      "y": 4,
+    },
+  },
+}
+`;
+
 exports[`createOfficeTheme test 1`] = `
 Object {
   "colors": Object {

@@ -16,9 +16,33 @@ const themeOptions: ThemeOptions[][] = [
 
 const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
 
+it('fallbackOfficeModule test', () => {
+  expect(fallbackOfficeModule).toMatchSnapshot();
+});
+
+it('getThemingModule test', () => {
+  const themingModule = getThemingModule();
+  expect(themingModule).toMatchSnapshot();
+});
+
+it('createPartialOfficeTheme test', () => {
+  const themingModule = getThemingModule();
+  expect(createPartialOfficeTheme(themingModule[0])).toMatchSnapshot;
+});
+
+it.concurrent.each(themeOptions)('createOfficeTheme test', async (option: ThemeOptions) => {
+  const officeTheme = createOfficeTheme(option).theme;
+  expect(officeTheme).toMatchSnapshot();
+});
+
 it.concurrent.each(officeThemes)('createOfficeColorAliasTokens test officeTheme: %s', async (theme) => {
   const colorAliasToken = createOfficeColorAliasTokens(theme);
   expect(colorAliasToken).toMatchSnapshot();
+});
+
+it.concurrent.each(officeThemes)('createOfficeShadowAliasTokens test officeTheme: %s', async (theme) => {
+  const shadowAliasToken = createOfficeShadowAliasTokens(theme);
+  expect(shadowAliasToken).toMatchSnapshot();
 });
 
 describe('fallbackGetPalette test', () => {
@@ -35,25 +59,4 @@ describe('fallbackGetPalette test', () => {
     const fallbackPalette = fallbackGetPalette('RedColors');
     expect(fallbackPalette).toMatchSnapshot();
   });
-});
-
-it('fallbackOfficeModule test', () => {
-  expect(fallbackOfficeModule).toMatchSnapshot();
-});
-
-it('getThemingModule test', () => {
-  const themingModule = getThemingModule();
-  expect(themingModule).toMatchSnapshot();
-});
-
-// it('paletteFromOfficeColors');
-
-it('createPartialOfficeTheme test', () => {
-  const themingModule = getThemingModule();
-  expect(createPartialOfficeTheme(themingModule[0])).toMatchSnapshot;
-});
-
-it.concurrent.each(themeOptions)('createOfficeTheme test', async (option: ThemeOptions) => {
-  const officeTheme = createOfficeTheme(option).theme;
-  expect(officeTheme).toMatchSnapshot();
 });
