@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Fri, 26 Aug 2022 18:15:17 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.15.8",
+      "version": "0.15.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "7f63ff4271084e9782fa1a78fa0daaae9ea344e7",
+            "comment": "RadioButton: Fix truncation in RTL mode"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 23:22:38 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.15.7",
       "version": "0.15.7",

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Fri, 05 Aug 2022 23:22:38 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Aug 2022 18:15:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.8
+
+Fri, 26 Aug 2022 18:15:17 GMT
+
+### Patches
+
+- RadioButton: Fix truncation in RTL mode (67026167+chiuam@users.noreply.github.com)
 
 ## 0.15.7
 

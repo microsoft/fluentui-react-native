@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "entries": [
     {
+      "date": "Fri, 26 Aug 2022 18:15:16 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.13",
+      "version": "0.2.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "661eeca6abbf496a2b36f2ecd4ae8dd6a6ae2f58",
+            "comment": "Use undefined shadowToken in NotificationTokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 15 Aug 2022 23:29:03 GMT",
       "tag": "@fluentui-react-native/experimental-shadow_v0.2.12",
       "version": "0.2.12",
