@@ -3,7 +3,7 @@ import { createDefaultTheme } from '../createDefaultTheme';
 import { createColorAliasTokens, createShadowAliasTokens } from '../createAliasTokens';
 import { ThemeOptions, AppearanceOptions } from '@fluentui-react-native/theme-types';
 
-const createDefaultThemeTable: ThemeOptions[][] = [
+const defaultThemeOptions: ThemeOptions[][] = [
   [{ appearance: 'light', defaultAppearance: 'light' }],
   [{ appearance: 'dark', defaultAppearance: 'light' }],
   [{ appearance: 'highContrast', defaultAppearance: 'light' }],
@@ -29,7 +29,7 @@ it('defaultFluentDarkTheme test', () => {
 });
 
 describe('createDefaultTheme test', () => {
-  it.concurrent.each(createDefaultThemeTable)('themeOption - %o', async (themeOption: ThemeOptions) => {
+  it.concurrent.each(defaultThemeOptions)('themeOption - %o', async (themeOption: ThemeOptions) => {
     const defaultTheme = createDefaultTheme(themeOption).theme;
     expect(defaultTheme).toMatchSnapshot();
   });
