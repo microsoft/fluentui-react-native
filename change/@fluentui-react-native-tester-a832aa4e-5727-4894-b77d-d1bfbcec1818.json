@@ -1,6 +1,6 @@
 {
   "type": "minor",
-  "comment": "update avatar hashing to match native avatar",
+  "comment": "add link to spec in FluentTester",
   "packageName": "@fluentui-react-native/tester",
   "email": "joannaquu@gmail.com",
   "dependentChangeType": "patch"

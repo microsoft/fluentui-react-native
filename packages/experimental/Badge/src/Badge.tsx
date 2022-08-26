@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import { Children, ReactNode } from 'react';
-import { View } from 'react-native';
+import { View, I18nManager } from 'react-native';
 import { badgeName, BadgeType, BadgeProps } from './Badge.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { compose, withSlots, UseSlots, mergeProps } from '@fluentui-react-native/framework';
@@ -17,9 +17,10 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['size'] ||
     (!userProps['size'] && layer === 'large') ||
     layer === userProps['shape'] ||
-    (!userProps['shape'] && layer === 'rounded') ||
+    (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (!userProps['badgeColor'] && layer === 'brand')
+    (!userProps['badgeColor'] && layer === 'brand') ||
+    (I18nManager.isRTL && layer === 'rtl')
   );
 };
 

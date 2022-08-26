@@ -54,7 +54,6 @@
     ]
   },
   "resolutions": {
-    "react-native-macos": "file:../react-native-macos",
     "@appium/support": "^2.57.0",
     "es5-ext": "0.10.53",
     "jpeg-js": "^0.4.4",

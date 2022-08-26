@@ -10,7 +10,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
     textPadding: globalTokens.spacing.xxs,
-    position: 'absolute',
+    position: 'relative',
     tiny: {
       minWidth: 6,
       minHeight: 6,
@@ -69,5 +69,9 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
     },
     square: {
       borderRadius: globalTokens.corner.radius.none,
+    },
+    rtl: {
+      left: globalTokens.spacing.none,
+      right: undefined,
     },
   } as BadgeTokens);
