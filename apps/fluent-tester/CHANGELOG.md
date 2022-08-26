@@ -1,8 +1,50 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 19 Aug 2022 15:32:12 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Aug 2022 22:09:56 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.90.0
+
+Fri, 26 Aug 2022 22:09:56 GMT
+
+### Minor changes
+
+- add link to spec in FluentTester (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.17.0
+
+## 0.89.0
+
+Fri, 26 Aug 2022 19:52:23 GMT
+
+### Minor changes
+
+- fix issue where status definitions don't wrap (joannaquu@gmail.com)
+
+## 0.88.0
+
+Fri, 26 Aug 2022 18:15:17 GMT
+
+### Minor changes
+
+- update avatar hashing to match native avatar (joannaquu@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.2.0
+- Bump @fluentui-react-native/badge to v0.1.24
+- Bump @fluentui-react-native/button to v0.24.17
+- Bump @fluentui-react-native/experimental-button to v0.16.17
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.20
+- Bump @fluentui-react-native/experimental-shadow to v0.2.13
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.1
+- Bump @fluentui-react-native/menu to v1.0.26
+- Bump @fluentui-react-native/notification to v0.16.1
+- Bump @fluentui-react-native/switch to v0.6.2
+- Bump @fluentui/react-native to v0.32.8
+
+### Patches
+
+- Fixed PresenceBadge Tester page (vkozlova@microsoft.com)
+- [Badge] Set relative position as the default one (vkozlova@microsoft.com)
+- Added font-tokens, color as a prop. Had to rename it to badgeColor (the same reason as in Avatar). And added position as a prop (vkozlova@microsoft.com)
 
 ## 0.87.0
 

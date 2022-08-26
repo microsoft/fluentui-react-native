@@ -282,5 +282,7 @@ export const NotificationTest: React.FunctionComponent = () => {
 
   const description = 'Testing notification component';
 
-  return <Test name="Notification Test" description={description} sections={notificationSections} status={status}></Test>;
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Notification/SPEC.md';
+
+  return <Test name="Notification Test" description={description} spec={spec} sections={notificationSections} status={status} />;
 };

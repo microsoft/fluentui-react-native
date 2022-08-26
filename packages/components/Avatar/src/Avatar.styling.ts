@@ -162,7 +162,7 @@ export const stylingSettings: UseStylingOptions<AvatarProps, AvatarSlotProps, Av
         return {
           size: tokens.badgeSize,
           status: tokens.badgeStatus,
-          shape: 'circular',
+          position: 'absolute',
           outOfOffice: tokens.outOfOffice,
         };
       },

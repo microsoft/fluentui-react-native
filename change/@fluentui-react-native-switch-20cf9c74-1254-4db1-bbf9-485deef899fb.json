@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added better HC token mapping for win32",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}

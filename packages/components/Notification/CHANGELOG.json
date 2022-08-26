@@ -2,6 +2,48 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Fri, 26 Aug 2022 22:09:56 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "e6e38f4c544a6b8f3f4aedc86084835c4408910a",
+            "comment": "move spec to outer folder"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 Aug 2022 18:15:17 GMT",
+      "tag": "@fluentui-react-native/notification_v0.16.1",
+      "version": "0.16.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "661eeca6abbf496a2b36f2ecd4ae8dd6a6ae2f58",
+            "comment": "Use undefined shadowToken in NotificationTokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.24.17",
+            "commit": "dafd1715f123ac93deb845cd94bc0be2e1f421ff"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.13",
+            "commit": "dafd1715f123ac93deb845cd94bc0be2e1f421ff"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 17 Aug 2022 20:36:34 GMT",
       "tag": "@fluentui-react-native/notification_v0.16.0",
       "version": "0.16.0",
