@@ -16,6 +16,7 @@ import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
+import { StyleProp, ViewStyle } from 'react-native';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -36,10 +37,13 @@ const MenuDefault: React.FunctionComponent = () => {
   );
 };
 
+const defaultCheckedTestCase = ['itemOne'];
+const checkedTestCase = ['itemTwo'];
+
 const MenuCheckmarks: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu defaultChecked={['itemOne']}>
+      <Menu defaultChecked={defaultCheckedTestCase}>
         <MenuTrigger>
           <Button>All checkmark items</Button>
         </MenuTrigger>
@@ -51,7 +55,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
           </MenuList>
         </MenuPopover>
       </Menu>
-      <Menu hasCheckmarks checked={['itemTwo']}>
+      <Menu hasCheckmarks checked={checkedTestCase}>
         <MenuTrigger>
           <Button>Some controlled checkmark items with alignment</Button>
         </MenuTrigger>
@@ -94,7 +98,7 @@ const MenuRadioItem: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Current checked: {checked.join(' ')}</Text>
-      <Menu defaultChecked={['itemOne']} onCheckedChange={onCheckedChange}>
+      <Menu defaultChecked={defaultCheckedTestCase} onCheckedChange={onCheckedChange}>
         <MenuTrigger>
           <Button>Items with radio selection</Button>
         </MenuTrigger>
@@ -164,10 +168,12 @@ const MenuOpenOnHover: React.FunctionComponent = () => {
   );
 };
 
+const rootStackStyle: StyleProp<ViewStyle> = [stackStyle, { flexDirection: 'row' }];
+
 const MenuControlledOpen: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   return (
-    <Stack style={[stackStyle, { flexDirection: 'row' }]}>
+    <Stack style={rootStackStyle}>
       <Button onClick={() => setOpen(!open)}>Toggle open</Button>
       <Menu open={open}>
         <MenuTrigger>

@@ -16,11 +16,6 @@ const getThemedStyles = themedStyleSheet((theme: Theme) => {
       borderWidth: 2,
       borderColor: theme.colors.bodyText,
     },
-    stackStyle: {
-      borderWidth: 2,
-      padding: 12,
-      margin: 8,
-    },
   };
 });
 
@@ -30,18 +25,28 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 5,
   },
+  panel: {
+    ...commonTestStyles.view,
+    borderWidth: 2,
+    padding: 12,
+    margin: 8,
+  },
   pickerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+  },
+  stackStyle: {
+    borderWidth: 2,
+    padding: 12,
+    margin: 8,
   },
 });
 
 const Panel: React.FunctionComponent = () => {
   const [disabled, setDisabled] = React.useState(false);
   const onClick = React.useCallback(() => setDisabled(!disabled), [disabled, setDisabled]);
-  const themedStyles = getThemedStyles(useTheme());
   return (
-    <View style={[commonTestStyles.view, themedStyles.stackStyle]}>
+    <View style={styles.panel}>
       <PrimaryButton onClick={onClick} content="Primary Button" disabled={disabled} />
       <Button onClick={onClick} content="Default Button" disabled={disabled} />
       <StealthButton onClick={onClick} content="Stealth Button" disabled={disabled} />
@@ -69,7 +74,6 @@ const SemanticColor: React.FunctionComponent<SemanticColorProps> = (p: SemanticC
 
 const SwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
-  const themedStyles = getThemedStyles(theme);
   const palette = theme.colors;
 
   const aggregator = React.useCallback(
@@ -84,14 +88,14 @@ const SwatchList: React.FunctionComponent = () => {
   }, [palette, aggregator]);
 
   const paletteAsArray = React.useMemo(flattenArray, [flattenArray]);
-  const renderSwatch = React.useCallback(({ item }) => {
+  const renderSwatch = React.useCallback((item) => {
     const { color, key } = item;
     return <SemanticColor key={key} color={color} name={key} />;
   }, []);
   return (
     <View style={commonTestStyles.view}>
       <Text>getHostSettingsWin32(theme: ITheme).palette</Text>
-      <View style={themedStyles.stackStyle}>{paletteAsArray.map((item) => renderSwatch({ item }))}</View>
+      <View style={styles.stackStyle}>{paletteAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
 };
