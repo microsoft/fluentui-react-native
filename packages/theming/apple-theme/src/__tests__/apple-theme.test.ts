@@ -23,22 +23,24 @@ it('IsHighContrast test', () => {
   expect(getIsHighContrast()).toBe(true);
 });
 
-describe('createMacOSColorAliasTokens test', () => {
-  it.concurrent.each(macOsAliasTokensTable)('mode: %s, isHighContrast: %p', async (mode: AppearanceOptions, isHighContrast: boolean) => {
+it.concurrent.each(macOsAliasTokensTable)(
+  'createMacOSColorAliasTokens test mode: %s, isHighContrast: %p',
+  async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {
       expect(() => createMacOSColorAliasTokens(mode, isHighContrast)).toThrow();
     } else {
       expect(createMacOSColorAliasTokens(mode, isHighContrast)).toMatchSnapshot();
     }
-  });
-});
+  },
+);
 
-describe('createMacOSShadowAliasTokens test', () => {
-  it.concurrent.each(macOsAliasTokensTable)('mode: %s, isHighContrast: %p', async (mode: AppearanceOptions, isHighContrast: boolean) => {
+it.concurrent.each(macOsAliasTokensTable)(
+  'createMacOSShadowAliasTokens test mode: %s, isHighContrast: %p',
+  async (mode: AppearanceOptions, isHighContrast: boolean) => {
     if (mode === 'highContrast') {
       expect(() => createMacOSShadowAliasTokens(mode, isHighContrast)).toThrow();
     } else {
       expect(createMacOSShadowAliasTokens(mode, isHighContrast)).toMatchSnapshot();
     }
-  });
-});
+  },
+);
