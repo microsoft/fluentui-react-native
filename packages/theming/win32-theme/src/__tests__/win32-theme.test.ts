@@ -14,14 +14,20 @@ const themeOptions: ThemeOptions[][] = [
   [{ paletteName: 'TaskPane', appearance: 'dynamic' }],
 ];
 
-it('fallbackGetPalette test given TaskPane pallete', () => {
-  const fallbackPallete = fallbackGetPalette('TaskPane');
-  expect(fallbackPallete).toMatchSnapshot();
-});
+describe('fallbackGetPalette test', () => {
+  it('TaskPane palette', () => {
+    const fallbackPalette = fallbackGetPalette('TaskPane');
+    expect(fallbackPalette).toMatchSnapshot();
+  });
 
-it('fallbackGetPalette test given any pallete', () => {
-  const fallbackPallete = fallbackGetPalette('RedColors');
-  expect(fallbackPallete).toMatchSnapshot();
+  it('Any other palette', () => {
+    /**
+     * RedColors is just a random pallette, we're just testing to what happens
+     * if we use anything other than the TaskPane palette.
+     * */
+    const fallbackPalette = fallbackGetPalette('RedColors');
+    expect(fallbackPalette).toMatchSnapshot();
+  });
 });
 
 it('fallbackOfficeModule test', () => {
@@ -32,6 +38,8 @@ it('getThemingModule test', () => {
   const themingModule = getThemingModule();
   expect(themingModule).toMatchSnapshot();
 });
+
+it('paletteFromOfficeColors');
 
 it('createPartialOfficeTheme test', () => {
   const themingModule = getThemingModule();
