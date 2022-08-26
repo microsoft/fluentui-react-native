@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
-import { Text, ToggleButton, Separator } from '@fluentui/react-native';
+import { Text, ToggleButton, Separator, Link } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from './Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -25,6 +25,7 @@ export type PlatformStatus = {
 export interface TestProps {
   name: string;
   description: string;
+  spec?: string;
   status: PlatformStatus;
   sections: TestSection[];
 }
@@ -48,6 +49,11 @@ const styles = StyleSheet.create({
   description: {
     alignItems: 'flex-start',
     flexWrap: 'wrap',
+  },
+  header: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   section: {
     marginTop: 12,
@@ -102,9 +108,12 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
 
   return (
     <View testID="ScrollViewAreaForComponents">
-      <Text style={[styles.name]} variant="heroSemibold">
-        {props.name}
-      </Text>
+      <View style={styles.header}>
+        <Text style={[styles.name]} variant="heroSemibold">
+          {props.name}
+        </Text>
+        {props.spec && <Link url={props.spec} content="SPEC" />}
+      </View>
       <Separator />
       <Stack style={stackStyle}>
         <Text style={styles.description}>{props.description}</Text>
