@@ -1,5 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Custom FAB with no shadow(iOS) 1`] = `
+<View
+  accessibilityLabel="Custom FAB with no shadow(iOS)"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  disabled={false}
+  enableFocusRing={true}
+  focusable={true}
+  iconPosition="before"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "#005a9e",
+      "borderRadius": 9999,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 56,
+      "minWidth": 56,
+      "padding": 16,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Custom FAB with no shadow(iOS)
+  </Text>
+</View>
+`;
+
 exports[`Default FAB (iOS) 1`] = `
 <View
   style={

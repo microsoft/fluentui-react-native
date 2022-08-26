@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "[Badge] Set relative position as the default one",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -15,6 +15,12 @@ it('Default FAB (iOS)', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('Custom FAB with no shadow(iOS)', () => {
+  const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
+  const tree = renderer.create(<CustomFABNoShadow>Custom FAB with no shadow(iOS)</CustomFABNoShadow>).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
 it('Button simple rendering does not invalidate styling', () => {
   checkRenderConsistency(() => <FAB>Default FAB</FAB>, 2);
 });

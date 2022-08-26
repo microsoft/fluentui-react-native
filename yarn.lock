@@ -4018,9 +4018,9 @@ appium-mac2-driver@^1.4.0:
     teen_process "^1.15.0"
 
 appium-windows-driver@^2.0.1:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.6.tgz#e462bc3100d464d3c50b0cabef0e4cd37613ef5f"
-  integrity sha512-uZuUIGXfY7IzS31xtPigxPl5X52xSSh1J3w/mYHV48k22MCJ0bF86DUBCf5O4GtJJhUxLwM1ZpYPF0EBxpAXSQ==
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.7.tgz#2a9a29bf2a7b752b087eefc37ca1a0a7928ff58f"
+  integrity sha512-SPEEFQQQZetubkeN8ZFm0rMppVqNBVs2A2xRQe4kDPOD7LzF/EMq1F3njfwjly+9g25DeNNvxhjUDqMKVONqkA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.3.1"
@@ -4029,7 +4029,7 @@ appium-windows-driver@^2.0.1:
     lodash "^4.6.1"
     portscanner "2.2.0"
     source-map-support "^0.5.5"
-    teen_process "^1.7.0"
+    teen_process "^2.0.1"
 
 appium@^2.0.0-beta.27:
   version "2.0.0-beta.41"
@@ -9435,9 +9435,9 @@ kuler@^2.0.0:
   integrity sha512-Xq9nH7KlWZmXAtodXDDRE7vs6DU1gTU8zYDHDiWLSip45Egwq3plLHzPn27NgvzL2r1LMPC1vdqh98sQxtqj4A==
 
 lage@^1.5.0:
-  version "1.7.7"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.7.tgz#252f375c1c75a84f48c88476fa00485d5ab94551"
-  integrity sha512-fJbAsCbltotfGMhVMIWv8VnvjQP6ZQoWie7x7ayB5ziOZuGeQo45pooTVSwO2WVyl/0KW+KcQ+wtNSgU6LMo8A==
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.7.9.tgz#fd52dab6d7e3f766d65290f81083e7d421d33aeb"
+  integrity sha512-FnOsc2u/dtFG7gYDMNNkBv8+cl5q0/LZJf/BNM77u4SFFM1vAXb7J9S6Y6n2jtqU8nazLXyMTX3FmPqfi1kW8A==
   dependencies:
     "@lage-run/logger" "*"
     "@xmldom/xmldom" "^0.8.0"
@@ -11732,9 +11732,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.70"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.70.tgz#544c5f499f863a6fb720c2258865159082ec93d4"
-  integrity sha512-Ox7pn/46gaIOsgQ4sMhDCVc+lHdPM4ZrF/SHS5yAWrB0cSB+0mmRi+cmqK8DEI5bEMxeJgU0yG6nkft0ecLEEQ==
+  version "0.66.74"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.74.tgz#bc831969d046c16d05249b9ec198f7f5cdfb6b8e"
+  integrity sha512-1efidtqZdwZbivx4MOgLrk/7XN+Wk+pl0+TmFP7b8b/EwZP5nZ8tGJK1/3ebv7PZu448/snEGQ1v0vkyc4qNhA==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"
@@ -11786,9 +11786,9 @@ react-native-svg@^12.3.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^1.6.2:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.9.tgz#0c44f51c60d6c43d4ecd2a393ae1f8ab5a6a6f63"
-  integrity sha512-n/DwqmTgBNJMFFDNwFAwMrX9up4Pl9HiMilv3QsWHtE2yToXuzx59+6yowvtq+8O98d6/hZTR5J21DwWoFVLKw==
+  version "1.6.11"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.11.tgz#4b28b8d418a0c4dd9e0829ed9eeca92503d5506e"
+  integrity sha512-eBR6q44u1UdTGqd3BA0WPttsY3NaclwsQROxj+0EDEeFl7tOPYoaDofRa5Qafk/c9pzGJO9f0W65TqJQuc1qDg==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
@@ -13165,7 +13165,7 @@ tar@^6.1.9:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-teen_process@1.16.0, teen_process@^1.15.0, teen_process@^1.7.0:
+teen_process@1.16.0, teen_process@^1.15.0:
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-1.16.0.tgz#2bad3e33b4d0a3a271cdd0c836434befa7771b44"
   integrity sha512-RnW7HHZD1XuhSTzD3djYOdIl1adE3oNEprE3HOFFxWs5m4FZsqYRhKJ4mDU2udtNGMLUS7jV7l8vVRLWAvmPDw==
@@ -13176,6 +13176,18 @@ teen_process@1.16.0, teen_process@^1.15.0, teen_process@^1.7.0:
     shell-quote "^1.4.3"
     source-map-support "^0.5.3"
     which "^2.0.2"
+
+teen_process@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-2.0.1.tgz#3e23d4b980bcdb7f7d0d064868943c6d8ec09894"
+  integrity sha512-1YI3e/leIKqkEliocmT2rqpRAJQS9/cgTWqoILdcSTT4aomSGamNXS0uevHwX1O34lVOidWQWDlMiZ+jaSI/5A==
+  dependencies:
+    "@babel/runtime" "7.18.9"
+    bluebird "3.7.2"
+    lodash "4.17.21"
+    shell-quote "1.7.3"
+    source-map-support "0.5.21"
+    which "2.0.2"
 
 temp@0.8.3:
   version "0.8.3"

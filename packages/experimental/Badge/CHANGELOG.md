@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Thu, 18 Aug 2022 18:41:33 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Aug 2022 18:15:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.24
+
+Fri, 26 Aug 2022 18:15:16 GMT
+
+### Patches
+
+- [Badge] Set relative position as the default one (vkozlova@microsoft.com)
+- Fixed PresenceBadge Tester page (vkozlova@microsoft.com)
+- Added Badge for RTL (vkozlova@microsoft.com)
+- Fixed empty badge bug (vkozlova@microsoft.com)
+- Updated some color to alias tokens (vkozlova@microsoft.com)
+- Added font-tokens, color as a prop. Had to rename it to badgeColor (the same reason as in Avatar). And added position as a prop (vkozlova@microsoft.com)
 
 ## 0.1.23
 

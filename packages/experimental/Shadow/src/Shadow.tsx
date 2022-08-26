@@ -6,6 +6,10 @@ import { getShadowTokenStyleSet } from './shadowStyle';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
+    if (!props.shadowToken) {
+      return <>{children}</>;
+    }
+
     const shadowTokenStyleSet = getShadowTokenStyleSet(props.shadowToken);
     const mergedProps = mergeProps(final, { style: shadowTokenStyleSet.ambient });
 
