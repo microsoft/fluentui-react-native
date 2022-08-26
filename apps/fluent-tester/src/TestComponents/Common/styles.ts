@@ -116,7 +116,7 @@ export const fluentTesterStyles = StyleSheet.create({
   },
 
   testSection: {
-    flexShrink: 1,
+    flexGrow: 1,
   },
 
   noTest: {
