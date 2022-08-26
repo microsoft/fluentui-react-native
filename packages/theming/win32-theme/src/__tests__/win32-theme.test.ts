@@ -2,7 +2,7 @@ import { createOfficeTheme } from '../createOfficeTheme';
 import { createPartialOfficeTheme } from '../createPartialOfficeTheme';
 import { fallbackGetPalette, fallbackOfficeModule, getThemingModule } from '../NativeModule/index';
 import { paletteFromOfficeColors } from '../paletteFromOfficeColors';
-import { createOfficeColorAliasTokens as createOfficeAliasTokens } from '../createOfficeAliasTokens';
+import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from '../createOfficeAliasTokens';
 import { createFontAliasTokens } from '../createFontAliasTokens';
 import { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from '../createBrandedThemeWithAlias';
 import { win32Typography } from '../getThemeTypography';
@@ -13,6 +13,13 @@ const themeOptions: ThemeOptions[][] = [
   [{ paletteName: 'TaskPane', appearance: 'dark' }],
   [{ paletteName: 'TaskPane', appearance: 'dynamic' }],
 ];
+
+const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
+
+it.concurrent.each(officeThemes)('createOfficeColorAliasTokens test officeTheme: %s', async (theme) => {
+  const colorAliasToken = createOfficeColorAliasTokens(theme);
+  expect(colorAliasToken).toMatchSnapshot();
+});
 
 describe('fallbackGetPalette test', () => {
   it('TaskPane palette', () => {
@@ -39,7 +46,7 @@ it('getThemingModule test', () => {
   expect(themingModule).toMatchSnapshot();
 });
 
-it('paletteFromOfficeColors');
+// it('paletteFromOfficeColors');
 
 it('createPartialOfficeTheme test', () => {
   const themingModule = getThemingModule();
