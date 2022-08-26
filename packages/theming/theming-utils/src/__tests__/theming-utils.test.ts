@@ -1,8 +1,6 @@
 import { getCurrentAppearance } from '../';
 import { mapPipelineToTheme, mapFontPipelineToTheme } from '../mapPipelineToTheme';
 import { mapPipelineToShadow } from '../mapPipelineToShadow';
-import { hcAliasTokens } from '@fluentui-react-native/default-theme';
-import { hcAliasTokens as hcAliasTokensWin32 } from '@fluentui-react-native/win32-theme';
 import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
 import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';
 import colorfulAliasTokens from '@fluentui-react-native/design-tokens-win32/colorful/tokens-aliases.json';
@@ -52,11 +50,6 @@ describe('mapPipelineToTheme test', () => {
     const aliasColorTokens = mapPipelineToTheme(darkAliasTokens);
     expect(aliasColorTokens).toMatchSnapshot();
   });
-
-  it('hcAliasTokens', () => {
-    const aliasColorTokens = mapPipelineToTheme(hcAliasTokens);
-    expect(aliasColorTokens).toMatchSnapshot();
-  });
 });
 
 describe('mapFontPipelineToTheme test', () => {
@@ -72,11 +65,6 @@ describe('mapFontPipelineToTheme test', () => {
 
   it('blackAliasTokens', () => {
     const fontTheme = mapFontPipelineToTheme(blackAliasTokens);
-    expect(fontTheme).toMatchSnapshot();
-  });
-
-  it('hcAliasTokens', () => {
-    const fontTheme = mapFontPipelineToTheme(hcAliasTokensWin32);
     expect(fontTheme).toMatchSnapshot();
   });
 });
