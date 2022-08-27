@@ -1,7 +1,7 @@
 import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 
@@ -14,7 +14,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   return (
-    <View style={[stackStyle, commonTestStyles.view]}>
+    <View style={testContentRootViewStyle}>
       <Button style={commonTestStyles.vmargin}>Default</Button>
       <Button disabled style={commonTestStyles.vmargin}>
         Default Disabled

@@ -2,13 +2,14 @@ import { ToggleButton } from '@fluentui/react-native';
 import { Checkbox } from '@fluentui/react-native';
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
   },
-  hmargin: {
+  checkbox: {
+    ...commonTestStyles.vmargin,
     marginHorizontal: 8,
   },
 });
@@ -20,12 +21,12 @@ export const ToggleButtonTest: React.FunctionComponent = () => {
   const onGhostClicked = React.useCallback(() => setSubtleChecked(!subtleChecked), [subtleChecked, setSubtleChecked]);
 
   return (
-    <View style={[stackStyle, commonTestStyles.view]}>
+    <View style={testContentRootViewStyle}>
       <View style={styles.row}>
         <ToggleButton onClick={onDefaultClicked} checked={defaultChecked} style={commonTestStyles.vmargin}>
           Default Toggle
         </ToggleButton>
-        <Checkbox checked={defaultChecked} label="Default Toggle is Checked" style={[commonTestStyles.vmargin, styles.hmargin]} />
+        <Checkbox checked={defaultChecked} label="Default Toggle is Checked" style={styles.checkbox} />
       </View>
       <ToggleButton checked style={commonTestStyles.vmargin}>
         Checked Default Toggle
@@ -46,7 +47,7 @@ export const ToggleButtonTest: React.FunctionComponent = () => {
         <ToggleButton appearance="subtle" onClick={onGhostClicked} checked={subtleChecked} style={commonTestStyles.vmargin}>
           Subtle Toggle
         </ToggleButton>
-        <Checkbox checked={subtleChecked} label="Subtle Toggle is Checked" style={[commonTestStyles.vmargin, styles.hmargin]} />
+        <Checkbox checked={subtleChecked} label="Subtle Toggle is Checked" style={styles.checkbox} />
       </View>
       <ToggleButton appearance="subtle" checked style={commonTestStyles.vmargin}>
         Checked Subtle Toggle

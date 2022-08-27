@@ -1,12 +1,19 @@
 import React, { useState, useMemo } from 'react';
 import { Avatar, AvatarColors, AvatarSize, getJavaHashCode } from '@fluentui-react-native/avatar';
-import { View, Text, TextInput, Platform } from 'react-native';
+import { View, Text, TextInput, Platform, StyleSheet } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { FontWeight } from '@fluentui-react-native/theme-types';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
+
+const styles = StyleSheet.create({
+  avatarTestCaseContainer: { marginLeft: 20 },
+  avatarTokenOptions: { flexDirection: 'row' },
+  fontTokenOptions: { paddingHorizontal: 20 },
+  tokenHeader: { fontWeight: 'bold' },
+});
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = useState(true);
@@ -80,7 +87,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         <ToggleButton onClick={() => setShowRing(!showRing)} checked={showRing} style={commonStyles.vmargin}>
           {showRing ? 'Hide' : 'Show'} ring
         </ToggleButton>
-        <View style={{ flexDirection: 'row' }}>
+        <View style={styles.avatarTokenOptions}>
           <View>
             <TextInput
               accessibilityLabel="Name for generating initials"
@@ -100,7 +107,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
                 setInitials(e.nativeEvent.text);
               }}
             />
-            <Text style={{ fontWeight: 'bold' }}>Avatar tokens</Text>
+            <Text style={styles.tokenHeader}>Avatar tokens</Text>
             <TextInput
               accessibilityLabel="Background color"
               style={commonStyles.textBox}
@@ -139,7 +146,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
                 setIconColor(e.nativeEvent.text);
               }}
             />
-            <Text style={{ fontWeight: 'bold' }}>Ring tokens</Text>
+            <Text style={styles.tokenHeader}>Ring tokens</Text>
             <TextInput
               accessibilityLabel="Ring background color"
               style={commonStyles.textBox}
@@ -177,8 +184,8 @@ export const CustomizeUsage: React.FunctionComponent = () => {
               }}
             />
           </View>
-          <View style={{ paddingHorizontal: 20 }}>
-            <Text style={{ fontWeight: 'bold' }}>Font tokens</Text>
+          <View style={styles.fontTokenOptions}>
+            <Text style={styles.tokenHeader}>Font tokens</Text>
             <TextInput
               accessibilityLabel="Initials text color"
               style={commonStyles.textBox}
@@ -232,7 +239,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
           transparentRing={!showRing}
         />
       </View>
-      <View style={{ marginLeft: 20 }}>
+      <View style={styles.avatarTestCaseContainer}>
         <Text>Avatar customized with props</Text>
         <Avatar
           active="active"
@@ -251,7 +258,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         />
       </View>
       {useJavaHashCode && (
-        <View style={{ marginLeft: 20 }}>
+        <View style={styles.avatarTestCaseContainer}>
           <Text>Avatar with hashed color</Text>
           <Avatar
             active="active"
