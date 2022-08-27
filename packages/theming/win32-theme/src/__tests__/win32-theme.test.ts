@@ -15,6 +15,7 @@ const themeOptions: ThemeOptions[][] = [
 ];
 
 const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
+const appPrimaries = ['#185abd', '#107c41', '#d83b01', '#80397b', '#0078d4', '#c43e1c'];
 
 it('fallbackOfficeModule test', () => {
   expect(fallbackOfficeModule).toMatchSnapshot();
@@ -35,18 +36,24 @@ it('createFontAliasTokens test', () => {
   expect(fontAliasToken).toMatchSnapshot();
 });
 
+it.concurrent.each(officeThemes)('createBrandedThemeWithAlias test themeName: %s', async (themeName: string) => {
+  const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
+  const brandedTheme = createBrandedThemeWithAlias(themeName, officeTheme);
+  expect(brandedTheme).toMatchSnapshot();
+});
+
 it.concurrent.each(themeOptions)('createOfficeTheme test', async (option: ThemeOptions) => {
   const officeTheme = createOfficeTheme(option).theme;
   expect(officeTheme).toMatchSnapshot();
 });
 
-it.concurrent.each(officeThemes)('createOfficeColorAliasTokens test officeTheme: %s', async (theme) => {
-  const colorAliasToken = createOfficeColorAliasTokens(theme);
+it.concurrent.each(officeThemes)('createOfficeColorAliasTokens test officeTheme: %s', async (themeName: string) => {
+  const colorAliasToken = createOfficeColorAliasTokens(themeName);
   expect(colorAliasToken).toMatchSnapshot();
 });
 
-it.concurrent.each(officeThemes)('createOfficeShadowAliasTokens test officeTheme: %s', async (theme) => {
-  const shadowAliasToken = createOfficeShadowAliasTokens(theme);
+it.concurrent.each(officeThemes)('createOfficeShadowAliasTokens test officeTheme: %s', async (themeName: string) => {
+  const shadowAliasToken = createOfficeShadowAliasTokens(themeName);
   expect(shadowAliasToken).toMatchSnapshot();
 });
 
@@ -63,5 +70,23 @@ describe('fallbackGetPalette test', () => {
      * */
     const fallbackPalette = fallbackGetPalette('RedColors');
     expect(fallbackPalette).toMatchSnapshot();
+  });
+});
+
+describe('getCurrentBrandAliasTokens test', () => {
+  it.concurrent.each(appPrimaries)('themeName: White, appPrimary: %s', async (appPrimary: string) => {
+    const brandAliasTokens = getCurrentBrandAliasTokens('White', appPrimary);
+    expect(brandAliasTokens).toMatchSnapshot();
+  });
+
+  it.concurrent.each(appPrimaries)('themeName: Colorful, appPrimary: %s', async (appPrimary: string) => {
+    const brandAliasTokens = getCurrentBrandAliasTokens('Colorful', appPrimary);
+    expect(brandAliasTokens).toMatchSnapshot();
+  });
+
+  // Tests the variation of the alias tokens for when isWhiteOrColorfulTheme is not true
+  it.concurrent.each(appPrimaries)('themeName: null, appPrimary: %s', async (appPrimary: string) => {
+    const brandAliasTokens = getCurrentBrandAliasTokens(null, appPrimary);
+    expect(brandAliasTokens).toMatchSnapshot();
   });
 });
