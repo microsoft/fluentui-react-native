@@ -16,7 +16,7 @@ import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
-import { StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (

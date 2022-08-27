@@ -3,7 +3,7 @@ import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, TextStyle } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';

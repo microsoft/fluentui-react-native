@@ -1,7 +1,7 @@
 import { Checkbox } from '@fluentui/react-native';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
-import { View, TextInput, TextStyle } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 import { E2ECheckboxTest } from './CheckboxE2ETest';

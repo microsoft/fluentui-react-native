@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Text, Switch, TextInput, TextStyle } from 'react-native';
+import { View, Text, Switch, TextInput } from 'react-native';
 import { Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
