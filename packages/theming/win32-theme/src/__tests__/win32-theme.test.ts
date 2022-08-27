@@ -69,7 +69,7 @@ describe('fallbackGetPalette test', () => {
 
   it('Random palette', () => {
     /**
-     * RedColors is just a random pallette, we're just testing to what happens
+     * RedColors is just a random pallette, we're just testing to see what happens
      * if we use anything other than the TaskPane palette.
      * */
     const fallbackPalette = fallbackGetPalette('RedColors');
