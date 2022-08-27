@@ -30,6 +30,11 @@ it('createPartialOfficeTheme test', () => {
   expect(createPartialOfficeTheme(themingModule[0])).toMatchSnapshot;
 });
 
+it('createFontAliasTokens test', () => {
+  const fontAliasToken = createFontAliasTokens();
+  expect(fontAliasToken).toMatchSnapshot();
+});
+
 it.concurrent.each(themeOptions)('createOfficeTheme test', async (option: ThemeOptions) => {
   const officeTheme = createOfficeTheme(option).theme;
   expect(officeTheme).toMatchSnapshot();
