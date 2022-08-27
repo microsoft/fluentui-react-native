@@ -16,9 +16,9 @@ class MenuButtonPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  waitForMenuItemsToOpen(timeout?: number): void {
-    browser.waitUntil(
-      () => {
+  async waitForMenuItemsToOpen(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
         return this.menuItemDisplayed();
       },
       {
@@ -30,17 +30,17 @@ class MenuButtonPageObject extends BasePage {
   }
 
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
-  menuItemDisplayed(): boolean {
-    return this._menuItem.isDisplayed();
+  async menuItemDisplayed(): Promise<boolean> {
+    return (await this._menuItem).isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(selector: MenuButtonSelector, key: string): void {
-    this.getMenuButtonSelector(selector).addValue(key);
+  async sendKey(selector: MenuButtonSelector, key: string): Promise<void> {
+    await (await this.getMenuButtonSelector(selector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the MenuButton Selector */
-  getMenuButtonSelector(selector?: MenuButtonSelector): WebdriverIO.Element {
+  async getMenuButtonSelector(selector?: MenuButtonSelector): Promise<WebdriverIO.Element> {
     if (selector == MenuButtonSelector.MenuButton) {
       return this._primaryComponent;
     } else if (selector == MenuButtonSelector.MenuItem1) {

@@ -25,31 +25,31 @@ class RadioGroupPage extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   // Get RadioButton's accessibilityLabel
-  getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): string {
-    return this.getRadioButton(radioButtonSelector).getAttribute('Name');
+  async getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): Promise<string> {
+    return (await this.getRadioButton(radioButtonSelector)).getAttribute('Name');
   }
 
   /* This resets the RadioGroup selection by clicking/selecting the 1st RadioButton in the RadioGroup.
    * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
-  resetRadioGroupSelection(): void {
-    this._firstRadioButton.click();
+  async resetRadioGroupSelection(): Promise<void> {
+    (await this._firstRadioButton).click();
   }
 
-  getRadioButtonAccesibilityRole(): string {
-    return this._firstRadioButton.getAttribute('ControlType');
+  async getRadioButtonAccesibilityRole(): Promise<string> {
+    return (await this._firstRadioButton).getAttribute('ControlType');
   }
 
-  isRadioButtonSelected(radioButtonSelector: RadioButtonSelector): boolean {
-    return this.getRadioButton(radioButtonSelector).isSelected();
+  async isRadioButtonSelected(radioButtonSelector: RadioButtonSelector): Promise<boolean> {
+    return (await this.getRadioButton(radioButtonSelector)).isSelected();
   }
 
-  clickRadioButton(radioButtonSelector: RadioButtonSelector): void {
-    this.getRadioButton(radioButtonSelector).click();
+  async clickRadioButton(radioButtonSelector: RadioButtonSelector): Promise<void> {
+    await (await this.getRadioButton(radioButtonSelector)).click();
   }
 
-  waitForRadioButtonSelected(radioButtonSelector: RadioButtonSelector, timeout?: number): void {
-    browser.waitUntil(
-      () => {
+  async waitForRadioButtonSelected(radioButtonSelector: RadioButtonSelector, timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
         return this.isRadioButtonSelected(radioButtonSelector);
       },
       {
@@ -61,12 +61,12 @@ class RadioGroupPage extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(key: string, radioButtonSelector: RadioButtonSelector): void {
-    this.getRadioButton(radioButtonSelector).addValue(key);
+  async sendKey(key: string, radioButtonSelector: RadioButtonSelector): Promise<void> {
+    await (await this.getRadioButton(radioButtonSelector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the RadioButton Selector */
-  getRadioButton(radioButtonSelector: RadioButtonSelector): WebdriverIO.Element {
+  async getRadioButton(radioButtonSelector: RadioButtonSelector): Promise<WebdriverIO.Element> {
     if (radioButtonSelector == RadioButtonSelector.First) {
       return this._firstRadioButton;
     } else if (radioButtonSelector == RadioButtonSelector.Second) {

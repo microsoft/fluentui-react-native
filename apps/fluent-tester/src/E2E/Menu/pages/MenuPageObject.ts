@@ -22,10 +22,10 @@ class MenuPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  didMenuOpen(): boolean {
-    const callbackText = By(MENU_ON_OPEN);
-    browser.waitUntil(
-      () => {
+  async didMenuOpen(): Promise<boolean> {
+    const callbackText = await By(MENU_ON_OPEN);
+    await browser.waitUntil(
+      async () => {
         return callbackText.isDisplayed();
       },
       {
@@ -38,10 +38,10 @@ class MenuPageObject extends BasePage {
     return callbackText.isDisplayed();
   }
 
-  didMenuClose(): boolean {
-    const callbackText = By(MENU_ON_CLOSE);
-    browser.waitUntil(
-      () => {
+  async didMenuClose(): Promise<boolean> {
+    const callbackText = await By(MENU_ON_CLOSE);
+    await browser.waitUntil(
+      async () => {
         return callbackText.isDisplayed();
       },
       {
@@ -54,34 +54,34 @@ class MenuPageObject extends BasePage {
     return callbackText.isDisplayed();
   }
 
-  getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): string {
+  async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
     switch (componentSelector) {
       case MenuComponentSelector.PrimaryComponent:
-        return this._primaryComponent.getAttribute('Name');
+        return (await this._primaryComponent).getAttribute('Name');
 
       case MenuComponentSelector.SecondaryComponent:
-        return this._secondaryComponent.getAttribute('Name');
+        return (await this._secondaryComponent).getAttribute('Name');
 
       case MenuComponentSelector.TertiaryComponent:
-        return this._tertiaryComponent.getAttribute('Name');
+        return (await this._tertiaryComponent).getAttribute('Name');
     }
   }
 
-  getMenuAccessibilityRole(): string {
-    return By(MENUPOPOVER_TEST_COMPONENT).getAttribute('ControlType');
+  async getMenuAccessibilityRole(): Promise<string> {
+    return (await By(MENUPOPOVER_TEST_COMPONENT)).getAttribute('ControlType');
   }
 
-  getMenuItemAccessibilityRole(): string {
-    return this._secondaryComponent.getAttribute('ControlType');
+  async getMenuItemAccessibilityRole(): Promise<string> {
+    return (await this._secondaryComponent).getAttribute('ControlType');
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(menuComponentSelector: MenuComponentSelector, key: string): void {
-    this.getMenuComponentSelector(menuComponentSelector).addValue(key);
+  async sendKey(menuComponentSelector: MenuComponentSelector, key: string): Promise<void> {
+    await (await this.getMenuComponentSelector(menuComponentSelector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): WebdriverIO.Element {
+  async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
     if (menuComponentSelector == MenuComponentSelector.PrimaryComponent) {
       return this._primaryComponent;
     }

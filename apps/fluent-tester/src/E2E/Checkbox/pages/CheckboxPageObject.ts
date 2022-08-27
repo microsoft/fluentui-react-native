@@ -17,13 +17,13 @@ class CheckboxPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  isCheckboxChecked(): boolean {
-    return this._primaryComponent.isSelected();
+  async isCheckboxChecked(): Promise<boolean> {
+    return (await this._primaryComponent).isSelected();
   }
 
-  waitForCheckboxChecked(timeout?: number): void {
-    browser.waitUntil(
-      () => {
+  async waitForCheckboxChecked(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
         return this.isCheckboxChecked();
       },
       {
@@ -35,16 +35,16 @@ class CheckboxPageObject extends BasePage {
   }
 
   /* Useful in beforeEach() hook to reset the checkbox before every test */
-  toggleCheckboxToUnchecked(): void {
-    if (this.isCheckboxChecked()) {
-      this._primaryComponent.click();
+  async toggleCheckboxToUnchecked(): Promise<void> {
+    if (await this.isCheckboxChecked()) {
+      await (await this._primaryComponent).click();
     }
   }
 
-  didOnChangeCallbackFire(): boolean {
-    const callbackText = By(CHECKBOX_ON_PRESS);
-    browser.waitUntil(
-      () => {
+  async didOnChangeCallbackFire(): Promise<boolean> {
+    const callbackText = await By(CHECKBOX_ON_PRESS);
+    await browser.waitUntil(
+      async () => {
         return callbackText.isDisplayed();
       },
       {
@@ -58,12 +58,12 @@ class CheckboxPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(selector: CheckboxSelector, key: string): void {
-    this.getCheckboxSelector(selector).addValue(key);
+  async sendKey(selector: CheckboxSelector, key: string): Promise<void> {
+    await (await this.getCheckboxSelector(selector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  getCheckboxSelector(selector?: CheckboxSelector): WebdriverIO.Element {
+  async getCheckboxSelector(selector?: CheckboxSelector): Promise<WebdriverIO.Element> {
     if (selector == CheckboxSelector.Primary) {
       return this._primaryComponent;
     }

@@ -16,10 +16,10 @@ class ButtonExperimentalPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  didOnClickCallbackFire(): boolean {
-    const callbackText = By(BUTTON_ON_PRESS);
-    browser.waitUntil(
-      () => {
+  async didOnClickCallbackFire(): Promise<boolean> {
+    const callbackText = await By(BUTTON_ON_PRESS);
+    await browser.waitUntil(
+      async () => {
         return callbackText.isDisplayed();
       },
       {
@@ -33,12 +33,12 @@ class ButtonExperimentalPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(buttonSelector: ButtonSelector, key: string): void {
-    this.getButtonSelector(buttonSelector).addValue(key);
+  async sendKey(buttonSelector: ButtonSelector, key: string): Promise<void> {
+    await (await this.getButtonSelector(buttonSelector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  getButtonSelector(buttonSelector?: ButtonSelector): WebdriverIO.Element {
+  async getButtonSelector(buttonSelector?: ButtonSelector): Promise<WebdriverIO.Element> {
     if (buttonSelector == ButtonSelector.PrimaryButton) {
       return this._primaryComponent;
     }

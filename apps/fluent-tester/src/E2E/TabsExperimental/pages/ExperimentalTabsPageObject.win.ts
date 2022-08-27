@@ -10,8 +10,8 @@ class ExperimentalTabsPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  getTabItemAccesibilityRole(): string {
-    return this._tabItem.getAttribute('ControlType');
+  async getTabItemAccesibilityRole(): Promise<string> {
+    return (await this._tabItem).getAttribute('ControlType');
   }
 
   /*****************************************/

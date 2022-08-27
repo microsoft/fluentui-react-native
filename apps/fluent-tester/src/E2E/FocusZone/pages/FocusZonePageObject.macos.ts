@@ -4,9 +4,9 @@ import { BasePage, By } from '../../common/BasePage.macos';
 class FocusZonePageObject extends BasePage {
   // OVERRIDE: We use isExisting() here instead of isDisplayed() because FocusZone does not have any UI to it, it's simply
   // a wrapper that adds keyboard focus functionality
-  waitForPrimaryElementDisplayed(timeout?: number): void {
+  async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     const errorMsg = 'The FocusZone UI Element did not load correctly. Please see logs.';
-    this.waitForCondition(() => this._primaryComponent.isExisting(), errorMsg, timeout);
+    await this.waitForCondition(async () => (await this._primaryComponent).isExisting(), errorMsg, timeout);
   }
 
   /*****************************************/

@@ -17,9 +17,9 @@ class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  waitForContextualMenuItemsToOpen(timeout?: number): void {
-    browser.waitUntil(
-      () => {
+  async waitForContextualMenuItemsToOpen(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
         return this.contextualMenuItemDisplayed();
       },
       {
@@ -31,17 +31,17 @@ class ContextualMenuPageObject extends BasePage {
   }
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
-  contextualMenuItemDisplayed(): boolean {
-    return this._contextualMenuItem.isDisplayed();
+  async contextualMenuItemDisplayed(): Promise<boolean> {
+    return (await this._contextualMenuItem).isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(contextualMenuSelector: ContextualMenuSelector, key: string): void {
-    this.getContextualMenuSelector(contextualMenuSelector).addValue(key);
+  async sendKey(contextualMenuSelector: ContextualMenuSelector, key: string): Promise<void> {
+    await (await this.getContextualMenuSelector(contextualMenuSelector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the ContextualMenuSelector string */
-  getContextualMenuSelector(contextualMenuSelector?: ContextualMenuSelector): WebdriverIO.Element {
+  async getContextualMenuSelector(contextualMenuSelector?: ContextualMenuSelector): Promise<WebdriverIO.Element> {
     if (contextualMenuSelector == ContextualMenuSelector.ContextualMenu) {
       return this._primaryComponent;
     } else if (contextualMenuSelector == ContextualMenuSelector.ContextualMenuItem) {

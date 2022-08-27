@@ -25,9 +25,9 @@ class TabsPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  waitForTabsItemsToOpen(tabItemSelector: TabItemSelector, timeout?: number): void {
-    browser.waitUntil(
-      () => {
+  async waitForTabsItemsToOpen(tabItemSelector: TabItemSelector, timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
         return this.didTabItemContentLoad(tabItemSelector);
       },
       {
@@ -38,20 +38,20 @@ class TabsPageObject extends BasePage {
     );
   }
 
-  getTabItemAccesibilityRole(tabItemSelector: TabItemSelector): string {
-    return this.getTabItem(tabItemSelector).getAttribute('ControlType');
+  async getTabItemAccesibilityRole(tabItemSelector: TabItemSelector): Promise<string> {
+    return (await this.getTabItem(tabItemSelector)).getAttribute('ControlType');
   }
 
-  clickOnTabItem(tabItemSelector: TabItemSelector): void {
-    this.getTabItem(tabItemSelector).click();
+  async clickOnTabItem(tabItemSelector: TabItemSelector): Promise<void> {
+    await (await this.getTabItem(tabItemSelector)).click();
   }
 
-  didTabItemContentLoad(tabItemSelector: TabItemSelector): boolean {
-    return this.getTabItemContent(tabItemSelector).isDisplayed();
+  async didTabItemContentLoad(tabItemSelector: TabItemSelector): Promise<boolean> {
+    return (await this.getTabItemContent(tabItemSelector)).isDisplayed();
   }
 
   /* Returns the correct WebDriverIO element from the TabItem Selector */
-  getTabItem(tabItemSelector: TabItemSelector): WebdriverIO.Element {
+  async getTabItem(tabItemSelector: TabItemSelector): Promise<WebdriverIO.Element> {
     if (tabItemSelector == TabItemSelector.First) {
       return this._firstTabItem;
     } else if (tabItemSelector == TabItemSelector.Second) {
@@ -62,7 +62,7 @@ class TabsPageObject extends BasePage {
   }
 
   /* Returns the correct WebDriverIO element from the TabItem Selector */
-  getTabItemContent(tabItemSelector: TabItemSelector): WebdriverIO.Element {
+  async getTabItemContent(tabItemSelector: TabItemSelector): Promise<WebdriverIO.Element> {
     if (tabItemSelector == TabItemSelector.First) {
       return this._firstTabItemContent;
     } else if (tabItemSelector == TabItemSelector.Second) {
@@ -73,8 +73,8 @@ class TabsPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(key: string, tabItemSelector: TabItemSelector): void {
-    this.getTabItem(tabItemSelector).addValue(key);
+  async sendKey(key: string, tabItemSelector: TabItemSelector): Promise<void> {
+    await (await this.getTabItem(tabItemSelector)).addValue(key);
   }
 
   /*****************************************/

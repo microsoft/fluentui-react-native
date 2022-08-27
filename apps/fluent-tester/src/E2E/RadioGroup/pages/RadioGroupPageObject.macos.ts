@@ -18,18 +18,18 @@ class RadioGroupPage extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   // Get RadioButton's accessibilityLabel
-  getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): string {
+  async getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): Promise<string> {
     switch (radioButtonSelector) {
       case RadioButtonSelector.Primary:
-        return this._radioButton.getAttribute('Name');
+        return (await this._radioButton).getAttribute('Name');
 
       case RadioButtonSelector.Secondary:
-        return this._secondRadioButton.getAttribute('Name');
+        return (await this._secondRadioButton).getAttribute('Name');
     }
   }
 
-  getRadioButtonAccesibilityRole(): string {
-    return this._radioButton.getAttribute('ControlType');
+  async getRadioButtonAccesibilityRole(): Promise<string> {
+    return (await this._radioButton).getAttribute('ControlType');
   }
 
   /*****************************************/

@@ -4,20 +4,20 @@ import { BOOT_APP_TIMEOUT, PAGE_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Tabs Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Click and navigate to Tabs test page', () => {
+  it('Click and navigate to Tabs test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    TabsPageObject.scrollToComponentButton();
-    TabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await TabsPageObject.scrollToComponentButton();
+    await TabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToTabsPage();
-    TabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToTabsPage();
+    await TabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(TabsPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await TabsPageObject.isPageLoaded()).toBeTruthy();
   });
 });

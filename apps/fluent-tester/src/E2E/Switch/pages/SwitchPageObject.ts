@@ -18,13 +18,13 @@ class SwitchPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  isSwitchChecked(): boolean {
-    return this._primaryComponent.isSelected();
+  async isSwitchChecked(): Promise<boolean> {
+    return (await this._primaryComponent).isSelected();
   }
 
-  waitForSwitchChecked(timeout?: number): void {
-    browser.waitUntil(
-      () => {
+  async waitForSwitchChecked(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
         return this.isSwitchChecked();
       },
       {
@@ -35,16 +35,16 @@ class SwitchPageObject extends BasePage {
     );
   }
 
-  toggleSwitchToUnchecked(): void {
-    if (this.isSwitchChecked()) {
-      this._primaryComponent.click();
+  async toggleSwitchToUnchecked(): Promise<void> {
+    if (await this.isSwitchChecked()) {
+      (await this._primaryComponent).click();
     }
   }
 
-  didOnChangeCallbackFire(): boolean {
-    const callbackText = By(SWITCH_ON_PRESS);
-    browser.waitUntil(
-      () => {
+  async didOnChangeCallbackFire(): Promise<boolean> {
+    const callbackText = await By(SWITCH_ON_PRESS);
+    await browser.waitUntil(
+      async () => {
         return callbackText.isDisplayed();
       },
       {
@@ -58,12 +58,12 @@ class SwitchPageObject extends BasePage {
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(switchSelector: SwitchComponentSelector, key: string): void {
-    this.getButtonSelector(switchSelector).addValue(key);
+  async sendKey(switchSelector: SwitchComponentSelector, key: string): Promise<void> {
+    await (await this.getButtonSelector(switchSelector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  getButtonSelector(switchSelector?: SwitchComponentSelector): WebdriverIO.Element {
+  async getButtonSelector(switchSelector?: SwitchComponentSelector): Promise<WebdriverIO.Element> {
     if (switchSelector == SwitchComponentSelector.PrimaryComponent) {
       return this._primaryComponent;
     } else if (switchSelector === SwitchComponentSelector.SecondaryComponent) {
