@@ -24,10 +24,10 @@ Or start a development inner loop against the UI Fabric demo:
 To learn more about all the commands that this monorepo supports, see the wiki:
 
   https://github.com/OfficeDev/office-ui-fabric-react/wiki/Build-Commands
-`
+`,
 };
 
-if (path.basename(npmPath) !== 'yarn.js') {
+if (path.basename(npmPath) !== 'yarn.js' && path.basename(npmPath) !== 'yarn') {
   console.error(Strings.useYarnInstead);
 
   if (!detectYarnInstallation()) {
@@ -54,12 +54,18 @@ function checkRepositoryLocation() {
   if (nodePath.root !== repositoryPath.root) {
     console.warn(
       '\x1b[33m%s\x1b[0m',
-      'Your repository is located on a different drive than node.exe. This may cause build failure when running Jest tests.'
+      'Your repository is located on a different drive than node.exe. This may cause build failure when running Jest tests.',
     );
   }
 }
 
 function detectYarnInstallation() {
-  const yarnResult = spawnSync('yarn', ['--version']);
+  let yarnResult;
+  if (process.platform !== 'win32') {
+    yarnResult = spawnSync('yarn.cmd', ['--version']);
+  } else {
+    yarnResult = spawnSync('yarn', ['--version']);
+  }
+
   return yarnResult.status === 0;
 }
