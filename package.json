@@ -59,5 +59,6 @@
     "jpeg-js": "^0.4.4",
     "moment": "^2.29.4",
     "shell-quote": "^1.7.3"
-  }
+  },
+  "packageManager": "yarn@3.2.3"
 }
