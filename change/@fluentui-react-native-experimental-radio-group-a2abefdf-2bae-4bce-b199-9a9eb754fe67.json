@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update package.jsons to reference workspace",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
