@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add link to spec in FluentTester",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "joannaquu@gmail.com",
-  "dependentChangeType": "patch"
-}

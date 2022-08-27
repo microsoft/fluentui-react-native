@@ -1,11 +1,12 @@
 import { Checkbox } from '@fluentui/react-native';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
-import { View, TextInput, TextStyle } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { CHECKBOX_TESTPAGE } from './consts';
 import { E2ECheckboxTest } from './CheckboxE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
@@ -87,6 +88,10 @@ const HoverCheckbox = Checkbox.customize({
   },
 });
 
+const getThemedStyles = themedStyleSheet((t: Theme) => {
+  return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
+});
+
 const TokenCheckbox: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
@@ -108,9 +113,8 @@ const TokenCheckbox: React.FunctionComponent = () => {
   });
 
   const theme = useTheme();
-  const textBoxBorderStyle: TextStyle = {
-    borderColor: theme.colors.inputBorder,
-  };
+  const textBoxBorderStyle = getThemedStyles(theme);
+
   return (
     <View>
       <CircularCheckbox label="A circular checkbox" onChange={onChangeUncontrolled} defaultChecked={false} />
@@ -125,7 +129,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
 
       <TextInput
         accessibilityLabel="Background color"
-        style={[commonStyles.textBox, textBoxBorderStyle]}
+        style={textBoxBorderStyle.textbox}
         placeholder="Background color"
         blurOnSubmit={true}
         onSubmitEditing={(e) => {
@@ -135,7 +139,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
 
       <TextInput
         accessibilityLabel="Checkmark color"
-        style={[commonStyles.textBox, textBoxBorderStyle]}
+        style={textBoxBorderStyle.textbox}
         placeholder="Checkmark color"
         blurOnSubmit={true}
         onSubmitEditing={(e) => {

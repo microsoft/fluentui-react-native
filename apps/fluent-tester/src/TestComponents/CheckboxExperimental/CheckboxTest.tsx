@@ -2,11 +2,12 @@ import * as React from 'react';
 import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
-import { useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, TextStyle } from 'react-native';
+import { Theme, useTheme } from '@fluentui-react-native/theme-types';
+import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
@@ -91,6 +92,10 @@ const ComposedCheckbox = Checkbox.compose({
   },
 });
 
+const getThemedStyles = themedStyleSheet((t: Theme) => {
+  return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
+});
+
 const TokenCheckbox: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
@@ -104,9 +109,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
   });
 
   const theme = useTheme();
-  const textBoxBorderStyle: TextStyle = {
-    borderColor: theme.colors.inputBorder,
-  };
+  const textBoxBorderStyle = getThemedStyles(theme);
 
   return (
     <View>
@@ -123,7 +126,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
       />
       <TextInput
         accessibilityLabel="Background color"
-        style={[commonStyles.textBox, textBoxBorderStyle]}
+        style={textBoxBorderStyle.textbox}
         placeholder="Background color"
         blurOnSubmit={true}
         onSubmitEditing={(e) => {
@@ -133,7 +136,7 @@ const TokenCheckbox: React.FunctionComponent = () => {
 
       <TextInput
         accessibilityLabel="Checkmark color"
-        style={[commonStyles.textBox, textBoxBorderStyle]}
+        style={textBoxBorderStyle.textbox}
         placeholder="Checkmark color"
         blurOnSubmit={true}
         onSubmitEditing={(e) => {

@@ -1,11 +1,11 @@
 import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 
 export const ButtonShapeTest: React.FunctionComponent = () => {
   return (
-    <View style={[stackStyle, commonTestStyles.view]}>
+    <View style={testContentRootViewStyle}>
       <Button shape="rounded" style={commonTestStyles.vmargin}>
         Default Rounded Button
       </Button>

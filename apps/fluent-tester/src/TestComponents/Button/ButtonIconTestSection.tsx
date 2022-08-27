@@ -1,7 +1,7 @@
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
 import { SvgXml } from 'react-native-svg';
@@ -32,7 +32,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
           </svg>`;
 
   return (
-    <View style={[stackStyle, commonTestStyles.view]}>
+    <View style={testContentRootViewStyle}>
       <Button icon={{ fontSource: { ...fontBuiltInProps, fontSize: 32 }, color: '#060' }} style={commonTestStyles.vmargin}>
         Font icon
       </Button>
