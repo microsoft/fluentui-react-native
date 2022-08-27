@@ -17,6 +17,10 @@ const themeOptions: ThemeOptions[][] = [
 const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
 const appPrimaries = ['#185abd', '#107c41', '#d83b01', '#80397b', '#0078d4', '#c43e1c'];
 
+it('win32Typography test', () => {
+  expect(win32Typography).toMatchSnapshot();
+});
+
 it('fallbackOfficeModule test', () => {
   expect(fallbackOfficeModule).toMatchSnapshot();
 });

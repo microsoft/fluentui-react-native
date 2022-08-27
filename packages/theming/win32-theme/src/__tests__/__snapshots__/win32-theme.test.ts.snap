@@ -5462,3 +5462,5 @@ Array [
   undefined,
 ]
 `;
+
+exports[`win32Typography test 1`] = `[Function]`;
