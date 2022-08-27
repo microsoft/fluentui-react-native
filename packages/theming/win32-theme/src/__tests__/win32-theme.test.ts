@@ -31,7 +31,8 @@ it('getThemingModule test', () => {
 
 it('createPartialOfficeTheme test', () => {
   const themingModule = getThemingModule();
-  expect(createPartialOfficeTheme(themingModule[0])).toMatchSnapshot;
+  const partialOfficeTheme = createPartialOfficeTheme(themingModule[0]);
+  expect(partialOfficeTheme).toMatchSnapshot;
 });
 
 it('createFontAliasTokens test', () => {
