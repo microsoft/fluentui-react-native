@@ -109,7 +109,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   return (
     <View testID="ScrollViewAreaForComponents">
       <View style={styles.header}>
-        <Text style={[styles.name]} variant="heroSemibold">
+        <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
         {props.spec && <Link url={props.spec} content="SPEC" />}
@@ -125,28 +125,28 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         </View>
         {showStatus && (
           <>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
+            <Text style={styles.statusLabel} variant="bodySemibold">
               Win32: <Text style={styles.status}>{props.status.win32Status}</Text>
             </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
+            <Text style={styles.statusLabel} variant="bodySemibold">
               UWP: <Text style={styles.status}>{props.status.uwpStatus}</Text>
             </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
+            <Text style={styles.statusLabel} variant="bodySemibold">
               iOS: <Text style={styles.status}>{props.status.iosStatus}</Text>
             </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
+            <Text style={styles.statusLabel} variant="bodySemibold">
               macOS: <Text style={styles.status}>{props.status.macosStatus}</Text>
             </Text>
-            <Text style={[styles.statusLabel]} variant="bodySemibold">
+            <Text style={styles.statusLabel} variant="bodySemibold">
               Android: <Text style={styles.status}>{props.status.androidStatus}</Text>
             </Text>
 
-            <Text style={[styles.definitionHeader]} variant="headerStandard">
+            <Text style={styles.definitionHeader} variant="headerStandard">
               Status Definitions
             </Text>
             {Object.entries(definitions).map(([key, value]) => {
               return (
-                <Text style={[styles.statusLabel]} variant="bodySemibold" key={key}>
+                <Text style={styles.statusLabel} variant="bodySemibold" key={key}>
                   {key}: <Text style={styles.status}>{value}</Text>
                 </Text>
               );
@@ -158,7 +158,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text style={[styles.section]} variant="headerSemibold" testID={section.testID}>
+            <Text style={styles.section} variant="headerSemibold" testID={section.testID}>
               {section.name}
             </Text>
             <Separator />

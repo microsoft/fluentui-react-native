@@ -100,7 +100,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={36}
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="SVG Icon"
-          icon={{ fontSource: { ...fontBuiltInProps } }}
+          icon={{ fontSource: fontBuiltInProps }}
           avatarColor={avatarColor}
           badge={{ status: 'outOfOffice', outOfOffice }}
         />
@@ -110,7 +110,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={imageSize === undefinedText ? undefined : imageSize}
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="SVG Icon"
-          icon={{ fontSource: { ...fontBuiltInProps }, color: 'green' }}
+          icon={{ fontSource: fontBuiltInProps, color: 'green' }}
           avatarColor={avatarColor}
           badge={{ status: 'outOfOffice', outOfOffice }}
         />

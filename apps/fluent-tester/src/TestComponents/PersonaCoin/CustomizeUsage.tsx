@@ -1,11 +1,16 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment } from '@fluentui/react-native';
-import { Switch, View, Text, TextInput, TextStyle } from 'react-native';
+import { Switch, View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+
+const getThemedStyles = themedStyleSheet((t: Theme) => {
+  return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
+});
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
@@ -25,9 +30,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [transparent, setTransparent] = React.useState<boolean>(false);
 
   const theme = useTheme();
-  const textBoxBorderStyle: TextStyle = {
-    borderColor: theme.colors.inputBorder,
-  };
+  const textBoxBorderStyle = getThemedStyles(theme);
 
   const CustomizedPersonaCoin = React.useMemo(() => {
     const tokens = {
@@ -75,7 +78,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Background color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Background color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -85,7 +88,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Initials text color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Initials text color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -95,7 +98,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Icon stroke color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Icon stroke color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -105,7 +108,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Ring color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Ring color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -115,7 +118,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Ring background color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Ring background color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {

@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 26 Aug 2022 19:52:23 GMT and should not be manually modified.
+This log was last generated on Sat, 27 Aug 2022 01:33:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.90.1
+
+Sat, 27 Aug 2022 01:33:14 GMT
+
+### Patches
+
+- Tester style cleanup (ruaraki@microsoft.com)
+
+## 0.90.0
+
+Fri, 26 Aug 2022 22:09:56 GMT
+
+### Minor changes
+
+- add link to spec in FluentTester (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.17.0
 
 ## 0.89.0
 
