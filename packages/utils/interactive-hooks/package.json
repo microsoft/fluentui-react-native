@@ -26,14 +26,14 @@
     "directory": "packages/utils/interactive-hooks"
   },
   "dependencies": {
-    "@fluentui-react-native/memo-cache": "^1.1.7",
+    "@fluentui-react-native/memo-cache": "workspace:*",
     "invariant": "^2.2.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/icon": "0.13.4",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/icon": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.66.0",
     "@types/invariant": "^2.2.0",
     "@types/jest": "^26.0.0",

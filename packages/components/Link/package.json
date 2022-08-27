@@ -26,17 +26,17 @@
     "directory": "packages/components/Link"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": ">=0.9.0 <1.0.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.18.1 <1.0.0",
-    "@fluentui-react-native/text": ">=0.14.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.16.0 <1.0.0",
-    "@uifabricshared/foundation-composable": ">=0.11.0 <1.0.0",
-    "@uifabricshared/foundation-compose": "^1.12.1",
-    "@uifabricshared/foundation-settings": ">=0.12.0 <1.0.0"
+    "@fluentui-react-native/adapters": "workspace:*",
+    "@fluentui-react-native/interactive-hooks": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
+    "@uifabricshared/foundation-composable": "workspace:*",
+    "@uifabricshared/foundation-compose": "workspace:*",
+    "@uifabricshared/foundation-settings": "workspace:*"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@types/react-native": "^0.66.0",
     "react-native": "^0.66.0"
   },

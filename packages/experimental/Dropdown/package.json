@@ -26,9 +26,9 @@
     "directory": "packages/experimental/dropdown"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
-    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
+    "@fluentui-react-native/test-tools": "workspace:*",
     "@types/react-native": "^0.66.0",
     "react-native": "^0.66.0"
   },

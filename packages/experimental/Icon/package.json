@@ -18,12 +18,12 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.14.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.0",
-    "@fluentui-react-native/text": "^0.14.0",
-    "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.14.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.16.0 <1.0.0",
+    "@fluentui-react-native/default-theme": "workspace:*",
+    "@fluentui-react-native/framework": "workspace:*",
+    "@fluentui-react-native/text": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
+    "@fluentui-react-native/tokens": "workspace:*",
     "react-native-svg": "^12.3.0"
   },
   "repository": {
@@ -32,8 +32,8 @@
     "directory": "packages/experimental/Icon"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.66.0",
     "@types/react-native": "^0.66.0",
     "react-native": "^0.66.0",

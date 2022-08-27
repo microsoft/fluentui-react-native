@@ -31,15 +31,15 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.89.0",
+    "@fluentui-react-native/tester": "workspace:*",
     "react": "17.0.2",
     "react-native": "^0.66.0",
     "react-native-svg": "^12.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@office-iss/react-native-win32": "^0.66.0",
     "@office-iss/rex-win32": "0.66.17-devmain.15229.10000",
     "@rnx-kit/cli": "^0.9.57",

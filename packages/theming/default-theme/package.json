@@ -33,16 +33,16 @@
   "dependencies": {
     "@fluentui-react-native/design-tokens-win32": "^0.13.0",
     "@fluentui-react-native/design-tokens-windows": "^0.13.0",
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme": ">=0.7.0 <1.0.0",
-    "@fluentui-react-native/theme-tokens": "^0.19.0",
-    "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.14.0 <1.0.0",
+    "@fluentui-react-native/memo-cache": "workspace:*",
+    "@fluentui-react-native/theme": "workspace:*",
+    "@fluentui-react-native/theme-tokens": "workspace:*",
+    "@fluentui-react-native/theme-types": "workspace:*",
+    "@fluentui-react-native/theming-utils": "workspace:*",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/eslint-config-rules": "workspace:*",
+    "@fluentui-react-native/scripts": "workspace:*",
     "@types/react": "^17.0.2",
     "react": "17.0.2",
     "react-native": "^0.66.0"
