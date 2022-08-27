@@ -4430,7 +4430,7 @@ Object {
 }
 `;
 
-exports[`fallbackGetPalette test Any other palette 1`] = `
+exports[`fallbackGetPalette test Random palette 1`] = `
 Object {
   "AccentDark": "#C6C6C6",
   "AccentEmphasis": "#D83B01",
