@@ -67,7 +67,7 @@ describe('fallbackGetPalette test', () => {
     expect(fallbackPalette).toMatchSnapshot();
   });
 
-  it('Any other palette', () => {
+  it('Random palette', () => {
     /**
      * RedColors is just a random pallette, we're just testing to what happens
      * if we use anything other than the TaskPane palette.
