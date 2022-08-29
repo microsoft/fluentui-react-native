@@ -5,13 +5,6 @@ import { createOfficeColorAliasTokens, createOfficeShadowAliasTokens } from '../
 import { createFontAliasTokens } from '../createFontAliasTokens';
 import { createBrandedThemeWithAlias, getCurrentBrandAliasTokens } from '../createBrandedThemeWithAlias';
 import { win32Typography } from '../getThemeTypography';
-import { ThemeOptions } from '@fluentui-react-native/theme-types';
-
-const themeOptions: ThemeOptions[][] = [
-  [{ paletteName: 'TaskPane', appearance: 'light' }],
-  [{ paletteName: 'TaskPane', appearance: 'dark' }],
-  [{ paletteName: 'TaskPane', appearance: 'dynamic' }],
-];
 
 const officeThemes = ['White', 'Colorful', 'DarkGray', 'Black', 'HighContrast'];
 const appPrimaries = ['#185abd', '#107c41', '#d83b01', '#80397b', '#0078d4', '#c43e1c'];
@@ -40,15 +33,15 @@ it('createFontAliasTokens test', () => {
   expect(fontAliasToken).toMatchSnapshot();
 });
 
+it('createOfficeTheme test', () => {
+  const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
+  expect(officeTheme).toMatchSnapshot();
+});
+
 it.concurrent.each(officeThemes)('createBrandedThemeWithAlias test themeName: %s', async (themeName: string) => {
   const officeTheme = createOfficeTheme({ paletteName: 'TaskPane', appearance: 'light' }).theme;
   const brandedTheme = createBrandedThemeWithAlias(themeName, officeTheme);
   expect(brandedTheme).toMatchSnapshot();
-});
-
-it.concurrent.each(themeOptions)('createOfficeTheme test', async (option: ThemeOptions) => {
-  const officeTheme = createOfficeTheme(option).theme;
-  expect(officeTheme).toMatchSnapshot();
 });
 
 it.concurrent.each(officeThemes)('createOfficeColorAliasTokens test officeTheme: %s', async (themeName: string) => {
