@@ -4,7 +4,6 @@ exports[`Badge component tests Badge all props 1`] = `
 <View
   appearance="outline"
   shape="rounded"
-  size="large"
   style={
     Object {
       "alignItems": "center",
@@ -67,7 +66,6 @@ exports[`Badge component tests Badge all props 1`] = `
 
 exports[`Badge component tests Badge tokens 1`] = `
 <View
-  size="medium"
   style={
     Object {
       "alignItems": "center",
@@ -116,7 +114,6 @@ exports[`Badge component tests Badge tokens 1`] = `
 
 exports[`Badge component tests Empty Badge 1`] = `
 <View
-  size="medium"
   style={
     Object {
       "alignItems": "center",
