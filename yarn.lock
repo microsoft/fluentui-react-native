@@ -1493,10 +1493,20 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.13.0.tgz#6481f3d543fbc2534d4fb242e9b33e23ec32efd6"
   integrity sha512-jSJD291L22ZRZiH0CFBbLW8y1kBoESrrARcPUk8bCgzyIRFCEkq0iGL8k3W8OY7ov8/TLAflfChY3GtVX99ynA==
 
+"@fluentui-react-native/design-tokens-win32@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.14.0.tgz#357b4244828bfc797edc6531f6c35519c2d4a736"
+  integrity sha512-xUdy2EpGQ2O/5cLVAP2tyKnCF9p6GGVKKo4Gtt0D7hbmuwXTcI/iOh2ReUOfMtgDOMjbbKpi8k8C49NHxUZLKA==
+
 "@fluentui-react-native/design-tokens-windows@^0.13.0":
   version "0.13.0"
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.13.0.tgz#1d8610634920bd5decaca669cae8183c0713d2ef"
   integrity sha512-o9ir+tpie+Fm9zO+nCbJLBfzVjUhugRWRsPS8n6wBaujC1qyeUYjhoGg6ejXzKc0nVCkIsFmRRRgC0brfrPIzw==
+
+"@fluentui-react-native/design-tokens-windows@^0.14.0":
+  version "0.14.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.14.0.tgz#1483caa1dd4e7097ac48a5872e93d7f896e8402c"
+  integrity sha512-WNNVTMpRir6a2Voa0yu3BZJmy2w7fofrokL+nyFQM40bACtX68KDRDE96HA5W5+4q8rEaNSXV3DzSzLXm6ekfA==
 
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
