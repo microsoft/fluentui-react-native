@@ -59,9 +59,5 @@
     "jpeg-js": "^0.4.4",
     "moment": "^2.29.4",
     "shell-quote": "^1.7.3"
-  },
-  "dependencies": {
-    "@wdio/codemod": "^0.12.0",
-    "jscodeshift": "^0.13.1"
   }
 }

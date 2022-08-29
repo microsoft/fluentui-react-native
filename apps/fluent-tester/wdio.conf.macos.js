@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
 const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
@@ -95,7 +97,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  //before: function () {},
+  before: function () {
+    require('ts-node').register({ files: true });
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {String} commandName hook command name
