@@ -57,6 +57,7 @@
     "allure-commandline": "2.13.0",
     "appium": "^2.0.0-beta.27",
     "metro-config": "^0.66.2",
+    "appium-windows-driver": "^2.0.6",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
