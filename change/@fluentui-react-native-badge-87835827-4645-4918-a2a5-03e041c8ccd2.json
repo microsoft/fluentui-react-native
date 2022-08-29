@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed showing content for tiny and extraSmall badge",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

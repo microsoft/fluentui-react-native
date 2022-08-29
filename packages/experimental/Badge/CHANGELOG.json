@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Mon, 29 Aug 2022 12:39:37 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.25",
+      "version": "0.1.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "9e08685b287f75bb13b586fbc23aa3245d58aa0d",
+            "comment": "Fixed showing content for tiny and extraSmall badge"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Aug 2022 18:15:16 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.24",
       "version": "0.1.24",
