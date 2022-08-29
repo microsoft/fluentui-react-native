@@ -43,7 +43,9 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate accessibilityLabel from `name` prop', async () => {
-    await expect(await AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(AVATAR_ACCESSIBILITY_LABEL_BY_NAME);
+    await expect(await AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(
+      AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
+    );
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
   it('Validate accessibilityHint', async () => {
