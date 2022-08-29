@@ -4,7 +4,6 @@ class RadioButton: NSButton {
 
 	public override init(frame:NSRect) {
 		super.init(frame: frame)
-		translatesAutoresizingMaskIntoConstraints = false;
 	}
 	
 	required init?(coder: NSCoder) {
