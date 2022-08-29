@@ -25,7 +25,7 @@ export const Checkbox = compose<CheckboxTypeMacOS>({
     root: buildProps<CheckboxProps, CheckboxTokens>(() => ({
       style: {
         minHeight: 20,
-        width: '100%',
+        minWidth: '100%',
       },
     })),
   },
