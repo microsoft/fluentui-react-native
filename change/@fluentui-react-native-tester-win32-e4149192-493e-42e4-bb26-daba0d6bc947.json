@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update WebDriverIO to v7 and use Asynchronous Testing",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
