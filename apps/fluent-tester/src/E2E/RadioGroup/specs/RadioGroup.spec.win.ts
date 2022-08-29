@@ -58,7 +58,9 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
   });
 
   it('RadioButton - Set accessibilityLabel', async () => {
-    await expect(await RadioGroupPageObject.getRBAccessibilityLabel(RadioButtonSelector.First)).toEqual(FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL);
+    await expect(await RadioGroupPageObject.getRBAccessibilityLabel(RadioButtonSelector.First)).toEqual(
+      FIRST_RADIO_BUTTON_ACCESSIBILITY_LABEL,
+    );
     await expect(await RadioGroupPageObject.didAssertPopup()).toBeFalsy(RadioGroupPageObject.ERRORMESSAGE_ASSERT);
   });
 

@@ -99,7 +99,9 @@ describe('Menu Accessibility Testing', () => {
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
-    await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.SecondaryComponent)).toEqual(MENUITEM_ACCESSIBILITY_LABEL);
+    await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.SecondaryComponent)).toEqual(
+      MENUITEM_ACCESSIBILITY_LABEL,
+    );
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);

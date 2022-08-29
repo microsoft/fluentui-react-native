@@ -46,7 +46,9 @@ describe('Experimental Button Accessibility Testing', () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
     await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL);
+    await expect(await ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
+      BUTTON_TEST_COMPONENT_LABEL,
+    );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 });
