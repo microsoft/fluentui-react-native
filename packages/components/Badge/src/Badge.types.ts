@@ -74,7 +74,7 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
   appearance?: BadgeAppearance;
 
   /**
-   * Applies shadow for badges with solid background.
+   * Applies shadow according to the Fluent elevation system.
    * @default false
    */
   shadow?: boolean;
