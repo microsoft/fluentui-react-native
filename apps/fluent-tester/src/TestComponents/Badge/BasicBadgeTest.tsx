@@ -27,10 +27,8 @@ const badgeIconPositions = ['before', 'after'];
 
 const StyledBadge = Badge.customize({
   fontWeight: 'bold',
-  fontSize: 60,
-  variant: 'heroLargeStandard',
-  textPadding: 50,
-  paddingHorizontal: 60,
+  fontSize: 12,
+  fontFamily: 'Georgia',
   backgroundColor: '#f09',
   borderColor: 'purple',
   color: 'yellow',

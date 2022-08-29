@@ -17,9 +17,9 @@ import { defaultBadgeTokens } from './BadgeTokens';
 import { defaultBadgeColorTokens } from './BadgeColorTokens';
 import { badgeFontTokens } from './BadgeFontTokens';
 
-export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes, 'textPadding'];
+export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl'];
-const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'iconColor', 'position', 'textColor'];
+const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'icon', 'iconColor', 'iconPosition', 'position'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeFontTokens, badgeName],
@@ -38,7 +38,6 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
             flexDirection: 'row',
             alignSelf: 'flex-start',
             justifyContent: 'center',
-            minHeight: tokens.minHeight,
             width: tokens.width,
             backgroundColor: _badgeColor,
             position,
@@ -70,12 +69,16 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       ['iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
-      (tokens: BadgeTokens, theme: Theme) => ({
-        ...fontStyles.from(tokens, theme),
-        color: tokens.textColor || tokens.color,
-        paddingHorizontal: tokens.textPadding,
-      }),
-      ['color', 'textColor', 'textPadding', ...fontStyles.keys],
+      (tokens: BadgeTokens, theme: Theme) => {
+        return {
+          style: {
+            ...fontStyles.from(tokens, theme),
+            color: tokens.color,
+            ...getIconMargin(tokens),
+          },
+        };
+      },
+      ['color', 'textMargin', ...fontStyles.keys],
     ),
   },
 };
@@ -106,4 +109,17 @@ export function getBadgePosition(tokens: BadgeCoreTokens) {
     ...verticalPosition,
     ...horizontalPosition,
   };
+}
+
+export function getIconMargin(tokens: BadgeTokens) {
+  if (tokens.icon) {
+    return tokens.iconPosition === 'before'
+      ? {
+          marginStart: tokens.textMargin,
+        }
+      : {
+          marginEnd: tokens.textMargin,
+        };
+  }
+  return {};
 }

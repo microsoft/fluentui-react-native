@@ -128,11 +128,6 @@ export interface BadgeConfigurableProps {
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
-
-  /**
-   * Text color.
-   */
-  textColor?: ColorValue;
 }
 ```
 

@@ -24,20 +24,31 @@ export interface BadgeConfigurableProps {
   badgeColor?: BadgeColor;
 
   /**
+   * Set the text color
+   */
+  color?: ColorValue;
+
+  /*
+   * Source URL or name of the icon to show on the Badge.
+   */
+  icon?: IconSourcesType;
+
+  /**
    * The icon color.
    */
   iconColor?: ColorValue;
+
+  /**
+   * Icon can be placed before or after Badge's content.
+   * @default before
+   */
+  iconPosition?: BadgeIconPosition;
 
   /**
    * Badge position
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
-
-  /**
-   * Text color.
-   */
-  textColor?: ColorValue;
 }
 
 export interface BadgeCoreProps extends IViewProps {
@@ -59,19 +70,8 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    * @defaultvalue filled
    */
   appearance?: BadgeAppearance;
-
-  /*
-   * Source URL or name of the icon to show on the Badge.
-   */
-  icon?: IconSourcesType;
-
-  /**
-   * Icon can be placed before or after Badge's content.
-   * @default before
-   */
-  iconPosition?: BadgeIconPosition;
 }
-export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, Omit<IColorTokens, 'color'> {
   /**
    * Set the bottom edge of the Badge
    */
@@ -101,7 +101,7 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * Set padding for text container when Badge contains
    * icons or images
    */
-  textPadding?: number;
+  textMargin?: number;
 
   /**
    * Set the top edge of the Badge
@@ -164,7 +164,7 @@ export interface BadgeTokens extends BadgeCoreTokens, BadgeConfigurableProps {
 
 export interface BadgeSlotProps {
   root: IViewProps;
-  icon: IconProps;
+  icon?: IconProps;
   text: TextProps;
 }
 

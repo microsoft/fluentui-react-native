@@ -42,21 +42,15 @@ exports[`Badge component tests Badge all props 1`] = `
   <Text
     accessible={false}
     ellipsizeMode="tail"
-    fontFamily="Segoe UI"
-    fontSize={12}
-    fontWeight="400"
     numberOfLines={0}
-    paddingHorizontal={2}
     style={
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontStyle": undefined,
         "fontWeight": "400",
         "margin": 0,
-        "textAlign": undefined,
-        "textDecorationLine": undefined,
+        "marginEnd": 2,
       }
     }
   >
@@ -91,21 +85,14 @@ exports[`Badge component tests Badge tokens 1`] = `
   <Text
     accessible={false}
     ellipsizeMode="tail"
-    fontFamily="Segoe UI"
-    fontSize={12}
-    fontWeight="400"
     numberOfLines={0}
-    paddingHorizontal={2}
     style={
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
         "fontSize": 12,
-        "fontStyle": undefined,
         "fontWeight": "400",
         "margin": 0,
-        "textAlign": undefined,
-        "textDecorationLine": undefined,
       }
     }
   >
