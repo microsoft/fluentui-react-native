@@ -1,11 +1,13 @@
 import * as React from 'react';
-import { View, Text, Switch, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { Slider } from '../Common/Slider';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
@@ -41,15 +43,15 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     return Persona.customize({ tokens });
   }, [coinColor, textColor, textSize, secondarySize, tertiarySize, optionalSize, horizontalGap, verticalGap]);
 
+  const onSetShowImage = (_e: InteractionEvent, value: boolean) => {
+    setShowImage(value);
+  };
+
   return (
     <View style={commonStyles.root}>
       {/* settings */}
       <View style={commonStyles.settings}>
-        <View style={commonStyles.switch}>
-          <Text>Show image</Text>
-          <Switch value={showImage} onValueChange={setShowImage} />
-        </View>
-
+        <Switch checked={showImage} onChange={onSetShowImage} label="Show image" />
         <TextInput
           accessibilityLabel="Background color"
           style={textBoxBorderStyle.textbox}

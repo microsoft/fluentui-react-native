@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ScreenRect, Text, View, Switch, ScrollView } from 'react-native';
+import { ScreenRect, Text, View, ScrollView } from 'react-native';
 import {
   Button,
   Callout,
@@ -10,11 +10,13 @@ import {
   DismissBehaviors,
   StealthButton,
 } from '@fluentui/react-native';
+import { Switch } from '@fluentui-react-native/switch';
 import { CALLOUT_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ECalloutTest } from './CalloutE2ETest';
 import { fluentTesterStyles } from '../Common/styles';
 import { MenuPicker } from '../Common/MenuPicker';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const StandardCallout: React.FunctionComponent = () => {
   const [showStandardCallout, setShowStandardCallout] = React.useState(false);
@@ -23,20 +25,20 @@ const StandardCallout: React.FunctionComponent = () => {
   const [calloutHovered, setCalloutHovered] = React.useState(false);
 
   const [shouldSetInitialFocus, setShouldSetInitialFocus] = React.useState(true);
-  const onInitialFocusChange = React.useCallback((value) => setShouldSetInitialFocus(value), []);
+  const onInitialFocusChange = React.useCallback((_e: InteractionEvent, value) => setShouldSetInitialFocus(value), []);
 
   const [customRestoreFocus, setCustomRestoreFocus] = React.useState(false);
-  const onRestoreFocusChange = React.useCallback((value) => setCustomRestoreFocus(value), []);
+  const onRestoreFocusChange = React.useCallback((_e: InteractionEvent, value: boolean) => setCustomRestoreFocus(value), []);
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
-  const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+  const onIsBeakVisibleChange = React.useCallback((_e: InteractionEvent, value) => setIsBeakVisible(value), []);
 
   const [preventDismissOnKeyDown, setPreventDismissOnKeyDown] = React.useState(false);
   const [preventDismissOnClickOutside, setPreventDismissOnClickOutside] = React.useState(false);
   const [calloutDismissBehaviors, setDismissBehaviors] = React.useState<DismissBehaviors[]>([]);
 
   const onPreventDismissOnKeyDownChange = React.useCallback(
-    (value) => {
+    (_e: InteractionEvent, value) => {
       setPreventDismissOnKeyDown(value);
       if (value) {
         setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnKeyDown'));
@@ -51,7 +53,7 @@ const StandardCallout: React.FunctionComponent = () => {
   );
 
   const onPreventDismissOnClickOutsideChange = React.useCallback(
-    (value) => {
+    (_e: InteractionEvent, value) => {
       setPreventDismissOnClickOutside(value);
       if (value) {
         setDismissBehaviors(calloutDismissBehaviors.concat('preventDismissOnClickOutside'));
@@ -207,44 +209,29 @@ const StandardCallout: React.FunctionComponent = () => {
     setScrollviewContents((arr) => [...arr, 1]);
   }, [setScrollviewContents]);
 
+  const onOpenCalloutOnHoverAnchor = (_e: InteractionEvent, value: boolean) => {
+    setOpenCalloutOnHoverAnchor(value);
+  };
+
+  const onShowScrollViewCallout = (_e: InteractionEvent, value: boolean) => {
+    setShowScrollViewCalout(value);
+  };
+
   return (
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={openCalloutOnHoverAnchor} onValueChange={setOpenCalloutOnHoverAnchor} />
-            <Text>Show Callout On Hover Anchor</Text>
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={shouldSetInitialFocus} onValueChange={onInitialFocusChange} />
-            <Text>Set Initial Focus</Text>
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={customRestoreFocus} onValueChange={onRestoreFocusChange} />
-            <Text>Customize Restore Focus</Text>
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
-            <Text>Beak Visible</Text>
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={preventDismissOnKeyDown} onValueChange={onPreventDismissOnKeyDownChange} />
-            <Text>Prevent Dismiss On Key Down</Text>
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={preventDismissOnClickOutside} onValueChange={onPreventDismissOnClickOutsideChange} />
-            <Text>Prevent Dismiss On Click Outside</Text>
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Switch value={showScrollViewCallout} onValueChange={setShowScrollViewCalout} />
-            <Text>Enable ScrollView Callout</Text>
-          </View>
+          <Switch checked={openCalloutOnHoverAnchor} onChange={onOpenCalloutOnHoverAnchor} label="Show Callout On Hover Anchor" />
+          <Switch checked={shouldSetInitialFocus} onChange={onInitialFocusChange} label="Set Initial Focus" />
+          <Switch checked={customRestoreFocus} onChange={onRestoreFocusChange} label="Customize Restore Focus" />
+          <Switch checked={isBeakVisible} onChange={onIsBeakVisibleChange} label="Beak Visible" />
+          <Switch checked={preventDismissOnKeyDown} onChange={onPreventDismissOnKeyDownChange} label="Prevent Dismiss On Key Down" />
+          <Switch
+            checked={preventDismissOnClickOutside}
+            onChange={onPreventDismissOnClickOutsideChange}
+            label="Prevent Dismiss On Click Outside"
+          />
+          <Switch checked={showScrollViewCallout} onChange={onShowScrollViewCallout} label="Enable ScrollView Callout" />
 
           <MenuPicker
             prompt="Background Color"

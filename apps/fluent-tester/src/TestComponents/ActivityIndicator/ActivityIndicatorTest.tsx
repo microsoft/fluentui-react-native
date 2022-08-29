@@ -5,24 +5,33 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ACTIVITY_INDICATOR_TESTPAGE } from './consts';
-import { View, Switch } from 'react-native';
+import { View } from 'react-native';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const BasicActivityIndicator: React.FunctionComponent = () => {
   const [animating, setAnimating] = React.useState(true);
   const [hidesWhenStopped, setHidesWhenStopped] = React.useState(true);
 
+  const onChangeAnimating = React.useCallback(
+    (__e: InteractionEvent, value) => {
+      setAnimating(value);
+    },
+    [setAnimating],
+  );
+
+  const onChangeHideWhenStopped = React.useCallback(
+    (_e: InteractionEvent, value) => {
+      setHidesWhenStopped(value);
+    },
+    [setHidesWhenStopped],
+  );
   return (
     <Stack style={stackStyle}>
       <View style={commonStyles.root}>
         <View style={commonStyles.settings}>
-          <View style={commonStyles.switch}>
-            <Text>Animating</Text>
-            <Switch value={animating} onValueChange={setAnimating} />
-          </View>
-          <View style={commonStyles.switch}>
-            <Text>HidesWhenStopped</Text>
-            <Switch value={hidesWhenStopped} onValueChange={setHidesWhenStopped} />
-          </View>
+          <Switch checked={animating} onChange={onChangeAnimating} label="Animating" />
+          <Switch checked={hidesWhenStopped} onChange={onChangeHideWhenStopped} label="HidesWhenStopped" />
         </View>
         <ActivityIndicator animating={animating} hidesWhenStopped={hidesWhenStopped} />
       </View>

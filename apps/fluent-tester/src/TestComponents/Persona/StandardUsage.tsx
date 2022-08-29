@@ -2,9 +2,11 @@ import * as React from 'react';
 import { Persona, PersonaSize } from '@fluentui/react-native';
 import { rajeshImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { View, Text, Switch } from 'react-native';
+import { View } from 'react-native';
 import { undefinedText } from '../PersonaCoin/styles';
 import { MenuPicker } from '../Common/MenuPicker';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -28,22 +30,6 @@ const allSizesCollection = allSizes.map((size) => {
   };
 });
 
-interface ISwitchWithLabelProps {
-  label: string;
-  value: boolean;
-  onValueChange: (value: boolean) => void;
-}
-
-function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
-  const { label, value, onValueChange } = props;
-  return (
-    <View style={commonStyles.switch}>
-      <Text>{label}</Text>
-      <Switch value={value} onValueChange={onValueChange} />
-    </View>
-  );
-}
-
 export const StandardUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showPrimary, setShowPrimary] = React.useState(true);
@@ -52,15 +38,35 @@ export const StandardUsage: React.FunctionComponent = () => {
   const [showOptional, setShowOptional] = React.useState(true);
   const [imageSize, setImageSize] = React.useState<PersonaSize | undefined>('size72');
 
+  const onSetShowImage = (_e: InteractionEvent, value: boolean) => {
+    setShowImage(value);
+  };
+
+  const onSetShowPrimary = (_e: InteractionEvent, value: boolean) => {
+    setShowPrimary(value);
+  };
+
+  const onSetShowSecondary = (_e: InteractionEvent, value: boolean) => {
+    setShowSecondary(value);
+  };
+
+  const onSetShowTertiary = (_e: InteractionEvent, value: boolean) => {
+    setShowTertiary(value);
+  };
+
+  const onSetShowOptional = (_e: InteractionEvent, value: boolean) => {
+    setShowOptional(value);
+  };
+
   return (
     <View style={commonStyles.root}>
       {/* settings */}
       <View style={commonStyles.settings}>
-        <SwitchWithLabel label="Show image" value={showImage} onValueChange={setShowImage} />
-        <SwitchWithLabel label="Show primary text" value={showPrimary} onValueChange={setShowPrimary} />
-        <SwitchWithLabel label="Show secondary text" value={showSecondary} onValueChange={setShowSecondary} />
-        <SwitchWithLabel label="Show tertiary text" value={showTertiary} onValueChange={setShowTertiary} />
-        <SwitchWithLabel label="Show optional text" value={showOptional} onValueChange={setShowOptional} />
+        <Switch label="Show image" checked={showImage} onChange={onSetShowImage} />
+        <Switch label="Show primary text" checked={showPrimary} onChange={onSetShowPrimary} />
+        <Switch label="Show secondary text" checked={showSecondary} onChange={onSetShowSecondary} />
+        <Switch label="Show tertiary text" checked={showTertiary} onChange={onSetShowTertiary} />
+        <Switch label="Show optional text" checked={showOptional} onChange={onSetShowOptional} />
         <MenuPicker
           prompt="Size"
           style={commonStyles.header}

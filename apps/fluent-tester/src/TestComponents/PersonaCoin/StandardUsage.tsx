@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { PersonaSize, PersonaCoinFluentColor, PersonaCoin, PersonaPresence } from '@fluentui/react-native';
 import { StyledPicker } from '../Common/StyledPicker';
-import { Switch, View, Text, ColorValue } from 'react-native';
+import { View } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -57,17 +58,15 @@ export const StandardUsage: React.FunctionComponent = () => {
   const onColorChange = React.useCallback((value) => setCoinColor(value), []);
   const onPresenceChange = React.useCallback((value) => setPresence(value), []);
 
-  const theme = useTheme();
-  const textStyles = { color: theme.colors.inputText as ColorValue };
+  const onSetShowImage = (_e: InteractionEvent, value: boolean) => {
+    setShowImage(value);
+  };
 
   return (
     <View style={commonStyles.root}>
       {/* settings */}
       <View style={commonStyles.settingsPicker}>
-        <View style={commonStyles.switch}>
-          <Text style={textStyles}>Show image</Text>
-          <Switch value={showImage} onValueChange={setShowImage} />
-        </View>
+        <Switch checked={showImage} onChange={onSetShowImage} label="Show image" />
         <StyledPicker prompt="Size" selected={imageSize} onChange={onSizeChange} collection={allSizes} />
         <StyledPicker prompt="Coin color" selected={coinColor} onChange={onColorChange} collection={allColors} />
         <StyledPicker prompt="Presence status" selected={presence} onChange={onPresenceChange} collection={allPresences} />

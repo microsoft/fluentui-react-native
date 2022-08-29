@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import * as React from 'react';
-import { Text, View, Switch } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   Text as FURNText,
   ButtonV1 as Button,
@@ -11,10 +11,12 @@ import {
   Separator,
   Checkbox,
 } from '@fluentui/react-native';
+import { Switch } from '@fluentui-react-native/switch';
 import { CONTEXTUALMENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { svgProps, fontProps, testImage } from '../Common/iconExamples';
 import { E2EContextualMenuTest } from './E2EContextualMenuTest';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const ContextualMenuMainTest: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
@@ -24,13 +26,16 @@ const ContextualMenuMainTest: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
-  const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+  const onIsBeakVisibleChange = React.useCallback((_e: InteractionEvent, value) => setIsBeakVisible(value), []);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback((_e: InteractionEvent, value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(
+    (_e: InteractionEvent, value) => setShouldFocusOnContainer(value),
+    [setShouldFocusOnContainer],
+  );
 
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
@@ -57,19 +62,9 @@ const ContextualMenuMainTest: React.FunctionComponent = () => {
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Mount</Text>
-            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Container</Text>
-            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Beak Visible</Text>
-            <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
-          </View>
+          <Switch checked={focusOnMount} onChange={toggleFocusOnMount} label="Should Focus on Mount" />
+          <Switch checked={focusOnContainer} onChange={toggleFocusOnContainer} label="Should Focus on Container" />
+          <Switch checked={isBeakVisible} onChange={onIsBeakVisibleChange} label="Beak Visible" />
         </View>
 
         <Separator vertical />
@@ -123,10 +118,13 @@ const NestedContextualMenu: React.FunctionComponent = () => {
   const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback((_e: InteractionEvent, value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(
+    (_e: InteractionEvent, value) => setShouldFocusOnContainer(value),
+    [setShouldFocusOnContainer],
+  );
 
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
@@ -168,15 +166,8 @@ const NestedContextualMenu: React.FunctionComponent = () => {
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Mount</Text>
-            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Container</Text>
-            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
-          </View>
+          <Switch checked={focusOnMount} onChange={toggleFocusOnMount} label="Should Focus on Mount" />
+          <Switch checked={focusOnContainer} onChange={toggleFocusOnContainer} label="Should Focus on Container" />
         </View>
 
         <Separator vertical />
@@ -246,10 +237,13 @@ const IconContextualMenu: React.FunctionComponent = () => {
   const [isContextualMenuVisible, setIsContextualMenuVisible] = React.useState(false);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback((_e: InteractionEvent, value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(
+    (_e: InteractionEvent, value) => setShouldFocusOnContainer(value),
+    [setShouldFocusOnContainer],
+  );
 
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
@@ -269,15 +263,8 @@ const IconContextualMenu: React.FunctionComponent = () => {
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Mount</Text>
-            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Container</Text>
-            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
-          </View>
+          <Switch checked={focusOnMount} onChange={toggleFocusOnMount} label="Should Focus on Mount" />
+          <Switch checked={focusOnContainer} onChange={toggleFocusOnContainer} label="Should Focus on Container" />
         </View>
 
         <Separator vertical />
@@ -328,13 +315,16 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [isBeakVisible, setIsBeakVisible] = React.useState(false);
-  const onIsBeakVisibleChange = React.useCallback((value) => setIsBeakVisible(value), []);
+  const onIsBeakVisibleChange = React.useCallback((_e: InteractionEvent, value) => setIsBeakVisible(value), []);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback((_e: InteractionEvent, value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(
+    (_e: InteractionEvent, value) => setShouldFocusOnContainer(value),
+    [setShouldFocusOnContainer],
+  );
 
   const toggleShowContextualMenu = React.useCallback(() => {
     setShowContextualMenu(!showContextualMenu);
@@ -383,19 +373,9 @@ const ScrollViewContextualMenu: React.FunctionComponent = () => {
     <View>
       <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
         <View style={{ flexDirection: 'column', paddingHorizontal: 5 }}>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Mount</Text>
-            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
-          </View>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Should Focus on Container</Text>
-            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
-          </View>
-          <View style={{ flexDirection: 'row' }}>
-            <Text>Beak Visible</Text>
-            <Switch value={isBeakVisible} onValueChange={onIsBeakVisibleChange} />
-          </View>
+          <Switch checked={focusOnMount} onChange={toggleFocusOnMount} label="Should Focus on Mount" />
+          <Switch checked={focusOnContainer} onChange={toggleFocusOnContainer} label="Should Focus on Container" />
+          <Switch checked={isBeakVisible} onChange={onIsBeakVisibleChange} label="Beak Visible" />
         </View>
 
         <Separator vertical />

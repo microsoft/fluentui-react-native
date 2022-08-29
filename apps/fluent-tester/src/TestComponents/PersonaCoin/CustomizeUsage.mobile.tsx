@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { PersonaCoin } from '@fluentui/react-native';
-import { Switch, View, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
 import Slider from '@react-native-community/slider';
 import { steveBallmerPhotoUrl, undefinedText } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 type WithUndefined<T> = T | typeof undefinedText;
 
@@ -39,17 +41,6 @@ const StyledTextInput = (props) => {
   );
 };
 
-const StyledSwitch = (props) => {
-  const { title, value, onChange } = props;
-  const theme = useTheme();
-  return (
-    <View style={commonStyles.switch}>
-      <Text style={{ color: theme.colors.inputText, flex: 1 }}>{title}</Text>
-      <Switch style={{ flex: 1 }} value={value} onValueChange={onChange} />
-    </View>
-  );
-};
-
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
   const [showRings, setShowRings] = React.useState(true);
@@ -78,6 +69,26 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     return PersonaCoin.customize({ tokens });
   }, [coinColor, textColor, coinSize, iconSize, iconStrokeWidth]);
 
+  const onSetShowColoredBackground = (_e: InteractionEvent, value: boolean) => {
+    setShowColoredBackground(value);
+  };
+
+  const onSetShowImage = (_e: InteractionEvent, value: boolean) => {
+    setShowImage(value);
+  };
+
+  const onSetShowPresence = (_e: InteractionEvent, value: boolean) => {
+    setShowPresence(value);
+  };
+
+  const onSetShowRings = (_e: InteractionEvent, value: boolean) => {
+    setShowRings(value);
+  };
+
+  const onSetTransparent = (_e: InteractionEvent, value: boolean) => {
+    setTransparent(value);
+  };
+
   return (
     <View style={{ flexDirection: 'column', padding: 10, backgroundColor: showColoredBackground ? 'gray' : 'transparent' }}>
       {/* component under test */}
@@ -103,11 +114,11 @@ export const CustomizeUsage: React.FunctionComponent = () => {
         </View>
         {/** Switch settings */}
         <View style={{ width: '50%', marginLeft: 30 }}>
-          <StyledSwitch title="Change Background" value={showColoredBackground} onChange={setShowColoredBackground} />
-          <StyledSwitch title="Show Image" value={showImage} onChange={setShowImage} />
-          <StyledSwitch title="Show Presence" value={showPresence} onChange={setShowPresence} />
-          <StyledSwitch title="Show Rings" value={showRings} onChange={setShowRings} />
-          <StyledSwitch title="Show transparent rings" value={transparent} onChange={setTransparent} />
+          <Switch label="Change Background" checked={showColoredBackground} onChange={onSetShowColoredBackground} />
+          <Switch label="Show Image" checked={showImage} onChange={onSetShowImage} />
+          <Switch label="Show Presence" checked={showPresence} onChange={onSetShowPresence} />
+          <Switch label="Show Rings" checked={showRings} onChange={onSetShowRings} />
+          <Switch label="Show transparent rings" checked={transparent} onChange={onSetTransparent} />
         </View>
       </View>
 

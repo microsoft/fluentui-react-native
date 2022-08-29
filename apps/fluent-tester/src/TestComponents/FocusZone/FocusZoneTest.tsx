@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Switch } from 'react-native';
+import { View } from 'react-native';
 import { FocusZone, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -8,6 +8,8 @@ import { focusZoneTestStyles, GridButton, stackStyleFocusZone, SubheaderText } f
 import { commonTestStyles } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
 import { MenuButton, MenuButtonItemProps } from '@fluentui-react-native/experimental-menu-button';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const ListOfCheckboxes: React.FunctionComponent = () => {
   return (
@@ -204,22 +206,6 @@ const Navigation2DFocusZone: React.FunctionComponent = () => {
   );
 };
 
-interface ISwitchWithLabelProps {
-  label: string;
-  value: boolean;
-  onValueChange: (value: boolean) => void;
-}
-
-function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
-  const { label, value, onValueChange } = props;
-  return (
-    <View style={commonTestStyles.switch}>
-      <Text>{label}</Text>
-      <Switch value={value} onValueChange={onValueChange} />
-    </View>
-  );
-}
-
 const CustomizableFocusZone: React.FunctionComponent = () => {
   const [is2DNav, set2dNav] = React.useState(false);
   const [isDisabled, setDisabled] = React.useState(false);
@@ -227,13 +213,24 @@ const CustomizableFocusZone: React.FunctionComponent = () => {
   const [focusZoneDirection, setFocusZoneDirection] = React.useState<FocusZoneDirection>('bidirectional');
   const menuItems: MenuButtonItemProps[] = FocusZoneDirections.map((direction) => ({ itemKey: direction, text: direction }));
 
+  const onSet2dNavChange = (_e: InteractionEvent, value: boolean) => {
+    set2dNav(value);
+  };
+
+  const onSetDisabledChange = (_e: InteractionEvent, value: boolean) => {
+    setDisabled(value);
+  };
+
+  const onSetIsCircularNav = (_e: InteractionEvent, value: boolean) => {
+    setIsCircularNav(value);
+  };
   return (
     <View style={commonTestStyles.root}>
       <Stack style={stackStyleFocusZone}>
         <View style={commonTestStyles.settings}>
-          <SwitchWithLabel label="2D Navigation" value={is2DNav} onValueChange={set2dNav} />
-          <SwitchWithLabel label="Disabled" value={isDisabled} onValueChange={setDisabled} />
-          <SwitchWithLabel label="Circular Navigation" value={isCircularNav} onValueChange={setIsCircularNav} />
+          <Switch label="2D Navigation" checked={is2DNav} onChange={onSet2dNavChange} />
+          <Switch label="Disabled" checked={isDisabled} onChange={onSetDisabledChange} />
+          <Switch label="Circular Navigation" checked={isCircularNav} onChange={onSetIsCircularNav} />
           <MenuButton
             content={focusZoneDirection}
             menuItems={menuItems}

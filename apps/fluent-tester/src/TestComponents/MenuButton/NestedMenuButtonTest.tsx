@@ -1,17 +1,22 @@
 import * as React from 'react';
-import { Text, View, Switch } from 'react-native';
+import { Text, View } from 'react-native';
 import { Separator, MenuButton } from '@fluentui/react-native';
 import { menuItems, testImage, iconProps } from './testData';
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 export const NestedMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
 
   const [focusOnMount, setShouldFocusOnMount] = React.useState(true);
-  const toggleFocusOnMount = React.useCallback((value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
+  const toggleFocusOnMount = React.useCallback((_e: InteractionEvent, value) => setShouldFocusOnMount(value), [setShouldFocusOnMount]);
 
   const [focusOnContainer, setShouldFocusOnContainer] = React.useState(false);
-  const toggleFocusOnContainer = React.useCallback((value) => setShouldFocusOnContainer(value), [setShouldFocusOnContainer]);
+  const toggleFocusOnContainer = React.useCallback(
+    (_e: InteractionEvent, value) => setShouldFocusOnContainer(value),
+    [setShouldFocusOnContainer],
+  );
 
   const onItemClick = React.useCallback(
     (key) => {
@@ -118,15 +123,8 @@ export const NestedMenuButton: React.FunctionComponent = () => {
     <View>
       <View style={viewWrapperStyle}>
         <View style={columnStyle}>
-          <View style={rowStyle}>
-            <Text>Should Focus on Mount</Text>
-            <Switch value={focusOnMount} onValueChange={toggleFocusOnMount} />
-          </View>
-
-          <View style={rowStyle}>
-            <Text>Should Focus on Container</Text>
-            <Switch value={focusOnContainer} onValueChange={toggleFocusOnContainer} />
-          </View>
+          <Switch checked={focusOnMount} onChange={toggleFocusOnMount} label="Should Focus on Mount" />
+          <Switch checked={focusOnContainer} onChange={toggleFocusOnContainer} label="Should Focus on Container" />
         </View>
 
         <Separator vertical />

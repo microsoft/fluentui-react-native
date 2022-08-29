@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, Switch, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Separator } from '@fluentui/react-native';
 import { Circle, Defs, G, Line, Path, Polygon, LinearGradient, RadialGradient, Rect, Stop, Svg, SvgUri, Use } from 'react-native-svg';
 import TestSvg from './Assets/accessible-icon-brands.svg';
 import { SVG_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const styles = StyleSheet.create({
   svg: {
@@ -20,15 +22,13 @@ const RectTest: React.FunctionComponent = () => {
 
   return (
     <React.Fragment>
-      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-        <Switch
-          value={useColorA}
-          onValueChange={(value) => {
-            setUseColorA(value);
-          }}
-        />
-        <Text>Change Color</Text>
-      </View>
+      <Switch
+        checked={useColorA}
+        onChange={(_e: InteractionEvent, value) => {
+          setUseColorA(value);
+        }}
+        label="Change Color"
+      />
       <Separator />
       <Svg width="50" height="50">
         <Rect x="10" y="10" width="20" height="20" fill={useColorA ? colorA : colorB} stroke="black" />

@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { PersonaCoin, IconAlignment } from '@fluentui/react-native';
-import { Switch, View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import { Slider } from '../Common/Slider';
 import { steveBallmerPhotoUrl } from './styles';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { AlignmentPicker } from '../Common/AlignmentPicker';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { Switch } from '@fluentui-react-native/switch';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
@@ -57,24 +59,25 @@ export const CustomizeUsage: React.FunctionComponent = () => {
     physicalSize,
   ]);
 
+  const onSetShowImage = (_e: InteractionEvent, value: boolean) => {
+    setShowImage(value);
+  };
+
+  const onSetShowRing = (_e: InteractionEvent, value: boolean) => {
+    setShowRing(value);
+  };
+
+  const onSetTransparent = (_e: InteractionEvent, value: boolean) => {
+    setTransparent(value);
+  };
+
   return (
     <View style={commonStyles.root}>
       {/* settings */}
       <View style={commonStyles.settings}>
-        <View style={commonStyles.switch}>
-          <Text>Show image</Text>
-          <Switch value={showImage} onValueChange={setShowImage} />
-        </View>
-
-        <View style={commonStyles.switch}>
-          <Text>Show rings</Text>
-          <Switch value={showRing} onValueChange={setShowRing} />
-        </View>
-
-        <View style={commonStyles.switch}>
-          <Text>Transparent Ring</Text>
-          <Switch value={transparent} onValueChange={setTransparent} />
-        </View>
+        <Switch checked={showImage} onChange={onSetShowImage} label="Show image" />
+        <Switch checked={showRing} onChange={onSetShowRing} label="Show rings" />
+        <Switch checked={transparent} onChange={onSetTransparent} label="Transparent Ring" />
 
         <TextInput
           accessibilityLabel="Background color"
