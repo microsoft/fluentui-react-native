@@ -19,7 +19,7 @@ import { badgeFontTokens } from './BadgeFontTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl'];
-const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'icon', 'iconColor', 'iconPosition', 'position'];
+const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'color', 'icon', 'iconColor', 'iconPosition', 'position'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeFontTokens, badgeName],
@@ -74,7 +74,7 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
           style: {
             ...fontStyles.from(tokens, theme),
             color: tokens.color,
-            ...getIconMargin(tokens),
+            ...getTextMargin(tokens),
           },
         };
       },
@@ -111,7 +111,7 @@ export function getBadgePosition(tokens: BadgeCoreTokens) {
   };
 }
 
-export function getIconMargin(tokens: BadgeTokens) {
+export function getTextMargin(tokens: BadgeTokens) {
   if (tokens.icon) {
     return tokens.iconPosition === 'before'
       ? {
