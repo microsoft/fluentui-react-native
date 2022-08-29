@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Fri, 19 Aug 2022 15:32:12 GMT and should not be manually modified.
+This log was last generated on Fri, 26 Aug 2022 18:15:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.2
+
+Fri, 26 Aug 2022 18:15:17 GMT
+
+### Patches
+
+- Added better HC token mapping for win32 (nkhalil942@gmail.com)
 
 ## 0.6.1
 

@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Mon, 29 Aug 2022 12:39:37 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.25",
+      "version": "0.1.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "9e08685b287f75bb13b586fbc23aa3245d58aa0d",
+            "comment": "Fixed showing content for tiny and extraSmall badge"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 Aug 2022 18:15:16 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.24",
+      "version": "0.1.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "dcb547e6d295ec87d32f94ee85416c8b7176d4fc",
+            "comment": "[Badge] Set relative position as the default one"
+          },
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "6a6416eb951ef9185c4f6e66a1eb89cc8def491a",
+            "comment": "Fixed PresenceBadge Tester page"
+          },
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "6a5d1161515c03f8956cb04d82919756a563a62c",
+            "comment": "Added Badge for RTL"
+          },
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "36976132bc26fe44ff32b838cecd28841d01b7e6",
+            "comment": "Fixed empty badge bug"
+          },
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "3e19c418e927a2a2441e86de35c8343a1a705142",
+            "comment": "Updated some color to alias tokens"
+          },
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "88199f51372d047d7ea78bb47f6a35f78490b748",
+            "comment": "Added font-tokens, color as a prop. Had to rename it to badgeColor (the same reason as in Avatar). And added position as a prop"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 18 Aug 2022 18:41:33 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.23",
       "version": "0.1.23",

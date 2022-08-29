@@ -8,6 +8,7 @@ export const commonTestStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
+  flex: { flex: 1 },
   header: {
     marginVertical: 6,
     fontSize: 16,
@@ -116,6 +117,8 @@ export const fluentTesterStyles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 
+  testListSeparator: { marginHorizontal: 8 },
+
   testSection: {
     flexGrow: 1,
   },
@@ -159,3 +162,5 @@ export const mobileStyles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export const testContentRootViewStyle = [stackStyle, commonTestStyles.view];
