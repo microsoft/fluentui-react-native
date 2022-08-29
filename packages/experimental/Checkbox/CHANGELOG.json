@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Mon, 29 Aug 2022 22:11:28 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.12.11",
+      "version": "0.12.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "155002d6cff624f33c15b0f9cb80cd8e9de2d446",
+            "comment": "Fix RTL for RadioButton and Checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 23:22:38 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.12.10",
       "version": "0.12.10",

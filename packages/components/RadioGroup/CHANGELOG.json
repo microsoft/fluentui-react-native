@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/radio-group",
   "entries": [
     {
+      "date": "Mon, 29 Aug 2022 22:11:28 GMT",
+      "tag": "@fluentui-react-native/radio-group_v0.15.9",
+      "version": "0.15.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "67026167+chiuam@users.noreply.github.com",
+            "package": "@fluentui-react-native/radio-group",
+            "commit": "155002d6cff624f33c15b0f9cb80cd8e9de2d446",
+            "comment": "Fix RTL for RadioButton and Checkbox"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 26 Aug 2022 18:15:17 GMT",
       "tag": "@fluentui-react-native/radio-group_v0.15.8",
       "version": "0.15.8",
