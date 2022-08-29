@@ -25,7 +25,10 @@
     "url": "https://github.com/microsoft/fluentui-react-native.git",
     "directory": "packages/experimental/dropdown"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@fluentui-react-native/adapters": ">=0.9.0 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.18.1 <1.0.0"
+  },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
