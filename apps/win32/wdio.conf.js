@@ -7,7 +7,6 @@ const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
@@ -53,8 +52,8 @@ exports.config = {
   ],
 
   framework: 'jasmine',
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: jasmineDefaultTimeout,
+  jasmineOpts: {
+    defaultTimeoutInterval: 25000,
   },
 
   // The number of times to retry the entire spec file when it fails as a whole.
