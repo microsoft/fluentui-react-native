@@ -2,26 +2,25 @@ const fs = require('fs');
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local',
   /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
   so we must specify which ones we want to test here. */
   specs: [
-    'src/E2E/ActivityIndicator/specs/*.win.ts',
+    //'src/E2E/ActivityIndicator/specs/*.win.ts',
     'src/E2E/Button/specs/*.win.ts',
-    'src/E2E/Callout/specs/*.win.ts',
-    'src/E2E/Checkbox/specs/*.windows.ts', // See spec file for more information
-    'src/E2E/Link/specs/*.win.ts',
-    'src/E2E/PersonaCoin/specs/*.win.ts',
-    'src/E2E/Pressable/specs/*.win.ts',
-    'src/E2E/Separator/specs/*.win.ts',
-    'src/E2E/Tabs/specs/*.windows.ts', // See spec file for more information
-    'src/E2E/Text/specs/*.win.ts',
-    'src/E2E/TextExperimental/specs/*.win.ts',
-    'src/E2E/Theme/specs/*.win.ts',
-    'src/E2E/Tokens/specs/*.win.ts',
+    // 'src/E2E/Callout/specs/*.win.ts',
+    // 'src/E2E/Checkbox/specs/*.windows.ts', // See spec file for more information
+    // 'src/E2E/Link/specs/*.win.ts',
+    // 'src/E2E/PersonaCoin/specs/*.win.ts',
+    // 'src/E2E/Pressable/specs/*.win.ts',
+    // 'src/E2E/Separator/specs/*.win.ts',
+    // 'src/E2E/Tabs/specs/*.windows.ts', // See spec file for more information
+    // 'src/E2E/Text/specs/*.win.ts',
+    // 'src/E2E/TextExperimental/specs/*.win.ts',
+    // 'src/E2E/Theme/specs/*.win.ts',
+    // 'src/E2E/Tokens/specs/*.win.ts',
   ],
   exclude: [
     /* 'path/to/excluded/files' */
@@ -65,7 +64,7 @@ exports.config = {
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: jasmineDefaultTimeout,
+    defaultTimeoutInterval: 25000,
   },
 
   // The number of times to retry the entire specfile when it fails as a whole.
