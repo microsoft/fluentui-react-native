@@ -26,17 +26,17 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return (await this._primaryComponent).getAttribute('ControlType');
+    return await (await this._primaryComponent).getAttribute('ControlType');
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return (await this._primaryComponent).getAttribute('Name');
+        return await (await this._primaryComponent).getAttribute('Name');
 
       case ComponentSelector.Secondary:
-        return (await this._secondaryComponent).getAttribute('Name');
+        return await (await this._secondaryComponent).getAttribute('Name');
     }
   }
 
