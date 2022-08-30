@@ -39,7 +39,7 @@ export const Radio = compose<RadioType>({
     const Slots = useSlots(userProps, (layer: string) => radioLookup(layer, radio.state, radio.props));
 
     // now return the handler for finishing render
-    return (final: RadioProps, ...children: React.ReactNode[]) => {
+    return (final: RadioProps) => {
       const { label, ...mergedProps } = mergeProps(radio.props, final);
 
       return (
