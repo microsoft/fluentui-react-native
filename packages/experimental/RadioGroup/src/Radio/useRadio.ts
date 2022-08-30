@@ -2,7 +2,8 @@ import { RadioProps, RadioState } from './Radio.types';
 import * as React from 'react';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
-import { radioSelectActionLabel } from './Radio.styling';
+
+export const radioSelectActionLabel = 'Select a RadioButton';
 
 export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);

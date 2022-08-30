@@ -10,7 +10,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     color: t.colors.menuItemText,
     backgroundColor: t.colors.menuItemText,
     textBorderColor: t.colors.transparentStroke,
-    radioVisibility: 1,
+    radioVisibility: 0,
     variant: 'subheaderStandard',
     // Unchecked, Rest
     radioBorder: t.colors.neutralStrokeAccessible,

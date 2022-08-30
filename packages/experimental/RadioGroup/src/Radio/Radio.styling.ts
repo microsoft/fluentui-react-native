@@ -8,8 +8,6 @@ const radioRadius = radioSize / 2;
 const radioInnerCircleSize = 10;
 const radioInnerCircleRadius = radioInnerCircleSize / 2;
 
-export const radioSelectActionLabel = 'Select a RadioButton';
-
 export const radioStates: (keyof RadioTokens)[] = ['focused', 'hovered', 'pressed', 'selected', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, RadioTokens> = {
