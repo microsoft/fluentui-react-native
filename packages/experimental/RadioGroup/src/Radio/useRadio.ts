@@ -18,26 +18,26 @@ export const useRadio = (props: RadioProps): RadioState => {
   } = props;
 
   // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
-  const info = useRadioGroupContext();
+  const selectedInfo = useRadioGroupContext();
 
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
   const changeSelection = React.useCallback(() => {
-    if (value != info.value) {
-      info.onChange && info.onChange(value);
-      info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+    if (value != selectedInfo.value) {
+      selectedInfo.onChange && selectedInfo.onChange(value);
+      selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
     }
-  }, [info, value, componentRef]);
+  }, [selectedInfo, value, componentRef]);
 
   /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value == info.value) {
-      info.updateSelectedButtonRef && componentRef && info.updateSelectedButtonRef(componentRef);
+    if (value == selectedInfo.value) {
+      selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
     }
-  }, [info, value, componentRef]);
+  }, [selectedInfo, value, componentRef]);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -63,7 +63,7 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   const state = {
     ...pressable.state,
-    selected: info.value === props.value,
+    selected: selectedInfo.value === props.value,
     disabled: disabled || false,
   };
 
@@ -78,8 +78,8 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessibilityLabel,
       accessibilityState: { disabled: state.disabled, selected: state.selected },
       accessibilityActions: [{ name: 'Select', label: radioSelectActionLabel }],
-      accessibilityPositionInSet: accessibilityPositionInSet ?? info.buttonKeys.findIndex((x) => x == value) + 1,
-      accessibilitySetSize: accessibilitySetSize ?? info.buttonKeys.length,
+      accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
       focusable: !state.disabled,
       onAccessibilityAction: onAccessibilityAction,
     },
