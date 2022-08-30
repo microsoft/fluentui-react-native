@@ -17,9 +17,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
   states: radioStates,
   slotProps: {
     root: buildProps(() => ({
-      accessible: true,
-      focusable: true,
-      accessibilityRole: 'radio',
       style: {
         display: 'flex',
         alignItems: 'center',
