@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Tue, 30 Aug 2022 18:36:15 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.28",
+      "version": "0.1.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "b982d88ccb26ead708caa1c778a1e93c8685ba74",
+            "comment": "Moved Badge to components folder."
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 30 Aug 2022 08:26:56 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.27",
       "version": "0.1.27",

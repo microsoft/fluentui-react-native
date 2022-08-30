@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 30 Aug 2022 08:26:56 GMT and should not be manually modified.
+This log was last generated on Tue, 30 Aug 2022 18:36:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.28
+
+Tue, 30 Aug 2022 18:36:15 GMT
+
+### Patches
+
+- Moved Badge to components folder. (vkozlova@microsoft.com)
 
 ## 0.1.27
 
