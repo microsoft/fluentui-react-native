@@ -26,11 +26,16 @@ const badgeAppearances: BadgeAppearance[] = [...BadgeAppearances];
 const badgeIconPositions = ['before', 'after'];
 
 const StyledBadge = Badge.customize({
-  backgroundColor: 'yellow',
-  borderColor: '#f09',
-  borderWidth: 4,
-  color: '#f07',
   fontWeight: 'bold',
+  fontSize: 12,
+  fontFamily: 'Georgia',
+  backgroundColor: '#f09',
+  borderColor: 'purple',
+  color: 'yellow',
+  borderWidth: 4,
+  borderStyle: 'dashed',
+  borderRadius: 2,
+  iconColor: 'cyan',
 });
 
 export const BasicBadge: React.FunctionComponent = () => {
@@ -111,10 +116,10 @@ export const BasicBadge: React.FunctionComponent = () => {
           </Badge>
           <Badge appearance="outline" icon={iconProps} />
           <Badge icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>Badge with icon</Badge>
+          <Text>Customized Badge with icon</Text>
+          <StyledBadge icon={{ svgSource: svgProps }}>Styled badge</StyledBadge>
         </>
       )}
-      <StyledBadge appearance="outline">Styled badge</StyledBadge>
-      <StyledBadge>Styled badge</StyledBadge>
     </View>
   );
 };

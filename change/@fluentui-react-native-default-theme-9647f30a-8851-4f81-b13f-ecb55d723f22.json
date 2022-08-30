@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added unit tests",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}

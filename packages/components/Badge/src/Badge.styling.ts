@@ -19,7 +19,7 @@ import { badgeFontTokens } from './BadgeFontTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl'];
-const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'position'];
+const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'color', 'icon', 'iconColor', 'iconPosition', 'position'];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeFontTokens, badgeName],
@@ -38,7 +38,6 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
             flexDirection: 'row',
             alignSelf: 'flex-start',
             justifyContent: 'center',
-            minHeight: tokens.minHeight,
             width: tokens.width,
             backgroundColor: _badgeColor,
             position,
@@ -47,7 +46,19 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
           },
         };
       },
-      ['backgroundColor', 'width', 'minHeight', 'bottom', 'right', 'top', 'left', ...borderStyles.keys, ...layoutStyles.keys],
+      [
+        'backgroundColor',
+        'badgeColor',
+        'width',
+        'minHeight',
+        'bottom',
+        'right',
+        'top',
+        'left',
+        'position',
+        ...borderStyles.keys,
+        ...layoutStyles.keys,
+      ],
     ),
     icon: buildProps(
       (tokens: BadgeTokens) => ({
@@ -58,12 +69,16 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       ['iconSize', 'iconColor', 'color'],
     ),
     text: buildProps(
-      (tokens: BadgeTokens, theme: Theme) => ({
-        ...fontStyles.from(tokens, theme),
-        color: tokens.color,
-        paddingHorizontal: tokens.textPadding,
-      }),
-      ['color', 'textPadding', ...fontStyles.keys],
+      (tokens: BadgeTokens, theme: Theme) => {
+        return {
+          style: {
+            ...fontStyles.from(tokens, theme),
+            color: tokens.color,
+            ...getTextMargin(tokens),
+          },
+        };
+      },
+      ['color', 'textMargin', ...fontStyles.keys],
     ),
   },
 };
@@ -94,4 +109,17 @@ export function getBadgePosition(tokens: BadgeCoreTokens) {
     ...verticalPosition,
     ...horizontalPosition,
   };
+}
+
+export function getTextMargin(tokens: BadgeTokens) {
+  if (tokens.icon) {
+    return tokens.iconPosition === 'before'
+      ? {
+          marginStart: tokens.textMargin,
+        }
+      : {
+          marginEnd: tokens.textMargin,
+        };
+  }
+  return {};
 }
