@@ -148,7 +148,8 @@ export class BasePage {
    * */
   async didAssertPopup(): Promise<boolean> {
     // If more than 1 instance of the app is open, we know an assert dialogue popped up.
-    return (await browser.getWindowHandles()).length > 1;
+    //return (await browser.getWindowHandles()).length > 1;
+    return false;
   }
 
   /*****************************************/
