@@ -48,7 +48,6 @@ export const Radio = compose<RadioType>({
             <Slots.innerCircle />
           </Slots.button>
           <Slots.label>{label}</Slots.label>
-          {children}
         </Slots.root>
       );
     };
