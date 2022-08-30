@@ -8,6 +8,7 @@ export const radioSelectActionLabel = 'Select a RadioButton';
 export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
   const {
+    label,
     value,
     disabled,
     accessibilityLabel,
@@ -69,13 +70,14 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   return {
     props: {
-      value: value,
+      value,
+      label,
       ...rest,
       ref: buttonRef,
       ...pressable.props,
       accessible: true,
       accessibilityRole: 'radio',
-      accessibilityLabel,
+      accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: { disabled: state.disabled, selected: state.selected },
       accessibilityActions: [{ name: 'Select', label: radioSelectActionLabel }],
       accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
