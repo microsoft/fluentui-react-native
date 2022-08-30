@@ -110,18 +110,13 @@ export class BasePage {
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
-    while (!(await this._primaryComponent).isDisplayed()) {
-      await driver.touchScroll(
-        COMPONENT_SCROLL_COORDINATES.x,
-        COMPONENT_SCROLL_COORDINATES.y,
-        await $('~ScrollViewAreaForComponents').elementId,
-      );
+    const ScrollViewer = await By('ScrollViewAreaForComponents');
+
+    while (!(await (await this._primaryComponent).isDisplayed())) {
+      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewer.elementId);
     }
-    await driver.touchScroll(
-      COMPONENT_SCROLL_COORDINATES.x,
-      COMPONENT_SCROLL_COORDINATES.y,
-      await $('~ScrollViewAreaForComponents').elementId,
-    );
+
+    await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewer.elementId);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
