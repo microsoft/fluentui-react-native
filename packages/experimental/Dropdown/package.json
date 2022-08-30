@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.9.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.0",
-    "@fluentui-react-native/interactive-hooks": ">=0.18.1 <1.0.0"
+    "@fluentui-react-native/framework": "0.8.1",
+    "@fluentui-react-native/interactive-hooks": ">=0.18.2 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
