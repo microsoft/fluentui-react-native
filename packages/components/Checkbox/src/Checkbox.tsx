@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Checkbox.styling';
 import { compose, mergeProps, withSlots, UseSlots, useFluentTheme } from '@fluentui-react-native/framework';
 import { useCheckbox } from './useCheckbox';

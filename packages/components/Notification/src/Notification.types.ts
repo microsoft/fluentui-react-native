@@ -20,7 +20,6 @@ export interface NotificationTokens extends LayoutTokens, IBorderTokens, IColorT
   neutralBar: NotificationTokens;
   danger: NotificationTokens;
   warning: NotificationTokens;
-  hasTitle: NotificationTokens;
   isBar: NotificationTokens;
   shadowToken?: ShadowToken;
 }
@@ -30,10 +29,30 @@ export interface NotificationProps {
    * Notification variants: 'primary' | 'neutral' | 'primaryBar' | 'primaryOutlineBar' | 'neutralBar' | 'danger' | 'warning'
    */
   variant: NotificationVariant;
+
+  /**
+   * Optional icon that appears on the left side of toast notifications
+   */
   icon?: IconSourcesType;
+
+  /**
+   * Optional icon that appears at the top of toast notifications
+   */
   title?: string;
+
+  /**
+   * Text in the action button
+   */
   action?: string;
+
+  /**
+   * Callback function that is triggered by pressing the entire notification
+   */
   onPress?: (e: InteractionEvent) => void;
+
+  /**
+   * Callback function that is triggered by pressing the action button
+   */
   onActionPress?: (e: InteractionEvent) => void;
 }
 

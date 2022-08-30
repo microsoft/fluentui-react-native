@@ -1,8 +1,90 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 25 Jul 2022 21:27:20 GMT and should not be manually modified.
+This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.10
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.2
+- Bump @fluentui-react-native/focus-zone to v0.10.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+- Bump @fluentui-react-native/pressable to v0.9.8
+- Bump @fluentui-react-native/text to v0.14.1
+
+## 0.15.9
+
+Mon, 29 Aug 2022 22:11:28 GMT
+
+### Patches
+
+- Fix RTL for RadioButton and Checkbox (67026167+chiuam@users.noreply.github.com)
+
+## 0.15.8
+
+Fri, 26 Aug 2022 18:15:17 GMT
+
+### Patches
+
+- RadioButton: Fix truncation in RTL mode (67026167+chiuam@users.noreply.github.com)
+
+## 0.15.7
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.7
+- Bump @fluentui-react-native/interactive-hooks to v0.18.1
+- Bump @fluentui-react-native/pressable to v0.9.7
+- Bump @fluentui-react-native/text to v0.14.0
+
+## 0.15.6
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+- Bump @fluentui-react-native/pressable to v0.9.6
+
+## 0.15.5
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.5
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/pressable to v0.9.5
+- Bump @fluentui-react-native/text to v0.13.0
+
+## 0.15.4
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.4
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+- Bump @fluentui-react-native/pressable to v0.9.4
+
+## 0.15.3
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.1
+- Bump @fluentui-react-native/focus-zone to v0.10.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @fluentui-react-native/pressable to v0.9.3
+- Bump @fluentui-react-native/text to v0.12.1
 
 ## 0.15.2
 

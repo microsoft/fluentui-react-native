@@ -1,4 +1,5 @@
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
+import { HOMEPAGE_BADGE_BUTTON } from '../../TestComponents/Badge/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../TestComponents/ContextualMenu/consts';
@@ -21,6 +22,10 @@ import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
 import { By, BasePage } from './BasePage.macos';
 
 class NavigateAppPage extends BasePage {
+  clickAndGoToBadgePage() {
+    this.badgePage.click();
+  }
+
   clickAndGoToButtonPage() {
     this.buttonPage.click();
   }
@@ -103,6 +108,10 @@ class NavigateAppPage extends BasePage {
 
   get _testPage() {
     return By(BASE_TESTPAGE);
+  }
+
+  private get badgePage() {
+    return By(HOMEPAGE_BADGE_BUTTON);
   }
 
   private get buttonPage() {

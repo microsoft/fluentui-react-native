@@ -14,8 +14,9 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
+import { StyleSheet } from 'react-native';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -36,10 +37,13 @@ const MenuDefault: React.FunctionComponent = () => {
   );
 };
 
+const defaultCheckedTestCase = ['itemOne'];
+const checkedTestCase = ['itemTwo'];
+
 const MenuCheckmarks: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Menu defaultChecked={['itemOne']}>
+      <Menu defaultChecked={defaultCheckedTestCase}>
         <MenuTrigger>
           <Button>All checkmark items</Button>
         </MenuTrigger>
@@ -51,7 +55,7 @@ const MenuCheckmarks: React.FunctionComponent = () => {
           </MenuList>
         </MenuPopover>
       </Menu>
-      <Menu hasCheckmarks checked={['itemTwo']}>
+      <Menu hasCheckmarks checked={checkedTestCase}>
         <MenuTrigger>
           <Button>Some controlled checkmark items with alignment</Button>
         </MenuTrigger>
@@ -94,7 +98,7 @@ const MenuRadioItem: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Text>Current checked: {checked.join(' ')}</Text>
-      <Menu defaultChecked={['itemOne']} onCheckedChange={onCheckedChange}>
+      <Menu defaultChecked={defaultCheckedTestCase} onCheckedChange={onCheckedChange}>
         <MenuTrigger>
           <Button>Items with radio selection</Button>
         </MenuTrigger>
@@ -164,10 +168,12 @@ const MenuOpenOnHover: React.FunctionComponent = () => {
   );
 };
 
+const rootStackStyle = StyleSheet.create({ root: { ...(stackStyle as object), flexDirection: 'row' } });
+
 const MenuControlledOpen: React.FunctionComponent = () => {
   const [open, setOpen] = React.useState<boolean>(false);
   return (
-    <Stack style={[stackStyle, { flexDirection: 'row' }]}>
+    <Stack style={rootStackStyle.root}>
       <Button onClick={() => setOpen(!open)}>Toggle open</Button>
       <Menu open={open}>
         <MenuTrigger>
@@ -283,5 +289,7 @@ export const MenuTest: React.FunctionComponent = () => {
   const description =
     'A Menu is an component that displays a list of options on a temporary surface. They are invoked when users interact with a button, action, or other control.';
 
-  return <Test name="Menu Test" description={description} sections={menuSections} status={status}></Test>;
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Menu/SPEC.md';
+
+  return <Test name="Menu Test" description={description} spec={spec} sections={menuSections} status={status} />;
 };

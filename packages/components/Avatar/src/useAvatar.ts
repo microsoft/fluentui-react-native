@@ -1,4 +1,5 @@
-import { AvatarProps, AvatarInfo, AvatarState, AvatarColors } from './Avatar.types';
+import { ImageProps, ImageSourcePropType } from 'react-native';
+import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
@@ -19,11 +20,14 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     activeAppearance,
     badge,
     idForColor,
+    image,
+    imageUrl,
     initials,
     name,
     shape,
     transparentRing,
     icon,
+    size,
     ...rest
   } = props;
 
@@ -42,11 +46,35 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     showBadge,
   };
 
+  let imageProps: ImageProps = {
+    accessibilityLabel,
+    source: imageUrl ? ({ uri: imageUrl } as ImageSourcePropType) : undefined,
+  };
+
+  if (image && image.source) {
+    imageProps = {
+      ...image,
+      accessibilityLabel: image.accessibilityLabel ?? accessibilityLabel,
+    };
+  }
+
   const _initials = initials || getInitials(name);
   const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
   const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
 
-  const iconProps = createIconProps(icon);
+  let iconProps = createIconProps(icon);
+  const isFontIcon = !!(iconProps && iconProps.fontSource);
+  if (isFontIcon) {
+    const { fontSource, ...restIconProps } = iconProps;
+
+    iconProps = {
+      fontSource: {
+        fontSize: fontSource.fontSize ?? getFontIconSize(size),
+        ...iconProps.fontSource,
+      },
+      ...restIconProps,
+    };
+  }
 
   return {
     props: {
@@ -60,8 +88,10 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       badgeStatus: badge?.status,
       initials: _initials,
       icon: iconProps,
+      image: imageProps,
       outOfOffice: badge?.outOfOffice,
       shape: shape ?? 'circular',
+      size,
       ...rest,
     },
     state: {
@@ -105,10 +135,14 @@ export const removeRedundantCharacters = (name: string): string[] => {
   if (!name) {
     return [];
   }
+
+  const MAX_NAME_LENGTH = 100;
+  const _name = name.length > MAX_NAME_LENGTH ? name.trim().substring(0, MAX_NAME_LENGTH) : name;
+
   const WORDS_IN_BRACES_REGEXP = new RegExp('[(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
   const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
   const SPECIAL_CHARACTERS_REGEXP = new RegExp('[!"#\'$%&*+,-./:;>=<?@^_`|~¡¢£¤¥¦§¨©ª«¬®ˉ°±²¼½¾¿×÷]', 'g');
-  const words = name
+  const words = _name
     .replace(WORDS_IN_BRACES_REGEXP, '')
     .replace(PHONE_NUMBER_REGEXP, ' ')
     .replace(SPECIAL_CHARACTERS_REGEXP, '')
@@ -126,3 +160,18 @@ export const removeRedundantCharacters = (name: string): string[] => {
 export const removeTitlesFromName = (words: string[]): string[] => {
   return words.filter((word) => !titles.has(word));
 };
+
+function getFontIconSize(size: AvatarSize) {
+  if (size >= 25 && size <= 47) {
+    return 20;
+  } else if (size === 48) {
+    return 24;
+  } else if (size === 56) {
+    return 28;
+  } else if (size >= 57 && size <= 72) {
+    return 32;
+  } else if (size >= 73) {
+    return 48;
+  }
+  return 16;
+}

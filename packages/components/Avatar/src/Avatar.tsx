@@ -65,9 +65,9 @@ export const Avatar = compose<AvatarType>({
 });
 
 function renderAvatar(final: AvatarProps, avatarProps: AvatarProps, Slots: Slots<AvatarSlotProps>, svgIconsEnabled?: boolean) {
-  const { icon, initials, imageUrl } = mergeProps(avatarProps, final);
-  return imageUrl ? (
-    <Slots.image source={{ uri: imageUrl }} />
+  const { icon, initials, image } = mergeProps(avatarProps, final);
+  return image.source ? (
+    <Slots.image {...image} />
   ) : (
     <Slots.initialsBackground accessible={false}>
       {initials ? (

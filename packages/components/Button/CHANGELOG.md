@@ -1,8 +1,119 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 25 Jul 2022 21:27:19 GMT and should not be manually modified.
+This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.24.18
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.1
+- Bump @fluentui-react-native/experimental-shadow to v0.2.14
+- Bump @fluentui-react-native/framework to v0.8.1
+- Bump @fluentui-react-native/icon to v0.13.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+- Bump @fluentui-react-native/pressable to v0.9.8
+- Bump @fluentui-react-native/text to v0.14.1
+
+## 0.24.17
+
+Fri, 26 Aug 2022 18:15:16 GMT
+
+### Patches
+
+- Use undefined shadowToken in NotificationTokens (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.13
+
+## 0.24.16
+
+Mon, 15 Aug 2022 23:29:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.12
+
+## 0.24.15
+
+Mon, 15 Aug 2022 22:12:03 GMT
+
+### Patches
+
+- Pass key shadow props into child instead of a new view (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.11
+
+## 0.24.14
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.4
+- Bump @fluentui-react-native/interactive-hooks to v0.18.1
+- Bump @fluentui-react-native/pressable to v0.9.7
+- Bump @fluentui-react-native/text to v0.14.0
+
+## 0.24.13
+
+Tue, 02 Aug 2022 22:19:18 GMT
+
+### Patches
+
+- Restore ability to create unfocusable buttons (nakambo@microsoft.com)
+
+## 0.24.12
+
+Tue, 02 Aug 2022 20:08:43 GMT
+
+### Patches
+
+- Update exports (ruaraki@microsoft.com)
+
+## 0.24.11
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Patches
+
+- Allow user props to override default button key handling (email not defined)
+- Bump @fluentui-react-native/interactive-hooks to v0.18.0
+- Bump @fluentui-react-native/pressable to v0.9.6
+
+## 0.24.10
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.3
+- Bump @fluentui-react-native/interactive-hooks to v0.17.5
+- Bump @fluentui-react-native/pressable to v0.9.5
+- Bump @fluentui-react-native/text to v0.13.0
+
+## 0.24.9
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.2
+- Bump @fluentui-react-native/interactive-hooks to v0.17.4
+- Bump @fluentui-react-native/pressable to v0.9.4
+
+## 0.24.8
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.1
+- Bump @fluentui-react-native/icon to v0.13.1
+- Bump @fluentui-react-native/interactive-hooks to v0.17.3
+- Bump @fluentui-react-native/pressable to v0.9.3
+- Bump @fluentui-react-native/text to v0.12.1
 
 ## 0.24.7
 

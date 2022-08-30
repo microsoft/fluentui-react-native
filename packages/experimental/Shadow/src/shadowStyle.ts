@@ -5,13 +5,6 @@ import { ColorValue } from 'react-native';
 export const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
 
 function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
-  if (!shadowToken) {
-    return {
-      key: emptyShadowStyle,
-      ambient: emptyShadowStyle,
-    };
-  }
-
   const keyShadow = shadowToken.key;
   const ambientShadow = shadowToken.ambient;
 
@@ -47,14 +40,4 @@ const shadowOpacityFromRGBAColor = (rgbaColor: ColorValue) => {
 
   // Round to two decimal places
   return Math.round(opacityAsDecimal * 100) / 100;
-};
-
-const emptyShadowStyle = {
-  shadowColor: '000000',
-  shadowOpacity: 0,
-  shadowRadius: 0,
-  shadowOffset: {
-    width: 0,
-    height: 0,
-  },
 };
