@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 30 Aug 2022 08:26:56 GMT",
+      "tag": "@fluentui-react-native/tester_v0.90.5",
+      "version": "0.90.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c755a9ceab6225c2ec84504d8b24b68be393200d",
+            "comment": "Fixed customization"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.2.3",
+            "commit": "c755a9ceab6225c2ec84504d8b24b68be393200d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.27",
+            "commit": "c755a9ceab6225c2ec84504d8b24b68be393200d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 29 Aug 2022 23:21:44 GMT",
       "tag": "@fluentui-react-native/tester_v0.90.4",
       "version": "0.90.4",
