@@ -10,7 +10,7 @@ const defaultConnectionRetryTimeout = 20000;
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/Button/specs/*.win.ts'],
+  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
   maxInstances: 30,
@@ -53,7 +53,7 @@ exports.config = {
 
   framework: 'jasmine',
   jasmineOpts: {
-    defaultTimeoutInterval: 25000,
+    defaultTimeoutInterval: 30000,
   },
 
   // The number of times to retry the entire spec file when it fails as a whole.

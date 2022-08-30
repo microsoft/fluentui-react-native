@@ -12,10 +12,10 @@ export const enum AvatarComponentSelector {
 }
 class AvatarPageObject extends BasePage {
   async getPrimaryComponentAttribute(attribute: string): Promise<string> {
-    return (await this._primaryComponent).getAttribute(attribute);
+    return await (await this._primaryComponent).getAttribute(attribute);
   }
   async getSecondaryComponentAttribute(attribute: string): Promise<string> {
-    return (await this._secondaryComponent).getAttribute(attribute);
+    return await (await this._secondaryComponent).getAttribute(attribute);
   }
   async getAvatarAccessibilityLabel(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent

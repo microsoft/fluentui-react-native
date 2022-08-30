@@ -21,7 +21,7 @@ class ButtonPageObject extends BasePage {
     const callbackText = await By(BUTTON_ON_PRESS_DEPRECATED);
     await browser.waitUntil(
       async () => {
-        return callbackText.isDisplayed();
+        return await callbackText.isDisplayed();
       },
       {
         timeout: this.waitForPageTimeout,
@@ -30,7 +30,7 @@ class ButtonPageObject extends BasePage {
       },
     );
 
-    return callbackText.isDisplayed();
+    return await callbackText.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -41,9 +41,9 @@ class ButtonPageObject extends BasePage {
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getButtonSelector(buttonSelector?: ButtonSelector): Promise<WebdriverIO.Element> {
     if (buttonSelector == ButtonSelector.PrimaryButton) {
-      return this._primaryComponent;
+      return await this._primaryComponent;
     }
-    return this._primaryComponent;
+    return await this._primaryComponent;
   }
 
   /*****************************************/

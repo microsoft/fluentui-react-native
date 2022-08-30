@@ -59,9 +59,9 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async scrollToComponentButton(): Promise<void> {
+    const ScrollView = await By('SCROLLVIEW_TEST_ID');
     if (!(await this.isButtonInView())) {
-      const scrollViewElement = $('~SCROLLVIEW_TEST_ID');
-      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, (await scrollViewElement).elementId);
+      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollView.elementId);
     }
   }
 
@@ -69,7 +69,7 @@ export class BasePage {
   async waitForPageDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(
       async () => {
-        return this.isPageLoaded();
+        return await this.isPageLoaded();
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
@@ -83,7 +83,7 @@ export class BasePage {
   async waitForButtonDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(
       async () => {
-        return this.isButtonInView();
+        return await this.isButtonInView();
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
@@ -97,7 +97,7 @@ export class BasePage {
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(
       async () => {
-        return (await this._primaryComponent).isDisplayed();
+        return await (await this._primaryComponent).isDisplayed();
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
@@ -124,7 +124,7 @@ export class BasePage {
   async waitForCondition(condition?: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
     await browser.waitUntil(
       async () => {
-        return condition();
+        return await condition();
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,

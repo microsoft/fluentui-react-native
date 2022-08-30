@@ -14,7 +14,7 @@ export const TEXT_A11Y_ROLE = 'ControlType.Text';
 
 /* Jasmine Timeouts */
 export const BOOT_APP_TIMEOUT = 60000;
-export const PAGE_TIMEOUT = 15000;
+export const PAGE_TIMEOUT = 25000;
 
 /* Keyboard Key Constants */
 export const enum Keys {
