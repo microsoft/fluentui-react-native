@@ -39,7 +39,6 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
-    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -81,7 +80,6 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
-    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -147,7 +145,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
   }
 >
   <Text
-    accessible={true}
+    accessible={false}
     style={
       Object {
         "color": "#fff",
@@ -350,6 +348,8 @@ exports[`CounterBadge component tests Empty Badge 1`] = `null`;
 
 exports[`PresenceBadge component tests PresenceBadge props 1`] = `
 <View
+  accessibilityLabel="available"
+  accessible={true}
   iconPosition="before"
   style={
     Object {
