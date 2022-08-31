@@ -2,7 +2,7 @@ import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
-import { commonTestStyles, stackStyle } from '../Common/styles';
+import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 import TestSvg from './test.svg';
 
 export const ButtonSizeTest: React.FunctionComponent = () => {
@@ -12,7 +12,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
   };
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
   return (
-    <View style={[stackStyle, commonTestStyles.view]}>
+    <View style={testContentRootViewStyle}>
       {svgIconsEnabled && (
         <>
           <Button

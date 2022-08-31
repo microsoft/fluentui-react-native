@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update package versions to align with other packages",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

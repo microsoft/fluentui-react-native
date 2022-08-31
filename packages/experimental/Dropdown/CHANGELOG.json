@@ -1,0 +1,35 @@
+{
+  "name": "@fluentui-react-native/dropdown",
+  "entries": [
+    {
+      "date": "Wed, 31 Aug 2022 00:27:59 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.1.1",
+      "version": "0.1.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "5dded69ee6eedd34063117ac9d7efb3ba91ca207",
+            "comment": "Setting up compose framework for Dropdown"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 26 Aug 2022 19:52:23 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "dafd1715f123ac93deb845cd94bc0be2e1f421ff",
+            "comment": "Initial commit for Dropdown"
+          }
+        ]
+      }
+    }
+  ]
+}

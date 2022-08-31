@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Thu, 18 Aug 2022 18:41:33 GMT and should not be manually modified.
+This log was last generated on Tue, 30 Aug 2022 18:36:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.4
+
+Tue, 30 Aug 2022 18:36:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.28
+
+## 1.2.3
+
+Tue, 30 Aug 2022 08:26:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.27
+
+## 1.2.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.26
+- Bump @fluentui-react-native/framework to v0.8.1
+- Bump @fluentui-react-native/icon to v0.13.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+
+## 1.2.1
+
+Mon, 29 Aug 2022 12:39:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.25
+
+## 1.2.0
+
+Fri, 26 Aug 2022 18:15:16 GMT
+
+### Minor changes
+
+- update avatar hashing to match native avatar (joannaquu@gmail.com)
+- Bump @fluentui-react-native/badge to v0.1.24
+
+### Patches
+
+- Fixed PresenceBadge Tester page (vkozlova@microsoft.com)
 
 ## 1.1.40
 

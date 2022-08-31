@@ -1,8 +1,145 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 19 Aug 2022 15:32:12 GMT and should not be manually modified.
+This log was last generated on Wed, 31 Aug 2022 12:11:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.90.7
+
+Wed, 31 Aug 2022 12:11:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.19
+- Bump @fluentui-react-native/experimental-button to v0.16.19
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.22
+- Bump @fluentui-react-native/menu to v1.0.28
+- Bump @fluentui-react-native/notification to v0.17.2
+- Bump @fluentui/react-native to v0.32.11
+
+## 0.90.6
+
+Tue, 30 Aug 2022 18:36:15 GMT
+
+### Patches
+
+- Moved Badge to components folder. (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.2.4
+- Bump @fluentui-react-native/badge to v0.1.28
+
+## 0.90.5
+
+Tue, 30 Aug 2022 08:26:56 GMT
+
+### Patches
+
+- Fixed customization (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.2.3
+- Bump @fluentui-react-native/badge to v0.1.27
+
+## 0.90.4
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/android-theme to v0.12.0
+- Bump @fluentui-react-native/apple-theme to v0.13.3
+- Bump @fluentui-react-native/avatar to v1.2.2
+- Bump @fluentui-react-native/badge to v0.1.26
+- Bump @fluentui-react-native/button to v0.24.18
+- Bump @fluentui-react-native/default-theme to v0.15.0
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.1
+- Bump @fluentui-react-native/experimental-avatar to v0.16.2
+- Bump @fluentui-react-native/experimental-button to v0.16.18
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.12
+- Bump @fluentui-react-native/experimental-expander to v0.4.1
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.21
+- Bump @fluentui-react-native/experimental-shadow to v0.2.14
+- Bump @fluentui-react-native/experimental-shimmer to v0.7.1
+- Bump @fluentui-react-native/experimental-tabs to v0.5.10
+- Bump @fluentui-react-native/experimental-text to v0.11.2
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.2
+- Bump @fluentui-react-native/framework to v0.8.1
+- Bump @fluentui-react-native/icon to v0.13.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+- Bump @fluentui-react-native/menu to v1.0.27
+- Bump @fluentui-react-native/notification to v0.17.1
+- Bump @fluentui-react-native/stack to v0.7.4
+- Bump @fluentui-react-native/switch to v0.6.3
+- Bump @fluentui-react-native/text to v0.14.1
+- Bump @fluentui-react-native/theming-utils to v0.15.0
+- Bump @fluentui-react-native/win32-theme to v0.21.0
+- Bump @fluentui/react-native to v0.32.10
+
+## 0.90.3
+
+Mon, 29 Aug 2022 22:11:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.11
+- Bump @fluentui/react-native to v0.32.9
+
+## 0.90.2
+
+Mon, 29 Aug 2022 12:39:37 GMT
+
+### Patches
+
+- Fixed showing content for tiny and extraSmall badge (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.2.1
+- Bump @fluentui-react-native/badge to v0.1.25
+
+## 0.90.1
+
+Sat, 27 Aug 2022 01:33:14 GMT
+
+### Patches
+
+- Tester style cleanup (ruaraki@microsoft.com)
+
+## 0.90.0
+
+Fri, 26 Aug 2022 22:09:56 GMT
+
+### Minor changes
+
+- add link to spec in FluentTester (joannaquu@gmail.com)
+- Bump @fluentui-react-native/notification to v0.17.0
+
+## 0.89.0
+
+Fri, 26 Aug 2022 19:52:23 GMT
+
+### Minor changes
+
+- fix issue where status definitions don't wrap (joannaquu@gmail.com)
+
+## 0.88.0
+
+Fri, 26 Aug 2022 18:15:17 GMT
+
+### Minor changes
+
+- update avatar hashing to match native avatar (joannaquu@gmail.com)
+- Bump @fluentui-react-native/avatar to v1.2.0
+- Bump @fluentui-react-native/badge to v0.1.24
+- Bump @fluentui-react-native/button to v0.24.17
+- Bump @fluentui-react-native/experimental-button to v0.16.17
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.20
+- Bump @fluentui-react-native/experimental-shadow to v0.2.13
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.1
+- Bump @fluentui-react-native/menu to v1.0.26
+- Bump @fluentui-react-native/notification to v0.16.1
+- Bump @fluentui-react-native/switch to v0.6.2
+- Bump @fluentui/react-native to v0.32.8
+
+### Patches
+
+- Fixed PresenceBadge Tester page (vkozlova@microsoft.com)
+- [Badge] Set relative position as the default one (vkozlova@microsoft.com)
+- Added font-tokens, color as a prop. Had to rename it to badgeColor (the same reason as in Avatar). And added position as a prop (vkozlova@microsoft.com)
 
 ## 0.87.0
 
