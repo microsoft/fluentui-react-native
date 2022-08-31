@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Removed unused styles",
-  "packageName": "@fluentui-react-native/button",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
