@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added Switch control for win32",
-  "packageName": "@fluentui-react-native/experimental-switch",
-  "email": "nkhalil942@gmail.com",
-  "dependentChangeType": "patch"
-}
