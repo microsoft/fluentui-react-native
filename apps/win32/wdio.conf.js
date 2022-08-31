@@ -10,7 +10,7 @@ const defaultConnectionRetryTimeout = 20000;
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
+  specs: ['../fluent-tester/src/E2E/Button/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
   maxInstances: 30,
