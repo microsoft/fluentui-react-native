@@ -26,20 +26,15 @@ class TabsPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async waitForTabsItemsToOpen(tabItemSelector: TabItemSelector, timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return this.didTabItemContentLoad(tabItemSelector);
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The Tab Items content did not open.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this.didTabItemContentLoad(tabItemSelector), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'The Tab Items content did not open.',
+      interval: 1000,
+    });
   }
 
   async getTabItemAccesibilityRole(tabItemSelector: TabItemSelector): Promise<string> {
-    return (await this.getTabItem(tabItemSelector)).getAttribute('ControlType');
+    return await (await this.getTabItem(tabItemSelector)).getAttribute('ControlType');
   }
 
   async clickOnTabItem(tabItemSelector: TabItemSelector): Promise<void> {
@@ -47,7 +42,7 @@ class TabsPageObject extends BasePage {
   }
 
   async didTabItemContentLoad(tabItemSelector: TabItemSelector): Promise<boolean> {
-    return (await this.getTabItemContent(tabItemSelector)).isDisplayed();
+    return await (await this.getTabItemContent(tabItemSelector)).isDisplayed();
   }
 
   /* Returns the correct WebDriverIO element from the TabItem Selector */

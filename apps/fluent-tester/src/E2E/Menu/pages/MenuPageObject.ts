@@ -24,55 +24,45 @@ class MenuPageObject extends BasePage {
   /******************************************************************/
   async didMenuOpen(): Promise<boolean> {
     const callbackText = await By(MENU_ON_OPEN);
-    await browser.waitUntil(
-      async () => {
-        return callbackText.isDisplayed();
-      },
-      {
-        timeout: this.waitForPageTimeout,
-        timeoutMsg: 'The Menu did not open.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+      timeout: this.waitForPageTimeout,
+      timeoutMsg: 'The Menu did not open.',
+      interval: 1000,
+    });
 
-    return callbackText.isDisplayed();
+    return await callbackText.isDisplayed();
   }
 
   async didMenuClose(): Promise<boolean> {
     const callbackText = await By(MENU_ON_CLOSE);
-    await browser.waitUntil(
-      async () => {
-        return callbackText.isDisplayed();
-      },
-      {
-        timeout: this.waitForPageTimeout,
-        timeoutMsg: 'The Menu did not close.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+      timeout: this.waitForPageTimeout,
+      timeoutMsg: 'The Menu did not close.',
+      interval: 1000,
+    });
 
-    return callbackText.isDisplayed();
+    return await callbackText.isDisplayed();
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
     switch (componentSelector) {
       case MenuComponentSelector.PrimaryComponent:
-        return (await this._primaryComponent).getAttribute('Name');
+        return await this._primaryComponent.getAttribute('Name');
 
       case MenuComponentSelector.SecondaryComponent:
-        return (await this._secondaryComponent).getAttribute('Name');
+        return await this._secondaryComponent.getAttribute('Name');
 
       case MenuComponentSelector.TertiaryComponent:
-        return (await this._tertiaryComponent).getAttribute('Name');
+        return await this._tertiaryComponent.getAttribute('Name');
     }
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
-    return (await By(MENUPOPOVER_TEST_COMPONENT)).getAttribute('ControlType');
+    return await By(MENUPOPOVER_TEST_COMPONENT).getAttribute('ControlType');
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return (await this._secondaryComponent).getAttribute('ControlType');
+    return await this._secondaryComponent.getAttribute('ControlType');
   }
 
   /* Sends a Keyboarding command on a specific UI element */

@@ -21,15 +21,15 @@ class RadioGroupPage extends BasePage {
   async getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): Promise<string> {
     switch (radioButtonSelector) {
       case RadioButtonSelector.Primary:
-        return (await this._radioButton).getAttribute('Name');
+        return await this._radioButton.getAttribute('Name');
 
       case RadioButtonSelector.Secondary:
-        return (await this._secondRadioButton).getAttribute('Name');
+        return await this._secondRadioButton.getAttribute('Name');
     }
   }
 
   async getRadioButtonAccesibilityRole(): Promise<string> {
-    return (await this._radioButton).getAttribute('ControlType');
+    return await this._radioButton.getAttribute('ControlType');
   }
 
   /*****************************************/

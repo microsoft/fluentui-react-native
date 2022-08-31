@@ -12,11 +12,13 @@ export const enum BadgeComponentSelector {
 }
 class BasicBadgePageObject extends BasePage {
   async getPrimaryComponentAttribute(attribute: string): Promise<string> {
-    return (await this._primaryComponent).getAttribute(attribute);
+    return await this._primaryComponent.getAttribute(attribute);
   }
+
   async getSecondaryComponentAttribute(attribute: string): Promise<string> {
-    return (await this._secondaryComponent).getAttribute(attribute);
+    return await this._secondaryComponent.getAttribute(attribute);
   }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/

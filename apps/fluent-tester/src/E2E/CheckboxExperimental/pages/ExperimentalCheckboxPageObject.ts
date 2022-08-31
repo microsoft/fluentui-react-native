@@ -18,13 +18,13 @@ class ExperimentalCheckboxPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
-    return (await this._primaryComponent).isSelected();
+    return await this._primaryComponent.isSelected();
   }
 
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
     await browser.waitUntil(
       async () => {
-        return this.isCheckboxChecked();
+        return await this.isCheckboxChecked();
       },
       {
         timeout: timeout ?? this.waitForPageTimeout,
@@ -37,7 +37,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
   /* Useful in beforeEach() hook to reset the checkbox before every test */
   async toggleCheckboxToUnchecked(): Promise<void> {
     if (await this.isCheckboxChecked()) {
-      (await this._primaryComponent).click();
+      await this._primaryComponent.click();
     }
   }
 
@@ -45,7 +45,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
     const callbackText = await By(EXPERIMENTAL_CHECKBOX_ON_PRESS);
     await browser.waitUntil(
       async () => {
-        return callbackText.isDisplayed();
+        return await callbackText.isDisplayed();
       },
       {
         timeout: this.waitForPageTimeout,
@@ -54,7 +54,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
       },
     );
 
-    return callbackText.isDisplayed();
+    return await callbackText.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */

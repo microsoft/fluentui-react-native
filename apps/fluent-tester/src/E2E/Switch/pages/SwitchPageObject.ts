@@ -19,42 +19,32 @@ class SwitchPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isSwitchChecked(): Promise<boolean> {
-    return (await this._primaryComponent).isSelected();
+    return await this._primaryComponent.isSelected();
   }
 
   async waitForSwitchChecked(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return this.isSwitchChecked();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The Switch was not toggled correctly',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this.isSwitchChecked(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'The Switch was not toggled correctly',
+      interval: 1000,
+    });
   }
 
   async toggleSwitchToUnchecked(): Promise<void> {
     if (await this.isSwitchChecked()) {
-      (await this._primaryComponent).click();
+      await this._primaryComponent.click();
     }
   }
 
   async didOnChangeCallbackFire(): Promise<boolean> {
     const callbackText = await By(SWITCH_ON_PRESS);
-    await browser.waitUntil(
-      async () => {
-        return callbackText.isDisplayed();
-      },
-      {
-        timeout: this.waitForPageTimeout,
-        timeoutMsg: 'The OnChange callback did not fire.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+      timeout: this.waitForPageTimeout,
+      timeoutMsg: 'The OnChange callback did not fire.',
+      interval: 1000,
+    });
 
-    return callbackText.isDisplayed();
+    return await callbackText.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */

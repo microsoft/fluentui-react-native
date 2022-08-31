@@ -2,8 +2,8 @@ const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
-export async function By(identifier: string): Promise<WebdriverIO.Element> {
-  return await $('~' + identifier);
+export function By(identifier: string) {
+  return $('~' + identifier);
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -26,17 +26,17 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return await (await this._primaryComponent).getAttribute('ControlType');
+    return await this._primaryComponent.getAttribute('ControlType');
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return await (await this._primaryComponent).getAttribute('Name');
+        return await this._primaryComponent.getAttribute('Name');
 
       case ComponentSelector.Secondary:
-        return await (await this._secondaryComponent).getAttribute('Name');
+        return await this._secondaryComponent.getAttribute('Name');
     }
   }
 
@@ -44,16 +44,16 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return (await this._testPage).isDisplayed();
+    return await this._testPage.isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
-    return (await this._pageButton).isDisplayed();
+    return await this._pageButton.isDisplayed();
   }
 
   async clickComponent(): Promise<void> {
-    await (await this._primaryComponent).click();
+    await this._primaryComponent.click();
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
@@ -67,52 +67,37 @@ export class BasePage {
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
   async waitForPageDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return await this.isPageLoaded();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this.isPageLoaded(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
+      interval: 1000,
+    });
   }
 
   /* Waits for the test page's button to be displayed. If the button doesn't load before the timeout, it causes the test to fail. */
   async waitForButtonDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return await this.isButtonInView();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this.isButtonInView(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
+      interval: 1000,
+    });
   }
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return await (await this._primaryComponent).isDisplayed();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg:
-          'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg:
+        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+      interval: 1000,
+    });
   }
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
     const ScrollViewer = await By('ScrollViewAreaForComponents');
 
-    while (!(await (await this._primaryComponent).isDisplayed())) {
+    while (!(await this._primaryComponent.isDisplayed())) {
       await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewer.elementId);
     }
 
@@ -122,16 +107,11 @@ export class BasePage {
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
   async waitForCondition(condition?: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return await condition();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await condition(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
+      interval: 1000,
+    });
   }
 
   /* FUNCTIONALITY: Determines if an Assert has fired. True if yes; false otherwise
@@ -164,26 +144,26 @@ export class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  get _testPage(): Promise<WebdriverIO.Element> {
+  get _testPage() {
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
-  get _primaryComponent(): Promise<WebdriverIO.Element> {
+  get _primaryComponent() {
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
-  get _secondaryComponent(): Promise<WebdriverIO.Element> {
+  get _secondaryComponent() {
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  get _pageButton(): Promise<WebdriverIO.Element> {
+  get _pageButton() {
     return By(DUMMY_CHAR);
   }
 

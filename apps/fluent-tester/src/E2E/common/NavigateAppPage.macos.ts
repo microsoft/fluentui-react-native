@@ -23,83 +23,83 @@ import { By, BasePage } from './BasePage.macos';
 
 class NavigateAppPage extends BasePage {
   async clickAndGoToBadgePage() {
-    await this.badgePage.then((badgePage) => badgePage.click());
+    await this.badgePage.click();
   }
 
   async clickAndGoToButtonPage() {
-    await this.buttonPage.then((buttonPage) => buttonPage.click());
+    await this.buttonPage.click();
   }
 
   async clickAndGoToCalloutPage() {
-    await this.calloutPage.then((calloutPage) => calloutPage.click());
+    await this.calloutPage.click();
   }
 
   async clickAndGoToCheckboxPage() {
-    await this.checkboxPage.then((checkboxPage) => checkboxPage.click());
+    await this.checkboxPage.click();
   }
 
   async clickAndGoToContextualMenuPage() {
-    await this.contextualMenuPage.then((contextualMenuPage) => contextualMenuPage.click());
+    await this.contextualMenuPage.click();
   }
 
   async clickAndGoToFocusTrapZonePage() {
-    await this.focusTrapZonePage.then((focusTrapZonePage) => focusTrapZonePage.click());
+    await this.focusTrapZonePage.click();
   }
 
   async clickAndGoToFocusZonePage() {
-    await this.focusZonePage.then((focusZonePage) => focusZonePage.click());
+    await this.focusZonePage.click();
   }
 
   async clickAndGoToIconPage() {
-    await this.iconPage.then((iconPage) => iconPage.click());
+    await this.iconPage.click();
   }
 
   async clickAndGoToLinkPage() {
-    await this.linkPage.then((linkPage) => linkPage.click());
+    await this.linkPage.click();
   }
 
   async clickAndGoToMenuButtonPage() {
-    await this.menuButtonPage.then((menuButtonPage) => menuButtonPage.click());
+    await this.menuButtonPage.click();
   }
 
   async clickAndGoToPersonaPage() {
-    await this.personaPage.then((personaPage) => personaPage.click());
+    await this.personaPage.click();
   }
 
   async clickAndGoToPersonaCoinPage() {
-    await this.personaCoinPage.then((personaCoinPage) => personaCoinPage.click());
+    await this.personaCoinPage.click();
   }
 
   async clickAndGoToPressablePage() {
-    await this.pressablePage.then((pressablePage) => pressablePage.click());
+    await this.pressablePage.click();
   }
 
   async clickAndGoToRadioGroupPage() {
-    await this.radioGroupPage.then((radioGroupPage) => radioGroupPage.click());
+    await this.radioGroupPage.click();
   }
 
   async clickAndGoToSeparatorPage() {
-    await this.separatorPage.then((separatorPage) => separatorPage.click());
+    await this.separatorPage.click();
   }
 
   async clickAndGoToSvgPage() {
-    await this.svgPage.then((svgPage) => svgPage.click());
+    await this.svgPage.click();
   }
 
   async clickAndGoToTextPage() {
-    await this.textPage.then((textPage) => textPage.click());
+    await this.textPage.click();
   }
 
   async clickAndGoToTabsPage() {
-    await this.tabsPage.then((tabsPage) => tabsPage.click());
+    await this.tabsPage.click();
   }
 
   async clickAndGoToThemePage() {
-    await this.themePage.then((themePage) => themePage.click());
+    await this.themePage.click();
   }
 
   async clickAndGoToExperimentalTabsPage() {
-    await this.experimentalTabsPage.then((experimentalTabsPage) => experimentalTabsPage.click());
+    await this.experimentalTabsPage.click();
   }
 
   /*

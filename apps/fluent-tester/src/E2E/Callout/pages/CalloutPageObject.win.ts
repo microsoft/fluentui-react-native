@@ -11,12 +11,12 @@ class CalloutPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didCalloutLoad(): Promise<boolean> {
-    return (await this._primaryComponent).isDisplayed();
+    return await this._primaryComponent.isDisplayed();
   }
 
   /* OVERRIDE: This must scroll to the button that opens the callout, not the callout (since it's not visible on load.) */
   async scrollToTestElement(): Promise<void> {
-    while (!(await (await this._buttonToOpenCallout).isDisplayed())) {
+    while (!(await this._buttonToOpenCallout.isDisplayed())) {
       await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, (await this._testPage).elementId);
     }
   }

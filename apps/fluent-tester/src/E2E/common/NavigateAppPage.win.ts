@@ -32,148 +32,119 @@ import { By, BasePage } from './BasePage.win';
 
 class NavigateAppPage extends BasePage {
   async clickAndGoToActivityIndicatorPage() {
-    const activityIndicatorPage = await By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
-    await activityIndicatorPage.click();
+    await this.activityIndicatorPage.click();
   }
 
   async clickAndGoToAvatarPage() {
-    const avatarPage = await By(HOMEPAGE_AVATAR_BUTTON);
-    await avatarPage.click();
+    await this.avatarPage.click();
   }
 
   async clickAndGoToBadgePage() {
-    const badgePage = await By(HOMEPAGE_BADGE_BUTTON);
-    await badgePage.click();
+    await this.badgePage.click();
   }
 
   async clickAndGoToButtonPage() {
-    const buttonPage = await By(HOMEPAGE_BUTTON_BUTTON);
-    await buttonPage.click();
+    await this.buttonPage.click();
   }
 
   async clickAndGoToCalloutPage() {
-    const calloutPage = await By(HOMEPAGE_CALLOUT_BUTTON);
-    await calloutPage.click();
+    await this.calloutPage.click();
   }
 
   async clickAndGoToCheckboxPage() {
-    const checkboxPage = await By(HOMEPAGE_CHECKBOX_BUTTON);
-    await checkboxPage.click();
+    await this.checkboxPage.click();
   }
 
   async clickAndGoToCheckboxExperimentalPage() {
-    const checkboxExperimentalPage = await By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
-    await checkboxExperimentalPage.click();
+    await this.checkboxExperimentalPage.click();
   }
 
   async clickAndGoToContextualMenuPage() {
-    const contextualMenuPage = await By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
-    await contextualMenuPage.click();
+    await this.contextualMenuPage.click();
   }
 
   async clickAndGoToFocusTrapZonePage() {
-    const focusTrapZonePage = await By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
-    await focusTrapZonePage.click();
+    await this.focusTrapZonePage.click();
   }
 
   async clickAndGoToFocusZonePage() {
-    const focusZonePage = await By(HOMEPAGE_FOCUSZONE_BUTTON);
-    await focusZonePage.click();
+    await this.focusZonePage.click();
   }
 
   async clickAndGoToIconPage() {
-    const iconPage = await By(HOMEPAGE_ICON_BUTTON);
-    await iconPage.click();
+    await this.iconPage.click();
   }
 
   async clickAndGoToLinkPage() {
-    const linkPage = await By(HOMEPAGE_LINK_BUTTON);
-    await linkPage.click();
+    await this.linkPage.click();
   }
 
   async clickAndGoToMenuPage() {
-    const menuPage = await By(HOMEPAGE_MENU_BUTTON);
-    await menuPage.click();
+    await this.menuPage.click();
   }
 
   async clickAndGoToMenuButtonPage() {
-    const menuButtonPage = await By(HOMEPAGE_MENUBUTTON_BUTTON);
-    await menuButtonPage.click();
+    await this.menuButtonPage.click();
   }
 
   async clickAndGoToExperimentalMenuButtonPage() {
-    const menuButtonExperimentalPage = await By(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
-    await menuButtonExperimentalPage.click();
+    await this.menuButtonExperimentalPage.click();
   }
 
   async clickAndGoToPersonaPage() {
-    const personaPage = await By(HOMEPAGE_PERSONA_BUTTON);
-    await personaPage.click();
+    await this.personaPage.click();
   }
 
   async clickAndGoToPersonaCoinPage() {
-    const personaCoinPage = await By(HOMEPAGE_PERSONACOIN_BUTTON);
-    await personaCoinPage.click();
+    await this.personaCoinPage.click();
   }
 
   async clickAndGoToPressablePage() {
-    const pressablePage = await By(HOMEPAGE_PRESSABLE_BUTTON);
-    await pressablePage.click();
+    await this.pressablePage.click();
   }
 
   async clickAndGoToRadioGroupPage() {
-    const radioGroupPage = await By(HOMEPAGE_RADIOGROUP_BUTTON);
-    await radioGroupPage.click();
+    await this.radioGroupPage.click();
   }
 
   async clickAndGoToSeparatorPage() {
-    const separatorPage = await By(HOMEPAGE_SEPARATOR_BUTTON);
-    await separatorPage.click();
+    await this.separatorPage.click();
   }
 
   async clickAndGoToShimmerPage() {
-    const shimmerPage = await By(HOMEPAGE_SHIMMER_BUTTON);
-    await shimmerPage.click();
+    await this.shimmerPage.click();
   }
 
   async clickAndGoToSvgPage() {
-    const svgPage = await By(HOMEPAGE_SVG_BUTTON);
-    await svgPage.click();
+    await this.svgPage.click();
   }
 
   async clickAndGoToSwitchPage() {
-    const switchPage = await By(HOMEPAGE_SWITCH_BUTTON);
-    await switchPage.click();
+    await this.switchPage.click();
   }
 
   async clickAndGoToTextPage() {
-    const textPage = await By(HOMEPAGE_TEXT_BUTTON);
-    await textPage.click();
+    await this.textPage.click();
   }
 
   async clickAndGoToExperimentalTextPage() {
-    const textExperimentalPage = await By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
-    await textExperimentalPage.click();
+    await this.textExperimentalPage.click();
   }
 
   async clickAndGoToTabsPage() {
-    const tabsPage = await By(HOMEPAGE_TABS_BUTTON);
-    await tabsPage.click();
+    await this.tabsPage.click();
   }
 
   async clickAndGoToThemePage() {
-    const themePage = await By(HOMEPAGE_THEME_BUTTON);
-    await themePage.click();
+    await this.themePage.click();
   }
 
   async clickAndGoToTokensPage() {
-    const tokensPage = await By(HOMEPAGE_TOKEN_BUTTON);
-    await tokensPage.click();
+    await this.tokensPage.click();
   }
 
   async clickAndGoToExperimentalTabsPage() {
-    const experimentalTabsPage = await By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
-    await experimentalTabsPage.click();
+    await this.experimentalTabsPage.click();
   }
 
   /*
@@ -182,6 +153,122 @@ class NavigateAppPage extends BasePage {
 
   get _testPage() {
     return By(BASE_TESTPAGE);
+  }
+
+  private get activityIndicatorPage() {
+    return By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
+  }
+
+  private get avatarPage() {
+    return By(HOMEPAGE_AVATAR_BUTTON);
+  }
+
+  private get badgePage() {
+    return By(HOMEPAGE_BADGE_BUTTON);
+  }
+
+  private get buttonPage() {
+    return By(HOMEPAGE_BUTTON_BUTTON);
+  }
+
+  private get calloutPage() {
+    return By(HOMEPAGE_CALLOUT_BUTTON);
+  }
+
+  private get checkboxPage() {
+    return By(HOMEPAGE_CHECKBOX_BUTTON);
+  }
+
+  private get checkboxExperimentalPage() {
+    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+  }
+
+  private get contextualMenuPage() {
+    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
+  }
+
+  private get focusTrapZonePage() {
+    return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
+  }
+
+  private get focusZonePage() {
+    return By(HOMEPAGE_FOCUSZONE_BUTTON);
+  }
+
+  private get iconPage() {
+    return By(HOMEPAGE_ICON_BUTTON);
+  }
+
+  private get linkPage() {
+    return By(HOMEPAGE_LINK_BUTTON);
+  }
+
+  private get menuPage() {
+    return By(HOMEPAGE_MENU_BUTTON);
+  }
+
+  private get menuButtonPage() {
+    return By(HOMEPAGE_MENUBUTTON_BUTTON);
+  }
+
+  private get menuButtonExperimentalPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
+  }
+
+  private get personaPage() {
+    return By(HOMEPAGE_PERSONA_BUTTON);
+  }
+
+  private get personaCoinPage() {
+    return By(HOMEPAGE_PERSONACOIN_BUTTON);
+  }
+
+  private get pressablePage() {
+    return By(HOMEPAGE_PRESSABLE_BUTTON);
+  }
+
+  private get radioGroupPage() {
+    return By(HOMEPAGE_RADIOGROUP_BUTTON);
+  }
+
+  private get separatorPage() {
+    return By(HOMEPAGE_SEPARATOR_BUTTON);
+  }
+
+  private get shimmerPage() {
+    return By(HOMEPAGE_SHIMMER_BUTTON);
+  }
+
+  private get svgPage() {
+    return By(HOMEPAGE_SVG_BUTTON);
+  }
+
+  private get switchPage() {
+    return By(HOMEPAGE_SWITCH_BUTTON);
+  }
+
+  private get textPage() {
+    return By(HOMEPAGE_TEXT_BUTTON);
+  }
+
+  private get textExperimentalPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+  }
+
+  private get tabsPage() {
+    return By(HOMEPAGE_TABS_BUTTON);
+  }
+
+  private get themePage() {
+    return By(HOMEPAGE_THEME_BUTTON);
+  }
+
+  private get tokensPage() {
+    return By(HOMEPAGE_TOKEN_BUTTON);
+  }
+
+  private get experimentalTabsPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
   }
 }
 

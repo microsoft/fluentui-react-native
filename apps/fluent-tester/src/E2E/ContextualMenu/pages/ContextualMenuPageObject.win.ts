@@ -18,21 +18,16 @@ class ContextualMenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async waitForContextualMenuItemsToOpen(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return this.contextualMenuItemDisplayed();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The Contextual Menu Items did not open.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this.contextualMenuItemDisplayed(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'The Contextual Menu Items did not open.',
+      interval: 1000,
+    });
   }
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async contextualMenuItemDisplayed(): Promise<boolean> {
-    return (await this._contextualMenuItem).isDisplayed();
+    return await this._contextualMenuItem.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */

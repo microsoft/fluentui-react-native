@@ -6,7 +6,7 @@ class TabsPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getTabItemAccesibilityRole(): Promise<string> {
-    return (await this._tabItem).getAttribute('ControlType');
+    return await this._tabItem.getAttribute('ControlType');
   }
 
   /*****************************************/

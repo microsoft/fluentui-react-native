@@ -17,21 +17,16 @@ class MenuButtonPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async waitForMenuItemsToOpen(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return this.menuItemDisplayed();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The Menu Items did not open.',
-        interval: 1000,
-      },
-    );
+    await browser.waitUntil(async () => await this.menuItemDisplayed(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'The Menu Items did not open.',
+      interval: 1000,
+    });
   }
 
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async menuItemDisplayed(): Promise<boolean> {
-    return (await this._menuItem).isDisplayed();
+    return await this._menuItem.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
