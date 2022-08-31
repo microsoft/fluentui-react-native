@@ -47,7 +47,7 @@ exports.config = {
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 1,
+  bail: 0,
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.

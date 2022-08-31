@@ -9,7 +9,7 @@
   dependencies:
     "@jridgewell/trace-mapping" "^0.3.0"
 
-"@appium/base-driver@^8.0.0", "@appium/base-driver@^8.3.1":
+"@appium/base-driver@^8.3.1":
   version "8.7.0"
   resolved "https://registry.yarnpkg.com/@appium/base-driver/-/base-driver-8.7.0.tgz#57df6882d5d752fc0d8fe8487324cfcbff1e91d8"
   integrity sha512-Zzze66lY7VXejkTevZS12iif4J9Zfdc87d7twEYk+3VNCMFFAYsZLauX9KQgBwDY9j/6MnEMIsrNE96sqwaQ1w==
@@ -55,7 +55,7 @@
     json-schema "0.4.0"
     source-map-support "0.5.21"
 
-"@appium/support@2.55.2", "@appium/support@^2.55.3", "@appium/support@^2.56.1", "@appium/support@^2.57.0", "@appium/support@^2.59.5":
+"@appium/support@2.55.2", "@appium/support@^2.56.1", "@appium/support@^2.57.0", "@appium/support@^2.59.5":
   version "2.59.5"
   resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.5.tgz#090c5c711680eddfeb0434b57b975978566e7553"
   integrity sha512-OtEmiuLikmNjquVT5oVTFNlFilCiRQVICH5NxNcxzDZkIZk3XTpWmLHPz+MEHVP3dKh3pWaLFjrdA1bdEvG7hw==
@@ -3986,10 +3986,10 @@ appdirsjs@^1.2.4:
   resolved "https://registry.yarnpkg.com/appdirsjs/-/appdirsjs-1.2.6.tgz#fccf9ee543315492867cacfcfd4a2b32257d30ac"
   integrity sha512-D8wJNkqMCeQs3kLasatELsddox/Xqkhp+J07iXGyL54fVN7oc+nmNfYzGuCs1IEP6uBw+TfpuO3JKwc+lECy4w==
 
-appium-mac2-driver@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.0.tgz#6059bcaada3608505c2b2f2535d33b7cc43c2584"
-  integrity sha512-gKdQOrl1esSfrXh5JCA+cs1YKoj7m+TU9NdpEgd1z5OE+0nAD17E0wqrl89drVzACdugejf7U8KQ2MmIUzXMBQ==
+appium-mac2-driver@^1.4.0:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/appium-mac2-driver/-/appium-mac2-driver-1.4.1.tgz#03ca37f4599c20ac0503180342d92063e6a87fde"
+  integrity sha512-g7dmlLkkbmInHF39ZMExwTcjzxxu3kCdtnoK097VZ45XGvn/4Vj95LX4QvhyCtsFrs1kPibmor1F0wyX+WFCbg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.0.2"
@@ -3998,15 +3998,13 @@ appium-mac2-driver@1.4.0:
     lodash "^4.17.4"
     portscanner "2.2.0"
     source-map-support "^0.x"
-    teen_process "^1.15.0"
+    teen_process "^2.0.1"
 
-appium-windows-driver@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.1.tgz#357eb11c455b63e3f5b99168ebf72923dbaf5394"
-  integrity sha512-e2ZJDLeqyrvU4MaQAz0WX8Fx6Sx4YMlS/9vTQG6EmgfO3JiOp6XA/gIgmvA+ymLN5X6GWRvyaVfr0WD7oa0hog==
+appium-windows-driver@^2.0.1:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/appium-windows-driver/-/appium-windows-driver-2.0.7.tgz#2a9a29bf2a7b752b087eefc37ca1a0a7928ff58f"
+  integrity sha512-SPEEFQQQZetubkeN8ZFm0rMppVqNBVs2A2xRQe4kDPOD7LzF/EMq1F3njfwjly+9g25DeNNvxhjUDqMKVONqkA==
   dependencies:
-    "@appium/base-driver" "^8.0.0"
-    "@appium/support" "^2.55.3"
     "@babel/runtime" "^7.0.0"
     asyncbox "^2.3.1"
     bluebird "^3.5.1"
@@ -4014,7 +4012,7 @@ appium-windows-driver@2.0.1:
     lodash "^4.6.1"
     portscanner "2.2.0"
     source-map-support "^0.5.5"
-    teen_process "^1.7.0"
+    teen_process "^2.0.1"
 
 appium@2.0.0-beta.27:
   version "2.0.0-beta.27"
@@ -12980,7 +12978,7 @@ tar@^6.1.9:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-teen_process@1.16.0, teen_process@^1.15.0, teen_process@^1.7.0:
+teen_process@1.16.0:
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-1.16.0.tgz#2bad3e33b4d0a3a271cdd0c836434befa7771b44"
   integrity sha512-RnW7HHZD1XuhSTzD3djYOdIl1adE3oNEprE3HOFFxWs5m4FZsqYRhKJ4mDU2udtNGMLUS7jV7l8vVRLWAvmPDw==
@@ -12991,6 +12989,18 @@ teen_process@1.16.0, teen_process@^1.15.0, teen_process@^1.7.0:
     shell-quote "^1.4.3"
     source-map-support "^0.5.3"
     which "^2.0.2"
+
+teen_process@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/teen_process/-/teen_process-2.0.1.tgz#3e23d4b980bcdb7f7d0d064868943c6d8ec09894"
+  integrity sha512-1YI3e/leIKqkEliocmT2rqpRAJQS9/cgTWqoILdcSTT4aomSGamNXS0uevHwX1O34lVOidWQWDlMiZ+jaSI/5A==
+  dependencies:
+    "@babel/runtime" "7.18.9"
+    bluebird "3.7.2"
+    lodash "4.17.21"
+    shell-quote "1.7.3"
+    source-map-support "0.5.21"
+    which "2.0.2"
 
 temp@0.8.3:
   version "0.8.3"
