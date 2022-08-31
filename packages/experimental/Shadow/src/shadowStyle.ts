@@ -2,6 +2,10 @@ import { memoize } from '@fluentui-react-native/framework';
 import { ShadowToken } from '@fluentui-react-native/theme-types';
 import { ColorValue } from 'react-native';
 
+// The blur property from the token is not the same as the shadow radius value,
+// it needs to be divided by 2 to achieve the same effect.
+const shadowBlurAdjustment = 0.5;
+
 export const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
 
 function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
@@ -12,7 +16,7 @@ function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
     key: {
       shadowColor: shadowColorFromRGBAColor(keyShadow.color),
       shadowOpacity: shadowOpacityFromRGBAColor(keyShadow.color),
-      shadowRadius: keyShadow.blur,
+      shadowRadius: keyShadow.blur * shadowBlurAdjustment,
       shadowOffset: {
         width: keyShadow.x,
         height: keyShadow.y,
@@ -21,7 +25,7 @@ function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
     ambient: {
       shadowColor: shadowColorFromRGBAColor(ambientShadow.color),
       shadowOpacity: shadowOpacityFromRGBAColor(ambientShadow.color),
-      shadowRadius: ambientShadow.blur,
+      shadowRadius: ambientShadow.blur * shadowBlurAdjustment,
       shadowOffset: {
         width: ambientShadow.x,
         height: ambientShadow.y,
