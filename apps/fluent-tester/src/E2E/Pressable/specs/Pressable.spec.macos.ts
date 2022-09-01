@@ -1,23 +1,23 @@
-// import NavigateAppPage from '../../common/NavigateAppPage.macos';
-// import PressablePageObject from '../pages/PressablePageObject.macos';
-// import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import NavigateAppPage from '../../common/NavigateAppPage.macos';
+import PressablePageObject from '../pages/PressablePageObject.macos';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
-// // Before testing begins, allow up to 60 seconds for app to open
-// describe('Pressable Testing Initialization', function () {
-//   it('Wait for app load', () => {
-//     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-//     expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
-//   });
+// Before testing begins, allow up to 60 seconds for app to open
+describe('Pressable Testing Initialization', function () {
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
+  });
 
-//   it('Click and navigate to Pressable test page', () => {
-//     /* Scroll to component test page button in scrollview if not already visible*/
-//     PressablePageObject.scrollToComponentButton();
-//     PressablePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Pressable test page', async () => {
+    /* Scroll to component test page button in scrollview if not already visible*/
+    await PressablePageObject.scrollToComponentButton();
+    await PressablePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
-//     /* Click on component button to navigate to test page */
-//     NavigateAppPage.clickAndGoToPressablePage();
-//     PressablePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    /* Click on component button to navigate to test page */
+    await NavigateAppPage.clickAndGoToPressablePage();
+    await PressablePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-//     expect(PressablePageObject.isPageLoaded()).toBeTruthy();
-//   });
-// });
+    await expect(await PressablePageObject.isPageLoaded()).toBeTruthy();
+  });
+});
