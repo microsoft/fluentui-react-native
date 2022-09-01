@@ -1,60 +1,60 @@
-// import NavigateAppPage from '../../common/NavigateAppPage.win';
-// import ExperimentalMenuButtonPageObject from '../pages/ExperimentalMenuButtonPageObject.win';
-// import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
-// import {
-//   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
-//   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
-// } from '../../../TestComponents/MenuButtonExperimental/consts';
-// import { ComponentSelector } from '../../common/BasePage.win';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
+import ExperimentalMenuButtonPageObject from '../pages/ExperimentalMenuButtonPageObject.win';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
+import {
+  EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
+  EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
+} from '../../../TestComponents/MenuButtonExperimental/consts';
+import { ComponentSelector } from '../../common/BasePage.win';
 
-// // Before testing begins, allow up to 60 seconds for app to open
-// describe('Experimental MenuButton Testing Initialization', function () {
-//   it('Wait for app load', () => {
-//     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-//     expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-//   });
+// Before testing begins, allow up to 60 seconds for app to open
+describe('Experimental MenuButton Testing Initialization', function () {
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  });
 
-//   it('Click and navigate to Experimental MenuButton test page', () => {
-//     /* Scroll to component test page button in scrollview if not already visible*/
-//     ExperimentalMenuButtonPageObject.scrollToComponentButton();
-//     ExperimentalMenuButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Experimental MenuButton test page', async () => {
+    /* Scroll to component test page button in scrollview if not already visible*/
+    await ExperimentalMenuButtonPageObject.scrollToComponentButton();
+    await ExperimentalMenuButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
-//     /* Click on component button to navigate to test page */
-//     NavigateAppPage.clickAndGoToExperimentalMenuButtonPage();
-//     ExperimentalMenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    /* Click on component button to navigate to test page */
+    await NavigateAppPage.clickAndGoToExperimentalMenuButtonPage();
+    await ExperimentalMenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-//     expect(ExperimentalMenuButtonPageObject.isPageLoaded()).toBeTruthy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_PAGELOAD);
-//     expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
-// });
+    await expect(await ExperimentalMenuButtonPageObject.isPageLoaded()).toBeTruthy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});
 
-// /* This will be re-enabled with a MenuButton Bug is fixed. Currently in PR - "Integrating accessibilityLabel functionality for MenuButton #1117" */
-// describe('Experimental MenuButton Accessibility Testing', () => {
-//   it('Experimental MenuButton - Validate accessibilityRole is correct', () => {
-//     ExperimentalMenuButtonPageObject.scrollToTestElement();
-//     ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+/* This will be re-enabled with a MenuButton Bug is fixed. Currently in PR - "Integrating accessibilityLabel functionality for MenuButton #1117" */
+describe('Experimental MenuButton Accessibility Testing', () => {
+  it('Experimental MenuButton - Validate accessibilityRole is correct', async () => {
+    await ExperimentalMenuButtonPageObject.scrollToTestElement();
+    await ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-//     expect(ExperimentalMenuButtonPageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
-//     expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
+    await expect(await ExperimentalMenuButtonPageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
 
-//   it('Experimental MenuButton - Set accessibilityLabel', () => {
-//     ExperimentalMenuButtonPageObject.scrollToTestElement();
-//     ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  it('Experimental MenuButton - Set accessibilityLabel', async () => {
+    await ExperimentalMenuButtonPageObject.scrollToTestElement();
+    await ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-//     expect(ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
-//       EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
-//     );
-//     expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
+    await expect(await ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
+      EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
+    );
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
 
-//   it('Do not set accessibilityLabel -> Default to Experimental MenuButton label', () => {
-//     ExperimentalMenuButtonPageObject.scrollToTestElement();
-//     ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  it('Do not set accessibilityLabel -> Default to Experimental MenuButton label', async () => {
+    await ExperimentalMenuButtonPageObject.scrollToTestElement();
+    await ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-//     expect(ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-//       EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
-//     );
-//     expect(ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
-// });
+    await expect(await ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
+      EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
+    );
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});

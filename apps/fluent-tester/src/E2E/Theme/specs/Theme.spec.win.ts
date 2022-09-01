@@ -1,24 +1,24 @@
-// import NavigateAppPage from '../../common/NavigateAppPage.win';
-// import ThemePageObject from '../pages/ThemePageObject.win';
-// import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import NavigateAppPage from '../../common/NavigateAppPage.win';
+import ThemePageObject from '../pages/ThemePageObject.win';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
-// // Before testing begins, allow up to 60 seconds for app to open
-// describe('Theme Testing Initialization', function () {
-//   it('Wait for app load', () => {
-//     NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-//     expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
-//   });
+// Before testing begins, allow up to 60 seconds for app to open
+describe('Theme Testing Initialization', function () {
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  });
 
-//   it('Click and navigate to Theme test page', () => {
-//     /* Scroll to component test page button in scrollview if not already visible*/
-//     ThemePageObject.scrollToComponentButton();
-//     ThemePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Theme test page', async () => {
+    /* Scroll to component test page button in scrollview if not already visible*/
+    await ThemePageObject.scrollToComponentButton();
+    await ThemePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
-//     /* Click on component button to navigate to test page */
-//     NavigateAppPage.clickAndGoToThemePage();
-//     ThemePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    /* Click on component button to navigate to test page */
+    await NavigateAppPage.clickAndGoToThemePage();
+    await ThemePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-//     expect(ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
-//     expect(ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
-// });
+    await expect(await ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});
