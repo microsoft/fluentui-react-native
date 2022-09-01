@@ -57,7 +57,7 @@ export const PresenceBadge = compose<PresenceBadgeType>({
       const path = getIconPath(status, isOutOfOffice);
 
       return (
-        <Slots.root {...mergedProps} accessibilityLabel={status} accessible={true}>
+        <Slots.root {...mergedProps} accessible={true}>
           <Slots.svg viewBox="0 0 16 16" fill="none">
             <Path fill="currentColor" d={path} />
           </Slots.svg>
