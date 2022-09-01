@@ -1,8 +1,9 @@
-import { compose, UseSlots } from '@fluentui-react-native/framework';
+/**  @jsx withSlots */
+import { compose, mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import React from 'react';
 import { View } from 'react-native';
-import { Svg } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 import { optionName, OptionProps, OptionType } from './Option.types';
 
 export const Option = compose<OptionType>({
@@ -12,9 +13,20 @@ export const Option = compose<OptionType>({
     checkIcon: Svg,
     label: Text,
   },
-  useRender: (_userProps: OptionProps, _useSlots: UseSlots<OptionType>) => {
-    return (_final: OptionProps, ..._children: React.ReactNode[]) => {
-      return null;
+  useRender: (userProps: OptionProps, useSlots: UseSlots<OptionType>) => {
+    const Slots = useSlots(userProps);
+    return (final: OptionProps, ...children: React.ReactNode[]) => {
+      const mergedProps = mergeProps(userProps, final);
+
+      // TODO: Handle non-string children
+      const label = <Slots.label>{children}</Slots.label>;
+
+      return (
+        <Slots.root {...mergedProps}>
+          <Slots.checkIcon />
+          {label}
+        </Slots.root>
+      );
     };
   },
 });
