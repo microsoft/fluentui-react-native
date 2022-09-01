@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, Switch } from 'react-native';
+import { View, Switch, ScrollView } from 'react-native';
 import { FocusZone, Text, FocusZoneDirection, Checkbox } from '@fluentui/react-native';
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -32,6 +32,17 @@ const ListOfDisabledCheckboxes: React.FunctionComponent = () => {
 const EdgeCasesFocusZone: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyleFocusZone}>
+        <SubheaderText>FocusZone wrapping a ScrollView</SubheaderText>
+        <Button>Outside Focus Zone</Button>
+        <FocusZone focusZoneDirection="vertical">
+          <Button>Inside Focus Zone</Button>
+          <ScrollView style={{height: 100}} contentContainerStyle={{backgroundColor: 'grey'}} showsVerticalScrollIndicator={true}>
+              <Button style={{margin: 100}}>1</Button>
+              <Button style={{margin: 100}}>2</Button>
+              <Button style={{margin: 100}}>3</Button>
+              <Button style={{margin: 100}}>4</Button>
+        </ScrollView>
+      </FocusZone>
       <FocusZone>
         <SubheaderText>FocusZone with no focusable elements</SubheaderText>
         <ListOfDisabledCheckboxes />
