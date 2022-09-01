@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
-export const radioSelectActionLabel = 'Select a RadioButton';
+const defaultAccessibilityActions = [{ name: 'Select' }];
 
 export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
@@ -11,10 +11,12 @@ export const useRadio = (props: RadioProps): RadioState => {
     label,
     value,
     disabled,
+    accessibilityActions,
     accessibilityLabel,
     componentRef = defaultComponentRef,
     accessibilityPositionInSet,
     accessibilitySetSize,
+    enableFocusRing,
     ...rest
   } = props;
 
@@ -50,6 +52,10 @@ export const useRadio = (props: RadioProps): RadioState => {
     onFocus: changeSelection,
   });
 
+  const accessibilityActionsProp = accessibilityActions
+    ? [...defaultAccessibilityActions, ...accessibilityActions]
+    : defaultAccessibilityActions;
+
   // Used when creating accessibility properties in mergeSettings below
   const onAccessibilityAction = React.useCallback(
     (event: { nativeEvent: { actionName: any } }) => {
@@ -79,10 +85,11 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: { disabled: state.disabled, selected: state.selected },
-      accessibilityActions: [{ name: 'Select', label: radioSelectActionLabel }],
+      accessibilityActions: accessibilityActionsProp, //[{ name: 'Select', label: radioSelectActionLabel }]
       accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
       accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
       focusable: !state.disabled,
+      enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
     },
     state: state,
