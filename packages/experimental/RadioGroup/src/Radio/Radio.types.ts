@@ -1,17 +1,17 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
+import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IFocusable, IPressableHooks } from '@fluentui-react-native/interactive-hooks';
 import { ColorValue } from 'react-native';
 
 export const radioName = 'Radio';
 
-export interface RadioTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
+export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
    * Focus border color
    */
-  textBorderColor?: ColorValue;
+  // textBorderColor?: ColorValue;
 
   /**
    * Indicator border color
@@ -26,12 +26,27 @@ export interface RadioTokens extends FontTokens, IForegroundColorTokens, IBackgr
   /**
    * Label text color
    */
-  labelColor?: ColorValue;
+  // labelColor?: ColorValue;
 
   /**
    * Visibility of the radio inner circle from 0 to 1
    */
   radioVisibility?: number;
+
+  /**
+   * Diameter size of the outer indicator
+   */
+  radioSize?: number;
+
+  /**
+   * Diameter size of the inner circle indicator
+   */
+  radioInnerCircleSize?: number;
+
+  /**
+   * Border width of Radio
+   */
+  radioBorderWidth?: number;
 
   /**
    * States that can be applied to a Radio
