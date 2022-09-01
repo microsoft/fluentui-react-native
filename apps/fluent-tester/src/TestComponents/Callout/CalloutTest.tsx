@@ -348,7 +348,7 @@ const StandardCallout: React.FunctionComponent = () => {
               </View>
             ) : (
               //else
-              <View style={[{ padding: 20 }, { backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }]}>
+              <View style={{ padding: 20, backgroundColor: calloutHovered ? 'lightgreen' : 'pink' }}>
                 <Button content="click to change anchor" onClick={toggleCalloutRef} />
               </View>
             )}

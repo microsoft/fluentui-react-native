@@ -1,10 +1,15 @@
 import * as React from 'react';
-import { View, Text, Switch, TextInput, TextStyle } from 'react-native';
+import { View, Text, Switch, TextInput } from 'react-native';
 import { Persona } from '@fluentui/react-native';
 import { michaelImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { Slider } from '../Common/Slider';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+
+const getThemedStyles = themedStyleSheet((t: Theme) => {
+  return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
+});
 
 export const CustomizeUsage: React.FunctionComponent = () => {
   const [showImage, setShowImage] = React.useState(true);
@@ -20,9 +25,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const [verticalGap, setVerticalGap] = React.useState<number>();
 
   const theme = useTheme();
-  const textBoxBorderStyle: TextStyle = {
-    borderColor: theme.colors.inputBorder,
-  };
+  const textBoxBorderStyle = getThemedStyles(theme);
 
   const CustomizedPersona = React.useMemo(() => {
     const tokens = {
@@ -49,7 +52,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Background color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Background color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
@@ -59,7 +62,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
 
         <TextInput
           accessibilityLabel="Initials text color"
-          style={[commonStyles.textBox, textBoxBorderStyle]}
+          style={textBoxBorderStyle.textbox}
           placeholder="Initials text color"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {

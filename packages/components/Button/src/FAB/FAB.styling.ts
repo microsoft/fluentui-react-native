@@ -1,4 +1,5 @@
-import { ButtonCoreTokens, ButtonSlotProps, ButtonCoreProps } from '../Button.types';
+import { ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
+import { FABSlotProps } from './FAB.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { buttonCoreStates } from '../Button.styling';
@@ -6,7 +7,7 @@ import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
-export const stylingSettings: UseStylingOptions<ButtonCoreProps, ButtonSlotProps, ButtonCoreTokens> = {
+export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, ButtonCoreTokens> = {
   tokens: [defaultFABTokens, defaultFABColorTokens],
   states: [...buttonCoreStates],
   slotProps: {

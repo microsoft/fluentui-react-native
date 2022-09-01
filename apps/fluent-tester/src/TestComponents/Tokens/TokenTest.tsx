@@ -19,11 +19,6 @@ const getThemedStyles = themedStyleSheet((theme: Theme) => {
       borderWidth: 2,
       borderColor: theme.colors.bodyText,
     },
-    stackStyle: {
-      borderWidth: 2,
-      padding: 12,
-      margin: 8,
-    },
   };
 });
 
@@ -36,6 +31,11 @@ const styles = StyleSheet.create({
   pickerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+  },
+  stackStyle: {
+    borderWidth: 2,
+    padding: 12,
+    margin: 8,
   },
 });
 
@@ -57,7 +57,6 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
 
 const AliasTokensSwatchList: React.FunctionComponent = () => {
   const theme = useTheme();
-  const themedStyles = getThemedStyles(theme);
   const isOfficeTheme =
     theme.name === 'White' ||
     theme.name === 'Colorful' ||
@@ -80,14 +79,14 @@ const AliasTokensSwatchList: React.FunctionComponent = () => {
   }, [aliasColorTokens, aggregator]);
 
   const aliasTokensAsArray = React.useMemo(flattenArray, [flattenArray]);
-  const renderSwatch = React.useCallback(({ item }) => {
+  const renderSwatch = React.useCallback((item) => {
     const { color, key } = item;
     return <ColorToken key={key} color={color} name={key} />;
   }, []);
   return (
-    <View style={[commonTestStyles.view]}>
+    <View style={commonTestStyles.view}>
       <Text>Alias Color Tokens from Token Pipeline</Text>
-      <View style={themedStyles.stackStyle}>{aliasTokensAsArray.map((item) => renderSwatch({ item }))}</View>
+      <View style={styles.stackStyle}>{aliasTokensAsArray.map((item) => renderSwatch(item))}</View>
     </View>
   );
 };
