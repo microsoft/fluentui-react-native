@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 01 Sep 2022 17:00:15 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "567d1903113eede5db9b04f1e93b9599fdfdaabd",
+            "comment": "Added unit tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 29 Aug 2022 23:21:44 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.13.3",
       "version": "0.13.3",
