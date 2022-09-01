@@ -100,7 +100,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    require('ts-node').register({ files: true });
+    //require('ts-node').register({ files: true });
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -117,15 +117,17 @@ exports.config = {
     // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
     // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
     let fluentTesterWindow = null;
-    browser.waitUntil(() => {
-      fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
-      return fluentTesterWindow != null;
-    },
-    {
-      timeout: 10000,
-      timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
-      interval: 500
-    });
+    browser.waitUntil(
+      () => {
+        fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
+        return fluentTesterWindow != null;
+      },
+      {
+        timeout: 10000,
+        timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
+        interval: 500,
+      },
+    );
 
     const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
     maxButton.click();
@@ -217,4 +219,11 @@ exports.config = {
    */
   //onReload: function(oldSessionId, newSessionId) {
   //}
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 };

@@ -7,7 +7,6 @@ const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
@@ -54,7 +53,7 @@ exports.config = {
 
   framework: 'jasmine',
   jasmineNodeOpts: {
-    defaultTimeoutInterval: jasmineDefaultTimeout,
+    defaultTimeoutInterval: 25000,
   },
 
   // The number of times to retry the entire spec file when it fails as a whole.
@@ -110,9 +109,6 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    // not needed for Cucumber
-    require('ts-node').register({ files: true });
-
     browser.maximizeWindow();
   },
   /**
@@ -229,4 +225,11 @@ exports.config = {
    */
   //onReload: function(oldSessionId, newSessionId) {
   //}
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 };

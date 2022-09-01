@@ -122,7 +122,7 @@ exports.config = {
    */
   before: function () {
     // not needed for Cucumber
-    require('ts-node').register({ files: true });
+    //require('ts-node').register({ files: true });
 
     browser.maximizeWindow();
   },
@@ -225,4 +225,11 @@ exports.config = {
    */
   //onReload: function(oldSessionId, newSessionId) {
   //}
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 };
