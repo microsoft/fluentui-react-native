@@ -22,7 +22,7 @@ import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
 import { By, BasePage } from './BasePage.macos';
 
 class NavigateAppPage extends BasePage {
-   async clickAndGoToBadgePage() {
+  async clickAndGoToBadgePage() {
     await this.badgePage.click();
   }
 

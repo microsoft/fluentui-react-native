@@ -45,7 +45,9 @@ describe('Avatar Accessibility Testing', () => {
   });
 
   it('Validate accessibilityLabel from `name` prop', async () => {
-    await expect(await AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(AVATAR_ACCESSIBILITY_LABEL_BY_NAME);
+    await expect(await AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(
+      AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
+    );
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
