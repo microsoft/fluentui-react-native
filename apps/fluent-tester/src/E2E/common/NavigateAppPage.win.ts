@@ -35,116 +35,116 @@ class NavigateAppPage extends BasePage {
     await this.activityIndicatorPage.click();
   }
 
-  clickAndGoToAvatarPage() {
-    this.avatarPage.click();
+  async clickAndGoToAvatarPage() {
+    await this.avatarPage.click();
   }
 
-  clickAndGoToBadgePage() {
-    this.badgePage.click();
+  async clickAndGoToBadgePage() {
+    await this.badgePage.click();
   }
 
-  clickAndGoToButtonPage() {
-    this.buttonPage.click();
+  async clickAndGoToButtonPage() {
+    await this.buttonPage.click();
   }
 
-  clickAndGoToCalloutPage() {
-    this.calloutPage.click();
+  async clickAndGoToCalloutPage() {
+    await this.calloutPage.click();
   }
 
-  clickAndGoToCheckboxPage() {
-    this.checkboxPage.click();
+  async clickAndGoToCheckboxPage() {
+    await this.checkboxPage.click();
   }
 
-  clickAndGoToCheckboxExperimentalPage() {
-    this.checkboxExperimentalPage.click();
+  async clickAndGoToCheckboxExperimentalPage() {
+    await this.checkboxExperimentalPage.click();
   }
 
-  clickAndGoToContextualMenuPage() {
-    this.contextualMenuPage.click();
+  async clickAndGoToContextualMenuPage() {
+    await this.contextualMenuPage.click();
   }
 
-  clickAndGoToFocusTrapZonePage() {
-    this.focusTrapZonePage.click();
+  async clickAndGoToFocusTrapZonePage() {
+    await this.focusTrapZonePage.click();
   }
 
-  clickAndGoToFocusZonePage() {
-    this.focusZonePage.click();
+  async clickAndGoToFocusZonePage() {
+    await this.focusZonePage.click();
   }
 
-  clickAndGoToIconPage() {
-    this.iconPage.click();
+  async clickAndGoToIconPage() {
+    await this.iconPage.click();
   }
 
-  clickAndGoToLinkPage() {
-    this.linkPage.click();
+  async clickAndGoToLinkPage() {
+    await this.linkPage.click();
   }
 
-  clickAndGoToMenuPage() {
-    this.menuPage.click();
+  async clickAndGoToMenuPage() {
+    await this.menuPage.click();
   }
 
-  clickAndGoToMenuButtonPage() {
-    this.menuButtonPage.click();
+  async clickAndGoToMenuButtonPage() {
+    await this.menuButtonPage.click();
   }
 
-  clickAndGoToExperimentalMenuButtonPage() {
-    this.menuButtonExperimentalPage.click();
+  async clickAndGoToExperimentalMenuButtonPage() {
+    await this.menuButtonExperimentalPage.click();
   }
 
-  clickAndGoToPersonaPage() {
-    this.personaPage.click();
+  async clickAndGoToPersonaPage() {
+    await this.personaPage.click();
   }
 
-  clickAndGoToPersonaCoinPage() {
-    this.personaCoinPage.click();
+  async clickAndGoToPersonaCoinPage() {
+    await this.personaCoinPage.click();
   }
 
-  clickAndGoToPressablePage() {
-    this.pressablePage.click();
+  async clickAndGoToPressablePage() {
+    await this.pressablePage.click();
   }
 
-  clickAndGoToRadioGroupPage() {
-    this.radioGroupPage.click();
+  async clickAndGoToRadioGroupPage() {
+    await this.radioGroupPage.click();
   }
 
-  clickAndGoToSeparatorPage() {
-    this.separatorPage.click();
+  async clickAndGoToSeparatorPage() {
+    await this.separatorPage.click();
   }
 
-  clickAndGoToShimmerPage() {
-    this.shimmerPage.click();
+  async clickAndGoToShimmerPage() {
+    await this.shimmerPage.click();
   }
 
-  clickAndGoToSvgPage() {
-    this.svgPage.click();
+  async clickAndGoToSvgPage() {
+    await this.svgPage.click();
   }
 
-  clickAndGoToSwitchPage() {
-    this.switchPage.click();
+  async clickAndGoToSwitchPage() {
+    await this.switchPage.click();
   }
 
-  clickAndGoToTextPage() {
-    this.textPage.click();
+  async clickAndGoToTextPage() {
+    await this.textPage.click();
   }
 
-  clickAndGoToExperimentalTextPage() {
-    this.textExperimentalPage.click();
+  async clickAndGoToExperimentalTextPage() {
+    await this.textExperimentalPage.click();
   }
 
-  clickAndGoToTabsPage() {
-    this.tabsPage.click();
+  async clickAndGoToTabsPage() {
+    await this.tabsPage.click();
   }
 
-  clickAndGoToThemePage() {
-    this.themePage.click();
+  async clickAndGoToThemePage() {
+    await this.themePage.click();
   }
 
-  clickAndGoToTokensPage() {
-    this.tokensPage.click();
+  async clickAndGoToTokensPage() {
+    await this.tokensPage.click();
   }
 
-  clickAndGoToExperimentalTabsPage() {
-    this.experimentalTabsPage.click();
+  async clickAndGoToExperimentalTabsPage() {
+    await this.experimentalTabsPage.click();
   }
 
   /*
