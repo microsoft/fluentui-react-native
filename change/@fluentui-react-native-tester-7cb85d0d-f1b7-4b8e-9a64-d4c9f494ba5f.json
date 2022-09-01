@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Upgrade WDIO to v7",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
