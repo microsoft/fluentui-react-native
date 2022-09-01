@@ -7,7 +7,7 @@
       "*": ["*", "*.win32"],
       "src/*": ["./src/*"]
     },
-    "types": ["webdriverio/sync", "@wdio/jasmine-framework", "node", "@types/jasmine"]
+    "types": ["webdriverio/async", "@wdio/jasmine-framework", "node", "@types/jasmine"]
   },
   "include": ["src", "../fluent-tester/src"]
 }
