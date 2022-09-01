@@ -1,5 +1,6 @@
 import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { defaultRadioTokens } from './RadioTokens';
 
 export const radioStates: (keyof RadioTokens)[] = ['focused', 'hovered', 'pressed', 'selected', 'disabled'];
@@ -33,10 +34,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           borderStyle: tokens.borderStyle,
           borderRadius: tokens.radioSize / 2,
           borderColor: tokens.radioBorder,
-          marginTop: 4,
-          marginRight: 6,
-          marginBottom: 6,
-          marginLeft: 6,
+          marginTop: globalTokens.spacing.xs,
+          marginRight: globalTokens.spacing.sNudge,
+          marginBottom: globalTokens.spacing.sNudge,
+          marginLeft: globalTokens.spacing.sNudge,
         },
       }),
       ['radioBorderWidth', 'borderStyle', 'radioSize', 'radioBorder'],
