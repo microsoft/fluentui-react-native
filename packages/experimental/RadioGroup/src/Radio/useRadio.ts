@@ -40,7 +40,7 @@ export const useRadio = (props: RadioProps): RadioState => {
     if (value == selectedInfo.value) {
       selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
     }
-  }, [selectedInfo, value, componentRef]);
+  }, []);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
