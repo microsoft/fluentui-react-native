@@ -121,9 +121,6 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: function () {
-    // not needed for Cucumber
-    //require('ts-node').register({ files: true });
-
     browser.maximizeWindow();
   },
   /**
