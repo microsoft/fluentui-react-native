@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Wed, 31 Aug 2022 12:11:39 GMT",
+      "tag": "@fluentui-react-native/button_v0.24.19",
+      "version": "0.24.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "6886abed6eb8492fdf7c873762e4fe0b71f87917",
+            "comment": "Removed unused styles"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 29 Aug 2022 23:21:44 GMT",
       "tag": "@fluentui-react-native/button_v0.24.18",
       "version": "0.24.18",
