@@ -24,11 +24,6 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioFill?: ColorValue;
 
   /**
-   * Label text color
-   */
-  // labelColor?: ColorValue;
-
-  /**
    * Visibility of the radio inner circle from 0 to 1
    */
   radioVisibility?: number;
