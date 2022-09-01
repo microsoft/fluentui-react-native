@@ -26,7 +26,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           height: tokens.radioSize,
           top: 0,
           left: 0,
-          borderWidth: tokens.radioBorderWidth, // need to change this to 1
+          borderWidth: tokens.radioBorderWidth,
           borderStyle: tokens.borderStyle,
           borderRadius: tokens.radioSize / 2,
           borderColor: tokens.radioBorder,
