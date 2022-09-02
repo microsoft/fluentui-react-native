@@ -1,44 +1,44 @@
-// import {
-//   EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT,
-//   EXPERIMENTAL_TABS_TESTPAGE,
-//   EXPERIMENTAL_TABS_TEST_COMPONENT,
-//   HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
-// } from '../../../TestComponents/TabsExperimental/consts';
-// import { BasePage, By } from '../../common/BasePage.macos';
+import {
+  EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT,
+  EXPERIMENTAL_TABS_TESTPAGE,
+  EXPERIMENTAL_TABS_TEST_COMPONENT,
+  HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
+} from '../../../TestComponents/TabsExperimental/consts';
+import { BasePage, By } from '../../common/BasePage.macos';
 
-// class ExperimentalTabsPageObject extends BasePage {
-//   /******************************************************************/
-//   /**************** UI Element Interaction Methods ******************/
-//   /******************************************************************/
-//   getTabItemAccesibilityRole(): string {
-//     return this._tabItem.getAttribute('ControlType');
-//   }
+class ExperimentalTabsPageObject extends BasePage {
+  /******************************************************************/
+  /**************** UI Element Interaction Methods ******************/
+  /******************************************************************/
+  async getTabItemAccesibilityRole(): Promise<string> {
+    return await this._tabItem.getAttribute('ControlType');
+  }
 
-//   /*****************************************/
-//   /**************** Getters ****************/
-//   /*****************************************/
-//   get _testPage() {
-//     return By(EXPERIMENTAL_TABS_TESTPAGE);
-//   }
+  /*****************************************/
+  /**************** Getters ****************/
+  /*****************************************/
+  get _testPage() {
+    return By(EXPERIMENTAL_TABS_TESTPAGE);
+  }
 
-//   get _pageName() {
-//     return EXPERIMENTAL_TABS_TESTPAGE;
-//   }
+  get _pageName() {
+    return EXPERIMENTAL_TABS_TESTPAGE;
+  }
 
-//   get _primaryComponent() {
-//     return By(EXPERIMENTAL_TABS_TEST_COMPONENT);
-//   }
+  get _primaryComponent() {
+    return By(EXPERIMENTAL_TABS_TEST_COMPONENT);
+  }
 
-//   get _pageButton() {
-//     return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
-//   }
+  get _pageButton() {
+    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+  }
 
-//   /***********/
-//   /* TabItem *
-//   /***********/
-//   get _tabItem() {
-//     return By(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT);
-//   }
-// }
+  /***********/
+  /* TabItem *
+  /***********/
+  get _tabItem() {
+    return By(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT);
+  }
+}
 
-// export default new ExperimentalTabsPageObject();
+export default new ExperimentalTabsPageObject();

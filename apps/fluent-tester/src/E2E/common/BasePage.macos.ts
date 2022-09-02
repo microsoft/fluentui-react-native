@@ -53,10 +53,14 @@ export class BasePage {
     return await this._pageButton.isDisplayed();
   }
 
+  async clickComponent(): Promise<void> {
+    await this._primaryComponent.click();
+  }
+
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async scrollToComponentButton(): Promise<void> {
-    /* TODO: Implement (not needed yet) */
+    /* Not Needed Yet */
   }
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
@@ -64,7 +68,7 @@ export class BasePage {
     await browser.waitUntil(async () => await this.isPageLoaded(), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-      interval: 1000,
+      interval: 1500,
     });
   }
 
@@ -73,7 +77,7 @@ export class BasePage {
     await browser.waitUntil(async () => await this.isButtonInView(), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      interval: 1000,
+      interval: 1500,
     });
   }
 
@@ -83,18 +87,18 @@ export class BasePage {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
-      interval: 1000,
+      interval: 1500,
     });
   }
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
-    /* TODO: Implement (not needed yet) */
+    /* Not Needed Yet */
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
-  async waitForCondition(condition?: () => boolean, errorMsg?: string, timeout?: number): Promise<void> {
+  async waitForCondition(condition?: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
