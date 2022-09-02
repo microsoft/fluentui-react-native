@@ -123,8 +123,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function () {
-    browser.maximizeWindow();
+  before: async function () {
+    await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.

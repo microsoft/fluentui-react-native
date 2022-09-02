@@ -107,8 +107,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function () {
-    browser.maximizeWindow();
+  before: async function () {
+    await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -143,7 +143,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test, context, results) {
+  afterTest: async function (test, context, results) {
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
     if (results.passed) {
@@ -158,19 +158,19 @@ exports.config = {
 
     /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
      * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
-    const windowHandles = browser.getWindowHandles();
+    const windowHandles = await browser.getWindowHandles();
     if (windowHandles.length > 1) {
       /* Switch to the Assert window - Take a screenshot and close the assert */
-      browser.switchToWindow(windowHandles[0]);
-      browser.saveScreenshot(filePath);
-      browser.closeWindow();
+      await browser.switchToWindow(windowHandles[0]);
+      await browser.saveScreenshot(filePath);
+      await browser.closeWindow();
 
       /* Switch back to FluentTester and close. The test harness has trouble closing the app when an assert fired */
-      browser.switchToWindow(windowHandles[1]);
-      browser.closeWindow();
+      await browser.switchToWindow(windowHandles[1]);
+      await browser.closeWindow();
     } else {
       // save screenshot
-      browser.saveScreenshot(filePath);
+      await browser.saveScreenshot(filePath);
     }
   },
 
