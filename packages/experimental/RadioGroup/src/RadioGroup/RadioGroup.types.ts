@@ -53,6 +53,11 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   value?: string;
 
   /**
+   * Sets the RadioGorup to disabled if true
+   */
+  disabled: boolean;
+
+  /**
    * Callback for receiving a notification when the choice has been changed
    */
   onChange?: (key: string) => void;
