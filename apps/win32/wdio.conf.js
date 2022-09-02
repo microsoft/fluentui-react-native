@@ -13,7 +13,6 @@ exports.config = {
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
-  maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
@@ -27,20 +26,18 @@ exports.config = {
   ],
 
   /*
-   ** ===================
-   ** Test Configurations
-   ** ===================
-   ** Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
+   ** Test Configurations - Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
    */
 
-  logLevel: 'debug', // Level of logging verbosity: trace | debug | info | warn | error | silent
+  logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
   outputDir: './reports', // Directory to store all test runner log files
-
-  // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
+  specFileRetries: 3, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [
@@ -57,11 +54,15 @@ exports.config = {
     defaultTimeoutInterval: 60000,
   },
 
-  // The number of times to retry the entire spec file when it fails as a whole.
-  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 3,
-
   reporters: ['spec'],
+
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 
   /*
    ** ===================
@@ -78,9 +79,6 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   // onPrepare: function (config, capabilities) {
-  //   require('ts-node/register');
-  //   // require('ts-node').register({ files: true });
-  //   console.log('<<< NATIVE APP TESTS STARTED >>>');
   // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -226,11 +224,4 @@ exports.config = {
    */
   //onReload: function(oldSessionId, newSessionId) {
   //}
-  autoCompileOpts: {
-    autoCompile: true,
-
-    tsNodeOpts: {
-      files: true,
-    },
-  },
 };
