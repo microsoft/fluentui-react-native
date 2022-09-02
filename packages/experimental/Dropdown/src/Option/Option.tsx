@@ -4,10 +4,12 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import React from 'react';
 import { View } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
+import { stylingSettings } from './Option.styling';
 import { optionName, OptionProps, OptionType } from './Option.types';
 
 export const Option = compose<OptionType>({
   displayName: optionName,
+  ...stylingSettings,
   slots: {
     root: View,
     checkIcon: Svg,
@@ -30,8 +32,7 @@ export const Option = compose<OptionType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {/* TODO: Move viewBox to styling */}
-          <Slots.checkIcon viewBox="0 0 12 12">{checkPath}</Slots.checkIcon>
+          <Slots.checkIcon>{checkPath}</Slots.checkIcon>
           {label}
         </Slots.root>
       );
