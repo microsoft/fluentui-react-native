@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
+const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
@@ -28,7 +28,6 @@ exports.config = {
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
-  outputDir: './reports', // Directory to store all test runner log files
   bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
