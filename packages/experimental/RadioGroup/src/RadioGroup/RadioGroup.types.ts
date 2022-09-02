@@ -32,7 +32,12 @@ export interface RadioGroupState extends RadioGroupProps {
   buttonKeys?: string[];
 }
 
-export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {}
+export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
+  /**
+   * States that can be applied to a RadioGroup
+   */
+  disabled?: RadioGroupTokens;
+}
 
 export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
   /**
@@ -55,7 +60,7 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   /**
    * Sets the RadioGorup to disabled if true
    */
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
    * Callback for receiving a notification when the choice has been changed
