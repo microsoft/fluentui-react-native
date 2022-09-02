@@ -29,6 +29,7 @@ exports.config = {
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
+  outputDir: './reports', // Directory to store all test runner log files
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   bail: 0,
@@ -208,9 +209,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
-    //console.log('<<< TESTING FINISHED >>>');
-  },
+  // onComplete: function (exitCode, config, capabilities, results) {
+  //   console.log('<<< TESTING FINISHED >>>');
+  // },
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session

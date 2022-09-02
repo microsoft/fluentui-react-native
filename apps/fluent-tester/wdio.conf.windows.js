@@ -46,6 +46,7 @@ exports.config = {
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
+  outputDir: './reports', // Directory to store all test runner log files
 
   // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   bail: 1,
