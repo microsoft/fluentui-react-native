@@ -3691,14 +3691,14 @@
     strip-ansi "^6.0.0"
 
 "@wdio/appium-service@^7.13.0":
-  version "7.23.0"
-  resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-7.23.0.tgz#61b996899756f30d0f7b133fb6aebcdd60b35b6d"
-  integrity sha512-aVDGQXQ2J1IVC/FFLvTMDYCageA5qEzsujTVk01NCf+Ej5FlLesK3P9IrGJ1yA6L0JGQTpnACJE1oVFhGWp7CA==
+  version "7.24.0"
+  resolved "https://registry.yarnpkg.com/@wdio/appium-service/-/appium-service-7.24.0.tgz#37a6f988428f0595cef20b2e2eac870c74e165af"
+  integrity sha512-m7Bu8S4kNdt3hKMmX8vb8EUA7wE/2C4pqckYDYt7/LFX52BnPGKYJnHKFjh3tYPidFbAbUv8s7c4En6QzdOd9A==
   dependencies:
     "@types/fs-extra" "^9.0.4"
-    "@wdio/config" "7.23.0"
+    "@wdio/config" "7.24.0"
     "@wdio/logger" "7.19.0"
-    "@wdio/types" "7.23.0"
+    "@wdio/types" "7.24.0"
     fs-extra "^10.0.0"
     param-case "^3.0.0"
 
@@ -3744,6 +3744,17 @@
     "@wdio/logger" "7.19.0"
     "@wdio/types" "7.23.0"
     "@wdio/utils" "7.23.0"
+    deepmerge "^4.0.0"
+    glob "^8.0.3"
+
+"@wdio/config@7.24.0":
+  version "7.24.0"
+  resolved "https://registry.yarnpkg.com/@wdio/config/-/config-7.24.0.tgz#ac29f8c25df8bba29bd811a386a46ff05386b213"
+  integrity sha512-MSIuwbs7JeOh9eMiFP3nVYDyaK3jYv7HY4eJIfvl6TBo4G1mTjbF1Dnct38W0ZR5WIFeSKhl15LiumbNUv0pyA==
+  dependencies:
+    "@wdio/logger" "7.19.0"
+    "@wdio/types" "7.24.0"
+    "@wdio/utils" "7.24.0"
     deepmerge "^4.0.0"
     glob "^8.0.3"
 
@@ -3866,6 +3877,14 @@
     "@types/node" "^18.0.0"
     got "^11.8.1"
 
+"@wdio/types@7.24.0":
+  version "7.24.0"
+  resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.24.0.tgz#ded79460f8a2a4892232e2707fb8d0ce3694bfd5"
+  integrity sha512-wJZ+1lIHFz5aWXSO+k91wX8tfZdpyX4YYoker5xfC4zvM7ypyK81dZyiE5whS+QFL3VTCPP8dXNjwX5f5h+YEw==
+  dependencies:
+    "@types/node" "^18.0.0"
+    got "^11.8.1"
+
 "@wdio/utils@7.23.0":
   version "7.23.0"
   resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-7.23.0.tgz#04056cea87c5f94fb3dc0cc7951beb6161120e9a"
@@ -3873,6 +3892,15 @@
   dependencies:
     "@wdio/logger" "7.19.0"
     "@wdio/types" "7.23.0"
+    p-iteration "^1.1.8"
+
+"@wdio/utils@7.24.0":
+  version "7.24.0"
+  resolved "https://registry.yarnpkg.com/@wdio/utils/-/utils-7.24.0.tgz#f6d4c8fce057a2064f87fe6e4f8fa77286058129"
+  integrity sha512-VWfFT1Ket3pAt19kY5lPRuwJDheKF4hMwG0AiezkqqerDl/m+fcb4a6pj1WHjlawvlYM4MM15iBZFxYfphG9lg==
+  dependencies:
+    "@wdio/logger" "7.19.0"
+    "@wdio/types" "7.24.0"
     p-iteration "^1.1.8"
 
 "@wojtekmaj/enzyme-adapter-react-17@^0.6.5":
@@ -11761,9 +11789,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.77"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.77.tgz#f9b225e00810cb519905ef92d3a21788a4e8da70"
-  integrity sha512-oJhyPXbRJbxizyPjmfW05USpjYPvY6aSLlXxs/+15AQvSEp48GEVCaEs5nu8Mm3hPRKLGOyBWbJt3EZWvCHQdQ==
+  version "0.66.78"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.78.tgz#6c922fcdfa1aa0c392782b0d4d984954c66feb71"
+  integrity sha512-zS5aDxOZjixjHA98AS5rRfNdg+0kSHG0Am/bmXStgBY04MTsZPk+707e8L1Ezc9JOkyHbOCZjn91yQytBYmzDA==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"
