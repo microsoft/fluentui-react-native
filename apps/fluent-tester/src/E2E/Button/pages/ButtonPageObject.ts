@@ -30,8 +30,6 @@ class ButtonPageObject extends BasePage {
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(buttonSelector: ButtonSelector, key: string): Promise<void> {
-    await this.getButtonSelector(buttonSelector).then((selector) => selector.addValue(key));
-
     await (await this.getButtonSelector(buttonSelector)).addValue(key);
   }
 
