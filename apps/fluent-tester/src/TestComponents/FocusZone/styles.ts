@@ -9,11 +9,7 @@ export const focusZoneTestStyles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
-  },
-  focusZoneContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    padding: 4,
+    padding: 10,
   },
   nestedFocusZoneStyle: {
     borderWidth: 1,
@@ -21,8 +17,24 @@ export const focusZoneTestStyles = StyleSheet.create({
     margin: 8,
   },
   focusZoneButton: {
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 100,
+    margin: 10,
+  },
+  dashedBorder: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+  },
+  scrollViewStyle: {
+    height: 100,
+    width: 300,
+  },
+  scrollViewContentStyle: {
+    backgroundColor: 'grey',
+  },
+  scrollViewButton: {
+    marginHorizontal: 20,
+    marginVertical: 100,
   },
 });
 
