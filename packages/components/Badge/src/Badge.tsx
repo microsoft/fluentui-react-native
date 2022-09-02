@@ -13,13 +13,11 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
   return (
     userProps[layer] ||
     layer === userProps['appearance'] ||
-    (!userProps['appearance'] && layer === 'filled') ||
     layer === userProps['size'] ||
     (!userProps['size'] && layer === 'large') ||
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (!userProps['badgeColor'] && layer === 'brand') ||
     (I18nManager.isRTL && layer === 'rtl')
   );
 };
@@ -39,20 +37,24 @@ export const Badge = compose<BadgeType>({
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition = 'before', ...mergedProps } = mergeProps(badge, final);
+      const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge, final);
+      const showContent = size !== 'tiny' && size !== 'extraSmall';
+      const showIcon = size !== 'tiny';
+
       return (
         <Slots.root {...mergedProps}>
-          {icon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-          {Children.map(children, (child, i) =>
-            typeof child === 'string' ? (
-              <Slots.text accessible={false} key={`text-${i}`}>
-                {child}
-              </Slots.text>
-            ) : (
-              child
-            ),
-          )}
-          {icon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+          {showContent &&
+            Children.map(children, (child, i) =>
+              typeof child === 'string' ? (
+                <Slots.text accessible={false} key={`text-${i}`}>
+                  {child}
+                </Slots.text>
+              ) : (
+                child
+              ),
+            )}
+          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
         </Slots.root>
       );
     };

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Mon, 29 Aug 2022 23:21:44 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "f049cb01e7f95ea188fb4f5d988dfb2b9c531868",
+            "comment": "Added unit tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:50 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.14.0",
       "version": "0.14.0",
