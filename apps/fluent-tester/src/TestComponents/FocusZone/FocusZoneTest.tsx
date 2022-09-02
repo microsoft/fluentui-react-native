@@ -5,13 +5,12 @@ import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Checkbox, CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { FOCUSZONE_TESTPAGE } from './consts';
-import { focusZoneTestStyles, GridButton, stackStyleFocusZone, SubheaderText } from './styles';
+import { focusZoneTestStyles, GridButton, SubheaderText } from './styles';
 import { commonTestStyles } from '../Common/styles';
-import { Stack } from '@fluentui-react-native/stack';
-import { collectionItem, MenuPicker } from '../Common/MenuPicker';
+import { CollectionItem, MenuPicker } from '../Common/MenuPicker';
 
 const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
-const directionCollection: collectionItem[] = FocusZoneDirections.map((x) => ({
+const directionCollection: CollectionItem<FocusZoneDirection>[] = FocusZoneDirections.map((x) => ({
   label: x,
   value: x,
 }));
@@ -28,18 +27,23 @@ const Checkboxes = (props: CheckboxProps) => {
 
 const FocusZoneInsideScrollView: React.FunctionComponent = () => {
   return (
-    <FocusZone focusZoneDirection="vertical">
-      <Button>Inside Focus Zone</Button>
-      <ScrollView
-        style={focusZoneTestStyles.scrollViewStyle}
-        contentContainerStyle={focusZoneTestStyles.scrollViewContentStyle}
-        showsVerticalScrollIndicator={true}
-      >
-        <Button style={focusZoneTestStyles.scrollViewButton}>1</Button>
-        <Button style={focusZoneTestStyles.scrollViewButton}>2</Button>
-        <Button style={focusZoneTestStyles.scrollViewButton}>3</Button>
-      </ScrollView>
-    </FocusZone>
+    <FocusZoneListWrapper>
+      <FocusZone focusZoneDirection="bidrectional">
+        <View style={focusZoneTestStyles.dashedBorder}>
+          <Button style={focusZoneTestStyles.listWrapperButton}>Inside Focus Zone</Button>
+          <ScrollView
+            focusable={false}
+            style={focusZoneTestStyles.scrollViewStyle}
+            contentContainerStyle={focusZoneTestStyles.scrollViewContentStyle}
+            showsVerticalScrollIndicator={true}
+          >
+            <Button style={focusZoneTestStyles.scrollViewButton}>1</Button>
+            <Button style={focusZoneTestStyles.scrollViewButton}>2</Button>
+            <Button style={focusZoneTestStyles.scrollViewButton}>3</Button>
+          </ScrollView>
+        </View>
+      </FocusZone>
+    </FocusZoneListWrapper>
   );
 };
 
@@ -61,41 +65,41 @@ const FocusZoneNoProps: React.FunctionComponent = () => {
 
 const NestedFocusZone: React.FunctionComponent = () => {
   return (
-    <Stack style={stackStyleFocusZone}>
-      <Button>Outside Focus Zone</Button>
-      <Text>Parent FocusZone, vertical</Text>
-      <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
-        <FocusZone focusZoneDirection="vertical">
-          <Text>Inner FocusZone 1, horizontal</Text>
-          <FocusZone focusZoneDirection="horizontal">
-            <GridOfButtons gridWidth={3} gridHeight={1} />
+    <FocusZoneListWrapper>
+      <>
+        <Text>Parent FocusZone, vertical</Text>
+        <View style={focusZoneTestStyles.nestedFocusZoneStyle}>
+          <FocusZone focusZoneDirection="vertical">
+            <Text>Inner FocusZone 1, horizontal</Text>
+            <FocusZone focusZoneDirection="horizontal">
+              <GridOfButtons gridWidth={3} gridHeight={1} />
+            </FocusZone>
+            <Text>Inner FocusZone 2, horizontal</Text>
+            <FocusZone focusZoneDirection="horizontal">
+              <GridOfButtons gridWidth={3} gridHeight={1} />
+            </FocusZone>
+            <Button>Inside Focus Zone</Button>
           </FocusZone>
-          <Text>Inner FocusZone 2, horizontal</Text>
-          <FocusZone focusZoneDirection="horizontal">
-            <GridOfButtons gridWidth={3} gridHeight={1} />
-          </FocusZone>
-          <Button>Inside Focus Zone</Button>
-        </FocusZone>
-      </View>
-      <Button>Outside Focus Zone</Button>
-    </Stack>
+        </View>
+      </>
+    </FocusZoneListWrapper>
   );
 };
 
 const FocusZoneListWrapper = (props) => {
-  const buttonProps: ButtonProps = { children: 'Click to Focus', style: { marginVertical: 10 } };
+  const buttonProps: ButtonProps = { children: 'Click to Focus', style: focusZoneTestStyles.listWrapperButton };
   return (
-    <React.Fragment>
+    <>
       <Button {...buttonProps} />
       {React.Children.map(props.children, (child) => {
         return (
-          <React.Fragment>
+          <>
             {child}
             <Button {...buttonProps} />
-          </React.Fragment>
+          </>
         );
       })}
-    </React.Fragment>
+    </>
   );
 };
 
@@ -177,20 +181,18 @@ const FocusZone2D: React.FunctionComponent = () => {
 
   return (
     <View style={commonTestStyles.root}>
-      <Stack style={stackStyleFocusZone}>
-        <View style={commonTestStyles.settings}>
-          <SwitchWithLabel label="2D Navigation" value={is2DNav} onValueChange={set2dNav} />
-          <SwitchWithLabel label="Disabled" value={isDisabled} onValueChange={setDisabled} />
-          <SwitchWithLabel label="Circular Navigation" value={isCircularNav} onValueChange={setIsCircularNav} />
-          <MenuPicker prompt="Direction" selected={direction} onChange={setDirection} collection={directionCollection} />
-        </View>
+      <View style={commonTestStyles.settings}>
+        <SwitchWithLabel label="2D Navigation" value={is2DNav} onValueChange={set2dNav} />
+        <SwitchWithLabel label="Disabled" value={isDisabled} onValueChange={setDisabled} />
+        <SwitchWithLabel label="Circular Navigation" value={isCircularNav} onValueChange={setIsCircularNav} />
+        <MenuPicker prompt="Direction" selected={direction} onChange={setDirection} collection={directionCollection} />
+      </View>
 
-        <FocusZoneListWrapper>
-          <FocusZone disabled={isDisabled} use2DNavigation={is2DNav} focusZoneDirection={direction} isCircularNavigation={isCircularNav}>
-            <GridOfButtons gridWidth={3} gridHeight={3} />
-          </FocusZone>
-        </FocusZoneListWrapper>
-      </Stack>
+      <FocusZoneListWrapper>
+        <FocusZone disabled={isDisabled} use2DNavigation={is2DNav} focusZoneDirection={direction} isCircularNavigation={isCircularNav}>
+          <GridOfButtons gridWidth={3} gridHeight={3} />
+        </FocusZone>
+      </FocusZoneListWrapper>
     </View>
   );
 };

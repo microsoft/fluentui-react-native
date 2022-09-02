@@ -21,6 +21,9 @@ export const focusZoneTestStyles = StyleSheet.create({
     width: 100,
     margin: 10,
   },
+  listWrapperButton: {
+    marginVertical: 10,
+  },
   dashedBorder: {
     borderWidth: 1,
     borderStyle: 'dashed',
@@ -34,7 +37,7 @@ export const focusZoneTestStyles = StyleSheet.create({
   },
   scrollViewButton: {
     marginHorizontal: 20,
-    marginVertical: 100,
+    marginBottom: 100,
   },
 });
 
@@ -55,8 +58,3 @@ export const SubheaderText = Text.customize({
   tokens: { variant: 'subheaderSemibold' },
   root: { style: { textDecorationLine: 'underline' } },
 });
-
-export const stackStyleFocusZone: IStackProps['style'] = {
-  flexDirection: 'column',
-  marginBottom: 40,
-};

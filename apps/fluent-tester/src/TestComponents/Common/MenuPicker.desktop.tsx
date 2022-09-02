@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
-import { MenuPickerProps, collectionItem } from './MenuPicker';
+import { MenuPickerProps, CollectionItem } from './MenuPicker';
 import { ButtonV1 as Button, Text } from '@fluentui/react-native';
 import { SvgXml } from 'react-native-svg';
 
@@ -34,7 +34,7 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
-            {collection.map((collectionItem: collectionItem, index: number) => (
+            {collection.map((collectionItem: CollectionItem, index: number) => (
               <MenuItem onClick={() => onChange(collectionItem.value, index)} key={collectionItem.value ?? index}>
                 {collectionItem.label}
               </MenuItem>
