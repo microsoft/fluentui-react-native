@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Tue, 06 Sep 2022 17:08:47 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.29",
+      "version": "0.1.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "f1dd89e8b4324bafb3ac2c9f95a32d1c808d46ef",
+            "comment": "Aligned Badge accessibility with Web implementation"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 30 Aug 2022 18:36:15 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.28",
       "version": "0.1.28",

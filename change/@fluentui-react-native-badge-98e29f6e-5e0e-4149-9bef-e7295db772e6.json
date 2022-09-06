@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Aligned Badge accessibility with Web implementation",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
