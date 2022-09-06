@@ -45,15 +45,7 @@ export const Badge = compose<BadgeType>({
         <Slots.root {...mergedProps}>
           {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
           {showContent &&
-            Children.map(children, (child, i) =>
-              typeof child === 'string' ? (
-                <Slots.text accessible={false} key={`text-${i}`}>
-                  {child}
-                </Slots.text>
-              ) : (
-                child
-              ),
-            )}
+            Children.map(children, (child, i) => (typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child))}
           {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
         </Slots.root>
       );
