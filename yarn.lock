@@ -3040,11 +3040,6 @@
   resolved "https://registry.yarnpkg.com/@types/fancy-log/-/fancy-log-2.0.0.tgz#dbaeb0955bbe14b0bf0cbeb6db0f15f22c412b68"
   integrity sha512-g39Vp8ZJ3D0gXhhkhDidVvdy4QajkF7/PV6HGn23FMaMqE/tLC1JNHUeQ7SshKLsBjucakZsXBLkWULbGLdL5g==
 
-"@types/fibers@^3.1.0":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@types/fibers/-/fibers-3.1.1.tgz#b714d357eebf6aec0bc5d70512e573b89bc84f20"
-  integrity sha512-yHoUi46uika0snoTpNcVqUSvgbRndaIps4TUCotrXjtc0DHDoPQckmyXEZ2bX3e4mpJmyEW3hRhCwQa/ISCPaA==
-
 "@types/find-root@1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@types/find-root/-/find-root-1.1.2.tgz#32b05d0d9028866bbe29bb9eaaf00170017a9110"
@@ -3327,13 +3322,6 @@
   version "15.7.4"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
-
-"@types/puppeteer@^5.4.0":
-  version "5.4.5"
-  resolved "https://registry.yarnpkg.com/@types/puppeteer/-/puppeteer-5.4.5.tgz#154e3850a77bfd3967f036680de8ddc88eb3a12b"
-  integrity sha512-lxCjpDEY+DZ66+W3x5Af4oHnEmUXt0HuaRzkBGE2UZiZEp/V1d3StpLPlmNVu/ea091bdNmVPl44lu8Wy/0ZCA==
-  dependencies:
-    "@types/node" "*"
 
 "@types/qs@*":
   version "6.9.7"
@@ -3837,18 +3825,6 @@
     chalk "^4.0.0"
     easy-table "^1.1.1"
     pretty-ms "^7.0.0"
-
-"@wdio/sync@^7.13.0":
-  version "7.23.0"
-  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-7.23.0.tgz#dbd7bc20173f15ffa5112f20d3dcdcdc3eb5974a"
-  integrity sha512-n1Hw32LIy4tzPWo16xxPqdT9FL7S3KCHK7SLhUo4EyeqaCahKdTf2UFpoz6I4m6t+F+L/3aNL7FuCLSzODgjtQ==
-  dependencies:
-    "@types/fibers" "^3.1.0"
-    "@types/puppeteer" "^5.4.0"
-    "@wdio/logger" "7.19.0"
-    "@wdio/types" "7.23.0"
-    fibers "5.0.1"
-    webdriverio "7.23.0"
 
 "@wdio/types@7.20.7":
   version "7.20.7"
@@ -6078,11 +6054,6 @@ destroy@1.2.0:
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.2.0.tgz#4803735509ad8be552934c67df614f94e66fa015"
   integrity sha512-2sJGJTaXIIaR1w4iJSNoN0hnMY7Gpc/n8D4qSCJw8QqFWXf7cuAgnEHxBpweaVcPevC2l3KpjYCx3NypQQgaJg==
 
-detect-libc@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
-  integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
-
 detect-newline@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/detect-newline/-/detect-newline-3.1.0.tgz#576f5dfc63ae1a192ff192d8ad3af6308991b651"
@@ -7090,13 +7061,6 @@ fecha@^4.2.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/fecha/-/fecha-4.2.1.tgz#0a83ad8f86ef62a091e22bb5a039cd03d23eecce"
   integrity sha512-MMMQ0ludy/nBs1/o0zVOiKTpG7qMbonKUzjJgQFEuvq6INZ1OraKPRAWkBq5vlKLOUMpmNYG1JoN3oDPUQ9m3Q==
-
-fibers@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/fibers/-/fibers-5.0.1.tgz#bb9b02aa022685185d21aed227363e456d87660d"
-  integrity sha512-VMC7Frt87Oo0AOJ6EcPFbi+tZmkQ4tD85aatwyWL6I9cYMJmm2e+pXUJsfGZ36U7MffXtjou2XIiWJMtHriErw==
-  dependencies:
-    detect-libc "^1.0.3"
 
 figures@^3.0.0:
   version "3.2.0"
@@ -11761,9 +11725,9 @@ react-native-codegen@^0.0.7:
     nullthrows "^1.1.1"
 
 react-native-macos@^0.66.0:
-  version "0.66.74"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.74.tgz#bc831969d046c16d05249b9ec198f7f5cdfb6b8e"
-  integrity sha512-1efidtqZdwZbivx4MOgLrk/7XN+Wk+pl0+TmFP7b8b/EwZP5nZ8tGJK1/3ebv7PZu448/snEGQ1v0vkyc4qNhA==
+  version "0.66.78"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.66.78.tgz#6c922fcdfa1aa0c392782b0d4d984954c66feb71"
+  integrity sha512-zS5aDxOZjixjHA98AS5rRfNdg+0kSHG0Am/bmXStgBY04MTsZPk+707e8L1Ezc9JOkyHbOCZjn91yQytBYmzDA==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^6.0.0"

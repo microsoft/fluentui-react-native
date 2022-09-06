@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Wed, 31 Aug 2022 00:27:59 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.3
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.3
+
+## 0.1.2
+
+Fri, 02 Sep 2022 05:01:01 GMT
+
+### Patches
+
+- Skeletal Option component (ruaraki@microsoft.com)
 
 ## 0.1.1
 

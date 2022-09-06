@@ -1,6 +1,6 @@
 {
-  "type": "patch",
-  "comment": "Upgrade WDIO to v7",
+  "type": "minor",
+  "comment": "Updating from Sync E2E testing framework to Async",
   "packageName": "@fluentui-react-native/tester",
   "email": "safreibe@microsoft.com",
   "dependentChangeType": "patch"

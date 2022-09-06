@@ -4,21 +4,21 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Badge Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Badge test page', () => {
+  it('Click and navigate to Badge test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    BasicBadgePageObject.scrollToComponentButton();
-    BasicBadgePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await BasicBadgePageObject.scrollToComponentButton();
+    await BasicBadgePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToBadgePage();
-    BasicBadgePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToBadgePage();
+    await BasicBadgePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
-    expect(BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
+    await expect(await BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
   });
 });
