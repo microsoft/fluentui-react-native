@@ -11,12 +11,17 @@ export interface OptionTokens extends FontTokens, IBorderTokens, IColorTokens, L
   /**
    * Color of the checkmark icon on the Option indicating Option is selected
    */
-  checkIconColor?: ColorValue;
+  checkmarkColor?: ColorValue;
 
   /**
    * Height and width of the checkmark icon on the Option indicating Option is selected
    */
-  checkIconSize?: number;
+  checkmarkSize?: number;
+
+  /**
+   * Spacing, in pixels, between the label and icons
+   */
+  spacingContentIcon?: number;
 }
 
 export type OptionProps = IWithPressableOptions<IViewProps>;
