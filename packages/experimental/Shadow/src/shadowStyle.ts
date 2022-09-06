@@ -4,13 +4,15 @@ import { ColorValue, Platform } from 'react-native';
 
 // For iOS/macOS, the blur property from the token is not the same as the shadow radius value,
 // it needs to be divided by 2 to achieve the same effect.
-const shadowBlurAdjustment = Platform.OS === 'macos' || Platform.OS === 'ios' ? 0.5 : 1;
+const appleShadowBlurAdjustment = 0.5;
+const defaultShadowBlurAdjustment = 1;
 
 export const getShadowTokenStyleSet = memoize(getShadowTokenStyleSetWorker);
 
 function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
   const keyShadow = shadowToken.key;
   const ambientShadow = shadowToken.ambient;
+  const shadowBlurAdjustment = Platform.OS === 'macos' || Platform.OS === 'ios' ? appleShadowBlurAdjustment : defaultShadowBlurAdjustment;
 
   return {
     key: {
