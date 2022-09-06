@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Sep 2022 21:51:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.0
+
+Tue, 06 Sep 2022 21:51:07 GMT
+
+### Minor changes
+
+- Add test page for Dropdown component (ruaraki@microsoft.com)
+- Initial Option implementation (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/text to v0.14.2
 
 ## 0.1.3
 
