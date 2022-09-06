@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Updating from Sync E2E testing framework to Async",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
