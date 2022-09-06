@@ -348,7 +348,6 @@ exports[`CounterBadge component tests Empty Badge 1`] = `null`;
 
 exports[`PresenceBadge component tests PresenceBadge props 1`] = `
 <View
-  accessibilityLabel="available"
   accessible={true}
   iconPosition="before"
   style={
