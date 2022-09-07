@@ -118,7 +118,11 @@ export const getInitials = (name: string): string => {
   );
   const words = removeRedundantCharacters(name);
   const wordsLength = words.length;
-  if (!wordsLength) return '';
+
+  if (!wordsLength) {
+    return '';
+  }
+
   const lastWordIdx = wordsLength - 1;
   const firstLetter = words[0].charAt(0).toUpperCase();
   const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
@@ -170,10 +174,17 @@ export const removeTitlesFromName = (words: string[]): string[] => {
  * @returns name without multi-word titles
  */
 const removeMultiWordTitles = (name: string, idx: number = 0): string => {
-  if (!isMultiWordName || idx >= multiWordTitles.length) return name;
+  if (idx >= multiWordTitles.length) {
+    return name;
+  }
+
   const title = multiWordTitles[idx];
-  const _name = name.indexOf(title) !== -1 ? name.replace(title, '') : name;
-  return removeMultiWordTitles(_name, idx + 1);
+
+  if (name.indexOf(title) !== -1) {
+    return name.replace(title, '');
+  }
+
+  return removeMultiWordTitles(name, idx + 1);
 };
 
 /**
