@@ -66,8 +66,7 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async scrollToComponentButton(platform: Platform): Promise<void> {
-    switch(platform)
-    {
+    switch (platform) {
       case Platform.Win32:
         while (!(await this.isButtonInView())) {
           const scrollViewElement = await By('SCROLLVIEW_TEST_ID');
@@ -77,7 +76,7 @@ export class BasePage {
 
       case Platform.iOS:
         while (!(await this.isButtonInView())) {
-          await driver.execute("mobile: scroll", {direction: 'down'});
+          await driver.execute('mobile: scroll', { direction: 'down' });
         }
         break;
 
