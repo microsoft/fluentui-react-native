@@ -79,7 +79,7 @@ const multiWordTitlesData = [
   ['Rev Canon', ''],
   ['Rev Dr', ''],
   ['Sir & Lady', ''],
-  ['The Rt Hon Lord Victor', 'V']
+  ['The Rt Hon Lord Victor', 'V'],
 ];
 
 const edgeCaseData = [
