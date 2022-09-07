@@ -23,7 +23,15 @@ export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
   const description =
     'RadioGroup lets users select a single option from two or more choices. Each option is represented by one Radio; a user can select only one Radio in a RadioGroup.';
 
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/RadioGroup/SPEC.md';
+
   return (
-    <Test name="Experimental RadioGroup Test" description={description} sections={radioGroupExperimentalSections} status={status}></Test>
+    <Test
+      name="Experimental RadioGroup Test"
+      description={description}
+      spec={spec}
+      sections={radioGroupExperimentalSections}
+      status={status}
+    />
   );
 };

@@ -4,21 +4,21 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Shimmer Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Shimmer test page', () => {
+  it('Click and navigate to Shimmer test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    ShimmerPageObject.scrollToComponentButton();
-    ShimmerPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await ShimmerPageObject.scrollToComponentButton();
+    await ShimmerPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToShimmerPage();
-    ShimmerPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToShimmerPage();
+    await ShimmerPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ShimmerPageObject.isPageLoaded()).toBeTruthy(ShimmerPageObject.ERRORMESSAGE_PAGELOAD);
-    expect(ShimmerPageObject.didAssertPopup()).toBeFalsy(ShimmerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ShimmerPageObject.isPageLoaded()).toBeTruthy(ShimmerPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ShimmerPageObject.didAssertPopup()).toBeFalsy(ShimmerPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

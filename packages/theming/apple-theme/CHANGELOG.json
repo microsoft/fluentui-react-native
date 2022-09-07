@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Thu, 01 Sep 2022 17:00:15 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.14.0",
+      "version": "0.14.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "nkhalil942@gmail.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "567d1903113eede5db9b04f1e93b9599fdfdaabd",
+            "comment": "Added unit tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 29 Aug 2022 23:21:44 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.13.3",
+      "version": "0.13.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.15.0",
+            "commit": "370259af6f245b97a9a9129d8defbdd30a0bbd9d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.15.0",
+            "commit": "370259af6f245b97a9a9129d8defbdd30a0bbd9d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 24 Jul 2022 01:24:23 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.13.2",
       "version": "0.13.2",

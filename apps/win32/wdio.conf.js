@@ -7,14 +7,13 @@ const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
+const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
-  maxInstances: 30,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
@@ -28,19 +27,17 @@ exports.config = {
   ],
 
   /*
-   ** ===================
-   ** Test Configurations
-   ** ===================
-   ** Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
+   ** Test Configurations - Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
-
-  // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
+  specFileRetries: 3, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [
@@ -53,15 +50,19 @@ exports.config = {
   ],
 
   framework: 'jasmine',
-  jasmineNodeOpts: {
+  jasmineOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire spec file when it fails as a whole.
-  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 3,
-
   reporters: ['spec'],
+
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 
   /*
    ** ===================
@@ -78,9 +79,6 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   // onPrepare: function (config, capabilities) {
-  //   require('ts-node/register');
-  //   // require('ts-node').register({ files: true });
-  //   console.log('<<< NATIVE APP TESTS STARTED >>>');
   // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -109,11 +107,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function () {
-    // not needed for Cucumber
-    require('ts-node').register({ files: true });
-
-    browser.maximizeWindow();
+  before: async function () {
+    await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -148,7 +143,7 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: function (test, context, results) {
+  afterTest: async function (test, context, results) {
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
     if (results.passed) {
@@ -163,19 +158,19 @@ exports.config = {
 
     /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
      * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
-    const windowHandles = browser.getWindowHandles();
+    const windowHandles = await browser.getWindowHandles();
     if (windowHandles.length > 1) {
       /* Switch to the Assert window - Take a screenshot and close the assert */
-      browser.switchToWindow(windowHandles[0]);
-      browser.saveScreenshot(filePath);
-      browser.closeWindow();
+      await browser.switchToWindow(windowHandles[0]);
+      await browser.saveScreenshot(filePath);
+      await browser.closeWindow();
 
       /* Switch back to FluentTester and close. The test harness has trouble closing the app when an assert fired */
-      browser.switchToWindow(windowHandles[1]);
-      browser.closeWindow();
+      await browser.switchToWindow(windowHandles[1]);
+      await browser.closeWindow();
     } else {
       // save screenshot
-      browser.saveScreenshot(filePath);
+      await browser.saveScreenshot(filePath);
     }
   },
 

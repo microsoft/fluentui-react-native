@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Updated some color to alias tokens",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

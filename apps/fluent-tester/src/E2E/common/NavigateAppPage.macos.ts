@@ -22,84 +22,84 @@ import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
 import { By, BasePage } from './BasePage.macos';
 
 class NavigateAppPage extends BasePage {
-  clickAndGoToBadgePage() {
-    this.badgePage.click();
+  async clickAndGoToBadgePage() {
+    await this.badgePage.click();
   }
 
-  clickAndGoToButtonPage() {
-    this.buttonPage.click();
+  async clickAndGoToButtonPage() {
+    await this.buttonPage.click();
   }
 
-  clickAndGoToCalloutPage() {
-    this.calloutPage.click();
+  async clickAndGoToCalloutPage() {
+    await this.calloutPage.click();
   }
 
-  clickAndGoToCheckboxPage() {
-    this.checkboxPage.click();
+  async clickAndGoToCheckboxPage() {
+    await this.checkboxPage.click();
   }
 
-  clickAndGoToContextualMenuPage() {
-    this.contextualMenuPage.click();
+  async clickAndGoToContextualMenuPage() {
+    await this.contextualMenuPage.click();
   }
 
-  clickAndGoToFocusTrapZonePage() {
-    this.focusTrapZonePage.click();
+  async clickAndGoToFocusTrapZonePage() {
+    await this.focusTrapZonePage.click();
   }
 
-  clickAndGoToFocusZonePage() {
-    this.focusZonePage.click();
+  async clickAndGoToFocusZonePage() {
+    await this.focusZonePage.click();
   }
 
-  clickAndGoToIconPage() {
-    this.iconPage.click();
+  async clickAndGoToIconPage() {
+    await this.iconPage.click();
   }
 
-  clickAndGoToLinkPage() {
-    this.linkPage.click();
+  async clickAndGoToLinkPage() {
+    await this.linkPage.click();
   }
 
-  clickAndGoToMenuButtonPage() {
-    this.menuButtonPage.click();
+  async clickAndGoToMenuButtonPage() {
+    await this.menuButtonPage.click();
   }
 
-  clickAndGoToPersonaPage() {
-    this.personaPage.click();
+  async clickAndGoToPersonaPage() {
+    await this.personaPage.click();
   }
 
-  clickAndGoToPersonaCoinPage() {
-    this.personaCoinPage.click();
+  async clickAndGoToPersonaCoinPage() {
+    await this.personaCoinPage.click();
   }
 
-  clickAndGoToPressablePage() {
-    this.pressablePage.click();
+  async clickAndGoToPressablePage() {
+    await this.pressablePage.click();
   }
 
-  clickAndGoToRadioGroupPage() {
-    this.radioGroupPage.click();
+  async clickAndGoToRadioGroupPage() {
+    await this.radioGroupPage.click();
   }
 
-  clickAndGoToSeparatorPage() {
-    this.separatorPage.click();
+  async clickAndGoToSeparatorPage() {
+    await this.separatorPage.click();
   }
 
-  clickAndGoToSvgPage() {
-    this.svgPage.click();
+  async clickAndGoToSvgPage() {
+    await this.svgPage.click();
   }
 
-  clickAndGoToTextPage() {
-    this.textPage.click();
+  async clickAndGoToTextPage() {
+    await this.textPage.click();
   }
 
-  clickAndGoToTabsPage() {
-    this.tabsPage.click();
+  async clickAndGoToTabsPage() {
+    await this.tabsPage.click();
   }
 
-  clickAndGoToThemePage() {
-    this.themePage.click();
+  async clickAndGoToThemePage() {
+    await this.themePage.click();
   }
 
-  clickAndGoToExperimentalTabsPage() {
-    this.experimentalTabsPage.click();
+  async clickAndGoToExperimentalTabsPage() {
+    await this.experimentalTabsPage.click();
   }
 
   /*

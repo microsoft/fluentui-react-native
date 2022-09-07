@@ -8,6 +8,7 @@ import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbo
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
+import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
 // import { DrawerTest, HOMEPAGE_DRAWER_BUTTON } from './TestComponents/Drawer';
 // import { ExpanderTest, HOMEPAGE_EXPANDER_BUTTON } from './TestComponents/Expander';
 import { FocusTrapTest, HOMEPAGE_FOCUSTRAPZONE_BUTTON } from './TestComponents/FocusTrapZone';
@@ -22,7 +23,7 @@ import { PersonaTest, HOMEPAGE_PERSONA_BUTTON } from './TestComponents/Persona';
 import { PersonaCoinTest, HOMEPAGE_PERSONACOIN_BUTTON } from './TestComponents/PersonaCoin';
 import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './TestComponents/Pressable';
 import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './TestComponents/RadioGroup';
-import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
+import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
 import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
 import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
@@ -34,7 +35,6 @@ import { TextTest, HOMEPAGE_TEXT_BUTTON } from './TestComponents/Text';
 import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestComponents/TextExperimental';
 import { ThemeTest, HOMEPAGE_THEME_BUTTON } from './TestComponents/Theme';
 import { TokenTest, HOMEPAGE_TOKEN_BUTTON } from './TestComponents/Tokens';
-import { RadioGroupExperimentalTest } from './TestComponents/RadioGroupExperimental';
 import { ExperimentalLinkTest, HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from './TestComponents/LinkExperimental';
 
 export const tests: TestDescription[] = [
@@ -97,6 +97,12 @@ export const tests: TestDescription[] = [
     component: NativeDatePickerTest,
     testPage: HOMEPAGE_NATIVEDATEPICKER_BUTTON,
     platforms: ['ios'],
+  },
+  {
+    name: 'Dropdown',
+    component: DropdownTest,
+    testPage: HOMEPAGE_DROPDOWN_BUTTON,
+    platforms: ['macos', 'win32'],
   },
   // {
   //   name: 'Drawer',
