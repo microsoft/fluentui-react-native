@@ -1,5 +1,5 @@
 import { TABS_TESTPAGE, TABS_TEST_COMPONENT, FIRST_TABS_ITEM, HOMEPAGE_TABS_BUTTON } from '../../../TestComponents/Tabs/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 class TabsPageObject extends BasePage {
   /******************************************************************/

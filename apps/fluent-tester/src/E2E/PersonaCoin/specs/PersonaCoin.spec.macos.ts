@@ -10,8 +10,6 @@ describe('PersonaCoin Testing Initialization', function () {
   });
 
   it('Click and navigate to PersonaCoin test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await PersonaCoinPageObject.scrollToComponentButton();
     await PersonaCoinPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

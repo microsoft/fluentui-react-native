@@ -1,5 +1,5 @@
 import { FOCUSZONE_TESTPAGE, FOCUSZONE_TEST_COMPONENT, HOMEPAGE_FOCUSZONE_BUTTON } from '../../../TestComponents/FocusZone/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class FocusZonePageObject extends BasePage {
   // OVERRIDE: We use isExisting() here instead of isDisplayed() because FocusZone does not have any UI to it, it's simply

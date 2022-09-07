@@ -1,5 +1,5 @@
 import { PERSONACOIN_TESTPAGE, PERSONACOIN_TEST_COMPONENT, HOMEPAGE_PERSONACOIN_BUTTON } from '../../../TestComponents/PersonaCoin/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class PersonaCoinPageObject extends BasePage {
   /*****************************************/

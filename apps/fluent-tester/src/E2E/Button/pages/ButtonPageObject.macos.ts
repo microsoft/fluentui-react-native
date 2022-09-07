@@ -4,7 +4,7 @@ import {
   BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED,
   HOMEPAGE_BUTTON_BUTTON,
 } from '../../../TestComponents/Button/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 class ButtonPageObject extends BasePage {
   /*****************************************/

@@ -6,7 +6,7 @@ import {
   FIRST_RADIO_BUTTON,
   SECOND_RADIO_BUTTON,
 } from '../../../TestComponents/RadioGroup/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 export const enum RadioButtonSelector {
   Primary = 0, // this._primaryComponent

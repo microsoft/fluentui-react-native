@@ -10,8 +10,6 @@ describe('Experimental Tabs Testing Initialization', function () {
   });
 
   it('Click and navigate to Experimental Tabs test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ExperimentalTabsPageObject.scrollToComponentButton();
     await ExperimentalTabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

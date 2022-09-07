@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import ExperimentalCheckboxPageObject, { ExperimentalCheckboxSelector } from '../pages/ExperimentalCheckboxPageObject';
-import { ComponentSelector } from '../../common/BasePage.win';
+import { ComponentSelector } from '../../common/BasePage';
 import {
   EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
   EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,

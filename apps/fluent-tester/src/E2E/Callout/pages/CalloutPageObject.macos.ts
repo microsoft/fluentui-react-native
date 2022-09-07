@@ -4,7 +4,7 @@ import {
   HOMEPAGE_CALLOUT_BUTTON,
   BUTTON_TO_OPEN_CALLOUT,
 } from '../../../TestComponents/Callout/consts';
-import { BasePage, By, COMPONENT_SCROLL_COORDINATES } from '../../common/BasePage.macos';
+import { BasePage, By, COMPONENT_SCROLL_COORDINATES } from '../../common/BasePage';
 
 class CalloutPageObject extends BasePage {
   /******************************************************************/

@@ -28,7 +28,7 @@ import { HOMEPAGE_TOKEN_BUTTON } from '../../TestComponents/Tokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../../TestComponents/Tabs/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
-import { By, BasePage } from './BasePage.win';
+import { By, BasePage } from './BasePage';
 
 class NavigateAppPage extends BasePage {
   async clickAndGoToActivityIndicatorPage() {

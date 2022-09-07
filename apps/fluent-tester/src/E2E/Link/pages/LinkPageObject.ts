@@ -4,7 +4,7 @@ import {
   HOMEPAGE_LINK_BUTTON,
   LINK_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/Link/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class LinkPageObject extends BasePage {
   /*****************************************/

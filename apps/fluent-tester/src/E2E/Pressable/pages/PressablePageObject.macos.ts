@@ -1,5 +1,5 @@
 import { PRESSABLE_TESTPAGE, PRESSABLE_TEST_COMPONENT, HOMEPAGE_PRESSABLE_BUTTON } from '../../../TestComponents/Pressable/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 class PressablePageObject extends BasePage {
   /*****************************************/

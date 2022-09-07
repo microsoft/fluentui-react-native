@@ -8,7 +8,7 @@ import {
   THIRD_RADIO_BUTTON,
   FOURTH_RADIO_BUTTON,
 } from '../../../TestComponents/RadioGroup/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The main RadioGroup we are testing has FOUR RadioButtons. The spec file will

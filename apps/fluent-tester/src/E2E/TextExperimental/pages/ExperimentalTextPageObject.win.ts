@@ -3,7 +3,7 @@ import {
   EXPERIMENTAL_TEXT_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
 } from '../../../TestComponents/TextExperimental/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class ExperimentalTextPageObject extends BasePage {
   /*****************************************/

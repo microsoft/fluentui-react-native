@@ -1,5 +1,5 @@
 import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../../../TestComponents/Theme/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class ThemePageObject extends BasePage {
   /*****************************************/

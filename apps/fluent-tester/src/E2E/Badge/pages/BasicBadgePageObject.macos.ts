@@ -4,7 +4,7 @@ import {
   BADGE_TEST_COMPONENT,
   BADGE_SECONDARY_TEST_COMPONENT,
 } from '../../../TestComponents/Badge/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 export const enum BadgeComponentSelector {
   PrimaryComponent, //this._primaryComponent

@@ -4,7 +4,7 @@ import {
   HOMEPAGE_ICON_BUTTON,
   ICON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/Icon/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 class IconPageObject extends BasePage {
   /*****************************************/

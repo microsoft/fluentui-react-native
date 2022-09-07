@@ -1,5 +1,5 @@
 import { TEXT_TESTPAGE, FIRST_TEXT_COMPONENT, HOMEPAGE_TEXT_BUTTON } from '../../../TestComponents/Text/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 class TextPageObject extends BasePage {
   /*****************************************/

@@ -4,7 +4,7 @@ import {
   CHECKBOX_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_CHECKBOX_BUTTON,
 } from '../../../TestComponents/Checkbox/consts';
-import { BasePage, By } from '../../common/BasePage.macos';
+import { BasePage, By } from '../../common/BasePage';
 
 class CheckboxPageObject extends BasePage {
   /******************************************************************/

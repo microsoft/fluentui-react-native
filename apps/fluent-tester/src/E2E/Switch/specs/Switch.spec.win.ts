@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage.win';
 import SwitchPageObject from '../pages/SwitchPageObject';
 import { SwitchComponentSelector } from '../pages/SwitchPageObject';
-import { ComponentSelector } from '../../common/BasePage.win';
+import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../../../TestComponents/Switch/consts';
 

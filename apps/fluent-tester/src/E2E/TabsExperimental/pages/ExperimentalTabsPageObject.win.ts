@@ -4,7 +4,7 @@ import {
   EXPERIMENTAL_TABS_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
 } from '../../../TestComponents/TabsExperimental/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class ExperimentalTabsPageObject extends BasePage {
   /******************************************************************/

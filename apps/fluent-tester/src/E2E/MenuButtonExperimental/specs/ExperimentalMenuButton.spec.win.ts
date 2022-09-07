@@ -5,7 +5,7 @@ import {
   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
 } from '../../../TestComponents/MenuButtonExperimental/consts';
-import { ComponentSelector } from '../../common/BasePage.win';
+import { ComponentSelector } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental MenuButton Testing Initialization', function () {
