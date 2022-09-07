@@ -176,6 +176,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                   }}
                   style={mobileStyles.testListItem}
                   testID={description.testPage}
+                  // Please read http://93days.me/testing-react-native-application/ to understand why we set accessibilityLabel here.
                   accessibilityLabel={description.testPage}
                 >
                   {description.name}
