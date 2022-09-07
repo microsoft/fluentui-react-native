@@ -115,23 +115,6 @@ exports.config = {
    * @param {Object} suite suite details
    */
   // beforeSuite: async function () {
-  //   // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
-  //   // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
-  //   let fluentTesterWindow = null;
-  //   await browser.waitUntil(
-  //     async () => {
-  //       fluentTesterWindow = await $('//*[@title="Fluent Tester" and @elementType=4]');
-  //       return fluentTesterWindow != null;
-  //     },
-  //     {
-  //       timeout: 10000,
-  //       timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
-  //       interval: 1000,
-  //     },
-  //   );
-
-  //   const maxButton = await fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
-  //   await maxButton.click();
   // },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
@@ -156,18 +139,18 @@ exports.config = {
   afterTest: function (test, context, results) {
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
-    // if (results.passed) {
-    //   return;
-    // }
+    if (results.passed) {
+      return;
+    }
 
-    // // get current test title and clean it, to use it as file name
-    // const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
+    // get current test title and clean it, to use it as file name
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
 
-    // // build file path
-    // const filePath = './errorShots/' + fileName + '.png';
+    // build file path
+    const filePath = './errorShots/' + fileName + '.png';
 
-    // // save screenshot
-    // browser.saveScreenshot(filePath);
+    // save screenshot
+    browser.saveScreenshot(filePath);
   },
 
   /**
