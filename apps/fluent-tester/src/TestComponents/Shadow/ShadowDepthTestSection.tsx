@@ -9,18 +9,12 @@ import { useFluentTheme } from '@fluentui-react-native/framework';
 
 const getThemedStyles = themedStyleSheet(() => {
   return {
-    effectBox: {
-      maxWidth: 732,
-      minHeight: 64,
-      borderRadius: 8,
-    },
-    padding: {
-      padding: 20,
-    },
-    vmargin: {
-      marginVertical: 16,
-      marginHorizontal: 32,
-    },
+    maxWidth: 732,
+    minHeight: 64,
+    borderRadius: 8,
+    padding: 20,
+    marginVertical: 16,
+    marginHorizontal: 32,
   };
 });
 
@@ -32,20 +26,22 @@ interface ShadowTestBoxProps {
 
 const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: ShadowTestBoxProps) => {
   const theme = useTheme();
-  const themedStyles = getThemedStyles(theme);
+  //const themedStyles = getThemedStyles(theme);
   const backgroundColor = props.isBrand ? theme.colors.brandedBackground : theme.colors.background;
   const textColor = props.isBrand ? theme.colors.primaryButtonText : theme.colors.bodyText;
 
   return (
     <Shadow shadowToken={props.shadowToken}>
       <View
-        style={[
-          commonTestStyles.view,
-          themedStyles.effectBox,
-          themedStyles.vmargin,
-          themedStyles.padding,
-          { backgroundColor: backgroundColor },
-        ]}
+        style={{
+          maxWidth: 732,
+          minHeight: 64,
+          borderRadius: 8,
+          padding: 20,
+          marginVertical: 16,
+          marginHorizontal: 32,
+          backgroundColor: backgroundColor,
+        }}
       >
         <Text variant="bodySemibold" color={textColor}>
           {props.shadowDepthText}
