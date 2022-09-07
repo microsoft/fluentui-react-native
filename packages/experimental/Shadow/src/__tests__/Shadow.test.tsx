@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Shadow } from '../Shadow';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
@@ -14,7 +14,9 @@ const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestP
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows[props.depth]}>
-      <Text>{props.displayText}</Text>
+      <View>
+        <Text>{props.displayText}</Text>
+      </View>
     </Shadow>
   );
 };

@@ -14,7 +14,7 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -27,8 +27,10 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
       }
     }
   >
-    Brand shadow (depth=2)
-  </Text>
+    <Text>
+      Brand shadow (depth=2)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -46,7 +48,7 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -59,8 +61,10 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
       }
     }
   >
-    Brand shadow (depth=4)
-  </Text>
+    <Text>
+      Brand shadow (depth=4)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -78,7 +82,7 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -91,8 +95,10 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
       }
     }
   >
-    Brand shadow (depth=8)
-  </Text>
+    <Text>
+      Brand shadow (depth=8)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -110,7 +116,7 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -123,8 +129,10 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
       }
     }
   >
-    Brand shadow (depth=16)
-  </Text>
+    <Text>
+      Brand shadow (depth=16)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -142,7 +150,7 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -155,8 +163,10 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
       }
     }
   >
-    Brand shadow (depth=28)
-  </Text>
+    <Text>
+      Brand shadow (depth=28)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -174,7 +184,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -187,8 +197,10 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
       }
     }
   >
-    Brand shadow (depth=64)
-  </Text>
+    <Text>
+      Brand shadow (depth=64)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -206,7 +218,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -219,8 +231,10 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
       }
     }
   >
-    Shadow (depth=2)
-  </Text>
+    <Text>
+      Shadow (depth=2)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -238,7 +252,7 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -251,8 +265,10 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
       }
     }
   >
-    Shadow (depth=4)
-  </Text>
+    <Text>
+      Shadow (depth=4)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -270,7 +286,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -283,8 +299,10 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
       }
     }
   >
-    Shadow (depth=8)
-  </Text>
+    <Text>
+      Shadow (depth=8)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -302,7 +320,7 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -315,8 +333,10 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
       }
     }
   >
-    Shadow (depth=16)
-  </Text>
+    <Text>
+      Shadow (depth=16)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -334,7 +354,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -347,8 +367,10 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
       }
     }
   >
-    Shadow (depth=28)
-  </Text>
+    <Text>
+      Shadow (depth=28)
+    </Text>
+  </View>
 </View>
 `;
 
@@ -366,7 +388,7 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
     }
   }
 >
-  <Text
+  <View
     style={
       Object {
         "shadowColor": "#000000",
@@ -379,7 +401,9 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
       }
     }
   >
-    Shadow (depth=64)
-  </Text>
+    <Text>
+      Shadow (depth=64)
+    </Text>
+  </View>
 </View>
 `;

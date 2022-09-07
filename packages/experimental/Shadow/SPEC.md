@@ -42,7 +42,7 @@ For an example of adding a Shadow as a slot to a Fluent component, please see th
 The `Shadow` component takes in one prop called `ShadowToken`. The variants of ShadowToken are all defined in the theme.
 If `undefined` is passed into the `shadowToken` prop, no shadow will be rendered.
 
-`Shadow` must take exactly one child, which must support a style that derives from ViewStyle (ex. View, Text)
+`Shadow` must take exactly one child, which must be of type View.
 
 ## Notes
 
