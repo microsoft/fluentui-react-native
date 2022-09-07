@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 06 Sep 2022 21:51:07 GMT and should not be manually modified.
+This log was last generated on Wed, 07 Sep 2022 20:33:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.0
+
+Wed, 07 Sep 2022 20:33:39 GMT
+
+### Minor changes
+
+- Pinning versions of WebDriverIO + Appium (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.92.0
 
 ## 0.24.0
 
