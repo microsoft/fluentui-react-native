@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import FocusZonePageObject from '../pages/FocusZonePageObject.macos';
+import FocusZonePageObject from '../pages/FocusZonePageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open

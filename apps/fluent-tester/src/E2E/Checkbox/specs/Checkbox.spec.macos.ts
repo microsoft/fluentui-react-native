@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import CheckboxPageObject from '../pages/CheckboxPageObject.macos';
+import CheckboxPageObject from '../pages/CheckboxPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {

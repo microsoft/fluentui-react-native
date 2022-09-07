@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import TextPageObject from '../pages/TextPageObject.win';
+import TextPageObject from '../pages/TextPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 import { TEXT_ACCESSIBILITY_LABEL, TEXT_COMPONENT_CONTENT } from '../../../TestComponents/Text/consts';
