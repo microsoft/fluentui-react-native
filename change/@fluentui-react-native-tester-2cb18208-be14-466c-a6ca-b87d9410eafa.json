@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "\"Adding iOS E2E Testing\"",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
