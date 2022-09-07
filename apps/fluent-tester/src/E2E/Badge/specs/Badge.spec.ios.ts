@@ -7,19 +7,17 @@ import { Platform } from '../../common/BasePage';
 describe('Badge Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Click and navigate to Badge test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await BasicBadgePageObject.scrollToComponentButton(Platform.Win32);
+    await BasicBadgePageObject.scrollToComponentButton(Platform.iOS);
     await BasicBadgePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToBadgePage();
     await BasicBadgePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await BasicBadgePageObject.isPageLoaded()).toBeTruthy(BasicBadgePageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await BasicBadgePageObject.didAssertPopup()).toBeFalsy(BasicBadgePageObject.ERRORMESSAGE_ASSERT);
+    await expect(await BasicBadgePageObject.isPageLoaded()).toBeTruthy();
   });
 });

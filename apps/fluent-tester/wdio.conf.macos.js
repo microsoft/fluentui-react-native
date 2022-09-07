@@ -32,7 +32,7 @@ exports.config = {
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
-  specFileRetries: 3, // The number of times to retry the entire spec file when it fails as a whole.
+  specFileRetries: 1, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [
@@ -115,6 +115,8 @@ exports.config = {
    * @param {Object} suite suite details
    */
   beforeSuite: async function () {
+    global.thisTest = false;
+
     // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
     // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
     let fluentTesterWindow = null;

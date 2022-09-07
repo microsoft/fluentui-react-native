@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ThemePageObject from '../pages/ThemePageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Theme Testing Initialization', function () {
@@ -11,7 +10,6 @@ describe('Theme Testing Initialization', function () {
   });
 
   it('Click and navigate to Theme test page', async () => {
-    await ThemePageObject.scrollToComponentButton(Platform.Win32);
     await ThemePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
@@ -19,6 +17,5 @@ describe('Theme Testing Initialization', function () {
     await ThemePageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ThemePageObject.isPageLoaded()).toBeTruthy(ThemePageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await ThemePageObject.didAssertPopup()).toBeFalsy(ThemePageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });

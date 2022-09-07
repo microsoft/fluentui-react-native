@@ -14,6 +14,13 @@ export const enum ComponentSelector {
   Secondary, // this._secondaryComponent
 }
 
+export const enum Platform {
+  Win32 = 0,
+  iOS,
+  macOS,
+  Android,
+}
+
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
  * two UI elements, so we'll add integration for two UI elements in this file (See *Getters* section below).
@@ -58,10 +65,30 @@ export class BasePage {
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
-  async scrollToComponentButton(): Promise<void> {
-    if (!(await this.isButtonInView())) {
-      const scrollViewElement = await By('SCROLLVIEW_TEST_ID');
-      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
+  async scrollToComponentButton(platform: Platform): Promise<void> {
+    switch(platform)
+    {
+      case Platform.Win32:
+        while (!(await this.isButtonInView())) {
+          const scrollViewElement = await By('SCROLLVIEW_TEST_ID');
+          await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
+        }
+        break;
+
+      case Platform.iOS:
+        while (!(await this.isButtonInView())) {
+          await driver.execute("mobile: scroll", {direction: 'down'});
+        }
+        break;
+
+      case Platform.macOS:
+        // Not needed for macOS. It automatically scrolls
+        break;
+
+      default:
+      case Platform.Android:
+        // Todo
+        break;
     }
   }
 

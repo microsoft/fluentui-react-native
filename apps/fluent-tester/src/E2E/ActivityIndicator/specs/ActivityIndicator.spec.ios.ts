@@ -11,7 +11,7 @@ describe('Activity Indicator Testing Initialization', function () {
   });
 
   it('Click and navigate to Activity Indicator test page', async () => {
-    await ActivityIndicatorPageObject.scrollToComponentButton(Platform.Win32);
+    await ActivityIndicatorPageObject.scrollToComponentButton(Platform.iOS);
     await ActivityIndicatorPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
@@ -19,5 +19,6 @@ describe('Activity Indicator Testing Initialization', function () {
     await ActivityIndicatorPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ActivityIndicatorPageObject.isPageLoaded()).toBeTruthy(ActivityIndicatorPageObject.ERRORMESSAGE_PAGELOAD);
+
   });
 });

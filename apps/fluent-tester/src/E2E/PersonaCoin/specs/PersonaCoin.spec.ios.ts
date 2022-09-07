@@ -7,19 +7,17 @@ import { Platform } from '../../common/BasePage';
 describe('PersonaCoin Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Click and navigate to PersonaCoin test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await PersonaCoinPageObject.scrollToComponentButton(Platform.Win32);
+    await PersonaCoinPageObject.scrollToComponentButton(Platform.iOS);
     await PersonaCoinPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToPersonaCoinPage();
     await PersonaCoinPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await PersonaCoinPageObject.isPageLoaded()).toBeTruthy(PersonaCoinPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await PersonaCoinPageObject.didAssertPopup()).toBeFalsy(PersonaCoinPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await PersonaCoinPageObject.isPageLoaded()).toBeTruthy();
   });
 });
