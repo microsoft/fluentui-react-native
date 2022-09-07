@@ -121,6 +121,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
             style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
             onClick={onBackPress}
             disabled={onTestListView}
+            testID="The_Back_Button"
           >
             ‹ Back
           </Button>
@@ -176,6 +177,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                   }}
                   style={mobileStyles.testListItem}
                   testID={description.testPage}
+                  accessibilityLabel={description.testPage}
                 >
                   {description.name}
                 </Text>
