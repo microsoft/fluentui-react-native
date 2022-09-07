@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalMenuButtonPageObject from '../pages/ExperimentalMenuButtonPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
 import {

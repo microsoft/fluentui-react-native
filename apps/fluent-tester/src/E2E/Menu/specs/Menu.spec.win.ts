@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuPageObject, { MenuComponentSelector } from '../pages/MenuPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, MENU_A11Y_ROLE } from '../../common/consts';
 import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../../../TestComponents/Menu';

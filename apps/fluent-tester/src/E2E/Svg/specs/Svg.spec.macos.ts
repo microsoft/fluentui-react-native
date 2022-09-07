@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.macos';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import SvgPageObject from '../pages/SvgPageObject.macos';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 

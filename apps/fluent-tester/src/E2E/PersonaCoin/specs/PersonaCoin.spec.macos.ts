@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.macos';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import PersonaCoinPageObject from '../pages/PersonaCoinPageObject.macos';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 

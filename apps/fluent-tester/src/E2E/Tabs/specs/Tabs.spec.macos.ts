@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.macos';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import TabsPageObject from '../pages/TabsPageObject.macos';
 import { BOOT_APP_TIMEOUT, PAGE_TIMEOUT } from '../../common/consts';
 

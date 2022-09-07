@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import SwitchPageObject from '../pages/SwitchPageObject';
 import { SwitchComponentSelector } from '../pages/SwitchPageObject';
 import { ComponentSelector } from '../../common/BasePage';

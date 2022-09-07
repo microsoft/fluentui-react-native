@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkPageObject from '../pages/LinkPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { LINK_ACCESSIBILITY_LABEL } from '../../../TestComponents/Link/consts';
