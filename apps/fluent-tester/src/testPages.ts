@@ -35,6 +35,7 @@ import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestC
 import { ThemeTest, HOMEPAGE_THEME_BUTTON } from './TestComponents/Theme';
 import { TokenTest, HOMEPAGE_TOKEN_BUTTON } from './TestComponents/Tokens';
 import { RadioGroupExperimentalTest } from './TestComponents/RadioGroupExperimental';
+import { ExperimentalLinkTest, HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from './TestComponents/LinkExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -133,6 +134,12 @@ export const tests: TestDescription[] = [
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
     platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+  },
+  {
+    name: 'Link (Experimental)',
+    component: ExperimentalLinkTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
+    platforms: ['win32'],
   },
   {
     name: 'Menu',

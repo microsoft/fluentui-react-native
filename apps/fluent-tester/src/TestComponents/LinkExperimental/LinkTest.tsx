@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Alert } from 'react-native';
-import { Link } from '@fluentui/react-native';
+import { Link } from '@fluentui-react-native/experimental-link';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { LINK_TESTPAGE } from './consts';
+import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
 
@@ -12,10 +12,14 @@ const Links: React.FunctionComponent = () => {
     Alert.alert('Alert.', 'You have been alerted.');
   };
 
+  const doAllyTap = (): void => {
+    Alert.alert('Alert.', 'You have invoked onAllyTap.');
+  };
+
   return (
     <Stack style={stackStyle}>
-      <Link url="https://www.bing.com/" content="Click to navigate." />
-      <Link disabled onPress={doPress} content="Click to alert." />
+      <Link url="https://www.bing.com/">Click to navigate.</Link>
+      <Link disabled onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
     </Stack>
   );
 };
@@ -23,7 +27,7 @@ const Links: React.FunctionComponent = () => {
 const linkSections: TestSection[] = [
   {
     name: 'Navigation and Alert',
-    testID: LINK_TESTPAGE,
+    testID: EXPERIMENTAL_LINK_TESTPAGE,
     component: Links,
   },
   {
@@ -32,7 +36,7 @@ const linkSections: TestSection[] = [
   },
 ];
 
-export const LinkTest: React.FunctionComponent = () => {
+export const ExperimentalLinkTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'Experimental',
