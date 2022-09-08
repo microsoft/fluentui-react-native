@@ -140,6 +140,8 @@ jobs:
         parameters:
           platform: 'ios'
 
+      - template: templates/e2e-testing-ios.yml
+
   # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
