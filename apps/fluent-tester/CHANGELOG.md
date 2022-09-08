@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 08 Sep 2022 15:59:45 GMT and should not be manually modified.
+This log was last generated on Thu, 08 Sep 2022 23:05:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.93.0
+
+Thu, 08 Sep 2022 23:05:17 GMT
+
+### Minor changes
+
+- "Adding iOS E2E Testing" (email not defined)
 
 ## 0.92.1
 
