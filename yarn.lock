@@ -77,12 +77,12 @@
     source-map-support "0.5.21"
 
 "@appium/support@^2.57.0", "@appium/support@^2.59.3", "@appium/support@^2.59.5":
-  version "2.59.5"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.59.5.tgz#090c5c711680eddfeb0434b57b975978566e7553"
-  integrity sha512-OtEmiuLikmNjquVT5oVTFNlFilCiRQVICH5NxNcxzDZkIZk3XTpWmLHPz+MEHVP3dKh3pWaLFjrdA1bdEvG7hw==
+  version "2.60.0"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.60.0.tgz#3ab7cbc94a219d61aabe269d1336b078dabdeffb"
+  integrity sha512-hrCeBqeQ0xxAEGLxF/8CfwXTQMgD9z5Jd5Bz5JCFbmgSSRUd8u0MaeiRQJDfCB9q6m3Gw2KXFliFhe+M9Hf/WA==
   dependencies:
-    "@appium/types" "^0.4.0"
-    "@babel/runtime" "7.18.9"
+    "@appium/types" "^0.4.1"
+    "@babel/runtime" "7.19.0"
     "@colors/colors" "1.5.0"
     "@types/archiver" "5.3.1"
     "@types/base64-stream" "1.0.2"
@@ -97,7 +97,7 @@
     "@types/pluralize" "0.0.29"
     "@types/pngjs" "6.0.1"
     "@types/rimraf" "3.0.2"
-    "@types/semver" "7.3.10"
+    "@types/semver" "7.3.12"
     "@types/shell-quote" "1.7.1"
     "@types/supports-color" "8.1.1"
     "@types/teen_process" "1.16.1"
@@ -135,7 +135,7 @@
     source-map-support "0.5.21"
     supports-color "8.1.1"
     teen_process "1.16.0"
-    type-fest "2.18.0"
+    type-fest "2.19.0"
     uuid "8.3.2"
     which "2.0.2"
     yauzl "2.10.0"
@@ -168,16 +168,17 @@
     "@wdio/types" "7.20.7"
     type-fest "2.18.0"
 
-"@appium/types@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@appium/types/-/types-0.4.0.tgz#bdb051dd893f6566198f1a32693c6452692a6139"
-  integrity sha512-Vw+UGmbiNsDiDyI2Uhd37igTLx40eg/xdb3u5lJbiyTtlyMhrNv/UDaLXLq/+G5+3ynad3klRPVu0S9YNJ15aQ==
+"@appium/types@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@appium/types/-/types-0.4.1.tgz#9fb0eee12cd15d2b4319fcc5afe6ff5087e8dfc8"
+  integrity sha512-Xt7JIvmzCPEetNjB5iTJdeWmE/AzLfLNGoIQ+771tqPXgs9XWl9byxN82aK3q4LLXoroWIBbBA2h1nV4iOLToA==
   dependencies:
     "@appium/schema" "^0.0.9"
     "@types/express" "4.17.13"
     "@types/npmlog" "4.1.4"
-    "@wdio/types" "7.20.7"
-    type-fest "2.18.0"
+    "@types/ws" "8.5.3"
+    "@wdio/types" "7.24.0"
+    type-fest "2.19.0"
 
 "@azure/abort-controller@^1.0.0":
   version "1.0.4"
@@ -1407,6 +1408,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@7.19.0":
+  version "7.19.0"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
+  integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.0.0", "@babel/template@^7.18.10", "@babel/template@^7.18.6", "@babel/template@^7.3.3", "@babel/template@^7.4.0":
   version "7.18.10"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.18.10.tgz#6f9134835970d1dbf0835c0d100c9f38de0c5e71"
@@ -2533,7 +2541,7 @@
     lodash "^4.17.21"
     semver "^7.0.0"
 
-"@rnx-kit/console@^1.0.11":
+"@rnx-kit/console@^1.0.0", "@rnx-kit/console@^1.0.11":
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/@rnx-kit/console/-/console-1.0.11.tgz#63c9124080424fefb10252d6b3f6bd16e8f71529"
   integrity sha512-2Iyx56e+kk9YBQt3G5YSqG91dEI+AZhK/S58J64C6muPOdnYi7zuzaX1P/vkDFRSMAybtBi639Onn268suihnA==
@@ -2566,11 +2574,12 @@
     find-up "^5.0.0"
 
 "@rnx-kit/metro-config@^1.2.26":
-  version "1.2.37"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.37.tgz#15ba2bacfe25ad49582e86595a33c23b21c27147"
-  integrity sha512-bztHJDOhZCmABsuz9CylzT2OTxXwzxhTWuvSf2CngrYCP6Ve25jVmfy/hp8bUQ8pnGw1P44yHY9R1lufY5/p6g==
+  version "1.2.38"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/metro-config/-/metro-config-1.2.38.tgz#48b79c7a8552ab441d1c5ab46287cd5432aabf80"
+  integrity sha512-dorfJuUR/TZYWj09pNL92/UwkdQCw7utaZyvUbAjqEqJR7Bx64epSm/w3WXWtLFNpv21T0VudjbmigA2kdGtvw==
   dependencies:
     "@rnx-kit/babel-preset-metro-react-native" "^1.0.17"
+    "@rnx-kit/console" "^1.0.0"
     "@rnx-kit/tools-node" "^1.3.0"
     "@rnx-kit/tools-workspaces" "^0.1.0"
 
@@ -3339,9 +3348,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-native@^0.66.0":
-  version "0.66.21"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.66.21.tgz#0af38b44fb5a4afdc4ef6ecf065ef91ee5bc813f"
-  integrity sha512-O/PLXzTWZsNByotNKLxBWe/ePr/qV2km2pXflnMFkaot3KdfMl36E/0c5JVRMKCxxmDVvoazVHkqPuAvnkkgxA==
+  version "0.66.22"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.66.22.tgz#7202b57ce270f657f7eb5022f31e97ee945034a3"
+  integrity sha512-AaHTLLxijfNctNyHw0mt7IOunXOnCC5pTwW0Sk63rh90I1wEhkVvQBkXfsHOaQEgql7DtN7rpNdAaUWnsbVunw==
   dependencies:
     "@types/react" "^17"
 
@@ -3392,6 +3401,11 @@
   version "7.3.10"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.10.tgz#5f19ee40cbeff87d916eedc8c2bfe2305d957f73"
   integrity sha512-zsv3fsC7S84NN6nPK06u79oWgrPVd0NvOyqgghV1haPaFcVxIrP4DLomRwGAXk0ui4HZA7mOcSFL98sMVW9viw==
+
+"@types/semver@7.3.12":
+  version "7.3.12"
+  resolved "https://registry.yarnpkg.com/@types/semver/-/semver-7.3.12.tgz#920447fdd78d76b19de0438b7f60df3c4a80bf1c"
+  integrity sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==
 
 "@types/serve-favicon@2.5.3":
   version "2.5.3"
@@ -3480,6 +3494,13 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/wrap-ansi/-/wrap-ansi-3.0.0.tgz#18b97a972f94f60a679fd5c796d96421b9abb9fd"
   integrity sha512-ltIpx+kM7g/MLRZfkbL7EsCEjfzCcScLpkg37eXEtx5kmrAKBkTJwd1GIAjDSL8wTpM6Hzn5YO4pSb91BEwu1g==
+
+"@types/ws@8.5.3":
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/@types/ws/-/ws-8.5.3.tgz#7d25a1ffbecd3c4f2d35068d0b283c037003274d"
+  integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
+  dependencies:
+    "@types/node" "*"
 
 "@types/yargs-parser@*":
   version "21.0.0"
@@ -3843,6 +3864,14 @@
   version "7.23.0"
   resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.23.0.tgz#4d2a1099f9d0c6f68372d6ea06a40cb50ee2dc6d"
   integrity sha512-9I00r/AkitiDbOX0swYo6r3t1jzEHd6DD3opH5Zz/pMGQbwMenqvmACH+HwnRA7QKbcRVb1bY66yogMxvfQYAQ==
+  dependencies:
+    "@types/node" "^18.0.0"
+    got "^11.8.1"
+
+"@wdio/types@7.24.0":
+  version "7.24.0"
+  resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.24.0.tgz#ded79460f8a2a4892232e2707fb8d0ce3694bfd5"
+  integrity sha512-wJZ+1lIHFz5aWXSO+k91wX8tfZdpyX4YYoker5xfC4zvM7ypyK81dZyiE5whS+QFL3VTCPP8dXNjwX5f5h+YEw==
   dependencies:
     "@types/node" "^18.0.0"
     got "^11.8.1"
@@ -13420,6 +13449,11 @@ type-fest@2.18.0:
   version "2.18.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.18.0.tgz#fdef3a74e0a9e68ebe46054836650fb91ac3881e"
   integrity sha512-pRS+/yrW5TjPPHNOvxhbNZexr2bS63WjrMU8a+VzEBhUi9Tz1pZeD+vQz3ut0svZ46P+SRqMEPnJmk2XnvNzTw==
+
+type-fest@2.19.0:
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
+  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
 type-fest@^0.20.2:
   version "0.20.2"
