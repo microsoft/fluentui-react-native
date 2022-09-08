@@ -6,6 +6,7 @@ import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Notification } from '@fluentui-react-native/notification';
 import { FAB } from '@fluentui-react-native/button';
+import { Pressable } from '@fluentui-react-native/pressable';
 
 interface ShadowTestProps {
   displayText: string;
@@ -19,6 +20,15 @@ const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestP
       <View>
         <Text>{props.displayText}</Text>
       </View>
+    </Shadow>
+  );
+};
+
+const TestPressableWithShadow: React.FunctionComponent = () => {
+  const theme = useFluentTheme();
+  return (
+    <Shadow shadowToken={theme.shadows['shadow16']}>
+      <Pressable />
     </Shadow>
   );
 };
@@ -84,7 +94,7 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Notification component that has a shadow', () => {
+  it('Notification component that has a default shadow', () => {
     const tree = renderer
       .create(
         <Notification variant={'primary'} action="Undo">
@@ -95,8 +105,13 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('FAB component that has a shadow', () => {
+  it('FAB component that has a default shadow', () => {
     const tree = renderer.create(<FAB>Test FAB</FAB>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Pressable that has a shadow', () => {
+    const tree = renderer.create(<TestPressableWithShadow />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

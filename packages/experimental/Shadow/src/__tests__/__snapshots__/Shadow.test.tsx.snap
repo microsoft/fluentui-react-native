@@ -204,7 +204,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
 </View>
 `;
 
-exports[`Shadow component tests FAB component that has a shadow 1`] = `
+exports[`Shadow component tests FAB component that has a default shadow 1`] = `
 <View
   accessibilityLabel="Test FAB"
   accessibilityRole="button"
@@ -267,7 +267,7 @@ exports[`Shadow component tests FAB component that has a shadow 1`] = `
 </View>
 `;
 
-exports[`Shadow component tests Notification component that has a shadow 1`] = `
+exports[`Shadow component tests Notification component that has a default shadow 1`] = `
 <View
   style={
     Object {
@@ -342,6 +342,45 @@ exports[`Shadow component tests Notification component that has a shadow 1`] = `
       </Text>
     </View>
   </View>
+</View>
+`;
+
+exports[`Shadow component tests Pressable that has a shadow 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
+    }
+  }
+>
+  <View
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 8,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 16,
+      }
+    }
+  />
 </View>
 `;
 
