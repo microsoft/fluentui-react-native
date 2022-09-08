@@ -1,8 +1,59 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 01 Sep 2022 17:00:15 GMT and should not be manually modified.
+This log was last generated on Thu, 08 Sep 2022 15:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.25.1
+
+Thu, 08 Sep 2022 15:59:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.92.1
+
+## 0.25.0
+
+Wed, 07 Sep 2022 20:33:39 GMT
+
+### Minor changes
+
+- Pinning versions of WebDriverIO + Appium (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.92.0
+
+## 0.24.0
+
+Tue, 06 Sep 2022 21:51:07 GMT
+
+### Minor changes
+
+- Updating from Sync E2E testing framework to Async (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.91.0
+
+## 0.23.39
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.90.11
+
+## 0.23.38
+
+Tue, 06 Sep 2022 17:08:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.90.10
+
+## 0.23.37
+
+Thu, 01 Sep 2022 21:06:38 GMT
+
+### Patches
+
+- Upgrade WDIO to V7 (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.90.9
 
 ## 0.23.36
 
