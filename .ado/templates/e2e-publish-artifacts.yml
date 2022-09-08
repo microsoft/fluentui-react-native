@@ -11,7 +11,7 @@ steps:
     inputs:
       sourceFolder: apps/fluent-tester/reports
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy non-Win32 Appium Reports,'
+    displayName: 'Copy ${{parameters.applicationType}} Appium Reports,'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'), ne('${{parameters.platform}}', 'win32'))
 
   # Win32 saves files in a different area than other platforms
@@ -27,7 +27,7 @@ steps:
     inputs:
       sourceFolder: apps/fluent-tester/errorShots
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy non-Win32 tree dump screenshots'
+    displayName: 'Copy ${{parameters.applicationType}} tree dump screenshots'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'), ne('${{parameters.platform}}', 'win32'))
 
   # Copy errorShots win32 to FluentTesterDump
