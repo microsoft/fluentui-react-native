@@ -10,21 +10,16 @@ class CheckboxPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  isCheckboxChecked(): boolean {
-    return this._primaryComponent.isSelected();
+  async isCheckboxChecked(): Promise<boolean> {
+    return await this._primaryComponent.isSelected();
   }
 
-  waitForCheckboxUnchecked(timeout?: number): void {
-    browser.waitUntil(
-      () => {
-        return !this.isCheckboxChecked();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
-        interval: 1000,
-      },
-    );
+  async waitForCheckboxUnchecked(timeout?: number): Promise<void> {
+    await browser.waitUntil(async () => await !this.isCheckboxChecked(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'The onPress() callback for ' + this._pageName + ' did not fire correctly.',
+      interval: 1000,
+    });
   }
 
   /*****************************************/

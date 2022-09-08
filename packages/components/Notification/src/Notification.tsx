@@ -43,9 +43,7 @@ const useSizeClassIOS_DO_NOT_USE: () => SizeClassIOS = () => {
  */
 export const notificationLookup = (layer: string, userProps: NotificationProps): boolean => {
   return (
-    layer === userProps.variant ||
-    (layer === 'hasTitle' && userProps.title != undefined) ||
-    (layer === 'isBar' && ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
+    layer === userProps.variant || (layer === 'isBar' && ['primaryOutlineBar', 'primaryBar', 'neutralBar'].includes(userProps.variant))
   );
 };
 
@@ -90,8 +88,8 @@ export const Notification = compose<NotificationType>({
       return (
         <Slots.shadow>
           <Slots.root {...mergedProps}>
-            {icon && <Slots.icon {...iconProps} />}
-            <Slots.contentContainer>
+            {icon && <Slots.icon {...iconProps} accessible={false} />}
+            <Slots.contentContainer accessible={true}>
               {title && <Slots.title>{title}</Slots.title>}
               <Slots.message style={messageStyle}>{children}</Slots.message>
             </Slots.contentContainer>

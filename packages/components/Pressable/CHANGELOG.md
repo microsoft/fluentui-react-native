@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/pressable
 
-This log was last generated on Fri, 05 Aug 2022 23:22:38 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.9
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.3
+
+## 0.9.8
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
 
 ## 0.9.7
 

@@ -9,6 +9,8 @@ export const switchStates: (keyof SwitchTokens)[] = [
   'before',
   'after',
   'above',
+  'beforeContent',
+  'afterContent',
   'hovered',
   'focused',
   'pressed',

@@ -4,11 +4,11 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
-import { TestDescription } from './TestComponents';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
-import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
+import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
+import { tests } from './testPages';
 
 // uncomment the below lines to enable message spy
 /**
@@ -22,7 +22,6 @@ const EmptyComponent: React.FunctionComponent = () => {
 export interface FluentTesterProps {
   initialTest?: string;
   enableSinglePaneView?: boolean;
-  enabledTests: TestDescription[];
 }
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
@@ -54,8 +53,9 @@ const TestListSeparator = Separator.customize((t) => ({
 }));
 
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  // sort tests alphabetically by name
-  const sortedTestComponents = props.enabledTests.sort((a, b) => a.name.localeCompare(b.name));
+  // filters and sorts tests alphabetically
+  const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
+  const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
 
   const { initialTest, enableSinglePaneView } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {
@@ -89,7 +89,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       <View style={fluentTesterStyles.header}>
         <Text
           testID={BASE_TESTPAGE}
-          style={[fluentTesterStyles.testHeader]}
+          style={fluentTesterStyles.testHeader}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
         >
@@ -107,7 +107,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     return (
       <View style={mobileStyles.header}>
         <Text
-          style={[fluentTesterStyles.testHeader]}
+          style={fluentTesterStyles.testHeader}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
           testID={BASE_TESTPAGE}
@@ -153,7 +153,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           })}
         </ScrollView>
 
-        <TestListSeparator vertical style={{ marginHorizontal: 8 }} />
+        <TestListSeparator vertical style={fluentTesterStyles.testListSeparator} />
       </View>
     );
   };
@@ -208,7 +208,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TesterContent: React.FunctionComponent = () => {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={commonTestStyles.flex}>
         {enableSinglePaneView ? <MobileHeader /> : <Header />}
 
         <HeaderSeparator />
@@ -222,7 +222,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={commonTestStyles.flex}>
       {Platform.OS === ('win32' as any) ? (
         <FocusTrapZone style={themedStyles.root}>
           <TesterContent />

@@ -15,10 +15,15 @@ import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
 
+const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
+  if (props === undefined) {
+    props = emptyProps;
+  }
+
   // split out color and variant from props
   const {
-    align,
+    align = undefined,
     block,
     color,
     font,

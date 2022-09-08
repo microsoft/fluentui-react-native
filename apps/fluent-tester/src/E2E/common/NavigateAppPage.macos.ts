@@ -1,4 +1,5 @@
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
+import { HOMEPAGE_BADGE_BUTTON } from '../../TestComponents/Badge/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../TestComponents/ContextualMenu/consts';
@@ -21,80 +22,84 @@ import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
 import { By, BasePage } from './BasePage.macos';
 
 class NavigateAppPage extends BasePage {
-  clickAndGoToButtonPage() {
-    this.buttonPage.click();
+  async clickAndGoToBadgePage() {
+    await this.badgePage.click();
   }
 
-  clickAndGoToCalloutPage() {
-    this.calloutPage.click();
+  async clickAndGoToButtonPage() {
+    await this.buttonPage.click();
   }
 
-  clickAndGoToCheckboxPage() {
-    this.checkboxPage.click();
+  async clickAndGoToCalloutPage() {
+    await this.calloutPage.click();
   }
 
-  clickAndGoToContextualMenuPage() {
-    this.contextualMenuPage.click();
+  async clickAndGoToCheckboxPage() {
+    await this.checkboxPage.click();
   }
 
-  clickAndGoToFocusTrapZonePage() {
-    this.focusTrapZonePage.click();
+  async clickAndGoToContextualMenuPage() {
+    await this.contextualMenuPage.click();
   }
 
-  clickAndGoToFocusZonePage() {
-    this.focusZonePage.click();
+  async clickAndGoToFocusTrapZonePage() {
+    await this.focusTrapZonePage.click();
   }
 
-  clickAndGoToIconPage() {
-    this.iconPage.click();
+  async clickAndGoToFocusZonePage() {
+    await this.focusZonePage.click();
   }
 
-  clickAndGoToLinkPage() {
-    this.linkPage.click();
+  async clickAndGoToIconPage() {
+    await this.iconPage.click();
   }
 
-  clickAndGoToMenuButtonPage() {
-    this.menuButtonPage.click();
+  async clickAndGoToLinkPage() {
+    await this.linkPage.click();
   }
 
-  clickAndGoToPersonaPage() {
-    this.personaPage.click();
+  async clickAndGoToMenuButtonPage() {
+    await this.menuButtonPage.click();
   }
 
-  clickAndGoToPersonaCoinPage() {
-    this.personaCoinPage.click();
+  async clickAndGoToPersonaPage() {
+    await this.personaPage.click();
   }
 
-  clickAndGoToPressablePage() {
-    this.pressablePage.click();
+  async clickAndGoToPersonaCoinPage() {
+    await this.personaCoinPage.click();
   }
 
-  clickAndGoToRadioGroupPage() {
-    this.radioGroupPage.click();
+  async clickAndGoToPressablePage() {
+    await this.pressablePage.click();
   }
 
-  clickAndGoToSeparatorPage() {
-    this.separatorPage.click();
+  async clickAndGoToRadioGroupPage() {
+    await this.radioGroupPage.click();
   }
 
-  clickAndGoToSvgPage() {
-    this.svgPage.click();
+  async clickAndGoToSeparatorPage() {
+    await this.separatorPage.click();
   }
 
-  clickAndGoToTextPage() {
-    this.textPage.click();
+  async clickAndGoToSvgPage() {
+    await this.svgPage.click();
   }
 
-  clickAndGoToTabsPage() {
-    this.tabsPage.click();
+  async clickAndGoToTextPage() {
+    await this.textPage.click();
   }
 
-  clickAndGoToThemePage() {
-    this.themePage.click();
+  async clickAndGoToTabsPage() {
+    await this.tabsPage.click();
   }
 
-  clickAndGoToExperimentalTabsPage() {
-    this.experimentalTabsPage.click();
+  async clickAndGoToThemePage() {
+    await this.themePage.click();
+  }
+
+  async clickAndGoToExperimentalTabsPage() {
+    await this.experimentalTabsPage.click();
   }
 
   /*
@@ -103,6 +108,10 @@ class NavigateAppPage extends BasePage {
 
   get _testPage() {
     return By(BASE_TESTPAGE);
+  }
+
+  private get badgePage() {
+    return By(HOMEPAGE_BADGE_BUTTON);
   }
 
   private get buttonPage() {
