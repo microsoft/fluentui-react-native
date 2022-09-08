@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Increasing timeout count for E2E testing",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
