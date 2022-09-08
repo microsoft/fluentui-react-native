@@ -173,18 +173,15 @@ export const removeTitlesFromName = (words: string[]): string[] => {
  * @param name
  * @returns name without multi-word titles
  */
-const removeMultiWordTitles = (name: string, idx: number = 0): string => {
-  if (idx >= multiWordTitles.length) {
-    return name;
+const removeMultiWordTitles = (name: string): string => {
+  for (const idx in multiWordTitles) {
+    const title = multiWordTitles[idx];
+
+    if (name.indexOf(title) !== -1) {
+      return name.replace(title, '');
+    }
   }
-
-  const title = multiWordTitles[idx];
-
-  if (name.indexOf(title) !== -1) {
-    return name.replace(title, '');
-  }
-
-  return removeMultiWordTitles(name, idx + 1);
+  return name;
 };
 
 /**
@@ -194,7 +191,7 @@ const removeMultiWordTitles = (name: string, idx: number = 0): string => {
  * @returns true if name is multi-word
  */
 const isMultiWordName = (name: string): boolean => {
-  return name.split(' ').length > 1;
+  return name.search(' ') !== -1;
 };
 
 function getFontIconSize(size: AvatarSize) {
