@@ -27,3 +27,4 @@ steps:
       applicationType: ios
       platform: 'ios'
       buildArtifacts: variables['task.Build.status']
+      directory: $(Build.SourcesDirectory)/apps/fluent-tester
