@@ -4,11 +4,43 @@ import { IFocusable, IPressableState, IWithPressableEvents, IWithPressableOption
 
 export const linkName = 'Link';
 
+export type ILinkState = IPressableState & {
+  /**
+   * Specifies whether the link has been visited.
+   * @default false
+   */
+  visited?: boolean;
+  /**
+   * Specifies whether the link is disabled.
+   * @default false
+   */
+  disabled?: boolean;
+  /**
+   * Specifies whether the link is inline.
+   * @default false
+   */
+  inline?: boolean;
+  /**
+   * Specifies whether the link is subtle.
+   * @default false
+   */
+  subtle?: boolean
+
+};
 /**
  * Link tokens, these are the internally configurable values for Link elements. In particular these
  * drive decisions on how to build the styles
  */
-export type LinkTokens = TextTokens;
+export interface LinkTokens extends TextTokens {
+  hovered?: LinkTokens;
+  pressed?: LinkTokens;
+  focused?: LinkTokens;
+  visited?: LinkTokens;
+  disabled?: LinkTokens;
+  inline?: LinkTokens;
+  subtle?: LinkTokens;
+
+}
 
 export type LinkAppearance = 'default' | 'subtle';
 
@@ -43,20 +75,12 @@ export interface LinkProps extends LinkCoreProps {
   /**
    * link appearance
    */
-  apprearance?: LinkAppearance;
+  appearance?: LinkAppearance;
   /*
    * link inline
    */
   inline?: boolean;
 }
-
-export type ILinkState = IPressableState & {
-  /**
-   * Specifies whether the link has been visited.
-   * @default false
-   */
-  visited?: boolean;
-};
 
 export type LinkHooks<T extends object> = {
   props: IWithPressableEvents<T>;

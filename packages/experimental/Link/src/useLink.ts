@@ -7,14 +7,14 @@ import { AccessibilityState, Linking, Platform } from 'react-native';
 export const useLink = (props: LinkProps): LinkState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const { onPress, onAccessibilityTap, url, accessibilityState, componentRef = defaultComponentRef, disabled, enableFocusRing, focusable, ...rest } = props;
+  const {onPress, onAccessibilityTap, url, accessibilityState, componentRef = defaultComponentRef, disabled, enableFocusRing, focusable, ...rest } = props;
   const isDisabled = !!disabled;
 
-  const [linkState, setLinkState] = React.useState({ visited: false });
+  const [visitedState, setVisitedState] = React.useState({ visited: false });
   const linkOnPress = React.useCallback(
     (e) => {
       if (!disabled) {
-        setLinkState({ visited: true });
+        setVisitedState({ visited: true });
         if (url) {
           Linking.openURL(url as string);
         } else if (onPress) {
@@ -22,7 +22,7 @@ export const useLink = (props: LinkProps): LinkState => {
         }
         e.stopPropagation();
       }
-    }, [disabled, setLinkState, url, onPress],
+    }, [disabled, setVisitedState, url, onPress],
   );
 
 
@@ -34,7 +34,8 @@ export const useLink = (props: LinkProps): LinkState => {
 
   const newState = {
     ...pressable.state,
-    ...linkState,
+    ...visitedState
+
   };
   const onAccTap = React.useCallback(
     (e?) => {

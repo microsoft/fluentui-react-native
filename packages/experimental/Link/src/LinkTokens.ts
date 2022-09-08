@@ -6,7 +6,9 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
   ({
     color: t.colors.link,
     variant: 'body1',
-    underline: true,
+    inline: {
+      textDecorationLine: 'underline',
+    },
     disabled: {
       color: t.colors.disabledBodyText,
     },
@@ -16,28 +18,44 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
     pressed: {
       color: t.colors.linkPressed,
     },
-    focused: {
-      borderColor: t.colors.link,
-      color: t.colors.linkHovered,
+    visited: {
+      color: t.colors.link,
     },
-    inline: {
-      underline: false,
+    focused: {
+      color: t.colors.link,
+      borderColor: t.colors.focusBorder,
     },
     subtle: {
       color: t.colors.neutralForeground2,
-      disabled: {
-        color: t.colors.ghostDisabledContent,
-      },
       hovered: {
-        color: t.colors.neutralForeground2,
+        color: t.colors.neutralForeground2Hover,
       },
       pressed: {
+        color: t.colors.neutralForeground2Pressed,
+      },
+      visited: {
         color: t.colors.neutralForeground2,
       },
       focused: {
-        borderColor: t.colors.ghostFocusedBorder,
         color: t.colors.neutralForeground2,
-      },
+        borderColor: t.colors.focusBorder,
+      }
     },
+    brand: {
+      color: t.colors.neutralForegroundInvertedLink,
+      hovered: {
+        color: t.colors.neutralForegroundInvertedLinkHover,
+      },
+      pressed: {
+        color: t.colors.neutralForegroundInvertedLinkPressed,
+      },
+      visited: {
+        color: t.colors.neutralForegroundInvertedLink,
+      },
+      focused: {
+        color: t.colors.neutralForegroundInvertedLink,
+        borderColor: t.colors.focusBorder,
+      }
+    }
   } as LinkTokens);
 
