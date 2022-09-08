@@ -204,6 +204,147 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
 </View>
 `;
 
+exports[`Shadow component tests FAB component that has a shadow 1`] = `
+<View
+  accessibilityLabel="Test FAB"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  disabled={false}
+  enableFocusRing={true}
+  focusable={true}
+  iconPosition="before"
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "#005a9e",
+      "borderRadius": 9999,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 56,
+      "minWidth": 56,
+      "padding": 16,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#ffffff",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Test FAB
+  </Text>
+</View>
+`;
+
+exports[`Shadow component tests Notification component that has a shadow 1`] = `
+<View
+  style={
+    Object {
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 8,
+        "width": 0,
+      },
+      "shadowOpacity": 0.14,
+      "shadowRadius": 8,
+    }
+  }
+>
+  <View
+    marginHorizontal={16}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "backgroundColor": "#EBF3FC",
+        "borderColor": "transparent",
+        "borderRadius": 12,
+        "borderWidth": 1,
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "minHeight": 52,
+        "padding": 16,
+        "paddingVertical": 12,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 0,
+          "width": 0,
+        },
+        "shadowOpacity": 0.12,
+        "shadowRadius": 1,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      style={
+        Object {
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "alignSelf": "center",
+            "color": "#0F6CBD",
+            "fontFamily": "Segoe UI",
+            "fontSize": 15,
+            "fontWeight": "400",
+            "margin": 0,
+          }
+        }
+      >
+        Mail Archived
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
 exports[`Shadow component tests Shadow (depth=2) 1`] = `
 <View
   style={
