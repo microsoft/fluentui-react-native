@@ -9532,9 +9532,9 @@ ky@0.30.0:
   integrity sha512-X/u76z4JtDVq10u1JA5UQfatPxgPaVDMYTrgHyiTpGN2z4TMEJkIHsoSBBSg9SWZEIXTKsi9kHgiQ9o3Y/4yog==
 
 lage@^1.5.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.8.0.tgz#9e497924159c5c963b3246cf3805f62b3dc71cb1"
-  integrity sha512-Ct/yar2qLRFhZEhKIuSjUWel3KIKGsEuPtSZ8Vi2Lwujy2d5D+Vrom83zXfJBQAp/JnmgqK3RjROODW/Kocj2Q==
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.8.1.tgz#60c870ca7c855651764088f09e74ed662569c9e5"
+  integrity sha512-+lXEQrgb62iC/WHgbJ+f14rVupUWjeJyJ4hhUIT6LuLPROv7bCwnuSRDAmBfPWzqeCjHkJK7Y5DJ7twdH0D/Tw==
   dependencies:
     "@lage-run/logger" "*"
     "@xmldom/xmldom" "^0.8.0"
