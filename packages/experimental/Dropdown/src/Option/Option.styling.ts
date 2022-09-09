@@ -1,8 +1,9 @@
 import { borderStyles, buildProps, fontStyles, layoutStyles, Theme, UseStylingOptions } from '@fluentui-react-native/framework';
 import { optionName, OptionProps, OptionSlotProps, OptionTokens } from './Option.types';
+import { defaultOptionTokens } from './OptionTokens';
 
 export const stylingSettings: UseStylingOptions<OptionProps, OptionSlotProps, OptionTokens> = {
-  tokens: [optionName],
+  tokens: [defaultOptionTokens, optionName],
   slotProps: {
     root: buildProps(
       (tokens: OptionTokens, theme: Theme) => ({
