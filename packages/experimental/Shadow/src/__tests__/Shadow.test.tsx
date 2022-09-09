@@ -4,7 +4,6 @@ import { Shadow } from '../Shadow';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
-import { Notification } from '@fluentui-react-native/notification';
 import { Pressable } from '@fluentui-react-native/pressable';
 
 interface ShadowTestProps {
@@ -90,17 +89,6 @@ describe('Shadow component tests', () => {
 
   it('Brand shadow (depth=64)', () => {
     const tree = renderer.create(<TestShadow displayText="Brand shadow (depth=64)" depth="shadow64brand" />).toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('Notification component that has a default shadow', () => {
-    const tree = renderer
-      .create(
-        <Notification variant={'primary'} action="Undo">
-          Mail Archived
-        </Notification>,
-      )
-      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
