@@ -5,7 +5,6 @@ import { useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Notification } from '@fluentui-react-native/notification';
-import { FAB } from '@fluentui-react-native/button';
 import { Pressable } from '@fluentui-react-native/pressable';
 
 interface ShadowTestProps {
@@ -102,11 +101,6 @@ describe('Shadow component tests', () => {
         </Notification>,
       )
       .toJSON();
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('FAB component that has a default shadow', () => {
-    const tree = renderer.create(<FAB>Test FAB</FAB>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
