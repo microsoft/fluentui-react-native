@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import { IStackProps } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Icon } from '@fluentui-react-native/icon';

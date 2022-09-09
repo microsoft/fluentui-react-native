@@ -28,7 +28,7 @@ const Checkboxes = (props: CheckboxProps) => {
 const FocusZoneInsideScrollView: React.FunctionComponent = () => {
   return (
     <FocusZoneListWrapper>
-      <FocusZone focusZoneDirection="bidrectional">
+      <FocusZone focusZoneDirection="bidirectional">
         <View style={focusZoneTestStyles.dashedBorder}>
           <Button style={focusZoneTestStyles.listWrapperButton}>Inside Focus Zone</Button>
           <ScrollView
@@ -104,7 +104,7 @@ const FocusZoneListWrapper = (props) => {
 };
 
 const DirectionalFocusZone: React.FunctionComponent = () => {
-  const [direction, setDirection] = React.useState('none');
+  const [direction, setDirection] = React.useState<FocusZoneDirection>('none');
 
   return (
     <>
