@@ -17,6 +17,22 @@ typedef BOOL (^IsViewLeadingCandidateForNextFocus)(NSView *candidateView);
 // enumerated in the same row (or column) as the current focused view
 static const CGFloat FocusZoneBuffer = 3;
 
+// Classes FocusZone should never focus on
+static NSArray<Class> *ViewClassesToSkip() {
+	return @[[NSScroller class]];
+}
+
+// TODO
+static BOOL ShouldSkipFocus(NSView *view) {
+	NSArray<Class> *classesToSkip = ViewClassesToSkip();
+	for (Class class in classesToSkip) {
+		if ([view isKindOfClass:class]) {
+			return YES;
+		}
+	}
+	return NO;
+}
+
 @implementation RCTFocusZone
 
 static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
@@ -55,6 +71,11 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
     }
 
 	for (NSView *view in [parentView subviews]) {
+
+		if (ShouldSkipFocus(view)) {
+			return nil;
+		}
+		
 		if ([view canBecomeKeyView]) {
 			return view;
 		}
@@ -73,6 +94,10 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 static NSView *GetLastKeyViewWithin(NSView *parentView)
 {
 	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
+		if (ShouldSkipFocus(view)) {
+			return nil;
+		}
+		
 		if ([view canBecomeKeyView]) {
 			return view;
 		}
@@ -205,7 +230,11 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		NSView *candidateView = [queue firstObject];
 		[queue removeObjectAtIndex:0];
 
-		if ([candidateView isNotEqualTo:self] && [candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
+		if (
+				[candidateView isNotEqualTo:self] &&
+				[candidateView canBecomeKeyView] &&
+				isLeadingCandidate(candidateView) &&
+				!ShouldSkipFocus(candidateView))
 		{
 			nextViewToFocus = candidateView;
 		}
@@ -323,6 +352,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		NSRect candidateRect = [candidateView convertRect:[candidateView bounds] toView:self];
 
 		BOOL skip = candidateView == firstResponder
+		  || ShouldSkipFocus(candidateView)
 			|| (isAdvance && NSMinY(candidateRect) < NSMaxY(firstResponderRect) - FocusZoneBuffer)
 			|| (!isAdvance && NSMaxY(candidateRect) > NSMinY(firstResponderRect) + FocusZoneBuffer);
 
