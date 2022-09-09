@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -34,19 +34,46 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
+const extractMarginAndroid = (style) => {
+  const marginKeys = [
+    'margin',
+    'marginTop',
+    'marginBottom',
+    'marginLeft',
+    'marginRight',
+    'marginStart',
+    'marginEnd',
+    'marginVertical',
+    'marginHorizontal',
+  ];
+  const extractedMargin = {},
+    mask = {};
+  marginKeys.forEach((key) => {
+    if (style && style[key]) {
+      extractedMargin[key] = style[key];
+      mask[key] = 0;
+    }
+  });
+  return [extractedMargin, { ...style, ...mask }];
+};
+
 export const Button = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
     root: View,
+    ripple: Pressable,
     icon: Icon,
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
+    const [rippledPressed, setRippleState] = React.useState(false);
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) =>
+      buttonLookup(layer, { ...button.state, pressed: rippledPressed || button.state.pressed }, userProps),
+    );
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
@@ -70,17 +97,46 @@ export const Button = compose<ButtonType>({
         });
       }
       const label = accessibilityLabel ?? childText;
-
-      return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
+      const buttonContent = (
+        <React.Fragment>
           {loading && <ActivityIndicator />}
           {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
-        </Slots.root>
+        </React.Fragment>
       );
+
+      const hasRipple = Platform.OS === 'android';
+      if (hasRipple) {
+        const [extractedMargin, styleWithoutMargin] = extractMarginAndroid(mergedProps.style);
+        return (
+          <Slots.root style={extractedMargin}>
+            <Slots.ripple
+              accessibilityLabel={label}
+              {...mergedProps}
+              style={styleWithoutMargin}
+              onPressIn={() => {
+                setRippleState(true);
+                mergedProps.onPressIn?.();
+              }}
+              onPressOut={() => {
+                setRippleState(false);
+                mergedProps.onPressOut?.();
+              }}
+            >
+              {buttonContent}
+            </Slots.ripple>
+          </Slots.root>
+        );
+      } else {
+        return (
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {buttonContent}
+          </Slots.root>
+        );
+      }
     };
   },
 });

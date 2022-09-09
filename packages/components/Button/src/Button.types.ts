@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewProps, ViewStyle, ColorValue, PressableProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
@@ -152,6 +152,7 @@ export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWith
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<IViewProps>;
+  ripple?: PressableProps;
   icon: IconProps;
   content: TextProps;
 }
