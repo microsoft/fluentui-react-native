@@ -7,8 +7,6 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   backgroundColor: t.colors.neutralBackground1,
   borderRadius: globalTokens.corner.radius.medium,
   checkmarkSize: 16,
-  submenuIndicatorPadding: globalTokens.spacing.none,
-  submenuIndicatorSize: 16,
   color: t.colors.neutralForeground2,
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size[300],
@@ -18,16 +16,22 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   minWidth: 160,
   maxWidth: 300,
   padding: globalTokens.spacing.sNudge,
+  submenuIndicatorColor: t.colors.neutralForeground2,
+  submenuIndicatorPadding: globalTokens.spacing.none,
+  submenuIndicatorSize: 16,
   hovered: {
     backgroundColor: t.colors.neutralBackground1Hover,
     color: t.colors.neutralForeground2Hover,
+    submenuIndicatorColor: t.colors.neutralForeground2Hover,
   },
   pressed: {
     backgroundColor: t.colors.neutralBackground1Pressed,
     color: t.colors.neutralForeground2Pressed,
+    submenuIndicatorColor: t.colors.neutralForeground2Pressed,
   },
   disabled: {
     backgroundColor: t.colors.neutralBackground1,
     color: t.colors.neutralForegroundDisabled,
+    submenuIndicatorColor: t.colors.neutralForegroundDisabled,
   },
 });
