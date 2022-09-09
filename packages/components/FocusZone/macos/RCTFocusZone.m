@@ -17,11 +17,6 @@ typedef BOOL (^IsViewLeadingCandidateForNextFocus)(NSView *candidateView);
 // enumerated in the same row (or column) as the current focused view
 static const CGFloat FocusZoneBuffer = 3;
 
-// Classes FocusZone should never focus on
-static NSArray<Class> *ViewClassesToSkip() {
-	return @[[NSScroller class]];
-}
-
 @implementation RCTFocusZone
 
 static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
