@@ -20,7 +20,7 @@ export const Option = compose<OptionType>({
     const option = useOption(userProps);
     const Slots = useSlots(userProps, (layer): boolean => option.state[layer] || userProps[layer]);
     return (final: OptionProps, ...children: React.ReactNode[]) => {
-      const mergedProps = mergeProps(userProps, final);
+      const mergedProps = mergeProps(option.props, final);
 
       const checkPath = (
         <Path
