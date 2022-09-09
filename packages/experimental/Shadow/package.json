@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "@fluentui-react-native/framework": "0.8.1",
-    "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0"
+    "@fluentui-react-native/pressable": "0.9.9",
+    "@fluentui-react-native/theme-types": "0.18.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
