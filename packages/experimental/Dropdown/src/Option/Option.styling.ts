@@ -31,8 +31,8 @@ export const stylingSettings: UseStylingOptions<OptionProps, OptionSlotProps, Op
       (tokens: OptionTokens, theme: Theme) => ({
         color: tokens.color,
         style: {
-          paddingStart: tokens.spacingContentIcon,
           ...fontStyles.from(tokens, theme),
+          marginStart: tokens.spacingContentIcon,
         },
       }),
       ['color', 'spacingContentIcon', ...fontStyles.keys],
