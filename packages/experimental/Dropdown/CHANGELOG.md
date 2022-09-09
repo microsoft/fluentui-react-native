@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Wed, 07 Sep 2022 20:33:39 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 19:48:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.0
+
+Fri, 09 Sep 2022 19:48:05 GMT
+
+### Minor changes
+
+- Add default tokens for Option (ruaraki@microsoft.com)
 
 ## 0.2.1
 
