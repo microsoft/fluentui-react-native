@@ -11,20 +11,20 @@ function getShadowTokenStyleSetWorker(shadowToken: ShadowToken) {
   return {
     key: {
       shadowColor: 'blue', //shadowColorFromRGBAColor(keyShadow.color),
-      shadowOpacity: shadowOpacityFromRGBAColor(keyShadow.color),
-      shadowRadius: keyShadow.blur,
+      shadowOpacity: 1, //shadowOpacityFromRGBAColor(keyShadow.color),
+      shadowRadius: 20, //keyShadow.blur,
       shadowOffset: {
-        width: keyShadow.x,
-        height: keyShadow.y,
+        width: 10, //keyShadow.x,
+        height: 0, //keyShadow.y,
       },
     },
     ambient: {
       shadowColor: 'red', //shadowColorFromRGBAColor(ambientShadow.color),
-      shadowOpacity: shadowOpacityFromRGBAColor(ambientShadow.color),
-      shadowRadius: ambientShadow.blur,
+      shadowOpacity: 1, //shadowOpacityFromRGBAColor(ambientShadow.color),
+      shadowRadius: 20, // ambientShadow.blur,
       shadowOffset: {
-        width: ambientShadow.x,
-        height: ambientShadow.y,
+        width: -10, //ambientShadow.x,
+        height: 0, //ambientShadow.y,
       },
     },
   };

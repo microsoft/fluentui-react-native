@@ -53,6 +53,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
       style: [
         shadowTokenStyleSet.key,
         {
+          margin: 10,
           backgroundColor: 'red', // will not be shown, just something needed to be set in macOS/iOS to suppress buggy behaviour
           padding: padding,
         },
@@ -61,7 +62,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
     });
     const outerShadowProps = mergeProps(final, {
       style: [
-        shadowTokenStyleSet.ambient,
+        //shadowTokenStyleSet.ambient,
         {
           backgroundColor: 'red', // will not be shown, just something needed to be set in macOS/iOS to suppress buggy behaviour
           marginHorizontal: marginHorizontal,
