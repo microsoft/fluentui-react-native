@@ -1,7 +1,7 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
+import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/framework';
 import { IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { ColorValue } from 'react-native';
 import { SvgProps } from 'react-native-svg';
 
