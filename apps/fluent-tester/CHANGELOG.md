@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 09 Sep 2022 19:48:05 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 21:53:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.93.3
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- (macOS) Fix bug when FocusZone wraps a ScrollView (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.24
+- Bump @fluentui-react-native/experimental-tabs to v0.5.12
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.4
+- Bump @fluentui/react-native to v0.32.13
 
 ## 0.93.2
 
