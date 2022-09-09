@@ -24,7 +24,13 @@ export interface OptionTokens extends FontTokens, IBorderTokens, IColorTokens, L
   spacingContentIcon?: number;
 }
 
-export type OptionProps = IWithPressableOptions<IViewProps>;
+export interface OptionProps extends IWithPressableOptions<IViewProps> {
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<IFocusable>;
+}
+
 export type OptionState = IPressableHooks<OptionProps & React.ComponentPropsWithRef<any>>;
 
 export interface OptionSlotProps {
