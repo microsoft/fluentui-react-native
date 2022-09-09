@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "android ripple on button",
+  "packageName": "@fluentui-react-native/button",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
