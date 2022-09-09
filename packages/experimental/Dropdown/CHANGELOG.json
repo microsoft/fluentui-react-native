@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Wed, 07 Sep 2022 20:33:39 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.2.1",
+      "version": "0.2.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "bb19d377dbf9adb027ea0a2d1c2cfe8c01f4668d",
+            "comment": "Fix dependency"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Sep 2022 21:51:07 GMT",
       "tag": "@fluentui-react-native/dropdown_v0.2.0",
       "version": "0.2.0",

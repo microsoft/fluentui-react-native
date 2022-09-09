@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Thu, 08 Sep 2022 15:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.7
+
+Thu, 08 Sep 2022 15:59:45 GMT
+
+### Patches
+
+- [Avatar] Fixed bug with  multi-word titles (vkozlova@microsoft.com)
 
 ## 1.2.6
 
