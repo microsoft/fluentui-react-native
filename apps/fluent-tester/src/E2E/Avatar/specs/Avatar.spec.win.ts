@@ -1,4 +1,4 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import AvatarPageObject from '../pages/AvatarPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 import {
@@ -11,6 +11,7 @@ import {
   ACCESSIBILITY_ROLE_IMAGE,
   ACCESSIBILITY_ROLE_LINK,
 } from '../../../TestComponents/Avatar/consts';
+import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Avatar Testing Initialization', function () {
@@ -21,7 +22,7 @@ describe('Avatar Testing Initialization', function () {
 
   it('Click and navigate to Avatar test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await AvatarPageObject.scrollToComponentButton();
+    await AvatarPageObject.scrollToComponentButton(Platform.Win32);
     await AvatarPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

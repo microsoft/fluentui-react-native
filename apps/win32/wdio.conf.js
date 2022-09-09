@@ -6,7 +6,7 @@ const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bund
 const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 20000;
-const defaultConnectionRetryTimeout = 20000;
+const defaultConnectionRetryTimeout = 60000;
 const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {

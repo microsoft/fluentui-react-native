@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 06 Sep 2022 21:51:07 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 01:08:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.93.1
+
+Fri, 09 Sep 2022 01:08:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.0.30
+
+## 0.93.0
+
+Thu, 08 Sep 2022 23:05:17 GMT
+
+### Minor changes
+
+- "Adding iOS E2E Testing" (email not defined)
+
+## 0.92.1
+
+Thu, 08 Sep 2022 15:59:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.2.7
+
+## 0.92.0
+
+Wed, 07 Sep 2022 20:33:39 GMT
+
+### Minor changes
+
+- Pinning versions of WebDriverIO + Appium (safreibe@microsoft.com)
+- Bump @fluentui-react-native/dropdown to v0.2.1
 
 ## 0.91.0
 
