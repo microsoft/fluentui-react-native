@@ -2,6 +2,8 @@ import { borderStyles, buildProps, fontStyles, layoutStyles, Theme, UseStylingOp
 import { optionName, OptionProps, OptionSlotProps, OptionTokens } from './Option.types';
 import { defaultOptionTokens } from './OptionTokens';
 
+export const menuItemStates: (keyof OptionTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
+
 export const stylingSettings: UseStylingOptions<OptionProps, OptionSlotProps, OptionTokens> = {
   tokens: [defaultOptionTokens, optionName],
   slotProps: {
