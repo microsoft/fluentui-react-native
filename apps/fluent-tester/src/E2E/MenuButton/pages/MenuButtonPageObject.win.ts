@@ -5,7 +5,7 @@ import {
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_ITEM_1_COMPONENT,
 } from '../../../TestComponents/MenuButton/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 export const enum MenuButtonSelector {
   MenuButton = 0, // this._primarySelector
@@ -16,37 +16,32 @@ class MenuButtonPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  waitForMenuItemsToOpen(timeout?: number): void {
-    browser.waitUntil(
-      () => {
-        return this.menuItemDisplayed();
-      },
-      {
-        timeout: timeout ?? this.waitForPageTimeout,
-        timeoutMsg: 'The Menu Items did not open.',
-        interval: 1000,
-      },
-    );
+  async waitForMenuItemsToOpen(timeout?: number): Promise<void> {
+    await browser.waitUntil(async () => await this.menuItemDisplayed(), {
+      timeout: timeout ?? this.waitForPageTimeout,
+      timeoutMsg: 'The Menu Items did not open.',
+      interval: 1000,
+    });
   }
 
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
-  menuItemDisplayed(): boolean {
-    return this._menuItem.isDisplayed();
+  async menuItemDisplayed(): Promise<boolean> {
+    return await this._menuItem.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(selector: MenuButtonSelector, key: string): void {
-    this.getMenuButtonSelector(selector).addValue(key);
+  async sendKey(selector: MenuButtonSelector, key: string): Promise<void> {
+    await (await this.getMenuButtonSelector(selector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the MenuButton Selector */
-  getMenuButtonSelector(selector?: MenuButtonSelector): WebdriverIO.Element {
+  async getMenuButtonSelector(selector?: MenuButtonSelector): Promise<WebdriverIO.Element> {
     if (selector == MenuButtonSelector.MenuButton) {
-      return this._primaryComponent;
+      return await this._primaryComponent;
     } else if (selector == MenuButtonSelector.MenuItem1) {
-      return this._menuItem;
+      return await this._menuItem;
     }
-    return this._primaryComponent;
+    return await this._primaryComponent;
   }
 
   /*****************************************/

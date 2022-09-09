@@ -1,23 +1,21 @@
-import NavigateAppPage from '../../common/NavigateAppPage.macos';
-import SvgPageObject from '../pages/SvgPageObject.macos';
+import NavigateAppPage from '../../common/NavigateAppPage';
+import SvgPageObject from '../pages/SvgPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Svg Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy();
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
-  it('Click and navigate to Svg test page', () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    SvgPageObject.scrollToComponentButton();
-    SvgPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  it('Click and navigate to Svg test page', async () => {
+    await SvgPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToSvgPage();
-    SvgPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToSvgPage();
+    await SvgPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(SvgPageObject.isPageLoaded()).toBeTruthy();
+    await expect(await SvgPageObject.isPageLoaded()).toBeTruthy();
   });
 });
