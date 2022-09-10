@@ -1,14 +1,15 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { FocusZone, FocusTrapZone, Separator, Text } from '@fluentui/react-native';
+import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, FlatList } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, FlatList, ListRenderItemInfo } from 'react-native';
 import { BASE_TESTPAGE } from './TestComponents/Common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
+import { TestDescription } from './TestComponents';
 
 // uncomment the below lines to enable message spy
 /**
@@ -51,7 +52,7 @@ const TestListSeparator = Separator.customize((t) => ({
   separatorWidth: 2,
 }));
 
-const TestListItem = Button.customize((t) => ({
+const TestListItem = Button.customize((t: Theme) => ({
   subtle: {
     color: t.colors.neutralForeground1,
     hovered: {
@@ -142,13 +143,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const listRef = React.useRef<FlatList>();
 
-  const ListItem = (props) => {
-    const index = props.index;
-    const itemData = props.item;
+  const ListItem = React.memo((props: ListRenderItemInfo<TestDescription>) => {
+    const { index, item } = props;
 
     const ref = React.useRef<View>();
 
     const isSelected = Platform.select({
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore `isSelected` is a macOS only prop not in the TS definition yet
       macos: props.isSelected,
       default: index == selectedTestIndex,
     });
@@ -159,6 +161,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       }
     });
 
+    const onPress = React.useCallback(() => {
+      setSelectedTestIndex(index);
+      // Platform.select({
+      //   macos: listRef.current?.selectRowAtIndex(index),
+      //   default: setSelectedTestIndex(index),
+      // });
+    }, [index]);
+
     return (
       <TestListItem
         componentRef={ref}
@@ -166,21 +176,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         enableFocusRing={true}
         key={index}
         pressed={isSelected}
-        onClick={() => {
-          setSelectedTestIndex(index);
-
-          // Platform.select({
-          //   macos: listRef.current?.selectRowAtIndex(index),
-          //   default: setSelectedTestIndex(index),
-          // });
-        }}
+        onClick={onPress}
         style={fluentTesterStyles.testListItem}
-        testID={itemData.testPage}
+        testID={item.testPage}
       >
-        {itemData.name}
+        {item.name}
       </TestListItem>
     );
-  };
+  });
 
   const TestList: React.FunctionComponent = () => {
     const keyboardNavigationPropsMacOS = {
@@ -190,9 +193,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         setSelectedTestIndex(info.newSelection);
       },
     };
-
     return (
-      <FocusZone focusZoneDirection={'vertical'} style={fluentTesterStyles.testList}>
+      <>
         <FlatList
           ref={listRef}
           data={sortedTestComponents}
@@ -200,9 +202,10 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           // @ts-ignore `ListItemComponent` is `renderItem` with support for hooks
           ListItemComponent={ListItem}
           {...(Platform.OS === 'macos' && keyboardNavigationPropsMacOS)}
+          style={fluentTesterStyles.testList}
         />
         <TestListSeparator vertical style={fluentTesterStyles.testListSeparator} />
-      </FocusZone>
+      </>
     );
   };
 
