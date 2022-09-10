@@ -32,6 +32,13 @@ const TestPressableWithShadow: React.FunctionComponent = () => {
 };
 
 describe('Shadow component tests', () => {
+  beforeAll(() => {
+    jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+      OS: 'macos',
+      select: () => null,
+    }));
+  });
+
   it('Shadow (depth=2)', () => {
     const tree = renderer.create(<TestShadow displayText="Shadow (depth=2)" depth="shadow2" />).toJSON();
     expect(tree).toMatchSnapshot();
@@ -103,5 +110,9 @@ describe('Shadow component tests', () => {
 
   it('Shadow re-renders correctly', () => {
     checkReRender(() => <TestShadow displayText="Shadow render twice test" depth="shadow2" />, 2);
+  });
+
+  afterAll(() => {
+    jest.unmock('react-native/Libraries/Utilities/Platform');
   });
 });

@@ -10,7 +10,7 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.3,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -23,7 +23,7 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.25,
-        "shadowRadius": 2,
+        "shadowRadius": 1,
       }
     }
   >
@@ -44,7 +44,7 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.3,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -57,7 +57,7 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.25,
-        "shadowRadius": 4,
+        "shadowRadius": 2,
       }
     }
   >
@@ -78,7 +78,7 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.3,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -91,7 +91,7 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.25,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
       }
     }
   >
@@ -112,7 +112,7 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.3,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -125,7 +125,7 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.25,
-        "shadowRadius": 16,
+        "shadowRadius": 8,
       }
     }
   >
@@ -146,7 +146,7 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.3,
-      "shadowRadius": 8,
+      "shadowRadius": 4,
     }
   }
 >
@@ -159,7 +159,7 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.25,
-        "shadowRadius": 28,
+        "shadowRadius": 14,
       }
     }
   >
@@ -180,7 +180,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.3,
-      "shadowRadius": 8,
+      "shadowRadius": 4,
     }
   }
 >
@@ -193,7 +193,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.25,
-        "shadowRadius": 64,
+        "shadowRadius": 32,
       }
     }
   >
@@ -253,7 +253,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -266,7 +266,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.14,
-        "shadowRadius": 2,
+        "shadowRadius": 1,
       }
     }
   >
@@ -287,7 +287,7 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -300,7 +300,7 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.14,
-        "shadowRadius": 4,
+        "shadowRadius": 2,
       }
     }
   >
@@ -321,7 +321,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -334,7 +334,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.14,
-        "shadowRadius": 8,
+        "shadowRadius": 4,
       }
     }
   >
@@ -355,7 +355,7 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -368,7 +368,7 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.14,
-        "shadowRadius": 16,
+        "shadowRadius": 8,
       }
     }
   >
@@ -389,7 +389,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.2,
-      "shadowRadius": 8,
+      "shadowRadius": 4,
     }
   }
 >
@@ -402,7 +402,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 28,
+        "shadowRadius": 14,
       }
     }
   >
@@ -423,7 +423,7 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.2,
-      "shadowRadius": 8,
+      "shadowRadius": 4,
     }
   }
 >
@@ -436,7 +436,7 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.24,
-        "shadowRadius": 64,
+        "shadowRadius": 32,
       }
     }
   >
