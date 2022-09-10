@@ -1,6 +1,6 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { ButtonV1 as Button, ToggleButton } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, FlatList, ListRenderItemInfo } from 'react-native';
@@ -52,13 +52,13 @@ const TestListSeparator = Separator.customize((t) => ({
   separatorWidth: 2,
 }));
 
-const TestListItem = Button.customize((t: Theme) => ({
+const TestListItem = ToggleButton.customize((t: Theme) => ({
   subtle: {
     color: t.colors.neutralForeground1,
     hovered: {
       color: t.colors.neutralForeground1Hover,
     },
-    pressed: {
+    checked: {
       backgroundColor: t.colors.brandForeground1,
       color: t.colors.neutralForegroundInverted,
     },
@@ -175,7 +175,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         appearance={'subtle'}
         enableFocusRing={true}
         key={index}
-        pressed={isSelected}
+        checked={isSelected}
         onClick={onPress}
         style={fluentTesterStyles.testListItem}
         testID={item.testPage}
