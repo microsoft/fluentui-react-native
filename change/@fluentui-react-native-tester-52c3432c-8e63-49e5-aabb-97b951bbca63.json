@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Use Flatlist for test list",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "saadnajmi2@gmail.com",
+  "dependentChangeType": "patch"
+}
