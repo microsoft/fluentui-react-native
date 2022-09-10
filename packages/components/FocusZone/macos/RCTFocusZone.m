@@ -222,8 +222,10 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 	NSView *firstResponder = GetFirstResponder([self window]);
 	NSRect firstResponderRect = [firstResponder convertRect:[firstResponder bounds] toView:self];
+	NSScrollView * firstResponderEnclosingScrollView = [firstResponder enclosingScrollView];
 
 	__block CGFloat closestDistance = CGFLOAT_MAX;
+	__block CGFloat closestDistanceWithinEnclosingScrollView = CGFLOAT_MAX;
 
 	IsViewLeadingCandidateForNextFocus block = ^BOOL(NSView *candidateView)
 	{
@@ -274,10 +276,24 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		if (!skip)
 		{
 			CGFloat distance = GetDistanceBetweenCentersOfRects(firstResponderRect, candidateRect);
-			if (closestDistance > distance)
+			
+			// If there are other candidate views inside the same ScrollView as the firstResponder,
+			// prefer those views over other views outside the scrollview, even if they are closer.
+			if ([firstResponderEnclosingScrollView isEqualTo:[candidateView enclosingScrollView]])
 			{
-				closestDistance = distance;
-				isLeadingCandidate = YES;
+				if (closestDistanceWithinEnclosingScrollView > distance)
+				{
+					closestDistanceWithinEnclosingScrollView = distance;
+					isLeadingCandidate = YES;
+				}
+			}
+			else
+			{
+				if (closestDistance > distance)
+				{
+					closestDistance = distance;
+					isLeadingCandidate = YES;
+				}
 			}
 		}
 

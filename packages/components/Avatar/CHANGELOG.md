@@ -1,8 +1,69 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Fri, 26 Aug 2022 18:15:16 GMT and should not be manually modified.
+This log was last generated on Thu, 08 Sep 2022 15:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.7
+
+Thu, 08 Sep 2022 15:59:45 GMT
+
+### Patches
+
+- [Avatar] Fixed bug with  multi-word titles (vkozlova@microsoft.com)
+
+## 1.2.6
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.30
+- Bump @fluentui-react-native/icon to v0.13.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.3
+
+## 1.2.5
+
+Tue, 06 Sep 2022 17:08:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.29
+
+## 1.2.4
+
+Tue, 30 Aug 2022 18:36:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.28
+
+## 1.2.3
+
+Tue, 30 Aug 2022 08:26:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.27
+
+## 1.2.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.26
+- Bump @fluentui-react-native/framework to v0.8.1
+- Bump @fluentui-react-native/icon to v0.13.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+
+## 1.2.1
+
+Mon, 29 Aug 2022 12:39:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.25
 
 ## 1.2.0
 

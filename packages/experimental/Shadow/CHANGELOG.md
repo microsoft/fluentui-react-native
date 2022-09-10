@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Fri, 26 Aug 2022 18:15:16 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 23:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.15
+
+Fri, 09 Sep 2022 23:54:15 GMT
+
+### Patches
+
+- Shadows should only take a child of type View (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.2.14
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.1
 
 ## 0.2.13
 

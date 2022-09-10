@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Fri, 05 Aug 2022 23:22:38 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.13
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.12
+
+## 0.12.12
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.11
+- Bump @fluentui-react-native/framework to v0.8.1
+
+## 0.12.11
+
+Mon, 29 Aug 2022 22:11:28 GMT
+
+### Patches
+
+- Fix RTL for RadioButton and Checkbox (67026167+chiuam@users.noreply.github.com)
 
 ## 0.12.10
 

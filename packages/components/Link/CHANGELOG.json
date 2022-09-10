@@ -2,6 +2,54 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Tue, 06 Sep 2022 18:22:03 GMT",
+      "tag": "@fluentui-react-native/link_v0.16.9",
+      "version": "0.16.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.3",
+            "commit": "202705df4fb6402793b3368e586bfe16f0961070"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/text to v0.14.2",
+            "commit": "202705df4fb6402793b3368e586bfe16f0961070"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 29 Aug 2022 23:21:44 GMT",
+      "tag": "@fluentui-react-native/link_v0.16.8",
+      "version": "0.16.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.2",
+            "commit": "370259af6f245b97a9a9129d8defbdd30a0bbd9d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.2",
+            "commit": "370259af6f245b97a9a9129d8defbdd30a0bbd9d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/link",
+            "comment": "Bump @fluentui-react-native/text to v0.14.1",
+            "commit": "370259af6f245b97a9a9129d8defbdd30a0bbd9d"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 05 Aug 2022 23:22:38 GMT",
       "tag": "@fluentui-react-native/link_v0.16.7",
       "version": "0.16.7",

@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 const defaultWaitForTimeout = 20000;
-const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
+const defaultConnectionRetryTimeout = 60000;
+const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
@@ -22,19 +22,17 @@ exports.config = {
   ],
 
   /*
-   ** ===================
-   ** Test Configurations
-   ** ===================
-   ** Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
+   ** Test Configurations - Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
-
-  // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 0,
+  bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
+  specFileRetries: 3, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [
@@ -47,15 +45,19 @@ exports.config = {
   ],
 
   framework: 'jasmine',
-  jasmineNodeOpts: {
+  jasmineOpts: {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire specfile when it fails as a whole.
-  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 3,
-
   reporters: ['spec'],
+
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 
   /*
    ** ===================
@@ -99,9 +101,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function () {
-    require('ts-node').register({ files: true });
-  },
+  // before: function () {
+  // },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {String} commandName hook command name
@@ -113,22 +114,24 @@ exports.config = {
    * Hook that gets executed before the suite starts
    * @param {Object} suite suite details
    */
-  beforeSuite: function () {
+  beforeSuite: async function () {
     // Unlike other platforms, the appium Mac2 driver doesn't have a command to maximize the app.
     // Because of this, we look up the maximize window button directly through it's XCUI identifier and click it.
     let fluentTesterWindow = null;
-    browser.waitUntil(() => {
-      fluentTesterWindow = $('//*[@title="Fluent Tester" and @elementType=4]');
-      return fluentTesterWindow != null;
-    },
-    {
-      timeout: 10000,
-      timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
-      interval: 500
-    });
+    await browser.waitUntil(
+      async () => {
+        fluentTesterWindow = await $('//*[@title="Fluent Tester" and @elementType=4]');
+        return fluentTesterWindow != null;
+      },
+      {
+        timeout: 10000,
+        timeoutMsg: 'Could not find the FluentTester window. Cannot maximize app.',
+        interval: 1000,
+      },
+    );
 
-    const maxButton = fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
-    maxButton.click();
+    const maxButton = await fluentTesterWindow.$('//*[@identifier="_XCUI:FullScreenWindow" and @elementType=9]');
+    await maxButton.click();
   },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
@@ -207,9 +210,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  onComplete: function (exitCode, config, capabilities, results) {
-    //console.log('<<< TESTING FINISHED >>>');
-  },
+  // onComplete: function (exitCode, config, capabilities, results) {
+  //   console.log('<<< TESTING FINISHED >>>');
+  // },
   /**
    * Gets executed when a refresh happens.
    * @param {String} oldSessionId session ID of the old session

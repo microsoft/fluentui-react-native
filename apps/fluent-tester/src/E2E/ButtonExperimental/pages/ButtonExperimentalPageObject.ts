@@ -5,7 +5,7 @@ import {
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS,
 } from '../../../TestComponents/Button/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -16,33 +16,28 @@ class ButtonExperimentalPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  didOnClickCallbackFire(): boolean {
-    const callbackText = By(BUTTON_ON_PRESS);
-    browser.waitUntil(
-      () => {
-        return callbackText.isDisplayed();
-      },
-      {
-        timeout: this.waitForPageTimeout,
-        timeoutMsg: 'The OnClick callback did not fire.',
-        interval: 1000,
-      },
-    );
+  async didOnClickCallbackFire(): Promise<boolean> {
+    const callbackText = await By(BUTTON_ON_PRESS);
+    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+      timeout: this.waitForPageTimeout,
+      timeoutMsg: 'The OnClick callback did not fire.',
+      interval: 1000,
+    });
 
-    return callbackText.isDisplayed();
+    return await callbackText.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
-  sendKey(buttonSelector: ButtonSelector, key: string): void {
-    this.getButtonSelector(buttonSelector).addValue(key);
+  async sendKey(buttonSelector: ButtonSelector, key: string): Promise<void> {
+    await (await this.getButtonSelector(buttonSelector)).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  getButtonSelector(buttonSelector?: ButtonSelector): WebdriverIO.Element {
+  async getButtonSelector(buttonSelector?: ButtonSelector): Promise<WebdriverIO.Element> {
     if (buttonSelector == ButtonSelector.PrimaryButton) {
-      return this._primaryComponent;
+      return await this._primaryComponent;
     }
-    return this._primaryComponent;
+    return await this._primaryComponent;
   }
 
   /*****************************************/

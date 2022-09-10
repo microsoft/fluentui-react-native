@@ -4,7 +4,7 @@ import {
   HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/MenuButtonExperimental/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class ExperimentalMenuButtonPageObject extends BasePage {
   /*****************************************/
