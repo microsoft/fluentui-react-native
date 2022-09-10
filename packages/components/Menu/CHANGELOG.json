@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 09 Sep 2022 23:54:15 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.31",
+      "version": "1.0.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.24.21",
+            "commit": "a664c9d7f82b7249340da1df9a32c4b5a0e606e1"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 09 Sep 2022 01:08:39 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.30",
+      "version": "1.0.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "5e76ee7e215fba17e358672c9d69694a47b5daba",
+            "comment": "Minor fixes for caching and adding new tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Sep 2022 18:22:03 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.29",
       "version": "1.0.29",

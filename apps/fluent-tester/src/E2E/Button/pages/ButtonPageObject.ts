@@ -5,7 +5,7 @@ import {
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS_DEPRECATED,
 } from '../../../TestComponents/Button/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */

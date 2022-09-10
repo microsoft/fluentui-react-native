@@ -12,8 +12,8 @@ These are the current `Shadow` variants:
 
 |                 | Light mode                                                                                                                                                                | Dark mode                                                                                                                                                                 |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Regular shadows | <img width="801" alt="Screen Shot 2022-08-12 at 10 46 45 AM" src="https://user-images.githubusercontent.com/78454019/184426272-fe23d23f-3c60-4811-82d8-16ae8dc501d9.png"> | <img width="788" alt="Screen Shot 2022-08-12 at 12 08 56 PM" src="https://user-images.githubusercontent.com/78454019/184427236-0b93d797-fdde-4367-9caa-751bcf335eea.png"> |
-| Brand shadows   | <img width="802" alt="Screen Shot 2022-08-12 at 12 09 15 PM" src="https://user-images.githubusercontent.com/78454019/184427300-06dacedc-5f39-4dc1-b07b-536186115d2e.png"> | <img width="789" alt="Screen Shot 2022-08-12 at 12 09 03 PM" src="https://user-images.githubusercontent.com/78454019/184427338-c322d223-4719-4593-a550-8360c45aa2e5.png"> |
+| Regular shadows | <img width="820" alt="light" src="https://user-images.githubusercontent.com/78454019/187567525-64592ead-c64c-4cc1-acd3-a21abdea2d35.png"> | <img width="820" alt="dark" src="https://user-images.githubusercontent.com/78454019/187567552-3b376f4d-eacd-482d-a395-a261c374c9f6.png"> |
+| Brand shadows   | <img width="820" alt="light-brand" src="https://user-images.githubusercontent.com/78454019/187567541-c939ceaa-35b1-4cd6-84b5-55d8a5032e0c.png"> | <img width="820" alt="dark-brand" src="https://user-images.githubusercontent.com/78454019/187567558-79783f9b-2bff-463c-b7b5-7ec692b000fd.png"> |
 
 ## Sample Code
 
@@ -42,7 +42,7 @@ For an example of adding a Shadow as a slot to a Fluent component, please see th
 The `Shadow` component takes in one prop called `ShadowToken`. The variants of ShadowToken are all defined in the theme.
 If `undefined` is passed into the `shadowToken` prop, no shadow will be rendered.
 
-`Shadow` must take exactly one child, which must support a style that derives from ViewStyle (ex. View, Text)
+`Shadow` must take exactly one child, which must be of type View.
 
 ## Notes
 

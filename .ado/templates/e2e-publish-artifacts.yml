@@ -5,38 +5,21 @@ parameters:
   directory:
 
 steps:
-  # Copy Appium reports to FluentTesterDump. Only Win32 reports are located within
-  # its platform-specific folder, not /fluent-tester, which is why I added the last condition
+  # Copy Appium/WebDriverIO reports to FluentTesterDump
   - task: CopyFiles@2
     inputs:
-      sourceFolder: apps/fluent-tester/reports
+      sourceFolder: ${{parameters.directory}}/reports
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy non-Win32 Appium Reports,'
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'), ne('${{parameters.platform}}', 'win32'))
+    displayName: 'Copy ${{parameters.applicationType}} Appium/WebDriverIO Reports,'
+    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
-  # Win32 saves files in a different area than other platforms
+  # Copy errorShots to FluentTesterDump
   - task: CopyFiles@2
     inputs:
-      sourceFolder: apps/win32/reports
+      sourceFolder: ${{parameters.directory}}/errorShots
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy Win32 Appium Reports'
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'), eq('${{parameters.platform}}', 'win32'))
-
-  # Copy errorShots (non-win32) to FluentTesterDump
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: apps/fluent-tester/errorShots
-      targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy non-Win32 tree dump screenshots'
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'), ne('${{parameters.platform}}', 'win32'))
-
-  # Copy errorShots win32 to FluentTesterDump
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: apps/win32/errorShots
-      targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy Win32 tree dump screenshots'
-    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'),  eq('${{parameters.platform}}', 'win32'))
+    displayName: 'Copy ${{parameters.applicationType}} tree dump screenshots'
+    condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1

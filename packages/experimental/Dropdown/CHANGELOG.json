@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Fri, 09 Sep 2022 19:48:05 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "593a14576a58424dd02b449a986429b0be165706",
+            "comment": "Add default tokens for Option"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 07 Sep 2022 20:33:39 GMT",
       "tag": "@fluentui-react-native/dropdown_v0.2.1",
       "version": "0.2.1",

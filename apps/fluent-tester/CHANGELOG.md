@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 08 Sep 2022 15:59:45 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 23:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.93.4
+
+Fri, 09 Sep 2022 23:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.21
+- Bump @fluentui-react-native/experimental-button to v0.16.21
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.25
+- Bump @fluentui-react-native/experimental-shadow to v0.2.15
+- Bump @fluentui-react-native/menu to v1.0.31
+- Bump @fluentui-react-native/notification to v0.17.4
+- Bump @fluentui/react-native to v0.32.14
+
+## 0.93.3
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- (macOS) Fix bug when FocusZone wraps a ScrollView (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.24
+- Bump @fluentui-react-native/experimental-tabs to v0.5.12
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.4
+- Bump @fluentui/react-native to v0.32.13
+
+## 0.93.2
+
+Fri, 09 Sep 2022 19:48:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/dropdown to v0.3.0
+
+## 0.93.1
+
+Fri, 09 Sep 2022 01:08:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.0.30
+
+## 0.93.0
+
+Thu, 08 Sep 2022 23:05:17 GMT
+
+### Minor changes
+
+- "Adding iOS E2E Testing" (email not defined)
 
 ## 0.92.1
 

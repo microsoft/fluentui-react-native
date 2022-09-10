@@ -5,7 +5,7 @@ export const commonTestStyles = StyleSheet.create({
   root: {
     marginTop: 16,
     marginRight: 32,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'flex-start',
   },
   flex: { flex: 1 },

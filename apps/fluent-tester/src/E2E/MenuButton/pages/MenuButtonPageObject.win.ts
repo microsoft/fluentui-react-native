@@ -5,7 +5,7 @@ import {
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_ITEM_1_COMPONENT,
 } from '../../../TestComponents/MenuButton/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 export const enum MenuButtonSelector {
   MenuButton = 0, // this._primarySelector
