@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Fri, 09 Sep 2022 23:54:15 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Sep 2022 18:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.16
+
+Mon, 12 Sep 2022 18:52:11 GMT
+
+### Patches
+
+- Updated screenshots (78454019+lyzhan7@users.noreply.github.com)
+- Change the test (ruaraki@microsoft.com)
 
 ## 0.2.15
 
