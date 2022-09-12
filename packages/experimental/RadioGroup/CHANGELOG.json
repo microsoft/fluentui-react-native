@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Mon, 12 Sep 2022 21:48:46 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "8f785f021c98747b773771ce991979d565c0df35",
+            "comment": "Added new Radio component with new framework."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.9",
+            "commit": "8f785f021c98747b773771ce991979d565c0df35"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Sep 2022 21:53:29 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.2.4",
       "version": "0.2.4",

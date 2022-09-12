@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 12 Sep 2022 18:52:11 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Sep 2022 21:48:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.94.0
+
+Mon, 12 Sep 2022 21:48:46 GMT
+
+### Minor changes
+
+- Added new Radio component to test. (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.3.0
 
 ## 0.93.5
 

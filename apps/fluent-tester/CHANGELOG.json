@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 12 Sep 2022 21:48:46 GMT",
+      "tag": "@fluentui-react-native/tester_v0.94.0",
+      "version": "0.94.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8f785f021c98747b773771ce991979d565c0df35",
+            "comment": "Added new Radio component to test."
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.3.0",
+            "commit": "8f785f021c98747b773771ce991979d565c0df35"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Sep 2022 18:52:11 GMT",
       "tag": "@fluentui-react-native/tester_v0.93.5",
       "version": "0.93.5",
