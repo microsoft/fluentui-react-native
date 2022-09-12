@@ -52,13 +52,13 @@ const TestListSeparator = Separator.customize((t) => ({
   separatorWidth: 2,
 }));
 
-const TestListItem = ToggleButton.customize((t: Theme) => ({
+const TestListItem = Button.customize((t: Theme) => ({
   subtle: {
     color: t.colors.neutralForeground1,
     hovered: {
       color: t.colors.neutralForeground1Hover,
     },
-    checked: {
+    pressed: {
       backgroundColor: t.colors.brandForeground1,
       color: t.colors.neutralForegroundInverted,
     },
@@ -169,13 +169,20 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       // });
     }, [index]);
 
+    const enableFocusRing = Platform.select({
+      macos: false,
+      default: false,
+    });
+
     return (
       <TestListItem
         componentRef={ref}
         appearance={'subtle'}
-        enableFocusRing={true}
+        enableFocusRing={enableFocusRing}
         key={index}
-        checked={isSelected}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore `pressed` is in ButtonTokens (not props), but can be set
+        pressed={isSelected}
         onClick={onPress}
         style={fluentTesterStyles.testListItem}
         testID={item.testPage}
@@ -187,6 +194,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestList: React.FunctionComponent = () => {
     const keyboardNavigationPropsMacOS = {
+      focusable: false,
       enableSelectionOnKeyPress: true,
       initialSelectedIndex: selectedTestIndex,
       onSelectionChanged: (info) => {
