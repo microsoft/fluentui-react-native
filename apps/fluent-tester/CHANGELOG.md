@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 09 Sep 2022 23:54:15 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Sep 2022 18:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.93.5
+
+Mon, 12 Sep 2022 18:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.22
+- Bump @fluentui-react-native/experimental-button to v0.16.22
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.26
+- Bump @fluentui-react-native/experimental-shadow to v0.2.16
+- Bump @fluentui-react-native/menu to v1.0.32
+- Bump @fluentui-react-native/notification to v0.17.5
+- Bump @fluentui/react-native to v0.32.15
 
 ## 0.93.4
 

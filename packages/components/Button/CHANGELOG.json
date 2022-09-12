@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Mon, 12 Sep 2022 18:52:11 GMT",
+      "tag": "@fluentui-react-native/button_v0.24.22",
+      "version": "0.24.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "1dbd38f7204a32f336f6c1c23d5d3ed3ee0ed5e5",
+            "comment": "Update shadow jest tests"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.16",
+            "commit": "b3c75109b7cd2863307aa717b822898bda05648e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Sep 2022 23:54:15 GMT",
       "tag": "@fluentui-react-native/button_v0.24.21",
       "version": "0.24.21",
