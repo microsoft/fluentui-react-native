@@ -214,7 +214,7 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
         "width": 0,
       },
       "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -222,6 +222,8 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -236,7 +238,7 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
           "width": 0,
         },
         "shadowOpacity": 0.14,
-        "shadowRadius": 16,
+        "shadowRadius": 8,
       }
     }
   />
