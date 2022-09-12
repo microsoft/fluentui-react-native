@@ -6,16 +6,16 @@ import { Picker } from '@react-native-picker/picker';
  * MenuPicker uses the community Picker package for iOS/Win32 and our own Picker for Win32/MacOS.
  */
 
-export interface collectionItem {
+export interface CollectionItem<T = string> {
   label: string;
-  value?: string;
+  value?: T;
 }
 
 export interface MenuPickerProps {
   prompt?: string;
   selected?: string;
   onChange?: (value: any, index?: number) => void;
-  collection?: collectionItem[];
+  collection?: CollectionItem[];
   style?: any;
 }
 

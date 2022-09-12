@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Shadow } from '../Shadow';
 import { useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { Pressable } from '@fluentui-react-native/pressable';
 
 interface ShadowTestProps {
   displayText: string;
@@ -14,12 +15,30 @@ const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestP
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows[props.depth]}>
-      <Text>{props.displayText}</Text>
+      <View>
+        <Text>{props.displayText}</Text>
+      </View>
+    </Shadow>
+  );
+};
+
+const TestPressableWithShadow: React.FunctionComponent = () => {
+  const theme = useFluentTheme();
+  return (
+    <Shadow shadowToken={theme.shadows['shadow16']}>
+      <Pressable />
     </Shadow>
   );
 };
 
 describe('Shadow component tests', () => {
+  beforeAll(() => {
+    jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+      OS: 'macos',
+      select: () => null,
+    }));
+  });
+
   it('Shadow (depth=2)', () => {
     const tree = renderer.create(<TestShadow displayText="Shadow (depth=2)" depth="shadow2" />).toJSON();
     expect(tree).toMatchSnapshot();
@@ -80,11 +99,20 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Pressable that has a shadow', () => {
+    const tree = renderer.create(<TestPressableWithShadow />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Shadow simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <TestShadow displayText="Shadow render test" depth="shadow2" />, 2);
   });
 
   it('Shadow re-renders correctly', () => {
     checkReRender(() => <TestShadow displayText="Shadow render twice test" depth="shadow2" />, 2);
+  });
+
+  afterAll(() => {
+    jest.unmock('react-native/Libraries/Utilities/Platform');
   });
 });

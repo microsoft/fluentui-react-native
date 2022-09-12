@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 09 Sep 2022 01:08:39 GMT and should not be manually modified.
+This log was last generated on Mon, 12 Sep 2022 18:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.93.5
+
+Mon, 12 Sep 2022 18:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.22
+- Bump @fluentui-react-native/experimental-button to v0.16.22
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.26
+- Bump @fluentui-react-native/experimental-shadow to v0.2.16
+- Bump @fluentui-react-native/menu to v1.0.32
+- Bump @fluentui-react-native/notification to v0.17.5
+- Bump @fluentui/react-native to v0.32.15
+
+## 0.93.4
+
+Fri, 09 Sep 2022 23:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.21
+- Bump @fluentui-react-native/experimental-button to v0.16.21
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.25
+- Bump @fluentui-react-native/experimental-shadow to v0.2.15
+- Bump @fluentui-react-native/menu to v1.0.31
+- Bump @fluentui-react-native/notification to v0.17.4
+- Bump @fluentui/react-native to v0.32.14
+
+## 0.93.3
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- (macOS) Fix bug when FocusZone wraps a ScrollView (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.24
+- Bump @fluentui-react-native/experimental-tabs to v0.5.12
+- Bump @fluentui-react-native/experimental-radio-group to v0.2.4
+- Bump @fluentui/react-native to v0.32.13
+
+## 0.93.2
+
+Fri, 09 Sep 2022 19:48:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/dropdown to v0.3.0
 
 ## 0.93.1
 

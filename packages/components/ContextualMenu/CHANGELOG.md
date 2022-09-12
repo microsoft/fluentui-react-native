@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 21:53:29 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.11
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.10
 
 ## 0.18.10
 
