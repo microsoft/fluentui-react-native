@@ -23,10 +23,12 @@ export const ShadowTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
-    androidStatus: 'Experimental',
+    androidStatus: 'Backlog',
   };
 
   const description = 'A Shadow component using the Fluent Design System. Shadow components can be added to other components.';
 
-  return <Test name="Shadow Test" description={description} sections={shadowSections} status={status} />;
+  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Shadow/SPEC.md';
+
+  return <Test name="Shadow Test" description={description} spec={spec} sections={shadowSections} status={status} />;
 };

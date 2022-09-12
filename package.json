@@ -28,7 +28,7 @@
     "preinstall": "node ./scripts/use-yarn-please.js",
     "prettier": "lage prettier",
     "prettier-fix": "lage prettier-fix",
-    "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"",
+    "publish:beachball": "beachball publish --bump-deps -m\"📦 applying package updates ***NO_CI***\"  --verbose",
     "test": "lage test",
     "test-links": "markdown-link-check"
   },
@@ -58,7 +58,8 @@
     "es5-ext": "0.10.53",
     "jpeg-js": "^0.4.4",
     "moment": "^2.29.4",
-    "shell-quote": "^1.7.3"
+    "shell-quote": "^1.7.3",
+    "@types/react": "^17.0.2"
   },
   "rnx-kit": {
     "reactNativeVersion": "0.68",

@@ -1,42 +1,43 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
-import ExperimentalTabsPageObject from '../pages/ExperimentalTabsPageObject.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
+import ExperimentalTabsPageObject from '../pages/ExperimentalTabsPageObject';
 import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT } from '../../common/consts';
+import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Tabs Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Experimental Tabs test page', () => {
+  it('Click and navigate to Experimental Tabs test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    ExperimentalTabsPageObject.scrollToComponentButton();
-    ExperimentalTabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await ExperimentalTabsPageObject.scrollToComponentButton(Platform.Win32);
+    await ExperimentalTabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToExperimentalTabsPage();
-    ExperimentalTabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToExperimentalTabsPage();
+    await ExperimentalTabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalTabsPageObject.isPageLoaded()).toBeTruthy(ExperimentalTabsPageObject.ERRORMESSAGE_PAGELOAD);
-    expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ExperimentalTabsPageObject.isPageLoaded()).toBeTruthy(ExperimentalTabsPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
 describe('Experimental Tabs Accessibility Testing', () => {
-  it("Validate Experimental Tab's accessibilityRole is correct", () => {
-    ExperimentalTabsPageObject.scrollToTestElement();
-    ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  it("Validate Experimental Tab's accessibilityRole is correct", async () => {
+    await ExperimentalTabsPageObject.scrollToTestElement();
+    await ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalTabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
-    expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ExperimentalTabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
+    await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Validate Experimental TabItem's accessibilityRole is correct", () => {
-    ExperimentalTabsPageObject.scrollToTestElement();
-    ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  it("Validate Experimental TabItem's accessibilityRole is correct", async () => {
+    await ExperimentalTabsPageObject.scrollToTestElement();
+    await ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalTabsPageObject.getTabItemAccesibilityRole()).toEqual(TABITEM_A11Y_ROLE);
-    expect(ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ExperimentalTabsPageObject.getTabItemAccesibilityRole()).toEqual(TABITEM_A11Y_ROLE);
+    await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
   });
 });

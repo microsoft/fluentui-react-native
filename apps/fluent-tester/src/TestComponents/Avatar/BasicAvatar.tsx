@@ -46,6 +46,7 @@ export const StandardUsage: FunctionComponent = () => {
   };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+  const badgeStatus = presence === undefinedText ? undefined : presence;
 
   return (
     <View style={commonStyles.root}>
@@ -79,7 +80,7 @@ export const StandardUsage: FunctionComponent = () => {
           name="Satya Nadella"
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="Photo of Satya Nadella"
-          badge={{ status: presence === undefinedText ? undefined : presence, outOfOffice }}
+          badge={{ status: badgeStatus, outOfOffice, accessibilityLabel: badgeStatus }}
           imageUrl={showImage ? satyaPhotoUrl : undefined}
           avatarColor={avatarColor}
         />
@@ -100,7 +101,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={36}
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="SVG Icon"
-          icon={{ fontSource: { ...fontBuiltInProps } }}
+          icon={{ fontSource: fontBuiltInProps }}
           avatarColor={avatarColor}
           badge={{ status: 'outOfOffice', outOfOffice }}
         />
@@ -110,7 +111,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={imageSize === undefinedText ? undefined : imageSize}
           shape={isSquare ? 'square' : 'circular'}
           accessibilityLabel="SVG Icon"
-          icon={{ fontSource: { ...fontBuiltInProps }, color: 'green' }}
+          icon={{ fontSource: fontBuiltInProps, color: 'green' }}
           avatarColor={avatarColor}
           badge={{ status: 'outOfOffice', outOfOffice }}
         />

@@ -110,7 +110,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   toggleContainerFlexDirection?: ViewStyle['flexDirection'];
 
   /**
-   * States that can be applied to a button
+   * States that can be applied to a switch
    */
   hovered?: SwitchTokens;
   focused?: SwitchTokens;
@@ -119,6 +119,8 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   checked?: SwitchTokens;
   toggleOn?: SwitchTokens;
   toggleOff?: SwitchTokens;
+  beforeContent?: SwitchTokens;
+  afterContent?: SwitchTokens;
   before?: SwitchTokens;
   after?: SwitchTokens;
   above?: SwitchTokens;
@@ -161,7 +163,9 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   onText?: string;
 
   /**
-   * Sets the position of the Switch's label
+   * Sets the position of the Switch's label. The position value 'after' is mutually
+   * exclusive with the onText and offText props. This is due to variable width
+   * of the text props causing the Switch's position to change when it shouldn't.
    */
   labelPosition?: 'before' | 'above' | 'after';
 }

@@ -1,8 +1,130 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Mon, 08 Aug 2022 11:50:27 GMT and should not be manually modified.
+This log was last generated on Thu, 08 Sep 2022 15:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.7
+
+Thu, 08 Sep 2022 15:59:45 GMT
+
+### Patches
+
+- [Avatar] Fixed bug with  multi-word titles (vkozlova@microsoft.com)
+
+## 1.2.6
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.30
+- Bump @fluentui-react-native/icon to v0.13.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.3
+
+## 1.2.5
+
+Tue, 06 Sep 2022 17:08:47 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.29
+
+## 1.2.4
+
+Tue, 30 Aug 2022 18:36:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.28
+
+## 1.2.3
+
+Tue, 30 Aug 2022 08:26:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.27
+
+## 1.2.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.26
+- Bump @fluentui-react-native/framework to v0.8.1
+- Bump @fluentui-react-native/icon to v0.13.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+
+## 1.2.1
+
+Mon, 29 Aug 2022 12:39:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.25
+
+## 1.2.0
+
+Fri, 26 Aug 2022 18:15:16 GMT
+
+### Minor changes
+
+- update avatar hashing to match native avatar (joannaquu@gmail.com)
+- Bump @fluentui-react-native/badge to v0.1.24
+
+### Patches
+
+- Fixed PresenceBadge Tester page (vkozlova@microsoft.com)
+
+## 1.1.40
+
+Thu, 18 Aug 2022 18:41:33 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.23
+
+## 1.1.39
+
+Wed, 17 Aug 2022 08:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.22
+
+## 1.1.38
+
+Tue, 16 Aug 2022 18:18:21 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.21
+
+## 1.1.37
+
+Fri, 12 Aug 2022 15:05:04 GMT
+
+### Patches
+
+- Added inner gap for the Avatar (vkozlova@microsoft.com)
+
+## 1.1.36
+
+Thu, 11 Aug 2022 11:02:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.20
+
+## 1.1.35
+
+Wed, 10 Aug 2022 20:10:58 GMT
+
+### Patches
+
+- Investigation of codeQL bug (v.kozova13@gmail.com)
 
 ## 1.1.34
 

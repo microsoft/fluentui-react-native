@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback } from 'react';
-import { View, Platform, Text, Image } from 'react-native';
+import { View, Platform, Text, Image, FlexStyle } from 'react-native';
 import {
   Badge,
   BadgeAppearance,
@@ -25,15 +25,17 @@ const badgeSizes: BadgeSize[] = [...BadgeSizes];
 const badgeAppearances: BadgeAppearance[] = [...BadgeAppearances];
 const badgeIconPositions = ['before', 'after'];
 
-const BadgeNoBorder = Badge.customize({
-  borderColor: 'transparent',
-  borderWidth: 0,
-});
-
 const StyledBadge = Badge.customize({
-  backgroundColor: 'yellow',
-  borderColor: '#f09',
+  fontWeight: 'bold',
+  fontSize: 12,
+  fontFamily: 'Georgia',
+  backgroundColor: '#f09',
+  borderColor: 'purple',
+  color: 'yellow',
   borderWidth: 4,
+  borderStyle: 'dashed',
+  borderRadius: 2,
+  iconColor: 'cyan',
 });
 
 export const BasicBadge: React.FunctionComponent = () => {
@@ -65,7 +67,8 @@ export const BasicBadge: React.FunctionComponent = () => {
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
   const badgeConfig = {
     appearance: badgeAppearance,
-    color: badgeColor,
+    badgeColor,
+    position: 'absolute' as FlexStyle['position'],
     size,
     shape,
   };
@@ -85,17 +88,20 @@ export const BasicBadge: React.FunctionComponent = () => {
         </>
       )}
 
-      {svgIconsEnabled && showIcon ? (
-        <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
-          Basic badge
-        </Badge>
-      ) : (
-        <Badge {...badgeConfig}>Basic badge</Badge>
-      )}
+      <View style={{ position: 'relative', backgroundColor: 'yellow', padding: 20, width: 200 }}>
+        <Text>Parent component for the Badge</Text>
+        {svgIconsEnabled && showIcon ? (
+          <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
+            Basic badge
+          </Badge>
+        ) : (
+          <Badge {...badgeConfig}>Basic badge</Badge>
+        )}
+      </View>
 
       <Text>Size</Text>
       <Badge size="tiny" shape="circular" />
-      <Badge size="extraSmall" shape="circular" />
+      <Badge size="extraSmall" shape="circular" badgeColor="red" />
       <Badge size="small">Small</Badge>
       <Badge size="medium">Medium</Badge>
       <Badge size="large">Large</Badge>
@@ -110,11 +116,10 @@ export const BasicBadge: React.FunctionComponent = () => {
           </Badge>
           <Badge appearance="outline" icon={iconProps} />
           <Badge icon={{ fontSource: { ...fontBuiltInProps }, color: '#fff' }}>Badge with icon</Badge>
-          <Text>Customized Badge</Text>
-          <BadgeNoBorder appearance="outline" icon={iconProps} />
+          <Text>Customized Badge with icon</Text>
+          <StyledBadge icon={{ svgSource: svgProps }}>Styled badge</StyledBadge>
         </>
       )}
-      <StyledBadge appearance="outline">Styled badge</StyledBadge>
     </View>
   );
 };

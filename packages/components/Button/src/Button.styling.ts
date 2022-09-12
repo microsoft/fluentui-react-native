@@ -1,6 +1,6 @@
 import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { borderStyles, layoutStyles, fontStyles, shadowStyles, FontTokens } from '@fluentui-react-native/tokens';
+import { borderStyles, layoutStyles, fontStyles, FontTokens } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
 import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { Platform, ColorValue } from 'react-native';
@@ -44,10 +44,9 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           backgroundColor: tokens.backgroundColor,
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
-          ...shadowStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
+      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => {

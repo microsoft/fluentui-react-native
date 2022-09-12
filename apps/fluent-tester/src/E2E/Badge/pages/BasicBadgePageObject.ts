@@ -4,19 +4,22 @@ import {
   BADGE_TEST_COMPONENT,
   BADGE_SECONDARY_TEST_COMPONENT,
 } from '../../../TestComponents/Badge/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 export const enum BadgeComponentSelector {
   PrimaryComponent, //this._primaryComponent
   SecondaryComponent, //this._secondaryComponent
 }
+
 class BasicBadgePageObject extends BasePage {
-  getPrimaryComponentAttribute(attribute: string): string {
-    return this._primaryComponent.getAttribute(attribute);
+  async getPrimaryComponentAttribute(attribute: string): Promise<string> {
+    return await this._primaryComponent.getAttribute(attribute);
   }
-  getSecondaryComponentAttribute(attribute: string): string {
-    return this._secondaryComponent.getAttribute(attribute);
+
+  async getSecondaryComponentAttribute(attribute: string): Promise<string> {
+    return await this._secondaryComponent.getAttribute(attribute);
   }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/

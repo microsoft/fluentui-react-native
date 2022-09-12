@@ -1,8 +1,71 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 05 Aug 2022 23:22:38 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Sep 2022 01:08:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.30
+
+Fri, 09 Sep 2022 01:08:39 GMT
+
+### Patches
+
+- Minor fixes for caching and adding new tokens (ruaraki@microsoft.com)
+
+## 1.0.29
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.9
+- Bump @fluentui-react-native/interactive-hooks to v0.18.3
+- Bump @fluentui-react-native/text to v0.14.2
+- Bump @fluentui-react-native/button to v0.24.20
+
+## 1.0.28
+
+Wed, 31 Aug 2022 12:11:39 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.19
+
+## 1.0.27
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.8
+- Bump @fluentui-react-native/framework to v0.8.1
+- Bump @fluentui-react-native/interactive-hooks to v0.18.2
+- Bump @fluentui-react-native/text to v0.14.1
+- Bump @fluentui-react-native/button to v0.24.18
+
+## 1.0.26
+
+Fri, 26 Aug 2022 18:15:17 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.17
+
+## 1.0.25
+
+Mon, 15 Aug 2022 23:29:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.16
+
+## 1.0.24
+
+Mon, 15 Aug 2022 22:12:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.15
 
 ## 1.0.23
 

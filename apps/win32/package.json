@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.23.8",
+  "version": "0.26.1",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -31,32 +31,32 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.84.0",
+    "@fluentui-react-native/tester": "^0.93.1",
     "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0",
+    "react-native-svg": "12.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@office-iss/react-native-win32": "^0.68.0",
-    "@office-iss/rex-win32": "0.66.17-devmain.15229.10000",
+    "@office-iss/rex-win32": "0.68.15-devmain.15710.10000",
     "@rnx-kit/cli": "^0.9.57",
     "@rnx-kit/metro-config": "^1.2.26",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.0",
-    "@wdio/allure-reporter": "^6.5.0",
-    "@wdio/appium-service": "^6.5.0",
-    "@wdio/cli": "^6.5.0",
-    "@wdio/jasmine-framework": "^6.5.0",
-    "@wdio/local-runner": "^6.5.0",
-    "@wdio/spec-reporter": "^6.5.0",
-    "@wdio/sync": "^6.5.0",
+    "@wdio/allure-reporter": "7.23.0",
+    "@wdio/appium-service": "7.23.0",
+    "@wdio/cli": "7.23.0",
+    "@wdio/jasmine-framework": "7.23.0",
+    "@wdio/local-runner": "7.23.0",
+    "@wdio/spec-reporter": "7.23.0",
     "allure-commandline": "2.13.0",
-    "appium": "^2.0.0-beta.27",
-    "appium-windows-driver": "^2.0.1",
+    "appium": "2.0.0-beta.41",
+    "appium-windows-driver": "2.0.7",
     "metro-config": "^0.67.0",
     "metro-react-native-babel-preset": "^0.67.0",
     "react-native-svg-transformer": "^1.0.0",
@@ -64,7 +64,7 @@
     "ts-node": "^8.10.1",
     "tsconfig-paths": "^3.9.0",
     "typescript": "4.5.4",
-    "webdriverio": "^6.5.0"
+    "webdriverio": "7.23.0"
   },
   "jest": {
     "preset": "react-native"
