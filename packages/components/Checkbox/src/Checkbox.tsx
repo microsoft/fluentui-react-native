@@ -63,7 +63,7 @@ export const Checkbox = compose<CheckboxType>({
         <Slots.root {...mergedProps}>
           {Checkbox.state.labelIsBefore && labelComponent}
           <Slots.checkbox>
-            <Slots.checkmark width="12" height="12" key="checkmark" viewBox="0 0 12 12">
+            <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
               {checkmarkPath}
             </Slots.checkmark>
           </Slots.checkbox>
