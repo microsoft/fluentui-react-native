@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { ShadowProps, shadowName } from './Shadow.types';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { getShadowTokenStyleSet } from './shadowStyle';
+import { memoize } from '@fluentui-react-native/framework';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
@@ -22,90 +23,92 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 
     const { style: childStyle = {}, ...restOfChildProps } = child.props;
 
-    const {
-      borderBottomWidth,
-      borderEndWidth,
-      borderLeftWidth,
-      borderRightWidth,
-      borderStartWidth,
-      borderTopWidth,
-      borderWidth,
+    const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, shadowTokenStyleSet);
+    const innerShadowViewProps = mergeProps(restOfChildProps, shadowViewStyleProps.inner);
+    const outerShadowViewProps = mergeProps(final, shadowViewStyleProps.outer);
 
-      margin,
-      marginBottom,
-      marginEnd,
-      marginHorizontal,
-      marginLeft,
-      marginRight,
-      marginStart,
-      marginTop,
-      marginVertical,
+    const childWithInnerShadow = React.cloneElement(child, innerShadowViewProps);
 
-      padding,
-      paddingBottom,
-      paddingEnd,
-      paddingHorizontal,
-      paddingLeft,
-      paddingRight,
-      paddingStart,
-      paddingTop,
-      paddingVertical,
-
-      ...restOfChildStyleProps
-    } = childStyle;
-
-    const innerShadowProps = mergeProps(restOfChildProps, {
-      style: [
-        shadowTokenStyleSet.key,
-        {
-          backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
-
-          padding: padding,
-          paddingBottom: paddingBottom,
-          paddingEnd: paddingEnd,
-          paddingHorizontal: paddingHorizontal,
-          paddingLeft: paddingLeft,
-          paddingRight: paddingRight,
-          paddingStart: paddingStart,
-          paddingTop: paddingTop,
-          paddingVertical: paddingVertical,
-
-          borderBottomWidth: borderBottomWidth,
-          borderEndWidth: borderEndWidth,
-          borderLeftWidth: borderLeftWidth,
-          borderRightWidth: borderRightWidth,
-          borderStartWidth: borderStartWidth,
-          borderTopWidth: borderTopWidth,
-          borderWidth: borderWidth,
-        },
-        restOfChildStyleProps,
-      ],
-    });
-
-    const outerShadowProps = mergeProps(final, restOfChildStyleProps, {
-      style: [
-        shadowTokenStyleSet.ambient,
-        {
-          backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
-
-          margin: margin,
-          marginBottom: marginBottom,
-          marginEnd: marginEnd,
-          marginHorizontal: marginHorizontal,
-          marginLeft: marginLeft,
-          marginRight: marginRight,
-          marginStart: marginStart,
-          marginTop: marginTop,
-          marginVertical: marginVertical,
-        },
-      ],
-    });
-
-    const childWithInnerShadow = React.cloneElement(child, innerShadowProps);
-
-    return <View {...outerShadowProps}>{childWithInnerShadow}</View>;
+    return <View {...outerShadowViewProps}>{childWithInnerShadow}</View>;
   };
 });
+
+const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);
+function getStylePropsForShadowViewsWorker(childStyleProps: any, shadowTokenStyleSet: any) {
+  const {
+    borderBottomWidth,
+    borderEndWidth,
+    borderLeftWidth,
+    borderRightWidth,
+    borderStartWidth,
+    borderTopWidth,
+    borderWidth,
+
+    margin,
+    marginBottom,
+    marginEnd,
+    marginHorizontal,
+    marginLeft,
+    marginRight,
+    marginStart,
+    marginTop,
+    marginVertical,
+
+    padding,
+    paddingBottom,
+    paddingEnd,
+    paddingHorizontal,
+    paddingLeft,
+    paddingRight,
+    paddingStart,
+    paddingTop,
+    paddingVertical,
+
+    ...restOfChildStyleProps
+  } = childStyleProps;
+
+  return {
+    inner: {
+      style: {
+        backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
+        ...(padding && { padding }),
+        ...(paddingBottom && { paddingBottom }),
+        ...(paddingEnd && { paddingEnd }),
+        ...(paddingHorizontal && { paddingHorizontal }),
+        ...(paddingLeft && { paddingLeft }),
+        ...(paddingRight && { paddingRight }),
+        ...(paddingStart && { paddingStart }),
+        ...(paddingTop && { paddingTop }),
+        ...(paddingVertical && { paddingVertical }),
+        ...(borderBottomWidth && { borderBottomWidth }),
+        ...(borderEndWidth && { borderEndWidth }),
+        ...(borderLeftWidth && { borderLeftWidth }),
+        ...(borderRightWidth && { borderRightWidth }),
+        ...(borderStartWidth && { borderStartWidth }),
+        ...(borderTopWidth && { borderTopWidth }),
+        ...(borderWidth && { borderWidth }),
+        ...shadowTokenStyleSet.key,
+        ...restOfChildStyleProps,
+      },
+    },
+    outer: {
+      style: {
+        backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
+        ...(margin && { margin }),
+        ...(marginBottom && { marginBottom }),
+        ...(marginEnd && { marginEnd }),
+        ...(marginHorizontal && { marginHorizontal }),
+        ...(marginLeft && { marginLeft }),
+        ...(marginRight && { marginRight }),
+        ...(marginStart && { marginStart }),
+        ...(marginTop && { marginTop }),
+        ...(marginVertical && { marginVertical }),
+        ...shadowTokenStyleSet.ambient,
+        ...restOfChildStyleProps,
+      },
+    },
+  };
+}
 
 Shadow.displayName = shadowName;
 
