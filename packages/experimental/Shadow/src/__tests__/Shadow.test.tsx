@@ -31,6 +31,21 @@ const TestPressableWithShadow: React.FunctionComponent = () => {
   );
 };
 
+interface ShadowOnChildViewWithProps {
+  childViewStyleProps: object;
+}
+
+const TestShadowOnChildViewWithProps: React.FunctionComponent<ShadowOnChildViewWithProps> = (props: ShadowOnChildViewWithProps) => {
+  const theme = useFluentTheme();
+  return (
+    <Shadow shadowToken={theme.shadows['shadow16']}>
+      <View style={props.childViewStyleProps}>
+        <Text>{JSON.stringify(props.childViewStyleProps)}</Text>
+      </View>
+    </Shadow>
+  );
+};
+
 describe('Shadow component tests', () => {
   beforeAll(() => {
     jest.mock('react-native/Libraries/Utilities/Platform', () => ({
@@ -101,6 +116,16 @@ describe('Shadow component tests', () => {
 
   it('Pressable that has a shadow', () => {
     const tree = renderer.create(<TestPressableWithShadow />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Shadow on a child with margin and padding', () => {
+    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ margin: 2, padding: 2 }} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Shadow on a child with border radius', () => {
+    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderRadius: 2 }} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

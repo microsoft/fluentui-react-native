@@ -4,6 +4,7 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -17,6 +18,7 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 1,
@@ -38,6 +40,7 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -51,6 +54,7 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 2,
@@ -72,6 +76,7 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -85,6 +90,7 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 4,
@@ -106,6 +112,7 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -119,6 +126,7 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 8,
@@ -140,6 +148,7 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -153,6 +162,7 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 14,
@@ -174,6 +184,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -187,6 +198,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 32,
@@ -208,13 +220,14 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
         "width": 0,
       },
       "shadowOpacity": 0.12,
-      "shadowRadius": 2,
+      "shadowRadius": 1,
     }
   }
 >
@@ -222,6 +235,8 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -230,13 +245,14 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 8,
           "width": 0,
         },
         "shadowOpacity": 0.14,
-        "shadowRadius": 16,
+        "shadowRadius": 8,
       }
     }
   />
@@ -247,6 +263,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -260,6 +277,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 1,
@@ -281,6 +299,7 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -294,6 +313,7 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 2,
@@ -315,6 +335,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -328,6 +349,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 4,
@@ -349,6 +371,7 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -362,6 +385,7 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 8,
@@ -383,6 +407,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -396,6 +421,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 14,
@@ -417,6 +443,7 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "red",
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -430,6 +457,7 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
   <View
     style={
       Object {
+        "backgroundColor": "red",
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 32,
@@ -442,6 +470,82 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
   >
     <Text>
       Shadow (depth=64)
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow on a child with border radius 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "red",
+      "borderRadius": 2,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+        "borderRadius": 2,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 8,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
+      }
+    }
+  >
+    <Text>
+      {"borderRadius":2}
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`Shadow component tests Shadow on a child with margin and padding 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "red",
+      "margin": 2,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+        "padding": 2,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 8,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
+      }
+    }
+  >
+    <Text>
+      {"margin":2,"padding":2}
     </Text>
   </View>
 </View>
