@@ -4,32 +4,6 @@ import { ShadowProps, shadowName } from './Shadow.types';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { getShadowTokenStyleSet } from './shadowStyle';
 
-// Original component
-// export const Shadow = stagedComponent((props: ShadowProps) => {
-//   return (final: ShadowProps, children: React.ReactNode) => {
-//     if (!props.shadowToken) {
-//       return <>{children}</>;
-//     }
-
-//     const shadowTokenStyleSet = getShadowTokenStyleSet(props.shadowToken);
-//     const mergedProps = mergeProps(final, { style: shadowTokenStyleSet.ambient });
-
-//     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
-//     const child = childrenArray[0];
-
-//     if (__DEV__) {
-//       if (childrenArray.length !== 1) {
-//         console.warn('Shadow must only have one child');
-//       }
-//     }
-
-//     const childWithKeyShadow = React.cloneElement(child, mergeProps(child.props, { style: shadowTokenStyleSet.key }));
-
-//     return <View {...mergedProps}>{childWithKeyShadow}</View>;
-//   };
-// });
-
-// Approach 1: Pulling out margin/padding
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
     if (!props.shadowToken) {
@@ -46,35 +20,90 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
       }
     }
 
-    const { style, ...restOfChildProps } = child.props;
-    const { marginHorizontal, marginVertical, padding, ...restOfChildStyleProps } = style; // for now, just the props for the shadow box
+    const { style: childStyle = {}, ...restOfChildProps } = child.props;
+
+    const {
+      borderBottomWidth,
+      borderEndWidth,
+      borderLeftWidth,
+      borderRightWidth,
+      borderStartWidth,
+      borderTopWidth,
+      borderWidth,
+
+      margin,
+      marginBottom,
+      marginEnd,
+      marginHorizontal,
+      marginLeft,
+      marginRight,
+      marginStart,
+      marginTop,
+      marginVertical,
+
+      padding,
+      paddingBottom,
+      paddingEnd,
+      paddingHorizontal,
+      paddingLeft,
+      paddingRight,
+      paddingStart,
+      paddingTop,
+      paddingVertical,
+
+      ...restOfChildStyleProps
+    } = childStyle;
 
     const innerShadowProps = mergeProps(restOfChildProps, {
       style: [
         shadowTokenStyleSet.key,
         {
-          margin: 10,
-          backgroundColor: 'red', // will not be shown, just something needed to be set in macOS/iOS to suppress buggy behaviour
+          backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
+
           padding: padding,
+          paddingBottom: paddingBottom,
+          paddingEnd: paddingEnd,
+          paddingHorizontal: paddingHorizontal,
+          paddingLeft: paddingLeft,
+          paddingRight: paddingRight,
+          paddingStart: paddingStart,
+          paddingTop: paddingTop,
+          paddingVertical: paddingVertical,
+
+          borderBottomWidth: borderBottomWidth,
+          borderEndWidth: borderEndWidth,
+          borderLeftWidth: borderLeftWidth,
+          borderRightWidth: borderRightWidth,
+          borderStartWidth: borderStartWidth,
+          borderTopWidth: borderTopWidth,
+          borderWidth: borderWidth,
         },
         restOfChildStyleProps,
       ],
     });
-    const outerShadowProps = mergeProps(final, {
+
+    const outerShadowProps = mergeProps(final, restOfChildStyleProps, {
       style: [
-        //shadowTokenStyleSet.ambient,
+        shadowTokenStyleSet.ambient,
         {
-          backgroundColor: 'red', // will not be shown, just something needed to be set in macOS/iOS to suppress buggy behaviour
+          backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
+
+          margin: margin,
+          marginBottom: marginBottom,
+          marginEnd: marginEnd,
           marginHorizontal: marginHorizontal,
+          marginLeft: marginLeft,
+          marginRight: marginRight,
+          marginStart: marginStart,
+          marginTop: marginTop,
           marginVertical: marginVertical,
         },
-        restOfChildStyleProps,
       ],
     });
 
-    const childWithKeyShadow = React.cloneElement(child, innerShadowProps);
+    const childWithInnerShadow = React.cloneElement(child, innerShadowProps);
 
-    return <View {...outerShadowProps}>{childWithKeyShadow}</View>;
+    return <View {...outerShadowProps}>{childWithInnerShadow}</View>;
   };
 });
 
