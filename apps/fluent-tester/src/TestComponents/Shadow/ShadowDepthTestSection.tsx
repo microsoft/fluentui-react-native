@@ -1,21 +1,19 @@
 import * as React from 'react';
-import { commonTestStyles } from '../Common/styles';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
 import { ShadowToken, useTheme } from '@fluentui-react-native/theme-types';
-import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 
-const getThemedStyles = themedStyleSheet(() => {
-  return {
+const styles = StyleSheet.create({
+  shadowTestBox: {
     maxWidth: 732,
     minHeight: 64,
     borderRadius: 8,
     padding: 20,
     marginVertical: 16,
     marginHorizontal: 32,
-  };
+  },
 });
 
 interface ShadowTestBoxProps {
@@ -26,23 +24,12 @@ interface ShadowTestBoxProps {
 
 const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: ShadowTestBoxProps) => {
   const theme = useTheme();
-  //const themedStyles = getThemedStyles(theme);
   const backgroundColor = props.isBrand ? theme.colors.brandedBackground : theme.colors.background;
   const textColor = props.isBrand ? theme.colors.primaryButtonText : theme.colors.bodyText;
 
   return (
     <Shadow shadowToken={props.shadowToken}>
-      <View
-        style={{
-          maxWidth: 732,
-          minHeight: 64,
-          borderRadius: 8,
-          padding: 20,
-          marginVertical: 16,
-          marginHorizontal: 32,
-          backgroundColor: backgroundColor,
-        }}
-      >
+      <View style={mergeStyles(styles.shadowTestBox, { backgroundColor: backgroundColor })}>
         <Text variant="bodySemibold" color={textColor}>
           {props.shadowDepthText}
         </Text>
