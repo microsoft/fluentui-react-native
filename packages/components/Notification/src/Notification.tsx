@@ -81,7 +81,7 @@ export const Notification = compose<NotificationType>({
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
-      const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
+      const mergedProps = mergeProps<PressableProps>(rest, { style: rootStyle });
       const iconProps = createIconProps(icon);
       const notificationButtonProps = createNotificationButtonProps(userProps);
 
