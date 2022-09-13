@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Run E2E tests sequentially",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
