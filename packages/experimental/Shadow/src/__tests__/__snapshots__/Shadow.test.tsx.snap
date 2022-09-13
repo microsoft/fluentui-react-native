@@ -513,6 +513,43 @@ exports[`Shadow component tests Shadow on a child with border radius 1`] = `
 </View>
 `;
 
+exports[`Shadow component tests Shadow on a child with border radius 2`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "red",
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "red",
+        "borderWidth": 2,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 8,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 8,
+      }
+    }
+  >
+    <Text>
+      {"borderWidth":2}
+    </Text>
+  </View>
+</View>
+`;
+
 exports[`Shadow component tests Shadow on a child with margin and padding 1`] = `
 <View
   style={

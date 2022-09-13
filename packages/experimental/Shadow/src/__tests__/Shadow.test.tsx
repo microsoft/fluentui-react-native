@@ -129,6 +129,11 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Shadow on a child with border width', () => {
+    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderWidth: 2 }} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Shadow simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <TestShadow displayText="Shadow render test" depth="shadow2" />, 2);
   });
