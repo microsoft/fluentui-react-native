@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 14 Sep 2022 19:40:18 GMT",
+      "tag": "@fluentui-react-native/tester_v0.95.0",
+      "version": "0.95.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "690c4978c5bc43ce6eec6457862cc430338ece58",
+            "comment": "Adding Appium driver dependencies"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.12.14",
+            "commit": "d8079ac9927eeb41ef14181377d59a582a86374b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.3.1",
+            "commit": "d8079ac9927eeb41ef14181377d59a582a86374b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.32.16",
+            "commit": "d8079ac9927eeb41ef14181377d59a582a86374b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 12 Sep 2022 21:48:46 GMT",
       "tag": "@fluentui-react-native/tester_v0.94.0",
       "version": "0.94.0",

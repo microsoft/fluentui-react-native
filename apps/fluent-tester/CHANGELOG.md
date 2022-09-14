@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 12 Sep 2022 21:48:46 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Sep 2022 19:40:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.95.0
+
+Wed, 14 Sep 2022 19:40:18 GMT
+
+### Minor changes
+
+- Adding Appium driver dependencies (safreibe@microsoft.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.14
+- Bump @fluentui-react-native/experimental-radio-group to v0.3.1
+- Bump @fluentui/react-native to v0.32.16
 
 ## 0.94.0
 

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Previous win32 Checkbox checkmark was too thin and presented visibility issues. Changed SVG path and styling of component to make checkmark thicker.",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

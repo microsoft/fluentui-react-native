@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update dependency",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

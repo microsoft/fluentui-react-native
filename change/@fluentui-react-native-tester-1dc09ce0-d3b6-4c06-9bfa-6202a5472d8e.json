@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Adding Appium driver dependencies",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
