@@ -93,7 +93,7 @@ export class BasePage {
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
   async waitForPageDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isPageLoaded(), {
+    await browser.waitUntil(async () => (await this.isPageLoaded()) || (await this._primaryComponent.isDisplayed()), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
       interval: 1500,

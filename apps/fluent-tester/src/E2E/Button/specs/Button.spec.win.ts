@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ButtonPageObject /*, { ButtonSelector }*/ from '../pages/ButtonPageObject';
+import ButtonPageObject, { ButtonSelector } from '../pages/ButtonPageObject';
 import { ComponentSelector, Platform } from '../../common/BasePage';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPRECATED } from '../../../TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -48,32 +48,32 @@ describe('Button Accessibility Testing', () => {
   });
 });
 
-// describe('Button Functional Testing', () => {
-//   /* Scrolls and waits for the Button to be visible on the Test Page */
-//   beforeEach(async () => {
-//     await ButtonPageObject.scrollToTestElement();
-//     await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-//   });
+describe('Button Functional Testing', () => {
+  /* Scrolls and waits for the Button to be visible on the Test Page */
+  beforeEach(async () => {
+    await ButtonPageObject.scrollToTestElement();
+    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
 
-//   it('Validate OnClick() callback was fired -> Click', async () => {
-//     await ButtonPageObject.clickComponent();
-//     await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-//     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate OnClick() callback was fired -> Click', async () => {
+    await ButtonPageObject.clickComponent();
+    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
-//     await ButtonPageObject.clickComponent(); // Reset Button State
-//   });
+    await ButtonPageObject.clickComponent(); // Reset Button State
+  });
 
-//   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
-//     await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
-//     await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-//     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
+    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
+    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
-//     await ButtonPageObject.clickComponent(); // Reset Button State
-//   });
+    await ButtonPageObject.clickComponent(); // Reset Button State
+  });
 
-//   it('Validate OnClick() callback was fired -> Type "Spacebar"', async () => {
-//     await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
-//     await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-//     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
-//   });
-// });
+  it('Validate OnClick() callback was fired -> Type "Spacebar"', async () => {
+    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
+    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  });
+});
