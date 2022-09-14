@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Sep 2022 19:40:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.13
+
+Wed, 14 Sep 2022 19:40:18 GMT
+
+### Patches
+
+- Previous win32 Checkbox checkmark was too thin and presented visibility issues. Changed SVG path and styling of component to make checkmark thicker. (email not defined)
 
 ## 0.16.12
 

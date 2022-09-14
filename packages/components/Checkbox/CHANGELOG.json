@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Wed, 14 Sep 2022 19:40:18 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.16.13",
+      "version": "0.16.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "46f1f35cb1f94b5f0b77ce8cfc815ad0cb6f0d64",
+            "comment": "Previous win32 Checkbox checkmark was too thin and presented visibility issues. Changed SVG path and styling of component to make checkmark thicker."
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Sep 2022 18:22:03 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.16.12",
       "version": "0.16.12",
