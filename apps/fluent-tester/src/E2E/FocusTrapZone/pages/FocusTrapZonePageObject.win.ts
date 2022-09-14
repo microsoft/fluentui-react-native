@@ -3,7 +3,7 @@ import {
   FOCUSTRAPZONE_TEST_COMPONENT,
   HOMEPAGE_FOCUSTRAPZONE_BUTTON,
 } from '../../../TestComponents/FocusTrapZone/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { BasePage, By } from '../../common/BasePage';
 
 class FocusTrapZonePageObject extends BasePage {
   // OVERRIDE: We use isExisting() here instead of isDisplayed() because FocusTrapZone does not have any UI to it, it's simply

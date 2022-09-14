@@ -1,6 +1,7 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import TokenPageObject from '../pages/TokensPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Tokens Testing Initialization', function () {
@@ -11,7 +12,7 @@ describe('Tokens Testing Initialization', function () {
 
   it('Click and navigate to Tokens test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await TokenPageObject.scrollToComponentButton();
+    await TokenPageObject.scrollToComponentButton(Platform.Win32);
     await TokenPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
