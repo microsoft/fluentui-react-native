@@ -5,7 +5,7 @@ import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
@@ -34,7 +34,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-const extractMarginAndroid = (style) => {
+export const extractMarginAndroid = (style) => {
   const marginKeys = [
     'margin',
     'marginTop',
@@ -67,13 +67,10 @@ export const Button = compose<ButtonType>({
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
-    const [rippledPressed, setRippleState] = React.useState(false);
     const button = useButton(userProps);
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) =>
-      buttonLookup(layer, { ...button.state, pressed: rippledPressed || button.state.pressed }, userProps),
-    );
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
@@ -117,14 +114,14 @@ export const Button = compose<ButtonType>({
               accessibilityLabel={label}
               {...mergedProps}
               style={styleWithoutMargin}
-              onPressIn={() => {
-                setRippleState(true);
+              onPressIn={memoize(() => {
+                mergedProps.setRippleStateAndroid(true);
                 mergedProps.onPressIn?.();
-              }}
-              onPressOut={() => {
-                setRippleState(false);
+              })}
+              onPressOut={memoize(() => {
+                mergedProps.setRippleStateAndroid(false);
                 mergedProps.onPressOut?.();
-              }}
+              })}
             >
               {buttonContent}
             </Slots.ripple>

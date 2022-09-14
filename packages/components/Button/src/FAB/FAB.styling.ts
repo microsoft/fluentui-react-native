@@ -1,34 +1,72 @@
-import { ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
-import { FABSlotProps } from './FAB.types';
+import { ButtonCoreTokens } from '../Button.types';
+import { FABProps, FABSlotProps } from './FAB.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { buttonCoreStates } from '../Button.styling';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { Platform } from 'react-native';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
-export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, ButtonCoreTokens> = {
+export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCoreTokens> = {
   tokens: [defaultFABTokens, defaultFABColorTokens],
   states: [...buttonCoreStates],
   slotProps: {
-    root: buildProps(
-      (tokens: ButtonCoreTokens, theme: Theme) => ({
-        style: {
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          justifyContent: 'center',
-          width: tokens.width,
-          backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-          ...shadowStyles.from(tokens, theme),
-        },
-        elevation: tokens.elevation,
-      }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
-    ),
+    ...Platform.select({
+      android: {
+        root: buildProps(
+          (tokens: ButtonCoreTokens, theme: Theme) => {
+            return {
+              style: {
+                flexDirection: 'row',
+                alignSelf: 'baseline',
+                backgroundColor: tokens.backgroundColor,
+                ...borderStyles.from(tokens, theme),
+                overflow: 'hidden',
+              },
+            };
+          },
+          ['backgroundColor', ...borderStyles.keys],
+        ),
+        ripple: buildProps(
+          (tokens: ButtonCoreTokens, theme: Theme) => ({
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              justifyContent: 'center',
+              width: tokens.width,
+              ...layoutStyles.from(tokens, theme),
+            },
+            android_ripple: {
+              color: 'buttonbackgroundpressed',
+            },
+          }),
+          ['backgroundColor', 'width', ...layoutStyles.keys],
+        ),
+      },
+      default: {
+        root: buildProps(
+          (tokens: ButtonCoreTokens, theme: Theme) => ({
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              justifyContent: 'center',
+              width: tokens.width,
+              backgroundColor: tokens.backgroundColor,
+              ...borderStyles.from(tokens, theme),
+              ...layoutStyles.from(tokens, theme),
+              ...shadowStyles.from(tokens, theme),
+            },
+            elevation: tokens.elevation,
+          }),
+          ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
+        ),
+      },
+    }),
     content: buildProps(
       (tokens: ButtonCoreTokens, theme: Theme) => ({
         style: {

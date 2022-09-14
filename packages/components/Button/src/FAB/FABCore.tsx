@@ -1,15 +1,15 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
-import { fabName, FABType } from './FAB.types';
+import { Platform, Pressable, View } from 'react-native';
+import { fabName, FABProps, FABType } from './FAB.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { ButtonCoreProps } from '../Button.types';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
+import { extractMarginAndroid } from '../Button';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -19,7 +19,7 @@ import { Shadow } from '@fluentui-react-native/experimental-shadow';
  * @param userProps The props that were passed into the button
  * @returns Whether the styles that are assigned to the layer should be applied to the button
  */
-const buttonLookup = (layer: string, state: IPressableState, userProps: ButtonCoreProps): boolean => {
+const buttonLookup = (layer: string, state: IPressableState, userProps: FABProps): boolean => {
   return (
     state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIconBefore' && userProps.icon)
   );
@@ -32,10 +32,11 @@ export const FAB = compose<FABType>({
     root: View,
     icon: Icon,
     content: Text,
+    ripple: Pressable,
     shadow: Shadow,
   },
-  useRender: (userProps: ButtonCoreProps, useSlots: UseSlots<FABType>) => {
-    const { icon, onClick, ...rest } = userProps;
+  useRender: (userProps: FABProps, useSlots: UseSlots<FABType>) => {
+    const { icon, ...rest } = userProps;
 
     const iconProps = createIconProps(userProps.icon);
     const button = useButton(rest);
@@ -44,8 +45,8 @@ export const FAB = compose<FABType>({
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
-    return (final: ButtonCoreProps, ...children: React.ReactNode[]) => {
-      const { iconOnly, accessibilityLabel, ...mergedProps } = mergeProps(button.props, final);
+    return (final: FABProps, ...children: React.ReactNode[]) => {
+      const { iconOnly, accessibilityLabel, showChildren = true, ...mergedProps } = mergeProps(button.props, final);
 
       if (__DEV__ && iconOnly) {
         React.Children.forEach(children, (child) => {
@@ -65,20 +66,54 @@ export const FAB = compose<FABType>({
       }
       const label = accessibilityLabel ?? childText;
 
-      const fabWithoutShadow = (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
+      const buttonContent = (
+        <React.Fragment>
           {icon && <Slots.icon {...iconProps} />}
-          {React.Children.map(children, (child) =>
-            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
-          )}
-        </Slots.root>
+          {showChildren &&
+            React.Children.map(children, (child) =>
+              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+            )}
+        </React.Fragment>
       );
 
       const hasShadow = Platform.OS === 'ios';
+      const hasRipple = Platform.OS === 'android';
+
       if (hasShadow) {
-        return <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
+        return (
+          <Slots.shadow>
+            <Slots.root {...mergedProps} accessibilityLabel={label}>
+              {buttonContent}
+            </Slots.root>
+          </Slots.shadow>
+        );
+      } else if (hasRipple) {
+        const [extractedMargin, styleWithoutMargin] = extractMarginAndroid(mergedProps.style);
+        return (
+          <Slots.root style={extractedMargin}>
+            <Slots.ripple
+              accessibilityLabel={label}
+              {...mergedProps}
+              style={styleWithoutMargin}
+              onPressIn={memoize(() => {
+                mergedProps.setRippleStateAndroid(true);
+                mergedProps.onPressIn?.();
+              })}
+              onPressOut={memoize(() => {
+                mergedProps.setRippleStateAndroid(false);
+                mergedProps.onPressOut?.();
+              })}
+            >
+              {buttonContent}
+            </Slots.ripple>
+          </Slots.root>
+        );
       } else {
-        return fabWithoutShadow;
+        return (
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {buttonContent}
+          </Slots.root>
+        );
       }
     };
   },

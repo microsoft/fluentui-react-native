@@ -32,22 +32,59 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
-    root: buildProps(
-      (tokens: ButtonTokens, theme: Theme) => ({
-        style: {
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
-          alignSelf: 'flex-start',
-          justifyContent: 'center',
-          width: tokens.width,
-          backgroundColor: tokens.backgroundColor,
-          ...borderStyles.from(tokens, theme),
-          ...layoutStyles.from(tokens, theme),
-        },
-      }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
-    ),
+    ...Platform.select({
+      android: {
+        root: buildProps(
+          (tokens: ButtonTokens, theme: Theme) => {
+            return {
+              style: {
+                flexDirection: 'row',
+                alignSelf: 'baseline',
+                backgroundColor: tokens.backgroundColor,
+                ...borderStyles.from(tokens, theme),
+                overflow: 'hidden',
+              },
+            };
+          },
+          ['backgroundColor', ...borderStyles.keys],
+        ),
+        ripple: buildProps(
+          (tokens: ButtonTokens, theme: Theme) => ({
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              justifyContent: 'center',
+              width: tokens.width,
+              ...layoutStyles.from(tokens, theme),
+            },
+            android_ripple: {
+              color: 'buttonbackgroundpressed',
+            },
+          }),
+          ['backgroundColor', 'width', ...layoutStyles.keys],
+        ),
+      },
+      default: {
+        root: buildProps(
+          (tokens: ButtonTokens, theme: Theme) => ({
+            style: {
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'row',
+              alignSelf: 'flex-start',
+              justifyContent: 'center',
+              width: tokens.width,
+              backgroundColor: tokens.backgroundColor,
+              ...borderStyles.from(tokens, theme),
+              ...layoutStyles.from(tokens, theme),
+            },
+          }),
+          ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
+        ),
+      },
+    }),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => {
         return {
