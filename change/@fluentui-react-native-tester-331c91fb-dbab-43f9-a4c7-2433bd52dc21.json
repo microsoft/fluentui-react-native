@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Ripple/Fix on FAB, Review changes on Button",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
