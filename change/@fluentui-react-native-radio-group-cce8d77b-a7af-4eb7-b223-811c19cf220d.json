@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove rn win32 dep",
+  "packageName": "@fluentui-react-native/radio-group",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
