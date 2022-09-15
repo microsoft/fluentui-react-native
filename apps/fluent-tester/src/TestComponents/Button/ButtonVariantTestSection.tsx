@@ -12,6 +12,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
+  const [showFABText, setShowFABText] = React.useState(true);
 
   return (
     <View style={testContentRootViewStyle}>
@@ -48,7 +49,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
         Subtle
       </CompoundButton>
       <FAB icon={iconProps} style={commonTestStyles.vmargin} />
-      <FAB icon={iconProps} style={commonTestStyles.vmargin}>
+      <FAB icon={iconProps} style={commonTestStyles.vmargin} showChildren={showFABText} onClick={() => setShowFABText(!showFABText)}>
         FAB
       </FAB>
     </View>
