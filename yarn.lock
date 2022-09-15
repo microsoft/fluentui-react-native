@@ -14174,9 +14174,9 @@ wordwrapjs@^3.0.0:
     typical "^2.6.1"
 
 workspace-tools@^0.26.0, workspace-tools@^0.26.3:
-  version "0.26.3"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.26.3.tgz#521ff930e889873eab5d223289d7136d1e9a1b42"
-  integrity sha512-aNnxt0rBh8CwQ6DfYn/CU1xNTKu+dwoNjZ9oddEAOogvIOMQGJ57OQ3XI7+iRZu1XfO+HK2xsQLMbZGjmAJ8UA==
+  version "0.26.4"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.26.4.tgz#04dfb5a81e27707caf11a4acd4cd44a6534d4aff"
+  integrity sha512-mGYxQGZvoqMasuQLv1PxQ9rZpOKEn0Y4xTOU4fRVL0C+0QPB+jFdc8Z8XRsOz0+CC33gs2GT4GfR3BcfGIWvCw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^5.0.0"
