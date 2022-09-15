@@ -27,8 +27,6 @@ describe('Avatar Testing Initialization', function () {
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToAvatarPage();
-    await browser.pause(5000);
-    await NavigateAppPage.clickAndGoToAvatarPage();
     await AvatarPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await AvatarPageObject.isPageLoaded()).toBeTruthy(AvatarPageObject.ERRORMESSAGE_PAGELOAD);
