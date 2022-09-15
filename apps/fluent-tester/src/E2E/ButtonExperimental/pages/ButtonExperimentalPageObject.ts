@@ -34,9 +34,9 @@ class ButtonExperimentalPageObject extends BasePage {
   async scrollToTestElement(): Promise<void> {
     const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
     while (!(await this._primaryComponent.isDisplayed())) {
-      await driver.touchScroll(100, 0, ScrollViewerID);
+      await driver.touchScroll(0, 100, ScrollViewerID);
     }
-    await driver.touchScroll(100, 0, ScrollViewerID);
+    await driver.touchScroll(0, 100, ScrollViewerID);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
