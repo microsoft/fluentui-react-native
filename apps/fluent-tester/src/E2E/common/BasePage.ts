@@ -51,7 +51,7 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return (await this._testPage.isDisplayed()) || (await this._primaryComponent.isDisplayed());
+    return await this._testPage.isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
@@ -93,7 +93,7 @@ export class BasePage {
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
   async waitForPageDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => (await this.isPageLoaded()) || (await this._primaryComponent.isDisplayed()), {
+    await browser.waitUntil(async () => await this.isPageLoaded(), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
       interval: 1500,
