@@ -513,7 +513,7 @@ exports[`Shadow component tests Shadow on a child with border radius 1`] = `
 </View>
 `;
 
-exports[`Shadow component tests Shadow on a child with border radius 2`] = `
+exports[`Shadow component tests Shadow on a child with border width 1`] = `
 <View
   style={
     Object {

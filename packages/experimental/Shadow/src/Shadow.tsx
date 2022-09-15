@@ -21,7 +21,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
       }
     }
 
-    const { style: childStyle = {}, ...restOfChildProps } = child.props;
+    const { style: childStyle, ...restOfChildProps } = child.props;
 
     const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, shadowTokenStyleSet);
     const innerShadowViewProps = mergeProps(restOfChildProps, shadowViewStyleProps.inner);
@@ -34,7 +34,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 });
 
 const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);
-function getStylePropsForShadowViewsWorker(childStyleProps: any, shadowTokenStyleSet: any) {
+function getStylePropsForShadowViewsWorker(childStyleProps: any = {}, shadowTokenStyleSet: any) {
   const {
     borderBottomWidth,
     borderEndWidth,
