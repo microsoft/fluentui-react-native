@@ -27,6 +27,18 @@ class ButtonExperimentalPageObject extends BasePage {
     return await callbackText.isDisplayed();
   }
 
+  /* OVERRIDE: This is a quirky temporary workaround. Now that our E2E tests run sequentially (app doesn't restart every spec file),
+  we ran into an issue with Button and ButtonExperimental because they're both on the same test page. This function only scrolls down
+  to find the test element. But in this case, we're already on the test page (from the deprecated Button's spec file), and thus we have to
+  scroll upwards to find this Button component. Once the old button is deprecated completely, we can remove this. */
+  async scrollToTestElement(): Promise<void> {
+    const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
+    while (!(await this._primaryComponent.isDisplayed())) {
+      await driver.touchScroll(100, 0, ScrollViewerID);
+    }
+    await driver.touchScroll(100, 0, ScrollViewerID);
+  }
+
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(buttonSelector: ButtonSelector, key: string): Promise<void> {
     await (await this.getButtonSelector(buttonSelector)).addValue(key);
