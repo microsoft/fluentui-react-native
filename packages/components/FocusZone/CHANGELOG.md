@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Sep 2022 23:07:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.11
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.4
+
+## 0.10.10
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- (macOS) Fix bug when FocusZone wraps a ScrollView (sanajmi@microsoft.com)
 
 ## 0.10.9
 

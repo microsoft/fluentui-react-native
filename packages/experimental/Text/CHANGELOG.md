@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Sep 2022 23:07:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.3
 
 ## 0.11.3
 

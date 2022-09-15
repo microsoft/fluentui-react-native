@@ -2,6 +2,54 @@
   "name": "@fluentui-react-native/experimental-checkbox",
   "entries": [
     {
+      "date": "Wed, 14 Sep 2022 23:07:41 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.12.15",
+      "version": "0.12.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb",
+            "comment": "Remove rn win32 dep"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.1",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.14",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.2",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 14 Sep 2022 19:40:18 GMT",
+      "tag": "@fluentui-react-native/experimental-checkbox_v0.12.14",
+      "version": "0.12.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-checkbox",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.13",
+            "commit": "d8079ac9927eeb41ef14181377d59a582a86374b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Sep 2022 18:22:03 GMT",
       "tag": "@fluentui-react-native/experimental-checkbox_v0.12.13",
       "version": "0.12.13",

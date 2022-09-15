@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorValue, ViewProps } from 'react-native';
+import { ColorValue } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
@@ -43,7 +43,7 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   pressed?: MenuItemTokens;
 }
 
-export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface MenuItemProps extends Omit<IWithPressableOptions<IViewProps>, 'onPress'> {
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
