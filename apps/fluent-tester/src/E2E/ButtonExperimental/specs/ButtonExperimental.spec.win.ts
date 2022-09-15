@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonExperimentalPageObject, { ButtonSelector } from '../pages/ButtonExperimentalPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../TestComponents/Button/consts';
 
@@ -11,18 +11,21 @@ describe('Experimental Button Testing Initialization', function () {
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Button test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ButtonExperimentalPageObject.scrollToComponentButton(Platform.Win32);
-    await ButtonExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+  // Temporarily removing this until the old Button is completely deprecated. The reason being, both the deprecated button and
+  // this new button are on the same test page in our test app. This means we don't have to re-navigate to the test page
+  // for this experimental button.
+  // it('Click and navigate to Button test page', async () => {
+  //   /* Scroll to component test page button in scrollview if not already visible*/
+  //   await ButtonExperimentalPageObject.scrollToComponentButton(Platform.Win32);
+  //   await ButtonExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
-    /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToButtonPage();
-    await ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+  //   /* Click on component button to navigate to test page */
+  //   await NavigateAppPage.clickAndGoToButtonPage();
+  //   await ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy(ButtonExperimentalPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-  });
+  //   await expect(await ButtonExperimentalPageObject.isPageLoaded()).toBeTruthy(ButtonExperimentalPageObject.ERRORMESSAGE_PAGELOAD);
+  //   await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  // });
 });
 
 describe('Experimental Button Accessibility Testing', async () => {
@@ -33,7 +36,6 @@ describe('Experimental Button Accessibility Testing', async () => {
   });
 
   it('Experimental Button - Validate accessibilityRole is correct', async () => {
-    console.log('\nExperimental Button - Validate accessibilityRole is correct\n');
     await expect(await ButtonExperimentalPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
