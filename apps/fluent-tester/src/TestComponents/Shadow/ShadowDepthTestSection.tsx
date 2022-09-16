@@ -25,11 +25,12 @@ interface ShadowTestBoxProps {
 const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: ShadowTestBoxProps) => {
   const theme = useTheme();
   const backgroundColor = props.isBrand ? theme.colors.brandedBackground : theme.colors.background;
+  const viewStyle = mergeStyles(styles.shadowTestBox, { backgroundColor });
   const textColor = props.isBrand ? theme.colors.primaryButtonText : theme.colors.bodyText;
 
   return (
     <Shadow shadowToken={props.shadowToken}>
-      <View style={mergeStyles(styles.shadowTestBox, { backgroundColor: backgroundColor })}>
+      <View style={viewStyle}>
         <Text variant="bodySemibold" color={textColor}>
           {props.shadowDepthText}
         </Text>

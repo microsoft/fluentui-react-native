@@ -16,6 +16,16 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       marginHorizontal: 32,
       backgroundColor: t.colors.background,
     },
+    headerTextPadding: {
+      padding: 16,
+    },
+    borderRadiusTestProps: {
+      borderRadius: 8,
+    },
+    borderWidthTestProps: {
+      borderWidth: 2,
+      borderColor: 'black',
+    },
   };
 });
 
@@ -25,7 +35,9 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
 
   return (
     <View>
-      <Text style={{ padding: 16 }}>The following tests have a Shadow16 set on a child view that has some specific props.</Text>
+      <Text style={themedStyles.headerTextPadding}>
+        The following tests have a Shadow16 set on a child view that has some specific props.
+      </Text>
       <View>
         <Shadow shadowToken={theme.shadows.shadow16}>
           <View style={themedStyles.defaultShadowTestBoxProps}>
@@ -33,12 +45,18 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, { borderRadius: 8 })}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.borderRadiusTestProps)}>
             <Text variant="bodySemibold">borderRadius: 8</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
-          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, { borderRadius: 8, borderWidth: 2, borderColor: 'black' })}>
+          <View
+            style={mergeStyles(
+              themedStyles.defaultShadowTestBoxProps,
+              themedStyles.borderRadiusTestProps,
+              themedStyles.borderWidthTestProps,
+            )}
+          >
             <Text variant="bodySemibold">borderWidth: 2</Text>
           </View>
         </Shadow>
