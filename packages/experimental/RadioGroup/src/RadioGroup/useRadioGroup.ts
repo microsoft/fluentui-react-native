@@ -4,7 +4,7 @@ import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-h
 import { View } from 'react-native';
 
 export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
-  const { value, defaultValue, disabled, onChange, isCircularNavigation, accessibilityLabel, label } = props;
+  const { value, defaultValue, disabled, required, onChange, isCircularNavigation, accessibilityLabel, label } = props;
 
   // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
   const data = useValue(value || defaultValue || null, onChange);
@@ -21,6 +21,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
   const state: RadioGroupState = {
     value: data.selectedKey,
     disabled: disabled || false,
+    required: required || false,
     onChange: data.onKeySelect,
     updateSelectedButtonRef: onSelectButtonRef,
   };
@@ -29,6 +30,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     props: {
       ...props,
       disabled,
+      required,
       accessible: true,
       accessibilityRole: 'radiogroup',
       accessibilityLabel: accessibilityLabel ?? label,

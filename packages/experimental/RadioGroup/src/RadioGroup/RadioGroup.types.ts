@@ -2,6 +2,7 @@ import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
 import { IForegroundColorTokens, FontTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
+import { ColorValue, ViewStyle } from 'react-native';
 
 export const radioGroupName = 'RadioGroup';
 
@@ -34,6 +35,16 @@ export interface RadioGroupState extends RadioGroupProps {
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
   /**
+   * Color of required indicator
+   */
+  requiredColor?: ColorValue;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
+  requiredPadding?: ViewStyle['padding'];
+
+  /**
    * States that can be applied to a RadioGroup
    */
   disabled?: RadioGroupTokens;
@@ -64,7 +75,7 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   disabled?: boolean;
 
   /**
-   * Sets the RadioGroup to required if true
+   * Require a selection in this group. Adds the 'required' prop to all child Radio items.
    */
   required?: boolean;
 
@@ -81,7 +92,9 @@ export interface RadioGroupInfo {
 
 export interface RadioGroupSlotProps {
   root: React.PropsWithRef<IViewProps>;
-  label?: TextProps;
+  label?: IViewProps;
+  labelText?: TextProps;
+  required?: TextProps;
   container: FocusZoneProps;
 }
 
