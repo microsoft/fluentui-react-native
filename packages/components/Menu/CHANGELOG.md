@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 09 Sep 2022 23:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.34
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.11
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/text to v0.14.4
+- Bump @fluentui-react-native/tokens to v0.16.2
+- Bump @fluentui-react-native/button to v0.24.24
+
+## 1.0.33
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- "MenuItems and MenuTrigger should be based off of IViewProps" (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/callout to v0.21.10
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/interactive-hooks to v0.18.4
+- Bump @fluentui-react-native/text to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.16.1
+- Bump @fluentui-react-native/button to v0.24.23
+
+## 1.0.32
+
+Mon, 12 Sep 2022 18:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.24.22
 
 ## 1.0.31
 
