@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Platform, PressableProps, useWindowDimensions, View, ViewProps, ViewStyle } from 'react-native';
+import { Platform, PressableProps, useWindowDimensions, View, ViewProps } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
