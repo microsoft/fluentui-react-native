@@ -1478,10 +1478,10 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/design-tokens-android@^0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.13.0.tgz#f473d1f3eefdf720715c627b7816a2b41ba35627"
-  integrity sha512-bkWBgViYMpJ712+wd82+RIvHcU1ox5TGxV4O46FnJLI9LW7sd+HVP70yW7fd1Kuhkx/MTmI9K3YEG/Aw4JnyOA==
+"@fluentui-react-native/design-tokens-android@^0.17.0":
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.17.0.tgz#55ed03b2639907f26103c5e9eb5eec46086a310e"
+  integrity sha512-PPwXUuuKJ7eM5AEp16ceLM/CHfUi0Ltq9gDU5TZ9X6P0vW/B1IkLk6eFgtoiFdSmbQT+EoO5s3v2EUwhJ0z1ew==
 
 "@fluentui-react-native/design-tokens-macos@^0.13.0":
   version "0.13.0"

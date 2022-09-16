@@ -3,8 +3,8 @@ import { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
 export function mapPipelineToTheme(pipelineOutput: any): Partial<AliasColorTokens> {
   return {
     neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
-    neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
-    neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
+    // neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
+    // neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
     // neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
     // neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
     // neutralForeground2Hover: pipelineOutput.neutralForeground2.fillColorHover,

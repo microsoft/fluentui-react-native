@@ -2,8 +2,10 @@ import { Spacing, Theme } from '@fluentui-react-native/theme-types';
 import { getFluentUIAndroidPalette } from './colorsSemantic';
 import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
+import { createColorAliasTokens } from './createAliasTokens';
 import { getAndroidPalette } from './colorsBase';
 
+// should come from pipelien.
 export function androidSpacing(): Spacing {
   return {
     s2: '8px',
@@ -35,6 +37,7 @@ export const androidComponents = {
 };
 
 // mocked out
+// should come from pipeline.
 const androidShadows = {
   shadow2: {
     ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
