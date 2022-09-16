@@ -54,7 +54,7 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   const accessibilityActionsProp = React.useMemo(
     () => (accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions),
-    [],
+    [accessibilityActions],
   );
 
   // Used when creating accessibility properties in mergeSettings below
