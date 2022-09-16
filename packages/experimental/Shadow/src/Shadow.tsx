@@ -67,10 +67,22 @@ function getStylePropsForShadowViewsWorker(childStyleProps: any = {}, shadowToke
     ...restOfChildStyleProps
   } = childStyleProps;
 
+  if (__DEV__) {
+    if (!childStyleProps.backgroundColor) {
+      console.warn('The View that the Shadow is set on must have a background color set');
+    }
+  }
+
   return {
     inner: {
       style: {
-        backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
+        ...(borderBottomWidth && { borderBottomWidth }),
+        ...(borderEndWidth && { borderEndWidth }),
+        ...(borderLeftWidth && { borderLeftWidth }),
+        ...(borderRightWidth && { borderRightWidth }),
+        ...(borderStartWidth && { borderStartWidth }),
+        ...(borderTopWidth && { borderTopWidth }),
+        ...(borderWidth && { borderWidth }),
         ...(padding && { padding }),
         ...(paddingBottom && { paddingBottom }),
         ...(paddingEnd && { paddingEnd }),
@@ -80,20 +92,12 @@ function getStylePropsForShadowViewsWorker(childStyleProps: any = {}, shadowToke
         ...(paddingStart && { paddingStart }),
         ...(paddingTop && { paddingTop }),
         ...(paddingVertical && { paddingVertical }),
-        ...(borderBottomWidth && { borderBottomWidth }),
-        ...(borderEndWidth && { borderEndWidth }),
-        ...(borderLeftWidth && { borderLeftWidth }),
-        ...(borderRightWidth && { borderRightWidth }),
-        ...(borderStartWidth && { borderStartWidth }),
-        ...(borderTopWidth && { borderTopWidth }),
-        ...(borderWidth && { borderWidth }),
         ...shadowTokenStyleSet.key,
         ...restOfChildStyleProps,
       },
     },
     outer: {
       style: {
-        backgroundColor: 'red', // will not be shown, just needed in macOS/iOS to ensure buggy behaviour is suppressed
         ...(margin && { margin }),
         ...(marginBottom && { marginBottom }),
         ...(marginEnd && { marginEnd }),

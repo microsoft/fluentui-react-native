@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { Shadow } from '../Shadow';
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 import { Pressable } from '@fluentui-react-native/pressable';
 
+const backgroundColor = { backgroundColor: 'red' };
 interface ShadowTestProps {
   displayText: string;
   depth: string;
@@ -15,7 +16,7 @@ const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestP
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows[props.depth]}>
-      <View>
+      <View style={backgroundColor}>
         <Text>{props.displayText}</Text>
       </View>
     </Shadow>
@@ -26,7 +27,7 @@ const TestPressableWithShadow: React.FunctionComponent = () => {
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows['shadow16']}>
-      <Pressable />
+      <Pressable style={backgroundColor} />
     </Shadow>
   );
 };
@@ -39,7 +40,7 @@ const TestShadowOnChildViewWithProps: React.FunctionComponent<ShadowOnChildViewW
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows['shadow16']}>
-      <View style={props.childViewStyleProps}>
+      <View style={mergeStyles(props.childViewStyleProps, backgroundColor)}>
         <Text>{JSON.stringify(props.childViewStyleProps)}</Text>
       </View>
     </Shadow>
