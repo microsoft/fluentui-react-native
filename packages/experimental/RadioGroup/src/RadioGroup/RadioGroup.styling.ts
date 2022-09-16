@@ -1,10 +1,12 @@
 import { radioGroupName, RadioGroupTokens, RadioGroupSlotProps, RadioGroupProps } from './RadioGroup.types';
-import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultRadioGroupTokens } from './RadioGroupTokens';
-import { fontStyles } from '@fluentui-react-native/tokens';
+
+export const radioGroupStates: (keyof RadioGroupTokens)[] = ['required'];
 
 export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotProps, RadioGroupTokens> = {
   tokens: [defaultRadioGroupTokens, radioGroupName],
+  states: radioGroupStates,
   slotProps: {
     root: buildProps(() => ({
       style: {
@@ -13,13 +15,32 @@ export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotP
         flexDirection: 'column',
       },
     })),
-    label: buildProps(
-      (tokens: RadioGroupTokens, theme: Theme) => ({
+    label: buildProps(() => ({
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+      },
+    })),
+    labelText: buildProps(
+      (tokens: RadioGroupTokens) => ({
+        variant: tokens.variant,
         style: {
-          ...fontStyles.from(tokens, theme),
+          color: tokens.color,
         },
       }),
-      [...fontStyles.keys],
+      ['color'],
+    ),
+    required: buildProps(
+      (tokens: RadioGroupTokens) => ({
+        variant: tokens.variant,
+        style: {
+          color: tokens.requiredColor,
+          paddingStart: tokens.requiredPadding,
+        },
+      }),
+      ['requiredColor', 'requiredPadding'],
     ),
   },
 };

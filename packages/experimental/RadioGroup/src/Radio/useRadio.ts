@@ -52,9 +52,9 @@ export const useRadio = (props: RadioProps): RadioState => {
     onFocus: changeSelection,
   });
 
-  const accessibilityActionsProp = React.useCallback(() => {
+  const accessibilityActionsProp = React.useMemo(() => {
     accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions;
-  }, []);
+  }, [accessibilityActions]);
 
   // Used when creating accessibility properties in mergeSettings below
   const onAccessibilityAction = React.useCallback(
