@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Platform, PressableProps, useWindowDimensions, View, ViewProps } from 'react-native';
+import { Platform, PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
@@ -75,9 +75,9 @@ export const Notification = compose<NotificationType>({
       }
     }, [isBar, width]);
 
-    const messageStyle: ViewProps = useMemo(() => {
+    const messageStyle: ViewStyle = useMemo(() => {
       const alignSelf = onActionPress ? 'flex-start' : 'center';
-      return { style: { alignSelf: alignSelf } };
+      return { alignSelf: alignSelf };
     }, [onActionPress]);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
