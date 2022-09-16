@@ -4,6 +4,7 @@ import { ShadowProps, shadowName } from './Shadow.types';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { getShadowTokenStyleSet } from './shadowStyle';
 import { memoize } from '@fluentui-react-native/framework';
+import { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
@@ -11,7 +12,6 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
       return <>{children}</>;
     }
 
-    const shadowTokenStyleSet = getShadowTokenStyleSet(props.shadowToken);
     const childrenArray = React.Children.toArray(children) as React.ReactElement[];
     const child = childrenArray[0];
 
@@ -23,7 +23,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 
     const { style: childStyle, ...restOfChildProps } = child.props;
 
-    const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, shadowTokenStyleSet);
+    const shadowViewStyleProps = getStylePropsForShadowViews(childStyle, props.shadowToken);
     const innerShadowViewProps = mergeProps(restOfChildProps, shadowViewStyleProps.inner);
     const outerShadowViewProps = mergeProps(final, shadowViewStyleProps.outer);
 
@@ -34,7 +34,9 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 });
 
 const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);
-function getStylePropsForShadowViewsWorker(childStyleProps: any = {}, shadowTokenStyleSet: any) {
+function getStylePropsForShadowViewsWorker(childStyleProps: any = {}, shadowToken: ShadowToken) {
+  const shadowTokenStyleSet = getShadowTokenStyleSet(shadowToken);
+
   const {
     borderBottomWidth,
     borderEndWidth,
