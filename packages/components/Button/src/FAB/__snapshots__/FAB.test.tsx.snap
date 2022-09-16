@@ -67,6 +67,16 @@ exports[`Default FAB (iOS) 1`] = `
 <View
   style={
     Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#0078d4",
+      "borderColor": "#005a9e",
+      "borderRadius": 9999,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minHeight": 56,
+      "minWidth": 56,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -74,6 +84,7 @@ exports[`Default FAB (iOS) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "width": undefined,
     }
   }
 >
@@ -104,7 +115,6 @@ exports[`Default FAB (iOS) 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#0078d4",
         "borderColor": "#005a9e",
         "borderRadius": 9999,
         "display": "flex",
@@ -120,6 +130,7 @@ exports[`Default FAB (iOS) 1`] = `
         },
         "shadowOpacity": 0.14,
         "shadowRadius": 4,
+        "width": undefined,
       }
     }
   >
