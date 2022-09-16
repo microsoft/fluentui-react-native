@@ -8,6 +8,7 @@ const emptyData = [
   [null, ''],
   ['', ''],
 ];
+
 const testData = [
   ['Marie', 'M'],
   ['Aadi KaPoor', 'AK'],
@@ -23,6 +24,7 @@ const testData = [
   ['-Test   str  with *spaces', 'TS'],
   ['Second, First', 'SF'],
 ];
+
 const namesWithTitles = [
   ['Mr Feynman', 'F'],
   ['Dr Richard Feynman', 'RF'],
@@ -59,6 +61,27 @@ const phoneNumbersAndDigits = [
   ['A2', 'A'],
 ];
 
+const multiWordTitlesData = [
+  ['Air Comm', ''],
+  ['Brig & Mrs', ''],
+  ['Brig Gen', ''],
+  ['Commander & Mrs', ''],
+  ['Consul General', ''],
+  ['Dr & Mrs', ''],
+  ['Lord & Lady', ''],
+  ['Major General', ''],
+  ['Mr & Dr', ''],
+  ['Mr & Mrs', ''],
+  ['Mr & Ms', ''],
+  ['Prof & Dr', ''],
+  ['Prof & Mrs', ''],
+  ['Rev & Mrs', ''],
+  ['Rev Canon', ''],
+  ['Rev Dr', ''],
+  ['Sir & Lady', ''],
+  ['The Rt Hon Lord Victor', 'V'],
+];
+
 const edgeCaseData = [
   ['4lex 5loo', 'LL'],
   [' !@#$%^&*()=+ (Alpha) David   (The man) `~<>,./?[]{}|   Goff   (Gamma)    ', 'DG'],
@@ -91,6 +114,9 @@ describe('getInitials method', () => {
     expect(getInitials(text)).toBe(expected);
   });
   it.each(edgeCaseData)("render initials for edge cases: '%s'", (text, expected) => {
+    expect(getInitials(text)).toBe(expected);
+  });
+  it.each(multiWordTitlesData)("render initials for multi-word titles: '%s'", (text, expected) => {
     expect(getInitials(text)).toBe(expected);
   });
 });

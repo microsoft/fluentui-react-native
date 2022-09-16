@@ -86,7 +86,7 @@ jobs:
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: 'Clean DerivedData'
-        
+
       - script: |
           sudo gem install cocoapods
         displayName: 'Install Cocoapods Environment'
@@ -96,7 +96,7 @@ jobs:
           yarn bundle:macos
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle macos'
-        
+
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
@@ -122,7 +122,7 @@ jobs:
       - script: |
           rm -rf $(Build.Repository.LocalPath)/DerivedData
         displayName: 'Clean DerivedData'
-        
+
       - script: |
           sudo gem install cocoapods
         displayName: 'Install Cocoapods Environment'
@@ -132,13 +132,15 @@ jobs:
           yarn bundle:ios
         workingDirectory: apps/fluent-tester
         displayName: 'yarn bundle ios'
-        
+
       # Select proper Xcode version
       - template: templates/apple-xcode-select.yml
 
       - template: templates/apple-yarn-build.yml
         parameters:
           platform: 'ios'
+
+      - template: templates/e2e-testing-ios.yml
 
   # Windows bundling and end to end testing
   - job: WindowsPR

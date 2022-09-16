@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.2
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Fallback when Text gets no props (ruaraki@microsoft.com)
 
 ## 0.14.1
 

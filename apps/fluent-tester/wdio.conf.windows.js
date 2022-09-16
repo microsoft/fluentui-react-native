@@ -1,8 +1,8 @@
 const fs = require('fs');
 
 const defaultWaitForTimeout = 20000;
-const defaultConnectionRetryTimeout = 20000;
-const jasmineDefaultTimeout = 45000; // 45 seconds for Jasmine test timeout
+const defaultConnectionRetryTimeout = 60000;
+const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local',
@@ -39,19 +39,17 @@ exports.config = {
   ],
 
   /*
-   ** ===================
-   ** Test Configurations
-   ** ===================
-   ** Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
+   ** Test Configurations - Define all options that are relevant for the WebdriverIO instance here
+   ** ===============================================================================================
    */
 
   logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
-
-  // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
-  bail: 1,
+  bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
   connectionRetryCount: 3, // Maximum count of request retries to the Selenium server.
+  specFileRetries: 3, // The number of times to retry the entire spec file when it fails as a whole.
 
   port: 4723, // default appium port
   services: [
@@ -68,11 +66,15 @@ exports.config = {
     defaultTimeoutInterval: jasmineDefaultTimeout,
   },
 
-  // The number of times to retry the entire specfile when it fails as a whole.
-  // Adding an extra retry will hopefully reduce the risk of engineers seeing a false-negative
-  specFileRetries: 3,
-
   reporters: ['spec'],
+
+  autoCompileOpts: {
+    autoCompile: true,
+
+    tsNodeOpts: {
+      files: true,
+    },
+  },
 
   /*
    ** ===================
@@ -120,8 +122,8 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
-  before: function () {
-    browser.maximizeWindow();
+  before: async function () {
+    await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -222,11 +224,4 @@ exports.config = {
    */
   //onReload: function(oldSessionId, newSessionId) {
   //}
-  autoCompileOpts: {
-    autoCompile: true,
-
-    tsNodeOpts: {
-      files: true,
-    },
-  },
 };
