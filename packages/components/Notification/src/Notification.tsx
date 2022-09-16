@@ -5,7 +5,7 @@ import { Platform, PressableProps, useWindowDimensions, View, ViewStyle, ViewPro
 import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
 import { useMemo } from 'react';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
@@ -66,14 +66,7 @@ export const Notification = compose<NotificationType>({
     const sizeClass = useSizeClassIOS_DO_NOT_USE();
     const onActionPress = userProps.onActionPress;
 
-    const rootStyle: ViewProps = useMemo(() => {
-      const marginHorizontal = isBar ? 0 : 16;
-      if (sizeClass === 'regular' && !isBar) {
-        return { style: { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width } };
-      } else {
-        return { style: { marginHorizontal: marginHorizontal } };
-      }
-    }, [isBar, width]);
+    const rootStyle = getRootStyle(isBar, width, sizeClass);
 
     const messageStyle: ViewStyle = useMemo(() => {
       const alignSelf = onActionPress ? 'flex-start' : 'center';
@@ -101,3 +94,13 @@ export const Notification = compose<NotificationType>({
     };
   },
 });
+
+const getRootStyle = memoize(getRootStyleWorker);
+function getRootStyleWorker(isBar: boolean, width: number, sizeClass: SizeClassIOS): ViewProps {
+  const marginHorizontal = isBar ? 0 : 16;
+  if (sizeClass === 'regular' && !isBar) {
+    return { style: { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width } };
+  } else {
+    return { style: { marginHorizontal: marginHorizontal } };
+  }
+}
