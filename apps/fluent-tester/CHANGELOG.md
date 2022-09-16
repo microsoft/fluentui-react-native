@@ -1,8 +1,46 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 14 Sep 2022 23:07:41 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.95.2
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/android-theme to v0.12.1
+- Bump @fluentui-react-native/apple-theme to v0.14.1
+- Bump @fluentui-react-native/avatar to v1.2.9
+- Bump @fluentui-react-native/badge to v0.1.32
+- Bump @fluentui-react-native/button to v0.24.24
+- Bump @fluentui-react-native/default-theme to v0.15.1
+- Bump @fluentui-react-native/dropdown to v0.3.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.3
+- Bump @fluentui-react-native/experimental-avatar to v0.16.4
+- Bump @fluentui-react-native/experimental-button to v0.16.24
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.16
+- Bump @fluentui-react-native/experimental-expander to v0.4.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.28
+- Bump @fluentui-react-native/experimental-radio-group to v0.3.3
+- Bump @fluentui-react-native/experimental-shadow to v0.2.18
+- Bump @fluentui-react-native/experimental-shimmer to v0.7.3
+- Bump @fluentui-react-native/experimental-tabs to v0.5.14
+- Bump @fluentui-react-native/experimental-text to v0.11.5
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/icon to v0.13.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/menu to v1.0.34
+- Bump @fluentui-react-native/notification to v0.17.7
+- Bump @fluentui-react-native/stack to v0.7.7
+- Bump @fluentui-react-native/switch to v0.6.6
+- Bump @fluentui-react-native/text to v0.14.4
+- Bump @fluentui-react-native/theme to v0.7.1
+- Bump @fluentui-react-native/theme-types to v0.19.0
+- Bump @fluentui-react-native/theming-utils to v0.15.1
+- Bump @fluentui-react-native/win32-theme to v0.21.1
+- Bump @fluentui/react-native to v0.32.18
 
 ## 0.95.1
 

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Rename FontLightHeight to FontLineHeight",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}
