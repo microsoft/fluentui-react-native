@@ -103,7 +103,9 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Badge {...badgeConfig}>Basic badge</Badge>
         )}
       </View>
-
+      <Badge size="extraLarge" shadow={showShadow}>
+        Shadow Badge
+      </Badge>
       <Text>Size</Text>
       <Badge size="tiny" shape="circular" />
       <Badge size="extraSmall" shape="circular" badgeColor="red" />
