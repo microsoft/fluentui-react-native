@@ -6,8 +6,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
-import { useMemo } from 'react';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
@@ -67,11 +66,7 @@ export const Notification = compose<NotificationType>({
     const onActionPress = userProps.onActionPress;
 
     const rootStyle = getRootStyle(isBar, width, sizeClass);
-
-    const messageStyle: ViewStyle = useMemo(() => {
-      const alignSelf = onActionPress ? 'flex-start' : 'center';
-      return { alignSelf: alignSelf };
-    }, [onActionPress]);
+    const messageStyle = getMessageStyle(onActionPress);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
@@ -103,4 +98,10 @@ function getRootStyleWorker(isBar: boolean, width: number, sizeClass: SizeClassI
   } else {
     return { style: { marginHorizontal: marginHorizontal } };
   }
+}
+
+const getMessageStyle = memoize(getMessageStyleWorker);
+function getMessageStyleWorker(onActionPress: (e: InteractionEvent) => void): ViewStyle {
+  const alignSelf = onActionPress ? 'flex-start' : 'center';
+  return { alignSelf: alignSelf };
 }
