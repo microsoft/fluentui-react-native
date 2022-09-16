@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Platform, PressableProps, useWindowDimensions, View, ViewStyle } from 'react-native';
+import { Platform, PressableProps, useWindowDimensions, View, ViewProps, ViewStyle } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
@@ -66,22 +66,23 @@ export const Notification = compose<NotificationType>({
     const sizeClass = useSizeClassIOS_DO_NOT_USE();
     const onActionPress = userProps.onActionPress;
 
-    const rootStyle: ViewStyle = useMemo(() => {
+    const rootStyle: ViewProps = useMemo(() => {
       const marginHorizontal = isBar ? 0 : 16;
       if (sizeClass === 'regular' && !isBar) {
-        return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
+        return { style: { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width } };
       } else {
-        return { marginHorizontal: marginHorizontal };
+        return { style: { marginHorizontal: marginHorizontal } };
       }
     }, [isBar, width]);
-    const messageStyle: ViewStyle = useMemo(() => {
+
+    const messageStyle: ViewProps = useMemo(() => {
       const alignSelf = onActionPress ? 'flex-start' : 'center';
-      return { alignSelf: alignSelf };
+      return { style: { alignSelf: alignSelf } };
     }, [onActionPress]);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
-      const mergedProps = mergeProps<PressableProps>(rest, { style: rootStyle });
+      const mergedProps = mergeProps<PressableProps>(rest, rootStyle);
       const iconProps = createIconProps(icon);
       const notificationButtonProps = createNotificationButtonProps(userProps);
 
