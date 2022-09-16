@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View } from 'react-native';
+import { View, ViewStyle } from 'react-native';
 import { ShadowProps, shadowName } from './Shadow.types';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { getShadowTokenStyleSet } from './shadowStyle';
@@ -34,7 +34,7 @@ export const Shadow = stagedComponent((props: ShadowProps) => {
 });
 
 const getStylePropsForShadowViews = memoize(getStylePropsForShadowViewsWorker);
-function getStylePropsForShadowViewsWorker(childStyleProps: any = {}, shadowToken: ShadowToken) {
+function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shadowToken: ShadowToken) {
   const shadowTokenStyleSet = getShadowTokenStyleSet(shadowToken);
 
   const {
