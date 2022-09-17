@@ -14,4 +14,19 @@ export const defaultOptionTokens: TokenSettings<OptionTokens> = (t: Theme): Opti
   paddingHorizontal: globalTokens.spacing.sNudge,
   spacingContentIcon: globalTokens.spacing.xs,
   variant: 'body1',
+  hovered: {
+    backgroundColor: t.colors.neutralBackground1Hover,
+    checkmarkColor: t.colors.neutralForeground2Hover,
+    color: t.colors.neutralForeground2Hover,
+  },
+  pressed: {
+    backgroundColor: t.colors.neutralBackground1Pressed,
+    checkmarkColor: t.colors.neutralForeground2Pressed,
+    color: t.colors.neutralForeground2Pressed,
+  },
+  disabled: {
+    backgroundColor: t.colors.neutralBackground1,
+    checkmarkColor: t.colors.neutralForegroundDisabled,
+    color: t.colors.neutralForegroundDisabled,
+  },
 });

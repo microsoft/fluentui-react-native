@@ -1,6 +1,6 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/framework';
-import { IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { TextProps } from '@fluentui-react-native/text';
 import { ColorValue } from 'react-native';
 import { SvgProps } from 'react-native-svg';
@@ -22,9 +22,23 @@ export interface OptionTokens extends FontTokens, IBorderTokens, IColorTokens, L
    * Spacing, in pixels, between the label and icons
    */
   spacingContentIcon?: number;
+
+  /**
+   * States of the item control
+   */
+  disabled?: OptionTokens;
+  focused?: OptionTokens;
+  hovered?: OptionTokens;
+  pressed?: OptionTokens;
 }
 
-export type OptionProps = IWithPressableOptions<IViewProps>;
+export interface OptionProps extends IWithPressableOptions<IViewProps> {
+  /**
+   * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
+   */
+  componentRef?: React.RefObject<IFocusable>;
+}
+
 export type OptionState = IPressableHooks<OptionProps & React.ComponentPropsWithRef<any>>;
 
 export interface OptionSlotProps {
