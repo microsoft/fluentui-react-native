@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Sat, 17 Sep 2022 00:44:31 GMT",
+      "tag": "@fluentui-react-native/tester_v0.95.3",
+      "version": "0.95.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "eb1f86126d394b68b3936b7fb6c1c6102492a3e5",
+            "comment": "Add new test case"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/dropdown to v0.4.0",
+            "commit": "eb1f86126d394b68b3936b7fb6c1c6102492a3e5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/tester_v0.95.2",
       "version": "0.95.2",

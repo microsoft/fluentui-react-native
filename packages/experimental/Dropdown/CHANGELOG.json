@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Sat, 17 Sep 2022 00:44:31 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "eb1f86126d394b68b3936b7fb6c1c6102492a3e5",
+            "comment": "Add interactivity tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/dropdown_v0.3.2",
       "version": "0.3.2",
