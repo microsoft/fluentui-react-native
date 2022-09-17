@@ -12201,7 +12201,7 @@ read-pkg@^3.0.0:
     normalize-package-data "^2.3.2"
     path-type "^3.0.0"
 
-read-yaml-file@^2.0.0, read-yaml-file@^2.1.0:
+read-yaml-file@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/read-yaml-file/-/read-yaml-file-2.1.0.tgz#c5866712db9ef5343b4d02c2413bada53c41c4a9"
   integrity sha512-UkRNRIwnhG+y7hpqnycCL/xbTk7+ia9VuVTC0S+zVbwd65DI9eUpRMfsWIGrCWxTU/mi+JW8cHQCrv+zfCbEPQ==
@@ -14203,17 +14203,17 @@ wordwrapjs@^3.0.0:
     typical "^2.6.1"
 
 workspace-tools@^0.26.0, workspace-tools@^0.26.3:
-  version "0.26.5"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.26.5.tgz#a023ff7294cc6cdee0d25c199af27744d96b82d6"
-  integrity sha512-RUbqQn3DL7WKpb6BHTDiCUJeVMHq7BySzRgzmJcTUmaZTRlUxk/DIpeRSYaisFFjTEOFkGUoylBcBpqIdkrg8w==
+  version "0.26.6"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.26.6.tgz#5a8045f86545f3221f8cace23f43b42fad5c3897"
+  integrity sha512-BXeb9CXb7WYTCItPmbRt5Of1owfBYzoxaK7UcBCblnMbb9eGG2luGN4FU0UFw2paFceWTv1IMnnuTc094An6dw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     find-up "^5.0.0"
     git-url-parse "^13.0.0"
     globby "^11.0.0"
     jju "^1.4.0"
+    js-yaml "^4.1.0"
     micromatch "^4.0.0"
-    read-yaml-file "^2.0.0"
 
 wrap-ansi@7.0.0, wrap-ansi@^7.0.0:
   version "7.0.0"
