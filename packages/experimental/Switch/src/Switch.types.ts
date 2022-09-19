@@ -143,8 +143,8 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   defaultChecked?: boolean;
 
   /**
-   * Defines the controlled checked state of the Switch. If passed, Switch ignores the defaultChecked property. 
-   * This should only be used if the checked state is to be controlled at a higher level and there is a plan to 
+   * Defines the controlled checked state of the Switch. If passed, Switch ignores the defaultChecked property.
+   * This should only be used if the checked state is to be controlled at a higher level and there is a plan to
    * pass the correct value based on handling onChange events and re-rendering.
    */
   checked?: boolean;
