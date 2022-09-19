@@ -38,7 +38,8 @@
     "@fluentui-react-native/tokens": ">=0.16.2 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.0 <1.0.0",
     "@uifabricshared/foundation-compose": "^1.12.4",
-    "@uifabricshared/foundation-settings": ">=0.12.0 <1.0.0"
+    "@uifabricshared/foundation-settings": ">=0.12.0 <1.0.0",
+    "react-native-svg": "^12.3.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
@@ -47,13 +48,11 @@
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
     "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0",
     "react-native-svg-transformer": "^1.0.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-svg": "^12.3.0"
+    "react-native": "^0.68.0"
   },
   "rnx-kit": {
     "reactNativeVersion": "^0.68",
