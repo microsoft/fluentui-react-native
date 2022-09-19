@@ -90,7 +90,8 @@
       "react",
       "svg",
       "metro-config",
-      "babel-preset-react-native"
+      "babel-preset-react-native",
+      "react-dom"
     ]
   }
 }

@@ -148,7 +148,8 @@
       "svg",
       "metro-config",
       "babel-preset-react-native",
-      "test-app"
+      "test-app",
+      "react-dom"
     ]
   },
   "depcheck": {
