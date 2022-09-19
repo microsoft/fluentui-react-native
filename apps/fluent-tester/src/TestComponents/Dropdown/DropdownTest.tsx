@@ -9,6 +9,7 @@ const DropdownDefault: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Option>Test</Option>
+      <Option disabled>Disabled Test</Option>
     </Stack>
   );
 };

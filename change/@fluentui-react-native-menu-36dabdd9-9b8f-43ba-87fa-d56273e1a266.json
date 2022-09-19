@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "\"MenuItems and MenuTrigger should be based off of IViewProps\"",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
