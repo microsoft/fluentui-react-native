@@ -12025,6 +12025,14 @@ react-native-svg@12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
+react-native-svg@^12.3.0:
+  version "12.4.4"
+  resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.4.4.tgz#2ba684eaea9a7402fbbe0ed9737e77284631d00e"
+  integrity sha512-LpcNlEVCURexqPAvQ9ne8KrPVfYz0wIDygwud8VMRmXLezysXzyQN/DTsjm1BO9lIfYp55WQsr3u3yW/vk6iiA==
+  dependencies:
+    css-select "^5.1.0"
+    css-tree "^1.1.3"
+
 react-native-test-app@^1.6.2:
   version "1.6.15"
   resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.15.tgz#8bdf6d26554ece01b0f7207783fd53d77417fdb2"
