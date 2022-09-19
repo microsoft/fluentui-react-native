@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/experimental-native-date-picker
 
-This log was last generated on Sat, 30 Apr 2022 06:33:42 GMT and should not be manually modified.
+This log was last generated on Wed, 10 Aug 2022 23:40:09 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Wed, 10 Aug 2022 23:40:09 GMT
+
+### Minor changes
+
+- make NativeDatePicker specific to ios (NativeDatePicker.ios.tsx) (joannaquu@gmail.com)
+
+## 0.6.1
+
+Fri, 05 Aug 2022 20:00:03 GMT
+
+### Patches
+
+- update fua version (hyshin@microsoft.com)
+
+## 0.6.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+
+## 0.5.0
+
+Thu, 23 Jun 2022 16:08:07 GMT
+
+### Minor changes
+
+- Add ability to set custom reference start/end dates (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.4.4
+
+Thu, 16 Jun 2022 17:09:28 GMT
+
+### Patches
+
+- apple: remove unneccesary build settings from podspec (sanajmi@microsoft.com)
+
+## 0.4.3
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Patches
+
+- Add method to set default calendar configuration (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.4.2
 

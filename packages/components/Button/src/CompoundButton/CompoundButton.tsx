@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './CompoundButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';

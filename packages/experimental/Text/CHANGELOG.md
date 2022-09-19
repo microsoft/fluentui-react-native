@@ -1,8 +1,139 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.5
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.4
+
+## 0.11.4
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.3
+
+## 0.11.3
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.2
+
+## 0.11.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.1
+
+## 0.11.1
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.0
+
+## 0.11.0
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Minor changes
+
+- move text from experimental to components dir (email not defined)
+- Bump @fluentui-react-native/text to v0.13.0
+
+## 0.10.2
+
+Tue, 19 Jul 2022 18:10:02 GMT
+
+### Patches
+
+- add support for onAccessibilityTap on Text (email not defined)
+
+## 0.10.1
+
+Thu, 14 Jul 2022 20:03:37 GMT
+
+### Patches
+
+- Revert "Add support for onAccessibilityTap on Text"  (amchiu@microsoft.com)
+
+## 0.10.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+
+## 0.9.3
+
+Thu, 14 Jul 2022 17:13:16 GMT
+
+### Patches
+
+- add support for onAccessibilityTap on Text (email not defined)
+
+## 0.9.2
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.32
+
+## 0.9.1
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+
+## 0.9.0
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+
+## 0.7.28
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+
+## 0.7.27
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.27
 
 ## 0.7.26
 

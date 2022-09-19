@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Thu, 31 Mar 2022 07:27:47 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Sep 2022 23:07:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.1
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- "Add accessibilityAccessKey as a prop to adapter" (ruaraki@microsoft.com)
+
+## 0.9.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
 
 ## 0.8.5
 

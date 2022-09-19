@@ -1,8 +1,117 @@
 # Change Log - @fluentui-react-native/persona-coin
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.4
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.4
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/tokens to v0.16.2
+- Bump @uifabricshared/foundation-tokens to v0.12.2
+
+## 0.11.3
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- Remove rn win32 dep (ruaraki@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.3
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/tokens to v0.16.1
+- Bump @uifabricshared/foundation-tokens to v0.12.1
+
+## 0.11.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.2
+- Bump @fluentui-react-native/framework to v0.8.1
+
+## 0.11.1
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.1
+
+## 0.11.0
+
+Thu, 14 Jul 2022 18:09:52 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/framework to v0.8.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+- Bump @uifabricshared/foundation-tokens to v0.12.0
+
+## 0.10.31
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.23
+- Bump @fluentui-react-native/framework to v0.7.32
+- Bump @fluentui-react-native/tokens to v0.15.1
+- Bump @uifabricshared/foundation-tokens to v0.11.4
+
+## 0.10.30
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.31
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.10.29
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.22
+- Bump @fluentui-react-native/framework to v0.7.30
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.14.0
+
+## 0.10.28
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.7.28
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.10.27
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.20
+- Bump @fluentui-react-native/framework to v0.7.27
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/tokens to v0.12.1
 
 ## 0.10.26
 

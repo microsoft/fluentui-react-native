@@ -4,19 +4,14 @@ export function createAliasesFromPalette(palette: OfficePalette, isHighContrast:
   // Workaround for getting checkmark to have correct color in HC
   // while native code doesn't support PlatformColor
   if (isHighContrast) {
-    return {
-      neutralForeground1: palette.Text,
-      neutralForeground2: palette.TextSecondary,
-      neutralForeground4: palette.TextCtlSubtlePlaceholder,
-      neutralForegroundDisabled: palette.TextDisabled,
-      neutralForegroundOnBrand: palette.TextCtlEmphasis,
-      neutralForegroundOnBrandHover: palette.TextCtlEmphasisHover,
-      neutralForegroundOnBrandPressed: palette.TextCtlEmphasisPressed,
-    };
+    return {};
   }
 
   return {
     neutralForeground1: palette.Text,
+    neutralForeground1Hover: palette.TextHover,
+    neutralForeground1Pressed: palette.TextPressed,
+    neutralForeground1Selected: palette.TextSelected,
     neutralForeground2: palette.TextSecondary,
     neutralForeground2Hover: palette.TextSecondaryHover,
     neutralForeground2Pressed: palette.TextSecondaryPressed,

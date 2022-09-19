@@ -1,8 +1,126 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.4
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.4
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/tokens to v0.16.2
+
+## 0.14.3
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.3
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/tokens to v0.16.1
+
+## 0.14.2
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Fallback when Text gets no props (ruaraki@microsoft.com)
+
+## 0.14.1
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.2
+- Bump @fluentui-react-native/framework to v0.8.1
+
+## 0.14.0
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Minor changes
+
+- Update out of date documentation (#1964) (email not defined)
+
+## 0.13.0
+
+Fri, 29 Jul 2022 21:04:39 GMT
+
+### Minor changes
+
+- move text from experimental to components dir (email not defined)
+
+## 0.12.1
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.1
+
+## 0.12.0
+
+Thu, 14 Jul 2022 18:09:49 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.0
+- Bump @fluentui-react-native/adapters to v0.9.0
+- Bump @fluentui-react-native/tokens to v0.16.0
+
+## 0.11.28
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.23
+- Bump @fluentui-react-native/tokens to v0.15.1
+
+## 0.11.27
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.15.0
+
+## 0.11.26
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.11.22
+- Bump @fluentui-react-native/tokens to v0.14.0
+
+## 0.11.24
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tokens to v0.12.2
+
+## 0.11.23
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.11.20
+- Bump @fluentui-react-native/tokens to v0.12.1
 
 ## 0.11.22
 

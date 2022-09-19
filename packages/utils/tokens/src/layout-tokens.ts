@@ -1,5 +1,5 @@
 import { ViewStyle } from 'react-native';
-import { IOperationSet } from '@uifabricshared/foundation-tokens';
+import { OperationSet } from './token.types';
 import { Theme } from '@fluentui-react-native/theme-types';
 import { tokenBuilder } from './tokenBuilder';
 
@@ -12,7 +12,7 @@ export interface LayoutTokens {
   paddingVertical?: ViewStyle['paddingVertical'];
 }
 
-export const layoutTokens: IOperationSet<LayoutTokens, Theme> = [
+export const layoutTokens: OperationSet<LayoutTokens, Theme> = [
   { source: 'minWidth' },
   { source: 'maxWidth' },
   { source: 'minHeight' },

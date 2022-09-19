@@ -28,7 +28,7 @@ Basic examples:
 <Button size="large">Text</Button>
 ```
 
-More examples on the [Test pages for the Button](../../../apps/fluent-tester/src/FluentTester/TestComponents/Button). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+More examples on the [Test pages for the Button](../../../apps/fluent-tester/src/TestComponents/Button). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
 
@@ -113,6 +113,12 @@ export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
+
+  /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
 
   /**
    * Icon slot that, if specified, renders an icon either before or after the `children` as specified by the
@@ -260,6 +266,8 @@ The following is a set of keys that interact with the `Button` component:
 | ------- | ----------------------------------------------------- |
 | `Enter` | Executes the function passed into the `onClick` prop. |
 | `Space` | Executes the function passed into the `onClick` prop. |
+
+It is possible to override key behaviors by specifying `onKeyUp` or `onKeyDown`, depending on what `preferKeyDownForKeyEvents` from the `@fluentui-react-native/interactive-hooks` package indicates. Providing the callback this way will prevent the default behaviors noted above -- you will need to handle `Enter` and `Space` in the provided callback if the default behavior is desired.
 
 #### Cursor interaction
 

@@ -1,8 +1,88 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.4
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.15.1
+- Bump @fluentui-react-native/theme-types to v0.19.0
+- Bump @uifabricshared/foundation-tokens to v0.12.2
+- Bump @uifabricshared/theming-ramp to v0.17.1
+
+## 1.12.3
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-tokens to v0.12.1
+
+## 1.12.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.15.0
+
+## 1.12.1
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Add missing dependency (ruaraki@microsoft.com)
+
+## 1.12.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.14.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+- Bump @uifabricshared/themed-settings to v0.9.0
+- Bump @uifabricshared/foundation-composable to v0.11.0
+- Bump @uifabricshared/foundation-settings to v0.12.0
+- Bump @uifabricshared/foundation-tokens to v0.12.0
+- Bump @uifabricshared/theming-ramp to v0.17.0
+
+## 1.11.23
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-tokens to v0.11.4
+
+## 1.11.22
+
+Wed, 25 May 2022 18:43:10 GMT
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.13.0
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @uifabricshared/theming-ramp to v0.16.11
+
+## 1.11.20
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @uifabricshared/theming-ramp to v0.16.9
 
 ## 1.11.19
 

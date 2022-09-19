@@ -10,6 +10,7 @@ export type IImageProps = ImageProps;
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
   accessible: true,
+  accessibilityAccessKey: true,
   accessibilityControls: true,
   accessibilityItemType: true,
   accessibilityLabel: true,
@@ -118,6 +119,8 @@ const _textMask: IFilterMask<ITextProps> = {
   onLongPress: true,
   onMagicTap: true,
   onPress: true,
+  onPressIn: true,
+  onPressOut: true,
   style: true,
   nativeID: true,
   maxFontSizeMultiplier: true,

@@ -1,6 +1,6 @@
 # FluentUI React Native
 
-[![npm version](https://badge.fury.io/js/%40fluentui%2Freact-native.svg)](https://badge.fury.io/js/%40fluentui%2Freact-native) [![Build Status](https://dev.azure.com/ms/ui-fabric-react-native/_apis/build/status/PR?branchName=master)](https://dev.azure.com/ms/ui-fabric-react-native/_build/latest?definitionId=226&branchName=master) [![Build Status](https://dev.azure.com/ms/ui-fabric-react-native/_apis/build/status/Publish?branchName=master)](https://dev.azure.com/ms/ui-fabric-react-native/_build/latest?definitionId=229&branchName=master)
+[![npm version](https://badge.fury.io/js/%40fluentui%2Freact-native.svg)](https://badge.fury.io/js/%40fluentui%2Freact-native) [![Build Status](https://dev.azure.com/ms/ui-fabric-react-native/_apis/build/status/PR?branchName=main)](https://dev.azure.com/ms/ui-fabric-react-native/_build/latest?definitionId=226&branchName=main) [![Build Status](https://dev.azure.com/ms/ui-fabric-react-native/_apis/build/status/Publish?branchName=main)](https://dev.azure.com/ms/ui-fabric-react-native/_build/latest?definitionId=229&branchName=main)
 
 FluentUI React Native is a javascript component library that provides developers with controls that are part of the [Fluent Design System](https://www.microsoft.com/design/fluent/). These controls are built on [React Native](https://reactnative.dev/) and fully customizable.
 
@@ -115,6 +115,8 @@ To start developing in the repository you can:
 1. `yarn build`
 
 After a successful yarn build, you can explore FluentUI Tester, our demo application to play with each of the controls. To run FluentUI Tester, please follow instructions in the [FluentUI Tester readme](./apps/fluent-tester/README.md).
+
+Note: If your repo is located on either your Desktop or Documents folder, you may encounter the error: "Watchman error... Operation not permitted". Clone it in a different directory to avoid Watchman permission issues.
 
 ### Prettier
 

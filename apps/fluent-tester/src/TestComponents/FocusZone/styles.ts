@@ -1,0 +1,59 @@
+import { StyleSheet, View } from 'react-native';
+import { Text } from '@fluentui/react-native';
+import { ButtonV1 as Button } from '@fluentui-react-native/button';
+import { Icon } from '@fluentui-react-native/icon';
+
+export const focusZoneTestStyles = StyleSheet.create({
+  focusZoneViewStyle: {
+    flexDirection: 'row',
+    alignContent: 'flex-start',
+    alignItems: 'flex-start',
+    padding: 10,
+  },
+  nestedFocusZoneStyle: {
+    borderWidth: 1,
+    padding: 8,
+    margin: 8,
+  },
+  focusZoneButton: {
+    height: 30,
+    width: 100,
+    margin: 10,
+  },
+  listWrapperButton: {
+    marginVertical: 10,
+  },
+  dashedBorder: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+  },
+  scrollViewStyle: {
+    height: 100,
+    width: 300,
+  },
+  scrollViewContentStyle: {
+    backgroundColor: 'grey',
+  },
+  scrollViewButton: {
+    marginHorizontal: 20,
+    marginBottom: 100,
+  },
+});
+
+export const GridButton = Button.compose({
+  slots: {
+    root: View,
+    icon: Icon,
+    content: Text,
+  },
+  slotProps: {
+    content: {
+      style: { aspectRatio: 1, alignItems: 'center', justifyContent: 'center' },
+    },
+  },
+});
+
+export const SubheaderText = Text.customize({
+  tokens: { variant: 'subheaderSemibold' },
+  root: { style: { textDecorationLine: 'underline' } },
+});

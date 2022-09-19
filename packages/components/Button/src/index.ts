@@ -25,9 +25,10 @@ export {
   ButtonType,
 } from './Button.types';
 export { Button as ButtonV1 } from './Button';
+export { useButton } from './useButton';
 export { CompoundButton, compoundButtonName } from './CompoundButton';
 export type { CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens, CompoundButtonType } from './CompoundButton';
 export { FAB, fabName } from './FAB';
 export type { FABType } from './FAB';
-export { ToggleButton, toggleButtonName } from './ToggleButton';
+export { ToggleButton, toggleButtonName, useToggleButton } from './ToggleButton';
 export type { ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonState, ToggleButtonTokens, ToggleButtonType } from './ToggleButton';

@@ -1,8 +1,45 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.0
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Minor changes
+
+- Rename FontLightHeight to FontLineHeight (adam.gleitman@gmail.com)
+
+## 0.18.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+
+## 0.17.0
+
+Wed, 25 May 2022 18:43:10 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+
+## 0.15.0
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Minor changes
+
+- Add shadows to the theme (ruaraki@microsoft.com)
 
 ## 0.14.3
 

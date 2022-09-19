@@ -1,34 +1,35 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalTextPageObject from '../pages/ExperimentalTextPageObject.win';
 import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Text Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Experimental Text test page', () => {
+  it('Click and navigate to Experimental Text test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    ExperimentalTextPageObject.scrollToComponentButton();
-    ExperimentalTextPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await ExperimentalTextPageObject.scrollToComponentButton(Platform.Win32);
+    await ExperimentalTextPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToExperimentalTextPage();
-    ExperimentalTextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToExperimentalTextPage();
+    await ExperimentalTextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalTextPageObject.isPageLoaded()).toBeTruthy(ExperimentalTextPageObject.ERRORMESSAGE_PAGELOAD);
-    expect(ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ExperimentalTextPageObject.isPageLoaded()).toBeTruthy(ExperimentalTextPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
 
 describe('Experimental Text Accessibility Testing', () => {
-  it('Text - Validate accessibilityRole is correct', () => {
-    ExperimentalTextPageObject.scrollToTestElement();
-    ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  it('Text - Validate accessibilityRole is correct', async () => {
+    await ExperimentalTextPageObject.scrollToTestElement();
+    await ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    expect(ExperimentalTextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
-    expect(ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ExperimentalTextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
+    await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
   });
 });

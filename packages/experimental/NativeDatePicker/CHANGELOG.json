@@ -2,6 +2,96 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Wed, 10 Aug 2022 23:40:09 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "joannaquu@gmail.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "40c9267d69d210d9b2bcbc5ee7d56038c5e40a65",
+            "comment": "make NativeDatePicker specific to ios (NativeDatePicker.ios.tsx)"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 05 Aug 2022 20:00:03 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.6.1",
+      "version": "0.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "hyshin@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "1e36771980f2e8e3b710949eb86e4233cad14bf1",
+            "comment": "update fua version"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 14 Jul 2022 18:09:51 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b",
+            "comment": "Update to React Native 0.66"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 23 Jun 2022 16:08:07 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "7880dae12f6e2283020d0a6413fdb7e8193afb2b",
+            "comment": "Add ability to set custom reference start/end dates"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 16 Jun 2022 17:09:28 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.4",
+      "version": "0.4.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "c5a694d12a1926f4c49d28ae83ad9f52c22ec7f7",
+            "comment": "apple: remove unneccesary build settings from podspec"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:08 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.3",
+      "version": "0.4.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "eaebc100b5c4b73d38ee9e0157c1cccd570c2e4a",
+            "comment": "Add method to set default calendar configuration"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 30 Apr 2022 06:33:42 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.4.2",
       "version": "0.4.2",

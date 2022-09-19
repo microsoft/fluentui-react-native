@@ -1,25 +1,24 @@
 parameters:
-  relative_directory: ''
+  platform: ''
 
 steps:
   # Install any pods necessary for the project
   - bash: |
-      echo "pod install --project-directory=src"
-      pod install --project-directory=src
-    workingDirectory: apps/${{ parameters.relative_directory }}
-    displayName: 'pod install'
+      echo "pod install ${{parameters.platform}}"
+      pod install
+    workingDirectory: apps/fluent-tester/${{parameters.platform}}
+    displayName: 'pod install ${{parameters.platform}}'
 
   - bash: |
       echo "Pre boot simulator"
-      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS15.4)
+      UDID=$(xcrun simctl create test-iphone com.apple.CoreSimulator.SimDeviceType.iPhone-12 iOS15.5)
       xcrun simctl boot $UDID
-    workingDirectory: apps/${{ parameters.relative_directory }}
+    workingDirectory: apps/fluent-tester
+    condition: and(succeeded(), eq('${{ parameters.platform }}', 'ios'))
     displayName: 'Boot simulator'
 
   - bash: |
-      echo "yarn ${{ parameters.relative_directory }}"
-      yarn ${{ parameters.relative_directory }}
-    workingDirectory: apps/${{ parameters.relative_directory }}
-    displayName: 'yarn ${{ parameters.relative_directory }}'
-    env:
-      platform_directory: ${{ parameters.relative_directory }}
+      echo "yarn ${{parameters.platform}}"
+      yarn ${{parameters.platform}}
+    workingDirectory: apps/fluent-tester
+    displayName: 'yarn ${{parameters.platform}}'

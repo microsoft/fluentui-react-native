@@ -55,6 +55,10 @@ Most components should use the compose framework as it offers the comprehensive 
 1. Update your `package.json` file. This defines the name, fields, and dependencies of the npm package that will be published for this component.
 1. As a pattern, we prefix `experimental` components with the word "experimental". For example, we have `@fluentui-react-native/experimental-button`.
 
+**Additionally, we require integrating your new component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/fluent-tester/src/E2E. This is to create a sophisticated, in-depth testing infrastructure that ensures that we don't regress our component library in the future; giving our partners and customers the best experience possible. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/fluent-tester/src/E2E#authoring-e2e-test).**
+
+Reach out to Samuel Freiberg with any questions related to E2E testing.
+
 ### Adding the JS source code to your component
 
 1. Create a `src/` subdirectory in your component directory with a minimum of two files (listed below). You may optionally choose to subdivide your code however you wish; there are plenty of examples in the other components of FluentUI React Native.
@@ -69,12 +73,12 @@ Most components should use the compose framework as it offers the comprehensive 
 
 ### Adding a new test for your component to the test app
 
-1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `fluentui-react-native/apps/fluent-tester/src/FluentTester/TestComponents`.
+1. In FluentTester (our test app), we'll need to add an test component. The test components are located under `fluentui-react-native/apps/fluent-tester/src/TestComponents`.
 1. Make a subdirectory for your new component at this path, as well as adding an entry for your test in `testPages.tsx` and `testPages.<platform>.tsx`
 1. Create your tests in this new subdirectory. Pattern matching off an existing control's tests will greatly help.
 1. If your component contains a native module, you will also need to add the path to your component's `podspec` (that we created earlier) in your test app's Podfile. This extra step is due to the fact that FluentTester has separate platform test apps that each share a common JS package. The react native community CLI does not support [autolinking transitive dependencies](https://github.com/react-native-community/cli/issues/1347), so we need to add it manually here.
 1. Add your new module as a dependency in `apps/fluent-tester/package.json` and run `yarn && yarn build` from the root folder.
-   1. If your component has native apple code, run `pod install` from the corresponding macOS or iOS test app src folder (`apps/macos/src` or `apps/ios/src` respectively).
+   1. If your component has native apple code, run `pod install` from the corresponding macOS or iOS test app folders (`apps/fluent-tester/macos` or `apps/fluent-tester/ios` respectively).
 1. Run the test app and you should see your new test!
 
 ## Adding native code to your new component
@@ -181,36 +185,38 @@ To add a native module that wraps a FluentUI Android control:
 
 1. Create the android/src/main/java/com/microsoft/fnandroid/<new-component> subdirectory in your components directory
 
-2. Inside the new directory you just created,  add the following files. In all of the newly created files, add your package name at the top of the file: package com.microsoft.fnandroid.(new-component)
+2. Inside the new directory you just created, add the following files. In all of the newly created files, add your package name at the top of the file: package com.microsoft.fnandroid.(new-component)
 
-    a. **(new-component)ViewManager.kt**: This Kotlin file imports FluentUI Android, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Android control.
+   a. **(new-component)ViewManager.kt**: This Kotlin file imports FluentUI Android, and creates a subclass of RCTViewManager to instantiate and return your FluentUI Android control.
 
-    - Implement the createViewInstance method
+   - Implement the createViewInstance method
 
-    - Expose view property setters using @ReactProp (or @ReactPropGroup) It's important to note that in order for properties and methods to be available to React Native, they must add the @ReactMethod decorator to it's declaration.
+   - Expose view property setters using @ReactProp (or @ReactPropGroup) It's important to note that in order for properties and methods to be available to React Native, they must add the @ReactMethod decorator to it's declaration.
 
-    b. **(new-component)Module.kt**: This file will contain your native module class. Your module class will extend the ReactContextBaseJavaModule
+   b. **(new-component)Module.kt**: This file will contain your native module class. Your module class will extend the ReactContextBaseJavaModule
 
-    c. **(new-component)Package.kt**
-    - Add the ViewManager in createViewManagers of the applications package
-    - Add the Module in  createNativeModules of the applications package
+   c. **(new-component)Package.kt**
+
+   - Add the ViewManager in createViewManagers of the applications package
+   - Add the Module in createNativeModules of the applications package
 
 3. In directory android/src/main, add AndroidManifest.xml and add the package name
 
 4. Autolink Native Module
 
-    a. Gradle Build Init plugin
-    - Run gradle init inside android directory
-    - Select type of project to generate: Basic
-    - Select build script DSL: Groovy
+   a. Gradle Build Init plugin
 
-    b. Include dependencies for android build environment
-    - Edit the generated build.gradle file (Example: packages/experimental/Drawer/android/build.gradle)
-    - Add dependencies for kotlin, maven, react-native, etc
-      - Add dependency for FluentUIAndroid
+   - Run gradle init inside android directory
+   - Select type of project to generate: Basic
+   - Select build script DSL: Groovy
 
-    c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/android/package.json in order for our Fluent Tester app to build and use your new Android component module
+   b. Include dependencies for android build environment
 
+   - Edit the generated build.gradle file (Example: packages/experimental/Drawer/android/build.gradle)
+   - Add dependencies for kotlin, maven, react-native, etc
+     - Add dependency for FluentUIAndroid
+
+   c. Add @fluentui-react-native/<new-component> package under "dependencies" and "depcheck"/"ignoreMatches" in apps/fluent-tester/package.json in order for our Fluent Tester app to build and use your new Android component module
 
 ## Creating a pull request
 

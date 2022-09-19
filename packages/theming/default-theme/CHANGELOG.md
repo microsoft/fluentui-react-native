@@ -1,8 +1,68 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.1
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.19.0
+- Bump @fluentui-react-native/theme to v0.7.1
+- Bump @fluentui-react-native/theming-utils to v0.15.1
+
+## 0.15.0
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Minor changes
+
+- Added unit tests (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/theming-utils to v0.15.0
+
+## 0.14.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+- Bump @fluentui-react-native/theme to v0.7.0
+- Bump @fluentui-react-native/theming-utils to v0.14.0
+
+## 0.13.0
+
+Wed, 25 May 2022 18:43:08 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theme to v0.6.11
+- Bump @fluentui-react-native/theming-utils to v0.13.0
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+
+## 0.11.0
+
+Sat, 21 May 2022 01:47:57 GMT
+
+### Minor changes
+
+- Add shadows to default (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theme to v0.6.9
+- Bump @fluentui-react-native/theming-utils to v0.11.0
 
 ## 0.10.3
 

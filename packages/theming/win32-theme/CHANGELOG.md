@@ -1,8 +1,97 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Thu, 28 Apr 2022 19:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.1
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.15.1
+- Bump @fluentui-react-native/theme-types to v0.19.0
+- Bump @fluentui-react-native/theme to v0.7.1
+- Bump @fluentui-react-native/theming-utils to v0.15.1
+
+## 0.21.0
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Minor changes
+
+- Added unit tests (nkhalil942@gmail.com)
+- Bump @fluentui-react-native/default-theme to v0.15.0
+- Bump @fluentui-react-native/theming-utils to v0.15.0
+
+## 0.20.1
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Delete workaround (ruaraki@microsoft.com)
+
+## 0.20.0
+
+Thu, 14 Jul 2022 18:09:50 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.14.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.0
+- Bump @fluentui-react-native/theme-types to v0.18.0
+- Bump @fluentui-react-native/theme to v0.7.0
+- Bump @fluentui-react-native/theming-utils to v0.14.0
+
+## 0.19.2
+
+Tue, 28 Jun 2022 16:48:37 GMT
+
+### Patches
+
+- Fixed absence of icon in HC (vkozlova@microsoft.com)
+
+## 0.19.1
+
+Fri, 24 Jun 2022 18:52:57 GMT
+
+### Patches
+
+- Override colors for checkmark in MenuItem (ruaraki@microsoft.com)
+
+## 0.19.0
+
+Wed, 25 May 2022 18:43:10 GMT
+
+### Minor changes
+
+- Add text implementation v2 (email not defined)
+- Bump @fluentui-react-native/default-theme to v0.13.0
+- Bump @fluentui-react-native/theme-tokens to v0.18.0
+- Bump @fluentui-react-native/theme-types to v0.17.0
+- Bump @fluentui-react-native/theme to v0.6.11
+- Bump @fluentui-react-native/theming-utils to v0.13.0
+
+### Patches
+
+- beachball sync (krsiler@microsoft.com)
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+
+## 0.17.0
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Minor changes
+
+- Add shadows to win32 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.11.0
+- Bump @fluentui-react-native/theme-tokens to v0.16.3
+- Bump @fluentui-react-native/theme-types to v0.15.0
+- Bump @fluentui-react-native/theme to v0.6.9
+- Bump @fluentui-react-native/theming-utils to v0.11.0
 
 ## 0.16.4
 

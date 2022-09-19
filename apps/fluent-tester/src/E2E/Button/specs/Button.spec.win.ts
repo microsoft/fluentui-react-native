@@ -1,82 +1,79 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonPageObject, { ButtonSelector } from '../pages/ButtonPageObject';
-import { ComponentSelector } from '../../common/BasePage.win';
+import { ComponentSelector, Platform } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
-import {
-  BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
-  BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
-} from '../../../FluentTester/TestComponents/Button/consts';
+import { BUTTON_ACCESSIBILITY_LABEL_DEPRECATED, BUTTON_TEST_COMPONENT_LABEL_DEPRECATED } from '../../../TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Button Testing Initialization', function () {
-  it('Wait for app load', () => {
-    NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    expect(NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+  it('Wait for app load', async () => {
+    await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
 
-  it('Click and navigate to Button test page', () => {
+  it('Click and navigate to Button test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    ButtonPageObject.scrollToComponentButton();
-    ButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
+    await ButtonPageObject.scrollToComponentButton(Platform.Win32);
+    await ButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    NavigateAppPage.clickAndGoToButtonPage();
-    ButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
+    await NavigateAppPage.clickAndGoToButtonPage();
+    await ButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    expect(ButtonPageObject.isPageLoaded()).toBeTruthy(ButtonPageObject.ERRORMESSAGE_PAGELOAD);
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ButtonPageObject.isPageLoaded()).toBeTruthy(ButtonPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
 describe('Button Accessibility Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
-  beforeEach(() => {
-    ButtonPageObject.scrollToTestElement();
-    ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  beforeEach(async () => {
+    await ButtonPageObject.scrollToTestElement();
+    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
-  it('Button - Validate accessibilityRole is correct', () => {
-    expect(ButtonPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Button - Validate accessibilityRole is correct', async () => {
+    await expect(await ButtonPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Button - Set accessibilityLabel', () => {
-    expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL_DEPRECATED);
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Button - Set accessibilityLabel', async () => {
+    await expect(await ButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL_DEPRECATED);
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Button - Do not set accessibilityLabel -> Default to Button label', () => {
-    expect(ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL_DEPRECATED);
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Button - Do not set accessibilityLabel -> Default to Button label', async () => {
+    await expect(await ButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(BUTTON_TEST_COMPONENT_LABEL_DEPRECATED);
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
 describe('Button Functional Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
-  beforeEach(() => {
-    ButtonPageObject.scrollToTestElement();
-    ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  beforeEach(async () => {
+    await ButtonPageObject.scrollToTestElement();
+    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
-  it('Validate OnClick() callback was fired -> Click', () => {
-    ButtonPageObject.clickComponent();
-    expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate OnClick() callback was fired -> Click', async () => {
+    await ButtonPageObject.clickComponent();
+    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
-    ButtonPageObject.clickComponent(); // Reset Button State
+    await ButtonPageObject.clickComponent(); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "Enter"', () => {
-    ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
-    expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
+    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
+    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
-    ButtonPageObject.clickComponent(); // Reset Button State
+    await ButtonPageObject.clickComponent(); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "Spacebar"', () => {
-    ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
-    expect(ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
-    expect(ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
+  it('Validate OnClick() callback was fired -> Type "Spacebar"', async () => {
+    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
+    await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
+    await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });

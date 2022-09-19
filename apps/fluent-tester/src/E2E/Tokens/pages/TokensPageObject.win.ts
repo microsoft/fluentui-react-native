@@ -1,5 +1,5 @@
-import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../../../FluentTester/TestComponents/Tokens/consts';
-import { BasePage, By } from '../../common/BasePage.win';
+import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../../../TestComponents/Tokens/consts';
+import { BasePage, By } from '../../common/BasePage';
 
 class TokenPageObject extends BasePage {
   /*****************************************/

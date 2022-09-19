@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue } from 'react-native';
-import { TextProps } from '@fluentui-react-native/experimental-text';
+import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IPressableHooks, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { IViewProps } from '@fluentui-react-native/adapters';
+import { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -41,6 +42,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
    * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
    */
   spacingIconContentAfter?: number;
+
+  /**
+   * An object describing the shadow of the button
+   */
+  shadowToken?: ShadowToken;
 
   /**
    * States that can be applied to a button
@@ -110,6 +116,12 @@ export interface ButtonProps extends ButtonCoreProps {
    * @default false
    */
   block?: boolean;
+
+  /**
+   * Whether to use native focus visuals for the component
+   * @default true
+   */
+  enableFocusRing?: boolean;
 
   /** Sets style of button to a preset size style
    * @default 'small' on win32, 'medium' elsewhere

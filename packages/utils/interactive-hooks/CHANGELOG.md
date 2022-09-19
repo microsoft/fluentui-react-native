@@ -1,8 +1,180 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 04 May 2022 21:06:04 GMT and should not be manually modified.
+This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.5
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.8
+
+## 0.18.4
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- Update RN Win32 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.13.7
+
+## 0.18.3
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.6
+
+## 0.18.2
+
+Mon, 29 Aug 2022 23:21:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.5
+
+## 0.18.1
+
+Fri, 05 Aug 2022 23:22:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.4
+
+## 0.18.0
+
+Fri, 29 Jul 2022 22:47:07 GMT
+
+### Minor changes
+
+- Adding flag to determine platform preference for keyUp vs. keyDown (email not defined)
+
+## 0.17.5
+
+Fri, 29 Jul 2022 21:04:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.3
+
+## 0.17.4
+
+Thu, 28 Jul 2022 23:57:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.2
+
+## 0.17.3
+
+Tue, 26 Jul 2022 19:30:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.1
+
+## 0.17.2
+
+Mon, 25 Jul 2022 21:27:20 GMT
+
+### Patches
+
+- useViewCommandFocus: check focus command exists on RCTView first (sanajmi@microsoft.com)
+
+## 0.17.1
+
+Sat, 23 Jul 2022 00:28:48 GMT
+
+### Patches
+
+- useViewCommandFocus: check focus command exists on RCTView first (sanajmi@microsoft.com)
+
+## 0.17.0
+
+Thu, 14 Jul 2022 18:09:51 GMT
+
+### Minor changes
+
+- Update to React Native 0.66 (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.13.0
+
+## 0.16.5
+
+Fri, 08 Jul 2022 21:23:37 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.3
+
+## 0.16.4
+
+Thu, 07 Jul 2022 21:24:07 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.2
+
+## 0.16.3
+
+Mon, 13 Jun 2022 23:58:18 GMT
+
+### Patches
+
+- Fix focus on open (ruaraki@microsoft.com)
+
+## 0.16.2
+
+Mon, 06 Jun 2022 19:20:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.1
+
+## 0.16.1
+
+Thu, 26 May 2022 21:22:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.12.0
+
+## 0.16.0
+
+Thu, 26 May 2022 00:33:11 GMT
+
+### Minor changes
+
+- Type cleanup (ruaraki@microsoft.com)
+
+## 0.15.10
+
+Wed, 25 May 2022 18:43:09 GMT
+
+### Patches
+
+- Version bump for packages to attempt to fix NPM publish pipeline (krsiler@microsoft.com)
+- beachball sync (krsiler@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.11.25
+
+## 0.15.8
+
+Sat, 21 May 2022 16:18:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.23
+
+## 0.15.7
+
+Sat, 21 May 2022 01:47:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.11.22
 
 ## 0.15.6
 

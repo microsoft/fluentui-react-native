@@ -2,6 +2,65 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Thu, 14 Jul 2022 18:09:50 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "155145b496a51b06bba73f8f9c6b89dc7b348c4b",
+            "comment": "Update to React Native 0.66"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 25 May 2022 18:43:10 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "7d1c5dba49eb5da6c18681b8c9295c7fa0d0353b",
+            "comment": "Version bump for packages to attempt to fix NPM publish pipeline"
+          },
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "f4e881a5caef5a8258094f2a2ba674c62321886d",
+            "comment": "beachball sync"
+          }
+        ],
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "18480e3fdf2038a34147995f413a45d14f012a73",
+            "comment": "Add text implementation v2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 21 May 2022 01:47:57 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.16.3",
+      "version": "0.16.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "3fdd5fccdcd5e76c90bac7ad2fa436917b1c84e0",
+            "comment": "Update design-tokens packages"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 27 Apr 2022 19:30:38 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.16.2",
       "version": "0.16.2",
