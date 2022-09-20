@@ -83,5 +83,8 @@
     "subspec",
     "uifabricshared",
     "unemphasized"
-  ]
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.configPath": "E:\\fluentui-react-native\\prettier.config.js",
+  "prettier.ignorePath": "./.prettierignore"
 }
