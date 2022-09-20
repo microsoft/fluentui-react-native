@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
+This log was last generated on Tue, 20 Sep 2022 16:58:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.7
+
+Tue, 20 Sep 2022 16:58:04 GMT
+
+### Patches
+
+- Updated SwitchProp comments to better align with the prop comments on the Fluent UI React Switch documentation. Did not make any functional changes to the control, but wanted to update documentation to get it more ready for publishing as a V1 control. (ejlayne@microsoft.com)
 
 ## 0.6.6
 

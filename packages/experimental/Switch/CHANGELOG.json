@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Tue, 20 Sep 2022 16:58:04 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ejlayne@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "725e9cb7c78a89c622c550a64a2a077660a7a2d0",
+            "comment": "Updated SwitchProp comments to better align with the prop comments on the Fluent UI React Switch documentation. Did not make any functional changes to the control, but wanted to update documentation to get it more ready for publishing as a V1 control."
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/switch_v0.6.6",
       "version": "0.6.6",
