@@ -14,5 +14,5 @@ jscodeshift -t <path to transform file> --parser=tsx --extensions=tsx <path to f
 For example
 
 ```cli
-jscodeshift -t transforms/src/button-v0-to-v1.ts --parser=tsx --extensions=tsx apps/fluent-tester/src/FluentTester/TestComponents/Button/deprecated
+jscodeshift -t transforms/src/button-v0-to-v1.ts --parser=tsx --extensions=tsx apps/fluent-tester/src/TestComponents/Button/deprecated
 ```
