@@ -3,6 +3,8 @@ import { Text } from './Text';
 export const Caption1 = Text.customize({
   variant: 'caption1',
 });
+export const Caption1Strong = Text; // Not supported on Win32
+export const Caption2 = Text; // Not supported on Win32
 export const Body1 = Text.customize({
   variant: 'body1',
 });
@@ -33,6 +35,8 @@ export const Title1 = Text.customize({
 export const Title1Strong = Text.customize({
   variant: 'title1Strong',
 });
+export const Title2 = Text; // Not supported on Win32
+export const Title3 = Text; // Not supported on Win32
 export const LargeTitle = Text.customize({
   variant: 'largeTitle',
 });

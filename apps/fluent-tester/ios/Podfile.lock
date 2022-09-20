@@ -10,11 +10,11 @@ PODS:
     - React-jsi (= 0.66.4)
     - ReactCommon/turbomodule/core (= 0.66.4)
   - fmt (6.2.1)
-  - FRNAvatar (0.16.1):
+  - FRNAvatar (0.16.2):
     - MicrosoftFluentUI (= 0.6.1)
     - MicrosoftFluentUI/Avatar_ios (= 0.6.1)
     - React
-  - FRNDatePicker (0.6.1):
+  - FRNDatePicker (0.7.0):
     - MicrosoftFluentUI (= 0.6.1)
     - React
   - glog (0.3.5)
@@ -376,7 +376,7 @@ PODS:
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.2.4):
+  - react-native-slider (4.3.1):
     - React-Core
   - React-perflogger (0.66.4)
   - React-RCTActionSheet (0.66.4):
@@ -443,11 +443,11 @@ PODS:
     - React-jsi (= 0.66.4)
     - React-logger (= 0.66.4)
     - React-perflogger (= 0.66.4)
-  - ReactTestApp-DevSupport (1.6.2):
+  - ReactTestApp-DevSupport (1.6.13):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (2.4.2):
+  - RNCPicker (2.4.4):
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
@@ -584,8 +584,8 @@ SPEC CHECKSUMS:
   FBLazyVector: e5569e42a1c79ca00521846c223173a57aca1fe1
   FBReactNativeSpec: fe08c1cd7e2e205718d77ad14b34957cce949b58
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: 106dad851d08d0cea35d56310b64db6a065c2099
-  FRNDatePicker: 75eb1d59c15ec0cfe681e91316105cd2fc206bea
+  FRNAvatar: 0080b4c6f613ccac725c81fe896d757b1242d331
+  FRNDatePicker: 832a17493d062b0f698597d9d3c86287ca317a0e
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   MicrosoftFluentUI: 28925cbf24aa550b9942f844d293b90d1a5db330
   RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
@@ -601,7 +601,7 @@ SPEC CHECKSUMS:
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: cecabb58ecffad671d2ad3ccc58c7f4d2d029e95
+  react-native-slider: d3ae4270cf8a8cc45a69912db0cc42b151560d5a
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
   React-RCTAnimation: 743e88b55ac62511ae5c2e22803d4f503f2a3a13
@@ -614,9 +614,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: e3ffca672dd3772536cb844274094b0e2c31b187
   React-runtimeexecutor: dec32ee6f2e2a26e13e58152271535fadff5455a
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
-  ReactTestApp-DevSupport: 2fa32bc5aec307737d9836a8e40dfaa3745e7525
+  ReactTestApp-DevSupport: 8a8cff38c37cd8145a12ac7d7d0503dd08f97d65
   ReactTestApp-Resources: ecba662266ac5af3e30e1e3004c0fa8c0298b61a
-  RNCPicker: 0250e95ad170569a96f5b0555cdd5e65b9084dca
+  RNCPicker: 0b65be85fe7954fbb2062ef079e3d1cde252d888
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
 
