@@ -3,17 +3,12 @@ import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { E2ETextTest } from './TextE2ETest';
-import { V2Usage } from './V2Usage';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
     component: StandardUsage,
-  },
-  {
-    name: 'V2 Usage',
-    component: V2Usage,
   },
   {
     name: 'Customize Usage',
