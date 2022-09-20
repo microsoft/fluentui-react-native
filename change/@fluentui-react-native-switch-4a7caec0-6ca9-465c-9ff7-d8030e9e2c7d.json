@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Updated SwitchProp comments to better align with the prop comments on the Fluent UI React Switch documentation. Did not make any functional changes to the control, but wanted to update documentation to get it more ready for publishing as a V1 control.",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "ejlayne@microsoft.com",
+  "dependentChangeType": "patch"
+}
