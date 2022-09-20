@@ -17,17 +17,29 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
       (path: ImportDeclaration) => path.source.value === '@fluentui/react-native' || path.source.value === '@fluentui-react-native/button',
     )
     .forEach((path: ASTPath<ImportDeclaration>) => {
-      path.value.specifiers?.forEach((specifier) => {
-        if (
+      if (!path.value.specifiers) {
+        return;
+      }
+
+      const buttonSpecifier = path.value.specifiers.findIndex(
+        (specifier) =>
           specifier.type === 'ImportSpecifier' &&
           (specifier.imported.name === 'Button' ||
             specifier.imported.name === 'PrimaryButton' ||
-            specifier.imported.name === 'StealthButton')
-        ) {
-          specifier.imported.name = 'ButtonV1';
-          specifier.local = { type: 'Identifier', name: 'Button' };
-        }
-      });
+            specifier.imported.name === 'StealthButton'),
+      );
+
+      if (buttonSpecifier !== undefined && buttonSpecifier !== -1) {
+        path.value.specifiers[buttonSpecifier] = j.importSpecifier(j.identifier('ButtonV1'), j.identifier('Button'));
+      }
+
+      path.value.specifiers = path.value.specifiers.filter(
+        (specifier) =>
+          specifier.type !== 'ImportSpecifier' ||
+          (specifier.imported.name !== 'Button' &&
+            specifier.imported.name !== 'PrimaryButton' &&
+            specifier.imported.name !== 'StealthButton'),
+      );
     });
 
   // Change previous buttons to new type of button
