@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add type for method parameter",
+  "packageName": "@fluentui-react-native/button",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
