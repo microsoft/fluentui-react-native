@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add transforms package",
+  "packageName": "@fluentui-react-native/transforms",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
