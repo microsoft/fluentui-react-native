@@ -21,14 +21,14 @@ export const Body2 = Text.customize({
 export const Body2Strong = Text.customize({
   variant: 'body2Strong',
 });
-export const Subtitle1 = Text; // Not supported on iOS
-export const Subtitle1Strong = Text; // Not supported on iOS
-export const Subtitle2 = Text; // Not supported on iOS
-export const Subtitle2Strong = Text; // Not supported on iOS
+export const Subtitle1 = null; // Not supported on iOS
+export const Subtitle1Strong = null; // Not supported on iOS
+export const Subtitle2 = null; // Not supported on iOS
+export const Subtitle2Strong = null; // Not supported on iOS
 export const Title1 = Text.customize({
   variant: 'title1',
 });
-export const Title1Strong = Text; // Not supported on iOS
+export const Title1Strong = null; // Not supported on iOS
 export const Title2 = Text.customize({
   variant: 'title2',
 });
