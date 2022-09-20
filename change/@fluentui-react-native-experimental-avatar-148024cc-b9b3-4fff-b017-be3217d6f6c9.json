@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bumping FUA version",
-  "packageName": "@fluentui-react-native/experimental-avatar",
-  "email": "sophialee.0416@gmail.com",
-  "dependentChangeType": "patch"
-}

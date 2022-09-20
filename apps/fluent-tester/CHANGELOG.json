@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 20 Sep 2022 23:28:25 GMT",
+      "tag": "@fluentui-react-native/tester_v0.95.6",
+      "version": "0.95.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sophialee.0416@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "259b0a7324ce64cca6a77cf469a0550be9e63001",
+            "comment": "Bumping FUA version"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-avatar to v0.16.5",
+            "commit": "259b0a7324ce64cca6a77cf469a0550be9e63001"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-native-date-picker to v0.7.1",
+            "commit": "259b0a7324ce64cca6a77cf469a0550be9e63001"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 20 Sep 2022 20:05:27 GMT",
       "tag": "@fluentui-react-native/tester_v0.95.5",
       "version": "0.95.5",
