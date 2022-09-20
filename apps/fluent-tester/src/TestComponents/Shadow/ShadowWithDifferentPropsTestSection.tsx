@@ -7,18 +7,31 @@ import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { mergeStyles } from '@fluentui-react-native/merge-props';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
+  const defaultShadowTestBoxPropsWithoutSpacing = {
+    maxWidth: 732,
+    minHeight: 64,
+    backgroundColor: t.colors.background,
+  };
+  const marginTestProps = {
+    marginVertical: 16,
+    marginHorizontal: 32,
+  };
+  const paddingTestProps = {
+    padding: 20,
+  };
+
   return {
-    defaultShadowTestBoxProps: {
-      maxWidth: 732,
-      minHeight: 64,
-      padding: 20,
-      marginVertical: 16,
-      marginHorizontal: 32,
-      backgroundColor: t.colors.background,
-    },
     headerTextPadding: {
       padding: 16,
     },
+    defaultShadowTestBoxPropsWithoutSpacing,
+    defaultShadowTestBoxProps: {
+      ...defaultShadowTestBoxPropsWithoutSpacing,
+      ...marginTestProps,
+      ...paddingTestProps,
+    },
+    marginTestProps,
+    paddingTestProps,
     borderRadiusTestProps: {
       borderRadius: 8,
     },
@@ -42,6 +55,16 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
         <Shadow shadowToken={theme.shadows.shadow16}>
           <View style={themedStyles.defaultShadowTestBoxProps}>
             <Text variant="bodySemibold">padding: 20, marginVertical: 16, marginHorizontal: 32</Text>
+          </View>
+        </Shadow>
+        <Shadow shadowToken={theme.shadows.shadow16}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxPropsWithoutSpacing, themedStyles.paddingTestProps)}>
+            <Text variant="bodySemibold">padding only</Text>
+          </View>
+        </Shadow>
+        <Shadow shadowToken={theme.shadows.shadow16}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxPropsWithoutSpacing, themedStyles.marginTestProps)}>
+            <Text variant="bodySemibold">margins only</Text>
           </View>
         </Shadow>
         <Shadow shadowToken={theme.shadows.shadow16}>
