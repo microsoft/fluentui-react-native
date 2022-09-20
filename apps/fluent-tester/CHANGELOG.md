@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 20 Sep 2022 16:58:04 GMT and should not be manually modified.
+This log was last generated on Tue, 20 Sep 2022 20:05:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.95.5
+
+Tue, 20 Sep 2022 20:05:27 GMT
+
+### Patches
+
+- Add border width test (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.24.25
+- Bump @fluentui-react-native/experimental-button to v0.16.25
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.29
+- Bump @fluentui-react-native/experimental-shadow to v0.2.19
+- Bump @fluentui-react-native/menu to v1.0.35
+- Bump @fluentui-react-native/notification to v0.17.8
+- Bump @fluentui/react-native to v0.32.19
 
 ## 0.95.4
 
