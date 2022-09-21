@@ -7076,7 +7076,7 @@ expand-brackets@^2.1.4:
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
 
-expect-webdriverio@^3.0.0:
+expect-webdriverio@3.4.0, expect-webdriverio@^3.0.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/expect-webdriverio/-/expect-webdriverio-3.4.0.tgz#32944cefaae3380285ee8d3a88edc1a3b9ed4612"
   integrity sha512-7Ivy1IB35pmkbCcI36un2OMytGEYCy1PcdqrlDnWZBzTpewAO14r+gO2FSuO5kNpDWm3gZSD4NYLG1KXJOlI3w==
