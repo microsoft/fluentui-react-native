@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-trap-zone",
   "entries": [
     {
+      "date": "Fri, 16 Sep 2022 01:53:06 GMT",
+      "tag": "@fluentui-react-native/focus-trap-zone_v0.9.11",
+      "version": "0.9.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-trap-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.5",
+            "commit": "379d866e6ec5a3d954b5e945949467345f815513"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 14 Sep 2022 23:07:42 GMT",
       "tag": "@fluentui-react-native/focus-trap-zone_v0.9.10",
       "version": "0.9.10",

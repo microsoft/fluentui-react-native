@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Wed, 14 Sep 2022 23:07:42 GMT and should not be manually modified.
+This log was last generated on Sat, 17 Sep 2022 00:44:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.0
+
+Sat, 17 Sep 2022 00:44:31 GMT
+
+### Minor changes
+
+- Add interactivity tokens (ruaraki@microsoft.com)
+
+## 0.3.2
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/text to v0.14.4
 
 ## 0.3.1
 

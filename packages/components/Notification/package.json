@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/notification",
-  "version": "0.17.6",
+  "version": "0.17.8",
   "description": "add component-description",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,15 +27,15 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.9.1",
-    "@fluentui-react-native/button": ">=0.24.23 <1.0.0",
-    "@fluentui-react-native/experimental-shadow": "0.2.17",
-    "@fluentui-react-native/framework": "0.8.2",
-    "@fluentui-react-native/icon": "0.13.7",
-    "@fluentui-react-native/interactive-hooks": ">=0.18.4 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.9.10 <1.0.0",
-    "@fluentui-react-native/text": ">=0.14.3 <1.0.0",
-    "@fluentui-react-native/theme-types": ">=0.18.0 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.16.1 <1.0.0",
+    "@fluentui-react-native/button": ">=0.24.25 <1.0.0",
+    "@fluentui-react-native/experimental-shadow": "0.2.19",
+    "@fluentui-react-native/framework": "0.8.3",
+    "@fluentui-react-native/icon": "0.13.8",
+    "@fluentui-react-native/interactive-hooks": ">=0.18.5 <1.0.0",
+    "@fluentui-react-native/pressable": ">=0.9.11 <1.0.0",
+    "@fluentui-react-native/text": ">=0.14.4 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.19.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.16.2 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.0 <1.0.0"
   },
   "devDependencies": {

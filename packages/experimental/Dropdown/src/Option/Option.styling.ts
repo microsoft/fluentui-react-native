@@ -2,21 +2,25 @@ import { borderStyles, buildProps, fontStyles, layoutStyles, Theme, UseStylingOp
 import { optionName, OptionProps, OptionSlotProps, OptionTokens } from './Option.types';
 import { defaultOptionTokens } from './OptionTokens';
 
+export const optionStates: (keyof OptionTokens)[] = ['hovered', 'focused', 'pressed', 'disabled'];
+
 export const stylingSettings: UseStylingOptions<OptionProps, OptionSlotProps, OptionTokens> = {
   tokens: [defaultOptionTokens, optionName],
+  states: optionStates,
   slotProps: {
     root: buildProps(
       (tokens: OptionTokens, theme: Theme) => ({
         style: {
           alignItems: 'center',
           alignSelf: 'flex-start',
+          backgroundColor: tokens.backgroundColor,
           display: 'flex',
           flexDirection: 'row',
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
       }),
-      [...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     checkIcon: buildProps(
       (tokens: OptionTokens) => ({
