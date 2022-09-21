@@ -44,5 +44,11 @@ export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeS
       }),
       ['variant', 'color'],
     ),
+    shadow: buildProps(
+      (tokens: CounterBadgeTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
+    ),
   },
 };

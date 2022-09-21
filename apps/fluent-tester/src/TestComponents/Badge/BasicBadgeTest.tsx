@@ -18,6 +18,7 @@ import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
@@ -74,6 +75,7 @@ export const BasicBadge: React.FunctionComponent = () => {
     shape,
     shadow: showShadow,
   };
+  const theme = useFluentTheme();
 
   return (
     <View>
@@ -103,7 +105,7 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Badge {...badgeConfig}>Basic badge</Badge>
         )}
       </View>
-      <Badge size="extraLarge" shadow={showShadow}>
+      <Badge size="extraLarge" shadow={true} shadowToken={theme.shadows.shadow28}>
         Shadow Badge
       </Badge>
       <Text>Size</Text>

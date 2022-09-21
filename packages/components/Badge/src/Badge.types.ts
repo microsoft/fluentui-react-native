@@ -51,6 +51,11 @@ export interface BadgeConfigurableProps {
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
+
+  /**
+   * Sets shadow style with `ambient` and `key` props
+   */
+  shadowToken?: ShadowToken;
 }
 
 export interface BadgeCoreProps extends IViewProps {
@@ -104,11 +109,6 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * Set the right edge of the Badge
    */
   right?: FlexStyle['right'];
-
-  /**
-   * Sets shadow style with `ambient` and `key` props
-   */
-  shadowToken?: ShadowToken;
 
   /**
    * Set padding for text container when Badge contains

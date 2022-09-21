@@ -11,7 +11,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = (theme: The
     right: globalTokens.spacing.none,
     textMargin: globalTokens.spacing.xxs,
     position: 'relative',
-    shadowToken: theme.shadows.shadow2,
+    shadowToken: theme.shadows.shadow4,
     tiny: {
       minWidth: 6,
       minHeight: 6,
