@@ -15,15 +15,12 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   focusable={true}
   iconPosition="before"
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
   onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -91,15 +88,12 @@ exports[`Default FAB (iOS) 1`] = `
     focusable={true}
     iconPosition="before"
     onBlur={[Function]}
-    onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={[Function]}
     onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
     style={
       Object {
         "alignItems": "center",

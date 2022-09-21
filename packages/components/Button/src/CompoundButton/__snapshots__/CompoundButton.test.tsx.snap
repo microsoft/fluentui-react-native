@@ -14,15 +14,12 @@ exports[`CompoundButton default 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
   onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
