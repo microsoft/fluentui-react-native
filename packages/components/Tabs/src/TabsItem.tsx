@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
@@ -145,7 +145,7 @@ export const TabsItem = compose<TabsItemType>({
 
   settings,
   slots: {
-    root: View,
+    root: Pressable,
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Icon as React.ComponentType },
     content: Text,
