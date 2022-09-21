@@ -13,7 +13,6 @@ describe('Tabs Testing Initialization', () => {
   it('Click and navigate to Tabs test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await TabsPageObject.scrollToComponentButton(Platform.Win32);
-    await TabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToTabsPage();
@@ -28,7 +27,6 @@ describe('Tabs Accessibility Testing', () => {
   /* Scrolls and waits for the Tabs to be visible on the Test Page */
   beforeEach(async () => {
     await TabsPageObject.scrollToTestElement();
-    await TabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Validate Tab's accessibilityRole is correct", async () => {
@@ -46,7 +44,6 @@ describe('Tabs Functional Tests', () => {
   /* Scrolls and waits for the Tabs to be visible on the Test Page */
   beforeEach(async () => {
     await TabsPageObject.scrollToTestElement();
-    await TabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     // Reset the TabGroup by putting focus on First tab item
     await TabsPageObject.clickOnTabItem(TabItemSelector.First);

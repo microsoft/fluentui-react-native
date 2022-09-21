@@ -17,7 +17,6 @@ describe('Experimental MenuButton Testing Initialization', () => {
   it('Click and navigate to Experimental MenuButton test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await ExperimentalMenuButtonPageObject.scrollToComponentButton(Platform.Win32);
-    await ExperimentalMenuButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToExperimentalMenuButtonPage();
@@ -32,7 +31,6 @@ describe('Experimental MenuButton Testing Initialization', () => {
 describe('Experimental MenuButton Accessibility Testing', () => {
   it('Experimental MenuButton - Validate accessibilityRole is correct', async () => {
     await ExperimentalMenuButtonPageObject.scrollToTestElement();
-    await ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalMenuButtonPageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
     await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
@@ -40,7 +38,6 @@ describe('Experimental MenuButton Accessibility Testing', () => {
 
   it('Experimental MenuButton - Set accessibilityLabel', async () => {
     await ExperimentalMenuButtonPageObject.scrollToTestElement();
-    await ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
       EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
@@ -50,7 +47,6 @@ describe('Experimental MenuButton Accessibility Testing', () => {
 
   it('Do not set accessibilityLabel -> Default to Experimental MenuButton label', async () => {
     await ExperimentalMenuButtonPageObject.scrollToTestElement();
-    await ExperimentalMenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
       EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,

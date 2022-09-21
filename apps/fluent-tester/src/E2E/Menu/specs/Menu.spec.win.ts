@@ -64,13 +64,13 @@ describe('Menu Functional Testing', () => {
 });
 
 describe('Menu Accessibility Testing', () => {
-  it('Menu - Validate accessibilityRole of menu item is correct', async () => {
+  beforeEach(async () => {
     await MenuPageObject.scrollToTestElement();
-    await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
 
+  it('Menu - Validate accessibilityRole of menu item is correct', async () => {
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
     await expect(await MenuPageObject.getMenuItemAccessibilityRole()).toEqual(MENUITEM_A11Y_ROLE);
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
@@ -79,12 +79,8 @@ describe('Menu Accessibility Testing', () => {
   });
 
   it('Menu - Validate accessibilityRole of menu is correct', async () => {
-    await MenuPageObject.scrollToTestElement();
-    await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
     await expect(await MenuPageObject.getMenuAccessibilityRole()).toEqual(MENU_A11Y_ROLE);
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
@@ -93,12 +89,8 @@ describe('Menu Accessibility Testing', () => {
   });
 
   it('Menu - Set accessibilityLabel', async () => {
-    await MenuPageObject.scrollToTestElement();
-    await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
     await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.SecondaryComponent)).toEqual(
       MENUITEM_ACCESSIBILITY_LABEL,
@@ -109,12 +101,8 @@ describe('Menu Accessibility Testing', () => {
   });
 
   it('Menu - Do not set accessibilityLabel -> Default to MenuItem label', async () => {
-    await MenuPageObject.scrollToTestElement();
-    await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Enter);
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
-    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
     await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.TertiaryComponent)).toEqual(MENUITEM_TEST_LABEL);
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);

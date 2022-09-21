@@ -14,7 +14,6 @@ describe('Link Testing Initialization', () => {
   it('Click and navigate to Link test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await LinkPageObject.scrollToComponentButton(Platform.Win32);
-    await LinkPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToLinkPage();
@@ -26,18 +25,16 @@ describe('Link Testing Initialization', () => {
 });
 
 describe('Link Accessibility Testing', () => {
-  it('Link - Validate accessibilityRole is correct', async () => {
+  beforeEach(async () => {
     await LinkPageObject.scrollToTestElement();
-    await LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
 
+  it('Link - Validate accessibilityRole is correct', async () => {
     await expect(await LinkPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
   it('Link - Set accessibilityLabel', async () => {
-    await LinkPageObject.scrollToTestElement();
-    await LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await expect(await LinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });

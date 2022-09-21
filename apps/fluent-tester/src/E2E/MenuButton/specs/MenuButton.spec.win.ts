@@ -14,7 +14,6 @@ describe('MenuButton Testing Initialization', () => {
   it('Click and navigate to MenuButton test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await MenuButtonPageObject.scrollToComponentButton(Platform.Win32);
-    await MenuButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToMenuButtonPage();
@@ -30,7 +29,6 @@ describe('MenuButton Accessibility Testing', () => {
   /* Scrolls and waits for the MenuButton to be visible on the Test Page */
   beforeEach(async () => {
     await MenuButtonPageObject.scrollToTestElement();
-    await MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('MenuButton - Validate accessibilityRole is correct', async () => {
@@ -53,7 +51,6 @@ describe('MenuButton Functional Testing', () => {
   /* Scrolls and waits for the MenuButton to be visible on the Test Page */
   beforeEach(async () => {
     await MenuButtonPageObject.scrollToTestElement();
-    await MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape); // Reset MenuButton state for next test
   });

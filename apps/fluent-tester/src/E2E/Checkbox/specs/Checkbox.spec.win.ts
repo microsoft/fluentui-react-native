@@ -13,7 +13,6 @@ describe('Checkbox Testing Initialization', () => {
   it('Click and navigate to Checkbox test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await CheckboxPageObject.scrollToComponentButton(Platform.Win32);
-    await CheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToCheckboxPage();
@@ -28,7 +27,6 @@ describe('Checkbox Accessibility Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page */
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
-    await CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Checkbox - Validate accessibilityRole is correct', async () => {
@@ -51,8 +49,6 @@ describe('Checkbox Functional Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page AND un-checks the Checkbox */
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
-    await CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await CheckboxPageObject.toggleCheckboxToUnchecked();
   });
 

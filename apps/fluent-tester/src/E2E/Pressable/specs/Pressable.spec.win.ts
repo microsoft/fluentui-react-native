@@ -13,7 +13,6 @@ describe('Pressable Testing Initialization', () => {
   it('Click and navigate to Pressable test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await PressablePageObject.scrollToComponentButton(Platform.Win32);
-    await PressablePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToPressablePage();

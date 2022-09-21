@@ -23,7 +23,6 @@ describe('Avatar Testing Initialization', () => {
   it('Click and navigate to Avatar test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await AvatarPageObject.scrollToComponentButton(Platform.Win32);
-    await AvatarPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToAvatarPage();
@@ -37,7 +36,6 @@ describe('Avatar Testing Initialization', () => {
 describe('Avatar Accessibility Testing', () => {
   beforeEach(async () => {
     await AvatarPageObject.scrollToTestElement();
-    await AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate accessibilityLabel', async () => {

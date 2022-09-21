@@ -19,7 +19,6 @@ describe('RadioGroup/RadioButton Testing Initialization', () => {
   it('Click and navigate to RadioGroup test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await RadioGroupPageObject.scrollToComponentButton(Platform.Win32);
-    await RadioGroupPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToRadioGroupPage();
@@ -34,7 +33,6 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
   /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();
-    await RadioGroupPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Validate RadioGroup's accessibilityRole is correct", async () => {
@@ -74,8 +72,6 @@ describe('RadioGroup Functional Testing', () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st RadioButton in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();
-    await RadioGroupPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await RadioGroupPageObject.resetRadioGroupSelection();
   });
 

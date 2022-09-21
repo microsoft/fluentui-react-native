@@ -14,7 +14,6 @@ describe('Text Testing Initialization', () => {
   it('Click and navigate to Text test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await TextPageObject.scrollToComponentButton(Platform.Win32);
-    await TextPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToTextPage();
@@ -28,7 +27,6 @@ describe('Text Testing Initialization', () => {
 describe('Text Accessibility Testing', () => {
   beforeEach(async () => {
     await TextPageObject.scrollToTestElement();
-    await TextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Text - Validate accessibilityRole is correct', async () => {

@@ -13,7 +13,6 @@ describe('ContextualMenu Testing Initialization', () => {
   it('Click and navigate to ContextualMenu test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await ContextualMenuPageObjectObject.scrollToComponentButton(Platform.Win32);
-    await ContextualMenuPageObjectObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToContextualMenuPage();
@@ -28,8 +27,6 @@ describe('ContextualMenu Functional Tests', () => {
   /* Scrolls and waits for the ContextualMenu to be visible on the Test Page */
   beforeEach(async () => {
     await ContextualMenuPageObjectObject.scrollToTestElement();
-    await ContextualMenuPageObjectObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-
     await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Escape); // Reset ContextualMenu state for next test
   });
 

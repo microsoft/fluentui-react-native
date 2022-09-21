@@ -15,7 +15,6 @@ describe('Switch Testing Initialization', () => {
   it('Click and navigate to Switch test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await SwitchPageObject.scrollToComponentButton(Platform.Win32);
-    await SwitchPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToSwitchPage();
@@ -30,7 +29,6 @@ describe('Switch Accessibility Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(async () => {
     await SwitchPageObject.scrollToTestElement();
-    await SwitchPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Switch - Validate accessibilityRole is correct', async () => {
@@ -53,7 +51,6 @@ describe('Switch Functional Testing', () => {
   /* Scrolls and waits for the Switch to be visible on the Test Page */
   beforeEach(async () => {
     await SwitchPageObject.scrollToTestElement();
-    await SwitchPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Click on a Switch -> Validate it toggles correctly AND calls the user's onChange", async () => {

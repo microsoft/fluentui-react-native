@@ -13,7 +13,6 @@ describe('Experimental Tabs Testing Initialization', () => {
   it('Click and navigate to Experimental Tabs test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await ExperimentalTabsPageObject.scrollToComponentButton(Platform.Win32);
-    await ExperimentalTabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToExperimentalTabsPage();
@@ -27,7 +26,6 @@ describe('Experimental Tabs Testing Initialization', () => {
 describe('Experimental Tabs Accessibility Testing', () => {
   it("Validate Experimental Tab's accessibilityRole is correct", async () => {
     await ExperimentalTabsPageObject.scrollToTestElement();
-    await ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalTabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
     await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
@@ -35,7 +33,6 @@ describe('Experimental Tabs Accessibility Testing', () => {
 
   it("Validate Experimental TabItem's accessibilityRole is correct", async () => {
     await ExperimentalTabsPageObject.scrollToTestElement();
-    await ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalTabsPageObject.getTabItemAccesibilityRole()).toEqual(TABITEM_A11Y_ROLE);
     await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);

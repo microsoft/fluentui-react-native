@@ -14,7 +14,6 @@ describe('Button Testing Initialization', () => {
   it('Click and navigate to Button test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await ButtonPageObject.scrollToComponentButton(Platform.Win32);
-    await ButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToButtonPage();
@@ -29,7 +28,6 @@ describe('Button Accessibility Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonPageObject.scrollToTestElement();
-    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Button - Validate accessibilityRole is correct', async () => {
@@ -52,7 +50,6 @@ describe('Button Functional Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonPageObject.scrollToTestElement();
-    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {

@@ -13,7 +13,6 @@ describe('Experimental Text Testing Initialization', () => {
   it('Click and navigate to Experimental Text test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await ExperimentalTextPageObject.scrollToComponentButton(Platform.Win32);
-    await ExperimentalTextPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToExperimentalTextPage();
@@ -27,7 +26,6 @@ describe('Experimental Text Testing Initialization', () => {
 describe('Experimental Text Accessibility Testing', () => {
   it('Text - Validate accessibilityRole is correct', async () => {
     await ExperimentalTextPageObject.scrollToTestElement();
-    await ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalTextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
     await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);
