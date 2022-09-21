@@ -62,7 +62,7 @@ exports.config = {
     tsNodeOpts: {
       transpileOnly: true,
       project: 'tsconfig.json',
-      ignore: ['/node_modules', '../../node_modules', '../node_modules', '../../../node_modules']
+      ignore: ['/node_modules', '../../node_modules', '../node_modules', '../../../node_modules', '../fluent-tester/node_modules']
     },
   },
 
