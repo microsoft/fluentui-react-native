@@ -6,6 +6,7 @@ import { ThemeContext } from '@uifabricshared/theming-ramp';
 
 /**
  * props for the ThemeLayer
+ * @deprecated
  */
 export interface IThemeLayerProps {
   /**
@@ -46,6 +47,7 @@ export interface IThemeLayerProps {
  * The work of registering for updates will be done automatically.  The highest level `ThemeLayer` in
  * consumer mode will automatically register and act like a provider to ensure renders happen on theme
  * change
+ * @deprecated
  */
 export class ThemeLayer extends React.Component<IThemeLayerProps> {
   /**
