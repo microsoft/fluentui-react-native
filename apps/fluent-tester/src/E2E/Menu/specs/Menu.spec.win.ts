@@ -5,7 +5,7 @@ import { MENUITEM_ACCESSIBILITY_LABEL, MENUITEM_TEST_LABEL } from '../../../Test
 import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Menu Testing Initialization', function () {
+describe('Menu Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);

@@ -5,7 +5,7 @@ import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } fro
 import { ComponentSelector, Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('MenuButton Testing Initialization', function () {
+describe('MenuButton Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);

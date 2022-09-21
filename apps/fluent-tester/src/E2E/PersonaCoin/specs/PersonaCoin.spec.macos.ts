@@ -3,7 +3,7 @@ import PersonaCoinPageObject from '../pages/PersonaCoinPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('PersonaCoin Testing Initialization', function () {
+describe('PersonaCoin Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();

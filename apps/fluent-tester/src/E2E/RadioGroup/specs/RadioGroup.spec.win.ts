@@ -10,7 +10,7 @@ import {
 } from '../../../TestComponents/RadioGroup/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('RadioGroup/RadioButton Testing Initialization', function () {
+describe('RadioGroup/RadioButton Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
@@ -70,7 +70,7 @@ describe('RadioGroup/RadioButton Accessibility Testing', () => {
   });
 });
 
-describe('RadioGroup Functional Testing', async () => {
+describe('RadioGroup Functional Testing', () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st RadioButton in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupPageObject.scrollToTestElement();

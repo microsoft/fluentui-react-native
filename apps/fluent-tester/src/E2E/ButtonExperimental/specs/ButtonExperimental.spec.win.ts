@@ -5,7 +5,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../co
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
-describe('Experimental Button Testing Initialization', function () {
+describe('Experimental Button Testing Initialization', () => {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
@@ -28,7 +28,7 @@ describe('Experimental Button Testing Initialization', function () {
   // });
 });
 
-describe('Experimental Button Accessibility Testing', async () => {
+describe('Experimental Button Accessibility Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
@@ -53,7 +53,7 @@ describe('Experimental Button Accessibility Testing', async () => {
   });
 });
 
-describe('Experimental Button Functional Testing', async () => {
+describe('Experimental Button Functional Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
