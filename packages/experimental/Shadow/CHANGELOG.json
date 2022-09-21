@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "entries": [
     {
+      "date": "Tue, 20 Sep 2022 20:05:27 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.19",
+      "version": "0.2.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "c738f985915d011ced8cb7b713a3b5ca3f04cbd9",
+            "comment": "Add border width test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/experimental-shadow_v0.2.18",
       "version": "0.2.18",
