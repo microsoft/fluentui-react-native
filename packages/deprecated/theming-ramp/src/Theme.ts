@@ -16,6 +16,7 @@ const _themeMergeOptions: MergeOptions = {
 /**
  * Resolve `partialTheme` into a fully specified theme, using `theme` to fill
  * in any missing values.
+ * @deprecated
  */
 export function resolvePartialTheme(theme: Theme, partialTheme?: PartialTheme): Theme {
   let newTheme = immutableMergeCore(_themeMergeOptions, theme, partialTheme) as Theme;
