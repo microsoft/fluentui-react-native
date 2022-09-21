@@ -30,11 +30,11 @@ export const fontStyles: TokenBuilder<FontTokens> = {
       variant !== undefined
     ) {
       return {
-        fontFamily: families[fontFamily] ?? fontFamily ?? families[variants[variant].face] ?? variants[variant].face,
-        fontSize: sizes[fontSize] ?? fontSize ?? sizes[variants[variant].size] ?? variants[variant].size,
-        fontWeight: weights[fontWeight] ?? fontWeight ?? weights[variants[variant].weight] ?? variants[variant].weight,
-        lineHeight: fontLineHeight ?? variants[variant].lineHeight,
-        letterSpacing: fontLetterSpacing ?? variants[variant].letterSpacing,
+        fontFamily: families[fontFamily] ?? fontFamily ?? families[variants[variant]?.face] ?? variants[variant]?.face,
+        fontSize: sizes[fontSize] ?? fontSize ?? sizes[variants[variant]?.size] ?? variants[variant]?.size,
+        fontWeight: weights[fontWeight] ?? fontWeight ?? weights[variants[variant]?.weight] ?? variants[variant]?.weight,
+        lineHeight: fontLineHeight ?? variants[variant]?.lineHeight,
+        letterSpacing: fontLetterSpacing ?? variants[variant]?.letterSpacing,
       };
     }
 
