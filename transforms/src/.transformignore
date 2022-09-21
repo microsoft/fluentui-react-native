@@ -1,2 +1,4 @@
 **/index.ts
 ../**/index.ts
+**/*.test.ts
+../**/*.test.ts
