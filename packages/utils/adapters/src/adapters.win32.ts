@@ -10,6 +10,7 @@ export type IImageProps = ImageProps;
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
   accessible: true,
+  accessibilityAccessKey: true,
   accessibilityActions: true,
   accessibilityAnnotation: true,
   accessibilityControls: true,

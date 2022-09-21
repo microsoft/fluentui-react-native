@@ -94,7 +94,7 @@ export type FontWeight = keyof FontWeights | FontWeightValue;
 /**
  * A font line height value, specified in CSS pixels (px).
  */
-export type FontLightHeight = number;
+export type FontLineHeight = number;
 
 /**
  * A font variant value.
