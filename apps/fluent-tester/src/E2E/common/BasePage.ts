@@ -68,16 +68,31 @@ export class BasePage {
   async scrollToComponentButton(platform: Platform): Promise<void> {
     switch (platform) {
       case Platform.Win32:
-        while (!(await this.isButtonInView())) {
-          const scrollViewElement = await By('SCROLLVIEW_TEST_ID');
-          await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
-        }
+        // eslint-disable-next-line no-case-declarations
+        const scrollViewElement = await By('SCROLLVIEW_TEST_ID');
+        await browser.waitUntil(
+          async () => {
+            await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
+            return await this.isButtonInView();
+          },
+          {
+            timeout: this.waitForPageTimeout,
+            timeoutMsg: 'Could not scroll to Button',
+          },
+        );
         break;
 
       case Platform.iOS:
-        while (!(await this.isButtonInView())) {
-          await driver.execute('mobile: scroll', { direction: 'down' });
-        }
+        await browser.waitUntil(
+          async () => {
+            await driver.execute('mobile: scroll', { direction: 'down' });
+            return await this.isButtonInView();
+          },
+          {
+            timeout: this.waitForPageTimeout,
+            timeoutMsg: 'Could not scroll to Button',
+          },
+        );
         break;
 
       case Platform.macOS:
@@ -122,9 +137,16 @@ export class BasePage {
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
     const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
-    while (!(await this._primaryComponent.isDisplayed())) {
-      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
-    }
+    await browser.waitUntil(
+      async () => {
+        await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
+        return await this._primaryComponent.isDisplayed();
+      },
+      {
+        timeout: this.waitForPageTimeout,
+        timeoutMsg: 'Could not scroll to test element',
+      },
+    );
     await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
   }
 
