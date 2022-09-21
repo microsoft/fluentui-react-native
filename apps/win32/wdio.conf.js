@@ -12,7 +12,15 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: [['../fluent-tester/src/E2E/**/specs/*.win.ts']],
-  exclude: ['../fluent-tester/src/E2E/Menu/specs/*.win.ts', '../fluent-tester/src/E2E/ButtonExperimental/specs/*.win.ts'],
+  exclude: [
+    '../fluent-tester/src/E2E/Menu/specs/*.win.ts',
+    '../fluent-tester/src/E2E/ButtonExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/CheckboxExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/MenuButtonExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/RadioGroupExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/TabsExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
+  ],
 
   capabilities: [
     {

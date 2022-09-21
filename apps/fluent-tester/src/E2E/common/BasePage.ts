@@ -66,18 +66,41 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async scrollToComponentButton(platform: Platform): Promise<void> {
+    // Check if button is already displayed
+    const TestPageButton = await this._pageButton;
+    if (await TestPageButton.isDisplayed()) {
+      return;
+    }
+
     switch (platform) {
       case Platform.Win32:
-        while (!(await this.isButtonInView())) {
-          const scrollViewElement = await By('SCROLLVIEW_TEST_ID');
-          await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, scrollViewElement.elementId);
-        }
+        // eslint-disable-next-line no-case-declarations
+        const ScrollViewer = await By('SCROLLVIEW_TEST_ID');
+        await browser.waitUntil(
+          async () => {
+            await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewer.elementId);
+            return await TestPageButton.isDisplayed();
+          },
+          {
+            timeout: this.waitForPageTimeout,
+            timeoutMsg:
+              'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
+          },
+        );
         break;
 
       case Platform.iOS:
-        while (!(await this.isButtonInView())) {
-          await driver.execute('mobile: scroll', { direction: 'down' });
-        }
+        await browser.waitUntil(
+          async () => {
+            await driver.execute('mobile: scroll', { direction: 'down' });
+            return await TestPageButton.isDisplayed();
+          },
+          {
+            timeout: this.waitForPageTimeout,
+            timeoutMsg:
+              'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
+          },
+        );
         break;
 
       case Platform.macOS:
@@ -121,10 +144,28 @@ export class BasePage {
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
-    const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
-    while (!(await this._primaryComponent.isDisplayed())) {
-      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
+    // Check if element is already displayed
+    const PrimaryComponent = await this._primaryComponent;
+    if (await PrimaryComponent.isDisplayed()) {
+      return;
     }
+
+    // Scroll until element is displayed
+    const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
+    await browser.waitUntil(
+      async () => {
+        await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
+        return await PrimaryComponent.isDisplayed();
+      },
+      {
+        timeout: this.waitForPageTimeout,
+        timeoutMsg:
+          'Could not scroll to the ' +
+          this._pageName +
+          "'s main test element. Please see Pipeline artifacts for more debugging information.",
+      },
+    );
+
     await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
   }
 
