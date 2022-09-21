@@ -48,15 +48,12 @@ exports[`Tabs FocusZone props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -117,15 +114,12 @@ exports[`Tabs FocusZone props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -186,15 +180,12 @@ exports[`Tabs FocusZone props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -291,15 +282,12 @@ exports[`Tabs default props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -360,15 +348,12 @@ exports[`Tabs default props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -429,15 +414,12 @@ exports[`Tabs default props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -534,15 +516,12 @@ exports[`Tabs disabled 1`] = `
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -603,15 +582,12 @@ exports[`Tabs disabled 1`] = `
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -672,15 +648,12 @@ exports[`Tabs disabled 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -778,15 +751,12 @@ exports[`Tabs header text and count 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -864,15 +834,12 @@ exports[`Tabs header text and count 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -950,15 +917,12 @@ exports[`Tabs header text and count 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -1072,15 +1036,12 @@ exports[`Tabs headers only 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -1141,15 +1102,12 @@ exports[`Tabs headers only 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -1210,15 +1168,12 @@ exports[`Tabs headers only 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -1331,15 +1286,12 @@ exports[`Tabs props 1`] = `
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -1417,15 +1369,12 @@ exports[`Tabs props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
@@ -1503,15 +1452,12 @@ exports[`Tabs props 1`] = `
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
-        onClick={[Function]}
         onFocus={[Function]}
+        onHoverIn={[Function]}
+        onHoverOut={[Function]}
         onPress={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPressIn={[Function]}
+        onPressOut={[Function]}
         style={
           Object {
             "alignItems": "center",
