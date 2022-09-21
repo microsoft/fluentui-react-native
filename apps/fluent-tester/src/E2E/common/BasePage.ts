@@ -33,17 +33,17 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return await this._primaryComponent.getAttribute('ControlType');
+    return await (await this._primaryComponent).getAttribute('ControlType');
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return await this._primaryComponent.getAttribute('Name');
+        return await (await this._primaryComponent).getAttribute('Name');
 
       case ComponentSelector.Secondary:
-        return await this._secondaryComponent.getAttribute('Name');
+        return await (await this._secondaryComponent).getAttribute('Name');
     }
   }
 
@@ -60,7 +60,7 @@ export class BasePage {
   }
 
   async clickComponent(): Promise<void> {
-    await this._primaryComponent.click();
+    await (await this._primaryComponent).click();
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
@@ -81,7 +81,8 @@ export class BasePage {
           },
           {
             timeout: this.waitForPageTimeout,
-            timeoutMsg: 'Could not scroll to Button',
+            timeoutMsg:
+              'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
           },
         );
         break;
@@ -94,7 +95,8 @@ export class BasePage {
           },
           {
             timeout: this.waitForPageTimeout,
-            timeoutMsg: 'Could not scroll to Button',
+            timeoutMsg:
+              'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
           },
         );
         break;
@@ -143,7 +145,10 @@ export class BasePage {
       },
       {
         timeout: this.waitForPageTimeout,
-        timeoutMsg: 'Could not scroll to test element',
+        timeoutMsg:
+          'Could not scroll to the ' +
+          this._pageName +
+          "'s main test element. Please see Pipeline artifacts for more debugging information.",
       },
     );
     await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
@@ -155,7 +160,6 @@ export class BasePage {
     await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
-      interval: 1000,
     });
   }
 
