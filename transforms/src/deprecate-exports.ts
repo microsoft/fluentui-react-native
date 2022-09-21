@@ -17,7 +17,7 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
     if (path.value.comments) {
       const comment = path.value.comments[path.value.comments.length - 1].value;
       if (!comment.includes('@deprecated')) {
-        path.value.comments[path.value.comments.length - 1].value = comment + '* @deprecated\r\n ';
+        path.value.comments[path.value.comments.length - 1].value = comment + comment.includes('\n') ? '' : '\r\n' + '* @deprecated\r\n ';
       }
     } else {
       path.value.comments = [j.commentBlock('*\r\n * @deprecated\r\n ')];
