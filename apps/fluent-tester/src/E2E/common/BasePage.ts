@@ -51,12 +51,12 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return await this._testPage.isDisplayed();
+    return await (await this._testPage).isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
-    return await this._pageButton.isDisplayed();
+    return await (await this._pageButton).isDisplayed();
   }
 
   async clickComponent(): Promise<void> {
@@ -128,19 +128,10 @@ export class BasePage {
     });
   }
 
-  /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
-  async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
-      timeout: timeout ?? this.waitForPageTimeout,
-      timeoutMsg:
-        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
-      interval: 1500,
-    });
-  }
-
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
-    if (await this._primaryComponent.isDisplayed()) {
+    const PrimaryComponent = await this._primaryComponent;
+    if (await PrimaryComponent.isDisplayed()) {
       return;
     }
 
@@ -148,7 +139,7 @@ export class BasePage {
     await browser.waitUntil(
       async () => {
         await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
-        return await this._primaryComponent.isDisplayed();
+        return await PrimaryComponent.isDisplayed();
       },
       {
         timeout: this.waitForPageTimeout,
