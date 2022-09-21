@@ -11,7 +11,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { useAsPressable, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -54,7 +54,7 @@ export const TabsItem = compose<TabsItemType>({
       setFocusState({ focused: false });
     }, [setFocusState]);
 
-    const pressable = useAsPressable({
+    const pressable = usePressableState({
       ...rest,
       onPress: changeSelection,
       onFocus: changeSelectionWithFocus,

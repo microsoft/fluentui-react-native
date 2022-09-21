@@ -9,7 +9,7 @@ import { settings } from './Tabs.settings';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { foregroundColorTokens, textTokens, backgroundColorTokens } from '@fluentui-react-native/tokens';
-import { useSelectedKey, useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { useSelectedKey, usePressableState } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsContext = React.createContext<TabsContextData>({
   selectedKey: null,
@@ -77,7 +77,7 @@ export const Tabs = compose<TabsType>({
 
     const styleProps = useStyling(userProps, (override: string) => state[override] || userProps[override]);
 
-    const pressable = useAsPressable({ ...rest });
+    const pressable = usePressableState({ ...rest });
 
     const onKeyDown = (ev: any) => {
       if (ev.nativeEvent.key === 'ArrowRight' || ev.nativeEvent.key === 'ArrowLeft') {
