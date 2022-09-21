@@ -5061,9 +5061,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.30.1"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.30.1.tgz#36057015f09f151abc24cf593d151303367b1f51"
-  integrity sha512-v3qzZ5a7gFTVOQ6P4Q6uUK5QJWD897bAVqkilh5JpKNpsP/v9XgMMFZe6xzCkKQqux6+QW0SJlQRqnD/MPi3ZQ==
+  version "2.31.0"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.0.tgz#dd556f2a75ab08039320e94291eed3b87809f502"
+  integrity sha512-xi6xf9nLLp9dpXBhnQuDsWdM6k+I34CrSdtniW8Qlt/BdHoUdTGhFFk9ky30pgywCam/bgGQbMd2FOChaUvfjQ==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -5074,8 +5074,8 @@ beachball@^2.20.0:
     prompts "^2.1.0"
     semver "^7.0.0"
     toposort "^2.0.2"
-    uuid "^8.3.1"
-    workspace-tools "^0.26.0"
+    uuid "^9.0.0"
+    workspace-tools "^0.27.0"
     yargs-parser "^21.0.0"
 
 big-integer@1.6.x:
@@ -13916,7 +13916,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
-uuid@8.3.2, uuid@^8.0.0, uuid@^8.3.0, uuid@^8.3.1, uuid@^8.3.2:
+uuid@8.3.2, uuid@^8.0.0, uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
@@ -14181,7 +14181,7 @@ wordwrapjs@^3.0.0:
     reduce-flatten "^1.0.1"
     typical "^2.6.1"
 
-workspace-tools@^0.26.0, workspace-tools@^0.26.3:
+workspace-tools@^0.26.3:
   version "0.26.6"
   resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.26.6.tgz#5a8045f86545f3221f8cace23f43b42fad5c3897"
   integrity sha512-BXeb9CXb7WYTCItPmbRt5Of1owfBYzoxaK7UcBCblnMbb9eGG2luGN4FU0UFw2paFceWTv1IMnnuTc094An6dw==
