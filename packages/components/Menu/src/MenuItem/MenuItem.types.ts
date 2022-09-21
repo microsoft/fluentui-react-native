@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorValue, ViewProps } from 'react-native';
+import { ColorValue, PressableProps, ViewProps } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
@@ -70,7 +70,7 @@ export interface MenuItemState extends IPressableHooks<MenuItemProps & React.Com
 }
 
 export interface MenuItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressableProps>;
   content?: TextProps;
   checkmark?: React.PropsWithRef<IViewProps>;
   submenuIndicator?: XmlProps;

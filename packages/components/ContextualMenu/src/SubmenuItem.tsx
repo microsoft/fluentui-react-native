@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
@@ -64,7 +64,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       }
     }, [context, disabled, itemKey, onClick]);
 
-    const pressable = useAsPressable({
+    const pressable = usePressableState({
       ...rest,
       onPress: onItemPress,
       onHoverIn: onItemHoverIn,
@@ -75,25 +75,27 @@ export const SubmenuItem = compose<SubmenuItemType>({
     /**
      * GH #1267
      * We want onMouseEnter to fire right away to set focus, and then Pressable's onHoverIn to fire after a delay to show the submenu.
-     * To achieve this, we override the onMouseEnter handler returned by useAsPressable, and replace it with our own. Inside our own
-     * onMouseEnter handler, we call useAsPressable's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
+     * To achieve this, we override the onMouseEnter handler returned by usePressableState, and replace it with our own. Inside our own
+     * onMouseEnter handler, we call usePressableState's onMouseEnter handler, which incorporates the delay passed to delayHoverIn
      * In the future, we can avoid needing to override onMouseEnter by handling submenu rendering internally rather than depending on the
      * client to conditionally render it with onHoverIn.
      */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore onMouseLeave not in PressableProps but is supported on desktop
     const { onBlur, onMouseEnter, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseEnterModified = React.useCallback(
       (e) => {
         componentRef.current.focus();
         onMouseEnter && onMouseEnter(e);
       },
-      [onMouseEnter],
+      [componentRef, onMouseEnter],
     );
     const onMouseLeaveModified = React.useCallback(
       (e) => {
         onBlur(e);
         onMouseLeave && onMouseLeave(e);
       },
-      [onMouseLeave],
+      [onBlur, onMouseLeave],
     );
     const pressablePropsModified = {
       onBlur: onBlur,

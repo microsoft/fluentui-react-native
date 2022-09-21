@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { PressableProps } from 'react-native';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
@@ -14,7 +15,7 @@ export type SubmenuItemProps = ContextualMenuItemProps;
 export type SubmenuItemState = ContextualMenuItemState;
 
 export interface SubmenuItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressableProps>;
   startstack: IViewProps;
   icon: IconProps;
   content: ITextProps;

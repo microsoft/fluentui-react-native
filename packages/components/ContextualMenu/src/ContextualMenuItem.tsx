@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './ContextualMenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
@@ -64,7 +64,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
       }
     }, [componentRef, disabled, context]);
 
-    const pressable = useAsPressable({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
+    const pressable = usePressableState({ ...rest, onPress: onItemClick, onHoverIn: onItemHoverIn });
 
     const onKeyUpProps = useKeyProps(onItemClick, ' ', 'Enter');
 
@@ -80,9 +80,11 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     /**
      * On Desktop, focus gets moved to the root of the menu, so hovering off the menu does not automatically call onBlur as we expect it to.
      * onMouseLeave is overridden to explicitly call onBlur to simulate removing focus
-     * To achieve this, we override the onMouseLEave handler returned by useAsPressable, and replace it with our own. Inside our own
-     * onMouseLeave handler, we call useAsPressable's onMouseLEave handler,
+     * To achieve this, we override the onMouseLeave handler returned by usePressableState, and replace it with our own. Inside our own
+     * onMouseLeave handler, we call usePressableState's onMouseLEave handler,
      */
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore onMouseLeave not in PressableProps but is supported on desktop
     const { onBlur, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseLeaveModified = React.useCallback(
       (e) => {

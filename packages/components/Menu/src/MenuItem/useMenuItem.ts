@@ -5,7 +5,7 @@ import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
   isKeyPressEvent,
-  useAsPressable,
+  usePressableState,
   useKeyDownProps,
   useViewCommandFocus,
 } from '@fluentui-react-native/interactive-hooks';
@@ -54,7 +54,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     [disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
   );
 
-  const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
+  const pressable = usePressableState({ ...rest, disabled, onPress: onInvoke });
   const itemRef = useViewCommandFocus(componentRef);
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 

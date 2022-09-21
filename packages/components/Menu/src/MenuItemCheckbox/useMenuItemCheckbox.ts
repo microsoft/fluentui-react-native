@@ -5,7 +5,7 @@ import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
   KeyPressEvent,
-  useAsPressable,
+  usePressableState,
   useKeyDownProps,
   useOnPressWithFocus,
   useViewCommandFocus,
@@ -74,7 +74,7 @@ export const useMenuCheckboxInteraction = (
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleCallback);
 
-  const pressable = useAsPressable({ ...rest, disabled, onPress: toggleCheckedWithFocus });
+  const pressable = usePressableState({ ...rest, disabled, onPress: toggleCheckedWithFocus });
   const buttonRef = useViewCommandFocus(componentRef);
 
   const onKeysPressed = React.useCallback(
