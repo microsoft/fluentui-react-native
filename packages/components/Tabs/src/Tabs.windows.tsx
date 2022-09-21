@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
@@ -162,7 +162,7 @@ export const Tabs = compose<TabsType>({
 
   settings,
   slots: {
-    root: View,
+    root: Pressable,
     label: Text,
     stack: View,
     tabPanel: { slotType: View, filter: filterViewProps },
