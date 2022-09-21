@@ -90,7 +90,7 @@ function _getEntry(entryName: string, entries: IEntries): IEntry {
 function _getThemeDefinitionObject(parentTheme: object, definition?: object | IProcessTheme<object, object>): object {
   if (definition) {
     if (typeof definition === 'function') {
-      const processor = <IProcessTheme<object, object>>definition;
+      const processor = definition as IProcessTheme<object, object>;
       return processor(parentTheme);
     }
     return definition;
@@ -177,10 +177,10 @@ interface IEntries {
   [entryName: string]: IEntry;
 }
 
-export function createThemeRegistry<T extends object, TPartial extends object>(
-  initial: T,
-  baseResolver: IResolveTheme<T, TPartial>,
-): IThemeRegistry<T, TPartial> {
+/**
+ * @deprecated
+ */
+export function createThemeRegistry<T extends object, TPartial extends object>(initial: T, baseResolver: IResolveTheme<T, TPartial>): IThemeRegistry<T, TPartial> {
   const entries: IEntries = {
     [_platformEntryName]: { resolved: initial as object },
     [_defaultEntryName]: { parentEntryName: _platformEntryName },
