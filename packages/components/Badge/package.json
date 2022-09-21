@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/badge",
-  "version": "0.1.30",
+  "version": "0.1.32",
   "description": "A cross-platform Badge component using the Fluent Design System. A badge is an additional visual descriptor for UI elements.",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -24,13 +24,13 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.9.0",
-    "@fluentui-react-native/framework": ">=0.8.1 <1.0.0",
-    "@fluentui-react-native/icon": "^0.13.6",
-    "@fluentui-react-native/interactive-hooks": "^0.18.3",
-    "@fluentui-react-native/text": ">=0.14.2 <1.0.0",
+    "@fluentui-react-native/adapters": "^0.9.1",
+    "@fluentui-react-native/framework": ">=0.8.3 <1.0.0",
+    "@fluentui-react-native/icon": "^0.13.8",
+    "@fluentui-react-native/interactive-hooks": "^0.18.5",
+    "@fluentui-react-native/text": ">=0.14.4 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.19.0",
-    "@fluentui-react-native/tokens": "^0.16.0",
+    "@fluentui-react-native/tokens": "^0.16.2",
     "@fluentui-react-native/use-styling": "^0.9.0",
     "react-native-svg": "^12.3.0"
   },
