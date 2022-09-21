@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update test snapshots",
+  "packageName": "@fluentui-react-native/button",
+  "email": "adam.gleitman@gmail.com",
+  "dependentChangeType": "patch"
+}

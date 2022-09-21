@@ -96,6 +96,7 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "Segoe UI",
             "fontSize": 15,
             "fontWeight": "400",
+            "lineHeight": 20,
             "margin": 0,
           }
         }
@@ -160,6 +161,8 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "Segoe UI",
             "fontSize": 15,
             "fontWeight": "600",
+            "letterSpacing": 20,
+            "lineHeight": -0.24,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,

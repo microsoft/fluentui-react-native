@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add iOS typography variants",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "adam.gleitman@gmail.com",
+  "dependentChangeType": "patch"
+}
