@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Merge branch 'main' into ios-typography-tokens",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}

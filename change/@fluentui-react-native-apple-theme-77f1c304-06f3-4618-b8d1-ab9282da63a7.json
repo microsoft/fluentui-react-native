@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add Apple typography",
-  "packageName": "@fluentui-react-native/apple-theme",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}
