@@ -66,6 +66,10 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async scrollToComponentButton(platform: Platform): Promise<void> {
+    if (await this.isButtonInView()) {
+      return;
+    }
+
     switch (platform) {
       case Platform.Win32:
         // eslint-disable-next-line no-case-declarations
@@ -136,6 +140,10 @@ export class BasePage {
 
   /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
   async scrollToTestElement(): Promise<void> {
+    if (await this._primaryComponent.isDisplayed()) {
+      return;
+    }
+
     const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
     await browser.waitUntil(
       async () => {
