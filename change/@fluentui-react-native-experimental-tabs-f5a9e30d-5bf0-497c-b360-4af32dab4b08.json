@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "se Pressable from React Native",
+  "comment": "Use Pressable from React Native",
   "packageName": "@fluentui-react-native/experimental-tabs",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
