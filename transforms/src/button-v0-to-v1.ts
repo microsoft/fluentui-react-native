@@ -12,6 +12,7 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
 
   const root = j(fileInfo.source);
   root
+    // Find all imports that import from '@fluentui/react-native' or '@fluentui-react-native/button'
     .find(
       j.ImportDeclaration,
       (path: ImportDeclaration) => path.source.value === '@fluentui/react-native' || path.source.value === '@fluentui-react-native/button',
@@ -21,6 +22,7 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
         return;
       }
 
+      // Find the first import specifier that imports Button, PrimaryButton or StealthButton.
       const buttonSpecifier = path.value.specifiers.findIndex(
         (specifier) =>
           specifier.type === 'ImportSpecifier' &&
@@ -29,10 +31,12 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
             specifier.imported.name === 'StealthButton'),
       );
 
+      // Change that import to be 'ButtonV1 as Button'
       if (buttonSpecifier !== undefined && buttonSpecifier !== -1) {
         path.value.specifiers[buttonSpecifier] = j.importSpecifier(j.identifier('ButtonV1'), j.identifier('Button'));
       }
 
+      // Filter out all other instances of importing Button, PrimaryButton, or StealthButton so that ButtonV1 is only imported once.
       path.value.specifiers = path.value.specifiers.filter(
         (specifier) =>
           specifier.type !== 'ImportSpecifier' ||
@@ -42,7 +46,7 @@ export const transform: Transform = (fileInfo: FileInfo, api: API, options: Opti
       );
     });
 
-  // Change previous buttons to new type of button
+  // Change JSX instances of previous buttons to new type of button
   root.findJSXElements('PrimaryButton').forEach((path: ASTPath<JSXElement>) => {
     if (path.value.openingElement.name.type === 'JSXIdentifier') {
       path.value.openingElement.name.name = 'Button';
