@@ -10,16 +10,20 @@ exports[`Button component tests Button circular 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   shape="circular"
   style={
     Object {
@@ -128,16 +132,20 @@ exports[`Button component tests Button customized 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -188,16 +196,20 @@ exports[`Button component tests Button default 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -248,16 +260,20 @@ exports[`Button component tests Button large 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   size="large"
   style={
     Object {
@@ -310,16 +326,20 @@ exports[`Button component tests Button primary 1`] = `
   }
   accessible={true}
   appearance="primary"
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -370,16 +390,20 @@ exports[`Button component tests Button small 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   size="small"
   style={
     Object {
@@ -431,16 +455,20 @@ exports[`Button component tests Button square 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   shape="square"
   style={
     Object {
@@ -493,16 +521,20 @@ exports[`Button component tests Button subtle 1`] = `
   }
   accessible={true}
   appearance="subtle"
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
   onHoverIn={[Function]}
   onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
