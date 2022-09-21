@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Removing E2E test for CI testing purposes",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "none"
+}
