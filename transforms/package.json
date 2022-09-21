@@ -29,5 +29,10 @@
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "@types/jscodeshift": "^0.11.5",
     "jscodeshift": "^0.13.1"
+  },
+  "depcheck": {
+    "ignorePatterns": [
+      "src/__testfixtures__/*"
+    ]
   }
 }
