@@ -20,6 +20,7 @@ exports.config = {
     '../fluent-tester/src/E2E/RadioGroupExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/TabsExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Text/specs/*.win.ts',
   ],
 
   capabilities: [
