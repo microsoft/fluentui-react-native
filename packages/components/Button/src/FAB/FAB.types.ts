@@ -8,7 +8,7 @@ export interface FABSlotProps extends ButtonSlotProps {
 }
 
 export interface FABProps extends ButtonCoreProps {
-  showChildren?: boolean;
+  showContent?: boolean;
 }
 
 export interface FABType {
