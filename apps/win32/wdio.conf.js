@@ -15,6 +15,7 @@ exports.config = {
   exclude: [
     '../fluent-tester/src/E2E/Menu/specs/*.win.ts',
     '../fluent-tester/src/E2E/ButtonExperimental/specs/*.win.ts',
+    '../fluent-tester/src/E2E/Switch/specs/*.win.ts',
     '../fluent-tester/src/E2E/TabsExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/Text/specs/*.win.ts',
