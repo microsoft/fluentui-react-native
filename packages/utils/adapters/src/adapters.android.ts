@@ -1,10 +1,13 @@
-import { TextProps, TextPropsIOS, ViewProps, ViewPropsIOS, ImageProps, ImagePropsIOS } from 'react-native';
+import { TextProps, TextPropsIOS, ViewProps, ViewPropsIOS, ImageProps, ImagePropsIOS, PressableProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
 // export core interface types
 export type ITextProps = Omit<TextProps, keyof TextPropsIOS>;
 export type IViewProps = Omit<ViewProps, keyof ViewPropsIOS>;
 export type IImageProps = Omit<ImageProps, keyof ImagePropsIOS>;
+
+// Extend PressableProps to include platform specific props
+export type IPressableProps = PressableProps & IViewProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,

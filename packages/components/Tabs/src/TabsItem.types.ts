@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import type { IViewProps, IPressableProps } from '@fluentui-react-native/adapters';
 import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
@@ -103,7 +103,7 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
 }
 
 export interface TabsItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<IPressableProps>;
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;

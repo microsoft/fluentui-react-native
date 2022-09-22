@@ -1,3 +1,4 @@
+import { PressableProps } from 'react-native';
 import { ImageProps, TextProps, ViewProps } from 'react-native-macos';
 import { IFilterMask } from './filter.types';
 
@@ -5,6 +6,9 @@ import { IFilterMask } from './filter.types';
 export type ITextProps = TextProps;
 export type IViewProps = ViewProps;
 export type IImageProps = ImageProps;
+
+// Extend PressableProps to include platform specific props
+export type IPressableProps = PressableProps & IViewProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   acceptsFirstMouse: true,

@@ -1,5 +1,5 @@
 import { IViewWindowsProps } from 'react-native-windows';
-import { TextProps } from 'react-native';
+import { PressableProps, TextProps } from 'react-native';
 import { ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
@@ -7,6 +7,9 @@ import { IFilterMask } from './filter.types';
 export type ITextProps = TextProps;
 export type IViewProps = IViewWindowsProps;
 export type IImageProps = ImageProps;
+
+// Extend PressableProps to include platform specific props
+export type IPressableProps = PressableProps & IViewProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
