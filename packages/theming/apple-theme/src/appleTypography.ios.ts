@@ -1,4 +1,8 @@
+import globalTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-global.json';
+
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+
+const fontTokens = globalTokens.font;
 
 // The sizes are taken for the Dynamic Type Size "Large", which is the system default
 export function appleTypography(): Typography {
@@ -45,20 +49,91 @@ export function appleTypography(): Typography {
       heroSemibold: { face: 'primary', size: 'hero', weight: '600' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
-      // mocked out
-      caption1: { face: 'primary', size: 'caption', weight: '400' },
-      body1: { face: 'primary', size: 'secondary', weight: '400' },
-      body1Strong: { face: 'primary', size: 'secondary', weight: '600' },
-      body2: { face: 'primary', size: 'body', weight: '400' },
-      body2Strong: { face: 'primary', size: 'body', weight: '600' },
-      subtitle1: { face: 'primary', size: 'header', weight: '400' },
-      subtitle1Strong: { face: 'primary', size: 'header', weight: '600' },
-      subtitle2: { face: 'primary', size: 'subheader', weight: '400' },
-      subtitle2Strong: { face: 'primary', size: 'subheader', weight: '600' },
-      title1: { face: 'primary', size: 'hero', weight: '400' },
-      title1Strong: { face: 'primary', size: 'hero', weight: '600' },
-      largeTitle: { face: 'primary', size: 'heroLarge', weight: '400' },
-      display: { face: 'primary', size: 'heroLarge', weight: '600' },
+      // iOS styles
+      caption2: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[100],
+        weight: fontTokens.weight.regular,
+        lineHeight: fontTokens.lineHeight[100],
+        letterSpacing: 0,
+      },
+      caption1: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[200],
+        weight: fontTokens.weight.regular,
+        lineHeight: fontTokens.lineHeight[200],
+        letterSpacing: -0.08,
+      },
+      caption1Strong: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[200],
+        weight: fontTokens.weight.semibold,
+        lineHeight: fontTokens.lineHeight[200],
+        letterSpacing: -0.08,
+      },
+      body2: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[300],
+        weight: fontTokens.weight.regular,
+        lineHeight: fontTokens.lineHeight[300],
+        letterSpacing: -0.23,
+      },
+      body2Strong: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[300],
+        weight: fontTokens.weight.semibold,
+        lineHeight: fontTokens.lineHeight[300],
+        letterSpacing: -0.23,
+      },
+      body1: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[400],
+        weight: fontTokens.weight.regular,
+        lineHeight: fontTokens.lineHeight[400],
+        letterSpacing: -0.43,
+      },
+      body1Strong: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[400],
+        weight: fontTokens.weight.semibold,
+        lineHeight: fontTokens.lineHeight[400],
+        letterSpacing: -0.43,
+      },
+      title3: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[500],
+        weight: fontTokens.weight.semibold,
+        lineHeight: fontTokens.lineHeight[500],
+        letterSpacing: -0.45,
+      },
+      title2: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[600],
+        weight: fontTokens.weight.semibold,
+        lineHeight: fontTokens.lineHeight[600],
+        letterSpacing: -0.26,
+      },
+      title1: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[700],
+        weight: fontTokens.weight.bold,
+        lineHeight: fontTokens.lineHeight[700],
+        letterSpacing: 0.38,
+      },
+      largeTitle: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[800],
+        weight: fontTokens.weight.bold,
+        lineHeight: fontTokens.lineHeight[800],
+        letterSpacing: 0.4,
+      },
+      display: {
+        face: fontTokens.family.base,
+        size: fontTokens.size[900],
+        weight: fontTokens.weight.bold,
+        lineHeight: fontTokens.lineHeight[900],
+        letterSpacing: 0.26,
+      },
     } as Variants,
   };
 
