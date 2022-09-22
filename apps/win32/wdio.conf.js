@@ -13,10 +13,8 @@ exports.config = {
   runner: 'local', // Where should your test be launched
   specs: [['../fluent-tester/src/E2E/**/specs/*.win.ts']],
   exclude: [
-    '../fluent-tester/src/E2E/Menu/specs/*.win.ts',
     '../fluent-tester/src/E2E/ButtonExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/Switch/specs/*.win.ts',
-    '../fluent-tester/src/E2E/TabsExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/Text/specs/*.win.ts',
   ],
@@ -129,17 +127,25 @@ exports.config = {
    * @param {Object} suite suite details
    */
   // beforeSuite: function (suite) {
+  //   console.log('\n\n\n\n\n\n IN BEFORESUITE \n\n\n\n\n\n\n\n\n');
   // },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  // beforeTest: function (test, context) {
-  // },
+  beforeTest: async (test) => {
+    // get current test title and clean it, to use it as file name
+    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
+
+    // build file path
+    const filePath = './errorShots/before_' + fileName + '.png';
+    await browser.saveScreenshot(filePath);
+  },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
    */
   // beforeHook: function (test, context) {
+  //   console.log('\n\n\n\n Before Hook - test: ' + JSON.stringify(test) + '. And context: ' + JSON.stringify(context), +'\n\n');
   // },
   /**
    * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
