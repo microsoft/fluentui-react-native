@@ -18,13 +18,14 @@ exports[`Switch Default 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -120,13 +121,14 @@ exports[`Switch Disabled 1`] = `
     }
   }
   accessible={true}
-  disabled={true}
+  collapsable={false}
   focusable={false}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
