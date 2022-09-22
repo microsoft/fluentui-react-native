@@ -58,7 +58,7 @@ class MenuPageObject extends BasePage {
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
-    return await By(MENUPOPOVER_TEST_COMPONENT).getAttribute('ControlType');
+    return await this._menuPopoverComponent.getAttribute('ControlType');
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
@@ -103,6 +103,10 @@ class MenuPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_MENU_BUTTON);
+  }
+
+  get _menuPopoverComponent() {
+    return By(MENUPOPOVER_TEST_COMPONENT);
   }
 }
 
