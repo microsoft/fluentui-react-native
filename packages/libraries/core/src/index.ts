@@ -175,6 +175,9 @@ export type {
   IRadioGroupType,
 } from '@fluentui-react-native/radio-group';
 
+export { Switch, useSwitch } from '@fluentui-react-native/switch';
+export { SwitchTokens, SwitchProps, SwitchState, SwitchSlotProps, SwitchType } from '@fluentui-react-native/switch';
+
 export { Separator, separatorName } from '@fluentui-react-native/separator';
 export type { SeparatorProps, SeparatorTokens, SeparatorType } from '@fluentui-react-native/separator';
 
