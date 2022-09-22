@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Sep 2022 23:44:22 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Sep 2022 00:31:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.96.2
+
+Thu, 22 Sep 2022 00:31:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-tabs to v0.5.16
+- Bump @fluentui/react-native to v0.32.21
 
 ## 0.96.1
 

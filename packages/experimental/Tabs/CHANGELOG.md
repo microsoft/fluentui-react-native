@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Sep 2022 00:31:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.16
+
+Thu, 22 Sep 2022 00:31:25 GMT
+
+### Patches
+
+- Use Pressable from React Native (sanajmi@microsoft.com)
 
 ## 0.5.15
 

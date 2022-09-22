@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-tabs",
   "entries": [
     {
+      "date": "Thu, 22 Sep 2022 00:31:25 GMT",
+      "tag": "@fluentui-react-native/experimental-tabs_v0.5.16",
+      "version": "0.5.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/experimental-tabs",
+            "commit": "7f4c8e9b8b19b4bd46a0fec20984e373871c8020",
+            "comment": "Use Pressable from React Native"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui-react-native/experimental-tabs_v0.5.15",
       "version": "0.5.15",

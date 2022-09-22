@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Thu, 22 Sep 2022 00:31:25 GMT",
+      "tag": "@fluentui/react-native_v0.32.21",
+      "version": "0.32.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.14",
+            "commit": "7f4c8e9b8b19b4bd46a0fec20984e373871c8020"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui/react-native_v0.32.20",
       "version": "0.32.20",
