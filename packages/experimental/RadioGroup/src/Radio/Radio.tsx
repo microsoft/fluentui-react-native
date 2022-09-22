@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { radioName, RadioType, RadioProps } from './Radio.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Radio.styling';
@@ -24,7 +24,7 @@ export const Radio = compose<RadioType>({
   displayName: radioName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     button: View,
     innerCircle: View,
     label: Text,

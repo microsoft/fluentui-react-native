@@ -1,7 +1,7 @@
 import { RadioProps, RadioState } from './Radio.types';
 import * as React from 'react';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
-import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useOnPressWithFocus, usePressableState, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
@@ -46,7 +46,7 @@ export const useRadio = (props: RadioProps): RadioState => {
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
   /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
-  const pressable = useAsPressable({
+  const pressable = usePressableState({
     ...rest,
     onPress: changeSelectionWithFocus,
     onFocus: changeSelection,
