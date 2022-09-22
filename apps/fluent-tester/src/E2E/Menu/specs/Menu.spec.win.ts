@@ -57,7 +57,7 @@ describe('Menu Functional Testing', () => {
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
 
-    MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Spacebar);
+    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.Spacebar);
     await expect(await MenuPageObject.didMenuClose()).toBeTruthy();
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
