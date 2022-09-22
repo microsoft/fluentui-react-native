@@ -1,5 +1,5 @@
 import { getCurrentAppearance } from '../';
-import { mapPipelineToTheme, mapFontPipelineToTheme } from '../mapPipelineToTheme';
+import { mapPipelineToTheme, mapFontPipelineToTheme } from '../mapPipelineToTheme.android';
 import { mapPipelineToShadow } from '../mapPipelineToShadow';
 import lightAliasTokens from '@fluentui-react-native/design-tokens-windows/light/tokens-aliases.json';
 import darkAliasTokens from '@fluentui-react-native/design-tokens-windows/dark/tokens-aliases.json';

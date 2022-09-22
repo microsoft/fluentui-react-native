@@ -469,30 +469,33 @@ export interface AliasColorTokens {
   neutralForeground3BrandHover: ColorValue;
   neutralForeground3BrandPressed: ColorValue;
   neutralForeground3BrandSelected: ColorValue;
-  neutralForeground4: ColorValue;
-  neutralForegroundDisabled: ColorValue;
 
-  brandForegroundLink: ColorValue;
-  brandForegroundLinkHover: ColorValue;
-  brandForegroundLinkPressed: ColorValue;
-  brandForegroundLinkSelected: ColorValue;
-  compoundBrandForeground1: ColorValue;
-  compoundBrandForeground1Hover: ColorValue;
-  compoundBrandForeground1Pressed: ColorValue;
-  brandForeground1: ColorValue;
-  brandForeground1Disabled: ColorValue;
-  brandForeground1Pressed: ColorValue;
-  brandForeground2: ColorValue;
-
+  neutralForeground4?: ColorValue;
+  neutralForegroundDisabled?: ColorValue;
+  brandForegroundLink?: ColorValue;
+  brandForegroundLinkHover?: ColorValue;
+  brandForegroundLinkPressed?: ColorValue;
+  brandForegroundLinkSelected?: ColorValue;
+  compoundBrandForeground1?: ColorValue;
+  compoundBrandForeground1Hover?: ColorValue;
+  compoundBrandForeground1Pressed?: ColorValue;
   neutralForegroundInverted: ColorValue;
-  neutralForegroundOnBrand: ColorValue;
-  neutralForegroundOnBrandHover: ColorValue;
-  neutralForegroundOnBrandPressed: ColorValue;
-  neutralForegroundOnBrandSelected: ColorValue;
-  neutralForegroundInvertedLink: ColorValue;
-  neutralForegroundInvertedLinkHover: ColorValue;
-  neutralForegroundInvertedLinkPressed: ColorValue;
-  neutralForegroundInvertedLinkSelected: ColorValue;
+
+
+  brandForeground1?: ColorValue;
+  brandForeground1Disabled?: ColorValue;
+  brandForeground1Pressed?: ColorValue;
+  brandForeground2?: ColorValue;
+
+  neutralForegroundOnBrand?: ColorValue;
+  neutralForegroundOnBrandHover?: ColorValue;
+  neutralForegroundOnBrandPressed?: ColorValue;
+  neutralForegroundOnBrandSelected?: ColorValue;
+
+  neutralForegroundInvertedLink?: ColorValue;
+  neutralForegroundInvertedLinkHover?: ColorValue;
+  neutralForegroundInvertedLinkPressed?: ColorValue;
+  neutralForegroundInvertedLinkSelected?: ColorValue;
 
   neutralBackground1: ColorValue;
   neutralBackground1Hover: ColorValue;
@@ -517,32 +520,20 @@ export interface AliasColorTokens {
   neutralBackground6: ColorValue;
   neutralBackgroundInverted: ColorValue;
 
-  subtleBackground: ColorValue;
-  subtleBackgroundHover: ColorValue;
-  subtleBackgroundPressed: ColorValue;
-  subtleBackgroundSelected: ColorValue;
+  subtleBackground?: ColorValue;
+  subtleBackgroundHover?: ColorValue;
+  subtleBackgroundPressed?: ColorValue;
+  subtleBackgroundSelected?: ColorValue;
 
-  transparentBackground: ColorValue;
-  transparentBackgroundHover: ColorValue;
-  transparentBackgroundPressed: ColorValue;
-  transparentBackgroundSelected: ColorValue;
+  transparentBackground?: ColorValue;
+  transparentBackgroundHover?: ColorValue;
+  transparentBackgroundPressed?: ColorValue;
+  transparentBackgroundSelected?: ColorValue;
 
   neutralBackgroundDisabled: ColorValue;
 
   neutralStencil1: ColorValue;
   neutralStencil2: ColorValue;
-
-  brandBackground: ColorValue;
-  brandBackgroundHover: ColorValue;
-  brandBackgroundPressed: ColorValue;
-  brandBackgroundDisabled: ColorValue;
-  brandBackgroundSelected: ColorValue;
-  compoundBrandBackground1: ColorValue;
-  compoundBrandBackground1Hover: ColorValue;
-  compoundBrandBackground1Pressed: ColorValue;
-
-  brandBackgroundStatic: ColorValue;
-  brandBackground2: ColorValue;
 
   neutralStrokeAccessible: ColorValue;
   neutralStrokeAccessibleHover: ColorValue;
@@ -553,30 +544,43 @@ export interface AliasColorTokens {
   neutralStroke1Pressed: ColorValue;
   neutralStroke1Selected: ColorValue;
   neutralStroke2: ColorValue;
-  neutralStroke3: ColorValue;
-  brandStroke1: ColorValue;
-  brandStroke2: ColorValue;
-  compoundBrandStroke1: ColorValue;
-  compoundBrandStroke1Hover: ColorValue;
-  compoundBrandStroke1Pressed: ColorValue;
+  neutralStroke3?: ColorValue;
+
   neutralStrokeDisabled: ColorValue;
 
-  transparentStroke: ColorValue;
-  transparentStrokeInteractive: ColorValue;
-  transparentStrokeDisabled: ColorValue;
+  strokeFocus1?: ColorValue;
+  strokeFocus2?: ColorValue;
 
-  strokeFocus1: ColorValue;
-  strokeFocus2: ColorValue;
+  brandBackground?: ColorValue;
+  brandBackgroundHover?: ColorValue;
+  brandBackgroundPressed?: ColorValue;
+  brandBackgroundDisabled?: ColorValue;
+  brandBackgroundSelected?: ColorValue;
+  compoundBrandBackground1?: ColorValue;
+  compoundBrandBackground1Hover?: ColorValue;
+  compoundBrandBackground1Pressed?: ColorValue;
+  brandBackgroundStatic?: ColorValue;
+  brandBackground2?: ColorValue;
+  brandStroke1?: ColorValue;
+  brandStroke2?: ColorValue;
 
-  redBackground1: ColorValue;
-  redBackground2: ColorValue;
-  redBackground3: ColorValue;
-  redForeground1: ColorValue;
-  redForeground2: ColorValue;
-  redForeground3: ColorValue;
-  redBorderActive: ColorValue;
-  redBorder1: ColorValue;
-  redBorder2: ColorValue;
+  compoundBrandStroke1?: ColorValue;
+  compoundBrandStroke1Hover?: ColorValue;
+  compoundBrandStroke1Pressed?: ColorValue;
+  transparentStroke?: ColorValue;
+  transparentStrokeInteractive?: ColorValue;
+  transparentStrokeDisabled?: ColorValue;
+  redBackground1?: ColorValue;
+  redBackground2?: ColorValue;
+  redBackground3?: ColorValue;
+  redForeground1?: ColorValue;
+  redForeground2?: ColorValue;
+  redForeground3?: ColorValue;
+  redBorderActive?: ColorValue;
+  redBorder1?: ColorValue;
+  redBorder2?: ColorValue;
+
+
 }
 
 /**
