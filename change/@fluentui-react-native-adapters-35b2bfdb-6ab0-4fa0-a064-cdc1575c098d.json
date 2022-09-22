@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Introduce IPressableProps",
+  "packageName": "@fluentui-react-native/adapters",
+  "email": "sanajmi@microsoft.com",
+  "dependentChangeType": "patch"
+}
