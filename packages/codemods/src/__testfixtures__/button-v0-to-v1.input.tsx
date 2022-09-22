@@ -4,7 +4,6 @@ import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { findNodeHandle } from 'react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../test.svg';
 
 export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
   const [state, setState] = React.useState({
@@ -15,15 +14,12 @@ export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
   const onFocus = React.useCallback(() => {
     setState({ focused: !state.focused });
     if (buttonRef.current && !state.focused) {
-      const node = findNodeHandle(buttonRef.current);
-      console.log(node);
       buttonRef.current.focus();
     }
   }, [state, setState]);
   const testImage = require('./assets/icon_24x24.png');
 
   const svgProps: SvgIconProps = {
-    src: TestSvg,
     viewBox: '0 0 500 500',
   };
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
