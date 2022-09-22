@@ -40,7 +40,7 @@ export const useRadio = (props: RadioProps): RadioState => {
     if (value == selectedInfo.value) {
       selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
     }
-  }, []);
+  }, [componentRef, selectedInfo, value]);
 
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
@@ -54,7 +54,7 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   const accessibilityActionsProp = React.useCallback(() => {
     accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions;
-  }, []);
+  }, [accessibilityActions]);
 
   // Used when creating accessibility properties in mergeSettings below
   const onAccessibilityAction = React.useCallback(
