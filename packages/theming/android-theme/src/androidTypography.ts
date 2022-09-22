@@ -1,12 +1,7 @@
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
 
-/**
- * The primary font used in Fluent Android is Roboto as in [Figma](https://www.figma.com/file/MkkE13z6zALstwLlbczIMXrA/Fluent-Android?node-id=7455%3A94)
- * The other fontFamily equivalents are filled from available React Native fonts for Android. Weights are defined from Figma.
- */
 
-// does this need to comef rom piplein?
-
+// VSO# - Remaining tokens for android.
 export function androidTypography(): Typography {
   const androidDict = {
     sizes: {

@@ -4,7 +4,7 @@ import { paletteFromAndroidColors } from './colorsTokens';
 import { androidTypography } from './androidTypography';
 import { getAndroidPalette } from './colorsBase';
 
-// should come from pipelien.
+// VSO# - Remaning tokens for android.
 export function androidSpacing(): Spacing {
   return {
     s2: '8px',
@@ -15,6 +15,7 @@ export function androidSpacing(): Spacing {
   };
 }
 
+// VSO# - Remaining tokens for android.
 export const androidComponents = {
   Checkbox: {
     checkbox: {
@@ -35,9 +36,7 @@ export const androidComponents = {
   },
 };
 
-// mocked out
-// should come from pipeline.
-// VSO
+// VSO# - Remaining tokens for android.
 const androidShadows = {
   shadow2: {
     ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
