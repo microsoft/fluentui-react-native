@@ -20,7 +20,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "transforms"
+    "directory": "packages/codemods"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
