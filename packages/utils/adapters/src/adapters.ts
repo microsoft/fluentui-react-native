@@ -7,8 +7,31 @@ export type ITextProps = TextProps & Partial<ITextWin32Props>;
 export type IViewProps = ViewProps & Partial<IViewWin32Props>;
 export type IImageProps = ImageProps;
 
+// GH #1035: Tempoarily create this type while it is missing from DefinitelyTyped
+type PressableHoverProps = {
+  /**
+   * Duration to wait after hover in before calling `onHoverIn`.
+   */
+  delayHoverIn?: number;
+
+  /**
+   * Duration to wait after hover out before calling `onHoverOut`.
+   */
+  delayHoverOut?: number;
+
+  /**
+   * Called when the hover is activated to provide visual feedback.
+   */
+  onHoverIn?: (event: MouseEvent) => any;
+
+  /**
+   * Called when the hover is deactivated to undo visual feedback.
+   */
+  onHoverOut?: (event: MouseEvent) => any;
+};
+
 // Extend PressableProps to include platform specific props
-export type IPressableProps = PressableProps & IViewProps;
+export type AdaptedPressableProps = PressableProps & IViewProps & PressableHoverProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
