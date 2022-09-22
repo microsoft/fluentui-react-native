@@ -6,6 +6,7 @@ import { View } from 'react-native';
 import { Path, Svg } from 'react-native-svg';
 import { stylingSettings } from './Option.styling';
 import { optionName, OptionProps, OptionType } from './Option.types';
+import { useOption } from './useOption';
 
 export const Option = compose<OptionType>({
   displayName: optionName,
@@ -16,9 +17,10 @@ export const Option = compose<OptionType>({
     label: Text,
   },
   useRender: (userProps: OptionProps, useSlots: UseSlots<OptionType>) => {
-    const Slots = useSlots(userProps);
+    const option = useOption(userProps);
+    const Slots = useSlots(userProps, (layer): boolean => option.state[layer] || userProps[layer]);
     return (final: OptionProps, ...children: React.ReactNode[]) => {
-      const mergedProps = mergeProps(userProps, final);
+      const mergedProps = mergeProps(option.props, final);
 
       const checkPath = (
         <Path
