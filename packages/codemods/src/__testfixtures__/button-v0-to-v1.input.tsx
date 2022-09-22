@@ -2,7 +2,6 @@ import { Button, PrimaryButton, StealthButton } from '@fluentui/react-native';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
-import { findNodeHandle } from 'react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 
 export const ButtonFocusTest_deprecated: React.FunctionComponent = () => {
