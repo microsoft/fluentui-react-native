@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Moved Switch from experimental to components folder, publishing as V1",
+  "packageName": "@fluentui/react-native",
+  "email": "ejlayne@microsoft.com",
+  "dependentChangeType": "patch"
+}

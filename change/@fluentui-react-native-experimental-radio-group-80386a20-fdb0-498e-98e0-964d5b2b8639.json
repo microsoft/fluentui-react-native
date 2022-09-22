@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Moved Switch from experimental to components folder, publishing as V1",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "ejlayne@microsoft.com",
+  "dependentChangeType": "none"
+}
