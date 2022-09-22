@@ -80,16 +80,16 @@ describe('Checkbox Functional Testing', () => {
     await ExperimentalCheckboxPageObject.clickComponent();
     await ExperimentalCheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
-    expect(await ExperimentalCheckboxPageObject.didOnChangeCallbackFire()).toBeTruthy();
+    await expect(await ExperimentalCheckboxPageObject.didOnChangeCallbackFire()).toBeTruthy();
 
     /* Validate the Checkbox is toggled ON */
-    expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeTruthy();
+    await expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeTruthy();
 
     await ExperimentalCheckboxPageObject.clickComponent();
 
     /* Validate the Checkbox is toggled OFF */
-    expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeFalsy();
-    expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
+    await expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeFalsy();
+    await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Click the "Spacebar" on a Checkbox and verify it toggles', async () => {

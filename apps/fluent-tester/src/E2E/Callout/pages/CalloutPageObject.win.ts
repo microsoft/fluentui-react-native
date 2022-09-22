@@ -16,9 +16,15 @@ class CalloutPageObject extends BasePage {
 
   /* OVERRIDE: This must scroll to the button that opens the callout, not the callout (since it's not visible on load.) */
   async scrollToTestElement(): Promise<void> {
-    while (!(await this._buttonToOpenCallout.isDisplayed())) {
-      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await this._testPage.elementId);
-    }
+    await browser.waitUntil(
+      async () => {
+        await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await this._testPage.elementId);
+        return await this._buttonToOpenCallout.isDisplayed();
+      },
+      {
+        timeoutMsg: 'Could not find the Button to open the menu.',
+      },
+    );
   }
 
   /*****************************************/
