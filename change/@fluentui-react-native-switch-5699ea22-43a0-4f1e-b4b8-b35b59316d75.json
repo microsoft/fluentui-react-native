@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Renamed FAB showChildren to showContent",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
