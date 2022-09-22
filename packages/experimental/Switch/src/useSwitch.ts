@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
 import { AccessibilityState, AccessibilityActionEvent } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
@@ -45,7 +45,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   }
 
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
-  const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
+  const pressable = usePressableState({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
 
   const accessibilityActionsProp = accessibilityActions
