@@ -13,10 +13,9 @@ exports.config = {
   runner: 'local', // Where should your test be launched
   specs: [['../fluent-tester/src/E2E/**/specs/*.win.ts']],
   exclude: [
+    '../fluent-tester/src/E2E/Menu/specs/*.win.ts',
     '../fluent-tester/src/E2E/ButtonExperimental/specs/*.win.ts',
     '../fluent-tester/src/E2E/Switch/specs/*.win.ts',
-    '../fluent-tester/src/E2E/TextExperimental/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Text/specs/*.win.ts',
   ],
 
   capabilities: [
