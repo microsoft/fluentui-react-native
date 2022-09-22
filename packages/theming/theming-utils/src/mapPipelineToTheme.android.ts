@@ -1,6 +1,8 @@
 import { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
 
-// everyhting that I am marking optional here is a fork in desigs - log a WI and start follow up on these
+// API that translates tokens coming for android to Theme color values.
+// This is implemented in a per-plaform fashion, for each endpoint that maps to similar token sets in design - i.e. map to similar
+// pipeline output.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
     neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
@@ -66,9 +68,6 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
-
-    // strokeFocus1: pipelineOutput.neutralStrokeFocus1.strokeColorRest,
-    // strokeFocus2: pipelineOutput.neutralStrokeFocus2.strokeColorRest,
   };
 }
 

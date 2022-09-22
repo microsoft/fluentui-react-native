@@ -1,9 +1,6 @@
 import lightAliasTokens from '@fluentui-react-native/design-tokens-android/light/tokens-aliases.json';
 import darkAliasTokens from '@fluentui-react-native/design-tokens-android/dark/tokens-aliases.json';
-// import lightShadowTokens from '@fluentui-react-native/design-tokens-android/light/tokens-shadow.json';
-// import darkShadowTokens from '@fluentui-react-native/design-tokens-android/dark/tokens-shadow.json';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
-
 
 export function getAliasTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
@@ -13,13 +10,3 @@ export function getAliasTokens(mode: AppearanceOptions) {
   }
   return lightAliasTokens;
 }
-
-// VSO - for remaining token sets on andorid.
-// export function getShadowTokens(mode: AppearanceOptions) {
-//   if (mode === 'light') {
-//     return lightShadowTokens.shadow;
-//   } else if (mode === 'dark') {
-//     return darkShadowTokens.shadow;
-//   }
-//   return lightAliasTokens;
-// }

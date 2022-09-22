@@ -1,3 +1,3 @@
 export { getCurrentAppearance } from './getCurrentAppearance';
-export { mapPipelineToTheme, mapFontPipelineToTheme } from './mapPipelineToTheme.android';
+export { mapPipelineToTheme, mapFontPipelineToTheme } from './mapPipelineToTheme';
 export { mapPipelineToShadow } from './mapPipelineToShadow';

@@ -579,8 +579,6 @@ export interface AliasColorTokens {
   redBorderActive?: ColorValue;
   redBorder1?: ColorValue;
   redBorder2?: ColorValue;
-
-
 }
 
 /**

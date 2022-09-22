@@ -2,11 +2,12 @@ import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { FluentUIAndroidPalette } from './colorsSemantic';
 import { createColorAliasTokens } from './createAliasTokens';
 
-/** creates a palette of colors for the android theme, given the FluentUI Android Palette */
+/** creates a palette of colors for the android theme, given the FluentUI Android Palette - ??.
+ * What is the rest if the palette color?
+ */
 export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorDefinition {
   /* PaletteBackgroundColors & PaletteTextColors */
   return {
-    // does this need to come from pipleine?
     background: p.surfacesPrimary,
     bodyStandoutBackground: p.surfacesSecondary,
     bodyFrameBackground: p.surfacesTertiary,

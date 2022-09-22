@@ -5,9 +5,8 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
 export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
 ({
-  color: t.colors.neutralForeground1,
+  color: t.colors.neutralForeground3,
   backgroundColor: t.colors.neutralBackground6,
-  fontcoor: t.colors.communicationBlueShade20,
   avatarOpacity: 1,
   fontFamily: t.typography.families.primary,
   fontWeight: globalTokens.font.weight.semibold,
