@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Sep 2022 18:51:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.18
+
+Thu, 22 Sep 2022 18:51:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.17
 
 ## 0.12.17
 

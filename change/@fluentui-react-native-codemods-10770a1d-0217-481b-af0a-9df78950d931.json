@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add button-v0-to-button-v1 script",
-  "packageName": "@fluentui-react-native/codemods",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
