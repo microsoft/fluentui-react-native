@@ -50,8 +50,7 @@
     "packages": [
       "apps/*",
       "packages/**",
-      "scripts",
-      "transforms"
+      "scripts"
     ],
     "nohoist": [
       "@fluentui-react-native/tester-win32/appium-windows-driver",
