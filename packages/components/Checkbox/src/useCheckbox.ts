@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  useAsPressable,
+  usePressableState,
   useKeyProps,
   useOnPressWithFocus,
   useViewCommandFocus,
@@ -53,7 +53,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
   // attach the pressable state handlers
-  const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
+  const pressable = usePressableState({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
 
   const buttonRef = useViewCommandFocus(componentRef);
 
