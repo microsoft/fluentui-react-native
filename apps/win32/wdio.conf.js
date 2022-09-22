@@ -127,14 +127,8 @@ exports.config = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  beforeTest: async (test) => {
-    // get current test title and clean it, to use it as file name
-    const fileName = encodeURIComponent(test.description.replace(/\s+/g, '-'));
-
-    // build file path
-    const filePath = './errorShots/before_' + fileName + '.png';
-    await browser.saveScreenshot(filePath);
-  },
+  // beforeTest: async (test) => {
+  // },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
@@ -152,6 +146,7 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: async function (test, context, results) {
+    console.log('\n\n\n\n Test Case: ' + test.description + '.      Test Result: ' + results.passed + ' \n\n\n\n');
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
     if (results.passed) {
