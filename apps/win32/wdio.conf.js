@@ -36,7 +36,7 @@ exports.config = {
    ** ===============================================================================================
    */
 
-  logLevel: 'info', // Level of logging verbosity: trace | debug | info | warn | error | silent
+  logLevel: 'debug', // Level of logging verbosity: trace | debug | info | warn | error | silent
   bail: 0, // If you only want to run your tests until a specific amount of tests have failed use bail (default is 0 - don't bail, run all tests).
   waitforTimeout: defaultWaitForTimeout, // Default timeout for all waitForXXX commands.
   connectionRetryTimeout: defaultConnectionRetryTimeout, // Timeout for any WebDriver request to a driver or grid.
