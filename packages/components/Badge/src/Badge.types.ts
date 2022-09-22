@@ -20,6 +20,12 @@ export type BadgeIconPosition = 'before' | 'after';
 
 export interface BadgeConfigurableProps {
   /**
+   * A Badge can have its content and borders styled for greater emphasis or to be subtle.
+   * It can be filled, outline, ghost, inverted
+   * @defaultvalue filled
+   */
+  appearance?: BadgeAppearance;
+  /**
    * A Badge can be one of preset colors
    * @defaultvalue brand
    */
@@ -70,20 +76,7 @@ export interface BadgeCoreProps extends IViewProps {
    */
   size?: BadgeSize;
 }
-export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
-  /**
-   * A Badge can have its content and borders styled for greater emphasis or to be subtle.
-   * It can be filled, outline, ghost, inverted
-   * @defaultvalue filled
-   */
-  appearance?: BadgeAppearance;
-
-  /**
-   * Applies shadow according to the Fluent elevation system.
-   * @default false
-   */
-  shadow?: boolean;
-}
+export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {}
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, Omit<IColorTokens, 'color'> {
   /**
    * Set the bottom edge of the Badge

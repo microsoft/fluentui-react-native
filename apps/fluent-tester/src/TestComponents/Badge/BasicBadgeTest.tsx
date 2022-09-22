@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useCallback } from 'react';
-import { View, Platform, Text, Image, FlexStyle } from 'react-native';
+import { View, Platform, Text, Image } from 'react-native';
 import {
   Badge,
   BadgeAppearance,
@@ -26,19 +26,6 @@ const badgeSizes: BadgeSize[] = [...BadgeSizes];
 const badgeAppearances: BadgeAppearance[] = [...BadgeAppearances];
 const badgeIconPositions = ['before', 'after'];
 
-const StyledBadge = Badge.customize({
-  fontWeight: 'bold',
-  fontSize: 12,
-  fontFamily: 'Georgia',
-  backgroundColor: '#f09',
-  borderColor: 'purple',
-  color: 'yellow',
-  borderWidth: 4,
-  borderStyle: 'dashed',
-  borderRadius: 2,
-  iconColor: 'cyan',
-});
-
 export const BasicBadge: React.FunctionComponent = () => {
   const [badgeAppearance, setBadgeAppearance] = useState<BadgeAppearance>('filled');
   const [badgeColor, setBadgeColor] = useState<BadgeColor>('brand');
@@ -53,7 +40,10 @@ export const BasicBadge: React.FunctionComponent = () => {
   const onShapeChange = useCallback((value) => setShape(value), []);
   const onSizeChange = useCallback((value) => setSize(value), []);
   const onIconPositionChange = useCallback((value) => setIconPosition(value), []);
+  const onShowShadowChange = useCallback(() => setShowShadow(!showShadow), [showShadow, setShowShadow]);
+  const onShowIconChange = useCallback(() => setShowIcon(!showIcon), [showIcon, setShowIcon]);
 
+  const theme = useFluentTheme();
   const svgProps: SvgIconProps = {
     src: TestSvg,
     viewBox: '0 0 500 500',
@@ -70,12 +60,24 @@ export const BasicBadge: React.FunctionComponent = () => {
   const badgeConfig = {
     appearance: badgeAppearance,
     badgeColor,
-    position: 'absolute' as FlexStyle['position'],
     size,
     shape,
-    shadow: showShadow,
+    shadowToken: showShadow ? theme.shadows.shadow4 : undefined,
   };
-  const theme = useFluentTheme();
+
+  const StyledBadge = Badge.customize({
+    fontWeight: 'bold',
+    fontSize: 12,
+    fontFamily: 'Georgia',
+    backgroundColor: '#f09',
+    borderColor: 'purple',
+    color: 'yellow',
+    borderWidth: 4,
+    borderStyle: 'dashed',
+    borderRadius: 2,
+    iconColor: 'cyan',
+    shadowToken: theme.shadows.shadow16,
+  });
 
   return (
     <View>
@@ -85,13 +87,13 @@ export const BasicBadge: React.FunctionComponent = () => {
       <StyledPicker prompt="Size" selected={size} onChange={onSizeChange} collection={badgeSizes} />
       {svgIconsEnabled && (
         <>
-          <ToggleButton onClick={() => setShowIcon(!showIcon)} checked={showIcon}>
+          <ToggleButton onClick={onShowIconChange} checked={showIcon}>
             Set {showIcon ? ' Hide icon' : ' Show icon'}
           </ToggleButton>
           <StyledPicker prompt="Icon position" selected={iconPosition} onChange={onIconPositionChange} collection={badgeIconPositions} />
         </>
       )}
-      <ToggleButton onClick={() => setShowShadow(!showShadow)} checked={showShadow}>
+      <ToggleButton onClick={onShowShadowChange} checked={showShadow}>
         Set {showShadow ? ' Hide shadow' : ' Show shadow'}
       </ToggleButton>
 
@@ -105,12 +107,12 @@ export const BasicBadge: React.FunctionComponent = () => {
           <Badge {...badgeConfig}>Basic badge</Badge>
         )}
       </View>
-      <Badge size="extraLarge" shadow={true} shadowToken={theme.shadows.shadow28}>
+      <Badge size="extraLarge" appearance="tint" shadowToken={theme.shadows.shadow8}>
         Shadow Badge
       </Badge>
       <Text>Size</Text>
-      <Badge size="tiny" shape="circular" />
-      <Badge size="extraSmall" shape="circular" badgeColor="red" />
+      <Badge size="tiny" />
+      <Badge size="extraSmall" badgeColor="red" />
       <Badge size="small">Small</Badge>
       <Badge size="medium">Medium</Badge>
       <Badge size="large">Large</Badge>

@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Children, ReactNode, Fragment } from 'react';
+import { Children, ReactNode } from 'react';
 import { View, I18nManager } from 'react-native';
 import { badgeName, BadgeType, BadgeProps } from './Badge.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -39,13 +39,11 @@ export const Badge = compose<BadgeType>({
     const Slots = useSlots(userProps, (layer) => badgeLookup(layer, userProps));
 
     return (final: BadgeProps, ...children: ReactNode[]) => {
-      const { icon, iconPosition, size, shadow, ...mergedProps } = mergeProps(badge, final);
+      const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
-      const BadgeComponent = shadow ? Slots.shadow : Fragment;
-
       return (
-        <BadgeComponent>
+        <Slots.shadow>
           <Slots.root {...mergedProps}>
             {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
             {showContent &&
@@ -60,7 +58,7 @@ export const Badge = compose<BadgeType>({
               )}
             {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
           </Slots.root>
-        </BadgeComponent>
+        </Slots.shadow>
       );
     };
   },

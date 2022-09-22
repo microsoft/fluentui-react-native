@@ -19,7 +19,16 @@ import { badgeFontTokens } from './BadgeFontTokens';
 
 export const coreBadgeStates: (keyof BadgeCoreTokens)[] = [...BadgeSizes, ...BadgeShapes];
 export const badgeStates: (keyof BadgeTokens)[] = [...coreBadgeStates, ...BadgeColors, ...BadgeAppearances, 'rtl'];
-const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = ['badgeColor', 'color', 'icon', 'iconColor', 'iconPosition', 'position'];
+const tokensThatAreAlsoProps: (keyof BadgeConfigurableProps)[] = [
+  'appearance',
+  'badgeColor',
+  'color',
+  'icon',
+  'iconColor',
+  'iconPosition',
+  'position',
+  'shadowToken',
+];
 
 export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, BadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, badgeFontTokens, badgeName],
@@ -81,9 +90,14 @@ export const stylingSettings: UseStylingOptions<BadgeProps, BadgeSlotProps, Badg
       ['color', 'textMargin', ...fontStyles.keys],
     ),
     shadow: buildProps(
-      (tokens: BadgeTokens) => ({
-        shadowToken: tokens.shadowToken,
-      }),
+      (tokens: BadgeTokens) => {
+        const { appearance, shadowToken } = tokens;
+        const showShadow = !!shadowToken && (!appearance || appearance === 'filled' || appearance === 'tint');
+
+        return {
+          shadowToken: showShadow ? shadowToken : undefined,
+        };
+      },
       ['shadowToken'],
     ),
   },

@@ -45,9 +45,14 @@ export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeS
       ['variant', 'color'],
     ),
     shadow: buildProps(
-      (tokens: CounterBadgeTokens) => ({
-        shadowToken: tokens.shadowToken,
-      }),
+      (tokens: CounterBadgeTokens) => {
+        const { appearance, shadowToken } = tokens;
+        const showShadow = !!shadowToken && (!appearance || appearance === 'filled' || appearance === 'tint');
+
+        return {
+          shadowToken: showShadow ? shadowToken : undefined,
+        };
+      },
       ['shadowToken'],
     ),
   },
