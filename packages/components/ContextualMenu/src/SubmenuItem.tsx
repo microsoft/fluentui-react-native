@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { I18nManager, Platform, View } from 'react-native';
+import { I18nManager, Platform, Pressable, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -184,7 +184,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     );
   },
   slots: {
-    root: View,
+    root: Pressable,
     startstack: View,
     icon: Icon as React.ComponentType,
     content: Text,

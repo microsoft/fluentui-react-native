@@ -179,16 +179,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -229,17 +234,21 @@ Array [
             }
           }
           accessible={true}
-          disabled={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -394,16 +403,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -565,16 +579,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -687,17 +706,21 @@ Array [
             }
           }
           accessible={true}
-          disabled={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -912,16 +935,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1034,16 +1062,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1258,16 +1291,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1380,16 +1418,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1604,16 +1647,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1714,16 +1762,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1930,16 +1983,21 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",
@@ -1982,17 +2040,22 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
           onHoverOut={[Function]}
-          onPress={[Function]}
-          onPressIn={[Function]}
-          onPressOut={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
           style={
             Object {
               "alignItems": "center",

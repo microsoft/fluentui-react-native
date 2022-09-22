@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import {
   ContextualMenuItemSlotProps,
   ContextualMenuItemState,
@@ -138,7 +138,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
     );
   },
   slots: {
-    root: View,
+    root: Pressable,
     stack: { slotType: View },
     icon: { slotType: Icon as React.ComponentType },
     content: Text,

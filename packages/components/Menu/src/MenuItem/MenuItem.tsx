@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { I18nManager, View } from 'react-native';
+import { I18nManager, Pressable, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { compose, memoize, mergeProps, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -12,7 +12,7 @@ export const MenuItem = compose<MenuItemType>({
   displayName: menuItemName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     checkmark: View,
     content: Text,
     submenuIndicator: SvgXml,
