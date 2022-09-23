@@ -2,9 +2,7 @@ import { ThemeColorDefinition } from '@fluentui-react-native/theme-types';
 import { FluentUIAndroidPalette } from './colorsSemantic';
 import { createColorAliasTokens } from './createAliasTokens';
 
-/** creates a palette of colors for the android theme, given the FluentUI Android Palette - ??.
- * What is the rest if the palette color?
- */
+/** Creates a palette of colors for the android theme, given the FluentUI Android Palette. */
 export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorDefinition {
   /* PaletteBackgroundColors & PaletteTextColors */
   return {
