@@ -1,9 +1,28 @@
+import { Keys } from './consts';
+
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export function By(identifier: string) {
   return $('~' + identifier);
+}
+
+/* This function gets an element and provides extra safeguards. It waits until an element exists and then returns */
+export async function GetElement(identifier: string): Promise<WebdriverIO.Element> {
+  let Element = null;
+
+  await browser.waitUntil(
+    async () => {
+      Element = await By(identifier);
+      return await Element.isDisplayed();
+    },
+    {
+      timeoutMsg: 'Could not find the element with identifier = ' + identifier,
+    },
+  );
+
+  return Element;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -33,17 +52,17 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return await this._primaryComponent.getAttribute('ControlType');
+    return await (await this._primaryComponent).getAttribute('ControlType');
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return await this._primaryComponent.getAttribute('Name');
+        return await (await this._primaryComponent).getAttribute('Name');
 
       case ComponentSelector.Secondary:
-        return await this._secondaryComponent.getAttribute('Name');
+        return await (await this._secondaryComponent).getAttribute('Name');
     }
   }
 
@@ -51,42 +70,40 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return await this._testPage.isDisplayed();
+    return await (await this._testPage).isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
-    return await this._pageButton.isDisplayed();
+    return await (await this._pageButton).isDisplayed();
   }
 
   async clickComponent(): Promise<void> {
-    await this._primaryComponent.click();
+    await (await this._primaryComponent).click();
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async scrollToComponentButton(platform: Platform): Promise<void> {
-    // Check if button is already displayed
-    const TestPageButton = await this._pageButton;
-    if (await TestPageButton.isDisplayed()) {
+    if (await (await this._pageButton).isDisplayed()) {
       return;
     }
 
     switch (platform) {
       case Platform.Win32:
+        const scrollDownKeys = [Keys.PAGE_DOWN];
         await browser.waitUntil(
           async () => {
-            await driver.touchScroll(
-              COMPONENT_SCROLL_COORDINATES.x,
-              COMPONENT_SCROLL_COORDINATES.y,
-              await this._testPageButtonScrollViewer.elementId,
-            );
-            return await TestPageButton.isDisplayed();
+            await (await this._firstTestPageButton).addValue(scrollDownKeys);
+            scrollDownKeys.push(Keys.PAGE_DOWN);
+            return await (await this._pageButton).isDisplayed();
           },
           {
             timeout: this.waitForPageTimeout,
             timeoutMsg:
-              'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
+              'Could not scroll to the ' +
+              this._pageName +
+              "'s main test element. Please see Pipeline artifacts for more debugging information.",
           },
         );
         break;
@@ -95,7 +112,7 @@ export class BasePage {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
-            return await TestPageButton.isDisplayed();
+            return await (await this._pageButton).isDisplayed();
           },
           {
             timeout: this.waitForPageTimeout,
@@ -137,7 +154,7 @@ export class BasePage {
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
+    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForPageTimeout,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
@@ -145,22 +162,19 @@ export class BasePage {
     });
   }
 
-  /* Scrolls to the primary UI test element until it is displayed. It uses the ScrollView that encapsulates each test page. */
+  /* Scrolls to the primary UI test element until it is displayed. */
   async scrollToTestElement(): Promise<void> {
-    // Check if element is already displayed
-    const PrimaryComponent = await this._primaryComponent;
-    if (await PrimaryComponent.isDisplayed()) {
+    if (await (await this._primaryComponent).isDisplayed()) {
       return;
     }
 
+    const FocusButton = await GetElement('Focus_Button');
+    const scrollDownKeys = [Keys.PAGE_DOWN];
     await browser.waitUntil(
       async () => {
-        await driver.touchScroll(
-          COMPONENT_SCROLL_COORDINATES.x,
-          COMPONENT_SCROLL_COORDINATES.y,
-          await this._testElementScrollViewer.elementId,
-        );
-        return await PrimaryComponent.isDisplayed();
+        await FocusButton.addValue(scrollDownKeys);
+        scrollDownKeys.push(Keys.PAGE_DOWN);
+        return await (await this._primaryComponent).isDisplayed();
       },
       {
         timeout: this.waitForPageTimeout,
@@ -170,8 +184,6 @@ export class BasePage {
           "'s main test element. Please see Pipeline artifacts for more debugging information.",
       },
     );
-
-    await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await this._testElementScrollViewer.elementId);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
@@ -202,6 +214,23 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
+  async GetFirstScrollViewButtonChild() {
+    const ScrollViewer = await GetElement('SCROLLVIEW_TEST_ID');
+    const TestChildren = await ScrollViewer.$$('//*');
+    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
+
+    for await (const child of TestChildren) {
+      const autoId = await child.getAttribute('AutomationId');
+      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID') {
+        if (autoId.match(reg)) {
+          return await child;
+        }
+      }
+    }
+
+    return null;
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -215,26 +244,26 @@ export class BasePage {
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
   get _testPage() {
-    return By(DUMMY_CHAR);
+    return GetElement(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
-    return By(DUMMY_CHAR);
+    return GetElement(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
-    return By(DUMMY_CHAR);
+    return GetElement(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
   get _pageButton() {
-    return By(DUMMY_CHAR);
+    return GetElement(DUMMY_CHAR);
   }
 
   // Returns: String
@@ -245,12 +274,16 @@ export class BasePage {
 
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {
-    return By('SCROLLVIEW_TEST_ID');
+    return GetElement('SCROLLVIEW_TEST_ID');
   }
 
   // The scrollviewer containing the body of each test page
   get _testElementScrollViewer() {
-    return By('ScrollViewAreaForComponents');
+    return GetElement('ScrollViewAreaForComponents');
+  }
+
+  get _firstTestPageButton() {
+    return this.GetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/
