@@ -186,6 +186,9 @@ export class BasePage {
           "'s main test element. Please see Pipeline artifacts for more debugging information.",
       },
     );
+
+    // We have this extra scroll here to ensure the whole component is visible.
+    await FocusButton.addValue(scrollDownKeys);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
