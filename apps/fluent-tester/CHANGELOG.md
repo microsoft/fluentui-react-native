@@ -1,8 +1,22 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 22 Sep 2022 18:51:04 GMT and should not be manually modified.
+This log was last generated on Fri, 23 Sep 2022 06:23:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.97.0
+
+Fri, 23 Sep 2022 06:23:01 GMT
+
+### Minor changes
+
+- make fab collapsible, fix fab bugs (email not defined)
+- Bump @fluentui-react-native/button to v0.25.0
+- Bump @fluentui-react-native/experimental-button to v0.16.27
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.31
+- Bump @fluentui-react-native/menu to v1.0.37
+- Bump @fluentui-react-native/notification to v0.17.10
+- Bump @fluentui/react-native to v0.32.23
 
 ## 0.96.3
 

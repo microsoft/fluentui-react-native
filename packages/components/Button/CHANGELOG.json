@@ -2,6 +2,20 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 23 Sep 2022 06:23:01 GMT",
+      "tag": "@fluentui-react-native/button_v0.25.0",
+      "version": "0.25.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/button",
+            "commit": "a754fbf223bee8a06ca792e17db7ca2bd44373e0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui-react-native/button_v0.24.26",
       "version": "0.24.26",
