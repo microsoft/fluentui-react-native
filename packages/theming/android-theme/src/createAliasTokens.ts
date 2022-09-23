@@ -10,7 +10,6 @@ function createColorAliasTokensWorker(mode: AppearanceOptions): AliasColorTokens
 
 export const createColorAliasTokens = memoize(createColorAliasTokensWorker);
 
-// VSO# - Remaining tokens for android.
 function createShadowAliasTokensWorker(mode: AppearanceOptions): ThemeShadowDefinition {
   const aliasTokens = getShadowTokens(mode);
   return mapPipelineToShadow(aliasTokens);

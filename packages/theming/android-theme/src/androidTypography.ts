@@ -1,7 +1,5 @@
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
 
-
-// VSO# - Remaining tokens for android.
 export function androidTypography(): Typography {
   const androidDict = {
     sizes: {
