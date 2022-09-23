@@ -74,11 +74,13 @@ export class BasePage {
 
     switch (platform) {
       case Platform.Win32:
-        // eslint-disable-next-line no-case-declarations
-        const ScrollViewer = await By('SCROLLVIEW_TEST_ID');
         await browser.waitUntil(
           async () => {
-            await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewer.elementId);
+            await driver.touchScroll(
+              COMPONENT_SCROLL_COORDINATES.x,
+              COMPONENT_SCROLL_COORDINATES.y,
+              await this._testPageButtonScrollViewer.elementId,
+            );
             return await TestPageButton.isDisplayed();
           },
           {
@@ -151,11 +153,13 @@ export class BasePage {
       return;
     }
 
-    // Scroll until element is displayed
-    const ScrollViewerID = await By('ScrollViewAreaForComponents').elementId;
     await browser.waitUntil(
       async () => {
-        await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
+        await driver.touchScroll(
+          COMPONENT_SCROLL_COORDINATES.x,
+          COMPONENT_SCROLL_COORDINATES.y,
+          await this._testElementScrollViewer.elementId,
+        );
         return await PrimaryComponent.isDisplayed();
       },
       {
@@ -167,7 +171,7 @@ export class BasePage {
       },
     );
 
-    await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, ScrollViewerID);
+    await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await this._testElementScrollViewer.elementId);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
@@ -237,6 +241,16 @@ export class BasePage {
   // Returns the name of the test page. Useful for error messages (see above).
   get _pageName(): string {
     return DUMMY_CHAR;
+  }
+
+  // The scrollviewer containing the list of buttons to navigate to each test page
+  get _testPageButtonScrollViewer() {
+    return By('SCROLLVIEW_TEST_ID');
+  }
+
+  // The scrollviewer containing the body of each test page
+  get _testElementScrollViewer() {
+    return By('ScrollViewAreaForComponents');
   }
 
   /****************** Error Messages ******************/
