@@ -1,38 +1,11 @@
 import { IViewWindowsProps } from 'react-native-windows';
-import { PressableProps, TextProps } from 'react-native';
-import { ImageProps } from 'react-native';
+import { TextProps, ImageProps } from 'react-native';
 import { IFilterMask } from './filter.types';
 
 // export core interface types from RN
 export type ITextProps = TextProps;
 export type IViewProps = IViewWindowsProps;
 export type IImageProps = ImageProps;
-
-// GH #1035: Tempoarily create this type while it is missing from DefinitelyTyped
-type PressableHoverProps = {
-  /**
-   * Duration to wait after hover in before calling `onHoverIn`.
-   */
-  delayHoverIn?: number;
-
-  /**
-   * Duration to wait after hover out before calling `onHoverOut`.
-   */
-  delayHoverOut?: number;
-
-  /**
-   * Called when the hover is activated to provide visual feedback.
-   */
-  onHoverIn?: (event: MouseEvent) => any;
-
-  /**
-   * Called when the hover is deactivated to undo visual feedback.
-   */
-  onHoverOut?: (event: MouseEvent) => any;
-};
-
-// Extend PressableProps to include platform specific props
-export type AdaptedPressableProps = PressableProps & IViewProps & PressableHoverProps;
 
 const _viewMask: IFilterMask<IViewProps> = {
   children: true,
