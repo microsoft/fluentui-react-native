@@ -5109,9 +5109,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.0"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.0.tgz#dd556f2a75ab08039320e94291eed3b87809f502"
-  integrity sha512-xi6xf9nLLp9dpXBhnQuDsWdM6k+I34CrSdtniW8Qlt/BdHoUdTGhFFk9ky30pgywCam/bgGQbMd2FOChaUvfjQ==
+  version "2.31.1"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.1.tgz#dc649688e635f2f667c0b803402c4aea6c45e682"
+  integrity sha512-evxdaylIXwMRPTjnKGUSjF0xdScw2EpE+VMfI+Q27uZrRXhdgHEfkQvVMbIs60bX5wbdUToi9FXF/CJVW0DM6A==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
