@@ -90,7 +90,7 @@ export class BasePage {
     }
 
     switch (platform) {
-      case Platform.Win32:
+      case Platform.Win32: {
         const scrollDownKeys = [Keys.PAGE_DOWN];
         await browser.waitUntil(
           async () => {
@@ -107,8 +107,9 @@ export class BasePage {
           },
         );
         break;
+      }
 
-      case Platform.iOS:
+      case Platform.iOS: {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
@@ -121,6 +122,7 @@ export class BasePage {
           },
         );
         break;
+      }
 
       case Platform.macOS:
         // Not needed for macOS. It automatically scrolls
