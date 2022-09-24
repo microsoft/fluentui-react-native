@@ -141,7 +141,7 @@ export interface TabsItemState extends PressableState {
 }
 
 export interface TabsItemInfo {
-  props: React.PropsWithRef<TabsItemProps>;
+  props: TabsItemProps & React.ComponentPropsWithRef<any>;
   state: TabsItemState;
 }
 
