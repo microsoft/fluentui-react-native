@@ -26,6 +26,7 @@
     "directory": "packages/utils/interactive-hooks"
   },
   "dependencies": {
+    "@fluentui-react-native/adapters": "^0.9.1",
     "@fluentui-react-native/memo-cache": "^1.1.7",
     "invariant": "^2.2.0",
     "tslib": "^2.3.1"
