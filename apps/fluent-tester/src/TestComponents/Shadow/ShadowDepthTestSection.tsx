@@ -1,25 +1,26 @@
 import * as React from 'react';
-import { commonTestStyles } from '../Common/styles';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimental-shadow';
-import { ShadowToken, useTheme } from '@fluentui-react-native/theme-types';
+import { ShadowToken, Theme, useTheme } from '@fluentui-react-native/theme-types';
+import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { useFluentTheme } from '@fluentui-react-native/framework';
 
-const getThemedStyles = themedStyleSheet(() => {
+const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
-    effectBox: {
+    shadowTestBox: {
       maxWidth: 732,
       minHeight: 64,
       borderRadius: 8,
-    },
-    padding: {
       padding: 20,
-    },
-    vmargin: {
       marginVertical: 16,
       marginHorizontal: 32,
+    },
+    defaultBackground: {
+      backgroundColor: t.colors.background,
+    },
+    brandedBackground: {
+      backgroundColor: t.colors.brandedBackground,
     },
   };
 });
@@ -33,20 +34,13 @@ interface ShadowTestBoxProps {
 const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: ShadowTestBoxProps) => {
   const theme = useTheme();
   const themedStyles = getThemedStyles(theme);
-  const backgroundColor = props.isBrand ? theme.colors.brandedBackground : theme.colors.background;
+
+  const backgroundColor = props.isBrand ? themedStyles.brandedBackground : themedStyles.defaultBackground;
   const textColor = props.isBrand ? theme.colors.primaryButtonText : theme.colors.bodyText;
 
   return (
     <Shadow shadowToken={props.shadowToken}>
-      <View
-        style={[
-          commonTestStyles.view,
-          themedStyles.effectBox,
-          themedStyles.vmargin,
-          themedStyles.padding,
-          { backgroundColor: backgroundColor },
-        ]}
-      >
+      <View style={mergeStyles(themedStyles.shadowTestBox, backgroundColor)}>
         <Text variant="bodySemibold" color={textColor}>
           {props.shadowDepthText}
         </Text>

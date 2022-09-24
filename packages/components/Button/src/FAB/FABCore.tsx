@@ -46,7 +46,7 @@ export const FAB = compose<FABType>({
 
     // now return the handler for finishing render
     return (final: FABProps, ...children: React.ReactNode[]) => {
-      const { iconOnly, accessibilityLabel, showChildren = true, ...mergedProps } = mergeProps(button.props, final);
+      const { iconOnly, accessibilityLabel, showContent = true, ...mergedProps } = mergeProps(button.props, final);
 
       if (__DEV__ && iconOnly) {
         React.Children.forEach(children, (child) => {

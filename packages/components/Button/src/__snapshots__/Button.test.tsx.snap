@@ -112,6 +112,8 @@ exports[`Button component tests Button composed 1`] = `
         "fontFamily": "Segoe UI",
         "fontSize": 14,
         "fontWeight": "600",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
         "marginBottom": 0,
         "marginEnd": 0,
         "marginStart": 0,

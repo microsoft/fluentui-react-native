@@ -133,22 +133,24 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * Callback function for changes to the switch's state and interaction event
+   * Callback to be called when the checked state value changes
    */
   onChange?: (e: InteractionEvent, checked?: boolean) => void;
 
   /**
-   * The default state of the Switch
+   * Defines whether the Switch is initially in a checked state or not when rendered
    */
   defaultChecked?: boolean;
 
   /**
-   * The Switch's state
+   * Defines the controlled checked state of the Switch. If passed, Switch ignores the defaultChecked property.
+   * This should only be used if the checked state is to be controlled at a higher level and there is a plan to
+   * pass the correct value based on handling onChange events and re-rendering.
    */
   checked?: boolean;
 
   /**
-   * A label to describe the Switch
+   * The Switch's label
    */
   label?: string;
 
@@ -163,7 +165,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   onText?: string;
 
   /**
-   * Sets the position of the Switch's label. The position value 'after' is mutually
+   * The position of the label relative to the Switch. The position value 'after' is mutually
    * exclusive with the onText and offText props. This is due to variable width
    * of the text props causing the Switch's position to change when it shouldn't.
    */

@@ -94,7 +94,12 @@ export type FontWeight = keyof FontWeights | FontWeightValue;
 /**
  * A font line height value, specified in CSS pixels (px).
  */
-export type FontLightHeight = number;
+export type FontLineHeight = number;
+
+/**
+ * A font letter spacing value, specified in points on Apple platforms and ems everywhere else.
+ */
+export type FontLetterSpacing = number;
 
 /**
  * A font variant value.
@@ -103,6 +108,8 @@ export type VariantValue = {
   face: FontFamily;
   size: FontSize;
   weight: FontWeight;
+  lineHeight?: FontLineHeight;
+  letterSpacing?: FontLetterSpacing;
 };
 
 /**
@@ -124,6 +131,8 @@ export interface Variants {
   heroLargeSemibold: VariantValue;
   //v2 variants
   caption1?: VariantValue;
+  caption1Strong?: VariantValue;
+  caption2?: VariantValue;
   body1?: VariantValue;
   body1Strong?: VariantValue;
   body2?: VariantValue;
@@ -134,6 +143,8 @@ export interface Variants {
   subtitle2Strong?: VariantValue;
   title1?: VariantValue;
   title1Strong?: VariantValue;
+  title2?: VariantValue;
+  title3?: VariantValue;
   largeTitle?: VariantValue;
   display?: VariantValue;
 }

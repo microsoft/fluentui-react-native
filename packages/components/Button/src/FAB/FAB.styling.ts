@@ -63,7 +63,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
             },
             elevation: tokens.elevation,
           }),
-          ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
+          ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
         ),
       },
     }),
