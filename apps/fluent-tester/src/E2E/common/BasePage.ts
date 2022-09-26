@@ -94,8 +94,7 @@ export class BasePage {
         const scrollDownKeys = [Keys.PAGE_DOWN];
         await browser.waitUntil(
           async () => {
-            const firstTestPageButton = await browser.getFirstTestPageButton();
-            await firstTestPageButton.addValue(scrollDownKeys);
+            await (await this._firstTestPageButton).addValue(scrollDownKeys);
             scrollDownKeys.push(Keys.PAGE_DOWN);
             return await (await this._pageButton).isDisplayed();
           },
@@ -220,6 +219,21 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
+  async SetFirstScrollViewButtonChild() {
+    console.log('\nRunning static logic.\n');
+    const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
+    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
+
+    for (const child of TestChildren) {
+      const autoId = await child.getAttribute('AutomationId');
+      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID' && autoId.match(reg)) {
+        return await child;
+      }
+    }
+
+    return null;
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -269,6 +283,10 @@ export class BasePage {
   // The scrollviewer containing the body of each test page
   get _testElementScrollViewer() {
     return GetElement('ScrollViewAreaForComponents');
+  }
+
+  get _firstTestPageButton() {
+    return this.SetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/
