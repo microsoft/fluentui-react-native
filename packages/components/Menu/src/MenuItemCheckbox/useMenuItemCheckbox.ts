@@ -53,7 +53,7 @@ function getAccessibilityStateWorker(disabled: boolean, checked: boolean, access
 export const useMenuCheckboxInteraction = (
   props: MenuItemCheckboxProps,
   toggleCallback: (e: InteractionEvent) => void,
-): MenuItemCheckboxState => {
+): MenuItemCheckboxInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessibilityActions,

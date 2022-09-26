@@ -29,7 +29,6 @@ export {
   MenuItemCheckbox,
   menuItemCheckboxName,
   MenuItemCheckboxProps,
-  MenuItemCheckboxState,
   MenuItemCheckboxInfo,
   MenuItemCheckboxSlotProps,
   MenuItemCheckboxTokens,
