@@ -83,12 +83,12 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
      * To achieve this, we override the onMouseLeave handler returned by usePressableState, and replace it with our own. Inside our own
      * onMouseLeave handler, we call usePressableState's onMouseLEave handler,
      */
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore onMouseLeave not in PressableProps but is supported on desktop
     const { onBlur, onMouseLeave, ...restPressableProps } = pressable.props;
     const onMouseLeaveModified = React.useCallback(
       (e) => {
         onBlur(e);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseLeave && onMouseLeave(e);
       },
       [onBlur, onMouseLeave],

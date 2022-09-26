@@ -38,9 +38,9 @@ export const MenuItem = compose<MenuItemType>({
 
       return (
         <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {menuItem.hasCheckmarks && <Slots.checkmark />}
+          {menuItem.state.hasCheckmarks && <Slots.checkmark />}
           {children && <Slots.content>{children}</Slots.content>}
-          {menuItem.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
+          {menuItem.state.hasSubmenu && <Slots.submenuIndicator xml={chevronXml} />}
         </Slots.root>
       );
     };

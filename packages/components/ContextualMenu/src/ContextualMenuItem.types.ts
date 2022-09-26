@@ -1,11 +1,9 @@
 import * as React from 'react';
-import { PressableProps } from 'react-native';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { ITextProps } from '@fluentui-react-native/text';
-import { IPressableProps } from '@fluentui-react-native/pressable';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import { IconProps } from '@fluentui-react-native/icon';
 
 export const contextualMenuItemName = 'ContextualMenuItem';
@@ -48,7 +46,7 @@ export interface ContextualMenuItemTokens extends FontTokens, IForegroundColorTo
   iconWeight?: number;
 }
 
-export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'> {
+export interface ContextualMenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
   /*
    ** A unique key-identifier for each menu item
    */
@@ -81,7 +79,7 @@ export interface ContextualMenuItemProps extends Omit<IPressableProps, 'onPress'
 }
 
 export interface ContextualMenuItemSlotProps {
-  root: React.PropsWithRef<PressableProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   stack: IViewProps;
   icon: IconProps;
   content: ITextProps;

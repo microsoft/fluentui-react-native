@@ -81,9 +81,11 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       ref: itemRef,
       ...onKeyDownProps,
     },
-    state: pressable.state,
-    hasSubmenu,
-    hasCheckmarks,
+    state: {
+      ...pressable.state,
+      hasSubmenu,
+      hasCheckmarks,
+    },
   };
 };
 

@@ -86,6 +86,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const onMouseEnterModified = React.useCallback(
       (e) => {
         componentRef.current.focus();
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseEnter && onMouseEnter(e);
       },
       [componentRef, onMouseEnter],
@@ -93,6 +95,8 @@ export const SubmenuItem = compose<SubmenuItemType>({
     const onMouseLeaveModified = React.useCallback(
       (e) => {
         onBlur(e);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore IViewWin32 doesn't have the event as an argument, while macOS does
         onMouseLeave && onMouseLeave(e);
       },
       [onBlur, onMouseLeave],
