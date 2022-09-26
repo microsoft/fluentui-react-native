@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { tabsName, TabsType, TabsProps, TabsContextData } from './Tabs.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Tabs.styling';
@@ -27,7 +27,7 @@ export const Tabs = compose<TabsType>({
   displayName: tabsName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     label: Text,
     container: FocusZone,
     stack: View,

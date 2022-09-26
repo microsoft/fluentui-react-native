@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.19.1",
+      "version": "0.19.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "adam.gleitman@gmail.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2",
+            "comment": "Merge branch 'main' into ios-typography-tokens"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 16 Sep 2022 01:53:06 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.19.0",
+      "version": "0.19.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adam.gleitman@gmail.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "379d866e6ec5a3d954b5e945949467345f815513",
+            "comment": "Rename FontLightHeight to FontLineHeight"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:50 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.18.0",
       "version": "0.18.0",

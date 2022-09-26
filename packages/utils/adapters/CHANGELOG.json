@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Wed, 14 Sep 2022 23:07:41 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb",
+            "comment": "\"Add accessibilityAccessKey as a prop to adapter\""
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:50 GMT",
       "tag": "@fluentui-react-native/adapters_v0.9.0",
       "version": "0.9.0",

@@ -51,6 +51,12 @@
       "apps/*",
       "packages/**",
       "scripts"
+    ],
+    "nohoist": [
+      "@fluentui-react-native/tester-win32/appium-windows-driver",
+      "@fluentui-react-native/tester/appium-mac2-driver",
+      "@fluentui-react-native/tester/appium-xcuitest-driver",
+      "@fluentui-react-native/tester/appium-windows-driver"
     ]
   },
   "resolutions": {

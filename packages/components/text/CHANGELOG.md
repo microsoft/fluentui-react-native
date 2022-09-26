@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Minor changes
+
+- Add new iOS tokens (adam.gleitman@gmail.com)
+- Bump @uifabricshared/foundation-compose to v1.12.5
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/tokens to v0.17.0
+
+## 0.14.4
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.4
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/tokens to v0.16.2
+
+## 0.14.3
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.3
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/tokens to v0.16.1
 
 ## 0.14.2
 

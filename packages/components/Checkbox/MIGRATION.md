@@ -27,7 +27,7 @@ import { CheckboxV1 as Checkbox } from '@fluentui-react-native/checkbox';
 ### Props repurposed
 
 - `ariaLabel` => Use `accessibilityLabel` prop instead
-- `boxSide` => Use `after` value for `labelPosition` prop instead of `start` or `before` value for `labelPosition` prop instead of `after`
+- `boxSide` => Use `after` value for `labelPosition` prop instead of `start` or `before` value for `labelPosition` prop instead of `end`
 
 ### Props removed
 

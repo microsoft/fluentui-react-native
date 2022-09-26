@@ -2,6 +2,108 @@
   "name": "@fluentui-react-native/callout",
   "entries": [
     {
+      "date": "Mon, 26 Sep 2022 02:39:40 GMT",
+      "tag": "@fluentui-react-native/callout_v0.21.13",
+      "version": "0.21.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.7",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@fluentui-react-native/callout_v0.21.12",
+      "version": "0.21.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.6",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.0",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.5",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 16 Sep 2022 01:53:06 GMT",
+      "tag": "@fluentui-react-native/callout_v0.21.11",
+      "version": "0.21.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.5",
+            "commit": "379d866e6ec5a3d954b5e945949467345f815513"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.16.2",
+            "commit": "379d866e6ec5a3d954b5e945949467345f815513"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.4",
+            "commit": "379d866e6ec5a3d954b5e945949467345f815513"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 14 Sep 2022 23:07:42 GMT",
+      "tag": "@fluentui-react-native/callout_v0.21.10",
+      "version": "0.21.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.1",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.4",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @fluentui-react-native/tokens to v0.16.1",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/callout",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.3",
+            "commit": "bb45f425d71a2c9f4c8088ae2e15d93759b915bb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Sep 2022 18:22:03 GMT",
       "tag": "@fluentui-react-native/callout_v0.21.9",
       "version": "0.21.9",
