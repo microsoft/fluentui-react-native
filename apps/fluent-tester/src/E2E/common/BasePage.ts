@@ -219,18 +219,15 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
-  static async GetFirstScrollViewButtonChild() {
-    console.log('\nRunning static logic.\n')
-    const ScrollViewer = await GetElement('SCROLLVIEW_TEST_ID');
-    const TestChildren = await ScrollViewer.$$('//*');
+  async SetFirstScrollViewButtonChild() {
+    console.log('\nRunning static logic.\n');
+    const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
     const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
 
-    for await (const child of TestChildren) {
+    for (const child of TestChildren) {
       const autoId = await child.getAttribute('AutomationId');
-      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID') {
-        if (autoId.match(reg)) {
-          return await child;
-        }
+      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID' && autoId.match(reg)) {
+        return await child;
       }
     }
 
@@ -289,7 +286,7 @@ export class BasePage {
   }
 
   get _firstTestPageButton() {
-    return BasePage.GetFirstScrollViewButtonChild();
+    return this.SetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/
