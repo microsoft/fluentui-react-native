@@ -75,7 +75,7 @@ export interface RadioProps extends PressablePropsExtended {
   enableFocusRing?: boolean;
 }
 
-export interface RadioState {
+export interface RadioInfo {
   props: RadioProps & React.ComponentPropsWithRef<any>;
   state: PressableState;
 }

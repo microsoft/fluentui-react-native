@@ -13,6 +13,6 @@ export { RadioGroupContext, RadioGroupContextValue, RadioGroupProvider, useRadio
 export { useRadioGroup } from './RadioGroup/useRadioGroup';
 export { useRadioGroupContextValue } from './RadioGroup/useRadioGroupContextValue';
 export { Radio, radioLookup } from './Radio/Radio';
-export { radioName, RadioProps, RadioSlotProps, RadioState, RadioTokens, RadioType } from './Radio/Radio.types';
+export { radioName, RadioProps, RadioSlotProps, RadioInfo, RadioTokens, RadioType } from './Radio/Radio.types';
 export { defaultRadioTokens } from './Radio/RadioTokens';
 export { useRadio } from './Radio/useRadio';
