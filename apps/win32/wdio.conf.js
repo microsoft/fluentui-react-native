@@ -109,6 +109,34 @@ exports.config = {
    */
   before: async function () {
     await browser.maximizeWindow();
+
+    // Find the ScrollViewer containing the test page buttons
+    var testPageButtonScrollViewer = null;
+    await browser.waitUntil(
+      async () => {
+        testPageButtonScrollViewer = await $('~SCROLLVIEW_TEST_ID');
+        return await testPageButtonScrollViewer.isExisting();
+      },
+      {
+        timeoutMsg: 'Could not find the element with identifier = ' + identifier,
+      },
+    );
+
+    const testPageButtons = await testPageButtonScrollViewer.$$('//*');
+    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
+
+    var firstTestPageButton = null;
+    for (const child of testPageButtons) {
+      const autoId = await child.getAttribute('AutomationId');
+      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID' && autoId.match(reg)) {
+        firstTestPageButton = await child;
+        break;
+      }
+    }
+
+    await browser.addCommand('getFirstTestPageButton', async function () {
+      return firstTestPageButton;
+    });
   },
   /**
    * Runs before a WebdriverIO command gets executed.
