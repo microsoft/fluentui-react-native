@@ -5,7 +5,8 @@ import {
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS,
 } from '../../../TestComponents/Button/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By, GetElement } from '../../common/BasePage';
+import { Keys } from '../../common/consts';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -25,6 +26,15 @@ class ButtonExperimentalPageObject extends BasePage {
     });
 
     return await callbackText.isDisplayed();
+  }
+
+  // This is a special case. Currently, the Button spec and the ButtonExperimental spec examples are both on
+  // the same test page. We need to refresh the app so we cab re-navigate + re-scroll to the Button
+  // Experimental component. Once the deprecated button is fully deprecated and we can remove that spec file,
+  // we can rid of this function.
+  async refreshButtonPage(): Promise<void> {
+    const FocusButton = await GetElement('Focus_Button');
+    await FocusButton.addValue(Keys.F5);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
