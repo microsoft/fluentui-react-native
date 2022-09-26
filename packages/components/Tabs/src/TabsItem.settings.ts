@@ -1,6 +1,6 @@
 import { tabsItemName, TabsItemType } from './TabsItem.types';
 import { IComposeSettings } from '@uifabricshared/foundation-compose';
-import type { IViewProps } from '@fluentui-react-native/adapters';
+import { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 export const tabsItemSelectActionLabel = 'Select a TabsItem';
 
@@ -25,7 +25,7 @@ export const settings: IComposeSettings<TabsItemType> = [
         alignSelf: 'flex-start',
         justifyContent: 'center',
       },
-    } as IViewProps,
+    } as PressablePropsExtended,
     indicator: {
       style: {
         minHeight: 2,

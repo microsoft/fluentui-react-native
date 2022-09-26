@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import {
+  usePressableState,
+  useKeyProps,
+  useOnPressWithFocus,
+  useViewCommandFocus,
+  IFocusable,
+} from '@fluentui-react-native/interactive-hooks';
 import { TabsItemProps, TabsItemInfo } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
@@ -11,18 +17,18 @@ import { TabsContext } from './Tabs';
  * @returns configured props and state for TabsItem
  */
 export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
-  const defaultComponentRef = React.useRef(null);
+  const defaultComponentRef = React.useRef<IFocusable>(null);
   const { accessibilityLabel, headerText, componentRef = defaultComponentRef, itemKey, disabled, itemCount, icon, ...rest } = props;
   // Grabs the context information from Tabs (currently selected TabsItem and client's onTabsClick callback).
   const info = React.useContext(TabsContext);
 
-  const changeSelection = () => {
+  const changeSelection = React.useCallback(() => {
     if (itemKey != info.selectedKey) {
       info.onTabsClick && info.onTabsClick(itemKey);
       info.getTabId && info.getTabId(itemKey, info.tabsItemKeys.findIndex((x) => x == itemKey) + 1);
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }
-  };
+  }, [componentRef, info, itemKey]);
 
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
@@ -43,7 +49,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
           break;
       }
     },
-    [info, itemKey],
+    [changeSelection],
   );
 
   /* We use the componentRef of the currently selected tabsItem to maintain the default tabbable
@@ -53,7 +59,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
     if (itemKey == info.selectedKey) {
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }
-  }, []);
+  }, [componentRef, info, itemKey]);
 
   return {
     props: {
