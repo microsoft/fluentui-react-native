@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ViewStyle, PressableProps, ColorValue } from 'react-native';
+import { ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableHooks, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { ShadowToken } from '@fluentui-react-native/theme-types';
 
@@ -74,7 +74,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   hasIconAfter?: ButtonTokens;
 }
 
-export interface ButtonCoreProps extends Omit<PressableProps, 'onPress'> {
+export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
@@ -147,10 +147,13 @@ export interface ButtonProps extends ButtonCoreProps {
   loading?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+export interface ButtonInfo {
+  props: ButtonProps & React.ComponentPropsWithRef<any>;
+  state: PressableState;
+}
 
 export interface ButtonSlotProps {
-  root: React.PropsWithRef<PressableProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   icon: IconProps;
   content: TextProps;
 }
