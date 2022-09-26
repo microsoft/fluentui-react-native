@@ -1,8 +1,7 @@
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
-import { IFocusable, IPressableHooks } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { ColorValue } from 'react-native';
 
 export const radioName = 'Radio';
@@ -48,7 +47,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   pressed?: RadioTokens;
 }
 
-export interface RadioProps extends IPressableProps {
+export interface RadioProps extends PressablePropsExtended {
   /**
    * The text string for the option
    */
@@ -76,7 +75,10 @@ export interface RadioProps extends IPressableProps {
   enableFocusRing?: boolean;
 }
 
-export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {}
+export interface RadioState {
+  props: RadioProps & React.ComponentPropsWithRef<any>;
+  state: PressableState;
+}
 
 export interface RadioSlotProps {
   root: IViewProps;
