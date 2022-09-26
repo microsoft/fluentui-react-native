@@ -99,7 +99,7 @@ export class BasePage {
             return await (await this._pageButton).isDisplayed();
           },
           {
-            timeout: this.waitForPageTimeout,
+            timeout: this.waitForUIEvent,
             timeoutMsg:
               'Could not scroll to the ' +
               this._pageName +
@@ -116,7 +116,7 @@ export class BasePage {
             return await (await this._pageButton).isDisplayed();
           },
           {
-            timeout: this.waitForPageTimeout,
+            timeout: this.waitForUIEvent,
             timeoutMsg:
               'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
           },
@@ -139,7 +139,7 @@ export class BasePage {
   async waitForPageDisplayed(timeout?: number): Promise<void> {
     await browser.pause(2000);
     await browser.waitUntil(async () => await this.isPageLoaded(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
       interval: 1500,
     });
@@ -148,7 +148,7 @@ export class BasePage {
   /* Waits for the test page's button to be displayed. If the button doesn't load before the timeout, it causes the test to fail. */
   async waitForButtonDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.isButtonInView(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
       interval: 1500,
     });
@@ -157,7 +157,7 @@ export class BasePage {
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
@@ -179,7 +179,7 @@ export class BasePage {
         return await (await this._primaryComponent).isDisplayed();
       },
       {
-        timeout: this.waitForPageTimeout,
+        timeout: 30000,
         timeoutMsg:
           'Could not scroll to the ' +
           this._pageName +
@@ -195,7 +195,7 @@ export class BasePage {
    * this will allow cleaner code within all the Page Objects. */
   async waitForCondition(condition?: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await condition(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
       interval: 1000,
     });
@@ -308,6 +308,6 @@ export class BasePage {
     return 'An assert popped up. ' + this.ERRORMESSAGE_SUFFIX;
   }
 
-  // Default timeout to wait until page is displayed (10s)
-  waitForPageTimeout: number = 15000;
+  // Default timeout to wait until page is displayed (20s)
+  waitForUIEvent: number = 20000;
 }

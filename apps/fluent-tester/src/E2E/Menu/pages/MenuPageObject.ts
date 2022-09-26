@@ -25,7 +25,7 @@ class MenuPageObject extends BasePage {
   async didMenuOpen(): Promise<boolean> {
     const callbackText = await By(MENU_ON_OPEN);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForPageTimeout,
+      timeout: this.waitForUIEvent,
       timeoutMsg: 'The Menu did not open.',
       interval: 1000,
     });
@@ -36,7 +36,7 @@ class MenuPageObject extends BasePage {
   async didMenuClose(): Promise<boolean> {
     const callbackText = await By(MENU_ON_CLOSE);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForPageTimeout,
+      timeout: this.waitForUIEvent,
       timeoutMsg: 'The Menu did not close.',
       interval: 1000,
     });

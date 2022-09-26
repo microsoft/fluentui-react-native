@@ -27,7 +27,7 @@ class TabsPageObject extends BasePage {
   /******************************************************************/
   async waitForTabsItemsToOpen(tabItemSelector: TabItemSelector, timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.didTabItemContentLoad(tabItemSelector), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: 'The Tab Items content did not open.',
       interval: 1000,
     });

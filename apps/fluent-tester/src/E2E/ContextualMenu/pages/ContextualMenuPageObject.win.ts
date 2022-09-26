@@ -19,7 +19,7 @@ class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   async waitForContextualMenuItemsToOpen(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.contextualMenuItemDisplayed(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: 'The Contextual Menu Items did not open.',
       interval: 1000,
     });
