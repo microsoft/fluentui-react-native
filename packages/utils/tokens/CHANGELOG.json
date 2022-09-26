@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tokens",
   "entries": [
     {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@fluentui-react-native/tokens_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adam.gleitman@gmail.com",
+            "package": "@fluentui-react-native/tokens",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2",
+            "comment": "Add iOS typography variants"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.19.1",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/tokens_v0.16.2",
       "version": "0.16.2",

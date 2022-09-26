@@ -2,6 +2,69 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Mon, 26 Sep 2022 02:39:40 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.9",
+      "version": "0.6.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.7",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.8",
+      "version": "0.6.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.0",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.4",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.6",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.0",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 20 Sep 2022 16:58:04 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.7",
+      "version": "0.6.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "ejlayne@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "725e9cb7c78a89c622c550a64a2a077660a7a2d0",
+            "comment": "Updated SwitchProp comments to better align with the prop comments on the Fluent UI React Switch documentation. Did not make any functional changes to the control, but wanted to update documentation to get it more ready for publishing as a V1 control."
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/switch_v0.6.6",
       "version": "0.6.6",

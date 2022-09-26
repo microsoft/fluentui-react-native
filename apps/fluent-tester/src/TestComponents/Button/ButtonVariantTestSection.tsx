@@ -13,6 +13,9 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   };
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
+  const [showFABText, setShowFABText] = React.useState(true);
+  const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
+
   return (
     <View style={testContentRootViewStyle}>
       <Button style={commonTestStyles.vmargin}>Default</Button>
@@ -48,7 +51,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
         Subtle
       </CompoundButton>
       <FAB icon={iconProps} style={commonTestStyles.vmargin} />
-      <FAB icon={iconProps} style={commonTestStyles.vmargin}>
+      <FAB icon={iconProps} style={commonTestStyles.vmargin} showContent={showFABText} onClick={flipFABcontent}>
         FAB
       </FAB>
     </View>

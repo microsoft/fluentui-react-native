@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Merge branch 'main' into ios-typography-tokens (adam.gleitman@gmail.com)
 
 ## 0.19.0
 

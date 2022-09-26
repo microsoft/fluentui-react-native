@@ -6,8 +6,13 @@ export const fabName = 'FAB';
 export interface FABSlotProps extends ButtonSlotProps {
   shadow?: ShadowProps;
 }
+
+export interface FABProps extends ButtonCoreProps {
+  showContent?: boolean;
+}
+
 export interface FABType {
-  props: ButtonCoreProps;
+  props: FABProps;
   tokens: ButtonCoreTokens;
   slotProps: FABSlotProps;
 }

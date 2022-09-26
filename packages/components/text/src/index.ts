@@ -2,6 +2,8 @@ export { Text as TextV1 } from './Text';
 export type { textName as textNameV1, TextProps, TextTokens } from './Text.types';
 export {
   Caption1,
+  Caption1Strong,
+  Caption2,
   Body1,
   Body1Strong,
   Body2,
@@ -12,6 +14,8 @@ export {
   Subtitle2Strong,
   Title1,
   Title1Strong,
+  Title2,
+  Title3,
   LargeTitle,
   Display,
 } from './Variants';

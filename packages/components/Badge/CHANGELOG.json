@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Mon, 26 Sep 2022 02:39:40 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.34",
+      "version": "0.1.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.7",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.33",
+      "version": "0.1.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "adam.gleitman@gmail.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2",
+            "comment": "Update test snapshots"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.4",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.9",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.6",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/text to v0.15.0",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.0",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.32",
       "version": "0.1.32",

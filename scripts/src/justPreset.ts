@@ -12,6 +12,7 @@ const { ts } = require('./tasks/ts');
 const { eslint } = require('./tasks/eslint');
 const { depcheckTask } = require('./tasks/depcheck');
 const { checkForModifiedFiles } = require('./tasks/checkForModifiedFilesTask');
+const { findGitRoot } = require('workspace-tools');
 
 export function preset() {
   // this add s a resolve path for the build tooling deps like TS from the scripts folder
@@ -35,7 +36,11 @@ export function preset() {
   task('ts:esm', ts.esm);
   task('eslint', eslint);
   task('ts:commonjs-only', ts.commonjsOnly);
-  task('prettier', () => (argv().fix ? prettierTask({ files: ['src/.'] }) : prettierCheckTask({ files: ['src/.'] })));
+  task('prettier', () =>
+    argv().fix
+      ? prettierTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') })
+      : prettierCheckTask({ files: ['src/.'], ignorePath: path.join(findGitRoot(process.cwd()), '.prettierignore') }),
+  );
   task('checkForModifiedFiles', checkForModifiedFiles);
   task('tsall', parallel('ts:commonjs', 'ts:esm'));
   task(
