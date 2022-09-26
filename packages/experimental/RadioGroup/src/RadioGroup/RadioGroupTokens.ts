@@ -8,5 +8,8 @@ export const defaultRadioGroupTokens: TokenSettings<RadioGroupTokens, Theme> = (
     variant: 'subtitle2Strong',
     disabled: {
       color: t.colors.neutralForegroundDisabled,
+      fontFamily: 'Segoe UI',
+      fontSize: 16,
+      fontWeight: '600',
     },
   } as RadioGroupTokens);
