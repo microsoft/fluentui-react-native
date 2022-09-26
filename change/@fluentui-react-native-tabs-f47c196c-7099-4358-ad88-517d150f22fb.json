@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "use PressablePropsExtended",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
