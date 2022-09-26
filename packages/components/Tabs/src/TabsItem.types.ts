@@ -1,16 +1,14 @@
 import * as React from 'react';
 import { ViewProps } from 'react-native';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import type { IViewProps } from '@fluentui-react-native/adapters';
-import { IFocusable, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import { ITextProps } from '@fluentui-react-native/text';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { FontTokens, IBackgroundColorTokens, IBorderTokens, IForegroundColorTokens } from '@fluentui-react-native/tokens';
-import { IPressableProps } from '@fluentui-react-native/pressable';
 
 export const tabsItemName = 'TabsItem';
 
-export interface TabsItemInfo extends IPressableState {
+export interface TabsItemInfo extends PressableState {
   /**
    * TabsItem icon.
    */
@@ -36,7 +34,7 @@ export interface TabsItemState {
   info: TabsItemInfo;
 }
 
-export interface TabsItemProps extends IPressableProps {
+export interface TabsItemProps extends PressablePropsExtended {
   /**
    * The text string for the option.
    */
@@ -103,7 +101,7 @@ export interface TabsItemTokens extends IForegroundColorTokens, FontTokens, IBac
 }
 
 export interface TabsItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   stack: ViewProps;
   icon: IconProps;
   content: ITextProps;

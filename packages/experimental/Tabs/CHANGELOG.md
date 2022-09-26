@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Thu, 22 Sep 2022 00:31:25 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.17
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Use IPressableProps (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+- Bump @fluentui-react-native/focus-zone to v0.10.14
 
 ## 0.5.16
 
