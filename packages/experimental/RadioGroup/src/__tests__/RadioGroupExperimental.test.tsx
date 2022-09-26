@@ -1,11 +1,32 @@
 import * as React from 'react';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
+import { Radio } from '../Radio/Radio';
+import { View } from 'react-native';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 describe('RadioGroup component tests', () => {
   it('RadioGroup default', () => {
-    const tree = renderer.create(<RadioGroup>Your component</RadioGroup>).toJSON();
+    const tree = renderer
+      .create(
+        <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
+          <Radio value="key1" label="RadioButton1" />
+          <Radio value="key2" label="RadioButton2" />
+        </RadioGroup>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Radio not direct child of radio group', () => {
+    const tree = renderer.create(
+      <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
+        <View>
+          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+        </View>
+      </RadioGroup>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -16,6 +37,4 @@ describe('RadioGroup component tests', () => {
   it('RadioGroup re-renders correctly', () => {
     checkReRender(() => <RadioGroup>Render twice</RadioGroup>, 2);
   });
-
-  // Feel free to add more tests here
 });
