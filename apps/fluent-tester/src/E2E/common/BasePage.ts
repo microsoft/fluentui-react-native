@@ -219,7 +219,8 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
-  async GetFirstScrollViewButtonChild() {
+  static async GetFirstScrollViewButtonChild() {
+    console.log('\nRunning static logic.\n')
     const ScrollViewer = await GetElement('SCROLLVIEW_TEST_ID');
     const TestChildren = await ScrollViewer.$$('//*');
     const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
@@ -288,7 +289,7 @@ export class BasePage {
   }
 
   get _firstTestPageButton() {
-    return this.GetFirstScrollViewButtonChild();
+    return BasePage.GetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/
