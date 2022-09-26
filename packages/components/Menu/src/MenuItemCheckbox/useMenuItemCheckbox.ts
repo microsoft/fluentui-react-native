@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AccessibilityActionEvent, AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemCheckboxProps, MenuItemCheckboxState } from './MenuItemCheckbox.types';
+import { MenuItemCheckboxProps, MenuItemCheckboxInfo } from './MenuItemCheckbox.types';
 import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
@@ -16,7 +16,7 @@ import { useMenuContext } from '../context/menuContext';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
-export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheckboxState => {
+export const useMenuItemCheckbox = (props: MenuItemCheckboxProps): MenuItemCheckboxInfo => {
   const { disabled, name } = props;
   const context = useMenuListContext();
   const checked = context.checked?.[name];

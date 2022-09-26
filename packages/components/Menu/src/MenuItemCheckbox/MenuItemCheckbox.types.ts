@@ -40,7 +40,7 @@ export interface MenuItemCheckboxProps extends MenuItemProps {
    */
   name: string;
 }
-export interface MenuItemCheckboxState {
+export interface MenuItemCheckboxInfo {
   props: MenuItemCheckboxProps & React.ComponentPropsWithRef<any>;
   state: PressableState;
 }

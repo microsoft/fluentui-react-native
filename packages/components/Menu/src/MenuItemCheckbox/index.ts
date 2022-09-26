@@ -3,6 +3,7 @@ export { menuItemCheckboxName } from './MenuItemCheckbox.types';
 export type {
   MenuItemCheckboxProps,
   MenuItemCheckboxState,
+  MenuItemCheckboxInfo,
   MenuItemCheckboxTokens,
   MenuItemCheckboxSlotProps,
   MenuItemCheckboxType,

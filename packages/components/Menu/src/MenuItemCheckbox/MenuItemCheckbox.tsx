@@ -7,7 +7,7 @@ import {
   menuItemCheckboxName,
   MenuItemCheckboxProps,
   MenuItemCheckboxSlotProps,
-  MenuItemCheckboxState,
+  MenuItemCheckboxInfo,
   MenuItemCheckboxType,
 } from './MenuItemCheckbox.types';
 import { useMenuItemCheckbox } from './useMenuItemCheckbox';
@@ -32,7 +32,7 @@ export const MenuItemCheckbox = compose<MenuItemCheckboxType>({
 });
 
 export const menuItemFinalRender = (
-  menuItem: MenuItemCheckboxState,
+  menuItem: MenuItemCheckboxInfo,
   Slots: Slots<MenuItemCheckboxSlotProps>,
 ): React.FunctionComponent<MenuItemCheckboxProps> => {
   return (final: MenuItemCheckboxProps, children: React.ReactNode) => {

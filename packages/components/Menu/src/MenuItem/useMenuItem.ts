@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemProps, MenuItemState } from './MenuItem.types';
+import { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
@@ -16,7 +16,7 @@ import { useMenuTriggerContext } from '../context/menuTriggerContext';
 export const triggerKeys = [' ', 'Enter'];
 export const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
 
-export const useMenuItem = (props: MenuItemProps): MenuItemState => {
+export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;

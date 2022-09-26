@@ -60,16 +60,18 @@ export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
   persistOnClick?: boolean;
 }
 
-export interface MenuItemState {
-  props: MenuItemProps & React.ComponentPropsWithRef<any>;
-  state: PressableState & {
-    hasCheckmarks?: boolean;
+export interface MenuItemState extends PressableState {
+  hasCheckmarks?: boolean;
 
-    /**
-     * If the menu item is a trigger for a submenu
-     */
-    hasSubmenu?: boolean;
-  };
+  /**
+   * If the menu item is a trigger for a submenu
+   */
+  hasSubmenu?: boolean;
+}
+
+export interface MenuItemInfo {
+  props: MenuItemProps & React.ComponentPropsWithRef<any>;
+  state: MenuItemState;
 }
 
 export interface MenuItemSlotProps {
