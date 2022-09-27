@@ -87,7 +87,7 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessible: true,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: getAccessibilityState(state.selected, !!selectedInfo.required, accessibilityState),
+      accessibilityState: getAccessibilityState(state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
       accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
       accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
@@ -100,9 +100,9 @@ export const useRadio = (props: RadioProps): RadioState => {
 };
 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(selected: boolean, required: boolean, accessibilityState?: AccessibilityState) {
+function getAccessibilityStateWorker(selected: boolean, accessibilityState?: AccessibilityState) {
   if (accessibilityState) {
-    return { selected, required, ...accessibilityState };
+    return { selected, ...accessibilityState };
   }
-  return { selected, required };
+  return { selected };
 }
