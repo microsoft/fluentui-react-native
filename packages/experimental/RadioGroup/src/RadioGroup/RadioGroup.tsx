@@ -35,7 +35,7 @@ export const RadioGroup = compose<RadioGroupType>({
       const labelComponent = (
         <Slots.label>
           <Slots.labelText key="label">{label}</Slots.labelText>
-          {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
+          {!!required && <Slots.required>{'*'}</Slots.required>}
         </Slots.label>
       );
 
