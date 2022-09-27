@@ -33,12 +33,10 @@ export const RadioGroup = compose<RadioGroupType>({
       const { label, required, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(radioGroup.props, final);
 
       const labelComponent = (
-        <React.Fragment>
-          <Slots.label>
-            <Slots.labelText key="label">{label}</Slots.labelText>
-            {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
-          </Slots.label>
-        </React.Fragment>
+        <Slots.label>
+          <Slots.labelText key="label">{label}</Slots.labelText>
+          {!!required && <Slots.required>{typeof required === 'string' ? required : '*'}</Slots.required>}
+        </Slots.label>
       );
 
       // Populate the buttonKeys array
