@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 27 Sep 2022 18:09:32 GMT",
+      "tag": "@fluentui-react-native/tester_v0.98.0",
+      "version": "0.98.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "5c4cefd465abfd995506a04679a312314cd411a0",
+            "comment": "Added disabled RadioGroup to tester page"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.4.0",
+            "commit": "5c4cefd465abfd995506a04679a312314cd411a0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 26 Sep 2022 02:39:40 GMT",
       "tag": "@fluentui-react-native/tester_v0.97.1",
       "version": "0.97.1",
