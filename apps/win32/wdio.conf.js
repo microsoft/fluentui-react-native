@@ -108,7 +108,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: async function () {
-    //await browser.maximizeWindow();
+    await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -126,7 +126,7 @@ exports.config = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  // beforeTest: function (test, context) => {
+  // beforeTest: function (test, context) {
   // },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
