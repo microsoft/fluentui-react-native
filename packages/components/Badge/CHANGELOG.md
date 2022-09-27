@@ -1,8 +1,54 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.34
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+
+## 0.1.33
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Update test snapshots (adam.gleitman@gmail.com)
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/icon to v0.13.9
+- Bump @fluentui-react-native/interactive-hooks to v0.18.6
+- Bump @fluentui-react-native/text to v0.15.0
+- Bump @fluentui-react-native/tokens to v0.17.0
+
+## 0.1.32
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/icon to v0.13.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/text to v0.14.4
+- Bump @fluentui-react-native/tokens to v0.16.2
+
+## 0.1.31
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/icon to v0.13.7
+- Bump @fluentui-react-native/interactive-hooks to v0.18.4
+- Bump @fluentui-react-native/text to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.16.1
 
 ## 0.1.30
 

@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/codemods",
+  "entries": [
+    {
+      "date": "Thu, 22 Sep 2022 18:51:04 GMT",
+      "tag": "@fluentui-react-native/codemods_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/codemods",
+            "commit": "1160d21823f10486e0c7bf9624aa2b43e0f13664",
+            "comment": "Add button-v0-to-button-v1 script"
+          }
+        ]
+      }
+    }
+  ]
+}

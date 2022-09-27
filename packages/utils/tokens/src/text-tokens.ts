@@ -19,19 +19,28 @@ export interface FontStyleTokens {
 export type FontTokens = FontStyleTokens & FontVariantTokens;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
-  from: ({ fontFamily, fontSize, fontWeight, variant }: FontTokens, { typography }: Theme) => {
+  from: ({ fontFamily, fontLetterSpacing, fontLineHeight, fontSize, fontWeight, variant }: FontTokens, { typography }: Theme) => {
     const { families, sizes, weights, variants } = typography;
-    if (fontFamily || fontSize || fontWeight || variant) {
+    if (
+      fontFamily !== undefined ||
+      fontLetterSpacing !== undefined ||
+      fontLineHeight !== undefined ||
+      fontSize !== undefined ||
+      fontWeight !== undefined ||
+      variant !== undefined
+    ) {
       return {
-        fontFamily: families[fontFamily] || fontFamily || families[variants[variant].face] || variants[variant].face,
-        fontSize: sizes[fontSize] || fontSize || sizes[variants[variant].size] || variants[variant].size,
-        fontWeight: weights[fontWeight] || fontWeight || weights[variants[variant].weight] || variants[variant].weight,
+        fontFamily: families[fontFamily] ?? fontFamily ?? families[variants[variant]?.face] ?? variants[variant]?.face,
+        fontSize: sizes[fontSize] ?? fontSize ?? sizes[variants[variant]?.size] ?? variants[variant]?.size,
+        fontWeight: weights[fontWeight] ?? fontWeight ?? weights[variants[variant]?.weight] ?? variants[variant]?.weight,
+        lineHeight: fontLineHeight ?? variants[variant]?.lineHeight,
+        letterSpacing: fontLetterSpacing ?? variants[variant]?.letterSpacing,
       };
     }
 
     return {};
   },
-  keys: ['fontFamily', 'fontSize', 'fontWeight', 'variant'],
+  keys: ['fontFamily', 'fontLineHeight', 'fontLetterSpacing', 'fontSize', 'fontWeight', 'variant'],
 };
 
 function _buildTextStyles(tokens: FontTokens, theme: Theme): ITextProps {
