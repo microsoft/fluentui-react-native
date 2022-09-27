@@ -16,6 +16,8 @@ const styles = StyleSheet.create({
 
 export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [borderColor, setBorderColor] = React.useState<string>('black');
+  const [borderStyle, setBorderStyle] = React.useState<string>('solid');
+  const [borderWidth, setBorderWidth] = React.useState<number>(1);
   const [radioBorder, setRadioBorder] = React.useState<string>('transparent');
 
   const CustomRadioGroup = React.useMemo(() => {
