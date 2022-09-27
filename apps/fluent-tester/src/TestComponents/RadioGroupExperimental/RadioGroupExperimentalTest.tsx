@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from './consts';
 import { DefaultRadioGroup } from './DefaultRadioGroup';
+import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
@@ -14,6 +15,11 @@ const radioGroupExperimentalSections: TestSection[] = [
     name: 'Disabled RadioGroup',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: DisabledRadioGroup,
+  },
+  {
+    name: 'Required RadioGroup',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: RequiredRadioGroup,
   },
 ];
 
