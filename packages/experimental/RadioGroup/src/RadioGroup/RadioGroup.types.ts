@@ -43,11 +43,6 @@ export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
    * Amount of padding between the end of the label and the start of the required text
    */
   requiredPadding?: ViewStyle['padding'];
-
-  /**
-   * States that can be applied to a RadioGroup
-   */
-  required?: RadioGroupTokens;
 }
 
 export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
