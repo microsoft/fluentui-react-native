@@ -84,7 +84,7 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessible: true,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: { disabled: state.disabled, selected: state.selected },
+      accessibilityState: { disabled: state.disabled, selected: state.selected, required: !!selectedInfo.required },
       accessibilityActions: accessibilityActionsProp,
       accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
       accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
