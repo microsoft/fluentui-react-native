@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radio component tests Radio default 1`] = `
+<View
+  accessibilityActions={[Function]}
+  accessibilityLabel="Default Radio"
+  accessibilityPositionInSet={0}
+  accessibilityRole="radio"
+  accessibilitySetSize={0}
+  accessibilityState={
+    Object {
+      "disabled": false,
+      "selected": false,
+    }
+  }
+  accessible={true}
+  enableFocusRing={true}
+  focusable={true}
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "borderRadius": 4,
+      "display": "flex",
+      "flexDirection": "row",
+      "marginTop": 0,
+      "minHeight": 20,
+    }
+  }
+  value="key1"
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#616161",
+        "borderRadius": 10,
+        "borderStyle": "solid",
+        "borderWidth": 1,
+        "height": 20,
+        "left": 0,
+        "marginBottom": 6,
+        "marginLeft": 6,
+        "marginRight": 6,
+        "marginTop": 4,
+        "top": 0,
+        "width": 20,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": undefined,
+          "borderRadius": 5,
+          "height": 10,
+          "left": 4,
+          "opacity": 0,
+          "top": 4,
+          "width": 10,
+        }
+      }
+    />
+  </View>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#616161",
+        "fontFamily": "Segoe UI",
+        "fontSize": 16,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginTop": 2,
+      }
+    }
+  >
+    Default Radio
+  </Text>
+</View>
+`;
