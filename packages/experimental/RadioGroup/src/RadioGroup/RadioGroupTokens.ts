@@ -6,4 +6,7 @@ export const defaultRadioGroupTokens: TokenSettings<RadioGroupTokens, Theme> = (
   ({
     color: t.colors.menuItemText,
     variant: 'subtitle2Strong',
+    disabled: {
+      color: t.colors.neutralForegroundDisabled,
+    },
   } as RadioGroupTokens);
