@@ -12,7 +12,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxBorderWidth: globalTokens.stroke.width.thin,
       checkboxBorderRadius: globalTokens.corner.radius.small,
       checkboxSize: 16,
-      checkmarkSize: 8,
+      checkmarkSize: 12,
       label: {
         padding: globalTokens.spacing.s,
         borderRadius: globalTokens.corner.radius.medium,
@@ -30,7 +30,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxBorderWidth: globalTokens.stroke.width.thin,
       checkboxBorderRadius: globalTokens.corner.radius.small,
       checkboxSize: 20,
-      checkmarkSize: 10,
+      checkmarkSize: 16,
       label: {
         padding: globalTokens.spacing.s,
         borderRadius: globalTokens.corner.radius.medium,

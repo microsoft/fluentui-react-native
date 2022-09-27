@@ -55,9 +55,10 @@ export const useRadio = (props: RadioProps): RadioState => {
     onFocus: changeSelection,
   });
 
-  const accessibilityActionsProp = React.useMemo(() => {
-    accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions;
-  }, [accessibilityActions]);
+  const accessibilityActionsProp = React.useMemo(
+    () => (accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions),
+    [accessibilityActions],
+  );
 
   // Used when creating accessibility properties in mergeSettings below
   const onAccessibilityAction = React.useCallback(
@@ -74,7 +75,7 @@ export const useRadio = (props: RadioProps): RadioState => {
   const state = {
     ...pressable.state,
     selected: selectedInfo.value === props.value,
-    disabled: disabled || false,
+    disabled: selectedInfo.disabled || disabled || false,
   };
 
   return {
@@ -87,7 +88,7 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessible: true,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: getAccessibilityState(state.selected, accessibilityState),
+      accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
       accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
       accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
@@ -100,9 +101,9 @@ export const useRadio = (props: RadioProps): RadioState => {
 };
 
 const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(selected: boolean, accessibilityState?: AccessibilityState) {
+function getAccessibilityStateWorker(disabled: boolean, selected: boolean, accessibilityState?: AccessibilityState) {
   if (accessibilityState) {
-    return { selected, ...accessibilityState };
+    return { disabled, selected, ...accessibilityState };
   }
-  return { selected };
+  return { disabled, selected };
 }

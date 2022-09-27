@@ -2,8 +2,11 @@ import { radioGroupName, RadioGroupTokens, RadioGroupSlotProps, RadioGroupProps 
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultRadioGroupTokens } from './RadioGroupTokens';
 
+export const radioGroupStates: (keyof RadioGroupTokens)[] = ['disabled'];
+
 export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotProps, RadioGroupTokens> = {
   tokens: [defaultRadioGroupTokens, radioGroupName],
+  states: radioGroupStates,
   slotProps: {
     root: buildProps(() => ({
       style: {
@@ -25,9 +28,10 @@ export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotP
         variant: tokens.variant,
         style: {
           color: tokens.color,
+          ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color'],
+      ['color', ...fontStyles.keys],
     ),
     required: buildProps(
       (tokens: RadioGroupTokens) => ({
