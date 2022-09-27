@@ -2,9 +2,11 @@ import * as React from 'react';
 import { RadioGroupInfo, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-hooks';
 import { View } from 'react-native';
+import { memoize } from '@fluentui-react-native/framework';
+import { AccessibilityState } from 'react-native';
 
 export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
-  const { value, defaultValue, required, onChange, isCircularNavigation, accessibilityLabel, label } = props;
+  const { value, defaultValue, required, onChange, isCircularNavigation, accessibilityLabel, label, accessibilityState } = props;
 
   // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
   const data = useValue(value || defaultValue || null, onChange);
@@ -32,7 +34,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
       accessible: true,
       accessibilityRole: 'radiogroup',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: { required: state.required },
+      accessibilityState: getAccessibilityState(state.required, accessibilityState),
       defaultTabbableElement: selectedButtonRef,
       isCircularNavigation: isCircularNavigation ?? true,
     },
@@ -41,3 +43,11 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(required: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { required, ...accessibilityState };
+  }
+  return { required };
+}
