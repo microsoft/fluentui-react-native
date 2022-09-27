@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added disabled RadioGroup to tester page",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "gulnazsayed@microsoft.com",
-  "dependentChangeType": "patch"
-}
