@@ -43,7 +43,8 @@ export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
    * Amount of padding between the end of the label and the start of the required text
    */
   requiredPadding?: ViewStyle['padding'];
-  
+
+  /**
    * States that can be applied to a RadioGroup
    */
   disabled?: RadioGroupTokens;
@@ -71,7 +72,8 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
    * Require a selection in this group. Adds the 'required' prop to all child Radio items.
    */
   required?: boolean;
-  
+
+  /**
    * Sets the RadioGroup to disabled if true
    */
   disabled?: boolean;
