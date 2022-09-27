@@ -219,19 +219,19 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
-  // async SetFirstScrollViewButtonChild() {
-  //   const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
-  //   const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
+  async SetFirstScrollViewButtonChild() {
+    const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
+    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
 
-  //   for (const child of TestChildren) {
-  //     const autoId = await child.getAttribute('AutomationId');
-  //     if (autoId && autoId !== 'SCROLLVIEW_TEST_ID' && autoId.match(reg)) {
-  //       return await child;
-  //     }
-  //   }
+    for (const child of TestChildren) {
+      const autoId = await child.getAttribute('AutomationId');
+      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID' && autoId.match(reg)) {
+        return await child;
+      }
+    }
 
-  //   return null;
-  // }
+    return null;
+  }
 
   /*****************************************/
   /**************** Getters ****************/
@@ -285,8 +285,7 @@ export class BasePage {
   }
 
   get _firstTestPageButton() {
-    //return this.SetFirstScrollViewButtonChild();
-    return GetElement('Homepage_ActivityIndicator_Button');
+    return this.SetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/
