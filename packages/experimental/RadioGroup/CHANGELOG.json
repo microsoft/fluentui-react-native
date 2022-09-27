@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Tue, 27 Sep 2022 20:55:52 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "93fb68fc7b815141a45c275b56330761ff210c38",
+            "comment": "Added required prop to RadioGroup"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 27 Sep 2022 18:09:31 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.4.0",
       "version": "0.4.0",
