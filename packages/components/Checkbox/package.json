@@ -38,7 +38,7 @@
     "@uifabricshared/foundation-compose": "^1.12.5",
     "@uifabricshared/foundation-composable": ">=0.11.0 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.12.0 <1.0.0",
-    "react-native-svg": "^12.3.0",
+    "react-native-svg": "12.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
