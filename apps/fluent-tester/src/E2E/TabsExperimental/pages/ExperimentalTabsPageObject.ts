@@ -4,21 +4,21 @@ import {
   EXPERIMENTAL_TABS_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TABS_BUTTON,
 } from '../../../TestComponents/TabsExperimental/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class ExperimentalTabsPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getTabItemAccesibilityRole(): Promise<string> {
-    return await this._tabItem.getAttribute('ControlType');
+    return await (await this._tabItem).getAttribute('ControlType');
   }
 
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(EXPERIMENTAL_TABS_TESTPAGE);
+    return GetElement(EXPERIMENTAL_TABS_TESTPAGE);
   }
 
   get _pageName() {
@@ -26,18 +26,18 @@ class ExperimentalTabsPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_TABS_TEST_COMPONENT);
+    return GetElement(EXPERIMENTAL_TABS_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+    return GetElement(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
   }
 
   /***********/
   /* TabItem *
   /***********/
   get _tabItem() {
-    return By(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT);
+    return GetElement(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT);
   }
 }
 

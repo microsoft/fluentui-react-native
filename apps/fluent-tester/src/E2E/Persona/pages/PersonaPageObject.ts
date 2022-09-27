@@ -1,12 +1,12 @@
 import { PERSONA_TESTPAGE, PERSONA_TEST_COMPONENT, HOMEPAGE_PERSONA_BUTTON } from '../../../TestComponents/Persona/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class PersonaPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(PERSONA_TESTPAGE);
+    return GetElement(PERSONA_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class PersonaPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(PERSONA_TEST_COMPONENT);
+    return GetElement(PERSONA_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_PERSONA_BUTTON);
+    return GetElement(HOMEPAGE_PERSONA_BUTTON);
   }
 }
 

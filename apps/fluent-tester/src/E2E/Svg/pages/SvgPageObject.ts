@@ -1,12 +1,12 @@
 import { SVG_TESTPAGE, SVG_TEST_COMPONENT, HOMEPAGE_SVG_BUTTON } from '../../../TestComponents/Svg/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class SvgPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(SVG_TESTPAGE);
+    return GetElement(SVG_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class SvgPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(SVG_TEST_COMPONENT);
+    return GetElement(SVG_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_SVG_BUTTON);
+    return GetElement(HOMEPAGE_SVG_BUTTON);
   }
 }
 

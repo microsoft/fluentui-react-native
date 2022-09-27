@@ -9,7 +9,7 @@ import {
   SECOND_TABS_ITEM_CONTENT,
   THIRD_TABS_ITEM_CONTENT,
 } from '../../../TestComponents/Tabs/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page.
@@ -76,7 +76,7 @@ class TabsPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(TABS_TESTPAGE);
+    return GetElement(TABS_TESTPAGE);
   }
 
   get _pageName() {
@@ -84,37 +84,37 @@ class TabsPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(TABS_TEST_COMPONENT);
+    return GetElement(TABS_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_TABS_BUTTON);
+    return GetElement(HOMEPAGE_TABS_BUTTON);
   }
 
   /* The first tab group has 3 Tab item headers, all listed below */
   get _firstTabItem() {
-    return By(FIRST_TABS_ITEM);
+    return GetElement(FIRST_TABS_ITEM);
   }
 
   get _secondTabItem() {
-    return By(SECOND_TABS_ITEM);
+    return GetElement(SECOND_TABS_ITEM);
   }
 
   get _thirdTabItem() {
-    return By(THIRD_TABS_ITEM);
+    return GetElement(THIRD_TABS_ITEM);
   }
 
   /* Content shown when tab item is clicked */
   get _firstTabItemContent() {
-    return By(FIRST_TABS_ITEM_CONTENT);
+    return GetElement(FIRST_TABS_ITEM_CONTENT);
   }
 
   get _secondTabItemContent() {
-    return By(SECOND_TABS_ITEM_CONTENT);
+    return GetElement(SECOND_TABS_ITEM_CONTENT);
   }
 
   get _thirdTabItemContent() {
-    return By(THIRD_TABS_ITEM_CONTENT);
+    return GetElement(THIRD_TABS_ITEM_CONTENT);
   }
 }
 

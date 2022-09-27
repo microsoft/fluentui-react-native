@@ -8,7 +8,7 @@ import {
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
 } from '../../../TestComponents/Menu/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -23,7 +23,7 @@ class MenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didMenuOpen(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_OPEN);
+    const callbackText = await GetElement(MENU_ON_OPEN);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUIEvent,
       timeoutMsg: 'The Menu did not open.',
@@ -34,7 +34,7 @@ class MenuPageObject extends BasePage {
   }
 
   async didMenuClose(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_CLOSE);
+    const callbackText = await GetElement(MENU_ON_CLOSE);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUIEvent,
       timeoutMsg: 'The Menu did not close.',
@@ -47,22 +47,22 @@ class MenuPageObject extends BasePage {
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
     switch (componentSelector) {
       case MenuComponentSelector.PrimaryComponent:
-        return await this._primaryComponent.getAttribute('Name');
+        return await (await this._primaryComponent).getAttribute('Name');
 
       case MenuComponentSelector.SecondaryComponent:
-        return await this._secondaryComponent.getAttribute('Name');
+        return await (await this._secondaryComponent).getAttribute('Name');
 
       case MenuComponentSelector.TertiaryComponent:
-        return await this._tertiaryComponent.getAttribute('Name');
+        return await (await this._tertiaryComponent).getAttribute('Name');
     }
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
-    return await this._menuPopoverComponent.getAttribute('ControlType');
+    return await (await this._menuPopoverComponent).getAttribute('ControlType');
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return await this._secondaryComponent.getAttribute('ControlType');
+    return await (await this._secondaryComponent).getAttribute('ControlType');
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -82,7 +82,7 @@ class MenuPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(MENU_TESTPAGE);
+    return GetElement(MENU_TESTPAGE);
   }
 
   get _pageName() {
@@ -90,23 +90,23 @@ class MenuPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(MENUTRIGGER_TEST_COMPONENT);
+    return GetElement(MENUTRIGGER_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(MENUITEM_TEST_COMPONENT);
+    return GetElement(MENUITEM_TEST_COMPONENT);
   }
 
   get _tertiaryComponent() {
-    return By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(MENUITEM_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_MENU_BUTTON);
+    return GetElement(HOMEPAGE_MENU_BUTTON);
   }
 
   get _menuPopoverComponent() {
-    return By(MENUPOPOVER_TEST_COMPONENT);
+    return GetElement(MENUPOPOVER_TEST_COMPONENT);
   }
 }
 

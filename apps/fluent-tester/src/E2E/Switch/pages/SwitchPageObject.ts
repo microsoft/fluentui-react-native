@@ -5,7 +5,7 @@ import {
   HOMEPAGE_SWITCH_BUTTON,
   SWITCH_ON_PRESS,
 } from '../../../TestComponents/Switch/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -19,7 +19,7 @@ class SwitchPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isSwitchChecked(): Promise<boolean> {
-    return await this._primaryComponent.isSelected();
+    return await (await this._primaryComponent).isSelected();
   }
 
   async waitForSwitchChecked(timeout?: number): Promise<void> {
@@ -32,12 +32,12 @@ class SwitchPageObject extends BasePage {
 
   async toggleSwitchToUnchecked(): Promise<void> {
     if (await this.isSwitchChecked()) {
-      await this._primaryComponent.click();
+      await (await this._primaryComponent).click();
     }
   }
 
   async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(SWITCH_ON_PRESS);
+    const callbackText = await GetElement(SWITCH_ON_PRESS);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUIEvent,
       timeoutMsg: 'The OnChange callback did not fire.',
@@ -66,7 +66,7 @@ class SwitchPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(SWITCH_TESTPAGE);
+    return GetElement(SWITCH_TESTPAGE);
   }
 
   get _pageName() {
@@ -74,15 +74,15 @@ class SwitchPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(SWITCH_TEST_COMPONENT);
+    return GetElement(SWITCH_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(SWITCH_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(SWITCH_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_SWITCH_BUTTON);
+    return GetElement(HOMEPAGE_SWITCH_BUTTON);
   }
 }
 

@@ -1,12 +1,12 @@
 import { HOMEPAGE_SHIMMER_BUTTON, SHIMMER_TESTPAGE, SHIMMER_TEST_COMPONENT } from '../../../TestComponents/Shimmer/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class ShimmerPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(SHIMMER_TESTPAGE);
+    return GetElement(SHIMMER_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class ShimmerPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(SHIMMER_TEST_COMPONENT);
+    return GetElement(SHIMMER_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_SHIMMER_BUTTON);
+    return GetElement(HOMEPAGE_SHIMMER_BUTTON);
   }
 }
 

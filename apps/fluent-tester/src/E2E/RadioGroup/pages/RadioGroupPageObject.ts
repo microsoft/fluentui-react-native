@@ -8,7 +8,7 @@ import {
   THIRD_RADIO_BUTTON,
   FOURTH_RADIO_BUTTON,
 } from '../../../TestComponents/RadioGroup/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The main RadioGroup we are testing has FOUR RadioButtons. The spec file will
@@ -32,11 +32,11 @@ class RadioGroupPage extends BasePage {
   /* This resets the RadioGroup selection by clicking/selecting the 1st RadioButton in the RadioGroup.
    * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
   async resetRadioGroupSelection(): Promise<void> {
-    await this._firstRadioButton.click();
+    await (await this._firstRadioButton).click();
   }
 
   async getRadioButtonAccesibilityRole(): Promise<string> {
-    return await this._firstRadioButton.getAttribute('ControlType');
+    return await (await this._firstRadioButton).getAttribute('ControlType');
   }
 
   async isRadioButtonSelected(radioButtonSelector: RadioButtonSelector): Promise<boolean> {
@@ -77,7 +77,7 @@ class RadioGroupPage extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(RADIOGROUP_TESTPAGE);
+    return GetElement(RADIOGROUP_TESTPAGE);
   }
 
   get _pageName() {
@@ -85,15 +85,15 @@ class RadioGroupPage extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(RADIOGROUP_TEST_COMPONENT);
+    return GetElement(RADIOGROUP_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(RADIOGROUP_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_RADIOGROUP_BUTTON);
+    return GetElement(HOMEPAGE_RADIOGROUP_BUTTON);
   }
 
   /***************/
@@ -102,19 +102,19 @@ class RadioGroupPage extends BasePage {
 
   /* The first RadioGroup has 4 radio buttons, all listed below */
   get _firstRadioButton() {
-    return By(FIRST_RADIO_BUTTON);
+    return GetElement(FIRST_RADIO_BUTTON);
   }
 
   get _secondRadioButton() {
-    return By(SECOND_RADIO_BUTTON);
+    return GetElement(SECOND_RADIO_BUTTON);
   }
 
   get _thirdRadioButton() {
-    return By(THIRD_RADIO_BUTTON);
+    return GetElement(THIRD_RADIO_BUTTON);
   }
 
   get _fourthRadioButton() {
-    return By(FOURTH_RADIO_BUTTON);
+    return GetElement(FOURTH_RADIO_BUTTON);
   }
 }
 

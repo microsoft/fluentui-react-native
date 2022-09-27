@@ -1,4 +1,4 @@
-import { BasePage, By } from '../../../common/BasePage';
+import { BasePage, GetElement } from '../../../common/BasePage';
 
 const ScrollViewTestId = 'SCROLLVIEW_TEST_ID';
 
@@ -13,14 +13,14 @@ class NativeTestingPageObject extends BasePage {
   }
 
   async doesScrollViewParentExist(): Promise<boolean> {
-    return await this._scrollViewParent.isExisting();
+    return await (await this._scrollViewParent).isExisting();
   }
 
   /* Validate the Children of the ScrollView stay intact. The children are the buttons that
    * navigate to each test page. Also, validate these children exist with the proper testId format */
   async validateScrollViewChildren(): Promise<boolean> {
     // Gets all the children
-    const testChildren = await this._scrollViewParent.$$('//*');
+    const testChildren = await (await this._scrollViewParent).$$('//*');
     let foundValidButton = false;
 
     // Ensure the testID (maps 1:1 to automationId) properties of the button children match the defined testing format
@@ -44,7 +44,7 @@ class NativeTestingPageObject extends BasePage {
   }
 
   get _scrollViewParent() {
-    return By(ScrollViewTestId);
+    return GetElement(ScrollViewTestId);
   }
 }
 

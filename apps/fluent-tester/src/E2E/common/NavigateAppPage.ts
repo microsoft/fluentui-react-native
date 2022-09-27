@@ -28,123 +28,123 @@ import { HOMEPAGE_TOKEN_BUTTON } from '../../TestComponents/Tokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../../TestComponents/Tabs/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../TestComponents/Theme/consts';
 import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
-import { By, BasePage } from './BasePage';
+import { GetElement, BasePage } from './BasePage';
 
 class NavigateAppPage extends BasePage {
   async clickAndGoToActivityIndicatorPage() {
-    await this.activityIndicatorPage.click();
+    await (await this.activityIndicatorPage).click();
   }
 
   async clickAndGoToAvatarPage() {
-    await this.avatarPage.click();
+    await (await this.avatarPage).click();
   }
 
   async clickAndGoToBadgePage() {
-    await this.badgePage.click();
+    await (await this.badgePage).click();
   }
 
   async clickAndGoToButtonPage() {
-    await this.buttonPage.click();
+    await (await this.buttonPage).click();
   }
 
   async clickAndGoToCalloutPage() {
-    await this.calloutPage.click();
+    await (await this.calloutPage).click();
   }
 
   async clickAndGoToCheckboxPage() {
-    await this.checkboxPage.click();
+    await (await this.checkboxPage).click();
   }
 
   async clickAndGoToCheckboxExperimentalPage() {
-    await this.checkboxExperimentalPage.click();
+    await (await this.checkboxExperimentalPage).click();
   }
 
   async clickAndGoToContextualMenuPage() {
-    await this.contextualMenuPage.click();
+    await (await this.contextualMenuPage).click();
   }
 
   async clickAndGoToFocusTrapZonePage() {
-    await this.focusTrapZonePage.click();
+    await (await this.focusTrapZonePage).click();
   }
 
   async clickAndGoToFocusZonePage() {
-    await this.focusZonePage.click();
+    await (await this.focusZonePage).click();
   }
 
   async clickAndGoToIconPage() {
-    await this.iconPage.click();
+    await (await this.iconPage).click();
   }
 
   async clickAndGoToLinkPage() {
-    await this.linkPage.click();
+    await (await this.linkPage).click();
   }
 
   async clickAndGoToMenuPage() {
-    await this.menuPage.click();
+    await (await this.menuPage).click();
   }
 
   async clickAndGoToMenuButtonPage() {
-    await this.menuButtonPage.click();
+    await (await this.menuButtonPage).click();
   }
 
   async clickAndGoToExperimentalMenuButtonPage() {
-    await this.menuButtonExperimentalPage.click();
+    await (await this.menuButtonExperimentalPage).click();
   }
 
   async clickAndGoToPersonaPage() {
-    await this.personaPage.click();
+    await (await this.personaPage).click();
   }
 
   async clickAndGoToPersonaCoinPage() {
-    await this.personaCoinPage.click();
+    await (await this.personaCoinPage).click();
   }
 
   async clickAndGoToPressablePage() {
-    await this.pressablePage.click();
+    await (await this.pressablePage).click();
   }
 
   async clickAndGoToRadioGroupPage() {
-    await this.radioGroupPage.click();
+    await (await this.radioGroupPage).click();
   }
 
   async clickAndGoToSeparatorPage() {
-    await this.separatorPage.click();
+    await (await this.separatorPage).click();
   }
 
   async clickAndGoToShimmerPage() {
-    await this.shimmerPage.click();
+    await (await this.shimmerPage).click();
   }
 
   async clickAndGoToSvgPage() {
-    await this.svgPage.click();
+    await (await this.svgPage).click();
   }
 
   async clickAndGoToSwitchPage() {
-    await this.switchPage.click();
+    await (await this.switchPage).click();
   }
 
   async clickAndGoToTextPage() {
-    await this.textPage.click();
+    await (await this.textPage).click();
   }
 
   async clickAndGoToExperimentalTextPage() {
-    await this.textExperimentalPage.click();
+    await (await this.textExperimentalPage).click();
   }
 
   async clickAndGoToTabsPage() {
-    await this.tabsPage.click();
+    await (await this.tabsPage).click();
   }
 
   async clickAndGoToThemePage() {
-    await this.themePage.click();
+    await (await this.themePage).click();
   }
 
   async clickAndGoToTokensPage() {
-    await this.tokensPage.click();
+    await (await this.tokensPage).click();
   }
 
   async clickAndGoToExperimentalTabsPage() {
-    await this.experimentalTabsPage.click();
+    await (await this.experimentalTabsPage).click();
   }
 
   /*
@@ -152,123 +152,123 @@ class NavigateAppPage extends BasePage {
    */
 
   get _testPage() {
-    return By(BASE_TESTPAGE);
+    return GetElement(BASE_TESTPAGE);
   }
 
   private get activityIndicatorPage() {
-    return By(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
+    return GetElement(HOMEPAGE_ACTIVITY_INDICATOR_BUTTON);
   }
 
   private get avatarPage() {
-    return By(HOMEPAGE_AVATAR_BUTTON);
+    return GetElement(HOMEPAGE_AVATAR_BUTTON);
   }
 
   private get badgePage() {
-    return By(HOMEPAGE_BADGE_BUTTON);
+    return GetElement(HOMEPAGE_BADGE_BUTTON);
   }
 
   private get buttonPage() {
-    return By(HOMEPAGE_BUTTON_BUTTON);
+    return GetElement(HOMEPAGE_BUTTON_BUTTON);
   }
 
   private get calloutPage() {
-    return By(HOMEPAGE_CALLOUT_BUTTON);
+    return GetElement(HOMEPAGE_CALLOUT_BUTTON);
   }
 
   private get checkboxPage() {
-    return By(HOMEPAGE_CHECKBOX_BUTTON);
+    return GetElement(HOMEPAGE_CHECKBOX_BUTTON);
   }
 
   private get checkboxExperimentalPage() {
-    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+    return GetElement(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
   }
 
   private get contextualMenuPage() {
-    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
+    return GetElement(HOMEPAGE_CONTEXTUALMENU_BUTTON);
   }
 
   private get focusTrapZonePage() {
-    return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
+    return GetElement(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
   }
 
   private get focusZonePage() {
-    return By(HOMEPAGE_FOCUSZONE_BUTTON);
+    return GetElement(HOMEPAGE_FOCUSZONE_BUTTON);
   }
 
   private get iconPage() {
-    return By(HOMEPAGE_ICON_BUTTON);
+    return GetElement(HOMEPAGE_ICON_BUTTON);
   }
 
   private get linkPage() {
-    return By(HOMEPAGE_LINK_BUTTON);
+    return GetElement(HOMEPAGE_LINK_BUTTON);
   }
 
   private get menuPage() {
-    return By(HOMEPAGE_MENU_BUTTON);
+    return GetElement(HOMEPAGE_MENU_BUTTON);
   }
 
   private get menuButtonPage() {
-    return By(HOMEPAGE_MENUBUTTON_BUTTON);
+    return GetElement(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   private get menuButtonExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
+    return GetElement(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
   }
 
   private get personaPage() {
-    return By(HOMEPAGE_PERSONA_BUTTON);
+    return GetElement(HOMEPAGE_PERSONA_BUTTON);
   }
 
   private get personaCoinPage() {
-    return By(HOMEPAGE_PERSONACOIN_BUTTON);
+    return GetElement(HOMEPAGE_PERSONACOIN_BUTTON);
   }
 
   private get pressablePage() {
-    return By(HOMEPAGE_PRESSABLE_BUTTON);
+    return GetElement(HOMEPAGE_PRESSABLE_BUTTON);
   }
 
   private get radioGroupPage() {
-    return By(HOMEPAGE_RADIOGROUP_BUTTON);
+    return GetElement(HOMEPAGE_RADIOGROUP_BUTTON);
   }
 
   private get separatorPage() {
-    return By(HOMEPAGE_SEPARATOR_BUTTON);
+    return GetElement(HOMEPAGE_SEPARATOR_BUTTON);
   }
 
   private get shimmerPage() {
-    return By(HOMEPAGE_SHIMMER_BUTTON);
+    return GetElement(HOMEPAGE_SHIMMER_BUTTON);
   }
 
   private get svgPage() {
-    return By(HOMEPAGE_SVG_BUTTON);
+    return GetElement(HOMEPAGE_SVG_BUTTON);
   }
 
   private get switchPage() {
-    return By(HOMEPAGE_SWITCH_BUTTON);
+    return GetElement(HOMEPAGE_SWITCH_BUTTON);
   }
 
   private get textPage() {
-    return By(HOMEPAGE_TEXT_BUTTON);
+    return GetElement(HOMEPAGE_TEXT_BUTTON);
   }
 
   private get textExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+    return GetElement(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
   }
 
   private get tabsPage() {
-    return By(HOMEPAGE_TABS_BUTTON);
+    return GetElement(HOMEPAGE_TABS_BUTTON);
   }
 
   private get themePage() {
-    return By(HOMEPAGE_THEME_BUTTON);
+    return GetElement(HOMEPAGE_THEME_BUTTON);
   }
 
   private get tokensPage() {
-    return By(HOMEPAGE_TOKEN_BUTTON);
+    return GetElement(HOMEPAGE_TOKEN_BUTTON);
   }
 
   private get experimentalTabsPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+    return GetElement(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
   }
 }
 

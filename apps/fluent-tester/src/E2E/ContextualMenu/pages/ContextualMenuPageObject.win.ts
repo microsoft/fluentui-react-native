@@ -4,7 +4,7 @@ import {
   HOMEPAGE_CONTEXTUALMENU_BUTTON,
   CONTEXTUALMENUITEM_TEST_COMPONENT,
 } from '../../../TestComponents/ContextualMenu/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -27,7 +27,7 @@ class ContextualMenuPageObject extends BasePage {
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async contextualMenuItemDisplayed(): Promise<boolean> {
-    return await this._contextualMenuItem.isDisplayed();
+    return await (await this._contextualMenuItem).isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -50,7 +50,7 @@ class ContextualMenuPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(CONTEXTUALMENU_TESTPAGE);
+    return GetElement(CONTEXTUALMENU_TESTPAGE);
   }
 
   get _pageName() {
@@ -58,15 +58,15 @@ class ContextualMenuPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(CONTEXTUALMENU_TEST_COMPONENT);
+    return GetElement(CONTEXTUALMENU_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
+    return GetElement(HOMEPAGE_CONTEXTUALMENU_BUTTON);
   }
 
   get _contextualMenuItem() {
-    return By(CONTEXTUALMENUITEM_TEST_COMPONENT);
+    return GetElement(CONTEXTUALMENUITEM_TEST_COMPONENT);
   }
 }
 

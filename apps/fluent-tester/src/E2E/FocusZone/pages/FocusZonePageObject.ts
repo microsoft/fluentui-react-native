@@ -1,19 +1,19 @@
 import { FOCUSZONE_TESTPAGE, FOCUSZONE_TEST_COMPONENT, HOMEPAGE_FOCUSZONE_BUTTON } from '../../../TestComponents/FocusZone/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class FocusZonePageObject extends BasePage {
   // OVERRIDE: We use isExisting() here instead of isDisplayed() because FocusZone does not have any UI to it, it's simply
   // a wrapper that adds keyboard focus functionality
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     const errorMsg = 'The FocusZone UI Element did not load correctly. Please see logs.';
-    await this.waitForCondition(async () => await this._primaryComponent.isExisting(), errorMsg, timeout);
+    await this.waitForCondition(async () => await (await this._primaryComponent).isExisting(), errorMsg, timeout);
   }
 
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(FOCUSZONE_TESTPAGE);
+    return GetElement(FOCUSZONE_TESTPAGE);
   }
 
   get _pageName() {
@@ -21,11 +21,11 @@ class FocusZonePageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(FOCUSZONE_TEST_COMPONENT);
+    return GetElement(FOCUSZONE_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_FOCUSZONE_BUTTON);
+    return GetElement(HOMEPAGE_FOCUSZONE_BUTTON);
   }
 }
 

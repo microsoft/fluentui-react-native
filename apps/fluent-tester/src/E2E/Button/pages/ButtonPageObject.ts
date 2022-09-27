@@ -5,7 +5,7 @@ import {
   HOMEPAGE_BUTTON_BUTTON,
   BUTTON_ON_PRESS_DEPRECATED,
 } from '../../../TestComponents/Button/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -18,7 +18,7 @@ class ButtonPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didOnClickCallbackFire(): Promise<boolean> {
-    const callbackText = await By(BUTTON_ON_PRESS_DEPRECATED);
+    const callbackText = await GetElement(BUTTON_ON_PRESS_DEPRECATED);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUIEvent,
       timeoutMsg: 'The OnClick callback did not fire.',
@@ -45,7 +45,7 @@ class ButtonPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(BUTTON_TESTPAGE);
+    return GetElement(BUTTON_TESTPAGE);
   }
 
   get _pageName() {
@@ -53,15 +53,15 @@ class ButtonPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(BUTTON_TEST_COMPONENT_DEPRECATED);
+    return GetElement(BUTTON_TEST_COMPONENT_DEPRECATED);
   }
 
   get _secondaryComponent() {
-    return By(BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED);
+    return GetElement(BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_BUTTON_BUTTON);
+    return GetElement(HOMEPAGE_BUTTON_BUTTON);
   }
 }
 

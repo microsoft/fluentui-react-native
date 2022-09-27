@@ -4,14 +4,14 @@ import {
   HOMEPAGE_ICON_BUTTON,
   ICON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/Icon/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class IconPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(ICON_TESTPAGE);
+    return GetElement(ICON_TESTPAGE);
   }
 
   get _pageName() {
@@ -19,15 +19,15 @@ class IconPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(ICON_TEST_COMPONENT);
+    return GetElement(ICON_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(ICON_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(ICON_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_ICON_BUTTON);
+    return GetElement(HOMEPAGE_ICON_BUTTON);
   }
 }
 

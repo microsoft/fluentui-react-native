@@ -4,14 +4,14 @@ import {
   HOMEPAGE_LINK_BUTTON,
   LINK_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/Link/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class LinkPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(LINK_TESTPAGE);
+    return GetElement(LINK_TESTPAGE);
   }
 
   get _pageName() {
@@ -19,15 +19,15 @@ class LinkPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(LINK_TEST_COMPONENT);
+    return GetElement(LINK_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(LINK_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(LINK_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_LINK_BUTTON);
+    return GetElement(HOMEPAGE_LINK_BUTTON);
   }
 }
 

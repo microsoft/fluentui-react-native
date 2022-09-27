@@ -4,7 +4,7 @@ import {
   AVATAR_TEST_COMPONENT,
   AVATAR_SECONDARY_TEST_COMPONENT,
 } from '../../../TestComponents/Avatar/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 export const enum AvatarComponentSelector {
   PrimaryComponent, //this._primaryComponent
@@ -12,47 +12,47 @@ export const enum AvatarComponentSelector {
 }
 class AvatarPageObject extends BasePage {
   async getPrimaryComponentAttribute(attribute: string): Promise<string> {
-    return await this._primaryComponent.getAttribute(attribute);
+    return await (await this._primaryComponent).getAttribute(attribute);
   }
 
   async getSecondaryComponentAttribute(attribute: string): Promise<string> {
-    return await this._secondaryComponent.getAttribute(attribute);
+    return await (await this._secondaryComponent).getAttribute(attribute);
   }
 
   async getAvatarAccessibilityLabel(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
-      ? await this._secondaryComponent.getAttribute('Name')
-      : await this._primaryComponent.getAttribute('Name');
+      ? await (await this._secondaryComponent).getAttribute('Name')
+      : await (await this._primaryComponent).getAttribute('Name');
   }
 
   async getAvatarAccessibilityHint(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
-      ? await this._secondaryComponent.getAttribute('HelpText')
-      : await this._primaryComponent.getAttribute('HelpText');
+      ? await (await this._secondaryComponent).getAttribute('HelpText')
+      : await (await this._primaryComponent).getAttribute('HelpText');
   }
 
   async getAvatarAccessibilityRole(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
-      ? await this._secondaryComponent.getAttribute('ControlType')
-      : await this._primaryComponent.getAttribute('ControlType');
+      ? await (await this._secondaryComponent).getAttribute('ControlType')
+      : await (await this._primaryComponent).getAttribute('ControlType');
   }
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(AVATAR_TESTPAGE);
+    return GetElement(AVATAR_TESTPAGE);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_AVATAR_BUTTON);
+    return GetElement(HOMEPAGE_AVATAR_BUTTON);
   }
 
   get _primaryComponent() {
-    return By(AVATAR_TEST_COMPONENT);
+    return GetElement(AVATAR_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(AVATAR_SECONDARY_TEST_COMPONENT);
+    return GetElement(AVATAR_SECONDARY_TEST_COMPONENT);
   }
 }
 

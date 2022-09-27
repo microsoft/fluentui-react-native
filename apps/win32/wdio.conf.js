@@ -11,7 +11,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: [['../fluent-tester/src/E2E/**/specs/*.win.ts']],
+  specs: [['../fluent-tester/src/E2E/Theme/specs/*.win.ts']],
   exclude: [],
 
   capabilities: [
@@ -108,7 +108,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: async function () {
-    await browser.maximizeWindow();
+    //await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
@@ -122,19 +122,17 @@ exports.config = {
    * @param {Object} suite suite details
    */
   // beforeSuite: function (suite) {
-  //   console.log('\n\n\n\n\n\n IN BEFORESUITE \n\n\n\n\n\n\n\n\n');
   // },
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  // beforeTest: async (test) => {
+  // beforeTest: function (test, context) => {
   // },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
    */
   // beforeHook: function (test, context) {
-  //   console.log('\n\n\n\n Before Hook - test: ' + JSON.stringify(test) + '. And context: ' + JSON.stringify(context), +'\n\n');
   // },
   /**
    * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling
@@ -146,7 +144,8 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: async function (test, context, results) {
-    console.log('\n\n Test Case: ' + test.description + '.      Test Result: ' + results.passed + ' \n\n');
+    console.log('\n\n Test Case: ' + test.description + '.      Test Result: ' + results.passed ? 'Passed' : 'Failed' + ' \n\n');
+
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
     if (results.passed) {

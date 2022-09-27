@@ -165,8 +165,10 @@ export class BasePage {
   }
 
   /* Scrolls to the primary UI test element until it is displayed. */
-  async scrollToTestElement(): Promise<void> {
-    if (await (await this._primaryComponent).isDisplayed()) {
+  async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
+    const ComponentToScrollTo = component ?? (await this._primaryComponent);
+
+    if (await ComponentToScrollTo.isDisplayed()) {
       return;
     }
 
@@ -176,7 +178,7 @@ export class BasePage {
       async () => {
         await FocusButton.addValue(scrollDownKeys);
         scrollDownKeys.push(Keys.PAGE_DOWN);
-        return await (await this._primaryComponent).isDisplayed();
+        return await ComponentToScrollTo.isDisplayed();
       },
       {
         timeout: 30000,

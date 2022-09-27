@@ -1,12 +1,12 @@
 import { PRESSABLE_TESTPAGE, PRESSABLE_TEST_COMPONENT, HOMEPAGE_PRESSABLE_BUTTON } from '../../../TestComponents/Pressable/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class PressablePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(PRESSABLE_TESTPAGE);
+    return GetElement(PRESSABLE_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class PressablePageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(PRESSABLE_TEST_COMPONENT);
+    return GetElement(PRESSABLE_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_PRESSABLE_BUTTON);
+    return GetElement(HOMEPAGE_PRESSABLE_BUTTON);
   }
 }
 

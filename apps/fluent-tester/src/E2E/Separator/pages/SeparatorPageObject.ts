@@ -1,12 +1,12 @@
 import { SEPARATOR_TESTPAGE, SEPARATOR_TEST_COMPONENT, HOMEPAGE_SEPARATOR_BUTTON } from '../../../TestComponents/Separator/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class SeparatorPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(SEPARATOR_TESTPAGE);
+    return GetElement(SEPARATOR_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class SeparatorPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(SEPARATOR_TEST_COMPONENT);
+    return GetElement(SEPARATOR_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_SEPARATOR_BUTTON);
+    return GetElement(HOMEPAGE_SEPARATOR_BUTTON);
   }
 }
 

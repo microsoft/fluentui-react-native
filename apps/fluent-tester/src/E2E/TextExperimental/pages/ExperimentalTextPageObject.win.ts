@@ -3,14 +3,14 @@ import {
   EXPERIMENTAL_TEXT_TEST_COMPONENT,
   HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
 } from '../../../TestComponents/TextExperimental/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class ExperimentalTextPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(EXPERIMENTAL_TEXT_TESTPAGE);
+    return GetElement(EXPERIMENTAL_TEXT_TESTPAGE);
   }
 
   get _pageName() {
@@ -18,11 +18,11 @@ class ExperimentalTextPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_TEXT_TEST_COMPONENT);
+    return GetElement(EXPERIMENTAL_TEXT_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
+    return GetElement(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
   }
 }
 

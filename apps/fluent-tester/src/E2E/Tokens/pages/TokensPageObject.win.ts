@@ -1,12 +1,12 @@
 import { HOMEPAGE_TOKEN_BUTTON, TOKEN_TESTPAGE, TOKENS_TEST_COMPONENT } from '../../../TestComponents/Tokens/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class TokenPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(TOKEN_TESTPAGE);
+    return GetElement(TOKEN_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class TokenPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(TOKENS_TEST_COMPONENT);
+    return GetElement(TOKENS_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_TOKEN_BUTTON);
+    return GetElement(HOMEPAGE_TOKEN_BUTTON);
   }
 }
 

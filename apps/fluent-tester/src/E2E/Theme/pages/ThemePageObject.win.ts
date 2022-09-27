@@ -1,12 +1,12 @@
 import { THEME_TESTPAGE, THEME_TEST_COMPONENT, HOMEPAGE_THEME_BUTTON } from '../../../TestComponents/Theme/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class ThemePageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(THEME_TESTPAGE);
+    return GetElement(THEME_TESTPAGE);
   }
 
   get _pageName() {
@@ -14,11 +14,11 @@ class ThemePageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(THEME_TEST_COMPONENT);
+    return GetElement(THEME_TEST_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_THEME_BUTTON);
+    return GetElement(HOMEPAGE_THEME_BUTTON);
   }
 }
 

@@ -5,7 +5,7 @@ import {
   MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   MENU_ITEM_1_COMPONENT,
 } from '../../../TestComponents/MenuButton/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 export const enum MenuButtonSelector {
   MenuButton = 0, // this._primarySelector
@@ -26,7 +26,7 @@ class MenuButtonPageObject extends BasePage {
 
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async menuItemDisplayed(): Promise<boolean> {
-    return await this._menuItem.isDisplayed();
+    return await (await this._menuItem).isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -48,7 +48,7 @@ class MenuButtonPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(MENU_BUTTON_TESTPAGE);
+    return GetElement(MENU_BUTTON_TESTPAGE);
   }
 
   get _pageName() {
@@ -56,19 +56,19 @@ class MenuButtonPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(MENU_BUTTON_TEST_COMPONENT);
+    return GetElement(MENU_BUTTON_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_MENUBUTTON_BUTTON);
+    return GetElement(HOMEPAGE_MENUBUTTON_BUTTON);
   }
 
   get _menuItem() {
-    return By(MENU_ITEM_1_COMPONENT);
+    return GetElement(MENU_ITEM_1_COMPONENT);
   }
 }
 

@@ -4,14 +4,14 @@ import {
   HOMEPAGE_EXPERIMENTAL_MENU_BUTTON,
   EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/MenuButtonExperimental/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, GetElement } from '../../common/BasePage';
 
 class ExperimentalMenuButtonPageObject extends BasePage {
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(MENU_BUTTON_EXPERIMENTAL_TESTPAGE);
+    return GetElement(MENU_BUTTON_EXPERIMENTAL_TESTPAGE);
   }
 
   get _pageName() {
@@ -19,15 +19,15 @@ class ExperimentalMenuButtonPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT);
+    return GetElement(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
+    return GetElement(EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
+    return GetElement(HOMEPAGE_EXPERIMENTAL_MENU_BUTTON);
   }
 }
 
