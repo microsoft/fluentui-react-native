@@ -60,7 +60,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     content: buildProps(
       () => ({
         style: {
-          display: 'flex',
           alignItems: 'flex-start',
           flexDirection: 'column',
         },
