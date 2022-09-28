@@ -9,6 +9,7 @@ export interface RadioGroupContextValue extends RadioGroupState {}
 export const RadioGroupContext = React.createContext<RadioGroupContextValue>({
   value: null,
   disabled: false,
+  layout: null,
   onChange: (/* key: string */) => {
     return;
   },
