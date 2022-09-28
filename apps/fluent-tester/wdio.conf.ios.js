@@ -7,7 +7,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['src/E2E/**/specs/*.ios.ts'],
-  exclude: [ ],
+  exclude: [],
 
   maxInstances: 30,
   capabilities: [
@@ -137,6 +137,9 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: function (test, context, results) {
+    const resultString = results.passed ? 'Passed' : 'Failed';
+    console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
+
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
     if (results.passed) {
