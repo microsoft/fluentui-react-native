@@ -6,6 +6,7 @@ import { stackStyle } from './Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { Button } from '@fluentui-react-native/experimental-button';
 
 export type TestSection = {
   name: string;
@@ -70,6 +71,9 @@ const styles = StyleSheet.create({
   status: {
     fontWeight: 'normal',
   },
+  e2eFocusButton: {
+    opacity: 0.1,
+  },
 });
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
@@ -112,6 +116,9 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
+        <Button testID="Focus_Button" style={styles.e2eFocusButton}>
+          E2E Testing Button
+        </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />

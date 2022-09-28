@@ -5,7 +5,7 @@ const ScrollViewTestId = 'SCROLLVIEW_TEST_ID';
 class NativeTestingPageObject extends BasePage {
   async waitForScrollViewDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.doesScrollViewParentExist(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'For testing purposes we require that the root view contains a non-empty, immutable ScrollView of buttons that navigate to test pages.',
       interval: 1000,
