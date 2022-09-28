@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Added label subtext radiogroup example to tester",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}

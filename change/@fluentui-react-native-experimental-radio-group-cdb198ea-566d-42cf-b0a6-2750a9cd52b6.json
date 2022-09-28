@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Added subtext prop to Radio",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "gulnazsayed@microsoft.com",
+  "dependentChangeType": "patch"
+}

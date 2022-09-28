@@ -11,10 +11,12 @@ export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
   const {
     label,
+    subtext,
     value,
     disabled,
     accessibilityActions,
     accessibilityLabel,
+    accessibilityHint,
     accessibilityState,
     componentRef = defaultComponentRef,
     accessibilityPositionInSet,
@@ -82,12 +84,14 @@ export const useRadio = (props: RadioProps): RadioState => {
     props: {
       value,
       label,
+      subtext,
       ...rest,
       ref: buttonRef,
       ...pressable.props,
       accessible: true,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
+      accessibilityHint: accessibilityHint ?? subtext,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
       accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
