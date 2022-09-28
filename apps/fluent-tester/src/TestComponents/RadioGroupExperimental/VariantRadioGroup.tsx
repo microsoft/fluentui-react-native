@@ -4,7 +4,7 @@ import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
-export const ArbitraryRadioGroup: React.FunctionComponent = () => {
+export const VariantRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
   const onChange = (key: string) => {
     console.log(key);
