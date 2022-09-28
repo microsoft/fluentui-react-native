@@ -15,7 +15,7 @@ export async function GetElement(identifier: string): Promise<WebdriverIO.Elemen
   await browser.waitUntil(
     async () => {
       Element = await By(identifier);
-      return await Element.isExisting();
+      return await Element.isDisplayed();
     },
     {
       timeoutMsg: 'Could not find the element with identifier = ' + identifier,
