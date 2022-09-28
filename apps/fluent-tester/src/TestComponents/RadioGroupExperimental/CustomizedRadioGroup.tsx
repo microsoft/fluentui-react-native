@@ -89,7 +89,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
     };
     return Radio.customize(tokens);
   }, [
-borderCplor,
+borderColor,
 borderStyle,
 
   ]);
