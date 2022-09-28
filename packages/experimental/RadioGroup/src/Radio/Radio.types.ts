@@ -39,7 +39,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
-   * Border width of Radio
+   * Font size of label subtext
    */
   subtextSize?: number;
 
