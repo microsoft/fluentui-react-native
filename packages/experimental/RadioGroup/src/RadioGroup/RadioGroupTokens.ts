@@ -9,7 +9,7 @@ export const defaultRadioGroupTokens: TokenSettings<RadioGroupTokens, Theme> = (
     variant: 'subtitle2Strong',
     requiredColor: t.colors.redForeground3,
     requiredPadding: globalTokens.spacing.xs,
-    flexDirection: 'row',
+    flexDirection: 'column',
     disabled: {
       color: t.colors.neutralForegroundDisabled,
     },
