@@ -21,7 +21,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           borderRadius: tokens.borderRadius,
         },
       }),
-      ['borderRadius'],
+      ['flexDirection', 'borderRadius'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
