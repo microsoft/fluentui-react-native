@@ -18,11 +18,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioInnerCircleSize: 10,
     flexDirection: 'row',
 
-    after: {
-      flexDirection: 'row',
-    },
-
-    below: {
+    isBelow: {
       flexDirection: 'column',
     },
 

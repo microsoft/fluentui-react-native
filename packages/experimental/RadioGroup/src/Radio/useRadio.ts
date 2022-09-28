@@ -28,6 +28,8 @@ export const useRadio = (props: RadioProps): RadioState => {
     ...rest
   } = props;
 
+  console.log(labelPosition);
+
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
@@ -78,7 +80,7 @@ export const useRadio = (props: RadioProps): RadioState => {
     ...pressable.state,
     selected: selectedInfo.value === props.value,
     disabled: selectedInfo.disabled || disabled || false,
-    labelPosition: labelPosition || 'after',
+    isBelow: labelPosition === 'below' ? true : false,
   };
 
   return {

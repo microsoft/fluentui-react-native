@@ -46,8 +46,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * States that can be applied to a Radio
    */
-  after?: RadioTokens;
-  below?: RadioTokens;
+  isBelow?: RadioTokens;
   selected?: RadioTokens;
   disabled?: RadioTokens;
   hovered?: RadioTokens;
@@ -93,7 +92,12 @@ export interface RadioProps extends IPressableProps {
   enableFocusRing?: boolean;
 }
 
-export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {}
+export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {
+  /**
+   * If horizontal-stacked, label should be below indicator.
+   */
+  isBelow?: boolean;
+}
 
 export interface RadioSlotProps {
   root: IViewProps;

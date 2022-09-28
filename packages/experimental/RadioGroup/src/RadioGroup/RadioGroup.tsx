@@ -55,11 +55,9 @@ export const RadioGroup = compose<RadioGroupType>({
         <RadioGroupProvider value={contextValue}>
           <Slots.root {...mergedProps}>
             {label && labelComponent}
-            <Slots.options>
-              <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
-                {children}
-              </Slots.container>
-            </Slots.options>
+            <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
+              <Slots.options>{children}</Slots.options>
+            </Slots.container>
           </Slots.root>
         </RadioGroupProvider>
       );
