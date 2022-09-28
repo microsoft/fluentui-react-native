@@ -137,11 +137,9 @@ export class BasePage {
 
   /* Waits for the test page to load. If the test page doesn't load before the timeout, it causes the test to fail. */
   async waitForPageDisplayed(timeout?: number): Promise<void> {
-    await browser.pause(2000);
     await browser.waitUntil(async () => await this.isPageLoaded(), {
       timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: this._pageName + ' did not render correctly. Please see /errorShots for more information.',
-      interval: 1500,
     });
   }
 
@@ -150,7 +148,6 @@ export class BasePage {
     await browser.waitUntil(async () => await this.isButtonInView(), {
       timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: 'Could not find the button to navigate to ' + this._pageName + '. Please see /errorShots for more information.',
-      interval: 1500,
     });
   }
 
@@ -160,7 +157,6 @@ export class BasePage {
       timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
-      interval: 1500,
     });
   }
 
@@ -199,7 +195,6 @@ export class BasePage {
     await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUIEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
-      interval: 1000,
     });
   }
 
