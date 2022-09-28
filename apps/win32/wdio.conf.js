@@ -11,7 +11,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
+  specs: ['../fluent-tester/src/E2E/Button/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
   capabilities: [
@@ -144,7 +144,7 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: async function (test, context, results) {
-    const resultString = test.passed ? 'Passed' : 'Failed';
+    const resultString = results.passed ? 'Passed' : 'Failed';
     console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
