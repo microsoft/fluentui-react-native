@@ -203,6 +203,7 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
+  /* Finds the first test page button in the ScrollView */
   async SetFirstScrollViewButtonChild() {
     const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
     const reg = new RegExp('Homepage_[a-zA-Z]*_Button');

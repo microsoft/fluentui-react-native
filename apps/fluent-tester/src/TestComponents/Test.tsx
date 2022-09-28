@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
   },
   e2eFocusButton: {
-    opacity: 0.1,
+    opacity: 0,
   },
 });
 
