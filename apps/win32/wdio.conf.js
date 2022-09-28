@@ -144,7 +144,8 @@ exports.config = {
    * Function to be executed after a test (in Mocha/Jasmine).
    */
   afterTest: async function (test, context, results) {
-    console.log('\n\n Test Case: ' + test.description + '.      Test Result: ' + results.passed ? 'Passed' : 'Failed' + ' \n\n');
+    const resultString = results.passed ? 'Passed' : 'Failed';
+    console.log('\n\n Test Case: ' + test.description + '.      Test Result: ' + resultString + ' \n\n');
 
     // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
     // it may be useful to have a screenshot of the app on load.
