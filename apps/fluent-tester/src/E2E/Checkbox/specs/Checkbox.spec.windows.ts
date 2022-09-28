@@ -75,9 +75,9 @@ describe('Checkbox Accessibility Testing', () => {
 //     await expect(await CheckboxPageObject.isCheckboxChecked()).toBeFalsy();
 //   });
 
-//   it('Click the "SPACE" on a Checkbox and verify it toggles', () => {
+//   it('Click the "Spacebar" on a Checkbox and verify it toggles', () => {
 //     /* Presses the "space bar" to select the Checkbox */
-//     CheckboxPageObject.sendKey(CHECKBOX_TEST_COMPONENT, Keys.SPACE);
+//     CheckboxPageObject.sendKey(CHECKBOX_TEST_COMPONENT, Keys.Spacebar);
 //     CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
 //     /* Validate the Checkbox is selected */
