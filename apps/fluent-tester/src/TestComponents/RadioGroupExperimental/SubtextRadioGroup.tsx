@@ -11,10 +11,10 @@ export const SubtextRadioGroup: React.FunctionComponent = () => {
   return (
     <View>
       <RadioGroup label="Uncontrolled RadioGroup" defaultValue="X" onChange={onChange}>
-        <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
-        <Radio label="Option X" value="X" />
-        <Radio label="Option Y" value="C" />
-        <Radio label="Option Z" value="Z" />
+        <Radio label="Apple" subtext="This is a type of fruit" value="W" />
+        <Radio label="Pear" value="X" />
+        <Radio label="Banana" value="C" />
+        <Radio label="Orange" value="Z" />
       </RadioGroup>
     </View>
   );

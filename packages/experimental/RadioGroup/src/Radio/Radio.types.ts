@@ -39,6 +39,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
+   * Border width of Radio
+   */
+  subtextSize?: number;
+
+  /**
    * States that can be applied to a Radio
    */
   selected?: RadioTokens;
@@ -53,6 +58,11 @@ export interface RadioProps extends IPressableProps {
    * The text string for the option
    */
   label: string;
+
+  /**
+   * Label subtext for the option
+   */
+  subtext?: string;
 
   /**
    * A unique key-identifier for each option
@@ -82,7 +92,9 @@ export interface RadioSlotProps {
   root: IViewProps;
   button: IViewProps;
   innerCircle: IViewProps;
+  content: IViewProps;
   label: TextProps;
+  subtext?: TextProps;
 }
 
 export interface RadioType {
