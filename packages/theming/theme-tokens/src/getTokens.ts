@@ -20,17 +20,3 @@ export function getAliasTokens(mode: AppearanceOptions) {
 
   return lightAliasTokens;
 }
-
-export function getShadowTokens(mode: AppearanceOptions) {
-  if (mode === 'light') {
-    return lightShadowTokens.shadow;
-  } else if (mode === 'dark') {
-    return darkShadowTokens.shadow;
-  } else if (mode === 'highContrast') {
-    return hcShadowTokens.shadow;
-  } else {
-    assertNever(mode);
-  }
-
-  return lightAliasTokens;
-}
