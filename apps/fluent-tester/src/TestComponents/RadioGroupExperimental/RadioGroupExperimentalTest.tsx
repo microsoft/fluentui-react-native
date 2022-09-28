@@ -2,7 +2,10 @@ import * as React from 'react';
 import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from './consts';
 import { DefaultRadioGroup } from './DefaultRadioGroup';
 import { E2ERadioGroupExperimentalTest } from './RadioGroupExperimentalE2ETest';
+import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
+import { CustomizedRadioGroup } from './CustomizedRadioGroup';
+import { VariantRadioGroup } from './VariantRadioGroup';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [
@@ -15,6 +18,21 @@ const radioGroupExperimentalSections: TestSection[] = [
     name: 'Disabled RadioGroup',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: DisabledRadioGroup,
+  },
+  {
+    name: 'Required RadioGroup',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: RequiredRadioGroup,
+  },
+  {
+    name: 'Customized RadioGroup Usage',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: CustomizedRadioGroup,
+  },
+  {
+    name: 'Variant RadioGroup Usage',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: VariantRadioGroup,
   },
   {
     name: 'RadioGroup for E2E Testing',

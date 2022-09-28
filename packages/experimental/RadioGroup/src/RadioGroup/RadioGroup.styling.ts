@@ -16,7 +16,15 @@ export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotP
         flexDirection: 'column',
       },
     })),
-    label: buildProps(
+    label: buildProps(() => ({
+      style: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+      },
+    })),
+    labelText: buildProps(
       (tokens: RadioGroupTokens, theme: Theme) => ({
         variant: tokens.variant,
         style: {
@@ -25,6 +33,16 @@ export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotP
         },
       }),
       ['color', ...fontStyles.keys],
+    ),
+    required: buildProps(
+      (tokens: RadioGroupTokens) => ({
+        variant: tokens.variant,
+        style: {
+          color: tokens.requiredColor,
+          paddingStart: tokens.requiredPadding,
+        },
+      }),
+      ['requiredColor', 'requiredPadding'],
     ),
   },
 };
