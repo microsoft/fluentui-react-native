@@ -44,6 +44,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   flexDirection?: ViewStyle['flexDirection'];
 
   /**
+   * The flex direction of the root
+   */
+  marginTop?: ViewStyle['marginTop'];
+
+  /**
    * States that can be applied to a Radio
    */
   isBelow?: RadioTokens;

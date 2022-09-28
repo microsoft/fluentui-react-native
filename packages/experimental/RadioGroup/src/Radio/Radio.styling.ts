@@ -17,6 +17,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           flexDirection: tokens.flexDirection,
           minHeight: 20,
           marginTop: 0,
+          marginRight: globalTokens.spacing.s,
           borderRadius: tokens.borderRadius,
         },
       }),
@@ -60,11 +61,11 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       (tokens: RadioTokens) => ({
         variant: tokens.variant,
         style: {
-          marginTop: 2,
+          marginTop: tokens.marginTop,
           color: tokens.color,
         },
       }),
-      ['color'],
+      ['color', 'marginTop'],
     ),
   },
 };

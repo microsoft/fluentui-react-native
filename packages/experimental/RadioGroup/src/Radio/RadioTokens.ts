@@ -17,6 +17,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioSize: 20,
     radioInnerCircleSize: 10,
     flexDirection: 'row',
+    marginTop: globalTokens.spacing.xxs,
 
     isBelow: {
       flexDirection: 'column',
