@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Sep 2022 20:55:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Tue, 27 Sep 2022 20:55:52 GMT
+
+### Minor changes
+
+- Added required prop to RadioGroup (gulnazsayed@microsoft.com)
+
+## 0.4.0
+
+Tue, 27 Sep 2022 18:09:31 GMT
+
+### Minor changes
+
+- Added disabled prop to RadioGroup and Radio (gulnazsayed@microsoft.com)
 
 ## 0.3.5
 
