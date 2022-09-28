@@ -204,6 +204,6 @@ export function paletteFromAndroidColors(p: FluentUIAndroidPalette): ThemeColorD
 
     personaActivityRing: p.surfacesPrimary,
     personaActivityGlow: p.buttonBackground,
-    ...createColorAliasTokens(p.variant == "light" ? 'light' : 'dark')
+    ...createColorAliasTokens(p.variant == 'light' ? 'light' : 'dark'),
   };
 }
