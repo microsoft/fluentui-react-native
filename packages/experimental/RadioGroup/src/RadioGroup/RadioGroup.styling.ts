@@ -48,6 +48,7 @@ export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotP
       (tokens: RadioGroupTokens) => ({
         style: {
           display: 'flex',
+          justifyContent: 'space-around',
           alignItems: 'flex-start',
           flexDirection: tokens.flexDirection,
         },
