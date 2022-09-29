@@ -12,6 +12,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
   tokens: [defaultFABTokens, defaultFABColorTokens],
   states: [...buttonCoreStates],
   slotProps: {
+<<<<<<< HEAD
     ...Platform.select({
       android: {
         root: buildProps(
@@ -68,6 +69,26 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
         ),
       },
     }),
+=======
+    root: buildProps(
+      (tokens: ButtonCoreTokens, theme: Theme) => ({
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',
+          alignSelf: 'flex-start',
+          justifyContent: 'center',
+          width: tokens.width,
+          backgroundColor: tokens.backgroundColor,
+          ...borderStyles.from(tokens, theme),
+          ...layoutStyles.from(tokens, theme),
+          ...shadowStyles.from(tokens, theme),
+        },
+        elevation: tokens.elevation,
+      }),
+      ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
+    ),
+>>>>>>> 62b0f3d5c5d04004dafba11b9690536c78b59e2c
     content: buildProps(
       (tokens: ButtonCoreTokens, theme: Theme) => ({
         style: {

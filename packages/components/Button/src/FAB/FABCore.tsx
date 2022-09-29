@@ -1,6 +1,10 @@
 /** @jsx withSlots */
 import * as React from 'react';
+<<<<<<< HEAD
 import { Platform, Pressable, View } from 'react-native';
+=======
+import { Platform, View } from 'react-native';
+>>>>>>> 62b0f3d5c5d04004dafba11b9690536c78b59e2c
 import { fabName, FABProps, FABType } from './FAB.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
@@ -73,7 +77,11 @@ export const FAB = compose<FABType>({
             React.Children.map(children, (child) =>
               typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
             )}
+<<<<<<< HEAD
         </React.Fragment>
+=======
+        </Slots.root>
+>>>>>>> 62b0f3d5c5d04004dafba11b9690536c78b59e2c
       );
 
       const hasShadow = Platform.OS === 'ios';

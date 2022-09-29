@@ -9,9 +9,10 @@ export type {
   IPressableState,
   IWithPressableEvents,
   IWithPressableOptions,
-  PressablePropsExtended,
 } from './useAsPressable.types';
-export { useAsPressable, useFocusState, useHoverState, usePressState, usePressableState } from './useAsPressable';
+export { useAsPressable, useFocusState, useHoverState, usePressState } from './useAsPressable';
+export { PressablePropsExtended, PressableState } from './usePressableState.types';
+export { usePressableState } from './usePressableState';
 export { usePressability } from './usePressability';
 export { useViewCommandFocus } from './useViewCommandFocus';
 export type { IFocusable } from './useViewCommandFocus';
