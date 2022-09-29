@@ -20,7 +20,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...layoutStyles.keys],
+      ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     checkmark: buildProps(
       (tokens: MenuItemCheckboxTokens) => ({
@@ -31,7 +31,7 @@ export const stylingSettings: UseStylingOptions<MenuItemCheckboxProps, MenuItemC
         viewBox: '0 0 ' + (tokens.checkmarkSize - tokens.checkmarkPadding * 2) + ' ' + (tokens.checkmarkSize - tokens.checkmarkPadding * 2),
         style: { marginEnd: tokens.gap },
       }),
-      ['checkmarkSize', 'gap', 'color'],
+      ['checkmarkPadding', 'checkmarkSize', 'checkmarkVisibility', 'color', 'gap'],
     ),
     content: buildProps(
       (tokens: MenuItemCheckboxTokens, theme: Theme) => ({

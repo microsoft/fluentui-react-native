@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { TabsItemProps, TabsItemInfo, TabsItemState } from './TabsItem.types';
 import { TabsContext } from './Tabs';
 
@@ -23,7 +23,7 @@ export const useTabsItem = (props: TabsItemProps): TabsItemInfo => {
     info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
   }, [componentRef, info, itemKey]);
 
-  const pressable = useAsPressable({
+  const pressable = usePressableState({
     ...rest,
     onPress: changeSelection,
   });

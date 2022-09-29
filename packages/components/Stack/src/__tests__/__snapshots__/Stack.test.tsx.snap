@@ -15,7 +15,7 @@ exports[`Stack with tokens 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -28,7 +28,7 @@ exports[`Stack with tokens 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginTop": 8,
@@ -42,7 +42,7 @@ exports[`Stack with tokens 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginTop": 8,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewProps } from 'react-native';
+import { ColorValue } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
@@ -15,6 +15,16 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   checkmarkSize?: number;
 
   /**
+   * Space between parts of the item control in pixels
+   */
+  gap?: number;
+
+  /**
+   * Color of the indicator that shows that an item has a submenu
+   */
+  submenuIndicatorColor?: ColorValue;
+
+  /**
    * Amount of space in pixels around the indicator that shows that an item has a submenu
    */
   submenuIndicatorPadding?: number;
@@ -25,11 +35,6 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   submenuIndicatorSize?: number;
 
   /**
-   * Space between parts of the item control in pixels
-   */
-  gap?: number;
-
-  /**
    * States of the item control
    */
   disabled?: MenuItemTokens;
@@ -38,7 +43,7 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   pressed?: MenuItemTokens;
 }
 
-export interface MenuItemProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface MenuItemProps extends Omit<IWithPressableOptions<IViewProps>, 'onPress'> {
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */

@@ -1,7 +1,7 @@
 import { ImageProps, ImageSourcePropType } from 'react-native';
 import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
-import { titles } from './titles';
+import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 /**
@@ -118,6 +118,11 @@ export const getInitials = (name: string): string => {
   );
   const words = removeRedundantCharacters(name);
   const wordsLength = words.length;
+
+  if (!wordsLength) {
+    return '';
+  }
+
   const lastWordIdx = wordsLength - 1;
   const firstLetter = words[0].charAt(0).toUpperCase();
   const lastLetter = wordsLength > 1 ? words[lastWordIdx].charAt(0).toUpperCase() : '';
@@ -137,7 +142,8 @@ export const removeRedundantCharacters = (name: string): string[] => {
   }
 
   const MAX_NAME_LENGTH = 100;
-  const _name = name.length > MAX_NAME_LENGTH ? name.trim().substring(0, MAX_NAME_LENGTH) : name;
+  let _name = name.length > MAX_NAME_LENGTH ? name.trim().substring(0, MAX_NAME_LENGTH) : name;
+  _name = isMultiWordName(_name) ? removeMultiWordTitles(_name) : _name;
 
   const WORDS_IN_BRACES_REGEXP = new RegExp('[(\\[\\{][^\\)\\]\\}]*[\\)\\]\\}]', 'g');
   const PHONE_NUMBER_REGEXP = new RegExp('(\\+|(\\d|\\s))', 'g');
@@ -159,6 +165,33 @@ export const removeRedundantCharacters = (name: string): string[] => {
  */
 export const removeTitlesFromName = (words: string[]): string[] => {
   return words.filter((word) => !titles.has(word));
+};
+
+/**
+ * A function which verifies whether words array contains multi-word title
+ *
+ * @param name
+ * @returns name without multi-word titles
+ */
+const removeMultiWordTitles = (name: string): string => {
+  for (const idx in multiWordTitles) {
+    const title = multiWordTitles[idx];
+
+    if (name.indexOf(title) !== -1) {
+      return name.replace(title, '');
+    }
+  }
+  return name;
+};
+
+/**
+ * A function which verifies whether name contains more than one word
+ *
+ * @param name
+ * @returns true if name is multi-word
+ */
+const isMultiWordName = (name: string): boolean => {
+  return name.search(' ') !== -1;
 };
 
 function getFontIconSize(size: AvatarSize) {

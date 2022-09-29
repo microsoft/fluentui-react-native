@@ -1,8 +1,78 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
+This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.16
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.14
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+- Bump @fluentui-react-native/pressable to v0.9.13
+
+## 0.15.15
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.5
+- Bump @fluentui-react-native/focus-zone to v0.10.13
+- Bump @fluentui-react-native/interactive-hooks to v0.18.6
+- Bump @fluentui-react-native/pressable to v0.9.12
+- Bump @fluentui-react-native/text to v0.15.0
+- Bump @fluentui-react-native/tokens to v0.17.0
+
+## 0.15.14
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.4
+- Bump @fluentui-react-native/focus-zone to v0.10.12
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/pressable to v0.9.11
+- Bump @fluentui-react-native/text to v0.14.4
+- Bump @fluentui-react-native/tokens to v0.16.2
+
+## 0.15.13
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- Remove rn win32 dep (ruaraki@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.3
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/focus-zone to v0.10.11
+- Bump @fluentui-react-native/interactive-hooks to v0.18.4
+- Bump @fluentui-react-native/pressable to v0.9.10
+- Bump @fluentui-react-native/text to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.16.1
+
+## 0.15.12
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.10
+
+## 0.15.11
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.9
+- Bump @fluentui-react-native/interactive-hooks to v0.18.3
+- Bump @fluentui-react-native/pressable to v0.9.9
+- Bump @fluentui-react-native/text to v0.14.2
 
 ## 0.15.10
 

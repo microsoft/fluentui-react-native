@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { Shadow } from '../Shadow';
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
+import { Pressable } from '@fluentui-react-native/pressable';
 
+const backgroundColor = { backgroundColor: 'red' };
 interface ShadowTestProps {
   displayText: string;
   depth: string;
@@ -14,12 +16,45 @@ const TestShadow: React.FunctionComponent<ShadowTestProps> = (props: ShadowTestP
   const theme = useFluentTheme();
   return (
     <Shadow shadowToken={theme.shadows[props.depth]}>
-      <Text>{props.displayText}</Text>
+      <View style={backgroundColor}>
+        <Text>{props.displayText}</Text>
+      </View>
+    </Shadow>
+  );
+};
+
+const TestPressableWithShadow: React.FunctionComponent = () => {
+  const theme = useFluentTheme();
+  return (
+    <Shadow shadowToken={theme.shadows['shadow16']}>
+      <Pressable style={backgroundColor} />
+    </Shadow>
+  );
+};
+
+interface ShadowOnChildViewWithProps {
+  childViewStyleProps: object;
+}
+
+const TestShadowOnChildViewWithProps: React.FunctionComponent<ShadowOnChildViewWithProps> = (props: ShadowOnChildViewWithProps) => {
+  const theme = useFluentTheme();
+  return (
+    <Shadow shadowToken={theme.shadows['shadow16']}>
+      <View style={mergeStyles(props.childViewStyleProps, backgroundColor)}>
+        <Text>{JSON.stringify(props.childViewStyleProps)}</Text>
+      </View>
     </Shadow>
   );
 };
 
 describe('Shadow component tests', () => {
+  beforeAll(() => {
+    jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+      OS: 'macos',
+      select: () => null,
+    }));
+  });
+
   it('Shadow (depth=2)', () => {
     const tree = renderer.create(<TestShadow displayText="Shadow (depth=2)" depth="shadow2" />).toJSON();
     expect(tree).toMatchSnapshot();
@@ -80,11 +115,35 @@ describe('Shadow component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Pressable that has a shadow', () => {
+    const tree = renderer.create(<TestPressableWithShadow />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Shadow on a child with margin and padding', () => {
+    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ margin: 2, padding: 2 }} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Shadow on a child with border radius', () => {
+    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderRadius: 2 }} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Shadow on a child with border width', () => {
+    const tree = renderer.create(<TestShadowOnChildViewWithProps childViewStyleProps={{ borderWidth: 2 }} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Shadow simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <TestShadow displayText="Shadow render test" depth="shadow2" />, 2);
   });
 
   it('Shadow re-renders correctly', () => {
     checkReRender(() => <TestShadow displayText="Shadow render twice test" depth="shadow2" />, 2);
+  });
+
+  afterAll(() => {
+    jest.unmock('react-native/Libraries/Utilities/Platform');
   });
 });

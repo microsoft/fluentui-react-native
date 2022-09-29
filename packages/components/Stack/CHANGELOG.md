@@ -1,8 +1,53 @@
 # Change Log - @fluentui-react-native/stack
 
-This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.8
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.5
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/tokens to v0.17.0
+- Bump @uifabricshared/foundation-tokens to v0.12.3
+- Bump @fluentui-react-native/text to v0.15.0
+
+## 0.7.7
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.4
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/tokens to v0.16.2
+- Bump @uifabricshared/foundation-tokens to v0.12.2
+- Bump @fluentui-react-native/text to v0.14.4
+
+## 0.7.6
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.3
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/tokens to v0.16.1
+- Bump @uifabricshared/foundation-tokens to v0.12.1
+- Bump @fluentui-react-native/text to v0.14.3
+
+## 0.7.5
+
+Tue, 06 Sep 2022 18:22:03 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.2
 
 ## 0.7.4
 

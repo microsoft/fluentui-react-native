@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { tabsItemName, TabItemType, TabsItemProps } from './TabsItem.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './TabsItem.styling';
@@ -14,7 +14,7 @@ export const TabsItem = compose<TabItemType>({
   displayName: tabsItemName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     stack: View,
     icon: Icon,
     indicator: View,

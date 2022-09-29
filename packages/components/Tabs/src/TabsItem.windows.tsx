@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
@@ -11,7 +11,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { useAsPressable, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
@@ -40,7 +40,7 @@ export const TabsItem = compose<TabsItemType>({
       info.updateSelectedTabsItemRef && componentRef && info.updateSelectedTabsItemRef(componentRef);
     }, [componentRef, info, itemKey]);
 
-    const pressable = useAsPressable({
+    const pressable = usePressableState({
       ...rest,
       onPress: changeSelection,
     });
@@ -129,7 +129,7 @@ export const TabsItem = compose<TabsItemType>({
 
   settings,
   slots: {
-    root: View,
+    root: Pressable,
     stack: { slotType: View, filter: filterViewProps },
     icon: { slotType: Icon as React.ComponentType },
     content: Text,
