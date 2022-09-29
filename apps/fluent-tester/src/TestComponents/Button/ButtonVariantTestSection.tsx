@@ -12,10 +12,6 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
     viewBox: '0 0 500 500',
   };
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
-  const [showFABText, setShowFABText] = React.useState(true);
-
-  const [showFABText, setShowFABText] = React.useState(true);
-  const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
 
   const [showFABText, setShowFABText] = React.useState(true);
   const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);

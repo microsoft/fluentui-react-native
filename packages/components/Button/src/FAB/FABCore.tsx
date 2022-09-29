@@ -69,7 +69,7 @@ export const FAB = compose<FABType>({
       const buttonContent = (
         <React.Fragment>
           {icon && <Slots.icon {...iconProps} />}
-          {showChildren &&
+          {showContent &&
             React.Children.map(children, (child) =>
               typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
             )}

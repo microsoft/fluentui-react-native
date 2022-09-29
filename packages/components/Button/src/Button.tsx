@@ -34,7 +34,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-export const extractMarginAndroid = (style) => {
+export const extractMarginAndroid = memoize((style) => {
   const marginKeys = [
     'margin',
     'marginTop',
@@ -47,15 +47,15 @@ export const extractMarginAndroid = (style) => {
     'marginHorizontal',
   ];
   const extractedMargin = {},
-    mask = {};
+    resetMargin = {};
   marginKeys.forEach((key) => {
     if (style && style[key]) {
       extractedMargin[key] = style[key];
-      mask[key] = 0;
+      resetMargin[key] = 0;
     }
   });
-  return [extractedMargin, { ...style, ...mask }];
-};
+  return [extractedMargin, { ...style, ...resetMargin }];
+});
 
 export const Button = compose<ButtonType>({
   displayName: buttonName,
@@ -110,6 +110,7 @@ export const Button = compose<ButtonType>({
         const [extractedMargin, styleWithoutMargin] = extractMarginAndroid(mergedProps.style);
         return (
           <Slots.root style={extractedMargin}>
+            {/* RN Pressable needs to be wrapped with a root view to support curved edges */}
             <Slots.ripple
               accessibilityLabel={label}
               {...mergedProps}

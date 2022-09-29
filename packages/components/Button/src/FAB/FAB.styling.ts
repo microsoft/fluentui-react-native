@@ -15,18 +15,18 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
     ...Platform.select({
       android: {
         root: buildProps(
-          (tokens: ButtonCoreTokens, theme: Theme) => {
+          (tokens: ButtonCoreTokens) => {
             return {
               style: {
                 flexDirection: 'row',
                 alignSelf: 'baseline',
                 backgroundColor: tokens.backgroundColor,
-                ...borderStyles.from(tokens, theme),
+                borderRadius: tokens.borderRadius,
                 overflow: 'hidden',
               },
             };
           },
-          ['backgroundColor', ...borderStyles.keys],
+          ['backgroundColor', 'borderRadius'],
         ),
         ripple: buildProps(
           (tokens: ButtonCoreTokens, theme: Theme) => ({
@@ -37,13 +37,14 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
               alignSelf: 'flex-start',
               justifyContent: 'center',
               width: tokens.width,
+              ...borderStyles.from(tokens, theme),
               ...layoutStyles.from(tokens, theme),
             },
             android_ripple: {
-              color: 'buttonbackgroundpressed',
+              color: tokens.pressed.backgroundColor,
             },
           }),
-          ['backgroundColor', 'width', ...layoutStyles.keys],
+          ['pressed', 'width', ...layoutStyles.keys, ...borderStyles.keys],
         ),
       },
       default: {
