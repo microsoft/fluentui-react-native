@@ -1,13 +1,12 @@
 /** @jsx withSlots */
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
-import { Platform, PressableProps, useWindowDimensions, View, ViewStyle } from 'react-native';
+import { Platform, PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useMemo } from 'react';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
+import { createIconProps, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
@@ -66,18 +65,8 @@ export const Notification = compose<NotificationType>({
     const sizeClass = useSizeClassIOS_DO_NOT_USE();
     const onActionPress = userProps.onActionPress;
 
-    const rootStyle: ViewStyle = useMemo(() => {
-      const marginHorizontal = isBar ? 0 : 16;
-      if (sizeClass === 'regular' && !isBar) {
-        return { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width };
-      } else {
-        return { marginHorizontal: marginHorizontal };
-      }
-    }, [isBar, width]);
-    const messageStyle: ViewStyle = useMemo(() => {
-      const alignSelf = onActionPress ? 'flex-start' : 'center';
-      return { alignSelf: alignSelf };
-    }, [onActionPress]);
+    const rootStyle = getRootStyle(isBar, width, sizeClass);
+    const messageStyle = getMessageStyle(onActionPress);
 
     return (final: NotificationProps, ...children: React.ReactNode[]) => {
       const { variant, icon, title, action, onActionPress, ...rest } = mergeProps(userProps, final);
@@ -100,3 +89,19 @@ export const Notification = compose<NotificationType>({
     };
   },
 });
+
+const getRootStyle = memoize(getRootStyleWorker);
+function getRootStyleWorker(isBar: boolean, width: number, sizeClass: SizeClassIOS): ViewProps {
+  const marginHorizontal = isBar ? 0 : 16;
+  if (sizeClass === 'regular' && !isBar) {
+    return { style: { alignSelf: 'center', marginHorizontal: marginHorizontal, width: width } };
+  } else {
+    return { style: { marginHorizontal: marginHorizontal } };
+  }
+}
+
+const getMessageStyle = memoize(getMessageStyleWorker);
+function getMessageStyleWorker(onActionPress: (e: InteractionEvent) => void): ViewStyle {
+  const alignSelf = onActionPress ? 'flex-start' : 'center';
+  return { alignSelf: alignSelf };
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ViewStyle, ColorValue } from 'react-native';
+import { PressableProps, ViewStyle, ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
@@ -146,7 +146,7 @@ export interface TabsItemInfo {
 }
 
 export interface TabsItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressableProps>;
   icon: IconProps;
   stack: IViewProps;
   indicator: IViewProps;

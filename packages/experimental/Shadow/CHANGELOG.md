@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.20
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/pressable to v0.9.12
+- Bump @fluentui-react-native/theme-types to v0.19.1
+
+## 0.2.19
+
+Tue, 20 Sep 2022 20:05:27 GMT
+
+### Patches
+
+- Add border width test (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.18
 

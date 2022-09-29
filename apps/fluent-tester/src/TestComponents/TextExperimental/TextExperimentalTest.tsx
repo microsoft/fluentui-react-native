@@ -5,12 +5,17 @@ import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
 import { EXPERIMENTAL_TEXT_TESTPAGE } from './consts';
+import { V2Usage } from './V2Usage';
 
 const textSections: TestSection[] = [
   {
     name: 'Standard Usage',
     testID: EXPERIMENTAL_TEXT_TESTPAGE,
     component: StandardUsage,
+  },
+  {
+    name: 'V2 Usage',
+    component: V2Usage,
   },
   {
     name: 'Customize Usage',
