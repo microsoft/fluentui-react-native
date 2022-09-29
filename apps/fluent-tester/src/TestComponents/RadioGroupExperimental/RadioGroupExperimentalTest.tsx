@@ -7,6 +7,7 @@ import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { HorizontalRadioGroup } from './HorizontalRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
 import { VariantRadioGroup } from './VariantRadioGroup';
+import { E2ERadioGroupExperimentalTest } from './RadioGroupExperimentalE2ETest';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [
@@ -44,6 +45,11 @@ const radioGroupExperimentalSections: TestSection[] = [
     name: 'Variant RadioGroups',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: VariantRadioGroup,
+  },
+  {
+    name: 'RadioGroup for E2E Testing',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: E2ERadioGroupExperimentalTest,
   },
 ];
 
