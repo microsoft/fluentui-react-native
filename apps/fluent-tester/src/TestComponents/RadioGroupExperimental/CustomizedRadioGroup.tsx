@@ -271,9 +271,9 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
         </View>
       </View>
 
-      <CustomRadioGroup label="Custom RadioGroup" accessibilityLabel="Custom Switch">
+      <CustomRadioGroup required label="Custom RadioGroup" accessibilityLabel="Custom Switch">
         <CustomRadio label="Apple" value="Apple"></CustomRadio>
-        <CustomRadio label="Pear" value="Pear"></CustomRadio>
+        <CustomRadio label="Pear" subtext="This is my favorite" value="Pear"></CustomRadio>
         <CustomRadio label="Banana" value="Banana"></CustomRadio>
         <CustomRadio label="Orange" value="Orange"></CustomRadio>
       </CustomRadioGroup>

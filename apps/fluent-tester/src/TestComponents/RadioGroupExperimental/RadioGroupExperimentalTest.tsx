@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from './consts';
 import { DefaultRadioGroup } from './DefaultRadioGroup';
-import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
-import { CustomizedRadioGroup } from './CustomizedRadioGroup';
-import { VariantRadioGroup } from './VariantRadioGroup';
+import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { HorizontalRadioGroup } from './HorizontalRadioGroup';
+import { CustomizedRadioGroup } from './CustomizedRadioGroup';
+import { VariantRadioGroup } from './VariantRadioGroup';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [
@@ -36,14 +36,14 @@ const radioGroupExperimentalSections: TestSection[] = [
     component: HorizontalRadioGroup,
   },
   {
-    name: 'Variant RadioGroups',
-    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-    component: VariantRadioGroup,
-  },
-  {
     name: 'Customized RadioGroup Usage',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: CustomizedRadioGroup,
+  },
+  {
+    name: 'Variant RadioGroups',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: VariantRadioGroup,
   },
 ];
 
