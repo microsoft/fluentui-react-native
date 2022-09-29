@@ -42,6 +42,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: getAccessibilityState(state.disabled, state.required, accessibilityState),
       defaultTabbableElement: selectedButtonRef,
+      focusable: !state.disabled,
       isCircularNavigation: isCircularNavigation ?? true,
     },
     state: {
