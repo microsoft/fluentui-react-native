@@ -1,6 +1,7 @@
 {
   "type": "minor",
+  "comment": "Ripple/Fix on FAB",
   "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
+  "email": "ruaraki@microsoft.com",
   "dependentChangeType": "patch"
 }
