@@ -3,20 +3,18 @@ import { Separator } from '@fluentui/react-native';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+import { Option } from '@fluentui-react-native/dropdown';
+import { Stack } from '@fluentui-react-native/stack';
+import { stackStyle } from '../Common/styles';
 
 export const VariantRadioGroup: React.FunctionComponent = () => {
-  // Client's example onChange function
-  const onChange = (key: string) => {
-    console.log(key);
-  };
-
   return (
     <View>
-      <RadioGroup label="RadioGroup with Input" defaultValue="Pear" onChange={onChange}>
+      <RadioGroup label="RadioGroup with Input" defaultValue="Pear">
         <Radio label="Apple" value="Apple" />
         <Radio label="Pear" value="Pear" />
         <Radio label="Banana" value="Banana" />
-        <View>
+        <View style={{ alignItems: 'flex-start', flexDirection: 'row' }}>
           <Radio label="" value="Orange" />
           <TextInput
             accessibilityLabel="Other"
@@ -30,12 +28,17 @@ export const VariantRadioGroup: React.FunctionComponent = () => {
         </View>
       </RadioGroup>
       <Separator />
-      <RadioGroup label="RadioGroup with Dropdown" defaultValue="Pear" onChange={onChange}>
+      <RadioGroup label="RadioGroup with Dropdown" defaultValue="Pear">
         <Radio label="Apple" value="Apple" />
         <Radio label="Pear" value="Pear" />
         <Radio label="Banana" value="Banana" />
-        <View>
+        <View style={{ alignItems: 'flex-start', flexDirection: 'row' }}>
           <Radio label="Orange" value="Orange" />
+          {/* Replace with V1 Dropdown */}
+          <Stack style={stackStyle}>
+            <Option>Test</Option>
+            <Option disabled>Disabled Test</Option>
+          </Stack>
         </View>
       </RadioGroup>
     </View>

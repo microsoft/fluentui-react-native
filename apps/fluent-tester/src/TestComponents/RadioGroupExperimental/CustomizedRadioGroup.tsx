@@ -31,8 +31,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(10);
   const [radioFill, setRadioFill] = React.useState<string>('blue');
   const [color, setColor] = React.useState<string>('black');
-  const [subtextSize, setSubtextSize] = React.useState<number>(200);
-  const [marginTop, setMarginTop] = React.useState<number>(2);
+  const [subtextSize, setSubtextSize] = React.useState<number>(12);
+  const [marginTop, setMarginTop] = React.useState<number>(1);
 
   const CustomRadioGroup = React.useMemo(() => {
     const tokens: RadioGroupTokens = {
