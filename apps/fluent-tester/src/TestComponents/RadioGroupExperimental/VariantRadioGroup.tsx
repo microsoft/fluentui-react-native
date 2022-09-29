@@ -21,9 +21,9 @@ export const VariantRadioGroup: React.FunctionComponent = () => {
             style={commonStyles.textBox}
             placeholder="Other"
             blurOnSubmit={true}
-            // onSubmitEditing={(e) => {
-            //   setBorderWidth(parseInt(e.nativeEvent.text.toString()));
-            // }}
+            onSubmitEditing={(e) => {
+              console.log(e.nativeEvent.text.toString());
+            }}
           />
         </View>
       </RadioGroup>
