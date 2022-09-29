@@ -1,10 +1,7 @@
 import { Theme } from '@fluentui-react-native/theme-types';
 import { IComponentSettings } from '@uifabricshared/foundation-settings';
 
-/**
- * helper to strip out the component settings specific bits from the returned structure
- * @deprecated
- */
+/** helper to strip out the component settings specific bits from the returned structure */
 export function returnAsSlotProps(target: IComponentSettings): IComponentSettings {
   if (target) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,7 +16,6 @@ export function returnAsSlotProps(target: IComponentSettings): IComponentSetting
  * @param theme - theme used to retrieve settings
  * @param name - name of the settings entry to retrieve
  * @param overrides - optional override lookup object to conditionally apply overrides
- * @deprecated
  */
 export function getSettings(theme: Theme, name: string): IComponentSettings {
   return (theme.components && theme.components[name]) || undefined;
