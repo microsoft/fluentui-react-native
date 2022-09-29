@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Sep 2022 20:55:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.0
+
+Tue, 27 Sep 2022 20:55:52 GMT
+
+### Minor changes
+
+- Added required prop to RadioGroup (gulnazsayed@microsoft.com)
+
+## 0.4.0
+
+Tue, 27 Sep 2022 18:09:31 GMT
+
+### Minor changes
+
+- Added disabled prop to RadioGroup and Radio (gulnazsayed@microsoft.com)
+
+## 0.3.5
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.14
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+- Bump @fluentui-react-native/pressable to v0.9.13
 
 ## 0.3.4
 
