@@ -3,7 +3,7 @@ import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IFocusable, IPressableHooks } from '@fluentui-react-native/interactive-hooks';
-import { ColorValue } from 'react-native';
+import { ColorValue, ViewStyle } from 'react-native';
 
 export const radioName = 'Radio';
 
@@ -44,8 +44,19 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   subtextSize?: number;
 
   /**
+   * The flex direction of the root
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+
+  /**
+   * The flex direction of the root
+   */
+  marginTop?: ViewStyle['marginTop'];
+
+  /**
    * States that can be applied to a Radio
    */
+  isBelow?: RadioTokens;
   selected?: RadioTokens;
   disabled?: RadioTokens;
   hovered?: RadioTokens;
@@ -75,6 +86,16 @@ export interface RadioProps extends IPressableProps {
   disabled?: boolean;
 
   /**
+   * The position of the label relative to the radio indicator.
+   *
+   * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
+   * in which case it defaults to 'below'
+   *
+   * @default after
+   */
+  labelPosition?: 'after' | 'below';
+
+  /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
@@ -86,7 +107,12 @@ export interface RadioProps extends IPressableProps {
   enableFocusRing?: boolean;
 }
 
-export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {}
+export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {
+  /**
+   * If horizontal-stacked, label should be below indicator.
+   */
+  isBelow?: boolean;
+}
 
 export interface RadioSlotProps {
   root: IViewProps;

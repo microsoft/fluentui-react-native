@@ -15,39 +15,56 @@ const styles = StyleSheet.create({
 });
 
 export const CustomizedRadioGroup: React.FunctionComponent = () => {
+  // RadioGroup
+  const [groupColor, setGroupColor] = React.useState<string>('black');
+  const [requiredColor, setRequiredColor] = React.useState<string>('red');
+  const [requiredPadding, setRequiredPadding] = React.useState<number>(2);
+
+  // Radio
   const [borderColor, setBorderColor] = React.useState<string>('black');
-  const [borderStyle, setBorderStyle] = React.useState<string>('solid');
   const [borderWidth, setBorderWidth] = React.useState<number>(1);
-  const [radioBorder, setRadioBorder] = React.useState<string>('transparent');
+  const [borderRadius, setBorderRadius] = React.useState<number>(1);
+  const [radioBorderWidth, setRadioBorderWidth] = React.useState<number>(1);
+  const [radioVisibility, setRadioVisibility] = React.useState<number>(1);
+  const [radioBorder, setRadioBorder] = React.useState<string>('black');
+  const [radioSize, setRadioSize] = React.useState<number>(20);
+  const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(10);
+  const [radioFill, setRadioFill] = React.useState<string>('blue');
+  const [color, setColor] = React.useState<string>('black');
+  const [subtextSize, setSubtextSize] = React.useState<number>(200);
+  const [marginTop, setMarginTop] = React.useState<number>(2);
 
   const CustomRadioGroup = React.useMemo(() => {
     const tokens: RadioGroupTokens = {
-      // insert disabled
-      // insert required
+      color: groupColor,
+      requiredColor,
+      requiredPadding,
+      disabled: {
+        color: groupColor,
+      },
     };
     return RadioGroup.customize(tokens);
-  }, []);
+  }, [groupColor, requiredColor, requiredPadding]);
 
   const CustomRadio = React.useMemo(() => {
     const tokens: RadioTokens = {
       borderColor,
-      borderStyle,
       borderWidth,
       borderRadius,
-      variant,
-      color,
-      radioBorder,
+      radioBorderWidth,
       radioVisibility,
+      radioBorder,
       radioSize,
       radioInnerCircleSize,
-      radioBorderWidth,
+      color,
+      subtextSize,
+      marginTop,
 
       disabled: {
         radioBorder,
         color,
         radioVisibility,
-      }
-
+      },
       hovered: {
         radioBorder,
         color,
@@ -56,9 +73,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
           radioFill,
           color,
           radioVisibility,
-        }
-      }
-
+        },
+      },
       pressed: {
         radioBorder,
         color,
@@ -67,16 +83,14 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
           radioFill,
           color,
           radioVisibility,
-        }
-      }
-
+        },
+      },
       focused: {
         borderColor,
         selected: {
           radioVisibility,
-        }
-      }
-
+        },
+      },
       selected: {
         radioBorder,
         radioFill,
@@ -84,70 +98,84 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
         radioVisibility,
         disabled: {
           radioFill,
-        }
-      }
+        },
+      },
     };
     return Radio.customize(tokens);
   }, [
-borderColor,
-borderStyle,
-
+    borderColor,
+    borderWidth,
+    borderRadius,
+    radioBorderWidth,
+    radioVisibility,
+    radioBorder,
+    radioSize,
+    radioInnerCircleSize,
+    radioFill,
+    color,
+    subtextSize,
+    marginTop,
   ]);
 
   return (
     <View style={styles.tokensColumn}>
       <View style={styles.tokensRow}>
         <View>
-          <Text>Track Tokens</Text>
+          <Text>RadioGroup Tokens</Text>
           <TextInput
-            accessibilityLabel="Track color"
+            accessibilityLabel="RadioGroup color"
             style={commonStyles.textBox}
-            placeholder="Track color"
+            placeholder="color"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setTrackColor(e.nativeEvent.text);
+              setGroupColor(e.nativeEvent.text);
             }}
           />
           <TextInput
-            accessibilityLabel="Track border color"
+            accessibilityLabel="RadioGroup required color"
             style={commonStyles.textBox}
-            placeholder="Track border color"
+            placeholder="requiredColor"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setRequiredColor(e.nativeEvent.text);
+            }}
+          />
+          <TextInput
+            accessibilityLabel="RadioGroup required padding"
+            style={commonStyles.textBox}
+            placeholder="requiredPadding"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setRequiredPadding(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+        </View>
+      </View>
+      <View style={styles.tokensRow}>
+        <View>
+          <Text>Radio Border Tokens</Text>
+          <TextInput
+            accessibilityLabel="Radio border color"
+            style={commonStyles.textBox}
+            placeholder="borderColor"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
               setBorderColor(e.nativeEvent.text);
             }}
           />
           <TextInput
-            accessibilityLabel="Track width"
+            accessibilityLabel="Radio border width"
             style={commonStyles.textBox}
-            placeholder="Track width"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setTrackWidth(parseInt(e.nativeEvent.text.toString()));
-            }}
-          />
-          <TextInput
-            accessibilityLabel="Track height"
-            style={commonStyles.textBox}
-            placeholder="Track height"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setTrackHeight(parseInt(e.nativeEvent.text.toString()));
-            }}
-          />
-          <TextInput
-            accessibilityLabel="Track border width"
-            style={commonStyles.textBox}
-            placeholder="Track border width"
+            placeholder="borderWidth"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
               setBorderWidth(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
-            accessibilityLabel="Track border radius"
+            accessibilityLabel="Radio border radius"
             style={commonStyles.textBox}
-            placeholder="Track border radius"
+            placeholder="borderRadius"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
               setBorderRadius(parseInt(e.nativeEvent.text.toString()));
@@ -155,119 +183,99 @@ borderStyle,
           />
         </View>
         <View>
-          <Text>Thumb Tokens</Text>
+          <Text>Radio Button Tokens</Text>
           <TextInput
-            accessibilityLabel="Thumb on color"
+            accessibilityLabel="Radio button border width"
             style={commonStyles.textBox}
-            placeholder="Thumb on color"
+            placeholder="radioBorderWidth"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setThumbColorOn(e.nativeEvent.text);
+              setRadioBorderWidth(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
-            accessibilityLabel="Thumb off color"
+            accessibilityLabel="Radio button visibility"
             style={commonStyles.textBox}
-            placeholder="Thumb off color"
+            placeholder="radioVisibility"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setThumbColorOff(e.nativeEvent.text);
+              setRadioVisibility(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
-            accessibilityLabel="Thumb size"
+            accessibilityLabel="Radio button border"
             style={commonStyles.textBox}
-            placeholder="Thumb size"
+            placeholder="radioBorder"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setThumbSize(parseInt(e.nativeEvent.text));
+              setRadioBorder(e.nativeEvent.text);
             }}
           />
           <TextInput
-            accessibilityLabel="Thumb radius"
+            accessibilityLabel="Radio button size"
             style={commonStyles.textBox}
-            placeholder="Thumb radius"
+            placeholder="radioSize"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setThumbRadius(parseInt(e.nativeEvent.text));
-            }}
-          />
-        </View>
-      </View>
-      <View style={styles.tokensRow}>
-        <View>
-          <Text>Focus Stroke Tokens</Text>
-          <TextInput
-            accessibilityLabel="Focus stroke color"
-            style={commonStyles.textBox}
-            placeholder="Focus stroke color"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setFocusStrokeColor(e.nativeEvent.text);
+              setRadioSize(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
-            accessibilityLabel="Focus stroke border radius"
+            accessibilityLabel="Radio button inner circle size"
             style={commonStyles.textBox}
-            placeholder="Focus stroke border radius"
+            placeholder="radioInnerCircleSize"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setFocusBorderRadius(parseInt(e.nativeEvent.text));
+              setRadioInnerCircleSize(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput
-            accessibilityLabel="Focus stroke border width"
+            accessibilityLabel="Radio button fill"
             style={commonStyles.textBox}
-            placeholder="Focus stroke border width"
+            placeholder="radioFill"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
-              setFocusBorderWidth(parseInt(e.nativeEvent.text));
+              setRadioFill(e.nativeEvent.text);
             }}
           />
         </View>
         <View>
-          <Text>Other Tokens</Text>
+          <Text>Radio Label Tokens</Text>
           <TextInput
-            accessibilityLabel="Minimum width"
+            accessibilityLabel="Radio label color"
             style={commonStyles.textBox}
-            placeholder="Minimum width"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setMinWidth(parseInt(e.nativeEvent.text));
-            }}
-          />
-          <TextInput
-            accessibilityLabel="Minimum height"
-            style={commonStyles.textBox}
-            placeholder="Minimum height"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setMinHeight(parseInt(e.nativeEvent.text));
-            }}
-          />
-          <TextInput
-            accessibilityLabel="Padding"
-            style={commonStyles.textBox}
-            placeholder="Padding"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setPadding(parseInt(e.nativeEvent.text));
-            }}
-          />
-          <TextInput
-            accessibilityLabel="Text colors"
-            style={commonStyles.textBox}
-            placeholder="Text colors"
+            placeholder="color"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
               setColor(e.nativeEvent.text);
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio label subtext size"
+            style={commonStyles.textBox}
+            placeholder="subtextSize"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setSubtextSize(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio label margin top"
+            style={commonStyles.textBox}
+            placeholder="marginTop"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setMarginTop(parseInt(e.nativeEvent.text.toString()));
             }}
           />
         </View>
       </View>
 
       <CustomRadioGroup label="Custom RadioGroup" accessibilityLabel="Custom Switch">
-        <Radio></Radio>
+        <CustomRadio label="Apple" value="Apple"></CustomRadio>
+        <CustomRadio label="Pear" value="Pear"></CustomRadio>
+        <CustomRadio label="Banana" value="Banana"></CustomRadio>
+        <CustomRadio label="Orange" value="Orange"></CustomRadio>
       </CustomRadioGroup>
     </View>
   );

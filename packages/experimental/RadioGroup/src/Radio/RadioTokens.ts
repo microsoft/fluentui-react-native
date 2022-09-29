@@ -17,16 +17,25 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioSize: 20,
     radioInnerCircleSize: 10,
     subtextSize: globalTokens.font.size[200],
+    flexDirection: 'row',
+    marginTop: globalTokens.spacing.xxs,
+
+    isBelow: {
+      flexDirection: 'column',
+    },
+
     disabled: {
       // Unchecked, Disabled
       radioBorder: t.colors.neutralForegroundDisabled,
       color: t.colors.neutralForegroundDisabled,
       radioVisibility: 0,
     },
+
     hovered: {
       // Unchecked, Hover
       radioBorder: t.colors.neutralStrokeAccessibleHover,
       color: t.colors.neutralForeground2,
+
       selected: {
         // Checked, Hover
         radioBorder: t.colors.compoundBrandStroke1Hover,
@@ -35,10 +44,12 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioVisibility: 0.5,
       },
     },
+
     pressed: {
       // Unchecked, Pressed
       radioBorder: t.colors.neutralStrokeAccessiblePressed,
       color: t.colors.neutralForeground1,
+
       selected: {
         // Checked, Pressed
         radioBorder: t.colors.compoundBrandStroke1Pressed,
@@ -47,19 +58,23 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioVisibility: 1,
       },
     },
+
     focused: {
       borderColor: t.colors.focusBorder,
+
       selected: {
         // Checked, Focused
         radioVisibility: 1,
       },
     },
+
     selected: {
       // Checked, Rest
       radioBorder: t.colors.compoundBrandStroke1,
       radioFill: t.colors.compoundBrandStroke1,
       color: t.colors.neutralForeground3,
       radioVisibility: 1,
+
       disabled: {
         // Checked, Disabled
         radioFill: t.colors.neutralForegroundDisabled,

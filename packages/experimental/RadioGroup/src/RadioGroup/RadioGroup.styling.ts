@@ -3,7 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { defaultRadioGroupTokens } from './RadioGroupTokens';
 import { fontStyles } from '@fluentui-react-native/tokens';
 
-export const radioGroupStates: (keyof RadioGroupTokens)[] = ['disabled'];
+export const radioGroupStates: (keyof RadioGroupTokens)[] = ['isHorizontal', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotProps, RadioGroupTokens> = {
   tokens: [defaultRadioGroupTokens, radioGroupName],
@@ -43,6 +43,16 @@ export const stylingSettings: UseStylingOptions<RadioGroupProps, RadioGroupSlotP
         },
       }),
       ['requiredColor', 'requiredPadding'],
+    ),
+    options: buildProps(
+      (tokens: RadioGroupTokens) => ({
+        style: {
+          display: 'flex',
+          alignItems: 'flex-start',
+          flexDirection: tokens.flexDirection,
+        },
+      }),
+      ['flexDirection'],
     ),
   },
 };

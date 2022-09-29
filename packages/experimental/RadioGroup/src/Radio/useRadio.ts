@@ -9,11 +9,16 @@ const defaultAccessibilityActions = [{ name: 'Select' }];
 
 export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
+
+  // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
+  const selectedInfo = useRadioGroupContext();
+
   const {
     label,
     subtext,
     value,
     disabled,
+    labelPosition = selectedInfo.layout === 'horizontal-stacked' ? 'below' : 'after',
     accessibilityActions,
     accessibilityLabel,
     accessibilityHint,
@@ -25,8 +30,7 @@ export const useRadio = (props: RadioProps): RadioState => {
     ...rest
   } = props;
 
-  // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
-  const selectedInfo = useRadioGroupContext();
+  console.log(labelPosition);
 
   const buttonRef = useViewCommandFocus(componentRef);
 
@@ -78,6 +82,7 @@ export const useRadio = (props: RadioProps): RadioState => {
     ...pressable.state,
     selected: selectedInfo.value === props.value,
     disabled: selectedInfo.disabled || disabled || false,
+    isBelow: labelPosition === 'below' ? true : false,
   };
 
   return {
@@ -85,6 +90,7 @@ export const useRadio = (props: RadioProps): RadioState => {
       value,
       label,
       subtext,
+      labelPosition,
       ...rest,
       ref: buttonRef,
       ...pressable.props,
