@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 00:54:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.1
+
+Fri, 30 Sep 2022 00:54:37 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
 
 ## 0.8.0
 
