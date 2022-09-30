@@ -1,25 +1,28 @@
-import { requireNativeComponent, View } from 'react-native';
 import { ensureNativeComponent } from './ensureNativeComponent';
 
-jest.mock('react-native/Libraries/ReactNative/requireNativeComponent', () => (className) => {
-  if (className == 'RCTView') {
-    return jest.requireActual('View');
-  }
+jest.mock('react-native/Libraries/ReactNative/requireNativeComponent', () =>
+  jest.fn((className) => {
+    if (className == 'RCTView') {
+      return jest.requireActual('react-native/Libraries/Components/View/View');
+    }
 
-  return null;
-});
+    return null;
+  }),
+);
+const requireNativeComponent = require('react-native/Libraries/ReactNative/requireNativeComponent');
 
 describe('ensureNativeComponent test suite', () => {
   it('Base component render', () => {
-    const component = ensureNativeComponent('RCTView');
+    ensureNativeComponent('RCTView');
     expect(requireNativeComponent).toHaveBeenCalled();
-    expect(component).toEqual(View);
   });
 
   it('Base component render', () => {
     const component = ensureNativeComponent('RCTView');
     const component2 = ensureNativeComponent('RCTView');
-    expect(requireNativeComponent).not.toHaveBeenCalled();
+
+    // Make sure requireNativeComponent has only been called once
+    expect(requireNativeComponent).toHaveBeenCalledTimes(1);
     expect(component).toEqual(component2);
   });
 
@@ -30,3 +33,5 @@ describe('ensureNativeComponent test suite', () => {
     expect(requireNativeComponent).toHaveBeenCalled();
   });
 });
+
+jest.clearAllMocks();
