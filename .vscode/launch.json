@@ -32,6 +32,21 @@
       "outFiles": []
     },
     {
+      "name": "Debug current folder test",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "cwd": "${fileDirname}",
+      "args": ["-i", "--runInBand"],
+      "runtimeArgs": ["--nolazy"],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "console": "integratedTerminal",
+      "sourceMaps": true,
+      "outFiles": []
+    },
+    {
       "name": "Debug metro bundling task",
       "type": "node",
       "request": "launch",
