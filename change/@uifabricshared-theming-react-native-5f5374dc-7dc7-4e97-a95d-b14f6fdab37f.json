@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Deprecate theming-react-native",
+  "packageName": "@uifabricshared/theming-react-native",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
