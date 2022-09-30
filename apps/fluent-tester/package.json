@@ -16,7 +16,7 @@
     "android": "react-native run-android",
     "build": "fluentui-scripts build",
     "bundle": "react-native rnx-bundle --dev false",
-    "bundle:android": "react-native rnx-bundle --dev false --platform android --assets-path dist/res",
+    "bundle:android": "react-native rnx-bundle --dev false --platform android --assets-dest dist/res",
     "bundle:ios": "react-native rnx-bundle --dev false --platform ios",
     "bundle:macos": "react-native rnx-bundle --dev false --platform macos",
     "bundle:windows": "react-native rnx-bundle --dev false --platform windows",
@@ -90,8 +90,8 @@
     "@babel/runtime": "^7.8.0",
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@rnx-kit/cli": "^0.9.57",
-    "@rnx-kit/metro-config": "^1.2.26",
+    "@rnx-kit/cli": "^0.14.8",
+    "@rnx-kit/metro-config": "^1.3.1",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.0",
@@ -124,22 +124,25 @@
   "rnx-kit": {
     "reactNativeVersion": "^0.68",
     "kitType": "app",
-    "bundle": {
-      "targets": [
-        "android",
-        "ios",
-        "macos",
-        "windows"
-      ],
-      "entryPath": "index.js",
-      "detectCyclicDependencies": {
-        "throwOnError": true
-      },
-      "detectDuplicateDependencies": {
-        "throwOnError": false
-      },
-      "typescriptValidation": false
-    },
+    "bundle": [
+      {
+        "id": "main",
+        "entryFile": "index.js",
+        "targets": [
+          "android",
+          "ios",
+          "macos",
+          "windows"
+        ],
+        "detectCyclicDependencies": {
+          "throwOnError": true
+        },
+        "detectDuplicateDependencies": {
+          "throwOnError": false
+        },
+        "typescriptValidation": false
+      }
+    ],
     "capabilities": [
       "core-android",
       "core-ios",
