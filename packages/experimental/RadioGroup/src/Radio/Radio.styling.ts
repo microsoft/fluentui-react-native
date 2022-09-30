@@ -87,7 +87,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           fontSize: tokens.subtextSize,
         },
       }),
-      ['color'],
+      ['variant', 'color', 'subtextSize'],
     ),
   },
 };
