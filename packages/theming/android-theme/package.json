@@ -33,7 +33,9 @@
   "dependencies": {
     "@fluentui-react-native/theme-tokens": "^0.19.1",
     "@fluentui-react-native/theme-types": ">=0.19.2 <1.0.0",
-    "@fluentui-react-native/theme": ">=0.7.3 <1.0.0"
+    "@fluentui-react-native/theme": ">=0.7.3 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.15.3 <1.0.0",
+    "@fluentui-react-native/memo-cache": "^1.1.7"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
