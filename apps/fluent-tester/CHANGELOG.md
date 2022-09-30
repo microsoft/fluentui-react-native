@@ -1,8 +1,71 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 22 Sep 2022 00:31:25 GMT and should not be manually modified.
+This log was last generated on Tue, 27 Sep 2022 20:55:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.99.0
+
+Tue, 27 Sep 2022 20:55:52 GMT
+
+### Minor changes
+
+- Added required RadioGroup to tester app (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.5.0
+
+## 0.98.0
+
+Tue, 27 Sep 2022 18:09:32 GMT
+
+### Minor changes
+
+- Added disabled RadioGroup to tester page (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.4.0
+
+## 0.97.1
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.2.11
+- Bump @fluentui-react-native/badge to v0.1.34
+- Bump @fluentui-react-native/button to v0.25.1
+- Bump @fluentui-react-native/dropdown to v0.4.2
+- Bump @fluentui-react-native/experimental-button to v0.16.28
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.19
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.32
+- Bump @fluentui-react-native/experimental-radio-group to v0.3.5
+- Bump @fluentui-react-native/experimental-shadow to v0.2.21
+- Bump @fluentui-react-native/experimental-tabs to v0.5.17
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+- Bump @fluentui-react-native/menu to v1.0.38
+- Bump @fluentui-react-native/notification to v0.17.11
+- Bump @fluentui-react-native/switch to v0.6.9
+- Bump @fluentui/react-native to v0.32.24
+
+## 0.97.0
+
+Fri, 23 Sep 2022 06:23:01 GMT
+
+### Minor changes
+
+- make fab collapsible, fix fab bugs (email not defined)
+- Bump @fluentui-react-native/button to v0.25.0
+- Bump @fluentui-react-native/experimental-button to v0.16.27
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.31
+- Bump @fluentui-react-native/menu to v1.0.37
+- Bump @fluentui-react-native/notification to v0.17.10
+- Bump @fluentui/react-native to v0.32.23
+
+## 0.96.3
+
+Thu, 22 Sep 2022 18:51:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.18
+- Bump @fluentui/react-native to v0.32.22
 
 ## 0.96.2
 

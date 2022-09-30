@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PressableProps } from 'react-native';
 import { PressableFocusProps, PressableHoverProps, PressablePressProps } from './Pressability/Pressability.types';
 import {
   IPressableHooks,
@@ -8,8 +7,6 @@ import {
   IHoverState,
   IFocusState,
   IWithPressableEvents,
-  IPressableState,
-  PressablePropsExtended,
 } from './useAsPressable.types';
 import { usePressability } from './usePressability';
 
@@ -148,21 +145,4 @@ export function useAsPressable<T extends object>(props: IWithPressableOptions<T>
     props: { ...props, ...pressabilityProps },
     state: { ...hoverState, ...focusState, ...pressState },
   };
-}
-
-/**
- * This routine hooks the props to pass to a Pressable component to obtain the current state of the Pressable as well as generating
- * state change updates when those props change. This allows a parent component to control the render of the whole component rather than having
- * to split the code between a child function or style function.
- *
- * @param props - props to pass to a Pressable component
- * @returns - modified props to pass into the Pressable as well as the current state with regards to hover, focus, and press
- */
-export function usePressableState(props: PressablePropsExtended): { props: PressableProps; state: IPressableState } {
-  const { onPressIn, onPressOut, onHoverIn, onHoverOut, onFocus, onBlur, ...rest } = props;
-  const [hoverProps, hoverState] = useHoverHelper({ onHoverIn, onHoverOut });
-  const [focusProps, focusState] = useFocusHelper({ onFocus, onBlur });
-  const [pressProps, pressState] = usePressHelper({ onPressIn, onPressOut });
-
-  return { props: { ...hoverProps, ...focusProps, ...pressProps, ...rest }, state: { ...hoverState, ...focusState, ...pressState } };
 }

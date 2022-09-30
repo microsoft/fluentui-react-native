@@ -27,7 +27,7 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, B
         },
         elevation: tokens.elevation,
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     content: buildProps(
       (tokens: ButtonCoreTokens, theme: Theme) => ({
