@@ -37,12 +37,7 @@ function ensurePalette(module: OfficeThemingModule, paletteCache: PaletteCache, 
 /**
  * @deprecated
  */
-export function translateOfficeTheme(
-  module: OfficeThemingModule,
-  cache: PaletteCache,
-  id?: string,
-  themeName?: string,
-) {
+export function translateOfficeTheme(module: OfficeThemingModule, cache: PaletteCache, id?: string, themeName?: string) {
   const palette = ensurePalette(module, cache, id);
   return createPartialOfficeTheme(module, themeName, palette);
 }
