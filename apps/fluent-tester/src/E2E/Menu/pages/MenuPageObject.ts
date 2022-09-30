@@ -23,25 +23,23 @@ class MenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didMenuOpen(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_OPEN);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+    await browser.waitUntil(async () => await (await this._menuOpenText).isDisplayed(), {
       timeout: this.waitForUiEvent,
       timeoutMsg: 'The Menu did not open.',
       interval: 1000,
     });
 
-    return await callbackText.isDisplayed();
+    return await (await this._menuOpenText).isDisplayed();
   }
 
   async didMenuClose(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_CLOSE);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+    await browser.waitUntil(async () => await (await this._menuCloseText).isDisplayed(), {
       timeout: this.waitForUiEvent,
       timeoutMsg: 'The Menu did not close.',
       interval: 1000,
     });
 
-    return await callbackText.isDisplayed();
+    return await (await this._menuCloseText).isDisplayed();
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
@@ -103,6 +101,14 @@ class MenuPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_MENU_BUTTON);
+  }
+
+  get _menuOpenText() {
+    return By(MENU_ON_OPEN);
+  }
+
+  get _menuCloseText() {
+    return By(MENU_ON_CLOSE);
   }
 }
 
