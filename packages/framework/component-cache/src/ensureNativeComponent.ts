@@ -8,7 +8,7 @@ const cache: { [key: string]: HostComponent<any> } = {};
  */
 export function ensureNativeComponent<T>(name: string): HostComponent<T> {
   if (!cache[name]) {
-    cache[name] = requireNativeComponent(name);
+    cache[name] = requireNativeComponent<T>(name);
   }
   return cache[name];
 }
