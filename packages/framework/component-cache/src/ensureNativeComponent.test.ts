@@ -1,17 +1,19 @@
+import { requireNativeComponent } from 'react-native';
 import { ensureNativeComponent } from './ensureNativeComponent';
 
-jest.mock('react-native/Libraries/ReactNative/requireNativeComponent', () =>
-  jest.fn((className) => {
-    if (className == 'RCTView') {
-      return jest.requireActual('react-native/Libraries/Components/View/View');
-    }
-
-    return null;
-  }),
-);
-const requireNativeComponent = require('react-native/Libraries/ReactNative/requireNativeComponent');
-
 describe('ensureNativeComponent test suite', () => {
+  beforeAll(() => {
+    jest.mock('react-native/Libraries/ReactNative/requireNativeComponent', () =>
+      jest.fn((className) => {
+        if (className == 'RCTView') {
+          return jest.requireActual('react-native/Libraries/Components/View/View');
+        }
+
+        return null;
+      }),
+    );
+  });
+
   it('Base component render', () => {
     ensureNativeComponent('RCTView');
     expect(requireNativeComponent).toHaveBeenCalled();
@@ -32,6 +34,8 @@ describe('ensureNativeComponent test suite', () => {
     ensureNativeComponent('RCTText');
     expect(requireNativeComponent).toHaveBeenCalled();
   });
-});
 
-jest.clearAllMocks();
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+});
