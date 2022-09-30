@@ -5,6 +5,9 @@ import { IThemeEventListener } from '@uifabricshared/theme-registry';
 import { getThemeRegistry } from './Global';
 import { ThemeContext } from '@uifabricshared/theming-ramp';
 
+/**
+ * @deprecated
+ */
 export const ThemeProvider: React.FunctionComponent<IThemeProviderProps> = (props: IThemeProviderProps) => {
   const { registry: registryFromProps, theme: themeName = '', children } = props;
   const defaultRegistry = useThemeRegistry();
