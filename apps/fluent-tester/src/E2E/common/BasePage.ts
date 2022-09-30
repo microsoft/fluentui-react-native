@@ -1,4 +1,5 @@
 import { Keys } from './consts';
+import { TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '../../TestComponents/Common/consts';
 
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
@@ -154,12 +155,13 @@ export class BasePage {
       return;
     }
 
-    const FocusButton = await By('Focus_Button');
-    const scrollDownKeys = [Keys.PAGE_DOWN];
     await browser.waitUntil(
       async () => {
-        await FocusButton.addValue(scrollDownKeys);
-        scrollDownKeys.push(Keys.PAGE_DOWN);
+        await driver.touchScroll(
+          COMPONENT_SCROLL_COORDINATES.x,
+          COMPONENT_SCROLL_COORDINATES.y,
+          await this._testContentScrollViewer.elementId,
+        );
         return await ComponentToScrollTo.isDisplayed();
       },
       {
@@ -171,8 +173,7 @@ export class BasePage {
       },
     );
 
-    // We have this extra scroll here to ensure the whole component is visible.
-    await FocusButton.addValue(scrollDownKeys);
+    await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await this._testContentScrollViewer.elementId);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
@@ -210,7 +211,7 @@ export class BasePage {
 
     for (const child of TestChildren) {
       const autoId = await child.getAttribute('AutomationId');
-      if (autoId && autoId !== 'SCROLLVIEW_TEST_ID' && autoId.match(reg)) {
+      if (autoId && autoId !== TESTPAGE_CONTENT_SCROLLVIEWER && autoId.match(reg)) {
         return await child;
       }
     }
@@ -261,7 +262,12 @@ export class BasePage {
 
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {
-    return By('SCROLLVIEW_TEST_ID');
+    return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
+  }
+
+  // The scrollviewer containing each test page's content
+  get _testContentScrollViewer() {
+    return By(TESTPAGE_CONTENT_SCROLLVIEWER);
   }
 
   get _firstTestPageButton() {

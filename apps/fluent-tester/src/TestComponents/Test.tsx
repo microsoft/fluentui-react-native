@@ -111,7 +111,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
 
   return (
-    <View testID="ScrollViewAreaForComponents">
+    <View>
       <View style={styles.header}>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
