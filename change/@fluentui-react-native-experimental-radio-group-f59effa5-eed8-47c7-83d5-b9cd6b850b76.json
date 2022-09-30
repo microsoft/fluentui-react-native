@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add radio group snapshot test",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
