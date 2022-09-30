@@ -33,7 +33,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
       Object {
         "alignItems": "center",
         "aspectRatio": 1,
-        "backgroundColor": "#e6e6e6",
+        "backgroundColor": "#5c5c5c",
         "borderColor": "#d1d1d1",
         "borderRadius": 9999,
         "borderWidth": 0,
@@ -47,7 +47,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
       align="xMidYMid"
       bbHeight={16}
       bbWidth={16}
-      color={-10395295}
+      color={-8355712}
       focusable={false}
       height={16}
       meetOrSlice={0}
@@ -66,7 +66,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
           },
         ]
       }
-      tintColor={-10395295}
+      tintColor={-8355712}
       vbHeight={16}
       vbWidth={14}
       width={16}
