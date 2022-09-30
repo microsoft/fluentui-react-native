@@ -2,6 +2,21 @@
   "name": "@uifabricshared/theme-registry",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 00:54:37 GMT",
+      "tag": "@uifabricshared/theme-registry_v0.8.1",
+      "version": "0.8.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/theme-registry",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:50 GMT",
       "tag": "@uifabricshared/theme-registry_v0.8.0",
       "version": "0.8.0",
