@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theme-registry",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Implementation of the theme graph",
   "repository": {
     "type": "git",
@@ -30,13 +30,27 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/immutable-merge": "^1.1.7",
-    "@types/jest": "^26.0.0",
-    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "react-native": "^0.66.0"
+    "@types/jest": "^26.0.0",
+    "@types/react-native": "^0.68.0",
+    "react": "17.0.2",
+    "react-native": "^0.68.0"
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68.0",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "core-android",
+      "core-ios"
+    ]
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
+    "react-native": "^0.68.0"
   }
 }

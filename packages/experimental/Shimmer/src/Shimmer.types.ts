@@ -1,5 +1,5 @@
 import { SvgProps } from 'react-native-svg';
-import { ViewProps } from 'react-native';
+import { ColorValue, ViewProps } from 'react-native';
 import { IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 
 export const shimmerName = 'Shimmer';
@@ -121,21 +121,17 @@ export interface ShimmerTokens extends IBackgroundColorTokens {
   /**
    * Color you see when the shimmer wave is not animating.
    *
-   * Note: Needs to be changed to ColorValue. https://www.github.com/Microsoft/fluentui-react-native Issue #866
-   *
    * @defaultValue theme.colors.bodyFrameDivider
    */
-  shimmerColor?: string | number;
+  shimmerColor?: ColorValue;
 
   /**
    * Defines the tip color of the wave which has a linear gradient.
    * from shimmerColor to shimmerWaveColor to shimmerColor.
    *
-   * Note: Needs to be changed to ColorValue. https://www.github.com/Microsoft/fluentui-react-native Issue #866
-   *
    * @defaultValue '#E1E1E1'
    */
-  shimmerWaveColor?: string | number;
+  shimmerWaveColor?: ColorValue;
 
   /**
    * Width of the Shimmer wave.

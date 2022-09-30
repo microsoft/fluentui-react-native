@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 00:54:34 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.12.3",
+      "version": "0.12.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/android-theme",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.19.2",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.7.3",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.12.2",
       "version": "0.12.2",
