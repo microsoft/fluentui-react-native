@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add deprecate script and test",
+  "packageName": "@fluentui-react-native/codemods",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
