@@ -5,10 +5,12 @@ import { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
  * @deprecated
  */
 export { ITheme, IPartialTheme } from '@uifabricshared/theming-ramp';
+
 /**
  * @deprecated
  */
 export type IThemeDefinition = IPartialTheme | IProcessTheme<ITheme, IPartialTheme>;
+
 /**
  * @deprecated
  */

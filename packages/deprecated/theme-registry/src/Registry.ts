@@ -180,7 +180,10 @@ interface IEntries {
 /**
  * @deprecated
  */
-export function createThemeRegistry<T extends object, TPartial extends object>(initial: T, baseResolver: IResolveTheme<T, TPartial>): IThemeRegistry<T, TPartial> {
+export function createThemeRegistry<T extends object, TPartial extends object>(
+  initial: T,
+  baseResolver: IResolveTheme<T, TPartial>,
+): IThemeRegistry<T, TPartial> {
   const entries: IEntries = {
     [_platformEntryName]: { resolved: initial as object },
     [_defaultEntryName]: { parentEntryName: _platformEntryName },
