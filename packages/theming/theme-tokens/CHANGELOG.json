@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.19.2",
+      "version": "0.19.2",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293",
+            "comment": "Added implmemtations for android tokens"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme-tokens",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.20.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 00:54:36 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.19.1",
       "version": "0.19.1",

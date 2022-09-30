@@ -2,6 +2,47 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 08:04:43 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.15.2",
+      "version": "0.15.2",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293",
+            "comment": "snapshots udpate"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.7.4",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.20.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/apple-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.16.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 00:54:34 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.15.1",
       "version": "0.15.1",

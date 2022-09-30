@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Added new api fro android",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

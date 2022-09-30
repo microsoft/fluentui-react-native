@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.16.0",
+      "version": "0.16.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293",
+            "comment": "Added new api fro android"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.20.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 00:54:37 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.15.3",
       "version": "0.15.3",
