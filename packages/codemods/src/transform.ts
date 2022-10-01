@@ -1,11 +1,16 @@
 import path from 'path';
 import yargs from 'yargs';
-import { spawnSync } from 'child_process';
+import { execSync } from 'child_process';
 
 const transformerDirectory = path.join(__dirname, 'transforms');
 const jscodeshiftExecutable = require.resolve('.bin/jscodeshift');
 
-const yargsParse = () => {
+interface argsType {
+  path: string;
+  transform: string;
+}
+
+export const yargsParse = (args: string[]): argsType => {
   return yargs([])
     .help()
     .exitProcess(false)
@@ -21,18 +26,17 @@ const yargsParse = () => {
       description: 'Name of transform to run',
       choices: ['button-v0-to-v1'],
     })
-    .demandOption(['path', 'transform']).argv;
+    .demandOption(['path', 'transform'])
+    .parse(args);
 };
 
-export const transform = () => {
-  const parsedArgs = yargsParse();
+export const transform = (args: argsType) => {
+  const codeshiftArgs = [];
 
-  const args = [];
+  codeshiftArgs.push('-t', path.join(transformerDirectory, args.transform + '.js'));
+  codeshiftArgs.push('--parser=tsx');
+  codeshiftArgs.push('--extensions=tsx');
+  codeshiftArgs.push(args.path);
 
-  args.push('-t', path.join(transformerDirectory, parsedArgs.transform));
-  args.push('--parser=tsx');
-  args.push('--extensions=tsx');
-  args.push(parsedArgs.path);
-
-  spawnSync(jscodeshiftExecutable, args);
+  execSync(jscodeshiftExecutable + ' ' + codeshiftArgs.join(' '));
 };

@@ -1,1 +1,3 @@
-export { transform } from './transform';
+import { transform, yargsParse } from './transform';
+
+transform(yargsParse(process.argv));
