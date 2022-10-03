@@ -2,6 +2,120 @@
   "name": "@uifabricshared/theming-react-native",
   "entries": [
     {
+      "date": "Mon, 03 Oct 2022 16:40:48 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.15.0",
+      "version": "0.15.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "c8f9ff1e1fc507dcea3280f3498c54fa377aa271",
+            "comment": "Deprecate theming-react-native"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theme-registry to v0.9.0",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.14.6",
+      "version": "0.14.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.21.4",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.4",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 00:54:37 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.14.5",
+      "version": "0.14.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/theming-react-native",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.15.3",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.21.3",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theme-registry to v0.8.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.3",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@uifabricshared/theming-react-native_v0.14.4",
+      "version": "0.14.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.15.2",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @fluentui-react-native/win32-theme to v0.21.2",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/theming-react-native",
+            "comment": "Bump @uifabricshared/theming-ramp to v0.17.2",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 16 Sep 2022 01:53:06 GMT",
       "tag": "@uifabricshared/theming-react-native_v0.14.3",
       "version": "0.14.3",

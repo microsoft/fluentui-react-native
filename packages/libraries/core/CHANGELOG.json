@@ -2,6 +2,510 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 03 Oct 2022 16:40:48 GMT",
+      "tag": "@fluentui/react-native_v0.32.27",
+      "version": "0.32.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.16",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.18",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.9.16",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.17",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.36",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.15.19",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.18",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@fluentui/react-native_v0.32.26",
+      "version": "0.32.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.25.3",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.15",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.20",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.17",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.9.15",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.16",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.9",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.16.15",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.35",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona to v0.13.7",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.11.7",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.15",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.15.18",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/separator to v0.12.6",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.17",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/text to v0.15.2",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 00:54:34 GMT",
+      "tag": "@fluentui/react-native_v0.32.25",
+      "version": "0.32.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.25.2",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.14",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.19",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.16",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.9.14",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.15",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.8",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.16.14",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.34",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona to v0.13.6",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.11.6",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.14",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.15.17",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/separator to v0.12.5",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.16",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/text to v0.15.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 26 Sep 2022 02:39:40 GMT",
+      "tag": "@fluentui/react-native_v0.32.24",
+      "version": "0.32.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.25.1",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.13",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.18",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.15",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.9.13",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.14",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.7",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.16.13",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.33",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.13",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.15.16",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.15",
+            "commit": "db03501224be9a35673a60cb27da1f999cc57628"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 23 Sep 2022 06:23:01 GMT",
+      "tag": "@fluentui/react-native_v0.32.23",
+      "version": "0.32.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.25.0",
+            "commit": "a754fbf223bee8a06ca792e17db7ca2bd44373e0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.32",
+            "commit": "a754fbf223bee8a06ca792e17db7ca2bd44373e0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Sep 2022 18:51:04 GMT",
+      "tag": "@fluentui/react-native_v0.32.22",
+      "version": "0.32.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.17",
+            "commit": "1160d21823f10486e0c7bf9624aa2b43e0f13664"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 22 Sep 2022 00:31:25 GMT",
+      "tag": "@fluentui/react-native_v0.32.21",
+      "version": "0.32.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.14",
+            "commit": "7f4c8e9b8b19b4bd46a0fec20984e373871c8020"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Sep 2022 21:00:40 GMT",
+      "tag": "@fluentui/react-native_v0.32.20",
+      "version": "0.32.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.24.26",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.12",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.16",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.14",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-trap-zone to v0.9.12",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.13",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.6",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.16.12",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.31",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona to v0.13.5",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/persona-coin to v0.11.5",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.12",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.15.15",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/separator to v0.12.4",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.7.13",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/text to v0.15.0",
+            "commit": "6706e18d88a521539fdc717100516ec3ee4bb5e2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 20 Sep 2022 20:05:27 GMT",
       "tag": "@fluentui/react-native_v0.32.19",
       "version": "0.32.19",

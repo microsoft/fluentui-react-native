@@ -4,12 +4,23 @@ exports[`Tabs FocusZone props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   componentRef={
     Object {
       "current": null,
     }
   }
   defaultSelectedKey="2"
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "display": "flex",
@@ -45,12 +56,12 @@ exports[`Tabs FocusZone props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -114,12 +125,12 @@ exports[`Tabs FocusZone props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -158,7 +169,7 @@ exports[`Tabs FocusZone props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": undefined,
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -183,12 +194,12 @@ exports[`Tabs FocusZone props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -248,11 +259,22 @@ exports[`Tabs default props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   componentRef={
     Object {
       "current": null,
     }
   }
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "display": "flex",
@@ -288,12 +310,12 @@ exports[`Tabs default props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -332,7 +354,7 @@ exports[`Tabs default props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": undefined,
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -357,12 +379,12 @@ exports[`Tabs default props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -426,12 +448,12 @@ exports[`Tabs default props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -491,11 +513,22 @@ exports[`Tabs disabled 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   componentRef={
     Object {
       "current": null,
     }
   }
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "display": "flex",
@@ -531,12 +564,12 @@ exports[`Tabs disabled 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -600,12 +633,12 @@ exports[`Tabs disabled 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -669,12 +702,12 @@ exports[`Tabs disabled 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -713,7 +746,7 @@ exports[`Tabs disabled 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": undefined,
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -734,11 +767,22 @@ exports[`Tabs header text and count 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   componentRef={
     Object {
       "current": null,
     }
   }
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "display": "flex",
@@ -775,12 +819,12 @@ exports[`Tabs header text and count 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -835,7 +879,7 @@ exports[`Tabs header text and count 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": undefined,
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -861,12 +905,12 @@ exports[`Tabs header text and count 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -947,12 +991,12 @@ exports[`Tabs header text and count 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1028,12 +1072,23 @@ exports[`Tabs headers only 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   componentRef={
     Object {
       "current": null,
     }
   }
+  focusable={true}
   headersOnly={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "display": "flex",
@@ -1069,12 +1124,12 @@ exports[`Tabs headers only 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1113,7 +1168,7 @@ exports[`Tabs headers only 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": undefined,
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1138,12 +1193,12 @@ exports[`Tabs headers only 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1207,12 +1262,12 @@ exports[`Tabs headers only 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1270,13 +1325,24 @@ exports[`Tabs props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   componentRef={
     Object {
       "current": null,
     }
   }
   defaultSelectedKey="2"
+  focusable={true}
   headersOnly={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "display": "flex",
@@ -1328,12 +1394,12 @@ exports[`Tabs props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={false}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1373,7 +1439,6 @@ exports[`Tabs props 1`] = `
             numberOfLines={0}
             style={
               Object {
-                "color": "#bdbdbd",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
                 "fontWeight": "400",
@@ -1414,12 +1479,12 @@ exports[`Tabs props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1474,7 +1539,7 @@ exports[`Tabs props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": undefined,
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1500,12 +1565,12 @@ exports[`Tabs props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onPress={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}

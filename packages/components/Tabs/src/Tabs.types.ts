@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { ITextProps } from '@fluentui-react-native/text';
-import type { IViewWin32Props } from '@office-iss/react-native-win32';
 import { IRenderData } from '@uifabricshared/foundation-composable';
 import { IForegroundColorTokens, FontTokens, IBackgroundColorTokens } from '@fluentui-react-native/tokens';
 import { FocusZoneProps } from '@fluentui-react-native/focus-zone';
 import { View, ViewProps } from 'react-native';
+import { PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 export const tabsName = 'Tabs';
 
@@ -111,7 +111,7 @@ export interface TabsProps extends Pick<FocusZoneProps, 'isCircularNavigation'> 
 export interface TabsTokens extends IForegroundColorTokens, FontTokens, IBackgroundColorTokens {}
 
 export interface TabsSlotProps {
-  root: React.PropsWithRef<IViewWin32Props>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   label: ITextProps;
   container: FocusZoneProps;
   stack: ViewProps;

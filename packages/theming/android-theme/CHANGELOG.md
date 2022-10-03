@@ -1,8 +1,39 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 08:04:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.12.4
+
+Fri, 30 Sep 2022 08:04:43 GMT
+
+### Patches
+
+- Added theme color tokens support for android (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.19.2
+- Bump @fluentui-react-native/theme-types to v0.20.0
+- Bump @fluentui-react-native/theme to v0.7.4
+- Bump @fluentui-react-native/theming-utils to v0.16.0
+
+## 0.12.3
+
+Fri, 30 Sep 2022 00:54:34 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.19.2
+- Bump @fluentui-react-native/theme to v0.7.3
+
+## 0.12.2
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.19.1
+- Bump @fluentui-react-native/theme to v0.7.2
 
 ## 0.12.1
 

@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 16 Sep 2022 01:53:06 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.0
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Minor changes
+
+- Made color type properties optional (email not defined)
+
+## 0.19.2
+
+Fri, 30 Sep 2022 00:54:37 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+
+## 0.19.1
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Merge branch 'main' into ios-typography-tokens (adam.gleitman@gmail.com)
 
 ## 0.19.0
 

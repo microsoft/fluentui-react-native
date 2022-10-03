@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ViewStyle, ColorValue } from 'react-native';
 import { FontTokens, IBorderTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IWithPressableEvents, IPressableState, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, PressableState, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
@@ -102,7 +102,7 @@ export interface TabsItemTokens extends FontTokens, IBorderTokens {
   selected?: TabsItemTokens;
 }
 
-export interface TabsItemProps extends Omit<IWithPressableOptions<IViewProps>, 'onPress'> {
+export interface TabsItemProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * The text string for the option
    */
@@ -136,17 +136,17 @@ export interface TabsItemProps extends Omit<IWithPressableOptions<IViewProps>, '
   testID?: string;
 }
 
-export interface TabsItemState extends IPressableState {
+export interface TabsItemState extends PressableState {
   selected?: boolean;
 }
 
 export interface TabsItemInfo {
-  props: IWithPressableEvents<TabsItemProps & React.ComponentPropsWithRef<any>>;
+  props: TabsItemProps & React.ComponentPropsWithRef<any>;
   state: TabsItemState;
 }
 
 export interface TabsItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   icon: IconProps;
   stack: IViewProps;
   indicator: IViewProps;

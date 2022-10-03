@@ -1,8 +1,78 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 20 Sep 2022 20:05:27 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.41
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.16
+
+## 1.0.40
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.15
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.9
+- Bump @fluentui-react-native/text to v0.15.2
+- Bump @fluentui-react-native/theme-tokens to v0.19.2
+- Bump @fluentui-react-native/tokens to v0.17.2
+- Bump @fluentui-react-native/button to v0.25.3
+
+## 1.0.39
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/callout to v0.21.14
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.8
+- Bump @fluentui-react-native/text to v0.15.1
+- Bump @fluentui-react-native/theme-tokens to v0.19.1
+- Bump @fluentui-react-native/tokens to v0.17.1
+- Bump @fluentui-react-native/use-styling to v0.9.1
+- Bump @fluentui-react-native/button to v0.25.2
+
+## 1.0.38
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.13
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+- Bump @fluentui-react-native/button to v0.25.1
+
+## 1.0.37
+
+Fri, 23 Sep 2022 06:23:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.0
+
+## 1.0.36
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.12
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/interactive-hooks to v0.18.6
+- Bump @fluentui-react-native/text to v0.15.0
+- Bump @fluentui-react-native/tokens to v0.17.0
+- Bump @fluentui-react-native/button to v0.24.26
 
 ## 1.0.35
 
