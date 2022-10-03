@@ -45,9 +45,19 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   subtextVariant?: keyof Variant;
 
   /**
-   * Amount of padding between the end of the label and the start of the required text
+   * Padding between label and label subtext
    */
   marginTop?: ViewStyle['marginTop'];
+
+  /**
+   * Padding between label subtext and focus ring
+   */
+  marginRight?: ViewStyle['marginRight'];
+
+  /**
+   * Padding between label subtext and focus ring
+   */
+  marginBottom?: ViewStyle['marginBottom'];
 
   /**
    * States that can be applied to a Radio

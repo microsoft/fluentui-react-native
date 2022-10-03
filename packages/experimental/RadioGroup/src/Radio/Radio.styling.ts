@@ -82,12 +82,12 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         variant: tokens.subtextVariant,
         style: {
           marginTop: tokens.marginTop,
-          marginRight: globalTokens.spacing.xxs,
-          marginBottom: globalTokens.spacing.xxs,
+          marginRight: tokens.marginRight,
+          marginBottom: tokens.marginBottom,
           color: tokens.color,
         },
       }),
-      ['variant', 'marginTop', 'color', 'subtextVariant'],
+      ['variant', 'marginTop', 'marginRight', 'marginBottom', 'color', 'subtextVariant'],
     ),
   },
 };

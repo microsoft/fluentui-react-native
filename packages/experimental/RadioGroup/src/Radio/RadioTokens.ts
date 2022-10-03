@@ -18,6 +18,8 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioInnerCircleSize: 10,
     subtextVariant: 'caption1',
     marginTop: globalTokens.spacing.xxs,
+    marginRight: globalTokens.spacing.xxs,
+    marginBottom: globalTokens.spacing.xxs,
     disabled: {
       // Unchecked, Disabled
       radioBorder: t.colors.neutralForegroundDisabled,
