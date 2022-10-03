@@ -85,7 +85,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginRight: globalTokens.spacing.xxs,
           marginBottom: globalTokens.spacing.xxs,
           color: tokens.color,
-          // fontSize: tokens.subtextSize,
         },
       }),
       ['variant', 'marginTop', 'color', 'subtextVariant'],
