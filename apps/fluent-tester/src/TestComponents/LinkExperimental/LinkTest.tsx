@@ -6,7 +6,6 @@ import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
-import { Typography } from '@fluentui-react-native/theme-types';
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = (): void => {
@@ -19,9 +18,9 @@ const DefaultLinks: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Link url="https://www.bing.com/">Click to navigate.</Link>
+      <Link tooltip={"https://www.bing.com/"} url="https://www.bing.com/">Click to navigate.</Link>
       <Link onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
-      <Link disabled>Disabled Link</Link>
+      <Link disabled focusable>Disabled focusable Link</Link>
     </Stack>
   );
 };
@@ -35,12 +34,11 @@ const InlineLinks: React.FunctionComponent = () => {
     Alert.alert('Alert.', 'You have invoked onAllyTap.');
   };
 
-
   return (
     <Stack style={stackStyle}>
-      <Link inline url="https://www.bing.com/">Click to navigate.</Link>
-      <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
-      <Link inline onPress={doPress} disabled>Disabled Link</Link>
+      <Text>Click <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>this link</Link> to alert me.</Text>
+      <Text>This <Link inline onPress={doPress} disabled focusable>link</Link> is disabled but focusable.</Text>
+      <Text>Follow this <Link inline url="https://www.bing.com/">link</Link> to navigate.</Text>
     </Stack>
   );
 };
@@ -57,8 +55,27 @@ const SubtleLinks: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Link appearance='subtle' url="https://www.bing.com/">Click to navigate.</Link>
-      <Link appearance='subtle' inline onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
+      <Text>This is inline Link. <Link appearance='subtle' inline onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link></Text>
       <Link appearance='subtle' onPress={doPress} disabled>Disabled Link</Link>
+    </Stack>
+  );
+};
+
+const SelectableLinks: React.FunctionComponent = () => {
+  /*const doPress = (): void => {
+    Alert.alert('Alert.', 'You have been alerted.');
+  };
+
+  const doAllyTap = (): void => {
+    Alert.alert('Alert.', 'You have invoked onAllyTap.');
+  };*/
+
+  return (
+    <Stack style={stackStyle}>
+      {/*<Link selectable tooltip={"https://www.bing.com/"} url="https://www.bing.com/">Click to navigate.</Link>
+      <Link selectable onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
+      <Link selectable disabled focusable>Disabled focusable selectable Link</Link>
+      <Text selectable>Click <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>this link</Link> to alert me.</Text>*/}
     </Stack>
   );
 };
@@ -74,15 +91,11 @@ const styles = StyleSheet.create({
   },
 });
 
-
+const BlueHeaderBold = Link.customize({ variant: 'headerStandard', fontWeight: '700', color: '#0229c4', textAlign: 'right' });
 const CustomLinks: React.FunctionComponent = () => {
   const [linkColor, setLinkColor] = React.useState<string>('blue');
   const [linkFont, setLinkFont] = React.useState<string>('Ariel');
   const [linkFontSize, setLinkFontSize] = React.useState<number>(12);
-  // const [linkFontStyle, setLinkFontStyle] = React.useState<string >('normal');
-  // const [linkAlign, setLinkAlign] = React.useState<string>('auto');
-  // const [linkDecorationLine, setLinkDecorationLine] = React.useState<string>('none');
-  const [linkVariant, setLinkVariant] = React.useState<keyof Typography['variants']>('body2');
   const [linkText, setLinkText] = React.useState<string>('Click to Navigate');
   const [linkUrl, setLinkUrl] = React.useState<string>('https://www.bing.com/');
 
@@ -91,17 +104,12 @@ const CustomLinks: React.FunctionComponent = () => {
       color: linkColor,
       fontFamily: linkFont,
       fontSize: linkFontSize,
-      variant: linkVariant
     };
     return Link.customize(tokens);
   },
   [linkColor,
     linkFont,
     linkFontSize,
-    // linkFontStyle,
-    // linkAlign,
-    // linkDecorationLine,
-    linkVariant,
     linkText,
     linkUrl
   ]);
@@ -111,7 +119,7 @@ const CustomLinks: React.FunctionComponent = () => {
     <View style={styles.tokensColumn}>
       <View style={styles.tokensRow}>
         <View>
-          <Text>Track Tokens</Text>
+          <Text>Text Tokens</Text>
           <TextInput
             accessibilityLabel="Link color"
             style={commonStyles.textBox}
@@ -139,15 +147,6 @@ const CustomLinks: React.FunctionComponent = () => {
               setLinkFontSize(parseInt(e.nativeEvent.text));
             }}
           />
-          <TextInput
-            accessibilityLabel="Link font variant"
-            style={commonStyles.textBox}
-            placeholder="Link font variant"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setLinkVariant(e.nativeEvent.text as keyof Typography['variants']);
-            }}
-          />
         </View>
         <View>
           <Text>Content and URL customize</Text>
@@ -171,7 +170,8 @@ const CustomLinks: React.FunctionComponent = () => {
           />
         </View>
       </View>
-      <CustomLink url={linkUrl}>{linkText}</CustomLink>
+      <CustomLink align='end' url={linkUrl}>{linkText}</CustomLink>
+      <BlueHeaderBold>BlueHeaderBold</BlueHeaderBold>
     </View>
   );
 };
@@ -189,6 +189,10 @@ const linkSections: TestSection[] = [
   {
     name: 'Subtle Links',
     component: SubtleLinks,
+  },
+  {
+    name: 'Selectable Link',
+    component: SelectableLinks,
   },
   {
     name: 'Custom Link',

@@ -17,8 +17,17 @@ export const stylingSettings: UseStylingOptions<LinkProps, LinkSlotProps, LinkTo
   states: linkStates,
   slotProps: {
     root: buildProps(
+      (tokens: LinkTokens) => ({
+        style: {
+          alignSelf: tokens.alignSelf,
+        },
+      }),
+      [],
+    ),
+    content: buildProps(
       (tokens: LinkTokens, theme: Theme) => ({
         style: {
+          alignSelf: tokens.alignSelf,
           textDecorationLine: tokens.textDecorationLine,
           color: tokens.color,
           fontStyle: tokens.fontStyle,

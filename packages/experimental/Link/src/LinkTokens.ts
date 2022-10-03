@@ -5,15 +5,21 @@ import { LinkTokens } from './Link.types';
 export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
   ({
     color: t.colors.link,
+    alignSelf: 'flex-start',
     variant: 'body1',
     inline: {
       textDecorationLine: 'underline',
     },
     disabled: {
       color: t.colors.disabledBodyText,
+      textDecorationLine: 'none',
+      focused: {
+        borderColor: t.colors.focusBorder,
+      }
     },
     hovered: {
       color: t.colors.linkHovered,
+      textDecorationLine: 'underline',
     },
     pressed: {
       color: t.colors.linkPressed,

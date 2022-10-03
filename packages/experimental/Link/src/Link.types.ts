@@ -1,6 +1,6 @@
 import { TextTokens, TextProps } from '@fluentui-react-native/text';
 import { IFocusable, IPressableState, IWithPressableEvents, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
-// import { IconProps } from '@fluentui-react-native/icon';
+import { ViewProps } from 'react-native';
 
 export const linkName = 'Link';
 
@@ -69,6 +69,10 @@ export interface LinkCoreProps extends IWithLinkOptions<TextProps> {
    * @default true
    */
   enableFocusRing?: boolean;
+   /**
+   * Text that should show in a tooltip when the user hovers over a button.
+   */
+  tooltip?: string;
 }
 
 export interface LinkProps extends LinkCoreProps {
@@ -89,8 +93,8 @@ export type LinkHooks<T extends object> = {
 export type LinkState = LinkHooks<LinkProps & React.ComponentPropsWithRef<any>>;
 
 export interface LinkSlotProps {
-  root: TextProps;
-  // icon: IconProps;
+  root: ViewProps;
+  content: TextProps;
 }
 
 export interface LinkType {

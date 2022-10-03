@@ -1,9 +1,10 @@
 /** @jsx withSlots */
 import * as React from 'react';
+import { View } from 'react-native';
 import { linkName, LinkType, LinkProps, ILinkState } from './Link.types';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useLink } from './useLink';
-import { Text } from 'react-native';
+import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Link.styling';
 
 
@@ -21,10 +22,7 @@ export const linkLookup = (layer: string, state: ILinkState, userProps: LinkProp
     userProps[layer] ||
     layer === userProps['appearance'] ||
     (layer === 'inline' && userProps.inline) ||
-    (layer === 'hovered' && state[layer]) ||
-    (layer === 'pressed' && state[layer]) ||
-    (layer === 'visited' && state[layer]) ||
-    (layer === 'focused' && state[layer])
+    (layer === 'disabled' && userProps.disabled)
   );
 };
 
@@ -32,8 +30,8 @@ export const Link = compose<LinkType>({
   displayName: linkName,
   ...stylingSettings,
   slots: {
-    root: Text,
-    // icon: Icon,
+    root: View,
+    content: Text
   },
   useRender: (userProps: LinkProps, useSlots: UseSlots<LinkType>) => {
     const link = useLink(userProps);
@@ -42,10 +40,19 @@ export const Link = compose<LinkType>({
     // now return the handler for finishing render
     return (final: LinkProps, ...children: React.ReactNode[]) => {
       // pull onPress out to let Link's Pressable deal with all press events
-      const { onPress, ...mergedProps } = mergeProps(link.props, final);
+      const {
+        inline,
+        onPress,
+        ...mergedProps
+      } = mergeProps(link.props, final);
 
       return (
-          <Slots.root {...mergedProps}>{children}</Slots.root>
+        inline || mergedProps.selectable ? <Slots.content {...mergedProps}>{children}</Slots.content>
+        : <Slots.root {...mergedProps}>
+            <Slots.content focusable={false}>
+              {children}
+            </Slots.content>
+          </Slots.root>
       );
     };
   },

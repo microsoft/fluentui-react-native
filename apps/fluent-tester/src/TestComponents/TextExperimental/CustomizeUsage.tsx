@@ -72,7 +72,7 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   const NonBlockText = () => {
     return (
       <Text>
-        <Text italic>I am italisized inline text.</Text>
+        <Text focusable={false} italic>I am italisized inline text.</Text>
         <Text weight="medium">Since text components are inside a Text, (medium) </Text>
         <Text weight="bold">every block of text (bolded) </Text>
         <Text size={600}>gets placed inline.</Text>
