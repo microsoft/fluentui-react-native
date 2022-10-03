@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/theme-registry
 
-This log was last generated on Fri, 30 Sep 2022 00:54:37 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.0
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Minor changes
+
+- Deprecate theme-registry (ruaraki@microsoft.com)
 
 ## 0.8.1
 
