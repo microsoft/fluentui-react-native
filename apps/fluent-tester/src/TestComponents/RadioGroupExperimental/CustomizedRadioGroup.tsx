@@ -31,8 +31,9 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(10);
   const [radioFill, setRadioFill] = React.useState<string>('blue');
   const [color, setColor] = React.useState<string>('black');
-  const [subtextSize, setSubtextSize] = React.useState<number>(12);
   const [marginTop, setMarginTop] = React.useState<number>(1);
+  const [marginRight, setMarginRight] = React.useState<number>(2);
+  const [marginBottom, setMarginBottom] = React.useState<number>(2);
 
   const CustomRadioGroup = React.useMemo(() => {
     const tokens: RadioGroupTokens = {
@@ -57,8 +58,9 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
       radioSize,
       radioInnerCircleSize,
       color,
-      subtextSize,
       marginTop,
+      marginRight,
+      marginBottom,
 
       disabled: {
         radioBorder,
@@ -113,8 +115,9 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
     radioInnerCircleSize,
     radioFill,
     color,
-    subtextSize,
     marginTop,
+    marginRight,
+    marginBottom,
   ]);
 
   return (
@@ -251,21 +254,30 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
             }}
           />
           <TextInput
-            accessibilityLabel="Radio label subtext size"
-            style={commonStyles.textBox}
-            placeholder="subtextSize"
-            blurOnSubmit={true}
-            onSubmitEditing={(e) => {
-              setSubtextSize(parseInt(e.nativeEvent.text.toString()));
-            }}
-          />
-          <TextInput
             accessibilityLabel="Radio label margin top"
             style={commonStyles.textBox}
             placeholder="marginTop"
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
               setMarginTop(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio label margin right"
+            style={commonStyles.textBox}
+            placeholder="marginRight"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setMarginRight(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio label margin bottom"
+            style={commonStyles.textBox}
+            placeholder="marginBottom"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setMarginBottom(parseInt(e.nativeEvent.text.toString()));
             }}
           />
         </View>

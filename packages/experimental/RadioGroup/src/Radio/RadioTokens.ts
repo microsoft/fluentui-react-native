@@ -16,9 +16,11 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     color: t.colors.neutralForeground3,
     radioSize: 20,
     radioInnerCircleSize: 10,
-    subtextSize: globalTokens.font.size[200],
-    flexDirection: 'row',
+    subtextVariant: 'caption1',
     marginTop: globalTokens.spacing.xxs,
+    marginRight: globalTokens.spacing.xxs,
+    marginBottom: globalTokens.spacing.xxs,
+    flexDirection: 'row',
 
     isBelow: {
       flexDirection: 'column',

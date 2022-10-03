@@ -80,15 +80,15 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({
-        variant: tokens.variant,
+        variant: tokens.subtextVariant,
         style: {
-          marginTop: globalTokens.spacing.xxs,
-          marginRight: globalTokens.spacing.xxs,
+          marginTop: tokens.marginTop,
+          marginRight: tokens.marginRight,
+          marginBottom: tokens.marginBottom,
           color: tokens.color,
-          fontSize: tokens.subtextSize,
         },
       }),
-      ['color', 'marginTop'],
+      ['variant', 'marginTop', 'marginRight', 'marginBottom', 'color', 'subtextVariant'],
     ),
   },
 };
