@@ -3,7 +3,8 @@ import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, IColorTokens } from '@fluentui-react-native/tokens';
 import { IPressableProps } from '@fluentui-react-native/pressable';
 import { IFocusable, IPressableHooks } from '@fluentui-react-native/interactive-hooks';
-import { ColorValue } from 'react-native';
+import { ColorValue, ViewStyle } from 'react-native';
+import { Variant } from '@fluentui-react-native/framework';
 
 export const radioName = 'Radio';
 
@@ -39,9 +40,14 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
-   * Font size of label subtext
+   * Variant of label subtext
    */
-  subtextSize?: number;
+  subtextVariant?: keyof Variant;
+
+  /**
+   * Amount of padding between the end of the label and the start of the required text
+   */
+  marginTop?: ViewStyle['marginTop'];
 
   /**
    * States that can be applied to a Radio
