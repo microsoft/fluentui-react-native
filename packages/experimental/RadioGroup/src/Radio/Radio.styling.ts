@@ -71,11 +71,12 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         variant: tokens.variant,
         style: {
           marginTop: 2,
+          marginRight: tokens.marginRight,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['color', 'marginRight', ...fontStyles.keys],
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({
