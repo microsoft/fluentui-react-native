@@ -14,7 +14,7 @@ npx -p @fluentui-react-native/codemods transform -t <transform_name> --path <pat
 For example
 
 ```cli
-npx -p @fluentui-react-native/codemods transform -t button-v0-to-v1 --path ./apps\fluent-tester\src\TestComponents\Button\deprecated\ButtonFocusTest.tsx
+npx -p @fluentui-react-native/codemods transform -t button-v0-to-v1 --path .\apps\fluent-tester\src\TestComponents\Button\deprecated\ButtonFocusTest.tsx
 ```
 
 ## Tests
