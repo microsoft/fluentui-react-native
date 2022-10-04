@@ -24,7 +24,7 @@ export const yargsParse = (args: string[]): argsType => {
       alias: 't',
       type: 'string',
       description: 'Name of transform to run',
-      choices: ['button-v0-to-v1'],
+      choices: ['button-v0-to-v1', 'deprecate-exports'],
     })
     .demandOption(['path', 'transform'])
     .parse(args);
