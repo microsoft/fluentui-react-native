@@ -7,5 +7,8 @@ const cache: { [key: string]: HostComponent<any> } = {};
  * @param name - name of the component to retrieve from the cache
  */
 export function ensureNativeComponent<T>(name: string): HostComponent<T> {
-  return cache[name] || requireNativeComponent(name);
+  if (!cache[name]) {
+    cache[name] = requireNativeComponent<T>(name);
+  }
+  return cache[name];
 }

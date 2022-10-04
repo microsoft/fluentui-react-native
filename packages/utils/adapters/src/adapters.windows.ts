@@ -70,6 +70,11 @@ const _viewMask: IFilterMask<IViewProps> = {
   tvParallaxShiftDistanceY: true,
   tvParallaxTiltAngle: true,
   focusable: true,
+  tooltip: true,
+  tabIndex: true,
+  enableFocusRing: true,
+  onMouseEnter: true,
+  onMouseLeave: true,
 };
 
 const _textMask: IFilterMask<ITextProps> = {
@@ -154,8 +159,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   defaultSource: true,
   blurRadius: true,
   capInsets: true,
-  width: true,
-  height: true,
   fadeDuration: true,
   nativeID: true,
 };
