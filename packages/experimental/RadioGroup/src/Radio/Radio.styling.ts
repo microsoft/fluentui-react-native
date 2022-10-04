@@ -76,7 +76,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'marginRight', ...fontStyles.keys],
+      ['variant', 'color', 'marginRight', ...fontStyles.keys],
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({
@@ -88,7 +88,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           color: tokens.color,
         },
       }),
-      ['variant', 'marginTop', 'marginRight', 'marginBottom', 'color', 'subtextVariant'],
+      ['marginTop', 'marginRight', 'marginBottom', 'color', 'subtextVariant'],
     ),
   },
 };
