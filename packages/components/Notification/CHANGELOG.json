@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 21:09:28 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.15",
+      "version": "0.17.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.25.5",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.25",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.7",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.12",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.10",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.16",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/text to v0.15.3",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 04 Oct 2022 17:24:58 GMT",
       "tag": "@fluentui-react-native/notification_v0.17.14",
       "version": "0.17.14",

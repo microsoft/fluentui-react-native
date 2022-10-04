@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 21:09:28 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.19.3",
+      "version": "0.19.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "ac6a7ec3c7e35ed94af821c9f82bfe566366fbf8",
+            "comment": "Update peer dependencies to allow for other RN versions"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 08:04:44 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.19.2",
       "version": "0.19.2",

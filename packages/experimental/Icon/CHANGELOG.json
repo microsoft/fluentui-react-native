@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/icon",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 21:09:28 GMT",
+      "tag": "@fluentui-react-native/icon_v0.13.12",
+      "version": "0.13.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.1",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.7",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/icon",
+            "comment": "Bump @fluentui-react-native/text to v0.15.3",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 08:04:44 GMT",
       "tag": "@fluentui-react-native/icon_v0.13.11",
       "version": "0.13.11",
