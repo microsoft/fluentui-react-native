@@ -1,5 +1,6 @@
 import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
 import { Separator } from '@fluentui/react-native';
+import { Button } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
 
@@ -11,12 +12,14 @@ export const DisabledRadioGroup: React.FunctionComponent = () => {
 
   return (
     <View>
+      <Button></Button>
       <RadioGroup disabled label="Disabled RadioGroup" defaultValue="X" onChange={onChange}>
         <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />
         <Radio label="Option X" value="X" />
         <Radio label="Option Y" value="C" />
         <Radio label="Option Z" value="Z" />
       </RadioGroup>
+      <Button></Button>
       <Separator />
       <RadioGroup label="Disabled Item" defaultValue="X" onChange={onChange}>
         <Radio label="Option W" value="W" accessibilityLabel="Test Accessibility Label" />

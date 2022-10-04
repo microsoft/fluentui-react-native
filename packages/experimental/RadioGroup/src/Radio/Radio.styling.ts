@@ -59,6 +59,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     ),
     content: {
       style: {
+        alignSelf: 'center',
         alignItems: 'flex-start',
         flexDirection: 'column',
       },

@@ -41,7 +41,7 @@ export const Radio = compose<RadioType>({
 
     // now return the handler for finishing render
     return (final: RadioProps) => {
-      const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
+      const { label, subtext, disabled, ...mergedProps } = mergeProps(radio.props, final);
 
       const labelComponent = (
         <Slots.content>

@@ -88,7 +88,6 @@ export const useRadio = (props: RadioProps): RadioState => {
       ...rest,
       ref: buttonRef,
       ...pressable.props,
-      accessible: true,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityHint: accessibilityHint ?? subtext,
