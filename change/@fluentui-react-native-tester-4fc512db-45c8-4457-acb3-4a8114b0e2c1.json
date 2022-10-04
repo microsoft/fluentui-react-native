@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Set default theme to Office for win32",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

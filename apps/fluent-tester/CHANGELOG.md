@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 16:44:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.99.5
+
+Tue, 04 Oct 2022 16:44:20 GMT
+
+### Patches
+
+- Set default theme to Office for win32 (ruaraki@microsoft.com)
 
 ## 0.99.4
 
