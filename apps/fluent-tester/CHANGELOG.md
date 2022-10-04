@@ -1,8 +1,23 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 04 Oct 2022 16:44:20 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 17:24:59 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.99.6
+
+Tue, 04 Oct 2022 17:24:59 GMT
+
+### Patches
+
+- Get Shadow working with layout props (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.25.4
+- Bump @fluentui-react-native/experimental-button to v0.16.31
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.36
+- Bump @fluentui-react-native/experimental-shadow to v0.2.24
+- Bump @fluentui-react-native/menu to v1.0.42
+- Bump @fluentui-react-native/notification to v0.17.14
+- Bump @fluentui/react-native to v0.32.28
 
 ## 0.99.5
 

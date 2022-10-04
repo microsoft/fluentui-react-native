@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 17:24:58 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.14",
+      "version": "0.17.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01",
+            "comment": "Update tests after considering layout props"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.25.4",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.24",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 08:04:44 GMT",
       "tag": "@fluentui-react-native/notification_v0.17.13",
       "version": "0.17.13",

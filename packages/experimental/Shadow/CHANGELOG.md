@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 17:24:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.24
+
+Tue, 04 Oct 2022 17:24:58 GMT
+
+### Patches
+
+- Get Shadow working with layout props (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.23
 

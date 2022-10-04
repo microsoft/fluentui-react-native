@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 17:24:59 GMT",
+      "tag": "@fluentui-react-native/tester_v0.99.6",
+      "version": "0.99.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01",
+            "comment": "Get Shadow working with layout props"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/button to v0.25.4",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.16.31",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.4.36",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.24",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.0.42",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.17.14",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.32.28",
+            "commit": "fa9c8fe626780f63740b4330eaeaa405bc2dbc01"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 04 Oct 2022 16:44:20 GMT",
       "tag": "@fluentui-react-native/tester_v0.99.5",
       "version": "0.99.5",
