@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Minor changes
+
+- Added new api fro android (email not defined)
+- Bump @fluentui-react-native/theme-types to v0.20.0
+
+## 0.15.3
+
+Fri, 30 Sep 2022 00:54:37 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/theme-types to v0.19.2
 
 ## 0.15.2
 

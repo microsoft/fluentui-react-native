@@ -1,8 +1,55 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Tue, 27 Sep 2022 20:55:52 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.4
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.17
+
+## 0.5.3
+
+Fri, 30 Sep 2022 20:38:11 GMT
+
+### Patches
+
+- Add radio group snapshot test (ruaraki@microsoft.com)
+
+## 0.5.2
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.16
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.9
+- Bump @fluentui-react-native/pressable to v0.9.15
+- Bump @fluentui-react-native/text to v0.15.2
+- Bump @fluentui-react-native/theme-tokens to v0.19.2
+- Bump @fluentui-react-native/tokens to v0.17.2
+
+## 0.5.1
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/focus-zone to v0.10.15
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.8
+- Bump @fluentui-react-native/pressable to v0.9.14
+- Bump @fluentui-react-native/text to v0.15.1
+- Bump @fluentui-react-native/theme-tokens to v0.19.1
+- Bump @fluentui-react-native/tokens to v0.17.1
+- Bump @fluentui-react-native/use-styling to v0.9.1
 
 ## 0.5.0
 

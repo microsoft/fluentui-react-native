@@ -22,14 +22,14 @@
     "just-scripts": "^1.8.0"
   },
   "devDependencies": {
-    "@react-native-community/cli": "^6.0.0",
+    "@react-native-community/cli": "^7.0.3",
     "@rnx-kit/jest-preset": "^0.1.9",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",
     "@types/jest": "^26.0.0",
     "@types/node": "^12.11.2",
-    "@types/react-native": "^0.66.0",
+    "@types/react-native": "^0.68.0",
     "@types/react-test-renderer": "16.9.0",
     "@uifabric/prettier-rules": "^7.0.3",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
@@ -43,8 +43,8 @@
     "jsdom": "^16.4.0",
     "just-scripts": "^1.8.0",
     "just-task": "^1.4.2",
-    "metro-config": "^0.66.2",
-    "metro-react-native-babel-transformer": "^0.66.2",
+    "metro-config": "^0.67.0",
+    "metro-react-native-babel-transformer": "^0.67.0",
     "prettier": "^2.4.1",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
@@ -62,6 +62,15 @@
     "shouldPublish": false,
     "disallowedChangeTypes": [
       "major"
+    ]
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "metro-config",
+      "metro-react-native-babel-transformer"
     ]
   }
 }

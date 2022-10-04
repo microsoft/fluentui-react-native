@@ -48,7 +48,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
@@ -166,7 +166,7 @@ exports[`Default FAB (iOS) 1`] = `
         Object {
           "color": "#ffffff",
           "fontFamily": "Segoe UI",
-          "fontSize": 12,
+          "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
