@@ -39,6 +39,10 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       borderWidth: 2,
       borderColor: 'black',
     },
+    offsetTestProps: { start: 10 },
+    alignItemsTestProps: { alignItems: 'flex-start' },
+    flexDirectionTestProps: { flexDirection: 'row' },
+    flexWrapTestProps: { flexWrap: 'wrap' },
   };
 });
 
@@ -81,6 +85,26 @@ export const ShadowWithDifferentPropsTestSection: React.FunctionComponent = () =
             )}
           >
             <Text variant="bodySemibold">borderWidth: 2</Text>
+          </View>
+        </Shadow>
+        <Shadow shadowToken={theme.shadows.shadow16}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.offsetTestProps)}>
+            <Text variant="bodySemibold">start: 10</Text>
+          </View>
+        </Shadow>
+        <Shadow shadowToken={theme.shadows.shadow16}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.alignItemsTestProps)}>
+            <Text variant="bodySemibold">alignItems: flex-start</Text>
+          </View>
+        </Shadow>
+        <Shadow shadowToken={theme.shadows.shadow16}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.flexDirectionTestProps)}>
+            <Text variant="bodySemibold">flexDirection: row</Text>
+          </View>
+        </Shadow>
+        <Shadow shadowToken={theme.shadows.shadow16}>
+          <View style={mergeStyles(themedStyles.defaultShadowTestBoxProps, themedStyles.flexWrapTestProps)}>
+            <Text variant="bodySemibold">flexWrap: wrap</Text>
           </View>
         </Shadow>
       </View>
