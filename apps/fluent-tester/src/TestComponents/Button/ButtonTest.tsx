@@ -14,45 +14,8 @@ import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 
 const buttonSections: TestSection[] = [
   {
-    name: 'Button Variants',
-    testID: BUTTON_TESTPAGE,
-    component: ButtonVariantTest,
-  },
-  {
     name: 'Button Shape',
     component: ButtonShapeTest,
-  },
-  {
-    name: 'Icon Button',
-    component: ButtonIconTest,
-  },
-  {
-    name: 'Toggle Button',
-    component: ToggleButtonTest,
-  },
-  {
-    name: 'Sizes',
-    component: ButtonSizeTest,
-  },
-  {
-    name: 'Customize, Compose, and Ref',
-    component: ButtonHOCTest,
-  },
-  {
-    name: 'E2E Button Testing',
-    component: E2EButtonExperimentalTest,
-  },
-  {
-    name: 'Deprecated Basic Button',
-    component: ButtonFocusTest_deprecated,
-  },
-  {
-    name: 'Deprecated Icon Button',
-    component: ButtonIconTest_deprecated,
-  },
-  {
-    name: 'Deprecated E2E Button Testing',
-    component: E2EButtonTest_deprecated,
   },
 ];
 
