@@ -5083,9 +5083,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.2"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.2.tgz#6705d2180cd9277812706af4876e2ff9ce4bfef3"
-  integrity sha512-gQqjNfKHOZz9UxOojfgy/Q7bd4aN8hc1w/sxqKNCcJR3SxZ4hya9Czn9HJflAJZUQXQ41/VHlJvZgWzkjx402g==
+  version "2.31.3"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.3.tgz#ce29efc17fe38a5531ca8984a9fc8f3078cc0808"
+  integrity sha512-LKfxF9HVic6UpiFyz3tqTeKFtvF25mXTiUQGyicoYDdimCnbdoRYadIqfMSYq266QncLPHeVjYdN7AZyUJWonw==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -5097,7 +5097,7 @@ beachball@^2.20.0:
     semver "^7.0.0"
     toposort "^2.0.2"
     uuid "^9.0.0"
-    workspace-tools "^0.27.0"
+    workspace-tools "^0.28.0"
     yargs-parser "^21.0.0"
 
 big-integer@1.6.x:
