@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 15:53:06 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.26.25",
+      "version": "0.26.25",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "2377d1bfa503e0092ebb4968d200afd5d11bbef6",
+            "comment": "chore: bump `@rnx-kit/cli` to 0.14.8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 03 Oct 2022 16:40:48 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.26.25",
       "version": "0.26.25",
