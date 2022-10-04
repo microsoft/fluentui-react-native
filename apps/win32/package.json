@@ -75,6 +75,9 @@
       {
         "id": "main",
         "entryFile": "index.js",
+        "bundleOutput": "dist/index.win32.bundle",
+        "sourcemapOutput": "dist/index.win32.bundle.map",
+        "assetsDest": "dist",
         "targets": [
           "win32"
         ],
