@@ -1,16 +1,6 @@
 import * as React from 'react';
-import { ButtonFocusTest_deprecated } from './deprecated/ButtonFocusTest';
-import { ButtonIconTest_deprecated } from './deprecated/ButtonIconTest';
-import { BUTTON_TESTPAGE } from './consts';
-import { E2EButtonTest_deprecated } from './deprecated/E2EButtonTest';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { ButtonVariantTest } from './ButtonVariantTestSection';
-import { ToggleButtonTest } from './ToggleButtonTestSection';
-import { ButtonIconTest } from '../Button/ButtonIconTestSection';
-import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonShapeTest } from './ButtonShapeTestSection';
-import { E2EButtonExperimentalTest } from './E2EButtonTest';
-import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
 
 const buttonSections: TestSection[] = [
   {

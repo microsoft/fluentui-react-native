@@ -1,4 +1,4 @@
-import { ButtonV1 as Button, CompoundButton, TextV1 as Text } from '@fluentui/react-native';
+import { ButtonV1 as Button, TextV1 as Text } from '@fluentui/react-native';
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
