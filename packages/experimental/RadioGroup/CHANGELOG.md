@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 20:38:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.3
+
+Fri, 30 Sep 2022 20:38:11 GMT
+
+### Patches
+
+- Add radio group snapshot test (ruaraki@microsoft.com)
 
 ## 0.5.2
 

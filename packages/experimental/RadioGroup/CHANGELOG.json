@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 20:38:11 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.5.3",
+      "version": "0.5.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "83e7bccc8a37bf26595cb1d302610cbc9b63759b",
+            "comment": "Add radio group snapshot test"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 08:04:44 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.5.2",
       "version": "0.5.2",
