@@ -9,7 +9,7 @@
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
   "bin": {
-    "transform": "./bin/transform.js"
+    "transform": "./transform.js"
   },
   "scripts": {
     "build": "fluentui-scripts build",
