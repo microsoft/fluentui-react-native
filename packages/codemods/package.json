@@ -38,7 +38,7 @@
   },
   "depcheck": {
     "ignorePatterns": [
-      "src/__testfixtures__/*"
+      "src/transforms/__testfixtures__/*"
     ]
   }
 }
