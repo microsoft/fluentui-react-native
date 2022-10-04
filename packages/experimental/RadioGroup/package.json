@@ -46,13 +46,7 @@
   },
   "peerDependencies": {
     "react": "17.0.2",
-<<<<<<< HEAD
-    "react-native": ">=0.66.0"
-||||||| 2d9c0cfd7
-    "react-native": "^0.66.0"
-=======
-    "react-native": "^0.68.0"
->>>>>>> main
+    "react-native": ">=0.68.0"
   },
   "author": "",
   "license": "MIT",
