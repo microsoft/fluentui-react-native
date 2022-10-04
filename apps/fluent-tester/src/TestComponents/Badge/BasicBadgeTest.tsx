@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { View, Platform, Text, Image } from 'react-native';
 import {
   Badge,
@@ -12,19 +12,25 @@ import {
   BadgeSize,
   BadgeSizes,
   BadgeIconPosition,
+  BadgeProps,
+  BadgeTokens,
 } from '@fluentui-react-native/badge';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
-import { useFluentTheme, memoize } from '@fluentui-react-native/framework';
+import { useFluentTheme } from '@fluentui-react-native/framework';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
 const badgeSizes: BadgeSize[] = [...BadgeSizes];
 const badgeAppearances: BadgeAppearance[] = [...BadgeAppearances];
 const badgeIconPositions = ['before', 'after'];
+
+const CustomizedBadge = (tokensAndprops: BadgeProps & BadgeTokens) => {
+  return useMemo(() => Badge.customize({ ...tokensAndprops }), [tokensAndprops]);
+};
 
 export const BasicBadge: React.FunctionComponent = () => {
   const [badgeAppearance, setBadgeAppearance] = useState<BadgeAppearance>('filled');
@@ -57,29 +63,30 @@ export const BasicBadge: React.FunctionComponent = () => {
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
+
+  const shadow = showShadow ? theme.shadows.shadow4 : undefined;
+  const CustomBadge = CustomizedBadge({ shadowToken: shadow });
+
   const badgeConfig = {
     appearance: badgeAppearance,
     badgeColor,
     size,
     shape,
-    shadowToken: showShadow ? theme.shadows.shadow4 : undefined,
   };
 
-  const StyledBadge = memoize(
-    Badge.customize({
-      fontWeight: 'bold',
-      fontSize: 12,
-      fontFamily: 'Georgia',
-      backgroundColor: '#f09',
-      borderColor: 'purple',
-      color: 'yellow',
-      borderWidth: 4,
-      borderStyle: 'dashed',
-      borderRadius: 2,
-      iconColor: 'cyan',
-      shadowToken: theme.shadows.shadow16,
-    }),
-  );
+  const StyledBadge = CustomizedBadge({
+    fontWeight: 'bold',
+    fontSize: 12,
+    fontFamily: 'Georgia',
+    backgroundColor: '#f09',
+    borderColor: 'purple',
+    color: 'yellow',
+    borderWidth: 4,
+    borderStyle: 'dashed',
+    borderRadius: 2,
+    iconColor: 'cyan',
+    shadowToken: theme.shadows.shadow16,
+  });
 
   return (
     <View>
@@ -102,16 +109,13 @@ export const BasicBadge: React.FunctionComponent = () => {
       <View style={{ position: 'relative', backgroundColor: 'yellow', padding: 20, width: 200 }}>
         <Text>Parent component for the Badge</Text>
         {svgIconsEnabled && showIcon ? (
-          <Badge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
+          <CustomBadge {...badgeConfig} icon={{ svgSource: svgProps }} iconPosition={iconPosition}>
             Basic badge
-          </Badge>
+          </CustomBadge>
         ) : (
-          <Badge {...badgeConfig}>Basic badge</Badge>
+          <CustomBadge {...badgeConfig}>Basic badge</CustomBadge>
         )}
       </View>
-      <Badge size="extraLarge" appearance="tint" shadowToken={theme.shadows.shadow8}>
-        Shadow Badge
-      </Badge>
       <Text>Size</Text>
       <Badge size="tiny" />
       <Badge size="extraSmall" badgeColor="red" />

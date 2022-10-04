@@ -51,11 +51,6 @@ export interface BadgeConfigurableProps {
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
-
-  /**
-   * Sets shadow style with `ambient` and `key` props
-   */
-  shadowToken?: ShadowToken;
 }
 
 export interface BadgeCoreProps extends IViewProps {
@@ -116,6 +111,11 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * Set the top edge of the Badge
    */
   top?: FlexStyle['top'];
+
+  /**
+   * Sets shadow style with `ambient` and `key` props
+   */
+  shadowToken?: ShadowToken;
 
   /**
    * The width of the Badge.

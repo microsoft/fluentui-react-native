@@ -4,7 +4,6 @@ import { View, Platform, Text } from 'react-native';
 import { CounterBadge } from '@fluentui-react-native/badge';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from '../../FluentTester/test-data/test.svg';
-import { useFluentTheme } from '@fluentui-react-native/framework';
 
 export const CounterBadgeTest: React.FunctionComponent = () => {
   const svgProps: SvgIconProps = {
@@ -13,7 +12,6 @@ export const CounterBadgeTest: React.FunctionComponent = () => {
   };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-  const theme = useFluentTheme();
 
   return (
     <View>
@@ -27,10 +25,7 @@ export const CounterBadgeTest: React.FunctionComponent = () => {
       <CounterBadge badgeColor="informative" count={777}></CounterBadge>
       <CounterBadge badgeColor="important" overflowCount={1000} count={777}></CounterBadge>
       <CounterBadge badgeColor="danger" overflowCount={1000} count={1500}></CounterBadge>
-      <CounterBadge count={13}></CounterBadge>
-      <CounterBadge count={13} shadowToken={theme.shadows.shadow28}>
-        CounterBadge with Shadow
-      </CounterBadge>
+      <CounterBadge count={13} />
       {svgIconsEnabled && <CounterBadge count={17} icon={{ svgSource: svgProps }} iconPosition="after" />}
     </View>
   );
