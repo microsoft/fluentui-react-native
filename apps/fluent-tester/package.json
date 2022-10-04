@@ -16,7 +16,7 @@
     "android": "react-native run-android",
     "build": "fluentui-scripts build",
     "bundle": "react-native rnx-bundle --dev false",
-    "bundle:android": "react-native rnx-bundle --dev false --platform android --assets-dest dist/res",
+    "bundle:android": "react-native rnx-bundle --dev false --platform android",
     "bundle:ios": "react-native rnx-bundle --dev false --platform ios",
     "bundle:macos": "react-native rnx-bundle --dev false --platform macos",
     "bundle:windows": "react-native rnx-bundle --dev false --platform windows",
@@ -128,6 +128,7 @@
       {
         "id": "main",
         "entryFile": "index.js",
+        "assetsDest": "dist",
         "targets": [
           "android",
           "ios",
@@ -140,7 +141,26 @@
         "detectDuplicateDependencies": {
           "throwOnError": false
         },
-        "typescriptValidation": false
+        "typescriptValidation": false,
+        "platforms": {
+          "android": {
+            "bundleOutput": "dist/index.android.bundle",
+            "sourcemapOutput": "dist/index.android.bundle.map",
+            "assetsDest": "dist/res"
+          },
+          "ios": {
+            "bundleOutput": "dist/index.ios.jsbundle",
+            "sourcemapOutput": "dist/index.ios.jsbundle.map"
+          },
+          "macos": {
+            "bundleOutput": "dist/index.macos.jsbundle",
+            "sourcemapOutput": "dist/index.macos.jsbundle.map"
+          },
+          "windows": {
+            "bundleOutput": "dist/index.windows.bundle",
+            "sourcemapOutput": "dist/index.windows.bundle.map"
+          }
+        }
       }
     ],
     "capabilities": [
