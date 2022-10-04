@@ -19,7 +19,10 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl')
+    (I18nManager.isRTL && layer === 'rtl') ||
+    (layer === 'shadowToken' &&
+      !!userProps.shadowToken &&
+      (!userProps.appearance || userProps.appearance === 'filled' || userProps.appearance === 'tint'))
   );
 };
 

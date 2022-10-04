@@ -18,7 +18,7 @@ import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { useFluentTheme, memoize } from '@fluentui-react-native/framework';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
@@ -65,19 +65,21 @@ export const BasicBadge: React.FunctionComponent = () => {
     shadowToken: showShadow ? theme.shadows.shadow4 : undefined,
   };
 
-  const StyledBadge = Badge.customize({
-    fontWeight: 'bold',
-    fontSize: 12,
-    fontFamily: 'Georgia',
-    backgroundColor: '#f09',
-    borderColor: 'purple',
-    color: 'yellow',
-    borderWidth: 4,
-    borderStyle: 'dashed',
-    borderRadius: 2,
-    iconColor: 'cyan',
-    shadowToken: theme.shadows.shadow16,
-  });
+  const StyledBadge = memoize(
+    Badge.customize({
+      fontWeight: 'bold',
+      fontSize: 12,
+      fontFamily: 'Georgia',
+      backgroundColor: '#f09',
+      borderColor: 'purple',
+      color: 'yellow',
+      borderWidth: 4,
+      borderStyle: 'dashed',
+      borderRadius: 2,
+      iconColor: 'cyan',
+      shadowToken: theme.shadows.shadow16,
+    }),
+  );
 
   return (
     <View>
