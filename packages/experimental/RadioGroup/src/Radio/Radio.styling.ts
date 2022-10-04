@@ -57,15 +57,12 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       }),
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
-    content: buildProps(
-      () => ({
-        style: {
-          alignItems: 'flex-start',
-          flexDirection: 'column',
-        },
-      }),
-      [],
-    ),
+    content: {
+      style: {
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+      },
+    },
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
