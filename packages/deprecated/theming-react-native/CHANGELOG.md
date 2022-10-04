@@ -1,8 +1,17 @@
 # Change Log - @uifabricshared/theming-react-native
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.0
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Minor changes
+
+- Deprecate theming-react-native (ruaraki@microsoft.com)
+- Bump @uifabricshared/theme-registry to v0.9.0
 
 ## 0.14.6
 

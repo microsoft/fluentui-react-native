@@ -2,6 +2,59 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 16:44:20 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.26.26",
+      "version": "0.26.26",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "not available",
+            "comment": "chore: bump `@rnx-kit/cli` to 0.14.8"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.99.5",
+            "commit": "15ddaf7a239fbb345c151a52f4ffaf14db2787ba"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 04 Oct 2022 15:53:06 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.26.25",
+      "version": "0.26.25",
+      "comments": {
+        "none": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "2377d1bfa503e0092ebb4968d200afd5d11bbef6",
+            "comment": "chore: bump `@rnx-kit/cli` to 0.14.8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 03 Oct 2022 16:40:48 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.26.25",
+      "version": "0.26.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.99.4",
+            "commit": "41bf5eac728b15d0385431869982018ef3341491"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 20:38:11 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.26.24",
       "version": "0.26.24",

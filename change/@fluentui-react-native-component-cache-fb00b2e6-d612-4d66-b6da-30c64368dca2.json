@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Get the component cache to actually... cache...",
-  "packageName": "@fluentui-react-native/component-cache",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,31 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 30 Sep 2022 20:38:11 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 16:44:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.99.5
+
+Tue, 04 Oct 2022 16:44:20 GMT
+
+### Patches
+
+- Set default theme to Office for win32 (ruaraki@microsoft.com)
+
+## 0.99.4
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-avatar to v0.16.9
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.22
+- Bump @fluentui-react-native/experimental-expander to v0.4.8
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.35
+- Bump @fluentui-react-native/experimental-radio-group to v0.5.4
+- Bump @fluentui-react-native/experimental-tabs to v0.5.20
+- Bump @fluentui-react-native/menu to v1.0.41
+- Bump @fluentui/react-native to v0.32.27
 
 ## 0.99.3
 

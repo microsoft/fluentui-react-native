@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.41
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.16
 
 ## 1.0.40
 

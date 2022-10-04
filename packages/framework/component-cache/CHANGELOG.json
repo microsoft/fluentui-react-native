@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/component-cache",
   "entries": [
     {
+      "date": "Mon, 03 Oct 2022 16:40:48 GMT",
+      "tag": "@fluentui-react-native/component-cache_v1.4.2",
+      "version": "1.4.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/component-cache",
+            "commit": "45d33f2b8f5aba6293494a13cc92fd75715340e9",
+            "comment": "Get the component cache to actually... cache..."
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 00:54:35 GMT",
       "tag": "@fluentui-react-native/component-cache_v1.4.1",
       "version": "1.4.1",

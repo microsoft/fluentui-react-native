@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Deprecate theme-registry",
-  "packageName": "@uifabricshared/theme-registry",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
