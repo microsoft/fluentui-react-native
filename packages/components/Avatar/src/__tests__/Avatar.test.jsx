@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Avatar } from '..';
-import { getInitials } from '../useAvatar';
+import { getInitials, resolveColorfulToSpecificColor } from '../useAvatar';
 import * as renderer from 'react-test-renderer';
 
 const emptyData = [
@@ -118,5 +118,27 @@ describe('getInitials method', () => {
   });
   it.each(multiWordTitlesData)("render initials for multi-word titles: '%s'", (text, expected) => {
     expect(getInitials(text)).toBe(expected);
+  });
+});
+
+describe('resolveColorfulToSpecificColor method', () => {
+  it('Name = Satya Nadella', () => {
+    expect(resolveColorfulToSpecificColor(undefined, 'Satya Nadella')).toBe('lilac');
+  });
+
+  it('Name = Bill Gates', () => {
+    expect(resolveColorfulToSpecificColor(undefined, 'Bill Gates')).toBe('plum');
+  });
+
+  it('Undefined case', () => {
+    expect(resolveColorfulToSpecificColor(undefined, undefined)).toBe('darkRed');
+  });
+
+  it('Id = a', () => {
+    expect(resolveColorfulToSpecificColor('a', undefined)).toBe('brass')
+  });
+
+  it('Id = x', () => {
+    expect(resolveColorfulToSpecificColor('x', undefined)).toBe('darkRed');
   });
 });
