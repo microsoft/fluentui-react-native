@@ -8,8 +8,7 @@ exports[`Badge component tests Badge all props 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "transparent",
-      "borderColor": "transparent",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -39,13 +38,13 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginEnd": 2,
@@ -80,13 +79,13 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -103,8 +102,7 @@ exports[`Badge component tests Empty Badge 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": undefined,
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -130,8 +128,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "transparent",
-      "borderColor": "transparent",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 1,
       "bottom": 0,
@@ -163,9 +160,9 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -187,8 +184,7 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": undefined,
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -206,9 +202,9 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -230,8 +226,7 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": undefined,
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -249,9 +244,9 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -274,8 +269,7 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "transparent",
+      "backgroundColor": undefined,
       "borderRadius": 9999,
       "borderWidth": 1,
       "bottom": 0,
@@ -293,9 +287,9 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -336,9 +330,9 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#ffffff",
+        "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontStyle": undefined,
         "fontWeight": "400",
         "letterSpacing": undefined,
@@ -365,7 +359,7 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
       "alignItems": "center",
       "alignSelf": "flex-start",
       "aspectRatio": 1,
-      "backgroundColor": "#ffffff",
+      "backgroundColor": "#000000",
       "borderColor": "#ffffff",
       "borderRadius": 9999,
       "borderWidth": 2,
