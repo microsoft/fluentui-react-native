@@ -1,9 +1,10 @@
 import { ImageProps, ImageSourcePropType } from 'react-native';
-import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize } from './Avatar.types';
+import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize, AvatarColor } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -59,8 +60,14 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
   }
 
   const _initials = initials || getInitials(name);
-  const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
-  const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
+
+  let _avatarColor = avatarColor;
+
+  // Resolve 'colorful' to a specific color name
+  if (avatarColor === 'colorful') {
+    const adjustedNumberOfAvatarColors = AvatarColors.length - 3;
+    _avatarColor = AvatarColors[getHashCodeWeb(idForColor ?? name ?? '') % adjustedNumberOfAvatarColors];
+  }
 
   let iconProps = createIconProps(icon);
   const isFontIcon = !!(iconProps && iconProps.fontSource);
