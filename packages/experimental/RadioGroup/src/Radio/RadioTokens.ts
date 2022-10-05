@@ -33,7 +33,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       selected: {
         // Checked, Hover
         radioBorder: t.colors.compoundBrandStroke1Hover,
-        radioFill: t.colors.compoundBrandForeground1Hover,
+        radioFill: t.colors.compoundBrandBackground1Hover,
         color: t.colors.neutralForeground2,
         radioVisibility: 0.5,
       },
@@ -45,7 +45,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       selected: {
         // Checked, Pressed
         radioBorder: t.colors.compoundBrandStroke1Pressed,
-        radioFill: t.colors.compoundBrandForeground1Pressed,
+        radioFill: t.colors.compoundBrandBackground1Pressed,
         color: t.colors.neutralForeground1,
         radioVisibility: 1,
       },
