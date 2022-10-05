@@ -61,25 +61,6 @@ const SubtleLinks: React.FunctionComponent = () => {
   );
 };
 
-const SelectableLinks: React.FunctionComponent = () => {
-  /*const doPress = (): void => {
-    Alert.alert('Alert.', 'You have been alerted.');
-  };
-
-  const doAllyTap = (): void => {
-    Alert.alert('Alert.', 'You have invoked onAllyTap.');
-  };*/
-
-  return (
-    <Stack style={stackStyle}>
-      {/*<Link selectable tooltip={"https://www.bing.com/"} url="https://www.bing.com/">Click to navigate.</Link>
-      <Link selectable onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
-      <Link selectable disabled focusable>Disabled focusable selectable Link</Link>
-      <Text selectable>Click <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>this link</Link> to alert me.</Text>*/}
-    </Stack>
-  );
-};
-
 const styles = StyleSheet.create({
   tokensRow: {
     flexDirection: 'row',
@@ -189,10 +170,6 @@ const linkSections: TestSection[] = [
   {
     name: 'Subtle Links',
     component: SubtleLinks,
-  },
-  {
-    name: 'Selectable Link',
-    component: SelectableLinks,
   },
   {
     name: 'Custom Link',
