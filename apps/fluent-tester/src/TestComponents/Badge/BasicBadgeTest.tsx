@@ -28,7 +28,7 @@ const badgeSizes: BadgeSize[] = [...BadgeSizes];
 const badgeAppearances: BadgeAppearance[] = [...BadgeAppearances];
 const badgeIconPositions = ['before', 'after'];
 
-const CustomizedBadge = (tokensAndprops: BadgeProps & BadgeTokens) => {
+const useCustomizedBadge = (tokensAndprops: BadgeProps & BadgeTokens) => {
   return useMemo(() => Badge.customize({ ...tokensAndprops }), [tokensAndprops]);
 };
 
@@ -65,7 +65,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   const shadow = showShadow ? theme.shadows.shadow4 : undefined;
-  const CustomBadge = CustomizedBadge({ shadowToken: shadow });
+  const CustomBadge = useCustomizedBadge({ shadowToken: shadow });
 
   const badgeConfig = {
     appearance: badgeAppearance,
@@ -74,7 +74,7 @@ export const BasicBadge: React.FunctionComponent = () => {
     shape,
   };
 
-  const StyledBadge = CustomizedBadge({
+  const StyledBadge = useCustomizedBadge({
     fontWeight: 'bold',
     fontSize: 12,
     fontFamily: 'Georgia',
