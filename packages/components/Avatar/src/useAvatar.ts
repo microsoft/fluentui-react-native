@@ -59,16 +59,6 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     };
   }
 
-  const _initials = initials || getInitials(name);
-
-  let _avatarColor = avatarColor;
-
-  // Resolve 'colorful' to a specific color name
-  if (avatarColor === 'colorful') {
-    const adjustedNumberOfAvatarColors = AvatarColors.length - 3;
-    _avatarColor = AvatarColors[getHashCodeWeb(idForColor ?? name ?? '') % adjustedNumberOfAvatarColors];
-  }
-
   let iconProps = createIconProps(icon);
   const isFontIcon = !!(iconProps && iconProps.fontSource);
   if (isFontIcon) {
@@ -90,10 +80,10 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       accessibilityRole: accessibilityRole ?? 'image',
       active,
       activeAppearance,
-      avatarColor: _avatarColor,
+      avatarColor: avatarColor === 'colorful' ? resolveColorfulToSpecificColor(idForColor, name) : avatarColor,
       badge: badgeProps,
       badgeStatus: badge?.status,
-      initials: _initials,
+      initials: initials || getInitials(name),
       icon: iconProps,
       image: imageProps,
       outOfOffice: badge?.outOfOffice,
@@ -215,3 +205,15 @@ function getFontIconSize(size: AvatarSize) {
   }
   return 16;
 }
+
+/**
+ * A function that determines the actual color to be used for the avatar background when the avatarColor token is 'colorful'
+ *
+ * @param idForColor
+ * @param name
+ * @returns
+ */
+export const resolveColorfulToSpecificColor = (idForColor: string, name: string): AvatarColor => {
+  const adjustedNumberOfAvatarColors = AvatarColors.length - 3;
+  return AvatarColors[getHashCodeWeb(idForColor ?? name ?? '') % adjustedNumberOfAvatarColors];
+};
