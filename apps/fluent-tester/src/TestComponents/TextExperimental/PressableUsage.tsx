@@ -31,7 +31,7 @@ export const PressableUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-      <Text variant={'bodyStandard'}>
+        <Text variant={'bodyStandard'}>
           To learn more about microsoft, visit this{' '}
           <Text
             focusable
