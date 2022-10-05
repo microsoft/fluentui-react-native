@@ -1,5 +1,7 @@
 # E2E Testing Overview
 
+**There is currently an Appium issue with NPM v8.19.2. Please use an older version of NPM**
+
 ## Win32/UWP Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher.
