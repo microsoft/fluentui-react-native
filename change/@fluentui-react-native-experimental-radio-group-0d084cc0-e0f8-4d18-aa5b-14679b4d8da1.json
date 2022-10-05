@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Undo peer package change",
+  "packageName": "@fluentui-react-native/experimental-radio-group",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
