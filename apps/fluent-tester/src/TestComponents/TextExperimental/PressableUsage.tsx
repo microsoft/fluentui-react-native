@@ -32,7 +32,9 @@ export const PressableUsage: React.FunctionComponent = () => {
     <View>
       <Stack style={stackStyle} gap={5}>
       <Text variant={'bodyStandard'}>
+          To learn more about microsoft, visit this{' '}
           <Text
+            focusable
             variant={'bodyStandard'}
             color="blue"
             keyDownEvents={handledNativeKeyboardEvents}
@@ -40,7 +42,8 @@ export const PressableUsage: React.FunctionComponent = () => {
             onKeyDown={_onKeyDown}
           >
             webpage
-          </Text>
+          </Text>{' '}
+          for more details.
         </Text>
         <Text variant={'bodyStandard'}>
           Press{' '}
