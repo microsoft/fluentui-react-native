@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@fluentui-react-native/theme_v0.7.4",
+      "version": "0.7.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.20.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 00:54:36 GMT",
+      "tag": "@fluentui-react-native/theme_v0.7.3",
+      "version": "0.7.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/theme",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.19.2",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui-react-native/theme_v0.7.2",
       "version": "0.7.2",

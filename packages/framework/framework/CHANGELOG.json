@@ -2,6 +2,117 @@
   "name": "@fluentui-react-native/framework",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 21:09:28 GMT",
+      "tag": "@fluentui-react-native/framework_v0.8.7",
+      "version": "0.8.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.1",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@fluentui-react-native/framework_v0.8.6",
+      "version": "0.8.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.16.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.20.0",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.2",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 00:54:36 GMT",
+      "tag": "@fluentui-react-native/framework_v0.8.5",
+      "version": "0.8.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/framework",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/composition to v0.8.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/default-theme to v0.15.3",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/merge-props to v0.5.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.19.2",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/use-styling to v0.9.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/use-slot to v0.3.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/use-slots to v0.7.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/use-tokens to v0.3.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/framework",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui-react-native/framework_v0.8.4",
       "version": "0.8.4",

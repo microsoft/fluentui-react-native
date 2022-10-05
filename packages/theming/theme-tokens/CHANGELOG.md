@@ -1,8 +1,32 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Thu, 14 Jul 2022 18:09:50 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.3
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Update peer dependencies to allow for other RN versions (ruaraki@microsoft.com)
+
+## 0.19.2
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.20.0
+
+## 0.19.1
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
 
 ## 0.19.0
 

@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-drawer",
-  "version": "0.2.5",
+  "version": "0.2.9",
   "description": "A Native Drawer component using the Fluent Design System. Currently only implemented on Android",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -21,8 +21,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/component-cache": "^1.4.0",
-    "@fluentui-react-native/framework": "0.8.4",
+    "@fluentui-react-native/component-cache": "^1.4.2",
+    "@fluentui-react-native/framework": "0.8.7",
     "tslib": "^2.3.1"
   },
   "repository": {
@@ -32,15 +32,26 @@
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@types/react-native": "^0.66.0",
     "@fluentui-react-native/scripts": "^0.1.1",
+    "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.66.0"
+    "react-native": "^0.68.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
-    "react-native": "^0.66.0"
+    "react-native": ">=0.68.0"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "core-android",
+      "core-ios",
+      "react"
+    ]
+  }
 }

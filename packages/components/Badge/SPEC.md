@@ -128,6 +128,11 @@ export interface BadgeConfigurableProps {
    * @defaultvalue absolute
    */
   position?: FlexStyle['position'];
+
+  /**
+   * Sets shadow style with `ambient` and `key` props
+   */
+  shadowToken?: ShadowToken;
 }
 ```
 

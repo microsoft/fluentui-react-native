@@ -2,6 +2,143 @@
   "name": "@fluentui-react-native/stack",
   "entries": [
     {
+      "date": "Tue, 04 Oct 2022 21:09:28 GMT",
+      "tag": "@fluentui-react-native/stack_v0.7.11",
+      "version": "0.7.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.8",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.7",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.15.3",
+            "commit": "32b6348d1077759b38f33ffb00e7ab9db8d2c77c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 08:04:44 GMT",
+      "tag": "@fluentui-react-native/stack_v0.7.10",
+      "version": "0.7.10",
+      "comments": {
+        "none": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/stack",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293",
+            "comment": "snapshots update"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.7",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.6",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.2",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.12.5",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.15.2",
+            "commit": "609f7988754b77b86f2ed51d0ce4714fb2152293"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 30 Sep 2022 00:54:36 GMT",
+      "tag": "@fluentui-react-native/stack_v0.7.9",
+      "version": "0.7.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/stack",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.6",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.2",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.5",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-composable to v0.11.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.12.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @uifabricshared/foundation-tokens to v0.12.4",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/stack",
+            "comment": "Bump @fluentui-react-native/text to v0.15.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Sep 2022 21:00:40 GMT",
       "tag": "@fluentui-react-native/stack_v0.7.8",
       "version": "0.7.8",

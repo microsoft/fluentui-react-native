@@ -1,8 +1,46 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.25
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/pressable to v0.9.16
+
+## 0.2.24
+
+Tue, 04 Oct 2022 17:24:58 GMT
+
+### Patches
+
+- Get Shadow working with layout props (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.2.23
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/pressable to v0.9.15
+- Bump @fluentui-react-native/theme-types to v0.20.0
+
+## 0.2.22
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/pressable to v0.9.14
+- Bump @fluentui-react-native/theme-types to v0.19.2
 
 ## 0.2.21
 

@@ -66,6 +66,18 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
     paddingTop,
     paddingVertical,
 
+    alignItems,
+
+    flexWrap,
+    flexDirection,
+
+    start,
+    end,
+    left,
+    right,
+    top,
+    bottom,
+
     ...restOfChildStyleProps
   } = childStyleProps;
 
@@ -85,6 +97,7 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
         borderStartWidth,
         borderTopWidth,
         borderWidth,
+
         padding,
         paddingBottom,
         paddingEnd,
@@ -94,6 +107,12 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
         paddingStart,
         paddingTop,
         paddingVertical,
+
+        alignItems,
+
+        flexWrap,
+        flexDirection,
+
         ...shadowTokenStyleSet.key,
         ...restOfChildStyleProps,
       },
@@ -109,6 +128,14 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
         marginStart,
         marginTop,
         marginVertical,
+
+        start,
+        end,
+        left,
+        right,
+        top,
+        bottom,
+
         ...shadowTokenStyleSet.ambient,
         ...restOfChildStyleProps,
       },

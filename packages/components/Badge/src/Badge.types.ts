@@ -3,6 +3,8 @@ import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IViewProps } from '@fluentui-react-native/adapters';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
+import { ShadowProps } from '@fluentui-react-native/experimental-shadow';
+import { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const badgeName = 'Badge';
 export const BadgeSizes = ['tiny', 'extraSmall', 'small', 'medium', 'large', 'extraLarge'] as const;
@@ -63,6 +65,7 @@ export interface BadgeCoreProps extends IViewProps {
    */
   size?: BadgeSize;
 }
+
 export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
   /**
    * A Badge can have its content and borders styled for greater emphasis or to be subtle.
@@ -71,6 +74,7 @@ export interface BadgeProps extends BadgeCoreProps, BadgeConfigurableProps {
    */
   appearance?: BadgeAppearance;
 }
+
 export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, Omit<IColorTokens, 'color'> {
   /**
    * Set the bottom edge of the Badge
@@ -107,6 +111,11 @@ export interface BadgeCoreTokens extends LayoutTokens, FontTokens, IBorderTokens
    * Set the top edge of the Badge
    */
   top?: FlexStyle['top'];
+
+  /**
+   * Sets shadow style with `ambient` and `key` props
+   */
+  shadowToken?: ShadowToken;
 
   /**
    * The width of the Badge.
@@ -166,6 +175,7 @@ export interface BadgeSlotProps {
   root: IViewProps;
   icon?: IconProps;
   text: TextProps;
+  shadow?: ShadowProps;
 }
 
 export interface BadgeType {

@@ -429,7 +429,7 @@ exports[`Button component tests Button small 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
