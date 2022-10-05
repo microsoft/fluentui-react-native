@@ -9,6 +9,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { badgeLookup } from '../Badge';
 import { useCounterBadge } from './useCounterBadge';
 import { TextV1 as Text } from '@fluentui-react-native/text';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const CounterBadge = compose<CounterBadgeType>({
   displayName: counterBadgeName,
@@ -17,6 +18,7 @@ export const CounterBadge = compose<CounterBadgeType>({
     root: View,
     icon: Icon,
     text: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: CounterBadgeProps, useSlots: UseSlots<CounterBadgeType>) => {
     const iconProps = createIconProps(userProps.icon);
@@ -31,18 +33,20 @@ export const CounterBadge = compose<CounterBadgeType>({
       const hasChildren = Children.toArray(children)[0];
 
       return showBadge ? (
-        <Slots.root {...mergedProps}>
-          {!dot && (
-            <React.Fragment>
-              {icon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-              {!hasChildren && <Slots.text>{displayCount}</Slots.text>}
-              {Children.map(children, (child, i) =>
-                typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child,
-              )}
-              {icon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
-            </React.Fragment>
-          )}
-        </Slots.root>
+        <Slots.shadow>
+          <Slots.root {...mergedProps}>
+            {!dot && (
+              <React.Fragment>
+                {icon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+                {!hasChildren && <Slots.text>{displayCount}</Slots.text>}
+                {Children.map(children, (child, i) =>
+                  typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child,
+                )}
+                {icon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+              </React.Fragment>
+            )}
+          </Slots.root>
+        </Slots.shadow>
       ) : null;
     };
   },
