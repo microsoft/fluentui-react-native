@@ -125,19 +125,15 @@ describe('resolveColorfulToSpecificColor method', () => {
   it('Name = Satya Nadella', () => {
     expect(resolveColorfulToSpecificColor(undefined, 'Satya Nadella')).toBe('lilac');
   });
-
   it('Name = Bill Gates', () => {
     expect(resolveColorfulToSpecificColor(undefined, 'Bill Gates')).toBe('plum');
   });
-
   it('Undefined case', () => {
     expect(resolveColorfulToSpecificColor(undefined, undefined)).toBe('darkRed');
   });
-
   it('Id = a', () => {
-    expect(resolveColorfulToSpecificColor('a', undefined)).toBe('brass')
+    expect(resolveColorfulToSpecificColor('a', undefined)).toBe('brass');
   });
-
   it('Id = x', () => {
     expect(resolveColorfulToSpecificColor('x', undefined)).toBe('darkRed');
   });
