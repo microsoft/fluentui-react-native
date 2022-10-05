@@ -8,10 +8,6 @@ it('Link all props', () => {
 });
 
 it('Link with child', () => {
-  const tree = renderer
-    .create(
-      <Link url="https://www.bing.com">Link to bing</Link>,
-    )
-    .toJSON();
+  const tree = renderer.create(<Link url="https://www.bing.com">Link to bing</Link>).toJSON();
   expect(tree).toMatchSnapshot();
 });

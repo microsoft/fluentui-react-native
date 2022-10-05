@@ -7,7 +7,6 @@ import { useLink } from './useLink';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Link.styling';
 
-
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the link.
  *
@@ -31,7 +30,7 @@ export const Link = compose<LinkType>({
   ...stylingSettings,
   slots: {
     root: View,
-    content: Text
+    content: Text,
   },
   useRender: (userProps: LinkProps, useSlots: UseSlots<LinkType>) => {
     const link = useLink(userProps);
@@ -40,19 +39,14 @@ export const Link = compose<LinkType>({
     // now return the handler for finishing render
     return (final: LinkProps, ...children: React.ReactNode[]) => {
       // pull onPress out to let Link's Pressable deal with all press events
-      const {
-        inline,
-        onPress,
-        ...mergedProps
-      } = mergeProps(link.props, final);
+      const { inline, onPress, ...mergedProps } = mergeProps(link.props, final);
 
-      return (
-        inline || mergedProps.selectable ? <Slots.content {...mergedProps}>{children}</Slots.content>
-        : <Slots.root {...mergedProps}>
-            <Slots.content focusable={false}>
-              {children}
-            </Slots.content>
-          </Slots.root>
+      return inline || mergedProps.selectable ? (
+        <Slots.content {...mergedProps}>{children}</Slots.content>
+      ) : (
+        <Slots.root {...mergedProps}>
+          <Slots.content focusable={false}>{children}</Slots.content>
+        </Slots.root>
       );
     };
   },

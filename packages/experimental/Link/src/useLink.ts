@@ -7,7 +7,19 @@ import { AccessibilityState, Linking, Platform } from 'react-native';
 export const useLink = (props: LinkProps): LinkState => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
-  const {accessibilityRole, onPress, onAccessibilityTap, tooltip, url, accessibilityState, componentRef = defaultComponentRef, disabled, enableFocusRing, focusable, ...rest } = props;
+  const {
+    accessibilityRole,
+    onPress,
+    onAccessibilityTap,
+    tooltip,
+    url,
+    accessibilityState,
+    componentRef = defaultComponentRef,
+    disabled,
+    enableFocusRing,
+    focusable,
+    ...rest
+  } = props;
   const isDisabled = !!disabled;
 
   const [visitedState, setVisitedState] = React.useState({ visited: false });
@@ -22,7 +34,8 @@ export const useLink = (props: LinkProps): LinkState => {
         }
         e.stopPropagation();
       }
-    }, [disabled, setVisitedState, url, onPress],
+    },
+    [disabled, setVisitedState, url, onPress],
   );
 
   // GH #1336: Set focusRef to null if link is disabled to prevent getting keyboard focus.
@@ -33,8 +46,7 @@ export const useLink = (props: LinkProps): LinkState => {
 
   const newState = {
     ...pressable.state,
-    ...visitedState
-
+    ...visitedState,
   };
   const onAccTap = React.useCallback(
     (e?) => {
@@ -58,7 +70,7 @@ export const useLink = (props: LinkProps): LinkState => {
       focusable: focusable ?? !isDisabled,
       ...{ cursor: isDisabled ? 'not-allowed' : 'pointer' },
       ref: useViewCommandFocus(componentRef),
-      tooltip: linkTooltip
+      tooltip: linkTooltip,
     },
     state: newState,
   };

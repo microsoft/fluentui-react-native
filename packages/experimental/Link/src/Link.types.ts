@@ -24,8 +24,7 @@ export type ILinkState = IPressableState & {
    * Specifies whether the link is subtle.
    * @default false
    */
-  subtle?: boolean
-
+  subtle?: boolean;
 };
 /**
  * Link tokens, these are the internally configurable values for Link elements. In particular these
@@ -39,7 +38,6 @@ export interface LinkTokens extends TextTokens {
   disabled?: LinkTokens;
   inline?: LinkTokens;
   subtle?: LinkTokens;
-
 }
 
 export type LinkAppearance = 'default' | 'subtle';
@@ -51,7 +49,6 @@ export interface LinkOptions {
    */
   url?: string;
 }
-
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type IWithLinkOptions<T extends object> = LinkOptions & IWithPressableOptions<T>;
@@ -69,7 +66,7 @@ export interface LinkCoreProps extends IWithLinkOptions<TextProps> {
    * @default true
    */
   enableFocusRing?: boolean;
-   /**
+  /**
    * Text that should show in a tooltip when the user hovers over a button.
    */
   tooltip?: string;
@@ -102,5 +99,3 @@ export interface LinkType {
   tokens: LinkTokens;
   slotProps: LinkSlotProps;
 }
-
-

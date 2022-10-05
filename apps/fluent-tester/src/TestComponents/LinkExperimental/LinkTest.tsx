@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Alert, View, StyleSheet, Text, TextInput} from 'react-native';
+import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
 import { Link, LinkTokens } from '@fluentui-react-native/experimental-link';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
@@ -18,9 +18,15 @@ const DefaultLinks: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Link tooltip={"https://www.bing.com/"} url="https://www.bing.com/">Click to navigate.</Link>
-      <Link onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link>
-      <Link disabled focusable>Disabled focusable Link</Link>
+      <Link tooltip={'https://www.bing.com/'} url="https://www.bing.com/">
+        Click to navigate.
+      </Link>
+      <Link onPress={doPress} onAccessibilityTap={doAllyTap}>
+        Click to alert.
+      </Link>
+      <Link disabled focusable>
+        Disabled focusable Link
+      </Link>
     </Stack>
   );
 };
@@ -36,9 +42,27 @@ const InlineLinks: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Text>Click <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>this link</Link> to alert me.</Text>
-      <Text>This <Link inline onPress={doPress} disabled focusable>link</Link> is disabled but focusable.</Text>
-      <Text>Follow this <Link inline url="https://www.bing.com/">link</Link> to navigate.</Text>
+      <Text>
+        Click{' '}
+        <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
+          this link
+        </Link>{' '}
+        to alert me.
+      </Text>
+      <Text>
+        This{' '}
+        <Link inline onPress={doPress} disabled focusable>
+          link
+        </Link>{' '}
+        is disabled but focusable.
+      </Text>
+      <Text>
+        Follow this{' '}
+        <Link inline url="https://www.bing.com/">
+          link
+        </Link>{' '}
+        to navigate.
+      </Text>
     </Stack>
   );
 };
@@ -54,9 +78,18 @@ const SubtleLinks: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Link appearance='subtle' url="https://www.bing.com/">Click to navigate.</Link>
-      <Text>This is inline Link. <Link appearance='subtle' inline onPress={doPress} onAccessibilityTap={doAllyTap}>Click to alert.</Link></Text>
-      <Link appearance='subtle' onPress={doPress} disabled>Disabled Link</Link>
+      <Link appearance="subtle" url="https://www.bing.com/">
+        Click to navigate.
+      </Link>
+      <Text>
+        This is inline Link.{' '}
+        <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
+          Click to alert.
+        </Link>
+      </Text>
+      <Link appearance="subtle" onPress={doPress} disabled>
+        Disabled Link
+      </Link>
     </Stack>
   );
 };
@@ -87,14 +120,7 @@ const CustomLinks: React.FunctionComponent = () => {
       fontSize: linkFontSize,
     };
     return Link.customize(tokens);
-  },
-  [linkColor,
-    linkFont,
-    linkFontSize,
-    linkText,
-    linkUrl
-  ]);
-
+  }, [linkColor, linkFont, linkFontSize, linkText, linkUrl]);
 
   return (
     <View style={styles.tokensColumn}>
@@ -151,7 +177,9 @@ const CustomLinks: React.FunctionComponent = () => {
           />
         </View>
       </View>
-      <CustomLink align='end' url={linkUrl}>{linkText}</CustomLink>
+      <CustomLink align="end" url={linkUrl}>
+        {linkText}
+      </CustomLink>
       <BlueHeaderBold>BlueHeaderBold</BlueHeaderBold>
     </View>
   );

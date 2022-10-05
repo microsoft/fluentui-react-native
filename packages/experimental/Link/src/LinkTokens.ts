@@ -15,7 +15,7 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
       textDecorationLine: 'none',
       focused: {
         borderColor: t.colors.focusBorder,
-      }
+      },
     },
     hovered: {
       color: t.colors.linkHovered,
@@ -45,7 +45,7 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
       focused: {
         color: t.colors.neutralForeground2,
         borderColor: t.colors.focusBorder,
-      }
+      },
     },
     brand: {
       color: t.colors.neutralForegroundInvertedLink,
@@ -61,7 +61,6 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
       focused: {
         color: t.colors.neutralForegroundInvertedLink,
         borderColor: t.colors.focusBorder,
-      }
-    }
+      },
+    },
   } as LinkTokens);
-

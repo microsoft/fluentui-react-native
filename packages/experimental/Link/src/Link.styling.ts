@@ -3,14 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultLinkTokens } from './LinkTokens';
 
-export const linkStates: (keyof ILinkState)[] = [
-  'inline',
-  'subtle',
-  'hovered',
-  'focused',
-  'pressed',
-  'disabled',
-];
+export const linkStates: (keyof ILinkState)[] = ['inline', 'subtle', 'hovered', 'focused', 'pressed', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<LinkProps, LinkSlotProps, LinkTokens> = {
   tokens: [defaultLinkTokens, linkName],
@@ -38,6 +31,6 @@ export const stylingSettings: UseStylingOptions<LinkProps, LinkSlotProps, LinkTo
         },
       }),
       ['color', ...fontStyles.keys],
-    )
+    ),
   },
 };
