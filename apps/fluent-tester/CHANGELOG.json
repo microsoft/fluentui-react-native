@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 05 Oct 2022 14:33:50 GMT",
+      "tag": "@fluentui-react-native/tester_v0.99.8",
+      "version": "0.99.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2fb2c21644fd9abb3507cc840efd81a13e54a19c",
+            "comment": "Added Shadow to CounterBadge"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.2.15",
+            "commit": "2fb2c21644fd9abb3507cc840efd81a13e54a19c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.38",
+            "commit": "2fb2c21644fd9abb3507cc840efd81a13e54a19c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 04 Oct 2022 21:09:28 GMT",
       "tag": "@fluentui-react-native/tester_v0.99.7",
       "version": "0.99.7",

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Wed, 05 Oct 2022 14:33:50 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.38",
+      "version": "0.1.38",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "2fb2c21644fd9abb3507cc840efd81a13e54a19c",
+            "comment": "Added Shadow to CounterBadge"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.25",
+            "commit": "2fb2c21644fd9abb3507cc840efd81a13e54a19c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 04 Oct 2022 21:09:28 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.37",
       "version": "0.1.37",
