@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "merge master",
-  "packageName": "@fluentui-react-native/link",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

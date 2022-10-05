@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "merge master",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
