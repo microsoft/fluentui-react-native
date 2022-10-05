@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "revert text changes",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
