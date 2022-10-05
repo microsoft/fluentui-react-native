@@ -19,7 +19,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     flexDirection: 'row',
     marginTop: globalTokens.spacing.xxs,
 
-    isBelow: {
+    labelPositionBelow: {
       flexDirection: 'column',
     },
 

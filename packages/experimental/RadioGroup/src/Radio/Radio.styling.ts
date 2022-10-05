@@ -3,7 +3,7 @@ import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework'
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { defaultRadioTokens } from './RadioTokens';
 
-export const radioStates: (keyof RadioTokens)[] = ['isBelow', 'focused', 'hovered', 'pressed', 'selected', 'disabled'];
+export const radioStates: (keyof RadioTokens)[] = ['labelPositionBelow', 'focused', 'hovered', 'pressed', 'selected', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, RadioTokens> = {
   tokens: [defaultRadioTokens, radioName],

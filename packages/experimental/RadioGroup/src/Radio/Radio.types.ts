@@ -44,14 +44,14 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   flexDirection?: ViewStyle['flexDirection'];
 
   /**
-   * The flex direction of the root
+   * Top margin
    */
   marginTop?: ViewStyle['marginTop'];
 
   /**
    * States that can be applied to a Radio
    */
-  isBelow?: RadioTokens;
+  labelPositionBelow?: RadioTokens;
   selected?: RadioTokens;
   disabled?: RadioTokens;
   hovered?: RadioTokens;
@@ -101,7 +101,7 @@ export interface RadioState extends IPressableHooks<RadioProps & React.Component
   /**
    * If horizontal-stacked, label should be below indicator.
    */
-  isBelow?: boolean;
+  labelPositionBelow?: boolean;
 }
 
 export interface RadioSlotProps {

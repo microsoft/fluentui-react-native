@@ -26,7 +26,7 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     required: required || false,
     disabled: disabled || false,
     layout: layout || 'vertical',
-    isHorizontal: layout === 'horizontal' || layout === 'horizontal-stacked' ? true : false,
+    isHorizontal: layout === 'horizontal' || layout === 'horizontal-stacked',
     onChange: data.onKeySelect,
     updateSelectedButtonRef: onSelectButtonRef,
   };
