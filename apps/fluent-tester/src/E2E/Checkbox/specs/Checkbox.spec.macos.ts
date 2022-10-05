@@ -1,5 +1,5 @@
-import NavigateAppPage from '../../common/NavigateAppPage.macos';
-import CheckboxPageObject from '../pages/CheckboxPageObject.macos';
+import NavigateAppPage from '../../common/NavigateAppPage';
+import CheckboxPageObject from '../pages/CheckboxPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {
@@ -9,8 +9,6 @@ describe('Checkbox Testing Initialization', () => {
   });
 
   it('Click and navigate to Checkbox test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await CheckboxPageObject.scrollToComponentButton();
     await CheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

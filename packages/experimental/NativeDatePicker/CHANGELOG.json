@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-native-date-picker",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 00:54:35 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.7.2",
+      "version": "0.7.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 20 Sep 2022 23:28:25 GMT",
+      "tag": "@fluentui-react-native/experimental-native-date-picker_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "sophialee.0416@gmail.com",
+            "package": "@fluentui-react-native/experimental-native-date-picker",
+            "commit": "259b0a7324ce64cca6a77cf469a0550be9e63001",
+            "comment": "Bumping FUA version"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 10 Aug 2022 23:40:09 GMT",
       "tag": "@fluentui-react-native/experimental-native-date-picker_v0.7.0",
       "version": "0.7.0",

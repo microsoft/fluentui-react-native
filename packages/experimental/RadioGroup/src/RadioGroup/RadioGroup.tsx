@@ -15,7 +15,9 @@ export const RadioGroup = compose<RadioGroupType>({
   ...stylingSettings,
   slots: {
     root: View,
-    label: Text,
+    label: View,
+    labelText: Text,
+    required: Text,
     container: FocusZone,
   },
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
@@ -28,7 +30,14 @@ export const RadioGroup = compose<RadioGroupType>({
         return null;
       }
 
-      const { label, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(radioGroup.props, final);
+      const { label, required, defaultTabbableElement, isCircularNavigation, ...mergedProps } = mergeProps(radioGroup.props, final);
+
+      const labelComponent = (
+        <Slots.label>
+          <Slots.labelText key="label">{label}</Slots.labelText>
+          {!!required && <Slots.required>{'*'}</Slots.required>}
+        </Slots.label>
+      );
 
       // Populate the buttonKeys array
       if (children) {
@@ -44,7 +53,7 @@ export const RadioGroup = compose<RadioGroupType>({
       return (
         <RadioGroupProvider value={contextValue}>
           <Slots.root {...mergedProps}>
-            {label && <Slots.label>{label}</Slots.label>}
+            {label && labelComponent}
             <Slots.container isCircularNavigation defaultTabbableElement={defaultTabbableElement}>
               {children}
             </Slots.container>

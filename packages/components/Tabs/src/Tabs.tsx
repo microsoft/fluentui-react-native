@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { tabsName, TabsType, TabsProps, TabsState, TabsSlotProps, TabsRenderData, TabsContextData } from './Tabs.types';
@@ -144,7 +144,7 @@ export const Tabs = compose<TabsType>({
 
   settings,
   slots: {
-    root: View,
+    root: Pressable,
     label: Text,
     container: FocusZone,
     stack: { slotType: View, filter: filterViewProps },

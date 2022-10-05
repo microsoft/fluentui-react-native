@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/repo",
-  "version": "0.1.1",
+  "version": "1.22.19",
   "private": true,
   "description": "",
   "keywords": [],
@@ -43,7 +43,12 @@
     "beachball": "^2.20.0",
     "lage": "^1.5.0",
     "markdown-link-check": "^3.8.7",
-    "metro-react-native-babel-preset": "^0.66.0",
+    "metro-react-native-babel-preset": "^0.67.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "workspaces": {
@@ -51,6 +56,12 @@
       "apps/*",
       "packages/**",
       "scripts"
+    ],
+    "nohoist": [
+      "@fluentui-react-native/tester-win32/appium-windows-driver",
+      "@fluentui-react-native/tester/appium-mac2-driver",
+      "@fluentui-react-native/tester/appium-xcuitest-driver",
+      "@fluentui-react-native/tester/appium-windows-driver"
     ]
   },
   "resolutions": {
@@ -58,6 +69,15 @@
     "es5-ext": "0.10.53",
     "jpeg-js": "^0.4.4",
     "moment": "^2.29.4",
-    "shell-quote": "^1.7.3"
+    "shell-quote": "^1.7.3",
+    "@types/react": "^17.0.2"
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "0.68",
+    "kitType": "library",
+    "capabilities": [
+      "babel-preset-react-native",
+      "react-dom"
+    ]
   }
 }

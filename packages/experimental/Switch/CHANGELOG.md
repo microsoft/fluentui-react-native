@@ -1,8 +1,94 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.12
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.3
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/interactive-hooks to v0.18.10
+
+## 0.6.11
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.2
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/interactive-hooks to v0.18.9
+- Bump @fluentui-react-native/tokens to v0.17.2
+
+## 0.6.10
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/text to v0.15.1
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/interactive-hooks to v0.18.8
+- Bump @fluentui-react-native/tokens to v0.17.1
+- Bump @fluentui-react-native/use-styling to v0.9.1
+
+## 0.6.9
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+
+## 0.6.8
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.0
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/interactive-hooks to v0.18.6
+- Bump @fluentui-react-native/tokens to v0.17.0
+
+## 0.6.7
+
+Tue, 20 Sep 2022 16:58:04 GMT
+
+### Patches
+
+- Updated SwitchProp comments to better align with the prop comments on the Fluent UI React Switch documentation. Did not make any functional changes to the control, but wanted to update documentation to get it more ready for publishing as a V1 control. (ejlayne@microsoft.com)
+
+## 0.6.6
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.14.4
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/tokens to v0.16.2
+
+## 0.6.5
+
+Wed, 14 Sep 2022 23:07:41 GMT
+
+### Patches
+
+- Remove rn win32 dep (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/text to v0.14.3
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/interactive-hooks to v0.18.4
+- Bump @fluentui-react-native/tokens to v0.16.1
 
 ## 0.6.4
 

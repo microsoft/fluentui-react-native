@@ -20,7 +20,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['backgroundColor', ...layoutStyles.keys],
+      ['backgroundColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     checkmark: buildProps(
       (tokens: MenuItemTokens) => ({
@@ -35,9 +35,9 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
     content: buildProps(
       (tokens: MenuItemTokens, theme: Theme) => {
         return {
+          color: tokens.color,
           style: {
             flexGrow: 1,
-            color: tokens.color,
             ...fontStyles.from(tokens, theme),
           },
         };
@@ -47,7 +47,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
     submenuIndicator: buildProps(
       (tokens: MenuItemTokens) => {
         return {
-          color: tokens.color,
+          color: tokens.submenuIndicatorColor,
           height: tokens.submenuIndicatorSize,
           width: tokens.submenuIndicatorSize,
           viewBox:
@@ -57,7 +57,7 @@ export const stylingSettings: UseStylingOptions<MenuItemProps, MenuItemSlotProps
             (tokens.submenuIndicatorSize - tokens.submenuIndicatorPadding * 2),
         };
       },
-      ['color'],
+      ['submenuIndicatorColor', 'submenuIndicatorPadding', 'submenuIndicatorSize'],
     ),
   },
 };

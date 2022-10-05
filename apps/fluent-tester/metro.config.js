@@ -6,8 +6,10 @@
  */
 
 const path = require('path');
-const { defaultWatchFolders, exclusionList } = require('@rnx-kit/metro-config');
+const { defaultWatchFolders, exclusionList, resolveUniqueModule } = require('@rnx-kit/metro-config');
 const { getDefaultConfig } = require('metro-config');
+
+const [reactIs, reactIsExcludePattern] = resolveUniqueModule('react-is');
 
 const blockList = exclusionList([
   /node_modules\/.*\/node_modules\/react-native\/.*/,
@@ -31,6 +33,8 @@ const blockList = exclusionList([
 
   // Exclude build output directory
   /.*\/apps\/fluent-tester\/dist\/.*/,
+
+  reactIsExcludePattern,
 ]);
 
 module.exports = (async () => {
@@ -44,6 +48,9 @@ module.exports = (async () => {
       sourceExts: [...sourceExts, 'svg'],
       blacklistRE: blockList,
       blockList,
+      extraNodeModules: {
+        'react-is': reactIs,
+      },
     },
     transformer: {
       // This transformer selects between the regular transformer and svg transformer depending on the file type

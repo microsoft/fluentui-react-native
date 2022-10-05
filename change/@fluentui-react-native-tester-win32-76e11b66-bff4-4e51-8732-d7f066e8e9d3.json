@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Pinning versions of WebDriverIO + Appium",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}

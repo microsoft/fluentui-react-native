@@ -4,6 +4,25 @@ exports[`Notification component tests Notification default 1`] = `
 <View
   style={
     Object {
+      "backgroundColor": "#EBF3FC",
+      "borderColor": "transparent",
+      "borderRadius": 12,
+      "bottom": undefined,
+      "end": undefined,
+      "flex": 1,
+      "justifyContent": "space-between",
+      "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": 16,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
+      "minHeight": 52,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 8,
@@ -11,11 +30,12 @@ exports[`Notification component tests Notification default 1`] = `
       },
       "shadowOpacity": 0.14,
       "shadowRadius": 8,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
-    marginHorizontal={16}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
@@ -28,15 +48,30 @@ exports[`Notification component tests Notification default 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "#EBF3FC",
+        "borderBottomWidth": undefined,
         "borderColor": "transparent",
+        "borderEndWidth": undefined,
+        "borderLeftWidth": undefined,
         "borderRadius": 12,
+        "borderRightWidth": undefined,
+        "borderStartWidth": undefined,
+        "borderTopWidth": undefined,
         "borderWidth": 1,
         "flex": 1,
         "flexDirection": "row",
+        "flexWrap": undefined,
         "justifyContent": "space-between",
         "minHeight": 52,
         "padding": 16,
+        "paddingBottom": undefined,
+        "paddingEnd": undefined,
+        "paddingHorizontal": undefined,
+        "paddingLeft": undefined,
+        "paddingRight": undefined,
+        "paddingStart": undefined,
+        "paddingTop": undefined,
         "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
@@ -68,6 +103,7 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "Segoe UI",
             "fontSize": 15,
             "fontWeight": "400",
+            "lineHeight": 20,
             "margin": 0,
           }
         }
@@ -132,6 +168,8 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "Segoe UI",
             "fontSize": 15,
             "fontWeight": "600",
+            "letterSpacing": 20,
+            "lineHeight": -0.24,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,

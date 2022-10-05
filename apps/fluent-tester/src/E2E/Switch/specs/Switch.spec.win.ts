@@ -1,7 +1,7 @@
-import NavigateAppPage from '../../common/NavigateAppPage.win';
+import NavigateAppPage from '../../common/NavigateAppPage';
 import SwitchPageObject from '../pages/SwitchPageObject';
 import { SwitchComponentSelector } from '../pages/SwitchPageObject';
-import { ComponentSelector } from '../../common/BasePage.win';
+import { ComponentSelector, Platform } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../../../TestComponents/Switch/consts';
 
@@ -14,7 +14,7 @@ describe('Switch Testing Initialization', function () {
 
   it('Click and navigate to Switch test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await SwitchPageObject.scrollToComponentButton();
+    await SwitchPageObject.scrollToComponentButton(Platform.Win32);
     await SwitchPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

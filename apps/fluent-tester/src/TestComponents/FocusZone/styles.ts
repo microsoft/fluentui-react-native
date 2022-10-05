@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import { IStackProps } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Icon } from '@fluentui-react-native/icon';
@@ -9,11 +8,7 @@ export const focusZoneTestStyles = StyleSheet.create({
     flexDirection: 'row',
     alignContent: 'flex-start',
     alignItems: 'flex-start',
-  },
-  focusZoneContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    padding: 4,
+    padding: 10,
   },
   nestedFocusZoneStyle: {
     borderWidth: 1,
@@ -21,8 +16,27 @@ export const focusZoneTestStyles = StyleSheet.create({
     margin: 8,
   },
   focusZoneButton: {
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 100,
+    margin: 10,
+  },
+  listWrapperButton: {
+    marginVertical: 10,
+  },
+  dashedBorder: {
+    borderWidth: 1,
+    borderStyle: 'dashed',
+  },
+  scrollViewStyle: {
+    height: 100,
+    width: 300,
+  },
+  scrollViewContentStyle: {
+    backgroundColor: 'grey',
+  },
+  scrollViewButton: {
+    marginHorizontal: 20,
+    marginBottom: 100,
   },
 });
 
@@ -43,8 +57,3 @@ export const SubheaderText = Text.customize({
   tokens: { variant: 'subheaderSemibold' },
   root: { style: { textDecorationLine: 'underline' } },
 });
-
-export const stackStyleFocusZone: IStackProps['style'] = {
-  flexDirection: 'column',
-  marginBottom: 40,
-};

@@ -1,4 +1,4 @@
-import { BasePage, By } from '../../../common/BasePage.win';
+import { BasePage, By } from '../../../common/BasePage';
 
 const ScrollViewTestId = 'SCROLLVIEW_TEST_ID';
 

@@ -1,8 +1,108 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.25
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/pressable to v0.9.16
+
+## 0.2.24
+
+Tue, 04 Oct 2022 17:24:58 GMT
+
+### Patches
+
+- Get Shadow working with layout props (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.2.23
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/pressable to v0.9.15
+- Bump @fluentui-react-native/theme-types to v0.20.0
+
+## 0.2.22
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/pressable to v0.9.14
+- Bump @fluentui-react-native/theme-types to v0.19.2
+
+## 0.2.21
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.9.13
+
+## 0.2.20
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.4
+- Bump @fluentui-react-native/pressable to v0.9.12
+- Bump @fluentui-react-native/theme-types to v0.19.1
+
+## 0.2.19
+
+Tue, 20 Sep 2022 20:05:27 GMT
+
+### Patches
+
+- Add border width test (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.2.18
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.3
+- Bump @fluentui-react-native/pressable to v0.9.11
+- Bump @fluentui-react-native/theme-types to v0.19.0
+
+## 0.2.17
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.2
+- Bump @fluentui-react-native/pressable to v0.9.10
+
+## 0.2.16
+
+Mon, 12 Sep 2022 18:52:11 GMT
+
+### Patches
+
+- Updated screenshots (78454019+lyzhan7@users.noreply.github.com)
+- Change the test (ruaraki@microsoft.com)
+
+## 0.2.15
+
+Fri, 09 Sep 2022 23:54:15 GMT
+
+### Patches
+
+- Shadows should only take a child of type View (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.14
 

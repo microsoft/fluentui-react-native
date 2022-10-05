@@ -1,8 +1,130 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Tue, 06 Sep 2022 18:22:03 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.19
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.17
+- Bump @fluentui-react-native/focus-zone to v0.10.18
+- Bump @fluentui-react-native/icon to v0.13.12
+- Bump @fluentui-react-native/interactive-hooks to v0.18.10
+- Bump @fluentui-react-native/text to v0.15.3
+- Bump @uifabricshared/foundation-compose to v1.12.8
+- Bump @fluentui-react-native/pressable to v0.9.16
+
+## 0.18.18
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.16
+- Bump @fluentui-react-native/focus-zone to v0.10.17
+
+## 0.18.17
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.15
+- Bump @fluentui-react-native/focus-zone to v0.10.16
+- Bump @fluentui-react-native/icon to v0.13.11
+- Bump @fluentui-react-native/interactive-hooks to v0.18.9
+- Bump @fluentui-react-native/text to v0.15.2
+- Bump @fluentui-react-native/tokens to v0.17.2
+- Bump @uifabricshared/foundation-compose to v1.12.7
+- Bump @fluentui-react-native/pressable to v0.9.15
+
+## 0.18.16
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/callout to v0.21.14
+- Bump @fluentui-react-native/focus-zone to v0.10.15
+- Bump @fluentui-react-native/icon to v0.13.10
+- Bump @fluentui-react-native/interactive-hooks to v0.18.8
+- Bump @fluentui-react-native/text to v0.15.1
+- Bump @fluentui-react-native/tokens to v0.17.1
+- Bump @uifabricshared/foundation-composable to v0.11.1
+- Bump @uifabricshared/foundation-compose to v1.12.6
+- Bump @uifabricshared/foundation-settings to v0.12.1
+- Bump @fluentui-react-native/pressable to v0.9.14
+
+## 0.18.15
+
+Mon, 26 Sep 2022 02:39:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.13
+- Bump @fluentui-react-native/focus-zone to v0.10.14
+- Bump @fluentui-react-native/interactive-hooks to v0.18.7
+- Bump @fluentui-react-native/pressable to v0.9.13
+
+## 0.18.14
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.12
+- Bump @fluentui-react-native/focus-zone to v0.10.13
+- Bump @fluentui-react-native/icon to v0.13.9
+- Bump @fluentui-react-native/interactive-hooks to v0.18.6
+- Bump @fluentui-react-native/text to v0.15.0
+- Bump @fluentui-react-native/tokens to v0.17.0
+- Bump @uifabricshared/foundation-compose to v1.12.5
+- Bump @fluentui-react-native/pressable to v0.9.12
+
+## 0.18.13
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.11
+- Bump @fluentui-react-native/focus-zone to v0.10.12
+- Bump @fluentui-react-native/icon to v0.13.8
+- Bump @fluentui-react-native/interactive-hooks to v0.18.5
+- Bump @fluentui-react-native/text to v0.14.4
+- Bump @fluentui-react-native/tokens to v0.16.2
+- Bump @uifabricshared/foundation-compose to v1.12.4
+- Bump @fluentui-react-native/pressable to v0.9.11
+
+## 0.18.12
+
+Wed, 14 Sep 2022 23:07:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.9.1
+- Bump @fluentui-react-native/callout to v0.21.10
+- Bump @fluentui-react-native/focus-zone to v0.10.11
+- Bump @fluentui-react-native/icon to v0.13.7
+- Bump @fluentui-react-native/interactive-hooks to v0.18.4
+- Bump @fluentui-react-native/text to v0.14.3
+- Bump @fluentui-react-native/tokens to v0.16.1
+- Bump @uifabricshared/foundation-compose to v1.12.3
+- Bump @fluentui-react-native/pressable to v0.9.10
+
+## 0.18.11
+
+Fri, 09 Sep 2022 21:53:29 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.10
 
 ## 0.18.10
 

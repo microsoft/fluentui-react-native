@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/win32-theme
 
-This log was last generated on Mon, 29 Aug 2022 23:21:44 GMT and should not be manually modified.
+This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.5
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.1
+- Bump @fluentui-react-native/theme-tokens to v0.19.3
+
+## 0.21.4
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.0
+- Bump @fluentui-react-native/theme-tokens to v0.19.2
+- Bump @fluentui-react-native/theme-types to v0.20.0
+- Bump @fluentui-react-native/theme to v0.7.4
+- Bump @fluentui-react-native/theming-utils to v0.16.0
+
+## 0.21.3
+
+Fri, 30 Sep 2022 00:54:37 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.15.3
+- Bump @fluentui-react-native/theme-tokens to v0.19.1
+- Bump @fluentui-react-native/theme-types to v0.19.2
+- Bump @fluentui-react-native/theme to v0.7.3
+- Bump @fluentui-react-native/theming-utils to v0.15.3
+
+## 0.21.2
+
+Wed, 21 Sep 2022 21:00:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.15.2
+- Bump @fluentui-react-native/theme-types to v0.19.1
+- Bump @fluentui-react-native/theme to v0.7.2
+- Bump @fluentui-react-native/theming-utils to v0.15.2
+
+## 0.21.1
+
+Fri, 16 Sep 2022 01:53:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.15.1
+- Bump @fluentui-react-native/theme-types to v0.19.0
+- Bump @fluentui-react-native/theme to v0.7.1
+- Bump @fluentui-react-native/theming-utils to v0.15.1
 
 ## 0.21.0
 
