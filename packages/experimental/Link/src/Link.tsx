@@ -8,7 +8,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Link.styling';
 
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the link.
+ * A function which determines if a set of styles should be applied to the component given the current state and props of the link.
  *
  * @param layer The name of the state that is being checked for
  * @param state The current state of the link

@@ -25,17 +25,15 @@ export const useLink = (props: LinkProps): LinkState => {
   const [visitedState, setVisitedState] = React.useState({ visited: false });
   const linkOnPress = React.useCallback(
     (e) => {
-      if (!disabled) {
-        setVisitedState({ visited: true });
-        if (url) {
-          Linking.openURL(url as string);
-        } else if (onPress) {
-          onPress(e);
-        }
-        e.stopPropagation();
+      setVisitedState({ visited: true });
+      if (url) {
+        Linking.openURL(url as string);
+      } else if (onPress) {
+        onPress(e);
       }
+      e.stopPropagation();
     },
-    [disabled, setVisitedState, url, onPress],
+    [setVisitedState, url, onPress],
   );
 
   // GH #1336: Set focusRef to null if link is disabled to prevent getting keyboard focus.
