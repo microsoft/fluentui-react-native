@@ -71,6 +71,8 @@ const styles = StyleSheet.create({
   status: {
     fontWeight: 'normal',
   },
+  // This button is only for our E2E testing framework. We want to be able to put keyboard focus in any test page if we need it.
+  // This button will be at the top of every test page and allows us to do that. But we don't want partners to see it.
   e2eFocusButton: {
     opacity: 0,
   },
