@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Wed, 05 Oct 2022 14:33:50 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Oct 2022 14:01:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.39
+
+Thu, 06 Oct 2022 14:01:15 GMT
+
+### Patches
+
+- Fix bug with colors on Mac for PresenceBadge (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.25
 
 ## 0.1.38
 

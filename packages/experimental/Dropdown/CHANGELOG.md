@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Tue, 04 Oct 2022 21:09:28 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Oct 2022 14:01:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.6
+
+Thu, 06 Oct 2022 14:01:15 GMT
+
+### Patches
+
+- Skeleton Listbox (ruaraki@microsoft.com)
 
 ## 0.4.5
 

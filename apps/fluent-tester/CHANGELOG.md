@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 05 Oct 2022 14:33:50 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Oct 2022 14:01:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.99.9
+
+Thu, 06 Oct 2022 14:01:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.2.16
+- Bump @fluentui-react-native/badge to v0.1.39
+- Bump @fluentui-react-native/dropdown to v0.4.6
 
 ## 0.99.8
 

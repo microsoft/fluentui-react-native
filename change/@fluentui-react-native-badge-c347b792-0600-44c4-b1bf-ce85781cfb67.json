@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix bug with colors on Mac for PresenceBadge",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

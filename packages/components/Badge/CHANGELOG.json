@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Thu, 06 Oct 2022 14:01:15 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.39",
+      "version": "0.1.39",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "051d8db9ebfb4ea18f4cec3a7839cba20762a547",
+            "comment": "Fix bug with colors on Mac for PresenceBadge"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.25",
+            "commit": "051d8db9ebfb4ea18f4cec3a7839cba20762a547"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Oct 2022 14:33:50 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.38",
       "version": "0.1.38",

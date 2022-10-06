@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Skeleton Listbox",
-  "packageName": "@fluentui-react-native/dropdown",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

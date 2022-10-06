@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 06 Oct 2022 14:01:15 GMT",
+      "tag": "@fluentui-react-native/tester_v0.99.9",
+      "version": "0.99.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.2.16",
+            "commit": "051d8db9ebfb4ea18f4cec3a7839cba20762a547"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.39",
+            "commit": "051d8db9ebfb4ea18f4cec3a7839cba20762a547"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/dropdown to v0.4.6",
+            "commit": "051d8db9ebfb4ea18f4cec3a7839cba20762a547"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 05 Oct 2022 14:33:50 GMT",
       "tag": "@fluentui-react-native/tester_v0.99.8",
       "version": "0.99.8",
