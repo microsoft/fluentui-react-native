@@ -38,7 +38,9 @@ describe('Link Accessibility Testing', () => {
     await ExperimentalLinkPageObject.scrollToTestElement();
     await ExperimentalLinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ExperimentalLinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL);
+    await expect(await ExperimentalLinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
+      EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL,
+    );
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 

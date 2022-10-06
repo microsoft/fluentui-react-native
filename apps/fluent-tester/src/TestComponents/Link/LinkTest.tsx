@@ -15,7 +15,7 @@ const Links: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Link url="https://www.bing.com/" content="Click to navigate." />
-      <Link disabled onPress={doPress} content="Click to alert." />
+      <Link onPress={doPress} content="Click to alert." />
     </Stack>
   );
 };
