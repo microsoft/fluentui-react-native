@@ -1,20 +1,9 @@
-import { ButtonV1 as Button } from '@fluentui-react-native/button';
-import { compose, UseSlots } from '@fluentui-react-native/framework';
-import { Icon } from '@fluentui-react-native/icon';
+import { buildUseTokens, compressible, UseTokens } from '@fluentui-react-native/framework';
 import React from 'react';
-import { View } from 'react-native';
-import { dropdownName, DropdownProps, DropdownType } from './Dropdown.types';
+import { DropdownProps, DropdownTokens } from './Dropdown.types';
 
-export const Dropdown = compose<DropdownType>({
-  displayName: dropdownName,
-  slots: {
-    root: View,
-    button: Button,
-    expandIcon: Icon,
-  },
-  useRender: (_userProps: DropdownProps, _useSLots: UseSlots<DropdownType>) => {
-    return (_final: DropdownProps, ..._children: React.ReactNode[]) => {
-      return null;
-    };
-  },
-});
+export const Dropdown = compressible<DropdownProps, DropdownTokens>((_props: DropdownProps, _useTokens: UseTokens<DropdownTokens>) => {
+  return (_final: DropdownProps, ..._children: React.ReactNode[]) => {
+    return null;
+  };
+}, buildUseTokens<DropdownTokens>({}));
