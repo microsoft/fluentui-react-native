@@ -1,5 +1,7 @@
 # E2E Testing Overview
 
+**There is currently an Appium issue with NPM v8.19.2. Please use an older version of NPM**
+
 ## Win32/UWP Prerequisites
 
 - [Node.js](https://nodejs.org/en/download/) - Version 10.19 or higher.
@@ -39,9 +41,7 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 2. Bundle the test app (pick specific platform you want to test, we'll use win32)
    - C:\repo\fluentui-react-native>`cd apps\win32`
    - C:\repo\fluentui-react-native\apps\win32> `yarn bundle`
-3. Hook up appium to the WinAppDriver (only needed once)
-   - C:\repo\fluentui-react-native\apps\win32> `yarn appium driver install windows`
-4. Run E2E tests
+3. Run E2E tests
    - C:\repo\fluentui-react-native\apps\win32> `yarn e2etest`
 
 ## UWP Steps
@@ -50,9 +50,7 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 2. Start the server
    - C:\repo\fluentui-react-native> `cd apps\windows`
    - C:\repo\fluentui-react-native\apps\windows> `yarn start`
-3. Hook up appium to the WinAppDriver (only needed once)
-   - C:\repo\fluentui-react-native\apps\win32> `yarn appium driver install windows`
-4. Open a new command prompt and run the E2E tests
+3. Open a new command prompt and run the E2E tests
    - C:\repo\fluentui-react-native\apps\windows> `yarn e2etest`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
@@ -63,12 +61,10 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 2. POD Install
    - C:\repo\fluentui-react-native> `cd apps\fluent-tester\macos`
    - C:\repo\fluentui-react-native\apps\fluent-tester\macos> `pod install`
-3. Install Appium's MacOS Driver (only needed once)
-   - C:\repo\fluentui-react-native\apps\fluent-tester\E2E> `yarn appium driver install mac2`
-4. Start the server
+3. Start the server
    - C:\repo\fluentui-react-native> `cd apps\fluent-tester`
    - C:\repo\fluentui-react-native\apps\fluent-tester> `yarn start`
-5. Open a new command prompt and run the E2E tests
+4. Open a new command prompt and run the E2E tests
    - C:\repo\fluentui-react-native\apps\fluent-tester> `yarn e2etest:macos`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
