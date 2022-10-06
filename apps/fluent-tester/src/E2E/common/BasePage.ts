@@ -73,6 +73,9 @@ export class BasePage {
       return;
     }
 
+    const errorMsg =
+      'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
+
     switch (platform) {
       case Platform.Win32: {
         const scrollDownKeys = [Keys.PAGE_DOWN];
@@ -84,10 +87,7 @@ export class BasePage {
           },
           {
             timeout: this.waitForUiEvent,
-            timeoutMsg:
-              'Could not scroll to the ' +
-              this._pageName +
-              "'s main test element. Please see Pipeline artifacts for more debugging information.",
+            timeoutMsg: errorMsg,
           },
         );
         break;
@@ -101,8 +101,7 @@ export class BasePage {
           },
           {
             timeout: this.waitForUiEvent,
-            timeoutMsg:
-              'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.",
+            timeoutMsg: errorMsg,
           },
         );
         break;
