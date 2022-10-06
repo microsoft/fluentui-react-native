@@ -7,8 +7,16 @@ import { Svg, SvgProps } from 'react-native-svg';
 import { DropdownProps, DropdownTokens } from './Dropdown.types';
 
 export const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownProps, _useTokens: UseTokens<DropdownTokens>) => {
+  const onButtonClick = React.useCallback(() => {}, []); //eslint-disable-line
+  const buttonProps: ButtonProps = React.useMemo(
+    () => ({
+      onClick: onButtonClick,
+    }),
+    [onButtonClick],
+  );
+
   const RootSlot = useSlot<IViewProps>(View, props);
-  const ButtonSlot = useSlot<ButtonProps>(Button, {});
+  const ButtonSlot = useSlot<ButtonProps>(Button, buttonProps);
   const ExpandIconSlot = useSlot<SvgProps>(Svg, {});
 
   return (_final: DropdownProps, ..._children: React.ReactNode[]) => {
