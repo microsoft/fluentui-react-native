@@ -1,5 +1,5 @@
 import { Keys } from './consts';
-import { TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from '../../TestComponents/Common/consts';
+import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
 
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
@@ -210,7 +210,7 @@ export class BasePage {
 
     for (const child of TestChildren) {
       const autoId = await child.getAttribute('AutomationId');
-      if (autoId && autoId !== TESTPAGE_CONTENT_SCROLLVIEWER && autoId.match(reg)) {
+      if (autoId && autoId !== TESTPAGE_BUTTONS_SCROLLVIEWER && autoId.match(reg)) {
         return await child;
       }
     }
@@ -262,11 +262,6 @@ export class BasePage {
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {
     return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
-  }
-
-  // The scrollviewer containing each test page's content
-  get _testContentScrollViewer() {
-    return By(TESTPAGE_CONTENT_SCROLLVIEWER);
   }
 
   get _firstTestPageButton() {

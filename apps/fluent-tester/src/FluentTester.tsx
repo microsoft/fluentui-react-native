@@ -4,7 +4,7 @@ import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
-import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER, TESTPAGE_CONTENT_SCROLLVIEWER } from './TestComponents/Common/consts';
+import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from './TestComponents/Common/consts';
 import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
@@ -192,7 +192,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponentView: React.FunctionComponent = () => {
     return (
-      <ScrollView style={fluentTesterStyles.testSection} testID={TESTPAGE_CONTENT_SCROLLVIEWER}>
+      <ScrollView style={fluentTesterStyles.testSection}>
         <TestComponent />
       </ScrollView>
     );
