@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Thu, 06 Oct 2022 17:24:49 GMT and should not be manually modified.
+This log was last generated on Thu, 06 Oct 2022 20:27:37 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.9
+
+Thu, 06 Oct 2022 20:27:37 GMT
+
+### Patches
+
+- Make SVG Path arc-path radius values positive; negative values aren't always accepted permissively (patboyd@microsoft.com)
 
 ## 0.7.8
 
