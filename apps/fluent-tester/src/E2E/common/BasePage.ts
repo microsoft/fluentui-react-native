@@ -150,18 +150,17 @@ export class BasePage {
   /* Scrolls to the primary UI test element until it is displayed. */
   async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
     const ComponentToScrollTo = component ?? (await this._primaryComponent);
-
     if (await ComponentToScrollTo.isDisplayed()) {
       return;
     }
 
+    // This button is at the top of every test page. It allows us to put focus in the test page pane so we can type PageDown
+    const FocusButton = await By('Focus_Button');
+    const scrollDownKeys = [Keys.PAGE_DOWN];
     await browser.waitUntil(
       async () => {
-        await driver.touchScroll(
-          COMPONENT_SCROLL_COORDINATES.x,
-          COMPONENT_SCROLL_COORDINATES.y,
-          await this._testContentScrollViewer.elementId,
-        );
+        await FocusButton.addValue(scrollDownKeys);
+        scrollDownKeys.push(Keys.PAGE_DOWN);
         return await ComponentToScrollTo.isDisplayed();
       },
       {
@@ -173,7 +172,8 @@ export class BasePage {
       },
     );
 
-    await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await this._testContentScrollViewer.elementId);
+    // We have this extra scroll here to ensure the whole component is visible.
+    await FocusButton.addValue(scrollDownKeys);
   }
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
