@@ -71,7 +71,8 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.clickComponent();
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
 
-    await MenuPageObject.clickComponent();
+    // Close menu
+    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
     await expect(await MenuPageObject.didMenuClose()).toBeTruthy();
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -80,7 +81,8 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ENTER);
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
 
-    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ENTER);
+    // Close menu
+    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
     await expect(await MenuPageObject.didMenuClose()).toBeTruthy();
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -89,7 +91,8 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.SPACE);
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
 
-    MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.SPACE);
+    // Close menu
+    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
     await expect(await MenuPageObject.didMenuClose()).toBeTruthy();
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
