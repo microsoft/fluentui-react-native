@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 07 Oct 2022 21:15:14 GMT",
+      "tag": "@fluentui-react-native/tester_v0.99.13",
+      "version": "0.99.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4f099bdfc47a0c8711df2ccd78e0d58eef927058",
+            "comment": "Align FURN avatar color hash to web"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.2.18",
+            "commit": "dd25e87eab7fc40c7a83f7b8d03199390ba0a2ad"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/notification to v0.17.17",
+            "commit": "dd25e87eab7fc40c7a83f7b8d03199390ba0a2ad"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 07 Oct 2022 20:30:16 GMT",
       "tag": "@fluentui-react-native/tester_v0.99.12",
       "version": "0.99.12",

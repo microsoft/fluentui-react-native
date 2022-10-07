@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Thu, 06 Oct 2022 17:24:49 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Oct 2022 21:15:14 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.18
+
+Fri, 07 Oct 2022 21:15:14 GMT
+
+### Patches
+
+- Align FURN avatar color hash to web (78454019+lyzhan7@users.noreply.github.com)
 
 ## 1.2.17
 

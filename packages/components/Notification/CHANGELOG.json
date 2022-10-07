@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Fri, 07 Oct 2022 21:15:14 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.17",
+      "version": "0.17.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "dd25e87eab7fc40c7a83f7b8d03199390ba0a2ad",
+            "comment": "Update Notification to use shadow16"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 17:24:49 GMT",
       "tag": "@fluentui-react-native/notification_v0.17.16",
       "version": "0.17.16",
