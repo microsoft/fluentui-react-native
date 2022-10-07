@@ -18,10 +18,11 @@ export interface MenuPickerProps {
   onChange?: (value: any, index?: number) => void;
   collection?: CollectionItem[];
   style?: any;
+  testID?: string;
 }
 
 export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
-  const { prompt, selected, onChange, collection, style } = props;
+  const { prompt, selected, onChange, collection, style, testID } = props;
   let selectedItemKey;
 
   collection.forEach((item) => {
@@ -32,6 +33,7 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
 
   return (
     <Picker
+      testID={testID}
       prompt={prompt}
       selectedValue={selectedItemKey}
       onValueChange={(value: string, index: number) => onChange(value, index)}

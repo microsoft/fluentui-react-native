@@ -16,6 +16,23 @@ export const TEXT_A11Y_ROLE = 'ControlType.Text';
 export const BOOT_APP_TIMEOUT = 60000;
 export const PAGE_TIMEOUT = 15000;
 
+export const enum Attribute {
+  AccessibilityLabel = 'Name',
+  AccessibilityRole = 'ControlType',
+  IsEnabled = 'IsEnabled',
+  IsFocused = 'HasKeyboardFocus',
+  IsRequiredForForm = 'IsRequiredForForm',
+  IsTogglePatternAvailable = 'IsTogglePatternAvailable',
+  ToggleState = 'Toggle.ToggleState',
+}
+
+export const enum AttributeValue {
+  on = '1',
+  off = '0',
+  true = 'True',
+  false = 'False',
+}
+
 /* Keyboard Key Constants */
 export const enum Keys {
   NULL = '\uE000',
