@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/apple-theme",
   "entries": [
     {
+      "date": "Fri, 07 Oct 2022 20:30:16 GMT",
+      "tag": "@fluentui-react-native/apple-theme_v0.15.5",
+      "version": "0.15.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/apple-theme",
+            "commit": "6bdf75b9ef629d801683883b31fc59c399d7a516",
+            "comment": "Remove hardcoded tokens, use shadow tokens from pipeline"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 17:24:49 GMT",
       "tag": "@fluentui-react-native/apple-theme_v0.15.4",
       "version": "0.15.4",
