@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Align FURN avatar color hash to web",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}

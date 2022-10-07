@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 07 Oct 2022 18:44:33 GMT",
+      "tag": "@fluentui-react-native/tester_v0.99.11",
+      "version": "0.99.11",
+      "comments": {
+        "none": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "3aaeabc60098662e79439334f775e51cdd2c0497",
+            "comment": "Updating E2E README Steps"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 20:27:37 GMT",
       "tag": "@fluentui-react-native/tester_v0.99.11",
       "version": "0.99.11",
