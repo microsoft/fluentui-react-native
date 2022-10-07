@@ -211,7 +211,7 @@ function getFontIconSize(size: AvatarSize) {
  *
  * @param idForColor
  * @param name
- * @returns
+ * @returns color to be used when the avatarColor token is set to 'colorful'
  */
 export const resolveColorfulToSpecificColor = (idForColor: string, name: string): AvatarColor => {
   const adjustedNumberOfAvatarColors = AvatarColors.length - 3;
