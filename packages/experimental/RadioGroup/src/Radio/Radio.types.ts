@@ -47,17 +47,17 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * Padding between label and label subtext
    */
-  marginTop?: ViewStyle['marginTop'];
+  subtextMarginTop?: ViewStyle['marginTop'];
 
   /**
    * Padding between label subtext and focus ring
    */
-  marginRight?: ViewStyle['marginRight'];
+  subtextMarginRight?: ViewStyle['marginRight'];
 
   /**
    * Padding between label subtext and focus ring
    */
-  marginBottom?: ViewStyle['marginBottom'];
+  subtextMarginBottom?: ViewStyle['marginBottom'];
 
   /**
    * States that can be applied to a Radio

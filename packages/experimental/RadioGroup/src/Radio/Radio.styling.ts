@@ -71,24 +71,23 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         variant: tokens.variant,
         style: {
           marginTop: 2,
-          marginRight: tokens.marginRight,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', 'marginRight', ...fontStyles.keys],
+      ['color', ...fontStyles.keys],
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({
         variant: tokens.subtextVariant,
         style: {
-          marginTop: tokens.marginTop,
-          marginRight: tokens.marginRight,
-          marginBottom: tokens.marginBottom,
+          marginTop: tokens.subtextMarginTop,
+          marginRight: tokens.subtextMarginRight,
+          marginBottom: tokens.subtextMarginBottom,
           color: tokens.color,
         },
       }),
-      ['variant', 'marginTop', 'marginRight', 'marginBottom', 'color', 'subtextVariant'],
+      ['variant', 'subtextMarginTop', 'subtextMarginRight', 'subtextMarginBottom', 'color', 'subtextVariant'],
     ),
   },
 };
