@@ -48,7 +48,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "Segoe UI",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
@@ -67,14 +67,15 @@ exports[`Default FAB (iOS) 1`] = `
 <View
   style={
     Object {
-      "alignItems": "center",
       "alignSelf": "flex-start",
       "backgroundColor": "#0078d4",
       "borderColor": "#005a9e",
       "borderRadius": 9999,
+      "bottom": undefined,
       "display": "flex",
-      "flexDirection": "row",
+      "end": undefined,
       "justifyContent": "center",
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -86,6 +87,7 @@ exports[`Default FAB (iOS) 1`] = `
       "marginVertical": undefined,
       "minHeight": 56,
       "minWidth": 56,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -93,6 +95,8 @@ exports[`Default FAB (iOS) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
       "width": undefined,
     }
   }
@@ -136,6 +140,7 @@ exports[`Default FAB (iOS) 1`] = `
         "borderWidth": undefined,
         "display": "flex",
         "flexDirection": "row",
+        "flexWrap": undefined,
         "justifyContent": "center",
         "minHeight": 56,
         "minWidth": 56,
@@ -166,7 +171,7 @@ exports[`Default FAB (iOS) 1`] = `
         Object {
           "color": "#ffffff",
           "fontFamily": "Segoe UI",
-          "fontSize": 12,
+          "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,

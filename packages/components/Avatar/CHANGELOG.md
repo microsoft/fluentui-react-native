@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
+This log was last generated on Wed, 05 Oct 2022 14:33:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.15
+
+Wed, 05 Oct 2022 14:33:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.38
+
+## 1.2.14
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.37
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/icon to v0.13.12
+- Bump @fluentui-react-native/interactive-hooks to v0.18.10
+- Bump @fluentui-react-native/theme-tokens to v0.19.3
+
+## 1.2.13
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.1.36
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/icon to v0.13.11
+- Bump @fluentui-react-native/interactive-hooks to v0.18.9
+- Bump @fluentui-react-native/theme-tokens to v0.19.2
+- Bump @fluentui-react-native/tokens to v0.17.2
+
+## 1.2.12
+
+Fri, 30 Sep 2022 00:54:34 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/badge to v0.1.35
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/icon to v0.13.10
+- Bump @fluentui-react-native/interactive-hooks to v0.18.8
+- Bump @fluentui-react-native/theme-tokens to v0.19.1
+- Bump @fluentui-react-native/tokens to v0.17.1
+- Bump @fluentui-react-native/use-styling to v0.9.1
 
 ## 1.2.11
 

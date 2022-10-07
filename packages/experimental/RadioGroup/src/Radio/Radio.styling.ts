@@ -59,6 +59,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     ),
     labelContent: {
       style: {
+        alignSelf: 'center',
         alignItems: 'flex-start',
         flexDirection: 'column',
       },
@@ -72,7 +73,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           ...fontStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['variant', 'color', ...fontStyles.keys],
     ),
     subtext: buildProps(
       (tokens: RadioTokens) => ({
@@ -84,7 +85,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           color: tokens.color,
         },
       }),
-      ['variant', 'subtextMarginTop', 'subtextMarginRight', 'subtextMarginBottom', 'color', 'subtextVariant'],
+      ['subtextMarginTop', 'subtextMarginRight', 'subtextMarginBottom', 'color', 'subtextVariant'],
     ),
   },
 };

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/merge-props
 
-This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 00:54:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
 
 ## 0.5.0
 
