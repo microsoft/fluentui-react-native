@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Update Notification to use shadow16",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "78454019+lyzhan7@users.noreply.github.com",
+  "dependentChangeType": "patch"
+}
