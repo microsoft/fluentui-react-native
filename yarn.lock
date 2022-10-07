@@ -1452,10 +1452,10 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.17.0.tgz#55ed03b2639907f26103c5e9eb5eec46086a310e"
   integrity sha512-PPwXUuuKJ7eM5AEp16ceLM/CHfUi0Ltq9gDU5TZ9X6P0vW/B1IkLk6eFgtoiFdSmbQT+EoO5s3v2EUwhJ0z1ew==
 
-"@fluentui-react-native/design-tokens-ios@^0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-ios/-/design-tokens-ios-0.19.0.tgz#8c084af9080e93705239bc8b353da55bbbb507aa"
-  integrity sha512-Kvf3plp5eXN9S6mHK8SeDNhg2XukciVBm7rU954wgIYCePSif9/zixhH/OSSOE9HcYGyXzthRY6KDuu1KJDVCA==
+"@fluentui-react-native/design-tokens-ios@^0.23.0":
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-ios/-/design-tokens-ios-0.23.0.tgz#059b66c48fc1e236869187ccee1e39157c1a864a"
+  integrity sha512-03kPPV0z9hPRvzurUKwXa2as7Cv2PzGbw7xQAagSznoE6dl4r92Z67hlxzBpL5XlSfTvB3LlVhy6Pw5vX45wGw==
 
 "@fluentui-react-native/design-tokens-macos@^0.13.0":
   version "0.13.0"
@@ -2604,9 +2604,9 @@
     chalk "^4.1.0"
 
 "@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.12.23":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.13.0.tgz#9f3780a17e512131c724f0120dbf6efa202e6d29"
-  integrity sha512-fisE8pssSCh57tCbhv8LqdF3h9RPj4AZXvQTbWEPw7SiVPhmP525sKXw39RyEU0iSkJwgjLO3ZH2T76dbIxRHQ==
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.13.1.tgz#c66a0f0b73583a003ee328e1b0d45475fea6c804"
+  integrity sha512-0StKAz91CbYKBSCMbMarpyDDgJznmbfGCwDLHYOWVhNyAKYl1qF1Ac6cYrESVM56IsSHyvV81LqTrVVdrFDGlw==
 
 "@rnx-kit/eslint-plugin@^0.2.8":
   version "0.2.13"
