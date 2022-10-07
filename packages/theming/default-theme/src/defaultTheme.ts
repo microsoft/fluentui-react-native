@@ -16,6 +16,8 @@ function _defaultTypography(): Typography {
       heroLarge: globalTokens.font.size['900'] as FontSize,
     } as FontSizes,
     weights: {
+      bold: globalTokens.font.weight.bold as FontWeightValue,
+      normal: globalTokens.font.weight.regular as FontWeightValue,
       regular: globalTokens.font.weight.regular as FontWeightValue,
       semiBold: globalTokens.font.weight.semibold as FontWeightValue,
     },

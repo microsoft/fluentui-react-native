@@ -38,6 +38,7 @@
     "@fluentui-react-native/theme": ">=0.7.4 <1.0.0",
     "@fluentui-react-native/theme-types": ">=0.20.0 <1.0.0",
     "@fluentui-react-native/theming-utils": "^0.16.0",
+    "@fluentui-react-native/tokens": "^0.17.2",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {

@@ -14,6 +14,8 @@ export function androidTypography(): Typography {
     weights: {
       // The font weights do not work for Android since RN 0.60 (https://github.com/facebook/react-native/issues/25696)
       // The workaround is to use font aliases from android source (https://android.googlesource.com/platform/frameworks/base/+/master/data/fonts/fonts.xml)
+      bold: '700' as FontWeightValue,
+      normal: '400' as FontWeightValue,
       regular: '400' as FontWeightValue,
       semiBold: '500' as FontWeightValue,
     },

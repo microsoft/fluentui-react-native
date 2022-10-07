@@ -1,8 +1,17 @@
-import globalTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-global.json';
+import aliasTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-aliases.json';
+import { FontStyleTokens } from '@fluentui-react-native/tokens';
 
-import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import { FontSize, FontSizes, FontWeightValue, Typography, Variants, VariantValue } from '@fluentui-react-native/theme-types';
 
-const fontTokens = globalTokens.font;
+export function convertAliasFont(aliasFont: FontStyleTokens): VariantValue {
+  return {
+    face: aliasFont.fontFamily,
+    size: aliasFont.fontSize,
+    weight: aliasFont.fontWeight,
+    lineHeight: aliasFont.fontLineHeight,
+    letterSpacing: aliasFont.fontLetterSpacing,
+  };
+}
 
 // The sizes are taken for the Dynamic Type Size "Large", which is the system default
 export function appleTypography(): Typography {
@@ -20,6 +29,7 @@ export function appleTypography(): Typography {
       ultralight: '100' as FontWeightValue,
       thin: '200' as FontWeightValue,
       light: '300' as FontWeightValue,
+      normal: '400' as FontWeightValue,
       regular: '400' as FontWeightValue,
       medium: '500' as FontWeightValue,
       semiBold: '600' as FontWeightValue,
@@ -50,90 +60,18 @@ export function appleTypography(): Typography {
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
       // iOS styles
-      caption2: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[100],
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight[100],
-        letterSpacing: 0,
-      },
-      caption1: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[200],
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight[200],
-        letterSpacing: -0.08,
-      },
-      caption1Strong: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[200],
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight[200],
-        letterSpacing: -0.08,
-      },
-      body2: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[300],
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight[300],
-        letterSpacing: -0.23,
-      },
-      body2Strong: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[300],
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight[300],
-        letterSpacing: -0.23,
-      },
-      body1: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[400],
-        weight: fontTokens.weight.regular,
-        lineHeight: fontTokens.lineHeight[400],
-        letterSpacing: -0.43,
-      },
-      body1Strong: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[400],
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight[400],
-        letterSpacing: -0.43,
-      },
-      title3: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[500],
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight[500],
-        letterSpacing: -0.45,
-      },
-      title2: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[600],
-        weight: fontTokens.weight.semibold,
-        lineHeight: fontTokens.lineHeight[600],
-        letterSpacing: -0.26,
-      },
-      title1: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[700],
-        weight: fontTokens.weight.bold,
-        lineHeight: fontTokens.lineHeight[700],
-        letterSpacing: 0.38,
-      },
-      largeTitle: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[800],
-        weight: fontTokens.weight.bold,
-        lineHeight: fontTokens.lineHeight[800],
-        letterSpacing: 0.4,
-      },
-      display: {
-        face: fontTokens.family.base,
-        size: fontTokens.size[900],
-        weight: fontTokens.weight.bold,
-        lineHeight: fontTokens.lineHeight[900],
-        letterSpacing: 0.26,
-      },
+      caption2: convertAliasFont(aliasTokens.caption2 as FontStyleTokens),
+      caption1: convertAliasFont(aliasTokens.caption1 as FontStyleTokens),
+      caption1Strong: convertAliasFont(aliasTokens.caption1Strong as FontStyleTokens),
+      body2: convertAliasFont(aliasTokens.body2 as FontStyleTokens),
+      body2Strong: convertAliasFont(aliasTokens.body2Strong as FontStyleTokens),
+      body1: convertAliasFont(aliasTokens.body1 as FontStyleTokens),
+      body1Strong: convertAliasFont(aliasTokens.body1Strong as FontStyleTokens),
+      title3: convertAliasFont(aliasTokens.title3 as FontStyleTokens),
+      title2: convertAliasFont(aliasTokens.title2 as FontStyleTokens),
+      title1: convertAliasFont(aliasTokens.title1 as FontStyleTokens),
+      largeTitle: convertAliasFont(aliasTokens.largeTitle as FontStyleTokens),
+      display: convertAliasFont(aliasTokens.display as FontStyleTokens),
     } as Variants,
   };
 

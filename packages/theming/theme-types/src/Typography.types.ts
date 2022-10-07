@@ -82,6 +82,8 @@ export type FontWeightValue = '100' | '200' | '300' | '400' | '500' | '600' | '7
  * These names should be used when defining a theme.
  */
 export interface FontWeights {
+  bold: FontWeightValue;
+  normal: FontWeightValue;
   regular: FontWeightValue;
   semiBold: FontWeightValue;
 }
