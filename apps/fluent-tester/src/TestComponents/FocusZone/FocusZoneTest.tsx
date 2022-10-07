@@ -4,7 +4,7 @@ import { FocusZone, Text, FocusZoneDirection } from '@fluentui/react-native';
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { Checkbox, CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { FOCUSZONE_TESTPAGE } from './consts';
+import { FOCUSZONE_TESTPAGE, FOCUSZONE_GRID_BUTTON, FOCUSZONE_DIRECTION_ID } from './consts';
 import { focusZoneTestStyles, GridButton, SubheaderText } from './styles';
 import { commonTestStyles } from '../Common/styles';
 import { CollectionItem, MenuPicker } from '../Common/MenuPicker';
@@ -13,6 +13,7 @@ const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal'
 const directionCollection: CollectionItem<FocusZoneDirection>[] = FocusZoneDirections.map((x) => ({
   label: x,
   value: x,
+  testID: FOCUSZONE_DIRECTION_ID(x),
 }));
 
 const Checkboxes = (props: CheckboxProps) => {
@@ -103,34 +104,6 @@ const FocusZoneListWrapper = (props) => {
   );
 };
 
-const DirectionalFocusZone: React.FunctionComponent = () => {
-  const [direction, setDirection] = React.useState<FocusZoneDirection>('none');
-
-  return (
-    <>
-      <MenuPicker prompt="Direction" selected={direction} onChange={setDirection} collection={directionCollection} />
-      <FocusZone focusZoneDirection={direction}>
-        <Checkboxes />
-      </FocusZone>
-    </>
-  );
-};
-
-const CommonUsageFocusZone: React.FunctionComponent = () => {
-  return (
-    <FocusZoneListWrapper>
-      <FocusZone isCircularNavigation={true}>
-        <SubheaderText>FocusZone with Circular Navigation</SubheaderText>
-        <Checkboxes />
-      </FocusZone>
-      <FocusZone disabled={true}>
-        <SubheaderText>Disabled FocusZone</SubheaderText>
-        <Checkboxes />
-      </FocusZone>
-    </FocusZoneListWrapper>
-  );
-};
-
 type GridOfButtonsProps = {
   gridWidth: number;
   gridHeight: number;
@@ -145,7 +118,7 @@ const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props: GridO
             {[...Array(props.gridWidth)].map((_value, widthIndex: number) => {
               const gridIndex = heightIndex * props.gridWidth + widthIndex + 1;
               return (
-                <GridButton key={widthIndex} style={focusZoneTestStyles.focusZoneButton}>
+                <GridButton testId={FOCUSZONE_GRID_BUTTON(gridIndex)} key={widthIndex} style={focusZoneTestStyles.focusZoneButton}>
                   <Text>{gridIndex}</Text>
                 </GridButton>
               );
@@ -198,15 +171,6 @@ const FocusZone2D: React.FunctionComponent = () => {
 };
 
 const focusZoneSections: TestSection[] = [
-  {
-    name: 'Common FocusZone Usage',
-    component: CommonUsageFocusZone,
-  },
-  {
-    name: 'Directional FocusZone Usage',
-    testID: FOCUSZONE_TESTPAGE,
-    component: DirectionalFocusZone,
-  },
   {
     name: '2D Navigation',
     component: FocusZone2D,
