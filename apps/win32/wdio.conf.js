@@ -11,7 +11,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
+  specs: ['../fluent-tester/src/E2E/Menu/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Shimmer/specs/*.win.ts'],
 
   capabilities: [
@@ -108,7 +108,7 @@ exports.config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    */
   before: async function () {
-    await browser.maximizeWindow();
+    //await browser.maximizeWindow();
   },
   /**
    * Runs before a WebdriverIO command gets executed.
