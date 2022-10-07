@@ -40,22 +40,30 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
-   * Variant of label subtext
+   * Variant of label subtext.
+   *
+   * Should only by used if subtext prop is provided.
    */
   subtextVariant?: keyof Variant;
 
   /**
-   * Padding between label and label subtext
+   * Padding between label and label subtext.
+   *
+   * Should only by used if subtext prop is provided.
    */
   subtextMarginTop?: ViewStyle['marginTop'];
 
   /**
-   * Padding between label subtext and focus ring
+   * Padding between label subtext and focus ring.
+   *
+   * Should only by used if subtext prop is provided.
    */
   subtextMarginRight?: ViewStyle['marginRight'];
 
   /**
-   * Padding between label subtext and focus ring
+   * Padding between label subtext and focus ring.
+   *
+   * Should only by used if subtext prop is provided.
    */
   subtextMarginBottom?: ViewStyle['marginBottom'];
 
