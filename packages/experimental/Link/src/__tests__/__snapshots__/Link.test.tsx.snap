@@ -1,13 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Link all props 1`] = `
-<View>
-  Link to Bing
+<View
+  accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  cursor="pointer"
+  disabled={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignSelf": "flex-start",
+    }
+  }
+  tooltip="https://www.bing.com"
+>
+  <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
+    style={
+      Object {
+        "alignSelf": "flex-start",
+        "color": "#0078d4",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
+        "margin": 0,
+        "variant": "body1",
+      }
+    }
+  >
+    Link to Bing
+  </Text>
 </View>
 `;
 
 exports[`Link with child 1`] = `
-<View>
-  Link to bing
+<View
+  accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  cursor="pointer"
+  disabled={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignSelf": "flex-start",
+    }
+  }
+  tooltip="https://www.bing.com"
+>
+  <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
+    style={
+      Object {
+        "alignSelf": "flex-start",
+        "color": "#0078d4",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
+        "margin": 0,
+        "variant": "body1",
+      }
+    }
+  >
+    Link to bing
+  </Text>
 </View>
 `;
