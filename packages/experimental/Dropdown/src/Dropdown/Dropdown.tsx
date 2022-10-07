@@ -5,9 +5,9 @@ import { buildUseTokens, compressible, useSlot, UseTokens, withSlots } from '@fl
 import React from 'react';
 import { View } from 'react-native';
 import { Path, Svg, SvgProps } from 'react-native-svg';
-import { DropdownProps, DropdownTokens } from './Dropdown.types';
+import { dropdownName, DropdownProps, DropdownTokens } from './Dropdown.types';
 
-export const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownProps, _useTokens: UseTokens<DropdownTokens>) => {
+const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownProps, _useTokens: UseTokens<DropdownTokens>) => {
   const onButtonClick = React.useCallback(() => {}, []); //eslint-disable-line
   const buttonProps: ButtonProps = React.useMemo(
     () => ({
@@ -44,3 +44,6 @@ export const Dropdown = compressible<DropdownProps, DropdownTokens>((props: Drop
     );
   };
 }, buildUseTokens<DropdownTokens>({}));
+Dropdown.displayName = dropdownName;
+
+export { Dropdown };
