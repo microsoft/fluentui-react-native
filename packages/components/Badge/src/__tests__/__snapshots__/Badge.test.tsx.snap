@@ -38,6 +38,7 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -78,6 +79,7 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
