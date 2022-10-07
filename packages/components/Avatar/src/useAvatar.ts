@@ -209,8 +209,8 @@ function getFontIconSize(size: AvatarSize) {
 /**
  * A function that determines the actual color to be used for the avatar background when the avatarColor token is 'colorful'
  *
- * @param idForColor
- * @param name
+ * @param idForColor string to be used instead of the name, to determine which color to use when color="colorful"
+ * @param name name of the person or entity represented by this Avatar
  * @returns color to be used when the avatarColor token is set to 'colorful'
  */
 export const resolveColorfulToSpecificColor = (idForColor: string, name: string): AvatarColor => {
