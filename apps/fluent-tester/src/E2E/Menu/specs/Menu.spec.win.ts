@@ -30,15 +30,11 @@ describe('Menu Accessibility Testing', () => {
     await MenuPageObject.scrollToTestElement();
     await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ENTER);
-  });
-
-  afterEach(async () => {
-    await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ENTER);
+    await MenuPageObject.closeMenu();
   });
 
   it('Menu - Validate accessibilityRole of menu item is correct', async () => {
-    await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
+    await MenuPageObject.openMenu();
 
     await expect(await MenuPageObject.getMenuItemAccessibilityRole()).toEqual(MENUITEM_A11Y_ROLE);
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
@@ -53,7 +49,7 @@ describe('Menu Accessibility Testing', () => {
   // });
 
   it('Menu - Do not set accessibilityLabel -> Default to MenuItem label', async () => {
-    await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
+    await MenuPageObject.openMenu();
 
     await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.TertiaryComponent)).toEqual(MENUITEM_TEST_LABEL);
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
@@ -65,29 +61,28 @@ describe('Menu Functional Testing', () => {
   beforeEach(async () => {
     await MenuPageObject.scrollToTestElement();
     await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
+    await MenuPageObject.closeMenu();
   });
 
   it('Validate OnOpenChange() callback was fired -> Click', async () => {
-    await MenuPageObject.clickComponent();
+    await MenuPageObject.openMenu();
     await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
-
-    await MenuPageObject.clickComponent();
-    await expect(await MenuPageObject.didMenuClose()).toBeTruthy();
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  // it('Validate OnOpenChange() callback was fired -> Type "Enter"', async () => {
-  //   await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ENTER);
-  //   await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
+  it('Validate OnOpenChange() callback was fired -> Type "Enter"', async () => {
+    await MenuPageObject.openMenu(Keys.ENTER);
+    await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
 
-  //   await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
-  // });
+    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+  });
 
-  // it('Validate OnOpenChange() callback was fired -> Type "SPACE"', async () => {
-  //   await MenuPageObject.sendKey(MenuComponentSelector.PrimaryComponent, Keys.SPACE);
-  //   await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
+  it('Validate OnOpenChange() callback was fired -> Type "SPACE"', async () => {
+    await MenuPageObject.openMenu(Keys.SPACE);
+    await expect(await MenuPageObject.didMenuOpen()).toBeTruthy();
 
-  //   await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
-  // });
+    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+  });
 });

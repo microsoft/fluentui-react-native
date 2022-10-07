@@ -23,23 +23,7 @@ class MenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didMenuOpen(): Promise<boolean> {
-    await browser.waitUntil(async () => await (await this._menuOpenText).isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The Menu did not open.',
-      interval: 1000,
-    });
-
     return await (await this._menuOpenText).isDisplayed();
-  }
-
-  async didMenuClose(): Promise<boolean> {
-    await browser.waitUntil(async () => await (await this._menuCloseText).isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The Menu did not close.',
-      interval: 1000,
-    });
-
-    return await (await this._menuCloseText).isDisplayed();
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
@@ -74,6 +58,38 @@ class MenuPageObject extends BasePage {
       return await this._primaryComponent;
     }
     return await this._primaryComponent;
+  }
+
+  async closeMenu() {
+    await browser.waitUntil(
+      async () => {
+        await (await this._primaryComponent).click();
+        return await (await this._menuCloseText).isDisplayed();
+      },
+      {
+        timeoutMsg: 'Menu did not close correctly.',
+      },
+    );
+  }
+
+  // Optional key. If no key is provided, we click on the menu button to open
+  async openMenu(key?: string) {
+    await browser.waitUntil(
+      async () => {
+        if (key) {
+          await this.sendKey(MenuComponentSelector.PrimaryComponent, key);
+        } else {
+          await (await this._primaryComponent).click();
+        }
+
+        return await (await this._menuOpenText).isDisplayed();
+      },
+      {
+        timeoutMsg: 'Menu did not open correctly.',
+      },
+    );
+
+    await expect(await (await this._menuOpenText).isDisplayed());
   }
 
   /*****************************************/
