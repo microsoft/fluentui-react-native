@@ -108,7 +108,7 @@ export interface RadioSlotProps {
   root: IViewProps;
   button: IViewProps;
   innerCircle: IViewProps;
-  content: IViewProps;
+  labelContent: IViewProps;
   label: TextProps;
   subtext?: TextProps;
 }
