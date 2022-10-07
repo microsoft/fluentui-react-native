@@ -9,7 +9,7 @@ import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
-import { extractMarginAndroid } from '../Button';
+import { extractOuterStylePropsAndroid } from '../Button';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -37,12 +37,15 @@ export const FAB = compose<FABType>({
   },
   useRender: (userProps: FABProps, useSlots: UseSlots<FABType>) => {
     const { icon, ...rest } = userProps;
+    const [ripplePressedAndroid, setRippleStateAndroid] = React.useState(false);
 
     const iconProps = createIconProps(userProps.icon);
     const button = useButton(rest);
 
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) =>
+      buttonLookup(layer, { ...button.state, pressed: ripplePressedAndroid || button.state.pressed }, userProps),
+    );
 
     // now return the handler for finishing render
     return (final: FABProps, ...children: React.ReactNode[]) => {
@@ -88,19 +91,19 @@ export const FAB = compose<FABType>({
           </Slots.shadow>
         );
       } else if (hasRipple) {
-        const [extractedMargin, styleWithoutMargin] = extractMarginAndroid(mergedProps.style);
+        const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
-          <Slots.root style={extractedMargin}>
+          <Slots.root style={outerStyleProps}>
             <Slots.ripple
               accessibilityLabel={label}
               {...mergedProps}
-              style={styleWithoutMargin}
+              style={innerStyleProps}
               onPressIn={memoize(() => {
-                mergedProps.setRippleStateAndroid(true);
+                setRippleStateAndroid(true);
                 mergedProps.onPressIn?.();
               })}
               onPressOut={memoize(() => {
-                mergedProps.setRippleStateAndroid(false);
+                setRippleStateAndroid(false);
                 mergedProps.onPressOut?.();
               })}
             >

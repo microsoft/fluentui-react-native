@@ -2,87 +2,29 @@
 
 exports[`Checkbox component tests Menu default 1`] = `
 <View
-  accessibilityActions={Array []}
-  accessibilityLabel="Default"
-  accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-      "expanded": false,
-    }
-  }
-  accessible={true}
-  disabled={false}
-  enableFocusRing={true}
-  focusable={true}
-  onAccessibilityAction={[Function]}
-  onAccessibilityTap={[Function]}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={false}
-  onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "center",
-      "alignSelf": "flex-start",
+      "alignSelf": "baseline",
       "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "justifyContent": "center",
-      "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
-      "width": undefined,
+      "overflow": "hidden",
     }
   }
 >
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
-    style={
-      Object {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
-        "fontWeight": "600",
-        "margin": 0,
-        "marginBottom": 0,
-        "marginEnd": 0,
-        "marginStart": 0,
-        "marginTop": 0,
-      }
-    }
-  >
-    Default
-  </Text>
-</View>
-`;
-
-exports[`Checkbox component tests Menu defaultOpen 1`] = `
-Array [
   <View
     accessibilityActions={Array []}
-    accessibilityLabel="Open"
+    accessibilityLabel="Default"
     accessibilityRole="button"
     accessibilityState={
       Object {
         "disabled": false,
-        "expanded": true,
+        "expanded": false,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -90,9 +32,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -103,7 +42,6 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
         "borderWidth": 1,
@@ -134,8 +72,88 @@ Array [
         }
       }
     >
-      Open
+      Default
     </Text>
+  </View>
+</View>
+`;
+
+exports[`Checkbox component tests Menu defaultOpen 1`] = `
+Array [
+  <View
+    style={
+      Object {
+        "alignSelf": "baseline",
+        "backgroundColor": "#f3f2f1",
+        "borderRadius": 4,
+        "display": "flex",
+        "flexDirection": "row",
+        "overflow": "hidden",
+      }
+    }
+  >
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Open"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
+        }
+      }
+    >
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Open
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"
@@ -287,70 +305,79 @@ Array [
 exports[`Checkbox component tests Menu open 1`] = `
 Array [
   <View
-    accessibilityActions={Array []}
-    accessibilityLabel="Open"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "expanded": true,
-      }
-    }
-    accessible={true}
-    disabled={false}
-    enableFocusRing={true}
-    focusable={true}
-    onAccessibilityAction={[Function]}
-    onAccessibilityTap={[Function]}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignSelf": "baseline",
         "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "overflow": "hidden",
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Open"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
         }
       }
     >
-      Open
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Open
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"
@@ -453,70 +480,79 @@ Array [
 exports[`Checkbox component tests Menu open checkbox and divider 1`] = `
 Array [
   <View
-    accessibilityActions={Array []}
-    accessibilityLabel="Open"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "expanded": true,
-      }
-    }
-    accessible={true}
-    disabled={false}
-    enableFocusRing={true}
-    focusable={true}
-    onAccessibilityAction={[Function]}
-    onAccessibilityTap={[Function]}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignSelf": "baseline",
         "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "overflow": "hidden",
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Open"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
         }
       }
     >
-      Open
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Open
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"
@@ -803,70 +839,79 @@ Array [
 exports[`Checkbox component tests Menu open checkbox checked 1`] = `
 Array [
   <View
-    accessibilityActions={Array []}
-    accessibilityLabel="Open"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "expanded": true,
-      }
-    }
-    accessible={true}
-    disabled={false}
-    enableFocusRing={true}
-    focusable={true}
-    onAccessibilityAction={[Function]}
-    onAccessibilityTap={[Function]}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignSelf": "baseline",
         "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "overflow": "hidden",
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Open"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
         }
       }
     >
-      Open
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Open
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"
@@ -1155,70 +1200,79 @@ Array [
 exports[`Checkbox component tests Menu open checkbox defaultChecked 1`] = `
 Array [
   <View
-    accessibilityActions={Array []}
-    accessibilityLabel="Open"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "expanded": true,
-      }
-    }
-    accessible={true}
-    disabled={false}
-    enableFocusRing={true}
-    focusable={true}
-    onAccessibilityAction={[Function]}
-    onAccessibilityTap={[Function]}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignSelf": "baseline",
         "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "overflow": "hidden",
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Open"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
         }
       }
     >
-      Open
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Open
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"
@@ -1507,70 +1561,79 @@ Array [
 exports[`Checkbox component tests Menu open radio 1`] = `
 Array [
   <View
-    accessibilityActions={Array []}
-    accessibilityLabel="Open"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "expanded": true,
-      }
-    }
-    accessible={true}
-    disabled={false}
-    enableFocusRing={true}
-    focusable={true}
-    onAccessibilityAction={[Function]}
-    onAccessibilityTap={[Function]}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignSelf": "baseline",
         "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "overflow": "hidden",
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Open"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
         }
       }
     >
-      Open
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Open
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"
@@ -1847,70 +1910,79 @@ Array [
 exports[`Checkbox component tests Menu submenu 1`] = `
 Array [
   <View
-    accessibilityActions={Array []}
-    accessibilityLabel="Default"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-        "expanded": true,
-      }
-    }
-    accessible={true}
-    disabled={false}
-    enableFocusRing={true}
-    focusable={true}
-    onAccessibilityAction={[Function]}
-    onAccessibilityTap={[Function]}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignSelf": "baseline",
         "backgroundColor": "#f3f2f1",
-        "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "overflow": "hidden",
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
+    <View
+      accessibilityActions={Array []}
+      accessibilityLabel="Default"
+      accessibilityRole="button"
+      accessibilityState={
+        Object {
+          "disabled": false,
+          "expanded": true,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      enableFocusRing={true}
+      focusable={true}
+      onAccessibilityAction={[Function]}
+      onAccessibilityTap={[Function]}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
+          "alignItems": "center",
+          "alignSelf": "flex-start",
+          "borderColor": "#8a8886",
+          "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
+          "width": undefined,
         }
       }
     >
-      Default
-    </Text>
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
+        style={
+          Object {
+            "color": "#323130",
+            "fontFamily": "Segoe UI",
+            "fontSize": 14,
+            "fontWeight": "600",
+            "margin": 0,
+            "marginBottom": 0,
+            "marginEnd": 0,
+            "marginStart": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        Default
+      </Text>
+    </View>
   </View>,
   <RCTCallout
     accessibilityRole="menu"

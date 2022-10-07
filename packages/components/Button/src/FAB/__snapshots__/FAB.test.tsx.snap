@@ -26,18 +26,11 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "center",
-      "alignSelf": "flex-start",
+      "alignSelf": "baseline",
       "backgroundColor": "#0078d4",
-      "borderColor": "#005a9e",
       "borderRadius": 9999,
-      "display": "flex",
       "flexDirection": "row",
-      "justifyContent": "center",
-      "minHeight": 56,
-      "minWidth": 56,
-      "padding": 16,
-      "width": undefined,
+      "overflow": "hidden",
     }
   }
 >
@@ -67,14 +60,11 @@ exports[`Default FAB (iOS) 1`] = `
 <View
   style={
     Object {
-      "alignSelf": "flex-start",
+      "alignSelf": "baseline",
       "backgroundColor": "#0078d4",
-      "borderColor": "#005a9e",
       "borderRadius": 9999,
       "bottom": undefined,
-      "display": "flex",
       "end": undefined,
-      "justifyContent": "center",
       "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
@@ -85,8 +75,7 @@ exports[`Default FAB (iOS) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
-      "minHeight": 56,
-      "minWidth": 56,
+      "overflow": "hidden",
       "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
@@ -97,7 +86,6 @@ exports[`Default FAB (iOS) 1`] = `
       "shadowRadius": 1,
       "start": undefined,
       "top": undefined,
-      "width": undefined,
     }
   }
 >
@@ -126,11 +114,10 @@ exports[`Default FAB (iOS) 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
+        "alignItems": undefined,
+        "alignSelf": "baseline",
         "backgroundColor": "#0078d4",
         "borderBottomWidth": undefined,
-        "borderColor": "#005a9e",
         "borderEndWidth": undefined,
         "borderLeftWidth": undefined,
         "borderRadius": 9999,
@@ -138,13 +125,10 @@ exports[`Default FAB (iOS) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
-        "display": "flex",
         "flexDirection": "row",
         "flexWrap": undefined,
-        "justifyContent": "center",
-        "minHeight": 56,
-        "minWidth": 56,
-        "padding": 16,
+        "overflow": "hidden",
+        "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
         "paddingHorizontal": undefined,
@@ -160,7 +144,6 @@ exports[`Default FAB (iOS) 1`] = `
         },
         "shadowOpacity": 0.14,
         "shadowRadius": 4,
-        "width": undefined,
       }
     }
   >

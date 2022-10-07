@@ -34,7 +34,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-export const extractMarginAndroid = memoize((style) => {
+export const extractOuterStylePropsAndroid = memoize((style) => {
   const marginKeys = [
     'margin',
     'marginTop',
@@ -45,16 +45,25 @@ export const extractMarginAndroid = memoize((style) => {
     'marginEnd',
     'marginVertical',
     'marginHorizontal',
+    'start',
+    'end',
+    'left',
+    'right',
+    'top',
+    'bottom',
   ];
-  const extractedMargin = {},
-    resetMargin = {};
+  const outerStyleProps = {},
+    resetProps = {};
   marginKeys.forEach((key) => {
     if (style && style[key]) {
-      extractedMargin[key] = style[key];
-      resetMargin[key] = 0;
+      outerStyleProps[key] = style[key];
+      resetProps[key] = 0;
     }
   });
-  return [extractedMargin, { ...style, ...resetMargin }];
+  return [
+    { ...outerStyleProps, display: style ? style.display : 'flex' },
+    { ...style, ...resetProps },
+  ];
 });
 
 export const Button = compose<ButtonType>({
@@ -68,9 +77,13 @@ export const Button = compose<ButtonType>({
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
+    const [ripplePressedAndroid, setRippleStateAndroid] = React.useState(false);
+
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
+    const Slots = useSlots(userProps, (layer) =>
+      buttonLookup(layer, { ...button.state, pressed: ripplePressedAndroid || button.state.pressed }, userProps),
+    );
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
@@ -107,20 +120,20 @@ export const Button = compose<ButtonType>({
 
       const hasRipple = Platform.OS === 'android';
       if (hasRipple) {
-        const [extractedMargin, styleWithoutMargin] = extractMarginAndroid(mergedProps.style);
+        const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
-          <Slots.root style={extractedMargin}>
+          <Slots.root style={outerStyleProps}>
             {/* RN Pressable needs to be wrapped with a root view to support curved edges */}
             <Slots.ripple
               accessibilityLabel={label}
               {...mergedProps}
-              style={styleWithoutMargin}
+              style={innerStyleProps}
               onPressIn={memoize(() => {
-                mergedProps.setRippleStateAndroid(true);
+                setRippleStateAndroid(true);
                 mergedProps.onPressIn?.();
               })}
               onPressOut={memoize(() => {
-                mergedProps.setRippleStateAndroid(false);
+                setRippleStateAndroid(false);
                 mergedProps.onPressOut?.();
               })}
             >

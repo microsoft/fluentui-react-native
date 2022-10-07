@@ -112,74 +112,85 @@ exports[`Notification component tests Notification default 1`] = `
       </Text>
     </View>
     <View
-      accessibilityLabel="Undo"
-      accessibilityRole="button"
-      accessibilityState={
-        Object {
-          "disabled": false,
-        }
-      }
-      accessible={true}
-      appearance="subtle"
-      color="#0F6CBD"
-      disabled={false}
-      disabledColor="#2886DE"
-      enableFocusRing={true}
-      focusable={true}
-      minWidth={0}
-      onAccessibilityTap={[Function]}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onPress={[Function]}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
-      padding={0}
-      paddingHorizontal={0}
-      pressedColor="#0F6CBD30"
       style={
         Object {
-          "alignItems": "center",
-          "alignSelf": "center",
+          "alignSelf": "baseline",
           "backgroundColor": "transparent",
-          "borderColor": "#ffffff",
           "borderRadius": 4,
-          "borderWidth": 1,
-          "display": "flex",
           "flexDirection": "row",
-          "justifyContent": "center",
           "marginStart": 16,
-          "minWidth": 96,
-          "padding": 5,
-          "paddingHorizontal": 11,
+          "overflow": "hidden",
         }
       }
     >
-      <Text
-        ellipsizeMode="tail"
-        numberOfLines={0}
+      <View
+        accessibilityLabel="Undo"
+        accessibilityRole="button"
+        accessibilityState={
+          Object {
+            "disabled": false,
+          }
+        }
+        accessible={true}
+        appearance="subtle"
+        collapsable={false}
+        color="#0F6CBD"
+        disabledColor="#2886DE"
+        enableFocusRing={true}
+        focusable={true}
+        minWidth={0}
+        onAccessibilityTap={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        padding={0}
+        paddingHorizontal={0}
+        pressedColor="#0F6CBD30"
         style={
           Object {
-            "color": "#0F6CBD",
-            "fontFamily": "Segoe UI",
-            "fontSize": 15,
-            "fontWeight": "600",
-            "letterSpacing": 20,
-            "lineHeight": -0.24,
-            "margin": 0,
-            "marginBottom": 0,
-            "marginEnd": 0,
+            "alignItems": "center",
+            "alignSelf": "center",
+            "borderColor": "#ffffff",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "display": "flex",
+            "flexDirection": "row",
+            "justifyContent": "center",
             "marginStart": 0,
-            "marginTop": 0,
+            "minWidth": 96,
+            "padding": 5,
+            "paddingHorizontal": 11,
           }
         }
       >
-        Undo
-      </Text>
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#0F6CBD",
+              "fontFamily": "Segoe UI",
+              "fontSize": 15,
+              "fontWeight": "600",
+              "letterSpacing": 20,
+              "lineHeight": -0.24,
+              "margin": 0,
+              "marginBottom": 0,
+              "marginEnd": 0,
+              "marginStart": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          Undo
+        </Text>
+      </View>
     </View>
   </View>
 </View>

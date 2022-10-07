@@ -16,8 +16,6 @@ export const useButton = (props: ButtonProps): ButtonState => {
   const onKeyUpProps = useKeyProps(onClick, ' ', 'Enter');
   const hasTogglePattern = props.accessibilityActions && !!props.accessibilityActions.find((action) => action.name === 'Toggle');
 
-  const [rippledPressedAndroid, setRippleStateAndroid] = React.useState(false);
-
   return {
     props: {
       ...onKeyUpProps,
@@ -32,9 +30,8 @@ export const useButton = (props: ButtonProps): ButtonState => {
       ref: useViewCommandFocus(componentRef),
       iconPosition: props.iconPosition || 'before',
       loading,
-      setRippleStateAndroid,
     },
-    state: { ...pressable.state, pressed: rippledPressedAndroid || pressable.state.pressed },
+    state: pressable.state,
   };
 };
 

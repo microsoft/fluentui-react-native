@@ -39,12 +39,14 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
               width: tokens.width,
               ...borderStyles.from(tokens, theme),
               ...layoutStyles.from(tokens, theme),
+              ...shadowStyles.from(tokens, theme),
             },
             android_ripple: {
               color: tokens.pressed.backgroundColor,
             },
+            elevation: tokens.elevation,
           }),
-          ['pressed', 'width', ...layoutStyles.keys, ...borderStyles.keys],
+          ['pressed', 'width', 'elevation', ...layoutStyles.keys, ...borderStyles.keys, ...shadowStyles.keys],
         ),
       },
       default: {
