@@ -29,7 +29,7 @@ const badgeSections: TestSection[] = [
 export const BadgeTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
-    uwpStatus: 'Experimental',
+    uwpStatus: 'Backlog',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
     androidStatus: 'Backlog',
