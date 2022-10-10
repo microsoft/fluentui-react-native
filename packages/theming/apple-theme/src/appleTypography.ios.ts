@@ -29,7 +29,6 @@ export function appleTypography(): Typography {
       ultralight: '100' as FontWeightValue,
       thin: '200' as FontWeightValue,
       light: '300' as FontWeightValue,
-      normal: '400' as FontWeightValue,
       regular: '400' as FontWeightValue,
       medium: '500' as FontWeightValue,
       semiBold: '600' as FontWeightValue,

@@ -157,7 +157,7 @@ export const mockTheme: Theme = {
   },
   typography: {
     sizes: { caption: 10, secondary: 12, body: 14, subheader: 16, header: 20, hero: 28, heroLarge: 42 },
-    weights: { bold: '700', normal: '400', regular: '400', semiBold: '600' },
+    weights: { regular: '400', semiBold: '600' },
     families: { primary: 'Segoe UI', secondary: 'System', cursive: 'System', monospace: 'System', sansSerif: 'System', serif: 'System' },
     variants: {
       captionStandard: { face: 'primary', size: 'caption', weight: 'regular' },
