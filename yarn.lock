@@ -2463,9 +2463,9 @@
   integrity sha512-3jgCWoZY31s/cjtTCAbGN0VqapwM7WiGZonb5KSkRT6egkwR1QAWBxe8Pe216u6R5EY/AGC8Z4Bf9wASYpz/1A==
 
 "@react-native-picker/picker@^2.2.1":
-  version "2.4.6"
-  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.6.tgz#a6f804c41ca2a0bb52f1d04402e2fb76b5074e78"
-  integrity sha512-TyrQZKwi7tbGbETxpQpaf0Jld6Fw/RRWVPAShRobTUWwUglveP71mtdLwuNJV+1NXI6PqW/OvCEk9ZmFfGj0fQ==
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.7.tgz#7b7c2d3fe537cd82ed67c9c7f26039553e194c16"
+  integrity sha512-SZewIUpkHIA1VzDdetXLpZUfwVOR4p+CRGguo8dGt/33nh9Bhkpt0Ke6KazZ6agbDGyBjlVEAqzkcLXoRBwOJQ==
 
 "@react-native-windows/cli@0.68.5":
   version "0.68.5"
@@ -12112,9 +12112,9 @@ react-native-test-app@^1.6.2:
     yargs "^16.0.0"
 
 react-native-windows@^0.68.0:
-  version "0.68.18"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.18.tgz#c850bff9a3cce1e1a6c7b05a06785ea69ff6b37a"
-  integrity sha512-Hu1Sop5gnt7vONa65ZjUuJvdEXbxgdxL0kdSD4OpO2zq5KogjlvY9v4ZYl81hlR2Cs+uC1QLLi8W2CG/KAjxjQ==
+  version "0.68.19"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.19.tgz#64be41cb34a10dfabbea9185522424bb9094d0c4"
+  integrity sha512-X6UZztKoKwsW1CkV7+WjBkVBK4+Y7fVnsoU9pkTKnnoDGmEdsjjhQhx3weSbXmoSu+mVEdGHel/QO+2EIf7oNw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
