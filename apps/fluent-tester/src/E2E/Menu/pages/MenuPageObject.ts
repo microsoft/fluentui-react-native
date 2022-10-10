@@ -3,10 +3,9 @@ import {
   MENUTRIGGER_TEST_COMPONENT,
   MENUITEM_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_MENU_BUTTON,
-  MENU_ON_OPEN,
-  MENU_ON_CLOSE,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
+  MENU_DEFOCUS_BUTTON,
 } from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
 
@@ -23,25 +22,19 @@ class MenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didMenuOpen(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_OPEN);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+    await browser.waitUntil(async () => await this.menuIsExpanded(), {
       timeout: this.waitForUiEvent,
       timeoutMsg: 'The Menu did not open.',
       interval: 1000,
     });
 
-    return await callbackText.isDisplayed();
+    return await this.menuIsExpanded();
   }
 
-  async didMenuClose(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_CLOSE);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The Menu did not close.',
-      interval: 1000,
-    });
-
-    return await callbackText.isDisplayed();
+  async menuIsExpanded(): Promise<boolean> {
+    const expandState = await (await this._primaryComponent).getAttribute('ExpandCollapse.ExpandCollapseState');
+    console.log(expandState);
+    return expandState === 'Expanded';
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
@@ -78,6 +71,10 @@ class MenuPageObject extends BasePage {
     return await this._primaryComponent;
   }
 
+  async resetTest() {
+    await (await this._defocusButton).click();
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -103,6 +100,10 @@ class MenuPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_MENU_BUTTON);
+  }
+
+  get _defocusButton() {
+    return By(MENU_DEFOCUS_BUTTON);
   }
 }
 
