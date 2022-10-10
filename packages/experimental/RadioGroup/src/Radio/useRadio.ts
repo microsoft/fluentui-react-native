@@ -11,13 +11,13 @@ export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
 
   // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
-  const selectedInfo = useRadioGroupContext();
+  const radioGroupContext = useRadioGroupContext();
 
   const {
     label,
     value,
     disabled,
-    labelPosition = selectedInfo.layout === 'horizontal-stacked' ? 'below' : 'after',
+    labelPosition = radioGroupContext.layout === 'horizontal-stacked' ? 'below' : 'after',
     accessibilityActions,
     accessibilityLabel,
     accessibilityState,
@@ -32,18 +32,18 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
   const changeSelection = React.useCallback(() => {
-    if (value != selectedInfo.value) {
-      selectedInfo.onChange && selectedInfo.onChange(value);
-      selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
+    if (value != radioGroupContext.value) {
+      radioGroupContext.onChange && radioGroupContext.onChange(value);
+      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
-  }, [selectedInfo, value, componentRef]);
+  }, [radioGroupContext, value, componentRef]);
 
   /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value == selectedInfo.value) {
-      selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
+    if (value == radioGroupContext.value) {
+      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
   }, []);
 
@@ -76,8 +76,8 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   const state = {
     ...pressable.state,
-    selected: selectedInfo.value === props.value,
-    disabled: selectedInfo.disabled || disabled || false,
+    selected: radioGroupContext.value === props.value,
+    disabled: radioGroupContext.disabled || disabled || false,
     labelPositionBelow: labelPosition === 'below',
   };
 
@@ -94,8 +94,8 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
-      accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
+      accessibilityPositionInSet: accessibilityPositionInSet ?? radioGroupContext.buttonKeys.findIndex((x) => x == value) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.buttonKeys.length,
       focusable: !state.disabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
