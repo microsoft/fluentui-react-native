@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Thu, 06 Oct 2022 17:24:49 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Oct 2022 22:38:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.4.8
+
+Mon, 10 Oct 2022 22:38:04 GMT
+
+### Patches
+
+- Slots for Dropdown trigger (ruaraki@microsoft.com)
 
 ## 0.4.7
 

@@ -2,6 +2,35 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 10 Oct 2022 22:38:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.100.0",
+      "version": "0.100.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "95b95bb97a07d64e9d61efdee8047d5b4a9f0af6",
+            "comment": "Add Dropdown test case"
+          }
+        ],
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d25e8da84f57b8bdf67b20a45e633cf1c4406a11",
+            "comment": "Improving scroll logic and adding more Key constants"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/dropdown to v0.4.8",
+            "commit": "d25e8da84f57b8bdf67b20a45e633cf1c4406a11"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Oct 2022 00:11:05 GMT",
       "tag": "@fluentui-react-native/tester_v0.99.14",
       "version": "0.99.14",

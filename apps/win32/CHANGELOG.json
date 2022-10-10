@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 10 Oct 2022 22:38:04 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.27.0",
+      "version": "0.27.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "d25e8da84f57b8bdf67b20a45e633cf1c4406a11",
+            "comment": "Improving scroll logic and adding more Key constants"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.100.0",
+            "commit": "d25e8da84f57b8bdf67b20a45e633cf1c4406a11"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 08 Oct 2022 00:11:05 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.26.35",
       "version": "0.26.35",

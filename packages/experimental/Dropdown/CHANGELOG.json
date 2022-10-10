@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dropdown",
   "entries": [
     {
+      "date": "Mon, 10 Oct 2022 22:38:04 GMT",
+      "tag": "@fluentui-react-native/dropdown_v0.4.8",
+      "version": "0.4.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/dropdown",
+            "commit": "95b95bb97a07d64e9d61efdee8047d5b4a9f0af6",
+            "comment": "Slots for Dropdown trigger"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 17:24:49 GMT",
       "tag": "@fluentui-react-native/dropdown_v0.4.7",
       "version": "0.4.7",

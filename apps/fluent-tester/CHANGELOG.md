@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 08 Oct 2022 00:11:05 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Oct 2022 22:38:04 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.100.0
+
+Mon, 10 Oct 2022 22:38:04 GMT
+
+### Minor changes
+
+- Improving scroll logic and adding more Key constants (safreibe@microsoft.com)
+- Bump @fluentui-react-native/dropdown to v0.4.8
+
+### Patches
+
+- Add Dropdown test case (ruaraki@microsoft.com)
 
 ## 0.99.14
 
