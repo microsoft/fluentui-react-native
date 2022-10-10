@@ -7,6 +7,7 @@ import {
   MENU_ON_CLOSE,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
+  MENU_DEFOCUS_BUTTON,
 } from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
 
@@ -61,6 +62,7 @@ class MenuPageObject extends BasePage {
   }
 
   async closeMenu() {
+    await (await this._defocusButton).click();
     await browser.waitUntil(
       async () => {
         await (await this._primaryComponent).click();
@@ -74,6 +76,7 @@ class MenuPageObject extends BasePage {
 
   // Optional key. If no key is provided, we click on the menu button to open
   async openMenu(key?: string) {
+    await (await this._defocusButton).click();
     await browser.waitUntil(
       async () => {
         if (key) {
@@ -125,6 +128,10 @@ class MenuPageObject extends BasePage {
 
   get _menuCloseText() {
     return By(MENU_ON_CLOSE);
+  }
+
+  get _defocusButton() {
+    return By(MENU_DEFOCUS_BUTTON);
   }
 }
 
