@@ -45,7 +45,7 @@ export const RadioGroup = compose<RadioGroupType>({
         // @ts-ignore - TODO, fix typing error
         contextValue.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
-            return child.props.buttonKey;
+            return child.props.value;
           }
         });
       }
