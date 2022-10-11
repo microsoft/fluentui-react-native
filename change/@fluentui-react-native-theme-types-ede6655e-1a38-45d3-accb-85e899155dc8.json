@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Add new spacing tokens",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme",
   "entries": [
     {
+      "date": "Tue, 11 Oct 2022 22:41:44 GMT",
+      "tag": "@fluentui-react-native/theme_v0.7.5",
+      "version": "0.7.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.21.0",
+            "commit": "3547a335f47efb90f52c10443dc85f755046a324"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 08:04:44 GMT",
       "tag": "@fluentui-react-native/theme_v0.7.4",
       "version": "0.7.4",

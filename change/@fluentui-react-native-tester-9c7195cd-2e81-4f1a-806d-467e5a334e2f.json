@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add iOS test page for spacing tokens",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "adam.gleitman@gmail.com",
-  "dependentChangeType": "patch"
-}
