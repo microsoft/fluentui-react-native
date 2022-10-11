@@ -164,7 +164,10 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         )}
       </Stack>
       {props.sections.map((section, index) => {
-        if (section == null) return <></>;
+        if (section == null) {
+          return <></>;
+        }
+
         const TestComponent = section.component;
         return (
           <View key={index}>
