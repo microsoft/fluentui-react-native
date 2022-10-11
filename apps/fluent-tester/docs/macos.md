@@ -49,7 +49,7 @@ If you're looking to upgrade `react-native`, look for the `rnx-kit` section in
 {
   ...
   "rnx-kit": {
-    "reactNativeVersion": "^0.66",
+    "reactNativeVersion": "^0.68",
     "kitType": "app",
     "bundle": {
   ...

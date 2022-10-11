@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Wed, 14 Sep 2022 23:07:41 GMT and should not be manually modified.
+This log was last generated on Fri, 30 Sep 2022 00:54:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.2
+
+Fri, 30 Sep 2022 00:54:34 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
 
 ## 0.9.1
 

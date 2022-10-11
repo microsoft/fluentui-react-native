@@ -36,4 +36,23 @@ export const defaultPresenceBadgeTokens: TokenSettings<PresenceBadgeTokens> = ()
       height: 28,
       borderWidth: 2,
     },
+    available: getBadgeColor('lightGreen'),
+    away: getBadgeColor('marigold'),
+    awayOutOfOffice: getBadgeColor('berry'),
+    busy: getBadgeColor('red'),
+    blocked: getBadgeColor('red'),
+    unknown: getBadgeColor('red'),
+    offline: {
+      iconColor: globalTokens.color.grey[38],
+    },
+    outOfOffice: getBadgeColor('berry'),
   } as PresenceBadgeTokens);
+
+function getBadgeColor(color: string) {
+  return {
+    iconColor: globalTokens.color[color].primary,
+    outOfOffice: {
+      iconColor: globalTokens.color[color].primary,
+    },
+  };
+}
