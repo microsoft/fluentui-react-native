@@ -13,11 +13,6 @@ export interface RadioGroupState extends RadioGroupProps {
   value: string | null;
 
   /**
-   * Layout of the Radios. True if horizontal or horizontal-stacked.
-   */
-  isHorizontal?: boolean;
-
-  /**
    * Updates the selected button and calls the client’s onChange callback
    */
   onChange?: (key: string) => void;

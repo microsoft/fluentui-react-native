@@ -97,12 +97,7 @@ export interface RadioProps extends IPressableProps {
   enableFocusRing?: boolean;
 }
 
-export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {
-  /**
-   * If horizontal-stacked, label should be below indicator.
-   */
-  labelPositionBelow?: boolean;
-}
+export interface RadioState extends IPressableHooks<RadioProps & React.ComponentPropsWithRef<any>> {}
 
 export interface RadioSlotProps {
   root: IViewProps;

@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { radioGroupName, RadioGroupType, RadioGroupProps } from './RadioGroup.types';
+import { radioGroupName, RadioGroupType, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { FocusZone } from '@fluentui-react-native/focus-zone';
 import { stylingSettings } from './RadioGroup.styling';
@@ -9,6 +9,22 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useRadioGroup } from './useRadioGroup';
 import { RadioGroupProvider } from './radioGroupContext';
 import { useRadioGroupContextValue } from './useRadioGroupContextValue';
+
+/**
+ * A function which determines if a set of styles should be applied to the compoent given the current state and props of the radiogroup.
+ *
+ * @param layer The name of the state that is being checked for
+ * @param state The current state of the radiogroup
+ * @param userProps The props that were passed into the radiogroup
+ * @returns Whether the styles that are assigned to the layer should be applied to the radiogroup
+ */
+export const radioGroupLookup = (layer: string, state: RadioGroupState, userProps: RadioGroupProps): boolean => {
+  return (
+    state[layer] ||
+    userProps[layer] ||
+    (layer === 'isHorizontal' && (userProps['layout'] === 'horizontal' || userProps['layout'] === 'horizontal-stacked'))
+  );
+};
 
 export const RadioGroup = compose<RadioGroupType>({
   displayName: radioGroupName,
@@ -24,7 +40,7 @@ export const RadioGroup = compose<RadioGroupType>({
   useRender: (userProps: RadioGroupProps, useSlots: UseSlots<RadioGroupType>) => {
     const radioGroup = useRadioGroup(userProps);
     const contextValue = useRadioGroupContextValue(radioGroup.state);
-    const Slots = useSlots(userProps, (layer) => radioGroup.state[layer] || userProps[layer]);
+    const Slots = useSlots(userProps, (layer) => radioGroupLookup(layer, radioGroup.state, userProps));
 
     return (final: RadioGroupProps, ...children: React.ReactNode[]) => {
       if (!radioGroup.state) {
@@ -46,7 +62,7 @@ export const RadioGroup = compose<RadioGroupType>({
         // @ts-ignore - TODO, fix typing error
         contextValue.buttonKeys = React.Children.map(children, (child: React.ReactChild) => {
           if (React.isValidElement(child)) {
-            return child.props.buttonKey;
+            return child.props.value;
           }
         });
       }
