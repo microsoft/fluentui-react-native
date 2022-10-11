@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuPageObject, { MenuComponentSelector } from '../pages/MenuPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE } from '../../common/consts';
-import { MENUITEM_TEST_LABEL } from '../../../TestComponents/Menu/consts';
+import { ExpandCollapseState, MENUITEM_TEST_LABEL } from '../../../TestComponents/Menu/consts';
 import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -29,6 +29,7 @@ describe('Menu Accessibility Testing', () => {
   beforeEach(async () => {
     await MenuPageObject.scrollToTestElement();
     await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+    await MenuPageObject.resetTest();
   });
 
   it('Menu - Validate accessibilityRole of menu item is correct', async () => {
@@ -40,6 +41,12 @@ describe('Menu Accessibility Testing', () => {
   it('Menu - Do not set accessibilityLabel -> Default to MenuItem label', async () => {
     await MenuPageObject.clickComponent();
     await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.TertiaryComponent)).toEqual(MENUITEM_TEST_LABEL);
+    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Menu - Click menu -> ExpandCollapseState correctly changes', async () => {
+    await MenuPageObject.clickComponent();
+    await expect(await MenuPageObject.getMenuExpandCollapseState()).toEqual(ExpandCollapseState.EXPANDED);
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 });

@@ -6,6 +6,7 @@ import {
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
   MENU_DEFOCUS_BUTTON,
+  ExpandCollapseState,
 } from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
 
@@ -32,9 +33,11 @@ class MenuPageObject extends BasePage {
   }
 
   async menuIsExpanded(): Promise<boolean> {
-    const expandCollapseState = await (await this._primaryComponent).getAttribute('ExpandCollapse.ExpandCollapseState');
-    const menuItemIsDisplayed = await (await this._secondaryComponent).isDisplayed();
-    return expandCollapseState === 'Expanded' && menuItemIsDisplayed;
+    return await (await this._secondaryComponent).isDisplayed();
+  }
+
+  async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
+    return (await (await this._primaryComponent).getAttribute('ExpandCollapse.ExpandCollapseState')) as ExpandCollapseState;
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
