@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "updating new android tokens",
+  "packageName": "@fluentui-react-native/theme-tokens",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
