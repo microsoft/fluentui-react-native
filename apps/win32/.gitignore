@@ -63,7 +63,7 @@ buck-out/
 */fastlane/screenshots
 
 # Bundle artifact
-*.jsbundle
+*.bundle
 
 # CocoaPods
 /ios/Pods/
