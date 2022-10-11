@@ -9,6 +9,7 @@ import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestCompon
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
+import { ROOT_VIEW } from './E2E/common/consts';
 
 // uncomment the below lines to enable message spy
 /**
@@ -224,7 +225,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    <View style={commonTestStyles.flex}>
+    <View accessible testID={ROOT_VIEW} style={commonTestStyles.flex}>
       {Platform.OS === ('win32' as any) ? (
         <FocusTrapZone style={themedStyles.root}>
           <TesterContent />

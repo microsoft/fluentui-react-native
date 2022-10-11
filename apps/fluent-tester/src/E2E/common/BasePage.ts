@@ -1,13 +1,18 @@
-import { Keys } from './consts';
+import { Keys, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
 import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
+let _rootView: WebdriverIO.Element | null = null;
+
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
-export function By(identifier: string) {
-  return $('~' + identifier);
+export async function By(identifier: string) {
+  if (_rootView === null) {
+    _rootView = await $('~' + ROOT_VIEW);
+  }
+  return _rootView.$('~' + identifier);
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -55,16 +60,16 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return await this._testPage.isDisplayed();
+    return (await this._testPage).isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
-    return await this._pageButton.isDisplayed();
+    return await (await this._pageButton).isDisplayed();
   }
 
   async clickComponent(): Promise<void> {
-    await this._primaryComponent.click();
+    await (await this._primaryComponent).click();
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -143,7 +148,7 @@ export class BasePage {
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
+    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
