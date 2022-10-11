@@ -32,9 +32,9 @@ class MenuPageObject extends BasePage {
   }
 
   async menuIsExpanded(): Promise<boolean> {
-    const expandState = await (await this._primaryComponent).getAttribute('ExpandCollapse.ExpandCollapseState');
-    console.log(expandState);
-    return expandState === 'Expanded';
+    const expandCollapseState = await (await this._primaryComponent).getAttribute('ExpandCollapse.ExpandCollapseState');
+    const menuItemIsDisplayed = await (await this._secondaryComponent).isDisplayed();
+    return expandCollapseState === 'Expanded' && menuItemIsDisplayed;
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
