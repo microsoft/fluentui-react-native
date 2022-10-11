@@ -1,17 +1,5 @@
-import aliasTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-aliases.json';
-import { FontStyleTokens } from '@fluentui-react-native/tokens';
-
-import { FontSize, FontSizes, FontWeightValue, Typography, Variants, VariantValue } from '@fluentui-react-native/theme-types';
-
-export function convertAliasFont(aliasFont: FontStyleTokens): VariantValue {
-  return {
-    face: aliasFont.fontFamily,
-    size: aliasFont.fontSize,
-    weight: aliasFont.fontWeight,
-    lineHeight: aliasFont.fontLineHeight,
-    letterSpacing: aliasFont.fontLetterSpacing,
-  };
-}
+import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import { createFontAliasTokens } from './createFontAliasTokens.ios';
 
 // The sizes are taken for the Dynamic Type Size "Large", which is the system default
 export function appleTypography(): Typography {
@@ -59,18 +47,7 @@ export function appleTypography(): Typography {
       heroLargeStandard: { face: 'primary', size: 'heroLarge', weight: '400' },
       heroLargeSemibold: { face: 'primary', size: 'heroLarge', weight: '600' },
       // iOS styles
-      caption2: convertAliasFont(aliasTokens.caption2 as FontStyleTokens),
-      caption1: convertAliasFont(aliasTokens.caption1 as FontStyleTokens),
-      caption1Strong: convertAliasFont(aliasTokens.caption1Strong as FontStyleTokens),
-      body2: convertAliasFont(aliasTokens.body2 as FontStyleTokens),
-      body2Strong: convertAliasFont(aliasTokens.body2Strong as FontStyleTokens),
-      body1: convertAliasFont(aliasTokens.body1 as FontStyleTokens),
-      body1Strong: convertAliasFont(aliasTokens.body1Strong as FontStyleTokens),
-      title3: convertAliasFont(aliasTokens.title3 as FontStyleTokens),
-      title2: convertAliasFont(aliasTokens.title2 as FontStyleTokens),
-      title1: convertAliasFont(aliasTokens.title1 as FontStyleTokens),
-      largeTitle: convertAliasFont(aliasTokens.largeTitle as FontStyleTokens),
-      display: convertAliasFont(aliasTokens.display as FontStyleTokens),
+      ...createFontAliasTokens(),
     } as Variants,
   };
 
