@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Thu, 06 Oct 2022 17:24:49 GMT and should not be manually modified.
+This log was last generated on Fri, 07 Oct 2022 20:30:16 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.5
+
+Fri, 07 Oct 2022 20:30:16 GMT
+
+### Patches
+
+- Remove hardcoded tokens, use shadow tokens from pipeline (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.15.4
 

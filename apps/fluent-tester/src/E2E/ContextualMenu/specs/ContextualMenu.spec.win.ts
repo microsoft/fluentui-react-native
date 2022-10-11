@@ -30,7 +30,7 @@ describe('ContextualMenu Functional Tests', async () => {
     await ContextualMenuPageObjectObject.scrollToTestElement();
     await ContextualMenuPageObjectObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Escape); // Reset ContextualMenu state for next test
+    await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.ESCAPE); // Reset ContextualMenu state for next test
   });
 
   it('Click on ContextualMenu Button and validate that the list of ContextualMenu Items open', async () => {
@@ -42,9 +42,9 @@ describe('ContextualMenu Functional Tests', async () => {
     await expect(await ContextualMenuPageObjectObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObjectObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
-  it('Type "SpaceBar" to select the ContextualMenu and validate that the list of ContextualMenu Items open', async () => {
+  it('Type "SPACE" to select the ContextualMenu and validate that the list of ContextualMenu Items open', async () => {
     /* Type a space on the ContextualMenu */
-    await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Spacebar);
+    await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.SPACE);
     await ContextualMenuPageObjectObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT);
 
     await expect(await ContextualMenuPageObjectObject.contextualMenuItemDisplayed()).toBeTruthy();
@@ -53,6 +53,6 @@ describe('ContextualMenu Functional Tests', async () => {
 
   /* Runs after all tests. This ensures the ContextualMenu closes. If it stays open, the test driver won't be able to close the test app */
   afterAll(async () => {
-    await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.Escape); // Reset ContextualMenu state for next test
+    await ContextualMenuPageObjectObject.sendKey(ContextualMenuSelector.ContextualMenu, Keys.ESCAPE); // Reset ContextualMenu state for next test
   });
 });

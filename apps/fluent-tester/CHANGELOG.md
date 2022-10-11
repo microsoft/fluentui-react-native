@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 06 Oct 2022 20:27:37 GMT and should not be manually modified.
+This log was last generated on Mon, 10 Oct 2022 23:26:12 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.100.1
+
+Mon, 10 Oct 2022 23:26:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.39
+- Bump @fluentui-react-native/menu to v1.0.45
+- Bump @fluentui/react-native to v0.32.31
+
+## 0.100.0
+
+Mon, 10 Oct 2022 22:38:04 GMT
+
+### Minor changes
+
+- Improving scroll logic and adding more Key constants (safreibe@microsoft.com)
+- Bump @fluentui-react-native/dropdown to v0.4.8
+
+### Patches
+
+- Add Dropdown test case (ruaraki@microsoft.com)
+
+## 0.99.14
+
+Sat, 08 Oct 2022 00:11:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.17.18
+
+## 0.99.13
+
+Fri, 07 Oct 2022 21:15:14 GMT
+
+### Patches
+
+- Align FURN avatar color hash to web (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/avatar to v1.2.18
+- Bump @fluentui-react-native/notification to v0.17.17
+
+## 0.99.12
+
+Fri, 07 Oct 2022 20:30:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.15.5
 
 ## 0.99.11
 

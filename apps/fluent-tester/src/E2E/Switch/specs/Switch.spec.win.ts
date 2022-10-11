@@ -81,7 +81,7 @@ describe('Switch Functional Testing', () => {
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
     /* Presses the "Enter" to select the Switch */
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
+    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.ENTER);
     await SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
 
     await expect(await SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
@@ -90,19 +90,19 @@ describe('Switch Functional Testing', () => {
     await expect(await SwitchPageObject.isSwitchChecked()).toBeTruthy();
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
 
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Enter);
+    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.ENTER);
 
     /* Validate the Switch is toggled OFF */
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Click the 'Spacebar' on a Switch and verify it toggles correctly AND calls the user's onChange", async () => {
+  it("Click the 'SPACE' on a Switch and verify it toggles correctly AND calls the user's onChange", async () => {
     /* Validate the Switch is initially toggled OFF */
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();
 
     /* Presses the "space bar" to select the Switch */
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
+    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.SPACE);
     await SwitchPageObject.waitForSwitchChecked(PAGE_TIMEOUT);
 
     await expect(await SwitchPageObject.didOnChangeCallbackFire()).toBeTruthy();
@@ -111,7 +111,7 @@ describe('Switch Functional Testing', () => {
     await expect(await SwitchPageObject.isSwitchChecked()).toBeTruthy();
     await expect(await SwitchPageObject.didAssertPopup()).toBeFalsy(SwitchPageObject.ERRORMESSAGE_ASSERT);
 
-    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.Spacebar);
+    await SwitchPageObject.sendKey(SwitchComponentSelector.PrimaryComponent, Keys.SPACE);
 
     /* Validate the Switch is toggled OFF */
     await expect(await SwitchPageObject.isSwitchChecked()).toBeFalsy();

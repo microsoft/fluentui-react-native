@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Fri, 07 Oct 2022 21:15:14 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.2.18",
+      "version": "1.2.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "4f099bdfc47a0c8711df2ccd78e0d58eef927058",
+            "comment": "Align FURN avatar color hash to web"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 17:24:49 GMT",
       "tag": "@fluentui-react-native/avatar_v1.2.17",
       "version": "1.2.17",

@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Thu, 06 Oct 2022 17:24:49 GMT and should not be manually modified.
+This log was last generated on Sat, 08 Oct 2022 00:11:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.18
+
+Sat, 08 Oct 2022 00:11:05 GMT
+
+### Patches
+
+- Checked Figma again and updated notification (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.17.17
+
+Fri, 07 Oct 2022 21:15:14 GMT
+
+### Patches
+
+- Update Notification to use shadow16 (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.17.16
 
