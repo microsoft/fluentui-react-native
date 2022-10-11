@@ -25,11 +25,11 @@ exports[`Notification component tests Notification default 1`] = `
       "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
-        "height": 8,
+        "height": 0,
         "width": 0,
       },
-      "shadowOpacity": 0.14,
-      "shadowRadius": 8,
+      "shadowOpacity": 0.12,
+      "shadowRadius": 2,
       "start": undefined,
       "top": undefined,
     }
@@ -75,11 +75,11 @@ exports[`Notification component tests Notification default 1`] = `
         "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
-          "height": 0,
+          "height": 8,
           "width": 0,
         },
-        "shadowOpacity": 0.12,
-        "shadowRadius": 1,
+        "shadowOpacity": 0.14,
+        "shadowRadius": 16,
       }
     }
   >
@@ -168,8 +168,8 @@ exports[`Notification component tests Notification default 1`] = `
             "fontFamily": "Segoe UI",
             "fontSize": 15,
             "fontWeight": "600",
-            "letterSpacing": 20,
-            "lineHeight": -0.24,
+            "letterSpacing": -0.23,
+            "lineHeight": 20,
             "margin": 0,
             "marginBottom": 0,
             "marginEnd": 0,

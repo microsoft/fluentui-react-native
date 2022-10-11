@@ -62,25 +62,25 @@ describe('Tabs Functional Tests', () => {
 
   it('Keyboarding: Arrow Navigation: Right -> Down -> Left -> Up -> Validate the correct TabItem content is shown', async () => {
     /* At First tab element, press Right Arrow to navigate to the Second tab element */
-    await TabsPageObject.sendKey(Keys.Right_Arrow, TabItemSelector.First);
+    await TabsPageObject.sendKey(Keys.ARROW_RIGHT, TabItemSelector.First);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
 
     /* At Second tab element, press Down Arrow to navigate to the Third tab element */
-    await TabsPageObject.sendKey(Keys.Down_Arrow, TabItemSelector.Second);
+    await TabsPageObject.sendKey(Keys.ARROW_DOWN, TabItemSelector.Second);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Third, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Third)).toBeTruthy();
 
     /* At Third tab element, press Left Arrow to navigate to the Second tab element */
-    await TabsPageObject.sendKey(Keys.Left_Arrow, TabItemSelector.Third);
+    await TabsPageObject.sendKey(Keys.ARROW_LEFT, TabItemSelector.Third);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
 
     /* At Second tab element, press Up Arrow to navigate to the First tab element */
-    await TabsPageObject.sendKey(Keys.Up_Arrow, TabItemSelector.Second);
+    await TabsPageObject.sendKey(Keys.ARROW_UP, TabItemSelector.Second);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.First, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.First)).toBeTruthy();
