@@ -1354,10 +1354,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@7.19.0", "@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@7.19.0":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
   integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
+  version "7.19.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.4.tgz#a42f814502ee467d55b38dd1c256f53a7b885c78"
+  integrity sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -12043,9 +12050,9 @@ react-native-gradle-plugin@^0.0.6:
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
 react-native-macos@^0.68.0:
-  version "0.68.51"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.51.tgz#352b916fe37410486ec47425fa7a2ca9c70243cc"
-  integrity sha512-1fHzc2baPdZtrYhuWbQBXL+PJcZQy/Apzet2IogsOGvWdUisH1NfYDnfi09sHy5ru0K57V1WRYbsVRTSe0Er0Q==
+  version "0.68.54"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.54.tgz#220d3f71e119d57e68daeef18967015b7a301493"
+  integrity sha512-gaa7+Y5am0QIu8I6D+zcxdgDnrh3AF1QzmQk0PmMFc42ewmjIaP+5QkhwdDiTenqbONPnTzu+niY47Iv1bN7+g==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"

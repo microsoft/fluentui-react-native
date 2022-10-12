@@ -28,9 +28,9 @@ export interface RadioGroupState extends RadioGroupProps {
   selectedButtonRef?: React.MutableRefObject<any>;
 
   /**
-   * Array of radio button keys in the group
+   * Array of radio keys in the group
    */
-  buttonKeys?: string[];
+  values?: string[];
 }
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {

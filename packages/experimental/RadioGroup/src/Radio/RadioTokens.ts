@@ -16,13 +16,15 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     color: t.colors.neutralForeground3,
     radioSize: 20,
     radioInnerCircleSize: 10,
+    subtextVariant: 'caption1',
+    subtextMarginTop: globalTokens.spacing.xxs,
+    subtextMarginRight: globalTokens.spacing.xxs,
+    subtextMarginBottom: globalTokens.spacing.xxs,
     flexDirection: 'row',
-    marginTop: globalTokens.spacing.xxs,
-
     labelPositionBelow: {
       flexDirection: 'column',
     },
-
+    
     disabled: {
       // Unchecked, Disabled
       radioBorder: t.colors.neutralForegroundDisabled,
