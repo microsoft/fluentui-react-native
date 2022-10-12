@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Wed, 12 Oct 2022 21:54:15 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.22.0",
+      "version": "0.22.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "e2edb2218d4c953ac465dc3460e2923441dfae5b",
+            "comment": "Make `Theme.spacing` read-only"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Oct 2022 22:41:44 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.21.0",
       "version": "0.21.0",
