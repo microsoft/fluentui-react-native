@@ -1,6 +1,6 @@
 import globalTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-global.json';
 
-import { Theme, Spacing } from '@fluentui-react-native/theme-types';
+import { Theme, Spacing, StrokeWidth } from '@fluentui-react-native/theme-types';
 import { paletteFromAppleColors } from './appleColors.ios';
 import { appleTypography } from './appleTypography.ios';
 import { iOSShadows } from './appleShadows.ios';
@@ -13,6 +13,12 @@ function appleSpacing(): Spacing {
     l2: '32px',
     // v2 types
     ...globalTokens.spacing,
+  };
+}
+
+function iOSStrokeWidth(): StrokeWidth {
+  return {
+    ...globalTokens.stroke.width,
   };
 }
 
@@ -137,6 +143,7 @@ export const BaseAppleLightThemeIOS: Theme = {
   shadows: iOSShadows(),
   spacing: appleSpacing(),
   components: appleComponents,
+  stroke: { width: iOSStrokeWidth() },
   host: { appearance: 'light' },
 };
 
@@ -146,5 +153,6 @@ export const BaseAppleDarkThemeIOS: Theme = {
   shadows: iOSShadows(),
   spacing: appleSpacing(),
   components: appleComponents,
+  stroke: { width: iOSStrokeWidth() },
   host: { appearance: 'dark' },
 };
