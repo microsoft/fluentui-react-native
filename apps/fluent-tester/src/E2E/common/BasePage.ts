@@ -10,9 +10,16 @@ let _rootView: WebdriverIO.Element | null = null;
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
   if (_rootView === null) {
+    // Most of the elements we're searching for will be children of this _rootView node.
     _rootView = await $('~' + ROOT_VIEW);
   }
-  return _rootView.$('~' + identifier);
+  const selector = '~' + identifier;
+  let queryResult = await _rootView.$(selector);
+  if (queryResult.error) {
+    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the _rootView node, meaning we need to start our search from the top of the tree.
+    queryResult = await $(selector);
+  }
+  return queryResult;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
