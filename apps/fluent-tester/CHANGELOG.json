@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 12 Oct 2022 16:17:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.101.0",
+      "version": "0.101.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e9adcc0b0b6da103e32ab3dfc3ea9c445277124f",
+            "comment": "Added label subtext radiogroup example to tester"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.6.0",
+            "commit": "e9adcc0b0b6da103e32ab3dfc3ea9c445277124f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 13:07:10 GMT",
       "tag": "@fluentui-react-native/tester_v0.100.3",
       "version": "0.100.3",

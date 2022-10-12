@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 12 Oct 2022 13:07:10 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 16:17:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.101.0
+
+Wed, 12 Oct 2022 16:17:39 GMT
+
+### Minor changes
+
+- Added label subtext radiogroup example to tester (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.6.0
 
 ## 0.100.3
 

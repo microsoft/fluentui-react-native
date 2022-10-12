@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Tue, 11 Oct 2022 22:41:44 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 16:17:39 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.0
+
+Wed, 12 Oct 2022 16:17:39 GMT
+
+### Minor changes
+
+- Added subtext prop to Radio (gulnazsayed@microsoft.com)
 
 ## 0.5.7
 
