@@ -6,9 +6,14 @@ import React from 'react';
 import { View } from 'react-native';
 import { Path, Svg, SvgProps } from 'react-native-svg';
 import { dropdownName, DropdownProps, DropdownTokens } from './Dropdown.types';
+import { Listbox, ListboxProps } from '../Listbox';
 
 const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownProps, _useTokens: UseTokens<DropdownTokens>) => {
-  const onButtonClick = React.useCallback(() => {}, []); //eslint-disable-line
+  const [isOpen, setOpen] = React.useState(false);
+  const onButtonClick = React.useCallback(() => {
+    setOpen(!isOpen);
+  }, [isOpen, setOpen]);
+
   const buttonProps: ButtonProps = React.useMemo(
     () => ({
       onClick: onButtonClick,
@@ -32,14 +37,16 @@ const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownPro
   const RootSlot = useSlot<IViewProps>(View, props);
   const ButtonSlot = useSlot<ButtonProps>(Button, buttonProps);
   const ExpandIconSlot = useSlot<SvgProps>(Svg, expandIconProps);
+  const ListboxSlot = useSlot<ListboxProps>(Listbox, {});
 
-  return (_final: DropdownProps, ..._children: React.ReactNode[]) => {
+  return (_final: DropdownProps, ...children: React.ReactNode[]) => {
     return (
       <RootSlot>
         <ButtonSlot>
           Test
           <ExpandIconSlot>{expandIconPath}</ExpandIconSlot>
         </ButtonSlot>
+        {isOpen && <ListboxSlot>{children}</ListboxSlot>}
       </RootSlot>
     );
   };
