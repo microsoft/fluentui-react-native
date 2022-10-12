@@ -9,6 +9,7 @@ import {
   ExpandCollapseState,
 } from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
+import { Keys } from '../../common/consts';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -41,16 +42,7 @@ class MenuPageObject extends BasePage {
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
-    switch (componentSelector) {
-      case MenuComponentSelector.PrimaryComponent:
-        return await this._primaryComponent.getAttribute('Name');
-
-      case MenuComponentSelector.SecondaryComponent:
-        return await this._secondaryComponent.getAttribute('Name');
-
-      case MenuComponentSelector.TertiaryComponent:
-        return await this._tertiaryComponent.getAttribute('Name');
-    }
+    return await (await this.getMenuComponentSelector(componentSelector)).getAttribute('Name');
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
@@ -68,14 +60,24 @@ class MenuPageObject extends BasePage {
 
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
-    if (menuComponentSelector == MenuComponentSelector.PrimaryComponent) {
-      return await this._primaryComponent;
+    switch (menuComponentSelector) {
+      case MenuComponentSelector.PrimaryComponent:
+        return await this._primaryComponent;
+      case MenuComponentSelector.SecondaryComponent:
+        return await this._secondaryComponent;
+      case MenuComponentSelector.TertiaryComponent:
+        return await this._tertiaryComponent;
+      default:
+        return await this._primaryComponent;
     }
-    return await this._primaryComponent;
   }
 
   async resetTest() {
-    await (await this._defocusButton).click();
+    // Both escape on the menu trigger to hard dismiss menu and click defocus to reset focus
+    if (await this.menuIsExpanded()) {
+      await this.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
+      await (await this._defocusButton).click();
+    }
   }
 
   /*****************************************/
