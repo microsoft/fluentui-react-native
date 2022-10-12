@@ -3,6 +3,7 @@ import { RADIO_GROUP_EXPERIMENTAL_TESTPAGE } from './consts';
 import { DefaultRadioGroup } from './DefaultRadioGroup';
 import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
+import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [
@@ -20,6 +21,11 @@ const radioGroupExperimentalSections: TestSection[] = [
     name: 'Required RadioGroup',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: RequiredRadioGroup,
+  },
+  {
+    name: 'RadioGroup with Label Subtext',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: SubtextRadioGroup,
   },
 ];
 

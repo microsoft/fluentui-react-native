@@ -9,7 +9,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       "required": false,
     }
   }
-  accessible={true}
   style={
     Object {
       "alignItems": "flex-start",
