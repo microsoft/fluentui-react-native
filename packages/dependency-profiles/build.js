@@ -10,9 +10,6 @@ const CAPABILITY_MAP = {
   'react-native-macos': 'core-macos',
   'react-native-windows': 'core-windows',
   'react-native-svg': 'svg',
-  // core-android?
-  // core-ios?
-  // react?
 };
 
 const fs = require('fs');
@@ -31,7 +28,7 @@ function readFile(path) {
 
 const packages = {};
 
-// Look for `react-native` and out-of-tree platforms
+// Look for react-native capabilities
 for (const [name, capability] of Object.entries(CAPABILITY_MAP)) {
   if (name in devDependencies) {
     packages[capability] = { name, version: devDependencies[name] };
