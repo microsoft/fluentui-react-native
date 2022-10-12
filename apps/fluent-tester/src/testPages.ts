@@ -25,6 +25,7 @@ import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './TestComponents/Press
 import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './TestComponents/RadioGroup';
 import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
 import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
+import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
 import { StrokeWidthTokensTest, HOMEPAGE_STROKEWIDTH_TESTPAGE } from './TestComponents/StrokeWidth';
 import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
@@ -194,6 +195,12 @@ export const tests: TestDescription[] = [
     component: RadioGroupExperimentalTest,
     testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
     platforms: ['android', 'ios', 'macos', 'web', 'win32'],
+  },
+  {
+    name: 'Spacing Tokens',
+    component: SpacingTokensTest,
+    testPage: HOMEPAGE_SPACING_BUTTON,
+    platforms: ['ios'],
   },
   {
     name: 'Separator',

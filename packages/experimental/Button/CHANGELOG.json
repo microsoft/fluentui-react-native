@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-button",
   "entries": [
     {
+      "date": "Wed, 12 Oct 2022 21:54:15 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.16.35",
+      "version": "0.16.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.25.8",
+            "commit": "e2edb2218d4c953ac465dc3460e2923441dfae5b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 11 Oct 2022 22:41:44 GMT",
+      "tag": "@fluentui-react-native/experimental-button_v0.16.34",
+      "version": "0.16.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-button",
+            "comment": "Bump @fluentui-react-native/button to v0.25.7",
+            "commit": "3547a335f47efb90f52c10443dc85f755046a324"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 06 Oct 2022 17:24:49 GMT",
       "tag": "@fluentui-react-native/experimental-button_v0.16.33",
       "version": "0.16.33",
