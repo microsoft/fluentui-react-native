@@ -4,6 +4,7 @@ import {
   FOCUSZONE_CIRCLE_NAV_SWITCH,
   FOCUSZONE_DEFAULT_TABBABLE_SWITCH,
   FOCUSZONE_DIRECTION_ID,
+  FOCUSZONE_DIRECTION_PICKER,
   FOCUSZONE_DISABLED_SWITCH,
   FOCUSZONE_GRID_AFTER,
   FOCUSZONE_GRID_BEFORE,
@@ -62,7 +63,9 @@ class FocusZonePageObject extends BasePage {
     let switchElement: WebdriverIO.Element;
     switch (option) {
       case GridFocusZoneOption.SetDirection:
-        await (await this._getGridFocusZoneRadioButton(arg)).click();
+        await (await this._directionPicker).click();
+        await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
+        await (await this._getGridFocusZoneMenuOption(arg)).click();
         return;
       case GridFocusZoneOption.Set2DNavigation:
         switchElement = await this._twoDimSwitch;
@@ -105,7 +108,7 @@ class FocusZonePageObject extends BasePage {
     }
   }
 
-  private async _getGridFocusZoneRadioButton(direction: FocusZoneDirection) {
+  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
     return await By(FOCUSZONE_DIRECTION_ID(direction));
   }
 
@@ -124,10 +127,12 @@ class FocusZonePageObject extends BasePage {
     return By(FOCUSZONE_TEST_COMPONENT);
   }
 
-  // FocusZone grid
-
   get _pageButton() {
     return By(HOMEPAGE_FOCUSZONE_BUTTON);
+  }
+
+  get _directionPicker() {
+    return By(FOCUSZONE_DIRECTION_PICKER);
   }
 
   get _twoDimSwitch() {

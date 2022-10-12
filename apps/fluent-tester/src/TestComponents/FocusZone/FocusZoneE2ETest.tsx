@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Switch } from 'react-native';
-import { FocusZoneDirection, FocusZone, Text } from '@fluentui/react-native';
-import { RadioGroup, Radio } from '@fluentui-react-native/experimental-radio-group';
+import { View } from 'react-native';
+import { FocusZoneDirection, FocusZone, MenuButton, Text } from '@fluentui/react-native';
+import { Switch } from '@fluentui-react-native/switch';
 import { ButtonV1 as Button, ButtonProps } from '@fluentui-react-native/button';
 import { commonTestStyles } from '../Common/styles';
 import {
@@ -14,6 +14,7 @@ import {
   FOCUSZONE_GRID_BEFORE,
   FOCUSZONE_GRID_AFTER,
   FOCUSZONE_GRID_BUTTON,
+  FOCUSZONE_DIRECTION_PICKER,
 } from './consts';
 import { focusZoneTestStyles, GridButton } from './styles';
 
@@ -39,6 +40,7 @@ type GridOfButtonsProps = {
   gridHeight: number;
   tabRef?: React.RefObject<View>;
   tabbableIdx?: number;
+  e2etesting?: boolean;
 };
 
 export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props: GridOfButtonsProps) => {
@@ -51,7 +53,7 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
               const gridIndex = heightIndex * props.gridWidth + widthIndex + 1;
               return (
                 <GridButton
-                  testID={FOCUSZONE_GRID_BUTTON(gridIndex)}
+                  testID={props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex) : undefined}
                   key={widthIndex}
                   style={focusZoneTestStyles.focusZoneButton}
                   componentRef={gridIndex === props.tabbableIdx ? props.tabRef : undefined}
@@ -66,23 +68,6 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
     </View>
   );
 };
-
-interface ISwitchWithLabelProps {
-  label: string;
-  value: boolean;
-  onValueChange: (value: boolean) => void;
-  testID?: string;
-}
-
-function SwitchWithLabel(props: ISwitchWithLabelProps): React.ReactElement {
-  const { label, value, onValueChange, testID } = props;
-  return (
-    <View style={commonTestStyles.switch}>
-      <Text>{label}</Text>
-      <Switch testID={testID} value={value} onValueChange={onValueChange} />
-    </View>
-  );
-}
 
 export const FocusZone2D: React.FunctionComponent = () => {
   const [is2DNav, set2dNav] = React.useState(false);
@@ -99,25 +84,29 @@ export const FocusZone2D: React.FunctionComponent = () => {
         <Text variant="subheaderSemibold" testID={FOCUSZONE_TEST_COMPONENT}>
           FocusZone Direction
         </Text>
-        {/* Usage of RadioGroup over MenuPicker is because MenuPicker, from my experimentation, doesn't support automation. */}
-        <RadioGroup style={focusZoneTestStyles.radioGroup} onChange={(dir) => setDirection(dir as FocusZoneDirection)} value={direction}>
-          {FocusZoneDirections.map((direction, i) => (
-            <Radio label={direction} value={direction} testID={FOCUSZONE_DIRECTION_ID(direction)} key={i} />
-          ))}
-        </RadioGroup>
-        <SwitchWithLabel testID={FOCUSZONE_TWO_DIM_SWITCH} label="2D Navigation" value={is2DNav} onValueChange={set2dNav} />
-        <SwitchWithLabel testID={FOCUSZONE_DISABLED_SWITCH} label="Disabled" value={isDisabled} onValueChange={setDisabled} />
-        <SwitchWithLabel
+        <MenuButton
+          testID={FOCUSZONE_DIRECTION_PICKER}
+          content={`Current direction: ${direction}`}
+          menuItems={FocusZoneDirections.map((dir) => ({
+            itemKey: dir,
+            text: dir,
+            testID: FOCUSZONE_DIRECTION_ID(dir),
+          }))}
+          onItemClick={(dir) => setDirection(dir as FocusZoneDirection)}
+        />
+        <Switch testID={FOCUSZONE_TWO_DIM_SWITCH} label="2D Navigation" checked={is2DNav} onChange={(_, checked) => set2dNav(checked)} />
+        <Switch testID={FOCUSZONE_DISABLED_SWITCH} label="Disabled" checked={isDisabled} onChange={(_, checked) => setDisabled(checked)} />
+        <Switch
           testID={FOCUSZONE_CIRCLE_NAV_SWITCH}
           label="Circular Navigation"
-          value={isCircularNav}
-          onValueChange={setIsCircularNav}
+          checked={isCircularNav}
+          onChange={(_, checked) => setIsCircularNav(checked)}
         />
-        <SwitchWithLabel
+        <Switch
           testID={FOCUSZONE_DEFAULT_TABBABLE_SWITCH}
           label="Use Default Tabbable Element"
-          value={useDeffaultTabbableElement}
-          onValueChange={setUseDeffaultTabbableElement}
+          checked={useDeffaultTabbableElement}
+          onChange={(_, checked) => setUseDeffaultTabbableElement(checked)}
         />
       </View>
 
@@ -129,7 +118,7 @@ export const FocusZone2D: React.FunctionComponent = () => {
           isCircularNavigation={isCircularNav}
           defaultTabbableElement={useDeffaultTabbableElement ? tabbableRef : undefined}
         >
-          <GridOfButtons gridWidth={3} gridHeight={3} tabRef={tabbableRef} tabbableIdx={4} />
+          <GridOfButtons gridWidth={3} gridHeight={3} tabRef={tabbableRef} tabbableIdx={4} e2etesting />
         </FocusZone>
       </FocusZoneListWrapper>
     </View>

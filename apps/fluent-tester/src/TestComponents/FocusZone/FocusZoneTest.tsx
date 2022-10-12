@@ -114,15 +114,11 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'Common FocusZone Usage',
     component: CommonUsageFocusZone,
+    testID: FOCUSZONE_TESTPAGE,
   },
   {
     name: 'Directional FocusZone Usage',
     component: DirectionalFocusZone,
-  },
-  {
-    name: '2D Navigation',
-    component: FocusZone2D,
-    testID: FOCUSZONE_TESTPAGE,
   },
   {
     name: 'ScrollView inside FocusZone',
@@ -139,6 +135,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'Nested FocusZone',
     component: NestedFocusZone,
+  },
+  {
+    name: '2D Navigation + E2E Testing',
+    component: FocusZone2D,
   },
 ];
 

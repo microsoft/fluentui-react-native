@@ -39,11 +39,11 @@ describe('FocusZone Functional Testing', () => {
 
   it('Navigate bidirectional focuszone by arrow keys - switches focus correctly', async () => {
     // move to 2 with right arrow
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     // move to 3 with down arrow
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Down_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_DOWN]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Three)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
@@ -52,15 +52,15 @@ describe('FocusZone Functional Testing', () => {
   it('Navigate horizontal focuszone by arrow keys - switches focus correctly', async () => {
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.SetDirection, 'horizontal');
     // move to 2 with right arrow
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     // down arrow shouldn't move focus
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Down_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_DOWN]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     // left arrow goes back
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.Left_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.ARROW_LEFT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Three)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
@@ -70,15 +70,15 @@ describe('FocusZone Functional Testing', () => {
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.SetDirection, 'vertical');
 
     // move to 2 with down arrow
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Down_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_DOWN]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     // right arrow shouldn't move focus
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     // up arrow goes back
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.Up_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.ARROW_UP]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Three)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
@@ -88,16 +88,16 @@ describe('FocusZone Functional Testing', () => {
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.SetDirection, 'none');
 
     // none of these key commands should move
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Down_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_DOWN]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Up_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_UP]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Left_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_LEFT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
@@ -106,28 +106,28 @@ describe('FocusZone Functional Testing', () => {
   it('Navigates bi-directional focuszone with 2d navigation - switches focus correctly', async () => {
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.Set2DNavigation, true);
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Down_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_DOWN]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Four)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Five)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Navigates focuszone with circular navigation on - switches focus correctly', async () => {
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Left_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_LEFT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.One)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Nine, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Nine, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Nine)).toBeTruthy();
 
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.SetCircularNavigation, true);
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Left_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_LEFT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Nine)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Nine, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Nine, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.One)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
@@ -137,29 +137,29 @@ describe('FocusZone Functional Testing', () => {
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.Disable, true);
 
     // none of these key commands should move
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Down_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_DOWN]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Up_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_UP]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Left_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_LEFT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.Right_Arrow]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Two, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Two)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Tabs in and out of the FocusZone - switches focus correctly', async () => {
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Before, [Keys.Tab]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Before, [Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.One)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.Tab]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.After)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.After, [Keys.Shift, Keys.Tab]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.After, [Keys.SHIFT, Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Nine)).toBeTruthy();
   });
 
@@ -167,13 +167,13 @@ describe('FocusZone Functional Testing', () => {
     // This sets the defaultTabbableElement prop of the FocusZone to be grid button #4. Whenever a user tabs into the zone, button 4 should always be the first to be selected.
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.UseDefaultTabbableElement, true);
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Before, [Keys.Tab]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Before, [Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Four)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.Tab]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.After)).toBeTruthy();
 
-    await FocusZonePageObject.sendKeys(GridButtonSelector.After, [Keys.Shift, Keys.Tab]);
+    await FocusZonePageObject.sendKeys(GridButtonSelector.After, [Keys.SHIFT, Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Four)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
