@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/dependency-profiles",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "@rnx-kit/dep-check profiles covering packages published from FluentUI-React-Native",
   "license": "UNLICENSED",
   "files": [
