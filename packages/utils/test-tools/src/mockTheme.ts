@@ -190,6 +190,7 @@ export const mockTheme: Theme = {
     shadow64brand: { ambient: { x: 0, y: 0, blur: 64, color: 'black' }, key: { x: 64, y: 64, blur: 64, color: 'blue' } },
   },
   spacing: { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' },
+  stroke: { width: {} },
   host: { appearance: 'light' },
   components: {},
 };

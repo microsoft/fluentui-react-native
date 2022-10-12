@@ -83,6 +83,7 @@ export const defaultFluentTheme: Theme = {
   spacing: defaultSpacing(),
   shadows: createShadowAliasTokens('light'),
   components: {},
+  stroke: { width: {} },
   host: { appearance: 'light' },
 };
 
@@ -92,6 +93,7 @@ export const defaultFluentDarkTheme: Theme = {
   shadows: createShadowAliasTokens('dark'),
   spacing: defaultFluentTheme.spacing,
   components: {},
+  stroke: { width: {} },
   host: { appearance: 'dark' },
 };
 
@@ -101,5 +103,6 @@ export const defaultFluentHighConstrastTheme: Theme = {
   shadows: createShadowAliasTokens('highContrast'),
   spacing: defaultFluentTheme.spacing,
   components: {},
+  stroke: { width: {} },
   host: { appearance: 'highContrast' },
 };

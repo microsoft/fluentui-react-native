@@ -92,6 +92,7 @@ export function getAndroidTheme(appearance: 'light' | 'dark'): Theme {
     shadows: androidShadows,
     spacing: androidSpacing(),
     components: androidComponents,
+    stroke: { width: {} },
     host: { appearance },
   };
 }
