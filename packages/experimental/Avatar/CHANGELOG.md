@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Tue, 11 Oct 2022 22:41:44 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 13:07:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.13
+
+Wed, 12 Oct 2022 13:07:10 GMT
+
+### Patches
+
+- Fix autolinking for iOS (4123478+tido64@users.noreply.github.com)
 
 ## 0.16.12
 

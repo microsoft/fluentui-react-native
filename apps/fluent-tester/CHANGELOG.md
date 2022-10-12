@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 11 Oct 2022 22:41:44 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 13:07:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.100.3
+
+Wed, 12 Oct 2022 13:07:10 GMT
+
+### Patches
+
+- Fix autolinking of FRNAvatar and FRNDatePicker (4123478+tido64@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-avatar to v0.16.13
+- Bump @fluentui-react-native/experimental-native-date-picker to v0.7.3
 
 ## 0.100.2
 

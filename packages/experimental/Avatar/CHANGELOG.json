@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-avatar",
   "entries": [
     {
+      "date": "Wed, 12 Oct 2022 13:07:10 GMT",
+      "tag": "@fluentui-react-native/experimental-avatar_v0.16.13",
+      "version": "0.16.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-avatar",
+            "commit": "31bcec5128204c8b3832dbe6de9548d88671f41c",
+            "comment": "Fix autolinking for iOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Oct 2022 22:41:44 GMT",
       "tag": "@fluentui-react-native/experimental-avatar_v0.16.12",
       "version": "0.16.12",
