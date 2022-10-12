@@ -7,8 +7,10 @@ import { View } from 'react-native';
 import { listboxName, ListboxProps, ListboxTokens } from './Listbox.types';
 
 const Listbox = compressible<ListboxProps, ListboxTokens>((props: ListboxProps, _useTokens: UseTokens<ListboxTokens>) => {
-  const RootSlot = useSlot<ICalloutProps>(Callout, {});
-  const ContainerSlot = useSlot<IViewProps>(View, props);
+  const innerViewProps = React.useMemo(() => ({}), []);
+
+  const RootSlot = useSlot<ICalloutProps>(Callout, props);
+  const ContainerSlot = useSlot<IViewProps>(View, innerViewProps);
 
   return (_final: ListboxProps, ...children: React.ReactNode[]) => {
     return (
