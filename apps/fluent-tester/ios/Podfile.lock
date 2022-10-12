@@ -10,7 +10,7 @@ PODS:
     - React-jsi (= 0.68.3)
     - ReactCommon/turbomodule/core (= 0.68.3)
   - fmt (6.2.1)
-  - FRNAvatar (0.16.9):
+  - FRNAvatar (0.16.12):
     - MicrosoftFluentUI (= 0.8.3)
     - React
   - FRNDatePicker (0.7.2):
@@ -384,7 +384,7 @@ PODS:
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.3.1):
+  - react-native-slider (4.3.2):
     - React-Core
   - React-perflogger (0.68.3)
   - React-RCTActionSheet (0.68.3):
@@ -451,11 +451,11 @@ PODS:
     - React-jsi (= 0.68.3)
     - React-logger (= 0.68.3)
     - React-perflogger (= 0.68.3)
-  - ReactTestApp-DevSupport (1.6.19):
+  - ReactTestApp-DevSupport (1.6.20):
     - React-Core
     - React-jsi
   - ReactTestApp-Resources (1.0.0-dev)
-  - RNCPicker (2.4.6):
+  - RNCPicker (2.4.7):
     - React-Core
   - RNSVG (12.3.0):
     - React-Core
@@ -466,8 +466,8 @@ DEPENDENCIES:
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../../../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../../../node_modules/react-native/React/FBReactNativeSpec`)
-  - FRNAvatar (from `../../../packages/experimental/Avatar/FRNAvatar.podspec`)
-  - FRNDatePicker (from `../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec`)
+  - FRNAvatar (from `../../../packages/experimental/Avatar`)
+  - FRNDatePicker (from `../../../packages/experimental/NativeDatePicker`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
@@ -519,9 +519,9 @@ EXTERNAL SOURCES:
   FBReactNativeSpec:
     :path: "../../../node_modules/react-native/React/FBReactNativeSpec"
   FRNAvatar:
-    :path: "../../../packages/experimental/Avatar/FRNAvatar.podspec"
+    :path: "../../../packages/experimental/Avatar"
   FRNDatePicker:
-    :path: "../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec"
+    :path: "../../../packages/experimental/NativeDatePicker"
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -595,11 +595,11 @@ SPEC CHECKSUMS:
   FBLazyVector: 34f7420274737b6fcf2e2d9fd42641e66b4436a3
   FBReactNativeSpec: 46f650441373ea75c83aec30f23378f6523245f2
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: f018912184f0203208c497e001e7ba26b2521ea5
+  FRNAvatar: 0086d80917e8530e8f35147e8a9d06016a95ce30
   FRNDatePicker: 3681a15ca6fcdc66e6e184fafe963ba48b02a04b
-  glog: 5337263514dd6f09803962437687240c5dc39aa4
+  glog: 476ee3e89abb49e07f822b48323c51c57124b572
   MicrosoftFluentUI: e30487dd18aba04beeed4caf1ce1988073f8b03a
-  RCT-Folly: a21c126816d8025b547704b777a2ba552f3d9fa9
+  RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
   RCTRequired: b8caca023d386d43740dfb94c2cf68f695fa5e77
   RCTTypeSafety: ec44ea1d6ad1e5cd6447b22159ff40c2ebbd23b1
   React: 9f8c8afb9a9d61b7a1b01a1c6fb7f0d4f902988f
@@ -613,7 +613,7 @@ SPEC CHECKSUMS:
   React-jsinspector: 86e89b9f135787a2e8eb74b3fc00ec61e9a80ae1
   React-logger: f790bd10f86b38012e108fb4b564023602702270
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: d3ae4270cf8a8cc45a69912db0cc42b151560d5a
+  react-native-slider: e540525ea731783850802b7af457d8551edb0711
   React-perflogger: fa15d1d29ff7557ee25ea48f7f59e65896fb3215
   React-RCTActionSheet: e83515333352a3cc19c146e3c7a63a8a9269da8f
   React-RCTAnimation: 8032daa2846e3db7ac28c4c5a207d0bfb5e1e3ad
@@ -626,12 +626,12 @@ SPEC CHECKSUMS:
   React-RCTVibration: f41f116aad644973f24653effb3db3de64fa0314
   React-runtimeexecutor: 8cdd80915ed6dabf2221a689f1f7ddb50ea5e9f3
   ReactCommon: 5b1b43a7d81a1ac4eec85f7c4db3283a14a3b13d
-  ReactTestApp-DevSupport: dcff56cd656b2b47ac14e5908c03ce5d00a70004
-  ReactTestApp-Resources: ecba662266ac5af3e30e1e3004c0fa8c0298b61a
-  RNCPicker: 2f71e09c52ab6327e2c393213368ea0e5bfbcb65
+  ReactTestApp-DevSupport: f65d9f20da50012c9fa224c9e0431e48f70a32e8
+  ReactTestApp-Resources: 8c0164a3cc5052418c92018e2af0e05d564aa307
+  RNCPicker: 35b5d45693bb46c0e5514116081509e15a64a145
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   Yoga: 2f6a78c58dcc2963bd8e34d96a4246d9dff2e3a7
 
-PODFILE CHECKSUM: 471bcded6dd3e64a1865525c60e6a27d0b4961a9
+PODFILE CHECKSUM: dfe15f1d6484c77bac1ab1b46c2e44215ca8558b
 
 COCOAPODS: 1.11.3

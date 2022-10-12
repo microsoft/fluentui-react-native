@@ -1,0 +1,1 @@
+// This dummy project file is required for @react-native-community/cli <8.0 to recognize this package as a native module
