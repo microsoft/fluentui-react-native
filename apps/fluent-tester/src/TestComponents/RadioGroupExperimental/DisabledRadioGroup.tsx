@@ -5,9 +5,9 @@ import { View } from 'react-native';
 
 export const DisabledRadioGroup: React.FunctionComponent = () => {
   // Client's example onChange function
-  const onChange = (key: string) => {
+  const onChange = React.useCallback((key: string) => {
     console.log(key);
-  };
+  }, []);
 
   return (
     <View>

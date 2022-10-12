@@ -1354,10 +1354,17 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/runtime@7.19.0", "@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
+"@babel/runtime@7.19.0":
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.0.tgz#22b11c037b094d27a8a2504ea4dcff00f50e2259"
   integrity sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.0", "@babel/runtime@^7.8.4":
+  version "7.19.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.19.4.tgz#a42f814502ee467d55b38dd1c256f53a7b885c78"
+  integrity sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==
   dependencies:
     regenerator-runtime "^0.13.4"
 
@@ -12112,9 +12119,9 @@ react-native-test-app@^1.6.2:
     yargs "^16.0.0"
 
 react-native-windows@^0.68.0:
-  version "0.68.18"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.18.tgz#c850bff9a3cce1e1a6c7b05a06785ea69ff6b37a"
-  integrity sha512-Hu1Sop5gnt7vONa65ZjUuJvdEXbxgdxL0kdSD4OpO2zq5KogjlvY9v4ZYl81hlR2Cs+uC1QLLi8W2CG/KAjxjQ==
+  version "0.68.19"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.19.tgz#64be41cb34a10dfabbea9185522424bb9094d0c4"
+  integrity sha512-X6UZztKoKwsW1CkV7+WjBkVBK4+Y7fVnsoU9pkTKnnoDGmEdsjjhQhx3weSbXmoSu+mVEdGHel/QO+2EIf7oNw==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"

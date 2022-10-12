@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Wed, 12 Oct 2022 16:17:39 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.6.0",
+      "version": "0.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "e9adcc0b0b6da103e32ab3dfc3ea9c445277124f",
+            "comment": "Added subtext prop to Radio"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 11 Oct 2022 22:41:44 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.5.7",
       "version": "0.5.7",
