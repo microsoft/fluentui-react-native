@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Tue, 11 Oct 2022 22:41:44 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.22.0
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Minor changes
+
+- Make `Theme.spacing` read-only (adgleitm@microsoft.com)
 
 ## 0.21.0
 

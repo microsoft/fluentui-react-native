@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Make `Theme.spacing` read-only",
-  "packageName": "@fluentui-react-native/theme-types",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
