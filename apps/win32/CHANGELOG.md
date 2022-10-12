@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Sat, 08 Oct 2022 00:11:05 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 13:07:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.3
+
+Wed, 12 Oct 2022 13:07:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.100.3
+
+## 0.27.2
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.100.2
+
+## 0.27.1
+
+Mon, 10 Oct 2022 23:26:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.100.1
+
+## 0.27.0
+
+Mon, 10 Oct 2022 22:38:04 GMT
+
+### Minor changes
+
+- Improving scroll logic and adding more Key constants (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.100.0
 
 ## 0.26.35
 
