@@ -25,7 +25,7 @@ export interface Theme {
     [key: string]: object; // eslint-disable-line @typescript-eslint/ban-types
   };
   shadows: ThemeShadowDefinition;
-  spacing: Spacing;
+  readonly spacing: Spacing;
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten
     // dynamic refers to a theme that handles it's own appearance switching, such as one that uses the PlatformColor API
