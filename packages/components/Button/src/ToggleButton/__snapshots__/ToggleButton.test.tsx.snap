@@ -56,7 +56,7 @@ exports[`ToggleButton default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,

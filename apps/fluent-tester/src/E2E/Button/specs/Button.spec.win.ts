@@ -64,15 +64,15 @@ describe('Button Functional Testing', () => {
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
-    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
+    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.ENTER);
     await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
     await ButtonPageObject.clickComponent(); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "Spacebar"', async () => {
-    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
+  it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
+    await ButtonPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.SPACE);
     await expect(await ButtonPageObject.didOnClickCallbackFire()).toBeTruthy();
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });

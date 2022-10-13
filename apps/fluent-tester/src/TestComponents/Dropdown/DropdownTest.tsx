@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Option } from '@fluentui-react-native/dropdown';
+import { Option, Dropdown } from '@fluentui-react-native/dropdown';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { DROPDOWN_TESTPAGE } from './consts';
@@ -8,6 +8,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const DropdownDefault: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
+      <Dropdown />
       <Option>Test</Option>
       <Option disabled>Disabled Test</Option>
     </Stack>

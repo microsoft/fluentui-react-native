@@ -8,11 +8,3 @@ export interface DropdownTokens {}
 export interface DropdownProps extends IWithPressableOptions<IViewProps> {}
 
 export interface DropdownState extends IPressableHooks<DropdownProps & React.ComponentPropsWithRef<any>> {}
-
-export interface DropdownSlotProps {}
-
-export interface DropdownType {
-  props: DropdownProps;
-  tokens: DropdownTokens;
-  slotProps: DropdownSlotProps;
-}

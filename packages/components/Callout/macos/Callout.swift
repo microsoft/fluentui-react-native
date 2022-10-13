@@ -43,6 +43,13 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 	convenience init(bridge: RCTBridge) {
 		self.init()
 		self.bridge = bridge
+
+		// Listens for mouse clicks in the main menu bar while callout is shown
+		NotificationCenter.default.addObserver(
+			self,
+			selector: #selector(menuDidBeginTracking),
+			name: NSMenu.didBeginTrackingNotification,
+			object: nil)
 	}
 
 	override func viewDidMoveToWindow() {
@@ -328,6 +335,11 @@ class CalloutView: RCTView, CalloutWindowLifeCycleDelegate {
 			let event: [AnyHashable: Any] = ["target": reactTag]
 			onDismiss(event)
 		}
+	}
+
+	// The app's main menu bar is active while callout is shown, dismiss.
+	@objc private func menuDidBeginTracking() {
+		self.dismissCallout()
 	}
 
 	// MARK: Private variables
