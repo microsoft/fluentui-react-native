@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Button } from './Button';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
-import { Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 
 describe('Button component tests', () => {
@@ -50,7 +50,7 @@ describe('Button component tests', () => {
   it('Button composed', () => {
     const ComposedButton = Button.compose({
       slots: {
-        root: View,
+        root: Pressable,
         icon: Icon,
         content: Text,
       },
