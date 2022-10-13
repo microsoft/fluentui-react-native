@@ -5,6 +5,7 @@ import { BadgeTest, HOMEPAGE_BADGE_BUTTON } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
+import { CornerRadiusTokensTest, HOMEPAGE_CORNERRADIUS_BUTTON } from './TestComponents/CornerRadius';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
@@ -91,6 +92,12 @@ export const tests: TestDescription[] = [
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
     platforms: ['android', 'macos', 'win32'],
+  },
+  {
+    name: 'Corner Radius Tokens',
+    component: CornerRadiusTokensTest,
+    testPage: HOMEPAGE_CORNERRADIUS_BUTTON,
+    platforms: ['ios'],
   },
   {
     name: 'Date Picker (Native)',
