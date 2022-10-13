@@ -2,6 +2,8 @@ import { RadioProps, RadioState } from './Radio.types';
 import * as React from 'react';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { memoize } from '@fluentui-react-native/framework';
+import { AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
@@ -9,10 +11,13 @@ export const useRadio = (props: RadioProps): RadioState => {
   const defaultComponentRef = React.useRef(null);
   const {
     label,
+    subtext,
     value,
     disabled,
     accessibilityActions,
     accessibilityLabel,
+    accessibilityHint,
+    accessibilityState,
     componentRef = defaultComponentRef,
     accessibilityPositionInSet,
     accessibilitySetSize,
@@ -52,9 +57,10 @@ export const useRadio = (props: RadioProps): RadioState => {
     onFocus: changeSelection,
   });
 
-  const accessibilityActionsProp = React.useCallback(() => {
-    accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions;
-  }, []);
+  const accessibilityActionsProp = React.useMemo(
+    () => (accessibilityActions ? [...defaultAccessibilityActions, ...accessibilityActions] : defaultAccessibilityActions),
+    [accessibilityActions],
+  );
 
   // Used when creating accessibility properties in mergeSettings below
   const onAccessibilityAction = React.useCallback(
@@ -71,23 +77,24 @@ export const useRadio = (props: RadioProps): RadioState => {
   const state = {
     ...pressable.state,
     selected: selectedInfo.value === props.value,
-    disabled: disabled || false,
+    disabled: selectedInfo.disabled || disabled || false,
   };
 
   return {
     props: {
       value,
       label,
+      subtext,
       ...rest,
       ref: buttonRef,
       ...pressable.props,
-      accessible: true,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
-      accessibilityState: { disabled: state.disabled, selected: state.selected },
+      accessibilityHint: accessibilityHint ?? subtext,
+      accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.buttonKeys.findIndex((x) => x == value) + 1,
-      accessibilitySetSize: accessibilitySetSize ?? selectedInfo.buttonKeys.length,
+      accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.values.findIndex((x) => x == value) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? selectedInfo.values.length,
       focusable: !state.disabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,
@@ -95,3 +102,11 @@ export const useRadio = (props: RadioProps): RadioState => {
     state: state,
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean, selected: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { disabled, selected, ...accessibilityState };
+  }
+  return { disabled, selected };
+}

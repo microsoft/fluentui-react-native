@@ -1,8 +1,78 @@
 # Change Log - @fluentui-react-native/apple-theme
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.1
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.4
+- Bump @fluentui-react-native/theme to v0.7.6
+- Bump @fluentui-react-native/theme-types to v0.22.0
+- Bump @fluentui-react-native/theming-utils to v0.16.2
+
+## 0.16.0
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Minor changes
+
+- Add new spacing tokens (adam.gleitman@gmail.com)
+- Bump @fluentui-react-native/default-theme to v0.16.3
+- Bump @fluentui-react-native/theme to v0.7.5
+- Bump @fluentui-react-native/theme-types to v0.21.0
+- Bump @fluentui-react-native/theming-utils to v0.16.1
+
+## 0.15.5
+
+Fri, 07 Oct 2022 20:30:16 GMT
+
+### Patches
+
+- Remove hardcoded tokens, use shadow tokens from pipeline (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.15.4
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.2
+
+## 0.15.3
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.1
+
+## 0.15.2
+
+Fri, 30 Sep 2022 08:04:43 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.0
+- Bump @fluentui-react-native/theme to v0.7.4
+- Bump @fluentui-react-native/theme-types to v0.20.0
+- Bump @fluentui-react-native/theming-utils to v0.16.0
+
+## 0.15.1
+
+Fri, 30 Sep 2022 00:54:34 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/default-theme to v0.15.3
+- Bump @fluentui-react-native/theme to v0.7.3
+- Bump @fluentui-react-native/theme-types to v0.19.2
+- Bump @fluentui-react-native/theming-utils to v0.15.3
 
 ## 0.15.0
 

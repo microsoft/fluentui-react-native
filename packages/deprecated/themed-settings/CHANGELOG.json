@@ -2,6 +2,27 @@
   "name": "@uifabricshared/themed-settings",
   "entries": [
     {
+      "date": "Fri, 30 Sep 2022 00:54:37 GMT",
+      "tag": "@uifabricshared/themed-settings_v0.9.1",
+      "version": "0.9.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@uifabricshared/themed-settings",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b",
+            "comment": "Update react-native to 0.68"
+          },
+          {
+            "author": "beachball",
+            "package": "@uifabricshared/themed-settings",
+            "comment": "Bump @uifabricshared/foundation-settings to v0.12.1",
+            "commit": "de9ddf75304295843613e144473e4fef3190f14b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 14 Jul 2022 18:09:50 GMT",
       "tag": "@uifabricshared/themed-settings_v0.9.0",
       "version": "0.9.0",

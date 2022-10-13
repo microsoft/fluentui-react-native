@@ -25,8 +25,7 @@ export const CounterBadgeTest: React.FunctionComponent = () => {
       <CounterBadge badgeColor="informative" count={777}></CounterBadge>
       <CounterBadge badgeColor="important" overflowCount={1000} count={777}></CounterBadge>
       <CounterBadge badgeColor="danger" overflowCount={1000} count={1500}></CounterBadge>
-      <CounterBadge count={13}></CounterBadge>
-      <CounterBadge count={13}>CounterBadge</CounterBadge>
+      <CounterBadge count={13} />
       {svgIconsEnabled && <CounterBadge count={17} icon={{ svgSource: svgProps }} iconPosition="after" />}
     </View>
   );

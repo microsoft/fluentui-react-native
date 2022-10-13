@@ -19,7 +19,7 @@ class ButtonExperimentalPageObject extends BasePage {
   async didOnClickCallbackFire(): Promise<boolean> {
     const callbackText = await By(BUTTON_ON_PRESS);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForPageTimeout,
+      timeout: this.waitForUiEvent,
       timeoutMsg: 'The OnClick callback did not fire.',
       interval: 1000,
     });

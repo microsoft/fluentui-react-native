@@ -18,7 +18,7 @@ class MenuButtonPageObject extends BasePage {
   /******************************************************************/
   async waitForMenuItemsToOpen(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.menuItemDisplayed(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'The Menu Items did not open.',
       interval: 1000,
     });

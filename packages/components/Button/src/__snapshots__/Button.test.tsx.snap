@@ -49,7 +49,7 @@ exports[`Button component tests Button circular 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,
@@ -107,7 +107,7 @@ exports[`Button component tests Button composed 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "letterSpacing": undefined,
@@ -172,7 +172,7 @@ exports[`Button component tests Button customized 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,
@@ -236,7 +236,7 @@ exports[`Button component tests Button default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,
@@ -301,7 +301,7 @@ exports[`Button component tests Button large 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 16,
         "fontWeight": "600",
         "margin": 0,
@@ -366,7 +366,7 @@ exports[`Button component tests Button primary 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,
@@ -431,7 +431,7 @@ exports[`Button component tests Button small 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
@@ -496,7 +496,7 @@ exports[`Button component tests Button square 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,
@@ -561,7 +561,7 @@ exports[`Button component tests Button subtle 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,

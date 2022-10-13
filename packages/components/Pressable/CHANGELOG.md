@@ -1,8 +1,60 @@
 # Change Log - @fluentui-react-native/pressable
 
-This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.9.19
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.13
+
+## 0.9.18
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.12
+
+## 0.9.17
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.11
+
+## 0.9.16
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.10
+
+## 0.9.15
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.9
+
+## 0.9.14
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/interactive-hooks to v0.18.8
+- Bump @uifabricshared/foundation-composable to v0.11.1
+- Bump @uifabricshared/foundation-settings to v0.12.1
 
 ## 0.9.13
 

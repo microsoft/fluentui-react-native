@@ -1,8 +1,74 @@
 # Change Log - @fluentui-react-native/experimental-avatar
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.14
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.10
+
+## 0.16.13
+
+Wed, 12 Oct 2022 13:07:10 GMT
+
+### Patches
+
+- Fix autolinking for iOS (4123478+tido64@users.noreply.github.com)
+
+## 0.16.12
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.9
+
+## 0.16.11
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.8
+
+## 0.16.10
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.7
+
+## 0.16.9
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/component-cache to v1.4.2
+
+## 0.16.8
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.6
+
+## 0.16.7
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/component-cache to v1.4.1
+- Bump @fluentui-react-native/framework to v0.8.5
 
 ## 0.16.6
 

@@ -62,8 +62,8 @@ export const NotificationButton = stagedComponent((props: NotificationButtonProp
       iconColor: props.color,
       fontSize: 15,
       fontWeight: '600',
-      fontLineHeight: -0.24, // iOS only prop
-      fontLetterSpacing: 20,
+      fontLineHeight: 20,
+      fontLetterSpacing: -0.23, // iOS only prop
       disabled: {
         color: props.disabledColor,
       },

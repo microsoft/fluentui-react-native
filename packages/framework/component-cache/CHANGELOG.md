@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/component-cache
 
-This log was last generated on Thu, 14 Jul 2022 18:09:51 GMT and should not be manually modified.
+This log was last generated on Mon, 03 Oct 2022 16:40:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.4.2
+
+Mon, 03 Oct 2022 16:40:48 GMT
+
+### Patches
+
+- Get the component cache to actually... cache... (ruaraki@microsoft.com)
+
+## 1.4.1
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
 
 ## 1.4.0
 

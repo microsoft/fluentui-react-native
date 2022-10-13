@@ -1,8 +1,71 @@
 # Change Log - @fluentui-react-native/framework
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.10
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.4
+- Bump @fluentui-react-native/theme-types to v0.22.0
+- Bump @fluentui-react-native/tokens to v0.17.4
+
+## 0.8.9
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.3
+- Bump @fluentui-react-native/theme-types to v0.21.0
+- Bump @fluentui-react-native/tokens to v0.17.3
+
+## 0.8.8
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.2
+
+## 0.8.7
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.1
+
+## 0.8.6
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/default-theme to v0.16.0
+- Bump @fluentui-react-native/theme-types to v0.20.0
+- Bump @fluentui-react-native/tokens to v0.17.2
+
+## 0.8.5
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/composition to v0.8.1
+- Bump @fluentui-react-native/default-theme to v0.15.3
+- Bump @fluentui-react-native/merge-props to v0.5.1
+- Bump @fluentui-react-native/theme-types to v0.19.2
+- Bump @fluentui-react-native/use-styling to v0.9.1
+- Bump @fluentui-react-native/use-slot to v0.3.1
+- Bump @fluentui-react-native/use-slots to v0.7.1
+- Bump @fluentui-react-native/use-tokens to v0.3.1
+- Bump @fluentui-react-native/tokens to v0.17.1
 
 ## 0.8.4
 

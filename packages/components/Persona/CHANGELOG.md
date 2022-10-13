@@ -1,8 +1,80 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.11
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.11
+- Bump @fluentui-react-native/framework to v0.8.10
+- Bump @fluentui-react-native/persona-coin to v0.11.11
+- Bump @fluentui-react-native/tokens to v0.17.4
+- Bump @uifabricshared/foundation-tokens to v0.12.7
+
+## 0.13.10
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.10
+- Bump @fluentui-react-native/framework to v0.8.9
+- Bump @fluentui-react-native/persona-coin to v0.11.10
+- Bump @fluentui-react-native/tokens to v0.17.3
+- Bump @uifabricshared/foundation-tokens to v0.12.6
+
+## 0.13.9
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.9
+- Bump @fluentui-react-native/framework to v0.8.8
+- Bump @fluentui-react-native/persona-coin to v0.11.9
+
+## 0.13.8
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.8
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/persona-coin to v0.11.8
+
+## 0.13.7
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.7
+- Bump @fluentui-react-native/framework to v0.8.6
+- Bump @fluentui-react-native/persona-coin to v0.11.7
+- Bump @fluentui-react-native/tokens to v0.17.2
+- Bump @uifabricshared/foundation-tokens to v0.12.5
+
+## 0.13.6
+
+Fri, 30 Sep 2022 00:54:36 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.6
+- Bump @fluentui-react-native/adapters to v0.9.2
+- Bump @fluentui-react-native/framework to v0.8.5
+- Bump @fluentui-react-native/persona-coin to v0.11.6
+- Bump @fluentui-react-native/tokens to v0.17.1
+- Bump @uifabricshared/foundation-composable to v0.11.1
+- Bump @uifabricshared/foundation-settings to v0.12.1
+- Bump @uifabricshared/foundation-tokens to v0.12.4
 
 ## 0.13.5
 
