@@ -588,6 +588,9 @@ Object {
     "s1": "8px",
     "s2": "4px",
   },
+  "stroke": Object {
+    "width": Object {},
+  },
   "typography": Object {
     "families": Object {
       "cursive": "System",
@@ -1156,6 +1159,9 @@ Object {
     "m": "16px",
     "s1": "8px",
     "s2": "4px",
+  },
+  "stroke": Object {
+    "width": Object {},
   },
   "typography": Object {
     "families": Object {
@@ -1726,6 +1732,9 @@ Object {
     "s1": "8px",
     "s2": "4px",
   },
+  "stroke": Object {
+    "width": Object {},
+  },
   "typography": Object {
     "families": Object {
       "cursive": "System",
@@ -2295,6 +2304,9 @@ Object {
     "s1": "8px",
     "s2": "4px",
   },
+  "stroke": Object {
+    "width": Object {},
+  },
   "typography": Object {
     "families": Object {
       "cursive": "System",
@@ -2863,6 +2875,9 @@ Object {
     "m": "16px",
     "s1": "8px",
     "s2": "4px",
+  },
+  "stroke": Object {
+    "width": Object {},
   },
   "typography": Object {
     "families": Object {
@@ -3952,6 +3967,9 @@ Object {
     "s1": "8px",
     "s2": "4px",
   },
+  "stroke": Object {
+    "width": Object {},
+  },
   "typography": Object {
     "families": Object {
       "cursive": "System",
@@ -4520,6 +4538,9 @@ Object {
     "m": "16px",
     "s1": "8px",
     "s2": "4px",
+  },
+  "stroke": Object {
+    "width": Object {},
   },
   "typography": Object {
     "families": Object {
