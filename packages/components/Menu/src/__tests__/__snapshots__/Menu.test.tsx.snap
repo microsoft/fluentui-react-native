@@ -7,7 +7,6 @@ exports[`Checkbox component tests Menu default 1`] = `
   accessibilityRole="button"
   accessibilityState={
     Object {
-      "disabled": false,
       "expanded": false,
     }
   }
@@ -74,7 +73,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
@@ -286,7 +284,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
@@ -449,7 +446,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
@@ -796,7 +792,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
@@ -1145,7 +1140,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
@@ -1494,7 +1488,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
@@ -1831,7 +1824,6 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
