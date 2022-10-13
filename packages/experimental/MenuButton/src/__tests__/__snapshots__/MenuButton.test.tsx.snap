@@ -4,11 +4,6 @@ exports[`ContextualMenu default 1`] = `
 <View
   accessibilityLabel="Press for Nested MenuButton"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
   collapsable={false}
   enableFocusRing={true}
