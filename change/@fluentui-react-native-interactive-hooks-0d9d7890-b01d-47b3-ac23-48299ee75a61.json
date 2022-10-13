@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "move hoook to shareable location and add rending tests",
+  "packageName": "@fluentui-react-native/interactive-hooks",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
