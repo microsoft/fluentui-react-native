@@ -82,21 +82,9 @@ export class BasePage {
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
     switch (platform) {
-      case Platform.Win32: {
-        const scrollDownKeys = [Keys.PAGE_DOWN];
-        await browser.waitUntil(
-          async () => {
-            await (await this._firstTestPageButton).addValue(scrollDownKeys);
-            scrollDownKeys.push(Keys.PAGE_DOWN);
-            return await (await this._pageButton).isDisplayed();
-          },
-          {
-            timeout: this.waitForUiEvent,
-            timeoutMsg: errorMsg,
-          },
-        );
+      case Platform.Win32:
+        // Not needed for Win32. Automatic scroll on click.
         break;
-      }
 
       case Platform.iOS: {
         await browser.waitUntil(
