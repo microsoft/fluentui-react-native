@@ -14,12 +14,18 @@ export async function By(identifier: string) {
     _rootView = await $('~' + ROOT_VIEW);
   }
   const selector = '~' + identifier;
-  let queryResult = await _rootView.$(selector);
-  if (queryResult.error) {
-    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the _rootView node, meaning we need to start our search from the top of the tree.
-    queryResult = await $(selector);
+  if (_rootView.error) {
+    // fallback if _rootView is not available (bug with UWP?)
+    return await $(selector);
+  } else {
+    let queryResult: WebdriverIO.Element;
+    queryResult = await _rootView.$(selector);
+    if (queryResult.error) {
+      // In some cases, such as opened ContextualMenu items, the element nodes are not children of the _rootView node, meaning we need to start our search from the top of the tree.
+      queryResult = await $(selector);
+    }
+    return queryResult;
   }
-  return queryResult;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
