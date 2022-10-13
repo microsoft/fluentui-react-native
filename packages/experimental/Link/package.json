@@ -26,9 +26,9 @@
     "directory": "packages/experimental/link"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.8.8",
-    "@fluentui-react-native/interactive-hooks": ">=0.18.11 <1.0.0",
-    "@fluentui-react-native/tokens": "^0.17.2",
+    "@fluentui-react-native/framework": ">=0.8.10 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.18.13 <1.0.0",
+    "@fluentui-react-native/tokens": "^0.17.4",
     "@fluentui-react-native/use-styling": "^0.9.1",
     "@fluentui-react-native/text": ">=0.15.4 <1.0.0",
     "tslib": "^2.3.1"
