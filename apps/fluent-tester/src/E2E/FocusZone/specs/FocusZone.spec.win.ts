@@ -115,13 +115,17 @@ describe('FocusZone Functional Testing', () => {
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Navigates focuszone with circular navigation on - switches focus correctly', async () => {
+  it("Navigates focuszone with circular navigation off - doesn't switch focus", async () => {
     await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_LEFT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.One)).toBeTruthy();
 
     await FocusZonePageObject.sendKeys(GridButtonSelector.Nine, [Keys.ARROW_RIGHT]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Nine)).toBeTruthy();
 
+    await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Navigates focuszone with circular navigation on - switches focus correctly', async () => {
     await FocusZonePageObject.configureGridFocusZone(GridFocusZoneOption.SetCircularNavigation, true);
 
     await FocusZonePageObject.sendKeys(GridButtonSelector.One, [Keys.ARROW_LEFT]);
@@ -161,6 +165,11 @@ describe('FocusZone Functional Testing', () => {
 
     await FocusZonePageObject.sendKeys(GridButtonSelector.After, [Keys.SHIFT, Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Nine)).toBeTruthy();
+
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Nine, [Keys.SHIFT, Keys.TAB]);
+    await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Before)).toBeTruthy();
+
+    await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Tabs in and out of the FocusZone with a defaultTabbableElement set - switches focus correctly', async () => {
@@ -174,6 +183,16 @@ describe('FocusZone Functional Testing', () => {
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.After)).toBeTruthy();
 
     await FocusZonePageObject.sendKeys(GridButtonSelector.After, [Keys.SHIFT, Keys.TAB]);
+    await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Four)).toBeTruthy();
+
+    // Key to another button, tab out, and tab back in to make sure the default tabbable element is still the first to be tabbed to
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Four, [Keys.ARROW_RIGHT]);
+    await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Five)).toBeTruthy();
+
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Five, [Keys.SHIFT, Keys.TAB]);
+    await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Before)).toBeTruthy();
+
+    await FocusZonePageObject.sendKeys(GridButtonSelector.Before, [Keys.TAB]);
     await expect(await FocusZonePageObject.gridButtonIsFocused(GridButtonSelector.Four)).toBeTruthy();
 
     await expect(await FocusZonePageObject.didAssertPopup()).toBeFalsy(FocusZonePageObject.ERRORMESSAGE_ASSERT);
