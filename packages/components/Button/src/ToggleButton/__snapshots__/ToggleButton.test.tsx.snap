@@ -14,7 +14,6 @@ exports[`ToggleButton default 1`] = `
   accessibilityState={
     Object {
       "checked": undefined,
-      "disabled": false,
     }
   }
   accessible={true}

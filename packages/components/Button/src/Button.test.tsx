@@ -11,6 +11,11 @@ describe('Button component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Button disabled', () => {
+    const tree = renderer.create(<Button disabled>Disabled Button</Button>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Button primary', () => {
     const tree = renderer.create(<Button appearance="primary">Primary Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();

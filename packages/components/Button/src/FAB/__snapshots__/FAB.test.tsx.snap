@@ -4,13 +4,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
 <View
   accessibilityLabel="Custom FAB with no shadow(iOS)"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
   enableFocusRing={true}
   focusable={true}
   iconPosition="before"
@@ -101,13 +95,7 @@ exports[`Default FAB (iOS) 1`] = `
   <View
     accessibilityLabel="Default FAB (iOS)"
     accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
     accessible={true}
-    disabled={false}
     enableFocusRing={true}
     focusable={true}
     iconPosition="before"
