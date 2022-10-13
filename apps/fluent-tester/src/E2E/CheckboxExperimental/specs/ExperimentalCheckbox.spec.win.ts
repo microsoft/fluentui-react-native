@@ -16,7 +16,6 @@ describe('Experimental Checkbox Testing Initialization', () => {
   it('Click and navigate to Experimental Checkbox test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
     await ExperimentalCheckboxPageObject.scrollToComponentButton(Platform.Win32);
-    await ExperimentalCheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToCheckboxExperimentalPage();

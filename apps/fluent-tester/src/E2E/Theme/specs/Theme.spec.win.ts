@@ -12,7 +12,6 @@ describe('Theme Testing Initialization', function () {
 
   it('Click and navigate to Theme test page', async () => {
     await ThemePageObject.scrollToComponentButton(Platform.Win32);
-    await ThemePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToThemePage();
