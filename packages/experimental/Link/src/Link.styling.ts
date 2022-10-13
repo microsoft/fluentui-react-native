@@ -15,7 +15,7 @@ export const stylingSettings: UseStylingOptions<LinkProps, LinkSlotProps, LinkTo
           alignSelf: tokens.alignSelf,
         },
       }),
-      [],
+      ['alignSelf'],
     ),
     content: buildProps(
       (tokens: LinkTokens, theme: Theme) => ({
@@ -30,7 +30,7 @@ export const stylingSettings: UseStylingOptions<LinkProps, LinkSlotProps, LinkTo
           ...borderStyles.from(tokens, theme),
         },
       }),
-      ['color', ...fontStyles.keys],
+      ['alignSelf', 'color', 'textDecorationLine', 'textAlign', ...fontStyles.keys, ...borderStyles.keys],
     ),
   },
 };

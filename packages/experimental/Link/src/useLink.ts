@@ -1,13 +1,18 @@
 import * as React from 'react';
-import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import {
+  useAsPressable,
+  useKeyProps,
+  useOnPressWithFocus,
+  useViewCommandFocus,
+  getAccessibilityState,
+} from '@fluentui-react-native/interactive-hooks';
 import { LinkProps, LinkState } from './Link.types';
-import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState, Linking, Platform } from 'react-native';
+import { Linking } from 'react-native';
 
 export const useLink = (props: LinkProps): LinkState => {
-  // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const {
+    accessible = true,
     accessibilityRole,
     onPress,
     onAccessibilityTap,
@@ -22,10 +27,10 @@ export const useLink = (props: LinkProps): LinkState => {
   } = props;
   const isDisabled = !!disabled;
 
-  const [visitedState, setVisitedState] = React.useState({ visited: false });
+  const [visitedState, setVisitedState] = React.useState(false);
   const linkOnPress = React.useCallback(
     (e) => {
-      setVisitedState({ visited: true });
+      setVisitedState(true);
       if (url) {
         Linking.openURL(url as string);
       } else if (onPress) {
@@ -44,7 +49,7 @@ export const useLink = (props: LinkProps): LinkState => {
 
   const newState = {
     ...pressable.state,
-    ...visitedState,
+    visited: visitedState,
   };
   const onAccTap = React.useCallback(
     (e?) => {
@@ -60,25 +65,15 @@ export const useLink = (props: LinkProps): LinkState => {
       ...rest,
       ...onKeyUpProps,
       ...pressable.props, // allow user key events to override those set by us
-      accessible: true,
       accessibilityRole: 'link',
-      ...(Platform.OS === (('win32' as any) || 'windows') && { onAccessibilityTap: onAccTap }),
+      onAccessibilityTap: onAccTap,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: enableFocusRing ?? true,
       focusable: focusable ?? !isDisabled,
-      ...{ cursor: isDisabled ? 'not-allowed' : 'pointer' },
+      cursor: isDisabled ? 'not-allowed' : 'pointer',
       ref: useViewCommandFocus(componentRef),
       tooltip: linkTooltip,
     },
     state: newState,
   };
 };
-
-/* Copied from useButton. Move to sharable location */
-const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: AccessibilityState) {
-  if (accessibilityState) {
-    return { disabled: disabled, ...accessibilityState };
-  }
-  return { disabled: disabled };
-}

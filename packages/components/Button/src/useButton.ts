@@ -1,8 +1,12 @@
 import * as React from 'react';
-import { useAsPressable, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import {
+  useAsPressable,
+  useKeyProps,
+  useOnPressWithFocus,
+  useViewCommandFocus,
+  getAccessibilityState,
+} from '@fluentui-react-native/interactive-hooks';
 import { ButtonProps, ButtonState } from './Button.types';
-import { memoize } from '@fluentui-react-native/framework';
-import { AccessibilityState } from 'react-native';
 
 export const useButton = (props: ButtonProps): ButtonState => {
   // attach the pressable state handlers
@@ -34,11 +38,3 @@ export const useButton = (props: ButtonProps): ButtonState => {
     state: pressable.state,
   };
 };
-
-const getAccessibilityState = memoize(getAccessibilityStateWorker);
-function getAccessibilityStateWorker(disabled: boolean, accessibilityState?: AccessibilityState) {
-  if (accessibilityState) {
-    return { disabled: disabled, ...accessibilityState };
-  }
-  return { disabled: disabled };
-}

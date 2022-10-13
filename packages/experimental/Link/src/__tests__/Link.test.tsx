@@ -1,13 +1,39 @@
 import * as React from 'react';
+import { Alert } from 'react-native';
 import { Link } from '..';
 import * as renderer from 'react-test-renderer';
 
-it('Link all props', () => {
+it('Default Link', () => {
   const tree = renderer.create(<Link url="https://www.bing.com">Link to Bing</Link>).toJSON();
   expect(tree).toMatchSnapshot();
 });
 
-it('Link with child', () => {
-  const tree = renderer.create(<Link url="https://www.bing.com">Link to bing</Link>).toJSON();
+it('Default Link as a pressable', () => {
+  const doPress = (): void => {
+    Alert.alert('Alert.', 'You have been alerted.');
+  };
+  const tree = renderer.create(<Link onPress={doPress}>Link to Bing</Link>).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('Inline Link', () => {
+  const tree = renderer
+    .create(
+      <Link inline url="https://www.bing.com">
+        Link to Bing
+      </Link>,
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('Subtle Link', () => {
+  const tree = renderer
+    .create(
+      <Link appearance="subtle" url="https://www.bing.com">
+        Link to Bing
+      </Link>,
+    )
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

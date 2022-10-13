@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Link all props 1`] = `
+exports[`Default Link 1`] = `
 <View
   accessibilityRole="link"
   accessibilityState={
@@ -8,11 +8,11 @@ exports[`Link all props 1`] = `
       "disabled": false,
     }
   }
-  accessible={true}
   cursor="pointer"
   disabled={false}
   enableFocusRing={true}
   focusable={true}
+  onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -50,7 +50,7 @@ exports[`Link all props 1`] = `
 </View>
 `;
 
-exports[`Link with child 1`] = `
+exports[`Default Link as a pressable 1`] = `
 <View
   accessibilityRole="link"
   accessibilityState={
@@ -58,11 +58,103 @@ exports[`Link with child 1`] = `
       "disabled": false,
     }
   }
-  accessible={true}
   cursor="pointer"
   disabled={false}
   enableFocusRing={true}
   focusable={true}
+  onAccessibilityTap={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignSelf": "flex-start",
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    focusable={false}
+    numberOfLines={0}
+    style={
+      Object {
+        "alignSelf": "flex-start",
+        "color": "#0078d4",
+        "fontFamily": "Segoe UI",
+        "fontSize": 13,
+        "fontWeight": "400",
+        "margin": 0,
+        "variant": "body1",
+      }
+    }
+  >
+    Link to Bing
+  </Text>
+</View>
+`;
+
+exports[`Inline Link 1`] = `
+<Text
+  accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  cursor="pointer"
+  disabled={false}
+  ellipsizeMode="tail"
+  enableFocusRing={true}
+  focusable={true}
+  numberOfLines={0}
+  onAccessibilityTap={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignSelf": "flex-start",
+      "color": "#0078d4",
+      "fontFamily": "Segoe UI",
+      "fontSize": 13,
+      "fontWeight": "400",
+      "margin": 0,
+      "textDecorationLine": "underline",
+      "variant": "body1",
+    }
+  }
+  tooltip="https://www.bing.com"
+>
+  Link to Bing
+</Text>
+`;
+
+exports[`Subtle Link 1`] = `
+<View
+  accessibilityRole="link"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  appearance="subtle"
+  cursor="pointer"
+  disabled={false}
+  enableFocusRing={true}
+  focusable={true}
+  onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
@@ -86,7 +178,7 @@ exports[`Link with child 1`] = `
     style={
       Object {
         "alignSelf": "flex-start",
-        "color": "#0078d4",
+        "color": "#616161",
         "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
@@ -95,7 +187,7 @@ exports[`Link with child 1`] = `
       }
     }
   >
-    Link to bing
+    Link to Bing
   </Text>
 </View>
 `;

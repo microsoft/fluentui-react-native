@@ -56,7 +56,11 @@ export type IWithLinkOptions<T extends object> = LinkOptions & IWithPressableOpt
 /**
  * Link props, extending Text props with Pressable options
  */
-export interface LinkCoreProps extends IWithLinkOptions<TextProps> {
+export interface LinkProps extends IWithLinkOptions<TextProps> {
+  /**
+   * link appearance
+   */
+  appearance?: LinkAppearance;
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -67,27 +71,19 @@ export interface LinkCoreProps extends IWithLinkOptions<TextProps> {
    */
   enableFocusRing?: boolean;
   /**
+   * link inline
+   */
+  inline?: boolean;
+  /**
    * Text that should show in a tooltip when the user hovers over a button.
    */
   tooltip?: string;
 }
 
-export interface LinkProps extends LinkCoreProps {
-  /**
-   * link appearance
-   */
-  appearance?: LinkAppearance;
-  /*
-   * link inline
-   */
-  inline?: boolean;
-}
-
-export type LinkHooks<T extends object> = {
-  props: IWithPressableEvents<T>;
+export type LinkState = {
+  props: IWithPressableEvents<LinkProps & React.ComponentPropsWithRef<any>>;
   state: ILinkState;
 };
-export type LinkState = LinkHooks<LinkProps & React.ComponentPropsWithRef<any>>;
 
 export interface LinkSlotProps {
   root: ViewProps;
