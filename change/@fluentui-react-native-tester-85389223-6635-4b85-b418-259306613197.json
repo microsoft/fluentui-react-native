@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "skip null sections",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "singh.ayush@microsoft.com",
+  "dependentChangeType": "patch"
+}

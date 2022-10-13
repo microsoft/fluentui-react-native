@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Set button jest tests to run for iOS",
+  "packageName": "@fluentui-react-native/callout",
+  "email": "singh.ayush@microsoft.com",
+  "dependentChangeType": "none"
+}
