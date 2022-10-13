@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove janky scroll logic for win32 component button",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
