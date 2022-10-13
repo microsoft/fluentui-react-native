@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Removed Toggle & Compound button from Android",
-  "packageName": "@fluentui-react-native/button",
-  "email": "singh.ayush@microsoft.com",
-  "dependentChangeType": "patch"
-}

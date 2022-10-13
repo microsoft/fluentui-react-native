@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Thu, 13 Oct 2022 05:37:25 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.4.42",
+      "version": "0.4.42",
+      "comments": {
+        "none": [
+          {
+            "author": "singh.ayush@microsoft.com",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "6575a9ac3fc81300e9b1ffbae87617035ca52e54",
+            "comment": "Set button jest tests to run for iOS"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.16.36",
+            "commit": "6575a9ac3fc81300e9b1ffbae87617035ca52e54"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.4.41",
       "version": "0.4.41",

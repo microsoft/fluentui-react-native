@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "Set button jest tests to run for iOS",
-  "packageName": "@fluentui-react-native/experimental-menu-button",
-  "email": "singh.ayush@microsoft.com",
-  "dependentChangeType": "none"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Thu, 13 Oct 2022 05:37:25 GMT",
+      "tag": "@fluentui-react-native/button_v0.25.9",
+      "version": "0.25.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "singh.ayush@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "6575a9ac3fc81300e9b1ffbae87617035ca52e54",
+            "comment": "Removed Toggle & Compound button from Android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/button_v0.25.8",
       "version": "0.25.8",
