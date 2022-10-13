@@ -12,7 +12,7 @@ exports[`Checkbox component tests Menu default 1`] = `
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityAction={[Function]}
@@ -20,9 +20,6 @@ exports[`Checkbox component tests Menu default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={false}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -82,7 +79,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -90,9 +87,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -297,7 +291,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -305,9 +299,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -463,7 +454,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -471,9 +462,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -813,7 +801,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -821,9 +809,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1165,7 +1150,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -1173,9 +1158,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1517,7 +1499,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -1525,9 +1507,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1857,7 +1836,7 @@ Array [
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -1865,9 +1844,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}

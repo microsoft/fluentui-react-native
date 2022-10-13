@@ -121,8 +121,8 @@ exports[`Notification component tests Notification default 1`] = `
       }
       accessible={true}
       appearance="subtle"
+      collapsable={false}
       color="#0F6CBD"
-      disabled={false}
       disabledColor="#2886DE"
       enableFocusRing={true}
       focusable={true}
@@ -131,7 +131,6 @@ exports[`Notification component tests Notification default 1`] = `
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
-      onPress={[Function]}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
       onResponderRelease={[Function]}
