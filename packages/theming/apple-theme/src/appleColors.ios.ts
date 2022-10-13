@@ -212,8 +212,8 @@ function getFluentUIAppleDarkPalette(): ApplePalette {
 }
 
 /** Creates a palette of colors for the apple theme, using the appropriate FluentUI Apple Palette based on appearance */
-export function paletteFromAppleColors(isDark: boolean): ThemeColorDefinition {
-  const fluentApple = isDark ? getFluentUIAppleDarkPalette() : getFluentUIAppleLightPalette();
+export function paletteFromAppleColors(isLight: boolean): ThemeColorDefinition {
+  const fluentApple = isLight ? getFluentUIAppleLightPalette() : getFluentUIAppleDarkPalette();
 
   return {
     /* PaletteBackgroundColors & PaletteTextColors */
