@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add empty stroke width object to other themes",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
