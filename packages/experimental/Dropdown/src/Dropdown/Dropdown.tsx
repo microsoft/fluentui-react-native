@@ -34,18 +34,17 @@ const dropdownTokens = buildUseTokens<DropdownTokens>((t: Theme) => ({
 const dropdownState: (keyof DropdownTokens)[] = ['hovered', 'focused', 'pressed'];
 
 const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownProps, useTokens: UseTokens<DropdownTokens>) => {
-  const pressableState = useAsPressable(props);
+  const pressable = useAsPressable(props);
   const theme = useFluentTheme();
   const [tokens, tokenCache] = useTokens(theme);
-  const [mergedTokens] = applyTokenLayers(tokens, dropdownState, tokenCache, (layer) => pressableState.state[layer]);
+  const [mergedTokens] = applyTokenLayers(tokens, dropdownState, tokenCache, (layer) => pressable.state[layer]);
 
   const onButtonClick = React.useCallback(() => {}, []); //eslint-disable-line
   const buttonProps: ButtonProps = React.useMemo(
     () => ({
-      ...pressableState.props,
       onClick: onButtonClick,
     }),
-    [onButtonClick, pressableState],
+    [onButtonClick],
   );
   const CustButton = React.useMemo(
     () =>
@@ -78,7 +77,7 @@ const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownPro
     />
   );
 
-  const RootSlot = useSlot<IViewProps>(View, props);
+  const RootSlot = useSlot<IViewProps>(View, pressable.props);
   const ButtonSlot = useSlot<ButtonProps>(CustButton, buttonProps);
   const ExpandIconSlot = useSlot<SvgProps>(Svg, expandIconProps);
 
