@@ -2,6 +2,21 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 14:12:26 GMT",
+      "tag": "@fluentui/react-native_v0.32.35",
+      "version": "0.32.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.16.25",
+            "commit": "d45dccde60348c5e722eb4fe949bfeb8c8dac8bf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Oct 2022 05:37:25 GMT",
       "tag": "@fluentui/react-native_v0.32.34",
       "version": "0.32.34",

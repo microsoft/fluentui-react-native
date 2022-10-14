@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 14:12:26 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.16.25",
+      "version": "0.16.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "d45dccde60348c5e722eb4fe949bfeb8c8dac8bf",
+            "comment": "Switch Checkbox to Pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.16.24",
       "version": "0.16.24",
