@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 19:11:13 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.50",
+      "version": "1.0.50",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.3",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.22",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.11",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.14",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/text to v0.15.7",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.5",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.25.11",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Oct 2022 17:16:50 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.49",
       "version": "1.0.49",

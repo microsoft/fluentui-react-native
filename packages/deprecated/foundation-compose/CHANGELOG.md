@@ -1,8 +1,16 @@
 # Change Log - @uifabricshared/foundation-compose
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Oct 2022 19:11:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.12.12
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-tokens to v0.12.8
 
 ## 1.12.11
 
