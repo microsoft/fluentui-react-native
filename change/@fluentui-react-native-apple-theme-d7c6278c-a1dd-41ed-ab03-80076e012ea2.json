@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Remove hardcoded tokens, use shadow tokens from pipeline",
+  "comment": "Initial fix for theme not getting updated when appearance changes",
   "packageName": "@fluentui-react-native/apple-theme",
   "email": "78454019+lyzhan7@users.noreply.github.com",
   "dependentChangeType": "patch"

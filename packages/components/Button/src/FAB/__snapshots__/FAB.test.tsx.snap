@@ -4,26 +4,17 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
 <View
   accessibilityLabel="Custom FAB with no shadow(iOS)"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
   enableFocusRing={true}
   focusable={true}
   iconPosition="before"
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
   onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -47,8 +38,8 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontFamily": "System",
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
@@ -104,26 +95,17 @@ exports[`Default FAB (iOS) 1`] = `
   <View
     accessibilityLabel="Default FAB (iOS)"
     accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
     accessible={true}
-    disabled={false}
     enableFocusRing={true}
     focusable={true}
     iconPosition="before"
     onBlur={[Function]}
-    onClick={[Function]}
     onFocus={[Function]}
+    onHoverIn={[Function]}
+    onHoverOut={[Function]}
     onPress={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+    onPressIn={[Function]}
+    onPressOut={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -170,8 +152,8 @@ exports[`Default FAB (iOS) 1`] = `
       style={
         Object {
           "color": "#ffffff",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
+          "fontFamily": "System",
+          "fontSize": 12,
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,

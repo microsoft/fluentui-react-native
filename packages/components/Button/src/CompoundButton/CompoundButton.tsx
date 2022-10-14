@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { CompoundButtonProps, compoundButtonName, CompoundButtonType } from './CompoundButton.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -15,7 +15,7 @@ export const CompoundButton = compose<CompoundButtonType>({
   displayName: compoundButtonName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
     secondaryContent: Text,

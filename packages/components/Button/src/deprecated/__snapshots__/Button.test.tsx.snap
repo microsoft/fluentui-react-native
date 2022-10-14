@@ -2,43 +2,39 @@
 
 exports[`Button default 1`] = `
 <View
-  accessible={false}
-  focusable={false}
+  accessibilityLabel="Default Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": false,
+    }
+  }
+  accessible={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onPress={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "flex-start",
       "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
-      "borderRadius": 12,
+      "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
     }
   }
 >
-  <View
-    accessibilityLabel="Default Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-  >
+  <View>
     <View
       style={
         Object {
@@ -47,10 +43,10 @@ exports[`Button default 1`] = `
           "display": "flex",
           "flexDirection": "row",
           "justifyContent": "center",
-          "minHeight": 52,
-          "minWidth": 80,
-          "paddingHorizontal": 20,
-          "paddingVertical": 14,
+          "minHeight": 24,
+          "minWidth": 32,
+          "paddingEnd": 6,
+          "paddingStart": 6,
         }
       }
     >
@@ -58,10 +54,12 @@ exports[`Button default 1`] = `
         style={
           Object {
             "color": "#323130",
-            "fontFamily": "Segoe UI",
-            "fontSize": 14,
-            "fontWeight": "600",
+            "fontFamily": "System",
+            "fontSize": 12,
+            "fontWeight": "400",
             "margin": 0,
+            "marginEnd": 2,
+            "marginStart": 2,
           }
         }
       >

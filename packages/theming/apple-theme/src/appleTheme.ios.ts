@@ -1,10 +1,19 @@
+import globalTokens from '@fluentui-react-native/design-tokens-ios/light/tokens-global.json';
+
 import { Theme, Spacing } from '@fluentui-react-native/theme-types';
 import { paletteFromAppleColors } from './appleColors.ios';
 import { appleTypography } from './appleTypography.ios';
 import { iOSShadows } from './appleShadows.ios';
 
 function appleSpacing(): Spacing {
-  return { s2: '4px', s1: '8px', m: '16px', l1: '20px', l2: '32px' };
+  return {
+    s2: '4px',
+    s1: '8px',
+    l1: '20px',
+    l2: '32px',
+    // v2 types
+    ...globalTokens.spacing,
+  };
 }
 
 const appleComponents = {
@@ -122,20 +131,13 @@ const appleComponents = {
   },
 };
 
-export const BaseAppleLightThemeIOS: Theme = {
-  colors: paletteFromAppleColors(false),
-  typography: appleTypography(),
-  shadows: iOSShadows(),
-  spacing: appleSpacing(),
-  components: appleComponents,
-  host: { appearance: 'light' },
-};
-
-export const BaseAppleDarkThemeIOS: Theme = {
-  colors: paletteFromAppleColors(true),
-  typography: appleTypography(),
-  shadows: iOSShadows(),
-  spacing: appleSpacing(),
-  components: appleComponents,
-  host: { appearance: 'dark' },
-};
+export function getBaseAppleThemeIOS(isLightMode: boolean): Theme {
+  return {
+    colors: paletteFromAppleColors(isLightMode),
+    typography: appleTypography(),
+    shadows: iOSShadows(),
+    spacing: appleSpacing(),
+    components: appleComponents,
+    host: { appearance: isLightMode ? 'light' : 'dark' },
+  };
+}

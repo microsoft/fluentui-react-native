@@ -23,7 +23,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
 
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.isCheckboxChecked(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'The Checkbox was not toggled correctly',
       interval: 1000,
     });
@@ -39,7 +39,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
   async didOnChangeCallbackFire(): Promise<boolean> {
     const callbackText = await By(EXPERIMENTAL_CHECKBOX_ON_PRESS);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForPageTimeout,
+      timeout: this.waitForUiEvent,
       timeoutMsg: 'The OnChange callback did not fire.',
       interval: 1000,
     });
