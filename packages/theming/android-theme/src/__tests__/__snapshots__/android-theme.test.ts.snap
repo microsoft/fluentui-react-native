@@ -421,9 +421,6 @@ Object {
     "s1": "12px",
     "s2": "8px",
   },
-  "stroke": Object {
-    "width": Object {},
-  },
   "typography": Object {
     "families": Object {
       "cursive": "cursive",
@@ -978,9 +975,6 @@ Object {
     "m": "16px",
     "s1": "12px",
     "s2": "8px",
-  },
-  "stroke": Object {
-    "width": Object {},
   },
   "typography": Object {
     "families": Object {
@@ -1537,9 +1531,6 @@ Object {
     "s1": "12px",
     "s2": "8px",
   },
-  "stroke": Object {
-    "width": Object {},
-  },
   "typography": Object {
     "families": Object {
       "cursive": "cursive",
@@ -2094,9 +2085,6 @@ Object {
     "m": "16px",
     "s1": "12px",
     "s2": "8px",
-  },
-  "stroke": Object {
-    "width": Object {},
   },
   "typography": Object {
     "families": Object {
@@ -2653,9 +2641,6 @@ Object {
     "s1": "12px",
     "s2": "8px",
   },
-  "stroke": Object {
-    "width": Object {},
-  },
   "typography": Object {
     "families": Object {
       "cursive": "cursive",
@@ -3210,9 +3195,6 @@ Object {
     "m": "16px",
     "s1": "12px",
     "s2": "8px",
-  },
-  "stroke": Object {
-    "width": Object {},
   },
   "typography": Object {
     "families": Object {

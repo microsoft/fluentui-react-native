@@ -411,9 +411,6 @@ Object {
     "s1": "8px",
     "s2": "4px",
   },
-  "stroke": Object {
-    "width": Object {},
-  },
   "typography": Object {
     "families": Object {
       "cursive": "System",
