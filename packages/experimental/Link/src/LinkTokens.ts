@@ -11,7 +11,7 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
       textDecorationLine: 'underline',
     },
     disabled: {
-      color: t.colors.disabledBodyText,
+      color: t.colors.neutralForegroundDisabled,
       textDecorationLine: 'none',
       focused: {
         borderColor: t.colors.focusBorder,
