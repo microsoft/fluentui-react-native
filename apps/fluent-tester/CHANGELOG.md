@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 14 Oct 2022 17:16:50 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Oct 2022 18:04:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.101.5
+
+Fri, 14 Oct 2022 18:04:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/apple-theme to v0.16.2
 
 ## 0.101.4
 
