@@ -1,4 +1,4 @@
-import { ButtonState } from '..';
+import { ButtonInfo } from '..';
 import { ButtonSlotProps, ButtonTokens, ButtonProps } from '../Button.types';
 
 export const toggleButtonName = 'ToggleButton';
@@ -22,8 +22,8 @@ export interface ToggleButtonProps extends ButtonProps {
   defaultChecked?: boolean;
 }
 
-export interface ToggleButtonState extends ButtonState {
-  state: ButtonState['state'] & {
+export interface ToggleButtonInfo extends ButtonInfo {
+  state: ButtonInfo['state'] & {
     /**
      * Whether the ToggleButton is toggled or not
      */
