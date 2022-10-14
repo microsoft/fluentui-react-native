@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, ViewStyle } from 'react-native';
+import { Platform, View, ViewStyle } from 'react-native';
 import { ShadowProps, shadowName } from './Shadow.types';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
 import { getShadowTokenStyleSet } from './shadowStyle';
@@ -8,7 +8,13 @@ import { ShadowToken } from '@fluentui-react-native/theme-types';
 
 export const Shadow = stagedComponent((props: ShadowProps) => {
   return (final: ShadowProps, children: React.ReactNode) => {
-    if (!props.shadowToken) {
+    /**
+     * Don't render additional views if we don't need to.
+     * On Android, we still want the extra outer view to constrain a ripple that
+     * may be present in the inner view, due to the following bug:
+     * https://stackoverflow.com/questions/63048178/ripple-effect-leaking-at-corners-as-if-pressable-button-has-a-borderradius
+     **/
+    if (!props.shadowToken && Platform.OS !== 'android') {
       return <>{children}</>;
     }
 
@@ -113,7 +119,7 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
         flexWrap,
         flexDirection,
 
-        ...shadowTokenStyleSet.key,
+        ...shadowTokenStyleSet.ambient,
         ...restOfChildStyleProps,
       },
     },
@@ -136,7 +142,7 @@ function getStylePropsForShadowViewsWorker(childStyleProps: ViewStyle = {}, shad
         top,
         bottom,
 
-        ...shadowTokenStyleSet.ambient,
+        ...shadowTokenStyleSet.key,
         ...restOfChildStyleProps,
       },
     },

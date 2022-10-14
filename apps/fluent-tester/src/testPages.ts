@@ -211,7 +211,7 @@ export const tests: TestDescription[] = [
     name: 'Shadow',
     component: ShadowTest,
     testPage: HOMEPAGE_SHADOW_BUTTON,
-    platforms: ['ios', 'macos', 'win32'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Shimmer',
