@@ -20,11 +20,14 @@ import { dropdownName, DropdownProps, DropdownTokens } from './Dropdown.types';
 // Change later for win32
 const dropdownTokens = buildUseTokens<DropdownTokens>((t: Theme) => ({
   buttonBorder: t.colors.neutralStroke1,
+  expandIconColor: 'red',
   hovered: {
     buttonBorder: t.colors.neutralStroke1Hover,
+    expandIconColor: 'pink',
   },
   pressed: {
     buttonBorder: t.colors.neutralStrokeAccessible,
+    expandIconColor: 'blue',
   },
 }));
 
@@ -34,14 +37,15 @@ const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownPro
   const pressableState = useAsPressable(props);
   const theme = useFluentTheme();
   const [tokens, tokenCache] = useTokens(theme);
-  const [mergedTokens] = applyTokenLayers(tokens, dropdownState, tokenCache, (layer) => pressableState[layer]);
+  const [mergedTokens] = applyTokenLayers(tokens, dropdownState, tokenCache, (layer) => pressableState.state[layer]);
 
   const onButtonClick = React.useCallback(() => {}, []); //eslint-disable-line
   const buttonProps: ButtonProps = React.useMemo(
     () => ({
+      ...pressableState.props,
       onClick: onButtonClick,
     }),
-    [onButtonClick],
+    [onButtonClick, pressableState],
   );
   const CustButton = React.useMemo(
     () =>
@@ -65,10 +69,13 @@ const Dropdown = compressible<DropdownProps, DropdownTokens>((props: DropdownPro
       viewBox: '0 0 16 16',
       fill: 'none',
     }),
-    [mergedTokens.expandIconColor],
+    [mergedTokens],
   );
   const expandIconPath = (
-    <Path d="M3.14645 5.64645C3.34171 5.45118 3.65829 5.45118 3.85355 5.64645L8 9.79289L12.1464 5.64645C12.3417 5.45118 12.6583 5.45118 12.8536 5.64645C13.0488 5.84171 13.0488 6.15829 12.8536 6.35355L8.35355 10.8536C8.15829 11.0488 7.84171 11.0488 7.64645 10.8536L3.14645 6.35355C2.95118 6.15829 2.95118 5.84171 3.14645 5.64645Z" />
+    <Path
+      fill="currentColor"
+      d="M3.14645 5.64645C3.34171 5.45118 3.65829 5.45118 3.85355 5.64645L8 9.79289L12.1464 5.64645C12.3417 5.45118 12.6583 5.45118 12.8536 5.64645C13.0488 5.84171 13.0488 6.15829 12.8536 6.35355L8.35355 10.8536C8.15829 11.0488 7.84171 11.0488 7.64645 10.8536L3.14645 6.35355C2.95118 6.15829 2.95118 5.84171 3.14645 5.64645Z"
+    />
   );
 
   const RootSlot = useSlot<IViewProps>(View, props);
