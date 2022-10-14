@@ -5,7 +5,8 @@ import { getBaseAppleThemeIOS } from './appleTheme.ios';
 
 export function createAppleTheme(): ThemeReference {
   const appleThemeReference = new ThemeReference({} as Theme, () => {
-    return getBaseAppleThemeIOS(Appearance.getColorScheme() === 'light');
+    const isLightMode = Appearance.getColorScheme() === 'light';
+    return getBaseAppleThemeIOS(isLightMode);
   });
 
   Appearance.addChangeListener(() => {
