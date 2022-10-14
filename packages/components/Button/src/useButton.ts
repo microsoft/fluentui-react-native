@@ -3,7 +3,6 @@ import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocu
 import { ButtonProps, ButtonInfo } from './Button.types';
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
-  // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, componentRef = defaultComponentRef, disabled, loading, enableFocusRing, focusable, ...rest } = props;
   const isDisabled = !!disabled || !!loading;
@@ -18,7 +17,12 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
     props: {
       ...onKeyUpProps,
       ...pressable.props, // allow user key events to override those set by us
-      ...(isDisabled && { disabled: isDisabled }), // Due to a bug in React Native, unconditionally passing this may cause unnecessary re-renders. Therefore, let's only pass it in if it's defined.
+      /**
+       * https://github.com/facebook/react-native/issues/34986
+       * Due to a bug in React Native, unconditionally passing this may cause unnecessary re-renders.
+       * Therefore, let's only pass it in if it's defined to limit this issue.
+       */
+      ...(isDisabled && { disabled: isDisabled }),
       accessible: true,
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),
