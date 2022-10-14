@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 17:16:50 GMT",
+      "tag": "@fluentui-react-native/button_v0.25.10",
+      "version": "0.25.10",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/button",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9",
+            "comment": "Switch Button component to use React Native Pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Oct 2022 05:37:25 GMT",
       "tag": "@fluentui-react-native/button_v0.25.9",
       "version": "0.25.9",

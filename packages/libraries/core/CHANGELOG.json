@@ -2,6 +2,33 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 17:16:50 GMT",
+      "tag": "@fluentui/react-native_v0.32.36",
+      "version": "0.32.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui/react-native",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9",
+            "comment": "Switch Button to Pressable"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/button to v0.25.10",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.44",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Oct 2022 14:12:26 GMT",
       "tag": "@fluentui/react-native_v0.32.35",
       "version": "0.32.35",

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 17:16:50 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.49",
+      "version": "1.0.49",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9",
+            "comment": "Switch Button components to use React Native Pressable"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.25.10",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 13 Oct 2022 05:37:25 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.48",
       "version": "1.0.48",

@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 13 Oct 2022 05:37:25 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Oct 2022 17:16:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.49
+
+Fri, 14 Oct 2022 17:16:50 GMT
+
+### Patches
+
+- Switch Button components to use React Native Pressable (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.25.10
 
 ## 1.0.48
 
