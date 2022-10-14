@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Oct 2022 14:12:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.25
+
+Fri, 14 Oct 2022 14:12:26 GMT
+
+### Patches
+
+- Switch Checkbox to Pressable (sanajmi@microsoft.com)
 
 ## 0.16.24
 

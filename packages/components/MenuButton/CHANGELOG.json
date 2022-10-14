@@ -2,6 +2,50 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 17:16:50 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.8.44",
+      "version": "0.8.44",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9",
+            "comment": "Switch Button components to use React Native Pressable"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.25.10",
+            "commit": "0fc0e5ba35779665a6289e58cc364bb5607b61d9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 13 Oct 2022 05:37:25 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.8.43",
+      "version": "0.8.43",
+      "comments": {
+        "none": [
+          {
+            "author": "singh.ayush@microsoft.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "6575a9ac3fc81300e9b1ffbae87617035ca52e54",
+            "comment": "Set button jest tests to run for iOS"
+          }
+        ],
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.25.9",
+            "commit": "6575a9ac3fc81300e9b1ffbae87617035ca52e54"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.8.42",
       "version": "0.8.42",

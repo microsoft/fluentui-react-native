@@ -1,8 +1,47 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Oct 2022 17:16:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.101.4
+
+Fri, 14 Oct 2022 17:16:50 GMT
+
+### Patches
+
+- Switch Button components to use React Native Pressable (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.25.10
+- Bump @fluentui-react-native/dropdown to v0.4.12
+- Bump @fluentui-react-native/experimental-button to v0.16.37
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.43
+- Bump @fluentui-react-native/menu to v1.0.49
+- Bump @fluentui-react-native/notification to v0.17.22
+- Bump @fluentui/react-native to v0.32.36
+
+## 0.101.3
+
+Fri, 14 Oct 2022 14:12:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.27
+- Bump @fluentui/react-native to v0.32.35
+
+## 0.101.2
+
+Thu, 13 Oct 2022 05:37:26 GMT
+
+### Patches
+
+- skip null sections (singh.ayush@microsoft.com)
+- Bump @fluentui-react-native/button to v0.25.9
+- Bump @fluentui-react-native/dropdown to v0.4.11
+- Bump @fluentui-react-native/experimental-button to v0.16.36
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.42
+- Bump @fluentui-react-native/menu to v1.0.48
+- Bump @fluentui-react-native/notification to v0.17.21
+- Bump @fluentui/react-native to v0.32.34
 
 ## 0.101.1
 
