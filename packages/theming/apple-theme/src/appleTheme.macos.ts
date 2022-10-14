@@ -78,7 +78,6 @@ export function getBaseAppleThemeMacOS(): Theme {
     shadows: fallbackAppleShadows(),
     spacing: appleSpacing(),
     components: appleComponents,
-    stroke: { width: {} },
     host: { appearance: 'dynamic' },
   };
 }
