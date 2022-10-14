@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Port partner focuszone tests to FURN",
-  "packageName": "@fluentui-react-native/tester-win32",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
