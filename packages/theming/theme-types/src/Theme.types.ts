@@ -28,16 +28,6 @@ export interface Spacing {
   xxxxl?: SpacingValue;
 }
 
-export interface StrokeWidth {
-  none?: number;
-  thinnest?: number;
-  thinner?: number;
-  thin?: number;
-  thick?: number;
-  thicker?: number;
-  thickest?: number;
-}
-
 /**
  * A fully specified theme.
  */
@@ -50,9 +40,6 @@ export interface Theme {
   };
   shadows: ThemeShadowDefinition;
   readonly spacing: Spacing;
-  readonly stroke: {
-    width: StrokeWidth;
-  };
   host: {
     // appearance of the theme, this corresponds to the react-native Appearance library values, though can be overwritten
     // dynamic refers to a theme that handles it's own appearance switching, such as one that uses the PlatformColor API
