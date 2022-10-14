@@ -4,8 +4,8 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { View, StyleSheet } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { Text } from '@fluentui/react-native';
-import { createAppleTheme } from '@fluentui-react-native/apple-theme';
 
 const styles = StyleSheet.create({
   root: {
@@ -38,18 +38,13 @@ const StrokeWidthTestComponent: React.FunctionComponent<StrokeWidthTestComponent
 };
 
 const StrokeWidthTest: React.FunctionComponent = () => {
-  const appleTheme = createAppleTheme().theme;
-
   return (
     <View>
       <Stack style={stackStyle}>
-        <StrokeWidthTestComponent name="None" strokeWidth={appleTheme.stroke.width.none}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thinnest" strokeWidth={appleTheme.stroke.width.thinnest}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thinner" strokeWidth={appleTheme.stroke.width.thinner}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thin" strokeWidth={appleTheme.stroke.width.thin}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thick" strokeWidth={appleTheme.stroke.width.thick}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thicker" strokeWidth={appleTheme.stroke.width.thicker}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thickest" strokeWidth={appleTheme.stroke.width.thickest}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="Thin" strokeWidth={globalTokens.stroke.width.thin}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="Thick" strokeWidth={globalTokens.stroke.width.thick}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="Thicker" strokeWidth={globalTokens.stroke.width.thicker}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="Thickest" strokeWidth={globalTokens.stroke.width.thickest}></StrokeWidthTestComponent>
       </Stack>
     </View>
   );
