@@ -4,7 +4,7 @@ import { ViewProps } from 'react-native';
 
 export const linkName = 'Link';
 
-export type ILinkState = IPressableState & {
+export type LinkState = IPressableState & {
   /**
    * Specifies whether the link has been visited.
    * @default false
@@ -26,6 +26,7 @@ export type ILinkState = IPressableState & {
    */
   subtle?: boolean;
 };
+
 /**
  * Link tokens, these are the internally configurable values for Link elements. In particular these
  * drive decisions on how to build the styles
@@ -42,21 +43,10 @@ export interface LinkTokens extends TextTokens {
 
 export type LinkAppearance = 'default' | 'subtle';
 
-export interface LinkOptions {
-  /**
-   * The URL that is opened when the link is clicked.  This value supersedes the 'onPress' callback when both are present.
-   * @default undefined
-   */
-  url?: string;
-}
-
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type IWithLinkOptions<T extends object> = LinkOptions & IWithPressableOptions<T>;
-
 /**
  * Link props, extending Text props with Pressable options
  */
-export interface LinkProps extends IWithLinkOptions<TextProps> {
+export interface LinkProps extends IWithPressableOptions<TextProps> {
   /**
    * link appearance
    */
@@ -75,14 +65,19 @@ export interface LinkProps extends IWithLinkOptions<TextProps> {
    */
   inline?: boolean;
   /**
+   * The URL that is opened when the link is clicked.  This value supersedes the 'onPress' callback when both are present.
+   * @default undefined
+   */
+  url?: string;
+  /**
    * Text that should show in a tooltip when the user hovers over a button.
    */
   tooltip?: string;
 }
 
-export type LinkState = {
+export type LinkInfo = {
   props: IWithPressableEvents<LinkProps & React.ComponentPropsWithRef<any>>;
-  state: ILinkState;
+  state: LinkState;
 };
 
 export interface LinkSlotProps {

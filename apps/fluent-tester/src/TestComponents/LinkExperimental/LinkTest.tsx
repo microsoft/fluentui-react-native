@@ -8,13 +8,8 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
 
 const DefaultLinks: React.FunctionComponent = () => {
-  const doPress = (): void => {
-    Alert.alert('Alert.', 'You have been alerted.');
-  };
-
-  const doAllyTap = (): void => {
-    Alert.alert('Alert.', 'You have invoked onAllyTap.');
-  };
+  const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
+  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
 
   return (
     <Stack style={stackStyle}>
@@ -32,13 +27,8 @@ const DefaultLinks: React.FunctionComponent = () => {
 };
 
 const InlineLinks: React.FunctionComponent = () => {
-  const doPress = (): void => {
-    Alert.alert('Alert.', 'You have been alerted.');
-  };
-
-  const doAllyTap = (): void => {
-    Alert.alert('Alert.', 'You have invoked onAllyTap.');
-  };
+  const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
+  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
 
   return (
     <Stack style={stackStyle}>
@@ -68,13 +58,8 @@ const InlineLinks: React.FunctionComponent = () => {
 };
 
 const SubtleLinks: React.FunctionComponent = () => {
-  const doPress = (): void => {
-    Alert.alert('Alert.', 'You have been alerted.');
-  };
-
-  const doAllyTap = (): void => {
-    Alert.alert('Alert.', 'You have invoked onAllyTap.');
-  };
+  const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
+  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
 
   return (
     <Stack style={stackStyle}>

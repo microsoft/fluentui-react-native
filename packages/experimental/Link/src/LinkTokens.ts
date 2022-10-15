@@ -4,7 +4,7 @@ import { LinkTokens } from './Link.types';
 
 export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
   ({
-    color: t.colors.link,
+    color: t.colors.brandForegroundLink,
     alignSelf: 'flex-start',
     variant: 'body1',
     inline: {
@@ -18,17 +18,17 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
       },
     },
     hovered: {
-      color: t.colors.linkHovered,
+      color: t.colors.brandForegroundLinkHover,
       textDecorationLine: 'underline',
     },
     pressed: {
-      color: t.colors.linkPressed,
+      color: t.colors.brandForegroundLinkPressed,
     },
     visited: {
-      color: t.colors.link,
+      color: t.colors.brandForegroundLink,
     },
     focused: {
-      color: t.colors.link,
+      color: t.colors.brandForegroundLink,
       borderColor: t.colors.focusBorder,
     },
     subtle: {

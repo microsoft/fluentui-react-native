@@ -6,10 +6,10 @@ import {
   useViewCommandFocus,
   getAccessibilityState,
 } from '@fluentui-react-native/interactive-hooks';
-import { LinkProps, LinkState } from './Link.types';
+import { LinkProps, LinkInfo } from './Link.types';
 import { Linking } from 'react-native';
 
-export const useLink = (props: LinkProps): LinkState => {
+export const useLink = (props: LinkProps): LinkInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessible = true,
@@ -65,6 +65,7 @@ export const useLink = (props: LinkProps): LinkState => {
       ...rest,
       ...onKeyUpProps,
       ...pressable.props, // allow user key events to override those set by us
+      accessible: accessible,
       accessibilityRole: 'link',
       onAccessibilityTap: onAccTap,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),

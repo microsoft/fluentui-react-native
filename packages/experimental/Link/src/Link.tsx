@@ -1,7 +1,7 @@
 /** @jsx withSlots */
 import * as React from 'react';
 import { View } from 'react-native';
-import { linkName, LinkType, LinkProps, ILinkState } from './Link.types';
+import { linkName, LinkType, LinkProps, LinkState } from './Link.types';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useLink } from './useLink';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -15,14 +15,8 @@ import { stylingSettings } from './Link.styling';
  * @param userProps The props that were passed into the link
  * @returns Whether the styles that are assigned to the layer should be applied to the link
  */
-export const linkLookup = (layer: string, state: ILinkState, userProps: LinkProps): boolean => {
-  return (
-    state[layer] ||
-    userProps[layer] ||
-    layer === userProps['appearance'] ||
-    (layer === 'inline' && userProps.inline) ||
-    (layer === 'disabled' && userProps.disabled)
-  );
+export const linkLookup = (layer: string, state: LinkState, userProps: LinkProps): boolean => {
+  return state[layer] || userProps[layer] || layer === userProps['appearance'];
 };
 
 export const Link = compose<LinkType>({
@@ -38,8 +32,8 @@ export const Link = compose<LinkType>({
     const Slots = useSlots(userProps, (layer) => linkLookup(layer, link.state, userProps));
     // now return the handler for finishing render
     return (final: LinkProps, ...children: React.ReactNode[]) => {
-      // pull onPress out to let Link's Pressable deal with all press events
-      const { inline, onPress, ...mergedProps } = mergeProps(link.props, final);
+      // the event fires twice due to native's implementation of inline link
+      const { inline, ...mergedProps } = mergeProps(link.props, final);
 
       return inline || mergedProps.selectable ? (
         <Slots.content {...mergedProps}>{children}</Slots.content>
