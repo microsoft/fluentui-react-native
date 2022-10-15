@@ -6,10 +6,9 @@ import {
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
   MENU_DEFOCUS_BUTTON,
-  ExpandCollapseState,
 } from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
-import { Keys } from '../../common/consts';
+import { Keys, ExpandCollapseState, Attribute } from '../../common/consts';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -38,19 +37,19 @@ class MenuPageObject extends BasePage {
   }
 
   async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
-    return (await (await this._primaryComponent).getAttribute('ExpandCollapse.ExpandCollapseState')) as ExpandCollapseState;
+    return (await this.getElementAttribute(await this._primaryComponent, Attribute.ExpandCollapseState)) as ExpandCollapseState;
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
-    return await (await this.getMenuComponentSelector(componentSelector)).getAttribute('Name');
+    return await this.getElementAttribute(await this.getMenuComponentSelector(componentSelector), Attribute.AccessibilityLabel);
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
-    return await By(MENUPOPOVER_TEST_COMPONENT).getAttribute('ControlType');
+    return await this.getElementAttribute(await By(MENUPOPOVER_TEST_COMPONENT), Attribute.AccessibilityRole);
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return await this._secondaryComponent.getAttribute('ControlType');
+    return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityRole);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -61,8 +60,6 @@ class MenuPageObject extends BasePage {
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
     switch (menuComponentSelector) {
-      case MenuComponentSelector.PrimaryComponent:
-        return await this._primaryComponent;
       case MenuComponentSelector.SecondaryComponent:
         return await this._secondaryComponent;
       case MenuComponentSelector.TertiaryComponent:

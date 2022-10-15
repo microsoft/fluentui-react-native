@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuPageObject, { MenuComponentSelector } from '../pages/MenuPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE } from '../../common/consts';
-import { ExpandCollapseState, MENUITEM_TEST_LABEL } from '../../../TestComponents/Menu/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys, MENUITEM_A11Y_ROLE, ExpandCollapseState } from '../../common/consts';
+import { MENUITEM_TEST_LABEL } from '../../../TestComponents/Menu/consts';
 import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open

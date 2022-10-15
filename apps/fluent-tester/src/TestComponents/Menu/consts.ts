@@ -16,8 +16,3 @@ export const MENU_ON_OPEN = 'Menu_On_Open'; // For testing the open functionalit
 export const MENU_ON_CLOSE = 'Menu_On_Close'; // For testing the open functionality of Menu
 
 export const MENU_DEFOCUS_BUTTON = 'Menu_Defocus_Button'; // Used to move focus away from menu button
-
-export const enum ExpandCollapseState {
-  EXPANDED = 'Expanded',
-  COLLAPSED = 'Collapsed',
-}
