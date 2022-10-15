@@ -1,11 +1,10 @@
-import { BasePage, By } from '../../../common/BasePage';
-
-const ScrollViewTestId = 'SCROLLVIEW_TEST_ID';
+import { BasePage } from '../../../common/BasePage';
+import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../../TestComponents/Common/consts';
 
 class NativeTestingPageObject extends BasePage {
   async waitForScrollViewDisplayed(timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.doesScrollViewParentExist(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'For testing purposes we require that the root view contains a non-empty, immutable ScrollView of buttons that navigate to test pages.',
       interval: 1000,
@@ -13,14 +12,14 @@ class NativeTestingPageObject extends BasePage {
   }
 
   async doesScrollViewParentExist(): Promise<boolean> {
-    return await this._scrollViewParent.isExisting();
+    return await this._testPageButtonScrollViewer.isDisplayed();
   }
 
   /* Validate the Children of the ScrollView stay intact. The children are the buttons that
    * navigate to each test page. Also, validate these children exist with the proper testId format */
   async validateScrollViewChildren(): Promise<boolean> {
     // Gets all the children
-    const testChildren = await this._scrollViewParent.$$('//*');
+    const testChildren = await this._testPageButtonScrollViewer.$$('//*');
     let foundValidButton = false;
 
     // Ensure the testID (maps 1:1 to automationId) properties of the button children match the defined testing format
@@ -30,7 +29,7 @@ class NativeTestingPageObject extends BasePage {
     // If automationId is found in the wrong format, return false.
     for await (const child of testChildren) {
       const autoId = await child.getAttribute('AutomationId');
-      if (autoId && autoId !== ScrollViewTestId) {
+      if (autoId && autoId !== TESTPAGE_BUTTONS_SCROLLVIEWER) {
         if (autoId.match(reg)) {
           foundValidButton = true;
         } else {
@@ -41,10 +40,6 @@ class NativeTestingPageObject extends BasePage {
     }
 
     return foundValidButton;
-  }
-
-  get _scrollViewParent() {
-    return By(ScrollViewTestId);
   }
 }
 

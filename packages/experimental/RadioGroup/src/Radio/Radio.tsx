@@ -27,7 +27,9 @@ export const Radio = compose<RadioType>({
     root: View,
     button: View,
     innerCircle: View,
+    labelContent: View,
     label: Text,
+    subtext: Text,
   },
   filters: {
     button: filterViewProps,
@@ -39,14 +41,21 @@ export const Radio = compose<RadioType>({
 
     // now return the handler for finishing render
     return (final: RadioProps) => {
-      const { label, ...mergedProps } = mergeProps(radio.props, final);
+      const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
+
+      const labelComponent = (
+        <Slots.labelContent>
+          <Slots.label>{label}</Slots.label>
+          {!!subtext && <Slots.subtext>{subtext}</Slots.subtext>}
+        </Slots.labelContent>
+      );
 
       return (
         <Slots.root {...mergedProps}>
           <Slots.button>
             <Slots.innerCircle />
           </Slots.button>
-          <Slots.label>{label}</Slots.label>
+          {labelComponent}
         </Slots.root>
       );
     };

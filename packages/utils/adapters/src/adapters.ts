@@ -105,6 +105,7 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
+  disabled: true,
   onAccessibilityAction: true,
   onAccessibilityEscape: true,
   onAccessibilityTap: true,
@@ -189,8 +190,6 @@ const _imageMask: IFilterMask<IImageProps> = {
   defaultSource: true,
   blurRadius: true,
   capInsets: true,
-  width: true,
-  height: true,
   fadeDuration: true,
   nativeID: true,
 };

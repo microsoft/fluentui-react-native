@@ -4,16 +4,19 @@
  * Useful for themes which can be computationally created from a base theme.
  * For example, creating a monochromatic theme from a colorful theme, or
  * increasing contrast throuhgout a theme.
+ * @deprecated
  */
 export type IProcessTheme<TTheme, TPartialTheme> = (parentTheme: TTheme) => TPartialTheme;
 
 /**
  * Function which resolves a theme + partial theme into a new theme
+ * @deprecated
  */
 export type IResolveTheme<TTheme, TPartialTheme> = (parent: TTheme, partial?: TPartialTheme) => TTheme;
 
 /**
  * Events issued from the theme registry.
+ * @deprecated
  */
 export interface IThemeEventListener {
   /**
@@ -31,6 +34,7 @@ export interface IThemeEventListener {
 
 /**
  * A hierarchical collection of themes.
+ * @deprecated
  */
 export interface IThemeRegistry<TTheme, TPartialTheme> {
   /**

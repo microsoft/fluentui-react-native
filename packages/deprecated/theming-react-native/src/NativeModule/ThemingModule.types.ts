@@ -2,12 +2,21 @@ import { ITheme, IPartialTheme, OfficePalette as IOfficePalette } from '@uifabri
 import { IProcessTheme } from '@uifabricshared/theme-registry';
 import { PlatformDefaultsChangedCallback } from '@fluentui-react-native/win32-theme';
 
+/**
+ * @deprecated
+ */
 export interface IEventEmitter {
   addListener: (event: string, PlatformDefaultsChangedCallback) => void;
 }
 
+/**
+ * @deprecated
+ */
 export type IPlatformThemeDefinition = IPartialTheme | IProcessTheme<ITheme, IPartialTheme>;
 
+/**
+ * @deprecated
+ */
 export interface IThemingModuleHelper {
   /**
    * Gets a complete platform theme suitable for using with a Theme Registry
@@ -21,6 +30,9 @@ export interface IThemingModuleHelper {
   addListener: (listener: PlatformDefaultsChangedCallback) => void; // TODO: Should probably be able to remove
 }
 
+/**
+ * @deprecated
+ */
 export type IHostSettingsWin32 = {
   palette: IOfficePalette;
 };
