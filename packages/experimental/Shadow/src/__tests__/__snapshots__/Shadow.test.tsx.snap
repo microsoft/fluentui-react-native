@@ -5,6 +5,9 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -14,6 +17,7 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -21,12 +25,15 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
       },
       "shadowOpacity": 0.3,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -35,6 +42,8 @@ exports[`Shadow component tests Brand shadow (depth=2) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -66,6 +75,9 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -75,6 +87,7 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -82,12 +95,15 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
       },
       "shadowOpacity": 0.3,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -96,6 +112,8 @@ exports[`Shadow component tests Brand shadow (depth=4) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -127,6 +145,9 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -136,6 +157,7 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -143,12 +165,15 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
       },
       "shadowOpacity": 0.3,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -157,6 +182,8 @@ exports[`Shadow component tests Brand shadow (depth=8) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -188,6 +215,9 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -197,6 +227,7 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -204,12 +235,15 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
       },
       "shadowOpacity": 0.3,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -218,6 +252,8 @@ exports[`Shadow component tests Brand shadow (depth=16) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -249,6 +285,9 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -258,6 +297,7 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -265,12 +305,15 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
       },
       "shadowOpacity": 0.3,
       "shadowRadius": 4,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -279,6 +322,8 @@ exports[`Shadow component tests Brand shadow (depth=28) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -310,6 +355,9 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -319,6 +367,7 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -326,12 +375,15 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
       },
       "shadowOpacity": 0.3,
       "shadowRadius": 4,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -340,6 +392,8 @@ exports[`Shadow component tests Brand shadow (depth=64) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -371,6 +425,9 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -380,6 +437,7 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -387,6 +445,8 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
@@ -404,6 +464,7 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -412,6 +473,8 @@ exports[`Shadow component tests Pressable that has a shadow 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -439,6 +502,9 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -448,6 +514,7 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -455,12 +522,15 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -469,6 +539,8 @@ exports[`Shadow component tests Shadow (depth=2) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -500,6 +572,9 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -509,6 +584,7 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -516,12 +592,15 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -530,6 +609,8 @@ exports[`Shadow component tests Shadow (depth=4) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -561,6 +642,9 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -570,6 +654,7 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -577,12 +662,15 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -591,6 +679,8 @@ exports[`Shadow component tests Shadow (depth=8) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -622,6 +712,9 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -631,6 +724,7 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -638,12 +732,15 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -652,6 +749,8 @@ exports[`Shadow component tests Shadow (depth=16) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -683,6 +782,9 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -692,6 +794,7 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -699,12 +802,15 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
       },
       "shadowOpacity": 0.2,
       "shadowRadius": 4,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -713,6 +819,8 @@ exports[`Shadow component tests Shadow (depth=28) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -744,6 +852,9 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -753,6 +864,7 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -760,12 +872,15 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
       },
       "shadowOpacity": 0.2,
       "shadowRadius": 4,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -774,6 +889,8 @@ exports[`Shadow component tests Shadow (depth=64) 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -806,6 +923,9 @@ exports[`Shadow component tests Shadow on a child with border radius 1`] = `
     Object {
       "backgroundColor": "red",
       "borderRadius": 2,
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -815,6 +935,7 @@ exports[`Shadow component tests Shadow on a child with border radius 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -822,12 +943,15 @@ exports[`Shadow component tests Shadow on a child with border radius 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -837,6 +961,8 @@ exports[`Shadow component tests Shadow on a child with border radius 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -868,6 +994,9 @@ exports[`Shadow component tests Shadow on a child with border width 1`] = `
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": undefined,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -877,6 +1006,7 @@ exports[`Shadow component tests Shadow on a child with border width 1`] = `
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -884,12 +1014,15 @@ exports[`Shadow component tests Shadow on a child with border width 1`] = `
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -898,6 +1031,8 @@ exports[`Shadow component tests Shadow on a child with border width 1`] = `
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": 2,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": undefined,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
@@ -929,6 +1064,9 @@ exports[`Shadow component tests Shadow on a child with margin and padding 1`] = 
   style={
     Object {
       "backgroundColor": "red",
+      "bottom": undefined,
+      "end": undefined,
+      "left": undefined,
       "margin": 2,
       "marginBottom": undefined,
       "marginEnd": undefined,
@@ -938,6 +1076,7 @@ exports[`Shadow component tests Shadow on a child with margin and padding 1`] = 
       "marginStart": undefined,
       "marginTop": undefined,
       "marginVertical": undefined,
+      "right": undefined,
       "shadowColor": "#000000",
       "shadowOffset": Object {
         "height": 0,
@@ -945,12 +1084,15 @@ exports[`Shadow component tests Shadow on a child with margin and padding 1`] = 
       },
       "shadowOpacity": 0.12,
       "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": undefined,
         "backgroundColor": "red",
         "borderBottomWidth": undefined,
         "borderEndWidth": undefined,
@@ -959,6 +1101,8 @@ exports[`Shadow component tests Shadow on a child with margin and padding 1`] = 
         "borderStartWidth": undefined,
         "borderTopWidth": undefined,
         "borderWidth": undefined,
+        "flexDirection": undefined,
+        "flexWrap": undefined,
         "padding": 2,
         "paddingBottom": undefined,
         "paddingEnd": undefined,

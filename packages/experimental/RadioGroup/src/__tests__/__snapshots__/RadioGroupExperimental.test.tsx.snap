@@ -3,7 +3,12 @@
 exports[`RadioGroup component tests RadioGroup default 1`] = `
 <View
   accessibilityRole="radiogroup"
-  accessible={true}
+  accessibilityState={
+    Object {
+      "disabled": false,
+      "required": false,
+    }
+  }
   style={
     Object {
       "alignItems": "flex-start",

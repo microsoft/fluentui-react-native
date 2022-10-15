@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.26.19",
+  "version": "0.27.11",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -31,22 +31,22 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.97.1",
+    "@fluentui-react-native/tester": "^0.101.7",
     "react": "17.0.2",
-    "react-native": "^0.66.0",
-    "react-native-svg": "^12.3.0",
+    "react-native": "^0.68.0",
+    "react-native-svg": "12.3.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@office-iss/react-native-win32": "^0.66.6",
-    "@office-iss/rex-win32": "0.66.17-devmain.15229.10000",
-    "@rnx-kit/cli": "^0.9.57",
-    "@rnx-kit/metro-config": "^1.2.26",
+    "@office-iss/react-native-win32": ">=0.68.0 <0.68.6",
+    "@office-iss/rex-win32": "0.68.15-devmain.15717.10000",
+    "@rnx-kit/cli": "^0.14.8",
+    "@rnx-kit/metro-config": "^1.3.1",
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
-    "@types/react-native": "^0.66.0",
+    "@types/react-native": "^0.68.0",
     "@wdio/allure-reporter": "7.23.0",
     "@wdio/appium-service": "7.23.0",
     "@wdio/cli": "7.23.0",
@@ -56,8 +56,8 @@
     "allure-commandline": "2.13.0",
     "appium": "2.0.0-beta.41",
     "appium-windows-driver": "2.0.7",
-    "metro-config": "^0.66.2",
-    "metro-react-native-babel-preset": "^0.66.2",
+    "metro-config": "^0.67.0",
+    "metro-react-native-babel-preset": "^0.67.0",
     "react-native-svg-transformer": "^1.0.0",
     "react-test-renderer": "17.0.2",
     "ts-node": "^8.10.1",
@@ -69,25 +69,33 @@
     "preset": "react-native"
   },
   "rnx-kit": {
-    "reactNativeVersion": "0.66",
+    "reactNativeVersion": "0.68",
     "kitType": "app",
-    "bundle": {
-      "targets": [
-        "win32"
-      ],
-      "entryPath": "index.js",
-      "detectCyclicDependencies": {
-        "throwOnError": true
-      },
-      "detectDuplicateDependencies": {
-        "throwOnError": false
-      },
-      "typescriptValidation": false
-    },
+    "bundle": [
+      {
+        "id": "main",
+        "entryFile": "index.js",
+        "bundleOutput": "dist/index.win32.bundle",
+        "sourcemapOutput": "dist/index.win32.bundle.map",
+        "assetsDest": "dist",
+        "targets": [
+          "win32"
+        ],
+        "detectCyclicDependencies": {
+          "throwOnError": true
+        },
+        "detectDuplicateDependencies": {
+          "throwOnError": false
+        },
+        "typescriptValidation": false
+      }
+    ],
     "capabilities": [
       "core",
       "react",
-      "svg"
+      "svg",
+      "metro-config",
+      "babel-preset-react-native"
     ]
   }
 }
