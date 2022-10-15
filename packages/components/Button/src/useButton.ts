@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { getAccessibilityState, usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { ButtonProps, ButtonInfo } from './Button.types';
 
 export const useButton = (props: ButtonProps): ButtonInfo => {
