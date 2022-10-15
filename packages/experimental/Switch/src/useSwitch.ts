@@ -26,9 +26,8 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     ...rest
   } = props;
 
-  const isDisabled = !!disabled;
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
-  const focusRef = isDisabled ? null : componentRef;
+  const focusRef = disabled ? null : componentRef;
 
   if (__DEV__ && defaultChecked !== undefined && checked !== undefined) {
     console.warn("The props 'defaultChecked' and 'checked' are mutually exclusive. Use only one of the props, do not use both.");
@@ -45,7 +44,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   }
 
   const onClickWithFocus = useOnPressWithFocus(focusRef, toggleCallback);
-  const pressable = usePressableState({ ...rest, disabled: isDisabled, onPress: onClickWithFocus });
+  const pressable = usePressableState({ ...rest, onPress: onClickWithFocus });
   const onKeyUpProps = useKeyProps(toggleCallback, ' ', 'Enter');
 
   const accessibilityActionsProp = accessibilityActions
@@ -71,8 +70,8 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       accessibilityRole: accessibilityRole ?? 'switch',
       accessibilityActions: accessibilityActionsProp,
       onAccessibilityAction: onAccessibilityActionProp,
-      accessibilityState: getAccessibilityState(checkedState, isDisabled, accessibilityState),
-      focusable: !isDisabled,
+      accessibilityState: getAccessibilityState(checkedState, disabled, accessibilityState),
+      focusable: !disabled,
       ref: useViewCommandFocus(componentRef),
       checked: checkedState,
       labelPosition: labelPosition ?? 'after',

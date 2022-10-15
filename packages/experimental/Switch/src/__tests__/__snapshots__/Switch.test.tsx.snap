@@ -14,7 +14,7 @@ exports[`Switch Default 1`] = `
   accessibilityState={
     Object {
       "checked": undefined,
-      "disabled": false,
+      "disabled": undefined,
     }
   }
   accessible={true}
@@ -24,8 +24,6 @@ exports[`Switch Default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -127,8 +125,6 @@ exports[`Switch Disabled 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
