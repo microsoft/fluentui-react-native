@@ -82,11 +82,11 @@ function convertRoundedRectToSvgPath(
    *              'h 14 ' +
    *              'a 5 3 0 0 1 5 3' +
    *              'v 6 ' +
-   *              'a -5 3 0 0 1 -5 3' +
+   *              'a 5 3 0 0 1 -5 3' +
    *              'h -14 ' +
-   *              'a -5 -3 0 0 1 -5 -3' +
+   *              'a 5 3 0 0 1 -5 -3' +
    *              'v -6 ' +
-   *              'a 5 -3 0 0 1 5 -3 Z';
+   *              'a 5 3 0 0 1 5 -3 Z';
    */
 
   // We start at the left-most point of the top edge.
@@ -122,7 +122,7 @@ function convertRoundedRectToSvgPath(
   /**
    * Draw the arc for the bottom-right corner.
    */
-  path = path.concat(['a', -borderRadiusX, borderRadiusY, xAxisRotation, largeArcFlag, sweepArcFlag, -borderRadiusX, borderRadiusY]);
+  path = path.concat(['a', borderRadiusX, borderRadiusY, xAxisRotation, largeArcFlag, sweepArcFlag, -borderRadiusX, borderRadiusY]);
 
   /**
    * Draw to the left-most point of the bottom edge.
@@ -132,7 +132,7 @@ function convertRoundedRectToSvgPath(
   /**
    * Draw the bottom-left corner.
    */
-  path = path.concat(['a', -borderRadiusX, -borderRadiusY, xAxisRotation, largeArcFlag, sweepArcFlag, -borderRadiusX, -borderRadiusY]);
+  path = path.concat(['a', borderRadiusX, borderRadiusY, xAxisRotation, largeArcFlag, sweepArcFlag, -borderRadiusX, -borderRadiusY]);
 
   /**
    * Draw to the top-most point of the left edge.
@@ -142,7 +142,7 @@ function convertRoundedRectToSvgPath(
   /**
    * Draw the top-left corner.
    */
-  path = path.concat(['a', borderRadiusX, -borderRadiusY, xAxisRotation, largeArcFlag, sweepArcFlag, borderRadiusX, -borderRadiusY]);
+  path = path.concat(['a', borderRadiusX, borderRadiusY, xAxisRotation, largeArcFlag, sweepArcFlag, borderRadiusX, -borderRadiusY]);
 
   /**
    * Finally, close the shape.  While we have manually returned to the same coordinate we started with, closing and not-closing the shape

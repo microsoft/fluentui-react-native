@@ -7,6 +7,7 @@ let _registry: ThemeRegistry;
 /**
  * Ensure that `_registry` is set. If not, create it using a native module to
  * provide platform defaults.
+ * @deprecated
  */
 export function getThemeRegistry(): ThemeRegistry {
   if (!_registry) {
@@ -24,6 +25,7 @@ export function getThemeRegistry(): ThemeRegistry {
  * The react tree may contain <ThemeLayer> controls which are tightly bound to
  * `_registry`. Changing `_registry` while the app is running will disrupt
  * theming, causing undefined behavior.
+ * @deprecated
  */
 export function setThemeRegistry(registry: ThemeRegistry): void {
   _registry = registry;
@@ -34,6 +36,7 @@ export function setThemeRegistry(registry: ThemeRegistry): void {
  * @param definition - partial theme definition or processing function that defines the theme
  * @param name - name of the theme, undefined or '' for default
  * @param parent - parent theme to depend on, if unspecified this will pull from the default theme
+ * @deprecated
  */
 export function setTheme(definition: IPartialTheme | IProcessTheme<ITheme, IPartialTheme>, name?: string, parent?: string): void {
   return getThemeRegistry().setTheme(definition, name, parent);
@@ -42,6 +45,7 @@ export function setTheme(definition: IPartialTheme | IProcessTheme<ITheme, IPart
 /**
  * Register a theme event listener
  * @param listener - theme event listener to add
+ * @deprecated
  */
 export function addThemeRegistryListener(listener: IThemeEventListener): void {
   return getThemeRegistry().addEventListener(listener);
@@ -50,6 +54,7 @@ export function addThemeRegistryListener(listener: IThemeEventListener): void {
 /**
  * Unregister a theme event listener
  * @param listener - theme event listener to remove
+ * @deprecated
  */
 export function removeThemeRegistryListener(listener: IThemeEventListener): void {
   return getThemeRegistry().removeEventListener(listener);
@@ -58,6 +63,7 @@ export function removeThemeRegistryListener(listener: IThemeEventListener): void
 /**
  * Get a theme by name
  * @param name - name of the theme.  Undefined or '' will resolve to the default theme
+ * @deprecated
  */
 export function getTheme(name?: string): ITheme {
   return getThemeRegistry().getTheme(name);
@@ -69,6 +75,7 @@ export function getTheme(name?: string): ITheme {
  *
  * @param definition - properties to add to the platform theme.  Note that this will invalidate every theme and cause rerenders
  * if this is not done in the boot sequence.
+ * @deprecated
  */
 export function augmentPlatformTheme(definition: IPartialTheme): void {
   getThemeRegistry().updatePlatformDefaults(definition);

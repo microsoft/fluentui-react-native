@@ -2,9 +2,11 @@ import * as React from 'react';
 import { RadioGroupInfo, RadioGroupProps, RadioGroupState } from './RadioGroup.types';
 import { useSelectedKey as useValue } from '@fluentui-react-native/interactive-hooks';
 import { View } from 'react-native';
+import { memoize } from '@fluentui-react-native/framework';
+import { AccessibilityState } from 'react-native';
 
 export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
-  const { value, defaultValue, onChange, isCircularNavigation, accessibilityLabel, label } = props;
+  const { value, defaultValue, disabled, required, onChange, isCircularNavigation, accessibilityLabel, label, accessibilityState } = props;
 
   // This hook updates the selected Radio and calls the customer's onClick function. This gets called after a button is pressed.
   const data = useValue(value || defaultValue || null, onChange);
@@ -20,6 +22,8 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
 
   const state: RadioGroupState = {
     value: data.selectedKey,
+    required: required || false,
+    disabled: disabled || false,
     onChange: data.onKeySelect,
     updateSelectedButtonRef: onSelectButtonRef,
   };
@@ -27,9 +31,10 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
   return {
     props: {
       ...props,
-      accessible: true,
+      required,
       accessibilityRole: 'radiogroup',
       accessibilityLabel: accessibilityLabel ?? label,
+      accessibilityState: getAccessibilityState(state.disabled, state.required, accessibilityState),
       defaultTabbableElement: selectedButtonRef,
       isCircularNavigation: isCircularNavigation ?? true,
     },
@@ -38,3 +43,11 @@ export const useRadioGroup = (props: RadioGroupProps): RadioGroupInfo => {
     },
   };
 };
+
+const getAccessibilityState = memoize(getAccessibilityStateWorker);
+function getAccessibilityStateWorker(disabled: boolean, required: boolean, accessibilityState?: AccessibilityState) {
+  if (accessibilityState) {
+    return { disabled, required, ...accessibilityState };
+  }
+  return { disabled, required };
+}

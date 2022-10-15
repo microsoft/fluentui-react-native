@@ -1,5 +1,7 @@
 *.binlog
+*.bundle
 *.hprof
+*.jsbundle
 *.xcworkspace/
 *.zip
 .DS_Store

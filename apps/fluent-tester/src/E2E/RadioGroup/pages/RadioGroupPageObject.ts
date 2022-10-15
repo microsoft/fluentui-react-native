@@ -49,7 +49,7 @@ class RadioGroupPage extends BasePage {
 
   async waitForRadioButtonSelected(radioButtonSelector: RadioButtonSelector, timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.isRadioButtonSelected(radioButtonSelector), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'RadioButton was not selected correctly.',
       interval: 1000,
     });

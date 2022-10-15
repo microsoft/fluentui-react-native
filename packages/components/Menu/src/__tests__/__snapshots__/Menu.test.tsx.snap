@@ -7,12 +7,11 @@ exports[`Checkbox component tests Menu default 1`] = `
   accessibilityRole="button"
   accessibilityState={
     Object {
-      "disabled": false,
       "expanded": false,
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityAction={[Function]}
@@ -20,9 +19,6 @@ exports[`Checkbox component tests Menu default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={false}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -77,12 +73,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -90,9 +85,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -162,7 +154,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -197,7 +189,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -213,7 +205,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -252,7 +244,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -269,7 +261,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#bdbdbd",
+                "color": "#323130",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -295,12 +287,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -308,9 +299,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -386,7 +374,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -421,7 +409,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -437,7 +425,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -463,12 +451,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -476,9 +463,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -554,7 +538,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -597,7 +581,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -612,7 +596,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -635,7 +619,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -665,7 +649,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -724,7 +708,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -740,7 +724,6 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-4342339}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -763,7 +746,6 @@ Array [
                 },
               ]
             }
-            tintColor={-4342339}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -793,7 +775,6 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#bdbdbd",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -819,12 +800,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -832,9 +812,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -910,7 +887,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -953,7 +930,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -968,7 +945,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -991,7 +968,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1021,7 +998,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1080,7 +1057,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1096,7 +1073,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1119,7 +1096,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1149,7 +1126,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1175,12 +1152,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -1188,9 +1164,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1266,7 +1239,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -1309,7 +1282,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1324,7 +1297,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1347,7 +1320,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1377,7 +1350,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1436,7 +1409,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1452,7 +1425,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1475,7 +1448,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1505,7 +1478,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1531,12 +1504,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -1544,9 +1516,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1622,7 +1591,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -1665,7 +1634,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1680,7 +1649,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1703,7 +1672,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1733,7 +1702,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1780,7 +1749,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1796,7 +1765,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1819,7 +1788,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1849,7 +1818,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -1875,12 +1844,11 @@ Array [
     accessibilityRole="button"
     accessibilityState={
       Object {
-        "disabled": false,
         "expanded": true,
       }
     }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     onAccessibilityAction={[Function]}
@@ -1888,9 +1856,6 @@ Array [
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={false}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1966,7 +1931,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#ffffff",
+            "backgroundColor": "#000000",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -2001,7 +1966,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -2017,7 +1982,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -2059,7 +2024,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#ffffff",
+              "backgroundColor": "#000000",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -2075,7 +2040,7 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#424242",
+                "color": "#616161",
                 "flexGrow": 1,
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
@@ -2090,7 +2055,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-12434878}
+            color={-10395295}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -2109,7 +2074,7 @@ Array [
                 },
               ]
             }
-            tintColor={-12434878}
+            tintColor={-10395295}
             vbHeight={16}
             vbWidth={16}
             width={16}

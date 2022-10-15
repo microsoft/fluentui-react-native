@@ -34,11 +34,17 @@ function ensurePalette(module: OfficeThemingModule, paletteCache: PaletteCache, 
   return paletteCache[key] || ({} as OfficePalette);
 }
 
+/**
+ * @deprecated
+ */
 export function translateOfficeTheme(module: OfficeThemingModule, cache: PaletteCache, id?: string, themeName?: string) {
   const palette = ensurePalette(module, cache, id);
   return createPartialOfficeTheme(module, themeName, palette);
 }
 
+/**
+ * @deprecated
+ */
 export function createThemingModuleHelper(themingModule?: OfficeThemingModule, emitter?: IEventEmitter): IThemingModuleHelper {
   themingModule || console.error('No NativeModule for Theming found');
   const paletteCache: PaletteCache = {};

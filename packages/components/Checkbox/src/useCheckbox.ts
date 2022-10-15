@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {
-  useAsPressable,
+  usePressableState,
   useKeyProps,
   useOnPressWithFocus,
   useViewCommandFocus,
   useAsToggleWithEvent,
 } from '@fluentui-react-native/interactive-hooks';
 import { CheckboxProps, CheckboxInfo, CheckboxState } from './Checkbox.types';
-import { IPressableProps } from '@fluentui-react-native/pressable';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityActionEvent, AccessibilityState } from 'react-native';
 
@@ -53,7 +52,7 @@ export const useCheckbox = (props: CheckboxProps): CheckboxInfo => {
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleChecked);
 
   // attach the pressable state handlers
-  const pressable = useAsPressable({ onPress: toggleCheckedWithFocus, ...(rest as IPressableProps) });
+  const pressable = usePressableState({ onPress: toggleCheckedWithFocus, ...rest });
 
   const buttonRef = useViewCommandFocus(componentRef);
 

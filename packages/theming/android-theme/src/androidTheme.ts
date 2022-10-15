@@ -34,7 +34,6 @@ export const androidComponents = {
   },
 };
 
-// mocked out
 const androidShadows = {
   shadow2: {
     ambient: { x: 0, y: 0, blur: 2, color: '#0000001f' },
