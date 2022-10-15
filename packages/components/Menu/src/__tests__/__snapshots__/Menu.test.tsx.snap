@@ -178,8 +178,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -233,8 +231,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -398,8 +394,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -570,8 +564,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -697,8 +689,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -919,8 +909,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1046,8 +1034,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1271,8 +1257,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1398,8 +1382,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1623,8 +1605,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1738,8 +1718,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1955,8 +1933,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2013,8 +1989,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
