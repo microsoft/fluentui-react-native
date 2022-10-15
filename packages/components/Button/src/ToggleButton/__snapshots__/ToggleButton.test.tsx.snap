@@ -14,21 +14,29 @@ exports[`ToggleButton default 1`] = `
   accessibilityState={
     Object {
       "checked": undefined,
-      "disabled": false,
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onFocus={[Function]}
+<<<<<<< HEAD
   onHoverIn={[Function]}
   onHoverOut={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+=======
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>>>>>>> master
   style={
     Object {
       "alignItems": "center",

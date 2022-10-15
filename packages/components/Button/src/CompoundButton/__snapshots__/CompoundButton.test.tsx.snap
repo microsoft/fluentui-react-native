@@ -4,22 +4,26 @@ exports[`CompoundButton default 1`] = `
 <View
   accessibilityLabel="Default Button sublabel"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onFocus={[Function]}
+<<<<<<< HEAD
   onHoverIn={[Function]}
   onHoverOut={[Function]}
   onPress={[Function]}
   onPressIn={[Function]}
   onPressOut={[Function]}
+=======
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>>>>>>> master
   style={
     Object {
       "alignItems": "center",

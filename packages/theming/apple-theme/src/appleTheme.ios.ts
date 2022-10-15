@@ -131,20 +131,13 @@ const appleComponents = {
   },
 };
 
-export const BaseAppleLightThemeIOS: Theme = {
-  colors: paletteFromAppleColors(false),
-  typography: appleTypography(),
-  shadows: iOSShadows(),
-  spacing: appleSpacing(),
-  components: appleComponents,
-  host: { appearance: 'light' },
-};
-
-export const BaseAppleDarkThemeIOS: Theme = {
-  colors: paletteFromAppleColors(true),
-  typography: appleTypography(),
-  shadows: iOSShadows(),
-  spacing: appleSpacing(),
-  components: appleComponents,
-  host: { appearance: 'dark' },
-};
+export function getBaseAppleThemeIOS(isLightMode: boolean): Theme {
+  return {
+    colors: paletteFromAppleColors(isLightMode),
+    typography: appleTypography(),
+    shadows: iOSShadows(),
+    spacing: appleSpacing(),
+    components: appleComponents,
+    host: { appearance: isLightMode ? 'light' : 'dark' },
+  };
+}

@@ -1,5 +1,6 @@
 import { Keys } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
+import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
@@ -36,17 +37,17 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return await this._primaryComponent.getAttribute('ControlType');
+    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return await this._primaryComponent.getAttribute('Name');
+        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
 
       case ComponentSelector.Secondary:
-        return await this._secondaryComponent.getAttribute('Name');
+        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
     }
   }
 
@@ -64,6 +65,10 @@ export class BasePage {
 
   async clickComponent(): Promise<void> {
     await this._primaryComponent.click();
+  }
+
+  async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
+    return await element.getAttribute(attribute);
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.

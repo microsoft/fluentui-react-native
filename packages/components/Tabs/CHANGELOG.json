@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/tabs",
   "entries": [
     {
+      "date": "Fri, 14 Oct 2022 19:11:13 GMT",
+      "tag": "@fluentui-react-native/tabs_v0.7.23",
+      "version": "0.7.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.3",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.22",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.16",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.14",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/text to v0.15.7",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.5",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tabs",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.12",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/tabs_v0.7.22",
       "version": "0.7.22",

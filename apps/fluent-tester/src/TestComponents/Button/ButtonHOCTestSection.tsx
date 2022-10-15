@@ -2,7 +2,7 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import TestSvg from './test.svg';
 import { InteractionEvent, isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
@@ -12,7 +12,7 @@ const CustomButton = Button.customize({ backgroundColor: 'pink' });
 const CustomIconButton = Button.customize({ iconColor: 'yellow' });
 const ComposedButton = Button.compose({
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: CustomText,
   },
