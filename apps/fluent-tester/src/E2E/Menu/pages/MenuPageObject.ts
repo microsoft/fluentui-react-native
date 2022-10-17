@@ -3,12 +3,12 @@ import {
   MENUTRIGGER_TEST_COMPONENT,
   MENUITEM_NO_A11Y_LABEL_COMPONENT,
   HOMEPAGE_MENU_BUTTON,
-  MENU_ON_OPEN,
-  MENU_ON_CLOSE,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
+  MENU_DEFOCUS_BUTTON,
 } from '../../../TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
+import { Keys, ExpandCollapseState, Attribute } from '../../common/consts';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
@@ -23,46 +23,33 @@ class MenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didMenuOpen(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_OPEN);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
+    await browser.waitUntil(async () => await this.menuIsExpanded(), {
       timeout: this.waitForUiEvent,
       timeoutMsg: 'The Menu did not open.',
       interval: 1000,
     });
 
-    return await callbackText.isDisplayed();
+    return await this.menuIsExpanded();
   }
 
-  async didMenuClose(): Promise<boolean> {
-    const callbackText = await By(MENU_ON_CLOSE);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The Menu did not close.',
-      interval: 1000,
-    });
+  async menuIsExpanded(): Promise<boolean> {
+    return await (await this._secondaryComponent).isDisplayed();
+  }
 
-    return await callbackText.isDisplayed();
+  async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
+    return (await this.getElementAttribute(await this._primaryComponent, Attribute.ExpandCollapseState)) as ExpandCollapseState;
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
-    switch (componentSelector) {
-      case MenuComponentSelector.PrimaryComponent:
-        return await this._primaryComponent.getAttribute('Name');
-
-      case MenuComponentSelector.SecondaryComponent:
-        return await this._secondaryComponent.getAttribute('Name');
-
-      case MenuComponentSelector.TertiaryComponent:
-        return await this._tertiaryComponent.getAttribute('Name');
-    }
+    return await this.getElementAttribute(await this.getMenuComponentSelector(componentSelector), Attribute.AccessibilityLabel);
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
-    return await By(MENUPOPOVER_TEST_COMPONENT).getAttribute('ControlType');
+    return await this.getElementAttribute(await By(MENUPOPOVER_TEST_COMPONENT), Attribute.AccessibilityRole);
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return await this._secondaryComponent.getAttribute('ControlType');
+    return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityRole);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -72,10 +59,22 @@ class MenuPageObject extends BasePage {
 
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
-    if (menuComponentSelector == MenuComponentSelector.PrimaryComponent) {
-      return await this._primaryComponent;
+    switch (menuComponentSelector) {
+      case MenuComponentSelector.SecondaryComponent:
+        return await this._secondaryComponent;
+      case MenuComponentSelector.TertiaryComponent:
+        return await this._tertiaryComponent;
+      default:
+        return await this._primaryComponent;
     }
-    return await this._primaryComponent;
+  }
+
+  async resetTest() {
+    // Both escape on the menu trigger to hard dismiss menu and click defocus to reset focus
+    if (await this.menuIsExpanded()) {
+      await this.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
+      await (await this._defocusButton).click();
+    }
   }
 
   /*****************************************/
@@ -103,6 +102,10 @@ class MenuPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_MENU_BUTTON);
+  }
+
+  get _defocusButton() {
+    return By(MENU_DEFOCUS_BUTTON);
   }
 }
 

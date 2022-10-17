@@ -49,7 +49,7 @@ exports[`Checkbox component tests Menu default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 14,
         "fontWeight": "600",
         "margin": 0,
@@ -115,7 +115,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -154,7 +154,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -187,7 +187,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -203,9 +203,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -240,7 +240,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -257,9 +257,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#323130",
+                "color": "#bdbdbd",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -325,7 +325,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -370,7 +370,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -403,7 +403,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -419,9 +419,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -487,7 +487,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -532,7 +532,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -573,7 +573,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -588,7 +588,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -611,7 +611,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -641,9 +641,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -698,7 +698,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -714,6 +714,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
+            color={4290624957}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -736,6 +737,7 @@ Array [
                 },
               ]
             }
+            tintColor={4290624957}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -765,8 +767,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
+                "color": "#bdbdbd",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -832,7 +835,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -877,7 +880,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -918,7 +921,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -933,7 +936,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -956,7 +959,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -986,9 +989,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1043,7 +1046,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1059,7 +1062,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1082,7 +1085,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1112,9 +1115,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1180,7 +1183,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -1225,7 +1228,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -1266,7 +1269,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1281,7 +1284,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1304,7 +1307,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1334,9 +1337,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1391,7 +1394,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1407,7 +1410,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1430,7 +1433,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1460,9 +1463,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1528,7 +1531,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -1573,7 +1576,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -1614,7 +1617,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1629,7 +1632,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1652,7 +1655,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1682,9 +1685,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1727,7 +1730,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1743,7 +1746,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1766,7 +1769,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1796,9 +1799,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1864,7 +1867,7 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 14,
           "fontWeight": "600",
           "margin": 0,
@@ -1909,7 +1912,7 @@ Array [
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
@@ -1942,7 +1945,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -1958,9 +1961,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -1998,7 +2001,7 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -2014,9 +2017,9 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
+                "fontFamily": "System",
                 "fontSize": 14,
                 "fontWeight": "400",
                 "margin": 0,
@@ -2029,7 +2032,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -2048,7 +2051,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
