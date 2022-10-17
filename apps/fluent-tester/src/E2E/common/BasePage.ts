@@ -3,29 +3,37 @@ import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/const
 import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
+const PLATFORM = process.env['E2ETEST_PLATFORM'];
+if (PLATFORM) {
+  console.log(`Using platform: ${PLATFORM}`);
+}
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 let _rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
+  switch (PLATFORM) {
+    case Platform.Win32:
+      return await QueryWithChaining(identifier);
+    default:
+      return await $('~' + identifier);
+  }
+}
+
+async function QueryWithChaining(identifier) {
   if (_rootView === null) {
     // Most of the elements we're searching for will be children of this _rootView node.
     _rootView = await $('~' + ROOT_VIEW);
   }
   const selector = '~' + identifier;
-  if (_rootView.error) {
-    // fallback if _rootView is not available (bug with UWP?)
-    return await $(selector);
-  } else {
-    let queryResult: WebdriverIO.Element;
-    queryResult = await _rootView.$(selector);
-    if (queryResult.error) {
-      // In some cases, such as opened ContextualMenu items, the element nodes are not children of the _rootView node, meaning we need to start our search from the top of the tree.
-      queryResult = await $(selector);
-    }
-    return queryResult;
+  let queryResult: WebdriverIO.Element;
+  queryResult = await _rootView.$(selector);
+  if (queryResult.error) {
+    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the _rootView node, meaning we need to start our search from the top of the tree.
+    queryResult = await $(selector);
   }
+  return queryResult;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -55,9 +63,8 @@ export class BasePage {
   private platform?: Platform;
 
   constructor() {
-    if (process.env.E2ETEST_PLATFORM) {
-      this.platform = process.env.E2ETEST_PLATFORM as Platform;
-      console.log(`Using platform: ${this.platform}`);
+    if (PLATFORM) {
+      this.platform = PLATFORM as Platform;
     }
   }
   /******************************************************************/
@@ -100,7 +107,7 @@ export class BasePage {
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
-  async scrollToComponentButton(platform: Platform): Promise<void> {
+  async scrollToComponentButton(): Promise<void> {
     if (await (await this._pageButton).isDisplayed()) {
       return;
     }
@@ -108,7 +115,7 @@ export class BasePage {
     const errorMsg =
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
-    switch (platform) {
+    switch (this.platform) {
       case Platform.Windows:
       case Platform.Win32: {
         const scrollDownKeys = [Keys.PAGE_DOWN];

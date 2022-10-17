@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalCheckboxPageObject, { ExperimentalCheckboxSelector } from '../pages/ExperimentalCheckboxPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import {
   EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
   EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
@@ -15,7 +15,7 @@ describe('Experimental Checkbox Testing Initialization', () => {
 
   it('Click and navigate to Experimental Checkbox test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await ExperimentalCheckboxPageObject.scrollToComponentButton(Platform.Win32);
+    await ExperimentalCheckboxPageObject.scrollToComponentButton();
     await ExperimentalCheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', function () {
@@ -12,7 +11,7 @@ describe('Callout Testing Initialization', function () {
 
   it('Click and navigate to Callout test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await CalloutPageObject.scrollToComponentButton(Platform.Win32);
+    await CalloutPageObject.scrollToComponentButton();
     await CalloutPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

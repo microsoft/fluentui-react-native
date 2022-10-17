@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalCheckboxPageObject from '../pages/ExperimentalCheckboxPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 describe('Experimental Checkbox Testing Initialization', () => {
   it('Wait for app load', async () => {
@@ -10,7 +9,7 @@ describe('Experimental Checkbox Testing Initialization', () => {
   });
 
   it('Click and navigate to Experimental Checkbox test page', async () => {
-    await ExperimentalCheckboxPageObject.scrollToComponentButton(Platform.iOS);
+    await ExperimentalCheckboxPageObject.scrollToComponentButton();
     await ExperimentalCheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ActivityIndicatorPageObject from '../pages/ActivityIndicatorPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Activity Indicator Testing Initialization', function () {
@@ -11,7 +10,7 @@ describe('Activity Indicator Testing Initialization', function () {
   });
 
   it('Click and navigate to Activity Indicator test page', async () => {
-    await ActivityIndicatorPageObject.scrollToComponentButton(Platform.Win32);
+    await ActivityIndicatorPageObject.scrollToComponentButton();
     await ActivityIndicatorPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

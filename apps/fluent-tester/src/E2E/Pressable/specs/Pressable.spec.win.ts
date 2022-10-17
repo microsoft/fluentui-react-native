@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import PressablePageObject from '../pages/PressablePageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Pressable Testing Initialization', function () {
@@ -12,7 +11,7 @@ describe('Pressable Testing Initialization', function () {
 
   it('Click and navigate to Pressable test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await PressablePageObject.scrollToComponentButton(Platform.Win32);
+    await PressablePageObject.scrollToComponentButton();
     await PressablePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
