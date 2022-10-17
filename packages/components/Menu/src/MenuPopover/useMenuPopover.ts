@@ -3,7 +3,6 @@ import { I18nManager, Platform } from 'react-native';
 import { DirectionalHint, DismissBehaviors } from '@fluentui-react-native/callout';
 import { useMenuContext } from '../context/menuContext';
 import { MenuPopoverProps, MenuPopoverState } from './MenuPopover.types';
-import { isCloseOnHoverOutEnabled } from '../consts';
 
 const controlledDismissBehaviors = ['preventDismissOnKeyDown', 'preventDismissOnClickOutside'] as DismissBehaviors[];
 
@@ -71,7 +70,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     },
     innerView: {
       onMouseEnter,
-      onMouseLeave: isCloseOnHoverOutEnabled && onMouseLeave,
+      onMouseLeave: onMouseLeave,
       accessible: shouldFocusOnContainer,
       focusable: canFocusOnPopover,
       onBlur,
