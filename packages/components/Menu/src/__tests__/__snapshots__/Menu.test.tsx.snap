@@ -149,7 +149,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -365,7 +365,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -527,7 +527,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -875,7 +875,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1223,7 +1223,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1571,7 +1571,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1907,7 +1907,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={

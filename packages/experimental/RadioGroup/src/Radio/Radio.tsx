@@ -9,15 +9,15 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
+ * A function which determines if a set of styles should be applied to the compoent given the current state and props of the Radio.
  *
  * @param layer The name of the state that is being checked for
- * @param state The current state of the button
- * @param props The props that were passed into the Radio
- * @returns Whether the styles that are assigned to the layer should be applied to the button
+ * @param state The current state of the Radio
+ * @param userProps The props that were passed into the Radio
+ * @returns Whether the styles that are assigned to the layer should be applied to the Radio
  */
-export const radioLookup = (layer: string, state: IPressableState, props: RadioProps): boolean => {
-  return state[layer] || props[layer];
+export const radioLookup = (layer: string, state: IPressableState, userProps: RadioProps): boolean => {
+  return state[layer] || userProps[layer] || (layer === 'labelPositionBelow' && userProps['labelPosition'] === 'below');
 };
 
 export const Radio = compose<RadioType>({

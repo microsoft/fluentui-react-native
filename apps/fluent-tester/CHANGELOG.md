@@ -1,8 +1,33 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Oct 2022 22:34:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.102.1
+
+Mon, 17 Oct 2022 22:34:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/menu to v1.0.52
+
+## 0.102.0
+
+Mon, 17 Oct 2022 21:25:05 GMT
+
+### Minor changes
+
+- Added layout tests to test page (gulnazsayed@microsoft.com)
+- Bump @fluentui-react-native/experimental-radio-group to v0.7.0
+
+## 0.101.9
+
+Mon, 17 Oct 2022 19:16:05 GMT
+
+### Patches
+
+- Re-enable and rewrite parts of menu e2etest (winlarry@microsoft.com)
 
 ## 0.101.8
 

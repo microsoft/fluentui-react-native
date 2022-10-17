@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Oct 2022 22:34:22 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.52
+
+Mon, 17 Oct 2022 22:34:22 GMT
+
+### Patches
+
+- Remove isCloseOnHoverOutEnabled (sanajmi@microsoft.com)
 
 ## 1.0.51
 
