@@ -32,7 +32,7 @@ const radioGroupExperimentalSections: TestSection[] = [
     name: 'Other Layouts',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: HorizontalRadioGroup,
-},
+  },
 ];
 
 export const RadioGroupExperimentalTest: React.FunctionComponent = () => {
