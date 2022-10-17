@@ -220,6 +220,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   accessibilityRole="radiogroup"
   accessible={true}
   defaultValue="key2"
+  
   style={
     Object {
       "alignItems": "flex-start",
@@ -228,6 +229,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
     }
   }
 >
+
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
@@ -422,6 +424,11 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         RadioButton2
       </Text>
     </View>
+
+  <RCTFocusZone
+    navigateAtEnd="NavigateWrap"
+  >
+    Your component
   </RCTFocusZone>
 </View>
 `;

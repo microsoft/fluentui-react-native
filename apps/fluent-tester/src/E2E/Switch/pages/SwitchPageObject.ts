@@ -24,7 +24,7 @@ class SwitchPageObject extends BasePage {
 
   async waitForSwitchChecked(timeout?: number): Promise<void> {
     browser.waitUntil(async () => await this.isSwitchChecked(), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'The Switch was not toggled correctly',
       interval: 1000,
     });
@@ -39,7 +39,7 @@ class SwitchPageObject extends BasePage {
   async didOnChangeCallbackFire(): Promise<boolean> {
     const callbackText = await By(SWITCH_ON_PRESS);
     browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForPageTimeout,
+      timeout: this.waitForUiEvent,
       timeoutMsg: 'The OnChange callback did not fire.',
       interval: 1000,
     });

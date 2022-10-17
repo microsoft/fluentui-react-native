@@ -1,8 +1,79 @@
 # Change Log - @fluentui-react-native/default-theme
 
-This log was last generated on Wed, 21 Sep 2022 21:00:40 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.5
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- test updates (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.20.0
+
+## 0.16.4
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.19.6
+- Bump @fluentui-react-native/theme-types to v0.22.0
+- Bump @fluentui-react-native/theme to v0.7.6
+- Bump @fluentui-react-native/theming-utils to v0.16.2
+
+## 0.16.3
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.19.5
+- Bump @fluentui-react-native/theme-types to v0.21.0
+- Bump @fluentui-react-native/theme to v0.7.5
+- Bump @fluentui-react-native/theming-utils to v0.16.1
+
+## 0.16.2
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.19.4
+
+## 0.16.1
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.19.3
+
+## 0.16.0
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Minor changes
+
+- Used alias tokens from theme-tokens pacakge (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.19.2
+- Bump @fluentui-react-native/theme-types to v0.20.0
+- Bump @fluentui-react-native/theme to v0.7.4
+- Bump @fluentui-react-native/theming-utils to v0.16.0
+
+## 0.15.3
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.19.1
+- Bump @fluentui-react-native/theme-types to v0.19.2
+- Bump @fluentui-react-native/theme to v0.7.3
+- Bump @fluentui-react-native/theming-utils to v0.15.3
 
 ## 0.15.2
 

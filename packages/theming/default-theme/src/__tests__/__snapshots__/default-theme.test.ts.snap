@@ -121,508 +121,508 @@ Object {
 exports[`createColorAliasTokens test appearanceOptions - highContrast 1`] = `
 Object {
   "brandBackground": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonFaceColor",
     ],
   },
   "brandBackground2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonFaceColor",
     ],
   },
   "brandBackgroundDisabled": undefined,
   "brandBackgroundHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "brandBackgroundPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "brandBackgroundSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "brandBackgroundStatic": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "brandForeground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "brandForeground1Disabled": undefined,
   "brandForeground1Pressed": undefined,
   "brandForeground2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonTextColor",
     ],
   },
   "brandForegroundLink": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "brandForegroundLinkHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "brandForegroundLinkPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "brandForegroundLinkSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "brandStroke1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "brandStroke2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "compoundBrandBackground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandBackground1Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandBackground1Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandForeground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandForeground1Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandForeground1Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandStroke1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "compoundBrandStroke1Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "compoundBrandStroke1Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackground1Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground1Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground1Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackground2Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground2Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground2Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground3": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackground3Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground3Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground3Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground4": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackground4Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground4Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground4Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground5": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackground5Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground5Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground5Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralBackground6": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackgroundDisabled": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralBackgroundInverted": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralForeground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralForeground1Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground1Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground1Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralForeground2BrandHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground2BrandPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground2BrandSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground2Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground2Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground2Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground3": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralForeground3BrandHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground3BrandPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground3BrandSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground3Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground3Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground3Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForeground4": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralForegroundDisabled": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorGrayTextColor",
     ],
   },
   "neutralForegroundInverted": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "neutralForegroundInvertedLink": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "neutralForegroundInvertedLinkHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "neutralForegroundInvertedLinkPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "neutralForegroundInvertedLinkSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHotlightColor",
     ],
   },
   "neutralForegroundOnBrand": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonTextColor",
     ],
   },
   "neutralForegroundOnBrandHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForegroundOnBrandPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralForegroundOnBrandSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightTextColor",
     ],
   },
   "neutralStencil1": "#141414",
   "neutralStencil2": "#858585",
   "neutralStroke1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralStroke1Hover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralStroke1Pressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralStroke1Selected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralStroke2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralStroke3": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralStrokeAccessible": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "neutralStrokeAccessibleHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralStrokeAccessiblePressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralStrokeAccessibleSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "neutralStrokeDisabled": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorGrayTextColor",
     ],
   },
   "redBackground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonFaceColor",
     ],
   },
   "redBackground2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "redBackground3": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonFaceColor",
     ],
   },
   "redBorder1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "redBorder2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "redBorderActive": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "redForeground1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonTextColor",
     ],
   },
   "redForeground2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "redForeground3": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorButtonFaceColor",
     ],
   },
   "strokeFocus1": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowColor",
     ],
   },
   "strokeFocus2": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "subtleBackground": "transparent",
   "subtleBackgroundHover": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "subtleBackgroundPressed": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
   "subtleBackgroundSelected": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
@@ -631,17 +631,17 @@ Object {
   "transparentBackgroundPressed": "transparent",
   "transparentBackgroundSelected": "transparent",
   "transparentStroke": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorWindowTextColor",
     ],
   },
   "transparentStrokeDisabled": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorGrayTextColor",
     ],
   },
   "transparentStrokeInteractive": Object {
-    "resource_paths": Array [
+    "semantic": Array [
       "SystemColorHighlightColor",
     ],
   },
@@ -798,8 +798,8 @@ Object {
     "brandForegroundLinkSelected": "#2899f5",
     "brandStroke1": "#2899f5",
     "brandStroke2": "#004c87",
-    "brandedBackground": "#2b88d8",
-    "brandedBorder": "#deecf9",
+    "brandedBackground": "#2899f5",
+    "brandedBorder": "#6cb8f6",
     "brandedCheckedBackground": "#484644",
     "brandedCheckedContent": "#faf9f8",
     "brandedCheckedHoveredBackground": "#292827",
@@ -809,18 +809,18 @@ Object {
     "brandedDisabledBorder": "#252423",
     "brandedDisabledContent": "#3b3a39",
     "brandedDisabledIcon": "#3b3a39",
-    "brandedFocusedBackground": "#c7e0f4",
+    "brandedFocusedBackground": "#3aa0f3",
     "brandedFocusedBorder": "#82c7ff",
     "brandedFocusedContent": "#1b1a19",
     "brandedFocusedIcon": "#1b1a19",
     "brandedFocusedSecondaryContent": "#201f1e",
-    "brandedHoveredBackground": "#c7e0f4",
+    "brandedHoveredBackground": "#3aa0f3",
     "brandedHoveredBorder": "#82c7ff",
     "brandedHoveredContent": "#1b1a19",
     "brandedHoveredIcon": "#1b1a19",
     "brandedHoveredSecondaryContent": "#201f1e",
     "brandedIcon": "#1b1a19",
-    "brandedPressedBackground": "#deecf9",
+    "brandedPressedBackground": "#6cb8f6",
     "brandedPressedBorder": "#82c7ff",
     "brandedPressedContent": "#1b1a19",
     "brandedPressedIcon": "#1b1a19",
@@ -841,7 +841,7 @@ Object {
     "buttonTextDisabled": "#797775",
     "buttonTextHovered": "#f3f2f1",
     "buttonTextPressed": "#faf9f8",
-    "checkboxBackground": "#2b88d8",
+    "checkboxBackground": "#2899f5",
     "checkboxBackgroundDisabled": "#252423",
     "checkboxBorderColor": "#979693",
     "checkmarkColor": "#1b1a19",
@@ -920,18 +920,18 @@ Object {
     "ghostPressedSecondaryContent": "#a19f9d",
     "ghostSecondaryContent": "#a19f9d",
     "inputBackground": "#1b1a19",
-    "inputBackgroundChecked": "#2b88d8",
-    "inputBackgroundCheckedHovered": "#c7e0f4",
+    "inputBackgroundChecked": "#2899f5",
+    "inputBackgroundCheckedHovered": "#3aa0f3",
     "inputBorder": "#797775",
     "inputBorderHovered": "#f3f2f1",
-    "inputFocusBorderAlt": "#2b88d8",
+    "inputFocusBorderAlt": "#2899f5",
     "inputForegroundChecked": "#1b1a19",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
     "inputTextHovered": "#faf9f8",
-    "link": "#2b88d8",
+    "link": "#2899f5",
     "linkHovered": "#82c7ff",
-    "linkPressed": "#deecf9",
+    "linkPressed": "#6cb8f6",
     "listBackground": "#1b1a19",
     "listHeaderBackgroundHovered": "#252423",
     "listHeaderBackgroundPressed": "#292827",
@@ -942,7 +942,7 @@ Object {
     "menuBackground": "#252423",
     "menuDivider": "#484644",
     "menuHeader": "#ffffff",
-    "menuIcon": "#c7e0f4",
+    "menuIcon": "#3aa0f3",
     "menuItemBackgroundHovered": "#323130",
     "menuItemBackgroundPressed": "#3b3a39",
     "menuItemText": "#f3f2f1",
@@ -1012,12 +1012,12 @@ Object {
     "neutralStrokeAccessiblePressed": "#b3b3b3",
     "neutralStrokeAccessibleSelected": "#3aa0f3",
     "neutralStrokeDisabled": "#424242",
-    "personaActivityGlow": "#2b88d8",
+    "personaActivityGlow": "#2899f5",
     "personaActivityRing": "#1b1a19",
-    "primaryButtonBackground": "#2b88d8",
+    "primaryButtonBackground": "#2899f5",
     "primaryButtonBackgroundDisabled": "#252423",
-    "primaryButtonBackgroundHovered": "#c7e0f4",
-    "primaryButtonBackgroundPressed": "#deecf9",
+    "primaryButtonBackgroundHovered": "#3aa0f3",
+    "primaryButtonBackgroundPressed": "#6cb8f6",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#1b1a19",
@@ -1240,9 +1240,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {
@@ -1426,8 +1426,8 @@ Object {
     "brandForegroundLinkSelected": "#2899f5",
     "brandStroke1": "#2899f5",
     "brandStroke2": "#004c87",
-    "brandedBackground": "#2b88d8",
-    "brandedBorder": "#deecf9",
+    "brandedBackground": "#2899f5",
+    "brandedBorder": "#6cb8f6",
     "brandedCheckedBackground": "#484644",
     "brandedCheckedContent": "#faf9f8",
     "brandedCheckedHoveredBackground": "#292827",
@@ -1437,18 +1437,18 @@ Object {
     "brandedDisabledBorder": "#252423",
     "brandedDisabledContent": "#3b3a39",
     "brandedDisabledIcon": "#3b3a39",
-    "brandedFocusedBackground": "#c7e0f4",
+    "brandedFocusedBackground": "#3aa0f3",
     "brandedFocusedBorder": "#82c7ff",
     "brandedFocusedContent": "#1b1a19",
     "brandedFocusedIcon": "#1b1a19",
     "brandedFocusedSecondaryContent": "#201f1e",
-    "brandedHoveredBackground": "#c7e0f4",
+    "brandedHoveredBackground": "#3aa0f3",
     "brandedHoveredBorder": "#82c7ff",
     "brandedHoveredContent": "#1b1a19",
     "brandedHoveredIcon": "#1b1a19",
     "brandedHoveredSecondaryContent": "#201f1e",
     "brandedIcon": "#1b1a19",
-    "brandedPressedBackground": "#deecf9",
+    "brandedPressedBackground": "#6cb8f6",
     "brandedPressedBorder": "#82c7ff",
     "brandedPressedContent": "#1b1a19",
     "brandedPressedIcon": "#1b1a19",
@@ -1469,7 +1469,7 @@ Object {
     "buttonTextDisabled": "#797775",
     "buttonTextHovered": "#f3f2f1",
     "buttonTextPressed": "#faf9f8",
-    "checkboxBackground": "#2b88d8",
+    "checkboxBackground": "#2899f5",
     "checkboxBackgroundDisabled": "#252423",
     "checkboxBorderColor": "#979693",
     "checkmarkColor": "#1b1a19",
@@ -1548,18 +1548,18 @@ Object {
     "ghostPressedSecondaryContent": "#a19f9d",
     "ghostSecondaryContent": "#a19f9d",
     "inputBackground": "#1b1a19",
-    "inputBackgroundChecked": "#2b88d8",
-    "inputBackgroundCheckedHovered": "#c7e0f4",
+    "inputBackgroundChecked": "#2899f5",
+    "inputBackgroundCheckedHovered": "#3aa0f3",
     "inputBorder": "#797775",
     "inputBorderHovered": "#f3f2f1",
-    "inputFocusBorderAlt": "#2b88d8",
+    "inputFocusBorderAlt": "#2899f5",
     "inputForegroundChecked": "#1b1a19",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
     "inputTextHovered": "#faf9f8",
-    "link": "#2b88d8",
+    "link": "#2899f5",
     "linkHovered": "#82c7ff",
-    "linkPressed": "#deecf9",
+    "linkPressed": "#6cb8f6",
     "listBackground": "#1b1a19",
     "listHeaderBackgroundHovered": "#252423",
     "listHeaderBackgroundPressed": "#292827",
@@ -1570,7 +1570,7 @@ Object {
     "menuBackground": "#252423",
     "menuDivider": "#484644",
     "menuHeader": "#ffffff",
-    "menuIcon": "#c7e0f4",
+    "menuIcon": "#3aa0f3",
     "menuItemBackgroundHovered": "#323130",
     "menuItemBackgroundPressed": "#3b3a39",
     "menuItemText": "#f3f2f1",
@@ -1640,12 +1640,12 @@ Object {
     "neutralStrokeAccessiblePressed": "#b3b3b3",
     "neutralStrokeAccessibleSelected": "#3aa0f3",
     "neutralStrokeDisabled": "#424242",
-    "personaActivityGlow": "#2b88d8",
+    "personaActivityGlow": "#2899f5",
     "personaActivityRing": "#1b1a19",
-    "primaryButtonBackground": "#2b88d8",
+    "primaryButtonBackground": "#2899f5",
     "primaryButtonBackgroundDisabled": "#252423",
-    "primaryButtonBackgroundHovered": "#c7e0f4",
-    "primaryButtonBackgroundPressed": "#deecf9",
+    "primaryButtonBackgroundHovered": "#3aa0f3",
+    "primaryButtonBackgroundPressed": "#6cb8f6",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#1b1a19",
@@ -1868,9 +1868,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {
@@ -2038,75 +2038,75 @@ Object {
     "bodyText": "#ffffff",
     "bodyTextChecked": "#000000",
     "brandBackground": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonFaceColor",
       ],
     },
     "brandBackground2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonFaceColor",
       ],
     },
     "brandBackgroundDisabled": undefined,
     "brandBackgroundHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "brandBackgroundPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "brandBackgroundSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "brandBackgroundStatic": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "brandForeground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "brandForeground1Disabled": undefined,
     "brandForeground1Pressed": undefined,
     "brandForeground2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonTextColor",
       ],
     },
     "brandForegroundLink": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "brandForegroundLinkHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "brandForegroundLinkPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "brandForegroundLinkSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "brandStroke1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "brandStroke2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
@@ -2158,47 +2158,47 @@ Object {
     "checkboxBorderColor": "#ffffff",
     "checkmarkColor": "#ffffff",
     "compoundBrandBackground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandBackground1Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandBackground1Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandForeground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandForeground1Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandForeground1Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandStroke1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "compoundBrandStroke1Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "compoundBrandStroke1Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
@@ -2296,319 +2296,319 @@ Object {
     "menuItemText": "#ffffff",
     "menuItemTextHovered": "#000000",
     "neutralBackground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackground1Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground1Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground1Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackground2Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground2Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground2Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground3": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackground3Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground3Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground3Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground4": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackground4Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground4Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground4Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground5": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackground5Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground5Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground5Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralBackground6": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackgroundDisabled": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralBackgroundInverted": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralForeground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralForeground1Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground1Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground1Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralForeground2BrandHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground2BrandPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground2BrandSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground2Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground2Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground2Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground3": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralForeground3BrandHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground3BrandPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground3BrandSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground3Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground3Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground3Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForeground4": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralForegroundDisabled": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorGrayTextColor",
       ],
     },
     "neutralForegroundInverted": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "neutralForegroundInvertedLink": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "neutralForegroundInvertedLinkHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "neutralForegroundInvertedLinkPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "neutralForegroundInvertedLinkSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHotlightColor",
       ],
     },
     "neutralForegroundOnBrand": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonTextColor",
       ],
     },
     "neutralForegroundOnBrandHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForegroundOnBrandPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralForegroundOnBrandSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightTextColor",
       ],
     },
     "neutralStencil1": "#141414",
     "neutralStencil2": "#858585",
     "neutralStroke1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralStroke1Hover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralStroke1Pressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralStroke1Selected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralStroke2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralStroke3": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralStrokeAccessible": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "neutralStrokeAccessibleHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralStrokeAccessiblePressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralStrokeAccessibleSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "neutralStrokeDisabled": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorGrayTextColor",
       ],
     },
@@ -2625,75 +2625,75 @@ Object {
     "primaryButtonTextHovered": "#000000",
     "primaryButtonTextPressed": "#000000",
     "redBackground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonFaceColor",
       ],
     },
     "redBackground2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "redBackground3": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonFaceColor",
       ],
     },
     "redBorder1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "redBorder2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "redBorderActive": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "redForeground1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonTextColor",
       ],
     },
     "redForeground2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "redForeground3": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorButtonFaceColor",
       ],
     },
     "smallInputBorder": "#ffffff",
     "strokeFocus1": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowColor",
       ],
     },
     "strokeFocus2": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "subText": "#ffffff",
     "subtleBackground": "transparent",
     "subtleBackgroundHover": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "subtleBackgroundPressed": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
     "subtleBackgroundSelected": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
@@ -2703,17 +2703,17 @@ Object {
     "transparentBackgroundPressed": "transparent",
     "transparentBackgroundSelected": "transparent",
     "transparentStroke": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorWindowTextColor",
       ],
     },
     "transparentStrokeDisabled": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorGrayTextColor",
       ],
     },
     "transparentStrokeInteractive": Object {
-      "resource_paths": Array [
+      "semantic": Array [
         "SystemColorHighlightColor",
       ],
     },
@@ -2908,9 +2908,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {
@@ -3106,18 +3106,18 @@ Object {
     "brandedDisabledContent": "#d2d0ce",
     "brandedDisabledIcon": "#d2d0ce",
     "brandedFocusedBackground": "#106ebe",
-    "brandedFocusedBorder": undefined,
+    "brandedFocusedBorder": "#004578",
     "brandedFocusedContent": "#ffffff",
     "brandedFocusedIcon": "#ffffff",
     "brandedFocusedSecondaryContent": "#faf9f8",
     "brandedHoveredBackground": "#106ebe",
-    "brandedHoveredBorder": undefined,
+    "brandedHoveredBorder": "#004578",
     "brandedHoveredContent": "#ffffff",
     "brandedHoveredIcon": "#ffffff",
     "brandedHoveredSecondaryContent": "#faf9f8",
     "brandedIcon": "#ffffff",
     "brandedPressedBackground": "#005a9e",
-    "brandedPressedBorder": undefined,
+    "brandedPressedBorder": "#004578",
     "brandedPressedContent": "#ffffff",
     "brandedPressedIcon": "#ffffff",
     "brandedPressedSecondaryContent": "#faf9f8",
@@ -3226,7 +3226,7 @@ Object {
     "inputText": "#323130",
     "inputTextHovered": "#201f1e",
     "link": "#0078d4",
-    "linkHovered": undefined,
+    "linkHovered": "#004578",
     "linkPressed": "#005a9e",
     "listBackground": "#ffffff",
     "listHeaderBackgroundHovered": "#f3f2f1",
@@ -3536,9 +3536,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {
@@ -3734,18 +3734,18 @@ Object {
     "brandedDisabledContent": "#d2d0ce",
     "brandedDisabledIcon": "#d2d0ce",
     "brandedFocusedBackground": "#106ebe",
-    "brandedFocusedBorder": undefined,
+    "brandedFocusedBorder": "#004578",
     "brandedFocusedContent": "#ffffff",
     "brandedFocusedIcon": "#ffffff",
     "brandedFocusedSecondaryContent": "#faf9f8",
     "brandedHoveredBackground": "#106ebe",
-    "brandedHoveredBorder": undefined,
+    "brandedHoveredBorder": "#004578",
     "brandedHoveredContent": "#ffffff",
     "brandedHoveredIcon": "#ffffff",
     "brandedHoveredSecondaryContent": "#faf9f8",
     "brandedIcon": "#ffffff",
     "brandedPressedBackground": "#005a9e",
-    "brandedPressedBorder": undefined,
+    "brandedPressedBorder": "#004578",
     "brandedPressedContent": "#ffffff",
     "brandedPressedIcon": "#ffffff",
     "brandedPressedSecondaryContent": "#faf9f8",
@@ -3854,7 +3854,7 @@ Object {
     "inputText": "#323130",
     "inputTextHovered": "#201f1e",
     "link": "#0078d4",
-    "linkHovered": undefined,
+    "linkHovered": "#004578",
     "linkPressed": "#005a9e",
     "listBackground": "#ffffff",
     "listHeaderBackgroundHovered": "#f3f2f1",
@@ -4164,9 +4164,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {
@@ -4869,8 +4869,8 @@ Object {
     "brandForegroundLinkSelected": "#2899f5",
     "brandStroke1": "#2899f5",
     "brandStroke2": "#004c87",
-    "brandedBackground": "#2b88d8",
-    "brandedBorder": "#deecf9",
+    "brandedBackground": "#2899f5",
+    "brandedBorder": "#6cb8f6",
     "brandedCheckedBackground": "#484644",
     "brandedCheckedContent": "#faf9f8",
     "brandedCheckedHoveredBackground": "#292827",
@@ -4880,18 +4880,18 @@ Object {
     "brandedDisabledBorder": "#252423",
     "brandedDisabledContent": "#3b3a39",
     "brandedDisabledIcon": "#3b3a39",
-    "brandedFocusedBackground": "#c7e0f4",
+    "brandedFocusedBackground": "#3aa0f3",
     "brandedFocusedBorder": "#82c7ff",
     "brandedFocusedContent": "#1b1a19",
     "brandedFocusedIcon": "#1b1a19",
     "brandedFocusedSecondaryContent": "#201f1e",
-    "brandedHoveredBackground": "#c7e0f4",
+    "brandedHoveredBackground": "#3aa0f3",
     "brandedHoveredBorder": "#82c7ff",
     "brandedHoveredContent": "#1b1a19",
     "brandedHoveredIcon": "#1b1a19",
     "brandedHoveredSecondaryContent": "#201f1e",
     "brandedIcon": "#1b1a19",
-    "brandedPressedBackground": "#deecf9",
+    "brandedPressedBackground": "#6cb8f6",
     "brandedPressedBorder": "#82c7ff",
     "brandedPressedContent": "#1b1a19",
     "brandedPressedIcon": "#1b1a19",
@@ -4912,7 +4912,7 @@ Object {
     "buttonTextDisabled": "#797775",
     "buttonTextHovered": "#f3f2f1",
     "buttonTextPressed": "#faf9f8",
-    "checkboxBackground": "#2b88d8",
+    "checkboxBackground": "#2899f5",
     "checkboxBackgroundDisabled": "#252423",
     "checkboxBorderColor": "#979693",
     "checkmarkColor": "#1b1a19",
@@ -4991,18 +4991,18 @@ Object {
     "ghostPressedSecondaryContent": "#a19f9d",
     "ghostSecondaryContent": "#a19f9d",
     "inputBackground": "#1b1a19",
-    "inputBackgroundChecked": "#2b88d8",
-    "inputBackgroundCheckedHovered": "#c7e0f4",
+    "inputBackgroundChecked": "#2899f5",
+    "inputBackgroundCheckedHovered": "#3aa0f3",
     "inputBorder": "#797775",
     "inputBorderHovered": "#f3f2f1",
-    "inputFocusBorderAlt": "#2b88d8",
+    "inputFocusBorderAlt": "#2899f5",
     "inputForegroundChecked": "#1b1a19",
     "inputPlaceholderText": "#a19f9d",
     "inputText": "#f3f2f1",
     "inputTextHovered": "#faf9f8",
-    "link": "#2b88d8",
+    "link": "#2899f5",
     "linkHovered": "#82c7ff",
-    "linkPressed": "#deecf9",
+    "linkPressed": "#6cb8f6",
     "listBackground": "#1b1a19",
     "listHeaderBackgroundHovered": "#252423",
     "listHeaderBackgroundPressed": "#292827",
@@ -5013,7 +5013,7 @@ Object {
     "menuBackground": "#252423",
     "menuDivider": "#484644",
     "menuHeader": "#ffffff",
-    "menuIcon": "#c7e0f4",
+    "menuIcon": "#3aa0f3",
     "menuItemBackgroundHovered": "#323130",
     "menuItemBackgroundPressed": "#3b3a39",
     "menuItemText": "#f3f2f1",
@@ -5083,12 +5083,12 @@ Object {
     "neutralStrokeAccessiblePressed": "#b3b3b3",
     "neutralStrokeAccessibleSelected": "#3aa0f3",
     "neutralStrokeDisabled": "#424242",
-    "personaActivityGlow": "#2b88d8",
+    "personaActivityGlow": "#2899f5",
     "personaActivityRing": "#1b1a19",
-    "primaryButtonBackground": "#2b88d8",
+    "primaryButtonBackground": "#2899f5",
     "primaryButtonBackgroundDisabled": "#252423",
-    "primaryButtonBackgroundHovered": "#c7e0f4",
-    "primaryButtonBackgroundPressed": "#deecf9",
+    "primaryButtonBackgroundHovered": "#3aa0f3",
+    "primaryButtonBackgroundPressed": "#6cb8f6",
     "primaryButtonBorder": "transparent",
     "primaryButtonBorderFocused": "transparent",
     "primaryButtonText": "#1b1a19",
@@ -5311,9 +5311,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {
@@ -5509,18 +5509,18 @@ Object {
     "brandedDisabledContent": "#d2d0ce",
     "brandedDisabledIcon": "#d2d0ce",
     "brandedFocusedBackground": "#106ebe",
-    "brandedFocusedBorder": undefined,
+    "brandedFocusedBorder": "#004578",
     "brandedFocusedContent": "#ffffff",
     "brandedFocusedIcon": "#ffffff",
     "brandedFocusedSecondaryContent": "#faf9f8",
     "brandedHoveredBackground": "#106ebe",
-    "brandedHoveredBorder": undefined,
+    "brandedHoveredBorder": "#004578",
     "brandedHoveredContent": "#ffffff",
     "brandedHoveredIcon": "#ffffff",
     "brandedHoveredSecondaryContent": "#faf9f8",
     "brandedIcon": "#ffffff",
     "brandedPressedBackground": "#005a9e",
-    "brandedPressedBorder": undefined,
+    "brandedPressedBorder": "#004578",
     "brandedPressedContent": "#ffffff",
     "brandedPressedIcon": "#ffffff",
     "brandedPressedSecondaryContent": "#faf9f8",
@@ -5629,7 +5629,7 @@ Object {
     "inputText": "#323130",
     "inputTextHovered": "#201f1e",
     "link": "#0078d4",
-    "linkHovered": undefined,
+    "linkHovered": "#004578",
     "linkPressed": "#005a9e",
     "listBackground": "#ffffff",
     "listHeaderBackgroundHovered": "#f3f2f1",
@@ -5939,9 +5939,9 @@ Object {
     "families": Object {
       "cursive": "System",
       "monospace": "System",
-      "primary": "Segoe UI",
+      "primary": "System",
       "sansSerif": "System",
-      "secondary": "Segoe UI",
+      "secondary": "System",
       "serif": "System",
     },
     "sizes": Object {

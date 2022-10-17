@@ -11,6 +11,7 @@ import { ButtonSizeTest } from './ButtonSizeTestSection';
 import { ButtonShapeTest } from './ButtonShapeTestSection';
 import { E2EButtonExperimentalTest } from './E2EButtonTest';
 import { ButtonHOCTest } from '../Button/ButtonHOCTestSection';
+import { Platform } from 'react-native';
 
 const buttonSections: TestSection[] = [
   {
@@ -26,10 +27,13 @@ const buttonSections: TestSection[] = [
     name: 'Icon Button',
     component: ButtonIconTest,
   },
-  {
-    name: 'Toggle Button',
-    component: ToggleButtonTest,
-  },
+  Platform.select({
+    android: null, //Toggle Button is not implemented for Android
+    default: {
+      name: 'Toggle Button',
+      component: ToggleButtonTest,
+    },
+  }),
   {
     name: 'Sizes',
     component: ButtonSizeTest,

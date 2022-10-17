@@ -30,7 +30,7 @@ export function configureJest(customConfig?: object): object {
       },
 
       // ignore our own packages in node_modules
-      transformIgnorePatterns: Object.keys(pkgInfo).map(pkg => '/node_modules/' + pkg),
+      transformIgnorePatterns: Object.keys(pkgInfo).map((pkg) => '/node_modules/' + pkg),
 
       // testRegex for which files to consider test files
       testRegex: '(/__tests__/.*|\\.(test|spec))\\.(ts|tsx)$',

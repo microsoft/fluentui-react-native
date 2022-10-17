@@ -54,7 +54,7 @@ exports[`Text component tests Text default 1`] = `
     Object {
       "color": "#323130",
       "fontFamily": "Segoe UI",
-      "fontSize": 12,
+      "fontSize": 13,
       "fontStyle": undefined,
       "fontWeight": "400",
       "letterSpacing": undefined,
@@ -77,7 +77,7 @@ exports[`Text component tests Text variants render correctly with style 1`] = `
     Object {
       "color": "blue",
       "fontFamily": "Segoe UI",
-      "fontSize": 40,
+      "fontSize": 60,
       "fontWeight": "600",
       "margin": 0,
       "marginBottom": 8,
