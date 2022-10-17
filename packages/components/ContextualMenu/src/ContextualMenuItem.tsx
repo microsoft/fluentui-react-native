@@ -114,6 +114,7 @@ export const ContextualMenuItem = compose<ContextualMenuItemType>({
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
         onAccessibilityTap: onAccTap,
+        disabled,
         focusable: !disabled,
         testID,
         ...rest,

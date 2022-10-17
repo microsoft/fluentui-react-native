@@ -54,7 +54,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
     [disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
   );
 
-  const pressable = usePressableState({ ...rest, disabled, onPress: onInvoke });
+  const pressable = usePressableState({ ...rest, onPress: onInvoke });
   const itemRef = useViewCommandFocus(componentRef);
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
@@ -70,6 +70,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
+      disabled,
       enableFocusRing: Platform.select({
         macos: false,
         default: !pressable.state.hovered, // win32

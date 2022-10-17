@@ -74,7 +74,7 @@ export const useMenuCheckboxInteraction = (
   // Ensure focus is placed on checkbox after click
   const toggleCheckedWithFocus = useOnPressWithFocus(componentRef, toggleCallback);
 
-  const pressable = usePressableState({ ...rest, disabled, onPress: toggleCheckedWithFocus });
+  const pressable = usePressableState({ ...rest, onPress: toggleCheckedWithFocus });
   const buttonRef = useViewCommandFocus(componentRef);
 
   const onKeysPressed = React.useCallback(
@@ -117,8 +117,8 @@ export const useMenuCheckboxInteraction = (
 
   const state = {
     ...pressable.state,
-    disabled: !!props.disabled,
     checked: isChecked,
+    disabled,
   };
 
   return {
@@ -129,6 +129,7 @@ export const useMenuCheckboxInteraction = (
       accessibilityLabel,
       accessibilityRole: 'menuitem',
       accessibilityState: getAccessibilityState(disabled, state.checked, accessibilityState),
+      disabled,
       enableFocusRing: Platform.select({
         macos: false,
         default: !pressable.state.hovered, // win32

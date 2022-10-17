@@ -160,6 +160,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
         accessibilityRole: 'menuitem',
         accessibilityState: { disabled: state.disabled, selected: state.selected },
         accessibilityValue: { text: itemKey },
+        disabled,
         focusable: !disabled,
         onAccessibilityTap: onAccTap,
         ...rest,
