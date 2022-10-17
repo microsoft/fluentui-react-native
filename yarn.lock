@@ -78,9 +78,9 @@
     source-map-support "0.5.21"
 
 "@appium/support@^2.55.3", "@appium/support@^2.57.0", "@appium/support@^2.59.3", "@appium/support@^2.60.0":
-  version "2.61.0"
-  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.61.0.tgz#11b4335a3ce3c4d264d04183acecbf7c4ff1c435"
-  integrity sha512-xHsmB3hpw7IushPjfPFgI3xW1kD+f211hDCWQkKoxcv64oK3F5rqvKPzFfJQLYZi8uFewdfC2cyL7ApVdOeN0Q==
+  version "2.61.1"
+  resolved "https://registry.yarnpkg.com/@appium/support/-/support-2.61.1.tgz#d68b71ba8cf7b7e1940acedc52d2ced659232611"
+  integrity sha512-+KNWsyLaQ0sY2UfXLukFHv0fi7dJbkpWeF/j9rUNppwafStXX/pNQAEreexf2GJpleaeFOqUu2nYQ4T8jEZARA==
   dependencies:
     "@appium/types" "^0.5.0"
     "@colors/colors" "1.5.0"
@@ -131,7 +131,7 @@
     rimraf "3.0.2"
     sanitize-filename "1.6.3"
     semver "7.3.8"
-    shell-quote "1.7.3"
+    shell-quote "1.7.4"
     source-map-support "0.5.21"
     supports-color "8.1.1"
     teen_process "2.0.2"
@@ -3403,9 +3403,9 @@
   integrity sha512-EEhsLsD6UsDM1yFhAvy0Cjr6VwmpMWqFBCb9w07wVugF7w9nfajxLuVmngTIpgS6svCnm6Vaw+MZhoDCKnOfsw==
 
 "@types/react-native@^0.68.0":
-  version "0.68.7"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.7.tgz#24f7d56cd405831e131da3b5b323d02a53256b19"
-  integrity sha512-icGr0/iTPLsvIrUoLvu5uluDFBMZEir+DbwgrHnvazO3fJv1C/kpZZLGplQ3noYyDLjuBynwOUgoaZpGyFI4Iw==
+  version "0.68.8"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.68.8.tgz#0490862b7b294b681ca0f281b202ade82bc68b54"
+  integrity sha512-jyPLeAiKhAIBIeY6ZICoxKkg4SHQaA+nhXfYFW7QxeiGf70sY1nVOj/2tWUbbvUGqE2FKc4NuOqVDCqT0EcUJw==
   dependencies:
     "@types/react" "^17"
 
@@ -12920,7 +12920,7 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-shell-quote@1.7.3, shell-quote@^1.4.3, shell-quote@^1.6.1, shell-quote@^1.7.3:
+shell-quote@1.7.3, shell-quote@1.7.4, shell-quote@^1.4.3, shell-quote@^1.6.1, shell-quote@^1.7.3:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/shell-quote/-/shell-quote-1.7.3.tgz#aa40edac170445b9a431e17bb62c0b881b9c4123"
   integrity sha512-Vpfqwm4EnqGdlsBFNmHhxhElJYrdfcxPThu+ryKS5J8L/fhAwLazFZtq+S+TWZ9ANj2piSQLGj6NQg+lKPmxrw==
