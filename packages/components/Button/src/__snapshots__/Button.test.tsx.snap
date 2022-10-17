@@ -9,21 +9,14 @@ exports[`Button component tests Button circular 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   shape="circular"
   style={
     Object {
@@ -74,21 +67,14 @@ exports[`Button component tests Button composed 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   style={
     Object {
       "alignItems": "center",
@@ -137,21 +123,14 @@ exports[`Button component tests Button customized 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   style={
     Object {
       "alignItems": "center",
@@ -201,21 +180,14 @@ exports[`Button component tests Button default 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   style={
     Object {
       "alignItems": "center",
@@ -327,21 +299,14 @@ exports[`Button component tests Button large 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   size="large"
   style={
     Object {
@@ -393,21 +358,14 @@ exports[`Button component tests Button primary 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   style={
     Object {
       "alignItems": "center",
@@ -457,21 +415,14 @@ exports[`Button component tests Button small 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   size="small"
   style={
     Object {
@@ -522,21 +473,14 @@ exports[`Button component tests Button square 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   shape="square"
   style={
     Object {
@@ -588,21 +532,14 @@ exports[`Button component tests Button subtle 1`] = `
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-<<<<<<< HEAD
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
-=======
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
   onResponderTerminate={[Function]}
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
->>>>>>> master
   style={
     Object {
       "alignItems": "center",
