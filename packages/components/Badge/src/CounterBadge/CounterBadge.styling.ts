@@ -7,10 +7,12 @@ import { badgeStates, getBadgePosition } from '../Badge.styling';
 import { counterBadgeTokens } from './CounterBadgeTokens';
 
 export const counterBadgeStates: (keyof CounterBadgeTokens)[] = [...badgeStates, 'dot'];
+const tokensThatAreAlsoProps: (keyof CounterBadgeTokens)[] = ['shadowToken'];
 
 export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeSlotProps, CounterBadgeTokens> = {
   tokens: [defaultBadgeTokens, defaultBadgeColorTokens, counterBadgeName, counterBadgeTokens],
   states: counterBadgeStates,
+  tokensThatAreAlsoProps,
   slotProps: {
     root: buildProps(
       (tokens: CounterBadgeTokens, theme: Theme) => ({
@@ -43,6 +45,12 @@ export const stylingSettings: UseStylingOptions<CounterBadgeProps, CounterBadgeS
         color: tokens.color,
       }),
       ['variant', 'color'],
+    ),
+    shadow: buildProps(
+      (tokens: CounterBadgeTokens) => ({
+        shadowToken: tokens.shadowToken,
+      }),
+      ['shadowToken'],
     ),
   },
 };

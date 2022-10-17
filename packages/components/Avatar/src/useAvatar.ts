@@ -1,9 +1,10 @@
 import { ImageProps, ImageSourcePropType } from 'react-native';
-import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize } from './Avatar.types';
+import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize, AvatarColor } from './Avatar.types';
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+
 /**
  * Re-usable hook for FURN Avatar.
  * This hook configures Avatar props and state for FURN Avatar.
@@ -58,10 +59,6 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
     };
   }
 
-  const _initials = initials || getInitials(name);
-  const avatarColorsIdx = getHashCodeWeb(idForColor ?? name ?? '') % AvatarColors.length;
-  const _avatarColor = avatarColor === 'colorful' ? AvatarColors[avatarColorsIdx] : avatarColor;
-
   let iconProps = createIconProps(icon);
   const isFontIcon = !!(iconProps && iconProps.fontSource);
   if (isFontIcon) {
@@ -83,10 +80,10 @@ export const useAvatar = (props: AvatarProps): AvatarInfo => {
       accessibilityRole: accessibilityRole ?? 'image',
       active,
       activeAppearance,
-      avatarColor: _avatarColor,
+      avatarColor: avatarColor === 'colorful' ? resolveColorfulToSpecificColor(idForColor, name) : avatarColor,
       badge: badgeProps,
       badgeStatus: badge?.status,
-      initials: _initials,
+      initials: initials || getInitials(name),
       icon: iconProps,
       image: imageProps,
       outOfOffice: badge?.outOfOffice,
@@ -208,3 +205,15 @@ function getFontIconSize(size: AvatarSize) {
   }
   return 16;
 }
+
+/**
+ * A function that determines the actual color to be used for the avatar background when the avatarColor token is 'colorful'
+ *
+ * @param idForColor string to be used instead of the name, to determine which color to use when color="colorful"
+ * @param name name of the person or entity represented by this Avatar
+ * @returns color to be used when the avatarColor token is set to 'colorful'
+ */
+export const resolveColorfulToSpecificColor = (idForColor: string, name: string): AvatarColor => {
+  const adjustedNumberOfAvatarColors = AvatarColors.length - 3;
+  return AvatarColors[getHashCodeWeb(idForColor ?? name ?? '') % adjustedNumberOfAvatarColors];
+};

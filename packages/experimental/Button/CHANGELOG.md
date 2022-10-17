@@ -1,8 +1,98 @@
 # Change Log - @fluentui-react-native/experimental-button
 
-This log was last generated on Mon, 26 Sep 2022 02:39:40 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.39
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.12
+
+## 0.16.38
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.11
+
+## 0.16.37
+
+Fri, 14 Oct 2022 17:16:50 GMT
+
+### Patches
+
+- Switch Button to Pressable (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/button to v0.25.10
+
+## 0.16.36
+
+Thu, 13 Oct 2022 05:37:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.9
+
+## 0.16.35
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.8
+
+## 0.16.34
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.7
+
+## 0.16.33
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.6
+
+## 0.16.32
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.5
+
+## 0.16.31
+
+Tue, 04 Oct 2022 17:24:59 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.4
+
+## 0.16.30
+
+Fri, 30 Sep 2022 08:04:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.25.3
+
+## 0.16.29
+
+Fri, 30 Sep 2022 00:54:35 GMT
+
+### Patches
+
+- Update react-native to 0.68 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/button to v0.25.2
 
 ## 0.16.28
 

@@ -4,8 +4,8 @@ import { DefaultRadioGroup } from './DefaultRadioGroup';
 import { E2ERadioGroupExperimentalTest } from './RadioGroupExperimentalE2ETest';
 import { RequiredRadioGroup } from './RequiredRadioGroup';
 import { DisabledRadioGroup } from './DisabledRadioGroup';
+import { SubtextRadioGroup } from './SubtextRadioGroup';
 import { CustomizedRadioGroup } from './CustomizedRadioGroup';
-import { VariantRadioGroup } from './VariantRadioGroup';
 import { Test, TestSection, PlatformStatus } from '../Test';
 
 const radioGroupExperimentalSections: TestSection[] = [
@@ -25,14 +25,14 @@ const radioGroupExperimentalSections: TestSection[] = [
     component: RequiredRadioGroup,
   },
   {
+    name: 'RadioGroup with Label Subtext',
+    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
+    component: SubtextRadioGroup,
+  },
+  {
     name: 'Customized RadioGroup Usage',
     testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
     component: CustomizedRadioGroup,
-  },
-  {
-    name: 'Variant RadioGroup Usage',
-    testID: RADIO_GROUP_EXPERIMENTAL_TESTPAGE,
-    component: VariantRadioGroup,
   },
   {
     name: 'RadioGroup for E2E Testing',

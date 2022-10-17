@@ -4,7 +4,12 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
 <View
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
-  accessible={true}
+  accessibilityState={
+    Object {
+      "disabled": false,
+      "required": false,
+    }
+  }
   defaultValue="key2"
   style={
     Object {
@@ -14,27 +19,44 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
     }
   }
 >
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
+  <View
     style={
       Object {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 16,
-        "fontWeight": "600",
-        "margin": 0,
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
       }
     }
   >
-    Uncontrolled RadioGroup
-  </Text>
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#323130",
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "600",
+          "margin": 0,
+        }
+      }
+    >
+      Uncontrolled RadioGroup
+    </Text>
+  </View>
   <RCTFocusZone
     navigateAtEnd="NavigateWrap"
   >
     <View>
       <View
-        accessibilityActions={[Function]}
+        accessibilityActions={
+          Array [
+            Object {
+              "name": "Select",
+            },
+          ]
+        }
         accessibilityLabel="Radio1"
         accessibilityPositionInSet={1}
         accessibilityRole="radio"
@@ -45,7 +67,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             "selected": false,
           }
         }
-        accessible={true}
         enableFocusRing={true}
         focusable={true}
         onAccessibilityAction={[Function]}
@@ -61,7 +82,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
+            "alignItems": "flex-start",
             "borderRadius": 4,
             "display": "flex",
             "flexDirection": "row",
@@ -104,25 +125,41 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             }
           />
         </View>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+        <View
           style={
             Object {
-              "color": "#616161",
-              "fontFamily": "Segoe UI",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "margin": 0,
-              "marginTop": 2,
+              "alignItems": "flex-start",
+              "alignSelf": "center",
+              "flexDirection": "column",
             }
           }
         >
-          Radio1
-        </Text>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": "400",
+                "margin": 0,
+                "marginTop": 2,
+              }
+            }
+          >
+            Radio1
+          </Text>
+        </View>
       </View>
       <View
-        accessibilityActions={[Function]}
+        accessibilityActions={
+          Array [
+            Object {
+              "name": "Select",
+            },
+          ]
+        }
         accessibilityLabel="Radio2"
         accessibilityPositionInSet={2}
         accessibilityRole="radio"
@@ -133,7 +170,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             "selected": true,
           }
         }
-        accessible={true}
         enableFocusRing={true}
         focusable={true}
         onAccessibilityAction={[Function]}
@@ -149,7 +185,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignItems": "center",
+            "alignItems": "flex-start",
             "borderRadius": 4,
             "display": "flex",
             "flexDirection": "row",
@@ -192,22 +228,32 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
             }
           />
         </View>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
+        <View
           style={
             Object {
-              "color": "#616161",
-              "fontFamily": "Segoe UI",
-              "fontSize": 16,
-              "fontWeight": "400",
-              "margin": 0,
-              "marginTop": 2,
+              "alignItems": "flex-start",
+              "alignSelf": "center",
+              "flexDirection": "column",
             }
           }
         >
-          Radio2
-        </Text>
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "System",
+                "fontSize": 16,
+                "fontWeight": "400",
+                "margin": 0,
+                "marginTop": 2,
+              }
+            }
+          >
+            Radio2
+          </Text>
+        </View>
       </View>
     </View>
   </RCTFocusZone>
@@ -218,7 +264,12 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
 <View
   accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
-  accessible={true}
+  accessibilityState={
+    Object {
+      "disabled": false,
+      "required": false,
+    }
+  }
   defaultValue="key2"
   style={
     Object {
@@ -228,37 +279,53 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
     }
   }
 >
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
+  <View
     style={
       Object {
-        "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 16,
-        "fontWeight": "600",
-        "margin": 0,
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
       }
     }
   >
-    Uncontrolled RadioGroup
-  </Text>
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#323130",
+          "fontFamily": "System",
+          "fontSize": 16,
+          "fontWeight": "600",
+          "margin": 0,
+        }
+      }
+    >
+      Uncontrolled RadioGroup
+    </Text>
+  </View>
   <RCTFocusZone
     navigateAtEnd="NavigateWrap"
   >
     <View
-      accessibilityActions={[Function]}
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
       accessibilityLabel="RadioButton1"
-      accessibilityPositionInSet={0}
+      accessibilityPositionInSet={1}
       accessibilityRole="radio"
-      accessibilitySetSize={0}
+      accessibilitySetSize={2}
       accessibilityState={
         Object {
           "disabled": false,
           "selected": false,
         }
       }
-      accessible={true}
       enableFocusRing={true}
       focusable={true}
       onAccessibilityAction={[Function]}
@@ -274,7 +341,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "alignItems": "center",
+          "alignItems": "flex-start",
           "borderRadius": 4,
           "display": "flex",
           "flexDirection": "row",
@@ -317,36 +384,51 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           }
         />
       </View>
-      <Text
-        ellipsizeMode="tail"
-        numberOfLines={0}
+      <View
         style={
           Object {
-            "color": "#616161",
-            "fontFamily": "Segoe UI",
-            "fontSize": 16,
-            "fontWeight": "400",
-            "margin": 0,
-            "marginTop": 2,
+            "alignItems": "flex-start",
+            "alignSelf": "center",
+            "flexDirection": "column",
           }
         }
       >
-        RadioButton1
-      </Text>
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#616161",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginTop": 2,
+            }
+          }
+        >
+          RadioButton1
+        </Text>
+      </View>
     </View>
     <View
-      accessibilityActions={[Function]}
+      accessibilityActions={
+        Array [
+          Object {
+            "name": "Select",
+          },
+        ]
+      }
       accessibilityLabel="RadioButton2"
-      accessibilityPositionInSet={0}
+      accessibilityPositionInSet={2}
       accessibilityRole="radio"
-      accessibilitySetSize={0}
+      accessibilitySetSize={2}
       accessibilityState={
         Object {
           "disabled": false,
           "selected": true,
         }
       }
-      accessible={true}
       enableFocusRing={true}
       focusable={true}
       onAccessibilityAction={[Function]}
@@ -362,7 +444,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "alignItems": "center",
+          "alignItems": "flex-start",
           "borderRadius": 4,
           "display": "flex",
           "flexDirection": "row",
@@ -405,22 +487,32 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
           }
         />
       </View>
-      <Text
-        ellipsizeMode="tail"
-        numberOfLines={0}
+      <View
         style={
           Object {
-            "color": "#616161",
-            "fontFamily": "Segoe UI",
-            "fontSize": 16,
-            "fontWeight": "400",
-            "margin": 0,
-            "marginTop": 2,
+            "alignItems": "flex-start",
+            "alignSelf": "center",
+            "flexDirection": "column",
           }
         }
       >
-        RadioButton2
-      </Text>
+        <Text
+          ellipsizeMode="tail"
+          numberOfLines={0}
+          style={
+            Object {
+              "color": "#616161",
+              "fontFamily": "System",
+              "fontSize": 16,
+              "fontWeight": "400",
+              "margin": 0,
+              "marginTop": 2,
+            }
+          }
+        >
+          RadioButton2
+        </Text>
+      </View>
     </View>
   </RCTFocusZone>
 </View>

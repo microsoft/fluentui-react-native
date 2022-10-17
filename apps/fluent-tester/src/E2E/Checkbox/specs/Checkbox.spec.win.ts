@@ -76,9 +76,9 @@ describe('Checkbox Functional Testing', () => {
     await expect(await CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "Spacebar" on a Checkbox and verify it toggles', async () => {
+  it('Click the "SPACE" on a Checkbox and verify it toggles', async () => {
     /* Presses the "space bar" to select the Checkbox */
-    await CheckboxPageObject.sendKey(CheckboxSelector.Primary, Keys.Spacebar);
+    await CheckboxPageObject.sendKey(CheckboxSelector.Primary, Keys.SPACE);
     await CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     /* Validate the Checkbox is selected */

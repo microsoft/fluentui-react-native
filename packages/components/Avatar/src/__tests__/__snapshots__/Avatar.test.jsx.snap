@@ -47,7 +47,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
       align="xMidYMid"
       bbHeight={16}
       bbWidth={16}
-      color={-10395295}
+      color={4284572001}
       focusable={false}
       height={16}
       meetOrSlice={0}
@@ -66,7 +66,7 @@ exports[`Avatar rendering renders Avatar 1`] = `
           },
         ]
       }
-      tintColor={-10395295}
+      tintColor={4284572001}
       vbHeight={16}
       vbWidth={14}
       width={16}

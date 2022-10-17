@@ -39,12 +39,13 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
@@ -80,12 +81,13 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
+    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
@@ -164,7 +166,7 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
@@ -207,7 +209,7 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
@@ -250,7 +252,7 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
@@ -294,7 +296,7 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
@@ -337,7 +339,7 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 12,
         "fontStyle": undefined,
         "fontWeight": "400",
@@ -384,7 +386,7 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
     align="xMidYMid"
     bbHeight={20}
     bbWidth={20}
-    color={-15490802}
+    color={4279476494}
     fill="none"
     focusable={false}
     meetOrSlice={0}
@@ -409,7 +411,7 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
         },
       ]
     }
-    tintColor={-15490802}
+    tintColor={4279476494}
     vbHeight={16}
     vbWidth={16}
   >

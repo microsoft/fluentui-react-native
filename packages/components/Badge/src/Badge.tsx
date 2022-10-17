@@ -8,6 +8,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps } from '@fluentui-react-native/interactive-hooks';
 import { stylingSettings } from './Badge.styling';
 import { useBadge } from './useBadge';
+import { Shadow } from '@fluentui-react-native/experimental-shadow';
 
 export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
   return (
@@ -18,7 +19,8 @@ export const badgeLookup = (layer: string, userProps: BadgeProps): boolean => {
     layer === userProps['shape'] ||
     (!userProps['shape'] && layer === 'circular') ||
     layer === userProps['badgeColor'] ||
-    (I18nManager.isRTL && layer === 'rtl')
+    (I18nManager.isRTL && layer === 'rtl') ||
+    (layer === 'shadowToken' && (!userProps.appearance || userProps.appearance === 'filled' || userProps.appearance === 'tint'))
   );
 };
 
@@ -29,6 +31,7 @@ export const Badge = compose<BadgeType>({
     root: View,
     icon: Icon,
     text: Text,
+    shadow: Shadow,
   },
   useRender: (userProps: BadgeProps, useSlots: UseSlots<BadgeType>) => {
     const iconProps = createIconProps(userProps.icon);
@@ -40,14 +43,23 @@ export const Badge = compose<BadgeType>({
       const { icon, iconPosition, size, ...mergedProps } = mergeProps(badge, final);
       const showContent = size !== 'tiny' && size !== 'extraSmall';
       const showIcon = size !== 'tiny';
-
       return (
-        <Slots.root {...mergedProps}>
-          {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
-          {showContent &&
-            Children.map(children, (child, i) => (typeof child === 'string' ? <Slots.text key={`text-${i}`}>{child}</Slots.text> : child))}
-          {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
-        </Slots.root>
+        <Slots.shadow>
+          <Slots.root {...mergedProps}>
+            {icon && showIcon && iconPosition === 'before' && <Slots.icon accessible={false} {...iconProps} />}
+            {showContent &&
+              Children.map(children, (child, i) =>
+                typeof child === 'string' ? (
+                  <Slots.text accessible={false} key={`text-${i}`}>
+                    {child}
+                  </Slots.text>
+                ) : (
+                  child
+                ),
+              )}
+            {icon && showIcon && iconPosition === 'after' && <Slots.icon accessible={false} {...iconProps} />}
+          </Slots.root>
+        </Slots.shadow>
       );
     };
   },

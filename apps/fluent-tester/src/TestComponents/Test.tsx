@@ -6,6 +6,7 @@ import { stackStyle } from './Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { Button } from '@fluentui-react-native/experimental-button';
 
 export type TestSection = {
   name: string;
@@ -70,6 +71,11 @@ const styles = StyleSheet.create({
   status: {
     fontWeight: 'normal',
   },
+  // This button is only for our E2E testing framework. We want to be able to put keyboard focus in any test page if we need it.
+  // This button will be at the top of every test page and allows us to do that. But we don't want partners to see it.
+  e2eFocusButton: {
+    opacity: 0,
+  },
 });
 
 export const Test = (props: TestProps): React.ReactElement<Record<string, never>> => {
@@ -107,11 +113,14 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
 
   return (
-    <View testID="ScrollViewAreaForComponents">
+    <View>
       <View style={styles.header}>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
+        <Button testID="Focus_Button" style={styles.e2eFocusButton}>
+          E2E Testing Button
+        </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />
@@ -155,6 +164,10 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         )}
       </Stack>
       {props.sections.map((section, index) => {
+        if (section == null) {
+          return <></>;
+        }
+
         const TestComponent = section.component;
         return (
           <View key={index}>
