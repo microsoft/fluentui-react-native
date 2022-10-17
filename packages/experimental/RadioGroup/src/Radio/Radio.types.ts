@@ -43,7 +43,33 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    * The flex direction of the root
    */
   flexDirection?: ViewStyle['flexDirection'];
-  
+
+  /**
+   * Root item alignment
+   */
+  alignItems?: ViewStyle['alignItems'];
+
+  /**
+   * The top margin
+   */
+  marginTop?: ViewStyle['marginTop'];
+
+  /**
+   * The right margin
+   */
+  marginRight?: ViewStyle['marginRight'];
+
+  /**
+   * The bottom margin
+   */
+  marginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * The left margin
+   */
+  marginLeft?: ViewStyle['marginLeft'];
+
+  /*
    * Variant of label subtext.
    *
    * Should only by used if subtext prop is provided.

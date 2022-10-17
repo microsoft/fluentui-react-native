@@ -20,9 +20,17 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     subtextMarginTop: globalTokens.spacing.xxs,
     subtextMarginRight: globalTokens.spacing.xxs,
     subtextMarginBottom: globalTokens.spacing.xxs,
+    marginTop: globalTokens.spacing.xs,
+    marginRight: globalTokens.spacing.sNudge,
+    marginBottom: globalTokens.spacing.sNudge,
+    marginLeft: globalTokens.spacing.sNudge,
     flexDirection: 'row',
+    alignItems: 'flex-start',
+
     labelPositionBelow: {
       flexDirection: 'column',
+      alignItems: 'center',
+      marginLeft: 0,
     },
 
     disabled: {
