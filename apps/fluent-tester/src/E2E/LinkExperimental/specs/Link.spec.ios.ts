@@ -15,7 +15,7 @@ describe('Link Testing Initialization', function () {
     await ExperimentalLinkPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToLinkPage();
+    await NavigateAppPage.clickAndGoToLinkExperimentalPage();
     await ExperimentalLinkPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalLinkPageObject.isPageLoaded()).toBeTruthy();
