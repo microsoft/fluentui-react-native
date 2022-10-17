@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "test updates",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
