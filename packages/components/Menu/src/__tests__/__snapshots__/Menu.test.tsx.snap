@@ -149,7 +149,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -366,7 +366,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -528,7 +528,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -877,7 +877,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1225,7 +1225,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1573,7 +1573,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1909,7 +1909,7 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
@@ -1994,7 +1994,7 @@ Array [
           onClick={[Function]}
           onFocus={[Function]}
           onHoverIn={[Function]}
-          onHoverOut={false}
+          onHoverOut={[Function]}
           onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
