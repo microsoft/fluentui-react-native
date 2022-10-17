@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View, AccessibilityInfo } from 'react-native';
+import { View, AccessibilityInfo, Pressable } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -33,7 +33,7 @@ export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     label: Text,
     track: View,
     thumb: View,
