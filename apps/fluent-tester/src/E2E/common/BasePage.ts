@@ -37,10 +37,11 @@ export const enum ComponentSelector {
 }
 
 export const enum Platform {
-  Win32 = 0,
-  iOS,
-  macOS,
-  Android,
+  Win32 = 'win32',
+  Windows = 'windows',
+  iOS = 'ios',
+  macOS = 'macos',
+  Android = 'android',
 }
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
@@ -51,6 +52,14 @@ export const enum Platform {
  *********************************************************************************************************/
 
 export class BasePage {
+  private platform?: Platform;
+
+  constructor() {
+    if (process.env.E2ETEST_PLATFORM) {
+      this.platform = process.env.E2ETEST_PLATFORM as Platform;
+      console.log(`Using platform: ${this.platform}`);
+    }
+  }
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -100,6 +109,7 @@ export class BasePage {
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
     switch (platform) {
+      case Platform.Windows:
       case Platform.Win32: {
         const scrollDownKeys = [Keys.PAGE_DOWN];
         await browser.waitUntil(
