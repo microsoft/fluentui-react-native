@@ -69,6 +69,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    */
   marginLeft?: ViewStyle['marginLeft'];
 
+  /**
+   * Label's top margin.
+   */
+  labelMarginTop?: ViewStyle['marginTop'];
+
   /*
    * Variant of label subtext.
    *
