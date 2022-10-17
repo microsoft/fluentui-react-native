@@ -3,6 +3,7 @@ import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/const
 import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
+// The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
 const PLATFORM = process.env['E2ETEST_PLATFORM'];
 if (PLATFORM) {
   console.log(`Using platform: ${PLATFORM}`);
@@ -14,6 +15,7 @@ let _rootView: WebdriverIO.Element | null = null;
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
   switch (PLATFORM) {
+    case Platform.iOS:
     case Platform.Win32:
       return await QueryWithChaining(identifier);
     default:
