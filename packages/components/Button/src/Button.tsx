@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Platform, Pressable, View, ViewStyle } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -34,35 +34,47 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   );
 };
 
-export const extractOuterStylePropsAndroid = memoize((style) => {
-  const marginKeys = [
-    'margin',
-    'marginTop',
-    'marginBottom',
-    'marginLeft',
-    'marginRight',
-    'marginStart',
-    'marginEnd',
-    'marginVertical',
-    'marginHorizontal',
-    'start',
-    'end',
-    'left',
-    'right',
-    'top',
-    'bottom',
-  ];
-  const outerStyleProps = {},
-    resetProps = {};
-  marginKeys.forEach((key) => {
-    if (style && style[key]) {
-      outerStyleProps[key] = style[key];
-      resetProps[key] = 0;
-    }
-  });
+export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [outerStyleProps: ViewStyle, innerStyleProps: ViewStyle] => {
+  const {
+    margin,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginStart,
+    marginEnd,
+    marginVertical,
+    marginHorizontal,
+    start,
+    end,
+    left,
+    right,
+    top,
+    bottom,
+    display,
+    ...restOfProps
+  } = style;
+
   return [
-    { ...outerStyleProps, display: style ? style.display : 'flex' },
-    { ...style, ...resetProps },
+    {
+      margin,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      marginStart,
+      marginEnd,
+      marginVertical,
+      marginHorizontal,
+      start,
+      end,
+      left,
+      right,
+      top,
+      bottom,
+      display,
+    },
+    { ...restOfProps },
   ];
 });
 
@@ -106,6 +118,7 @@ export const Button = compose<ButtonType>({
           }
         });
       }
+
       const label = accessibilityLabel ?? childText;
       const buttonContent = (
         <React.Fragment>

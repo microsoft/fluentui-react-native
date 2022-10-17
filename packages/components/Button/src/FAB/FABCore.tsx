@@ -78,18 +78,17 @@ export const FAB = compose<FABType>({
             )}
         </React.Fragment>
       );
+      const buttonContentWithRoot = (
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
+          {buttonContent}
+        </Slots.root>
+      );
 
       const hasShadow = Platform.OS === 'ios';
       const hasRipple = Platform.OS === 'android';
 
       if (hasShadow) {
-        return (
-          <Slots.shadow>
-            <Slots.root {...mergedProps} accessibilityLabel={label}>
-              {buttonContent}
-            </Slots.root>
-          </Slots.shadow>
-        );
+        return <Slots.shadow>{buttonContentWithRoot}</Slots.shadow>;
       } else if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
@@ -112,11 +111,7 @@ export const FAB = compose<FABType>({
           </Slots.root>
         );
       } else {
-        return (
-          <Slots.root {...mergedProps} accessibilityLabel={label}>
-            {buttonContent}
-          </Slots.root>
-        );
+        return buttonContentWithRoot;
       }
     };
   },
