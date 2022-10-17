@@ -10,7 +10,7 @@ describe('Experimental Checkbox Testing Initialization', () => {
   });
 
   it('Click and navigate to Experimental Checkbox test page', async () => {
-    await ExperimentalCheckboxPageObject.scrollToComponentButton(Platform.iOS);
+    await ExperimentalCheckboxPageObject.mobileScrollToComponentButton(Platform.iOS);
     await ExperimentalCheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

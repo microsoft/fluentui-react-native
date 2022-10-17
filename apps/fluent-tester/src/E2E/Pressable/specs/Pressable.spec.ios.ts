@@ -11,7 +11,7 @@ describe('Pressable Testing Initialization', function () {
   });
 
   it('Click and navigate to Pressable test page', async () => {
-    await PressablePageObject.scrollToComponentButton(Platform.iOS);
+    await PressablePageObject.mobileScrollToComponentButton(Platform.iOS);
     await PressablePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

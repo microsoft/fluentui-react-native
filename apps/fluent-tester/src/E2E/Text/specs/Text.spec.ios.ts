@@ -11,7 +11,7 @@ describe('Text Testing Initialization', function () {
   });
 
   it('Click and navigate to Text test page', async () => {
-    await TextPageObject.scrollToComponentButton(Platform.iOS);
+    await TextPageObject.mobileScrollToComponentButton(Platform.iOS);
     await TextPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

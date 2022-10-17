@@ -11,7 +11,7 @@ describe('Icon Testing Initialization', function () {
   });
 
   it('Click and navigate to Icon test page', async () => {
-    await IconPageObject.scrollToComponentButton(Platform.iOS);
+    await IconPageObject.mobileScrollToComponentButton(Platform.iOS);
     await IconPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

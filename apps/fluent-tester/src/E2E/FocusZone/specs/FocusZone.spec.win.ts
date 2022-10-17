@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import FocusZonePageObject, { GridButtonSelector, GridFocusZoneOption } from '../pages/FocusZonePageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('FocusZone Testing Initialization', function () {
@@ -11,9 +10,6 @@ describe('FocusZone Testing Initialization', function () {
   });
 
   it('Click and navigate to FocusZone test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await FocusZonePageObject.scrollToComponentButton(Platform.Win32);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToFocusZonePage();
     await FocusZonePageObject.waitForPageDisplayed(PAGE_TIMEOUT);

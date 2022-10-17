@@ -11,7 +11,7 @@ describe('Button Testing Initialization', function () {
   });
 
   it('Click and navigate to Button test page', async () => {
-    await ButtonPageObject.scrollToComponentButton(Platform.iOS);
+    await ButtonPageObject.mobileScrollToComponentButton(Platform.iOS);
     await ButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

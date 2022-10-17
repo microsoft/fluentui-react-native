@@ -11,7 +11,7 @@ describe('Separator Testing Initialization', function () {
   });
 
   it('Click and navigate to Separator test page', async () => {
-    await SeparatorPageObject.scrollToComponentButton(Platform.iOS);
+    await SeparatorPageObject.mobileScrollToComponentButton(Platform.iOS);
     await SeparatorPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

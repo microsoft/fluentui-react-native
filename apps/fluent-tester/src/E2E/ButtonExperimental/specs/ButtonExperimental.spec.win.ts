@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonExperimentalPageObject, { ButtonSelector } from '../pages/ButtonExperimentalPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../TestComponents/Button/consts';
 
@@ -12,9 +12,6 @@ describe('Experimental Button Testing Initialization', function () {
   });
 
   it('Click and navigate to Button test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ButtonExperimentalPageObject.scrollToComponentButton(Platform.Win32);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToButtonPage();
     await ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);

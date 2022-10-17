@@ -11,7 +11,7 @@ describe('Svg Testing Initialization', function () {
   });
 
   it('Click and navigate to Svg test page', async () => {
-    await SvgPageObject.scrollToComponentButton(Platform.iOS);
+    await SvgPageObject.mobileScrollToComponentButton(Platform.iOS);
     await SvgPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

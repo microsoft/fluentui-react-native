@@ -11,7 +11,7 @@ describe('Persona Testing Initialization', function () {
   });
 
   it('Click and navigate to Persona test page', async () => {
-    await PersonaPageObject.scrollToComponentButton(Platform.iOS);
+    await PersonaPageObject.mobileScrollToComponentButton(Platform.iOS);
     await PersonaPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -73,7 +73,7 @@ export class BasePage {
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
-  async scrollToComponentButton(platform: Platform): Promise<void> {
+  async mobileScrollToComponentButton(platform: Platform): Promise<void> {
     if (await (await this._pageButton).isDisplayed()) {
       return;
     }
@@ -83,7 +83,8 @@ export class BasePage {
 
     switch (platform) {
       case Platform.Win32:
-        // Not needed for Win32. Automatic scroll on click.
+        // Not needed for Win32. It automatically scrolls.
+        // Scrolling is automatically done by sending a click command to the component button.
         break;
 
       case Platform.iOS: {

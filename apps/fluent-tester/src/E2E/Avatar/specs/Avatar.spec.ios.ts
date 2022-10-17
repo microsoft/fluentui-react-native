@@ -11,7 +11,7 @@ describe('Avatar Testing Initialization', function () {
   });
 
   it('Click and navigate to Avatar test page', async () => {
-    await AvatarPageObject.scrollToComponentButton(Platform.iOS);
+    await AvatarPageObject.mobileScrollToComponentButton(Platform.iOS);
     await AvatarPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

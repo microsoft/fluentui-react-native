@@ -11,7 +11,7 @@ describe('Badge Testing Initialization', function () {
   });
 
   it('Click and navigate to Badge test page', async () => {
-    await BasicBadgePageObject.scrollToComponentButton(Platform.iOS);
+    await BasicBadgePageObject.mobileScrollToComponentButton(Platform.iOS);
     await BasicBadgePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

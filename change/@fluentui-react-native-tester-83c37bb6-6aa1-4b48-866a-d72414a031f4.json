@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "Remove janky scroll logic for win32 component button",
+  "comment": "Remove unnecessary scroll logic within e2e tests",
   "packageName": "@fluentui-react-native/tester",
   "email": "winlarry@microsoft.com",
   "dependentChangeType": "patch"

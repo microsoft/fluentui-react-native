@@ -11,7 +11,7 @@ describe('PersonaCoin Testing Initialization', function () {
   });
 
   it('Click and navigate to PersonaCoin test page', async () => {
-    await PersonaCoinPageObject.scrollToComponentButton(Platform.iOS);
+    await PersonaCoinPageObject.mobileScrollToComponentButton(Platform.iOS);
     await PersonaCoinPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

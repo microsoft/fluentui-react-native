@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import TextPageObject from '../pages/TextPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { TEXT_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 import { TEXT_ACCESSIBILITY_LABEL, TEXT_COMPONENT_CONTENT } from '../../../TestComponents/Text/consts';
 
@@ -12,9 +12,6 @@ describe('Text Testing Initialization', function () {
   });
 
   it('Click and navigate to Text test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await TextPageObject.scrollToComponentButton(Platform.Win32);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToTextPage();
     await TextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
