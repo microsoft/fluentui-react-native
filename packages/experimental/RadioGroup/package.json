@@ -30,7 +30,6 @@
     "@fluentui-react-native/focus-zone": ">=0.10.23 <1.0.0",
     "@fluentui-react-native/framework": "0.8.12",
     "@fluentui-react-native/interactive-hooks": ">=0.18.15 <1.0.0",
-    "@fluentui-react-native/pressable": ">=0.9.21 <1.0.0",
     "@fluentui-react-native/text": ">=0.15.8 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.20.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.17.5 <1.0.0",
