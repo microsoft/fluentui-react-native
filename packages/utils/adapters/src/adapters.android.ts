@@ -67,6 +67,7 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityValue: true,
   accessibilityViewIsModal: true,
   accessible: true,
+  disabled: true,
   onAccessibilityAction: true,
   onAccessibilityEscape: true,
   onAccessibilityTap: true,

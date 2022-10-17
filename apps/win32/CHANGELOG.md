@@ -1,8 +1,49 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 13 Oct 2022 05:37:26 GMT and should not be manually modified.
+This log was last generated on Fri, 14 Oct 2022 23:01:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.11
+
+Fri, 14 Oct 2022 23:01:57 GMT
+
+### Patches
+
+- Port partner focuszone tests to FURN (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.101.7
+
+## 0.27.10
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.6
+
+## 0.27.9
+
+Fri, 14 Oct 2022 18:04:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.5
+
+## 0.27.8
+
+Fri, 14 Oct 2022 17:16:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.4
+
+## 0.27.7
+
+Fri, 14 Oct 2022 14:12:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.3
 
 ## 0.27.6
 

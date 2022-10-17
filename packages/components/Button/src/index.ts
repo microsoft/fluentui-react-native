@@ -20,7 +20,7 @@ export {
   ButtonTokens,
   ButtonCoreProps,
   ButtonProps,
-  ButtonState,
+  ButtonInfo,
   ButtonSlotProps,
   ButtonType,
 } from './Button.types';
@@ -31,4 +31,4 @@ export type { CompoundButtonProps, CompoundButtonSlotProps, CompoundButtonTokens
 export { FAB, fabName } from './FAB';
 export type { FABType } from './FAB';
 export { ToggleButton, toggleButtonName, useToggleButton } from './ToggleButton';
-export type { ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonState, ToggleButtonTokens, ToggleButtonType } from './ToggleButton';
+export type { ToggleButtonProps, ToggleButtonSlotProps, ToggleButtonInfo, ToggleButtonTokens, ToggleButtonType } from './ToggleButton';

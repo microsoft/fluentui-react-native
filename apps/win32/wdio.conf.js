@@ -13,7 +13,6 @@ exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
   exclude: ['../fluent-tester/src/E2E/Menu/specs/*.win.ts'],
-
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
