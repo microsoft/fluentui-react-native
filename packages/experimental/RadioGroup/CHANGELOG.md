@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Oct 2022 21:25:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.0
+
+Mon, 17 Oct 2022 21:25:05 GMT
+
+### Minor changes
+
+- Added layout and labelPosition props (gulnazsayed@microsoft.com)
 
 ## 0.6.3
 
