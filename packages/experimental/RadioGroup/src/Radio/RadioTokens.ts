@@ -24,7 +24,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     labelPositionBelow: {
       flexDirection: 'column',
     },
-    
+
     disabled: {
       // Unchecked, Disabled
       radioBorder: t.colors.neutralForegroundDisabled,
