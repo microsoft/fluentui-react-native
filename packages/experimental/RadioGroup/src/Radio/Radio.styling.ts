@@ -69,7 +69,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
         style: {
-          // marginTop: tokens.marginTop,
           color: tokens.color,
           ...fontStyles.from(tokens, theme),
         },
