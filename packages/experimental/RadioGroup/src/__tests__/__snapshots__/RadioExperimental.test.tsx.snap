@@ -21,6 +21,7 @@ exports[`Radio component tests Radio default 1`] = `
   }
   enableFocusRing={true}
   focusable={true}
+  labelPosition="after"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
@@ -38,6 +39,7 @@ exports[`Radio component tests Radio default 1`] = `
       "borderRadius": 4,
       "display": "flex",
       "flexDirection": "row",
+      "marginRight": 8,
       "marginTop": 0,
       "minHeight": 20,
     }
@@ -96,7 +98,7 @@ exports[`Radio component tests Radio default 1`] = `
           "fontSize": 16,
           "fontWeight": "400",
           "margin": 0,
-          "marginTop": 2,
+          "marginTop": 0,
         }
       }
     >
