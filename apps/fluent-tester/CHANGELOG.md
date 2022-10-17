@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 17 Oct 2022 22:34:22 GMT and should not be manually modified.
+This log was last generated on Mon, 17 Oct 2022 23:24:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.102.2
+
+Mon, 17 Oct 2022 23:24:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/switch to v0.6.18
 
 ## 0.102.1
 

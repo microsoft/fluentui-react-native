@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Switch Switch to Pressable",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
