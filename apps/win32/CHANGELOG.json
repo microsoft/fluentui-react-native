@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 17 Oct 2022 21:25:05 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.27.14",
+      "version": "0.27.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.102.0",
+            "commit": "40e38c7cf57ad14383841d850eded5ed2fde5bff"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Oct 2022 19:16:05 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.27.13",
+      "version": "0.27.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "ec21fcf6380241b2ad3cffd75dfbe53555bf23f9",
+            "comment": "Re-enable and rewrite parts of menu e2etest"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.101.9",
+            "commit": "ec21fcf6380241b2ad3cffd75dfbe53555bf23f9"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Oct 2022 17:52:49 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.27.12",
+      "version": "0.27.12",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.101.8",
+            "commit": "14bd4084276efd59f022ab5074441eca421c96d0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Oct 2022 23:01:57 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.27.11",
       "version": "0.27.11",

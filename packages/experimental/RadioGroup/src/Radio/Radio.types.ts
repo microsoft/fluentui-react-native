@@ -39,6 +39,41 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorderWidth?: number;
 
   /**
+   * The flex direction of the root
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+
+  /**
+   * Root item alignment
+   */
+  alignItems?: ViewStyle['alignItems'];
+
+  /**
+   * The top margin
+   */
+  marginTop?: ViewStyle['marginTop'];
+
+  /**
+   * The right margin
+   */
+  marginRight?: ViewStyle['marginRight'];
+
+  /**
+   * The bottom margin
+   */
+  marginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * The left margin
+   */
+  marginLeft?: ViewStyle['marginLeft'];
+
+  /**
+   * Label's top margin.
+   */
+  labelMarginTop?: ViewStyle['marginTop'];
+
+  /*
    * Variant of label subtext.
    *
    * Should only by used if subtext prop is provided.
@@ -69,6 +104,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * States that can be applied to a Radio
    */
+  labelPositionBelow?: RadioTokens;
   selected?: RadioTokens;
   disabled?: RadioTokens;
   hovered?: RadioTokens;
@@ -96,6 +132,16 @@ export interface RadioProps extends PressablePropsExtended {
    * Whether or not the radio button is selectable
    */
   disabled?: boolean;
+
+  /**
+   * The position of the label relative to the radio indicator.
+   *
+   * This defaults to 'after' unless the Radio is inside a RadioGroup with layout horizontal-stacked,
+   * in which case it defaults to 'below'
+   *
+   * @default after
+   */
+  labelPosition?: 'after' | 'below';
 
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
