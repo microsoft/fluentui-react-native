@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Mon, 17 Oct 2022 17:52:49 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.16.5",
+      "version": "0.16.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "14bd4084276efd59f022ab5074441eca421c96d0",
+            "comment": "test updates"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.20.0",
+            "commit": "14bd4084276efd59f022ab5074441eca421c96d0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.16.4",
       "version": "0.16.4",

@@ -19,6 +19,7 @@ export const PAGE_TIMEOUT = 15000;
 export const enum Attribute {
   AccessibilityLabel = 'Name',
   AccessibilityRole = 'ControlType',
+  ExpandCollapseState = 'ExpandCollapse.ExpandCollapseState',
   IsEnabled = 'IsEnabled',
   IsFocused = 'HasKeyboardFocus',
   IsRequiredForForm = 'IsRequiredForForm',
@@ -95,4 +96,9 @@ export const enum Keys {
   F10 = '\uE03A',
   F11 = '\uE03B',
   F12 = '\uE03C',
+}
+
+export const enum ExpandCollapseState {
+  EXPANDED = 'Expanded',
+  COLLAPSED = 'Collapsed',
 }
