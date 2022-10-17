@@ -70,7 +70,7 @@ export const useMenuPopover = (_props: MenuPopoverProps): MenuPopoverState => {
     },
     innerView: {
       onMouseEnter,
-      onMouseLeave: onMouseLeave,
+      onMouseLeave,
       accessible: shouldFocusOnContainer,
       focusable: canFocusOnPopover,
       onBlur,
