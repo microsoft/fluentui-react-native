@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "ripple\\fixes on FAB, Button",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "singh.ayush@microsoft.com",
+  "dependentChangeType": "none"
+}
