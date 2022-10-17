@@ -20,7 +20,7 @@ export const enum RadioSelector {
   Fourth, // this._fourthRadio
 }
 
-class RadioGroupPage extends BasePage {
+class RadioGroupExperimentalPage extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -49,7 +49,7 @@ class RadioGroupPage extends BasePage {
 
   async waitForRadioSelected(radioSelector: RadioSelector, timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await this.isRadioSelected(radioSelector), {
-      timeout: timeout ?? this.waitForPageTimeout,
+      timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'Radio was not selected correctly.',
       interval: 1000,
     });
@@ -118,4 +118,4 @@ class RadioGroupPage extends BasePage {
   }
 }
 
-export default new RadioGroupPage();
+export default new RadioGroupExperimentalPage();

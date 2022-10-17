@@ -17,11 +17,11 @@ describe('RadioGroup/Radio Testing Initialization', function () {
   });
 
   it('Click and navigate to RadioGroup test page', async () => {
-    /* Scroll to component test page  in scrollview if not already visible*/
+    /* Scroll to component test page button in scrollview if not already visible*/
     await RadioGroupExperimentalPageObject.scrollToComponentButton(Platform.Win32);
     await RadioGroupExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
-    /* Click on component  to navigate to test page */
+    /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToRadioGroupPage();
     await RadioGroupExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
@@ -98,7 +98,7 @@ describe('RadioGroup Functional Testing', async () => {
 
   it('Keyboard to Radio and check for Selection state', async () => {
     // Presses the ArrowDown key while the first (A) Radio is selected
-    await RadioGroupExperimentalPageObject.sendKey(Keys.Down_Arrow, RadioSelector.First);
+    await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.First);
     await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Second, 5000);
 
     /* Validate the Radio is selected */
@@ -108,7 +108,7 @@ describe('RadioGroup Functional Testing', async () => {
 
   it("Keyboard to DISABLED Radio and validate it doesn't get selected", async () => {
     // Presses the ArrowDown key while the second (B) Radio is selected
-    await RadioGroupExperimentalPageObject.sendKey(Keys.Down_Arrow, RadioSelector.Second);
+    await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.Second);
     await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Fourth, 5000); // It should skip Radio 3 since it is disabled
 
     /* Validate the Radio is selected */
