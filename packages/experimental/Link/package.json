@@ -1,7 +1,7 @@
 {
-  "name": "@fluentui-react-native/interactive-hooks",
-  "version": "0.18.15",
-  "description": "Hooks for adding focus, hover, and press semantics to view based components",
+  "name": "@fluentui-react-native/experimental-link",
+  "version": "0.1.0",
+  "description": "A cross-platform Link component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
@@ -23,41 +23,27 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/microsoft/fluentui-react-native.git",
-    "directory": "packages/utils/interactive-hooks"
+    "directory": "packages/experimental/link"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.9.3",
-    "@fluentui-react-native/framework": ">=0.8.11 <1.0.0",
-    "@fluentui-react-native/memo-cache": "^1.1.7",
-    "invariant": "^2.2.0",
+    "@fluentui-react-native/framework": ">=0.8.10 <1.0.0",
+    "@fluentui-react-native/interactive-hooks": ">=0.18.13 <1.0.0",
+    "@fluentui-react-native/tokens": "^0.17.4",
+    "@fluentui-react-native/use-styling": "^0.9.1",
+    "@fluentui-react-native/text": ">=0.15.4 <1.0.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
-    "@fluentui-react-native/icon": "0.13.17",
-    "@office-iss/react-native-win32": ">=0.68.0 <0.68.6",
-    "@types/invariant": "^2.2.0",
-    "@types/jest": "^26.0.0",
-    "@types/react": "^17.0.2",
     "@types/react-native": "^0.68.0",
-    "react": "17.0.2",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
     "react-native": "^0.68.0"
   },
   "peerDependencies": {
-    "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react": ">=17.0.2",
+    "react-native": ">=0.68.0"
   },
   "author": "",
-  "license": "MIT",
-  "rnx-kit": {
-    "reactNativeVersion": "^0.68",
-    "reactNativeDevVersion": "^0.68",
-    "kitType": "library",
-    "capabilities": [
-      "core",
-      "core-android",
-      "core-ios",
-      "react"
-    ]
-  }
+  "license": "MIT"
 }

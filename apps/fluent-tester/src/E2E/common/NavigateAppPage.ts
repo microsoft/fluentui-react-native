@@ -11,6 +11,7 @@ import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../TestComponents/FocusTrapZon
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../TestComponents/Icon/consts';
 import { HOMEPAGE_LINK_BUTTON } from '../../TestComponents/Link/consts';
+import { HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from '../../TestComponents/LinkExperimental/consts';
 import { HOMEPAGE_MENU_BUTTON } from '../../TestComponents/Menu/consts';
 import { HOMEPAGE_MENUBUTTON_BUTTON } from '../../TestComponents/MenuButton/consts';
 import { HOMEPAGE_EXPERIMENTAL_MENU_BUTTON } from '../../TestComponents/MenuButtonExperimental/consts';
@@ -77,6 +78,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToLinkPage() {
     await this.linkPage.click();
+  }
+
+  async clickAndGoToLinkExperimentalPage() {
+    await this.linkExperimentalPage.click();
   }
 
   async clickAndGoToMenuPage() {
@@ -201,6 +206,10 @@ class NavigateAppPage extends BasePage {
 
   private get linkPage() {
     return By(HOMEPAGE_LINK_BUTTON);
+  }
+
+  private get linkExperimentalPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_LINK_BUTTON);
   }
 
   private get menuPage() {
