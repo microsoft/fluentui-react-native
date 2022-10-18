@@ -18,12 +18,18 @@ export const enum ComponentSelector {
   Secondary, // this._secondaryComponent
 }
 
-export const enum Platform {
-  Win32 = 0,
-  iOS,
-  macOS,
+export const enum MobilePlatform {
+  iOS = 0,
   Android,
 }
+
+export const enum NativePlatform {
+  Win32 = 0,
+  Windows,
+  macOS,
+}
+
+export type Platform = MobilePlatform | NativePlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -74,7 +80,7 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards.
    * There are no need for win32 and macos cases, as the click command automatically scrolls the element into view. */
-  async mobileScrollToComponentButton(platform: Platform): Promise<void> {
+  async mobileScrollToComponentButton(platform: MobilePlatform): Promise<void> {
     if (await (await this._pageButton).isDisplayed()) {
       return;
     }
@@ -83,7 +89,7 @@ export class BasePage {
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
     switch (platform) {
-      case Platform.iOS: {
+      case MobilePlatform.iOS: {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
@@ -97,7 +103,7 @@ export class BasePage {
         break;
       }
       default:
-      case Platform.Android:
+      case MobilePlatform.Android:
         // Todo
         break;
     }

@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import BasicBadgePageObject from '../pages/BasicBadgePageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
+import { MobilePlatform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Badge Testing Initialization', function () {
@@ -11,7 +11,7 @@ describe('Badge Testing Initialization', function () {
   });
 
   it('Click and navigate to Badge test page', async () => {
-    await BasicBadgePageObject.mobileScrollToComponentButton(Platform.iOS);
+    await BasicBadgePageObject.mobileScrollToComponentButton(MobilePlatform.iOS);
     await BasicBadgePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
