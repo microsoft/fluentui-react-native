@@ -5,10 +5,6 @@ const path = require('path');
 const OUTPUT_FILE = `${__dirname}/src/index.js`;
 
 const CAPABILITY_MAP = {
-  '@office-iss/react-native-win32': 'core-win32',
-  'react-native': 'core',
-  'react-native-macos': 'core-macos',
-  'react-native-windows': 'core-windows',
   'react-native-svg': 'svg',
 };
 

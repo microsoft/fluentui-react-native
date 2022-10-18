@@ -2,22 +2,6 @@
 /* eslint-disable */
 module.exports = {
   "latest": {
-    "core-win32": {
-      "name": "@office-iss/react-native-win32",
-      "version": ">=0.68.0 <0.68.6"
-    },
-    "core": {
-      "name": "react-native",
-      "version": "^0.68.0"
-    },
-    "core-macos": {
-      "name": "react-native-macos",
-      "version": "^0.68.0"
-    },
-    "core-windows": {
-      "name": "react-native-windows",
-      "version": "^0.68.0"
-    },
     "svg": {
       "name": "react-native-svg",
       "version": "12.3.0"
