@@ -81,7 +81,7 @@ class NavigateAppPage extends BasePage {
   }
 
   async clickAndGoToLinkExperimentalPage() {
-    await this.linkExperimentalPage.click();
+    await (await this.linkExperimentalPage).click();
   }
 
   async clickAndGoToMenuPage() {
