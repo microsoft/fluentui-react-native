@@ -3,7 +3,7 @@ import { ColorValue } from 'react-native';
 import { XmlProps } from 'react-native-svg';
 import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
-import { IFocusable, InteractionEvent, IPressableHooks, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 
 export const menuItemName = 'MenuItem';
@@ -43,7 +43,7 @@ export interface MenuItemTokens extends LayoutTokens, FontTokens, IBorderTokens,
   pressed?: MenuItemTokens;
 }
 
-export interface MenuItemProps extends Omit<IWithPressableOptions<IViewProps>, 'onPress'> {
+export interface MenuItemProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
@@ -60,7 +60,7 @@ export interface MenuItemProps extends Omit<IWithPressableOptions<IViewProps>, '
   persistOnClick?: boolean;
 }
 
-export interface MenuItemState extends IPressableHooks<MenuItemProps & React.ComponentPropsWithRef<any>> {
+export interface MenuItemState extends PressableState {
   hasCheckmarks?: boolean;
 
   /**
@@ -69,8 +69,13 @@ export interface MenuItemState extends IPressableHooks<MenuItemProps & React.Com
   hasSubmenu?: boolean;
 }
 
+export interface MenuItemInfo {
+  props: MenuItemProps & React.ComponentPropsWithRef<any>;
+  state: MenuItemState;
+}
+
 export interface MenuItemSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   content?: TextProps;
   checkmark?: React.PropsWithRef<IViewProps>;
   submenuIndicator?: XmlProps;

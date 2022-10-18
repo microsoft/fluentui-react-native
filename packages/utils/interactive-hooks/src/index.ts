@@ -61,3 +61,4 @@ export { preferKeyDownForKeyEvents, useKeyCallback, useKeyDownProps, useKeyProps
 export type { KeyCallback, KeyPressProps } from './useKeyProps';
 export { useOnPressWithFocus } from './useOnPressWithFocus';
 export type { OnPressCallback, OnPressWithFocusCallback } from './useOnPressWithFocus';
+export { getAccessibilityState } from './getAccessibilityState';
