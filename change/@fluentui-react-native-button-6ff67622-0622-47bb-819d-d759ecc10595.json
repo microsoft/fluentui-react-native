@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "move hoook to shareable location and add rending tests",
-  "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

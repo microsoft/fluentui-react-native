@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Mon, 17 Oct 2022 23:24:26 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.19
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
 
 ## 0.6.18
 
