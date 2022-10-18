@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Implement selector chaining in win32 + ios e2etests for optimizing element querying",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
