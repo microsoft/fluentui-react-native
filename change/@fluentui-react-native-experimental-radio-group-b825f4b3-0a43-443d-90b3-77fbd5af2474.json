@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Switch Radio to Pressable",
-  "packageName": "@fluentui-react-native/experimental-radio-group",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
