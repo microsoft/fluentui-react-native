@@ -194,21 +194,6 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
-  /* Finds the first test page button in the ScrollView */
-  async SetFirstScrollViewButtonChild() {
-    const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
-    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
-
-    for (const child of TestChildren) {
-      const autoId = await child.getAttribute('AutomationId');
-      if (autoId && autoId !== TESTPAGE_BUTTONS_SCROLLVIEWER && autoId.match(reg)) {
-        return await child;
-      }
-    }
-
-    return null;
-  }
-
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -253,10 +238,6 @@ export class BasePage {
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {
     return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
-  }
-
-  get _firstTestPageButton() {
-    return this.SetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/
