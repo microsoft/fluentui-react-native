@@ -225,7 +225,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    <View accessible={!enableSinglePaneView} testID={ROOT_VIEW} style={commonTestStyles.flex}>
+    // TODO: Figure out why making this view accessible breaks element querying on iOS.
+    <View accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW} style={commonTestStyles.flex}>
       {Platform.OS === ('win32' as any) ? (
         <FocusTrapZone style={themedStyles.root}>
           <TesterContent />
