@@ -171,13 +171,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -224,14 +224,13 @@ Array [
             }
           }
           accessible={true}
-          disabled={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -388,13 +387,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -558,13 +557,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -683,14 +682,13 @@ Array [
             }
           }
           accessible={true}
-          disabled={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -907,13 +905,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1032,13 +1030,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1255,13 +1253,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1380,13 +1378,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1603,13 +1601,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1716,13 +1714,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1931,13 +1929,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1986,6 +1984,7 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1993,9 +1992,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
