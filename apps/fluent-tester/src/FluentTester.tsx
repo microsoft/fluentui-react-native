@@ -225,7 +225,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    <View accessible testID={ROOT_VIEW} style={commonTestStyles.flex}>
+    <View accessible={!enableSinglePaneView} testID={ROOT_VIEW} style={commonTestStyles.flex}>
       {Platform.OS === ('win32' as any) ? (
         <FocusTrapZone style={themedStyles.root}>
           <TesterContent />
