@@ -10,7 +10,7 @@ if (PLATFORM) {
 }
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
-let _rootView: WebdriverIO.Element | null = null;
+let rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
@@ -24,15 +24,15 @@ export async function By(identifier: string) {
 }
 
 async function QueryWithChaining(identifier) {
-  if (_rootView === null) {
-    // Most of the elements we're searching for will be children of this _rootView node.
-    _rootView = await $('~' + ROOT_VIEW);
+  if (rootView === null) {
+    // Most of the elements we're searching for will be children of this rootView node.
+    rootView = await $('~' + ROOT_VIEW);
   }
   const selector = '~' + identifier;
   let queryResult: WebdriverIO.Element;
-  queryResult = await _rootView.$(selector);
+  queryResult = await rootView.$(selector);
   if (queryResult.error) {
-    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the _rootView node, meaning we need to start our search from the top of the tree.
+    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
     queryResult = await $(selector);
   }
   return queryResult;
