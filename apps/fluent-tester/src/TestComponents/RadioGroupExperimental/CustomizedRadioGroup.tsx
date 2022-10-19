@@ -29,6 +29,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [radioBorder, setRadioBorder] = React.useState<string>('black');
   const [radioSize, setRadioSize] = React.useState<number>(20);
   const [radioInnerCircleSize, setRadioInnerCircleSize] = React.useState<number>(10);
+  const [radioInnerCircleTop, setRadioInnerCircleTop] = React.useState<number>(4);
+  const [radioInnerCircleLeft, setRadioInnerCircleLeft] = React.useState<number>(4);
   const [radioFill, setRadioFill] = React.useState<string>('blue');
   const [color, setColor] = React.useState<string>('black');
   const [marginTop, setMarginTop] = React.useState<number>(1);
@@ -57,6 +59,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
       radioBorder,
       radioSize,
       radioInnerCircleSize,
+      radioInnerCircleTop,
+      radioInnerCircleLeft,
       color,
       marginTop,
       marginRight,
@@ -113,6 +117,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
     radioBorder,
     radioSize,
     radioInnerCircleSize,
+    radioInnerCircleLeft,
+    radioInnerCircleTop,
     radioFill,
     color,
     marginTop,
@@ -230,6 +236,24 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
             blurOnSubmit={true}
             onSubmitEditing={(e) => {
               setRadioInnerCircleSize(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio button inner circle top spacing"
+            style={commonStyles.textBox}
+            placeholder="radioInnerCircleTop space"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setRadioInnerCircleTop(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio button inner circle left spacing"
+            style={commonStyles.textBox}
+            placeholder="radioInnerCircleLeft space"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setRadioInnerCircleLeft(parseInt(e.nativeEvent.text.toString()));
             }}
           />
           <TextInput

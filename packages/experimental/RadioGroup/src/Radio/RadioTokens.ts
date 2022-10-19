@@ -27,6 +27,8 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     marginLeft: globalTokens.spacing.sNudge,
     flexDirection: 'row',
     alignItems: 'flex-start',
+    radioInnerCircleTop: 4,
+    radioInnerCircleLeft: 4,
 
     labelPositionBelow: {
       flexDirection: 'column',

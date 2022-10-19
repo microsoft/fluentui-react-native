@@ -52,11 +52,11 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           height: tokens.radioInnerCircleSize,
           width: tokens.radioInnerCircleSize,
           backgroundColor: tokens.radioFill,
-          left: 4,
-          top: 4,
+          left: tokens.radioInnerCircleLeft,
+          top: tokens.radioInnerCircleTop,
         },
       }),
-      ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
+      ['radioInnerCircleSize', 'radioVisibility', 'radioFill', 'radioInnerCircleLeft', 'radioInnerCircleTop'],
     ),
     labelContent: {
       style: {
