@@ -48,10 +48,17 @@ for (const manifestPath of workspacePackages.sort()) {
   packages[name] = { name, version, devOnly };
 }
 
+const { major, minor } = semver.coerce(devDependencies['react-native']);
+
 let profiles;
 
 profiles = {
-  [`latest`]: packages,
+  [`${major}.${minor}`]: packages,
+  // When updating FURN to a new version of react-native, save the profile for
+  // the latest react-native version in index.js to a new file and add that
+  // profile here. For example:
+  //
+  // ...require('./src/furn-profile-0.68.js')
 };
 
 const source = [
