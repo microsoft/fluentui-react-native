@@ -19,6 +19,8 @@ exports[`Radio component tests Radio default 1`] = `
       "selected": false,
     }
   }
+  accessible={true}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   labelPosition="after"
@@ -26,7 +28,6 @@ exports[`Radio component tests Radio default 1`] = `
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
