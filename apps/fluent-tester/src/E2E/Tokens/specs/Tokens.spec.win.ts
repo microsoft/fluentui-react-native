@@ -10,10 +10,6 @@ describe('Tokens Testing Initialization', function () {
   });
 
   it('Click and navigate to Tokens test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-
-    await TokenPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToTokensPage();
     await TokenPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
