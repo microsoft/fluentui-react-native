@@ -10,7 +10,7 @@ describe('Activity Indicator Testing Initialization', function () {
   });
 
   it('Click and navigate to Activity Indicator test page', async () => {
-    await ActivityIndicatorPageObject.scrollToComponentButton();
+    await ActivityIndicatorPageObject.mobileScrollToComponentButton();
     await ActivityIndicatorPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -10,7 +10,7 @@ describe('Link Testing Initialization', function () {
   });
 
   it('Click and navigate to Link test page', async () => {
-    await LinkPageObject.scrollToComponentButton();
+    await LinkPageObject.mobileScrollToComponentButton();
     await LinkPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

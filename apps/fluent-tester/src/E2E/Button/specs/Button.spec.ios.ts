@@ -10,7 +10,7 @@ describe('Button Testing Initialization', function () {
   });
 
   it('Click and navigate to Button test page', async () => {
-    await ButtonPageObject.scrollToComponentButton();
+    await ButtonPageObject.mobileScrollToComponentButton();
     await ButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

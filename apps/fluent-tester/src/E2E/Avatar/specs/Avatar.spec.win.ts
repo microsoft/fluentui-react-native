@@ -21,7 +21,7 @@ describe('Avatar Testing Initialization', function () {
 
   it('Click and navigate to Avatar test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await AvatarPageObject.scrollToComponentButton();
+
     await AvatarPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -10,7 +10,7 @@ describe('Shimmer Testing Initialization', function () {
   });
 
   it('Click and navigate to Shimmer test page', async () => {
-    await ShimmerPageObject.scrollToComponentButton();
+    await ShimmerPageObject.mobileScrollToComponentButton();
     await ShimmerPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

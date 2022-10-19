@@ -10,7 +10,7 @@ describe('Tokens Testing Initialization', function () {
   });
 
   it('Click and navigate to Tokens test page', async () => {
-    await TokenPageObject.scrollToComponentButton();
+    await TokenPageObject.mobileScrollToComponentButton();
     await TokenPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

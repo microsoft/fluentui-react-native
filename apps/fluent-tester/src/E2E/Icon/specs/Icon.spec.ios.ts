@@ -10,7 +10,7 @@ describe('Icon Testing Initialization', function () {
   });
 
   it('Click and navigate to Icon test page', async () => {
-    await IconPageObject.scrollToComponentButton();
+    await IconPageObject.mobileScrollToComponentButton();
     await IconPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

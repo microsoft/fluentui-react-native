@@ -14,7 +14,7 @@ describe('Switch Testing Initialization', function () {
 
   it('Click and navigate to Switch test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await SwitchPageObject.scrollToComponentButton();
+
     await SwitchPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

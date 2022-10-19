@@ -10,7 +10,7 @@ describe('Experimental Text Testing Initialization', function () {
   });
 
   it('Click and navigate to Experimental Text test page', async () => {
-    await ExperimentalTextPageObject.scrollToComponentButton();
+    await ExperimentalTextPageObject.mobileScrollToComponentButton();
     await ExperimentalTextPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

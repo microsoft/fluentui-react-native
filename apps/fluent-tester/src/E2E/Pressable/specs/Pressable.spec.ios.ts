@@ -10,7 +10,7 @@ describe('Pressable Testing Initialization', function () {
   });
 
   it('Click and navigate to Pressable test page', async () => {
-    await PressablePageObject.scrollToComponentButton();
+    await PressablePageObject.mobileScrollToComponentButton();
     await PressablePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

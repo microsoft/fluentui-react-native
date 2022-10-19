@@ -11,7 +11,7 @@ describe('Callout Testing Initialization', function () {
 
   it('Click and navigate to Callout test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await CalloutPageObject.scrollToComponentButton();
+
     await CalloutPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

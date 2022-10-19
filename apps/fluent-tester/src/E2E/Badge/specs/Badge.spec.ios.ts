@@ -10,7 +10,7 @@ describe('Badge Testing Initialization', function () {
   });
 
   it('Click and navigate to Badge test page', async () => {
-    await BasicBadgePageObject.scrollToComponentButton();
+    await BasicBadgePageObject.mobileScrollToComponentButton();
     await BasicBadgePageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -11,7 +11,7 @@ describe('Shimmer Testing Initialization', function () {
 
   it('Click and navigate to Shimmer test page', async () => {
     /* Scroll to component test page button in scrollview if not already visible*/
-    await ShimmerPageObject.scrollToComponentButton();
+
     await ShimmerPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
