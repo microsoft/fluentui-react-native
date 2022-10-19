@@ -6,6 +6,8 @@ A `Shadow` is a component that can be used to add Fluent shadows to other compon
 
 Shadows defined in the Fluent design system are actually comprised of two shadows. The **key shadow** is used to create a feeling of distance, and the **ambient shadow** is used to define the edges of the shape.
 
+The `Shadow` component is different from other components in that it was created to address limitations with React Native - Views in React Native can only have one Shadow set at a time. This component provides an easy way to add a Fluent shadow to another component.
+
 ## Shadow Depth Ramp
 
 These are the current `Shadow` variants:
