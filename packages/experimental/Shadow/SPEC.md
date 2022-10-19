@@ -23,13 +23,17 @@ Examples adding some Shadows to some text:
 
 ```tsx
 <Shadow shadowToken={theme.shadows.shadow8}>
-  <Text>Text box with shadow8</Text>
+  <View>
+    <Text>Text box with shadow8</Text>
+  </View>
 </Shadow>
 ```
 
 ```tsx
 <Shadow shadowToken={theme.shadows.shadow8brand}>
-  <Text>Text box with shadow8brand</Text>
+  <View>
+    <Text>Text box with shadow8brand</Text>
+  </View>
 </Shadow>
 ```
 
@@ -49,3 +53,4 @@ If `undefined` is passed into the `shadowToken` prop, no shadow will be rendered
 ## Notes
 
 - Known issue: there may be some slight rounding discrepancies due to hex to decimal rounding errors, ex. opacity 0.24 may end up at 0.25.
+- Comparison of what Shadow 'blur'/'radius' means across platforms and why some adjustments were needed on Apple platforms: https://github.com/microsoft/apple-ux-guide/blob/gh-pages/Shadows.md
