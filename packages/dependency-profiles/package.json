@@ -13,7 +13,8 @@
     "directory": "packages/dependency-profiles"
   },
   "scripts": {
-    "update-profiles": "node update-profiles.js"
+    "build": "fluentui-scripts build",
+    "update-profile": "node update-profile.js"
   },
   "devDependencies": {
     "@fluentui/react-native": "*",
