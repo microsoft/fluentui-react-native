@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add spacing tokens to Notification",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
