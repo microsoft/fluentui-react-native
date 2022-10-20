@@ -1,7 +1,6 @@
 import { Keys, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
 import { Attribute } from './consts';
-import { ChainablePromiseElement } from 'webdriverio';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
@@ -11,27 +10,30 @@ if (PLATFORM) {
 }
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
-let rootView: ChainablePromiseElement<WebdriverIO.Element> | null = null;
+let rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
-export function By(identifier: string, startFromTreeRoot: boolean = false) {
-  // Hacky workaround while I figure out why windows doesn't render the root node.
+export async function By(identifier: string) {
   if (PLATFORM === NativePlatform.Windows) {
-    startFromTreeRoot = true;
+    // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
+    return await $('~' + identifier);
   }
-  if (startFromTreeRoot) {
-    return $('~' + identifier);
-  } else {
-    return QueryWithChaining(identifier);
-  }
+  return await QueryWithChaining(identifier);
 }
 
-function QueryWithChaining(identifier) {
+async function QueryWithChaining(identifier) {
   if (rootView === null) {
     // Most of the elements we're searching for will be children of this rootView node.
-    rootView = $('~' + ROOT_VIEW);
+    rootView = await $('~' + ROOT_VIEW);
   }
-  return rootView.$('~' + identifier);
+  const selector = '~' + identifier;
+  let queryResult: WebdriverIO.Element;
+  queryResult = await rootView.$(selector);
+  if (queryResult.error) {
+    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
+    queryResult = await $(selector);
+  }
+  return queryResult;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -92,7 +94,7 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return this._testPage.isDisplayed();
+    return (await this._testPage).isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
@@ -101,7 +103,7 @@ export class BasePage {
   }
 
   async clickComponent(): Promise<void> {
-    await this._primaryComponent.click();
+    await (await this._primaryComponent).click();
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -111,7 +113,7 @@ export class BasePage {
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async mobileScrollToComponentButton(): Promise<void> {
-    if (await this._pageButton.isDisplayed()) {
+    if (await (await this._pageButton).isDisplayed()) {
       return;
     }
 
@@ -159,7 +161,7 @@ export class BasePage {
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
+    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',

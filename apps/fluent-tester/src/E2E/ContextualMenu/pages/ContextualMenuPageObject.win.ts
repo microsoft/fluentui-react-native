@@ -66,7 +66,7 @@ class ContextualMenuPageObject extends BasePage {
   }
 
   get _contextualMenuItem() {
-    return By(CONTEXTUALMENUITEM_TEST_COMPONENT, true);
+    return By(CONTEXTUALMENUITEM_TEST_COMPONENT);
   }
 }
 

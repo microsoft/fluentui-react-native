@@ -68,7 +68,7 @@ class MenuButtonPageObject extends BasePage {
   }
 
   get _menuItem() {
-    return By(MENU_ITEM_1_COMPONENT, true);
+    return By(MENU_ITEM_1_COMPONENT);
   }
 }
 
