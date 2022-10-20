@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { View, ScrollView } from 'react-native';
-import { FocusZone, FocusZoneDirection, Text } from '@fluentui/react-native';
+import { View, ScrollView, Pressable } from 'react-native';
+import { FocusZone, FocusZoneDirection, Text, useOnPressWithFocus } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { Checkbox, CheckboxProps } from '@fluentui-react-native/experimental-checkbox';
 import { Test, TestSection, PlatformStatus } from '../Test';
@@ -87,6 +87,50 @@ const FocusZoneNoProps: React.FunctionComponent = () => {
   );
 };
 
+const TinyBox = () => {
+  const ref = React.useRef<View>();
+  const onPress = useOnPressWithFocus(ref, null);
+
+  return <Pressable focusable style={focusZoneTestStyles.smallBoxStyle} ref={ref} onPress={onPress} />;
+};
+
+const WideBox = () => {
+  const ref = React.useRef<View>();
+  const onPress = useOnPressWithFocus(ref, null);
+
+  return <Pressable focusable style={focusZoneTestStyles.wideBoxStyle} ref={ref} onPress={onPress} />;
+};
+
+const TinyText = () => {
+  return (
+    <Text selectable style={focusZoneTestStyles.smallBoxStyle}>
+      Hi
+    </Text>
+  );
+};
+
+const WideText = () => {
+  return (
+    <Text selectable style={focusZoneTestStyles.wideBoxStyle}>
+      Hello world
+    </Text>
+  );
+};
+
+const DifferentSizesTest: React.FunctionComponent = () => {
+  return (
+    <FocusZone focusZoneDirection="bidirectional">
+      <View style={focusZoneTestStyles.dashedBorder}>
+        <WideBox />
+        <TinyBox />
+        <WideBox />
+        <TinyText />
+        <WideText />
+      </View>
+    </FocusZone>
+  );
+};
+
 const NestedFocusZone: React.FunctionComponent = () => {
   return (
     <FocusZoneListWrapper>
@@ -131,6 +175,10 @@ const focusZoneSections: TestSection[] = [
   {
     name: 'FocusZone with no props',
     component: FocusZoneNoProps,
+  },
+  {
+    name: 'Different Sized Children',
+    component: DifferentSizesTest,
   },
   {
     name: 'Nested FocusZone',
