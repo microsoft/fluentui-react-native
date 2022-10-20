@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Thu, 20 Oct 2022 18:30:02 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Oct 2022 23:16:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.33
+
+Thu, 20 Oct 2022 23:16:01 GMT
+
+### Patches
+
+- Update spec: why shadow component is different (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.2.32
 
