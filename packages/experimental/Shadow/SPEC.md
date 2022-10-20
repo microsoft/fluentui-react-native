@@ -19,21 +19,17 @@ These are the current `Shadow` variants:
 
 ## Sample Code
 
-Examples adding some Shadows to some text:
+Examples adding some Shadows to a Button:
 
 ```tsx
 <Shadow shadowToken={theme.shadows.shadow8}>
-  <View>
-    <Text>Text box with shadow8</Text>
-  </View>
+  <Button>Text box with shadow8</Button>
 </Shadow>
 ```
 
 ```tsx
 <Shadow shadowToken={theme.shadows.shadow8brand}>
-  <View>
-    <Text>Text box with shadow8brand</Text>
-  </View>
+  <Button>Text box with shadow8brand</Button>
 </Shadow>
 ```
 
@@ -50,7 +46,11 @@ If `undefined` is passed into the `shadowToken` prop, no shadow will be rendered
 
 `Shadow` must take exactly one child, which must be of type View.
 
+## Implementation details
+
+In order to get around the React Native restriction of one Shadow per View, the Shadow component adds an extra View around the original View. One of the shadows is placed on the original View and the other is placed on the extra View.  The Shadow component smartly extracts the original View's style props so that the extra View isn't noticable (ex. will always be the same size as the original View, padding/margins are set correctly, etc.)
+
 ## Notes
 
 - Known issue: there may be some slight rounding discrepancies due to hex to decimal rounding errors, ex. opacity 0.24 may end up at 0.25.
-- Comparison of what Shadow 'blur'/'radius' means across platforms and why some adjustments were needed on Apple platforms: https://github.com/microsoft/apple-ux-guide/blob/gh-pages/Shadows.md
+- One additional adjustment that was needed on Apple platforms was to divide the blur radius token value by 2. This was needed because shadow blur/radius looks different across platforms - more information here: https://github.com/microsoft/apple-ux-guide/blob/gh-pages/Shadows.md
