@@ -48,6 +48,18 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   shadowToken?: ShadowToken;
 
   /**
+   * Focused State on Android has inner and outer borders
+   * Outer Border is equivalent to the border tokens from IBorders
+   * This adds inner border support.
+   */
+  borderInnerColor?: ColorValue;
+  borderInnerWidth?: number;
+  borderInnerRadius?: number;
+  borderInnerStyle?: ViewStyle['borderStyle'];
+}
+
+export interface ButtonTokens extends ButtonCoreTokens {
+  /**
    * States that can be applied to a button
    */
   hovered?: ButtonTokens;
@@ -56,12 +68,6 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
   hasIconBefore?: ButtonTokens;
-}
-
-export interface ButtonTokens extends ButtonCoreTokens {
-  /**
-   * Additional states that can be applied to a button
-   */
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
   block?: ButtonTokens;

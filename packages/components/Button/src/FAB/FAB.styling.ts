@@ -1,18 +1,18 @@
-import { ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
-import { FABSlotProps } from './FAB.types';
+import { fabName, FABProps, FABSlotProps, FABTokens } from './FAB.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
-import { buttonCoreStates } from '../Button.styling';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
-export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, ButtonCoreTokens> = {
-  tokens: [defaultFABTokens, defaultFABColorTokens],
-  states: [...buttonCoreStates],
+export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small'];
+
+export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABTokens> = {
+  tokens: [defaultFABTokens, defaultFABColorTokens, fabName],
+  states: FABStates,
   slotProps: {
     root: buildProps(
-      (tokens: ButtonCoreTokens, theme: Theme) => ({
+      (tokens: FABTokens, theme: Theme) => ({
         style: {
           display: 'flex',
           alignItems: 'center',
@@ -30,7 +30,7 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, B
       ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     content: buildProps(
-      (tokens: ButtonCoreTokens, theme: Theme) => ({
+      (tokens: FABTokens, theme: Theme) => ({
         style: {
           color: tokens.color,
           ...getTextMarginAdjustment(),
@@ -41,7 +41,7 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, B
       ['color', 'spacingIconContentBefore', ...fontStyles.keys],
     ),
     icon: buildProps(
-      (tokens: ButtonCoreTokens) => ({
+      (tokens: FABTokens) => ({
         style: {
           tintColor: tokens.iconColor,
         },
@@ -51,7 +51,7 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, B
       ['iconColor', 'iconSize'],
     ),
     shadow: buildProps(
-      (tokens: ButtonCoreTokens) => ({
+      (tokens: FABTokens) => ({
         shadowToken: tokens.shadowToken,
       }),
       ['shadowToken'],

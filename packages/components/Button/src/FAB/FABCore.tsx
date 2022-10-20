@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import { fabName, FABProps, FABType } from './FAB.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
@@ -28,7 +28,7 @@ export const FAB = compose<FABType>({
   displayName: fabName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
     shadow: Shadow,
