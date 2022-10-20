@@ -862,6 +862,16 @@ exports[`Tabs header text and count 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
                 "color": "#242424",
@@ -948,6 +958,16 @@ exports[`Tabs header text and count 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
                 "color": "#616161",
@@ -1034,6 +1054,16 @@ exports[`Tabs header text and count 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
                 "color": "#616161",
@@ -1354,6 +1384,16 @@ exports[`Tabs props 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#323130",
@@ -1437,6 +1477,16 @@ exports[`Tabs props 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
                 "fontFamily": "Segoe UI",
@@ -1522,6 +1572,16 @@ exports[`Tabs props 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
                 "color": "#242424",
@@ -1608,6 +1668,16 @@ exports[`Tabs props 1`] = `
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
+            onAccessibilityTap={[Function]}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
               Object {
                 "color": "#616161",

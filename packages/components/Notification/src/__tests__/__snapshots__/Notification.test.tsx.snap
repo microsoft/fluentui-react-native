@@ -110,9 +110,18 @@ exports[`Notification component tests Notification default 1`] = `
       <Text
         ellipsizeMode="tail"
         numberOfLines={0}
+        onAccessibilityTap={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "alignSelf": "flex-start",
             "color": Object {
               "dynamic": Object {
                 "dark": "#77B7F7",
@@ -205,6 +214,16 @@ exports[`Notification component tests Notification default 1`] = `
       <Text
         ellipsizeMode="tail"
         numberOfLines={0}
+        onAccessibilityTap={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
         style={
           Object {
             "color": Object {

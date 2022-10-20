@@ -39,6 +39,16 @@ exports[`ContextualMenu default 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#323130",

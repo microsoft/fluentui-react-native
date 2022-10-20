@@ -39,9 +39,18 @@ exports[`Badge component tests Badge all props 1`] = `
     ♣
   </Text>
   <Text
-    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
@@ -81,9 +90,18 @@ exports[`Badge component tests Badge tokens 1`] = `
   }
 >
   <Text
-    accessible={false}
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
@@ -163,15 +181,20 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 12,
         "fontStyle": undefined,
-        "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -206,15 +229,20 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 12,
         "fontStyle": undefined,
-        "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -249,15 +277,20 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 12,
         "fontStyle": undefined,
-        "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -293,15 +326,20 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 12,
         "fontStyle": undefined,
-        "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
@@ -336,15 +374,20 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
+    onAccessibilityTap={[Function]}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 12,
         "fontStyle": undefined,
-        "fontWeight": "400",
-        "letterSpacing": undefined,
-        "lineHeight": undefined,
         "margin": 0,
         "textAlign": undefined,
         "textDecorationLine": undefined,
