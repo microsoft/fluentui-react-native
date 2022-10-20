@@ -194,13 +194,13 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup',
     component: RadioGroupTest,
     testPage: HOMEPAGE_RADIOGROUP_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'RadioGroup (Experimental)',
     component: RadioGroupExperimentalTest,
     testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'Spacing Tokens',
