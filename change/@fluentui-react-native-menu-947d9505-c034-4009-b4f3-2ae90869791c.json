@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add ability to have additional callback for callbacks overridden by MenuTrigger",
+  "packageName": "@fluentui-react-native/menu",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "none"
+}
