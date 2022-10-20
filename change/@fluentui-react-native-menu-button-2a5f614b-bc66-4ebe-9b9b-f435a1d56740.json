@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Bump react-native-svg: 12.3.0 -> 12.x",
+  "packageName": "@fluentui-react-native/menu-button",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
