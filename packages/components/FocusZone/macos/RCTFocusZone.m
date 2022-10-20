@@ -1,5 +1,6 @@
 #import "KeyCodes.h"
 #import "RCTFocusZone.h"
+#import "RCTi18nUtil.h"
 
 typedef enum {
 	FocusZoneActionNone,
@@ -27,7 +28,16 @@ static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 
 static inline CGFloat GetDistanceBetweenOriginsOfRects(NSRect rect1, NSRect rect2)
 {
-	return GetDistanceBetweenPoints(rect1.origin, rect2.origin);
+	// Get the top left corner of the rect, top right in RTL
+	bool isRTL = [[RCTI18nUtil sharedInstance] isRTL];
+
+	CGFloat rect1Offset = isRTL ? rect1.size.width : 0;
+	CGFloat rect2Offset = isRTL ? rect2.size.width : 0;
+	
+	NSPoint rect1Corner = NSMakePoint(rect1.origin.x + rect1Offset , rect1.origin.y);
+	NSPoint rect2Corner = NSMakePoint(rect2.origin.x + rect2Offset , rect2.origin.y);
+
+	return GetDistanceBetweenPoints(rect1Corner, rect2Corner);
 }
 
 static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSPoint point)
