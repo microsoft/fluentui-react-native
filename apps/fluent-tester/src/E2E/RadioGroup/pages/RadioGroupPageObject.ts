@@ -32,11 +32,11 @@ class RadioGroupPage extends BasePage {
   /* This resets the RadioGroup selection by clicking/selecting the 1st RadioButton in the RadioGroup.
    * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
   async resetRadioGroupSelection(): Promise<void> {
-    await (await this._firstRadioButton).click();
+    await this._firstRadioButton.click();
   }
 
   async getRadioButtonAccesibilityRole(): Promise<string> {
-    return await (await this._firstRadioButton).getAttribute('ControlType');
+    return await this._firstRadioButton.getAttribute('ControlType');
   }
 
   async isRadioButtonSelected(radioButtonSelector: RadioButtonSelector): Promise<boolean> {

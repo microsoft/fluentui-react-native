@@ -19,7 +19,7 @@ class ExperimentalMenuButtonPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT);
+    return By(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT, true);
   }
 
   get _secondaryComponent() {

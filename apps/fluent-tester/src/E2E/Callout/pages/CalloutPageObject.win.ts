@@ -11,7 +11,7 @@ class CalloutPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async didCalloutLoad(): Promise<boolean> {
-    return await (await this._primaryComponent).isDisplayed();
+    return await this._primaryComponent.isDisplayed();
   }
 
   /* OVERRIDE: This must scroll to the button that opens the callout, not the callout (since it's not visible on load.) */

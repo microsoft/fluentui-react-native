@@ -33,7 +33,7 @@ class MenuPageObject extends BasePage {
   }
 
   async menuIsExpanded(): Promise<boolean> {
-    return await (await this._secondaryComponent).isDisplayed();
+    return await this._secondaryComponent.isDisplayed();
   }
 
   async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
@@ -93,11 +93,11 @@ class MenuPageObject extends BasePage {
   }
 
   get _secondaryComponent() {
-    return By(MENUITEM_TEST_COMPONENT);
+    return By(MENUITEM_TEST_COMPONENT, true);
   }
 
   get _tertiaryComponent() {
-    return By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
+    return By(MENUITEM_NO_A11Y_LABEL_COMPONENT, true);
   }
 
   get _pageButton() {
