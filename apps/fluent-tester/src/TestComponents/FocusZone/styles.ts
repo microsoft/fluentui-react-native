@@ -43,6 +43,18 @@ export const focusZoneTestStyles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 100,
   },
+  smallBoxStyle: {
+    width: 20,
+    height: 20,
+    backgroundColor: 'lightgrey',
+    margin: 5,
+  },
+  wideBoxStyle: {
+    width: 150,
+    height: 20,
+    backgroundColor: 'lightgrey',
+    margin: 5,
+  },
 });
 
 export const GridButton = Button.compose({
