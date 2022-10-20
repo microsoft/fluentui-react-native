@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/dependency-profiles",
   "version": "0.0.0",
-  "description": "@rnx-kit/dep-check profiles covering packages published from FluentUI-React-Native",
+  "description": "@rnx-kit/align-deps profiles covering packages published from FluentUI-React-Native",
   "license": "MIT",
   "files": [
     "src/*"
