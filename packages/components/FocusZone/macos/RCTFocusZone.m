@@ -25,14 +25,9 @@ static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 	return sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 
-static inline NSPoint GetCenterOfRect(NSRect rect)
+static inline CGFloat GetDistanceBetweenOriginsOfRects(NSRect rect1, NSRect rect2)
 {
-	return NSMakePoint(NSMidX(rect), NSMidY(rect));
-}
-
-static inline CGFloat GetDistanceBetweenCentersOfRects(NSRect rect1, NSRect rect2)
-{
-	return GetDistanceBetweenPoints(GetCenterOfRect(rect1), GetCenterOfRect(rect2));
+	return GetDistanceBetweenPoints(rect1.origin, rect2.origin);
 }
 
 static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSPoint point)
@@ -275,7 +270,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 		if (!skip)
 		{
-			CGFloat distance = GetDistanceBetweenCentersOfRects(firstResponderRect, candidateRect);
+			CGFloat distance = GetDistanceBetweenOriginsOfRects(firstResponderRect, candidateRect);
 			
 			// If there are other candidate views inside the same ScrollView as the firstResponder,
 			// prefer those views over other views outside the scrollview, even if they are closer.
