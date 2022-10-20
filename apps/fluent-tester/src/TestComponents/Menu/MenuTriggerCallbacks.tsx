@@ -6,7 +6,7 @@ import { stackStyle } from '../Common/styles';
 import { ColorValue } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
-export const MenuTriggerOnClickOverride: React.FunctionComponent = () => {
+export const MenuTriggerOnClickCallback: React.FunctionComponent = () => {
   const [counter, setCounter] = React.useState<number>(0);
   const onClick = React.useCallback(() => {
     setCounter(counter + 1);
@@ -30,7 +30,7 @@ export const MenuTriggerOnClickOverride: React.FunctionComponent = () => {
   );
 };
 
-export const MenuTriggerHoverOverride: React.FunctionComponent = () => {
+export const MenuTriggerHoverCallback: React.FunctionComponent = () => {
   const [iconColor, setIconColor] = React.useState<ColorValue>('red');
   const onHoverIn = React.useCallback(() => {
     setIconColor('blue');
