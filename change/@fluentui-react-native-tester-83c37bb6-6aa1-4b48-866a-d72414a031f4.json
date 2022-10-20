@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove unnecessary scroll logic within e2e tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

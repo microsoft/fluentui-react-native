@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ContextualMenuPageObjectObject, { ContextualMenuSelector } from '../pages/ContextualMenuPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('ContextualMenu Testing Initialization', function () {
@@ -11,10 +10,6 @@ describe('ContextualMenu Testing Initialization', function () {
   });
 
   it('Click and navigate to ContextualMenu test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ContextualMenuPageObjectObject.scrollToComponentButton(Platform.Win32);
-    await ContextualMenuPageObjectObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToContextualMenuPage();
     await ContextualMenuPageObjectObject.waitForPageDisplayed(PAGE_TIMEOUT);

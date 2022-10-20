@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import PersonaCoinPageObject from '../pages/PersonaCoinPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
+import { MobilePlatform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('PersonaCoin Testing Initialization', function () {
@@ -11,7 +11,7 @@ describe('PersonaCoin Testing Initialization', function () {
   });
 
   it('Click and navigate to PersonaCoin test page', async () => {
-    await PersonaCoinPageObject.scrollToComponentButton(Platform.iOS);
+    await PersonaCoinPageObject.mobileScrollToComponentButton(MobilePlatform.iOS);
     await PersonaCoinPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
