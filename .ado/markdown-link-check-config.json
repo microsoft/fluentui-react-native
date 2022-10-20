@@ -1,7 +1,9 @@
 {
   "ignorePatterns": [
     {
-      "pattern": "^https://badge.fury.io/js/%40fluentui%2Freact-native",
+      "pattern": "^https://badge.fury.io/js/%40fluentui%2Freact-native"
+    },
+    {
       "pattern": "https://cla.opensource.microsoft.com"
     }
   ],
