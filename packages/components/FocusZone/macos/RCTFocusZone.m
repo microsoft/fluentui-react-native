@@ -26,7 +26,7 @@ static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 	return sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 
-static inline CGFloat GetDistanceBetweenOriginsOfRects(NSRect rect1, NSRect rect2)
+static inline CGFloat GetDistanceBetweenRects(NSRect rect1, NSRect rect2)
 {
 	// Get the top left corner of the rect, top right in RTL
 	bool isRTL = [[RCTI18nUtil sharedInstance] isRTL];
@@ -280,7 +280,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 		if (!skip)
 		{
-			CGFloat distance = GetDistanceBetweenOriginsOfRects(firstResponderRect, candidateRect);
+			CGFloat distance = GetDistanceBetweenRects(firstResponderRect, candidateRect);
 			
 			// If there are other candidate views inside the same ScrollView as the firstResponder,
 			// prefer those views over other views outside the scrollview, even if they are closer.
