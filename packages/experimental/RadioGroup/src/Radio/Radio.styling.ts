@@ -20,9 +20,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginTop: 0,
           marginRight: globalTokens.spacing.s,
           borderRadius: tokens.borderRadius,
+          borderColor: tokens.borderColor,
         },
       }),
-      ['flexDirection', 'borderRadius', 'alignItems'],
+      ['flexDirection', 'borderRadius', 'alignItems', 'borderColor'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
