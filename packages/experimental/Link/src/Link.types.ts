@@ -1,5 +1,5 @@
 import { TextTokens, TextProps } from '@fluentui-react-native/text';
-import { IFocusable, IPressableState, IWithPressableEvents, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 import { ViewProps } from 'react-native';
 
 export const linkName = 'Link';
@@ -46,7 +46,7 @@ export type LinkAppearance = 'default' | 'subtle';
 /**
  * Link props, extending Text props with Pressable options
  */
-export interface LinkProps extends IWithPressableOptions<TextProps> {
+export interface LinkProps extends TextProps {
   /**
    * link appearance
    */

@@ -1,19 +1,27 @@
 /** @jsx withSlots */
 import {
+  applyTokenLayers,
+  buildUseTokens,
+  compressible,
   fontStyles,
-  withSlots,
+  FontWeightValue,
+  mergeStyles,
+  useSlot,
   UseTokens,
   useFluentTheme,
-  mergeStyles,
-  compressible,
   patchTokens,
-  FontWeightValue,
+  Theme,
+  withSlots
 } from '@fluentui-react-native/framework';
+import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
+
+
+const textState: (keyof TextTokens)[] = ['hovered', 'focused', 'pressed'];
 
 const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
@@ -41,9 +49,11 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     wrap = true,
     ...rest
   } = props;
+
+  const pressable = useAsPressable({...rest, onPress});
   const theme = useFluentTheme();
-  // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
+  let [mergedTokens] = applyTokenLayers(tokens, textState, cache, (layer) => pressable.state[layer]);
 
   const textAlign = I18nManager.isRTL
     ? align === 'start'
@@ -65,7 +75,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   );
 
   // override tokens from props
-  [tokens, cache] = patchTokens(tokens, cache, {
+  [mergedTokens, cache] = patchTokens(mergedTokens, cache, {
     color,
     variant,
     fontFamily: font == 'base' ? 'primary' : font,
@@ -82,30 +92,30 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   const [tokenStyle] = cache(
     () => ({
       margin: 0,
-      color: tokens.color,
-      fontStyle: tokens.fontStyle,
-      textAlign: tokens.textAlign,
-      textDecorationLine: tokens.textDecorationLine,
-      ...fontStyles.from(tokens, theme),
+      color: mergedTokens.color,
+      fontStyle: mergedTokens.fontStyle,
+      textAlign: mergedTokens.textAlign,
+      textDecorationLine: mergedTokens.textDecorationLine,
+      ...fontStyles.from(mergedTokens, theme),
     }),
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
+  const mergedProps = {
+    ...rest,
+    ...pressable.props,
+    numberOfLines: truncate || !wrap ? 1 : 0,
+    onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+    onAccessibilityTap: onAccTap,
+    style: mergeStyles(tokenStyle, props.style)
+  };
 
-  // return a continuation function that allows this text to be compressed
-  return (extra: TextProps, children: React.ReactNode) => {
-    const mergedProps = {
-      numberOfLines: truncate || !wrap ? 1 : 0,
-      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
-      ...(Platform.OS === (('win32' as any) || 'windows') && { onAccessibilityTap: onAccTap }),
-      onPress,
-      ...rest,
-      ...extra,
-      style: mergeStyles(tokenStyle, props.style, extra?.style),
-    };
+  const RootSlot = useSlot<TextProps>(RNText, mergedProps);
+
+  return (_final: TextProps, children: React.ReactNode) => {
     return (
-      <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
+      <RootSlot ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'}>
         {children}
-      </RNText>
+      </RootSlot>
     );
   };
 }, useTextTokens);
