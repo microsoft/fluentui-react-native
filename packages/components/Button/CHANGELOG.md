@@ -1,8 +1,68 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.26.0
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Minor changes
+
+- move hoook to shareable location and add rending tests (email not defined)
+- Bump @fluentui-react-native/experimental-shadow to v0.2.31
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+- Bump @fluentui-react-native/pressable to v0.9.22
+
+## 0.25.12
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.13
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.12
+- Bump @fluentui-react-native/experimental-shadow to v0.2.30
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/icon to v0.13.17
+- Bump @fluentui-react-native/interactive-hooks to v0.18.15
+- Bump @fluentui-react-native/pressable to v0.9.21
+- Bump @fluentui-react-native/theme-tokens to v0.20.0
+- Bump @fluentui-react-native/text to v0.15.8
+
+## 0.25.11
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.12
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.11
+- Bump @fluentui-react-native/experimental-shadow to v0.2.29
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/icon to v0.13.16
+- Bump @fluentui-react-native/interactive-hooks to v0.18.14
+- Bump @fluentui-react-native/pressable to v0.9.20
+- Bump @fluentui-react-native/text to v0.15.7
+- Bump @fluentui-react-native/tokens to v0.17.5
+
+## 0.25.10
+
+Fri, 14 Oct 2022 17:16:50 GMT
+
+### Patches
+
+- Switch Button component to use React Native Pressable (sanajmi@microsoft.com)
+
+## 0.25.9
+
+Thu, 13 Oct 2022 05:37:25 GMT
+
+### Patches
+
+- Removed Toggle & Compound button from Android (singh.ayush@microsoft.com)
 
 ## 0.25.8
 

@@ -4,20 +4,14 @@ exports[`ContextualMenu default 1`] = `
 <View
   accessibilityLabel="Press for Nested MenuButton"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -31,13 +25,13 @@ exports[`ContextualMenu default 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": NaN,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }

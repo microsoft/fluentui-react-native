@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { AccessibilityState, I18nManager, Platform } from 'react-native';
-import { MenuItemProps, MenuItemState } from './MenuItem.types';
+import { MenuItemProps, MenuItemInfo } from './MenuItem.types';
 import { memoize } from '@fluentui-react-native/framework';
 import {
   InteractionEvent,
   isKeyPressEvent,
-  useAsPressable,
+  usePressableState,
   useKeyDownProps,
   useViewCommandFocus,
 } from '@fluentui-react-native/interactive-hooks';
@@ -16,7 +16,7 @@ import { useMenuTriggerContext } from '../context/menuTriggerContext';
 export const triggerKeys = [' ', 'Enter'];
 export const submenuTriggerKeys = [...triggerKeys, 'ArrowLeft', 'ArrowRight'];
 
-export const useMenuItem = (props: MenuItemProps): MenuItemState => {
+export const useMenuItem = (props: MenuItemProps): MenuItemInfo => {
   // attach the pressable state handlers
   const defaultComponentRef = React.useRef(null);
   const { onClick, accessibilityState, componentRef = defaultComponentRef, disabled, persistOnClick, ...rest } = props;
@@ -54,7 +54,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
     [disabled, hasSubmenu, onArrowClose, onClick, setOpen, shouldPersist],
   );
 
-  const pressable = useAsPressable({ ...rest, disabled, onPress: onInvoke });
+  const pressable = usePressableState({ ...rest, onPress: onInvoke });
   const itemRef = useViewCommandFocus(componentRef);
   const keys = isSubmenu ? submenuTriggerKeys : triggerKeys;
 
@@ -70,6 +70,7 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       accessibilityRole: 'menuitem',
       onAccessibilityTap: props.onAccessibilityTap || onInvoke,
       accessibilityState: getAccessibilityState(disabled, accessibilityState),
+      disabled,
       enableFocusRing: Platform.select({
         macos: false,
         default: !pressable.state.hovered, // win32
@@ -81,9 +82,11 @@ export const useMenuItem = (props: MenuItemProps): MenuItemState => {
       ref: itemRef,
       ...onKeyDownProps,
     },
-    state: pressable.state,
-    hasSubmenu,
-    hasCheckmarks,
+    state: {
+      ...pressable.state,
+      hasSubmenu,
+      hasCheckmarks,
+    },
   };
 };
 

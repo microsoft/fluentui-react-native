@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalTabsPageObject from '../pages/ExperimentalTabsPageObject';
 import { TAB_A11Y_ROLE, TABITEM_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental Tabs Testing Initialization', function () {
@@ -11,10 +10,6 @@ describe('Experimental Tabs Testing Initialization', function () {
   });
 
   it('Click and navigate to Experimental Tabs test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ExperimentalTabsPageObject.scrollToComponentButton(Platform.Win32);
-    await ExperimentalTabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToExperimentalTabsPage();
     await ExperimentalTabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
