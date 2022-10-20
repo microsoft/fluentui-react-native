@@ -89,11 +89,8 @@
     "@uifabricshared/themed-settings": "*",
     "@uifabricshared/theming-ramp": "*",
     "@uifabricshared/theming-react-native": "*",
-    "@office-iss/react-native-win32": ">=0.68.0 <0.68.6",
     "react-native": "^0.68.0",
-    "react-native-macos": "^0.68.0",
     "react-native-svg": "12.3.0",
-    "react-native-windows": "^0.68.0",
     "semver": "^7.3.5",
     "workspace-tools": "^0.26.3"
   }
