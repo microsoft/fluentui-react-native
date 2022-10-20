@@ -28,7 +28,7 @@
   "dependencies": {
     "@fluentui-react-native/framework": "0.8.21",
     "assert-never": "^1.2.1",
-    "react-native-svg": "12.3.0"
+    "react-native-svg": "12.x"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
