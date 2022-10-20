@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-types",
   "entries": [
     {
+      "date": "Tue, 11 Oct 2022 22:41:44 GMT",
+      "tag": "@fluentui-react-native/theme-types_v0.21.0",
+      "version": "0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adam.gleitman@gmail.com",
+            "package": "@fluentui-react-native/theme-types",
+            "commit": "3547a335f47efb90f52c10443dc85f755046a324",
+            "comment": "Add new spacing tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 30 Sep 2022 08:04:44 GMT",
       "tag": "@fluentui-react-native/theme-types_v0.20.0",
       "version": "0.20.0",

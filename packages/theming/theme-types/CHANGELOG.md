@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-types
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Tue, 11 Oct 2022 22:41:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.0
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Minor changes
+
+- Add new spacing tokens (adam.gleitman@gmail.com)
 
 ## 0.20.0
 

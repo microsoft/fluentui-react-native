@@ -55,7 +55,7 @@ describe('MenuButton Functional Testing', () => {
     await MenuButtonPageObject.scrollToTestElement();
     await MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape); // Reset MenuButton state for next test
+    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.ESCAPE); // Reset MenuButton state for next test
   });
 
   it('Click on MenuButton and validate that the list of Menu Items open', async () => {
@@ -67,9 +67,9 @@ describe('MenuButton Functional Testing', () => {
     await expect(await MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Type "SpaceBar" to select the MenuButton and validate that the list of Menu Items open', async () => {
+  it('Type "SPACE" to select the MenuButton and validate that the list of Menu Items open', async () => {
     /* Type a space on the MenuButton */
-    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Spacebar);
+    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.SPACE);
     await MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
 
     await expect(await MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
@@ -78,6 +78,6 @@ describe('MenuButton Functional Testing', () => {
 
   /* Runs after all tests. This ensures the MenuButton closes. If it stays open, the test driver won't be able to close the test app */
   afterAll(async () => {
-    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape);
+    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.ESCAPE);
   });
 });
