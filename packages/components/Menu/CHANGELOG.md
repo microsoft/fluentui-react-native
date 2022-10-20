@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 14 Oct 2022 19:11:13 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.53
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.24
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+- Bump @fluentui-react-native/button to v0.26.0
+
+## 1.0.52
+
+Mon, 17 Oct 2022 22:34:22 GMT
+
+### Patches
+
+- Remove isCloseOnHoverOutEnabled (sanajmi@microsoft.com)
+
+## 1.0.51
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- tests update to run on ios (email not defined)
+- Bump @fluentui-react-native/callout to v0.21.23
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/interactive-hooks to v0.18.15
+- Bump @fluentui-react-native/text to v0.15.8
+- Bump @fluentui-react-native/theme-tokens to v0.20.0
+- Bump @fluentui-react-native/button to v0.25.12
 
 ## 1.0.50
 

@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Fri, 14 Oct 2022 19:11:13 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.0
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Minor changes
+
+- move hoook to shareable location and add rending tests (email not defined)
+- Bump @fluentui-react-native/framework to v0.8.12
+
+## 0.18.15
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.17
 
 ## 0.18.14
 
