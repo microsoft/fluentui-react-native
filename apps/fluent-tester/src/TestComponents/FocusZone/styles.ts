@@ -27,6 +27,11 @@ export const focusZoneTestStyles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'dashed',
   },
+  radioGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    fontSize: 12,
+  },
   scrollViewStyle: {
     height: 100,
     width: 300,
@@ -37,6 +42,18 @@ export const focusZoneTestStyles = StyleSheet.create({
   scrollViewButton: {
     marginHorizontal: 20,
     marginBottom: 100,
+  },
+  smallBoxStyle: {
+    width: 20,
+    height: 20,
+    backgroundColor: 'lightgrey',
+    margin: 5,
+  },
+  wideBoxStyle: {
+    width: 150,
+    height: 20,
+    backgroundColor: 'lightgrey',
+    margin: 5,
   },
 });
 

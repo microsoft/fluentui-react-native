@@ -1,8 +1,75 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Wed, 12 Oct 2022 16:17:39 GMT and should not be manually modified.
+This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.2
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.24
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+
+## 0.7.1
+
+Tue, 18 Oct 2022 00:26:20 GMT
+
+### Patches
+
+- Switch Radio to Pressable (sanajmi@microsoft.com)
+
+## 0.7.0
+
+Mon, 17 Oct 2022 21:25:05 GMT
+
+### Minor changes
+
+- Added layout and labelPosition props (gulnazsayed@microsoft.com)
+
+## 0.6.3
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- test updates (email not defined)
+- Bump @fluentui-react-native/focus-zone to v0.10.23
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/interactive-hooks to v0.18.15
+- Bump @fluentui-react-native/pressable to v0.9.21
+- Bump @fluentui-react-native/text to v0.15.8
+- Bump @fluentui-react-native/theme-tokens to v0.20.0
+
+## 0.6.2
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/focus-zone to v0.10.22
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/interactive-hooks to v0.18.14
+- Bump @fluentui-react-native/pressable to v0.9.20
+- Bump @fluentui-react-native/text to v0.15.7
+- Bump @fluentui-react-native/tokens to v0.17.5
+
+## 0.6.1
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.21
+- Bump @fluentui-react-native/framework to v0.8.10
+- Bump @fluentui-react-native/interactive-hooks to v0.18.13
+- Bump @fluentui-react-native/pressable to v0.9.19
+- Bump @fluentui-react-native/text to v0.15.6
+- Bump @fluentui-react-native/theme-tokens to v0.19.6
+- Bump @fluentui-react-native/tokens to v0.17.4
 
 ## 0.6.0
 

@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ShimmerPageObject from '../pages/ShimmerPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
+import { MobilePlatform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Shimmer Testing Initialization', function () {
@@ -11,7 +11,7 @@ describe('Shimmer Testing Initialization', function () {
   });
 
   it('Click and navigate to Shimmer test page', async () => {
-    await ShimmerPageObject.scrollToComponentButton(Platform.iOS);
+    await ShimmerPageObject.mobileScrollToComponentButton(MobilePlatform.iOS);
     await ShimmerPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

@@ -1,5 +1,6 @@
 import { Keys } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
+import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
@@ -17,12 +18,18 @@ export const enum ComponentSelector {
   Secondary, // this._secondaryComponent
 }
 
-export const enum Platform {
-  Win32 = 0,
-  iOS,
-  macOS,
+export const enum MobilePlatform {
+  iOS = 0,
   Android,
 }
+
+export const enum NativePlatform {
+  Win32 = 0,
+  Windows,
+  macOS,
+}
+
+export type Platform = MobilePlatform | NativePlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -36,17 +43,17 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return await this._primaryComponent.getAttribute('ControlType');
+    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return await this._primaryComponent.getAttribute('Name');
+        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
 
       case ComponentSelector.Secondary:
-        return await this._secondaryComponent.getAttribute('Name');
+        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
     }
   }
 
@@ -66,9 +73,14 @@ export class BasePage {
     await this._primaryComponent.click();
   }
 
+  async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
+    return await element.getAttribute(attribute);
+  }
+
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
-   * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
-  async scrollToComponentButton(platform: Platform): Promise<void> {
+   * We use a negative number as the Y-coordinate because that enables us to scroll downwards.
+   * There are no need for win32 and macos cases, as the click command automatically scrolls the element into view. */
+  async mobileScrollToComponentButton(platform: MobilePlatform): Promise<void> {
     if (await (await this._pageButton).isDisplayed()) {
       return;
     }
@@ -77,23 +89,7 @@ export class BasePage {
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
     switch (platform) {
-      case Platform.Win32: {
-        const scrollDownKeys = [Keys.PAGE_DOWN];
-        await browser.waitUntil(
-          async () => {
-            await (await this._firstTestPageButton).addValue(scrollDownKeys);
-            scrollDownKeys.push(Keys.PAGE_DOWN);
-            return await (await this._pageButton).isDisplayed();
-          },
-          {
-            timeout: this.waitForUiEvent,
-            timeoutMsg: errorMsg,
-          },
-        );
-        break;
-      }
-
-      case Platform.iOS: {
+      case MobilePlatform.iOS: {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
@@ -106,13 +102,8 @@ export class BasePage {
         );
         break;
       }
-
-      case Platform.macOS:
-        // Not needed for macOS. It automatically scrolls
-        break;
-
       default:
-      case Platform.Android:
+      case MobilePlatform.Android:
         // Todo
         break;
     }
@@ -203,21 +194,6 @@ export class BasePage {
     return windowHandles.length > 1;
   }
 
-  /* Finds the first test page button in the ScrollView */
-  async SetFirstScrollViewButtonChild() {
-    const TestChildren = await (await this._testPageButtonScrollViewer).$$('//*');
-    const reg = new RegExp('Homepage_[a-zA-Z]*_Button');
-
-    for (const child of TestChildren) {
-      const autoId = await child.getAttribute('AutomationId');
-      if (autoId && autoId !== TESTPAGE_BUTTONS_SCROLLVIEWER && autoId.match(reg)) {
-        return await child;
-      }
-    }
-
-    return null;
-  }
-
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/
@@ -262,10 +238,6 @@ export class BasePage {
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {
     return By(TESTPAGE_BUTTONS_SCROLLVIEWER);
-  }
-
-  get _firstTestPageButton() {
-    return this.SetFirstScrollViewButtonChild();
   }
 
   /****************** Error Messages ******************/

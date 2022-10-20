@@ -20,7 +20,18 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
   <RCTFocusZone
     navigateAtEnd="NavigateWrap"
   >
-    Your component
+    <View
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+        }
+      }
+    >
+      Your component
+    </View>
   </RCTFocusZone>
 </View>
 `;
