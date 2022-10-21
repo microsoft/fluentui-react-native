@@ -15,12 +15,15 @@ exports[`Link component tests Default Link 1`] = `
   focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
   onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "flex-start",
@@ -72,12 +75,15 @@ exports[`Link component tests Default Link as a pressable 1`] = `
   focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
   onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "flex-start",
@@ -159,12 +165,15 @@ exports[`Link component tests Subtle Link 1`] = `
   focusable={true}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
   onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "flex-start",

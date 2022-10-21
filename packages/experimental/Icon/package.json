@@ -18,12 +18,8 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.16.5 <1.0.0",
     "@fluentui-react-native/framework": "0.8.12",
     "@fluentui-react-native/text": "^0.15.8",
-    "@fluentui-react-native/theme-types": ">=0.22.0 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.16.2 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.17.5 <1.0.0",
     "react-native-svg": "12.3.0"
   },
   "repository": {
@@ -32,13 +28,10 @@
     "directory": "packages/experimental/Icon"
   },
   "devDependencies": {
-    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
-    "@office-iss/react-native-win32": ">=0.68.0 <0.68.6",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0",
-    "react-native-svg-transformer": "^1.0.0"
+    "react-native": "^0.68.0"
   },
   "peerDependencies": {
     "react": "17.0.2",

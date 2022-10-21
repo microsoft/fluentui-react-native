@@ -4,7 +4,7 @@ import {
   useOnPressWithFocus,
   useViewCommandFocus,
   getAccessibilityState,
-  usePressableState,
+  useAsPressable,
 } from '@fluentui-react-native/interactive-hooks';
 import { LinkProps, LinkInfo } from './Link.types';
 import { Linking } from 'react-native';
@@ -44,7 +44,7 @@ export const useLink = (props: LinkProps): LinkInfo => {
   // GH #1336: Set focusRef to null if link is disabled to prevent getting keyboard focus.
   const focusRef = isDisabled && !focusable ? null : componentRef;
   const onPressWithFocus = useOnPressWithFocus(focusRef, linkOnPress);
-  const pressable = usePressableState({ ...rest, disabled: isDisabled, onPress: onPressWithFocus });
+  const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onPressWithFocus });
   const onKeyUpProps = useKeyProps(linkOnPress, ' ', 'Enter');
 
   const newState = {
