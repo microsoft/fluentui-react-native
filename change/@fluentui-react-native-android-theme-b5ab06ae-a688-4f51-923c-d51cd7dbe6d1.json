@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "FontPipeline",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
