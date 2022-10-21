@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Fri, 21 Oct 2022 13:09:26 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.5.0",
+      "version": "0.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df",
+            "comment": "FontPipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.19.0",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.16.43",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.13",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Oct 2022 23:16:01 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.4.49",
       "version": "0.4.49",

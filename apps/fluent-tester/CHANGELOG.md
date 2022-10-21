@@ -1,8 +1,45 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 20 Oct 2022 23:16:01 GMT and should not be manually modified.
+This log was last generated on Fri, 21 Oct 2022 13:09:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.103.4
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/android-theme to v0.13.0
+- Bump @fluentui-react-native/apple-theme to v0.16.4
+- Bump @fluentui-react-native/avatar to v1.2.26
+- Bump @fluentui-react-native/badge to v0.1.48
+- Bump @fluentui-react-native/button to v0.27.0
+- Bump @fluentui-react-native/default-theme to v0.16.6
+- Bump @fluentui-react-native/dropdown to v0.5.2
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.13
+- Bump @fluentui-react-native/experimental-avatar to v0.16.17
+- Bump @fluentui-react-native/experimental-button to v0.16.43
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.32
+- Bump @fluentui-react-native/experimental-expander to v0.4.15
+- Bump @fluentui-react-native/experimental-link to v0.1.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.5.0
+- Bump @fluentui-react-native/experimental-radio-group to v0.7.5
+- Bump @fluentui-react-native/experimental-shadow to v0.2.34
+- Bump @fluentui-react-native/experimental-shimmer to v0.7.14
+- Bump @fluentui-react-native/experimental-tabs to v0.5.30
+- Bump @fluentui-react-native/experimental-text to v0.11.15
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/icon to v0.13.18
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+- Bump @fluentui-react-native/menu to v1.0.56
+- Bump @fluentui-react-native/notification to v0.17.28
+- Bump @fluentui-react-native/stack to v0.7.17
+- Bump @fluentui-react-native/switch to v0.6.21
+- Bump @fluentui-react-native/text to v0.15.9
+- Bump @fluentui-react-native/theming-utils to v0.17.0
+- Bump @fluentui-react-native/win32-theme to v0.22.1
+- Bump @fluentui/react-native to v0.32.43
 
 ## 0.103.3
 

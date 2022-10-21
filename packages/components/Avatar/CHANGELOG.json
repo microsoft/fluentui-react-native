@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Fri, 21 Oct 2022 13:09:26 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.2.26",
+      "version": "1.2.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.48",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.13",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.18",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.2",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 20 Oct 2022 23:16:01 GMT",
       "tag": "@fluentui-react-native/avatar_v1.2.25",
       "version": "1.2.25",
