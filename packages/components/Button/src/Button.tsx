@@ -5,11 +5,11 @@ import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
-import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
-import { extractOuterStylePropsAndroid } from './utils.android';
+import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -46,13 +46,10 @@ export const Button = compose<ButtonType>({
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
-    const [ripplePressedAndroid, setRippleStateAndroid] = React.useState(false);
 
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
-    const Slots = useSlots(userProps, (layer) =>
-      buttonLookup(layer, { ...button.state, pressed: ripplePressedAndroid || button.state.pressed }, userProps),
-    );
+    const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
 
     // now return the handler for finishing render
     return (final: ButtonProps, ...children: React.ReactNode[]) => {
@@ -94,19 +91,7 @@ export const Button = compose<ButtonType>({
         return (
           <Slots.rippleContainer style={outerStyleProps}>
             {/* RN Pressable needs to be wrapped with a root view to support curved edges */}
-            <Slots.root
-              accessibilityLabel={label}
-              {...mergedProps}
-              style={innerStyleProps}
-              onPressIn={memoize(() => {
-                setRippleStateAndroid(true);
-                mergedProps.onPressIn?.();
-              })}
-              onPressOut={memoize(() => {
-                setRippleStateAndroid(false);
-                mergedProps.onPressOut?.();
-              })}
-            >
+            <Slots.root accessibilityLabel={label} {...mergedProps} style={innerStyleProps}>
               {buttonContent}
             </Slots.root>
           </Slots.rippleContainer>

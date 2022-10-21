@@ -1,6 +1,7 @@
 import { memoize } from '@fluentui-react-native/framework';
-import { ViewStyle } from '@office-iss/react-native-win32';
+import { ViewStyle } from 'react-native';
 
+// This function is used to seperate out inner and outer styles for the RippleContainer
 export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [outerStyleProps: ViewStyle, innerStyleProps: ViewStyle] => {
   const {
     margin,
