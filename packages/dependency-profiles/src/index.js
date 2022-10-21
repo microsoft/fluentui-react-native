@@ -2,10 +2,6 @@
 /* eslint-disable */
 module.exports = {
   "0.68": {
-    "svg": {
-      "name": "react-native-svg",
-      "version": "12.3.0"
-    },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
       "version": "0.103.0"

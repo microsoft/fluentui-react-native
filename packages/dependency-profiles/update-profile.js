@@ -5,7 +5,7 @@ const path = require('path');
 const OUTPUT_FILE = `${__dirname}/src/index.js`;
 
 const CAPABILITY_MAP = {
-  'react-native-svg': 'svg',
+  // empty for now
 };
 
 const fs = require('fs');
