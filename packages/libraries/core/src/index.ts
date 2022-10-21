@@ -17,7 +17,7 @@ export type {
   ButtonShape,
   ButtonSize,
   ButtonSlotProps,
-  ButtonState,
+  ButtonInfo,
   ButtonTokens,
   ButtonType,
   IButtonInfo,

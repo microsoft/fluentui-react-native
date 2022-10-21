@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { ColorValue } from 'react-native';
 import { XmlProps } from 'react-native-svg';
-import type { IViewProps } from '@fluentui-react-native/adapters';
 import { TextProps } from '@fluentui-react-native/text';
-import { IPressableHooks } from '@fluentui-react-native/interactive-hooks';
+import { PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { MenuItemProps, MenuItemTokens } from '../MenuItem/MenuItem.types';
 
 export const menuItemCheckboxName = 'MenuItemCheckbox';
@@ -41,11 +40,13 @@ export interface MenuItemCheckboxProps extends MenuItemProps {
    */
   name: string;
 }
-
-export interface MenuItemCheckboxState extends IPressableHooks<MenuItemCheckboxProps & React.ComponentPropsWithRef<any>> {}
+export interface MenuItemCheckboxInfo {
+  props: MenuItemCheckboxProps & React.ComponentPropsWithRef<any>;
+  state: PressableState;
+}
 
 export interface MenuItemCheckboxSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
   checkmark?: XmlProps;
   content?: TextProps;
 }

@@ -82,8 +82,8 @@ export const Button = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
-    root: View,
-    ripple: Pressable,
+    root: Pressable,
+    rippleContainer: View,
     icon: Icon,
     content: Text,
   },

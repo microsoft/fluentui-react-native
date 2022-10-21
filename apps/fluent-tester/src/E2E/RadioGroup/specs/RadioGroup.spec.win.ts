@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupPageObject, { RadioButtonSelector } from '../pages/RadioGroupPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 import {
   RADIOGROUP_ACCESSIBILITY_LABEL,
@@ -17,10 +17,6 @@ describe('RadioGroup/RadioButton Testing Initialization', function () {
   });
 
   it('Click and navigate to RadioGroup test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await RadioGroupPageObject.scrollToComponentButton(Platform.Win32);
-    await RadioGroupPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToRadioGroupPage();
     await RadioGroupPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -94,7 +90,7 @@ describe('RadioGroup Functional Testing', async () => {
 
   it('Keyboard to RadioButton and check for Selection state', async () => {
     // Presses the ArrowDown key while the first (A) RadioButton is selected
-    await RadioGroupPageObject.sendKey(Keys.Down_Arrow, RadioButtonSelector.First);
+    await RadioGroupPageObject.sendKey(Keys.ARROW_DOWN, RadioButtonSelector.First);
     await RadioGroupPageObject.waitForRadioButtonSelected(RadioButtonSelector.Second, 5000);
 
     /* Validate the RadioButton is selected */
@@ -104,7 +100,7 @@ describe('RadioGroup Functional Testing', async () => {
 
   it("Keyboard to DISABLED RadioButton and validate it doesn't get selected", async () => {
     // Presses the ArrowDown key while the second (B) RadioButton is selected
-    await RadioGroupPageObject.sendKey(Keys.Down_Arrow, RadioButtonSelector.Second);
+    await RadioGroupPageObject.sendKey(Keys.ARROW_DOWN, RadioButtonSelector.Second);
     await RadioGroupPageObject.waitForRadioButtonSelected(RadioButtonSelector.Fourth, 5000); // It should skip RadioButton 3 since it is disabled
 
     /* Validate the RadioButton is selected */

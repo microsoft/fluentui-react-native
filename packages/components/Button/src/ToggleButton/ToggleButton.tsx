@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Pressable } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { ToggleButtonProps, toggleButtonName, ToggleButtonType } from './ToggleButton.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -15,7 +15,7 @@ export const ToggleButton = compose<ToggleButtonType>({
   displayName: toggleButtonName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
   },

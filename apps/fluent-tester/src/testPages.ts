@@ -25,6 +25,7 @@ import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './TestComponents/Press
 import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './TestComponents/RadioGroup';
 import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
 import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
+import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
 import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
 import { SvgTest, HOMEPAGE_SVG_BUTTON } from './TestComponents/Svg';
@@ -35,6 +36,7 @@ import { TextTest, HOMEPAGE_TEXT_BUTTON } from './TestComponents/Text';
 import { TextExperimentalTest, HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './TestComponents/TextExperimental';
 import { ThemeTest, HOMEPAGE_THEME_BUTTON } from './TestComponents/Theme';
 import { TokenTest, HOMEPAGE_TOKEN_BUTTON } from './TestComponents/Tokens';
+import { ExperimentalLinkTest, HOMEPAGE_EXPERIMENTAL_LINK_BUTTON } from './TestComponents/LinkExperimental';
 
 export const tests: TestDescription[] = [
   {
@@ -141,6 +143,12 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
   },
   {
+    name: 'Link (Experimental)',
+    component: ExperimentalLinkTest,
+    testPage: HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
+    platforms: ['win32'],
+  },
+  {
     name: 'Menu',
     component: MenuTest,
     testPage: HOMEPAGE_MENU_BUTTON,
@@ -186,13 +194,19 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup',
     component: RadioGroupTest,
     testPage: HOMEPAGE_RADIOGROUP_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'RadioGroup (Experimental)',
     component: RadioGroupExperimentalTest,
     testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32'],
+    platforms: ['macos', 'win32'],
+  },
+  {
+    name: 'Spacing Tokens',
+    component: SpacingTokensTest,
+    testPage: HOMEPAGE_SPACING_BUTTON,
+    platforms: ['ios'],
   },
   {
     name: 'Separator',

@@ -2,10 +2,10 @@ import * as React from 'react';
 import { ViewProps, ViewStyle, ColorValue, PressableProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableHooks, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import { IViewProps } from '@fluentui-react-native/adapters';
 import { ShadowToken } from '@fluentui-react-native/theme-types';
+import { View } from '@office-iss/react-native-win32';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -75,7 +75,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   hasIconAfter?: ButtonTokens;
 }
 
-export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
@@ -148,11 +148,14 @@ export interface ButtonProps extends ButtonCoreProps {
   loading?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+export interface ButtonInfo {
+  props: ButtonProps & React.ComponentPropsWithRef<any>;
+  state: PressableState;
+}
 
 export interface ButtonSlotProps {
-  root: React.PropsWithRef<IViewProps>;
-  ripple?: PressableProps;
+  root: React.PropsWithRef<PressablePropsExtended>;
+  rippleContainer: View;
   icon: IconProps;
   content: TextProps;
 }

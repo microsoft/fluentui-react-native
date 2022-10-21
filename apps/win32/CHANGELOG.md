@@ -1,8 +1,211 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 06 Oct 2022 20:27:37 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Oct 2022 23:16:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.21
+
+Thu, 20 Oct 2022 23:16:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.3
+
+## 0.27.20
+
+Thu, 20 Oct 2022 19:21:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.2
+
+## 0.27.19
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.1
+
+## 0.27.18
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.0
+
+## 0.27.17
+
+Tue, 18 Oct 2022 00:26:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.102.3
+
+## 0.27.16
+
+Mon, 17 Oct 2022 23:24:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.102.2
+
+## 0.27.15
+
+Mon, 17 Oct 2022 22:34:22 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.102.1
+
+## 0.27.14
+
+Mon, 17 Oct 2022 21:25:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.102.0
+
+## 0.27.13
+
+Mon, 17 Oct 2022 19:16:05 GMT
+
+### Patches
+
+- Re-enable and rewrite parts of menu e2etest (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.101.9
+
+## 0.27.12
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.8
+
+## 0.27.11
+
+Fri, 14 Oct 2022 23:01:57 GMT
+
+### Patches
+
+- Port partner focuszone tests to FURN (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.101.7
+
+## 0.27.10
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.6
+
+## 0.27.9
+
+Fri, 14 Oct 2022 18:04:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.5
+
+## 0.27.8
+
+Fri, 14 Oct 2022 17:16:51 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.4
+
+## 0.27.7
+
+Fri, 14 Oct 2022 14:12:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.3
+
+## 0.27.6
+
+Thu, 13 Oct 2022 05:37:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.2
+
+## 0.27.5
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.1
+
+## 0.27.4
+
+Wed, 12 Oct 2022 16:17:40 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.101.0
+
+## 0.27.3
+
+Wed, 12 Oct 2022 13:07:10 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.100.3
+
+## 0.27.2
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.100.2
+
+## 0.27.1
+
+Mon, 10 Oct 2022 23:26:12 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.100.1
+
+## 0.27.0
+
+Mon, 10 Oct 2022 22:38:04 GMT
+
+### Minor changes
+
+- Improving scroll logic and adding more Key constants (safreibe@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.100.0
+
+## 0.26.35
+
+Sat, 08 Oct 2022 00:11:05 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.99.14
+
+## 0.26.34
+
+Fri, 07 Oct 2022 21:15:15 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.99.13
+
+## 0.26.33
+
+Fri, 07 Oct 2022 20:30:16 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.99.12
 
 ## 0.26.32
 

@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxPageObject, { CheckboxSelector } from '../pages/CheckboxPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../TestComponents/Checkbox/consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 
@@ -11,10 +11,6 @@ describe('Checkbox Testing Initialization', () => {
   });
 
   it('Click and navigate to Checkbox test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await CheckboxPageObject.scrollToComponentButton(Platform.Win32);
-    await CheckboxPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToCheckboxPage();
     await CheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -76,9 +72,9 @@ describe('Checkbox Functional Testing', () => {
     await expect(await CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "Spacebar" on a Checkbox and verify it toggles', async () => {
+  it('Click the "SPACE" on a Checkbox and verify it toggles', async () => {
     /* Presses the "space bar" to select the Checkbox */
-    await CheckboxPageObject.sendKey(CheckboxSelector.Primary, Keys.Spacebar);
+    await CheckboxPageObject.sendKey(CheckboxSelector.Primary, Keys.SPACE);
     await CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
     /* Validate the Checkbox is selected */

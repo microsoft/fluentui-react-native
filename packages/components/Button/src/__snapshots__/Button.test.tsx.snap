@@ -2,6 +2,22 @@
 
 exports[`Button component tests Button circular 1`] = `
 <View
+  accessibilityLabel="Circular Button"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  shape="circular"
   style={
     Object {
       "alignSelf": "baseline",
@@ -37,18 +53,15 @@ exports[`Button component tests Button circular 1`] = `
     shape="circular"
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 9999,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -77,6 +90,21 @@ exports[`Button component tests Button circular 1`] = `
 
 exports[`Button component tests Button composed 1`] = `
 <View
+  accessibilityLabel="Composed Button with RNText"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "baseline",
@@ -111,18 +139,16 @@ exports[`Button component tests Button composed 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -150,6 +176,21 @@ exports[`Button component tests Button composed 1`] = `
 
 exports[`Button component tests Button customized 1`] = `
 <View
+  accessibilityLabel="Custom Button"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "baseline",
@@ -184,18 +225,15 @@ exports[`Button component tests Button customized 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -224,6 +262,21 @@ exports[`Button component tests Button customized 1`] = `
 
 exports[`Button component tests Button default 1`] = `
 <View
+  accessibilityLabel="Default Button"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "baseline",
@@ -258,18 +311,15 @@ exports[`Button component tests Button default 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -296,8 +346,86 @@ exports[`Button component tests Button default 1`] = `
 </View>
 `;
 
+exports[`Button component tests Button disabled 1`] = `
+<View
+  accessibilityLabel="Disabled Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#f3f2f1",
+      "borderRadius": 4,
+      "borderWidth": 1,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#a19f9d",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Disabled Button
+  </Text>
+</View>
+`;
+
 exports[`Button component tests Button large 1`] = `
 <View
+  accessibilityLabel="Large Button"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="large"
   style={
     Object {
       "alignSelf": "baseline",
@@ -333,18 +461,15 @@ exports[`Button component tests Button large 1`] = `
     size="large"
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 7,
-        "paddingHorizontal": 15,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 16,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -373,6 +498,22 @@ exports[`Button component tests Button large 1`] = `
 
 exports[`Button component tests Button primary 1`] = `
 <View
+  accessibilityLabel="Primary Button"
+  accessibilityRole="button"
+  accessible={true}
+  appearance="primary"
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "baseline",
@@ -408,18 +549,15 @@ exports[`Button component tests Button primary 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#005a9e",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -448,6 +586,22 @@ exports[`Button component tests Button primary 1`] = `
 
 exports[`Button component tests Button small 1`] = `
 <View
+  accessibilityLabel="Small Button"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="small"
   style={
     Object {
       "alignSelf": "baseline",
@@ -483,18 +637,15 @@ exports[`Button component tests Button small 1`] = `
     size="small"
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 12,
+        "fontWeight": "400",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -523,6 +674,22 @@ exports[`Button component tests Button small 1`] = `
 
 exports[`Button component tests Button square 1`] = `
 <View
+  accessibilityLabel="Square Button"
+  accessibilityRole="button"
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  shape="square"
   style={
     Object {
       "alignSelf": "baseline",
@@ -558,18 +725,15 @@ exports[`Button component tests Button square 1`] = `
     shape="square"
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#8a8886",
-        "borderRadius": 0,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >
@@ -598,6 +762,22 @@ exports[`Button component tests Button square 1`] = `
 
 exports[`Button component tests Button subtle 1`] = `
 <View
+  accessibilityLabel="Subtle Button"
+  accessibilityRole="button"
+  accessible={true}
+  appearance="subtle"
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "baseline",
@@ -633,18 +813,15 @@ exports[`Button component tests Button subtle 1`] = `
     onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "alignItems": "center",
-        "alignSelf": "flex-start",
-        "borderColor": "#ffffff",
-        "borderRadius": 4,
-        "borderWidth": 1,
-        "display": "flex",
-        "flexDirection": "row",
-        "justifyContent": "center",
-        "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
-        "width": undefined,
+        "color": "#323130",
+        "fontFamily": "System",
+        "fontSize": 14,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
       }
     }
   >

@@ -2,7 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage';
 import MenuButtonPageObject, { MenuButtonSelector } from '../pages/MenuButtonPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { MENU_BUTTON_ACCESSIBILITY_LABEL, MENU_BUTTON_TEST_COMPONENT_LABEL } from '../../../TestComponents/MenuButton/consts';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButton Testing Initialization', function () {
@@ -12,10 +12,6 @@ describe('MenuButton Testing Initialization', function () {
   });
 
   it('Click and navigate to MenuButton test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await MenuButtonPageObject.scrollToComponentButton(Platform.Win32);
-    await MenuButtonPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToMenuButtonPage();
     await MenuButtonPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -55,7 +51,7 @@ describe('MenuButton Functional Testing', () => {
     await MenuButtonPageObject.scrollToTestElement();
     await MenuButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
-    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape); // Reset MenuButton state for next test
+    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.ESCAPE); // Reset MenuButton state for next test
   });
 
   it('Click on MenuButton and validate that the list of Menu Items open', async () => {
@@ -67,9 +63,9 @@ describe('MenuButton Functional Testing', () => {
     await expect(await MenuButtonPageObject.didAssertPopup()).toBeFalsy(MenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Type "SpaceBar" to select the MenuButton and validate that the list of Menu Items open', async () => {
+  it('Type "SPACE" to select the MenuButton and validate that the list of Menu Items open', async () => {
     /* Type a space on the MenuButton */
-    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Spacebar);
+    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.SPACE);
     await MenuButtonPageObject.waitForMenuItemsToOpen(PAGE_TIMEOUT);
 
     await expect(await MenuButtonPageObject.menuItemDisplayed()).toBeTruthy();
@@ -78,6 +74,6 @@ describe('MenuButton Functional Testing', () => {
 
   /* Runs after all tests. This ensures the MenuButton closes. If it stays open, the test driver won't be able to close the test app */
   afterAll(async () => {
-    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.Escape);
+    await MenuButtonPageObject.sendKey(MenuButtonSelector.MenuButton, Keys.ESCAPE);
   });
 });

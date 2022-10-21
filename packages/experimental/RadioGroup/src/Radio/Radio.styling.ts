@@ -1,9 +1,10 @@
 import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
-import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
+import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { defaultRadioTokens } from './RadioTokens';
+import { fontStyles } from '@fluentui-react-native/tokens';
 
-export const radioStates: (keyof RadioTokens)[] = ['focused', 'hovered', 'pressed', 'selected', 'disabled'];
+export const radioStates: (keyof RadioTokens)[] = ['labelPositionBelow', 'focused', 'hovered', 'pressed', 'selected', 'disabled'];
 
 export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, RadioTokens> = {
   tokens: [defaultRadioTokens, radioName],
@@ -13,14 +14,15 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       (tokens: RadioTokens) => ({
         style: {
           display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'row',
+          alignItems: tokens.alignItems,
+          flexDirection: tokens.flexDirection,
           minHeight: 20,
           marginTop: 0,
+          marginRight: globalTokens.spacing.s,
           borderRadius: tokens.borderRadius,
         },
       }),
-      ['borderRadius'],
+      ['flexDirection', 'borderRadius', 'alignItems'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
@@ -34,13 +36,13 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           borderStyle: tokens.borderStyle,
           borderRadius: tokens.radioSize / 2,
           borderColor: tokens.radioBorder,
-          marginTop: globalTokens.spacing.xs,
-          marginRight: globalTokens.spacing.sNudge,
-          marginBottom: globalTokens.spacing.sNudge,
-          marginLeft: globalTokens.spacing.sNudge,
+          marginTop: tokens.marginTop,
+          marginRight: tokens.marginRight,
+          marginBottom: tokens.marginBottom,
+          marginLeft: tokens.marginLeft,
         },
       }),
-      ['radioBorderWidth', 'borderStyle', 'radioSize', 'radioBorder'],
+      ['radioBorderWidth', 'borderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
     ),
     innerCircle: buildProps(
       (tokens: RadioTokens) => ({
@@ -56,15 +58,35 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       }),
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
+    labelContent: {
+      style: {
+        alignSelf: 'center',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+      },
+    },
     label: buildProps(
-      (tokens: RadioTokens) => ({
+      (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
         style: {
-          marginTop: 2,
+          marginTop: tokens.labelMarginTop,
+          color: tokens.color,
+          ...fontStyles.from(tokens, theme),
+        },
+      }),
+      ['variant', 'labelMarginTop', 'color', ...fontStyles.keys],
+    ),
+    subtext: buildProps(
+      (tokens: RadioTokens) => ({
+        variant: tokens.subtextVariant,
+        style: {
+          marginTop: tokens.subtextMarginTop,
+          marginRight: tokens.subtextMarginRight,
+          marginBottom: tokens.subtextMarginBottom,
           color: tokens.color,
         },
       }),
-      ['color'],
+      ['subtextMarginTop', 'subtextMarginRight', 'subtextMarginBottom', 'color', 'subtextVariant'],
     ),
   },
 };

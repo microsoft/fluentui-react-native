@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import TabsPageObject, { TabItemSelector } from '../pages/TabsPageObject';
 import { TAB_A11Y_ROLE, BOOT_APP_TIMEOUT, PAGE_TIMEOUT, TABITEM_A11Y_ROLE, Keys } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Tabs Testing Initialization', function () {
@@ -11,10 +10,6 @@ describe('Tabs Testing Initialization', function () {
   });
 
   it('Click and navigate to Tabs test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await TabsPageObject.scrollToComponentButton(Platform.Win32);
-    await TabsPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToTabsPage();
     await TabsPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -62,25 +57,25 @@ describe('Tabs Functional Tests', () => {
 
   it('Keyboarding: Arrow Navigation: Right -> Down -> Left -> Up -> Validate the correct TabItem content is shown', async () => {
     /* At First tab element, press Right Arrow to navigate to the Second tab element */
-    await TabsPageObject.sendKey(Keys.Right_Arrow, TabItemSelector.First);
+    await TabsPageObject.sendKey(Keys.ARROW_RIGHT, TabItemSelector.First);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
 
     /* At Second tab element, press Down Arrow to navigate to the Third tab element */
-    await TabsPageObject.sendKey(Keys.Down_Arrow, TabItemSelector.Second);
+    await TabsPageObject.sendKey(Keys.ARROW_DOWN, TabItemSelector.Second);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Third, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Third)).toBeTruthy();
 
     /* At Third tab element, press Left Arrow to navigate to the Second tab element */
-    await TabsPageObject.sendKey(Keys.Left_Arrow, TabItemSelector.Third);
+    await TabsPageObject.sendKey(Keys.ARROW_LEFT, TabItemSelector.Third);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.Second, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.Second)).toBeTruthy();
 
     /* At Second tab element, press Up Arrow to navigate to the First tab element */
-    await TabsPageObject.sendKey(Keys.Up_Arrow, TabItemSelector.Second);
+    await TabsPageObject.sendKey(Keys.ARROW_UP, TabItemSelector.Second);
     await TabsPageObject.waitForTabsItemsToOpen(TabItemSelector.First, PAGE_TIMEOUT);
 
     await expect(await TabsPageObject.didTabItemContentLoad(TabItemSelector.First)).toBeTruthy();

@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonExperimentalPageObject, { ButtonSelector } from '../pages/ButtonExperimentalPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../TestComponents/Button/consts';
 
@@ -12,10 +12,6 @@ describe('Experimental Button Testing Initialization', function () {
   });
 
   it('Click and navigate to Button test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ButtonExperimentalPageObject.scrollToComponentButton(Platform.Win32);
-    await ButtonExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToButtonPage();
     await ButtonExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
@@ -69,15 +65,15 @@ describe('Experimental Button Functional Testing', async () => {
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
-    await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Enter);
+    await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.ENTER);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
 
     await ButtonExperimentalPageObject.clickComponent(); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "Spacebar"', async () => {
-    await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.Spacebar);
+  it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
+    await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.SPACE);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy();
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
