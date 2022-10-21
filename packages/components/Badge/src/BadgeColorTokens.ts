@@ -100,11 +100,11 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.darkOrange.tint60,
-            color: globalTokens.color.office.shade10,
-            borderColor: globalTokens.color.office.tint50,
+            color: globalTokens.color.darkOrange.shade10,
+            borderColor: globalTokens.color.darkOrange.tint50,
             backgroundColorDark: globalTokens.color.orange.shade40,
-            colorDark: globalTokens.color.office.tint40,
-            borderColorDark: globalTokens.color.office.shade40,
+            colorDark: globalTokens.color.darkOrange.tint40,
+            borderColorDark: globalTokens.color.darkOrange.shade40,
           },
           t,
         ),
