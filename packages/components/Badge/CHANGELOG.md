@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Fri, 21 Oct 2022 13:09:26 GMT and should not be manually modified.
+This log was last generated on Fri, 21 Oct 2022 17:11:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.49
+
+Fri, 21 Oct 2022 17:11:46 GMT
+
+### Patches
+
+- Fixed Badge tint-severe colors (vkozlova@microsoft.com)
 
 ## 0.1.48
 

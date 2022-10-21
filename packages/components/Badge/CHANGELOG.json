@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Fri, 21 Oct 2022 17:11:46 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.49",
+      "version": "0.1.49",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "db5a12bed66338ec7f6c95e18d1e3598089efc40",
+            "comment": "Fixed Badge tint-severe colors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 21 Oct 2022 13:09:26 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.48",
       "version": "0.1.48",
