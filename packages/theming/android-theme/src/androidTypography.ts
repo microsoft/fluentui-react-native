@@ -42,7 +42,7 @@ export function androidTypography(): Typography {
       heroSemibold: { face: 'primarySemibold', size: 'hero' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge' },
       heroLargeSemibold: { face: 'primarySemibold', size: 'heroLarge' },
-     ...createFontAliasTokens()
+      ...createFontAliasTokens(),
     } as Variants,
   };
 

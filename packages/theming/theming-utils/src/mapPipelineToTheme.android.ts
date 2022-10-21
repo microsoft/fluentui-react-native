@@ -75,7 +75,7 @@ export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
   return {
     caption1: createVariantValue(pipelineOutput.caption1),
     caption2: createVariantValue(pipelineOutput.caption2),
-    caption1Strong:createVariantValue(pipelineOutput.caption1Strong),
+    caption1Strong: createVariantValue(pipelineOutput.caption1Strong),
     body1: createVariantValue(pipelineOutput.body1),
     body1Strong: createVariantValue(pipelineOutput.body1Strong),
     body2: createVariantValue(pipelineOutput.body2),
@@ -89,11 +89,11 @@ export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
 }
 
 function createVariantValue(variant: any): VariantValue {
-    return {
-      face: variant.fontFamily,
-      size: variant.fontSize,
-      weight: variant.fontWeight,
-      lineHeight: variant.fontLineHeight,
-      letterSpacing: variant.fontLetterSpacing
-    };
+  return {
+    face: variant.fontFamily,
+    size: variant.fontSize,
+    weight: variant.fontWeight,
+    lineHeight: variant.fontLineHeight,
+    letterSpacing: variant.fontLetterSpacing,
+  };
 }
