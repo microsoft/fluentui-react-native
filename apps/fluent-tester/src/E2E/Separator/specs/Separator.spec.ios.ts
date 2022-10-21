@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import SeparatorPageObject from '../pages/SeparatorPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
+import { MobilePlatform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Separator Testing Initialization', function () {
@@ -11,7 +11,7 @@ describe('Separator Testing Initialization', function () {
   });
 
   it('Click and navigate to Separator test page', async () => {
-    await SeparatorPageObject.scrollToComponentButton(Platform.iOS);
+    await SeparatorPageObject.mobileScrollToComponentButton(MobilePlatform.iOS);
     await SeparatorPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

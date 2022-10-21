@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Fri, 21 Oct 2022 13:09:26 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.27",
+      "version": "0.10.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.2",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 19:21:06 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.26",
+      "version": "0.10.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90",
+            "comment": "FocusZone (macOS): Fix RTL bug"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 18:30:02 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.25",
+      "version": "0.10.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "860fa561d4887cee5f1eb2aa88ce7064620bcae1",
+            "comment": "FocusZone (macOS): Calculate distance from origin"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.1",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Oct 2022 04:06:27 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.10.24",
       "version": "0.10.24",
