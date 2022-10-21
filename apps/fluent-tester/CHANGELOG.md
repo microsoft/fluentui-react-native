@@ -1,8 +1,64 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Oct 2022 23:16:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.103.3
+
+Thu, 20 Oct 2022 23:16:01 GMT
+
+### Patches
+
+- Add test case (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.2.25
+- Bump @fluentui-react-native/badge to v0.1.47
+- Bump @fluentui-react-native/button to v0.26.2
+- Bump @fluentui-react-native/dropdown to v0.5.1
+- Bump @fluentui-react-native/experimental-button to v0.16.42
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.49
+- Bump @fluentui-react-native/experimental-shadow to v0.2.33
+- Bump @fluentui-react-native/menu to v1.0.55
+- Bump @fluentui-react-native/notification to v0.17.27
+- Bump @fluentui/react-native to v0.32.42
+
+## 0.103.2
+
+Thu, 20 Oct 2022 19:21:06 GMT
+
+### Patches
+
+- Update platforms to just win32/macOS (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.48
+- Bump @fluentui-react-native/experimental-radio-group to v0.7.4
+- Bump @fluentui-react-native/experimental-tabs to v0.5.29
+- Bump @fluentui/react-native to v0.32.41
+
+## 0.103.1
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Update test (ruaraki@microsoft.com)
+- Remove unnecessary scroll logic within e2e tests (winlarry@microsoft.com)
+- FocusZone (macOS): Calculate distance from origin (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.2.24
+- Bump @fluentui-react-native/badge to v0.1.46
+- Bump @fluentui-react-native/button to v0.26.1
+- Bump @fluentui-react-native/dropdown to v0.5.0
+- Bump @fluentui-react-native/experimental-button to v0.16.41
+- Bump @fluentui-react-native/experimental-checkbox to v0.12.31
+- Bump @fluentui-react-native/experimental-link to v0.1.2
+- Bump @fluentui-react-native/experimental-menu-button to v0.4.47
+- Bump @fluentui-react-native/experimental-radio-group to v0.7.3
+- Bump @fluentui-react-native/experimental-shadow to v0.2.32
+- Bump @fluentui-react-native/experimental-tabs to v0.5.28
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
+- Bump @fluentui-react-native/menu to v1.0.54
+- Bump @fluentui-react-native/notification to v0.17.26
+- Bump @fluentui-react-native/switch to v0.6.20
+- Bump @fluentui/react-native to v0.32.40
 
 ## 0.103.0
 

@@ -17,6 +17,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
 import { StyleSheet } from 'react-native';
+import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -266,6 +267,14 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Submenu',
     component: MenuSubMenu,
+  },
+  {
+    name: 'Menu Trigger onClick Override',
+    component: MenuTriggerOnClickCallback,
+  },
+  {
+    name: 'Menu Trigger Hover Override',
+    component: MenuTriggerHoverCallback,
   },
   {
     name: 'Menu Customized',

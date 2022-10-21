@@ -2,6 +2,42 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Thu, 20 Oct 2022 23:16:01 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.47",
+      "version": "0.1.47",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.33",
+            "commit": "919157eea517674033ee0226391eda0eb1626642"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 18:30:02 GMT",
+      "tag": "@fluentui-react-native/badge_v0.1.46",
+      "version": "0.1.46",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.32",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/badge",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.1",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Oct 2022 04:06:27 GMT",
       "tag": "@fluentui-react-native/badge_v0.1.45",
       "version": "0.1.45",

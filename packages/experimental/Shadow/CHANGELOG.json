@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "entries": [
     {
+      "date": "Thu, 20 Oct 2022 23:16:01 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.33",
+      "version": "0.2.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "commit": "919157eea517674033ee0226391eda0eb1626642",
+            "comment": "Update spec: why shadow component is different"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 18:30:02 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.32",
+      "version": "0.2.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.23",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Oct 2022 04:06:27 GMT",
       "tag": "@fluentui-react-native/experimental-shadow_v0.2.31",
       "version": "0.2.31",

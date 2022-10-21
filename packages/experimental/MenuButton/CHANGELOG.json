@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/experimental-menu-button",
   "entries": [
     {
+      "date": "Thu, 20 Oct 2022 23:16:01 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.4.49",
+      "version": "0.4.49",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.16.42",
+            "commit": "919157eea517674033ee0226391eda0eb1626642"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 19:21:06 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.4.48",
+      "version": "0.4.48",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.28",
+            "commit": "62a7995be7842d498a6a000ee98df291069b41bf"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 18:30:02 GMT",
+      "tag": "@fluentui-react-native/experimental-menu-button_v0.4.47",
+      "version": "0.4.47",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.18.27",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-menu-button",
+            "comment": "Bump @fluentui-react-native/experimental-button to v0.16.41",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 18 Oct 2022 04:06:27 GMT",
       "tag": "@fluentui-react-native/experimental-menu-button_v0.4.46",
       "version": "0.4.46",

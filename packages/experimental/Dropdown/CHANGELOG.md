@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Oct 2022 23:16:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.1
+
+Thu, 20 Oct 2022 23:16:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.26.2
+
+## 0.5.0
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Minor changes
+
+- Add Listbox to Dropdown (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/button to v0.26.1
+- Bump @fluentui-react-native/callout to v0.21.25
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
 
 ## 0.4.15
 

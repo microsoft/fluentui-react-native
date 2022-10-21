@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
+This log was last generated on Thu, 20 Oct 2022 18:30:02 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Fix pipeline some more (ruaraki@microsoft.com)
 
 ## 0.19.0
 
