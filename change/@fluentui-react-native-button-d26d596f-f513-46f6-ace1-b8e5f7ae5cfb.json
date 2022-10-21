@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "FontPipeline",
-  "packageName": "@fluentui-react-native/button",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
