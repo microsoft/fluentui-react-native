@@ -11,7 +11,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     },
     medium: {
        padding: Platform.select({
-        android: 6,
+        android: globalTokens.spacing.xs,
         default: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
        }),
       borderWidth: globalTokens.stroke.width.thin,
