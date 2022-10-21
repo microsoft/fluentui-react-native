@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue, PressableProps } from 'react-native';
+import { ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { ShadowToken } from '@fluentui-react-native/theme-types';
-import { View } from '@office-iss/react-native-win32';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -155,7 +155,7 @@ export interface ButtonInfo {
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  rippleContainer: View;
+  rippleContainer?: IViewProps;
   icon: IconProps;
   content: TextProps;
 }

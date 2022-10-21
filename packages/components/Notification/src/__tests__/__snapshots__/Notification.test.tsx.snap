@@ -186,44 +186,25 @@ exports[`Notification component tests Notification default 1`] = `
       }
       style={
         Object {
-          "alignSelf": "baseline",
+          "alignItems": "center",
+          "alignSelf": "center",
           "backgroundColor": "transparent",
+          "borderColor": "#ffffff",
           "borderRadius": 4,
+          "borderWidth": 1,
+          "display": "flex",
           "flexDirection": "row",
+          "justifyContent": "center",
           "marginStart": 16,
-          "overflow": "hidden",
+          "minWidth": 96,
+          "padding": 5,
+          "paddingHorizontal": 11,
         }
       }
     >
-      <View
-        accessibilityLabel="Undo"
-        accessibilityRole="button"
-        accessibilityState={
-          Object {
-            "disabled": false,
-          }
-        }
-        accessible={true}
-        appearance="subtle"
-        collapsable={false}
-        color="#0F6CBD"
-        disabledColor="#2886DE"
-        enableFocusRing={true}
-        focusable={true}
-        minWidth={0}
-        onAccessibilityTap={[Function]}
-        onBlur={[Function]}
-        onClick={[Function]}
-        onFocus={[Function]}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
-        padding={0}
-        paddingHorizontal={0}
-        pressedColor="#0F6CBD30"
+      <Text
+        ellipsizeMode="tail"
+        numberOfLines={0}
         style={
           Object {
             "color": Object {
@@ -243,34 +224,12 @@ exports[`Notification component tests Notification default 1`] = `
             "marginBottom": 0,
             "marginEnd": 0,
             "marginStart": 0,
-            "minWidth": 96,
-            "padding": 5,
-            "paddingHorizontal": 11,
+            "marginTop": 0,
           }
         }
       >
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={0}
-          style={
-            Object {
-              "color": "#0F6CBD",
-              "fontFamily": "Segoe UI",
-              "fontSize": 15,
-              "fontWeight": "600",
-              "letterSpacing": 20,
-              "lineHeight": -0.24,
-              "margin": 0,
-              "marginBottom": 0,
-              "marginEnd": 0,
-              "marginStart": 0,
-              "marginTop": 0,
-            }
-          }
-        >
-          Undo
-        </Text>
-      </View>
+        Undo
+      </Text>
     </View>
   </View>
 </View>

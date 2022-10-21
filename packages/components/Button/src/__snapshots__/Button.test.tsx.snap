@@ -20,37 +20,25 @@ exports[`Button component tests Button circular 1`] = `
   shape="circular"
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderRadius": 9999,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Circular Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    shape="circular"
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -65,26 +53,8 @@ exports[`Button component tests Button circular 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Circular Button
-    </Text>
-  </View>
+    Circular Button
+  </Text>
 </View>
 `;
 
@@ -107,36 +77,23 @@ exports[`Button component tests Button composed 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Composed Button with RNText"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+  <Text
     style={
       Object {
         "color": "#323130",
@@ -152,25 +109,8 @@ exports[`Button component tests Button composed 1`] = `
       }
     }
   >
-    <Text
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "letterSpacing": undefined,
-          "lineHeight": undefined,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Composed Button with RNText
-    </Text>
-  </View>
+    Composed Button with RNText
+  </Text>
 </View>
 `;
 
@@ -193,36 +133,25 @@ exports[`Button component tests Button customized 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "pink",
+      "borderColor": "#8a8886",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Custom Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -237,26 +166,8 @@ exports[`Button component tests Button customized 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Custom Button
-    </Text>
-  </View>
+    Custom Button
+  </Text>
 </View>
 `;
 
@@ -279,36 +190,25 @@ exports[`Button component tests Button default 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Default Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -323,26 +223,8 @@ exports[`Button component tests Button default 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Default Button
-    </Text>
-  </View>
+    Default Button
+  </Text>
 </View>
 `;
 
@@ -428,37 +310,25 @@ exports[`Button component tests Button large 1`] = `
   size="large"
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 7,
+      "paddingHorizontal": 15,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Large Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    size="large"
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -473,26 +343,8 @@ exports[`Button component tests Button large 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 16,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Large Button
-    </Text>
-  </View>
+    Large Button
+  </Text>
 </View>
 `;
 
@@ -516,37 +368,25 @@ exports[`Button component tests Button primary 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#0078d4",
+      "borderColor": "#005a9e",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Primary Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    appearance="primary"
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#ffffff",
@@ -561,26 +401,8 @@ exports[`Button component tests Button primary 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#ffffff",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Primary Button
-    </Text>
-  </View>
+    Primary Button
+  </Text>
 </View>
 `;
 
@@ -604,37 +426,25 @@ exports[`Button component tests Button small 1`] = `
   size="small"
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 64,
+      "padding": 3,
+      "paddingHorizontal": 7,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Small Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    size="small"
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -649,26 +459,8 @@ exports[`Button component tests Button small 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 13,
-          "fontWeight": "400",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Small Button
-    </Text>
-  </View>
+    Small Button
+  </Text>
 </View>
 `;
 
@@ -692,37 +484,25 @@ exports[`Button component tests Button square 1`] = `
   shape="square"
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#f3f2f1",
+      "borderColor": "#8a8886",
       "borderRadius": 0,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Square Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
-    shape="square"
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -737,26 +517,8 @@ exports[`Button component tests Button square 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Square Button
-    </Text>
-  </View>
+    Square Button
+  </Text>
 </View>
 `;
 
@@ -780,37 +542,25 @@ exports[`Button component tests Button subtle 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignSelf": "baseline",
+      "alignItems": "center",
+      "alignSelf": "flex-start",
       "backgroundColor": "#ffffff",
+      "borderColor": "#ffffff",
       "borderRadius": 4,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
-      "overflow": "hidden",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 5,
+      "paddingHorizontal": 11,
+      "width": undefined,
     }
   }
 >
-  <View
-    accessibilityLabel="Subtle Button"
-    accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
-    accessible={true}
-    appearance="subtle"
-    collapsable={false}
-    enableFocusRing={true}
-    focusable={true}
-    onBlur={[Function]}
-    onClick={[Function]}
-    onFocus={[Function]}
-    onResponderGrant={[Function]}
-    onResponderMove={[Function]}
-    onResponderRelease={[Function]}
-    onResponderTerminate={[Function]}
-    onResponderTerminationRequest={[Function]}
-    onStartShouldSetResponder={[Function]}
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
     style={
       Object {
         "color": "#323130",
@@ -825,25 +575,7 @@ exports[`Button component tests Button subtle 1`] = `
       }
     }
   >
-    <Text
-      ellipsizeMode="tail"
-      numberOfLines={0}
-      style={
-        Object {
-          "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
-          "fontWeight": "600",
-          "margin": 0,
-          "marginBottom": 0,
-          "marginEnd": 0,
-          "marginStart": 0,
-          "marginTop": 0,
-        }
-      }
-    >
-      Subtle Button
-    </Text>
-  </View>
+    Subtle Button
+  </Text>
 </View>
 `;

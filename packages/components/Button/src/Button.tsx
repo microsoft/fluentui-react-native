@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, Pressable, View, ViewStyle } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -9,6 +9,7 @@ import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-rea
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { extractOuterStylePropsAndroid } from './utils.android';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -33,50 +34,6 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
     (layer === 'hasIconBefore' && (userProps.icon || userProps.loading) && (!userProps.iconPosition || userProps.iconPosition === 'before'))
   );
 };
-
-export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [outerStyleProps: ViewStyle, innerStyleProps: ViewStyle] => {
-  const {
-    margin,
-    marginTop,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginStart,
-    marginEnd,
-    marginVertical,
-    marginHorizontal,
-    start,
-    end,
-    left,
-    right,
-    top,
-    bottom,
-    display,
-    ...restOfProps
-  } = style;
-
-  return [
-    {
-      margin,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
-      marginStart,
-      marginEnd,
-      marginVertical,
-      marginHorizontal,
-      start,
-      end,
-      left,
-      right,
-      top,
-      bottom,
-      display,
-    },
-    { ...restOfProps },
-  ];
-});
 
 export const Button = compose<ButtonType>({
   displayName: buttonName,
@@ -135,9 +92,9 @@ export const Button = compose<ButtonType>({
       if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
-          <Slots.root style={outerStyleProps}>
+          <Slots.rippleContainer style={outerStyleProps}>
             {/* RN Pressable needs to be wrapped with a root view to support curved edges */}
-            <Slots.ripple
+            <Slots.root
               accessibilityLabel={label}
               {...mergedProps}
               style={innerStyleProps}
@@ -151,8 +108,8 @@ export const Button = compose<ButtonType>({
               })}
             >
               {buttonContent}
-            </Slots.ripple>
-          </Slots.root>
+            </Slots.root>
+          </Slots.rippleContainer>
         );
       } else {
         return (

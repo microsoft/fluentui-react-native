@@ -2,46 +2,19 @@
 
 exports[`ContextualMenu default 1`] = `
 <View
-  accessibilityLabel="Press for Nested MenuButton"
-  accessibilityRole="button"
-  accessible={true}
-  collapsable={false}
-  enableFocusRing={true}
-  focusable={true}
-  onAccessibilityTap={[Function]}
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignSelf": "baseline",
       "backgroundColor": "#f3f2f1",
       "borderRadius": 4,
-      "borderWidth": 1.5,
-      "display": "flex",
       "flexDirection": "row",
-      "justifyContent": "center",
-      "minWidth": 96,
-      "padding": NaN,
-      "paddingHorizontal": 14.5,
-      "width": undefined,
+      "overflow": "hidden",
     }
   }
 >
   <View
     accessibilityLabel="Press for Nested MenuButton"
     accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
     accessible={true}
     collapsable={false}
     enableFocusRing={true}
@@ -62,13 +35,13 @@ exports[`ContextualMenu default 1`] = `
         "alignSelf": "flex-start",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1,
+        "borderWidth": 1.5,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": NaN,
+        "paddingHorizontal": 14.5,
         "width": undefined,
       }
     }

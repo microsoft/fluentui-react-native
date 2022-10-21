@@ -14,7 +14,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
   slotProps: {
     ...Platform.select({
       android: {
-        root: buildProps(
+        rippleContainer: buildProps(
           (tokens: ButtonCoreTokens) => {
             return {
               style: {
@@ -28,7 +28,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCo
           },
           ['backgroundColor', 'borderRadius'],
         ),
-        ripple: buildProps(
+        root: buildProps(
           (tokens: ButtonCoreTokens, theme: Theme) => ({
             style: {
               display: 'flex',

@@ -9,7 +9,7 @@ import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
-import { extractOuterStylePropsAndroid } from '../Button';
+import { extractOuterStylePropsAndroid } from '../utils.android';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -29,10 +29,10 @@ export const FAB = compose<FABType>({
   displayName: fabName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
-    ripple: Pressable,
+    rippleContainer: View,
     shadow: Shadow,
   },
   useRender: (userProps: FABProps, useSlots: UseSlots<FABType>) => {
@@ -92,8 +92,8 @@ export const FAB = compose<FABType>({
       } else if (hasRipple) {
         const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
         return (
-          <Slots.root style={outerStyleProps}>
-            <Slots.ripple
+          <Slots.rippleContainer style={outerStyleProps}>
+            <Slots.root
               accessibilityLabel={label}
               {...mergedProps}
               style={innerStyleProps}
@@ -107,8 +107,8 @@ export const FAB = compose<FABType>({
               })}
             >
               {buttonContent}
-            </Slots.ripple>
-          </Slots.root>
+            </Slots.root>
+          </Slots.rippleContainer>
         );
       } else {
         return buttonContentWithRoot;

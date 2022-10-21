@@ -34,7 +34,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   slotProps: {
     ...Platform.select({
       android: {
-        root: buildProps(
+        rippleContainer: buildProps(
           (tokens: ButtonTokens) => {
             return {
               style: {
@@ -48,7 +48,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           },
           ['backgroundColor', 'borderRadius'],
         ),
-        ripple: buildProps(
+        root: buildProps(
           (tokens: ButtonTokens, theme: Theme) => ({
             style: {
               display: 'flex',
