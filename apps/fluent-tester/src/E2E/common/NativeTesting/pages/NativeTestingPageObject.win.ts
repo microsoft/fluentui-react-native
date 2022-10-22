@@ -12,14 +12,14 @@ class NativeTestingPageObject extends BasePage {
   }
 
   async doesScrollViewParentExist(): Promise<boolean> {
-    return await (await this._testPageButtonScrollViewer).isDisplayed();
+    return await this._testPageButtonScrollViewer.isDisplayed();
   }
 
   /* Validate the Children of the ScrollView stay intact. The children are the buttons that
    * navigate to each test page. Also, validate these children exist with the proper testId format */
   async validateScrollViewChildren(): Promise<boolean> {
     // Gets all the children
-    const testChildren = await (await this._testPageButtonScrollViewer).$$('//*');
+    const testChildren = await this._testPageButtonScrollViewer.$$('//*');
     let foundValidButton = false;
 
     // Ensure the testID (maps 1:1 to automationId) properties of the button children match the defined testing format

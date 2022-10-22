@@ -19,7 +19,7 @@ class SwitchPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isSwitchChecked(): Promise<boolean> {
-    return await (await this._primaryComponent).isSelected();
+    return await this._primaryComponent.isSelected();
   }
 
   async waitForSwitchChecked(timeout?: number): Promise<void> {
@@ -32,7 +32,7 @@ class SwitchPageObject extends BasePage {
 
   async toggleSwitchToUnchecked(): Promise<void> {
     if (await this.isSwitchChecked()) {
-      await (await this._primaryComponent).click();
+      await this._primaryComponent.click();
     }
   }
 
@@ -49,17 +49,17 @@ class SwitchPageObject extends BasePage {
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(switchSelector: SwitchComponentSelector, key: string): Promise<void> {
-    await (await this.getButtonSelector(switchSelector)).addValue(key);
+    await this.getButtonSelector(switchSelector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  async getButtonSelector(switchSelector?: SwitchComponentSelector): Promise<WebdriverIO.Element> {
+  getButtonSelector(switchSelector?: SwitchComponentSelector) {
     if (switchSelector == SwitchComponentSelector.PrimaryComponent) {
-      return await this._primaryComponent;
+      return this._primaryComponent;
     } else if (switchSelector === SwitchComponentSelector.SecondaryComponent) {
-      return await this._secondaryComponent;
+      return this._secondaryComponent;
     }
-    return await this._primaryComponent;
+    return this._primaryComponent;
   }
 
   /*****************************************/

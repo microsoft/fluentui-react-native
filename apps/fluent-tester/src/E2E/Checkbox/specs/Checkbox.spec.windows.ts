@@ -6,6 +6,7 @@ import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common
 
 describe('Checkbox Testing Initialization', () => {
   it('Wait for app load', async () => {
+    await NavigateAppPage.waitForRootQueryElementToBeFound(BOOT_APP_TIMEOUT);
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });

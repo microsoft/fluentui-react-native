@@ -8,6 +8,7 @@ import { SWITCH_TEST_COMPONENT_LABEL, SWITCH_ACCESSIBILITY_LABEL } from '../../.
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Switch Testing Initialization', function () {
   it('Wait for app load', async () => {
+    await NavigateAppPage.waitForRootQueryElementToBeFound(BOOT_APP_TIMEOUT);
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });

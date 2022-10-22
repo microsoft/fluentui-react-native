@@ -30,15 +30,15 @@ class ButtonPageObject extends BasePage {
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(buttonSelector: ButtonSelector, key: string): Promise<void> {
-    await (await this.getButtonSelector(buttonSelector)).addValue(key);
+    await this.getButtonSelector(buttonSelector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  async getButtonSelector(buttonSelector?: ButtonSelector): Promise<WebdriverIO.Element> {
+  getButtonSelector(buttonSelector?: ButtonSelector) {
     if (buttonSelector == ButtonSelector.PrimaryButton) {
-      return await this._primaryComponent;
+      return this._primaryComponent;
     }
-    return await this._primaryComponent;
+    return this._primaryComponent;
   }
 
   /*****************************************/

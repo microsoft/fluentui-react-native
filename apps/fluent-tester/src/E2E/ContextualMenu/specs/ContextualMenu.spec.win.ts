@@ -1,9 +1,11 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ContextualMenuPageObjectObject, { ContextualMenuSelector } from '../pages/ContextualMenuPageObject.win';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
+
 // Before testing begins, allow up to 60 seconds for app to open
 describe('ContextualMenu Testing Initialization', function () {
   it('Wait for app load', async () => {
+    await NavigateAppPage.waitForRootQueryElementToBeFound(BOOT_APP_TIMEOUT);
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });

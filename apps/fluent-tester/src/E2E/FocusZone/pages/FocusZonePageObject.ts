@@ -47,7 +47,7 @@ type BooleanGridFocusZoneOption =
 class FocusZonePageObject extends BasePage {
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     const errorMsg = 'The FocusZone UI Element did not load correctly. Please see logs.';
-    await this.waitForCondition(async () => await (await this._primaryComponent).isDisplayed(), errorMsg, timeout);
+    await this.waitForCondition(async () => await this._primaryComponent.isDisplayed(), errorMsg, timeout);
   }
 
   async resetTest() {
@@ -63,9 +63,9 @@ class FocusZonePageObject extends BasePage {
     let switchElement: WebdriverIO.Element;
     switch (option) {
       case GridFocusZoneOption.SetDirection:
-        await (await this._directionPicker).click();
-        await browser.waitUntil(async () => await (await this._getGridFocusZoneMenuOption(arg)).isDisplayed());
-        await (await this._getGridFocusZoneMenuOption(arg)).click();
+        await this._directionPicker.click();
+        await browser.waitUntil(async () => await this._getGridFocusZoneMenuOption(arg).isDisplayed());
+        await this._getGridFocusZoneMenuOption(arg).click();
         return;
       case GridFocusZoneOption.Set2DNavigation:
         switchElement = await this._twoDimSwitch;
@@ -97,19 +97,19 @@ class FocusZonePageObject extends BasePage {
     return (await this.getElementAttribute(btn, Attribute.IsFocused)) === AttributeValue.true;
   }
 
-  private async _getGridButton(selector: GridButtonSelector): Promise<WebdriverIO.Element> {
+  private _getGridButton(selector: GridButtonSelector) {
     switch (selector) {
       case GridButtonSelector.Before:
-        return await this._gridBeforeButton;
+        return this._gridBeforeButton;
       case GridButtonSelector.After:
-        return await this._gridAfterButton;
+        return this._gridAfterButton;
       default:
-        return await By(FOCUSZONE_GRID_BUTTON(selector));
+        return By(FOCUSZONE_GRID_BUTTON(selector));
     }
   }
 
-  private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
-    return await By(FOCUSZONE_DIRECTION_ID(direction));
+  private _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
+    return By(FOCUSZONE_DIRECTION_ID(direction));
   }
 
   /*****************************************/

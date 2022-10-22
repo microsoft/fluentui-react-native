@@ -26,22 +26,22 @@ class MenuButtonPageObject extends BasePage {
 
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async menuItemDisplayed(): Promise<boolean> {
-    return await (await this._menuItem).isDisplayed();
+    return await this._menuItem.isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(selector: MenuButtonSelector, key: string): Promise<void> {
-    await (await this.getMenuButtonSelector(selector)).addValue(key);
+    await this.getMenuButtonSelector(selector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the MenuButton Selector */
-  async getMenuButtonSelector(selector?: MenuButtonSelector): Promise<WebdriverIO.Element> {
+  getMenuButtonSelector(selector?: MenuButtonSelector) {
     if (selector == MenuButtonSelector.MenuButton) {
-      return await this._primaryComponent;
+      return this._primaryComponent;
     } else if (selector == MenuButtonSelector.MenuItem1) {
-      return await this._menuItem;
+      return this._menuItem;
     }
-    return await this._primaryComponent;
+    return this._primaryComponent;
   }
 
   /*****************************************/

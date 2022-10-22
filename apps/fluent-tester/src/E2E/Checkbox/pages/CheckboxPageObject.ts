@@ -18,7 +18,7 @@ class CheckboxPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isCheckboxChecked(): Promise<boolean> {
-    return await (await this._primaryComponent).isSelected();
+    return await this._primaryComponent.isSelected();
   }
 
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
@@ -32,7 +32,7 @@ class CheckboxPageObject extends BasePage {
   /* Useful in beforeEach() hook to reset the checkbox before every test */
   async toggleCheckboxToUnchecked(): Promise<void> {
     if (await this.isCheckboxChecked()) {
-      await (await this._primaryComponent).click();
+      await this._primaryComponent.click();
     }
   }
 
@@ -49,15 +49,15 @@ class CheckboxPageObject extends BasePage {
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(selector: CheckboxSelector, key: string): Promise<void> {
-    await (await this.getCheckboxSelector(selector)).addValue(key);
+    await this.getCheckboxSelector(selector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  async getCheckboxSelector(selector?: CheckboxSelector): Promise<WebdriverIO.Element> {
+  getCheckboxSelector(selector?: CheckboxSelector) {
     if (selector == CheckboxSelector.Primary) {
-      return await this._primaryComponent;
+      return this._primaryComponent;
     }
-    return await this._primaryComponent;
+    return this._primaryComponent;
   }
 
   /*****************************************/

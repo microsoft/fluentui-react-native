@@ -33,39 +33,39 @@ class MenuPageObject extends BasePage {
   }
 
   async menuIsExpanded(): Promise<boolean> {
-    return await (await this._secondaryComponent).isDisplayed();
+    return await this._secondaryComponent.isDisplayed();
   }
 
   async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
-    return (await this.getElementAttribute(await this._primaryComponent, Attribute.ExpandCollapseState)) as ExpandCollapseState;
+    return (await this.getElementAttribute(this._primaryComponent, Attribute.ExpandCollapseState)) as ExpandCollapseState;
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
-    return await this.getElementAttribute(await this.getMenuComponentSelector(componentSelector), Attribute.AccessibilityLabel);
+    return await this.getElementAttribute(this.getMenuComponentSelector(componentSelector), Attribute.AccessibilityLabel);
   }
 
   async getMenuAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await By(MENUPOPOVER_TEST_COMPONENT), Attribute.AccessibilityRole);
+    return await this.getElementAttribute(By(MENUPOPOVER_TEST_COMPONENT), Attribute.AccessibilityRole);
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityRole);
+    return await this.getElementAttribute(this._secondaryComponent, Attribute.AccessibilityRole);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(menuComponentSelector: MenuComponentSelector, key: string): Promise<void> {
-    await (await this.getMenuComponentSelector(menuComponentSelector)).addValue(key);
+    await this.getMenuComponentSelector(menuComponentSelector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
-  async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
+  getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector) {
     switch (menuComponentSelector) {
       case MenuComponentSelector.SecondaryComponent:
-        return await this._secondaryComponent;
+        return this._secondaryComponent;
       case MenuComponentSelector.TertiaryComponent:
-        return await this._tertiaryComponent;
+        return this._tertiaryComponent;
       default:
-        return await this._primaryComponent;
+        return this._primaryComponent;
     }
   }
 
@@ -73,7 +73,7 @@ class MenuPageObject extends BasePage {
     // Both escape on the menu trigger to hard dismiss menu and click defocus to reset focus
     if (await this.menuIsExpanded()) {
       await this.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
-      await (await this._defocusButton).click();
+      await this._defocusButton.click();
     }
   }
 

@@ -34,42 +34,42 @@ class TabsPageObject extends BasePage {
   }
 
   async getTabItemAccesibilityRole(tabItemSelector: TabItemSelector): Promise<string> {
-    return await (await this.getTabItem(tabItemSelector)).getAttribute('ControlType');
+    return await this.getTabItem(tabItemSelector).getAttribute('ControlType');
   }
 
   async clickOnTabItem(tabItemSelector: TabItemSelector): Promise<void> {
-    await (await this.getTabItem(tabItemSelector)).click();
+    await this.getTabItem(tabItemSelector).click();
   }
 
   async didTabItemContentLoad(tabItemSelector: TabItemSelector): Promise<boolean> {
-    return await (await this.getTabItemContent(tabItemSelector)).isDisplayed();
+    return await this.getTabItemContent(tabItemSelector).isDisplayed();
   }
 
   /* Returns the correct WebDriverIO element from the TabItem Selector */
-  async getTabItem(tabItemSelector: TabItemSelector): Promise<WebdriverIO.Element> {
+  getTabItem(tabItemSelector: TabItemSelector) {
     if (tabItemSelector == TabItemSelector.First) {
-      return await this._firstTabItem;
+      return this._firstTabItem;
     } else if (tabItemSelector == TabItemSelector.Second) {
-      return await this._secondTabItem;
+      return this._secondTabItem;
     } else {
-      return await this._thirdTabItem;
+      return this._thirdTabItem;
     }
   }
 
   /* Returns the correct WebDriverIO element from the TabItem Selector */
-  async getTabItemContent(tabItemSelector: TabItemSelector): Promise<WebdriverIO.Element> {
+  getTabItemContent(tabItemSelector: TabItemSelector) {
     if (tabItemSelector == TabItemSelector.First) {
-      return await this._firstTabItemContent;
+      return this._firstTabItemContent;
     } else if (tabItemSelector == TabItemSelector.Second) {
-      return await this._secondTabItemContent;
+      return this._secondTabItemContent;
     } else {
-      return await this._thirdTabItemContent;
+      return this._thirdTabItemContent;
     }
   }
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(key: string, tabItemSelector: TabItemSelector): Promise<void> {
-    await (await this.getTabItem(tabItemSelector)).addValue(key);
+    await this.getTabItem(tabItemSelector).addValue(key);
   }
 
   /*****************************************/

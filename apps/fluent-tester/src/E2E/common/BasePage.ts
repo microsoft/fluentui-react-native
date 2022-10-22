@@ -1,6 +1,7 @@
-import { Keys, ROOT_VIEW } from './consts';
+import { Attribute, Keys, MobilePlatform, Platform } from './consts';
+import findRoot from './findRoot';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
-import { Attribute } from './consts';
+import { ChainablePromiseElement } from 'webdriverio';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
@@ -12,28 +13,30 @@ export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the
 
 let rootView: WebdriverIO.Element | null = null;
 
-/* Win32/UWP-Specific Selector. We use this to get elements on the test page */
-export async function By(identifier: string) {
-  if (PLATFORM === NativePlatform.Windows) {
-    // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
-    return await $('~' + identifier);
+// Tries to initialize rootView. If findRoot returns an element, sets rootview to the result and returns true. Otherwise, returns false.
+export async function attemptRootQueryElementSearch(): Promise<boolean> {
+  if (PLATFORM) {
+    rootView = await findRoot(PLATFORM as Platform);
+    if (rootView === null) {
+      console.warn('Your search for the top level window returned null. Try adjusting your search strategy.');
+    } else {
+      return true;
+    }
+  } else {
+    throw new Error('E2ETEST_PLATFORM environment variable not defined. Check your wdio.config.');
   }
-  return await QueryWithChaining(identifier);
+  return false;
 }
 
-async function QueryWithChaining(identifier) {
-  if (rootView === null) {
-    // Most of the elements we're searching for will be children of this rootView node.
-    rootView = await $('~' + ROOT_VIEW);
-  }
+/* Win32/UWP-Specific Selector. We use this to get elements on the test page */
+export function By(identifier: string) {
   const selector = '~' + identifier;
-  let queryResult: WebdriverIO.Element;
-  queryResult = await rootView.$(selector);
-  if (queryResult.error) {
-    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
-    queryResult = await $(selector);
+  // If we've initialized a rootView, we use selector chaining to narrow our search. Else, we search the whole tree.
+  if (rootView) {
+    return rootView.$(selector);
+  } else {
+    return $(selector);
   }
-  return queryResult;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -43,19 +46,6 @@ export const enum ComponentSelector {
   Primary = 0, // this._primaryComponent
   Secondary, // this._secondaryComponent
 }
-
-export const enum MobilePlatform {
-  iOS = 'ios',
-  Android = 'android',
-}
-
-export const enum NativePlatform {
-  Win32 = 'win32',
-  Windows = 'windows',
-  macOS = 'macos',
-}
-
-export type Platform = MobilePlatform | NativePlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -76,44 +66,64 @@ export class BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async getAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
+    return await this.getElementAttribute(this._primaryComponent, Attribute.AccessibilityRole);
   }
 
   /* Gets the accessibility label of an UI element given the selector */
   async getAccessibilityLabel(componentSelector: ComponentSelector): Promise<string> {
     switch (componentSelector) {
       case ComponentSelector.Primary:
-        return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityLabel);
+        return await this.getElementAttribute(this._primaryComponent, Attribute.AccessibilityLabel);
 
       case ComponentSelector.Secondary:
-        return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityLabel);
+        return await this.getElementAttribute(this._secondaryComponent, Attribute.AccessibilityLabel);
     }
+  }
+
+  async waitForRootQueryElementToBeFound(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
+        try {
+          return await attemptRootQueryElementSearch();
+        } catch (error) {
+          console.warn((error as Error).message);
+          return true;
+        }
+      },
+      {
+        timeout: timeout ?? this.waitForUiEvent,
+        timeoutMsg: 'Unable to find designated query root of tester app.',
+      },
+    );
   }
 
   /* Returns true if the test page has loaded. To determine if it's loaded, each test page has a specific UI element we attempt to locate.
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return (await this._testPage).isDisplayed();
+    return await this._testPage.isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
-    return await (await this._pageButton).isDisplayed();
+    return await this._pageButton.isDisplayed();
   }
 
   async clickComponent(): Promise<void> {
-    await (await this._primaryComponent).click();
+    await this._primaryComponent.click();
   }
 
-  async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
-    return await element.getAttribute(attribute);
+  async getElementAttribute(
+    element: WebdriverIO.Element | ChainablePromiseElement<WebdriverIO.Element>,
+    attribute: Attribute,
+  ): Promise<string> {
+    return (await element).getAttribute(attribute);
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
    * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
   async mobileScrollToComponentButton(): Promise<void> {
-    if (await (await this._pageButton).isDisplayed()) {
+    if (await this._pageButton.isDisplayed()) {
       return;
     }
 
@@ -125,7 +135,7 @@ export class BasePage {
         await browser.waitUntil(
           async () => {
             await driver.execute('mobile: scroll', { direction: 'down' });
-            return await (await this._pageButton).isDisplayed();
+            return await this._pageButton.isDisplayed();
           },
           {
             timeout: this.waitForUiEvent,
@@ -161,7 +171,7 @@ export class BasePage {
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
+    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',

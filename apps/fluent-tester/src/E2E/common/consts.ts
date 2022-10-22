@@ -104,3 +104,16 @@ export const enum ExpandCollapseState {
   EXPANDED = 'Expanded',
   COLLAPSED = 'Collapsed',
 }
+
+export const enum MobilePlatform {
+  iOS = 'ios',
+  Android = 'android',
+}
+
+export const enum NativePlatform {
+  Win32 = 'win32',
+  Windows = 'windows',
+  macOS = 'macos',
+}
+
+export type Platform = MobilePlatform | NativePlatform;

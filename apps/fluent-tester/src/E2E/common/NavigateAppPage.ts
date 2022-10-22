@@ -33,123 +33,123 @@ import { By, BasePage } from './BasePage';
 
 class NavigateAppPage extends BasePage {
   async clickAndGoToActivityIndicatorPage() {
-    await (await this.activityIndicatorPage).click();
+    await this.activityIndicatorPage.click();
   }
 
   async clickAndGoToAvatarPage() {
-    await (await this.avatarPage).click();
+    await this.avatarPage.click();
   }
 
   async clickAndGoToBadgePage() {
-    await (await this.badgePage).click();
+    await this.badgePage.click();
   }
 
   async clickAndGoToButtonPage() {
-    await (await this.buttonPage).click();
+    await this.buttonPage.click();
   }
 
   async clickAndGoToCalloutPage() {
-    await (await this.calloutPage).click();
+    await this.calloutPage.click();
   }
 
   async clickAndGoToCheckboxPage() {
-    await (await this.checkboxPage).click();
+    await this.checkboxPage.click();
   }
 
   async clickAndGoToCheckboxExperimentalPage() {
-    await (await this.checkboxExperimentalPage).click();
+    await this.checkboxExperimentalPage.click();
   }
 
   async clickAndGoToContextualMenuPage() {
-    await (await this.contextualMenuPage).click();
+    await this.contextualMenuPage.click();
   }
 
   async clickAndGoToFocusTrapZonePage() {
-    await (await this.focusTrapZonePage).click();
+    await this.focusTrapZonePage.click();
   }
 
   async clickAndGoToFocusZonePage() {
-    await (await this.focusZonePage).click();
+    await this.focusZonePage.click();
   }
 
   async clickAndGoToIconPage() {
-    await (await this.iconPage).click();
+    await this.iconPage.click();
   }
 
   async clickAndGoToLinkPage() {
-    await (await this.linkPage).click();
+    await this.linkPage.click();
   }
 
   async clickAndGoToLinkExperimentalPage() {
-    await (await this.linkExperimentalPage).click();
+    await this.linkExperimentalPage.click();
   }
 
   async clickAndGoToMenuPage() {
-    await (await this.menuPage).click();
+    await this.menuPage.click();
   }
 
   async clickAndGoToMenuButtonPage() {
-    await (await this.menuButtonPage).click();
+    await this.menuButtonPage.click();
   }
 
   async clickAndGoToExperimentalMenuButtonPage() {
-    await (await this.menuButtonExperimentalPage).click();
+    await this.menuButtonExperimentalPage.click();
   }
 
   async clickAndGoToPersonaPage() {
-    await (await this.personaPage).click();
+    await this.personaPage.click();
   }
 
   async clickAndGoToPersonaCoinPage() {
-    await (await this.personaCoinPage).click();
+    await this.personaCoinPage.click();
   }
 
   async clickAndGoToPressablePage() {
-    await (await this.pressablePage).click();
+    await this.pressablePage.click();
   }
 
   async clickAndGoToRadioGroupPage() {
-    await (await this.radioGroupPage).click();
+    await this.radioGroupPage.click();
   }
 
   async clickAndGoToSeparatorPage() {
-    await (await this.separatorPage).click();
+    await this.separatorPage.click();
   }
 
   async clickAndGoToShimmerPage() {
-    await (await this.shimmerPage).click();
+    await this.shimmerPage.click();
   }
 
   async clickAndGoToSvgPage() {
-    await (await this.svgPage).click();
+    await this.svgPage.click();
   }
 
   async clickAndGoToSwitchPage() {
-    await (await this.switchPage).click();
+    await this.switchPage.click();
   }
 
   async clickAndGoToTextPage() {
-    await (await this.textPage).click();
+    await this.textPage.click();
   }
 
   async clickAndGoToExperimentalTextPage() {
-    await (await this.textExperimentalPage).click();
+    await this.textExperimentalPage.click();
   }
 
   async clickAndGoToTabsPage() {
-    await (await this.tabsPage).click();
+    await this.tabsPage.click();
   }
 
   async clickAndGoToThemePage() {
-    await (await this.themePage).click();
+    await this.themePage.click();
   }
 
   async clickAndGoToTokensPage() {
-    await (await this.tokensPage).click();
+    await this.tokensPage.click();
   }
 
   async clickAndGoToExperimentalTabsPage() {
-    await (await this.experimentalTabsPage).click();
+    await this.experimentalTabsPage.click();
   }
 
   /*

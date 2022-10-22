@@ -26,25 +26,25 @@ class RadioGroupPage extends BasePage {
   /******************************************************************/
   // Get RadioButton's accessibilityLabel
   async getRBAccessibilityLabel(radioButtonSelector: RadioButtonSelector): Promise<string> {
-    return await (await this.getRadioButton(radioButtonSelector)).getAttribute('Name');
+    return await this.getRadioButton(radioButtonSelector).getAttribute('Name');
   }
 
   /* This resets the RadioGroup selection by clicking/selecting the 1st RadioButton in the RadioGroup.
    * Useful in beforeEach() hooks to reset the RadioGroup before additional tests */
   async resetRadioGroupSelection(): Promise<void> {
-    await (await this._firstRadioButton).click();
+    await this._firstRadioButton.click();
   }
 
   async getRadioButtonAccesibilityRole(): Promise<string> {
-    return await (await this._firstRadioButton).getAttribute('ControlType');
+    return await this._firstRadioButton.getAttribute('ControlType');
   }
 
   async isRadioButtonSelected(radioButtonSelector: RadioButtonSelector): Promise<boolean> {
-    return await (await this.getRadioButton(radioButtonSelector)).isSelected();
+    return await this.getRadioButton(radioButtonSelector).isSelected();
   }
 
   async clickRadioButton(radioButtonSelector: RadioButtonSelector): Promise<void> {
-    await (await this.getRadioButton(radioButtonSelector)).click();
+    await this.getRadioButton(radioButtonSelector).click();
   }
 
   async waitForRadioButtonSelected(radioButtonSelector: RadioButtonSelector, timeout?: number): Promise<void> {
@@ -57,19 +57,19 @@ class RadioGroupPage extends BasePage {
 
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(key: string, radioButtonSelector: RadioButtonSelector): Promise<void> {
-    await (await this.getRadioButton(radioButtonSelector)).addValue(key);
+    await this.getRadioButton(radioButtonSelector).addValue(key);
   }
 
   /* Returns the correct WebDriverIO element from the RadioButton Selector */
-  async getRadioButton(radioButtonSelector: RadioButtonSelector): Promise<WebdriverIO.Element> {
+  getRadioButton(radioButtonSelector: RadioButtonSelector) {
     if (radioButtonSelector == RadioButtonSelector.First) {
-      return await this._firstRadioButton;
+      return this._firstRadioButton;
     } else if (radioButtonSelector == RadioButtonSelector.Second) {
-      return await this._secondRadioButton;
+      return this._secondRadioButton;
     } else if (radioButtonSelector == RadioButtonSelector.Third) {
-      return await this._thirdRadioButton;
+      return this._thirdRadioButton;
     } else {
-      return await this._fourthRadioButton;
+      return this._fourthRadioButton;
     }
   }
 
