@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "move createIconProps hook to icon package",
+  "packageName": "@fluentui-react-native/separator",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

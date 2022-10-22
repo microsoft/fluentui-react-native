@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "move createIconProps hook to icon package",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

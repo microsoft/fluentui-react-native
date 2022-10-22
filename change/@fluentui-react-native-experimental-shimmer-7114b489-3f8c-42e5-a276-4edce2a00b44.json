@@ -1,7 +1,0 @@
-{
-  "type": "none",
-  "comment": "move createIconProps hook to icon package",
-  "packageName": "@fluentui-react-native/experimental-shimmer",
-  "email": "email not defined",
-  "dependentChangeType": "none"
-}

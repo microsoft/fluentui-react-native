@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "move createIconProps hook to icon package",
+  "packageName": "@uifabricshared/foundation-compose",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
