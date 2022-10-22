@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "move createIconProps hook to icon package",
+  "packageName": "@fluentui-react-native/experimental-drawer",
+  "email": "email not defined",
+  "dependentChangeType": "none"
+}

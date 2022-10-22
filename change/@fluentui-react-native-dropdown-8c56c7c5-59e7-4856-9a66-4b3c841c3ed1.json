@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "move createIconProps hook to icon package",
+  "packageName": "@fluentui-react-native/dropdown",
+  "email": "email not defined",
+  "dependentChangeType": "none"
+}
