@@ -106,83 +106,82 @@ The `Text` control is rendered as a `react-native` Text(`RNText`). However, `RNT
 Below is the set of props the Text supports:
 
 ```ts
-export type TextProps<TBase = ITextProps> = TBase &
-  FontVariantTokens & {
-    /**
-     * foreground text color
-     */
-    color?: ColorValue;
+export interface TextProps extends IWithPressableOptions<ITextProps & FontVariantTokens> {
+  /**
+   * foreground text color
+   */
+  color?: ColorValue;
 
-    /**
-     * Aligns text based on the parent container.
-     *
-     * @defaultValue start
-     */
-    align?: TextAlign;
+  /**
+   * Aligns text based on the parent container.
+   *
+   * @defaultValue start
+   */
+  align?: TextAlign;
 
-    /**
-     * Applies a block display for the content.
-     *
-     * @defaultValue false
-     */
-    block?: boolean;
+  /**
+   * Applies a block display for the content.
+   *
+   * @defaultValue false
+   */
+  block?: boolean;
 
-    /**
-     * Applies the font family to the content.
-     *
-     * @defaultValue base
-     */
-    font?: TextFont;
+  /**
+   * Applies the font family to the content.
+   *
+   * @defaultValue base
+   */
+  font?: TextFont;
 
-    /**
-     * Applies the italic font style to the content.
-     *
-     * @defaultValue false
-     */
-    italic?: boolean;
+  /**
+   * Applies the italic font style to the content.
+   *
+   * @defaultValue false
+   */
+  italic?: boolean;
 
-    /**
-     * Applies the strikethrough text decoration to the content.
-     *
-     * @defaultValue false
-     */
-    strikethrough?: boolean;
+  /**
+   * Applies the strikethrough text decoration to the content.
+   *
+   * @defaultValue false
+   */
+  strikethrough?: boolean;
 
-    /**
-     * Applies font size and line height based on the theme tokens.
-     *
-     * @defaultValue 300
-     */
-    size?: TextSize;
+  /**
+   * Applies font size and line height based on the theme tokens.
+   *
+   * @defaultValue 300
+   */
+  size?: TextSize;
 
-    /**
-     * Truncate overflowing text for block displays.
-     *
-     * @defaultValue false
-     */
-    truncate?: boolean;
+  /**
+   * Truncate overflowing text for block displays.
+   *
+   * @defaultValue false
+   */
+  truncate?: boolean;
 
-    /**
-     * Applies the underline text decoration to the content.
-     *
-     * @defaultValue false
-     */
-    underline?: boolean;
+  /**
+   * Applies the underline text decoration to the content.
+   *
+   * @defaultValue false
+   */
+  underline?: boolean;
 
-    /**
-     * Applies font weight to the content.
-     *
-     * @defaultValue regular
-     */
-    weight?: TextWeight;
+  /**
+   * Applies font weight to the content.
+   *
+   * @defaultValue regular
+   */
+  weight?: TextWeight;
 
-    /**
-     * Wraps the text content on white spaces.
-     *
-     * @defaultValue true
-     */
-    wrap?: boolean;
-  };
+  /**
+   * Wraps the text content on white spaces.
+   *
+   * @defaultValue true
+   */
+  wrap?: boolean;
+}
 
 8/1/22 Notes:
 
@@ -196,7 +195,13 @@ export type TextProps<TBase = ITextProps> = TBase &
 Tokens can be used to customize the styling of the control by using the `customize` function on the `Text`. For more information on using the `customize` API, please see [this page](../../framework/composition/README.md). The `Text` has the following tokens:
 
 ```ts
-export type TextTokens = FontTokens & IForegroundColorTokens & TextStyle;
+export type TextTokens = Omit<FontTokens, 'fontFamily'> &
+  IForegroundColorTokens &
+  Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'> & {
+    focused?: TextTokens;
+    hovered?: TextTokens;
+    pressed?: TextTokens;
+  };
 ```
 
 ## Behaviors
