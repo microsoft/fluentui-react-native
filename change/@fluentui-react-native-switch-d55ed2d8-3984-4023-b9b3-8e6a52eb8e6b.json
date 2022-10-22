@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "📦 applying package updates ***NO_CI***",
-  "packageName": "@fluentui-react-native/switch",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

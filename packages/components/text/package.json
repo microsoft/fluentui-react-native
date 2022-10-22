@@ -29,6 +29,7 @@
     "@uifabricshared/foundation-compose": "^1.12.14",
     "@fluentui-react-native/adapters": ">=0.9.3 <1.0.0",
     "@fluentui-react-native/framework": "0.8.13",
+    "@fluentui-react-native/interactive-hooks": ">=0.19.2 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.20.0 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.17.5 <1.0.0",
     "tslib": "^2.3.1"

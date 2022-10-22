@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "move createIconProps hook to icon package",
-  "packageName": "@fluentui-react-native/default-theme",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
