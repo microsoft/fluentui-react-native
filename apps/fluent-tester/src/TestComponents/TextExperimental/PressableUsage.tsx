@@ -34,7 +34,6 @@ export const PressableUsage: React.FunctionComponent = () => {
         <Text variant={'bodyStandard'}>
           To learn more about microsoft, visit this{' '}
           <Text
-            focusable
             variant={'bodyStandard'}
             color="blue"
             keyDownEvents={handledNativeKeyboardEvents}

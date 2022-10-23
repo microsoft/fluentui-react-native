@@ -73,7 +73,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
 
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
-    color,
+    color: color ?? tokens.color,
     variant,
     fontFamily: font == 'base' ? 'primary' : font,
     fontSize: globalTokens.font.size[size],
