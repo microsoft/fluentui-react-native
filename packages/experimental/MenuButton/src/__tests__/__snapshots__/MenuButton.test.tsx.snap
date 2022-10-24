@@ -30,7 +30,7 @@ exports[`ContextualMenu default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": NaN,
+      "padding": 8,
       "paddingHorizontal": 14.5,
       "width": undefined,
     }
