@@ -45,9 +45,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   const theme = useFluentTheme();
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
-  console.log('');
-  console.log(`props=${JSON.stringify(props)}`);
-  console.log(`tokens=${JSON.stringify(tokens)}`);
 
   const textAlign = I18nManager.isRTL
     ? align === 'start'
