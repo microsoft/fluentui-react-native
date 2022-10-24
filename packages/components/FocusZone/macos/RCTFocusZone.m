@@ -187,7 +187,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return NO;
 }
 
-- (bool)canFocusOnView:(NSView *)view
+- (bool)shouldFocusOnView:(NSView *)view
 {
 	return [self forceFocus] ? [view acceptsFirstResponder] : [view canBecomeKeyView];
 }
@@ -219,7 +219,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		if (
 				[candidateView isNotEqualTo:self] &&
 //				[candidateView canBecomeKeyView] &&
-				[self canFocusOnView:candidateView] &&
+				[self shouldFocusOnView:candidateView] &&
 				isLeadingCandidate(candidateView))
 		{
 			nextViewToFocus = candidateView;
