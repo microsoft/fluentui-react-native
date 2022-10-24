@@ -13,6 +13,12 @@ module.exports = {
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
       }
     },
+    postbump: (packagePath, name) => {
+      if (name === '@fluentui-react-native/dependency-profiles') {
+        console.log(`Updating ${name} to use latest published versions`);
+        execSync(`yarn update-profile`, { cwd: packagePath });
+      }
+    },
   },
   changelog: {
     groups: [
