@@ -1,7 +1,11 @@
 import { memoize } from '@fluentui-react-native/framework';
 import { ViewStyle } from 'react-native';
 
-// This function is used to seperate out inner and outer styles for the RippleContainer
+/**
+ * React Native's Pressable needs to be wrapped with a root view to support curved edges.
+ * This function seperates out inner and outer styles for the Container.
+ */
+
 export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [outerStyleProps: ViewStyle, innerStyleProps: ViewStyle] => {
   const {
     margin,
