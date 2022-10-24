@@ -34,7 +34,7 @@ for (const [name, capability] of Object.entries(CAPABILITY_MAP)) {
 const workspacePackages = getAllPackageJsonFiles(__dirname);
 for (const manifestPath of workspacePackages.sort()) {
   const { name, version, private, devOnly } = JSON.parse(readFile(manifestPath));
-  if (private || name === thisPackageName) {
+  if (private || name === thisPackageName || name === '@fluentui-react-native/codemods') {
     continue;
   }
 

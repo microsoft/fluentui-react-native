@@ -10,10 +10,6 @@ module.exports = {
       "name": "@fluentui-react-native/tester-win32",
       "version": "0.27.18"
     },
-    "@fluentui-react-native/codemods": {
-      "name": "@fluentui-react-native/codemods",
-      "version": "0.2.2"
-    },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
       "version": "1.2.23"
