@@ -6,9 +6,7 @@ import { ChainablePromiseElement } from 'webdriverio';
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
 const PLATFORM = process.env['E2ETEST_PLATFORM'];
-if (PLATFORM) {
-  console.log(`Using platform: ${PLATFORM}`);
-}
+
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 let rootView: WebdriverIO.Element | null = null;

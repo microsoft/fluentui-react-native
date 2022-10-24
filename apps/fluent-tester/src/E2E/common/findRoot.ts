@@ -1,5 +1,7 @@
+import { BASE_TESTPAGE } from '../../TestComponents/Common/consts';
 import { Attribute, MobilePlatform, NativePlatform, Platform, ROOT_VIEW } from './consts';
 
+// NOTE: These are prone to breaking.
 const rootSearchFunctions: { [platform in Platform]: () => Promise<WebdriverIO.Element | null> | null } = {
   [NativePlatform.Win32]: async () => {
     // we know that our tester window will have a class name = sdxtestapp
@@ -16,16 +18,18 @@ const rootSearchFunctions: { [platform in Platform]: () => Promise<WebdriverIO.E
     // we weren't able to find our window :(
     return null;
   },
-  [NativePlatform.Win32]: null,
   [NativePlatform.Windows]: async () => {
     // uwp window frames have class name = ApplicationFrameWindow
     const windowRefs = await driver.findElements('class name', 'ApplicationFrameWindow');
-    // our window will be named 'ReactTestApp'
+    // our window will be named 'ReactTestApp' and will have a Fluent Tester header
     for (const ref of windowRefs) {
       const window = await $(ref);
       const windowName = await window.getAttribute(Attribute.AccessibilityLabel);
       if (windowName === 'ReactTestApp') {
-        return window;
+        const header = await window.$('~' + BASE_TESTPAGE);
+        if (!header.error && (await header.getText()).includes('FluentUI Tests')) {
+          return window;
+        }
       }
     }
     // we weren't able to find our window :(
