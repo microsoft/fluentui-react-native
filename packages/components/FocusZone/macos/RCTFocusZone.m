@@ -60,7 +60,7 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
     }
 
 	for (NSView *view in [parentView subviews]) {
-		if ([view canBecomeKeyView]) {
+		if ([view acceptsFirstResponder]) {
 			return view;
 		}
 
@@ -78,7 +78,8 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 static NSView *GetLastKeyViewWithin(NSView *parentView)
 {
 	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
-		if ([view canBecomeKeyView]) {
+//		if ([view canBecomeKeyView]) {
+		if ([view acceptsFirstResponder]) {
 			return view;
 		}
 
@@ -186,6 +187,11 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	return NO;
 }
 
+- (bool)canFocusOnView:(NSView *)view
+{
+	return [self forceFocus] ? [view acceptsFirstResponder] : [view canBecomeKeyView];
+}
+
 /// Accept firstResponder on FocusZone itself in order to reassign it within the FocusZone.
 - (BOOL)acceptsFirstResponder
 {
@@ -210,7 +216,11 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		NSView *candidateView = [queue firstObject];
 		[queue removeObjectAtIndex:0];
 
-		if ([candidateView isNotEqualTo:self] && [candidateView canBecomeKeyView] && isLeadingCandidate(candidateView))
+		if (
+				[candidateView isNotEqualTo:self] &&
+//				[candidateView canBecomeKeyView] &&
+				[self canFocusOnView:candidateView] &&
+				isLeadingCandidate(candidateView))
 		{
 			nextViewToFocus = candidateView;
 		}
