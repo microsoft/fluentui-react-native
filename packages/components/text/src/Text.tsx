@@ -14,6 +14,7 @@ import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
+import { NativeFontMetrics } from '@fluentui-react-native/experimental-native-font-metrics';
 
 const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
@@ -44,6 +45,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   const theme = useFluentTheme();
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
+  console.log('');
+  console.log(`props=${JSON.stringify(props)}`);
+  console.log(`tokens=${JSON.stringify(tokens)}`);
 
   const textAlign = I18nManager.isRTL
     ? align === 'start'
@@ -63,6 +67,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     },
     [onPress, onAccessibilityTap],
   );
+
+  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+  const dynamicTypeVariant = Platform.OS === 'ios' ? NativeFontMetrics.getConstants().styles[(tokens as any).dynamicTypeRamp] : undefined;
 
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
@@ -93,6 +100,21 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
 
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
+    // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+    interface ScaleStyleAdjustmentProps {
+      fontSize?: number;
+      lineHeight?: number;
+    }
+    let scaleStyleAdjustmentProps: ScaleStyleAdjustmentProps = {};
+    if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
+      const scaleFactor = NativeFontMetrics.scaleFactorForStyle(dynamicTypeVariant);
+      scaleStyleAdjustmentProps = {
+        fontSize: tokenStyle.fontSize * scaleFactor,
+        lineHeight: tokenStyle.lineHeight * scaleFactor,
+      };
+    }
+    // ]TODO(#2268)
+
     const mergedProps = {
       numberOfLines: truncate || !wrap ? 1 : 0,
       onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
@@ -100,7 +122,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       onPress,
       ...rest,
       ...extra,
-      style: mergeStyles(tokenStyle, props.style, extra?.style),
+      style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustmentProps),
+      allowFontScaling: dynamicTypeVariant === undefined, // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
     };
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
