@@ -156,6 +156,7 @@ export interface ButtonSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
   icon: IconProps;
   content: TextProps;
+  ripple?: { children: React.PropsWithRef<PressablePropsExtended> }; // Is this valid?
 }
 
 export interface ButtonType {

@@ -45,6 +45,9 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
+        android_ripple: {
+          color: 'red', //todo
+        },
       }),
       ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
     ),

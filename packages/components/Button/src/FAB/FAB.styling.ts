@@ -25,6 +25,9 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, B
           ...layoutStyles.from(tokens, theme),
           ...shadowStyles.from(tokens, theme),
         },
+        android_ripple: {
+          color: 'red', //todo
+        },
         elevation: tokens.elevation,
       }),
       ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],

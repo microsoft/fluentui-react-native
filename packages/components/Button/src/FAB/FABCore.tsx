@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable } from 'react-native';
 import { fabName, FABProps, FABType } from './FAB.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
@@ -9,6 +9,7 @@ import { useButton } from '../useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
+import { Ripple } from '../../../../experimental/Ripple/src/Ripple';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -28,10 +29,11 @@ export const FAB = compose<FABType>({
   displayName: fabName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
     shadow: Shadow,
+    ripple: Ripple,
   },
   useRender: (userProps: FABProps, useSlots: UseSlots<FABType>) => {
     const { icon, ...rest } = userProps;
@@ -78,7 +80,7 @@ export const FAB = compose<FABType>({
       if (hasShadow) {
         return <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
       } else {
-        return fabWithoutShadow;
+        return <Slots.ripple>{fabWithoutShadow}</Slots.ripple>;
       }
     };
   },

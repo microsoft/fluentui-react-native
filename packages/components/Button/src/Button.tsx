@@ -9,6 +9,7 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import Ripple from '../../../experimental/Ripple/src/Ripple';
 
 /**
  * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
@@ -41,6 +42,7 @@ export const Button = compose<ButtonType>({
     root: Pressable,
     icon: Icon,
     content: Text,
+    ripple: Ripple,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
@@ -72,14 +74,16 @@ export const Button = compose<ButtonType>({
       const label = accessibilityLabel ?? childText;
 
       return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
-          {loading && <ActivityIndicator />}
-          {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
-          {React.Children.map(children, (child) =>
-            typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
-          )}
-          {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
-        </Slots.root>
+        <Slots.ripple>
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {loading && <ActivityIndicator />}
+            {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
+            {React.Children.map(children, (child) =>
+              typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
+            )}
+            {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
+          </Slots.root>
+        </Slots.ripple>
       );
     };
   },
