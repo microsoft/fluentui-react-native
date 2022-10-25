@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Switch platform for tests from ios to win32",
-  "packageName": "@fluentui-react-native/win32-theme",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

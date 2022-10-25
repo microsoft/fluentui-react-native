@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update snapshots (changes are the differences between ios and windows tokens)",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

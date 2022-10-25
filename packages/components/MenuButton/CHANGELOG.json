@@ -2,6 +2,51 @@
   "name": "@fluentui-react-native/menu-button",
   "entries": [
     {
+      "date": "Tue, 25 Oct 2022 22:47:44 GMT",
+      "tag": "@fluentui-react-native/menu-button_v0.8.53",
+      "version": "0.8.53",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/menu-button",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b",
+            "comment": "Update snapshots (changes are the differences between ios and windows tokens)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/button to v0.27.2",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.19.1",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/icon to v0.13.19",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.3",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu-button",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.15",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Oct 2022 20:57:00 GMT",
       "tag": "@fluentui-react-native/menu-button_v0.8.52",
       "version": "0.8.52",
