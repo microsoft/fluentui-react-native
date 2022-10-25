@@ -1,4 +1,5 @@
 import { FontSize, FontSizes, FontWeightValue, Typography, Variants } from '@fluentui-react-native/theme-types';
+import { createFontAliasTokens } from './createFontAliasTokens';
 
 export function androidTypography(): Typography {
   const androidDict = {
@@ -41,20 +42,7 @@ export function androidTypography(): Typography {
       heroSemibold: { face: 'primarySemibold', size: 'hero' },
       heroLargeStandard: { face: 'primary', size: 'heroLarge' },
       heroLargeSemibold: { face: 'primarySemibold', size: 'heroLarge' },
-      // mocked out
-      caption1: { face: 'primary', size: 'caption' },
-      body1: { face: 'primary', size: 'secondary' },
-      body1Strong: { face: 'primarySemibold', size: 'secondary' },
-      body2: { face: 'primary', size: 'body' },
-      body2Strong: { face: 'primarySemibold', size: 'body' },
-      subtitle1: { face: 'primary', size: 'header' },
-      subtitle1Strong: { face: 'primarySemibold', size: 'header' },
-      subtitle2: { face: 'primary', size: 'subheader' },
-      subtitle2Strong: { face: 'primarySemibold', size: 'subheader' },
-      title1: { face: 'primary', size: 'hero' },
-      title1Strong: { face: 'primarySemibold', size: 'hero' },
-      largeTitle: { face: 'primary', size: 'heroLarge' },
-      display: { face: 'primarySemibold', size: 'heroLarge' },
+      ...createFontAliasTokens(),
     } as Variants,
   };
 

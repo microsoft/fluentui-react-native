@@ -3,6 +3,7 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { Platform } from 'react-native';
 import { ButtonTokens } from './Button.types';
+import { Platform } from 'react-native';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
   ({
@@ -11,7 +12,8 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
     },
     medium: {
       padding: Platform.select({
-        ios: 6,
+        android: globalTokens.spacing.xs,
+        ios: globalTokens.spacing.xs,
         default: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
       }),
       borderWidth: globalTokens.stroke.width.thin,

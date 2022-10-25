@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 21 Oct 2022 13:09:26 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.0
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Minor changes
+
+- Font Pipeline (email not defined)
 
 ## 0.16.2
 
