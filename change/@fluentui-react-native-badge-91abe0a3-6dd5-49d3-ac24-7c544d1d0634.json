@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Make badge tests run on win32 instead of ios",
-  "packageName": "@fluentui-react-native/badge",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
