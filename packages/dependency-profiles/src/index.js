@@ -46,25 +46,25 @@ module.exports = {
       "name": "@fluentui-react-native/link",
       "version": "0.16.24"
     },
-    "@fluentui-react-native/menu-button": {
-      "name": "@fluentui-react-native/menu-button",
-      "version": "0.8.51"
-    },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
       "version": "1.0.56"
+    },
+    "@fluentui-react-native/menu-button": {
+      "name": "@fluentui-react-native/menu-button",
+      "version": "0.8.51"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
       "version": "0.17.28"
     },
-    "@fluentui-react-native/persona-coin": {
-      "name": "@fluentui-react-native/persona-coin",
-      "version": "0.11.14"
-    },
     "@fluentui-react-native/persona": {
       "name": "@fluentui-react-native/persona",
       "version": "0.13.14"
+    },
+    "@fluentui-react-native/persona-coin": {
+      "name": "@fluentui-react-native/persona-coin",
+      "version": "0.11.14"
     },
     "@fluentui-react-native/pressable": {
       "name": "@fluentui-react-native/pressable",
