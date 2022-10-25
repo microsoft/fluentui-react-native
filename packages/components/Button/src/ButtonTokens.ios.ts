@@ -9,7 +9,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       width: '100%',
     },
     medium: {
-      padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
+      padding: globalTokens.spacing.xs,
       borderWidth: globalTokens.stroke.width.thin,
       iconSize: 16,
       focused: {
