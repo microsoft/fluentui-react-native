@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 21 Oct 2022 13:09:26 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Oct 2022 22:47:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.58
+
+Tue, 25 Oct 2022 22:47:44 GMT
+
+### Patches
+
+- Update snapshots (changes are the differences between ios and windows tokens) (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/callout to v0.21.27
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+- Bump @fluentui-react-native/text to v0.15.10
+- Bump @fluentui-react-native/theme-tokens to v0.20.1
+- Bump @fluentui-react-native/button to v0.27.2
+
+## 1.0.57
+
+Tue, 25 Oct 2022 20:57:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.27.1
 
 ## 1.0.56
 

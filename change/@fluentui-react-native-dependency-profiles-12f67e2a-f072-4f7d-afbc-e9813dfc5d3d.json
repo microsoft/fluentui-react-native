@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Create dependency profile package for FURN",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}
