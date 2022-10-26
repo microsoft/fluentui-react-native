@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "@react-native-community/cli": "^7.0.3",
-    "@rnx-kit/jest-preset": "^0.1.9",
+    "@rnx-kit/jest-preset": "^0.1.12",
     "@types/enzyme": "^3.10.5",
     "@types/es6-collections": "^0.5.29",
     "@types/es6-promise": "0.0.32",

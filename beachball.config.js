@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const execSync = require('child_process').execSync;
 
 module.exports = {
   disallowedChangeTypes: ['major'],
@@ -11,6 +12,12 @@ module.exports = {
         Object.assign(packageJson, packageJson.onPublish);
         delete packageJson.onPublish;
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2) + '\n');
+      }
+    },
+    postbump: (packagePath, name) => {
+      if (name === '@fluentui-react-native/dependency-profiles') {
+        console.log(`Updating ${name} to use latest published versions`);
+        execSync(`yarn update-profile`, { cwd: packagePath });
       }
     },
   },

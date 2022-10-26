@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/theme-tokens
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Oct 2022 22:47:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.1
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Add tokens-global.ios.ts (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.20.0
 
