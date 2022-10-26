@@ -47,7 +47,7 @@ export interface FocusZoneProps {
    *
    * On macOS, not every focusable view is a key view (i.e: we can press Tab to move focus to it).
    * Rather, there is a system preference to toggle which views are in the key view loop.
-   * This prop allows you to focus on all views that accept first responder, rather than just key views.
+   * This prop allows you to focus on all focusable views, rather than just key views.
    * For more info, see https://microsoft.github.io/apple-ux-guide/KeyboardFocus.html
    * @platform macOS
    */
