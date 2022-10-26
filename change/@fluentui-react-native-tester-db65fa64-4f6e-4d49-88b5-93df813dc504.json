@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use iOS 16.0 simulator",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
