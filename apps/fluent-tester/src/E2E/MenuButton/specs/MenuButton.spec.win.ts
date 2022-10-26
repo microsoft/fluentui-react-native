@@ -7,7 +7,6 @@ import { ComponentSelector } from '../../common/BasePage';
 // Before testing begins, allow up to 60 seconds for app to open
 describe('MenuButton Testing Initialization', function () {
   it('Wait for app load', async () => {
-    await NavigateAppPage.waitForRootQueryElementToBeFound(BOOT_APP_TIMEOUT);
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
     await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
   });
