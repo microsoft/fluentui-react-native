@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { IFocusable } from '@fluentui-react-native/interactive-hooks';
 import { IRenderData } from '@uifabricshared/foundation-composable';
-import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const focusZoneName = 'FocusZone';
 
 export interface FocusZoneState {}
 
-export interface FocusZoneProps extends IViewProps {
+export interface FocusZoneProps {
   /**
    * A RefObject to access the IFocusable interface. Use this to access the public methods and properties of the component.
    */
