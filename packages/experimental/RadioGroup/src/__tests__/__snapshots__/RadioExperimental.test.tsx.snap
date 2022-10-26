@@ -37,6 +37,7 @@ exports[`Radio component tests Radio default 1`] = `
   style={
     Object {
       "alignItems": "flex-start",
+      "borderColor": "transparent",
       "borderRadius": 4,
       "display": "flex",
       "flexDirection": "row",

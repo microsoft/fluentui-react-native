@@ -95,6 +95,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -201,6 +202,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
+              "borderColor": "transparent",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
@@ -371,6 +373,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         style={
           Object {
             "alignItems": "flex-start",
+            "borderColor": "transparent",
             "borderRadius": 4,
             "display": "flex",
             "flexDirection": "row",
@@ -477,6 +480,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         style={
           Object {
             "alignItems": "flex-start",
+            "borderColor": "transparent",
             "borderRadius": 4,
             "display": "flex",
             "flexDirection": "row",
