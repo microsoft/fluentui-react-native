@@ -59,13 +59,18 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
       }),
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill', 'radioInnerCircleLeft', 'radioInnerCircleTop'],
     ),
-    labelContent: {
-      style: {
-        alignSelf: 'center',
-        alignItems: 'flex-start',
-        flexDirection: 'column',
-      },
-    },
+    labelContent: buildProps(
+      (tokens: RadioTokens) => ({
+        style: {
+          alignSelf: 'center',
+          alignItems: 'flex-start',
+          flexDirection: 'column',
+          marginRight: tokens.labelMarginRight,
+          marginLeft: tokens.labelMarginLeft,
+        },
+      }),
+      ['labelMarginRight', 'labelMarginLeft'],
+    ),
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
@@ -82,12 +87,11 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         variant: tokens.subtextVariant,
         style: {
           marginTop: tokens.subtextMarginTop,
-          marginRight: tokens.subtextMarginRight,
           marginBottom: tokens.subtextMarginBottom,
           color: tokens.color,
         },
       }),
-      ['subtextMarginTop', 'subtextMarginRight', 'subtextMarginBottom', 'color', 'subtextVariant'],
+      ['subtextMarginTop', 'subtextMarginBottom', 'color', 'subtextVariant'],
     ),
   },
 };

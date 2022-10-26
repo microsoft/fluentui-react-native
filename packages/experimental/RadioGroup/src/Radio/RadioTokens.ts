@@ -17,9 +17,10 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioSize: 20,
     radioInnerCircleSize: 10,
     labelMarginTop: globalTokens.spacing.none,
+    labelMarginRight: globalTokens.spacing.xxs,
+    labelMarginLeft: globalTokens.spacing.none,
     subtextVariant: 'caption1',
     subtextMarginTop: globalTokens.spacing.xxs,
-    subtextMarginRight: globalTokens.spacing.xxs,
     subtextMarginBottom: globalTokens.spacing.xxs,
     marginTop: globalTokens.spacing.xs,
     marginRight: globalTokens.spacing.sNudge,
@@ -34,6 +35,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
       flexDirection: 'column',
       alignItems: 'center',
       marginLeft: globalTokens.spacing.none,
+      labelMarginLeft: globalTokens.spacing.xs,
     },
 
     disabled: {
