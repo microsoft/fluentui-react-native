@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalLinkPageObject from '../pages/LinkPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL } from '../../../TestComponents/LinkExperimental/consts';
 import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
@@ -12,10 +12,6 @@ describe('Link Testing Initialization', function () {
   });
 
   it('Click and navigate to Link test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await ExperimentalLinkPageObject.scrollToComponentButton(Platform.Win32);
-    await ExperimentalLinkPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToLinkExperimentalPage();
     await ExperimentalLinkPageObject.waitForPageDisplayed(PAGE_TIMEOUT);

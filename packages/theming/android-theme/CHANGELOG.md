@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Tue, 25 Oct 2022 22:47:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.20.1
+
+## 0.13.0
+
+Fri, 21 Oct 2022 13:09:25 GMT
+
+### Minor changes
+
+- FontPipeline (email not defined)
+- Bump @fluentui-react-native/theming-utils to v0.17.0
 
 ## 0.12.9
 

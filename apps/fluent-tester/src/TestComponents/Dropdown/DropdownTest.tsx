@@ -8,9 +8,10 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 const DropdownDefault: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
-      <Dropdown />
-      <Option>Test</Option>
-      <Option disabled>Disabled Test</Option>
+      <Dropdown>
+        <Option>Test</Option>
+        <Option disabled>Disabled Test</Option>
+      </Dropdown>
     </Stack>
   );
 };
