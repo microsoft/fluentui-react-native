@@ -19,6 +19,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   iconColor?: ColorValue;
 
   /**
+   * Ripple color for Android.
+   */
+  rippleColor?: ColorValue;
+
+  /**
    * The size of the icon.
    */
   iconSize?: number;
@@ -155,7 +160,7 @@ export interface ButtonInfo {
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  rippleContainer?: IViewProps;
+  rippleContainer?: IViewProps; // Android only
   icon: IconProps;
   content: TextProps;
 }

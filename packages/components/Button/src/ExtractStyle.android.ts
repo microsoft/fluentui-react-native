@@ -2,8 +2,12 @@ import { memoize } from '@fluentui-react-native/framework';
 import { ViewStyle } from 'react-native';
 
 /**
- * React Native's Pressable needs to be wrapped with a root view to support curved edges.
- * This function seperates out inner and outer styles for the Container.
+ * React Native's Pressable does not support curved edges.
+ * It needs to be wrapped inside another view and have border set there.
+ * This function extracts styles that should be applied on the outer view.
+ *
+ * @param style Styling that is to be applied on the component
+ * @returns Array containing split styles that are to be applied on the inner and outer views
  */
 
 export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [outerStyleProps: ViewStyle, innerStyleProps: ViewStyle] => {
@@ -48,6 +52,6 @@ export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [o
       display,
       opacity,
     },
-    { ...restOfProps },
+    { borderWidth: 0, ...restOfProps },
   ];
 });

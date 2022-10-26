@@ -32,60 +32,40 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
-    ...Platform.select({
-      android: {
-        rippleContainer: buildProps(
-          (tokens: ButtonTokens) => {
-            return {
-              style: {
-                flexDirection: 'row',
-                alignSelf: 'baseline',
-                backgroundColor: tokens.backgroundColor,
-                borderRadius: tokens.borderRadius,
-                overflow: 'hidden',
-              },
-            };
-          },
-          ['backgroundColor', 'borderRadius'],
-        ),
-        root: buildProps(
-          (tokens: ButtonTokens, theme: Theme) => ({
+    ...(Platform.OS == 'android' && {
+      rippleContainer: buildProps(
+        (tokens: ButtonTokens) => {
+          return {
             style: {
-              display: 'flex',
-              alignItems: 'center',
               flexDirection: 'row',
-              alignSelf: 'flex-start',
-              justifyContent: 'center',
-              width: tokens.width,
-              ...borderStyles.from(tokens, theme),
-              ...layoutStyles.from(tokens, theme),
+              alignSelf: 'baseline',
+              borderRadius: tokens.borderRadius,
+              overflow: 'hidden',
             },
-            android_ripple: {
-              color: tokens.pressed.backgroundColor,
-            },
-          }),
-          ['pressed', 'width', ...layoutStyles.keys, ...borderStyles.keys],
-        ),
-      },
-      default: {
-        root: buildProps(
-          (tokens: ButtonTokens, theme: Theme) => ({
-            style: {
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'row',
-              alignSelf: 'flex-start',
-              justifyContent: 'center',
-              width: tokens.width,
-              backgroundColor: tokens.backgroundColor,
-              ...borderStyles.from(tokens, theme),
-              ...layoutStyles.from(tokens, theme),
-            },
-          }),
-          ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
-        ),
-      },
+          };
+        },
+        ['borderRadius'],
+      ),
     }),
+    root: buildProps(
+      (tokens: ButtonTokens, theme: Theme) => ({
+        style: {
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',
+          alignSelf: 'flex-start',
+          justifyContent: 'center',
+          width: tokens.width,
+          backgroundColor: tokens.backgroundColor,
+          ...borderStyles.from(tokens, theme),
+          ...layoutStyles.from(tokens, theme),
+        },
+        android_ripple: {
+          color: tokens.rippleColor,
+        },
+      }),
+      ['backgroundColor', 'width', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys],
+    ),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => {
         return {
