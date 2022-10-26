@@ -33,7 +33,7 @@ static inline CGFloat GetDistanceBetweenRects(NSRect rect1, NSRect rect2)
 
 	CGFloat rect1Offset = isRTL ? rect1.size.width : 0;
 	CGFloat rect2Offset = isRTL ? rect2.size.width : 0;
-	
+
 	NSPoint rect1Corner = NSMakePoint(rect1.origin.x + rect1Offset , rect1.origin.y);
 	NSPoint rect2Corner = NSMakePoint(rect2.origin.x + rect2Offset , rect2.origin.y);
 
@@ -291,7 +291,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		if (!skip)
 		{
 			CGFloat distance = GetDistanceBetweenRects(firstResponderRect, candidateRect);
-			
+
 			// If there are other candidate views inside the same ScrollView as the firstResponder,
 			// prefer those views over other views outside the scrollview, even if they are closer.
 			if ([firstResponderEnclosingScrollView isEqualTo:[candidateView enclosingScrollView]])
@@ -397,7 +397,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	NSView *nextViewToFocus;
 
 	[[self window] recalculateKeyViewLoop];
-	
+
 	// Find the first view outside the FocusZone (or any parent FocusZones) to place focus
 	RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(self);
 
@@ -416,7 +416,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		{
 			nextViewToFocus = [nextViewToFocus previousValidKeyView];
 		}
-		
+
 		// If the previous view is in a FocusZone, focus on its defaultKeyView
 		// (For FocusZoneActionTab, this is handled by becomeFirstResponder).
 		RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(nextViewToFocus);
