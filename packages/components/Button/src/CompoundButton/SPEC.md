@@ -4,6 +4,8 @@
 
 The `CompoundButton` is a `Button` that is designed to show an extra line of text.
 
+Does not render on Android.
+
 ## Requirements
 
 If using FURN's theming, the `CompoundButton` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](../../../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.

@@ -87,6 +87,7 @@ The `Button` component has three slots, or parts. The slots behave as follows:
 - `root` - The outer container representing the `Button` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `content` - If specified, renders the first entry of `children` as text.
+- `rippleContainer` - A wrapper view to support curved border in ripple for Android.
 
 The slots can be modified using the `compose` function on the `Button`. For more information on using the `compose` API, please see [this page](../../framework/composition/README.md).
 
@@ -95,7 +96,7 @@ The slots can be modified using the `compose` function on the `Button`. For more
 Below is the set of props the button supports:
 
 ```ts
-export interface ButtonProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
    * - 'primary': Emphasizes the button as a primary action.
@@ -176,6 +177,16 @@ Tokens can be used to customize the styling of the control by using the `customi
 ```ts
 export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
+   * Focused State on Android has inner and outer borders
+   * Outer Border is equivalent to the border tokens from IBorders
+   * This adds inner border support.
+   */
+  borderInnerColor?: ColorValue;
+  borderInnerRadius?: number;
+  borderInnerStyle?: ViewStyle['borderStyle'];
+  borderInnerWidth?: number;
+
+  /**
    * The icon color.
    */
   iconColor?: ColorValue;
@@ -191,9 +202,9 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   iconWeight?: number;
 
   /**
-   * The width of the button.
+   * An object describing the shadow of the button
    */
-  width?: ViewStyle['width'];
+  shadowToken?: ShadowToken;
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
@@ -204,6 +215,11 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
    * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
    */
   spacingIconContentAfter?: number;
+
+  /**
+   * The width of the button.
+   */
+  width?: ViewStyle['width'];
 
   /**
    * States that can be applied to a button.

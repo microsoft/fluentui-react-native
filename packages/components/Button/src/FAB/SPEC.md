@@ -18,6 +18,11 @@ Basic examples:
 <FAB icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</FAB>
 <FAB appearance="primary">Text</FAB>
 <FAB disabled>Text</FAB>
+
+// Collapsing FAB Content (to show only icon) on click
+const [showFABText, setShowFABText] = React.useState(true);
+const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
+<FAB showContent={showFABText} onClick={flipFABcontent}>Text</FAB>
 ```
 
 More examples on the [Test pages for the Button](../../../../../apps/fluent-tester/src/TestComponents/Button). Instructions on running the tester app can be found [here](../../../../../apps/fluent-tester/README.md).
@@ -36,29 +41,24 @@ Android:
 
 ### Slots
 
-The `FAB` component has two slots, or parts. The slots behave as follows:
+The `FAB` component has the following slots, or parts. The slots behave as follows:
 
 - `root` - The outer container representing the `FAB` itself that wraps everything passed via the `children` prop.
 - `icon` - If specified, renders an `icon` either before or after the `children` as specified by the `iconPosition` prop.
 - `content` - If specified, renders the first entry of `children` as text.
 - `shadow` - By default renders a shadow on the FAB. The depth of the shadow can be customized.
+- `rippleContainer` - A wrapper view to support curved border in ripple for Android.
 
 The slots can be modified using the `compose` function on the `FAB`. For more information on using the `compose` API, please see [this page](../../../../framework/composition/README.md).
 
 ### Props
 
 ```ts
-export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface FABProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
-
-  /*
-   * Text to show on the Button.
-   * Only used in FAB
-   */
-  content?: string;
 
   /*
    * Source URL or name of the icon to show on the Button.
@@ -66,9 +66,26 @@ export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPres
   icon?: IconSourcesType;
 
   /**
+   * Button contains only icon, there's no text content
+   * Must be set for button to style correctly when button has not content.
+   */
+  iconOnly?: boolean;
+
+  /**
    * A callback to call on button click event
    */
-  onClick?: () => void;
+  onClick?: (e: InteractionEvent) => void;
+
+  /**
+   * FAB text and other content can be hidden with this prop
+   * @default 'true'
+   */
+  showContent?: boolean;
+
+  /** Sets style of FAB to a preset size style
+   * @default 'large' on android
+   */
+  size?: FABSize;
 
   /**
    * Text that should show in a tooltip when the user hovers over a button.
@@ -82,7 +99,17 @@ export interface FABProps extends Omit<IWithPressableOptions<ViewProps>, 'onPres
 Tokens can be used to customize the styling of the control by using the `customize` function on the `FAB`. For more information on using the `customize` API, please see [this page(../../../../framework/composition/README.md). The `FAB` has the following tokens:
 
 ```ts
-export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+export interface FABTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
+  /**
+   * Focused State on Android has inner and outer borders
+   * Outer Border is equivalent to the border tokens from IBorders
+   * This adds inner border support.
+   */
+  borderInnerColor?: ColorValue;
+  borderInnerRadius?: number;
+  borderInnerStyle?: ViewStyle['borderStyle'];
+  borderInnerWidth?: number;
+
   /**
    * The icon color.
    */
@@ -99,9 +126,9 @@ export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderT
   iconWeight?: number;
 
   /**
-   * The width of the button.
+   * An object describing the shadow of the button
    */
-  width?: ViewStyle['width'];
+  shadowToken?: ShadowToken;
 
   /**
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
@@ -109,14 +136,24 @@ export interface CompoundButtonTokens extends LayoutTokens, FontTokens, IBorderT
   spacingIconContentBefore?: number;
 
   /**
-   * States that can be applied to a button
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
    */
-  hovered?: ButtonTokens;
-  focused?: ButtonTokens;
-  pressed?: ButtonTokens;
-  disabled?: ButtonTokens;
-  hasContent?: ButtonTokens;
-  hasIconBefore?: ButtonTokens;
+  spacingIconContentAfter?: number;
+
+  /**
+   * The width of the button.
+   */
+  width?: ViewStyle['width'];
+
+  /**
+   * States that can be applied to FAB
+   */
+  focused?: FABTokens;
+  pressed?: FABTokens;
+  subtle?: FABTokens;
+  disabled?: FABTokens;
+  large?: FABTokens;
+  small?: FABTokens;
 }
 ```
 

@@ -4,6 +4,8 @@
 
 The `ToggleButton` is a `Button` that is designed show a selected state when toggled.
 
+Does not render on Android use `Switch` instead.
+
 ## Requirements
 
 If using FURN's theming, the `ToggleButton` requires use of the `ThemeProvider` from `@fluentui-react-native/theme` to work properly with themes. Please see [this page](../../../../../docs/pages/Guides/UpdateThemeProvider.md) for information on updating your `ThemeProvider` if using the version from `@uifabricshared/theming-react-native`.
