@@ -74,11 +74,11 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
     brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
 
-    brandBackground2: pipelineOutput.brandBackground2.fillColorRest,
-    brandBackground2Pressed: pipelineOutput.brandBackground2.fillColorPressed,
-    brandBackground2Selected: pipelineOutput.brandBackground2.fillColorSelected,
+    brandBackground2: pipelineOutput.brandBackground2?.fillColorRest,
+    brandBackground2Pressed: pipelineOutput.brandBackground2?.fillColorPressed,
+    brandBackground2Selected: pipelineOutput.brandBackground2?.fillColorSelected,
 
-    brandBackground3: pipelineOutput.brandBackground3.fillColorRest,
+    brandBackground3: pipelineOutput.brandBackground3?.fillColorRest,
     brandBackgroundTint: pipelineOutput.brandBackgroundTint.fillColorRest,
     brandBackgroundInverted: pipelineOutput.brandBackgroundInverted.fillColorRest,
 
@@ -95,7 +95,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
-};
+  };
 }
 
 export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
