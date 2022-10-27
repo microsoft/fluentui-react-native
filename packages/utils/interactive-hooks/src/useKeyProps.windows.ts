@@ -26,7 +26,7 @@ export function useKeyCallback(userCallback?: KeyCallback, ...keys: string[]) {
 
 export function getKeyCallbackWorker(userCallback?: KeyCallback, ...keys: string[]) {
   const onKeyEvent = (args: KeyPressEvent) => {
-    if (userCallback !== undefined && (keys === undefined || keys.includes(args.nativeEvent.key))) {
+    if (userCallback !== undefined && !isModifierKey(args.nativeEvent) && (keys === undefined || keys.includes(args.nativeEvent.key))) {
       userCallback(args);
       args.stopPropagation();
     }
@@ -72,3 +72,22 @@ export const useKeyProps = memoize(getKeyUpPropsWorker);
 
 /** Exposes the behavior of useKeyProps for the current platform as a boolean */
 export const preferKeyDownForKeyEvents = false;
+
+/**
+ * Verifies if nativeEvent contains modifier key.
+ * @param nativeEvent
+ * @returns `true` if one or more of modifier keys are `true`
+ */
+export const isModifierKey = (nativeEvent: any): boolean => {
+  return (
+    nativeEvent &&
+    (nativeEvent.alt ||
+      nativeEvent.altKey ||
+      nativeEvent.ctrl ||
+      nativeEvent.ctrlKey ||
+      nativeEvent.meta ||
+      nativeEvent.metaKey ||
+      nativeEvent.shift ||
+      nativeEvent.shiftKey)
+  );
+};
