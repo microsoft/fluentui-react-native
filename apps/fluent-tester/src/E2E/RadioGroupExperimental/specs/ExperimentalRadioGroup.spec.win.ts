@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupExperimentalPageObject, { RadioSelector } from '../pages/RadioGroupExperimentalPageObject';
-import { ComponentSelector, Platform } from '../../common/BasePage';
+import { ComponentSelector } from '../../common/BasePage';
 import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 import {
   RADIOGROUP_ACCESSIBILITY_LABEL,
@@ -17,12 +17,8 @@ describe('RadioGroup/Radio Testing Initialization', function () {
   });
 
   it('Click and navigate to RadioGroup test page', async () => {
-    /* Scroll to component test page button in scrollview if not already visible*/
-    await RadioGroupExperimentalPageObject.scrollToComponentButton(Platform.Win32);
-    await RadioGroupExperimentalPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
-
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToRadioGroupPage();
+    await NavigateAppPage.clickAndGoToRadioGroupExperimentalPage();
     await RadioGroupExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await RadioGroupExperimentalPageObject.isPageLoaded()).toBeTruthy(RadioGroupExperimentalPageObject.ERRORMESSAGE_PAGELOAD);
@@ -68,7 +64,7 @@ describe('RadioGroup/Radio Accessibility Testing', () => {
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Radio - Do not set accessibilityLabel -> Default to Radio label', async () => {
+  it('Radio - Do not set accessibilityLabel -> Default to RadioButton label', async () => {
     await expect(await RadioGroupExperimentalPageObject.getRBAccessibilityLabel(RadioSelector.Second)).toEqual(SECOND_RADIO_LABEL);
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -109,7 +105,7 @@ describe('RadioGroup Functional Testing', async () => {
   it("Keyboard to DISABLED Radio and validate it doesn't get selected", async () => {
     // Presses the ArrowDown key while the second (B) Radio is selected
     await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.Second);
-    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Fourth, 5000); // It should skip Radio 3 since it is disabled
+    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.Fourth, 5000); // It should skip RadioButton 3 since it is disabled
 
     /* Validate the Radio is selected */
     await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.Fourth)).toBeTruthy();

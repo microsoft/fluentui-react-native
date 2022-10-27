@@ -4,7 +4,7 @@ export const RADIO_GROUP_EXPERIMENTAL_TESTPAGE = 'RadioGroupExperimental_TestPag
 /********************************************************************/
 /********************* E2E Testing RadioGroup 1 *********************/
 /********************************************************************/
-export const RADIOGROUP_TEST_COMPONENT = 'RadioGroup_Test_Component';
+export const RADIOGROUP_TEST_COMPONENT = 'RadioGroupExperimental_Test_Component';
 export const RADIOGROUP_ACCESSIBILITY_LABEL = 'E2E testing RadioGroup accessibility label';
 
 /* E2E Testing RadioButton 1 (1 of 4) */
@@ -25,6 +25,6 @@ export const FOURTH_RADIO = 'Fourth_Radio';
 /********************* E2E Testing RadioGroup 2 *********************/
 /********************************************************************/
 export const RADIOGROUP_NO_A11Y_LABEL_COMPONENT = 'RadioGroup_No_A11y_label_Component';
-export const RADIOGROUP_TEST_COMPONENT_LABEL = 'Test RadioGroup2 - No Accessibility Label'; // A component on each specific test page
+export const RADIOGROUP_TEST_COMPONENT_LABEL = 'Test RadioGroupExperimental2 - No Accessibility Label'; // A component on each specific test page
 
 export const RADIOGROUP_ON_PRESS = 'RadioGroup_On_Press'; // For testing the press functionality on a button

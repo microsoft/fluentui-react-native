@@ -19,6 +19,7 @@ import { HOMEPAGE_PERSONA_BUTTON } from '../../TestComponents/Persona/consts';
 import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../TestComponents/PersonaCoin/consts';
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../../TestComponents/Pressable/consts';
 import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../TestComponents/RadioGroup/consts';
+import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from '../../TestComponents/RadioGroupExperimental/consts';
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../TestComponents/Separator/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
@@ -110,6 +111,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToRadioGroupPage() {
     await this.radioGroupPage.click();
+  }
+
+  async clickAndGoToRadioGroupExperimentalPage() {
+    await this.radioGroupExperimentalPage.click();
   }
 
   async clickAndGoToSeparatorPage() {
@@ -238,6 +243,10 @@ class NavigateAppPage extends BasePage {
 
   private get radioGroupPage() {
     return By(HOMEPAGE_RADIOGROUP_BUTTON);
+  }
+
+  private get radioGroupExperimentalPage() {
+    return By(HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON);
   }
 
   private get separatorPage() {
