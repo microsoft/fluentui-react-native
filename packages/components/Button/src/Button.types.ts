@@ -39,22 +39,33 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   width?: ViewStyle['width'];
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels.
    */
   spacingIconContentBefore?: number;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
    */
   spacingIconContentAfter?: number;
 
   /**
-   * An object describing the shadow of the button
+   * An object describing the shadow of the button.
    */
   shadowToken?: ShadowToken;
 
   /**
-   * States that can be applied to a button
+   * Focused State on Android has inner and outer borders.
+   * Outer Border is equivalent to the border tokens from IBorders.
+   */
+  borderInnerColor?: ColorValue;
+  borderInnerWidth?: number;
+  borderInnerRadius?: number;
+  borderInnerStyle?: ViewStyle['borderStyle'];
+}
+
+export interface ButtonTokens extends ButtonCoreTokens {
+  /**
+   * States that can be applied to a button.
    */
   hovered?: ButtonTokens;
   focused?: ButtonTokens;
@@ -62,12 +73,6 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
   hasIconBefore?: ButtonTokens;
-}
-
-export interface ButtonTokens extends ButtonCoreTokens {
-  /**
-   * Additional states that can be applied to a button
-   */
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
   block?: ButtonTokens;
@@ -87,7 +92,7 @@ export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'>
   icon?: IconSourcesType;
 
   /**
-   * Button contains only icon, there's no text content
+   * Button contains only icon, there's no content.
    * Must be set for button to style correctly when button has not content.
    */
   iconOnly?: boolean;
@@ -98,7 +103,7 @@ export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'>
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * A callback to call on button click event
+   * A callback to call on button click event.
    */
   onClick?: (e: InteractionEvent) => void;
 
@@ -123,12 +128,12 @@ export interface ButtonProps extends ButtonCoreProps {
   block?: boolean;
 
   /**
-   * Whether to use native focus visuals for the component
+   * Whether to use native focus visuals for the component.
    * @default true
    */
   enableFocusRing?: boolean;
 
-  /** Sets style of button to a preset size style
+  /** Sets style of button to a preset size style.
    * @default 'small' on win32, 'medium' elsewhere
    */
   size?: ButtonSize;
