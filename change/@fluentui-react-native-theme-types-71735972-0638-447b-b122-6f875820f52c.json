@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "BrandTokensIntegration",
+  "packageName": "@fluentui-react-native/theme-types",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
