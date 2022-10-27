@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import LinkPageObject from '../pages/LinkPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { MobilePlatform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', function () {
@@ -11,7 +10,7 @@ describe('Link Testing Initialization', function () {
   });
 
   it('Click and navigate to Link test page', async () => {
-    await LinkPageObject.mobileScrollToComponentButton(MobilePlatform.iOS);
+    await LinkPageObject.mobileScrollToComponentButton();
     await LinkPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */
