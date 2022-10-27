@@ -7,13 +7,14 @@ import {
   useAsPressable,
 } from '@fluentui-react-native/interactive-hooks';
 import { LinkProps, LinkInfo } from './Link.types';
-import { Linking } from 'react-native';
+import { Linking, Platform } from 'react-native';
 
 export const useLink = (props: LinkProps): LinkInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessible = true,
     accessibilityRole,
+    onKeyDown,
     onPress,
     onAccessibilityTap,
     tooltip,
@@ -65,6 +66,8 @@ export const useLink = (props: LinkProps): LinkInfo => {
       ...rest,
       ...onKeyUpProps,
       ...pressable.props, // allow user key events to override those set by us
+      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+      onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
       accessible: accessible,
       accessibilityRole: 'link',
       onAccessibilityTap: onAccTap,

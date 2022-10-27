@@ -51,9 +51,6 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
-        "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
@@ -178,9 +175,6 @@ exports[`Default FAB (iOS) 1`] = `
       style={
         Object {
           "color": "#ffffff",
-          "fontFamily": "System",
-          "fontSize": 13,
-          "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
           "marginEnd": 0,

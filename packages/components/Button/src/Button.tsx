@@ -7,7 +7,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
-import { Icon,createIconProps } from '@fluentui-react-native/icon';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
 

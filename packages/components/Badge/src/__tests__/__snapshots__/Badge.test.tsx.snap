@@ -194,8 +194,6 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -244,8 +242,6 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -294,8 +290,6 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -345,8 +339,6 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -395,8 +387,6 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "System",
-        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,

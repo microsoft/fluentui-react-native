@@ -51,11 +51,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   let [tokens, cache] = useTokens(theme);
 
   /* Only if onPress is set */
-  let pressable;
-  if (onPress) {
-    pressable = useAsPressable({ ...rest, onPress });
-    [tokens] = applyTokenLayers(tokens, textState, cache, (layer) => pressable.state[layer]);
-  }
+  const pressable = useAsPressable({ ...rest, onPress });
+  [tokens] = applyTokenLayers(tokens, textState, cache, (layer) => pressable.state[layer]);
 
   const textAlign = I18nManager.isRTL
     ? align === 'start'
@@ -107,6 +104,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ...pressable?.props,
     numberOfLines: truncate || !wrap ? 1 : 0,
     onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+    onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
     onAccessibilityTap: onAccTap,
     style: mergeStyles(tokenStyle, props.style),
   };
