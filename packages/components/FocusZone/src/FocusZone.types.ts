@@ -23,7 +23,7 @@ export interface FocusZoneProps {
   focusZoneDirection?: FocusZoneDirection;
 
   /**
-   * Disabled the FocusZone, with slightly different behavior on macOS and win32.
+   * Disables the FocusZone, with slightly different behavior on macOS and win32.
    * On win32, the FocusZone will not be tabbable and keyboard navigation will be disabled.
    * on macOS, the FocusZone will "pass through" events, and the children will respond as if there was no FocusZone.
    */
