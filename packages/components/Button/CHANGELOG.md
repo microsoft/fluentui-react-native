@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 27 Oct 2022 11:09:35 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.29.0
+
+Thu, 27 Oct 2022 13:19:00 GMT
+
+### Minor changes
+
+- Split Button and FAB Types (singh.ayush@microsoft.com)
 
 ## 0.28.1
 

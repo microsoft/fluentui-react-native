@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Split Button and FAB Types",
-  "packageName": "@fluentui-react-native/button",
-  "email": "singh.ayush@microsoft.com",
-  "dependentChangeType": "patch"
-}
