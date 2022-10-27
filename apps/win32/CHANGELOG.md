@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 18:06:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.27.30
+
+Thu, 27 Oct 2022 18:06:52 GMT
+
+### Patches
+
+- Implement selector chaining in win32 + ios e2etests for optimizing element querying (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.103.12
 
 ## 0.27.29
 

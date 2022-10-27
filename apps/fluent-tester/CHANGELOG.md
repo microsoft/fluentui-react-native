@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 18:06:52 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.103.12
+
+Thu, 27 Oct 2022 18:06:52 GMT
+
+### Patches
+
+- Add selector chaining in `By` method using root (winlarry@microsoft.com)
 
 ## 0.103.11
 

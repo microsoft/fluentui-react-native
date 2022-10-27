@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add selector chaining in `By` method using root",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}
