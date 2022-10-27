@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Thu, 27 Oct 2022 11:09:35 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 21:01:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.30
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- FocusZone (macOS): New prop to ignore OS keyboard shortcut preference (sanajmi@microsoft.com)
 
 ## 0.10.29
 

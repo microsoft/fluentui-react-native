@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 27 Oct 2022 21:01:42 GMT",
+      "tag": "@fluentui-react-native/tester_v0.103.13",
+      "version": "0.103.13",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-menu-button to v0.5.6",
+            "commit": "d5c85eced1b43510215dc7aa7f79a3db80616ce7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-radio-group to v0.7.8",
+            "commit": "d5c85eced1b43510215dc7aa7f79a3db80616ce7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-tabs to v0.6.1",
+            "commit": "d5c85eced1b43510215dc7aa7f79a3db80616ce7"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.32.49",
+            "commit": "d5c85eced1b43510215dc7aa7f79a3db80616ce7"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 18:06:52 GMT",
       "tag": "@fluentui-react-native/tester_v0.103.12",
       "version": "0.103.12",
