@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/popover",
   "entries": [
     {
+      "date": "Thu, 27 Oct 2022 11:09:35 GMT",
+      "tag": "@fluentui-react-native/popover_v0.1.25",
+      "version": "0.1.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/popover",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.15",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Oct 2022 22:47:45 GMT",
       "tag": "@fluentui-react-native/popover_v0.1.24",
       "version": "0.1.24",
