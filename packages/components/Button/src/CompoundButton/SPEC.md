@@ -3,6 +3,7 @@
 ## Background
 
 The `CompoundButton` is a `Button` that is designed to show an extra line of text.
+Does not render on Android.
 
 ## Requirements
 
