@@ -11,13 +11,13 @@ exports[`Badge component tests Badge all props 1`] = `
       "backgroundColor": "transparent",
       "borderColor": "transparent",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "position": "relative",
       "right": 0,
       "width": undefined,
@@ -55,10 +55,10 @@ exports[`Badge component tests Badge all props 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
-        "marginEnd": 2,
+        "marginEnd": 4,
       }
     }
   >
@@ -82,7 +82,7 @@ exports[`Badge component tests Badge tokens 1`] = `
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "position": "relative",
       "right": 0,
       "width": undefined,
@@ -106,7 +106,7 @@ exports[`Badge component tests Badge tokens 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -126,13 +126,13 @@ exports[`Badge component tests Empty Badge 1`] = `
       "backgroundColor": "#0078d4",
       "borderColor": "transparent",
       "borderRadius": 9999,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
       "minWidth": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "position": "relative",
       "right": 0,
       "width": undefined,
@@ -153,12 +153,12 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
       "backgroundColor": "transparent",
       "borderColor": "transparent",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "right": 0,
       "width": undefined,
     }
@@ -194,6 +194,8 @@ exports[`CounterBadge component tests CounterBadge all props 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -215,12 +217,12 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
       "backgroundColor": "#0078d4",
       "borderColor": "transparent",
       "borderRadius": 9999,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "right": 0,
       "width": undefined,
     }
@@ -242,6 +244,8 @@ exports[`CounterBadge component tests CounterBadge shows 99+ 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -263,12 +267,12 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
       "backgroundColor": "#0078d4",
       "borderColor": "transparent",
       "borderRadius": 9999,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "right": 0,
       "width": undefined,
     }
@@ -290,6 +294,8 @@ exports[`CounterBadge component tests CounterBadge shows 1000+ 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -312,12 +318,12 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
       "backgroundColor": "#0078d4",
       "borderColor": "transparent",
       "borderRadius": 9999,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "bottom": 0,
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "right": 0,
       "width": undefined,
     }
@@ -339,6 +345,8 @@ exports[`CounterBadge component tests CounterBadge shows zero 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -365,7 +373,7 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 24,
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "right": 0,
       "width": undefined,
     }
@@ -387,6 +395,8 @@ exports[`CounterBadge component tests CounterBadge tokens 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 13,
         "fontStyle": undefined,
         "margin": 0,
         "textAlign": undefined,
@@ -414,13 +424,13 @@ exports[`PresenceBadge component tests PresenceBadge props 1`] = `
       "borderColor": "#ffffff",
       "borderRadius": 9999,
       "borderWidth": 2,
-      "bottom": -2,
+      "bottom": -4,
       "flexDirection": "row",
       "height": 24,
       "justifyContent": "center",
-      "paddingHorizontal": 4,
+      "paddingHorizontal": 8,
       "position": "relative",
-      "right": -2,
+      "right": -4,
       "width": 24,
     }
   }

@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { fabName, FABProps, FABType } from './FAB.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
@@ -9,9 +9,10 @@ import { useButton } from '../useButton';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
+import { extractOuterStylePropsAndroid } from '../ExtractStyle.android';
 
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
+ * A function which determines if a set of styles should be applied to the component given the current state and props of the button.
  *
  * @param layer The name of the state that is being checked for
  * @param state The current state of the button
@@ -28,9 +29,10 @@ export const FAB = compose<FABType>({
   displayName: fabName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
     icon: Icon,
     content: Text,
+    rippleContainer: View,
     shadow: Shadow,
   },
   useRender: (userProps: FABProps, useSlots: UseSlots<FABType>) => {
@@ -64,21 +66,37 @@ export const FAB = compose<FABType>({
       }
       const label = accessibilityLabel ?? childText;
 
-      const fabWithoutShadow = (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
+      const buttonContent = (
+        <React.Fragment>
           {icon && <Slots.icon {...iconProps} />}
           {showContent &&
             React.Children.map(children, (child) =>
               typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
             )}
+        </React.Fragment>
+      );
+      const buttonContentWithRoot = (
+        <Slots.root {...mergedProps} accessibilityLabel={label}>
+          {buttonContent}
         </Slots.root>
       );
 
       const hasShadow = Platform.OS === 'ios';
+      const hasRipple = Platform.OS === 'android';
+
       if (hasShadow) {
-        return <Slots.shadow>{fabWithoutShadow}</Slots.shadow>;
+        return <Slots.shadow>{buttonContentWithRoot}</Slots.shadow>;
+      } else if (hasRipple) {
+        const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
+        return (
+          <Slots.rippleContainer style={outerStyleProps}>
+            <Slots.root accessibilityLabel={label} {...mergedProps} style={innerStyleProps}>
+              {buttonContent}
+            </Slots.root>
+          </Slots.rippleContainer>
+        );
       } else {
-        return fabWithoutShadow;
+        return buttonContentWithRoot;
       }
     };
   },

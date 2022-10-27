@@ -55,7 +55,7 @@ exports[`Button default 1`] = `
           Object {
             "color": "#323130",
             "fontFamily": "System",
-            "fontSize": 12,
+            "fontSize": 13,
             "fontWeight": "400",
             "margin": 0,
             "marginEnd": 2,

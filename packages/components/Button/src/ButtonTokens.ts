@@ -2,7 +2,6 @@ import { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonTokens } from './Button.types';
-import { Platform } from 'react-native';
 
 export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
   ({
@@ -10,10 +9,7 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       width: '100%',
     },
     medium: {
-      padding: Platform.select({
-        android: globalTokens.spacing.xs,
-        default: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
-      }),
+      padding: globalTokens.spacing.sNudge - globalTokens.stroke.width.thin,
       borderWidth: globalTokens.stroke.width.thin,
       iconSize: 16,
       focused: {

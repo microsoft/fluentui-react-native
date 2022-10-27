@@ -68,6 +68,33 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
+
+    //Brand tokens.
+    brandBackground: pipelineOutput.brandBackground1.fillColorRest,
+    brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
+    brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
+
+    brandBackground2: pipelineOutput.brandBackground2?.fillColorRest,
+    brandBackground2Pressed: pipelineOutput.brandBackground2?.fillColorPressed,
+    brandBackground2Selected: pipelineOutput.brandBackground2?.fillColorSelected,
+
+    brandBackground3: pipelineOutput.brandBackground3?.fillColorRest,
+    brandBackgroundTint: pipelineOutput.brandBackgroundTint.fillColorRest,
+    brandBackgroundInverted: pipelineOutput.brandBackgroundInverted.fillColorRest,
+
+    brandBackgroundInvertedDisabled: pipelineOutput.brandBackgroundInvertedDisabled.fillColorRest,
+
+    brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
+    brandForeground1Pressed: pipelineOutput.brandForeground1.fillColorPressed,
+    brandForeground1Selected: pipelineOutput.brandForeground1.fillColorSelected,
+
+    brandForegroundTint: pipelineOutput.brandForegroundTint.fillColorRest,
+    brandForegroundDisabled1: pipelineOutput.brandForegroundDisabled1.fillColorRest,
+    brandForegroundDisabled2: pipelineOutput.brandForegroundDisabled2.fillColorRest,
+
+    brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
+    brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
+    brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
   };
 }
 
