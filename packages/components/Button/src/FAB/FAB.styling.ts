@@ -14,7 +14,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
   slotProps: {
     ...(Platform.OS == 'android' && {
       rippleContainer: buildProps(
-        (tokens: ButtonCoreTokens) => {
+        (tokens: FABTokens) => {
           return {
             style: {
               flexDirection: 'row',
