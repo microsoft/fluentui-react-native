@@ -7,7 +7,7 @@ import { stylingSettings } from './ComponentName.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useComponentName } from './useComponentName';
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the component-name.
+ * A function which determines if a set of styles should be applied to the component given the current state and props of the component-name.
  *
  * @param layer The name of the state that is being checked for
  * @param userProps The props that were passed into the component-name

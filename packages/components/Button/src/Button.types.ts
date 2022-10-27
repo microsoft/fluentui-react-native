@@ -5,6 +5,7 @@ import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } 
 import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
 import { ShadowToken } from '@fluentui-react-native/theme-types';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -16,6 +17,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
    * The icon color.
    */
   iconColor?: ColorValue;
+
+  /**
+   * Ripple color for Android.
+   */
+  rippleColor?: ColorValue;
 
   /**
    * The size of the icon.
@@ -160,6 +166,7 @@ export interface ButtonInfo {
 
 export interface ButtonSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
+  rippleContainer?: IViewProps; // Android only
   icon: IconProps;
   content: TextProps;
 }

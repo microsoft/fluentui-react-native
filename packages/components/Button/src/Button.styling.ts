@@ -30,6 +30,21 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
+    ...(Platform.OS == 'android' && {
+      rippleContainer: buildProps(
+        (tokens: ButtonTokens) => {
+          return {
+            style: {
+              flexDirection: 'row',
+              alignSelf: 'baseline',
+              borderRadius: tokens.borderRadius,
+              overflow: 'hidden',
+            },
+          };
+        },
+        ['borderRadius'],
+      ),
+    }),
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
@@ -43,8 +58,11 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
+        android_ripple: {
+          color: tokens.rippleColor,
+        },
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => {

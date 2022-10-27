@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 26 Oct 2022 22:09:04 GMT",
+      "tag": "@fluentui-react-native/tester_v0.103.8",
+      "version": "0.103.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "d26ca33536e86379daa626531330d8181b8ce4f9",
+            "comment": "Use iOS 16.0 simulator"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Oct 2022 22:47:45 GMT",
       "tag": "@fluentui-react-native/tester_v0.103.7",
       "version": "0.103.7",

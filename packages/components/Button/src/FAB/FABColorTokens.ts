@@ -8,6 +8,7 @@ export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme)
   color: t.colors.brandedContent,
   borderColor: t.colors.brandedBorder,
   iconColor: t.colors.brandedIcon,
+  rippleColor: t.colors.defaultPressedBackground, // Android only
   disabled: {
     backgroundColor: t.colors.brandedDisabledBackground,
     color: t.colors.brandedDisabledContent,

@@ -2,6 +2,7 @@ import { fabName, FABProps, FABSlotProps, FABTokens } from './FAB.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { Platform } from 'react-native';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
@@ -11,6 +12,21 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
   tokens: [defaultFABTokens, defaultFABColorTokens, fabName],
   states: FABStates,
   slotProps: {
+    ...(Platform.OS == 'android' && {
+      rippleContainer: buildProps(
+        (tokens: ButtonCoreTokens) => {
+          return {
+            style: {
+              flexDirection: 'row',
+              alignSelf: 'baseline',
+              borderRadius: tokens.borderRadius,
+              overflow: 'hidden',
+            },
+          };
+        },
+        ['borderRadius'],
+      ),
+    }),
     root: buildProps(
       (tokens: FABTokens, theme: Theme) => ({
         style: {
@@ -25,9 +41,12 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
           ...layoutStyles.from(tokens, theme),
           ...shadowStyles.from(tokens, theme),
         },
+        android_ripple: {
+          color: tokens.rippleColor,
+        },
         elevation: tokens.elevation,
       }),
-      ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
+      ['backgroundColor', 'width', 'elevation', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     content: buildProps(
       (tokens: FABTokens, theme: Theme) => ({
