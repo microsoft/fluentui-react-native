@@ -1,8 +1,57 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 20 Oct 2022 23:16:01 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 08:31:28 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.28.0
+
+Thu, 27 Oct 2022 08:31:28 GMT
+
+### Minor changes
+
+- Ripple/Fix on FAB (ruaraki@microsoft.com)
+
+## 0.27.2
+
+Tue, 25 Oct 2022 22:47:44 GMT
+
+### Patches
+
+- Add tokens-global.ios.ts (78454019+lyzhan7@users.noreply.github.com)
+- Bump @uifabricshared/foundation-compose to v1.12.15
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.14
+- Bump @fluentui-react-native/experimental-shadow to v0.2.35
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/icon to v0.13.19
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+- Bump @fluentui-react-native/pressable to v0.9.25
+- Bump @fluentui-react-native/theme-tokens to v0.20.1
+- Bump @fluentui-react-native/text to v0.15.10
+
+## 0.27.1
+
+Tue, 25 Oct 2022 20:57:00 GMT
+
+### Patches
+
+- Fix issue when using older haul object polyfill (30809111+acoates-ms@users.noreply.github.com)
+
+## 0.27.0
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Minor changes
+
+- FontPipeline (email not defined)
+- Bump @uifabricshared/foundation-compose to v1.12.14
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.13
+- Bump @fluentui-react-native/experimental-shadow to v0.2.34
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/icon to v0.13.18
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+- Bump @fluentui-react-native/pressable to v0.9.24
+- Bump @fluentui-react-native/text to v0.15.9
 
 ## 0.26.2
 

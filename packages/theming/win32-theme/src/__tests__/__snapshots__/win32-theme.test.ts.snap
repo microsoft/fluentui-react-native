@@ -3,36 +3,36 @@
 exports[`createBrandedThemeWithAlias test themeName: Black 1`] = `
 Object {
   "colors": Object {
-    "brandBackground": "#0078d4",
-    "brandBackground2": "#c7e0f4",
-    "brandBackgroundHover": "#106ebe",
-    "brandBackgroundPressed": "#004c87",
-    "brandBackgroundSelected": "#005a9e",
-    "brandBackgroundStatic": "#0078d4",
-    "brandForeground1": "#6cb8f6",
-    "brandForeground2": "#c7e0f4",
-    "brandForegroundLink": "#6cb8f6",
-    "brandForegroundLinkHover": "#c7e0f4",
-    "brandForegroundLinkPressed": "#2899f5",
-    "brandForegroundLinkSelected": "#c7e0f4",
-    "brandStroke1": "#0078d4",
-    "brandStroke2": "#c7e0f4",
-    "compoundBrandBackground1": "#0078d4",
-    "compoundBrandBackground1Hover": "#106ebe",
-    "compoundBrandBackground1Pressed": "#005a9e",
-    "compoundBrandForeground1": "#6cb8f6",
-    "compoundBrandForeground1Hover": "#c7e0f4",
-    "compoundBrandForeground1Pressed": "#2899f5",
-    "compoundBrandStroke1": "#0078d4",
-    "compoundBrandStroke1Hover": "#106ebe",
-    "compoundBrandStroke1Pressed": "#005a9e",
-    "neutralForeground2BrandHover": "#c7e0f4",
-    "neutralForeground2BrandPressed": "#2899f5",
-    "neutralForeground2BrandSelected": "#c7e0f4",
-    "neutralForeground3BrandHover": "#c7e0f4",
-    "neutralForeground3BrandPressed": "#2899f5",
-    "neutralForeground3BrandSelected": "#c7e0f4",
-    "neutralStrokeAccessibleSelected": "#0078d4",
+    "brandBackground": "#185abd",
+    "brandBackground2": "#d2e0f4",
+    "brandBackgroundHover": "#1651aa",
+    "brandBackgroundPressed": "#0e336a",
+    "brandBackgroundSelected": "#13458f",
+    "brandBackgroundStatic": "#185abd",
+    "brandForeground1": "#aec6eb",
+    "brandForeground2": "#d2e0f4",
+    "brandForegroundLink": "#aec6eb",
+    "brandForegroundLinkHover": "#d2e0f4",
+    "brandForegroundLinkPressed": "#2e6ac5",
+    "brandForegroundLinkSelected": "#d2e0f4",
+    "brandStroke1": "#185abd",
+    "brandStroke2": "#d2e0f4",
+    "compoundBrandBackground1": "#185abd",
+    "compoundBrandBackground1Hover": "#1651aa",
+    "compoundBrandBackground1Pressed": "#13458f",
+    "compoundBrandForeground1": "#aec6eb",
+    "compoundBrandForeground1Hover": "#d2e0f4",
+    "compoundBrandForeground1Pressed": "#2e6ac5",
+    "compoundBrandStroke1": "#185abd",
+    "compoundBrandStroke1Hover": "#1651aa",
+    "compoundBrandStroke1Pressed": "#13458f",
+    "neutralForeground2BrandHover": "#d2e0f4",
+    "neutralForeground2BrandPressed": "#2e6ac5",
+    "neutralForeground2BrandSelected": "#d2e0f4",
+    "neutralForeground3BrandHover": "#d2e0f4",
+    "neutralForeground3BrandPressed": "#2e6ac5",
+    "neutralForeground3BrandSelected": "#d2e0f4",
+    "neutralStrokeAccessibleSelected": "#185abd",
   },
 }
 `;
@@ -40,36 +40,36 @@ Object {
 exports[`createBrandedThemeWithAlias test themeName: Colorful 1`] = `
 Object {
   "colors": Object {
-    "brandBackground": "#0078d4",
-    "brandBackground2": "#c7e0f4",
-    "brandBackgroundHover": "#106ebe",
-    "brandBackgroundPressed": "#004c87",
-    "brandBackgroundSelected": "#005a9e",
-    "brandBackgroundStatic": "#0078d4",
-    "brandForeground1": "#0078d4",
-    "brandForeground2": "#106ebe",
-    "brandForegroundLink": "#0078d4",
-    "brandForegroundLinkHover": "#106ebe",
-    "brandForegroundLinkPressed": "#004c87",
-    "brandForegroundLinkSelected": "#005a9e",
-    "brandStroke1": "#0078d4",
-    "brandStroke2": "#c7e0f4",
-    "compoundBrandBackground1": "#0078d4",
-    "compoundBrandBackground1Hover": "#106ebe",
-    "compoundBrandBackground1Pressed": "#005a9e",
-    "compoundBrandForeground1": "#0078d4",
-    "compoundBrandForeground1Hover": "#106ebe",
-    "compoundBrandForeground1Pressed": "#004c87",
-    "compoundBrandStroke1": "#0078d4",
-    "compoundBrandStroke1Hover": "#106ebe",
-    "compoundBrandStroke1Pressed": "#005a9e",
-    "neutralForeground2BrandHover": "#106ebe",
-    "neutralForeground2BrandPressed": "#004c87",
-    "neutralForeground2BrandSelected": "#005a9e",
-    "neutralForeground3BrandHover": "#106ebe",
-    "neutralForeground3BrandPressed": "#004c87",
-    "neutralForeground3BrandSelected": "#005a9e",
-    "neutralStrokeAccessibleSelected": "#0078d4",
+    "brandBackground": "#185abd",
+    "brandBackground2": "#d2e0f4",
+    "brandBackgroundHover": "#1651aa",
+    "brandBackgroundPressed": "#0e336a",
+    "brandBackgroundSelected": "#13458f",
+    "brandBackgroundStatic": "#185abd",
+    "brandForeground1": "#185abd",
+    "brandForeground2": "#1651aa",
+    "brandForegroundLink": "#185abd",
+    "brandForegroundLinkHover": "#1651aa",
+    "brandForegroundLinkPressed": "#0e336a",
+    "brandForegroundLinkSelected": "#13458f",
+    "brandStroke1": "#185abd",
+    "brandStroke2": "#d2e0f4",
+    "compoundBrandBackground1": "#185abd",
+    "compoundBrandBackground1Hover": "#1651aa",
+    "compoundBrandBackground1Pressed": "#13458f",
+    "compoundBrandForeground1": "#185abd",
+    "compoundBrandForeground1Hover": "#1651aa",
+    "compoundBrandForeground1Pressed": "#0e336a",
+    "compoundBrandStroke1": "#185abd",
+    "compoundBrandStroke1Hover": "#1651aa",
+    "compoundBrandStroke1Pressed": "#13458f",
+    "neutralForeground2BrandHover": "#1651aa",
+    "neutralForeground2BrandPressed": "#0e336a",
+    "neutralForeground2BrandSelected": "#13458f",
+    "neutralForeground3BrandHover": "#1651aa",
+    "neutralForeground3BrandPressed": "#0e336a",
+    "neutralForeground3BrandSelected": "#13458f",
+    "neutralStrokeAccessibleSelected": "#185abd",
   },
 }
 `;
@@ -77,36 +77,36 @@ Object {
 exports[`createBrandedThemeWithAlias test themeName: DarkGray 1`] = `
 Object {
   "colors": Object {
-    "brandBackground": "#0078d4",
-    "brandBackground2": "#c7e0f4",
-    "brandBackgroundHover": "#106ebe",
-    "brandBackgroundPressed": "#004c87",
-    "brandBackgroundSelected": "#005a9e",
-    "brandBackgroundStatic": "#0078d4",
-    "brandForeground1": "#6cb8f6",
-    "brandForeground2": "#c7e0f4",
-    "brandForegroundLink": "#6cb8f6",
-    "brandForegroundLinkHover": "#c7e0f4",
-    "brandForegroundLinkPressed": "#2899f5",
-    "brandForegroundLinkSelected": "#c7e0f4",
-    "brandStroke1": "#0078d4",
-    "brandStroke2": "#c7e0f4",
-    "compoundBrandBackground1": "#0078d4",
-    "compoundBrandBackground1Hover": "#106ebe",
-    "compoundBrandBackground1Pressed": "#005a9e",
-    "compoundBrandForeground1": "#6cb8f6",
-    "compoundBrandForeground1Hover": "#c7e0f4",
-    "compoundBrandForeground1Pressed": "#2899f5",
-    "compoundBrandStroke1": "#0078d4",
-    "compoundBrandStroke1Hover": "#106ebe",
-    "compoundBrandStroke1Pressed": "#005a9e",
-    "neutralForeground2BrandHover": "#c7e0f4",
-    "neutralForeground2BrandPressed": "#2899f5",
-    "neutralForeground2BrandSelected": "#c7e0f4",
-    "neutralForeground3BrandHover": "#c7e0f4",
-    "neutralForeground3BrandPressed": "#2899f5",
-    "neutralForeground3BrandSelected": "#c7e0f4",
-    "neutralStrokeAccessibleSelected": "#0078d4",
+    "brandBackground": "#185abd",
+    "brandBackground2": "#d2e0f4",
+    "brandBackgroundHover": "#1651aa",
+    "brandBackgroundPressed": "#0e336a",
+    "brandBackgroundSelected": "#13458f",
+    "brandBackgroundStatic": "#185abd",
+    "brandForeground1": "#aec6eb",
+    "brandForeground2": "#d2e0f4",
+    "brandForegroundLink": "#aec6eb",
+    "brandForegroundLinkHover": "#d2e0f4",
+    "brandForegroundLinkPressed": "#2e6ac5",
+    "brandForegroundLinkSelected": "#d2e0f4",
+    "brandStroke1": "#185abd",
+    "brandStroke2": "#d2e0f4",
+    "compoundBrandBackground1": "#185abd",
+    "compoundBrandBackground1Hover": "#1651aa",
+    "compoundBrandBackground1Pressed": "#13458f",
+    "compoundBrandForeground1": "#aec6eb",
+    "compoundBrandForeground1Hover": "#d2e0f4",
+    "compoundBrandForeground1Pressed": "#2e6ac5",
+    "compoundBrandStroke1": "#185abd",
+    "compoundBrandStroke1Hover": "#1651aa",
+    "compoundBrandStroke1Pressed": "#13458f",
+    "neutralForeground2BrandHover": "#d2e0f4",
+    "neutralForeground2BrandPressed": "#2e6ac5",
+    "neutralForeground2BrandSelected": "#d2e0f4",
+    "neutralForeground3BrandHover": "#d2e0f4",
+    "neutralForeground3BrandPressed": "#2e6ac5",
+    "neutralForeground3BrandSelected": "#d2e0f4",
+    "neutralStrokeAccessibleSelected": "#185abd",
   },
 }
 `;
@@ -116,36 +116,36 @@ exports[`createBrandedThemeWithAlias test themeName: HighContrast 1`] = `Object 
 exports[`createBrandedThemeWithAlias test themeName: White 1`] = `
 Object {
   "colors": Object {
-    "brandBackground": "#0078d4",
-    "brandBackground2": "#c7e0f4",
-    "brandBackgroundHover": "#106ebe",
-    "brandBackgroundPressed": "#004c87",
-    "brandBackgroundSelected": "#005a9e",
-    "brandBackgroundStatic": "#0078d4",
-    "brandForeground1": "#0078d4",
-    "brandForeground2": "#106ebe",
-    "brandForegroundLink": "#0078d4",
-    "brandForegroundLinkHover": "#106ebe",
-    "brandForegroundLinkPressed": "#004c87",
-    "brandForegroundLinkSelected": "#005a9e",
-    "brandStroke1": "#0078d4",
-    "brandStroke2": "#c7e0f4",
-    "compoundBrandBackground1": "#0078d4",
-    "compoundBrandBackground1Hover": "#106ebe",
-    "compoundBrandBackground1Pressed": "#005a9e",
-    "compoundBrandForeground1": "#0078d4",
-    "compoundBrandForeground1Hover": "#106ebe",
-    "compoundBrandForeground1Pressed": "#004c87",
-    "compoundBrandStroke1": "#0078d4",
-    "compoundBrandStroke1Hover": "#106ebe",
-    "compoundBrandStroke1Pressed": "#005a9e",
-    "neutralForeground2BrandHover": "#106ebe",
-    "neutralForeground2BrandPressed": "#004c87",
-    "neutralForeground2BrandSelected": "#005a9e",
-    "neutralForeground3BrandHover": "#106ebe",
-    "neutralForeground3BrandPressed": "#004c87",
-    "neutralForeground3BrandSelected": "#005a9e",
-    "neutralStrokeAccessibleSelected": "#0078d4",
+    "brandBackground": "#185abd",
+    "brandBackground2": "#d2e0f4",
+    "brandBackgroundHover": "#1651aa",
+    "brandBackgroundPressed": "#0e336a",
+    "brandBackgroundSelected": "#13458f",
+    "brandBackgroundStatic": "#185abd",
+    "brandForeground1": "#185abd",
+    "brandForeground2": "#1651aa",
+    "brandForegroundLink": "#185abd",
+    "brandForegroundLinkHover": "#1651aa",
+    "brandForegroundLinkPressed": "#0e336a",
+    "brandForegroundLinkSelected": "#13458f",
+    "brandStroke1": "#185abd",
+    "brandStroke2": "#d2e0f4",
+    "compoundBrandBackground1": "#185abd",
+    "compoundBrandBackground1Hover": "#1651aa",
+    "compoundBrandBackground1Pressed": "#13458f",
+    "compoundBrandForeground1": "#185abd",
+    "compoundBrandForeground1Hover": "#1651aa",
+    "compoundBrandForeground1Pressed": "#0e336a",
+    "compoundBrandStroke1": "#185abd",
+    "compoundBrandStroke1Hover": "#1651aa",
+    "compoundBrandStroke1Pressed": "#13458f",
+    "neutralForeground2BrandHover": "#1651aa",
+    "neutralForeground2BrandPressed": "#0e336a",
+    "neutralForeground2BrandSelected": "#13458f",
+    "neutralForeground3BrandHover": "#1651aa",
+    "neutralForeground3BrandPressed": "#0e336a",
+    "neutralForeground3BrandSelected": "#13458f",
+    "neutralStrokeAccessibleSelected": "#185abd",
   },
 }
 `;
@@ -577,509 +577,509 @@ Object {
 exports[`createOfficeColorAliasTokens test officeTheme: HighContrast 1`] = `
 Object {
   "brandBackground": Object {
-    "semantic": Array [
-      "SystemColorButtonFaceColor",
+    "resource_paths": Array [
+      "ButtonFace",
     ],
   },
   "brandBackground2": Object {
-    "semantic": Array [
-      "SystemColorButtonFaceColor",
+    "resource_paths": Array [
+      "ButtonFace",
     ],
   },
   "brandBackgroundDisabled": undefined,
   "brandBackgroundHover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "brandBackgroundPressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "brandBackgroundSelected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "brandBackgroundStatic": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "brandForeground1": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "brandForeground1Disabled": undefined,
   "brandForeground1Pressed": undefined,
   "brandForeground2": Object {
-    "semantic": Array [
-      "SystemColorButtonTextColor",
+    "resource_paths": Array [
+      "ButtonText",
     ],
   },
   "brandForegroundLink": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "brandForegroundLinkHover": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "brandForegroundLinkPressed": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "brandForegroundLinkSelected": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "brandStroke1": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "brandStroke2": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "compoundBrandBackground1": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandBackground1Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandBackground1Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandForeground1": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandForeground1Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandForeground1Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandStroke1": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "compoundBrandStroke1Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "compoundBrandStroke1Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground1": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackground1Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground1Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground1Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground2": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackground2Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground2Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground2Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground3": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackground3Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground3Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground3Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground4": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackground4Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground4Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground4Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground5": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackground5Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground5Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground5Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralBackground6": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackgroundDisabled": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralBackgroundInverted": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralForeground1": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralForeground1Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground1Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground1Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground2": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralForeground2BrandHover": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground2BrandPressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground2BrandSelected": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground2Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground2Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground2Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground3": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralForeground3BrandHover": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground3BrandPressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground3BrandSelected": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground3Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground3Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground3Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForeground4": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralForegroundDisabled": Object {
-    "semantic": Array [
-      "SystemColorGrayTextColor",
+    "resource_paths": Array [
+      "GrayText",
     ],
   },
   "neutralForegroundInverted": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "neutralForegroundInvertedLink": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "neutralForegroundInvertedLinkHover": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "neutralForegroundInvertedLinkPressed": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "neutralForegroundInvertedLinkSelected": Object {
-    "semantic": Array [
-      "SystemColorHotlightColor",
+    "resource_paths": Array [
+      "Hotlight",
     ],
   },
   "neutralForegroundOnBrand": Object {
-    "semantic": Array [
-      "SystemColorButtonTextColor",
+    "resource_paths": Array [
+      "ButtonText",
     ],
   },
   "neutralForegroundOnBrandHover": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForegroundOnBrandPressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralForegroundOnBrandSelected": Object {
-    "semantic": Array [
-      "SystemColorHighlightTextColor",
+    "resource_paths": Array [
+      "HighlightText",
     ],
   },
   "neutralStencil1": "#141414",
   "neutralStencil2": "#858585",
   "neutralStroke1": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralStroke1Hover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralStroke1Pressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralStroke1Selected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralStroke2": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralStroke3": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralStrokeAccessible": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "neutralStrokeAccessibleHover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralStrokeAccessiblePressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralStrokeAccessibleSelected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "neutralStrokeDisabled": Object {
-    "semantic": Array [
-      "SystemColorGrayTextColor",
+    "resource_paths": Array [
+      "GrayText",
     ],
   },
   "redBackground1": Object {
-    "semantic": Array [
-      "SystemColorButtonFaceColor",
+    "resource_paths": Array [
+      "ButtonFace",
     ],
   },
   "redBackground2": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "redBackground3": Object {
-    "semantic": Array [
-      "SystemColorButtonFaceColor",
+    "resource_paths": Array [
+      "ButtonFace",
     ],
   },
   "redBorder1": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "redBorder2": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "redBorderActive": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "redForeground1": Object {
-    "semantic": Array [
-      "SystemColorButtonTextColor",
+    "resource_paths": Array [
+      "ButtonText",
     ],
   },
   "redForeground2": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "redForeground3": Object {
-    "semantic": Array [
-      "SystemColorButtonFaceColor",
+    "resource_paths": Array [
+      "ButtonFace",
     ],
   },
   "strokeFocus1": Object {
-    "semantic": Array [
-      "SystemColorWindowColor",
+    "resource_paths": Array [
+      "Window",
     ],
   },
   "strokeFocus2": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "subtleBackground": "transparent",
   "subtleBackgroundHover": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "subtleBackgroundPressed": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "subtleBackgroundSelected": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
   "transparentBackground": "transparent",
@@ -1087,18 +1087,18 @@ Object {
   "transparentBackgroundPressed": "transparent",
   "transparentBackgroundSelected": "transparent",
   "transparentStroke": Object {
-    "semantic": Array [
-      "SystemColorWindowTextColor",
+    "resource_paths": Array [
+      "WindowText",
     ],
   },
   "transparentStrokeDisabled": Object {
-    "semantic": Array [
-      "SystemColorGrayTextColor",
+    "resource_paths": Array [
+      "GrayText",
     ],
   },
   "transparentStrokeInteractive": Object {
-    "semantic": Array [
-      "SystemColorHighlightColor",
+    "resource_paths": Array [
+      "Highlight",
     ],
   },
 }
@@ -2103,19 +2103,19 @@ Object {
     "bodyText": "#262626",
     "bodyTextChecked": "#262626",
     "brandBackground": "#D83B01",
-    "brandBackground2": "#c7e0f4",
+    "brandBackground2": "#d2e0f4",
     "brandBackgroundHover": "#F29F71",
     "brandBackgroundPressed": "#A22C01",
-    "brandBackgroundSelected": "#005a9e",
-    "brandBackgroundStatic": "#0078d4",
-    "brandForeground1": "#6cb8f6",
-    "brandForeground2": "#c7e0f4",
-    "brandForegroundLink": "#6cb8f6",
-    "brandForegroundLinkHover": "#c7e0f4",
-    "brandForegroundLinkPressed": "#2899f5",
-    "brandForegroundLinkSelected": "#c7e0f4",
+    "brandBackgroundSelected": "#13458f",
+    "brandBackgroundStatic": "#185abd",
+    "brandForeground1": "#aec6eb",
+    "brandForeground2": "#d2e0f4",
+    "brandForegroundLink": "#aec6eb",
+    "brandForegroundLinkHover": "#d2e0f4",
+    "brandForegroundLinkPressed": "#2e6ac5",
+    "brandForegroundLinkSelected": "#d2e0f4",
     "brandStroke1": "#D83B01",
-    "brandStroke2": "#c7e0f4",
+    "brandStroke2": "#d2e0f4",
     "brandedBackground": "#D83B01",
     "brandedBorder": "#A22C01",
     "brandedCheckedBackground": "#c8c6c4",
@@ -2159,7 +2159,7 @@ Object {
     "buttonTextDisabled": "#B1B1B1",
     "buttonTextHovered": "#262626",
     "buttonTextPressed": "#262626",
-    "checkboxBackground": "#0078d4",
+    "checkboxBackground": "#185abd",
     "checkboxBackgroundDisabled": "#f3f2f1",
     "checkboxBorderColor": "#8a8886",
     "checkmarkColor": "#ffffff",
@@ -2293,16 +2293,16 @@ Object {
     "neutralForeground1Pressed": "#262626",
     "neutralForeground1Selected": "#262626",
     "neutralForeground2": "#666666",
-    "neutralForeground2BrandHover": "#c7e0f4",
-    "neutralForeground2BrandPressed": "#2899f5",
-    "neutralForeground2BrandSelected": "#c7e0f4",
+    "neutralForeground2BrandHover": "#d2e0f4",
+    "neutralForeground2BrandPressed": "#2e6ac5",
+    "neutralForeground2BrandSelected": "#d2e0f4",
     "neutralForeground2Hover": "#505050",
     "neutralForeground2Pressed": "#666666",
     "neutralForeground2Selected": "#666666",
     "neutralForeground3": "#616161",
-    "neutralForeground3BrandHover": "#c7e0f4",
-    "neutralForeground3BrandPressed": "#2899f5",
-    "neutralForeground3BrandSelected": "#c7e0f4",
+    "neutralForeground3BrandHover": "#d2e0f4",
+    "neutralForeground3BrandPressed": "#2e6ac5",
+    "neutralForeground3BrandSelected": "#d2e0f4",
     "neutralForeground3Hover": "#424242",
     "neutralForeground3Pressed": "#424242",
     "neutralForeground3Selected": "#424242",
@@ -2328,9 +2328,9 @@ Object {
     "neutralStrokeAccessible": "#969696",
     "neutralStrokeAccessibleHover": "#B1B1B1",
     "neutralStrokeAccessiblePressed": "#737373",
-    "neutralStrokeAccessibleSelected": "#0078d4",
+    "neutralStrokeAccessibleSelected": "#185abd",
     "neutralStrokeDisabled": "#D2D2D2",
-    "personaActivityGlow": "#0078d4",
+    "personaActivityGlow": "#185abd",
     "personaActivityRing": "#ffffff",
     "primaryButtonBackground": "#D83B01",
     "primaryButtonBackgroundDisabled": "#E6E6E6",
@@ -3213,34 +3213,34 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #0078d4 1`] = `
 Object {
   "brandBackground": "#0078d4",
-  "brandBackground2": "#c7e0f4",
+  "brandBackground2": "#cce3f5",
   "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#004c87",
-  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundPressed": "#135995",
+  "brandBackgroundSelected": "#1664a7",
   "brandBackgroundStatic": "#0078d4",
   "brandForeground1": "#0078d4",
   "brandForeground2": "#106ebe",
   "brandForegroundLink": "#0078d4",
   "brandForegroundLinkHover": "#106ebe",
-  "brandForegroundLinkPressed": "#004c87",
-  "brandForegroundLinkSelected": "#005a9e",
+  "brandForegroundLinkPressed": "#135995",
+  "brandForegroundLinkSelected": "#1664a7",
   "brandStroke1": "#0078d4",
-  "brandStroke2": "#c7e0f4",
+  "brandStroke2": "#cce3f5",
   "compoundBrandBackground1": "#0078d4",
   "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#005a9e",
+  "compoundBrandBackground1Pressed": "#1664a7",
   "compoundBrandForeground1": "#0078d4",
   "compoundBrandForeground1Hover": "#106ebe",
-  "compoundBrandForeground1Pressed": "#004c87",
+  "compoundBrandForeground1Pressed": "#135995",
   "compoundBrandStroke1": "#0078d4",
   "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#005a9e",
+  "compoundBrandStroke1Pressed": "#1664a7",
   "neutralForeground2BrandHover": "#106ebe",
-  "neutralForeground2BrandPressed": "#004c87",
-  "neutralForeground2BrandSelected": "#005a9e",
+  "neutralForeground2BrandPressed": "#135995",
+  "neutralForeground2BrandSelected": "#1664a7",
   "neutralForeground3BrandHover": "#106ebe",
-  "neutralForeground3BrandPressed": "#004c87",
-  "neutralForeground3BrandSelected": "#005a9e",
+  "neutralForeground3BrandPressed": "#135995",
+  "neutralForeground3BrandSelected": "#1664a7",
   "neutralStrokeAccessibleSelected": "#0078d4",
 }
 `;
@@ -3248,33 +3248,33 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #107c41 1`] = `
 Object {
   "brandBackground": "#107c41",
-  "brandBackground2": "#55b17e",
+  "brandBackground2": "#caead8",
   "brandBackgroundHover": "#0f703b",
-  "brandBackgroundPressed": "#0a5325",
+  "brandBackgroundPressed": "#094624",
   "brandBackgroundSelected": "#0c5f32",
   "brandBackgroundStatic": "#107c41",
   "brandForeground1": "#107c41",
   "brandForeground2": "#0f703b",
   "brandForegroundLink": "#107c41",
   "brandForegroundLinkHover": "#0f703b",
-  "brandForegroundLinkPressed": "#0a5325",
+  "brandForegroundLinkPressed": "#094624",
   "brandForegroundLinkSelected": "#0c5f32",
   "brandStroke1": "#107c41",
-  "brandStroke2": "#55b17e",
+  "brandStroke2": "#caead8",
   "compoundBrandBackground1": "#107c41",
   "compoundBrandBackground1Hover": "#0f703b",
   "compoundBrandBackground1Pressed": "#0c5f32",
   "compoundBrandForeground1": "#107c41",
   "compoundBrandForeground1Hover": "#0f703b",
-  "compoundBrandForeground1Pressed": "#0a5325",
+  "compoundBrandForeground1Pressed": "#094624",
   "compoundBrandStroke1": "#107c41",
   "compoundBrandStroke1Hover": "#0f703b",
   "compoundBrandStroke1Pressed": "#0c5f32",
   "neutralForeground2BrandHover": "#0f703b",
-  "neutralForeground2BrandPressed": "#0a5325",
+  "neutralForeground2BrandPressed": "#094624",
   "neutralForeground2BrandSelected": "#0c5f32",
   "neutralForeground3BrandHover": "#0f703b",
-  "neutralForeground3BrandPressed": "#0a5325",
+  "neutralForeground3BrandPressed": "#094624",
   "neutralForeground3BrandSelected": "#0c5f32",
   "neutralStrokeAccessibleSelected": "#107c41",
 }
@@ -3283,33 +3283,33 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #185abd 1`] = `
 Object {
   "brandBackground": "#185abd",
-  "brandBackground2": "#6794d7",
+  "brandBackground2": "#d2e0f4",
   "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#19428a",
+  "brandBackgroundPressed": "#0e336a",
   "brandBackgroundSelected": "#13458f",
   "brandBackgroundStatic": "#185abd",
   "brandForeground1": "#185abd",
   "brandForeground2": "#1651aa",
   "brandForegroundLink": "#185abd",
   "brandForegroundLinkHover": "#1651aa",
-  "brandForegroundLinkPressed": "#19428a",
+  "brandForegroundLinkPressed": "#0e336a",
   "brandForegroundLinkSelected": "#13458f",
   "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
+  "brandStroke2": "#d2e0f4",
   "compoundBrandBackground1": "#185abd",
   "compoundBrandBackground1Hover": "#1651aa",
   "compoundBrandBackground1Pressed": "#13458f",
   "compoundBrandForeground1": "#185abd",
   "compoundBrandForeground1Hover": "#1651aa",
-  "compoundBrandForeground1Pressed": "#19428a",
+  "compoundBrandForeground1Pressed": "#0e336a",
   "compoundBrandStroke1": "#185abd",
   "compoundBrandStroke1Hover": "#1651aa",
   "compoundBrandStroke1Pressed": "#13458f",
   "neutralForeground2BrandHover": "#1651aa",
-  "neutralForeground2BrandPressed": "#19428a",
+  "neutralForeground2BrandPressed": "#0e336a",
   "neutralForeground2BrandSelected": "#13458f",
   "neutralForeground3BrandHover": "#1651aa",
-  "neutralForeground3BrandPressed": "#19428a",
+  "neutralForeground3BrandPressed": "#0e336a",
   "neutralForeground3BrandSelected": "#13458f",
   "neutralStrokeAccessibleSelected": "#185abd",
 }
@@ -3317,69 +3317,69 @@ Object {
 
 exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #80397b 1`] = `
 Object {
-  "brandBackground": "#7719aa",
-  "brandBackground2": "#e6d1f2",
-  "brandBackgroundHover": "#6c179a",
-  "brandBackgroundPressed": "#430e60",
-  "brandBackgroundSelected": "#5b1382",
-  "brandBackgroundStatic": "#7719aa",
-  "brandForeground1": "#7719aa",
-  "brandForeground2": "#6c179a",
-  "brandForegroundLink": "#7719aa",
-  "brandForegroundLinkHover": "#6c179a",
-  "brandForegroundLinkPressed": "#430e60",
-  "brandForegroundLinkSelected": "#5b1382",
-  "brandStroke1": "#7719aa",
-  "brandStroke2": "#e6d1f2",
-  "compoundBrandBackground1": "#7719aa",
-  "compoundBrandBackground1Hover": "#6c179a",
-  "compoundBrandBackground1Pressed": "#5b1382",
-  "compoundBrandForeground1": "#7719aa",
-  "compoundBrandForeground1Hover": "#6c179a",
-  "compoundBrandForeground1Pressed": "#430e60",
-  "compoundBrandStroke1": "#7719aa",
-  "compoundBrandStroke1Hover": "#6c179a",
-  "compoundBrandStroke1Pressed": "#5b1382",
-  "neutralForeground2BrandHover": "#6c179a",
-  "neutralForeground2BrandPressed": "#430e60",
-  "neutralForeground2BrandSelected": "#5b1382",
-  "neutralForeground3BrandHover": "#6c179a",
-  "neutralForeground3BrandPressed": "#430e60",
-  "neutralForeground3BrandSelected": "#5b1382",
-  "neutralStrokeAccessibleSelected": "#7719aa",
+  "brandBackground": "#80397b",
+  "brandBackground2": "#f0daee",
+  "brandBackgroundHover": "#6c2f68",
+  "brandBackgroundPressed": "#3c1a3a",
+  "brandBackgroundSelected": "#52254f",
+  "brandBackgroundStatic": "#80397b",
+  "brandForeground1": "#80397b",
+  "brandForeground2": "#6c2f68",
+  "brandForegroundLink": "#80397b",
+  "brandForegroundLinkHover": "#6c2f68",
+  "brandForegroundLinkPressed": "#3c1a3a",
+  "brandForegroundLinkSelected": "#52254f",
+  "brandStroke1": "#80397b",
+  "brandStroke2": "#f0daee",
+  "compoundBrandBackground1": "#80397b",
+  "compoundBrandBackground1Hover": "#6c2f68",
+  "compoundBrandBackground1Pressed": "#52254f",
+  "compoundBrandForeground1": "#80397b",
+  "compoundBrandForeground1Hover": "#6c2f68",
+  "compoundBrandForeground1Pressed": "#3c1a3a",
+  "compoundBrandStroke1": "#80397b",
+  "compoundBrandStroke1Hover": "#6c2f68",
+  "compoundBrandStroke1Pressed": "#52254f",
+  "neutralForeground2BrandHover": "#6c2f68",
+  "neutralForeground2BrandPressed": "#3c1a3a",
+  "neutralForeground2BrandSelected": "#52254f",
+  "neutralForeground3BrandHover": "#6c2f68",
+  "neutralForeground3BrandPressed": "#3c1a3a",
+  "neutralForeground3BrandSelected": "#52254f",
+  "neutralStrokeAccessibleSelected": "#80397b",
 }
 `;
 
 exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #c43e1c 1`] = `
 Object {
   "brandBackground": "#c43e1c",
-  "brandBackground2": "#dc816a",
+  "brandBackground2": "#f6dbd4",
   "brandBackgroundHover": "#b13719",
-  "brandBackgroundPressed": "#79310a",
+  "brandBackgroundPressed": "#6e220f",
   "brandBackgroundSelected": "#952f15",
   "brandBackgroundStatic": "#c43e1c",
   "brandForeground1": "#c43e1c",
   "brandForeground2": "#b13719",
   "brandForegroundLink": "#c43e1c",
   "brandForegroundLinkHover": "#b13719",
-  "brandForegroundLinkPressed": "#79310a",
+  "brandForegroundLinkPressed": "#6e220f",
   "brandForegroundLinkSelected": "#952f15",
   "brandStroke1": "#c43e1c",
-  "brandStroke2": "#dc816a",
+  "brandStroke2": "#f6dbd4",
   "compoundBrandBackground1": "#c43e1c",
   "compoundBrandBackground1Hover": "#b13719",
   "compoundBrandBackground1Pressed": "#952f15",
   "compoundBrandForeground1": "#c43e1c",
   "compoundBrandForeground1Hover": "#b13719",
-  "compoundBrandForeground1Pressed": "#79310a",
+  "compoundBrandForeground1Pressed": "#6e220f",
   "compoundBrandStroke1": "#c43e1c",
   "compoundBrandStroke1Hover": "#b13719",
   "compoundBrandStroke1Pressed": "#952f15",
   "neutralForeground2BrandHover": "#b13719",
-  "neutralForeground2BrandPressed": "#79310a",
+  "neutralForeground2BrandPressed": "#6e220f",
   "neutralForeground2BrandSelected": "#952f15",
   "neutralForeground3BrandHover": "#b13719",
-  "neutralForeground3BrandPressed": "#79310a",
+  "neutralForeground3BrandPressed": "#6e220f",
   "neutralForeground3BrandSelected": "#952f15",
   "neutralStrokeAccessibleSelected": "#c43e1c",
 }
@@ -3388,33 +3388,33 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: Colorful, appPrimary: #d83b01 1`] = `
 Object {
   "brandBackground": "#d83b01",
-  "brandBackground2": "#e8825d",
+  "brandBackground2": "#f9dcd1",
   "brandBackgroundHover": "#c33400",
-  "brandBackgroundPressed": "#99482b",
+  "brandBackgroundPressed": "#792000",
   "brandBackgroundSelected": "#a52c00",
   "brandBackgroundStatic": "#d83b01",
   "brandForeground1": "#d83b01",
   "brandForeground2": "#c33400",
   "brandForegroundLink": "#d83b01",
   "brandForegroundLinkHover": "#c33400",
-  "brandForegroundLinkPressed": "#99482b",
+  "brandForegroundLinkPressed": "#792000",
   "brandForegroundLinkSelected": "#a52c00",
   "brandStroke1": "#d83b01",
-  "brandStroke2": "#e8825d",
+  "brandStroke2": "#f9dcd1",
   "compoundBrandBackground1": "#d83b01",
   "compoundBrandBackground1Hover": "#c33400",
   "compoundBrandBackground1Pressed": "#a52c00",
   "compoundBrandForeground1": "#d83b01",
   "compoundBrandForeground1Hover": "#c33400",
-  "compoundBrandForeground1Pressed": "#99482b",
+  "compoundBrandForeground1Pressed": "#792000",
   "compoundBrandStroke1": "#d83b01",
   "compoundBrandStroke1Hover": "#c33400",
   "compoundBrandStroke1Pressed": "#a52c00",
   "neutralForeground2BrandHover": "#c33400",
-  "neutralForeground2BrandPressed": "#99482b",
+  "neutralForeground2BrandPressed": "#792000",
   "neutralForeground2BrandSelected": "#a52c00",
   "neutralForeground3BrandHover": "#c33400",
-  "neutralForeground3BrandPressed": "#99482b",
+  "neutralForeground3BrandPressed": "#792000",
   "neutralForeground3BrandSelected": "#a52c00",
   "neutralStrokeAccessibleSelected": "#d83b01",
 }
@@ -3423,34 +3423,34 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #0078d4 1`] = `
 Object {
   "brandBackground": "#0078d4",
-  "brandBackground2": "#c7e0f4",
+  "brandBackground2": "#cce3f5",
   "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#004c87",
-  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundPressed": "#135995",
+  "brandBackgroundSelected": "#1664a7",
   "brandBackgroundStatic": "#0078d4",
   "brandForeground1": "#0078d4",
   "brandForeground2": "#106ebe",
   "brandForegroundLink": "#0078d4",
   "brandForegroundLinkHover": "#106ebe",
-  "brandForegroundLinkPressed": "#004c87",
-  "brandForegroundLinkSelected": "#005a9e",
+  "brandForegroundLinkPressed": "#135995",
+  "brandForegroundLinkSelected": "#1664a7",
   "brandStroke1": "#0078d4",
-  "brandStroke2": "#c7e0f4",
+  "brandStroke2": "#cce3f5",
   "compoundBrandBackground1": "#0078d4",
   "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#005a9e",
+  "compoundBrandBackground1Pressed": "#1664a7",
   "compoundBrandForeground1": "#0078d4",
   "compoundBrandForeground1Hover": "#106ebe",
-  "compoundBrandForeground1Pressed": "#004c87",
+  "compoundBrandForeground1Pressed": "#135995",
   "compoundBrandStroke1": "#0078d4",
   "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#005a9e",
+  "compoundBrandStroke1Pressed": "#1664a7",
   "neutralForeground2BrandHover": "#106ebe",
-  "neutralForeground2BrandPressed": "#004c87",
-  "neutralForeground2BrandSelected": "#005a9e",
+  "neutralForeground2BrandPressed": "#135995",
+  "neutralForeground2BrandSelected": "#1664a7",
   "neutralForeground3BrandHover": "#106ebe",
-  "neutralForeground3BrandPressed": "#004c87",
-  "neutralForeground3BrandSelected": "#005a9e",
+  "neutralForeground3BrandPressed": "#135995",
+  "neutralForeground3BrandSelected": "#1664a7",
   "neutralStrokeAccessibleSelected": "#0078d4",
 }
 `;
@@ -3458,33 +3458,33 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #107c41 1`] = `
 Object {
   "brandBackground": "#107c41",
-  "brandBackground2": "#55b17e",
+  "brandBackground2": "#caead8",
   "brandBackgroundHover": "#0f703b",
-  "brandBackgroundPressed": "#0a5325",
+  "brandBackgroundPressed": "#094624",
   "brandBackgroundSelected": "#0c5f32",
   "brandBackgroundStatic": "#107c41",
   "brandForeground1": "#107c41",
   "brandForeground2": "#0f703b",
   "brandForegroundLink": "#107c41",
   "brandForegroundLinkHover": "#0f703b",
-  "brandForegroundLinkPressed": "#0a5325",
+  "brandForegroundLinkPressed": "#094624",
   "brandForegroundLinkSelected": "#0c5f32",
   "brandStroke1": "#107c41",
-  "brandStroke2": "#55b17e",
+  "brandStroke2": "#caead8",
   "compoundBrandBackground1": "#107c41",
   "compoundBrandBackground1Hover": "#0f703b",
   "compoundBrandBackground1Pressed": "#0c5f32",
   "compoundBrandForeground1": "#107c41",
   "compoundBrandForeground1Hover": "#0f703b",
-  "compoundBrandForeground1Pressed": "#0a5325",
+  "compoundBrandForeground1Pressed": "#094624",
   "compoundBrandStroke1": "#107c41",
   "compoundBrandStroke1Hover": "#0f703b",
   "compoundBrandStroke1Pressed": "#0c5f32",
   "neutralForeground2BrandHover": "#0f703b",
-  "neutralForeground2BrandPressed": "#0a5325",
+  "neutralForeground2BrandPressed": "#094624",
   "neutralForeground2BrandSelected": "#0c5f32",
   "neutralForeground3BrandHover": "#0f703b",
-  "neutralForeground3BrandPressed": "#0a5325",
+  "neutralForeground3BrandPressed": "#094624",
   "neutralForeground3BrandSelected": "#0c5f32",
   "neutralStrokeAccessibleSelected": "#107c41",
 }
@@ -3493,33 +3493,33 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #185abd 1`] = `
 Object {
   "brandBackground": "#185abd",
-  "brandBackground2": "#6794d7",
+  "brandBackground2": "#d2e0f4",
   "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#19428a",
+  "brandBackgroundPressed": "#0e336a",
   "brandBackgroundSelected": "#13458f",
   "brandBackgroundStatic": "#185abd",
   "brandForeground1": "#185abd",
   "brandForeground2": "#1651aa",
   "brandForegroundLink": "#185abd",
   "brandForegroundLinkHover": "#1651aa",
-  "brandForegroundLinkPressed": "#19428a",
+  "brandForegroundLinkPressed": "#0e336a",
   "brandForegroundLinkSelected": "#13458f",
   "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
+  "brandStroke2": "#d2e0f4",
   "compoundBrandBackground1": "#185abd",
   "compoundBrandBackground1Hover": "#1651aa",
   "compoundBrandBackground1Pressed": "#13458f",
   "compoundBrandForeground1": "#185abd",
   "compoundBrandForeground1Hover": "#1651aa",
-  "compoundBrandForeground1Pressed": "#19428a",
+  "compoundBrandForeground1Pressed": "#0e336a",
   "compoundBrandStroke1": "#185abd",
   "compoundBrandStroke1Hover": "#1651aa",
   "compoundBrandStroke1Pressed": "#13458f",
   "neutralForeground2BrandHover": "#1651aa",
-  "neutralForeground2BrandPressed": "#19428a",
+  "neutralForeground2BrandPressed": "#0e336a",
   "neutralForeground2BrandSelected": "#13458f",
   "neutralForeground3BrandHover": "#1651aa",
-  "neutralForeground3BrandPressed": "#19428a",
+  "neutralForeground3BrandPressed": "#0e336a",
   "neutralForeground3BrandSelected": "#13458f",
   "neutralStrokeAccessibleSelected": "#185abd",
 }
@@ -3527,69 +3527,69 @@ Object {
 
 exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #80397b 1`] = `
 Object {
-  "brandBackground": "#7719aa",
-  "brandBackground2": "#e6d1f2",
-  "brandBackgroundHover": "#6c179a",
-  "brandBackgroundPressed": "#430e60",
-  "brandBackgroundSelected": "#5b1382",
-  "brandBackgroundStatic": "#7719aa",
-  "brandForeground1": "#7719aa",
-  "brandForeground2": "#6c179a",
-  "brandForegroundLink": "#7719aa",
-  "brandForegroundLinkHover": "#6c179a",
-  "brandForegroundLinkPressed": "#430e60",
-  "brandForegroundLinkSelected": "#5b1382",
-  "brandStroke1": "#7719aa",
-  "brandStroke2": "#e6d1f2",
-  "compoundBrandBackground1": "#7719aa",
-  "compoundBrandBackground1Hover": "#6c179a",
-  "compoundBrandBackground1Pressed": "#5b1382",
-  "compoundBrandForeground1": "#7719aa",
-  "compoundBrandForeground1Hover": "#6c179a",
-  "compoundBrandForeground1Pressed": "#430e60",
-  "compoundBrandStroke1": "#7719aa",
-  "compoundBrandStroke1Hover": "#6c179a",
-  "compoundBrandStroke1Pressed": "#5b1382",
-  "neutralForeground2BrandHover": "#6c179a",
-  "neutralForeground2BrandPressed": "#430e60",
-  "neutralForeground2BrandSelected": "#5b1382",
-  "neutralForeground3BrandHover": "#6c179a",
-  "neutralForeground3BrandPressed": "#430e60",
-  "neutralForeground3BrandSelected": "#5b1382",
-  "neutralStrokeAccessibleSelected": "#7719aa",
+  "brandBackground": "#80397b",
+  "brandBackground2": "#f0daee",
+  "brandBackgroundHover": "#6c2f68",
+  "brandBackgroundPressed": "#3c1a3a",
+  "brandBackgroundSelected": "#52254f",
+  "brandBackgroundStatic": "#80397b",
+  "brandForeground1": "#80397b",
+  "brandForeground2": "#6c2f68",
+  "brandForegroundLink": "#80397b",
+  "brandForegroundLinkHover": "#6c2f68",
+  "brandForegroundLinkPressed": "#3c1a3a",
+  "brandForegroundLinkSelected": "#52254f",
+  "brandStroke1": "#80397b",
+  "brandStroke2": "#f0daee",
+  "compoundBrandBackground1": "#80397b",
+  "compoundBrandBackground1Hover": "#6c2f68",
+  "compoundBrandBackground1Pressed": "#52254f",
+  "compoundBrandForeground1": "#80397b",
+  "compoundBrandForeground1Hover": "#6c2f68",
+  "compoundBrandForeground1Pressed": "#3c1a3a",
+  "compoundBrandStroke1": "#80397b",
+  "compoundBrandStroke1Hover": "#6c2f68",
+  "compoundBrandStroke1Pressed": "#52254f",
+  "neutralForeground2BrandHover": "#6c2f68",
+  "neutralForeground2BrandPressed": "#3c1a3a",
+  "neutralForeground2BrandSelected": "#52254f",
+  "neutralForeground3BrandHover": "#6c2f68",
+  "neutralForeground3BrandPressed": "#3c1a3a",
+  "neutralForeground3BrandSelected": "#52254f",
+  "neutralStrokeAccessibleSelected": "#80397b",
 }
 `;
 
 exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #c43e1c 1`] = `
 Object {
   "brandBackground": "#c43e1c",
-  "brandBackground2": "#dc816a",
+  "brandBackground2": "#f6dbd4",
   "brandBackgroundHover": "#b13719",
-  "brandBackgroundPressed": "#79310a",
+  "brandBackgroundPressed": "#6e220f",
   "brandBackgroundSelected": "#952f15",
   "brandBackgroundStatic": "#c43e1c",
   "brandForeground1": "#c43e1c",
   "brandForeground2": "#b13719",
   "brandForegroundLink": "#c43e1c",
   "brandForegroundLinkHover": "#b13719",
-  "brandForegroundLinkPressed": "#79310a",
+  "brandForegroundLinkPressed": "#6e220f",
   "brandForegroundLinkSelected": "#952f15",
   "brandStroke1": "#c43e1c",
-  "brandStroke2": "#dc816a",
+  "brandStroke2": "#f6dbd4",
   "compoundBrandBackground1": "#c43e1c",
   "compoundBrandBackground1Hover": "#b13719",
   "compoundBrandBackground1Pressed": "#952f15",
   "compoundBrandForeground1": "#c43e1c",
   "compoundBrandForeground1Hover": "#b13719",
-  "compoundBrandForeground1Pressed": "#79310a",
+  "compoundBrandForeground1Pressed": "#6e220f",
   "compoundBrandStroke1": "#c43e1c",
   "compoundBrandStroke1Hover": "#b13719",
   "compoundBrandStroke1Pressed": "#952f15",
   "neutralForeground2BrandHover": "#b13719",
-  "neutralForeground2BrandPressed": "#79310a",
+  "neutralForeground2BrandPressed": "#6e220f",
   "neutralForeground2BrandSelected": "#952f15",
   "neutralForeground3BrandHover": "#b13719",
-  "neutralForeground3BrandPressed": "#79310a",
+  "neutralForeground3BrandPressed": "#6e220f",
   "neutralForeground3BrandSelected": "#952f15",
   "neutralStrokeAccessibleSelected": "#c43e1c",
 }
@@ -3598,33 +3598,33 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: White, appPrimary: #d83b01 1`] = `
 Object {
   "brandBackground": "#d83b01",
-  "brandBackground2": "#e8825d",
+  "brandBackground2": "#f9dcd1",
   "brandBackgroundHover": "#c33400",
-  "brandBackgroundPressed": "#99482b",
+  "brandBackgroundPressed": "#792000",
   "brandBackgroundSelected": "#a52c00",
   "brandBackgroundStatic": "#d83b01",
   "brandForeground1": "#d83b01",
   "brandForeground2": "#c33400",
   "brandForegroundLink": "#d83b01",
   "brandForegroundLinkHover": "#c33400",
-  "brandForegroundLinkPressed": "#99482b",
+  "brandForegroundLinkPressed": "#792000",
   "brandForegroundLinkSelected": "#a52c00",
   "brandStroke1": "#d83b01",
-  "brandStroke2": "#e8825d",
+  "brandStroke2": "#f9dcd1",
   "compoundBrandBackground1": "#d83b01",
   "compoundBrandBackground1Hover": "#c33400",
   "compoundBrandBackground1Pressed": "#a52c00",
   "compoundBrandForeground1": "#d83b01",
   "compoundBrandForeground1Hover": "#c33400",
-  "compoundBrandForeground1Pressed": "#99482b",
+  "compoundBrandForeground1Pressed": "#792000",
   "compoundBrandStroke1": "#d83b01",
   "compoundBrandStroke1Hover": "#c33400",
   "compoundBrandStroke1Pressed": "#a52c00",
   "neutralForeground2BrandHover": "#c33400",
-  "neutralForeground2BrandPressed": "#99482b",
+  "neutralForeground2BrandPressed": "#792000",
   "neutralForeground2BrandSelected": "#a52c00",
   "neutralForeground3BrandHover": "#c33400",
-  "neutralForeground3BrandPressed": "#99482b",
+  "neutralForeground3BrandPressed": "#792000",
   "neutralForeground3BrandSelected": "#a52c00",
   "neutralStrokeAccessibleSelected": "#d83b01",
 }
@@ -3633,34 +3633,34 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #0078d4 1`] = `
 Object {
   "brandBackground": "#0078d4",
-  "brandBackground2": "#c7e0f4",
+  "brandBackground2": "#cce3f5",
   "brandBackgroundHover": "#106ebe",
-  "brandBackgroundPressed": "#004c87",
-  "brandBackgroundSelected": "#005a9e",
+  "brandBackgroundPressed": "#135995",
+  "brandBackgroundSelected": "#1664a7",
   "brandBackgroundStatic": "#0078d4",
-  "brandForeground1": "#6cb8f6",
-  "brandForeground2": "#c7e0f4",
-  "brandForegroundLink": "#6cb8f6",
-  "brandForegroundLinkHover": "#c7e0f4",
-  "brandForegroundLinkPressed": "#2899f5",
-  "brandForegroundLinkSelected": "#c7e0f4",
+  "brandForeground1": "#b3d6f2",
+  "brandForeground2": "#cce3f5",
+  "brandForegroundLink": "#b3d6f2",
+  "brandForegroundLinkHover": "#cce3f5",
+  "brandForegroundLinkPressed": "#2488d8",
+  "brandForegroundLinkSelected": "#cce3f5",
   "brandStroke1": "#0078d4",
-  "brandStroke2": "#c7e0f4",
+  "brandStroke2": "#cce3f5",
   "compoundBrandBackground1": "#0078d4",
   "compoundBrandBackground1Hover": "#106ebe",
-  "compoundBrandBackground1Pressed": "#005a9e",
-  "compoundBrandForeground1": "#6cb8f6",
-  "compoundBrandForeground1Hover": "#c7e0f4",
-  "compoundBrandForeground1Pressed": "#2899f5",
+  "compoundBrandBackground1Pressed": "#1664a7",
+  "compoundBrandForeground1": "#b3d6f2",
+  "compoundBrandForeground1Hover": "#cce3f5",
+  "compoundBrandForeground1Pressed": "#2488d8",
   "compoundBrandStroke1": "#0078d4",
   "compoundBrandStroke1Hover": "#106ebe",
-  "compoundBrandStroke1Pressed": "#005a9e",
-  "neutralForeground2BrandHover": "#c7e0f4",
-  "neutralForeground2BrandPressed": "#2899f5",
-  "neutralForeground2BrandSelected": "#c7e0f4",
-  "neutralForeground3BrandHover": "#c7e0f4",
-  "neutralForeground3BrandPressed": "#2899f5",
-  "neutralForeground3BrandSelected": "#c7e0f4",
+  "compoundBrandStroke1Pressed": "#1664a7",
+  "neutralForeground2BrandHover": "#cce3f5",
+  "neutralForeground2BrandPressed": "#2488d8",
+  "neutralForeground2BrandSelected": "#cce3f5",
+  "neutralForeground3BrandHover": "#cce3f5",
+  "neutralForeground3BrandPressed": "#2488d8",
+  "neutralForeground3BrandSelected": "#cce3f5",
   "neutralStrokeAccessibleSelected": "#0078d4",
 }
 `;
@@ -3668,34 +3668,34 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #107c41 1`] = `
 Object {
   "brandBackground": "#107c41",
-  "brandBackground2": "#55b17e",
+  "brandBackground2": "#caead8",
   "brandBackgroundHover": "#0f703b",
-  "brandBackgroundPressed": "#0a5325",
+  "brandBackgroundPressed": "#094624",
   "brandBackgroundSelected": "#0c5f32",
   "brandBackgroundStatic": "#107c41",
-  "brandForeground1": "#60bd82",
-  "brandForeground2": "#55b17e",
-  "brandForegroundLink": "#60bd82",
-  "brandForegroundLinkHover": "#55b17e",
-  "brandForegroundLinkPressed": "#10893c",
-  "brandForegroundLinkSelected": "#55b17e",
+  "brandForeground1": "#a0d8b9",
+  "brandForeground2": "#caead8",
+  "brandForegroundLink": "#a0d8b9",
+  "brandForegroundLinkHover": "#caead8",
+  "brandForegroundLinkPressed": "#218d51",
+  "brandForegroundLinkSelected": "#caead8",
   "brandStroke1": "#107c41",
-  "brandStroke2": "#55b17e",
+  "brandStroke2": "#caead8",
   "compoundBrandBackground1": "#107c41",
   "compoundBrandBackground1Hover": "#0f703b",
   "compoundBrandBackground1Pressed": "#0c5f32",
-  "compoundBrandForeground1": "#60bd82",
-  "compoundBrandForeground1Hover": "#55b17e",
-  "compoundBrandForeground1Pressed": "#10893c",
+  "compoundBrandForeground1": "#a0d8b9",
+  "compoundBrandForeground1Hover": "#caead8",
+  "compoundBrandForeground1Pressed": "#218d51",
   "compoundBrandStroke1": "#107c41",
   "compoundBrandStroke1Hover": "#0f703b",
   "compoundBrandStroke1Pressed": "#0c5f32",
-  "neutralForeground2BrandHover": "#55b17e",
-  "neutralForeground2BrandPressed": "#10893c",
-  "neutralForeground2BrandSelected": "#55b17e",
-  "neutralForeground3BrandHover": "#55b17e",
-  "neutralForeground3BrandPressed": "#10893c",
-  "neutralForeground3BrandSelected": "#55b17e",
+  "neutralForeground2BrandHover": "#caead8",
+  "neutralForeground2BrandPressed": "#218d51",
+  "neutralForeground2BrandSelected": "#caead8",
+  "neutralForeground3BrandHover": "#caead8",
+  "neutralForeground3BrandPressed": "#218d51",
+  "neutralForeground3BrandSelected": "#caead8",
   "neutralStrokeAccessibleSelected": "#107c41",
 }
 `;
@@ -3703,104 +3703,104 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #185abd 1`] = `
 Object {
   "brandBackground": "#185abd",
-  "brandBackground2": "#6794d7",
+  "brandBackground2": "#d2e0f4",
   "brandBackgroundHover": "#1651aa",
-  "brandBackgroundPressed": "#19428a",
+  "brandBackgroundPressed": "#0e336a",
   "brandBackgroundSelected": "#13458f",
   "brandBackgroundStatic": "#185abd",
-  "brandForeground1": "#82abf1",
-  "brandForeground2": "#6794d7",
-  "brandForegroundLink": "#82abf1",
-  "brandForegroundLinkHover": "#6794d7",
-  "brandForegroundLinkPressed": "#296fe6",
-  "brandForegroundLinkSelected": "#6794d7",
+  "brandForeground1": "#aec6eb",
+  "brandForeground2": "#d2e0f4",
+  "brandForegroundLink": "#aec6eb",
+  "brandForegroundLinkHover": "#d2e0f4",
+  "brandForegroundLinkPressed": "#2e6ac5",
+  "brandForegroundLinkSelected": "#d2e0f4",
   "brandStroke1": "#185abd",
-  "brandStroke2": "#6794d7",
+  "brandStroke2": "#d2e0f4",
   "compoundBrandBackground1": "#185abd",
   "compoundBrandBackground1Hover": "#1651aa",
   "compoundBrandBackground1Pressed": "#13458f",
-  "compoundBrandForeground1": "#82abf1",
-  "compoundBrandForeground1Hover": "#6794d7",
-  "compoundBrandForeground1Pressed": "#296fe6",
+  "compoundBrandForeground1": "#aec6eb",
+  "compoundBrandForeground1Hover": "#d2e0f4",
+  "compoundBrandForeground1Pressed": "#2e6ac5",
   "compoundBrandStroke1": "#185abd",
   "compoundBrandStroke1Hover": "#1651aa",
   "compoundBrandStroke1Pressed": "#13458f",
-  "neutralForeground2BrandHover": "#6794d7",
-  "neutralForeground2BrandPressed": "#296fe6",
-  "neutralForeground2BrandSelected": "#6794d7",
-  "neutralForeground3BrandHover": "#6794d7",
-  "neutralForeground3BrandPressed": "#296fe6",
-  "neutralForeground3BrandSelected": "#6794d7",
+  "neutralForeground2BrandHover": "#d2e0f4",
+  "neutralForeground2BrandPressed": "#2e6ac5",
+  "neutralForeground2BrandSelected": "#d2e0f4",
+  "neutralForeground3BrandHover": "#d2e0f4",
+  "neutralForeground3BrandPressed": "#2e6ac5",
+  "neutralForeground3BrandSelected": "#d2e0f4",
   "neutralStrokeAccessibleSelected": "#185abd",
 }
 `;
 
 exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #80397b 1`] = `
 Object {
-  "brandBackground": "#7719aa",
-  "brandBackground2": "#e6d1f2",
-  "brandBackgroundHover": "#6c179a",
-  "brandBackgroundPressed": "#430e60",
-  "brandBackgroundSelected": "#5b1382",
-  "brandBackgroundStatic": "#7719aa",
-  "brandForeground1": "#d1abe6",
-  "brandForeground2": "#e6d1f2",
-  "brandForegroundLink": "#d1abe6",
-  "brandForegroundLinkHover": "#e6d1f2",
-  "brandForegroundLinkPressed": "#862eb5",
-  "brandForegroundLinkSelected": "#e6d1f2",
-  "brandStroke1": "#7719aa",
-  "brandStroke2": "#e6d1f2",
-  "compoundBrandBackground1": "#7719aa",
-  "compoundBrandBackground1Hover": "#6c179a",
-  "compoundBrandBackground1Pressed": "#5b1382",
-  "compoundBrandForeground1": "#d1abe6",
-  "compoundBrandForeground1Hover": "#e6d1f2",
-  "compoundBrandForeground1Pressed": "#862eb5",
-  "compoundBrandStroke1": "#7719aa",
-  "compoundBrandStroke1Hover": "#6c179a",
-  "compoundBrandStroke1Pressed": "#5b1382",
-  "neutralForeground2BrandHover": "#e6d1f2",
-  "neutralForeground2BrandPressed": "#862eb5",
-  "neutralForeground2BrandSelected": "#e6d1f2",
-  "neutralForeground3BrandHover": "#e6d1f2",
-  "neutralForeground3BrandPressed": "#862eb5",
-  "neutralForeground3BrandSelected": "#e6d1f2",
-  "neutralStrokeAccessibleSelected": "#7719aa",
+  "brandBackground": "#80397b",
+  "brandBackground2": "#f0daee",
+  "brandBackgroundHover": "#6c2f68",
+  "brandBackgroundPressed": "#3c1a3a",
+  "brandBackgroundSelected": "#52254f",
+  "brandBackgroundStatic": "#80397b",
+  "brandForeground1": "#e0bfde",
+  "brandForeground2": "#f0daee",
+  "brandForegroundLink": "#e0bfde",
+  "brandForegroundLinkHover": "#f0daee",
+  "brandForegroundLinkPressed": "#9e5499",
+  "brandForegroundLinkSelected": "#f0daee",
+  "brandStroke1": "#80397b",
+  "brandStroke2": "#f0daee",
+  "compoundBrandBackground1": "#80397b",
+  "compoundBrandBackground1Hover": "#6c2f68",
+  "compoundBrandBackground1Pressed": "#52254f",
+  "compoundBrandForeground1": "#e0bfde",
+  "compoundBrandForeground1Hover": "#f0daee",
+  "compoundBrandForeground1Pressed": "#9e5499",
+  "compoundBrandStroke1": "#80397b",
+  "compoundBrandStroke1Hover": "#6c2f68",
+  "compoundBrandStroke1Pressed": "#52254f",
+  "neutralForeground2BrandHover": "#f0daee",
+  "neutralForeground2BrandPressed": "#9e5499",
+  "neutralForeground2BrandSelected": "#f0daee",
+  "neutralForeground3BrandHover": "#f0daee",
+  "neutralForeground3BrandPressed": "#9e5499",
+  "neutralForeground3BrandSelected": "#f0daee",
+  "neutralStrokeAccessibleSelected": "#80397b",
 }
 `;
 
 exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #c43e1c 1`] = `
 Object {
   "brandBackground": "#c43e1c",
-  "brandBackground2": "#dc816a",
+  "brandBackground2": "#f6dbd4",
   "brandBackgroundHover": "#b13719",
-  "brandBackgroundPressed": "#79310a",
+  "brandBackgroundPressed": "#6e220f",
   "brandBackgroundSelected": "#952f15",
   "brandBackgroundStatic": "#c43e1c",
-  "brandForeground1": "#e1966d",
-  "brandForeground2": "#dc816a",
-  "brandForegroundLink": "#e1966d",
-  "brandForegroundLinkHover": "#dc816a",
-  "brandForegroundLinkPressed": "#ca5010",
-  "brandForegroundLinkSelected": "#dc816a",
+  "brandForeground1": "#edbcb0",
+  "brandForeground2": "#f6dbd4",
+  "brandForegroundLink": "#edbcb0",
+  "brandForegroundLinkHover": "#f6dbd4",
+  "brandForegroundLinkPressed": "#cb5031",
+  "brandForegroundLinkSelected": "#f6dbd4",
   "brandStroke1": "#c43e1c",
-  "brandStroke2": "#dc816a",
+  "brandStroke2": "#f6dbd4",
   "compoundBrandBackground1": "#c43e1c",
   "compoundBrandBackground1Hover": "#b13719",
   "compoundBrandBackground1Pressed": "#952f15",
-  "compoundBrandForeground1": "#e1966d",
-  "compoundBrandForeground1Hover": "#dc816a",
-  "compoundBrandForeground1Pressed": "#ca5010",
+  "compoundBrandForeground1": "#edbcb0",
+  "compoundBrandForeground1Hover": "#f6dbd4",
+  "compoundBrandForeground1Pressed": "#cb5031",
   "compoundBrandStroke1": "#c43e1c",
   "compoundBrandStroke1Hover": "#b13719",
   "compoundBrandStroke1Pressed": "#952f15",
-  "neutralForeground2BrandHover": "#dc816a",
-  "neutralForeground2BrandPressed": "#ca5010",
-  "neutralForeground2BrandSelected": "#dc816a",
-  "neutralForeground3BrandHover": "#dc816a",
-  "neutralForeground3BrandPressed": "#ca5010",
-  "neutralForeground3BrandSelected": "#dc816a",
+  "neutralForeground2BrandHover": "#f6dbd4",
+  "neutralForeground2BrandPressed": "#cb5031",
+  "neutralForeground2BrandSelected": "#f6dbd4",
+  "neutralForeground3BrandHover": "#f6dbd4",
+  "neutralForeground3BrandPressed": "#cb5031",
+  "neutralForeground3BrandSelected": "#f6dbd4",
   "neutralStrokeAccessibleSelected": "#c43e1c",
 }
 `;
@@ -3808,34 +3808,34 @@ Object {
 exports[`getCurrentBrandAliasTokens test themeName: null, appPrimary: #d83b01 1`] = `
 Object {
   "brandBackground": "#d83b01",
-  "brandBackground2": "#e8825d",
+  "brandBackground2": "#f9dcd1",
   "brandBackgroundHover": "#c33400",
-  "brandBackgroundPressed": "#99482b",
+  "brandBackgroundPressed": "#792000",
   "brandBackgroundSelected": "#a52c00",
   "brandBackgroundStatic": "#d83b01",
-  "brandForeground1": "#ff9973",
-  "brandForeground2": "#e8825d",
-  "brandForegroundLink": "#ff9973",
-  "brandForegroundLinkHover": "#e8825d",
-  "brandForegroundLinkPressed": "#fe7948",
-  "brandForegroundLinkSelected": "#e8825d",
+  "brandForeground1": "#f4beaa",
+  "brandForeground2": "#f9dcd1",
+  "brandForegroundLink": "#f4beaa",
+  "brandForegroundLinkHover": "#f9dcd1",
+  "brandForegroundLinkPressed": "#dd4f1b",
+  "brandForegroundLinkSelected": "#f9dcd1",
   "brandStroke1": "#d83b01",
-  "brandStroke2": "#e8825d",
+  "brandStroke2": "#f9dcd1",
   "compoundBrandBackground1": "#d83b01",
   "compoundBrandBackground1Hover": "#c33400",
   "compoundBrandBackground1Pressed": "#a52c00",
-  "compoundBrandForeground1": "#ff9973",
-  "compoundBrandForeground1Hover": "#e8825d",
-  "compoundBrandForeground1Pressed": "#fe7948",
+  "compoundBrandForeground1": "#f4beaa",
+  "compoundBrandForeground1Hover": "#f9dcd1",
+  "compoundBrandForeground1Pressed": "#dd4f1b",
   "compoundBrandStroke1": "#d83b01",
   "compoundBrandStroke1Hover": "#c33400",
   "compoundBrandStroke1Pressed": "#a52c00",
-  "neutralForeground2BrandHover": "#e8825d",
-  "neutralForeground2BrandPressed": "#fe7948",
-  "neutralForeground2BrandSelected": "#e8825d",
-  "neutralForeground3BrandHover": "#e8825d",
-  "neutralForeground3BrandPressed": "#fe7948",
-  "neutralForeground3BrandSelected": "#e8825d",
+  "neutralForeground2BrandHover": "#f9dcd1",
+  "neutralForeground2BrandPressed": "#dd4f1b",
+  "neutralForeground2BrandSelected": "#f9dcd1",
+  "neutralForeground3BrandHover": "#f9dcd1",
+  "neutralForeground3BrandPressed": "#dd4f1b",
+  "neutralForeground3BrandSelected": "#f9dcd1",
   "neutralStrokeAccessibleSelected": "#d83b01",
 }
 `;

@@ -1,16 +1,32 @@
-import { ButtonCoreTokens, ButtonCoreProps } from '../Button.types';
-import { FABSlotProps } from './FAB.types';
+import { ButtonCoreTokens } from '../Button.types';
+import { FABProps, FABSlotProps } from './FAB.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, shadowStyles } from '@fluentui-react-native/tokens';
 import { buttonCoreStates } from '../Button.styling';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { Platform } from 'react-native';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
-export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, ButtonCoreTokens> = {
+export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, ButtonCoreTokens> = {
   tokens: [defaultFABTokens, defaultFABColorTokens],
   states: [...buttonCoreStates],
   slotProps: {
+    ...(Platform.OS == 'android' && {
+      rippleContainer: buildProps(
+        (tokens: ButtonCoreTokens) => {
+          return {
+            style: {
+              flexDirection: 'row',
+              alignSelf: 'baseline',
+              borderRadius: tokens.borderRadius,
+              overflow: 'hidden',
+            },
+          };
+        },
+        ['borderRadius'],
+      ),
+    }),
     root: buildProps(
       (tokens: ButtonCoreTokens, theme: Theme) => ({
         style: {
@@ -25,9 +41,12 @@ export const stylingSettings: UseStylingOptions<ButtonCoreProps, FABSlotProps, B
           ...layoutStyles.from(tokens, theme),
           ...shadowStyles.from(tokens, theme),
         },
+        android_ripple: {
+          color: tokens.rippleColor,
+        },
         elevation: tokens.elevation,
       }),
-      ['backgroundColor', 'width', 'elevation', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
+      ['backgroundColor', 'width', 'elevation', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys, ...shadowStyles.keys],
     ),
     content: buildProps(
       (tokens: ButtonCoreTokens, theme: Theme) => ({
