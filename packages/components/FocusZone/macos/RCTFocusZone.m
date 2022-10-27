@@ -18,9 +18,14 @@ typedef BOOL (^IsViewLeadingCandidateForNextFocus)(NSView *candidateView);
 // enumerated in the same row (or column) as the current focused view
 static const CGFloat FocusZoneBuffer = 3;
 
-BOOL ShouldFocusOnView(NSView *view, BOOL forceFocus)
+
+/// Returns whether FocusZone should move focus on the view in question.
+/// - Parameters:
+///   - view: The view to check if we should move focus to, should be a child / subview of the FocusZone in question.
+///   - forceFocus: Check if we should focus on all views that accept first responder status, rather than just key views.
+BOOL ShouldFocusOnView(NSView *view, BOOL focusOnAllFirstResponders)
 {
-	return forceFocus ? [view acceptsFirstResponder] : [view canBecomeKeyView];
+	return focusOnAllFirstResponders ? [view acceptsFirstResponder] : [view canBecomeKeyView];
 }
 
 /// Performs a depth first search looking for the first key view in a parent view's view hierarchy.
@@ -93,6 +98,8 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 	);
 }
 
+/// Returns the first NSView in the given windows NSResponder chain.
+/// - Parameter window: The window whose NSResponder chain we should check.
 static NSView *GetFirstResponder(NSWindow *window)
 {
 	NSResponder *responder = [window firstResponder];
@@ -103,6 +110,9 @@ static NSView *GetFirstResponder(NSWindow *window)
 	return [responder isKindOfClass:[NSView class]] ? (NSView *)responder : nil;
 }
 
+
+/// Returns a `FocusZoneAction` for a given NSEvent
+/// - Parameter event: The event to interpret into a command. Should be a keyDown event.
 static FocusZoneAction GetActionForEvent(NSEvent *event)
 {
 	FocusZoneAction action = FocusZoneActionNone;
@@ -202,6 +212,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	return !rejectsResponderStatus;
 }
 
+///  Reassign firstResponder within the FocusZone to either the default key view or first focusable view.
 - (BOOL)becomeFirstResponder
 {
 	NSView *keyView = _defaultKeyView ?: [self firstFocusableView];
@@ -219,8 +230,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		NSView *candidateView = [queue firstObject];
 		[queue removeObjectAtIndex:0];
 
-		if (
-				[candidateView isNotEqualTo:self] &&
+		if ([candidateView isNotEqualTo:self] &&
 				ShouldFocusOnView(candidateView, [self forceFocus]) &&
 				isLeadingCandidate(candidateView))
 		{
