@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Snapshot update",
-  "packageName": "@fluentui-react-native/link",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}

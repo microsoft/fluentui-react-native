@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Snapshot Update",
-  "packageName": "@fluentui-react-native/tabs",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
