@@ -24,7 +24,6 @@ import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../../TestComponents/Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../TestComponents/Text/consts';
-import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../TestComponents/TextExperimental/consts';
 import { HOMEPAGE_TOKEN_BUTTON } from '../../TestComponents/Tokens/consts';
 import { HOMEPAGE_TABS_BUTTON } from '../../TestComponents/Tabs/consts';
 import { HOMEPAGE_THEME_BUTTON } from '../../TestComponents/Theme/consts';
@@ -130,10 +129,6 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToTextPage() {
     await this.textPage.click();
-  }
-
-  async clickAndGoToExperimentalTextPage() {
-    await this.textExperimentalPage.click();
   }
 
   async clickAndGoToTabsPage() {
@@ -258,10 +253,6 @@ class NavigateAppPage extends BasePage {
 
   private get textPage() {
     return By(HOMEPAGE_TEXT_BUTTON);
-  }
-
-  private get textExperimentalPage() {
-    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
   }
 
   private get tabsPage() {
