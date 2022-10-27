@@ -66,7 +66,7 @@ export interface FABProps extends Omit<PressablePropsExtended, 'onPress'> {
   icon?: IconSourcesType;
 
   /**
-   * Button contains only icon, there's no text content
+   * Button contains only icon, there's no content.
    * Must be set for button to style correctly when button has not content.
    */
   iconOnly?: boolean;
@@ -101,9 +101,8 @@ Tokens can be used to customize the styling of the control by using the `customi
 ```ts
 export interface FABTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
-   * Focused State on Android has inner and outer borders
-   * Outer Border is equivalent to the border tokens from IBorders
-   * This adds inner border support.
+   * Focused State on Android has inner and outer borders.
+   * Outer Border is equivalent to the border tokens from IBorders.
    */
   borderInnerColor?: ColorValue;
   borderInnerRadius?: number;
@@ -126,17 +125,17 @@ export interface FABTokens extends LayoutTokens, FontTokens, IBorderTokens, ISha
   iconWeight?: number;
 
   /**
-   * An object describing the shadow of the button
+   * An object describing the shadow of the button.
    */
   shadowToken?: ShadowToken;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels.
    */
   spacingIconContentBefore?: number;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
    */
   spacingIconContentAfter?: number;
 
@@ -146,7 +145,7 @@ export interface FABTokens extends LayoutTokens, FontTokens, IBorderTokens, ISha
   width?: ViewStyle['width'];
 
   /**
-   * States that can be applied to FAB
+   * States that can be applied to FAB.
    */
   focused?: FABTokens;
   pressed?: FABTokens;

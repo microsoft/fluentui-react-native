@@ -10,12 +10,12 @@ export interface FABSlotProps extends ButtonSlotProps {
 
 export interface FABProps extends ButtonCoreProps {
   /**
-   * FAB text and other content can be hidden with this prop
+   * FAB text and other content can be hidden with this prop.
    * @default 'true'
    */
   showContent?: boolean;
 
-  /** Sets style of FAB to a preset size style
+  /** Sets style of FAB to a preset size style.
    * @default 'large' on android
    */
   size?: FABSize;
@@ -23,7 +23,7 @@ export interface FABProps extends ButtonCoreProps {
 
 export interface FABTokens extends ButtonCoreTokens {
   /**
-   * States that can be applied to FAB
+   * States that can be applied to FAB.
    */
   focused?: FABTokens;
   pressed?: FABTokens;

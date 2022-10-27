@@ -177,9 +177,8 @@ Tokens can be used to customize the styling of the control by using the `customi
 ```ts
 export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
-   * Focused State on Android has inner and outer borders
-   * Outer Border is equivalent to the border tokens from IBorders
-   * This adds inner border support.
+   * Focused State on Android has inner and outer borders.
+   * Outer Border is equivalent to the border tokens from IBorders.
    */
   borderInnerColor?: ColorValue;
   borderInnerRadius?: number;
@@ -202,17 +201,17 @@ export interface ButtonTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   iconWeight?: number;
 
   /**
-   * An object describing the shadow of the button
+   * An object describing the shadow of the button.
    */
   shadowToken?: ShadowToken;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels.
    */
   spacingIconContentBefore?: number;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
    */
   spacingIconContentAfter?: number;
 
