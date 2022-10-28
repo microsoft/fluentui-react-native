@@ -8,6 +8,7 @@ import {
   EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_LINK_TEST_COMPONENT_LABEL,
+  EXPERIMENTAL_LINK_URL,
 } from './consts';
 
 export const LinkE2ETest: React.FunctionComponent = () => {
@@ -18,7 +19,7 @@ export const LinkE2ETest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <Link
-        url="https://www.bing.com/"
+        url={EXPERIMENTAL_LINK_URL}
         testID={EXPERIMENTAL_LINK_TEST_COMPONENT}
         accessibilityLabel={EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL}
       >

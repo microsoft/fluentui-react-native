@@ -4,9 +4,29 @@ import {
   HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
   EXPERIMENTAL_LINK_NO_A11Y_LABEL_COMPONENT,
 } from '../../../TestComponents/LinkExperimental/consts';
-import { BasePage, By } from '../../common/BasePage';
+import { BasePage, By, ComponentSelector } from '../../common/BasePage';
+import { Attribute, Keys } from '../../common/consts';
 
 class ExperimentalLinkPageObject extends BasePage {
+  async click(selector: ComponentSelector) {
+    await (await this.getComponent(selector)).click();
+  }
+
+  async sendKeys(selector: ComponentSelector, keys: Keys[]) {
+    await (await this.getComponent(selector)).addValue(keys);
+  }
+
+  async getHelpText(selector: ComponentSelector) {
+    return await this.getElementAttribute(await this.getComponent(selector), Attribute.HelpText);
+  }
+
+  private async getComponent(selector: ComponentSelector) {
+    if (selector === ComponentSelector.Primary) {
+      return await this._primaryComponent;
+    }
+    return await this._secondaryComponent;
+  }
+
   /*****************************************/
   /**************** Getters ****************/
   /*****************************************/

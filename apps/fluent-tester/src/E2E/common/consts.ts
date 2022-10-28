@@ -22,6 +22,7 @@ export const enum Attribute {
   AccessibilityLabel = 'Name',
   AccessibilityRole = 'ControlType',
   ExpandCollapseState = 'ExpandCollapse.ExpandCollapseState',
+  HelpText = 'HelpText',
   IsEnabled = 'IsEnabled',
   IsFocused = 'HasKeyboardFocus',
   IsRequiredForForm = 'IsRequiredForForm',
