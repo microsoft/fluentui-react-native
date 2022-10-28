@@ -114,7 +114,7 @@ class NavigateAppPage extends BasePage {
   }
 
   async clickAndGoToRadioGroupExperimentalPage() {
-    await this.radioGroupExperimentalPage.click();
+    await await this.radioGroupExperimentalPage.click();
   }
 
   async clickAndGoToSeparatorPage() {
