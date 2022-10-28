@@ -3,7 +3,7 @@ import { StandardUsage } from './StandardUsage';
 import { CustomizeUsage } from './CustomizeUsage';
 import { PressableUsage } from './PressableUsage';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { E2ETextTest } from '../Text/TextE2ETest';
+import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
 import { EXPERIMENTAL_TEXT_TESTPAGE } from './consts';
 import { V2Usage } from './V2Usage';
 
@@ -27,7 +27,7 @@ const textSections: TestSection[] = [
   },
   {
     name: 'E2E Testing for Experimental Text',
-    component: E2ETextTest,
+    component: E2EExperimentalTextTest,
   },
 ];
 

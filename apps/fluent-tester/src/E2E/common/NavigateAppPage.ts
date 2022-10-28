@@ -7,6 +7,7 @@ import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../TestComponents/ContextualMenu/consts';
 import { HOMEPAGE_EXPERIMENTAL_TABS_BUTTON } from '../../TestComponents/TabsExperimental/consts';
+import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from '../../TestComponents/TextExperimental/consts';
 import { HOMEPAGE_FOCUSTRAPZONE_BUTTON } from '../../TestComponents/FocusTrapZone/consts';
 import { HOMEPAGE_FOCUSZONE_BUTTON } from '../../TestComponents/FocusZone/consts';
 import { HOMEPAGE_ICON_BUTTON } from '../../TestComponents/Icon/consts';
@@ -147,6 +148,10 @@ class NavigateAppPage extends BasePage {
     await this.experimentalTabsPage.click();
   }
 
+  async clickAndGoToExperimentalTextPage() {
+    await this.experimentalTextPage.click();
+  }
+
   /*
    ** Returns the StealthButton element on the left-hand column that navigates to each page
    */
@@ -269,6 +274,10 @@ class NavigateAppPage extends BasePage {
 
   private get experimentalTabsPage() {
     return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+  }
+
+  private get experimentalTextPage() {
+    return By(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON);
   }
 }
 
