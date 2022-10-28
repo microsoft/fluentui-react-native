@@ -65,9 +65,14 @@ export const useLink = (props: LinkProps): LinkInfo => {
   /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
   const filteredProps = {
     onKeyUp: Platform.OS === (('win32' as any) || 'windows') ? onKeyUp : undefined,
+    keyUpEvents: Platform.OS === (('win32' as any) || 'windows') ? keyUpEvents : undefined,
+    validKeysUp: undefined,
     onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+    keyDownEvents: Platform.OS === (('win32' as any) || 'windows') ? keyDownEvents : undefined,
+    validKeysDown: undefined,
     onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
     onMouseLeave: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseLeave : undefined,
+    onAccessibilityTap: Platform.OS === (('win32' as any) || 'windows') ? onAccTap : undefined,
   };
 
   return {
@@ -78,7 +83,6 @@ export const useLink = (props: LinkProps): LinkInfo => {
       ...filteredProps,
       accessible: accessible,
       accessibilityRole: 'link',
-      onAccessibilityTap: onAccTap,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: enableFocusRing ?? true,
       focusable: focusable ?? !isDisabled,
