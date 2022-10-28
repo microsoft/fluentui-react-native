@@ -34,7 +34,7 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
-    focusZone: FocusZone,
+    ...(Platform.OS === 'macos' ? { focusZone: FocusZone } : null),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
@@ -51,16 +51,17 @@ export const MenuList = compose<MenuListType>({
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
-            <FocusZone
+            <Slots.focusZone
               componentRef={focusZoneRef}
               focusZoneDirection={'vertical'}
               defaultTabbableElement={focusZoneRef}
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
               enableFocusRing={false}
+              forceFocusMacOS={true}
             >
               {children}
-            </FocusZone>
+            </Slots.focusZone>
           </Slots.root>
         ) : (
           <Slots.root>{children}</Slots.root>
