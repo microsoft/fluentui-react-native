@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 27 Oct 2022 11:09:35 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 21:01:42 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.3
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- FocusZone (macOS): New prop to ignore OS keyboard shortcut preference (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.10.30
 
 ## 0.19.2
 

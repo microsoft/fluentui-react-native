@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import PersonaPageObject from '../pages/PersonaPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { MobilePlatform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Persona Testing Initialization', function () {
@@ -11,7 +10,7 @@ describe('Persona Testing Initialization', function () {
   });
 
   it('Click and navigate to Persona test page', async () => {
-    await PersonaPageObject.mobileScrollToComponentButton(MobilePlatform.iOS);
+    await PersonaPageObject.mobileScrollToComponentButton();
     await PersonaPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

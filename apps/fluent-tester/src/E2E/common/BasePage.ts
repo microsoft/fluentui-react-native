@@ -1,13 +1,36 @@
-import { Keys } from './consts';
+import { Keys, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../TestComponents/Common/consts';
 import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
+// The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
+const PLATFORM = process.env['E2ETEST_PLATFORM'];
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
+let rootView: WebdriverIO.Element | null = null;
+
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
-export function By(identifier: string) {
-  return $('~' + identifier);
+export async function By(identifier: string) {
+  if (PLATFORM === NativePlatform.Windows) {
+    // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
+    return await $('~' + identifier);
+  }
+  return await QueryWithChaining(identifier);
+}
+
+async function QueryWithChaining(identifier) {
+  if (rootView === null) {
+    // Most of the elements we're searching for will be children of this rootView node.
+    rootView = await $('~' + ROOT_VIEW);
+  }
+  const selector = '~' + identifier;
+  let queryResult: WebdriverIO.Element;
+  queryResult = await rootView.$(selector);
+  if (queryResult.error) {
+    // In some cases, such as opened ContextualMenu items, the element nodes are not children of the rootView node, meaning we need to start our search from the top of the tree.
+    queryResult = await $(selector);
+  }
+  return queryResult;
 }
 
 /* The values in this enum map to the UI components we want to test in our app. We use this to
@@ -19,14 +42,14 @@ export const enum ComponentSelector {
 }
 
 export const enum MobilePlatform {
-  iOS = 0,
-  Android,
+  iOS = 'ios',
+  Android = 'android',
 }
 
 export const enum NativePlatform {
-  Win32 = 0,
-  Windows,
-  macOS,
+  Win32 = 'win32',
+  Windows = 'windows',
+  macOS = 'macos',
 }
 
 export type Platform = MobilePlatform | NativePlatform;
@@ -39,6 +62,13 @@ export type Platform = MobilePlatform | NativePlatform;
  *********************************************************************************************************/
 
 export class BasePage {
+  private platform?: Platform;
+
+  constructor() {
+    if (PLATFORM) {
+      this.platform = PLATFORM as Platform;
+    }
+  }
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
@@ -61,16 +91,16 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return await this._testPage.isDisplayed();
+    return (await this._testPage).isDisplayed();
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
   async isButtonInView(): Promise<boolean> {
-    return await this._pageButton.isDisplayed();
+    return await (await this._pageButton).isDisplayed();
   }
 
   async clickComponent(): Promise<void> {
-    await this._primaryComponent.click();
+    await (await this._primaryComponent).click();
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -78,9 +108,8 @@ export class BasePage {
   }
 
   /* Scrolls until the desired test page's button is displayed. We use the scroll viewer UI element as the point to start scrolling.
-   * We use a negative number as the Y-coordinate because that enables us to scroll downwards.
-   * There are no need for win32 and macos cases, as the click command automatically scrolls the element into view. */
-  async mobileScrollToComponentButton(platform: MobilePlatform): Promise<void> {
+   * We use a negative number as the Y-coordinate because that enables us to scroll downwards */
+  async mobileScrollToComponentButton(): Promise<void> {
     if (await (await this._pageButton).isDisplayed()) {
       return;
     }
@@ -88,7 +117,7 @@ export class BasePage {
     const errorMsg =
       'Could not scroll to the ' + this._pageName + "'s Button. Please see Pipeline artifacts for more debugging information.";
 
-    switch (platform) {
+    switch (this.platform) {
       case MobilePlatform.iOS: {
         await browser.waitUntil(
           async () => {
@@ -129,7 +158,7 @@ export class BasePage {
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this._primaryComponent.isDisplayed(), {
+    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
