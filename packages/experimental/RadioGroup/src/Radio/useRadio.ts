@@ -37,7 +37,6 @@ export const useRadio = (props: RadioProps): RadioInfo => {
   /* We don't want to call the user's onChange multiple times on the same selection. */
   const changeSelection = React.useCallback(() => {
     if (value !== radioGroupContext.value) {
-      // && !mergeDisabled
       radioGroupContext.onChange && radioGroupContext.onChange(value);
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
