@@ -30,7 +30,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     ...rest
   } = props;
 
-  const mergeDisabled = radioGroupContext.disabled || disabled;
+  const isDisabled = radioGroupContext.disabled || disabled;
 
   const buttonRef = useViewCommandFocus(componentRef);
 
@@ -46,7 +46,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value === radioGroupContext.value && !mergeDisabled) {
+    if (value === radioGroupContext.value && !isDisabled) {
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
   }, []);
@@ -80,8 +80,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   const state = {
     ...pressable.state,
-    selected: radioGroupContext.value === props.value && !mergeDisabled,
-    disabled: mergeDisabled || false,
+    selected: radioGroupContext.value === props.value && !isDisabled,
+    disabled: isDisabled || false,
     labelPositionBelow: labelPosition === 'below',
   };
 
