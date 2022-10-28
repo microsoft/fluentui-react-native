@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Fri, 28 Oct 2022 22:19:58 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.7.9",
+      "version": "0.7.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "93770d6d89d7bf4f0c19c509ce20a75258420a71",
+            "comment": "added check that default value is not set if disabled"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 21:01:42 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.7.8",
       "version": "0.7.8",

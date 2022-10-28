@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Thu, 27 Oct 2022 21:01:42 GMT and should not be manually modified.
+This log was last generated on Fri, 28 Oct 2022 22:19:58 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.9
+
+Fri, 28 Oct 2022 22:19:58 GMT
+
+### Patches
+
+- added check that default value is not set if disabled (gulnazsayed@microsoft.com)
 
 ## 0.7.8
 
