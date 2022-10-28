@@ -14,7 +14,7 @@ exports.config = {
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'iOS',
-      'appium:platformVersion': '15.5',
+      'appium:platformVersion': '16.0',
       'appium:deviceName': 'iPhone 13',
       'appium:automationName': 'XCUITest',
       'appium:bundleId': 'com.microsoft.ReactTestApp',
@@ -94,6 +94,7 @@ exports.config = {
    */
   beforeSession: function (/*config, capabilities, specs*/) {
     fs.mkdirSync('./errorShots', { recursive: true });
+    process.env['E2ETEST_PLATFORM'] = 'ios';
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global

@@ -1,8 +1,110 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.33
+
+Thu, 27 Oct 2022 13:19:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.29.0
+
+## 0.17.32
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.28.1
+- Bump @fluentui-react-native/experimental-shadow to v0.2.36
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/icon to v0.13.20
+- Bump @fluentui-react-native/interactive-hooks to v0.19.4
+- Bump @fluentui-react-native/pressable to v0.9.26
+- Bump @fluentui-react-native/text to v0.15.11
+- Bump @fluentui-react-native/theme-types to v0.23.0
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.17.31
+
+Thu, 27 Oct 2022 08:31:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.28.0
+
+## 0.17.30
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Update snapshots (changes are the differences between ios and windows tokens) (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.27.2
+- Bump @fluentui-react-native/experimental-shadow to v0.2.35
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/icon to v0.13.19
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+- Bump @fluentui-react-native/pressable to v0.9.25
+- Bump @fluentui-react-native/text to v0.15.10
+
+## 0.17.29
+
+Tue, 25 Oct 2022 20:57:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.27.1
+
+## 0.17.28
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.27.0
+- Bump @fluentui-react-native/experimental-shadow to v0.2.34
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/icon to v0.13.18
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+- Bump @fluentui-react-native/pressable to v0.9.24
+- Bump @fluentui-react-native/text to v0.15.9
+
+## 0.17.27
+
+Thu, 20 Oct 2022 23:16:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.26.2
+- Bump @fluentui-react-native/experimental-shadow to v0.2.33
+
+## 0.17.26
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Fix error when title string is empty (78454019+lyzhan7@users.noreply.github.com)
+- Add spacing tokens to Notification (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/button to v0.26.1
+- Bump @fluentui-react-native/experimental-shadow to v0.2.32
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
+- Bump @fluentui-react-native/pressable to v0.9.23
+
+## 0.17.25
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.26.0
+- Bump @fluentui-react-native/experimental-shadow to v0.2.31
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+- Bump @fluentui-react-native/pressable to v0.9.22
 
 ## 0.17.24
 

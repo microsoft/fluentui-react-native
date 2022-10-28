@@ -2,6 +2,75 @@
   "name": "@fluentui-react-native/default-theme",
   "entries": [
     {
+      "date": "Thu, 27 Oct 2022 11:09:35 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.16.8",
+      "version": "0.16.8",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.21.0",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.23.0",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme to v0.7.7",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.18.0",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Oct 2022 22:47:44 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.16.7",
+      "version": "0.16.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/default-theme",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b",
+            "comment": "Switch platform for tests from ios to win32"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.20.1",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 21 Oct 2022 13:09:26 GMT",
+      "tag": "@fluentui-react-native/default-theme_v0.16.6",
+      "version": "0.16.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/default-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.17.0",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 17 Oct 2022 17:52:49 GMT",
       "tag": "@fluentui-react-native/default-theme_v0.16.5",
       "version": "0.16.5",

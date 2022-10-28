@@ -1,8 +1,63 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Mon, 17 Oct 2022 17:52:49 GMT and should not be manually modified.
+This log was last generated on Thu, 27 Oct 2022 11:09:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.23
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.11
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/interactive-hooks to v0.19.4
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.6.22
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.10
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+
+## 0.6.21
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.9
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+
+## 0.6.20
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
+
+## 0.6.19
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+
+## 0.6.18
+
+Mon, 17 Oct 2022 23:24:26 GMT
+
+### Patches
+
+- Switch Switch to Pressable (sanajmi@microsoft.com)
 
 ## 0.6.17
 

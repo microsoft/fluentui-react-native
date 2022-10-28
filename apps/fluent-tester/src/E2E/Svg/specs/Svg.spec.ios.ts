@@ -1,7 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import SvgPageObject from '../pages/SvgPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
-import { Platform } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Svg Testing Initialization', function () {
@@ -11,7 +10,7 @@ describe('Svg Testing Initialization', function () {
   });
 
   it('Click and navigate to Svg test page', async () => {
-    await SvgPageObject.scrollToComponentButton(Platform.iOS);
+    await SvgPageObject.mobileScrollToComponentButton();
     await SvgPageObject.waitForButtonDisplayed(PAGE_TIMEOUT);
 
     /* Click on component button to navigate to test page */

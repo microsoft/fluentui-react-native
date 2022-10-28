@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Re-enable and rewrite parts of menu e2etest",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -5,16 +5,19 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   accessibilityLabel="Custom FAB with no shadow(iOS)"
   accessibilityRole="button"
   accessible={true}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   iconPosition="before"
   onBlur={[Function]}
+  onClick={[Function]}
   onFocus={[Function]}
-  onHoverIn={[Function]}
-  onHoverOut={[Function]}
-  onPress={[Function]}
-  onPressIn={[Function]}
-  onPressOut={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -27,7 +30,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
       "justifyContent": "center",
       "minHeight": 56,
       "minWidth": 56,
-      "padding": 16,
+      "padding": 20,
       "width": undefined,
     }
   }
@@ -39,7 +42,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
@@ -96,16 +99,19 @@ exports[`Default FAB (iOS) 1`] = `
     accessibilityLabel="Default FAB (iOS)"
     accessibilityRole="button"
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     iconPosition="before"
     onBlur={[Function]}
+    onClick={[Function]}
     onFocus={[Function]}
-    onHoverIn={[Function]}
-    onHoverOut={[Function]}
-    onPress={[Function]}
-    onPressIn={[Function]}
-    onPressOut={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
         "alignItems": "center",
@@ -126,7 +132,7 @@ exports[`Default FAB (iOS) 1`] = `
         "justifyContent": "center",
         "minHeight": 56,
         "minWidth": 56,
-        "padding": 16,
+        "padding": 20,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
         "paddingHorizontal": undefined,
@@ -153,7 +159,7 @@ exports[`Default FAB (iOS) 1`] = `
         Object {
           "color": "#ffffff",
           "fontFamily": "System",
-          "fontSize": 12,
+          "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,
