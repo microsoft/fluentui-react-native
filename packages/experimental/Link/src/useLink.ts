@@ -14,6 +14,7 @@ export const useLink = (props: LinkProps): LinkInfo => {
   const {
     accessible = true,
     accessibilityRole,
+    onKeyUp,
     onKeyDown,
     onPress,
     onAccessibilityTap,
@@ -61,13 +62,20 @@ export const useLink = (props: LinkProps): LinkInfo => {
 
   const linkTooltip = tooltip ?? url ?? undefined;
 
+  /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
+  const filteredProps = {
+    onKeyUp: Platform.OS === (('win32' as any) || 'windows') ? onKeyUp : undefined,
+    onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+    onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
+    onMouseLeave: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseLeave : undefined,
+  };
+
   return {
     props: {
       ...rest,
       ...onKeyUpProps,
       ...pressable.props, // allow user key events to override those set by us
-      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
-      onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
+      ...filteredProps,
       accessible: accessible,
       accessibilityRole: 'link',
       onAccessibilityTap: onAccTap,

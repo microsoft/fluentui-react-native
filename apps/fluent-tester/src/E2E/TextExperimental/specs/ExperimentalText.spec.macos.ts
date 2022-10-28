@@ -6,7 +6,7 @@ import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 describe('Experimental Text Testing Initialization', function () {
   it('Wait for app load', async () => {
     await NavigateAppPage.waitForPageDisplayed(BOOT_APP_TIMEOUT);
-    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy(NavigateAppPage.ERRORMESSAGE_APPLOAD);
+    await expect(await NavigateAppPage.isPageLoaded()).toBeTruthy();
   });
 
   it('Click and navigate to Experimental Text test page', async () => {
@@ -16,6 +16,6 @@ describe('Experimental Text Testing Initialization', function () {
     await NavigateAppPage.clickAndGoToExperimentalTextPage();
     await ExperimentalTextPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
-    await expect(await ExperimentalTextPageObject.isPageLoaded()).toBeTruthy(ExperimentalTextPageObject.ERRORMESSAGE_PAGELOAD);
+    await expect(await ExperimentalTextPageObject.isPageLoaded()).toBeTruthy();
   });
 });

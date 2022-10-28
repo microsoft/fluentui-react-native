@@ -11,7 +11,7 @@ import {
   patchTokens,
   withSlots,
 } from '@fluentui-react-native/framework';
-import { useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
@@ -34,6 +34,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     font,
     italic,
     onAccessibilityTap,
+    onKeyUp,
     onKeyDown,
     onPress,
     size,
@@ -52,6 +53,16 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
 
   /* Only if onPress is set */
   const pressable = useAsPressable({ ...rest, onPress });
+  const textOnPress = React.useCallback(
+    (e) => {
+      if (onPress) {
+        onPress(e);
+      }
+      e.stopPropagation();
+    },
+    [onPress],
+  );
+  const onKeyUpProps = useKeyProps(textOnPress, ' ', 'Enter');
   [tokens] = applyTokenLayers(tokens, textState, cache, (layer) => pressable.state[layer]);
 
   const textAlign = I18nManager.isRTL
@@ -99,12 +110,21 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     }),
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
-  const mergedProps = {
-    ...rest,
-    ...pressable?.props,
-    numberOfLines: truncate || !wrap ? 1 : 0,
+
+  /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
+  const filteredProps = {
+    onKeyUp: Platform.OS === (('win32' as any) || 'windows') ? onKeyUp : undefined,
     onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
     onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
+    onMouseLeave: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseLeave : undefined,
+  };
+
+  const mergedProps = {
+    ...rest,
+    ...onKeyUpProps,
+    ...pressable.props,
+    ...filteredProps,
+    numberOfLines: truncate || !wrap ? 1 : 0,
     onAccessibilityTap: onAccTap,
     style: mergeStyles(tokenStyle, props.style),
   };
