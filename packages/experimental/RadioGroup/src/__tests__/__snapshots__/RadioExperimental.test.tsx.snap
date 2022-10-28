@@ -39,6 +39,8 @@ exports[`Radio component tests Radio default 1`] = `
       "alignItems": "flex-start",
       "borderColor": "transparent",
       "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 2,
       "display": "flex",
       "flexDirection": "row",
       "marginRight": 12,
