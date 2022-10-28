@@ -26,7 +26,7 @@ class MenuButtonPageObject extends BasePage {
 
   /* Whether the menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async menuItemDisplayed(): Promise<boolean> {
-    return await this._menuItem.isDisplayed();
+    return await (await this._menuItem).isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */
