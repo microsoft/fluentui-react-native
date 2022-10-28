@@ -146,7 +146,7 @@ export const tests: TestDescription[] = [
     name: 'Link (Experimental)',
     component: ExperimentalLinkTest,
     testPage: HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
-    platforms: ['win32'],
+    platforms: ['macos', 'win32'],
   },
   {
     name: 'Menu',

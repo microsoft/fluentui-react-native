@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
 const BlueHeaderBold = Link.customize({ variant: 'headerStandard', fontWeight: '700', color: '#0229c4', textAlign: 'right' });
 const CustomLinks: React.FunctionComponent = () => {
   const [linkColor, setLinkColor] = React.useState<string>('blue');
-  const [linkFont, setLinkFont] = React.useState<string>('Ariel');
+  const [linkFont, setLinkFont] = React.useState<string>('System');
   const [linkFontSize, setLinkFontSize] = React.useState<number>(12);
   const [linkText, setLinkText] = React.useState<string>('Click to Navigate');
   const [linkUrl, setLinkUrl] = React.useState<string>('https://www.bing.com/');

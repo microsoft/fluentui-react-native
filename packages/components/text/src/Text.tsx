@@ -35,7 +35,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     italic,
     onAccessibilityTap,
     onKeyUp,
+    keyUpEvents,
     onKeyDown,
+    keyDownEvents,
     onPress,
     size,
     strikethrough,
@@ -62,7 +64,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     },
     [onPress],
   );
-  const onKeyUpProps = useKeyProps(textOnPress, ' ', 'Enter');
+  const keyProps = useKeyProps(textOnPress, ' ', 'Enter');
   [tokens] = applyTokenLayers(tokens, textState, cache, (layer) => pressable.state[layer]);
 
   const textAlign = I18nManager.isRTL
@@ -114,18 +116,22 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
   const filteredProps = {
     onKeyUp: Platform.OS === (('win32' as any) || 'windows') ? onKeyUp : undefined,
+    keyUpEvents: Platform.OS === (('win32' as any) || 'windows') ? keyUpEvents : undefined,
+    validKeysUp: undefined,
     onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
+    keyDownEvents: Platform.OS === (('win32' as any) || 'windows') ? keyDownEvents : undefined,
+    validKeysDown: undefined,
     onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
     onMouseLeave: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseLeave : undefined,
+    onAccessibilityTap: Platform.OS === (('win32' as any) || 'windows') ? onAccTap : undefined,
   };
 
   const mergedProps = {
     ...rest,
-    ...onKeyUpProps,
+    ...keyProps,
     ...pressable.props,
     ...filteredProps,
     numberOfLines: truncate || !wrap ? 1 : 0,
-    onAccessibilityTap: onAccTap,
     style: mergeStyles(tokenStyle, props.style),
   };
 

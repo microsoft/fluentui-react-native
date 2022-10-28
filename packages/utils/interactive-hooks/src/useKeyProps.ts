@@ -28,7 +28,7 @@ export function useKeyCallback(_userCallback?: KeyCallback, ..._keys: string[]) 
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-const noOp2 = (_userCallback: KeyCallback, ..._keys: string[]) => {
+const noOp2: (userCallback: KeyCallback, ...keys: string[]) => KeyPressProps = (_userCallback: KeyCallback, ..._keys: string[]) => {
   return {};
 };
 
