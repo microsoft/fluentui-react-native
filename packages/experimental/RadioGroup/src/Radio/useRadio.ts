@@ -30,6 +30,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     ...rest
   } = props;
 
+  const isDisabled = radioGroupContext.disabled || disabled;
+
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
@@ -44,7 +46,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value === radioGroupContext.value) {
+    if (value === radioGroupContext.value && !isDisabled) {
       radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
   }, []);
@@ -78,8 +80,8 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   const state = {
     ...pressable.state,
-    selected: radioGroupContext.value === props.value,
-    disabled: radioGroupContext.disabled || disabled || false,
+    selected: radioGroupContext.value === props.value && !isDisabled,
+    disabled: isDisabled || false,
     labelPositionBelow: labelPosition === 'below',
   };
 

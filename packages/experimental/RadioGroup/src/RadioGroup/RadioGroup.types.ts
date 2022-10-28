@@ -63,7 +63,9 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   label?: string;
 
   /**
-   * The key of the RadioButton that will initially be selected
+   * The key of the RadioButton that will initially be selected.
+   *
+   * This is mutually-exclusive if radiogroup is disabled or radio button is disabled.
    */
   defaultValue?: string;
 
