@@ -41,7 +41,7 @@ exports[`Radio component tests Radio default 1`] = `
       "borderRadius": 4,
       "display": "flex",
       "flexDirection": "row",
-      "marginRight": 8,
+      "marginRight": 12,
       "marginTop": 0,
       "minHeight": 20,
     }
@@ -55,13 +55,13 @@ exports[`Radio component tests Radio default 1`] = `
         "borderColor": "#616161",
         "borderRadius": 10,
         "borderStyle": "solid",
-        "borderWidth": 1,
+        "borderWidth": 1.5,
         "height": 20,
         "left": 0,
-        "marginBottom": 6,
-        "marginLeft": 6,
-        "marginRight": 6,
-        "marginTop": 4,
+        "marginBottom": undefined,
+        "marginLeft": undefined,
+        "marginRight": undefined,
+        "marginTop": 8,
         "top": 0,
         "width": 20,
       }
@@ -87,6 +87,8 @@ exports[`Radio component tests Radio default 1`] = `
         "alignItems": "flex-start",
         "alignSelf": "center",
         "flexDirection": "column",
+        "marginLeft": 0,
+        "marginRight": 4,
       }
     }
   >
@@ -97,7 +99,7 @@ exports[`Radio component tests Radio default 1`] = `
         Object {
           "color": "#616161",
           "fontFamily": "System",
-          "fontSize": 16,
+          "fontSize": 17,
           "fontWeight": "400",
           "margin": 0,
           "marginTop": 0,
