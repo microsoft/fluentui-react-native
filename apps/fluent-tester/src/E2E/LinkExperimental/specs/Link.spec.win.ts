@@ -1,8 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ExperimentalLinkPageObject from '../pages/LinkPageObject';
-import { ComponentSelector } from '../../common/BasePage';
+import ExperimentalLinkPageObject, { ExperimentalLinkSelector } from '../pages/LinkPageObject';
 import { EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL, EXPERIMENTAL_LINK_URL } from '../../../TestComponents/LinkExperimental/consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, Keys, AttributeValue } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', function () {
@@ -33,17 +32,47 @@ describe('Link Accessibility Testing', () => {
   });
 
   it('Link - Set accessibilityLabel', async () => {
-    await expect(await ExperimentalLinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
-      EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL,
-    );
+    await expect(
+      await ExperimentalLinkPageObject.getElementAttribute(
+        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.First),
+        Attribute.AccessibilityLabel,
+      ),
+    ).toEqual(EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL);
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
   it('Link - Set help text', async () => {
     // This help text gets used in the hyperlink popup when hovered
-    await expect(await ExperimentalLinkPageObject.getHelpText(ComponentSelector.Primary)).toEqual(EXPERIMENTAL_LINK_URL);
+    await expect(
+      await ExperimentalLinkPageObject.getElementAttribute(
+        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.First),
+        Attribute.HelpText,
+      ),
+    ).toEqual(EXPERIMENTAL_LINK_URL);
     // Links that don't go anywhere shouldn't have an alert
-    await expect(await ExperimentalLinkPageObject.getHelpText(ComponentSelector.Secondary)).toBeFalsy();
+    await expect(
+      await ExperimentalLinkPageObject.getElementAttribute(
+        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.Second),
+        Attribute.HelpText,
+      ),
+    ).toBeFalsy();
+
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+
+  it('Link - Disabled link sets isEnabled and isFocusable as false', async () => {
+    await expect(
+      await ExperimentalLinkPageObject.getElementAttribute(
+        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.Third),
+        Attribute.IsEnabled,
+      ),
+    ).toEqual(AttributeValue.false);
+    await expect(
+      await ExperimentalLinkPageObject.getElementAttribute(
+        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.Third),
+        Attribute.IsKeyboardFocusable,
+      ),
+    ).toEqual(AttributeValue.false);
 
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -52,26 +81,32 @@ describe('Link Accessibility Testing', () => {
   // on a Text component which we have testing for in our Text component spec
 });
 
-// describe('Link Functionality Testing', () => {
-//   beforeEach(async () => {
-//     await ExperimentalLinkPageObject.scrollToTestElement();
-//     await ExperimentalLinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-//   });
+describe('Link Functionality Testing', () => {
+  beforeEach(async () => {
+    await ExperimentalLinkPageObject.scrollToTestElement();
+    await ExperimentalLinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+    await ExperimentalLinkPageObject.resetCallback();
+  });
 
-//   // Question: How can we test whether a browser opens up
-//   it('Link - Clicking pops alert', async () => {
-//     await ExperimentalLinkPageObject.saveTesterWindowHandle();
-//     await ExperimentalLinkPageObject.click(ComponentSelector.Secondary);
-//     await expect(await ExperimentalLinkPageObject.verifyAndCloseLinkAlert()).toBeTruthy();
+  // Question: How can we test whether a browser opens up
+  it('Link - Click; onPress callback fires.', async () => {
+    await ExperimentalLinkPageObject.click(ExperimentalLinkSelector.Second);
+    await expect(await ExperimentalLinkPageObject.callbackDidFire()).toBeTruthy();
 
-//     // await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
 
-//   it('Link - Keyboard pops alert', async () => {
-//     await ExperimentalLinkPageObject.saveTesterWindowHandle();
-//     await ExperimentalLinkPageObject.sendKeys(ComponentSelector.Secondary, [Keys.ENTER]);
-//     await expect(await ExperimentalLinkPageObject.verifyAndCloseLinkAlert()).toBeTruthy();
+  it('Link - Press enter; onPress callback fires.', async () => {
+    await ExperimentalLinkPageObject.sendKeys(ExperimentalLinkSelector.Second, [Keys.ENTER]);
+    await expect(await ExperimentalLinkPageObject.callbackDidFire()).toBeTruthy();
 
-//     // await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-//   });
-// });
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+
+  it('Link - Press space; onPress callback fires.', async () => {
+    await ExperimentalLinkPageObject.sendKeys(ExperimentalLinkSelector.Second, [Keys.SPACE]);
+    await expect(await ExperimentalLinkPageObject.callbackDidFire()).toBeTruthy();
+
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});

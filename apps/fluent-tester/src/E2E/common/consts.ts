@@ -25,6 +25,7 @@ export const enum Attribute {
   HelpText = 'HelpText',
   IsEnabled = 'IsEnabled',
   IsFocused = 'HasKeyboardFocus',
+  IsKeyboardFocusable = 'IsKeyboardFocusable',
   IsRequiredForForm = 'IsRequiredForForm',
   IsTogglePatternAvailable = 'IsTogglePatternAvailable',
   ToggleState = 'Toggle.ToggleState',
