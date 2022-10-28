@@ -19,11 +19,13 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           minHeight: 20,
           marginTop: 0,
           marginRight: globalTokens.spacing.s,
-          borderRadius: tokens.borderRadius,
           borderColor: tokens.borderColor,
+          borderWidth: tokens.borderWidth,
+          borderStyle: tokens.borderStyle,
+          borderRadius: tokens.borderRadius,
         },
       }),
-      ['flexDirection', 'borderRadius', 'alignItems', 'borderColor'],
+      ['flexDirection', 'borderRadius', 'alignItems', 'borderColor', 'borderWidth', 'borderStyle'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
@@ -34,7 +36,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           top: 0,
           left: 0,
           borderWidth: tokens.radioBorderWidth,
-          borderStyle: tokens.borderStyle,
+          borderStyle: tokens.radioBorderStyle,
           borderRadius: tokens.radioSize / 2,
           borderColor: tokens.radioBorder,
           marginTop: tokens.marginTop,
@@ -43,7 +45,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginLeft: tokens.marginLeft,
         },
       }),
-      ['radioBorderWidth', 'borderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+      ['radioBorderWidth', 'radioBorderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
     ),
     innerCircle: buildProps(
       (tokens: RadioTokens) => ({

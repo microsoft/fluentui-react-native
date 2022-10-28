@@ -21,7 +21,7 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [requiredPadding, setRequiredPadding] = React.useState<number>(2);
 
   // Radio
-  const [borderColor, setBorderColor] = React.useState<string>('black');
+  const [borderColor, setBorderColor] = React.useState<string>('white');
   const [borderWidth, setBorderWidth] = React.useState<number>(1);
   const [borderRadius, setBorderRadius] = React.useState<number>(1);
   const [radioBorderWidth, setRadioBorderWidth] = React.useState<number>(1);

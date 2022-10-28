@@ -14,6 +14,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorder?: ColorValue;
 
   /**
+   * Indicator border color
+   */
+  radioBorderStyle?: ViewStyle['borderStyle'];
+
+  /**
    * Inner circle color when selected
    */
   radioFill?: ColorValue;

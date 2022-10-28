@@ -12,6 +12,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioBorderWidth: globalTokens.stroke.width.thin,
     radioVisibility: 0,
     variant: 'subheaderStandard',
+    radioBorderStyle: 'solid',
     radioBorder: t.colors.neutralStrokeAccessible,
     color: t.colors.neutralForeground3,
     radioSize: 20,
@@ -34,7 +35,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     labelPositionBelow: {
       flexDirection: 'column',
       alignItems: 'center',
-      marginLeft: globalTokens.spacing.none,
+      marginLeft: globalTokens.spacing.xs,
       labelMarginLeft: globalTokens.spacing.xs,
     },
 
