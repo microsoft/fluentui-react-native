@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
+This log was last generated on Sat, 29 Oct 2022 00:18:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.62
+
+Sat, 29 Oct 2022 00:18:41 GMT
+
+### Patches
+
+- MenuV1 (macOS): Add FocusZone (sanajmi@microsoft.com)
+- MenuV1 (macOS): Update MenuItem tokens (sanajmi@microsoft.com)
 
 ## 1.0.61
 

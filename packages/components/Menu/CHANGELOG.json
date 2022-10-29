@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Sat, 29 Oct 2022 00:18:41 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.62",
+      "version": "1.0.62",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "afd897fce7b8442dcefcb0d92217807f4fa7e70b",
+            "comment": "MenuV1 (macOS): Add FocusZone"
+          },
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "1bfe45236cf9e2db058b31cda686e4a6bdb548fa",
+            "comment": "MenuV1 (macOS): Update MenuItem tokens"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 13:19:00 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.61",
       "version": "1.0.61",

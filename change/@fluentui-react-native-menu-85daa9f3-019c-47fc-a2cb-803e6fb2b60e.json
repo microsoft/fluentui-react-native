@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "MenuV1 (macOS): Add FocusZone",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
