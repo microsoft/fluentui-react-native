@@ -1,9 +1,8 @@
-import { IViewProps } from '@fluentui-react-native/adapters';
-import { InteractionEvent, IWithPressableOptions } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 export const menuTriggerName = 'MenuTrigger';
 
-export interface MenuTriggerChildProps extends Omit<IWithPressableOptions<IViewProps>, 'onPress'> {
+export interface MenuTriggerChildProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A RefObject to refer to the trigger component.
    */
