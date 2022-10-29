@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/switch
 
-This log was last generated on Thu, 27 Oct 2022 11:09:35 GMT and should not be manually modified.
+This log was last generated on Sat, 29 Oct 2022 01:05:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.24
+
+Sat, 29 Oct 2022 01:05:20 GMT
+
+### Patches
+
+- MenuV1: Update types to PressablePropsExtended (sanajmi@microsoft.com)
 
 ## 0.6.23
 

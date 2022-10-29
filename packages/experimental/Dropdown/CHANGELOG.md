@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/dropdown
 
-This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
+This log was last generated on Sat, 29 Oct 2022 01:05:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.8
+
+Sat, 29 Oct 2022 01:05:20 GMT
+
+### Patches
+
+- MenuV1: Update types to PressablePropsExtended (sanajmi@microsoft.com)
 
 ## 0.5.7
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Sat, 29 Oct 2022 00:18:41 GMT and should not be manually modified.
+This log was last generated on Sat, 29 Oct 2022 01:05:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.63
+
+Sat, 29 Oct 2022 01:05:20 GMT
+
+### Patches
+
+- MenuV1: Update types to PressablePropsExtended (sanajmi@microsoft.com)
 
 ## 1.0.62
 

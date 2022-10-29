@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Sat, 29 Oct 2022 01:05:20 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.63",
+      "version": "1.0.63",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "9d5251df615f035066294a17a93e50bead28d7cc",
+            "comment": "MenuV1: Update types to PressablePropsExtended"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 29 Oct 2022 00:18:41 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.62",
       "version": "1.0.62",

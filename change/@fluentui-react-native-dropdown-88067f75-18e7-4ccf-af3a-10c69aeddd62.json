@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "MenuV1: Update types to PressablePropsExtended",
-  "packageName": "@fluentui-react-native/dropdown",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

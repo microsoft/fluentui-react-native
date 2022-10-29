@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Sat, 29 Oct 2022 01:05:20 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.24",
+      "version": "0.6.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "9d5251df615f035066294a17a93e50bead28d7cc",
+            "comment": "MenuV1: Update types to PressablePropsExtended"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 11:09:35 GMT",
       "tag": "@fluentui-react-native/switch_v0.6.23",
       "version": "0.6.23",

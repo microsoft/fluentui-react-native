@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sat, 29 Oct 2022 00:18:41 GMT and should not be manually modified.
+This log was last generated on Sat, 29 Oct 2022 01:05:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.103.16
+
+Sat, 29 Oct 2022 01:05:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/dropdown to v0.5.8
+- Bump @fluentui-react-native/menu to v1.0.63
+- Bump @fluentui-react-native/switch to v0.6.24
 
 ## 0.103.15
 
