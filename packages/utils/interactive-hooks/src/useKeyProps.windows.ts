@@ -2,6 +2,7 @@ import { KeyCallback, KeyPressProps } from './useKeyProps';
 import { KeyPressEvent } from './Pressability/CoreEventTypes';
 import { memoize } from '@fluentui-react-native/memo-cache';
 import * as React from 'react';
+import { isModifierKey } from './isModifierKey';
 
 /**
  * Re-usable hook for an onKeyDown event.
@@ -72,22 +73,3 @@ export const useKeyProps = memoize(getKeyUpPropsWorker);
 
 /** Exposes the behavior of useKeyProps for the current platform as a boolean */
 export const preferKeyDownForKeyEvents = false;
-
-/**
- * Verifies if nativeEvent contains modifier key.
- * @param nativeEvent
- * @returns `true` if one or more of modifier keys are `true`
- */
-export const isModifierKey = (nativeEvent: any): boolean => {
-  return (
-    nativeEvent &&
-    (nativeEvent.alt ||
-      nativeEvent.altKey ||
-      nativeEvent.ctrl ||
-      nativeEvent.ctrlKey ||
-      nativeEvent.meta ||
-      nativeEvent.metaKey ||
-      nativeEvent.shift ||
-      nativeEvent.shiftKey)
-  );
-};
