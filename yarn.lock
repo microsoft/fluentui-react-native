@@ -9762,9 +9762,9 @@ ky@0.30.0:
   integrity sha512-X/u76z4JtDVq10u1JA5UQfatPxgPaVDMYTrgHyiTpGN2z4TMEJkIHsoSBBSg9SWZEIXTKsi9kHgiQ9o3Y/4yog==
 
 lage@^1.5.0:
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.9.2.tgz#bf695205eb0e6f12c3acb704900bbf724e63f6f6"
-  integrity sha512-zu7/iJ5zWI3bKtFR0iQsUmmFTVMnJmq+fOJ63qggRwtJH3RNveo9RGq4/GC7IoobwD3ue/WyFjTa5dO5L4oDFw==
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.9.3.tgz#3573057667a0cf8f52b52a27ec4367ab0655aeb0"
+  integrity sha512-GbJQxcx/059fTyyePUfaO+dMGTSn4OdJNhxTzdFulMEs2345W7vuuKrvPa/GZiEKc/oPs4Mdnz6hbXtT2UKYvg==
   dependencies:
     "@lage-run/logger" "*"
     "@xmldom/xmldom" "^0.8.0"
@@ -9781,7 +9781,7 @@ lage@^1.5.0:
     p-graph "^1.1.1"
     p-limit "^3.1.0"
     p-profiler "^0.2.1"
-    workspace-tools "^0.28.0"
+    workspace-tools "^0.29.0"
     yargs-parser "^18.1.3"
 
 last-run@^1.1.0:
@@ -14376,6 +14376,18 @@ workspace-tools@^0.28.0:
   version "0.28.1"
   resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.28.1.tgz#5cc9e8b224b3464afcca9c9f2f3bfbc38f066587"
   integrity sha512-UmTALcSNAhSBT+oClcYHrudO5JIDPgrlEqyI6YlIkNtTQmqqQQ5jdw62zsN9tY5G8Eg/TP6Wb3GnsPsbj1lsiw==
+  dependencies:
+    "@yarnpkg/lockfile" "^1.1.0"
+    git-url-parse "^13.0.0"
+    globby "^11.0.0"
+    jju "^1.4.0"
+    js-yaml "^4.1.0"
+    micromatch "^4.0.0"
+
+workspace-tools@^0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.29.0.tgz#c7a8cee69a68350cb17e71569f626397dacbf601"
+  integrity sha512-lH7ZLb6BVzf8Nua2MMKfTBbIh+iTBexFRr/OoiXFm8AbNZ8kRL01r+wISnH7vt7lUmuRbod2/6EtyS4koAPpJg==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     git-url-parse "^13.0.0"
