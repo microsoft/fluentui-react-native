@@ -1,7 +1,7 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalLinkPageObject, { ExperimentalLinkSelector } from '../pages/LinkPageObject';
-import { EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL, EXPERIMENTAL_LINK_URL } from '../../../TestComponents/LinkExperimental/consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, Keys, AttributeValue } from '../../common/consts';
+import { EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL } from '../../../TestComponents/LinkExperimental/consts';
+import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', function () {
@@ -38,42 +38,6 @@ describe('Link Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
       ),
     ).toEqual(EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL);
-    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-  });
-
-  it('Link - Set help text', async () => {
-    // This help text gets used in the hyperlink popup when hovered
-    await expect(
-      await ExperimentalLinkPageObject.getElementAttribute(
-        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.First),
-        Attribute.HelpText,
-      ),
-    ).toEqual(EXPERIMENTAL_LINK_URL);
-    // Links that don't go anywhere shouldn't have an alert
-    await expect(
-      await ExperimentalLinkPageObject.getElementAttribute(
-        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.Second),
-        Attribute.HelpText,
-      ),
-    ).toBeFalsy();
-
-    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
-  });
-
-  it('Link - Disabled link sets isEnabled and isFocusable as false', async () => {
-    await expect(
-      await ExperimentalLinkPageObject.getElementAttribute(
-        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.Third),
-        Attribute.IsEnabled,
-      ),
-    ).toEqual(AttributeValue.false);
-    await expect(
-      await ExperimentalLinkPageObject.getElementAttribute(
-        await ExperimentalLinkPageObject.getComponent(ExperimentalLinkSelector.Third),
-        Attribute.IsKeyboardFocusable,
-      ),
-    ).toEqual(AttributeValue.false);
-
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
