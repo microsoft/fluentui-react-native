@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Use global spacing tokens instead of those from `Theme`",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

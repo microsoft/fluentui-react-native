@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Tue, 01 Nov 2022 00:56:44 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.34",
+      "version": "0.17.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/notification",
+            "commit": "b01f0ab82550d0396404299090fbd3c99d90bd5b",
+            "comment": "Use global spacing tokens instead of those from `Theme`"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 13:19:00 GMT",
       "tag": "@fluentui-react-native/notification_v0.17.33",
       "version": "0.17.33",

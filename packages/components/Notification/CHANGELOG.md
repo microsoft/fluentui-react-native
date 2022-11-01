@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
+This log was last generated on Tue, 01 Nov 2022 00:56:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.34
+
+Tue, 01 Nov 2022 00:56:44 GMT
+
+### Patches
+
+- Use global spacing tokens instead of those from `Theme` (adgleitm@microsoft.com)
 
 ## 0.17.33
 
