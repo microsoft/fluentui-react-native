@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added check for modifier key",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

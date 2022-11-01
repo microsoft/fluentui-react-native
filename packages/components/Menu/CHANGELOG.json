@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.64",
+      "version": "1.0.64",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.29",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.31",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.29.1",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sat, 29 Oct 2022 01:05:20 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.63",
       "version": "1.0.63",

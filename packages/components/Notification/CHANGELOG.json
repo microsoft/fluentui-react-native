@@ -2,6 +2,39 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.35",
+      "version": "0.17.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.29.1",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.37",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.27",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 01 Nov 2022 00:56:44 GMT",
       "tag": "@fluentui-react-native/notification_v0.17.34",
       "version": "0.17.34",

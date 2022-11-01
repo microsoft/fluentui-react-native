@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-link",
   "entries": [
     {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/experimental-link_v0.1.6",
+      "version": "0.1.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-link",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 11:09:35 GMT",
       "tag": "@fluentui-react-native/experimental-link_v0.1.5",
       "version": "0.1.5",

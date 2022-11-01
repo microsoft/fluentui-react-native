@@ -4,59 +4,59 @@ module.exports = {
   "0.68": {
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.103.17"
+      "version": "0.103.18"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.27.35"
+      "version": "0.27.36"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
-      "version": "1.2.29"
+      "version": "1.2.30"
     },
     "@fluentui-react-native/badge": {
       "name": "@fluentui-react-native/badge",
-      "version": "0.1.51"
+      "version": "0.1.52"
     },
     "@fluentui-react-native/button": {
       "name": "@fluentui-react-native/button",
-      "version": "0.29.0"
+      "version": "0.29.1"
     },
     "@fluentui-react-native/callout": {
       "name": "@fluentui-react-native/callout",
-      "version": "0.21.28"
+      "version": "0.21.29"
     },
     "@fluentui-react-native/checkbox": {
       "name": "@fluentui-react-native/checkbox",
-      "version": "0.16.32"
+      "version": "0.16.33"
     },
     "@fluentui-react-native/contextual-menu": {
       "name": "@fluentui-react-native/contextual-menu",
-      "version": "0.19.3"
+      "version": "0.19.4"
     },
     "@fluentui-react-native/focus-trap-zone": {
       "name": "@fluentui-react-native/focus-trap-zone",
-      "version": "0.9.27"
+      "version": "0.9.28"
     },
     "@fluentui-react-native/focus-zone": {
       "name": "@fluentui-react-native/focus-zone",
-      "version": "0.10.30"
+      "version": "0.10.31"
     },
     "@fluentui-react-native/link": {
       "name": "@fluentui-react-native/link",
-      "version": "0.17.0"
+      "version": "0.17.1"
     },
     "@fluentui-react-native/menu": {
       "name": "@fluentui-react-native/menu",
-      "version": "1.0.63"
+      "version": "1.0.64"
     },
     "@fluentui-react-native/menu-button": {
       "name": "@fluentui-react-native/menu-button",
-      "version": "0.8.57"
+      "version": "0.8.58"
     },
     "@fluentui-react-native/notification": {
       "name": "@fluentui-react-native/notification",
-      "version": "0.17.34"
+      "version": "0.17.35"
     },
     "@fluentui-react-native/persona": {
       "name": "@fluentui-react-native/persona",
@@ -68,11 +68,11 @@ module.exports = {
     },
     "@fluentui-react-native/pressable": {
       "name": "@fluentui-react-native/pressable",
-      "version": "0.9.26"
+      "version": "0.9.27"
     },
     "@fluentui-react-native/radio-group": {
       "name": "@fluentui-react-native/radio-group",
-      "version": "0.15.32"
+      "version": "0.15.33"
     },
     "@fluentui-react-native/separator": {
       "name": "@fluentui-react-native/separator",
@@ -84,7 +84,7 @@ module.exports = {
     },
     "@fluentui-react-native/tabs": {
       "name": "@fluentui-react-native/tabs",
-      "version": "0.8.1"
+      "version": "0.8.2"
     },
     "@fluentui-react-native/text": {
       "name": "@fluentui-react-native/text",
@@ -132,11 +132,11 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-button": {
       "name": "@fluentui-react-native/experimental-button",
-      "version": "0.16.48"
+      "version": "0.16.49"
     },
     "@fluentui-react-native/experimental-checkbox": {
       "name": "@fluentui-react-native/experimental-checkbox",
-      "version": "0.12.34"
+      "version": "0.12.35"
     },
     "@fluentui-react-native/experimental-drawer": {
       "name": "@fluentui-react-native/experimental-drawer",
@@ -144,7 +144,7 @@ module.exports = {
     },
     "@fluentui-react-native/dropdown": {
       "name": "@fluentui-react-native/dropdown",
-      "version": "0.5.8"
+      "version": "0.5.9"
     },
     "@fluentui-react-native/experimental-expander": {
       "name": "@fluentui-react-native/experimental-expander",
@@ -156,11 +156,11 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-link": {
       "name": "@fluentui-react-native/experimental-link",
-      "version": "0.1.5"
+      "version": "0.1.6"
     },
     "@fluentui-react-native/experimental-menu-button": {
       "name": "@fluentui-react-native/experimental-menu-button",
-      "version": "0.5.6"
+      "version": "0.5.7"
     },
     "@fluentui-react-native/experimental-native-date-picker": {
       "name": "@fluentui-react-native/experimental-native-date-picker",
@@ -172,11 +172,11 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-radio-group": {
       "name": "@fluentui-react-native/experimental-radio-group",
-      "version": "0.7.9"
+      "version": "0.7.10"
     },
     "@fluentui-react-native/experimental-shadow": {
       "name": "@fluentui-react-native/experimental-shadow",
-      "version": "0.2.36"
+      "version": "0.2.37"
     },
     "@fluentui-react-native/experimental-shimmer": {
       "name": "@fluentui-react-native/experimental-shimmer",
@@ -184,11 +184,11 @@ module.exports = {
     },
     "@fluentui-react-native/switch": {
       "name": "@fluentui-react-native/switch",
-      "version": "0.6.24"
+      "version": "0.6.25"
     },
     "@fluentui-react-native/experimental-tabs": {
       "name": "@fluentui-react-native/experimental-tabs",
-      "version": "0.6.1"
+      "version": "0.6.2"
     },
     "@fluentui-react-native/experimental-text": {
       "name": "@fluentui-react-native/experimental-text",
@@ -244,7 +244,7 @@ module.exports = {
     },
     "@fluentui/react-native": {
       "name": "@fluentui/react-native",
-      "version": "0.32.49"
+      "version": "0.32.50"
     },
     "@fluentui-react-native/android-theme": {
       "name": "@fluentui-react-native/android-theme",
@@ -280,7 +280,7 @@ module.exports = {
     },
     "@fluentui-react-native/interactive-hooks": {
       "name": "@fluentui-react-native/interactive-hooks",
-      "version": "0.19.4"
+      "version": "0.19.5"
     },
     "@fluentui-react-native/styling-utils": {
       "name": "@fluentui-react-native/styling-utils",

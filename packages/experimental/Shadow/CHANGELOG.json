@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-shadow",
   "entries": [
     {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/experimental-shadow_v0.2.37",
+      "version": "0.2.37",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-shadow",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.27",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 11:09:35 GMT",
       "tag": "@fluentui-react-native/experimental-shadow_v0.2.36",
       "version": "0.2.36",

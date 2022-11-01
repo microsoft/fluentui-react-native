@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/button_v0.29.1",
+      "version": "0.29.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/experimental-shadow to v0.2.37",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.27",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 13:19:00 GMT",
       "tag": "@fluentui-react-native/button_v0.29.0",
       "version": "0.29.0",
