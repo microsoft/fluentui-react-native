@@ -34,7 +34,7 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
-    ...(Platform.OS === 'macos' ? { focusZone: FocusZone } : null),
+    ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);

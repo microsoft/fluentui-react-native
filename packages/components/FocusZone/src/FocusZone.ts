@@ -29,7 +29,7 @@ export const FocusZone = composable<FocusZoneType>({
       slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), {
         root: {
           ...rest,
-          ...(Platform.OS === 'macos' ? { forceFocus: forceFocusMacOS } : null),
+          ...(Platform.OS === 'macos' && { forceFocus: forceFocusMacOS }),
           defaultTabbableElement: targetNativeTag,
           ref: ftzRef,
           navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',
