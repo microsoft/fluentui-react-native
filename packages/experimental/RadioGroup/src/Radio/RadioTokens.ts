@@ -7,7 +7,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
   ({
     borderColor: t.colors.transparentStroke,
     borderStyle: 'solid',
-    borderWidth: globalTokens.stroke.width.thick,
+    borderWidth: globalTokens.stroke.width.thin,
     borderRadius: globalTokens.corner.radius.medium,
     radioBorderWidth: globalTokens.stroke.width.thin,
     radioVisibility: 0,
@@ -29,8 +29,6 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     marginLeft: globalTokens.spacing.sNudge,
     flexDirection: 'row',
     alignItems: 'flex-start',
-    radioInnerCircleTop: 4,
-    radioInnerCircleLeft: 4,
 
     labelPositionBelow: {
       flexDirection: 'column',

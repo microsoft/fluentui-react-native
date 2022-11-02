@@ -33,8 +33,8 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           backgroundColor: 'transparent',
           width: tokens.radioSize,
           height: tokens.radioSize,
-          top: 0,
-          left: 0,
+          alignItems: 'center',
+          justifyContent: 'center',
           borderWidth: tokens.radioBorderWidth,
           borderStyle: tokens.radioBorderStyle,
           borderRadius: tokens.radioSize / 2,
@@ -55,11 +55,9 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           height: tokens.radioInnerCircleSize,
           width: tokens.radioInnerCircleSize,
           backgroundColor: tokens.radioFill,
-          left: tokens.radioInnerCircleLeft,
-          top: tokens.radioInnerCircleTop,
         },
       }),
-      ['radioInnerCircleSize', 'radioVisibility', 'radioFill', 'radioInnerCircleLeft', 'radioInnerCircleTop'],
+      ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
     labelContent: buildProps(
       (tokens: RadioTokens) => ({

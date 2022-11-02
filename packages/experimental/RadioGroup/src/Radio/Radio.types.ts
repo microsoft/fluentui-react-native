@@ -110,20 +110,6 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   subtextMarginBottom?: ViewStyle['marginBottom'];
 
   /**
-   *
-   * Inner circle top spacing
-   *
-   */
-  radioInnerCircleTop?: number;
-
-  /**
-   *
-   * Inner circle left spacing
-   *
-   */
-  radioInnerCircleLeft?: number;
-
-  /**
    * States that can be applied to a Radio
    */
   labelPositionBelow?: RadioTokens;
