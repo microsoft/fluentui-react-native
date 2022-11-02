@@ -1,6 +1,7 @@
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-@interface FRNFontMetrics : NSObject <RCTBridgeModule>
+@interface FRNFontMetrics : RCTEventEmitter <RCTBridgeModule>
 @end
 
 #import <React/RCTConvert.h>
@@ -26,5 +27,5 @@ typedef NS_ENUM(NSInteger, FRNTextStyle) {
 
 @end
 
-UIFontMetrics * _Nonnull FRNUIFontMetricsForTextStyle(FRNTextStyle textStyle);
+UIFontMetrics *_Nonnull FRNUIFontMetricsForTextStyle(FRNTextStyle textStyle);
 CGFloat FRNBaseSizeForTextStyle(FRNTextStyle textStyle);

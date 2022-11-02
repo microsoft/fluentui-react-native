@@ -1,20 +1,29 @@
 #import "FRNFontMetrics.h"
 
+static NSDictionary<NSString *, NSNumber *> *FRNRecognizedTextStyles() {
+    static NSDictionary<NSString *, NSNumber *> *styles;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        styles = @{
+            @"caption1": @(FRNTextStyleCaption1),
+            @"caption2": @(FRNTextStyleCaption2),
+            @"footnote": @(FRNTextStyleFootnote),
+            @"subheadline": @(FRNTextStyleSubheadline),
+            @"callout": @(FRNTextStyleCallout),
+            @"body": @(FRNTextStyleBody),
+            @"headline": @(FRNTextStyleHeadline),
+            @"title3": @(FRNTextStyleTitle3),
+            @"title2": @(FRNTextStyleTitle2),
+            @"title1": @(FRNTextStyleTitle1),
+            @"largeTitle": @(FRNTextStyleLargeTitle),
+        };
+    });
+    return styles;
+}
+
 @implementation RCTConvert (FRNTextStyle)
 
-RCT_ENUM_CONVERTER(FRNTextStyle, (@{
-    @"caption2": @(FRNTextStyleCaption2),
-    @"caption1": @(FRNTextStyleCaption1),
-    @"footnote": @(FRNTextStyleFootnote),
-    @"subheadline": @(FRNTextStyleSubheadline),
-    @"callout": @(FRNTextStyleCallout),
-    @"body": @(FRNTextStyleBody),
-    @"headline": @(FRNTextStyleHeadline),
-    @"title3": @(FRNTextStyleTitle3),
-    @"title2": @(FRNTextStyleTitle2),
-    @"title1": @(FRNTextStyleTitle1),
-    @"largeTitle": @(FRNTextStyleLargeTitle),
-}), FRNTextStyleUndefined, integerValue)
+RCT_ENUM_CONVERTER(FRNTextStyle, FRNRecognizedTextStyles(), FRNTextStyleUndefined, integerValue)
 
 @end
 
@@ -47,7 +56,7 @@ CGFloat FRNBaseSizeForTextStyle(FRNTextStyle textStyle) {
     static NSDictionary<NSNumber *, NSNumber *> *mapping;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        // Values taken from https://developer.apple.com/design/human-interface-guidelines/foundations/typography/
+        // Values taken from https://developer.apple.com/design/human-interface-guidelines/foundations/typography/#specifications
         mapping = @{
             @(FRNTextStyleCaption2): @11,
             @(FRNTextStyleCaption1): @12,
@@ -67,43 +76,66 @@ CGFloat FRNBaseSizeForTextStyle(FRNTextStyle textStyle) {
     return CGFLOAT_IS_DOUBLE ? [baseSize doubleValue] : [baseSize floatValue];
 }
 
-@implementation FRNFontMetrics
+@implementation FRNFontMetrics {
+    BOOL hasListeners;
+}
 
 + (BOOL)requiresMainQueueSetup
 {
     return YES;
 }
 
-- (NSDictionary *)constantsToExport
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(allScaleFactors)
 {
-    return @{
-        @"styles": @{
-            @"caption1": @(FRNTextStyleCaption1),
-            @"caption2": @(FRNTextStyleCaption2),
-            @"footnote": @(FRNTextStyleFootnote),
-            @"subheadline": @(FRNTextStyleSubheadline),
-            @"callout": @(FRNTextStyleCallout),
-            @"body": @(FRNTextStyleBody),
-            @"headline": @(FRNTextStyleHeadline),
-            @"title3": @(FRNTextStyleTitle3),
-            @"title2": @(FRNTextStyleTitle2),
-            @"title1": @(FRNTextStyleTitle1),
-            @"largeTitle": @(FRNTextStyleLargeTitle),
-        }
-    };
+    NSMutableDictionary *result = [NSMutableDictionary new];
+    [FRNRecognizedTextStyles() enumerateKeysAndObjectsUsingBlock:^(NSString * styleString, __unused NSNumber * boxedTextStyle, __unused BOOL * stop) {
+        result[styleString] = [self scaleFactorForStyle:styleString];
+    }];
+    return result;
 }
 
-RCT_EXPORT_METHOD(calculateScaleFactorForStyle:(FRNTextStyle)style callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(calculateScaleFactorForStyle:(NSString *)style callback:(RCTResponseSenderBlock)callback)
 {
     callback(@[[self scaleFactorForStyle:style]]);
 }
 
-RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(FRNTextStyle)style)
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleString)
 {
+    FRNTextStyle style = [RCTConvert FRNTextStyle:styleString];
     UIFontMetrics *fontMetrics = FRNUIFontMetricsForTextStyle(style);
-    CGFloat baseSize = FRNBaseSizeForTextStyle(style);
+   CGFloat baseSize = FRNBaseSizeForTextStyle(style);
     CGFloat scaleFactor = [fontMetrics scaledValueForValue:baseSize] / baseSize;
     return @(scaleFactor);
+}
+
+#pragma mark - RCTEventEmitter
+
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[ @"onFontMetricsChanged" ];
+}
+
+- (void)startObserving
+{
+    hasListeners = YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onFontMetricsChanged:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
+}
+
+- (void)stopObserving
+{
+    hasListeners = NO;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - Event processing
+
+- (void)onFontMetricsChanged:(NSNotification *)notification {
+    if (hasListeners) {
+        [self sendEventWithName:@"onFontMetricsChanged" body:@{@"newScaleFactors": [self allScaleFactors]}];
+    }
 }
 
 RCT_EXPORT_MODULE();

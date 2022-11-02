@@ -14,7 +14,7 @@ import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
-import { NativeFontMetrics } from '@fluentui-react-native/experimental-native-font-metrics';
+import { useFontMetrics } from '@fluentui-react-native/experimental-native-font-metrics';
 
 const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
@@ -46,6 +46,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 
+  const fontMetrics = useFontMetrics();
+
   const textAlign = I18nManager.isRTL
     ? align === 'start'
       ? 'right'
@@ -66,7 +68,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   );
 
   // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
-  const dynamicTypeVariant = Platform.OS === 'ios' ? NativeFontMetrics.getConstants().styles[(tokens as any).dynamicTypeRamp] : undefined;
+  const dynamicTypeVariant = Platform.OS === 'ios' ? (tokens as any).dynamicTypeRamp : undefined;
 
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
@@ -104,7 +106,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     }
     let scaleStyleAdjustmentProps: ScaleStyleAdjustmentProps = {};
     if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
-      const scaleFactor = NativeFontMetrics.scaleFactorForStyle(dynamicTypeVariant);
+      const scaleFactor = fontMetrics[dynamicTypeVariant] ?? 1;
       scaleStyleAdjustmentProps = {
         fontSize: tokenStyle.fontSize * scaleFactor,
         lineHeight: tokenStyle.lineHeight * scaleFactor,
