@@ -40,7 +40,7 @@ exports[`Radio component tests Radio default 1`] = `
       "borderColor": "transparent",
       "borderRadius": 4,
       "borderStyle": "solid",
-      "borderWidth": 2,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "marginRight": 12,
@@ -53,18 +53,18 @@ exports[`Radio component tests Radio default 1`] = `
   <View
     style={
       Object {
+        "alignItems": "center",
         "backgroundColor": "transparent",
         "borderColor": "#616161",
         "borderRadius": 10,
         "borderStyle": "solid",
         "borderWidth": 1.5,
         "height": 20,
-        "left": 0,
+        "justifyContent": "center",
         "marginBottom": undefined,
         "marginLeft": undefined,
         "marginRight": undefined,
         "marginTop": 8,
-        "top": 0,
         "width": 20,
       }
     }
@@ -75,9 +75,7 @@ exports[`Radio component tests Radio default 1`] = `
           "backgroundColor": undefined,
           "borderRadius": 5,
           "height": 10,
-          "left": 4,
           "opacity": 0,
-          "top": 4,
           "width": 10,
         }
       }
