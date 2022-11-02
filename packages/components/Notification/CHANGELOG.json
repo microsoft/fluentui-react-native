@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/notification",
   "entries": [
     {
+      "date": "Wed, 02 Nov 2022 00:59:45 GMT",
+      "tag": "@fluentui-react-native/notification_v0.17.36",
+      "version": "0.17.36",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/notification",
+            "comment": "Bump @fluentui-react-native/button to v0.29.2",
+            "commit": "3eab416738df9b04a2fdf51b43d2c191843b4ae5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 01 Nov 2022 16:30:56 GMT",
       "tag": "@fluentui-react-native/notification_v0.17.35",
       "version": "0.17.35",

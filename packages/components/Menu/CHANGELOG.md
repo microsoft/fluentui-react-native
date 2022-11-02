@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Tue, 01 Nov 2022 16:30:56 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Nov 2022 00:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.65
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Undo workaround needed for old haul polyfill (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.10.32
+- Bump @fluentui-react-native/button to v0.29.2
 
 ## 1.0.64
 

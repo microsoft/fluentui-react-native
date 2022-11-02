@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 02 Nov 2022 00:59:45 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.65",
+      "version": "1.0.65",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "3eab416738df9b04a2fdf51b43d2c191843b4ae5",
+            "comment": "Undo workaround needed for old haul polyfill"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.32",
+            "commit": "3eab416738df9b04a2fdf51b43d2c191843b4ae5"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.29.2",
+            "commit": "3eab416738df9b04a2fdf51b43d2c191843b4ae5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 01 Nov 2022 16:30:56 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.64",
       "version": "1.0.64",

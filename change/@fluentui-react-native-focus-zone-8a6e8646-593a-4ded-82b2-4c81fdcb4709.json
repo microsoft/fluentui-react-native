@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Undo workaround needed for old haul polyfill",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

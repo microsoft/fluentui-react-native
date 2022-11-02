@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Wed, 02 Nov 2022 00:59:45 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.32",
+      "version": "0.10.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "3eab416738df9b04a2fdf51b43d2c191843b4ae5",
+            "comment": "Undo workaround needed for old haul polyfill"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 01 Nov 2022 16:30:56 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.10.31",
       "version": "0.10.31",
