@@ -418,6 +418,11 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		nextViewToFocus = [self nextValidKeyView];
 		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
+			if ([nextViewToFocus isEqual:focusZoneAncestor])
+			{
+				nextViewToFocus = nil;
+				break;
+			}
 			nextViewToFocus = [nextViewToFocus nextValidKeyView];
 		}
 	}
@@ -453,7 +458,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 	BOOL passthrough = NO;
 	NSView *viewToFocus = nil;
-
+	BOOL noOp = NO;
 	if ([self disabled] || action == FocusZoneActionNone)
 	{
 		passthrough = YES;
@@ -461,6 +466,10 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	else if (action == FocusZoneActionTab || action == FocusZoneActionShiftTab)
 	{
 		viewToFocus = [self nextViewToFocusOutsideZone:action];
+		if (viewToFocus == nil)
+		{
+			noOp = YES;
+		}
 	}
 	else if ((focusZoneDirection == FocusZoneDirectionVertical
 			&& (action == FocusZoneActionRightArrow || action == FocusZoneActionLeftArrow))
@@ -479,6 +488,10 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 	{
 		[[self window] makeFirstResponder:viewToFocus];
 		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
+	}
+	if (noOp == YES)
+	{
+		// No view to focus, do nothing
 	}
 	else
 	{
