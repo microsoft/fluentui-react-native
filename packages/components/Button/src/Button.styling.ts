@@ -1,4 +1,4 @@
-import { buttonName, ButtonCoreTokens, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
+import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, FontTokens } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
@@ -6,8 +6,6 @@ import { defaultButtonColorTokens } from './ButtonColorTokens';
 import { Platform, ColorValue } from 'react-native';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
 import { defaultButtonFontTokens } from './ButtonFontTokens';
-
-export const buttonCoreStates: (keyof ButtonCoreTokens)[] = ['hovered', 'focused', 'pressed', 'disabled', 'hasContent', 'hasIconBefore'];
 
 export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
@@ -32,6 +30,21 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
+    ...(Platform.OS == 'android' && {
+      rippleContainer: buildProps(
+        (tokens: ButtonTokens) => {
+          return {
+            style: {
+              flexDirection: 'row',
+              alignSelf: 'baseline',
+              borderRadius: tokens.borderRadius,
+              overflow: 'hidden',
+            },
+          };
+        },
+        ['borderRadius'],
+      ),
+    }),
     root: buildProps(
       (tokens: ButtonTokens, theme: Theme) => ({
         style: {
@@ -45,8 +58,11 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
           ...borderStyles.from(tokens, theme),
           ...layoutStyles.from(tokens, theme),
         },
+        android_ripple: {
+          color: tokens.rippleColor,
+        },
       }),
-      ['backgroundColor', 'width', ...borderStyles.keys, ...layoutStyles.keys],
+      ['backgroundColor', 'width', 'rippleColor', ...borderStyles.keys, ...layoutStyles.keys],
     ),
     content: buildProps(
       (tokens: ButtonTokens, theme: Theme) => {

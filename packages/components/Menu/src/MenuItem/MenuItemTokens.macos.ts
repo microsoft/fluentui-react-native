@@ -7,25 +7,25 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   backgroundColor: t.colors.transparentBackground,
   borderRadius: 5, // hardcoded for now to match ContextualMenu
   checkmarkSize: 16,
-  submenuIndicatorPadding: globalTokens.spacing.none,
-  submenuIndicatorSize: 16,
-  color: t.colors.neutralForeground2,
+  color: t.colors.menuItemText, // matches ContextualMenu
   fontFamily: t.typography.families.primary,
   fontSize: globalTokens.font.size[300],
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.spacing.xs,
   paddingHorizontal: 5, // hardcoded for now to match ContextualMenu
   paddingVertical: 3, // hardcoded for now to match ContextualMenu
+  submenuIndicatorPadding: globalTokens.spacing.none,
+  submenuIndicatorSize: 16,
   focused: {
-    backgroundColor: t.colors.brandBackground,
-    color: t.colors.brandedContent,
+    backgroundColor: t.colors.menuItemBackgroundHovered,
+    color: t.colors.menuItemTextHovered,
   },
   pressed: {
-    backgroundColor: t.colors.brandBackgroundPressed,
-    color: t.colors.brandedPressedContent,
+    backgroundColor: t.colors.menuItemBackgroundPressed,
+    color: t.colors.menuItemTextHovered,
   },
   disabled: {
-    backgroundColor: t.colors.transparentBackground,
-    color: t.colors.neutralForegroundDisabled,
+    backgroundColor: t.colors.menuBackground,
+    color: t.colors.disabledText,
   },
 });

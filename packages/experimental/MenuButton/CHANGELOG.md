@@ -1,8 +1,80 @@
 # Change Log - @fluentui-react-native/experimental-menu-button
 
-This log was last generated on Fri, 21 Oct 2022 13:09:26 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Nov 2022 00:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.5.8
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.5
+- Bump @fluentui-react-native/experimental-button to v0.16.50
+
+## 0.5.7
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.4
+- Bump @fluentui-react-native/experimental-button to v0.16.49
+
+## 0.5.6
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.3
+
+## 0.5.5
+
+Thu, 27 Oct 2022 13:19:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.16.48
+
+## 0.5.4
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.2
+- Bump @fluentui-react-native/experimental-button to v0.16.47
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.5.3
+
+Thu, 27 Oct 2022 08:31:28 GMT
+
+### Patches
+
+- Ripple changes for RN Pressable (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/experimental-button to v0.16.46
+
+## 0.5.2
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.1
+- Bump @fluentui-react-native/experimental-button to v0.16.45
+- Bump @fluentui-react-native/framework to v0.8.14
+
+## 0.5.1
+
+Tue, 25 Oct 2022 20:57:00 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-button to v0.16.44
 
 ## 0.5.0
 
