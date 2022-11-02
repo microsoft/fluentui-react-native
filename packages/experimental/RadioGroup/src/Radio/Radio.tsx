@@ -9,7 +9,7 @@ import { filterViewProps } from '@fluentui-react-native/adapters';
 import { PressableState } from '@fluentui-react-native/interactive-hooks';
 
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the Radio.
+ * A function which determines if a set of styles should be applied to the component given the current state and props of the Radio.
  *
  * @param layer The name of the state that is being checked for
  * @param state The current state of the Radio

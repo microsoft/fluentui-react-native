@@ -1,8 +1,88 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Nov 2022 00:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.6.3
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.32
+
+## 0.6.2
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.5
+- Bump @fluentui-react-native/focus-zone to v0.10.31
+
+## 0.6.1
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.30
+
+## 0.6.0
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Minor changes
+
+- Snapshot update (email not defined)
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/interactive-hooks to v0.19.4
+- Bump @fluentui-react-native/focus-zone to v0.10.29
+- Bump @fluentui-react-native/text to v0.15.11
+- Bump @fluentui-react-native/tokens to v0.17.6
+- Bump @fluentui-react-native/icon to v0.13.20
+
+## 0.5.31
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+- Bump @fluentui-react-native/focus-zone to v0.10.28
+- Bump @fluentui-react-native/text to v0.15.10
+- Bump @fluentui-react-native/icon to v0.13.19
+
+## 0.5.30
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+- Bump @fluentui-react-native/focus-zone to v0.10.27
+- Bump @fluentui-react-native/text to v0.15.9
+- Bump @fluentui-react-native/icon to v0.13.18
+
+## 0.5.29
+
+Thu, 20 Oct 2022 19:21:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.26
+
+## 0.5.28
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
+- Bump @fluentui-react-native/focus-zone to v0.10.25
 
 ## 0.5.27
 

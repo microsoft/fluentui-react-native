@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/dependency-profiles",
+  "entries": [
+    {
+      "date": "Tue, 25 Oct 2022 15:26:47 GMT",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.1.0",
+      "version": "0.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "26dc5728df883ebe8dae5beae47d04b0bae68806",
+            "comment": "Create dependency profile package for FURN"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { AliasColorTokens, Variants } from '@fluentui-react-native/theme-types';
+import { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native/theme-types';
 
 // API that translates tokens coming for android to Theme color values.
 // This is implemented in a per-plaform fashion, for each endpoint that maps to similar token sets in design - i.e. map to similar
@@ -68,27 +68,59 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
+
+    //Brand tokens.
+    brandBackground: pipelineOutput.brandBackground1.fillColorRest,
+    brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
+    brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
+
+    brandBackground2: pipelineOutput.brandBackground2?.fillColorRest,
+    brandBackground2Pressed: pipelineOutput.brandBackground2?.fillColorPressed,
+    brandBackground2Selected: pipelineOutput.brandBackground2?.fillColorSelected,
+
+    brandBackground3: pipelineOutput.brandBackground3?.fillColorRest,
+    brandBackgroundTint: pipelineOutput.brandBackgroundTint.fillColorRest,
+    brandBackgroundInverted: pipelineOutput.brandBackgroundInverted.fillColorRest,
+
+    brandBackgroundInvertedDisabled: pipelineOutput.brandBackgroundInvertedDisabled.fillColorRest,
+
+    brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
+    brandForeground1Pressed: pipelineOutput.brandForeground1.fillColorPressed,
+    brandForeground1Selected: pipelineOutput.brandForeground1.fillColorSelected,
+
+    brandForegroundTint: pipelineOutput.brandForegroundTint.fillColorRest,
+    brandForegroundDisabled1: pipelineOutput.brandForegroundDisabled1.fillColorRest,
+    brandForegroundDisabled2: pipelineOutput.brandForegroundDisabled2.fillColorRest,
+
+    brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
+    brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
+    brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
   };
 }
 
 export function mapFontPipelineToTheme(pipelineOutput: any): Partial<Variants> {
   return {
     caption1: createVariantValue(pipelineOutput.caption1),
+    caption2: createVariantValue(pipelineOutput.caption2),
+    caption1Strong: createVariantValue(pipelineOutput.caption1Strong),
     body1: createVariantValue(pipelineOutput.body1),
     body1Strong: createVariantValue(pipelineOutput.body1Strong),
     body2: createVariantValue(pipelineOutput.body2),
     body2Strong: createVariantValue(pipelineOutput.body2Strong),
-    subtitle1: createVariantValue(pipelineOutput.subtitle1),
-    subtitle1Strong: createVariantValue(pipelineOutput.subtitle1Strong),
-    subtitle2: createVariantValue(pipelineOutput.subtitle2),
-    subtitle2Strong: createVariantValue(pipelineOutput.subtitle2Strong),
     title1: createVariantValue(pipelineOutput.title1),
-    title1Strong: createVariantValue(pipelineOutput.title1Strong),
+    title2: createVariantValue(pipelineOutput.title2),
+    title3: createVariantValue(pipelineOutput.title3),
     largeTitle: createVariantValue(pipelineOutput.largeTitle),
     display: createVariantValue(pipelineOutput.display),
   };
 }
 
-function createVariantValue(variant: any) {
-  return { face: 'primary', size: variant.fontSize, weight: variant.fontWeight };
+function createVariantValue(variant: any): VariantValue {
+  return {
+    face: variant.fontFamily,
+    size: variant.fontSize,
+    weight: variant.fontWeight,
+    lineHeight: variant.fontLineHeight,
+    letterSpacing: variant.fontLetterSpacing,
+  };
 }

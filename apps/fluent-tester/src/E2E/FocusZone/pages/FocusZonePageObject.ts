@@ -47,7 +47,7 @@ type BooleanGridFocusZoneOption =
 class FocusZonePageObject extends BasePage {
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     const errorMsg = 'The FocusZone UI Element did not load correctly. Please see logs.';
-    await this.waitForCondition(async () => await this._primaryComponent.isDisplayed(), errorMsg, timeout);
+    await this.waitForCondition(async () => await (await this._primaryComponent).isDisplayed(), errorMsg, timeout);
   }
 
   async resetTest() {

@@ -1,8 +1,73 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Tue, 18 Oct 2022 04:06:27 GMT and should not be manually modified.
+This log was last generated on Wed, 02 Nov 2022 00:59:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.32
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Undo workaround needed for old haul polyfill (sanajmi@microsoft.com)
+
+## 0.10.31
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.5
+
+## 0.10.30
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- FocusZone (macOS): New prop to ignore OS keyboard shortcut preference (sanajmi@microsoft.com)
+
+## 0.10.29
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.4
+
+## 0.10.28
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+
+## 0.10.27
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+
+## 0.10.26
+
+Thu, 20 Oct 2022 19:21:06 GMT
+
+### Patches
+
+- FocusZone (macOS): Fix RTL bug (sanajmi@microsoft.com)
+
+## 0.10.25
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- FocusZone (macOS): Calculate distance from origin (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
 
 ## 0.10.24
 
