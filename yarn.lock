@@ -2564,20 +2564,20 @@
     babel-plugin-const-enum "^1.0.0"
 
 "@rnx-kit/cli@^0.14.8":
-  version "0.14.8"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.14.8.tgz#021f1da095e780f50389b5a1fe0e6cabe275bce6"
-  integrity sha512-+63pAQEtWLjdtIMbGX1weJPwd2kTC5kIFjQ0b2Lu5jHg6AYwvrweqW+SWEDI304VERpvm7T2uKMTSyacOAjD3w==
+  version "0.14.9"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/cli/-/cli-0.14.9.tgz#e22d64e64a1d602a4986b531bcc5f1f92112608a"
+  integrity sha512-gIROTzzvGtWvy4VKvDvrDS7dQHO8MdSs7qo/u0cqVxDdZFljkedaBRMYUzs6mbv45EptVl3AE+kssuWkaDGQxg==
   dependencies:
     "@rnx-kit/config" "^0.5.2"
     "@rnx-kit/console" "^1.0.11"
-    "@rnx-kit/dep-check" "^1.12.23"
+    "@rnx-kit/dep-check" "^1.13.4"
     "@rnx-kit/metro-plugin-cyclic-dependencies-detector" "^1.0.21"
     "@rnx-kit/metro-plugin-duplicates-checker" "^2.0.0"
     "@rnx-kit/metro-serializer" "^1.0.11"
     "@rnx-kit/metro-serializer-esbuild" "^0.1.0"
     "@rnx-kit/metro-service" "^3.0.2"
     "@rnx-kit/third-party-notices" "^1.2.13"
-    "@rnx-kit/tools-language" "^1.3.0"
+    "@rnx-kit/tools-language" "^1.4.0"
     "@rnx-kit/tools-node" "^1.2.7"
     "@rnx-kit/tools-react-native" "^1.2.0"
     "@rnx-kit/typescript-react-native-resolver" "^0.2.0"
@@ -2606,7 +2606,7 @@
   dependencies:
     chalk "^4.1.0"
 
-"@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.12.23":
+"@rnx-kit/dep-check@^1.10.1", "@rnx-kit/dep-check@^1.13.4":
   version "1.13.4"
   resolved "https://registry.yarnpkg.com/@rnx-kit/dep-check/-/dep-check-1.13.4.tgz#5eb042fcaf57705a31fb8540a761869617257ec9"
   integrity sha512-5hWg4kfNeduOcSy1AQnv4v7VupVRaqGn07dI/eB6u1dA3nDscjjJrl//PAOZVQBRz9jbv6lXflNhb5QsKYJkSA==
@@ -2694,10 +2694,10 @@
     spdx-expression-parse "^3.0.1"
     yargs "^16.0.0"
 
-"@rnx-kit/tools-language@^1.2.6", "@rnx-kit/tools-language@^1.3.0":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.3.1.tgz#7ab040becedd1426fbc58b0d6f8161df6d949add"
-  integrity sha512-PI5ouRAAT1UavccKw0c/Ufe/jubenU/6TWSphpGK4XdJ4/gV8gz9KOrALbSPrVCr0exrAaqf5p9QyBiPIFpriw==
+"@rnx-kit/tools-language@^1.2.6", "@rnx-kit/tools-language@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@rnx-kit/tools-language/-/tools-language-1.4.0.tgz#6c47e8950ce93b489e99926dbb4fc080ac662875"
+  integrity sha512-RU6AtXR7JzE2CdPpceXV7HRe8s9QMTxCipDaN/TF+SdLyb/Hqf209wJGsut+AFA9/X1vEGbPjTXX3QOBSG7fAg==
 
 "@rnx-kit/tools-node@^1.2.7", "@rnx-kit/tools-node@^1.3.0":
   version "1.3.0"
