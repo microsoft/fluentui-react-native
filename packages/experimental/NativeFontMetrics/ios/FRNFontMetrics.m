@@ -98,7 +98,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleStri
 {
     FRNTextStyle style = [RCTConvert FRNTextStyle:styleString];
     UIFontMetrics *fontMetrics = FRNUIFontMetricsForTextStyle(style);
-   CGFloat baseSize = FRNBaseSizeForTextStyle(style);
+    CGFloat baseSize = FRNBaseSizeForTextStyle(style);
     CGFloat scaleFactor = [fontMetrics scaledValueForValue:baseSize] / baseSize;
     return @(scaleFactor);
 }
