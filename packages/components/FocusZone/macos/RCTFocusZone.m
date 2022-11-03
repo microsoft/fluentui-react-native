@@ -458,6 +458,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 
 	BOOL passthrough = NO;
 	NSView *viewToFocus = nil;
+	// A flag for handling no op cases
 	BOOL noOp = NO;
 	if ([self disabled] || action == FocusZoneActionNone)
 	{
@@ -489,7 +490,7 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		[[self window] makeFirstResponder:viewToFocus];
 		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
 	}
-	if (noOp == YES)
+	else if (noOp)
 	{
 		// No view to focus, do nothing
 	}
