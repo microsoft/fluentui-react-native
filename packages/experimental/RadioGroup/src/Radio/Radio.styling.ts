@@ -19,13 +19,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           minHeight: 20,
           marginTop: 0,
           marginRight: globalTokens.spacing.s,
-          borderColor: tokens.borderColor,
-          borderWidth: tokens.borderWidth,
-          borderStyle: tokens.borderStyle,
           borderRadius: tokens.borderRadius,
         },
       }),
-      ['flexDirection', 'borderRadius', 'alignItems', 'borderColor', 'borderWidth', 'borderStyle'],
+      ['flexDirection', 'borderRadius', 'alignItems'],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
@@ -33,10 +30,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           backgroundColor: 'transparent',
           width: tokens.radioSize,
           height: tokens.radioSize,
-          alignItems: 'center',
-          justifyContent: 'center',
+          top: 0,
+          left: 0,
           borderWidth: tokens.radioBorderWidth,
-          borderStyle: tokens.radioBorderStyle,
+          borderStyle: tokens.borderStyle,
           borderRadius: tokens.radioSize / 2,
           borderColor: tokens.radioBorder,
           marginTop: tokens.marginTop,
@@ -45,7 +42,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginLeft: tokens.marginLeft,
         },
       }),
-      ['radioBorderWidth', 'radioBorderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
+      ['radioBorderWidth', 'borderStyle', 'radioSize', 'radioBorder', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft'],
     ),
     innerCircle: buildProps(
       (tokens: RadioTokens) => ({
@@ -55,22 +52,19 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           height: tokens.radioInnerCircleSize,
           width: tokens.radioInnerCircleSize,
           backgroundColor: tokens.radioFill,
+          left: 4,
+          top: 4,
         },
       }),
       ['radioInnerCircleSize', 'radioVisibility', 'radioFill'],
     ),
-    labelContent: buildProps(
-      (tokens: RadioTokens) => ({
-        style: {
-          alignSelf: 'center',
-          alignItems: 'flex-start',
-          flexDirection: 'column',
-          marginRight: tokens.labelMarginRight,
-          marginLeft: tokens.labelMarginLeft,
-        },
-      }),
-      ['labelMarginRight', 'labelMarginLeft'],
-    ),
+    labelContent: {
+      style: {
+        alignSelf: 'center',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
+      },
+    },
     label: buildProps(
       (tokens: RadioTokens, theme: Theme) => ({
         variant: tokens.variant,
@@ -87,11 +81,12 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         variant: tokens.subtextVariant,
         style: {
           marginTop: tokens.subtextMarginTop,
+          marginRight: tokens.subtextMarginRight,
           marginBottom: tokens.subtextMarginBottom,
           color: tokens.color,
         },
       }),
-      ['subtextMarginTop', 'subtextMarginBottom', 'color', 'subtextVariant'],
+      ['subtextMarginTop', 'subtextMarginRight', 'subtextMarginBottom', 'color', 'subtextVariant'],
     ),
   },
 };
