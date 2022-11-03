@@ -94,11 +94,6 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(allScaleFactors)
     return result;
 }
 
-RCT_EXPORT_METHOD(calculateScaleFactorForStyle:(NSString *)style callback:(RCTResponseSenderBlock)callback)
-{
-    callback(@[[self scaleFactorForStyle:style]]);
-}
-
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleString)
 {
     FRNTextStyle style = [RCTConvert FRNTextStyle:styleString];

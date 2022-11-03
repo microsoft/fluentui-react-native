@@ -19,7 +19,6 @@ export type ScaleFactors = { [K in TextStyle]: number | undefined };
 
 interface NativeFontMetricsInterface {
   allScaleFactors(): ScaleFactors;
-  calculateScaleFactorForStyle(style: TextStyle, callback: (number) => void);
   scaleFactorForStyle(style: TextStyle): number;
 }
 export default NativeFontMetrics as NativeFontMetricsInterface;
