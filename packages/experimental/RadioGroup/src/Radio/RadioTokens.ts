@@ -7,21 +7,19 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
   ({
     borderColor: t.colors.transparentStroke,
     borderStyle: 'solid',
-    borderWidth: globalTokens.stroke.width.thin,
+    borderWidth: globalTokens.stroke.width.thick,
     borderRadius: globalTokens.corner.radius.medium,
     radioBorderWidth: globalTokens.stroke.width.thin,
     radioVisibility: 0,
     variant: 'subheaderStandard',
-    radioBorderStyle: 'solid',
     radioBorder: t.colors.neutralStrokeAccessible,
     color: t.colors.neutralForeground3,
     radioSize: 20,
     radioInnerCircleSize: 10,
     labelMarginTop: globalTokens.spacing.none,
-    labelMarginRight: globalTokens.spacing.xxs,
-    labelMarginLeft: globalTokens.spacing.none,
     subtextVariant: 'caption1',
     subtextMarginTop: globalTokens.spacing.xxs,
+    subtextMarginRight: globalTokens.spacing.xxs,
     subtextMarginBottom: globalTokens.spacing.xxs,
     marginTop: globalTokens.spacing.xs,
     marginRight: globalTokens.spacing.sNudge,
@@ -33,8 +31,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     labelPositionBelow: {
       flexDirection: 'column',
       alignItems: 'center',
-      marginLeft: globalTokens.spacing.xs,
-      labelMarginLeft: globalTokens.spacing.xs,
+      marginLeft: globalTokens.spacing.none,
     },
 
     disabled: {
@@ -54,7 +51,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioBorder: t.colors.compoundBrandStroke1Hover,
         radioFill: t.colors.compoundBrandBackground1Hover,
         color: t.colors.neutralForeground2,
-        radioVisibility: 1,
+        radioVisibility: 0.5,
       },
     },
 
