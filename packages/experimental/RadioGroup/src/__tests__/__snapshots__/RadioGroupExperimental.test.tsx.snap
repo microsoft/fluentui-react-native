@@ -96,10 +96,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
               "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 1.5,
               "display": "flex",
               "flexDirection": "row",
               "marginRight": 12,
@@ -112,18 +109,18 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           <View
             style={
               Object {
-                "alignItems": "center",
                 "backgroundColor": "transparent",
                 "borderColor": "#616161",
                 "borderRadius": 10,
                 "borderStyle": "solid",
                 "borderWidth": 1.5,
                 "height": 20,
-                "justifyContent": "center",
+                "left": 0,
                 "marginBottom": undefined,
                 "marginLeft": undefined,
                 "marginRight": undefined,
                 "marginTop": 8,
+                "top": 0,
                 "width": 20,
               }
             }
@@ -134,7 +131,9 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
                   "backgroundColor": undefined,
                   "borderRadius": 5,
                   "height": 10,
+                  "left": 4,
                   "opacity": 0,
+                  "top": 4,
                   "width": 10,
                 }
               }
@@ -146,8 +145,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
                 "alignItems": "flex-start",
                 "alignSelf": "center",
                 "flexDirection": "column",
-                "marginLeft": 0,
-                "marginRight": 4,
               }
             }
           >
@@ -205,10 +202,7 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           style={
             Object {
               "alignItems": "flex-start",
-              "borderColor": "transparent",
               "borderRadius": 4,
-              "borderStyle": "solid",
-              "borderWidth": 1.5,
               "display": "flex",
               "flexDirection": "row",
               "marginRight": 12,
@@ -221,18 +215,18 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
           <View
             style={
               Object {
-                "alignItems": "center",
                 "backgroundColor": "transparent",
                 "borderColor": "#0078d4",
                 "borderRadius": 10,
                 "borderStyle": "solid",
                 "borderWidth": 1.5,
                 "height": 20,
-                "justifyContent": "center",
+                "left": 0,
                 "marginBottom": undefined,
                 "marginLeft": undefined,
                 "marginRight": undefined,
                 "marginTop": 8,
+                "top": 0,
                 "width": 20,
               }
             }
@@ -243,7 +237,9 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
                   "backgroundColor": "#0078d4",
                   "borderRadius": 5,
                   "height": 10,
+                  "left": 4,
                   "opacity": 1,
+                  "top": 4,
                   "width": 10,
                 }
               }
@@ -255,8 +251,6 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
                 "alignItems": "flex-start",
                 "alignSelf": "center",
                 "flexDirection": "column",
-                "marginLeft": 0,
-                "marginRight": 4,
               }
             }
           >
@@ -379,10 +373,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         style={
           Object {
             "alignItems": "flex-start",
-            "borderColor": "transparent",
             "borderRadius": 4,
-            "borderStyle": "solid",
-            "borderWidth": 1.5,
             "display": "flex",
             "flexDirection": "row",
             "marginRight": 12,
@@ -395,18 +386,18 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "#616161",
               "borderRadius": 10,
               "borderStyle": "solid",
               "borderWidth": 1.5,
               "height": 20,
-              "justifyContent": "center",
+              "left": 0,
               "marginBottom": undefined,
               "marginLeft": undefined,
               "marginRight": undefined,
               "marginTop": 8,
+              "top": 0,
               "width": 20,
             }
           }
@@ -417,7 +408,9 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
                 "backgroundColor": undefined,
                 "borderRadius": 5,
                 "height": 10,
+                "left": 4,
                 "opacity": 0,
+                "top": 4,
                 "width": 10,
               }
             }
@@ -429,8 +422,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "alignItems": "flex-start",
               "alignSelf": "center",
               "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 4,
             }
           }
         >
@@ -488,10 +479,7 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         style={
           Object {
             "alignItems": "flex-start",
-            "borderColor": "transparent",
             "borderRadius": 4,
-            "borderStyle": "solid",
-            "borderWidth": 1.5,
             "display": "flex",
             "flexDirection": "row",
             "marginRight": 12,
@@ -504,18 +492,18 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         <View
           style={
             Object {
-              "alignItems": "center",
               "backgroundColor": "transparent",
               "borderColor": "#0078d4",
               "borderRadius": 10,
               "borderStyle": "solid",
               "borderWidth": 1.5,
               "height": 20,
-              "justifyContent": "center",
+              "left": 0,
               "marginBottom": undefined,
               "marginLeft": undefined,
               "marginRight": undefined,
               "marginTop": 8,
+              "top": 0,
               "width": 20,
             }
           }
@@ -526,7 +514,9 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
                 "backgroundColor": "#0078d4",
                 "borderRadius": 5,
                 "height": 10,
+                "left": 4,
                 "opacity": 1,
+                "top": 4,
                 "width": 10,
               }
             }
@@ -538,8 +528,6 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "alignItems": "flex-start",
               "alignSelf": "center",
               "flexDirection": "column",
-              "marginLeft": 0,
-              "marginRight": 4,
             }
           }
         >
