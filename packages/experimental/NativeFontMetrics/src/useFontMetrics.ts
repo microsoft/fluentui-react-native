@@ -1,11 +1,17 @@
 import { useMemo } from 'react';
-import { NativeEventEmitter } from 'react-native';
+import { NativeEventEmitter, Platform } from 'react-native';
 import { useSubscription } from 'use-subscription';
-import NativeFontMetrics, { ScaleFactors } from './NativeFontMetrics';
+import NativeFontMetrics from './NativeFontMetrics';
+import { ScaleFactors } from './NativeFontMetrics.types';
 
 const eventEmitter = new NativeEventEmitter(NativeFontMetrics as any);
 
 export function useFontMetrics(): ScaleFactors {
+  if (Platform.OS !== 'ios') {
+    console.warn('NativeFontMetrics is only available on iOS');
+    return {};
+  }
+
   const subscription = useMemo(
     () => ({
       getCurrentValue: () => NativeFontMetrics.allScaleFactors(),
