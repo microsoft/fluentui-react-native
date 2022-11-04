@@ -48,7 +48,7 @@ UIFontMetrics *FRNUIFontMetricsForTextStyle(FRNTextStyle textStyle) {
         };
     });
 
-    id uiFontTextStyle = mapping[@(textStyle)] ?: UIFontTextStyleBody; // Default to body if we don't recognize the specified ramp
+    UIFontTextStyle uiFontTextStyle = mapping[@(textStyle)] ?: UIFontTextStyleBody; // Default to body if we don't recognize the specified ramp
     return [UIFontMetrics metricsForTextStyle:uiFontTextStyle];
 }
 
