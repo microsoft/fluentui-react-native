@@ -1439,6 +1439,7 @@ exports[`Tabs props 1`] = `
             numberOfLines={0}
             style={
               Object {
+                "color": "#bdbdbd",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
                 "fontWeight": "400",
