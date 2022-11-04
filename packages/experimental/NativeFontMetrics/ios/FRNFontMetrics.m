@@ -77,7 +77,7 @@ CGFloat FRNBaseSizeForTextStyle(FRNTextStyle textStyle) {
 }
 
 @implementation FRNFontMetrics {
-    BOOL hasListeners;
+    BOOL _hasListeners;
 }
 
 + (BOOL)requiresMainQueueSetup
@@ -112,7 +112,7 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleStri
 
 - (void)startObserving
 {
-    hasListeners = YES;
+    _hasListeners = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(onFontMetricsChanged:)
                                                  name:UIContentSizeCategoryDidChangeNotification
@@ -121,14 +121,14 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleStri
 
 - (void)stopObserving
 {
-    hasListeners = NO;
+    _hasListeners = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Event processing
 
 - (void)onFontMetricsChanged:(NSNotification *)notification {
-    if (hasListeners) {
+    if (_hasListeners) {
         [self sendEventWithName:@"onFontMetricsChanged" body:@{@"newScaleFactors": [self allScaleFactors]}];
     }
 }
