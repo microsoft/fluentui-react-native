@@ -48,7 +48,7 @@ UIFontMetrics *FRNUIFontMetricsForTextStyle(FRNTextStyle textStyle) {
         };
     });
 
-    id uiFontTextStyle = mapping[@(textStyle)] ?: UIFontTextStyleBody; // Default to body if we don't recognize the specified ramp
+    UIFontTextStyle uiFontTextStyle = mapping[@(textStyle)] ?: UIFontTextStyleBody; // Default to body if we don't recognize the specified ramp
     return [UIFontMetrics metricsForTextStyle:uiFontTextStyle];
 }
 
@@ -94,16 +94,11 @@ RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(allScaleFactors)
     return result;
 }
 
-RCT_EXPORT_METHOD(calculateScaleFactorForStyle:(NSString *)style callback:(RCTResponseSenderBlock)callback)
-{
-    callback(@[[self scaleFactorForStyle:style]]);
-}
-
 RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(scaleFactorForStyle:(NSString *)styleString)
 {
     FRNTextStyle style = [RCTConvert FRNTextStyle:styleString];
     UIFontMetrics *fontMetrics = FRNUIFontMetricsForTextStyle(style);
-   CGFloat baseSize = FRNBaseSizeForTextStyle(style);
+    CGFloat baseSize = FRNBaseSizeForTextStyle(style);
     CGFloat scaleFactor = [fontMetrics scaledValueForValue:baseSize] / baseSize;
     return @(scaleFactor);
 }

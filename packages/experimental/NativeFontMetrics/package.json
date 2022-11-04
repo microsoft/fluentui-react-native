@@ -32,8 +32,10 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@types/react-native": "^0.68.0",
+    "@types/use-subscription": "1.0.0",
     "react": "17.0.2",
-    "react-native": "^0.68.0"
+    "react-native": "^0.68.0",
+    "use-subscription": ">=1.0.0 <1.6.0"
   },
   "peerDependencies": {
     "react": "17.0.2",
@@ -45,7 +47,6 @@
     "kitType": "library",
     "capabilities": [
       "core",
-      "core-android",
       "core-ios",
       "react"
     ]
