@@ -432,6 +432,12 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		nextViewToFocus = [self previousValidKeyView];
 		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
+			// there are no views left in the key view loop
+			if ([nextViewToFocus isEqual:focusZoneAncestor])
+			{
+				nextViewToFocus = nil;
+				break;
+			}
 			nextViewToFocus = [nextViewToFocus previousValidKeyView];
 		}
 
