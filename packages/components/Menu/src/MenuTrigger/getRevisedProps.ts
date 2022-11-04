@@ -48,5 +48,5 @@ function getRevisedPropsWorker(state: MenuTriggerState, props: any): MenuTrigger
     };
   }
 
-  return { ...revisedProps };
+  return revisedProps;
 }
