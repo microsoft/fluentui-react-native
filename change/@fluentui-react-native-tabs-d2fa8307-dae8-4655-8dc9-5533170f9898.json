@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "missingTokens",
+  "packageName": "@fluentui-react-native/tabs",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
