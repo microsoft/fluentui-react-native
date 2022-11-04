@@ -1,10 +1,19 @@
 import * as React from 'react';
 import { Radio } from '../Radio/Radio';
 import * as renderer from 'react-test-renderer';
+import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 describe('Radio component tests', () => {
   it('Radio default', () => {
     const tree = renderer.create(<Radio value="key1" label="Default Radio" />).toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it('RadioGroup simple rendering does not invalidate styling', () => {
+    checkRenderConsistency(() => <Radio value="key1" label="Default Radio" />, 2);
+  });
+
+  it('RadioGroup re-renders correctly', () => {
+    checkReRender(() => <Radio value="key1" label="Render twice" />, 2);
   });
 });
