@@ -47,6 +47,7 @@
     "kitType": "library",
     "capabilities": [
       "core",
+      "core-android",
       "core-ios",
       "react"
     ]
