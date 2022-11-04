@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/theming-ramp",
-  "version": "0.17.7",
+  "version": "0.17.8",
   "description": "Theming Library",
   "repository": {
     "type": "git",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@uifabricshared/foundation-settings": ">=0.12.1 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.1.7",
-    "@fluentui-react-native/theme-types": ">=0.23.0 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.23.1 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
