@@ -1372,7 +1372,7 @@ exports[`Tabs props 1`] = `
           <Text
             style={
               Object {
-                "color": "#bdbdbd",
+                "color": "neutralForegroundDisabled",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
                 "fontWeight": "400",
