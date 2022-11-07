@@ -14,10 +14,9 @@ import {
   useAsPressable,
   useKeyProps,
   useViewCommandFocus,
-  createIconProps,
   useOnPressWithFocus,
 } from '@fluentui-react-native/interactive-hooks';
-import { Icon } from '@fluentui-react-native/icon';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 
 /**
  * @deprecated This component is deprecated in favor of ButtonV1. This Button will be removed when the package moves to 1.0.0.

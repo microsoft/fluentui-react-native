@@ -2,8 +2,7 @@ import React from 'react';
 import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { ButtonProps, ButtonTokens, ButtonV1 as Button } from '@fluentui-react-native/button';
 import { mergeProps, stagedComponent } from '@fluentui-react-native/framework';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
 import { NotificationProps } from './Notification.types';
 
 export type NotificationButtonColorStates = { disabledColor; pressedColor };
