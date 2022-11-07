@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ScreenRect, Text, View } from 'react-native';
 import { Button, Callout } from '@fluentui/react-native';
-import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL } from './consts';
+import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from './consts';
 
 export const E2ECalloutTest: React.FunctionComponent = () => {
   const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
@@ -35,6 +35,7 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
 
       {showCustomizedCallout && (
         <Callout
+          testID={CALLOUT_TEST_COMPONENT}
           anchorRect={myRect}
           onDismiss={onDismissCustomizedCallout}
           onShow={onShowCustomizedCallout}

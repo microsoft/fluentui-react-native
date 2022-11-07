@@ -320,6 +320,7 @@ const StandardCallout: React.FunctionComponent = () => {
       {showStandardCallout && (
         <Callout
           {...{
+            testID: 'hello_world',
             doNotTakePointerCapture: openCalloutOnHoverAnchor ?? undefined,
             target: anchorRef,
             onDismiss: onDismissStandardCallout,
