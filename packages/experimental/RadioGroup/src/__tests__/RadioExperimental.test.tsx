@@ -9,6 +9,11 @@ describe('Radio component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('Radio disabled', () => {
+    const tree = renderer.create(<Radio disabled value="key1" label="Disabled Radio" />);
+    expect(tree).toMatchSnapshot();
+  });
+
   it('Radio simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <Radio value="key1" label="Default Radio" />, 2);
   });
