@@ -111,4 +111,14 @@ describe('RadioGroup Functional Testing', async () => {
     await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.Fourth)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
+
+  it('Validate circular navigation', async () => {
+    // Presses the ArrowDown key while the fourth (D) Radio is selected
+    await RadioGroupExperimentalPageObject.sendKey(Keys.ARROW_DOWN, RadioSelector.Fourth);
+    await RadioGroupExperimentalPageObject.waitForRadioSelected(RadioSelector.First, 5000); // It should go to first Radio to follow circular navigation
+
+    /* Validate the Radio is selected */
+    await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.First)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
 });
