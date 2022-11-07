@@ -1,6 +1,13 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import RadioGroupExperimentalPageObject, { RadioSelector } from '../pages/RadioGroupExperimentalPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
+import { ComponentSelector } from '../../common/BasePage';
+import { RADIOBUTTON_A11Y_ROLE, RADIOGROUP_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
+import {
+  RADIOGROUP_ACCESSIBILITY_LABEL,
+  RADIOGROUP_TEST_COMPONENT_LABEL,
+  FIRST_RADIO_ACCESSIBILITY_LABEL,
+  SECOND_RADIO_LABEL,
+} from '../../../TestComponents/RadioGroupExperimental/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('RadioGroup/Radio Testing Initialization', function () {
@@ -17,6 +24,50 @@ describe('RadioGroup/Radio Testing Initialization', function () {
     await RadioGroupExperimentalPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await RadioGroupExperimentalPageObject.isPageLoaded()).toBeTruthy();
+  });
+});
+
+describe('RadioGroup/Radio Accessibility Testing', () => {
+  /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
+  beforeEach(async () => {
+    await RadioGroupExperimentalPageObject.scrollToTestElement();
+    await RadioGroupExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+  });
+
+  it("Validate RadioGroup's accessibilityRole is correct", async () => {
+    await expect(await RadioGroupExperimentalPageObject.getAccessibilityRole()).toEqual(RADIOGROUP_A11Y_ROLE);
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it("Validate Radio's accessibilityRole is correct", async () => {
+    await expect(await RadioGroupExperimentalPageObject.getRadioAccesibilityRole()).toEqual(RADIOBUTTON_A11Y_ROLE);
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('RadioGroup - Set accessibilityLabel', async () => {
+    await expect(await RadioGroupExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
+      RADIOGROUP_ACCESSIBILITY_LABEL,
+    );
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('RadioGroup - Do not set accessibilityLabel -> Default to RadioGroup label', async () => {
+    await expect(await RadioGroupExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
+      RADIOGROUP_TEST_COMPONENT_LABEL,
+    );
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Radio - Set accessibilityLabel', async () => {
+    await expect(await RadioGroupExperimentalPageObject.getRBAccessibilityLabel(RadioSelector.First)).toEqual(
+      FIRST_RADIO_ACCESSIBILITY_LABEL,
+    );
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Radio - Do not set accessibilityLabel -> Default to RadioButton label', async () => {
+    await expect(await RadioGroupExperimentalPageObject.getRBAccessibilityLabel(RadioSelector.Second)).toEqual(SECOND_RADIO_LABEL);
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
