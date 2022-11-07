@@ -4,11 +4,11 @@ module.exports = {
   "0.68": {
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.103.21"
+      "version": "0.103.22"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.27.39"
+      "version": "0.27.40"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -176,7 +176,7 @@ module.exports = {
     },
     "@fluentui-react-native/experimental-radio-group": {
       "name": "@fluentui-react-native/experimental-radio-group",
-      "version": "0.7.13"
+      "version": "0.7.14"
     },
     "@fluentui-react-native/experimental-shadow": {
       "name": "@fluentui-react-native/experimental-shadow",

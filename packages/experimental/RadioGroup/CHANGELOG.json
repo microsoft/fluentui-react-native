@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Mon, 07 Nov 2022 22:34:28 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.7.14",
+      "version": "0.7.14",
+      "comments": {
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "commit": "40cf24d6a6c102d171cc67393d4baab3256c638b",
+            "comment": "changing visibility of radio fill"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 07 Nov 2022 21:42:58 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.7.13",
       "version": "0.7.13",
