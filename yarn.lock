@@ -12099,15 +12099,14 @@ react-native-svg@12.3.0:
     css-select "^4.2.1"
     css-tree "^1.0.0-alpha.39"
 
-react-native-test-app@^1.6.2:
-  version "1.6.20"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-1.6.20.tgz#ab9a6315c81fb080d7b14e0c5f8ab6983bb95d90"
-  integrity sha512-uAiiARR61kPf2JUUSVHPXOgM7D0WTS/zRXEGSj09vpzf1KxLZdcBdFLy7IkqvsKo6tXlBTyPKwdLWORXVHfEPw==
+react-native-test-app@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.0.2.tgz#132b601199f4cddadd24c26237dfeda5b918b0e2"
+  integrity sha512-OZeVBwTjndLCyh7/L8TYTcbSdE2oV+mPoY0AD4awTKLMaLFycfT0cSEWlfSdj8Va2KPj+AmXwfQIoI9l6/w7/Q==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
     prompts "^2.4.0"
-    rimraf "^3.0.0"
     semver "^7.3.5"
     uuid "^8.3.2"
     yargs "^16.0.0"

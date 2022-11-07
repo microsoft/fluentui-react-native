@@ -18,6 +18,7 @@ if [ -z "${RCT_NO_LAUNCH_PACKAGER+xxx}" ] ; then
   fi
 fi
 }
+
 use_flipper!(false)
 use_test_app! do |target|
   target.app do
