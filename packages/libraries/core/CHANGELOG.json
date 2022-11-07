@@ -2,6 +2,45 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Mon, 07 Nov 2022 21:42:58 GMT",
+      "tag": "@fluentui/react-native_v0.32.53",
+      "version": "0.32.53",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.19.7",
+            "commit": "1c37d1859d1ed1009e1efe0e894ada950483a9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.34",
+            "commit": "1c37d1859d1ed1009e1efe0e894ada950483a9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.8.61",
+            "commit": "1c37d1859d1ed1009e1efe0e894ada950483a9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/radio-group to v0.15.36",
+            "commit": "1c37d1859d1ed1009e1efe0e894ada950483a9bf"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.9.1",
+            "commit": "1c37d1859d1ed1009e1efe0e894ada950483a9bf"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 04 Nov 2022 14:36:23 GMT",
       "tag": "@fluentui/react-native_v0.32.52",
       "version": "0.32.52",
