@@ -10,12 +10,7 @@ import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens,
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 
-import {
-  useAsPressable,
-  useKeyProps,
-  useViewCommandFocus,
-  useOnPressWithFocus,
-} from '@fluentui-react-native/interactive-hooks';
+import { useAsPressable, useKeyProps, useViewCommandFocus, useOnPressWithFocus } from '@fluentui-react-native/interactive-hooks';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
 
 /**

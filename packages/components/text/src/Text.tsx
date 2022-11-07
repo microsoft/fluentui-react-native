@@ -62,14 +62,14 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     : align;
 
   const textOnPress = React.useCallback(
-      (e) => {
-        if (onPress) {
-          onPress(e);
-        }
-        e.stopPropagation();
-      },
-      [onPress],
-    );
+    (e) => {
+      if (onPress) {
+        onPress(e);
+      }
+      e.stopPropagation();
+    },
+    [onPress],
+  );
   const keyProps = useKeyProps(textOnPress, ' ', 'Enter');
 
   const onAccTap = React.useCallback(
