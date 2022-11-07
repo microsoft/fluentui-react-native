@@ -108,3 +108,112 @@ exports[`Radio component tests Radio default 1`] = `
   </View>
 </View>
 `;
+
+exports[`Radio component tests Radio disabled 1`] = `
+<View
+  accessibilityActions={
+    Array [
+      Object {
+        "name": "Select",
+      },
+    ]
+  }
+  accessibilityLabel="Disabled Radio"
+  accessibilityPositionInSet={0}
+  accessibilityRole="radio"
+  accessibilitySetSize={0}
+  accessibilityState={
+    Object {
+      "disabled": true,
+      "selected": false,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={false}
+  labelPosition="after"
+  onAccessibilityAction={[Function]}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "borderRadius": 4,
+      "display": "flex",
+      "flexDirection": "row",
+      "marginRight": 12,
+      "marginTop": 0,
+      "minHeight": 20,
+    }
+  }
+  value="key1"
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "borderColor": "#bdbdbd",
+        "borderRadius": 10,
+        "borderStyle": "solid",
+        "borderWidth": 1.5,
+        "height": 20,
+        "left": 0,
+        "marginBottom": undefined,
+        "marginLeft": undefined,
+        "marginRight": undefined,
+        "marginTop": 8,
+        "top": 0,
+        "width": 20,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": undefined,
+          "borderRadius": 5,
+          "height": 10,
+          "left": 4,
+          "opacity": 0,
+          "top": 4,
+          "width": 10,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "flex-start",
+        "alignSelf": "center",
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#bdbdbd",
+          "fontFamily": "System",
+          "fontSize": 17,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      Disabled Radio
+    </Text>
+  </View>
+</View>
+`;
