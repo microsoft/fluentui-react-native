@@ -2178,10 +2178,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@office-iss/react-native-win32@>=0.68.0 <0.68.6":
-  version "0.68.5"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.68.5.tgz#db7a893292eca61c088383dfcb99dc6604f41589"
-  integrity sha512-ZNZE2LBmSegaP7i6hxKxOI3qz2OYnuvSlFk7uUXVREzDGX+pxnguQqB9JJV5T/ar6XI38vzqE/B+JWOqW7Bjgg==
+"@office-iss/react-native-win32@>=0.68.0 <=0.68.8":
+  version "0.68.8"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.68.8.tgz#d45925c70491934980c04d5a772b103a1661a0b5"
+  integrity sha512-47auu9rgKerO0JWOz8F6P8/EkbtkEbspBZJzoSdN4jXxu9iM1aQtAXOmw3aoFzpNOUxvsZ6RJb79rAt276VxlA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
