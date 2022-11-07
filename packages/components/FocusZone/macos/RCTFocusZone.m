@@ -492,11 +492,8 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		[[self window] makeFirstResponder:viewToFocus];
 		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
 	}
-	else if (viewToFocus == nil)
-	{
-		// No view to focus, do nothing
-	}
-	else
+	// Call super only if there are views to focus
+	else if (viewToFocus != nil)
 	{
 		[super keyDown:event];
 	}
