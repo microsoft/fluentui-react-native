@@ -21,6 +21,9 @@ export const THIRD_RADIO = 'Third_Radio';
 /* E2E Testing RadioButton 1 (4 of 4) */
 export const FOURTH_RADIO = 'Fourth_Radio';
 
+/* E2E Testing RadioButton 2 (5 of 8) */
+export const FIFTH_RADIO = 'Fifth_Radio';
+
 /********************************************************************/
 /********************* E2E Testing RadioGroup 2 *********************/
 /********************************************************************/

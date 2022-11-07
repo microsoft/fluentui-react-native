@@ -10,6 +10,7 @@ import {
   SECOND_RADIO,
   THIRD_RADIO,
   FOURTH_RADIO,
+  FIFTH_RADIO,
   FIRST_RADIO_ACCESSIBILITY_LABEL,
   SECOND_RADIO_LABEL,
 } from './consts';
@@ -31,7 +32,7 @@ export const E2ERadioGroupExperimentalTest: React.FunctionComponent = () => {
           <Radio label="Option D" value="C" testID={FOURTH_RADIO} />
         </RadioGroup>
         <RadioGroup label={RADIOGROUP_TEST_COMPONENT_LABEL} testID={RADIOGROUP_NO_A11Y_LABEL_COMPONENT}>
-          <Radio label="Option W" value="W" />
+          <Radio label="Option W" value="W" testID={FIFTH_RADIO} />
           <Radio label="Option X" value="X" />
           <Radio label="Option Y (disabled)" value="C" disabled={true} />
           <Radio label="Option Z" value="Z" />

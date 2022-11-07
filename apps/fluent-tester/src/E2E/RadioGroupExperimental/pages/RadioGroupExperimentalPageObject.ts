@@ -7,8 +7,10 @@ import {
   SECOND_RADIO,
   THIRD_RADIO,
   FOURTH_RADIO,
+  FIFTH_RADIO,
 } from '../../../TestComponents/RadioGroupExperimental/consts';
 import { BasePage, By } from '../../common/BasePage';
+import { Attribute, AttributeValue } from '../../common/consts';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The main RadioGroup we are testing has FOUR Radios. The spec file will
@@ -18,6 +20,7 @@ export const enum RadioSelector {
   Second, // this._secondRadio
   Third, // this._thirdRadio
   Fourth, // this._fourthRadio
+  Fifth, // this._fifthRadio
 }
 
 class RadioGroupExperimentalPage extends BasePage {
@@ -43,6 +46,10 @@ class RadioGroupExperimentalPage extends BasePage {
     return await (await this.getRadio(radioSelector)).isSelected();
   }
 
+  async isRadioFocused(radioSelector: RadioSelector): Promise<boolean> {
+    return (await this.getElementAttribute(await this.getRadio(radioSelector), Attribute.IsFocused)) == AttributeValue.true;
+  }
+
   async clickRadio(radioSelector: RadioSelector): Promise<void> {
     await (await this.getRadio(radioSelector)).click();
   }
@@ -51,6 +58,14 @@ class RadioGroupExperimentalPage extends BasePage {
     await browser.waitUntil(async () => await this.isRadioSelected(radioSelector), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: 'Radio was not selected correctly.',
+      interval: 1000,
+    });
+  }
+
+  async waitForRadioFocused(radioSelector: RadioSelector, timeout?: number): Promise<void> {
+    await browser.waitUntil(async () => await this.isRadioFocused(radioSelector), {
+      timeout: timeout ?? this.waitForUiEvent,
+      timeoutMsg: 'Radio was not focused correctly.',
       interval: 1000,
     });
   }
@@ -68,8 +83,10 @@ class RadioGroupExperimentalPage extends BasePage {
       return await this._secondRadio;
     } else if (radioSelector == RadioSelector.Third) {
       return await this._thirdRadio;
-    } else {
+    } else if (radioSelector == RadioSelector.Fourth) {
       return await this._fourthRadio;
+    } else {
+      return await this._fifthRadio;
     }
   }
 
@@ -115,6 +132,10 @@ class RadioGroupExperimentalPage extends BasePage {
 
   get _fourthRadio() {
     return By(FOURTH_RADIO);
+  }
+
+  get _fifthRadio() {
+    return By(FIFTH_RADIO);
   }
 }
 

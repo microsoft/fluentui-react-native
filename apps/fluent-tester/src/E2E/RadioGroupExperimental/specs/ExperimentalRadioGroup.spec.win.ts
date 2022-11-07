@@ -121,4 +121,14 @@ describe('RadioGroup Functional Testing', async () => {
     await expect(await RadioGroupExperimentalPageObject.isRadioSelected(RadioSelector.First)).toBeTruthy();
     await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
+
+  it('Validate tab out of RadioGroup', async () => {
+    // Presses the Tab key while the second (B) Radio is selected in first RadioGroup
+    await RadioGroupExperimentalPageObject.sendKey(Keys.TAB, RadioSelector.Second);
+    await RadioGroupExperimentalPageObject.waitForRadioFocused(RadioSelector.Fifth, 5000);
+
+    /* Validate the Radio is not focused */
+    await expect(await RadioGroupExperimentalPageObject.isRadioFocused(RadioSelector.Fifth)).toBeTruthy();
+    await expect(await RadioGroupExperimentalPageObject.didAssertPopup()).toBeFalsy(RadioGroupExperimentalPageObject.ERRORMESSAGE_ASSERT);
+  });
 });
