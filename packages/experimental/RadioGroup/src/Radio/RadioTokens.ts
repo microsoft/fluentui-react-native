@@ -51,7 +51,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
         radioBorder: t.colors.compoundBrandStroke1Hover,
         radioFill: t.colors.compoundBrandBackground1Hover,
         color: t.colors.neutralForeground2,
-        radioVisibility: 0.5,
+        radioVisibility: 1,
       },
     },
 

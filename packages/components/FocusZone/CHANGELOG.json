@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Mon, 07 Nov 2022 21:42:58 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.34",
+      "version": "0.10.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "6f086d9beaa1aea80f475f62d8bdb80f3c855c83",
+            "comment": "Fix infinite loop in ContextualMenu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Nov 2022 14:36:23 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.33",
+      "version": "0.10.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.6",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 02 Nov 2022 00:59:45 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.10.32",
       "version": "0.10.32",
