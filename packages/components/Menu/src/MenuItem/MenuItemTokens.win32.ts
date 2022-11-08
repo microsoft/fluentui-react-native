@@ -9,7 +9,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   checkmarkSize: 16,
   color: t.colors.neutralForeground1,
   fontFamily: t.typography.families.primary,
-  fontSize: globalTokens.font.size[200],
+  fontSize: globalTokens.font.size200,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.spacing.xs,
   minHeight: 24,

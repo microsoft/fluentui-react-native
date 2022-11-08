@@ -9,7 +9,7 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   checkmarkSize: 16,
   color: t.colors.menuItemText, // matches ContextualMenu
   fontFamily: t.typography.families.primary,
-  fontSize: globalTokens.font.size[300],
+  fontSize: globalTokens.font.size300,
   fontWeight: globalTokens.font.weight.regular as FontWeightValue,
   gap: globalTokens.spacing.xs,
   paddingHorizontal: 5, // hardcoded for now to match ContextualMenu
