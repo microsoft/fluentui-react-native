@@ -6,7 +6,7 @@ import { BadgeTokens } from './Badge.types';
 export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
   ({
     iconSize: 12,
-    borderWidth: globalTokens.stroke.width.thin,
+    borderWidth: globalTokens.stroke.width10,
     bottom: globalTokens.spacing.none,
     right: globalTokens.spacing.none,
     textMargin: globalTokens.spacing.xxs,
