@@ -51,9 +51,10 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
 
 export const ShadowDepthTestSection: React.FunctionComponent = () => {
   const theme = useFluentTheme();
+  const backgroundViewStyle = shadowTestPageStyles(theme).backgroundColor;
 
   return (
-    <View style={shadowTestPageStyles(theme).backgroundColor}>
+    <View style={backgroundViewStyle}>
       <ShadowTestBox shadowDepthText="Shadow 2" shadowToken={theme.shadows.shadow2} />
       <ShadowTestBox shadowDepthText="Shadow 4" shadowToken={theme.shadows.shadow4} />
       <ShadowTestBox shadowDepthText="Shadow 8" shadowToken={theme.shadows.shadow8} />
