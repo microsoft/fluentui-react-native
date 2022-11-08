@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Fri, 04 Nov 2022 14:36:23 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 19:22:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.35
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+
+## 0.10.34
+
+Mon, 07 Nov 2022 21:42:58 GMT
+
+### Patches
+
+- Fix infinite loop in ContextualMenu (email not defined)
 
 ## 0.10.33
 

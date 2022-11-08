@@ -1,8 +1,36 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Fri, 04 Nov 2022 14:36:23 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 19:22:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.15
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.35
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+- Bump @fluentui-react-native/text to v0.15.13
+- Bump @fluentui-react-native/theme-tokens to v0.21.2
+
+## 0.7.14
+
+Mon, 07 Nov 2022 22:34:28 GMT
+
+### Patches
+
+- changing visibility of radio fill (gulnazsayed@microsoft.com)
+
+## 0.7.13
+
+Mon, 07 Nov 2022 21:42:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.34
 
 ## 0.7.12
 
