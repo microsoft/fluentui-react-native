@@ -31,7 +31,7 @@ export function paletteFromFabricColors(p: FabricWebPalette, isInverted?: boolea
     defaultStateBackground: p.neutralLighterAlt,
 
     errorText: !isInverted ? p.redDark : '#ff5f5f',
-    warningText: !isInverted ? globalTokens.color.grey['20'] : globalTokens.color.white,
+    warningText: !isInverted ? globalTokens.color.grey20 : globalTokens.color.white,
     errorBackground: !isInverted ? 'rgba(245, 135, 145, .2)' : 'rgba(232, 17, 35, .5)',
     blockingBackground: !isInverted ? 'rgba(250, 65, 0, .2)' : 'rgba(234, 67, 0, .5)',
     warningBackground: !isInverted ? 'rgba(255, 200, 10, .2)' : 'rgba(255, 251, 0, .6)',
