@@ -23,8 +23,8 @@ export interface FluentTesterProps {
 
 interface HeaderProps {
   enableSinglePaneView?: boolean;
-  showBackButton?: boolean;
-  onBackButtonPressed?: () => void;
+  enableBackButtonIOS?: boolean;
+  onBackButtonPressedIOS?: () => void;
 }
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
@@ -60,7 +60,7 @@ const TestListSeparator = Separator.customize((t) => ({
 }));
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
-  const { enableSinglePaneView, showBackButton, onBackButtonPressed } = props;
+  const { enableSinglePaneView, enableBackButton: showBackButton, onBackButtonPressed } = props;
   const theme = useTheme();
 
   const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
@@ -77,8 +77,8 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
       </Text>
       <View style={fluentTesterStyles.header}>
         {/* On iOS, We need a back button */}
-        {Platform.OS === 'ios' && showBackButton && (
-          <Button appearance="subtle" style={fluentTesterStyles.backButton} onClick={onBackButtonPressed}>
+        {Platform.OS === 'ios' && (
+          <Button appearance="subtle" style={fluentTesterStyles.backButton} onClick={onBackButtonPressed} disabled={!showBackButton}>
             ‹ Back
           </Button>
         )}
@@ -113,6 +113,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
 
+  const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
   const TestList: React.FunctionComponent = React.memo(() => {
@@ -184,7 +185,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     // TODO: Figure out why making this view accessible breaks element querying on iOS.
     <View accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW} style={commonTestStyles.flex}>
       <RootView style={themedStyles.root}>
-        <Header enableSinglePaneView={enableSinglePaneView} showBackButton={!onTestListView} onBackButtonPressed={onBackPress} />
+        <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
         <HeaderSeparator />
         <View style={fluentTesterStyles.testRoot}>
           {enableSinglePaneView ? <MobileTestList /> : <TestList />}
