@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "update @office-iss/react-native-win32 to 0.68.8",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/adapters
 
-This log was last generated on Fri, 14 Oct 2022 19:11:13 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.0
+
+Tue, 08 Nov 2022 22:18:43 GMT
+
+### Minor changes
+
+- add accessibilityLevel prop to Text on Win32 (krsiler@microsoft.com)
 
 ## 0.9.3
 

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "add accessibilityLevel prop to Text on Win32",
-  "packageName": "@fluentui-react-native/adapters",
-  "email": "krsiler@microsoft.com",
-  "dependentChangeType": "patch"
-}

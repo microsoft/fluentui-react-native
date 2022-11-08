@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Tue, 08 Nov 2022 20:41:54 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.28.0
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Minor changes
+
+- add accessibilityLevel prop for Text on Win32 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.104.0
 
 ## 0.27.42
 
