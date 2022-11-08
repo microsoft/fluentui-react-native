@@ -2168,10 +2168,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@office-iss/react-native-win32@>=0.68.0 <0.68.6":
-  version "0.68.5"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.68.5.tgz#db7a893292eca61c088383dfcb99dc6604f41589"
-  integrity sha512-ZNZE2LBmSegaP7i6hxKxOI3qz2OYnuvSlFk7uUXVREzDGX+pxnguQqB9JJV5T/ar6XI38vzqE/B+JWOqW7Bjgg==
+"@office-iss/react-native-win32@^0.68.0":
+  version "0.68.8"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.68.8.tgz#d45925c70491934980c04d5a772b103a1661a0b5"
+  integrity sha512-47auu9rgKerO0JWOz8F6P8/EkbtkEbspBZJzoSdN4jXxu9iM1aQtAXOmw3aoFzpNOUxvsZ6RJb79rAt276VxlA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
@@ -2210,10 +2210,10 @@
     whatwg-fetch "^3.0.0"
     ws "^6.1.4"
 
-"@office-iss/rex-win32@0.68.15-devmain.15717.10000":
-  version "0.68.15-devmain.15717.10000"
-  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.68.15-devmain.15717.10000.tgz#09617f11b8d22eb7c53cce86d99c3c2af9a69d61"
-  integrity sha512-nujbwUa8eF24aXxKemvkUgddlE3fiIp1IWuzTwVX8H9bRzUzPAuk5Jp+iu1QeCiiWoyMsej5loMDwCZMxiACFg==
+"@office-iss/rex-win32@0.68.19-devmain.15905.10000":
+  version "0.68.19-devmain.15905.10000"
+  resolved "https://registry.yarnpkg.com/@office-iss/rex-win32/-/rex-win32-0.68.19-devmain.15905.10000.tgz#cfb06734c19a88906a4df0e287148b98371e2681"
+  integrity sha512-/9cJ4mZbPDXrPu0USZDa6QkoWwopfgfFH/NHrh9cj1cktzyNQTJw4KLzfUJWZNuInYJG5KV1Zcmr/fg5JExFgQ==
   dependencies:
     command-line-args "^5.0.2"
     command-line-usage "^5.0.5"
