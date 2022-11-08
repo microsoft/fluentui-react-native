@@ -2,6 +2,45 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Tue, 08 Nov 2022 19:22:01 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.7.15",
+      "version": "0.7.15",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.10.35",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.17",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.7",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/text to v0.15.13",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.21.2",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 07 Nov 2022 22:34:28 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.7.14",
       "version": "0.7.14",
