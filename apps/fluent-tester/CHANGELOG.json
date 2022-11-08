@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 08 Nov 2022 20:41:54 GMT",
+      "tag": "@fluentui-react-native/tester_v0.103.24",
+      "version": "0.103.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "4519df076d9b6d7e07b2081a58665e1d22c5f6a7",
+            "comment": "Shadow test page background color"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 08 Nov 2022 19:22:01 GMT",
       "tag": "@fluentui-react-native/tester_v0.103.23",
       "version": "0.103.23",

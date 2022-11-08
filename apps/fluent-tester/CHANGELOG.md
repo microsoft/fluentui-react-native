@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 08 Nov 2022 19:22:01 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 20:41:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.103.24
+
+Tue, 08 Nov 2022 20:41:54 GMT
+
+### Patches
+
+- Shadow test page background color (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.103.23
 
