@@ -117,7 +117,7 @@
     "webdriverio": "7.23.0"
   },
   "peerDependencies": {
-    "@office-iss/react-native-win32": ">=0.68.0 <=0.68.8"
+    "@office-iss/react-native-win32": "^0.68.0"
   },
   "jest": {
     "preset": "react-native"
