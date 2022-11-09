@@ -30,14 +30,14 @@ export function useViewCommandFocus(
        */
       if (localRef) {
         localRef.focus = () => {
-          const commands = UIManager.getViewManagerConfig('RCTView').Commands;
-          if ('focus' in commands) {
+          const commands = UIManager.getViewManagerConfig('RCTView')?.Commands;
+          if (commands != null && 'focus' in commands) {
             UIManager.dispatchViewManagerCommand(findNodeHandle(localRef), commands.focus, null);
           }
         };
         localRef.blur = () => {
-          const commands = UIManager.getViewManagerConfig('RCTView').Commands;
-          if ('blur' in commands) {
+          const commands = UIManager.getViewManagerConfig('RCTView')?.Commands;
+          if (commands != null && 'blur' in commands) {
             UIManager.dispatchViewManagerCommand(findNodeHandle(localRef), commands.blur, null);
           }
         };
