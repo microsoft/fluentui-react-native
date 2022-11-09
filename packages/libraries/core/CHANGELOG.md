@@ -1,8 +1,54 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Mon, 07 Nov 2022 21:42:58 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.55
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.30.0
+- Bump @fluentui-react-native/callout to v0.21.32
+- Bump @fluentui-react-native/checkbox to v0.17.0
+- Bump @fluentui-react-native/contextual-menu to v0.19.9
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.31
+- Bump @fluentui-react-native/focus-zone to v0.11.0
+- Bump @fluentui-react-native/interactive-hooks to v0.20.0
+- Bump @fluentui-react-native/link to v0.17.4
+- Bump @fluentui-react-native/menu-button to v0.8.63
+- Bump @fluentui-react-native/persona to v0.13.19
+- Bump @fluentui-react-native/persona-coin to v0.12.0
+- Bump @fluentui-react-native/pressable to v0.9.30
+- Bump @fluentui-react-native/radio-group to v0.16.0
+- Bump @fluentui-react-native/separator to v0.13.0
+- Bump @fluentui-react-native/tabs to v0.10.0
+- Bump @fluentui-react-native/text to v0.15.14
+
+## 0.32.54
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.29.4
+- Bump @fluentui-react-native/callout to v0.21.31
+- Bump @fluentui-react-native/checkbox to v0.16.35
+- Bump @fluentui-react-native/contextual-menu to v0.19.8
+- Bump @fluentui-react-native/focus-trap-zone to v0.9.30
+- Bump @fluentui-react-native/focus-zone to v0.10.35
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+- Bump @fluentui-react-native/link to v0.17.3
+- Bump @fluentui-react-native/menu-button to v0.8.62
+- Bump @fluentui-react-native/persona to v0.13.18
+- Bump @fluentui-react-native/persona-coin to v0.11.18
+- Bump @fluentui-react-native/pressable to v0.9.29
+- Bump @fluentui-react-native/radio-group to v0.15.37
+- Bump @fluentui-react-native/separator to v0.12.17
+- Bump @fluentui-react-native/tabs to v0.9.2
+- Bump @fluentui-react-native/text to v0.15.13
 
 ## 0.32.53
 
