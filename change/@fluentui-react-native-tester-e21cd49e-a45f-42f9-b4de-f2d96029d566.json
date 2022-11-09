@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Modify and re-enable callout e2e tests",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
