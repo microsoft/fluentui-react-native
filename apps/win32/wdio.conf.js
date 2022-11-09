@@ -12,11 +12,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 exports.config = {
   runner: 'local', // Where should your test be launched
   specs: ['../fluent-tester/src/E2E/**/specs/*.win.ts'],
-  exclude: [
-    '../fluent-tester/src/E2E/Icon/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Svg/specs/*.win.ts',
-    '../fluent-tester/src/E2E/Persona/specs/*.win.ts',
-  ],
+  exclude: [],
 
   capabilities: [
     {
