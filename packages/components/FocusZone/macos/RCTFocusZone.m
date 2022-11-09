@@ -418,6 +418,12 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		nextViewToFocus = [self nextValidKeyView];
 		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
+			// there are no views left in the key view loop
+			if ([nextViewToFocus isEqual:focusZoneAncestor])
+			{
+				nextViewToFocus = nil;
+				break;
+			}
 			nextViewToFocus = [nextViewToFocus nextValidKeyView];
 		}
 	}
@@ -426,6 +432,12 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		nextViewToFocus = [self previousValidKeyView];
 		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
+			// there are no views left in the key view loop
+			if ([nextViewToFocus isEqual:focusZoneAncestor])
+			{
+				nextViewToFocus = nil;
+				break;
+			}
 			nextViewToFocus = [nextViewToFocus previousValidKeyView];
 		}
 
@@ -480,7 +492,8 @@ static RCTFocusZone *GetFocusZoneAncestor(NSView *view)
 		[[self window] makeFirstResponder:viewToFocus];
 		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
 	}
-	else
+	// Call super only if there are views to focus
+	else if (viewToFocus != nil)
 	{
 		[super keyDown:event];
 	}

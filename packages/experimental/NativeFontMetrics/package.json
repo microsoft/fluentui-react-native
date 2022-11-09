@@ -1,0 +1,54 @@
+{
+  "name": "@fluentui-react-native/experimental-native-font-metrics",
+  "version": "0.2.0",
+  "description": "A temporary partial wrapper for UIFontMetrics.",
+  "license": "MIT",
+  "author": "Microsoft <fluentuinativeowners@microsoft.com>",
+  "homepage": "https://github.com/microsoft/fluentui-react-native",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "onPublish": {
+    "main": "lib-commonjs/index.js",
+    "module": "lib/index.js"
+  },
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "just": "fluentui-scripts",
+    "clean": "fluentui-scripts clean",
+    "lint": "fluentui-scripts eslint",
+    "depcheck": "fluentui-scripts depcheck",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/NativeFontMetrics"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "@types/react-native": "^0.68.0",
+    "@types/use-subscription": "1.0.0",
+    "react": "17.0.2",
+    "react-native": "^0.68.0",
+    "use-subscription": ">=1.0.0 <1.6.0"
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
+    "react-native": "^0.68.0"
+  },
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "core-ios",
+      "react"
+    ]
+  }
+}

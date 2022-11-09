@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-tabs",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "A cross-platform Experimental Tabs component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,21 +26,21 @@
     "directory": "packages/experimental/Tabs"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.8.16",
-    "@fluentui-react-native/interactive-hooks": ">=0.19.6 <1.0.0",
-    "@fluentui-react-native/focus-zone": ">=0.10.33 <1.0.0",
-    "@fluentui-react-native/text": ">=0.15.12 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.17.7 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.18",
+    "@fluentui-react-native/interactive-hooks": ">=0.20.0 <1.0.0",
+    "@fluentui-react-native/focus-zone": ">=0.11.0 <1.0.0",
+    "@fluentui-react-native/text": ">=0.15.14 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.17.8 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0",
-    "@fluentui-react-native/icon": "0.13.21",
-    "@fluentui-react-native/adapters": "0.9.3",
+    "@fluentui-react-native/icon": "0.14.0",
+    "@fluentui-react-native/adapters": "0.10.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
-    "@office-iss/react-native-win32": ">=0.68.0 <0.68.6",
+    "@office-iss/react-native-win32": "^0.68.0",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
     "react-native": "^0.68.0"
