@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/adapters",
   "entries": [
     {
+      "date": "Tue, 08 Nov 2022 22:18:43 GMT",
+      "tag": "@fluentui-react-native/adapters_v0.10.0",
+      "version": "0.10.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/adapters",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae",
+            "comment": "add accessibilityLevel prop to Text on Win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 14 Oct 2022 19:11:13 GMT",
       "tag": "@fluentui-react-native/adapters_v0.9.3",
       "version": "0.9.3",
