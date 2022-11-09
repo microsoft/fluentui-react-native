@@ -1,7 +1,7 @@
 {
   "name": "@fluentui-react-native/experimental-icon",
   "version": "0.0.1",
-  "description": "add component-description",
+  "description": "A cross-platform Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
   "typings": "lib/index.d.ts",
