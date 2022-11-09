@@ -65,16 +65,17 @@ export const useLink = (props: LinkProps): LinkInfo => {
   const linkTooltip = tooltip ?? url ?? undefined;
 
   /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
+  const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
   const filteredProps = {
-    onKeyUp: Platform.OS === (('win32' as any) || 'windows') ? onKeyUp : undefined,
-    keyUpEvents: Platform.OS === (('win32' as any) || 'windows') ? keyUpEvents : undefined,
+    onKeyUp: isWinPlatform ? onKeyUp : undefined,
+    keyUpEvents: isWinPlatform ? keyUpEvents : undefined,
     validKeysUp: undefined,
-    onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
-    keyDownEvents: Platform.OS === (('win32' as any) || 'windows') ? keyDownEvents : undefined,
+    onKeyDown: isWinPlatform ? onKeyDown : undefined,
+    keyDownEvents: isWinPlatform ? keyDownEvents : undefined,
     validKeysDown: undefined,
-    onMouseEnter: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseEnter : undefined,
-    onMouseLeave: Platform.OS === (('win32' as any) || 'windows') ? pressable.props.onMouseLeave : undefined,
-    onAccessibilityTap: Platform.OS === (('win32' as any) || 'windows') ? onAccTap : undefined,
+    onMouseEnter: isWinPlatform ? pressable.props.onMouseEnter : undefined,
+    onMouseLeave: isWinPlatform ? pressable.props.onMouseLeave : undefined,
+    onAccessibilityTap: isWinPlatform ? onAccTap : undefined,
   };
 
   return {
