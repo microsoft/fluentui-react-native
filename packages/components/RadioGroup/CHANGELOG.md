@@ -1,8 +1,56 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Wed, 02 Nov 2022 00:59:45 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:43 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Tue, 08 Nov 2022 22:18:43 GMT
+
+### Minor changes
+
+- update @office-iss/react-native-win32 to 0.68.8 (krsiler@microsoft.com)
+- Bump @uifabricshared/foundation-compose to v1.12.19
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/focus-zone to v0.11.0
+- Bump @fluentui-react-native/interactive-hooks to v0.20.0
+- Bump @fluentui-react-native/pressable to v0.9.30
+- Bump @fluentui-react-native/text to v0.15.14
+- Bump @fluentui-react-native/tokens to v0.17.8
+
+## 0.15.37
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.18
+- Bump @fluentui-react-native/focus-zone to v0.10.35
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+- Bump @fluentui-react-native/pressable to v0.9.29
+- Bump @fluentui-react-native/text to v0.15.13
+
+## 0.15.36
+
+Mon, 07 Nov 2022 21:42:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.34
+
+## 0.15.35
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.17
+- Bump @fluentui-react-native/focus-zone to v0.10.33
+- Bump @fluentui-react-native/interactive-hooks to v0.19.6
+- Bump @fluentui-react-native/pressable to v0.9.28
+- Bump @fluentui-react-native/text to v0.15.12
+- Bump @fluentui-react-native/tokens to v0.17.7
 
 ## 0.15.34
 

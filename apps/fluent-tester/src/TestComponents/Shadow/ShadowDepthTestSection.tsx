@@ -5,6 +5,7 @@ import { Shadow, getShadowTokenStyleSet } from '@fluentui-react-native/experimen
 import { ShadowToken, Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { mergeStyles, useFluentTheme } from '@fluentui-react-native/framework';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { shadowTestPageStyles } from './ShadowTestPageStyles';
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
   return {
@@ -16,9 +17,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
       marginVertical: 16,
       marginHorizontal: 32,
     },
-    defaultBackground: {
-      backgroundColor: t.colors.background,
-    },
+    defaultBackground: shadowTestPageStyles(t).backgroundColor,
     brandedBackground: {
       backgroundColor: t.colors.brandedBackground,
     },
@@ -52,9 +51,10 @@ const ShadowTestBox: React.FunctionComponent<ShadowTestBoxProps> = (props: Shado
 
 export const ShadowDepthTestSection: React.FunctionComponent = () => {
   const theme = useFluentTheme();
+  const backgroundViewStyle = shadowTestPageStyles(theme).backgroundColor;
 
   return (
-    <View>
+    <View style={backgroundViewStyle}>
       <ShadowTestBox shadowDepthText="Shadow 2" shadowToken={theme.shadows.shadow2} />
       <ShadowTestBox shadowDepthText="Shadow 4" shadowToken={theme.shadows.shadow4} />
       <ShadowTestBox shadowDepthText="Shadow 8" shadowToken={theme.shadows.shadow8} />
