@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Wed, 09 Nov 2022 22:52:11 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.20.1",
+      "version": "0.20.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "cad484c342321e75b0fa8920ebd3ffe4c2509d30",
+            "comment": "Update useViewCommandFocus"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 08 Nov 2022 22:18:43 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.20.0",
       "version": "0.20.0",
