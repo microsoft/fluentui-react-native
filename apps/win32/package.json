@@ -32,9 +32,6 @@
   },
   "dependencies": {
     "@fluentui-react-native/tester": "^0.104.0",
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/free-solid-svg-icons": "^6.2.0",
-    "@fortawesome/react-native-fontawesome": "^0.3.0",
     "react": "17.0.2",
     "react-native": "^0.68.0",
     "react-native-svg": "12.3.0",
