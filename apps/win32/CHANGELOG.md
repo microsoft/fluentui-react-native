@@ -1,8 +1,122 @@
 # Change Log - @fluentui-react-native/tester-win32
 
-This log was last generated on Thu, 27 Oct 2022 13:19:00 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.28.0
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Minor changes
+
+- add accessibilityLevel prop for Text on Win32 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.104.0
+
+## 0.27.42
+
+Tue, 08 Nov 2022 20:41:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.24
+
+## 0.27.41
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.23
+
+## 0.27.40
+
+Mon, 07 Nov 2022 22:34:28 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.22
+
+## 0.27.39
+
+Mon, 07 Nov 2022 21:42:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.21
+
+## 0.27.38
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.20
+
+## 0.27.37
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.19
+
+## 0.27.36
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.18
+
+## 0.27.35
+
+Tue, 01 Nov 2022 00:56:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.17
+
+## 0.27.34
+
+Sat, 29 Oct 2022 01:05:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.16
+
+## 0.27.33
+
+Sat, 29 Oct 2022 00:18:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.15
+
+## 0.27.32
+
+Fri, 28 Oct 2022 22:19:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.14
+
+## 0.27.31
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/tester to v0.103.13
+
+## 0.27.30
+
+Thu, 27 Oct 2022 18:06:52 GMT
+
+### Patches
+
+- Implement selector chaining in win32 + ios e2etests for optimizing element querying (winlarry@microsoft.com)
+- Bump @fluentui-react-native/tester to v0.103.12
 
 ## 0.27.29
 

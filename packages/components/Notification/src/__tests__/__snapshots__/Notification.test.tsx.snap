@@ -78,7 +78,7 @@ exports[`Notification component tests Notification default 1`] = `
         "flexWrap": undefined,
         "justifyContent": "space-between",
         "minHeight": 52,
-        "padding": "16px",
+        "padding": 16,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
         "paddingHorizontal": undefined,
@@ -86,7 +86,7 @@ exports[`Notification component tests Notification default 1`] = `
         "paddingRight": undefined,
         "paddingStart": undefined,
         "paddingTop": undefined,
-        "paddingVertical": undefined,
+        "paddingVertical": 12,
         "shadowColor": "#000000",
         "shadowOffset": Object {
           "height": 0,

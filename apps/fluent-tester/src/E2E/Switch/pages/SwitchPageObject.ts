@@ -19,7 +19,7 @@ class SwitchPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async isSwitchChecked(): Promise<boolean> {
-    return await this._primaryComponent.isSelected();
+    return await (await this._primaryComponent).isSelected();
   }
 
   async waitForSwitchChecked(timeout?: number): Promise<void> {
@@ -32,7 +32,7 @@ class SwitchPageObject extends BasePage {
 
   async toggleSwitchToUnchecked(): Promise<void> {
     if (await this.isSwitchChecked()) {
-      await this._primaryComponent.click();
+      await (await this._primaryComponent).click();
     }
   }
 

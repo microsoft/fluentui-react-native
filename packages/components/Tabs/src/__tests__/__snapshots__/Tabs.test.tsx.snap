@@ -159,7 +159,7 @@ exports[`Tabs FocusZone props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -333,7 +333,7 @@ exports[`Tabs default props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -720,7 +720,7 @@ exports[`Tabs disabled 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -838,7 +838,7 @@ exports[`Tabs header text and count 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1113,7 +1113,7 @@ exports[`Tabs headers only 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1473,7 +1473,7 @@ exports[`Tabs props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,

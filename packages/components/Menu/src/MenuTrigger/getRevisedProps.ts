@@ -34,21 +34,19 @@ function getRevisedPropsWorker(state: MenuTriggerState, props: any): MenuTrigger
     };
   }
 
-  let onHoverIn = undefined;
   if (props.onHoverIn) {
-    onHoverIn = (e: InteractionEvent) => {
+    revisedProps.onHoverIn = (e: InteractionEvent) => {
       state.props.onHoverIn(isMouseEvent(e) && e);
       props.onHoverIn(e);
     };
   }
 
-  let onHoverOut = undefined;
   if (props.onHoverOut) {
-    onHoverOut = (e: InteractionEvent) => {
+    revisedProps.onHoverOut = (e: InteractionEvent) => {
       state.props.onHoverOut(isMouseEvent(e) && e);
       props.onHoverOut(e);
     };
   }
 
-  return { ...revisedProps, onHoverIn, onHoverOut };
+  return { ...revisedProps };
 }

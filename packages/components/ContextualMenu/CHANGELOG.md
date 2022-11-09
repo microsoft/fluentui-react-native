@@ -1,8 +1,89 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Thu, 27 Oct 2022 11:09:35 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.9
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/callout to v0.21.32
+- Bump @fluentui-react-native/focus-zone to v0.11.0
+- Bump @fluentui-react-native/icon to v0.14.0
+- Bump @fluentui-react-native/interactive-hooks to v0.20.0
+- Bump @fluentui-react-native/text to v0.15.14
+- Bump @fluentui-react-native/tokens to v0.17.8
+- Bump @uifabricshared/foundation-compose to v1.12.19
+- Bump @fluentui-react-native/pressable to v0.9.30
+
+## 0.19.8
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.31
+- Bump @fluentui-react-native/focus-zone to v0.10.35
+- Bump @fluentui-react-native/icon to v0.13.22
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+- Bump @fluentui-react-native/text to v0.15.13
+- Bump @uifabricshared/foundation-compose to v1.12.18
+- Bump @fluentui-react-native/pressable to v0.9.29
+
+## 0.19.7
+
+Mon, 07 Nov 2022 21:42:58 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.34
+
+## 0.19.6
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.30
+- Bump @fluentui-react-native/focus-zone to v0.10.33
+- Bump @fluentui-react-native/icon to v0.13.21
+- Bump @fluentui-react-native/interactive-hooks to v0.19.6
+- Bump @fluentui-react-native/text to v0.15.12
+- Bump @fluentui-react-native/tokens to v0.17.7
+- Bump @uifabricshared/foundation-compose to v1.12.17
+- Bump @fluentui-react-native/pressable to v0.9.28
+
+## 0.19.5
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.10.32
+
+## 0.19.4
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.29
+- Bump @fluentui-react-native/focus-zone to v0.10.31
+- Bump @fluentui-react-native/interactive-hooks to v0.19.5
+- Bump @fluentui-react-native/pressable to v0.9.27
+
+## 0.19.3
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- FocusZone (macOS): New prop to ignore OS keyboard shortcut preference (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.10.30
 
 ## 0.19.2
 
