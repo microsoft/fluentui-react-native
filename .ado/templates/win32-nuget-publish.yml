@@ -27,6 +27,14 @@ steps:
         arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
         workingFolder: 'apps/win32/nuget'
 
+  # Pack the NuGet package
+  - task: CmdLine@1
+    displayName: 'Create NuGet package for Automated Test Framework Dependencies'
+    inputs:
+        filename: nuget
+        arguments: 'pack Microsoft.FluentUI.WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+        workingFolder: 'tester_deps/nuget'
+
 
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
     displayName: 📒 Generate Manifest FluentTester
@@ -48,4 +56,13 @@ steps:
     inputs:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
+      publishVstsFeed: Office
+
+  # Push the NuGet package
+  - task: NuGetCommand@2
+    displayName: 'NuGet push Tester Deps'
+    condition: not(${{ parameters.skipNugetPublish }})
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
       publishVstsFeed: Office
