@@ -370,8 +370,7 @@ exports[`Button component tests Button primary 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "#005a9e",
+      "backgroundColor": undefined,
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
