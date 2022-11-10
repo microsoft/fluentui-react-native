@@ -22,7 +22,8 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#0c3b5e",
+      "borderColor": "#082338",
       "borderRadius": 9999,
       "display": "flex",
       "flexDirection": "row",
@@ -61,7 +62,8 @@ exports[`Default FAB (iOS) 1`] = `
   style={
     Object {
       "alignSelf": "flex-start",
-      "backgroundColor": undefined,
+      "backgroundColor": "#0c3b5e",
+      "borderColor": "#082338",
       "borderRadius": 9999,
       "bottom": undefined,
       "display": "flex",
@@ -114,8 +116,9 @@ exports[`Default FAB (iOS) 1`] = `
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": undefined,
+        "backgroundColor": "#0c3b5e",
         "borderBottomWidth": undefined,
+        "borderColor": "#082338",
         "borderEndWidth": undefined,
         "borderLeftWidth": undefined,
         "borderRadius": 9999,
