@@ -98,6 +98,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       square: {
         borderRadius: globalTokens.corner.radius60,
       },
+    },
     size96: {
       size: 96,
       badgeSize: 'extraLarge',
