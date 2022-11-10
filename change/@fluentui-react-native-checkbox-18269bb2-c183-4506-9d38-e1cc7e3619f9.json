@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add initial checkbox tokens",
+  "packageName": "@fluentui-react-native/checkbox",
+  "email": "prasadro@microsoft.com",
+  "dependentChangeType": "patch"
+}
