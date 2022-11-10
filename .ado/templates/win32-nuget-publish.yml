@@ -20,12 +20,12 @@ steps:
     displayName: 'Bundling win32'
 
   # Pack the NuGet package
-  - task: CmdLine@1
-    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
-    inputs:
-        filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-        workingFolder: 'apps/win32/nuget'
+  # - task: CmdLine@1
+  #   displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+  #   inputs:
+  #       filename: nuget
+  #       arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+  #       workingFolder: 'apps/win32/nuget'
 
   # Pack the NuGet package
   - task: CmdLine@1
@@ -50,13 +50,13 @@ steps:
   - task: ComponentGovernanceComponentDetection@0
 
   # Push the NuGet package
-  - task: NuGetCommand@2
-    displayName: 'NuGet push'
-    condition: not(${{ parameters.skipNugetPublish }})
-    inputs:
-      command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
-      publishVstsFeed: Office
+  # - task: NuGetCommand@2
+  #   displayName: 'NuGet push'
+  #   condition: not(${{ parameters.skipNugetPublish }})
+  #   inputs:
+  #     command: push
+  #     packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
+  #     publishVstsFeed: Office
 
   # Push the NuGet package
   - task: NuGetCommand@2
