@@ -8,14 +8,10 @@ export const FontIcon = stagedComponent((props: FontIconProps) => {
   const fontIconProps = useFontIcon(props);
   return (final: FontIconProps) => {
     const newProps = mergeProps<FontIconProps>(fontIconProps, final);
-    const { codepoint, style, ...rest } = newProps;
+    const { codepoint, ...rest } = newProps;
 
     const char = String.fromCharCode(codepoint);
-    return (
-      <Text style={style} {...rest}>
-        {char}
-      </Text>
-    );
+    return <Text {...rest}>{char}</Text>;
   };
 });
 
