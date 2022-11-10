@@ -19,10 +19,10 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     borderColor: t.colors.neutralStroke1,
     borderWidth: t.name === 'HighContrast' ? 1 : 0,
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
+      borderRadius: globalTokens.corner.radiusCircular,
     },
     square: {
-      borderRadius: globalTokens.corner.radius.medium,
+      borderRadius: globalTokens.corner.radius40,
     },
     inactive: {
       avatarOpacity: 0.8,
@@ -33,7 +33,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       iconSize: 16,
       fontSize: globalTokens.font.size100,
       square: {
-        borderRadius: globalTokens.corner.radius.small,
+        borderRadius: globalTokens.corner.radius20,
       },
     },
     size24: {
@@ -42,7 +42,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       iconSize: 16,
       fontSize: globalTokens.font.size100,
       square: {
-        borderRadius: globalTokens.corner.radius.small,
+        borderRadius: globalTokens.corner.radius20,
       },
     },
     size28: {

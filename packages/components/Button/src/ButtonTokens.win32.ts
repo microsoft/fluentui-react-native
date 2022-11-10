@@ -81,12 +81,12 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
       },
     },
     rounded: {
-      borderRadius: globalTokens.corner.radius.medium,
+      borderRadius: globalTokens.corner.radius40,
     },
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
+      borderRadius: globalTokens.corner.radiusCircular,
     },
     square: {
-      borderRadius: globalTokens.corner.radius.none,
+      borderRadius: globalTokens.corner.radiusNone,
     },
   } as ButtonTokens);

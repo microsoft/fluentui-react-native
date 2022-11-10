@@ -5,7 +5,7 @@ import { MenuItemTokens } from './MenuItem.types';
 
 export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  borderRadius: globalTokens.corner.radius.none,
+  borderRadius: globalTokens.corner.radiusNone,
   checkmarkSize: 16,
   color: t.colors.neutralForeground1,
   fontFamily: t.typography.families.primary,

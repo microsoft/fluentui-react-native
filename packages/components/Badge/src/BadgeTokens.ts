@@ -16,7 +16,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       minWidth: 6,
       minHeight: 6,
       rounded: {
-        borderRadius: globalTokens.corner.radius.small,
+        borderRadius: globalTokens.corner.radius20,
       },
     },
     extraSmall: {
@@ -24,7 +24,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       minHeight: 10,
       iconSize: 10,
       rounded: {
-        borderRadius: globalTokens.corner.radius.small,
+        borderRadius: globalTokens.corner.radius20,
       },
     },
     small: {
@@ -35,7 +35,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       textMargin: globalTokens.spacing.xxs,
       flexGap: globalTokens.spacing.xxs,
       rounded: {
-        borderRadius: globalTokens.corner.radius.small,
+        borderRadius: globalTokens.corner.radius20,
       },
     },
     medium: {
@@ -63,13 +63,13 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       flexGap: globalTokens.spacing.xs,
     },
     rounded: {
-      borderRadius: globalTokens.corner.radius.medium,
+      borderRadius: globalTokens.corner.radius40,
     },
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
+      borderRadius: globalTokens.corner.radiusCircular,
     },
     square: {
-      borderRadius: globalTokens.corner.radius.none,
+      borderRadius: globalTokens.corner.radiusNone,
     },
     rtl: {
       left: globalTokens.spacing.none,

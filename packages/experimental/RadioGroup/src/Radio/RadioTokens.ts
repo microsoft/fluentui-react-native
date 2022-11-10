@@ -8,7 +8,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     borderColor: t.colors.transparentStroke,
     borderStyle: 'solid',
     borderWidth: globalTokens.stroke.width20,
-    borderRadius: globalTokens.corner.radius.medium,
+    borderRadius: globalTokens.corner.radius40,
     radioBorderWidth: globalTokens.stroke.width10,
     radioVisibility: 0,
     variant: 'subheaderStandard',
