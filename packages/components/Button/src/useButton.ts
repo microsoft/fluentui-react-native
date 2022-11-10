@@ -22,7 +22,7 @@ export const useButton = (props: ButtonProps): ButtonInfo => {
        * Due to a bug in React Native, unconditionally passing this may cause unnecessary re-renders.
        * Therefore, let's only pass it in if it's defined to limit this issue.
        */
-      ...(isDisabled ? { disabled: isDisabled } : null),
+      ...(isDisabled && { disabled: isDisabled }),
       accessible: true,
       accessibilityRole: 'button',
       onAccessibilityTap: props.onAccessibilityTap || (!hasTogglePattern ? props.onClick : undefined),

@@ -97,6 +97,7 @@ export const ContextualMenu = compose<ContextualMenuType>({
         componentRef: focusZoneRef,
         defaultTabbableElement: focusZoneRef,
         focusZoneDirection: 'vertical',
+        forceFocusMacOS: true,
       },
     });
 

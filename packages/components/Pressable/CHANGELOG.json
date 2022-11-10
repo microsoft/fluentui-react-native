@@ -2,6 +2,72 @@
   "name": "@fluentui-react-native/pressable",
   "entries": [
     {
+      "date": "Tue, 08 Nov 2022 22:18:44 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.9.30",
+      "version": "0.9.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/pressable",
+            "comment": "Bump @fluentui-react-native/adapters to v0.10.0",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/pressable",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.20.0",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 08 Nov 2022 19:22:01 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.9.29",
+      "version": "0.9.29",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/pressable",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.7",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Nov 2022 14:36:23 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.9.28",
+      "version": "0.9.28",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/pressable",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.6",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/pressable_v0.9.27",
+      "version": "0.9.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/pressable",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 11:09:35 GMT",
       "tag": "@fluentui-react-native/pressable_v0.9.26",
       "version": "0.9.26",

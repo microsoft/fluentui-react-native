@@ -12,29 +12,29 @@ export const enum AvatarComponentSelector {
 }
 class AvatarPageObject extends BasePage {
   async getPrimaryComponentAttribute(attribute: string): Promise<string> {
-    return await this._primaryComponent.getAttribute(attribute);
+    return await (await this._primaryComponent).getAttribute(attribute);
   }
 
   async getSecondaryComponentAttribute(attribute: string): Promise<string> {
-    return await this._secondaryComponent.getAttribute(attribute);
+    return await (await this._secondaryComponent).getAttribute(attribute);
   }
 
   async getAvatarAccessibilityLabel(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
-      ? await this._secondaryComponent.getAttribute('Name')
-      : await this._primaryComponent.getAttribute('Name');
+      ? await (await this._secondaryComponent).getAttribute('Name')
+      : await (await this._primaryComponent).getAttribute('Name');
   }
 
   async getAvatarAccessibilityHint(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
-      ? await this._secondaryComponent.getAttribute('HelpText')
-      : await this._primaryComponent.getAttribute('HelpText');
+      ? await (await this._secondaryComponent).getAttribute('HelpText')
+      : await (await this._primaryComponent).getAttribute('HelpText');
   }
 
   async getAvatarAccessibilityRole(componentSelector: AvatarComponentSelector): Promise<string> {
     return componentSelector == AvatarComponentSelector.SecondaryComponent
-      ? await this._secondaryComponent.getAttribute('ControlType')
-      : await this._primaryComponent.getAttribute('ControlType');
+      ? await (await this._secondaryComponent).getAttribute('ControlType')
+      : await (await this._primaryComponent).getAttribute('ControlType');
   }
   /*****************************************/
   /**************** Getters ****************/

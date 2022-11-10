@@ -2,6 +2,117 @@
   "name": "@fluentui-react-native/focus-zone",
   "entries": [
     {
+      "date": "Tue, 08 Nov 2022 22:18:43 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.11.0",
+      "version": "0.11.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae",
+            "comment": "update @office-iss/react-native-win32 to 0.68.8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.20.0",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 08 Nov 2022 19:22:01 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.35",
+      "version": "0.10.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.7",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 07 Nov 2022 21:42:58 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.34",
+      "version": "0.10.34",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "6f086d9beaa1aea80f475f62d8bdb80f3c855c83",
+            "comment": "Fix infinite loop in ContextualMenu"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Nov 2022 14:36:23 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.33",
+      "version": "0.10.33",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.6",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 02 Nov 2022 00:59:45 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.32",
+      "version": "0.10.32",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "3eab416738df9b04a2fdf51b43d2c191843b4ae5",
+            "comment": "Undo workaround needed for old haul polyfill"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.31",
+      "version": "0.10.31",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/focus-zone",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 27 Oct 2022 21:01:42 GMT",
+      "tag": "@fluentui-react-native/focus-zone_v0.10.30",
+      "version": "0.10.30",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/focus-zone",
+            "commit": "d5c85eced1b43510215dc7aa7f79a3db80616ce7",
+            "comment": "FocusZone (macOS): New prop to ignore OS keyboard shortcut preference"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 27 Oct 2022 11:09:35 GMT",
       "tag": "@fluentui-react-native/focus-zone_v0.10.29",
       "version": "0.10.29",

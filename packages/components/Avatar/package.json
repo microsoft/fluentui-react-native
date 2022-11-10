@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/avatar",
-  "version": "1.2.29",
+  "version": "1.2.33",
   "description": "A cross-platform Avatar component using the Fluent Design System. Currently only implemented on iOS",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -29,13 +29,13 @@
     "directory": "packages/components/Avatar"
   },
   "dependencies": {
-    "@fluentui-react-native/adapters": "^0.9.3",
-    "@fluentui-react-native/badge": "^0.1.51",
-    "@fluentui-react-native/framework": "0.8.15",
-    "@fluentui-react-native/icon": "^0.13.20",
-    "@fluentui-react-native/interactive-hooks": "^0.19.4",
-    "@fluentui-react-native/theme-tokens": "^0.21.0",
-    "@fluentui-react-native/tokens": "^0.17.6",
+    "@fluentui-react-native/adapters": "^0.10.0",
+    "@fluentui-react-native/badge": "^0.1.55",
+    "@fluentui-react-native/framework": "0.8.18",
+    "@fluentui-react-native/icon": "^0.14.0",
+    "@fluentui-react-native/interactive-hooks": "^0.20.0",
+    "@fluentui-react-native/theme-tokens": "^0.21.2",
+    "@fluentui-react-native/tokens": "^0.17.8",
     "@fluentui-react-native/use-styling": "^0.9.1",
     "react-native-svg": "12.3.0"
   },

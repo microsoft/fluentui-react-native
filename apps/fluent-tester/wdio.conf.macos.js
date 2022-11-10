@@ -94,6 +94,7 @@ exports.config = {
    */
   beforeSession: function (/*config, capabilities, specs*/) {
     fs.mkdirSync('./errorShots', { recursive: true });
+    process.env['E2ETEST_PLATFORM'] = 'macos';
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
