@@ -16,9 +16,6 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           display: 'flex',
           alignItems: tokens.alignItems,
           flexDirection: tokens.flexDirection,
-          // minHeight: 20,
-          // marginTop: 0,
-          // marginRight: globalTokens.spacing.s,
           paddingHorizontal: globalTokens.spacing.xs,
           ...borderStyles.from(tokens, theme),
         },
@@ -60,7 +57,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
     labelContent: buildProps(
       (tokens: RadioTokens) => ({
         style: {
-          alignSelf: 'center',
+          alignSelf: 'flex-start',
           alignItems: 'flex-start',
           flexDirection: 'column',
           marginRight: tokens.labelMarginRight,
