@@ -1,6 +1,11 @@
+import * as React from 'react';
 import { InteractionEvent, PressablePropsExtended } from '@fluentui-react-native/interactive-hooks';
 
 export const menuTriggerName = 'MenuTrigger';
+
+export interface MenuTriggerProps {
+  children?: React.ReactElement | null;
+}
 
 export interface MenuTriggerChildProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
