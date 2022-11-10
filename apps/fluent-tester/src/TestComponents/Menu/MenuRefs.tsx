@@ -12,7 +12,7 @@ export const MenuTriggerChildRef: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <Button onClick={onClick}>Click to focus</Button>
+      <Button onClick={onClick}>Click to focus Menu trigger</Button>
 
       <Menu>
         <MenuTrigger>
@@ -21,8 +21,6 @@ export const MenuTriggerChildRef: React.FunctionComponent = () => {
         <MenuPopover>
           <MenuList>
             <MenuItem>A plain MenuItem</MenuItem>
-            <MenuItem disabled>A second disabled plain MenuItem</MenuItem>
-            <MenuItem>A third plain MenuItem</MenuItem>
           </MenuList>
         </MenuPopover>
       </Menu>
