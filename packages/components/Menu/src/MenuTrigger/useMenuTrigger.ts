@@ -64,8 +64,9 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
             break;
         }
       }
+      childOnAccessibilityAction && childOnAccessibilityAction(e);
     },
-    [setOpen],
+    [childOnAccessibilityAction, setOpen],
   );
 
   const onHoverIn = React.useCallback(
@@ -78,8 +79,10 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
           setOpen(e, true /* isOpen */);
         }, hoverDelay);
       }
+
+      childOnHoverIn && childOnHoverIn(e);
     },
-    [hoverDelay, openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
+    [childOnHoverIn, hoverDelay, openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
   );
 
   const onHoverOut = React.useCallback(
@@ -91,15 +94,18 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
         }, hoverDelay);
         setTriggerHoverOutTimer(timer);
       }
+
+      childOnHoverOut && childOnHoverOut(e);
     },
-    [hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer],
+    [childOnHoverOut, hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer],
   );
 
   const onClick = React.useCallback(
     (e: InteractionEvent) => {
       setOpen(e, !open);
+      childOnClick && childOnClick(e);
     },
-    [open, setOpen],
+    [childOnClick, open, setOpen],
   );
 
   React.useEffect(() => {
