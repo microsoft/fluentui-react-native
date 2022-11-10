@@ -16,7 +16,7 @@ export const MenuTriggerChildRef: React.FunctionComponent = () => {
 
       <Menu>
         <MenuTrigger>
-          <Button componentRef={ref} />
+          <Button componentRef={ref}>The Menu</Button>
         </MenuTrigger>
         <MenuPopover>
           <MenuList>
