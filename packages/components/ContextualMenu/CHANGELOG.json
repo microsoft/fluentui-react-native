@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 10 Nov 2022 02:05:55 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.19.11",
+      "version": "0.19.11",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "6bff867afa27546f52943f5b677f81ddef6a0764",
+            "comment": "Revert \"FocusZone (macOS): New prop to ignore OS keyboard shortcut preference (#2267)\""
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/contextual-menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.2",
+            "commit": "6bff867afa27546f52943f5b677f81ddef6a0764"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Nov 2022 22:52:11 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.19.10",
       "version": "0.19.10",
