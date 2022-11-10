@@ -5,7 +5,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 
 export const MenuTriggerChildRef: React.FunctionComponent = () => {
-  const ref = React.useRef();
+  const ref = React.useRef(null);
   const onClick = React.useCallback(() => {
     ref?.current?.focus();
   }, [ref]);
