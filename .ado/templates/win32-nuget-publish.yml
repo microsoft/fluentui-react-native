@@ -21,19 +21,11 @@ steps:
 
   # Pack the NuGet package
   - task: CmdLine@1
-    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
+    displayName: 'Create NuGet package for tester_deps.'
     inputs:
-        filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-        workingFolder: 'apps/win32/nuget'
-
-  # Pack the NuGet package
-  - task: CmdLine@1
-    displayName: 'Create NuGet package for FluentTester Win32 bundle.'
-    inputs:
-        filename: nuget
-        arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
-        workingFolder: 'apps/win32/nuget'
+      filename: nuget
+      arguments: 'pack Microsoft.FluentUI.WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+      workingFolder: 'tester_deps/nuget'
 
 
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
@@ -44,7 +36,7 @@ steps:
   - task: PublishPipelineArtifact@1
     displayName: 📒 Publish Manifest FluentTester
     inputs:
-      artifactName: SBom-FluentTester-$(System.JobAttempt)
+      artifactName: SBom-WdioDeps-$(System.JobAttempt)
       targetPath: $(System.DefaultWorkingDirectory)/_manifest
 
   - task: ComponentGovernanceComponentDetection@0
@@ -52,8 +44,7 @@ steps:
   # Push the NuGet package
   - task: NuGetCommand@2
     displayName: 'NuGet push'
-    condition: not(${{ parameters.skipNugetPublish }})
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.FluentTesterWin32.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
       publishVstsFeed: Office
