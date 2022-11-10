@@ -30,53 +30,53 @@ describe('RadioGroup component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('RadioGroup disabled', () => {
-    const tree = renderer.create(
-      <RadioGroup disabled label="Disabled RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
-    expect(tree).toMatchSnapshot();
-  });
+  // it('RadioGroup disabled', () => {
+  //   const tree = renderer.create(
+  //     <RadioGroup disabled label="Disabled RadioGroup" defaultValue="key2">
+  //       <View>
+  //         <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+  //         <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+  //       </View>
+  //     </RadioGroup>,
+  //   );
+  //   expect(tree).toMatchSnapshot();
+  // });
 
-  it('RadioGroup required', () => {
-    const tree = renderer.create(
-      <RadioGroup required label="Required RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
-    expect(tree).toMatchSnapshot();
-  });
+  // it('RadioGroup required', () => {
+  //   const tree = renderer.create(
+  //     <RadioGroup required label="Required RadioGroup" defaultValue="key2">
+  //       <View>
+  //         <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+  //         <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+  //       </View>
+  //     </RadioGroup>,
+  //   );
+  //   expect(tree).toMatchSnapshot();
+  // });
 
-  it('RadioGroup horizontal', () => {
-    const tree = renderer.create(
-      <RadioGroup layout="horizontal" label="Horizontal RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
-    expect(tree).toMatchSnapshot();
-  });
+  // it('RadioGroup horizontal', () => {
+  //   const tree = renderer.create(
+  //     <RadioGroup layout="horizontal" label="Horizontal RadioGroup" defaultValue="key2">
+  //       <View>
+  //         <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+  //         <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+  //       </View>
+  //     </RadioGroup>,
+  //   );
+  //   expect(tree).toMatchSnapshot();
+  // });
 
-  it('RadioGroup horizontal-stacked', () => {
-    const tree = renderer.create(
-      <RadioGroup layout="horizontal-stacked" label="Horizontal-Stacked RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
-    expect(tree).toMatchSnapshot();
-  });
+  // it('RadioGroup horizontal-stacked', () => {
+  //   const tree = renderer.create(
+  //     <RadioGroup layout="horizontal-stacked" label="Horizontal-Stacked RadioGroup" defaultValue="key2">
+  //       <View>
+  //         <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+  //         <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+  //       </View>
+  //     </RadioGroup>,
+  //   );
+  //   expect(tree).toMatchSnapshot();
+  // });
 
   it('RadioGroup simple rendering does not invalidate styling', () => {
     checkRenderConsistency(() => <RadioGroup>Default RadioGroup</RadioGroup>, 2);
