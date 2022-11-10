@@ -4,6 +4,14 @@
   "description": "This package contains all dependencies needed to run FURNs automated testing framework. This includes WebDriverIO + Appium dependencies.",
   "license": "MIT",
   "private": "true",
+  "scripts": {
+    "build": "fluentui-scripts build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "tester_deps"
+  },
   "devDependencies": {
     "@types/jasmine": "3.5.10",
     "@types/react": "^17.0.2",
