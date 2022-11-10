@@ -178,6 +178,8 @@ jobs:
       - template: templates/setup-repo-min-build.yml
 
       - template: templates/win32-nuget-publish.yml
+        parameters:
+          skipNugetPublish: false
 
       # bundle win32 and do end to end tests
       - template: templates/e2e-testing-win32.yml
