@@ -243,6 +243,11 @@ export function getStockWebPalette(): ThemeColorDefinition {
       redDark: globalTokens.color.burgundy.primary,
 
       // @ts-ignore
+      accent: globalTokens.color.brand80,
+      blackTranslucent40: 'rgba(0,0,0,.4)',
+
+      // Colors to be deprecated
+      // @ts-ignore
       themeDarker: globalTokens.color.brand40,
       // @ts-ignore
       themeDark: globalTokens.color.brand60,
@@ -260,9 +265,6 @@ export function getStockWebPalette(): ThemeColorDefinition {
       themeLighter: globalTokens.color.brand150,
       // @ts-ignore
       themeLighterAlt: globalTokens.color.brand160,
-      // @ts-ignore
-      accent: globalTokens.color.brand80,
-      blackTranslucent40: 'rgba(0,0,0,.4)',
     }),
     ...createColorAliasTokens('light'),
   };
@@ -273,24 +275,6 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
     ...paletteFromFabricColors(
       {
         // colors taken from fluentui DarkCustomizations.ts
-        // @ts-ignore
-        themeDarker: globalTokens.color.brand110,
-        // @ts-ignore
-        themeDark: globalTokens.color.brand100,
-        // @ts-ignore
-        themeDarkAlt: globalTokens.color.brand100,
-        // @ts-ignore
-        themePrimary: globalTokens.color.brand90,
-        // @ts-ignore
-        themeSecondary: globalTokens.color.brand90,
-        // @ts-ignore
-        themeTertiary: globalTokens.color.brand60,
-        // @ts-ignore
-        themeLight: globalTokens.color.brand50,
-        // @ts-ignore
-        themeLighter: globalTokens.color.brand40,
-        // @ts-ignore
-        themeLighterAlt: globalTokens.color.brand30,
         black: globalTokens.color.white,
         neutralDark: '#faf9f8',
         neutralPrimary: '#f3f2f1',
@@ -310,6 +294,26 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
         accent: globalTokens.color.brand40,
         redDark: '#f1707b',
         blackTranslucent40: 'rgba(0,0,0,.4)',
+
+        // Colors to be deprecated
+        // @ts-ignore
+        themeDarker: globalTokens.color.brand110,
+        // @ts-ignore
+        themeDark: globalTokens.color.brand100,
+        // @ts-ignore
+        themeDarkAlt: globalTokens.color.brand100,
+        // @ts-ignore
+        themePrimary: globalTokens.color.brand90,
+        // @ts-ignore
+        themeSecondary: globalTokens.color.brand90,
+        // @ts-ignore
+        themeTertiary: globalTokens.color.brand60,
+        // @ts-ignore
+        themeLight: globalTokens.color.brand50,
+        // @ts-ignore
+        themeLighter: globalTokens.color.brand40,
+        // @ts-ignore
+        themeLighterAlt: globalTokens.color.brand30,
       },
       true,
     ),
