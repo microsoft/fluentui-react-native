@@ -177,14 +177,14 @@ jobs:
       # yarn and minimal build to get set up
       - template: templates/setup-repo-min-build.yml
 
-      - script: |
-          yarn
-        workingDirectory: tester_deps/
-        displayName: 'Yarn in tester_deps'
+      # - script: |
+      #     yarn
+      #   workingDirectory: tester_deps/
+      #   displayName: 'Yarn in tester_deps'
 
-      - template: templates/win32-nuget-publish.yml
-        parameters:
-          skipNugetPublish: false
+      # - template: templates/win32-nuget-publish.yml
+      #   parameters:
+      #     skipNugetPublish: false
 
       # bundle win32 and do end to end tests
       # - template: templates/e2e-testing-win32.yml
