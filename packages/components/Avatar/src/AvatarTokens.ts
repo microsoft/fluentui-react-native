@@ -78,7 +78,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       iconSize: 28,
       fontSize: globalTokens.font.size400,
       square: {
-        borderRadius: globalTokens.corner.radius.large,
+        borderRadius: globalTokens.corner.radius60,
       },
     },
     size64: {
@@ -87,7 +87,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       iconSize: 32,
       fontSize: globalTokens.font.size500,
       square: {
-        borderRadius: globalTokens.corner.radius.large,
+        borderRadius: globalTokens.corner.radius60,
       },
     },
     size72: {
@@ -96,7 +96,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       iconSize: 32,
       fontSize: globalTokens.font.size500,
       square: {
-        borderRadius: globalTokens.corner.radius.large,
+        borderRadius: globalTokens.corner.radius60,
       },
     size96: {
       size: 96,
@@ -105,7 +105,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       fontWeight: globalTokens.font.weight.regular,
       fontSize: globalTokens.font.size700,
       square: {
-        borderRadius: globalTokens.corner.radius.extraLarge,
+        borderRadius: globalTokens.corner.radius80,
       },
     },
     size120: {
@@ -115,7 +115,7 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       fontWeight: globalTokens.font.weight.regular,
       fontSize: globalTokens.font.size900,
       square: {
-        borderRadius: globalTokens.corner.radius.extraLarge,
+        borderRadius: globalTokens.corner.radius80,
       },
     },
     neutral: {
