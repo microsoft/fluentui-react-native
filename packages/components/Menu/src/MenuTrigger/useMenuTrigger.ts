@@ -1,16 +1,16 @@
 import { useMenuContext } from '../context/menuContext';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { MenuTriggerState } from './MenuTrigger.types';
+import { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
 import { hoverDelayDefault } from '../consts';
 
-const accessibilityActions =
+const baseAccessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
 const expandedState = { expanded: true };
 const collapsedState = { expanded: false };
 
-export const useMenuTrigger = (): MenuTriggerState => {
+export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerState => {
   const context = useMenuContext();
   const {
     hoverDelay = hoverDelayDefault,
@@ -23,7 +23,33 @@ export const useMenuTrigger = (): MenuTriggerState => {
     triggerRef,
   } = context;
 
-  const accessibilityState = open ? expandedState : collapsedState;
+  const {
+    accessibilityActions: childAccessibilityActions,
+    accessibilityState: childAccessibilityState,
+    onAccessibilityAction: childOnAccessibilityAction,
+    onClick: childOnClick,
+    onHoverIn: childOnHoverIn,
+    onHoverOut: childOnHoverOut,
+    componentRef: childComponentRef,
+  } = childProps;
+
+  const accessibilityActions = React.useMemo(() => {
+    if (childAccessibilityActions) {
+      return [...baseAccessibilityActions, ...childAccessibilityActions];
+    }
+
+    return baseAccessibilityActions;
+  }, [childAccessibilityActions]);
+
+  const accessibilityState = React.useMemo(() => {
+    const baseState = open ? expandedState : collapsedState;
+
+    if (childAccessibilityState) {
+      return { ...baseState, ...childAccessibilityState };
+    }
+
+    return baseState;
+  }, [childAccessibilityState, open]);
 
   const onAccessibilityAction = React.useCallback(
     (e: AccessibilityActionEvent) => {
