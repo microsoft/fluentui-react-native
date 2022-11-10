@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkbox component tests Menu default 1`] = `
+exports[`Menu component tests Menu default 1`] = `
 <View
   accessibilityActions={Array []}
   accessibilityLabel="Default"
@@ -65,7 +65,7 @@ exports[`Checkbox component tests Menu default 1`] = `
 </View>
 `;
 
-exports[`Checkbox component tests Menu defaultOpen 1`] = `
+exports[`Menu component tests Menu defaultOpen 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -273,7 +273,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open 1`] = `
+exports[`Menu component tests Menu open 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -434,7 +434,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open checkbox and divider 1`] = `
+exports[`Menu component tests Menu open checkbox and divider 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -780,7 +780,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open checkbox checked 1`] = `
+exports[`Menu component tests Menu open checkbox checked 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -1126,7 +1126,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open checkbox defaultChecked 1`] = `
+exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -1472,7 +1472,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open radio 1`] = `
+exports[`Menu component tests Menu open radio 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -1806,7 +1806,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu submenu 1`] = `
+exports[`Menu component tests Menu submenu 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
