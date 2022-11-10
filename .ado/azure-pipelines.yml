@@ -183,9 +183,9 @@ jobs:
           script: npx midgard-yarn@1.23.33 --network-concurrency 40 --frozen-lockfile --cache-folder \.yarnCache
           workingDirectory: tester_deps/
 
-      - template: templates/win32-nuget-publish.yml
-        parameters:
-          skipNugetPublish: false
+      # - template: templates/win32-nuget-publish.yml
+      #   parameters:
+      #     skipNugetPublish: false
 
       # bundle win32 and do end to end tests
       # - template: templates/e2e-testing-win32.yml
