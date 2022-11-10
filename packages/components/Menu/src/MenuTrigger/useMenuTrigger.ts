@@ -4,6 +4,7 @@ import { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
 import { hoverDelayDefault } from '../consts';
+import { useMergedRefs } from './useMergeRefs';
 
 const baseAccessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
@@ -108,6 +109,8 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
     [childOnClick, open, setOpen],
   );
 
+  const ref = useMergedRefs(triggerRef, childComponentRef);
+
   React.useEffect(() => {
     return function cleanup() {
       clearTimeout(triggerHoverOutTimer);
@@ -119,7 +122,7 @@ export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerSt
       onClick,
       onHoverIn,
       onHoverOut,
-      componentRef: triggerRef,
+      componentRef: ref,
       accessibilityState,
       accessibilityActions,
       onAccessibilityAction,
