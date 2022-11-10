@@ -1,8 +1,34 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Fri, 04 Nov 2022 14:36:23 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Nov 2022 22:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.41
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.9.31
+
+## 0.2.40
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/pressable to v0.9.30
+
+## 0.2.39
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/pressable to v0.9.29
 
 ## 0.2.38
 
