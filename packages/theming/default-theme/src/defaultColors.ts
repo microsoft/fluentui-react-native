@@ -245,22 +245,23 @@ export function getStockWebPalette(): ThemeColorDefinition {
       // @ts-ignore
       themeDarker: globalTokens.color.brand40,
       // @ts-ignore
-      themeDark: globalTokens.color.brand20,
+      themeDark: globalTokens.color.brand60,
       // @ts-ignore
-      themeDarkAlt: globalTokens.color.brand10,
+      themeDarkAlt: globalTokens.color.brand70,
       // @ts-ignore
-      themePrimary: globalTokens.color.brand40,
-      themeSecondary: '#2b88d8',
-      themeTertiary: '#71afe5',
-
+      themePrimary: globalTokens.color.brand80,
       // @ts-ignore
-      themeLight: globalTokens.color.brand40,
+      themeSecondary: globalTokens.color.brand90,
       // @ts-ignore
-      themeLighter: globalTokens.color.brand50,
+      themeTertiary: globalTokens.color.brand120,
       // @ts-ignore
-      themeLighterAlt: globalTokens.color.brand60,
+      themeLight: globalTokens.color.brand140,
       // @ts-ignore
-      accent: globalTokens.color.brand10,
+      themeLighter: globalTokens.color.brand150,
+      // @ts-ignore
+      themeLighterAlt: globalTokens.color.brand160,
+      // @ts-ignore
+      accent: globalTokens.color.brand80,
       blackTranslucent40: 'rgba(0,0,0,.4)',
     }),
     ...createColorAliasTokens('light'),
@@ -272,22 +273,24 @@ export function getStockWebDarkPalette(): ThemeColorDefinition {
     ...paletteFromFabricColors(
       {
         // colors taken from fluentui DarkCustomizations.ts
-        themeDarker: '#82c7ff',
         // @ts-ignore
-        themeDark: globalTokens.color.brand40,
+        themeDarker: globalTokens.color.brand110,
         // @ts-ignore
-        themeDarkAlt: globalTokens.color.brand40,
+        themeDark: globalTokens.color.brand100,
         // @ts-ignore
-        themePrimary: globalTokens.color.brand40,
+        themeDarkAlt: globalTokens.color.brand100,
         // @ts-ignore
-        themeSecondary: globalTokens.color.brand40,
-        themeTertiary: '#235a85',
+        themePrimary: globalTokens.color.brand90,
         // @ts-ignore
-        themeLight: globalTokens.color.brand40,
+        themeSecondary: globalTokens.color.brand90,
+        // @ts-ignore
+        themeTertiary: globalTokens.color.brand60,
+        // @ts-ignore
+        themeLight: globalTokens.color.brand50,
         // @ts-ignore
         themeLighter: globalTokens.color.brand40,
         // @ts-ignore
-        themeLighterAlt: globalTokens.color.brand40,
+        themeLighterAlt: globalTokens.color.brand30,
         black: globalTokens.color.white,
         neutralDark: '#faf9f8',
         neutralPrimary: '#f3f2f1',
