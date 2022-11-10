@@ -1,8 +1,26 @@
 # Change Log - @fluentui-react-native/radio-group
 
-This log was last generated on Tue, 08 Nov 2022 22:18:43 GMT and should not be manually modified.
+This log was last generated on Thu, 10 Nov 2022 02:05:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.2
+
+Thu, 10 Nov 2022 02:05:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.2
+
+## 0.16.1
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.1
+- Bump @fluentui-react-native/interactive-hooks to v0.20.1
+- Bump @fluentui-react-native/pressable to v0.9.31
 
 ## 0.16.0
 
