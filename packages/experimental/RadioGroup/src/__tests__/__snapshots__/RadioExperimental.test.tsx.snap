@@ -37,12 +37,13 @@ exports[`Radio component tests Radio default 1`] = `
   style={
     Object {
       "alignItems": "flex-start",
+      "borderColor": "transparent",
       "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
-      "marginRight": 12,
-      "marginTop": 0,
-      "minHeight": 20,
+      "paddingHorizontal": 8,
     }
   }
   value="key1"
@@ -50,18 +51,18 @@ exports[`Radio component tests Radio default 1`] = `
   <View
     style={
       Object {
+        "alignItems": "center",
         "backgroundColor": "transparent",
         "borderColor": "#616161",
         "borderRadius": 10,
         "borderStyle": "solid",
         "borderWidth": 1.5,
         "height": 20,
-        "left": 0,
+        "justifyContent": "center",
         "marginBottom": undefined,
-        "marginLeft": undefined,
+        "marginLeft": 8,
         "marginRight": undefined,
-        "marginTop": 8,
-        "top": 0,
+        "marginTop": undefined,
         "width": 20,
       }
     }
@@ -72,9 +73,7 @@ exports[`Radio component tests Radio default 1`] = `
           "backgroundColor": undefined,
           "borderRadius": 5,
           "height": 10,
-          "left": 4,
           "opacity": 0,
-          "top": 4,
           "width": 10,
         }
       }
@@ -84,8 +83,10 @@ exports[`Radio component tests Radio default 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "alignSelf": "center",
+        "alignSelf": "flex-start",
         "flexDirection": "column",
+        "marginLeft": 0,
+        "marginRight": 4,
       }
     }
   >
@@ -99,7 +100,7 @@ exports[`Radio component tests Radio default 1`] = `
           "fontSize": 17,
           "fontWeight": "400",
           "margin": 0,
-          "marginTop": 0,
+          "marginTop": 9,
         }
       }
     >
@@ -146,12 +147,13 @@ exports[`Radio component tests Radio disabled 1`] = `
   style={
     Object {
       "alignItems": "flex-start",
+      "borderColor": "transparent",
       "borderRadius": 4,
+      "borderStyle": "solid",
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
-      "marginRight": 12,
-      "marginTop": 0,
-      "minHeight": 20,
+      "paddingHorizontal": 8,
     }
   }
   value="key1"
@@ -159,18 +161,18 @@ exports[`Radio component tests Radio disabled 1`] = `
   <View
     style={
       Object {
+        "alignItems": "center",
         "backgroundColor": "transparent",
         "borderColor": "#bdbdbd",
         "borderRadius": 10,
         "borderStyle": "solid",
         "borderWidth": 1.5,
         "height": 20,
-        "left": 0,
+        "justifyContent": "center",
         "marginBottom": undefined,
-        "marginLeft": undefined,
+        "marginLeft": 8,
         "marginRight": undefined,
-        "marginTop": 8,
-        "top": 0,
+        "marginTop": undefined,
         "width": 20,
       }
     }
@@ -181,9 +183,7 @@ exports[`Radio component tests Radio disabled 1`] = `
           "backgroundColor": undefined,
           "borderRadius": 5,
           "height": 10,
-          "left": 4,
           "opacity": 0,
-          "top": 4,
           "width": 10,
         }
       }
@@ -193,8 +193,10 @@ exports[`Radio component tests Radio disabled 1`] = `
     style={
       Object {
         "alignItems": "flex-start",
-        "alignSelf": "center",
+        "alignSelf": "flex-start",
         "flexDirection": "column",
+        "marginLeft": 0,
+        "marginRight": 4,
       }
     }
   >
@@ -208,7 +210,7 @@ exports[`Radio component tests Radio disabled 1`] = `
           "fontSize": 17,
           "fontWeight": "400",
           "margin": 0,
-          "marginTop": 0,
+          "marginTop": 9,
         }
       }
     >
