@@ -231,7 +231,7 @@ export const tests: TestDescription[] = [
     name: 'Stroke Width Tokens',
     component: StrokeWidthTokensTest,
     testPage: HOMEPAGE_STROKEWIDTH_TESTPAGE,
-    platforms: ['ios'],
+    platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
     name: 'Svg',

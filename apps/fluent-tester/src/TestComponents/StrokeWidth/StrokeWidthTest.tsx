@@ -25,7 +25,13 @@ interface StrokeWidthTestComponentProps {
 }
 
 const StrokeWidthTestComponent: React.FunctionComponent<StrokeWidthTestComponentProps> = (props: StrokeWidthTestComponentProps) => {
-  const exampleStrokeStyle = { height: props.strokeWidth, backgroundColor: 'grey' };
+  const exampleStrokeStyle = React.useMemo(
+    () => ({
+      height: props.strokeWidth,
+      backgroundColor: 'grey',
+    }),
+    [props.strokeWidth],
+  );
 
   return (
     <View style={styles.root}>
@@ -41,10 +47,14 @@ const StrokeWidthTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
-        <StrokeWidthTestComponent name="Thin" strokeWidth={globalTokens.stroke.width.thin}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thick" strokeWidth={globalTokens.stroke.width.thick}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thicker" strokeWidth={globalTokens.stroke.width.thicker}></StrokeWidthTestComponent>
-        <StrokeWidthTestComponent name="Thickest" strokeWidth={globalTokens.stroke.width.thickest}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="widthNone" strokeWidth={globalTokens.stroke.widthNone}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width05" strokeWidth={globalTokens.stroke.width05}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width10" strokeWidth={globalTokens.stroke.width10}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width15" strokeWidth={globalTokens.stroke.width15}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width20" strokeWidth={globalTokens.stroke.width20}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width30" strokeWidth={globalTokens.stroke.width30}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width40" strokeWidth={globalTokens.stroke.width40}></StrokeWidthTestComponent>
+        <StrokeWidthTestComponent name="width60" strokeWidth={globalTokens.stroke.width60}></StrokeWidthTestComponent>
       </Stack>
     </View>
   );
@@ -60,14 +70,14 @@ const strokeWidthSections: TestSection[] = [
 
 export const StrokeWidthTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Backlog',
-    uwpStatus: 'Backlog',
+    win32Status: 'Experimental',
+    uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    macosStatus: 'Experimental',
+    androidStatus: 'Experimental',
   };
 
-  const description = 'This showcases the different stroke width tokens available in Fluent UI.';
+  const description = 'This showcases the different global stroke width tokens available in Fluent UI.';
 
   return <Test name="Stroke Width Tokens Test" description={description} sections={strokeWidthSections} status={status} />;
 };
