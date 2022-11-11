@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theme-tokens",
   "entries": [
     {
+      "date": "Fri, 11 Nov 2022 18:06:31 GMT",
+      "tag": "@fluentui-react-native/theme-tokens_v0.21.3",
+      "version": "0.21.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/theme-tokens",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0",
+            "comment": "Bump all design-tokens packages to 0.29.0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 08 Nov 2022 19:22:01 GMT",
       "tag": "@fluentui-react-native/theme-tokens_v0.21.2",
       "version": "0.21.2",
