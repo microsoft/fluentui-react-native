@@ -70,18 +70,18 @@ describe('mapFontPipelineToTheme test', () => {
 });
 
 describe('mapPipelineToShadow test', () => {
-  it('lightShadowTokens.shadow', () => {
-    const fontTheme = mapPipelineToShadow(lightShadowTokens.shadow);
+  it('lightShadowTokens', () => {
+    const fontTheme = mapPipelineToShadow(lightShadowTokens);
     expect(fontTheme).toMatchSnapshot();
   });
 
-  it('darkShadowTokens.shadow', () => {
-    const fontTheme = mapPipelineToShadow(darkShadowTokens.shadow);
+  it('darkShadowTokens', () => {
+    const fontTheme = mapPipelineToShadow(darkShadowTokens);
     expect(fontTheme).toMatchSnapshot();
   });
 
-  it('hcShadowTokens.shadow', () => {
-    const fontTheme = mapPipelineToShadow(hcShadowTokens.shadow);
+  it('hcShadowTokens', () => {
+    const fontTheme = mapPipelineToShadow(hcShadowTokens);
     expect(fontTheme).toMatchSnapshot();
   });
 });
