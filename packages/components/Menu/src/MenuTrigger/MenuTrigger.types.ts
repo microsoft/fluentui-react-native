@@ -3,6 +3,11 @@ import { InteractionEvent, PressablePropsExtended } from '@fluentui-react-native
 
 export const menuTriggerName = 'MenuTrigger';
 
+/**
+ * Represents single react element (or null), which is the
+ * type of the child of MenuTrigger. Notably this excludes string, number,
+ * and array of elements as children, which MenuTrigger doesn't support.
+ */
 type SingleReactElement = React.ReactElement | null;
 
 export interface MenuTriggerProps {
