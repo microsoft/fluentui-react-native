@@ -32,7 +32,7 @@ describe('RadioGroup component tests', () => {
 
   it('RadioGroup disabled', () => {
     const tree = renderer.create(
-      <RadioGroup disabled label="Disabled RadioGroup" defaultValue="key2">
+      <RadioGroup disabled label="Disabled RadioGroup">
         <View>
           <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
           <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />

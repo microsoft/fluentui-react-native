@@ -569,7 +569,6 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
     }
   }
   accessible={true}
-  defaultValue="key2"
   disabled={true}
   style={
     Object {
