@@ -29,8 +29,8 @@ exports[`CompoundButton default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 11,
-      "paddingHorizontal": 11,
+      "padding": 15,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -50,7 +50,7 @@ exports[`CompoundButton default 1`] = `
         Object {
           "color": "#323130",
           "fontFamily": "System",
-          "fontSize": 14,
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -68,7 +68,7 @@ exports[`CompoundButton default 1`] = `
       style={
         Object {
           "fontFamily": "System",
-          "fontSize": 12,
+          "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,
           "marginBottom": 0,

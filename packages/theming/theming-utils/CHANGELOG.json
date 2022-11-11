@@ -2,6 +2,63 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Fri, 04 Nov 2022 14:36:23 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.18.1",
+      "version": "0.18.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65",
+            "comment": "missingTokens"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.23.1",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 27 Oct 2022 11:09:35 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.18.0",
+      "version": "0.18.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8",
+            "comment": "Brand Tokens Integration"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/theming-utils",
+            "comment": "Bump @fluentui-react-native/theme-types to v0.23.0",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 21 Oct 2022 13:09:26 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df",
+            "comment": "Font Pipeline"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.16.2",
       "version": "0.16.2",

@@ -45,9 +45,15 @@ export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
   requiredPadding?: ViewStyle['padding'];
 
   /**
+   * The flex direction of the Radios
+   */
+  flexDirection?: ViewStyle['flexDirection'];
+
+  /**
    * States that can be applied to a RadioGroup
    */
   disabled?: RadioGroupTokens;
+  isHorizontal?: RadioGroupTokens;
 }
 
 export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigation' | 'defaultTabbableElement'>, IViewProps {
@@ -57,7 +63,9 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   label?: string;
 
   /**
-   * The key of the RadioButton that will initially be selected
+   * The key of the RadioButton that will initially be selected.
+   *
+   * This is mutually-exclusive if radiogroup is disabled or radio button is disabled.
    */
   defaultValue?: string;
 
@@ -79,6 +87,13 @@ export interface RadioGroupProps extends Pick<FocusZoneProps, 'isCircularNavigat
   disabled?: boolean;
 
   /**
+   * The position of the label relative to the indicator.
+   *
+   * @default vertical
+   */
+  layout?: 'vertical' | 'horizontal' | 'horizontal-stacked';
+
+  /**
    * Callback for receiving a notification when the choice has been changed
    */
   onChange?: (key: string) => void;
@@ -94,6 +109,7 @@ export interface RadioGroupSlotProps {
   label?: IViewProps;
   labelText?: TextProps;
   required?: TextProps;
+  options: IViewProps;
   container: FocusZoneProps;
 }
 

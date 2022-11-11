@@ -30,8 +30,8 @@ exports[`Button component tests Button circular 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -43,7 +43,7 @@ exports[`Button component tests Button circular 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -87,8 +87,8 @@ exports[`Button component tests Button composed 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -98,7 +98,7 @@ exports[`Button component tests Button composed 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "letterSpacing": undefined,
         "lineHeight": undefined,
@@ -143,8 +143,8 @@ exports[`Button component tests Button customized 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -156,7 +156,7 @@ exports[`Button component tests Button customized 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -200,8 +200,8 @@ exports[`Button component tests Button default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -213,7 +213,7 @@ exports[`Button component tests Button default 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -262,8 +262,8 @@ exports[`Button component tests Button disabled 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -275,7 +275,7 @@ exports[`Button component tests Button disabled 1`] = `
       Object {
         "color": "#a19f9d",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -320,8 +320,8 @@ exports[`Button component tests Button large 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 7,
-      "paddingHorizontal": 15,
+      "padding": 11,
+      "paddingHorizontal": 19,
       "width": undefined,
     }
   }
@@ -333,7 +333,7 @@ exports[`Button component tests Button large 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 16,
+        "fontSize": 17,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -370,16 +370,16 @@ exports[`Button component tests Button primary 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
-      "borderColor": "#005a9e",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -391,7 +391,7 @@ exports[`Button component tests Button primary 1`] = `
       Object {
         "color": "#ffffff",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -436,8 +436,8 @@ exports[`Button component tests Button small 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 64,
-      "padding": 3,
-      "paddingHorizontal": 7,
+      "padding": 7,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -449,7 +449,7 @@ exports[`Button component tests Button small 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 12,
+        "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
@@ -494,8 +494,8 @@ exports[`Button component tests Button square 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -507,7 +507,7 @@ exports[`Button component tests Button square 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -552,8 +552,8 @@ exports[`Button component tests Button subtle 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -565,7 +565,7 @@ exports[`Button component tests Button subtle 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

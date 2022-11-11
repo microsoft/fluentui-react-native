@@ -1,8 +1,154 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Nov 2022 01:02:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.3
+
+Fri, 11 Nov 2022 01:02:57 GMT
+
+### Patches
+
+- FocusZone (macOS): Ensure we passthrough unhandled keyboard events (sanajmi@microsoft.com)
+
+## 0.11.2
+
+Thu, 10 Nov 2022 02:05:55 GMT
+
+### Patches
+
+- Fix infinite loop in ContextualMenu (email not defined)
+
+## 0.11.1
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.20.1
+
+## 0.11.0
+
+Tue, 08 Nov 2022 22:18:43 GMT
+
+### Minor changes
+
+- update @office-iss/react-native-win32 to 0.68.8 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.20.0
+
+## 0.10.35
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+
+## 0.10.34
+
+Mon, 07 Nov 2022 21:42:58 GMT
+
+### Patches
+
+- Fix infinite loop in ContextualMenu (email not defined)
+
+## 0.10.33
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.6
+
+## 0.10.32
+
+Wed, 02 Nov 2022 00:59:45 GMT
+
+### Patches
+
+- Undo workaround needed for old haul polyfill (sanajmi@microsoft.com)
+
+## 0.10.31
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.5
+
+## 0.10.30
+
+Thu, 27 Oct 2022 21:01:42 GMT
+
+### Patches
+
+- FocusZone (macOS): New prop to ignore OS keyboard shortcut preference (sanajmi@microsoft.com)
+
+## 0.10.29
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.4
+
+## 0.10.28
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.3
+
+## 0.10.27
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.2
+
+## 0.10.26
+
+Thu, 20 Oct 2022 19:21:06 GMT
+
+### Patches
+
+- FocusZone (macOS): Fix RTL bug (sanajmi@microsoft.com)
+
+## 0.10.25
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- FocusZone (macOS): Calculate distance from origin (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.19.1
+
+## 0.10.24
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.19.0
+
+## 0.10.23
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.15
+
+## 0.10.22
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.18.14
 
 ## 0.10.21
 

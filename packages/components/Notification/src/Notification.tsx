@@ -79,7 +79,7 @@ export const Notification = compose<NotificationType>({
           <Slots.root {...mergedProps}>
             {icon && <Slots.icon {...iconProps} accessible={false} />}
             <Slots.contentContainer accessible={true}>
-              {title && <Slots.title>{title}</Slots.title>}
+              {title ? <Slots.title>{title}</Slots.title> : null}
               <Slots.message style={messageStyle}>{children}</Slots.message>
             </Slots.contentContainer>
             {onActionPress && <Slots.action {...notificationButtonProps} />}

@@ -469,6 +469,9 @@ export interface AliasColorTokens {
   neutralForeground3BrandHover: ColorValue;
   neutralForeground3BrandPressed: ColorValue;
   neutralForeground3BrandSelected: ColorValue;
+  neutralForegroundDisabled1?: ColorValue;
+  neutralForegroundDisabled2?: ColorValue;
+  neutralForegroundOnColor?: ColorValue;
 
   neutralForeground4?: ColorValue;
   neutralForegroundDisabled?: ColorValue;
@@ -481,9 +484,14 @@ export interface AliasColorTokens {
   compoundBrandForeground1Pressed?: ColorValue;
   neutralForegroundInverted: ColorValue;
 
-  brandForeground1?: ColorValue;
+  brandForeground1: ColorValue;
   brandForeground1Disabled?: ColorValue;
-  brandForeground1Pressed?: ColorValue;
+  brandForeground1Pressed: ColorValue;
+  brandForeground1Selected?: ColorValue;
+  brandForegroundTint?: ColorValue;
+  brandForegroundDisabled1?: ColorValue;
+  brandForegroundDisabled2?: ColorValue;
+
   brandForeground2?: ColorValue;
 
   neutralForegroundOnBrand?: ColorValue;
@@ -550,17 +558,27 @@ export interface AliasColorTokens {
   strokeFocus1?: ColorValue;
   strokeFocus2?: ColorValue;
 
-  brandBackground?: ColorValue;
+  brandBackground: ColorValue;
   brandBackgroundHover?: ColorValue;
-  brandBackgroundPressed?: ColorValue;
+  brandBackgroundPressed: ColorValue;
   brandBackgroundDisabled?: ColorValue;
-  brandBackgroundSelected?: ColorValue;
+  brandBackgroundSelected: ColorValue;
   compoundBrandBackground1?: ColorValue;
   compoundBrandBackground1Hover?: ColorValue;
   compoundBrandBackground1Pressed?: ColorValue;
   brandBackgroundStatic?: ColorValue;
-  brandBackground2?: ColorValue;
-  brandStroke1?: ColorValue;
+  brandBackground2: ColorValue;
+  brandBackground2Pressed?: ColorValue;
+  brandBackground2Selected?: ColorValue;
+
+  brandBackground3?: ColorValue;
+  brandBackgroundTint?: ColorValue;
+  brandBackgroundInverted?: ColorValue;
+  brandBackgroundInvertedDisabled?: ColorValue;
+
+  brandStroke1: ColorValue;
+  brandStroke1Pressed?: ColorValue;
+  brandStroke1Selected?: ColorValue;
   brandStroke2?: ColorValue;
 
   compoundBrandStroke1?: ColorValue;

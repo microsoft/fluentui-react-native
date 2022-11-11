@@ -1,8 +1,91 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.14
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.19
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/tokens to v0.17.8
+
+## 0.15.13
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.18
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/theme-tokens to v0.21.2
+
+## 0.15.12
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.17
+- Bump @fluentui-react-native/framework to v0.8.16
+- Bump @fluentui-react-native/theme-tokens to v0.21.1
+- Bump @fluentui-react-native/tokens to v0.17.7
+
+## 0.15.11
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.16
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/theme-tokens to v0.21.0
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.15.10
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.15
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/theme-tokens to v0.20.1
+
+## 0.15.9
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.14
+- Bump @fluentui-react-native/framework to v0.8.13
+
+## 0.15.8
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.13
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/theme-tokens to v0.20.0
+
+## 0.15.7
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.12
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/tokens to v0.17.5
 
 ## 0.15.6
 

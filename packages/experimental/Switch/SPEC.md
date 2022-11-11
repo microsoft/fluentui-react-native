@@ -51,7 +51,7 @@ The slots can be modified using the `compose` function on the `Switch`. For more
 Below is the set of props the Switch supports:
 
 ```ts
-export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface SwitchProps extends Omit<PressablePropsExtended 'onPress'> {
   /**
    * Reference to the Switch
    */

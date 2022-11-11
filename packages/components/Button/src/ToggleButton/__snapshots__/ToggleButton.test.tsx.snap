@@ -42,8 +42,8 @@ exports[`ToggleButton default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -55,7 +55,7 @@ exports[`ToggleButton default 1`] = `
       Object {
         "color": "#323130",
         "fontFamily": "System",
-        "fontSize": 14,
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

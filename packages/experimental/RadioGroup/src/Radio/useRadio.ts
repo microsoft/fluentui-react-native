@@ -1,19 +1,24 @@
-import { RadioProps, RadioState } from './Radio.types';
+import { RadioProps, RadioInfo } from './Radio.types';
 import * as React from 'react';
 import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
-import { useAsPressable, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState } from 'react-native';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
-export const useRadio = (props: RadioProps): RadioState => {
+export const useRadio = (props: RadioProps): RadioInfo => {
   const defaultComponentRef = React.useRef(null);
+
+  // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
+  const radioGroupContext = useRadioGroupContext();
+
   const {
     label,
     subtext,
     value,
     disabled,
+    labelPosition = radioGroupContext.layout === 'horizontal-stacked' ? 'below' : 'after',
     accessibilityActions,
     accessibilityLabel,
     accessibilityHint,
@@ -25,25 +30,24 @@ export const useRadio = (props: RadioProps): RadioState => {
     ...rest
   } = props;
 
-  // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
-  const selectedInfo = useRadioGroupContext();
+  const isDisabled = radioGroupContext.disabled || disabled;
 
   const buttonRef = useViewCommandFocus(componentRef);
 
   /* We don't want to call the user's onChange multiple times on the same selection. */
   const changeSelection = React.useCallback(() => {
-    if (value != selectedInfo.value) {
-      selectedInfo.onChange && selectedInfo.onChange(value);
-      selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
+    if (value !== radioGroupContext.value) {
+      radioGroupContext.onChange && radioGroupContext.onChange(value);
+      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
-  }, [selectedInfo, value, componentRef]);
+  }, [radioGroupContext, value, componentRef]);
 
   /* We use the componentRef of the currently selected button to maintain the default tabbable
     element in a RadioGroup. Since the componentRef isn't generated until after initial render,
     we must update it once here. */
   React.useEffect(() => {
-    if (value == selectedInfo.value) {
-      selectedInfo.updateSelectedButtonRef && componentRef && selectedInfo.updateSelectedButtonRef(componentRef);
+    if (value === radioGroupContext.value && !isDisabled) {
+      radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
     }
   }, []);
 
@@ -51,7 +55,7 @@ export const useRadio = (props: RadioProps): RadioState => {
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
   /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
-  const pressable = useAsPressable({
+  const pressable = usePressableState({
     ...rest,
     onPress: changeSelectionWithFocus,
     onFocus: changeSelection,
@@ -76,8 +80,9 @@ export const useRadio = (props: RadioProps): RadioState => {
 
   const state = {
     ...pressable.state,
-    selected: selectedInfo.value === props.value,
-    disabled: selectedInfo.disabled || disabled || false,
+    selected: radioGroupContext.value === props.value && !isDisabled,
+    disabled: isDisabled || false,
+    labelPositionBelow: labelPosition === 'below',
   };
 
   return {
@@ -85,6 +90,7 @@ export const useRadio = (props: RadioProps): RadioState => {
       value,
       label,
       subtext,
+      labelPosition,
       ...rest,
       ref: buttonRef,
       ...pressable.props,
@@ -93,8 +99,8 @@ export const useRadio = (props: RadioProps): RadioState => {
       accessibilityHint: accessibilityHint ?? subtext,
       accessibilityState: getAccessibilityState(state.disabled, state.selected, accessibilityState),
       accessibilityActions: accessibilityActionsProp,
-      accessibilityPositionInSet: accessibilityPositionInSet ?? selectedInfo.values.findIndex((x) => x == value) + 1,
-      accessibilitySetSize: accessibilitySetSize ?? selectedInfo.values.length,
+      accessibilityPositionInSet: accessibilityPositionInSet ?? radioGroupContext.values.findIndex((x) => x == value) + 1,
+      accessibilitySetSize: accessibilitySetSize ?? radioGroupContext.values.length,
       focusable: !state.disabled,
       enableFocusRing: enableFocusRing ?? true,
       onAccessibilityAction: onAccessibilityAction,

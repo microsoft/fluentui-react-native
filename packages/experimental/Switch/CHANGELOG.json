@@ -2,6 +2,354 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Wed, 09 Nov 2022 22:52:11 GMT",
+      "tag": "@fluentui-react-native/switch_v0.7.1",
+      "version": "0.7.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.20.1",
+            "commit": "cad484c342321e75b0fa8920ebd3ffe4c2509d30"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 08 Nov 2022 22:18:44 GMT",
+      "tag": "@fluentui-react-native/switch_v0.7.0",
+      "version": "0.7.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae",
+            "comment": "update @office-iss/react-native-win32 to 0.68.8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/adapters to v0.10.0",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.14",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.18",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.20.0",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.8",
+            "commit": "892e038305667c72dd7c9af1e706ffe648a2d2ae"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 08 Nov 2022 19:22:01 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.27",
+      "version": "0.6.27",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.13",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.17",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.7",
+            "commit": "2a423f2b00d2039d1c67fc60b4d81b942e45a9dc"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 04 Nov 2022 14:36:23 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.26",
+      "version": "0.6.26",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.12",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.16",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.6",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.7",
+            "commit": "ddd021042b3e70af9dcc976f1d89e9c912defa65"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 01 Nov 2022 16:30:56 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.25",
+      "version": "0.6.25",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.5",
+            "commit": "f85015b9cf0c2a823556db6023fce48b6cac124c"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Sat, 29 Oct 2022 01:05:20 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.24",
+      "version": "0.6.24",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "9d5251df615f035066294a17a93e50bead28d7cc",
+            "comment": "MenuV1: Update types to PressablePropsExtended"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 27 Oct 2022 11:09:35 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.23",
+      "version": "0.6.23",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.11",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.15",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.4",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.6",
+            "commit": "ceeb4be38b8e0008315f65711c064c5fbd3d8bb8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 25 Oct 2022 22:47:45 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.22",
+      "version": "0.6.22",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.10",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.14",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.3",
+            "commit": "1e46feedf33b4bddf2888af9c6134f2cd705fa7b"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 21 Oct 2022 13:09:26 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.21",
+      "version": "0.6.21",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.9",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.13",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.2",
+            "commit": "5a21fe82f7540f64ec4fe8937cf5f86f11d1c9df"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Thu, 20 Oct 2022 18:30:02 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.20",
+      "version": "0.6.20",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.1",
+            "commit": "9e827dde137238cae829145564cbc880bbdc5a90"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 18 Oct 2022 04:06:27 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.19",
+      "version": "0.6.19",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.19.0",
+            "commit": "9e7902b05f12947fdb475cdd0fc6fc7d7db774a5"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Oct 2022 23:24:26 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.18",
+      "version": "0.6.18",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/switch",
+            "commit": "177b7637e6a739e728cf7763f5292abc42f4076d",
+            "comment": "Switch Switch to Pressable"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 17 Oct 2022 17:52:49 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.17",
+      "version": "0.6.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.8",
+            "commit": "14bd4084276efd59f022ab5074441eca421c96d0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.12",
+            "commit": "14bd4084276efd59f022ab5074441eca421c96d0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.15",
+            "commit": "14bd4084276efd59f022ab5074441eca421c96d0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 14 Oct 2022 19:11:13 GMT",
+      "tag": "@fluentui-react-native/switch_v0.6.16",
+      "version": "0.6.16",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/adapters to v0.9.3",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.15.7",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.11",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.18.14",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/tokens to v0.17.5",
+            "commit": "7263bc3c7cd4796b28fadad4f14a73d967deda0f"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 12 Oct 2022 21:54:15 GMT",
       "tag": "@fluentui-react-native/switch_v0.6.15",
       "version": "0.6.15",

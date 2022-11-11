@@ -1,8 +1,76 @@
 # Change Log - @fluentui-react-native/experimental-shimmer
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.7.19
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/tokens to v0.17.8
+
+## 0.7.18
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.17
+
+## 0.7.17
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.16
+- Bump @fluentui-react-native/tokens to v0.17.7
+
+## 0.7.16
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/tokens to v0.17.6
+
+## 0.7.15
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.14
+
+## 0.7.14
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.13
+
+## 0.7.13
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.12
+
+## 0.7.12
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/tokens to v0.17.5
 
 ## 0.7.11
 

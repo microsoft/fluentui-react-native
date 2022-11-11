@@ -1,8 +1,67 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 19:22:01 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.2
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Snapshots (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.21.2
+
+## 0.14.1
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- missingTokens (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.21.1
+- Bump @fluentui-react-native/theme-types to v0.23.1
+- Bump @fluentui-react-native/theme to v0.7.8
+- Bump @fluentui-react-native/theming-utils to v0.18.1
+
+## 0.14.0
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Minor changes
+
+- Snaphost update (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.21.0
+- Bump @fluentui-react-native/theme-types to v0.23.0
+- Bump @fluentui-react-native/theme to v0.7.7
+- Bump @fluentui-react-native/theming-utils to v0.18.0
+
+## 0.13.1
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.20.1
+
+## 0.13.0
+
+Fri, 21 Oct 2022 13:09:25 GMT
+
+### Minor changes
+
+- FontPipeline (email not defined)
+- Bump @fluentui-react-native/theming-utils to v0.17.0
+
+## 0.12.9
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- test updates (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.20.0
 
 ## 0.12.8
 

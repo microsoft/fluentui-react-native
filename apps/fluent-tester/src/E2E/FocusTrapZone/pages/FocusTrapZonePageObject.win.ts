@@ -10,7 +10,7 @@ class FocusTrapZonePageObject extends BasePage {
   // a wrapper that adds keyboard focus functionality
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
     const errorMsg = 'The FocusTrapZone UI Element did not load correctly. Please see logs.';
-    await this.waitForCondition(async () => await this._primaryComponent.isExisting(), errorMsg, timeout);
+    await this.waitForCondition(async () => await (await this._primaryComponent).isExisting(), errorMsg, timeout);
   }
 
   /*****************************************/

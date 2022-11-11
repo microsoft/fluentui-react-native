@@ -29,7 +29,7 @@ exports[`ContextualMenu default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "padding": 5,
+      "padding": 8,
       "width": undefined,
     }
   }
@@ -38,7 +38,7 @@ exports[`ContextualMenu default 1`] = `
     align="xMidYMid"
     bbHeight={16}
     bbWidth={12}
-    color={-10395295}
+    color={4284572001}
     focusable={false}
     height={16}
     meetOrSlice={0}
@@ -57,7 +57,7 @@ exports[`ContextualMenu default 1`] = `
         },
       ]
     }
-    tintColor={-10395295}
+    tintColor={4284572001}
     vbHeight={6}
     vbWidth={11}
     width={12}

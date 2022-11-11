@@ -1,11 +1,11 @@
 import { Theme } from '@fluentui-react-native/framework';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
-import { ButtonCoreTokens } from '../Button.types';
+import { FABTokens } from './FAB.types';
 
-export const defaultFABTokens: TokenSettings<ButtonCoreTokens, Theme> = (t: Theme) =>
+export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>
   ({
-    borderRadius: globalTokens.corner.radius.circle,
+    borderRadius: globalTokens.corner.radiusCircular,
     minHeight: 56,
     minWidth: 56,
     padding: globalTokens.spacing.l,
@@ -15,4 +15,4 @@ export const defaultFABTokens: TokenSettings<ButtonCoreTokens, Theme> = (t: Them
       },
     },
     shadowToken: t.shadows.shadow8,
-  } as ButtonCoreTokens);
+  } as FABTokens);

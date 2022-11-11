@@ -1,4 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { NotificationTokens } from './Notification.types';
 import { DynamicColorIOS } from 'react-native';
@@ -104,8 +105,8 @@ export const defaultNotificationTokens: TokenSettings<NotificationTokens, Theme>
     fontSize: 15,
     fontWeight: '400',
     minHeight: 52,
-    padding: 16,
-    paddingVertical: 12,
+    padding: globalTokens.spacing.m,
+    paddingVertical: globalTokens.spacing.s,
     shadowToken: notificationShadowStyle,
     isBar: {
       borderRadius: 0,

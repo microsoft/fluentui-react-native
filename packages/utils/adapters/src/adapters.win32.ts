@@ -81,6 +81,7 @@ const _textMask: IFilterMask<ITextProps> = {
   accessibilityItemType: true,
   accessibilityLabel: true,
   accessibilityLabeledBy: true,
+  accessibilityLevel: true,
   accessibilityRole: true,
   accessibilityState: true,
   accessibilityValue: true,

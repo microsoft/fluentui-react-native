@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/experimental-text
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.20
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.14
+
+## 0.11.19
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.13
+
+## 0.11.18
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.12
+
+## 0.11.17
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.11
+
+## 0.11.16
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.10
+
+## 0.11.15
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.9
+
+## 0.11.14
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.8
+
+## 0.11.13
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/text to v0.15.7
 
 ## 0.11.12
 

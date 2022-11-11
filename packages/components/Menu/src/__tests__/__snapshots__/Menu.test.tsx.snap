@@ -37,8 +37,8 @@ exports[`Checkbox component tests Menu default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -49,8 +49,8 @@ exports[`Checkbox component tests Menu default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -103,8 +103,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -115,8 +115,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -149,16 +149,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -171,13 +171,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -187,14 +187,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -203,10 +202,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -224,14 +223,13 @@ Array [
             }
           }
           accessible={true}
-          disabled={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -241,15 +239,14 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
-              "marginTop": 2,
+              "marginTop": 4,
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -258,10 +255,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#323130",
+                "color": "#bdbdbd",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -314,8 +311,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -326,8 +323,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -366,16 +363,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -388,13 +385,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -404,14 +401,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -420,10 +416,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -476,8 +472,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -488,8 +484,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -528,16 +524,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -558,13 +554,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -574,14 +570,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -589,7 +584,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -602,7 +597,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -612,7 +607,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -642,10 +637,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -660,7 +655,7 @@ Array [
               "backgroundColor": "#d1d1d1",
               "display": "flex",
               "height": 1,
-              "margin": 2,
+              "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
             }
@@ -683,14 +678,13 @@ Array [
             }
           }
           accessible={true}
-          disabled={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -700,15 +694,14 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
-              "marginTop": 2,
+              "marginTop": 4,
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -716,6 +709,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
+            color={4290624957}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -728,7 +722,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -738,6 +732,7 @@ Array [
                 },
               ]
             }
+            tintColor={4290624957}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -767,9 +762,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
+                "color": "#bdbdbd",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -822,8 +818,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -834,8 +830,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -874,16 +870,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -904,13 +900,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -920,14 +916,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -935,7 +930,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -948,7 +943,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -958,7 +953,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -988,10 +983,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1006,7 +1001,7 @@ Array [
               "backgroundColor": "#d1d1d1",
               "display": "flex",
               "height": 1,
-              "margin": 2,
+              "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
             }
@@ -1029,13 +1024,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1045,15 +1040,14 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
-              "marginTop": 2,
+              "marginTop": 4,
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -1061,7 +1055,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1074,7 +1068,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1084,7 +1078,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1114,10 +1108,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1170,8 +1164,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1182,8 +1176,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -1222,16 +1216,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -1252,13 +1246,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1268,14 +1262,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -1283,7 +1276,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1296,7 +1289,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1306,7 +1299,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1336,10 +1329,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1354,7 +1347,7 @@ Array [
               "backgroundColor": "#d1d1d1",
               "display": "flex",
               "height": 1,
-              "margin": 2,
+              "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
             }
@@ -1377,13 +1370,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1393,15 +1386,14 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
-              "marginTop": 2,
+              "marginTop": 4,
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -1409,7 +1401,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1422,7 +1414,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1432,7 +1424,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1462,10 +1454,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1518,8 +1510,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1530,8 +1522,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -1570,16 +1562,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -1600,13 +1592,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1616,14 +1608,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -1631,7 +1622,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1644,7 +1635,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1654,7 +1645,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1684,10 +1675,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1713,13 +1704,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1729,15 +1720,14 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
-              "marginTop": 2,
+              "marginTop": 4,
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -1745,7 +1735,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1758,7 +1748,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1768,7 +1758,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
@@ -1798,10 +1788,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1854,8 +1844,8 @@ Array [
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
-        "padding": 5,
-        "paddingHorizontal": 11,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1866,8 +1856,8 @@ Array [
       style={
         Object {
           "color": "#323130",
-          "fontFamily": "Segoe UI",
-          "fontSize": 14,
+          "fontFamily": "System",
+          "fontSize": 15,
           "fontWeight": "600",
           "margin": 0,
           "marginBottom": 0,
@@ -1906,16 +1896,16 @@ Array [
       focusable={false}
       onBlur={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={false}
+      onMouseLeave={[Function]}
     >
       <View
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#ffffff",
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "padding": 4,
+            "padding": 8,
           }
         }
       >
@@ -1928,13 +1918,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1944,14 +1934,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -1960,10 +1949,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1983,6 +1972,7 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
           onAccessibilityAction={[Function]}
@@ -1990,9 +1980,6 @@ Array [
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onHoverIn={[Function]}
-          onHoverOut={false}
-          onPress={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2002,14 +1989,13 @@ Array [
           style={
             Object {
               "alignItems": "center",
-              "backgroundColor": "#000000",
+              "backgroundColor": "#ffffff",
               "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
-              "padding": 6,
             }
           }
         >
@@ -2018,10 +2004,10 @@ Array [
             numberOfLines={0}
             style={
               Object {
-                "color": "#616161",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 14,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -2033,7 +2019,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={-10395295}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -2052,7 +2038,7 @@ Array [
                 },
               ]
             }
-            tintColor={-10395295}
+            tintColor={4282532418}
             vbHeight={16}
             vbWidth={16}
             width={16}
