@@ -50,9 +50,9 @@ static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSP
 	);
 }
 
-/// Performs a depth first search looking for the first key view in a parent view's view hierarchy.
+/// Performs a depth first search looking for the first view that accepts responder status in a parent view's view hierarchy.
 /// This function does not take into account the geometric position of the view.
-static NSView *GetFirstKeyViewWithin(NSView *parentView)
+static NSView *GetFirstFocusableViewWithin(NSView *parentView)
 {
     if ([[parentView subviews] count] < 1)
     {
@@ -64,7 +64,7 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 			return view;
 		}
 
-		NSView *match = GetFirstKeyViewWithin(view);
+		NSView *match = GetFirstFocusableViewWithin(view);
 		if (match) {
 			return match;
 		}
@@ -72,17 +72,17 @@ static NSView *GetFirstKeyViewWithin(NSView *parentView)
 	return nil;
 }
 
-/// Performs a depth first search looking for the last key view in a parent view's view hierarchy.
+/// Performs a depth first search looking for the last that accepts responder status in a parent view's view hierarchy.
 /// We find the last view by simply reversing the order of the subview array.
 /// This function does not take into account the geometric position of the view.
-static NSView *GetLastKeyViewWithin(NSView *parentView)
+static NSView *GetLastFocusableViewWithin(NSView *parentView)
 {
 	for (NSView *view in [[parentView subviews] reverseObjectEnumerator]) {
 		if ([view acceptsFirstResponder]) {
 			return view;
 		}
 
-		NSView *match = GetLastKeyViewWithin(view);
+		NSView *match = GetLastFocusableViewWithin(view);
 		if (match) {
 			return match;
 		}
@@ -175,7 +175,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 {
 	if([view isKindOfClass:[RCTFocusZone class]])
 	{
-		NSView *keyView = GetFirstKeyViewWithin(view);
+		NSView *keyView = GetFirstFocusableViewWithin(view);
 		// FocusZone is empty or has no focusable elements
 		if (keyView == nil)
 		{
@@ -195,7 +195,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 - (BOOL)becomeFirstResponder
 {
-	NSView *keyView = _defaultKeyView ?: GetFirstKeyViewWithin(self);
+	NSView *keyView = _defaultResponder ?: GetFirstFocusableViewWithin(self);
 	return !_disabled && [[self window] makeFirstResponder:keyView];
 }
 
@@ -356,11 +356,11 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 	{
 		if (action == FocusZoneActionDownArrow)
 		{
-			return GetFirstKeyViewWithin(self);
+			return GetFirstFocusableViewWithin(self);
 		}
 		else if (action == FocusZoneActionUpArrow)
 		{
-			return GetLastKeyViewWithin(self);
+			return GetLastFocusableViewWithin(self);
 		}
 	}
 
@@ -422,9 +422,9 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		// If the previous view is in a FocusZone, focus on its defaultKeyView
 		// (For FocusZoneActionTab, this is handled by becomeFirstResponder).
 		RCTFocusZone *focusZoneAncestor = GetFocusZoneAncestor(nextViewToFocus);
-		NSView *ancestorKeyView = [focusZoneAncestor defaultKeyView];
+		NSView *ancestorKeyView = [focusZoneAncestor defaultResponder];
 		if (ancestorKeyView != nil) {
-			nextViewToFocus = [focusZoneAncestor defaultKeyView];
+			nextViewToFocus = [focusZoneAncestor defaultResponder];
 		}
 	}
 
