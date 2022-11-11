@@ -18,6 +18,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
 import { StyleSheet } from 'react-native';
 import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
+import { MenuTriggerChildRef } from './MenuRefs';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -279,6 +280,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Customized',
     component: MenuCustomized,
+  },
+  {
+    name: 'Menu Refs',
+    component: MenuTriggerChildRef,
   },
   {
     name: 'Menu E2E',

@@ -1,8 +1,72 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Mon, 07 Nov 2022 21:42:58 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Nov 2022 18:06:31 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.67
+
+Fri, 11 Nov 2022 18:06:31 GMT
+
+### Patches
+
+- Bump all design-tokens packages to 0.29.0 (78454019+lyzhan7@users.noreply.github.com)
+- Bump @fluentui-react-native/button to v0.30.2
+- Bump @fluentui-react-native/contextual-menu to v0.19.13
+- Bump @fluentui-react-native/icon to v0.14.1
+- Bump @fluentui-react-native/interactive-hooks to v0.20.2
+- Bump @uifabricshared/foundation-compose to v1.12.20
+
+## 0.8.66
+
+Fri, 11 Nov 2022 01:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.12
+
+## 0.8.65
+
+Thu, 10 Nov 2022 02:05:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.19.11
+
+## 0.8.64
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.30.1
+- Bump @fluentui-react-native/contextual-menu to v0.19.10
+- Bump @fluentui-react-native/interactive-hooks to v0.20.1
+
+## 0.8.63
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.30.0
+- Bump @fluentui-react-native/contextual-menu to v0.19.9
+- Bump @fluentui-react-native/icon to v0.14.0
+- Bump @fluentui-react-native/interactive-hooks to v0.20.0
+- Bump @fluentui-react-native/tokens to v0.17.8
+- Bump @uifabricshared/foundation-compose to v1.12.19
+
+## 0.8.62
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.29.4
+- Bump @fluentui-react-native/contextual-menu to v0.19.8
+- Bump @fluentui-react-native/icon to v0.13.22
+- Bump @fluentui-react-native/interactive-hooks to v0.19.7
+- Bump @uifabricshared/foundation-compose to v1.12.18
 
 ## 0.8.61
 

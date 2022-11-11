@@ -8,21 +8,21 @@ export const defaultButtonFontTokens: TokenSettings<ButtonTokens, Theme> = (t: T
     medium: {
       hasContent: {
         fontFamily: t.typography.families.secondary,
-        fontSize: globalTokens.font.size[300],
+        fontSize: globalTokens.font.size300,
         fontWeight: globalTokens.font.weight.semibold,
       },
     },
     small: {
       hasContent: {
         fontFamily: t.typography.families.primary,
-        fontSize: globalTokens.font.size[200],
+        fontSize: globalTokens.font.size200,
         fontWeight: globalTokens.font.weight.regular,
       },
     },
     large: {
       hasContent: {
         fontFamily: t.typography.families.secondary,
-        fontSize: globalTokens.font.size[400],
+        fontSize: globalTokens.font.size400,
         fontWeight: globalTokens.font.weight.semibold,
       },
     },

@@ -14,6 +14,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   radioBorder?: ColorValue;
 
   /**
+   * Indicator border color
+   */
+  radioBorderStyle?: ViewStyle['borderStyle'];
+
+  /**
    * Inner circle color when selected
    */
   radioFill?: ColorValue;
@@ -73,6 +78,16 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    */
   labelMarginTop?: ViewStyle['marginTop'];
 
+  /**
+   * Padding between label content and focus ring.
+   */
+  labelMarginRight?: ViewStyle['marginRight'];
+
+  /**
+   * Padding between label content and focus ring.
+   */
+  labelMarginLeft?: ViewStyle['marginLeft'];
+
   /*
    * Variant of label subtext.
    *
@@ -86,13 +101,6 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    * Should only by used if subtext prop is provided.
    */
   subtextMarginTop?: ViewStyle['marginTop'];
-
-  /**
-   * Padding between label subtext and focus ring.
-   *
-   * Should only by used if subtext prop is provided.
-   */
-  subtextMarginRight?: ViewStyle['marginRight'];
 
   /**
    * Padding between label subtext and focus ring.

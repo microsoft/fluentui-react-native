@@ -178,9 +178,9 @@ function getRingConfig(tokens: AvatarTokens): any {
   const innerGap = tokens.ringInnerGap || ringThickness;
 
   const strokeSize = {
-    small: globalTokens.stroke.width.thick,
-    medium: globalTokens.stroke.width.thicker,
-    large: globalTokens.stroke.width.thickest,
+    small: globalTokens.stroke.width20,
+    medium: globalTokens.stroke.width30,
+    large: globalTokens.stroke.width40,
   };
   if (ringThickness) {
     return {

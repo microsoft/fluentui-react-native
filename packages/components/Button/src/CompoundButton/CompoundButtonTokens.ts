@@ -5,12 +5,12 @@ import { CompoundButtonTokens } from './CompoundButton.types';
 
 export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Theme> = (): CompoundButtonTokens => ({
   medium: {
-    padding: globalTokens.spacing.m - globalTokens.stroke.width.thin,
+    padding: globalTokens.spacing.m - globalTokens.stroke.width10,
     focused: {
       padding: globalTokens.spacing.m,
     },
     hasContent: {
-      paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width.thin,
+      paddingHorizontal: globalTokens.spacing.m - globalTokens.stroke.width10,
       minWidth: 96,
       focused: {
         paddingHorizontal: globalTokens.spacing.m,
@@ -24,12 +24,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
     },
   },
   small: {
-    padding: globalTokens.spacing.s - globalTokens.stroke.width.thin,
+    padding: globalTokens.spacing.s - globalTokens.stroke.width10,
     focused: {
       padding: globalTokens.spacing.s,
     },
     hasContent: {
-      paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width.thin,
+      paddingHorizontal: globalTokens.spacing.s - globalTokens.stroke.width10,
       minWidth: 64,
       focused: {
         paddingHorizontal: globalTokens.spacing.s,
@@ -43,12 +43,12 @@ export const defaultCompoundButtonTokens: TokenSettings<CompoundButtonTokens, Th
     },
   },
   large: {
-    padding: globalTokens.spacing.l - globalTokens.stroke.width.thin,
+    padding: globalTokens.spacing.l - globalTokens.stroke.width10,
     focused: {
       padding: globalTokens.spacing.l,
     },
     hasContent: {
-      paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width.thin,
+      paddingHorizontal: globalTokens.spacing.l - globalTokens.stroke.width10,
       minWidth: 96,
       focused: {
         paddingHorizontal: globalTokens.spacing.l,
