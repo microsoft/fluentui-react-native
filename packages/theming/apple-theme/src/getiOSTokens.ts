@@ -5,9 +5,9 @@ import { assertNever } from 'assert-never';
 
 export function getiOSShadowTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
-    return iOSLightShadowTokens.shadow;
+    return iOSLightShadowTokens;
   } else if (mode === 'dark') {
-    return iOSDarkShadowTokens.shadow;
+    return iOSDarkShadowTokens;
   } else if (mode === 'highContrast') {
     throw new Error('highContrast is not a valid AppearanceOptions on iOS');
   } else {

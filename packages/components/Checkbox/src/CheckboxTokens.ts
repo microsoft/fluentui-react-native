@@ -8,14 +8,14 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     requiredColor: t.colors.redForeground1,
     requiredPadding: globalTokens.spacing.s,
     medium: {
-      borderRadius: globalTokens.corner.radius.small,
-      checkboxBorderWidth: globalTokens.stroke.width.thin,
-      checkboxBorderRadius: globalTokens.corner.radius.small,
+      borderRadius: globalTokens.corner.radius20,
+      checkboxBorderWidth: globalTokens.stroke.width10,
+      checkboxBorderRadius: globalTokens.corner.radius20,
       checkboxSize: 16,
       checkmarkSize: 12,
       label: {
         padding: globalTokens.spacing.s,
-        borderRadius: globalTokens.corner.radius.medium,
+        borderRadius: globalTokens.corner.radius40,
         spacingLabelAfter: globalTokens.spacing.m,
         labelIsBefore: {
           spacingLabelBefore: globalTokens.spacing.m,
@@ -26,14 +26,14 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       variant: 'bodyStandard',
     },
     large: {
-      borderRadius: globalTokens.corner.radius.small,
-      checkboxBorderWidth: globalTokens.stroke.width.thin,
-      checkboxBorderRadius: globalTokens.corner.radius.small,
+      borderRadius: globalTokens.corner.radius20,
+      checkboxBorderWidth: globalTokens.stroke.width10,
+      checkboxBorderRadius: globalTokens.corner.radius20,
       checkboxSize: 20,
       checkmarkSize: 16,
       label: {
         padding: globalTokens.spacing.s,
-        borderRadius: globalTokens.corner.radius.medium,
+        borderRadius: globalTokens.corner.radius40,
         spacingLabelAfter: globalTokens.spacing.m,
         labelIsBefore: {
           spacingLabelBefore: globalTokens.spacing.m,
@@ -68,7 +68,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkmarkOpacity: 1,
     },
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
-      checkboxBorderRadius: globalTokens.corner.radius.circle,
+      borderRadius: globalTokens.corner.radiusCircular,
+      checkboxBorderRadius: globalTokens.corner.radiusCircular,
     },
   } as CheckboxTokens);
