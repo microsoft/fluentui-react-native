@@ -14,7 +14,7 @@ export function useFontMetrics(): ScaleFactors {
 
   const subscription = useMemo(
     () => ({
-      getCurrentValue: () => NativeFontMetrics.allScaleFactors(),
+      getCurrentValue: () => NativeFontMetrics.currentScaleFactors(),
       subscribe: (callback) => {
         const appearanceSubscription = eventEmitter.addListener('onFontMetricsChanged', callback);
         return () => {

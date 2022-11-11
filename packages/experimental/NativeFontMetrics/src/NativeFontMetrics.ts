@@ -1,12 +1,12 @@
 import { ScaleFactors, TextStyle } from './NativeFontMetrics.types';
 
 interface NativeFontMetricsInterface {
-  allScaleFactors(): ScaleFactors;
+  currentScaleFactors(): ScaleFactors;
   scaleFactorForStyle(style: TextStyle): number;
 }
 
 const NativeFontMetrics: NativeFontMetricsInterface = {
-  allScaleFactors: () => {
+  currentScaleFactors: () => {
     console.warn('NativeFontMetrics is only available on iOS');
     return {};
   },

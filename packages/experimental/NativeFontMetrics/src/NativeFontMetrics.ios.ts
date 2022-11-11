@@ -4,7 +4,7 @@ import { ScaleFactors, TextStyle } from './NativeFontMetrics.types';
 export const NativeFontMetrics = NativeModules.FRNFontMetrics;
 
 interface NativeFontMetricsInterface {
-  allScaleFactors(): ScaleFactors;
+  currentScaleFactors(): ScaleFactors;
   scaleFactorForStyle(style: TextStyle): number;
 }
 export default NativeFontMetrics as NativeFontMetricsInterface;
