@@ -191,14 +191,14 @@ exports[`Notification component tests Notification default 1`] = `
           "backgroundColor": "transparent",
           "borderColor": "#ffffff",
           "borderRadius": 4,
-          "borderWidth": 1.5,
+          "borderWidth": 1,
           "display": "flex",
           "flexDirection": "row",
           "justifyContent": "center",
           "marginStart": 16,
           "minWidth": 96,
           "padding": 8,
-          "paddingHorizontal": 14.5,
+          "paddingHorizontal": 15,
         }
       }
     >
