@@ -14,7 +14,7 @@ import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
-import { useFontMetrics } from '@fluentui-react-native/experimental-native-font-metrics';
+import { fontMetrics } from '@fluentui-react-native/experimental-native-font-metrics';
 
 const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
@@ -45,8 +45,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   const theme = useFluentTheme();
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
-
-  const fontMetrics = useFontMetrics();
 
   const textAlign = I18nManager.isRTL
     ? align === 'start'
@@ -106,7 +104,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     }
     let scaleStyleAdjustmentProps: ScaleStyleAdjustmentProps = {};
     if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
-      const scaleFactor = fontMetrics[dynamicTypeVariant] ?? 1;
+      const scaleFactor = fontMetrics.scaleFactors[dynamicTypeVariant] ?? 1;
       scaleStyleAdjustmentProps = {
         fontSize: tokenStyle.fontSize * scaleFactor,
         lineHeight: tokenStyle.lineHeight * scaleFactor,
