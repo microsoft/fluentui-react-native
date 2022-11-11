@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { HOMEPAGE_STROKEWIDTH_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
