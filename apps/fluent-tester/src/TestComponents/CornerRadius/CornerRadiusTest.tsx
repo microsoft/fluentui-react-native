@@ -6,6 +6,8 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { Text } from '@fluentui/react-native';
+import { useFluentTheme } from '@fluentui-react-native/framework';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
 
 interface CornerRadiusTestComponentProps {
   name: string;
@@ -13,14 +15,17 @@ interface CornerRadiusTestComponentProps {
 }
 
 const CornerRadiusTestComponent: React.FunctionComponent<CornerRadiusTestComponentProps> = (props: CornerRadiusTestComponentProps) => {
+  const theme = useFluentTheme();
+  const isLightMode = getCurrentAppearance(theme.host.appearance, 'light') === 'light';
+
   const outerBoxProps = React.useMemo(
     () => ({
       height: 60,
       margin: 16,
-      backgroundColor: 'lightgrey',
+      backgroundColor: isLightMode ? globalTokens.color.grey80 : globalTokens.color.grey10,
       borderRadius: props.cornerRadius,
     }),
-    [props.cornerRadius],
+    [props.cornerRadius, isLightMode],
   );
 
   const innerCircleIndicatorProps = React.useMemo(
@@ -28,16 +33,16 @@ const CornerRadiusTestComponent: React.FunctionComponent<CornerRadiusTestCompone
       height: props.cornerRadius * 2,
       width: props.cornerRadius * 2,
       borderRadius: props.cornerRadius,
-      backgroundColor: 'grey',
+      backgroundColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
     }),
-    [props.cornerRadius],
+    [props.cornerRadius, isLightMode],
   );
 
   return (
     <View>
       <Text variant="bodySemibold">{props.name + ': ' + props.cornerRadius + 'px'}</Text>
       <View style={outerBoxProps}>
-        <View style={innerCircleIndicatorProps} />
+        <View style={innerCircleIndicatorProps}></View>
       </View>
     </View>
   );
