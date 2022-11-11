@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bump design tokens packages from 0.29.0 to 0.31.0",
-  "packageName": "@fluentui-react-native/dropdown",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
