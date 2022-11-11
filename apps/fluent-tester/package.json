@@ -70,6 +70,7 @@
     "@fluentui-react-native/switch": "^0.7.1",
     "@fluentui-react-native/text": ">=0.15.14 <1.0.0",
     "@fluentui-react-native/theme": ">=0.7.8 <1.0.0",
+    "@fluentui-react-native/theme-tokens": "^0.21.2",
     "@fluentui-react-native/theme-types": ">=0.23.1 <1.0.0",
     "@fluentui-react-native/themed-stylesheet": "^1.4.1",
     "@fluentui-react-native/theming-utils": ">=0.18.1 <1.0.0",
