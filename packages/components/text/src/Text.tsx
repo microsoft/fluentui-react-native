@@ -84,7 +84,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     color,
     variant,
     fontFamily: font == 'base' ? 'primary' : font,
-    fontSize: globalTokens.font.size[size],
+    fontSize: globalTokens.font['size' + size],
     fontWeight: globalTokens.font.weight[weight] as FontWeightValue,
     // leave it undefined for tokens to be set by user
     fontStyle: italic ? 'italic' : undefined,

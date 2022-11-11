@@ -32,15 +32,15 @@ export function getMacOSAliasTokens(mode: AppearanceOptions, isHighContrast: boo
 export function getMacOSShadowTokens(mode: AppearanceOptions, isHighContrast: boolean) {
   if (mode === 'light') {
     if (isHighContrast) {
-      return macOSLightHCShadowTokens.shadow;
+      return macOSLightHCShadowTokens;
     } else {
-      return macOSLightShadowTokens.shadow;
+      return macOSLightShadowTokens;
     }
   } else if (mode === 'dark') {
     if (isHighContrast) {
-      return macOSDarkHCShadowTokens.shadow;
+      return macOSDarkHCShadowTokens;
     } else {
-      return macOSDarkShadowTokens.shadow;
+      return macOSDarkShadowTokens;
     }
   } else if (mode === 'highContrast') {
     throw new Error('highContrast is not a valid AppearanceOptions on macOS');
