@@ -1,20 +1,25 @@
 import * as React from 'react';
-import { SvgIcon } from '../';
+import { FontIcon } from '../';
 import * as renderer from 'react-test-renderer';
 
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
+const fontProps = {
+  fontFamily: 'Arial',
+  codepoint: 0x2663,
+  color: '#f07',
+};
 describe('Icon component tests', () => {
   it('SVG Icon', () => {
-    const tree = renderer.create(<SvgIcon viewBox="0 0 1000 1000" />).toJSON();
+    const tree = renderer.create(<FontIcon {...fontProps} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('Icon checkRenderConsistency', () => {
-    checkRenderConsistency(() => <SvgIcon />, 2);
+    checkRenderConsistency(() => <FontIcon {...fontProps} />, 2);
   });
 
   it('Icon re-renders correctly', () => {
-    checkReRender(() => <SvgIcon />, 2);
+    checkReRender(() => <FontIcon {...fontProps} />, 2);
   });
 });

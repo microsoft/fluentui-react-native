@@ -6,13 +6,8 @@ export const useFontIcon = (props: FontIconProps): FontIconProps => {
   const { color, fontSrcFile, fontFamily, fontSize, ...rest } = props;
 
   const style: TextStyle = fontStyleMemoCache(
-    {
-      fontSrcFile,
-      fontFamily: fontSrcFile != undefined ? fontFamilyFromFontSrcFile(fontSrcFile, fontFamily) : fontFamily,
-      fontSize,
-      color,
-    },
-    [color, fontSrcFile, fontFamily],
+    { fontFamily: fontSrcFile != undefined ? fontFamilyFromFontSrcFile(fontSrcFile, fontFamily) : fontFamily, fontSize, color },
+    [color, fontSize, fontFamily],
   )[0];
   return {
     style,
