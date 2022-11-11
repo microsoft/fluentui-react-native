@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HOMEPAGE_STROKEWIDTH_TESTPAGE } from './consts';
+import { STROKEWIDTH_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { View } from 'react-native';
 import { Stack } from '@fluentui-react-native/stack';
@@ -73,7 +73,7 @@ const StrokeWidthTest: React.FunctionComponent = () => {
 const strokeWidthSections: TestSection[] = [
   {
     name: 'Basic Usage',
-    testID: HOMEPAGE_STROKEWIDTH_TESTPAGE,
+    testID: STROKEWIDTH_TESTPAGE,
     component: StrokeWidthTest,
   },
 ];

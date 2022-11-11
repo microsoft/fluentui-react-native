@@ -27,7 +27,7 @@ import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } 
 import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
 import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
-import { StrokeWidthTokensTest, HOMEPAGE_STROKEWIDTH_TESTPAGE } from './TestComponents/StrokeWidth';
+import { StrokeWidthTokensTest, STROKEWIDTH_TESTPAGE } from './TestComponents/StrokeWidth';
 import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
 import { SvgTest, HOMEPAGE_SVG_BUTTON } from './TestComponents/Svg';
 import { SwitchTest, HOMEPAGE_SWITCH_BUTTON } from './TestComponents/Switch';
@@ -230,7 +230,7 @@ export const tests: TestDescription[] = [
   {
     name: 'Stroke Width Tokens',
     component: StrokeWidthTokensTest,
-    testPage: HOMEPAGE_STROKEWIDTH_TESTPAGE,
+    testPage: STROKEWIDTH_TESTPAGE,
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
