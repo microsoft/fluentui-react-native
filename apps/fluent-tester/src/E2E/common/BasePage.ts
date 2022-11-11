@@ -197,7 +197,7 @@ export class BasePage {
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
-  async waitForCondition(condition?: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
+  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
     await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
