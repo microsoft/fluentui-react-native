@@ -12,7 +12,7 @@ import { MenuItemCheckbox } from '../MenuItemCheckbox/MenuItemCheckbox';
 import { MenuDivider } from '../MenuDivider/MenuDivider';
 import { MenuItemRadio } from '../MenuItemRadio/MenuItemRadio';
 
-describe('Checkbox component tests', () => {
+describe('Menu component tests', () => {
   it('Menu default', () => {
     const tree = renderer
       .create(
