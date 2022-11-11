@@ -465,19 +465,16 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		viewToFocus = [self nextViewToFocusWithFallback:action];
 	}
 
-	if (passthrough)
-	{
-		[super keyDown:event];
-	}
-	else if (viewToFocus != nil)
+	if (viewToFocus != nil)
 	{
 		[[self window] makeFirstResponder:viewToFocus];
 		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
 	}
-	else
+	else if (passthrough)
 	{
-		// There are no views to pass focus to and we don't want to call `[super keyDown:event]`.
-		// Explicitly no-op.
+		// Only call super if we explicitly want to passthrough the event
+		// I.E: FocusZone don't handle this specific key
+		[super keyDown:event];
 	}
 }
 
