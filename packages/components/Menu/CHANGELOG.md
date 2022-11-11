@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Fri, 11 Nov 2022 18:06:31 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Nov 2022 19:03:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.0.74
+
+Fri, 11 Nov 2022 19:03:46 GMT
+
+### Patches
+
+- Add ref merging to useMenuTrigger (ruaraki@microsoft.com)
 
 ## 1.0.73
 

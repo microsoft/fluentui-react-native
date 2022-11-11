@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 11 Nov 2022 19:03:46 GMT",
+      "tag": "@fluentui-react-native/tester_v0.106.0",
+      "version": "0.106.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "64b20dfcc58d60e3d609fc8ca07ef4043a21e5c8",
+            "comment": "Add a test case"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.0.74",
+            "commit": "64b20dfcc58d60e3d609fc8ca07ef4043a21e5c8"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Nov 2022 18:06:32 GMT",
       "tag": "@fluentui-react-native/tester_v0.105.1",
       "version": "0.105.1",

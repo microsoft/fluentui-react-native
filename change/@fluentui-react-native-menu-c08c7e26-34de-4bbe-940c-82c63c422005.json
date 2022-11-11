@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add ref merging to useMenuTrigger",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Fri, 11 Nov 2022 19:03:46 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.74",
+      "version": "1.0.74",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "64b20dfcc58d60e3d609fc8ca07ef4043a21e5c8",
+            "comment": "Add ref merging to useMenuTrigger"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Nov 2022 18:06:31 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.73",
       "version": "1.0.73",
