@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 11 Nov 2022 02:01:35 GMT",
+      "tag": "@fluentui-react-native/tester_v0.105.0",
+      "version": "0.105.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "770a466027bf9494ba7e2c9c765a80f5e6cb8586",
+            "comment": "Removing optional parameter. It should not be optional"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Nov 2022 01:02:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.104.4",
       "version": "0.104.4",

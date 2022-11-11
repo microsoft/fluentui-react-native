@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 11 Nov 2022 01:02:57 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Nov 2022 02:01:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.105.0
+
+Fri, 11 Nov 2022 02:01:35 GMT
+
+### Minor changes
+
+- Removing optional parameter. It should not be optional (email not defined)
 
 ## 0.104.4
 

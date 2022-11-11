@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Removing optional parameter. It should not be optional",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "email not defined",
-  "dependentChangeType": "patch"
-}
