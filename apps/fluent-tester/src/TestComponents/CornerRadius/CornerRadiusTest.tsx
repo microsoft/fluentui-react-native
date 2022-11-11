@@ -53,7 +53,7 @@ const CornerRadiusTest: React.FunctionComponent = () => {
         <CornerRadiusTestComponent name="radius60" cornerRadius={globalTokens.corner.radius60} />
         <CornerRadiusTestComponent name="radius80" cornerRadius={globalTokens.corner.radius80} />
         <CornerRadiusTestComponent name="radius120" cornerRadius={globalTokens.corner.radius120} />
-        <CornerRadiusTestComponent name="Circular" cornerRadius={globalTokens.corner.radiusCircular} />
+        <CornerRadiusTestComponent name="radiusCircular" cornerRadius={globalTokens.corner.radiusCircular} />
       </Stack>
     </View>
   );
