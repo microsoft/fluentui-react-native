@@ -1,8 +1,43 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 08 Nov 2022 22:18:44 GMT and should not be manually modified.
+This log was last generated on Thu, 10 Nov 2022 02:05:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.104.2
+
+Thu, 10 Nov 2022 02:05:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.5.14
+- Bump @fluentui-react-native/experimental-radio-group to v0.7.18
+- Bump @fluentui-react-native/experimental-tabs to v0.7.2
+- Bump @fluentui-react-native/menu to v1.0.71
+- Bump @fluentui/react-native to v0.32.57
+
+## 0.104.1
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/avatar to v1.2.34
+- Bump @fluentui-react-native/badge to v0.1.56
+- Bump @fluentui-react-native/button to v0.30.1
+- Bump @fluentui-react-native/dropdown to v0.5.14
+- Bump @fluentui-react-native/experimental-button to v0.16.54
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.1
+- Bump @fluentui-react-native/experimental-link to v0.1.10
+- Bump @fluentui-react-native/experimental-menu-button to v0.5.13
+- Bump @fluentui-react-native/experimental-radio-group to v0.7.17
+- Bump @fluentui-react-native/experimental-shadow to v0.2.41
+- Bump @fluentui-react-native/experimental-tabs to v0.7.1
+- Bump @fluentui-react-native/interactive-hooks to v0.20.1
+- Bump @fluentui-react-native/menu to v1.0.70
+- Bump @fluentui-react-native/notification to v0.18.1
+- Bump @fluentui-react-native/switch to v0.7.1
+- Bump @fluentui/react-native to v0.32.56
 
 ## 0.104.0
 

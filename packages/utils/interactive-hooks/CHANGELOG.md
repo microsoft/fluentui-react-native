@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Tue, 08 Nov 2022 22:18:43 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Nov 2022 22:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.1
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Update useViewCommandFocus (amchiu@microsoft.com)
 
 ## 0.20.0
 
