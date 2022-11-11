@@ -53,7 +53,7 @@ const StrokeWidthTestComponent: React.FunctionComponent<StrokeWidthTestComponent
   );
 };
 
-const StrokeWidthTest: React.FunctionComponent = () => {
+const StrokeWidthTestRamp: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
@@ -74,11 +74,11 @@ const strokeWidthSections: TestSection[] = [
   {
     name: 'Basic Usage',
     testID: STROKEWIDTH_TESTPAGE,
-    component: StrokeWidthTest,
+    component: StrokeWidthTestRamp,
   },
 ];
 
-export const StrokeWidthTokensTest: React.FunctionComponent = () => {
+export const StrokeWidthTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Experimental',
     uwpStatus: 'Experimental',
