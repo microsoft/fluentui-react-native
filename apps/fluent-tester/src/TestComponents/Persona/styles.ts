@@ -1,6 +1,6 @@
 export * from '../PersonaCoin/styles';
 
 export const rajeshImageUrl =
-  'https://media-exp1.licdn.com/dms/image/C4E03AQFH5EV54YFN9g/profile-displayphoto-shrink_800_800/0/1517670612089?e=1673481600&v=beta&t=XaxIkit14fANqZy2jQPlPA03FXhl4iQbF24lq3V2XzM';
+  'https://static.seattletimes.com/wp-content/uploads/2016/09/a9c139d2-8665-11e6-9a5f-c893d49e0984-780x1091.jpg';
 
-export const michaelImageUrl = 'https://assets.vogue.com/photos/5988caf017b3c906c79dc630/master/pass/00-tout-micheal-jackson.jpg';
+export const michaelImageUrl = 'https://upload.wikimedia.org/wikipedia/commons/3/31/Michael_Jackson_in_1988.jpg';
