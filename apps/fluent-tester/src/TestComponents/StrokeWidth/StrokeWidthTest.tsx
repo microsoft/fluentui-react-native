@@ -6,17 +6,24 @@ import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { Text } from '@fluentui/react-native';
+import { Theme, useFluentTheme } from '@fluentui-react-native/framework';
+import { getCurrentAppearance } from '@fluentui-react-native/theming-utils';
+import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
-const styles = StyleSheet.create({
-  root: {
-    paddingBottom: 16,
-  },
-  exampleStrokeBackground: {
-    height: 100,
-    backgroundColor: '#f0f0f0',
-    display: 'flex',
-    justifyContent: 'center',
-  },
+const getThemedStyles = themedStyleSheet((t: Theme) => {
+  const isLightMode = getCurrentAppearance(t.host.appearance, 'light') === 'light';
+  return {
+    root: {
+      paddingBottom: 16,
+    },
+    exampleStrokeBackground: {
+      height: 100,
+      backgroundColor: isLightMode ? globalTokens.color.grey80 : globalTokens.color.grey10,
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: 8,
+    },
+  };
 });
 
 interface StrokeWidthTestComponentProps {
@@ -25,10 +32,13 @@ interface StrokeWidthTestComponentProps {
 }
 
 const StrokeWidthTestComponent: React.FunctionComponent<StrokeWidthTestComponentProps> = (props: StrokeWidthTestComponentProps) => {
+  const theme = useFluentTheme();
+  const styles = getThemedStyles(theme);
+  const isLightMode = getCurrentAppearance(theme.host.appearance, 'light') === 'light';
   const exampleStrokeStyle = React.useMemo(
     () => ({
       height: props.strokeWidth,
-      backgroundColor: 'grey',
+      backgroundColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
     }),
     [props.strokeWidth],
   );
