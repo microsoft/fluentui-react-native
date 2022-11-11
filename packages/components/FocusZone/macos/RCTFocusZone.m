@@ -1,5 +1,6 @@
 #import "KeyCodes.h"
 #import "RCTFocusZone.h"
+#import "RCTi18nUtil.h"
 
 typedef enum {
 	FocusZoneActionNone,
@@ -25,14 +26,18 @@ static inline CGFloat GetDistanceBetweenPoints(NSPoint point1, NSPoint point2)
 	return sqrt(delta.x * delta.x + delta.y * delta.y);
 }
 
-static inline NSPoint GetCenterOfRect(NSRect rect)
+static inline CGFloat GetDistanceBetweenRects(NSRect rect1, NSRect rect2)
 {
-	return NSMakePoint(NSMidX(rect), NSMidY(rect));
-}
+	// Get the top left corner of the rect, top right in RTL
+	bool isRTL = [[RCTI18nUtil sharedInstance] isRTL];
 
-static inline CGFloat GetDistanceBetweenCentersOfRects(NSRect rect1, NSRect rect2)
-{
-	return GetDistanceBetweenPoints(GetCenterOfRect(rect1), GetCenterOfRect(rect2));
+	CGFloat rect1Offset = isRTL ? rect1.size.width : 0;
+	CGFloat rect2Offset = isRTL ? rect2.size.width : 0;
+	
+	NSPoint rect1Corner = NSMakePoint(rect1.origin.x + rect1Offset , rect1.origin.y);
+	NSPoint rect2Corner = NSMakePoint(rect2.origin.x + rect2Offset , rect2.origin.y);
+
+	return GetDistanceBetweenPoints(rect1Corner, rect2Corner);
 }
 
 static inline CGFloat GetMinDistanceBetweenRectVerticesAndPoint(NSRect rect, NSPoint point)
@@ -275,7 +280,7 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 
 		if (!skip)
 		{
-			CGFloat distance = GetDistanceBetweenCentersOfRects(firstResponderRect, candidateRect);
+			CGFloat distance = GetDistanceBetweenRects(firstResponderRect, candidateRect);
 			
 			// If there are other candidate views inside the same ScrollView as the firstResponder,
 			// prefer those views over other views outside the scrollview, even if they are closer.
@@ -391,6 +396,12 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		nextViewToFocus = [self nextValidKeyView];
 		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
+			// there are no views left in the key view loop
+			if ([nextViewToFocus isEqual:focusZoneAncestor])
+			{
+				nextViewToFocus = nil;
+				break;
+			}
 			nextViewToFocus = [nextViewToFocus nextValidKeyView];
 		}
 	}
@@ -399,6 +410,12 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		nextViewToFocus = [self previousValidKeyView];
 		while([nextViewToFocus isDescendantOf:focusZoneAncestor])
 		{
+			// there are no views left in the key view loop
+			if ([nextViewToFocus isEqual:focusZoneAncestor])
+			{
+				nextViewToFocus = nil;
+				break;
+			}
 			nextViewToFocus = [nextViewToFocus previousValidKeyView];
 		}
 		
@@ -448,13 +465,15 @@ static BOOL ShouldSkipFocusZone(NSView *view)
 		viewToFocus = [self nextViewToFocusWithFallback:action];
 	}
 
-	if (!passthrough && viewToFocus != nil)
+	if (viewToFocus != nil)
 	{
 		[[self window] makeFirstResponder:viewToFocus];
 		[viewToFocus scrollRectToVisible:[viewToFocus bounds]];
 	}
-	else
+	else if (passthrough)
 	{
+		// Only call super if we explicitly want to passthrough the event
+		// I.E: FocusZone don't handle this specific key
 		[super keyDown:event];
 	}
 }

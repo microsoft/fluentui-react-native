@@ -1,8 +1,114 @@
 # Change Log - @fluentui-react-native/interactive-hooks
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Nov 2022 22:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.20.1
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Update useViewCommandFocus (amchiu@microsoft.com)
+
+## 0.20.0
+
+Tue, 08 Nov 2022 22:18:43 GMT
+
+### Minor changes
+
+- update @office-iss/react-native-win32 to 0.68.8 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/icon to v0.14.0
+
+## 0.19.7
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/icon to v0.13.22
+
+## 0.19.6
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.16
+- Bump @fluentui-react-native/icon to v0.13.21
+
+## 0.19.5
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Added check for modifier key (vkozlova@microsoft.com)
+
+## 0.19.4
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/icon to v0.13.20
+
+## 0.19.3
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/icon to v0.13.19
+
+## 0.19.2
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/icon to v0.13.18
+
+## 0.19.1
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Fix pipeline some more (ruaraki@microsoft.com)
+
+## 0.19.0
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Minor changes
+
+- move hoook to shareable location and add rending tests (email not defined)
+- Bump @fluentui-react-native/framework to v0.8.12
+
+## 0.18.15
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.13.17
+
+## 0.18.14
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/icon to v0.13.16
 
 ## 0.18.13
 

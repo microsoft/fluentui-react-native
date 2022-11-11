@@ -27,7 +27,7 @@ class ContextualMenuPageObject extends BasePage {
 
   /* Whether the contextual menu item is displayed or not. It should be displayed after clicking on the MenuButton */
   async contextualMenuItemDisplayed(): Promise<boolean> {
-    return await this._contextualMenuItem.isDisplayed();
+    return await (await this._contextualMenuItem).isDisplayed();
   }
 
   /* Sends a Keyboarding command on a specific UI element */

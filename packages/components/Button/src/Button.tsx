@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
@@ -9,9 +9,10 @@ import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native
 import { useButton } from './useButton';
 import { Icon } from '@fluentui-react-native/icon';
 import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { extractOuterStylePropsAndroid } from './ExtractStyle.android';
 
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the button.
+ * A function which determines if a set of styles should be applied to the component given the current state and props of the button.
  *
  * @param layer The name of the state that is being checked for
  * @param state The current state of the button
@@ -38,12 +39,14 @@ export const Button = compose<ButtonType>({
   displayName: buttonName,
   ...stylingSettings,
   slots: {
-    root: View,
+    root: Pressable,
+    rippleContainer: View,
     icon: Icon,
     content: Text,
   },
   useRender: (userProps: ButtonProps, useSlots: UseSlots<ButtonType>) => {
     const button = useButton(userProps);
+
     const iconProps = createIconProps(userProps.icon);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => buttonLookup(layer, button.state, userProps));
@@ -69,18 +72,37 @@ export const Button = compose<ButtonType>({
           }
         });
       }
-      const label = accessibilityLabel ?? childText;
 
-      return (
-        <Slots.root {...mergedProps} accessibilityLabel={label}>
+      const label = accessibilityLabel ?? childText;
+      const buttonContent = (
+        <React.Fragment>
           {loading && <ActivityIndicator />}
           {shouldShowIcon && iconPosition === 'before' && <Slots.icon {...iconProps} />}
           {React.Children.map(children, (child) =>
             typeof child === 'string' ? <Slots.content key="content">{child}</Slots.content> : child,
           )}
           {shouldShowIcon && iconPosition === 'after' && <Slots.icon {...iconProps} />}
-        </Slots.root>
+        </React.Fragment>
       );
+
+      const hasRipple = Platform.OS === 'android';
+      if (hasRipple) {
+        const [outerStyleProps, innerStyleProps] = extractOuterStylePropsAndroid(mergedProps.style);
+        return (
+          <Slots.rippleContainer style={outerStyleProps}>
+            {/* RN Pressable needs to be wrapped with a root view to support curved edges */}
+            <Slots.root accessibilityLabel={label} {...mergedProps} style={innerStyleProps}>
+              {buttonContent}
+            </Slots.root>
+          </Slots.rippleContainer>
+        );
+      } else {
+        return (
+          <Slots.root {...mergedProps} accessibilityLabel={label}>
+            {buttonContent}
+          </Slots.root>
+        );
+      }
     };
   },
 });

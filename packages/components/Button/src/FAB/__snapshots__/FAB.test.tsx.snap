@@ -4,20 +4,14 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
 <View
   accessibilityLabel="Custom FAB with no shadow(iOS)"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   iconPosition="before"
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -36,7 +30,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
       "justifyContent": "center",
       "minHeight": 56,
       "minWidth": 56,
-      "padding": 16,
+      "padding": 20,
       "width": undefined,
     }
   }
@@ -47,7 +41,7 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
@@ -104,20 +98,14 @@ exports[`Default FAB (iOS) 1`] = `
   <View
     accessibilityLabel="Default FAB (iOS)"
     accessibilityRole="button"
-    accessibilityState={
-      Object {
-        "disabled": false,
-      }
-    }
     accessible={true}
-    disabled={false}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
     iconPosition="before"
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onPress={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -144,7 +132,7 @@ exports[`Default FAB (iOS) 1`] = `
         "justifyContent": "center",
         "minHeight": 56,
         "minWidth": 56,
-        "padding": 16,
+        "padding": 20,
         "paddingBottom": undefined,
         "paddingEnd": undefined,
         "paddingHorizontal": undefined,
@@ -170,7 +158,7 @@ exports[`Default FAB (iOS) 1`] = `
       style={
         Object {
           "color": "#ffffff",
-          "fontFamily": "Segoe UI",
+          "fontFamily": "System",
           "fontSize": 13,
           "fontWeight": "400",
           "margin": 0,

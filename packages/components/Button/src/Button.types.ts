@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewStyle, ColorValue } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
 import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IPressableHooks, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IconProps, IconSourcesType } from '@fluentui-react-native/icon';
-import { IViewProps } from '@fluentui-react-native/adapters';
 import { ShadowToken } from '@fluentui-react-native/theme-types';
+import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -17,6 +17,11 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
    * The icon color.
    */
   iconColor?: ColorValue;
+
+  /**
+   * Ripple color for Android.
+   */
+  rippleColor?: ColorValue;
 
   /**
    * The size of the icon.
@@ -34,22 +39,33 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   width?: ViewStyle['width'];
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels.
    */
   spacingIconContentBefore?: number;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels
+   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
    */
   spacingIconContentAfter?: number;
 
   /**
-   * An object describing the shadow of the button
+   * An object describing the shadow of the button.
    */
   shadowToken?: ShadowToken;
 
   /**
-   * States that can be applied to a button
+   * Focused State on Android has inner and outer borders.
+   * Outer Border is equivalent to the border tokens from IBorders.
+   */
+  borderInnerColor?: ColorValue;
+  borderInnerWidth?: number;
+  borderInnerRadius?: number;
+  borderInnerStyle?: ViewStyle['borderStyle'];
+}
+
+export interface ButtonTokens extends ButtonCoreTokens {
+  /**
+   * States that can be applied to a button.
    */
   hovered?: ButtonTokens;
   focused?: ButtonTokens;
@@ -57,12 +73,6 @@ export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderToken
   disabled?: ButtonTokens;
   hasContent?: ButtonTokens;
   hasIconBefore?: ButtonTokens;
-}
-
-export interface ButtonTokens extends ButtonCoreTokens {
-  /**
-   * Additional states that can be applied to a button
-   */
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
   block?: ButtonTokens;
@@ -75,14 +85,14 @@ export interface ButtonTokens extends ButtonCoreTokens {
   hasIconAfter?: ButtonTokens;
 }
 
-export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'> {
   /*
    * Source URL or name of the icon to show on the Button.
    */
   icon?: IconSourcesType;
 
   /**
-   * Button contains only icon, there's no text content
+   * Button contains only icon, there's no content.
    * Must be set for button to style correctly when button has not content.
    */
   iconOnly?: boolean;
@@ -93,7 +103,7 @@ export interface ButtonCoreProps extends Omit<IWithPressableOptions<ViewProps>, 
   componentRef?: React.RefObject<IFocusable>;
 
   /**
-   * A callback to call on button click event
+   * A callback to call on button click event.
    */
   onClick?: (e: InteractionEvent) => void;
 
@@ -118,12 +128,12 @@ export interface ButtonProps extends ButtonCoreProps {
   block?: boolean;
 
   /**
-   * Whether to use native focus visuals for the component
+   * Whether to use native focus visuals for the component.
    * @default true
    */
   enableFocusRing?: boolean;
 
-  /** Sets style of button to a preset size style
+  /** Sets style of button to a preset size style.
    * @default 'small' on win32, 'medium' elsewhere
    */
   size?: ButtonSize;
@@ -148,10 +158,14 @@ export interface ButtonProps extends ButtonCoreProps {
   loading?: boolean;
 }
 
-export type ButtonState = IPressableHooks<ButtonProps & React.ComponentPropsWithRef<any>>;
+export interface ButtonInfo {
+  props: ButtonProps & React.ComponentPropsWithRef<any>;
+  state: PressableState;
+}
 
 export interface ButtonSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressablePropsExtended>;
+  rippleContainer?: IViewProps; // Android only
   icon: IconProps;
   content: TextProps;
 }

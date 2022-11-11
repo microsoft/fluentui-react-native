@@ -9,6 +9,7 @@ import { Picker } from '@react-native-picker/picker';
 export interface CollectionItem<T = string> {
   label: string;
   value?: T;
+  testID?: string;
 }
 
 export interface MenuPickerProps {
@@ -17,10 +18,11 @@ export interface MenuPickerProps {
   onChange?: (value: any, index?: number) => void;
   collection?: CollectionItem[];
   style?: any;
+  testID?: string;
 }
 
 export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: MenuPickerProps) => {
-  const { prompt, selected, onChange, collection, style } = props;
+  const { prompt, selected, onChange, collection, style, testID } = props;
   let selectedItemKey;
 
   collection.forEach((item) => {
@@ -31,13 +33,14 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
 
   return (
     <Picker
+      testID={testID}
       prompt={prompt}
       selectedValue={selectedItemKey}
       onValueChange={(value: string, index: number) => onChange(value, index)}
       style={{ ...style }}
     >
       {collection.map((item, index) => (
-        <Picker.Item label={item.label} key={index} value={item.value} />
+        <Picker.Item label={item.label} key={index} value={item.value} testID={item.testID} />
       ))}
     </Picker>
   );

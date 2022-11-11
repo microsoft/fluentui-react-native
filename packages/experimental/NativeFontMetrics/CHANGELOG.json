@@ -1,0 +1,20 @@
+{
+  "name": "@fluentui-react-native/experimental-native-font-metrics",
+  "entries": [
+    {
+      "date": "Mon, 07 Nov 2022 21:42:58 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.2.0",
+      "version": "0.2.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "1c37d1859d1ed1009e1efe0e894ada950483a9bf",
+            "comment": "Add NativeFontMetrics package"
+          }
+        ]
+      }
+    }
+  ]
+}

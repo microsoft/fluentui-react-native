@@ -4,19 +4,13 @@ exports[`Button component tests Button circular 1`] = `
 <View
   accessibilityLabel="Circular Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -31,13 +25,13 @@ exports[`Button component tests Button circular 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 9999,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -48,8 +42,8 @@ exports[`Button component tests Button circular 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -68,19 +62,13 @@ exports[`Button component tests Button composed 1`] = `
 <View
   accessibilityLabel="Composed Button with RNText"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -94,13 +82,13 @@ exports[`Button component tests Button composed 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -109,8 +97,8 @@ exports[`Button component tests Button composed 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "letterSpacing": undefined,
         "lineHeight": undefined,
@@ -130,19 +118,13 @@ exports[`Button component tests Button customized 1`] = `
 <View
   accessibilityLabel="Custom Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -156,13 +138,13 @@ exports[`Button component tests Button customized 1`] = `
       "backgroundColor": "pink",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -173,8 +155,8 @@ exports[`Button component tests Button customized 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -193,19 +175,13 @@ exports[`Button component tests Button default 1`] = `
 <View
   accessibilityLabel="Default Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -219,13 +195,13 @@ exports[`Button component tests Button default 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -236,8 +212,8 @@ exports[`Button component tests Button default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -252,23 +228,79 @@ exports[`Button component tests Button default 1`] = `
 </View>
 `;
 
+exports[`Button component tests Button disabled 1`] = `
+<View
+  accessibilityLabel="Disabled Button"
+  accessibilityRole="button"
+  accessibilityState={
+    Object {
+      "disabled": true,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  enableFocusRing={true}
+  focusable={false}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "alignItems": "center",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#f3f2f1",
+      "borderColor": "#f3f2f1",
+      "borderRadius": 4,
+      "borderWidth": 1.5,
+      "display": "flex",
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "minWidth": 96,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
+      "width": undefined,
+    }
+  }
+>
+  <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    style={
+      Object {
+        "color": "#a19f9d",
+        "fontFamily": "System",
+        "fontSize": 15,
+        "fontWeight": "600",
+        "margin": 0,
+        "marginBottom": 0,
+        "marginEnd": 0,
+        "marginStart": 0,
+        "marginTop": 0,
+      }
+    }
+  >
+    Disabled Button
+  </Text>
+</View>
+`;
+
 exports[`Button component tests Button large 1`] = `
 <View
   accessibilityLabel="Large Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -283,13 +315,13 @@ exports[`Button component tests Button large 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 7,
-      "paddingHorizontal": 15,
+      "padding": 10.5,
+      "paddingHorizontal": 18.5,
       "width": undefined,
     }
   }
@@ -300,8 +332,8 @@ exports[`Button component tests Button large 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 16,
+        "fontFamily": "System",
+        "fontSize": 17,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -320,20 +352,14 @@ exports[`Button component tests Button primary 1`] = `
 <View
   accessibilityLabel="Primary Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
   appearance="primary"
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -347,13 +373,13 @@ exports[`Button component tests Button primary 1`] = `
       "backgroundColor": "#0078d4",
       "borderColor": "#005a9e",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -364,8 +390,8 @@ exports[`Button component tests Button primary 1`] = `
     style={
       Object {
         "color": "#ffffff",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -384,19 +410,13 @@ exports[`Button component tests Button small 1`] = `
 <View
   accessibilityLabel="Small Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -411,13 +431,13 @@ exports[`Button component tests Button small 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 64,
-      "padding": 3,
-      "paddingHorizontal": 7,
+      "padding": 6.5,
+      "paddingHorizontal": 10.5,
       "width": undefined,
     }
   }
@@ -428,7 +448,7 @@ exports[`Button component tests Button small 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
+        "fontFamily": "System",
         "fontSize": 13,
         "fontWeight": "400",
         "margin": 0,
@@ -448,19 +468,13 @@ exports[`Button component tests Button square 1`] = `
 <View
   accessibilityLabel="Square Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -475,13 +489,13 @@ exports[`Button component tests Button square 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 0,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -492,8 +506,8 @@ exports[`Button component tests Button square 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,
@@ -512,20 +526,14 @@ exports[`Button component tests Button subtle 1`] = `
 <View
   accessibilityLabel="Subtle Button"
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
   appearance="subtle"
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -539,13 +547,13 @@ exports[`Button component tests Button subtle 1`] = `
       "backgroundColor": "#ffffff",
       "borderColor": "#ffffff",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -556,8 +564,8 @@ exports[`Button component tests Button subtle 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

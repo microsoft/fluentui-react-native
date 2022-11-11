@@ -1,8 +1,123 @@
 # Change Log - @fluentui-react-native/experimental-checkbox
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Nov 2022 22:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.17.1
+
+## 0.13.0
+
+Tue, 08 Nov 2022 22:18:43 GMT
+
+### Minor changes
+
+- update @office-iss/react-native-win32 to 0.68.8 (krsiler@microsoft.com)
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/checkbox to v0.17.0
+- Bump @fluentui-react-native/framework to v0.8.18
+
+## 0.12.37
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.35
+- Bump @fluentui-react-native/framework to v0.8.17
+
+## 0.12.36
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.34
+- Bump @fluentui-react-native/framework to v0.8.16
+
+## 0.12.35
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.33
+
+## 0.12.34
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.32
+- Bump @fluentui-react-native/framework to v0.8.15
+
+## 0.12.33
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.31
+- Bump @fluentui-react-native/framework to v0.8.14
+
+## 0.12.32
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.30
+- Bump @fluentui-react-native/framework to v0.8.13
+
+## 0.12.31
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.29
+
+## 0.12.30
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.28
+
+## 0.12.29
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.27
+- Bump @fluentui-react-native/framework to v0.8.12
+
+## 0.12.28
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/checkbox to v0.16.26
+- Bump @fluentui-react-native/framework to v0.8.11
+
+## 0.12.27
+
+Fri, 14 Oct 2022 14:12:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/checkbox to v0.16.25
 
 ## 0.12.26
 

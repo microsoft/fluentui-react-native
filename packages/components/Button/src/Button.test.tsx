@@ -2,12 +2,17 @@ import * as React from 'react';
 import { Button } from './Button';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
-import { Text, View } from 'react-native';
+import { Pressable, Text } from 'react-native';
 import { Icon } from '@fluentui-react-native/icon';
 
 describe('Button component tests', () => {
   it('Button default', () => {
     const tree = renderer.create(<Button>Default Button</Button>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('Button disabled', () => {
+    const tree = renderer.create(<Button disabled>Disabled Button</Button>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -50,7 +55,7 @@ describe('Button component tests', () => {
   it('Button composed', () => {
     const ComposedButton = Button.compose({
       slots: {
-        root: View,
+        root: Pressable,
         icon: Icon,
         content: Text,
       },

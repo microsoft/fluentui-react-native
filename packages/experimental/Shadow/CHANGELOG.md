@@ -1,8 +1,122 @@
 # Change Log - @fluentui-react-native/experimental-shadow
 
-This log was last generated on Wed, 12 Oct 2022 21:54:15 GMT and should not be manually modified.
+This log was last generated on Wed, 09 Nov 2022 22:52:11 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.41
+
+Wed, 09 Nov 2022 22:52:11 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.9.31
+
+## 0.2.40
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/pressable to v0.9.30
+
+## 0.2.39
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/pressable to v0.9.29
+
+## 0.2.38
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.16
+- Bump @fluentui-react-native/pressable to v0.9.28
+- Bump @fluentui-react-native/theme-types to v0.23.1
+
+## 0.2.37
+
+Tue, 01 Nov 2022 16:30:56 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.9.27
+
+## 0.2.36
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/pressable to v0.9.26
+- Bump @fluentui-react-native/theme-types to v0.23.0
+
+## 0.2.35
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/pressable to v0.9.25
+
+## 0.2.34
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/pressable to v0.9.24
+
+## 0.2.33
+
+Thu, 20 Oct 2022 23:16:01 GMT
+
+### Patches
+
+- Update spec: why shadow component is different (78454019+lyzhan7@users.noreply.github.com)
+
+## 0.2.32
+
+Thu, 20 Oct 2022 18:30:02 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.9.23
+
+## 0.2.31
+
+Tue, 18 Oct 2022 04:06:27 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/pressable to v0.9.22
+
+## 0.2.30
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/pressable to v0.9.21
+
+## 0.2.29
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/pressable to v0.9.20
 
 ## 0.2.28
 

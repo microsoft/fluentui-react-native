@@ -14,18 +14,16 @@ exports[`ToggleButton default 1`] = `
   accessibilityState={
     Object {
       "checked": undefined,
-      "disabled": false,
     }
   }
   accessible={true}
-  disabled={false}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -39,13 +37,13 @@ exports[`ToggleButton default 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1,
+      "borderWidth": 1.5,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 5,
-      "paddingHorizontal": 11,
+      "padding": 8,
+      "paddingHorizontal": 14.5,
       "width": undefined,
     }
   }
@@ -56,8 +54,8 @@ exports[`ToggleButton default 1`] = `
     style={
       Object {
         "color": "#323130",
-        "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontFamily": "System",
+        "fontSize": 15,
         "fontWeight": "600",
         "margin": 0,
         "marginBottom": 0,

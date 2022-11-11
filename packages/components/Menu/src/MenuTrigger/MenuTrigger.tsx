@@ -1,9 +1,9 @@
 import React from 'react';
-import { memoize, stagedComponent } from '@fluentui-react-native/framework';
-import { menuTriggerName, MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
+import { stagedComponent } from '@fluentui-react-native/framework';
+import { menuTriggerName } from './MenuTrigger.types';
 import { useMenuTrigger } from './useMenuTrigger';
-import { AccessibilityActionEvent } from 'react-native';
 import { MenuTriggerProvider } from '../context/menuTriggerContext';
+import { getRevisedProps } from './getRevisedProps';
 
 export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Record<never, any>>) => {
   const menuTrigger = useMenuTrigger();
@@ -28,26 +28,5 @@ export const MenuTrigger = stagedComponent((_props: React.PropsWithChildren<Reco
   };
 });
 MenuTrigger.displayName = menuTriggerName;
-
-const getRevisedProps = memoize(getRevisedPropsWorker);
-function getRevisedPropsWorker(state: MenuTriggerState, props: any): MenuTriggerChildProps {
-  const revisedProps = state.props;
-  if (props.accessibilityState) {
-    revisedProps.accessibilityState = { ...revisedProps.accessibilityState, ...props.accessibilityState };
-  }
-
-  if (props.accessibilityActions) {
-    revisedProps.accessibilityActions = [...revisedProps.accessibilityActions, ...props.accessibilityActions];
-  }
-
-  if (props.onAccessibilityAction) {
-    revisedProps.onAccessibilityAction = (e: AccessibilityActionEvent) => {
-      revisedProps.onAccessibilityAction(e);
-      props.onAccessibilityAction(e);
-    };
-  }
-
-  return revisedProps;
-}
 
 export default MenuTrigger;
