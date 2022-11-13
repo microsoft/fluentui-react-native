@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "fix double clicking on inline links",
+  "packageName": "@fluentui-react-native/icon",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

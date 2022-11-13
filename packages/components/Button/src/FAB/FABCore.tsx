@@ -6,8 +6,8 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './FAB.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
-import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps, IPressableState } from '@fluentui-react-native/interactive-hooks';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
+import { IPressableState } from '@fluentui-react-native/interactive-hooks';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 import { extractOuterStylePropsAndroid } from '../ExtractStyle.android';
 

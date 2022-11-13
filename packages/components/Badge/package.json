@@ -28,7 +28,6 @@
     "@fluentui-react-native/experimental-shadow": ">=0.2.42 <1.0.0",
     "@fluentui-react-native/framework": ">=0.8.19 <1.0.0",
     "@fluentui-react-native/icon": "^0.14.1",
-    "@fluentui-react-native/interactive-hooks": "^0.20.2",
     "@fluentui-react-native/text": ">=0.15.15 <1.0.0",
     "@fluentui-react-native/theme-tokens": "^0.21.3",
     "@fluentui-react-native/theme-types": "^0.23.1",
