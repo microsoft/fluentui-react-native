@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Fri, 11 Nov 2022 18:06:31 GMT and should not be manually modified.
+This log was last generated on Sun, 13 Nov 2022 09:17:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.16.0
+
+Sun, 13 Nov 2022 09:17:06 GMT
+
+### Minor changes
+
+- fix double clicking on inline links (email not defined)
+- Bump @fluentui-react-native/interactive-hooks to v0.21.0
 
 ## 0.15.15
 
