@@ -5,8 +5,7 @@ import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { backgroundColorTokens, borderTokens } from '@fluentui-react-native/tokens';
 import { ensureNativeComponent } from '@fluentui-react-native/component-cache';
-import { IconProps } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { IconProps, createIconProps } from '@fluentui-react-native/icon';
 import {
   MenuButtonName,
   MenuButtonProps,

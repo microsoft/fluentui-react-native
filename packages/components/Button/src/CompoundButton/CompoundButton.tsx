@@ -7,8 +7,7 @@ import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './CompoundButton.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from '../useButton';
-import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { buttonLookup } from '../Button';
 
 export const CompoundButton = compose<CompoundButtonType>({
