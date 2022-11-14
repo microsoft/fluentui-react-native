@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FontIcon, SvgIcon, Icon } from '@fluentui-react-native/experimental-icon';
 import { Text, View } from 'react-native';
 import TestSvg from './assets/test.svg';
@@ -29,8 +29,16 @@ export const IconExperimental: React.FunctionComponent = () => {
   return (
     <View>
       <Text>Icon component</Text>
-      <Icon svgSource={{ color: 'lightgreen', ...svgSrcProps }} />
-      <Icon svgSource={{ ...svgUriProps }} />
+      <Icon
+        svgSource={useMemo(
+          () => ({
+            color: 'lightgreen',
+            ...svgSrcProps,
+          }),
+          [],
+        )}
+      />
+      <Icon svgSource={svgUriProps} />
       <Icon fontSource={{ ...fontBuiltInProps, color: 'lightskyblue' }} />
 
       <Text>SVG</Text>
