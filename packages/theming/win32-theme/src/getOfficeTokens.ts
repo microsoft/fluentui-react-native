@@ -23,13 +23,13 @@ export function getOfficeAliasTokens(officeTheme: string) {
 
 export function getOfficeShadowTokens(officeTheme: string) {
   if (officeTheme === 'White' || officeTheme === 'Colorful') {
-    return colorfulShadowTokens.shadow;
+    return colorfulShadowTokens;
   } else if (officeTheme === 'DarkGray') {
-    return darkGrayShadowTokens.shadow;
+    return darkGrayShadowTokens;
   } else if (officeTheme === 'Black') {
-    return blackShadowTokens.shadow;
+    return blackShadowTokens;
   } else if (officeTheme === 'HighContrast') {
-    return hcShadowTokens.shadow;
+    return hcShadowTokens;
   }
 
   return colorfulAliasTokens;

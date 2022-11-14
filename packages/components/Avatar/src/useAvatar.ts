@@ -3,7 +3,7 @@ import { AvatarProps, AvatarInfo, AvatarState, AvatarColors, AvatarSize, AvatarC
 import { PresenceBadgeProps } from '@fluentui-react-native/badge';
 import { titles, multiWordTitles } from './titles';
 import { getHashCodeWeb } from './getHashCode';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { createIconProps } from '@fluentui-react-native/icon';
 
 /**
  * Re-usable hook for FURN Avatar.

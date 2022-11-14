@@ -4,7 +4,7 @@ import type { OptionTokens } from './Option.types';
 
 export const defaultOptionTokens: TokenSettings<OptionTokens> = (t: Theme): OptionTokens => ({
   backgroundColor: t.colors.neutralBackground1,
-  borderRadius: globalTokens.corner.radius.medium,
+  borderRadius: globalTokens.corner.radius40,
   checkmarkColor: t.colors.neutralForeground2,
   checkmarkSize: 16,
   color: t.colors.neutralForeground2,

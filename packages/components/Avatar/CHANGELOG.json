@@ -2,6 +2,78 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Sun, 13 Nov 2022 09:17:06 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.3.0",
+      "version": "1.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "42685ad6d78fdec7de899153a20b40863bad12f3",
+            "comment": "fix double clicking on inline links"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.2.0",
+            "commit": "42685ad6d78fdec7de899153a20b40863bad12f3"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.15.0",
+            "commit": "42685ad6d78fdec7de899153a20b40863bad12f3"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Nov 2022 18:06:31 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.2.35",
+      "version": "1.2.35",
+      "comments": {
+        "patch": [
+          {
+            "author": "78454019+lyzhan7@users.noreply.github.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0",
+            "comment": "Bump all design-tokens packages to 0.29.0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.1.57",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.19",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/icon to v0.14.1",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.20.2",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.21.3",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 09 Nov 2022 22:52:11 GMT",
       "tag": "@fluentui-react-native/avatar_v1.2.34",
       "version": "1.2.34",

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkbox component tests Menu default 1`] = `
+exports[`Menu component tests Menu default 1`] = `
 <View
   accessibilityActions={Array []}
   accessibilityLabel="Default"
@@ -32,13 +32,13 @@ exports[`Checkbox component tests Menu default 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1.5,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 8,
-      "paddingHorizontal": 14.5,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -65,7 +65,7 @@ exports[`Checkbox component tests Menu default 1`] = `
 </View>
 `;
 
-exports[`Checkbox component tests Menu defaultOpen 1`] = `
+exports[`Menu component tests Menu defaultOpen 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -98,13 +98,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -273,7 +273,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open 1`] = `
+exports[`Menu component tests Menu open 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -306,13 +306,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -434,7 +434,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open checkbox and divider 1`] = `
+exports[`Menu component tests Menu open checkbox and divider 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -467,13 +467,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -654,7 +654,7 @@ Array [
             Object {
               "backgroundColor": "#d1d1d1",
               "display": "flex",
-              "height": 1.5,
+              "height": 1,
               "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
@@ -780,7 +780,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open checkbox checked 1`] = `
+exports[`Menu component tests Menu open checkbox checked 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -813,13 +813,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1000,7 +1000,7 @@ Array [
             Object {
               "backgroundColor": "#d1d1d1",
               "display": "flex",
-              "height": 1.5,
+              "height": 1,
               "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
@@ -1126,7 +1126,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open checkbox defaultChecked 1`] = `
+exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -1159,13 +1159,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1346,7 +1346,7 @@ Array [
             Object {
               "backgroundColor": "#d1d1d1",
               "display": "flex",
-              "height": 1.5,
+              "height": 1,
               "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
@@ -1472,7 +1472,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu open radio 1`] = `
+exports[`Menu component tests Menu open radio 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -1505,13 +1505,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1806,7 +1806,7 @@ Array [
 ]
 `;
 
-exports[`Checkbox component tests Menu submenu 1`] = `
+exports[`Menu component tests Menu submenu 1`] = `
 Array [
   <View
     accessibilityActions={Array []}
@@ -1839,13 +1839,13 @@ Array [
         "backgroundColor": "#f3f2f1",
         "borderColor": "#8a8886",
         "borderRadius": 4,
-        "borderWidth": 1.5,
+        "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
         "minWidth": 96,
         "padding": 8,
-        "paddingHorizontal": 14.5,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }

@@ -4,14 +4,14 @@ import { Platform, Pressable, View } from 'react-native';
 import { compose, IUseComposeStyling } from '@uifabricshared/foundation-compose';
 import { ISlots, withSlots } from '@uifabricshared/foundation-composable';
 import { Text } from '@fluentui-react-native/text';
-import { Icon } from '@fluentui-react-native/icon';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { settings, tabsItemSelectActionLabel } from './TabsItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { TabsContext } from './Tabs';
 import { tabsItemName, TabsItemType, TabsItemProps, TabsItemSlotProps, TabsItemRenderData, TabsItemState } from './TabsItem.types';
-import { usePressableState, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 
 export const TabsItem = compose<TabsItemType>({
   displayName: tabsItemName,
