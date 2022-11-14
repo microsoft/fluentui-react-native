@@ -8,6 +8,7 @@ import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { isAndroid } from '../../utils/platformUtils';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
@@ -21,9 +22,12 @@ const BasicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
       <Checkbox label="Disabled checkbox" disabled />
       <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
-      <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
-      <Checkbox label="A circular checkbox" shape="circular" />
-      <Checkbox label="A checkbox with label placed before" labelPosition="before" />
+
+      {/* No Circular Checkbox , Tooltip , Before Label Support on Android */}
+
+      {isAndroid ? <></> : <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />}
+      {isAndroid ? <></> : <Checkbox label="A circular checkbox" shape="circular" />}
+      {isAndroid ? <></> : <Checkbox label="A checkbox with label placed before" labelPosition="before" />}
       <Checkbox label="A required checkbox" required />
     </View>
   );
@@ -54,12 +58,16 @@ const OtherCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
-      <Checkbox
-        label="Checkbox rendered with labelPosition 'before' (controlled)"
-        onChange={onChangeControlled2}
-        labelPosition="before"
-        checked={Boolean(isCheckedControlled2)}
-      />
+      {isAndroid ? (
+        <></>
+      ) : (
+        <Checkbox
+          label="Checkbox rendered with labelPosition 'before' (controlled)"
+          onChange={onChangeControlled2}
+          labelPosition="before"
+          checked={Boolean(isCheckedControlled2)}
+        />
+      )}
       <Checkbox label="A required checkbox with other required text" required="**" />
     </View>
   );
@@ -114,14 +122,18 @@ const TokenCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <HoverCheckbox label="A checkbox with checkmark visible on hover" onChange={onChangeUncontrolled} />
-      <CircleColorCheckbox label="A circular token-customized checkbox" shape="circular" onChange={onChangeUncontrolled} defaultChecked />
+      {isAndroid ? ( // Circular checkbox not available on Android
+        <></>
+      ) : (
+        <CircleColorCheckbox label="A circular token-customized checkbox" shape="circular" onChange={onChangeUncontrolled} defaultChecked />
+      )}
       <BigLabelCheckbox label="A checkbox with a bold large font label" />
       <ComposedCheckbox label="A checkbox with a hot pink label and no padding" />
 
       <BlueCheckbox
         label="Token-customized checkbox. Customizable below."
         onChange={onChangeUncontrolled}
-        labelPosition="before"
+        labelPosition={isAndroid ? 'after' : 'before'}
         defaultChecked={false}
       />
       <TextInput
@@ -153,10 +165,12 @@ const checkboxSections: TestSection[] = [
     testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
     component: BasicCheckbox,
   },
-  {
-    name: 'Size Checkboxes',
-    component: SizeCheckbox,
-  },
+  isAndroid
+    ? null // Android will have only one standard size checkbox supported
+    : {
+        name: 'Size Checkboxes',
+        component: SizeCheckbox,
+      },
   {
     name: 'Other Implementations',
     component: OtherCheckbox,
@@ -177,7 +191,7 @@ export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
     uwpStatus: 'N/A',
     iosStatus: 'N/A',
     macosStatus: 'Experimental',
-    androidStatus: 'N/A',
+    androidStatus: 'Experimental',
   };
 
   const description =

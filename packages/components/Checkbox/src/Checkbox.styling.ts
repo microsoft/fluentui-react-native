@@ -3,6 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultCheckboxTokens } from './CheckboxTokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { Platform } from 'react-native';
 
 export const checkboxStates: (keyof CheckboxTokens)[] = [
   'medium',
@@ -28,11 +29,13 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignItems: 'center',
           flexDirection: 'row',
           alignSelf: 'flex-start',
+          ...(Platform.OS === 'android' && { width: '100%' }),
           backgroundColor: tokens.backgroundColor,
           padding: tokens.padding,
           paddingHorizontal: tokens.paddingHorizontal,
           ...borderStyles.from(tokens, theme),
         },
+        android_ripple: { color: '#eeeeee' },
       }),
       ['backgroundColor', 'padding', ...borderStyles.keys],
     ),

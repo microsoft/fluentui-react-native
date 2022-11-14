@@ -5,25 +5,23 @@ import { CheckboxTokens } from './Checkbox.types';
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
-    borderRadius: globalTokens.corner.radius.small,
-    checkboxBorderWidth: 1, // Will be update once new globalTokens for stroke is merged.
-    checkboxBorderRadius: globalTokens.corner.radius.medium,
-    checkboxSize: 20,
-    checkmarkSize: 12,
+    checkboxBorderWidth: globalTokens.stroke.width15,
+    checkboxBorderRadius: globalTokens.corner.radius40,
+    checkboxSize: globalTokens.font.size600,
+    checkmarkSize: globalTokens.font.size100,
     label: {
       padding: globalTokens.spacing.s,
       paddingHorizontal: globalTokens.spacing.m,
-      borderRadius: globalTokens.corner.radius.medium,
-      spacingLabelAfter: globalTokens.spacing.s,
+      borderRadius: globalTokens.corner.radius40,
+      spacingLabelAfter: globalTokens.spacing.m,
       labelIsBefore: {
         spacingLabelBefore: globalTokens.spacing.s,
         spacingLabelAfter: 0,
       },
     },
     padding: globalTokens.spacing.xxs,
-    fontSize: globalTokens.font.size[200],
+    fontSize: globalTokens.font.size200, // Font size for label
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
-    color: t.colors.neutralForeground1,
     checkmarkOpacity: 0,
     disabled: {
       checkboxBorderColor: t.colors.neutralStrokeDisabled,
@@ -39,7 +37,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     circular: {
-      borderRadius: globalTokens.corner.radius.circle,
-      checkboxBorderRadius: globalTokens.corner.radius.circle,
+      borderRadius: globalTokens.corner.radiusCircular,
+      checkboxBorderRadius: globalTokens.corner.radiusCircular,
     },
   } as CheckboxTokens);
