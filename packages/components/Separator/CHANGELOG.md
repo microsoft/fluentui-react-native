@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/separator
 
-This log was last generated on Tue, 08 Nov 2022 22:18:43 GMT and should not be manually modified.
+This log was last generated on Fri, 11 Nov 2022 18:06:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.1
+
+Fri, 11 Nov 2022 18:06:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.19
 
 ## 0.13.0
 

@@ -10,6 +10,6 @@ export const counterBadgeTokens: TokenSettings<CounterBadgeTokens> = () =>
       minHeight: 6,
       paddingHorizontal: 0,
       borderWidth: 0,
-      borderRadius: globalTokens.corner.radius.circle,
+      borderRadius: globalTokens.corner.radiusCircular,
     },
   } as CounterBadgeTokens);

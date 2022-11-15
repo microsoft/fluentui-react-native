@@ -5,7 +5,7 @@ import { FABTokens } from './FAB.types';
 
 export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>
   ({
-    borderRadius: globalTokens.corner.radius.circle,
+    borderRadius: globalTokens.corner.radiusCircular,
     minHeight: 56,
     minWidth: 56,
     padding: globalTokens.spacing.l,

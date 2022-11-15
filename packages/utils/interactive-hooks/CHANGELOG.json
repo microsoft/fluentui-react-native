@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Sun, 13 Nov 2022 09:17:06 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.21.0",
+      "version": "0.21.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "42685ad6d78fdec7de899153a20b40863bad12f3",
+            "comment": "fix double clicking on inline links"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Fri, 11 Nov 2022 18:06:32 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.20.2",
+      "version": "0.20.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.19",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/icon to v0.14.1",
+            "commit": "b4bc2de7906d898e7a08e4fae106ae66023a49c0"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 09 Nov 2022 22:52:11 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.20.1",
+      "version": "0.20.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "commit": "cad484c342321e75b0fa8920ebd3ffe4c2509d30",
+            "comment": "Update useViewCommandFocus"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 08 Nov 2022 22:18:43 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.20.0",
       "version": "0.20.0",

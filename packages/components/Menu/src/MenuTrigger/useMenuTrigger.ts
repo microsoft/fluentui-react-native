@@ -1,16 +1,17 @@
 import { useMenuContext } from '../context/menuContext';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
-import { MenuTriggerState } from './MenuTrigger.types';
+import { MenuTriggerChildProps, MenuTriggerState } from './MenuTrigger.types';
 import { AccessibilityActionEvent, AccessibilityActionName, Platform } from 'react-native';
 import React from 'react';
 import { hoverDelayDefault } from '../consts';
+import { useMergedRefs } from './useMergeRefs';
 
-const accessibilityActions =
+const baseAccessibilityActions =
   Platform.OS === ('win32' as any) ? [{ name: 'Expand' as AccessibilityActionName }, { name: 'Collapse' as AccessibilityActionName }] : [];
 const expandedState = { expanded: true };
 const collapsedState = { expanded: false };
 
-export const useMenuTrigger = (): MenuTriggerState => {
+export const useMenuTrigger = (childProps: MenuTriggerChildProps): MenuTriggerState => {
   const context = useMenuContext();
   const {
     hoverDelay = hoverDelayDefault,
@@ -23,7 +24,33 @@ export const useMenuTrigger = (): MenuTriggerState => {
     triggerRef,
   } = context;
 
-  const accessibilityState = open ? expandedState : collapsedState;
+  const {
+    accessibilityActions: childAccessibilityActions,
+    accessibilityState: childAccessibilityState,
+    onAccessibilityAction: childOnAccessibilityAction,
+    onClick: childOnClick,
+    onHoverIn: childOnHoverIn,
+    onHoverOut: childOnHoverOut,
+    componentRef: childComponentRef,
+  } = childProps;
+
+  const accessibilityActions = React.useMemo(() => {
+    if (childAccessibilityActions) {
+      return [...baseAccessibilityActions, ...childAccessibilityActions];
+    }
+
+    return baseAccessibilityActions;
+  }, [childAccessibilityActions]);
+
+  const accessibilityState = React.useMemo(() => {
+    const baseState = open ? expandedState : collapsedState;
+
+    if (childAccessibilityState) {
+      return { ...baseState, ...childAccessibilityState };
+    }
+
+    return baseState;
+  }, [childAccessibilityState, open]);
 
   const onAccessibilityAction = React.useCallback(
     (e: AccessibilityActionEvent) => {
@@ -38,8 +65,9 @@ export const useMenuTrigger = (): MenuTriggerState => {
             break;
         }
       }
+      childOnAccessibilityAction && childOnAccessibilityAction(e);
     },
-    [setOpen],
+    [childOnAccessibilityAction, setOpen],
   );
 
   const onHoverIn = React.useCallback(
@@ -52,8 +80,10 @@ export const useMenuTrigger = (): MenuTriggerState => {
           setOpen(e, true /* isOpen */);
         }, hoverDelay);
       }
+
+      childOnHoverIn && childOnHoverIn(e);
     },
-    [hoverDelay, openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
+    [childOnHoverIn, hoverDelay, openOnHover, setOpen, triggerHoverOutTimer, popoverHoverOutTimer],
   );
 
   const onHoverOut = React.useCallback(
@@ -65,16 +95,21 @@ export const useMenuTrigger = (): MenuTriggerState => {
         }, hoverDelay);
         setTriggerHoverOutTimer(timer);
       }
+
+      childOnHoverOut && childOnHoverOut(e);
     },
-    [hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer],
+    [childOnHoverOut, hoverDelay, openOnHover, setOpen, setTriggerHoverOutTimer],
   );
 
   const onClick = React.useCallback(
     (e: InteractionEvent) => {
       setOpen(e, !open);
+      childOnClick && childOnClick(e);
     },
-    [open, setOpen],
+    [childOnClick, open, setOpen],
   );
+
+  const ref = useMergedRefs(triggerRef, childComponentRef);
 
   React.useEffect(() => {
     return function cleanup() {
@@ -87,7 +122,7 @@ export const useMenuTrigger = (): MenuTriggerState => {
       onClick,
       onHoverIn,
       onHoverOut,
-      componentRef: triggerRef,
+      componentRef: ref,
       accessibilityState,
       accessibilityActions,
       onAccessibilityAction,

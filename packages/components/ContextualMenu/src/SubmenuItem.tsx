@@ -17,8 +17,7 @@ import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens,
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
-import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
 import { Svg, G, Path, SvgProps } from 'react-native-svg';
 
 export const SubmenuItem = compose<SubmenuItemType>({
