@@ -1,7 +1,7 @@
 export const HOMEPAGE_AVATAR_BUTTON = 'Homepage_Avatar_Button';
 export const HOMEPAGE_NATIVE_AVATAR_BUTTON = 'Homepage_Native_Avatar_Button';
 export const NATIVE_AVATAR_TESTPAGE = 'NativeAvatar_TestPage';
-export const AVATAR_TESTPAGE = 'Avatar_Win32_TestPage';
+export const AVATAR_TESTPAGE = 'Avatar_TestPage';
 
 export const AVATAR_ACCESSIBILITY_LABEL = 'E2E Avatar Accessibility label';
 export const AVATAR_ACCESSIBILITY_LABEL_BY_NAME = 'Richard, available';
