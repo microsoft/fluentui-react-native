@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Sun, 13 Nov 2022 09:17:07 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Nov 2022 19:10:36 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.106.2
+
+Tue, 15 Nov 2022 19:10:36 GMT
+
+### Patches
+
+- Fix icon / button assert in native test app (winlarry@microsoft.com)
 
 ## 0.106.1
 

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 15 Nov 2022 19:10:36 GMT",
+      "tag": "@fluentui-react-native/tester_v0.106.2",
+      "version": "0.106.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "069de01c53721ba3b4e7eaa5215d5e5b7f37187c",
+            "comment": "Fix icon / button assert in native test app"
+          }
+        ]
+      }
+    },
+    {
       "date": "Sun, 13 Nov 2022 09:17:07 GMT",
       "tag": "@fluentui-react-native/tester_v0.106.1",
       "version": "0.106.1",
