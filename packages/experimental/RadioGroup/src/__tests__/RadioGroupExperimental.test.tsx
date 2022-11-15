@@ -5,6 +5,8 @@ import { View } from 'react-native';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
+jest.useFakeTimers();
+
 describe('RadioGroup component tests', () => {
   it('RadioGroup default', () => {
     const tree = renderer
