@@ -1,4 +1,4 @@
-import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
+import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
@@ -46,6 +46,12 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <Button size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
             Large Button with icon
           </Button>
+          <FAB size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+            Small FAB
+          </FAB>
+          <FAB size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+            Large FAB
+          </FAB>
         </>
       )}
       <Button size="small" style={commonTestStyles.vmargin}>

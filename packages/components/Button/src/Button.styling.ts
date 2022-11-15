@@ -1,4 +1,4 @@
-import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize } from './Button.types';
+import { buttonName, ButtonTokens, ButtonSlotProps, ButtonProps, ButtonSize, ButtonAppearance } from './Button.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles, FontTokens } from '@fluentui-react-native/tokens';
 import { defaultButtonTokens } from './ButtonTokens';
@@ -11,6 +11,7 @@ export const buttonStates: (keyof ButtonTokens)[] = [
   'block',
   'primary',
   'subtle',
+  'outline',
   'hovered',
   'small',
   'medium',
@@ -93,6 +94,22 @@ export const getDefaultSize = (): ButtonSize => {
   }
 
   return 'medium';
+};
+
+export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): ButtonAppearance => {
+  switch (appearance) {
+    case 'ascent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
+      return 'primary';
+    case 'outline': // Exists only for Mobile platforms, maps to default on other platforms.
+      if (Platform.OS == 'android' || Platform.OS == 'ios') return 'outline';
+      else return null;
+    case 'primary':
+    case 'subtle':
+      return appearance;
+    default: // Mobile platforms do not have seperate styling when no appearance is passed.
+      if (Platform.OS == 'android' || Platform.OS == 'ios') return 'primary';
+      else return null;
+  }
 };
 
 export const contentStyling = (tokens: ButtonTokens, theme: Theme, contentColor: ColorValue, fontStylesTokens: FontTokens) => {

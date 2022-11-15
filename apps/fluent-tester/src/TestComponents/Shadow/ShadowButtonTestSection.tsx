@@ -4,6 +4,13 @@ import { FAB, Text } from '@fluentui/react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+import TestSvg from '../../FluentTester/test-data/test.svg';
+import { SvgIconProps } from '@fluentui-react-native/icon';
+
+const svgProps: SvgIconProps = {
+  src: TestSvg,
+  viewBox: '0 0 500 500',
+};
 
 const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
 const CustomFABShadow64 = FAB.customize({
@@ -16,9 +23,15 @@ export const ShadowButtonTestSection: React.FunctionComponent = () => {
   if (Platform.OS === 'ios') {
     return (
       <View style={shadowTestPageStyles(t).backgroundColor}>
-        <FAB style={commonTestStyles.vmargin}>FAB with default shadow</FAB>
-        <CustomFABShadow64 style={commonTestStyles.vmargin}>Custom FAB with shadow64</CustomFABShadow64>
-        <CustomFABNoShadow style={commonTestStyles.vmargin}>Custom FAB with no shadow</CustomFABNoShadow>
+        <FAB icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          FAB with default shadow
+        </FAB>
+        <CustomFABShadow64 icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          Custom FAB with shadow64
+        </CustomFABShadow64>
+        <CustomFABNoShadow icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          Custom FAB with no shadow
+        </CustomFABNoShadow>
       </View>
     );
   } else {

@@ -1,6 +1,6 @@
 import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import TestSvg from './test.svg';
@@ -16,6 +16,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   const [showFABText, setShowFABText] = React.useState(true);
   const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
 
+  const isMobile = ['android', 'ios'].includes(Platform.OS as string);
   return (
     <View style={testContentRootViewStyle}>
       <Button style={commonTestStyles.vmargin}>Default</Button>
@@ -28,6 +29,16 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <Button disabled appearance="primary" style={commonTestStyles.vmargin}>
         Primary Disabled
       </Button>
+      {isMobile && (
+        <>
+          <Button appearance="ascent" style={commonTestStyles.vmargin}>
+            Ascent
+          </Button>
+          <Button appearance="outline" style={commonTestStyles.vmargin}>
+            Outline
+          </Button>
+        </>
+      )}
       <Button appearance="subtle" style={commonTestStyles.vmargin}>
         Subtle
       </Button>
@@ -50,9 +61,13 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
       </CompoundButton>
-      <FAB icon={iconProps} style={commonTestStyles.vmargin} />
+      <FAB icon={iconProps} iconOnly disabled style={commonTestStyles.vmargin} />
       <FAB icon={iconProps} style={commonTestStyles.vmargin} showContent={showFABText} onClick={flipFABcontent}>
-        FAB
+        Click Me!
+      </FAB>
+      <FAB appearance="subtle" iconOnly disabled icon={iconProps} style={commonTestStyles.vmargin} />
+      <FAB appearance="subtle" icon={iconProps} style={commonTestStyles.vmargin} showContent={showFABText} onClick={flipFABcontent}>
+        Click Me!
       </FAB>
     </View>
   );

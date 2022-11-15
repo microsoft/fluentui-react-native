@@ -21,7 +21,12 @@ import { extractOuterStylePropsAndroid } from '../ExtractStyle.android';
  */
 const buttonLookup = (layer: string, state: IPressableState, userProps: FABProps): boolean => {
   return (
-    state[layer] || userProps[layer] || (layer === 'hasContent' && !userProps.iconOnly) || (layer === 'hasIconBefore' && userProps.icon)
+    layer === userProps['appearance'] ||
+    state[layer] ||
+    userProps[layer] ||
+    layer === userProps['size'] ||
+    (!userProps['size'] && layer === 'large') ||
+    (layer === 'hasContent' && !userProps.iconOnly && (userProps.showContent == undefined ? true : userProps.showContent))
   );
 };
 

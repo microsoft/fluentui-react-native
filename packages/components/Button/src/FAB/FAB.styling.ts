@@ -6,7 +6,7 @@ import { Platform } from 'react-native';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
-export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small'];
+export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small', 'hasContent'];
 
 export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABTokens> = {
   tokens: [defaultFABTokens, defaultFABColorTokens, fabName],
@@ -61,9 +61,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
     ),
     icon: buildProps(
       (tokens: FABTokens) => ({
-        style: {
-          tintColor: tokens.iconColor,
-        },
+        color: tokens.iconColor,
         height: tokens.iconSize,
         width: tokens.iconSize,
       }),
