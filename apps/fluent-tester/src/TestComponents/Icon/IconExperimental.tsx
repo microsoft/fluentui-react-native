@@ -39,7 +39,15 @@ export const IconExperimental: React.FunctionComponent = () => {
         )}
       />
       <Icon svgSource={svgUriProps} />
-      <Icon fontSource={{ ...fontBuiltInProps, color: 'lightskyblue' }} />
+      <Icon
+        fontSource={useMemo(
+          () => ({
+            ...fontBuiltInProps,
+            color: 'lightskyblue',
+          }),
+          [],
+        )}
+      />
 
       <Text>SVG</Text>
       <SvgIcon color="green" {...svgSrcProps} />
