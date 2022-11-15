@@ -30,8 +30,8 @@ const CornerRadiusTestComponent: React.FunctionComponent<CornerRadiusTestCompone
 
   const innerCircleIndicatorProps = React.useMemo(
     () => ({
-      height: props.cornerRadius * 2,
-      width: props.cornerRadius * 2,
+      height: props.cornerRadius === globalTokens.corner.radiusCircular ? 60 : props.cornerRadius * 2,
+      width: props.cornerRadius === globalTokens.corner.radiusCircular ? 60 : props.cornerRadius * 2,
       borderRadius: props.cornerRadius,
       backgroundColor: isLightMode ? globalTokens.color.grey10 : globalTokens.color.grey80,
     }),
