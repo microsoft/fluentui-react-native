@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "add: checkbox android tokens mapping",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
