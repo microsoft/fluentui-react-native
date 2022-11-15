@@ -1,8 +1,20 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 15 Nov 2022 19:10:36 GMT and should not be manually modified.
+This log was last generated on Tue, 15 Nov 2022 22:52:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.107.0
+
+Tue, 15 Nov 2022 22:52:05 GMT
+
+### Minor changes
+
+- Fixing Avatar constant (email not defined)
+
+### Patches
+
+- Modify and re-enable callout e2e tests (winlarry@microsoft.com)
 
 ## 0.106.2
 

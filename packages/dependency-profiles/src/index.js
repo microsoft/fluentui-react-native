@@ -4,11 +4,11 @@ module.exports = {
   "0.68": {
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.106.2"
+      "version": "0.107.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.28.9"
+      "version": "0.28.10"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
