@@ -10,7 +10,7 @@ describe('Radio component tests', () => {
   });
 
   it('Radio disabled', () => {
-    const tree = renderer.create(<Radio disabled value="key1" label="Disabled Radio" />);
+    const tree = renderer.create(<Radio disabled value="key1" label="Disabled Radio" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 

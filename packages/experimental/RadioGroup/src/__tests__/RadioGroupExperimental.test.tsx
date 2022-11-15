@@ -19,62 +19,72 @@ describe('RadioGroup component tests', () => {
   });
 
   it('Radio not direct child of radio group', () => {
-    const tree = renderer.create(
-      <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
+    const tree = renderer
+      .create(
+        <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
+          <View>
+            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+          </View>
+        </RadioGroup>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('RadioGroup disabled', () => {
-    const tree = renderer.create(
-      <RadioGroup disabled label="Disabled RadioGroup">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
+    const tree = renderer
+      .create(
+        <RadioGroup disabled label="Disabled RadioGroup">
+          <View>
+            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+          </View>
+        </RadioGroup>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('RadioGroup required', () => {
-    const tree = renderer.create(
-      <RadioGroup required label="Required RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
+    const tree = renderer
+      .create(
+        <RadioGroup required label="Required RadioGroup" defaultValue="key2">
+          <View>
+            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+          </View>
+        </RadioGroup>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('RadioGroup horizontal', () => {
-    const tree = renderer.create(
-      <RadioGroup layout="horizontal" label="Horizontal RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
+    const tree = renderer
+      .create(
+        <RadioGroup layout="horizontal" label="Horizontal RadioGroup" defaultValue="key2">
+          <View>
+            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+          </View>
+        </RadioGroup>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it('RadioGroup horizontal-stacked', () => {
-    const tree = renderer.create(
-      <RadioGroup layout="horizontal-stacked" label="Horizontal-Stacked RadioGroup" defaultValue="key2">
-        <View>
-          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-        </View>
-      </RadioGroup>,
-    );
+    const tree = renderer
+      .create(
+        <RadioGroup layout="horizontal-stacked" label="Horizontal-Stacked RadioGroup" defaultValue="key2">
+          <View>
+            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
+          </View>
+        </RadioGroup>,
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
