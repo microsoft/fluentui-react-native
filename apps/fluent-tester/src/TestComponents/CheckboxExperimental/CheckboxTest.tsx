@@ -9,6 +9,7 @@ import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { isAndroid } from '../../utils/platformUtils';
+import { Text } from '@fluentui-react-native/experimental-text';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
@@ -58,8 +59,13 @@ const OtherCheckbox: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
+      <Checkbox label="A required checkbox with other required text" required="**" />
+
       {isAndroid ? (
-        <></>
+        <>
+          <Text size={200}>Checkbox with no prop label </Text>
+          <Checkbox onChange={onChangeControlled2} />
+        </>
       ) : (
         <Checkbox
           label="Checkbox rendered with labelPosition 'before' (controlled)"
@@ -68,7 +74,6 @@ const OtherCheckbox: React.FunctionComponent = () => {
           checked={Boolean(isCheckedControlled2)}
         />
       )}
-      <Checkbox label="A required checkbox with other required text" required="**" />
     </View>
   );
 };

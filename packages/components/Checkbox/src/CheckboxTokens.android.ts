@@ -21,7 +21,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       },
     },
     padding: globalTokens.spacing.xxs,
-    fontSize: globalTokens.font.size200,
+    fontSize: t.typography.sizes.body,
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
     checkmarkOpacity: 0,
     disabled: {
@@ -31,16 +31,10 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checked: {
       checkboxBackgroundColor: t.colors.brandBackground,
       checkmarkOpacity: 1,
-      checkboxBorderColor: t.colors.transparentStroke,
-      checkboxBorderWidth: 0,
+      checkboxBorderWidth: globalTokens.stroke.widthNone,
       checkmarkColor: t.colors.neutralForegroundOnColor,
       disabled: {
-        checkmarkColor: t.colors.neutralForegroundOnColor,
         checkboxBackgroundColor: t.colors.brandBackgroundDisabled,
       },
-    },
-    circular: {
-      borderRadius: globalTokens.corner.radiusCircular,
-      checkboxBorderRadius: globalTokens.corner.radiusCircular,
     },
   } as CheckboxTokens);
