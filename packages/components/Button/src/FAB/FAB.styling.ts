@@ -19,6 +19,8 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
             style: {
               flexDirection: 'row',
               alignSelf: 'baseline',
+              borderColor: tokens.borderInnerColor,
+              borderWidth: tokens.borderInnerWidth,
               borderRadius: tokens.borderRadius,
               overflow: 'hidden',
             },

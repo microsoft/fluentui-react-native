@@ -35,7 +35,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
       paddingHorizontal: globalTokens.spacing.l,
       paddingVertical: globalTokens.spacing.s,
       borderRadius: globalTokens.corner.radius60,
-      borderWidth: 0,
       iconSize: 20,
       outline: {
         borderWidth: globalTokens.stroke.width10,
@@ -53,7 +52,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
       paddingHorizontal: globalTokens.spacing.s,
       paddingVertical: globalTokens.spacing.xs,
       borderRadius: globalTokens.corner.radius40,
-      borderWidth: 0,
       outline: {
         borderWidth: globalTokens.stroke.width10,
       },
@@ -70,7 +68,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
       paddingHorizontal: globalTokens.spacing.xs,
       paddingVertical: globalTokens.spacing.xxs,
       borderRadius: globalTokens.corner.radius40,
-      borderWidth: 0,
       iconSize: 16,
       outline: {
         borderWidth: globalTokens.stroke.width10,
