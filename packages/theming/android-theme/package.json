@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/android-theme",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "description": "A FluentUI React Native theme that pulls constants from FluentUI Android",
   "repository": {
     "type": "git",
@@ -34,7 +34,7 @@
     "@fluentui-react-native/theme-tokens": "^0.21.3",
     "@fluentui-react-native/theme-types": ">=0.23.1 <1.0.0",
     "@fluentui-react-native/theme": ">=0.7.8 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.18.2 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.18.3 <1.0.0",
     "@fluentui-react-native/memo-cache": "^1.1.7"
   },
   "devDependencies": {
