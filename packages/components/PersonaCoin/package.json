@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/persona-coin",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "description": "A cross-platform PersonaCoin component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,9 +26,9 @@
     "directory": "packages/components/PersonaCoin"
   },
   "dependencies": {
-    "@uifabricshared/foundation-compose": "^1.12.20",
+    "@uifabricshared/foundation-compose": "^1.12.21",
     "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/framework": ">=0.8.19 <1.0.0",
+    "@fluentui-react-native/framework": ">=0.8.20 <1.0.0",
     "@fluentui-react-native/theme-tokens": ">=0.21.3 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.17.8 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.1 <1.0.0",

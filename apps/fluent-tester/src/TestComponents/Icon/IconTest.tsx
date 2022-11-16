@@ -8,7 +8,7 @@ import { ICON_TESTPAGE } from './consts';
 import { E2ETestingIcon } from './IconE2ETest';
 import { IconExperimental } from './IconExperimental';
 
-const testImage = require('../../FluentTester/test-data/icon_24x24.png');
+const testImage = require('../../../../assets/icon_24x24.png');
 const testTtf = require('./../../../assets/Font_Awesome_900.otf');
 import TestSvg from './assets/test.svg';
 
