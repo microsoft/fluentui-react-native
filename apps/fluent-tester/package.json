@@ -77,7 +77,7 @@
     "@fluentui/react-native": ">=0.33.0 <1.0.0",
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
-    "@fortawesome/react-native-fontawesome": "^0.3
+    "@fortawesome/react-native-fontawesome": "^0.3,
     "@react-native-community/slider": "^4.2.0",
     "@react-native-menu/menu": "^0.1.2",
     "@react-native-picker/picker": "^2.2.1",
