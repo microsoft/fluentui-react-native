@@ -26,28 +26,27 @@ const svgSrcProps: SvgIconProps = {
 };
 
 export const IconExperimental: React.FunctionComponent = () => {
+  const svgSource = useMemo(
+    () => ({
+      color: 'lightgreen',
+      ...svgSrcProps,
+    }),
+    [],
+  );
+  const fontSource = useMemo(
+    () => ({
+      ...fontBuiltInProps,
+      color: 'lightskyblue',
+    }),
+    [],
+  );
+
   return (
     <View>
       <Text>Icon component</Text>
-      <Icon
-        svgSource={useMemo(
-          () => ({
-            color: 'lightgreen',
-            ...svgSrcProps,
-          }),
-          [],
-        )}
-      />
+      <Icon svgSource={svgSource} />
       <Icon svgSource={svgUriProps} />
-      <Icon
-        fontSource={useMemo(
-          () => ({
-            ...fontBuiltInProps,
-            color: 'lightskyblue',
-          }),
-          [],
-        )}
-      />
+      <Icon fontSource={fontSource} />
 
       <Text>SVG</Text>
       <SvgIcon color="green" {...svgSrcProps} />
