@@ -37,13 +37,13 @@ exports[`ToggleButton default 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1.5,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 8,
-      "paddingHorizontal": 14.5,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }

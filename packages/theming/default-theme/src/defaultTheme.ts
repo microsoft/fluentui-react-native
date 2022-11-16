@@ -7,13 +7,13 @@ import { createShadowAliasTokens } from './createAliasTokens';
 function _defaultTypography(): Typography {
   const defaultsDict = {
     sizes: {
-      caption: globalTokens.font.size['100'] as FontSize,
-      secondary: globalTokens.font.size['200'] as FontSize,
-      body: globalTokens.font.size['300'] as FontSize,
-      subheader: globalTokens.font.size['400'] as FontSize,
-      header: globalTokens.font.size['500'] as FontSize,
-      hero: globalTokens.font.size['700'] as FontSize,
-      heroLarge: globalTokens.font.size['900'] as FontSize,
+      caption: globalTokens.font.size100 as FontSize,
+      secondary: globalTokens.font.size200 as FontSize,
+      body: globalTokens.font.size300 as FontSize,
+      subheader: globalTokens.font.size400 as FontSize,
+      header: globalTokens.font.size500 as FontSize,
+      hero: globalTokens.font.size700 as FontSize,
+      heroLarge: globalTokens.font.size900 as FontSize,
     } as FontSizes,
     weights: {
       regular: globalTokens.font.weight.regular as FontWeightValue,

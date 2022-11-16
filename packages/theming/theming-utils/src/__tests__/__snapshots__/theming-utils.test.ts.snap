@@ -210,7 +210,7 @@ Object {
 }
 `;
 
-exports[`mapPipelineToShadow test darkShadowTokens.shadow 1`] = `
+exports[`mapPipelineToShadow test darkShadowTokens 1`] = `
 Object {
   "shadow16": Object {
     "ambient": Object {
@@ -383,7 +383,7 @@ Object {
 }
 `;
 
-exports[`mapPipelineToShadow test hcShadowTokens.shadow 1`] = `
+exports[`mapPipelineToShadow test hcShadowTokens 1`] = `
 Object {
   "shadow16": Object {
     "ambient": Object {
@@ -556,7 +556,7 @@ Object {
 }
 `;
 
-exports[`mapPipelineToShadow test lightShadowTokens.shadow 1`] = `
+exports[`mapPipelineToShadow test lightShadowTokens 1`] = `
 Object {
   "shadow16": Object {
     "ambient": Object {

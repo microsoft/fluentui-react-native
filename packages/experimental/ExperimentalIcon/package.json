@@ -1,0 +1,56 @@
+{
+  "name": "@fluentui-react-native/experimental-icon",
+  "version": "0.0.2",
+  "description": "A cross-platform Icon component",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "fluentui-scripts build",
+    "clean": "fluentui-scripts clean",
+    "depcheck": "fluentui-scripts depcheck",
+    "just": "fluentui-scripts",
+    "lint": "fluentui-scripts eslint",
+    "test": "fluentui-scripts jest",
+    "update-snapshots": "fluentui-scripts jest -u",
+    "prettier": "fluentui-scripts prettier",
+    "prettier-fix": "fluentui-scripts prettier --fix true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "packages/experimental/ExperimentalIcon"
+  },
+  "dependencies": {
+    "@fluentui-react-native/adapters": "^0.10.0",
+    "@fluentui-react-native/framework": ">=0.8.18 <1.0.0",
+    "react-native-svg": "12.3.0"
+  },
+  "devDependencies": {
+    "@fluentui-react-native/eslint-config-rules": "^0.1.1",
+    "@fluentui-react-native/test-tools": ">=0.1.1 <1.0.0",
+    "@fluentui-react-native/scripts": "^0.1.1",
+    "@office-iss/react-native-win32": "^0.68.0",
+    "react": "17.0.2",
+    "react-native": "^0.68.0",
+    "@types/react-native": "^0.68.0"
+  },
+  "peerDependencies": {
+    "react": "17.0.2",
+    "react-native": "^0.68.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "rnx-kit": {
+    "reactNativeVersion": "^0.68",
+    "reactNativeDevVersion": "^0.68",
+    "kitType": "library",
+    "capabilities": [
+      "core",
+      "core-android",
+      "core-ios",
+      "react",
+      "svg"
+    ]
+  }
+}

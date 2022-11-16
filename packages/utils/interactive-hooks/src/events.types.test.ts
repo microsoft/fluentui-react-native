@@ -5,8 +5,8 @@ import { isAccessibilityActionEvent, isGestureResponderEvent, isKeyPressEvent } 
 const createMockEvent = (nativeEvent) => {
   return {
     nativeEvent: nativeEvent,
-    currentTarget: 1,
-    target: 1,
+    currentTarget: null,
+    target: null,
     bubbles: false,
     cancelable: true,
     defaultPrevented: false,

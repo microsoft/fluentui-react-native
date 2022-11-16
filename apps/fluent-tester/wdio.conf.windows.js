@@ -11,7 +11,6 @@ exports.config = {
   specs: [
     'src/E2E/ActivityIndicator/specs/*.win.ts',
     'src/E2E/Button/specs/*.win.ts',
-    'src/E2E/Callout/specs/*.win.ts',
     'src/E2E/Checkbox/specs/*.windows.ts', // See spec file for more information
     'src/E2E/Link/specs/*.win.ts',
     'src/E2E/PersonaCoin/specs/*.win.ts',
