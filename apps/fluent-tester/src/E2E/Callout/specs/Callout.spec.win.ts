@@ -1,6 +1,8 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CalloutPageObject from '../pages/CalloutPageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { CALLOUT_ACCESSIBILITY_LABEL } from '../../../TestComponents/Callout/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CALLOUT_A11Y_ROLE } from '../../common/consts';
+import { ComponentSelector } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Callout Testing Initialization', function () {
@@ -19,26 +21,40 @@ describe('Callout Testing Initialization', function () {
   });
 });
 
-/* This will be re-enabled after the Callout's ViewManager integrates the testID prop. This is used to select UI components */
-// describe('Callout Functional Testing', () => {
-//   it('Open the callout and validate it loaded correctly (visible)', () => {
-//     CalloutPageObject.scrollToTestElement();
-//     CalloutPageObject.openCallout();
-//     CalloutPageObject.waitForCalloutComponentInView(PAGE_TIMEOUT);
-//     expect(CalloutPageObject.didCalloutLoad()).toBeTruthy();
-//   });
-// });
+describe('Callout Accessibility Testing', () => {
+  beforeAll(async () => {
+    await CalloutPageObject.scrollToTestElement();
+    await CalloutPageObject.openCallout();
+    await CalloutPageObject.waitForCalloutComponentInView(PAGE_TIMEOUT);
+  });
 
-// describe('Callout Accessibility Testing', () => {
-//   it('Validate accessibilityRole is correct', () => {
-//     CalloutPageObject.scrollToTestElement();
-//     CalloutPageObject.waitForCalloutComponentInView(PAGE_TIMEOUT);
-//     expect(CalloutPageObject.getAccessibilityRole()).toEqual(CALLOUT_A11Y_ROLE);
-//   });
+  it('Validate accessibilityRole is correct', async () => {
+    await expect(await CalloutPageObject.getAccessibilityRole()).toEqual(CALLOUT_A11Y_ROLE);
+    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
 
-//   it('Set accessibilityLabel', () => {
-//     CalloutPageObject.scrollToTestElement();
-//     CalloutPageObject.waitForCalloutComponentInView(PAGE_TIMEOUT);
-//     expect(CalloutPageObject.getAccessibilityLabel(CalloutSelector.Primary)).toEqual(CALLOUT_ACCESSIBILITY_LABEL);
-//   });
-// });
+  it('Set accessibilityLabel', async () => {
+    await expect(await CalloutPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CALLOUT_ACCESSIBILITY_LABEL);
+    await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+
+  afterAll(async () => {
+    await CalloutPageObject.closeCallout();
+  });
+});
+
+describe('Callout Functional Testing', () => {
+  beforeEach(async () => {
+    await CalloutPageObject.scrollToTestElement();
+    await CalloutPageObject.openCallout();
+    await CalloutPageObject.waitForCalloutComponentInView(PAGE_TIMEOUT);
+  });
+
+  it('Open the callout and validate it loaded correctly (visible)', async () => {
+    await expect(await CalloutPageObject.didCalloutLoad()).toBeTruthy();
+  });
+
+  afterEach(async () => {
+    await CalloutPageObject.closeCallout();
+  });
+});

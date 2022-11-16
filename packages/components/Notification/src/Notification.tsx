@@ -2,11 +2,11 @@
 import { notification, NotificationType, NotificationProps } from './Notification.types';
 import { Pressable } from '@fluentui-react-native/pressable';
 import { Platform, PressableProps, useWindowDimensions, View, ViewStyle, ViewProps } from 'react-native';
-import { Icon } from '@fluentui-react-native/icon';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Notification.styling';
 import { compose, mergeProps, withSlots, UseSlots, memoize } from '@fluentui-react-native/framework';
-import { createIconProps, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { NotificationButton, createNotificationButtonProps } from './Notification.helper';
 import { Shadow } from '@fluentui-react-native/experimental-shadow';
 

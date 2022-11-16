@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Bump all design-tokens packages to 0.29.0",
-  "packageName": "@fluentui-react-native/text",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}

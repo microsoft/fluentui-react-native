@@ -9,6 +9,7 @@ import {
   patchTokens,
   FontWeightValue,
 } from '@fluentui-react-native/framework';
+import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
@@ -29,7 +30,10 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     font,
     italic,
     onAccessibilityTap,
+    onKeyUp,
     onKeyDown,
+    keyUpEvents,
+    keyDownEvents,
     onPress,
     size,
     strikethrough,
@@ -56,6 +60,17 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     : align === 'end'
     ? 'right'
     : align;
+
+  const textOnPress = React.useCallback(
+    (e) => {
+      if (onPress) {
+        onPress(e);
+      }
+      e.stopPropagation();
+    },
+    [onPress],
+  );
+  const keyProps = useKeyProps(textOnPress, ' ', 'Enter');
 
   const onAccTap = React.useCallback(
     (event?) => {
@@ -91,15 +106,26 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
 
+  const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
+  const filteredProps = {
+    onKeyUp: isWinPlatform ? onKeyUp : undefined,
+    keyUpEvents: isWinPlatform ? keyUpEvents : undefined,
+    validKeysUp: undefined,
+    onKeyDown: isWinPlatform ? onKeyDown : undefined,
+    keyDownEvents: isWinPlatform ? keyDownEvents : undefined,
+    validKeysDown: undefined,
+    onAccessibilityTap: isWinPlatform ? onAccTap : undefined,
+  };
+
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
     const mergedProps = {
-      numberOfLines: truncate || !wrap ? 1 : 0,
-      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
-      ...(Platform.OS === (('win32' as any) || 'windows') && { onAccessibilityTap: onAccTap }),
-      onPress,
       ...rest,
+      ...keyProps,
+      ...filteredProps,
       ...extra,
+      onPress,
+      numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style),
     };
     return (

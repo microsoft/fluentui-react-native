@@ -177,7 +177,7 @@ export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
     uwpStatus: 'N/A',
     iosStatus: 'N/A',
     macosStatus: 'Experimental',
-    androidStatus: 'N/A',
+    androidStatus: 'Experimental',
   };
 
   const description =
