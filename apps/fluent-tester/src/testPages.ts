@@ -25,9 +25,10 @@ import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './TestComponents/Press
 import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './TestComponents/RadioGroup';
 import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
 import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
-import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
 import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
+import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
+import { StrokeWidthTest, HOMEPAGE_STROKEWIDTH_BUTTON } from './TestComponents/StrokeWidth';
 import { SvgTest, HOMEPAGE_SVG_BUTTON } from './TestComponents/Svg';
 import { SwitchTest, HOMEPAGE_SWITCH_BUTTON } from './TestComponents/Switch';
 import { TabsTest, HOMEPAGE_TABS_BUTTON } from './TestComponents/Tabs';
@@ -203,12 +204,6 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'Spacing Tokens',
-    component: SpacingTokensTest,
-    testPage: HOMEPAGE_SPACING_BUTTON,
-    platforms: ['ios'],
-  },
-  {
     name: 'Separator',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
@@ -225,6 +220,18 @@ export const tests: TestDescription[] = [
     component: ShimmerTest,
     testPage: HOMEPAGE_SHIMMER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Spacing Tokens',
+    component: SpacingTokensTest,
+    testPage: HOMEPAGE_SPACING_BUTTON,
+    platforms: ['ios'],
+  },
+  {
+    name: 'Stroke Width Tokens',
+    component: StrokeWidthTest,
+    testPage: HOMEPAGE_STROKEWIDTH_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Svg',

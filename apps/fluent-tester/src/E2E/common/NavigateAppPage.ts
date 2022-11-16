@@ -21,6 +21,7 @@ import { HOMEPAGE_PRESSABLE_BUTTON } from '../../TestComponents/Pressable/consts
 import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../TestComponents/RadioGroup/consts';
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../TestComponents/Separator/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
+import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../../TestComponents/StrokeWidth/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../../TestComponents/Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../TestComponents/Text/consts';
@@ -118,6 +119,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToShimmerPage() {
     await (await this.shimmerPage).click();
+  }
+
+  async clickAndGoToStrokeWidthTokensPage() {
+    await (await this.strokeWidthTokensPage).click();
   }
 
   async clickAndGoToSvgPage() {
@@ -246,6 +251,10 @@ class NavigateAppPage extends BasePage {
 
   private get shimmerPage() {
     return By(HOMEPAGE_SHIMMER_BUTTON);
+  }
+
+  private get strokeWidthTokensPage() {
+    return By(HOMEPAGE_STROKEWIDTH_BUTTON);
   }
 
   private get svgPage() {
