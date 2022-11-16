@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { RadioGroup } from '../RadioGroup/RadioGroup';
 import { Radio } from '../Radio/Radio';
-import { View } from 'react-native';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
@@ -24,10 +23,8 @@ describe('RadioGroup component tests', () => {
     const tree = renderer
       .create(
         <RadioGroup label="Uncontrolled RadioGroup" defaultValue="key2">
-          <View>
-            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-          </View>
+          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
         </RadioGroup>,
       )
       .toJSON();
@@ -38,10 +35,8 @@ describe('RadioGroup component tests', () => {
     const tree = renderer
       .create(
         <RadioGroup disabled label="Disabled RadioGroup">
-          <View>
-            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-          </View>
+          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
         </RadioGroup>,
       )
       .toJSON();
@@ -52,10 +47,8 @@ describe('RadioGroup component tests', () => {
     const tree = renderer
       .create(
         <RadioGroup required label="Required RadioGroup" defaultValue="key2">
-          <View>
-            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-          </View>
+          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
         </RadioGroup>,
       )
       .toJSON();
@@ -66,10 +59,8 @@ describe('RadioGroup component tests', () => {
     const tree = renderer
       .create(
         <RadioGroup layout="horizontal" label="Horizontal RadioGroup" defaultValue="key2">
-          <View>
-            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-          </View>
+          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
         </RadioGroup>,
       )
       .toJSON();
@@ -80,10 +71,8 @@ describe('RadioGroup component tests', () => {
     const tree = renderer
       .create(
         <RadioGroup layout="horizontal-stacked" label="Horizontal-Stacked RadioGroup" defaultValue="key2">
-          <View>
-            <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
-            <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
-          </View>
+          <Radio value="key1" label="Radio1" accessibilityPositionInSet={1} accessibilitySetSize={2} />
+          <Radio value="key2" label="Radio2" accessibilityPositionInSet={2} accessibilitySetSize={2} />
         </RadioGroup>,
       )
       .toJSON();
