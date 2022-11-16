@@ -1,1 +1,1 @@
-export * from './fontMetrics';
+export * from './useFontMetrics';
