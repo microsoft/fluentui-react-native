@@ -24,13 +24,13 @@ exports[`CompoundButton default 1`] = `
       "backgroundColor": "#f3f2f1",
       "borderColor": "#8a8886",
       "borderRadius": 4,
-      "borderWidth": 1.5,
+      "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 14.5,
-      "paddingHorizontal": 14.5,
+      "padding": 15,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }

@@ -1,8 +1,40 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Thu, 10 Nov 2022 02:05:55 GMT and should not be manually modified.
+This log was last generated on Sun, 13 Nov 2022 09:17:06 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.0
+
+Sun, 13 Nov 2022 09:17:06 GMT
+
+### Minor changes
+
+- fix double clicking on inline links (email not defined)
+- Bump @fluentui-react-native/interactive-hooks to v0.21.0
+- Bump @fluentui-react-native/focus-zone to v0.11.5
+- Bump @fluentui-react-native/text to v0.16.0
+- Bump @fluentui-react-native/icon to v0.15.0
+
+## 0.7.4
+
+Fri, 11 Nov 2022 18:06:32 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.19
+- Bump @fluentui-react-native/interactive-hooks to v0.20.2
+- Bump @fluentui-react-native/focus-zone to v0.11.4
+- Bump @fluentui-react-native/text to v0.15.15
+- Bump @fluentui-react-native/icon to v0.14.1
+
+## 0.7.3
+
+Fri, 11 Nov 2022 01:02:57 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.3
 
 ## 0.7.2
 
