@@ -17,6 +17,8 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
 
   const isMobile = ['android', 'ios'].includes(Platform.OS as string);
+  const platfromSpecificNaming = isMobile ? 'Ascent' : 'Primary';
+
   return (
     <View style={testContentRootViewStyle}>
       <Button style={commonTestStyles.vmargin}>Default</Button>
@@ -24,16 +26,13 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
         Default Disabled
       </Button>
       <Button appearance="primary" style={commonTestStyles.vmargin}>
-        Primary
+        {platfromSpecificNaming}
       </Button>
       <Button disabled appearance="primary" style={commonTestStyles.vmargin}>
-        Primary Disabled
+        {`${platfromSpecificNaming} Disabled`}
       </Button>
       {isMobile && (
         <>
-          <Button appearance="ascent" style={commonTestStyles.vmargin}>
-            Ascent
-          </Button>
           <Button appearance="outline" style={commonTestStyles.vmargin}>
             Outline
           </Button>
@@ -47,7 +46,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
         Block
       </Button>
       <Button appearance="primary" block style={commonTestStyles.vmargin}>
-        Block Primary
+        {`Block ${platfromSpecificNaming}`}
       </Button>
       <Button appearance="subtle" block style={commonTestStyles.vmargin}>
         Block Subtle
@@ -56,7 +55,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
         Default
       </CompoundButton>
       <CompoundButton appearance="primary" secondaryContent="Compound" style={commonTestStyles.vmargin}>
-        Primary
+        {platfromSpecificNaming}
       </CompoundButton>
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
