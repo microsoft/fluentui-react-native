@@ -4,7 +4,7 @@ import {
   HOMEPAGE_CALLOUT_BUTTON,
   BUTTON_TO_OPEN_CALLOUT,
 } from '../../../TestComponents/Callout/consts';
-import { BasePage, By, COMPONENT_SCROLL_COORDINATES } from '../../common/BasePage';
+import { BasePage, By } from '../../common/BasePage';
 
 class CalloutPageObject extends BasePage {
   /******************************************************************/
@@ -16,9 +16,28 @@ class CalloutPageObject extends BasePage {
 
   /* OVERRIDE: This must scroll to the button that opens the callout, not the callout (since it's not visible on load.) */
   async scrollToTestElement(): Promise<void> {
-    while (!(await (await this._buttonToOpenCallout).isDisplayed())) {
-      await driver.touchScroll(COMPONENT_SCROLL_COORDINATES.x, COMPONENT_SCROLL_COORDINATES.y, await (await this._testPage).elementId);
-    }
+    // on win32, adding a blank value to an element automatically scrolls to it
+    await (await this._buttonToOpenCallout).addValue('');
+  }
+
+  async openCallout(): Promise<void> {
+    await (await this._buttonToOpenCallout).click();
+  }
+
+  async closeCallout(): Promise<void> {
+    // all we have to do is click outside the callout
+    await (await this._testPage).click();
+  }
+
+  async waitForCalloutComponentInView(timeout?: number): Promise<void> {
+    await browser.waitUntil(
+      async () => {
+        return await this.didCalloutLoad();
+      },
+      {
+        timeout: timeout ?? this.waitForUiEvent,
+      },
+    );
   }
 
   /*****************************************/

@@ -73,7 +73,7 @@ export const tests: TestDescription[] = [
     name: 'Callout',
     component: CalloutTest,
     testPage: HOMEPAGE_CALLOUT_BUTTON,
-    platforms: ['android', 'macos', 'win32', 'windows'],
+    platforms: ['android', 'macos', 'win32'],
   },
   {
     name: 'Checkbox',
