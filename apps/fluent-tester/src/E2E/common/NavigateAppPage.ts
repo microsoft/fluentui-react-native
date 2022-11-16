@@ -3,6 +3,7 @@ import { HOMEPAGE_AVATAR_BUTTON } from '../../TestComponents/Avatar/consts';
 import { HOMEPAGE_BADGE_BUTTON } from '../../TestComponents/Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../TestComponents/CheckboxExperimental/consts';
+import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../../TestComponents/CornerRadius/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../TestComponents/ContextualMenu/consts';
@@ -63,6 +64,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToContextualMenuPage() {
     await (await this.contextualMenuPage).click();
+  }
+
+  async clickAndGoToCornerRadiusTokensPage() {
+    await (await this.cornerRadiusTokensPage).click();
   }
 
   async clickAndGoToFocusTrapZonePage() {
@@ -195,6 +200,10 @@ class NavigateAppPage extends BasePage {
 
   private get contextualMenuPage() {
     return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
+  }
+
+  private get cornerRadiusTokensPage() {
+    return By(HOMEPAGE_CORNERRADIUS_BUTTON);
   }
 
   private get focusTrapZonePage() {
