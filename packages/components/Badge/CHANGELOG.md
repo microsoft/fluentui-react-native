@@ -1,8 +1,19 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Sun, 13 Nov 2022 09:17:06 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.2.1
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-shadow to v0.2.44
+- Bump @fluentui-react-native/framework to v0.8.20
+- Bump @fluentui-react-native/icon to v0.15.1
+- Bump @fluentui-react-native/text to v0.16.1
 
 ## 0.2.0
 
