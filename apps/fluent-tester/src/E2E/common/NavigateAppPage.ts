@@ -20,6 +20,7 @@ import { HOMEPAGE_PERSONACOIN_BUTTON } from '../../TestComponents/PersonaCoin/co
 import { HOMEPAGE_PRESSABLE_BUTTON } from '../../TestComponents/Pressable/consts';
 import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../TestComponents/RadioGroup/consts';
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../TestComponents/Separator/consts';
+import { HOMEPAGE_SHADOW_BUTTON } from '../../TestComponents/Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../../TestComponents/Switch/consts';
@@ -114,6 +115,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToSeparatorPage() {
     await (await this.separatorPage).click();
+  }
+
+  async clickAndGoToShadowPage() {
+    await (await this.shadowPage).click();
   }
 
   async clickAndGoToShimmerPage() {
@@ -242,6 +247,10 @@ class NavigateAppPage extends BasePage {
 
   private get separatorPage() {
     return By(HOMEPAGE_SEPARATOR_BUTTON);
+  }
+
+  private get shadowPage() {
+    return By(HOMEPAGE_SHADOW_BUTTON);
   }
 
   private get shimmerPage() {
