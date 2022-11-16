@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/theming-utils",
   "entries": [
     {
+      "date": "Wed, 16 Nov 2022 08:47:25 GMT",
+      "tag": "@fluentui-react-native/theming-utils_v0.18.3",
+      "version": "0.18.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/theming-utils",
+            "commit": "ac846edd3f16fd427bca196a070653adaf702450",
+            "comment": "modify tester app and tokens update"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Nov 2022 18:06:31 GMT",
       "tag": "@fluentui-react-native/theming-utils_v0.18.2",
       "version": "0.18.2",

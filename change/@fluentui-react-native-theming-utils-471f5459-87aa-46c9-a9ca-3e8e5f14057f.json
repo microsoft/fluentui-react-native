@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "modify tester app and tokens update",
-  "packageName": "@fluentui-react-native/theming-utils",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
