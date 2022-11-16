@@ -99,7 +99,7 @@ export const tests: TestDescription[] = [
     name: 'Corner Radius Tokens',
     component: CornerRadiusTokensTest,
     testPage: HOMEPAGE_CORNERRADIUS_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'win32'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Date Picker (Native)',
