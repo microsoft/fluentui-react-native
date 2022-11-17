@@ -1,18 +1,22 @@
 # Using Tokens
 
-With the Fluent Design System, we have a set of colors that we have agreed to use for our UI.
-This page describes how to access these colors.
+With the Fluent Design System, we have a set of named design values, that we have agreed to use for our UI. These values include colors, shadows, sizing, typography, stroke width, corner radius, etc. The [fluentui-design-tokens](https://github.com/microsoft/fluentui-design-tokens) repo contains all the token definitions. This page describes how to access these values in the fluentui-react-native repo.
 
 ## Global
 
-Our set of global tokens is the complete set of the colors that we agree to use for our UI. Each color has a specific name that is assigned to a hex value. For example, `grey74` is `#bdbdbd`.
-These names and values do not change no matter the platform or theme.\*
+Our set of global tokens is the complete set of the design values that we agree to use for our UI. Each token has a specific name that is assigned to a certain value. For example, `grey74` is `#bdbdbd`.
+
+These names and values do not change no matter the platform or theme; however, there are some exceptions. The only current exception is that brand color definitions change depending on platform.
 
 In most cases you will not be referring to global tokens directly. The case where you may be referring to global tokens is when you're defining your own alias token, or need to access brand colors.
 
 Global tokens can be imported directly:
 
 `import { globalTokens } from '@fluentui-react-native\theme-tokens'`
+
+The full set of global tokens is here: [android](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.android.json) / [ios](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.ios.json) / [macOS](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.macos.json) / [win32](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.win32.json) / [windows](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.windows.json)
+
+### Color
 
 If accessing a specific color, you can find it in the `globalTokens.color` property.
 
@@ -31,13 +35,96 @@ const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
 };
 ```
 
-\* An exception is that brand color definitions change depending on platform.
+### Font
+
+You can find tokens related to fonts such as weight and size in the `globalTokens.font` property.
+
+An example of usage is in our Badge component, where we specify different font sizes for different Badge sizes.
+
+```ts
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
+export const badgeFontTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) =>
+  ({
+    ...
+    fontSize: globalTokens.font.size100,
+    fontWeight: globalTokens.font.weight.regular,
+    large: {
+      fontSize: globalTokens.font.size200,
+    },
+    extraLarge: {
+      fontSize: globalTokens.font.size200,
+    },
+  } as BadgeTokens);
+
+```
+
+### Stroke
+
+You can find tokens related to stroke in the `globalTokens.stroke` property. Currently the only type of token related to stroke is stroke width.
+
+An example of usage is in our Avatar component, where we specify different ring thicknesses for different avatar sizes.
+
+```ts
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
+const strokeSize = {
+  small: globalTokens.stroke.width20,
+  medium: globalTokens.stroke.width30,
+  large: globalTokens.stroke.width40,
+};
+```
+
+### Corner Radius
+
+You can find tokens related to corner radius in the `globalTokens.corner` property. Currently the only type of token related to corner is corner radius.
+
+An example of usage is in our Avatar component, where we have the option of both circular and square avatars.
+
+```ts
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
+export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme) =>
+  ({
+    ...
+    circular: {
+      borderRadius: globalTokens.corner.radiusCircular,
+    },
+    square: {
+      borderRadius: globalTokens.corner.radius40,
+    },
+    size20: {
+      square: {
+        borderRadius: globalTokens.corner.radius20,
+      },
+    },
+    ...
+```
+
+### Size
+
+You can find tokens related to size in the `globalTokens.size property`.
+
+Example usage: in our Menu Item component, we use global size tokens to specific values for padding.
+
+```ts
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
+
+export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: Theme): MenuItemTokens => ({
+  ...
+  gap: globalTokens.size40,
+  padding: globalTokens.size40,
+  paddingHorizontal: globalTokens.size80,
+  submenuIndicatorPadding: globalTokens.size20,
+  ...
+})
+```
 
 ## Alias
 
 Alias tokens are used to refer to the global tokens that are appropriate based on the current platform or theme. For example for `neutralForeground1`, in a light mode it points to a global token whose value is a light grey, but in a dark mode will change to point to a global token whose value is a dark grey. This allows component builders to point to the same color name and have it change to the correct value without having to know about the underlying theme.
 
-Alias tokens can be accessed from the `Theme` object. Alias tokens are defined under the `colors` property on a theme. So if you have a `Theme` object and want to access the `neutralForeground1` alias token:
+Alias tokens can be accessed from the `Theme` object. So if you have a `Theme` object and want to access the `neutralForeground1` alias token:
 
 ```ts
 import { useFluentTheme } from '@fluentui-react-native/framework';
