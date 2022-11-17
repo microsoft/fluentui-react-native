@@ -5,6 +5,7 @@ import { BadgeTest, HOMEPAGE_BADGE_BUTTON } from './TestComponents/Badge';
 import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
+import { CornerRadiusTokensTest, HOMEPAGE_CORNERRADIUS_BUTTON } from './TestComponents/CornerRadius';
 import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
@@ -25,9 +26,10 @@ import { PressableTest, HOMEPAGE_PRESSABLE_BUTTON } from './TestComponents/Press
 import { RadioGroupTest, HOMEPAGE_RADIOGROUP_BUTTON } from './TestComponents/RadioGroup';
 import { RadioGroupExperimentalTest, HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from './TestComponents/RadioGroupExperimental';
 import { SeparatorTest, HOMEPAGE_SEPARATOR_BUTTON } from './TestComponents/Separator';
-import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
 import { ShadowTest, HOMEPAGE_SHADOW_BUTTON } from './TestComponents/Shadow';
 import { ShimmerTest, HOMEPAGE_SHIMMER_BUTTON } from './TestComponents/Shimmer';
+import { SpacingTokensTest, HOMEPAGE_SPACING_BUTTON } from './TestComponents/Spacing';
+import { StrokeWidthTest, HOMEPAGE_STROKEWIDTH_BUTTON } from './TestComponents/StrokeWidth';
 import { SvgTest, HOMEPAGE_SVG_BUTTON } from './TestComponents/Svg';
 import { SwitchTest, HOMEPAGE_SWITCH_BUTTON } from './TestComponents/Switch';
 import { TabsTest, HOMEPAGE_TABS_BUTTON } from './TestComponents/Tabs';
@@ -43,13 +45,13 @@ export const tests: TestDescription[] = [
     name: 'ActivityIndicator',
     component: ActivityIndicatorTest,
     testPage: HOMEPAGE_ACTIVITY_INDICATOR_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Avatar',
     component: AvatarTest,
     testPage: HOMEPAGE_AVATAR_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Avatar (Native)',
@@ -61,13 +63,13 @@ export const tests: TestDescription[] = [
     name: 'Badge',
     component: BadgeTest,
     testPage: HOMEPAGE_BADGE_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Button',
     component: ButtonTest,
     testPage: HOMEPAGE_BUTTON_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Callout',
@@ -79,7 +81,7 @@ export const tests: TestDescription[] = [
     name: 'Checkbox',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Checkbox (Experimental)',
@@ -92,6 +94,12 @@ export const tests: TestDescription[] = [
     component: ContextualMenuTest,
     testPage: HOMEPAGE_CONTEXTUALMENU_BUTTON,
     platforms: ['android', 'macos', 'win32'],
+  },
+  {
+    name: 'Corner Radius Tokens',
+    component: CornerRadiusTokensTest,
+    testPage: HOMEPAGE_CORNERRADIUS_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Date Picker (Native)',
@@ -140,7 +148,7 @@ export const tests: TestDescription[] = [
     name: 'Link',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Link (Experimental)',
@@ -176,19 +184,19 @@ export const tests: TestDescription[] = [
     name: 'Persona',
     component: PersonaTest,
     testPage: HOMEPAGE_PERSONA_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'PersonaCoin',
     component: PersonaCoinTest,
     testPage: HOMEPAGE_PERSONACOIN_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Pressable',
     component: PressableTest,
     testPage: HOMEPAGE_PRESSABLE_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'RadioGroup',
@@ -203,16 +211,10 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'Spacing Tokens',
-    component: SpacingTokensTest,
-    testPage: HOMEPAGE_SPACING_BUTTON,
-    platforms: ['ios'],
-  },
-  {
     name: 'Separator',
     component: SeparatorTest,
     testPage: HOMEPAGE_SEPARATOR_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Shadow',
@@ -225,6 +227,18 @@ export const tests: TestDescription[] = [
     component: ShimmerTest,
     testPage: HOMEPAGE_SHIMMER_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32'],
+  },
+  {
+    name: 'Spacing Tokens',
+    component: SpacingTokensTest,
+    testPage: HOMEPAGE_SPACING_BUTTON,
+    platforms: ['ios'],
+  },
+  {
+    name: 'Stroke Width Tokens',
+    component: StrokeWidthTest,
+    testPage: HOMEPAGE_STROKEWIDTH_BUTTON,
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Svg',
@@ -254,24 +268,24 @@ export const tests: TestDescription[] = [
     name: 'Text',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Text (Experimental)',
     component: TextExperimentalTest,
     testPage: HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Theme',
     component: ThemeTest,
     testPage: HOMEPAGE_THEME_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Tokens',
     component: TokenTest,
     testPage: HOMEPAGE_TOKEN_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'web', 'win32', 'windows'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
 ];

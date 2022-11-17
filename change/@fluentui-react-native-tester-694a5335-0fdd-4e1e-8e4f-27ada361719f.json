@@ -1,0 +1,7 @@
+{
+  "type": "none",
+  "comment": "Add a test for fontawesome's rnsvg package",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "warleu@microsoft.com",
+  "dependentChangeType": "none"
+}

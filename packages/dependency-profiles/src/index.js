@@ -4,11 +4,11 @@ module.exports = {
   "0.68": {
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.107.1"
+      "version": "0.107.2"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.28.11"
+      "version": "0.28.12"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
@@ -149,6 +149,10 @@ module.exports = {
     "@fluentui-react-native/experimental-expander": {
       "name": "@fluentui-react-native/experimental-expander",
       "version": "0.4.22"
+    },
+    "@fluentui-react-native/experimental-icon": {
+      "name": "@fluentui-react-native/experimental-icon",
+      "version": "0.0.2"
     },
     "@fluentui-react-native/icon": {
       "name": "@fluentui-react-native/icon",
