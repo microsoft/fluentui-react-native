@@ -9,7 +9,7 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonAppearance = 'primary' | 'subtle' | 'ascent' | 'outline';
+export type ButtonAppearance = 'primary' | 'subtle' | 'accent' | 'outline';
 export type ButtonShape = 'rounded' | 'circular' | 'square';
 
 // Core Props/Tokens are shared between FAB and Buttons
@@ -118,7 +118,7 @@ export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'>
 export interface ButtonProps extends ButtonCoreProps {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary' or 'ascent': Emphasizes the button as a primary action. 'Ascent' added to support Mobile platform naming convention, maps to 'primary'.
+   * - 'primary' or 'accent': Emphasizes the button as a primary action. 'Accent' added to support Mobile platform naming convention, maps to 'primary'.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    * - 'outline': Similar to subtle but has a border. Implemented for mobile endpoints only. Maps to default on other platforms.
    * @default 'primary' on mobile endpoints, other platform have a separate style when no apperance is passed.

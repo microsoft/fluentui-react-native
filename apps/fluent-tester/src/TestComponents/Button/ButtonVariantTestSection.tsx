@@ -17,7 +17,7 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
   const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
 
   const isMobile = ['android', 'ios'].includes(Platform.OS as string);
-  const platfromSpecificNaming = isMobile ? 'Ascent' : 'Primary';
+  const platfromSpecificNaming = isMobile ? 'Accent' : 'Primary';
 
   return (
     <View style={testContentRootViewStyle}>

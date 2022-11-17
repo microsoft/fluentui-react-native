@@ -100,17 +100,26 @@ export const getDefaultSize = (): ButtonSize => {
 
 export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): ButtonAppearance => {
   switch (appearance) {
-    case 'ascent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
+    case 'accent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
       return 'primary';
+
     case 'outline': // Exists only for Mobile platforms, maps to default on other platforms.
-      if (Platform.OS == 'android' || Platform.OS == 'ios') return 'outline';
-      else return null;
+      if (Platform.OS == 'android' || Platform.OS == 'ios') {
+        return 'outline';
+      } else {
+        return null;
+      }
+
     case 'primary':
     case 'subtle':
       return appearance;
+
     default: // Mobile platforms do not have seperate styling when no appearance is passed.
-      if (Platform.OS == 'android' || Platform.OS == 'ios') return 'primary';
-      else return null;
+      if (Platform.OS == 'android' || Platform.OS == 'ios') {
+        return 'primary';
+      } else {
+        return null;
+      }
   }
 };
 

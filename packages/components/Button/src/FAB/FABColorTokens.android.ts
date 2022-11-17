@@ -3,7 +3,7 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { FABTokens } from './FAB.types';
 
 export const defaultFABColorTokens: TokenSettings<FABTokens, Theme> = (t: Theme): FABTokens => ({
-  // Default coloring same as 'primary' or 'ascent'
+  // Default coloring same as 'primary' or 'accent'
   backgroundColor: t.colors.brandBackground,
   color: t.colors.neutralForegroundOnColor,
   iconColor: t.colors.neutralForegroundOnColor,

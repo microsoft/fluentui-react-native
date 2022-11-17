@@ -11,6 +11,7 @@ const svgProps: SvgIconProps = {
   src: TestSvg,
   viewBox: '0 0 500 500',
 };
+const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
 const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
 const CustomFABShadow64 = FAB.customize({
@@ -23,13 +24,13 @@ export const ShadowButtonTestSection: React.FunctionComponent = () => {
   if (Platform.OS === 'ios') {
     return (
       <View style={shadowTestPageStyles(t).backgroundColor}>
-        <FAB icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+        <FAB icon={iconProps} style={commonTestStyles.vmargin}>
           FAB with default shadow
         </FAB>
-        <CustomFABShadow64 icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+        <CustomFABShadow64 icon={iconProps} style={commonTestStyles.vmargin}>
           Custom FAB with shadow64
         </CustomFABShadow64>
-        <CustomFABNoShadow icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+        <CustomFABNoShadow icon={iconProps} style={commonTestStyles.vmargin}>
           Custom FAB with no shadow
         </CustomFABNoShadow>
       </View>

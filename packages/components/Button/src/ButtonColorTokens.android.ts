@@ -5,7 +5,7 @@ import { ButtonTokens } from './Button.types';
 export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
   ({
     /** Android does not have a different styles for 'default' button.
-     * 'primary', 'ascent' and if no apperance is mentioned, picks this.
+     * 'primary', 'accent' and if no apperance is mentioned, picks this.
      */
     backgroundColor: t.colors.brandBackground,
     rippleColor: 'transparent',

@@ -16,7 +16,7 @@ Basic examples:
 <FAB>Text</FAB>
 <FAB icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} iconOnly/>
 <FAB icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</FAB>
-<FAB appearance="ascent">Text</FAB>
+<FAB appearance="accent">Text</FAB>
 <FAB disabled>Text</FAB>
 
 // Collapsing FAB Content (to show only icon) on click
@@ -57,12 +57,12 @@ The slots can be modified using the `compose` function on the `FAB`. For more in
 export interface FABProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A FAB can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary' or 'ascent': Emphasizes the button as a primary action.
-   *   'ascent' is mobile naming convention, 'primary' included here to maintain parity with Button.
+   * - 'primary' or 'accent': Emphasizes the button as a primary action.
+   *   'accent' is mobile naming convention, 'primary' included here to maintain parity with Button.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
-   * @default 'primary' (or 'ascent')
+   * @default 'primary' (or 'accent')
    */
-  appearance?: 'primary' | 'subtle' | 'ascent';
+  appearance?: 'primary' | 'subtle' | 'accent';
 
   /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.

@@ -3,7 +3,7 @@ import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { ButtonTokens } from './Button.types';
 
-export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme) =>
+export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = () =>
   ({
     focused: {
       borderWidth: globalTokens.stroke.width20,
@@ -40,9 +40,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
         borderWidth: globalTokens.stroke.width10,
         iconSize: 20,
       },
-      fontSize: t.typography.variants.body1Strong.size,
-      fontFamily: t.typography.variants.body1Strong.face,
-      fontWeight: t.typography.variants.body1Strong.weight,
       spacingIconContentBefore: globalTokens.spacing.xs,
       spacingIconContentAfter: globalTokens.spacing.xs,
       minHeight: 36,
@@ -52,13 +49,11 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
       paddingHorizontal: globalTokens.spacing.s,
       paddingVertical: globalTokens.spacing.xs,
       borderRadius: globalTokens.corner.radius40,
+      iconSize: 20,
       outline: {
         borderWidth: globalTokens.stroke.width10,
+        iconSize: 20,
       },
-      iconSize: 20,
-      fontSize: t.typography.variants.body2Strong.size,
-      fontFamily: t.typography.variants.body2Strong.face,
-      fontWeight: t.typography.variants.body2Strong.weight,
       spacingIconContentBefore: globalTokens.spacing.xs,
       spacingIconContentAfter: globalTokens.spacing.xs,
       minHeight: 36,
@@ -73,9 +68,6 @@ export const defaultButtonTokens: TokenSettings<ButtonTokens, Theme> = (t: Theme
         borderWidth: globalTokens.stroke.width10,
         iconSize: 16,
       },
-      fontSize: t.typography.variants.body2Strong.size,
-      fontFamily: t.typography.variants.body2Strong.face,
-      fontWeight: t.typography.variants.body2Strong.weight,
       spacingIconContentBefore: globalTokens.spacing.xxs,
       spacingIconContentAfter: globalTokens.spacing.xxs,
       minHeight: 28,

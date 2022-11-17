@@ -52,8 +52,8 @@ Win32:
 
 The `Button` component has several apparance variants depending on where it's being used:
 
-- The default `Button` is rendered with its default styling indicating a trigger for an action. For mobile endpoints this is the same as 'ascent'.
-- appearance="primary"/appearance="ascent": The `Button` is styled to emphasize that it represents the primary action. Ascent is equivalent to primary and is based on mobile platform naming conventions.
+- The default `Button` is rendered with its default styling indicating a trigger for an action. For mobile endpoints this is the same as 'accent'.
+- appearance="primary"/appearance="accent": The `Button` is styled to emphasize that it represents the primary action. Accent is equivalent to primary and is based on mobile platform naming conventions.
 - appearance="subtle": The `Button` is styled to blend into its background to become less emphasized.
 - appearance="outline": The `Button` is styled similar to 'subtle' button but also includes a border. Implemented for mobile endpoints only. Maps to default on other platforms.
 
@@ -100,12 +100,12 @@ Below is the set of props the button supports:
 export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary' or 'ascent': Emphasizes the button as a primary action. 'Ascent' added to support Mobile platform naming convention, maps to 'primary'.
+   * - 'primary' or 'accent': Emphasizes the button as a primary action. 'Accent' added to support Mobile platform naming convention, maps to 'primary'.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    * - 'outline': Similar to subtle but has a border. Implemented for mobile endpoints only. Maps to default on other platforms.
    * @default 'primary' on mobile endpoints, other platform have a separate style when no apperance is passed.
    */
-  appearance?: 'primary' | 'subtle' | 'ascent' | 'outline';
+  appearance?: 'primary' | 'subtle' | 'accent' | 'outline';
 
   /**
    * A button can fill the width of its container.
