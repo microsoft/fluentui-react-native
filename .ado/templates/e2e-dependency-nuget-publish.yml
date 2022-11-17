@@ -31,7 +31,6 @@ steps:
       arguments: 'pack Microsoft.FluentUI.WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
       workingFolder: 'tester_deps/nuget'
 
-
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
     displayName: 📒 Generate Manifest Tester Dependencies
     inputs:
