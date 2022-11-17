@@ -27,6 +27,20 @@ class ButtonExperimentalPageObject extends BasePage {
     return await callbackText.isDisplayed();
   }
 
+  // This is a special case because the experimental button and the old button test examples
+  // live on the same test page. Since the old button tests first, we've already scrolled down
+  // the test page.
+  async waitForPageDisplayed(timeout?: number): Promise<void> {
+    if (await (await this._primaryComponent).isDisplayed()) {
+      return;
+    }
+    await super.waitForPageDisplayed(timeout ?? this.waitForUiEvent);
+  }
+
+  async isPageLoaded(): Promise<boolean> {
+    return await (await this._testPage).isDisplayed() || await (await this._primaryComponent).isDisplayed();
+  }
+
   /* Sends a Keyboarding command on a specific UI element */
   async sendKey(buttonSelector: ButtonSelector, key: string): Promise<void> {
     await (await this.getButtonSelector(buttonSelector)).addValue(key);
