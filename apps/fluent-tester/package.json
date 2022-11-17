@@ -31,7 +31,7 @@
     "macos": "react-native run-macos --scheme FluentTester",
     "prettier": "fluentui-scripts prettier",
     "prettier-fix": "fluentui-scripts prettier --fix true",
-    "start": "react-native start",
+    "start": "react-native rnx-start",
     "windows": "react-native run-windows --arch x64 --sln windows/FluentTester.sln"
   },
   "repository": {
