@@ -11,7 +11,7 @@ For example, the following will not result in any changes to FURN components:
 ```ts
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-globalTokens.corner.radius.small = 5;
+globalTokens.corner.radius20 = 5;
 export const updatedGlobalTokens = globalTokens;
 ```
 

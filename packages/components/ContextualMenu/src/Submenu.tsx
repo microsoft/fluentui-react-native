@@ -109,7 +109,6 @@ export const Submenu = compose<SubmenuType>({
       focusZone: {
         componentRef: focusZoneRef,
         focusZoneDirection: 'vertical',
-        forceFocusMacOS: true,
       },
     });
 

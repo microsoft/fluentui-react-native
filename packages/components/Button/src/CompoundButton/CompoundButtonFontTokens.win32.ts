@@ -7,11 +7,11 @@ export const defaultCompoundButtonFontTokens: TokenSettings<CompoundButtonTokens
   medium: {
     hasContent: {
       fontFamily: t.typography.families.secondary,
-      fontSize: globalTokens.font.size[200],
+      fontSize: globalTokens.font.size200,
       fontWeight: globalTokens.font.weight.semibold as FontWeightValue,
       secondaryContentFont: {
         fontFamily: t.typography.families.secondary,
-        fontSize: globalTokens.font.size[100],
+        fontSize: globalTokens.font.size100,
         fontWeight: globalTokens.font.weight.semibold as FontWeightValue,
       },
     },
@@ -19,11 +19,11 @@ export const defaultCompoundButtonFontTokens: TokenSettings<CompoundButtonTokens
   small: {
     hasContent: {
       fontFamily: t.typography.families.primary,
-      fontSize: globalTokens.font.size[200],
+      fontSize: globalTokens.font.size200,
       fontWeight: globalTokens.font.weight.regular as FontWeightValue,
       secondaryContentFont: {
         fontFamily: t.typography.families.secondary,
-        fontSize: globalTokens.font.size[100],
+        fontSize: globalTokens.font.size100,
         fontWeight: globalTokens.font.weight.semibold as FontWeightValue,
       },
     },
@@ -31,11 +31,11 @@ export const defaultCompoundButtonFontTokens: TokenSettings<CompoundButtonTokens
   large: {
     hasContent: {
       fontFamily: t.typography.families.secondary,
-      fontSize: globalTokens.font.size[400],
+      fontSize: globalTokens.font.size400,
       fontWeight: globalTokens.font.weight.semibold as FontWeightValue,
       secondaryContentFont: {
         fontFamily: t.typography.families.primary,
-        fontSize: globalTokens.font.size[200],
+        fontSize: globalTokens.font.size200,
         fontWeight: globalTokens.font.weight.regular as FontWeightValue,
       },
     },

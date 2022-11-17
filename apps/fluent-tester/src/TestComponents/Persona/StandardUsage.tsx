@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Persona, PersonaSize } from '@fluentui/react-native';
-import { rajeshImageUrl } from './styles';
+import { satyaImageUrl } from './styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { View, Text, Switch } from 'react-native';
 import { undefinedText } from '../PersonaCoin/styles';
@@ -71,14 +71,14 @@ export const StandardUsage: React.FunctionComponent = () => {
       </View>
 
       <Persona
-        text={showPrimary ? 'Rajesh Jha' : undefined}
-        secondaryText={showSecondary ? 'Executive Vice President' : undefined}
-        tertiaryText={showTertiary ? 'E & D' : undefined}
-        optionalText={showOptional ? 'Building 36/5600' : undefined}
+        text={showPrimary ? 'Satya Nadella' : undefined}
+        secondaryText={showSecondary ? 'CEO' : undefined}
+        tertiaryText={showTertiary ? 'Microsoft' : undefined}
+        optionalText={showOptional ? 'Office of the CEO' : undefined}
         size={imageSize}
-        initials="RJ"
-        imageUrl={showImage ? rajeshImageUrl : undefined}
-        imageDescription="Profile photo of Rajesh Jha"
+        initials="SN"
+        imageUrl={showImage ? satyaImageUrl : undefined}
+        imageDescription="Profile photo of Satya Nadella"
         presence={'away'}
       />
     </View>

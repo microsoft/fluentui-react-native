@@ -7,13 +7,17 @@ import {
   getAccessibilityState,
 } from '@fluentui-react-native/interactive-hooks';
 import { LinkProps, LinkInfo } from './Link.types';
-import { Linking } from 'react-native';
+import { Linking, Platform } from 'react-native';
 
 export const useLink = (props: LinkProps): LinkInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     accessible = true,
     accessibilityRole,
+    onKeyUp,
+    onKeyDown,
+    keyUpEvents,
+    keyDownEvents,
     onPress,
     onAccessibilityTap,
     tooltip,
@@ -60,14 +64,28 @@ export const useLink = (props: LinkProps): LinkInfo => {
 
   const linkTooltip = tooltip ?? url ?? undefined;
 
+  /*These callbacks are not implemented on iOS/macOS, and cause Redboxes if passed in. Limit to only windows/win32 for now*/
+  const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
+  const filteredProps = {
+    onKeyUp: isWinPlatform ? onKeyUp : undefined,
+    keyUpEvents: isWinPlatform ? keyUpEvents : undefined,
+    validKeysUp: undefined,
+    onKeyDown: isWinPlatform ? onKeyDown : undefined,
+    keyDownEvents: isWinPlatform ? keyDownEvents : undefined,
+    validKeysDown: undefined,
+    onMouseEnter: isWinPlatform ? pressable.props.onMouseEnter : undefined,
+    onMouseLeave: isWinPlatform ? pressable.props.onMouseLeave : undefined,
+    onAccessibilityTap: isWinPlatform ? onAccTap : undefined,
+  };
+
   return {
     props: {
       ...rest,
       ...onKeyUpProps,
       ...pressable.props, // allow user key events to override those set by us
+      ...filteredProps,
       accessible: accessible,
       accessibilityRole: 'link',
-      onAccessibilityTap: onAccTap,
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: enableFocusRing ?? true,
       focusable: focusable ?? !isDisabled,

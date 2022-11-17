@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { findNodeHandle, Platform } from 'react-native';
+import { findNodeHandle } from 'react-native';
 import { FocusZoneProps, FocusZoneSlotProps, FocusZoneType } from './FocusZone.types';
 import { IUseStyling, composable } from '@uifabricshared/foundation-composable';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
@@ -12,7 +12,7 @@ const filterOutComponentRef = (propName) => propName !== 'componentRef';
 
 export const FocusZone = composable<FocusZoneType>({
   usePrepareProps: (userProps: FocusZoneProps, useStyling: IUseStyling<FocusZoneType>) => {
-    const { componentRef, defaultTabbableElement, isCircularNavigation, forceFocusMacOS, ...rest } = userProps;
+    const { componentRef, defaultTabbableElement, isCircularNavigation, ...rest } = userProps;
 
     const ftzRef = useViewCommandFocus(componentRef);
 
@@ -29,7 +29,6 @@ export const FocusZone = composable<FocusZoneType>({
       slotProps: mergeSettings<FocusZoneSlotProps>(useStyling(userProps), {
         root: {
           ...rest,
-          ...(Platform.OS === 'macos' && { forceFocus: forceFocusMacOS }),
           defaultTabbableElement: targetNativeTag,
           ref: ftzRef,
           navigateAtEnd: isCircularNavigation ? 'NavigateWrap' : 'NavigateStopAtEnds',

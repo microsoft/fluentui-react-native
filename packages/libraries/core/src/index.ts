@@ -200,7 +200,6 @@ export type {
 } from '@fluentui-react-native/text';
 
 export {
-  createIconProps,
   normalizeRect,
   preferKeyDownForKeyEvents,
   useAsPressable,

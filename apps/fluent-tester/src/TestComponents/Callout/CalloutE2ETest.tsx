@@ -1,46 +1,66 @@
 import * as React from 'react';
-import { ScreenRect, Text, View } from 'react-native';
-import { Button, Callout } from '@fluentui/react-native';
-import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL } from './consts';
+import { ScreenRect, View } from 'react-native';
+import { ButtonV1 as Button, Callout, Text, DismissBehaviors } from '@fluentui/react-native';
+import { Switch } from '@fluentui-react-native/switch';
+import { BUTTON_TO_OPEN_CALLOUT, CALLOUT_ACCESSIBILITY_LABEL, CALLOUT_TEST_COMPONENT } from './consts';
 
 export const E2ECalloutTest: React.FunctionComponent = () => {
-  const [showCustomizedCallout, setShowCustomizedCallout] = React.useState(false);
-  const [isCustomizedCalloutVisible, setIsCustomizedCalloutVisible] = React.useState(false);
+  const [showCallout, setShowCallout] = React.useState(false);
+  const [isCalloutVisible, setIsCalloutVisible] = React.useState(false);
+  const [dismissBehaviors, setDismissBehaviors] = React.useState({
+    preventDismissOnKeyDown: false,
+    preventDismissOnClickOutside: false,
+  });
 
-  const toggleShowCustomizedCallout = React.useCallback(() => {
-    setShowCustomizedCallout(!showCustomizedCallout);
-    setIsCustomizedCalloutVisible(false);
-  }, [showCustomizedCallout, setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
+  const toggleShowCallout = React.useCallback(() => {
+    setShowCallout(!showCallout);
+    setIsCalloutVisible(false);
+  }, [showCallout, setIsCalloutVisible, setShowCallout]);
 
-  const onShowCustomizedCallout = React.useCallback(() => {
-    setIsCustomizedCalloutVisible(true);
-  }, [setIsCustomizedCalloutVisible]);
+  const onShowCallout = React.useCallback(() => {
+    setIsCalloutVisible(true);
+  }, [setIsCalloutVisible]);
 
-  const onDismissCustomizedCallout = React.useCallback(() => {
-    setIsCustomizedCalloutVisible(false);
-    setShowCustomizedCallout(false);
-  }, [setIsCustomizedCalloutVisible, setShowCustomizedCallout]);
+  const onDismissCallout = React.useCallback(() => {
+    setIsCalloutVisible(false);
+    setShowCallout(false);
+  }, [setIsCalloutVisible, setShowCallout]);
 
   const myRect: ScreenRect = { screenX: 10, screenY: 10, width: 100, height: 100 };
 
   return (
     <View>
       <View style={{ flexDirection: 'column', paddingVertical: 5 }}>
-        <Button content="Press for Callout" onClick={toggleShowCustomizedCallout} testID={BUTTON_TO_OPEN_CALLOUT} />
+        <Text variant="subheaderSemibold">Dismiss Behaviors</Text>
+        <View style={{ flexDirection: 'row', paddingVertical: 5 }}>
+          {Object.entries(dismissBehaviors).map(([behavior, checked], i) => (
+            <Switch
+              label={behavior}
+              checked={checked}
+              onChange={(_, isChecked) => setDismissBehaviors({ ...dismissBehaviors, [behavior]: isChecked })}
+              key={i}
+            />
+          ))}
+        </View>
+        <Button onClick={toggleShowCallout} testID={BUTTON_TO_OPEN_CALLOUT}>
+          Press for Callout
+        </Button>
         <Text selectable={true}>
           <Text>Visibility: </Text>
-          {isCustomizedCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
+          {isCalloutVisible ? <Text style={{ color: 'green' }}>Visible</Text> : <Text style={{ color: 'red' }}>Not Visible</Text>}
         </Text>
       </View>
 
-      {showCustomizedCallout && (
+      {showCallout && (
         <Callout
+          testID={CALLOUT_TEST_COMPONENT}
           anchorRect={myRect}
-          onDismiss={onDismissCustomizedCallout}
-          onShow={onShowCustomizedCallout}
+          onDismiss={onDismissCallout}
+          onShow={onShowCallout}
           accessibilityLabel={CALLOUT_ACCESSIBILITY_LABEL}
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
+          dismissBehaviors={Object.keys(dismissBehaviors).filter((behavior) => dismissBehaviors[behavior]) as DismissBehaviors[]}
         >
           <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>
             <Text>just some text so it does not take focus and is not empty.</Text>

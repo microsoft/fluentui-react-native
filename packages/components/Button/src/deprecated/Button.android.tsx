@@ -9,8 +9,8 @@ import { settings } from './Button.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useAsPressable, useViewCommandFocus, createIconProps } from '@fluentui-react-native/interactive-hooks';
-import { Icon } from '@fluentui-react-native/icon';
+import { useAsPressable, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 
 /**
  * @deprecated This component is deprecated in favor of ButtonV1. This Button will be removed when the package moves to 1.0.0.
