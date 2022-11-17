@@ -177,18 +177,8 @@ jobs:
       # yarn and minimal build to get set up
       - template: templates/setup-repo-min-build.yml
 
-      - task: CmdLine@2
-        displayName: midgard-yarn (faster yarn install)
-        inputs:
-          script: npx midgard-yarn@1.23.33 --network-concurrency 40 --frozen-lockfile --cache-folder \.yarnCache
-          workingDirectory: tester_deps/
-
-      # - template: templates/win32-nuget-publish.yml
-      #   parameters:
-      #     skipNugetPublish: false
-
       # bundle win32 and do end to end tests
-      # - template: templates/e2e-testing-win32.yml
+      - template: templates/e2e-testing-win32.yml
 
   # Dedicated task to make sure link on repo are functional.
   - job: TestLinks
