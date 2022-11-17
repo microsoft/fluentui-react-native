@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Fri, 11 Nov 2022 18:06:32 GMT and should not be manually modified.
+This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.14.4
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- checkbox token changes and update android tester app (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theming-utils to v0.18.3
 
 ## 0.14.3
 

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/android-theme",
   "entries": [
     {
+      "date": "Wed, 16 Nov 2022 08:47:25 GMT",
+      "tag": "@fluentui-react-native/android-theme_v0.14.4",
+      "version": "0.14.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/android-theme",
+            "commit": "ac846edd3f16fd427bca196a070653adaf702450",
+            "comment": "checkbox token changes and update android tester app"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/android-theme",
+            "comment": "Bump @fluentui-react-native/theming-utils to v0.18.3",
+            "commit": "ac846edd3f16fd427bca196a070653adaf702450"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 11 Nov 2022 18:06:32 GMT",
       "tag": "@fluentui-react-native/android-theme_v0.14.3",
       "version": "0.14.3",

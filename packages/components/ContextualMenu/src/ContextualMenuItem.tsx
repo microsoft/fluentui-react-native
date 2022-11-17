@@ -17,8 +17,7 @@ import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens,
 import { mergeSettings } from '@uifabricshared/foundation-settings';
 import { usePressableState, useKeyProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
-import { Icon } from '@fluentui-react-native/icon';
-import { createIconProps } from '@fluentui-react-native/interactive-hooks';
+import { Icon, createIconProps } from '@fluentui-react-native/icon';
 
 export const ContextualMenuItem = compose<ContextualMenuItemType>({
   displayName: contextualMenuItemName,

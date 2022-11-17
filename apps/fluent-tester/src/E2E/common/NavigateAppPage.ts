@@ -3,6 +3,7 @@ import { HOMEPAGE_AVATAR_BUTTON } from '../../TestComponents/Avatar/consts';
 import { HOMEPAGE_BADGE_BUTTON } from '../../TestComponents/Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../TestComponents/Checkbox/consts';
 import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../TestComponents/CheckboxExperimental/consts';
+import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../../TestComponents/CornerRadius/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../TestComponents/Callout/consts';
 import { HOMEPAGE_CONTEXTUALMENU_BUTTON } from '../../TestComponents/ContextualMenu/consts';
@@ -21,6 +22,7 @@ import { HOMEPAGE_PRESSABLE_BUTTON } from '../../TestComponents/Pressable/consts
 import { HOMEPAGE_RADIOGROUP_BUTTON } from '../../TestComponents/RadioGroup/consts';
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../TestComponents/Separator/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../TestComponents/Shimmer/consts';
+import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../../TestComponents/StrokeWidth/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../TestComponents/Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../../TestComponents/Switch/consts';
 import { HOMEPAGE_TEXT_BUTTON } from '../../TestComponents/Text/consts';
@@ -62,6 +64,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToContextualMenuPage() {
     await (await this.contextualMenuPage).click();
+  }
+
+  async clickAndGoToCornerRadiusTokensPage() {
+    await (await this.cornerRadiusTokensPage).click();
   }
 
   async clickAndGoToFocusTrapZonePage() {
@@ -118,6 +124,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToShimmerPage() {
     await (await this.shimmerPage).click();
+  }
+
+  async clickAndGoToStrokeWidthTokensPage() {
+    await (await this.strokeWidthTokensPage).click();
   }
 
   async clickAndGoToSvgPage() {
@@ -192,6 +202,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_CONTEXTUALMENU_BUTTON);
   }
 
+  private get cornerRadiusTokensPage() {
+    return By(HOMEPAGE_CORNERRADIUS_BUTTON);
+  }
+
   private get focusTrapZonePage() {
     return By(HOMEPAGE_FOCUSTRAPZONE_BUTTON);
   }
@@ -246,6 +260,10 @@ class NavigateAppPage extends BasePage {
 
   private get shimmerPage() {
     return By(HOMEPAGE_SHIMMER_BUTTON);
+  }
+
+  private get strokeWidthTokensPage() {
+    return By(HOMEPAGE_STROKEWIDTH_BUTTON);
   }
 
   private get svgPage() {

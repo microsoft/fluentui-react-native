@@ -18,7 +18,6 @@ export { useViewCommandFocus } from './useViewCommandFocus';
 export type { IFocusable } from './useViewCommandFocus';
 export { useSelectedKey } from './useSelectedKey.hooks';
 export type { onKeySelectCallback } from './useSelectedKey.hooks';
-export { createIconProps } from './useIconProps.hooks';
 export { useAsToggle } from './useAsToggle';
 export type { OnChangeCallback, OnToggleCallback } from './useAsToggle';
 export { useAsToggleWithEvent } from './useAsToggleWithEvent';

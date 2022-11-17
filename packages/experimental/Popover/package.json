@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/popover",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "description": "A cross-platform Popover component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": ">=0.10.0 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.19",
+    "@fluentui-react-native/framework": "0.8.20",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
