@@ -15,12 +15,12 @@ import {
   BadgeProps,
   BadgeTokens,
 } from '@fluentui-react-native/badge';
-import { SvgIconProps } from '@fluentui-react-native/icon';
 import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
-import TestSvg from '../../FluentTester/test-data/test.svg';
 import { ToggleButton } from '@fluentui/react-native';
 import { useFluentTheme } from '@fluentui-react-native/framework';
+import { svgProps } from '../Common/iconExamples';
+import { IconSourcesType } from '@fluentui-react-native/icon';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
@@ -50,10 +50,6 @@ export const BasicBadge: React.FunctionComponent = () => {
   const onShowIconChange = useCallback(() => setShowIcon(!showIcon), [showIcon, setShowIcon]);
 
   const theme = useFluentTheme();
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
 
   const fontBuiltInProps = {
     fontFamily: 'Arial',
@@ -62,7 +58,7 @@ export const BasicBadge: React.FunctionComponent = () => {
   };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
+  const iconProps: IconSourcesType = { svgSource: svgProps, width: 20, height: 20 };
 
   const shadow = showShadow ? theme.shadows.shadow4 : undefined;
   const CustomBadge = useCustomizedBadge({ shadowToken: shadow });
@@ -126,7 +122,7 @@ export const BasicBadge: React.FunctionComponent = () => {
       {svgIconsEnabled && (
         <>
           <Text>Badge with icon</Text>
-          <Badge icon={{ svgSource: svgProps }} iconPosition="after">
+          <Badge icon={{ svgSource: svgProps, ...(Platform.OS === 'android' ? { color: 'gray' } : {}) }} iconPosition="after">
             Badge with
             <Image source={{ uri: satyaPhotoUrl }} style={{ width: 20, height: 20 }} />
             <Text style={{ backgroundColor: 'yellow' }}>optional content</Text>

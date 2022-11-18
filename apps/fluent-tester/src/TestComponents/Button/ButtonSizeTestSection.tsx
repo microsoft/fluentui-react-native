@@ -1,16 +1,22 @@
 import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
-import { SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import TestSvg from './test.svg';
+import { svgProps } from '../Common/iconExamples';
+import { useTheme } from '@fluentui-react-native/theme-types';
 
 export const ButtonSizeTest: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
+  const theme = useTheme();
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+
+  const iconProps = Platform.select({
+    android: {
+      svgSource: svgProps,
+      color: theme.host.appearance === 'light' ? 'white' : 'black',
+    },
+    default: { svgSource: svgProps },
+  });
+
   return (
     <View style={testContentRootViewStyle}>
       {svgIconsEnabled && (
@@ -18,7 +24,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <Button
             iconOnly
             size="small"
-            icon={{ svgSource: svgProps }}
+            icon={iconProps}
             accessibilityLabel="Small size button with accessibility icon"
             style={commonTestStyles.vmargin}
             tooltip="button tooltip"
@@ -26,24 +32,24 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
           <Button
             iconOnly
             size="medium"
-            icon={{ svgSource: svgProps }}
+            icon={iconProps}
             accessibilityLabel="Medium size button with accessibility icon"
             style={commonTestStyles.vmargin}
           />
           <Button
             iconOnly
             size="large"
-            icon={{ svgSource: svgProps }}
+            icon={iconProps}
             accessibilityLabel="Large size button with accessibility icon"
             style={commonTestStyles.vmargin}
           />
-          <Button size="small" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          <Button size="small" icon={iconProps} style={commonTestStyles.vmargin}>
             Small Button with icon
           </Button>
-          <Button size="medium" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          <Button size="medium" icon={iconProps} style={commonTestStyles.vmargin}>
             Medium Button with icon
           </Button>
-          <Button size="large" icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          <Button size="large" icon={iconProps} style={commonTestStyles.vmargin}>
             Large Button with icon
           </Button>
         </>
@@ -77,13 +83,13 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       </CompoundButton>
       {svgIconsEnabled && (
         <>
-          <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="small" style={commonTestStyles.vmargin}>
+          <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="small" style={commonTestStyles.vmargin}>
             Content
           </CompoundButton>
-          <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="medium" style={commonTestStyles.vmargin}>
+          <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="medium" style={commonTestStyles.vmargin}>
             Content
           </CompoundButton>
-          <CompoundButton icon={{ svgSource: svgProps }} secondaryContent="SecondaryContent" size="large" style={commonTestStyles.vmargin}>
+          <CompoundButton icon={iconProps} secondaryContent="SecondaryContent" size="large" style={commonTestStyles.vmargin}>
             Content
           </CompoundButton>
         </>

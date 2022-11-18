@@ -1,13 +1,13 @@
 import { Platform } from 'react-native';
 import { SvgIconProps, FontIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../Button/test.svg';
+import TestSvg from '../../../assets/test.svg';
 
 export const svgProps: SvgIconProps = {
   src: TestSvg,
   viewBox: '0 0 500 500',
 };
 
-const testTtf = require('./../../../../assets/Font_Awesome_900.otf');
+export const testTtf = require('./../../../../assets/Font_Awesome_900.otf');
 
 export const fontProps: FontIconProps = Platform.select({
   macos: {
