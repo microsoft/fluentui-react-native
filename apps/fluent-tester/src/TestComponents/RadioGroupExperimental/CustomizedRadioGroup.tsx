@@ -38,6 +38,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
   const [labelMarginTop, setLabelMarginTop] = React.useState<number>(5);
   const [labelMarginRight, setLabelMarginRight] = React.useState<number>(2);
   const [labelMarginLeft, setLabelMarginLeft] = React.useState<number>(0);
+  const [subtextMarginTop, setSubtextMarginTop] = React.useState<number>(2);
+  const [subtextMarginBottom, setSubtextMarginBottom] = React.useState<number>(2);
 
   const CustomRadioGroup = React.useMemo(() => {
     const tokens: RadioGroupTokens = {
@@ -69,6 +71,12 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
       labelMarginTop,
       labelMarginRight,
       labelMarginLeft,
+      subtextMarginTop,
+      subtextMarginBottom,
+
+      labelPositionBelow: {
+        marginLeft: marginLeft,
+      },
 
       disabled: {
         radioBorder,
@@ -130,6 +138,8 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
     labelMarginTop,
     labelMarginRight,
     labelMarginLeft,
+    subtextMarginTop,
+    subtextMarginBottom,
   ]);
 
   return (
@@ -329,10 +339,31 @@ export const CustomizedRadioGroup: React.FunctionComponent = () => {
             }}
           />
         </View>
+        <View>
+          <Text>Radio Subtext Tokens</Text>
+          <TextInput
+            accessibilityLabel="Radio subtext margin top"
+            style={commonStyles.textBox}
+            placeholder="marginTop"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setSubtextMarginTop(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+          <TextInput
+            accessibilityLabel="Radio subtext margin bottom"
+            style={commonStyles.textBox}
+            placeholder="marginBottom"
+            blurOnSubmit={true}
+            onSubmitEditing={(e) => {
+              setSubtextMarginBottom(parseInt(e.nativeEvent.text.toString()));
+            }}
+          />
+        </View>
       </View>
 
       <CustomRadioGroup required label="Custom RadioGroup" accessibilityLabel="Custom Switch">
-        <CustomRadio label="Apple" value="Apple"></CustomRadio>
+        <CustomRadio label="Apple" subtext="Fruit" value="Apple"></CustomRadio>
         <CustomRadio label="Pear" value="Pear"></CustomRadio>
         <CustomRadio label="Banana" value="Banana"></CustomRadio>
         <CustomRadio label="Orange" value="Orange"></CustomRadio>
