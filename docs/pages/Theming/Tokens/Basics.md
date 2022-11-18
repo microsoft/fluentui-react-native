@@ -16,7 +16,22 @@ Global tokens can be imported directly:
 
 The full set of global tokens is here: [android](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.android.json) / [ios](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.ios.json) / [macOS](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.macos.json) / [win32](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.win32.json) / [windows](https://github.com/microsoft/fluentui-design-tokens/blob/main/src/global.windows.json)
 
-### Color
+## Alias
+
+Alias tokens are used to refer to the global tokens that are appropriate based on the current platform or theme. For example for `neutralForeground1`, in a light mode it points to a global token whose value is a light grey, but in a dark mode will change to point to a global token whose value is a dark grey. This allows component builders to point to the same color name and have it change to the correct value without having to know about the underlying theme.
+
+Alias tokens can be accessed from the `Theme` object. So if you have a `Theme` object and want to access the `neutralForeground1` alias token:
+
+```ts
+import { useFluentTheme } from '@fluentui-react-native/framework';
+
+const theme = useFluentTheme();
+const foreground = theme.colors.neutralForeground1;
+```
+
+## Types of tokens
+
+### Color [in progress]
 
 If accessing a specific color, you can find it in the `globalTokens.color` property.
 
@@ -32,26 +47,6 @@ const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
   teal: globalTokens.color.teal.primary,
   forest: globalTokens.color.forest.primary,
   ...
-};
-```
-
-### Font
-
-TO DO
-
-### Stroke
-
-You can find tokens related to stroke in the `globalTokens.stroke` property. Currently the only type of token related to stroke is stroke width.
-
-An example of usage is in our Avatar component, where we specify different ring thicknesses for different avatar sizes.
-
-```ts
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-
-const strokeSize = {
-  small: globalTokens.stroke.width20,
-  medium: globalTokens.stroke.width30,
-  large: globalTokens.stroke.width40,
 };
 ```
 
@@ -81,6 +76,10 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     ...
 ```
 
+### Font
+
+TO DO
+
 ### Size
 
 You can find tokens related to size in the `globalTokens.size property`.
@@ -100,15 +99,18 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
 })
 ```
 
-## Alias
+### Stroke
 
-Alias tokens are used to refer to the global tokens that are appropriate based on the current platform or theme. For example for `neutralForeground1`, in a light mode it points to a global token whose value is a light grey, but in a dark mode will change to point to a global token whose value is a dark grey. This allows component builders to point to the same color name and have it change to the correct value without having to know about the underlying theme.
+You can find tokens related to stroke in the `globalTokens.stroke` property. Currently the only type of token related to stroke is stroke width.
 
-Alias tokens can be accessed from the `Theme` object. So if you have a `Theme` object and want to access the `neutralForeground1` alias token:
+An example of usage is in our Avatar component, where we specify different ring thicknesses for different avatar sizes.
 
 ```ts
-import { useFluentTheme } from '@fluentui-react-native/framework';
+import { globalTokens } from '@fluentui-react-native/theme-tokens';
 
-const theme = useFluentTheme();
-const foreground = theme.colors.neutralForeground1;
+const strokeSize = {
+  small: globalTokens.stroke.width20,
+  medium: globalTokens.stroke.width30,
+  large: globalTokens.stroke.width40,
+};
 ```
