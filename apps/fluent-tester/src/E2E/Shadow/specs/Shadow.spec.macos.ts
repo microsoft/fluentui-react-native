@@ -17,6 +17,5 @@ describe('Shadow Testing Initialization', function () {
     await ShadowPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ShadowPageObject.isPageLoaded()).toBeTruthy(ShadowPageObject.ERRORMESSAGE_PAGELOAD);
-    await expect(await ShadowPageObject.didAssertPopup()).toBeFalsy(ShadowPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 });
