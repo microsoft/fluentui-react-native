@@ -27,7 +27,6 @@ steps:
         arguments: 'pack Microsoft.FluentUI.FluentTesterWin32.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
         workingFolder: 'apps/win32/nuget'
 
-
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
     displayName: 📒 Generate Manifest FluentTester
     inputs:

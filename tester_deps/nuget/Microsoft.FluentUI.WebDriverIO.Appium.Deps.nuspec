@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.FluentUI.WebDriverIO.Appium.Deps</id>
+    <version>1.0.0</version>
+    <title>WebDriverIO and Appium Dependencies</title>
+    <authors>Microsoft Office CXE</authors>
+    <projectUrl>https://github.com/microsoft/fluentui-react-native.git</projectUrl>
+    <description>This package contains the dependencies to run Automated Testing with WebDriverIO and Appium.</description>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <repository type="git"
+      url="https://github.com/microsoft/fluentui-react-native.git"
+      commit="$CommitId$" />
+  </metadata>
+  <files>
+    <file src="..\node_modules\**" target="win32" />
+  </files>
+</package>
