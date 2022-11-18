@@ -7,4 +7,5 @@ interface NativeFontMetricsInterface {
   currentScaleFactors(): ScaleFactors;
   scaleFactorForStyle(style: TextStyle): number;
 }
+
 export default NativeFontMetrics as NativeFontMetricsInterface;

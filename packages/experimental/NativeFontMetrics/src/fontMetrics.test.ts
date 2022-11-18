@@ -1,0 +1,3 @@
+jest.mock('./NativeFontMetrics', () => ({
+  scaleFactors: {},
+}));

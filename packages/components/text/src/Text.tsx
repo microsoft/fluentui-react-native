@@ -50,7 +50,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 
-  const fontMetricsScaleFactors = useFontMetricsScaleFactors();
+  const fontMetricsScaleFactors = Platform.OS === 'ios' ? useFontMetricsScaleFactors() : undefined;
 
   const textAlign = I18nManager.isRTL
     ? align === 'start'
@@ -126,14 +126,10 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
     // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
-    interface ScaleStyleAdjustmentProps {
-      fontSize?: number;
-      lineHeight?: number;
-    }
-    let scaleStyleAdjustmentProps: ScaleStyleAdjustmentProps = {};
+    let scaleStyleAdjustments: TextTokens = {};
     if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
       const scaleFactor = fontMetricsScaleFactors[dynamicTypeVariant] ?? 1;
-      scaleStyleAdjustmentProps = {
+      scaleStyleAdjustments = {
         fontSize: tokenStyle.fontSize * scaleFactor,
         lineHeight: tokenStyle.lineHeight * scaleFactor,
       };
@@ -147,8 +143,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...extra,
       onPress,
       numberOfLines: truncate || !wrap ? 1 : 0,
-      style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustmentProps),
-      allowFontScaling: dynamicTypeVariant === undefined, // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+      style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
+      ...(Platform.OS === 'ios' && { allowFontScaling: dynamicTypeVariant === undefined }), // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
     };
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>

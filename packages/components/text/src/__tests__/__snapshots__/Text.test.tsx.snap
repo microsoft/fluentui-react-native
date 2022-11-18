@@ -2,7 +2,6 @@
 
 exports[`Text component tests Text all props 1`] = `
 <Text
-  allowFontScaling={true}
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
@@ -26,7 +25,6 @@ exports[`Text component tests Text all props 1`] = `
 
 exports[`Text component tests Text all tokens 1`] = `
 <Text
-  allowFontScaling={true}
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
@@ -50,7 +48,6 @@ exports[`Text component tests Text all tokens 1`] = `
 
 exports[`Text component tests Text default 1`] = `
 <Text
-  allowFontScaling={true}
   ellipsizeMode="tail"
   numberOfLines={0}
   style={
@@ -74,7 +71,6 @@ exports[`Text component tests Text default 1`] = `
 
 exports[`Text component tests Text variants render correctly with style 1`] = `
 <Text
-  allowFontScaling={true}
   ellipsizeMode="tail"
   numberOfLines={0}
   style={

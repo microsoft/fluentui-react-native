@@ -1,14 +1,13 @@
-import { NativeEventEmitter, Platform } from 'react-native';
+import { NativeEventEmitter } from 'react-native';
 import NativeFontMetrics from './NativeFontMetrics';
 import { IFontMetrics, ScaleFactors } from './NativeFontMetrics.types';
-
-const eventEmitter = new NativeEventEmitter(NativeFontMetrics as any);
 
 class FontMetricsImpl implements IFontMetrics {
   _scaleFactors: ScaleFactors;
 
   constructor() {
     this._scaleFactors = NativeFontMetrics.currentScaleFactors();
+    const eventEmitter = new NativeEventEmitter(NativeFontMetrics as any);
     eventEmitter.addListener('onFontMetricsChanged', ({ newScaleFactors }) => {
       this._scaleFactors = newScaleFactors;
     });
@@ -19,5 +18,4 @@ class FontMetricsImpl implements IFontMetrics {
   }
 }
 
-const fontMetricsImpl = Platform.OS === 'ios' ? new FontMetricsImpl() : { scaleFactors: {} };
-export const fontMetrics = fontMetricsImpl as IFontMetrics;
+export const fontMetrics = new FontMetricsImpl() as IFontMetrics;

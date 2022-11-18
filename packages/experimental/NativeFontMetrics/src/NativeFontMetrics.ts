@@ -1,11 +1,10 @@
-import { ScaleFactors, TextStyle } from './NativeFontMetrics.types';
+import { TextStyle } from './NativeFontMetrics.types';
 
-interface NativeFontMetricsInterface {
-  currentScaleFactors(): ScaleFactors;
-  scaleFactorForStyle(style: TextStyle): number;
-}
-
-const NativeFontMetrics: NativeFontMetricsInterface = {
+const NativeFontMetrics = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  addListener: (_: string) => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  removeListeners: (_: number) => {},
   currentScaleFactors: () => {
     console.warn('NativeFontMetrics is only available on iOS');
     return {};
