@@ -14,6 +14,8 @@ describe('Radio component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  /* Uncomment these tests when Issue #2349 is fixed. */
+
   // it('Radio simple rendering does not invalidate styling', () => {
   //   checkRenderConsistency(() => <Radio value="key1" label="Default Radio" />, 2);
   // });
