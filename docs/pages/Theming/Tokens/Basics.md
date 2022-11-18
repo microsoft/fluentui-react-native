@@ -37,27 +37,7 @@ const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
 
 ### Font
 
-You can find tokens related to fonts such as weight and size in the `globalTokens.font` property.
-
-An example of usage is in our Badge component, where we specify different font sizes for different Badge sizes.
-
-```ts
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
-
-export const badgeFontTokens: TokenSettings<BadgeTokens, Theme> = (t: Theme) =>
-  ({
-    ...
-    fontSize: globalTokens.font.size100,
-    fontWeight: globalTokens.font.weight.regular,
-    large: {
-      fontSize: globalTokens.font.size200,
-    },
-    extraLarge: {
-      fontSize: globalTokens.font.size200,
-    },
-  } as BadgeTokens);
-
-```
+TO DO
 
 ### Stroke
 
