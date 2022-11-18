@@ -10,7 +10,7 @@ describe('Shadow Testing Initialization', function () {
   });
 
   it('Click and navigate to Shadow test page', async () => {
-    await NavigateAppPage.waitForButtonDisplayed();
+    await ShadowPageObject.waitForButtonDisplayed();
 
     /* Click on component button to navigate to test page */
     await NavigateAppPage.clickAndGoToShadowPage();

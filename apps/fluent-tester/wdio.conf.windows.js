@@ -16,7 +16,6 @@ exports.config = {
     'src/E2E/PersonaCoin/specs/*.win.ts',
     'src/E2E/Pressable/specs/*.win.ts',
     'src/E2E/Separator/specs/*.win.ts',
-    'src/E2E/Shadow/specs/*.win.ts',
     'src/E2E/Tabs/specs/*.windows.ts', // See spec file for more information
     'src/E2E/Text/specs/*.win.ts',
     'src/E2E/TextExperimental/specs/*.win.ts',
