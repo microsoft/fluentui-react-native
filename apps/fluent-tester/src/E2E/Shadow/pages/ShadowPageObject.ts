@@ -9,6 +9,10 @@ class ShadowTestPage extends BasePage {
     return By(SHADOW_TESTPAGE);
   }
 
+  get _pageName() {
+    return SHADOW_TESTPAGE;
+  }
+
   get _pageButton() {
     return By(HOMEPAGE_SHADOW_BUTTON);
   }
