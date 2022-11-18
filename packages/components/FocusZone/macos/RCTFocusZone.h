@@ -15,6 +15,6 @@ typedef NS_ENUM(NSInteger, FocusZoneDirection) {
 @property(nonatomic) BOOL disabled;
 @property(nonatomic) FocusZoneDirection focusZoneDirection;
 @property(nonatomic) NSString *navigateAtEnd;
-@property(nonatomic) NSView *defaultKeyView;
+@property(nonatomic) NSView *defaultResponder;
 
 @end
