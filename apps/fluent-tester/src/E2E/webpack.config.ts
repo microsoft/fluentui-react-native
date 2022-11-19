@@ -2,14 +2,14 @@ import * as path from 'path';
 import { Configuration } from 'webpack';
 
 const config: Configuration = {
-  name: 'fluentui-react-native-testing',
+  name: 'fluentui-react-native-testing-specs',
   mode: 'development',
   target: 'node',
   context: __dirname,
   devtool: 'source-map',
 
   entry: {
-    furnTestSpecs: path.join(__dirname, 'src/E2E/index.win32.ts'),
+    furnTestSpecs: path.join(__dirname, './index.win32.ts'),
   },
   output: {
     filename: 'win32_specs.bundle.js',
@@ -27,7 +27,7 @@ const config: Configuration = {
         test: /\.ts$/,
         loader: 'ts-loader',
         options: { allowTsInNodeModules: true },
-        include: [path.resolve(__dirname, './src')],
+        include: [path.resolve(__dirname, '.'), path.resolve(__dirname, '../TestComponents')],
       },
     ],
   },

@@ -1,0 +1,19 @@
+{
+  "name": "@fluentui-react-native/e2e-testing-specs",
+  "version": "1.0.0",
+  "description": "Package containing E2E testing specs",
+  "license": "MIT",
+  "scripts": {
+    "bundle": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "apps/fluent-tester/src/E2E"
+  },
+  "devDependencies": {
+    "webpack": "^5.28.0",
+    "webpack-cli": "^4.9.2",
+    "ts-loader": "^9.4.1"
+  }
+}
