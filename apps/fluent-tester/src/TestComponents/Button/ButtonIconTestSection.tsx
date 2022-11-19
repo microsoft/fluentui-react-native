@@ -2,29 +2,20 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { testImage, svgProps } from '../Common/iconExamples';
+import { testImage, svgProps, useCommonIconProps } from '../Common/iconExamples';
 import { SvgXml } from 'react-native-svg';
-import { IconSourcesType } from '@fluentui-react-native/icon';
-import { useTheme } from '@fluentui-react-native/theme-types';
 
 const styles = StyleSheet.create({
   chevron: { paddingStart: 4 },
 });
 
 export const ButtonIconTest: React.FunctionComponent = () => {
-  const theme = useTheme();
-
   const fontBuiltInProps = {
     fontFamily: 'Arial',
     codepoint: 0x2663,
     fontSize: 24,
   };
-  const iconProps: IconSourcesType = {
-    svgSource: svgProps,
-  };
-  if (Platform.OS === 'android') {
-    iconProps.color = theme.host.appearance === 'light' ? 'white' : 'black';
-  }
+  const iconProps = useCommonIconProps({ light: 'white', dark: 'black' });
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 

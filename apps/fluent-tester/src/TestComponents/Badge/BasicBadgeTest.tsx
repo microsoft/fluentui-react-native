@@ -19,8 +19,7 @@ import { StyledPicker } from '../Common/StyledPicker';
 import { satyaPhotoUrl } from './../PersonaCoin/styles';
 import { ToggleButton } from '@fluentui/react-native';
 import { useFluentTheme } from '@fluentui-react-native/framework';
-import { svgProps } from '../Common/iconExamples';
-import { IconSourcesType } from '@fluentui-react-native/icon';
+import { svgProps, useCommonIconProps } from '../Common/iconExamples';
 
 const badgeColors: BadgeColor[] = [...BadgeColors];
 const badgeShapes: BadgeShape[] = [...BadgeShapes];
@@ -58,7 +57,9 @@ export const BasicBadge: React.FunctionComponent = () => {
   };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-  const iconProps: IconSourcesType = { svgSource: svgProps, width: 20, height: 20 };
+  const iconProps = useCommonIconProps('gray');
+  iconProps.width = 20;
+  iconProps.height = 20;
 
   const shadow = showShadow ? theme.shadows.shadow4 : undefined;
   const CustomBadge = useCustomizedBadge({ shadowToken: shadow });

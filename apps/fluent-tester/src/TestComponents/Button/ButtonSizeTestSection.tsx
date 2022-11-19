@@ -2,20 +2,12 @@ import { ButtonV1 as Button, CompoundButton } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { svgProps } from '../Common/iconExamples';
-import { useTheme } from '@fluentui-react-native/theme-types';
+import { useCommonIconProps } from '../Common/iconExamples';
 
 export const ButtonSizeTest: React.FunctionComponent = () => {
-  const theme = useTheme();
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
-  const iconProps = Platform.select({
-    android: {
-      svgSource: svgProps,
-      color: theme.host.appearance === 'light' ? 'white' : 'black',
-    },
-    default: { svgSource: svgProps },
-  });
+  const iconProps = useCommonIconProps({ light: 'white', dark: 'black' });
 
   return (
     <View style={testContentRootViewStyle}>
