@@ -1,6 +1,6 @@
 import { ScaleFactors } from './NativeFontMetrics.types';
 
 export function useFontMetricsScaleFactors(): ScaleFactors {
-  console.warn('NativeFontMetrics is only available on iOS');
+  // Stubbed out for non-iOS platforms
   return {};
 }
