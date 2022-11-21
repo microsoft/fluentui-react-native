@@ -4,8 +4,7 @@ import { Stack } from '@fluentui-react-native/stack';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { stackStyle } from '../../Common/styles';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../test.svg';
+import { testImage, svgProps } from '../../Common/iconExamples';
 
 const CustomizedIconButton = Button.customize({
   tokens: { iconColor: 'red' },
@@ -14,12 +13,6 @@ const CustomizedIconButton = Button.customize({
 
 export const ButtonIconTest_deprecated: React.FunctionComponent = () => {
   /* eslint-disable @typescript-eslint/no-var-requires */
-  const testImage = require('../../../../../assets/icon_24x24.png');
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
 
   // SVG-based icons are not available on all platforms yet
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);

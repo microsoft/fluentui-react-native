@@ -2,15 +2,10 @@ import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from './test.svg';
+import { svgProps } from '../Common/iconExamples';
 
 // Test also pulls button from deprecated package to ensure it's still working
 export const ButtonVariantTest: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
   const iconProps = { svgSource: svgProps, width: 20, height: 20 };
 
   const [showFABText, setShowFABText] = React.useState(true);

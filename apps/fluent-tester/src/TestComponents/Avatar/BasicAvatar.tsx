@@ -4,8 +4,7 @@ import { PresenceBadgeStatuses, PresenceBadgeStatus } from '@fluentui-react-nati
 import { View, Text, Platform } from 'react-native';
 import { satyaPhotoUrl, undefinedText } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import TestSvg from '../../FluentTester/test-data/test.svg';
-import { SvgIconProps } from '@fluentui-react-native/icon';
+import { svgProps } from '../Common/iconExamples';
 import { StyledPicker } from '../Common/StyledPicker';
 import { ToggleButton } from '@fluentui/react-native';
 
@@ -38,11 +37,6 @@ export const StandardUsage: FunctionComponent = () => {
   const fontBuiltInProps = {
     fontFamily: 'Arial',
     codepoint: 0x2663,
-  };
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
   };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
