@@ -5,6 +5,9 @@
     },
     {
       "pattern": "https://cla.opensource.microsoft.com"
+    },
+    {
+      "pattern": "https://github.com/microsoft/fluentui-design-tokens"
     }
   ],
   "timeout": "5s",
