@@ -50,11 +50,6 @@ jobs:
         displayName: 'yarn test'
 
       - script: |
-          yarn webpack
-        workingDirectory: apps/fluent-tester
-        displayName: 'creating JS bundle'
-
-      - script: |
           echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
         displayName: Enable No-Publish (npm)
         condition: ${{ parameters.skipNpmPublish }}
