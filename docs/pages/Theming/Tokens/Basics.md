@@ -6,7 +6,7 @@ With the Fluent Design System, we have a set of named design values, that we hav
 
 Our set of global tokens is the complete set of the design values that we agree to use for our UI. Each token has a specific name that is assigned to a certain value. For example, `grey74` is `#bdbdbd`.
 
-These names and values do not change no matter the platform or theme; however, there are some exceptions. The only current exception is that brand color definitions change depending on platform.
+These names and values do not change no matter the platform or theme; however, there is an exception: currently brand color definitions differ depending on platform.
 
 In most cases you will not be referring to global tokens directly. The case where you may be referring to global tokens is when you're defining your own alias token, or need to access brand colors.
 
@@ -33,7 +33,9 @@ const foreground = theme.colors.neutralForeground1;
 
 ### Color [in progress]
 
-If accessing a specific color, you can find it in the `globalTokens.color` property.
+TO DO - recommended usage is through alias tokens rather than global
+
+Special case: if accessing a specific color, you can find it in the `globalTokens.color` property.
 
 An example of usage is in our PersonaCoin, where we use colors for the coin background if an image is not used.
 
@@ -82,7 +84,7 @@ TO DO
 
 ### Size
 
-You can find tokens related to size in the `globalTokens.size` property.
+You can find tokens related to size and spacing in the `globalTokens.size` property.
 
 Example usage: in our Menu Item component, we use global size tokens to specific values for padding.
 
