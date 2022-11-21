@@ -2,7 +2,7 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { testImage, svgProps, useCommonIconProps } from '../Common/iconExamples';
+import { testImage, svgProps, iconProps } from '../Common/iconExamples';
 import { SvgXml } from 'react-native-svg';
 
 const styles = StyleSheet.create({
@@ -15,7 +15,6 @@ export const ButtonIconTest: React.FunctionComponent = () => {
     codepoint: 0x2663,
     fontSize: 24,
   };
-  const iconProps = useCommonIconProps({ light: 'white', dark: 'black' });
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 

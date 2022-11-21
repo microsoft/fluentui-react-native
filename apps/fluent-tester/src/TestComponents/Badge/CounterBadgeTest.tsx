@@ -2,12 +2,10 @@
 import React from 'react';
 import { View, Platform, Text } from 'react-native';
 import { CounterBadge } from '@fluentui-react-native/badge';
-import { useCommonIconProps } from '../Common/iconExamples';
+import { iconProps } from '../Common/iconExamples';
 
 export const CounterBadgeTest: React.FunctionComponent = () => {
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-
-  const iconProps = useCommonIconProps('black');
 
   return (
     <View>
