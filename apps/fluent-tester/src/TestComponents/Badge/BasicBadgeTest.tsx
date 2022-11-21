@@ -120,7 +120,7 @@ export const BasicBadge: React.FunctionComponent = () => {
       {svgIconsEnabled && (
         <>
           <Text>Badge with icon</Text>
-          <Badge icon={{ svgSource: svgProps, ...(Platform.OS === 'android' ? { color: 'gray' } : {}) }} iconPosition="after">
+          <Badge icon={iconProps} iconPosition="after">
             Badge with
             <Image source={{ uri: satyaPhotoUrl }} style={{ width: 20, height: 20 }} />
             <Text style={{ backgroundColor: 'yellow' }}>optional content</Text>
