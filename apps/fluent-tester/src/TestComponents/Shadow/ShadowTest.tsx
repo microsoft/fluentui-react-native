@@ -13,12 +13,10 @@ const shadowSections: TestSection[] = [
   },
   {
     name: 'Shadows on Button Examples',
-    testID: SHADOW_TESTPAGE,
     component: ShadowButtonTestSection,
   },
   {
     name: 'Shadows with Different Props Test',
-    testID: SHADOW_TESTPAGE,
     component: ShadowWithDifferentPropsTestSection,
   },
 ];
