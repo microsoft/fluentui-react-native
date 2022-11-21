@@ -52,9 +52,9 @@ const colorTableFluent: { [P in PersonaCoinFluentColor]: string } = {
 
 ### Corner Radius
 
-You can find tokens related to corner radius in the `globalTokens.corner` property. Currently the only type of token related to corner is corner radius.
+You can find tokens related to corner radius in the `globalTokens.corner` property. Currently the only type of token related to corners is corner radius.
 
-An example of usage is in our Avatar component, where we have the option of both circular and square avatars.
+An example of usage is in our Avatar component, where we have the option of both circular and square avatars that use different corner radii.
 
 ```ts
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
@@ -76,13 +76,13 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     ...
 ```
 
-### Font
+### Font [in progress]
 
 TO DO
 
 ### Size
 
-You can find tokens related to size in the `globalTokens.size property`.
+You can find tokens related to size in the `globalTokens.size` property.
 
 Example usage: in our Menu Item component, we use global size tokens to specific values for padding.
 
@@ -97,6 +97,22 @@ export const defaultMenuItemTokens: TokenSettings<MenuItemTokens, Theme> = (t: T
   submenuIndicatorPadding: globalTokens.size20,
   ...
 })
+```
+
+### Shadow
+
+Shadow tokens are a type of alias token and can be accessed through the theme.
+
+The shadow token is an object describing the two shadows that comprise a single Fluent shadow. In FURN, The recommended usage of the shadow token is with the custom Shadow component - more documentation can be found [here](https://github.com/microsoft/fluentui-react-native/blob/main/packages/experimental/Shadow/SPEC.md)
+
+```ts
+import { useFluentTheme } from '@fluentui-react-native/framework';
+
+const theme = useFluentTheme();
+
+<Shadow shadowToken={theme.shadows.shadow8}>
+  <Button>Text box with shadow8</Button>
+</Shadow>;
 ```
 
 ### Stroke
