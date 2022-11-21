@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "fixing name of link file",
+  "packageName": "@fluentui-react-native/tester-win32",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
