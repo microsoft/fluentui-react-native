@@ -1,5 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
+import { Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
@@ -135,6 +135,14 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
   const TestList: React.FunctionComponent = () => {
+    const ref = React.useRef<View>();
+
+    React.useEffect(() => {
+      if (Platform.OS === ('win32' as any)) {
+        ref.current.focus();
+      }
+    }, []);
+
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID={TESTPAGE_BUTTONS_SCROLLVIEWER}>
@@ -147,6 +155,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
+                componentRef={index === 0 ? ref : undefined}
               >
                 {description.name}
               </Button>
@@ -227,15 +236,9 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   return (
     // TODO: Figure out why making this view accessible breaks element querying on iOS.
     <View accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW} style={commonTestStyles.flex}>
-      {Platform.OS === ('win32' as any) ? (
-        <FocusTrapZone style={themedStyles.root}>
-          <TesterContent />
-        </FocusTrapZone>
-      ) : (
-        <RootView style={themedStyles.root}>
-          <TesterContent />
-        </RootView>
-      )}
+      <RootView style={themedStyles.root}>
+        <TesterContent />
+      </RootView>
     </View>
   );
 };
