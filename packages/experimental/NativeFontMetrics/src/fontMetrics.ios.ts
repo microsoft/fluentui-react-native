@@ -1,8 +1,8 @@
 import { NativeEventEmitter } from 'react-native';
 import NativeFontMetrics from './NativeFontMetrics';
-import { IFontMetrics, ScaleFactors } from './NativeFontMetrics.types';
+import { FontMetrics, ScaleFactors } from './NativeFontMetrics.types';
 
-class FontMetricsImpl implements IFontMetrics {
+class FontMetricsImpl implements FontMetrics {
   _scaleFactors: ScaleFactors;
 
   constructor() {
@@ -22,4 +22,4 @@ class FontMetricsImpl implements IFontMetrics {
   }
 }
 
-export const fontMetrics = new FontMetricsImpl() as IFontMetrics;
+export const fontMetrics = new FontMetricsImpl() as FontMetrics;

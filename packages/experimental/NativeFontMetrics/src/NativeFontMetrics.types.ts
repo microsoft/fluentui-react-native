@@ -1,4 +1,4 @@
-export interface IFontMetrics {
+export interface FontMetrics {
   readonly scaleFactors: ScaleFactors;
 }
 

@@ -1,3 +1,3 @@
-import { IFontMetrics } from './NativeFontMetrics.types';
+import { FontMetrics } from './NativeFontMetrics.types';
 
-export const fontMetrics = { scaleFactors: {} } as IFontMetrics;
+export const fontMetrics = { scaleFactors: {} } as FontMetrics;
