@@ -1,28 +1,39 @@
-const path = require('path');
 const fs = require('fs');
-
-const appPath = path.resolve(path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js')), 'ReactTest.exe');
-const appArgs = 'basePath ' + path.resolve('dist') + ' plugin defaultplugin bundle index.win32 component FluentTester';
-const appDir = path.dirname(require.resolve('@office-iss/rex-win32/rex-win32.js'));
 
 const defaultWaitForTimeout = 20000;
 const defaultConnectionRetryTimeout = 60000;
 const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
-  runner: 'local', // Where should your test be launched
-  specs: ['../E2E/src/**/specs/*.win.ts'],
-  exclude: [],
+  runner: 'local',
+  /* UWP controls are a subset of the Win32 controls. Only some work on our UWP test app,
+  so we must specify which ones we want to test here. */
+  specs: [
+    'src/ActivityIndicator/specs/*.win.ts',
+    'src/Button/specs/*.win.ts',
+    'src/Checkbox/specs/*.windows.ts', // See spec file for more information
+    'src/Link/specs/*.win.ts',
+    'src/PersonaCoin/specs/*.win.ts',
+    'src/Pressable/specs/*.win.ts',
+    'src/Separator/specs/*.win.ts',
+    'src/Tabs/specs/*.windows.ts', // See spec file for more information
+    'src/Text/specs/*.win.ts',
+    'src/TextExperimental/specs/*.win.ts',
+    'src/Theme/specs/*.win.ts',
+    'src/Tokens/specs/*.win.ts',
+  ],
+  exclude: [
+    /* 'path/to/excluded/files' */
+  ],
 
+  maxInstances: 1,
   capabilities: [
     {
       maxInstances: 1, // Maximum number of total parallel running workers.
       platformName: 'windows',
       'appium:automationName': 'windows',
       'appium:deviceName': 'WindowsPC',
-      'appium:app': appPath,
-      'appium:appArguments': appArgs,
-      'appium:appWorkingDir': appDir,
+      'appium:app': '40411fc5-8e92-4d46-b68d-b62df44b1366_7c3z4tcdk8r62!App',
     },
   ],
 
@@ -79,6 +90,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    */
   // onPrepare: function (config, capabilities) {
+  //   require('ts-node/register');
+  //   // require('ts-node').register({ files: true });
+  //   console.log('<<< NATIVE APP TESTS STARTED >>>');
   // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialise specific service
@@ -100,7 +114,7 @@ exports.config = {
    */
   beforeSession: function (/* config, capabilities, specs */) {
     fs.mkdirSync('./errorShots', { recursive: true });
-    process.env['E2ETEST_PLATFORM'] = 'win32';
+    process.env['E2ETEST_PLATFORM'] = 'windows';
   },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
@@ -144,12 +158,11 @@ exports.config = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine).
    */
-  afterTest: async function (test, context, results) {
+  afterTest: function (test, context, results) {
     const resultString = results.passed ? 'Passed' : 'Failed';
     console.log('\n Test Case: ' + test.description + '.    Result: ' + resultString + '\n');
 
-    // if test passed, ignore, else take and save screenshot. Unless it's the first test that boots the app,
-    // it may be useful to have a screenshot of the app on load.
+    // if test passed, ignore, else take and save screenshot.
     if (results.passed) {
       return;
     }
@@ -160,22 +173,8 @@ exports.config = {
     // build file path
     const filePath = './errorShots/' + fileName + '.png';
 
-    /* If there are more than one instance of the app open, we know an assert popped up. Since the test already failed and a screenshot was captured
-     * we want to close the assert popup. If we don't it will stay open and negatively interact with logic in our CI pipeline. */
-    const windowHandles = await browser.getWindowHandles();
-    if (windowHandles.length > 1) {
-      /* Switch to the Assert window - Take a screenshot and close the assert */
-      await browser.switchToWindow(windowHandles[0]);
-      await browser.saveScreenshot(filePath);
-      await browser.closeWindow();
-
-      /* Switch back to FluentTester and close. The test harness has trouble closing the app when an assert fired */
-      await browser.switchToWindow(windowHandles[1]);
-      await browser.closeWindow();
-    } else {
-      // save screenshot
-      await browser.saveScreenshot(filePath);
-    }
+    // save screenshot
+    browser.saveScreenshot(filePath);
   },
 
   /**

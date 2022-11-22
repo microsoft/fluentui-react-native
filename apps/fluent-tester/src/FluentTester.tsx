@@ -9,7 +9,7 @@ import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestCompon
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
-import { ROOT_VIEW } from './E2E/common/consts';
+import { ROOT_VIEW } from '../../E2E/src/common/consts';
 
 // uncomment the below lines to enable message spy
 /**
