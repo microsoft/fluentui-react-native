@@ -6,11 +6,15 @@ class FontMetricsImpl implements IFontMetrics {
   _scaleFactors: ScaleFactors;
 
   constructor() {
-    this._scaleFactors = NativeFontMetrics.currentScaleFactors();
-    const eventEmitter = new NativeEventEmitter(NativeFontMetrics as any);
-    eventEmitter.addListener('onFontMetricsChanged', ({ newScaleFactors }) => {
-      this._scaleFactors = newScaleFactors;
-    });
+    if (NativeFontMetrics) {
+      this._scaleFactors = NativeFontMetrics.currentScaleFactors();
+      const eventEmitter = new NativeEventEmitter(NativeFontMetrics as any);
+      eventEmitter.addListener('onFontMetricsChanged', ({ newScaleFactors }) => {
+        this._scaleFactors = newScaleFactors;
+      });
+    } else {
+      this._scaleFactors = {};
+    }
   }
 
   get scaleFactors(): ScaleFactors {

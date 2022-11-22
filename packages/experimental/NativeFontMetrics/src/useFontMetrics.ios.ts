@@ -5,9 +5,13 @@ import { fontMetrics } from './fontMetrics';
 import NativeFontMetrics from './NativeFontMetrics';
 import { ScaleFactors } from './NativeFontMetrics.types';
 
-const eventEmitter = new NativeEventEmitter(NativeFontMetrics as any);
+const eventEmitter = NativeFontMetrics ? new NativeEventEmitter(NativeFontMetrics as any) : undefined;
 
 export function useFontMetricsScaleFactors(): ScaleFactors {
+  if (!eventEmitter) {
+    return {};
+  }
+
   const subscription = useMemo(
     () => ({
       getCurrentValue: () => fontMetrics.scaleFactors,
