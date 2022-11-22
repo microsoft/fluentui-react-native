@@ -20,19 +20,21 @@ const buttonSections: TestSection[] = [
     component: ButtonVariantTest,
   },
   {
-    name: 'Button Shape',
-    component: ButtonShapeTest,
-  },
-  {
     name: 'Icon Button',
     component: ButtonIconTest,
   },
-  Platform.select({
-    android: null, //Toggle Button is not implemented for Android
-    default: {
-      name: 'Toggle Button',
-      component: ToggleButtonTest,
-    },
+  ...Platform.select({
+    android: [null], //Following sections are not supported from Fluent Android
+    default: [
+      {
+        name: 'Toggle Button',
+        component: ToggleButtonTest,
+      },
+      {
+        name: 'Button Shape',
+        component: ButtonShapeTest,
+      },
+    ],
   }),
   {
     name: 'Sizes',

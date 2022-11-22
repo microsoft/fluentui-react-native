@@ -38,7 +38,7 @@ export interface FABProps extends ButtonCoreProps {
   size?: FABSize;
 }
 
-export interface FABTokens extends ButtonCoreTokens {
+export interface FABTokens extends Omit<ButtonCoreTokens, 'spacingIconContentAfter'> {
   /**
    * States that can be applied to FAB.
    */

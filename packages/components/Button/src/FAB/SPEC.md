@@ -144,12 +144,6 @@ export interface FABTokens extends LayoutTokens, FontTokens, IBorderTokens, ISha
   spacingIconContentBefore?: number;
 
   /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
-   * Not in use for FAB currently.
-   */
-  spacingIconContentAfter?: number;
-
-  /**
    * The width of the button.
    */
   width?: ViewStyle['width'];

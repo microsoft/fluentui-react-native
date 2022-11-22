@@ -63,6 +63,8 @@ The `Button` component can include an `icon` that appears before or after its `c
 
 ### Shape
 
+Shape modification is not explicitly supported on Android and is provided as an 'as-is' functionality.
+
 - shape="rounded": The button as rounded corners. This is the default if shape is not set.
 - shape="circular": The button has completely round corners. A button of equal width and height will be a circle.
 - shape="square": The button has right-angle corners.
@@ -71,13 +73,25 @@ The `Button` component can include an `icon` that appears before or after its `c
 
 The `Button` component supports different sizing with at least three different sizes: `small`, `medium`, and `large`. `Small` is the default on `win32`, `medium` is the default on other platforms.
 
+#### Size modification is not explicitly supported on Android and is provided as an 'as-is' functionality.
+
+</br>
+
 ### Block
 
 The `Button` component can completely fill the width of its container.
 
+#### 'Block' is not explicitly supported on Android and is provided as an 'as-is' functionality.
+
+</br>
+
 ### Loading
 
 The `Button` component can be loading if it's waiting for another action to occur before allowing itself to be interacted with.
+
+#### 'Loading' is not explicitly supported on Android and is provided as an 'as-is' functionality.
+
+</br>
 
 ## API
 
@@ -103,12 +117,13 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
    * - 'primary' or 'accent': Emphasizes the button as a primary action. 'Accent' added to support Mobile platform naming convention, maps to 'primary'.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    * - 'outline': Similar to subtle but has a border. Implemented for mobile endpoints only. Maps to default on other platforms.
-   * @default 'primary' on mobile endpoints, other platform have a separate style when no apperance is passed.
+   * @default 'primary' on mobile endpoints, other platform have a separate style when no appearance is passed.
    */
   appearance?: 'primary' | 'subtle' | 'accent' | 'outline';
 
   /**
    * A button can fill the width of its container.
+   * Not supported from Fluent Android, renders as-is.
    * @default false
    */
   block?: boolean;
@@ -138,6 +153,7 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
 
   /**
    * A button can format its icon to appear before or after its content.
+   * 'after' is not supported from Fluent Android, renders as-is.
    * @default 'before'
    */
   iconPosition?: 'before' | 'after';
@@ -145,6 +161,7 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
    * be interacted with.
+   * Not supported from Fluent Android, renders as-is.
    * @default false
    */
   loading?: boolean;
@@ -156,6 +173,7 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
 
   /**
    * A button can be rounded, circular, or square.
+   * Not supported from Fluent Android, renders as-is.
    * @default 'rounded'
    */
   shape?: 'rounded' | 'circular' | 'square';

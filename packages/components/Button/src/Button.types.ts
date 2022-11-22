@@ -121,7 +121,7 @@ export interface ButtonProps extends ButtonCoreProps {
    * - 'primary' or 'accent': Emphasizes the button as a primary action. 'Accent' added to support Mobile platform naming convention, maps to 'primary'.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
    * - 'outline': Similar to subtle but has a border. Implemented for mobile endpoints only. Maps to default on other platforms.
-   * @default 'primary' on mobile endpoints, other platform have a separate style when no apperance is passed.
+   * @default 'primary' on mobile endpoints, other platform have a separate style when no appearance is passed.
    */
   appearance?: ButtonAppearance;
 

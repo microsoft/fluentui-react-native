@@ -10,7 +10,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
     src: TestSvg,
     viewBox: '0 0 500 500',
   };
-  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
+  const iconProps = { svgSource: svgProps };
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
   return (
