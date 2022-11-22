@@ -99,12 +99,18 @@ export const getDefaultSize = (): ButtonSize => {
 };
 
 export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): ButtonAppearance => {
+  // 'Outline' exists only for Mobile platforms, maps to default on other platforms.
+  const supportsOutlineAppearance = Platform.OS == 'android' || Platform.OS == 'ios';
+
+  // Mobile platforms do not have seperate styling when no appearance is passed.
+  const hasDifferentDefaultAppearance = !(Platform.OS == 'android' || Platform.OS == 'ios');
+
   switch (appearance) {
     case 'accent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
       return 'primary';
 
-    case 'outline': // Exists only for Mobile platforms, maps to default on other platforms.
-      if (Platform.OS == 'android' || Platform.OS == 'ios') {
+    case 'outline':
+      if (supportsOutlineAppearance) {
         return 'outline';
       } else {
         return null;
@@ -114,11 +120,11 @@ export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): But
     case 'subtle':
       return appearance;
 
-    default: // Mobile platforms do not have seperate styling when no appearance is passed.
-      if (Platform.OS == 'android' || Platform.OS == 'ios') {
-        return 'primary';
-      } else {
+    default:
+      if (hasDifferentDefaultAppearance) {
         return null;
+      } else {
+        return 'primary';
       }
   }
 };
