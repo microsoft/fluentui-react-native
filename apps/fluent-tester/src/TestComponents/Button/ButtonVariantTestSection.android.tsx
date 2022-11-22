@@ -2,16 +2,9 @@ import { Button, FAB } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from './test.svg';
+import { iconProps } from '../Common/iconExamples';
 
 export const ButtonVariantTest: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
-
   const [showFABText, setShowFABText] = React.useState(true);
   const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
 
