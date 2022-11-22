@@ -4,6 +4,7 @@
   "description": "Package containing E2E testing specs",
   "license": "MIT",
   "scripts": {
+    "build": "fluentui-scripts build",
     "bundle": "webpack"
   },
   "repository": {
@@ -13,7 +14,7 @@
   },
   "devDependencies": {
     "webpack": "^5.28.0",
-    "webpack-cli": "^4.9.2",
+    "webpack-cli": "4.9.1",
     "ts-loader": "^9.4.1"
   }
 }
