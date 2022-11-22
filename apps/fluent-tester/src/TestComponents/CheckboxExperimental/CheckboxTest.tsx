@@ -3,15 +3,28 @@ import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, Platform } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
+import { Text } from '@fluentui-react-native/text';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
+
+const AndroidBasicCheckbox = () => {
+  return (
+    <View>
+      <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
+      <Checkbox label="Unchecked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked={false} />
+      <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
+      <Checkbox label="Disabled checkbox" disabled />
+      <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+    </View>
+  );
+};
 
 const BasicCheckbox: React.FunctionComponent = () => {
   return (
@@ -147,15 +160,23 @@ const TokenCheckbox: React.FunctionComponent = () => {
   );
 };
 
+const UnSupportedOnAndroid = () => {
+  return (
+    <Text style={{ margin: 10, fontSize: 14 }} color="red">
+      Unsupported on Android
+    </Text>
+  );
+};
+
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
     testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
-    component: BasicCheckbox,
+    component: Platform.OS === 'android' ? AndroidBasicCheckbox : BasicCheckbox,
   },
   {
     name: 'Size Checkboxes',
-    component: SizeCheckbox,
+    component: Platform.OS === 'android' ? UnSupportedOnAndroid : SizeCheckbox,
   },
   {
     name: 'Other Implementations',
