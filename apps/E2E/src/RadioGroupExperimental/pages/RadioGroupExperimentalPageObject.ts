@@ -8,7 +8,7 @@ import {
   THIRD_RADIO,
   FOURTH_RADIO,
   FIFTH_RADIO,
-} from '../../../TestComponents/RadioGroupExperimental/consts';
+} from '../../../../fluent-tester/src/TestComponents/RadioGroupExperimental/consts';
 import { BasePage, By } from '../../common/BasePage';
 import { Attribute, AttributeValue } from '../../common/consts';
 
