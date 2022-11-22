@@ -2,8 +2,7 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import * as React from 'react';
 import { Platform, View, StyleSheet } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from './test.svg';
+import { testImage, svgProps, iconProps } from '../Common/iconExamples';
 import { SvgXml } from 'react-native-svg';
 
 const styles = StyleSheet.create({
@@ -17,13 +16,6 @@ export const ButtonIconTest: React.FunctionComponent = () => {
     fontSize: 24,
   };
 
-  /* eslint-disable @typescript-eslint/no-var-requires */
-  const testImage = require('../../../../assets/icon_24x24.png');
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
 
   const chevronXml = `
@@ -54,7 +46,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
           <Button appearance="primary" icon={{ svgSource: svgProps, color: 'red' }} style={commonTestStyles.vmargin}>
             SVG
           </Button>
-          <Button icon={{ svgSource: svgProps }} style={commonTestStyles.vmargin}>
+          <Button icon={iconProps} style={commonTestStyles.vmargin}>
             SVG
           </Button>
         </>
@@ -66,7 +58,7 @@ export const ButtonIconTest: React.FunctionComponent = () => {
         PNG
       </Button>
       {svgIconsEnabled && (
-        <Button style={commonTestStyles.vmargin} icon={{ svgSource: svgProps }}>
+        <Button style={commonTestStyles.vmargin} icon={iconProps}>
           Icon Button and Chevron
           <View style={styles.chevron}>
             <SvgXml xml={chevronXml} />

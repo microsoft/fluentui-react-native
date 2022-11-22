@@ -1,18 +1,12 @@
 import { ButtonV1 as Button, CompoundButton, FAB } from '@fluentui/react-native';
-import { SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
 import { Platform, View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import TestSvg from './test.svg';
+import { iconProps } from '../Common/iconExamples';
 
 export const ButtonSizeTest: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-  const iconProps = { svgSource: svgProps };
-
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
+
   return (
     <View style={testContentRootViewStyle}>
       {svgIconsEnabled && (

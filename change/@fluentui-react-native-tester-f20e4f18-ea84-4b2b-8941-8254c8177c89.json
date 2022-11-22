@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix icon / button assert in native test app",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

@@ -5,8 +5,7 @@ import { Text } from '@fluentui/react-native';
 import { Icon } from '@fluentui-react-native/icon';
 import { ICON_ACCESSIBILITY_LABEL } from './consts';
 import { RasterImageIconProps } from '@fluentui-react-native/icon';
-
-const testImage = require('../../../../assets/icon_24x24.png');
+import { testImage } from '../Common/iconExamples';
 
 export const E2ETestingIcon: React.FunctionComponent = () => {
   const rasterRainbowSpectrumProps: RasterImageIconProps = { src: testImage };
