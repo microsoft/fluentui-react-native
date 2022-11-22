@@ -114,7 +114,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   );
 
   // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
-  let scaleStyleAdjustments: TextTokens = {};
+  let scaleStyleAdjustments: TextTokens = emptyProps;
   // tokenStyle.fontSize and tokenStyle.lineHeight can also be strings (e.g., "14px").
   // Therefore, we only support scaling for number-based size values in order to avoid any messy calculations.
   if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
