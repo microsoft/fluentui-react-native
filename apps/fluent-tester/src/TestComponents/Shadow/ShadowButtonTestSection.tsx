@@ -4,14 +4,7 @@ import { FAB, Text } from '@fluentui/react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
 import { shadowTestPageStyles } from './ShadowTestPageStyles';
 import { useFluentTheme } from '@fluentui-react-native/framework';
-import TestSvg from '../../FluentTester/test-data/test.svg';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-
-const svgProps: SvgIconProps = {
-  src: TestSvg,
-  viewBox: '0 0 500 500',
-};
-const iconProps = { svgSource: svgProps, width: 20, height: 20 };
+import { iconProps } from '../Common/iconExamples';
 
 const CustomFABNoShadow = FAB.customize({ shadowToken: undefined });
 const CustomFABShadow64 = FAB.customize({
