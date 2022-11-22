@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Add shadow crash + assert testing",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

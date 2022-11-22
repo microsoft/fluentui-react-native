@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Separator, MenuButton, ContextualMenuProps } from '@fluentui/react-native';
 import { Text, View, Switch, Platform } from 'react-native';
-import { menuItems, iconProps, testImage } from './testData';
+import { menuItems, iconProps } from './testData';
 import { viewWrapperStyle, columnStyle, rowStyle, textColor } from './MenuButtonTestStyles';
 import { IconSourcesType } from '@fluentui-react-native/icon';
+import { testImage } from '../Common/iconExamples';
 
 export const StandardMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
