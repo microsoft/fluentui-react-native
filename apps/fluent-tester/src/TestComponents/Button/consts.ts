@@ -29,3 +29,7 @@ export const BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL = 'Test Button4 - Not focusab
 
 export const BUTTON_ON_PRESS = 'Button_On_Press'; // For testing the press functionality on a button
 export const BUTTON_ON_KEY = 'Button_On_Key'; // For testing the key press functionality on a button
+
+/* Test Button 4 */
+export const BUTTON_A11Y_ROLE_COMPONENT = 'Button_A11y_Role_Component';
+export const BUTTON_ROLE_TEST_COMPONENT_LABEL = 'Test Button4 - Custom Role'; // A component on each specific test page
