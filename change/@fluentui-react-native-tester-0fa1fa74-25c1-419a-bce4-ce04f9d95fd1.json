@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Make Button respect accessibilityRole passed in props",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}
