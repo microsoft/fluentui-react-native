@@ -62,13 +62,13 @@ export const Checkbox = compose<CheckboxType>({
 
       return (
         <Slots.root {...mergedProps}>
-          {Platform.OS !== 'android' && Checkbox.state.labelIsBefore && labelComponent}
+          {Checkbox.state.labelIsBefore && labelComponent}
           <Slots.checkbox>
             <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
               {checkmarkPath}
             </Slots.checkmark>
           </Slots.checkbox>
-          {Platform.OS !== 'android' && !Checkbox.state.labelIsBefore && labelComponent}
+          {!Checkbox.state.labelIsBefore && labelComponent}
         </Slots.root>
       );
     };
