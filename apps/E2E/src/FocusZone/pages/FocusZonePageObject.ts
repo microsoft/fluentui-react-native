@@ -1,4 +1,4 @@
-import { FocusZoneDirection } from '@fluentui/react-native';
+import { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
 import { Attribute, AttributeValue, Keys } from '../../common/consts';
 import {
   FOCUSZONE_CIRCLE_NAV_SWITCH,

@@ -1,4 +1,4 @@
-import { FocusZoneDirection } from '@fluentui/react-native';
+import { FocusZoneDirection } from '@fluentui-react-native/focus-zone';
 
 export const HOMEPAGE_FOCUSZONE_BUTTON = 'Homepage_FocusZone_Button';
 export const FOCUSZONE_TESTPAGE = 'FocusZone_TestPage';
