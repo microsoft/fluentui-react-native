@@ -60,7 +60,6 @@ export const MenuList = compose<MenuListType>({
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
                 enableFocusRing={false}
-                forceFocusMacOS={true}
               >
                 {children}
               </Slots.focusZone>
