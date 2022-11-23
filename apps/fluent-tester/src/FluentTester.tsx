@@ -79,11 +79,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const themedStyles = getThemedStyles(useTheme());
 
   // This is used to initially bring focus to the app on win32
-  const win32FocusOnMount = React.useRef<View>();
+  const focusOnMountRef = React.useRef<View>();
 
   React.useEffect(() => {
     if (Platform.OS === ('win32' as any)) {
-      win32FocusOnMount.current.focus();
+      focusOnMountRef.current.focus();
     }
   }, []);
 
@@ -156,8 +156,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
-                {...(index === 0 && { componentRef: win32FocusOnMount })}
                 // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
+                {...(index === 0 && { componentRef: focusOnMountRef })}
               >
                 {description.name}
               </Button>
