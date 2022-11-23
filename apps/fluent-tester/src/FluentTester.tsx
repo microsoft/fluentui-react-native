@@ -78,6 +78,15 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   const themedStyles = getThemedStyles(useTheme());
 
+  // This is used to initially bring focus to the app on win32
+  const win32FocusOnMount = React.useRef<View>();
+
+  React.useEffect(() => {
+    if (Platform.OS === ('win32' as any)) {
+      win32FocusOnMount.current.focus();
+    }
+  }, []);
+
   const RootView = Platform.select({
     ios: SafeAreaView,
     default: View,
@@ -135,14 +144,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
   const TestList: React.FunctionComponent = () => {
-    const ref = React.useRef<View>();
-
-    React.useEffect(() => {
-      if (Platform.OS === ('win32' as any)) {
-        ref.current.focus();
-      }
-    }, []);
-
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID={TESTPAGE_BUTTONS_SCROLLVIEWER}>
@@ -155,7 +156,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
-                componentRef={index === 0 ? ref : undefined}
+                {...(index === 0 && { componentRef: win32FocusOnMount })}
+                // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
               >
                 {description.name}
               </Button>
