@@ -10,10 +10,10 @@ import { svgProps } from '../Common/iconExamples';
 const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });
 const CustomIconButton = Button.customize({ iconColor: 'yellow' });
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore Not all slots have to be overridden for compose to work
 const ComposedButton = Button.compose({
   slots: {
-    root: Pressable,
-    icon: Icon,
     content: CustomText,
   },
   slotProps: {
