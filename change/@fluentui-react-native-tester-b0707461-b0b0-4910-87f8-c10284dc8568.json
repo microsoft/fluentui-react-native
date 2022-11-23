@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add ScrollView to Menu (macOS)",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "amchiu@microsoft.com",
+  "dependentChangeType": "patch"
+}
