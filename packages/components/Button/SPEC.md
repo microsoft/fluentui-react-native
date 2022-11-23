@@ -63,35 +63,29 @@ The `Button` component can include an `icon` that appears before or after its `c
 
 ### Shape
 
-Shape modification is not explicitly supported on Android and is provided as an 'as-is' functionality.
-
 - shape="rounded": The button as rounded corners. This is the default if shape is not set.
 - shape="circular": The button has completely round corners. A button of equal width and height will be a circle.
 - shape="square": The button has right-angle corners.
+
+**Shape modification is not explicitly supported on Android and is provided as an 'as-is' functionality.**
 
 ### Sizes
 
 The `Button` component supports different sizing with at least three different sizes: `small`, `medium`, and `large`. `Small` is the default on `win32`, `medium` is the default on other platforms.
 
-#### Size modification is not explicitly supported on Android and is provided as an 'as-is' functionality.
-
-</br>
+**Size modification is not explicitly supported on Android and is provided as an 'as-is' functionality.**
 
 ### Block
 
 The `Button` component can completely fill the width of its container.
 
-#### 'Block' is not explicitly supported on Android and is provided as an 'as-is' functionality.
-
-</br>
+**'Block' is not explicitly supported on Android and is provided as an 'as-is' functionality.**
 
 ### Loading
 
 The `Button` component can be loading if it's waiting for another action to occur before allowing itself to be interacted with.
 
-#### 'Loading' is not explicitly supported on Android and is provided as an 'as-is' functionality.
-
-</br>
+**'Loading' is not explicitly supported on Android and is provided as an 'as-is' functionality.**
 
 ## API
 

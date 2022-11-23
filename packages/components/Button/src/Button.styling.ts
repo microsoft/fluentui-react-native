@@ -31,7 +31,7 @@ export const stylingSettings: UseStylingOptions<ButtonProps, ButtonSlotProps, Bu
   tokens: [defaultButtonTokens, defaultButtonFontTokens, defaultButtonColorTokens, buttonName],
   states: buttonStates,
   slotProps: {
-    ...(Platform.OS == 'android' && {
+    ...(Platform.OS === 'android' && {
       rippleContainer: buildProps(
         (tokens: ButtonTokens) => {
           return {
@@ -100,10 +100,10 @@ export const getDefaultSize = (): ButtonSize => {
 
 export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): ButtonAppearance => {
   // 'Outline' exists only for Mobile platforms, maps to default on other platforms.
-  const supportsOutlineAppearance = Platform.OS == 'android' || Platform.OS == 'ios';
+  const supportsOutlineAppearance = Platform.OS === 'android' || Platform.OS === 'ios';
 
   // Mobile platforms do not have seperate styling when no appearance is passed.
-  const hasDifferentDefaultAppearance = !(Platform.OS == 'android' || Platform.OS == 'ios');
+  const hasDifferentDefaultAppearance = !(Platform.OS === 'android' || Platform.OS === 'ios');
 
   switch (appearance) {
     case 'accent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.

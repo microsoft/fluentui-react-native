@@ -59,7 +59,7 @@ export const ButtonSizeTest: React.FunctionComponent = () => {
       <Button size="large" style={commonTestStyles.vmargin}>
         Large
       </Button>
-      {Platform.OS != 'android' && (
+      {Platform.OS !== 'android' && (
         <>
           <Button loading size="small" style={commonTestStyles.vmargin}>
             Loading Button Small

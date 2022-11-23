@@ -12,7 +12,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
   tokens: [defaultFABTokens, defaultFABColorTokens, fabName],
   states: FABStates,
   slotProps: {
-    ...(Platform.OS == 'android' && {
+    ...(Platform.OS === 'android' && {
       rippleContainer: buildProps(
         (tokens: FABTokens) => {
           return {
