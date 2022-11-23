@@ -30,7 +30,7 @@ export const Checkbox = compose<CheckboxType>({
     }
 
     {
-      Platform.OS === 'android' && nonAndroidProps.map((e) => Reflect.deleteProperty(userProps, e));
+      Platform.OS === 'android' && unsupportedAndroidProps.map((e) => Reflect.deleteProperty(userProps, e));
     }
 
     // configure props and state for checkbox based on user props
