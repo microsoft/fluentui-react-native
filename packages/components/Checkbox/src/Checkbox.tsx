@@ -29,10 +29,6 @@ export const Checkbox = compose<CheckboxType>({
         });
     }
 
-    {
-      Platform.OS === 'android' && unsupportedAndroidProps.map((e) => Reflect.deleteProperty(userProps, e));
-    }
-
     // configure props and state for checkbox based on user props
     const Checkbox = useCheckbox(userProps);
     // grab the styled slots
