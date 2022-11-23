@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "spacing global tokens and design-token package updates",
+  "packageName": "@fluentui-react-native/android-theme",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}

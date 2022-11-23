@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "spacing global tokens and design-token package updates",
+  "packageName": "@fluentui-react-native/badge",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
