@@ -440,9 +440,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "24px",
-    "m": "16px",
     "s1": "12px",
     "s2": "8px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {
@@ -1050,9 +1050,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "24px",
-    "m": "16px",
     "s1": "12px",
     "s2": "8px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {
@@ -1660,9 +1660,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "24px",
-    "m": "16px",
     "s1": "12px",
     "s2": "8px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {
@@ -2270,9 +2270,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "24px",
-    "m": "16px",
     "s1": "12px",
     "s2": "8px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {
@@ -2880,9 +2880,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "24px",
-    "m": "16px",
     "s1": "12px",
     "s2": "8px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {
@@ -3490,9 +3490,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "24px",
-    "m": "16px",
     "s1": "12px",
     "s2": "8px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {

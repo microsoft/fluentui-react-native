@@ -11,7 +11,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checkboxBorderRadius: globalTokens.corner.radius40,
     checkboxSize: globalTokens.font.size600,
     checkmarkSize: globalTokens.font.size100,
-    padding: globalTokens.spacing.xxs,
+    padding: globalTokens.size40,
     fontSize: t.typography.sizes.body,
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
     checkmarkOpacity: 0,

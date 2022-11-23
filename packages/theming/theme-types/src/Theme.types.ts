@@ -15,17 +15,26 @@ export interface Spacing {
   l1: string;
   l2: string;
   // v2 types
-  none?: SpacingValue;
-  xxxs?: SpacingValue;
-  xxs?: SpacingValue;
-  xs?: SpacingValue;
-  s?: SpacingValue;
-  m?: SpacingValue;
-  l?: SpacingValue;
-  xl?: SpacingValue;
-  xxl?: SpacingValue;
-  xxxl?: SpacingValue;
-  xxxxl?: SpacingValue;
+  sizeNone?: SpacingValue;
+  size20?: SpacingValue;
+  size40?: SpacingValue;
+  size60?: SpacingValue;
+  size80?: SpacingValue;
+  size100?: SpacingValue;
+  size120?: SpacingValue;
+  size160?: SpacingValue;
+  size200?: SpacingValue;
+  size240?: SpacingValue;
+  size280?: SpacingValue;
+  size320?: SpacingValue;
+  size360?: SpacingValue;
+  size400?: SpacingValue;
+  size480?: SpacingValue;
+  size560?: SpacingValue;
+  size640?: SpacingValue;
+  size720?: SpacingValue;
+  size800?: SpacingValue;
+  size1200?: SpacingValue;
 }
 
 /**

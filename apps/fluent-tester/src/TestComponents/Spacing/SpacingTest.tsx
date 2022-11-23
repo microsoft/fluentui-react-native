@@ -21,21 +21,29 @@ const BasicUsage: React.FunctionComponent = () => {
   }
 
   const appleTheme = createAppleTheme().theme;
-
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        {spacingExample('None', appleTheme.spacing.none)}
-        {spacingExample('XXXS', appleTheme.spacing.xxxs)}
-        {spacingExample('XXS', appleTheme.spacing.xxs)}
-        {spacingExample('XS', appleTheme.spacing.xs)}
-        {spacingExample('S', appleTheme.spacing.s)}
-        {spacingExample('M', appleTheme.spacing.m)}
-        {spacingExample('L', appleTheme.spacing.l)}
-        {spacingExample('XL', appleTheme.spacing.xl)}
-        {spacingExample('XXL', appleTheme.spacing.xxl)}
-        {spacingExample('XXXL', appleTheme.spacing.xxxl)}
-        {spacingExample('XXXXL', appleTheme.spacing.xxxxl)}
+        {spacingExample('None', appleTheme.spacing.sizeNone)}
+        {spacingExample('size20', appleTheme.spacing.size20)}
+        {spacingExample('size40', appleTheme.spacing.size40)}
+        {spacingExample('size60', appleTheme.spacing.size60)}
+        {spacingExample('size80', appleTheme.spacing.size80)}
+        {spacingExample('size100', appleTheme.spacing.size100)}
+        {spacingExample('size120', appleTheme.spacing.size120)}
+        {spacingExample('size160', appleTheme.spacing.size160)}
+        {spacingExample('size200', appleTheme.spacing.size200)}
+        {spacingExample('size240', appleTheme.spacing.size240)}
+        {spacingExample('size280', appleTheme.spacing.size280)}
+        {spacingExample('size320', appleTheme.spacing.size320)}
+        {spacingExample('size360', appleTheme.spacing.size360)}
+        {spacingExample('size400', appleTheme.spacing.size400)}
+        {spacingExample('size480', appleTheme.spacing.size480)}
+        {spacingExample('size560', appleTheme.spacing.size560)}
+        {spacingExample('size640', appleTheme.spacing.size640)}
+        {spacingExample('size720', appleTheme.spacing.size720)}
+        {spacingExample('size800', appleTheme.spacing.size800)}
+        {spacingExample('size1200', appleTheme.spacing.size1200)}
       </Stack>
     </View>
   );

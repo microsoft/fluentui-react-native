@@ -681,7 +681,7 @@ Object {
   },
   "compoundBrandStroke1": Object {
     "resource_paths": Array [
-      "Window",
+      "Highlight",
     ],
   },
   "compoundBrandStroke1Hover": Object {
@@ -2705,9 +2705,9 @@ Object {
   "spacing": Object {
     "l1": "20px",
     "l2": "32px",
-    "m": "16px",
     "s1": "8px",
     "s2": "4px",
+    "size160": "16px",
   },
   "typography": Object {
     "families": Object {

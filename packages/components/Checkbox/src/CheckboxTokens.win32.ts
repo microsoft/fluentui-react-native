@@ -6,7 +6,7 @@ import { CheckboxTokens } from './Checkbox.types';
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
     requiredColor: t.colors.redForeground1,
-    requiredPadding: globalTokens.spacing.s,
+    requiredPadding: globalTokens.size120,
     medium: {
       borderRadius: globalTokens.corner.radius20,
       checkboxBorderWidth: globalTokens.stroke.width10,
@@ -14,16 +14,16 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxSize: 16,
       checkmarkSize: 12,
       label: {
-        padding: globalTokens.spacing.s,
-        paddingHorizontal: globalTokens.spacing.m,
+        padding: globalTokens.size120,
+        paddingHorizontal: globalTokens.size160,
         borderRadius: globalTokens.corner.radius40,
-        spacingLabelAfter: globalTokens.spacing.s,
+        spacingLabelAfter: globalTokens.size120,
         labelIsBefore: {
-          spacingLabelBefore: globalTokens.spacing.s,
+          spacingLabelBefore: globalTokens.size120,
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.spacing.xs,
+      padding: globalTokens.size80,
       fontSize: globalTokens.font.size200,
       fontWeight: globalTokens.font.weight.regular,
       fontFamily: t.typography.families.primary,
@@ -35,15 +35,15 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       checkboxSize: 20,
       checkmarkSize: 16,
       label: {
-        padding: globalTokens.spacing.s,
+        padding: globalTokens.size120,
         borderRadius: globalTokens.corner.radius40,
-        spacingLabelAfter: globalTokens.spacing.m,
+        spacingLabelAfter: globalTokens.size160,
         labelIsBefore: {
-          spacingLabelBefore: globalTokens.spacing.m,
+          spacingLabelBefore: globalTokens.size160,
           spacingLabelAfter: 0,
         },
       },
-      padding: globalTokens.spacing.xs,
+      padding: globalTokens.size80,
       fontSize: globalTokens.font.size300,
       fontWeight: globalTokens.font.weight.regular,
       fontFamily: t.typography.families.primary,

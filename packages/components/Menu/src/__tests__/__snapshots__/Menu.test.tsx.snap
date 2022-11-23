@@ -194,6 +194,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -247,6 +248,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -408,6 +410,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -577,6 +580,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -702,6 +706,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -923,6 +928,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1048,6 +1054,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1269,6 +1276,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1394,6 +1402,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1615,6 +1624,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1728,6 +1738,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1941,6 +1952,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >
@@ -1996,6 +2008,7 @@ Array [
               "maxWidth": 300,
               "minHeight": 32,
               "minWidth": 160,
+              "padding": 6,
             }
           }
         >

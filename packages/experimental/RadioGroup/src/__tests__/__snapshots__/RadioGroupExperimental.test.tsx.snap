@@ -117,10 +117,10 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -224,10 +224,10 @@ exports[`RadioGroup component tests Radio not direct child of radio group 1`] = 
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -395,10 +395,10 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -502,10 +502,10 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }

@@ -7,7 +7,7 @@ export function appleSpacing(): Spacing {
   return {
     s2: '8px',
     s1: '12px',
-    m: '16px',
+    size160: '16px',
     l1: '20px',
     l2: '24px',
   };
