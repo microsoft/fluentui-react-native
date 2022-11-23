@@ -14,7 +14,7 @@
     "clean": "fluentui-scripts clean",
     "depcheck": "fluentui-scripts depcheck",
     "lint": "fluentui-scripts eslint",
-    "start": "react-native start --port 8081",
+    "start": "react-native rnx-start",
     "bundle": "react-native rnx-bundle --dev false",
     "bundle-dev": "react-native rnx-bundle",
     "run-win32": "rex-win32 --bundle index.win32 --component FluentTester --windowTitle \"FluentUI Tester\" --basePath ./dist --pluginProps --debugBundlePath index --jsEngine v8",

@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add checkbox android spec and tester",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}

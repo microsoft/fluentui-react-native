@@ -3,6 +3,8 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { CheckboxTokens } from './Checkbox.types';
 
+// No Tokens for Sizes , hovered, pressed and circular checkbox as they're not supported for Android Platform
+
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
     checkboxBorderWidth: globalTokens.stroke.width15,

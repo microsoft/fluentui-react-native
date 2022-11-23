@@ -6,9 +6,8 @@ import { Tabs, TabsItem } from '@fluentui-react-native/experimental-tabs';
 import { stackStyle } from '../Common/styles';
 import { EXPERIMENTAL_TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from './test.svg';
 import { E2ETestExperimentalTabs } from './TabsExperimentalE2ETest';
+import { svgProps } from '../Common/iconExamples';
 
 const TabsMainTest: React.FunctionComponent = () => {
   return (
@@ -47,11 +46,6 @@ const DisabledTabs: React.FunctionComponent = () => {
 };
 
 const TabsCountIcon: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-
   return (
     <View style={stackStyle}>
       <Tabs label="Tabs">
