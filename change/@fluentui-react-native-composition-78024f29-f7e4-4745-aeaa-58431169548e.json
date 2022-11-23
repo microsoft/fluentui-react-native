@@ -1,6 +1,6 @@
 {
   "type": "patch",
-  "comment": "[Draft] Fix typescript type of compose()",
+  "comment": "Fix typescript type of compose()",
   "packageName": "@fluentui-react-native/composition",
   "email": "sanajmi@microsoft.com",
   "dependentChangeType": "patch"
