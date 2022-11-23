@@ -152,6 +152,29 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
+const ScrollViewMenuPopover = MenuPopover.customize({ maxHeight: 100 });
+const MenuScrollView: React.FunctionComponent = () => {
+  return (
+    <Stack style={stackStyle}>
+      <Menu>
+        <MenuTrigger>
+          <Button>Test</Button>
+        </MenuTrigger>
+        <ScrollViewMenuPopover>
+          <MenuList>
+            <MenuItem>MenuItem 1</MenuItem>
+            <MenuItem>MenuItem 2</MenuItem>
+            <MenuItem>MenuItem 3</MenuItem>
+            <MenuItem>MenuItem 4</MenuItem>
+            <MenuItem>MenuItem 5</MenuItem>
+            <MenuItem>MenuItem 6</MenuItem>
+          </MenuList>
+        </ScrollViewMenuPopover>
+      </Menu>
+    </Stack>
+  );
+};
+
 const MenuOpenOnHover: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
@@ -268,6 +291,10 @@ const menuSections: TestSection[] = [
   {
     name: 'Menu Submenu',
     component: MenuSubMenu,
+  },
+  {
+    name: 'Menu with ScrollView',
+    component: MenuScrollView,
   },
   {
     name: 'Menu Trigger onClick Override',

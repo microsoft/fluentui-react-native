@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import { compose, mergeProps, stagedComponent, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
@@ -34,6 +34,7 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
+    scrollView: ScrollView,
     ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
@@ -51,20 +52,24 @@ export const MenuList = compose<MenuListType>({
       const content =
         Platform.OS === 'macos' ? (
           <Slots.root>
-            <Slots.focusZone
-              componentRef={focusZoneRef}
-              focusZoneDirection={'vertical'}
-              defaultTabbableElement={focusZoneRef}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
-              enableFocusRing={false}
-              forceFocusMacOS={true}
-            >
-              {children}
-            </Slots.focusZone>
+            <Slots.scrollView>
+              <Slots.focusZone
+                componentRef={focusZoneRef}
+                focusZoneDirection={'vertical'}
+                defaultTabbableElement={focusZoneRef}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
+                enableFocusRing={false}
+                forceFocusMacOS={true}
+              >
+                {children}
+              </Slots.focusZone>
+            </Slots.scrollView>
           </Slots.root>
         ) : (
-          <Slots.root>{children}</Slots.root>
+          <Slots.root>
+            <Slots.scrollView>{children}</Slots.scrollView>
+          </Slots.root>
         );
 
       return <MenuListProvider value={contextValue}>{content}</MenuListProvider>;
