@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "replace old spacing token with new sizeTokens with win32 ramp",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
