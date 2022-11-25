@@ -29,7 +29,7 @@ exports[`ContextualMenu default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "padding": 8,
+      "padding": 4,
       "width": undefined,
     }
   }

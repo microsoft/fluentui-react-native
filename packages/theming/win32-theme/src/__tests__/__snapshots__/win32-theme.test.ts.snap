@@ -681,7 +681,7 @@ Object {
   },
   "compoundBrandStroke1": Object {
     "resource_paths": Array [
-      "Window",
+      "Highlight",
     ],
   },
   "compoundBrandStroke1Hover": Object {

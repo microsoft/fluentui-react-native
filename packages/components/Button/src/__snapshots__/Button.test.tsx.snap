@@ -30,8 +30,8 @@ exports[`Button component tests Button circular 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -87,8 +87,8 @@ exports[`Button component tests Button composed 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -143,8 +143,8 @@ exports[`Button component tests Button customized 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -200,8 +200,8 @@ exports[`Button component tests Button default 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -262,8 +262,8 @@ exports[`Button component tests Button disabled 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -320,8 +320,8 @@ exports[`Button component tests Button large 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 11,
-      "paddingHorizontal": 19,
+      "padding": 7,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -378,8 +378,8 @@ exports[`Button component tests Button primary 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -436,8 +436,8 @@ exports[`Button component tests Button small 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 64,
-      "padding": 7,
-      "paddingHorizontal": 11,
+      "padding": 3,
+      "paddingHorizontal": 7,
       "width": undefined,
     }
   }
@@ -494,8 +494,8 @@ exports[`Button component tests Button square 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
@@ -552,8 +552,8 @@ exports[`Button component tests Button subtle 1`] = `
       "flexDirection": "row",
       "justifyContent": "center",
       "minWidth": 96,
-      "padding": 8,
-      "paddingHorizontal": 15,
+      "padding": 4,
+      "paddingHorizontal": 11,
       "width": undefined,
     }
   }
