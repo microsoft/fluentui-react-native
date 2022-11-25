@@ -8,10 +8,10 @@ export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>
     borderRadius: globalTokens.corner.radiusCircular,
     minHeight: 56,
     minWidth: 56,
-    padding: globalTokens.spacing.l,
+    padding: globalTokens.size160,
     hasContent: {
       hasIconBefore: {
-        spacingIconContentBefore: globalTokens.spacing.mNudge,
+        spacingIconContentBefore: globalTokens.size100,
       },
     },
     shadowToken: t.shadows.shadow8,
