@@ -58,7 +58,7 @@ export const defaultBadgeTokens: TokenSettings<BadgeTokens, Theme> = () =>
       minWidth: 32,
       minHeight: 32,
       iconSize: 20,
-      paddingHorizontal: globalTokens.spacing.sNudge,
+      paddingHorizontal: globalTokens.size60,
       textMargin: globalTokens.size20,
       flexGap: globalTokens.size40,
     },
