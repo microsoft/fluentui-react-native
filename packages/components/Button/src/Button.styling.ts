@@ -105,11 +105,10 @@ export const getPlatformSpecificAppearance = (appearance: ButtonAppearance): But
   switch (appearance) {
     case 'accent': // Included to cover Mobile platform naming guidelines, maps to 'primary'.
       return 'primary';
-      
+
     case 'primary':
     case 'subtle':
-    // 'Outline' exists only for Mobile platforms, default picked on other platforms.
-    case 'outline':
+    case 'outline': // 'Outline' exists only for Mobile platforms, default picked on other platforms.
       return appearance;
 
     default:
