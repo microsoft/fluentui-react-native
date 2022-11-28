@@ -78,9 +78,11 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     ...
 ```
 
-### Font [in progress]
+### Font
 
-TO DO
+You can find global tokens related to fonts, including font families, sizes, and weights, in the `globalTokens.font` property.
+
+While you _could_ use these tokens directly in `Text` elements, this is not recommended. Instead, we recommend that you use the `variant` prop or the predefined JSX types as described in the [Typography](#typography) section, as these will pull in all the needed tokens automatically.
 
 ### Size
 
@@ -132,3 +134,16 @@ const strokeSize = {
   large: globalTokens.stroke.width40,
 };
 ```
+
+### Typography
+
+In FURN, typography alias tokens can be passed into a `Text` element or wrapped using a JSX type. For example:
+
+```tsx
+import { Body1, Text } from '@fluentui-react-native/text';
+
+const myText = <Text variant="body1">Here is some body text</Text>;
+const moreText = <Body1>Here is some more body text</Body1>;
+```
+
+The different text variants available on each platform can be found in the `Variants.platform.ts` files in `packages/components/text/src`. (Note that not all variants are available on every platform, although most of them are.)
