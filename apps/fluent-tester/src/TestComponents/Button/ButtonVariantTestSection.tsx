@@ -1,21 +1,10 @@
-import { Button, CompoundButton, FAB } from '@fluentui-react-native/experimental-button';
+import { Button, CompoundButton } from '@fluentui-react-native/experimental-button';
 import * as React from 'react';
 import { View } from 'react-native';
 import { commonTestStyles, testContentRootViewStyle } from '../Common/styles';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from './test.svg';
 
 // Test also pulls button from deprecated package to ensure it's still working
 export const ButtonVariantTest: React.FunctionComponent = () => {
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
-  const iconProps = { svgSource: svgProps, width: 20, height: 20 };
-
-  const [showFABText, setShowFABText] = React.useState(true);
-  const flipFABcontent = React.useCallback(() => setShowFABText(!showFABText), [showFABText]);
-
   return (
     <View style={testContentRootViewStyle}>
       <Button style={commonTestStyles.vmargin}>Default</Button>
@@ -50,10 +39,6 @@ export const ButtonVariantTest: React.FunctionComponent = () => {
       <CompoundButton appearance="subtle" secondaryContent="Compound" style={commonTestStyles.vmargin}>
         Subtle
       </CompoundButton>
-      <FAB icon={iconProps} style={commonTestStyles.vmargin} />
-      <FAB icon={iconProps} style={commonTestStyles.vmargin} showContent={showFABText} onClick={flipFABcontent}>
-        FAB
-      </FAB>
     </View>
   );
 };

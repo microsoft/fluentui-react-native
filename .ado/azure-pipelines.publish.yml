@@ -47,7 +47,7 @@ jobs:
 
       - script: |
           yarn test
-        displayName: 'yarn test'
+        displayName: 'yarn test [test]'
 
       - script: |
           echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
@@ -100,5 +100,16 @@ jobs:
 
     steps:
       - template: templates/win32-nuget-publish.yml
+        parameters:
+          skipNugetPublish: ${{ parameters.skipNugetPublish }}
+
+  - job: Win32TestingDependenciesNuGetPublish
+    displayName: Win32 Automated Testing Dependencies NuGet Publish
+    pool: OE-OfficePublic
+    timeoutInMinutes: 90 # how long to run the job before automatically cancelling
+    cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
+
+    steps:
+      - template: templates/e2e-dependency-nuget-publish.yml
         parameters:
           skipNugetPublish: ${{ parameters.skipNugetPublish }}

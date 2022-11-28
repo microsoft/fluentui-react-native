@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix FocusTrapZone test page component not trapping focus",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}

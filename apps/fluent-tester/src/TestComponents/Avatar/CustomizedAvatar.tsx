@@ -4,8 +4,7 @@ import { View, Text, TextInput, Platform, StyleSheet } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { FontWeight } from '@fluentui-react-native/theme-types';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-import TestSvg from '../../FluentTester/test-data/test.svg';
+import { svgProps } from '../Common/iconExamples';
 import { ToggleButton } from '@fluentui/react-native';
 
 const styles = StyleSheet.create({
@@ -67,10 +66,6 @@ export const CustomizeUsage: React.FunctionComponent = () => {
   ]);
 
   const svgIconsEnabled = ['ios', 'macos', 'win32', 'android'].includes(Platform.OS as string);
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
 
   return (
     <View style={commonStyles.root}>

@@ -14,9 +14,9 @@ Basic examples:
 
 ```jsx
 <FAB>Text</FAB>
-<FAB icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} />
+<FAB icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} iconOnly/>
 <FAB icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</FAB>
-<FAB appearance="primary">Text</FAB>
+<FAB appearance="accent">Text</FAB>
 <FAB disabled>Text</FAB>
 
 // Collapsing FAB Content (to show only icon) on click
@@ -56,6 +56,15 @@ The slots can be modified using the `compose` function on the `FAB`. For more in
 ```ts
 export interface FABProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
+   * A FAB can have its content and borders styled for greater emphasis or to be subtle.
+   * - 'primary' or 'accent': Emphasizes the button as a primary action.
+   *   'accent' is mobile naming convention, 'primary' included here to maintain parity with Button.
+   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+   * @default 'primary' (or 'accent')
+   */
+  appearance?: 'primary' | 'subtle' | 'accent';
+
+  /**
    * A RefObject to access the IButton interface. Use this to access the public methods and properties of the component.
    */
   componentRef?: React.RefObject<IFocusable>;
@@ -67,7 +76,7 @@ export interface FABProps extends Omit<PressablePropsExtended, 'onPress'> {
 
   /**
    * Button contains only icon, there's no content.
-   * Must be set for button to style correctly when button has not content.
+   * Must be set for button to style correctly when button has no content.
    */
   iconOnly?: boolean;
 
@@ -83,9 +92,9 @@ export interface FABProps extends Omit<PressablePropsExtended, 'onPress'> {
   showContent?: boolean;
 
   /** Sets style of FAB to a preset size style
-   * @default 'large' on android
+   * @default 'large'
    */
-  size?: FABSize;
+  size?: 'small' | 'large';
 
   /**
    * Text that should show in a tooltip when the user hovers over a button.
@@ -133,11 +142,6 @@ export interface FABTokens extends LayoutTokens, FontTokens, IBorderTokens, ISha
    * The amount of spacing between an icon and the content when iconPosition is set to 'before', in pixels.
    */
   spacingIconContentBefore?: number;
-
-  /**
-   * The amount of spacing between an icon and the content when iconPosition is set to 'after', in pixels.
-   */
-  spacingIconContentAfter?: number;
 
   /**
    * The width of the button.

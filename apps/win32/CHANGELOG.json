@@ -2,6 +2,41 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Mon, 28 Nov 2022 11:51:06 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.28.13",
+      "version": "0.28.13",
+      "comments": {
+        "none": [
+          {
+            "author": "warleu@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "c49a68b9e8e18f62113eb76ce912572622a59bdc",
+            "comment": "Add a test for fontawesome's rnsvg package"
+          },
+          {
+            "author": "4123478+tido64@users.noreply.github.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "69703d1c76cb253d39801d059c7d6f88f9b82622",
+            "comment": "chore: use `rnx-start` for dev server"
+          }
+        ],
+        "patch": [
+          {
+            "author": "gulnazsayed@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "d485629765a0a8240c727745d3e30864b53df28d",
+            "comment": "Added testing"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.108.0",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Nov 2022 12:15:42 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.28.12",
       "version": "0.28.12",

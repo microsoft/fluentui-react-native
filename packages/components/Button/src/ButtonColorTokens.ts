@@ -8,7 +8,6 @@ export const defaultButtonColorTokens: TokenSettings<ButtonTokens, Theme> = (t: 
     color: t.colors.buttonText,
     borderColor: t.colors.buttonBorder,
     iconColor: t.colors.buttonIcon,
-    rippleColor: t.colors.defaultPressedBackground, // Android only
     disabled: {
       backgroundColor: t.colors.defaultDisabledBackground,
       color: t.colors.defaultDisabledContent,

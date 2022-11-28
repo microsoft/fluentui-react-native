@@ -50,6 +50,68 @@ Win32:
 <Checkbox label="Circular Checkbox" shape="circular" />
 ```
 
+Android:
+
+##### Light Mode
+
+---
+
+<br/>
+
+![Checkbox with text on Android example](./assets/Checkbox_example_android.png)
+
+```jsx
+<Checkbox label="Unchecked checkbox (undefined)" />
+```
+
+![Checkbox with text on Android example](./assets/Checkbox_checked_example_android.png)
+
+```jsx
+<Checkbox label="checked checkbox (uncontrolled)" defaultChecked />
+```
+
+![Checkbox disabled unchecked with text on Android example](./assets/Checkbox_checked_disabled_android.png)
+
+```jsx
+<Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+```
+
+![Checkbox disabled checked with text on Android example](./assets/Checkbox_unchecked_disabled_android.png)
+
+```jsx
+<Checkbox label="Disabled checkbox" disabled />
+```
+
+##### Dark Mode
+
+---
+
+<br/>
+
+![Checkbox with text on Android example](./assets/Checkbox_example_android_dark.png)
+
+```jsx
+<Checkbox label="Unchecked checkbox (undefined)" />
+```
+
+![Checkbox with text on Android example](./assets/Checkbox_checked_example_android_dark.png)
+
+```jsx
+<Checkbox label="checked checkbox (uncontrolled)" defaultChecked />
+```
+
+![Checkbox disabled unchecked with text on Android example](./assets/Checkbox_checked_disabled_android_dark.png)
+
+```jsx
+<Checkbox label="Disabled checked checkbox" defaultChecked disabled />
+```
+
+![Checkbox disabled checked with text on Android example](./assets/Checkbox_unchecked_disabled_android_dark.png)
+
+```jsx
+<Checkbox label="Disabled checkbox" disabled />
+```
+
 ## Variants
 
 ### Checked
@@ -60,9 +122,13 @@ The `Checkbox` control supports the `unchecked` and `checked` appearances. It do
 
 The `Checkbox` control supports a rounded `square` (default) and `circular` shape variants.
 
+Note: Not Supported on Android
+
 ### Sizes
 
 The `Checkbox` control supports two different sizes: `medium` (default), and `large`.
+
+Note: Not Supported on Android
 
 ## API
 
@@ -121,6 +187,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * Allows you to set the checkbox to be at the before (start) or after (end) the label
    *
    * @default after
+   * @platform win32
    */
   labelPosition?: 'before' | 'after';
 
@@ -139,18 +206,20 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    * The shape of the checkbox. Can be either (rounded) square or circular.
    *
    * @default square
-   * @platform Android, iOS, windows, win32
+   * @platform iOS, windows, win32
    */
   shape?: CheckboxShape;
 
   /**
    * Sets style of checkbox to a preset size style.
    * @default 'medium'
+   * @platform win32
    */
   size?: CheckboxSize;
 
   /**
    * Provides a tooltip while hovering over Checkbox component
+   * @platform win32
    */
   tooltip?: string;
 }
@@ -256,13 +325,19 @@ A disabled `Checkbox` is non-interactive, disallowing the user to click/tap on i
 
 A hovered `Checkbox` changes styling to communicate that the user has placed a cursor above it. On win32, this will show a checkmark in a checkbox.
 
+Note: Not Supported on Android
+
 #### Focused state
 
 A focused `Checkbox` changes styling to communicate that the user has placed keyboard focus on it. This styling is usually the same to the one in the hovered state plus extra styling on the outline to indicate keyboard focus has been placed on the component.
 
+Note: Not Supported on Android
+
 #### Pressed state
 
 A pressed `Checkbox` changes styling to communicate that the user is currently pressing it.
+
+Note: Not Supported on Android
 
 #### Checked state
 

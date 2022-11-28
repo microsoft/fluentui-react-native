@@ -1,13 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { MenuButtonItemProps } from '@fluentui/react-native';
-import { SvgIconProps } from '@fluentui-react-native/icon';
-export const testImage = require('./../../../assets/icon_24x24.png');
-import TestSvg from '../Button/test.svg';
-
-const svgProps: SvgIconProps = {
-  src: TestSvg,
-  viewBox: '0 0 500 500',
-};
+import { testImage, svgProps } from '../Common/iconExamples';
 
 export const menuItems: MenuButtonItemProps[] = [
   {

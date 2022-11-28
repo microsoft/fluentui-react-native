@@ -1,0 +1,33 @@
+{
+  "name": "furn-tester-deps",
+  "version": "1.0.0",
+  "description": "This package contains all dependencies needed to run FURNs automated testing framework. This includes WebDriverIO + Appium dependencies.",
+  "license": "MIT",
+  "private": "true",
+  "scripts": {
+    "build": "fluentui-scripts build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microsoft/fluentui-react-native.git",
+    "directory": "tester_deps"
+  },
+  "devDependencies": {
+    "@types/jasmine": "3.5.10",
+    "@types/react": "^17.0.2",
+    "@types/react-native": "^0.68.0",
+    "@wdio/appium-service": "7.23.0",
+    "@wdio/cli": "7.23.0",
+    "@wdio/jasmine-framework": "7.23.0",
+    "@wdio/local-runner": "7.23.0",
+    "@wdio/spec-reporter": "7.23.0",
+    "appium": "2.0.0-beta.41",
+    "appium-windows-driver": "2.0.7",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.4",
+    "webdriverio": "7.23.0"
+  },
+  "resolutions": {
+    "@appium/types": "0.5.0"
+  }
+}

@@ -1,19 +1,18 @@
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
 import * as React from 'react';
-import { Platform, Pressable, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { commonTestStyles, stackStyle } from '../Common/styles';
-import TestSvg from './test.svg';
 import { InteractionEvent, isGestureResponderEvent } from '@fluentui-react-native/interactive-hooks';
+import { svgProps } from '../Common/iconExamples';
 
 const CustomText = Text.customize({ fontSize: 'header', color: 'hotpink' });
 const CustomButton = Button.customize({ backgroundColor: 'pink' });
 const CustomIconButton = Button.customize({ iconColor: 'yellow' });
 const ComposedButton = Button.compose({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore Not all slots have to be overridden for compose to work
   slots: {
-    root: Pressable,
-    icon: Icon,
     content: CustomText,
   },
   slotProps: {
@@ -22,10 +21,6 @@ const ComposedButton = Button.compose({
     },
   },
 });
-const svgProps: SvgIconProps = {
-  src: TestSvg,
-  viewBox: '0 0 500 500',
-};
 
 export const ButtonHOCTest: React.FunctionComponent = () => {
   const buttonRef = React.useRef(null);

@@ -1,7 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RadioGroup component tests RadioGroup default 1`] = `
+exports[`RadioGroup component tests Radio not direct child of radio group 1`] = `
 <View
+  accessibilityLabel="Uncontrolled RadioGroup"
   accessibilityRole="radiogroup"
   accessibilityState={
     Object {
@@ -9,6 +10,8 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
       "required": false,
     }
   }
+  accessible={true}
+  defaultValue="key2"
   style={
     Object {
       "alignItems": "flex-start",
@@ -17,6 +20,32 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
     }
   }
 >
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#323130",
+          "fontFamily": "System",
+          "fontSize": 17,
+          "fontWeight": "600",
+          "margin": 0,
+        }
+      }
+    >
+      Uncontrolled RadioGroup
+    </Text>
+  </View>
   <RCTFocusZone
     navigateAtEnd="NavigateWrap"
   >
@@ -30,7 +59,498 @@ exports[`RadioGroup component tests RadioGroup default 1`] = `
         }
       }
     >
-      Your component
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="Radio1"
+        accessibilityPositionInSet={1}
+        accessibilityRole="radio"
+        accessibilitySetSize={2}
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        enableFocusRing={true}
+        focusable={true}
+        labelPosition="after"
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "display": "flex",
+            "flexDirection": "row",
+            "paddingHorizontal": 8,
+          }
+        }
+        value="key1"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderColor": "#616161",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 20,
+              "justifyContent": "center",
+              "marginBottom": undefined,
+              "marginLeft": 8,
+              "marginRight": undefined,
+              "marginTop": undefined,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": undefined,
+                "borderRadius": 5,
+                "height": 10,
+                "opacity": 0,
+                "width": 10,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "alignSelf": "flex-start",
+              "flexDirection": "column",
+              "marginLeft": 0,
+              "marginRight": 4,
+            }
+          }
+        >
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "System",
+                "fontSize": 17,
+                "fontWeight": "400",
+                "margin": 0,
+                "marginTop": 9,
+              }
+            }
+          >
+            Radio1
+          </Text>
+        </View>
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="Radio2"
+        accessibilityPositionInSet={2}
+        accessibilityRole="radio"
+        accessibilitySetSize={2}
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        enableFocusRing={true}
+        focusable={true}
+        labelPosition="after"
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "display": "flex",
+            "flexDirection": "row",
+            "paddingHorizontal": 8,
+          }
+        }
+        value="key2"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderColor": "#0078d4",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 20,
+              "justifyContent": "center",
+              "marginBottom": undefined,
+              "marginLeft": 8,
+              "marginRight": undefined,
+              "marginTop": undefined,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#0078d4",
+                "borderRadius": 5,
+                "height": 10,
+                "opacity": 1,
+                "width": 10,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "alignSelf": "flex-start",
+              "flexDirection": "column",
+              "marginLeft": 0,
+              "marginRight": 4,
+            }
+          }
+        >
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "System",
+                "fontSize": 17,
+                "fontWeight": "400",
+                "margin": 0,
+                "marginTop": 9,
+              }
+            }
+          >
+            Radio2
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTFocusZone>
+</View>
+`;
+
+exports[`RadioGroup component tests RadioGroup default 1`] = `
+<View
+  accessibilityLabel="Uncontrolled RadioGroup"
+  accessibilityRole="radiogroup"
+  accessibilityState={
+    Object {
+      "disabled": false,
+      "required": false,
+    }
+  }
+  accessible={true}
+  defaultValue="key2"
+  style={
+    Object {
+      "alignItems": "flex-start",
+      "display": "flex",
+      "flexDirection": "column",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "display": "flex",
+        "flexDirection": "row",
+      }
+    }
+  >
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#323130",
+          "fontFamily": "System",
+          "fontSize": 17,
+          "fontWeight": "600",
+          "margin": 0,
+        }
+      }
+    >
+      Uncontrolled RadioGroup
+    </Text>
+  </View>
+  <RCTFocusZone
+    navigateAtEnd="NavigateWrap"
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "flex-start",
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": "space-around",
+        }
+      }
+    >
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="RadioButton1"
+        accessibilityPositionInSet={1}
+        accessibilityRole="radio"
+        accessibilitySetSize={2}
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": false,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        enableFocusRing={true}
+        focusable={true}
+        labelPosition="after"
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "display": "flex",
+            "flexDirection": "row",
+            "paddingHorizontal": 8,
+          }
+        }
+        value="key1"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderColor": "#616161",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 20,
+              "justifyContent": "center",
+              "marginBottom": undefined,
+              "marginLeft": 8,
+              "marginRight": undefined,
+              "marginTop": undefined,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": undefined,
+                "borderRadius": 5,
+                "height": 10,
+                "opacity": 0,
+                "width": 10,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "alignSelf": "flex-start",
+              "flexDirection": "column",
+              "marginLeft": 0,
+              "marginRight": 4,
+            }
+          }
+        >
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "System",
+                "fontSize": 17,
+                "fontWeight": "400",
+                "margin": 0,
+                "marginTop": 9,
+              }
+            }
+          >
+            RadioButton1
+          </Text>
+        </View>
+      </View>
+      <View
+        accessibilityActions={
+          Array [
+            Object {
+              "name": "Select",
+            },
+          ]
+        }
+        accessibilityLabel="RadioButton2"
+        accessibilityPositionInSet={2}
+        accessibilityRole="radio"
+        accessibilitySetSize={2}
+        accessibilityState={
+          Object {
+            "disabled": false,
+            "selected": true,
+          }
+        }
+        accessible={true}
+        collapsable={false}
+        enableFocusRing={true}
+        focusable={true}
+        labelPosition="after"
+        onAccessibilityAction={[Function]}
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "flex-start",
+            "borderColor": "transparent",
+            "borderRadius": 4,
+            "borderStyle": "solid",
+            "borderWidth": 1,
+            "display": "flex",
+            "flexDirection": "row",
+            "paddingHorizontal": 8,
+          }
+        }
+        value="key2"
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "borderColor": "#0078d4",
+              "borderRadius": 10,
+              "borderStyle": "solid",
+              "borderWidth": 1,
+              "height": 20,
+              "justifyContent": "center",
+              "marginBottom": undefined,
+              "marginLeft": 8,
+              "marginRight": undefined,
+              "marginTop": undefined,
+              "width": 20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#0078d4",
+                "borderRadius": 5,
+                "height": 10,
+                "opacity": 1,
+                "width": 10,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "flex-start",
+              "alignSelf": "flex-start",
+              "flexDirection": "column",
+              "marginLeft": 0,
+              "marginRight": 4,
+            }
+          }
+        >
+          <Text
+            ellipsizeMode="tail"
+            numberOfLines={0}
+            style={
+              Object {
+                "color": "#616161",
+                "fontFamily": "System",
+                "fontSize": 17,
+                "fontWeight": "400",
+                "margin": 0,
+                "marginTop": 9,
+              }
+            }
+          >
+            RadioButton2
+          </Text>
+        </View>
+      </View>
     </View>
   </RCTFocusZone>
 </View>

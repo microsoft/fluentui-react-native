@@ -1482,6 +1482,38 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.31.0.tgz#b871e8e4e4af408033e03205572294fde5770cea"
   integrity sha512-OphIR5RkLIup7uUd4SCh0nU/WGhGw2w0ZkSYhxQ49k2KmHTA14L3W9hPxtgDfVBE8uS7/PMJ3L3tSCBiFgb9hg==
 
+"@fortawesome/fontawesome-common-types@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.0.tgz#76467a94aa888aeb22aafa43eb6ff889df3a5a7f"
+  integrity sha512-rBevIsj2nclStJ7AxTdfsa3ovHb1H+qApwrxcTVo+NNdeJiB9V75hsKfrkG5AwNcRUNxrPPiScGYCNmLMoh8pg==
+
+"@fortawesome/fontawesome-common-types@6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.1.tgz#411e02a820744d3f7e0d8d9df9d82b471beaa073"
+  integrity sha512-Sz07mnQrTekFWLz5BMjOzHl/+NooTdW8F8kDQxjWwbpOJcnoSg4vUDng8d/WR1wOxM0O+CY9Zw0nR054riNYtQ==
+
+"@fortawesome/fontawesome-svg-core@^6.2.0":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.2.1.tgz#e87e905e444b5e7b715af09b64d27b53d4c8f9d9"
+  integrity sha512-HELwwbCz6C1XEcjzyT1Jugmz2NNklMrSPjZOWMlc+ZsHIVk+XOvOXLGGQtFBwSyqfJDNgRq4xBCwWOaZ/d9DEA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.2.1"
+
+"@fortawesome/free-solid-svg-icons@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.2.0.tgz#8dcde48109354fd7a5ece8ea48d678bb91d4b5f0"
+  integrity sha512-UjCILHIQ4I8cN46EiQn0CZL/h8AwCGgR//1c4R96Q5viSRwuKVo0NdQEc4bm+69ZwC0dUvjbDqAHF1RR5FA3XA==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.2.0"
+
+"@fortawesome/react-native-fontawesome@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-native-fontawesome/-/react-native-fontawesome-0.3.0.tgz#b59c45cdae2451d15f826f937d6e1a6e9dca0c74"
+  integrity sha512-wSfetdK4+b/pvPbM2v+bZ5hfNlwtk9l3QuJo59sbMrxJalfX7BuF2WsSIWMSxfWwSsbOtY4+TUs6uw/rE59NJA==
+  dependencies:
+    humps "^2.0.1"
+    prop-types "^15.7.2"
+
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.3.0.tgz#8368869dcb735be2e7f5cb7647de78e167a251fb"
@@ -2455,15 +2487,15 @@
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-2.4.8.tgz#a1a21f3d6ecadedbc3f0b691a444ddd7baa081f8"
   integrity sha512-5NQ5XPo1B03YNqKFrV6h9L3CQaHlB80wd4ETHUEABRP2iLh7FHLVObX2GfziD+K/VJb8G4KZcZ23NFBFP1f7bg==
 
-"@react-native-windows/cli@0.68.5":
-  version "0.68.5"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.68.5.tgz#0ea22a0b332cb8c200a01ca7008a3f8f1a1e0e24"
-  integrity sha512-RO46Nata9U60rWR/EfDbPTvg3jg/qruk9/+uOvIpHK9VzpATzIsfo4QxH9cICmWM0hbHpNIKIdAmeL7Ozg+nIw==
+"@react-native-windows/cli@0.68.6":
+  version "0.68.6"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/cli/-/cli-0.68.6.tgz#f93f08646b9cef564bd633a1e7dacf4aedfc5436"
+  integrity sha512-8kEoO6Oqrd/5E7LKd6AVzZug7wF/VOLHu/rJz4LU60e+/OHPxlGQ8nvIe716Ft9iaCfxMdUcNaJpCYvC9H7StA==
   dependencies:
     "@react-native-windows/fs" "0.68.1"
     "@react-native-windows/package-utils" "0.68.1"
-    "@react-native-windows/telemetry" "0.68.4"
-    "@xmldom/xmldom" "^0.7.5"
+    "@react-native-windows/telemetry" "0.68.5"
+    "@xmldom/xmldom" "^0.7.7"
     chalk "^4.1.0"
     cli-spinners "^2.2.0"
     envinfo "^7.5.0"
@@ -2505,13 +2537,13 @@
     get-monorepo-packages "^1.2.0"
     lodash "^4.17.15"
 
-"@react-native-windows/telemetry@0.68.4":
-  version "0.68.4"
-  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.68.4.tgz#e99de2d74f9c4d1d403ff8691ef3d45fa58a72d0"
-  integrity sha512-Rw/sYKWGIs7823x+qEnpn8do9i6XqxUWECp3uF7ZIalyVYCigJQquld2HVXsmqFcZcjHnXP4a2DkvPnXfgsWIQ==
+"@react-native-windows/telemetry@0.68.5":
+  version "0.68.5"
+  resolved "https://registry.yarnpkg.com/@react-native-windows/telemetry/-/telemetry-0.68.5.tgz#e2fa578684ff1515fc5fe24fa374f5aa581ee89d"
+  integrity sha512-d5J19O059O60DGf6EWrmxqpBqlcFQK8iAeRdj0VMxvcDg+EgOkncdfhu3qvgxfr5D+ZjbVx3onZprbFD3vRWjw==
   dependencies:
     "@react-native-windows/fs" "0.68.1"
-    "@xmldom/xmldom" "^0.7.5"
+    "@xmldom/xmldom" "^0.7.7"
     applicationinsights "^2.3.1"
     ci-info "^3.2.0"
     envinfo "^7.8.1"
@@ -3962,10 +3994,10 @@
     object.fromentries "^2.0.0"
     prop-types "^15.7.0"
 
-"@xmldom/xmldom@^0.7.5":
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.8.tgz#a8d0a0067c9554c187b0d04e86ad1845053c0e06"
-  integrity sha512-PrJx38EfpitFhwmILRl37jAdBlsww6AZ6rRVK4QS7T7RHLhX7mSs647sTmgr9GIxe3qjXdesmomEgbgaokrVFg==
+"@xmldom/xmldom@^0.7.7":
+  version "0.7.9"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.9.tgz#7f9278a50e737920e21b297b8a35286e9942c056"
+  integrity sha512-yceMpm/xd4W2a85iqZyO09gTnHvXF6pyiWjD2jcOJs7hRoZtNNOO1eJlhHj1ixA+xip2hOyGn+LgcvLCMo5zXA==
 
 "@xmldom/xmldom@^0.8.0", "@xmldom/xmldom@^0.x":
   version "0.8.5"
@@ -5078,9 +5110,9 @@ basic-auth@~2.0.1:
     safe-buffer "5.1.2"
 
 beachball@^2.20.0:
-  version "2.31.4"
-  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.4.tgz#22c7a7ac551fde5b3f6eede4628082e08c498dbd"
-  integrity sha512-5bCBIhGQwk7XNvfBeoVDGbXEN9PR84xDMy4IHhtw3n2Yy1HiXcc88E+n9uTSLXveKNsBS7P3KETYf+/qgtECYw==
+  version "2.31.5"
+  resolved "https://registry.yarnpkg.com/beachball/-/beachball-2.31.5.tgz#1852c3887568a35ff18c827a029b236f3c97d976"
+  integrity sha512-MhTWa4Yfwewk1qs5GdPi6bwG+LbWfK0hIpElpD2pxTq6zwL57H4T3dlEDspxEitn1Diy5uGZIEmjRDHEBkmx/Q==
   dependencies:
     cosmiconfig "^7.0.0"
     execa "^5.0.0"
@@ -5092,7 +5124,7 @@ beachball@^2.20.0:
     semver "^7.0.0"
     toposort "^2.0.2"
     uuid "^9.0.0"
-    workspace-tools "^0.28.0"
+    workspace-tools "^0.29.0"
     yargs-parser "^21.0.0"
 
 big-integer@1.6.x:
@@ -8168,6 +8200,11 @@ human-signals@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
+
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
+  integrity sha512-E0eIbrFWUhwfXJmsbdjRQFQPrl5pTEoKlz163j1mTqqUnU9PgR4AgB8AIITzuB3vLBdxZXyZ9TDIrwB2OASz4g==
 
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
@@ -11784,7 +11821,7 @@ prompts@^2.0.1, prompts@^2.4.0, prompts@^2.4.1, prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@*, prop-types@^15.7.0, prop-types@^15.8.1:
+prop-types@*, prop-types@^15.7.0, prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -12021,9 +12058,9 @@ react-native-gradle-plugin@^0.0.6:
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
 react-native-macos@^0.68.0:
-  version "0.68.57"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.57.tgz#57e755e0a1380591417564c786f4dc6585fe08ed"
-  integrity sha512-u2kE9l1k2Ty24JWuUr1BooGHHiftYV9QEw9VZ0jdKfjqoFQs5QiDfTe4lG4nEzJKm0bBmVjKT+8Cer7tMhcm9A==
+  version "0.68.58"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.58.tgz#a2ba0af72d9c525d24e9744f056e385a03facbce"
+  integrity sha512-ihIT1GctafEz0iepYYbbyaOiXAad/xRnB2ZYhfy12E1MzkuSb5snu/GgX6MB/rdeWL8y3Er28SgJ+O5hPDa1Qg==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
@@ -12077,9 +12114,9 @@ react-native-svg@12.3.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.0.2.tgz#132b601199f4cddadd24c26237dfeda5b918b0e2"
-  integrity sha512-OZeVBwTjndLCyh7/L8TYTcbSdE2oV+mPoY0AD4awTKLMaLFycfT0cSEWlfSdj8Va2KPj+AmXwfQIoI9l6/w7/Q==
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.0.3.tgz#7d5478768a148ed5d362b31997799f8a35e3dc7a"
+  integrity sha512-7obxUE+ZVtRsQITyTSFwuH5uN2Hw3NaWvhZg8x7zu9jkvNzPOwRIKobnCUtgYX6VpabKcL+W7lNDvvaZtfvzVA==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
@@ -12089,16 +12126,16 @@ react-native-test-app@^2.0.2:
     yargs "^16.0.0"
 
 react-native-windows@^0.68.0:
-  version "0.68.20"
-  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.20.tgz#00e1fba3254d4b8a0f23a699a876a0c3f7314e97"
-  integrity sha512-rtwM4ok2YpxKnX/e86wFvtUb4VYLQlb1MTBWXjtRcm+Z02AC0QhEEbLUArxvt40mguE1XakSjxNyOEpJZLcq8Q==
+  version "0.68.21"
+  resolved "https://registry.yarnpkg.com/react-native-windows/-/react-native-windows-0.68.21.tgz#e9a8d1dde1b6c3b6a2d4dfd064594ede318e3ac2"
+  integrity sha512-M9y/Ib6hzxK010vfOWcf5z8mB5O55lNwZB9zJw53SWWUySZMz3iKxRGK1M72Qv3KCQGZN2bFPNrWBtrquKXH1A==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
     "@react-native-community/cli-platform-android" "^7.0.1"
     "@react-native-community/cli-platform-ios" "^7.0.1"
-    "@react-native-windows/cli" "0.68.5"
+    "@react-native-windows/cli" "0.68.6"
     "@react-native-windows/virtualized-list" "0.68.1"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.0.0"
@@ -14332,18 +14369,6 @@ workspace-tools@^0.27.0:
   version "0.27.0"
   resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.27.0.tgz#11e8f1ec2cb4c80d1cefcf92da2d0154dc001aa8"
   integrity sha512-5mtE5Vy0Se4brAUJXKfXNtaS9jcUcH+IGF4LNU1xJr4bW1o5bK2gV0pykodB+n6V84nRtaD/4I/9w98aujm7LA==
-  dependencies:
-    "@yarnpkg/lockfile" "^1.1.0"
-    git-url-parse "^13.0.0"
-    globby "^11.0.0"
-    jju "^1.4.0"
-    js-yaml "^4.1.0"
-    micromatch "^4.0.0"
-
-workspace-tools@^0.28.0:
-  version "0.28.1"
-  resolved "https://registry.yarnpkg.com/workspace-tools/-/workspace-tools-0.28.1.tgz#5cc9e8b224b3464afcca9c9f2f3bfbc38f066587"
-  integrity sha512-UmTALcSNAhSBT+oClcYHrudO5JIDPgrlEqyI6YlIkNtTQmqqQQ5jdw62zsN9tY5G8Eg/TP6Wb3GnsPsbj1lsiw==
   dependencies:
     "@yarnpkg/lockfile" "^1.1.0"
     git-url-parse "^13.0.0"

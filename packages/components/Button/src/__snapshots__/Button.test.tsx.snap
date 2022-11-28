@@ -22,8 +22,8 @@ exports[`Button component tests Button circular 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 9999,
       "borderWidth": 1,
       "display": "flex",
@@ -41,7 +41,7 @@ exports[`Button component tests Button circular 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -79,8 +79,8 @@ exports[`Button component tests Button composed 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -96,7 +96,7 @@ exports[`Button component tests Button composed 1`] = `
   <Text
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -135,8 +135,8 @@ exports[`Button component tests Button customized 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "pink",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -154,7 +154,7 @@ exports[`Button component tests Button customized 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -192,8 +192,8 @@ exports[`Button component tests Button default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -211,7 +211,7 @@ exports[`Button component tests Button default 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -273,7 +273,7 @@ exports[`Button component tests Button disabled 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#a19f9d",
+        "color": "#d2d0ce",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -312,8 +312,8 @@ exports[`Button component tests Button large 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -331,7 +331,7 @@ exports[`Button component tests Button large 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 17,
         "fontWeight": "600",
@@ -428,8 +428,8 @@ exports[`Button component tests Button small 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
@@ -447,7 +447,7 @@ exports[`Button component tests Button small 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 13,
         "fontWeight": "400",
@@ -486,8 +486,8 @@ exports[`Button component tests Button square 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 0,
       "borderWidth": 1,
       "display": "flex",
@@ -505,7 +505,7 @@ exports[`Button component tests Button square 1`] = `
     numberOfLines={0}
     style={
       Object {
-        "color": "#323130",
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",

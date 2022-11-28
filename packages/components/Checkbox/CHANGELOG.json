@@ -2,6 +2,57 @@
   "name": "@fluentui-react-native/checkbox",
   "entries": [
     {
+      "date": "Mon, 28 Nov 2022 11:51:05 GMT",
+      "tag": "@fluentui-react-native/checkbox_v0.17.5",
+      "version": "0.17.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/checkbox",
+            "commit": "037c4c54ac62d19633e03eb15d72084a568ab0f4",
+            "comment": "fix: android checkbox functionality"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.21",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.21.2",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/pressable to v0.9.35",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/text to v0.16.2",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @fluentui-react-native/tokens to v0.18.0",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/checkbox",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.22",
+            "commit": "890ff26064088ee92d44bb8730b8629143533451"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 16 Nov 2022 08:47:25 GMT",
       "tag": "@fluentui-react-native/checkbox_v0.17.4",
       "version": "0.17.4",

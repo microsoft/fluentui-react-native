@@ -52,6 +52,6 @@ export const extractOuterStylePropsAndroid = memoize((style: ViewStyle = {}): [o
       display,
       opacity,
     },
-    { borderWidth: 0, ...restOfProps },
+    { ...restOfProps },
   ];
 });
