@@ -144,10 +144,10 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...keyProps,
       ...filteredProps,
       ...extra,
+      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
       onPress,
       numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
-      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
     };
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
