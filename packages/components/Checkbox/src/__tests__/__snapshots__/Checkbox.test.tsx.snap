@@ -20,16 +20,25 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   }
   accessible={true}
   defaultChecked={true}
-  disabled={true}
   enableFocusRing={true}
   focusable={false}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+    ]
+  }
   labelPosition="before"
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -52,20 +61,26 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   }
 >
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
-        "color": "#a19f9d",
+        "color": "#bdbdbd",
         "fontFamily": "Segoe UI",
         "fontSize": 14,
         "fontWeight": "400",
         "margin": 0,
-        "marginEnd": 12,
+        "marginEnd": 10,
       }
     }
   >
     All Props Checkbox
   </Text>
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "#690a19",
@@ -83,8 +98,8 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#f3f2f1",
+        "backgroundColor": "#f0f0f0",
+        "borderColor": "#e0e0e0",
         "borderRadius": 9999,
         "borderWidth": 1,
         "height": 20,
@@ -95,9 +110,9 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={10}
-      bbWidth={10}
-      color={-4342339}
+      bbHeight={16}
+      bbWidth={16}
+      color={4290624957}
       focusable={false}
       meetOrSlice={0}
       minX={0}
@@ -110,26 +125,26 @@ exports[`Checkbox component tests Checkbox all props 1`] = `
           },
           Object {
             "color": "#bdbdbd",
-            "height": 10,
+            "height": 16,
             "opacity": 1,
-            "width": 10,
+            "width": 16,
           },
           Object {
             "flex": 0,
-            "height": 10,
-            "width": 10,
+            "height": 16,
+            "width": 16,
           },
         ]
       }
-      tintColor={-4342339}
-      vbHeight={8}
-      vbWidth={11}
+      tintColor={4290624957}
+      vbHeight={12}
+      vbWidth={12}
     >
       <RNSVGGroup
         opacity={1}
       >
         <RNSVGPath
-          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+          d="M9.76497 3.20474C10.0661 3.48915 10.0797 3.96383 9.79526 4.26497L5.54526 8.76497C5.40613 8.91228 5.21332 8.99703 5.01071 8.99993C4.8081 9.00282 4.61295 8.92361 4.46967 8.78033L2.21967 6.53033C1.92678 6.23744 1.92678 5.76257 2.21967 5.46967C2.51256 5.17678 2.98744 5.17678 3.28033 5.46967L4.98463 7.17397L8.70474 3.23503C8.98915 2.9339 9.46383 2.92033 9.76497 3.20474Z"
           fill={
             Array [
               2,
@@ -169,12 +184,22 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
   defaultChecked={false}
   enableFocusRing={true}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -192,7 +217,7 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
-      "paddingHorizontal": undefined,
+      "paddingHorizontal": 12,
     }
   }
 >
@@ -212,9 +237,9 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={8}
-      bbWidth={8}
-      color={-16181}
+      bbHeight={12}
+      bbWidth={12}
+      color={4294951115}
       focusable={false}
       meetOrSlice={0}
       minX={0}
@@ -227,26 +252,26 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
           },
           Object {
             "color": "pink",
-            "height": 8,
+            "height": 12,
             "opacity": 0.7,
-            "width": 8,
+            "width": 12,
           },
           Object {
             "flex": 0,
-            "height": 8,
-            "width": 8,
+            "height": 12,
+            "width": 12,
           },
         ]
       }
-      tintColor={-16181}
-      vbHeight={8}
-      vbWidth={11}
+      tintColor={4294951115}
+      vbHeight={12}
+      vbWidth={12}
     >
       <RNSVGGroup
         opacity={0.7}
       >
         <RNSVGPath
-          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+          d="M9.76497 3.20474C10.0661 3.48915 10.0797 3.96383 9.79526 4.26497L5.54526 8.76497C5.40613 8.91228 5.21332 8.99703 5.01071 8.99993C4.8081 9.00282 4.61295 8.92361 4.46967 8.78033L2.21967 6.53033C1.92678 6.23744 1.92678 5.76257 2.21967 5.46967C2.51256 5.17678 2.98744 5.17678 3.28033 5.46967L4.98463 7.17397L8.70474 3.23503C8.98915 2.9339 9.46383 2.92033 9.76497 3.20474Z"
           fill={
             Array [
               2,
@@ -262,15 +287,18 @@ exports[`Checkbox component tests Checkbox all tokens 1`] = `
     </RNSVGSvgView>
   </View>
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
         "color": "yellow",
-        "fontFamily": "Wingdings",
-        "fontSize": 20,
-        "fontWeight": "900",
+        "fontFamily": "Segoe UI",
+        "fontSize": 12,
+        "fontWeight": "400",
         "margin": 0,
-        "marginEnd": 9,
-        "marginStart": 12,
+        "marginEnd": 7,
+        "marginStart": 8,
       }
     }
   >
@@ -300,17 +328,22 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
   accessible={true}
   enableFocusRing={true}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
-  onClick={[Function]}
   onFocus={[Function]}
+  onHoverIn={[Function]}
+  onHoverOut={[Function]}
+  onKeyUp={[Function]}
   onPress={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  onPressIn={[Function]}
+  onPressOut={[Function]}
   style={
     Object {
       "alignItems": "center",
@@ -320,7 +353,7 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
-      "paddingHorizontal": undefined,
+      "paddingHorizontal": 12,
     }
   }
 >
@@ -329,7 +362,7 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
       Object {
         "alignItems": "center",
         "backgroundColor": "#ffffff",
-        "borderColor": "#323130",
+        "borderColor": "#616161",
         "borderRadius": 2,
         "borderWidth": 1,
         "height": 16,
@@ -340,9 +373,8 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={8}
-      bbWidth={8}
-      color={-14672098}
+      bbHeight={12}
+      bbWidth={12}
       focusable={false}
       meetOrSlice={0}
       minX={0}
@@ -354,27 +386,26 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
             "borderWidth": 0,
           },
           Object {
-            "color": "#201f1e",
-            "height": 8,
+            "color": undefined,
+            "height": 12,
             "opacity": 0,
-            "width": 8,
+            "width": 12,
           },
           Object {
             "flex": 0,
-            "height": 8,
-            "width": 8,
+            "height": 12,
+            "width": 12,
           },
         ]
       }
-      tintColor={-14672098}
-      vbHeight={8}
-      vbWidth={11}
+      vbHeight={12}
+      vbWidth={12}
     >
       <RNSVGGroup
         opacity={0}
       >
         <RNSVGPath
-          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+          d="M9.76497 3.20474C10.0661 3.48915 10.0797 3.96383 9.79526 4.26497L5.54526 8.76497C5.40613 8.91228 5.21332 8.99703 5.01071 8.99993C4.8081 9.00282 4.61295 8.92361 4.46967 8.78033L2.21967 6.53033C1.92678 6.23744 1.92678 5.76257 2.21967 5.46967C2.51256 5.17678 2.98744 5.17678 3.28033 5.46967L4.98463 7.17397L8.70474 3.23503C8.98915 2.9339 9.46383 2.92033 9.76497 3.20474Z"
           fill={
             Array [
               2,
@@ -392,11 +423,13 @@ exports[`Checkbox component tests Checkbox composed 1`] = `
   <Text
     style={
       Object {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontSize": 12,
         "fontWeight": "400",
-        "marginStart": 12,
+        "letterSpacing": undefined,
+        "lineHeight": undefined,
+        "marginStart": 8,
       }
     }
   >
@@ -427,12 +460,22 @@ exports[`Checkbox component tests Checkbox default 1`] = `
   defaultChecked={false}
   enableFocusRing={true}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -448,7 +491,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
       "display": "flex",
       "flexDirection": "row",
       "padding": 8,
-      "paddingHorizontal": undefined,
+      "paddingHorizontal": 12,
     }
   }
 >
@@ -457,7 +500,7 @@ exports[`Checkbox component tests Checkbox default 1`] = `
       Object {
         "alignItems": "center",
         "backgroundColor": "#ffffff",
-        "borderColor": "#323130",
+        "borderColor": "#616161",
         "borderRadius": 2,
         "borderWidth": 1,
         "height": 16,
@@ -468,9 +511,8 @@ exports[`Checkbox component tests Checkbox default 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={8}
-      bbWidth={8}
-      color={-14672098}
+      bbHeight={12}
+      bbWidth={12}
       focusable={false}
       meetOrSlice={0}
       minX={0}
@@ -482,27 +524,26 @@ exports[`Checkbox component tests Checkbox default 1`] = `
             "borderWidth": 0,
           },
           Object {
-            "color": "#201f1e",
-            "height": 8,
+            "color": undefined,
+            "height": 12,
             "opacity": 0,
-            "width": 8,
+            "width": 12,
           },
           Object {
             "flex": 0,
-            "height": 8,
-            "width": 8,
+            "height": 12,
+            "width": 12,
           },
         ]
       }
-      tintColor={-14672098}
-      vbHeight={8}
-      vbWidth={11}
+      vbHeight={12}
+      vbWidth={12}
     >
       <RNSVGGroup
         opacity={0}
       >
         <RNSVGPath
-          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+          d="M9.76497 3.20474C10.0661 3.48915 10.0797 3.96383 9.79526 4.26497L5.54526 8.76497C5.40613 8.91228 5.21332 8.99703 5.01071 8.99993C4.8081 9.00282 4.61295 8.92361 4.46967 8.78033L2.21967 6.53033C1.92678 6.23744 1.92678 5.76257 2.21967 5.46967C2.51256 5.17678 2.98744 5.17678 3.28033 5.46967L4.98463 7.17397L8.70474 3.23503C8.98915 2.9339 9.46383 2.92033 9.76497 3.20474Z"
           fill={
             Array [
               2,
@@ -518,14 +559,17 @@ exports[`Checkbox component tests Checkbox default 1`] = `
     </RNSVGSvgView>
   </View>
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
-        "marginStart": 12,
+        "marginStart": 8,
       }
     }
   >
@@ -555,12 +599,22 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
   defaultChecked={false}
   enableFocusRing={true}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onChange={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -585,7 +639,7 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
       Object {
         "alignItems": "center",
         "backgroundColor": "#ffffff",
-        "borderColor": "#323130",
+        "borderColor": "#616161",
         "borderRadius": 2,
         "borderWidth": 1,
         "height": 16,
@@ -596,9 +650,8 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
   >
     <RNSVGSvgView
       align="xMidYMid"
-      bbHeight={8}
-      bbWidth={8}
-      color={-14672098}
+      bbHeight={12}
+      bbWidth={12}
       focusable={false}
       meetOrSlice={0}
       minX={0}
@@ -610,27 +663,26 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
             "borderWidth": 0,
           },
           Object {
-            "color": "#201f1e",
-            "height": 8,
+            "color": undefined,
+            "height": 12,
             "opacity": 0,
-            "width": 8,
+            "width": 12,
           },
           Object {
             "flex": 0,
-            "height": 8,
-            "width": 8,
+            "height": 12,
+            "width": 12,
           },
         ]
       }
-      tintColor={-14672098}
-      vbHeight={8}
-      vbWidth={11}
+      vbHeight={12}
+      vbWidth={12}
     >
       <RNSVGGroup
         opacity={0}
       >
         <RNSVGPath
-          d="M10.2637 1.26367L4 7.5332L0.736328 4.26367L1.26367 3.73633L4 6.4668L9.73633 0.736328L10.2637 1.26367Z"
+          d="M9.76497 3.20474C10.0661 3.48915 10.0797 3.96383 9.79526 4.26497L5.54526 8.76497C5.40613 8.91228 5.21332 8.99703 5.01071 8.99993C4.8081 9.00282 4.61295 8.92361 4.46967 8.78033L2.21967 6.53033C1.92678 6.23744 1.92678 5.76257 2.21967 5.46967C2.51256 5.17678 2.98744 5.17678 3.28033 5.46967L4.98463 7.17397L8.70474 3.23503C8.98915 2.9339 9.46383 2.92033 9.76497 3.20474Z"
           fill={
             Array [
               2,
@@ -646,11 +698,14 @@ exports[`Checkbox component tests Checkbox no label 1`] = `
     </RNSVGSvgView>
   </View>
   <Text
+    ellipsizeMode="tail"
+    numberOfLines={0}
+    onAccessibilityTap={[Function]}
     style={
       Object {
-        "color": "#323130",
+        "color": "#242424",
         "fontFamily": "Segoe UI",
-        "fontSize": 14,
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }

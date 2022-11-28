@@ -18,12 +18,25 @@ exports[`Switch Default 1`] = `
     }
   }
   accessible={true}
-  collapsable={false}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -34,7 +47,7 @@ exports[`Switch Default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "borderColor": undefined,
+      "borderColor": "transparent",
       "borderRadius": 4,
       "borderWidth": 2,
       "flexDirection": "row-reverse",
@@ -47,9 +60,9 @@ exports[`Switch Default 1`] = `
   <Text
     style={
       Object {
-        "color": "#616161",
+        "color": "#424242",
         "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -69,7 +82,7 @@ exports[`Switch Default 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": undefined,
+          "backgroundColor": "#ffffff",
           "borderColor": "#616161",
           "borderRadius": 10,
           "borderWidth": 1,
@@ -119,12 +132,25 @@ exports[`Switch Disabled 1`] = `
     }
   }
   accessible={true}
-  collapsable={false}
   focusable={false}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
   onAccessibilityAction={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -135,7 +161,7 @@ exports[`Switch Disabled 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "borderColor": undefined,
+      "borderColor": "transparent",
       "borderRadius": 4,
       "borderWidth": 2,
       "flexDirection": "row-reverse",
@@ -148,9 +174,9 @@ exports[`Switch Disabled 1`] = `
   <Text
     style={
       Object {
-        "color": "#616161",
+        "color": "#424242",
         "fontFamily": "Segoe UI",
-        "fontSize": 13,
+        "fontSize": 12,
         "fontWeight": "400",
         "margin": 0,
       }
@@ -170,7 +196,7 @@ exports[`Switch Disabled 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "backgroundColor": "#e0e0e0",
+          "backgroundColor": "#f0f0f0",
           "borderColor": "#e0e0e0",
           "borderRadius": 10,
           "borderWidth": 1,
