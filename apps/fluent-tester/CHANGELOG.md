@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 28 Nov 2022 17:44:48 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Nov 2022 19:49:35 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.109.0
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Minor changes
+
+- Add Dynamic Type support (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.3.3
+- Bump @fluentui-react-native/badge to v0.2.3
+- Bump @fluentui-react-native/button to v0.32.1
+- Bump @fluentui-react-native/dropdown to v0.5.19
+- Bump @fluentui-react-native/experimental-button to v0.16.59
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.6
+- Bump @fluentui-react-native/experimental-link to v0.2.3
+- Bump @fluentui-react-native/experimental-menu-button to v0.5.20
+- Bump @fluentui-react-native/experimental-radio-group to v0.8.1
+- Bump @fluentui-react-native/experimental-tabs to v0.8.3
+- Bump @fluentui-react-native/experimental-text to v0.11.25
+- Bump @fluentui-react-native/icon to v0.15.3
+- Bump @fluentui-react-native/menu to v1.0.78
+- Bump @fluentui-react-native/notification to v0.19.3
+- Bump @fluentui-react-native/stack to v0.7.27
+- Bump @fluentui-react-native/switch to v0.7.6
+- Bump @fluentui-react-native/text to v0.17.0
+- Bump @fluentui-react-native/theme-tokens to v0.21.3
+- Bump @fluentui/react-native to v0.33.3
 
 ## 0.108.1
 

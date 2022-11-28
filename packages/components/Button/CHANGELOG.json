@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Mon, 28 Nov 2022 19:49:35 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.1",
+      "version": "0.32.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/icon to v0.15.3",
+            "commit": "1b0f4b66f9ed9c9be49ad296d1b0d2f57c56bbc4"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/text to v0.17.0",
+            "commit": "1b0f4b66f9ed9c9be49ad296d1b0d2f57c56bbc4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Nov 2022 11:51:05 GMT",
       "tag": "@fluentui-react-native/button_v0.32.0",
       "version": "0.32.0",

@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-native-font-metrics",
   "entries": [
     {
+      "date": "Mon, 28 Nov 2022 19:49:35 GMT",
+      "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/experimental-native-font-metrics",
+            "commit": "1b0f4b66f9ed9c9be49ad296d1b0d2f57c56bbc4",
+            "comment": "Send new font metrics information through a JS event"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 07 Nov 2022 21:42:58 GMT",
       "tag": "@fluentui-react-native/experimental-native-font-metrics_v0.2.0",
       "version": "0.2.0",

@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Send new font metrics information through a JS event",
-  "packageName": "@fluentui-react-native/experimental-native-font-metrics",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
