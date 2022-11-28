@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Added padding start and end to LayoutTokens",
+  "packageName": "@fluentui-react-native/tokens",
+  "email": "ayushsinghs@yahoo.in",
+  "dependentChangeType": "patch"
+}
