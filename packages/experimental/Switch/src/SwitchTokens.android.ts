@@ -36,6 +36,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     thumbColor: t.colors.neutralBackgroundLightStatic,
     justifyContent: 'flex-end',
     disabled: {
+      color: t.colors.neutralBackgroundDisabled,
       trackColor: t.colors.brandBackgroundDisabled,
       thumbColor: t.colors.neutralBackgroundLightStaticDisabled,
     },
@@ -45,6 +46,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     thumbColor: t.colors.neutralBackgroundLightStatic,
     justifyContent: 'flex-start',
     disabled: {
+      color: t.colors.neutralBackgroundDisabled,
       trackColor: t.colors.neutralBackground5,
       thumbColor: t.colors.neutralBackgroundLightStaticDisabled,
     },
