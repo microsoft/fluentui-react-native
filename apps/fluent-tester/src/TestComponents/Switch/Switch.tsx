@@ -8,6 +8,7 @@ import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { CustomizedSwitch } from './CustomizedSwitch';
+import { Platform } from 'react-native-windows';
 
 const styles = StyleSheet.create({
   square: {
@@ -68,7 +69,7 @@ const LabelPosition: React.FunctionComponent = () => {
     <View style={commonTestStyles.settingsPicker}>
       <Switch defaultChecked={true} labelPosition={'before'} label={'before'} />
       <Switch defaultChecked={true} labelPosition={'after'} label={'after'} />
-      <Switch defaultChecked={true} labelPosition={'above'} label={'above'} />
+      {Platform.OS !== 'android' && <Switch defaultChecked={true} labelPosition={'above'} label={'above'} />}
     </View>
   );
 };

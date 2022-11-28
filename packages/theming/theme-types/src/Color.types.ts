@@ -526,6 +526,8 @@ export interface AliasColorTokens {
   neutralBackground5Selected: ColorValue;
   neutralBackground6: ColorValue;
   neutralBackgroundInverted: ColorValue;
+  neutralBackgroundLightStatic: ColorValue;
+  neutralBackgroundLightStaticDisabled: ColorValue;
 
   subtleBackground?: ColorValue;
   subtleBackgroundHover?: ColorValue;

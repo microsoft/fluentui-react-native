@@ -250,7 +250,7 @@ export const tests: TestDescription[] = [
     name: 'Switch',
     component: SwitchTest,
     testPage: HOMEPAGE_SWITCH_BUTTON,
-    platforms: ['win32'],
+    platforms: ['win32', 'android'],
   },
   {
     name: 'Tabs',

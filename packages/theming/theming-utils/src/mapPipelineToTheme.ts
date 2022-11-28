@@ -112,6 +112,9 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     compoundBrandStroke1Pressed: pipelineOutput.compoundBrandStroke1.strokeColorPressed,
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
 
+    neutralBackgroundLightStatic: pipelineOutput.neutralBackgroundLightStatic.fillColorRest,
+    neutralBackgroundLightStaticDisabled: pipelineOutput.neutralBackgroundLightStaticDisabled.fillColorRest,
+
     transparentStroke: pipelineOutput.transparentStroke.strokeColorRest,
     transparentStrokeInteractive: pipelineOutput.transparentStroke.strokeColorHover,
     transparentStrokeDisabled: pipelineOutput.transparentStroke.strokeColorDisabled,
