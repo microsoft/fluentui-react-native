@@ -61,7 +61,7 @@
       "@fluentui-react-native/e2e-testing/appium-windows-driver",
       "@fluentui-react-native/e2e-testing/appium-mac2-driver",
       "@fluentui-react-native/e2e-testing/appium-xcuitest-driver",
-      "@fluentui-react-native/e2e-testing/appium-windows-driver"
+      "@fluentui-react-native/tester-win32/appium-windows-driver"
     ]
   },
   "resolutions": {
