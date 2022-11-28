@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Updated tester app text for mobile",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}
