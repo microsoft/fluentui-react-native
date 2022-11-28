@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "FocusZone (macOS): move focus between first responders instead of key views",
-  "packageName": "@fluentui-react-native/focus-zone",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
