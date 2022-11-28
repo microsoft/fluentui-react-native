@@ -12,7 +12,7 @@
 
 ### UWP Additional Prerequisites
 
-- [UWP Prerequisites](../../../fluent-tester/docs/windows.md)
+- [UWP Prerequisites](../fluent-tester/docs/windows.md)
 
 ## MacOS Prerequisites
 
@@ -193,7 +193,7 @@ You can view the spec report right as E2E testing is finished. It shows the fail
 
 In the example below, the SVG test is the one failing the run, and at the bottom, you can see an error message.
 
-![E2E Error Debugging](../../../../assets/E2E/E2E_spec_reporter.png)
+![E2E Error Debugging](../../assets/E2E/E2E_spec_reporter.png)
 
 When running E2E locally, after failing an E2E run, you will get a screenshot of the error in /errorShots/ of the platform you tested.
 
@@ -211,9 +211,9 @@ This will bundle all the generated information and create a report for you to re
 
 When an E2E test run fails within our CI, crucial information is output to Azure-Pipelines to help you debug the failure. Follow these steps:
 
-1. On the PR page, navigate to the "Checks" tab, ensure you've selected the "PR" tab on the left, and press "View more details on Azure Pipelines" at the bottom. ![E2E_Debugging_Step_1](../../../../assets/E2E/E2E_Debugging_Step_1.png)
+1. On the PR page, navigate to the "Checks" tab, ensure you've selected the "PR" tab on the left, and press "View more details on Azure Pipelines" at the bottom. ![E2E_Debugging_Step_1](../../assets/E2E/E2E_Debugging_Step_1.png)
 
-2. Click on the "# published" section. ![E2E_Debugging_Step_2](../../../../assets/E2E/E2E_Debugging_Step_2.png)
+2. Click on the "# published" section. ![E2E_Debugging_Step_2](../../assets/E2E/E2E_Debugging_Step_2.png)
 
 3. Here, you have crucial information to help you debug the problem.
 
@@ -228,4 +228,4 @@ When an E2E test run fails within our CI, crucial information is output to Azure
      2. Navigate to it's location within your cmd, and type:
         - C:\pathToFolder\allure-report\E2E_win32_Dump> `allure open`
 
-![E2E_Debugging_Step_3](../../../../assets/E2E/E2E_Debugging_Step_3.png)
+![E2E_Debugging_Step_3](../../assets/E2E/E2E_Debugging_Step_3.png)
