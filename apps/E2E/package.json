@@ -39,7 +39,8 @@
     "appium-windows-driver": "2.0.7",
     "appium-xcuitest-driver": "4.11.1",
     "@babel/core": "^7.8.0",
-    "@babel/runtime": "^7.8.0"
+    "@babel/runtime": "^7.8.0",
+    "@fluentui-react-native/focus-zone": "^0.11.7"
   },
   "rnx-kit": {
     "reactNativeVersion": "0.68",
