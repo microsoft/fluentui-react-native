@@ -12,7 +12,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   fontSize: 16,
   fontWeight: '400',
   fontLineHeight: 24,
-
+  color: t.colors.neutralForeground1,
   beforeContent: {
     trackMarginLeft: 16,
   },
