@@ -1464,54 +1464,6 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.31.0.tgz#b871e8e4e4af408033e03205572294fde5770cea"
   integrity sha512-OphIR5RkLIup7uUd4SCh0nU/WGhGw2w0ZkSYhxQ49k2KmHTA14L3W9hPxtgDfVBE8uS7/PMJ3L3tSCBiFgb9hg==
 
-"@fluentui-react-native/focus-zone@^0.11.7":
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/focus-zone/-/focus-zone-0.11.7.tgz#e8d3e4a4dec34a5035ac67d9a8ae88958181aeed"
-  integrity sha512-xUW7t+2DVcJJPnjKNxIXpIjpi4L02FyQM5QQs0hevpgJI8O57qaZfCm2B/zVv+O4OmTyrlexDHCJET9i3J9IYQ==
-  dependencies:
-    "@fluentui-react-native/component-cache" "^1.4.2"
-    "@fluentui-react-native/interactive-hooks" ">=0.21.2 <1.0.0"
-    "@uifabricshared/foundation-composable" ">=0.11.1 <1.0.0"
-    "@uifabricshared/foundation-settings" ">=0.12.1 <1.0.0"
-
-"@fluentui-react-native/framework@>=0.8.21 <1.0.0":
-  version "0.8.21"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/framework/-/framework-0.8.21.tgz#1f7e9f03ea5bf5f665659fe6db15f8272d5828e7"
-  integrity sha512-soyLv5e6CCmIxa9O+FplmG3h+0gdLqxijlThlhF6A3TEf5DpqDKzPPpLgLHYpaEvfj8mNsYT4Ya7GUeZxHffTA==
-  dependencies:
-    "@fluentui-react-native/composition" ">=0.8.1 <1.0.0"
-    "@fluentui-react-native/default-theme" ">=0.16.12 <1.0.0"
-    "@fluentui-react-native/immutable-merge" "^1.1.7"
-    "@fluentui-react-native/memo-cache" "^1.1.7"
-    "@fluentui-react-native/merge-props" ">=0.5.1 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.23.1 <1.0.0"
-    "@fluentui-react-native/tokens" ">=0.18.0 <1.0.0"
-    "@fluentui-react-native/use-slot" ">=0.3.1 <1.0.0"
-    "@fluentui-react-native/use-slots" ">=0.7.1 <1.0.0"
-    "@fluentui-react-native/use-styling" ">=0.9.1 <1.0.0"
-    "@fluentui-react-native/use-tokens" ">=0.3.1 <1.0.0"
-    tslib "^2.3.1"
-
-"@fluentui-react-native/interactive-hooks@>=0.21.2 <1.0.0":
-  version "0.21.2"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/interactive-hooks/-/interactive-hooks-0.21.2.tgz#52f45dc98bf44a6d0b978317344e96dcca8d9e3d"
-  integrity sha512-PAILCMa8phlgtIaqqqs2sqOadsv3myeO3vFdpFa1pEMM+Mb65cR6DJvkjnLlUdGCX3N9HG0GJrg8Gbhl6aPW0w==
-  dependencies:
-    "@fluentui-react-native/adapters" "^0.10.0"
-    "@fluentui-react-native/framework" ">=0.8.21 <1.0.0"
-    "@fluentui-react-native/memo-cache" "^1.1.7"
-    invariant "^2.2.0"
-    tslib "^2.3.1"
-
-"@fluentui-react-native/tokens@>=0.18.0 <1.0.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/tokens/-/tokens-0.18.0.tgz#9851e5ae6c420e410b7928522b8a494756731b5c"
-  integrity sha512-32Jr7xDmnzY9RvEehuFGO35EpwC/H6qhRgThe2Jb1aII5xxU3weJHIYZQ6xzNPK3TFCBRdlxf44s96gnTkDw2A==
-  dependencies:
-    "@fluentui-react-native/adapters" ">=0.10.0 <1.0.0"
-    "@fluentui-react-native/theme-types" ">=0.23.1 <1.0.0"
-    tslib "^2.3.1"
-
 "@fortawesome/fontawesome-common-types@6.2.1":
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.1.tgz#411e02a820744d3f7e0d8d9df9d82b471beaa073"
@@ -1525,9 +1477,6 @@
     "@fortawesome/fontawesome-common-types" "6.2.1"
 
 "@fortawesome/free-solid-svg-icons@^6.2.0":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.2.1.tgz#2290ea5adcf1537cbd0c43de6feb38af02141d27"
-  integrity sha512-oKuqrP5jbfEPJWTij4sM+/RvgX+RMFwx3QZCZcK9PrBDgxC35zuc7AOFsyMjMd/PIFPeB2JxyqDr5zs/DZFPPw==
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.2.1.tgz#2290ea5adcf1537cbd0c43de6feb38af02141d27"
   integrity sha512-oKuqrP5jbfEPJWTij4sM+/RvgX+RMFwx3QZCZcK9PrBDgxC35zuc7AOFsyMjMd/PIFPeB2JxyqDr5zs/DZFPPw==
