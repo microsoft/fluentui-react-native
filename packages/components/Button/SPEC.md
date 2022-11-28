@@ -20,7 +20,7 @@ Basic examples:
 
 ```jsx
 <Button>Text</Button>
-<Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} />
+<Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} iconOnly/>
 <Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</Button>
 <Button appearance="primary">Text</Button>
 <Button disabled>Text</Button>
@@ -52,13 +52,14 @@ Win32:
 
 The `Button` component has several apparance variants depending on where it's being used:
 
-- The default `Button` is rendered with its default styling indicating a trigger for an action.
-- appearance="primary": The `Button` is styled to emphasize that it represents the primary action.
+- The default `Button` is rendered with its default styling indicating a trigger for an action. For mobile endpoints this is the same as 'accent'.
+- appearance="primary"/appearance="accent": The `Button` is styled to emphasize that it represents the primary action. Accent is equivalent to primary and is based on mobile platform naming conventions.
 - appearance="subtle": The `Button` is styled to blend into its background to become less emphasized.
+- appearance="outline": The `Button` is styled similar to 'subtle' button but also includes a border. Implemented for mobile endpoints only. Maps to default on other platforms.
 
 ### Icon
 
-The `Button` component can include an `icon` that appears before or after its `children`. If an `icon` is provided without any other `children` passed into `Button`, then the `Button` becomes an icon-only `Button`.
+The `Button` component can include an `icon` that appears before or after its `children`. If an `icon` is provided without any other `children` passed into `Button`, then the `Button` becomes an icon-only `Button`. This prop is required for proper styling.
 
 ### Shape
 
@@ -66,17 +67,25 @@ The `Button` component can include an `icon` that appears before or after its `c
 - shape="circular": The button has completely round corners. A button of equal width and height will be a circle.
 - shape="square": The button has right-angle corners.
 
+**Shape modification is not explicitly supported on Android and is provided as an 'as-is' functionality.**
+
 ### Sizes
 
 The `Button` component supports different sizing with at least three different sizes: `small`, `medium`, and `large`. `Small` is the default on `win32`, `medium` is the default on other platforms.
+
+**Size modification is not explicitly supported on Android and is provided as an 'as-is' functionality.**
 
 ### Block
 
 The `Button` component can completely fill the width of its container.
 
+**'Block' is not explicitly supported on Android and is provided as an 'as-is' functionality.**
+
 ### Loading
 
 The `Button` component can be loading if it's waiting for another action to occur before allowing itself to be interacted with.
+
+**'Loading' is not explicitly supported on Android and is provided as an 'as-is' functionality.**
 
 ## API
 
@@ -99,13 +108,16 @@ Below is the set of props the button supports:
 export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary': Emphasizes the button as a primary action.
-   * - 'subtle': Minimzes emphasis to blend into the background until hovered or focused.
+   * - 'primary' or 'accent': Emphasizes the button as a primary action. 'Accent' added to support Mobile platform naming convention, maps to 'primary'.
+   * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+   * - 'outline': Similar to subtle but has a border. Implemented for mobile endpoints only. Maps to default on other platforms.
+   * @default 'primary' on mobile endpoints, other platform have a separate style when no appearance is passed.
    */
-  appearance?: 'primary' | 'subtle';
+  appearance?: 'primary' | 'subtle' | 'accent' | 'outline';
 
   /**
    * A button can fill the width of its container.
+   * Not supported from Fluent Android, renders as-is.
    * @default false
    */
   block?: boolean;
@@ -129,12 +141,13 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
 
   /**
    * Button contains only icon, there's no text content
-   * Must be set for button to style correctly when button has not content.
+   * Must be set for button to style correctly when button has no content.
    */
   iconOnly?: boolean;
 
   /**
    * A button can format its icon to appear before or after its content.
+   * 'after' is not supported from Fluent Android, renders as-is.
    * @default 'before'
    */
   iconPosition?: 'before' | 'after';
@@ -142,6 +155,7 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * A button can show a loading indicator if it is waiting for another action to happen before allowing itself to
    * be interacted with.
+   * Not supported from Fluent Android, renders as-is.
    * @default false
    */
   loading?: boolean;
@@ -153,6 +167,7 @@ export interface ButtonProps extends Omit<PressablePropsExtended, 'onPress'> {
 
   /**
    * A button can be rounded, circular, or square.
+   * Not supported from Fluent Android, renders as-is.
    * @default 'rounded'
    */
   shape?: 'rounded' | 'circular' | 'square';

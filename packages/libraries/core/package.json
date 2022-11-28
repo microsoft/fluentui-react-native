@@ -1,6 +1,6 @@
 {
   "name": "@fluentui/react-native",
-  "version": "0.33.1",
+  "version": "0.33.2",
   "description": "A react-native component library that implements the Fluent Design System.",
   "repository": {
     "type": "git",
@@ -28,22 +28,22 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/button": "0.31.1",
-    "@fluentui-react-native/callout": "0.21.36",
-    "@fluentui-react-native/checkbox": "0.17.4",
-    "@fluentui-react-native/contextual-menu": "0.20.1",
-    "@fluentui-react-native/focus-trap-zone": "0.9.35",
-    "@fluentui-react-native/focus-zone": "0.11.6",
-    "@fluentui-react-native/interactive-hooks": "0.21.1",
-    "@fluentui-react-native/link": "0.17.8",
-    "@fluentui-react-native/menu-button": "0.9.1",
-    "@fluentui-react-native/persona": "0.13.21",
-    "@fluentui-react-native/persona-coin": "0.12.2",
-    "@fluentui-react-native/pressable": "0.9.34",
-    "@fluentui-react-native/radio-group": "0.16.6",
-    "@fluentui-react-native/separator": "0.13.2",
-    "@fluentui-react-native/tabs": "0.11.1",
-    "@fluentui-react-native/text": "0.16.1"
+    "@fluentui-react-native/button": "0.32.0",
+    "@fluentui-react-native/callout": "0.21.37",
+    "@fluentui-react-native/checkbox": "0.17.5",
+    "@fluentui-react-native/contextual-menu": "0.20.2",
+    "@fluentui-react-native/focus-trap-zone": "0.9.36",
+    "@fluentui-react-native/focus-zone": "0.11.7",
+    "@fluentui-react-native/interactive-hooks": "0.21.2",
+    "@fluentui-react-native/link": "0.17.9",
+    "@fluentui-react-native/menu-button": "0.9.2",
+    "@fluentui-react-native/persona": "0.13.22",
+    "@fluentui-react-native/persona-coin": "0.12.3",
+    "@fluentui-react-native/pressable": "0.9.35",
+    "@fluentui-react-native/radio-group": "0.16.7",
+    "@fluentui-react-native/separator": "0.13.3",
+    "@fluentui-react-native/tabs": "0.11.2",
+    "@fluentui-react-native/text": "0.16.2"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

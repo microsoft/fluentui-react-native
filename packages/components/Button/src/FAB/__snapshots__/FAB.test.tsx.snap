@@ -36,6 +36,20 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   }
 >
   <Text
+    accessible={true}
+    style={
+      Object {
+        "color": "#fff",
+        "fontFamily": "Arial",
+        "fontSize": 16,
+        "fontWeight": "400",
+        "margin": 0,
+      }
+    }
+  >
+    ♣
+  </Text>
+  <Text
     ellipsizeMode="tail"
     numberOfLines={0}
     style={
@@ -152,6 +166,20 @@ exports[`Default FAB (iOS) 1`] = `
       }
     }
   >
+    <Text
+      accessible={true}
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "margin": 0,
+        }
+      }
+    >
+      ♣
+    </Text>
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}

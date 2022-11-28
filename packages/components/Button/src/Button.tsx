@@ -4,7 +4,7 @@ import { Platform, Pressable, View } from 'react-native';
 import { ActivityIndicator } from '@fluentui-react-native/experimental-activity-indicator';
 import { buttonName, ButtonType, ButtonProps } from './Button.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
-import { stylingSettings, getDefaultSize } from './Button.styling';
+import { stylingSettings, getDefaultSize, getPlatformSpecificAppearance } from './Button.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useButton } from './useButton';
 import { Icon, createIconProps } from '@fluentui-react-native/icon';
@@ -23,7 +23,7 @@ export const buttonLookup = (layer: string, state: IPressableState, userProps: B
   return (
     state[layer] ||
     userProps[layer] ||
-    layer === userProps['appearance'] ||
+    layer === getPlatformSpecificAppearance(userProps['appearance']) ||
     layer === userProps['size'] ||
     (!userProps['size'] && layer === getDefaultSize()) ||
     layer === userProps['shape'] ||
