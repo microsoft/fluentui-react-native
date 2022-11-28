@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/focus-zone
 
-This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Nov 2022 11:51:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.11.7
+
+Mon, 28 Nov 2022 11:51:05 GMT
+
+### Patches
+
+- FocusZone (macOS): move focus between first responders instead of key views (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/interactive-hooks to v0.21.2
 
 ## 0.11.6
 
