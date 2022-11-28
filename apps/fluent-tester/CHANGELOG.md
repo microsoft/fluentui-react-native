@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 28 Nov 2022 11:51:05 GMT and should not be manually modified.
+This log was last generated on Mon, 28 Nov 2022 17:44:48 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.108.1
+
+Mon, 28 Nov 2022 17:44:48 GMT
+
+### Patches
+
+- Fix FocusTrapZone test page component not trapping focus (winlarry@microsoft.com)
+- Bump @fluentui-react-native/theme-tokens to v0.21.3
 
 ## 0.108.0
 

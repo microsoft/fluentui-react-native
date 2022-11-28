@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 28 Nov 2022 17:44:48 GMT",
+      "tag": "@fluentui-react-native/tester_v0.108.1",
+      "version": "0.108.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c07ddd7a7854bfc23a126776f8913822128d0fa2",
+            "comment": "Fix FocusTrapZone test page component not trapping focus"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.21.3",
+            "commit": "c07ddd7a7854bfc23a126776f8913822128d0fa2"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Nov 2022 11:51:05 GMT",
       "tag": "@fluentui-react-native/tester_v0.108.0",
       "version": "0.108.0",
