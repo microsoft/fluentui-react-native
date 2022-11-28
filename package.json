@@ -70,8 +70,7 @@
     "jpeg-js": "^0.4.4",
     "moment": "^2.29.4",
     "shell-quote": "^1.7.3",
-    "@types/react": "^17.0.2",
-    "@appium/types": "0.5.0"
+    "@types/react": "^17.0.2"
   },
   "rnx-kit": {
     "reactNativeVersion": "0.68",
