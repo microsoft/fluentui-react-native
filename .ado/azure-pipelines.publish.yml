@@ -50,6 +50,11 @@ jobs:
         displayName: 'yarn test [test]'
 
       - script: |
+          yarn bundle
+        workingDirectory: apps/E2E
+        displayName: 'bundle e2e spec files'
+
+      - script: |
           echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish
         displayName: Enable No-Publish (npm)
         condition: ${{ parameters.skipNpmPublish }}
