@@ -18,7 +18,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
       borderRadius: globalTokens.corner.radius40,
       spacingLabelAfter: globalTokens.size160,
       labelIsBefore: {
-        spacingLabelBefore: globalTokens.size160,
+        spacingLabelBefore: globalTokens.size120,
         spacingLabelAfter: 0,
       },
     },
