@@ -91,7 +91,8 @@ export class BasePage {
    * If this UI element is located, we know the page as loaded correctly. The UI element we look for is a Text component that contains
    * the title of the page (this._testPage returns that UI element)  */
   async isPageLoaded(): Promise<boolean> {
-    return (await this._testPage).isDisplayed();
+    const onPage = (await (await this._testPage).isDisplayed()) || (await (await this._primaryComponent).isDisplayed());
+    return onPage;
   }
 
   /* Returns true if the test page's button is displayed (the button that navigates to each test page) */
