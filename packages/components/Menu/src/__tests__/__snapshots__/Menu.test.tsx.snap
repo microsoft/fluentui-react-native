@@ -2,16 +2,7 @@
 
 exports[`Menu component tests Menu default 1`] = `
 <View
-  accessibilityActions={
-    Array [
-      Object {
-        "name": "Expand",
-      },
-      Object {
-        "name": "Collapse",
-      },
-    ]
-  }
+  accessibilityActions={Array []}
   accessibilityLabel="Default"
   accessibilityRole="button"
   accessibilityState={
@@ -20,27 +11,14 @@ exports[`Menu component tests Menu default 1`] = `
     }
   }
   accessible={true}
+  collapsable={false}
   enableFocusRing={true}
   focusable={true}
-  keyUpEvents={
-    Array [
-      Object {
-        "key": " ",
-      },
-      Object {
-        "key": "Enter",
-      },
-    ]
-  }
   onAccessibilityAction={[Function]}
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -51,17 +29,16 @@ exports[`Menu component tests Menu default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#ffffff",
-      "borderColor": "#d1d1d1",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "minHeight": 32,
-      "minWidth": 64,
-      "padding": 3,
-      "paddingHorizontal": 7,
+      "minWidth": 96,
+      "padding": 8,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }
@@ -69,18 +46,17 @@ exports[`Menu component tests Menu default 1`] = `
   <Text
     ellipsizeMode="tail"
     numberOfLines={0}
-    onAccessibilityTap={[Function]}
     style={
       Object {
-        "color": "#242424",
-        "fontFamily": "Segoe UI",
-        "fontSize": 12,
-        "fontWeight": "400",
+        "color": "#ffffff",
+        "fontFamily": "System",
+        "fontSize": 15,
+        "fontWeight": "600",
         "margin": 0,
-        "marginBottom": 1,
-        "marginEnd": -2,
+        "marginBottom": 0,
+        "marginEnd": 0,
         "marginStart": 0,
-        "marginTop": -1,
+        "marginTop": 0,
       }
     }
   >
@@ -92,16 +68,7 @@ exports[`Menu component tests Menu default 1`] = `
 exports[`Menu component tests Menu defaultOpen 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
@@ -110,27 +77,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -141,17 +95,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -159,18 +112,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -183,7 +135,7 @@ Array [
     borderWidth={1}
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -206,7 +158,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -219,26 +171,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -249,27 +188,24 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -287,26 +223,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -317,27 +240,25 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
+              "marginTop": 4,
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -355,16 +276,7 @@ Array [
 exports[`Menu component tests Menu open 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
@@ -373,27 +285,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -404,17 +303,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -422,18 +320,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -452,7 +349,7 @@ Array [
     }
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -475,7 +372,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -488,26 +385,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -518,27 +402,24 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -556,16 +437,7 @@ Array [
 exports[`Menu component tests Menu open checkbox and divider 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
@@ -574,27 +446,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -605,17 +464,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -623,18 +481,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -653,7 +510,7 @@ Array [
     }
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -676,7 +533,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -697,26 +554,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -727,14 +571,12 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -742,7 +584,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -755,7 +597,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -765,9 +607,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -793,13 +635,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -814,7 +655,7 @@ Array [
               "backgroundColor": "#d1d1d1",
               "display": "flex",
               "height": 1,
-              "margin": 2,
+              "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
             }
@@ -837,26 +678,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -867,14 +695,13 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
+              "marginTop": 4,
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -895,7 +722,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -906,8 +733,8 @@ Array [
               ]
             }
             tintColor={4290624957}
-            vbHeight={12}
-            vbWidth={12}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -933,13 +760,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
                 "color": "#bdbdbd",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -957,16 +783,7 @@ Array [
 exports[`Menu component tests Menu open checkbox checked 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
@@ -975,27 +792,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1006,17 +810,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1024,18 +827,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -1054,7 +856,7 @@ Array [
     }
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -1077,7 +879,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -1098,26 +900,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1128,14 +917,12 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -1143,7 +930,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1156,7 +943,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1166,9 +953,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -1194,13 +981,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1215,7 +1001,7 @@ Array [
               "backgroundColor": "#d1d1d1",
               "display": "flex",
               "height": 1,
-              "margin": 2,
+              "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
             }
@@ -1238,26 +1024,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1268,14 +1041,13 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
+              "marginTop": 4,
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -1283,7 +1055,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1296,7 +1068,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1306,9 +1078,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -1334,13 +1106,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1358,16 +1129,7 @@ Array [
 exports[`Menu component tests Menu open checkbox defaultChecked 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
@@ -1376,27 +1138,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1407,17 +1156,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1425,18 +1173,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -1455,7 +1202,7 @@ Array [
     }
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -1478,7 +1225,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -1499,26 +1246,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1529,14 +1263,12 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -1544,7 +1276,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1557,7 +1289,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1567,9 +1299,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -1595,13 +1327,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1616,7 +1347,7 @@ Array [
               "backgroundColor": "#d1d1d1",
               "display": "flex",
               "height": 1,
-              "margin": 2,
+              "margin": 4,
               "marginVertical": undefined,
               "width": undefined,
             }
@@ -1639,26 +1370,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1669,14 +1387,13 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
+              "marginTop": 4,
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -1684,7 +1401,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1697,7 +1414,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1707,9 +1424,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -1735,13 +1452,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -1759,16 +1475,7 @@ Array [
 exports[`Menu component tests Menu open radio 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Open"
     accessibilityRole="button"
     accessibilityState={
@@ -1777,27 +1484,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -1808,17 +1502,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -1826,18 +1519,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -1856,7 +1548,7 @@ Array [
     }
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -1879,7 +1571,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -1900,26 +1592,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -1930,14 +1609,12 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -1945,7 +1622,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -1958,7 +1635,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -1968,9 +1645,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -1996,13 +1673,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -2028,26 +1704,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2058,14 +1721,13 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
+              "marginTop": 4,
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
@@ -2073,7 +1735,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -2086,7 +1748,7 @@ Array [
                   "borderWidth": 0,
                 },
                 Object {
-                  "marginEnd": 4,
+                  "marginEnd": 8,
                 },
                 Object {
                   "flex": 0,
@@ -2096,9 +1758,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
     <svg>
@@ -2124,13 +1786,12 @@ Array [
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -2148,16 +1809,7 @@ Array [
 exports[`Menu component tests Menu submenu 1`] = `
 Array [
   <View
-    accessibilityActions={
-      Array [
-        Object {
-          "name": "Expand",
-        },
-        Object {
-          "name": "Collapse",
-        },
-      ]
-    }
+    accessibilityActions={Array []}
     accessibilityLabel="Default"
     accessibilityRole="button"
     accessibilityState={
@@ -2166,27 +1818,14 @@ Array [
       }
     }
     accessible={true}
+    collapsable={false}
     enableFocusRing={true}
     focusable={true}
-    keyUpEvents={
-      Array [
-        Object {
-          "key": " ",
-        },
-        Object {
-          "key": "Enter",
-        },
-      ]
-    }
     onAccessibilityAction={[Function]}
     onAccessibilityTap={[Function]}
     onBlur={[Function]}
     onClick={[Function]}
     onFocus={[Function]}
-    onKeyDown={[Function]}
-    onKeyUp={[Function]}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
     onResponderRelease={[Function]}
@@ -2197,17 +1836,16 @@ Array [
       Object {
         "alignItems": "center",
         "alignSelf": "flex-start",
-        "backgroundColor": "#ffffff",
-        "borderColor": "#d1d1d1",
+        "backgroundColor": "#0f6cbd",
+        "borderColor": "#0f548c",
         "borderRadius": 4,
         "borderWidth": 1,
         "display": "flex",
         "flexDirection": "row",
         "justifyContent": "center",
-        "minHeight": 32,
-        "minWidth": 64,
-        "padding": 3,
-        "paddingHorizontal": 7,
+        "minWidth": 96,
+        "padding": 8,
+        "paddingHorizontal": 15,
         "width": undefined,
       }
     }
@@ -2215,18 +1853,17 @@ Array [
     <Text
       ellipsizeMode="tail"
       numberOfLines={0}
-      onAccessibilityTap={[Function]}
       style={
         Object {
-          "color": "#242424",
-          "fontFamily": "Segoe UI",
-          "fontSize": 12,
-          "fontWeight": "400",
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 15,
+          "fontWeight": "600",
           "margin": 0,
-          "marginBottom": 1,
-          "marginEnd": -2,
+          "marginBottom": 0,
+          "marginEnd": 0,
           "marginStart": 0,
-          "marginTop": -1,
+          "marginTop": 0,
         }
       }
     >
@@ -2245,7 +1882,7 @@ Array [
     }
     doNotTakePointerCapture={false}
     onDismiss={[Function]}
-    setInitialFocus={true}
+    setInitialFocus={false}
     style={
       Object {
         "backgroundColor": "#faf9f8",
@@ -2268,7 +1905,7 @@ Array [
             "display": "flex",
             "maxWidth": 300,
             "minWidth": 128,
-            "paddingVertical": 4,
+            "padding": 8,
           }
         }
       >
@@ -2281,26 +1918,13 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-            ]
-          }
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2311,27 +1935,24 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -2341,16 +1962,7 @@ Array [
           </Text>
         </View>
         <View
-          accessibilityActions={
-            Array [
-              Object {
-                "name": "Expand",
-              },
-              Object {
-                "name": "Collapse",
-              },
-            ]
-          }
+          accessibilityActions={Array []}
           accessibilityLabel="Option 2"
           accessibilityRole="menuitem"
           accessibilityState={
@@ -2360,33 +1972,14 @@ Array [
             }
           }
           accessible={true}
+          collapsable={false}
           enableFocusRing={true}
           focusable={true}
-          keyDownEvents={
-            Array [
-              Object {
-                "key": " ",
-              },
-              Object {
-                "key": "Enter",
-              },
-              Object {
-                "key": "ArrowLeft",
-              },
-              Object {
-                "key": "ArrowRight",
-              },
-            ]
-          }
           onAccessibilityAction={[Function]}
           onAccessibilityTap={[Function]}
           onBlur={[Function]}
           onClick={[Function]}
           onFocus={[Function]}
-          onKeyDown={[Function]}
-          onKeyUp={[Function]}
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
           onResponderRelease={[Function]}
@@ -2397,27 +1990,24 @@ Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "borderRadius": 0,
+              "borderRadius": 4,
               "display": "flex",
               "flexDirection": "row",
               "maxWidth": 300,
-              "minHeight": 24,
+              "minHeight": 32,
               "minWidth": 160,
-              "padding": 4,
-              "paddingHorizontal": 8,
             }
           }
         >
           <Text
             ellipsizeMode="tail"
             numberOfLines={0}
-            onAccessibilityTap={[Function]}
             style={
               Object {
-                "color": "#242424",
+                "color": "#424242",
                 "flexGrow": 1,
-                "fontFamily": "Segoe UI",
-                "fontSize": 12,
+                "fontFamily": "System",
+                "fontSize": 15,
                 "fontWeight": "400",
                 "margin": 0,
               }
@@ -2429,7 +2019,7 @@ Array [
             align="xMidYMid"
             bbHeight={16}
             bbWidth={16}
-            color={4280558628}
+            color={4282532418}
             focusable={false}
             height={16}
             meetOrSlice={0}
@@ -2448,9 +2038,9 @@ Array [
                 },
               ]
             }
-            tintColor={4280558628}
-            vbHeight={12}
-            vbWidth={12}
+            tintColor={4282532418}
+            vbHeight={16}
+            vbWidth={16}
             width={16}
             xml="
           <svg>

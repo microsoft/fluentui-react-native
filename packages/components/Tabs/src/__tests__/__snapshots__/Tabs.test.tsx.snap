@@ -4,14 +4,11 @@ exports[`Tabs FocusZone props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -48,15 +45,12 @@ exports[`Tabs FocusZone props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -122,15 +116,12 @@ exports[`Tabs FocusZone props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -168,7 +159,7 @@ exports[`Tabs FocusZone props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -196,15 +187,12 @@ exports[`Tabs FocusZone props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -261,14 +249,11 @@ exports[`Tabs default props 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -305,15 +290,12 @@ exports[`Tabs default props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -351,7 +333,7 @@ exports[`Tabs default props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -379,15 +361,12 @@ exports[`Tabs default props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -453,15 +432,12 @@ exports[`Tabs default props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -518,14 +494,11 @@ exports[`Tabs disabled 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -562,15 +535,12 @@ exports[`Tabs disabled 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -636,15 +606,12 @@ exports[`Tabs disabled 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -710,15 +677,12 @@ exports[`Tabs disabled 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -756,7 +720,7 @@ exports[`Tabs disabled 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -775,14 +739,11 @@ exports[`Tabs header text and count 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -820,15 +781,12 @@ exports[`Tabs header text and count 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -880,7 +838,7 @@ exports[`Tabs header text and count 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -909,15 +867,12 @@ exports[`Tabs header text and count 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -998,15 +953,12 @@ exports[`Tabs header text and count 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1077,14 +1029,11 @@ exports[`Tabs headers only 1`] = `
 <View
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -1121,15 +1070,12 @@ exports[`Tabs headers only 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1167,7 +1113,7 @@ exports[`Tabs headers only 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1195,15 +1141,12 @@ exports[`Tabs headers only 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1269,15 +1212,12 @@ exports[`Tabs headers only 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1335,14 +1275,11 @@ exports[`Tabs props 1`] = `
   accessibilityLabel="Tabs"
   accessibilityRole="tablist"
   accessible={true}
+  collapsable={false}
   focusable={true}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyUp={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -1393,15 +1330,12 @@ exports[`Tabs props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1438,7 +1372,7 @@ exports[`Tabs props 1`] = `
           <Text
             style={
               Object {
-                "color": "#bdbdbd",
+                "color": "neutralForegroundDisabled",
                 "fontFamily": "Segoe UI",
                 "fontSize": 14,
                 "fontWeight": "400",
@@ -1482,15 +1416,12 @@ exports[`Tabs props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
@@ -1542,7 +1473,7 @@ exports[`Tabs props 1`] = `
           style={
             Object {
               "alignSelf": "stretch",
-              "backgroundColor": "#0078d4",
+              "backgroundColor": "#0f6cbd",
               "borderRadius": 2,
               "marginBottom": 2,
               "marginHorizontal": 10,
@@ -1571,15 +1502,12 @@ exports[`Tabs props 1`] = `
           }
         }
         accessible={true}
+        collapsable={false}
         focusable={true}
         onAccessibilityAction={[Function]}
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
         onResponderRelease={[Function]}
