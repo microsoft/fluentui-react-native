@@ -2,13 +2,17 @@
 /* eslint-disable */
 module.exports = {
   "0.68": {
+    "@fluentui-react-native/e2e-testing": {
+      "name": "@fluentui-react-native/e2e-testing",
+      "version": "1.1.0"
+    },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.109.0"
+      "version": "0.110.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.28.15"
+      "version": "0.29.0"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",

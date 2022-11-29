@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Moving E2E testing files to its own package within /apps. This allows us to export as an NPM package easier (and allows us to consume the testing code outside of this repo)",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "safreibe@microsoft.com",
-  "dependentChangeType": "patch"
-}
