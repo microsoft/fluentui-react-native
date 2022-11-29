@@ -6,8 +6,6 @@ import { PartialShadowDefinition, ThemeShadowDefinition } from './Shadow.types';
 
 type TwoLevelPartial<T> = { [K in keyof T]?: Partial<T[K]> };
 
-type SpacingValue = number | string;
-
 export interface Spacing {
   s2: string;
   s1: string;
@@ -15,27 +13,6 @@ export interface Spacing {
   // m is now defined as a v2 type
   l1: string;
   l2: string;
-  // v2 types
-  sizeNone?: SpacingValue;
-  size20?: SpacingValue;
-  size40?: SpacingValue;
-  size60?: SpacingValue;
-  size80?: SpacingValue;
-  size100?: SpacingValue;
-  size120?: SpacingValue;
-  size160?: SpacingValue;
-  size200?: SpacingValue;
-  size240?: SpacingValue;
-  size280?: SpacingValue;
-  size320?: SpacingValue;
-  size360?: SpacingValue;
-  size400?: SpacingValue;
-  size480?: SpacingValue;
-  size560?: SpacingValue;
-  size640?: SpacingValue;
-  size720?: SpacingValue;
-  size800?: SpacingValue;
-  size1200?: SpacingValue;
 }
 
 /**
