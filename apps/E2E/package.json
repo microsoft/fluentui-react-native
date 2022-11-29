@@ -16,7 +16,7 @@
     "directory": "apps/E2E"
   },
   "files": [
-    "src/*",
+    "src/**/*",
     "dist/*"
   ],
   "devDependencies": {
