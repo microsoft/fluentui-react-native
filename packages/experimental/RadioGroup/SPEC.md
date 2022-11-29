@@ -10,19 +10,37 @@ If using FURN's theming, the `RadioGroup` and sub-component `Radio` requires use
 
 ## Sample Code
 
-Basic examples:
+### Uncontrolled RadioGroup
 
-```jsx
-<Button>Text</Button>
-<Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }} />
-<Button icon={{ svgSource: { uri: 'https://www.example.com/test.svg', viewBox: '0 0 100 100' } }}>Text</Button>
-<Button appearance="primary">Text</Button>
-<Button disabled>Text</Button>
-<Button size="small">Text</Button>
-<Button size="large">Text</Button>
+```tsx
+const radiogroup = (
+  <RadioGroup label="Uncontrolled RadioGroup" defaultValue="X" onChange={onChange}>
+    <Radio label="Option W" value="W" />
+    <Radio label="Option X" value="X" />
+    <Radio label="Option Y" value="Y" />
+    <Radio label="Option Z" value="Z" />
+  </RadioGroup>
+);
 ```
 
-More examples on the [Test pages for the Button](../../../apps/fluent-tester/src/TestComponents/Button). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
+### Controlled RadioGroup
+
+```tsx
+const [selectedKey, setSelectedKey] = React.useState('C');
+
+const onChange = React.useCallback((key: string) => {
+  setSelectedKey(key);
+}, []);
+
+const radiogroup = (
+  <RadioGroup label="Controlled RadioGroup" value={selectedKey} onChange={onChange}>
+    <Radio label="Option A" value="A" />
+    <Radio label="Option B" value="B" />
+    <Radio label="Option C" value="C" />
+    <Radio label="Option D" value="D" />
+  </RadioGroup>
+);
+```
 
 ## Visual Examples
 
