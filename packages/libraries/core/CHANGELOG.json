@@ -2,6 +2,45 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Tue, 29 Nov 2022 20:39:50 GMT",
+      "tag": "@fluentui/react-native_v0.33.5",
+      "version": "0.33.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/callout to v0.21.38",
+            "commit": "2f6ea0cc82dd0e1f24d68dba83d69555772f01af"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/contextual-menu to v0.20.4",
+            "commit": "2f6ea0cc82dd0e1f24d68dba83d69555772f01af"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/menu-button to v0.9.5",
+            "commit": "2f6ea0cc82dd0e1f24d68dba83d69555772f01af"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/separator to v0.13.4",
+            "commit": "2f6ea0cc82dd0e1f24d68dba83d69555772f01af"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/tabs to v0.11.4",
+            "commit": "2f6ea0cc82dd0e1f24d68dba83d69555772f01af"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Nov 2022 15:14:15 GMT",
       "tag": "@fluentui/react-native_v0.33.4",
       "version": "0.33.4",

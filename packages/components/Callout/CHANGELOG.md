@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Nov 2022 20:39:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.38
+
+Tue, 29 Nov 2022 20:39:49 GMT
+
+### Patches
+
+- Update config (ruaraki@microsoft.com)
 
 ## 0.21.37
 

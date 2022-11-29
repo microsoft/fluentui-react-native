@@ -1,8 +1,21 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 29 Nov 2022 15:14:15 GMT and should not be manually modified.
+This log was last generated on Tue, 29 Nov 2022 20:39:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.110.2
+
+Tue, 29 Nov 2022 20:39:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/dropdown to v0.5.21
+- Bump @fluentui-react-native/experimental-menu-button to v0.5.22
+- Bump @fluentui-react-native/experimental-tabs to v0.8.4
+- Bump @fluentui-react-native/menu to v1.0.80
+- Bump @fluentui-react-native/theme-tokens to v0.21.3
+- Bump @fluentui/react-native to v0.33.5
 
 ## 0.110.1
 
