@@ -1,0 +1,14 @@
+{
+  "extends": "@fluentui-react-native/scripts/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "importHelpers": true,
+    "outDir": "lib",
+    "paths": {
+      "*": ["*", "*.win32", "./*"],
+      "src/*": ["./src/*", "src"]
+    },
+    "types": ["webdriverio/async", "@wdio/jasmine-framework", "node", "@types/jasmine"]
+  },
+  "include": ["src"]
+}
