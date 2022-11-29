@@ -288,5 +288,5 @@ export class BasePage {
   }
 
   // Default timeout to wait until page is displayed (10s)
-  waitForUiEvent: number = 25000;
+  waitForUiEvent = 25000;
 }

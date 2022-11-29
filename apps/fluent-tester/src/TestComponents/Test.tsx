@@ -7,6 +7,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
 import { Button } from '@fluentui-react-native/experimental-button';
+import { testProps } from './Common/TestProps';
 
 export type TestSection = {
   name: string;
@@ -118,7 +119,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
-        <Button testID="Focus_Button" style={styles.e2eFocusButton}>
+        <Button {...testProps('Focus_Button')} style={styles.e2eFocusButton}>
           E2E Testing Button
         </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
@@ -171,7 +172,7 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text style={styles.section} variant="headerSemibold" testID={section.testID}>
+            <Text style={styles.section} variant="headerSemibold" {...testProps(section.testID)}>
               {section.name}
             </Text>
             <Separator />

@@ -10,6 +10,7 @@ import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
 import { ROOT_VIEW } from '../../E2E/src/common/consts';
+import { testProps } from './TestComponents/Common/TestProps';
 
 // uncomment the below lines to enable message spy
 /**
@@ -98,7 +99,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     return (
       <View style={fluentTesterStyles.header}>
         <Text
-          testID={BASE_TESTPAGE}
+          {...testProps(BASE_TESTPAGE)}
           style={fluentTesterStyles.testHeader}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
@@ -120,7 +121,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           style={fluentTesterStyles.testHeader}
           variant="heroLargeSemibold"
           color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
+          {...testProps(BASE_TESTPAGE)}
         >
           ⚛ FluentUI Tests
         </Text>
@@ -146,7 +147,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestList: React.FunctionComponent = () => {
     return (
       <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID={TESTPAGE_BUTTONS_SCROLLVIEWER}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}>
           {sortedTestComponents.map((description, index) => {
             return (
               <Button
@@ -155,7 +156,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 disabled={index == selectedTestIndex}
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
-                testID={description.testPage}
+                {...testProps(description.testPage)}
                 // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
                 {...(index === 0 && { componentRef: focusOnMountRef })}
               >
@@ -187,9 +188,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                     }
                   }}
                   style={mobileStyles.testListItem}
-                  testID={description.testPage}
-                  // Please read http://93days.me/testing-react-native-application/ to understand why we set accessibilityLabel here.
-                  accessibilityLabel={description.testPage}
+                  {...testProps(description.testPage)}
                 >
                   {description.name}
                 </Text>
@@ -237,7 +236,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   return (
     // TODO: Figure out why making this view accessible breaks element querying on iOS.
-    <View accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW} style={commonTestStyles.flex}>
+    <View accessible={Platform.OS !== 'ios'} {...testProps(ROOT_VIEW)} style={commonTestStyles.flex}>
       <RootView style={themedStyles.root}>
         <TesterContent />
       </RootView>
