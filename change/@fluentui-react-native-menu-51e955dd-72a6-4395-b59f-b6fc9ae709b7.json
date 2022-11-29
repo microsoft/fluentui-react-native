@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update config",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
