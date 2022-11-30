@@ -10,11 +10,13 @@ PODS:
     - React-jsi (= 0.68.5)
     - ReactCommon/turbomodule/core (= 0.68.5)
   - fmt (6.2.1)
-  - FRNAvatar (0.16.20):
+  - FRNAvatar (0.16.24):
     - MicrosoftFluentUI (= 0.8.3)
     - React
   - FRNDatePicker (0.7.3):
     - MicrosoftFluentUI (= 0.8.3)
+    - React
+  - FRNFontMetrics (0.2.0):
     - React
   - glog (0.3.5)
   - MicrosoftFluentUI (0.8.3):
@@ -384,7 +386,7 @@ PODS:
     - glog
   - react-native-menu (0.1.2):
     - React
-  - react-native-slider (4.3.2):
+  - react-native-slider (4.3.3):
     - React-Core
   - React-perflogger (0.68.5)
   - React-RCTActionSheet (0.68.5):
@@ -468,6 +470,7 @@ DEPENDENCIES:
   - FBReactNativeSpec (from `../../../node_modules/react-native/React/FBReactNativeSpec`)
   - FRNAvatar (from `../../../packages/experimental/Avatar`)
   - FRNDatePicker (from `../../../packages/experimental/NativeDatePicker`)
+  - FRNFontMetrics (from `../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec`)
   - glog (from `../../../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - RCT-Folly (from `../../../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../../../node_modules/react-native/Libraries/RCTRequired`)
@@ -522,6 +525,8 @@ EXTERNAL SOURCES:
     :path: "../../../packages/experimental/Avatar"
   FRNDatePicker:
     :path: "../../../packages/experimental/NativeDatePicker"
+  FRNFontMetrics:
+    :path: "../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec"
   glog:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/glog.podspec"
   RCT-Folly:
@@ -595,8 +600,9 @@ SPEC CHECKSUMS:
   FBLazyVector: 2b47ff52037bd9ae07cc9b051c9975797814b736
   FBReactNativeSpec: dd89c4a5591e20015aa55c6efbf9c7740a83efbf
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
-  FRNAvatar: de1aec8a9011ade478f2148677b4f2c076d77110
+  FRNAvatar: 3911021ed95a08f19e0ee696712aa48b6dff010a
   FRNDatePicker: 241cd55b8d2b63d4427d782951f31504f09fbe1a
+  FRNFontMetrics: 472e7952e454ece364a91babd8bb2a32219676e7
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
   MicrosoftFluentUI: e30487dd18aba04beeed4caf1ce1988073f8b03a
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -613,7 +619,7 @@ SPEC CHECKSUMS:
   React-jsinspector: eb202e43b3879aba9a14f3f65788aec85d4e1ea9
   React-logger: 98f663b292a60967ebbc6d803ae96c1381183b6d
   react-native-menu: 9fe07f72e075b250295eeae25425490cc9608951
-  react-native-slider: e540525ea731783850802b7af457d8551edb0711
+  react-native-slider: 7d19220da2f2ae7cbb9aa80127cb73c597fa221f
   React-perflogger: 0458a87ea9a7342079e7a31b0d32b3734fb8415f
   React-RCTActionSheet: 22538001ea2926dea001111dd2846c13a0730bc9
   React-RCTAnimation: 732ce66878d4aa151d56a0d142b1105aa12fd313
@@ -632,6 +638,6 @@ SPEC CHECKSUMS:
   RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   Yoga: c4d61225a466f250c35c1ee78d2d0b3d41fe661c
 
-PODFILE CHECKSUM: eeba196fb25cf059c631787109cecd08a4ac85a6
+PODFILE CHECKSUM: 819f14a4e3e6e335a0b1993fe37edad50db02d86
 
 COCOAPODS: 1.11.3
