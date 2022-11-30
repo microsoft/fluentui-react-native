@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "switch initial tokenization and tester app changes",
+  "packageName": "@fluentui-react-native/switch",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
