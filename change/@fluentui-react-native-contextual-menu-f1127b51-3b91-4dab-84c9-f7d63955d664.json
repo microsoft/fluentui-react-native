@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update jest configs for ContextualMenu, FocusTrapZone, FocusZone",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

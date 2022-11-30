@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-radio-group
 
-This log was last generated on Mon, 28 Nov 2022 19:49:35 GMT and should not be manually modified.
+This log was last generated on Wed, 30 Nov 2022 21:33:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.2
+
+Wed, 30 Nov 2022 21:33:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.8
 
 ## 0.8.1
 

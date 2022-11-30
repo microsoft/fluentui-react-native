@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Wed, 30 Nov 2022 21:33:19 GMT",
+      "tag": "@fluentui-react-native/menu_v1.0.81",
+      "version": "1.0.81",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.8",
+            "commit": "ed6ad65f29fd421eccbfc22d3ecb5725b5360f83"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Nov 2022 20:39:50 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.80",
       "version": "1.0.80",

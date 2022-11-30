@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-radio-group",
   "entries": [
     {
+      "date": "Wed, 30 Nov 2022 21:33:19 GMT",
+      "tag": "@fluentui-react-native/experimental-radio-group_v0.8.2",
+      "version": "0.8.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/experimental-radio-group",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.8",
+            "commit": "ed6ad65f29fd421eccbfc22d3ecb5725b5360f83"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Nov 2022 19:49:35 GMT",
       "tag": "@fluentui-react-native/experimental-radio-group_v0.8.1",
       "version": "0.8.1",
