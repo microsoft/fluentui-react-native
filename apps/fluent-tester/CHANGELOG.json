@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 30 Nov 2022 01:20:53 GMT",
+      "tag": "@fluentui-react-native/tester_v0.110.2",
+      "version": "0.110.2",
+      "comments": {
+        "none": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "eac52db4ba7c027276eb9ff03fa9aa6d280de07b",
+            "comment": "Ignore xcode.env files in gitignore"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.21.3",
+            "commit": "eac52db4ba7c027276eb9ff03fa9aa6d280de07b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 29 Nov 2022 20:39:50 GMT",
       "tag": "@fluentui-react-native/tester_v0.110.2",
       "version": "0.110.2",
