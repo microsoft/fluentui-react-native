@@ -6,19 +6,21 @@ import { Platform } from 'react-native';
 import { defaultFABTokens } from './FABTokens';
 import { defaultFABColorTokens } from './FABColorTokens';
 
-export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small'];
+export const FABStates: (keyof FABTokens)[] = ['focused', 'pressed', 'subtle', 'disabled', 'large', 'small', 'hasContent'];
 
 export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABTokens> = {
   tokens: [defaultFABTokens, defaultFABColorTokens, fabName],
   states: FABStates,
   slotProps: {
-    ...(Platform.OS == 'android' && {
+    ...(Platform.OS === 'android' && {
       rippleContainer: buildProps(
         (tokens: FABTokens) => {
           return {
             style: {
               flexDirection: 'row',
               alignSelf: 'baseline',
+              borderColor: tokens.borderInnerColor,
+              borderWidth: tokens.borderInnerWidth,
               borderRadius: tokens.borderRadius,
               overflow: 'hidden',
             },
@@ -61,9 +63,7 @@ export const stylingSettings: UseStylingOptions<FABProps, FABSlotProps, FABToken
     ),
     icon: buildProps(
       (tokens: FABTokens) => ({
-        style: {
-          tintColor: tokens.iconColor,
-        },
+        color: tokens.iconColor,
         height: tokens.iconSize,
         width: tokens.iconSize,
       }),

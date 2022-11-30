@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-avatar",
-  "version": "0.16.24",
+  "version": "0.16.25",
   "description": "A cross-platform Avatar component using the Fluent Design System. Currently only implemented on iOS",
   "license": "MIT",
   "author": "Microsoft <fluentuinativeowners@microsoft.com>",
@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/component-cache": "^1.4.2",
-    "@fluentui-react-native/framework": "0.8.20"
+    "@fluentui-react-native/framework": "0.8.21"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
