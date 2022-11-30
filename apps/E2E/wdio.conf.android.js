@@ -6,7 +6,7 @@ const jasmineDefaultTimeout = 60000; // 60 seconds for Jasmine test timeout
 
 exports.config = {
   runner: 'local', // Where should your test be launched
-  specs: ['src/**/specs/*.ios.ts'],
+  specs: ['src/**/specs/*.android.ts'],
   exclude: [],
 
   maxInstances: 30,
@@ -16,7 +16,7 @@ exports.config = {
       platformName: 'android',
       'appium:appPackage': 'com.microsoft.reacttestapp',
       'appium:appActivity': 'MainActivity',
-      'appium:noReset': true,
+      // 'appium:noReset': true,
       'appium:automationName': 'uiautomator2',
     },
   ],
@@ -162,6 +162,7 @@ exports.config = {
    * @param {Object} suite suite details
    */
   // afterSuite: function (suite) {
+  //   browser.back();
   // },
   /**
    * Runs after a WebdriverIO command gets executed

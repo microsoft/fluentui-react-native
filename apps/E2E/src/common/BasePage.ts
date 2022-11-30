@@ -15,6 +15,9 @@ export async function By(identifier: string) {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
+  if (PLATFORM === MobilePlatform.Android) {
+    return await $(`android=new UiSelector().description("${identifier}")`);
+  }
   return await QueryWithChaining(identifier);
 }
 
@@ -134,7 +137,17 @@ export class BasePage {
       }
       default:
       case MobilePlatform.Android:
-        // Todo
+        await browser.waitUntil(
+          async () => {
+            const bottomElementSelector = `new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("${this._pageButton}"))`;
+            await $(`android=${bottomElementSelector}`);
+            return await (await this._pageButton).isDisplayed();
+          },
+          {
+            timeout: this.waitForUiEvent,
+            timeoutMsg: errorMsg,
+          },
+        );
         break;
     }
   }
