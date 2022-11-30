@@ -35,7 +35,7 @@
     "@fluentui-react-native/theme-tokens": ">=0.21.3 <1.0.0",
     "@fluentui-react-native/tokens": ">=0.18.0 <1.0.0",
     "@fluentui-react-native/use-styling": ">=0.9.1 <1.0.0",
-    "react-native-svg": "12.4.4",
+    "react-native-svg": "12.5.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
