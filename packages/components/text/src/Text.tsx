@@ -83,9 +83,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     [onPress, onAccessibilityTap],
   );
 
-  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
-  const dynamicTypeVariant = Platform.OS === 'ios' ? tokens.dynamicTypeRamp : undefined;
-
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
     color,
@@ -113,6 +110,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
 
+  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+  const dynamicTypeVariant = Platform.OS === 'ios' ? tokenStyle.dynamicTypeRamp : undefined;
+
   // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
   let scaleStyleAdjustments: TextTokens = emptyProps;
   // tokenStyle.fontSize and tokenStyle.lineHeight can also be strings (e.g., "14px").
@@ -122,6 +122,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     scaleStyleAdjustments = {
       fontSize: tokenStyle.fontSize * scaleFactor,
       lineHeight: tokenStyle.lineHeight * scaleFactor,
+      dynamicTypeRamp: undefined, // RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will be sad
     };
   }
   // ]TODO(#2268)

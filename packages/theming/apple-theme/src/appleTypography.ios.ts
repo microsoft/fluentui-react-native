@@ -56,6 +56,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.regular,
         lineHeight: fontTokens.lineHeight100,
         letterSpacing: 0,
+        dynamicTypeRamp: 'caption1', // Not a typo, this corresponds to UIFontTextStypeCaption1
       },
       caption1: {
         face: fontTokens.family.base,
@@ -63,6 +64,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.regular,
         lineHeight: fontTokens.lineHeight200,
         letterSpacing: -0.08,
+        dynamicTypeRamp: 'footnote',
       },
       caption1Strong: {
         face: fontTokens.family.base,
@@ -70,6 +72,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.semibold,
         lineHeight: fontTokens.lineHeight200,
         letterSpacing: -0.08,
+        dynamicTypeRamp: 'footnote',
       },
       body2: {
         face: fontTokens.family.base,
@@ -77,6 +80,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.regular,
         lineHeight: fontTokens.lineHeight300,
         letterSpacing: -0.23,
+        dynamicTypeRamp: 'subheadline',
       },
       body2Strong: {
         face: fontTokens.family.base,
@@ -84,6 +88,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.semibold,
         lineHeight: fontTokens.lineHeight300,
         letterSpacing: -0.23,
+        dynamicTypeRamp: 'subheadline',
       },
       body1: {
         face: fontTokens.family.base,
@@ -91,6 +96,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.regular,
         lineHeight: fontTokens.lineHeight400,
         letterSpacing: -0.43,
+        dynamicTypeRamp: 'body',
       },
       body1Strong: {
         face: fontTokens.family.base,
@@ -98,6 +104,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.semibold,
         lineHeight: fontTokens.lineHeight400,
         letterSpacing: -0.43,
+        dynamicTypeRamp: 'body',
       },
       title3: {
         face: fontTokens.family.base,
@@ -105,6 +112,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.semibold,
         lineHeight: fontTokens.lineHeight500,
         letterSpacing: -0.45,
+        dynamicTypeRamp: 'title3',
       },
       title2: {
         face: fontTokens.family.base,
@@ -112,6 +120,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.semibold,
         lineHeight: fontTokens.lineHeight600,
         letterSpacing: -0.26,
+        dynamicTypeRamp: 'title2',
       },
       title1: {
         face: fontTokens.family.base,
@@ -119,6 +128,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.bold,
         lineHeight: fontTokens.lineHeight700,
         letterSpacing: 0.38,
+        dynamicTypeRamp: 'title1',
       },
       largeTitle: {
         face: fontTokens.family.base,
@@ -126,6 +136,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.bold,
         lineHeight: fontTokens.lineHeight800,
         letterSpacing: 0.4,
+        dynamicTypeRamp: 'largeTitle',
       },
       display: {
         face: fontTokens.family.base,
@@ -133,6 +144,7 @@ export function appleTypography(): Typography {
         weight: fontTokens.weight.bold,
         lineHeight: fontTokens.lineHeight900,
         letterSpacing: 0.26,
+        dynamicTypeRamp: 'largeTitle',
       },
     } as Variants,
   };
