@@ -137,12 +137,12 @@ const strokeSize = {
 
 ### Typography
 
-In FURN, typography alias tokens can be passed into a `Text` element or wrapped using a JSX type. For example:
+In FURN, typography alias tokens can be passed into a `TextV1` element or wrapped using a JSX type. For example:
 
 ```tsx
-import { Body1, Text } from '@fluentui-react-native/text';
+import { Body1, TextV1 } from '@fluentui-react-native/text';
 
-const myText = <Text variant="body1">Here is some body text</Text>;
+const myText = <TextV1 variant="body1">Here is some body text</TextV1>;
 const moreText = <Body1>Here is some more body text</Body1>;
 ```
 
