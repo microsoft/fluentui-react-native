@@ -97,6 +97,7 @@ exports[`Button component tests Button composed 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "dynamicTypeRamp": undefined,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",

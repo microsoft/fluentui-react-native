@@ -122,7 +122,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     scaleStyleAdjustments = {
       fontSize: tokenStyle.fontSize * scaleFactor,
       lineHeight: tokenStyle.lineHeight * scaleFactor,
-      dynamicTypeRamp: undefined, // RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will be sad
     };
   }
   // ]TODO(#2268)
@@ -150,6 +149,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
+    delete mergedProps.style.dynamicTypeRamp; // TODO(#2268): RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will be sad
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
         {children}
