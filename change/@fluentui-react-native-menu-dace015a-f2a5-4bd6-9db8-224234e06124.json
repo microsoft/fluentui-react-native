@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "replace old spacing token with new sizeTokens with win32 ramp",
-  "packageName": "@fluentui-react-native/menu",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

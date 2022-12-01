@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-activity-indicator",
-  "version": "0.6.21",
+  "version": "0.6.22",
   "description": "A cross-platform Fluent Activity Indicator component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,7 +26,7 @@
     "directory": "packages/experimental/ActivityIndicator"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": "0.8.21",
+    "@fluentui-react-native/framework": "0.8.22",
     "assert-never": "^1.2.1",
     "react-native-svg": "12.3.0"
   },

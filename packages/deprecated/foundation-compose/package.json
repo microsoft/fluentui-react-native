@@ -1,6 +1,6 @@
 {
   "name": "@uifabricshared/foundation-compose",
-  "version": "1.12.22",
+  "version": "1.12.23",
   "description": "Compose infrastructure",
   "repository": {
     "type": "git",
@@ -31,15 +31,15 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.16.12 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.16.13 <1.0.0",
     "@fluentui-react-native/immutable-merge": "^1.1.7",
     "@fluentui-react-native/memo-cache": "^1.1.7",
-    "@fluentui-react-native/theme-types": ">=0.23.1 <1.0.0",
+    "@fluentui-react-native/theme-types": ">=0.24.0 <1.0.0",
     "@uifabricshared/themed-settings": ">=0.9.1 <1.0.0",
     "@uifabricshared/foundation-composable": ">=0.11.1 <1.0.0",
     "@uifabricshared/foundation-settings": ">=0.12.1 <1.0.0",
-    "@uifabricshared/foundation-tokens": ">=0.12.12 <1.0.0",
-    "@uifabricshared/theming-ramp": ">=0.17.8 <1.0.0"
+    "@uifabricshared/foundation-tokens": ">=0.12.13 <1.0.0",
+    "@uifabricshared/theming-ramp": ">=0.17.9 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
