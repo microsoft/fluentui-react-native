@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/theme-tokens",
-  "version": "0.21.3",
+  "version": "0.21.4",
   "description": "Defines values for tokens used to fill out themes.",
   "repository": {
     "type": "git",
@@ -31,11 +31,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@fluentui-react-native/design-tokens-android": "^0.31.0",
-    "@fluentui-react-native/design-tokens-ios": "^0.31.0",
-    "@fluentui-react-native/design-tokens-win32": "^0.31.0",
-    "@fluentui-react-native/design-tokens-windows": "^0.31.0",
-    "@fluentui-react-native/theme-types": ">=0.23.1 <1.0.0",
+    "@fluentui-react-native/design-tokens-android": "^0.36.0",
+    "@fluentui-react-native/design-tokens-ios": "^0.36.0",
+    "@fluentui-react-native/design-tokens-win32": "^0.36.0",
+    "@fluentui-react-native/design-tokens-windows": "^0.36.0",
+    "@fluentui-react-native/theme-types": ">=0.24.0 <1.0.0",
     "assert-never": "^1.2.1"
   },
   "devDependencies": {
