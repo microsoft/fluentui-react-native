@@ -46,8 +46,8 @@ jobs:
       - template: templates/yarn-install.yml
 
       - script: |
-          yarn test
-        displayName: 'yarn test [test]'
+          yarn buildci
+        displayName: 'yarn buildci'
 
       - script: |
           echo ##vso[task.setvariable variable=SkipNpmPublishArgs]--no-publish

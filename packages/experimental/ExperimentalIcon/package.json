@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/experimental-icon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A cross-platform Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@fluentui-react-native/adapters": "^0.10.0",
-    "@fluentui-react-native/framework": ">=0.8.21 <1.0.0",
+    "@fluentui-react-native/framework": ">=0.8.22 <1.0.0",
     "react-native-svg": "12.3.0"
   },
   "devDependencies": {
