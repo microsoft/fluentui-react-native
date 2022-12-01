@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Adding bundle to NPM package:",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
