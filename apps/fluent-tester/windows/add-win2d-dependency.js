@@ -14,7 +14,7 @@ const builder = new Builder();
 const cppProjPath = path.resolve(__dirname, '..', 'node_modules', '.generated', 'windows', 'ReactTestApp', 'ReactTestApp.vcxproj');
 
 fs.readFile(cppProjPath)
-  .then(async (contents) => {
+  .then((contents) => {
     return parser.parseStringPromise(contents);
   })
   .then((xmlData) => {

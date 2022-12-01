@@ -41,6 +41,11 @@ steps:
     displayName: 'generate UWP app'
 
   - script: |
+      node .\windows\add-win2d-dependency.js
+    workingDirectory: apps\fluent-tester
+    displayName: Add Win2D.uwp as a ReactTestApp dependency
+
+  - script: |
       yarn windows --arch x64 --logging --no-packager --no-launch
     workingDirectory: apps\fluent-tester
     displayName: 'build UWP app'
