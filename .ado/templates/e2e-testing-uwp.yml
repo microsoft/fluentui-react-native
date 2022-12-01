@@ -46,9 +46,19 @@ steps:
     displayName: Add Win2D.uwp as a ReactTestApp dependency
 
   - script: |
+      dir
+    displayName: 'check disk size'
+    condition: always()
+
+  - script: |
       yarn windows --arch x64 --logging --no-packager --no-launch
     workingDirectory: apps\fluent-tester
     displayName: 'build UWP app'
+
+  - script: |
+      dir
+    displayName: 'check disk size'
+    condition: always()
 
   # Creates a variable that determines whether the previous build tasks succeeded.
   # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make

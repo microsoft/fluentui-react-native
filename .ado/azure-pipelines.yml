@@ -155,6 +155,7 @@ jobs:
     steps:
       - checkout: self
         persistCredentials: true
+        fetchDepth: 5
 
       # yarn and minimal build to get set up
       - template: templates/setup-repo-min-build.yml
