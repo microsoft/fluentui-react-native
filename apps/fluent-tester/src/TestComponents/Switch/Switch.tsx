@@ -19,8 +19,12 @@ const styles = StyleSheet.create({
 });
 
 const StandardUsage: React.FunctionComponent = () => {
+  const memoizedStyles = React.useMemo(
+    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 180 } : { ...commonTestStyles.settingsPicker }],
+    [],
+  );
   return (
-    <View style={Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 180 } : commonTestStyles.settingsPicker}>
+    <View style={memoizedStyles}>
       <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
@@ -36,8 +40,13 @@ const OnChangeUsage: React.FunctionComponent = () => {
     setDisplaySquare(checked);
   };
 
+  const memoizedStyles = React.useMemo(
+    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : { ...commonTestStyles.settingsPicker }],
+    [],
+  );
+
   return (
-    <View style={Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : commonTestStyles.settingsPicker}>
+    <View style={memoizedStyles}>
       <Switch label={'Toggle Square'} defaultChecked={true} onChange={defaultToggleSquare} />
       {displaySquare && <View style={styles.square} />}
     </View>
@@ -55,8 +64,13 @@ const ControlSwitchValues: React.FunctionComponent = () => {
     setToggleSwitch(false);
   };
 
+  const memoizedStyles = React.useMemo(
+    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : { ...commonTestStyles.settingsPicker }],
+    [],
+  );
+
   return (
-    <View style={Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 140 } : commonTestStyles.settingsPicker}>
+    <View style={memoizedStyles}>
       <Button onClick={toggleSwitchTrue}>Toggle Switch True</Button>
       <Button onClick={toggleSwitchFalse}>Toggle Switch False</Button>
       <Switch label={'Switch Value Being Controlled'} checked={toggleSwitch} />
