@@ -15,6 +15,11 @@ import { Platform } from 'react-native';
 export const E2ESwitchTest: React.FunctionComponent = () => {
   const [switchPressed, setSwitchSwitchPressed] = React.useState(false);
 
+  const memoizedStyles = React.useMemo(
+    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 100, marginBottom: 50 } : stackStyle],
+    [],
+  );
+
   const onToggle = React.useCallback(
     (_e, checked) => {
       setSwitchSwitchPressed(checked);
@@ -23,7 +28,7 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   );
 
   return (
-    <Stack style={Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 100 } : stackStyle}>
+    <Stack style={memoizedStyles}>
       <Switch testID={SWITCH_TEST_COMPONENT} label={'Switch Test'} onChange={onToggle} accessibilityLabel={SWITCH_ACCESSIBILITY_LABEL} />
       {switchPressed ? <Text testID={SWITCH_ON_PRESS}>Switch Toggled On</Text> : null}
       <Switch label={SWITCH_TEST_COMPONENT_LABEL} testID={SWITCH_NO_A11Y_LABEL_COMPONENT} />
