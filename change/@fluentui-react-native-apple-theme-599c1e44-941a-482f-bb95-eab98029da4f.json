@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Allow V1 usage of V2 text variants",
+  "packageName": "@fluentui-react-native/apple-theme",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
