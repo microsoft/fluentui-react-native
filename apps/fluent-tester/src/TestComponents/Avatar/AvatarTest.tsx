@@ -4,6 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { StandardUsage } from './BasicAvatar';
 import { CustomizeUsage } from './CustomizedAvatar';
 import { E2EAvatarTest } from './E2EAvatarTest';
+import { Platform } from 'react-native';
 
 const avatarSections: TestSection[] = [
   {
@@ -11,15 +12,19 @@ const avatarSections: TestSection[] = [
     testID: AVATAR_TESTPAGE,
     component: StandardUsage,
   },
-  {
-    name: 'Customize Usage',
-    component: CustomizeUsage,
-  },
-  {
-    name: 'Avatar E2E',
-    component: E2EAvatarTest,
-  },
-];
+  ...Platform.select({
+    android: [null],
+    default:
+      [{
+        name: 'Customize Usage',
+        component: CustomizeUsage,
+      },
+      {
+        name: 'Avatar E2E',
+        component: E2EAvatarTest,
+      }],
+  })];
+
 
 export const AvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
@@ -27,7 +32,7 @@ export const AvatarTest: React.FunctionComponent = () => {
     uwpStatus: 'Backlog',
     iosStatus: 'Beta',
     macosStatus: 'Experimental',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =
