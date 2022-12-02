@@ -1,6 +1,6 @@
 {
-  "type": "patch",
-  "comment": "Bump react-native-svg: 12.3.0 -> 12.x",
+  "type": "minor",
+  "comment": "Bump react-native-svg: 12.3.0 -> 12.5.0",
   "packageName": "@fluentui-react-native/experimental-activity-indicator",
   "email": "winlarry@microsoft.com",
   "dependentChangeType": "patch"
