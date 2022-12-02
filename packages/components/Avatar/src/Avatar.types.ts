@@ -61,7 +61,8 @@ export const AvatarColors = [
   'hotPink',
   'orchid',
 ] as const;
-export const ColorSchemes = ['neutral', 'brand', 'colorful'] as const;
+
+export const ColorSchemes = ['neutral', 'brand', 'colorful', 'brandInverted', 'accent'] as const;
 export type AvatarSize = typeof AvatarSizes[number];
 export type AvatarNamedColor = typeof AvatarColors[number];
 export type AvatarColorSchemes = typeof ColorSchemes[number];
@@ -69,25 +70,27 @@ export type AvatarColorSchemes = typeof ColorSchemes[number];
 export type AvatarShape = 'circular' | 'square';
 export type AvatarActive = 'active' | 'inactive' | 'unset';
 export type AvatarActiveAppearance = 'ring';
+
 export type AvatarColor = AvatarColorSchemes | AvatarNamedColor | ColorValue;
 
 export interface AvatarConfigurableProps {
   /**
-   * Optional activity indicator
+   *   Optional activity indicator
    * * active: the avatar will be decorated according to activeAppearance
    * * inactive: the avatar will be reduced in size and partially transparent
    * * unset: normal display
-   *
    * @defaultvalue unset
    */
   active?: AvatarActive;
+
   /**
    * The color when displaying either an icon or initials.
    * * neutral (default): gray
    * * brand: color from the brand palette
+   * * brandInverted: Inverted color from the brand palette. @platform android
+   * * accent: // TO-DO. @platform android
    * * colorful: picks a color from a set of pre-defined colors, based on a hash of the name (or idForColor if provided)
    * * [AvatarNamedColor]: a specific color from the theme
-   *
    * @defaultvalue neutral
    */
   avatarColor?: AvatarColor;
@@ -235,6 +238,8 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
    */
   neutral?: AvatarTokens;
   brand?: AvatarTokens;
+  brandInverted?: AvatarTokens;
+  accent?:AvatarTokens;
   darkRed?: AvatarTokens;
   cranberry?: AvatarTokens;
   red?: AvatarTokens;

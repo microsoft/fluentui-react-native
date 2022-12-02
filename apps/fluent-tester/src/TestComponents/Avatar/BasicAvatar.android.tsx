@@ -112,7 +112,7 @@ export const StandardUsage: FunctionComponent = () => {
         flex: 1,
         justifyContent: 'space-evenly',
       }}>
-        {/* Variation - Anonymous ascent  .*/}
+        {/* Variation - Anonymous ascent.*/}
 
         {/* With badge.*/}
         <Avatar
