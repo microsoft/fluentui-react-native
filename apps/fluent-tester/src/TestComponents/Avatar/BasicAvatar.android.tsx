@@ -112,13 +112,13 @@ export const StandardUsage: FunctionComponent = () => {
         flex: 1,
         justifyContent: 'space-evenly',
       }}>
-        {/* Variation - Anonymous ascent.*/}
+        {/* Variation - Anonymous accent.*/}
 
         {/* With badge.*/}
         <Avatar
           size={56}
           badge={{ status: 'available' }}
-          avatarColor={'ascent'}
+          avatarColor={'accent'}
         />
 
         {/* No ring and badge.*/}
@@ -126,7 +126,7 @@ export const StandardUsage: FunctionComponent = () => {
           accessibilityLabel="Fall-back Icon"
           accessibilityHint="A picture representing a user"
           size={56}
-          avatarColor={'ascent'}
+          avatarColor={'accent'}
         />
 
         {/* With ring. */}
@@ -136,7 +136,7 @@ export const StandardUsage: FunctionComponent = () => {
           size={56}
           activeAppearance="ring"
           active="active"
-          avatarColor={'ascent'}
+          avatarColor={'accent'}
         />
       </View>
 
