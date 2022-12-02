@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/text
 
-This log was last generated on Mon, 28 Nov 2022 11:51:06 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Dec 2022 03:12:20 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.1
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/theme-tokens to v0.21.4
+- Bump @fluentui-react-native/tokens to v0.18.1
+
+## 0.17.0
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Minor changes
+
+- Add Dynamic Type support (adgleitm@microsoft.com)
+- Bump @fluentui-react-native/experimental-native-font-metrics to v0.3.0
 
 ## 0.16.2
 

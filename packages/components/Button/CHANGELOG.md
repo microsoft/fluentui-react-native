@@ -1,8 +1,44 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Mon, 28 Nov 2022 11:51:05 GMT and should not be manually modified.
+This log was last generated on Thu, 01 Dec 2022 03:12:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.3
+
+Thu, 01 Dec 2022 03:12:19 GMT
+
+### Patches
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.6.22
+- Bump @fluentui-react-native/experimental-shadow to v0.2.46
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/icon to v0.15.4
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/pressable to v0.9.36
+- Bump @fluentui-react-native/theme-tokens to v0.21.4
+- Bump @fluentui-react-native/theme-types to v0.24.0
+- Bump @fluentui-react-native/text to v0.17.1
+- Bump @fluentui-react-native/tokens to v0.18.1
+
+## 0.32.2
+
+Tue, 29 Nov 2022 15:14:15 GMT
+
+### Patches
+
+- Provided FAB Tokens for iOS (ayushsinghs@yahoo.in)
+
+## 0.32.1
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.15.3
+- Bump @fluentui-react-native/text to v0.17.0
 
 ## 0.32.0
 

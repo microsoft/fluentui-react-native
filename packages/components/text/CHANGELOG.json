@@ -2,6 +2,66 @@
   "name": "@fluentui-react-native/text",
   "entries": [
     {
+      "date": "Thu, 01 Dec 2022 03:12:20 GMT",
+      "tag": "@fluentui-react-native/text_v0.17.1",
+      "version": "0.17.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @uifabricshared/foundation-compose to v1.12.23",
+            "commit": "9faf7ab61974a5d5f7dd0c5aa84a123a68d786f8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.22",
+            "commit": "9faf7ab61974a5d5f7dd0c5aa84a123a68d786f8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.21.3",
+            "commit": "9faf7ab61974a5d5f7dd0c5aa84a123a68d786f8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/theme-tokens to v0.21.4",
+            "commit": "9faf7ab61974a5d5f7dd0c5aa84a123a68d786f8"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/tokens to v0.18.1",
+            "commit": "9faf7ab61974a5d5f7dd0c5aa84a123a68d786f8"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 28 Nov 2022 19:49:35 GMT",
+      "tag": "@fluentui-react-native/text_v0.17.0",
+      "version": "0.17.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/text",
+            "commit": "1b0f4b66f9ed9c9be49ad296d1b0d2f57c56bbc4",
+            "comment": "Add Dynamic Type support"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/text",
+            "comment": "Bump @fluentui-react-native/experimental-native-font-metrics to v0.3.0",
+            "commit": "1b0f4b66f9ed9c9be49ad296d1b0d2f57c56bbc4"
+          }
+        ]
+      }
+    },
+    {
       "date": "Mon, 28 Nov 2022 11:51:06 GMT",
       "tag": "@fluentui-react-native/text_v0.16.2",
       "version": "0.16.2",

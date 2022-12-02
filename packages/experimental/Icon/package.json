@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/icon",
-  "version": "0.15.2",
+  "version": "0.15.4",
   "description": "A cross-platform opinionated Fluent Icon component",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -18,12 +18,12 @@
     "prettier-fix": "fluentui-scripts prettier --fix true"
   },
   "dependencies": {
-    "@fluentui-react-native/default-theme": ">=0.16.12 <1.0.0",
-    "@fluentui-react-native/framework": "0.8.21",
-    "@fluentui-react-native/text": "^0.16.2",
-    "@fluentui-react-native/theme-types": ">=0.23.1 <1.0.0",
-    "@fluentui-react-native/theming-utils": ">=0.18.3 <1.0.0",
-    "@fluentui-react-native/tokens": ">=0.18.0 <1.0.0",
+    "@fluentui-react-native/default-theme": ">=0.16.13 <1.0.0",
+    "@fluentui-react-native/framework": "0.8.22",
+    "@fluentui-react-native/text": "^0.17.1",
+    "@fluentui-react-native/theme-types": ">=0.24.0 <1.0.0",
+    "@fluentui-react-native/theming-utils": ">=0.19.0 <1.0.0",
+    "@fluentui-react-native/tokens": ">=0.18.1 <1.0.0",
     "react-native-svg": "12.3.0"
   },
   "repository": {
