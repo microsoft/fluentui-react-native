@@ -149,7 +149,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
-    delete mergedProps.style.dynamicTypeRamp; // TODO(#2268): RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will complain about it being an invalid prop
+    delete (mergedProps.style as TextTokens).dynamicTypeRamp; // TODO(#2268): RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will complain about it being an invalid prop
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
         {children}
