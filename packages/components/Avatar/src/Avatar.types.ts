@@ -157,6 +157,7 @@ export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
    * using the `getInitials` function.
    *
    * The initials are displayed when there is no image (including while the image is loading).
+   *
    */
   initials?: string;
 
