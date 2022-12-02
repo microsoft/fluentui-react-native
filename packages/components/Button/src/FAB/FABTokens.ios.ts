@@ -11,9 +11,7 @@ export const defaultFABTokens: TokenSettings<FABTokens, Theme> = (t: Theme) =>
     minWidth: 56,
     padding: globalTokens.size200,
     hasContent: {
-      hasIconBefore: {
-        spacingIconContentBefore: globalTokens.size80,
-      },
+      spacingIconContentBefore: globalTokens.size80,
     },
     shadowToken: t.shadows.shadow8,
   } as FABTokens);
