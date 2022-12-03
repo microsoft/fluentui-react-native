@@ -6,7 +6,6 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
   accessibilityRole="button"
   accessible={true}
   collapsable={false}
-  elevation={8}
   enableFocusRing={true}
   focusable={true}
   iconPosition="before"
@@ -23,17 +22,15 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 9999,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
       "minHeight": 56,
       "minWidth": 56,
-      "paddingEnd": 20,
-      "paddingHorizontal": 16,
-      "paddingStart": 16,
-      "paddingVertical": 16,
+      "padding": 20,
       "width": undefined,
     }
   }
@@ -57,9 +54,10 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
     numberOfLines={0}
     style={
       Object {
+        "color": "#ffffff",
         "fontFamily": "System",
         "fontSize": 13,
-        "fontWeight": "600",
+        "fontWeight": "400",
         "margin": 0,
         "marginBottom": 0,
         "marginEnd": 0,
@@ -75,73 +73,132 @@ exports[`Custom FAB with no shadow(iOS) 1`] = `
 
 exports[`Default FAB (iOS) 1`] = `
 <View
-  accessibilityLabel="Default FAB (iOS)"
-  accessibilityRole="button"
-  accessible={true}
-  collapsable={false}
-  elevation={8}
-  enableFocusRing={true}
-  focusable={true}
-  iconPosition="before"
-  onBlur={[Function]}
-  onClick={[Function]}
-  onFocus={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#0078d4",
+      "backgroundColor": "#0f6cbd",
+      "borderColor": "#0f548c",
       "borderRadius": 9999,
+      "bottom": undefined,
       "display": "flex",
-      "flexDirection": "row",
+      "end": undefined,
       "justifyContent": "center",
+      "left": undefined,
+      "margin": undefined,
+      "marginBottom": undefined,
+      "marginEnd": undefined,
+      "marginHorizontal": undefined,
+      "marginLeft": undefined,
+      "marginRight": undefined,
+      "marginStart": undefined,
+      "marginTop": undefined,
+      "marginVertical": undefined,
       "minHeight": 56,
       "minWidth": 56,
-      "paddingEnd": 20,
-      "paddingHorizontal": 16,
-      "paddingStart": 16,
-      "paddingVertical": 16,
+      "right": undefined,
+      "shadowColor": "#000000",
+      "shadowOffset": Object {
+        "height": 0,
+        "width": 0,
+      },
+      "shadowOpacity": 0.12,
+      "shadowRadius": 1,
+      "start": undefined,
+      "top": undefined,
       "width": undefined,
     }
   }
 >
-  <Text
+  <View
+    accessibilityLabel="Default FAB (iOS)"
+    accessibilityRole="button"
     accessible={true}
+    collapsable={false}
+    enableFocusRing={true}
+    focusable={true}
+    iconPosition="before"
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "color": "#fff",
-        "fontFamily": "Arial",
-        "fontSize": 16,
-        "fontWeight": "400",
-        "margin": 0,
+        "alignItems": "center",
+        "alignSelf": "flex-start",
+        "backgroundColor": "#0f6cbd",
+        "borderBottomWidth": undefined,
+        "borderColor": "#0f548c",
+        "borderEndWidth": undefined,
+        "borderLeftWidth": undefined,
+        "borderRadius": 9999,
+        "borderRightWidth": undefined,
+        "borderStartWidth": undefined,
+        "borderTopWidth": undefined,
+        "borderWidth": undefined,
+        "display": "flex",
+        "flexDirection": "row",
+        "flexWrap": undefined,
+        "justifyContent": "center",
+        "minHeight": 56,
+        "minWidth": 56,
+        "padding": 20,
+        "paddingBottom": undefined,
+        "paddingEnd": undefined,
+        "paddingHorizontal": undefined,
+        "paddingLeft": undefined,
+        "paddingRight": undefined,
+        "paddingStart": undefined,
+        "paddingTop": undefined,
+        "paddingVertical": undefined,
+        "shadowColor": "#000000",
+        "shadowOffset": Object {
+          "height": 4,
+          "width": 0,
+        },
+        "shadowOpacity": 0.14,
+        "shadowRadius": 4,
+        "width": undefined,
       }
     }
   >
-    ♣
-  </Text>
-  <Text
-    ellipsizeMode="tail"
-    numberOfLines={0}
-    style={
-      Object {
-        "fontFamily": "System",
-        "fontSize": 13,
-        "fontWeight": "600",
-        "margin": 0,
-        "marginBottom": 0,
-        "marginEnd": 0,
-        "marginStart": 8,
-        "marginTop": 0,
+    <Text
+      accessible={true}
+      style={
+        Object {
+          "color": "#fff",
+          "fontFamily": "Arial",
+          "fontSize": 16,
+          "fontWeight": "400",
+          "margin": 0,
+        }
       }
-    }
-  >
-    Default FAB (iOS)
-  </Text>
+    >
+      ♣
+    </Text>
+    <Text
+      ellipsizeMode="tail"
+      numberOfLines={0}
+      style={
+        Object {
+          "color": "#ffffff",
+          "fontFamily": "System",
+          "fontSize": 13,
+          "fontWeight": "400",
+          "margin": 0,
+          "marginBottom": 0,
+          "marginEnd": 0,
+          "marginStart": 8,
+          "marginTop": 0,
+        }
+      }
+    >
+      Default FAB (iOS)
+    </Text>
+  </View>
 </View>
 `;
