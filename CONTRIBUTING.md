@@ -55,7 +55,7 @@ Most components should use the compose framework as it offers the comprehensive 
 1. Update your `package.json` file. This defines the name, fields, and dependencies of the npm package that will be published for this component.
 1. As a pattern, we prefix `experimental` components with the word "experimental". For example, we have `@fluentui-react-native/experimental-button`.
 
-**Additionally, we require integrating your new component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/fluent-tester/src/E2E. This is to create a sophisticated, in-depth testing infrastructure that ensures that we don't regress our component library in the future; giving our partners and customers the best experience possible. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/fluent-tester/src/E2E#authoring-e2e-test).**
+**Additionally, we require integrating your new component/test page with our E2E testing infrastructure. Whenever a new component/test page is created, it should map to new tests in /apps/fluent-tester/src/E2E. This is to create a sophisticated, in-depth testing infrastructure that ensures that we don't regress our component library in the future; giving our partners and customers the best experience possible. Please see [Authoring an E2E Test](https://github.com/microsoft/fluentui-react-native/tree/main/apps/E2E#authoring-e2e-test).**
 
 Reach out to Samuel Freiberg with any questions related to E2E testing.
 

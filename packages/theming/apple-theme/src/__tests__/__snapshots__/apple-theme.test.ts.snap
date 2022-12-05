@@ -459,21 +459,10 @@ Object {
     },
   },
   "spacing": Object {
-    "l": 20,
     "l1": "20px",
     "l2": "32px",
-    "m": 16,
-    "none": 0,
-    "s": 12,
     "s1": "8px",
     "s2": "4px",
-    "xl": 24,
-    "xs": 8,
-    "xxl": 36,
-    "xxs": 4,
-    "xxxl": 48,
-    "xxxs": 2,
-    "xxxxl": 72,
   },
   "typography": Object {
     "families": Object {

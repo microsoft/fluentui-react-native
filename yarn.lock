@@ -1439,30 +1439,30 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fluentui-react-native/design-tokens-android@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.31.0.tgz#52a1209522f7d8eb8530b3b31cd1a63267f5483f"
-  integrity sha512-WjJBHW+Sd8CFQl6QnaoD/QMtMXJOCH2iPhCvosil7Z9zlDsjw1BBwU86FcqU1TK8W+oBZf+HYuYMIXu8bogUzg==
+"@fluentui-react-native/design-tokens-android@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-android/-/design-tokens-android-0.36.0.tgz#854d511c4bb8916633921219987968bdcceb12b1"
+  integrity sha512-lvWKGRevVrcALew2PjmcCDdmFfGw1stGm39hZJJUlGK63okEaDwZ7jR40YSVVbP0YEqrVu5xhD2MhLqpeJQTCw==
 
-"@fluentui-react-native/design-tokens-ios@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-ios/-/design-tokens-ios-0.31.0.tgz#b0195aede1eea607a95fe4682cb2970ff5989877"
-  integrity sha512-Ncl0aPlSLIeA+YFmINxiwbCA1K97oJeDKK6lA9AnI/88ObnkO5F68I5UscQopCCQunfyVW8b3g8fJF4IsUnJDA==
+"@fluentui-react-native/design-tokens-ios@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-ios/-/design-tokens-ios-0.36.0.tgz#94412840d56833fd3f3d03f59466f5eae3cf0c47"
+  integrity sha512-8bTsGclqmS1CBHTmBjitGMlpSIFCQTdJFX/04U3iat1+SdoIWdlJ9Ws8C6lMXIQPdkeUxvCmNl7fZOj+opZBfA==
 
-"@fluentui-react-native/design-tokens-macos@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.31.0.tgz#e91ad674e4c58ffcf70fdaf496ffb0b585fb4086"
-  integrity sha512-JIphZwHEakTGmY4QeNOVMzQu0YS+iOpzcpagU924xV5PwSaRx1wgO96giWkDuR/o+bRbbNHOcgvue2MBJ8YbsQ==
+"@fluentui-react-native/design-tokens-macos@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-macos/-/design-tokens-macos-0.36.0.tgz#2609266b37f8486864c6d0b5db1a963a49121363"
+  integrity sha512-MuxBgTj5FNk1s3PjRxTQOksa5sLjRX5p4qSMbigkWs3p913jzBkcU5wg36DeADIklAUGgORFmL5qPyTYMsK26A==
 
-"@fluentui-react-native/design-tokens-win32@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.31.0.tgz#4cfd08d212d9c210e1a89e8288cdd0838933e952"
-  integrity sha512-0a+zUnS8IzAqdUJ2rNra0Z3zxT8jzC549mV1o0FcgTNwgIyQo7DB4DW63ZK67ZFeh611PZm3a9omrrHbREB+Nw==
+"@fluentui-react-native/design-tokens-win32@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-win32/-/design-tokens-win32-0.36.0.tgz#0fa6706bbd4caeaac5ba562a01bbd52fa453ba13"
+  integrity sha512-DO2H2eBHoGHiheTxK253KyUWxmk31gW9Ge9Ks+eyMoxOmLz431rI7/HZXhDrNeTqNJbtK3kEOoVkot+T2Em+xQ==
 
-"@fluentui-react-native/design-tokens-windows@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.31.0.tgz#b871e8e4e4af408033e03205572294fde5770cea"
-  integrity sha512-OphIR5RkLIup7uUd4SCh0nU/WGhGw2w0ZkSYhxQ49k2KmHTA14L3W9hPxtgDfVBE8uS7/PMJ3L3tSCBiFgb9hg==
+"@fluentui-react-native/design-tokens-windows@^0.36.0":
+  version "0.36.0"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.36.0.tgz#d0ad552c0176af5596896b96ee8029952f5f4415"
+  integrity sha512-sz2a+LtcJSn1fL4mydeE8NL5kKnWfLkk5kgkRKxO3DKCMghDMf0Yp0e0+a9oHSZrFemhJv8oZSok10VKjqeWAw==
 
 "@fortawesome/fontawesome-common-types@6.2.1":
   version "6.2.1"
@@ -6318,9 +6318,9 @@ decimal.js@^10.2.1:
   integrity sha512-ic1yEvwT6GuvaYwBLLY6/aFFgjZdySKTE8en/fkU3QICTmRtgtSlFn0u0BXN06InZwtfCelR7j8LRiDI/02iGA==
 
 decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
-  integrity sha512-hjf+xovcEn31w/EUYdTXQh/8smFL/dzYjohQGEIgjyNavaJfBY2p5F527Bo1VPATxv0VYTUC2bOcXvqFwk78Og==
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
+  integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
 decompress-response@^6.0.0:
   version "6.0.0"
@@ -12353,14 +12353,15 @@ react-native-gradle-plugin@^0.0.6:
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
 
 react-native-macos@^0.68.0:
-  version "0.68.58"
-  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.58.tgz#a2ba0af72d9c525d24e9744f056e385a03facbce"
-  integrity sha512-ihIT1GctafEz0iepYYbbyaOiXAad/xRnB2ZYhfy12E1MzkuSb5snu/GgX6MB/rdeWL8y3Er28SgJ+O5hPDa1Qg==
+  version "0.68.59"
+  resolved "https://registry.yarnpkg.com/react-native-macos/-/react-native-macos-0.68.59.tgz#47d6ef36d183bac8014b33096953cf2879a395c9"
+  integrity sha512-W5k23D9M5A0L5OG5jnOu7ZzaFU9bYEg4M8dsyi+LFdy9+6RADpoaCVbNAQ811OT6LLZtNt8RY1WlFVbOxKnzeg==
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^7.0.3"
     "@react-native-community/cli-platform-android" "^7.0.1"
     "@react-native-community/cli-platform-ios" "^7.0.1"
+    "@react-native-community/cli-tools" "^7.0.1"
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.0.0"
     "@react-native/polyfills" "2.0.0"
@@ -12409,9 +12410,9 @@ react-native-svg@12.3.0:
     css-tree "^1.0.0-alpha.39"
 
 react-native-test-app@^2.0.2:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.0.3.tgz#7d5478768a148ed5d362b31997799f8a35e3dc7a"
-  integrity sha512-7obxUE+ZVtRsQITyTSFwuH5uN2Hw3NaWvhZg8x7zu9jkvNzPOwRIKobnCUtgYX6VpabKcL+W7lNDvvaZtfvzVA==
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-test-app/-/react-native-test-app-2.1.1.tgz#a66b8705e80a7f53730c4bb1591708e222e6a860"
+  integrity sha512-8+CNMEGk83yM+fCOKnFwUx6Ui4MT8ARKrtPIncIlBe82/k0pnUUYwFZhJodFgz4jd/D+ry6/XKv0nm8iqAse8w==
   dependencies:
     ajv "^8.0.0"
     chalk "^4.1.0"
