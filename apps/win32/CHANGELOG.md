@@ -3621,7 +3621,7 @@ Mon, 28 Sep 2020 20:32:21 GMT
 
 ### Minor changes
 
-- 🚚Move files around, rename things. Makes FluentTester more canonical (aliciakds88@gmail.com)
+- 🚚Move files around, rename things.  Makes FluentTester more canonical (aliciakds88@gmail.com)
 
 ## 0.4.0
 

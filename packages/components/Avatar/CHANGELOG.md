@@ -385,7 +385,7 @@ Thu, 08 Sep 2022 15:59:45 GMT
 
 ### Patches
 
-- [Avatar] Fixed bug with multi-word titles (vkozlova@microsoft.com)
+- [Avatar] Fixed bug with  multi-word titles (vkozlova@microsoft.com)
 
 ## 1.2.6
 

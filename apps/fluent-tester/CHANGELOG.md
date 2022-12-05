@@ -1946,7 +1946,7 @@ Fri, 19 Aug 2022 15:32:12 GMT
 
 ### Patches
 
-- Menu Picker for desktop is now using a FURN text element (nkhalil942@gmail.com)
+- Menu Picker for desktop is now using a FURN text  element (nkhalil942@gmail.com)
 
 ## 0.86.2
 
@@ -5988,7 +5988,7 @@ Fri, 25 Jun 2021 06:21:11 GMT
 
 ### Minor changes
 
-- 📦 applying package updates **_NO_CI_** (tamasane@gmail.com)
+- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
 
 ## 0.27.0
 
