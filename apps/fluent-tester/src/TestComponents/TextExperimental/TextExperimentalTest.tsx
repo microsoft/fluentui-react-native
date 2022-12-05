@@ -14,7 +14,7 @@ const textSections: TestSection[] = [
     component: StandardUsage,
   },
   {
-    name: 'V2 Usage',
+    name: 'V2/V1 Comparison',
     component: V2Usage,
   },
   {

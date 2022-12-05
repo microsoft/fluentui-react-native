@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Allow V1 usage of V2 text variants",
+  "packageName": "@fluentui-react-native/button",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
