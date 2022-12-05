@@ -75,6 +75,8 @@ jobs:
           targetPath: $(System.DefaultWorkingDirectory)/_manifest
 
       - task: ComponentGovernanceComponentDetection@0
+        inputs:
+          ignoreDirectories: 'node_modules/react-native/template'
 
   - job: NuGetPublish
     displayName: NuGet Publish
