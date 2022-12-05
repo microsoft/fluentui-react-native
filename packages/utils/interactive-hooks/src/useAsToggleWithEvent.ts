@@ -25,15 +25,14 @@ export function useAsToggleWithEvent(
 
   const onChange = React.useCallback(
     (e: any) => {
+      if (Platform.OS === 'android') {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      }
       userCallback && userCallback(e, !isChecked);
+
       setChecked(!isChecked);
     },
     [isChecked, setChecked],
   );
-
-  if (Platform.OS === 'android') {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-  }
-
   return [checked ?? isChecked, onChange];
 }
