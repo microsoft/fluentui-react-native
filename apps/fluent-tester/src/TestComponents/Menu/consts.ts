@@ -15,4 +15,14 @@ export const MENUITEM_TEST_LABEL = 'Test MenuItem2 - No Accessibility Label'; //
 export const MENU_ON_OPEN = 'Menu_On_Open'; // For testing the open functionality of Menu
 export const MENU_ON_CLOSE = 'Menu_On_Close'; // For testing the open functionality of Menu
 
+/* Test MenuItem 3 */
+export const MENUITEM_DISABLED_COMPONENT = 'MenuItem_Disabled_Component';
+
+/* Test MenuItem 4 */
+export const MENUITEM_FOURTH_COMPONENT = 'MenuItem_Fourth_Component';
+
 export const MENU_DEFOCUS_BUTTON = 'Menu_Defocus_Button'; // Used to move focus away from menu button
+export const MENU_CALLBACK_RESET_BUTTON = 'Menu_Reset_Button'; // For resetting the menu item callback text
+
+export const MENUITEM_CALLBACK_LABEL = 'Menu_Item_Callback_Label';
+export const MENUITEM_CALLBACK_TEXT = 'Callback fired';
