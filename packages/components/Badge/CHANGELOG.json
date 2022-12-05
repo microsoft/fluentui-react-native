@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/badge",
   "entries": [
     {
+      "date": "Mon, 05 Dec 2022 22:48:51 GMT",
+      "tag": "@fluentui-react-native/badge_v0.3.2",
+      "version": "0.3.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "299ed92c52bf1d2603cd46b7848dcb4935c5954a",
+            "comment": "Fix NPM publish pipeline"
+          },
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/badge",
+            "commit": "e8719ef6830f02ac0d8477614c6957629edb9bdb",
+            "comment": "Updated danger and success colors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Dec 2022 03:12:19 GMT",
       "tag": "@fluentui-react-native/badge_v0.3.0",
       "version": "0.3.0",

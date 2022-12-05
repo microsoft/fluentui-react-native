@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Mon, 05 Dec 2022 22:48:51 GMT",
+      "tag": "@fluentui-react-native/tester_v0.111.2",
+      "version": "0.111.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "299ed92c52bf1d2603cd46b7848dcb4935c5954a",
+            "comment": "Fix NPM publish pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.3.6",
+            "commit": "38b6fb126876b0428ca86e742c970e428581a7db"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/badge to v0.3.2",
+            "commit": "38b6fb126876b0428ca86e742c970e428581a7db"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Dec 2022 03:12:20 GMT",
       "tag": "@fluentui-react-native/tester_v0.111.0",
       "version": "0.111.0",

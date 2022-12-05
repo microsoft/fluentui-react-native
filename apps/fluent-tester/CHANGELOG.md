@@ -1,8 +1,18 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 01 Dec 2022 03:12:20 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Dec 2022 22:48:51 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.111.2
+
+Mon, 05 Dec 2022 22:48:51 GMT
+
+### Patches
+
+- Fix NPM publish pipeline (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/avatar to v1.3.6
+- Bump @fluentui-react-native/badge to v0.3.2
 
 ## 0.111.0
 
@@ -1936,7 +1946,7 @@ Fri, 19 Aug 2022 15:32:12 GMT
 
 ### Patches
 
-- Menu Picker for desktop is now using a FURN text  element (nkhalil942@gmail.com)
+- Menu Picker for desktop is now using a FURN text element (nkhalil942@gmail.com)
 
 ## 0.86.2
 
@@ -5978,7 +5988,7 @@ Fri, 25 Jun 2021 06:21:11 GMT
 
 ### Minor changes
 
-- 📦 applying package updates ***NO_CI*** (tamasane@gmail.com)
+- 📦 applying package updates **_NO_CI_** (tamasane@gmail.com)
 
 ## 0.27.0
 
