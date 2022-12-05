@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { LayoutAnimation, Platform } from 'react-native';
 import { InteractionEvent } from '.';
 
 export type OnToggleWithEventCallback = (e: InteractionEvent, value?: boolean) => void;
@@ -29,6 +30,10 @@ export function useAsToggleWithEvent(
     },
     [isChecked, setChecked],
   );
+
+  if (Platform.OS === 'android') {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }
 
   return [checked ?? isChecked, onChange];
 }

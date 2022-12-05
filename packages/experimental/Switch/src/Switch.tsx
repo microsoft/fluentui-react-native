@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { View, AccessibilityInfo, Pressable } from 'react-native';
+import { View, AccessibilityInfo, Pressable, UIManager, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
@@ -44,6 +44,11 @@ export const Switch = compose<SwitchType>({
     const switchInfo = useSwitch(userProps);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
+
+    // Use Layout Animation for Android
+    if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
 
     // now return the handler for finishing render
     return (final: SwitchProps) => {
