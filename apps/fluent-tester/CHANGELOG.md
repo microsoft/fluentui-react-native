@@ -1,8 +1,27 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 01 Dec 2022 03:12:20 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Dec 2022 21:29:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.111.2
+
+Mon, 05 Dec 2022 21:29:32 GMT
+
+### Patches
+
+- Fix NPM publish pipeline (sanajmi@microsoft.com)
+- Tester changes for FAB iOS (ayushsinghs@yahoo.in)
+- Bump @fluentui-react-native/avatar to v1.3.6
+- Bump @fluentui-react-native/badge to v0.3.2
+- Bump @fluentui-react-native/button to v0.32.4
+- Bump @fluentui-react-native/dropdown to v0.6.1
+- Bump @fluentui-react-native/experimental-button to v0.16.62
+- Bump @fluentui-react-native/experimental-icon to v0.0.5
+- Bump @fluentui-react-native/experimental-menu-button to v0.5.25
+- Bump @fluentui-react-native/menu to v1.0.83
+- Bump @fluentui-react-native/notification to v0.19.6
+- Bump @fluentui/react-native to v0.33.8
 
 ## 0.111.0
 

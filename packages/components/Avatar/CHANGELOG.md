@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Thu, 01 Dec 2022 03:12:20 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Dec 2022 21:29:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.6
+
+Mon, 05 Dec 2022 21:29:32 GMT
+
+### Patches
+
+- Fix NPM publish pipeline (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/badge to v0.3.2
 
 ## 1.3.4
 

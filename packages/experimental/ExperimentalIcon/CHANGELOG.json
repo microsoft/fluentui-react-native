@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-icon",
   "entries": [
     {
+      "date": "Mon, 05 Dec 2022 21:29:32 GMT",
+      "tag": "@fluentui-react-native/experimental-icon_v0.0.5",
+      "version": "0.0.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/experimental-icon",
+            "commit": "cc03a282a2b2184ac107da8b7ed9b0f945e43c74",
+            "comment": "Fixed import for the Icon"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Dec 2022 03:12:20 GMT",
       "tag": "@fluentui-react-native/experimental-icon_v0.0.4",
       "version": "0.0.4",

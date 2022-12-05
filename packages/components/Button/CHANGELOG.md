@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Thu, 01 Dec 2022 03:12:19 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Dec 2022 21:29:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.4
+
+Mon, 05 Dec 2022 21:29:32 GMT
+
+### Patches
+
+- Provided FAB Tokens for iOS (ayushsinghs@yahoo.in)
 
 ## 0.32.3
 

@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Mon, 05 Dec 2022 21:29:32 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.3.6",
+      "version": "1.3.6",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "299ed92c52bf1d2603cd46b7848dcb4935c5954a",
+            "comment": "Fix NPM publish pipeline"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/avatar",
+            "comment": "Bump @fluentui-react-native/badge to v0.3.2",
+            "commit": "8bf7527f7c008ac79e831533f79f38bcc12f84cb"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 01 Dec 2022 03:12:20 GMT",
       "tag": "@fluentui-react-native/avatar_v1.3.4",
       "version": "1.3.4",

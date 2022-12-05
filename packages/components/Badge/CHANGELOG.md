@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/badge
 
-This log was last generated on Thu, 01 Dec 2022 03:12:19 GMT and should not be manually modified.
+This log was last generated on Mon, 05 Dec 2022 21:29:32 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.2
+
+Mon, 05 Dec 2022 21:29:32 GMT
+
+### Patches
+
+- Fix NPM publish pipeline (sanajmi@microsoft.com)
+- Updated danger and success colors (vkozlova@microsoft.com)
 
 ## 0.3.0
 

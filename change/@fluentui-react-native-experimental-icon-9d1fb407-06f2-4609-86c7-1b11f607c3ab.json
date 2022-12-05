@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fixed import for the Icon",
-  "packageName": "@fluentui-react-native/experimental-icon",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}
