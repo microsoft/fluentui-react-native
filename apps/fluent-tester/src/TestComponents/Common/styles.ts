@@ -148,7 +148,14 @@ export const mobileStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
-
+  testVariants: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
   testList: {
     width: '100%',
   },

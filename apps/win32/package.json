@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/tester-win32",
-  "version": "0.29.5",
+  "version": "0.30.0",
   "main": "src/index.tsx",
   "module": "src/index.tsx",
   "typings": "lib/index.d.ts",
@@ -31,10 +31,10 @@
     "directory": "apps/win32"
   },
   "dependencies": {
-    "@fluentui-react-native/tester": "^0.111.1",
+    "@fluentui-react-native/tester": "^0.113.0",
     "react": "17.0.2",
     "react-native": "^0.68.0",
-    "react-native-svg": "12.3.0",
+    "react-native-svg": "12.5.0",
     "tslib": "^2.3.1"
   },
   "devDependencies": {

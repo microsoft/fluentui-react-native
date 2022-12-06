@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix NPM publish pipeline",
-  "packageName": "@fluentui-react-native/dependency-profiles",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

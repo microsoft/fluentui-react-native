@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Fix NPM publish pipeline",
-  "packageName": "@fluentui-react-native/avatar",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

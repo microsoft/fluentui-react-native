@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Tester changes for FAB iOS",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

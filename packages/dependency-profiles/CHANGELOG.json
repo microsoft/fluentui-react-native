@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/dependency-profiles",
   "entries": [
     {
+      "date": "Mon, 05 Dec 2022 22:48:51 GMT",
+      "tag": "@fluentui-react-native/dependency-profiles_v0.1.42",
+      "version": "0.1.42",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/dependency-profiles",
+            "commit": "299ed92c52bf1d2603cd46b7848dcb4935c5954a",
+            "comment": "Fix NPM publish pipeline"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 25 Oct 2022 15:26:47 GMT",
       "tag": "@fluentui-react-native/dependency-profiles_v0.1.0",
       "version": "0.1.0",
