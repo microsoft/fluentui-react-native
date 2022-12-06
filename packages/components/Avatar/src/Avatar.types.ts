@@ -88,7 +88,7 @@ export interface AvatarConfigurableProps {
    * * neutral (default): gray
    * * brand: color from the brand palette
    * * brandInverted: Inverted color from the brand palette. @platform android
-   * * accent: // TO-DO. @platform android
+   * * accent @platform android
    * * colorful: picks a color from a set of pre-defined colors, based on a hash of the name (or idForColor if provided)
    * * [AvatarNamedColor]: a specific color from the theme
    * @defaultvalue neutral
@@ -103,6 +103,7 @@ export interface AvatarConfigurableProps {
   initialsColor?: ColorValue;
 
   outOfOffice?: boolean;
+
   /**
    * Ring props
    */
@@ -117,7 +118,6 @@ export interface AvatarConfigurableProps {
    *
    * Size is restricted to a limited set of supported values recommended for most uses (see `AvatarSizeValue`) and
    * based on design guidelines for the Avatar control.
-   *
    * @defaultvalue 24
    */
   size?: AvatarSize;
@@ -139,7 +139,6 @@ export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
 
   /**
    * Icon to be displayed when the avatar doesn't have an image or initials.
-   *
    * @defaultvalue `PersonRegular` (the default icon's size depends on the Avatar's size)
    */
   icon?: IconSourcesType;
@@ -157,7 +156,6 @@ export interface AvatarProps extends IViewProps, AvatarConfigurableProps {
    * using the `getInitials` function.
    *
    * The initials are displayed when there is no image (including while the image is loading).
-   *
    */
   initials?: string;
 
