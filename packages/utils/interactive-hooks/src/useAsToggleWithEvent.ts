@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { LayoutAnimation, Platform } from 'react-native';
 import { InteractionEvent } from '.';
 
 export type OnToggleWithEventCallback = (e: InteractionEvent, value?: boolean) => void;
@@ -26,7 +25,6 @@ export function useAsToggleWithEvent(
   const onChange = React.useCallback(
     (e: any) => {
       userCallback && userCallback(e, !isChecked);
-
       setChecked(!isChecked);
     },
     [isChecked, setChecked],
