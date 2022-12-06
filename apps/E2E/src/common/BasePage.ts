@@ -237,32 +237,36 @@ export class BasePage {
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
   get _testPage() {
+    console.error('You have to implement the method _testPage.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
-    // return By(DUMMY_CHAR);
-    throw new Error('You have to implement the method _primaryComponent.');
+    console.error('You have to implement the method _primaryComponent.');
+    return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
+    console.error('You have to implement the method _secondaryComponent.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
   get _pageButton() {
+    console.error('You have to implement the method _pageButton.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
   get _pageName(): string {
+    console.error('You have to implement the method _pageName.');
     return DUMMY_CHAR;
   }
 
