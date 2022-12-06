@@ -17,11 +17,11 @@ import { Keys, ExpandCollapseState, Attribute, AttributeValue } from '../../comm
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
 export const enum MenuComponentSelector {
-  PrimaryComponent = 0, //this._primaryComponent
-  SecondaryComponent, //this._secondaryComponent
-  TertiaryComponent, //this._tertiaryComponent
-  QuaternaryComponent, // this._quaternaryComponent
-  QuinternaryComponent, // this._quinternaryComponent
+  MenuTrigger = 0, //this._primaryComponent
+  FirstItem, //this._secondaryComponent
+  SecondItem, //this._tertiaryComponent
+  ThirdItem, // this._quaternaryComponent
+  FourthItem, // this._quinternaryComponent
 }
 
 class MenuPageObject extends BasePage {
@@ -38,7 +38,7 @@ class MenuPageObject extends BasePage {
   }
 
   async menuIsExpanded(): Promise<boolean> {
-    return await (await this._secondaryComponent).isDisplayed();
+    return await (await this._firstMenuItem).isDisplayed();
   }
 
   async waitForItemCallbackToFire(): Promise<void> {
@@ -49,11 +49,9 @@ class MenuPageObject extends BasePage {
     return (await (await this._callbackLabel).getText()) === MENUITEM_CALLBACK_TEXT;
   }
 
-  async itemIsFocused(itemPosition: number): Promise<boolean> {
-    const component = await this.getMenuComponentSelector(this.getItemSelector(itemPosition));
-    const res = await this.getElementAttribute(component, Attribute.IsFocused);
-    console.log(res);
-    return res === AttributeValue.true;
+  async componentIsFocused(selector: MenuComponentSelector): Promise<boolean> {
+    const component = await this.getMenuComponentSelector(selector);
+    return (await this.getElementAttribute(component, Attribute.IsFocused)) === AttributeValue.true;
   }
 
   async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
@@ -69,7 +67,7 @@ class MenuPageObject extends BasePage {
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityRole);
+    return await this.getElementAttribute(await this._firstMenuItem, Attribute.AccessibilityRole);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -78,21 +76,21 @@ class MenuPageObject extends BasePage {
   }
 
   async clickComponent(menuComponentSelector?: MenuComponentSelector): Promise<void> {
-    const selector = menuComponentSelector ?? MenuComponentSelector.PrimaryComponent;
+    const selector = menuComponentSelector ?? MenuComponentSelector.MenuTrigger;
     await (await this.getMenuComponentSelector(selector)).click();
   }
 
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
     switch (menuComponentSelector) {
-      case MenuComponentSelector.SecondaryComponent:
-        return await this._secondaryComponent;
-      case MenuComponentSelector.TertiaryComponent:
-        return await this._tertiaryComponent;
-      case MenuComponentSelector.QuaternaryComponent:
-        return await this._quaternaryComponent;
-      case MenuComponentSelector.QuinternaryComponent:
-        return await this._quinternaryComponent;
+      case MenuComponentSelector.FirstItem:
+        return await this._firstMenuItem;
+      case MenuComponentSelector.SecondItem:
+        return await this._secondMenuItem;
+      case MenuComponentSelector.ThirdItem:
+        return await this._thirdMenuItem;
+      case MenuComponentSelector.FourthItem:
+        return await this._fourthMenuItem;
       default:
         return await this._primaryComponent;
     }
@@ -101,13 +99,9 @@ class MenuPageObject extends BasePage {
   async resetTest() {
     // Both escape on the menu trigger to hard dismiss menu and click callback reset to reset focus
     if (await this.menuIsExpanded()) {
-      await this.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
+      await this.sendKey(MenuComponentSelector.MenuTrigger, Keys.ESCAPE);
       await (await this._callbackResetButton).click();
     }
-  }
-
-  getItemSelector(itemPosition: number) {
-    return itemPosition as MenuComponentSelector;
   }
 
   /*****************************************/
@@ -125,19 +119,19 @@ class MenuPageObject extends BasePage {
     return By(MENUTRIGGER_TEST_COMPONENT);
   }
 
-  get _secondaryComponent() {
+  get _firstMenuItem() {
     return By(MENUITEM_TEST_COMPONENT);
   }
 
-  get _tertiaryComponent() {
+  get _secondMenuItem() {
     return By(MENUITEM_DISABLED_COMPONENT);
   }
 
-  get _quaternaryComponent() {
+  get _thirdMenuItem() {
     return By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
   }
 
-  get _quinternaryComponent() {
+  get _fourthMenuItem() {
     return By(MENUITEM_FOURTH_COMPONENT);
   }
 
