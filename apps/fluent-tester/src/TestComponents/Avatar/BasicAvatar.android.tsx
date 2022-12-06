@@ -2,97 +2,45 @@ import React, { FunctionComponent } from 'react';
 import { Avatar } from '@fluentui-react-native/avatar';
 import { View } from 'react-native';
 import { steveBallmerPhotoUrl } from './../PersonaCoin/styles';
+import { mobileStyles } from '../Common/styles';
 
 export const StandardUsage: FunctionComponent = () => {
   return (
-    <View style={{ paddingBottom: 40 }} >
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly',
-      }}>
-
+    <View style={{ paddingBottom: 40 }}>
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Standard */}
 
         {/* With badge. */}
-        <Avatar
-          badge={{ status: 'available' }}
-          avatarColor={'brand'}
-          size={40}
-        />
+        <Avatar badge={{ status: 'available' }} avatarColor={'brand'} size={40} />
 
         {/* Variation - No Ring and badge. */}
-        <Avatar
-          size={56}
-          avatarColor={'brand'}
-        />
+        <Avatar size={56} avatarColor={'brand'} />
 
         {/* Variation - With Ring.*/}
-        <Avatar
-          active="active"
-          activeAppearance="ring"
-          size={56}
-          avatarColor={'brand'}
-        />
+        <Avatar active="active" activeAppearance="ring" size={56} avatarColor={'brand'} />
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly'
-      }}>
-
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Standard Inverted */}
 
         {/* With badge only.*/}
-        <Avatar
-          size={56}
-          badge={{ status: 'available' }}
-          avatarColor={'brandInverted'}
-        />
+        <Avatar size={56} badge={{ status: 'available' }} avatarColor={'brandInverted'} />
 
         {/* No ring and badge.*/}
-        <Avatar
-          size={56}
-          avatarColor={'brandInverted'}
-        />
+        <Avatar size={56} avatarColor={'brandInverted'} />
 
         {/* With ring.*/}
-        <Avatar
-          active="active"
-          activeAppearance="ring"
-          size={56}
-          avatarColor={'brandInverted'} />
+        <Avatar active="active" activeAppearance="ring" size={56} avatarColor={'brandInverted'} />
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly',
-      }}>
+      <View style={mobileStyles.testVariants}>
         {/*Variation - Anonymous*/}
 
         {/* With Badge.*/}
-        <Avatar
-          size={56}
-          badge={{ status: 'available' }}
-        />
+        <Avatar size={56} badge={{ status: 'available' }} />
 
         {/* No ring and badge.*/}
-        <Avatar
-          accessibilityLabel="Fall-back Icon"
-          accessibilityHint="A picture representing a user"
-          size={56}
-        />
+        <Avatar accessibilityLabel="Fall-back Icon" accessibilityHint="A picture representing a user" size={56} />
 
         {/* With ring. */}
         <Avatar
@@ -104,30 +52,14 @@ export const StandardUsage: FunctionComponent = () => {
         />
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly',
-      }}>
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Anonymous accent.*/}
 
         {/* With badge.*/}
-        <Avatar
-          size={56}
-          badge={{ status: 'available' }}
-          avatarColor={'accent'}
-        />
+        <Avatar size={56} badge={{ status: 'available' }} avatarColor={'accent'} />
 
         {/* No ring and badge.*/}
-        <Avatar
-          accessibilityLabel="Fall-back Icon"
-          accessibilityHint="A picture representing a user"
-          size={56}
-          avatarColor={'accent'}
-        />
+        <Avatar accessibilityLabel="Fall-back Icon" accessibilityHint="A picture representing a user" size={56} avatarColor={'accent'} />
 
         {/* With ring. */}
         <Avatar
@@ -140,104 +72,41 @@ export const StandardUsage: FunctionComponent = () => {
         />
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly',
-      }}>
-
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Initials.*/}
 
         {/* With badge.*/}
-        <Avatar
-          size={56}
-          badge={{ status: 'outOfOffice' }}
-          name="* Richard Faynman *"
-        />
+        <Avatar size={56} badge={{ status: 'outOfOffice' }} name="* Richard Faynman *" />
 
         {/* No ring and badge.*/}
-        <Avatar
-          size={56}
-          name="* Annie Markus *"
-          avatarColor={'colorful'}
-        />
+        <Avatar size={56} name="* Annie Markus *" avatarColor={'colorful'} />
 
         {/* With ring. */}
-        <Avatar
-          active="active"
-          activeAppearance="ring"
-          size={56}
-          name="* Keshav Madhav *"
-          avatarColor={'colorful'}
-        />
+        <Avatar active="active" activeAppearance="ring" size={56} name="* Keshav Madhav *" avatarColor={'colorful'} />
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly',
-      }}>
-
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Image. */}
 
         {/* With badge.*/}
-        <Avatar
-          size={56}
-          badge={{ status: 'outOfOffice' }}
-          name="* Richard Faynman *"
-          imageUrl={steveBallmerPhotoUrl}
-        />
+        <Avatar size={56} badge={{ status: 'outOfOffice' }} name="* Richard Faynman *" imageUrl={steveBallmerPhotoUrl} />
 
         {/* No ring and badge.*/}
-        <Avatar
-          size={56}
-          imageUrl={steveBallmerPhotoUrl}
-          avatarColor={'colorful'}
-        />
+        <Avatar size={56} imageUrl={steveBallmerPhotoUrl} avatarColor={'colorful'} />
 
         {/* With ring.*/}
-        <Avatar
-          active="active"
-          activeAppearance="ring"
-          size={56}
-          name="* Richard Faynman *"
-          imageUrl={steveBallmerPhotoUrl}
-
-        />
+        <Avatar active="active" activeAppearance="ring" size={56} name="* Richard Faynman *" imageUrl={steveBallmerPhotoUrl} />
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        marginHorizontal: 10,
-        paddingTop: 10,
-        paddingBottom: 5,
-        flex: 1,
-        justifyContent: 'space-evenly',
-      }}>
-
+      <View style={mobileStyles.testVariants}>
         {/* Variation - Overflow .*/}
 
-        <Avatar
-          size={56}
-          initials="20"
-          avatarColor={'colorful'}
-        />
+        <Avatar size={56} initials="20" avatarColor={'colorful'} />
 
         {/* Variation - Group avatar*/}
 
-        <Avatar
-          size={56}
-          shape={'square'}
-          avatarColor={'colorful'}
-          name="*Annie Martha*"
-        />
+        <Avatar size={56} shape={'square'} avatarColor={'colorful'} name="*Annie Martha*" />
       </View>
-    </View >
+    </View>
   );
 };

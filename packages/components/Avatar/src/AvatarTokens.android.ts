@@ -130,14 +130,14 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
       iconColor: t.colors.neutralForegroundOnBrand,
       ringColor: t.colors.brandStroke1,
     },
-     brandInverted: {
+    brandInverted: {
       backgroundColor: t.colors.neutralBackground1,
       iconColor: t.colors.brandForeground1,
       ringColor: t.colors.brandStroke1,
     },
     accent: {
       backgroundColor: t.colors.brandBackgroundTint,
-      iconColor:t.colors.brandForegroundTint,
+      iconColor: t.colors.brandForegroundTint,
       ringColor: t.colors.brandStroke1,
     },
     darkRed: getColorProps('darkRed', t),
@@ -170,9 +170,6 @@ export const defaultAvatarTokens: TokenSettings<AvatarTokens, Theme> = (t: Theme
     mink: getColorProps('mink', t),
     platinum: getColorProps('platinum', t),
     anchor: getColorProps('anchor', t),
-    burgundy: getColorProps('burgundy', t),
-    hotPink: getColorProps('hotPink', t),
-    orchid: getColorProps('orchid', t),
   } as AvatarTokens);
 
 /**

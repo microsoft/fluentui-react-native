@@ -14,17 +14,18 @@ const avatarSections: TestSection[] = [
   },
   ...Platform.select({
     android: [null],
-    default:
-      [{
+    default: [
+      {
         name: 'Customize Usage',
         component: CustomizeUsage,
       },
       {
         name: 'Avatar E2E',
         component: E2EAvatarTest,
-      }],
-  })];
-
+      },
+    ],
+  }),
+];
 
 export const AvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {

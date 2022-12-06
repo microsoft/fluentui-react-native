@@ -240,7 +240,7 @@ export interface AvatarTokens extends IBackgroundColorTokens, IForegroundColorTo
   neutral?: AvatarTokens;
   brand?: AvatarTokens;
   brandInverted?: AvatarTokens;
-  accent?:AvatarTokens;
+  accent?: AvatarTokens;
   darkRed?: AvatarTokens;
   cranberry?: AvatarTokens;
   red?: AvatarTokens;
