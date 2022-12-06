@@ -97,6 +97,7 @@ exports[`Button component tests Button composed 1`] = `
     style={
       Object {
         "color": "#ffffff",
+        "dynamicTypeRamp": undefined,
         "fontFamily": "System",
         "fontSize": 15,
         "fontWeight": "600",
@@ -321,7 +322,7 @@ exports[`Button component tests Button large 1`] = `
       "justifyContent": "center",
       "minWidth": 96,
       "padding": 11,
-      "paddingHorizontal": 19,
+      "paddingHorizontal": 15,
       "width": undefined,
     }
   }

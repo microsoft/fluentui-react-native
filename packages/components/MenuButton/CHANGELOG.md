@@ -1,8 +1,63 @@
 # Change Log - @fluentui-react-native/menu-button
 
-This log was last generated on Tue, 29 Nov 2022 20:39:50 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Dec 2022 16:59:54 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.10.1
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.6
+- Bump @fluentui-react-native/contextual-menu to v0.21.1
+- Bump @fluentui-react-native/icon to v0.16.1
+- Bump @uifabricshared/foundation-compose to v1.12.25
+
+## 0.10.0
+
+Tue, 06 Dec 2022 02:02:54 GMT
+
+### Minor changes
+
+- Bump react-native-svg: 12.3.0 -> 12.5.0 (winlarry@microsoft.com)
+- Bump @fluentui-react-native/button to v0.32.5
+- Bump @fluentui-react-native/contextual-menu to v0.21.0
+- Bump @fluentui-react-native/icon to v0.16.0
+
+## 0.9.8
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/button to v0.32.4
+- Bump @fluentui-react-native/contextual-menu to v0.20.7
+- Bump @fluentui-react-native/icon to v0.15.5
+- Bump @fluentui-react-native/tokens to v0.19.0
+- Bump @uifabricshared/foundation-compose to v1.12.24
+
+## 0.9.7
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/button to v0.32.3
+- Bump @fluentui-react-native/contextual-menu to v0.20.6
+- Bump @fluentui-react-native/icon to v0.15.4
+- Bump @fluentui-react-native/tokens to v0.18.1
+- Bump @uifabricshared/foundation-compose to v1.12.23
+
+## 0.9.6
+
+Wed, 30 Nov 2022 21:33:19 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/contextual-menu to v0.20.5
 
 ## 0.9.5
 

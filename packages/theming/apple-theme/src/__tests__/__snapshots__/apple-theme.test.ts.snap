@@ -459,21 +459,10 @@ Object {
     },
   },
   "spacing": Object {
-    "l": 20,
     "l1": "20px",
     "l2": "32px",
-    "m": 16,
-    "none": 0,
-    "s": 12,
     "s1": "8px",
     "s2": "4px",
-    "xl": 24,
-    "xs": 8,
-    "xxl": 36,
-    "xxs": 4,
-    "xxxl": 48,
-    "xxxs": 2,
-    "xxxxl": 72,
   },
   "typography": Object {
     "families": Object {
@@ -495,6 +484,7 @@ Object {
     },
     "variants": Object {
       "body1": Object {
+        "dynamicTypeRamp": "body",
         "face": "System",
         "letterSpacing": -0.43,
         "lineHeight": 22,
@@ -502,6 +492,7 @@ Object {
         "weight": "400",
       },
       "body1Strong": Object {
+        "dynamicTypeRamp": "body",
         "face": "System",
         "letterSpacing": -0.43,
         "lineHeight": 22,
@@ -509,6 +500,7 @@ Object {
         "weight": "600",
       },
       "body2": Object {
+        "dynamicTypeRamp": "subheadline",
         "face": "System",
         "letterSpacing": -0.23,
         "lineHeight": 20,
@@ -516,6 +508,7 @@ Object {
         "weight": "400",
       },
       "body2Strong": Object {
+        "dynamicTypeRamp": "subheadline",
         "face": "System",
         "letterSpacing": -0.23,
         "lineHeight": 20,
@@ -533,6 +526,7 @@ Object {
         "weight": "400",
       },
       "caption1": Object {
+        "dynamicTypeRamp": "footnote",
         "face": "System",
         "letterSpacing": -0.08,
         "lineHeight": 18,
@@ -540,6 +534,7 @@ Object {
         "weight": "400",
       },
       "caption1Strong": Object {
+        "dynamicTypeRamp": "footnote",
         "face": "System",
         "letterSpacing": -0.08,
         "lineHeight": 18,
@@ -547,6 +542,7 @@ Object {
         "weight": "600",
       },
       "caption2": Object {
+        "dynamicTypeRamp": "caption1",
         "face": "System",
         "letterSpacing": 0,
         "lineHeight": 16,
@@ -559,6 +555,7 @@ Object {
         "weight": "400",
       },
       "display": Object {
+        "dynamicTypeRamp": "largeTitle",
         "face": "System",
         "letterSpacing": 0.26,
         "lineHeight": 70,
@@ -596,6 +593,7 @@ Object {
         "weight": "400",
       },
       "largeTitle": Object {
+        "dynamicTypeRamp": "largeTitle",
         "face": "System",
         "letterSpacing": 0.4,
         "lineHeight": 41,
@@ -623,6 +621,7 @@ Object {
         "weight": "400",
       },
       "title1": Object {
+        "dynamicTypeRamp": "title1",
         "face": "System",
         "letterSpacing": 0.38,
         "lineHeight": 34,
@@ -630,6 +629,7 @@ Object {
         "weight": "700",
       },
       "title2": Object {
+        "dynamicTypeRamp": "title2",
         "face": "System",
         "letterSpacing": -0.26,
         "lineHeight": 28,
@@ -637,6 +637,7 @@ Object {
         "weight": "600",
       },
       "title3": Object {
+        "dynamicTypeRamp": "title3",
         "face": "System",
         "letterSpacing": -0.45,
         "lineHeight": 25,

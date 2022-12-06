@@ -1,8 +1,25 @@
 # Change Log - @fluentui-react-native/theming-utils
 
-This log was last generated on Wed, 16 Nov 2022 08:47:25 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Dec 2022 00:46:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.19.1
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-types to v0.25.0
+
+## 0.19.0
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Minor changes
+
+- theme spacing tokens change (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theme-types to v0.24.0
 
 ## 0.18.3
 

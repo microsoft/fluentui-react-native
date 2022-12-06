@@ -25,6 +25,7 @@
     "checkchange": "beachball check --changehint \"Run 'yarn change' to generate a change file\"",
     "depcheck": "rnx-dep-check && lage depcheck",
     "lint": "lage lint",
+    "postinstall": "patch-package",
     "preinstall": "node ./scripts/use-yarn-please.js",
     "prettier": "lage prettier",
     "prettier-fix": "lage prettier-fix",
@@ -44,6 +45,7 @@
     "lage": "^1.5.0",
     "markdown-link-check": "^3.8.7",
     "metro-react-native-babel-preset": "^0.67.0",
+    "patch-package": "6.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
