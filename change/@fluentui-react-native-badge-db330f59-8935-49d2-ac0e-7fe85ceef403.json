@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "Updated danger and success colors",
   "packageName": "@fluentui-react-native/badge",
   "email": "vkozlova@microsoft.com",
