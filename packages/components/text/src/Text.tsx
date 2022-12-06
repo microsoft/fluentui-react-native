@@ -83,9 +83,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     [onPress, onAccessibilityTap],
   );
 
-  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
-  const dynamicTypeVariant = Platform.OS === 'ios' ? tokens.dynamicTypeRamp : undefined;
-
   // override tokens from props
   [tokens, cache] = patchTokens(tokens, cache, {
     color,
@@ -112,6 +109,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     }),
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
+
+  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+  const dynamicTypeVariant = Platform.OS === 'ios' ? tokenStyle.dynamicTypeRamp : undefined;
 
   // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
   let scaleStyleAdjustments: TextTokens = emptyProps;
@@ -149,6 +149,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
+    delete (mergedProps.style as TextTokens).dynamicTypeRamp; // TODO(#2268): RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will complain about it being an invalid prop
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
         {children}
