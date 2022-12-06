@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
 const StandardUsage: React.FunctionComponent = () => {
   const memoizedStyles = React.useMemo(
-    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 180 } : { ...commonTestStyles.settingsPicker }],
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 180 } : commonTestStyles.settingsPicker),
     [],
   );
   return (
@@ -41,7 +41,7 @@ const OnChangeUsage: React.FunctionComponent = () => {
   };
 
   const memoizedStyles = React.useMemo(
-    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : { ...commonTestStyles.settingsPicker }],
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : commonTestStyles.settingsPicker),
     [],
   );
 
@@ -65,7 +65,7 @@ const ControlSwitchValues: React.FunctionComponent = () => {
   };
 
   const memoizedStyles = React.useMemo(
-    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : { ...commonTestStyles.settingsPicker }],
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : commonTestStyles.settingsPicker),
     [],
   );
 

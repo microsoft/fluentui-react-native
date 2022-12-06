@@ -16,7 +16,7 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   const [switchPressed, setSwitchSwitchPressed] = React.useState(false);
 
   const memoizedStyles = React.useMemo(
-    () => [Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 100, marginBottom: 50 } : stackStyle],
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 100, marginBottom: 50 } : stackStyle),
     [],
   );
 
