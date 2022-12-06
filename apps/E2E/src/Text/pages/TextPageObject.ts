@@ -66,10 +66,6 @@ class TextPageObject extends BasePage {
     return By(FIRST_TEXT_COMPONENT);
   }
 
-  get _secondaryComponent() {
-    return By(SECOND_TEXT_COMPONENT);
-  }
-
   get _firstComponent() {
     return By(FIRST_TEXT_COMPONENT);
   }
