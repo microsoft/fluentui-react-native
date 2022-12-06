@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/button",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 02:02:55 GMT",
+      "tag": "@fluentui-react-native/button_v0.32.5",
+      "version": "0.32.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/experimental-activity-indicator to v0.7.0",
+            "commit": "d64b7100cfa70fd9763d2c593ee606bc899801ee"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/button",
+            "comment": "Bump @fluentui-react-native/icon to v0.16.0",
+            "commit": "d64b7100cfa70fd9763d2c593ee606bc899801ee"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 00:46:41 GMT",
       "tag": "@fluentui-react-native/button_v0.32.4",
       "version": "0.32.4",

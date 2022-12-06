@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 02:02:55 GMT",
+      "tag": "@fluentui-react-native/tester-win32_v0.30.0",
+      "version": "0.30.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester-win32",
+            "commit": "d64b7100cfa70fd9763d2c593ee606bc899801ee",
+            "comment": "Bump react-native-svg: 12.3.0 -> 12.5.0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester-win32",
+            "comment": "Bump @fluentui-react-native/tester to v0.113.0",
+            "commit": "d64b7100cfa70fd9763d2c593ee606bc899801ee"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 00:46:41 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.29.7",
       "version": "0.29.7",

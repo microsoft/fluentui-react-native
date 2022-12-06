@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Bump react-native-svg: 12.3.0 -> 12.5.0",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

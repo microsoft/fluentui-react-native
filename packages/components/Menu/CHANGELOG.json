@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/menu",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 02:02:55 GMT",
+      "tag": "@fluentui-react-native/menu_v1.1.0",
+      "version": "1.1.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/menu",
+            "commit": "d64b7100cfa70fd9763d2c593ee606bc899801ee",
+            "comment": "Bump react-native-svg: 12.3.0 -> 12.5.0"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/menu",
+            "comment": "Bump @fluentui-react-native/button to v0.32.5",
+            "commit": "d64b7100cfa70fd9763d2c593ee606bc899801ee"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 00:46:41 GMT",
       "tag": "@fluentui-react-native/menu_v1.0.83",
       "version": "1.0.83",

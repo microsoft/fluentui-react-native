@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/button
 
-This log was last generated on Tue, 06 Dec 2022 00:46:41 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Dec 2022 02:02:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.32.5
+
+Tue, 06 Dec 2022 02:02:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-activity-indicator to v0.7.0
+- Bump @fluentui-react-native/icon to v0.16.0
 
 ## 0.32.4
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-tabs
 
-This log was last generated on Tue, 06 Dec 2022 00:46:41 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Dec 2022 02:02:55 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.8.8
+
+Tue, 06 Dec 2022 02:02:55 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.16.0
 
 ## 0.8.7
 
