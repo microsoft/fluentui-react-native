@@ -18,6 +18,11 @@ import {
   Title3,
 } from '@fluentui-react-native/text';
 
+const LimitedDisplay = Display.customize({
+  dynamicTypeRamp: 'display',
+  maximumFontSize: 70,
+});
+
 export const V2Usage: React.FunctionComponent = () => {
   return (
     <View>
@@ -44,6 +49,7 @@ export const V2Usage: React.FunctionComponent = () => {
         <TextV1 variant="title1">Title1</TextV1>
         <LargeTitle>LargeTitle</LargeTitle>
         <TextV1 variant="largeTitle">LargeTitle</TextV1>
+        <LimitedDisplay>Disp(&le;70)</LimitedDisplay>
         <Display>Display</Display>
         <TextV1 variant="display">Display</TextV1>
       </Stack>

@@ -11,7 +11,9 @@ export const textName = 'Text';
 export type TextTokens = Omit<FontTokens, 'fontFamily'> &
   IForegroundColorTokens &
   Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'> & {
-    dynamicTypeRamp?: string; // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+    // TODO(#2268): Remove these once RN Core properly supports Dynamic Type scaling
+    dynamicTypeRamp?: string;
+    maximumFontSize?: number;
   };
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify';
