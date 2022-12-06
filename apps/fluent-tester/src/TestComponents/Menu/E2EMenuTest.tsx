@@ -14,7 +14,6 @@ import {
   MENU_ON_OPEN,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
-  MENU_DEFOCUS_BUTTON,
   MENU_CALLBACK_RESET_BUTTON,
   MENUITEM_FOURTH_COMPONENT,
   MENUITEM_DISABLED_COMPONENT,
@@ -45,7 +44,6 @@ export const E2EMenuTest: React.FunctionComponent = () => {
     <Stack style={stackStyle}>
       <View style={{ flexDirection: 'row' }}>
         {menuOpened ? <Text testID={MENU_ON_OPEN}>Menu opened</Text> : <Text testID={MENU_ON_CLOSE}>Menu closed</Text>}
-        <Button testID={MENU_DEFOCUS_BUTTON}>Defocus Button</Button>
         <Button onClick={onResetClick} testID={MENU_CALLBACK_RESET_BUTTON}>
           Reset Item Callback
         </Button>
@@ -58,7 +56,7 @@ export const E2EMenuTest: React.FunctionComponent = () => {
               <MenuItem onClick={onItemClick} testID={MENUITEM_TEST_COMPONENT} accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}>
                 A plain MenuItem
               </MenuItem>
-              <MenuItem testID={MENUITEM_DISABLED_COMPONENT} disabled>
+              <MenuItem onClick={onItemClick} testID={MENUITEM_DISABLED_COMPONENT} disabled>
                 A second disabled plain MenuItem
               </MenuItem>
               <MenuItem testID={MENUITEM_NO_A11Y_LABEL_COMPONENT}>{MENUITEM_TEST_LABEL}</MenuItem>

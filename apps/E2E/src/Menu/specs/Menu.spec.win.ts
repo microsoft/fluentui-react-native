@@ -109,6 +109,38 @@ describe('Menu Functional Testing', () => {
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
+  it('Validate disabled MenuItem onClick() callback does not fire -> Click', async () => {
+    // we want to test for this because a disabled item is focusable for accessibility reasons, but it should not do anything when activated
+    await MenuPageObject.clickComponent();
+    await MenuPageObject.waitForMenuToOpen();
+    // fire callback
+    await MenuPageObject.clickComponent(MenuPageObject.getItemSelector(2));
+    await expect(await MenuPageObject.didItemCallbackFire()).toBeFalsy();
+
+    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Validate disabled MenuItem onClick() callback does not fire -> Press Enter', async () => {
+    // we want to test for this because a disabled item is focusable for accessibility reasons, but it should not do anything when activated
+    await MenuPageObject.clickComponent();
+    await MenuPageObject.waitForMenuToOpen();
+    await MenuPageObject.sendKey(MenuPageObject.getItemSelector(2), Keys.ENTER);
+    await expect(await MenuPageObject.didItemCallbackFire()).toBeFalsy();
+
+    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Validate disabled MenuItem onClick() callback does not fire -> Press Space', async () => {
+    // we want to test for this because a disabled item is focusable for accessibility reasons, but it should not do anything when activated
+    await MenuPageObject.clickComponent();
+    await MenuPageObject.waitForMenuToOpen();
+    // fire callback
+    await MenuPageObject.sendKey(MenuPageObject.getItemSelector(2), Keys.SPACE);
+    await expect(await MenuPageObject.didItemCallbackFire()).toBeFalsy();
+
+    await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
+  });
+
   // menu navigation
 
   it('Validate MenuItem navigation works correctly -> Press Up + Down', async () => {

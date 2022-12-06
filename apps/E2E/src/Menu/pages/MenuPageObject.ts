@@ -5,7 +5,6 @@ import {
   HOMEPAGE_MENU_BUTTON,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
-  MENU_DEFOCUS_BUTTON,
   MENUITEM_DISABLED_COMPONENT,
   MENUITEM_FOURTH_COMPONENT,
   MENU_CALLBACK_RESET_BUTTON,
@@ -100,10 +99,9 @@ class MenuPageObject extends BasePage {
   }
 
   async resetTest() {
-    // Both escape on the menu trigger to hard dismiss menu and click defocus to reset focus
+    // Both escape on the menu trigger to hard dismiss menu and click callback reset to reset focus
     if (await this.menuIsExpanded()) {
       await this.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
-      await (await this._defocusButton).click();
       await (await this._callbackResetButton).click();
     }
   }
@@ -145,10 +143,6 @@ class MenuPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_MENU_BUTTON);
-  }
-
-  get _defocusButton() {
-    return By(MENU_DEFOCUS_BUTTON);
   }
 
   get _callbackResetButton() {
