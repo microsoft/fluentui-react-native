@@ -23,7 +23,7 @@
     "directory": "packages/utils/test-tools"
   },
   "dependencies": {
-    "@fluentui-react-native/theme-types": ">=0.24.0 <1.0.0"
+    "@fluentui-react-native/theme-types": ">=0.25.0 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",

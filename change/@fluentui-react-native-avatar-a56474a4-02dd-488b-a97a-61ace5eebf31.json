@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Android Avatar variations",
+  "packageName": "@fluentui-react-native/avatar",
+  "email": "email not defined",
+  "dependentChangeType": "patch"
+}

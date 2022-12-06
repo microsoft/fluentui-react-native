@@ -145,8 +145,7 @@ jobs:
   # Windows bundling and end to end testing
   - job: WindowsPR
     displayName: Windows PR
-    pool:
-      vmImage: 'windows-2019'
+    pool: rnw-pool-4
     timeoutInMinutes: 60 # how long to run the job before automatically cancelling
     cancelTimeoutInMinutes: 5 # how much time to give 'run always even if cancelled tasks' before killing them
 
@@ -155,6 +154,7 @@ jobs:
     steps:
       - checkout: self
         persistCredentials: true
+        fetchDepth: 5
 
       # yarn and minimal build to get set up
       - template: templates/setup-repo-min-build.yml
