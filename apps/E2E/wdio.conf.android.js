@@ -16,7 +16,6 @@ exports.config = {
       platformName: 'android',
       'appium:appPackage': 'com.microsoft.reacttestapp',
       'appium:appActivity': 'MainActivity',
-      // 'appium:noReset': true,
       'appium:automationName': 'uiautomator2',
     },
   ],
@@ -162,7 +161,6 @@ exports.config = {
    * @param {Object} suite suite details
    */
   // afterSuite: function (suite) {
-  //   browser.back();
   // },
   /**
    * Runs after a WebdriverIO command gets executed

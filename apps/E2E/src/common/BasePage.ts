@@ -15,9 +15,6 @@ export async function By(identifier: string) {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
-  // if (PLATFORM === MobilePlatform.Android) {
-  //   return await $(`android=new UiSelector().description("${identifier}")`); // TODO: Document is query chaining will help, Check for common spec files and movement to test page, re-run only failing test
-  // }
   return await QueryWithChaining(identifier);
 }
 
