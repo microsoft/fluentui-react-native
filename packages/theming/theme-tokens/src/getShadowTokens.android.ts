@@ -1,4 +1,3 @@
-
 import lightShadowTokens from '@fluentui-react-native/design-tokens-android/light/tokens-shadow.json';
 import darkShadowTokens from '@fluentui-react-native/design-tokens-android/dark/tokens-shadow.json';
 import { AppearanceOptions } from '@fluentui-react-native/theme-types';
@@ -10,5 +9,5 @@ export function getShadowTokens(mode: AppearanceOptions) {
     return darkShadowTokens;
   }
 
-return lightShadowTokens;
+  return lightShadowTokens;
 }

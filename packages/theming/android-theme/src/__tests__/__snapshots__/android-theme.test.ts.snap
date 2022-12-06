@@ -313,13 +313,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -383,13 +383,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -923,13 +923,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -993,13 +993,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -1533,13 +1533,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -1603,13 +1603,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -2013,7 +2013,7 @@ Object {
     "neutralBackground4Hover": undefined,
     "neutralBackground4Pressed": "#dbdbdb",
     "neutralBackground4Selected": "#e6e6e6",
-    "neutralBackground5": "#3d3d3d",
+    "neutralBackground5": "#F0F0F0",
     "neutralBackground5Hover": undefined,
     "neutralBackground5Pressed": "#6b6b6b",
     "neutralBackground5Selected": "#616161",
@@ -2143,13 +2143,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -2213,13 +2213,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -2753,13 +2753,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -2823,13 +2823,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -3233,7 +3233,7 @@ Object {
     "neutralBackground4Hover": undefined,
     "neutralBackground4Pressed": "#dbdbdb",
     "neutralBackground4Selected": "#e6e6e6",
-    "neutralBackground5": "#3d3d3d",
+    "neutralBackground5": "#F0F0F0",
     "neutralBackground5Hover": undefined,
     "neutralBackground5Pressed": "#6b6b6b",
     "neutralBackground5Selected": "#616161",
@@ -3363,13 +3363,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -3433,13 +3433,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
