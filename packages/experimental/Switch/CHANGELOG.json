@@ -2,6 +2,33 @@
   "name": "@fluentui-react-native/switch",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 16:59:54 GMT",
+      "tag": "@fluentui-react-native/switch_v0.7.9",
+      "version": "0.7.9",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/text to v0.18.1",
+            "commit": "194db935512b14a024c78b97466f6bf5cd94074b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.24",
+            "commit": "194db935512b14a024c78b97466f6bf5cd94074b"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/switch",
+            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.21.5",
+            "commit": "194db935512b14a024c78b97466f6bf5cd94074b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 00:46:41 GMT",
       "tag": "@fluentui-react-native/switch_v0.7.8",
       "version": "0.7.8",

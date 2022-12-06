@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/interactive-hooks",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 16:59:54 GMT",
+      "tag": "@fluentui-react-native/interactive-hooks_v0.21.5",
+      "version": "0.21.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/interactive-hooks",
+            "comment": "Bump @fluentui-react-native/framework to v0.8.24",
+            "commit": "194db935512b14a024c78b97466f6bf5cd94074b"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 00:46:41 GMT",
       "tag": "@fluentui-react-native/interactive-hooks_v0.21.4",
       "version": "0.21.4",
