@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Allow V1 usage of V2 text variants",
-  "packageName": "@fluentui-react-native/tokens",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}

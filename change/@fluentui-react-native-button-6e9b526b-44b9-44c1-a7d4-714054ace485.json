@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Provided FAB Tokens for iOS",
-  "packageName": "@fluentui-react-native/button",
-  "email": "ayushsinghs@yahoo.in",
-  "dependentChangeType": "patch"
-}

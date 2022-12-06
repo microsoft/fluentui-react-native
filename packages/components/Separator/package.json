@@ -1,6 +1,6 @@
 {
   "name": "@fluentui-react-native/separator",
-  "version": "0.13.5",
+  "version": "0.13.6",
   "description": "A cross-platform Separator component using the Fluent Design System",
   "main": "src/index.ts",
   "module": "src/index.ts",
@@ -26,7 +26,7 @@
     "directory": "packages/components/Separator"
   },
   "dependencies": {
-    "@fluentui-react-native/framework": ">=0.8.22 <1.0.0"
+    "@fluentui-react-native/framework": ">=0.8.23 <1.0.0"
   },
   "devDependencies": {
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
