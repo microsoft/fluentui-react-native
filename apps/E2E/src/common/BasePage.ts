@@ -243,7 +243,8 @@ export class BasePage {
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
-    return By(DUMMY_CHAR);
+    // return By(DUMMY_CHAR);
+    throw new Error('You have to implement the method _primaryComponent.');
   }
 
   // Returns: UI Element
