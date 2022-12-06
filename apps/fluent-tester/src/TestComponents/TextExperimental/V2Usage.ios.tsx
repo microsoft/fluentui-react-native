@@ -19,7 +19,6 @@ import {
 } from '@fluentui-react-native/text';
 
 const LimitedDisplay = Display.customize({
-  dynamicTypeRamp: 'display',
   maximumFontSize: 70,
 });
 
