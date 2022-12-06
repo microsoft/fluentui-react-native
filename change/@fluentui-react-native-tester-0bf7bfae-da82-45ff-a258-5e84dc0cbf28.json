@@ -1,5 +1,5 @@
 {
-  "type": "patch",
+  "type": "minor",
   "comment": "Add more baseline Menu E2E tests",
   "packageName": "@fluentui-react-native/tester",
   "email": "winlarry@microsoft.com",

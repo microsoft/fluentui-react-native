@@ -54,7 +54,7 @@ describe('Menu Functional Testing', () => {
     await MenuPageObject.resetTest();
   });
 
-  // menu opens
+  // OnOpenChange callback for MenuTrigger
 
   it('Validate OnOpenChange() callback was fired -> Click', async () => {
     await MenuPageObject.clickComponent();
@@ -141,7 +141,7 @@ describe('Menu Functional Testing', () => {
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  // menu navigation
+  // menuitem navigation with keyboard
 
   it('Validate MenuItem navigation works correctly -> Press Up + Down', async () => {
     // open menu
