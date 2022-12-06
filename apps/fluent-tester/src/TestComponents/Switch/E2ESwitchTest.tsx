@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Stack } from '@fluentui-react-native/stack';
 import { Switch } from '@fluentui-react-native/switch';
-import { Text } from '@fluentui-react-native/experimental-text';
+import { TextV1 } from '@fluentui-react-native/text';
 import { stackStyle, commonTestStyles } from '../Common/styles';
 import {
   SWITCH_TEST_COMPONENT,
@@ -30,7 +30,7 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
   return (
     <Stack style={memoizedStyles}>
       <Switch testID={SWITCH_TEST_COMPONENT} label={'Switch Test'} onChange={onToggle} accessibilityLabel={SWITCH_ACCESSIBILITY_LABEL} />
-      {switchPressed ? <Text testID={SWITCH_ON_PRESS}>Switch Toggled On</Text> : null}
+      {switchPressed ? <TextV1 testID={SWITCH_ON_PRESS}>Switch Toggled On</TextV1> : null}
       <Switch label={SWITCH_TEST_COMPONENT_LABEL} testID={SWITCH_NO_A11Y_LABEL_COMPONENT} />
     </Stack>
   );
