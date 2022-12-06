@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/avatar",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 21:28:49 GMT",
+      "tag": "@fluentui-react-native/avatar_v1.5.0",
+      "version": "1.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/avatar",
+            "commit": "194db935512b14a024c78b97466f6bf5cd94074b",
+            "comment": "Android Avatar variations"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 16:59:54 GMT",
       "tag": "@fluentui-react-native/avatar_v1.4.1",
       "version": "1.4.1",

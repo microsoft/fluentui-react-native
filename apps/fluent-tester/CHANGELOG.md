@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 06 Dec 2022 16:59:54 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Dec 2022 21:28:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.114.0
+
+Tue, 06 Dec 2022 21:28:49 GMT
+
+### Minor changes
+
+- Updated tester styles (email not defined)
+- Bump @fluentui-react-native/avatar to v1.5.0
 
 ## 0.113.1
 

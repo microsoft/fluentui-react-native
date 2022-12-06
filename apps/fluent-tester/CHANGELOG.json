@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 06 Dec 2022 21:28:49 GMT",
+      "tag": "@fluentui-react-native/tester_v0.114.0",
+      "version": "0.114.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "email not defined",
+            "package": "@fluentui-react-native/tester",
+            "commit": "194db935512b14a024c78b97466f6bf5cd94074b",
+            "comment": "Updated tester styles"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/avatar to v1.5.0",
+            "commit": "e2af1361cb2a5fa9066a232bc092d7437aca9b19"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 06 Dec 2022 16:59:54 GMT",
       "tag": "@fluentui-react-native/tester_v0.113.1",
       "version": "0.113.1",

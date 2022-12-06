@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 06 Dec 2022 16:59:54 GMT and should not be manually modified.
+This log was last generated on Tue, 06 Dec 2022 21:28:49 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.5.0
+
+Tue, 06 Dec 2022 21:28:49 GMT
+
+### Minor changes
+
+- Android Avatar variations (email not defined)
 
 ## 1.4.1
 

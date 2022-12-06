@@ -8,15 +8,15 @@ module.exports = {
     },
     "@fluentui-react-native/tester": {
       "name": "@fluentui-react-native/tester",
-      "version": "0.113.1"
+      "version": "0.114.0"
     },
     "@fluentui-react-native/tester-win32": {
       "name": "@fluentui-react-native/tester-win32",
-      "version": "0.30.1"
+      "version": "0.30.2"
     },
     "@fluentui-react-native/avatar": {
       "name": "@fluentui-react-native/avatar",
-      "version": "1.4.1"
+      "version": "1.5.0"
     },
     "@fluentui-react-native/badge": {
       "name": "@fluentui-react-native/badge",
