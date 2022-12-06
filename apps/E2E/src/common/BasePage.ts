@@ -1,4 +1,4 @@
-import { Keys, ROOT_VIEW } from './consts';
+import { Keys, ROOT_SCROLL_VIEW, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../fluent-tester/src/TestComponents/Common/consts';
 import { Attribute } from './consts';
 
@@ -15,9 +15,9 @@ export async function By(identifier: string) {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
-  if (PLATFORM === MobilePlatform.Android) {
-    return await $(`android=new UiSelector().description("${identifier}")`);
-  }
+  // if (PLATFORM === MobilePlatform.Android) {
+  //   return await $(`android=new UiSelector().description("${identifier}")`); // TODO: Document is query chaining will help, Check for common spec files and movement to test page, re-run only failing test
+  // }
   return await QueryWithChaining(identifier);
 }
 
@@ -139,7 +139,7 @@ export class BasePage {
       case MobilePlatform.Android:
         await browser.waitUntil(
           async () => {
-            const bottomElementSelector = `new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().description("${this._pageButton}"))`;
+            const bottomElementSelector = `new UiScrollable(new UiSelector().description("${ROOT_SCROLL_VIEW}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
             await $(`android=${bottomElementSelector}`);
             return await (await this._pageButton).isDisplayed();
           },
@@ -275,6 +275,12 @@ export class BasePage {
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
   get _pageName(): string {
+    return DUMMY_CHAR;
+  }
+
+  // Returns: String
+  // Returns the name of the button that navigates to the test page.
+  get _pageButtonName(): string {
     return DUMMY_CHAR;
   }
 

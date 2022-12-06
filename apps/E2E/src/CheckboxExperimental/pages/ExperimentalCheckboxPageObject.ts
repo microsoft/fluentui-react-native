@@ -82,6 +82,10 @@ class ExperimentalCheckboxPageObject extends BasePage {
   get _pageButton() {
     return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
   }
+
+  get _pageButtonName(): string {
+    return HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON;
+  }
 }
 
 export default new ExperimentalCheckboxPageObject();

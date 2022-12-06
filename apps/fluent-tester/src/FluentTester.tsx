@@ -9,7 +9,7 @@ import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestCompon
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
-import { ROOT_VIEW } from '../../E2E/src/common/consts';
+import { ROOT_SCROLL_VIEW, ROOT_VIEW } from '../../E2E/src/common/consts';
 import { testProps } from './TestComponents/Common/TestProps';
 
 // uncomment the below lines to enable message spy
@@ -57,7 +57,7 @@ const TestListSeparator = Separator.customize((t) => ({
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
   // filters and sorts tests alphabetically
   const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
-  const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
+  const sortedTestComponents = filteredTestComponents.sort((a, b) => b.name.localeCompare(a.name));
 
   const { initialTest, enableSinglePaneView } = props;
   const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {
@@ -174,7 +174,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const MobileTestList: React.FunctionComponent = () => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} {...testProps(ROOT_SCROLL_VIEW)}>
           {sortedTestComponents.map((description, index) => {
             return (
               <View key={index}>
