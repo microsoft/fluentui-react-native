@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "add additional tests for Text",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "krsiler@microsoft.com",
+  "dependentChangeType": "patch"
+}
