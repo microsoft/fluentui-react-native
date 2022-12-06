@@ -39,6 +39,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     justifyContent: 'flex-end',
     pressed: {
       thumbSize: 24,
+      thumbMargin: 4,
     },
     disabled: {
       elevation: 0,
@@ -53,6 +54,7 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
     justifyContent: 'flex-start',
     pressed: {
       thumbSize: 24,
+      thumbMargin: 4,
     },
     disabled: {
       elevation: 0,
