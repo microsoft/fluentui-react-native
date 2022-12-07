@@ -36,7 +36,9 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const animateSwitchKnob = () => {
     if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut, () => {
+        UIManager.setLayoutAnimationEnabledExperimental(false);
+      });
     }
   };
 
