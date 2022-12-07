@@ -59,13 +59,13 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 
 1. Follow step #1 from "Win32 Steps" section above.
 2. POD Install
-   - C:\repo\fluentui-react-native> `cd apps\fluent-tester\macos`
-   - C:\repo\fluentui-react-native\apps\fluent-tester\macos> `pod install`
+   - (from fluentui-react-native) `cd apps/fluent-tester/macos`
+   - (from fluentui-react-native/apps/fluent-tester/macos) `pod install`
 3. Start the server
-   - C:\repo\fluentui-react-native> `cd apps\fluent-tester`
-   - C:\repo\fluentui-react-native\apps\fluent-tester> `yarn start`
+   - (from fluentui-react-native) `cd apps/fluent-tester`
+   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
 4. Open a new command prompt and run the E2E tests
-   - C:\repo\fluentui-react-native\apps\E2E> `yarn e2etest:macos`
+   - (from fluentui-react-native/apps/E2E) `yarn e2etest:macos`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
@@ -78,13 +78,13 @@ First check that iOS configs in wdio.conf.ios.js are updated to match your dev e
 
 1. Follow step #1 from "Win32 Steps" section above.
 2. POD Install
-   - C:\repo\fluentui-react-native> `cd apps\fluent-tester\ios`
-   - C:\repo\fluentui-react-native\apps\fluent-tester\macos> `pod install`
+   - (from fluentui-react-native) `cd apps/fluent-tester/ios`
+   - (from fluentui-react-native/apps/fluent-tester/ios) `pod install`
 3. Start the server
-   - C:\repo\fluentui-react-native> `cd apps\fluent-tester`
-   - C:\repo\fluentui-react-native\apps\fluent-tester> `yarn start`
+   - (from fluentui-react-native) `cd apps/fluent-tester`
+   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
 4. Open a new command prompt and run the E2E tests
-   - C:\repo\fluentui-react-native\apps\E2E> `yarn e2etest:ios`
+   - (from fluentui-react-native/apps/E2E) `yarn e2etest:ios`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
