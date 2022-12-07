@@ -1,5 +1,4 @@
 export const ROOT_VIEW = 'Fluent_Tester_Root_View';
-export const ROOT_SCROLL_VIEW = 'Fluent_Tester_Root_Scroll_View';
 
 /* Accessibility Role Control Types - https://docs.microsoft.com/en-us/windows/win32/winauto/uiauto-controltype-ids */
 export const BUTTON_A11Y_ROLE = 'ControlType.Button';

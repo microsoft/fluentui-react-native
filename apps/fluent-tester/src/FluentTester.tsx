@@ -9,7 +9,7 @@ import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestCompon
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
-import { ROOT_SCROLL_VIEW, ROOT_VIEW } from '../../E2E/src/common/consts';
+import { ROOT_VIEW } from '../../E2E/src/common/consts';
 import { testProps } from './TestComponents/Common/TestProps';
 
 // uncomment the below lines to enable message spy
@@ -174,7 +174,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const MobileTestList: React.FunctionComponent = () => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} {...testProps(ROOT_SCROLL_VIEW)}>
+        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}>
           {sortedTestComponents.map((description, index) => {
             return (
               <View key={index}>

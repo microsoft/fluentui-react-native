@@ -1,4 +1,4 @@
-import { Keys, ROOT_SCROLL_VIEW, ROOT_VIEW } from './consts';
+import { Keys, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../fluent-tester/src/TestComponents/Common/consts';
 import { Attribute } from './consts';
 
@@ -136,7 +136,7 @@ export class BasePage {
       case MobilePlatform.Android:
         await browser.waitUntil(
           async () => {
-            const bottomElementSelector = `new UiScrollable(new UiSelector().description("${ROOT_SCROLL_VIEW}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
+            const bottomElementSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_BUTTONS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
             await $(`android=${bottomElementSelector}`);
             return await (await this._pageButton).isDisplayed();
           },
