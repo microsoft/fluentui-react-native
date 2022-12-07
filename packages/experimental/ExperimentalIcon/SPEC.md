@@ -80,6 +80,11 @@ const svgSrcProps: SvgIconProps = {
 
 Icon renders Font or SVG icon based on props.
 
+### Accessibility
+
+Icon is accessible by default. It can be changed using prop `accessible`.
+`accessibilityRole` of SVG icon is `image`.
+
 ### Props
 
 ```ts
@@ -125,7 +130,7 @@ export interface SvgIconProps extends IViewProps {
    */
   uri?: string;
   /**
-   * Viewbox.
+   * Viewbox defines the position and dimension of an SVG viewport.
    */
   viewBox?: string;
   /**
@@ -142,7 +147,7 @@ Font Icon can be rendered using `codepoint` and `fontSource` props.
 ### Props
 
 ```ts
-export interface FontIconProps {
+export interface FontIconProps extends AccessibilityProps {
   /**
    * Unicode codepoint.
    */
@@ -156,7 +161,7 @@ export interface FontIconProps {
    */
   fontFamily?: string;
   /**
-   * Font size.
+   * Font size in points.
    */
   fontSize?: number;
   /**

@@ -26,7 +26,7 @@ export interface SvgIconProps extends IViewProps {
    */
   uri?: string;
   /**
-   * Viewbox.
+   * Viewbox defines the position and dimension of an SVG viewport.
    */
   viewBox?: string;
   /**

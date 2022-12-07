@@ -1,8 +1,8 @@
-import { ColorValue, TextStyle, StyleProp } from 'react-native';
+import { AccessibilityProps, ColorValue, TextStyle, StyleProp } from 'react-native';
 
 export const fontIconName = 'FontIcon';
 
-export interface FontIconProps {
+export interface FontIconProps extends AccessibilityProps {
   /**
    * Unicode codepoint.
    */
@@ -16,7 +16,7 @@ export interface FontIconProps {
    */
   fontFamily?: string;
   /**
-   * Font size.
+   * Font size in points.
    */
   fontSize?: number;
   /**
