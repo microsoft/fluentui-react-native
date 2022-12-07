@@ -69,6 +69,25 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
+## iOS Steps
+
+First check that iOS configs in wdio.conf.ios.js are updated to match your dev environment.
+
+- 'appium:deviceName' should be updated to a simulator that you have. You can check the ones you have by going to the 'Devices and Simulators' window in Xcode.
+- 'appium:platformVersion' should be updated to match the iOS version of the simulator you're using. You can check what version this should be in the same 'Devices and Simulators' window.
+
+1. Follow step #1 from "Win32 Steps" section above.
+2. POD Install
+   - C:\repo\fluentui-react-native> `cd apps\fluent-tester\ios`
+   - C:\repo\fluentui-react-native\apps\fluent-tester\macos> `pod install`
+3. Start the server
+   - C:\repo\fluentui-react-native> `cd apps\fluent-tester`
+   - C:\repo\fluentui-react-native\apps\fluent-tester> `yarn start`
+4. Open a new command prompt and run the E2E tests
+   - C:\repo\fluentui-react-native\apps\E2E> `yarn e2etest:ios`
+
+_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
+
 # Authoring E2E Test
 
 You just added a new component to FURN... Awesome! Now we need to make sure we have proper regression testing to make sure we put the safest product out there (don't worry, it's not as hard as it sounds). Here's what we have to do:
