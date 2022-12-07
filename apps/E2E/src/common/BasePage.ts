@@ -159,15 +159,20 @@ export class BasePage {
 
   /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
+    await this.waitForElementDisplayed(await this._primaryComponent, timeout);
+  }
+
+  /* Waits for the the specified UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
+  async waitForElementDisplayed(component: WebdriverIO.Element, timeout?: number): Promise<void> {
+    await browser.waitUntil(async () => await (await component).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
-        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+        'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
     });
   }
 
-  /* Scrolls to the primary UI test element until it is displayed. */
+  /* Scrolls to the specified or primary UI test element until it is displayed. */
   async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
     const ComponentToScrollTo = component ?? (await this._primaryComponent);
     if (await ComponentToScrollTo.isDisplayed()) {
