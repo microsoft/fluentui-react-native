@@ -1,7 +1,13 @@
 import * as React from 'react';
-import { usePressableState, useKeyProps, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import {
+  usePressableState,
+  useKeyProps,
+  useOnPressWithFocus,
+  useViewCommandFocus,
+  InteractionEvent,
+} from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
-import { AccessibilityState, AccessibilityActionEvent } from 'react-native';
+import { AccessibilityState, AccessibilityActionEvent, Platform, LayoutAnimation, UIManager } from 'react-native';
 import { memoize } from '@fluentui-react-native/framework';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
 
@@ -26,7 +32,20 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
     ...rest
   } = props;
 
-  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChange);
+  // Use Layout Animation for Knob animating on state change
+  const animateSwitchKnob = () => {
+    if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    }
+  };
+
+  const onChangeWithAnimation = (e: InteractionEvent, checked?: boolean) => {
+    onChange && onChange(e, checked);
+    animateSwitchKnob();
+  };
+
+  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
   const focusRef = disabled ? null : componentRef;
 
   if (__DEV__ && defaultChecked !== undefined && checked !== undefined) {
