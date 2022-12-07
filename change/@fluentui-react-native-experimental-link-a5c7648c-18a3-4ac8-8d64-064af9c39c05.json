@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "initial tokens for link android",
+  "packageName": "@fluentui-react-native/experimental-link",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
