@@ -14,9 +14,9 @@
 
 - [UWP Prerequisites](../fluent-tester/docs/windows.md)
 
-## MacOS Prerequisites
+## macOS Prerequisites
 
-- MacOS 10.15 or later
+- macOS 10.15 or later
 - XCode 12 or later should be installed
 - XCode Helper app should be enabled for Accessibility access. The app itself is usually found at: _/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/Xcode Helper.app_.
 
@@ -55,7 +55,7 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
-## MacOS Steps
+## macOS Steps
 
 1. Follow step #1 from "Win32 Steps" section above.
 2. POD Install
