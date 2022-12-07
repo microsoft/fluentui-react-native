@@ -200,7 +200,7 @@ export const ExperimentalLinkTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =

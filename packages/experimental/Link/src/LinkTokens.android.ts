@@ -1,0 +1,26 @@
+import { Theme } from '@fluentui-react-native/framework';
+import { TokenSettings } from '@fluentui-react-native/use-styling';
+import { LinkTokens } from './Link.types';
+
+export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
+  ({
+    color: t.colors.brandForeground1,
+    alignSelf: 'flex-start',
+    variant: 'body1',
+    inline: {
+      textDecorationLine: 'underline',
+    },
+    disabled: {
+      color: t.colors.brandForeground1Disabled,
+      textDecorationLine: 'none',
+    },
+    pressed: {
+      color: t.colors.brandForeground1Pressed,
+    },
+    subtle: {
+      color: t.colors.neutralForeground2,
+      pressed: {
+        color: t.colors.neutralBackground2Pressed,
+      },
+    },
+  } as LinkTokens);
