@@ -71,7 +71,7 @@ _Note: It could take up to a minute to load the test app with WebDriverIO, don't
 
 ## iOS Steps
 
-First check that iOS configs in wdio.conf.ios.js are updated to match your dev environment.
+First check that iOS configs in wdio.conf.ios.js are updated to match your dev environment. If the config doesn't match you may get an error message "App with bundle identifier 'com.microsoft.ReactTestApp' unknown"
 
 - 'appium:deviceName' should be updated to a simulator that you have. You can check the ones you have by going to the 'Devices and Simulators' window in Xcode.
 - 'appium:platformVersion' should be updated to match the iOS version of the simulator you're using. You can check what version this should be in the same 'Devices and Simulators' window.
