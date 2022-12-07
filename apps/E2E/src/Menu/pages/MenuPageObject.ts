@@ -9,7 +9,6 @@ import {
   MENUITEM_FOURTH_COMPONENT,
   MENU_CALLBACK_RESET_BUTTON,
   MENUITEM_CALLBACK_LABEL,
-  MENUITEM_CALLBACK_TEXT,
 } from '../../../../fluent-tester/src/TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
 import { Keys, ExpandCollapseState, Attribute, AttributeValue } from '../../common/consts';
@@ -18,10 +17,10 @@ import { Keys, ExpandCollapseState, Attribute, AttributeValue } from '../../comm
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
 export const enum MenuComponentSelector {
   MenuTrigger = 0, //this._primaryComponent
-  FirstItem, //this._secondaryComponent
-  SecondItem, //this._tertiaryComponent
-  ThirdItem, // this._quaternaryComponent
-  FourthItem, // this._quinternaryComponent
+  FirstMenuItem, //this._secondaryComponent
+  SecondMenuItem, //this._tertiaryComponent
+  ThirdMenuItem, // this._quaternaryComponent
+  FourthMenuItem, // this._quinternaryComponent
 }
 
 class MenuPageObject extends BasePage {
@@ -41,12 +40,17 @@ class MenuPageObject extends BasePage {
     return await (await this._firstMenuItem).isDisplayed();
   }
 
-  async waitForItemCallbackToFire(): Promise<void> {
-    await this.waitForCondition(async () => await this.didItemCallbackFire(), 'MenuItem callback failed to fire.', this.waitForUiEvent);
+  async waitForItemCallbackToFire(timesFired: number): Promise<void> {
+    await this.waitForCondition(
+      async () => await this.itemOnClickHasFired(timesFired),
+      `MenuItem callback failed to fire ${timesFired} times.`,
+      this.waitForUiEvent,
+      500,
+    );
   }
 
-  async didItemCallbackFire(): Promise<boolean> {
-    return (await (await this._callbackLabel).getText()) === MENUITEM_CALLBACK_TEXT;
+  async itemOnClickHasFired(timesFired: number): Promise<boolean> {
+    return (await (await this._callbackLabel).getText()).includes(timesFired.toString());
   }
 
   async componentIsFocused(selector: MenuComponentSelector): Promise<boolean> {
@@ -83,16 +87,16 @@ class MenuPageObject extends BasePage {
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
     switch (menuComponentSelector) {
-      case MenuComponentSelector.FirstItem:
-        return await this._firstMenuItem;
-      case MenuComponentSelector.SecondItem:
-        return await this._secondMenuItem;
-      case MenuComponentSelector.ThirdItem:
-        return await this._thirdMenuItem;
-      case MenuComponentSelector.FourthItem:
-        return await this._fourthMenuItem;
-      default:
+      case MenuComponentSelector.MenuTrigger:
         return await this._primaryComponent;
+      case MenuComponentSelector.FirstMenuItem:
+        return await this._firstMenuItem;
+      case MenuComponentSelector.SecondMenuItem:
+        return await this._secondMenuItem;
+      case MenuComponentSelector.ThirdMenuItem:
+        return await this._thirdMenuItem;
+      case MenuComponentSelector.FourthMenuItem:
+        return await this._fourthMenuItem;
     }
   }
 

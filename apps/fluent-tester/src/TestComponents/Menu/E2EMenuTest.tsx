@@ -18,12 +18,11 @@ import {
   MENUITEM_FOURTH_COMPONENT,
   MENUITEM_DISABLED_COMPONENT,
   MENUITEM_CALLBACK_LABEL,
-  MENUITEM_CALLBACK_TEXT,
 } from './consts';
 
 export const E2EMenuTest: React.FunctionComponent = () => {
   const [menuOpened, setMenuOpened] = React.useState(false);
-  const [callbackText, setCallbackText] = React.useState('');
+  const [numOnClickCalls, setNumOnClickCalls] = React.useState(0);
 
   const onOpenChange = React.useCallback(
     (_e: any, isOpen: boolean) => {
@@ -33,11 +32,11 @@ export const E2EMenuTest: React.FunctionComponent = () => {
   );
 
   const onItemClick = () => {
-    setCallbackText(MENUITEM_CALLBACK_TEXT);
+    setNumOnClickCalls((n) => n + 1);
   };
 
   const onResetClick = () => {
-    setCallbackText('');
+    setNumOnClickCalls(0);
   };
 
   return (
@@ -53,10 +52,15 @@ export const E2EMenuTest: React.FunctionComponent = () => {
           </MenuTrigger>
           <MenuPopover testID={MENUPOPOVER_TEST_COMPONENT}>
             <MenuList>
-              <MenuItem onClick={onItemClick} testID={MENUITEM_TEST_COMPONENT} accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}>
+              <MenuItem
+                onClick={onItemClick}
+                testID={MENUITEM_TEST_COMPONENT}
+                accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}
+                persistOnClick
+              >
                 A plain MenuItem
               </MenuItem>
-              <MenuItem onClick={onItemClick} testID={MENUITEM_DISABLED_COMPONENT} disabled>
+              <MenuItem onClick={onItemClick} testID={MENUITEM_DISABLED_COMPONENT} disabled persistOnClick>
                 A second disabled plain MenuItem
               </MenuItem>
               <MenuItem testID={MENUITEM_NO_A11Y_LABEL_COMPONENT}>{MENUITEM_TEST_LABEL}</MenuItem>
@@ -66,7 +70,7 @@ export const E2EMenuTest: React.FunctionComponent = () => {
         </Menu>
       </View>
       <Text style={{ marginVertical: 4 }} testID={MENUITEM_CALLBACK_LABEL}>
-        {callbackText}
+        {`onClick fired ${numOnClickCalls} times`}
       </Text>
     </Stack>
   );
