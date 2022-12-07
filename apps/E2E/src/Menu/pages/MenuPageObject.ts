@@ -28,7 +28,7 @@ class MenuPageObject extends BasePage {
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
   async waitForMenuToOpen(): Promise<void> {
-    await this.waitForCondition(async () => await this.menuIsExpanded(), 'The Menu did not open.', this.waitForUiEvent);
+    await this.waitForCondition(async () => await this.menuIsExpanded(), 'The Menu did not open.', this.waitForUiEvent, 500);
   }
 
   async didMenuOpen(): Promise<boolean> {

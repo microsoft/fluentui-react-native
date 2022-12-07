@@ -22,28 +22,26 @@ describe('Menu Testing Initialization', function () {
 });
 
 describe('Menu Accessibility Testing', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await MenuPageObject.scrollToTestElement();
     await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
-    await MenuPageObject.resetTest();
+    await MenuPageObject.clickComponent();
+    await MenuPageObject.waitForMenuToOpen();
   });
 
   it('Menu - Validate accessibilityRole of menu item is correct', async () => {
-    await MenuPageObject.clickComponent();
     await expect(await MenuPageObject.getMenuItemAccessibilityRole()).toEqual(MENUITEM_A11Y_ROLE);
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Menu - Do not set accessibilityLabel -> Default to MenuItem label', async () => {
-    await MenuPageObject.clickComponent();
     await expect(await MenuPageObject.getMenuItemAccessibilityLabel(MenuComponentSelector.ThirdMenuItem)).toEqual(MENUITEM_TEST_LABEL);
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Menu - Click menu -> ExpandCollapseState correctly changes', async () => {
-    await MenuPageObject.clickComponent();
     await expect(await MenuPageObject.getMenuExpandCollapseState()).toEqual(ExpandCollapseState.EXPANDED);
 
     await expect(await MenuPageObject.didAssertPopup()).toBeFalsy(MenuPageObject.ERRORMESSAGE_ASSERT);
