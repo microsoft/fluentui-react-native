@@ -17,10 +17,4 @@ export const defaultLinkTokens: TokenSettings<LinkTokens, Theme> = (t: Theme) =>
     pressed: {
       color: t.colors.brandForeground1Pressed,
     },
-    subtle: {
-      color: t.colors.neutralForeground2,
-      pressed: {
-        color: t.colors.neutralBackground2Pressed,
-      },
-    },
   } as LinkTokens);
