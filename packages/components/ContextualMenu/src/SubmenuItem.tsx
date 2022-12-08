@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { usePressableState, useKeyDownProps, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
+import { usePressableState, useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
 import { Svg, G, Path, SvgProps } from 'react-native-svg';
@@ -63,7 +63,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
       }
     }, [context, disabled, itemKey, onClick]);
 
-    const pressable = usePressableState({
+    const pressable = useAsPressable({
       ...rest,
       onPress: onItemPress,
       onHoverIn: onItemHoverIn,
@@ -188,7 +188,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     );
   },
   slots: {
-    root: Pressable,
+    root: View,
     startstack: View,
     icon: Icon as React.ComponentType,
     content: Text,
