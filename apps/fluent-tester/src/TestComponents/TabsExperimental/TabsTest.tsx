@@ -260,7 +260,7 @@ if (Platform.OS !== 'windows') {
 
 export const ExperimentalTabsTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Experimental',
     iosStatus: 'Backlog',
     macosStatus: 'Experimental',
