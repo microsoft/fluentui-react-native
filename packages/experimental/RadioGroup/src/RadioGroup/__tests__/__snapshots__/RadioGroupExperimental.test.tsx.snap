@@ -657,7 +657,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "row",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key1"
@@ -673,10 +673,10 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -700,7 +700,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -714,7 +714,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -764,7 +764,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "row",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key2"
@@ -780,10 +780,10 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -807,7 +807,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -821,7 +821,7 @@ exports[`RadioGroup component tests RadioGroup disabled 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -936,7 +936,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "row",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key1"
@@ -952,10 +952,10 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -979,7 +979,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -993,7 +993,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -1043,7 +1043,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "row",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key2"
@@ -1059,10 +1059,10 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -1086,7 +1086,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -1100,7 +1100,7 @@ exports[`RadioGroup component tests RadioGroup horizontal 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -1215,7 +1215,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "column",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key1"
@@ -1231,10 +1231,10 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
+              "marginBottom": 6,
               "marginLeft": 0,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -1258,7 +1258,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -1272,7 +1272,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -1322,7 +1322,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "column",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key2"
@@ -1338,10 +1338,10 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
+              "marginBottom": 6,
               "marginLeft": 0,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -1365,7 +1365,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -1379,7 +1379,7 @@ exports[`RadioGroup component tests RadioGroup horizontal-stacked 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -1447,7 +1447,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
           "fontSize": 17,
           "fontWeight": "600",
           "margin": 0,
-          "paddingStart": 8,
+          "paddingStart": 4,
         }
       }
     >
@@ -1509,7 +1509,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "row",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key1"
@@ -1525,10 +1525,10 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -1552,7 +1552,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -1566,7 +1566,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >
@@ -1616,7 +1616,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
             "borderWidth": 1,
             "display": "flex",
             "flexDirection": "row",
-            "paddingHorizontal": 8,
+            "paddingHorizontal": 4,
           }
         }
         value="key2"
@@ -1632,10 +1632,10 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "borderWidth": 1,
               "height": 20,
               "justifyContent": "center",
-              "marginBottom": undefined,
-              "marginLeft": 8,
-              "marginRight": undefined,
-              "marginTop": undefined,
+              "marginBottom": 6,
+              "marginLeft": 4,
+              "marginRight": 6,
+              "marginTop": 6,
               "width": 20,
             }
           }
@@ -1659,7 +1659,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
               "alignSelf": "flex-start",
               "flexDirection": "column",
               "marginLeft": 0,
-              "marginRight": 4,
+              "marginRight": 2,
             }
           }
         >
@@ -1673,7 +1673,7 @@ exports[`RadioGroup component tests RadioGroup required 1`] = `
                 "fontSize": 17,
                 "fontWeight": "400",
                 "margin": 0,
-                "marginTop": 9,
+                "marginTop": 5,
               }
             }
           >

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { RadioGroup } from '../RadioGroup/RadioGroup';
-import { Radio } from '../Radio/Radio';
+import { RadioGroup } from '../../RadioGroup/RadioGroup';
+import { Radio } from '../../Radio/Radio';
 import * as renderer from 'react-test-renderer';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
