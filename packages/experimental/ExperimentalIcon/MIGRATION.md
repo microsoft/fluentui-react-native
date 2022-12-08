@@ -4,7 +4,7 @@
 
 | v0 `Icon`                                                                                               | v1 `Icon`                                                                                 |
 | ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `<Icon svgSource={svgUriProps} width={100} height={100} color="red" accessibilityLabel="Wheelchair" />` | `<Icon svgSource={svgUriProps} />`                                                        |
+| `<Icon svgSource={svgUriProps} width={100} height={100} color="red" accessibilityLabel="Wheelchair" />` | `<Icon svgSource={allSvgProps} />`                                                        |
 | `<Icon svgSource={{src: TestSvg, viewBox: '0 0 500 500'}} width={100} height={100} color="yellow" />`   | `<SvgIcon src={TestSvg} viewBox="0 0 500 500" width={100} height={100} color="yellow" />` |
 | `<Icon fontSource={fontBuiltInProps} color="#060" />`                                                   | `<Icon fontSource={allFontProps} />`                                                      |
 | `<Icon fontSource={fontBuiltInProps} color="#060" />`                                                   | `<FontIcon fontFamily="Arial" codepoint={0x2663} fontSize={32} />`                        |
