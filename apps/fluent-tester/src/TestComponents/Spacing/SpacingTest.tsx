@@ -50,7 +50,7 @@ const BasicUsage: React.FunctionComponent = () => {
 
 export const SpacingTokensTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Backlog',
+    win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Experimental',
     macosStatus: 'Backlog',
