@@ -78,7 +78,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'macos', 'win32'],
   },
   {
-    name: 'Checkbox Pre-V1',
+    name: 'Checkbox Legacy',
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
@@ -145,7 +145,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32'],
   },
   {
-    name: 'Link Pre-V1',
+    name: 'Link Legacy',
     component: LinkTest,
     testPage: HOMEPAGE_LINK_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
@@ -163,7 +163,7 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32'],
   },
   {
-    name: 'MenuButton Pre-V1',
+    name: 'MenuButton Legacy',
     component: MenuButtonTest,
     testPage: HOMEPAGE_MENUBUTTON_BUTTON,
     platforms: ['macos', 'win32'],
@@ -199,7 +199,7 @@ export const tests: TestDescription[] = [
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
-    name: 'RadioGroup Pre-V1',
+    name: 'RadioGroup Legacy',
     component: RadioGroupTest,
     testPage: HOMEPAGE_RADIOGROUP_BUTTON,
     platforms: ['macos', 'win32'],
@@ -253,7 +253,7 @@ export const tests: TestDescription[] = [
     platforms: ['win32'],
   },
   {
-    name: 'Tabs Pre-V1',
+    name: 'Tabs Legacy',
     component: TabsTest,
     testPage: HOMEPAGE_TABS_BUTTON,
     platforms: ['macos', 'win32', 'windows'],
@@ -265,7 +265,7 @@ export const tests: TestDescription[] = [
     platforms: ['macos', 'win32', 'windows'],
   },
   {
-    name: 'Text Pre-V1',
+    name: 'Text Legacy',
     component: TextTest,
     testPage: HOMEPAGE_TEXT_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
