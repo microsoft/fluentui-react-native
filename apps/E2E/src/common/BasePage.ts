@@ -136,9 +136,9 @@ export class BasePage {
       case MobilePlatform.Android:
         await browser.waitUntil(
           async () => {
-            const bottomElementSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_BUTTONS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
-            await $(`android=${bottomElementSelector}`);
-            return await (await this._pageButton).isDisplayed();
+            const buttonElementSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_BUTTONS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;
+            const pageButton = await $(`android=${buttonElementSelector}`);
+            return await pageButton.isDisplayed();
           },
           {
             timeout: this.waitForUiEvent,
