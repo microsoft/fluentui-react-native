@@ -60,6 +60,12 @@ export const commonTestStyles = StyleSheet.create({
     minHeight: 200,
     justifyContent: 'space-between',
   },
+  customisedChecked: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    height: 200,
+  },
 });
 
 export const fluentTesterStyles = StyleSheet.create({

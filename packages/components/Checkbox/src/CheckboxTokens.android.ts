@@ -9,21 +9,25 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
   ({
     checkboxBorderWidth: globalTokens.stroke.width15,
     checkboxBorderRadius: globalTokens.corner.radius40,
-    checkboxSize: globalTokens.font.size600,
-    checkmarkSize: globalTokens.font.size100,
+    checkboxSize: globalTokens.size200,
+    checkmarkSize: globalTokens.size120,
     label: {
+      // Tokens taken from Android List Item
       color: t.colors.neutralForeground1,
-      padding: globalTokens.size120,
-      paddingHorizontal: globalTokens.size160,
-      borderRadius: globalTokens.corner.radius40,
+      padding: globalTokens.size20,
       spacingLabelAfter: globalTokens.size160,
       labelIsBefore: {
         spacingLabelBefore: globalTokens.size120,
         spacingLabelAfter: 0,
       },
     },
-    padding: globalTokens.size80,
-    fontSize: t.typography.sizes.body,
+    pressed: {
+      checkboxBackgroundColor: t.colors.neutralBackground1Pressed,
+    },
+    padding: globalTokens.size20,
+    fontSize: t.typography.variants.body1.size,
+    fontWeight: t.typography.variants.body1.weight,
+    fontLineHeight: t.typography.variants.body1.lineHeight,
     checkboxBorderColor: t.colors.neutralStrokeAccessible,
     checkmarkOpacity: 0,
     disabled: {
