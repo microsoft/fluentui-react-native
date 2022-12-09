@@ -37,6 +37,7 @@ exports[`Link component tests Default Link 1`] = `
     style={
       Object {
         "alignSelf": "flex-start",
+        "color": "#0f6cbd",
         "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
@@ -86,6 +87,7 @@ exports[`Link component tests Default Link as a pressable 1`] = `
     style={
       Object {
         "alignSelf": "flex-start",
+        "color": "#0f6cbd",
         "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
@@ -126,6 +128,7 @@ exports[`Link component tests Inline Link 1`] = `
   style={
     Object {
       "alignSelf": "flex-start",
+      "color": "#0f6cbd",
       "fontFamily": "Segoe UI",
       "fontSize": 13,
       "fontWeight": "400",
@@ -178,7 +181,7 @@ exports[`Link component tests Subtle Link 1`] = `
     style={
       Object {
         "alignSelf": "flex-start",
-        "color": "#616161",
+        "color": "#0f6cbd",
         "fontFamily": "Segoe UI",
         "fontSize": 13,
         "fontWeight": "400",
