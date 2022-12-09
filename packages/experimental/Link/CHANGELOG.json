@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-link",
   "entries": [
     {
+      "date": "Fri, 09 Dec 2022 10:05:33 GMT",
+      "tag": "@fluentui-react-native/experimental-link_v0.3.0",
+      "version": "0.3.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/experimental-link",
+            "commit": "df6df3d4847fd76007dec8a87daa8712b5396a09",
+            "comment": "initial tokens for link android"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 05:23:38 GMT",
       "tag": "@fluentui-react-native/experimental-link_v0.2.7",
       "version": "0.2.7",
