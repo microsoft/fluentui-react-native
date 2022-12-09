@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 09 Dec 2022 20:56:59 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 23:48:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.3.1
+
+Fri, 09 Dec 2022 23:48:05 GMT
+
+### Patches
+
+- Fixing name of .nuspec file (safreibe@microsoft.com)
 
 ## 1.3.0
 

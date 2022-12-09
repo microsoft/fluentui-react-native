@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Fri, 09 Dec 2022 23:48:05 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.3.1",
+      "version": "1.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "safreibe@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "45af2ee84acc8058e20d795362a5fb2456baedec",
+            "comment": "Fixing name of .nuspec file"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 20:56:59 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.3.0",
       "version": "1.3.0",

@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Revert usePressableState for SubmenuItem",
-  "packageName": "@fluentui-react-native/contextual-menu",
-  "email": "amchiu@microsoft.com",
-  "dependentChangeType": "patch"
-}

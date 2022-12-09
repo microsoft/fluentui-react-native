@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Fri, 09 Dec 2022 23:48:05 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.21.3",
+      "version": "0.21.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "5bfbcef174d81b39d5c6eb83467e2feefcdf7168",
+            "comment": "Revert usePressableState for SubmenuItem"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 05:23:38 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.21.2",
       "version": "0.21.2",
