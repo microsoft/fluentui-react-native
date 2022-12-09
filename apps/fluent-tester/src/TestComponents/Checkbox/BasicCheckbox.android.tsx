@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { CheckboxV1 as Checkbox } from '@fluentui-react-native/checkbox';
+import { CheckboxV1 as Checkbox } from '@fluentui/react-native';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
