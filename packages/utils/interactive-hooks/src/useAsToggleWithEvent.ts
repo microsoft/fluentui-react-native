@@ -29,5 +29,6 @@ export function useAsToggleWithEvent(
     },
     [isChecked, setChecked],
   );
+
   return [checked ?? isChecked, onChange];
 }
