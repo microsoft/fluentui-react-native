@@ -203,10 +203,10 @@ const linkSections: TestSection[] = [
 
 export const ExperimentalLinkTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Experimental',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    macosStatus: 'Experimental',
     androidStatus: 'Experimental',
   };
 
