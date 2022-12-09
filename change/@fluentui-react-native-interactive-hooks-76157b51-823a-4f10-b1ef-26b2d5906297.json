@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "switch ease in and out animation",
-  "packageName": "@fluentui-react-native/interactive-hooks",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
