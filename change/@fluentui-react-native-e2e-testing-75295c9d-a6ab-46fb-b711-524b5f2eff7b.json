@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fixing name of .nuspec file",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "safreibe@microsoft.com",
+  "dependentChangeType": "patch"
+}
