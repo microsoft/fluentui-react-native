@@ -12,7 +12,7 @@ import {
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
 
-export const E2ECheckboxExperimentalTest: React.FunctionComponent = () => {
+export const E2ECheckboxV1Test: React.FunctionComponent = () => {
   const [checkboxPressed, setCheckboxPressed] = React.useState(false);
 
   const onClick = React.useCallback(

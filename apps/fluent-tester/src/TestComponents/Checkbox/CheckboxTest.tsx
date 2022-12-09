@@ -5,10 +5,12 @@ import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, Platform } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
-import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
+import { E2ECheckboxV1Test } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import { Text } from '@fluentui-react-native/text';
+import { BasicCheckbox_legacy, OtherCheckbox_legacy, TokenCheckbox_legacy } from './legacy/CheckboxTest';
+import { E2ECheckboxTest_legacy } from './legacy/CheckboxE2ETest';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
@@ -187,8 +189,25 @@ const checkboxSections: TestSection[] = [
     component: TokenCheckbox,
   },
   {
-    name: 'E2E Testing for Experimental Checkbox',
-    component: E2ECheckboxExperimentalTest,
+    name: 'E2E Testing for CheckboxV1',
+    component: E2ECheckboxV1Test,
+  },
+  {
+    name: 'Legacy - Basic Checkboxes',
+    testID: CHECKBOX_TESTPAGE,
+    component: BasicCheckbox_legacy,
+  },
+  {
+    name: 'Legacy - Other Implementations',
+    component: OtherCheckbox_legacy,
+  },
+  {
+    name: 'Legacy - Token Customized Checkboxes',
+    component: TokenCheckbox_legacy,
+  },
+  {
+    name: 'Legacy - Checkbox for E2E Testing',
+    component: E2ECheckboxTest_legacy,
   },
 ];
 
@@ -204,5 +223,5 @@ export const CheckboxTest: React.FunctionComponent = () => {
   const description =
     'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
 
-  return <Test name="Experimental Checkbox Test" description={description} sections={checkboxSections} status={status} />;
+  return <Test name="Checkbox Test" description={description} sections={checkboxSections} status={status} />;
 };
