@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import { Svg } from 'react-native-svg';
 import { Text } from '@fluentui-react-native/text';
 
+// GH:935 Remove when SVGs are fixed on windows
 export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
   slots: { root: View, checkbox: View, checkmark: Svg, label: Text, required: Text },
