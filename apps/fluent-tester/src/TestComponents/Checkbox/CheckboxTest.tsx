@@ -3,29 +3,18 @@ import { CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
-import { View, TextInput, Platform } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 import { E2ECheckboxV1Test } from './E2ECheckboxExperimentalTest';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
-import { Text } from '@fluentui-react-native/text';
 import { BasicCheckbox_legacy, OtherCheckbox_legacy, TokenCheckbox_legacy } from './legacy/CheckboxTest';
 import { E2ECheckboxTest_legacy } from './legacy/CheckboxE2ETest';
 import { BasicCheckbox } from './BasicCheckbox';
+import { SizeCheckbox } from './SizeCheckbox';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
-
-const SizeCheckbox: React.FunctionComponent = () => {
-  return (
-    <View>
-      <Checkbox tooltip="Medium checkbox" size="medium" />
-      <Checkbox tooltip="Large checkbox" size="large" />
-      <Checkbox label="Medium checkbox" size="medium" />
-      <Checkbox label="Large checkbox" size="large" />
-    </View>
-  );
-};
 
 const OtherCheckbox: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
@@ -134,14 +123,6 @@ const TokenCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const UnSupportedOnAndroid = () => {
-  return (
-    <Text style={{ margin: 10, fontSize: 14 }} color="red">
-      Unsupported on Android
-    </Text>
-  );
-};
-
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
@@ -150,7 +131,7 @@ const checkboxSections: TestSection[] = [
   },
   {
     name: 'Size Checkboxes',
-    component: Platform.OS === 'android' ? UnSupportedOnAndroid : SizeCheckbox,
+    component: SizeCheckbox,
   },
   {
     name: 'Other Implementations',
