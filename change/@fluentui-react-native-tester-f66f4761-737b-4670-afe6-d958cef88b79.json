@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Enable Switch test page on all platforms",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}

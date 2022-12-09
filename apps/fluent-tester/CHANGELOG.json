@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 09 Dec 2022 22:56:19 GMT",
+      "tag": "@fluentui-react-native/tester_v0.116.2",
+      "version": "0.116.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "38629bb8d0863902680bacd83146738cb30cd67a",
+            "comment": "Enable Switch test page on all platforms"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 20:03:13 GMT",
       "tag": "@fluentui-react-native/tester_v0.116.1",
       "version": "0.116.1",

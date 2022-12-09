@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Fri, 09 Dec 2022 20:03:13 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 22:56:19 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.116.2
+
+Fri, 09 Dec 2022 22:56:19 GMT
+
+### Patches
+
+- Enable Switch test page on all platforms (sanajmi@microsoft.com)
 
 ## 0.116.1
 
