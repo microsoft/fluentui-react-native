@@ -8,10 +8,17 @@
 | `<Icon svgSource={{src: TestSvg, viewBox: '0 0 500 500'}} width={100} height={100} color="yellow" />`   | `<SvgIcon src={TestSvg} viewBox="0 0 500 500" width={100} height={100} color="yellow" />` |
 | `<Icon fontSource={fontBuiltInProps} color="#060" />`                                                   | `<Icon fontSource={allFontProps} />`                                                      |
 | `<Icon fontSource={fontBuiltInProps} color="#060" />`                                                   | `<FontIcon fontFamily="Arial" codepoint={0x2663} fontSize={32} />`                        |
+| `<Icon rasterImageSource={{ src: { uri: 'path/image.png' } }} width={100} height={100} />`              | `<Image source={{ uri: 'path/image.png', width: 100, height: 100 }} />`                   |
 
 ### Not supported functionality
 
 Image Icon is not supported anymore.
+React Native Image should be used instead.
+
+```jsx
+import { Image } from 'react-native';
+<Image source={{ uri: 'path/image.png', width: 100, height: 100 }} />;
+```
 
 ### Props that remain as is
 
