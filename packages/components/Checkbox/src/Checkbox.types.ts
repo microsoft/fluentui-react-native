@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ColorValue, ViewStyle } from 'react-native';
+import { ColorValue, PressableProps, ViewStyle } from 'react-native';
 import { FontTokens, IBorderTokens, IForegroundColorTokens, IBackgroundColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
 import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import type { ITextProps, IViewProps } from '@fluentui-react-native/adapters';
@@ -183,7 +183,7 @@ export interface CheckboxInfo {
 
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  checkbox: IViewProps;
+  checkbox: PressableProps;
   checkmark: SvgProps;
   label: ITextProps;
   required: ITextProps;

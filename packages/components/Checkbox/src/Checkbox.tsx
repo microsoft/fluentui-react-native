@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Pressable } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Checkbox.styling';
@@ -13,7 +13,7 @@ export const Checkbox = compose<CheckboxType>({
   ...stylingSettings,
   slots: {
     root: Pressable,
-    checkbox: View,
+    checkbox: Pressable,
     checkmark: Svg,
     label: Text,
     required: Text,
@@ -53,7 +53,7 @@ export const Checkbox = compose<CheckboxType>({
       return (
         <Slots.root {...mergedProps}>
           {Checkbox.state.labelIsBefore && labelComponent}
-          <Slots.checkbox>
+          <Slots.checkbox {...mergedProps}>
             <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
               {checkmarkPath}
             </Slots.checkmark>
