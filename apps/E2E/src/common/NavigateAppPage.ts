@@ -315,6 +315,15 @@ class NavigateAppPage extends BasePage {
   private get experimentalTabsPage() {
     return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
   }
+
+  get _pageName() {
+    // This is an odd name, but it works well with the error message it is used for.
+    return 'The Fluent Tester';
+  }
+
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    throw new Error('You are trying to read the _pageButton getter for NavigateAppPage, which is not implemented.');
+  }
 }
 
 export default new NavigateAppPage();

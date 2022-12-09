@@ -29,6 +29,17 @@ export const enum Attribute {
   ToggleState = 'Toggle.ToggleState',
 }
 
+export const attributeToEnumName = {
+  [Attribute.AccessibilityLabel]: 'AccessibilityLabel',
+  [Attribute.AccessibilityRole]: 'AccessibilityRole',
+  [Attribute.ExpandCollapseState]: 'ExpandCollapseState',
+  [Attribute.IsEnabled]: 'IsEnabled',
+  [Attribute.IsFocused]: 'IsFocused',
+  [Attribute.IsRequiredForForm]: 'IsRequiredForForm',
+  [Attribute.IsTogglePatternAvailable]: 'IsTogglePatternAvailable',
+  [Attribute.ToggleState]: 'ToggleState',
+};
+
 export const enum AttributeValue {
   on = '1',
   off = '0',

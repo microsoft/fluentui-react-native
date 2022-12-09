@@ -1,3 +1,4 @@
+import { Attribute } from '../../common/consts';
 import {
   BUTTON_TESTPAGE,
   BUTTON_TEST_COMPONENT,
@@ -11,6 +12,7 @@ import { BasePage, By } from '../../common/BasePage';
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
 export const enum ButtonSelector {
   PrimaryButton, //this._primaryComponent
+  SecondaryButton,
 }
 class ButtonExperimentalPageObject extends BasePage {
   /******************************************************************/
@@ -34,10 +36,20 @@ class ButtonExperimentalPageObject extends BasePage {
 
   /* Returns the correct WebDriverIO element from the Button Selector */
   async getButtonSelector(buttonSelector?: ButtonSelector): Promise<WebdriverIO.Element> {
-    if (buttonSelector == ButtonSelector.PrimaryButton) {
-      return await this._primaryComponent;
+    switch (buttonSelector) {
+      case ButtonSelector.PrimaryButton:
+        return this._primaryComponent;
+      case ButtonSelector.SecondaryButton:
+        return this._secondaryComponent;
     }
-    return await this._primaryComponent;
+  }
+
+  async accessibilityLabelIsEqualTo(selector: ButtonSelector, expectedValue: any): Promise<boolean> {
+    return this._attributeIsEqualTo(await this.getButtonSelector(selector), Attribute.AccessibilityLabel, expectedValue);
+  }
+
+  async accessibilityRoleIsEqualTo(selector: ButtonSelector, expectedValue: any): Promise<boolean> {
+    return this._attributeIsEqualTo(await this.getButtonSelector(selector), Attribute.AccessibilityRole, expectedValue);
   }
 
   /*****************************************/

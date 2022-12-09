@@ -41,6 +41,18 @@ class NativeTestingPageObject extends BasePage {
 
     return foundValidButton;
   }
+
+  get _testPage(): Promise<WebdriverIO.Element> {
+    throw new Error('You are trying to read the _testPage getter for NativeTestingPageObject, which is not implemented.');
+  }
+
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    throw new Error('You are trying to read the _pageButton getter for NativeTestingPageObject, which is not implemented.');
+  }
+
+  get _pageName(): string {
+    throw new Error('You are trying to read the _pageName getter for NativeTestingPageObject, which is not implemented.');
+  }
 }
 
 export default new NativeTestingPageObject();
