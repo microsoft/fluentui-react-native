@@ -65,5 +65,5 @@ steps:
     displayName: 'NuGet push Win32 test specs'
     inputs:
       command: push
-      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.Win32.E2E.Testing.Specs.Appium.Deps.nupkg'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.Win32.E2E.Testing.Specs.nupkg'
       publishVstsFeed: Office
