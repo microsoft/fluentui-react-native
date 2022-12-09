@@ -1,3 +1,3 @@
-export const SizeCheckbox = () => {
+export const TokenCheckbox = () => {
   return null;
 };
