@@ -1,10 +1,10 @@
 import {
-  HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
-  EXPERIMENTAL_CHECKBOX_TESTPAGE,
-  EXPERIMENTAL_CHECKBOX_TEST_COMPONENT,
-  EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT,
-  EXPERIMENTAL_CHECKBOX_ON_PRESS,
-} from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
+  HOMEPAGE_CHECKBOX_BUTTON,
+  CHECKBOX_TESTPAGE,
+  CHECKBOX_V1_TEST_COMPONENT,
+  CHECKBOX_V1_NO_A11Y_LABEL_COMPONENT,
+  CHECKBOX_V1_ON_PRESS,
+} from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
@@ -37,7 +37,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
   }
 
   async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(EXPERIMENTAL_CHECKBOX_ON_PRESS);
+    const callbackText = await By(CHECKBOX_V1_ON_PRESS);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUiEvent,
       timeoutMsg: 'The OnChange callback did not fire.',
@@ -64,23 +64,23 @@ class ExperimentalCheckboxPageObject extends BasePage {
   /**************** Getters ****************/
   /*****************************************/
   get _testPage() {
-    return By(EXPERIMENTAL_CHECKBOX_TESTPAGE);
+    return By(CHECKBOX_TESTPAGE);
   }
 
   get _pageName() {
-    return EXPERIMENTAL_CHECKBOX_TESTPAGE;
+    return CHECKBOX_TESTPAGE;
   }
 
   get _primaryComponent() {
-    return By(EXPERIMENTAL_CHECKBOX_TEST_COMPONENT);
+    return By(CHECKBOX_V1_TEST_COMPONENT);
   }
 
   get _secondaryComponent() {
-    return By(EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT);
+    return By(CHECKBOX_V1_NO_A11Y_LABEL_COMPONENT);
   }
 
   get _pageButton() {
-    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+    return By(HOMEPAGE_CHECKBOX_BUTTON);
   }
 }
 

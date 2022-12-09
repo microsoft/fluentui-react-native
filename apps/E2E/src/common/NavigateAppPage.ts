@@ -2,7 +2,6 @@ import { HOMEPAGE_ACTIVITY_INDICATOR_BUTTON } from '../../../fluent-tester/src/T
 import { HOMEPAGE_AVATAR_BUTTON } from '../../../fluent-tester/src/TestComponents/Avatar/consts';
 import { HOMEPAGE_BADGE_BUTTON } from '../../../fluent-tester/src/TestComponents/Badge/consts';
 import { HOMEPAGE_CHECKBOX_BUTTON } from '../../../fluent-tester/src/TestComponents/Checkbox/consts';
-import { HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from '../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
 import { HOMEPAGE_CORNERRADIUS_BUTTON } from '../../../fluent-tester/src/TestComponents/CornerRadius/consts';
 import { HOMEPAGE_BUTTON_BUTTON } from '../../../fluent-tester/src/TestComponents/Button/consts';
 import { HOMEPAGE_CALLOUT_BUTTON } from '../../../fluent-tester/src/TestComponents/Callout/consts';
@@ -58,10 +57,6 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToCheckboxPage() {
     await (await this.checkboxPage).click();
-  }
-
-  async clickAndGoToCheckboxExperimentalPage() {
-    await (await this.checkboxExperimentalPage).click();
   }
 
   async clickAndGoToContextualMenuPage() {
@@ -202,10 +197,6 @@ class NavigateAppPage extends BasePage {
 
   private get checkboxPage() {
     return By(HOMEPAGE_CHECKBOX_BUTTON);
-  }
-
-  private get checkboxExperimentalPage() {
-    return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
   }
 
   private get contextualMenuPage() {

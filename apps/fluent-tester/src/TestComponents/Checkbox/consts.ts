@@ -12,11 +12,11 @@ export const CHECKBOX_TEST_COMPONENT_LABEL_LEGACY = 'Test Checkbox2 - No Accessi
 export const CHECKBOX_ON_PRESS_LEGACY = 'Checkbox_On_Press_Legacy'; // For testing the press functionality on a Checkbox
 
 /* Test Experimental Checkbox 1 */
-export const EXPERIMENTAL_CHECKBOX_TEST_COMPONENT = 'Experimental_Checkbox_Test_Component'; // A component on each specific test page
-export const EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL = 'E2E testing Experimental Checkbox accessibility label';
+export const CHECKBOX_V1_TEST_COMPONENT = 'CheckboxV1_Test_Component'; // A component on each specific test page
+export const CHECKBOX_V1_ACCESSIBILITY_LABEL = 'E2E testing CheckboxV1 accessibility label';
 
 /* Test Experimental Checkbox 2 */
-export const EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT = 'Experimental Checkbox_No_A11y_label_Component';
-export const EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL = 'Test Experimental Checkbox2 - No Accessibility Label'; // A component on each specific test page
+export const CHECKBOX_V1_NO_A11Y_LABEL_COMPONENT = 'CheckboxV1_No_A11y_label_Component';
+export const CHECKBOX_V1_TEST_COMPONENT_LABEL = 'Test CheckboxV1 2 - No Accessibility Label'; // A component on each specific test page
 
-export const EXPERIMENTAL_CHECKBOX_ON_PRESS = 'Experimental_Checkbox_On_Press'; // For testing the press functionality on a Checkbox
+export const CHECKBOX_V1_ON_PRESS = 'CheckboxV1_On_Press'; // For testing the press functionality on a Checkbox

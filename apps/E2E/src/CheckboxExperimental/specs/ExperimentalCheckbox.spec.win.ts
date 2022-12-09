@@ -2,9 +2,9 @@ import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalCheckboxPageObject, { ExperimentalCheckboxSelector } from '../pages/ExperimentalCheckboxPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import {
-  EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
-  EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
-} from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
+  CHECKBOX_V1_TEST_COMPONENT_LABEL,
+  CHECKBOX_V1_ACCESSIBILITY_LABEL,
+} from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, CHECKBOX_A11Y_ROLE, Keys } from '../../common/consts';
 
 describe('Experimental Checkbox Testing Initialization', () => {
@@ -15,7 +15,7 @@ describe('Experimental Checkbox Testing Initialization', () => {
 
   it('Click and navigate to Experimental Checkbox test page', async () => {
     /* Click on component button to navigate to test page */
-    await NavigateAppPage.clickAndGoToCheckboxExperimentalPage();
+    await NavigateAppPage.clickAndGoToCheckboxPage();
     await ExperimentalCheckboxPageObject.waitForPageDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.isPageLoaded()).toBeTruthy(ExperimentalCheckboxPageObject.ERRORMESSAGE_PAGELOAD);
@@ -43,7 +43,7 @@ describe('Experimental Checkbox Accessibility Testing', () => {
     await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
-      EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
+      CHECKBOX_V1_ACCESSIBILITY_LABEL,
     );
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
@@ -53,7 +53,7 @@ describe('Experimental Checkbox Accessibility Testing', () => {
     await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
+      CHECKBOX_V1_TEST_COMPONENT_LABEL,
     );
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
