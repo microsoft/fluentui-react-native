@@ -1,5 +1,5 @@
 {
-  "type": "minor",
+  "type": "patch",
   "comment": "add additional tests for Text",
   "packageName": "@fluentui-react-native/tester",
   "email": "krsiler@microsoft.com",
