@@ -6,7 +6,7 @@
     <title>FluentUI React Native's E2E Testing Specs for Win32</title>
     <authors>Microsoft Office CXE</authors>
     <projectUrl>https://github.com/microsoft/fluentui-react-native.git</projectUrl>
-    <description>This package contains a bundle of all Win32 E2E testing specs using WebDriverIO and Appium.</description>
+    <description>This package contains a JS bundle of all Win32 E2E testing specs using WebDriverIO and Appium. This exports a JS bundle in a NuGet package because the consuming test infrastructure is setup to pull in NuGet packages, but does not yet support NPM packages.</description>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <repository type="git"
       url="https://github.com/microsoft/fluentui-react-native.git"
