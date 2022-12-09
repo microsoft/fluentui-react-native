@@ -2,17 +2,14 @@ import { Checkbox } from '@fluentui/react-native';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import * as React from 'react';
 import { View, TextInput } from 'react-native';
-import { commonTestStyles as commonStyles } from '../Common/styles';
-import { CHECKBOX_TESTPAGE } from './consts';
-import { E2ECheckboxTest } from './CheckboxE2ETest';
-import { Test, TestSection, PlatformStatus } from '../Test';
+import { commonTestStyles as commonStyles } from '../../Common/styles';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 
 function onChangeUncontrolled(isChecked: boolean) {
   console.log(isChecked);
 }
 
-const BasicCheckbox: React.FunctionComponent = () => {
+export const BasicCheckbox_legacy: React.FunctionComponent = () => {
   return (
     <View>
       <Checkbox label="Unchecked checkbox (undefined)" onChange={onChangeUncontrolled} />
@@ -30,7 +27,7 @@ const BasicCheckbox: React.FunctionComponent = () => {
   );
 };
 
-const OtherCheckbox: React.FunctionComponent = () => {
+export const OtherCheckbox_legacy: React.FunctionComponent = () => {
   const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
   const onChangeControlled1 = React.useCallback((checked) => {
     setCheckedControlled1(checked);
@@ -92,7 +89,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
   return { textbox: { ...commonStyles.textBox, borderColor: t.colors.inputBorder } };
 });
 
-const TokenCheckbox: React.FunctionComponent = () => {
+export const TokenCheckbox_legacy: React.FunctionComponent = () => {
   const [checkboxColor, setCheckboxColor] = React.useState('blue');
   const [checkmarkColor, setCheckmarkColor] = React.useState('white');
 
@@ -148,41 +145,4 @@ const TokenCheckbox: React.FunctionComponent = () => {
       />
     </View>
   );
-};
-
-const checkboxSections: TestSection[] = [
-  {
-    name: 'Basic Checkboxes',
-    testID: CHECKBOX_TESTPAGE,
-    component: BasicCheckbox,
-  },
-  {
-    name: 'Other Implementations',
-    component: OtherCheckbox,
-  },
-  {
-    name: 'Token Customized Checkboxes',
-    component: TokenCheckbox,
-  },
-  {
-    name: 'Checkbox for E2E Testing',
-    component: E2ECheckboxTest,
-  },
-];
-
-export const CheckboxTest: React.FunctionComponent = () => {
-  const status: PlatformStatus = {
-    win32Status: 'Beta',
-    uwpStatus: 'Experimental',
-    iosStatus: 'N/A',
-    macosStatus: 'Experimental',
-    androidStatus: 'N/A',
-  };
-
-  const description =
-    'Checkboxes give people a way to select one or more items from a group, or switch between two mutually exclusive options (checked or unchecked, on or off).';
-
-  const spec = 'https://github.com/microsoft/fluentui-react-native/blob/main/packages/components/Checkbox/SPEC.md';
-
-  return <Test name="Checkbox Test" description={description} spec={spec} sections={checkboxSections} status={status} />;
 };

@@ -1,7 +1,10 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import CheckboxPageObject from '../pages/CheckboxPageObject';
 import { ComponentSelector } from '../../common/BasePage';
-import { CHECKBOX_TEST_COMPONENT_LABEL, CHECKBOX_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
+import {
+  CHECKBOX_TEST_COMPONENT_LABEL_LEGACY,
+  CHECKBOX_ACCESSIBILITY_LABEL_LEGACY,
+} from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
 import { CHECKBOX_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
 
 describe('Checkbox Testing Initialization', () => {
@@ -31,11 +34,11 @@ describe('Checkbox Accessibility Testing', () => {
   });
 
   it('Checkbox - Set accessibilityLabel', async () => {
-    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL);
+    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(CHECKBOX_ACCESSIBILITY_LABEL_LEGACY);
   });
 
   it('Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', async () => {
-    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL);
+    await expect(await CheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(CHECKBOX_TEST_COMPONENT_LABEL_LEGACY);
   });
 });
 

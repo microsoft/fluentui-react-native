@@ -1,9 +1,9 @@
 import {
   CHECKBOX_TESTPAGE,
-  CHECKBOX_TEST_COMPONENT,
-  CHECKBOX_NO_A11Y_LABEL_COMPONENT,
+  CHECKBOX_TEST_COMPONENT_LEGACY,
+  CHECKBOX_NO_A11Y_LABEL_COMPONENT_LEGACY,
   HOMEPAGE_CHECKBOX_BUTTON,
-  CHECKBOX_ON_PRESS,
+  CHECKBOX_ON_PRESS_LEGACY,
 } from '../../../../fluent-tester/src/TestComponents/Checkbox/consts';
 import { BasePage, By } from '../../common/BasePage';
 
@@ -37,7 +37,7 @@ class CheckboxPageObject extends BasePage {
   }
 
   async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(CHECKBOX_ON_PRESS);
+    const callbackText = await By(CHECKBOX_ON_PRESS_LEGACY);
     await browser.waitUntil(async () => await callbackText.isDisplayed(), {
       timeout: this.waitForUiEvent,
       timeoutMsg: 'The OnChange callback did not fire.',
@@ -72,11 +72,11 @@ class CheckboxPageObject extends BasePage {
   }
 
   get _primaryComponent() {
-    return By(CHECKBOX_TEST_COMPONENT);
+    return By(CHECKBOX_TEST_COMPONENT_LEGACY);
   }
 
   get _secondaryComponent() {
-    return By(CHECKBOX_NO_A11Y_LABEL_COMPONENT);
+    return By(CHECKBOX_NO_A11Y_LABEL_COMPONENT_LEGACY);
   }
 
   get _pageButton() {
