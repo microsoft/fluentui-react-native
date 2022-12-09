@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { EXPERIMENTAL_CHECKBOX_TESTPAGE } from './consts';
+import { CHECKBOX_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
@@ -171,7 +171,7 @@ const UnSupportedOnAndroid = () => {
 const checkboxSections: TestSection[] = [
   {
     name: 'Basic Checkboxes',
-    testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
+    testID: CHECKBOX_TESTPAGE,
     component: Platform.OS === 'android' ? AndroidBasicCheckbox : BasicCheckbox,
   },
   {
@@ -192,7 +192,7 @@ const checkboxSections: TestSection[] = [
   },
 ];
 
-export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
+export const CheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
     win32Status: 'Beta',
     uwpStatus: 'N/A',

@@ -6,7 +6,6 @@ import { ButtonTest, HOMEPAGE_BUTTON_BUTTON } from './TestComponents/Button';
 import { CalloutTest, HOMEPAGE_CALLOUT_BUTTON } from './TestComponents/Callout';
 import { CheckboxTest, HOMEPAGE_CHECKBOX_BUTTON } from './TestComponents/Checkbox';
 import { CornerRadiusTokensTest, HOMEPAGE_CORNERRADIUS_BUTTON } from './TestComponents/CornerRadius';
-import { ExperimentalCheckboxTest, HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON } from './TestComponents/CheckboxExperimental';
 import { ContextualMenuTest, HOMEPAGE_CONTEXTUALMENU_BUTTON } from './TestComponents/ContextualMenu';
 import { NativeDatePickerTest, HOMEPAGE_NATIVEDATEPICKER_BUTTON } from './TestComponents/NativeDatePicker';
 import { DropdownTest, HOMEPAGE_DROPDOWN_BUTTON } from './TestComponents/Dropdown';
@@ -82,12 +81,6 @@ export const tests: TestDescription[] = [
     component: CheckboxTest,
     testPage: HOMEPAGE_CHECKBOX_BUTTON,
     platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
-  },
-  {
-    name: 'Checkbox (Experimental)',
-    component: ExperimentalCheckboxTest,
-    testPage: HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON,
-    platforms: ['android', 'ios', 'macos', 'win32'], // 'windows': GH#935: Temporarily disabling while SVGs don't work in windows
   },
   {
     name: 'ContextualMenu',
