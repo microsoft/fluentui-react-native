@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Combine checkbox test pages",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
