@@ -33,7 +33,6 @@ const checkboxSections: TestSection[] = [
   },
   {
     name: 'Legacy - Basic Checkboxes',
-    testID: CHECKBOX_TESTPAGE,
     component: BasicCheckbox_legacy,
   },
   {
