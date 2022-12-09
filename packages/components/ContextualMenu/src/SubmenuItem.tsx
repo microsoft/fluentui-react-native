@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { I18nManager, Platform, Pressable, View } from 'react-native';
+import { I18nManager, Platform, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { usePressableState, useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
 import { Svg, G, Path, SvgProps } from 'react-native-svg';
