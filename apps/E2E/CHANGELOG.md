@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 06 Dec 2022 16:59:54 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.4
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.12
+
+## 1.2.3
+
+Thu, 08 Dec 2022 23:12:24 GMT
+
+### Patches
+
+- Add iOS e2e testing steps (78454019+lyzhan7@users.noreply.github.com)
 
 ## 1.2.2
 
