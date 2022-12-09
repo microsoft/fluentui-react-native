@@ -6,6 +6,7 @@ import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
+import { Platform } from 'react-native';
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
@@ -180,10 +181,16 @@ const linkSections: TestSection[] = [
     name: 'Inline Links',
     component: InlineLinks,
   },
-  {
-    name: 'Subtle Links',
-    component: SubtleLinks,
-  },
+  ...Platform.select({
+    // As per design discussion , There is no use case for subtle link on Android , No tokens available for same.
+    android: [null],
+    default: [
+      {
+        name: 'Subtle Links',
+        component: SubtleLinks,
+      },
+    ],
+  }),
   {
     name: 'Custom Link',
     component: CustomLinks,
@@ -200,7 +207,7 @@ export const ExperimentalLinkTest: React.FunctionComponent = () => {
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description =
