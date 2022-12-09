@@ -147,7 +147,7 @@ export const tests: TestDescription[] = [
     name: 'Link V1',
     component: ExperimentalLinkTest,
     testPage: HOMEPAGE_EXPERIMENTAL_LINK_BUTTON,
-    platforms: ['win32'],
+    platforms: ['win32', 'android'],
   },
   {
     name: 'Menu',
@@ -243,7 +243,7 @@ export const tests: TestDescription[] = [
     name: 'Switch',
     component: SwitchTest,
     testPage: HOMEPAGE_SWITCH_BUTTON,
-    platforms: ['win32'],
+    platforms: ['win32', 'android'],
   },
   {
     name: 'Tabs Legacy',
