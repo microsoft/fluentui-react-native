@@ -31,6 +31,14 @@ steps:
       arguments: 'pack Microsoft.FluentUI.WebDriverIO.Appium.Deps.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
       workingFolder: 'tester_deps/nuget'
 
+  # Pack the NuGet package
+  - task: CmdLine@1
+    displayName: 'Create NuGet package for win32 test specs.'
+    inputs:
+      filename: nuget
+      arguments: 'pack Microsoft.FluentUI.Win32.E2E.Testing.Specs.nuspec -OutputDirectory $(Build.ArtifactStagingDirectory) -OutputFileNamesWithoutVersion -Verbosity detailed -Version $(Build.BuildNumber) -properties CommitId=$(Build.SourceVersion)'
+      workingFolder: 'apps/E2E/nuget'
+
   - task: AzureArtifacts.manifest-generator-task.manifest-generator-task.ManifestGeneratorTask@0
     displayName: 📒 Generate Manifest Tester Dependencies
     inputs:
@@ -46,8 +54,16 @@ steps:
 
   # Push the NuGet package
   - task: NuGetCommand@2
-    displayName: 'NuGet push'
+    displayName: 'NuGet push WebDriverIO/Appium dependencies'
     inputs:
       command: push
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.WebDriverIO.Appium.Deps.nupkg'
+      publishVstsFeed: Office
+
+  # Push the NuGet package
+  - task: NuGetCommand@2
+    displayName: 'NuGet push Win32 test specs'
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/Microsoft.FluentUI.Win32.E2E.Testing.Specs.Appium.Deps.nupkg'
       publishVstsFeed: Office
