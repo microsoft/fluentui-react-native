@@ -164,7 +164,7 @@ export class BasePage {
 
   /* Waits for the the specified UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
   async waitForElementDisplayed(component: WebdriverIO.Element, timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await (await component).isDisplayed(), {
+    await browser.waitUntil(async () => await component.isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
