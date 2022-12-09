@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Fri, 09 Dec 2022 20:03:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.116.1",
+      "version": "0.116.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "23b2d1140b54df103c829db2b2dcbad8688ac35d",
+            "comment": "Update statuses for win32"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 10:05:33 GMT",
       "tag": "@fluentui-react-native/tester_v0.116.0",
       "version": "0.116.0",
