@@ -64,10 +64,10 @@ const buttonSections: TestSection[] = [
 
 export const ButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    macosStatus: 'Production',
     androidStatus: 'Experimental',
   };
 

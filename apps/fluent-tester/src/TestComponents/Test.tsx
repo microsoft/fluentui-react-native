@@ -14,7 +14,7 @@ export type TestSection = {
   component: React.FunctionComponent;
 };
 
-export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A';
+export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A' | 'Deprecated';
 export type PlatformStatus = {
   win32Status: Status;
   uwpStatus: Status;
@@ -37,6 +37,7 @@ const definitions = {
   Experimental: 'Control code checked into repo, but not ready for partner use.',
   Backlog: 'Control is in plan and on our backlog to deliver.',
   'N/A': 'Control is not in current plan.',
+  Deprecated: 'Control is being deprecated.',
 };
 
 const styles = StyleSheet.create({
