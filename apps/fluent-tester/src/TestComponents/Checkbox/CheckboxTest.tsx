@@ -11,35 +11,11 @@ import { BasicCheckbox_legacy, OtherCheckbox_legacy, TokenCheckbox_legacy } from
 import { E2ECheckboxTest_legacy } from './legacy/CheckboxE2ETest';
 import { BasicCheckbox } from './BasicCheckbox';
 import { SizeCheckbox } from './SizeCheckbox';
+import { OtherCheckbox } from './OtherCheckbox';
 
 function onChangeUncontrolled(_e: InteractionEvent, isChecked: boolean) {
   console.log(isChecked);
 }
-
-const OtherCheckbox: React.FunctionComponent = () => {
-  const [isCheckedControlled1, setCheckedControlled1] = React.useState(false);
-  const onChangeControlled1 = React.useCallback((checked) => {
-    setCheckedControlled1(checked);
-  }, []);
-
-  const [isCheckedControlled2, setCheckedControlled2] = React.useState(true);
-  const onChangeControlled2 = React.useCallback((checked) => {
-    setCheckedControlled2(checked);
-  }, []);
-
-  return (
-    <View>
-      <Checkbox label="This is a controlled Checkbox" onChange={onChangeControlled1} checked={Boolean(isCheckedControlled1)} />
-      <Checkbox
-        label="Checkbox rendered with labelPosition 'before' (controlled)"
-        onChange={onChangeControlled2}
-        labelPosition="before"
-        checked={Boolean(isCheckedControlled2)}
-      />
-      <Checkbox label="A required checkbox with other required text" required="**" />
-    </View>
-  );
-};
 
 const CircleColorCheckbox = Checkbox.customize({
   checked: {
