@@ -22,7 +22,6 @@ describe('Experimental Text Testing Initialization', function () {
 describe('Experimental Text Accessibility Testing', () => {
   it('Text - Validate accessibilityRole is correct', async () => {
     await ExperimentalTextPageObject.scrollToTestElement();
-    await ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalTextPageObject.getAccessibilityRole()).toEqual(TEXT_A11Y_ROLE);
     await expect(await ExperimentalTextPageObject.didAssertPopup()).toBeFalsy(ExperimentalTextPageObject.ERRORMESSAGE_ASSERT);

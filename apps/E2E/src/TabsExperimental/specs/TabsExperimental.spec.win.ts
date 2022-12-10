@@ -22,7 +22,6 @@ describe('Experimental Tabs Testing Initialization', function () {
 describe('Experimental Tabs Accessibility Testing', () => {
   it("Validate Experimental Tab's accessibilityRole is correct", async () => {
     await ExperimentalTabsPageObject.scrollToTestElement();
-    await ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalTabsPageObject.getAccessibilityRole()).toEqual(TAB_A11Y_ROLE);
     await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
@@ -30,7 +29,6 @@ describe('Experimental Tabs Accessibility Testing', () => {
 
   it("Validate Experimental TabItem's accessibilityRole is correct", async () => {
     await ExperimentalTabsPageObject.scrollToTestElement();
-    await ExperimentalTabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalTabsPageObject.getTabItemAccesibilityRole()).toEqual(TABITEM_A11Y_ROLE);
     await expect(await ExperimentalTabsPageObject.didAssertPopup()).toBeFalsy(ExperimentalTabsPageObject.ERRORMESSAGE_ASSERT);
