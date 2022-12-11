@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Remove waitForPrimaryElementDisplayed method and test calls",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
