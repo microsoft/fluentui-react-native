@@ -1,6 +1,8 @@
 import { ViewProps, ColorValue } from 'react-native';
 
-interface SeparatorPropTokens {
+export const SeparatorName = 'Separator';
+
+export interface SeparatorPropTokens {
   /**
    * Specifies whether the separator is vertical or horizontal. If true, then it's vertical.
    * @defaultValue 'false'
@@ -30,10 +32,12 @@ export interface SeparatorProps extends ViewProps, SeparatorPropTokens {
   // alignContent?: 'start' | 'center' | 'end';
 }
 
+export interface SeperatorSlotProps {
+  root: ViewProps;
+}
+
 export interface SeparatorType {
   props: SeparatorProps;
-  slotProps: {
-    root: ViewProps;
-  };
+  slotProps: SeperatorSlotProps;
   tokens: SeparatorTokens;
 }
