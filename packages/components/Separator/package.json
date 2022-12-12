@@ -32,6 +32,8 @@
     "@fluentui-react-native/eslint-config-rules": "^0.1.1",
     "@fluentui-react-native/scripts": "^0.1.1",
     "@office-iss/react-native-win32": "^0.68.0",
+    "@fluentui-react-native/theme-tokens": "^0.22.1",
+    "@fluentui-react-native/use-styling": "^0.9.1",
     "@types/react-native": "^0.68.0",
     "react": "17.0.2",
     "react-native": "^0.68.0"
