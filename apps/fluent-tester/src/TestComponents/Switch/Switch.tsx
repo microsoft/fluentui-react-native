@@ -8,6 +8,7 @@ import { commonTestStyles } from '../Common/styles';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { CustomizedSwitch } from './CustomizedSwitch';
+import { Platform } from 'react-native';
 
 const styles = StyleSheet.create({
   square: {
@@ -18,8 +19,12 @@ const styles = StyleSheet.create({
 });
 
 const StandardUsage: React.FunctionComponent = () => {
+  const memoizedStyles = React.useMemo(
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 180 } : commonTestStyles.settingsPicker),
+    [],
+  );
   return (
-    <View style={commonTestStyles.settingsPicker}>
+    <View style={memoizedStyles}>
       <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
@@ -35,8 +40,13 @@ const OnChangeUsage: React.FunctionComponent = () => {
     setDisplaySquare(checked);
   };
 
+  const memoizedStyles = React.useMemo(
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : commonTestStyles.settingsPicker),
+    [],
+  );
+
   return (
-    <View style={commonTestStyles.settingsPicker}>
+    <View style={memoizedStyles}>
       <Switch label={'Toggle Square'} defaultChecked={true} onChange={defaultToggleSquare} />
       {displaySquare && <View style={styles.square} />}
     </View>
@@ -54,8 +64,13 @@ const ControlSwitchValues: React.FunctionComponent = () => {
     setToggleSwitch(false);
   };
 
+  const memoizedStyles = React.useMemo(
+    () => (Platform.OS === 'android' ? { ...commonTestStyles.androidContainer, height: 150 } : commonTestStyles.settingsPicker),
+    [],
+  );
+
   return (
-    <View style={commonTestStyles.settingsPicker}>
+    <View style={memoizedStyles}>
       <Button onClick={toggleSwitchTrue}>Toggle Switch True</Button>
       <Button onClick={toggleSwitchFalse}>Toggle Switch False</Button>
       <Switch label={'Switch Value Being Controlled'} checked={toggleSwitch} />
@@ -68,7 +83,7 @@ const LabelPosition: React.FunctionComponent = () => {
     <View style={commonTestStyles.settingsPicker}>
       <Switch defaultChecked={true} labelPosition={'before'} label={'before'} />
       <Switch defaultChecked={true} labelPosition={'after'} label={'after'} />
-      <Switch defaultChecked={true} labelPosition={'above'} label={'above'} />
+      {Platform.OS !== 'android' && <Switch defaultChecked={true} labelPosition={'above'} label={'above'} />}
     </View>
   );
 };
@@ -96,14 +111,20 @@ const toggleSections: TestSection[] = [
     name: 'Control Switch Values',
     component: () => <ControlSwitchValues />,
   },
-  {
-    name: 'Label Position',
-    component: () => <LabelPosition />,
-  },
-  {
-    name: 'On/Off Text',
-    component: () => <OnOffText />,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Label Position',
+      component: () => <LabelPosition />,
+    },
+  }),
+  Platform.select({
+    android: null,
+    default: {
+      name: 'On/Off Text',
+      component: () => <OnOffText />,
+    },
+  }),
   {
     name: 'Customized Tokens',
     component: () => <CustomizedSwitch />,
@@ -116,11 +137,11 @@ const toggleSections: TestSection[] = [
 
 export const SwitchTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',
-    androidStatus: 'Backlog',
+    androidStatus: 'Experimental',
   };
 
   const description = 'Switch is a control that has two mutually exclusive states.';

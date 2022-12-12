@@ -435,7 +435,7 @@ export const CalloutTest: React.FunctionComponent = () => {
     win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Backlog',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

@@ -29,7 +29,7 @@ const avatarSections: TestSection[] = [
 
 export const AvatarTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Beta',
     macosStatus: 'Experimental',

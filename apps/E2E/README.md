@@ -14,9 +14,9 @@
 
 - [UWP Prerequisites](../fluent-tester/docs/windows.md)
 
-## MacOS Prerequisites
+## macOS Prerequisites
 
-- MacOS 10.15 or later
+- macOS 10.15 or later
 - XCode 12 or later should be installed
 - XCode Helper app should be enabled for Accessibility access. The app itself is usually found at: _/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Xcode/Agents/Xcode Helper.app_.
 
@@ -55,17 +55,36 @@ and drag & drop the **XCode Helper** app to **Security & Privacy -> Privacy -> A
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
-## MacOS Steps
+## macOS Steps
 
 1. Follow step #1 from "Win32 Steps" section above.
 2. POD Install
-   - C:\repo\fluentui-react-native> `cd apps\fluent-tester\macos`
-   - C:\repo\fluentui-react-native\apps\fluent-tester\macos> `pod install`
+   - (from fluentui-react-native) `cd apps/fluent-tester/macos`
+   - (from fluentui-react-native/apps/fluent-tester/macos) `pod install`
 3. Start the server
-   - C:\repo\fluentui-react-native> `cd apps\fluent-tester`
-   - C:\repo\fluentui-react-native\apps\fluent-tester> `yarn start`
+   - (from fluentui-react-native) `cd apps/fluent-tester`
+   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
 4. Open a new command prompt and run the E2E tests
-   - C:\repo\fluentui-react-native\apps\E2E> `yarn e2etest:macos`
+   - (from fluentui-react-native/apps/E2E) `yarn e2etest:macos`
+
+_Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
+
+## iOS Steps
+
+First check that iOS configs in wdio.conf.ios.js are updated to match your dev environment. If the config doesn't match you may get an error message "App with bundle identifier 'com.microsoft.ReactTestApp' unknown"
+
+- 'appium:deviceName' should be updated to a simulator that you have. You can check the ones you have by going to the 'Devices and Simulators' window in Xcode.
+- 'appium:platformVersion' should be updated to match the iOS version of the simulator you're using. You can check what version this should be in the same 'Devices and Simulators' window.
+
+1. Follow step #1 from "Win32 Steps" section above.
+2. POD Install
+   - (from fluentui-react-native) `cd apps/fluent-tester/ios`
+   - (from fluentui-react-native/apps/fluent-tester/ios) `pod install`
+3. Start the server
+   - (from fluentui-react-native) `cd apps/fluent-tester`
+   - (from fluentui-react-native/apps/fluent-tester) `yarn start`
+4. Open a new command prompt and run the E2E tests
+   - (from fluentui-react-native/apps/E2E) `yarn e2etest:ios`
 
 _Note: It could take up to a minute to load the test app with WebDriverIO, don't panic, the tests will run :)_
 
