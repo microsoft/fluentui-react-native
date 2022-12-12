@@ -1,6 +1,10 @@
 import { ViewProps, ColorValue } from 'react-native';
 
-export const SeparatorName = 'Separator';
+export const separatorName = 'Separator';
+
+export const SeparatorInsetSpacings = [0, 16, 56, 68, 72, 108] as const;
+
+export type SeparatorInsetSpacing = typeof SeparatorInsetSpacings[number];
 
 export interface SeparatorPropTokens {
   /**
@@ -8,6 +12,15 @@ export interface SeparatorPropTokens {
    * @defaultValue 'false'
    */
   vertical?: boolean;
+
+  /**
+   * Inset Spacing in pixels.
+   *
+   * Inset Spacing is restricted to a limited set of supported values recommended for most uses (see `SeparatorInsetSpacing`) and
+   * based on design guidelines for the Separator control.
+   * @defaultvalue 0
+   */
+  insetSpacing?: SeparatorInsetSpacing;
 }
 
 export interface SeparatorTokens extends SeparatorPropTokens {

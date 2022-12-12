@@ -1,13 +1,13 @@
 /** @jsx withSlots */
 import { View } from 'react-native';
-import { SeparatorName, SeparatorProps, SeparatorType } from './Separator.types';
+import { separatorName, SeparatorProps, SeparatorType } from './Separator.types';
 import { compose, UseSlots, withSlots, mergeProps } from '@fluentui-react-native/framework';
 import { stylingSettings } from './Separator.styling';
 
 const propMask = { vertical: undefined };
 
 export const Separator = compose<SeparatorType>({
-  displayName: SeparatorName,
+  displayName: separatorName,
   ...stylingSettings,
   slots: { root: View },
   useRender: (props: SeparatorProps, useSlots: UseSlots<SeparatorType>) => {
