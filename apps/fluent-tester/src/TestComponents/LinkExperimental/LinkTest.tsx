@@ -21,7 +21,7 @@ const DefaultLinks: React.FunctionComponent = () => {
         Click to alert.
       </Link>
       <Link disabled focusable>
-        Disabled focusable Link
+        Disabled Link not focusable
       </Link>
     </Stack>
   );
