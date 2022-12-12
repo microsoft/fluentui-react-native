@@ -10,16 +10,6 @@ steps:
       jdkVersionOption: '1.11'
       workingDirectory: apps/fluent-tester/android
 
-  - task: Gradle@2
-    displayName: 'gradlew uninstall all'
-    inputs:
-      gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
-      tasks: 'uninstallAll'
-      gradleOptions: '-Xmx2g'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      workingDirectory: apps/fluent-tester/android
-
   - script: |
       adb install app-debug.apk
     workingDirectory: apps/fluent-tester/android/app/build/outputs/apk/debug
