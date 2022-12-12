@@ -59,7 +59,7 @@ const TestListSeparator = Separator.customize((t) => ({
   separatorWidth: 2,
 }));
 
-const Header: React.FunctionComponent<HeaderProps> = (props) => {
+const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
   const { enableSinglePaneView, enableBackButtonIOS, onBackButtonPressedIOS } = props;
   const theme = useTheme();
 
@@ -93,7 +93,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
       </View>
     </View>
   );
-};
+});
 
 // filters and sorts tests alphabetically
 const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
@@ -161,7 +161,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     );
   });
 
-  const MobileTestList: React.FunctionComponent = () => {
+  const MobileTestList: React.FunctionComponent = React.memo(() => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -191,7 +191,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         </ScrollView>
       </View>
     );
-  };
+  });
 
   const TestComponentView: React.FunctionComponent = () => {
     return (
@@ -208,7 +208,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
       <HeaderSeparator />
       <View style={fluentTesterStyles.testRoot}>
         {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-
         {isTestSectionVisible && <TestComponentView />}
       </View>
     </RootView>
