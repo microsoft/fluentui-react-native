@@ -1,13 +1,11 @@
 steps:
-  - script: |
-      yarn bundle:android
-    workingDirectory: apps/fluent-tester
-    displayName: 'yarn bundle android'
-
-  - script: |
-      ./gradlew assembleDebug
-    workingDirectory: apps/fluent-tester/android
-    displayName: 'build apk'
+  # Building APK also requires bundling, this is currently already being done as part of main Android PR task.
+  - task: Gradle@3
+    displayName: 'gradlew build Apk'
+    inputs:
+      gradleWrapperFile: 'gradlew'
+      tasks: 'assembleDevelopmentDebug'
+      javaHomeOption: 'JDKVersion'
 
   - script: |
       adb install app-debug.apk
