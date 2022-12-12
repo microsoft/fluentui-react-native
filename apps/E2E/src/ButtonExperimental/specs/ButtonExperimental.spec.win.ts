@@ -57,8 +57,7 @@ describe('Experimental Button Functional Testing', async () => {
   it('Validate OnClick() callback was fired -> Click', async () => {
     await ButtonExperimentalPageObject.clickComponent();
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
-      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a mouse click. Please contact
-       the ButtonV1 engineer for more details.`,
+      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a mouse click.`,
     );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
 
@@ -68,8 +67,7 @@ describe('Experimental Button Functional Testing', async () => {
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
     await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.ENTER);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
-      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a enter keypress. Please contact
-       the ButtonV1 engineer for more details.`,
+      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a enter keypress.`,
     );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
 
@@ -79,8 +77,7 @@ describe('Experimental Button Functional Testing', async () => {
   it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
     await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.SPACE);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
-      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a space keypress. Please contact
-       the ButtonV1 engineer for more details.`,
+      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a space keypress.`,
     );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });

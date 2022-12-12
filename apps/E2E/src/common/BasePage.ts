@@ -82,9 +82,8 @@ export abstract class BasePage {
     const actualValue = await element.getAttribute(attribute);
     if (expectedValue !== actualValue) {
       throw new Error(
-        `On ${this._pageName}, a test component should have attribute, ${attributeToEnumName[attribute]}, equal to ${expectedValue}.
-        Instead, ${attributeToEnumName[attribute]} is equal to ${actualValue}. Contact either the component engineer or
-        the test engineer for ${this._pageName} for more details.`,
+        `On ${this._pageName}, a test component should have attribute, ${attributeToEnumName[attribute]} (${attribute}), equal to ${expectedValue}.
+        Instead, ${attributeToEnumName[attribute]} is equal to ${actualValue}.`,
       );
     }
     return true;
