@@ -3,7 +3,7 @@ import { Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
 import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from './TestComponents/Common/consts';
 import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
@@ -46,7 +46,7 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
 });
 
 const EmptyComponent: React.FunctionComponent = () => {
-  return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
+  return <RNText style={fluentTesterStyles.noTest}>Select a component from the test list.</RNText>;
 };
 
 const HeaderSeparator = Separator.customize((t) => ({
@@ -64,6 +64,8 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
   const theme = useTheme();
 
   const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
+
+  const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
 
   return (
     <View style={headerStyle}>
@@ -84,7 +86,7 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
             onClick={onBackButtonPressedIOS}
             disabled={!enableBackButtonIOS}
           >
-            ‹ Back
+            {backButtonTitle}
           </Button>
         )}
         <ThemePickers />
