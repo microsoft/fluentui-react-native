@@ -11,7 +11,7 @@ steps:
       workingDirectory: apps/fluent-tester/android
 
   - script: |
-      adb install app-debug.apk
+      adb install -r app-debug.apk
     workingDirectory: apps/fluent-tester/android/app/build/outputs/apk/debug
     displayName: 'install apk'
 
