@@ -1,8 +1,76 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Fri, 11 Nov 2022 18:06:32 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.26
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/persona-coin to v0.12.7
+- Bump @fluentui-react-native/tokens to v0.19.1
+- Bump @uifabricshared/foundation-tokens to v0.12.15
+
+## 0.13.25
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/persona-coin to v0.12.6
+
+## 0.13.24
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.24
+- Bump @fluentui-react-native/framework to v0.8.23
+- Bump @fluentui-react-native/persona-coin to v0.12.5
+- Bump @fluentui-react-native/tokens to v0.19.0
+- Bump @uifabricshared/foundation-tokens to v0.12.14
+
+## 0.13.23
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/persona-coin to v0.12.4
+- Bump @fluentui-react-native/tokens to v0.18.1
+- Bump @uifabricshared/foundation-tokens to v0.12.13
+
+## 0.13.22
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.22
+- Bump @fluentui-react-native/framework to v0.8.21
+- Bump @fluentui-react-native/persona-coin to v0.12.3
+- Bump @fluentui-react-native/tokens to v0.18.0
+- Bump @uifabricshared/foundation-tokens to v0.12.12
+
+## 0.13.21
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.21
+- Bump @fluentui-react-native/framework to v0.8.20
+- Bump @fluentui-react-native/persona-coin to v0.12.2
 
 ## 0.13.20
 

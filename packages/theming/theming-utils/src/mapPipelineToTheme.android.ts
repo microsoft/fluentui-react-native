@@ -29,6 +29,9 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     neutralForegroundOnColor: pipelineOutput.neutralForegroundOnColor.fillColorRest,
 
+    neutralBackgroundLightStatic: pipelineOutput.neutralBackgroundLightStatic.fillColorRest,
+    neutralBackgroundLightStaticDisabled: pipelineOutput.neutralBackgroundLightStaticDisabled.fillColorRest,
+
     neutralBackground1: pipelineOutput.neutralBackground1.fillColorRest,
     neutralBackground1Hover: pipelineOutput.neutralBackground1.fillColorHover,
     neutralBackground1Pressed: pipelineOutput.neutralBackground1.fillColorPressed,
@@ -77,7 +80,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandBackground: pipelineOutput.brandBackground1.fillColorRest,
     brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
     brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
-
+    brandBackgroundDisabled: pipelineOutput.brandBackgroundDisabled.fillColorRest,
     brandBackground2: pipelineOutput.brandBackground2?.fillColorRest,
     brandBackground2Pressed: pipelineOutput.brandBackground2?.fillColorPressed,
     brandBackground2Selected: pipelineOutput.brandBackground2?.fillColorSelected,

@@ -1,12 +1,14 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Checkbox.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useCheckbox } from './useCheckbox';
 import { Svg, Path } from 'react-native-svg';
+
+const unsupportedAndroidProps: string[] = ['size', 'shape', 'required', 'labelPosition', 'tooltip'];
 
 export const Checkbox = compose<CheckboxType>({
   displayName: checkboxName,
@@ -19,6 +21,14 @@ export const Checkbox = compose<CheckboxType>({
     required: Text,
   },
   useRender: (userProps: CheckboxProps, useSlots: UseSlots<CheckboxType>) => {
+    // Removal of tokens which are not supported for Android
+    {
+      Platform.OS === 'android' &&
+        unsupportedAndroidProps.map((e) => {
+          Reflect.deleteProperty(userProps, e);
+        });
+    }
+
     // configure props and state for checkbox based on user props
     const Checkbox = useCheckbox(userProps);
     // grab the styled slots

@@ -1,8 +1,139 @@
 # Change Log - @fluentui-react-native/contextual-menu
 
-This log was last generated on Sun, 13 Nov 2022 09:17:06 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 23:48:05 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.3
+
+Fri, 09 Dec 2022 23:48:05 GMT
+
+### Patches
+
+- Revert usePressableState for SubmenuItem (amchiu@microsoft.com)
+
+## 0.21.2
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.42
+- Bump @fluentui-react-native/focus-zone to v0.11.12
+- Bump @fluentui-react-native/icon to v0.16.2
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/text to v0.18.2
+- Bump @fluentui-react-native/tokens to v0.19.1
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/pressable to v0.9.39
+
+## 0.21.1
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.41
+- Bump @fluentui-react-native/focus-zone to v0.11.11
+- Bump @fluentui-react-native/icon to v0.16.1
+- Bump @fluentui-react-native/interactive-hooks to v0.21.5
+- Bump @fluentui-react-native/text to v0.18.1
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/pressable to v0.9.38
+
+## 0.21.0
+
+Tue, 06 Dec 2022 02:02:55 GMT
+
+### Minor changes
+
+- Bump react-native-svg: 12.3.0 -> 12.5.0 (winlarry@microsoft.com)
+- Bump @fluentui-react-native/icon to v0.16.0
+
+## 0.20.7
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.40
+- Bump @fluentui-react-native/focus-zone to v0.11.10
+- Bump @fluentui-react-native/icon to v0.15.5
+- Bump @fluentui-react-native/interactive-hooks to v0.21.4
+- Bump @fluentui-react-native/text to v0.18.0
+- Bump @fluentui-react-native/tokens to v0.19.0
+- Bump @uifabricshared/foundation-compose to v1.12.24
+- Bump @fluentui-react-native/pressable to v0.9.37
+
+## 0.20.6
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.39
+- Bump @fluentui-react-native/focus-zone to v0.11.9
+- Bump @fluentui-react-native/icon to v0.15.4
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/text to v0.17.1
+- Bump @fluentui-react-native/tokens to v0.18.1
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/pressable to v0.9.36
+
+## 0.20.5
+
+Wed, 30 Nov 2022 21:33:19 GMT
+
+### Patches
+
+- Update jest configs for ContextualMenu, FocusTrapZone, FocusZone (sanajmi@microsoft.com)
+- Bump @fluentui-react-native/focus-zone to v0.11.8
+
+## 0.20.4
+
+Tue, 29 Nov 2022 20:39:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.38
+
+## 0.20.3
+
+Mon, 28 Nov 2022 19:49:35 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/icon to v0.15.3
+- Bump @fluentui-react-native/text to v0.17.0
+
+## 0.20.2
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.37
+- Bump @fluentui-react-native/focus-zone to v0.11.7
+- Bump @fluentui-react-native/icon to v0.15.2
+- Bump @fluentui-react-native/interactive-hooks to v0.21.2
+- Bump @fluentui-react-native/text to v0.16.2
+- Bump @fluentui-react-native/tokens to v0.18.0
+- Bump @uifabricshared/foundation-compose to v1.12.22
+- Bump @fluentui-react-native/pressable to v0.9.35
+
+## 0.20.1
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/callout to v0.21.36
+- Bump @fluentui-react-native/focus-zone to v0.11.6
+- Bump @fluentui-react-native/icon to v0.15.1
+- Bump @fluentui-react-native/interactive-hooks to v0.21.1
+- Bump @fluentui-react-native/text to v0.16.1
+- Bump @uifabricshared/foundation-compose to v1.12.21
+- Bump @fluentui-react-native/pressable to v0.9.34
 
 ## 0.20.0
 

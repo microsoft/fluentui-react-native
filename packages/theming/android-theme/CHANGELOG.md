@@ -1,8 +1,60 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Fri, 11 Nov 2022 18:06:32 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.1
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- snapshot update (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theme-tokens to v0.22.1
+- Bump @fluentui-react-native/theme-types to v0.26.0
+- Bump @fluentui-react-native/theme to v0.7.11
+- Bump @fluentui-react-native/theming-utils to v0.20.0
+
+## 0.15.0
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Minor changes
+
+- Integrate Shadows from pipeline (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.22.0
+
+## 0.14.6
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.21.5
+- Bump @fluentui-react-native/theme-types to v0.25.0
+- Bump @fluentui-react-native/theme to v0.7.10
+- Bump @fluentui-react-native/theming-utils to v0.19.1
+
+## 0.14.5
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/theme-tokens to v0.21.4
+- Bump @fluentui-react-native/theme-types to v0.24.0
+- Bump @fluentui-react-native/theme to v0.7.9
+- Bump @fluentui-react-native/theming-utils to v0.19.0
+
+## 0.14.4
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- checkbox token changes and update android tester app (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theming-utils to v0.18.3
 
 ## 0.14.3
 

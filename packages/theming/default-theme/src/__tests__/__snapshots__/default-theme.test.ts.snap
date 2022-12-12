@@ -225,7 +225,7 @@ Object {
   },
   "compoundBrandStroke1": Object {
     "semantic": Array [
-      "SystemColorWindowColor",
+      "SystemColorHighlightColor",
     ],
   },
   "compoundBrandStroke1Hover": Object {
@@ -2189,7 +2189,7 @@ Object {
     },
     "compoundBrandStroke1": Object {
       "semantic": Array [
-        "SystemColorWindowColor",
+        "SystemColorHighlightColor",
       ],
     },
     "compoundBrandStroke1Hover": Object {

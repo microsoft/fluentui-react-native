@@ -20,6 +20,7 @@ Object {
     "brandBackground2Pressed": undefined,
     "brandBackground2Selected": undefined,
     "brandBackground3": undefined,
+    "brandBackgroundDisabled": "#0c3b5e",
     "brandBackgroundInverted": "#ffffff",
     "brandBackgroundInvertedDisabled": "#adadad",
     "brandBackgroundPressed": "#96c6fa",
@@ -189,6 +190,8 @@ Object {
     "neutralBackground6": "#5c5c5c",
     "neutralBackgroundDisabled": "#525252",
     "neutralBackgroundInverted": "#575757",
+    "neutralBackgroundLightStatic": "#ffffff",
+    "neutralBackgroundLightStaticDisabled": "#adadad",
     "neutralForeground1": "#ffffff",
     "neutralForeground1Hover": undefined,
     "neutralForeground1Pressed": undefined,
@@ -312,13 +315,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -382,13 +385,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -629,6 +632,7 @@ Object {
     "brandBackground2Pressed": undefined,
     "brandBackground2Selected": undefined,
     "brandBackground3": undefined,
+    "brandBackgroundDisabled": "#0c3b5e",
     "brandBackgroundInverted": "#ffffff",
     "brandBackgroundInvertedDisabled": "#adadad",
     "brandBackgroundPressed": "#96c6fa",
@@ -798,6 +802,8 @@ Object {
     "neutralBackground6": "#5c5c5c",
     "neutralBackgroundDisabled": "#525252",
     "neutralBackgroundInverted": "#575757",
+    "neutralBackgroundLightStatic": "#ffffff",
+    "neutralBackgroundLightStaticDisabled": "#adadad",
     "neutralForeground1": "#ffffff",
     "neutralForeground1Hover": undefined,
     "neutralForeground1Pressed": undefined,
@@ -921,13 +927,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -991,13 +997,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -1238,6 +1244,7 @@ Object {
     "brandBackground2Pressed": undefined,
     "brandBackground2Selected": undefined,
     "brandBackground3": undefined,
+    "brandBackgroundDisabled": "#0c3b5e",
     "brandBackgroundInverted": "#ffffff",
     "brandBackgroundInvertedDisabled": "#adadad",
     "brandBackgroundPressed": "#96c6fa",
@@ -1407,6 +1414,8 @@ Object {
     "neutralBackground6": "#5c5c5c",
     "neutralBackgroundDisabled": "#525252",
     "neutralBackgroundInverted": "#575757",
+    "neutralBackgroundLightStatic": "#ffffff",
+    "neutralBackgroundLightStaticDisabled": "#adadad",
     "neutralForeground1": "#ffffff",
     "neutralForeground1Hover": undefined,
     "neutralForeground1Pressed": undefined,
@@ -1530,13 +1539,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -1600,13 +1609,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -1847,6 +1856,7 @@ Object {
     "brandBackground2Pressed": "#0c3b5e",
     "brandBackground2Selected": "#0e4775",
     "brandBackground3": "#0f548c",
+    "brandBackgroundDisabled": "#b4d6fa",
     "brandBackgroundInverted": "#ffffff",
     "brandBackgroundInvertedDisabled": "#ffffff",
     "brandBackgroundPressed": "#0e4775",
@@ -2016,6 +2026,8 @@ Object {
     "neutralBackground6": "#d1d1d1",
     "neutralBackgroundDisabled": "#e0e0e0",
     "neutralBackgroundInverted": "#242424",
+    "neutralBackgroundLightStatic": "#ffffff",
+    "neutralBackgroundLightStaticDisabled": "#ffffff",
     "neutralForeground1": "#242424",
     "neutralForeground1Hover": undefined,
     "neutralForeground1Pressed": undefined,
@@ -2139,13 +2151,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -2209,13 +2221,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -2456,6 +2468,7 @@ Object {
     "brandBackground2Pressed": undefined,
     "brandBackground2Selected": undefined,
     "brandBackground3": undefined,
+    "brandBackgroundDisabled": "#0c3b5e",
     "brandBackgroundInverted": "#ffffff",
     "brandBackgroundInvertedDisabled": "#adadad",
     "brandBackgroundPressed": "#96c6fa",
@@ -2625,6 +2638,8 @@ Object {
     "neutralBackground6": "#5c5c5c",
     "neutralBackgroundDisabled": "#525252",
     "neutralBackgroundInverted": "#575757",
+    "neutralBackgroundLightStatic": "#ffffff",
+    "neutralBackgroundLightStaticDisabled": "#adadad",
     "neutralForeground1": "#ffffff",
     "neutralForeground1Hover": undefined,
     "neutralForeground1Pressed": undefined,
@@ -2748,13 +2763,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -2818,13 +2833,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },
@@ -3065,6 +3080,7 @@ Object {
     "brandBackground2Pressed": "#0c3b5e",
     "brandBackground2Selected": "#0e4775",
     "brandBackground3": "#0f548c",
+    "brandBackgroundDisabled": "#b4d6fa",
     "brandBackgroundInverted": "#ffffff",
     "brandBackgroundInvertedDisabled": "#ffffff",
     "brandBackgroundPressed": "#0e4775",
@@ -3234,6 +3250,8 @@ Object {
     "neutralBackground6": "#d1d1d1",
     "neutralBackgroundDisabled": "#e0e0e0",
     "neutralBackgroundInverted": "#242424",
+    "neutralBackgroundLightStatic": "#ffffff",
+    "neutralBackgroundLightStaticDisabled": "#ffffff",
     "neutralForeground1": "#242424",
     "neutralForeground1Hover": undefined,
     "neutralForeground1Pressed": undefined,
@@ -3357,13 +3375,13 @@ Object {
     "shadow28": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 28,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 14,
       },
@@ -3427,13 +3445,13 @@ Object {
     "shadow64": Object {
       "ambient": Object {
         "blur": 8,
-        "color": "#00000033",
+        "color": "#0000001f",
         "x": 0,
         "y": 0,
       },
       "key": Object {
         "blur": 64,
-        "color": "#0000003d",
+        "color": "#00000024",
         "x": 0,
         "y": 32,
       },

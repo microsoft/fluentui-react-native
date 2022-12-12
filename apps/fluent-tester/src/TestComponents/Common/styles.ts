@@ -60,6 +60,10 @@ export const commonTestStyles = StyleSheet.create({
     minHeight: 200,
     justifyContent: 'space-between',
   },
+  androidContainer: {
+    marginTop: 20,
+    justifyContent: 'space-between',
+  },
 });
 
 export const fluentTesterStyles = StyleSheet.create({
@@ -141,6 +145,18 @@ export const separatorStackStyle: IStackProps['style'] = {
 };
 
 export const mobileStyles = StyleSheet.create({
+  header: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  testVariants: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
   testList: {
     width: '100%',
   },

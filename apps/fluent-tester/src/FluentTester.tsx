@@ -1,5 +1,5 @@
 import { Theme } from '@fluentui-react-native/framework';
-import { FocusTrapZone, Separator, Text } from '@fluentui/react-native';
+import { Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
@@ -9,7 +9,7 @@ import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestCompon
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
-import { ROOT_VIEW } from './E2E/common/consts';
+import { ROOT_VIEW } from '../../E2E/src/common/consts';
 
 // uncomment the below lines to enable message spy
 /**
@@ -108,10 +108,53 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     return true;
   }, []);
 
-  // We can't use Platform.select because win32 isn't on there.. so we do this long check instead
-  const RootView = Platform.OS === ('win32' as any) ? FocusTrapZone : Platform.OS === 'ios' ? SafeAreaView : View;
-
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
+
+  const themedStyles = getThemedStyles(useTheme());
+
+  // This is used to initially bring focus to the app on win32
+  const focusOnMountRef = React.useRef<View>();
+
+  React.useEffect(() => {
+    if (Platform.OS === ('win32' as any)) {
+      focusOnMountRef.current.focus();
+    }
+  }, []);
+
+  const RootView = Platform.select({
+    ios: SafeAreaView,
+    default: View,
+  });
+
+  // iOS needs a software back button, which is shown on a newline along with the ThemePickers
+  const MobileHeader: React.FunctionComponent = () => {
+    const theme = useTheme();
+
+    return (
+      <View style={mobileStyles.header}>
+        <Text
+          style={fluentTesterStyles.testHeader}
+          variant="heroLargeSemibold"
+          color={theme.host.palette?.TextEmphasis}
+          testID={BASE_TESTPAGE}
+        >
+          ⚛ FluentUI Tests
+        </Text>
+        <View style={fluentTesterStyles.header}>
+          {/* on iOS, display a back Button */}
+          <Button
+            appearance="subtle"
+            style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
+            onClick={onBackPress}
+            disabled={onTestListView}
+          >
+            ‹ Back
+          </Button>
+          <ThemePickers />
+        </View>
+      </View>
+    );
+  };
 
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
@@ -129,6 +172,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
                 testID={description.testPage}
+                // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
+                {...(index === 0 && { componentRef: focusOnMountRef })}
               >
                 {description.name}
               </Button>

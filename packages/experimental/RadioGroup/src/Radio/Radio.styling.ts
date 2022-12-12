@@ -16,7 +16,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           display: 'flex',
           alignItems: tokens.alignItems,
           flexDirection: tokens.flexDirection,
-          paddingHorizontal: globalTokens.spacing.xs,
+          paddingHorizontal: globalTokens.size40,
           ...borderStyles.from(tokens, theme),
         },
       }),

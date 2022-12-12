@@ -14,7 +14,7 @@ const textSections: TestSection[] = [
     component: StandardUsage,
   },
   {
-    name: 'V2 Usage',
+    name: 'V2/V1 Comparison',
     component: V2Usage,
   },
   {
@@ -33,7 +33,7 @@ const textSections: TestSection[] = [
 
 export const TextExperimentalTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',

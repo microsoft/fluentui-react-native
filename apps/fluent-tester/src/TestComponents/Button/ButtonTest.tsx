@@ -20,19 +20,21 @@ const buttonSections: TestSection[] = [
     component: ButtonVariantTest,
   },
   {
-    name: 'Button Shape',
-    component: ButtonShapeTest,
-  },
-  {
     name: 'Icon Button',
     component: ButtonIconTest,
   },
-  Platform.select({
-    android: null, //Toggle Button is not implemented for Android
-    default: {
-      name: 'Toggle Button',
-      component: ToggleButtonTest,
-    },
+  ...Platform.select({
+    android: [null], //Following sections are not supported from Fluent Android
+    default: [
+      {
+        name: 'Toggle Button',
+        component: ToggleButtonTest,
+      },
+      {
+        name: 'Button Shape',
+        component: ButtonShapeTest,
+      },
+    ],
   }),
   {
     name: 'Sizes',
@@ -62,11 +64,11 @@ const buttonSections: TestSection[] = [
 
 export const ButtonTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
-    androidStatus: 'Backlog',
+    macosStatus: 'Production',
+    androidStatus: 'Experimental',
   };
 
   const description =

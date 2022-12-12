@@ -9,9 +9,10 @@ import { IViewProps } from '@fluentui-react-native/adapters';
 
 export const buttonName = 'Button';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonAppearance = 'primary' | 'subtle';
+export type ButtonAppearance = 'primary' | 'subtle' | 'accent' | 'outline';
 export type ButtonShape = 'rounded' | 'circular' | 'square';
 
+// Core Props/Tokens are shared between FAB and Buttons
 export interface ButtonCoreTokens extends LayoutTokens, FontTokens, IBorderTokens, IShadowTokens, IColorTokens {
   /**
    * The icon color.
@@ -75,6 +76,7 @@ export interface ButtonTokens extends ButtonCoreTokens {
   hasIconBefore?: ButtonTokens;
   primary?: ButtonTokens;
   subtle?: ButtonTokens;
+  outline?: ButtonTokens;
   block?: ButtonTokens;
   small?: ButtonTokens;
   medium?: ButtonTokens;
@@ -93,7 +95,7 @@ export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'>
 
   /**
    * Button contains only icon, there's no content.
-   * Must be set for button to style correctly when button has not content.
+   * Must be set for button to style correctly when button has no content.
    */
   iconOnly?: boolean;
 
@@ -116,8 +118,10 @@ export interface ButtonCoreProps extends Omit<PressablePropsExtended, 'onPress'>
 export interface ButtonProps extends ButtonCoreProps {
   /**
    * A button can have its content and borders styled for greater emphasis or to be subtle.
-   * - 'primary': Emphasizes the button as a primary action.
+   * - 'primary' or 'accent': Emphasizes the button as a primary action. 'Accent' added to support Mobile platform naming convention, maps to 'primary'.
    * - 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+   * - 'outline': Similar to subtle but has a border. Implemented for mobile endpoints only. Maps to default on other platforms.
+   * @default 'primary' on mobile endpoints, other platform have a separate style when no appearance is passed.
    */
   appearance?: ButtonAppearance;
 

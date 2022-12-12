@@ -1,8 +1,74 @@
 # Change Log - @fluentui-react-native/callout
 
-This log was last generated on Sun, 13 Nov 2022 09:17:07 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.42
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/tokens to v0.19.1
+- Bump @uifabricshared/foundation-compose to v1.12.26
+
+## 0.21.41
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.21.5
+- Bump @uifabricshared/foundation-compose to v1.12.25
+
+## 0.21.40
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.21.4
+- Bump @fluentui-react-native/tokens to v0.19.0
+- Bump @uifabricshared/foundation-compose to v1.12.24
+
+## 0.21.39
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.21.3
+- Bump @fluentui-react-native/tokens to v0.18.1
+- Bump @uifabricshared/foundation-compose to v1.12.23
+
+## 0.21.38
+
+Tue, 29 Nov 2022 20:39:49 GMT
+
+### Patches
+
+- Update config (ruaraki@microsoft.com)
+
+## 0.21.37
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.21.2
+- Bump @fluentui-react-native/tokens to v0.18.0
+- Bump @uifabricshared/foundation-compose to v1.12.22
+
+## 0.21.36
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/interactive-hooks to v0.21.1
+- Bump @uifabricshared/foundation-compose to v1.12.21
 
 ## 0.21.35
 
