@@ -15,7 +15,7 @@ const SeparatorMainTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle} gap={5}>
       <Stack gap={4} style={separatorStackStyle}>
-        <Button appearance="primary">Button1</Button>
+        <Button>Button1</Button>
         <BlueSeparator vertical />
         <Button>Button2</Button>
         <RedSeparator vertical />
