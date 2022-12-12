@@ -22,7 +22,6 @@ describe('Tabs Accessibility Testing', () => {
   /* Scrolls and waits for the Tabs to be visible on the Test Page */
   beforeEach(async () => {
     await TabsPageObject.scrollToTestElement();
-    await TabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Validate Tab's accessibilityRole is correct", async () => {
@@ -38,7 +37,6 @@ describe('Tabs Functional Tests', () => {
   /* Scrolls and waits for the Tabs to be visible on the Test Page */
   beforeEach(async () => {
     await TabsPageObject.scrollToTestElement();
-    await TabsPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     // Reset the TabGroup by putting focus on First tab item
     await TabsPageObject.clickOnTabItem(TabItemSelector.First);

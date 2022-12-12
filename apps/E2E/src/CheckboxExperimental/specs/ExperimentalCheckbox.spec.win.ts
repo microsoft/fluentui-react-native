@@ -27,12 +27,10 @@ describe('Experimental Checkbox Accessibility Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page */
   beforeEach(async () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
-    await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Experimental Checkbox - Validate accessibilityRole is correct', async () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
-    await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.getAccessibilityRole()).toEqual(CHECKBOX_A11Y_ROLE);
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
@@ -40,7 +38,6 @@ describe('Experimental Checkbox Accessibility Testing', () => {
 
   it('Experimental Checkbox - Set accessibilityLabel', async () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
-    await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
       EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL,
@@ -50,7 +47,6 @@ describe('Experimental Checkbox Accessibility Testing', () => {
 
   it('Experimental Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', async () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
-    await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ExperimentalCheckboxPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
       EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL,
@@ -63,7 +59,6 @@ describe('Checkbox Functional Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page AND un-checks the Checkbox */
   beforeEach(async () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
-    await ExperimentalCheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await ExperimentalCheckboxPageObject.toggleCheckboxToUnchecked();
   });

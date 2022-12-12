@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Remove waitForPrimaryElementDisplayed test calls, deprecated method",
+  "packageName": "@fluentui-react-native/e2e-testing",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "minor"
+}

@@ -28,7 +28,7 @@ describe('FocusZone Testing Initialization', function () {
 describe('FocusZone Functional Testing', () => {
   beforeEach(async () => {
     await FocusZonePageObject.scrollToTestElement();
-    await FocusZonePageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     await FocusZonePageObject.resetTest();
   });
 

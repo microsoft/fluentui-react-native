@@ -28,7 +28,6 @@ describe('Button Accessibility Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonPageObject.scrollToTestElement();
-    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Button - Validate accessibilityRole is correct', async () => {
@@ -51,7 +50,6 @@ describe('Button Functional Testing', () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonPageObject.scrollToTestElement();
-    await ButtonPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {
