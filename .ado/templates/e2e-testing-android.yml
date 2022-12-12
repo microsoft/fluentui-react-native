@@ -34,7 +34,7 @@ steps:
 
   - template: e2e-publish-artifacts.yml
     parameters:
-      applicationType: ios
-      platform: 'ios'
+      applicationType: android
+      platform: 'android'
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
