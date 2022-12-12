@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ButtonExperimentalPageObject, { ButtonSelector } from '../pages/ButtonExperimentalPageObject';
+import ButtonExperimentalPageObject from '../pages/ButtonExperimentalPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../../fluent-tester/src/TestComponents/Button/consts';
 
@@ -22,18 +22,23 @@ describe('Experimental Button Testing Initialization', function () {
 
 describe('Experimental Button Accessibility Testing', async () => {
   beforeEach(async () => {
-    await ButtonExperimentalPageObject.scrollToTestElement();
+    await ButtonExperimentalPageObject.scrollToTestElement(await ButtonExperimentalPageObject._primaryComponent);
   });
 
   it('Experimental Button - Validate accessibilityRole is correct', async () => {
-    await expect(await ButtonExperimentalPageObject.accessibilityRoleIsEqualTo(ButtonSelector.PrimaryButton, BUTTON_A11Y_ROLE)).toBeTrue();
+    await expect(
+      await ButtonExperimentalPageObject.accessibilityRoleIsEqualTo(ButtonExperimentalPageObject._primaryComponent, BUTTON_A11Y_ROLE),
+    ).toBeTrue();
 
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Experimental Button - Set accessibilityLabel', async () => {
     await expect(
-      await ButtonExperimentalPageObject.accessibilityLabelIsEqualTo(ButtonSelector.PrimaryButton, BUTTON_ACCESSIBILITY_LABEL),
+      await ButtonExperimentalPageObject.accessibilityLabelIsEqualTo(
+        ButtonExperimentalPageObject._primaryComponent,
+        BUTTON_ACCESSIBILITY_LABEL,
+      ),
     ).toBeTrue();
 
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
@@ -41,7 +46,10 @@ describe('Experimental Button Accessibility Testing', async () => {
 
   it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', async () => {
     await expect(
-      await ButtonExperimentalPageObject.accessibilityLabelIsEqualTo(ButtonSelector.SecondaryButton, BUTTON_TEST_COMPONENT_LABEL),
+      await ButtonExperimentalPageObject.accessibilityLabelIsEqualTo(
+        ButtonExperimentalPageObject._secondaryComponent,
+        BUTTON_TEST_COMPONENT_LABEL,
+      ),
     ).toBeTrue();
 
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
@@ -51,33 +59,33 @@ describe('Experimental Button Accessibility Testing', async () => {
 describe('Experimental Button Functional Testing', async () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
-    await ButtonExperimentalPageObject.scrollToTestElement();
+    await ButtonExperimentalPageObject.scrollToTestElement(await ButtonExperimentalPageObject._primaryComponent);
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {
-    await ButtonExperimentalPageObject.clickComponent();
+    await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
-      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a mouse click.`,
+      `The primary button failed to fire an onClick callback with a mouse click.`,
     );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
 
-    await ButtonExperimentalPageObject.clickComponent(); // Reset Button State
+    await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
-    await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.ENTER);
+    await ButtonExperimentalPageObject.keys(ButtonExperimentalPageObject._primaryComponent, [Keys.ENTER]);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
-      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a enter keypress.`,
+      `The primary button failed to fire an onClick callback with a enter keypress.`,
     );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
 
-    await ButtonExperimentalPageObject.clickComponent(); // Reset Button State
+    await ButtonExperimentalPageObject.click(ButtonExperimentalPageObject._primaryComponent); // Reset Button State
   });
 
   it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
-    await ButtonExperimentalPageObject.sendKey(ButtonSelector.PrimaryButton, Keys.SPACE);
+    await ButtonExperimentalPageObject.keys(ButtonExperimentalPageObject._primaryComponent, [Keys.SPACE]);
     await expect(await ButtonExperimentalPageObject.didOnClickCallbackFire()).toBeTruthy(
-      `For ButtonExperimental E2E test, the primary button failed to fire an onClick callback with a space keypress.`,
+      `The primary button failed to fire an onClick callback with a space keypress.`,
     );
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
   });

@@ -89,6 +89,14 @@ export abstract class BasePage {
     return true;
   }
 
+  async accessibilityLabelIsEqualTo(element: Promise<WebdriverIO.Element>, expectedValue: any): Promise<boolean> {
+    return this._attributeIsEqualTo(await element, Attribute.AccessibilityLabel, expectedValue);
+  }
+
+  async accessibilityRoleIsEqualTo(element: Promise<WebdriverIO.Element>, expectedValue: any): Promise<boolean> {
+    return this._attributeIsEqualTo(await element, Attribute.AccessibilityRole, expectedValue);
+  }
+
   async getAccessibilityRole(): Promise<string> {
     return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
   }
@@ -119,6 +127,15 @@ export abstract class BasePage {
 
   async clickComponent(): Promise<void> {
     await (await this._primaryComponent).click();
+  }
+
+  /* The goal of click() and keys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
+  async click(element: Promise<WebdriverIO.Element>): Promise<void> {
+    await (await element).click();
+  }
+
+  async keys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
+    await (await element).addValue(keys);
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
