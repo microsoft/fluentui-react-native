@@ -6,7 +6,8 @@ steps:
       gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
       tasks: 'assembleDebug'
       gradleOptions: '-Xmx2g'
-      javaHomeOption: 'JDKVersion'
+      javaHomeOption: 'Path'
+      jdkDirectory: '$(JAVA_HOME)'
       workingDirectory: apps/fluent-tester/android
 
   - script: |
