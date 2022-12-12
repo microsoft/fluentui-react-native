@@ -1,15 +1,15 @@
 steps:
-    - script: |
+  - script: |
       yarn bundle:android
     workingDirectory: apps/fluent-tester
     displayName: 'yarn bundle android'
 
-    - script: |
+  - script: |
       ./gradlew assembleDebug
     workingDirectory: apps/fluent-tester/android
     displayName: 'build apk'
 
-    - script: |
+  - script: |
       adb install app-debug.apk
     workingDirectory: apps/fluent-tester/android/app/build/outputs/apk/debug
     displayName: 'install apk'
