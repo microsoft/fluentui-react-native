@@ -5,7 +5,7 @@ import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
 import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
 import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from './TestComponents/Common/consts';
-import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
+import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
@@ -60,7 +60,7 @@ const TestListSeparator = Separator.customize((t) => ({
 }));
 
 const Header: React.FunctionComponent<HeaderProps> = (props) => {
-  const { enableSinglePaneView, enableBackButton: showBackButton, onBackButtonPressed } = props;
+  const { enableSinglePaneView, enableBackButtonIOS, onBackButtonPressedIOS } = props;
   const theme = useTheme();
 
   const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
@@ -76,9 +76,9 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
         ⚛ FluentUI Tests
       </Text>
       <View style={fluentTesterStyles.header}>
-        {/* On iOS, We need a back button */}
-        {Platform.OS === 'ios' && (
-          <Button appearance="subtle" style={fluentTesterStyles.backButton} onClick={onBackButtonPressed} disabled={!showBackButton}>
+        {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
+        {Platform.OS === 'ios' && !Platform.isPad && (
+          <Button appearance="subtle" style={fluentTesterStyles.backButton} onClick={onBackButtonPressedIOS} disabled={!enableBackButtonIOS}>
             ‹ Back
           </Button>
         )}
@@ -109,8 +109,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   }, []);
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
-
-  const themedStyles = getThemedStyles(useTheme());
 
   // This is used to initially bring focus to the app on win32
   const focusOnMountRef = React.useRef<View>();
@@ -227,9 +225,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    // TODO: Figure out why making this view accessible breaks element querying on iOS.
-    <View accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW} style={commonTestStyles.flex}>
-      <RootView style={themedStyles.root}>
+      // TODO: Figure out why making this view accessible breaks element querying on iOS.
+      <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
         <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
         <HeaderSeparator />
         <View style={fluentTesterStyles.testRoot}>
@@ -238,6 +235,5 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
           {isTestSectionVisible && <TestComponentView />}
         </View>
       </RootView>
-    </View>
   );
 };
