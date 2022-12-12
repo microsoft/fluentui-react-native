@@ -78,7 +78,12 @@ const Header: React.FunctionComponent<HeaderProps> = (props) => {
       <View style={fluentTesterStyles.header}>
         {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
         {Platform.OS === 'ios' && !Platform.isPad && (
-          <Button appearance="subtle" style={fluentTesterStyles.backButton} onClick={onBackButtonPressedIOS} disabled={!enableBackButtonIOS}>
+          <Button
+            appearance="subtle"
+            style={fluentTesterStyles.backButton}
+            onClick={onBackButtonPressedIOS}
+            disabled={!enableBackButtonIOS}
+          >
             ‹ Back
           </Button>
         )}
@@ -123,36 +128,6 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     ios: SafeAreaView,
     default: View,
   });
-
-  // iOS needs a software back button, which is shown on a newline along with the ThemePickers
-  const MobileHeader: React.FunctionComponent = () => {
-    const theme = useTheme();
-
-    return (
-      <View style={mobileStyles.header}>
-        <Text
-          style={fluentTesterStyles.testHeader}
-          variant="heroLargeSemibold"
-          color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
-        >
-          ⚛ FluentUI Tests
-        </Text>
-        <View style={fluentTesterStyles.header}>
-          {/* on iOS, display a back Button */}
-          <Button
-            appearance="subtle"
-            style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
-            onClick={onBackPress}
-            disabled={onTestListView}
-          >
-            ‹ Back
-          </Button>
-          <ThemePickers />
-        </View>
-      </View>
-    );
-  };
 
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
@@ -225,15 +200,15 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-      // TODO: Figure out why making this view accessible breaks element querying on iOS.
-      <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
-        <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
-        <HeaderSeparator />
-        <View style={fluentTesterStyles.testRoot}>
-          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+    // TODO: Figure out why making this view accessible breaks element querying on iOS.
+    <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
+      <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
+      <HeaderSeparator />
+      <View style={fluentTesterStyles.testRoot}>
+        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
 
-          {isTestSectionVisible && <TestComponentView />}
-        </View>
-      </RootView>
+        {isTestSectionVisible && <TestComponentView />}
+      </View>
+    </RootView>
   );
 };
