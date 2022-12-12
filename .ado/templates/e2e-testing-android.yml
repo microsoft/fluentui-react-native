@@ -6,6 +6,7 @@ steps:
       gradleWrapperFile: 'gradlew'
       tasks: 'assembleDevelopmentDebug'
       javaHomeOption: 'JDKVersion'
+      workingDirectory: apps/fluent-tester/android
 
   - script: |
       adb install app-debug.apk
