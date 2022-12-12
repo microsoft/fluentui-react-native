@@ -61,15 +61,14 @@ jobs:
       # sets-up specifics for android dependency like NDK & emulator
       - template: templates/android-dep-setup.yml
 
-      # Disabling yarn android since E2E script creates APK
-      # - bash: |
-      #     echo "yarn $(platform)"
-      #     yarn $(platform)
-      #   workingDirectory: apps/fluent-tester
-      #   displayName: 'yarn $(platform)'
-      #   env:
-      #     JAVA_HOME: $(JAVA_HOME_11_X64)
-      #     PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
+      - bash: |
+          echo "yarn $(platform)"
+          yarn $(platform)
+        workingDirectory: apps/fluent-tester
+        displayName: 'yarn $(platform)'
+        env:
+          JAVA_HOME: $(JAVA_HOME_11_X64)
+          PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
       - template: templates/e2e-testing-android.yml
 
