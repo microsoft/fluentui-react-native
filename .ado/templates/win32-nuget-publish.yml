@@ -11,13 +11,8 @@ steps:
   - template: setup-repo-min-build.yml
 
   - script: |
-      yarn build
+      yarn buildci
     displayName: 'Building the repo'
-
-  - script: |
-      yarn bundle
-    workingDirectory: apps/win32
-    displayName: 'Bundling win32'
 
   # Pack the NuGet package
   - task: CmdLine@1
