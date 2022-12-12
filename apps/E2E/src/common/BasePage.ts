@@ -157,6 +157,17 @@ export class BasePage {
     });
   }
 
+  /* @deprecated, only use `scrollToTestElement()` instead */
+  async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
+    console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
+    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
+      timeout: timeout ?? this.waitForUiEvent,
+      timeoutMsg:
+        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+      interval: 1500,
+    });
+  }
+
   /* Scrolls to the primary UI test element until it is displayed. */
   async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
     const ComponentToScrollTo = component ?? (await this._primaryComponent);

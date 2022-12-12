@@ -1,7 +1,7 @@
 {
-  "type": "patch",
-  "comment": "Remove waitForPrimaryElementDisplayed method and test calls",
+  "type": "minor",
+  "comment": "Remove waitForPrimaryElementDisplayed test calls, deprecated method",
   "packageName": "@fluentui-react-native/e2e-testing",
   "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
+  "dependentChangeType": "minor"
 }
