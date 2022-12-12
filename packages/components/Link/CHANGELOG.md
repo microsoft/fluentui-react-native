@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/link
 
-This log was last generated on Tue, 06 Dec 2022 00:46:41 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.17.14
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/text to v0.18.2
+- Bump @fluentui-react-native/tokens to v0.19.1
+
+## 0.17.13
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/interactive-hooks to v0.21.5
+- Bump @fluentui-react-native/text to v0.18.1
 
 ## 0.17.12
 

@@ -1,8 +1,29 @@
 # Change Log - @fluentui-react-native/android-theme
 
-This log was last generated on Tue, 06 Dec 2022 00:46:41 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.15.1
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- snapshot update (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/theme-tokens to v0.22.1
+- Bump @fluentui-react-native/theme-types to v0.26.0
+- Bump @fluentui-react-native/theme to v0.7.11
+- Bump @fluentui-react-native/theming-utils to v0.20.0
+
+## 0.15.0
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Minor changes
+
+- Integrate Shadows from pipeline (email not defined)
+- Bump @fluentui-react-native/theme-tokens to v0.22.0
 
 ## 0.14.6
 

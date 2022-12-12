@@ -1,8 +1,39 @@
 # Change Log - @fluentui-react-native/avatar
 
-This log was last generated on Tue, 06 Dec 2022 02:02:55 GMT and should not be manually modified.
+This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.5.1
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.4.2
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/icon to v0.16.2
+- Bump @fluentui-react-native/theme-tokens to v0.22.1
+- Bump @fluentui-react-native/tokens to v0.19.1
+
+## 1.5.0
+
+Tue, 06 Dec 2022 21:28:49 GMT
+
+### Minor changes
+
+- Android Avatar variations (email not defined)
+
+## 1.4.1
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/badge to v0.4.1
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/icon to v0.16.1
+- Bump @fluentui-react-native/theme-tokens to v0.22.0
 
 ## 1.4.0
 

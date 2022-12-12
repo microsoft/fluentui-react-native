@@ -18,7 +18,7 @@ const personaCoinSections: TestSection[] = [
 
 export const PersonaCoinTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Deprecated',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
     macosStatus: 'Experimental',
