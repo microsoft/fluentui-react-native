@@ -1,6 +1,6 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ButtonExperimentalPageObject from '../pages/ButtonExperimentalPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, BUTTON_A11Y_ROLE, Keys, Attribute } from '../../common/consts';
 import { BUTTON_ACCESSIBILITY_LABEL, BUTTON_TEST_COMPONENT_LABEL } from '../../../../fluent-tester/src/TestComponents/Button/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -27,7 +27,11 @@ describe('Experimental Button Accessibility Testing', async () => {
 
   it('Experimental Button - Validate accessibilityRole is correct', async () => {
     await expect(
-      await ButtonExperimentalPageObject.accessibilityRoleIsEqualTo(ButtonExperimentalPageObject._primaryComponent, BUTTON_A11Y_ROLE),
+      await ButtonExperimentalPageObject.compareAttribute(
+        ButtonExperimentalPageObject._primaryComponent,
+        Attribute.AccessibilityRole,
+        BUTTON_A11Y_ROLE,
+      ),
     ).toBeTrue();
 
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
@@ -35,8 +39,9 @@ describe('Experimental Button Accessibility Testing', async () => {
 
   it('Experimental Button - Set accessibilityLabel', async () => {
     await expect(
-      await ButtonExperimentalPageObject.accessibilityLabelIsEqualTo(
+      await ButtonExperimentalPageObject.compareAttribute(
         ButtonExperimentalPageObject._primaryComponent,
+        Attribute.AccessibilityLabel,
         BUTTON_ACCESSIBILITY_LABEL,
       ),
     ).toBeTrue();
@@ -46,8 +51,9 @@ describe('Experimental Button Accessibility Testing', async () => {
 
   it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', async () => {
     await expect(
-      await ButtonExperimentalPageObject.accessibilityLabelIsEqualTo(
+      await ButtonExperimentalPageObject.compareAttribute(
         ButtonExperimentalPageObject._secondaryComponent,
+        Attribute.AccessibilityLabel,
         BUTTON_TEST_COMPONENT_LABEL,
       ),
     ).toBeTrue();

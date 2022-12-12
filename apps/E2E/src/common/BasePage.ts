@@ -78,8 +78,8 @@ export abstract class BasePage {
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
    * the expected and actual values don't match.
    * This should never be called in a spec. Other PageObjects should use these to make accessibility / attribute testing easier for them. */
-  protected async _attributeIsEqualTo(element: WebdriverIO.Element, attribute: Attribute, expectedValue: any): Promise<boolean> {
-    const actualValue = await element.getAttribute(attribute);
+  async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
+    const actualValue = await (await element).getAttribute(attribute);
     if (expectedValue !== actualValue) {
       throw new Error(
         `On ${this._pageName}, a test component should have attribute, ${attributeToEnumName[attribute]} (${attribute}), equal to ${expectedValue}.
@@ -87,14 +87,6 @@ export abstract class BasePage {
       );
     }
     return true;
-  }
-
-  async accessibilityLabelIsEqualTo(element: Promise<WebdriverIO.Element>, expectedValue: any): Promise<boolean> {
-    return this._attributeIsEqualTo(await element, Attribute.AccessibilityLabel, expectedValue);
-  }
-
-  async accessibilityRoleIsEqualTo(element: Promise<WebdriverIO.Element>, expectedValue: any): Promise<boolean> {
-    return this._attributeIsEqualTo(await element, Attribute.AccessibilityRole, expectedValue);
   }
 
   async getAccessibilityRole(): Promise<string> {
