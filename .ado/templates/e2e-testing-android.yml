@@ -1,0 +1,40 @@
+steps:
+    - script: |
+      yarn bundle:android
+    workingDirectory: apps/fluent-tester
+    displayName: 'yarn bundle android'
+
+    - script: |
+      ./gradlew assembleDebug
+    workingDirectory: apps/fluent-tester/android
+    displayName: 'build apk'
+
+    - script: |
+      adb install app-debug.apk
+    workingDirectory: apps/fluent-tester/android/app/build/outputs/apk/debug
+    displayName: 'install apk'
+
+  # Creates a variable that determines whether the previous build tasks succeeded.
+  # Usage: We want the tasks that generate reports to run for both passing/failing E2E testing tasks. In order to do so, we need to make
+  # those reporting tasks run even on when certain previous tasks fail. This variable allows us to differentiate build failures from
+  # E2E testing failures. Thus, if this variable != "Success", we know the build failed, and to not run the reporting tasks.
+  - task: PowerShell@2
+    inputs:
+      targetType: 'inline'
+      script: |
+        Write-Host "##vso[task.setvariable variable=task.Build.status]Success"
+    condition: succeeded()
+    displayName: 'Create success build variable'
+
+  - script: |
+      yarn e2etest:android
+    workingDirectory: apps/E2E
+    displayName: 'run E2E Android tests'
+    condition: succeeded()
+
+  - template: e2e-publish-artifacts.yml
+    parameters:
+      applicationType: ios
+      platform: 'ios'
+      buildArtifacts: variables['task.Build.status']
+      directory: $(Build.SourcesDirectory)/apps/E2E

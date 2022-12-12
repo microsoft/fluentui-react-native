@@ -70,6 +70,8 @@ jobs:
           JAVA_HOME: $(JAVA_HOME_11_X64)
           PATH: $(JAVA_HOME_11_X64)/bin;$(PATH)
 
+      - template: templates/e2e-testing-android.yml
+
   - job: macOSPR
     displayName: macOS PR
     pool:
