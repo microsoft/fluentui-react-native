@@ -1,7 +1,7 @@
 steps:
   # Building APK also requires bundling, this is currently already being done as part of main Android PR task.
   - task: Gradle@2
-    displayName: 'gradlew build Apk'
+    displayName: 'gradlew build apk'
     inputs:
       gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
       tasks: 'assembleDebug'
@@ -10,8 +10,18 @@ steps:
       jdkVersionOption: '1.11'
       workingDirectory: apps/fluent-tester/android
 
+  - task: Gradle@2
+    displayName: 'gradlew uninstall all'
+    inputs:
+      gradleWrapperFile: 'apps/fluent-tester/android/gradlew'
+      tasks: 'uninstallAll'
+      gradleOptions: '-Xmx2g'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      workingDirectory: apps/fluent-tester/android
+
   - script: |
-      adb install -r app-debug.apk
+      adb install app-debug.apk
     workingDirectory: apps/fluent-tester/android/app/build/outputs/apk/debug
     displayName: 'install apk'
 
