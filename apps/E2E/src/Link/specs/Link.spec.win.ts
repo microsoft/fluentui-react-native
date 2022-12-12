@@ -24,7 +24,6 @@ describe('Link Testing Initialization', function () {
 describe('Link Accessibility Testing', () => {
   it('Link - Validate accessibilityRole is correct', async () => {
     await LinkPageObject.scrollToTestElement();
-    await LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkPageObject.getAccessibilityRole()).toEqual(LINK_A11Y_ROLE);
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
@@ -32,7 +31,6 @@ describe('Link Accessibility Testing', () => {
 
   it('Link - Set accessibilityLabel', async () => {
     await LinkPageObject.scrollToTestElement();
-    await LinkPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await LinkPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(LINK_ACCESSIBILITY_LABEL);
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u

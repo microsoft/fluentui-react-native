@@ -24,7 +24,6 @@ describe('Text Testing Initialization', function () {
 describe('Text Accessibility Testing', () => {
   beforeEach(async () => {
     await TextPageObject.scrollToTestElement();
-    await TextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Text - Validate accessibilityRole is correct', async () => {

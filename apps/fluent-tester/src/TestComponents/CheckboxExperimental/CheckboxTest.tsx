@@ -194,7 +194,7 @@ const checkboxSections: TestSection[] = [
 
 export const ExperimentalCheckboxTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Production',
     uwpStatus: 'N/A',
     iosStatus: 'N/A',
     macosStatus: 'Experimental',

@@ -23,7 +23,6 @@ describe('Experimental Button Testing Initialization', function () {
 describe('Experimental Button Accessibility Testing', async () => {
   beforeEach(async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
-    await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Experimental Button - Validate accessibilityRole is correct', async () => {
@@ -53,7 +52,6 @@ describe('Experimental Button Functional Testing', async () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
-    await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {

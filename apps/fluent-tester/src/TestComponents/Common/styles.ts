@@ -60,6 +60,10 @@ export const commonTestStyles = StyleSheet.create({
     minHeight: 200,
     justifyContent: 'space-between',
   },
+  androidContainer: {
+    marginTop: 20,
+    justifyContent: 'space-between',
+  },
 });
 
 export const fluentTesterStyles = StyleSheet.create({
