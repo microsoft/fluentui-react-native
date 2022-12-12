@@ -27,7 +27,7 @@ steps:
       sourceFolder: ${{parameters.apkDirectory}}
       targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
     displayName: 'Copy ${{parameters.applicationType}} dump apk'
-    condition: and (eq(${{parameters.platform}}, 'android'), eq(${{parameters.buildArtifacts}}, 'success'))
+    condition: and (eq(${{parameters.platform}}, android), eq(${{parameters.buildArtifacts}}, 'success'))
 
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1
