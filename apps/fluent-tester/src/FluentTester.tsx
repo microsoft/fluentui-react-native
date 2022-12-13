@@ -74,7 +74,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
         style={fluentTesterStyles.testHeader}
         variant="heroLargeSemibold"
         color={theme.host.palette?.TextEmphasis}
-        testID={BASE_TESTPAGE}
+        {...testProps(BASE_TESTPAGE)}
       >
         ⚛ FluentUI Tests
       </Text>
