@@ -58,7 +58,7 @@ steps:
         echo "Starting emulator"
 
         # Start emulator in background
-        nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -engine auto -no-accel -skin 1080x1920 -m 2048 -no-snapshot -no-audio -no-boot-anim -gpu swiftshader_indirect -qemu -lcd-density 420 > /dev/null 2>&1 &
+        nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -no-accel -no-snapshot -no-audio -gpu swiftshader_indirect -qemu -m 2048 > /dev/null 2>&1 &
         $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
 
         #list online device/emulator
