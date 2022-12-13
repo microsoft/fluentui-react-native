@@ -3,7 +3,7 @@ import { TokenSettings } from '@fluentui-react-native/use-styling';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { CheckboxTokens } from './Checkbox.types';
 
-// No Tokens for Sizes , hovered, pressed and circular checkbox as they're not supported for Android Platform
+// No Tokens for Sizes , hovered and circular checkbox as they're not supported for Android Platform
 
 export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: Theme) =>
   ({
@@ -11,7 +11,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checkboxBorderRadius: globalTokens.corner.radius40,
     checkboxSize: globalTokens.size200,
     checkmarkSize: globalTokens.size120,
-    rippleColor: '#00000033', //Android Only , Used a hex for black with alpha 0.2 , Will be replace once tokens for transparent are decided for Android
+    rippleColor: '#D4D4D4',
     label: {
       // Tokens taken from Android List Item
       color: t.colors.neutralForeground1,
