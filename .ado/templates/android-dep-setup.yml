@@ -21,12 +21,16 @@ steps:
       script: |
         #!/usr/bin/env bash
 
+        #brew install intel-haxm -m 2048
+        echo "y" | $ANDROID_HOME/tools/bin/sdkmanager --licenses
+
         # Create emulator
         echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd -n android_emulator -d pixel --package 'system-images;android-27;default;x86_64'
 
          # list emulator
         echo "Available emulator"
         $ANDROID_HOME/emulator/emulator -list-avds
+        $ANDROID_HOME/emulator/emulator -accel-check
 
         if false; then
         emulator_config=~/.android/avd/android_emulator.avd/config.ini
@@ -49,11 +53,12 @@ steps:
         echo "Emulator settings ($emulator_config)"
         cat "$emulator_config"
         fi
+        #$ANDROID_HOME/platform-tools/adb shell 'su;setprop debug.hwui.renderer skiagl;stop;start'
 
         echo "Starting emulator"
 
         # Start emulator in background
-        nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -no-accel -no-snapshot -no-audio -gpu swiftshader_indirect -qemu -m 2048 > /dev/null 2>&1 &
+        nohup $ANDROID_HOME/emulator/emulator -avd android_emulator -no-snapshot -no-audio -gpu swiftshader_indirect -qemu -m 2048 > /dev/null 2>&1 &
         $ANDROID_HOME/platform-tools/adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed | tr -d '\r') ]]; do sleep 1; done; input keyevent 82'
 
         #list online device/emulator
