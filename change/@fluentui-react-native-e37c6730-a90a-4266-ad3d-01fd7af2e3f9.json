@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Add missing entries to export of library/core",
+  "packageName": "@fluentui/react-native",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
