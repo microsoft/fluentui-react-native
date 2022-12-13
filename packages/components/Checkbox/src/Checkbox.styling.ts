@@ -3,6 +3,7 @@ import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/fra
 import { borderStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultCheckboxTokens } from './CheckboxTokens';
 import { getTextMarginAdjustment } from '@fluentui-react-native/styling-utils';
+import { Platform } from 'react-native';
 
 export const checkboxStates: (keyof CheckboxTokens)[] = [
   'medium',
@@ -33,7 +34,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           paddingHorizontal: tokens.paddingHorizontal,
           ...borderStyles.from(tokens, theme),
         },
-        android_ripple: { color: tokens.rippleColor },
+        android_ripple: { color: tokens.rippleColor, foreground: true },
       }),
       ['backgroundColor', 'padding', ...borderStyles.keys],
     ),
@@ -55,7 +56,10 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignItems: 'center',
           justifyContent: 'center',
         },
-        android_ripple: { color: tokens.rippleColor, radius: tokens.checkboxSize, foreground: true },
+        ...(Platform.OS === 'android' && {
+          pressRetentionOffset: typeof tokens.padding === 'number' ? tokens.padding : parseFloat(tokens.padding), /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
+        }),
+        android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
       }),
       ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize'],
     ),
