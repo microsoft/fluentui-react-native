@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 13 Dec 2022 20:07:29 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Dec 2022 21:31:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.5.0
+
+Tue, 13 Dec 2022 21:31:46 GMT
+
+### Minor changes
+
+- Add more baseline Menu E2E tests (winlarry@microsoft.com)
 
 ## 1.4.1
 
