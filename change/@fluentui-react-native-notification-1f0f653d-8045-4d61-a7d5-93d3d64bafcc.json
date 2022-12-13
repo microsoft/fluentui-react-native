@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Use V2 font tokens for Notification text elements",
-  "packageName": "@fluentui-react-native/notification",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
