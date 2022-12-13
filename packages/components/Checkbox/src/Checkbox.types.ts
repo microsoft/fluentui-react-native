@@ -85,6 +85,11 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   circular?: CheckboxTokens;
   medium?: CheckboxTokens;
   large?: CheckboxTokens;
+
+  /**
+   * Ripple color for Android.
+   */
+  rippleColor?: ColorValue;
 }
 
 export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {

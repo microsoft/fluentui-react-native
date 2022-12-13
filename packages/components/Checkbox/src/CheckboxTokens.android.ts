@@ -11,6 +11,7 @@ export const defaultCheckboxTokens: TokenSettings<CheckboxTokens, Theme> = (t: T
     checkboxBorderRadius: globalTokens.corner.radius40,
     checkboxSize: globalTokens.size200,
     checkmarkSize: globalTokens.size120,
+    rippleColor: '#00000033', //Android Only , Used a hex for black with alpha 0.2 , Will be replace once tokens for transparent are decided for Android
     label: {
       // Tokens taken from Android List Item
       color: t.colors.neutralForeground1,
