@@ -317,7 +317,9 @@ class NavigateAppPage extends BasePage {
   }
 
   get _pageName() {
-    // This is an odd name, but it works well with the error message it is used for.
+    // This is an odd name, but this PageObject calls the method `waitForPageDisplayed`. If this call fails, then
+    // there's probably an issue with the larger Fluent Tester at hand. The error will read:
+    // "The Fluent Tester did not render correctly. Please see /errorShots for more information.".
     return 'The Fluent Tester';
   }
 

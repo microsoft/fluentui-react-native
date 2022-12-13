@@ -24,20 +24,6 @@ export const enum GridFocusZoneOption {
   Disable,
 }
 
-export const enum GridButtonSelector {
-  Before = 0,
-  One,
-  Two,
-  Three,
-  Four,
-  Five,
-  Six,
-  Seven,
-  Eight,
-  Nine,
-  After,
-}
-
 type BooleanGridFocusZoneOption =
   | GridFocusZoneOption.UseDefaultTabbableElement
   | GridFocusZoneOption.Set2DNavigation
@@ -82,25 +68,8 @@ class FocusZonePageObject extends BasePage {
     }
   }
 
-  async sendKeys(selector: GridButtonSelector, keys: Keys[]): Promise<void> {
-    const btn = await this._getGridButton(selector);
-    await btn.addValue(keys);
-  }
-
-  async gridButtonIsFocused(selector: GridButtonSelector): Promise<boolean> {
-    const btn = await this._getGridButton(selector);
-    return (await this.getElementAttribute(btn, Attribute.IsFocused)) === AttributeValue.true;
-  }
-
-  private async _getGridButton(selector: GridButtonSelector): Promise<WebdriverIO.Element> {
-    switch (selector) {
-      case GridButtonSelector.Before:
-        return await this._gridBeforeButton;
-      case GridButtonSelector.After:
-        return await this._gridAfterButton;
-      default:
-        return await By(FOCUSZONE_GRID_BUTTON(selector));
-    }
+  async gridButton(n: number) {
+    return await By(FOCUSZONE_GRID_BUTTON(n));
   }
 
   private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
@@ -146,11 +115,11 @@ class FocusZonePageObject extends BasePage {
     return By(FOCUSZONE_DEFAULT_TABBABLE_SWITCH);
   }
 
-  get _gridBeforeButton() {
+  get _beforeButton() {
     return By(FOCUSZONE_GRID_BEFORE);
   }
 
-  get _gridAfterButton() {
+  get _afterButton() {
     return By(FOCUSZONE_GRID_AFTER);
   }
 }

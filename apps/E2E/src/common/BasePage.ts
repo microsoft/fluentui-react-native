@@ -11,7 +11,7 @@ let rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
-  if (PLATFORM === NativePlatform.Windows) {
+  if (PLATFORM === DesktopPlatform.Windows) {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
@@ -46,13 +46,13 @@ export const enum MobilePlatform {
   Android = 'android',
 }
 
-export const enum NativePlatform {
+export const enum DesktopPlatform {
   Win32 = 'win32',
   Windows = 'windows',
   macOS = 'macos',
 }
 
-export type Platform = MobilePlatform | NativePlatform;
+export type Platform = MobilePlatform | DesktopPlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -78,11 +78,13 @@ export abstract class BasePage {
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
    * the expected and actual values don't match. This should be called for attribute tests in specs. */
   async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
-    const actualValue = await (await element).getAttribute(attribute);
+    const el = await element;
+    const actualValue = await el.getAttribute(attribute);
     if (expectedValue !== actualValue) {
       throw new Error(
-        `On ${this._pageName}, a test component should have attribute, ${attributeToEnumName[attribute]} (${attribute}), equal to ${expectedValue}.
-        Instead, ${attributeToEnumName[attribute]} is equal to ${actualValue}.`,
+        `On ${this._pageName}, a test component with a testID = ${await el.getAttribute(Attribute.TestID)} should have attribute,
+        ${attributeToEnumName[attribute]} (which maps to windows attribute '${attribute}' property on the element), equal to
+        ${expectedValue}. Instead, ${attributeToEnumName[attribute]} is equal to ${actualValue}.`,
       );
     }
     return true;
@@ -125,7 +127,7 @@ export abstract class BasePage {
     await (await element).click();
   }
 
-  async keys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
+  async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
     await (await element).addValue(keys);
   }
 
