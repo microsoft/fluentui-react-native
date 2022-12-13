@@ -76,8 +76,7 @@ export abstract class BasePage {
   /**
    * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
    * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
-   * the expected and actual values don't match.
-   * This should never be called in a spec. Other PageObjects should use these to make accessibility / attribute testing easier for them. */
+   * the expected and actual values don't match. This should be called for attribute tests in specs. */
   async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
     const actualValue = await (await element).getAttribute(attribute);
     if (expectedValue !== actualValue) {
