@@ -25,8 +25,6 @@ describe('Menu Accessibility Testing', () => {
   beforeAll(async () => {
     await MenuPageObject.scrollToTestElement();
     await MenuPageObject.openMenu();
-
-    await MenuPageObject.resetTest();
   });
 
   it('Menu - Validate accessibilityRole of menu item is correct', async () => {
