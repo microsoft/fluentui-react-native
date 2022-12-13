@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 13 Dec 2022 20:07:29 GMT",
+      "tag": "@fluentui-react-native/tester_v0.116.7",
+      "version": "0.116.7",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "71dd31580752395ff03b9943c0e147b02919f786",
+            "comment": "add additional tests for Text"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Dec 2022 18:37:11 GMT",
       "tag": "@fluentui-react-native/tester_v0.116.6",
       "version": "0.116.6",
