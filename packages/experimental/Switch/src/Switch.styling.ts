@@ -2,6 +2,7 @@ import { switchName, SwitchTokens, SwitchSlotProps, SwitchProps } from './Switch
 import { UseStylingOptions, Theme, buildProps } from '@fluentui-react-native/framework';
 import { borderStyles, layoutStyles, fontStyles } from '@fluentui-react-native/tokens';
 import { defaultSwitchTokens } from './SwitchTokens';
+import { Platform } from 'react-native';
 
 export const switchStates: (keyof SwitchTokens)[] = [
   'toggleOn',
@@ -91,6 +92,7 @@ export const stylingSettings: UseStylingOptions<SwitchProps, SwitchSlotProps, Sw
           width: tokens.thumbSize,
           borderRadius: tokens.thumbRadius,
           margin: tokens.thumbMargin,
+          ...(Platform.OS === 'android' && { elevation: tokens.elevation }),
         },
       }),
       ['thumbColor', 'thumbSize', 'thumbRadius', 'thumbMargin'],

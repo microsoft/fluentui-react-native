@@ -157,14 +157,10 @@ export class BasePage {
     });
   }
 
-  /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
+  /* @deprecated, only use `scrollToTestElement()` instead */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    await this.waitForElementDisplayed(await this._primaryComponent, timeout);
-  }
-
-  /* Waits for the the specified UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
-  async waitForElementDisplayed(component: WebdriverIO.Element, timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await component.isDisplayed(), {
+    console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
+    await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
         'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',

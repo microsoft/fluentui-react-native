@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Tue, 06 Dec 2022 16:59:54 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Dec 2022 18:37:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.1
+
+Tue, 13 Dec 2022 18:37:10 GMT
+
+### Patches
+
+- Change disabled link to not be focusable (ruaraki@microsoft.com)
+
+## 0.3.0
+
+Fri, 09 Dec 2022 10:05:33 GMT
+
+### Minor changes
+
+- initial tokens for link android (rohanpd.work@gmail.com)
+
+## 0.2.7
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/interactive-hooks to v0.22.0
+- Bump @fluentui-react-native/tokens to v0.19.1
+- Bump @fluentui-react-native/text to v0.18.2
 
 ## 0.2.6
 

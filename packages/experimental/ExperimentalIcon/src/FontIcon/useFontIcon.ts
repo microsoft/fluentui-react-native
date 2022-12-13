@@ -3,13 +3,14 @@ import { getMemoCache } from '@fluentui-react-native/framework';
 import { FontIconProps } from './FontIcon.types';
 
 export const useFontIcon = (props: FontIconProps): FontIconProps => {
-  const { color, fontSrcFile, fontFamily, fontSize, ...rest } = props;
+  const { accessible, color, fontSrcFile, fontFamily, fontSize, ...rest } = props;
 
   const style: TextStyle = fontStyleMemoCache(
     { fontFamily: fontSrcFile != undefined ? fontFamilyFromFontSrcFile(fontSrcFile, fontFamily) : fontFamily, fontSize, color },
     [color, fontSize, fontFamily],
   )[0];
   return {
+    accessible: accessible ?? true,
     style,
     ...rest,
   };

@@ -293,10 +293,10 @@ const menuSections: TestSection[] = [
 
 export const MenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Experimental',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

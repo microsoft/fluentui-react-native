@@ -23,7 +23,7 @@ describe('Menu Testing Initialization', function () {
 describe('Menu Accessibility Testing', () => {
   beforeEach(async () => {
     await MenuPageObject.scrollToTestElement();
-    await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     await MenuPageObject.resetTest();
   });
 
@@ -50,7 +50,7 @@ describe('Menu Functional Testing', () => {
   /* Scrolls and waits for the Menu to be visible on the Test Page */
   beforeEach(async () => {
     await MenuPageObject.scrollToTestElement();
-    await MenuPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
+
     await MenuPageObject.resetTest();
   });
 

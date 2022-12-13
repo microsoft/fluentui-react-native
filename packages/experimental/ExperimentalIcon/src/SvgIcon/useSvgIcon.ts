@@ -5,8 +5,9 @@ import { SvgIconProps } from './SvgIcon.types';
 const rasterImageStyleCache = getMemoCache<ImageStyle>();
 
 export const useSvgIcon = (props: SvgIconProps): SvgIconProps => {
-  const { style, height, width, ...rest } = props;
+  const { accessible, style, height, width, ...rest } = props;
   return {
+    accessible: accessible ?? true,
     height,
     style: mergeStyles(style, rasterImageStyleCache({ width, height }, [width, height])[0]),
     width,

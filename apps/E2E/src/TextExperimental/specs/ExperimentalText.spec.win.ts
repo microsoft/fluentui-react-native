@@ -27,7 +27,6 @@ describe('Experimental Text Testing Initialization', function () {
 describe('Experimental Text Accessibility Testing', () => {
   beforeEach(async () => {
     await ExperimentalTextPageObject.scrollToTestElement();
-    await ExperimentalTextPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Text - Validate accessibilityRole is correct', async () => {

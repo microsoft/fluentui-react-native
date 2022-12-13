@@ -24,7 +24,6 @@ describe('Experimental Button Testing Initialization', function () {
 describe('Experimental Button Accessibility Testing', async () => {
   it('Experimental Button - Validate accessibilityRole is correct', async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
-    await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ButtonExperimentalPageObject.getAccessibilityRole()).toEqual(BUTTON_A11Y_ROLE);
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
@@ -32,7 +31,6 @@ describe('Experimental Button Accessibility Testing', async () => {
 
   it('Experimental Button - Set accessibilityLabel', async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
-    await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(BUTTON_ACCESSIBILITY_LABEL);
     await expect(await ButtonExperimentalPageObject.didAssertPopup()).toBeFalsy(ButtonExperimentalPageObject.ERRORMESSAGE_ASSERT);
@@ -40,7 +38,6 @@ describe('Experimental Button Accessibility Testing', async () => {
 
   it('Experimental Button - Do not set accessibilityLabel -> Default to Button label', async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
-    await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await expect(await ButtonExperimentalPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
       BUTTON_TEST_COMPONENT_LABEL,
@@ -53,7 +50,6 @@ describe('Experimental Button Functional Testing', async () => {
   /* Scrolls and waits for the Button to be visible on the Test Page */
   beforeEach(async () => {
     await ButtonExperimentalPageObject.scrollToTestElement();
-    await ButtonExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate OnClick() callback was fired -> Click', async () => {

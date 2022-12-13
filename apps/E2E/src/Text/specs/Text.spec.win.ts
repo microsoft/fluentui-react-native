@@ -28,7 +28,6 @@ describe('Text Testing Initialization', function () {
 describe('V1 Text Accessibility Testing', () => {
   beforeEach(async () => {
     await TextPageObject.scrollToTestElement(await TextPageObject._v1FirstComponent);
-    await TextPageObject.waitForElementDisplayed(await TextPageObject._v1FirstComponent, PAGE_TIMEOUT);
   });
 
   it('V1 Text - Validate accessibilityRole is correct', async () => {
@@ -50,7 +49,6 @@ describe('V1 Text Accessibility Testing', () => {
 describe('Deprecated Text Accessibility Testing', () => {
   beforeEach(async () => {
     await TextPageObject.scrollToTestElement(await TextPageObject._deprecatedFirstComponent);
-    await TextPageObject.waitForElementDisplayed(await TextPageObject._deprecatedFirstComponent, PAGE_TIMEOUT);
   });
 
   it('Deprecated Text - Validate accessibilityRole is correct', async () => {
