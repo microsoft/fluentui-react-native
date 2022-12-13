@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Tue, 13 Dec 2022 00:35:18 GMT",
+      "tag": "@fluentui-react-native/tester_v0.116.5",
+      "version": "0.116.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "sanajmi@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "6d27d8e7f0b341e290238ef65c5f419be67cd9c6",
+            "comment": "Less inline Function Components in Fluent Tester"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Dec 2022 10:12:02 GMT",
+      "tag": "@fluentui-react-native/tester_v0.116.4",
+      "version": "0.116.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-icon to v0.1.4",
+            "commit": "53114e08fc6e899f9316d8b6bb40a52f1c1f6dc5"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 23:48:05 GMT",
       "tag": "@fluentui-react-native/tester_v0.116.3",
       "version": "0.116.3",
