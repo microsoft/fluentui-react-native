@@ -82,9 +82,11 @@ export abstract class BasePage {
     const actualValue = await el.getAttribute(attribute);
     if (expectedValue !== actualValue) {
       throw new Error(
-        `On ${this._pageName}, a test component with a testID = ${await el.getAttribute(Attribute.TestID)} should have attribute,
-        ${attributeToEnumName[attribute]} (which maps to windows attribute '${attribute}' property on the element), equal to
-        ${expectedValue}. Instead, ${attributeToEnumName[attribute]} is equal to ${actualValue}.`,
+        `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
+          attributeToEnumName[attribute]
+        } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
+          attributeToEnumName[attribute]
+        } is equal to '${actualValue}'.`,
       );
     }
     return true;
