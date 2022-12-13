@@ -20,9 +20,7 @@ const DefaultLinks: React.FunctionComponent = () => {
       <Link onPress={doPress} onAccessibilityTap={doAllyTap}>
         Click to alert.
       </Link>
-      <Link disabled focusable>
-        Disabled focusable Link
-      </Link>
+      <Link disabled>Disabled Link</Link>
     </Stack>
   );
 };
@@ -203,10 +201,10 @@ const linkSections: TestSection[] = [
 
 export const ExperimentalLinkTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Beta',
+    win32Status: 'Experimental',
     uwpStatus: 'Experimental',
     iosStatus: 'Experimental',
-    macosStatus: 'Beta',
+    macosStatus: 'Experimental',
     androidStatus: 'Experimental',
   };
 

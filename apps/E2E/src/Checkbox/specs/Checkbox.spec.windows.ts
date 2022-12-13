@@ -23,7 +23,6 @@ describe('Checkbox Accessibility Testing', () => {
   /* Scrolls and waits for the Checkbox to be visible on the Test Page */
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
-    await CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Checkbox - Validate accessibilityRole is correct', async () => {
@@ -45,7 +44,6 @@ describe('Checkbox Accessibility Testing', () => {
 //   /* Scrolls and waits for the Checkbox to be visible on the Test Page AND un-checks the Checkbox */
 //   beforeEach(() => {
 //     CheckboxPageObject.scrollToTestElement();
-//     CheckboxPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
 //     CheckboxPageObject.toggleCheckboxToUnchecked();
 //   });

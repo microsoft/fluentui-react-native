@@ -137,7 +137,7 @@ const toggleSections: TestSection[] = [
 
 export const SwitchTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Production',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
     macosStatus: 'Backlog',

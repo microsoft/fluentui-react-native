@@ -157,17 +157,18 @@ export class BasePage {
     });
   }
 
-  /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
+  /* @deprecated, only use `scrollToTestElement()` instead */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
+    console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
     await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
-        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+        'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
     });
   }
 
-  /* Scrolls to the primary UI test element until it is displayed. */
+  /* Scrolls to the specified or primary UI test element until it is displayed. */
   async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
     const ComponentToScrollTo = component ?? (await this._primaryComponent);
     if (await ComponentToScrollTo.isDisplayed()) {
@@ -237,12 +238,14 @@ export class BasePage {
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
   get _testPage() {
+    console.error('Each class extending BasePage must implement its own _testPage method.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
+    console.error('Each class extending BasePage must implement its own _primaryComponent method.');
     return By(DUMMY_CHAR);
   }
 
@@ -250,18 +253,21 @@ export class BasePage {
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
+    console.error('Each class extending BasePage must implement its own _secondaryComponent method.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
   get _pageButton() {
+    console.error('Each class extending BasePage must implement its own _pageButton method.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
   get _pageName(): string {
+    console.error('Each class extending BasePage must implement its own _pageName method.');
     return DUMMY_CHAR;
   }
 
