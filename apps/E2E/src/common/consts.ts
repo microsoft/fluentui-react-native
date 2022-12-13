@@ -47,6 +47,8 @@ export const enum AttributeValue {
   off = '0',
   true = 'True',
   false = 'False',
+  expanded = 'Expanded',
+  collapsed = 'Collapsed',
 }
 
 /* Keyboard Key Constants */
@@ -111,9 +113,4 @@ export const enum Keys {
   F10 = '\uE03A',
   F11 = '\uE03B',
   F12 = '\uE03C',
-}
-
-export const enum ExpandCollapseState {
-  EXPANDED = 'Expanded',
-  COLLAPSED = 'Collapsed',
 }
