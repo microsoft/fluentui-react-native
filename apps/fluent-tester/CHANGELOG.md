@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Mon, 12 Dec 2022 10:12:02 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Dec 2022 00:35:18 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.116.5
+
+Tue, 13 Dec 2022 00:35:18 GMT
+
+### Patches
+
+- Less inline Function Components in Fluent Tester (sanajmi@microsoft.com)
 
 ## 0.116.4
 

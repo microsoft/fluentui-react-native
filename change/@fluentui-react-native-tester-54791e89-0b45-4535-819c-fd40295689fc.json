@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Less inline Function Components in Fluent Tester",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "sanajmi@microsoft.com",
-  "dependentChangeType": "patch"
-}
