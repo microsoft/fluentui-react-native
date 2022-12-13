@@ -124,7 +124,7 @@ export abstract class BasePage {
     await (await this._primaryComponent).click();
   }
 
-  /* The goal of click() and keys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
+  /* The goal of click() and sendKeys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
   async click(element: Promise<WebdriverIO.Element>): Promise<void> {
     await (await element).click();
   }
