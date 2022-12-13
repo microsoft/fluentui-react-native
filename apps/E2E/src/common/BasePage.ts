@@ -190,12 +190,12 @@ export abstract class BasePage {
     await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
-        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+        'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
     });
   }
 
-  /* Scrolls to the primary UI test element until it is displayed. */
+  /* Scrolls to the specified or primary UI test element until it is displayed. */
   async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
     const ComponentToScrollTo = component ?? (await this._primaryComponent);
     if (await ComponentToScrollTo.isDisplayed()) {
@@ -269,6 +269,7 @@ export abstract class BasePage {
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
+    console.error('Each class extending BasePage must implement its own _primaryComponent method.');
     return By(DUMMY_CHAR);
   }
 
@@ -276,6 +277,7 @@ export abstract class BasePage {
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
+    console.error('Each class extending BasePage must implement its own _secondaryComponent method.');
     return By(DUMMY_CHAR);
   }
 

@@ -3,9 +3,9 @@ import { Separator, Text } from '@fluentui/react-native';
 import { ButtonV1 as Button } from '@fluentui-react-native/button';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
 import * as React from 'react';
-import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler } from 'react-native';
+import { ScrollView, View, Text as RNText, Platform, SafeAreaView, BackHandler, I18nManager } from 'react-native';
 import { BASE_TESTPAGE, TESTPAGE_BUTTONS_SCROLLVIEWER } from './TestComponents/Common/consts';
-import { commonTestStyles, fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
+import { fluentTesterStyles, mobileStyles } from './TestComponents/Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import { ThemePickers } from './theme/ThemePickers';
 import { tests } from './testPages';
@@ -17,12 +17,14 @@ import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
 MessageQueue.spy(true);
  */
 
-const EmptyComponent: React.FunctionComponent = () => {
-  return <RNText style={fluentTesterStyles.noTest}>Select a component from the left.</RNText>;
-};
 export interface FluentTesterProps {
-  initialTest?: string;
   enableSinglePaneView?: boolean;
+}
+
+interface HeaderProps {
+  enableSinglePaneView?: boolean;
+  enableBackButtonIOS?: boolean;
+  onBackButtonPressedIOS?: () => void;
 }
 
 const getThemedStyles = themedStyleSheet((t: Theme) => {
@@ -43,6 +45,10 @@ const getThemedStyles = themedStyleSheet((t: Theme) => {
   };
 });
 
+const EmptyComponent: React.FunctionComponent = () => {
+  return <RNText style={fluentTesterStyles.noTest}>Select a component from the test list.</RNText>;
+};
+
 const HeaderSeparator = Separator.customize((t) => ({
   color: t.colors.bodyFrameDivider,
   separatorWidth: 2,
@@ -53,30 +59,63 @@ const TestListSeparator = Separator.customize((t) => ({
   separatorWidth: 2,
 }));
 
+const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
+  const { enableSinglePaneView, enableBackButtonIOS, onBackButtonPressedIOS } = props;
+  const theme = useTheme();
+
+  const headerStyle = enableSinglePaneView ? fluentTesterStyles.headerWithBackButton : fluentTesterStyles.header;
+
+  const backButtonTitle = I18nManager.isRTL ? 'Back ›' : '‹ Back';
+
+  return (
+    <View style={headerStyle}>
+      <Text
+        style={fluentTesterStyles.testHeader}
+        variant="heroLargeSemibold"
+        color={theme.host.palette?.TextEmphasis}
+        testID={BASE_TESTPAGE}
+      >
+        ⚛ FluentUI Tests
+      </Text>
+      <View style={fluentTesterStyles.header}>
+        {/* On iPhone, We need a back button. Android has an OS back button, while desktop platforms have a two-pane view */}
+        {Platform.OS === 'ios' && !Platform.isPad && (
+          <Button
+            appearance="subtle"
+            style={fluentTesterStyles.backButton}
+            onClick={onBackButtonPressedIOS}
+            disabled={!enableBackButtonIOS}
+          >
+            {backButtonTitle}
+          </Button>
+        )}
+        <ThemePickers />
+      </View>
+    </View>
+  );
+});
+
+// filters and sorts tests alphabetically
+const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
+const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
+
 export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: FluentTesterProps) => {
-  // filters and sorts tests alphabetically
-  const filteredTestComponents = tests.filter((test) => test.platforms.includes(Platform.OS as string));
-  const sortedTestComponents = filteredTestComponents.sort((a, b) => a.name.localeCompare(b.name));
+  const { enableSinglePaneView } = props;
 
-  const { initialTest, enableSinglePaneView } = props;
-  const initialSelectedTestIndex = sortedTestComponents.findIndex((description) => {
-    return description.name === initialTest;
-  });
-
-  const [selectedTestIndex, setSelectedTestIndex] = React.useState(initialSelectedTestIndex);
+  const [selectedTestIndex, setSelectedTestIndex] = React.useState(-1);
   const [onTestListView, setOnTestListView] = React.useState(true);
+  const theme = useTheme();
+  const themedStyles = getThemedStyles(theme);
 
-  const onBackPress = () => {
+  const onBackPress = React.useCallback(() => {
     setOnTestListView(true);
     if (Platform.OS === 'android') {
       BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }
     return true;
-  };
+  }, []);
 
   const TestComponent = selectedTestIndex == -1 ? EmptyComponent : sortedTestComponents[selectedTestIndex].component;
-
-  const themedStyles = getThemedStyles(useTheme());
 
   // This is used to initially bring focus to the app on win32
   const focusOnMountRef = React.useRef<View>();
@@ -92,58 +131,10 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     default: View,
   });
 
-  const Header: React.FunctionComponent = () => {
-    const theme = useTheme();
-
-    return (
-      <View style={fluentTesterStyles.header}>
-        <Text
-          testID={BASE_TESTPAGE}
-          style={fluentTesterStyles.testHeader}
-          variant="heroLargeSemibold"
-          color={theme.host.palette?.TextEmphasis}
-        >
-          ⚛ FluentUI Tests
-        </Text>
-        <ThemePickers />
-      </View>
-    );
-  };
-
-  // iOS needs a software back button, which is shown on a newline along with the ThemePickers
-  const MobileHeader: React.FunctionComponent = () => {
-    const theme = useTheme();
-
-    return (
-      <View style={mobileStyles.header}>
-        <Text
-          style={fluentTesterStyles.testHeader}
-          variant="heroLargeSemibold"
-          color={theme.host.palette?.TextEmphasis}
-          testID={BASE_TESTPAGE}
-        >
-          ⚛ FluentUI Tests
-        </Text>
-        <View style={fluentTesterStyles.header}>
-          {/* on iOS, display a back Button */}
-          <Button
-            appearance="subtle"
-            style={{ alignSelf: 'flex-start', display: Platform.OS === 'ios' ? 'flex' : 'none' }}
-            onClick={onBackPress}
-            disabled={onTestListView}
-          >
-            ‹ Back
-          </Button>
-          <ThemePickers />
-        </View>
-      </View>
-    );
-  };
-
   const isTestListVisible = !enableSinglePaneView || (enableSinglePaneView && onTestListView);
   const isTestSectionVisible = !enableSinglePaneView || (enableSinglePaneView && !onTestListView);
 
-  const TestList: React.FunctionComponent = () => {
+  const TestList: React.FunctionComponent = React.memo(() => {
     return (
       <View style={fluentTesterStyles.testList}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} testID={TESTPAGE_BUTTONS_SCROLLVIEWER}>
@@ -168,9 +159,9 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         <TestListSeparator vertical style={fluentTesterStyles.testListSeparator} />
       </View>
     );
-  };
+  });
 
-  const MobileTestList: React.FunctionComponent = () => {
+  const MobileTestList: React.FunctionComponent = React.memo(() => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
         <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle}>
@@ -200,47 +191,25 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
         </ScrollView>
       </View>
     );
-  };
+  });
 
   const TestComponentView: React.FunctionComponent = () => {
     return (
-      <ScrollView style={fluentTesterStyles.testSection}>
+      <ScrollView contentContainerStyle={fluentTesterStyles.testSection}>
         <TestComponent />
       </ScrollView>
     );
   };
 
-  const MobileTestComponentView: React.FunctionComponent = () => {
-    return (
-      <View style={{ ...mobileStyles.testSection, display: isTestSectionVisible ? 'flex' : 'none' }}>
-        <ScrollView>
-          <TestComponent />
-        </ScrollView>
-      </View>
-    );
-  };
-
-  const TesterContent: React.FunctionComponent = () => {
-    return (
-      <View style={commonTestStyles.flex}>
-        {enableSinglePaneView ? <MobileHeader /> : <Header />}
-
-        <HeaderSeparator />
-
-        <View style={fluentTesterStyles.testRoot}>
-          {enableSinglePaneView ? <MobileTestList /> : <TestList />}
-          {enableSinglePaneView ? <MobileTestComponentView /> : <TestComponentView />}
-        </View>
-      </View>
-    );
-  };
-
   return (
     // TODO: Figure out why making this view accessible breaks element querying on iOS.
-    <View accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW} style={commonTestStyles.flex}>
-      <RootView style={themedStyles.root}>
-        <TesterContent />
-      </RootView>
-    </View>
+    <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
+      <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
+      <HeaderSeparator />
+      <View style={fluentTesterStyles.testRoot}>
+        {enableSinglePaneView ? <MobileTestList /> : <TestList />}
+        {isTestSectionVisible && <TestComponentView />}
+      </View>
+    </RootView>
   );
 };

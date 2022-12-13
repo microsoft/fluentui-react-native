@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/experimental-link
 
-This log was last generated on Fri, 09 Dec 2022 10:05:33 GMT and should not be manually modified.
+This log was last generated on Tue, 13 Dec 2022 18:37:10 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.3.1
+
+Tue, 13 Dec 2022 18:37:10 GMT
+
+### Patches
+
+- Change disabled link to not be focusable (ruaraki@microsoft.com)
 
 ## 0.3.0
 
