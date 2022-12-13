@@ -4,7 +4,7 @@ import { radioName, RadioType, RadioProps } from './Radio.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Radio.styling';
 import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
-import { useRadio } from './useRadio';
+import { useRadio } from './useRadio.win32';
 import { filterViewProps } from '@fluentui-react-native/adapters';
 import { PressableState } from '@fluentui-react-native/interactive-hooks';
 

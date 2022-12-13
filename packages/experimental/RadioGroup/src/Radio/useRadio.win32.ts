@@ -4,6 +4,8 @@ import { useRadioGroupContext } from '../RadioGroup/radioGroupContext';
 import { usePressableState, useOnPressWithFocus, useViewCommandFocus } from '@fluentui-react-native/interactive-hooks';
 import { memoize } from '@fluentui-react-native/framework';
 import { AccessibilityState } from 'react-native';
+// import { IViewWin32Props } from '@office-iss/react-native-win32';
+import type { IHandledKeyboardEvent } from '@office-iss/react-native-win32';
 
 const defaultAccessibilityActions = [{ name: 'Select' }];
 
@@ -12,6 +14,31 @@ export const useRadio = (props: RadioProps): RadioInfo => {
 
   // Grabs the context information from RadioGroup (currently selected button and client's onChange callback)
   const radioGroupContext = useRadioGroupContext();
+
+  // Disables arrow up, arrow down, arrow right, and arrow left behavior on native side
+  const handledNativeKeyboardEvents: IHandledKeyboardEvent[] = [
+    { key: 'ArrowDown' },
+    { key: 'ArrowUp' },
+    { key: 'ArrowRight' },
+    { key: 'ArrowLeft' },
+  ];
+
+  // const keyPressProps: Omit<IViewWin32Props, 'accessibilityRole' | 'onBlur' | 'onFocus'> = {
+  //   keyDownEvents: [{ key: 'ArrowUp' | 'ArrowDown' | 'ArrowRight' | 'ArrowLeft' }],
+  //   onKeyDown: (args) => {
+  //     if (args.nativeEvent.key === 'a') {
+  //       setKeyDetected('a (down)');
+  //       args.stopPropagation();
+  //     }
+  //   },
+  //   keyUpEvents: [{ key: 'b' }],
+  //   onKeyUp: (args) => {
+  //     if (args.nativeEvent.key === 'b') {
+  //       setKeyDetected('b (up)');
+  //       args.stopPropagation();
+  //     }
+  //   },
+  // };
 
   const {
     label,
@@ -27,6 +54,9 @@ export const useRadio = (props: RadioProps): RadioInfo => {
     accessibilityPositionInSet,
     accessibilitySetSize,
     enableFocusRing,
+    keyDownEvents = handledNativeKeyboardEvents,
+    // ...keyPressProps,
+    // isCircularNavigation,
     ...rest
   } = props;
 
@@ -54,10 +84,36 @@ export const useRadio = (props: RadioProps): RadioInfo => {
   // Ensure focus is placed on button after click
   const changeSelectionWithFocus = useOnPressWithFocus(componentRef, changeSelection);
 
-  /* RadioButton changes selection when focus is moved between each RadioButton and on a click */
+  // const onKeyDown = (e: KeyboardEvent) => {
+  //   if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+  //     // const length = state.info.enabledKeys.length;
+  //     // const currRadioIndex = state.info.enabledKeys.findIndex((x) => x == state.context.selectedKey);
+  //     const length = radioGroupContext.values.length;
+  //     const currRadioIndex = radioGroupContext.values.findIndex((x) => x == radioGroupContext.value);
+  //     let newCurrRadioIndex;
+  //     if (e.key === 'ArrowRight') {
+  //       if (isCircularNavigation || !(currRadioIndex + 1 == length)) {
+  //         newCurrRadioIndex = (currRadioIndex + 1) % length;
+  //         // radioGroupContext.onChange && radioGroupContext.onChange(value);
+  //         // radioGroupContext.updateSelectedButtonRef && componentRef && radioGroupContext.updateSelectedButtonRef(componentRef);
+  //         state.context.selectedKey = radioGroupContext.values[newCurrRadioIndex];
+  //         data.onKeySelect(state.context.selectedKey);
+  //       }
+  //     } else {
+  //       if (isCircularNavigation || !(currTabItemIndex == 0)) {
+  //         newCurrTabItemIndex = (currTabItemIndex - 1 + length) % length;
+  //         state.context.selectedKey = state.info.enabledKeys[newCurrTabItemIndex];
+  //         data.onKeySelect(state.context.selectedKey);
+  //       }
+  //     }
+  //   }
+  // };
+
+  /* Radio changes selection when focus is moved between each RadioButton and on a click */
   const pressable = usePressableState({
     ...rest,
-    onPress: changeSelectionWithFocus,
+    onPress: changeSelectionWithFocus, // changeSelectionWithFocus
+    // onKeyDown,
     onFocus: changeSelection,
   });
 
@@ -94,6 +150,7 @@ export const useRadio = (props: RadioProps): RadioInfo => {
       ...rest,
       ref: buttonRef,
       ...pressable.props,
+      keyDownEvents,
       accessibilityRole: 'radio',
       accessibilityLabel: accessibilityLabel ?? label,
       accessibilityHint: accessibilityHint ?? subtext,

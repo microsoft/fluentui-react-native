@@ -15,4 +15,4 @@ export { useRadioGroupContextValue } from './RadioGroup/useRadioGroupContextValu
 export { Radio, radioLookup } from './Radio/Radio';
 export { radioName, RadioProps, RadioSlotProps, RadioInfo, RadioTokens, RadioType } from './Radio/Radio.types';
 export { defaultRadioTokens } from './Radio/RadioTokens';
-export { useRadio } from './Radio/useRadio';
+export { useRadio } from './Radio/useRadio.win32';
