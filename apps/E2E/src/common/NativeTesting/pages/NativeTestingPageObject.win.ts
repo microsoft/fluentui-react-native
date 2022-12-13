@@ -34,7 +34,10 @@ class NativeTestingPageObject extends BasePage {
           foundValidButton = true;
         } else {
           // The correct format for testId was not followed. Return a failure.
-          return false;
+          throw Error(
+            `A testPageButton with the testID '${autoId}' does not match the defined testID format, which should
+            read 'Homepage_<component_name>_Button.`,
+          );
         }
       }
     }
