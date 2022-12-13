@@ -21,14 +21,6 @@ steps:
     displayName: 'Copy ${{parameters.applicationType}} tree dump screenshots'
     condition: and (succeededOrFailed(), eq(${{parameters.buildArtifacts}}, 'success'))
 
-  # Copy android Apk to FluentTesterDump
-  - task: CopyFiles@2
-    inputs:
-      sourceFolder: ${{parameters.apkDirectory}}
-      targetFolder: $(Build.StagingDirectory)/E2E_${{parameters.applicationType}}_Dump
-    displayName: 'Copy ${{parameters.applicationType}} dump apk'
-    condition: and (and (eq('${{parameters.platform}}', 'android'), eq(${{parameters.buildArtifacts}}, 'success')), failed())
-
   # Publish FluentTesterDump
   - task: PublishBuildArtifacts@1
     inputs:
