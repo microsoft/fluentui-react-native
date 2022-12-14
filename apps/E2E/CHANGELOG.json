@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Wed, 14 Dec 2022 17:45:41 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.6.0",
+      "version": "1.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "e289811db7757b4dcb4e99040f1695ed44a3cc2b",
+            "comment": "Add new attribute testing method in BasePage, modify ButtonExperimental tests with better errors"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Dec 2022 21:31:46 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.5.0",
+      "version": "1.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "7af343bc8a54cbc67edc0087cd0fbfe1c8bfb0e1",
+            "comment": "Add more baseline Menu E2E tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 13 Dec 2022 20:07:29 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.4.1",
       "version": "1.4.1",

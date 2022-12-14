@@ -1,8 +1,41 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Tue, 13 Dec 2022 20:07:29 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Dec 2022 17:45:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.118.0
+
+Wed, 14 Dec 2022 17:45:41 GMT
+
+### Minor changes
+
+- Refactor BasePage and ButtonV1, FocusZone, and NativeTesting tests with better errors (winlarry@microsoft.com)
+
+## 0.117.2
+
+Wed, 14 Dec 2022 06:48:57 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.34.0
+
+## 0.117.1
+
+Tue, 13 Dec 2022 23:18:04 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.12
+- Bump @fluentui-react-native/experimental-text to v0.11.30
+
+## 0.117.0
+
+Tue, 13 Dec 2022 21:31:46 GMT
+
+### Minor changes
+
+- Add more baseline Menu E2E tests (winlarry@microsoft.com)
 
 ## 0.116.7
 

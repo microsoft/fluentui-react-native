@@ -1,8 +1,16 @@
 # Change Log - @fluentui/react-native
 
-This log was last generated on Fri, 09 Dec 2022 23:48:05 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Dec 2022 06:48:57 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.34.0
+
+Wed, 14 Dec 2022 06:48:57 GMT
+
+### Minor changes
+
+- Add missing entries to export of library/core (ruaraki@microsoft.com)
 
 ## 0.33.12
 
