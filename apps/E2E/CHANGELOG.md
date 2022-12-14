@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Tue, 13 Dec 2022 21:31:46 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Dec 2022 17:45:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.0
+
+Wed, 14 Dec 2022 17:45:41 GMT
+
+### Minor changes
+
+- Add new attribute testing method in BasePage, modify ButtonExperimental tests with better errors (winlarry@microsoft.com)
 
 ## 1.5.0
 

@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 14 Dec 2022 06:48:57 GMT and should not be manually modified.
+This log was last generated on Wed, 14 Dec 2022 17:45:41 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.118.0
+
+Wed, 14 Dec 2022 17:45:41 GMT
+
+### Minor changes
+
+- Refactor BasePage and ButtonV1, FocusZone, and NativeTesting tests with better errors (winlarry@microsoft.com)
 
 ## 0.117.2
 

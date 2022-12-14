@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Refactor BasePage and ButtonV1, FocusZone, and NativeTesting tests with better errors",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "winlarry@microsoft.com",
-  "dependentChangeType": "patch"
-}

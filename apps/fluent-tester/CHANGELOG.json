@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 14 Dec 2022 17:45:41 GMT",
+      "tag": "@fluentui-react-native/tester_v0.118.0",
+      "version": "0.118.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "e289811db7757b4dcb4e99040f1695ed44a3cc2b",
+            "comment": "Refactor BasePage and ButtonV1, FocusZone, and NativeTesting tests with better errors"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 14 Dec 2022 06:48:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.117.2",
       "version": "0.117.2",
