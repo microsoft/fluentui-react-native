@@ -20,24 +20,18 @@ class CalloutPageObject extends BasePage {
     await (await this._buttonToOpenCallout).addValue('');
   }
 
-  async openCallout(): Promise<void> {
+  // This both opens and waits for it to go in view
+  async openCalloutAndWaitForLoad(): Promise<void> {
     await (await this._buttonToOpenCallout).click();
+    await this.waitForCondition(
+      async () => await this.didCalloutLoad(),
+      'The testing callout failed to display after attempting to open it.',
+    );
   }
 
   async closeCallout(): Promise<void> {
     // all we have to do is click outside the callout
     await (await this._testPage).click();
-  }
-
-  async waitForCalloutComponentInView(timeout?: number): Promise<void> {
-    await browser.waitUntil(
-      async () => {
-        return await this.didCalloutLoad();
-      },
-      {
-        timeout: timeout ?? this.waitForUiEvent,
-      },
-    );
   }
 
   /*****************************************/
