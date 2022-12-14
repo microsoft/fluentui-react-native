@@ -7,12 +7,6 @@ import {
 } from '../../../../fluent-tester/src/TestComponents/CheckboxExperimental/consts';
 import { BasePage, By } from '../../common/BasePage';
 
-/* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
- * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
-export const enum ExperimentalCheckboxSelector {
-  Primary, //this._primaryComponent
-}
-
 class ExperimentalCheckboxPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
@@ -22,11 +16,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
   }
 
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isCheckboxChecked(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Checkbox was not toggled correctly',
-      interval: 1000,
-    });
+    await this.waitForCondition(async () => await this.isCheckboxChecked(), 'The Checkbox was not toggled correctly.', timeout);
   }
 
   /* Useful in beforeEach() hook to reset the checkbox before every test */
@@ -37,27 +27,9 @@ class ExperimentalCheckboxPageObject extends BasePage {
   }
 
   async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(EXPERIMENTAL_CHECKBOX_ON_PRESS);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The OnChange callback did not fire.',
-      interval: 1000,
-    });
-
+    const callbackText = await this._callbackText;
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), 'The onChange callback did not fire.');
     return await callbackText.isDisplayed();
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(selector: ExperimentalCheckboxSelector, key: string): Promise<void> {
-    await (await this.getCheckboxSelector(selector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  async getCheckboxSelector(selector?: ExperimentalCheckboxSelector): Promise<WebdriverIO.Element> {
-    if (selector == ExperimentalCheckboxSelector.Primary) {
-      return await this._primaryComponent;
-    }
-    return await this._primaryComponent;
   }
 
   /*****************************************/
@@ -81,6 +53,10 @@ class ExperimentalCheckboxPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_CHECKBOX_EXPERIMENTAL_BUTTON);
+  }
+
+  get _callbackText() {
+    return By(EXPERIMENTAL_CHECKBOX_ON_PRESS);
   }
 }
 
