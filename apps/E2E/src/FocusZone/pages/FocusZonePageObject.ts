@@ -15,6 +15,18 @@ import {
 } from '../../../../fluent-tester/src/TestComponents/FocusZone/consts';
 import { BasePage, By } from '../../common/BasePage';
 
+export const enum GridButton {
+  One = 1,
+  Two,
+  Three,
+  Four,
+  Five,
+  Six,
+  Seven,
+  Eight,
+  Nine,
+}
+
 export const enum GridFocusZoneOption {
   SetDirection = 0,
   Set2DNavigation,
@@ -67,8 +79,8 @@ class FocusZonePageObject extends BasePage {
     }
   }
 
-  async gridButton(n: number) {
-    return await By(FOCUSZONE_GRID_BUTTON(n));
+  async gridButton(button: GridButton) {
+    return await By(FOCUSZONE_GRID_BUTTON(button));
   }
 
   private async _getGridFocusZoneMenuOption(direction: FocusZoneDirection) {
