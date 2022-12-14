@@ -205,7 +205,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
     // TODO: Setting the testID should disable React Native's layout-only view removal optimization.
     // However, for win32, the view removal still happens even though the testID is being set on this view.
     // As a temporary patch, set the view to be accessible on win32 to ensure that the view is not removed.
-    <RootView style={themedStyles.root} accessible={Platform.OS === 'macos'} testID={ROOT_VIEW}>
+    <RootView style={themedStyles.root} collapsable={false} testID={ROOT_VIEW}>
       <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
       <HeaderSeparator />
       <View style={fluentTesterStyles.testRoot}>
