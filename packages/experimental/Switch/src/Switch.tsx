@@ -1,9 +1,9 @@
 /** @jsx withSlots */
-import { View, AccessibilityInfo, Pressable } from 'react-native';
+import { View, AccessibilityInfo, Pressable, Animated } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
-import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
 
 /**
@@ -29,20 +29,22 @@ export const switchLookup = (layer: string, state: SwitchState, userProps: Switc
   );
 };
 
+const useStyling = buildUseStyling(stylingSettings);
 export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
   slots: {
     root: Pressable,
     label: Text,
-    track: View,
-    thumb: View,
+    track: Animated.View,
+    thumb: Animated.View,
     toggleContainer: View,
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
     const switchInfo = useSwitch(userProps);
-
+    const tokens = useStyling(userProps); /// THERE IS ISSUE IN THIS
+    console.log(tokens);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
 
@@ -58,8 +60,8 @@ export const Switch = compose<SwitchType>({
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track>
-              <Slots.thumb {...thumbAnimation} />
+            <Slots.track style={switchInfo.props.animatedStyles.backgroundStyle}>
+              <Slots.thumb style={switchInfo.props.animatedStyles.animatedStyle} />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>

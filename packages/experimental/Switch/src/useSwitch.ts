@@ -7,21 +7,22 @@ import {
   InteractionEvent,
 } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
-import { AccessibilityState, AccessibilityActionEvent, Platform, LayoutAnimation, UIManager } from 'react-native';
-import { memoize } from '@fluentui-react-native/framework';
+import { AccessibilityState, AccessibilityActionEvent, Platform, LayoutAnimation, UIManager, Animated } from 'react-native';
+import { buildUseStyling, memoize } from '@fluentui-react-native/framework';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
+import { stylingSettings } from './Switch.styling';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
-// Use Layout Animation for Knob animating on state change
-const animateSwitchKnob = () => {
-  if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut, () => {
-      UIManager.setLayoutAnimationEnabledExperimental(false);
-    });
-  }
-};
+// // Use Layout Animation for Knob animating on state change
+// const animateSwitchKnob = () => {
+//   if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
+//     UIManager.setLayoutAnimationEnabledExperimental(true);
+//     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut, () => {
+//       UIManager.setLayoutAnimationEnabledExperimental(false);
+//     });
+//   }
+// };
 
 export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
@@ -45,12 +46,72 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
   const onChangeWithAnimation = React.useCallback(
     (e: InteractionEvent, checked?: boolean) => {
       onChange && onChange(e, checked);
-      animateSwitchKnob();
+      console.log('Checked ' + checked);
+      if (checked) {
+        startAnimatiobgn(checked);
+        startAnimation();
+      } else {
+        startAnimatiobgn(checked);
+        startAnimation2();
+      }
     },
     [onChange],
   );
 
+  const [animation, setAnimation] = React.useState(new Animated.Value(0));
+  const [animationbg, setAnimationbg] = React.useState(new Animated.Value(0));
+
+  const animatedStyles = {
+    animatedStyle: {
+      transform: [
+        {
+          translateX: animation,
+        },
+      ],
+    },
+    backgroundStyle: {
+      // backgroundColor: animationbg.interpolate({
+      //   inputRange: [0, 1],
+      //   outputRange: ['green', 'red'],
+      // }),
+    },
+  };
+
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
+  console.log('CHECKE STATED ' + checkedState);
+  const startAnimation = () => {
+    Animated.timing(animation, {
+      toValue: tokens.track.style.width - tokens.thumb.style.width - tokens.thumb.style.margin * 2,
+      duration: 250,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const startAnimatiobgn = (checkss) => {
+    const toValue = checkss ? 0 : 1;
+    Animated.timing(animationbg, {
+      toValue,
+      duration: 200,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const startAnimation2 = (first = false) => {
+    Animated.timing(animation, {
+      toValue: first ? 0 : -20,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  if (checkedState) {
+    startAnimation();
+    startAnimatiobgn(true);
+  } else {
+    startAnimation2(true);
+    startAnimatiobgn(false);
+  }
+
   const focusRef = disabled ? null : componentRef;
 
   if (__DEV__ && defaultChecked !== undefined && checked !== undefined) {
@@ -96,6 +157,7 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
       onAccessibilityAction: onAccessibilityActionProp,
       accessibilityState: getAccessibilityState(checkedState, disabled, accessibilityState),
       disabled,
+      animatedStyles: animatedStyles,
       focusable: !disabled,
       ref: useViewCommandFocus(componentRef),
       checked: checkedState,
