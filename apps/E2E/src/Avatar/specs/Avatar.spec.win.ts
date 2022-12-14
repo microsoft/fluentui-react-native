@@ -32,7 +32,6 @@ describe('Avatar Testing Initialization', function () {
 describe('Avatar Accessibility Testing', () => {
   beforeEach(async () => {
     await AvatarPageObject.scrollToTestElement();
-    await AvatarPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it('Validate accessibilityLabel', async () => {

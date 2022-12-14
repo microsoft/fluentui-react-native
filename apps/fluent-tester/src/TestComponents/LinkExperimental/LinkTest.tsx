@@ -20,9 +20,7 @@ const DefaultLinks: React.FunctionComponent = () => {
       <Link onPress={doPress} onAccessibilityTap={doAllyTap}>
         Click to alert.
       </Link>
-      <Link disabled focusable>
-        Disabled focusable Link
-      </Link>
+      <Link disabled>Disabled Link</Link>
     </Stack>
   );
 };

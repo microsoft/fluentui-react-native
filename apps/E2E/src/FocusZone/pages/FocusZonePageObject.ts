@@ -45,11 +45,6 @@ type BooleanGridFocusZoneOption =
   | GridFocusZoneOption.Disable;
 
 class FocusZonePageObject extends BasePage {
-  async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
-    const errorMsg = 'The FocusZone UI Element did not load correctly. Please see logs.';
-    await this.waitForCondition(async () => await (await this._primaryComponent).isDisplayed(), errorMsg, timeout);
-  }
-
   async resetTest() {
     await this.configureGridFocusZone(GridFocusZoneOption.SetDirection, 'bidirectional');
     await this.configureGridFocusZone(GridFocusZoneOption.Set2DNavigation, false);

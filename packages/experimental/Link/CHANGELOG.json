@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-link",
   "entries": [
     {
+      "date": "Tue, 13 Dec 2022 18:37:10 GMT",
+      "tag": "@fluentui-react-native/experimental-link_v0.3.1",
+      "version": "0.3.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-link",
+            "commit": "db71a5cb417ca9e1d609872212de069a0ed4351e",
+            "comment": "Change disabled link to not be focusable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 10:05:33 GMT",
       "tag": "@fluentui-react-native/experimental-link_v0.3.0",
       "version": "0.3.0",
