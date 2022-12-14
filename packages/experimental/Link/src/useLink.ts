@@ -26,7 +26,7 @@ export const useLink = (props: LinkProps): LinkInfo => {
     componentRef = defaultComponentRef,
     disabled,
     enableFocusRing,
-    focusable,
+    focusable = true,
     ...rest
   } = props;
   const isDisabled = !!disabled;
@@ -46,7 +46,7 @@ export const useLink = (props: LinkProps): LinkInfo => {
   );
 
   // GH #1336: Set focusRef to null if link is disabled to prevent getting keyboard focus.
-  const focusRef = isDisabled && !focusable ? null : componentRef;
+  const focusRef = isDisabled || !focusable ? null : componentRef;
   const onPressWithFocus = useOnPressWithFocus(focusRef, linkOnPress);
   const pressable = useAsPressable({ ...rest, disabled: isDisabled, onPress: onPressWithFocus });
   const onKeyUpProps = useKeyProps(linkOnPress, ' ', 'Enter');
@@ -88,7 +88,7 @@ export const useLink = (props: LinkProps): LinkInfo => {
       accessibilityRole: 'link',
       accessibilityState: getAccessibilityState(isDisabled, accessibilityState),
       enableFocusRing: enableFocusRing ?? true,
-      focusable: focusable ?? !isDisabled,
+      focusable: focusable && !isDisabled,
       cursor: isDisabled ? 'not-allowed' : 'pointer',
       ref: useViewCommandFocus(componentRef),
       tooltip: linkTooltip,
