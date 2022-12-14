@@ -22,7 +22,7 @@ describe('Callout Testing Initialization', function () {
 
 describe('Callout Accessibility Testing', () => {
   beforeAll(async () => {
-    await CalloutPageObject.scrollToTestElement();
+    await CalloutPageObject.scrollToTestElement(await CalloutPageObject._buttonToOpenCallout);
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 
@@ -53,7 +53,7 @@ describe('Callout Accessibility Testing', () => {
 
 describe('Callout Functional Testing', () => {
   beforeEach(async () => {
-    await CalloutPageObject.scrollToTestElement();
+    await CalloutPageObject.scrollToTestElement(await CalloutPageObject._buttonToOpenCallout);
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 

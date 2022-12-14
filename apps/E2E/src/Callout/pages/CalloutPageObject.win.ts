@@ -14,12 +14,6 @@ class CalloutPageObject extends BasePage {
     return await (await this._primaryComponent).isDisplayed();
   }
 
-  /* OVERRIDE: This must scroll to the button that opens the callout, not the callout (since it's not visible on load.) */
-  async scrollToTestElement(): Promise<void> {
-    // on win32, adding a blank value to an element automatically scrolls to it
-    await (await this._buttonToOpenCallout).addValue('');
-  }
-
   // This both opens and waits for it to go in view
   async openCalloutAndWaitForLoad(): Promise<void> {
     await (await this._buttonToOpenCallout).click();
