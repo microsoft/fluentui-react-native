@@ -4,6 +4,7 @@ export const ROOT_VIEW = 'Fluent_Tester_Root_View';
 export const BUTTON_A11Y_ROLE = 'ControlType.Button';
 export const CALLOUT_A11Y_ROLE = 'ControlType.Group';
 export const CHECKBOX_A11Y_ROLE = 'ControlType.CheckBox';
+export const IMAGE_A11Y_ROLE = 'ControlType.Image';
 export const LINK_A11Y_ROLE = 'ControlType.HyperLink';
 export const MENUBUTTON_A11Y_ROLE = 'ControlType.Button';
 export const MENU_A11Y_ROLE = 'ControlType.Menu';
@@ -19,6 +20,7 @@ export const BOOT_APP_TIMEOUT = 60000;
 export const PAGE_TIMEOUT = 15000;
 
 export const enum Attribute {
+  AccessibilityHint = 'HelpText',
   AccessibilityLabel = 'Name',
   AccessibilityRole = 'ControlType',
   ExpandCollapseState = 'ExpandCollapse.ExpandCollapseState',
@@ -31,6 +33,7 @@ export const enum Attribute {
 }
 
 export const attributeToEnumName = {
+  [Attribute.AccessibilityHint]: 'AccessibilityHint',
   [Attribute.AccessibilityLabel]: 'AccessibilityLabel',
   [Attribute.AccessibilityRole]: 'AccessibilityRole',
   [Attribute.ExpandCollapseState]: 'ExpandCollapseState',

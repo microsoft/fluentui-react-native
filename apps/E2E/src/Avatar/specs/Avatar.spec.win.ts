@@ -1,15 +1,10 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import AvatarPageObject from '../pages/AvatarPageObject';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute, LINK_A11Y_ROLE, IMAGE_A11Y_ROLE } from '../../common/consts';
 import {
   AVATAR_ACCESSIBILITY_LABEL,
   AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
   AVATAR_ACCESSIBILITY_HINT,
-  ACCESSIBILITY_LABEL_ATTR,
-  ACCESSIBILITY_HINT_ATTRIBUTE,
-  ACCESSIBILITY_ROLE_ATTRIBUTE,
-  ACCESSIBILITY_ROLE_IMAGE,
-  ACCESSIBILITY_ROLE_LINK,
 } from '../../../../fluent-tester/src/TestComponents/Avatar/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
@@ -35,29 +30,46 @@ describe('Avatar Accessibility Testing', () => {
   });
 
   it('Validate accessibilityLabel', async () => {
-    await expect(await AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(AVATAR_ACCESSIBILITY_LABEL);
+    await expect(
+      await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityLabel, AVATAR_ACCESSIBILITY_LABEL),
+    ).toBeTrue();
+
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate accessibilityLabel from `name` prop', async () => {
-    await expect(await AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_LABEL_ATTR)).toEqual(
-      AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
-    );
+    await expect(
+      await AvatarPageObject.compareAttribute(
+        AvatarPageObject._secondaryComponent,
+        Attribute.AccessibilityLabel,
+        AVATAR_ACCESSIBILITY_LABEL_BY_NAME,
+      ),
+    ).toBeTrue();
+
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate accessibilityHint', async () => {
-    await expect(await AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_HINT_ATTRIBUTE)).toEqual(AVATAR_ACCESSIBILITY_HINT);
+    await expect(
+      await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityHint, AVATAR_ACCESSIBILITY_HINT),
+    ).toBeTrue();
+
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate accessibilityRole', async () => {
-    await expect(await AvatarPageObject.getPrimaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_LINK);
+    await expect(
+      await AvatarPageObject.compareAttribute(AvatarPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE),
+    ).toBeTrue();
+
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
   it('Validate default accessibilityRole', async () => {
-    await expect(await AvatarPageObject.getSecondaryComponentAttribute(ACCESSIBILITY_ROLE_ATTRIBUTE)).toEqual(ACCESSIBILITY_ROLE_IMAGE);
+    await expect(
+      await AvatarPageObject.compareAttribute(AvatarPageObject._secondaryComponent, Attribute.AccessibilityRole, IMAGE_A11Y_ROLE),
+    ).toBeTrue();
+
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 });
