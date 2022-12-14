@@ -11,7 +11,7 @@ If you have an existing repo that uses FURN and you would like to stay up-to-dat
 Once `@rnx-kit/align-deps` is installed, you can add `@fluentui-react-native/dependency-profiles` as a dependency in your repo.
 
 ```
-yarn add ccccccc --dev
+yarn add @fluentui-react-native/dependency-profiles --dev
 ```
 
 or
@@ -20,14 +20,21 @@ or
 npm add --save-dev @fluentui-react-native/dependency-profiles
 ```
 
-Next, configure each of your onboarded React Native packages to use `@fluentui-react-native/dependency-profiles`:
+Next, configure each of your onboarded React Native packages to use a profile from `@fluentui-react-native/dependency-profiles` for the react-native version you're using under "presets". You can read more about configurations here: https://microsoft.github.io/rnx-kit/docs/tools/align-deps#configure and presets here: https://microsoft.github.io/rnx-kit/docs/tools/align-deps#presets.
 
 ```
++ const furnProfiles = require('@fluentui-react-native/dependency-profiles');
++ const furnProfile = furnProfiles[0.68];
+
+ .
+ .
+ .
+
  {
    "rnx-kit": {
      "alignDeps": {
 +      "presets": [
-+        "@fluentui-react-native/dependency-profiles"
++        "furnProfile"
 +      ],
        "requirements": [
         "react-native@0.68"
@@ -44,6 +51,8 @@ Next, configure each of your onboarded React Native packages to use `@fluentui-r
  }
 ```
 
-## Maintenance
+Now, you can use the `@rnx-kit/align-deps` tool to keep your FURN dependencies up-to-date by updating `@fluentui-react-native/dependency-profiles` to newer versions and running `yarn rnx-align-deps --write`.
+
+## Note for Package Maintainers
 
 Since this package is intended to contain multiple profiles for different versions of react-native, we need to make sure we save the current profile when updating the FURN repo to a newer version of react-native. To do this, copy the current profile (in index.js) to a new file under the src folder named `furn-profile-X.Y.js` where X.Y is the current version of react-native (for example, `furn-profile-0.68.js`). Next, add this file to the list of profiles in update-profile.js after "[`${major}.${minor}`]: packages" (which lists the profile for the new version of react-native you're updating to).
