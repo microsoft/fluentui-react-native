@@ -31,8 +31,6 @@ describe('RadioGroup component tests', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  /* Uncomment these tests when Issue #2349 is fixed. */
-
   it('RadioGroup disabled', () => {
     const tree = renderer
       .create(
