@@ -19,6 +19,6 @@ describe('Radio component tests', () => {
   });
 
   it('Radio re-renders correctly', () => {
-    checkReRender(() => <Radio value="key1" label="Render twice" />, 2);
+    checkReRender(() => <Radio value="key1" label="Render twice" />);
   });
 });
