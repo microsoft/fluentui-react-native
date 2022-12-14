@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Clean up and overhaul Avatar, Button, Callout, Checkbox, and CheckboxV1 tests with better errors and cleaner PageObjects",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "winlarry@microsoft.com",
+  "dependentChangeType": "patch"
+}
