@@ -2,7 +2,7 @@ import {
   ICON_TESTPAGE,
   ICON_TEST_COMPONENT,
   HOMEPAGE_ICON_BUTTON,
-  ICON_NO_A11Y_LABEL_COMPONENT,
+  ICON_FONT_TEST_COMPONENT,
 } from '../../../../fluent-tester/src/TestComponents/Icon/consts';
 import { BasePage, By } from '../../common/BasePage';
 
@@ -23,7 +23,7 @@ class IconPageObject extends BasePage {
   }
 
   get _secondaryComponent() {
-    return By(ICON_NO_A11Y_LABEL_COMPONENT);
+    return By(ICON_FONT_TEST_COMPONENT);
   }
 
   get _pageButton() {

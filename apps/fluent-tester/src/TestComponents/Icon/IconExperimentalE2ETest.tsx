@@ -3,7 +3,7 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Text } from '@fluentui/react-native';
 import { FontIcon, SvgIcon, Icon, FontIconProps, SvgIconProps } from '@fluentui-react-native/experimental-icon';
-import { ICON_ACCESSIBILITY_LABEL, ICON_TEST_COMPONENT, ICON_NO_A11Y_LABEL_COMPONENT } from './consts';
+import { ICON_ACCESSIBILITY_LABEL, ICON_TEST_COMPONENT, ICON_FONT_TEST_COMPONENT, ICON_SVG_TEST_COMPONENT } from './consts';
 import TestSvg from '../../../assets/test.svg';
 
 const fontBuiltInProps: FontIconProps = {
@@ -11,6 +11,7 @@ const fontBuiltInProps: FontIconProps = {
   codepoint: 0x2663,
   fontSize: 100,
   color: '#f09',
+  testID: ICON_FONT_TEST_COMPONENT,
   accessibilityLabel: ICON_ACCESSIBILITY_LABEL,
 };
 
@@ -28,10 +29,11 @@ const svgSrcProps: SvgIconProps = {
   src: TestSvg,
   width: 72,
   height: 72,
-  testID: ICON_NO_A11Y_LABEL_COMPONENT,
+  testID: ICON_SVG_TEST_COMPONENT,
+  accessibilityLabel: ICON_ACCESSIBILITY_LABEL,
 };
 
-export const E2ETestingIcon: React.FunctionComponent = () => {
+export const E2ETestingExperimentalIcon: React.FunctionComponent = () => {
   return (
     <View>
       <Text>Icon component</Text>

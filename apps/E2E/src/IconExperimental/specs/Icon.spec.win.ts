@@ -1,6 +1,8 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import IconPageObject from '../pages/IconPageObject';
 import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { ComponentSelector } from '../../common/BasePage';
+import { ICON_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/Icon/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Icon Testing Initialization', function () {
@@ -16,5 +18,26 @@ describe('Icon Testing Initialization', function () {
 
     await expect(await IconPageObject.isPageLoaded()).toBeTruthy(IconPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await IconPageObject.didAssertPopup()).toBeFalsy(IconPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});
+
+describe('Icon Accessibility Testing', () => {
+  beforeEach(async () => {
+    await IconPageObject.scrollToTestElement();
+  });
+
+  it('Validate accessibilityLabel for SVG Icon', async () => {
+    await expect(await IconPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(ICON_ACCESSIBILITY_LABEL);
+    await expect(await IconPageObject.didAssertPopup()).toBeFalsy(IconPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Validate accessibilityLabel for Font Icon', async () => {
+    await expect(await IconPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(ICON_ACCESSIBILITY_LABEL);
+    await expect(await IconPageObject.didAssertPopup()).toBeFalsy(IconPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Validate accessibilityRole for SVG Icon', async () => {
+    await expect(await IconPageObject.getAccessibilityRole()).toEqual('ControlType.Image');
+    await expect(await IconPageObject.didAssertPopup()).toBeFalsy(IconPageObject.ERRORMESSAGE_ASSERT);
   });
 });
