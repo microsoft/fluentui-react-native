@@ -22,11 +22,7 @@ class CheckboxPageObject extends BasePage {
   }
 
   async waitForCheckboxChecked(timeout?: number): Promise<void> {
-    await browser.waitUntil(async () => await this.isCheckboxChecked(), {
-      timeout: timeout ?? this.waitForUiEvent,
-      timeoutMsg: 'The Checkbox was not toggled correctly',
-      interval: 1000,
-    });
+    await this.waitForCondition(async () => await this.isCheckboxChecked(), 'The Checkbox was not toggled correctly.', timeout);
   }
 
   /* Useful in beforeEach() hook to reset the checkbox before every test */
@@ -37,27 +33,9 @@ class CheckboxPageObject extends BasePage {
   }
 
   async didOnChangeCallbackFire(): Promise<boolean> {
-    const callbackText = await By(CHECKBOX_ON_PRESS);
-    await browser.waitUntil(async () => await callbackText.isDisplayed(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The OnChange callback did not fire.',
-      interval: 1000,
-    });
-
+    const callbackText = await this._callbackText;
+    await this.waitForCondition(async () => await callbackText.isDisplayed(), 'The onChange callback did not fire.');
     return await callbackText.isDisplayed();
-  }
-
-  /* Sends a Keyboarding command on a specific UI element */
-  async sendKey(selector: CheckboxSelector, key: string): Promise<void> {
-    await (await this.getCheckboxSelector(selector)).addValue(key);
-  }
-
-  /* Returns the correct WebDriverIO element from the Checkbox Selector */
-  async getCheckboxSelector(selector?: CheckboxSelector): Promise<WebdriverIO.Element> {
-    if (selector == CheckboxSelector.Primary) {
-      return await this._primaryComponent;
-    }
-    return await this._primaryComponent;
   }
 
   /*****************************************/
@@ -81,6 +59,10 @@ class CheckboxPageObject extends BasePage {
 
   get _pageButton() {
     return By(HOMEPAGE_CHECKBOX_BUTTON);
+  }
+
+  get _callbackText() {
+    return By(CHECKBOX_ON_PRESS);
   }
 }
 
