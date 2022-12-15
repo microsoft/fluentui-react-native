@@ -9,12 +9,22 @@ export const radioName = 'Radio';
 
 export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens {
   /**
+   * Total size of the Radio View
+   */
+  radioViewSize?: number;
+
+  /**
+   * Horizontal padding of the root view
+   */
+  rootHorizontalPadding?: number;
+
+  /**
    * Indicator border color
    */
   radioBorder?: ColorValue;
 
   /**
-   * Indicator border color
+   * Indicator border style
    */
   radioBorderStyle?: ViewStyle['borderStyle'];
 
@@ -31,7 +41,7 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   /**
    * Diameter size of the outer indicator
    */
-  radioSize?: number;
+  radioOuterCircleSize?: number;
 
   /**
    * Diameter size of the inner circle indicator

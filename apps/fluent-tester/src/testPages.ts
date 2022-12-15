@@ -130,7 +130,7 @@ export const tests: TestDescription[] = [
     name: 'Focus Trap Zone',
     component: FocusTrapTest,
     testPage: HOMEPAGE_FOCUSTRAPZONE_BUTTON,
-    platforms: ['android', 'win32'],
+    platforms: ['win32'],
   },
   {
     name: 'FocusZone',
@@ -208,7 +208,7 @@ export const tests: TestDescription[] = [
     name: 'RadioGroup V1',
     component: RadioGroupExperimentalTest,
     testPage: HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON,
-    platforms: ['macos', 'win32'],
+    platforms: ['android', 'macos', 'win32'],
   },
   {
     name: 'Separator',
