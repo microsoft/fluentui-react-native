@@ -171,6 +171,7 @@ export const mobileStyles = StyleSheet.create({
   },
   testSection: {
     width: '100%',
+    marginVertical: 15,
   },
 });
 
