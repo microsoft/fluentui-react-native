@@ -18,6 +18,7 @@ export interface SeparatorPropTokens {
    *
    * Inset Spacing is restricted to a limited set of supported values recommended for most uses (see `SeparatorInsetSpacing`) and
    * based on design guidelines for the Separator control.
+   * Note : Supported only for mobile platforms ( Android & iOS)
    * @defaultvalue 0
    */
   insetSpacing?: SeparatorInsetSpacing;
