@@ -202,11 +202,8 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    // Setting the testID should disable React Native's layout-only view removal optimization, and keep the view in the native hierarchy.
-    // However, for win32 and macOS, the view removal still seems to happen even though the testID is being set on this view.
-    // As a temporary patch, set the view to be accessible on win32 and macOS to ensure that the view is not removed.
-    // TODO: remove the need for this temporary patch
-    <RootView style={themedStyles.root} accessible={Platform.OS === ('win32' as any) || Platform.OS === 'macos'} testID={ROOT_VIEW}>
+    // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
+    <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
       <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
       <HeaderSeparator />
       <View style={fluentTesterStyles.testRoot}>
