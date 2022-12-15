@@ -6,6 +6,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2EExperimentalTextTest } from './ExperimentalTextE2ETest';
 import { EXPERIMENTAL_TEXT_TESTPAGE } from './consts';
 import { V2Usage } from './V2Usage';
+import { MaximumFontSizeUsage } from './MaximumFontSize';
 
 const textSections: TestSection[] = [
   {
@@ -16,6 +17,10 @@ const textSections: TestSection[] = [
   {
     name: 'V2/V1 Comparison',
     component: V2Usage,
+  },
+  {
+    name: 'Maximum Font Size Usage',
+    component: MaximumFontSizeUsage,
   },
   {
     name: 'Customize Usage',
