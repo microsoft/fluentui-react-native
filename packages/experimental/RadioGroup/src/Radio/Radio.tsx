@@ -1,5 +1,5 @@
 /** @jsx withSlots */
-import { Pressable, View } from 'react-native';
+import { Platform, Pressable, View } from 'react-native';
 import { radioName, RadioType, RadioProps } from './Radio.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings } from './Radio.styling';
@@ -20,21 +20,26 @@ export const radioLookup = (layer: string, state: PressableState, userProps: Rad
   return state[layer] || userProps[layer] || (layer === 'labelPositionBelow' && userProps['labelPosition'] === 'below');
 };
 
+const platformBasedFilter = Platform.select({
+  android: {},
+  default: {
+    button: filterViewProps,
+    innerCircle: filterViewProps,
+  },
+});
+
 export const Radio = compose<RadioType>({
   displayName: radioName,
   ...stylingSettings,
   slots: {
     root: Pressable,
-    button: View,
+    button: Pressable,
     innerCircle: View,
     labelContent: View,
     label: Text,
     subtext: Text,
   },
-  filters: {
-    button: filterViewProps,
-    innerCircle: filterViewProps,
-  },
+  filters: platformBasedFilter,
   useRender: (userProps: RadioProps, useSlots: UseSlots<RadioType>) => {
     const radio = useRadio(userProps);
     const Slots = useSlots(userProps, (layer: string) => radioLookup(layer, radio.state, radio.props));
@@ -52,7 +57,7 @@ export const Radio = compose<RadioType>({
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.button>
+          <Slots.button {...mergedProps}>
             <Slots.innerCircle />
           </Slots.button>
           {labelComponent}

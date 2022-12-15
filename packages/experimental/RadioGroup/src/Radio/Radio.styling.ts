@@ -1,6 +1,5 @@
 import { radioName, RadioTokens, RadioSlotProps, RadioProps } from './Radio.types';
 import { Theme, UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
-import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { defaultRadioTokens } from './RadioTokens';
 import { fontStyles, borderStyles } from '@fluentui-react-native/tokens';
 
@@ -17,8 +16,10 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           alignItems: tokens.alignItems,
           flexDirection: tokens.flexDirection,
           paddingHorizontal: tokens.rootHorizontalPadding,
+          paddingVertical: tokens.rootVerticalPadding,
           ...borderStyles.from(tokens, theme),
         },
+        android_ripple: { color: tokens.rippleColor },
       }),
       ['flexDirection', 'rootHorizontalPadding', 'alignItems', ...borderStyles.keys],
     ),
@@ -40,6 +41,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginBottom: tokens.marginBottom,
           marginLeft: tokens.marginLeft,
         },
+        android_ripple: { color: tokens.rippleColor, radius: tokens.rippleSize, borderless: true },
       }),
       [
         'radioBorderWidth',

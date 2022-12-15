@@ -5,7 +5,6 @@ import { RadioTokens } from './Radio.types';
 
 export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) =>
   ({
-    rootHorizontalPadding: globalTokens.size160,
     color: t.colors.neutralForeground3,
     variant: 'body1',
     labelMarginLeft: globalTokens.size160,
@@ -22,6 +21,8 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
     radioInnerCircleSize: 10,
     radioBorderStyle: 'solid',
     radioBorderWidth: globalTokens.stroke.width15,
+    rippleRadius: globalTokens.size160,
+    rippleColor: '#D4D4D4',
 
     // Unselected, Rest
     radioBorder: t.colors.neutralStrokeAccessible,
@@ -29,6 +30,7 @@ export const defaultRadioTokens: TokenSettings<RadioTokens, Theme> = (t: Theme) 
 
     disabled: {
       // Unselected, Disabled
+      rippleColor: 'transparent',
       radioBorder: t.colors.neutralStrokeDisabled,
       radioVisibility: 0,
     },

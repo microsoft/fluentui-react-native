@@ -19,6 +19,11 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
   rootHorizontalPadding?: number;
 
   /**
+   * Vertical padding of the root view
+   */
+  rootVerticalPadding?: number;
+
+  /**
    * Indicator border color
    */
   radioBorder?: ColorValue;
@@ -118,6 +123,16 @@ export interface RadioTokens extends FontTokens, IColorTokens, IForegroundColorT
    * Should only by used if subtext prop is provided.
    */
   subtextMarginBottom?: ViewStyle['marginBottom'];
+
+  /**
+   * Ripple color for Android.
+   */
+  rippleColor?: ColorValue;
+
+  /**
+   * Ripple radius for circular radio on Android.
+   */
+  rippleRadius?: number;
 
   /**
    * States that can be applied to a Radio
