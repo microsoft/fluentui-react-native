@@ -11,7 +11,7 @@ export const textName = 'Text';
 export type TextTokens = Omit<FontTokens, 'fontFamily'> &
   IForegroundColorTokens &
   Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'> & {
-    // TODO(#2268): Remove these once RN Core properly supports Dynamic Type scaling
+    // GH #2268: Remove these once RN Core properly supports Dynamic Type scaling
     /**
      * (iOS only) The Dynamic Type ramp that a Text element should follow as the user changes their
      * preferred content size.

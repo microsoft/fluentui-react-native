@@ -50,7 +50,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 
-  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+  // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
   const fontMetricsScaleFactors = useFontMetricsScaleFactors();
 
   const textAlign = I18nManager.isRTL
@@ -111,7 +111,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
 
-  // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+  // [GH #2268: Remove once RN Core properly supports Dynamic Type scaling
   const dynamicTypeVariant = Platform.OS === 'ios' ? tokenStyle.dynamicTypeRamp : undefined;
   const maximumFontSize = tokenStyle.maximumFontSize ?? Number.POSITIVE_INFINITY;
 
@@ -128,7 +128,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       lineHeight: tokenStyle.lineHeight * scaleFactor, // scale accordingly with fontSize
     };
   }
-  // ]TODO(#2268)
+  // ]GH #2268
 
   const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
   const filteredProps = {
@@ -148,13 +148,13 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...keyProps,
       ...filteredProps,
       ...extra,
-      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
+      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
       onPress,
       numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
 
-    // TODO(#2268): RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props
+    // GH #2268: RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props
     delete (mergedProps.style as TextTokens).dynamicTypeRamp;
     delete (mergedProps.style as TextTokens).maximumFontSize;
 
