@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Dec 2022 19:18:30 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.119.1
+
+Thu, 15 Dec 2022 19:18:30 GMT
+
+### Patches
+
+- Update comment on why accessible can't be set to true on iOS (78454019+lyzhan7@users.noreply.github.com)
 
 ## 0.119.0
 

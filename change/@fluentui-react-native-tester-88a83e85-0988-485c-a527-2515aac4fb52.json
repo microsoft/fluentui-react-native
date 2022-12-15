@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update comment on why accessible can't be set to true on iOS",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "78454019+lyzhan7@users.noreply.github.com",
-  "dependentChangeType": "patch"
-}
