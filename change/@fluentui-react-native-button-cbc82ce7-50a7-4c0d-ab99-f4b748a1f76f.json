@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Add maximumSize",
-  "packageName": "@fluentui-react-native/button",
-  "email": "adgleitm@microsoft.com",
-  "dependentChangeType": "patch"
-}
