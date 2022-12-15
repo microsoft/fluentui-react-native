@@ -14,7 +14,7 @@ export interface FontStyleTokens {
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
   fontLetterSpacing?: TextStyle['letterSpacing'];
-  // TODO(#2268): Import these from RN directly
+  // Props below are used on iOS only. TODO(#2268): Import these from RN directly
   fontDynamicTypeRamp?: string;
   fontMaximumSize?: number;
 }
