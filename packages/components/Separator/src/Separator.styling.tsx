@@ -15,7 +15,7 @@ export const stylingSettings: UseStylingOptions<SeparatorProps, SeperatorSlotPro
           style: {
             ...(tokens.vertical ? { borderLeftWidth: tokens.separatorWidth } : { borderTopWidth: tokens.separatorWidth }),
             ...(tokens.color && { borderColor: tokens.color }),
-            ...(Platform.OS === 'android' && { marginStart: tokens.insetSpacing }),
+            ...((Platform.OS === 'android' || Platform.OS === 'ios') && { marginStart: tokens.insetSpacing }),
           },
         };
       },
