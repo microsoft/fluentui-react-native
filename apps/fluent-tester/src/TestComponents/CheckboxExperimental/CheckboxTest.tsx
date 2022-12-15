@@ -48,20 +48,20 @@ const SizeCheckbox: React.FunctionComponent = () => {
 const OtherCheckbox: React.FunctionComponent = () => {
   const [isChecked, setisChecked] = React.useState(false);
 
-  const toggleCheckedTrue = React.useCallback(() => {
+  const setCheckedTrue = React.useCallback(() => {
     setisChecked(true);
   }, []);
 
-  const toggleCheckedFalse = React.useCallback(() => {
+  const setCheckedFalse = React.useCallback(() => {
     setisChecked(false);
   }, []);
 
   return (
     <View style={commonStyles.customisedChecked}>
-      <Button onClick={toggleCheckedTrue} size="small">
+      <Button onClick={setCheckedTrue} size="small">
         Turn Checkbox True
       </Button>
-      <Button onClick={toggleCheckedFalse} size="small">
+      <Button onClick={setCheckedFalse} size="small">
         Turn Checkbox False
       </Button>
 
