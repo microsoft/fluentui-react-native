@@ -154,7 +154,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
 
-    // TODO(#2268): RN Text doesn't recognize these properties yet, so don't let it leak through or RN will complain about it being an invalid prop
+    // TODO(#2268): RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props
     delete (mergedProps.style as TextTokens).dynamicTypeRamp;
     delete (mergedProps.style as TextTokens).maximumFontSize;
 
