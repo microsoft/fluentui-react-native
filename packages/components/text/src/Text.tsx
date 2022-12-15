@@ -119,20 +119,14 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // tokenStyle.fontSize and tokenStyle.lineHeight can also be strings (e.g., "14px").
   // Therefore, we only support scaling for number-based size values in order to avoid any messy calculations.
   if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
-    const scaleFactor = fontMetricsScaleFactors[dynamicTypeVariant] ?? 1;
+    const requestedScaleFactor = fontMetricsScaleFactors[dynamicTypeVariant] ?? 1;
+    const maximumScaleFactor = maximumFontSize / tokenStyle.fontSize;
+    const scaleFactor = Math.min(requestedScaleFactor, maximumScaleFactor);
+
     scaleStyleAdjustments = {
       fontSize: tokenStyle.fontSize * scaleFactor,
-      lineHeight: tokenStyle.lineHeight * scaleFactor,
+      lineHeight: tokenStyle.lineHeight * scaleFactor, // scale accordingly with fontSize
     };
-    if (scaleStyleAdjustments.fontSize > maximumFontSize) {
-      scaleStyleAdjustments = {
-        fontSize: maximumFontSize,
-        // Scale line height accordingly as well
-        // We use "as number" below because TypeScript's type checker thinks scaleStyleAdjustments.fontSize
-        // could be a named font size, even though we just wrote it as a number a few lines up.
-        lineHeight: scaleStyleAdjustments.lineHeight * (maximumFontSize / (scaleStyleAdjustments.fontSize as number)),
-      };
-    }
   }
   // ]TODO(#2268)
 
