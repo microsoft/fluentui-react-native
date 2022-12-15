@@ -5,39 +5,82 @@ import {
   HOMEPAGE_MENU_BUTTON,
   MENUITEM_TEST_COMPONENT,
   MENUPOPOVER_TEST_COMPONENT,
-  MENU_DEFOCUS_BUTTON,
+  MENUITEM_DISABLED_COMPONENT,
+  MENUITEM_FOURTH_COMPONENT,
+  MENU_CALLBACK_RESET_BUTTON,
+  MENUITEM_CALLBACK_LABEL,
 } from '../../../../fluent-tester/src/TestComponents/Menu/consts';
 import { BasePage, By } from '../../common/BasePage';
-import { Keys, ExpandCollapseState, Attribute } from '../../common/consts';
+import { Keys, Attribute, AttributeValue } from '../../common/consts';
 
 /* This enum gives the spec file an EASY way to interact with SPECIFIC UI elements on the page.
  * The spec file should import this enum and use it when wanting to interact with different elements on the page. */
 export const enum MenuComponentSelector {
-  PrimaryComponent, //this._primaryComponent
-  SecondaryComponent, //this._secondaryComponent
-  TertiaryComponent, //this._tertiaryComponent
+  MenuTrigger = 0, //this._primaryComponent
+  FirstMenuItem,
+  SecondMenuItem,
+  ThirdMenuItem,
+  FourthMenuItem,
 }
 
 class MenuPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async didMenuOpen(): Promise<boolean> {
-    await browser.waitUntil(async () => await this.menuIsExpanded(), {
-      timeout: this.waitForUiEvent,
-      timeoutMsg: 'The Menu did not open.',
-      interval: 1000,
-    });
 
+  /** On the topic of openMenu() and closeMenu() being two methods, it is a fair suggestion to say that these can be combined into
+   *  a single function call. However, I think that separating these actions because (1) the actions to open vs close the menu are
+   *  different enough compared to a toggleable like checkbox and (2) readability - it is easier to understand MenuPageObject.openMenu()
+   *  vs MenuPageObject.setMenuState(AttributeValue.expanded) and vice-versa with close.
+   */
+  async openMenu(): Promise<void> {
+    if (!(await this.menuIsExpanded())) {
+      await this.click(MenuComponentSelector.MenuTrigger);
+      await this.waitForMenuToOpen();
+    }
+  }
+
+  async closeMenu(): Promise<void> {
+    if (await this.menuIsExpanded()) {
+      await this.sendKey(MenuComponentSelector.FirstMenuItem, Keys.ESCAPE);
+      await this.waitForCondition(async () => (await this.menuIsExpanded()) === false, 'The Menu did not close.', this.waitForUiEvent, 500);
+    }
+  }
+
+  async waitForMenuToOpen(): Promise<boolean> {
+    await this.waitForCondition(async () => await this.menuIsExpanded(), 'The Menu did not open.', this.waitForUiEvent, 500);
     return await this.menuIsExpanded();
   }
 
   async menuIsExpanded(): Promise<boolean> {
-    return await (await this._secondaryComponent).isDisplayed();
+    const menuItem = await this._firstMenuItem;
+    if (menuItem.error) {
+      // Not displayed because the item can't be found by appium
+      return false;
+    }
+    return await menuItem.isDisplayed();
   }
 
-  async getMenuExpandCollapseState(): Promise<ExpandCollapseState> {
-    return (await this.getElementAttribute(await this._primaryComponent, Attribute.ExpandCollapseState)) as ExpandCollapseState;
+  async waitForItemCallbackToFire(timesFired: number): Promise<void> {
+    await this.waitForCondition(
+      async () => await this.itemOnClickHasFired(timesFired),
+      `MenuItem callback failed to fire ${timesFired} times.`,
+      this.waitForUiEvent,
+      500,
+    );
+  }
+
+  async itemOnClickHasFired(timesFired: number): Promise<boolean> {
+    return (await (await this._callbackLabel).getText()).includes(timesFired.toString());
+  }
+
+  async componentIsFocused(selector: MenuComponentSelector): Promise<boolean> {
+    const component = await this.getMenuComponentSelector(selector);
+    return (await this.getElementAttribute(component, Attribute.IsFocused)) === AttributeValue.true;
+  }
+
+  async getMenuExpandCollapseState(): Promise<AttributeValue> {
+    return (await this.getElementAttribute(await this._primaryComponent, Attribute.ExpandCollapseState)) as AttributeValue;
   }
 
   async getMenuItemAccessibilityLabel(componentSelector: MenuComponentSelector): Promise<string> {
@@ -49,7 +92,7 @@ class MenuPageObject extends BasePage {
   }
 
   async getMenuItemAccessibilityRole(): Promise<string> {
-    return await this.getElementAttribute(await this._secondaryComponent, Attribute.AccessibilityRole);
+    return await this.getElementAttribute(await this._firstMenuItem, Attribute.AccessibilityRole);
   }
 
   /* Sends a Keyboarding command on a specific UI element */
@@ -57,24 +100,30 @@ class MenuPageObject extends BasePage {
     await (await this.getMenuComponentSelector(menuComponentSelector)).addValue(key);
   }
 
+  async click(selector: MenuComponentSelector): Promise<void> {
+    await (await this.getMenuComponentSelector(selector)).click();
+  }
+
   /* Returns the correct WebDriverIO element from the Button Selector */
-  async getMenuComponentSelector(menuComponentSelector?: MenuComponentSelector): Promise<WebdriverIO.Element> {
+  async getMenuComponentSelector(menuComponentSelector: MenuComponentSelector): Promise<WebdriverIO.Element> {
     switch (menuComponentSelector) {
-      case MenuComponentSelector.SecondaryComponent:
-        return await this._secondaryComponent;
-      case MenuComponentSelector.TertiaryComponent:
-        return await this._tertiaryComponent;
-      default:
+      case MenuComponentSelector.MenuTrigger:
         return await this._primaryComponent;
+      case MenuComponentSelector.FirstMenuItem:
+        return await this._firstMenuItem;
+      case MenuComponentSelector.SecondMenuItem:
+        return await this._secondMenuItem;
+      case MenuComponentSelector.ThirdMenuItem:
+        return await this._thirdMenuItem;
+      case MenuComponentSelector.FourthMenuItem:
+        return await this._fourthMenuItem;
     }
   }
 
   async resetTest() {
-    // Both escape on the menu trigger to hard dismiss menu and click defocus to reset focus
-    if (await this.menuIsExpanded()) {
-      await this.sendKey(MenuComponentSelector.PrimaryComponent, Keys.ESCAPE);
-      await (await this._defocusButton).click();
-    }
+    // Both escape on the menu trigger to hard dismiss menu and click callback reset to reset focus
+    await this.closeMenu();
+    await (await this._callbackResetButton).click();
   }
 
   /*****************************************/
@@ -92,20 +141,32 @@ class MenuPageObject extends BasePage {
     return By(MENUTRIGGER_TEST_COMPONENT);
   }
 
-  get _secondaryComponent() {
+  get _firstMenuItem() {
     return By(MENUITEM_TEST_COMPONENT);
   }
 
-  get _tertiaryComponent() {
+  get _secondMenuItem() {
+    return By(MENUITEM_DISABLED_COMPONENT);
+  }
+
+  get _thirdMenuItem() {
     return By(MENUITEM_NO_A11Y_LABEL_COMPONENT);
+  }
+
+  get _fourthMenuItem() {
+    return By(MENUITEM_FOURTH_COMPONENT);
   }
 
   get _pageButton() {
     return By(HOMEPAGE_MENU_BUTTON);
   }
 
-  get _defocusButton() {
-    return By(MENU_DEFOCUS_BUTTON);
+  get _callbackResetButton() {
+    return By(MENU_CALLBACK_RESET_BUTTON);
+  }
+
+  get _callbackLabel() {
+    return By(MENUITEM_CALLBACK_LABEL);
   }
 }
 

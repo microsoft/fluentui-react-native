@@ -77,36 +77,36 @@ export const fluentTesterStyles = StyleSheet.create({
     alignItems: 'stretch',
     padding: 4,
   },
-
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
+  headerWithBackButton: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    display: 'flex',
+  },
   testHeader: {
     marginBottom: 8,
     marginTop: 4,
   },
-
   testList: {
     minWidth: 160,
     flexShrink: 0,
     flexGrow: 0,
     flexDirection: 'row',
   },
-
   testListContainerStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
   },
-
   scrollViewStyle: {
     flexDirection: 'column',
     alignItems: 'stretch',
-    // height: 200,
-    // width: 200,
   },
-
   scrollViewContainer: {
     height: 250,
     width: 150,
@@ -114,19 +114,16 @@ export const fluentTesterStyles = StyleSheet.create({
     flexGrow: 0,
     flexDirection: 'column',
   },
-
   testListItem: {
     width: '100%',
     borderRadius: 0,
     justifyContent: 'flex-start',
   },
-
   testListSeparator: { marginHorizontal: 8 },
-
   testSection: {
-    flexGrow: 1,
+    width: '100%',
+    padding: 8,
   },
-
   noTest: {
     alignSelf: 'center',
     fontSize: 18,

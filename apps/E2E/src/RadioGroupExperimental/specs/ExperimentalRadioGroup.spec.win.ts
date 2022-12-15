@@ -30,7 +30,6 @@ describe('RadioGroup/Radio Accessibility Testing', () => {
   /* Scrolls and waits for the RadioGroup to be visible on the Test Page */
   beforeEach(async () => {
     await RadioGroupExperimentalPageObject.scrollToTestElement();
-    await RadioGroupExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
   });
 
   it("Validate RadioGroup's accessibilityRole is correct", async () => {
@@ -74,7 +73,6 @@ describe('RadioGroup Functional Testing', async () => {
   /* This resets the RadioGroup state by clicking/selecting the 1st Radio in the RadioGroup */
   beforeEach(async () => {
     await RadioGroupExperimentalPageObject.scrollToTestElement();
-    await RadioGroupExperimentalPageObject.waitForPrimaryElementDisplayed(PAGE_TIMEOUT);
 
     await RadioGroupExperimentalPageObject.resetRadioGroupSelection();
   });
