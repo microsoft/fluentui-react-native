@@ -1,14 +1,14 @@
 steps:
-- task: Cache@2
-  displayName: 'Caching System for AVD'
-  inputs:
-    key: 'AVD_IMAGES_PIXEL'
-    path: |
-      ~/.android/avd/*
-      ~/.android/adb*
-    cacheHitVar: 'AVD_IMAGES_RESTORED'
-  continueOnError: true
-  condition: succeededOrFailed()
+  - task: Cache@2
+    displayName: 'Caching System for AVD'
+    inputs:
+      key: 'AVD_IMAGES_PIXEL'
+      path: |
+        ~/.android/avd/*
+        ~/.android/adb*
+      cacheHitVar: 'AVD_IMAGES_RESTORED'
+    continueOnError: true
+    condition: succeededOrFailed()
 
   - task: Bash@3
     displayName: 'Android Emulator Setup'
