@@ -32,7 +32,7 @@ describe('Link Accessibility Testing', () => {
         Attribute.AccessibilityRole,
         LINK_A11Y_ROLE,
       ),
-    );
+    ).toBeTrue();
 
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
@@ -44,7 +44,7 @@ describe('Link Accessibility Testing', () => {
         Attribute.AccessibilityLabel,
         EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL,
       ),
-    );
+    ).toBeTrue();
 
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
