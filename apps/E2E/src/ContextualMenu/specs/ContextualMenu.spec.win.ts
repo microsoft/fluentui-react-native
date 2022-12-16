@@ -31,7 +31,7 @@ describe('ContextualMenu Functional Tests', async () => {
     /* Click on the ContextualMenu */
     await ContextualMenuPageObject.click(ContextualMenuPageObject._contextualMenu);
 
-    await expect(ContextualMenuPageObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT)).toBeTruthy(
+    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT)).toBeTruthy(
       'Clicked the ContextualMenu button, but the ContextualMenu items failed to open and display.',
     );
 
@@ -42,7 +42,7 @@ describe('ContextualMenu Functional Tests', async () => {
     /* Type a space on the ContextualMenu */
     await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.SPACE]);
 
-    await expect(ContextualMenuPageObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT)).toBeTruthy(
+    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT)).toBeTruthy(
       "Pressed 'SPACE' on the ContextualMenu button, but the ContextualMenu items failed to open and display.",
     );
 

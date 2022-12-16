@@ -25,13 +25,13 @@ describe('Link Accessibility Testing', () => {
     await LinkPageObject.scrollToTestElement();
   });
 
-  it('Link - Validate accessibilityRole is correct', async () => {
+  it('Validate accessibilityRole is correct', async () => {
     await expect(await LinkPageObject.compareAttribute(LinkPageObject._primaryComponent, Attribute.AccessibilityRole, LINK_A11Y_ROLE));
 
     await expect(await LinkPageObject.didAssertPopup()).toBeFalsy(LinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
-  it('Link - Set accessibilityLabel', async () => {
+  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
     await expect(
       await LinkPageObject.compareAttribute(LinkPageObject._primaryComponent, Attribute.AccessibilityLabel, LINK_ACCESSIBILITY_LABEL),
     );

@@ -25,7 +25,7 @@ describe('Link Accessibility Testing', () => {
     await ExperimentalLinkPageObject.scrollToTestElement();
   });
 
-  it('Link - Validate accessibilityRole is correct', async () => {
+  it('Validate accessibilityRole is correct', async () => {
     await expect(
       await ExperimentalLinkPageObject.compareAttribute(
         ExperimentalLinkPageObject._primaryComponent,
@@ -37,7 +37,7 @@ describe('Link Accessibility Testing', () => {
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped u
   });
 
-  it('Link - Set accessibilityLabel', async () => {
+  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
     await expect(
       await ExperimentalLinkPageObject.compareAttribute(
         ExperimentalLinkPageObject._primaryComponent,
