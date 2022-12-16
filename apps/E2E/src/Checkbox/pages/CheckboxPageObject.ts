@@ -15,17 +15,19 @@ class CheckboxPageObject extends BasePage {
     return await (await this._primaryComponent).isSelected();
   }
 
-  async waitForCheckboxChecked(timeout?: number): Promise<void> {
-    await this.waitForCondition(async () => await this.isCheckboxChecked(), 'The Checkbox was not toggled correctly.', timeout);
+  async waitForCheckboxToggle(newState: boolean, errorMessage?: string): Promise<boolean> {
+    if ((await this.isCheckboxChecked()) !== newState) {
+      await this.waitForCondition(async () => (await this.isCheckboxChecked()) === newState, errorMessage);
+    }
+    return (await this.isCheckboxChecked()) === newState;
   }
 
   async toggleCheckbox(newState: boolean) {
-    const state = await this.isCheckboxChecked();
-    if (state !== newState) {
+    if ((await this.isCheckboxChecked()) !== newState) {
       await this.click(this._primaryComponent);
-      await this.waitForCondition(
-        async () => (await this.isCheckboxChecked()) === newState,
-        `Clicked the primary checkbox to turn it ${newState ? 'on' : 'off'}, but it failed to change.`,
+      await this.waitForCheckboxToggle(
+        newState,
+        `Clicked the primary checkbox to turn it ${newState ? 'on' : 'off'}, but it failed to change states.`,
       );
     }
   }
