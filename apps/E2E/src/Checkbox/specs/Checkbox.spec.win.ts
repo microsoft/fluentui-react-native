@@ -63,7 +63,7 @@ describe('Checkbox Functional Testing', () => {
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
 
-    await CheckboxPageObject.toggleCheckboxToUnchecked();
+    await CheckboxPageObject.setCheckboxCheckState(false);
   });
 
   it("Click on a Checkbox -> Validate it toggles correctly AND calls the user's onChange", async () => {
@@ -79,9 +79,9 @@ describe('Checkbox Functional Testing', () => {
     );
 
     /* Validate the Checkbox is toggled ON */
-    await expect(await CheckboxPageObject.isCheckboxChecked()).toBeTruthy('The primary checkbox should have been toggled on.');
+    await expect(await CheckboxPageObject.isCheckboxChecked()).toBeTruthy('The primary checkbox should have been toggled on via click.');
 
-    await CheckboxPageObject.clickComponent();
+    await CheckboxPageObject.click(CheckboxPageObject._primaryComponent);
 
     /* Validate the Checkbox is toggled OFF */
     await expect(await CheckboxPageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should have been toggled off.');
@@ -89,15 +89,28 @@ describe('Checkbox Functional Testing', () => {
     await expect(await CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "SPACE" on a Checkbox and verify it toggles', async () => {
+  it("Press 'SPACE' on a Checkbox and verify it toggles correctly AND calls the user's onChange", async () => {
+    /* Validate the Checkbox is initially toggled OFF */
+    await expect(await CheckboxPageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should initially be toggled off.');
+
     /* Presses the "space bar" to select the Checkbox */
     await CheckboxPageObject.sendKeys(CheckboxPageObject._primaryComponent, [Keys.SPACE]);
     await CheckboxPageObject.waitForCheckboxChecked(PAGE_TIMEOUT);
 
-    /* Validate the Checkbox is selected */
-    await expect(await CheckboxPageObject.isCheckboxChecked()).toBeTruthy(
+    await expect(await CheckboxPageObject.didOnChangeCallbackFire()).toBeTruthy(
       "Primary checkbox failed to fire onChange() callback via 'Space' press.",
     );
+
+    /* Validate the Checkbox is toggled ON */
+    await expect(await CheckboxPageObject.isCheckboxChecked()).toBeTruthy(
+      "Primary checkbox should have been toggled on via 'Space' press.",
+    );
+
+    await CheckboxPageObject.sendKeys(CheckboxPageObject._primaryComponent, [Keys.SPACE]);
+
+    /* Validate the Checkbox is toggled OFF */
+    await expect(await CheckboxPageObject.isCheckboxChecked()).toBeFalsy('The primary checkbox should have been toggled off.');
+
     await expect(await CheckboxPageObject.didAssertPopup()).toBeFalsy(CheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 });

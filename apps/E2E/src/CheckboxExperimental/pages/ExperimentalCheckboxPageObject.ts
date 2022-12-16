@@ -19,10 +19,14 @@ class ExperimentalCheckboxPageObject extends BasePage {
     await this.waitForCondition(async () => await this.isCheckboxChecked(), 'The Checkbox was not toggled correctly.', timeout);
   }
 
-  /* Useful in beforeEach() hook to reset the checkbox before every test */
-  async toggleCheckboxToUnchecked(): Promise<void> {
-    if (await this.isCheckboxChecked()) {
-      await (await this._primaryComponent).click();
+  async setCheckboxCheckState(setChecked: boolean) {
+    const state = await this.isCheckboxChecked();
+    if (state !== setChecked) {
+      await this.click(this._primaryComponent);
+      await this.waitForCondition(
+        async () => (await this.isCheckboxChecked()) === setChecked,
+        `Clicked the primary checkbox to turn it ${setChecked ? 'on' : 'off'}, but it failed to change.`,
+      );
     }
   }
 

@@ -57,7 +57,7 @@ describe('Callout Functional Testing', () => {
     await CalloutPageObject.openCalloutAndWaitForLoad();
   });
 
-  it('Open the callout and validate it loaded correctly (visible)', async () => {
+  it('Open the callout via button press -> Validate that it is visible and loaded', async () => {
     await expect(await CalloutPageObject.didCalloutLoad()).toBeTruthy('The callout failed to visibly display.');
   });
 

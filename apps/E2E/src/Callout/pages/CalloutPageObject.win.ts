@@ -19,7 +19,7 @@ class CalloutPageObject extends BasePage {
     await (await this._buttonToOpenCallout).click();
     await this.waitForCondition(
       async () => await this.didCalloutLoad(),
-      'The testing callout failed to display after attempting to open it.',
+      'Clicked the button to open the Callout, but the Callout did not open correctly.',
     );
   }
 
