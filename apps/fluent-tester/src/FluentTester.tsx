@@ -202,7 +202,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    // TODO: Figure out why making this view accessible breaks element querying on iOS.
+    // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
     <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
       <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
       <HeaderSeparator />
