@@ -1,5 +1,5 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
-import ExperimentalLinkPageObject from '../pages/LinkPageObject';
+import ExperimentalLinkPageObject from '../pages/ExperimentalLinkPageObject';
 import { EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/LinkExperimental/consts';
 import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Attribute } from '../../common/consts';
 
