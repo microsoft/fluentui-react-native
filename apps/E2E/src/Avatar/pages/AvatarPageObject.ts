@@ -50,6 +50,10 @@ class AvatarPageObject extends BasePage {
   get _pageButtonName(): string {
     return HOMEPAGE_AVATAR_BUTTON;
   }
+  
+  get _pageName() {
+    return AVATAR_TESTPAGE;
+  }
 
   get _primaryComponent() {
     return By(AVATAR_TEST_COMPONENT);
