@@ -63,7 +63,7 @@ describe('Checkbox Functional Testing', () => {
   beforeEach(async () => {
     await CheckboxPageObject.scrollToTestElement();
 
-    await CheckboxPageObject.setCheckboxCheckState(false);
+    await CheckboxPageObject.toggleCheckbox(false);
   });
 
   it("Click on a Checkbox -> Validate it toggles correctly AND calls the user's onChange", async () => {

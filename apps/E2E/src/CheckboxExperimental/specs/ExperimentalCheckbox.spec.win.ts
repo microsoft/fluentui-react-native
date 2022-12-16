@@ -70,7 +70,7 @@ describe('Checkbox Functional Testing', () => {
   beforeEach(async () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
 
-    await ExperimentalCheckboxPageObject.setCheckboxCheckState(false);
+    await ExperimentalCheckboxPageObject.toggleCheckbox(false);
   });
 
   it("Click on a Checkbox -> Validate it toggles correctly AND calls the user's onChange", async () => {
@@ -98,7 +98,7 @@ describe('Checkbox Functional Testing', () => {
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Click the "SPACE" on a Checkbox and verify it toggles', async () => {
+  it("Press 'SPACE' on a Checkbox and verify it toggles correctly AND calls the user's onChange", async () => {
     /* Validate the Checkbox is initially toggled OFF */
     await expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeFalsy(
       'The primary checkbox should initially be toggled off.',
