@@ -10,6 +10,7 @@ import {
   EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
 } from './consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
   const [lastMenuItemClicked, setLastMenuItemClicked] = React.useState(null);
@@ -42,8 +43,8 @@ export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                testID={EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT}
                 accessibilityLabel={EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL}
+                {...testProps(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT)}
               />
             </View>
           </View>
@@ -54,7 +55,7 @@ export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
-                testID={EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT}
+                {...testProps(EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT)}
               />
             </View>
           </View>

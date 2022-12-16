@@ -1,6 +1,7 @@
 import { Avatar } from '@fluentui-react-native/avatar';
 import * as React from 'react';
 import { View } from 'react-native';
+import { testProps } from '../Common/TestProps';
 import {
   AVATAR_ACCESSIBILITY_LABEL,
   AVATAR_ACCESSIBILITY_HINT,
@@ -13,12 +14,12 @@ export const E2EAvatarTest: React.FunctionComponent = () => {
   return (
     <View>
       <Avatar
-        testID={AVATAR_TEST_COMPONENT}
         accessibilityHint={AVATAR_ACCESSIBILITY_HINT}
         accessibilityLabel={AVATAR_ACCESSIBILITY_LABEL}
         accessibilityRole={AVATAR_ACCESSIBILITY_ROLE}
+        {...testProps(AVATAR_TEST_COMPONENT)}
       />
-      <Avatar testID={AVATAR_SECONDARY_TEST_COMPONENT} name="Richard" badge={{ status: 'available' }} />
+      <Avatar name="Richard" badge={{ status: 'available' }} {...testProps(AVATAR_SECONDARY_TEST_COMPONENT)} />
     </View>
   );
 };

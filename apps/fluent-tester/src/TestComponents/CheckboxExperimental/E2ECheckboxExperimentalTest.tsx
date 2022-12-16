@@ -11,6 +11,7 @@ import {
 } from './consts';
 import { Stack } from '@fluentui-react-native/stack';
 import { Text } from '@fluentui/react-native';
+import { testProps } from '../Common/TestProps';
 
 export const E2ECheckboxExperimentalTest: React.FunctionComponent = () => {
   const [checkboxPressed, setCheckboxPressed] = React.useState(false);
@@ -29,11 +30,11 @@ export const E2ECheckboxExperimentalTest: React.FunctionComponent = () => {
           accessibilityLabel={EXPERIMENTAL_CHECKBOX_ACCESSIBILITY_LABEL}
           disabled={false}
           label="Testing accessibilityLabel"
-          testID={EXPERIMENTAL_CHECKBOX_TEST_COMPONENT}
           onChange={onClick}
+          {...testProps(EXPERIMENTAL_CHECKBOX_TEST_COMPONENT)}
         />
-        <Checkbox label={EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL} testID={EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT} />
-        {checkboxPressed ? <Text testID={EXPERIMENTAL_CHECKBOX_ON_PRESS}>Checkbox Selected</Text> : null}
+        <Checkbox label={EXPERIMENTAL_CHECKBOX_TEST_COMPONENT_LABEL} {...testProps(EXPERIMENTAL_CHECKBOX_NO_A11Y_LABEL_COMPONENT)} />
+        {checkboxPressed ? <Text {...testProps(EXPERIMENTAL_CHECKBOX_ON_PRESS)}>Checkbox Selected</Text> : null}
       </Stack>
     </View>
   );

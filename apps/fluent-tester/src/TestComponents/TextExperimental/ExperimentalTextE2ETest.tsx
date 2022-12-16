@@ -9,6 +9,7 @@ import {
   EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_TEXT_CONTENT,
 } from './consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2EExperimentalTextTest: React.FunctionComponent = () => {
   return (
@@ -16,12 +17,12 @@ export const E2EExperimentalTextTest: React.FunctionComponent = () => {
       <Stack style={stackStyle} gap={5}>
         <Text
           variant="captionStandard"
-          testID={EXPERIMENTAL_TEXT_TEST_COMPONENT}
           accessibilityLabel={EXPERIMENTAL_TEXT_ACCESSIBILITY_LABEL}
+          {...testProps(EXPERIMENTAL_TEXT_TEST_COMPONENT)}
         >
           Testing Text Component - Accessibility Label Set
         </Text>
-        <Text variant="captionStandard" testID={EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT}>
+        <Text variant="captionStandard" {...testProps(EXPERIMENTAL_TEXT_NO_A11Y_LABEL_COMPONENT)}>
           {EXPERIMENTAL_TEXT_CONTENT}
         </Text>
       </Stack>

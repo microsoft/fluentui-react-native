@@ -4,12 +4,13 @@ import { Text } from '@fluentui-react-native/experimental-text';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
 import { HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON } from './consts';
+import { testProps } from '../Common/TestProps';
 
 export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <Text variant="captionStandard" testID={HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON}>
+        <Text variant="captionStandard" {...testProps(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON)}>
           CaptionStandard
         </Text>
         <Text variant="secondaryStandard">SecondaryStandard</Text>

@@ -13,17 +13,18 @@ import {
   EXPERIMENTAL_TABS_ITEM_NO_A11Y_LABEL_COMPONENT,
   EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT_LABEL,
 } from './consts';
+import { testProps } from '../Common/TestProps';
 
 export const E2ETestExperimentalTabs: React.FunctionComponent = () => {
   return (
     <View>
       <View style={stackStyle}>
-        <Tabs label="Tabs" testID={EXPERIMENTAL_TABS_TEST_COMPONENT} accessibilityLabel={EXPERIMENTAL_TABS_ACCESSIBILITY_LABEL}>
+        <Tabs label="Tabs" accessibilityLabel={EXPERIMENTAL_TABS_ACCESSIBILITY_LABEL} {...testProps(EXPERIMENTAL_TABS_TEST_COMPONENT)}>
           <TabsItem
             headerText="Home"
             itemKey="A"
-            testID={EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT}
             accessibilityLabel={EXPERIMENTAL_TABS_ITEM_ACCESSIBILITY_LABEL}
+            {...testProps(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT)}
           >
             <Text>Tabs #1</Text>
           </TabsItem>
@@ -36,11 +37,11 @@ export const E2ETestExperimentalTabs: React.FunctionComponent = () => {
         </Tabs>
       </View>
       <View style={stackStyle}>
-        <Tabs label={EXPERIMENTAL_TABS_TEST_COMPONENT_LABEL} testID={EXPERIMENTAL_TABS_NO_A11Y_LABEL_COMPONENT}>
+        <Tabs label={EXPERIMENTAL_TABS_TEST_COMPONENT_LABEL} {...testProps(EXPERIMENTAL_TABS_NO_A11Y_LABEL_COMPONENT)}>
           <TabsItem
             headerText={EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT_LABEL}
             itemKey="A"
-            testID={EXPERIMENTAL_TABS_ITEM_NO_A11Y_LABEL_COMPONENT}
+            {...testProps(EXPERIMENTAL_TABS_ITEM_NO_A11Y_LABEL_COMPONENT)}
           >
             <Text>Tabs #1</Text>
           </TabsItem>

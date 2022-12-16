@@ -17,6 +17,7 @@ import {
   FOCUSZONE_DIRECTION_PICKER,
 } from './consts';
 import { focusZoneTestStyles, GridButton } from './styles';
+import { testProps } from '../Common/TestProps';
 
 export const FocusZoneDirections: FocusZoneDirection[] = ['bidirectional', 'horizontal', 'vertical', 'none'];
 
@@ -28,9 +29,9 @@ export const FocusZoneListWrapper: React.FunctionComponent<FocusZoneListWrapperP
   const buttonProps: ButtonProps = { children: 'Click to Focus', style: focusZoneTestStyles.listWrapperButton };
   return (
     <>
-      <Button {...buttonProps} testID={beforeID} />
+      <Button {...buttonProps} {...testProps(beforeID)} />
       {children}
-      <Button {...buttonProps} testID={afterID} />
+      <Button {...buttonProps} {...testProps(afterID)} />
     </>
   );
 };
@@ -53,10 +54,10 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
               const gridIndex = heightIndex * props.gridWidth + widthIndex + 1;
               return (
                 <GridButton
-                  testID={props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex) : undefined}
                   key={widthIndex}
                   style={focusZoneTestStyles.focusZoneButton}
                   componentRef={gridIndex === props.tabbableIdx ? props.tabRef : undefined}
+                  {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex) : undefined)}
                 >
                   <Text>{gridIndex}</Text>
                 </GridButton>
@@ -81,11 +82,10 @@ export const FocusZone2D: React.FunctionComponent = () => {
   return (
     <View style={commonTestStyles.root}>
       <View style={commonTestStyles.settings}>
-        <Text variant="subheaderSemibold" testID={FOCUSZONE_TEST_COMPONENT}>
+        <Text variant="subheaderSemibold" {...testProps(FOCUSZONE_TEST_COMPONENT)}>
           FocusZone Direction
         </Text>
         <MenuButton
-          testID={FOCUSZONE_DIRECTION_PICKER}
           content={`Current direction: ${direction}`}
           menuItems={FocusZoneDirections.map((dir) => ({
             itemKey: dir,
@@ -93,20 +93,31 @@ export const FocusZone2D: React.FunctionComponent = () => {
             testID: FOCUSZONE_DIRECTION_ID(dir),
           }))}
           onItemClick={(dir) => setDirection(dir as FocusZoneDirection)}
+          {...testProps(FOCUSZONE_DIRECTION_PICKER)}
         />
-        <Switch testID={FOCUSZONE_TWO_DIM_SWITCH} label="2D Navigation" checked={is2DNav} onChange={(_, checked) => set2dNav(checked)} />
-        <Switch testID={FOCUSZONE_DISABLED_SWITCH} label="Disabled" checked={isDisabled} onChange={(_, checked) => setDisabled(checked)} />
         <Switch
-          testID={FOCUSZONE_CIRCLE_NAV_SWITCH}
+          {...testProps(FOCUSZONE_TWO_DIM_SWITCH)}
+          label="2D Navigation"
+          checked={is2DNav}
+          onChange={(_, checked) => set2dNav(checked)}
+        />
+        <Switch
+          {...testProps(FOCUSZONE_DISABLED_SWITCH)}
+          label="Disabled"
+          checked={isDisabled}
+          onChange={(_, checked) => setDisabled(checked)}
+        />
+        <Switch
+          {...testProps(FOCUSZONE_CIRCLE_NAV_SWITCH)}
           label="Circular Navigation"
           checked={isCircularNav}
           onChange={(_, checked) => setIsCircularNav(checked)}
         />
         <Switch
-          testID={FOCUSZONE_DEFAULT_TABBABLE_SWITCH}
           label="Use Default Tabbable Element"
           checked={useDeffaultTabbableElement}
           onChange={(_, checked) => setUseDeffaultTabbableElement(checked)}
+          {...testProps(FOCUSZONE_DEFAULT_TABBABLE_SWITCH)}
         />
       </View>
 
