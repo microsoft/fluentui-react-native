@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Clarify V2Usage on iOS",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
