@@ -4,8 +4,8 @@ steps:
     inputs:
       key: 'AVD_IMAGES_PIXEL'
       path: |
-        $HOME/.android/avd/*
-        $HOME/.android/adb*
+        '$(HOME)/.android/avd/*'
+        '$(HOME)/.android/adb*'
       cacheHitVar: 'AVD_IMAGES_RESTORED'
     continueOnError: true
     condition: succeededOrFailed()
