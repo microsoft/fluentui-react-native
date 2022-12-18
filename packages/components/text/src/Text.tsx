@@ -50,7 +50,7 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 
-  // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
+  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
   const fontMetricsScaleFactors = useFontMetricsScaleFactors();
 
   const textAlign = I18nManager.isRTL
@@ -88,7 +88,6 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     color,
     variant,
     fontFamily: font == 'base' ? 'primary' : font,
-    fontMaximumSize: tokens.maximumFontSize,
     fontSize: globalTokens.font['size' + size],
     fontWeight: globalTokens.font.weight[weight] as FontWeightValue,
     // leave it undefined for tokens to be set by user
@@ -111,24 +110,21 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
 
-  // [GH #2268: Remove once RN Core properly supports Dynamic Type scaling
+  // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
   const dynamicTypeVariant = Platform.OS === 'ios' ? tokenStyle.dynamicTypeRamp : undefined;
-  const maximumFontSize = tokenStyle.maximumFontSize ?? Number.POSITIVE_INFINITY;
 
+  // [TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
   let scaleStyleAdjustments: TextTokens = emptyProps;
   // tokenStyle.fontSize and tokenStyle.lineHeight can also be strings (e.g., "14px").
   // Therefore, we only support scaling for number-based size values in order to avoid any messy calculations.
   if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
-    const requestedScaleFactor = fontMetricsScaleFactors[dynamicTypeVariant] ?? 1;
-    const maximumScaleFactor = maximumFontSize / tokenStyle.fontSize;
-    const scaleFactor = Math.min(requestedScaleFactor, maximumScaleFactor);
-
+    const scaleFactor = fontMetricsScaleFactors[dynamicTypeVariant] ?? 1;
     scaleStyleAdjustments = {
       fontSize: tokenStyle.fontSize * scaleFactor,
-      lineHeight: tokenStyle.lineHeight * scaleFactor, // scale accordingly with fontSize
+      lineHeight: tokenStyle.lineHeight * scaleFactor,
     };
   }
-  // ]GH #2268
+  // ]TODO(#2268)
 
   const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
   const filteredProps = {
@@ -148,16 +144,12 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
       ...keyProps,
       ...filteredProps,
       ...extra,
-      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
+      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
       onPress,
       numberOfLines: truncate || !wrap ? 1 : 0,
       style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
-
-    // GH #2268: RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props
-    delete (mergedProps.style as TextTokens).dynamicTypeRamp;
-    delete (mergedProps.style as TextTokens).maximumFontSize;
-
+    delete (mergedProps.style as TextTokens).dynamicTypeRamp; // TODO(#2268): RN Text doesn't recognize dynamicTypeRamp yet, so don't let it leak through or RN will complain about it being an invalid prop
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
         {children}

@@ -26,21 +26,8 @@ export const enum Attribute {
   IsFocused = 'HasKeyboardFocus',
   IsRequiredForForm = 'IsRequiredForForm',
   IsTogglePatternAvailable = 'IsTogglePatternAvailable',
-  TestID = 'AutomationId',
   ToggleState = 'Toggle.ToggleState',
 }
-
-export const attributeToEnumName = {
-  [Attribute.AccessibilityLabel]: 'AccessibilityLabel',
-  [Attribute.AccessibilityRole]: 'AccessibilityRole',
-  [Attribute.ExpandCollapseState]: 'ExpandCollapseState',
-  [Attribute.IsEnabled]: 'IsEnabled',
-  [Attribute.IsFocused]: 'IsFocused',
-  [Attribute.IsRequiredForForm]: 'IsRequiredForForm',
-  [Attribute.IsTogglePatternAvailable]: 'IsTogglePatternAvailable',
-  [Attribute.TestID]: 'TestID',
-  [Attribute.ToggleState]: 'ToggleState',
-};
 
 export const enum AttributeValue {
   on = '1',

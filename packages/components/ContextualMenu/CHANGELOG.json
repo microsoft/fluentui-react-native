@@ -2,63 +2,6 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
-      "date": "Thu, 15 Dec 2022 14:50:50 GMT",
-      "tag": "@fluentui-react-native/contextual-menu_v0.21.4",
-      "version": "0.21.4",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/callout to v0.21.43",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.13",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/icon to v0.16.3",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/interactive-hooks to v0.22.1",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/text to v0.19.0",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/tokens to v0.20.0",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @uifabricshared/foundation-compose to v1.12.27",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          },
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/contextual-menu",
-            "comment": "Bump @fluentui-react-native/pressable to v0.9.40",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          }
-        ]
-      }
-    },
-    {
       "date": "Fri, 09 Dec 2022 23:48:05 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.21.3",
       "version": "0.21.3",

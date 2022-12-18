@@ -1,18 +1,6 @@
 steps:
-  - task: Cache@2
-    displayName: 'Caching System for AVD'
-    inputs:
-      key: 'AVD_IMAGES_PIXEL'
-      path: |
-        ~/.android/avd/*
-        ~/.android/adb*
-      cacheHitVar: 'AVD_IMAGES_RESTORED'
-    continueOnError: true
-    condition: succeededOrFailed()
-
   - task: Bash@3
     displayName: 'Android Emulator Setup'
-    condition: ne(variables.AVD_IMAGES_RESTORED, 'true')
     inputs:
       targetType: 'inline'
       script: |
@@ -49,13 +37,6 @@ steps:
         echo "Emulator settings ($emulator_config)"
         cat "$emulator_config"
         fi
-
-  - task: Bash@3
-    displayName: 'Start Android Emulator'
-    inputs:
-      targetType: 'inline'
-      script: |
-        #!/usr/bin/env bash
 
         echo "Starting emulator"
 

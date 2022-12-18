@@ -14,16 +14,14 @@ export interface FontStyleTokens {
   fontWeight?: keyof Typography['weights'] | TextStyle['fontWeight'];
   fontLineHeight?: TextStyle['lineHeight'];
   fontLetterSpacing?: TextStyle['letterSpacing'];
-  // Props below are used on iOS only. GH #2268: Import these from RN directly
-  fontDynamicTypeRamp?: string;
-  fontMaximumSize?: number;
+  fontDynamicTypeRamp?: string; // TODO(#2268): Import type from RN directly
 }
 
 export type FontTokens = FontStyleTokens & FontVariantTokens;
 
 export const fontStyles: TokenBuilder<FontTokens> = {
   from: (
-    { fontDynamicTypeRamp, fontFamily, fontLetterSpacing, fontLineHeight, fontMaximumSize, fontSize, fontWeight, variant }: FontTokens,
+    { fontDynamicTypeRamp, fontFamily, fontLetterSpacing, fontLineHeight, fontSize, fontWeight, variant }: FontTokens,
     { typography }: Theme,
   ) => {
     const { families, sizes, weights, variants } = typography;
@@ -32,7 +30,6 @@ export const fontStyles: TokenBuilder<FontTokens> = {
       fontFamily !== undefined ||
       fontLetterSpacing !== undefined ||
       fontLineHeight !== undefined ||
-      fontMaximumSize !== undefined ||
       fontSize !== undefined ||
       fontWeight !== undefined ||
       variant !== undefined
@@ -44,22 +41,12 @@ export const fontStyles: TokenBuilder<FontTokens> = {
         lineHeight: fontLineHeight ?? variants[variant]?.lineHeight,
         letterSpacing: fontLetterSpacing ?? variants[variant]?.letterSpacing,
         dynamicTypeRamp: fontDynamicTypeRamp ?? variants[variant]?.dynamicTypeRamp,
-        maximumFontSize: fontMaximumSize,
       };
     }
 
     return {};
   },
-  keys: [
-    'fontDynamicTypeRamp',
-    'fontFamily',
-    'fontLineHeight',
-    'fontLetterSpacing',
-    'fontMaximumSize',
-    'fontSize',
-    'fontWeight',
-    'variant',
-  ],
+  keys: ['fontDynamicTypeRamp', 'fontFamily', 'fontLineHeight', 'fontLetterSpacing', 'fontSize', 'fontWeight', 'variant'],
 };
 
 function _buildTextStyles(tokens: FontTokens, theme: Theme): ITextProps {

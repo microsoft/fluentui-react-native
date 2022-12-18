@@ -11,7 +11,7 @@ import {
   BUTTON_ACCESSIBILITY_LABEL_DEPRECATED,
   BUTTON_TEST_COMPONENT_LABEL_DEPRECATED,
 } from '../consts';
-import { testProps } from '../../Common/TestProps';
+import { testProps } from 'src/TestComponents/Common/TestProps';
 
 export const E2EButtonTest_deprecated: React.FunctionComponent = () => {
   const [buttonPressed, setButtonPressed] = React.useState(false);

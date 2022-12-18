@@ -2,66 +2,6 @@
   "name": "@fluentui-react-native/tester-win32",
   "entries": [
     {
-      "date": "Thu, 15 Dec 2022 19:18:30 GMT",
-      "tag": "@fluentui-react-native/tester-win32_v0.31.5",
-      "version": "0.31.5",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/tester-win32",
-            "comment": "Bump @fluentui-react-native/tester to v0.119.1",
-            "commit": "6dab45d16e86445c04ba303e25bb3ef02eabac16"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Thu, 15 Dec 2022 14:50:50 GMT",
-      "tag": "@fluentui-react-native/tester-win32_v0.31.4",
-      "version": "0.31.4",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/tester-win32",
-            "comment": "Bump @fluentui-react-native/tester to v0.119.0",
-            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 14 Dec 2022 17:45:41 GMT",
-      "tag": "@fluentui-react-native/tester-win32_v0.31.3",
-      "version": "0.31.3",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/tester-win32",
-            "comment": "Bump @fluentui-react-native/tester to v0.118.0",
-            "commit": "e289811db7757b4dcb4e99040f1695ed44a3cc2b"
-          }
-        ]
-      }
-    },
-    {
-      "date": "Wed, 14 Dec 2022 06:48:57 GMT",
-      "tag": "@fluentui-react-native/tester-win32_v0.31.2",
-      "version": "0.31.2",
-      "comments": {
-        "patch": [
-          {
-            "author": "beachball",
-            "package": "@fluentui-react-native/tester-win32",
-            "comment": "Bump @fluentui-react-native/tester to v0.117.2",
-            "commit": "8ff9528d676394ba2adcb7288cb1fbdfe807451d"
-          }
-        ]
-      }
-    },
-    {
       "date": "Tue, 13 Dec 2022 23:18:04 GMT",
       "tag": "@fluentui-react-native/tester-win32_v0.31.1",
       "version": "0.31.1",

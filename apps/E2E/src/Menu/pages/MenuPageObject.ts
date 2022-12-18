@@ -35,7 +35,7 @@ class MenuPageObject extends BasePage {
    */
   async openMenu(): Promise<void> {
     if (!(await this.menuIsExpanded())) {
-      await this.clickItem(MenuComponentSelector.MenuTrigger);
+      await this.click(MenuComponentSelector.MenuTrigger);
       await this.waitForMenuToOpen();
     }
   }
@@ -100,8 +100,7 @@ class MenuPageObject extends BasePage {
     await (await this.getMenuComponentSelector(menuComponentSelector)).addValue(key);
   }
 
-  // Renaming this function until Menu tests are refactored to use BasePage methods.
-  async clickItem(selector: MenuComponentSelector): Promise<void> {
+  async click(selector: MenuComponentSelector): Promise<void> {
     await (await this.getMenuComponentSelector(selector)).click();
   }
 

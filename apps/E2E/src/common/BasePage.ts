@@ -1,17 +1,17 @@
 import { Keys, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../fluent-tester/src/TestComponents/Common/consts';
-import { Attribute, attributeToEnumName } from './consts';
+import { Attribute } from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
-const PLATFORM = process.env['E2ETEST_PLATFORM'] as Platform;
+const PLATFORM = process.env['E2ETEST_PLATFORM'];
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 let rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
-  if (PLATFORM === DesktopPlatform.Windows) {
+  if (PLATFORM === NativePlatform.Windows) {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
@@ -46,13 +46,13 @@ export const enum MobilePlatform {
   Android = 'android',
 }
 
-export const enum DesktopPlatform {
+export const enum NativePlatform {
   Win32 = 'win32',
   Windows = 'windows',
   macOS = 'macos',
 }
 
-export type Platform = MobilePlatform | DesktopPlatform;
+export type Platform = MobilePlatform | NativePlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -61,7 +61,7 @@ export type Platform = MobilePlatform | DesktopPlatform;
  * component's page object.
  *********************************************************************************************************/
 
-export abstract class BasePage {
+export class BasePage {
   private platform?: Platform;
 
   constructor() {
@@ -72,26 +72,6 @@ export abstract class BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-
-  /**
-   * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
-   * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
-   * the expected and actual values don't match. This should be called for attribute tests in specs. */
-  async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
-    const el = await element;
-    const actualValue = await el.getAttribute(attribute);
-    if (expectedValue !== actualValue) {
-      throw new Error(
-        `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
-          attributeToEnumName[attribute]
-        } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
-          attributeToEnumName[attribute]
-        } is equal to '${actualValue}'.`,
-      );
-    }
-    return true;
-  }
-
   async getAccessibilityRole(): Promise<string> {
     return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
   }
@@ -122,15 +102,6 @@ export abstract class BasePage {
 
   async clickComponent(): Promise<void> {
     await (await this._primaryComponent).click();
-  }
-
-  /* The goal of click() and sendKeys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
-  async click(element: Promise<WebdriverIO.Element>): Promise<void> {
-    await (await element).click();
-  }
-
-  async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
-    await (await element).addValue(keys);
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -276,7 +247,10 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  abstract get _testPage(): Promise<WebdriverIO.Element>;
+  get _testPage() {
+    console.error('Each class extending BasePage must implement its own _testPage method.');
+    return By(DUMMY_CHAR);
+  }
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
@@ -295,11 +269,17 @@ export abstract class BasePage {
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  abstract get _pageButton(): Promise<WebdriverIO.Element>;
+  get _pageButton() {
+    console.error('Each class extending BasePage must implement its own _pageButton method.');
+    return By(DUMMY_CHAR);
+  }
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
-  abstract get _pageName(): string;
+  get _pageName(): string {
+    console.error('Each class extending BasePage must implement its own _pageName method.');
+    return DUMMY_CHAR;
+  }
 
   // Returns: String
   // Returns the name of the button that navigates to the test page.

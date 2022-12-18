@@ -11,18 +11,7 @@ export const textName = 'Text';
 export type TextTokens = Omit<FontTokens, 'fontFamily'> &
   IForegroundColorTokens &
   Omit<TextStyle, 'fontSize' | 'fontWeight' | 'color'> & {
-    // GH #2268: Remove these once RN Core properly supports Dynamic Type scaling
-    /**
-     * (iOS only) The Dynamic Type ramp that a Text element should follow as the user changes their
-     * preferred content size.
-     */
-    dynamicTypeRamp?: string;
-
-    /**
-     * (iOS only) The maximum font size that a Text element will grow to as the user changes their
-     * preferred content size.
-     */
-    maximumFontSize?: number;
+    dynamicTypeRamp?: string; // TODO(#2268): Remove once RN Core properly supports Dynamic Type scaling
   };
 
 export type TextAlign = 'start' | 'center' | 'end' | 'justify';
