@@ -146,7 +146,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 disabled={index == selectedTestIndex}
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
-                testID={description.testPage}
+                testID={description.testPageButton}
                 // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
                 {...(index === 0 && { componentRef: focusOnMountRef })}
               >
@@ -178,9 +178,9 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                     }
                   }}
                   style={mobileStyles.testListItem}
-                  testID={description.testPage}
+                  testID={description.testPageButton}
                   // Please read http://93days.me/testing-react-native-application/ to understand why we set accessibilityLabel here.
-                  accessibilityLabel={description.testPage}
+                  accessibilityLabel={description.testPageButton}
                 >
                   {description.name}
                 </Text>
@@ -202,7 +202,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   };
 
   return (
-    // TODO: Figure out why making this view accessible breaks element querying on iOS.
+    // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
     <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} testID={ROOT_VIEW}>
       <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
       <HeaderSeparator />

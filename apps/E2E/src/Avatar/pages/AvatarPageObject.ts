@@ -47,6 +47,10 @@ class AvatarPageObject extends BasePage {
     return By(HOMEPAGE_AVATAR_BUTTON);
   }
 
+  get _pageName() {
+    return AVATAR_TESTPAGE;
+  }
+
   get _primaryComponent() {
     return By(AVATAR_TEST_COMPONENT);
   }
