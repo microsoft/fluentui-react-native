@@ -41,7 +41,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
           marginBottom: tokens.marginBottom,
           marginLeft: tokens.marginLeft,
         },
-        android_ripple: { color: tokens.rippleColor, radius: tokens.rippleSize, borderless: true },
+        android_ripple: { color: tokens.rippleColor, radius: tokens.rippleRadius, borderless: true },
       }),
       [
         'radioBorderWidth',
