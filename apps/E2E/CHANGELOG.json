@@ -2,6 +2,81 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 15 Dec 2022 14:50:50 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.6.1",
+      "version": "1.6.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/e2e-testing",
+            "comment": "Bump @fluentui-react-native/focus-zone to v0.11.13",
+            "commit": "ac1a77d965fb36b5ecdcfed3c7beaff4c93b1670"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 14 Dec 2022 17:45:41 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.6.0",
+      "version": "1.6.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "e289811db7757b4dcb4e99040f1695ed44a3cc2b",
+            "comment": "Add new attribute testing method in BasePage, modify ButtonExperimental tests with better errors"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Dec 2022 21:31:46 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.5.0",
+      "version": "1.5.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "7af343bc8a54cbc67edc0087cd0fbfe1c8bfb0e1",
+            "comment": "Add more baseline Menu E2E tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Tue, 13 Dec 2022 20:07:29 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.4.1",
+      "version": "1.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "krsiler@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "71dd31580752395ff03b9943c0e147b02919f786",
+            "comment": "add additional tests for Text"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Mon, 12 Dec 2022 18:55:33 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.4.0",
+      "version": "1.4.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "winlarry@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "100d4492f7e2d7fdc94bf5c3d0c1b4441e0d3097",
+            "comment": "Remove waitForPrimaryElementDisplayed test calls, deprecated method"
+          }
+        ]
+      }
+    },
+    {
       "date": "Fri, 09 Dec 2022 23:48:05 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.3.1",
       "version": "1.3.1",

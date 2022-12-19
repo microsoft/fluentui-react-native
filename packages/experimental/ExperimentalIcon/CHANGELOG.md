@@ -1,8 +1,24 @@
 # Change Log - @fluentui-react-native/experimental-icon
 
-This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.1.5
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.26
+
+## 0.1.4
+
+Mon, 12 Dec 2022 10:12:01 GMT
+
+### Patches
+
+- [Icon] Added MIGRATION.md file (vkozlova@microsoft.com)
 
 ## 0.1.3
 

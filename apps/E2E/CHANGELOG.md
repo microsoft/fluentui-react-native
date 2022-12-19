@@ -1,8 +1,48 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Fri, 09 Dec 2022 23:48:05 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.1
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/focus-zone to v0.11.13
+
+## 1.6.0
+
+Wed, 14 Dec 2022 17:45:41 GMT
+
+### Minor changes
+
+- Add new attribute testing method in BasePage, modify ButtonExperimental tests with better errors (winlarry@microsoft.com)
+
+## 1.5.0
+
+Tue, 13 Dec 2022 21:31:46 GMT
+
+### Minor changes
+
+- Add more baseline Menu E2E tests (winlarry@microsoft.com)
+
+## 1.4.1
+
+Tue, 13 Dec 2022 20:07:29 GMT
+
+### Patches
+
+- add additional tests for Text (krsiler@microsoft.com)
+
+## 1.4.0
+
+Mon, 12 Dec 2022 18:55:33 GMT
+
+### Minor changes
+
+- Remove waitForPrimaryElementDisplayed test calls, deprecated method (winlarry@microsoft.com)
 
 ## 1.3.1
 

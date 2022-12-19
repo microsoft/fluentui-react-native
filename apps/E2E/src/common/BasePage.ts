@@ -1,17 +1,17 @@
 import { Keys, ROOT_VIEW } from './consts';
 import { TESTPAGE_BUTTONS_SCROLLVIEWER } from '../../../fluent-tester/src/TestComponents/Common/consts';
-import { Attribute } from './consts';
+import { Attribute, attributeToEnumName } from './consts';
 
 const DUMMY_CHAR = '';
 // The E2ETEST_PLATFORM environment variable should be set in the beforeSession hook in the wdio.conf file for the respective platform
-const PLATFORM = process.env['E2ETEST_PLATFORM'];
+const PLATFORM = process.env['E2ETEST_PLATFORM'] as Platform;
 export const COMPONENT_SCROLL_COORDINATES = { x: -0, y: -100 }; // These are the offsets. Y is negative because we want the touch to move up (and thus it scrolls down)
 
 let rootView: WebdriverIO.Element | null = null;
 
 /* Win32/UWP-Specific Selector. We use this to get elements on the test page */
 export async function By(identifier: string) {
-  if (PLATFORM === NativePlatform.Windows) {
+  if (PLATFORM === DesktopPlatform.Windows) {
     // For some reason, the rootView node is never put into the element tree on the UWP tester. Remove this when fixed.
     return await $('~' + identifier);
   }
@@ -46,13 +46,13 @@ export const enum MobilePlatform {
   Android = 'android',
 }
 
-export const enum NativePlatform {
+export const enum DesktopPlatform {
   Win32 = 'win32',
   Windows = 'windows',
   macOS = 'macos',
 }
 
-export type Platform = MobilePlatform | NativePlatform;
+export type Platform = MobilePlatform | DesktopPlatform;
 
 /****************************** IMPORTANT! PLEASE READ! **************************************************
  * Every component's page object extends this. We can assume each test page will interact with at least
@@ -61,7 +61,7 @@ export type Platform = MobilePlatform | NativePlatform;
  * component's page object.
  *********************************************************************************************************/
 
-export class BasePage {
+export abstract class BasePage {
   private platform?: Platform;
 
   constructor() {
@@ -72,6 +72,26 @@ export class BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
+
+  /**
+   * Checks to see if an element attribute is strictly equal to an expected value the user passes in.
+   * The advantage to this over testing using .isEqual in a spec is that this throws a detailed error if
+   * the expected and actual values don't match. This should be called for attribute tests in specs. */
+  async compareAttribute(element: Promise<WebdriverIO.Element>, attribute: Attribute, expectedValue: any): Promise<boolean> {
+    const el = await element;
+    const actualValue = await el.getAttribute(attribute);
+    if (expectedValue !== actualValue) {
+      throw new Error(
+        `On ${this._pageName}, a test component with a testID = '${await el.getAttribute(Attribute.TestID)}' should have attribute, ${
+          attributeToEnumName[attribute]
+        } (which maps to windows attribute '${attribute}' property on the element), equal to '${expectedValue}'. Instead, ${
+          attributeToEnumName[attribute]
+        } is equal to '${actualValue}'.`,
+      );
+    }
+    return true;
+  }
+
   async getAccessibilityRole(): Promise<string> {
     return await this.getElementAttribute(await this._primaryComponent, Attribute.AccessibilityRole);
   }
@@ -102,6 +122,15 @@ export class BasePage {
 
   async clickComponent(): Promise<void> {
     await (await this._primaryComponent).click();
+  }
+
+  /* The goal of click() and sendKeys() is to be generally used across all pageobjects to reduce code repetition in similar methods. */
+  async click(element: Promise<WebdriverIO.Element>): Promise<void> {
+    await (await element).click();
+  }
+
+  async sendKeys(element: Promise<WebdriverIO.Element>, keys: Keys[]): Promise<void> {
+    await (await element).addValue(keys);
   }
 
   async getElementAttribute(element: WebdriverIO.Element, attribute: Attribute) {
@@ -157,17 +186,18 @@ export class BasePage {
     });
   }
 
-  /* Waits for the primary UI test element to be displayed. If the element doesn't load before the timeout, it causes the test to fail. */
+  /* @deprecated, only use `scrollToTestElement()` instead */
   async waitForPrimaryElementDisplayed(timeout?: number): Promise<void> {
+    console.warn('`waitForPrimaryElementDisplayed` is deprecated. Only use `scrollToTestElement` in your spec to improve performance.');
     await browser.waitUntil(async () => await (await this._primaryComponent).isDisplayed(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg:
-        'The primary UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
+        'The UI element for testing did not display correctly. Please see /errorShots of the first failed test for more information.',
       interval: 1500,
     });
   }
 
-  /* Scrolls to the primary UI test element until it is displayed. */
+  /* Scrolls to the specified or primary UI test element until it is displayed. */
   async scrollToTestElement(component?: WebdriverIO.Element): Promise<void> {
     const ComponentToScrollTo = component ?? (await this._primaryComponent);
     if (await ComponentToScrollTo.isDisplayed()) {
@@ -198,11 +228,11 @@ export class BasePage {
 
   /* A method that allows the caller to pass in a condition. A wrapper for waitUntil(). Once testing becomes more extensive,
    * this will allow cleaner code within all the Page Objects. */
-  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number): Promise<void> {
+  async waitForCondition(condition: () => Promise<boolean>, errorMsg?: string, timeout?: number, interval?: number): Promise<void> {
     await browser.waitUntil(async () => await condition(), {
       timeout: timeout ?? this.waitForUiEvent,
       timeoutMsg: errorMsg ?? 'Error. Please see /errorShots and logs for more information.',
-      interval: 1000,
+      interval: interval ?? 1000,
     });
   }
 
@@ -236,13 +266,12 @@ export class BasePage {
 
   // Returns: UI Element
   // The Text component on each test page containing the title of that page. We can use this to determine if a test page has loaded correctly.
-  get _testPage() {
-    return By(DUMMY_CHAR);
-  }
+  abstract get _testPage(): Promise<WebdriverIO.Element>;
 
   // Returns: UI Element
   // The primary UI element used for testing on the given test page.
   get _primaryComponent() {
+    console.error('Each class extending BasePage must implement its own _primaryComponent method.');
     return By(DUMMY_CHAR);
   }
 
@@ -250,20 +279,17 @@ export class BasePage {
   // The secondary UI element used for testing on the given test page. Often times, we'll want to set a
   // prop on one component, and not set it on another to verify certain behaviors. This is why we have this secondary component.
   get _secondaryComponent() {
+    console.error('Each class extending BasePage must implement its own _secondaryComponent method.');
     return By(DUMMY_CHAR);
   }
 
   // Returns: UI Element
   // The button that navigates you to the component's test page.
-  get _pageButton() {
-    return By(DUMMY_CHAR);
-  }
+  abstract get _pageButton(): Promise<WebdriverIO.Element>;
 
   // Returns: String
   // Returns the name of the test page. Useful for error messages (see above).
-  get _pageName(): string {
-    return DUMMY_CHAR;
-  }
+  abstract get _pageName(): string;
 
   // The scrollviewer containing the list of buttons to navigate to each test page
   get _testPageButtonScrollViewer() {
@@ -288,5 +314,5 @@ export class BasePage {
   }
 
   // Default timeout to wait until page is displayed (10s)
-  waitForUiEvent: number = 25000;
+  waitForUiEvent = 25000;
 }

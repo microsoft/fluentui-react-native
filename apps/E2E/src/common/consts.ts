@@ -26,14 +26,29 @@ export const enum Attribute {
   IsFocused = 'HasKeyboardFocus',
   IsRequiredForForm = 'IsRequiredForForm',
   IsTogglePatternAvailable = 'IsTogglePatternAvailable',
+  TestID = 'AutomationId',
   ToggleState = 'Toggle.ToggleState',
 }
+
+export const attributeToEnumName = {
+  [Attribute.AccessibilityLabel]: 'AccessibilityLabel',
+  [Attribute.AccessibilityRole]: 'AccessibilityRole',
+  [Attribute.ExpandCollapseState]: 'ExpandCollapseState',
+  [Attribute.IsEnabled]: 'IsEnabled',
+  [Attribute.IsFocused]: 'IsFocused',
+  [Attribute.IsRequiredForForm]: 'IsRequiredForForm',
+  [Attribute.IsTogglePatternAvailable]: 'IsTogglePatternAvailable',
+  [Attribute.TestID]: 'TestID',
+  [Attribute.ToggleState]: 'ToggleState',
+};
 
 export const enum AttributeValue {
   on = '1',
   off = '0',
   true = 'True',
   false = 'False',
+  expanded = 'Expanded',
+  collapsed = 'Collapsed',
 }
 
 /* Keyboard Key Constants */
@@ -98,9 +113,4 @@ export const enum Keys {
   F10 = '\uE03A',
   F11 = '\uE03B',
   F12 = '\uE03C',
-}
-
-export const enum ExpandCollapseState {
-  EXPANDED = 'Expanded',
-  COLLAPSED = 'Collapsed',
 }
