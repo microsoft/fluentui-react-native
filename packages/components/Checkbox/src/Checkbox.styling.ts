@@ -63,7 +63,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
         }),
         android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },
       }),
-      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize'],
+      ['checkboxBackgroundColor', 'checkboxBorderColor', 'checkboxBorderRadius', 'checkboxBorderWidth', 'checkboxSize', 'rippleColor'],
     ),
     checkmark: buildProps(
       (tokens: CheckboxTokens) => ({
