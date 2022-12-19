@@ -36,7 +36,6 @@ export const Checkbox = compose<CheckboxType>({
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
       const { onPress, accessibilityState } = mergedProps;
-      console.log(mergedProps);
       const labelComponent = (
         <React.Fragment>
           <Slots.label key="label">{label}</Slots.label>
