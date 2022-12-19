@@ -59,10 +59,10 @@ const OtherCheckbox: React.FunctionComponent = () => {
   return (
     <View style={commonStyles.customisedChecked}>
       <Button onClick={setCheckedTrue} size="small">
-        Turn Checkbox True
+        Check controlled checkboxes below
       </Button>
       <Button onClick={setCheckedFalse} size="small">
-        Turn Checkbox False
+        Uncheck controlled checkboxes below
       </Button>
 
       <Checkbox label="This is a controlled Checkbox" checked={isChecked} />

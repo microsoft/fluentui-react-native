@@ -18,6 +18,8 @@ export const checkboxStates: (keyof CheckboxTokens)[] = [
   'disabled',
 ];
 
+const hasPresetRententionForA11y = Platform.OS === 'android';
+
 export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps, CheckboxTokens> = {
   tokens: [defaultCheckboxTokens, checkboxName],
   states: checkboxStates,
@@ -36,7 +38,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
         },
         android_ripple: { color: tokens.rippleColor, foreground: true },
       }),
-      ['backgroundColor', 'padding', ...borderStyles.keys],
+      ['backgroundColor', 'padding', ...borderStyles.keys, 'rippleColor'],
     ),
     label: buildProps(
       (tokens: CheckboxTokens, theme: Theme) => ({
@@ -56,7 +58,7 @@ export const stylingSettings: UseStylingOptions<CheckboxProps, CheckboxSlotProps
           alignItems: 'center',
           justifyContent: 'center',
         },
-        ...(Platform.OS === 'android' && {
+        ...(hasPresetRententionForA11y && {
           pressRetentionOffset: typeof tokens.padding === 'number' ? tokens.padding : parseFloat(tokens.padding), /// Retention of the press area outside of the checkbox equal to padding to match accessibility requirement
         }),
         android_ripple: { color: tokens.rippleColor, radius: tokens.checkmarkSize, foreground: true },

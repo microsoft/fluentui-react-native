@@ -35,6 +35,8 @@ export const Checkbox = compose<CheckboxType>({
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
+      const { onPress, accessibilityState } = mergedProps;
+      console.log(mergedProps);
       const labelComponent = (
         <React.Fragment>
           <Slots.label key="label">{label}</Slots.label>
@@ -53,7 +55,7 @@ export const Checkbox = compose<CheckboxType>({
       return (
         <Slots.root {...mergedProps}>
           {Checkbox.state.labelIsBefore && labelComponent}
-          <Slots.checkbox {...mergedProps}>
+          <Slots.checkbox onPress={onPress} {...accessibilityState}>
             <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
               {checkmarkPath}
             </Slots.checkmark>
