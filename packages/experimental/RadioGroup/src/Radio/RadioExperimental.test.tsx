@@ -21,4 +21,6 @@ describe('Radio component tests', () => {
   it('Radio re-renders correctly', () => {
     checkReRender(() => <Radio value="key1" label="Render twice" />);
   });
+
+  /* Re-Render test for depth 2 is blocked and needs to be revisited later. */
 });
