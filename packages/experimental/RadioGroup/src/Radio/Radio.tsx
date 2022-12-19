@@ -47,6 +47,7 @@ export const Radio = compose<RadioType>({
     // now return the handler for finishing render
     return (final: RadioProps) => {
       const { label, subtext, ...mergedProps } = mergeProps(radio.props, final);
+      const { onPress, accessibilityState } = mergedProps;
 
       const labelComponent = (
         <Slots.labelContent>
@@ -57,7 +58,7 @@ export const Radio = compose<RadioType>({
 
       return (
         <Slots.root {...mergedProps}>
-          <Slots.button {...mergedProps}>
+          <Slots.button onPress={onPress} {...accessibilityState}>
             <Slots.innerCircle />
           </Slots.button>
           {labelComponent}

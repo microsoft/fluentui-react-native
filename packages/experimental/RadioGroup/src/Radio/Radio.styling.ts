@@ -21,7 +21,7 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         },
         android_ripple: { color: tokens.rippleColor },
       }),
-      ['flexDirection', 'rootHorizontalPadding', 'alignItems', ...borderStyles.keys],
+      ['flexDirection', 'rootHorizontalPadding', 'rootVerticalPadding', 'rippleColor', 'alignItems', ...borderStyles.keys],
     ),
     button: buildProps(
       (tokens: RadioTokens) => ({
@@ -47,6 +47,9 @@ export const stylingSettings: UseStylingOptions<RadioProps, RadioSlotProps, Radi
         'radioBorderWidth',
         'radioBorderStyle',
         'radioOuterCircleSize',
+        'radioViewSize',
+        'rippleColor',
+        'rippleRadius',
         'radioBorder',
         'marginTop',
         'marginRight',
