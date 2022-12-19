@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Separator } from '@fluentui-react-native/separator';
-import { Button } from '@fluentui-react-native/experimental-button';
+import { ButtonV1 } from '@fluentui-react-native/button';
 import { Text } from '@fluentui-react-native/experimental-text';
 import { stackStyle, separatorStackStyle } from '../Common/styles';
 import { Stack } from '@fluentui-react-native/stack';
@@ -14,16 +14,16 @@ const SeparatorMainTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle} gap={5}>
       <Stack gap={4} style={separatorStackStyle}>
-        <Button>Button1</Button>
+        <ButtonV1>Button1</ButtonV1>
         <BlueSeparator vertical />
-        <Button>Button2</Button>
+        <ButtonV1>Button2</ButtonV1>
         <RedSeparator vertical />
-        <Button>Button3 </Button>
+        <ButtonV1>Button3 </ButtonV1>
         <Separator />
       </Stack>
       <Text>This is a text element</Text>
       <Separator />
-      <Button>This button has longer text</Button>
+      <ButtonV1>This button has longer text</ButtonV1>
     </Stack>
   );
 };
