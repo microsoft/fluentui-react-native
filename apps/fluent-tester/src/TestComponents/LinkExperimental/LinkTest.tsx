@@ -7,6 +7,7 @@ import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
 import { Platform } from 'react-native';
+import { InlineLinks } from './InlineLinksTest';
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
@@ -21,37 +22,6 @@ const DefaultLinks: React.FunctionComponent = () => {
         Click to alert.
       </Link>
       <Link disabled>Disabled Link</Link>
-    </Stack>
-  );
-};
-
-const InlineLinks: React.FunctionComponent = () => {
-  const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
-  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
-
-  return (
-    <Stack style={stackStyle}>
-      <Text>
-        Click{' '}
-        <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-          this link
-        </Link>{' '}
-        to alert me.
-      </Text>
-      <Text>
-        This{' '}
-        <Link inline onPress={doPress} disabled focusable>
-          link
-        </Link>{' '}
-        is disabled but focusable.
-      </Text>
-      <Text>
-        Follow this{' '}
-        <Link inline url="https://www.bing.com/">
-          link
-        </Link>{' '}
-        to navigate.
-      </Text>
     </Stack>
   );
 };
