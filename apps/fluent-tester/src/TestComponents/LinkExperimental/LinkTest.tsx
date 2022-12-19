@@ -29,18 +29,21 @@ const DefaultLinks: React.FunctionComponent = () => {
 const SubtleLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
   const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
+  const supportsInlineLink = Platform.OS === ('win32' as any);
 
   return (
     <Stack style={stackStyle}>
       <Link appearance="subtle" url="https://www.bing.com/">
         Click to navigate.
       </Link>
-      <Text>
-        This is inline Link.{' '}
-        <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-          Click to alert.
-        </Link>
-      </Text>
+      {supportsInlineLink && (
+        <Text>
+          This is inline Link.{' '}
+          <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
+            Click to alert.
+          </Link>
+        </Text>
+      )}
       <Link appearance="subtle" onPress={doPress} disabled>
         Disabled Link
       </Link>
