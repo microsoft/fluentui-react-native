@@ -39,4 +39,3 @@ steps:
       platform: 'android'
       buildArtifacts: variables['task.Build.status']
       directory: $(Build.SourcesDirectory)/apps/E2E
-      apkDirectory: $(Build.SourcesDirectory)/apps/fluent-tester/android/app/build/outputs/apk/debug
