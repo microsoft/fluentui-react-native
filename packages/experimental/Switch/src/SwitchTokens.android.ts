@@ -34,6 +34,8 @@ export const defaultSwitchTokens: TokenSettings<SwitchTokens, Theme> = (t: Theme
   },
 
   toggleOn: {
+    trackMarginRight: 10000,
+
     trackColor: t.colors.brandBackground,
     thumbColor: t.colors.neutralBackgroundLightStatic,
     // justifyContent: 'flex-end',

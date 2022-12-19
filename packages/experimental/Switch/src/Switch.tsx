@@ -42,9 +42,13 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
+    const tokens = useStyling(userProps, (layer) => {
+      return layer === (switchInfo.props.checked ? 'toggleOn' : 'toggleOff');
+    }); /// THERE IS ISSUE IN THIS
     const switchInfo = useSwitch(userProps);
-    const tokens = useStyling(userProps); /// THERE IS ISSUE IN THIS
-    console.log(tokens);
+    console.log('Toggled' + switchInfo.state.toggled);
+
+    console.log(tokens.track.style);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
 
@@ -55,7 +59,6 @@ export const Switch = compose<SwitchType>({
       const displayOnOffText = !!offText || !!onText;
       const isReduceMotionEnabled = AccessibilityInfo.isReduceMotionEnabled;
       const thumbAnimation = isReduceMotionEnabled ? { animationClass: 'Ribbon_SwitchThumb' } : null;
-
       return (
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
