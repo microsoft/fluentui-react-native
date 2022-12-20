@@ -14,11 +14,11 @@ export interface SeparatorPropTokens {
   vertical?: boolean;
 
   /**
-   * Inset Spacing in pixels.
+   * Inset Spacing in 'dp' (density-independent pixels) on Android and 'points' on iOS.
    *
    * Inset Spacing is restricted to a limited set of supported values recommended for most uses (see `SeparatorInsetSpacing`) and
    * based on design guidelines for the Separator control.
-   * @platform Android, iOS
+   * @platform Android iOS
    * @defaultvalue 0
    */
   insetSpacing?: SeparatorInsetSpacing;

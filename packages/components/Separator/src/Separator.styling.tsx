@@ -1,8 +1,9 @@
 import { separatorName, SeparatorProps, SeparatorPropTokens, SeparatorTokens, SeperatorSlotProps } from './Separator.types';
 import { UseStylingOptions, buildProps } from '@fluentui-react-native/framework';
 import { defaultSeparatorTokens } from './SeparatorTokens';
-import { isMobile } from '@fluentui-react-native/platform-utils';
+import { Platform } from 'react-native';
 
+const isMobile = Platform.OS === 'android' || Platform.OS === 'ios';
 const tokensThatAreAlsoProps: (keyof SeparatorPropTokens)[] = ['vertical', 'insetSpacing'];
 export const stylingSettings: UseStylingOptions<SeparatorProps, SeperatorSlotProps, SeparatorTokens> = {
   tokens: [defaultSeparatorTokens, separatorName],
