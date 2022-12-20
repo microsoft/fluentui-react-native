@@ -69,6 +69,7 @@ Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guid
 ### Slot differences
 
 There are no differences between block and inline Links
+Note: Inline Links are not supported on win32.
 
 | Default Link |             |
 | ------------ | ----------- |

@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 15 Dec 2022 19:18:30 GMT and should not be manually modified.
+This log was last generated on Tue, 20 Dec 2022 23:10:17 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.119.2
+
+Tue, 20 Dec 2022 23:10:17 GMT
+
+### Patches
+
+- Fork inline link test for LinkV1 (ruaraki@microsoft.com)
+- Bump @fluentui-react-native/experimental-link to v0.4.0
 
 ## 0.119.1
 
