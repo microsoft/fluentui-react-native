@@ -22,8 +22,9 @@ If using FURN's theming, the `Link` requires use of the `ThemeProvider` from `@f
 Basic example:
 
 ```jsx
-<Link inline url="https://www.bing.com/">Click to Navigate.</Link>
+<Link url="https://www.bing.com/">Click to Navigate.</Link>
 ```
+
 More examples on the [Test pages for Link](../../../apps/fluent-tester/src/TestComponents/LinkExperimental). Instructions on running the tester app can be found [here](../../../apps/fluent-tester/README.md).
 
 ## Visual Examples
@@ -42,34 +43,6 @@ Win32:
 <Link disabled focusable>
   Disabled focusable Link
 </Link>
-```
-
-![Inline Links on win32 example](./assets/Link_example_inline_win32.png)
-
-```jsx
-<>
-  <Text>
-    Click{' '}
-    <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-      this link
-    </Link>{' '}
-    to alert me.
-  </Text>
-  <Text>
-    This{' '}
-    <Link inline onPress={doPress} disabled focusable>
-      link
-    </Link>{' '}
-      is disabled but focusable.
-  </Text>
-  <Text>
-    Follow this{' '}
-    <Link inline url="https://www.bing.com/">
-      link
-    </Link>{' '}
-    to navigate.
-  </Text>
-</>
 ```
 
 ![Subtle Links on win32 example](./assets/Link_example_subtle_win32.png)
@@ -120,7 +93,9 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
    */
   enableFocusRing?: boolean;
   /**
-   * link inline
+   * Whether the link is inline with text
+   * Note: Not supported for win32
+   * @default false
    */
   inline?: boolean;
   /**
@@ -133,11 +108,6 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
    */
   tooltip?: string;
 }
-
-11/8/22 Notes:
-
-- `inline` => On win32, inline links are rendered as a Text component without a View to handle all the mouse and focus events. Text component itself should handle them in case of inline links. Native changes need to be made on the platform level to support hovered/pressed/focused states.
-
 ```
 
 ### Styling Tokens

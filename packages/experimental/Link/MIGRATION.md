@@ -46,17 +46,17 @@ import { LinkV1 as Link } from '@fluentui-react-native/text';
 
 ### Tokens changed
 
-- Event states are added as `LinkTokens` 
+- Event states are added as `LinkTokens`
 
-| Token       | Win32       |
-| ----------- | ----------- |
-| `hovered`   | LinkTokens  |
-| `pressed`   | LinkTokens  |
-| `focused`   | LinkTokens  |
-| `visited`   | LinkTokens  |
-| `disabled`  | LinkTokens  |
-| `inline`    | LinkTokens  |
-| `subtle`    | LinkTokens  |
+| Token      | Win32      |
+| ---------- | ---------- |
+| `hovered`  | LinkTokens |
+| `pressed`  | LinkTokens |
+| `focused`  | LinkTokens |
+| `visited`  | LinkTokens |
+| `disabled` | LinkTokens |
+| `inline`   | LinkTokens |
+| `subtle`   | LinkTokens |
 
 ### Updating ThemeProvider
 
@@ -66,20 +66,20 @@ If you are using the older theme provider `ThemeProvider` from `@uifabricshared/
 
 Please see [this page](../../../docs/pages/Guides/UpdatingCustomize.md) for guidance on how to move from the old `customize` API to the new one.
 
-
 ### Slot differences
 
 There are no differences between block and inline Links
+Note: Inline Links are not supported on win32.
 
 | Default Link |             |
-| -----------  | ----------- |
+| ------------ | ----------- |
 | Slot         | Type        |
 | -----------  | ----------- |
 | root         | `View`      |
 | content      | `Text`      |
 
-| Inline Link  |             |
-| -----------  | ----------- |
-| Slot         | Type        |
-| -----------  | ----------- |
-| content      | `Text`      |
+| Inline Link |             |
+| ----------- | ----------- |
+| Slot        | Type        |
+| ----------- | ----------- |
+| content     | `Text`      |

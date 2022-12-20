@@ -7,6 +7,7 @@ import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { LinkE2ETest } from './E2ELinkTest';
 import { Platform } from 'react-native';
+import { InlineLinks } from './InlineLinksTest';
 
 const DefaultLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
@@ -25,52 +26,24 @@ const DefaultLinks: React.FunctionComponent = () => {
   );
 };
 
-const InlineLinks: React.FunctionComponent = () => {
-  const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
-  const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
-
-  return (
-    <Stack style={stackStyle}>
-      <Text>
-        Click{' '}
-        <Link inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-          this link
-        </Link>{' '}
-        to alert me.
-      </Text>
-      <Text>
-        This{' '}
-        <Link inline onPress={doPress} disabled focusable>
-          link
-        </Link>{' '}
-        is disabled but focusable.
-      </Text>
-      <Text>
-        Follow this{' '}
-        <Link inline url="https://www.bing.com/">
-          link
-        </Link>{' '}
-        to navigate.
-      </Text>
-    </Stack>
-  );
-};
-
 const SubtleLinks: React.FunctionComponent = () => {
   const doPress = React.useCallback(() => Alert.alert('Alert.', 'You have been alerted.'), []);
   const doAllyTap = React.useCallback(() => Alert.alert('Alert.', 'You have invoked onAllyTap.'), []);
+  const supportsInlineLink = Platform.OS !== ('win32' as any);
 
   return (
     <Stack style={stackStyle}>
       <Link appearance="subtle" url="https://www.bing.com/">
         Click to navigate.
       </Link>
-      <Text>
-        This is inline Link.{' '}
-        <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-          Click to alert.
-        </Link>
-      </Text>
+      {supportsInlineLink && (
+        <Text>
+          This is inline Link.{' '}
+          <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
+            Click to alert.
+          </Link>
+        </Text>
+      )}
       <Link appearance="subtle" onPress={doPress} disabled>
         Disabled Link
       </Link>

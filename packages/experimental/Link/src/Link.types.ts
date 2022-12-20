@@ -17,6 +17,8 @@ export type LinkState = IPressableState & {
   disabled?: boolean;
   /**
    * Specifies whether the link is inline.
+   * Note: Not supported for win32
+   *
    * @default false
    */
   inline?: boolean;
@@ -61,7 +63,9 @@ export interface LinkProps extends IWithPressableOptions<TextProps> {
    */
   enableFocusRing?: boolean;
   /**
-   * link inline
+   * Whether the link is inline with text
+   * Note: Not supported for win32
+   * @default false
    */
   inline?: boolean;
   /**
