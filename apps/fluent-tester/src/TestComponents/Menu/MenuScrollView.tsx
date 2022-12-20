@@ -3,11 +3,10 @@ import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { Text, TextInput, StyleSheet, View } from 'react-native';
+import { TextInput, StyleSheet, View } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
 
 const styles = StyleSheet.create({
-  menuContainerSubtitle: { fontWeight: 'bold' },
   menuContainerRow: { flexDirection: 'row' },
   menuMargin: { marginRight: 20 },
 });
@@ -62,7 +61,6 @@ export const MenuScrollView: React.FunctionComponent = () => {
           </ScrollViewMenuPopover>
         </Menu>
       </View>
-      <Text style={styles.menuContainerSubtitle}>Add/Remove menu item</Text>
       <View style={styles.menuContainerRow}>
         <Button appearance="subtle" onClick={insertOnClick}>
           Add new menu item
