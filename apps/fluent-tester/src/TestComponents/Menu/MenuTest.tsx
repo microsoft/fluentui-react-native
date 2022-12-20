@@ -152,8 +152,12 @@ const MenuSubMenu: React.FunctionComponent = () => {
   );
 };
 
-const ScrollViewMenuPopover = MenuPopover.customize({ maxHeight: 100 });
+const ScrollViewMenuPopover = MenuPopover.customize({ maxHeight: 800 });
 const MenuScrollView: React.FunctionComponent = () => {
+  const menuItems = [];
+  for (let i = 0; i < 400; i++) {
+    menuItems.push(<MenuItem key={i}>MenuItem</MenuItem>);
+  }
   return (
     <Stack style={stackStyle}>
       <Menu>
@@ -161,14 +165,7 @@ const MenuScrollView: React.FunctionComponent = () => {
           <Button>Test</Button>
         </MenuTrigger>
         <ScrollViewMenuPopover>
-          <MenuList>
-            <MenuItem>MenuItem 1</MenuItem>
-            <MenuItem>MenuItem 2</MenuItem>
-            <MenuItem>MenuItem 3</MenuItem>
-            <MenuItem>MenuItem 4</MenuItem>
-            <MenuItem>MenuItem 5</MenuItem>
-            <MenuItem>MenuItem 6</MenuItem>
-          </MenuList>
+          <MenuList>{menuItems}</MenuList>
         </ScrollViewMenuPopover>
       </Menu>
     </Stack>
