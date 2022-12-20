@@ -1,4 +1,4 @@
-export { RadioGroup } from './RadioGroup/RadioGroup';
+export { RadioGroup } from './RadioGroup/RadioGroup.win32';
 export {
   radioGroupName,
   RadioGroupInfo,
@@ -10,7 +10,7 @@ export {
 } from './RadioGroup/RadioGroup.types';
 export { defaultRadioGroupTokens } from './RadioGroup/RadioGroupTokens';
 export { RadioGroupContext, RadioGroupContextValue, RadioGroupProvider, useRadioGroupContext } from './RadioGroup/radioGroupContext';
-export { useRadioGroup } from './RadioGroup/useRadioGroup';
+export { useRadioGroup } from './RadioGroup/useRadioGroup.win32';
 export { useRadioGroupContextValue } from './RadioGroup/useRadioGroupContextValue';
 export { Radio, radioLookup } from './Radio/Radio';
 export { radioName, RadioProps, RadioSlotProps, RadioInfo, RadioTokens, RadioType } from './Radio/Radio.types';

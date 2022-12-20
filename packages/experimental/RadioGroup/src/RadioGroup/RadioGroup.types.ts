@@ -31,6 +31,12 @@ export interface RadioGroupState extends RadioGroupProps {
    * Array of radio keys in the group
    */
   values?: string[];
+
+  /**
+   * Array of enabled radio keys in the group
+   * Windows-Specific Prop.
+   */
+  enabledValues?: string[];
 }
 
 export interface RadioGroupTokens extends IForegroundColorTokens, FontTokens {
