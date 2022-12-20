@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import {
   Menu,
@@ -16,10 +16,10 @@ import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
-import { commonTestStyles as commonStyles } from '../Common/styles';
 import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
 import { MenuTriggerChildRef } from './MenuRefs';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { MenuScrollView } from './MenuScrollView';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -148,38 +148,6 @@ const MenuSubMenu: React.FunctionComponent = () => {
             <Submenu />
           </MenuList>
         </MenuPopover>
-      </Menu>
-    </Stack>
-  );
-};
-
-const MenuScrollView: React.FunctionComponent = () => {
-  const [maxHeight, setMaxHeight] = useState<number>(800);
-  const ScrollViewMenuPopover = MenuPopover.customize({ maxHeight: parseInt(maxHeight) });
-  const menuItems = [];
-  for (let i = 0; i < 400; i++) {
-    menuItems.push(<MenuItem key={i}>MenuItem</MenuItem>);
-  }
-  return (
-    <Stack style={stackStyle}>
-      <View>
-        <TextInput
-          accessibilityLabel="Max height for menu"
-          style={commonStyles.textBox}
-          placeholder="Max height for menu"
-          blurOnSubmit={true}
-          onSubmitEditing={(e) => {
-            setMaxHeight(e.nativeEvent.text);
-          }}
-        />
-      </View>
-      <Menu>
-        <MenuTrigger>
-          <Button>Test</Button>
-        </MenuTrigger>
-        <ScrollViewMenuPopover>
-          <MenuList>{menuItems}</MenuList>
-        </ScrollViewMenuPopover>
       </Menu>
     </Stack>
   );
