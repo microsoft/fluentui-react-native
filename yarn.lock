@@ -2175,9 +2175,9 @@
     fastq "^1.6.0"
 
 "@office-iss/react-native-win32@^0.68.0":
-  version "0.68.8"
-  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.68.8.tgz#d45925c70491934980c04d5a772b103a1661a0b5"
-  integrity sha512-47auu9rgKerO0JWOz8F6P8/EkbtkEbspBZJzoSdN4jXxu9iM1aQtAXOmw3aoFzpNOUxvsZ6RJb79rAt276VxlA==
+  version "0.68.9"
+  resolved "https://registry.yarnpkg.com/@office-iss/react-native-win32/-/react-native-win32-0.68.9.tgz#819fc6276206833c10e871c0a12368f465ab616f"
+  integrity sha512-GawunxVNwwhR0ctgYEj12Dfu8wWb7zV/9i4kGatGHnCavayTLXdjW4esOnOm55D4+n0sNQ11MJoo6s4BKOHgwg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     "@jest/create-cache-key-function" "^27.0.1"
