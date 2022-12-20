@@ -2,6 +2,29 @@
   "name": "@fluentui-react-native/experimental-link",
   "entries": [
     {
+      "date": "Tue, 20 Dec 2022 23:10:17 GMT",
+      "tag": "@fluentui-react-native/experimental-link_v0.4.0",
+      "version": "0.4.0",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-link",
+            "commit": "6eb13550aa4b368ecc162de3174bce0452a4e999",
+            "comment": "Update link spec with more detail"
+          }
+        ],
+        "minor": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-link",
+            "commit": "63a0062e5a0f528420734e9ef8cd589ecd830ffc",
+            "comment": "Force win32 to not have inline links"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Dec 2022 14:50:50 GMT",
       "tag": "@fluentui-react-native/experimental-link_v0.3.2",
       "version": "0.3.2",

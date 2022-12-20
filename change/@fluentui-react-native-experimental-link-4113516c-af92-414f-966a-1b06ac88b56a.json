@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Update link spec with more detail",
-  "packageName": "@fluentui-react-native/experimental-link",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}

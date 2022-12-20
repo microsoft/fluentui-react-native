@@ -1,7 +1,0 @@
-{
-  "type": "minor",
-  "comment": "Force win32 to not have inline links",
-  "packageName": "@fluentui-react-native/experimental-link",
-  "email": "ruaraki@microsoft.com",
-  "dependentChangeType": "patch"
-}
