@@ -15,6 +15,8 @@ class ExperimentalCheckboxPageObject extends BasePage {
     return await (await this._primaryComponent).isSelected();
   }
 
+  /* Waits for the checkbox to be checked or unchecked if the new state is true or false. Returns true if the
+   * checkbox toggled to the new state. */
   async waitForCheckboxToggle(newState: boolean, errorMessage?: string): Promise<boolean> {
     if ((await this.isCheckboxChecked()) !== newState) {
       await this.waitForCondition(async () => (await this.isCheckboxChecked()) === newState, errorMessage);
@@ -22,6 +24,7 @@ class ExperimentalCheckboxPageObject extends BasePage {
     return (await this.isCheckboxChecked()) === newState;
   }
 
+  /* Toggles the checkbox to the checked if newState == true or unchecked if newState == false. */
   async toggleCheckbox(newState: boolean) {
     if ((await this.isCheckboxChecked()) !== newState) {
       await this.click(this._primaryComponent);
@@ -32,6 +35,8 @@ class ExperimentalCheckboxPageObject extends BasePage {
     }
   }
 
+  /* The onChange callback for the checkbox shows a hidden Text component near the checkmark. This checks if the text
+   * is displayed. */
   async didOnChangeCallbackFire(): Promise<boolean> {
     const callbackText = await this._callbackText;
     await this.waitForCondition(async () => await callbackText.isDisplayed(), 'The onChange callback did not fire.');
