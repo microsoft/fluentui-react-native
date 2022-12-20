@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { Pressable } from 'react-native';
+import { Pressable, Platform } from 'react-native';
 import { checkboxName, CheckboxType, CheckboxProps } from './Checkbox.types';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { stylingSettings, getDefaultSize } from './Checkbox.styling';
@@ -35,7 +35,7 @@ export const Checkbox = compose<CheckboxType>({
     // now return the handler for finishing render
     return (final: CheckboxProps) => {
       const { label, required, ...mergedProps } = mergeProps(Checkbox.props, final);
-      const { onPress, accessibilityState } = mergedProps;
+      const { onPress, disabled } = mergedProps;
       const labelComponent = (
         <React.Fragment>
           <Slots.label key="label">{label}</Slots.label>
@@ -52,9 +52,9 @@ export const Checkbox = compose<CheckboxType>({
       );
 
       return (
-        <Slots.root {...mergedProps}>
+        <Slots.root {...mergedProps} {...(Platform.OS == 'android' && { accessible: !disabled, focusable: !disabled })}>
           {Checkbox.state.labelIsBefore && labelComponent}
-          <Slots.checkbox onPress={onPress} {...accessibilityState}>
+          <Slots.checkbox {...(Platform.OS == 'android' && { onPress, disabled })} accessible={false} focusable={false}>
             <Slots.checkmark key="checkmark" viewBox="0 0 12 12">
               {checkmarkPath}
             </Slots.checkmark>

@@ -4,7 +4,7 @@ import { Test, TestSection, PlatformStatus } from '../Test';
 import { Checkbox } from '@fluentui-react-native/experimental-checkbox';
 import { Theme, useTheme } from '@fluentui-react-native/theme-types';
 import { View, TextInput, Platform } from 'react-native';
-import { commonTestStyles as commonStyles } from '../Common/styles';
+import { commonTestStyles as commonStyles, mobileStyles } from '../Common/styles';
 import { E2ECheckboxExperimentalTest } from './E2ECheckboxExperimentalTest';
 import { InteractionEvent } from '@fluentui-react-native/interactive-hooks';
 import { themedStyleSheet } from '@fluentui-react-native/themed-stylesheet';
@@ -22,15 +22,18 @@ const BasicCheckbox: React.FunctionComponent = () => {
       <Checkbox label="Checked checkbox (uncontrolled)" onChange={onChangeUncontrolled} defaultChecked accessibilityLabel="Hello there" />
       <Checkbox label="Disabled checkbox" disabled />
       <Checkbox label="Disabled checked checkbox" defaultChecked disabled />
-      {Platform.OS !== 'android' && (
-        <>
-          <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
-          <Checkbox label="A circular checkbox" shape="circular" />
-          <Checkbox label="A checkbox with label placed before" labelPosition="before" />
-          <Checkbox label="A required checkbox" required />
-        </>
-      )}
     </View>
+  );
+};
+
+const DesktopSpecificCheckbox: React.FunctionComponent = () => {
+  return (
+    <>
+      <Checkbox label="Checkbox will display a tooltip" tooltip="This is a tooltip" />
+      <Checkbox label="A circular checkbox" shape="circular" />
+      <Checkbox label="A checkbox with label placed before" labelPosition="before" />
+      <Checkbox label="A required checkbox" required />
+    </>
   );
 };
 
@@ -56,8 +59,10 @@ const OtherCheckbox: React.FunctionComponent = () => {
     setisChecked(false);
   }, []);
 
+  const memoizedStyles = React.useMemo(() => (Platform.OS === 'android' ? { ...mobileStyles.containerSpacedEvenly, height: 200 } : {}), []);
+
   return (
-    <View style={commonStyles.customisedChecked}>
+    <View style={memoizedStyles}>
       <Button onClick={setCheckedTrue} size="small">
         Check controlled checkboxes below
       </Button>
@@ -170,16 +175,20 @@ const checkboxSections: TestSection[] = [
     testID: EXPERIMENTAL_CHECKBOX_TESTPAGE,
     component: BasicCheckbox,
   },
-  ...Platform.select({
-    android: [null],
-    default: [
-      {
-        name: 'Size Checkboxes',
-        component: SizeCheckbox,
-      },
-    ],
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Size Checkboxes',
+      component: SizeCheckbox,
+    },
   }),
-
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Desktop Specific Checkboxes',
+      component: DesktopSpecificCheckbox,
+    },
+  }),
   {
     name: 'Other Implementations',
     component: OtherCheckbox,

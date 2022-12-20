@@ -124,8 +124,12 @@ The `Checkbox` control supports a rounded `square` (default) and `circular` shap
 
 Note:
 
-- Circular Checkbox is not supported on Android
-- Square Checkbox is not supported on iOS
+| Platform | Square | Circular |
+| -------- | ------ | -------- |
+| Windows  | ✅     | ✅       |
+| iOS      | ❌     | ✅       |
+| macOS    | ✅     | ❌       |
+| Android  | ✅     | ❌       |
 
 ### Sizes
 

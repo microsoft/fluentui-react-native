@@ -64,12 +64,6 @@ export const commonTestStyles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'space-between',
   },
-  customisedChecked: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-    height: 200,
-  },
 });
 
 export const fluentTesterStyles = StyleSheet.create({
@@ -171,6 +165,11 @@ export const mobileStyles = StyleSheet.create({
     height: 'auto',
     fontSize: 18,
     paddingVertical: 8,
+  },
+  containerSpacedEvenly: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
   },
 });
 
