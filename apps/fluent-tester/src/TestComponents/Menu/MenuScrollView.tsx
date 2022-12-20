@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { ButtonV1 as Button, Text } from '@fluentui/react-native';
+import { ButtonV1 as Button } from '@fluentui/react-native';
 import { Menu, MenuItem, MenuTrigger, MenuPopover, MenuList } from '@fluentui-react-native/menu';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
-import { TextInput, View } from 'react-native';
+import { Text, TextInput, StyleSheet, View } from 'react-native';
 import { commonTestStyles as commonStyles } from '../Common/styles';
+
+const styles = StyleSheet.create({
+  menuContainerSubtitle: { fontWeight: 'bold' },
+  menuContainerRow: { flexDirection: 'row' },
+  menuMargin: { marginRight: 20 },
+});
 
 export const MenuScrollView: React.FunctionComponent = () => {
   const [maxHeight, setMaxHeight] = useState<number>(800);
@@ -37,33 +43,33 @@ export const MenuScrollView: React.FunctionComponent = () => {
 
   return (
     <Stack style={stackStyle}>
-      <View>
+      <View style={styles.menuContainerRow}>
         <TextInput
           accessibilityLabel="Max height for menu"
-          style={commonStyles.textBox}
+          style={[commonStyles.textBox, styles.menuMargin]}
           placeholder="Max height for menu"
           blurOnSubmit={true}
           onSubmitEditing={(e) => {
             setMaxHeight(parseInt(e.nativeEvent.text));
           }}
         />
+        <Menu>
+          <MenuTrigger>
+            <Button>Test</Button>
+          </MenuTrigger>
+          <ScrollViewMenuPopover>
+            <MenuList>{menuItems}</MenuList>
+          </ScrollViewMenuPopover>
+        </Menu>
       </View>
-      <Menu>
-        <MenuTrigger>
-          <Button>Test</Button>
-        </MenuTrigger>
-        <ScrollViewMenuPopover>
-          <MenuList>{menuItems}</MenuList>
-        </ScrollViewMenuPopover>
-      </Menu>
-      <Text>Add/Remove menu item</Text>
-      <Button appearance="subtle" onClick={insertOnClick}>
-        Add new menu item
-      </Button>
-      <Button appearance="subtle" onClick={popOnClick}>
-        Remove last menu item
-      </Button>
-      <View>
+      <Text style={styles.menuContainerSubtitle}>Add/Remove menu item</Text>
+      <View style={styles.menuContainerRow}>
+        <Button appearance="subtle" onClick={insertOnClick}>
+          Add new menu item
+        </Button>
+        <Button appearance="subtle" onClick={popOnClick}>
+          Remove last menu item
+        </Button>
         <Menu>
           <MenuTrigger>
             <Button>Mutable Menu</Button>
@@ -72,21 +78,21 @@ export const MenuScrollView: React.FunctionComponent = () => {
             <MenuList>{data}</MenuList>
           </ScrollViewMenuPopover>
         </Menu>
-        <Menu>
-          <MenuTrigger>
-            <Button>Custom height</Button>
-          </MenuTrigger>
-          <MenuPopover maxHeight={100}>
-            <MenuList>
-              <MenuItem>MenuItem 1</MenuItem>
-              <MenuItem>MenuItem 2</MenuItem>
-              <MenuItem>MenuItem 3</MenuItem>
-              <MenuItem>MenuItem 4</MenuItem>
-              <MenuItem>MenuItem 5</MenuItem>
-            </MenuList>
-          </MenuPopover>
-        </Menu>
       </View>
+      <Menu>
+        <MenuTrigger>
+          <Button>Custom height</Button>
+        </MenuTrigger>
+        <MenuPopover maxHeight={100}>
+          <MenuList>
+            <MenuItem>MenuItem 1</MenuItem>
+            <MenuItem>MenuItem 2</MenuItem>
+            <MenuItem>MenuItem 3</MenuItem>
+            <MenuItem>MenuItem 4</MenuItem>
+            <MenuItem>MenuItem 5</MenuItem>
+          </MenuList>
+        </MenuPopover>
+      </Menu>
     </Stack>
   );
 };
