@@ -68,6 +68,20 @@ export const MenuScrollView: React.FunctionComponent = () => {
             <MenuList>{data}</MenuList>
           </ScrollViewMenuPopover>
         </Menu>
+        <Menu>
+          <MenuTrigger>
+            <Button>Custom height</Button>
+          </MenuTrigger>
+          <MenuPopover maxHeight={100}>
+            <MenuList>
+              <MenuItem>MenuItem 1</MenuItem>
+              <MenuItem>MenuItem 2</MenuItem>
+              <MenuItem>MenuItem 3</MenuItem>
+              <MenuItem>MenuItem 4</MenuItem>
+              <MenuItem>MenuItem 5</MenuItem>
+            </MenuList>
+          </MenuPopover>
+        </Menu>
       </View>
     </Stack>
   );
