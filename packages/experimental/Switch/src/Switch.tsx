@@ -42,13 +42,13 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
+    console.log(userProps);
     const tokens = useStyling(userProps, (layer) => {
-      return layer === (switchInfo.props.checked ? 'toggleOn' : 'toggleOff');
+      return layer === (userProps.checked ? 'toggleOn' : 'toggleOff');
     }); /// THERE IS ISSUE IN THIS
-    const switchInfo = useSwitch(userProps);
-    console.log('Toggled' + switchInfo.state.toggled);
+    console.log(tokens.track.style.backgroundColor);
+    const switchInfo = useSwitch(userProps, tokens.track.style.backgroundColor);
 
-    console.log(tokens.track.style);
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
 

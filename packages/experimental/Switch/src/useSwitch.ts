@@ -24,8 +24,8 @@ const defaultAccessibilityActions = [{ name: 'Toggle' }];
 //   }
 // };
 
-export const useSwitch = (props: SwitchProps): SwitchInfo => {
-  console.log(props);
+export const useSwitch = (props: SwitchProps, bgColor?: any = 'red'): SwitchInfo => {
+  console.log(bgColor);
   const defaultComponentRef = React.useRef(null);
   const {
     onChange,
@@ -69,16 +69,15 @@ export const useSwitch = (props: SwitchProps): SwitchInfo => {
         },
       ],
     },
-    // backgroundStyle: {
-    //   backgroundColor: animationbg.interpolate({
-    //     inputRange: [0, 1],
-    //     outputRange: ['green', 'red'],
-    //   }),
-    // },
+    backgroundStyle: {
+      backgroundColor: animationbg.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['blue', bgColor],
+      }),
+    },
   };
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
-  console.log('CHECKE STATED ' + checkedState);
   const startAnimation = () => {
     Animated.timing(animation, {
       toValue: 20,
