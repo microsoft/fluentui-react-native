@@ -57,8 +57,12 @@ export const MenuScrollView: React.FunctionComponent = () => {
         </ScrollViewMenuPopover>
       </Menu>
       <Text>Add/Remove menu item</Text>
-      <Button onClick={insertOnClick}>Add new menu item</Button>
-      <Button onClick={popOnClick}>Remove last menu item</Button>
+      <Button appearance="subtle" onClick={insertOnClick}>
+        Add new menu item
+      </Button>
+      <Button appearance="subtle" onClick={popOnClick}>
+        Remove last menu item
+      </Button>
       <View>
         <Menu>
           <MenuTrigger>
