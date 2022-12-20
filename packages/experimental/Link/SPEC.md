@@ -66,7 +66,7 @@ Win32:
 
 ```jsx
 const BlueHeaderBold = Link.customize({ variant: 'headerStandard', fontWeight: '700', color: '#0229c4', textAlign: 'right' });
-<BlueHeaderBold>BlueHeaderBold</BlueHeaderBold>
+<BlueHeaderBold>BlueHeaderBold</BlueHeaderBold>;
 ```
 
 ## API
@@ -80,7 +80,8 @@ Below is the set of props the Text supports:
 ```ts
 export interface LinkProps extends IWithPressableOptions<TextProps> {
   /**
-   * link appearance
+   * The appearance of the link, either `default` or `subtle`
+   * @default default
    */
   appearance?: LinkAppearance;
   /**
@@ -138,10 +139,10 @@ export interface LinkTokens extends TextTokens {
 
 The following is a set of keys that interact with the `Link` component:
 
-| Key     | Description                                                     |
-| ------- | --------------------------------------------------------------- |
-| `Tab`   | If `disabled` is not set, component will gain focus.  |
-| `Space` | Nagivates to the path passed in as a `url` or executes the function passed into the `onPress` prop.           |
+| Key     | Description                                                                                         |
+| ------- | --------------------------------------------------------------------------------------------------- |
+| `Tab`   | If `disabled` is not set, component will gain focus.                                                |
+| `Space` | Nagivates to the path passed in as a `url` or executes the function passed into the `onPress` prop. |
 
 #### Cursor interaction for Link
 

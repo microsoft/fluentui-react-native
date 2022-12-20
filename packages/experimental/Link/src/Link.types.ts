@@ -50,7 +50,8 @@ export type LinkAppearance = 'default' | 'subtle';
  */
 export interface LinkProps extends IWithPressableOptions<TextProps> {
   /**
-   * link appearance
+   * The appearance of the link, either `default` or `subtle`
+   * @default default
    */
   appearance?: LinkAppearance;
   /**
