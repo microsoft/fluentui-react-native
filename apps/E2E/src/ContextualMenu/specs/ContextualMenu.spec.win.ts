@@ -38,7 +38,7 @@ describe('ContextualMenu Functional Tests', async () => {
     await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
-  it("Type 'SPACE' on ContextualMenu Button -> Validate that the mneu opens by checking if its items are displayed", async () => {
+  it("Type 'SPACE' on ContextualMenu Button -> Validate that the menu opens by checking if its items are displayed", async () => {
     /* Type a space on the ContextualMenu */
     await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.SPACE]);
 
