@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Move documentation files to new home",
+  "packageName": "@fluentui-react-native/link",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}

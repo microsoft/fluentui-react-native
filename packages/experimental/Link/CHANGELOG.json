@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/experimental-link",
   "entries": [
     {
+      "date": "Wed, 21 Dec 2022 01:18:57 GMT",
+      "tag": "@fluentui-react-native/experimental-link_v0.4.1",
+      "version": "0.4.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/experimental-link",
+            "commit": "0175de13061d7b0bb91c6a8144a8eec9d92289b7",
+            "comment": "Fix Link space/enter keyboarding"
+          }
+        ]
+      }
+    },
+    {
       "date": "Tue, 20 Dec 2022 23:10:17 GMT",
       "tag": "@fluentui-react-native/experimental-link_v0.4.0",
       "version": "0.4.0",
