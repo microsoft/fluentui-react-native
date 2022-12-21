@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/e2e-testing
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.6.2
+
+Wed, 21 Dec 2022 10:29:07 GMT
+
+### Patches
+
+- Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits (vkozlova@microsoft.com)
 
 ## 1.6.1
 

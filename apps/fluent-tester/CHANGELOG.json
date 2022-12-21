@@ -2,6 +2,69 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 21 Dec 2022 10:29:07 GMT",
+      "tag": "@fluentui-react-native/tester_v0.120.1",
+      "version": "0.120.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "62e3f79db5be4cdcf409620c7f28eded91bfae4e",
+            "comment": "Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-icon to v0.1.6",
+            "commit": "62e3f79db5be4cdcf409620c7f28eded91bfae4e"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Dec 2022 06:39:34 GMT",
+      "tag": "@fluentui-react-native/tester_v0.120.0",
+      "version": "0.120.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "rohanpd.work@gmail.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "af98a17356171f1eee209314cde18a12786bfa3d",
+            "comment": "Merge branch 'master' into checkbox-finalization"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-checkbox to v0.13.14",
+            "commit": "af98a17356171f1eee209314cde18a12786bfa3d"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.34.3",
+            "commit": "af98a17356171f1eee209314cde18a12786bfa3d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Dec 2022 02:06:39 GMT",
+      "tag": "@fluentui-react-native/tester_v0.119.4",
+      "version": "0.119.4",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui/react-native to v0.34.2",
+            "commit": "8fa01d4fa72d594c635da4246fbe945d9db506ad"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Dec 2022 01:18:57 GMT",
       "tag": "@fluentui-react-native/tester_v0.119.3",
       "version": "0.119.3",

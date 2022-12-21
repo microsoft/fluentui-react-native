@@ -2,6 +2,36 @@
   "name": "@fluentui/react-native",
   "entries": [
     {
+      "date": "Wed, 21 Dec 2022 06:39:34 GMT",
+      "tag": "@fluentui/react-native_v0.34.3",
+      "version": "0.34.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/checkbox to v0.18.4",
+            "commit": "af98a17356171f1eee209314cde18a12786bfa3d"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Dec 2022 02:06:39 GMT",
+      "tag": "@fluentui/react-native_v0.34.2",
+      "version": "0.34.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "beachball",
+            "package": "@fluentui/react-native",
+            "comment": "Bump @fluentui-react-native/link to v0.17.16",
+            "commit": "8fa01d4fa72d594c635da4246fbe945d9db506ad"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Dec 2022 14:50:50 GMT",
       "tag": "@fluentui/react-native_v0.34.1",
       "version": "0.34.1",

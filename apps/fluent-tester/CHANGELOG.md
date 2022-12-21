@@ -1,8 +1,35 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Dec 2022 01:18:57 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.120.1
+
+Wed, 21 Dec 2022 10:29:07 GMT
+
+### Patches
+
+- Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/experimental-icon to v0.1.6
+
+## 0.120.0
+
+Wed, 21 Dec 2022 06:39:34 GMT
+
+### Minor changes
+
+- Merge branch 'master' into checkbox-finalization (rohanpd.work@gmail.com)
+- Bump @fluentui-react-native/experimental-checkbox to v0.13.14
+- Bump @fluentui/react-native to v0.34.3
+
+## 0.119.4
+
+Wed, 21 Dec 2022 02:06:39 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.34.2
 
 ## 0.119.3
 
