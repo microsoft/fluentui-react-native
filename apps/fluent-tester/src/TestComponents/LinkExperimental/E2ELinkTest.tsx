@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Alert } from 'react-native';
 import { Link } from '@fluentui-react-native/experimental-link';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle } from '../Common/styles';
@@ -12,7 +11,7 @@ import {
 
 export const LinkE2ETest: React.FunctionComponent = () => {
   const doPress = (): void => {
-    Alert.alert('Alert.', 'You have been alerted.');
+    console.log('Link pressed');
   };
 
   return (
