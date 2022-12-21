@@ -2,7 +2,7 @@ import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalLinkPageObject from '../pages/LinkPageObject';
 import { ComponentSelector } from '../../common/BasePage';
 import { EXPERIMENTAL_LINK_ACCESSIBILITY_LABEL } from '../../../../fluent-tester/src/TestComponents/LinkExperimental/consts';
-import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT } from '../../common/consts';
+import { LINK_A11Y_ROLE, PAGE_TIMEOUT, BOOT_APP_TIMEOUT, Keys } from '../../common/consts';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Link Testing Initialization', function () {
@@ -18,6 +18,41 @@ describe('Link Testing Initialization', function () {
 
     await expect(await ExperimentalLinkPageObject.isPageLoaded()).toBeTruthy(ExperimentalLinkPageObject.ERRORMESSAGE_PAGELOAD);
     await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  });
+});
+
+describe('Link Testing Functionality', function () {
+  /* Scrolls and waits for the Button to be visible on the Test Page */
+  beforeEach(async () => {
+    await ExperimentalLinkPageObject.scrollToTestElement();
+  });
+
+  it('Validate OnPress() callback was fired -> Click', async () => {
+    await ExperimentalLinkPageObject.click(ExperimentalLinkPageObject._secondaryComponent);
+    await expect(await ExperimentalLinkPageObject.didOnClickCallbackFire()).toBeTruthy(
+      `The link failed to fire an onClick callback with a mouse click.`,
+    );
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT);
+
+    await ExperimentalLinkPageObject.click(ExperimentalLinkPageObject._secondaryComponent); // Reset Button State
+  });
+
+  it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
+    await ExperimentalLinkPageObject.sendKeys(ExperimentalLinkPageObject._secondaryComponent, [Keys.ENTER]);
+    await expect(await ExperimentalLinkPageObject.didOnClickCallbackFire()).toBeTruthy(
+      `The link failed to fire an onClick callback with an enter keypress.`,
+    );
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT);
+
+    await ExperimentalLinkPageObject.click(ExperimentalLinkPageObject._secondaryComponent); // Reset Button State
+  });
+
+  it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
+    await ExperimentalLinkPageObject.sendKeys(ExperimentalLinkPageObject._secondaryComponent, [Keys.SPACE]);
+    await expect(await ExperimentalLinkPageObject.didOnClickCallbackFire()).toBeTruthy(
+      `The link failed to fire an onClick callback with a space keypress.`,
+    );
+    await expect(await ExperimentalLinkPageObject.didAssertPopup()).toBeFalsy(ExperimentalLinkPageObject.ERRORMESSAGE_ASSERT);
   });
 });
 
