@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Alert, View, StyleSheet, Text, TextInput } from 'react-native';
-import { Link, LinkTokens } from '@fluentui-react-native/experimental-link';
+import { LinkV1 as Link, LinkTokens } from '@fluentui/react-native';
 import { Stack } from '@fluentui-react-native/stack';
 import { stackStyle, commonTestStyles as commonStyles } from '../Common/styles';
 import { EXPERIMENTAL_LINK_TESTPAGE } from './consts';
