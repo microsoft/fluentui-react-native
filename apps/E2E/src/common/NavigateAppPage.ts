@@ -24,6 +24,7 @@ import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from '../../../fluent-tester
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../fluent-tester/src/TestComponents/Separator/consts';
 import { HOMEPAGE_SHADOW_BUTTON } from '../../../fluent-tester/src/TestComponents/Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../../fluent-tester/src/TestComponents/Shimmer/consts';
+import { HOMEPAGE_SPACING_BUTTON } from '../../../fluent-tester/src/TestComponents/Spacing/consts';
 import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../../../fluent-tester/src/TestComponents/StrokeWidth/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../../fluent-tester/src/TestComponents/Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../../../fluent-tester/src/TestComponents/Switch/consts';
@@ -134,6 +135,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToShimmerPage() {
     await (await this.shimmerPage).click();
+  }
+
+  async clickAndGoToSpacingTokensPage() {
+    await (await this.spacingTokensPage).click();
   }
 
   async clickAndGoToStrokeWidthTokensPage() {
@@ -282,6 +287,10 @@ class NavigateAppPage extends BasePage {
 
   private get strokeWidthTokensPage() {
     return By(HOMEPAGE_STROKEWIDTH_BUTTON);
+  }
+
+  private get spacingTokensPage() {
+    return By(HOMEPAGE_SPACING_BUTTON);
   }
 
   private get svgPage() {
