@@ -33,7 +33,7 @@ export type LinkState = IPressableState & {
 /**
  * Link tokens, these are the internally configurable values for Link elements. In particular these
  * drive decisions on how to build the styles
- * Note: 'hovered','focused','visited','subtle' is not supported for Android
+ * Note: 'hovered','focused','visited','subtle' are not supported for Android
  */
 export interface LinkTokens extends TextTokens {
   hovered?: LinkTokens;
