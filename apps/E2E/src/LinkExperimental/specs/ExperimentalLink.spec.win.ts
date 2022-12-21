@@ -27,7 +27,7 @@ describe('Link Testing Functionality', function () {
     await ExperimentalLinkPageObject.scrollToTestElement();
   });
 
-  it('Validate OnPress() callback was fired -> Click', async () => {
+  it('Validate OnPress() callback was fired on a click', async () => {
     await ExperimentalLinkPageObject.click(ExperimentalLinkPageObject._secondaryComponent);
     await expect(await ExperimentalLinkPageObject.didOnClickCallbackFire()).toBeTruthy(
       `The link failed to fire an onClick callback with a mouse click.`,
@@ -37,7 +37,7 @@ describe('Link Testing Functionality', function () {
     await ExperimentalLinkPageObject.click(ExperimentalLinkPageObject._secondaryComponent); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
+  it('Validate OnClick() callback was fired after hitting "Enter"', async () => {
     await ExperimentalLinkPageObject.sendKeys(ExperimentalLinkPageObject._secondaryComponent, [Keys.ENTER]);
     await expect(await ExperimentalLinkPageObject.didOnClickCallbackFire()).toBeTruthy(
       `The link failed to fire an onClick callback with an enter keypress.`,
@@ -47,7 +47,7 @@ describe('Link Testing Functionality', function () {
     await ExperimentalLinkPageObject.click(ExperimentalLinkPageObject._secondaryComponent); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
+  it('Validate OnClick() callback was fired after hitting "SPACE"', async () => {
     await ExperimentalLinkPageObject.sendKeys(ExperimentalLinkPageObject._secondaryComponent, [Keys.SPACE]);
     await expect(await ExperimentalLinkPageObject.didOnClickCallbackFire()).toBeTruthy(
       `The link failed to fire an onClick callback with a space keypress.`,
