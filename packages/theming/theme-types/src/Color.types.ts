@@ -522,7 +522,7 @@ export interface AliasColorTokens {
   /** Defined on platforms: macOS, win32, windows */
   neutralForegroundDisabled?: ColorValue;
 
-  // TODO: remove definition from Android
+  // TODO #2440: remove from Android and delete token defintion
   /** Defined on platforms: android, macOS, win32, windows */
   neutralForegroundInverted: ColorValue;
 
@@ -619,7 +619,7 @@ export interface AliasColorTokens {
   /** Defined on platforms: android, iOS */
   neutralBackgroundLightStatic?: ColorValue;
 
-  /** Defined on platforms: android, iOS, */
+  /** Defined on platforms: android, iOS */
   neutralBackgroundLightStaticDisabled?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
@@ -690,7 +690,7 @@ export interface AliasColorTokens {
   /** Defined on platforms: android, iOS, macOS, win32, windows */
   brandForeground1: ColorValue;
 
-  // TODO: rename to brandForegroundDisabled1
+  // TODO #2445: rename to brandForegroundDisabled1
   /** Defined on platforms: android, iOS */
   brandForeground1Disabled?: ColorValue;
 
