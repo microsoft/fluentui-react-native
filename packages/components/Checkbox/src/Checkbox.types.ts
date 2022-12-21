@@ -188,7 +188,7 @@ export interface CheckboxInfo {
 
 export interface CheckboxSlotProps {
   root: React.PropsWithRef<PressablePropsExtended>;
-  checkbox: React.PropsWithRef<PressablePropsExtended>;
+  checkbox: PressablePropsExtended;
   checkmark: SvgProps;
   label: ITextProps;
   required: ITextProps;
