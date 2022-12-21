@@ -454,58 +454,58 @@ export interface AliasColorTokens {
   /// Foreground colors
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralForeground1: ColorValue;
+  neutralForeground1?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground1Hover: ColorValue;
+  neutralForeground1Hover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground1Pressed: ColorValue;
+  neutralForeground1Pressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground1Selected: ColorValue;
+  neutralForeground1Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralForeground2: ColorValue;
+  neutralForeground2?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground2Hover: ColorValue;
+  neutralForeground2Hover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground2Pressed: ColorValue;
+  neutralForeground2Pressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground2Selected: ColorValue;
+  neutralForeground2Selected?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground2BrandHover: ColorValue;
+  neutralForeground2BrandHover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground2BrandPressed: ColorValue;
+  neutralForeground2BrandPressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground2BrandSelected: ColorValue;
+  neutralForeground2BrandSelected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralForeground3: ColorValue;
+  neutralForeground3?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground3Hover: ColorValue;
+  neutralForeground3Hover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground3Pressed: ColorValue;
+  neutralForeground3Pressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground3Selected: ColorValue;
+  neutralForeground3Selected?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground3BrandHover: ColorValue;
+  neutralForeground3BrandHover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground3BrandPressed: ColorValue;
+  neutralForeground3BrandPressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralForeground3BrandSelected: ColorValue;
+  neutralForeground3BrandSelected?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
   neutralForeground4?: ColorValue;
@@ -536,7 +536,7 @@ export interface AliasColorTokens {
 
   // TODO: remove definition from Android
   /** Defined on platforms: android, macOS, win32, windows */
-  neutralForegroundInverted: ColorValue;
+  neutralForegroundInverted?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
   neutralForegroundInvertedLink?: ColorValue;
@@ -572,10 +572,10 @@ export interface AliasColorTokens {
   compoundBrandForeground1Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  brandForeground1: ColorValue;
+  brandForeground1?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS */
-  brandForeground1Pressed: ColorValue;
+  brandForeground1Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS */
   brandForeground1Selected?: ColorValue;
@@ -599,73 +599,73 @@ export interface AliasColorTokens {
   // Background colors
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground1: ColorValue;
+  neutralBackground1?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralBackground1Hover: ColorValue;
+  neutralBackground1Hover?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground1Pressed: ColorValue;
+  neutralBackground1Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground1Selected: ColorValue;
+  neutralBackground1Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground2: ColorValue;
+  neutralBackground2?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralBackground2Hover: ColorValue;
+  neutralBackground2Hover?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground2Pressed: ColorValue;
+  neutralBackground2Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground2Selected: ColorValue;
+  neutralBackground2Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground3: ColorValue;
+  neutralBackground3?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralBackground3Hover: ColorValue;
+  neutralBackground3Hover?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground3Pressed: ColorValue;
+  neutralBackground3Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground3Selected: ColorValue;
+  neutralBackground3Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground4: ColorValue;
+  neutralBackground4?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralBackground4Hover: ColorValue;
+  neutralBackground4Hover?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground4Pressed: ColorValue;
+  neutralBackground4Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground4Selected: ColorValue;
+  neutralBackground4Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground5: ColorValue;
+  neutralBackground5?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralBackground5Hover: ColorValue;
+  neutralBackground5Hover?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground5Pressed: ColorValue;
+  neutralBackground5Pressed?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground5Selected: ColorValue;
+  neutralBackground5Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackground6: ColorValue;
+  neutralBackground6?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackgroundInverted: ColorValue;
+  neutralBackgroundInverted?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralBackgroundDisabled: ColorValue;
+  neutralBackgroundDisabled?: ColorValue;
 
   /** Defined on platforms: android, iOS */
   neutralBackgroundLightStatic?: ColorValue;
@@ -698,19 +698,19 @@ export interface AliasColorTokens {
   transparentBackgroundSelected?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  brandBackground: ColorValue;
+  brandBackground?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
   brandBackgroundHover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  brandBackgroundPressed: ColorValue;
+  brandBackgroundPressed?: ColorValue;
 
   /** Defined on platforms: macOS */
   brandBackgroundDisabled?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  brandBackgroundSelected: ColorValue;
+  brandBackgroundSelecte?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
   compoundBrandBackground1?: ColorValue;
@@ -725,7 +725,7 @@ export interface AliasColorTokens {
   brandBackgroundStatic?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  brandBackground2: ColorValue;
+  brandBackground2?: ColorValue;
 
   /** Defined on platforms: android, iOS */
   brandBackground2Pressed?: ColorValue;
@@ -748,45 +748,45 @@ export interface AliasColorTokens {
   brandBackgroundInvertedDisabled?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralStencil1: ColorValue;
+  neutralStencil1?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralStencil2: ColorValue;
+  neutralStencil2?: ColorValue;
 
   // Stroke
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralStrokeAccessible: ColorValue;
+  neutralStrokeAccessibl?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralStrokeAccessibleHover: ColorValue;
+  neutralStrokeAccessibleHover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralStrokeAccessiblePressed: ColorValue;
+  neutralStrokeAccessiblePressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralStrokeAccessibleSelected: ColorValue;
+  neutralStrokeAccessibleSelected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralStroke1: ColorValue;
+  neutralStroke1?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralStroke1Hover: ColorValue;
+  neutralStroke1Hover?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralStroke1Pressed: ColorValue;
+  neutralStroke1Pressed?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
-  neutralStroke1Selected: ColorValue;
+  neutralStroke1Selected?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralStroke2: ColorValue;
+  neutralStroke2?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
   neutralStroke3?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  neutralStrokeDisabled: ColorValue;
+  neutralStrokeDisabled?: ColorValue;
 
   /** Defined on platforms: macOS, win32, windows */
   strokeFocus1?: ColorValue;
@@ -795,7 +795,7 @@ export interface AliasColorTokens {
   strokeFocus2?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS, win32, windows */
-  brandStroke1: ColorValue;
+  brandStroke1?: ColorValue;
 
   /** Defined on platforms: android, iOS, macOS */
   brandStroke1Pressed?: ColorValue;
