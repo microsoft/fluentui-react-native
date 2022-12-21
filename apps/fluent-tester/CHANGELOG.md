@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Dec 2022 17:18:46 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.120.2
+
+Wed, 21 Dec 2022 17:18:46 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.34.4
 
 ## 0.120.1
 

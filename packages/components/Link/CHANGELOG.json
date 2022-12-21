@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/link",
   "entries": [
     {
+      "date": "Wed, 21 Dec 2022 17:18:46 GMT",
+      "tag": "@fluentui-react-native/link_v0.17.17",
+      "version": "0.17.17",
+      "comments": {
+        "patch": [
+          {
+            "author": "ruaraki@microsoft.com",
+            "package": "@fluentui-react-native/link",
+            "commit": "272c2cde9b5260eec755ccbe7083e0b7c5040152",
+            "comment": "Update subtle example for Link"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Dec 2022 02:06:39 GMT",
       "tag": "@fluentui-react-native/link_v0.17.16",
       "version": "0.17.16",
