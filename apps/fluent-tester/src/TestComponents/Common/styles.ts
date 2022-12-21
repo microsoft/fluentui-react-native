@@ -170,6 +170,11 @@ export const mobileStyles = StyleSheet.create({
     width: '100%',
     marginVertical: 15,
   },
+  containerSpacedEvenly: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
 });
 
 export const testContentRootViewStyle = [stackStyle, commonTestStyles.view];
