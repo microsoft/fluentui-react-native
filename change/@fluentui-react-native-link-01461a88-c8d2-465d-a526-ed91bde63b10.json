@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Move v1 Link code into main link folder",
+  "packageName": "@fluentui-react-native/link",
+  "email": "ruaraki@microsoft.com",
+  "dependentChangeType": "patch"
+}
