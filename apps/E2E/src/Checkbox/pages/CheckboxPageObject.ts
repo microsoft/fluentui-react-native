@@ -35,8 +35,9 @@ class CheckboxPageObject extends BasePage {
     }
   }
 
-  /* The onChange callback for the checkbox shows a hidden Text component near the checkmark. This checks if the text
-   * is displayed. */
+  /* Unlike snapshot testing, we cannot spy on functions to determine if they get called or not. In order to determine if
+   * the onChange() callback gets fired, we show / hide the a Text label as the callback gets fired. This way, we know that
+   * the onChange() callback has fired by checking that the label element is currently displayed. */
   async didOnChangeCallbackFire(): Promise<boolean> {
     const callbackText = await this._callbackText;
     await this.waitForCondition(async () => await callbackText.isDisplayed(), 'The onChange callback did not fire.');
