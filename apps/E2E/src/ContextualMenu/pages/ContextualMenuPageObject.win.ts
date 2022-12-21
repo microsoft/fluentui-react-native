@@ -11,6 +11,7 @@ class ContextualMenuPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
+  /* Waiter that waits for the MenuItems to be displayed and returns true / false whether that occurs. */
   async waitForContextualMenuItemsToOpen(timeout?: number): Promise<boolean> {
     await this.waitForCondition(async () => this.contextualMenuItemDisplayed(), 'The Contextual Menu Items did not open.', timeout);
     return await (await this._contextualMenuItem).isDisplayed();
@@ -21,12 +22,15 @@ class ContextualMenuPageObject extends BasePage {
     return await (await this._contextualMenuItem).isDisplayed();
   }
 
+  /* Closes the ContextualMenu by sending an ESCAPE key input to the menu button */
   async closeContextualMenu(): Promise<void> {
-    await this.sendKeys(this._contextualMenu, [Keys.ESCAPE]);
-    await this.waitForCondition(
-      async () => !(await this.contextualMenuItemDisplayed()),
-      "Pressed 'ESC' on the ContextualMenu button, but the ContextualMenu items failed to close.",
-    );
+    if (await this.contextualMenuItemDisplayed()) {
+      await this.sendKeys(this._contextualMenu, [Keys.ESCAPE]);
+      await this.waitForCondition(
+        async () => !(await this.contextualMenuItemDisplayed()),
+        "Pressed 'ESC' on the ContextualMenu button, but the ContextualMenu items failed to close.",
+      );
+    }
   }
 
   /*****************************************/
