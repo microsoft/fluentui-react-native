@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 21 Dec 2022 23:00:53 GMT",
+      "tag": "@fluentui-react-native/tester_v0.121.0",
+      "version": "0.121.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "c6f0feaa01969cab2a902cd4c4c603729e39ef24",
+            "comment": "Add ScrollView to Menu (macOS)"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/menu to v1.2.0",
+            "commit": "c6f0feaa01969cab2a902cd4c4c603729e39ef24"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Dec 2022 17:18:46 GMT",
       "tag": "@fluentui-react-native/tester_v0.120.2",
       "version": "0.120.2",
