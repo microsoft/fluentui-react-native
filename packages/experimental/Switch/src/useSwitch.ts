@@ -24,7 +24,7 @@ const defaultAccessibilityActions = [{ name: 'Toggle' }];
 //   }
 // };
 
-export const useSwitch = (props: SwitchProps, bgColor?: any = 'red'): SwitchInfo => {
+export const useSwitch = (props: SwitchProps, bgColor?: { on: string; off: string }): SwitchInfo => {
   console.log(bgColor);
   const defaultComponentRef = React.useRef(null);
   const {
@@ -61,6 +61,8 @@ export const useSwitch = (props: SwitchProps, bgColor?: any = 'red'): SwitchInfo
   const [animation, setAnimation] = React.useState(new Animated.Value(0));
   const [animationbg, setAnimationbg] = React.useState(new Animated.Value(0));
 
+  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
+
   const animatedStyles = {
     animatedStyle: {
       transform: [
@@ -72,12 +74,11 @@ export const useSwitch = (props: SwitchProps, bgColor?: any = 'red'): SwitchInfo
     backgroundStyle: {
       backgroundColor: animationbg.interpolate({
         inputRange: [0, 1],
-        outputRange: ['blue', bgColor],
+        outputRange: checked ? [bgColor.off, bgColor.on] : [bgColor.on, bgColor.off],
       }),
     },
   };
 
-  const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
   const startAnimation = () => {
     Animated.timing(animation, {
       toValue: 20,
