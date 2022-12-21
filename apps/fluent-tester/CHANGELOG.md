@@ -1,8 +1,17 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Dec 2022 06:39:34 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.120.1
+
+Wed, 21 Dec 2022 10:29:07 GMT
+
+### Patches
+
+- Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits (vkozlova@microsoft.com)
+- Bump @fluentui-react-native/experimental-icon to v0.1.6
 
 ## 0.120.0
 

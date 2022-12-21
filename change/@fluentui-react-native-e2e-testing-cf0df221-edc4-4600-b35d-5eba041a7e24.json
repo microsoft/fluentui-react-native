@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits",
-  "packageName": "@fluentui-react-native/e2e-testing",
-  "email": "vkozlova@microsoft.com",
-  "dependentChangeType": "patch"
-}

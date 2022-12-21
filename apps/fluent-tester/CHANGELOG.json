@@ -2,6 +2,27 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Wed, 21 Dec 2022 10:29:07 GMT",
+      "tag": "@fluentui-react-native/tester_v0.120.1",
+      "version": "0.120.1",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "62e3f79db5be4cdcf409620c7f28eded91bfae4e",
+            "comment": "Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits"
+          },
+          {
+            "author": "beachball",
+            "package": "@fluentui-react-native/tester",
+            "comment": "Bump @fluentui-react-native/experimental-icon to v0.1.6",
+            "commit": "62e3f79db5be4cdcf409620c7f28eded91bfae4e"
+          }
+        ]
+      }
+    },
+    {
       "date": "Wed, 21 Dec 2022 06:39:34 GMT",
       "tag": "@fluentui-react-native/tester_v0.120.0",
       "version": "0.120.0",
