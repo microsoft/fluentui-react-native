@@ -1,0 +1,7 @@
+{
+  "type": "minor",
+  "comment": "Merge branch 'master' into checkbox-finalization",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
