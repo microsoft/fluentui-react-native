@@ -152,20 +152,22 @@ const linkSections: TestSection[] = [
     name: 'Inline Links',
     component: InlineLinks,
   },
-  ...Platform.select({
+  Platform.select({
     // As per design discussion , There is no use case for subtle link on Android , No tokens available for same.
-    android: [null],
-    default: [
-      {
-        name: 'Subtle Links',
-        component: SubtleLinks,
-      },
-    ],
+    android: null,
+    default: {
+      name: 'Subtle Links',
+      component: SubtleLinks,
+    },
   }),
-  {
-    name: 'Custom Link',
-    component: CustomLinks,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Custom Link',
+      component: CustomLinks,
+    },
+  }),
+
   {
     name: 'Link E2E Test',
     component: LinkE2ETest,
