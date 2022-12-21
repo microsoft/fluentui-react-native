@@ -12,9 +12,6 @@ const styles = StyleSheet.create({
 });
 
 export const MenuScrollView: React.FunctionComponent = () => {
-  const [maxHeight, setMaxHeight] = useState<number>(800);
-  const ScrollViewMenuPopover = MenuPopover.customize({ maxHeight: maxHeight });
-  const menuItems = [];
   const [data, setData] = useState([
     <MenuItem key={1}>MenuItem 1</MenuItem>,
     <MenuItem key={2}>MenuItem 2</MenuItem>,
@@ -23,9 +20,6 @@ export const MenuScrollView: React.FunctionComponent = () => {
     <MenuItem key={5}>MenuItem 5</MenuItem>,
   ]);
 
-  for (let i = 0; i < 400; i++) {
-    menuItems.push(<MenuItem key={i}>MenuItem {i}</MenuItem>);
-  }
   const insertOnClick = React.useCallback(() => {
     data.push(<MenuItem key={Math.random()}>MenuItem</MenuItem>);
     const newList = [...data];
@@ -39,6 +33,13 @@ export const MenuScrollView: React.FunctionComponent = () => {
       setData(newList);
     }
   }, [data]);
+
+  const [maxHeight, setMaxHeight] = useState<number>(800);
+  const menuItems = [];
+
+  for (let i = 0; i < 40; i++) {
+    menuItems.push(<MenuItem key={i}>MenuItem {i}</MenuItem>);
+  }
 
   return (
     <Stack style={stackStyle}>
@@ -54,11 +55,11 @@ export const MenuScrollView: React.FunctionComponent = () => {
         />
         <Menu>
           <MenuTrigger>
-            <Button>Test</Button>
+            <Button>Custom height</Button>
           </MenuTrigger>
-          <ScrollViewMenuPopover>
+          <MenuPopover maxHeight={maxHeight}>
             <MenuList>{menuItems}</MenuList>
-          </ScrollViewMenuPopover>
+          </MenuPopover>
         </Menu>
       </View>
       <View style={styles.menuContainerRow}>
@@ -72,14 +73,14 @@ export const MenuScrollView: React.FunctionComponent = () => {
           <MenuTrigger>
             <Button>Mutable Menu</Button>
           </MenuTrigger>
-          <ScrollViewMenuPopover>
+          <MenuPopover>
             <MenuList>{data}</MenuList>
-          </ScrollViewMenuPopover>
+          </MenuPopover>
         </Menu>
       </View>
       <Menu>
         <MenuTrigger>
-          <Button>Custom height</Button>
+          <Button>Height: 100</Button>
         </MenuTrigger>
         <MenuPopover maxHeight={100}>
           <MenuList>
