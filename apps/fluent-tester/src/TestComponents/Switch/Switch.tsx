@@ -26,9 +26,9 @@ const StandardUsage: React.FunctionComponent = () => {
   return (
     <View style={memoizedStyles}>
       <Switch defaultChecked={true} label={'Default Checked True'} />
-      <Switch defaultChecked={false} label={'Default Checked False'} />
+      {/* <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
-      <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled />
+      <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled /> */}
     </View>
   );
 };
@@ -103,36 +103,36 @@ const toggleSections: TestSection[] = [
     testID: SWITCH_TESTPAGE,
     component: () => <StandardUsage />,
   },
-  {
-    name: 'onChange Usage',
-    component: () => <OnChangeUsage />,
-  },
-  {
-    name: 'Control Switch Values',
-    component: () => <ControlSwitchValues />,
-  },
-  Platform.select({
-    android: null,
-    default: {
-      name: 'Label Position',
-      component: () => <LabelPosition />,
-    },
-  }),
-  Platform.select({
-    android: null,
-    default: {
-      name: 'On/Off Text',
-      component: () => <OnOffText />,
-    },
-  }),
-  {
-    name: 'Customized Tokens',
-    component: () => <CustomizedSwitch />,
-  },
-  {
-    name: 'Switch E2E Testing',
-    component: () => <E2ESwitchTest />,
-  },
+  // {
+  //   name: 'onChange Usage',
+  //   component: () => <OnChangeUsage />,
+  // },
+  // {
+  //   name: 'Control Switch Values',
+  //   component: () => <ControlSwitchValues />,
+  // },
+  // Platform.select({
+  //   android: null,
+  //   default: {
+  //     name: 'Label Position',
+  //     component: () => <LabelPosition />,
+  //   },
+  // }),
+  // Platform.select({
+  //   android: null,
+  //   default: {
+  //     name: 'On/Off Text',
+  //     component: () => <OnOffText />,
+  //   },
+  // }),
+  // {
+  //   name: 'Customized Tokens',
+  //   component: () => <CustomizedSwitch />,
+  // },
+  // {
+  //   name: 'Switch E2E Testing',
+  //   component: () => <E2ESwitchTest />,
+  // },
 ];
 
 export const SwitchTest: React.FunctionComponent = () => {
