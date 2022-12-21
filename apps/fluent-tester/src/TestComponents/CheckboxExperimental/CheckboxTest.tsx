@@ -193,10 +193,13 @@ const checkboxSections: TestSection[] = [
     name: 'Other Implementations',
     component: OtherCheckbox,
   },
-  {
-    name: 'Token Customized Checkboxes',
-    component: TokenCheckbox,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Token Customized Checkboxes',
+      component: TokenCheckbox,
+    },
+  }),
   {
     name: 'E2E Testing for Experimental Checkbox',
     component: E2ECheckboxExperimentalTest,
