@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "doc and tester update for link on Android",
+  "packageName": "@fluentui-react-native/tester",
+  "email": "rohanpd.work@gmail.com",
+  "dependentChangeType": "patch"
+}
