@@ -5,33 +5,7 @@ import { AliasColorTokens, Variants, VariantValue } from '@fluentui-react-native
 // pipeline output.
 export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
   return {
-    neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
-    neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
-    neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
-    neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
-    neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
-    neutralForeground2Hover: pipelineOutput.neutralForeground2.fillColorHover,
-    neutralForeground2Pressed: pipelineOutput.neutralForeground2.fillColorPressed,
-    neutralForeground2Selected: pipelineOutput.neutralForeground2.fillColorSelected,
-    neutralForeground2BrandHover: pipelineOutput.neutralForeground2.fillColorBrandHover,
-    neutralForeground2BrandPressed: pipelineOutput.neutralForeground2.fillColorBrandPressed,
-    neutralForeground2BrandSelected: pipelineOutput.neutralForeground2.fillColorBrandSelected,
-    neutralForeground3: pipelineOutput.neutralForeground3.fillColorRest,
-    neutralForeground3Hover: pipelineOutput.neutralForeground3.fillColorHover,
-    neutralForeground3Pressed: pipelineOutput.neutralForeground3.fillColorPressed,
-    neutralForeground3Selected: pipelineOutput.neutralForeground3.fillColorSelected,
-    neutralForeground3BrandHover: pipelineOutput.neutralForeground3.fillColorBrandHover,
-    neutralForeground3BrandPressed: pipelineOutput.neutralForeground3.fillColorBrandPressed,
-    neutralForeground3BrandSelected: pipelineOutput.neutralForeground3.fillColorBrandSelected,
-    neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,
-    neutralForegroundDisabled1: pipelineOutput.neutralForegroundDisabled1.fillColorRest,
-    neutralForegroundDisabled2: pipelineOutput.neutralForegroundDisabled2.fillColorRest,
-
-    neutralForegroundOnColor: pipelineOutput.neutralForegroundOnColor.fillColorRest,
-
-    neutralBackgroundLightStatic: pipelineOutput.neutralBackgroundLightStatic.fillColorRest,
-    neutralBackgroundLightStaticDisabled: pipelineOutput.neutralBackgroundLightStaticDisabled.fillColorRest,
-
+    /// Neutral background tokens
     neutralBackground1: pipelineOutput.neutralBackground1.fillColorRest,
     neutralBackground1Hover: pipelineOutput.neutralBackground1.fillColorHover,
     neutralBackground1Pressed: pipelineOutput.neutralBackground1.fillColorPressed,
@@ -60,9 +34,38 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     neutralBackgroundInverted: pipelineOutput.neutralBackgroundInverted.fillColorRest,
     neutralBackgroundDisabled: pipelineOutput.neutralBackgroundDisabled.fillColorRest,
 
+    neutralBackgroundLightStatic: pipelineOutput.neutralBackgroundLightStatic.fillColorRest,
+    neutralBackgroundLightStaticDisabled: pipelineOutput.neutralBackgroundLightStaticDisabled.fillColorRest,
+
     neutralStencil1: pipelineOutput.neutralStencil1.fillColorRest,
     neutralStencil2: pipelineOutput.neutralStencil2.fillColorRest,
 
+    /// Neutral foreground tokens
+    neutralForeground1: pipelineOutput.neutralForeground1.fillColorRest,
+    neutralForeground1Hover: pipelineOutput.neutralForeground1.fillColorHover,
+    neutralForeground1Pressed: pipelineOutput.neutralForeground1.fillColorPressed,
+    neutralForeground1Selected: pipelineOutput.neutralForeground1.fillColorSelected,
+    neutralForeground2: pipelineOutput.neutralForeground2.fillColorRest,
+    neutralForeground2Hover: pipelineOutput.neutralForeground2.fillColorHover,
+    neutralForeground2Pressed: pipelineOutput.neutralForeground2.fillColorPressed,
+    neutralForeground2Selected: pipelineOutput.neutralForeground2.fillColorSelected,
+    neutralForeground2BrandHover: pipelineOutput.neutralForeground2.fillColorBrandHover,
+    neutralForeground2BrandPressed: pipelineOutput.neutralForeground2.fillColorBrandPressed,
+    neutralForeground2BrandSelected: pipelineOutput.neutralForeground2.fillColorBrandSelected,
+    neutralForeground3: pipelineOutput.neutralForeground3.fillColorRest,
+    neutralForeground3Hover: pipelineOutput.neutralForeground3.fillColorHover,
+    neutralForeground3Pressed: pipelineOutput.neutralForeground3.fillColorPressed,
+    neutralForeground3Selected: pipelineOutput.neutralForeground3.fillColorSelected,
+    neutralForeground3BrandHover: pipelineOutput.neutralForeground3.fillColorBrandHover,
+    neutralForeground3BrandPressed: pipelineOutput.neutralForeground3.fillColorBrandPressed,
+    neutralForeground3BrandSelected: pipelineOutput.neutralForeground3.fillColorBrandSelected,
+    neutralForegroundInverted: pipelineOutput.neutralForegroundInverted.fillColorRest,
+    neutralForegroundDisabled1: pipelineOutput.neutralForegroundDisabled1.fillColorRest,
+    neutralForegroundDisabled2: pipelineOutput.neutralForegroundDisabled2.fillColorRest,
+
+    neutralForegroundOnColor: pipelineOutput.neutralForegroundOnColor.fillColorRest,
+
+    /// Neutral stroke tokens
     neutralStrokeAccessible: pipelineOutput.neutralStrokeAccessible.strokeColorRest,
     neutralStrokeAccessibleHover: pipelineOutput.neutralStrokeAccessible.strokeColorHover,
     neutralStrokeAccessiblePressed: pipelineOutput.neutralStrokeAccessible.strokeColorPressed,
@@ -76,7 +79,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     neutralStroke2: pipelineOutput.neutralStroke2.strokeColorRest,
     neutralStrokeDisabled: pipelineOutput.neutralStrokeDisabled.strokeColorRest,
 
-    //Brand tokens.
+    /// Brand background tokens
     brandBackground: pipelineOutput.brandBackground1.fillColorRest,
     brandBackgroundPressed: pipelineOutput.brandBackground1.fillColorPressed,
     brandBackgroundSelected: pipelineOutput.brandBackground1.fillColorSelected,
@@ -91,6 +94,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
 
     brandBackgroundInvertedDisabled: pipelineOutput.brandBackgroundInvertedDisabled.fillColorRest,
 
+    /// Brand foreground tokens
     brandForeground1: pipelineOutput.brandForeground1.fillColorRest,
     brandForeground1Pressed: pipelineOutput.brandForeground1.fillColorPressed,
     brandForeground1Selected: pipelineOutput.brandForeground1.fillColorSelected,
@@ -99,6 +103,7 @@ export function mapPipelineToTheme(pipelineOutput: any): AliasColorTokens {
     brandForegroundDisabled1: pipelineOutput.brandForegroundDisabled1.fillColorRest,
     brandForegroundDisabled2: pipelineOutput.brandForegroundDisabled2.fillColorRest,
 
+    /// Brand stroke tokens
     brandStroke1: pipelineOutput.brandStroke1.strokeColorRest,
     brandStroke1Pressed: pipelineOutput.brandStroke1.strokeColorPressed,
     brandStroke1Selected: pipelineOutput.brandStroke1.strokeColorSelected,
