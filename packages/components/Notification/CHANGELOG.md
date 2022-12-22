@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/notification
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Dec 2022 17:02:45 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.21.2
+
+Thu, 22 Dec 2022 17:02:45 GMT
+
+### Patches
+
+- Fix notification button padding (adgleitm@microsoft.com)
 
 ## 0.21.1
 

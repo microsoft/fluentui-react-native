@@ -6,6 +6,7 @@ import { Icon, RasterImageIconProps, SvgIconProps, FontIconProps } from '@fluent
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { ICON_TESTPAGE } from './consts';
 import { E2ETestingIcon } from './IconE2ETest';
+import { E2ETestingExperimentalIcon } from './IconExperimentalE2ETest';
 import { IconExperimental } from './IconExperimental';
 import { testImage, testTtf, svgProps } from '../Common/iconExamples';
 
@@ -100,6 +101,10 @@ const iconSections: TestSection[] = [
   {
     name: 'Default Icon',
     component: IconExperimental,
+  },
+  {
+    name: 'Icon Experimental for E2E Testing',
+    component: E2ETestingExperimentalIcon,
   },
 ];
 

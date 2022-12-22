@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/contextual-menu",
   "entries": [
     {
+      "date": "Thu, 22 Dec 2022 19:31:49 GMT",
+      "tag": "@fluentui-react-native/contextual-menu_v0.21.5",
+      "version": "0.21.5",
+      "comments": {
+        "patch": [
+          {
+            "author": "amchiu@microsoft.com",
+            "package": "@fluentui-react-native/contextual-menu",
+            "commit": "619e026c31aaa4c965c5e5bb10e7891ce9de43bf",
+            "comment": "Fork SubmenuItem pressable"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Dec 2022 14:50:50 GMT",
       "tag": "@fluentui-react-native/contextual-menu_v0.21.4",
       "version": "0.21.4",
