@@ -31,9 +31,7 @@ describe('ContextualMenu Functional Tests', async () => {
     /* Click on the ContextualMenu */
     await ContextualMenuPageObject.click(ContextualMenuPageObject._contextualMenu);
 
-    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT)).toBeTruthy(
-      'Clicked the ContextualMenu button, but the ContextualMenu items failed to open and display.',
-    );
+    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToDisplay(PAGE_TIMEOUT)).toBeTruthy();
 
     await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
@@ -42,9 +40,7 @@ describe('ContextualMenu Functional Tests', async () => {
     /* Type a space on the ContextualMenu */
     await ContextualMenuPageObject.sendKeys(ContextualMenuPageObject._contextualMenu, [Keys.SPACE]);
 
-    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToOpen(PAGE_TIMEOUT)).toBeTruthy(
-      "Pressed 'SPACE' on the ContextualMenu button, but the ContextualMenu items failed to open and display.",
-    );
+    await expect(await ContextualMenuPageObject.waitForContextualMenuItemsToDisplay(PAGE_TIMEOUT)).toBeTruthy();
 
     await expect(await ContextualMenuPageObject.didAssertPopup()).toBeFalsy(ContextualMenuPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
