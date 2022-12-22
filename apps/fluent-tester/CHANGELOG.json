@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 22 Dec 2022 22:15:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.121.3",
+      "version": "0.121.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "2e9c3b75cb6afed038dfd3abbf59623282d0bc1a",
+            "comment": "Clarify V2Usage on iOS"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Dec 2022 19:31:49 GMT",
       "tag": "@fluentui-react-native/tester_v0.121.2",
       "version": "0.121.2",
