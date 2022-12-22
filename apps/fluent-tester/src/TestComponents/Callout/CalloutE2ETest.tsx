@@ -43,7 +43,11 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
             />
           ))}
         </View>
-        <Button onClick={toggleShowCallout} {...testProps(BUTTON_TO_OPEN_CALLOUT)}>
+        <Button
+          onClick={toggleShowCallout}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(BUTTON_TO_OPEN_CALLOUT)}
+        >
           Press for Callout
         </Button>
         <Text selectable={true}>
@@ -61,6 +65,7 @@ export const E2ECalloutTest: React.FunctionComponent = () => {
           accessibilityRole="alert"
           accessibilityOnShowAnnouncement="Be informed that a customized callout has been opened."
           dismissBehaviors={Object.keys(dismissBehaviors).filter((behavior) => dismissBehaviors[behavior]) as DismissBehaviors[]}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(CALLOUT_TEST_COMPONENT)}
         >
           <View style={{ padding: 20, borderWidth: 2, borderColor: 'black' }}>

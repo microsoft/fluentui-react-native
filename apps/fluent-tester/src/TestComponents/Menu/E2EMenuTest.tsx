@@ -43,34 +43,76 @@ export const E2EMenuTest: React.FunctionComponent = () => {
   return (
     <Stack style={stackStyle}>
       <View style={{ flexDirection: 'row' }}>
-        {menuOpened ? <Text {...testProps(MENU_ON_OPEN)}>Menu opened</Text> : <Text {...testProps(MENU_ON_CLOSE)}>Menu closed</Text>}
-        <Button onClick={onResetClick} {...testProps(MENU_CALLBACK_RESET_BUTTON)}>
+        {menuOpened ? (
+          <Text /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */ {...testProps(MENU_ON_OPEN)}>
+            Menu opened
+          </Text>
+        ) : (
+          <Text /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */ {...testProps(MENU_ON_CLOSE)}>
+            Menu closed
+          </Text>
+        )}
+        <Button
+          onClick={onResetClick}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */ {...testProps(
+            MENU_CALLBACK_RESET_BUTTON,
+          )}
+        >
           Reset Item Callback
         </Button>
         <Menu open={menuOpened} onOpenChange={onOpenChange}>
           <MenuTrigger>
-            <Button {...testProps(MENUTRIGGER_TEST_COMPONENT)}>Test</Button>
+            <Button
+              /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+              {...testProps(MENUTRIGGER_TEST_COMPONENT)}
+            >
+              Test
+            </Button>
           </MenuTrigger>
-          <MenuPopover {...testProps(MENUPOPOVER_TEST_COMPONENT)}>
+          <MenuPopover
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(MENUPOPOVER_TEST_COMPONENT)}
+          >
             <MenuList>
               <MenuItem
                 onClick={onItemClick}
                 accessibilityLabel={MENUITEM_ACCESSIBILITY_LABEL}
                 persistOnClick
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
                 {...testProps(MENUITEM_TEST_COMPONENT)}
               >
                 A plain MenuItem
               </MenuItem>
-              <MenuItem onClick={onItemClick} {...testProps(MENUITEM_DISABLED_COMPONENT)} disabled persistOnClick>
+              <MenuItem
+                onClick={onItemClick}
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                {...testProps(MENUITEM_DISABLED_COMPONENT)}
+                disabled
+                persistOnClick
+              >
                 A second disabled plain MenuItem
               </MenuItem>
-              <MenuItem {...testProps(MENUITEM_NO_A11Y_LABEL_COMPONENT)}>{MENUITEM_TEST_LABEL}</MenuItem>
-              <MenuItem {...testProps(MENUITEM_FOURTH_COMPONENT)}>A fourth plain MenuItem</MenuItem>
+              <MenuItem
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                {...testProps(MENUITEM_NO_A11Y_LABEL_COMPONENT)}
+              >
+                {MENUITEM_TEST_LABEL}
+              </MenuItem>
+              <MenuItem
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+                {...testProps(MENUITEM_FOURTH_COMPONENT)}
+              >
+                A fourth plain MenuItem
+              </MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
       </View>
-      <Text style={{ marginVertical: 4 }} {...testProps(MENUITEM_CALLBACK_LABEL)}>
+      <Text
+        style={{ marginVertical: 4 }}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(MENUITEM_CALLBACK_LABEL)}
+      >
         {`onClick fired ${numOnClickCalls} times`}
       </Text>
     </Stack>

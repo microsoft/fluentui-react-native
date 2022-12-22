@@ -10,7 +10,11 @@ export const StandardUsage: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <Text variant="captionStandard" {...testProps(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON)}>
+        <Text
+          variant="captionStandard"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(HOMEPAGE_EXPERIMENTAL_TEXT_BUTTON)}
+        >
           CaptionStandard
         </Text>
         <Text variant="secondaryStandard">SecondaryStandard</Text>

@@ -25,15 +25,47 @@ export const E2ERadioGroupExperimentalTest: React.FunctionComponent = () => {
         <RadioGroup
           label="RadioGroup for E2E Testing - Ally Label Set"
           accessibilityLabel={RADIOGROUP_ACCESSIBILITY_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(RADIOGROUP_TEST_COMPONENT)}
         >
-          <Radio label="Option A" value="A" accessibilityLabel={FIRST_RADIO_ACCESSIBILITY_LABEL} {...testProps(FIRST_RADIO)} />
-          <Radio label={SECOND_RADIO_LABEL} value="B" {...testProps(SECOND_RADIO)} />
-          <Radio label="Option C (disabled)" value="C" disabled={true} {...testProps(THIRD_RADIO)} />
-          <Radio label="Option D" value="C" {...testProps(FOURTH_RADIO)} />
+          <Radio
+            label="Option A"
+            value="A"
+            accessibilityLabel={FIRST_RADIO_ACCESSIBILITY_LABEL}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(FIRST_RADIO)}
+          />
+          <Radio
+            label={SECOND_RADIO_LABEL}
+            value="B"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(SECOND_RADIO)}
+          />
+          <Radio
+            label="Option C (disabled)"
+            value="C"
+            disabled={true}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(THIRD_RADIO)}
+          />
+          <Radio
+            label="Option D"
+            value="C"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(FOURTH_RADIO)}
+          />
         </RadioGroup>
-        <RadioGroup label={RADIOGROUP_TEST_COMPONENT_LABEL} {...testProps(RADIOGROUP_NO_A11Y_LABEL_COMPONENT)}>
-          <Radio label="Option W" value="W" {...testProps(FIFTH_RADIO)} />
+        <RadioGroup
+          label={RADIOGROUP_TEST_COMPONENT_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(RADIOGROUP_NO_A11Y_LABEL_COMPONENT)}
+        >
+          <Radio
+            label="Option W"
+            value="W"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(FIFTH_RADIO)}
+          />
           <Radio label="Option X" value="X" />
           <Radio label="Option Y (disabled)" value="C" disabled={true} />
           <Radio label="Option Z" value="Z" />

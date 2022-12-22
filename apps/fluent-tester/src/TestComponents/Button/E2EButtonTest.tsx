@@ -49,16 +49,26 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle}>
-        <Button onClick={onClick} accessibilityLabel={BUTTON_ACCESSIBILITY_LABEL} {...testProps(BUTTON_TEST_COMPONENT)}>
+        <Button
+          onClick={onClick}
+          accessibilityLabel={BUTTON_ACCESSIBILITY_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(BUTTON_TEST_COMPONENT)}
+        >
           This is a button for E2E testing
         </Button>
-        <Button onClick={onClick} {...testProps(BUTTON_NO_A11Y_LABEL_COMPONENT)}>
+        <Button
+          onClick={onClick}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(BUTTON_NO_A11Y_LABEL_COMPONENT)}
+        >
           {BUTTON_TEST_COMPONENT_LABEL}
         </Button>
         <Button
           onClick={onClick}
           accessibilityLabel={BUTTON_PRESS_TEST_COMPONENT_LABEL}
           {...keyPressProps}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(BUTTON_PRESS_TEST_COMPONENT)}
         >
           Press &quot;a&quot; or &quot;b&quot; after focusing this button
@@ -67,12 +77,24 @@ export const E2EButtonExperimentalTest: React.FunctionComponent = () => {
           onClick={onClick}
           accessibilityLabel={BUTTON_FOCUSABLE_TEST_COMPONENT_LABEL}
           focusable={false}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(BUTTON_FOCUSABLE_TEST_COMPONENT)}
         >
           This button isn&apos;t focusable (but isn&apos;t disabled or indeterminate either)
         </Button>
-        {buttonPressed ? <Text {...testProps(BUTTON_ON_PRESS)}>Button Pressed</Text> : null}
-        {keyDetected ? <Text {...testProps(BUTTON_ON_KEY)}>Button Key Press detected: {keyDetected}</Text> : null}
+        {buttonPressed ? (
+          <Text
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(BUTTON_ON_PRESS)}
+          >
+            Button Pressed
+          </Text>
+        ) : null}
+        {keyDetected ? (
+          <Text /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */ {...testProps(BUTTON_ON_KEY)}>
+            Button Key Press detected: {keyDetected}
+          </Text>
+        ) : null}
       </Stack>
     </View>
   );

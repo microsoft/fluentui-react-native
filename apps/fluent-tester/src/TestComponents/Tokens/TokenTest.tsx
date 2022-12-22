@@ -50,7 +50,11 @@ const ColorToken: React.FunctionComponent<ColorTokenProps> = (p: ColorTokenProps
   const themedStyles = getThemedStyles(useTheme());
   return (
     <View style={styles.swatchItem}>
-      <View style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]} {...testProps(TOKENS_TEST_COMPONENT)} />
+      <View
+        style={[getSwatchColorStyle(p.name, p.color), themedStyles.swatch]}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(TOKENS_TEST_COMPONENT)}
+      />
       <Text>{p.name}</Text>
     </View>
   );

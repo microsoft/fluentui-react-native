@@ -2,8 +2,9 @@ import { Platform } from 'react-native';
 // Please read http://93days.me/testing-react-native-application/ to understand why we set accessibilityLabel here.
 
 /**
- * Android uses accessibilityLabel to find elements in tests, while other platforms use testID.
- * This function returns the correct prop for test identifier based on platform.
+ * The underlying Android test drivers use accessibilityLabel to find elements. However, all other platforms use testID.
+ * Because of this, we're adding the testProps function that takes in a unique identifier and returns the correct prop based on the platform
+ * (testID for Win32, Windows, macOS, iOS; accessibilityId for Android).
  *
  * If explict accessibilityLabel is being used for other platforms, apply testProps after it to override it for Android.
  * @param id The string to be used as the test identifier

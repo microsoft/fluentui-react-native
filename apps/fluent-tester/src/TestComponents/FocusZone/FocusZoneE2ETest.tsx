@@ -29,9 +29,17 @@ export const FocusZoneListWrapper: React.FunctionComponent<FocusZoneListWrapperP
   const buttonProps: ButtonProps = { children: 'Click to Focus', style: focusZoneTestStyles.listWrapperButton };
   return (
     <>
-      <Button {...buttonProps} {...testProps(beforeID)} />
+      <Button
+        {...buttonProps}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(beforeID)}
+      />
       {children}
-      <Button {...buttonProps} {...testProps(afterID)} />
+      <Button
+        {...buttonProps}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(afterID)}
+      />
     </>
   );
 };
@@ -57,6 +65,7 @@ export const GridOfButtons: React.FunctionComponent<GridOfButtonsProps> = (props
                   key={widthIndex}
                   style={focusZoneTestStyles.focusZoneButton}
                   componentRef={gridIndex === props.tabbableIdx ? props.tabRef : undefined}
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
                   {...testProps(props.e2etesting ? FOCUSZONE_GRID_BUTTON(gridIndex) : undefined)}
                 >
                   <Text>{gridIndex}</Text>
@@ -82,7 +91,11 @@ export const FocusZone2D: React.FunctionComponent = () => {
   return (
     <View style={commonTestStyles.root}>
       <View style={commonTestStyles.settings}>
-        <Text variant="subheaderSemibold" {...testProps(FOCUSZONE_TEST_COMPONENT)}>
+        <Text
+          variant="subheaderSemibold"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(FOCUSZONE_TEST_COMPONENT)}
+        >
           FocusZone Direction
         </Text>
         <MenuButton
@@ -93,21 +106,25 @@ export const FocusZone2D: React.FunctionComponent = () => {
             testID: FOCUSZONE_DIRECTION_ID(dir),
           }))}
           onItemClick={(dir) => setDirection(dir as FocusZoneDirection)}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(FOCUSZONE_DIRECTION_PICKER)}
         />
         <Switch
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(FOCUSZONE_TWO_DIM_SWITCH)}
           label="2D Navigation"
           checked={is2DNav}
           onChange={(_, checked) => set2dNav(checked)}
         />
         <Switch
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(FOCUSZONE_DISABLED_SWITCH)}
           label="Disabled"
           checked={isDisabled}
           onChange={(_, checked) => setDisabled(checked)}
         />
         <Switch
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(FOCUSZONE_CIRCLE_NAV_SWITCH)}
           label="Circular Navigation"
           checked={isCircularNav}
@@ -117,6 +134,7 @@ export const FocusZone2D: React.FunctionComponent = () => {
           label="Use Default Tabbable Element"
           checked={useDeffaultTabbableElement}
           onChange={(_, checked) => setUseDeffaultTabbableElement(checked)}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(FOCUSZONE_DEFAULT_TABBABLE_SWITCH)}
         />
       </View>

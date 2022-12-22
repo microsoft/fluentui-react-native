@@ -19,22 +19,36 @@ export const E2ETextTest: React.FunctionComponent = () => {
   return (
     <View>
       <Stack style={stackStyle} gap={5}>
-        <Text variant="captionStandard" accessibilityLabel={V1_TEXT_FIRST_ACCESSIBILITY_LABEL} {...testProps(V1_TEXT_FIRST_COMPONENT)}>
+        <Text
+          variant="captionStandard"
+          accessibilityLabel={V1_TEXT_FIRST_ACCESSIBILITY_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(V1_TEXT_FIRST_COMPONENT)}
+        >
           Testing Text Component - Accessibility Label Set
         </Text>
-        <Text variant="captionStandard" {...testProps(V1_TEXT_SECOND_COMPONENT)}>
+        <Text
+          variant="captionStandard"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(V1_TEXT_SECOND_COMPONENT)}
+        >
           {V1_TEXT_SECOND_COMPONENT_CONTENT}
         </Text>
       </Stack>
       <Stack style={stackStyle} gap={5}>
         <DeprecatedText
           variant="captionStandard"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(DEPRECATED_TEXT_FIRST_COMPONENT)}
           accessibilityLabel={DEPRECATED_TEXT_FIRST_ACCESSIBILITY_LABEL}
         >
           Testing Deprecated Text Component - Accessibility Label Set
         </DeprecatedText>
-        <DeprecatedText variant="captionStandard" {...testProps(DEPRECATED_TEXT_SECOND_COMPONENT)}>
+        <DeprecatedText
+          variant="captionStandard"
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(DEPRECATED_TEXT_SECOND_COMPONENT)}
+        >
           {DEPRECATED_TEXT_SECOND_COMPONENT_CONTENT}
         </DeprecatedText>
       </Stack>

@@ -64,7 +64,7 @@ class ButtonPageObject extends BasePage {
     return By(HOMEPAGE_BUTTON_BUTTON);
   }
 
-  get _pageButtonName(): string {
+  get _pageButtonName() {
     return HOMEPAGE_BUTTON_BUTTON;
   }
 }

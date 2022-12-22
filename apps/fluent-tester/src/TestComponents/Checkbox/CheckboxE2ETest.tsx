@@ -30,10 +30,21 @@ export const E2ECheckboxTest: React.FunctionComponent = () => {
           disabled={false}
           label="Testing accessibilityLabel"
           onChange={onClick}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(CHECKBOX_TEST_COMPONENT)}
         />
-        <Checkbox label={CHECKBOX_TEST_COMPONENT_LABEL} {...testProps(CHECKBOX_NO_A11Y_LABEL_COMPONENT)} />
-        {checkboxPressed ? <Text {...testProps(CHECKBOX_ON_PRESS)}>Checkbox Selected</Text> : null}
+        <Checkbox
+          label={CHECKBOX_TEST_COMPONENT_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(CHECKBOX_NO_A11Y_LABEL_COMPONENT)}
+        />
+        {checkboxPressed ? (
+          <Text /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(CHECKBOX_ON_PRESS)}
+          >
+            Checkbox Selected
+          </Text>
+        ) : null}
       </Stack>
     </View>
   );

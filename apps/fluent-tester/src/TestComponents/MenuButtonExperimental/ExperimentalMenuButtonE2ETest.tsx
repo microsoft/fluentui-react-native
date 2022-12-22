@@ -44,6 +44,7 @@ export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
                 accessibilityLabel={EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL}
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
                 {...testProps(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT)}
               />
             </View>
@@ -55,6 +56,7 @@ export const E2ETestExperimentalMenuButton: React.FunctionComponent = () => {
                 menuItems={menuItems}
                 onItemClick={onItemClick}
                 contextualMenu={contextualMenuProps}
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
                 {...testProps(EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT)}
               />
             </View>

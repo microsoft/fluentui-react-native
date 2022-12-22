@@ -120,7 +120,11 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
-        <Button {...testProps('Focus_Button')} style={styles.e2eFocusButton}>
+        <Button
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps('Focus_Button')}
+          style={styles.e2eFocusButton}
+        >
           E2E Testing Button
         </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
@@ -173,7 +177,12 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         const TestComponent = section.component;
         return (
           <View key={index}>
-            <Text style={styles.section} variant="headerSemibold" {...testProps(section.testID)}>
+            <Text
+              style={styles.section}
+              variant="headerSemibold"
+              /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+              {...testProps(section.testID)}
+            >
               {section.name}
             </Text>
             <Separator />

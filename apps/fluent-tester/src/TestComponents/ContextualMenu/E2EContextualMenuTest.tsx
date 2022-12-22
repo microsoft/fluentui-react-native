@@ -76,7 +76,12 @@ export const E2EContextualMenuTest: React.FunctionComponent = () => {
               <Text style={{ color: 'blue' }}>none</Text>
             )}
           </Text>
-          <Button onClick={toggleShowContextualMenu} componentRef={stdBtnRef} {...testProps(CONTEXTUALMENU_TEST_COMPONENT)}>
+          <Button
+            onClick={toggleShowContextualMenu}
+            componentRef={stdBtnRef}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(CONTEXTUALMENU_TEST_COMPONENT)}
+          >
             Press for ContextualMenu
           </Button>
         </View>
@@ -93,7 +98,12 @@ export const E2EContextualMenuTest: React.FunctionComponent = () => {
           shouldFocusOnContainer={focusOnContainer}
           isBeakVisible={isBeakVisible}
         >
-          <ContextualMenuItem text="MenuItem 1" itemKey="1" {...testProps(CONTEXTUALMENUITEM_TEST_COMPONENT)} />
+          <ContextualMenuItem
+            text="MenuItem 1"
+            itemKey="1"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(CONTEXTUALMENUITEM_TEST_COMPONENT)}
+          />
           <ContextualMenuItem text="MenuItem 2" itemKey="2" />
           <ContextualMenuItem text="Disabled Menu Item" itemKey="3" disabled />
           <ContextualMenuItem text="MenuItem 4" itemKey="4" />

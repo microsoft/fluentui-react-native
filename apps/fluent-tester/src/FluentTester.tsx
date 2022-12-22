@@ -74,6 +74,7 @@ const Header: React.FunctionComponent<HeaderProps> = React.memo((props) => {
         style={fluentTesterStyles.testHeader}
         variant="heroLargeSemibold"
         color={theme.host.palette?.TextEmphasis}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(BASE_TESTPAGE)}
       >
         ⚛ FluentUI Tests
@@ -138,7 +139,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const TestList: React.FunctionComponent = React.memo(() => {
     return (
       <View style={fluentTesterStyles.testList}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}>
+        <ScrollView
+          contentContainerStyle={fluentTesterStyles.testListContainerStyle}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}
+        >
           {sortedTestComponents.map((description, index) => {
             return (
               <Button
@@ -147,6 +152,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                 disabled={index == selectedTestIndex}
                 onClick={() => setSelectedTestIndex(index)}
                 style={fluentTesterStyles.testListItem}
+                /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
                 {...testProps(description.testPageButton)}
                 // This ref so focus can be set on it when the app mounts in win32. Without this, focus won't be set anywhere.
                 {...(index === 0 && { componentRef: focusOnMountRef })}
@@ -165,7 +171,11 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
   const MobileTestList: React.FunctionComponent = React.memo(() => {
     return (
       <View style={{ ...mobileStyles.testList, display: isTestListVisible ? 'flex' : 'none' }}>
-        <ScrollView contentContainerStyle={fluentTesterStyles.testListContainerStyle} {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}>
+        <ScrollView
+          contentContainerStyle={fluentTesterStyles.testListContainerStyle}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(TESTPAGE_BUTTONS_SCROLLVIEWER)}
+        >
           {sortedTestComponents.map((description, index) => {
             return (
               <View key={index}>
@@ -179,6 +189,7 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
                     }
                   }}
                   style={mobileStyles.testListItem}
+                  /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
                   {...testProps(description.testPageButton)}
                 >
                   {description.name}
@@ -202,7 +213,12 @@ export const FluentTester: React.FunctionComponent<FluentTesterProps> = (props: 
 
   return (
     // On iOS, the accessible prop must be set to false because iOS does not support nested accessibility elements
-    <RootView style={themedStyles.root} accessible={Platform.OS !== 'ios'} {...testProps(ROOT_VIEW)}>
+    <RootView
+      style={themedStyles.root}
+      accessible={Platform.OS !== 'ios'}
+      /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+      {...testProps(ROOT_VIEW)}
+    >
       <Header enableSinglePaneView={enableSinglePaneView} enableBackButtonIOS={!onTestListView} onBackButtonPressedIOS={onBackPress} />
       <HeaderSeparator />
       <View style={fluentTesterStyles.testRoot}>

@@ -163,6 +163,9 @@ export abstract class BasePage {
       }
       default:
       case MobilePlatform.Android:
+        /* 'mobile: scroll' which is used for iOS, does not support direction option on Android.
+         * Instead, we use the UiScrollable class to scroll down to the desired view based on its 'description' (accessibilityLabel).
+         * The first selector tells which container to scroll in, and the other selector tells which component to scroll to. */
         await browser.waitUntil(
           async () => {
             const buttonElementSelector = `new UiScrollable(new UiSelector().description("${TESTPAGE_BUTTONS_SCROLLVIEWER}").scrollable(true)).setMaxSearchSwipes(10).setAsVerticalList().scrollIntoView(new UiSelector().description("${this._pageButtonName}"))`;

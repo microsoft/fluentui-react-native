@@ -19,11 +19,17 @@ export const E2ETestExperimentalTabs: React.FunctionComponent = () => {
   return (
     <View>
       <View style={stackStyle}>
-        <Tabs label="Tabs" accessibilityLabel={EXPERIMENTAL_TABS_ACCESSIBILITY_LABEL} {...testProps(EXPERIMENTAL_TABS_TEST_COMPONENT)}>
+        <Tabs
+          label="Tabs"
+          accessibilityLabel={EXPERIMENTAL_TABS_ACCESSIBILITY_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(EXPERIMENTAL_TABS_TEST_COMPONENT)}
+        >
           <TabsItem
             headerText="Home"
             itemKey="A"
             accessibilityLabel={EXPERIMENTAL_TABS_ITEM_ACCESSIBILITY_LABEL}
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
             {...testProps(EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT)}
           >
             <Text>Tabs #1</Text>
@@ -37,10 +43,15 @@ export const E2ETestExperimentalTabs: React.FunctionComponent = () => {
         </Tabs>
       </View>
       <View style={stackStyle}>
-        <Tabs label={EXPERIMENTAL_TABS_TEST_COMPONENT_LABEL} {...testProps(EXPERIMENTAL_TABS_NO_A11Y_LABEL_COMPONENT)}>
+        <Tabs
+          label={EXPERIMENTAL_TABS_TEST_COMPONENT_LABEL}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(EXPERIMENTAL_TABS_NO_A11Y_LABEL_COMPONENT)}
+        >
           <TabsItem
             headerText={EXPERIMENTAL_TABS_ITEM_TEST_COMPONENT_LABEL}
             itemKey="A"
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
             {...testProps(EXPERIMENTAL_TABS_ITEM_NO_A11Y_LABEL_COMPONENT)}
           >
             <Text>Tabs #1</Text>

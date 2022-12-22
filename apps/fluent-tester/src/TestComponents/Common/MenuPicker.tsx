@@ -38,10 +38,16 @@ export const MenuPicker: React.FunctionComponent<MenuPickerProps> = (props: Menu
       selectedValue={selectedItemKey}
       onValueChange={(value: string, index: number) => onChange(value, index)}
       style={{ ...style }}
+      /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
       {...testProps(testID)}
     >
       {collection.map((item, index) => (
-        <Picker.Item label={item.label} key={index} value={item.value} {...testProps(item.testID)} />
+        <Picker.Item
+          label={item.label}
+          key={index}
+          value={item.value} /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(item.testID)}
+        />
       ))}
     </Picker>
   );

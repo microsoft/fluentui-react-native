@@ -27,14 +27,23 @@ export const E2EButtonTest_deprecated: React.FunctionComponent = () => {
           content="This is a button for E2E testing"
           onClick={onClick}
           accessibilityLabel={BUTTON_ACCESSIBILITY_LABEL_DEPRECATED}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(BUTTON_TEST_COMPONENT_DEPRECATED)}
         />
         <Button
           content={BUTTON_TEST_COMPONENT_LABEL_DEPRECATED}
           onClick={onClick}
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
           {...testProps(BUTTON_NO_A11Y_LABEL_COMPONENT_DEPRECATED)}
         />
-        {buttonPressed ? <Text {...testProps(BUTTON_ON_PRESS_DEPRECATED)}>Button Pressed</Text> : null}
+        {buttonPressed ? (
+          <Text
+            /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+            {...testProps(BUTTON_ON_PRESS_DEPRECATED)}
+          >
+            Button Pressed
+          </Text>
+        ) : null}
       </Stack>
     </View>
   );

@@ -17,9 +17,15 @@ export const E2EAvatarTest: React.FunctionComponent = () => {
         accessibilityHint={AVATAR_ACCESSIBILITY_HINT}
         accessibilityLabel={AVATAR_ACCESSIBILITY_LABEL}
         accessibilityRole={AVATAR_ACCESSIBILITY_ROLE}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(AVATAR_TEST_COMPONENT)}
       />
-      <Avatar name="Richard" badge={{ status: 'available' }} {...testProps(AVATAR_SECONDARY_TEST_COMPONENT)} />
+      <Avatar
+        name="Richard"
+        badge={{ status: 'available' }}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(AVATAR_SECONDARY_TEST_COMPONENT)}
+      />
     </View>
   );
 };

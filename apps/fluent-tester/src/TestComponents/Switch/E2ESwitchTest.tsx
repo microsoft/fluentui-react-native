@@ -34,10 +34,22 @@ export const E2ESwitchTest: React.FunctionComponent = () => {
         label={'Switch Test'}
         onChange={onToggle}
         accessibilityLabel={SWITCH_ACCESSIBILITY_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(SWITCH_TEST_COMPONENT)}
       />
-      {switchPressed ? <TextV1 {...testProps(SWITCH_ON_PRESS)}>Switch Toggled On</TextV1> : null}
-      <Switch label={SWITCH_TEST_COMPONENT_LABEL} {...testProps(SWITCH_NO_A11Y_LABEL_COMPONENT)} />
+      {switchPressed ? (
+        <TextV1
+          /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+          {...testProps(SWITCH_ON_PRESS)}
+        >
+          Switch Toggled On
+        </TextV1>
+      ) : null}
+      <Switch
+        label={SWITCH_TEST_COMPONENT_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
+        {...testProps(SWITCH_NO_A11Y_LABEL_COMPONENT)}
+      />
     </Stack>
   );
 };

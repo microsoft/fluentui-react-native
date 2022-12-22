@@ -17,12 +17,14 @@ export const LinkE2ETest: React.FunctionComponent = () => {
         url="https://www.bing.com/"
         content="Link with Accessibility Label."
         accessibilityLabel={LINK_ACCESSIBILITY_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(LINK_TEST_COMPONENT)}
       />
       <Link
         url="https://www.bing.com/"
         onPress={doPress}
         content={LINK_TEST_COMPONENT_LABEL}
+        /* For Android E2E testing purposes, testProps must be passed in after accessibilityLabel. */
         {...testProps(LINK_NO_A11Y_LABEL_COMPONENT)}
       />
     </Stack>
