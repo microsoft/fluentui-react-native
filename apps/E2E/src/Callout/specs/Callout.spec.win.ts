@@ -34,7 +34,7 @@ describe('Callout Accessibility Testing', () => {
     await expect(await CalloutPageObject.didAssertPopup()).toBeFalsy(CalloutPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
   });
 
-  it('Set accessibilityLabel', async () => {
+  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
     await expect(
       await CalloutPageObject.compareAttribute(
         CalloutPageObject._primaryComponent,

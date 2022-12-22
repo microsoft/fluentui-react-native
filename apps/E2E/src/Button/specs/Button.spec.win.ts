@@ -29,7 +29,7 @@ describe('Button Accessibility Testing', () => {
     await ButtonPageObject.scrollToTestElement();
   });
 
-  it('Button - Validate accessibilityRole is correct', async () => {
+  it('Validate accessibilityRole is correct', async () => {
     await expect(
       await ButtonPageObject.compareAttribute(ButtonPageObject._primaryComponent, Attribute.AccessibilityRole, BUTTON_A11Y_ROLE),
     ).toBeTrue();
@@ -37,7 +37,7 @@ describe('Button Accessibility Testing', () => {
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Button - Set accessibilityLabel', async () => {
+  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
     await expect(
       await ButtonPageObject.compareAttribute(
         ButtonPageObject._primaryComponent,
@@ -49,7 +49,7 @@ describe('Button Accessibility Testing', () => {
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Button - Do not set accessibilityLabel -> Default to Button label', async () => {
+  it('Do not set accessibilityLabel -> Validate accessibilityLabel defaults to label', async () => {
     await expect(
       await ButtonPageObject.compareAttribute(
         ButtonPageObject._secondaryComponent,
@@ -68,10 +68,10 @@ describe('Button Functional Testing', () => {
     await ButtonPageObject.scrollToTestElement();
   });
 
-  it('Validate OnClick() callback was fired -> Click', async () => {
+  it('Click on button -> Validate onClick() callback was fired', async () => {
     await ButtonPageObject.click(ButtonPageObject._primaryComponent);
     await expect(
-      await ButtonPageObject.waitForOnClickCallbackToFire('Clicking on the primary button failed to fire the onClick() callback.'),
+      await ButtonPageObject.didOnClickCallbackFire('Clicking on the primary button failed to fire the onClick() callback.'),
     ).toBeTruthy();
 
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
@@ -79,10 +79,10 @@ describe('Button Functional Testing', () => {
     await ButtonPageObject.clickComponent(); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
+  it('Type "Enter" on button -> Validate onClick() callback was fired', async () => {
     await ButtonPageObject.sendKeys(ButtonPageObject._primaryComponent, [Keys.ENTER]);
     await expect(
-      await ButtonPageObject.waitForOnClickCallbackToFire(
+      await ButtonPageObject.didOnClickCallbackFire(
         "Pressing the 'Enter' key on the primary button failed to fire the onClick() callback.",
       ),
     ).toBeTruthy();
@@ -91,10 +91,10 @@ describe('Button Functional Testing', () => {
     await ButtonPageObject.clickComponent(); // Reset Button State
   });
 
-  it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
+  it('Type "Space" on button -> Validate onClick() callback was fired', async () => {
     await ButtonPageObject.sendKeys(ButtonPageObject._primaryComponent, [Keys.SPACE]);
     await expect(
-      await ButtonPageObject.waitForOnClickCallbackToFire(
+      await ButtonPageObject.didOnClickCallbackFire(
         "Pressing the 'Space' key on the primary button failed to fire the onClick() callback.",
       ),
     ).toBeTruthy();

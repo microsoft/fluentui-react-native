@@ -28,7 +28,7 @@ describe('Experimental Checkbox Accessibility Testing', () => {
     await ExperimentalCheckboxPageObject.scrollToTestElement();
   });
 
-  it('Experimental Checkbox - Validate accessibilityRole is correct', async () => {
+  it('Validate accessibilityRole is correct', async () => {
     await expect(
       await ExperimentalCheckboxPageObject.compareAttribute(
         ExperimentalCheckboxPageObject._primaryComponent,
@@ -40,7 +40,7 @@ describe('Experimental Checkbox Accessibility Testing', () => {
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Experimental Checkbox - Set accessibilityLabel', async () => {
+  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
     await expect(
       await ExperimentalCheckboxPageObject.compareAttribute(
         ExperimentalCheckboxPageObject._primaryComponent,
@@ -52,7 +52,7 @@ describe('Experimental Checkbox Accessibility Testing', () => {
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Experimental Checkbox - Do not set accessibilityLabel -> Default to Checkbox label', async () => {
+  it('Do not set accessibilityLabel -> Validate accessibilityLabel defaults to label', async () => {
     await expect(
       await ExperimentalCheckboxPageObject.compareAttribute(
         ExperimentalCheckboxPageObject._secondaryComponent,
@@ -73,7 +73,7 @@ describe('Checkbox Functional Testing', () => {
     await ExperimentalCheckboxPageObject.toggleCheckbox(false);
   });
 
-  it("Click on a Checkbox -> Validate it toggles correctly AND calls the user's onChange", async () => {
+  it("Click on a Checkbox -> Validate that it toggles correctly AND calls the user's onChange", async () => {
     /* Validate the Checkbox is initially toggled OFF */
     await expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeFalsy(
       'The primary checkbox should initially be toggled off.',
@@ -101,7 +101,7 @@ describe('Checkbox Functional Testing', () => {
     await expect(await ExperimentalCheckboxPageObject.didAssertPopup()).toBeFalsy(ExperimentalCheckboxPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Press 'SPACE' on a Checkbox and verify it toggles correctly AND calls the user's onChange", async () => {
+  it("Press 'SPACE' on a Checkbox -> Validate that it toggles correctly AND calls the user's onChange", async () => {
     /* Validate the Checkbox is initially toggled OFF */
     await expect(await ExperimentalCheckboxPageObject.isCheckboxChecked()).toBeFalsy(
       'The primary checkbox should initially be toggled off.',
