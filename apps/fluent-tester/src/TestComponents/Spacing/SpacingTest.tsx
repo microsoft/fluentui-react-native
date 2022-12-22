@@ -4,6 +4,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { stackStyle } from '../Common/styles';
 import { Test, TestSection, PlatformStatus } from '../Test';
+import { SPACING_TESTPAGE } from './consts';
 
 const BasicUsage: React.FunctionComponent = () => {
   function spacingExample(tokenName: string, spacing?: number | string) {
@@ -62,6 +63,7 @@ export const SpacingTokensTest: React.FunctionComponent = () => {
   const spacingSections: TestSection[] = [
     {
       name: 'Basic Usage',
+      testID: SPACING_TESTPAGE,
       component: BasicUsage,
     },
   ];
