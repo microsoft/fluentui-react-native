@@ -9949,9 +9949,9 @@ ky@0.30.0:
   integrity sha512-X/u76z4JtDVq10u1JA5UQfatPxgPaVDMYTrgHyiTpGN2z4TMEJkIHsoSBBSg9SWZEIXTKsi9kHgiQ9o3Y/4yog==
 
 lage@^1.5.0:
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/lage/-/lage-1.9.5.tgz#c5092d3803b7e7dc8eeb6b686bc3806675936fbe"
-  integrity sha512-l7mLhOGw/eaq65w3+F5YqVl+PZYIq9mF46e2YLlFocw9t1961mtuusfBuMh0DHhCPsh+gUW/rklRJdHlkCDD8A==
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/lage/-/lage-1.9.6.tgz#8c4cf0ef05d5e8416fcdd25f16501a11c45fff83"
+  integrity sha512-pTVolv+UPl8t3Go/KD5MolbC7gwRtWQSIQY68rOcVxi7O+je5mDDpP9Uoy2h7yUiWbua+OBFu5gWgUKhMZKRvw==
   dependencies:
     "@xmldom/xmldom" "^0.8.0"
     abort-controller "^3.0.0"
