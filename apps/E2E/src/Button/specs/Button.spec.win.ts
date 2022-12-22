@@ -70,9 +70,9 @@ describe('Button Functional Testing', () => {
 
   it('Validate OnClick() callback was fired -> Click', async () => {
     await ButtonPageObject.click(ButtonPageObject._primaryComponent);
-    await expect(await ButtonPageObject.waitForOnClickCallbackToFire()).toBeTruthy(
-      'Clicking on the primary button failed to fire the onClick() callback.',
-    );
+    await expect(
+      await ButtonPageObject.waitForOnClickCallbackToFire('Clicking on the primary button failed to fire the onClick() callback.'),
+    ).toBeTruthy();
 
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
@@ -81,9 +81,11 @@ describe('Button Functional Testing', () => {
 
   it('Validate OnClick() callback was fired -> Type "Enter"', async () => {
     await ButtonPageObject.sendKeys(ButtonPageObject._primaryComponent, [Keys.ENTER]);
-    await expect(await ButtonPageObject.waitForOnClickCallbackToFire()).toBeTruthy(
-      "Pressing the 'Enter' key on the primary button failed to fire the onClick() callback.",
-    );
+    await expect(
+      await ButtonPageObject.waitForOnClickCallbackToFire(
+        "Pressing the 'Enter' key on the primary button failed to fire the onClick() callback.",
+      ),
+    ).toBeTruthy();
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
 
     await ButtonPageObject.clickComponent(); // Reset Button State
@@ -91,9 +93,11 @@ describe('Button Functional Testing', () => {
 
   it('Validate OnClick() callback was fired -> Type "SPACE"', async () => {
     await ButtonPageObject.sendKeys(ButtonPageObject._primaryComponent, [Keys.SPACE]);
-    await expect(await ButtonPageObject.waitForOnClickCallbackToFire()).toBeTruthy(
-      "Pressing the 'Space' key on the primary button failed to fire the onClick() callback.",
-    );
+    await expect(
+      await ButtonPageObject.waitForOnClickCallbackToFire(
+        "Pressing the 'Space' key on the primary button failed to fire the onClick() callback.",
+      ),
+    ).toBeTruthy();
 
     await expect(await ButtonPageObject.didAssertPopup()).toBeFalsy(ButtonPageObject.ERRORMESSAGE_ASSERT);
   });

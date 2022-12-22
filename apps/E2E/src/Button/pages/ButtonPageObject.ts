@@ -10,8 +10,8 @@ class ButtonPageObject extends BasePage {
   /******************************************************************/
   /**************** UI Element Interaction Methods ******************/
   /******************************************************************/
-  async waitForOnClickCallbackToFire(): Promise<boolean> {
-    await this.waitForCondition(async () => await this.onClickCallbackFired(), 'The Button onClick callback did not fire.');
+  async waitForOnClickCallbackToFire(errorMsg?: string): Promise<boolean> {
+    await this.waitForCondition(async () => await this.onClickCallbackFired(), errorMsg ?? 'The Button onClick callback did not fire.');
     return await this.onClickCallbackFired();
   }
 
