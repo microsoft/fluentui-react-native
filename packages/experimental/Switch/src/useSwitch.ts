@@ -7,25 +7,16 @@ import {
   InteractionEvent,
 } from '@fluentui-react-native/interactive-hooks';
 import { SwitchProps, SwitchInfo } from './Switch.types';
-import { AccessibilityState, AccessibilityActionEvent, Platform, LayoutAnimation, UIManager, Animated } from 'react-native';
-import { buildUseStyling, memoize } from '@fluentui-react-native/framework';
+import { AccessibilityState, AccessibilityActionEvent, Animated, Platform } from 'react-native';
+import { memoize } from '@fluentui-react-native/framework';
 import { useAsToggleWithEvent } from '@fluentui-react-native/interactive-hooks';
-import { stylingSettings } from './Switch.styling';
 
 const defaultAccessibilityActions = [{ name: 'Toggle' }];
 
-// // Use Layout Animation for Knob animating on state change
-// const animateSwitchKnob = () => {
-//   if (Platform.OS === 'android' && UIManager.setLayoutAnimationEnabledExperimental) {
-//     UIManager.setLayoutAnimationEnabledExperimental(true);
-//     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut, () => {
-//       UIManager.setLayoutAnimationEnabledExperimental(false);
-//     });
-//   }
-// };
-
-export const useSwitch = (props: SwitchProps, bgColor?: { on: string; off: string }): SwitchInfo => {
-  console.log(bgColor);
+export const useSwitch = (
+  props: SwitchProps,
+  bgColor?: { on: string; off: string; width: number; thumbWidth: number; thumbMargin: number },
+): SwitchInfo => {
   const defaultComponentRef = React.useRef(null);
   const {
     onChange,
@@ -43,16 +34,19 @@ export const useSwitch = (props: SwitchProps, bgColor?: { on: string; off: strin
     onAccessibilityAction,
     ...rest
   } = props;
+  console.log(bgColor);
 
   const onChangeWithAnimation = React.useCallback(
     (e: InteractionEvent, checked?: boolean) => {
       onChange && onChange(e, checked);
-      if (checked) {
-        startAnimatiobgn(checked);
-        startAnimation();
-      } else {
-        startAnimatiobgn(checked);
-        startAnimation2();
+      if (Platform.OS === 'android') {
+        if (checked) {
+          startAnimatiobgn(checked);
+          startAnimation();
+        } else {
+          startAnimatiobgn(checked);
+          startAnimation2();
+        }
       }
     },
     [onChange],
@@ -62,16 +56,15 @@ export const useSwitch = (props: SwitchProps, bgColor?: { on: string; off: strin
   const [animationbg, setAnimationbg] = React.useState(new Animated.Value(0));
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
-
-  const animatedStyles = {
-    animatedStyle: {
+  const switchAnimationStyles = {
+    thumbAnimatedStyle: {
       transform: [
         {
           translateX: animation,
         },
       ],
     },
-    backgroundStyle: {
+    trackBackgroundStyle: {
       backgroundColor: animationbg.interpolate({
         inputRange: [0, 1],
         outputRange: checked ? [bgColor.off, bgColor.on] : [bgColor.on, bgColor.off],
@@ -81,35 +74,37 @@ export const useSwitch = (props: SwitchProps, bgColor?: { on: string; off: strin
 
   const startAnimation = () => {
     Animated.timing(animation, {
-      toValue: 20,
+      toValue: bgColor.width - (bgColor.thumbWidth + bgColor.thumbMargin * 2),
       duration: 250,
       useNativeDriver: true,
     }).start();
   };
 
-  const startAnimatiobgn = (checkss) => {
-    const toValue = checkss ? 0 : 1;
+  const startAnimatiobgn = (checked) => {
+    const toValue = checked ? 0 : 1;
     Animated.timing(animationbg, {
       toValue,
-      duration: 300,
+      duration: 500,
       useNativeDriver: false,
     }).start();
   };
 
   const startAnimation2 = (first = false) => {
     Animated.timing(animation, {
-      toValue: first ? 0 : -20,
+      toValue: first ? 0 : -(bgColor.width + bgColor.thumbWidth),
       duration: 300,
       useNativeDriver: true,
     }).start();
   };
 
-  if (checkedState) {
-    startAnimation();
-    startAnimatiobgn(true);
-  } else {
-    startAnimation2(true);
-    startAnimatiobgn(false);
+  if (Platform.OS === 'android') {
+    if (checkedState) {
+      startAnimation();
+      startAnimatiobgn(true);
+    } else {
+      startAnimation2(true);
+      startAnimatiobgn(false);
+    }
   }
 
   const focusRef = disabled ? null : componentRef;
@@ -157,7 +152,7 @@ export const useSwitch = (props: SwitchProps, bgColor?: { on: string; off: strin
       onAccessibilityAction: onAccessibilityActionProp,
       accessibilityState: getAccessibilityState(checkedState, disabled, accessibilityState),
       disabled,
-      animatedStyles: animatedStyles,
+      switchAnimationStyles: switchAnimationStyles,
       focusable: !disabled,
       ref: useViewCommandFocus(componentRef),
       checked: checkedState,

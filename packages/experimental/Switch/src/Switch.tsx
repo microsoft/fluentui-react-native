@@ -1,9 +1,9 @@
 /** @jsx withSlots */
-import { View, AccessibilityInfo, Pressable, Animated } from 'react-native';
+import { View, AccessibilityInfo, Pressable, Animated, Platform } from 'react-native';
 import { Text } from '@fluentui-react-native/text';
 import { switchName, SwitchType, SwitchState, SwitchProps } from './Switch.types';
 import { stylingSettings } from './Switch.styling';
-import { compose, mergeProps, withSlots, UseSlots, buildUseStyling } from '@fluentui-react-native/framework';
+import { compose, mergeProps, withSlots, UseSlots } from '@fluentui-react-native/framework';
 import { useSwitch } from './useSwitch';
 
 /**
@@ -29,7 +29,6 @@ export const switchLookup = (layer: string, state: SwitchState, userProps: Switc
   );
 };
 
-const useStyling = buildUseStyling(stylingSettings);
 export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
@@ -42,19 +41,19 @@ export const Switch = compose<SwitchType>({
     onOffText: Text,
   },
   useRender: (userProps: SwitchProps, useSlots: UseSlots<SwitchType>) => {
-    const tokens = useStyling(userProps, (layer) => {
-      return layer === 'toggleOn';
-    }); /// THERE IS ISSUE IN THIS
+    const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true }, {}));
+    const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false }, {}));
 
-    const tokens2 = useStyling(userProps, (layer) => {
-      return layer === 'toggleOff';
-    }); /// THERE IS ISSUE IN THIS
-
-    // console.log('ON ' + tokens.track.style.backgroundColor);
-    // console.log('OFF ' + tokens2.track.style.backgroundColor);
-
-    const switchInfo = useSwitch(userProps, { on: tokens.track.style.backgroundColor, off: tokens2.track.style.backgroundColor });
-    // console.log(switchInfo.state.toggled);
+    const switchInfo = useSwitch(
+      userProps,
+      Platform.OS === 'android' && {
+        on: switchOnSlot.track({}).props.style.backgroundColor,
+        off: switchOffSlot.track({}).props.style.backgroundColor,
+        width: switchOnSlot.track({}).props.style.width,
+        thumbWidth: switchOnSlot.thumb({}).props.style.width,
+        thumbMargin: switchOnSlot.thumb({}).props.style.margin,
+      },
+    );
 
     // grab the styled slots
     const Slots = useSlots(userProps, (layer) => switchLookup(layer, switchInfo.state, switchInfo.props));
@@ -70,8 +69,11 @@ export const Switch = compose<SwitchType>({
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track style={switchInfo.props.animatedStyles.backgroundStyle}>
-              <Slots.thumb style={switchInfo.props.animatedStyles.animatedStyle} />
+            <Slots.track {...(Platform.OS == 'android' && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
+              <Slots.thumb
+                {...thumbAnimation}
+                {...(Platform.OS == 'android' && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })}
+              />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
