@@ -12,7 +12,7 @@ import {
 import { BasePage, By } from '../../common/BasePage';
 import { Keys } from '../../common/consts';
 
-/** Convenience enum for an external caller to get individual menu items using .getMenuItem() */
+/** Allows a caller to get specific menu items using .getMenuItem() */
 export const enum MenuItem {
   First,
   Second,
@@ -40,13 +40,23 @@ class MenuPageObject extends BasePage {
   async closeMenu(): Promise<void> {
     if (await this.menuIsExpanded()) {
       await this.sendKeys(this.getMenuItem(MenuItem.First), [Keys.ESCAPE]);
-      await this.waitForCondition(async () => (await this.menuIsExpanded()) === false, 'The Menu did not close.', this.waitForUiEvent, 500);
+      await this.waitForCondition(
+        async () => (await this.menuIsExpanded()) === false,
+        'Typed "ESCAPE" on MenuItem, but Menu did not close.',
+        this.waitForUiEvent,
+        500,
+      );
     }
   }
 
   /* Waits for menuitems to be visible. This is a separate method from openMenu() because we test multiple ways of opening the menu (mouse + keyboard). */
-  async waitForMenuToOpen(): Promise<boolean> {
-    await this.waitForCondition(async () => await this.menuIsExpanded(), 'The Menu did not open.', this.waitForUiEvent, 500);
+  async waitForMenuToOpen(errorMsg?: string): Promise<boolean> {
+    await this.waitForCondition(
+      async () => await this.menuIsExpanded(),
+      errorMsg ?? 'The Menu did not open: MenuItems failed to display.',
+      this.waitForUiEvent,
+      500,
+    );
     return await this.menuIsExpanded();
   }
 
@@ -70,7 +80,9 @@ class MenuPageObject extends BasePage {
     );
   }
 
-  /* When menu item 1 is clicked, it increments a counter variable in the test component page, which is displayed in a text box. */
+  /* When menu item 1 is clicked, it increments a counter variable in the test component page, which is displayed in a text box. Incrementing a counter within a label
+   * allows us to test whether the onClick() callback fires for click and keypress inputs across individual test cases without having to close the menu and reset the
+   * label per case (as you see in the button + checkbox tests). This decreases test time and improves performance for this spec. */
   async itemOnClickHasFired(timesFired: number): Promise<boolean> {
     return (await (await this._callbackLabel).getText()).includes(timesFired.toString());
   }
