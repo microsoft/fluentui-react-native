@@ -232,7 +232,7 @@ export const tests: TestDescription[] = [
     name: 'Spacing Tokens',
     component: SpacingTokensTest,
     testPageButton: HOMEPAGE_SPACING_BUTTON,
-    platforms: ['ios'],
+    platforms: ['android', 'ios', 'macos', 'win32', 'windows'],
   },
   {
     name: 'Stroke Width Tokens',
