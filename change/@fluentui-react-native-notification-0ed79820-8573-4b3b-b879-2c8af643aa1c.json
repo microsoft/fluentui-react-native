@@ -1,0 +1,7 @@
+{
+  "type": "patch",
+  "comment": "Fix notification button padding",
+  "packageName": "@fluentui-react-native/notification",
+  "email": "adgleitm@microsoft.com",
+  "dependentChangeType": "patch"
+}
