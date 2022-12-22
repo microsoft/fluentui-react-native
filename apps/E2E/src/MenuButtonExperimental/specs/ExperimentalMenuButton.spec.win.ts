@@ -1,11 +1,10 @@
 import NavigateAppPage from '../../common/NavigateAppPage';
 import ExperimentalMenuButtonPageObject from '../pages/ExperimentalMenuButtonPageObject.win';
-import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE } from '../../common/consts';
+import { PAGE_TIMEOUT, BOOT_APP_TIMEOUT, MENUBUTTON_A11Y_ROLE, Attribute } from '../../common/consts';
 import {
   EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
   EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
 } from '../../../../fluent-tester/src/TestComponents/MenuButtonExperimental/consts';
-import { ComponentSelector } from '../../common/BasePage';
 
 // Before testing begins, allow up to 60 seconds for app to open
 describe('Experimental MenuButton Testing Initialization', function () {
@@ -24,30 +23,45 @@ describe('Experimental MenuButton Testing Initialization', function () {
   });
 });
 
-/* This will be re-enabled with a MenuButton Bug is fixed. Currently in PR - "Integrating accessibilityLabel functionality for MenuButton #1117" */
 describe('Experimental MenuButton Accessibility Testing', () => {
-  it('Experimental MenuButton - Validate accessibilityRole is correct', async () => {
-    await ExperimentalMenuButtonPageObject.scrollToTestElement();
-
-    await expect(await ExperimentalMenuButtonPageObject.getAccessibilityRole()).toEqual(MENUBUTTON_A11Y_ROLE);
-    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+  /* Scrolls and waits for the MenuButton to be visible on the Test Page */
+  beforeEach(async () => {
+    await ExperimentalMenuButtonPageObject.scrollToTestElement(await ExperimentalMenuButtonPageObject._firstMenuButton);
   });
 
-  it('Experimental MenuButton - Set accessibilityLabel', async () => {
-    await ExperimentalMenuButtonPageObject.scrollToTestElement();
+  it('Validate accessibilityRole is correct', async () => {
+    await expect(
+      await ExperimentalMenuButtonPageObject.compareAttribute(
+        ExperimentalMenuButtonPageObject._firstMenuButton,
+        Attribute.AccessibilityRole,
+        MENUBUTTON_A11Y_ROLE,
+      ),
+    ).toBeTrue();
 
-    await expect(await ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Primary)).toEqual(
-      EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
-    );
-    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it('Do not set accessibilityLabel -> Default to Experimental MenuButton label', async () => {
-    await ExperimentalMenuButtonPageObject.scrollToTestElement();
+  it('Set accessibilityLabel -> Validate accessibilityLabel is correct', async () => {
+    await expect(
+      await ExperimentalMenuButtonPageObject.compareAttribute(
+        ExperimentalMenuButtonPageObject._firstMenuButton,
+        Attribute.AccessibilityLabel,
+        EXPERIMENTAL_MENU_BUTTON_ACCESSIBILITY_LABEL,
+      ),
+    ).toBeTrue();
 
-    await expect(await ExperimentalMenuButtonPageObject.getAccessibilityLabel(ComponentSelector.Secondary)).toEqual(
-      EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
-    );
-    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT); // Ensure no asserts popped up
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT);
+  });
+
+  it('Do not set accessibilityLabel -> Validate accessibilityLabel defaults to MenuButton label', async () => {
+    await expect(
+      await ExperimentalMenuButtonPageObject.compareAttribute(
+        ExperimentalMenuButtonPageObject._secondMenuButton,
+        Attribute.AccessibilityLabel,
+        EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT_LABEL,
+      ),
+    ).toBeTrue();
+
+    await expect(await ExperimentalMenuButtonPageObject.didAssertPopup()).toBeFalsy(ExperimentalMenuButtonPageObject.ERRORMESSAGE_ASSERT);
   });
 });

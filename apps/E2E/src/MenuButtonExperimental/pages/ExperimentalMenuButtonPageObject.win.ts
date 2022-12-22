@@ -18,11 +18,11 @@ class ExperimentalMenuButtonPageObject extends BasePage {
     return MENU_BUTTON_EXPERIMENTAL_TESTPAGE;
   }
 
-  get _primaryComponent() {
+  get _firstMenuButton() {
     return By(EXPERIMENTAL_MENU_BUTTON_TEST_COMPONENT);
   }
 
-  get _secondaryComponent() {
+  get _secondMenuButton() {
     return By(EXPERIMENTAL_MENU_BUTTON_NO_A11Y_LABEL_COMPONENT);
   }
 
