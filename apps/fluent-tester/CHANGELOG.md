@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Thu, 22 Dec 2022 22:15:13 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Dec 2022 23:12:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.122.0
+
+Thu, 22 Dec 2022 23:12:13 GMT
+
+### Minor changes
+
+- Add spacing E2E tests (adgleitm@microsoft.com)
 
 ## 0.121.3
 

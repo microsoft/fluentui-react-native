@@ -2,6 +2,21 @@
   "name": "@fluentui-react-native/tester",
   "entries": [
     {
+      "date": "Thu, 22 Dec 2022 23:12:13 GMT",
+      "tag": "@fluentui-react-native/tester_v0.122.0",
+      "version": "0.122.0",
+      "comments": {
+        "minor": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/tester",
+            "commit": "8bd92d77b7753be297a183e0f5bad4f9c523a1a0",
+            "comment": "Add spacing E2E tests"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 22 Dec 2022 22:15:13 GMT",
       "tag": "@fluentui-react-native/tester_v0.121.3",
       "version": "0.121.3",
