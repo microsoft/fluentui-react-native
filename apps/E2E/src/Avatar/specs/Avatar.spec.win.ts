@@ -37,7 +37,7 @@ describe('Avatar Accessibility Testing', () => {
     await expect(await AvatarPageObject.didAssertPopup()).toBeFalsy(AvatarPageObject.ERRORMESSAGE_ASSERT);
   });
 
-  it("Set 'name' prop without setting 'accessibilityLabel -> 'accessibilityLabel' should default to '{name}, available'", async () => {
+  it("Set 'name' prop without setting 'accessibilityLabel' -> 'accessibilityLabel' should default to '{name}, available'", async () => {
     await expect(
       await AvatarPageObject.compareAttribute(
         AvatarPageObject._secondaryComponent,
