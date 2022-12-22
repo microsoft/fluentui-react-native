@@ -34,12 +34,27 @@ class NativeTestingPageObject extends BasePage {
           foundValidButton = true;
         } else {
           // The correct format for testId was not followed. Return a failure.
-          return false;
+          throw Error(
+            `A testPageButton with the testID '${autoId}' does not match the defined testID format, which should
+            read 'Homepage_<component_name>_Button.`,
+          );
         }
       }
     }
 
     return foundValidButton;
+  }
+
+  get _testPage(): Promise<WebdriverIO.Element> {
+    throw new Error('You are trying to read the _testPage getter for NativeTestingPageObject, which is not implemented.');
+  }
+
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    throw new Error('You are trying to read the _pageButton getter for NativeTestingPageObject, which is not implemented.');
+  }
+
+  get _pageName(): string {
+    throw new Error('You are trying to read the _pageName getter for NativeTestingPageObject, which is not implemented.');
   }
 }
 
