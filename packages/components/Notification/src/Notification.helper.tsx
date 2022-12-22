@@ -70,6 +70,13 @@ export const NotificationButton = stagedComponent((props: NotificationButtonProp
         color: props.pressedColor,
       },
     },
+    medium: {
+      hasContent: {
+        minWidth: 0,
+        padding: 0,
+        paddingHorizontal: 0,
+      },
+    },
   });
 
   return (final: NotificationButtonProps, children: React.ReactNode) => {
