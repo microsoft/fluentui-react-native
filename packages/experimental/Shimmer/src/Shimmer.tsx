@@ -18,7 +18,6 @@ export const Shimmer = compose<ShimmerType>({
     const Slots = useSlots(props);
     const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
     const tokens = useStyling(props).root;
-    console.log(tokens);
     const memoizedShimmerData = useMemo(
       () => ({
         angle: props.angle ? props.angle : tokens['angle'],

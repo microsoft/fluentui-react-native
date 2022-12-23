@@ -41,12 +41,12 @@ export const CustomizedSwitch: React.FunctionComponent = () => {
       minWidth,
       minHeight,
       thumbSize,
-      thumbRadius: 100,
+      thumbRadius,
       padding,
       color,
       borderWidth,
       borderRadius,
-      thumbMargin: 3,
+
       toggleOn: {
         thumbColor: thumbColorOn,
         trackColor,
