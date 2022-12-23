@@ -59,7 +59,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: globalTokens.color.red.tint20 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.red.primary, colorDark: globalTokens.color.red.tint30 }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -78,7 +78,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.red.primary,
-            colorDark: globalTokens.color.red.tint20,
+            colorDark: globalTokens.color.red.tint30,
           },
           t,
         ),
@@ -94,17 +94,17 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: globalTokens.color.orange.tint20 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.darkOrange.primary, colorDark: globalTokens.color.darkOrange.tint30 }, t),
       },
       tint: {
         ...getTintColorProps(
           {
             backgroundColor: globalTokens.color.darkOrange.tint60,
-            color: globalTokens.color.office.shade10,
-            borderColor: globalTokens.color.office.tint50,
+            color: globalTokens.color.darkOrange.shade10,
+            borderColor: globalTokens.color.darkOrange.tint50,
             backgroundColorDark: globalTokens.color.orange.shade40,
-            colorDark: globalTokens.color.office.tint40,
-            borderColorDark: globalTokens.color.office.shade40,
+            colorDark: globalTokens.color.darkOrange.tint40,
+            borderColorDark: globalTokens.color.darkOrange.shade40,
           },
           t,
         ),
@@ -113,7 +113,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.darkOrange.primary,
-            colorDark: globalTokens.color.orange.tint20,
+            colorDark: globalTokens.color.darkOrange.tint30,
           },
           t,
         ),
@@ -124,7 +124,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getFilledColorProps(
           {
             backgroundColor: globalTokens.color.yellow.primary,
-            color: globalTokens.color.grey[14], // It should be neutralForegroundStatic1. It's hardcoded because the token doesn't exist right now
+            color: globalTokens.color.grey14, // It should be neutralForegroundStatic1. It's hardcoded because the token doesn't exist right now
           },
           t,
         ),
@@ -165,7 +165,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ),
       },
       outline: {
-        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: globalTokens.color.green.tint20 }, t),
+        ...getOutlineColorProps({ color: globalTokens.color.green.primary, colorDark: globalTokens.color.green.tint40 }, t),
       },
       tint: {
         ...getTintColorProps(
@@ -184,7 +184,7 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
         ...getGhostColorProps(
           {
             color: globalTokens.color.green.primary,
-            colorDark: globalTokens.color.green.tint20,
+            colorDark: globalTokens.color.green.tint40,
           },
           t,
         ),
@@ -209,9 +209,9 @@ export const defaultBadgeColorTokens: TokenSettings<BadgeTokens> = (t: Theme) =>
             backgroundColor: t.colors.neutralForeground3,
             color: t.colors.neutralBackground1,
             borderColor: t.colors.neutralStrokeAccessible,
-            backgroundColorDark: globalTokens.color.grey[68],
-            colorDark: globalTokens.color.grey[16],
-            borderColorDark: globalTokens.color.grey[68],
+            backgroundColorDark: globalTokens.color.grey68,
+            colorDark: globalTokens.color.grey16,
+            borderColorDark: globalTokens.color.grey68,
           },
           t,
         ),

@@ -1,8 +1,232 @@
 # Change Log - @fluentui-react-native/persona
 
-This log was last generated on Fri, 30 Sep 2022 08:04:44 GMT and should not be manually modified.
+This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.13.27
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.27
+- Bump @fluentui-react-native/framework to v0.8.26
+- Bump @fluentui-react-native/persona-coin to v0.12.8
+- Bump @fluentui-react-native/tokens to v0.20.0
+- Bump @uifabricshared/foundation-tokens to v0.12.16
+
+## 0.13.26
+
+Fri, 09 Dec 2022 05:23:38 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.26
+- Bump @fluentui-react-native/framework to v0.8.25
+- Bump @fluentui-react-native/persona-coin to v0.12.7
+- Bump @fluentui-react-native/tokens to v0.19.1
+- Bump @uifabricshared/foundation-tokens to v0.12.15
+
+## 0.13.25
+
+Tue, 06 Dec 2022 16:59:54 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.25
+- Bump @fluentui-react-native/framework to v0.8.24
+- Bump @fluentui-react-native/persona-coin to v0.12.6
+
+## 0.13.24
+
+Tue, 06 Dec 2022 00:46:41 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.24
+- Bump @fluentui-react-native/framework to v0.8.23
+- Bump @fluentui-react-native/persona-coin to v0.12.5
+- Bump @fluentui-react-native/tokens to v0.19.0
+- Bump @uifabricshared/foundation-tokens to v0.12.14
+
+## 0.13.23
+
+Thu, 01 Dec 2022 03:12:20 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.23
+- Bump @fluentui-react-native/framework to v0.8.22
+- Bump @fluentui-react-native/persona-coin to v0.12.4
+- Bump @fluentui-react-native/tokens to v0.18.1
+- Bump @uifabricshared/foundation-tokens to v0.12.13
+
+## 0.13.22
+
+Mon, 28 Nov 2022 11:51:06 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.22
+- Bump @fluentui-react-native/framework to v0.8.21
+- Bump @fluentui-react-native/persona-coin to v0.12.3
+- Bump @fluentui-react-native/tokens to v0.18.0
+- Bump @uifabricshared/foundation-tokens to v0.12.12
+
+## 0.13.21
+
+Wed, 16 Nov 2022 08:47:25 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.21
+- Bump @fluentui-react-native/framework to v0.8.20
+- Bump @fluentui-react-native/persona-coin to v0.12.2
+
+## 0.13.20
+
+Fri, 11 Nov 2022 18:06:32 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.20
+- Bump @fluentui-react-native/framework to v0.8.19
+- Bump @fluentui-react-native/persona-coin to v0.12.1
+
+## 0.13.19
+
+Tue, 08 Nov 2022 22:18:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.19
+- Bump @fluentui-react-native/adapters to v0.10.0
+- Bump @fluentui-react-native/framework to v0.8.18
+- Bump @fluentui-react-native/persona-coin to v0.12.0
+- Bump @fluentui-react-native/tokens to v0.17.8
+- Bump @uifabricshared/foundation-tokens to v0.12.11
+
+## 0.13.18
+
+Tue, 08 Nov 2022 19:22:01 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.18
+- Bump @fluentui-react-native/framework to v0.8.17
+- Bump @fluentui-react-native/persona-coin to v0.11.18
+
+## 0.13.17
+
+Fri, 04 Nov 2022 14:36:23 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.17
+- Bump @fluentui-react-native/framework to v0.8.16
+- Bump @fluentui-react-native/persona-coin to v0.11.17
+- Bump @fluentui-react-native/tokens to v0.17.7
+- Bump @uifabricshared/foundation-tokens to v0.12.10
+
+## 0.13.16
+
+Thu, 27 Oct 2022 11:09:35 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.16
+- Bump @fluentui-react-native/framework to v0.8.15
+- Bump @fluentui-react-native/persona-coin to v0.11.16
+- Bump @fluentui-react-native/tokens to v0.17.6
+- Bump @uifabricshared/foundation-tokens to v0.12.9
+
+## 0.13.15
+
+Tue, 25 Oct 2022 22:47:45 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.15
+- Bump @fluentui-react-native/framework to v0.8.14
+- Bump @fluentui-react-native/persona-coin to v0.11.15
+
+## 0.13.14
+
+Fri, 21 Oct 2022 13:09:26 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.14
+- Bump @fluentui-react-native/framework to v0.8.13
+- Bump @fluentui-react-native/persona-coin to v0.11.14
+
+## 0.13.13
+
+Mon, 17 Oct 2022 17:52:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.13
+- Bump @fluentui-react-native/framework to v0.8.12
+- Bump @fluentui-react-native/persona-coin to v0.11.13
+
+## 0.13.12
+
+Fri, 14 Oct 2022 19:11:13 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.12
+- Bump @fluentui-react-native/adapters to v0.9.3
+- Bump @fluentui-react-native/framework to v0.8.11
+- Bump @fluentui-react-native/persona-coin to v0.11.12
+- Bump @fluentui-react-native/tokens to v0.17.5
+- Bump @uifabricshared/foundation-tokens to v0.12.8
+
+## 0.13.11
+
+Wed, 12 Oct 2022 21:54:15 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.11
+- Bump @fluentui-react-native/framework to v0.8.10
+- Bump @fluentui-react-native/persona-coin to v0.11.11
+- Bump @fluentui-react-native/tokens to v0.17.4
+- Bump @uifabricshared/foundation-tokens to v0.12.7
+
+## 0.13.10
+
+Tue, 11 Oct 2022 22:41:44 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.10
+- Bump @fluentui-react-native/framework to v0.8.9
+- Bump @fluentui-react-native/persona-coin to v0.11.10
+- Bump @fluentui-react-native/tokens to v0.17.3
+- Bump @uifabricshared/foundation-tokens to v0.12.6
+
+## 0.13.9
+
+Thu, 06 Oct 2022 17:24:49 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.9
+- Bump @fluentui-react-native/framework to v0.8.8
+- Bump @fluentui-react-native/persona-coin to v0.11.9
+
+## 0.13.8
+
+Tue, 04 Oct 2022 21:09:28 GMT
+
+### Patches
+
+- Bump @uifabricshared/foundation-compose to v1.12.8
+- Bump @fluentui-react-native/framework to v0.8.7
+- Bump @fluentui-react-native/persona-coin to v0.11.8
 
 ## 0.13.7
 

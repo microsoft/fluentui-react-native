@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { ButtonV1 as Button } from '@fluentui/react-native';
 import {
   Menu,
@@ -16,7 +16,10 @@ import { MENU_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { TextV1 as Text } from '@fluentui-react-native/text';
 import { E2EMenuTest } from './E2EMenuTest';
+import { MenuTriggerHoverCallback, MenuTriggerOnClickCallback } from './MenuTriggerCallbacks';
+import { MenuTriggerChildRef } from './MenuRefs';
 import { StyleSheet } from 'react-native';
+import { MenuScrollView } from './MenuScrollView';
 
 const MenuDefault: React.FunctionComponent = () => {
   return (
@@ -268,8 +271,24 @@ const menuSections: TestSection[] = [
     component: MenuSubMenu,
   },
   {
+    name: 'Menu with ScrollView',
+    component: MenuScrollView,
+  },
+  {
+    name: 'Menu Trigger onClick Override',
+    component: MenuTriggerOnClickCallback,
+  },
+  {
+    name: 'Menu Trigger Hover Override',
+    component: MenuTriggerHoverCallback,
+  },
+  {
     name: 'Menu Customized',
     component: MenuCustomized,
+  },
+  {
+    name: 'Menu Refs',
+    component: MenuTriggerChildRef,
   },
   {
     name: 'Menu E2E',
@@ -279,10 +298,10 @@ const menuSections: TestSection[] = [
 
 export const MenuTest: React.FunctionComponent = () => {
   const status: PlatformStatus = {
-    win32Status: 'Experimental',
+    win32Status: 'Beta',
     uwpStatus: 'Backlog',
     iosStatus: 'Backlog',
-    macosStatus: 'Experimental',
+    macosStatus: 'Beta',
     androidStatus: 'Backlog',
   };
 

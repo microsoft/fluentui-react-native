@@ -5,7 +5,7 @@ import { stackStyle } from '../Common/styles';
 import { TABS_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
 import { E2ETabsTest } from './TabsE2ETest';
-import TestSvg from './test.svg';
+import { svgProps } from '../Common/iconExamples';
 
 const TabsMainTest: React.FunctionComponent = () => {
   return (
@@ -45,10 +45,7 @@ const DisabledTabs: React.FunctionComponent = () => {
 
 const TabsCountIcon: React.FunctionComponent = () => {
   const svgExample = {
-    svgSource: {
-      src: TestSvg,
-      viewBox: '0 0 500 500',
-    },
+    svgSource: svgProps,
     width: 20,
     height: 20,
   };

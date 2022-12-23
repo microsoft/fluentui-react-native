@@ -1,6 +1,6 @@
 export * from '../PersonaCoin/styles';
 
-export const rajeshImageUrl =
-  'https://3er1viui9wo30pkxh1v2nh4w-wpengine.netdna-ssl.com/wp-content/uploads/prod/2016/09/Rajesh-BW-Square.jpg';
+export const satyaImageUrl =
+  'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/MS-Exec-Nadella-Satya-2017-08-31-22_%28cropped%29.jpg/330px-MS-Exec-Nadella-Satya-2017-08-31-22_%28cropped%29.jpg';
 
-export const michaelImageUrl = 'https://www.rap-up.com/app/uploads/2014/12/michael-jackson.jpg';
+export const michaelImageUrl = 'https://upload.wikimedia.org/wikipedia/commons/3/31/Michael_Jackson_in_1988.jpg';

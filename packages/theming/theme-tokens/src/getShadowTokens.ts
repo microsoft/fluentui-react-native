@@ -5,11 +5,11 @@ import { AppearanceOptions } from '@fluentui-react-native/theme-types';
 
 export function getShadowTokens(mode: AppearanceOptions) {
   if (mode === 'light') {
-    return lightShadowTokens.shadow;
+    return lightShadowTokens;
   } else if (mode === 'dark') {
-    return darkShadowTokens.shadow;
+    return darkShadowTokens;
   }
 
   // HC mode.
-  return hcShadowTokens.shadow;
+  return hcShadowTokens;
 }

@@ -18,15 +18,14 @@ if [ -z "${RCT_NO_LAUNCH_PACKAGER+xxx}" ] ; then
   fi
 fi
 }
+
 use_flipper!(false)
 use_test_app! do |target|
   target.app do
     platform :ios, '14.0'
 
     # There is a bug where autolinking isn't working, do specify these manually.
-    pod 'FRNAvatar', :path => '../../../packages/experimental/Avatar/FRNAvatar.podspec'
-    pod 'FRNDatePicker', :path => '../../../packages/experimental/NativeDatePicker/FRNDatePicker.podspec'
-    pod 'react-native-menu', :path => '../../../node_modules/@react-native-menu/menu'
+    pod 'FRNFontMetrics', :path => '../../../packages/experimental/NativeFontMetrics/FRNFontMetrics.podspec'
 
     script_phase name: 'Start Packager',
                  script: start_packager_script,

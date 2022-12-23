@@ -51,7 +51,7 @@ The slots can be modified using the `compose` function on the `Switch`. For more
 Below is the set of props the Switch supports:
 
 ```ts
-export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface SwitchProps extends Omit<PressablePropsExtended 'onPress'> {
   /**
    * Reference to the Switch
    */
@@ -91,6 +91,7 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
    * Sets the position of the Switch's label. The position value 'after' is mutually
    * exclusive with the onText and offText props. This is due to variable width
    * of the text props causing the Switch's position to change when it shouldn't.
+   * For Android : 'above' is not supported
    */
   labelPosition?: 'before' | 'above' | 'after';
 }
@@ -236,6 +237,8 @@ A disabled `Switch` is non-interactive, disallowing the user to click/tap on it 
 
 A hovered `Switch` changes styling to communicate that the user has placed a cursor above it.
 
+_Note : Not supported on Android_
+
 #### Focused state
 
 A focused `Switch` changes styling to communicate that the user has placed keyboard focus on it. Specifically, a border is drawn around the control.
@@ -243,6 +246,8 @@ A focused `Switch` changes styling to communicate that the user has placed keybo
 #### Pressed state
 
 A pressed `Switch` changes styling to communicate that the user is currently pressing it.
+
+_Note : Not supported on Android_
 
 ### Interaction
 

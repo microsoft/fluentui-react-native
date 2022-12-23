@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as renderer from 'react-test-renderer';
-import { Switch } from '../Switch.win32';
+import { Switch } from '../Switch';
 import { checkRenderConsistency, checkReRender } from '@fluentui-react-native/test-tools';
 
 it('Switch Default', () => {

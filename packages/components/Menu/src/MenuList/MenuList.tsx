@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import React from 'react';
-import { View } from 'react-native';
+import { Platform, ScrollView, View } from 'react-native';
 import { compose, mergeProps, stagedComponent, UseSlots, withSlots } from '@fluentui-react-native/framework';
 import { menuListName, MenuListProps, MenuListType } from './MenuList.types';
 import { stylingSettings } from './MenuList.styling';
@@ -8,6 +8,7 @@ import { MenuListProvider } from '../context/menuListContext';
 import { useMenuList } from './useMenuList';
 import { useMenuListContextValue } from './useMenuListContextValue';
 import { IViewProps } from '@fluentui-react-native/adapters';
+import { FocusZone } from '@fluentui-react-native/focus-zone';
 
 const MenuStack = stagedComponent((props: React.PropsWithRef<IViewProps> & { gap?: number }) => {
   const { gap, ...rest } = props;
@@ -33,18 +34,42 @@ export const MenuList = compose<MenuListType>({
   ...stylingSettings,
   slots: {
     root: MenuStack,
+    ...(Platform.OS === 'macos' && { scrollView: ScrollView }),
+    ...(Platform.OS === 'macos' && { focusZone: FocusZone }),
   },
   useRender: (userProps: MenuListProps, useSlots: UseSlots<MenuListType>) => {
     const menuList = useMenuList(userProps);
     const contextValue = useMenuListContextValue(menuList);
     const Slots = useSlots(menuList.props);
 
+    const focusZoneRef = React.useRef<View>();
+
+    React.useEffect(() => {
+      focusZoneRef?.current?.focus();
+    }, []);
+
     return (_final: MenuListProps, children: React.ReactNode) => {
-      return (
-        <MenuListProvider value={contextValue}>
+      const content =
+        Platform.OS === 'macos' ? (
+          <Slots.root>
+            <Slots.scrollView>
+              <Slots.focusZone
+                componentRef={focusZoneRef}
+                focusZoneDirection={'vertical'}
+                defaultTabbableElement={focusZoneRef}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore FocusZone takes ViewProps, but that isn't defined on it's type.
+                enableFocusRing={false}
+              >
+                {children}
+              </Slots.focusZone>
+            </Slots.scrollView>
+          </Slots.root>
+        ) : (
           <Slots.root>{children}</Slots.root>
-        </MenuListProvider>
-      );
+        );
+
+      return <MenuListProvider value={contextValue}>{content}</MenuListProvider>;
     };
   },
 });

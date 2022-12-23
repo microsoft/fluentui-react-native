@@ -10,7 +10,7 @@ import { Icon } from '@fluentui-react-native/icon';
 import { Svg, Path } from 'react-native-svg';
 
 /**
- * A function which determines if a set of styles should be applied to the compoent given the current state and props of the avatar.
+ * A function which determines if a set of styles should be applied to the component given the current state and props of the avatar.
  *
  * @param layer The name of the state that is being checked for
  * @param state The current state of the avatar

@@ -5,19 +5,13 @@ import { Link } from '@fluentui/react-native';
 import { Button } from '@fluentui-react-native/experimental-button';
 import { Drawer } from '@fluentui-react-native/experimental-drawer';
 import { Stack } from '@fluentui-react-native/stack';
-import { Icon, SvgIconProps } from '@fluentui-react-native/icon';
+import { Icon } from '@fluentui-react-native/icon';
 import { DRAWER_TESTPAGE } from './consts';
 import { Test, TestSection, PlatformStatus } from '../Test';
-
-import TestSvg from '../Icon/assets/test.svg';
+import { svgProps } from '../Common/iconExamples';
 
 const BasicDrawer: React.FunctionComponent = () => {
   const stdBtnRef = React.useRef(null);
-
-  const svgProps: SvgIconProps = {
-    src: TestSvg,
-    viewBox: '0 0 500 500',
-  };
 
   return (
     <Stack style={stackStyle} gap={5}>

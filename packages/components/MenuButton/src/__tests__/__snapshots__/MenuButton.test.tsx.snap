@@ -4,20 +4,27 @@ exports[`ContextualMenu default 1`] = `
 <View
   accessibilityLabel=""
   accessibilityRole="button"
-  accessibilityState={
-    Object {
-      "disabled": false,
-    }
-  }
   accessible={true}
-  disabled={false}
   enableFocusRing={true}
   focusable={true}
+  keyUpEvents={
+    Array [
+      Object {
+        "key": " ",
+      },
+      Object {
+        "key": "Enter",
+      },
+    ]
+  }
   onAccessibilityTap={[Function]}
   onBlur={[Function]}
   onClick={[Function]}
   onFocus={[Function]}
-  onPress={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
   onResponderRelease={[Function]}
@@ -28,14 +35,14 @@ exports[`ContextualMenu default 1`] = `
     Object {
       "alignItems": "center",
       "alignSelf": "flex-start",
-      "backgroundColor": "#f3f2f1",
-      "borderColor": "#8a8886",
+      "backgroundColor": "#ffffff",
+      "borderColor": "#d1d1d1",
       "borderRadius": 4,
       "borderWidth": 1,
       "display": "flex",
       "flexDirection": "row",
       "justifyContent": "center",
-      "padding": 5,
+      "padding": 3,
       "width": undefined,
     }
   }
@@ -44,7 +51,7 @@ exports[`ContextualMenu default 1`] = `
     align="xMidYMid"
     bbHeight={16}
     bbWidth={12}
-    color={-10395295}
+    color={4284572001}
     focusable={false}
     height={16}
     meetOrSlice={0}
@@ -63,7 +70,7 @@ exports[`ContextualMenu default 1`] = `
         },
       ]
     }
-    tintColor={-10395295}
+    tintColor={4284572001}
     vbHeight={6}
     vbWidth={11}
     width={12}

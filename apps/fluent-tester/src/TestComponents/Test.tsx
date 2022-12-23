@@ -6,6 +6,7 @@ import { stackStyle } from './Common/styles';
 import { useTheme } from '@fluentui-react-native/theme-types';
 import Svg, { G, Path, SvgProps } from 'react-native-svg';
 import { SvgIconProps } from '@fluentui-react-native/icon';
+import { Button } from '@fluentui-react-native/experimental-button';
 
 export type TestSection = {
   name: string;
@@ -13,7 +14,7 @@ export type TestSection = {
   component: React.FunctionComponent;
 };
 
-export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A';
+export type Status = 'Production' | 'Beta' | 'Experimental' | 'Backlog' | 'N/A' | 'Deprecated';
 export type PlatformStatus = {
   win32Status: Status;
   uwpStatus: Status;
@@ -36,6 +37,7 @@ const definitions = {
   Experimental: 'Control code checked into repo, but not ready for partner use.',
   Backlog: 'Control is in plan and on our backlog to deliver.',
   'N/A': 'Control is not in current plan.',
+  Deprecated: 'Control is being deprecated.',
 };
 
 const styles = StyleSheet.create({
@@ -69,6 +71,11 @@ const styles = StyleSheet.create({
   },
   status: {
     fontWeight: 'normal',
+  },
+  // This button is only for our E2E testing framework. We want to be able to put keyboard focus in any test page if we need it.
+  // This button will be at the top of every test page and allows us to do that. But we don't want partners to see it.
+  e2eFocusButton: {
+    opacity: 0,
   },
 });
 
@@ -107,11 +114,14 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
   const toggleIconProps = Platform.OS === 'windows' ? { fontSource: fontIconProps } : { svgSource: svgProps, width: 12, height: 12 };
 
   return (
-    <View testID="ScrollViewAreaForComponents">
+    <View>
       <View style={styles.header}>
         <Text style={styles.name} variant="heroSemibold">
           {props.name}
         </Text>
+        <Button testID="Focus_Button" style={styles.e2eFocusButton}>
+          E2E Testing Button
+        </Button>
         {props.spec && <Link url={props.spec} content="SPEC" />}
       </View>
       <Separator />
@@ -155,6 +165,10 @@ export const Test = (props: TestProps): React.ReactElement<Record<string, never>
         )}
       </Stack>
       {props.sections.map((section, index) => {
+        if (section == null) {
+          return <></>;
+        }
+
         const TestComponent = section.component;
         return (
           <View key={index}>

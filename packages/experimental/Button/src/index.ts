@@ -14,7 +14,7 @@ export {
   ButtonTokens,
   ButtonCoreProps,
   ButtonProps,
-  ButtonState,
+  ButtonInfo,
   ButtonSlotProps,
   ButtonType,
   compoundButtonName,
@@ -30,6 +30,7 @@ export {
   ToggleButton,
   ToggleButtonTokens,
   ToggleButtonProps,
+  ToggleButtonInfo,
   ToggleButtonSlotProps,
   ToggleButtonType,
 } from '@fluentui-react-native/button';

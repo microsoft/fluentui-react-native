@@ -9,11 +9,13 @@ import {
   patchTokens,
   FontWeightValue,
 } from '@fluentui-react-native/framework';
+import { useKeyProps } from '@fluentui-react-native/interactive-hooks';
 import { globalTokens } from '@fluentui-react-native/theme-tokens';
 import { I18nManager, Platform, Text as RNText } from 'react-native';
 import { textName, TextProps, TextTokens } from './Text.types';
 import { useTextTokens } from './TextTokens';
 import React from 'react';
+import { useFontMetricsScaleFactors } from '@fluentui-react-native/experimental-native-font-metrics';
 
 const emptyProps = {};
 export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTokens: UseTokens<TextTokens>) => {
@@ -29,7 +31,10 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     font,
     italic,
     onAccessibilityTap,
+    onKeyUp,
     onKeyDown,
+    keyUpEvents,
+    keyDownEvents,
     onPress,
     size,
     strikethrough,
@@ -45,6 +50,9 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
   // get the tokens from the theme
   let [tokens, cache] = useTokens(theme);
 
+  // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
+  const fontMetricsScaleFactors = useFontMetricsScaleFactors();
+
   const textAlign = I18nManager.isRTL
     ? align === 'start'
       ? 'right'
@@ -56,6 +64,17 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     : align === 'end'
     ? 'right'
     : align;
+
+  const textOnPress = React.useCallback(
+    (e) => {
+      if (onPress) {
+        onPress(e);
+      }
+      e.stopPropagation();
+    },
+    [onPress],
+  );
+  const keyProps = useKeyProps(textOnPress, ' ', 'Enter');
 
   const onAccTap = React.useCallback(
     (event?) => {
@@ -69,7 +88,8 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     color,
     variant,
     fontFamily: font == 'base' ? 'primary' : font,
-    fontSize: globalTokens.font.size[size],
+    fontMaximumSize: tokens.maximumFontSize,
+    fontSize: globalTokens.font['size' + size],
     fontWeight: globalTokens.font.weight[weight] as FontWeightValue,
     // leave it undefined for tokens to be set by user
     fontStyle: italic ? 'italic' : undefined,
@@ -91,17 +111,53 @@ export const Text = compressible<TextProps, TextTokens>((props: TextProps, useTo
     ['color', 'fontStyle', 'textAlign', 'textDecorationLine', ...fontStyles.keys],
   );
 
+  // [GH #2268: Remove once RN Core properly supports Dynamic Type scaling
+  const dynamicTypeVariant = Platform.OS === 'ios' ? tokenStyle.dynamicTypeRamp : undefined;
+  const maximumFontSize = tokenStyle.maximumFontSize ?? Number.POSITIVE_INFINITY;
+
+  let scaleStyleAdjustments: TextTokens = emptyProps;
+  // tokenStyle.fontSize and tokenStyle.lineHeight can also be strings (e.g., "14px").
+  // Therefore, we only support scaling for number-based size values in order to avoid any messy calculations.
+  if (dynamicTypeVariant !== undefined && typeof tokenStyle.fontSize === 'number' && typeof tokenStyle.lineHeight === 'number') {
+    const requestedScaleFactor = fontMetricsScaleFactors[dynamicTypeVariant] ?? 1;
+    const maximumScaleFactor = maximumFontSize / tokenStyle.fontSize;
+    const scaleFactor = Math.min(requestedScaleFactor, maximumScaleFactor);
+
+    scaleStyleAdjustments = {
+      fontSize: tokenStyle.fontSize * scaleFactor,
+      lineHeight: tokenStyle.lineHeight * scaleFactor, // scale accordingly with fontSize
+    };
+  }
+  // ]GH #2268
+
+  const isWinPlatform = Platform.OS === (('win32' as any) || 'windows');
+  const filteredProps = {
+    onKeyUp: isWinPlatform ? onKeyUp : undefined,
+    keyUpEvents: isWinPlatform ? keyUpEvents : undefined,
+    validKeysUp: undefined,
+    onKeyDown: isWinPlatform ? onKeyDown : undefined,
+    keyDownEvents: isWinPlatform ? keyDownEvents : undefined,
+    validKeysDown: undefined,
+    onAccessibilityTap: isWinPlatform ? onAccTap : undefined,
+  };
+
   // return a continuation function that allows this text to be compressed
   return (extra: TextProps, children: React.ReactNode) => {
     const mergedProps = {
-      numberOfLines: truncate || !wrap ? 1 : 0,
-      onKeyDown: Platform.OS === (('win32' as any) || 'windows') ? onKeyDown : undefined,
-      ...(Platform.OS === (('win32' as any) || 'windows') && { onAccessibilityTap: onAccTap }),
-      onPress,
       ...rest,
+      ...keyProps,
+      ...filteredProps,
       ...extra,
-      style: mergeStyles(tokenStyle, props.style, extra?.style),
+      ...(dynamicTypeVariant !== undefined && { allowFontScaling: false }), // GH #2268: Remove once RN Core properly supports Dynamic Type scaling
+      onPress,
+      numberOfLines: truncate || !wrap ? 1 : 0,
+      style: mergeStyles(tokenStyle, props.style, extra?.style, scaleStyleAdjustments),
     };
+
+    // GH #2268: RN Text doesn't recognize these properties yet, so don't let them leak through or RN will complain about invalid props
+    delete (mergedProps.style as TextTokens).dynamicTypeRamp;
+    delete (mergedProps.style as TextTokens).maximumFontSize;
+
     return (
       <RNText ellipsizeMode={!wrap && !truncate ? 'clip' : 'tail'} {...mergedProps}>
         {children}

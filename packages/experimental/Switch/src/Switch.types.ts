@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { ViewProps, ViewStyle, ColorValue } from 'react-native';
+import { ViewStyle, ColorValue, PressableProps } from 'react-native';
 import { TextProps } from '@fluentui-react-native/text';
-import { FontTokens, IBorderTokens, IColorTokens, LayoutTokens } from '@fluentui-react-native/tokens';
-import { IFocusable, IWithPressableOptions, InteractionEvent } from '@fluentui-react-native/interactive-hooks';
+import { FontTokens, IBorderTokens, IColorTokens, IShadowTokens, LayoutTokens } from '@fluentui-react-native/tokens';
+import { IFocusable, InteractionEvent, PressablePropsExtended, PressableState } from '@fluentui-react-native/interactive-hooks';
 import { IViewProps } from '@fluentui-react-native/adapters';
-import { IPressableState, IWithPressableEvents } from '@fluentui-react-native/interactive-hooks';
 
 export const switchName = 'Switch';
 
-export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens {
+export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, IColorTokens, IShadowTokens {
   /**
    * Track color
    */
@@ -126,7 +125,7 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   above?: SwitchTokens;
 }
 
-export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onPress'> {
+export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * Reference to the Switch
    */
@@ -172,15 +171,15 @@ export interface SwitchProps extends Omit<IWithPressableOptions<ViewProps>, 'onP
   labelPosition?: 'before' | 'above' | 'after';
 }
 
-export type SwitchState = IPressableState & { toggled?: boolean };
+export type SwitchState = PressableState & { toggled?: boolean };
 
 export interface SwitchInfo {
-  props: IWithPressableEvents<SwitchProps & React.ComponentPropsWithRef<any>>;
+  props: SwitchProps & React.ComponentPropsWithRef<any>;
   state: SwitchState;
 }
 
 export interface SwitchSlotProps {
-  root: React.PropsWithRef<IViewProps>;
+  root: React.PropsWithRef<PressableProps>;
   label: TextProps;
   track: IViewProps;
   thumb: IViewProps;

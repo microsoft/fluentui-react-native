@@ -18,7 +18,6 @@ export { useViewCommandFocus } from './useViewCommandFocus';
 export type { IFocusable } from './useViewCommandFocus';
 export { useSelectedKey } from './useSelectedKey.hooks';
 export type { onKeySelectCallback } from './useSelectedKey.hooks';
-export { createIconProps } from './useIconProps.hooks';
 export { useAsToggle } from './useAsToggle';
 export type { OnChangeCallback, OnToggleCallback } from './useAsToggle';
 export { useAsToggleWithEvent } from './useAsToggleWithEvent';
@@ -61,3 +60,4 @@ export { preferKeyDownForKeyEvents, useKeyCallback, useKeyDownProps, useKeyProps
 export type { KeyCallback, KeyPressProps } from './useKeyProps';
 export { useOnPressWithFocus } from './useOnPressWithFocus';
 export type { OnPressCallback, OnPressWithFocusCallback } from './useOnPressWithFocus';
+export { getAccessibilityState } from './getAccessibilityState';
