@@ -195,6 +195,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    *
    * @default after
    * @platform win32
+   * Note: 'before' is not supported for Android
    */
   labelPosition?: 'before' | 'after';
 
@@ -214,6 +215,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
    *
    * @default square
    * @platform iOS, windows, win32
+   * Note : 'circular' is not supported on Android
    */
   shape?: CheckboxShape;
 
@@ -227,6 +229,7 @@ export interface CheckboxProps extends Omit<IViewProps, 'onPress'> {
   /**
    * Provides a tooltip while hovering over Checkbox component
    * @platform win32
+   * Note: Not supported for Android
    */
   tooltip?: string;
 }
@@ -302,6 +305,7 @@ export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBac
   /**
    * States that can be applied to a Checkbox.
    * These can be used to modify styles of the Checkbox when under the specified state.
+   * Note: 'hovered','focused','circular','labelIsBefore','large' are not supported for Android
    */
   disabled?: CheckboxTokens;
   label?: CheckboxTokens;
