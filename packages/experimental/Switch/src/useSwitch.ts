@@ -34,7 +34,7 @@ const startTrackAnimation = (onInit = false, animationConfig: IAnimationConfig, 
       ? 0
       : -(animationConfig.trackWidth + animationConfig.thumbWidth),
     duration: 300,
-    useNativeDriver: true,
+    useNativeDriver: false,
   }).start();
 };
 
