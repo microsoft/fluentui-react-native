@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "update spec for android unsupported props",
-  "packageName": "@fluentui-react-native/checkbox",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}

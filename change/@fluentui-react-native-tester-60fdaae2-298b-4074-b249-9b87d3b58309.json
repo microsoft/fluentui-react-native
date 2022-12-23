@@ -1,7 +1,0 @@
-{
-  "type": "patch",
-  "comment": "doc updates for checkbox",
-  "packageName": "@fluentui-react-native/tester",
-  "email": "rohanpd.work@gmail.com",
-  "dependentChangeType": "patch"
-}
