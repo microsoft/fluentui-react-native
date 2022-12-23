@@ -2,6 +2,36 @@
   "name": "@fluentui-react-native/e2e-testing",
   "entries": [
     {
+      "date": "Thu, 22 Dec 2022 23:12:13 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.6.3",
+      "version": "1.6.3",
+      "comments": {
+        "patch": [
+          {
+            "author": "adgleitm@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "8bd92d77b7753be297a183e0f5bad4f9c523a1a0",
+            "comment": "Add spacing E2E tests"
+          }
+        ]
+      }
+    },
+    {
+      "date": "Wed, 21 Dec 2022 10:29:07 GMT",
+      "tag": "@fluentui-react-native/e2e-testing_v1.6.2",
+      "version": "1.6.2",
+      "comments": {
+        "patch": [
+          {
+            "author": "vkozlova@microsoft.com",
+            "package": "@fluentui-react-native/e2e-testing",
+            "commit": "62e3f79db5be4cdcf409620c7f28eded91bfae4e",
+            "comment": "Added E2E tests for FURN Icon. This is code of existing Icon tests. Changes will be done in separate commits"
+          }
+        ]
+      }
+    },
+    {
       "date": "Thu, 15 Dec 2022 14:50:50 GMT",
       "tag": "@fluentui-react-native/e2e-testing_v1.6.1",
       "version": "1.6.1",

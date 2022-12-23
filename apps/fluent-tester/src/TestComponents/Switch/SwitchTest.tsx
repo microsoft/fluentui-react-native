@@ -125,10 +125,13 @@ const toggleSections: TestSection[] = [
       component: () => <OnOffText />,
     },
   }),
-  {
-    name: 'Customized Tokens',
-    component: () => <CustomizedSwitch />,
-  },
+  Platform.select({
+    android: null,
+    default: {
+      name: 'Customized Tokens',
+      component: () => <CustomizedSwitch />,
+    },
+  }),
   {
     name: 'Switch E2E Testing',
     component: () => <E2ESwitchTest />,
