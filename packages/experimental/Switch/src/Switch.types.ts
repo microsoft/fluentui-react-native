@@ -126,6 +126,14 @@ export interface SwitchTokens extends LayoutTokens, FontTokens, IBorderTokens, I
   above?: SwitchTokens;
 }
 
+export interface IAnimationConfig {
+  toggleOnBgColor: string;
+  toggleOffBgColor: string;
+  trackWidth: number;
+  thumbWidth: number;
+  thumbMargin: number;
+}
+
 export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
   /**
    * Reference to the Switch

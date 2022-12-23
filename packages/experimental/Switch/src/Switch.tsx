@@ -29,13 +29,15 @@ export const switchLookup = (layer: string, state: SwitchState, userProps: Switc
   );
 };
 
+const isMobile = Platform.OS === 'android' || Platform.OS == 'ios';
+
 export const Switch = compose<SwitchType>({
   displayName: switchName,
   ...stylingSettings,
   slots: {
     root: Pressable,
     label: Text,
-    track: Animated.View,
+    track: Animated.View, // Conversion from View to Animated.View for Animated API to work
     thumb: Animated.View,
     toggleContainer: View,
     onOffText: Text,
@@ -44,12 +46,13 @@ export const Switch = compose<SwitchType>({
     const switchOnSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: true }, {}));
     const switchOffSlot = useSlots(userProps, (layer) => switchLookup(layer, { toggled: false }, {}));
 
+    // For Mobile platform we are passing extra data to useSwitch for Aninated API
     const switchInfo = useSwitch(
       userProps,
-      Platform.OS === 'android' && {
-        on: switchOnSlot.track({}).props.style.backgroundColor,
-        off: switchOffSlot.track({}).props.style.backgroundColor,
-        width: switchOnSlot.track({}).props.style.width,
+      isMobile && {
+        toggleOnBgColor: switchOnSlot.track({}).props.style.backgroundColor,
+        toggleOffBgColor: switchOffSlot.track({}).props.style.backgroundColor,
+        trackWidth: switchOnSlot.track({}).props.style.width,
         thumbWidth: switchOnSlot.thumb({}).props.style.width,
         thumbMargin: switchOnSlot.thumb({}).props.style.margin,
       },
@@ -69,11 +72,9 @@ export const Switch = compose<SwitchType>({
         <Slots.root {...mergedProps}>
           <Slots.label>{label}</Slots.label>
           <Slots.toggleContainer>
-            <Slots.track {...(Platform.OS == 'android' && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
-              <Slots.thumb
-                {...thumbAnimation}
-                {...(Platform.OS == 'android' && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })}
-              />
+            {/* For the Mobile platform the animated styles are applied  */}
+            <Slots.track {...(isMobile && { style: switchInfo.props.switchAnimationStyles.trackBackgroundStyle })}>
+              <Slots.thumb {...thumbAnimation} {...(isMobile && { style: switchInfo.props.switchAnimationStyles.thumbAnimatedStyle })} />
             </Slots.track>
             {displayOnOffText && <Slots.onOffText>{onOffText}</Slots.onOffText>}
           </Slots.toggleContainer>
