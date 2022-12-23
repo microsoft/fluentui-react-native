@@ -63,6 +63,7 @@
     "@fluentui-react-native/interactive-hooks": ">=0.22.1 <1.0.0",
     "@fluentui-react-native/menu": "^1.2.0",
     "@fluentui-react-native/merge-props": ">=0.5.1 <1.0.0",
+    "@fluentui-react-native/separator": "^0.13.8",
     "@fluentui-react-native/notification": "0.21.2",
     "@fluentui-react-native/stack": ">=0.7.32 <1.0.0",
     "@fluentui-react-native/switch": "^0.8.2",
