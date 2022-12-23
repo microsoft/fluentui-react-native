@@ -31,6 +31,10 @@ class BasicBadgePageObject extends BasePage {
     return By(HOMEPAGE_BADGE_BUTTON);
   }
 
+  get _pageName() {
+    return BADGE_TESTPAGE;
+  }
+
   get _primaryComponent() {
     return By(BADGE_TEST_COMPONENT);
   }

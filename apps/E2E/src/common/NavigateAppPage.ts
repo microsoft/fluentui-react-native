@@ -24,6 +24,7 @@ import { HOMEPAGE_RADIO_GROUP_EXPERIMENTAL_BUTTON } from '../../../fluent-tester
 import { HOMEPAGE_SEPARATOR_BUTTON } from '../../../fluent-tester/src/TestComponents/Separator/consts';
 import { HOMEPAGE_SHADOW_BUTTON } from '../../../fluent-tester/src/TestComponents/Shadow/consts';
 import { HOMEPAGE_SHIMMER_BUTTON } from '../../../fluent-tester/src/TestComponents/Shimmer/consts';
+import { HOMEPAGE_SPACING_BUTTON } from '../../../fluent-tester/src/TestComponents/Spacing/consts';
 import { HOMEPAGE_STROKEWIDTH_BUTTON } from '../../../fluent-tester/src/TestComponents/StrokeWidth/consts';
 import { HOMEPAGE_SVG_BUTTON } from '../../../fluent-tester/src/TestComponents/Svg/consts';
 import { HOMEPAGE_SWITCH_BUTTON } from '../../../fluent-tester/src/TestComponents/Switch/consts';
@@ -134,6 +135,10 @@ class NavigateAppPage extends BasePage {
 
   async clickAndGoToShimmerPage() {
     await (await this.shimmerPage).click();
+  }
+
+  async clickAndGoToSpacingTokensPage() {
+    await (await this.spacingTokensPage).click();
   }
 
   async clickAndGoToStrokeWidthTokensPage() {
@@ -284,6 +289,10 @@ class NavigateAppPage extends BasePage {
     return By(HOMEPAGE_STROKEWIDTH_BUTTON);
   }
 
+  private get spacingTokensPage() {
+    return By(HOMEPAGE_SPACING_BUTTON);
+  }
+
   private get svgPage() {
     return By(HOMEPAGE_SVG_BUTTON);
   }
@@ -314,6 +323,15 @@ class NavigateAppPage extends BasePage {
 
   private get experimentalTabsPage() {
     return By(HOMEPAGE_EXPERIMENTAL_TABS_BUTTON);
+  }
+
+  get _pageName() {
+    // This is the main page displayed after launching the fluent tester.
+    return 'The Fluent Tester Base Page';
+  }
+
+  get _pageButton(): Promise<WebdriverIO.Element> {
+    throw new Error('You are trying to read the _pageButton getter for NavigateAppPage, which is not implemented.');
   }
 }
 

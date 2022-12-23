@@ -1,8 +1,30 @@
 # Change Log - @fluentui-react-native/checkbox
 
-This log was last generated on Fri, 09 Dec 2022 05:23:38 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Dec 2022 06:39:34 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.18.4
+
+Wed, 21 Dec 2022 06:39:34 GMT
+
+### Patches
+
+- add checkbox ripple (rohanpd.work@gmail.com)
+
+## 0.18.3
+
+Thu, 15 Dec 2022 14:50:50 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/framework to v0.8.26
+- Bump @fluentui-react-native/interactive-hooks to v0.22.1
+- Bump @fluentui-react-native/pressable to v0.9.40
+- Bump @fluentui-react-native/text to v0.19.0
+- Bump @fluentui-react-native/theme-tokens to v0.22.2
+- Bump @fluentui-react-native/tokens to v0.20.0
+- Bump @uifabricshared/foundation-compose to v1.12.27
 
 ## 0.18.2
 

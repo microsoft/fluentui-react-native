@@ -122,13 +122,20 @@ The `Checkbox` control supports the `unchecked` and `checked` appearances. It do
 
 The `Checkbox` control supports a rounded `square` (default) and `circular` shape variants.
 
-Note: Not Supported on Android
+Note:
+
+| Platform | Square | Circular |
+| -------- | ------ | -------- |
+| Windows  | ✅     | ✅       |
+| iOS      | ❌     | ✅       |
+| macOS    | ✅     | ❌       |
+| Android  | ✅     | ❌       |
 
 ### Sizes
 
 The `Checkbox` control supports two different sizes: `medium` (default), and `large`.
 
-Note: Not Supported on Android
+Note: Not Supported on Mobile
 
 ## API
 
@@ -325,19 +332,17 @@ A disabled `Checkbox` is non-interactive, disallowing the user to click/tap on i
 
 A hovered `Checkbox` changes styling to communicate that the user has placed a cursor above it. On win32, this will show a checkmark in a checkbox.
 
-Note: Not Supported on Android
+Note: Not Supported on Mobile
 
 #### Focused state
 
 A focused `Checkbox` changes styling to communicate that the user has placed keyboard focus on it. This styling is usually the same to the one in the hovered state plus extra styling on the outline to indicate keyboard focus has been placed on the component.
 
-Note: Not Supported on Android
+Note: Not Supported on Mobile
 
 #### Pressed state
 
 A pressed `Checkbox` changes styling to communicate that the user is currently pressing it.
-
-Note: Not Supported on Android
 
 #### Checked state
 
