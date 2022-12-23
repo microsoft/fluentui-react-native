@@ -25,7 +25,7 @@ const StandardUsage: React.FunctionComponent = () => {
   );
   return (
     <View style={memoizedStyles}>
-      <Switch defaultChecked={true} label={'Default dChecked True'} />
+      <Switch defaultChecked={true} label={'Default Checked True'} />
       <Switch defaultChecked={false} label={'Default Checked False'} />
       <Switch defaultChecked={true} label={'Disabled Default Checked True'} disabled />
       <Switch defaultChecked={false} label={'Disabled Default Checked False'} disabled />

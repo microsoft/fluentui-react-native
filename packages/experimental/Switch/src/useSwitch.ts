@@ -34,7 +34,6 @@ export const useSwitch = (
     onAccessibilityAction,
     ...rest
   } = props;
-  console.log(bgColor);
 
   const onChangeWithAnimation = React.useCallback(
     (e: InteractionEvent, checked?: boolean) => {
@@ -52,10 +51,12 @@ export const useSwitch = (
     [onChange],
   );
 
+  console.log('CHecked' + checked);
   const [animation, setAnimation] = React.useState(new Animated.Value(0));
   const [animationbg, setAnimationbg] = React.useState(new Animated.Value(0));
 
   const [checkedState, toggleCallback] = useAsToggleWithEvent(defaultChecked, checked, onChangeWithAnimation);
+
   const switchAnimationStyles = {
     thumbAnimatedStyle: {
       transform: [
@@ -67,10 +68,12 @@ export const useSwitch = (
     trackBackgroundStyle: {
       backgroundColor: animationbg.interpolate({
         inputRange: [0, 1],
-        outputRange: checked ? [bgColor.off, bgColor.on] : [bgColor.on, bgColor.off],
+        outputRange: checkedState ? [bgColor.on, bgColor.on] : [bgColor.off, bgColor.off],
       }),
     },
   };
+
+  console.log('switchAnimationStyles : ', switchAnimationStyles);
 
   const startAnimation = () => {
     Animated.timing(animation, {
