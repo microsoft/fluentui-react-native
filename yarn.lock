@@ -1465,6 +1465,15 @@
   resolved "https://registry.yarnpkg.com/@fluentui-react-native/design-tokens-windows/-/design-tokens-windows-0.36.0.tgz#d0ad552c0176af5596896b96ee8029952f5f4415"
   integrity sha512-sz2a+LtcJSn1fL4mydeE8NL5kKnWfLkk5kgkRKxO3DKCMghDMf0Yp0e0+a9oHSZrFemhJv8oZSok10VKjqeWAw==
 
+"@fluentui-react-native/tokens@^0.17.2":
+  version "0.17.8"
+  resolved "https://registry.yarnpkg.com/@fluentui-react-native/tokens/-/tokens-0.17.8.tgz#1b5adebaa03c1d7cd0dd184c838f9c4b20152969"
+  integrity sha512-hOVk4ZXd1D/kP+IowLwPLcGTtmLPu8KgaPBq3j3HEOb58kuUoITe05P09FMvf0IwC4lFPhdR2ZXQBKx3BG/xHg==
+  dependencies:
+    "@fluentui-react-native/adapters" ">=0.10.0 <1.0.0"
+    "@fluentui-react-native/theme-types" ">=0.23.1 <1.0.0"
+    tslib "^2.3.1"
+
 "@fortawesome/fontawesome-common-types@6.2.1":
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.1.tgz#411e02a820744d3f7e0d8d9df9d82b471beaa073"
