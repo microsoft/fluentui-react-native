@@ -1,8 +1,16 @@
 # Change Log - @fluentui-react-native/menu
 
-This log was last generated on Thu, 15 Dec 2022 14:50:50 GMT and should not be manually modified.
+This log was last generated on Wed, 21 Dec 2022 23:00:53 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 1.2.0
+
+Wed, 21 Dec 2022 23:00:53 GMT
+
+### Minor changes
+
+- Add ScrollView to Menu (macOS) (amchiu@microsoft.com)
 
 ## 1.1.3
 

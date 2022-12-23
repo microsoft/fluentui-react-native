@@ -51,12 +51,6 @@ Win32:
 <Link appearance="subtle" url="https://www.bing.com/">
   Click to navigate.
 </Link>
-<Text>
-  This is inline Link.{' '}
-  <Link appearance="subtle" inline onPress={doPress} onAccessibilityTap={doAllyTap}>
-    Click to alert.
-  </Link>
-</Text>
 <Link appearance="subtle" onPress={doPress} disabled>
   Disabled Link
 </Link>

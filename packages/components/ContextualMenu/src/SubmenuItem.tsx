@@ -1,6 +1,6 @@
 /** @jsx withSlots */
 import * as React from 'react';
-import { I18nManager, Platform, View } from 'react-native';
+import { I18nManager, Platform, Pressable, View } from 'react-native';
 import {
   SubmenuItemSlotProps,
   SubmenuItemState,
@@ -15,7 +15,7 @@ import { Text } from '@fluentui-react-native/text';
 import { settings } from './SubmenuItem.settings';
 import { backgroundColorTokens, borderTokens, textTokens, foregroundColorTokens, getPaletteFromTheme } from '@fluentui-react-native/tokens';
 import { mergeSettings } from '@uifabricshared/foundation-settings';
-import { useKeyDownProps, useViewCommandFocus, useAsPressable } from '@fluentui-react-native/interactive-hooks';
+import { useKeyDownProps, useViewCommandFocus, useAsPressable, usePressableState } from '@fluentui-react-native/interactive-hooks';
 import { CMContext } from './ContextualMenu';
 import { Icon, SvgIconProps, createIconProps } from '@fluentui-react-native/icon';
 import { Svg, G, Path, SvgProps } from 'react-native-svg';
@@ -63,13 +63,23 @@ export const SubmenuItem = compose<SubmenuItemType>({
       }
     }, [context, disabled, itemKey, onClick]);
 
-    const pressable = useAsPressable({
+    const pressableWin32 = usePressableState({
       ...rest,
       onPress: onItemPress,
       onHoverIn: onItemHoverIn,
       delayHoverIn: onHoverInDelay,
       onHoverOut: onItemHoverOut,
     });
+
+    const pressableMacOS = useAsPressable({
+      ...rest,
+      onPress: onItemPress,
+      onHoverIn: onItemHoverIn,
+      delayHoverIn: onHoverInDelay,
+      onHoverOut: onItemHoverOut,
+    });
+
+    const pressable = Platform.OS === 'macos' ? pressableMacOS : pressableWin32;
 
     /**
      * GH #1267
@@ -188,7 +198,7 @@ export const SubmenuItem = compose<SubmenuItemType>({
     );
   },
   slots: {
-    root: View,
+    root: Platform.OS === 'macos' ? View : Pressable,
     startstack: View,
     icon: Icon as React.ComponentType,
     content: Text,

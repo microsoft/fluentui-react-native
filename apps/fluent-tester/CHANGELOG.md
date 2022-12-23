@@ -1,8 +1,58 @@
 # Change Log - @fluentui-react-native/tester
 
-This log was last generated on Wed, 21 Dec 2022 10:29:07 GMT and should not be manually modified.
+This log was last generated on Thu, 22 Dec 2022 23:12:13 GMT and should not be manually modified.
 
 <!-- Start content -->
+
+## 0.122.0
+
+Thu, 22 Dec 2022 23:12:13 GMT
+
+### Minor changes
+
+- Add spacing E2E tests (adgleitm@microsoft.com)
+
+## 0.121.3
+
+Thu, 22 Dec 2022 22:15:13 GMT
+
+### Patches
+
+- Clarify V2Usage on iOS (adgleitm@microsoft.com)
+
+## 0.121.2
+
+Thu, 22 Dec 2022 19:31:49 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/experimental-menu-button to v0.6.5
+- Bump @fluentui/react-native to v0.34.5
+
+## 0.121.1
+
+Thu, 22 Dec 2022 17:02:45 GMT
+
+### Patches
+
+- Bump @fluentui-react-native/notification to v0.21.2
+
+## 0.121.0
+
+Wed, 21 Dec 2022 23:00:53 GMT
+
+### Minor changes
+
+- Add ScrollView to Menu (macOS) (amchiu@microsoft.com)
+- Bump @fluentui-react-native/menu to v1.2.0
+
+## 0.120.2
+
+Wed, 21 Dec 2022 17:18:46 GMT
+
+### Patches
+
+- Bump @fluentui/react-native to v0.34.4
 
 ## 0.120.1
 
