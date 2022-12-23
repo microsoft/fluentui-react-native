@@ -7,7 +7,7 @@ import { SvgProps } from 'react-native-svg';
 
 export const checkboxName = 'Checkbox';
 export type CheckboxSize = 'medium' | 'large';
-export type CheckboxShape = 'circular' | 'square'; // Circular is not supported on Android
+export type CheckboxShape = 'circular' | 'square';
 
 export interface CheckboxTokens extends FontTokens, IForegroundColorTokens, IBackgroundColorTokens, IBorderTokens, LayoutTokens {
   /**
