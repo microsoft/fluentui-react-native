@@ -170,7 +170,7 @@ export interface SwitchProps extends Omit<PressablePropsExtended, 'onPress'> {
    * The position of the label relative to the Switch. The position value 'after' is mutually
    * exclusive with the onText and offText props. This is due to variable width
    * of the text props causing the Switch's position to change when it shouldn't.
-   * Note : 'before' , 'above' are not supported on Android
+   * Note :'before', 'above' are not supported on Android
    */
   labelPosition?: 'before' | 'above' | 'after';
 }
